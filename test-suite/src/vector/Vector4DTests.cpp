@@ -538,12 +538,12 @@ TYPED_TEST(VectorEquality, SimilarVectorsAreEqual)
 	EXPECT_TRUE(equality);
 }
 
-TYPED_TEST(VectorEquality, DissimilarVectorsAreNoEqual)
+TYPED_TEST(VectorEquality, DissimilarVectorsAreNotEqual)
 {
 	// When two equal vectors are compared for equality
 	bool equality = this->eqVecA.equals(this->uneqVec);
 
-	// Then, they are equal
+	// Then, they are not equal
 	EXPECT_FALSE(equality);
 }
 
@@ -556,13 +556,49 @@ TYPED_TEST(VectorEquality, StaticWrapper_SimilarVectorsAreEqual)
 	EXPECT_TRUE(equality);
 }
 
-TYPED_TEST(VectorEquality, StaticWrapper_DissimilarVectorsAreNoEqual)
+TYPED_TEST(VectorEquality, StaticWrapper_DissimilarVectorsAreNotEqual)
 {
 	// When two equal vectors are compared for equality
 	bool equality = math::Vector4D<TypeParam>::equals(this->eqVecA, this->uneqVec);
 
+	// Then, they are not equal
+	EXPECT_FALSE(equality);
+}
+
+TYPED_TEST(VectorEquality, EqualityOperator_SimilarVectorsReturnsTrue)
+{
+	// When two equal vectors are compared for equality
+	bool equality = this->eqVecA == this->eqVecB;
+
+	// Then, they are equal
+	EXPECT_TRUE(equality);
+}
+
+TYPED_TEST(VectorEquality, EqualityOperator_DissimilarVectorsReturnsFalse)
+{
+	// When two equal vectors are compared for equality
+	bool equality = this->eqVecA == this->uneqVec;
+
+	// Then, they are not equal
+	EXPECT_FALSE(equality);
+}
+
+TYPED_TEST(VectorEquality, InEqualityOperator_SimilarVectorsReturnsFalse)
+{
+	// When two equal vectors are compared for equality
+	bool equality = this->eqVecA != this->eqVecB;
+
 	// Then, they are equal
 	EXPECT_FALSE(equality);
+}
+
+TYPED_TEST(VectorEquality, InEqualityOperator_DissimilarVectorsReturnsTrue)
+{
+	// When two equal vectors are compared for equality
+	bool equality = this->eqVecA != this->uneqVec;
+
+	// Then, they are equal
+	EXPECT_TRUE(equality);
 }
 
 /*********************************

@@ -63,6 +63,20 @@ namespace math
 		return vecA.equals(vecB);
 	}
 
+	template <Arithmetic T>
+	template <Arithmetic U>
+	bool Vector4D<T>::operator==(const Vector4D<U>& other) const
+	{
+		return this->equals(other);
+	}
+
+	template <Arithmetic T>
+	template <Arithmetic U>
+	bool Vector4D<T>::operator!=(const Vector4D<U>& other) const
+	{
+		return !this->equals(other);
+	}
+
 
 	/*************************************
 	 *                                   *

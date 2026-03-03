@@ -58,10 +58,16 @@ namespace math
 		 *                                     *
 		 ***************************************/
 		template <Arithmetic U>
-		bool equals(const Vector4D<U>& other, double epsilon = std::is_same_v<U, double>? DOUBLE_EPSILON: FLOAT_EPSILON) const;
+		bool equals(const Vector4D<U>& other, double epsilon = (std::is_same_v<T, double> && std::is_same_v<U, double>) ? DOUBLE_EPSILON: FLOAT_EPSILON) const;
 
 		template <Arithmetic U>
-		static bool equals(const Vector4D& vecA, const Vector4D<U>& vecB, double epsilon = std::is_same_v<U, double> ? DOUBLE_EPSILON : FLOAT_EPSILON);
+		static bool equals(const Vector4D& vecA, const Vector4D<U>& vecB, double epsilon = (std::is_same_v<T, double> && std::is_same_v<U, double>) ? DOUBLE_EPSILON : FLOAT_EPSILON);
+
+		template <Arithmetic U>
+		bool operator==(const Vector4D<U>& other) const;
+
+		template <Arithmetic U>
+		bool operator!=(const Vector4D<U>& other) const;
 
 		/*************************************
 		 *                                   *
