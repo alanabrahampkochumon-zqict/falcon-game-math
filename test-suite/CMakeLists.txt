@@ -17,7 +17,7 @@ set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h")
 list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
 
 set(SimdTestDirectory "src/simd/")
-set(SimdTestFiles "AdditionTests.cpp;InitializationTests.cpp")
+set(SimdTestFiles "AdditionTests.cpp;InitializationTests.cpp;SimdUtilsTests.cpp")
 list(TRANSFORM SimdTestFiles PREPEND ${SimdTestDirectory})
 
 target_sources(
@@ -30,6 +30,7 @@ target_link_libraries(
     TestSuite
     PRIVATE
     MathLib
+    FalconSIMD
     GTest::gtest_main # googletest
 )
 

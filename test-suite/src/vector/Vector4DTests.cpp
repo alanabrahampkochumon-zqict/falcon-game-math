@@ -673,7 +673,7 @@ TYPED_TEST(VectorEquality, MixedTypeInequality_DissimilarVectorsReturnsTrue)
 	EXPECT_TRUE(equality);
 }
 
-
+//TODO: Add test for bool vector == and !=
 
 /*********************************
  *                               *
