@@ -54,6 +54,24 @@ protected:
 };
 TYPED_TEST_SUITE(VectorEquality, SupportedArithmeticTypes);
 
+template <typename T>
+class VectorComparison: public ::testing::Test
+{
+protected:
+	math::Vector4D<T> vecA;
+	math::Vector4D<T> vecB;
+	math::bVec4 expectedGT, expectedGTE, expectedLT, expectedLTE; // GT-> Greater Than, GTE-> Greater Than or Equal, LT -> Less than, LTE -> Less than or equal
+
+	void SetUp() override
+	{
+		vecA = { T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589) };
+		vecB = { T(5.1234568789), T(1.123458319), T(8.123412593891), T(123.123489172589) };
+		expectedGT = {false, true, false, false};
+		expectedGTE = {false, true, false, true};
+		expectedLT = {true, false, true, false};
+		expectedLTE = {true, false, true, true};
+	}
+};
 
 /*********************************
  *                               *
@@ -524,11 +542,13 @@ TEST(Vector4DHelper, ulVec4Return4DFloatVector)
 	EXPECT_TRUE(isCorrectType);
 }
 
+
 /**********************
  *                    *
  *  COMPARISON TESTS  *
  *                    *
  **********************/
+
 TYPED_TEST(VectorEquality, SimilarVectorsAreEqual)
 {
 	// When two equal vectors are compared for equality
@@ -570,7 +590,7 @@ TYPED_TEST(VectorEquality, EqualityOperator_SimilarVectorsReturnsTrue)
 	// When two equal vectors are compared for equality
 	bool equality = this->eqVecA == this->eqVecB;
 
-	// Then, they are equal
+	// Then, result is true
 	EXPECT_TRUE(equality);
 }
 
@@ -579,7 +599,7 @@ TYPED_TEST(VectorEquality, EqualityOperator_DissimilarVectorsReturnsFalse)
 	// When two equal vectors are compared for equality
 	bool equality = this->eqVecA == this->uneqVec;
 
-	// Then, they are not equal
+	// Then, result is false
 	EXPECT_FALSE(equality);
 }
 
@@ -588,7 +608,7 @@ TYPED_TEST(VectorEquality, InEqualityOperator_SimilarVectorsReturnsFalse)
 	// When two equal vectors are compared for equality
 	bool equality = this->eqVecA != this->eqVecB;
 
-	// Then, they are equal
+	// Then, result is false
 	EXPECT_FALSE(equality);
 }
 
@@ -597,9 +617,63 @@ TYPED_TEST(VectorEquality, InEqualityOperator_DissimilarVectorsReturnsTrue)
 	// When two equal vectors are compared for equality
 	bool equality = this->eqVecA != this->uneqVec;
 
-	// Then, they are equal
+	// Then, result is true
 	EXPECT_TRUE(equality);
 }
+
+TYPED_TEST(VectorEquality, MixedTypeEquality_SimilarVectorsReturnsTrue)
+{
+	// Given two similar vectors of different types
+	const math::Vector4D vecA(1, 2, 3, 4);
+	const math::Vector4D vecB(1.0, 2.0, 3.0, 4.0);
+
+	// When they are compared for equality
+	bool equality = vecA == vecB;
+
+	// Then, the result is true
+	EXPECT_TRUE(equality);
+}
+
+TYPED_TEST(VectorEquality, MixedTypeEquality_DissimilarVectorsReturnsFalse)
+{
+	// Given two dissimilar vectors of different types
+	const math::Vector4D vecA(5, 6, 7, 8);
+	const math::Vector4D vecB(1.0, 2.0, 3.0, 4.0);
+
+	// When they are compared for inequality
+	bool equality = vecA == vecB;
+
+	// Then, the result is false
+	EXPECT_FALSE(equality);
+}
+
+TYPED_TEST(VectorEquality, MixedTypeInequality_SimilarVectorsReturnsFalse)
+{
+	// Given two similar vectors of different types
+	const math::Vector4D vecA(1, 2, 3, 4);
+	const math::Vector4D vecB(1.0, 2.0, 3.0, 4.0);
+
+	// When they are compared for equality
+	bool equality = vecA != vecB;
+
+	// Then, the result is false
+	EXPECT_FALSE(equality);
+}
+
+TYPED_TEST(VectorEquality, MixedTypeInequality_DissimilarVectorsReturnsTrue)
+{
+	// Given two dissimilar vectors of different types
+	const math::Vector4D vecA(5, 6, 7, 8);
+	const math::Vector4D vecB(1.0, 2.0, 3.0, 4.0);
+
+	// When they are compared for inequality
+	bool equality = vecA != vecB;
+
+	// Then, the result is true
+	EXPECT_TRUE(equality);
+}
+
+
 
 /*********************************
  *                               *
