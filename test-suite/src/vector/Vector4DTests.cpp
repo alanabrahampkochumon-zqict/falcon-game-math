@@ -72,6 +72,7 @@ protected:
 		expectedLTE = {true, false, true, true};
 	}
 };
+TYPED_TEST_SUITE(VectorComparison, SupportedArithmeticTypes);
 
 /*********************************
  *                               *
@@ -672,6 +673,59 @@ TYPED_TEST(VectorEquality, MixedTypeInequality_DissimilarVectorsReturnsTrue)
 	// Then, the result is true
 	EXPECT_TRUE(equality);
 }
+
+TEST(VectorEquality, EqualityOperator_SimilarBooleanVectorsReturnsTrue)
+{
+	// Given two similar boolean vectors
+	const math::Vector4D vecA(true, false, true, false);
+	const math::Vector4D vecB(true, false, true, false);
+
+	// When they are compared for equality
+	bool equality = vecA == vecB;
+
+	// Then, the result is true
+	EXPECT_TRUE(equality);
+}
+
+TEST(VectorEquality, EqualityOperator_DissimilarSimilarVectorsReturnsFalse)
+{
+	// Given two dissimilar boolean vectors
+	const math::Vector4D vecA(true, false, true, false);
+	const math::Vector4D vecB(true, true, true, false);
+
+	// When they are compared for inequality
+	bool equality = vecA == vecB;
+
+	// Then, the result is false
+	EXPECT_FALSE(equality);
+}
+
+TEST(VectorEquality, InequalityOperator_SimilarBooleanVectorsReturnsFalse)
+{
+	// Given two similar boolean vectors
+	const math::Vector4D vecA(true, false, true, false);
+	const math::Vector4D vecB(true, false, true, false);
+
+	// When they are compared for equality
+	bool equality = vecA != vecB;
+
+	// Then, the result is false
+	EXPECT_FALSE(equality);
+}
+
+TEST(VectorEquality, InequalityOperator_DissimilarBooleanVectorsReturnsFalse)
+{
+	// Given two dissimilar boolean vectors
+	const math::Vector4D vecA(true, false, true, false);
+	const math::Vector4D vecB(true, true, true, false);
+
+	// When they are compared for inequality
+	bool equality = vecA != vecB;
+
+	// Then, the result is true
+	EXPECT_TRUE(equality);
+}
+
 
 //TODO: Add test for bool vector == and !=
 
