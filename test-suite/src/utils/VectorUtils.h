@@ -11,8 +11,6 @@
 
 namespace TestUtils
 {
-	inline constexpr double TEST_EPSILON = 1e-6;
-
 	template<math::IsVector T, math::IsVector U>
 	void EXPECT_VEC_EQ(const T& expected, const U& actual)
 	{

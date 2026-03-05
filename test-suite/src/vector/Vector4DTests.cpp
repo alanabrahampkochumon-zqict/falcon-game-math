@@ -383,7 +383,7 @@ TEST(Vector4DConversionConstructor, ConversionConstructorCreatesNewVectorWithPro
 	ASSERT_FLOAT_EQ(2.0f, vec1.w);
 
 	// And, the new vector is of type double with the mutated value
-	static_assert(std::is_same_v<typename decltype(vec2)::value_type, double>);
+	static_assert(std::is_same_v<decltype(vec2)::value_type, double>);
 	ASSERT_DOUBLE_EQ(5.0, vec2.x);
 	ASSERT_DOUBLE_EQ(1.0, vec2.y);
 	ASSERT_DOUBLE_EQ(6.0, vec2.z);
@@ -407,7 +407,7 @@ TEST(Vector4DConversionConstructor, ConversionConstructorCreatesNewVectorWithDem
 	ASSERT_DOUBLE_EQ(2.0, vec1.w);
 
 	// And, the new vector is of type float with the mutated value
-	static_assert(std::is_same_v<typename decltype(vec2)::value_type, float>);
+	static_assert(std::is_same_v<decltype(vec2)::value_type, float>);
 	ASSERT_FLOAT_EQ(5.0f, vec2.x);
 	ASSERT_FLOAT_EQ(1.0f, vec2.y);
 	ASSERT_FLOAT_EQ(6.0f, vec2.z);
@@ -834,7 +834,7 @@ TEST(Vector4DAddition, MixedTypeAdditionPromotesType)
 	const math::Vector4D result = vec1 + vec2;
 
 	// Then the new vector is type promoted
-	static_assert(std::is_same_v<typename decltype(result)::value_type, double>);
+	static_assert(std::is_same_v<decltype(result)::value_type, double>);
 	// And contains sum of elements
 	EXPECT_VEC_EQ(expected, result);
 }
@@ -850,7 +850,7 @@ TEST(Vector4DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
 	vec1 += vec2;
 
 	// Then, the original vector's type is preserved
-	static_assert(std::is_same_v<typename decltype(vec1)::value_type, float>);
+	static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
 	// and contains sum of elements
 	EXPECT_VEC_EQ(expected, vec1);
 }
@@ -886,7 +886,7 @@ TEST(Vector4DSubtraction, MixedTypeSubtractionPromotesType)
 	const math::Vector4D result = vec1 - vec2;
 
 	// Then the new vector is type promoted
-	static_assert(std::is_same_v<typename decltype(result)::value_type, double>);
+	static_assert(std::is_same_v<decltype(result)::value_type, double>);
 	// And contains difference between the elements
 	EXPECT_VEC_EQ(expected, result);
 }
@@ -902,7 +902,7 @@ TEST(Vector4DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 	vec1 -= vec2;
 
 	// Then, the original vector's type is preserved
-	static_assert(std::is_same_v<typename decltype(vec1)::value_type, float>);
+	static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
 	// And contains difference between the elements
 	EXPECT_VEC_EQ(expected, vec1);
 }
@@ -983,7 +983,7 @@ TYPED_TEST(Vector4DScalarMultiplication, MixedTypeScalarMulitplicationPromotesTy
 	const math::Vector4D result = this->vec * scalar;
 
 	// Then the new vector is type promoted
-	static_assert(std::is_same_v<typename decltype(result)::value_type, double>);
+	static_assert(std::is_same_v<decltype(result)::value_type, double>);
 
 	// And the vector is scaled by `scalar`
 	EXPECT_VEC_EQ(expected, result);
@@ -1000,7 +1000,7 @@ TEST(Vector4DScalarMultiplication, MixedTypeScalarMulitplicationAssignmentDoesNo
 	vec *= scalar;
 
 	// Then the vector type is preserved
-	static_assert(std::is_same_v<typename decltype(vec)::value_type, float>);
+	static_assert(std::is_same_v<decltype(vec)::value_type, float>);
 	// And the vector is scaled by `scalar`
 	EXPECT_VEC_EQ(expected, vec);
 }
@@ -1082,7 +1082,7 @@ TEST(Vector4DScalarDivision, MixedTypeScalarDivisionPromotesType)
 	const math::Vector4D result = vec / scalar;
 
 	// Then the new vector is type promoted
-	static_assert(std::is_same_v<typename decltype(result)::value_type, double>);
+	static_assert(std::is_same_v<decltype(result)::value_type, double>);
 	// And the vector is scaled by `scalar`
 	EXPECT_VEC_EQ(expected, result);
 }
@@ -1099,7 +1099,7 @@ TEST(Vector4DScalarDivision, MixedTypeScalarDivisonAssignmentDoesNotPromoteType)
 	vec /= scalar;
 
 	// Then the vector type is preserved
-	static_assert(std::is_same_v<typename decltype(vec)::value_type, float>);
+	static_assert(std::is_same_v<decltype(vec)::value_type, float>);
 	// And the vector is scaled by `scalar`
 	EXPECT_VEC_EQ(expected, vec);
 }
@@ -1468,7 +1468,7 @@ TEST(Vector4DProjection, MixedTypeVectorProjectionPromotesType)
 	const math::Vector4D actualProjection = vec.project(onto);
 
 	// Then, the resultant vector is type promoted
-	static_assert(std::is_same_v<typename decltype(actualProjection)::value_type, double>);
+	static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
 	// and is the projection
 	EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
@@ -1615,7 +1615,7 @@ TEST(Vector4DRejection, MixedTypeVectorRejectionPromotesType)
 	const math::Vector4D actualRejection = vec.reject(onto);
 
 	// Then, the resultant vector is type promoted
-	static_assert(std::is_same_v<typename decltype(actualRejection)::value_type, double>);
+	static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
 	// and is the rejection
 	EXPECT_VEC_EQ(expectedRejection, actualRejection);
 }
