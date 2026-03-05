@@ -32,6 +32,17 @@ target_sources(
         ${VectorTestFiles} ${MatrixTestFiles} ${Utilities} ${SimdTestFiles}
 )
 
+target_precompile_headers(
+    TestSuite
+    PRIVATE
+    <gtest/gtest.h>
+    <iostream>
+    <limits>
+    <concepts>
+    <cstddef>
+    <type_traits>
+)
+
 target_link_libraries(
     TestSuite
     PRIVATE
