@@ -744,6 +744,16 @@ TYPED_TEST(VectorComparison, GreaterThan_ReturnsBooleanVectorWithElementsGreater
 	EXPECT_VEC_EQ(this->expectedGT, result);
 }
 
+TYPED_TEST(VectorComparison, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
+{
+	// Given two arbitrary vectors
+	// When compared with greater than operator
+	const math::Vector4D<bool> result = this->vecA > this->vecB;
+
+	// Then, the resulting elements are true iff first elements are greater than second
+	EXPECT_VEC_EQ(this->expectedGT, result);
+}
+
 TYPED_TEST(VectorComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
 	// Given two arbitrary vectors
@@ -803,6 +813,16 @@ TYPED_TEST(VectorComparison, GreaterThanOrEqual_ReturnsBooleanVectorWithElements
 	// Given two arbitrary vectors
 	// When compared with greater than or equal
 	const math::Vector4D<bool> result = this->vecA.greaterThanOrEqual(this->vecB);
+
+	// Then, the resulting elements are true iff first elements are greater than second
+	EXPECT_VEC_EQ(this->expectedGTE, result);
+}
+
+TYPED_TEST(VectorComparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
+{
+	// Given two arbitrary vectors
+	// When compared with greater than or equal
+	const math::Vector4D<bool> result = this->vecA >= this->vecB;
 
 	// Then, the resulting elements are true iff first elements are greater than second
 	EXPECT_VEC_EQ(this->expectedGTE, result);

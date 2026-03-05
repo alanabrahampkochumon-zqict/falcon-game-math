@@ -77,10 +77,16 @@ namespace math
 		static Vector4D<bool> greaterThan(const Vector4D& vecA, const Vector4D<U>& vecB) requires StrictArithmetic<T>;
 
 		template <StrictArithmetic U>
+		Vector4D<bool> operator>(const Vector4D<U>& other) const requires StrictArithmetic<T>;
+
+		template <StrictArithmetic U>
 		Vector4D<bool> greaterThanOrEqual(const Vector4D<U>& other) const requires StrictArithmetic<T>;
 
 		template <StrictArithmetic U>
 		static Vector4D<bool> greaterThanOrEqual(const Vector4D& vecA, const Vector4D<U>& vecB) requires StrictArithmetic<T>;
+
+		template <StrictArithmetic U>
+		Vector4D<bool> operator>=(const Vector4D<U>& other) const requires StrictArithmetic<T>;
 
 		/*************************************
 		 *                                   *
