@@ -9,7 +9,11 @@ target_compile_features(TestSuite PRIVATE cxx_std_20)
 # )
 
 # Vector Test Sources
-set(VectorTestDirectory "src/vector/")
+set(Vector4DTestDirectory "src/vectors/vector4d/")
+set(Vector4DTestFiles "AccessorTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;GeometricTests.cpp;InitializationTests.cpp")
+list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDirectory})
+
+set(VectorTestDirectory "src/vectors/") # TODO: Remove after migration to different test
 set(VectorTestFiles Vector2DTests.cpp Vector3DTests.cpp Vector4DTests.cpp)
 list(TRANSFORM VectorTestFiles PREPEND ${VectorTestDirectory})
 
@@ -29,7 +33,11 @@ list(TRANSFORM SimdTestFiles PREPEND ${SimdTestDirectory})
 target_sources(
     TestSuite
     PRIVATE
-        ${VectorTestFiles} ${MatrixTestFiles} ${Utilities} ${SimdTestFiles}
+        ${Vector4DTestFiles}
+        ${VectorTestFiles}
+        ${MatrixTestFiles}
+        ${Utilities}
+        ${SimdTestFiles}
 )
 
 target_precompile_headers(
@@ -56,6 +64,7 @@ enable_testing()
 include(GoogleTest)
 gtest_discover_tests(TestSuite)
 
-source_group("Source Files\\Vectors" FILES ${VectorTestFiles})
+source_group("Source Files\\Vectors\\Vector4D" FILES ${Vector4DTestFiles})
+source_group("Source Files\\Vectors" FILES ${VectorTestFiles}) # TODO: Remove after migration
 source_group("Source Files\\Matrices" FILES ${MatrixTestFiles})
 source_group("Source Files\\Simd" FILES ${SimdTestFiles})

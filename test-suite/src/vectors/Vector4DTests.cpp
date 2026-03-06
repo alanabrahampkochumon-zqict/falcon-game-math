@@ -9,19 +9,15 @@
 #include <limits>
 
 #include "../utils/VectorUtils.h"
-#include "matrix/Matrix4D.h"
-
 
 using namespace TestUtils;
 
-/****************
- *              *
- *  TEST SETUP  *
- *              *
- ****************/
 
-
-
+/*****************
+ *               *
+ *  TEST SETUPS  *
+ *               *
+ *****************/
 using SupportedTypes = ::testing::Types<unsigned char, bool, int, unsigned int, float, double, std::size_t, long long>;
 using SupportedArithmeticTypes = ::testing::Types<unsigned char, int, unsigned int, float, double, std::size_t, long long>;
 
@@ -31,18 +27,18 @@ using SupportedArithmeticTypes = ::testing::Types<unsigned char, int, unsigned i
  *  INITIALIZATION SETUP  *
  *                        *
  **************************/
-
 template<typename T>
-class VectorInitialization : public ::testing::Test { };
+class VectorInitialization : public ::testing::Test {};
 TYPED_TEST_SUITE(VectorInitialization, SupportedTypes);
 
-/************************
- *                      *
- *  VECTOR COMPARISONS  *
- *                      *
- ************************/
+
+/***************************
+ *                         *
+ *  VECTOR EQUALITY SETUP  *
+ *                         *
+ ***************************/
 template <typename T>
-class VectorEquality: public ::testing::Test
+class VectorEquality : public ::testing::Test
 {
 protected:
 	math::Vector4D<T> eqVecA;
@@ -51,15 +47,21 @@ protected:
 
 	void SetUp() override
 	{
-		eqVecA = {T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589)};
-		eqVecB = {T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589)};
-		uneqVec = {T(7.1234568789), T(2.123458319), T(24.00), T(123.123489172589)};
+		eqVecA = { T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589) };
+		eqVecB = { T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589) };
+		uneqVec = { T(7.1234568789), T(2.123458319), T(24.00), T(123.123489172589) };
 	}
 };
 TYPED_TEST_SUITE(VectorEquality, SupportedArithmeticTypes);
 
+
+/******************************
+ *                            *
+ *  VECTOR COMPARISONS SETUP  *
+ *                            *
+ ******************************/
 template <typename T>
-class VectorComparison: public ::testing::Test
+class VectorComparison : public ::testing::Test
 {
 protected:
 	math::Vector4D<T> vecA;
@@ -70,13 +72,39 @@ protected:
 	{
 		vecA = { T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589) };
 		vecB = { T(5.1234568789), T(1.123458319), T(8.123412593891), T(123.123489172589) };
-		expectedGT = {false, true, false, false};
-		expectedGTE = {false, true, false, true};
-		expectedLT = {true, false, true, false};
-		expectedLTE = {true, false, true, true};
+		expectedGT = { false, true, false, false };
+		expectedGTE = { false, true, false, true };
+		expectedLT = { true, false, true, false };
+		expectedLTE = { true, false, true, true };
 	}
 };
 TYPED_TEST_SUITE(VectorComparison, SupportedArithmeticTypes);
+
+
+/**************************************
+ *                                    *
+ *  BOOLEAN VECTOR COMPARISONS SETUP  *
+ *                                    *
+ **************************************/
+class BooleanVectorBitOperations : public ::testing::Test
+{
+protected:
+	math::Vector4D<bool> vecA;
+	math::Vector4D<bool> vecB;
+	math::Vector4D<bool> expectedAnd;
+	math::Vector4D<bool> expectedOr;
+	math::Vector4D<bool> expectedNotA;
+
+	void SetUp() override
+	{
+		vecA = { true, false, true, false };
+		vecB = { true, true, false, false };
+		expectedAnd = { true, false, false, false };
+		expectedOr = { true, true, true, false };
+		expectedNotA = { false, true, false, true };
+	}
+};
+
 
 /*********************************
  *                               *
