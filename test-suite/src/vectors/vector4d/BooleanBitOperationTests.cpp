@@ -32,3 +32,14 @@ TEST_F(BooleanVectorBitOperations, BitwiseAndReturnsComponentwiseAnd)
 	// Then, we get another vector with componentwise AND applied
 	EXPECT_VEC_EQ(this->expectedAndVector, result);
 }
+
+TEST_F(BooleanVectorBitOperations, BitwiseOrReturnsComponentwiseOr)
+{
+	// Given two bool vectors
+
+	// When they are `OR` together
+	auto result = this->vecA | this->vecB;
+
+	// Then, we get another vector with componentwise OR applied
+	EXPECT_VEC_EQ(this->expectedOrVector, result);
+}

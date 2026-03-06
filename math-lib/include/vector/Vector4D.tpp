@@ -10,22 +10,22 @@ namespace math
 	 *                                   *
 	 *************************************/
 	template <Arithmetic T>
-	Vector4D<T>::Vector4D() : x(T(0)), y(T(0)), z(T(0)), w(T(0)) { }
+	Vector4D<T>::Vector4D() : x(T(0)), y(T(0)), z(T(0)), w(T(0)) {}
 
 	template <Arithmetic T>
-	Vector4D<T>::Vector4D(T v1, T v2, T v3, T v4) : x(v1), y(v2), z(v3), w(v4) { }
+	Vector4D<T>::Vector4D(T v1, T v2, T v3, T v4) : x(v1), y(v2), z(v3), w(v4) {}
 
 	template <Arithmetic T>
-	Vector4D<T>::Vector4D(Vector2D<T> vec1, Vector2D<T> vec2) : x(vec1.x), y(vec1.y), z(vec2.x), w(vec2.y) { }
+	Vector4D<T>::Vector4D(Vector2D<T> vec1, Vector2D<T> vec2) : x(vec1.x), y(vec1.y), z(vec2.x), w(vec2.y) {}
 
 	template <Arithmetic T>
-	Vector4D<T>::Vector4D(Vector3D<T> vec, T v) : x(vec.x), y(vec.y), z(vec.z), w(v) { }
+	Vector4D<T>::Vector4D(Vector3D<T> vec, T v) : x(vec.x), y(vec.y), z(vec.z), w(v) {}
 
 	template <Arithmetic T>
 	template <Arithmetic U>
 	Vector4D<T>::Vector4D(const Vector4D<U>& other) :
 		x(static_cast<T>(other.x)), y(static_cast<T>(other.y)), z(static_cast<T>(other.z)), w(static_cast<T>(other.w))
-	{ }
+	{}
 
 
 	/*************************************
@@ -185,6 +185,12 @@ namespace math
 	Vector4D<bool> Vector4D<T>::operator&(const Vector4D<bool>& other) const requires std::is_same_v<T, bool>
 	{
 		return Vector4D(x && other.x, y && other.y, z && other.z, w && other.w);
+	}
+
+	template <Arithmetic T>
+	Vector4D<bool> Vector4D<T>::operator|(const Vector4D<bool>& other) const requires std::is_same_v<T, bool>
+	{
+		return Vector4D(x | other.x, y | other.y, z | other.z, w | other.w);
 	}
 
 
