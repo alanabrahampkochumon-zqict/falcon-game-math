@@ -14,7 +14,7 @@ list(TRANSFORM SetupFiles PREPEND ${IncludeDirectory})
 
 # Vector Test Sources
 set(Vector4DTestDirectory "src/vectors/vector4d/")
-set(Vector4DTestFiles "AccessorTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;GeometricTests.cpp;InitializationTests.cpp")
+set(Vector4DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;GeometricTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp")
 list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDirectory})
 
 set(VectorTestDirectory "src/vectors/") # TODO: Remove after migration to different test
