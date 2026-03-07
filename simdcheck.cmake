@@ -1,3 +1,40 @@
+set(SIMD_AVX512_PROG "
+    #include <immintrin.h>
+
+    int main()
+    {
+        float data[16] = {0};
+        __m512 a = _mm512_setzero_ps();
+        _mm512_storeu_ps(data, a);
+        return 0;
+    }
+")
+
+set(SIMD_AVX_PROG "
+    #include <immintrin.h>
+
+    int main()
+    {
+        float data[8] = {0};
+        __m256 a = _mm256_setzero_ps();
+        _mm256_storeu_ps(data, a);
+        return 0;
+    }
+")
+
+set(SIMD_SSE_PROG "
+    #include <xmmintrin.h>
+
+    int main()
+    {
+        float data[4] = {0};
+        __m128 a = _mm_setzero_ps();
+        _mm_storeu_ps(data, a);
+        return 0;
+    }
+")
+
+# TODO: Change to use include(CheckCXXSourceRuns)
 include(CheckCXXCompilerFlag)
 
 function (AddSIMDCompilerFlag Target)
@@ -60,3 +97,4 @@ function (AddSIMDCompilerFlag Target)
         endif()
     endif()
 endfunction(AddSIMDCompilerFlag)
+
