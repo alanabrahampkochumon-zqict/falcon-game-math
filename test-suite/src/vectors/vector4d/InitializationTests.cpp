@@ -9,10 +9,10 @@ class Vector4DInitialization: public ::testing::Test
 TYPED_TEST_SUITE(Vector4DInitialization, SupportedTypes);
 
 
-TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
+TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
 {
     // Given a vector initialized without parameters
-    const math::Vector4D<float> vec;
+    const math::Vector4D<TypeParam> vec;
 
     // Then, it's elements form a zero vector
     EXPECT_VEC_ZERO(vec);
@@ -52,7 +52,7 @@ TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
 
 TYPED_TEST(Vector4DInitialization, One3DVectorAndScalarCanInitializeA4DVector)
 {
-    // Given a 3D Vector and a scalar
+    // Given one 3D Vector and a scalar
     TypeParam a = static_cast<TypeParam>(3);
     TypeParam b = static_cast<TypeParam>(1);
     TypeParam c = static_cast<TypeParam>(6);

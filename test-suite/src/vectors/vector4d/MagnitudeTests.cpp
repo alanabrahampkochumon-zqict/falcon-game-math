@@ -177,7 +177,8 @@ TYPED_TEST(Vector4DNormalization, VectorWhenNormalizedReturnsAUnitVector)
     EXPECT_VEC_EQ(this->expectedVector, normalized);
 }
 
-TYPED_TEST(Vector4DNormalization, StaticWrapper_VectorWhenNormalizedReturnsAUnitVector)
+TYPED_TEST(Vector4DNormalization,
+           StaticWrapper_VectorWhenNormalizedReturnsAUnitVectorWhenDotWithItselfSquareMagnitudeVector)
 {
     // Given a non-normalized vector
 

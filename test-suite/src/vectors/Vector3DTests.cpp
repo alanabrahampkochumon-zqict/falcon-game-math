@@ -14,39 +14,6 @@ using namespace TestUtils;
  *                                             *
  ***********************************************/
 
-TEST(Vector3D_Initialization, EmptyConstructorInitializesZeroVector)
-{
-    // Arrange & Act
-    const math::Vector3D<float> vec;
-
-    // Assert
-    EXPECT_VEC_ZERO(vec);
-}
-
-TEST(Vector3D_Initialization, ConstructorParametersInitializesVector)
-{
-    // Arrange & Act
-    const math::Vector3D vec(3.0f, 1.0f, 6.0f);
-
-    // Assert
-    EXPECT_FLOAT_EQ(3.0f, vec.x);
-    EXPECT_FLOAT_EQ(1.0f, vec.y);
-    EXPECT_FLOAT_EQ(6.0f, vec.z);
-}
-
-TEST(Vector3D_Initialization, One2DVectorAndFloatCanInitializeA3DVector)
-{
-    // Arrange
-    math::Vector2D vec1(3.0f, 1.0f);
-
-    // Act
-    math::Vector3D vec(vec1, 6.0f);
-
-    // Assert
-    EXPECT_FLOAT_EQ(3.0f, vec.x);
-    EXPECT_FLOAT_EQ(1.0f, vec.y);
-    EXPECT_FLOAT_EQ(6.0f, vec.z);
-}
 
 TEST(Vector3D_ConversionConstructor, ConversionConstructorCreatesNewVectorWithPromotedType)
 {

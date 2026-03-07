@@ -9,13 +9,19 @@ target_compile_features(TestSuite PRIVATE cxx_std_20)
 # )
 
 set(IncludeDirectory "include/")
-set(SetupFiles "Vector4DTestSetup.h")
+set(SetupFiles "Vector4DTestSetup.h;Vector3DTestSetup.h")
 list(TRANSFORM SetupFiles PREPEND ${IncludeDirectory})
 
 # Vector Test Sources
 set(Vector4DTestDirectory "src/vectors/vector4d/")
 set(Vector4DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp")
 list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDirectory})
+
+# Vector Test Sources
+set(Vector3DTestDirectory "src/vectors/vector3d/")
+set(Vector3DTestFiles "InitializationTests.cpp;")
+list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDirectory})
+
 
 set(VectorTestDirectory "src/vectors/") # TODO: Remove after migration to different test
 set(VectorTestFiles Vector2DTests.cpp Vector3DTests.cpp)
@@ -37,6 +43,7 @@ list(TRANSFORM SimdTestFiles PREPEND ${SimdTestDirectory})
 target_sources(
     TestSuite
     PRIVATE
+        ${Vector3DTestFiles}
         ${Vector4DTestFiles}
         ${VectorTestFiles}
         ${MatrixTestFiles}
@@ -80,6 +87,7 @@ enable_testing()
 include(GoogleTest)
 gtest_discover_tests(TestSuite)
 
+source_group("Source Files\\Vectors\\Vector3D" FILES ${Vector3DTestFiles})
 source_group("Source Files\\Vectors\\Vector4D" FILES ${Vector4DTestFiles})
 source_group("Source Files\\Vectors" FILES ${VectorTestFiles}) # TODO: Remove after migration
 source_group("Source Files\\Matrices" FILES ${MatrixTestFiles})
