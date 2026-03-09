@@ -1,14 +1,25 @@
+/**
+ * @file ArithmeticOperationTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief `Vector4D` arithmetic operation (+, -, /, *) tests.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #include "Vector4DTestSetup.h"
 
 
-using namespace TestUtils;
+using namespace testutils;
 
 
-/***********
- *         *
- *  SETUP  *
- *         *
- ***********/
+/**************************************
+ *                                    *
+ *               SETUP                *
+ *                                    *
+ **************************************/
 
 template <typename T>
 class Vector4DAddition: public ::testing::Test
@@ -45,6 +56,7 @@ class Vector4DSubtraction: public ::testing::Test
 };
 TYPED_TEST_SUITE(Vector4DSubtraction, SupportedArithmeticTypes);
 
+
 template <typename T>
 class Vector4DScalarMultiplication: public ::testing::Test
 {
@@ -65,6 +77,7 @@ class Vector4DScalarMultiplication: public ::testing::Test
 };
 TYPED_TEST_SUITE(Vector4DScalarMultiplication, SupportedArithmeticTypes);
 
+
 template <typename T>
 class Vector4DScalarDivision: public ::testing::Test
 {
@@ -84,11 +97,11 @@ class Vector4DScalarDivision: public ::testing::Test
 TYPED_TEST_SUITE(Vector4DScalarDivision, SupportedArithmeticTypes);
 
 
-/********************
- *                  *
- *  ADDITION TESTS  *
- *                  *
- ********************/
+/**************************************
+ *                                    *
+ *           ADDITION TESTS           *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DAddition, VectorPlusVectorReturnsNewVectorWithSum)
 {
@@ -143,11 +156,11 @@ TEST(Vector4DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
 }
 
 
-/***********************
- *                     *
- *  SUBTRACTION TESTS  *
- *                     *
- ***********************/
+/**************************************
+ *                                    *
+ *          SUBTRACTION TESTS         *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DSubtraction, VectorMinusVectorReturnsNewVectorWithDifference)
 {
@@ -202,11 +215,12 @@ TEST(Vector4DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 }
 
 
-/*********************************
- *                               *
- *  SCALAR MULTIPLICATION TESTS  *
- *                               *
- *********************************/
+
+/**************************************
+ *                                    *
+ *     SCALAR MULTIPLICATION TESTS    *
+ *                                    *
+ **************************************/
 
 TEST(Vector4DScalarMultiplication, VectorTimesZeroReturnsZeroVector)
 {
@@ -321,11 +335,11 @@ TEST(Vector4DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentGivesR
 }
 
 
-/***************************
- *                         *
- *  SCALAR DIVISION TESTS  *
- *                         *
- ***************************/
+/**************************************
+ *                                    *
+ *        SCALAR DIVISION TESTS       *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DScalarDivision, VectorDividedByZeroReturnsInfinityVector)
 {

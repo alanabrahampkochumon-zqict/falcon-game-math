@@ -1,3 +1,20 @@
+/**
+ * @file Vector4D.h
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief Templated 4D Vector supporting integral, floating-point and boolean types.
+ * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
+ *
+ * @par Configuration
+ * Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
+ * Even if disabled, functional comparisons like `greaterThan()` remain available.
+ * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #pragma once
 
 #include "Vector2D.h"
@@ -5,17 +22,8 @@
 
 #include <cstddef>
 
-// NOTE: To manually turn off SIMD support use `FORCE_NO_SIMD` macro
-
-
 namespace math
 {
-    /*
-     * Data structure representing a 4D Vector.
-     * Options:
-     *	       Use `#define ENABLE_FGM_SHADER_OPERATORS` to enable operators like >, <, >=, <= which are turned off by
-     * default. Even if operators are disable you can use functions like `greaterThan` for comparisons.
-     */
     template <Arithmetic T>
     struct Vector4D
     {
@@ -26,15 +34,24 @@ namespace math
         union {
             struct
             {
-                T x, y, z, w;
+                T x; ///< X-axis component
+                T y; ///< Y-axis component
+                T z; ///< Z-axis component
+                T w; ///< W-axis (homogeneous) component
             };
             struct
             {
-                T r, g, b, a;
+                T r; ///< Red channel
+                T g; ///< Green channel
+                T b; ///< Blue channel
+                T a; ///< Alpha channel
             };
             struct
             {
-                T s, t, p, q;
+                T s; ///< S-coordinate
+                T t; ///< T-coordinate
+                T p; ///< P-coordinate
+                T q; ///< Q-coordinate
             };
 
             T elements[dimension];
@@ -88,7 +105,11 @@ namespace math
         template <Arithmetic U>
         bool operator!=(const Vector4D<U>& other) const;
 
-        // NOTE: All comparison operator expect equality and inequality performs element-wise comparison
+        /**
+         *
+         * @note All comparison operator expect equality and inequality performs element-wise comparison
+         *
+         */
         template <StrictArithmetic U>
         Vector4D<bool> greaterThan(const Vector4D<U>& other) const
             requires StrictArithmetic<T>;
@@ -214,9 +235,9 @@ namespace math
          *                                   *
          *************************************/
 
-        /*
+        /**
          * Returns the magnitude of the vector.
-         * @return If the type of T float, then a float is returned, else a float.
+         * @returns If the type of T float, then a float is returned, else a float.
          */
         Magnitude<T> mag() const
             requires StrictArithmetic<T>;
@@ -230,10 +251,10 @@ namespace math
          *                                   *
          *************************************/
 
-        /*
+        /**
          * Returns a normalized vector.
-         * Special Note: Vector will be type promoted to math::Magnitude's type.
-         * @return normalized floating point vector.
+         * @note Vector will be type promoted to math::Magnitude's type.
+         * @returns normalized floating point vector.
          */
         Vector4D<Magnitude<T>> normalize() const
             requires StrictArithmetic<T>;
@@ -251,8 +272,8 @@ namespace math
          * Projects the current vector onto to the `onto` vector.
          * @tparam U Type of the vector to be projected on to (b).
          * @param onto Vector to be projected onto.
-         * @param ontoNormalized A flag for optimizing the by ignoring the division, given the vector that is projected
-         * onto is normalized.
+         * @param ontoNormalized A flag for optimizing the calculation by ignoring the division, given the vector that
+         * is projected onto is normalized.
          * @return Projected vector.
          */
         template <StrictArithmetic U>
@@ -264,8 +285,8 @@ namespace math
          * @tparam U Type of the vector to be projected to.
          * @param vector Vector to project.
          * @param onto Vector to be projected onto.
-         * @param ontoNormalized A flag for optimizing the by ignoring the division, given the vector that is projected
-         * onto is normalized.
+         * @param ontoNormalized A flag for optimizing the calculation by ignoring the division, given the vector that
+         * is projected onto is normalized.
          * @return Projected vector.
          */
         template <StrictArithmetic U>
@@ -284,8 +305,8 @@ namespace math
          * Returns the perpendicular component for the current vector after projection to the `onto` vector.
          * @tparam U Type of the vector to be vector projected onto.
          * @param onto Vector to be projected onto.
-         * @param ontoNormalized A flag for optimizing the by ignoring the division, given the vector that is projected
-         * onto is normalized.
+         * @param ontoNormalized A flag for optimizing the calculation by ignoring the division, given the vector that
+         * is projected onto is normalized.
          * @return Projected vector.
          */
         template <StrictArithmetic U>
@@ -298,8 +319,8 @@ namespace math
          * @tparam U Type of the vector to be vector projected onto.
          * @param vector whose rejection(perpendicular) component on to `onto` we need to find.
          * @param onto Vector to be projected onto.
-         * @param ontoNormalized A flag for optimizing the by ignoring the division, given the vector that is projected
-         * onto is normalized.
+         * @param ontoNormalized A flag for optimizing the calculation by ignoring the division, given the vector that
+         * is projected onto is normalized.
          * @return Projected vector.
          */
         template <StrictArithmetic U>

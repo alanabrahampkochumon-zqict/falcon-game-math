@@ -1,6 +1,25 @@
+/**
+ * @file BooleanBitOperationTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief Boolean `Vector4D` bitwise operation (!, &, |) tests.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #include "Vector4DTestSetup.h"
 
-using namespace TestUtils;
+
+using namespace testutils;
+
+
+/**************************************
+ *                                    *
+ *                SETUP               *
+ *                                    *
+ **************************************/
 
 class BooleanVectorBitOperations: public ::testing::Test
 {
@@ -20,7 +39,13 @@ class BooleanVectorBitOperations: public ::testing::Test
         expectedNotAVector = { false, true, false, true };
     }
 };
-// TODO: Add Tests
+
+
+/**************************************
+ *                                    *
+ *                TESTS               *
+ *                                    *
+ **************************************/
 
 TEST_F(BooleanVectorBitOperations, BitwiseAndReturnsComponentwiseAnd)
 {

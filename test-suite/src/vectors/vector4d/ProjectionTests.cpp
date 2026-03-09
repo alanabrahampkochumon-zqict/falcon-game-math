@@ -1,13 +1,25 @@
+/**
+ * @file ProjectionTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief `Vector4D` projection and rejection tests.
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #include "Vector4DTestSetup.h"
 
-using namespace TestUtils;
+
+using namespace testutils;
 
 
-/***********
- *         *
- *  SETUP  *
- *         *
- ***********/
+/**************************************
+ *                                    *
+ *               SETUP                *
+ *                                    *
+ **************************************/
 
 template <typename T>
 class Vector4DProjection: public ::testing::Test
@@ -48,11 +60,11 @@ class Vector4DRejection: public ::testing::Test
 TYPED_TEST_SUITE(Vector4DRejection, SupportedArithmeticTypes);
 
 
-/**********************
- *                    *
- *  PROJECTION TESTS  *
- *                    *
- **********************/
+/**************************************
+ *                                    *
+ *          PROJECTION TESTS          *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DProjection, OrthogonalVectorsWhenProjectedReturnsZeroVector)
 {
@@ -191,11 +203,11 @@ TEST(Vector4DProjection, MixedTypeVectorProjectionPromotesType)
 }
 
 
-/*********************
- *                   *
- *  REJECTION TESTS  *
- *                   *
- *********************/
+/**************************************
+ *                                    *
+ *          REJECTION TESTS           *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DRejection, ParallelVectorsWhenRejectedReturnsZeroVector)
 {

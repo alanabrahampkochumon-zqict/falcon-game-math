@@ -1,3 +1,14 @@
+/**
+ * @file Vector4D.tpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief Implementation of Vector4D
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #pragma once
 
 #include <cassert>

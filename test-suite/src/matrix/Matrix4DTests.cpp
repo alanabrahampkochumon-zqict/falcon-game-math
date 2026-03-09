@@ -7,7 +7,7 @@
 #include <matrix/Matrix4D.h>
 #include <vector/Vector3D.h>
 
-using namespace TestUtils;
+using namespace testutils;
 // TODO: Add test for integer precision on multiplication -> [[2]] * 2.5 = [[5]] not 4
 
 
@@ -551,7 +551,7 @@ TEST(Matrix4D_Addition, PlusEqualsMatrixWithAnotherMatrixOfDifferentTypeReturnsS
 //	const math::vec3 actual = mat * vec;
 //
 //	// Assert
-//	TestUtils::EXPECT_VEC_EQ(expected, actual);
+//	testutils::EXPECT_VEC_EQ(expected, actual);
 // }
 //
 // TEST(Matrix4D_Product, IdentityMatrixTimesAVectorReturnsTheSameMatrix)
@@ -564,7 +564,7 @@ TEST(Matrix4D_Addition, PlusEqualsMatrixWithAnotherMatrixOfDifferentTypeReturnsS
 //	const math::vec3 actual = mat * vec;
 //
 //	// Assert
-//	TestUtils::EXPECT_VEC_EQ(vec, actual);
+//	testutils::EXPECT_VEC_EQ(vec, actual);
 // }
 //
 // TEST(Matrix4D_Product, VectorTimesAMatrixReturnsANewVectorWithCorrectValues)
@@ -581,7 +581,7 @@ TEST(Matrix4D_Addition, PlusEqualsMatrixWithAnotherMatrixOfDifferentTypeReturnsS
 //	const auto actual = vec * mat;
 //
 //	// Assert
-//	TestUtils::EXPECT_VEC_EQ(expected, actual);
+//	testutils::EXPECT_VEC_EQ(expected, actual);
 // }
 //
 //
@@ -595,7 +595,7 @@ TEST(Matrix4D_Addition, PlusEqualsMatrixWithAnotherMatrixOfDifferentTypeReturnsS
 //	const math::vec3 actual = vec * mat;
 //
 //	// Assert
-//	TestUtils::EXPECT_VEC_EQ(vec, actual);
+//	testutils::EXPECT_VEC_EQ(vec, actual);
 // }
 //
 // TEST(Matrix4D_Product, VectorTimesEqualMatrixReturnTheSameVectorWithNewValues)
@@ -612,7 +612,7 @@ TEST(Matrix4D_Addition, PlusEqualsMatrixWithAnotherMatrixOfDifferentTypeReturnsS
 //	vec *= mat;
 //
 //	// Assert
-//	TestUtils::EXPECT_VEC_EQ(expected, vec);
+//	testutils::EXPECT_VEC_EQ(expected, vec);
 // }
 //
 // TEST(Matrix4D_Product, MatrixTimesMatrixGivesAnotherMatrixWithCorrectValues)
@@ -785,7 +785,7 @@ TEST(Matrix4D_Addition, PlusEqualsMatrixWithAnotherMatrixOfDifferentTypeReturnsS
 //
 //	// Assert
 //	static_assert(std::is_same_v<typename decltype(actual)::value_type, double>, "Assertion Failed (Matrix4D): Float *
-//Double(vec) = Double"); 	TestUtils::EXPECT_VEC_EQ(expected, actual);
+//Double(vec) = Double"); 	testutils::EXPECT_VEC_EQ(expected, actual);
 // }
 //
 // TEST(Matrix4D_Product, DoubleVectorTimesEqualAMatrixReturnsANewVectorWithPromotedType)
@@ -804,7 +804,7 @@ TEST(Matrix4D_Addition, PlusEqualsMatrixWithAnotherMatrixOfDifferentTypeReturnsS
 //
 //	// Assert
 //	static_assert(std::is_same_v<typename decltype(vec)::value_type, float>, "Assertion Failed (Matrix4D): Float(vec) *
-//Double = Float"); 	TestUtils::EXPECT_VEC_EQ(expected, vec);
+//Double = Float"); 	testutils::EXPECT_VEC_EQ(expected, vec);
 // }
 //
 // TEST(Matrix4D_Product, MatrixTimesMatrixGivesAnotherMatrixWithTypePromotion)

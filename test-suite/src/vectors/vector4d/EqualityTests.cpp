@@ -1,3 +1,14 @@
+/**
+ * @file EqualityTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief `Vector4D` equality (==, != and their functional counterparts) tests.
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #include "Vector4DTestSetup.h"
 
 template <typename T>
@@ -18,11 +29,11 @@ class Vector4DEquality: public ::testing::Test
 TYPED_TEST_SUITE(Vector4DEquality, SupportedArithmeticTypes);
 
 
-/*********************
- *                   *
- *  VECTOR EQUALITY  *
- *                   *
- *********************/
+/**************************************
+ *                                    *
+ *           EQUALITY TESTS           *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DEquality, SimilarVectorsAreEqual)
 {
@@ -131,11 +142,11 @@ TEST(Vector4DEquality, EqualityOperator_DissimilarBooleanVectorsReturnsFalse)
 }
 
 
-/***********************
- *                     *
- *  VECTOR INEQUALITY  *
- *                     *
- ***********************/
+/**************************************
+ *                                    *
+ *          INEQUALITY TESTS          *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DEquality, InEqualityOperator_SimilarVectorsReturnsFalse)
 {

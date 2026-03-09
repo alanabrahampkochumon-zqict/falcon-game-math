@@ -1,7 +1,18 @@
 #pragma once
+/**
+ * @file SIMDUtils.h
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief SIMD utility functions.
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
 
 #include <bit>
 #include <cstddef>
+
 
 namespace falcon::simd
 {

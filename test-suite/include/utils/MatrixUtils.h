@@ -1,3 +1,14 @@
+/**
+ * @file MatrixUtils.h
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief Helper functions for testing Matrices like `Matrix2D`, `Matrix3D` etc.
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #pragma once
 
 #include <MathTraits.h>
@@ -6,7 +17,7 @@
 #include <matrix/Matrix2D.h>
 #include <matrix/Matrix3D.h>
 
-namespace TestUtils
+namespace testutils
 {
     template <math::Matrix T, math::Matrix U>
     void EXPECT_MAT_EQ(T expected, U actual)
@@ -78,10 +89,10 @@ namespace TestUtils
                 EXPECT_TRUE(std::isinf(actual(i, j)));
     }
 
-} // namespace TestUtils
+} // namespace testutils
 
-
-namespace TestUtils::Matrix3D
+// TODO: Remove
+namespace testutils::Matrix3D
 {
 
     static unsigned int SIZE = 9;
@@ -176,9 +187,9 @@ namespace TestUtils::Matrix3D
             EXPECT_TRUE(std::isinf(actual(i / ROW_SIZE, i % ROW_SIZE)));
         }
     }
-} // namespace TestUtils::Matrix3D
+} // namespace testutils::Matrix3D
 
-namespace TestUtils::Matrix2D
+namespace testutils::Matrix2D
 {
 
     static unsigned int SIZE = 4;
@@ -259,4 +270,4 @@ namespace TestUtils::Matrix2D
             EXPECT_TRUE(std::isinf(actual(i / ROW_SIZE, i % ROW_SIZE)));
         }
     }
-} // namespace TestUtils::Matrix2D
+} // namespace testutils::Matrix2D

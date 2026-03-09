@@ -1,24 +1,38 @@
 #pragma once
+/**
+ * @file SIMD.h
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief Architecture-agnostic SIMD abstractions and feature detection macros
+ *
+ * @par Configuration
+ * Define FORCE_SSE to turn on SSE, even if hardware supports newer instructions
+ * Similar options include FORCE_AVX512, FORCE_AVX2, FORCE_SSE, and FORCE_SCALAR which will completely turn off SIMD.
+ * @note Even if flags are specified, it will only default to the max that the CPU architecture supports
+ *
+ * @par Compiler note
+ * Make sure compiler flags are turned on:
+ * -mavx2 (GCC/Clang) or /arch:AVX2(MSVC) for turning on AVX2 support
+ * -mavx512 (GCC/Clang) or /arch:AVX512 (MSVC) for turning on AVX512 supported.
+ * @note If you compile using the supplied CMakeList.txt, then, it will turn on the flag supported by the CPU.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
 
 #include "SIMDUtils.h"
 
 #include <concepts>
 #include <cstddef>
 #include <immintrin.h>
-#include <zmmintrin.h>
 
-/*************************************
- *                                   *
- *            PREPROCESSORS          *
- *                                   *
- *************************************/
-/**
- * Defining FORCE_SSE will turn on SSE_4_1 even if the hardware supports newer instruction set
- * Similar MACROS are FORCE_AVX, FORCE_AVX2, FORCE_AVX512, and FORCE_SCALAR which will turn off SIMD.
- * Although you will be able to see the defined macros, all functions and register types will not be available or
- * substituted with stubs.
- */
 
+/**************************************
+ *                                    *
+ *            PREPROCESSORS           *
+ *                                    *
+ **************************************/
 #if defined(FORCE_AVX512) && defined(__AVX512F__)
     #define FALCON_AVX512_SUPPORTED
 #endif
@@ -40,12 +54,7 @@
     #define FALCON_SIMD_SUPPORTED
 #endif
 
-/**
- * Macros will be turned on by system support, if no force command is supplied.
- * Make sure compiler flags are turned on:
- * -mavx2 (GCC/Clang) or /arch:AVX2(MSVC) for turning on AVX2 support
- * -mavx512 (GCC/Clang) or /arch:AVX512 (MSVC) for turning on AVX512 supported.
- */
+
 #if !defined(FORCE_AVX512) && !defined(FORCE_AVX2) && !defined(FORCE_AVX) && !defined(FORCE_SSE) &&                    \
     !defined(FORCE_SCALAR)
     #ifdef __AVX512F__
@@ -78,6 +87,11 @@
 
 
 
+/**************************************
+ *                                    *
+ *           SIMD Registers           *
+ *                                    *
+ **************************************/
 namespace falcon::simd
 {
     template <typename T, std::size_t RegWidth>
@@ -148,8 +162,6 @@ namespace falcon::simd
 
 #endif
     };
-
-    SIMDReg<float, 256>;
 
 
 

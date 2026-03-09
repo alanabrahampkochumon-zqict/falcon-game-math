@@ -1,3 +1,14 @@
+/**
+ * @file MatrixUtils.h
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief Helper functions for testing Vectors like `Vector2D`, `Vector3D` etc.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #pragma once
 
 #include <MathTraits.h>
@@ -8,7 +19,7 @@
 #include <vector/Vector3D.h>
 #include <vector/Vector4D.h>
 
-namespace TestUtils
+namespace testutils
 {
     template <math::IsVector T, math::IsVector U>
     void EXPECT_VEC_EQ(const T& expected, const U& actual)
@@ -171,4 +182,4 @@ namespace TestUtils
         else
             EXPECT_EQ(expected, actual);
     }
-} // namespace TestUtils
+} // namespace testutils

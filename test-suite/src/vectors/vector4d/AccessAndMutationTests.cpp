@@ -1,11 +1,22 @@
+/**
+ * @file AccessAndMutationTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief `Vector4D` access and mutation tests.
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #include "Vector4DTestSetup.h"
 
 
-/******************
- *                *
- *  ACCESS TESTS  *
- *                *
- ******************/
+/**************************************
+ *                                    *
+ *            ACCESS TESTS            *
+ *                                    *
+ **************************************/
 
 TEST(Vector4DAccess, AccessibleAsXYZ)
 {
@@ -56,11 +67,11 @@ TEST(Vector4DAccess, AccessibleAsArray)
 }
 
 
-/********************
- *                  *
- *  MUTATION TESTS  *
- *                  *
- ********************/
+/**************************************
+ *                                    *
+ *           MUTATION TESTS           *
+ *                                    *
+ **************************************/
 
 TEST(Vector4DMutation, ElementsCanBeMutatedAtGivenIndex)
 {

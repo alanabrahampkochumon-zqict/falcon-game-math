@@ -1,4 +1,16 @@
+/**
+ * @file AliasTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief `Vector4D` alias (`vec4`, `bVec4`, ...) tests.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #include "Vector4DTestSetup.h"
+
 
 TEST(Vector4DAlias, bVec4IsA4DBoolVector)
 {

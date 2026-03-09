@@ -1,13 +1,24 @@
+/**
+ * @file MagnitudeTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief `Vector4D` magnitude and normalization tests.
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #include "Vector4DTestSetup.h"
 
-using namespace TestUtils;
+using namespace testutils;
 
 
-/***********
- *         *
- *  SETUP  *
- *         *
- ***********/
+/**************************************
+ *                                    *
+ *               SETUP                *
+ *                                    *
+ **************************************/
 
 template <typename T>
 class Vector4DMagnitude: public ::testing::Test
@@ -71,11 +82,11 @@ class Vector4DZeroNormalization: public ::testing::Test
 TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);
 
 
-/*********************
- *                   *
- *  MAGNITUDE TESTS  *
- *                   *
- *********************/
+/**************************************
+ *                                    *
+ *           MAGNITUDE TESTS          *
+ *                                    *
+ **************************************/
 
 TEST(Vector4DMagnitude, ZeroVectorReturnsZero)
 {
@@ -150,11 +161,11 @@ TYPED_TEST(Vector4DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMa
 }
 
 
-/*************************
- *                       *
- *  NORMALIZATION TESTS  *
- *                       *
- *************************/
+/**************************************
+ *                                    *
+ *        NORMALIZATION TESTS         *
+ *                                    *
+ **************************************/
 
 TEST(Vector4DNormalization, ZeroVectorWhenNormalizedCausesDeath)
 {

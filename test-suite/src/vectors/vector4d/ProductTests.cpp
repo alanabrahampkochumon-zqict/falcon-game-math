@@ -1,7 +1,26 @@
+/**
+ * @file ProductTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief `Vector4D` dot product tests.
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
+
 #include "Vector4DTestSetup.h"
 
-using namespace TestUtils;
 
+using namespace testutils;
+
+
+/**************************************
+ *                                    *
+ *               SETUP                *
+ *                                    *
+ **************************************/
 
 template <typename T>
 class Vector4DDotProduct: public ::testing::Test
@@ -30,6 +49,12 @@ class Vector4DDotProduct: public ::testing::Test
 };
 TYPED_TEST_SUITE(Vector4DDotProduct, SupportedArithmeticTypes);
 
+
+/**************************************
+ *                                    *
+ *               TESTS                *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DDotProduct, VectorWhenDotWithItselfReturnsSquareMagnitude)
 {

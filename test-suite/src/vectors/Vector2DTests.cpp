@@ -5,7 +5,7 @@
 #include <type_traits>
 #include <vector/Vector2D.h>
 
-using namespace TestUtils;
+using namespace testutils;
 
 
 /***********************************************

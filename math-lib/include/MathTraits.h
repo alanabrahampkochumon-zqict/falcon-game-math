@@ -1,8 +1,19 @@
 #pragma once
+/**
+ * @file MathTraits.h
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief Concepts for Arithmetic, StrictArithmetic, Matrix, and Vector. Also contains EPSILONs for floats and doubles.
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
 
 #include <concepts>
 #include <cstddef>
 #include <type_traits>
+
 
 namespace math
 {

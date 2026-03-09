@@ -1,13 +1,25 @@
+/**
+ * @file ComparisonTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: March 07, 2026
+ *
+ * @brief `Vector4D` comparision operation (>, <, <=, >= and their functional counterparts like greaterThanOrEqual) tests.
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #include "Vector4DTestSetup.h"
 
-using namespace TestUtils;
+
+using namespace testutils;
 
 
-/******************************
- *                            *
- *  VECTOR COMPARISONS SETUP  *
- *                            *
- ******************************/
+/**************************************
+ *                                    *
+ *                SETUP               *
+ *                                    *
+ **************************************/
 
 template <typename T>
 class Vector4DComparison: public ::testing::Test
@@ -31,11 +43,11 @@ class Vector4DComparison: public ::testing::Test
 TYPED_TEST_SUITE(Vector4DComparison, SupportedArithmeticTypes);
 
 
-/*************************
- *                       *
- *  VECTOR GREATER THAN  *
- *                       *
- *************************/
+/**************************************
+ *                                    *
+ *         GREATER THAN TESTS         *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DComparison, GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
@@ -111,11 +123,11 @@ TEST(Vector4DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectVa
 }
 
 
-/***********************************
- *                                 *
- *  VECTOR GREATER THAN OR EQUALS  *
- *                                 *
- ***********************************/
+/**************************************
+ *                                    *
+ *    GREATER THAN OR EQUALS TESTS    *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DComparison, GreaterThanOrEqual_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
@@ -192,11 +204,11 @@ TEST(Vector4DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
 }
 
 
-/**********************
- *                    *
- *  VECTOR LESS THAN  *
- *                    *
- **********************/
+/**************************************
+ *                                    *
+ *          LESS THAN TESTS           *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DComparison, LessThan_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
@@ -272,11 +284,11 @@ TEST(Vector4DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValue
 }
 
 
-/********************************
- *                              *
- *  VECTOR LESS THAN OR EQUALS  *
- *                              *
- ********************************/
+/**************************************
+ *                                    *
+ *      LESS THAN OR EQUALS TESTS     *
+ *                                    *
+ **************************************/
 
 TYPED_TEST(Vector4DComparison, LessThanOrEqual_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {

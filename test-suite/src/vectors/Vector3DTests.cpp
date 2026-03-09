@@ -5,7 +5,7 @@
 #include <vector/Vector3D.h>
 
 
-using namespace TestUtils;
+using namespace testutils;
 
 
 /***********************************************

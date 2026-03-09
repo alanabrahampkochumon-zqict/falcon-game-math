@@ -1,6 +1,6 @@
 #include "Vector3DTestSetup.h"
 
-using namespace TestUtils;
+using namespace testutils;
 
 template <typename T>
 class Vector3DInitialization: public ::testing::Test
