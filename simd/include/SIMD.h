@@ -103,11 +103,13 @@ namespace falcon::simd
     {
         using type = __m128;
     };
+
     template <>
     struct RegisterMap<double, 16>
     {
         using type = __m128d;
     };
+
     template <std::integral T>
     struct RegisterMap<T, 16>
     {
@@ -119,11 +121,13 @@ namespace falcon::simd
     {
         using type = __m256;
     };
+
     template <>
     struct RegisterMap<double, 32>
     {
         using type = __m256d;
     };
+
     template <std::integral T>
     struct RegisterMap<T, 32>
     {
@@ -135,33 +139,22 @@ namespace falcon::simd
     {
         using type = __m512;
     };
+
     template <>
     struct RegisterMap<double, 64>
     {
         using type = __m512d;
     };
+
     template <std::integral T>
     struct RegisterMap<T, 64>
     {
         using type = __m512i;
     };
 
-    template <typename T, std::size_t TotalBytes>
-    struct SIMDReg
-    {
-    };
-
-    template <std::size_t TotalBytes>
-    struct SIMDReg<float, TotalBytes>
-    {
-
-
-
-#if defined(MAX_ALIGNMENT) && MAX_ALIGNMENT > 0
+    #if defined(MAX_ALIGNMENT) && MAX_ALIGNMENT > 0
         const PackingParams packingParams = calculatePackedSize(TotalBytes, MAX_ALIGNMENT);
-
-#endif
-    };
+    #endif
 
 
 

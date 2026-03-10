@@ -9,7 +9,7 @@ target_compile_features(TestSuite PRIVATE cxx_std_20)
 # )
 
 set(IncludeDirectory "include/")
-set(SetupFiles "Vector4DTestSetup.h;Vector3DTestSetup.h")
+set(SetupFiles "Vector3DTestSetup.h;Vector4DTestSetup.h;SIMDTestSetup.h")
 list(TRANSFORM SetupFiles PREPEND ${IncludeDirectory})
 
 # Vector Test Sources
@@ -37,7 +37,7 @@ set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h")
 list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
 
 set(SimdTestDirectory "src/simd/")
-set(SimdTestFiles "AdditionTests.cpp;InitializationTests.cpp;SimdUtilsTests.cpp")
+set(SimdTestFiles "RegisterTypeTests.cpp;AdditionTests.cpp;InitializationTests.cpp;SimdUtilsTests.cpp")
 list(TRANSFORM SimdTestFiles PREPEND ${SimdTestDirectory})
 
 target_sources(
