@@ -73,7 +73,7 @@ TEST(Vector4DAccess, AccessibleAsArray)
  *                                    *
  **************************************/
 
-TEST(Vector4DAccess, MutableAsXYZW)
+TEST(Vector4DMutation, ElementsCanBeMutatedUsingXYZW)
 {
     // Given a default initialized vector
     math::Vector4D<float> vec;
@@ -84,14 +84,14 @@ TEST(Vector4DAccess, MutableAsXYZW)
     vec.z = 6.0f;
     vec.w = 2.0f;
 
-    // Then, it's elements are modified
+    // Then, it's element reflect the change
     EXPECT_FLOAT_EQ(3.0f, vec.x);
     EXPECT_FLOAT_EQ(1.0f, vec.y);
     EXPECT_FLOAT_EQ(6.0f, vec.z);
     EXPECT_FLOAT_EQ(2.0f, vec.w);
 }
 
-TEST(Vector4DAccess, MutableAsSTPQ)
+TEST(Vector4DMutation, ElementsCanBeMutatedUsingSTPQ)
 {
     // Given a default initialized vector
     math::Vector4D<float> vec;
@@ -109,7 +109,7 @@ TEST(Vector4DAccess, MutableAsSTPQ)
     EXPECT_FLOAT_EQ(2.0f, vec.q);
 }
 
-TEST(Vector4DAccess, MutableAsRGBA)
+TEST(Vector4DMutation, ElementsCanBeMutatedUsingRGBA)
 {
     // Given a default initialized vector
     math::Vector4D<float> vec;
@@ -120,14 +120,14 @@ TEST(Vector4DAccess, MutableAsRGBA)
     vec.b = 6.0f;
     vec.a = 2.0f;
 
-    // Then, it's elements are modified
+    // Then, it's element reflect the change
     EXPECT_FLOAT_EQ(3.0f, vec.r);
     EXPECT_FLOAT_EQ(1.0f, vec.g);
     EXPECT_FLOAT_EQ(6.0f, vec.b);
     EXPECT_FLOAT_EQ(2.0f, vec.a);
 }
 
-TEST(Vector4DMutation, ElementsCanBeMutatedAtGivenIndex)
+TEST(Vector4DMutation, ElementsCanBeMutatedUsingIndex)
 {
     // Given a vector initialization without parameters
     math::Vector4D<float> vec;

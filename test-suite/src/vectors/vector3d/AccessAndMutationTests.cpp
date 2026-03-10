@@ -17,7 +17,7 @@
  *                                    *
  **************************************/
 
-TEST(Vector3D_Access, AccessibleAsXYZ)
+TEST(Vector3DAccess, AccessibleAsXYZ)
 {
     // Given a vector with arbitrary values passed in
     const math::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -28,7 +28,7 @@ TEST(Vector3D_Access, AccessibleAsXYZ)
     EXPECT_FLOAT_EQ(6.0f, vec.z);
 }
 
-TEST(Vector3D_Access, AccessibleAsSTP)
+TEST(Vector3DAccess, AccessibleAsSTP)
 {
     // Given a vector with arbitrary values passed in
     const math::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -39,7 +39,7 @@ TEST(Vector3D_Access, AccessibleAsSTP)
     EXPECT_FLOAT_EQ(6.0f, vec.p);
 }
 
-TEST(Vector3D_Access, AccessibleAsRGB)
+TEST(Vector3DAccess, AccessibleAsRGB)
 {
     // Given a vector with arbitrary values passed in
     const math::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -50,7 +50,7 @@ TEST(Vector3D_Access, AccessibleAsRGB)
     EXPECT_FLOAT_EQ(6.0f, vec.b);
 }
 
-TEST(Vector3D_Access, AccessibleAsArray)
+TEST(Vector3DAccess, AccessibleAsArray)
 {
     // Given a vector with arbitrary values passed in
     const math::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -67,7 +67,56 @@ TEST(Vector3D_Access, AccessibleAsArray)
  *                                    *
  **************************************/
 
-TEST(Vector3D_Access, ElementsCanBeMutatedAtGivenIndex)
+
+TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZ)
+{
+    // Given a default initialized vector
+    math::Vector3D<float> vec;
+
+    // When, it's elements are modified using x, y, z
+    vec.x = 3.0f;
+    vec.y = 1.0f;
+    vec.z = 6.0f;
+
+    // Then, it's element reflect the change
+    EXPECT_FLOAT_EQ(3.0f, vec.x);
+    EXPECT_FLOAT_EQ(1.0f, vec.y);
+    EXPECT_FLOAT_EQ(6.0f, vec.z);
+}
+
+TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTP)
+{
+    // Given a default initialized vector
+    math::Vector3D<float> vec;
+
+    // When, it's elements are modified using s, t, p
+    vec.s = 3.0f;
+    vec.t = 1.0f;
+    vec.p = 6.0f;
+
+    // Then, it's element reflect the change
+    EXPECT_FLOAT_EQ(3.0f, vec.s);
+    EXPECT_FLOAT_EQ(1.0f, vec.t);
+    EXPECT_FLOAT_EQ(6.0f, vec.p);
+}
+
+TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGB)
+{
+    // Given a default initialized vector
+    math::Vector3D<float> vec;
+
+    // When, it's elements are modified using r, g, b
+    vec.r = 3.0f;
+    vec.g = 1.0f;
+    vec.b = 6.0f;
+
+    // Then, it's element reflect the change
+    EXPECT_FLOAT_EQ(3.0f, vec.r);
+    EXPECT_FLOAT_EQ(1.0f, vec.g);
+    EXPECT_FLOAT_EQ(6.0f, vec.b);
+}
+
+TEST(Vector3DMutation, ElementsCanBeMutatedUsingIndex)
 {
     // Given a vector initialization without parameters
     math::Vector3D<float> vec;
