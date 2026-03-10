@@ -21,7 +21,7 @@
 
 namespace testutils
 {
-    template <math::IsVector T, math::IsVector U>
+    template <math::Vector T, math::Vector U>
     void EXPECT_VEC_EQ(const T& expected, const U& actual)
     {
         using ValueType = T::value_type;
@@ -110,7 +110,7 @@ namespace testutils
         }
     }
 
-    template <math::IsVector T>
+    template <math::Vector T>
     void EXPECT_VEC_UNIT(const T& vector)
     {
         using ValueType = T::value_type;
@@ -135,7 +135,7 @@ namespace testutils
         }
     }
 
-    template <math::IsVector T>
+    template <math::Vector T>
     void EXPECT_VEC_ZERO(const T& vector)
     {
         using ValueType = T::value_type;
@@ -159,7 +159,7 @@ namespace testutils
         }
     }
 
-    template <math::IsVector T>
+    template <math::Vector T>
     void EXPECT_VEC_INF(const T& vector)
     {
         constexpr std::size_t elementCount = T::dimension;
