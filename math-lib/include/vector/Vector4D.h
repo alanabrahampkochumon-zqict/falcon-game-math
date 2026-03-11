@@ -85,7 +85,7 @@ namespace math
 
         /***************************************
          *                                     *
-         *            COMPARISONS              *
+         *             EQUALITY                *
          *                                     *
          ***************************************/
 
@@ -96,7 +96,7 @@ namespace math
          * @tparam U type of the `Vector4D` being compared against.
          * @param other `Vector4D` to check equality against.
          * @param epsilon Epsilon to use for comparison. Only affects `std::floating_point` types.
-         * @returns bool whether the entire vectors are equal.
+         * @returns vector equality result.
          */
         template <Arithmetic U>
         bool allEq(const Vector4D<U>& other,
@@ -111,7 +111,7 @@ namespace math
          * @param vecA `Vector4D` being compared.
          * @param vecB `Vector4D` being compared against.
          * @param epsilon Epsilon to use for comparison. Only affects `std::floating_point` types.
-         * @returns bool whether the entire vectors are equal.
+         * @returns vector equality result.
          */
         template <Arithmetic U>
         static bool allEq(const Vector4D& vecA, const Vector4D<U>& vecB,
@@ -123,7 +123,7 @@ namespace math
          * @note For Vector<bool> mask use `eq`.
          * @tparam U type of the `Vector4D` being compared against.
          * @param other `Vector4D` being compared against.
-         * @return bool whether the entire vector are equal.
+         * @return vector equality result.
          */
         template <Arithmetic U>
         bool operator==(const Vector4D<U>& other) const;
@@ -135,7 +135,7 @@ namespace math
          *
          * @tparam U type of the `Vector4D` being compared against.
          * @param other `Vector4D` being compared against.
-         * @return bool whether the entire vector are equal.
+         * @return vector equality result.
          */
         template <Arithmetic U>
         bool operator!=(const Vector4D<U>& other) const;
@@ -146,6 +146,45 @@ namespace math
          * @note All comparisons except equality operator(==), inequality operator(!=), and `allEq` performs element-wise comparison.
          *
          */
+
+
+        /**
+         * @brief Performs component-wise equality and returns a Vector<bool> mask.
+         * @note For bool result use `allEq` or equality operators(==, !=).
+         *
+         * @tparam U type of the `Vector4D` being compared against.
+         * @param other `Vector4D` to check equality against.
+         * @param epsilon Epsilon to use for comparison. Only affects `std::floating_point` types.
+         * @returns component-wise boolean mask.
+         */
+        template <Arithmetic U>
+        Vector4D<bool> eq(const Vector4D<U>& other,
+                   double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? DOUBLE_EPSILON
+                                                                                             : FLOAT_EPSILON) const;
+
+        /**
+         * @brief Static wrapper for `eq`.
+         * @note For bool result use `allEq` or equality operators(==, !=).
+         *
+         * @tparam U type of the `Vector4D` being compared against.
+         * @param vecA `Vector4D` being compared.
+         * @param vecB `Vector4D` being compared against.
+         * @param epsilon Epsilon to use for comparison. Only affects `std::floating_point` types.
+         * @returns component-wise boolean mask.
+         */
+        template <Arithmetic U>
+        static Vector4D<bool> eq(const Vector4D& vecA, const Vector4D<U>& vecB,
+                          double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                              ? DOUBLE_EPSILON
+                              : FLOAT_EPSILON);
+
+
+        /***************************************
+         *                                     *
+         *            COMPARISONS              *
+         *                                     *
+         ***************************************/
+
         template <StrictArithmetic U>
         Vector4D<bool> gt(const Vector4D<U>& other) const
             requires StrictArithmetic<T>;
@@ -310,7 +349,7 @@ namespace math
          * @param onto Vector to be projected onto.
          * @param ontoNormalized A flag for optimizing the calculation by ignoring the division, given the vector that
          * is projected onto is normalized.
-         * @return Projected vector.
+         * @returns Projected vector.
          */
         template <StrictArithmetic U>
         auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const -> Vector4D<std::common_type_t<T, U>>
@@ -323,7 +362,7 @@ namespace math
          * @param onto Vector to be projected onto.
          * @param ontoNormalized A flag for optimizing the calculation by ignoring the division, given the vector that
          * is projected onto is normalized.
-         * @return Projected vector.
+         * @returns Projected vector.
          */
         template <StrictArithmetic U>
         static auto project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized = false)
@@ -343,7 +382,7 @@ namespace math
          * @param onto Vector to be projected onto.
          * @param ontoNormalized A flag for optimizing the calculation by ignoring the division, given the vector that
          * is projected onto is normalized.
-         * @return Projected vector.
+         * @returns Projected vector.
          */
         template <StrictArithmetic U>
         auto reject(const Vector4D<U>& onto, bool ontoNormalized = false) const -> Vector4D<std::common_type_t<T, U>>
@@ -357,7 +396,7 @@ namespace math
          * @param onto Vector to be projected onto.
          * @param ontoNormalized A flag for optimizing the calculation by ignoring the division, given the vector that
          * is projected onto is normalized.
-         * @return Projected vector.
+         * @returns Projected vector.
          */
         template <StrictArithmetic U>
         static auto reject(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized = false)

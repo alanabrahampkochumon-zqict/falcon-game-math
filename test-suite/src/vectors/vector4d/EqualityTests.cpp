@@ -12,22 +12,27 @@
 #include "Vector4DTestSetup.h"
 
 
+using namespace testutils;
+
+
 template <typename T>
 class Vector4DEquality: public ::testing::Test
 {
     protected:
     math::Vector4D<T> eqVecA;
     math::Vector4D<T> eqVecB;
-    math::Vector4D<T> uneqVec;
-    math::Vector<bool> equalityMask;
-    math::Vector<bool> inequalityMask;
+    math::Vector4D<T> dissimilarVec;
+    math::Vector4D<bool> equalityMask;
+    math::Vector4D<bool> inequalityMask;
 
 
     void SetUp() override
     {
         eqVecA = { T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589) };
         eqVecB = { T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589) };
-        uneqVec = { T(7.1234568789), T(2.123458319), T(24.00), T(123.123489172589) };
+        dissimilarVec = { T(7.1234568789), T(2.123458319), T(24.00), T(123.123489172589) };
+        equalityMask = {false, true, false, true};
+        inequalityMask = {true, false, true, false};
     }
 };
 TYPED_TEST_SUITE(Vector4DEquality, SupportedArithmeticTypes);
@@ -51,7 +56,7 @@ TYPED_TEST(Vector4DEquality, SimilarVectorsAreEqual)
 TYPED_TEST(Vector4DEquality, DissimilarVectorsAreNotEqual)
 {
     // When two equal vectors are compared for equality
-    bool equality = this->eqVecA.allEq(this->uneqVec);
+    bool equality = this->eqVecA.allEq(this->dissimilarVec);
 
     // Then, they are not equal
     EXPECT_FALSE(equality);
@@ -69,7 +74,7 @@ TYPED_TEST(Vector4DEquality, StaticWrapper_SimilarVectorsAreEqual)
 TYPED_TEST(Vector4DEquality, StaticWrapper_DissimilarVectorsAreNotEqual)
 {
     // When two equal vectors are compared for equality
-    bool equality = math::Vector4D<TypeParam>::allEq(this->eqVecA, this->uneqVec);
+    bool equality = math::Vector4D<TypeParam>::allEq(this->eqVecA, this->dissimilarVec);
 
     // Then, they are not equal
     EXPECT_FALSE(equality);
@@ -87,7 +92,7 @@ TYPED_TEST(Vector4DEquality, EqualityOperator_SimilarVectorsReturnsTrue)
 TYPED_TEST(Vector4DEquality, EqualityOperator_DissimilarVectorsReturnsFalse)
 {
     // When two equal vectors are compared for equality
-    bool equality = this->eqVecA == this->uneqVec;
+    bool equality = this->eqVecA == this->dissimilarVec;
 
     // Then, result is false
     EXPECT_FALSE(equality);
@@ -146,6 +151,25 @@ TEST(Vector4DEquality, EqualityOperator_DissimilarBooleanVectorsReturnsFalse)
 }
 
 
+TYPED_TEST(Vector4DEquality, eqReturnsCorrectBooleanMask)
+{
+    // When two equal vectors are compared for component-wise equality
+    math::Vector4D<bool> mask = this->eqVecA.eq(this->dissimilarVec);
+
+    // Then, correct boolean mask is returned
+    EXPECT_VEC_EQ(this->equalityMask, mask);
+}
+
+TYPED_TEST(Vector4DEquality, StaticWrapper_eqReturnsCorrectBooleanMask)
+{
+    // When two equal vectors are compared for component-wise equality
+    math::Vector4D<bool> mask = math::Vector4D<TypeParam>::eq(this->eqVecA, this->dissimilarVec);
+
+    // Then, correct boolean mask is returned
+    EXPECT_VEC_EQ(this->equalityMask, mask);
+}
+
+
 /**************************************
  *                                    *
  *          INEQUALITY TESTS          *
@@ -164,7 +188,7 @@ TYPED_TEST(Vector4DEquality, InEqualityOperator_SimilarVectorsReturnsFalse)
 TYPED_TEST(Vector4DEquality, InEqualityOperator_DissimilarVectorsReturnsTrue)
 {
     // When two equal vectors are compared for equality
-    bool equality = this->eqVecA != this->uneqVec;
+    bool equality = this->eqVecA != this->dissimilarVec;
 
     // Then, result is true
     EXPECT_TRUE(equality);
