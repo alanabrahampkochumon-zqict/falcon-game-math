@@ -153,16 +153,31 @@ TEST(Vector4DEquality, EqualityOperator_DissimilarBooleanVectorsReturnsFalse)
 
 TYPED_TEST(Vector4DEquality, eqReturnsCorrectBooleanMask)
 {
-    // When two equal vectors are compared for component-wise equality
+    // When two vectors are compared for component-wise equality
     math::Vector4D<bool> mask = this->eqVecA.eq(this->dissimilarVec);
 
     // Then, correct boolean mask is returned
     EXPECT_VEC_EQ(this->equalityMask, mask);
 }
 
+TEST(Vector4DEquality, MixedType_eqReturnsCorrectBooleanMask)
+{
+    // When two different type vectors are compared for component-wise equality
+    math::Vector4D vecA = {1, 2, 3, 4};
+    math::Vector4D vecB = {1.0, 4.0, 0.0, 4.0};
+    math::Vector4D expectedMask = {true, false, false, true};
+
+    math::Vector4D<bool> mask = vecA.eq(vecB);
+
+    // Then, correct boolean mask is returned
+    EXPECT_VEC_EQ(expectedMask, mask);
+}
+
+// TODO: Add tests for INF and Nan
+
 TYPED_TEST(Vector4DEquality, StaticWrapper_eqReturnsCorrectBooleanMask)
 {
-    // When two equal vectors are compared for component-wise equality
+    // When two vectors are compared for component-wise equality
     math::Vector4D<bool> mask = math::Vector4D<TypeParam>::eq(this->eqVecA, this->dissimilarVec);
 
     // Then, correct boolean mask is returned

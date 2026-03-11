@@ -93,7 +93,7 @@ namespace math
          * @brief Checks the equality of all the vector elements.
          * @note For Vector<bool> mask use `neq` for inequality and `eq` for equality.
          *
-         * @tparam U type of the `Vector4D` being compared against.
+         * @tparam U Type of the `Vector4D` being compared against.
          * @param other `Vector4D` to check equality against.
          * @param epsilon Epsilon to use for comparison. Only affects `std::floating_point` types.
          * @returns vector equality result.
@@ -107,7 +107,7 @@ namespace math
          * @brief Static wrapper for `Vector4D` equality checks.
          * @note For Vector<bool> mask use `neq` for inequality and `eq` for equality.
          *
-         * @tparam U type of the `Vector4D` being compared against.
+         * @tparam U Type of the `Vector4D` being compared against.
          * @param vecA `Vector4D` being compared.
          * @param vecB `Vector4D` being compared against.
          * @param epsilon Epsilon to use for comparison. Only affects `std::floating_point` types.
@@ -121,7 +121,7 @@ namespace math
         /**
          * @brief Equality operator overload for vector comparison, that check for equality of entire vectors.
          * @note For Vector<bool> mask use `eq`.
-         * @tparam U type of the `Vector4D` being compared against.
+         * @tparam U Type of the `Vector4D` being compared against.
          * @param other `Vector4D` being compared against.
          * @return vector equality result.
          */
@@ -133,7 +133,7 @@ namespace math
          * @brief Inequality operator overload for vector comparison, that check for inequality of entire vectors.
          * @note For Vector<bool> mask use `neq`.
          *
-         * @tparam U type of the `Vector4D` being compared against.
+         * @tparam U Type of the `Vector4D` being compared against.
          * @param other `Vector4D` being compared against.
          * @return vector equality result.
          */
@@ -152,7 +152,7 @@ namespace math
          * @brief Performs component-wise equality and returns a Vector<bool> mask.
          * @note For bool result use `allEq` or equality operators(==, !=).
          *
-         * @tparam U type of the `Vector4D` being compared against.
+         * @tparam U Type of the `Vector4D` being compared against.
          * @param other `Vector4D` to check equality against.
          * @param epsilon Epsilon to use for comparison. Only affects `std::floating_point` types.
          * @returns component-wise boolean mask.
@@ -166,7 +166,7 @@ namespace math
          * @brief Static wrapper for `eq`.
          * @note For bool result use `allEq` or equality operators(==, !=).
          *
-         * @tparam U type of the `Vector4D` being compared against.
+         * @tparam U Type of the `Vector4D` being compared against.
          * @param vecA `Vector4D` being compared.
          * @param vecB `Vector4D` being compared against.
          * @param epsilon Epsilon to use for comparison. Only affects `std::floating_point` types.
