@@ -90,12 +90,12 @@ namespace math
          ***************************************/
 
         template <Arithmetic U>
-        bool equals(const Vector4D<U>& other,
+        bool eq(const Vector4D<U>& other,
                     double epsilon = (std::is_same_v<T, double> && std::is_same_v<U, double>) ? DOUBLE_EPSILON
                                                                                               : FLOAT_EPSILON) const;
 
         template <Arithmetic U>
-        static bool equals(const Vector4D& vecA, const Vector4D<U>& vecB,
+        static bool eq(const Vector4D& vecA, const Vector4D<U>& vecB,
                            double epsilon = (std::is_same_v<T, double> && std::is_same_v<U, double>) ? DOUBLE_EPSILON
                                                                                                      : FLOAT_EPSILON);
 
@@ -111,35 +111,35 @@ namespace math
          *
          */
         template <StrictArithmetic U>
-        Vector4D<bool> greaterThan(const Vector4D<U>& other) const
+        Vector4D<bool> gt(const Vector4D<U>& other) const
             requires StrictArithmetic<T>;
 
         template <StrictArithmetic U>
-        static Vector4D<bool> greaterThan(const Vector4D& vecA, const Vector4D<U>& vecB)
+        static Vector4D<bool> gt(const Vector4D& vecA, const Vector4D<U>& vecB)
             requires StrictArithmetic<T>;
 
         template <StrictArithmetic U>
-        Vector4D<bool> greaterThanOrEqual(const Vector4D<U>& other) const
+        Vector4D<bool> gte(const Vector4D<U>& other) const
             requires StrictArithmetic<T>;
 
         template <StrictArithmetic U>
-        static Vector4D<bool> greaterThanOrEqual(const Vector4D& vecA, const Vector4D<U>& vecB)
+        static Vector4D<bool> gte(const Vector4D& vecA, const Vector4D<U>& vecB)
             requires StrictArithmetic<T>;
 
         template <StrictArithmetic U>
-        Vector4D<bool> lessThan(const Vector4D<U>& other) const
+        Vector4D<bool> lt(const Vector4D<U>& other) const
             requires StrictArithmetic<T>;
 
         template <StrictArithmetic U>
-        static Vector4D<bool> lessThan(const Vector4D& vecA, const Vector4D<U>& vecB)
+        static Vector4D<bool> lt(const Vector4D& vecA, const Vector4D<U>& vecB)
             requires StrictArithmetic<T>;
 
         template <StrictArithmetic U>
-        Vector4D<bool> lessThanOrEqual(const Vector4D<U>& other) const
+        Vector4D<bool> lte(const Vector4D<U>& other) const
             requires StrictArithmetic<T>;
 
         template <StrictArithmetic U>
-        static Vector4D<bool> lessThanOrEqual(const Vector4D& vecA, const Vector4D<U>& vecB)
+        static Vector4D<bool> lte(const Vector4D& vecA, const Vector4D<U>& vecB)
             requires StrictArithmetic<T>;
 
 #ifdef ENABLE_FGM_SHADER_OPERATORS

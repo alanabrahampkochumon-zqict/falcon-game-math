@@ -39,7 +39,7 @@ TYPED_TEST_SUITE(Vector4DEquality, SupportedArithmeticTypes);
 TYPED_TEST(Vector4DEquality, SimilarVectorsAreEqual)
 {
     // When two equal vectors are compared for equality
-    bool equality = this->eqVecA.equals(this->eqVecB);
+    bool equality = this->eqVecA.allEq(this->eqVecB);
 
     // Then, they are equal
     EXPECT_TRUE(equality);
@@ -48,7 +48,7 @@ TYPED_TEST(Vector4DEquality, SimilarVectorsAreEqual)
 TYPED_TEST(Vector4DEquality, DissimilarVectorsAreNotEqual)
 {
     // When two equal vectors are compared for equality
-    bool equality = this->eqVecA.equals(this->uneqVec);
+    bool equality = this->eqVecA.allEq(this->uneqVec);
 
     // Then, they are not equal
     EXPECT_FALSE(equality);
@@ -57,7 +57,7 @@ TYPED_TEST(Vector4DEquality, DissimilarVectorsAreNotEqual)
 TYPED_TEST(Vector4DEquality, StaticWrapper_SimilarVectorsAreEqual)
 {
     // When two equal vectors are compared for equality
-    bool equality = this->eqVecA.equals(this->eqVecB);
+    bool equality = this->eqVecA.allEq(this->eqVecB);
 
     // Then, they are equal
     EXPECT_TRUE(equality);
@@ -66,7 +66,7 @@ TYPED_TEST(Vector4DEquality, StaticWrapper_SimilarVectorsAreEqual)
 TYPED_TEST(Vector4DEquality, StaticWrapper_DissimilarVectorsAreNotEqual)
 {
     // When two equal vectors are compared for equality
-    bool equality = math::Vector4D<TypeParam>::equals(this->eqVecA, this->uneqVec);
+    bool equality = math::Vector4D<TypeParam>::allEq(this->eqVecA, this->uneqVec);
 
     // Then, they are not equal
     EXPECT_FALSE(equality);

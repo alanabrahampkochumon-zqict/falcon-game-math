@@ -74,7 +74,7 @@ namespace math
 
     template <Arithmetic T>
     template <Arithmetic U>
-    bool Vector4D<T>::equals(const Vector4D<U>& other, double epsilon) const
+    bool Vector4D<T>::allEq(const Vector4D<U>& other, double epsilon) const
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return x == other.x && y == other.y && z == other.z && w == other.w;
@@ -85,28 +85,28 @@ namespace math
 
     template <Arithmetic T>
     template <Arithmetic U>
-    bool Vector4D<T>::equals(const Vector4D& vecA, const Vector4D<U>& vecB, double epsilon)
+    bool Vector4D<T>::allEq(const Vector4D& vecA, const Vector4D<U>& vecB, double epsilon)
     {
-        return vecA.equals(vecB, epsilon);
+        return vecA.allEq(vecB, epsilon);
     }
 
     template <Arithmetic T>
     template <Arithmetic U>
     bool Vector4D<T>::operator==(const Vector4D<U>& other) const
     {
-        return this->equals(other);
+        return this->allEq(other);
     }
 
     template <Arithmetic T>
     template <Arithmetic U>
     bool Vector4D<T>::operator!=(const Vector4D<U>& other) const
     {
-        return !this->equals(other);
+        return !this->allEq(other);
     }
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::greaterThan(const Vector4D<U>& other) const
+    Vector4D<bool> Vector4D<T>::gt(const Vector4D<U>& other) const
         requires StrictArithmetic<T>
     {
         return Vector4D(x > other.x, y > other.y, z > other.z, w > other.w);
@@ -114,15 +114,15 @@ namespace math
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::greaterThan(const Vector4D& vecA, const Vector4D<U>& vecB)
+    Vector4D<bool> Vector4D<T>::gt(const Vector4D& vecA, const Vector4D<U>& vecB)
         requires StrictArithmetic<T>
     {
-        return vecA.greaterThan(vecB);
+        return vecA.gt(vecB);
     }
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::greaterThanOrEqual(const Vector4D<U>& other) const
+    Vector4D<bool> Vector4D<T>::gte(const Vector4D<U>& other) const
         requires StrictArithmetic<T>
     {
         return Vector4D(x >= other.x, y >= other.y, z >= other.z, w >= other.w);
@@ -130,15 +130,15 @@ namespace math
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::greaterThanOrEqual(const Vector4D& vecA, const Vector4D<U>& vecB)
+    Vector4D<bool> Vector4D<T>::gte(const Vector4D& vecA, const Vector4D<U>& vecB)
         requires StrictArithmetic<T>
     {
-        return vecA.greaterThanOrEqual(vecB);
+        return vecA.gte(vecB);
     }
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::lessThan(const Vector4D<U>& other) const
+    Vector4D<bool> Vector4D<T>::lt(const Vector4D<U>& other) const
         requires StrictArithmetic<T>
     {
         return Vector4D(x < other.x, y < other.y, z < other.z, w < other.w);
@@ -146,16 +146,16 @@ namespace math
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::lessThan(const Vector4D& vecA, const Vector4D<U>& vecB)
+    Vector4D<bool> Vector4D<T>::lt(const Vector4D& vecA, const Vector4D<U>& vecB)
         requires StrictArithmetic<T>
     {
-        return vecA.lessThan(vecB);
+        return vecA.lt(vecB);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::lessThanOrEqual(const Vector4D<U>& other) const
+    Vector4D<bool> Vector4D<T>::lte(const Vector4D<U>& other) const
         requires StrictArithmetic<T>
     {
         return Vector4D(x <= other.x, y <= other.y, z <= other.z, w <= other.w);
@@ -163,10 +163,10 @@ namespace math
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::lessThanOrEqual(const Vector4D& vecA, const Vector4D<U>& vecB)
+    Vector4D<bool> Vector4D<T>::lte(const Vector4D& vecA, const Vector4D<U>& vecB)
         requires StrictArithmetic<T>
     {
-        return vecA.lessThanOrEqual(vecB);
+        return vecA.lte(vecB);
     }
 
 
@@ -176,7 +176,7 @@ namespace math
     Vector4D<bool> Vector4D<T>::operator>(const Vector4D<U>& other) const
         requires StrictArithmetic<T>
     {
-        return this->greaterThan(other);
+        return this->gt(other);
     }
 
     template <Arithmetic T>
@@ -184,7 +184,7 @@ namespace math
     Vector4D<bool> Vector4D<T>::operator>=(const Vector4D<U>& other) const
         requires StrictArithmetic<T>
     {
-        return this->greaterThanOrEqual(other);
+        return this->gte(other);
     }
 
     template <Arithmetic T>
@@ -192,7 +192,7 @@ namespace math
     Vector4D<bool> Vector4D<T>::operator<(const Vector4D<U>& other) const
         requires StrictArithmetic<T>
     {
-        return this->lessThan(other);
+        return this->lt(other);
     }
 
     template <Arithmetic T>
@@ -200,7 +200,7 @@ namespace math
     Vector4D<bool> Vector4D<T>::operator<=(const Vector4D<U>& other) const
         requires StrictArithmetic<T>
     {
-        return this->lessThanOrEqual(other);
+        return this->lte(other);
     }
 #endif
 
