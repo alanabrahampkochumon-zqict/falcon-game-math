@@ -151,7 +151,7 @@ TEST(Vector4DEquality, EqualityOperator_DissimilarBooleanVectorsReturnsFalse)
 }
 
 
-TYPED_TEST(Vector4DEquality, eqReturnsCorrectBooleanMask)
+TYPED_TEST(Vector4DEquality, EqualityMaskReturnsCorrectBooleanMask)
 {
     // When two vectors are compared for component-wise equality
     fgm::Vector4D<bool> mask = this->eqVecA.eq(this->dissimilarVec);
@@ -160,7 +160,7 @@ TYPED_TEST(Vector4DEquality, eqReturnsCorrectBooleanMask)
     EXPECT_VEC_EQ(this->equalityMask, mask);
 }
 
-TEST(Vector4DEquality, MixedType_eqReturnsCorrectBooleanMask)
+TEST(Vector4DEquality, MixedType_EqualityMaskReturnsCorrectBooleanMask)
 {
     // When two different type vectors are compared for component-wise equality
     fgm::Vector4D vecA = {1, 2, 3, 4};
@@ -173,9 +173,36 @@ TEST(Vector4DEquality, MixedType_eqReturnsCorrectBooleanMask)
     EXPECT_VEC_EQ(expectedMask, mask);
 }
 
-// TODO: Add tests for INF and Nan
+TEST(Vector4DEquality, NanEqualityReturnsFalseBooleanMask)
+{
+    // When a vector with only nan is compared with another vector
+    double nan = std::numeric_limits<double>::quiet_NaN();
+    fgm::Vector4D vecA = { nan, nan,nan, nan };
+    fgm::Vector4D<double> vecB = { 1.0, -5.88874789, INFINITY, nan };
+    fgm::Vector4D expectedMask = { false, false, false, false };
 
-TYPED_TEST(Vector4DEquality, StaticWrapper_eqReturnsCorrectBooleanMask)
+    fgm::Vector4D mask = vecA.eq(vecB);
+
+    // Then, boolean masks contains only false values
+    EXPECT_VEC_EQ(expectedMask, mask);
+}
+
+TEST(Vector4DEquality, InfinityEqualityReturnsCorrectBooleanMask)
+{
+    // When an infinity vector is compared with another
+    fgm::Vector4D vecA = { INFINITY, -INFINITY, INFINITY, -INFINITY };
+    fgm::Vector4D<double> vecB = { INFINITY, INFINITY, 10e11, 10e11 };
+    fgm::Vector4D expectedMask = { true, false, false, false };
+
+    fgm::Vector4D mask = vecA.eq(vecB);
+
+    // Then, boolean masks contains correct values
+    EXPECT_VEC_EQ(expectedMask, mask);
+}
+
+// TODO: Fix nan test
+
+TYPED_TEST(Vector4DEquality, StaticWrapper_EqualityMaskReturnsCorrectBooleanMask)
 {
     // When two vectors are compared for component-wise equality
     fgm::Vector4D<bool> mask = fgm::Vector4D<TypeParam>::eq(this->eqVecA, this->dissimilarVec);
