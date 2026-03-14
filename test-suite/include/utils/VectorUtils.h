@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: February 16, 2026
  *
- * @brief Define helper functions for testing Vectors like @ref Vector2D`, @ref Vector3D etc.
+ * @brief Define helper functions for testing Vectors like @ref fgm::Vector2D, @ref fgm::Vector3D etc.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
