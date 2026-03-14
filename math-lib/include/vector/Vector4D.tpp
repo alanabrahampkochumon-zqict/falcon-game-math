@@ -12,7 +12,8 @@
 
 
 #include <cassert>
-
+#include <type_traits>
+#include <iomanip>
 
 namespace fgm
 {
@@ -580,6 +581,21 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         return vector.reject(onto, ontoNormalized);
+    }
+
+    template <Arithmetic T>
+    std::ostream& operator<<(std::ostream& os, const Vector4D<T>& vector)
+    {        
+        os << "<";
+
+        if constexpr (std::is_same_v<T, double>)
+            os << std::setprecision(DOUBLE_EPSILON);
+        else if constexpr(std::is_floating_point_v<T>)
+            os << std::setprecision(FLOAT_EPSILON);
+
+        os << vector.x << ", " << vector.y << ", " << ", " << vector.z << ", " << vector.w;
+        os << ">\n";
+        return os;
     }
 
 } // namespace fgm

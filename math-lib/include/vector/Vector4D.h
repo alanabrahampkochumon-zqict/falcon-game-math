@@ -25,8 +25,9 @@
 #include "Vector3D.h"
 
 #include <cstddef>
+#include <ostream>
 
-// TODO: neq, Unit, Zero, Inf Vectors
+// TODO: Zero, One, Inf, -Inf, Nan, X, Y, Z, W
 
 namespace fgm
 {
@@ -228,8 +229,8 @@ namespace fgm
          */
         template <Arithmetic U>
         static bool allNeq(const Vector4D& vecA, const Vector4D<U>& vecB,
-                          double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? DOUBLE_EPSILON
-                                                                                                    : FLOAT_EPSILON);
+                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? DOUBLE_EPSILON
+                                                                                                     : FLOAT_EPSILON);
 
         /**
          * @copybrief allEq(const Vector4D<U>&, double) const
@@ -304,9 +305,9 @@ namespace fgm
          */
         template <Arithmetic U>
         Vector4D<bool> neq(const Vector4D<U>& other,
-                          double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                              ? DOUBLE_EPSILON
-                              : FLOAT_EPSILON) const;
+                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                               ? DOUBLE_EPSILON
+                               : FLOAT_EPSILON) const;
 
 
         /**
@@ -321,9 +322,9 @@ namespace fgm
          */
         template <Arithmetic U>
         static Vector4D<bool> neq(const Vector4D& vecA, const Vector4D<U>& vecB,
-                                 double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                     ? DOUBLE_EPSILON
-                                     : FLOAT_EPSILON);
+                                  double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                      ? DOUBLE_EPSILON
+                                      : FLOAT_EPSILON);
 
 
 
@@ -839,6 +840,18 @@ namespace fgm
         static auto reject(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized = false)
             -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
+
+
+        /** 
+         * @brief Write the vector to an output stream.
+         * Formats the vector as <x, y, z, w> string representation for debugging or logging.
+         *
+         * @tparam T Numeric type of the matrix.
+         * @param os The output stream to write to.
+         * @param vector The vector to be streamed.
+         * @return A reference to the output stream @p os.
+         */
+        friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector);
     };
 
 
