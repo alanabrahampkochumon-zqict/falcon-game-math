@@ -62,7 +62,8 @@
 
 ### Test Body Commenting
 
-- **Structure:** Use **Given / When / Then** blocks to separate setup, action, and assertion.
+- **Documentation**- Use @test to write a brief description of what the test are supposed to verify
+- **Structure:** Optionally use **Given / When / Then** blocks to separate setup, action, and assertion.
 
 ## Sample Documentation
 
