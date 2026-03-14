@@ -4,8 +4,9 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: January 26, 2026
  *
- * @brief @ref Vector4D implementation.
- * 
+ * @brief @ref fgm::Vector4D template implementation.
+ * @details This file contains the definitions of the template members declared in Matrix.h
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -44,7 +45,9 @@ namespace fgm
 
 
     template <Arithmetic T>
-    Vector4D<T>::Vector4D(T v, Vector3D<T> vec): x(v), y(vec.x), z(vec.y), w(vec.z) {}
+    Vector4D<T>::Vector4D(T v, Vector3D<T> vec): x(v), y(vec.x), z(vec.y), w(vec.z)
+    {
+    }
 
 
     template <Arithmetic T>
@@ -87,8 +90,10 @@ namespace fgm
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return x == other.x && y == other.y && z == other.z && w == other.w;
         else
-            return std::abs(x - other.x) <= epsilon && std::abs(y - other.y) <= epsilon &&
-                std::abs(z - other.z) <= epsilon && std::abs(w - other.w) <= epsilon;
+            return (x == other.x || std::abs(x - other.x) <= epsilon) &&
+                (y == other.y || std::abs(y - other.y) <= epsilon) &&
+                (z == other.z || std::abs(z - other.z) <= epsilon) &&
+                (w == other.w || std::abs(w - other.w) <= epsilon);
     }
 
     template <Arithmetic T>
@@ -120,8 +125,9 @@ namespace fgm
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return Vector4D(x == other.x, y == other.y, z == other.z, w == other.w);
         else
-            return Vector4D(std::abs(x - other.x) <= epsilon, std::abs(y - other.y) <= epsilon,
-                            std::abs(z - other.z) <= epsilon, std::abs(w - other.w) <= epsilon);
+            return Vector4D(
+                (x == other.x || std::abs(x - other.x) <= epsilon), (y == other.y || std::abs(y - other.y) <= epsilon),
+                (z == other.z || std::abs(z - other.z) <= epsilon), (w == other.w || std::abs(w - other.w) <= epsilon));
     }
 
 
@@ -133,7 +139,7 @@ namespace fgm
     }
 
 
-     /***************************************
+    /***************************************
      *                                     *
      *            COMPARISONS              *
      *                                     *
