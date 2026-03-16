@@ -846,12 +846,14 @@ namespace fgm
          * @brief Write the vector to an output stream.
          * Formats the vector as <x, y, z, w> string representation for debugging or logging.
          *
-         * @tparam T Numeric type of the matrix.
+         * @tparam T Numeric type of the vector.
          * @param os The output stream to write to.
          * @param vector The vector to be streamed.
          * @return A reference to the output stream @p os.
          */
-        friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector);
+        friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
+        { return os;
+        }
     };
 
 
@@ -888,6 +890,7 @@ namespace fgm
      *             ALIASES               *
      *                                   *
      *************************************/
+
     using bVec4 = Vector4D<bool>;                ///< bool vector
     using iVec4 = Vector4D<int>;                 ///< int vector
     using uVec4 = Vector4D<unsigned int>;        ///< unsigned int vector

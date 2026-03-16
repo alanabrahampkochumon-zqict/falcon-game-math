@@ -14,7 +14,7 @@ list(TRANSFORM SetupFiles PREPEND ${IncludeDirectory})
 
 # Vector Test Sources
 set(Vector4DTestDirectory "src/vectors/vector4d/")
-set(Vector4DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp")
+set(Vector4DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;StringRepresentationTests.cpp")
 list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDirectory})
 
 # Vector Test Sources

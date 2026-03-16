@@ -589,7 +589,7 @@ namespace fgm
     std::ostream& operator<<(std::ostream& os, const Vector4D<T>& vector)
     {        
         os << "<";
-        Config::LOG_PRECISION<T>
+        
         if constexpr (std::is_same_v<T, double>)
             os << std::setprecision(DOUBLE_EPSILON);
         else if constexpr(std::is_floating_point_v<T>)

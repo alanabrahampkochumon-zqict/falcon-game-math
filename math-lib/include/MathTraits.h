@@ -18,7 +18,6 @@
 namespace fgm
 {
 
-
     /**************************************
      *                                    *
      *         ARITHMETIC CONCEPTS        *
