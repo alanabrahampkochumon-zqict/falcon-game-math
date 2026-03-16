@@ -577,7 +577,7 @@ namespace fgm
 
         /**
          * @brief Subtract another vector from this vector component-wise.
-         * Performs an in-place subtraction of @p other from the current instance.
+         * Performs an in-place substraction of @p other from the current instance.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
