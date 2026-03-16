@@ -45,7 +45,7 @@ TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)
 
     ss << vec;
 
-    EXPECT_EQ(ss.str(), "<1, 2, 3, 4>");
+    EXPECT_EQ(ss.str(), "<1, 2, 3, 4>\n");
 }
 
 
@@ -57,7 +57,7 @@ TEST_F(Vector4DStringRepresentationTests, FloatRepresentation)
 
     ss << vec;
 
-    EXPECT_EQ(ss.str(), "<1.2345, 2.0, 3.56789, 4.2>");
+    EXPECT_EQ(ss.str(), "<1.23450, 2.00000, 3.56789, 4.20000>\n");
 }
 
 /** test Verify @ref Vector4D string representation of double precision floating type. */
@@ -68,5 +68,5 @@ TEST_F(Vector4DStringRepresentationTests, DoubleRepresentation)
 
     ss << vec;
 
-    EXPECT_EQ(ss.str(), "<1.2345789777, 2.2.65831, 3.161285, 4.0>");
+    EXPECT_EQ(ss.str(), "<1.234578977700000, 2.658310000000000, 3.161285000000000, 4.000000000000000>\n");
 }

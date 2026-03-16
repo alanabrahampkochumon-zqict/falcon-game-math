@@ -21,10 +21,12 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+#include "Config.h"
 #include "Vector2D.h"
 #include "Vector3D.h"
 
 #include <cstddef>
+#include <iomanip>
 #include <ostream>
 
 // TODO: Zero, One, Inf, -Inf, Nan, X, Y, Z, W
@@ -842,7 +844,7 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        /** 
+        /**
          * @brief Write the vector to an output stream.
          * Formats the vector as <x, y, z, w> string representation for debugging or logging.
          *
@@ -852,7 +854,13 @@ namespace fgm
          * @return A reference to the output stream @p os.
          */
         friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
-        { return os;
+        {
+            auto precision = Config::useFullPrecision
+                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+                : Config::LOG_PRECISION;
+            os << std::setprecision(precision) << std::fixed;
+            os << "<" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ">\n";
+            return os;
         }
     };
 
