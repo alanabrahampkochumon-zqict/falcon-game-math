@@ -38,7 +38,9 @@ class Vector4DProjection: public ::testing::Test
         expectedProjection = { T(0), T(6), T(0), T(0) };
     }
 };
+/** @brief Test fixture for @ref Vector4D projection, parameterized by @ref SupportedTypes. */
 TYPED_TEST_SUITE(Vector4DProjection, SupportedArithmeticTypes);
+
 
 template <typename T>
 class Vector4DRejection: public ::testing::Test
@@ -57,6 +59,7 @@ class Vector4DRejection: public ::testing::Test
         expectedRejection = { T(5), T(0), T(7), T(8) };
     }
 };
+/** @brief Test fixture for @ref fgm::Vector4D rejection, parameterized by @ref SupportedTypes. */
 TYPED_TEST_SUITE(Vector4DRejection, SupportedArithmeticTypes);
 
 
@@ -66,16 +69,14 @@ TYPED_TEST_SUITE(Vector4DRejection, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
+/** @test Verify that the projecting orthogonal @ref fgm::Vector4D instances returns a zero vector. */
 TYPED_TEST(Vector4DProjection, OrthogonalVectorsWhenProjectedReturnsZeroVector)
 {
-    // Given two orthogonal vectors
-
-    // When projected onto another
     const fgm::Vector4D actualProjection = this->perpendicularVec.project(this->onto);
 
-    // Then, the resultant is a zero vector
     EXPECT_VEC_ZERO(actualProjection);
 }
+
 
 TEST(Vector4DProjection, VectorProjectedOntoXAxisProducesVectorWithOnlyXComponent)
 {

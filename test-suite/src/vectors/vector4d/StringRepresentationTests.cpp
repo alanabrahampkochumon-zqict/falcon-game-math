@@ -13,6 +13,7 @@
 
 #include <sstream>
 
+
 /**************************************
  *                                    *
  *                SETUP               *
@@ -29,15 +30,13 @@ class Vector4DStringRepresentationTests: public ::testing::Test
 };
 
 
-
-
 /**************************************
  *                                    *
  *               TESTS                *
  *                                    *
  **************************************/
 
-/** test Verify @ref Vector4D string representation of integral types */
+/** @test Verify that the @ref fgm::Vector4D string representation matches the expected format for integral types. */
 TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)
 {
     fgm::Vector4D vec(1, 2, 3, 4);
@@ -49,7 +48,10 @@ TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)
 }
 
 
-/** test Verify @ref Vector4D string representation of single precision floating type. */
+/**
+ * @test Verify that the @ref fgm::Vector4D string representation matches the expected format for single-precision
+ *       floating-point types.
+ */
 TEST_F(Vector4DStringRepresentationTests, FloatRepresentation)
 {
     fgm::Vector4D vec(1.2345f, 2.0f, 3.56789f, 4.2f);
@@ -60,7 +62,11 @@ TEST_F(Vector4DStringRepresentationTests, FloatRepresentation)
     EXPECT_EQ(ss.str(), "<1.23450, 2.00000, 3.56789, 4.20000>\n");
 }
 
-/** test Verify @ref Vector4D string representation of double precision floating type. */
+
+/**
+ * @test Verify that the @ref fgm::Vector4D string representation matches the expected format for double-precision
+ *       floating-point types.
+ */
 TEST_F(Vector4DStringRepresentationTests, DoubleRepresentation)
 {
     fgm::Vector4D vec(1.2345789777, 2.65831, 3.161285, 4.0);

@@ -9,7 +9,6 @@
  */
 
 
-
 #include "Vector4DTestSetup.h"
 
 
@@ -21,6 +20,7 @@ using namespace testutils;
  *               SETUP                *
  *                                    *
  **************************************/
+
 
 template <typename T>
 class Vector4DDotProduct: public ::testing::Test

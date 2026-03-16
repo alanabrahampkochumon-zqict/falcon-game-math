@@ -11,11 +11,13 @@
 
 #include "Vector4DTestSetup.h"
 
-using testutils::EXPECT_VEQ_CONTAINS;
+using testutils::EXPECT_VEC_CONTAINS;
 
 
-/** @test Verify conversion constructor promotes type from float to double */
-TEST(Vector4DConversionConstructor, ConversionConstructorCreatesNewVectorWithPromotedType)
+/**
+ * @test Verify that the @ref fgm::Vector4D conversion constructor correctly promotes components from float to double.
+ */
+TEST(Vector4DConversionConstructor, PromotesType)
 {
     const fgm::Vector4D vec1(3.0f, 1.0f, 6.0f, 2.0f);
 
@@ -25,9 +27,9 @@ TEST(Vector4DConversionConstructor, ConversionConstructorCreatesNewVectorWithPro
 }
 
 
-/** @test Verify conversion constructor returns new instance */
+/** @test Verify that the @ref fgm::Vector4D conversion constructor ensures deep-copy value semantics. */
 TEST(Vector4DConversionConstructor, ReturnsNewInstance)
-{   
+{
     // Given a float vector
     fgm::Vector4D vec1(3.0f, 1.0f, 6.0f, 2.0f);
 
@@ -37,15 +39,17 @@ TEST(Vector4DConversionConstructor, ReturnsNewInstance)
     vec2.x = 5;
 
     // Then, the float vector remains unchanged
-    EXPECT_VEQ_CONTAINS(vec1, 3.0f, 1.0f, 6.0f, 2.0f);
+    EXPECT_VEC_CONTAINS(vec1, 3.0f, 1.0f, 6.0f, 2.0f);
 
     // And, the new vector is of type double with the mutated value
-    EXPECT_VEQ_CONTAINS(vec2, 5.0, 1.0, 6.0, 2.0);
+    EXPECT_VEC_CONTAINS(vec2, 5.0, 1.0, 6.0, 2.0);
 }
 
 
-/** @test Verify conversion constructor demotes type from double to float */
-TEST(Vector4DConversionConstructor, ConversionConstructorCreatesNewVectorWithDemotedType)
+/**
+ * @test Verify that the @ref fgm::Vector4D conversion constructor correctly demotes components from double to float.
+ */
+TEST(Vector4DConversionConstructor, DemotesType)
 {
     const fgm::Vector4D vec1(3.0, 1.0, 6.0, 2.0);
 
