@@ -55,7 +55,7 @@ TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue
     const fgm::Vector4D<TypeParam> vec(a, b, c, d);
 
     // Then, the values are stored as elements of the vector
-    EXPECT_VEQ_CONTAINS(vec, a, b, c, d);
+    EXPECT_VEC_CONTAINS(vec, a, b, c, d);
 }
 
 TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
@@ -72,7 +72,7 @@ TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
     const fgm::Vector4D<TypeParam> vec(vec1, vec2);
 
     // Then, the 2D vector elements form the 4D vector
-    EXPECT_VEQ_CONTAINS(vec, a, b, c, d);
+    EXPECT_VEC_CONTAINS(vec, a, b, c, d);
 }
 
 TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
@@ -88,7 +88,7 @@ TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
     const fgm::Vector4D vec(vec1, scalar);
 
     // Then, the 3D vector elements + scalar form the 4D vector in the passed-in format
-    EXPECT_VEQ_CONTAINS(vec, a, b, c, scalar);
+    EXPECT_VEC_CONTAINS(vec, a, b, c, scalar);
 }
 
 TYPED_TEST(Vector4DInitialization, ScalarAnd3DVectorCanInitializeA4DVector)
@@ -104,5 +104,5 @@ TYPED_TEST(Vector4DInitialization, ScalarAnd3DVectorCanInitializeA4DVector)
     const fgm::Vector4D vec(scalar, vec1);
 
     // Then, the 3D vector scalar + element form the 4D vector in the passed-in format
-    EXPECT_VEQ_CONTAINS(vec, scalar, a, b, c);
+    EXPECT_VEC_CONTAINS(vec, scalar, a, b, c);
 }

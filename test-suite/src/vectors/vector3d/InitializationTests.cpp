@@ -54,7 +54,7 @@ TYPED_TEST(Vector3DInitialization, ConstructorParametersInitializesVector)
     const fgm::Vector3D<TypeParam> vec(a, b, c);
 
     // Then, the values are stored as elements of the vector
-    EXPECT_VEQ_CONTAINS(vec, a, b, c);
+    EXPECT_VEC_CONTAINS(vec, a, b, c);
 }
 
 TYPED_TEST(Vector3DInitialization, One2DVectorAndScalarCanInitializeA3DVector)
@@ -69,5 +69,5 @@ TYPED_TEST(Vector3DInitialization, One2DVectorAndScalarCanInitializeA3DVector)
     const fgm::Vector3D<TypeParam> vec(vec1, scalar);
 
     // Then, the 2D vector elements + scalar form the 3D vector in the passed-in format
-    EXPECT_VEQ_CONTAINS(vec, a, b, scalar);
+    EXPECT_VEC_CONTAINS(vec, a, b, scalar);
 }

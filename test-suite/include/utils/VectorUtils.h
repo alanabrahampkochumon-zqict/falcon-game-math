@@ -42,7 +42,7 @@ namespace testutils
     }
 
     template <fgm::Arithmetic T>
-    void EXPECT_VEQ_CONTAINS(const fgm::Vector2D<T>& vector, T x, T y)
+    void EXPECT_VEC_CONTAINS(const fgm::Vector2D<T>& vector, T x, T y)
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -62,7 +62,7 @@ namespace testutils
     }
 
     template <fgm::Arithmetic T>
-    void EXPECT_VEQ_CONTAINS(const fgm::Vector3D<T>& vector, T x, T y, T z)
+    void EXPECT_VEC_CONTAINS(const fgm::Vector3D<T>& vector, T x, T y, T z)
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -85,7 +85,7 @@ namespace testutils
     }
 
     template <fgm::Arithmetic T>
-    void EXPECT_VEQ_CONTAINS(const fgm::Vector4D<T>& vector, T x, T y, T z, T w)
+    void EXPECT_VEC_CONTAINS(const fgm::Vector4D<T>& vector, T x, T y, T z, T w)
     {
         if constexpr (std::is_same_v<T, float>)
         {
