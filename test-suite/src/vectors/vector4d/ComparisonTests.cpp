@@ -40,6 +40,7 @@ class Vector4DComparison: public ::testing::Test
         expectedLTE = { true, false, true, true };
     }
 };
+/** @brief Test fixture for @fgm::Vector4D comparisons, parameterized by @ref SupportedArithmeticTypes */
 TYPED_TEST_SUITE(Vector4DComparison, SupportedArithmeticTypes);
 
 
@@ -49,36 +50,46 @@ TYPED_TEST_SUITE(Vector4DComparison, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than (gt) performs a component-wise comparison and returns the
+ *		 correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with greater than
     const fgm::Vector4D<bool> result = this->vecA.gt(this->vecB);
 
-    // Then, the resulting elements are true iff first elements are greater than second
     EXPECT_VEC_EQ(this->expectedGT, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than operator performs a component-wise comparison and returns the
+ *		  correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with greater than operator
     const fgm::Vector4D<bool> result = this->vecA > this->vecB;
 
-    // Then, the resulting elements are true iff first elements are greater than second
     EXPECT_VEC_EQ(this->expectedGT, result);
 }
 
+
+/**
+ * @test Verify that the static greater-than (gt) wrapper of @ref fgm::Vector4D performs a component-wise comparison and returns the
+ *		 correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with greater than static wrapper
     const fgm::Vector4D<bool> result = fgm::Vector4D<TypeParam>::gt(this->vecA, this->vecB);
 
-    // Then, the resulting elements are true iff first elements are greater than second
     EXPECT_VEC_EQ(this->expectedGT, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than (gt) performs a component-wise comparison when handling
+ *		 infinite values.
+ */
 TEST(Vector4DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given an arbitrary vector and an infinity vector
@@ -93,21 +104,27 @@ TEST(Vector4DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorr
     EXPECT_VEC_EQ(expected, result);
 }
 
-TEST(Vector4DComparison, NanVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
+
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than (gt) performs a component-wise comparison when handling
+ *		 NaN values.
+ */
+TEST(Vector4DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    // Given an arbitrary vector and a nan vector
-    double nan = std::numeric_limits<double>::quiet_NaN();
-    fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    fgm::Vector4D infVec(nan, nan, -5.9, nan);
+    fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
+    fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
     fgm::Vector4D expected(false, false, true, false);
 
-    // When compared with greater than
     const fgm::Vector4D<bool> result = vec.gt(infVec);
 
-    // Then, the resulting elements are false for Nan
     EXPECT_VEC_EQ(expected, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than (gt) performs a component-wise comparison when handling
+ *		 vectors of different types.
+ */
 TEST(Vector4DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
@@ -123,72 +140,86 @@ TEST(Vector4DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectVa
 }
 
 
+
+
 /**************************************
  *                                    *
  *    GREATER THAN OR EQUALS TESTS    *
  *                                    *
  **************************************/
 
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than-or-equal (gte) performs a component-wise comparison and returns the
+ *		 correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, GreaterThanOrEqual_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with greater than or equal
     const fgm::Vector4D<bool> result = this->vecA.gte(this->vecB);
 
-    // Then, the resulting elements are true iff first elements are greater than second
     EXPECT_VEC_EQ(this->expectedGTE, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than-or-equal operator performs a component-wise comparison and returns the
+ *		  correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with greater than or equal
     const fgm::Vector4D<bool> result = this->vecA >= this->vecB;
 
-    // Then, the resulting elements are true iff first elements are greater than second
     EXPECT_VEC_EQ(this->expectedGTE, result);
 }
 
+
+/**
+ * @test Verify that the static greater-than-or-equal (gte) wrapper of @ref fgm::Vector4D performs a component-wise comparison and
+ *		 returns the correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison,
            StaticWrapper_GreaterThanOrEqual_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with greater than or equal static wrapper
     const fgm::Vector4D<bool> result = fgm::Vector4D<TypeParam>::gte(this->vecA, this->vecB);
 
-    // Then, the resulting elements are true iff first elements are greater or equal to second
     EXPECT_VEC_EQ(this->expectedGTE, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than-or-equal (gte) performs a component-wise comparison when handling
+ *		 infinite values.
+ */
 TEST(Vector4DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    // Given an arbitrary vector and an infinity vector
-    fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
+    fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
     fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
     fgm::Vector4D expected(false, false, true, true);
 
-    // When compared with greater than or equal
     const fgm::Vector4D<bool> result = vec.gte(infVec);
 
-    // Then, the resulting elements are true for INFINITY and FALSE FOR -INFINITY
     EXPECT_VEC_EQ(expected, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than-or-equal (gte) performs a component-wise comparison when
+ *		 handling NaN values.
+ */
 TEST(Vector4DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    // Given an arbitrary vector and a nan vector
-    double nan = std::numeric_limits<double>::quiet_NaN();
     fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    fgm::Vector4D infVec(nan, nan, -5.9, nan);
+    fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
     fgm::Vector4D expected(false, false, true, false);
 
-    // When compared with greater than or equal
     const fgm::Vector4D<bool> result = vec.gte(infVec);
 
-    // Then, the resulting elements are false for Nan
     EXPECT_VEC_EQ(expected, result);
 }
 
+/**
+ * @test Verify that the @ref fgm::Vector4D greater-than-or-equal (gte) performs a component-wise comparison when handling
+ *		 vectors of different types.
+ */
 TEST(Vector4DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
@@ -204,71 +235,86 @@ TEST(Vector4DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
 }
 
 
+
+
 /**************************************
  *                                    *
  *          LESS THAN TESTS           *
  *                                    *
  **************************************/
 
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than (lt) performs a component-wise comparison and returns the
+ *		 correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, LessThan_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with less than
     const fgm::Vector4D<bool> result = this->vecA.lt(this->vecB);
 
-    // Then, the resulting elements are true iff first elements are less than second
     EXPECT_VEC_EQ(this->expectedLT, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than operator performs a component-wise comparison and returns the
+ *		  correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with less than operator
     const fgm::Vector4D<bool> result = this->vecA < this->vecB;
 
-    // Then, the resulting elements are true iff first elements are less than second
     EXPECT_VEC_EQ(this->expectedLT, result);
 }
 
+
+/**
+ * @test Verify that the static less-than (lt) wrapper of @ref fgm::Vector4D performs a component-wise comparison and
+ *		 returns the correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with less than static wrapper
     const fgm::Vector4D<bool> result = fgm::Vector4D<TypeParam>::lt(this->vecA, this->vecB);
 
-    // Then, the resulting elements are true iff first elements are less than second
     EXPECT_VEC_EQ(this->expectedLT, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than (lt) performs a component-wise comparison when handling
+ *		 infinite values.
+ */
 TEST(Vector4DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    // Given an arbitrary vector and an infinity vector
     fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
     fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
     fgm::Vector4D expected(true, true, false, false);
 
-    // When compared with less than
     const fgm::Vector4D<bool> result = vec.lt(infVec);
 
-    // Then, the resulting elements are FALSE for INFINITY and TRUE FOR -INFINITY
     EXPECT_VEC_EQ(expected, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than (lt) performs a component-wise comparison when handling
+ *		 NaN values.
+ */
 TEST(Vector4DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    // Given an arbitrary vector and a nan vector
-    double nan = std::numeric_limits<double>::quiet_NaN();
-    fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    fgm::Vector4D infVec(nan, nan, -5.9, nan);
+    fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
+    fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
     fgm::Vector4D expected(false, false, false, false);
 
-    // When compared with less than
     const fgm::Vector4D<bool> result = vec.lt(infVec);
 
-    // Then, the resulting elements are false for Nan
     EXPECT_VEC_EQ(expected, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than (lt) performs a component-wise comparison when
+ *		 handling vectors of different types.
+ */
 TEST(Vector4DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
@@ -284,71 +330,86 @@ TEST(Vector4DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValue
 }
 
 
+
+
 /**************************************
  *                                    *
  *      LESS THAN OR EQUALS TESTS     *
  *                                    *
  **************************************/
 
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than-or-equal (lte) performs a component-wise comparison and returns the
+ *		 correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, LessThanOrEqual_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with less than or equal
     const fgm::Vector4D<bool> result = this->vecA.lte(this->vecB);
 
-    // Then, the resulting elements are true iff first elements are less than or equal to second
     EXPECT_VEC_EQ(this->expectedLTE, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than-or-equal operator performs a component-wise comparison and returns the
+ *		  correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with less than or equal operator
     const fgm::Vector4D<bool> result = this->vecA <= this->vecB;
 
-    // Then, the resulting elements are true iff first elements are less than or equal to second
     EXPECT_VEC_EQ(this->expectedLTE, result);
 }
 
+
+/**
+ * @test Verify that the static less-than-or-equal (lte) wrapper of @ref fgm::Vector4D performs a component-wise comparison and
+ *		 returns the correct boolean mask.
+ */
 TYPED_TEST(Vector4DComparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
-    // Given two arbitrary vectors
-    // When compared with less than or equals static wrapper
     const fgm::Vector4D<bool> result = fgm::Vector4D<TypeParam>::lte(this->vecA, this->vecB);
 
-    // Then, the resulting elements are true iff first elements are less than or equal to second
     EXPECT_VEC_EQ(this->expectedLTE, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than-or-equal (lte) performs a component-wise comparison when handling
+ *		 infinite values.
+ */
 TEST(Vector4DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    // Given an arbitrary vector and an infinity vector
     fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
     fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
     fgm::Vector4D expected(true, true, false, false);
 
-    // When compared with less than or equal
     const fgm::Vector4D<bool> result = vec.lte(infVec);
 
-    // Then, the resulting elements are FALSE for INFINITY and TRUE FOR -INFINITY
     EXPECT_VEC_EQ(expected, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than-or-equal (lte) performs a component-wise comparison when handling
+ *		 NaN values.
+ */
 TEST(Vector4DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    // Given an arbitrary vector and a nan vector
-    double nan = std::numeric_limits<double>::quiet_NaN();
-    fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    fgm::Vector4D infVec(nan, nan, -5.9, nan);
+    fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
+    fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
     fgm::Vector4D expected(false, false, false, false);
 
-    // When compared with less than or equal
     const fgm::Vector4D<bool> result = vec.lte(infVec);
 
-    // Then, the resulting elements are false for Nan
     EXPECT_VEC_EQ(expected, result);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D less-than-or-equal (lte) performs a component-wise comparison when
+ *		 handling vectors of different types.
+ */
 TEST(Vector4DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
