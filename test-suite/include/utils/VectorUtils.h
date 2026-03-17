@@ -46,14 +46,12 @@ namespace testutils
         constexpr std::size_t elementCount = T::dimension;
 
         for (std::size_t i = 0; i < elementCount; ++i)
-        {
             if constexpr (std::is_same_v<ValueType, double>)
                 EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::DOUBLE_EPSILON);
             else if constexpr (std::is_floating_point_v<ValueType>)
                 EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::FLOAT_EPSILON);
             else
                 EXPECT_EQ(expected[i], static_cast<ValueType>(actual[i]));
-        }
     }
 
 
@@ -183,20 +181,12 @@ namespace testutils
         constexpr std::size_t elementCount = T::dimension;
 
         for (std::size_t i = 0; i < elementCount; ++i)
-        {
             if constexpr (std::is_same_v<ValueType, float>)
-            {
                 EXPECT_FLOAT_EQ(expected, static_cast<ValueType>(vector[i]));
-            }
             else if constexpr (std::is_same_v<ValueType, double>)
-            {
                 EXPECT_DOUBLE_EQ(expected, static_cast<ValueType>(vector[i]));
-            }
             else
-            {
                 EXPECT_EQ(expected, static_cast<ValueType>(vector[i]));
-            }
-        }
     }
 
 
@@ -217,20 +207,12 @@ namespace testutils
         constexpr std::size_t elementCount = T::dimension;
 
         for (std::size_t i = 0; i < elementCount; ++i)
-        {
             if constexpr (std::is_same_v<ValueType, float>)
-            {
                 EXPECT_FLOAT_EQ(0.0f, static_cast<ValueType>(vector[i]));
-            }
             else if constexpr (std::is_same_v<ValueType, double>)
-            {
                 EXPECT_DOUBLE_EQ(0.0, static_cast<ValueType>(vector[i]));
-            }
             else
-            {
                 EXPECT_EQ(ValueType(0), static_cast<ValueType>(vector[i]));
-            }
-        }
     }
 
 
@@ -249,11 +231,7 @@ namespace testutils
         constexpr std::size_t elementCount = T::dimension;
         if (std::is_floating_point_v<T>)
             for (std::size_t i = 0; i < elementCount; ++i)
-            {
                 EXPECT_TRUE(std::isinf(vector[i]));
-            }
-        else
-            GTEST_SKIP() << "Integral division by zero result in undefined behavior and crashes.";
     }
 
 
