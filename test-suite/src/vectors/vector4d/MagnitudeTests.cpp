@@ -122,13 +122,23 @@ TYPED_TEST(Vector4DMagnitude, NonUnitVectorReturnsCorrectMagnitude)
     EXPECT_MAG_EQ(this->magnitude, magnitude);
 }
 
-// TODO:Separate tests
+
+/** 
+ * @test Verify that the @ref fgm::Vector4D magnitude calculation results in a floating-point type, regardless of the
+ *       component type.
+ */
+TYPED_TEST(Vector4DMagnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
+{
+    [[maybe_unused]] const auto magnitude = this->vec.mag();
+    static_assert(std::is_floating_point_v<decltype(magnitude)>);
+}
+
+
 /** @test Verify that the static magnitude wrapper of @ref fgm::Vector4D returns a non-unit magnitude. */
 TYPED_TEST(Vector4DMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = fgm::Vector4D<TypeParam>::mag(this->vec);
 
-    static_assert(std::is_floating_point_v<decltype(magnitude)>);
     EXPECT_MAG_EQ(this->magnitude, magnitude);
 }
 
@@ -190,4 +200,14 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_NonZeroVectorNormalizationReturn
     const fgm::Vector4D normalized = fgm::Vector4D<TypeParam>::normalize(this->vec);
 
     EXPECT_VEC_EQ(this->expectedVector, normalized);
+}
+
+/**
+ * @test Verify that the @ref fgm::Vector4D normalization results in a floating-point type, regardless of the
+ *       component type.
+ */
+TYPED_TEST(Vector4DNormalization, NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+{
+    [[maybe_unused]] const auto normalized = this->vec.normalize();
+    static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
