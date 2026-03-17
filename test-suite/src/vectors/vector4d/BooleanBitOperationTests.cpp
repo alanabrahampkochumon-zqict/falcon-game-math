@@ -21,6 +21,7 @@ using namespace testutils;
  *                                    *
  **************************************/
 
+/** @brief Test fixture for @ref Vector4D<bool> bitwise operations */
 class BooleanVectorBitOperations: public ::testing::Test
 {
     protected:
@@ -47,35 +48,37 @@ class BooleanVectorBitOperations: public ::testing::Test
  *                                    *
  **************************************/
 
+/**
+ * @test Verify that the @ref fgm::Vector4D<bool> bitwise AND operator performs a component-wise logical conjunction
+ *        and returns the correct boolean mask.
+ */
 TEST_F(BooleanVectorBitOperations, BitwiseAndReturnsComponentwiseAnd)
 {
-    // Given two bool vectors
+    auto mask = this->vecA & this->vecB;
 
-    // When they are `AND` together
-    auto result = this->vecA & this->vecB;
-
-    // Then, we get another vector with component-wise AND applied
-    EXPECT_VEC_EQ(this->expectedAndVector, result);
+    EXPECT_VEC_EQ(this->expectedAndVector, mask);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D<bool> bitwise OR operator performs a component-wise logical disjunction
+ *        and returns the correct boolean mask.
+ */
 TEST_F(BooleanVectorBitOperations, BitwiseOrReturnsComponentwiseOr)
 {
-    // Given two bool vectors
+    auto mask = this->vecA | this->vecB;
 
-    // When they are `OR` together
-    auto result = this->vecA | this->vecB;
-
-    // Then, we get another vector with component-wise OR applied
-    EXPECT_VEC_EQ(this->expectedOrVector, result);
+    EXPECT_VEC_EQ(this->expectedOrVector, mask);
 }
 
+
+/**
+ * @test Verify that the @ref fgm::Vector4D<bool> bitwise NOT operator performs a component-wise logical inversion
+ *        and returns the correct boolean mask.
+ */
 TEST_F(BooleanVectorBitOperations, BitwiseNotReturnsInvertedVector)
 {
-    // Given a bool vector
+    auto mask = !this->vecA;
 
-    // When they are `OR` together
-    auto result = !this->vecA;
-
-    // Then, we get another vector with component-wise NOT applied
-    EXPECT_VEC_EQ(this->expectedNotAVector, result);
+    EXPECT_VEC_EQ(this->expectedNotAVector, mask);
 }
