@@ -4,7 +4,10 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: February 16, 2026
  *
- * @brief Helper functions for testing Matrices like @ref Matrix2D, @ref Matrix3D etc.
+ * @brief Diagnostic and validation utilities for Matrix types.
+ *        Provides specialized testing helpers and assertion wrappers for @ref Matrix2D,
+ *        @ref Matrix3D, and @ref Matrix4D to ensure numerical stability and
+ *        geometric correctness across the fgm library.
  * 
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -19,8 +22,21 @@
 
 namespace testutils
 {
+
+    /**
+     * @brief Perform a component-wise strict equality comparison between two matrices of the same dimensions.
+     *
+     * @tparam T Numeric type of the expected matrix components.
+     * @tparam U Numeric type of the actual matrix components.
+     * @param expected The matrix serving as the reference for comparison.
+     * @param actual The matrix being evaluated.
+     *
+     * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
+     *       if the matrices are out of the @p tolerance range.
+     * @note Triggers an assertion failure if matrix dimensions are mismatched.
+     */
     template <fgm::Matrix T, fgm::Matrix U>
-    void EXPECT_MAT_EQ(T expected, U actual)
+    void EXPECT_MAT_EQ(const T& expected,const U& actual)
     {
         using ValueType = T::value_type;
 
@@ -37,8 +53,22 @@ namespace testutils
                     ASSERT_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
     }
 
+
+    /**
+     * @brief Performs a component-wise approximate equality comparison using an absolute epsilon.
+     *
+     * @tparam T The type of the reference matrix.
+     * @tparam U The type of the matrix under test.
+     * @param expected The matrix serving as the ground truth.
+     * @param actual The matrix being evaluated.
+     * @param tolerance The maximum allowable absolute difference between components.
+     *
+     * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
+     *       if the matrices are out of the @p tolerance range.
+     * @note Triggers an assertion failure if matrix dimensions are mismatched.
+     */
     template <fgm::Matrix T, fgm::Matrix U>
-    void EXPECT_MAT_NEAR(T expected, U actual, double tolerance = 1e-5)
+    void EXPECT_MAT_NEAR(const T& expected, const U& actual, double tolerance = 1e-5)
     {
 
         using ValueType = T::value_type;
@@ -50,8 +80,19 @@ namespace testutils
                 EXPECT_NEAR(expected(i, j), static_cast<ValueType>(actual(i, j)), tolerance);
     }
 
+
+    /**
+     * @brief Validates that the provided matrix conforms to an identity matrix within a standard epsilon.
+     *
+     * @tparam T The matrix type being evaluated.
+     * @param actual The matrix to verify as an identity.
+     *
+     * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
+     *       if the matrix is not identity.
+     * @note Triggers an assertion failure if matrix dimensions are mismatched.
+     */
     template <fgm::Matrix T>
-    void EXPECT_MAT_IDENTITY(T actual)
+    void EXPECT_MAT_IDENTITY(const T& actual)
     {
         using ValueType = T::value_type;
         EXPECT_EQ(T::rows, T::columns) << "Identity matrices must be square(e.g: 3x3)\n";
@@ -66,8 +107,19 @@ namespace testutils
                     ASSERT_EQ(i == j, actual(i, j));
     }
 
+
+    /**
+     * @brief Validates that the provided matrix conforms to a zero matrix within a standard epsilon.
+     *
+     * @tparam T The matrix type being evaluated.
+     * @param actual The matrix to verify as a zero matrix.
+     *
+     * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
+     *       if the matrix is not a zero matrix.
+     * @note Triggers an assertion failure if matrix dimensions are mismatched.
+     */
     template <fgm::Matrix T>
-    void EXPECT_MAT_ZERO(T actual)
+    void EXPECT_MAT_ZERO(const T& actual)
     {
         using ValueType = T::value_type;
 
@@ -81,8 +133,19 @@ namespace testutils
                     ASSERT_EQ(ValueType(0), actual(i, j));
     }
 
+
+    /**
+     * @brief Validates that the provided matrix conforms to an infinity matrix.
+     *
+     * @tparam T The matrix type being evaluated.
+     * @param actual The matrix to verify as an infinity matrix.
+     *
+     * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
+     *       if the matrix is not an infinity matrix.
+     * @note Triggers an assertion failure if matrix dimensions are mismatched.
+     */
     template <fgm::Matrix T>
-    void EXPECT_MAT_INF(T actual)
+    void EXPECT_MAT_INF(const T& actual)
     {
         for (std::size_t i = 0; i < T::rows; ++i)
             for (std::size_t j = 0; j < T::columns; ++j)
@@ -91,7 +154,7 @@ namespace testutils
 
 } // namespace testutils
 
-// TODO: Remove
+// TODO: Deprecated Remove after refactor
 namespace testutils::Matrix3D
 {
 
