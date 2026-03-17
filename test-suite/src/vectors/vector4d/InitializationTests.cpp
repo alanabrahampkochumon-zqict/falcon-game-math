@@ -49,10 +49,10 @@ TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
  */
 TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue)
 {
-    TypeParam a = static_cast<TypeParam>(3);
-    TypeParam b = static_cast<TypeParam>(1);
-    TypeParam c = static_cast<TypeParam>(6);
-    TypeParam d = static_cast<TypeParam>(4);
+    constexpr TypeParam a = static_cast<TypeParam>(3);
+    constexpr TypeParam b = static_cast<TypeParam>(1);
+    constexpr TypeParam c = static_cast<TypeParam>(6);
+    constexpr TypeParam d = static_cast<TypeParam>(4);
 
     const fgm::Vector4D<TypeParam> vec(a, b, c, d);
 
@@ -66,10 +66,10 @@ TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue
  */
 TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
 {
-    TypeParam a = static_cast<TypeParam>(3);
-    TypeParam b = static_cast<TypeParam>(1);
-    TypeParam c = static_cast<TypeParam>(6);
-    TypeParam d = static_cast<TypeParam>(4);
+    constexpr TypeParam a = static_cast<TypeParam>(3);
+    constexpr TypeParam b = static_cast<TypeParam>(1);
+    constexpr TypeParam c = static_cast<TypeParam>(6);
+    constexpr TypeParam d = static_cast<TypeParam>(4);
     const fgm::Vector2D<TypeParam> vec1(a, b);
     const fgm::Vector2D<TypeParam> vec2(c, d);
 
@@ -85,11 +85,11 @@ TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
  */
 TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
 {
-    TypeParam a = static_cast<TypeParam>(3);
-    TypeParam b = static_cast<TypeParam>(1);
-    TypeParam c = static_cast<TypeParam>(6);
+    constexpr TypeParam a = static_cast<TypeParam>(3);
+    constexpr TypeParam b = static_cast<TypeParam>(1);
+    constexpr TypeParam c = static_cast<TypeParam>(6);
     const fgm::Vector3D vec1(a, b, c);
-    TypeParam scalar = static_cast<TypeParam>(4);
+    constexpr TypeParam scalar = static_cast<TypeParam>(4);
 
     const fgm::Vector4D vec(vec1, scalar);
 
@@ -103,11 +103,11 @@ TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
  */
 TYPED_TEST(Vector4DInitialization, ScalarAnd3DVectorCanInitializeA4DVector)
 {
-    TypeParam a = static_cast<TypeParam>(3);
-    TypeParam b = static_cast<TypeParam>(1);
-    TypeParam c = static_cast<TypeParam>(6);
+    constexpr TypeParam a = static_cast<TypeParam>(3);
+    constexpr TypeParam b = static_cast<TypeParam>(1);
+    constexpr TypeParam c = static_cast<TypeParam>(6);
     const fgm::Vector3D vec1(a, b, c);
-    TypeParam scalar = static_cast<TypeParam>(4);
+    constexpr TypeParam scalar = static_cast<TypeParam>(4);
 
     const fgm::Vector4D vec(scalar, vec1);
 

@@ -92,9 +92,9 @@ TYPED_TEST(Vector4DComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWit
  */
 TEST(Vector4DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
-    fgm::Vector4D expected(false, false, true, true);
+    const fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
+    const fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
+    const fgm::Vector4D expected(false, false, true, true);
 
     const fgm::Vector4D<bool> mask = vec.gt(infVec);
 
@@ -108,9 +108,9 @@ TEST(Vector4DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorr
  */
 TEST(Vector4DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
-    fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
-    fgm::Vector4D expected(false, false, true, false);
+    const fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
+    const fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
+    const fgm::Vector4D expected(false, false, true, false);
 
     const fgm::Vector4D<bool> mask = vec.gt(infVec);
 
@@ -125,9 +125,9 @@ TEST(Vector4DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectVa
 TEST(Vector4DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    fgm::Vector4D vecA(1.2, 4.5, 7.5, 9.5);
-    fgm::Vector4D vecB(5, 6, 7, 8);
-    fgm::Vector4D expected(false, false, true, true);
+    const fgm::Vector4D vecA(1.2, 4.5, 7.5, 9.5);
+    const fgm::Vector4D vecB(5, 6, 7, 8);
+    const fgm::Vector4D expected(false, false, true, true);
 
     // When compared with greater than or equal
     const fgm::Vector4D<bool> mask = vecA.gt(vecB);
@@ -188,9 +188,9 @@ TYPED_TEST(Vector4DComparison,
  */
 TEST(Vector4DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
-    fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
-    fgm::Vector4D expected(false, false, true, true);
+    const fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
+    const fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
+    const fgm::Vector4D expected(false, false, true, true);
 
     const fgm::Vector4D<bool> mask = vec.gte(infVec);
 
@@ -204,9 +204,9 @@ TEST(Vector4DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorW
  */
 TEST(Vector4DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
-    fgm::Vector4D expected(false, false, true, false);
+    const fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
+    const fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
+    const fgm::Vector4D expected(false, false, true, false);
 
     const fgm::Vector4D<bool> mask = vec.gte(infVec);
 
@@ -220,9 +220,9 @@ TEST(Vector4DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
 TEST(Vector4DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    fgm::Vector4D vecA(1.2, 4.5, 7.5, 9.5);
-    fgm::Vector4D vecB(5, 6, 7, 8);
-    fgm::Vector4D expected(false, false, true, true);
+    const fgm::Vector4D vecA(1.2, 4.5, 7.5, 9.5);
+    const fgm::Vector4D vecB(5, 6, 7, 8);
+    const fgm::Vector4D expected(false, false, true, true);
 
     // When compared with greater or equal than
     const fgm::Vector4D<bool> mask = vecA.gte(vecB);
@@ -282,9 +282,9 @@ TYPED_TEST(Vector4DComparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithEl
  */
 TEST(Vector4DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
-    fgm::Vector4D expected(true, true, false, false);
+    const fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
+    const fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
+    const fgm::Vector4D expected(true, true, false, false);
 
     const fgm::Vector4D<bool> mask = vec.lt(infVec);
 
@@ -298,9 +298,9 @@ TEST(Vector4DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrect
  */
 TEST(Vector4DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
-    fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
-    fgm::Vector4D expected(false, false, false, false);
+    const fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
+    const fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
+    const fgm::Vector4D expected(false, false, false, false);
 
     const fgm::Vector4D<bool> mask = vec.lt(infVec);
 
@@ -315,9 +315,9 @@ TEST(Vector4DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValue
 TEST(Vector4DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    fgm::Vector4D vecA(1.2, 4.5, 7.5, 9.5);
-    fgm::Vector4D vecB(5, 6, 7, 8);
-    fgm::Vector4D expected(true, true, false, false);
+    const fgm::Vector4D vecA(1.2, 4.5, 7.5, 9.5);
+    const fgm::Vector4D vecB(5, 6, 7, 8);
+    const fgm::Vector4D expected(true, true, false, false);
 
     // When compared with less than or equal
     const fgm::Vector4D<bool> mask = vecA.lt(vecB);
@@ -377,9 +377,9 @@ TYPED_TEST(Vector4DComparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVecto
  */
 TEST(Vector4DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
-    fgm::Vector4D expected(true, true, false, false);
+    const fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
+    const fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
+    const fgm::Vector4D expected(true, true, false, false);
 
     const fgm::Vector4D<bool> mask = vec.lte(infVec);
 
@@ -393,9 +393,9 @@ TEST(Vector4DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWith
  */
 TEST(Vector4DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
-    fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
-    fgm::Vector4D expected(false, false, false, false);
+    const fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
+    const fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
+    const fgm::Vector4D expected(false, false, false, false);
 
     const fgm::Vector4D<bool> mask = vec.lte(infVec);
 
@@ -410,9 +410,9 @@ TEST(Vector4DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
 TEST(Vector4DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    fgm::Vector4D vecA(1.2, 4.5, 7.5, 9.5);
-    fgm::Vector4D vecB(5, 6, 7, 8);
-    fgm::Vector4D expected(true, true, false, false);
+    const fgm::Vector4D vecA(1.2, 4.5, 7.5, 9.5);
+    const fgm::Vector4D vecB(5, 6, 7, 8);
+    const fgm::Vector4D expected(true, true, false, false);
 
     // When compared with less than or equal
     const fgm::Vector4D<bool> mask = vecA.lte(vecB);
