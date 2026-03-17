@@ -29,7 +29,7 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: &=, |=, Zero, One, Inf, -Inf, Nan, X, Y, Z, W
+// TODO: &=, |=, Zero, One, Inf, -Inf, Nan, X, Y, Z, W, Safe Normalize
 
 namespace fgm
 {
