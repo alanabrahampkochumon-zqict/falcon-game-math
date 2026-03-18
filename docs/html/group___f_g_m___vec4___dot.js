@@ -1,7 +1,5 @@
-var _product_tests_8cpp =
+var group___f_g_m___vec4___dot =
 [
-    [ "Vector4DDotProduct&lt; T &gt;", "class_vector4_d_dot_product.html", "class_vector4_d_dot_product" ],
-    [ "TYPED_TEST_SUITE", "_product_tests_8cpp.html#af2ae0656edefabcdf96aade192350f82", null ],
     [ "Vector4DDotProduct_AntiParallelDotProductReturnsNegativeScalar", "group___f_g_m___vec4___dot.html#ga4ce7ca6be0e057f649edb97cc08fd82c", null ],
     [ "Vector4DDotProduct_MixedTypeDotProductPromotesType", "group___f_g_m___vec4___dot.html#ga26e51f21b6148a59ce7e29928ed19309", null ],
     [ "Vector4DDotProduct_NonOrthogonalDotProductReturnsNonZeroScalar", "group___f_g_m___vec4___dot.html#gaa436dd759231daf72a9de66f38b55581", null ],

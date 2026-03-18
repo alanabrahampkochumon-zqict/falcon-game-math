@@ -17,9 +17,9 @@ var group___f_g_m_vector4_d =
     [ "Initialization", "group___f_g_m___vec4___init.html", "group___f_g_m___vec4___init" ],
     [ "Scalar Length(Magnitude)", "group___f_g_m___vec4___magnitude.html", "group___f_g_m___vec4___magnitude" ],
     [ "Vector Normalization", "group___f_g_m___vec4___normalize.html", "group___f_g_m___vec4___normalize" ],
-    [ "Dot Product", "group___f_g_m___vec4___dot.html", null ],
-    [ "Vector Projection", "group___f_g_m___vec4___proj.html", null ],
-    [ "Vector Rejection", "group___f_g_m___vec4___rej.html", null ],
+    [ "Dot Product", "group___f_g_m___vec4___dot.html", "group___f_g_m___vec4___dot" ],
+    [ "Vector Projection", "group___f_g_m___vec4___proj.html", "group___f_g_m___vec4___proj" ],
+    [ "Vector Rejection", "group___f_g_m___vec4___rej.html", "group___f_g_m___vec4___rej" ],
     [ "Formatted String Representation", "group___f_g_m___vec4___string___repr.html", null ],
     [ "Conversion Constructor", "group___f_g_m___vec4___type___conv.html", null ]
 ];

@@ -50,11 +50,12 @@ class Vector4DDotProduct: public ::testing::Test
 TYPED_TEST_SUITE(Vector4DDotProduct, SupportedArithmeticTypes);
 
 
-/**************************************
- *                                    *
- *               TESTS                *
- *                                    *
- **************************************/
+
+
+/**
+ * @addtogroup FGM_Vec4_Dot
+ * @{
+ */
 
 /** @test Verify that the dot product of a @ref fgm::Vector4D with itself returns its squared magnitude. */
 TYPED_TEST(Vector4DDotProduct, SelfDotProductReturnsSquareMagnitude)
@@ -70,7 +71,6 @@ TYPED_TEST(Vector4DDotProduct, SelfDotProductReturnsSquareMagnitude)
         EXPECT_EQ(this->aDotA, result);
 }
 
-
 /** @test Verify that the dot product of a @ref fgm::Vector4D with an orthogonal vector returns zero. */
 TYPED_TEST(Vector4DDotProduct, OrthogonalDotProductReturnZero)
 {
@@ -83,7 +83,6 @@ TYPED_TEST(Vector4DDotProduct, OrthogonalDotProductReturnZero)
     else
         EXPECT_EQ(0, result);
 }
-
 
 /** @test Verify that the dot product of a @ref fgm::Vector4D with a non-orthogonal vector returns a non-zero scalar. */
 TYPED_TEST(Vector4DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
@@ -98,7 +97,6 @@ TYPED_TEST(Vector4DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
         EXPECT_EQ(this->expected, result);
 }
 
-
 /** @test Verify that the static dot product wrapper of @ref fgm::Vector4D returns a non-zero scalar. */
 TYPED_TEST(Vector4DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
 {
@@ -111,7 +109,6 @@ TYPED_TEST(Vector4DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZe
     else
         EXPECT_EQ(this->expected, result);
 }
-
 
 /** @test Verify that the dot product of a @ref fgm::Vector4D with another @ref fgm::Vector4D in opposite direction
  *        returns a negative scalar. */
@@ -127,7 +124,6 @@ TEST(Vector4DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
     // Then, the dot product is -1
     EXPECT_DOUBLE_EQ(-1.0, result);
 }
-
 
 /** @test Verify that the dot product of a @ref fgm::Vector4D with another @ref fgm::Vector4D of different type
  *        returns a type promoted vector. */
@@ -146,3 +142,5 @@ TEST(Vector4DDotProduct, MixedTypeDotProductPromotesType)
     // Then, the dot product is non-zero
     EXPECT_DOUBLE_EQ(295.11111101, result);
 }
+
+/** @} */

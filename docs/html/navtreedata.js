@@ -86,9 +86,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_addition_tests_8cpp.html",
-"_product_tests_8cpp.html#a4ce7ca6be0e057f649edb97cc08fd82c",
-"class_vector4_d_comparison.html#a49e78861b8b8738a7d786af58fbbc945",
-"group___f_g_m___vec4___l_t___comp.html",
+"_projection_tests_8cpp.html",
+"class_vector4_d_normalization.html#aa737545b67702fae91c66ce301031fb7",
+"group___f_g_m___vec4___magnitude.html#ga94fda7188a9c870ef0f10cbf062c5584",
 "structfgm_1_1_matrix3_d.html#a26031c1ec7dda97c56069ad7d391df8d",
 "structfgm_1_1_vector4_d.html#aa39fdb964a46fabb76d867bf02572ee3"
 ];
