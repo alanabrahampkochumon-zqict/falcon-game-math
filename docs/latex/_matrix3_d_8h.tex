@@ -1,0 +1,25 @@
+\doxysection{math-\/lib/\+include/\+matrix/\+\+Matrix3D.h File Reference}
+\hypertarget{_matrix3_d_8h}{}\label{_matrix3_d_8h}\index{math-\/lib/include/matrix/Matrix3D.h@{math-\/lib/include/matrix/Matrix3D.h}}
+{\ttfamily \+\#include "{}../\+vector/\+\+Vector3\+D.\+h"{}}\newline
+{\ttfamily \+\#include $<$cstddef$>$}\newline
+{\ttfamily \+\#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \+\#include "{}Matrix3\+D.\+tpp"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3\+D$<$ T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacefgm}{fgm}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\auto \doxymbox{\hyperlink{namespacefgm_a34e0323b5c2d8ea26c6160515e7d7a13}{fgm::\+operator\texorpdfstring{$\ast$}{*}}} (const S \&scalar, const \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ T $>$ \&matrix) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\item 
+{\footnotesize template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\auto \doxymbox{\hyperlink{namespacefgm_a26a64145c3ede20a042afcda16a03651}{fgm::\+operator\texorpdfstring{$\ast$}{*}}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ S $>$ \&vec, const \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ T $>$ \&mat) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\item 
+{\footnotesize template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\auto \doxymbox{\hyperlink{namespacefgm_a205b4fa3f5f18af778c65a853bfede7c}{fgm::\+operator\texorpdfstring{$\ast$}{*}=}} (\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ S $>$ \&vec, const \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ T $>$ \&mat) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\end{DoxyCompactItemize}

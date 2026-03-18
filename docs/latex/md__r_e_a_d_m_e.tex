@@ -1,0 +1,32 @@
+\chapter{Math Library for CPP }
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{Math Library for CPP@{Math Library for CPP}}
+\label{md__r_e_a_d_m_e_autotoc_md15}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md15}%
+
+
+Math Library build in CPP for Game Engine following Eric Lengyel\textquotesingle{}s \href{https://foundationsofgameenginedev.com/}{\texttt{Foundations fo Game Engine Development Series}}
+
+Project uses CMake as it\textquotesingle{}s build system.\hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysection{\texorpdfstring{How to run}{How to run}}\label{md__r_e_a_d_m_e_autotoc_md16}
+
+\begin{DoxyEnumerate}
+\item Download and install \href{https://cmake.org/download/}{\texttt{CMake}} and \href{https://git-scm.com/install/windows}{\texttt{Git}} if you don\textquotesingle{}t have it installed.
+\item Generate project files using 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/B\ build}
+
+\end{DoxyCode}
+ OR using 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{genStrict.bat}
+
+\end{DoxyCode}
+
+\item Run the build using commandline 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/-\/build\ build}
+\DoxyCodeLine{./build/playground/Debug/Playground.exe\ \#\ To\ Run\ the\ playground}
+\DoxyCodeLine{./build/math-\/test/Debug/MathTest.exe\ \#\ To\ Run\ the\ tests}
+
+\end{DoxyCode}
+ OR Run it in Visual Studio or your IDE of choice. 
+\end{DoxyEnumerate}

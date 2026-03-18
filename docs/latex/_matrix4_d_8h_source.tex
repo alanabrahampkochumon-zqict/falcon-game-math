@@ -1,0 +1,73 @@
+\doxysection{Matrix4\+D.\+h}
+\hypertarget{_matrix4_d_8h_source}{}\label{_matrix4_d_8h_source}\index{math-\/lib/include/matrix/Matrix4D.h@{math-\/lib/include/matrix/Matrix4D.h}}
+\doxymbox{\hyperlink{_matrix4_d_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_math_traits_8h}{../MathTraits.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector4_d_8h}{../vector/Vector4D.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00008}00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacefgm}{fgm}}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{template}\ <StrictArithmetic\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00011}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d}{00011}}\ \ \ \ \ \textcolor{keyword}{struct\ }\textcolor{keyword}{alignas}(16)\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a6cb4fe79c2dbe309f70075324ac63790}{Matrix4D}}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00012}00012\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00013}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a94c0063d1cc32d24f05c72fa68e4896e}{00013}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a94c0063d1cc32d24f05c72fa68e4896e}{value\_type}}\ =\ T;}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00015}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a39c199bfb60e0ef109af7e578e489212}{00015}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ std::size\_t\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a39c199bfb60e0ef109af7e578e489212}{columns}}\ =\ 4;}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00016}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a4f3b6f962360028b575534611db967f9}{00016}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ std::size\_t\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a4f3b6f962360028b575534611db967f9}{rows}}\ =\ 4;}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00019}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a4374bb6a179f28ff5853979127a47fe0}{00019}}\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D<T>}}\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a4374bb6a179f28ff5853979127a47fe0}{col\_vectors}}[\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a39c199bfb60e0ef109af7e578e489212}{columns}}];}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00020}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_aa69f84b83fd60e8d5c7d5e4e09881321}{00020}}\ \ \ \ \ \ \ \ \ \ \ \ \ T\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_aa69f84b83fd60e8d5c7d5e4e09881321}{elements}}[\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a39c199bfb60e0ef109af7e578e489212}{columns}}][\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a4f3b6f962360028b575534611db967f9}{rows}}];}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00023}00023\ \textcolor{comment}{\ \ \ \ \ \ \ \ /*************************************}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00024}00024\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00025}00025\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ INITIALIZERS\ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00026}00026\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00027}00027\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *************************************/}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00029}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a6cb4fe79c2dbe309f70075324ac63790}{00029}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a6cb4fe79c2dbe309f70075324ac63790}{Matrix4D}}();}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00031}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a2614fa2bd2d154f3bb5aff8257f1fd10}{00031}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a2614fa2bd2d154f3bb5aff8257f1fd10}{Matrix4D}}(T\ v\_0\_0,\ T\ v\_0\_1,\ T\ v\_0\_2,\ T\ v\_0\_3,\ T\ v\_1\_0,\ T\ v\_1\_1,\ T\ v\_1\_2,\ T\ v\_1\_3,\ T\ v\_2\_0,\ T\ v\_2\_1,\ T\ v\_2\_2,}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ v\_2\_3,\ T\ v\_3\_0,\ T\ v\_3\_1,\ T\ v\_3\_2,\ T\ v\_3\_3);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00034}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_adcdb209b32dd9f2285f7420034ac5f5e}{00034}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_adcdb209b32dd9f2285f7420034ac5f5e}{Matrix4D}}(\doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D<T>}}\ col0,\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D<T>}}\ col1,\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D<T>}}\ col2,\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D<T>}}\ col3);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <StrictArithmetic\ U>}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00037}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a2e958c1f4c136d110f651530a127d46d}{00037}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a2e958c1f4c136d110f651530a127d46d}{Matrix4D}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a6cb4fe79c2dbe309f70075324ac63790}{Matrix4D<U>}}\&\ other);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00040}00040\ \textcolor{comment}{\ \ \ \ \ \ \ \ /*************************************}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00041}00041\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00042}00042\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ ACCESSORS\ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00043}00043\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00044}00044\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *************************************/}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00046}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a5dbb664757d4240ae211df2fad249337}{00046}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D<T>}}\&\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a5dbb664757d4240ae211df2fad249337}{operator[]}}(std::size\_t\ index);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00047}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_acf3e8e078b364936b7780e46b0f97a26}{00047}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D<T>}}\&\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_acf3e8e078b364936b7780e46b0f97a26}{operator[]}}(std::size\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00049}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a5f52cf09dbb29f417b09d3484475d5b0}{00049}}\ \ \ \ \ \ \ \ \ T\&\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a5f52cf09dbb29f417b09d3484475d5b0}{operator()}}(std::size\_t\ row,\ std::size\_t\ col);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00050}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a839252f573328a185f434647bdd22372}{00050}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ T\&\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a839252f573328a185f434647bdd22372}{operator()}}(std::size\_t\ row,\ std::size\_t\ col)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00053}00053\ \textcolor{comment}{\ \ \ \ \ \ \ \ /*************************************}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00054}00054\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00055}00055\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ ARITHMETIC\ OPERATORS\ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00056}00056\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00057}00057\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *************************************/}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <StrictArithmetic\ U>}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00059}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a660ce9cb5f4ff53a7a98c0a9f419c9bf}{00059}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a660ce9cb5f4ff53a7a98c0a9f419c9bf}{operator+}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a6cb4fe79c2dbe309f70075324ac63790}{Matrix4D<U>}}\&\ other)\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a6cb4fe79c2dbe309f70075324ac63790}{Matrix4D<std::common\_type\_t<T,\ U>}}>;}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <StrictArithmetic\ U>}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00062}\doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a937035c3bc0a1cda2fe5b89617683fde}{00062}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a6cb4fe79c2dbe309f70075324ac63790}{Matrix4D}}\&\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a937035c3bc0a1cda2fe5b89617683fde}{operator+=}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d_a6cb4fe79c2dbe309f70075324ac63790}{Matrix4D<U>}}\&\ other);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00063}00063\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00065}00065\ \}\ \textcolor{comment}{//\ namespace\ fgm}}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_matrix4_d_8h_source_l00067}00067\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_matrix4_d_8tpp}{Matrix4D.tpp}}"{}}}
+
+\end{DoxyCode}

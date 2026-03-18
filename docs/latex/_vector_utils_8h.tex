@@ -1,0 +1,33 @@
+\doxysection{test-\/suite/\+include/\+utils/\+\+Vector\+Utils.h File Reference}
+\hypertarget{_vector_utils_8h}{}\label{_vector_utils_8h}\index{test-\/suite/include/utils/VectorUtils.h@{test-\/suite/include/utils/VectorUtils.h}}
+{\ttfamily \+\#include $<$Math\+Traits.\+h$>$}\newline
+{\ttfamily \+\#include $<$cmath$>$}\newline
+{\ttfamily \+\#include $<$gtest/\+gtest.\+h$>$}\newline
+{\ttfamily \+\#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \+\#include $<$vector/\+\+Vector2\+D.\+h$>$}\newline
+{\ttfamily \+\#include $<$vector/\+\+Vector3\+D.\+h$>$}\newline
+{\ttfamily \+\#include $<$vector/\+\+Vector4\+D.\+h$>$}\newline
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacetestutils}{testutils}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T, \doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} U$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+EQ}} (const T \&expected, const U \&actual)
+\begin{DoxyCompactList}\small\item\em Perform a component-\/wise equality comparison between two vectors of the same dimensions. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS}} (const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{fgm::\+\+Vector2D}}$<$ T $>$ \&vector, T x, T y)
+\begin{DoxyCompactList}\small\item\em Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector2_d}{fgm::\+\+Vector2D} against discrete scalar values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_aaf56e8b74db722be7dfe45c0b2d6936c}{testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$ \&vector, T x, T y, T z)
+\begin{DoxyCompactList}\small\item\em Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D} against discrete scalar values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a0d6edb81cb51d687ca6538d8a125c318}{testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$ \&vector, T x, T y, T z, T w)
+\begin{DoxyCompactList}\small\item\em Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} against discrete scalar values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a12c4d4e6974106a0d0ddce9dad07584f}{testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+ONE}} (const T \&vector)
+\begin{DoxyCompactList}\small\item\em Validates that the provided vector contains only unit components. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+ZERO}} (const T \&vector)
+\begin{DoxyCompactList}\small\item\em Validates that the provided vector contains only zero components. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_af3e3755befec4337ccefebe35e82acc5}{testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+INF}} (const T \&vector)
+\begin{DoxyCompactList}\small\item\em Validates that the provided vector contains only INFINITY components. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_strict_arithmetic}{fgm::\+\+Strict\+Arithmetic}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a1f297fa9b099880593df66c438fa5eff}{testutils::\+\+EXPECT\+\_\+\+MAG\+\_\+\+EQ}} (T expected, T actual)
+\begin{DoxyCompactList}\small\item\em Validates that two scalar values are equal within a defined numerical tolerance. \end{DoxyCompactList}\end{DoxyCompactItemize}

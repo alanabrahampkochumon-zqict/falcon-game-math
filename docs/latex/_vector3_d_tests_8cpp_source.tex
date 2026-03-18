@@ -1,0 +1,970 @@
+\doxysection{Vector3\+DTests.\+cpp}
+\hypertarget{_vector3_d_tests_8cpp_source}{}\label{_vector3_d_tests_8cpp_source}\index{test-\/suite/src/vectors/Vector3DTests.cpp@{test-\/suite/src/vectors/Vector3DTests.cpp}}
+\doxymbox{\hyperlink{_vector3_d_tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_utils_8h}{utils/VectorUtils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <gtest/gtest.h>}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{_vector2_d_8h}{vector/Vector2D.h}}>}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{_vector3_d_8h}{vector/Vector3D.h}}>}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00008}00008\ \textcolor{keyword}{using\ namespace\ }\doxymbox{\hyperlink{namespacetestutils}{testutils}};}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00011}00011\ \textcolor{comment}{/***********************************************}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00012}00012\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00013}00013\ \textcolor{comment}{\ *\ \ INITIALIZATION,\ ACCESS\ AND\ MUTATION\ TESTS\ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00014}00014\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00015}00015\ \textcolor{comment}{\ ***********************************************/}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00018}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{00018}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_ConversionConstructor,\ ConversionConstructorCreatesNewVectorWithPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00019}00019\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00021}00021\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00023}00023\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00024}00024\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<double>}}\ vec2(vec1);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00025}00025\ \ \ \ \ vec2.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}}\ =\ 5;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00028}00028\ \ \ \ \ ASSERT\_FLOAT\_EQ(3.0f,\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00029}00029\ \ \ \ \ ASSERT\_FLOAT\_EQ(1.0f,\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00030}00030\ \ \ \ \ ASSERT\_FLOAT\_EQ(6.0f,\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(vec2)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00034}00034\ \ \ \ \ ASSERT\_DOUBLE\_EQ(5.0,\ vec2.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00035}00035\ \ \ \ \ ASSERT\_DOUBLE\_EQ(1.0,\ vec2.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a48b6ff16588e7fe467c14a24049147e9}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00036}00036\ \ \ \ \ ASSERT\_DOUBLE\_EQ(6.0,\ vec2.z);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00039}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a30df729cbfb3b2d094c06a07cf2d8eb2}{00039}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_ConversionConstructor,\ ConversionConstructorCreatesNewVectorWithDemotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00040}00040\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00041}00041\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00042}00042\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0,\ 1.0,\ 6.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00045}00045\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ vec2\ =\ vec1;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00046}00046\ \ \ \ \ vec2.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}}\ =\ 5;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00049}00049\ \ \ \ \ ASSERT\_DOUBLE\_EQ(3.0,\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00050}00050\ \ \ \ \ ASSERT\_DOUBLE\_EQ(1.0,\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00051}00051\ \ \ \ \ ASSERT\_DOUBLE\_EQ(6.0,\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(vec2)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00055}00055\ \ \ \ \ ASSERT\_FLOAT\_EQ(5.0f,\ vec2.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00056}00056\ \ \ \ \ ASSERT\_FLOAT\_EQ(1.0f,\ vec2.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a48b6ff16588e7fe467c14a24049147e9}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00057}00057\ \ \ \ \ ASSERT\_FLOAT\_EQ(6.0f,\ vec2.z);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00058}00058\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00062}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a5ca5bed165a355c8846c3298a024469a}{00062}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Helper,\ vec3Return3DFloatVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00063}00063\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{comment}{//\ Arrange\ \&\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ isCorrectType\ =\ std::is\_same\_v<fgm::vec3,\ fgm::Vector3D<float>>;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00067}00067\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00068}00068\ \ \ \ \ EXPECT\_TRUE(isCorrectType);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00069}00069\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00071}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_ac978db3d8a50ae57114dff1a780d3198}{00071}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Helper,\ dvec3Return3DDoubleVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00072}00072\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00073}00073\ \ \ \ \ \textcolor{comment}{//\ Arrange\ \&\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ isCorrectType\ =\ std::is\_same\_v<fgm::dvec3,\ fgm::Vector3D<double>>;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00077}00077\ \ \ \ \ EXPECT\_TRUE(isCorrectType);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00081}00081\ \textcolor{comment}{/*********************************}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00082}00082\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00083}00083\ \textcolor{comment}{\ *\ \ SIMPLE\ MATH\ OPERATION\ TESTS\ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00084}00084\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00085}00085\ \textcolor{comment}{\ *********************************/}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00087}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_aeb87a62d1469231d7892b9f99fcf43dd}{00087}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Addition,\ VectorPlusVectorReturnsNewVectorWithEachComponentsSummedUp)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00088}00088\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00090}00090\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00091}00091\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(9.0f,\ -\/5.0f,\ 10.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(12.0f,\ -\/5.0f,\ 9.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00095}00095\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec1\ +\ vec2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00097}00097\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00098}00098\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00099}00099\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00101}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a05d5fb069f4d8022f1c006d00223b166}{00101}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Addition,\ VectorPlusEqualsAnotherVectorReturnsFirstVectorWithCorrectValues)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00102}00102\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00103}00103\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00104}00104\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00105}00105\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(9.0f,\ -\/5.0f,\ 10.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00106}00106\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(12.0f,\ -\/5.0f,\ 9.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00108}00108\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00109}00109\ \ \ \ \ vec1\ +=\ vec2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00111}00111\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00112}00112\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec1);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00113}00113\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00115}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a5612f6e319b03714e39bb8adf49304e1}{00115}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Addition,\ VectorPlusVectorOfDifferentTypeReturnsNewVectorWithPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00116}00116\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00117}00117\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00118}00118\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00119}00119\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(9.0,\ -\/5.0,\ 10.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00120}00120\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(12.0,\ -\/5.0,\ 9.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00122}00122\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00123}00123\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec1\ +\ vec2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00125}00125\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00126}00126\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(actual)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00127}00127\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00128}00128\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00130}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a298dbf8d505d734d4f6ab475c30b251e}{00130}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Addition,\ VectorPlusEqualsVectorOfDifferentTypeReturnsNewVectorWithoutPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00131}00131\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00132}00132\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00133}00133\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00134}00134\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(9.0,\ -\/5.0,\ 10.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00135}00135\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(12.0,\ -\/5.0,\ 9.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00137}00137\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00138}00138\ \ \ \ \ vec1\ +=\ vec2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00140}00140\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00141}00141\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(vec1)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00142}00142\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec1);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00143}00143\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00145}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a3a40553602dc9a7014edf1a5f109dac7}{00145}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Subraction,\ VectorSubtraction)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00146}00146\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00147}00147\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00148}00148\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00149}00149\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(9.0f,\ -\/5.0f,\ 10.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00150}00150\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(-\/6.0f,\ 5.0f,\ -\/11.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00152}00152\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00153}00153\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec1\ -\/\ vec2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00155}00155\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00156}00156\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00157}00157\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00159}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a9bda71b9486e005eb52d29582dd745d7}{00159}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Subraction,\ VectorMinusEqualsAnotherVectorReturnsFirstVectorWithCorrectValues)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00160}00160\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00161}00161\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00162}00162\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00163}00163\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(9.0f,\ -\/5.0f,\ 10.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00164}00164\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(-\/6.0f,\ 5.0f,\ -\/11.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00166}00166\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00167}00167\ \ \ \ \ vec1\ -\/=\ vec2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00169}00169\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00170}00170\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec1);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00171}00171\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00173}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_abb69b24337452de0290e7ff9605a02c4}{00173}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Subraction,\ VectorMinusVectorOfDifferentTypeReturnsNewVectorWithPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00174}00174\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00175}00175\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00176}00176\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00177}00177\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(9.0,\ -\/5.0,\ 10.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00178}00178\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(-\/6.0,\ 5.0,\ -\/11.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00180}00180\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00181}00181\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec1\ -\/\ vec2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00183}00183\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00184}00184\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(actual)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00185}00185\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00186}00186\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00188}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a5f1b5c62fac107b814c3eab82e0fee01}{00188}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Subraction,\ VectorMinusEqualsVectorOfDifferentTypeReturnsNewVectorWithoutPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00189}00189\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00190}00190\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00191}00191\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00192}00192\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(9.0,\ -\/5.0,\ 10.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00193}00193\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(-\/6.0,\ 5.0,\ -\/11.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00195}00195\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00196}00196\ \ \ \ \ vec1\ -\/=\ vec2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00198}00198\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00199}00199\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(vec1)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00200}00200\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec1);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00201}00201\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00203}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a3ae4236c2f3d8e589b07145645b7e69b}{00203}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ VectorTimesZeroIsZero)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00204}00204\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00205}00205\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00206}00206\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00208}00208\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00209}00209\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ result\ =\ vec\ *\ 0;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00211}00211\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00212}00212\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{EXPECT\_VEC\_ZERO}}(result);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00213}00213\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00215}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a5f40c4d58a5f4c2140e49dc498d298cb}{00215}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ VectorTimesOneIsItself)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00216}00216\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00217}00217\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00218}00218\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00220}00220\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00221}00221\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ result\ =\ vec\ *\ 1;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00223}00223\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00224}00224\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(vec,\ result);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00225}00225\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00227}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_ad83c0bca96911ed71f9e4a52d3bad0c5}{00227}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ VectorTimesAnIntegerIsANewVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00228}00228\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00229}00229\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00230}00230\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00231}00231\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(6.0f,\ 2.0f,\ 12.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00232}00232\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ scalar\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00234}00234\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00235}00235\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec\ *\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00237}00237\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00238}00238\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00239}00239\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00241}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a84788e1a31ddcd1136a7324bde5d67a2}{00241}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ VectorTimesAFloatIsANewVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00242}00242\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00243}00243\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00244}00244\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00245}00245\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(6.0f,\ 2.0f,\ 12.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00246}00246\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ scalar\ =\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00248}00248\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00249}00249\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec\ *\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00251}00251\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00252}00252\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00253}00253\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00255}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a67c34272abe24b31159f548e38d8d3fa}{00255}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ IntegerTimesAVectorIsANewVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00256}00256\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00257}00257\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00258}00258\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00259}00259\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(6.0f,\ 2.0f,\ 12.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00260}00260\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ scalar\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00262}00262\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00263}00263\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ scalar\ *\ vec;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00265}00265\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00266}00266\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00267}00267\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00269}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_aaa3412a0b75002b7229d4f19ddf349d1}{00269}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ VectorTimesEqualAScalarIsSameVectorWithNewValues)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00270}00270\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00271}00271\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00272}00272\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00273}00273\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(6.0f,\ 2.0f,\ 12.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00274}00274\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ scalar\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00276}00276\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00277}00277\ \ \ \ \ vec\ *=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00279}00279\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00280}00280\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00281}00281\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00283}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a357a07129f5a379ab88abfd5099b75f9}{00283}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ VectorTimesEqualAScalarFloatIsSameVectorWithNewValues)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00284}00284\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00285}00285\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00286}00286\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00287}00287\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(6.0f,\ 2.0f,\ 12.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00288}00288\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ scalar\ =\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00290}00290\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00291}00291\ \ \ \ \ vec\ *=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00293}00293\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00294}00294\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00295}00295\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00297}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_aaa01929697a5cf761afe9d979094f54c}{00297}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ VectorTimesAScalarDoubleIsReturnsVectorWithoutPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00298}00298\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00299}00299\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00300}00300\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00301}00301\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(6.0f,\ 2.0f,\ 12.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00302}00302\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 2.0;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00304}00304\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00305}00305\ \ \ \ \ vec\ *=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00307}00307\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00308}00308\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(vec)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00309}00309\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00310}00310\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00312}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a948a423e4d0b33e96c3c63ea24d296ae}{00312}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ VectorTimesEqualAScalarDoubleIsSameVectorWithPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00313}00313\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00314}00314\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00315}00315\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00316}00316\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(6.0f,\ 2.0f,\ 12.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00317}00317\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 2.0;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00319}00319\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00320}00320\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ actual\ =\ scalar\ *\ vec;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00322}00322\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00323}00323\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(actual)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00324}00324\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00325}00325\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00327}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a429f2224a88c2e458322c2b06f3de19a}{00327}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Product,\ IntegerVectorTimesEqualAScalarFloatReturnsInMinimalPrecisionLoss)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00328}00328\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00329}00329\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00330}00330\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(2,\ 4,\ 8);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00331}00331\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(5.0f,\ 10.0f,\ 20.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00332}00332\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 2.5;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00334}00334\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00335}00335\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ actual\ =\ scalar\ *\ vec;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00337}00337\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00338}00338\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(actual)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00339}00339\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00340}00340\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00342}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a8e66630535ca5461ef6b630c359d17e0}{00342}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Division,\ VectorDividedByZeroIsInfinity)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00343}00343\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00344}00344\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00345}00345\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00347}00347\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00348}00348\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ result\ =\ vec\ /\ 0;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00350}00350\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00351}00351\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af3e3755befec4337ccefebe35e82acc5}{EXPECT\_VEC\_INF}}(result);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00352}00352\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00354}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_ad4e82201fa69df2a4d39b4b2c6d584b0}{00354}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Division,\ VectorDividedByOneIsItself)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00355}00355\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00356}00356\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00357}00357\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00359}00359\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00360}00360\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ result\ =\ vec\ /\ 1;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00362}00362\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00363}00363\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(vec,\ result);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00364}00364\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00366}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_af0f704b44b4a82b42aa71d96873365a9}{00366}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Division,\ VectorDividedByANumberIsANewVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00367}00367\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00368}00368\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00369}00369\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00370}00370\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(1.5f,\ 0.5f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00371}00371\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ scalar\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00372}00372\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00373}00373\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec\ /\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00375}00375\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00376}00376\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00377}00377\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00379}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a0f9d6914c5538ec520206466d346b9d4}{00379}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Division,\ VectorDividedByAFloatIsANewVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00380}00380\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00381}00381\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00382}00382\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00383}00383\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(1.5f,\ 0.5f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00384}00384\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ scalar\ =\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00385}00385\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00386}00386\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec\ /\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00387}00387\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00388}00388\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00389}00389\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00390}00390\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00391}00391\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00392}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a6f54c3ead5b6630e0fde37355a4b9f71}{00392}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Division,\ VectorDivideEqualAScalarIsSameVectorWithNewValues)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00393}00393\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00394}00394\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00395}00395\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00396}00396\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(1.5f,\ 0.5f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00397}00397\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ scalar\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00399}00399\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00400}00400\ \ \ \ \ vec\ /=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00402}00402\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00403}00403\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00404}00404\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00406}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_aa8f870bb6c49b4234416bda4c20ece30}{00406}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Division,\ VectorDivideEqualAFloatIsSameVectorWithNewValues)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00407}00407\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00408}00408\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00409}00409\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00410}00410\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(1.5f,\ 0.5f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00411}00411\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ scalar\ =\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00412}00412\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00413}00413\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00414}00414\ \ \ \ \ vec\ /=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00416}00416\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00417}00417\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00418}00418\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00419}00419\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00420}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a0f415cc61c1ca2800ca6f4e99c0ac813}{00420}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Division,\ VectorDivideEqualADoubleScalarIsSameVectorWithoutPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00421}00421\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00422}00422\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00423}00423\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00424}00424\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(1.5f,\ 0.5f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00425}00425\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 2.0;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00427}00427\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00428}00428\ \ \ \ \ vec\ /=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00430}00430\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00431}00431\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(vec)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00432}00432\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00433}00433\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00434}00434\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00435}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a346fbaa4d8770d26d70a95cc880c9226}{00435}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Division,\ VectorDividedByADoubleScalarIsAVectorWithPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00436}00436\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00437}00437\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00438}00438\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00439}00439\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(1.5f,\ 0.5f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00440}00440\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 2.0;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00442}00442\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00443}00443\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ actual\ =\ vec\ /\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00445}00445\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00446}00446\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(actual)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00447}00447\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00448}00448\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00450}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a8bd86975e44bdf7ae239badbc55429df}{00450}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Division,\ IntegerVectorDividedByAScalarFloatResultsInMinimalPrecisionLoss)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00451}00451\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00452}00452\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00453}00453\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(2,\ 4,\ 8);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00454}00454\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(4.0,\ 8.0,\ 16.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00455}00455\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 0.5;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00456}00456\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00457}00457\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00458}00458\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ actual\ =\ vec\ /\ scalar;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00459}00459\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00460}00460\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00461}00461\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(actual)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00462}00462\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00463}00463\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00464}00464\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00465}00465\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00466}00466\ \textcolor{comment}{/***************************************}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00467}00467\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00468}00468\ \textcolor{comment}{\ *\ \ MAGNITUDE\ AND\ NORMALIZATION\ TESTS\ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00469}00469\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00470}00470\ \textcolor{comment}{\ ***************************************/}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00471}00471\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00472}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a03d77a614f98b6be151e3ea588669bd6}{00472}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Magnitude,\ ZeroVectorReturnsMagnitudeZero)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00473}00473\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00474}00474\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00475}00475\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00476}00476\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00477}00477\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00478}00478\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ magnitude\ =\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a7b71db3dc802dbca471cdac2ec879812}{mag}}();}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00479}00479\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00480}00480\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00481}00481\ \ \ \ \ EXPECT\_FLOAT\_EQ(0.0f,\ magnitude);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00482}00482\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00483}00483\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00484}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a70fc3c81967e3eee0d5385be891c4dfc}{00484}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Magnitude,\ OneVectorReturnsMagnitudeNotEqualToOne)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00485}00485\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00486}00486\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00487}00487\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(1.0f,\ 1.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00488}00488\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00489}00489\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00490}00490\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ magnitude\ =\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a7b71db3dc802dbca471cdac2ec879812}{mag}}();}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00491}00491\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00492}00492\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00493}00493\ \ \ \ \ EXPECT\_NE(1.0f,\ magnitude);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00494}00494\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00495}00495\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00496}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a064e621a54d2642bae743cae5d22eb9f}{00496}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Magnitude,\ NonUnitVectorReturnsCorrectMagnitude)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00497}00497\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00498}00498\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00499}00499\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(2.0f,\ 3.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00500}00500\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00501}00501\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00502}00502\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ magnitude\ =\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a7b71db3dc802dbca471cdac2ec879812}{mag}}();}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00503}00503\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00504}00504\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00505}00505\ \ \ \ \ EXPECT\_FLOAT\_EQ(7.0f,\ magnitude);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00506}00506\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00508}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a9a045a0eaf9bb9e3bf80b9ba2aa1c995}{00508}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Normalization,\ VectorWhenNormalizedReturnsANormalVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00509}00509\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00510}00510\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00511}00511\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(0.0f,\ 3.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00512}00512\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(0.0f,\ 0.6f,\ 0.8f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00513}00513\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00514}00514\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00515}00515\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ normalized\ =\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a1ba3251f712f1691ca7518543d7922c9}{normalize}}();}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00517}00517\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00518}00518\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ normalized);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00519}00519\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00520}00520\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00522}00522\ \textcolor{comment}{/*********************************}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00523}00523\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00524}00524\ \textcolor{comment}{\ *\ \ DOT\ AND\ CROSS\ PRODUCT\ TESTS\ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00525}00525\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00526}00526\ \textcolor{comment}{\ *********************************/}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00528}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_ac1c764eaac6f4a93c72e7e3894a817db}{00528}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Dot,\ VectorWhenDotWithItselfReturnsOne)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00529}00529\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00530}00530\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00531}00531\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00532}00532\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00533}00533\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00534}00534\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ res\ =\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{dot}}(vec);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00535}00535\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00536}00536\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00537}00537\ \ \ \ \ EXPECT\_FLOAT\_EQ(1.0f,\ res);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00538}00538\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00539}00539\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00540}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_ad14a0aa51bbfcd22c2c1e2d9e2d977d5}{00540}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Dot,\ VectorWhenDotWithOrthogonalVectorReturnZero)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00541}00541\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00542}00542\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00543}00543\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00544}00544\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(0.0f,\ 1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00545}00545\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00546}00546\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00547}00547\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ res\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{dot}}(vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00548}00548\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00549}00549\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00550}00550\ \ \ \ \ EXPECT\_FLOAT\_EQ(0.0f,\ res);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00551}00551\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00552}00552\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00553}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a1dd6d2cc46e90eae773e34580e9fbf7f}{00553}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Dot,\ VectorWhenDotWithOppositeParallelVectorReturnsNegativeOne)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00554}00554\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00555}00555\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00556}00556\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00557}00557\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(-\/1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00558}00558\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00559}00559\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00560}00560\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ res\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{dot}}(vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00561}00561\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00562}00562\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00563}00563\ \ \ \ \ EXPECT\_FLOAT\_EQ(-\/1.0f,\ res);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00564}00564\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00565}00565\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00566}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a6f5a32a4a3c6707d8571b7c08338dfc1}{00566}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Dot,\ VectorWhenDotWithAnotherNonOrthogonalVectorReturnsNonZeroNumber)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00567}00567\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00568}00568\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00569}00569\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ vec1(1.0f,\ 2.0f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00570}00570\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ vec2(4.0f,\ -\/5.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00571}00571\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00572}00572\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00573}00573\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ res\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{dot}}(vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00575}00575\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00576}00576\ \ \ \ \ EXPECT\_FLOAT\_EQ(12.0,\ res);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00577}00577\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00578}00578\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00579}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_afc28dc0456d69e5b48ce0841f150c77c}{00579}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Dot,\ VectorWhenStaticWrapperDotWithAnotherNonOrthogonalVectorReturnsNonZeroNumber)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00580}00580\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00581}00581\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00582}00582\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(1.0f,\ 2.0f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00583}00583\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(4.0f,\ -\/5.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00584}00584\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00585}00585\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00586}00586\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ res\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{fgm::Vector3D<float>::dot}}(vec1,\ vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00587}00587\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00588}00588\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00589}00589\ \ \ \ \ EXPECT\_FLOAT\_EQ(12.0,\ res);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00590}00590\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00591}00591\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00592}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a74e38cfd85977366970d4c9504e8c285}{00592}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Dot,\ VectorWhenDotWithAnotherNonOrthogonalVectorOfDifferentTypeReturnsNonZeroNumberWithPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00593}00593\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00594}00594\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00595}00595\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(1.0f,\ 2.0f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00596}00596\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(4.0,\ -\/5.0,\ 6.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00597}00597\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00598}00598\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00599}00599\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ res\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{dot}}(vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00600}00600\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00601}00601\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00602}00602\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(res),\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00603}00603\ \ \ \ \ EXPECT\_DOUBLE\_EQ(12.0,\ res);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00604}00604\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00605}00605\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00606}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a4a4c18eb9bda68d3f61ca7a569cfed0d}{00606}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Cross,\ UnitXVectorWhenCrossWithUnitYVectorReturnsUnitZVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00607}00607\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00608}00608\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00609}00609\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00610}00610\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(0.0f,\ 1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00611}00611\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(0.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00612}00612\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00613}00613\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00614}00614\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{cross}}(vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00615}00615\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00616}00616\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00617}00617\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00618}00618\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00619}00619\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00620}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a9e85bfac37c6175360c0cef5015c5d55}{00620}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Cross,\ UnitYVectorWhenCrossWithUnitXVectorReturnsUnitNegativeZVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00621}00621\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00622}00622\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00623}00623\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(0.0f,\ 1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00624}00624\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00625}00625\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(0.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00626}00626\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00627}00627\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00628}00628\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{cross}}(vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00629}00629\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00630}00630\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00631}00631\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00632}00632\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00633}00633\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00634}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a160b79cf43abd72b86399381ff8bf44f}{00634}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Cross,\ UnitZVectorWhenCrossWithUnitYVectorReturnsUnitNegativeVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00635}00635\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00636}00636\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00637}00637\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(0.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00638}00638\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(0.0f,\ 1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00639}00639\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(-\/1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00640}00640\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00641}00641\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00642}00642\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{cross}}(vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00643}00643\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00644}00644\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00645}00645\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00646}00646\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00647}00647\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00648}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_af0cc71f5257c4a40b01e7554c5b40f20}{00648}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Cross,\ UnitVectorCrossWithItselfReturnZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00649}00649\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00650}00650\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00651}00651\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(0.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00652}00652\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00653}00653\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00654}00654\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00655}00655\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00656}00656\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{cross}}(vec);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00657}00657\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00658}00658\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00659}00659\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00660}00660\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00661}00661\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00662}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a6e46ebbe1f2a47e108b8bfca1b207a6d}{00662}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Cross,\ VectorCrossWithAnotherNonParallelVectorReturnsNewPerpendicularVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00663}00663\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00664}00664\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00665}00665\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(2.0f,\ 3.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00666}00666\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(5.0f,\ 6.0f,\ 7.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00667}00667\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00668}00668\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(-\/3.0f,\ 6.0f,\ -\/3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00669}00669\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00670}00670\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00671}00671\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{cross}}(vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00672}00672\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00673}00673\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00674}00674\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00675}00675\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00676}00676\ \ \ \ \ \textcolor{comment}{//\ Orientation\ Check:\ Dot\ must\ be\ zero}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00677}00677\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ dotProduct1\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{dot}}(actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00678}00678\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ dotProduct2\ =\ vec2.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a9fb9b12691d86cbeb442b234fe56ed7e}{dot}}(actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00679}00679\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00680}00680\ \ \ \ \ EXPECT\_FLOAT\_EQ(0.0,\ dotProduct1);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00681}00681\ \ \ \ \ EXPECT\_FLOAT\_EQ(0.0,\ dotProduct2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00682}00682\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00683}00683\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00684}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a67b6444f73b789dddedbe4aae6a31c68}{00684}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Cross,\ VectorCrossStaticWrapperWithAnotherNonParallelVectorReturnsNewPerpendicularVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00685}00685\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00686}00686\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00687}00687\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(2.0f,\ 3.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00688}00688\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(5.0f,\ 6.0f,\ 7.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00689}00689\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00690}00690\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(-\/3.0f,\ 6.0f,\ -\/3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00691}00691\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00692}00692\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00693}00693\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{fgm::Vector3D<float>::cross}}(vec1,\ vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00694}00694\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00695}00695\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00696}00696\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00697}00697\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00698}00698\ \ \ \ \ \textcolor{comment}{//\ Orientation\ Check:\ Dot\ must\ be\ zero}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00699}00699\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ dotProduct1\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{fgm::Vector3D<float>::dot}}(vec1,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00700}00700\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ dotProduct2\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{fgm::Vector3D<float>::dot}}(vec2,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00701}00701\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00702}00702\ \ \ \ \ EXPECT\_FLOAT\_EQ(0.0f,\ dotProduct1);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00703}00703\ \ \ \ \ EXPECT\_FLOAT\_EQ(0.0f,\ dotProduct2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00704}00704\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00705}00705\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00706}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a35c7bfbff276cc21edce9756251d79e4}{00706}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Cross,\ VectorCrossProductsAreAntiCommutative)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00707}00707\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00708}00708\ \ \ \ \ \textcolor{comment}{//\ vec1\ x(cross)\ vec2\ =\ -\/\ (vec2\ x\ vec1)}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00709}00709\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00710}00710\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(2.0f,\ 3.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00711}00711\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(3.0f,\ 5.0f,\ 9.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00712}00712\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00713}00713\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00714}00714\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ result1\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{fgm::Vector3D<float>::cross}}(vec1,\ vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00715}00715\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ result2\ =\ -\/1.0f\ *\ (\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{fgm::Vector3D<float>::cross}}(vec2,\ vec1));}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00716}00716\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00717}00717\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00718}00718\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(result1,\ result2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00719}00719\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00720}00720\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00721}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a1d7f7fd13cc6932693a2c2eb88602330}{00721}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Cross,\ VectorCrossProductsOfScalarMultiplesAreCommutative)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00722}00722\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00723}00723\ \ \ \ \ \textcolor{comment}{//\ vec1\ x(cross)\ vec2\ =\ vec2\ x\ vec1,\ given\ vec2\ =\ a\ *\ vec1}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00724}00724\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00725}00725\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(2.0f,\ 3.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00726}00726\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2\ =\ vec1\ *\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00727}00727\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00728}00728\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00729}00729\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ result1\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{fgm::Vector3D<float>::cross}}(vec1,\ vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00730}00730\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ result2\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{fgm::Vector3D<float>::cross}}(vec2,\ vec1);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00731}00731\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00732}00732\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00733}00733\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(result1,\ result2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00734}00734\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00735}00735\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00736}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a83e84ade0d2720e07ac5fb6b48e3b2de}{00736}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Cross,}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00737}00737\ \ \ \ \ \ VectorCrossWithAnotherNonParallelVectorOfDifferentTypeReturnsNewPerpendicularVectorWithPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00738}00738\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00739}00739\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00740}00740\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(2.0f,\ 3.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00741}00741\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec2(5.0,\ 6.0,\ 7.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00742}00742\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00743}00743\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expected(-\/3.0,\ 6.0,\ -\/3.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00744}00744\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00745}00745\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00746}00746\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actual\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{cross}}(vec2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00747}00747\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00748}00748\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00749}00749\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(actual)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00750}00750\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00751}00751\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00752}00752\ \ \ \ \ \textcolor{comment}{//\ Orientation\ Check:\ Dot\ must\ be\ zero}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00753}00753\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ dotProduct1\ =\ vec1.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{dot}}(actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00754}00754\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ dotProduct2\ =\ vec2.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a9fb9b12691d86cbeb442b234fe56ed7e}{dot}}(actual);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00755}00755\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00756}00756\ \ \ \ \ EXPECT\_DOUBLE\_EQ(0.0,\ dotProduct1);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00757}00757\ \ \ \ \ EXPECT\_DOUBLE\_EQ(0.0,\ dotProduct2);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00758}00758\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00759}00759\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00760}00760\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00761}00761\ \textcolor{comment}{/************************************}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00762}00762\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00763}00763\ \textcolor{comment}{\ *\ \ PROJECTION\ AND\ REJECTION\ TESTS\ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00764}00764\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00765}00765\ \textcolor{comment}{\ ************************************/}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00766}00766\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00767}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a3b60f891ccd4a81d03ae9252238c6600}{00767}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Projection,\ ParallelVectorsWhenProjectedReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00768}00768\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00769}00769\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00770}00770\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(1.0f,\ 2.0f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00771}00771\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(2.0f,\ 4.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00772}00772\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedProjection(1.0f,\ 2.0f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00773}00773\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00774}00774\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00775}00775\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90}{project}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00776}00776\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00777}00777\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00778}00778\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00779}00779\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00780}00780\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00781}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_af51606d32320b75b635eeb442c594e32}{00781}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Projection,\ PerpendicularVectorsWhenProjectedReturnsZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00782}00782\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00783}00783\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00784}00784\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00785}00785\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(0.0f,\ 1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00786}00786\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedProjection(0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00787}00787\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00788}00788\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00789}00789\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90}{project}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00790}00790\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00791}00791\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00792}00792\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00793}00793\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00794}00794\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00795}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a8de7240f6c95e7c00c288d99673eeb9e}{00795}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Projection,\ VectorsWhenProjectedReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00796}00796\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00797}00797\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00798}00798\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(2.0f,\ 1.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00799}00799\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(1.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00800}00800\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedProjection(0.5f,\ 0.0f,\ 0.5f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00801}00801\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00802}00802\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00803}00803\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90}{project}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00804}00804\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00805}00805\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00806}00806\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00807}00807\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00808}00808\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00809}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_ac9bc8b1369636d1e2b616ab898b7ccbf}{00809}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Projection,\ VectorsWhenProjectedOntoNormalizedVectorReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00810}00810\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00811}00811\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00812}00812\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(10.0f,\ 5.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00813}00813\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(0.8f,\ 0.6f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00814}00814\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedProjection(8.8f,\ 6.6f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00815}00815\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00816}00816\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00817}00817\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90}{project}}(b,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00818}00818\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00819}00819\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00820}00820\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00821}00821\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00822}00822\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00823}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a010b0a9d7921e7873fdb286088f5d4f8}{00823}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Projection,\ VectorsWhenProjectedOntoNegativeVectorReturnsNonZeroVectorInSameDirection)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00824}00824\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00825}00825\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00826}00826\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(4.0f,\ 4.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00827}00827\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(0.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00828}00828\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedProjection(0.0f,\ 0.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00829}00829\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00830}00830\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00831}00831\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90}{project}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00832}00832\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00833}00833\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00834}00834\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00835}00835\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00836}00836\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00837}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_aa851567fa2718347e5ac79778db8a102}{00837}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Projection,\ VectorsWhenProjectedUsingStaticWrapperReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00838}00838\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00839}00839\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00840}00840\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(2.0f,\ 1.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00841}00841\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(1.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00842}00842\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedProjection(0.5f,\ 0.0f,\ 0.5f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00843}00843\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00844}00844\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00845}00845\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualProjection\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90}{fgm::Vector3D<float>::project}}(a,\ b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00846}00846\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00847}00847\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00848}00848\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00849}00849\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00850}00850\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00851}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a7af54fb95d0adcc5b8fbed00572c9a0b}{00851}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Projection,\ VectorsWhenProjectedOntoVectorOfDifferentTypeReturnsVectorWithPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00852}00852\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00853}00853\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00854}00854\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(2.0f,\ 1.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00855}00855\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(1.0,\ 0.0,\ 1.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00856}00856\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedProjection(0.5,\ 0.0,\ 0.5);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00857}00857\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00858}00858\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00859}00859\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90}{project}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00860}00860\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00861}00861\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00862}00862\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(actualProjection)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00863}00863\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00864}00864\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00865}00865\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00866}00866\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00867}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a34e1336069af2151eb43a80858cce127}{00867}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Rejection,\ ParallelVectorsWhenRejectedReturnsZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00868}00868\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00869}00869\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00870}00870\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(1.0f,\ 2.0f,\ 3.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00871}00871\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(2.0f,\ 4.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00872}00872\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedRejection(0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00873}00873\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00874}00874\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00875}00875\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e}{reject}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00876}00876\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00877}00877\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00878}00878\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00879}00879\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00880}00880\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00881}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a68067f924e953ee9f403b141b6814caa}{00881}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Rejection,\ PerpendicularVectorsWhenRejectedReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00882}00882\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00883}00883\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00884}00884\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00885}00885\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(0.0f,\ 1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00886}00886\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedRejection(1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00887}00887\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00888}00888\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00889}00889\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e}{reject}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00890}00890\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00891}00891\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00892}00892\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00893}00893\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00894}00894\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00895}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a84bd5e217bb3352d740f93c84f3028f3}{00895}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Rejection,\ VectorsWhenRejectedReturnNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00896}00896\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00897}00897\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00898}00898\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(2.0f,\ 1.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00899}00899\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(1.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00900}00900\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedRejection(1.5f,\ 1.0f,\ -\/1.5f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00901}00901\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00902}00902\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00903}00903\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e}{reject}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00904}00904\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00905}00905\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00906}00906\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00907}00907\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00908}00908\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00909}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a8251d3285f7d5a6865b26a1de66a0973}{00909}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Rejection,\ VectorsWhenRejectedOntoNormalizedVectorReturnNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00910}00910\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00911}00911\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00912}00912\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(10.0f,\ 5.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00913}00913\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(0.8f,\ 0.6f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00914}00914\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedRejection(1.2f,\ -\/1.6f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00915}00915\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00916}00916\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00917}00917\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e}{reject}}(b,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00918}00918\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00919}00919\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00920}00920\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00921}00921\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00922}00922\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00923}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_abdc7b077c7f1d06b86bc10328f6c6e06}{00923}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Rejection,\ PositiveVectorsWhenRejectedOntoNegativeVectorReturnsNonZeroPositiveVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00924}00924\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00925}00925\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00926}00926\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(4.0f,\ 4.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00927}00927\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(0.0f,\ 0.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00928}00928\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedRejection(4.0f,\ 4.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00929}00929\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00930}00930\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00931}00931\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e}{reject}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00932}00932\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00933}00933\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00934}00934\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00935}00935\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00936}00936\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00937}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_ac7b0af23eb5ad4d453ef165b79e48dab}{00937}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Rejection,\ VectorsWhenRejectedUsingStaticWrapperReturnNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00938}00938\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00939}00939\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00940}00940\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(2.0f,\ 1.0f,\ -\/1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00941}00941\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(1.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00942}00942\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedRejection(1.5f,\ 1.0f,\ -\/1.5f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00943}00943\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00944}00944\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00945}00945\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ actualRejection\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e}{fgm::Vector3D<float>::reject}}(a,\ b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00946}00946\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00947}00947\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00948}00948\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00949}00949\ \}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00950}00950\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00951}\doxymbox{\hyperlink{_vector3_d_tests_8cpp_a5a0e92708dd7a85ef036e0538f8cc7c4}{00951}}\ \doxymbox{\hyperlink{_vector3_d_tests_8cpp_abf70696c7a7782b231eac9eab7a9c431}{TEST}}(Vector3D\_Rejection,\ VectorsWhenRejectedOntoVectorOfDifferentTypeReturnsVectorWithPromotedType)}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00952}00952\ \{}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00953}00953\ \ \ \ \ \textcolor{comment}{//\ Arrange}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00954}00954\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ a(4.0f,\ 4.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00955}00955\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ b(0.0,\ 0.0,\ -\/1.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00956}00956\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ expectedRejection(4.0,\ 4.0,\ 0.0);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00957}00957\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00958}00958\ \ \ \ \ \textcolor{comment}{//\ Act}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00959}00959\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e}{reject}}(b);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00960}00960\ }
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00961}00961\ \ \ \ \ \textcolor{comment}{//\ Assert}}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00962}00962\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(actualRejection)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00963}00963\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_vector3_d_tests_8cpp_source_l00964}00964\ \}}
+
+\end{DoxyCode}

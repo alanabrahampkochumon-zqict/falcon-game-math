@@ -1,0 +1,819 @@
+\doxysection{test-\/suite/\+src/\+vectors/\+\+Vector2\+DTests.cpp File Reference}
+\hypertarget{_vector2_d_tests_8cpp}{}\label{_vector2_d_tests_8cpp}\index{test-\/suite/src/vectors/Vector2DTests.cpp@{test-\/suite/src/vectors/Vector2DTests.cpp}}
+{\ttfamily \+\#include "{}utils/\+\+Matrix\+Utils.\+h"{}}\newline
+{\ttfamily \+\#include "{}utils/\+\+Vector\+Utils.\+h"{}}\newline
+{\ttfamily \+\#include $<$gtest/\+gtest.\+h$>$}\newline
+{\ttfamily \+\#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \+\#include $<$vector/\+\+Vector2\+D.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_ac4584952f7b3aae583d77a5c38a6986a}{TEST}} (Vector2\+D\+\_\+\+Initialization, Empty\+Constructor\+Initializes\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a5234cca20388316fadb097ab50dfd3c3}{TEST}} (Vector2\+D\+\_\+\+Initialization, Intialization\+With\+Integers\+Supported)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a9b12e9fb001bfa96cb3c58e2f48e8754}{TEST}} (Vector2\+D\+\_\+\+Initialization, Constructor\+Parameters\+Initializes\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_accdafea06fec6ae750fa34d8c7c0d8a1}{TEST}} (Vector2\+D\+\_\+\+Conversion\+Contructor, Conversion\+Constructor\+Creates\+New\+Vector\+With\+Promoted\+Type)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_aaf898e9883b21d6fd409a575aa6709b6}{TEST}} (Vector2\+D\+\_\+\+Conversion\+Contructor, Conversion\+Constructor\+Creates\+New\+Vector\+With\+Demoted\+Type)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_ab855c24c36159e67b7da3ee0aaf005c9}{TEST}} (Vector2\+D\+\_\+\+Access, Accessible\+As\+XYZ)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a80955a8338ac89908a97d8a163d5ae17}{TEST}} (Vector2\+D\+\_\+\+Access, Accessible\+As\+STP)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a7aede284930713caa6bec50936e56711}{TEST}} (Vector2\+D\+\_\+\+Access, Accessible\+As\+RGB)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a1239eabb74dad1e146b08fd64c46abba}{TEST}} (Vector2\+D\+\_\+\+Access, Accessible\+As\+Array)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a50af6220c3f7e4dad5cb77f54eb40d73}{TEST}} (Vector2\+D\+\_\+\+Access, Index\+Based\+Assignment\+And\+Retrival\+Support)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a4f69cad160387835524f96cedb80bf78}{TEST}} (Vector2\+D\+\_\+\+Access, vec2\+Return2\+DFloat\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a16af4f57cd885d360e5d14ba788a4db5}{TEST}} (Vector2\+D\+\_\+\+Access, dvec2\+Return2\+DDouble\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a9e2bf7cc4d17c77cf326d27071e46782}{TEST}} (Vector2\+D\+\_\+\+Addition, Vector\+Plus\+Vector\+Returns\+Correct\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a186632eb01445ebd03956c766e507a10}{TEST}} (Vector2\+D\+\_\+\+Addition, Vector\+Plus\+Equals\+Another\+Vector\+Returns\+First\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_adcc961a14605880b9f210d70a7cc4add}{TEST}} (Vector2\+D\+\_\+\+Addition, Vector\+Plus\+Vector\+Of\+Different\+Types\+Returns\+Vector\+With\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a125a2912c5d7d0b5daa0ab5218ab1c05}{TEST}} (Vector2\+D\+\_\+\+Addition, Vector\+Plus\+Equals\+Vector\+Of\+Different\+Types\+Returns\+Vector\+With\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a4403a1d31f56d3037e14cbae15404f18}{TEST}} (Vector2\+D\+\_\+\+Subraction, Vector\+Minus\+Vector\+Returns\+Correct\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a2c8a2655e5a1f94b9d3c4ea22c5cb1c1}{TEST}} (Vector2\+D\+\_\+\+Subraction, Vector\+Minus\+Equals\+Another\+Vector\+Returns\+First\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_aadda852632590427c8cf77e44e9b502a}{TEST}} (Vector2\+D\+\_\+\+Subraction, Vector\+Minus\+Vector\+Of\+Different\+Type\+Returns\+Vector\+With\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a74f901632fcaa49a0170c4cb06506416}{TEST}} (Vector2\+D\+\_\+\+Subraction, Vector\+Minus\+Equals\+Another\+Vector\+With\+Different\+Type\+Returns\+First\+Vector\+Without\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a01ff6dcd1f1415d734b22da2a422df84}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Vector\+Times\+Zero\+Is\+Zero)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_adfe64e6361628d8e56be6ea58a315a6c}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Vector\+Times\+One\+Is\+Itself)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_afe331e5d81a48ad1130c9524dc0a6b0d}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Vector\+Times\+ANumber\+Is\+ANew\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a3d42265d6c5d29dc030f96cd40a1a5be}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Vector\+Times\+AFloat\+Is\+ANew\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a8f219a52c56170c2e0d2f1ae9b483726}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Number\+Times\+AVector\+Is\+ANew\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_ac215952078d70f6840ddbfb8f7df8d28}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Vector\+Times\+Equal\+AScalar\+Is\+Same\+Vector\+With\+New\+Values)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a8cbeebcc75864ccf5d3b3ce0f2e4c69f}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Vector\+Times\+Equal\+AScalar\+Float\+Is\+Same\+Vector\+With\+New\+Values)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a3db4fab5de310129c3af9da3e0ed32eb}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Vector\+Times\+Equal\+ADouble\+Scalar\+Is\+Same\+Vector\+Without\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_aceb6e5a4eecf25e5634f373487d7fcee}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Float\+Vector\+Times\+ADouble\+Scalar\+Returns\+Vector\+With\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_ad3f57ed869d420df2d4a23e50bbd02f7}{TEST}} (Vector2\+D\+\_\+\+Mutliplication, Integer\+Vector\+Times\+Equal\+ADouble\+Scalar\+Returns\+Vector\+With\+Minimal\+Precision\+Loss)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a2cdfefb5cdae7bdea52babd072b0bb41}{TEST}} (Vector2\+D\+\_\+\+Division, Vector\+Divided\+By\+Zero\+Is\+Infinity\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a0f82a67b81efda80d6d703473263a771}{TEST}} (Vector2\+D\+\_\+\+Division, Vector\+Divided\+Returns\+Vector\+With\+Same\+Values)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a0e825d9349a443f4efc60fc6999be8f1}{TEST}} (Vector2\+D\+\_\+\+Division, Vector\+Divided\+By\+ANumber\+Returns\+ANew\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a2fc4d4288471cc61958af535992e0bd1}{TEST}} (Vector2\+D\+\_\+\+Division, Vector\+Divided\+By\+AFloat\+Returns\+ANew\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a3cf0f709e2b99aa183613243572105e8}{TEST}} (Vector2\+D\+\_\+\+Division, Vector\+Divides\+Equal\+AScalar\+Is\+Same\+Vector\+With\+New\+Values)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_ad2c1a6a1574d00fa8ba5afc9b8855e99}{TEST}} (Vector2\+D\+\_\+\+Division, Vector\+Divides\+Equal\+AFloat\+Is\+Same\+Vector\+With\+New\+Values)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a1d105fd093ea0e7e1d5648507dc278f9}{TEST}} (Vector2\+D\+\_\+\+Division, Vector\+Divides\+Equal\+ADouble\+Is\+Same\+Vector\+Without\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_ab10808e409dd4c921e70f283002d8c02}{TEST}} (Vector2\+D\+\_\+\+Division, Vector\+Divided\+By\+ADouble\+Returns\+Vector\+With\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_ab27a1e98e3d00a30b9277a8ed201af24}{TEST}} (Vector2\+D\+\_\+\+Division, Integer\+Vector\+Divide\+Equals\+AFloat\+Returns\+Vector\+With\+Minimal\+Precision\+Loss)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_af8ce440fb5faf93b223784072d0b1667}{TEST}} (Vector2\+D\+\_\+\+Magnitude, Zero\+Vector\+Returns\+Magnitude\+Zero)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a06bebe0238a0e4fe50a718055be43ab9}{TEST}} (Vector2\+D\+\_\+\+Magnitude, One\+Vector\+Returns\+Magnitude\+Not\+Equal\+To\+One)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a6e36788047a00885a034b9c79220403a}{TEST}} (Vector2\+D\+\_\+\+Magnitude, Non\+Unit\+Vector\+Returns\+Correct\+Magnitude)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a7d5680bacddc7134250322d29606c101}{TEST}} (Vector2\+D\+\_\+\+Normalize, Vector\+When\+Normalized\+Returns\+ANormal\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_abdf15d0ac7a462b8e9bbcd019b9a88cf}{TEST}} (Vector2\+D\+\_\+\+Dot, Vector\+When\+Dot\+With\+Itself\+Returns\+One)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a87027ef2414156c6feb038d306188721}{TEST}} (Vector2\+D\+\_\+\+Dot, Vector\+When\+Dot\+With\+Orthogonal\+Vector\+Return\+Zero)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a8fb90fb42ff7c000db33082fb652ceb5}{TEST}} (Vector2\+D\+\_\+\+Dot, Vector\+When\+Dot\+With\+Opposite\+Parallel\+Vector\+Returns\+Negative\+One)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_aac1c4c074a7c3c884608d57c584ceda7}{TEST}} (Vector2\+D\+\_\+\+Dot, Vector\+When\+Dot\+With\+Another\+Non\+Orthogonal\+Vector\+Returns\+Non\+Zero\+Number)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a42f734b42e4b83f02bce8aea1a57546a}{TEST}} (Vector2\+D\+\_\+\+Dot, Vector\+When\+Static\+Wrapper\+Dot\+With\+Another\+Non\+Orthogonal\+Vector\+Returns\+Non\+Zero\+Number)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_aa29f090cd6b468363789521cb821c7f0}{TEST}} (Vector2\+D\+\_\+\+Dot, Vector\+When\+Dot\+With\+Non\+Orthogonal\+Vector\+Of\+Different\+Type\+Returns\+Number\+With\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a5d05ccd9c9aaf306f54642f6f7f5060a}{TEST}} (Vector2\+D\+\_\+\+Cross, Unit\+XVector\+When\+Cross\+With\+Unit\+YVector\+Returns\+One)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a576dac144de2442cde3f1aa6b5464dac}{TEST}} (Vector2\+D\+\_\+\+Cross, Unit\+YVector\+When\+Cross\+With\+Unit\+XVector\+Returns\+Unit\+Negative\+One)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a47eea25a028622042458dd40f5555198}{TEST}} (Vector2\+D\+\_\+\+Cross, Unit\+Vector\+Cross\+With\+Itself\+Return\+Zero)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_aaf275526ca162a9ce0cee09ccb4f58b9}{TEST}} (Vector2\+D\+\_\+\+Cross, Vector\+Cross\+With\+Another\+Non\+Parallel\+Vector\+Returns\+Pseudo\+Cross\+Product)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a783f95638380ff2223d7fe9c73d0b8a0}{TEST}} (Vector2\+D\+\_\+\+Cross, Vector\+Cross\+Static\+Wrapper\+With\+Another\+Non\+Parallel\+Vector\+Returns\+Pseudo\+Cross\+Product)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a408cd672caad6947bcf78d5ef34d4b3b}{TEST}} (Vector2\+D\+\_\+\+Cross, Vector\+Cross\+With\+Vector\+Of\+Different\+Type\+Returns\+Scalar\+With\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_adf50cab23595121afc44ee7b9e42ff8f}{TEST}} (Vector2\+D\+\_\+\+Projection, Parallel\+Vectors\+When\+Projected\+Returns\+Non\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a40caad0aaf42ef7ad05ae8c22fc2d638}{TEST}} (Vector2\+D\+\_\+\+Projection, Perpendicular\+Vectors\+When\+Projected\+Returns\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a82ccd1aa4b881627c4833dbce6b5a206}{TEST}} (Vector2\+D\+\_\+\+Projection, Vectors\+When\+Projected\+Returns\+Non\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_af2fd38dc6fbe56284674d2b346356910}{TEST}} (Vector2\+D\+\_\+\+Projection, Vectors\+When\+Projected\+Onto\+Normalized\+Vector\+Returns\+Non\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_ad10be4dc27edb13ce7226002ece57a20}{TEST}} (Vector2\+D\+\_\+\+Projection, Vectors\+When\+Projected\+Using\+Static\+Wrapper\+Returns\+Non\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_ab60dec42feb309558a9207527f884908}{TEST}} (Vector2\+D\+\_\+\+Projection, Vectors\+When\+Projected\+Onto\+Vector\+Of\+Different\+Type\+Returns\+Vector\+With\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a211e776eda329deec7bea36ddb498190}{TEST}} (Vector2\+D\+\_\+\+Rejection, Parallel\+Vectors\+When\+Rejected\+Returns\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_afa0e77ec0cbd861ec9df0856a6eabb8a}{TEST}} (Vector2\+D\+\_\+\+Rejection, Perpendicular\+Vectors\+When\+Rejected\+Returns\+Non\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_adb284a8202963295c8c923a407aa506f}{TEST}} (Vector2\+D\+\_\+\+Rejection, Vectors\+When\+Rejected\+Returns\+Non\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a0278370c8de8cf820aac15e2f06359f8}{TEST}} (Vector2\+D\+\_\+\+Rejection, Vectors\+When\+Rejected\+Onto\+Normalized\+Vector\+Returns\+Non\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a5c661114d6e79b9f5c5f67b4d97d8747}{TEST}} (Vector2\+D\+\_\+\+Rejection, Vectors\+When\+Projected\+Using\+Static\+Wrapper\+Returns\+Non\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_vector2_d_tests_8cpp_a15c7b2a04a781a619e4eba6f0173bfa7}{TEST}} (Vector2\+D\+\_\+\+Rejection, Vectors\+When\+Rejected\+Onto\+Vector\+Of\+Different\+Type\+Returns\+Vector\+With\+Type\+Promotion)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_vector2_d_tests_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_vector2_d_tests_8cpp_a1239eabb74dad1e146b08fd64c46abba}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a1239eabb74dad1e146b08fd64c46abba} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Access}]{}{, }\item[{Accessible\+As\+Array}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00116}{116}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a7aede284930713caa6bec50936e56711}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a7aede284930713caa6bec50936e56711} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Access}]{}{, }\item[{Accessible\+As\+RGB}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00106}{106}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a80955a8338ac89908a97d8a163d5ae17}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a80955a8338ac89908a97d8a163d5ae17} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Access}]{}{, }\item[{Accessible\+As\+STP}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00096}{96}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_ab855c24c36159e67b7da3ee0aaf005c9}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_ab855c24c36159e67b7da3ee0aaf005c9} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Access}]{}{, }\item[{Accessible\+As\+XYZ}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00086}{86}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a16af4f57cd885d360e5d14ba788a4db5}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a16af4f57cd885d360e5d14ba788a4db5} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Access}]{}{, }\item[{dvec2\+Return2\+DDouble\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00149}{149}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a50af6220c3f7e4dad5cb77f54eb40d73}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a50af6220c3f7e4dad5cb77f54eb40d73} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Access}]{}{, }\item[{Index\+Based\+Assignment\+And\+Retrival\+Support}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00126}{126}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a4f69cad160387835524f96cedb80bf78}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a4f69cad160387835524f96cedb80bf78} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Access}]{}{, }\item[{vec2\+Return2\+DFloat\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00140}{140}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a186632eb01445ebd03956c766e507a10}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a186632eb01445ebd03956c766e507a10} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Addition}]{}{, }\item[{Vector\+Plus\+Equals\+Another\+Vector\+Returns\+First\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00179}{179}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a125a2912c5d7d0b5daa0ab5218ab1c05}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a125a2912c5d7d0b5daa0ab5218ab1c05} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Addition}]{}{, }\item[{Vector\+Plus\+Equals\+Vector\+Of\+Different\+Types\+Returns\+Vector\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00208}{208}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_adcc961a14605880b9f210d70a7cc4add}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_adcc961a14605880b9f210d70a7cc4add} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Addition}]{}{, }\item[{Vector\+Plus\+Vector\+Of\+Different\+Types\+Returns\+Vector\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00193}{193}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a9e2bf7cc4d17c77cf326d27071e46782}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a9e2bf7cc4d17c77cf326d27071e46782} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Addition}]{}{, }\item[{Vector\+Plus\+Vector\+Returns\+Correct\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00165}{165}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_aaf898e9883b21d6fd409a575aa6709b6}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_aaf898e9883b21d6fd409a575aa6709b6} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Conversion\+Contructor}]{}{, }\item[{Conversion\+Constructor\+Creates\+New\+Vector\+With\+Demoted\+Type}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00066}{66}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_accdafea06fec6ae750fa34d8c7c0d8a1}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_accdafea06fec6ae750fa34d8c7c0d8a1} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Conversion\+Contructor}]{}{, }\item[{Conversion\+Constructor\+Creates\+New\+Vector\+With\+Promoted\+Type}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00047}{47}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a47eea25a028622042458dd40f5555198}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a47eea25a028622042458dd40f5555198} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Cross}]{}{, }\item[{Unit\+Vector\+Cross\+With\+Itself\+Return\+Zero}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00699}{699}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a5d05ccd9c9aaf306f54642f6f7f5060a}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [15/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a5d05ccd9c9aaf306f54642f6f7f5060a} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Cross}]{}{, }\item[{Unit\+XVector\+When\+Cross\+With\+Unit\+YVector\+Returns\+One}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00673}{673}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a576dac144de2442cde3f1aa6b5464dac}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [16/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a576dac144de2442cde3f1aa6b5464dac} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Cross}]{}{, }\item[{Unit\+YVector\+When\+Cross\+With\+Unit\+XVector\+Returns\+Unit\+Negative\+One}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00686}{686}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a783f95638380ff2223d7fe9c73d0b8a0}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [17/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a783f95638380ff2223d7fe9c73d0b8a0} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Cross}]{}{, }\item[{Vector\+Cross\+Static\+Wrapper\+With\+Another\+Non\+Parallel\+Vector\+Returns\+Pseudo\+Cross\+Product}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00725}{725}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_aaf275526ca162a9ce0cee09ccb4f58b9}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [18/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_aaf275526ca162a9ce0cee09ccb4f58b9} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Cross}]{}{, }\item[{Vector\+Cross\+With\+Another\+Non\+Parallel\+Vector\+Returns\+Pseudo\+Cross\+Product}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00712}{712}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a408cd672caad6947bcf78d5ef34d4b3b}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [19/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a408cd672caad6947bcf78d5ef34d4b3b} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Cross}]{}{, }\item[{Vector\+Cross\+With\+Vector\+Of\+Different\+Type\+Returns\+Scalar\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00738}{738}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_ab27a1e98e3d00a30b9277a8ed201af24}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [20/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_ab27a1e98e3d00a30b9277a8ed201af24} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Division}]{}{, }\item[{Integer\+Vector\+Divide\+Equals\+AFloat\+Returns\+Vector\+With\+Minimal\+Precision\+Loss}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00516}{516}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_ab10808e409dd4c921e70f283002d8c02}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [21/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_ab10808e409dd4c921e70f283002d8c02} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Division}]{}{, }\item[{Vector\+Divided\+By\+ADouble\+Returns\+Vector\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00502}{502}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a2fc4d4288471cc61958af535992e0bd1}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [22/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a2fc4d4288471cc61958af535992e0bd1} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Division}]{}{, }\item[{Vector\+Divided\+By\+AFloat\+Returns\+ANew\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00449}{449}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a0e825d9349a443f4efc60fc6999be8f1}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [23/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a0e825d9349a443f4efc60fc6999be8f1} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Division}]{}{, }\item[{Vector\+Divided\+By\+ANumber\+Returns\+ANew\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00436}{436}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a2cdfefb5cdae7bdea52babd072b0bb41}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [24/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a2cdfefb5cdae7bdea52babd072b0bb41} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Division}]{}{, }\item[{Vector\+Divided\+By\+Zero\+Is\+Infinity\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00412}{412}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a0f82a67b81efda80d6d703473263a771}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [25/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a0f82a67b81efda80d6d703473263a771} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Division}]{}{, }\item[{Vector\+Divided\+Returns\+Vector\+With\+Same\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00424}{424}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a1d105fd093ea0e7e1d5648507dc278f9}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [26/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a1d105fd093ea0e7e1d5648507dc278f9} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Division}]{}{, }\item[{Vector\+Divides\+Equal\+ADouble\+Is\+Same\+Vector\+Without\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00488}{488}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_ad2c1a6a1574d00fa8ba5afc9b8855e99}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [27/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_ad2c1a6a1574d00fa8ba5afc9b8855e99} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Division}]{}{, }\item[{Vector\+Divides\+Equal\+AFloat\+Is\+Same\+Vector\+With\+New\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00475}{475}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a3cf0f709e2b99aa183613243572105e8}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [28/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a3cf0f709e2b99aa183613243572105e8} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Division}]{}{, }\item[{Vector\+Divides\+Equal\+AScalar\+Is\+Same\+Vector\+With\+New\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00462}{462}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_aac1c4c074a7c3c884608d57c584ceda7}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [29/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_aac1c4c074a7c3c884608d57c584ceda7} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Dot}]{}{, }\item[{Vector\+When\+Dot\+With\+Another\+Non\+Orthogonal\+Vector\+Returns\+Non\+Zero\+Number}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00633}{633}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_abdf15d0ac7a462b8e9bbcd019b9a88cf}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [30/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_abdf15d0ac7a462b8e9bbcd019b9a88cf} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Dot}]{}{, }\item[{Vector\+When\+Dot\+With\+Itself\+Returns\+One}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00595}{595}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_aa29f090cd6b468363789521cb821c7f0}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [31/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_aa29f090cd6b468363789521cb821c7f0} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Dot}]{}{, }\item[{Vector\+When\+Dot\+With\+Non\+Orthogonal\+Vector\+Of\+Different\+Type\+Returns\+Number\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00659}{659}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a8fb90fb42ff7c000db33082fb652ceb5}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [32/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a8fb90fb42ff7c000db33082fb652ceb5} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Dot}]{}{, }\item[{Vector\+When\+Dot\+With\+Opposite\+Parallel\+Vector\+Returns\+Negative\+One}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00620}{620}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a87027ef2414156c6feb038d306188721}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [33/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a87027ef2414156c6feb038d306188721} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Dot}]{}{, }\item[{Vector\+When\+Dot\+With\+Orthogonal\+Vector\+Return\+Zero}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00607}{607}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a42f734b42e4b83f02bce8aea1a57546a}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [34/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a42f734b42e4b83f02bce8aea1a57546a} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Dot}]{}{, }\item[{Vector\+When\+Static\+Wrapper\+Dot\+With\+Another\+Non\+Orthogonal\+Vector\+Returns\+Non\+Zero\+Number}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00646}{646}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a9b12e9fb001bfa96cb3c58e2f48e8754}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [35/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a9b12e9fb001bfa96cb3c58e2f48e8754} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Initialization}]{}{, }\item[{Constructor\+Parameters\+Initializes\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00037}{37}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_ac4584952f7b3aae583d77a5c38a6986a}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [36/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_ac4584952f7b3aae583d77a5c38a6986a} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Initialization}]{}{, }\item[{Empty\+Constructor\+Initializes\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00017}{17}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a5234cca20388316fadb097ab50dfd3c3}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [37/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a5234cca20388316fadb097ab50dfd3c3} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Initialization}]{}{, }\item[{Intialization\+With\+Integers\+Supported}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00026}{26}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a6e36788047a00885a034b9c79220403a}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [38/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a6e36788047a00885a034b9c79220403a} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Magnitude}]{}{, }\item[{Non\+Unit\+Vector\+Returns\+Correct\+Magnitude}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00561}{561}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a06bebe0238a0e4fe50a718055be43ab9}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [39/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a06bebe0238a0e4fe50a718055be43ab9} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Magnitude}]{}{, }\item[{One\+Vector\+Returns\+Magnitude\+Not\+Equal\+To\+One}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00549}{549}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_af8ce440fb5faf93b223784072d0b1667}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [40/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_af8ce440fb5faf93b223784072d0b1667} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Magnitude}]{}{, }\item[{Zero\+Vector\+Returns\+Magnitude\+Zero}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00537}{537}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_aceb6e5a4eecf25e5634f373487d7fcee}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [41/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_aceb6e5a4eecf25e5634f373487d7fcee} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Float\+Vector\+Times\+ADouble\+Scalar\+Returns\+Vector\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00384}{384}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_ad3f57ed869d420df2d4a23e50bbd02f7}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [42/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_ad3f57ed869d420df2d4a23e50bbd02f7} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Integer\+Vector\+Times\+Equal\+ADouble\+Scalar\+Returns\+Vector\+With\+Minimal\+Precision\+Loss}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00398}{398}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a8f219a52c56170c2e0d2f1ae9b483726}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [43/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a8f219a52c56170c2e0d2f1ae9b483726} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Number\+Times\+AVector\+Is\+ANew\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00331}{331}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a3d42265d6c5d29dc030f96cd40a1a5be}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [44/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a3d42265d6c5d29dc030f96cd40a1a5be} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Vector\+Times\+AFloat\+Is\+ANew\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00318}{318}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_afe331e5d81a48ad1130c9524dc0a6b0d}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [45/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_afe331e5d81a48ad1130c9524dc0a6b0d} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Vector\+Times\+ANumber\+Is\+ANew\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00305}{305}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a3db4fab5de310129c3af9da3e0ed32eb}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [46/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a3db4fab5de310129c3af9da3e0ed32eb} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Vector\+Times\+Equal\+ADouble\+Scalar\+Is\+Same\+Vector\+Without\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00370}{370}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a8cbeebcc75864ccf5d3b3ce0f2e4c69f}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [47/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a8cbeebcc75864ccf5d3b3ce0f2e4c69f} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Vector\+Times\+Equal\+AScalar\+Float\+Is\+Same\+Vector\+With\+New\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00357}{357}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_ac215952078d70f6840ddbfb8f7df8d28}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [48/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_ac215952078d70f6840ddbfb8f7df8d28} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Vector\+Times\+Equal\+AScalar\+Is\+Same\+Vector\+With\+New\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00344}{344}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_adfe64e6361628d8e56be6ea58a315a6c}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [49/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_adfe64e6361628d8e56be6ea58a315a6c} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Vector\+Times\+One\+Is\+Itself}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00293}{293}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a01ff6dcd1f1415d734b22da2a422df84}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [50/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a01ff6dcd1f1415d734b22da2a422df84} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Mutliplication}]{}{, }\item[{Vector\+Times\+Zero\+Is\+Zero}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00281}{281}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a7d5680bacddc7134250322d29606c101}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [51/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a7d5680bacddc7134250322d29606c101} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Normalize}]{}{, }\item[{Vector\+When\+Normalized\+Returns\+ANormal\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00574}{574}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_adf50cab23595121afc44ee7b9e42ff8f}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [52/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_adf50cab23595121afc44ee7b9e42ff8f} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Projection}]{}{, }\item[{Parallel\+Vectors\+When\+Projected\+Returns\+Non\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00759}{759}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a40caad0aaf42ef7ad05ae8c22fc2d638}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [53/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a40caad0aaf42ef7ad05ae8c22fc2d638} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Projection}]{}{, }\item[{Perpendicular\+Vectors\+When\+Projected\+Returns\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00773}{773}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_af2fd38dc6fbe56284674d2b346356910}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [54/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_af2fd38dc6fbe56284674d2b346356910} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Projection}]{}{, }\item[{Vectors\+When\+Projected\+Onto\+Normalized\+Vector\+Returns\+Non\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00801}{801}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_ab60dec42feb309558a9207527f884908}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [55/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_ab60dec42feb309558a9207527f884908} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Projection}]{}{, }\item[{Vectors\+When\+Projected\+Onto\+Vector\+Of\+Different\+Type\+Returns\+Vector\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00829}{829}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a82ccd1aa4b881627c4833dbce6b5a206}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [56/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a82ccd1aa4b881627c4833dbce6b5a206} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Projection}]{}{, }\item[{Vectors\+When\+Projected\+Returns\+Non\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00787}{787}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_ad10be4dc27edb13ce7226002ece57a20}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [57/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_ad10be4dc27edb13ce7226002ece57a20} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Projection}]{}{, }\item[{Vectors\+When\+Projected\+Using\+Static\+Wrapper\+Returns\+Non\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00815}{815}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a211e776eda329deec7bea36ddb498190}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [58/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a211e776eda329deec7bea36ddb498190} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Rejection}]{}{, }\item[{Parallel\+Vectors\+When\+Rejected\+Returns\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00844}{844}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_afa0e77ec0cbd861ec9df0856a6eabb8a}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [59/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_afa0e77ec0cbd861ec9df0856a6eabb8a} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Rejection}]{}{, }\item[{Perpendicular\+Vectors\+When\+Rejected\+Returns\+Non\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00858}{858}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a5c661114d6e79b9f5c5f67b4d97d8747}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [60/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a5c661114d6e79b9f5c5f67b4d97d8747} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Rejection}]{}{, }\item[{Vectors\+When\+Projected\+Using\+Static\+Wrapper\+Returns\+Non\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00900}{900}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a0278370c8de8cf820aac15e2f06359f8}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [61/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a0278370c8de8cf820aac15e2f06359f8} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Rejection}]{}{, }\item[{Vectors\+When\+Rejected\+Onto\+Normalized\+Vector\+Returns\+Non\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00886}{886}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a15c7b2a04a781a619e4eba6f0173bfa7}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [62/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a15c7b2a04a781a619e4eba6f0173bfa7} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Rejection}]{}{, }\item[{Vectors\+When\+Rejected\+Onto\+Vector\+Of\+Different\+Type\+Returns\+Vector\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00914}{914}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_adb284a8202963295c8c923a407aa506f}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [63/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_adb284a8202963295c8c923a407aa506f} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Rejection}]{}{, }\item[{Vectors\+When\+Rejected\+Returns\+Non\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00872}{872}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a2c8a2655e5a1f94b9d3c4ea22c5cb1c1}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [64/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a2c8a2655e5a1f94b9d3c4ea22c5cb1c1} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Subraction}]{}{, }\item[{Vector\+Minus\+Equals\+Another\+Vector\+Returns\+First\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00237}{237}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a74f901632fcaa49a0170c4cb06506416}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [65/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a74f901632fcaa49a0170c4cb06506416} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Subraction}]{}{, }\item[{Vector\+Minus\+Equals\+Another\+Vector\+With\+Different\+Type\+Returns\+First\+Vector\+Without\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00266}{266}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_aadda852632590427c8cf77e44e9b502a}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [66/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_aadda852632590427c8cf77e44e9b502a} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Subraction}]{}{, }\item[{Vector\+Minus\+Vector\+Of\+Different\+Type\+Returns\+Vector\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00251}{251}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+
+\Hypertarget{_vector2_d_tests_8cpp_a4403a1d31f56d3037e14cbae15404f18}\index{Vector2DTests.cpp@{Vector2DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Vector2DTests.cpp@{Vector2DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [67/67]}}
+{\footnotesize\ttfamily \label{_vector2_d_tests_8cpp_a4403a1d31f56d3037e14cbae15404f18} 
+TEST (\begin{DoxyParamCaption}\item[{Vector2\+D\+\_\+\+Subraction}]{}{, }\item[{Vector\+Minus\+Vector\+Returns\+Correct\+Vector}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source_l00223}{223}} of file \doxymbox{\hyperlink{_vector2_d_tests_8cpp_source}{Vector2\+DTests.\+cpp}}.
+

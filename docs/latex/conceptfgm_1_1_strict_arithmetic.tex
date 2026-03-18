@@ -1,0 +1,20 @@
+\doxysection{fgm::\+Strict\+Arithmetic Concept Reference}
+\hypertarget{conceptfgm_1_1_strict_arithmetic}{}\label{conceptfgm_1_1_strict_arithmetic}\index{fgm::StrictArithmetic@{fgm::StrictArithmetic}}
+
+
+{\ttfamily \+\#include $<$Math\+Traits.\+h$>$}
+
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptfgm_1_1_strict_arithmetic}{StrictArithmetic}}\ =\ \doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{Arithmetic<T>}}\ \&\&\ !std::is\_same\_v<T,\ bool>}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_math_traits_8h_source_l00033}{33}} of file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
+

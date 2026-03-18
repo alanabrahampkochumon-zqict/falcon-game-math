@@ -1,0 +1,330 @@
+\doxysection{fgm::\+Matrix2D\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structfgm_1_1_matrix2_d}{}\label{structfgm_1_1_matrix2_d}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+
+
+{\ttfamily \+\#include $<$Matrix2\+D.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_abd92d06329b3b2b2934db62b0e6b8a81}{value\+\_\+type}} = T
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} ()
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a879de42ab199a190cbc9f0f540f3254b}{Matrix2D}} (T v\+\_\+0\+\_\+0, T v\+\_\+0\+\_\+1, T v\+\_\+1\+\_\+0, T v\+\_\+1\+\_\+1)
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_ab59266d98876782c921c4cc931705733}{Matrix2D}} (\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ col0, \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ col1)
+\item 
+{\footnotesize template$<$typename S, std::\+enable\+\_\+if\+\_\+t$<$ std::\+is\+\_\+arithmetic\+\_\+v$<$ S $>$ $>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a4965ff71e0196c532151083b72d5ec8b}{Matrix2D}} (const Matrix2D \&other)
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a30c69ed9dc9bd6ceba24be89858a70b2}{operator\+[$\,$]\+}} (size\+\_\+t index)
+\item 
+const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a7d69b73917fed64115f782d413a7cd1e}{operator\+[$\,$]\+}} (size\+\_\+t index) const
+\item 
+T \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a721b87d834e94d9faac09c56de029eef}{operator()}} (size\+\_\+t row, size\+\_\+t col)
+\item 
+const T \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a66e9237870d8ce5e5a3d39a913de5f60}{operator()}} (size\+\_\+t row, size\+\_\+t col) const
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a4e8484373bd0408a33e8fb2ce336f68d}{operator+}} (const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \&other) const
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a1e3083ea1614a228b13814f727deef5c}{operator+=}} (const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \&other)
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a2fd71c4558b31076fe43f858efe2a9e7}{operator-\/}} (const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \&other) const
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a0512b86661a62d0a57439c155bf8d80a}{operator-\/=}} (const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \&other)
+\item 
+{\footnotesize template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_ae419909bb3bcd54ea4286eb140912aa4}{operator\texorpdfstring{$\ast$}{*}}} (const S \&scalar) const
+\item 
+{\footnotesize template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a82f7c6ccd984a47d699d08e44af9677f}{operator\texorpdfstring{$\ast$}{*}=}} (const S \&scalar)
+\item 
+{\footnotesize template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a25a91555a3181b362e214671d10038f2}{operator\texorpdfstring{$\ast$}{*}}} (const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ S $>$ \&vec) const
+\item 
+{\footnotesize template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_ae8bae34683a925eb976f9e691d6412af}{operator\texorpdfstring{$\ast$}{*}}} (const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ S $>$ \&other) const
+\item 
+{\footnotesize template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a98e55320bc47e450e5d03e964b08c35b}{operator\texorpdfstring{$\ast$}{*}=}} (const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ S $>$ \&other)
+\item 
+{\footnotesize template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a796241d8d7d711a1aac4b5ebfb70d371}{operator/\+}} (const S \&scalar) const
+\item 
+{\footnotesize template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a4fe7db34d0e0e803ee476009d44af19c}{operator/\+=}} (const S \&scalar)
+\item 
+T \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a1b11525b0a1720d2dfd3248668784a9a}{determinant}} () const
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_aca94866f7a81d10131101bff602d848a}{transpose}} () const
+\item 
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_ae728a327d922232cb1e3d1e0f003086d}{inverse}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static T \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a161438d654d130c51d3987c14d86d724}{determinant}} (const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \&matrix)
+\item 
+static \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_aecc97cc188a431dc763678acd507185e}{transpose}} (const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \&matrix)
+\item 
+static \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_aaf09ee54e896e2eb329fa0f6d7b4a15d}{inverse}} (const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \&matrix)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+struct fgm::\+\+Matrix2\+D$<$ T $>$}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix2_d_8h_source_l00010}{10}} of file \doxymbox{\hyperlink{_matrix2_d_8h_source}{Matrix2\+D.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{structfgm_1_1_matrix2_d_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{structfgm_1_1_matrix2_d_abd92d06329b3b2b2934db62b0e6b8a81}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_abd92d06329b3b2b2934db62b0e6b8a81} 
+template$<$typename T$>$ \\
+using \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+value\+\_\+type = T}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix2_d_8h_source_l00015}{15}} of file \doxymbox{\hyperlink{_matrix2_d_8h_source}{Matrix2\+D.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{structfgm_1_1_matrix2_d_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!Matrix2D@{Matrix2D}}
+\index{Matrix2D@{Matrix2D}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix2D()}{Matrix2D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+\+Matrix2D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a879de42ab199a190cbc9f0f540f3254b}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!Matrix2D@{Matrix2D}}
+\index{Matrix2D@{Matrix2D}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix2D()}{Matrix2D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a879de42ab199a190cbc9f0f540f3254b} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+\+Matrix2D (\begin{DoxyParamCaption}\item[{T}]{v\+\_\+0\+\_\+0}{, }\item[{T}]{v\+\_\+0\+\_\+1}{, }\item[{T}]{v\+\_\+1\+\_\+0}{, }\item[{T}]{v\+\_\+1\+\_\+1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{structfgm_1_1_matrix2_d_ab59266d98876782c921c4cc931705733}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!Matrix2D@{Matrix2D}}
+\index{Matrix2D@{Matrix2D}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix2D()}{Matrix2D()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_ab59266d98876782c921c4cc931705733} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+\+Matrix2D (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$}]{col0}{, }\item[{\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$}]{col1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a4965ff71e0196c532151083b72d5ec8b}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!Matrix2D@{Matrix2D}}
+\index{Matrix2D@{Matrix2D}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix2D()}{Matrix2D()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a4965ff71e0196c532151083b72d5ec8b} 
+template$<$typename T$>$ \\
+template$<$typename S, std::\+enable\+\_\+if\+\_\+t$<$ std::\+is\+\_\+arithmetic\+\_\+v$<$ S $>$ $>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+\+Matrix2D (\begin{DoxyParamCaption}\item[{const Matrix2D$<$ T $>$ \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{structfgm_1_1_matrix2_d_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structfgm_1_1_matrix2_d_a1b11525b0a1720d2dfd3248668784a9a}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!determinant@{determinant}}
+\index{determinant@{determinant}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{determinant()}{determinant()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a1b11525b0a1720d2dfd3248668784a9a} 
+template$<$typename T$>$ \\
+T \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+determinant (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a161438d654d130c51d3987c14d86d724}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!determinant@{determinant}}
+\index{determinant@{determinant}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{determinant()}{determinant()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a161438d654d130c51d3987c14d86d724} 
+template$<$typename T$>$ \\
+T \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+determinant (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{structfgm_1_1_matrix2_d_ae728a327d922232cb1e3d1e0f003086d}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!inverse@{inverse}}
+\index{inverse@{inverse}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{inverse()}{inverse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_ae728a327d922232cb1e3d1e0f003086d} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+inverse (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_aaf09ee54e896e2eb329fa0f6d7b4a15d}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!inverse@{inverse}}
+\index{inverse@{inverse}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{inverse()}{inverse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_aaf09ee54e896e2eb329fa0f6d7b4a15d} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+inverse (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a721b87d834e94d9faac09c56de029eef}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a721b87d834e94d9faac09c56de029eef} 
+template$<$typename T$>$ \\
+T \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator() (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{row}{, }\item[{size\+\_\+t}]{col}{}\end{DoxyParamCaption})}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a66e9237870d8ce5e5a3d39a913de5f60}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a66e9237870d8ce5e5a3d39a913de5f60} 
+template$<$typename T$>$ \\
+const T \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator() (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{row}{, }\item[{size\+\_\+t}]{col}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_ae8bae34683a925eb976f9e691d6412af}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_ae8bae34683a925eb976f9e691d6412af} 
+template$<$typename T$>$ \\
+template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ S $>$ \&}]{other}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_ae419909bb3bcd54ea4286eb140912aa4}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_ae419909bb3bcd54ea4286eb140912aa4} 
+template$<$typename T$>$ \\
+template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const S \&}]{scalar}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a25a91555a3181b362e214671d10038f2}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a25a91555a3181b362e214671d10038f2} 
+template$<$typename T$>$ \\
+template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ S $>$ \&}]{vec}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a98e55320bc47e450e5d03e964b08c35b}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a98e55320bc47e450e5d03e964b08c35b} 
+template$<$typename T$>$ \\
+template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ S $>$ \&}]{other}{}\end{DoxyParamCaption})}
+
+Multiplies a matrix by a matrix with \texorpdfstring{$\ast$}{*}= operator. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em S} & Type of the other \doxylink{conceptfgm_1_1_matrix}{Matrix} \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The matrix to be multiplied with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{conceptfgm_1_1_matrix}{Matrix} on which \texorpdfstring{$\ast$}{*}= is called, but with new values 
+\end{DoxyReturn}
+\Hypertarget{structfgm_1_1_matrix2_d_a82f7c6ccd984a47d699d08e44af9677f}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a82f7c6ccd984a47d699d08e44af9677f} 
+template$<$typename T$>$ \\
+template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{const S \&}]{scalar}{}\end{DoxyParamCaption})}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a4e8484373bd0408a33e8fb2ce336f68d}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a4e8484373bd0408a33e8fb2ce336f68d} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator+ (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \&}]{other}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a1e3083ea1614a228b13814f727deef5c}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a1e3083ea1614a228b13814f727deef5c} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator+= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \&}]{other}{}\end{DoxyParamCaption})}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a2fd71c4558b31076fe43f858efe2a9e7}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a2fd71c4558b31076fe43f858efe2a9e7} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator-\/ (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \&}]{other}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a0512b86661a62d0a57439c155bf8d80a}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a0512b86661a62d0a57439c155bf8d80a} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator-\/= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \&}]{other}{}\end{DoxyParamCaption})}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a796241d8d7d711a1aac4b5ebfb70d371}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator/@{operator/}}
+\index{operator/@{operator/}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a796241d8d7d711a1aac4b5ebfb70d371} 
+template$<$typename T$>$ \\
+template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator/\+ (\begin{DoxyParamCaption}\item[{const S \&}]{scalar}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a4fe7db34d0e0e803ee476009d44af19c}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a4fe7db34d0e0e803ee476009d44af19c} 
+template$<$typename T$>$ \\
+template$<$typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator/\+= (\begin{DoxyParamCaption}\item[{const S \&}]{scalar}{}\end{DoxyParamCaption})}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a30c69ed9dc9bd6ceba24be89858a70b2}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a30c69ed9dc9bd6ceba24be89858a70b2} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+\Hypertarget{structfgm_1_1_matrix2_d_a7d69b73917fed64115f782d413a7cd1e}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a7d69b73917fed64115f782d413a7cd1e} 
+template$<$typename T$>$ \\
+const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \& \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_aca94866f7a81d10131101bff602d848a}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_aca94866f7a81d10131101bff602d848a} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+transpose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structfgm_1_1_matrix2_d_aecc97cc188a431dc763678acd507185e}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_aecc97cc188a431dc763678acd507185e} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}} \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+transpose (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d_a5179953fc7477af45a3085ef6346c12b}{Matrix2D}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{structfgm_1_1_matrix2_d_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structfgm_1_1_matrix2_d_a544f29bc44c4b013ac0e4fe08752e862}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!columns@{columns}}
+\index{columns@{columns}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{columns}{columns}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_a544f29bc44c4b013ac0e4fe08752e862} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$T$>$ \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+columns\+[2]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix2_d_8h_source_l00019}{19}} of file \doxymbox{\hyperlink{_matrix2_d_8h_source}{Matrix2\+D.\+h}}.
+
+\Hypertarget{structfgm_1_1_matrix2_d_ac3c8a5257153b38c195067905c18784e}\index{fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}!elements@{elements}}
+\index{elements@{elements}!fgm::Matrix2D$<$ T $>$@{fgm::Matrix2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{elements}{elements}}
+{\footnotesize\ttfamily \label{structfgm_1_1_matrix2_d_ac3c8a5257153b38c195067905c18784e} 
+template$<$typename T$>$ \\
+T \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::\+\+Matrix2D}}$<$ T $>$::\+elements\+[2]\+\+[2]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix2_d_8h_source_l00020}{20}} of file \doxymbox{\hyperlink{_matrix2_d_8h_source}{Matrix2\+D.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+math-\/lib/\+include/\+matrix/\+\doxymbox{\hyperlink{_matrix2_d_8h}{Matrix2\+D.\+h}}\end{DoxyCompactItemize}

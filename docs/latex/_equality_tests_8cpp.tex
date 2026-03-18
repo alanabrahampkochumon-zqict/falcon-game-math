@@ -1,0 +1,557 @@
+\doxysection{test-\/suite/\+src/\+vectors/\+vector4d/\+\+Equality\+Tests.cpp File Reference}
+\hypertarget{_equality_tests_8cpp}{}\label{_equality_tests_8cpp}\index{test-\/suite/src/vectors/vector4d/EqualityTests.cpp@{test-\/suite/src/vectors/vector4d/EqualityTests.cpp}}
+
+
+Verifies \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} equality operator (==, !=) and their functional counterpart\textquotesingle{}s (eq, neq, all\+Eq, all\+Neq) logic.  
+
+
+{\ttfamily \+\#include "{}Vector4\+DTest\+Setup.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality$<$ T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_abccf0ab6f490f24563edb401117d539b}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_af8e389a516be88827b7af91a4ecedf4d}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Equality\+\_\+\+Identical\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ab1e61d722be96fa7b0c6f65a91d1260a}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Equality\+\_\+\+Different\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a5778e1f9b395ae7ec781b5091042c81e}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Static\+Wrapper\+\_\+\+Equality\+\_\+\+Identical\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ab16c7fe130d141b817174958ce630194}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Static\+Wrapper\+\_\+\+Equality\+\_\+\+Different\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ae2ffb779b78ea20b4bf2f368a6ee6284}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Nan\+Equality\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a15c74b2bae8a399a965f1e569029f72f}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Infinity\+Equality\+\_\+\+Identical\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a0e4b130d89bcb8372dfa5dcdc472b3f3}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Infinity\+Equality\+\_\+\+Different\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a1e6d081199529e32e1ee1c8c866089eb}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Equality\+Operator\+\_\+\+Identical\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a9fb9d32f442662919b82f8a574634c36}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Mixed\+Type\+\_\+\+Equality\+\_\+\+Identical\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_af2430f2bd7721830d2c75d43bdc51fdd}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Mixed\+Type\+\_\+\+Equality\+\_\+\+Different\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ace40d16204cbcd5ece6785fce6ab3727}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Equality\+Operator\+\_\+\+Different\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_af319b594758f3087c3aabb4be9adc7fc}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Equality\+Operator\+\_\+\+Identical\+Boolean\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a74f420e3bc9006a73093256d5a90e996}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Equality\+Operator\+\_\+\+Different\+Boolean\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a2cd7fbda1759b91934bdd8b6f8d3b661}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Equality\+Returns\+Correct\+Boolean\+Mask)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a9a01b54abcdd7acf9be31c7429651f09}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Mixed\+Type\+\_\+\+Equality\+Returns\+Correct\+Boolean\+Mask)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_af42da31b76a75c5481bdf1e20c45ebfa}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Nan\+Equality\+Returns\+False\+Boolean\+Mask)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a205201eee6a512572b3fdebc2d8c9fa7}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Infinity\+Equality\+Returns\+Correct\+Boolean\+Mask)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ac7867a918bdbc44ff66607a38736eacc}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Static\+Wrapper\+\_\+\+Equality\+Returns\+Correct\+Boolean\+Mask)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a741617f95cb9f63f2430341a2a381dec}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Inequality\+\_\+\+Identical\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a8e4cce2de019055fb03613d11c59f035}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Inequality\+\_\+\+Different\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ac70aea3fa41c2d21b40ea0481e65daea}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Static\+Wrapper\+\_\+\+Inequality\+\_\+\+Identical\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ab1beb8cc75fa92ab7e07fe2377f523a6}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Static\+Wrapper\+\_\+\+Inequality\+\_\+\+Different\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a54b5e5f13ea1ee636b9ac4e1b02f17f2}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Nan\+Inequality\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a7a9afa21351f935bca9254866829db12}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Infinity\+Inequality\+\_\+\+Identical\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ad3e76ab1e350944b88d7bcab8794020c}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Infinity\+Inequality\+\_\+\+Different\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a02c693e0b49ec8727c8d9fe597075b52}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Mixed\+Type\+\_\+\+Inequality\+\_\+\+Identical\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a6831196bdfaba485a7b650ea5fc7077f}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Mixed\+Type\+\_\+\+Inequality\+\_\+\+Different\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a33ea92c1c4343a17a856548d3a3630c6}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, In\+Equality\+Operator\+\_\+\+Identical\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a887c41b6004fd8b2909a54f1c8c6c044}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, In\+Equality\+Operator\+\_\+\+Different\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a3155cb807299e668e6e64638a405eb32}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Inequality\+Operator\+\_\+\+Identical\+Boolean\+Vectors\+Returns\+False)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a45ced4f95d74f1429e8081ed2a89e28d}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Inequality\+Operator\+\_\+\+Different\+Boolean\+Vectors\+Returns\+True)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a3b1f0c13c31fd19710be91cca1fbbfbd}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Inequality\+Returns\+Correct\+Boolean\+Mask)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a613b256b5384d09aa2743d92b1c1eadc}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Mixed\+Type\+\_\+\+Inequality\+Returns\+Correct\+Boolean\+Mask)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_a2e233ce686805d7bdf883e3536ee8a9b}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Nan\+Inequality\+Returns\+True\+Boolean\+Mask)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ab8dafc15a53805052e901173ca58710c}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Infinity\+Inequality\+Returns\+Correct\+Boolean\+Mask)
+\item 
+\doxymbox{\hyperlink{_equality_tests_8cpp_ac35f054e6e96429fba05c004053e6e74}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}, Static\+Wrapper\+\_\+\+Inequality\+Returns\+Correct\+Boolean\+Mask)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Verifies \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} equality operator (==, !=) and their functional counterpart\textquotesingle{}s (eq, neq, all\+Eq, all\+Neq) logic. 
+
+\begin{DoxyAuthor}{Author}
+Alan Abraham P Kochumon 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Created on:\+ March 07, 2026
+\end{DoxyDate}
+
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2026 Alan Abraham P Kochumon 
+\end{DoxyCopyright}
+
+
+Definition in file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_equality_tests_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_equality_tests_8cpp_a74f420e3bc9006a73093256d5a90e996}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a74f420e3bc9006a73093256d5a90e996} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Equality\+Operator\+\_\+\+Different\+Boolean\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000079}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} equality operator works for bool vector with different components. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00180}{180}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_af319b594758f3087c3aabb4be9adc7fc}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_af319b594758f3087c3aabb4be9adc7fc} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Equality\+Operator\+\_\+\+Identical\+Boolean\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000078}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} equality operator works for bool vector with identical components. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00168}{168}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a45ced4f95d74f1429e8081ed2a89e28d}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a45ced4f95d74f1429e8081ed2a89e28d} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Inequality\+Operator\+\_\+\+Different\+Boolean\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000097}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} equality operator works for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} with different components. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00385}{385}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a3155cb807299e668e6e64638a405eb32}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a3155cb807299e668e6e64638a405eb32} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Inequality\+Operator\+\_\+\+Identical\+Boolean\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000096}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} equality operator works for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} with identical components. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00373}{373}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a0e4b130d89bcb8372dfa5dcdc472b3f3}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a0e4b130d89bcb8372dfa5dcdc472b3f3} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Infinity\+Equality\+\_\+\+Different\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000073}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{fgm::\+\+Vector4\+D::\+all\+Eq} follows IEEE 754 for INFINITY comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00114}{114}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a15c74b2bae8a399a965f1e569029f72f}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a15c74b2bae8a399a965f1e569029f72f} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Infinity\+Equality\+\_\+\+Identical\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000072}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{fgm::\+\+Vector4\+D::\+all\+Eq} follows IEEE 754 for INFINITY comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00102}{102}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a205201eee6a512572b3fdebc2d8c9fa7}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a205201eee6a512572b3fdebc2d8c9fa7} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Infinity\+Equality\+Returns\+Correct\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000083}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a2e7ec13fa642ff5f2a62c46e6d424fc3}{fgm::\+\+Vector4\+D::\+eq} follows IEEE 754 for INFINITY comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00227}{227}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ad3e76ab1e350944b88d7bcab8794020c}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ad3e76ab1e350944b88d7bcab8794020c} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Infinity\+Inequality\+\_\+\+Different\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000091}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{fgm::\+\+Vector4\+D::\+all\+Neq} follows IEEE 754 for INFINITY comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00319}{319}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a7a9afa21351f935bca9254866829db12}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a7a9afa21351f935bca9254866829db12} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Infinity\+Inequality\+\_\+\+Identical\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000090}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{fgm::\+\+Vector4\+D::\+all\+Neq} follows IEEE 754 for INFINITY comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00307}{307}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ab8dafc15a53805052e901173ca58710c}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ab8dafc15a53805052e901173ca58710c} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Infinity\+Inequality\+Returns\+Correct\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000101}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ad277e47d8c40e696323a471b7b2d102a}{fgm::\+\+Vector4\+D::\+neq} follows IEEE 754 for INFINITY comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00432}{432}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a9a01b54abcdd7acf9be31c7429651f09}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a9a01b54abcdd7acf9be31c7429651f09} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Equality\+Returns\+Correct\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000081}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a2e7ec13fa642ff5f2a62c46e6d424fc3}{fgm::\+\+Vector4\+D::\+eq} returns \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} mask for different vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00201}{201}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a613b256b5384d09aa2743d92b1c1eadc}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a613b256b5384d09aa2743d92b1c1eadc} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Inequality\+Returns\+Correct\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000099}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ad277e47d8c40e696323a471b7b2d102a}{fgm::\+\+Vector4\+D::\+neq} returns \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} mask for different vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00406}{406}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ae2ffb779b78ea20b4bf2f368a6ee6284}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ae2ffb779b78ea20b4bf2f368a6ee6284} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Nan\+Equality\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000071}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{fgm::\+\+Vector4\+D::\+all\+Eq} follows IEEE 754 for NaN comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00090}{90}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_af42da31b76a75c5481bdf1e20c45ebfa}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_af42da31b76a75c5481bdf1e20c45ebfa} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Nan\+Equality\+Returns\+False\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000082}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a2e7ec13fa642ff5f2a62c46e6d424fc3}{fgm::\+\+Vector4\+D::\+eq} follows IEEE 754 for NaN comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00214}{214}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a54b5e5f13ea1ee636b9ac4e1b02f17f2}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [15/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a54b5e5f13ea1ee636b9ac4e1b02f17f2} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Nan\+Inequality\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000089}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{fgm::\+\+Vector4\+D::\+all\+Neq} follows IEEE 754 for NaN comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00295}{295}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a2e233ce686805d7bdf883e3536ee8a9b}\index{EqualityTests.cpp@{EqualityTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [16/16]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a2e233ce686805d7bdf883e3536ee8a9b} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Nan\+Inequality\+Returns\+True\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000100}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ad277e47d8c40e696323a471b7b2d102a}{fgm::\+\+Vector4\+D::\+neq} follows IEEE 754 for NaN comparisons. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00419}{419}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ab1e61d722be96fa7b0c6f65a91d1260a}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ab1e61d722be96fa7b0c6f65a91d1260a} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Equality\+\_\+\+Different\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000068}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{fgm::\+\+Vector4\+D::\+all\+Eq} returns false if any component differ. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00063}{63}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_af8e389a516be88827b7af91a4ecedf4d}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_af8e389a516be88827b7af91a4ecedf4d} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Equality\+\_\+\+Identical\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000067}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{fgm::\+\+Vector4\+D::\+all\+Eq} returns true for identical vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00054}{54}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ace40d16204cbcd5ece6785fce6ab3727}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ace40d16204cbcd5ece6785fce6ab3727} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Equality\+Operator\+\_\+\+Different\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000077}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} equality operator returns false if any component differ. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00159}{159}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a1e6d081199529e32e1ee1c8c866089eb}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a1e6d081199529e32e1ee1c8c866089eb} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Equality\+Operator\+\_\+\+Identical\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000074}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} equality operator returns true for identical vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00126}{126}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a2cd7fbda1759b91934bdd8b6f8d3b661}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a2cd7fbda1759b91934bdd8b6f8d3b661} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Equality\+Returns\+Correct\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000080}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a2e7ec13fa642ff5f2a62c46e6d424fc3}{fgm::\+\+Vector4\+D::\+eq} returns \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} mask for identical vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00192}{192}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a8e4cce2de019055fb03613d11c59f035}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a8e4cce2de019055fb03613d11c59f035} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Inequality\+\_\+\+Different\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000086}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{fgm::\+\+Vector4\+D::\+all\+Neq} returns true if any component differ. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00268}{268}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a741617f95cb9f63f2430341a2a381dec}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a741617f95cb9f63f2430341a2a381dec} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Inequality\+\_\+\+Identical\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000085}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{fgm::\+\+Vector4\+D::\+all\+Neq} returns false for identical vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00259}{259}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a887c41b6004fd8b2909a54f1c8c6c044}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a887c41b6004fd8b2909a54f1c8c6c044} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{In\+Equality\+Operator\+\_\+\+Different\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000095}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} inequality operator returns true for different vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00364}{364}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a33ea92c1c4343a17a856548d3a3630c6}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a33ea92c1c4343a17a856548d3a3630c6} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{In\+Equality\+Operator\+\_\+\+Identical\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000094}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} inequality operator returns false for identical vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00355}{355}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a3b1f0c13c31fd19710be91cca1fbbfbd}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a3b1f0c13c31fd19710be91cca1fbbfbd} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Inequality\+Returns\+Correct\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000098}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ad277e47d8c40e696323a471b7b2d102a}{fgm::\+\+Vector4\+D::\+neq} returns \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} mask for identical vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00397}{397}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_af2430f2bd7721830d2c75d43bdc51fdd}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_af2430f2bd7721830d2c75d43bdc51fdd} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Equality\+\_\+\+Different\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000076}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{fgm::\+\+Vector4\+D::\+all\+Eq} works for different vector types with different components. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00147}{147}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a9fb9d32f442662919b82f8a574634c36}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a9fb9d32f442662919b82f8a574634c36} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Equality\+\_\+\+Identical\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000075}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{fgm::\+\+Vector4\+D::\+all\+Eq} works for different vector types with identical components. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00135}{135}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a6831196bdfaba485a7b650ea5fc7077f}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a6831196bdfaba485a7b650ea5fc7077f} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Inequality\+\_\+\+Different\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000093}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{fgm::\+\+Vector4\+D::\+all\+Neq} works for different vector types with different components. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00343}{343}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a02c693e0b49ec8727c8d9fe597075b52}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a02c693e0b49ec8727c8d9fe597075b52} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Inequality\+\_\+\+Identical\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000092}{Test}}]Verify \doxylink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{fgm::\+\+Vector4\+D::\+all\+Neq} works for different vector types with identical components. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00331}{331}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ab16c7fe130d141b817174958ce630194}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [15/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ab16c7fe130d141b817174958ce630194} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Equality\+\_\+\+Different\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000070}{Test}}]Verify static variant of \doxylink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{fgm::\+\+Vector4\+D::\+all\+Eq} for different vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00081}{81}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_a5778e1f9b395ae7ec781b5091042c81e}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [16/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_a5778e1f9b395ae7ec781b5091042c81e} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Equality\+\_\+\+Identical\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000069}{Test}}]Verify static variant of \doxylink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{fgm::\+\+Vector4\+D::\+all\+Eq} for identical vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00072}{72}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ac7867a918bdbc44ff66607a38736eacc}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [17/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ac7867a918bdbc44ff66607a38736eacc} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Equality\+Returns\+Correct\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000084}{Test}}]Verify static variant of \doxylink{structfgm_1_1_vector4_d_a2e7ec13fa642ff5f2a62c46e6d424fc3}{fgm::\+\+Vector4\+D::\+eq} returns \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} mask for different vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00241}{241}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ab1beb8cc75fa92ab7e07fe2377f523a6}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [18/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ab1beb8cc75fa92ab7e07fe2377f523a6} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Inequality\+\_\+\+Different\+Vectors\+Returns\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000088}{Test}}]Verify static variant of \doxylink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{fgm::\+\+Vector4\+D::\+all\+Neq} for different vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00286}{286}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ac70aea3fa41c2d21b40ea0481e65daea}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [19/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ac70aea3fa41c2d21b40ea0481e65daea} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Inequality\+\_\+\+Identical\+Vectors\+Returns\+False}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000087}{Test}}]Verify static variant of \doxylink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{fgm::\+\+Vector4\+D::\+all\+Neq} for identical vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00277}{277}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_ac35f054e6e96429fba05c004053e6e74}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [20/20]}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_ac35f054e6e96429fba05c004053e6e74} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Inequality\+Returns\+Correct\+Boolean\+Mask}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000102}{Test}}]Verify static variant of \doxylink{structfgm_1_1_vector4_d_ad277e47d8c40e696323a471b7b2d102a}{fgm::\+\+Vector4\+D::\+neq} returns \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} mask for different vectors. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_equality_tests_8cpp_source_l00447}{447}} of file \doxymbox{\hyperlink{_equality_tests_8cpp_source}{Equality\+Tests.\+cpp}}.
+
+\Hypertarget{_equality_tests_8cpp_abccf0ab6f490f24563edb401117d539b}\index{EqualityTests.cpp@{EqualityTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!EqualityTests.cpp@{EqualityTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}}
+{\footnotesize\ttfamily \label{_equality_tests_8cpp_abccf0ab6f490f24563edb401117d539b} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_equality}{Vector4\+DEquality}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+

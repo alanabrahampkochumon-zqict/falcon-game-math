@@ -1,0 +1,95 @@
+\doxysection{Initialization\+Tests.\+cpp}
+\hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source}{}\label{vectors_2vector4d_2_initialization_tests_8cpp_source}\index{test-\/suite/src/vectors/vector4d/InitializationTests.cpp@{test-\/suite/src/vectors/vector4d/InitializationTests.cpp}}
+\doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector4_d_test_setup_8h}{Vector4DTestSetup.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00014}00014\ \textcolor{keyword}{using\ namespace\ }\doxymbox{\hyperlink{namespacetestutils}{testutils}};}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00017}00017\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00018}00018\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SETUP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00020}00020\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00021}00021\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00023}00023\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00024}\doxymbox{\hyperlink{class_vector4_d_initialization}{00024}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_initialization}{Vector4DInitialization}}:\ \textcolor{keyword}{public}\ ::testing::Test}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00025}00025\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00026}00026\ \};}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00028}\doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_a7b7860d540a7355829ade90b7b7d1179}{00028}}\ \doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_a7b7860d540a7355829ade90b7b7d1179}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_initialization}{Vector4DInitialization}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a3ab4037b913e41688f8e8de713d957fc}{SupportedTypes}});}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00031}00031\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00032}00032\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00033}00033\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TESTS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00034}00034\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00035}00035\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00038}\doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_a550ed419e998974d05fddeb438a0094f}{00038}}\ \doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_a550ed419e998974d05fddeb438a0094f}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_initialization}{Vector4DInitialization}},\ EmptyConstructorInitializesZeroVector)}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00039}00039\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<TypeParam>}}\ vec;}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00042}00042\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{EXPECT\_VEC\_ZERO}}(vec);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00043}00043\ \}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00050}\doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_af5dc7cc23aff6413a47b4c1c0318695c}{00050}}\ \doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_a550ed419e998974d05fddeb438a0094f}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_initialization}{Vector4DInitialization}},\ ConstructorInitializesVectorsWithCorrectValue)}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00051}00051\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ a\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(3);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ b\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(1);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ c\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(6);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ d\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(4);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<TypeParam>}}\ vec(a,\ b,\ c,\ d);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00059}00059\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(vec,\ a,\ b,\ c,\ d);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00067}\doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_a00ded7980b11c93d3744cb2dd12559f7}{00067}}\ \doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_a550ed419e998974d05fddeb438a0094f}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_initialization}{Vector4DInitialization}},\ Two2DVectorsCanInitializeA4DVector)}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00068}00068\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ a\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(3);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00070}00070\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ b\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(1);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ c\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(6);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ d\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(4);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00073}00073\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{fgm::Vector2D<TypeParam>}}\ vec1(a,\ b);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{fgm::Vector2D<TypeParam>}}\ vec2(c,\ d);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<TypeParam>}}\ vec(vec1,\ vec2);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00078}00078\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(vec,\ a,\ b,\ c,\ d);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00086}\doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_ab70e4318a4eb075c68da258bcc19a21f}{00086}}\ \doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_a550ed419e998974d05fddeb438a0094f}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_initialization}{Vector4DInitialization}},\ 3DVectorAndScalarCanInitializeA4DVector)}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00087}00087\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ a\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(3);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ b\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(1);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00090}00090\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ c\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(6);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00091}00091\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(a,\ b,\ c);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ scalar\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(4);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(vec1,\ scalar);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00096}00096\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(vec,\ a,\ b,\ c,\ scalar);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00104}\doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_aa7efeefb3474e33769487c4ccf308164}{00104}}\ \doxymbox{\hyperlink{vectors_2vector4d_2_initialization_tests_8cpp_a550ed419e998974d05fddeb438a0094f}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_initialization}{Vector4DInitialization}},\ ScalarAnd3DVectorCanInitializeA4DVector)}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00105}00105\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00106}00106\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ a\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(3);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00107}00107\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ b\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(1);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00108}00108\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ c\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(6);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00109}00109\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec1(a,\ b,\ c);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00110}00110\ \ \ \ \ \textcolor{keyword}{constexpr}\ TypeParam\ scalar\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(4);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00112}00112\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(scalar,\ vec1);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00114}00114\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(vec,\ scalar,\ a,\ b,\ c);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector4d_2_initialization_tests_8cpp_source_l00115}00115\ \}}
+
+\end{DoxyCode}

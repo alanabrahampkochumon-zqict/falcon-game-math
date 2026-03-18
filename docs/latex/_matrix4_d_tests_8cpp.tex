@@ -1,0 +1,185 @@
+\doxysection{test-\/suite/\+src/\+matrix/\+\+Matrix4\+DTests.cpp File Reference}
+\hypertarget{_matrix4_d_tests_8cpp}{}\label{_matrix4_d_tests_8cpp}\index{test-\/suite/src/matrix/Matrix4DTests.cpp@{test-\/suite/src/matrix/Matrix4DTests.cpp}}
+{\ttfamily \+\#include "{}utils/\+\+Float\+Equals.\+h"{}}\newline
+{\ttfamily \+\#include "{}utils/\+\+Matrix\+Utils.\+h"{}}\newline
+{\ttfamily \+\#include "{}utils/\+\+Vector\+Utils.\+h"{}}\newline
+{\ttfamily \+\#include $<$cstddef$>$}\newline
+{\ttfamily \+\#include $<$gtest/\+gtest.\+h$>$}\newline
+{\ttfamily \+\#include $<$matrix/\+\+Matrix4\+D.\+h$>$}\newline
+{\ttfamily \+\#include $<$vector/\+\+Vector3\+D.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a0da301c49a87025fc69134c064150693}{TEST}} (Matrix4\+D\+\_\+\+Initialization, Initialized\+With\+Out\+Parameters\+Provides\+Identity\+Matrix)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_aed980b5fdf5f58a62c01660e76ff362f}{TEST}} (Matrix4\+D\+\_\+\+Initialization, Initialization\+Supported\+For\+Integers)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a3e9e710084ed67ac669fe1a222d5cb53}{TEST}} (Matrix4\+D\+\_\+\+Initialization, Initialized\+With\+Parameters\+Provides\+Correct\+Matrix)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a5e5aa8c2d2795f598993a6c12038b26d}{TEST}} (Matrix4\+D\+\_\+\+Initialization, Initialized\+With\+Four4\+DVectors\+Provides\+Correct\+Matrix)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_ab47a20fb5918eb1fd73597ee76b89f62}{TEST}} (Matrix4\+D\+\_\+\+Initialization, Can\+Mutate\+Vector\+At\+Index)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a4daf38413b9a0e109c0f532a056fa4c8}{TEST}} (Matrix4\+D\+\_\+\+Initialization, Can\+Mutate\+Value\+At\+Row\+Column)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a21e1016964fac0a5759914d1e9bb9de8}{TEST}} (Matrix4\+D\+\_\+\+Initialization, Conversion\+Constructor\+Handles\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_adbe3523afd05bd33a0aac1f5469daa26}{TEST}} (Matrix4\+D\+\_\+\+Initialization, Conversion\+Constructor\+Handles\+Type\+Demotion)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a989d42256dd6f927a392446e0b51ed35}{TEST}} (Matrix4\+D\+\_\+\+Access, Can\+Be\+Accessed\+As\+AVector\+At\+Index)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a9a696681ab2382bdb04756b9753c4a87}{TEST}} (Matrix4\+D\+\_\+\+Access, Can\+Be\+Accessed\+As\+AValue\+At\+Row\+Column)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a4a65e59fa3d2edbf097632e7fca6c533}{TEST}} (Matrix4\+D\+\_\+\+Addition, Sum\+Of\+Two\+Matrices\+Returns\+Another\+Matrix\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_aad84a105ccfffbdc3f88b1c03df132c6}{TEST}} (Matrix4\+D\+\_\+\+Addition, Plus\+Equals\+Matrix\+With\+Another\+Matrix\+Returns\+Same\+Matrix\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a54c4e23943615e9feabc7e4a01e97282}{TEST}} (Matrix4\+D\+\_\+\+Addition, Sum\+Of\+Two\+Matrices\+Of\+Different\+Type\+Returns\+Another\+Matrix\+With\+Type\+Promotion)
+\item 
+\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a26866bd44de4f3f2a9696923ae1cbec6}{TEST}} (Matrix4\+D\+\_\+\+Addition, Plus\+Equals\+Matrix\+With\+Another\+Matrix\+Of\+Different\+Type\+Returns\+Same\+Matrix\+Without\+Type\+Promotion)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_matrix4_d_tests_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_matrix4_d_tests_8cpp_a9a696681ab2382bdb04756b9753c4a87}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a9a696681ab2382bdb04756b9753c4a87} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Access}]{}{, }\item[{Can\+Be\+Accessed\+As\+AValue\+At\+Row\+Column}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00194}{194}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_a989d42256dd6f927a392446e0b51ed35}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a989d42256dd6f927a392446e0b51ed35} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Access}]{}{, }\item[{Can\+Be\+Accessed\+As\+AVector\+At\+Index}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00179}{179}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_a26866bd44de4f3f2a9696923ae1cbec6}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a26866bd44de4f3f2a9696923ae1cbec6} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Addition}]{}{, }\item[{Plus\+Equals\+Matrix\+With\+Another\+Matrix\+Of\+Different\+Type\+Returns\+Same\+Matrix\+Without\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00272}{272}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_aad84a105ccfffbdc3f88b1c03df132c6}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_aad84a105ccfffbdc3f88b1c03df132c6} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Addition}]{}{, }\item[{Plus\+Equals\+Matrix\+With\+Another\+Matrix\+Returns\+Same\+Matrix\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00231}{231}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_a54c4e23943615e9feabc7e4a01e97282}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a54c4e23943615e9feabc7e4a01e97282} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Addition}]{}{, }\item[{Sum\+Of\+Two\+Matrices\+Of\+Different\+Type\+Returns\+Another\+Matrix\+With\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00251}{251}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_a4a65e59fa3d2edbf097632e7fca6c533}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a4a65e59fa3d2edbf097632e7fca6c533} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Addition}]{}{, }\item[{Sum\+Of\+Two\+Matrices\+Returns\+Another\+Matrix\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00213}{213}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_a4daf38413b9a0e109c0f532a056fa4c8}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a4daf38413b9a0e109c0f532a056fa4c8} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Initialization}]{}{, }\item[{Can\+Mutate\+Value\+At\+Row\+Column}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00105}{105}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_ab47a20fb5918eb1fd73597ee76b89f62}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_ab47a20fb5918eb1fd73597ee76b89f62} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Initialization}]{}{, }\item[{Can\+Mutate\+Vector\+At\+Index}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00074}{74}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_adbe3523afd05bd33a0aac1f5469daa26}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_adbe3523afd05bd33a0aac1f5469daa26} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Initialization}]{}{, }\item[{Conversion\+Constructor\+Handles\+Type\+Demotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00150}{150}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_a21e1016964fac0a5759914d1e9bb9de8}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a21e1016964fac0a5759914d1e9bb9de8} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Initialization}]{}{, }\item[{Conversion\+Constructor\+Handles\+Type\+Promotion}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00121}{121}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_aed980b5fdf5f58a62c01660e76ff362f}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_aed980b5fdf5f58a62c01660e76ff362f} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Initialization}]{}{, }\item[{Initialization\+Supported\+For\+Integers}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00032}{32}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_a5e5aa8c2d2795f598993a6c12038b26d}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a5e5aa8c2d2795f598993a6c12038b26d} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Initialization}]{}{, }\item[{Initialized\+With\+Four4\+DVectors\+Provides\+Correct\+Matrix}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00056}{56}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_a0da301c49a87025fc69134c064150693}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a0da301c49a87025fc69134c064150693} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Initialization}]{}{, }\item[{Initialized\+With\+Out\+Parameters\+Provides\+Identity\+Matrix}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00023}{23}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+
+\Hypertarget{_matrix4_d_tests_8cpp_a3e9e710084ed67ac669fe1a222d5cb53}\index{Matrix4DTests.cpp@{Matrix4DTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!Matrix4DTests.cpp@{Matrix4DTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily \label{_matrix4_d_tests_8cpp_a3e9e710084ed67ac669fe1a222d5cb53} 
+TEST (\begin{DoxyParamCaption}\item[{Matrix4\+D\+\_\+\+Initialization}]{}{, }\item[{Initialized\+With\+Parameters\+Provides\+Correct\+Matrix}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source_l00044}{44}} of file \doxymbox{\hyperlink{_matrix4_d_tests_8cpp_source}{Matrix4\+DTests.\+cpp}}.
+

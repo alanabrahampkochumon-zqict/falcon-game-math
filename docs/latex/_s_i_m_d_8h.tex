@@ -1,0 +1,91 @@
+\doxysection{simd/\+include/\+\+SIMD.h File Reference}
+\hypertarget{_s_i_m_d_8h}{}\label{_s_i_m_d_8h}\index{simd/include/SIMD.h@{simd/include/SIMD.h}}
+
+
+Architecture-\/agnostic SIMD abstractions and feature detection macros.  
+
+
+{\ttfamily \+\#include "{}SIMDUtils.\+h"{}}\newline
+{\ttfamily \+\#include $<$concepts$>$}\newline
+{\ttfamily \+\#include $<$cstddef$>$}\newline
+{\ttfamily \+\#include $<$immintrin.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01float_00_0116_01_4}{falcon::\+simd::\+\+Register\+Map$<$ float, 16 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01double_00_0116_01_4}{falcon::\+simd::\+\+Register\+Map$<$ double, 16 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01_t_00_0116_01_4}{falcon::\+simd::\+\+Register\+Map$<$ T, 16 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01float_00_0132_01_4}{falcon::\+simd::\+\+Register\+Map$<$ float, 32 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01double_00_0132_01_4}{falcon::\+simd::\+\+Register\+Map$<$ double, 32 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01_t_00_0132_01_4}{falcon::\+simd::\+\+Register\+Map$<$ T, 32 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01float_00_0164_01_4}{falcon::\+simd::\+\+Register\+Map$<$ float, 64 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01double_00_0164_01_4}{falcon::\+simd::\+\+Register\+Map$<$ double, 64 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01_t_00_0164_01_4}{falcon::\+simd::\+\+Register\+Map$<$ T, 64 $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacefalcon}{falcon}}
+\item 
+namespace \doxymbox{\hyperlink{namespacefalcon_1_1simd}{falcon::\+simd}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{_s_i_m_d_8h_a4379bc653453841ce91fbffb5a72a6e0}{MAX\+\_\+\+HARDWARE\+\_\+\+ALIGNMENT}}~= 0;
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Architecture-\/agnostic SIMD abstractions and feature detection macros. 
+
+\begin{DoxyAuthor}{Author}
+Alan Abraham P Kochumon 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Created on:\+ March 07, 2026
+\end{DoxyDate}
+
+
+\begin{DoxyParagraph}{Configuration}
+Define FORCE\+\_\+\+SSE to turn on SSE, even if hardware supports newer instructions Similar options include FORCE\+\_\+\+AVX512, FORCE\+\_\+\+AVX2, FORCE\+\_\+\+SSE, and FORCE\+\_\+\+SCALAR which will completely turn off SIMD. 
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+Even if flags are specified, it will only default to the max that the CPU architecture supports
+\end{DoxyNote}
+\begin{DoxyParagraph}{Compiler note}
+Make sure compiler flags are turned on:\+ -\/mavx2 (GCC/\+\+Clang) or /\+arch:\+AVX2(\+MSVC) for turning on AVX2 support -\/mavx512 (GCC/\+\+Clang) or /\+arch:\+AVX512 (MSVC) for turning on AVX512 supported. 
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+If you compile using the supplied CMake\+List.\+txt, then, it will turn on the flag supported by the CPU.
+\end{DoxyNote}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2026 Alan Abraham P Kochumon 
+\end{DoxyCopyright}
+
+
+Definition in file \doxymbox{\hyperlink{_s_i_m_d_8h_source}{SIMD.\+h}}.
+
+
+
+\label{doc-define-members}
+\Hypertarget{_s_i_m_d_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_s_i_m_d_8h_a4379bc653453841ce91fbffb5a72a6e0}\index{SIMD.h@{SIMD.h}!MAX\_HARDWARE\_ALIGNMENT@{MAX\_HARDWARE\_ALIGNMENT}}
+\index{MAX\_HARDWARE\_ALIGNMENT@{MAX\_HARDWARE\_ALIGNMENT}!SIMD.h@{SIMD.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_HARDWARE\_ALIGNMENT}{MAX\_HARDWARE\_ALIGNMENT}}
+{\footnotesize\ttfamily \label{_s_i_m_d_8h_a4379bc653453841ce91fbffb5a72a6e0} 
+\+\#define MAX\+\_\+\+HARDWARE\+\_\+\+ALIGNMENT~= 0;}
+
+
+
+Definition at line \doxymbox{\hyperlink{_s_i_m_d_8h_source_l00085}{85}} of file \doxymbox{\hyperlink{_s_i_m_d_8h_source}{SIMD.\+h}}.
+

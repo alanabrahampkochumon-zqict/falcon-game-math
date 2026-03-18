@@ -1,0 +1,80 @@
+\chapter{Documentation Guideline for Falcon Game Math Library (FGM) }
+\hypertarget{md__documentation_guideline}{}\label{md__documentation_guideline}\index{Documentation Guideline for Falcon Game Math Library (FGM)@{Documentation Guideline for Falcon Game Math Library (FGM)}}
+\label{md__documentation_guideline_autotoc_md0}%
+\Hypertarget{md__documentation_guideline_autotoc_md0}%
+\hypertarget{md__documentation_guideline_autotoc_md1}{}\doxysection{\texorpdfstring{1. General Language \& Formatting}{1. General Language \& Formatting}}\label{md__documentation_guideline_autotoc_md1}
+
+\begin{DoxyItemize}
+\item {\bfseries{Tense:\+}} Use present tense.
+\item {\bfseries{Dialect:\+}} Use American English.
+\item {\bfseries{Entity References:\+}} -\/ Use {\ttfamily @ref} for internal classes, structs, and concepts to generate hyperlinks.
+\begin{DoxyItemize}
+\item Use backticks ( \`{} \`{} ) for variables, constants, and {\ttfamily std} library types.
+\end{DoxyItemize}
+\item {\bfseries{Formulas:\+}} Use La\+TeX (enclosed in {\ttfamily \$}) for mathematical definitions to ensure clarity.
+\end{DoxyItemize}\hypertarget{md__documentation_guideline_autotoc_md2}{}\doxysection{\texorpdfstring{2. Doxygen Nomenclature}{2. Doxygen Nomenclature}}\label{md__documentation_guideline_autotoc_md2}
+\hypertarget{md__documentation_guideline_autotoc_md3}{}\doxysubsection{\texorpdfstring{Brief ({\ttfamily @brief})}{Brief ({\ttfamily @brief})}}\label{md__documentation_guideline_autotoc_md3}
+
+\begin{DoxyItemize}
+\item {\bfseries{Style:\+}} Single imperative sentence (e.\+g., "{}\+Calculate"{}, not "{}\+Calculates"{}). Do not repeat the function signature.
+\item {\bfseries{Good:\+}} {\ttfamily @brief Computes the dot product.}
+\item {\bfseries{Bad:\+}} {\ttfamily @brief This function returns the dot product as a T.}
+\end{DoxyItemize}\hypertarget{md__documentation_guideline_autotoc_md4}{}\doxysubsection{\texorpdfstring{Note ({\ttfamily @note})}{Note ({\ttfamily @note})}}\label{md__documentation_guideline_autotoc_md4}
+
+\begin{DoxyItemize}
+\item {\bfseries{Style:\+}} Use for important constraints or non-\/obvious behavior.
+\item {\bfseries{Example:\+}} {\ttfamily @note Arithmetic operations are restricted via the @ref Strict\+Arithmetic concept.}
+\end{DoxyItemize}\hypertarget{md__documentation_guideline_autotoc_md5}{}\doxysubsection{\texorpdfstring{Extended Explanations ({\ttfamily @par \texorpdfstring{$<$}{<}Heading\texorpdfstring{$>$}{>}})}{Extended Explanations ({\ttfamily @par \texorpdfstring{$<$}{<}Heading\texorpdfstring{$>$}{>}})}}\label{md__documentation_guideline_autotoc_md5}
+
+\begin{DoxyItemize}
+\item {\bfseries{Usage:\+}} Use for configuration flags, detailed algorithmic explanations, or complex notes.
+\end{DoxyItemize}\hypertarget{md__documentation_guideline_autotoc_md6}{}\doxysubsection{\texorpdfstring{Parameters ({\ttfamily @param})}{Parameters ({\ttfamily @param})}}\label{md__documentation_guideline_autotoc_md6}
+
+\begin{DoxyItemize}
+\item {\bfseries{Format:\+}} {\ttfamily \+[direction]\+ name Description.}
+\item {\bfseries{Direction:\+}} Always specify {\ttfamily \+[in]\+}, {\ttfamily \+[out]\+}, or {\ttfamily \+[in,out]\+}.
+\item {\bfseries{Example:\+}} {\ttfamily @param\+[in]\+ epsilon Maximum allowable difference for equality.}
+\end{DoxyItemize}\hypertarget{md__documentation_guideline_autotoc_md7}{}\doxysubsection{\texorpdfstring{Template Parameters ({\ttfamily @tparam})}{Template Parameters ({\ttfamily @tparam})}}\label{md__documentation_guideline_autotoc_md7}
+
+\begin{DoxyItemize}
+\item {\bfseries{Usage:\+}} Describe requirements for template arguments.
+\item {\bfseries{Example:\+}} {\ttfamily @tparam T Type of the vector components. Must satisfy @ref Arithmetic.}
+\end{DoxyItemize}\hypertarget{md__documentation_guideline_autotoc_md8}{}\doxysubsection{\texorpdfstring{Returns ({\ttfamily @return})}{Returns ({\ttfamily @return})}}\label{md__documentation_guideline_autotoc_md8}
+
+\begin{DoxyItemize}
+\item {\bfseries{Guideline:\+}} Omit the type name (it\textquotesingle{}s in the signature).
+\item {\bfseries{Style:\+}} Capitalize the first letter. Use "{}\+True if..."{} for booleans.
+\item {\bfseries{Good:\+}} {\ttfamily @return Magnitude of the @ref Vector3D.}
+\item {\bfseries{Good:\+}} {\ttfamily @return True if all components match exactly.}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__documentation_guideline_autotoc_md10}{}\doxysection{\texorpdfstring{3. Test Nomenclature (Google Test)}{3. Test Nomenclature (Google Test)}}\label{md__documentation_guideline_autotoc_md10}
+\hypertarget{md__documentation_guideline_autotoc_md11}{}\doxysubsection{\texorpdfstring{Test Brief}{Test Brief}}\label{md__documentation_guideline_autotoc_md11}
+
+\begin{DoxyItemize}
+\item {\bfseries{Style:\+}} Single sentence describing the verification goal.
+\item {\bfseries{Example:\+}} {\ttfamily /\+\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} @brief Verifies @ref Vector4D normalization logic. \texorpdfstring{$\ast$}{*}/\+}
+\end{DoxyItemize}\hypertarget{md__documentation_guideline_autotoc_md12}{}\doxysubsection{\texorpdfstring{Test Suite \& Name}{Test Suite \& Name}}\label{md__documentation_guideline_autotoc_md12}
+
+\begin{DoxyItemize}
+\item {\bfseries{Suite Name:\+}} Single Pascal\+Case word (e.\+g., {\ttfamily Vector4\+DMath}).
+\item {\bfseries{Test Name:\+}} Descriptive Pascal\+Case. Use a single underscore to separate the "{}\+Target"{} from the "{}\+Condition"{}.
+\item {\bfseries{Prefixes:\+}} -\/ {\ttfamily Static\+Wrapper\+\_\+}:\+ For static versions of member functions.
+\begin{DoxyItemize}
+\item {\ttfamily Operator\+\_\+}:\+ For operator overloads (e.\+g., {\ttfamily Operator\+Plus\+\_\+\+Returns\+Correct\+Sum}).
+\end{DoxyItemize}
+\item {\bfseries{Constraint:\+}} Maximum of two underscores per test name.
+\end{DoxyItemize}\hypertarget{md__documentation_guideline_autotoc_md13}{}\doxysubsection{\texorpdfstring{Test Body Commenting}{Test Body Commenting}}\label{md__documentation_guideline_autotoc_md13}
+
+\begin{DoxyItemize}
+\item {\bfseries{Documentation}}-\/ Use \begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000001}{Test}}]to write a brief description of what the test are supposed to verify\end{DoxyRefDesc}
+
+\end{DoxyItemize}\hypertarget{md__documentation_guideline_autotoc_md14}{}\doxysection{\texorpdfstring{Sample Documentation}{Sample Documentation}}\label{md__documentation_guideline_autotoc_md14}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+
+\end{DoxyCode}
+ 

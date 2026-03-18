@@ -1,0 +1,65 @@
+\doxysection{String\+Representation\+Tests.\+cpp}
+\hypertarget{_string_representation_tests_8cpp_source}{}\label{_string_representation_tests_8cpp_source}\index{test-\/suite/src/vectors/vector4d/StringRepresentationTests.cpp@{test-\/suite/src/vectors/vector4d/StringRepresentationTests.cpp}}
+\doxymbox{\hyperlink{_string_representation_tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector4_d_test_setup_8h}{Vector4DTestSetup.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00017}00017\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00018}00018\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SETUP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00020}00020\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00021}00021\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00023}\doxymbox{\hyperlink{class_vector4_d_string_representation_tests}{00023}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_string_representation_tests}{Vector4DStringRepresentationTests}}:\ \textcolor{keyword}{public}\ ::testing::Test}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00024}00024\ \{}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override\ }\{\ \doxymbox{\hyperlink{structfgm_1_1_config_ac6854401af0ce401431a3326c6925321}{fgm::Config::useFullPrecision}}\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{void}\ TearDown()\textcolor{keyword}{\ override\ }\{\ \doxymbox{\hyperlink{structfgm_1_1_config_ac6854401af0ce401431a3326c6925321}{fgm::Config::useFullPrecision}}\ =\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00030}00030\ \};}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00033}00033\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00034}00034\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00035}00035\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TESTS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00036}00036\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00037}00037\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00040}\doxymbox{\hyperlink{_string_representation_tests_8cpp_a62cdd9b03764386bc89b3d41da7ded1b}{00040}}\ \doxymbox{\hyperlink{_string_representation_tests_8cpp_a62cdd9b03764386bc89b3d41da7ded1b}{TEST\_F}}(\doxymbox{\hyperlink{class_vector4_d_string_representation_tests}{Vector4DStringRepresentationTests}},\ IntegralRepresentation)}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00041}00041\ \{}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(1,\ 2,\ 3,\ 4);}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00043}00043\ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00045}00045\ \ \ \ \ ss\ <<\ vec;}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00047}00047\ \ \ \ \ EXPECT\_EQ(ss.str(),\ \textcolor{stringliteral}{"{}<1,\ 2,\ 3,\ 4>\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00055}\doxymbox{\hyperlink{_string_representation_tests_8cpp_ae10a20c2f6cf9cf48db8c73e2790fcfc}{00055}}\ \doxymbox{\hyperlink{_string_representation_tests_8cpp_a62cdd9b03764386bc89b3d41da7ded1b}{TEST\_F}}(\doxymbox{\hyperlink{class_vector4_d_string_representation_tests}{Vector4DStringRepresentationTests}},\ FloatRepresentation)}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00056}00056\ \{}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(1.2345f,\ 2.0f,\ 3.56789f,\ 4.2f);}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00058}00058\ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00060}00060\ \ \ \ \ ss\ <<\ vec;}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00062}00062\ \ \ \ \ EXPECT\_EQ(ss.str(),\ \textcolor{stringliteral}{"{}<1.23450,\ 2.00000,\ 3.56789,\ 4.20000>\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00070}\doxymbox{\hyperlink{_string_representation_tests_8cpp_a2666c87ac35f0f0bbfd0ac8fb21aa15d}{00070}}\ \doxymbox{\hyperlink{_string_representation_tests_8cpp_a62cdd9b03764386bc89b3d41da7ded1b}{TEST\_F}}(\doxymbox{\hyperlink{class_vector4_d_string_representation_tests}{Vector4DStringRepresentationTests}},\ DoubleRepresentation)}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00071}00071\ \{}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(1.2345789777,\ 2.65831,\ 3.161285,\ 4.0);}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00073}00073\ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00075}00075\ \ \ \ \ ss\ <<\ vec;}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00077}00077\ \ \ \ \ EXPECT\_EQ(ss.str(),\ \textcolor{stringliteral}{"{}<1.234578977700000,\ 2.658310000000000,\ 3.161285000000000,\ 4.000000000000000>\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_string_representation_tests_8cpp_source_l00078}00078\ \}}
+
+\end{DoxyCode}

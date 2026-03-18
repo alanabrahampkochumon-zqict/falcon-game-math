@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['alleq_0',['allEq',['../structfgm_1_1_vector4_d.html#a5eb6b3dd44e398a21afd20010c43207f',1,'fgm::Vector4D::allEq(const Vector4D&lt; U &gt; &amp;other, double epsilon=(std::is_same_v&lt; T, double &gt;||std::is_same_v&lt; U, double &gt;) ? DOUBLE_EPSILON :FLOAT_EPSILON) const'],['../structfgm_1_1_vector4_d.html#a405e62ee50fc4f04cd92dcf3dc0eab50',1,'fgm::Vector4D::allEq(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB, double epsilon=(std::is_same_v&lt; T, double &gt;||std::is_same_v&lt; U, double &gt;) ? DOUBLE_EPSILON :FLOAT_EPSILON)']]],
+  ['allneq_1',['allNeq',['../structfgm_1_1_vector4_d.html#ae33e6541a59d178deb58338339c7c94c',1,'fgm::Vector4D::allNeq(const Vector4D&lt; U &gt; &amp;other, double epsilon=(std::is_same_v&lt; T, double &gt;||std::is_same_v&lt; U, double &gt;) ? DOUBLE_EPSILON :FLOAT_EPSILON) const'],['../structfgm_1_1_vector4_d.html#a12c51f95c065b2eb8726a164e88fe7cf',1,'fgm::Vector4D::allNeq(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB, double epsilon=(std::is_same_v&lt; T, double &gt;||std::is_same_v&lt; U, double &gt;) ? DOUBLE_EPSILON :FLOAT_EPSILON)']]]
+];

@@ -1,0 +1,71 @@
+\doxysection{Initialization\+Tests.\+cpp}
+\hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source}{}\label{vectors_2vector3d_2_initialization_tests_8cpp_source}\index{test-\/suite/src/vectors/vector3d/InitializationTests.cpp@{test-\/suite/src/vectors/vector3d/InitializationTests.cpp}}
+\doxymbox{\hyperlink{vectors_2vector3d_2_initialization_tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector3_d_test_setup_8h}{Vector3DTestSetup.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00015}00015\ \textcolor{keyword}{using\ namespace\ }\doxymbox{\hyperlink{namespacetestutils}{testutils}};}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00018}00018\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00020}00020\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SETUP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00021}00021\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00022}00022\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00024}00024\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00025}\doxymbox{\hyperlink{class_vector3_d_initialization}{00025}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector3_d_initialization}{Vector3DInitialization}}:\ \textcolor{keyword}{public}\ ::testing::Test}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00027}00027\ \};}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00028}\doxymbox{\hyperlink{vectors_2vector3d_2_initialization_tests_8cpp_ad5b4eb36fa031188f3cc5ca253c212ba}{00028}}\ \doxymbox{\hyperlink{vectors_2vector3d_2_initialization_tests_8cpp_ad5b4eb36fa031188f3cc5ca253c212ba}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector3_d_initialization}{Vector3DInitialization}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a3ab4037b913e41688f8e8de713d957fc}{SupportedTypes}});}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00031}00031\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00032}00032\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00033}00033\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TESTS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00034}00034\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00035}00035\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00037}\doxymbox{\hyperlink{vectors_2vector3d_2_initialization_tests_8cpp_af58d6b7e45f8f2d7e310f277ae7f2856}{00037}}\ \doxymbox{\hyperlink{vectors_2vector3d_2_initialization_tests_8cpp_af58d6b7e45f8f2d7e310f277ae7f2856}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector3_d_initialization}{Vector3DInitialization}},\ EmptyConstructorInitializesZeroVector)}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00038}00038\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ vector\ initialized\ without\ parameters}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<TypeParam>}}\ vec;}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ elements\ form\ a\ zero\ vector}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00043}00043\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{EXPECT\_VEC\_ZERO}}(vec);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00046}\doxymbox{\hyperlink{vectors_2vector3d_2_initialization_tests_8cpp_ab637aa3d6ed23ca0e231ad5a06de647c}{00046}}\ \doxymbox{\hyperlink{vectors_2vector3d_2_initialization_tests_8cpp_af58d6b7e45f8f2d7e310f277ae7f2856}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector3_d_initialization}{Vector3DInitialization}},\ ConstructorParametersInitializesVector)}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00047}00047\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//\ Given\ 3\ different\ values}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00049}00049\ \ \ \ \ TypeParam\ a\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(3);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00050}00050\ \ \ \ \ TypeParam\ b\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(1);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00051}00051\ \ \ \ \ TypeParam\ c\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(6);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{comment}{//\ When,\ a\ vector\ is\ initialized\ with\ those\ values}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<TypeParam>}}\ vec(a,\ b,\ c);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ values\ are\ stored\ as\ elements\ of\ the\ vector}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00057}00057\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(vec,\ a,\ b,\ c);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00058}00058\ \}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00060}\doxymbox{\hyperlink{vectors_2vector3d_2_initialization_tests_8cpp_a793157418d530cc152820d07b2cb51c1}{00060}}\ \doxymbox{\hyperlink{vectors_2vector3d_2_initialization_tests_8cpp_af58d6b7e45f8f2d7e310f277ae7f2856}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector3_d_initialization}{Vector3DInitialization}},\ One2DVectorAndScalarCanInitializeA3DVector)}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00061}00061\ \{}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{comment}{//\ Given\ one\ 2D\ Vector\ and\ a\ scalar}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00063}00063\ \ \ \ \ TypeParam\ a\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(3);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00064}00064\ \ \ \ \ TypeParam\ b\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(1);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{fgm::Vector2D<TypeParam>}}\ vec1(a,\ b);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00066}00066\ \ \ \ \ TypeParam\ scalar\ =\ \textcolor{keyword}{static\_cast<}TypeParam\textcolor{keyword}{>}(6);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00068}00068\ \ \ \ \ \textcolor{comment}{//\ When\ a\ Vector3D\ is\ initialized\ with\ that\ vec2d\ and\ scalar}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<TypeParam>}}\ vec(vec1,\ scalar);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ 2D\ vector\ elements\ +\ scalar\ form\ the\ 3D\ vector\ in\ the\ passed-\/in\ format}}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00072}00072\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(vec,\ a,\ b,\ scalar);}
+\DoxyCodeLine{\Hypertarget{vectors_2vector3d_2_initialization_tests_8cpp_source_l00073}00073\ \}}
+
+\end{DoxyCode}

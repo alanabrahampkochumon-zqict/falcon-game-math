@@ -1,0 +1,352 @@
+\doxysection{Projection\+Tests.\+cpp}
+\hypertarget{_projection_tests_8cpp_source}{}\label{_projection_tests_8cpp_source}\index{test-\/suite/src/vectors/vector4d/ProjectionTests.cpp@{test-\/suite/src/vectors/vector4d/ProjectionTests.cpp}}
+\doxymbox{\hyperlink{_projection_tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector4_d_test_setup_8h}{Vector4DTestSetup.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00015}00015\ \textcolor{keyword}{using\ namespace\ }\doxymbox{\hyperlink{namespacetestutils}{testutils}};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00018}00018\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00020}00020\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SETUP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00021}00021\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00022}00022\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00024}00024\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00025}\doxymbox{\hyperlink{class_vector4_d_projection}{00025}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}}:\ \textcolor{keyword}{public}\ ::testing::Test}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00028}\doxymbox{\hyperlink{class_vector4_d_projection_a08837a82f4e66088ad8ca12b54b103c8}{00028}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_projection_a08837a82f4e66088ad8ca12b54b103c8}{vec}};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00029}\doxymbox{\hyperlink{class_vector4_d_projection_aacf819fd71d6d5cfb5e5a4d65d801263}{00029}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_projection_aacf819fd71d6d5cfb5e5a4d65d801263}{perpendicularVec}};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00030}\doxymbox{\hyperlink{class_vector4_d_projection_a960f1be6410bded670185c9f90534c5e}{00030}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_projection_a960f1be6410bded670185c9f90534c5e}{onto}};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00031}\doxymbox{\hyperlink{class_vector4_d_projection_a41dd876eacf6498299b8887a20e090ca}{00031}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_projection_a41dd876eacf6498299b8887a20e090ca}{expectedProjection}};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00033}\doxymbox{\hyperlink{class_vector4_d_projection_ab71811e01a5f454b3caaee8598439030}{00033}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_projection_ab71811e01a5f454b3caaee8598439030}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00034}00034\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_projection_a08837a82f4e66088ad8ca12b54b103c8}{vec}}\ =\ \{\ T(5),\ T(6),\ T(7),\ T(8)\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_projection_aacf819fd71d6d5cfb5e5a4d65d801263}{perpendicularVec}}\ =\ \{\ T(10),\ T(0),\ T(14),\ T(16)\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_projection_a960f1be6410bded670185c9f90534c5e}{onto}}\ =\ \{\ T(0),\ T(2),\ T(0),\ T(0)\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_projection_a41dd876eacf6498299b8887a20e090ca}{expectedProjection}}\ =\ \{\ T(0),\ T(6),\ T(0),\ T(0)\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00040}00040\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00042}\doxymbox{\hyperlink{_projection_tests_8cpp_a06bd42c85b011f8b8776edf2a61cd3a4}{00042}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_a06bd42c85b011f8b8776edf2a61cd3a4}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00045}00045\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00046}\doxymbox{\hyperlink{class_vector4_d_rejection}{00046}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}}:\ \textcolor{keyword}{public}\ ::testing::Test}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00047}00047\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00049}\doxymbox{\hyperlink{class_vector4_d_rejection_afde6e8bd0ed242be74c87cd25d9699bd}{00049}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_rejection_afde6e8bd0ed242be74c87cd25d9699bd}{vec}};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00050}\doxymbox{\hyperlink{class_vector4_d_rejection_a4e9e3a64949ced58e9e4c778cf561114}{00050}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_rejection_a4e9e3a64949ced58e9e4c778cf561114}{parallelVec}};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00051}\doxymbox{\hyperlink{class_vector4_d_rejection_a744a13ce5221e8360450e69f6ef25656}{00051}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_rejection_a744a13ce5221e8360450e69f6ef25656}{onto}};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00052}\doxymbox{\hyperlink{class_vector4_d_rejection_a61e9041419b7eb93e14c0e986028f7fb}{00052}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_rejection_a61e9041419b7eb93e14c0e986028f7fb}{expectedRejection}};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00054}\doxymbox{\hyperlink{class_vector4_d_rejection_a3cc24ad26135ebce7dcfcf7517db4571}{00054}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_rejection_a3cc24ad26135ebce7dcfcf7517db4571}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00055}00055\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_rejection_afde6e8bd0ed242be74c87cd25d9699bd}{vec}}\ =\ \{\ T(5),\ T(6),\ T(7),\ T(8)\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_rejection_a4e9e3a64949ced58e9e4c778cf561114}{parallelVec}}\ =\ \{\ T(10),\ T(12),\ T(14),\ T(16)\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_rejection_a744a13ce5221e8360450e69f6ef25656}{onto}}\ =\ \{\ T(0),\ T(2),\ T(0),\ T(0)\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_rejection_a61e9041419b7eb93e14c0e986028f7fb}{expectedRejection}}\ =\ \{\ T(5),\ T(0),\ T(7),\ T(8)\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00061}00061\ \};}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00063}\doxymbox{\hyperlink{_projection_tests_8cpp_a85d76c209eb46b92afb6fca4bdcb5d65}{00063}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_a06bd42c85b011f8b8776edf2a61cd3a4}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00066}00066\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00067}00067\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00068}00068\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ PROJECTION\ TESTS\ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00069}00069\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00070}00070\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00073}\doxymbox{\hyperlink{_projection_tests_8cpp_ad269bb6f11c2177410226b1af52a1018}{00073}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_ad269bb6f11c2177410226b1af52a1018}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ OrthogonalVectorsReturnsZeroVector)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00074}00074\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualProjection\ =\ this-\/>perpendicularVec.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}}(this-\/>onto);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00077}00077\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{EXPECT\_VEC\_ZERO}}(actualProjection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00085}\doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{00085}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ ProjectionOntoXAxisReturnsVectorWithOnlyXComponent)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00086}00086\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00087}00087\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(10.0f,\ 20.0f,\ 30.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ xAxis(1.0f,\ 0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00090}00090\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedProjection(10.0f,\ 0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{comment}{//\ When\ projected\ onto\ x-\/axis}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00093}00093\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}}(xAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00095}00095\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ only\ has\ x-\/component\ as\ non-\/zero}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00096}00096\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00104}\doxymbox{\hyperlink{_projection_tests_8cpp_adc0191a2e41f7bc2ecff888fcdea9319}{00104}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ ProjectionOntoYAxisReturnsVectorWithOnlyYComponent)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00105}00105\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00106}00106\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00107}00107\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(10.0f,\ 20.0f,\ 30.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00108}00108\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ yAxis(0.0f,\ 1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00109}00109\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedProjection(0.0f,\ 20.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00111}00111\ \ \ \ \ \textcolor{comment}{//\ When\ projected\ onto\ y-\/axis}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00112}00112\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}}(yAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00114}00114\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ only\ has\ y-\/component\ as\ non-\/zero}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00115}00115\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00116}00116\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00123}\doxymbox{\hyperlink{_projection_tests_8cpp_afcde7b942c91f02758e8539282753cb5}{00123}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ ProjectionOntoZAxisReturnsVectorWithOnlyZComponent)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00124}00124\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00125}00125\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00126}00126\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(10.0f,\ 20.0f,\ 30.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00127}00127\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ zAxis(0.0f,\ 0.0f,\ 1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00128}00128\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedProjection(0.0f,\ 0.0f,\ 30.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00130}00130\ \ \ \ \ \textcolor{comment}{//\ When\ projected\ onto\ z-\/axis}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00131}00131\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}}(zAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00133}00133\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ only\ has\ z-\/component\ as\ non-\/zero}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00134}00134\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00135}00135\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00142}\doxymbox{\hyperlink{_projection_tests_8cpp_a4d26dd7c3665fcadd40389beef155159}{00142}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ ProjectionOntoWAxisReturnsVectorWithOnlyWComponent)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00143}00143\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00144}00144\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00145}00145\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(10.0f,\ 20.0f,\ 30.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00146}00146\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ wAxis(0.0f,\ 0.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00147}00147\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedProjection(0.0f,\ 0.0f,\ 0.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00149}00149\ \ \ \ \ \textcolor{comment}{//\ When\ projected\ onto\ w-\/axis}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00150}00150\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}}(wAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00152}00152\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ only\ has\ w-\/component\ as\ non-\/zero}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00153}00153\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00154}00154\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00161}\doxymbox{\hyperlink{_projection_tests_8cpp_af8087513fa927d46e26ad00d4457a5bd}{00161}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_ad269bb6f11c2177410226b1af52a1018}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ NonOrthogonalProjectionReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00162}00162\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00163}00163\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualProjection\ =\ this-\/>vec.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}}(this-\/>onto);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00165}00165\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00166}00166\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00173}\doxymbox{\hyperlink{_projection_tests_8cpp_a0126f850cde5f2a04ec9d23a9117e9ff}{00173}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_ad269bb6f11c2177410226b1af52a1018}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ StaticWrapper\_NonOrthogonalProjectionReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00174}00174\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00175}00175\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualProjection\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{fgm::Vector4D<TypeParam>::project}}(this-\/>vec,\ this-\/>onto);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00177}00177\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00178}00178\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00185}\doxymbox{\hyperlink{_projection_tests_8cpp_a2c0c73124f0254c835d19c0f176e106e}{00185}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ ProjectionOntoNormalizedVectorReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00186}00186\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00187}00187\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector\ and\ a\ normalized\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00188}00188\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(1.0f,\ 2.0f,\ 3.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00189}00189\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ b(1.0f,\ 0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00190}00190\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedProjection(1.0f,\ 0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00192}00192\ \ \ \ \ \textcolor{comment}{//\ When\ the\ vector\ is\ projected\ onto\ the\ normalized\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00193}00193\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}}(b,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00195}00195\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ has\ components\ that\ is\ parallel\ to\ the\ projected\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00196}00196\ \ \ \ \ EXPECT\_FLOAT\_EQ(expectedProjection.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5b123e1cdf3d7c5888546b71afec4c25}{x}},\ actualProjection.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5b123e1cdf3d7c5888546b71afec4c25}{x}});}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00197}00197\ \ \ \ \ EXPECT\_FLOAT\_EQ(expectedProjection.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a75ad7ea209aa513c25daee7908112c54}{y}},\ actualProjection.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a75ad7ea209aa513c25daee7908112c54}{y}});}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00198}00198\ \ \ \ \ EXPECT\_FLOAT\_EQ(expectedProjection.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae5fd276e681e0499943fd40f530fcd47}{z}},\ actualProjection.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae5fd276e681e0499943fd40f530fcd47}{z}});}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00199}00199\ \ \ \ \ EXPECT\_FLOAT\_EQ(expectedProjection.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad5362e4ee59aa8dda9630e3983786d76}{w}},\ actualProjection.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad5362e4ee59aa8dda9630e3983786d76}{w}});}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00200}00200\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00207}\doxymbox{\hyperlink{_projection_tests_8cpp_a7c1e9e6ecffa76a96d26534b2f408b55}{00207}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVectorInSameDirection)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00208}00208\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00209}00209\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector\ and\ a\ vector\ in\ the\ opposite\ Direction}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00210}00210\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(4.0f,\ 4.0f,\ 4.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00211}00211\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ negativeZAxis(0.0f,\ 0.0f,\ -\/1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00212}00212\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedProjection(0.0f,\ 0.0f,\ 4.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00214}00214\ \ \ \ \ \textcolor{comment}{//\ When\ projected}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00215}00215\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<float>}}\ actualProjection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}}(negativeZAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00217}00217\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ is\ non-\/zero\ and\ in\ the\ same\ direction}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00218}00218\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00219}00219\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00224}\doxymbox{\hyperlink{_projection_tests_8cpp_af499eafb2e22ecad19bf6011b7df7615}{00224}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_projection}{Vector4DProjection}},\ MixedTypeProjectionPromotesType)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00225}00225\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00226}00226\ \ \ \ \ \textcolor{comment}{//\ Given\ two\ arbitrary\ vectors}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00227}00227\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(7,\ 13,\ 29,\ 41);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00228}00228\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ onto(2.0,\ 4.0,\ 4.0,\ 2.0);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00229}00229\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedProjection(13.2,\ 26.4,\ 26.4,\ 13.2);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00231}00231\ \ \ \ \ \textcolor{comment}{//\ When\ projected\ onto\ another}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00232}00232\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualProjection\ =\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}}(onto);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00234}00234\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ is\ type\ promoted}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00235}00235\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(actualProjection)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00236}00236\ \ \ \ \ \textcolor{comment}{//\ and\ is\ the\ projection}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00237}00237\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedProjection,\ actualProjection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00238}00238\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00243}00243\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00244}00244\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00245}00245\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ REJECTION\ TESTS\ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00246}00246\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00247}00247\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00250}\doxymbox{\hyperlink{_projection_tests_8cpp_a7a25dbf3917533882636353f3a64c1f2}{00250}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_ad269bb6f11c2177410226b1af52a1018}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ ParallelVectorsReturnsZeroVector)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00251}00251\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00252}00252\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ this-\/>vec.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(this-\/>parallelVec);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00254}00254\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{EXPECT\_VEC\_ZERO}}(actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00255}00255\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00262}\doxymbox{\hyperlink{_projection_tests_8cpp_a1e61555682b1e83183409e4673463b5a}{00262}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ RejectionFromXAxisReturnsVectorWithZeroXComponent)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00263}00263\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00264}00264\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00265}00265\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(10.0f,\ 20.0f,\ 30.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00266}00266\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ xAxis(1.0f,\ 0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00267}00267\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedRejection(0.0f,\ 20.0f,\ 30.0f,\ 40.f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00269}00269\ \ \ \ \ \textcolor{comment}{//\ When\ rejected\ from\ x-\/axis}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00270}00270\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(xAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00272}00272\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ has\ zero\ x-\/component}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00273}00273\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00274}00274\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00281}\doxymbox{\hyperlink{_projection_tests_8cpp_a78d0a90868d6c0a46a9a960a2f7d2188}{00281}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ RejectionFromYAxisReturnsVectorWithZeroYComponent)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00282}00282\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00283}00283\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00284}00284\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(10.0f,\ 20.0f,\ 30.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00285}00285\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ yAxis(0.0f,\ 1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00286}00286\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedRejection(10.0f,\ 0.0f,\ 30.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00288}00288\ \ \ \ \ \textcolor{comment}{//\ When\ rejected\ from\ y-\/axis}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00289}00289\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(yAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00291}00291\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ has\ zero\ y-\/component}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00292}00292\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00293}00293\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00300}\doxymbox{\hyperlink{_projection_tests_8cpp_a194a3ee0aa322cc9d60419d4cf9612f5}{00300}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ RejectionFromZAxisReturnsVectorWithZeroZComponent)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00301}00301\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00302}00302\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00303}00303\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(10.0f,\ 20.0f,\ 30.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00304}00304\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ zAxis(0.0f,\ 0.0f,\ 1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00305}00305\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedRejection(10.0f,\ 20.0f,\ 0.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00307}00307\ \ \ \ \ \textcolor{comment}{//\ When\ rejected\ from\ z-\/axis}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00308}00308\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(zAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00310}00310\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ has\ zero\ z-\/component}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00311}00311\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00312}00312\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00319}\doxymbox{\hyperlink{_projection_tests_8cpp_ae52f4e23d3d6e54f8c7b8db3c4636f26}{00319}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ RejectionFromWAxisReturnsVectorWithZeroWComponent)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00320}00320\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00321}00321\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00322}00322\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(10.0f,\ 20.0f,\ 30.0f,\ 40.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00323}00323\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ wAxis(0.0f,\ 0.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00324}00324\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedRejection(10.0f,\ 20.0f,\ 30.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00326}00326\ \ \ \ \ \textcolor{comment}{//\ When\ rejected\ from\ w-\/axis}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00327}00327\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(wAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00329}00329\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ has\ zero\ w-\/component}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00330}00330\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00331}00331\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00338}\doxymbox{\hyperlink{_projection_tests_8cpp_a46a1b2e4f0d2903ff0d2ed03b36ee101}{00338}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ OrthogonalRejectionReturnsOriginalVector)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00339}00339\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00340}00340\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00341}00341\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(1.0f,\ 2.0f,\ 3.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00342}00342\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ b(0.0f,\ 0.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00343}00343\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00344}00344\ \ \ \ \ \textcolor{comment}{//\ When\ rejected\ on\ to\ an\ orthogonal\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00345}00345\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(b);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00347}00347\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ is\ same\ the\ original\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00348}00348\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(a,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00349}00349\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00356}\doxymbox{\hyperlink{_projection_tests_8cpp_a94b1e790dd329a5f88d76fc2b9623901}{00356}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_ad269bb6f11c2177410226b1af52a1018}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ NonOrthogonalRejectionReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00357}00357\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00358}00358\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ this-\/>vec.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(this-\/>onto);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00360}00360\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00361}00361\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00363}00363\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00368}\doxymbox{\hyperlink{_projection_tests_8cpp_ad77ce168415c790cddae0fe2c4879a4e}{00368}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_ad269bb6f11c2177410226b1af52a1018}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ StaticWrapper\_NonOrthogonalRejectionReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00369}00369\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00370}00370\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{fgm::Vector4D<TypeParam>::reject}}(this-\/>vec,\ this-\/>onto);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00371}00371\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00372}00372\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00373}00373\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00380}\doxymbox{\hyperlink{_projection_tests_8cpp_a8a49cf29ab12b47f1afa94839d606c63}{00380}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ RejectionFromNormalizedVectorReturnsNonZeroVector)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00381}00381\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00382}00382\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector\ and\ a\ normalized\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00383}00383\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(1.0f,\ 2.0f,\ 3.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00384}00384\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ b(1.0f,\ 0.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00385}00385\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedRejection(0.0f,\ 2.0f,\ 3.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00387}00387\ \ \ \ \ \textcolor{comment}{//\ When\ rejected\ from\ another}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00388}00388\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(b,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00390}00390\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ has\ components\ perpendicular\ to\ the\ \`{}from`\ vector.}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00391}00391\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00392}00392\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00399}\doxymbox{\hyperlink{_projection_tests_8cpp_accb7b03260bcd92fbef5ca5570c3e20d}{00399}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ RejectionFromVectorInOppositeDirectionReturnsVectorWithPerpendicularComponents)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00400}00400\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00401}00401\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ vector}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00402}00402\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ a(4.0f,\ 4.0f,\ 4.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00403}00403\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ negativeZAxis(0.0f,\ 0.0f,\ -\/1.0f,\ 0.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00404}00404\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedRejection(4.0f,\ 4.0f,\ 0.0f,\ 4.0f);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00406}00406\ \ \ \ \ \textcolor{comment}{//\ When\ rejection\ onto\ a\ vector\ in\ opposite\ direction}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00407}00407\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ a.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(negativeZAxis);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00409}00409\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ has\ components\ perpendicular\ to\ the\ \`{}from`\ vector\ in\ the\ same\ direction.}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00410}00410\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00411}00411\ \}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00412}00412\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00418}\doxymbox{\hyperlink{_projection_tests_8cpp_a74c50de1b836a9ef4caaec87d88ff39f}{00418}}\ \doxymbox{\hyperlink{_projection_tests_8cpp_aa2b05b52a91d0691e563f9e89a7507df}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_rejection}{Vector4DRejection}},\ MixedTypeRejectionPromotesType)}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00419}00419\ \{}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00420}00420\ \ \ \ \ \textcolor{comment}{//\ Given\ two\ arbitrary\ vectors}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00421}00421\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(7,\ 13,\ 29,\ 41);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00422}00422\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ onto(2.0,\ 4.0,\ 4.0,\ 2.0);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00423}00423\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expectedRejection(-\/6.2,\ -\/13.4,\ 2.6,\ 27.8);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00424}00424\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00425}00425\ \ \ \ \ \textcolor{comment}{//\ When\ projected\ onto\ another}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00426}00426\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ actualRejection\ =\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa752fcd05b72e7e2eb64a6ebe10eb55b}{reject}}(onto);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00427}00427\ }
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00428}00428\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ resultant\ vector\ is\ type\ promoted}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00429}00429\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(actualRejection)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00430}00430\ \ \ \ \ \textcolor{comment}{//\ and\ is\ the\ rejection}}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00431}00431\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expectedRejection,\ actualRejection);}
+\DoxyCodeLine{\Hypertarget{_projection_tests_8cpp_source_l00432}00432\ \}}
+
+\end{DoxyCode}

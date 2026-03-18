@@ -1,0 +1,63 @@
+\doxysection{Alias\+Tests.\+cpp}
+\hypertarget{_alias_tests_8cpp_source}{}\label{_alias_tests_8cpp_source}\index{test-\/suite/src/vectors/vector4d/AliasTests.cpp@{test-\/suite/src/vectors/vector4d/AliasTests.cpp}}
+\doxymbox{\hyperlink{_alias_tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector4_d_test_setup_8h}{Vector4DTestSetup.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00016}\doxymbox{\hyperlink{_alias_tests_8cpp_ab7c715959db48c9d8ec8cef75a319e40}{00016}}\ \doxymbox{\hyperlink{_alias_tests_8cpp_ab7c715959db48c9d8ec8cef75a319e40}{TEST}}(Vector4DAlias,\ bVec4IsA4DBoolVector)}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::bVec4::value\_type,\ bool>\ \&\&\ \textcolor{stringliteral}{"{}bVec4\ must\ contain\ boolean\ elements"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::bVec4,\ fgm::Vector4D<bool>>\ \&\&\ \textcolor{stringliteral}{"{}bVec4\ must\ be\ an\ alias\ of\ Vector4D<bool>"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00020}00020\ \}}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00024}\doxymbox{\hyperlink{_alias_tests_8cpp_a905ac8b98a25ade0a62dee51b9795af1}{00024}}\ \doxymbox{\hyperlink{_alias_tests_8cpp_ab7c715959db48c9d8ec8cef75a319e40}{TEST}}(Vector4DAlias,\ iVec4IsA4DIntVector)}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00025}00025\ \{}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::iVec4::value\_type,\ int>\ \&\&\ \textcolor{stringliteral}{"{}iVec4\ must\ contain\ int\ elements"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::iVec4,\ fgm::Vector4D<int>>\ \&\&\ \textcolor{stringliteral}{"{}iVec4\ must\ be\ an\ alias\ of\ Vector4D<int>"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00028}00028\ \}}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00032}\doxymbox{\hyperlink{_alias_tests_8cpp_a66b7130e2fda3fa0fcef3adbd662aab3}{00032}}\ \doxymbox{\hyperlink{_alias_tests_8cpp_ab7c715959db48c9d8ec8cef75a319e40}{TEST}}(Vector4DAlias,\ uVec4IsA4DUnsignedIntVector)}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::uVec4::value\_type,\ unsigned\ int>\ \&\&\ \textcolor{stringliteral}{"{}uVec4\ must\ contain\ unsigned\ int\ elements"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::uVec4,\ fgm::Vector4D<unsigned\ int>>\ \&\&}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}uVec4\ must\ be\ an\ alias\ of\ Vector4D<unsigned\ int>"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00041}\doxymbox{\hyperlink{_alias_tests_8cpp_ab91b9ef4055def6644d3d254893782f9}{00041}}\ \doxymbox{\hyperlink{_alias_tests_8cpp_ab7c715959db48c9d8ec8cef75a319e40}{TEST}}(Vector4DAlias,\ vec4IsA4DFloatVector)}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00042}00042\ \{}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::vec4::value\_type,\ float>\ \&\&\ \textcolor{stringliteral}{"{}vec4\ must\ contain\ float\ elements"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::vec4,\ fgm::Vector4D<float>>\ \&\&\ \textcolor{stringliteral}{"{}vec4\ must\ be\ an\ alias\ of\ Vector4D<float>"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00049}\doxymbox{\hyperlink{_alias_tests_8cpp_adf7f1ecda862de319f162c2848266b00}{00049}}\ \doxymbox{\hyperlink{_alias_tests_8cpp_ab7c715959db48c9d8ec8cef75a319e40}{TEST}}(Vector4DAlias,\ lVec4IsA4DLongLongVector)}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00050}00050\ \{}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::lVec4::value\_type,\ long\ long>\ \&\&\ \textcolor{stringliteral}{"{}lVec4\ must\ contain\ long\ long\ elements"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::lVec4,\ fgm::Vector4D<long\ long>>\ \&\&}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}lVec4\ must\ be\ an\ alias\ of\ Vector4D<long\ long>"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00054}00054\ \}}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00058}\doxymbox{\hyperlink{_alias_tests_8cpp_a07fe2e0c695e3b6971cc339282afabc8}{00058}}\ \doxymbox{\hyperlink{_alias_tests_8cpp_ab7c715959db48c9d8ec8cef75a319e40}{TEST}}(Vector4DAlias,\ dVec4IsA4DDoubleVector)}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::dVec4::value\_type,\ double>\ \&\&\ \textcolor{stringliteral}{"{}dVec4\ must\ contain\ double\ elements"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::dVec4,\ fgm::Vector4D<double>>\ \&\&\ \textcolor{stringliteral}{"{}dVec4\ must\ be\ an\ alias\ of\ Vector4D<double>"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00066}\doxymbox{\hyperlink{_alias_tests_8cpp_ab17b20949bbbf13000df59768654c7ad}{00066}}\ \doxymbox{\hyperlink{_alias_tests_8cpp_ab7c715959db48c9d8ec8cef75a319e40}{TEST}}(Vector4DAlias,\ ulVec4IsA4DUnsignedLongLongVector)}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00067}00067\ \{}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00068}00068\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::ulVec4::value\_type,\ unsigned\ long\ long>\ \&\&}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ulVec4\ must\ contain\ unsigned\ long\ long\ elements"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00070}00070\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<fgm::ulVec4,\ fgm::Vector4D<unsigned\ long\ long>>\ \&\&}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ulVec4\ must\ be\ an\ alias\ of\ Vector4D<unsigned\ long\ long>"{}});}
+\DoxyCodeLine{\Hypertarget{_alias_tests_8cpp_source_l00072}00072\ \}}
+
+\end{DoxyCode}

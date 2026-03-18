@@ -1,0 +1,432 @@
+\doxysection{fgm Namespace Reference}
+\hypertarget{namespacefgm}{}\label{namespacefgm}\index{fgm@{fgm}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structfgm_1_1_config}{Config}}
+\item 
+struct \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{Matrix2D}}
+\item 
+struct \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}
+\item 
+struct \doxymbox{\hyperlink{structfgm_1_1_matrix4_d}{Matrix4D}}
+\item 
+struct \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}
+\item 
+struct \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}
+\item 
+struct \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Concepts}
+\begin{DoxyCompactItemize}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{Arithmetic}}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1_strict_arithmetic}{Strict\+Arithmetic}}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1weak__arithmetic}{weak\+\_\+arithmetic}}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1_vector}{Vector}}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{Matrix}}
+\begin{DoxyCompactList}\small\item\em {\ttfamily Matrix} requires a value\+\_\+type, rows, columns, \+[]\+ accessor, (r, c) accessor, and its value\+\_\+type needs to be {\ttfamily Arithmetic}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\using \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}} = std::\+conditional\+\_\+t$<$std::\+is\+\_\+same\+\_\+v$<$T, float$>$, float, double$>$
+\begin{DoxyCompactList}\small\item\em Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision. \end{DoxyCompactList}\item 
+using \doxymbox{\hyperlink{namespacefgm_ad1013de6db597b4a2906d9e5d5c3ad78}{vec2}} = \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$float$>$
+\item 
+using \doxymbox{\hyperlink{namespacefgm_ad6863b15dcf76f4c41fa5ccd55040791}{dvec2}} = \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$double$>$
+\item 
+using \doxymbox{\hyperlink{namespacefgm_ae5d7d781ee2e419faff48229db52a50c}{vec3}} = \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$float$>$
+\item 
+using \doxymbox{\hyperlink{namespacefgm_a78fc07c62bb74319bf946897e75f5414}{dvec3}} = \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$double$>$
+\item 
+using \doxymbox{\hyperlink{namespacefgm_ab10b0cdd0e7cb4bdde903fb3ed21953a}{b\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$bool$>$
+\begin{DoxyCompactList}\small\item\em bool vector \end{DoxyCompactList}\item 
+using \doxymbox{\hyperlink{namespacefgm_a1c1317958c659deaa05ac70f0db126b8}{i\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$int$>$
+\begin{DoxyCompactList}\small\item\em int vector \end{DoxyCompactList}\item 
+using \doxymbox{\hyperlink{namespacefgm_ad66e47fb3512f48bd6312ddb99317040}{u\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$unsigned int$>$
+\begin{DoxyCompactList}\small\item\em unsigned int vector \end{DoxyCompactList}\item 
+using \doxymbox{\hyperlink{namespacefgm_abd13821e8386ef8d620a362f7dbe9c29}{vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$float$>$
+\begin{DoxyCompactList}\small\item\em float vector \end{DoxyCompactList}\item 
+using \doxymbox{\hyperlink{namespacefgm_ae6e8c3217001b4b35c326593c6b64e5e}{l\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$long long$>$
+\begin{DoxyCompactList}\small\item\em long long vector \end{DoxyCompactList}\item 
+using \doxymbox{\hyperlink{namespacefgm_a939e27ff4e1d08602da8ecc2b27227d2}{d\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$double$>$
+\begin{DoxyCompactList}\small\item\em double vector \end{DoxyCompactList}\item 
+using \doxymbox{\hyperlink{namespacefgm_a5f0aa2bb9ae6995a18139c6750339f10}{ul\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$unsigned long long$>$
+\begin{DoxyCompactList}\small\item\em unsigned long long vector \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{Matrix2D}}$<$ T $>$ \doxymbox{\hyperlink{namespacefgm_a2bf1923312a16451047b83ae8f9d51d0}{operator\texorpdfstring{$\ast$}{*}}} (const S \&scalar, const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{Matrix2D}}$<$ T $>$ \&matrix)
+\item 
+{\footnotesize template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \doxymbox{\hyperlink{namespacefgm_a33b3208792cac0cf793df0ed81bfd370}{operator\texorpdfstring{$\ast$}{*}}} (const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ S $>$ \&vec, const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{Matrix2D}}$<$ T $>$ \&mat)
+\item 
+{\footnotesize template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \doxymbox{\hyperlink{namespacefgm_ab226c5ce45fcb1bb3e488f29de4c7c09}{operator\texorpdfstring{$\ast$}{*}=}} (\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ S $>$ \&vec, const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{Matrix2D}}$<$ T $>$ \&mat)
+\item 
+{\footnotesize template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\auto \doxymbox{\hyperlink{namespacefgm_a34e0323b5c2d8ea26c6160515e7d7a13}{operator\texorpdfstring{$\ast$}{*}}} (const S \&scalar, const \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ T $>$ \&matrix) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\item 
+{\footnotesize template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\auto \doxymbox{\hyperlink{namespacefgm_a26a64145c3ede20a042afcda16a03651}{operator\texorpdfstring{$\ast$}{*}}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ S $>$ \&vec, const \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ T $>$ \&mat) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\item 
+{\footnotesize template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ }\\auto \doxymbox{\hyperlink{namespacefgm_a205b4fa3f5f18af778c65a853bfede7c}{operator\texorpdfstring{$\ast$}{*}=}} (\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ S $>$ \&vec, const \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ T $>$ \&mat) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\item 
+{\footnotesize template$<$Arithmetic T, Arithmetic S$>$ }\\auto \doxymbox{\hyperlink{namespacefgm_a43434fb0dd428fcdb2e7bf1d697ec077}{operator\texorpdfstring{$\ast$}{*}}} (S scalar, const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \&vector) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ S, T $>$ $>$
+\item 
+{\footnotesize template$<$Arithmetic T, Arithmetic S$>$ }\\auto \doxymbox{\hyperlink{namespacefgm_afabe3f375509d8bab94708cb06578d1b}{operator\texorpdfstring{$\ast$}{*}}} (S scalar, const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ T $>$ \&vector) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\item 
+{\footnotesize template$<$Strict\+Arithmetic T, Strict\+Arithmetic S$>$ \newline
+requires Strict\+Arithmetic$<$T$>$}\\auto \doxymbox{\hyperlink{namespacefgm_a5af829668f1b42436232631a1b2048af}{operator\texorpdfstring{$\ast$}{*}}} (S scalar, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$ T $>$ \&vector) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\begin{DoxyCompactList}\small\item\em Scale the vector by a scalar value. Multiplies {\ttfamily scalar} by each component of the vector and returns a new vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr double \doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}} = 1e-\/5
+\item 
+constexpr double \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}} = 1e-\/12
+\end{DoxyCompactItemize}
+
+
+\label{doc-typedef-members}
+\Hypertarget{namespacefgm_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespacefgm_ab10b0cdd0e7cb4bdde903fb3ed21953a}\index{fgm@{fgm}!bVec4@{bVec4}}
+\index{bVec4@{bVec4}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{bVec4}{bVec4}}
+{\footnotesize\ttfamily \label{namespacefgm_ab10b0cdd0e7cb4bdde903fb3ed21953a} 
+using \doxymbox{\hyperlink{namespacefgm_ab10b0cdd0e7cb4bdde903fb3ed21953a}{fgm::\+b\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$bool$>$}
+
+
+
+bool vector 
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_8h_source_l00902}{902}} of file \doxymbox{\hyperlink{_vector4_d_8h_source}{Vector4\+D.\+h}}.
+
+\Hypertarget{namespacefgm_ad6863b15dcf76f4c41fa5ccd55040791}\index{fgm@{fgm}!dvec2@{dvec2}}
+\index{dvec2@{dvec2}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{dvec2}{dvec2}}
+{\footnotesize\ttfamily \label{namespacefgm_ad6863b15dcf76f4c41fa5ccd55040791} 
+using \doxymbox{\hyperlink{namespacefgm_ad6863b15dcf76f4c41fa5ccd55040791}{fgm::\+dvec2}} = \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$double$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_8h_source_l00205}{205}} of file \doxymbox{\hyperlink{_vector2_d_8h_source}{Vector2\+D.\+h}}.
+
+\Hypertarget{namespacefgm_a78fc07c62bb74319bf946897e75f5414}\index{fgm@{fgm}!dvec3@{dvec3}}
+\index{dvec3@{dvec3}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{dvec3}{dvec3}}
+{\footnotesize\ttfamily \label{namespacefgm_a78fc07c62bb74319bf946897e75f5414} 
+using \doxymbox{\hyperlink{namespacefgm_a78fc07c62bb74319bf946897e75f5414}{fgm::\+dvec3}} = \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$double$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector3_d_8h_source_l00227}{227}} of file \doxymbox{\hyperlink{_vector3_d_8h_source}{Vector3\+D.\+h}}.
+
+\Hypertarget{namespacefgm_a939e27ff4e1d08602da8ecc2b27227d2}\index{fgm@{fgm}!dVec4@{dVec4}}
+\index{dVec4@{dVec4}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{dVec4}{dVec4}}
+{\footnotesize\ttfamily \label{namespacefgm_a939e27ff4e1d08602da8ecc2b27227d2} 
+using \doxymbox{\hyperlink{namespacefgm_a939e27ff4e1d08602da8ecc2b27227d2}{fgm::\+d\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$double$>$}
+
+
+
+double vector 
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_8h_source_l00907}{907}} of file \doxymbox{\hyperlink{_vector4_d_8h_source}{Vector4\+D.\+h}}.
+
+\Hypertarget{namespacefgm_a1c1317958c659deaa05ac70f0db126b8}\index{fgm@{fgm}!iVec4@{iVec4}}
+\index{iVec4@{iVec4}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{iVec4}{iVec4}}
+{\footnotesize\ttfamily \label{namespacefgm_a1c1317958c659deaa05ac70f0db126b8} 
+using \doxymbox{\hyperlink{namespacefgm_a1c1317958c659deaa05ac70f0db126b8}{fgm::\+i\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$int$>$}
+
+
+
+int vector 
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_8h_source_l00903}{903}} of file \doxymbox{\hyperlink{_vector4_d_8h_source}{Vector4\+D.\+h}}.
+
+\Hypertarget{namespacefgm_ae6e8c3217001b4b35c326593c6b64e5e}\index{fgm@{fgm}!lVec4@{lVec4}}
+\index{lVec4@{lVec4}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{lVec4}{lVec4}}
+{\footnotesize\ttfamily \label{namespacefgm_ae6e8c3217001b4b35c326593c6b64e5e} 
+using \doxymbox{\hyperlink{namespacefgm_ae6e8c3217001b4b35c326593c6b64e5e}{fgm::\+l\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$long long$>$}
+
+
+
+long long vector 
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_8h_source_l00906}{906}} of file \doxymbox{\hyperlink{_vector4_d_8h_source}{Vector4\+D.\+h}}.
+
+\Hypertarget{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}\index{fgm@{fgm}!Magnitude@{Magnitude}}
+\index{Magnitude@{Magnitude}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{Magnitude}{Magnitude}}
+{\footnotesize\ttfamily \label{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4} 
+template$<$typename T$>$ \\
+using \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{fgm::\+\+Magnitude}} = std::\+conditional\+\_\+t$<$std::\+is\+\_\+same\+\_\+v$<$T, float$>$, float, double$>$}
+
+
+
+Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_math_traits_8h_source_l00075}{75}} of file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
+
+\Hypertarget{namespacefgm_a5f0aa2bb9ae6995a18139c6750339f10}\index{fgm@{fgm}!ulVec4@{ulVec4}}
+\index{ulVec4@{ulVec4}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{ulVec4}{ulVec4}}
+{\footnotesize\ttfamily \label{namespacefgm_a5f0aa2bb9ae6995a18139c6750339f10} 
+using \doxymbox{\hyperlink{namespacefgm_a5f0aa2bb9ae6995a18139c6750339f10}{fgm::\+ul\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$unsigned long long$>$}
+
+
+
+unsigned long long vector 
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_8h_source_l00908}{908}} of file \doxymbox{\hyperlink{_vector4_d_8h_source}{Vector4\+D.\+h}}.
+
+\Hypertarget{namespacefgm_ad66e47fb3512f48bd6312ddb99317040}\index{fgm@{fgm}!uVec4@{uVec4}}
+\index{uVec4@{uVec4}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{uVec4}{uVec4}}
+{\footnotesize\ttfamily \label{namespacefgm_ad66e47fb3512f48bd6312ddb99317040} 
+using \doxymbox{\hyperlink{namespacefgm_ad66e47fb3512f48bd6312ddb99317040}{fgm::\+u\+Vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$unsigned int$>$}
+
+
+
+unsigned int vector 
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_8h_source_l00904}{904}} of file \doxymbox{\hyperlink{_vector4_d_8h_source}{Vector4\+D.\+h}}.
+
+\Hypertarget{namespacefgm_ad1013de6db597b4a2906d9e5d5c3ad78}\index{fgm@{fgm}!vec2@{vec2}}
+\index{vec2@{vec2}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{vec2}{vec2}}
+{\footnotesize\ttfamily \label{namespacefgm_ad1013de6db597b4a2906d9e5d5c3ad78} 
+using \doxymbox{\hyperlink{namespacefgm_ad1013de6db597b4a2906d9e5d5c3ad78}{fgm::\+vec2}} = \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$float$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector2_d_8h_source_l00204}{204}} of file \doxymbox{\hyperlink{_vector2_d_8h_source}{Vector2\+D.\+h}}.
+
+\Hypertarget{namespacefgm_ae5d7d781ee2e419faff48229db52a50c}\index{fgm@{fgm}!vec3@{vec3}}
+\index{vec3@{vec3}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{vec3}{vec3}}
+{\footnotesize\ttfamily \label{namespacefgm_ae5d7d781ee2e419faff48229db52a50c} 
+using \doxymbox{\hyperlink{namespacefgm_ae5d7d781ee2e419faff48229db52a50c}{fgm::\+vec3}} = \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$float$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector3_d_8h_source_l00226}{226}} of file \doxymbox{\hyperlink{_vector3_d_8h_source}{Vector3\+D.\+h}}.
+
+\Hypertarget{namespacefgm_abd13821e8386ef8d620a362f7dbe9c29}\index{fgm@{fgm}!vec4@{vec4}}
+\index{vec4@{vec4}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{vec4}{vec4}}
+{\footnotesize\ttfamily \label{namespacefgm_abd13821e8386ef8d620a362f7dbe9c29} 
+using \doxymbox{\hyperlink{namespacefgm_abd13821e8386ef8d620a362f7dbe9c29}{fgm::\+vec4}} = \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$float$>$}
+
+
+
+float vector 
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_8h_source_l00905}{905}} of file \doxymbox{\hyperlink{_vector4_d_8h_source}{Vector4\+D.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{namespacefgm_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacefgm_a2bf1923312a16451047b83ae8f9d51d0}\index{fgm@{fgm}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily \label{namespacefgm_a2bf1923312a16451047b83ae8f9d51d0} 
+template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{Matrix2D}}$<$ T $>$ fgm::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const S \&}]{scalar}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{Matrix2D}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespacefgm_a34e0323b5c2d8ea26c6160515e7d7a13}\index{fgm@{fgm}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily \label{namespacefgm_a34e0323b5c2d8ea26c6160515e7d7a13} 
+template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+auto fgm::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const S \&}]{scalar}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$}
+
+\Hypertarget{namespacefgm_a33b3208792cac0cf793df0ed81bfd370}\index{fgm@{fgm}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily \label{namespacefgm_a33b3208792cac0cf793df0ed81bfd370} 
+template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ fgm::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ S $>$ \&}]{vec}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{Matrix2D}}$<$ T $>$ \&}]{mat}{}\end{DoxyParamCaption})}
+
+Multiplies a \doxylink{structfgm_1_1_vector2_d}{Vector2D} by a \doxylink{structfgm_1_1_matrix2_d}{Matrix2D}. NOTE:\+ This operation transposes the 3x1 vector to a 1x3 vector(matrix), and may not be desirable in engine code. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type for matrix values \\
+\hline
+{\em S} & Type for vector values \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & vector to be multiplied. \\
+\hline
+{\em mat} & matrix to be multiplied against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new \doxylink{structfgm_1_1_vector2_d}{Vector2D} transposed(row major form) 
+\end{DoxyReturn}
+\Hypertarget{namespacefgm_a26a64145c3ede20a042afcda16a03651}\index{fgm@{fgm}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily \label{namespacefgm_a26a64145c3ede20a042afcda16a03651} 
+template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+auto fgm::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ S $>$ \&}]{vec}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ T $>$ \&}]{mat}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$}
+
+Multiplies a \doxylink{structfgm_1_1_vector3_d}{Vector3D} by a \doxylink{structfgm_1_1_matrix3_d}{Matrix3D}. NOTE:\+ This operation transposes the 3x1 vector to a 1x3 vector(matrix), and may not be desirable in engine code. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type for matrix values \\
+\hline
+{\em S} & Type for vector values \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & vector to be multiplied. \\
+\hline
+{\em mat} & matrix to be multiplied against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new \doxylink{structfgm_1_1_vector3_d}{Vector3D} transposed(row major form) 
+\end{DoxyReturn}
+\Hypertarget{namespacefgm_a43434fb0dd428fcdb2e7bf1d697ec077}\index{fgm@{fgm}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily \label{namespacefgm_a43434fb0dd428fcdb2e7bf1d697ec077} 
+template$<$Arithmetic T, Arithmetic S$>$ \\
+auto fgm::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{S}]{scalar}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \&}]{vector}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ S, T $>$ $>$}
+
+\Hypertarget{namespacefgm_afabe3f375509d8bab94708cb06578d1b}\index{fgm@{fgm}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily \label{namespacefgm_afabe3f375509d8bab94708cb06578d1b} 
+template$<$Arithmetic T, Arithmetic S$>$ \\
+auto fgm::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{S}]{scalar}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ T $>$ \&}]{vector}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$}
+
+\Hypertarget{namespacefgm_a5af829668f1b42436232631a1b2048af}\index{fgm@{fgm}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily \label{namespacefgm_a5af829668f1b42436232631a1b2048af} 
+template$<$Strict\+Arithmetic T, Strict\+Arithmetic S$>$ \newline
+requires Strict\+Arithmetic$<$T$>$\\
+auto fgm::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{S}]{scalar}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$ T $>$ \&}]{vector}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{Vector4D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$}
+
+
+
+Scale the vector by a scalar value. Multiplies {\ttfamily scalar} by each component of the vector and returns a new vector. 
+
+\begin{DoxyNote}{Note}
+Promotes the result to the {\ttfamily std::\+common\+\_\+type\+\_\+t} of {\ttfamily T} and {\ttfamily S}. 
+
+Operation is restricted to numeric types via \doxylink{conceptfgm_1_1_strict_arithmetic}{Strict\+Arithmetic}.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em S} & Numeric type of the scalar. Must satisfy \doxylink{conceptfgm_1_1_strict_arithmetic}{Strict\+Arithmetic}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em scalar} & The value to scale by. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em vector} & The vector to scale\+[RHS]\+. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{structfgm_1_1_vector4_d}{Vector4D} scaled by {\ttfamily scalar}. 
+\end{DoxyReturn}
+\Hypertarget{namespacefgm_ab226c5ce45fcb1bb3e488f29de4c7c09}\index{fgm@{fgm}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{namespacefgm_ab226c5ce45fcb1bb3e488f29de4c7c09} 
+template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ fgm::\+operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ S $>$ \&}]{vec}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{Matrix2D}}$<$ T $>$ \&}]{mat}{}\end{DoxyParamCaption})}
+
+Multiplies a \doxylink{structfgm_1_1_vector2_d}{Vector2D} by a \doxylink{structfgm_1_1_matrix2_d}{Matrix2D}. NOTE:\+ This operation transposes the 3x1 vector to a 1x3 vector(matrix), and may not be desirable in engine code. NOTE:\+ This operation returns a new vector so it is strictly for testing purposes and completeness and is not desirable to be used in game engine. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type for matrix values \\
+\hline
+{\em S} & Type for vector values \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & vector to be multiplied. \\
+\hline
+{\em mat} & matrix to be multiplied against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the passed in vector 
+\end{DoxyReturn}
+\Hypertarget{namespacefgm_a205b4fa3f5f18af778c65a853bfede7c}\index{fgm@{fgm}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{namespacefgm_a205b4fa3f5f18af778c65a853bfede7c} 
+template$<$typename T, typename S, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+S$>$$>$$>$ \\
+auto fgm::\+operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ S $>$ \&}]{vec}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{Matrix3D}}$<$ T $>$ \&}]{mat}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$}
+
+Multiplies a \doxylink{structfgm_1_1_vector3_d}{Vector3D} by a \doxylink{structfgm_1_1_matrix3_d}{Matrix3D}. NOTE:\+ This operation transposes the 3x1 vector to a 1x3 vector(matrix), and may not be desirable in engine code. NOTE:\+ This operation returns a new vector so it is strictly for testing purposes and completeness and is not desirable to be used in game engine. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type for matrix values \\
+\hline
+{\em S} & Type for vector values \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & vector to be multiplied. \\
+\hline
+{\em mat} & matrix to be multiplied against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the passed in vector 
+\end{DoxyReturn}
+
+
+\label{doc-var-members}
+\Hypertarget{namespacefgm_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}\index{fgm@{fgm}!DOUBLE\_EPSILON@{DOUBLE\_EPSILON}}
+\index{DOUBLE\_EPSILON@{DOUBLE\_EPSILON}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{DOUBLE\_EPSILON}{DOUBLE\_EPSILON}}
+{\footnotesize\ttfamily \label{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80} 
+double fgm::\+\+DOUBLE\+\_\+\+EPSILON = 1e-\/12\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_math_traits_8h_source_l00085}{85}} of file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
+
+\Hypertarget{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}\index{fgm@{fgm}!FLOAT\_EPSILON@{FLOAT\_EPSILON}}
+\index{FLOAT\_EPSILON@{FLOAT\_EPSILON}!fgm@{fgm}}
+\doxysubsubsection{\texorpdfstring{FLOAT\_EPSILON}{FLOAT\_EPSILON}}
+{\footnotesize\ttfamily \label{namespacefgm_ac3c0fd59149d0159565c3254343bdcab} 
+double fgm::\+\+FLOAT\+\_\+\+EPSILON = 1e-\/5\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_math_traits_8h_source_l00084}{84}} of file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
+

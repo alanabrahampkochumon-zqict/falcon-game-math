@@ -1,0 +1,417 @@
+\doxysection{test-\/suite/\+src/\+vectors/\+vector4d/\+\+Arithmetic\+Operation\+Tests.cpp File Reference}
+\hypertarget{_arithmetic_operation_tests_8cpp}{}\label{_arithmetic_operation_tests_8cpp}\index{test-\/suite/src/vectors/vector4d/ArithmeticOperationTests.cpp@{test-\/suite/src/vectors/vector4d/ArithmeticOperationTests.cpp}}
+
+
+Verifies Vector4D arithmetic operator(+, -\/, \texorpdfstring{$\ast$}{*}, /\+) logic.  
+
+
+{\ttfamily \+\#include "{}Vector4\+DTest\+Setup.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition$<$ T $>$}}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction$<$ T $>$}}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication$<$ T $>$}}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division$<$ T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_afb050afc382cfdd2d96b146f1ed1c157}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} addition, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a7186ef7ed741df2c5cf87173b6ba9499}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} subtraction, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a396bc665ff2ebf7c97c080914ce9d683}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} scalar multiplication, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a8f1f2172fc74a40f88bd5f847c4798e0}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} division, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}, Plus\+Operator\+\_\+\+Returns\+Vector\+Sum)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a5232eb07f269f30ff607102c6a791475}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}, Plus\+Equals\+Operator\+\_\+\+Returns\+Same\+Vector\+With\+Sum)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}, Mixed\+Type\+Addition\+Promotes\+Type)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a5e9e4dd3ec6c07f5fa13f3b10a356750}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}, Mixed\+Type\+Addition\+Assignment\+Does\+Not\+Promote\+Type)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a3638403a13b061e37e0bafa3e5201ef1}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}, Minus\+Operator\+\_\+\+Returns\+Difference)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a88613da712299fb64ec04584cf05db17}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}, Minus\+Equals\+Operator\+\_\+\+Returns\+Same\+Vector\+With\+Difference)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_afaa3e69e51fe30fb0cda43e6ddf4b419}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}, Mixed\+Type\+Subtraction\+Promotes\+Type)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a53711358489945854efd4c690e89bf07}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}, Mixed\+Type\+Subtraction\+Assignment\+Does\+Not\+Promote\+Type)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_af680037b9662b95176e2674e88f6dc98}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}, Multiplication\+By\+Zero\+Returns\+Zero\+Vector)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a2b4a7269d5007626c6c20132d6788980}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}, Multiplication\+By\+One\+Returns\+Original\+Vector)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a59ef669451d653d4e2a7e1ef1e22118c}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}, Vector\+Times\+Scalar\+Returns\+Scaled\+Vector)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a786eb8c470f37f2757390f5596275ca9}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}, Scalar\+Times\+AVector\+Returns\+Scaled\+Vector)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab1e2144559a1bfdc3f25a39ebfc4d382}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}, Vector\+Times\+Equal\+Scalar\+Is\+The\+Same\+Vector\+Scaled)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a74b9ff4b8b8bc4cb9ef23913cc3eded7}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}, Mixed\+Type\+Scalar\+Multiplication\+Promotes\+Type)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ae40f024a65c5e9f932dfb1cb6791ba34}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}, Mixed\+Type\+Scalar\+Multiplication\+Assignment\+Does\+Not\+Promote\+Type)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a2c482feeeb2b54fa552e9f58462f6701}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}, Mixed\+Type\+Scalar\+Multiplication\+Assignment\+Ensures\+Minimal\+Precision\+Loss)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a7bdc20178506089ee464d0b2227cce90}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}, Division\+By\+Zero\+Returns\+Infinity\+Vector)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a4fb2fe66ba99f7c28565d56a8b1407f7}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}, Division\+By\+One\+Returns\+Original\+Vector)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a82e78a8f0e499cea67dea007676c7a48}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}, Vector\+Divided\+By\+ANumber\+Returns\+AScaled\+Vector)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a1babaaebd4abcd024c3092cf5a34b9b9}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}, Vector\+Divide\+Equals\+ANumber\+Is\+The\+Same\+Vector\+Scaled)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_aeb3634098a155fea641d8f972d11163f}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}, Mixed\+Type\+Scalar\+Division\+Promotes\+Type)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a26244ae94576048d68ece16eaea4ef51}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}, Mixed\+Type\+Scalar\+Division\+Assignment\+Does\+Not\+Promote\+Type)
+\item 
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_abc91e76ace500db90224ccaba573b03e}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}, Mixed\+Type\+Scalar\+Division\+Assignment\+Gives\+Result\+With\+Minimal\+Precision\+Loss)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Verifies Vector4D arithmetic operator(+, -\/, \texorpdfstring{$\ast$}{*}, /\+) logic. 
+
+\begin{DoxyAuthor}{Author}
+Alan Abraham P Kochumon 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Created on:\+ March 07, 2026
+\end{DoxyDate}
+
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2026 Alan Abraham P Kochumon 
+\end{DoxyCopyright}
+
+
+Definition in file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_arithmetic_operation_tests_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_arithmetic_operation_tests_8cpp_a5e9e4dd3ec6c07f5fa13f3b10a356750}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a5e9e4dd3ec6c07f5fa13f3b10a356750} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}}]{}{, }\item[{Mixed\+Type\+Addition\+Assignment\+Does\+Not\+Promote\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000020}{Test}}]Verify that the compound addition assignment operator maintains the destination type and performs an implicit cast. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00152}{152}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}}]{}{, }\item[{Mixed\+Type\+Addition\+Promotes\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000019}{Test}}]Verify that the binary addition operator performs automatic type promotion to the wider numeric type. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00137}{137}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a26244ae94576048d68ece16eaea4ef51}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a26244ae94576048d68ece16eaea4ef51} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}}]{}{, }\item[{Mixed\+Type\+Scalar\+Division\+Assignment\+Does\+Not\+Promote\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000038}{Test}}]Verify that the compound division assignment operator maintains the destination type and performs an implicit cast. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00403}{403}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_abc91e76ace500db90224ccaba573b03e}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_abc91e76ace500db90224ccaba573b03e} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}}]{}{, }\item[{Mixed\+Type\+Scalar\+Division\+Assignment\+Gives\+Result\+With\+Minimal\+Precision\+Loss}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000039}{Test}}]Verify that the compound division operator for mixed types ensures minimal precision loss. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00415}{415}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_aeb3634098a155fea641d8f972d11163f}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_aeb3634098a155fea641d8f972d11163f} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}}]{}{, }\item[{Mixed\+Type\+Scalar\+Division\+Promotes\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000037}{Test}}]Verify that the binary division operator performs automatic type promotion to the wider numeric type. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00388}{388}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_ae40f024a65c5e9f932dfb1cb6791ba34}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_ae40f024a65c5e9f932dfb1cb6791ba34} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}}]{}{, }\item[{Mixed\+Type\+Scalar\+Multiplication\+Assignment\+Does\+Not\+Promote\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000031}{Test}}]Verify that the compound multiplication assignment operator maintains the destination type and performs an implicit cast. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00312}{312}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a2c482feeeb2b54fa552e9f58462f6701}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a2c482feeeb2b54fa552e9f58462f6701} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}}]{}{, }\item[{Mixed\+Type\+Scalar\+Multiplication\+Assignment\+Ensures\+Minimal\+Precision\+Loss}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000032}{Test}}]Verify that the compound multiplication operator for mixed types ensures minimal precision loss. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00323}{323}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a2b4a7269d5007626c6c20132d6788980}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a2b4a7269d5007626c6c20132d6788980} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}}]{}{, }\item[{Multiplication\+By\+One\+Returns\+Original\+Vector}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000026}{Test}}]Verify that the binary multiplication of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} by one returns the original vector. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00241}{241}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_af680037b9662b95176e2674e88f6dc98}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_af680037b9662b95176e2674e88f6dc98} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}}]{}{, }\item[{Multiplication\+By\+Zero\+Returns\+Zero\+Vector}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000025}{Test}}]Verify that the binary multiplication of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} by a zero scalar returns a zero-\/vector. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00230}{230}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a53711358489945854efd4c690e89bf07}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a53711358489945854efd4c690e89bf07} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}}]{}{, }\item[{Mixed\+Type\+Subtraction\+Assignment\+Does\+Not\+Promote\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000024}{Test}}]Verify that the compound subtraction assignment operator maintains the destination type and performs an implicit cast. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00210}{210}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_afaa3e69e51fe30fb0cda43e6ddf4b419}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/11]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_afaa3e69e51fe30fb0cda43e6ddf4b419} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}}]{}{, }\item[{Mixed\+Type\+Subtraction\+Promotes\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000023}{Test}}]Verify that the binary subtraction operator performs automatic type promotion to the wider numeric type. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00196}{196}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a5232eb07f269f30ff607102c6a791475}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a5232eb07f269f30ff607102c6a791475} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}}]{}{, }\item[{Plus\+Equals\+Operator\+\_\+\+Returns\+Same\+Vector\+With\+Sum}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000018}{Test}}]Verify that the compound addition assignment operator performs a component-\/wise sum and mutates the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} in-\/place. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00128}{128}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}}]{}{, }\item[{Plus\+Operator\+\_\+\+Returns\+Vector\+Sum}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000017}{Test}}]Verify that the binary addition operator performs a component-\/wise sum and returns a new \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} instance. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00116}{116}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a4fb2fe66ba99f7c28565d56a8b1407f7}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a4fb2fe66ba99f7c28565d56a8b1407f7} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}}]{}{, }\item[{Division\+By\+One\+Returns\+Original\+Vector}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000034}{Test}}]Verify that the binary division of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} by one returns the original vector. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00355}{355}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a7bdc20178506089ee464d0b2227cce90}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a7bdc20178506089ee464d0b2227cce90} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}}]{}{, }\item[{Division\+By\+Zero\+Returns\+Infinity\+Vector}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000033}{Test}}]Verify that the binary division of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} by a zero scalar returns an infinity-\/vector for floating-\/point types and triggers program termination for integral types. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00345}{345}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a82e78a8f0e499cea67dea007676c7a48}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a82e78a8f0e499cea67dea007676c7a48} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}}]{}{, }\item[{Vector\+Divided\+By\+ANumber\+Returns\+AScaled\+Vector}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000035}{Test}}]Verify that the binary division operator (vector /\+ scalar) performs a component-\/wise divide and returns a new \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} instance. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00367}{367}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a1babaaebd4abcd024c3092cf5a34b9b9}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a1babaaebd4abcd024c3092cf5a34b9b9} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}}]{}{, }\item[{Vector\+Divide\+Equals\+ANumber\+Is\+The\+Same\+Vector\+Scaled}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000036}{Test}}]Verify that the compound division assignment operator performs a component-\/wise divide and mutates the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} in-\/place. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00379}{379}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a74b9ff4b8b8bc4cb9ef23913cc3eded7}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a74b9ff4b8b8bc4cb9ef23913cc3eded7} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}}]{}{, }\item[{Mixed\+Type\+Scalar\+Multiplication\+Promotes\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000030}{Test}}]Verify that the binary multiplication operator performs automatic type promotion to the wider numeric type. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00298}{298}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a786eb8c470f37f2757390f5596275ca9}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a786eb8c470f37f2757390f5596275ca9} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}}]{}{, }\item[{Scalar\+Times\+AVector\+Returns\+Scaled\+Vector}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000028}{Test}}]Verify that the binary multiplication operator (scalar \texorpdfstring{$\ast$}{*} vector) performs a component-\/wise (Hadamard) product and returns a new \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} instance. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00271}{271}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_ab1e2144559a1bfdc3f25a39ebfc4d382}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_ab1e2144559a1bfdc3f25a39ebfc4d382} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}}]{}{, }\item[{Vector\+Times\+Equal\+Scalar\+Is\+The\+Same\+Vector\+Scaled}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000029}{Test}}]Verify that the compound multiplication assignment operator performs a component-\/wise (Hadamard) product and mutates the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} in-\/place. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00286}{286}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a59ef669451d653d4e2a7e1ef1e22118c}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a59ef669451d653d4e2a7e1ef1e22118c} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}}]{}{, }\item[{Vector\+Times\+Scalar\+Returns\+Scaled\+Vector}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000027}{Test}}]Verify that the binary multiplication operator (vector \texorpdfstring{$\ast$}{*} scalar) performs a component-\/wise (Hadamard) product and returns a new \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} instance. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00255}{255}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a88613da712299fb64ec04584cf05db17}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a88613da712299fb64ec04584cf05db17} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}}]{}{, }\item[{Minus\+Equals\+Operator\+\_\+\+Returns\+Same\+Vector\+With\+Difference}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000022}{Test}}]Verify that the compound subtraction assignment operator performs a component-\/wise difference and mutates the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} in-\/place. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00187}{187}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a3638403a13b061e37e0bafa3e5201ef1}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a3638403a13b061e37e0bafa3e5201ef1} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}}]{}{, }\item[{Minus\+Operator\+\_\+\+Returns\+Difference}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000021}{Test}}]Verify that the binary subtraction operator performs a component-\/wise difference and returns a new \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} instance. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source_l00175}{175}} of file \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_source}{Arithmetic\+Operation\+Tests.\+cpp}}.
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_afb050afc382cfdd2d96b146f1ed1c157}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_afb050afc382cfdd2d96b146f1ed1c157} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4\+DAddition}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} addition, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a8f1f2172fc74a40f88bd5f847c4798e0}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a8f1f2172fc74a40f88bd5f847c4798e0} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4\+DScalar\+Division}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} division, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a396bc665ff2ebf7c97c080914ce9d683}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a396bc665ff2ebf7c97c080914ce9d683} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4\+DScalar\+Multiplication}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} scalar multiplication, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+
+\Hypertarget{_arithmetic_operation_tests_8cpp_a7186ef7ed741df2c5cf87173b6ba9499}\index{ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!ArithmeticOperationTests.cpp@{ArithmeticOperationTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{_arithmetic_operation_tests_8cpp_a7186ef7ed741df2c5cf87173b6ba9499} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4\+DSubtraction}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} subtraction, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+

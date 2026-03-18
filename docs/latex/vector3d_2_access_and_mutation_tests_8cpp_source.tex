@@ -1,0 +1,131 @@
+\doxysection{Access\+And\+Mutation\+Tests.\+cpp}
+\hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source}{}\label{vector3d_2_access_and_mutation_tests_8cpp_source}\index{test-\/suite/src/vectors/vector3d/AccessAndMutationTests.cpp@{test-\/suite/src/vectors/vector3d/AccessAndMutationTests.cpp}}
+\doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector3_d_test_setup_8h}{Vector3DTestSetup.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00014}00014\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00015}00015\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00016}00016\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ ACCESS\ TESTS\ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00017}00017\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00018}00018\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00020}\doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_aeb346788d8133e05f0960cd3b91b1bac}{00020}}\ \doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_aeb346788d8133e05f0960cd3b91b1bac}{TEST}}(Vector3DAccess,\ AccessibleAsXYZ)}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ vector\ with\ arbitrary\ values\ passed\ in}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00025}00025\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ elements\ are\ accessible\ as\ x,\ y,\ z}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00026}00026\ \ \ \ \ EXPECT\_FLOAT\_EQ(3.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00027}00027\ \ \ \ \ EXPECT\_FLOAT\_EQ(1.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00028}00028\ \ \ \ \ EXPECT\_FLOAT\_EQ(6.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00029}00029\ \}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00031}\doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_a639628f8b1688279f8726b867db9005e}{00031}}\ \doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_aeb346788d8133e05f0960cd3b91b1bac}{TEST}}(Vector3DAccess,\ AccessibleAsSTP)}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ vector\ with\ arbitrary\ values\ passed\ in}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ elements\ are\ accessible\ as\ s,\ t,\ p}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00037}00037\ \ \ \ \ EXPECT\_FLOAT\_EQ(3.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a3e2efc3ee449c89a88ddeac6540c4982}{s}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00038}00038\ \ \ \ \ EXPECT\_FLOAT\_EQ(1.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a10056b4372dd4802ed419c14a47fb263}{t}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00039}00039\ \ \ \ \ EXPECT\_FLOAT\_EQ(6.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4f42e62dfc4b86140c809af64876c734}{p}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00040}00040\ \}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00042}\doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_a4f50a1c2f3aa0159dd155378464b45ef}{00042}}\ \doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_aeb346788d8133e05f0960cd3b91b1bac}{TEST}}(Vector3DAccess,\ AccessibleAsRGB)}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00043}00043\ \{}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ vector\ with\ arbitrary\ values\ passed\ in}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ elements\ are\ accessible\ as\ r,\ g,\ b}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00048}00048\ \ \ \ \ EXPECT\_FLOAT\_EQ(3.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_aba5ecb03bd7007ab7f08772041d46177}{r}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00049}00049\ \ \ \ \ EXPECT\_FLOAT\_EQ(1.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a455fad21e53cdda2065dc5248d0e3a1a}{g}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00050}00050\ \ \ \ \ EXPECT\_FLOAT\_EQ(6.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a89f751945443bd026c361cded5e69fa6}{b}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00051}00051\ \}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00053}\doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_a1bcd5bcb467b3446fefd89f19d243d0a}{00053}}\ \doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_aeb346788d8133e05f0960cd3b91b1bac}{TEST}}(Vector3DAccess,\ AccessibleAsArray)}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00054}00054\ \{}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ vector\ with\ arbitrary\ values\ passed\ in}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D}}\ vec(3.0f,\ 1.0f,\ 6.0f);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ elements\ are\ accessible\ as\ array\ elements}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00059}00059\ \ \ \ \ EXPECT\_FLOAT\_EQ(3.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_aa1972950d2c93a243f45a009ab0ef13f}{elements}}[0]);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00060}00060\ \ \ \ \ EXPECT\_FLOAT\_EQ(1.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_aa1972950d2c93a243f45a009ab0ef13f}{elements}}[1]);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00061}00061\ \ \ \ \ EXPECT\_FLOAT\_EQ(6.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_aa1972950d2c93a243f45a009ab0ef13f}{elements}}[2]);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00064}00064\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00065}00065\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00066}00066\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ MUTATION\ TESTS\ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00067}00067\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00068}00068\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00071}\doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_a7b1ef11a59728877b7a7511e36cb3619}{00071}}\ \doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_aeb346788d8133e05f0960cd3b91b1bac}{TEST}}(Vector3DMutation,\ ElementsCanBeMutatedUsingXYZ)}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00072}00072\ \{}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00073}00073\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ default\ initialized\ vector}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00074}00074\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ vec;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{comment}{//\ When,\ it's\ elements\ are\ modified\ using\ x,\ y,\ z}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00077}00077\ \ \ \ \ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}}\ =\ 3.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00078}00078\ \ \ \ \ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}}\ =\ 1.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00079}00079\ \ \ \ \ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}}\ =\ 6.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00081}00081\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ element\ reflect\ the\ change}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00082}00082\ \ \ \ \ EXPECT\_FLOAT\_EQ(3.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00083}00083\ \ \ \ \ EXPECT\_FLOAT\_EQ(1.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00084}00084\ \ \ \ \ EXPECT\_FLOAT\_EQ(6.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00085}00085\ \}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00087}\doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_a2db865821fffb8a7867d1f005328de2b}{00087}}\ \doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_aeb346788d8133e05f0960cd3b91b1bac}{TEST}}(Vector3DMutation,\ ElementsCanBeMutatedUsingSTP)}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00088}00088\ \{}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ default\ initialized\ vector}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00090}00090\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ vec;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{comment}{//\ When,\ it's\ elements\ are\ modified\ using\ s,\ t,\ p}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00093}00093\ \ \ \ \ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a3e2efc3ee449c89a88ddeac6540c4982}{s}}\ =\ 3.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00094}00094\ \ \ \ \ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a10056b4372dd4802ed419c14a47fb263}{t}}\ =\ 1.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00095}00095\ \ \ \ \ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4f42e62dfc4b86140c809af64876c734}{p}}\ =\ 6.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00097}00097\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ element\ reflect\ the\ change}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00098}00098\ \ \ \ \ EXPECT\_FLOAT\_EQ(3.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a3e2efc3ee449c89a88ddeac6540c4982}{s}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00099}00099\ \ \ \ \ EXPECT\_FLOAT\_EQ(1.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a10056b4372dd4802ed419c14a47fb263}{t}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00100}00100\ \ \ \ \ EXPECT\_FLOAT\_EQ(6.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4f42e62dfc4b86140c809af64876c734}{p}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00101}00101\ \}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00103}\doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_a5dbe8e213cda6096720d46788515b108}{00103}}\ \doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_aeb346788d8133e05f0960cd3b91b1bac}{TEST}}(Vector3DMutation,\ ElementsCanBeMutatedUsingRGB)}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00104}00104\ \{}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00105}00105\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ default\ initialized\ vector}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00106}00106\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ vec;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00108}00108\ \ \ \ \ \textcolor{comment}{//\ When,\ it's\ elements\ are\ modified\ using\ r,\ g,\ b}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00109}00109\ \ \ \ \ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_aba5ecb03bd7007ab7f08772041d46177}{r}}\ =\ 3.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00110}00110\ \ \ \ \ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a455fad21e53cdda2065dc5248d0e3a1a}{g}}\ =\ 1.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00111}00111\ \ \ \ \ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a89f751945443bd026c361cded5e69fa6}{b}}\ =\ 6.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00113}00113\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ element\ reflect\ the\ change}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00114}00114\ \ \ \ \ EXPECT\_FLOAT\_EQ(3.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_aba5ecb03bd7007ab7f08772041d46177}{r}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00115}00115\ \ \ \ \ EXPECT\_FLOAT\_EQ(1.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a455fad21e53cdda2065dc5248d0e3a1a}{g}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00116}00116\ \ \ \ \ EXPECT\_FLOAT\_EQ(6.0f,\ vec.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a89f751945443bd026c361cded5e69fa6}{b}});}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00117}00117\ \}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00119}\doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_ac54cbabfd7b2406877860a23d0d385f6}{00119}}\ \doxymbox{\hyperlink{vector3d_2_access_and_mutation_tests_8cpp_aeb346788d8133e05f0960cd3b91b1bac}{TEST}}(Vector3DMutation,\ ElementsCanBeMutatedUsingIndex)}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00120}00120\ \{}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00121}00121\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ vector\ initialization\ without\ parameters}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00122}00122\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<float>}}\ vec;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00124}00124\ \ \ \ \ \textcolor{comment}{//\ When\ it's\ elements\ are\ mutated\ at\ a\ particular\ index}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00125}00125\ \ \ \ \ vec[0]\ =\ 3.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00126}00126\ \ \ \ \ vec[1]\ =\ 1.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00127}00127\ \ \ \ \ vec[2]\ =\ 6.0f;}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00129}00129\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ element\ reflect\ the\ change}}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00130}00130\ \ \ \ \ EXPECT\_FLOAT\_EQ(3.0f,\ vec[0]);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00131}00131\ \ \ \ \ EXPECT\_FLOAT\_EQ(1.0f,\ vec[1]);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00132}00132\ \ \ \ \ EXPECT\_FLOAT\_EQ(6.0f,\ vec[2]);}
+\DoxyCodeLine{\Hypertarget{vector3d_2_access_and_mutation_tests_8cpp_source_l00133}00133\ \}}
+
+\end{DoxyCode}

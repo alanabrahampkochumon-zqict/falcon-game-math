@@ -1,0 +1,453 @@
+\doxysection{testutils Namespace Reference}
+\hypertarget{namespacetestutils}{}\label{namespacetestutils}\index{testutils@{testutils}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d}{Matrix3D}}
+\item 
+namespace \doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d}{Matrix2D}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T, \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} U$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_aeaa533951f000ad4a7c017b466cde69b}{EXPECT\+\_\+\+MAT\+\_\+\+EQ}} (const T \&expected, const U \&actual)
+\begin{DoxyCompactList}\small\item\em Perform a component-\/wise strict equality comparison between two matrices of the same dimensions. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T, \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} U$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a21190cc65e0c0d165cc681b53a7d625a}{EXPECT\+\_\+\+MAT\+\_\+\+NEAR}} (const T \&expected, const U \&actual, double tolerance=1e-\/5)
+\begin{DoxyCompactList}\small\item\em Performs a component-\/wise approximate equality comparison using an absolute epsilon. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a3ed7811d32bf5ba5896035fdb4c48a09}{EXPECT\+\_\+\+MAT\+\_\+\+IDENTITY}} (const T \&actual)
+\begin{DoxyCompactList}\small\item\em Validates that the provided matrix conforms to an identity matrix within a standard epsilon. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_add4567e070fbc850d28ad4e7badb9994}{EXPECT\+\_\+\+MAT\+\_\+\+ZERO}} (const T \&actual)
+\begin{DoxyCompactList}\small\item\em Validates that the provided matrix conforms to a zero matrix within a standard epsilon. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a312e9d515c157139838bb197fe06646b}{EXPECT\+\_\+\+MAT\+\_\+\+INF}} (const T \&actual)
+\begin{DoxyCompactList}\small\item\em Validates that the provided matrix conforms to an infinity matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T, \doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} U$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\+\_\+\+VEC\+\_\+\+EQ}} (const T \&expected, const U \&actual)
+\begin{DoxyCompactList}\small\item\em Perform a component-\/wise equality comparison between two vectors of the same dimensions. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS}} (const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{fgm::\+\+Vector2D}}$<$ T $>$ \&vector, T x, T y)
+\begin{DoxyCompactList}\small\item\em Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector2_d}{fgm::\+\+Vector2D} against discrete scalar values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_aaf56e8b74db722be7dfe45c0b2d6936c}{EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$ \&vector, T x, T y, T z)
+\begin{DoxyCompactList}\small\item\em Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D} against discrete scalar values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a0d6edb81cb51d687ca6538d8a125c318}{EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$ \&vector, T x, T y, T z, T w)
+\begin{DoxyCompactList}\small\item\em Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} against discrete scalar values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a12c4d4e6974106a0d0ddce9dad07584f}{EXPECT\+\_\+\+VEC\+\_\+\+ONE}} (const T \&vector)
+\begin{DoxyCompactList}\small\item\em Validates that the provided vector contains only unit components. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{EXPECT\+\_\+\+VEC\+\_\+\+ZERO}} (const T \&vector)
+\begin{DoxyCompactList}\small\item\em Validates that the provided vector contains only zero components. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_af3e3755befec4337ccefebe35e82acc5}{EXPECT\+\_\+\+VEC\+\_\+\+INF}} (const T \&vector)
+\begin{DoxyCompactList}\small\item\em Validates that the provided vector contains only INFINITY components. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_strict_arithmetic}{fgm::\+\+Strict\+Arithmetic}} T$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_a1f297fa9b099880593df66c438fa5eff}{EXPECT\+\_\+\+MAG\+\_\+\+EQ}} (T expected, T actual)
+\begin{DoxyCompactList}\small\item\em Validates that two scalar values are equal within a defined numerical tolerance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{namespacetestutils_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetestutils_a1f297fa9b099880593df66c438fa5eff}\index{testutils@{testutils}!EXPECT\_MAG\_EQ@{EXPECT\_MAG\_EQ}}
+\index{EXPECT\_MAG\_EQ@{EXPECT\_MAG\_EQ}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAG\_EQ()}{EXPECT\_MAG\_EQ()}}
+{\footnotesize\ttfamily \label{namespacetestutils_a1f297fa9b099880593df66c438fa5eff} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_strict_arithmetic}{fgm::\+\+Strict\+Arithmetic}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAG\+\_\+\+EQ (\begin{DoxyParamCaption}\item[{T}]{expected}{, }\item[{T}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Validates that two scalar values are equal within a defined numerical tolerance. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the values being compared. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em expected} & The ground-\/truth reference value. \\
+\hline
+{\em actual} & The value being evaluated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros. Triggers a non-\/fatal failure if the absolute difference between expected and actual exceeds the library\textquotesingle{}s standard epsilon. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_vector_utils_8h_source_l00249}{249}} of file \doxymbox{\hyperlink{_vector_utils_8h_source}{Vector\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_aeaa533951f000ad4a7c017b466cde69b}\index{testutils@{testutils}!EXPECT\_MAT\_EQ@{EXPECT\_MAT\_EQ}}
+\index{EXPECT\_MAT\_EQ@{EXPECT\_MAT\_EQ}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_EQ()}{EXPECT\_MAT\_EQ()}}
+{\footnotesize\ttfamily \label{namespacetestutils_aeaa533951f000ad4a7c017b466cde69b} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T, \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} U$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+EQ (\begin{DoxyParamCaption}\item[{const T \&}]{expected}{, }\item[{const U \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Perform a component-\/wise strict equality comparison between two matrices of the same dimensions. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the expected matrix components. \\
+\hline
+{\em U} & Numeric type of the actual matrix components. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em expected} & The matrix serving as the reference for comparison. \\
+\hline
+{\em actual} & The matrix being evaluated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrices are out of the {\ttfamily tolerance} range. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00039}{39}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_a3ed7811d32bf5ba5896035fdb4c48a09}\index{testutils@{testutils}!EXPECT\_MAT\_IDENTITY@{EXPECT\_MAT\_IDENTITY}}
+\index{EXPECT\_MAT\_IDENTITY@{EXPECT\_MAT\_IDENTITY}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_IDENTITY()}{EXPECT\_MAT\_IDENTITY()}}
+{\footnotesize\ttfamily \label{namespacetestutils_a3ed7811d32bf5ba5896035fdb4c48a09} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+IDENTITY (\begin{DoxyParamCaption}\item[{const T \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Validates that the provided matrix conforms to an identity matrix within a standard epsilon. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The matrix type being evaluated. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em actual} & The matrix to verify as an identity.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrix is not identity. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00095}{95}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_a312e9d515c157139838bb197fe06646b}\index{testutils@{testutils}!EXPECT\_MAT\_INF@{EXPECT\_MAT\_INF}}
+\index{EXPECT\_MAT\_INF@{EXPECT\_MAT\_INF}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_INF()}{EXPECT\_MAT\_INF()}}
+{\footnotesize\ttfamily \label{namespacetestutils_a312e9d515c157139838bb197fe06646b} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+INF (\begin{DoxyParamCaption}\item[{const T \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Validates that the provided matrix conforms to an infinity matrix. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The matrix type being evaluated. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em actual} & The matrix to verify as an infinity matrix.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrix is not an infinity matrix. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00148}{148}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_a21190cc65e0c0d165cc681b53a7d625a}\index{testutils@{testutils}!EXPECT\_MAT\_NEAR@{EXPECT\_MAT\_NEAR}}
+\index{EXPECT\_MAT\_NEAR@{EXPECT\_MAT\_NEAR}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_NEAR()}{EXPECT\_MAT\_NEAR()}}
+{\footnotesize\ttfamily \label{namespacetestutils_a21190cc65e0c0d165cc681b53a7d625a} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T, \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} U$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+NEAR (\begin{DoxyParamCaption}\item[{const T \&}]{expected}{, }\item[{const U \&}]{actual}{, }\item[{double}]{tolerance}{ = {\ttfamily 1e-\/5}}\end{DoxyParamCaption})}
+
+
+
+Performs a component-\/wise approximate equality comparison using an absolute epsilon. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the reference matrix. \\
+\hline
+{\em U} & The type of the matrix under test. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em expected} & The matrix serving as the ground truth. \\
+\hline
+{\em actual} & The matrix being evaluated. \\
+\hline
+{\em tolerance} & The maximum allowable absolute difference between components.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrices are out of the {\ttfamily tolerance} range. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00071}{71}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_add4567e070fbc850d28ad4e7badb9994}\index{testutils@{testutils}!EXPECT\_MAT\_ZERO@{EXPECT\_MAT\_ZERO}}
+\index{EXPECT\_MAT\_ZERO@{EXPECT\_MAT\_ZERO}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_ZERO()}{EXPECT\_MAT\_ZERO()}}
+{\footnotesize\ttfamily \label{namespacetestutils_add4567e070fbc850d28ad4e7badb9994} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+ZERO (\begin{DoxyParamCaption}\item[{const T \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Validates that the provided matrix conforms to a zero matrix within a standard epsilon. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The matrix type being evaluated. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em actual} & The matrix to verify as a zero matrix.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrix is not a zero matrix. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00122}{122}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}\index{testutils@{testutils}!EXPECT\_VEC\_CONTAINS@{EXPECT\_VEC\_CONTAINS}}
+\index{EXPECT\_VEC\_CONTAINS@{EXPECT\_VEC\_CONTAINS}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_VEC\_CONTAINS()}{EXPECT\_VEC\_CONTAINS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{fgm::\+\+Vector2D}}$<$ T $>$ \&}]{vector}{, }\item[{T}]{x}{, }\item[{T}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector2_d}{fgm::\+\+Vector2D} against discrete scalar values. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the vector and scalar components. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The 2D vector instance being evaluated. \\
+\hline
+{\em x} & The expected value for the x-\/component. \\
+\hline
+{\em y} & The expected value for the y-\/component.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros. Triggers a non-\/fatal test failure if the vector\textquotesingle{}s internal state does not match the provided scalars. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_vector_utils_8h_source_l00070}{70}} of file \doxymbox{\hyperlink{_vector_utils_8h_source}{Vector\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_aaf56e8b74db722be7dfe45c0b2d6936c}\index{testutils@{testutils}!EXPECT\_VEC\_CONTAINS@{EXPECT\_VEC\_CONTAINS}}
+\index{EXPECT\_VEC\_CONTAINS@{EXPECT\_VEC\_CONTAINS}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_VEC\_CONTAINS()}{EXPECT\_VEC\_CONTAINS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{namespacetestutils_aaf56e8b74db722be7dfe45c0b2d6936c} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$ \&}]{vector}{, }\item[{T}]{x}{, }\item[{T}]{y}{, }\item[{T}]{z}{}\end{DoxyParamCaption})}
+
+
+
+Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D} against discrete scalar values. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the vector and scalar components. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The 3D vector instance being evaluated. \\
+\hline
+{\em x} & The expected value for the x-\/component. \\
+\hline
+{\em y} & The expected value for the y-\/component. \\
+\hline
+{\em z} & The expected value for the z-\/component.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros. Triggers a non-\/fatal test failure if the vector\textquotesingle{}s internal state does not match the provided scalars. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_vector_utils_8h_source_l00103}{103}} of file \doxymbox{\hyperlink{_vector_utils_8h_source}{Vector\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_a0d6edb81cb51d687ca6538d8a125c318}\index{testutils@{testutils}!EXPECT\_VEC\_CONTAINS@{EXPECT\_VEC\_CONTAINS}}
+\index{EXPECT\_VEC\_CONTAINS@{EXPECT\_VEC\_CONTAINS}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_VEC\_CONTAINS()}{EXPECT\_VEC\_CONTAINS()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{namespacetestutils_a0d6edb81cb51d687ca6538d8a125c318} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$ \&}]{vector}{, }\item[{T}]{x}{, }\item[{T}]{y}{, }\item[{T}]{z}{, }\item[{T}]{w}{}\end{DoxyParamCaption})}
+
+
+
+Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} against discrete scalar values. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the vector and scalar components. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The 4D vector instance being evaluated. \\
+\hline
+{\em x} & The expected value for the x-\/component. \\
+\hline
+{\em y} & The expected value for the y-\/component. \\
+\hline
+{\em z} & The expected value for the z-\/component. \\
+\hline
+{\em w} & The expected value for the w-\/component.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros. Triggers a non-\/fatal test failure if the vector\textquotesingle{}s internal state does not match the provided scalars. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_vector_utils_8h_source_l00140}{140}} of file \doxymbox{\hyperlink{_vector_utils_8h_source}{Vector\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_af086eefd4f5940a7963581d949339c8f}\index{testutils@{testutils}!EXPECT\_VEC\_EQ@{EXPECT\_VEC\_EQ}}
+\index{EXPECT\_VEC\_EQ@{EXPECT\_VEC\_EQ}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_VEC\_EQ()}{EXPECT\_VEC\_EQ()}}
+{\footnotesize\ttfamily \label{namespacetestutils_af086eefd4f5940a7963581d949339c8f} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T, \doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} U$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+EQ (\begin{DoxyParamCaption}\item[{const T \&}]{expected}{, }\item[{const U \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Perform a component-\/wise equality comparison between two vectors of the same dimensions. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the expected vector components. \\
+\hline
+{\em U} & Numeric type of the actual vector components. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em expected} & The vector serving as the reference for comparison. \\
+\hline
+{\em actual} & The vector being evaluated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the vectors are not equal. 
+
+Triggers an assertion failure if vector dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_vector_utils_8h_source_l00040}{40}} of file \doxymbox{\hyperlink{_vector_utils_8h_source}{Vector\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_af3e3755befec4337ccefebe35e82acc5}\index{testutils@{testutils}!EXPECT\_VEC\_INF@{EXPECT\_VEC\_INF}}
+\index{EXPECT\_VEC\_INF@{EXPECT\_VEC\_INF}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_VEC\_INF()}{EXPECT\_VEC\_INF()}}
+{\footnotesize\ttfamily \label{namespacetestutils_af3e3755befec4337ccefebe35e82acc5} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+INF (\begin{DoxyParamCaption}\item[{const T \&}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Validates that the provided vector contains only INFINITY components. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the actual vector components. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector being evaluated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if any of the vectors components are not \`{}\+INFINITY\`{} or {\ttfamily -\/INFINITY}. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_vector_utils_8h_source_l00229}{229}} of file \doxymbox{\hyperlink{_vector_utils_8h_source}{Vector\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_a12c4d4e6974106a0d0ddce9dad07584f}\index{testutils@{testutils}!EXPECT\_VEC\_ONE@{EXPECT\_VEC\_ONE}}
+\index{EXPECT\_VEC\_ONE@{EXPECT\_VEC\_ONE}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_VEC\_ONE()}{EXPECT\_VEC\_ONE()}}
+{\footnotesize\ttfamily \label{namespacetestutils_a12c4d4e6974106a0d0ddce9dad07584f} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+ONE (\begin{DoxyParamCaption}\item[{const T \&}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Validates that the provided vector contains only unit components. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the actual vector components. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector being evaluated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if any of the vectors components are not unit. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_vector_utils_8h_source_l00176}{176}} of file \doxymbox{\hyperlink{_vector_utils_8h_source}{Vector\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}\index{testutils@{testutils}!EXPECT\_VEC\_ZERO@{EXPECT\_VEC\_ZERO}}
+\index{EXPECT\_VEC\_ZERO@{EXPECT\_VEC\_ZERO}!testutils@{testutils}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_VEC\_ZERO()}{EXPECT\_VEC\_ZERO()}}
+{\footnotesize\ttfamily \label{namespacetestutils_ae7dd463db7e44961df742eaebdb34400} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+VEC\+\_\+\+ZERO (\begin{DoxyParamCaption}\item[{const T \&}]{vector}{}\end{DoxyParamCaption})}
+
+
+
+Validates that the provided vector contains only zero components. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the actual vector components. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector being evaluated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if any of the vectors components are not zero. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_vector_utils_8h_source_l00203}{203}} of file \doxymbox{\hyperlink{_vector_utils_8h_source}{Vector\+Utils.\+h}}.
+

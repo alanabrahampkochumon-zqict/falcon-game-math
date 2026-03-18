@@ -1,0 +1,245 @@
+\doxysection{Matrix2\+D.\+tpp}
+\hypertarget{_matrix2_d_8tpp_source}{}\label{_matrix2_d_8tpp_source}\index{math-\/lib/include/matrix/Matrix2D.tpp@{math-\/lib/include/matrix/Matrix2D.tpp}}
+\doxymbox{\hyperlink{_matrix2_d_8tpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00001}00001\ \#pragma\ once}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00003}00003\ \#include\ <type\_traits>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00004}00004\ \#include\ <valarray>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00006}00006\ namespace\ fgm}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00008}00008\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00009}00009\ \ \ \ \ Matrix2D<T>::Matrix2D()}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00010}00010\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00011}00011\ \ \ \ \ \ \ \ \ //\ First\ Column}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00012}00012\ \ \ \ \ \ \ \ \ elements[0][0]\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00013}00013\ \ \ \ \ \ \ \ \ elements[0][1]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00015}00015\ \ \ \ \ \ \ \ \ //\ Second\ Column}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00016}00016\ \ \ \ \ \ \ \ \ elements[1][0]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00017}00017\ \ \ \ \ \ \ \ \ elements[1][1]\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00018}00018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00020}00020\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00021}00021\ \ \ \ \ Matrix2D<T>::Matrix2D(T\ v\_0\_0,\ T\ v\_0\_1,\ T\ v\_1\_0,\ T\ v\_1\_1)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00023}00023\ \ \ \ \ \ \ \ \ //\ First\ Column}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00024}00024\ \ \ \ \ \ \ \ \ elements[0][0]\ =\ v\_0\_0;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00025}00025\ \ \ \ \ \ \ \ \ elements[0][1]\ =\ v\_1\_0;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00027}00027\ \ \ \ \ \ \ \ \ //\ Second\ Column}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00028}00028\ \ \ \ \ \ \ \ \ elements[1][0]\ =\ v\_0\_1;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00029}00029\ \ \ \ \ \ \ \ \ elements[1][1]\ =\ v\_1\_1;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00032}00032\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00033}00033\ \ \ \ \ Matrix2D<T>::Matrix2D(Vector2D<T>\ col0,\ Vector2D<T>\ vec2)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00034}00034\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00035}00035\ \ \ \ \ \ \ \ \ columns[0]\ =\ col0;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00036}00036\ \ \ \ \ \ \ \ \ columns[1]\ =\ vec2;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00039}00039\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00040}00040\ \ \ \ \ template\ <typename\ S,\ std::enable\_if\_t<std::is\_arithmetic\_v<S>>>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00041}00041\ \ \ \ \ Matrix2D<T>::Matrix2D(const\ Matrix2D\&\ other)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00042}00042\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00043}00043\ \ \ \ \ \ \ \ \ //\ TODO:}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00046}00046\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00047}00047\ \ \ \ \ Vector2D<T>\&\ Matrix2D<T>::operator[](size\_t\ index)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00048}00048\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00049}00049\ \ \ \ \ \ \ \ \ return\ columns[index];}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00052}00052\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00053}00053\ \ \ \ \ const\ Vector2D<T>\&\ Matrix2D<T>::operator[](size\_t\ index)\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00055}00055\ \ \ \ \ \ \ \ \ return\ columns[index];}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00058}00058\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00059}00059\ \ \ \ \ T\&\ Matrix2D<T>::operator()(size\_t\ row,\ size\_t\ col)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00060}00060\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00061}00061\ \ \ \ \ \ \ \ \ return\ elements[col][row];}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00064}00064\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00065}00065\ \ \ \ \ const\ T\&\ Matrix2D<T>::operator()(size\_t\ row,\ size\_t\ col)\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00066}00066\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00067}00067\ \ \ \ \ \ \ \ \ return\ elements[col][row];}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00070}00070\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00071}00071\ \ \ \ \ Matrix2D<T>\ Matrix2D<T>::operator+(const\ Matrix2D\&\ other)\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00072}00072\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00073}00073\ \ \ \ \ \ \ \ \ return\ Matrix2D(elements[0][0]\ +\ other(0,\ 0),\ elements[1][0]\ +\ other(0,\ 1),\ elements[0][1]\ +\ other(1,\ 0),}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[1][1]\ +\ other(1,\ 1));}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00077}00077\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00078}00078\ \ \ \ \ Matrix2D<T>\&\ Matrix2D<T>::operator+=(const\ Matrix2D\&\ other)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00079}00079\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00080}00080\ \ \ \ \ \ \ \ \ elements[0][0]\ +=\ other(0,\ 0);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00081}00081\ \ \ \ \ \ \ \ \ elements[1][0]\ +=\ other(0,\ 1);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00082}00082\ \ \ \ \ \ \ \ \ elements[0][1]\ +=\ other(1,\ 0);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00083}00083\ \ \ \ \ \ \ \ \ elements[1][1]\ +=\ other(1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00084}00084\ \ \ \ \ \ \ \ \ return\ *this;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00087}00087\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00088}00088\ \ \ \ \ Matrix2D<T>\ Matrix2D<T>::operator-\/(const\ Matrix2D\&\ other)\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00089}00089\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00090}00090\ \ \ \ \ \ \ \ \ return\ Matrix2D(elements[0][0]\ -\/\ other(0,\ 0),\ elements[1][0]\ -\/\ other(0,\ 1),\ elements[0][1]\ -\/\ other(1,\ 0),}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[1][1]\ -\/\ other(1,\ 1));}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00092}00092\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00094}00094\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00095}00095\ \ \ \ \ Matrix2D<T>\&\ Matrix2D<T>::operator-\/=(const\ Matrix2D\&\ other)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00097}00097\ \ \ \ \ \ \ \ \ elements[0][0]\ -\/=\ other(0,\ 0);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00098}00098\ \ \ \ \ \ \ \ \ elements[1][0]\ -\/=\ other(0,\ 1);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00099}00099\ \ \ \ \ \ \ \ \ elements[0][1]\ -\/=\ other(1,\ 0);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00100}00100\ \ \ \ \ \ \ \ \ elements[1][1]\ -\/=\ other(1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00102}00102\ \ \ \ \ \ \ \ \ return\ *this;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00103}00103\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00105}00105\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00106}00106\ \ \ \ \ template\ <typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00107}00107\ \ \ \ \ Matrix2D<T>\ Matrix2D<T>::operator*(const\ S\&\ scalar)\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00108}00108\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00109}00109\ \ \ \ \ \ \ \ \ return\ Matrix2D(elements[0][0]\ *\ scalar,\ elements[1][0]\ *\ scalar,\ elements[0][1]\ *\ scalar,}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[1][1]\ *\ scalar);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00111}00111\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00113}00113\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00114}00114\ \ \ \ \ template\ <typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00115}00115\ \ \ \ \ Matrix2D<T>\&\ Matrix2D<T>::operator*=(const\ S\&\ scalar)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00116}00116\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00117}00117\ \ \ \ \ \ \ \ \ elements[0][0]\ *=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00118}00118\ \ \ \ \ \ \ \ \ elements[0][1]\ *=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00119}00119\ \ \ \ \ \ \ \ \ elements[1][0]\ *=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00120}00120\ \ \ \ \ \ \ \ \ elements[1][1]\ *=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00121}00121\ \ \ \ \ \ \ \ \ return\ *this;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00122}00122\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00124}00124\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00125}00125\ \ \ \ \ template\ <typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00126}00126\ \ \ \ \ Vector2D<T>\ Matrix2D<T>::operator*(const\ Vector2D<S>\&\ vec)\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00127}00127\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00128}00128\ \ \ \ \ \ \ \ \ //\ 0\_0\ 1\_0\ \ \ \ \ x}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00129}00129\ \ \ \ \ \ \ \ \ //\ \ \ \ \ \ \ \ \ \ \ *}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00130}00130\ \ \ \ \ \ \ \ \ //\ 0\_1\ 1\_1\ \ \ \ \ y}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00131}00131\ \ \ \ \ \ \ \ \ return\ Vector2D<T>(elements[0][0]\ *\ vec.x\ +\ elements[1][0]\ *\ vec.y,}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[0][1]\ *\ vec.x\ +\ elements[1][1]\ *\ vec.y);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00133}00133\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00135}00135\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00136}00136\ \ \ \ \ template\ <typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00137}00137\ \ \ \ \ Matrix2D<T>\ Matrix2D<T>::operator*(const\ Matrix2D<S>\&\ other)\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00138}00138\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00139}00139\ \ \ \ \ \ \ \ \ return\ Matrix2D<T>(elements[0][0]\ *\ other(0,\ 0)\ +\ elements[1][0]\ *\ other(1,\ 0),}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[0][0]\ *\ other(0,\ 1)\ +\ elements[1][0]\ *\ other(1,\ 1),}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[0][1]\ *\ other(0,\ 0)\ +\ elements[1][1]\ *\ other(1,\ 0),}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[0][1]\ *\ other(0,\ 1)\ +\ elements[1][1]\ *\ other(1,\ 1));}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00143}00143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00145}00145\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00146}00146\ \ \ \ \ template\ <typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00147}00147\ \ \ \ \ Matrix2D<T>\&\ Matrix2D<T>::operator*=(const\ Matrix2D<S>\&\ other)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00148}00148\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00149}00149\ \ \ \ \ \ \ \ \ Matrix2D\&\&\ temp\ =\ Matrix2D<T>(elements[0][0]\ *\ other(0,\ 0)\ +\ elements[1][0]\ *\ other(1,\ 0),}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[0][0]\ *\ other(0,\ 1)\ +\ elements[1][0]\ *\ other(1,\ 1),}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[0][1]\ *\ other(0,\ 0)\ +\ elements[1][1]\ *\ other(1,\ 0),}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elements[0][1]\ *\ other(0,\ 1)\ +\ elements[1][1]\ *\ other(1,\ 1));}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00154}00154\ \ \ \ \ \ \ \ \ (*this)\ =\ temp;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00156}00156\ \ \ \ \ \ \ \ \ return\ *this;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00157}00157\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00159}00159\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00160}00160\ \ \ \ \ template\ <typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00161}00161\ \ \ \ \ Matrix2D<T>\ Matrix2D<T>::operator/(const\ S\&\ scalar)\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00162}00162\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00163}00163\ \ \ \ \ \ \ \ \ T\ factor\ =\ T(1)\ /\ static\_cast<T>(scalar);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00164}00164\ \ \ \ \ \ \ \ \ return\ factor\ *\ (*this);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00165}00165\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00167}00167\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00168}00168\ \ \ \ \ template\ <typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00169}00169\ \ \ \ \ Matrix2D<T>\&\ Matrix2D<T>::operator/=(const\ S\&\ scalar)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00170}00170\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00171}00171\ \ \ \ \ \ \ \ \ T\ factor\ =\ T(1)\ /\ static\_cast<T>(scalar);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00172}00172\ \ \ \ \ \ \ \ \ (*this)\ *=\ factor;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00173}00173\ \ \ \ \ \ \ \ \ return\ *this;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00174}00174\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00176}00176\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00177}00177\ \ \ \ \ T\ Matrix2D<T>::determinant()\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00178}00178\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00179}00179\ \ \ \ \ \ \ \ \ //\ 0\_0\ \ 1\_0}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00180}00180\ \ \ \ \ \ \ \ \ //\ \ \ \(\backslash\)\ \ /}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00181}00181\ \ \ \ \ \ \ \ \ //\ 0\_1\ \ 1\_1}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00182}00182\ \ \ \ \ \ \ \ \ return\ elements[0][0]\ *\ elements[1][1]\ -\/\ elements[1][0]\ *\ elements[0][1];}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00183}00183\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00185}00185\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00186}00186\ \ \ \ \ T\ Matrix2D<T>::determinant(const\ Matrix2D<T>\&\ matrix)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00187}00187\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00188}00188\ \ \ \ \ \ \ \ \ return\ matrix.determinant();}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00189}00189\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00191}00191\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00192}00192\ \ \ \ \ Matrix2D<T>\ Matrix2D<T>::transpose()\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00193}00193\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00194}00194\ \ \ \ \ \ \ \ \ return\ Matrix2D<T>(elements[0][0],\ elements[0][1],\ elements[1][0],\ elements[1][1]);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00195}00195\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00197}00197\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00198}00198\ \ \ \ \ Matrix2D<T>\ Matrix2D<T>::transpose(const\ Matrix2D\&\ matrix)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00199}00199\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00200}00200\ \ \ \ \ \ \ \ \ return\ matrix.transpose();}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00201}00201\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00203}00203\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00204}00204\ \ \ \ \ Matrix2D<T>\ Matrix2D<T>::inverse()\ const}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00205}00205\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00206}00206\ \ \ \ \ \ \ \ \ T\ det\ =\ determinant();}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00207}00207\ \ \ \ \ \ \ \ \ if\ (std::abs(det)\ <=\ 1e-\/6f)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ return\ Matrix2D();\ //\ Identity\ Matrix}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00210}00210\ \ \ \ \ \ \ \ \ T\ factor\ =\ T(1)\ /\ det;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00212}00212\ \ \ \ \ \ \ \ \ return\ factor\ *\ Matrix2D(elements[1][1],\ -\/elements[1][0],\ -\/elements[0][1],\ elements[0][0]);}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00213}00213\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00215}00215\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00216}00216\ \ \ \ \ Matrix2D<T>\ Matrix2D<T>::inverse(const\ Matrix2D\&\ matrix)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00217}00217\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00218}00218\ \ \ \ \ \ \ \ \ return\ matrix.inverse();}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00219}00219\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00221}00221\ \ \ \ \ template\ <typename\ T,\ typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00222}00222\ \ \ \ \ Matrix2D<T>\ operator*(const\ S\&\ scalar,\ const\ Matrix2D<T>\&\ matrix)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00223}00223\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00224}00224\ \ \ \ \ \ \ \ \ return\ matrix\ *\ scalar;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00225}00225\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00227}00227\ \ \ \ \ template\ <typename\ T,\ typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00228}00228\ \ \ \ \ Vector2D<T>\ operator*(const\ Vector2D<S>\&\ vec,\ const\ Matrix2D<T>\&\ mat)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00229}00229\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00230}00230\ \ \ \ \ \ \ \ \ return\ Vector2D(vec.x\ *\ mat(0,\ 0)\ +\ vec.y\ *\ mat(1,\ 0),\ vec.x\ *\ mat(0,\ 1)\ +\ vec.y\ *\ mat(1,\ 1));}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00231}00231\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00233}00233\ \ \ \ \ template\ <typename\ T,\ typename\ S,\ typename>}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00234}00234\ \ \ \ \ Vector2D<T>\ operator*=(Vector2D<S>\&\ vec,\ const\ Matrix2D<T>\&\ mat)}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00235}00235\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00236}00236\ \ \ \ \ \ \ \ \ vec\ =\ Vector2D(vec.x\ *\ mat(0,\ 0)\ +\ vec.y\ *\ mat(1,\ 0),\ vec.x\ *\ mat(0,\ 1)\ +\ vec.y\ *\ mat(1,\ 1));}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00237}00237\ \ \ \ \ \ \ \ \ return\ vec;}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00238}00238\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_matrix2_d_8tpp_source_l00239}00239\ \}\ //\ namespace\ fgm}
+
+\end{DoxyCode}

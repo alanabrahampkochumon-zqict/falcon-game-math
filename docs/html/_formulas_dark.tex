@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{iftex}
+\usepackage{ifthen}
+\usepackage{epsfig}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\color{white}
+\pagecolor{black}
+\ifPDFTeX
+\usepackage{newunicodechar}
+  \makeatletter
+    \def\doxynewunicodechar#1#2{%
+    \@tempswafalse
+    \edef\nuc@tempa{\detokenize{#1}}%
+    \if\relax\nuc@tempa\relax
+      \nuc@emptyargerr
+    \else
+      \edef\@tempb{\expandafter\@car\nuc@tempa\@nil}%
+      \nuc@check
+      \if@tempswa
+        \@namedef{u8:\nuc@tempa}{#2}%
+      \fi
+    \fi
+  }
+  \makeatother
+  \doxynewunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \doxynewunicodechar{²}{${}^{2}$}% Superscript two
+  \doxynewunicodechar{³}{${}^{3}$}% Superscript three
+
+\fi
+\pagestyle{empty}
+\begin{document}
+$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i $
+\pagebreak
+
+$ \mathbf{vecA} \cdot \mathbf{vecB} $
+\pagebreak
+
+$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} $
+\pagebreak
+
+$ \|\mathbf{vec}\| $
+\pagebreak
+
+$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} $
+\pagebreak
+
+$ \mathbf{\hat{v}} $
+\pagebreak
+
+$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+\mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} $
+\pagebreak
+
+$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} $
+\pagebreak
+
+\end{document}

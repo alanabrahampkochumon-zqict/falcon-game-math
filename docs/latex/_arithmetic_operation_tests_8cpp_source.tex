@@ -1,0 +1,352 @@
+\doxysection{Arithmetic\+Operation\+Tests.\+cpp}
+\hypertarget{_arithmetic_operation_tests_8cpp_source}{}\label{_arithmetic_operation_tests_8cpp_source}\index{test-\/suite/src/vectors/vector4d/ArithmeticOperationTests.cpp@{test-\/suite/src/vectors/vector4d/ArithmeticOperationTests.cpp}}
+\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector4_d_test_setup_8h}{Vector4DTestSetup.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00015}00015\ \textcolor{keyword}{using\ namespace\ }\doxymbox{\hyperlink{namespacetestutils}{testutils}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00018}00018\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00020}00020\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SETUP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00021}00021\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00022}00022\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00024}00024\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00025}\doxymbox{\hyperlink{class_vector4_d_addition}{00025}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4DAddition}}:\ \textcolor{keyword}{public}\ ::testing::Test}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00028}\doxymbox{\hyperlink{class_vector4_d_addition_a0d122a9335b2ca9f74c62221cf60f088}{00028}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_addition_a0d122a9335b2ca9f74c62221cf60f088}{vecA}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00029}\doxymbox{\hyperlink{class_vector4_d_addition_a716d683ee9caa4dad654acab106eebe2}{00029}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_addition_a716d683ee9caa4dad654acab106eebe2}{vecB}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00030}\doxymbox{\hyperlink{class_vector4_d_addition_a4b0361cf543e4adaa071a61818f01f0b}{00030}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_addition_a4b0361cf543e4adaa071a61818f01f0b}{expected}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00032}\doxymbox{\hyperlink{class_vector4_d_addition_a5f70655f533e5fcd122a026776dabf93}{00032}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_addition_a5f70655f533e5fcd122a026776dabf93}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00033}00033\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_addition_a0d122a9335b2ca9f74c62221cf60f088}{vecA}}\ =\ \{\ T(3),\ T(1),\ T(6),\ T(2)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_addition_a716d683ee9caa4dad654acab106eebe2}{vecB}}\ =\ \{\ T(-\/8),\ T(5),\ T(-\/2),\ T(5)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_addition_a4b0361cf543e4adaa071a61818f01f0b}{expected}}\ =\ \{\ T(-\/5),\ T(6),\ T(4),\ T(7)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00038}00038\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00040}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_afb050afc382cfdd2d96b146f1ed1c157}{00040}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_afb050afc382cfdd2d96b146f1ed1c157}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4DAddition}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00043}00043\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00044}\doxymbox{\hyperlink{class_vector4_d_subtraction}{00044}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4DSubtraction}}:\ \textcolor{keyword}{public}\ ::testing::Test}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00045}00045\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00047}\doxymbox{\hyperlink{class_vector4_d_subtraction_a0bc250dc6b45e2cd5099be39724d306a}{00047}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_subtraction_a0bc250dc6b45e2cd5099be39724d306a}{vecA}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00048}\doxymbox{\hyperlink{class_vector4_d_subtraction_a98e5ed3338acfda4b0859fa579638e88}{00048}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_subtraction_a98e5ed3338acfda4b0859fa579638e88}{vecB}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00049}\doxymbox{\hyperlink{class_vector4_d_subtraction_a02fb5745776902f3116800ca4a371e83}{00049}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_subtraction_a02fb5745776902f3116800ca4a371e83}{expected}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00051}\doxymbox{\hyperlink{class_vector4_d_subtraction_ab41a965287ad40c8118e44f7aa09b656}{00051}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_subtraction_ab41a965287ad40c8118e44f7aa09b656}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00052}00052\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_subtraction_a0bc250dc6b45e2cd5099be39724d306a}{vecA}}\ =\ \{\ T(95),\ T(11),\ T(-\/6),\ T(2)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_subtraction_a98e5ed3338acfda4b0859fa579638e88}{vecB}}\ =\ \{\ T(-\/8),\ T(5),\ T(-\/2),\ T(-\/5)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_subtraction_a02fb5745776902f3116800ca4a371e83}{expected}}\ =\ \{\ T(103),\ T(6),\ T(-\/4),\ T(7)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00057}00057\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00059}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a7186ef7ed741df2c5cf87173b6ba9499}{00059}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_afb050afc382cfdd2d96b146f1ed1c157}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4DSubtraction}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00062}00062\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00063}\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{00063}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}}:\ \textcolor{keyword}{public}\ ::testing::Test}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00064}00064\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00066}\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_aaee80375c225bdebaad4c685be8a6f8e}{00066}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_aaee80375c225bdebaad4c685be8a6f8e}{vec}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00067}\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_a062e02b3e19c34bf57c5278301c87b58}{00067}}\ \ \ \ \ T\ \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_a062e02b3e19c34bf57c5278301c87b58}{scalar}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00068}\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_a4e43200ad9f21f028b16998fbb03d894}{00068}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_a4e43200ad9f21f028b16998fbb03d894}{expectedFloating}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00069}\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_ab31c3fbfa478cea3693ad9790e0c77cd}{00069}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_ab31c3fbfa478cea3693ad9790e0c77cd}{expectedIntegral}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00071}\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_a2619207cb9fc4232c3d332784e6f5e07}{00071}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_a2619207cb9fc4232c3d332784e6f5e07}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00072}00072\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_aaee80375c225bdebaad4c685be8a6f8e}{vec}}\ =\ \{\ T(7),\ T(13),\ T(29),\ T(41)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_a062e02b3e19c34bf57c5278301c87b58}{scalar}}\ =\ T(2.123456789123456);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_a4e43200ad9f21f028b16998fbb03d894}{expectedFloating}}\ =\ \{\ T(14.864197523864192),\ T(27.604938258604928),\ T(61.580246884580224),}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T(87.061728354061696)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_scalar_multiplication_ab31c3fbfa478cea3693ad9790e0c77cd}{expectedIntegral}}\ =\ \{\ T(14),\ T(26),\ T(58),\ T(82)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00079}00079\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00081}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a396bc665ff2ebf7c97c080914ce9d683}{00081}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_afb050afc382cfdd2d96b146f1ed1c157}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00084}00084\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00085}\doxymbox{\hyperlink{class_vector4_d_scalar_division}{00085}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4DScalarDivision}}:\ \textcolor{keyword}{public}\ ::testing::Test}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00086}00086\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00087}00087\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00088}\doxymbox{\hyperlink{class_vector4_d_scalar_division_ad0fb7cf34a6cbf88b95333ea07cbe41a}{00088}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_scalar_division_ad0fb7cf34a6cbf88b95333ea07cbe41a}{vec}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00089}\doxymbox{\hyperlink{class_vector4_d_scalar_division_a0e30e93570d768d32401bfb5585a9045}{00089}}\ \ \ \ \ T\ \doxymbox{\hyperlink{class_vector4_d_scalar_division_a0e30e93570d768d32401bfb5585a9045}{scalar}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00090}\doxymbox{\hyperlink{class_vector4_d_scalar_division_aa64d74a212d2ddfd1c230a789bd269f4}{00090}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_scalar_division_aa64d74a212d2ddfd1c230a789bd269f4}{expected}};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00092}\doxymbox{\hyperlink{class_vector4_d_scalar_division_a1d36c0177697a4de31edc76d5144621c}{00092}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_scalar_division_a1d36c0177697a4de31edc76d5144621c}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00093}00093\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_scalar_division_ad0fb7cf34a6cbf88b95333ea07cbe41a}{vec}}\ =\ \{\ T(17),\ T(31),\ T(59),\ T(73)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_scalar_division_a0e30e93570d768d32401bfb5585a9045}{scalar}}\ =\ T(13);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_scalar_division_aa64d74a212d2ddfd1c230a789bd269f4}{expected}}\ =\ \{\ T(1.30769230769230769231),\ T(2.38461538461538461538),\ T(4.53846153846153846154),}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T(5.61538461538461538462)\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00098}00098\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00099}00099\ \};}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00101}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a8f1f2172fc74a40f88bd5f847c4798e0}{00101}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_afb050afc382cfdd2d96b146f1ed1c157}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4DScalarDivision}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00106}00106\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00107}00107\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00108}00108\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ ADDITION\ TESTS\ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00109}00109\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00110}00110\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00116}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{00116}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4DAddition}},\ PlusOperator\_ReturnsVectorSum)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00117}00117\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00118}00118\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ this-\/>vecA\ +\ this-\/>vecB;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00120}00120\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expected,\ result);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00121}00121\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00128}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a5232eb07f269f30ff607102c6a791475}{00128}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4DAddition}},\ PlusEqualsOperator\_ReturnsSameVectorWithSum)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00129}00129\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00130}00130\ \ \ \ \ this-\/>vecA\ +=\ this-\/>vecB;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00132}00132\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expected,\ this-\/>vecA);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00133}00133\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00137}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{00137}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4DAddition}},\ MixedTypeAdditionPromotesType)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00138}00138\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00139}00139\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00140}00140\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec2(9.0,\ -\/5.0,\ 10.0,\ 3.0);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00142}00142\ \ \ \ \ [[maybe\_unused]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ vec1\ +\ vec2;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00144}00144\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(result)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00145}00145\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00152}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a5e9e4dd3ec6c07f5fa13f3b10a356750}{00152}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_addition}{Vector4DAddition}},\ MixedTypeAdditionAssignmentDoesNotPromoteType)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00153}00153\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00154}00154\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00155}00155\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec2(9.0,\ -\/5.0,\ 10.0,\ 3.0);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00157}00157\ \ \ \ \ vec1\ +=\ vec2;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00159}00159\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(vec1)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00160}00160\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00165}00165\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00166}00166\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00167}00167\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ SUBTRACTION\ TESTS\ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00168}00168\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00169}00169\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00175}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a3638403a13b061e37e0bafa3e5201ef1}{00175}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4DSubtraction}},\ MinusOperator\_ReturnsDifference)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00176}00176\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00177}00177\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ this-\/>vecA\ -\/\ this-\/>vecB;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00179}00179\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expected,\ result);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00180}00180\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00187}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a88613da712299fb64ec04584cf05db17}{00187}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4DSubtraction}},\ MinusEqualsOperator\_ReturnsSameVectorWithDifference)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00188}00188\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00189}00189\ \ \ \ \ this-\/>vecA\ -\/=\ this-\/>vecB;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00191}00191\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expected,\ this-\/>vecA);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00192}00192\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00196}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_afaa3e69e51fe30fb0cda43e6ddf4b419}{00196}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4DSubtraction}},\ MixedTypeSubtractionPromotesType)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00197}00197\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00198}00198\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00199}00199\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec2(9.0,\ -\/5.0,\ 10.0,\ 3.0);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00201}00201\ \ \ \ \ [[maybe\_unused]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ vec1\ -\/\ vec2;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00203}00203\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(result)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00204}00204\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00210}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a53711358489945854efd4c690e89bf07}{00210}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_subtraction}{Vector4DSubtraction}},\ MixedTypeSubtractionAssignmentDoesNotPromoteType)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00211}00211\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00212}00212\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec1(3.0f,\ 0.0f,\ -\/1.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00213}00213\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec2(9.0,\ -\/5.0,\ 10.0,\ 3.0);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00215}00215\ \ \ \ \ vec1\ -\/=\ vec2;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00217}00217\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(vec1)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00218}00218\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00223}00223\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00224}00224\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00225}00225\ \textcolor{comment}{\ *\ \ \ \ \ SCALAR\ MULTIPLICATION\ TESTS\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00226}00226\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00227}00227\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00230}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_af680037b9662b95176e2674e88f6dc98}{00230}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}},\ MultiplicationByZeroReturnsZeroVector)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00231}00231\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00232}00232\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(3.0f,\ 1.0f,\ 6.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00234}00234\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ vec\ *\ 0;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00236}00236\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{EXPECT\_VEC\_ZERO}}(result);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00237}00237\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00241}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a2b4a7269d5007626c6c20132d6788980}{00241}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}},\ MultiplicationByOneReturnsOriginalVector)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00242}00242\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00243}00243\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(3.0f,\ 1.0f,\ 6.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00245}00245\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ vec\ *\ 1;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00247}00247\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(vec,\ result);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00248}00248\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00255}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a59ef669451d653d4e2a7e1ef1e22118c}{00255}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}},\ VectorTimesScalarReturnsScaledVector)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00256}00256\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00257}00257\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ this-\/>vec\ *\ this-\/>scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00259}00259\ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_floating\_point\_v<TypeParam>)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedFloating,\ result);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00261}00261\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00262}00262\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedIntegral,\ result);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00263}00263\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00271}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a786eb8c470f37f2757390f5596275ca9}{00271}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}},\ ScalarTimesAVectorReturnsScaledVector)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00272}00272\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00273}00273\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ this-\/>scalar\ *\ this-\/>vec;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00275}00275\ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_floating\_point\_v<TypeParam>)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedFloating,\ result);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00277}00277\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedIntegral,\ result);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00279}00279\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00286}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab1e2144559a1bfdc3f25a39ebfc4d382}{00286}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}},\ VectorTimesEqualScalarIsTheSameVectorScaled)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00287}00287\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00288}00288\ \ \ \ \ this-\/>vec\ *=\ this-\/>scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00290}00290\ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_floating\_point\_v<TypeParam>)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedFloating,\ this-\/>vec);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00292}00292\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expectedIntegral,\ this-\/>vec);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00294}00294\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00298}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a74b9ff4b8b8bc4cb9ef23913cc3eded7}{00298}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}},\ MixedTypeScalarMultiplicationPromotesType)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00299}00299\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00300}00300\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 2.123456789123456;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00302}00302\ \ \ \ \ [[maybe\_unused]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ this-\/>vec\ *\ scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00304}00304\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(result)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00305}00305\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00312}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ae40f024a65c5e9f932dfb1cb6791ba34}{00312}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}},\ MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00313}00313\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00314}00314\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(3.0f,\ 0.0f,\ -\/1.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00315}00315\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 5.0;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00316}00316\ \ \ \ \ vec\ *=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00318}00318\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(vec)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00319}00319\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00323}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a2c482feeeb2b54fa552e9f58462f6701}{00323}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_multiplication}{Vector4DScalarMultiplication}},\ MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00324}00324\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00325}00325\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(3,\ 0,\ -\/1,\ 8);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00326}00326\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 2.5;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00327}00327\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expected(7,\ 0,\ -\/2,\ 20);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00329}00329\ \ \ \ \ vec\ *=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00331}00331\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00332}00332\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00335}00335\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00336}00336\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00337}00337\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ SCALAR\ DIVISION\ TESTS\ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00338}00338\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00339}00339\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00345}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a7bdc20178506089ee464d0b2227cce90}{00345}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4DScalarDivision}},\ DivisionByZeroReturnsInfinityVector)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00346}00346\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00347}00347\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<TypeParam>)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00348}00348\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af3e3755befec4337ccefebe35e82acc5}{EXPECT\_VEC\_INF}}(this-\/>vec\ /\ 0);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00349}00349\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00350}00350\ \ \ \ \ \ \ \ \ EXPECT\_DEATH(\{\ this-\/>vec\ /\ 0;\ \},\ \textcolor{stringliteral}{"{}Integral\ division\ by\ zero"{}});}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00351}00351\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00355}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a4fb2fe66ba99f7c28565d56a8b1407f7}{00355}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4DScalarDivision}},\ DivisionByOneReturnsOriginalVector)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00356}00356\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00357}00357\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ this-\/>vec\ /\ 1;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00359}00359\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(result,\ this-\/>vec);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00360}00360\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00367}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a82e78a8f0e499cea67dea007676c7a48}{00367}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4DScalarDivision}},\ VectorDividedByANumberReturnsAScaledVector)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00368}00368\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00369}00369\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ this-\/>vec\ /\ this-\/>scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00371}00371\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expected,\ result);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00372}00372\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00373}00373\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00379}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a1babaaebd4abcd024c3092cf5a34b9b9}{00379}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_ab0a064803ae6f0d75024b81d914d3f50}{TYPED\_TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4DScalarDivision}},\ VectorDivideEqualsANumberIsTheSameVectorScaled)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00380}00380\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00381}00381\ \ \ \ \ this-\/>vec\ /=\ this-\/>scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00383}00383\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(this-\/>expected,\ this-\/>vec);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00384}00384\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00385}00385\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00388}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_aeb3634098a155fea641d8f972d11163f}{00388}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4DScalarDivision}},\ MixedTypeScalarDivisionPromotesType)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00389}00389\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00390}00390\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(15.0,\ 0.0,\ -\/5.0,\ 10.0);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00391}00391\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 5.0;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00392}00392\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00393}00393\ \ \ \ \ [[maybe\_unused]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ result\ =\ vec\ /\ scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00395}00395\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(result)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00396}00396\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00397}00397\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00403}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_a26244ae94576048d68ece16eaea4ef51}{00403}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4DScalarDivision}},\ MixedTypeScalarDivisionAssignmentDoesNotPromoteType)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00404}00404\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00405}00405\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(15.0f,\ 0.0f,\ -\/5.0f,\ 10.0f);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00406}00406\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 5.0;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00408}00408\ \ \ \ \ vec\ /=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00410}00410\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(vec)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00411}00411\ \}}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00412}00412\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00415}\doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_abc91e76ace500db90224ccaba573b03e}{00415}}\ \doxymbox{\hyperlink{_arithmetic_operation_tests_8cpp_adcb21c9e8a408f5ae00d75d8419c75bc}{TEST}}(\doxymbox{\hyperlink{class_vector4_d_scalar_division}{Vector4DScalarDivision}},\ MixedTypeScalarDivisionAssignmentGivesResultWithMinimalPrecisionLoss)}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00416}00416\ \{}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00417}00417\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec(10,\ 25,\ -\/30,\ 2);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00418}00418\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ scalar\ =\ 2.5;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00419}00419\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ expected(4,\ 10,\ -\/12,\ 0);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00420}00420\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00421}00421\ \ \ \ \ vec\ /=\ scalar;}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00422}00422\ }
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00423}00423\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(expected,\ vec);}
+\DoxyCodeLine{\Hypertarget{_arithmetic_operation_tests_8cpp_source_l00424}00424\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,102 @@
+\doxysection{test-\/suite/\+include/\+\+Vector4\+DTest\+Setup.h File Reference}
+\hypertarget{_vector4_d_test_setup_8h}{}\label{_vector4_d_test_setup_8h}\index{test-\/suite/include/Vector4DTestSetup.h@{test-\/suite/include/Vector4DTestSetup.h}}
+
+
+Define test setups common to all Vector4D tests.  
+
+
+{\ttfamily \+\#include "{}./\+utils/\+\+Vector\+Utils.\+h"{}}\newline
+{\ttfamily \+\#include $<$Math\+Traits.\+h$>$}\newline
+{\ttfamily \+\#include $<$gtest/\+gtest.\+h$>$}\newline
+{\ttfamily \+\#include $<$limits$>$}\newline
+{\ttfamily \+\#include $<$vector/\+\+Vector4\+D.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{_vector4_d_test_setup_8h_af26a24259eed0eef6a08c6ea73e1e024}{FORCE\+\_\+\+SCALAR}}
+\item 
+\+\#define \doxymbox{\hyperlink{_vector4_d_test_setup_8h_ab92bccb9837c3d672a0b81db264710e0}{ENABLE\+\_\+\+FGM\+\_\+\+SHADER\+\_\+\+OPERATORS}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{_vector4_d_test_setup_8h_a3ab4037b913e41688f8e8de713d957fc}{Supported\+Types}} = ::\+testing::\+\+Types$<$unsigned char, bool, int, unsigned int, float, double, std::\+size\+\_\+t, long long$>$
+\item 
+using \doxymbox{\hyperlink{_vector4_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Define test setups common to all Vector4D tests. 
+
+\begin{DoxyAuthor}{Author}
+Alan Abraham P Kochumon 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Created on:\+ March 07, 2026
+\end{DoxyDate}
+
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2026 Alan Abraham P Kochumon 
+\end{DoxyCopyright}
+
+
+Definition in file \doxymbox{\hyperlink{_vector4_d_test_setup_8h_source}{Vector4\+DTest\+Setup.\+h}}.
+
+
+
+\label{doc-define-members}
+\Hypertarget{_vector4_d_test_setup_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_vector4_d_test_setup_8h_ab92bccb9837c3d672a0b81db264710e0}\index{Vector4DTestSetup.h@{Vector4DTestSetup.h}!ENABLE\_FGM\_SHADER\_OPERATORS@{ENABLE\_FGM\_SHADER\_OPERATORS}}
+\index{ENABLE\_FGM\_SHADER\_OPERATORS@{ENABLE\_FGM\_SHADER\_OPERATORS}!Vector4DTestSetup.h@{Vector4DTestSetup.h}}
+\doxysubsubsection{\texorpdfstring{ENABLE\_FGM\_SHADER\_OPERATORS}{ENABLE\_FGM\_SHADER\_OPERATORS}}
+{\footnotesize\ttfamily \label{_vector4_d_test_setup_8h_ab92bccb9837c3d672a0b81db264710e0} 
+\+\#define ENABLE\+\_\+\+FGM\+\_\+\+SHADER\+\_\+\+OPERATORS}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_test_setup_8h_source_l00014}{14}} of file \doxymbox{\hyperlink{_vector4_d_test_setup_8h_source}{Vector4\+DTest\+Setup.\+h}}.
+
+\Hypertarget{_vector4_d_test_setup_8h_af26a24259eed0eef6a08c6ea73e1e024}\index{Vector4DTestSetup.h@{Vector4DTestSetup.h}!FORCE\_SCALAR@{FORCE\_SCALAR}}
+\index{FORCE\_SCALAR@{FORCE\_SCALAR}!Vector4DTestSetup.h@{Vector4DTestSetup.h}}
+\doxysubsubsection{\texorpdfstring{FORCE\_SCALAR}{FORCE\_SCALAR}}
+{\footnotesize\ttfamily \label{_vector4_d_test_setup_8h_af26a24259eed0eef6a08c6ea73e1e024} 
+\+\#define FORCE\+\_\+\+SCALAR}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_test_setup_8h_source_l00013}{13}} of file \doxymbox{\hyperlink{_vector4_d_test_setup_8h_source}{Vector4\+DTest\+Setup.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_vector4_d_test_setup_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_vector4_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}\index{Vector4DTestSetup.h@{Vector4DTestSetup.h}!SupportedArithmeticTypes@{SupportedArithmeticTypes}}
+\index{SupportedArithmeticTypes@{SupportedArithmeticTypes}!Vector4DTestSetup.h@{Vector4DTestSetup.h}}
+\doxysubsubsection{\texorpdfstring{SupportedArithmeticTypes}{SupportedArithmeticTypes}}
+{\footnotesize\ttfamily \label{_vector4_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e} 
+using \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{::testing::Types<unsigned\ char,\ int,\ unsigned\ int,\ float,\ double,\ std::size\_t,\ long\ long>}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_test_setup_8h_source_l00025}{25}} of file \doxymbox{\hyperlink{_vector4_d_test_setup_8h_source}{Vector4\+DTest\+Setup.\+h}}.
+
+\Hypertarget{_vector4_d_test_setup_8h_a3ab4037b913e41688f8e8de713d957fc}\index{Vector4DTestSetup.h@{Vector4DTestSetup.h}!SupportedTypes@{SupportedTypes}}
+\index{SupportedTypes@{SupportedTypes}!Vector4DTestSetup.h@{Vector4DTestSetup.h}}
+\doxysubsubsection{\texorpdfstring{SupportedTypes}{SupportedTypes}}
+{\footnotesize\ttfamily \label{_vector4_d_test_setup_8h_a3ab4037b913e41688f8e8de713d957fc} 
+using \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a3ab4037b913e41688f8e8de713d957fc}{Supported\+Types}} = ::\+testing::\+\+Types$<$unsigned char, bool, int, unsigned int, float, double, std::\+size\+\_\+t, long long$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector4_d_test_setup_8h_source_l00024}{24}} of file \doxymbox{\hyperlink{_vector4_d_test_setup_8h_source}{Vector4\+DTest\+Setup.\+h}}.
+

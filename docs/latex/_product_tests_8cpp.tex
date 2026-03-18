@@ -1,0 +1,137 @@
+\doxysection{test-\/suite/\+src/\+vectors/\+vector4d/\+\+Product\+Tests.cpp File Reference}
+\hypertarget{_product_tests_8cpp}{}\label{_product_tests_8cpp}\index{test-\/suite/src/vectors/vector4d/ProductTests.cpp@{test-\/suite/src/vectors/vector4d/ProductTests.cpp}}
+
+
+Verifies Vector4\+D$<$bool$>$ dot product logic.  
+
+
+{\ttfamily \+\#include "{}Vector4\+DTest\+Setup.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product$<$ T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{_product_tests_8cpp_af2ae0656edefabcdf96aade192350f82}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} dot project, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_product_tests_8cpp_ac6892d7ed3c70faffc484cb40f492f0f}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}, Self\+Dot\+Product\+Returns\+Square\+Magnitude)
+\item 
+\doxymbox{\hyperlink{_product_tests_8cpp_a9426a7ffd1dee3fb7e7f29359a530a45}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}, Orthogonal\+Dot\+Product\+Return\+Zero)
+\item 
+\doxymbox{\hyperlink{_product_tests_8cpp_a9019737a5725cc56c058afee2b190121}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}, Non\+Orthogonal\+Dot\+Product\+Returns\+Non\+Zero\+Scalar)
+\item 
+\doxymbox{\hyperlink{_product_tests_8cpp_a994c37da972c99e84324198a12e2cfbe}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}, Static\+Wrapper\+\_\+\+Non\+Orthogonal\+Dot\+Product\+Returns\+Non\+Zero\+Scalar)
+\item 
+\doxymbox{\hyperlink{_product_tests_8cpp_a51ad932ec681906beb8f4dd119771c39}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}, Anti\+Parallel\+Dot\+Product\+Returns\+Negative\+Scalar)
+\item 
+\doxymbox{\hyperlink{_product_tests_8cpp_a946dc138984e2d414ff3d35643b6686e}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}, Mixed\+Type\+Dot\+Product\+Promotes\+Type)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Verifies Vector4\+D$<$bool$>$ dot product logic. 
+
+\begin{DoxyAuthor}{Author}
+Alan Abraham P Kochumon 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Created on:\+ March 07, 2026
+\end{DoxyDate}
+
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2026 Alan Abraham P Kochumon 
+\end{DoxyCopyright}
+
+
+Definition in file \doxymbox{\hyperlink{_product_tests_8cpp_source}{Product\+Tests.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_product_tests_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_product_tests_8cpp_a51ad932ec681906beb8f4dd119771c39}\index{ProductTests.cpp@{ProductTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ProductTests.cpp@{ProductTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_product_tests_8cpp_a51ad932ec681906beb8f4dd119771c39} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}}]{}{, }\item[{Anti\+Parallel\+Dot\+Product\+Returns\+Negative\+Scalar}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000123}{Test}}]Verify that the dot product of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with another \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} in opposite direction returns a negative scalar. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_product_tests_8cpp_source_l00118}{118}} of file \doxymbox{\hyperlink{_product_tests_8cpp_source}{Product\+Tests.\+cpp}}.
+
+\Hypertarget{_product_tests_8cpp_a946dc138984e2d414ff3d35643b6686e}\index{ProductTests.cpp@{ProductTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ProductTests.cpp@{ProductTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_product_tests_8cpp_a946dc138984e2d414ff3d35643b6686e} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}}]{}{, }\item[{Mixed\+Type\+Dot\+Product\+Promotes\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000124}{Test}}]Verify that the dot product of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with another \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} of different type returns a type promoted vector. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_product_tests_8cpp_source_l00134}{134}} of file \doxymbox{\hyperlink{_product_tests_8cpp_source}{Product\+Tests.\+cpp}}.
+
+\Hypertarget{_product_tests_8cpp_a9019737a5725cc56c058afee2b190121}\index{ProductTests.cpp@{ProductTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ProductTests.cpp@{ProductTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{_product_tests_8cpp_a9019737a5725cc56c058afee2b190121} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}}]{}{, }\item[{Non\+Orthogonal\+Dot\+Product\+Returns\+Non\+Zero\+Scalar}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000121}{Test}}]Verify that the dot product of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with a non-\/orthogonal vector returns a non-\/zero scalar. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_product_tests_8cpp_source_l00089}{89}} of file \doxymbox{\hyperlink{_product_tests_8cpp_source}{Product\+Tests.\+cpp}}.
+
+\Hypertarget{_product_tests_8cpp_a9426a7ffd1dee3fb7e7f29359a530a45}\index{ProductTests.cpp@{ProductTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ProductTests.cpp@{ProductTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{_product_tests_8cpp_a9426a7ffd1dee3fb7e7f29359a530a45} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}}]{}{, }\item[{Orthogonal\+Dot\+Product\+Return\+Zero}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000120}{Test}}]Verify that the dot product of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with an orthogonal vector returns zero. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_product_tests_8cpp_source_l00075}{75}} of file \doxymbox{\hyperlink{_product_tests_8cpp_source}{Product\+Tests.\+cpp}}.
+
+\Hypertarget{_product_tests_8cpp_ac6892d7ed3c70faffc484cb40f492f0f}\index{ProductTests.cpp@{ProductTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ProductTests.cpp@{ProductTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{_product_tests_8cpp_ac6892d7ed3c70faffc484cb40f492f0f} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}}]{}{, }\item[{Self\+Dot\+Product\+Returns\+Square\+Magnitude}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000119}{Test}}]Verify that the dot product of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with itself returns its squared magnitude. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_product_tests_8cpp_source_l00060}{60}} of file \doxymbox{\hyperlink{_product_tests_8cpp_source}{Product\+Tests.\+cpp}}.
+
+\Hypertarget{_product_tests_8cpp_a994c37da972c99e84324198a12e2cfbe}\index{ProductTests.cpp@{ProductTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ProductTests.cpp@{ProductTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{_product_tests_8cpp_a994c37da972c99e84324198a12e2cfbe} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Non\+Orthogonal\+Dot\+Product\+Returns\+Non\+Zero\+Scalar}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000122}{Test}}]Verify that the static dot product wrapper of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} returns a non-\/zero scalar. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_product_tests_8cpp_source_l00103}{103}} of file \doxymbox{\hyperlink{_product_tests_8cpp_source}{Product\+Tests.\+cpp}}.
+
+\Hypertarget{_product_tests_8cpp_af2ae0656edefabcdf96aade192350f82}\index{ProductTests.cpp@{ProductTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!ProductTests.cpp@{ProductTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}}
+{\footnotesize\ttfamily \label{_product_tests_8cpp_af2ae0656edefabcdf96aade192350f82} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_dot_product}{Vector4\+DDot\+Product}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} dot project, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+

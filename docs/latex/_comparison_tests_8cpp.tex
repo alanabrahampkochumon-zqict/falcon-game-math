@@ -1,0 +1,389 @@
+\doxysection{test-\/suite/\+src/\+vectors/\+vector4d/\+\+Comparison\+Tests.cpp File Reference}
+\hypertarget{_comparison_tests_8cpp}{}\label{_comparison_tests_8cpp}\index{test-\/suite/src/vectors/vector4d/ComparisonTests.cpp@{test-\/suite/src/vectors/vector4d/ComparisonTests.cpp}}
+
+
+Verifies \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} comparison operator (\texorpdfstring{$>$}{>}, \texorpdfstring{$>$}{>}=, \texorpdfstring{$<$}{<}, \texorpdfstring{$<$}{<}=) and their functional counterpart\textquotesingle{}s (gt, gte, lt, lte) logic.  
+
+
+{\ttfamily \+\#include "{}Vector4\+DTest\+Setup.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison$<$ T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a885d6bacff4a6d2b2f065aafc5a0dc51}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for @fgm::\+\+Vector4D comparisons, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_ad616d60cae96ac195ba7c97f9b5ad7bd}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a1cf4379e6048caba22827d0000d4f76f}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Greater\+Than\+Operator\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_ac3d98460c32ff77b1da8850eb20d3821}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Static\+Wrapper\+\_\+\+Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a5863d5abf650c422c034852029037ca9}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Infinity\+Vector\+\_\+\+Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_ac11be36583fc759c8a79c9d677326f5b}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Na\+NVector\+\_\+\+Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a9b77d2d49d4495c7e203f4863c0d9820}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Mixed\+Type\+\_\+\+Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a3fa44fde982b0b68d43d5ac554b9c48d}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+Or\+Equal\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_ad8e011dd776038e20f00e1dc12cfe88e}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Greater\+Than\+Or\+Equal\+Operator\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+Or\+Equal\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a1f72e0443c39159524c05acbe8e4c537}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Static\+Wrapper\+\_\+\+Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+Or\+Equal\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a4051f8ab9bd9b619b9a28eed515d9c55}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Infinity\+Vector\+\_\+\+Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a8f35442a2cbdae45e26f0ee9592af85e}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Nan\+Vector\+\_\+\+Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_afc94e1ede20fd961f8bb1ebd8f425cb1}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Mixed\+Type\+\_\+\+Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_afb292e71164f91728831be1a5e899824}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_adbc283c413372654df92924328631ce1}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Less\+Than\+Operator\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a09dac51c008ed482c3432876278813be}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Static\+Wrapper\+\_\+\+Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_aa528ff23890f64be0332f3fcc5de1957}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Infinity\+Vector\+\_\+\+Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_ac911a81c503a1cd2155eae51b67196a0}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Nan\+Vector\+\_\+\+Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_ac1bebb0125a0c48797db2ad70c22fe61}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Mixed\+Type\+\_\+\+Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a327faa7fb429efb99a7f754762ec9f8a}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+Or\+Equal\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a8dd4f0b23532d03060ba4ce721f22f6d}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Less\+Than\+Or\+Equal\+Operator\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+Or\+Equal\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_aa613048febba28d0e783a1252546de4c}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Static\+Wrapper\+\_\+\+Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+Or\+Equal\+As\+True)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a65fe90cf0fca7ceb899d60aed56b509b}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Infinity\+Vector\+\_\+\+Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_a89d18655c402d46ce09c9beb50db350d}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Nan\+Vector\+\_\+\+Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\item 
+\doxymbox{\hyperlink{_comparison_tests_8cpp_aa9faa5deb474800d3b5db49ca67c4cc4}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}, Mixed\+Type\+\_\+\+Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Verifies \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4\+D$<$bool$>$} comparison operator (\texorpdfstring{$>$}{>}, \texorpdfstring{$>$}{>}=, \texorpdfstring{$<$}{<}, \texorpdfstring{$<$}{<}=) and their functional counterpart\textquotesingle{}s (gt, gte, lt, lte) logic. 
+
+\begin{DoxyAuthor}{Author}
+Alan Abraham P Kochumon 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Created on:\+ March 07, 2026
+\end{DoxyDate}
+
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2026 Alan Abraham P Kochumon 
+\end{DoxyCopyright}
+
+
+Definition in file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_comparison_tests_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_comparison_tests_8cpp_a5863d5abf650c422c034852029037ca9}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a5863d5abf650c422c034852029037ca9} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Infinity\+Vector\+\_\+\+Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000046}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than (gt) performs a component-\/wise comparison when handling infinite values. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00093}{93}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a4051f8ab9bd9b619b9a28eed515d9c55}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a4051f8ab9bd9b619b9a28eed515d9c55} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Infinity\+Vector\+\_\+\+Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000052}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than-\/or-\/equal (gte) performs a component-\/wise comparison when handling infinite values. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00189}{189}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_aa528ff23890f64be0332f3fcc5de1957}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_aa528ff23890f64be0332f3fcc5de1957} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Infinity\+Vector\+\_\+\+Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000058}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than (lt) performs a component-\/wise comparison when handling infinite values. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00283}{283}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a65fe90cf0fca7ceb899d60aed56b509b}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a65fe90cf0fca7ceb899d60aed56b509b} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Infinity\+Vector\+\_\+\+Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000064}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than-\/or-\/equal (lte) performs a component-\/wise comparison when handling infinite values. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00378}{378}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a9b77d2d49d4495c7e203f4863c0d9820}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a9b77d2d49d4495c7e203f4863c0d9820} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000048}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than (gt) performs a component-\/wise comparison when handling vectors of different types. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00125}{125}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_afc94e1ede20fd961f8bb1ebd8f425cb1}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_afc94e1ede20fd961f8bb1ebd8f425cb1} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000054}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than-\/or-\/equal (gte) performs a component-\/wise comparison when handling vectors of different types. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00220}{220}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_ac1bebb0125a0c48797db2ad70c22fe61}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_ac1bebb0125a0c48797db2ad70c22fe61} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000060}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than (lt) performs a component-\/wise comparison when handling vectors of different types. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00315}{315}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_aa9faa5deb474800d3b5db49ca67c4cc4}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_aa9faa5deb474800d3b5db49ca67c4cc4} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Mixed\+Type\+\_\+\+Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000066}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than-\/or-\/equal (lte) performs a component-\/wise comparison when handling vectors of different types. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00410}{410}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_ac11be36583fc759c8a79c9d677326f5b}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_ac11be36583fc759c8a79c9d677326f5b} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Na\+NVector\+\_\+\+Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000047}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than (gt) performs a component-\/wise comparison when handling NaN values. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00109}{109}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a8f35442a2cbdae45e26f0ee9592af85e}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a8f35442a2cbdae45e26f0ee9592af85e} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Nan\+Vector\+\_\+\+Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000053}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than-\/or-\/equal (gte) performs a component-\/wise comparison when handling NaN values. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00205}{205}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_ac911a81c503a1cd2155eae51b67196a0}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_ac911a81c503a1cd2155eae51b67196a0} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Nan\+Vector\+\_\+\+Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000059}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than (lt) performs a component-\/wise comparison when handling NaN values. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00299}{299}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a89d18655c402d46ce09c9beb50db350d}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a89d18655c402d46ce09c9beb50db350d} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Nan\+Vector\+\_\+\+Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Correct\+Values}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000065}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than-\/or-\/equal (lte) performs a component-\/wise comparison when handling NaN values. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00394}{394}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_ad616d60cae96ac195ba7c97f9b5ad7bd}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_ad616d60cae96ac195ba7c97f9b5ad7bd} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000043}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than (gt) performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00057}{57}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a1cf4379e6048caba22827d0000d4f76f}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a1cf4379e6048caba22827d0000d4f76f} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Greater\+Than\+Operator\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000044}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than operator performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00069}{69}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a3fa44fde982b0b68d43d5ac554b9c48d}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a3fa44fde982b0b68d43d5ac554b9c48d} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+Or\+Equal\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000049}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than-\/or-\/equal (gte) performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00152}{152}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_ad8e011dd776038e20f00e1dc12cfe88e}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_ad8e011dd776038e20f00e1dc12cfe88e} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Greater\+Than\+Or\+Equal\+Operator\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+Or\+Equal\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000050}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} greater-\/than-\/or-\/equal operator performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00164}{164}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_afb292e71164f91728831be1a5e899824}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_afb292e71164f91728831be1a5e899824} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000055}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than (lt) performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00247}{247}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_adbc283c413372654df92924328631ce1}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_adbc283c413372654df92924328631ce1} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Less\+Than\+Operator\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000056}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than operator performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00259}{259}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a327faa7fb429efb99a7f754762ec9f8a}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a327faa7fb429efb99a7f754762ec9f8a} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+Or\+Equal\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000061}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than-\/or-\/equal (lte) performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00342}{342}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a8dd4f0b23532d03060ba4ce721f22f6d}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a8dd4f0b23532d03060ba4ce721f22f6d} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Less\+Than\+Or\+Equal\+Operator\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+Or\+Equal\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000062}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} less-\/than-\/or-\/equal operator performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00354}{354}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_ac3d98460c32ff77b1da8850eb20d3821}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_ac3d98460c32ff77b1da8850eb20d3821} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Greater\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000045}{Test}}]Verify that the static greater-\/than (gt) wrapper of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00081}{81}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a1f72e0443c39159524c05acbe8e4c537}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a1f72e0443c39159524c05acbe8e4c537} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Greater\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Greater\+Than\+Or\+Equal\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000051}{Test}}]Verify that the static greater-\/than-\/or-\/equal (gte) wrapper of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00176}{176}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a09dac51c008ed482c3432876278813be}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a09dac51c008ed482c3432876278813be} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Less\+Than\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000057}{Test}}]Verify that the static less-\/than (lt) wrapper of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00271}{271}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_aa613048febba28d0e783a1252546de4c}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_aa613048febba28d0e783a1252546de4c} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Less\+Than\+Or\+Equal\+\_\+\+Returns\+Boolean\+Vector\+With\+Elements\+Less\+Than\+Or\+Equal\+As\+True}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000063}{Test}}]Verify that the static less-\/than-\/or-\/equal (lte) wrapper of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} performs a component-\/wise comparison and returns the correct boolean mask. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_comparison_tests_8cpp_source_l00366}{366}} of file \doxymbox{\hyperlink{_comparison_tests_8cpp_source}{Comparison\+Tests.\+cpp}}.
+
+\Hypertarget{_comparison_tests_8cpp_a885d6bacff4a6d2b2f065aafc5a0dc51}\index{ComparisonTests.cpp@{ComparisonTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!ComparisonTests.cpp@{ComparisonTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}}
+{\footnotesize\ttfamily \label{_comparison_tests_8cpp_a885d6bacff4a6d2b2f065aafc5a0dc51} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4\+DComparison}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for @fgm::\+\+Vector4D comparisons, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+

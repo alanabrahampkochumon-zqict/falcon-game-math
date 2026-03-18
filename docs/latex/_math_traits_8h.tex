@@ -1,0 +1,60 @@
+\doxysection{math-\/lib/\+include/\+\+Math\+Traits.h File Reference}
+\hypertarget{_math_traits_8h}{}\label{_math_traits_8h}\index{math-\/lib/include/MathTraits.h@{math-\/lib/include/MathTraits.h}}
+
+
+Concepts for Arithmetic, Strict\+Arithmetic, Matrix, and Vector. Also contains EPSILONs for floats and doubles.  
+
+
+{\ttfamily \+\#include $<$concepts$>$}\newline
+{\ttfamily \+\#include $<$cstddef$>$}\newline
+{\ttfamily \+\#include $<$type\+\_\+traits$>$}\newline
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacefgm}{fgm}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Concepts}
+\begin{DoxyCompactItemize}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1_strict_arithmetic}{fgm::\+\+Strict\+Arithmetic}}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1weak__arithmetic}{fgm::\+weak\+\_\+arithmetic}}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1_vector}{fgm::\+\+Vector}}
+\item 
+concept \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}}
+\begin{DoxyCompactList}\small\item\em {\ttfamily Matrix} requires a value\+\_\+type, rows, columns, \+[]\+ accessor, (r, c) accessor, and its value\+\_\+type needs to be {\ttfamily Arithmetic}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\using \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{fgm::\+\+Magnitude}} = std::\+conditional\+\_\+t$<$std::\+is\+\_\+same\+\_\+v$<$T, float$>$, float, double$>$
+\begin{DoxyCompactList}\small\item\em Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr double \doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{fgm::\+\+FLOAT\+\_\+\+EPSILON}} = 1e-\/5
+\item 
+constexpr double \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{fgm::\+\+DOUBLE\+\_\+\+EPSILON}} = 1e-\/12
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Concepts for Arithmetic, Strict\+Arithmetic, Matrix, and Vector. Also contains EPSILONs for floats and doubles. 
+
+\begin{DoxyAuthor}{Author}
+Alan Abraham P Kochumon 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Created on:\+ March 07, 2026
+\end{DoxyDate}
+
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2026 Alan Abraham P Kochumon 
+\end{DoxyCopyright}
+
+
+Definition in file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
+

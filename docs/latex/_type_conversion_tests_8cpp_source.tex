@@ -1,0 +1,50 @@
+\doxysection{Type\+Conversion\+Tests.\+cpp}
+\hypertarget{_type_conversion_tests_8cpp_source}{}\label{_type_conversion_tests_8cpp_source}\index{test-\/suite/src/vectors/vector4d/TypeConversionTests.cpp@{test-\/suite/src/vectors/vector4d/TypeConversionTests.cpp}}
+\doxymbox{\hyperlink{_type_conversion_tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector4_d_test_setup_8h}{Vector4DTestSetup.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00014}00014\ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{testutils::EXPECT\_VEC\_CONTAINS}};}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00020}\doxymbox{\hyperlink{_type_conversion_tests_8cpp_aea4241fb9a0a69020d21ef0e4a8c1944}{00020}}\ \doxymbox{\hyperlink{_type_conversion_tests_8cpp_aea4241fb9a0a69020d21ef0e4a8c1944}{TEST}}(Vector4DConversionConstructor,\ PromotesType)}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec1(3.0f,\ 1.0f,\ 6.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00024}00024\ \ \ \ \ [[maybe\_unused]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<double>}}\ vec2(vec1);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(vec2)::value\_type,\ \textcolor{keywordtype}{double}>);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00027}00027\ \}}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00031}\doxymbox{\hyperlink{_type_conversion_tests_8cpp_a1841f85e9404adb601062cf98d0f0366}{00031}}\ \doxymbox{\hyperlink{_type_conversion_tests_8cpp_aea4241fb9a0a69020d21ef0e4a8c1944}{TEST}}(Vector4DConversionConstructor,\ ReturnsNewInstance)}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ Given\ a\ float\ vector}}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec1(3.0f,\ 1.0f,\ 6.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ When\ converted\ to\ a\ double\ vector}}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00037}00037\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<double>}}\ vec2(vec1);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{comment}{//\ And\ one\ of\ its\ value\ mutated}}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00039}00039\ \ \ \ \ vec2.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}}\ =\ 5;}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00041}00041\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ float\ vector\ remains\ unchanged}}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00042}00042\ \ \ \ \ \doxymbox{\hyperlink{_type_conversion_tests_8cpp_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(vec1,\ 3.0f,\ 1.0f,\ 6.0f,\ 2.0f);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\ And,\ the\ new\ vector\ is\ of\ type\ double\ with\ the\ mutated\ value}}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00045}00045\ \ \ \ \ \doxymbox{\hyperlink{_type_conversion_tests_8cpp_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(vec2,\ 5.0,\ 1.0,\ 6.0,\ 2.0);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00052}\doxymbox{\hyperlink{_type_conversion_tests_8cpp_a2ee37cb16e2c12be0f0e2b8e9e84529c}{00052}}\ \doxymbox{\hyperlink{_type_conversion_tests_8cpp_aea4241fb9a0a69020d21ef0e4a8c1944}{TEST}}(Vector4DConversionConstructor,\ DemotesType)}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00053}00053\ \{}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D}}\ vec1(3.0,\ 1.0,\ 6.0,\ 2.0);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00056}00056\ \ \ \ \ [[maybe\_unused]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<float>}}\ vec2(vec1);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{decltype}(vec2)::value\_type,\ \textcolor{keywordtype}{float}>);}
+\DoxyCodeLine{\Hypertarget{_type_conversion_tests_8cpp_source_l00059}00059\ \}}
+
+\end{DoxyCode}

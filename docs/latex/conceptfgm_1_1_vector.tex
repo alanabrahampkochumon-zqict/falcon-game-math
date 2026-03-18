@@ -1,0 +1,24 @@
+\doxysection{fgm::\+Vector Concept Reference}
+\hypertarget{conceptfgm_1_1_vector}{}\label{conceptfgm_1_1_vector}\index{fgm::Vector@{fgm::Vector}}
+
+
+{\ttfamily \+\#include $<$Math\+Traits.\+h$>$}
+
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptfgm_1_1_vector}{Vector}}\ =\ \textcolor{keyword}{requires}(T\ v,\ std::size\_t\ i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ T::value\_type;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\ T::dimension\ \}\ -\/>\ std::same\_as<const\ std::size\_t\&>;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\ v[i]\ \}\ -\/>\ std::convertible\_to<typename\ T::value\_type>;}
+\DoxyCodeLine{\ \ \ \ \}\ \&\&\ \doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{Arithmetic<typename\ T::value\_type>}}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+{\ttfamily Vector} requires a value\+\_\+type, dimension, \+[]\+ accessor, and its value\+\_\+type needs to be {\ttfamily Arithmetic}. 
+
+Definition at line \doxymbox{\hyperlink{_math_traits_8h_source_l00049}{49}} of file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
+

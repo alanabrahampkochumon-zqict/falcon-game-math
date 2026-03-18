@@ -1,0 +1,249 @@
+\doxysection{test-\/suite/\+src/\+vectors/\+vector4d/\+\+Magnitude\+Tests.cpp File Reference}
+\hypertarget{_magnitude_tests_8cpp}{}\label{_magnitude_tests_8cpp}\index{test-\/suite/src/vectors/vector4d/MagnitudeTests.cpp@{test-\/suite/src/vectors/vector4d/MagnitudeTests.cpp}}
+
+
+Verifies Vector4\+D$<$bool$>$ magnitude and normalization logic.  
+
+
+{\ttfamily \+\#include "{}Vector4\+DTest\+Setup.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude$<$ T $>$}}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4\+DUnclean\+Magnitude$<$ T $>$}}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization$<$ T $>$}}
+\item 
+class \doxymbox{\hyperlink{class_vector4_d_zero_normalization}{Vector4\+DZero\+Normalization$<$ T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} magnitude, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_ae10dbcc9538462dc5b07ef215bc7533d}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4\+DUnclean\+Magnitude}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} magnitude, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}, for testing high-\/precision magnitude. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_ae93dc8e95e82f4f60048608c94d9ce47}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} normalization, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_ac5c4e1d185d04d0d0efbd2b638325f35}{TYPED\+\_\+\+TEST\+\_\+\+SUITE}} (\doxymbox{\hyperlink{class_vector4_d_zero_normalization}{Vector4\+DZero\+Normalization}}, \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}})
+\begin{DoxyCompactList}\small\item\em Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} zero-\/vector normalization, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_a4a85d2c34fb5ed76b5d4030ee38048b4}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}, Zero\+Vector\+Returns\+Zero)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_ab0d737abbd241c9a29c5444f0c8204ac}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}, One\+Component\+Vector\+Returns\+Non\+Unit\+Scalar)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_a4c6ac55ffa145867778c1ca15f9e3c95}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}, Non\+Unit\+Vector\+Returns\+Correct\+Magnitude)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_a6ec81f856a24f9a546c88ab032119aa7}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}, Magnitude\+Is\+Always\+Typed\+Promoted\+To\+Floating\+Point\+Type)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_aa94521ee6fb71fbc95c54a9c1cf0c1c3}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}, Static\+Wrapper\+\_\+\+Non\+Unit\+Vector\+Returns\+Correct\+Magnitude)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_ae52c9b28e22a26d6840ae0393a0c574b}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4\+DUnclean\+Magnitude}}, Non\+Unit\+Vector\+Returns\+Correct\+Magnitude\+With\+Minimal\+Precision\+Loss)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_a5b9d30e468a8c4a716ae5bff1973ac5a}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4\+DUnclean\+Magnitude}}, Static\+Wrapper\+\_\+\+Non\+Unit\+Vector\+Returns\+Correct\+Magnitude\+With\+Minimal\+Precision\+Loss)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_a71d132ac96166752c50515fcf05082ea}{TEST}} (\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}, Zero\+Vector\+When\+Normalization\+Causes\+Death)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_a5cc9309a045182ec41531d3ec83b46ac}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}, Non\+Zero\+Vector\+Normalization\+Returns\+Unit\+Vector)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_aee49267d99bf51cd148c16312c4eb70b}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}, Static\+Wrapper\+\_\+\+Non\+Zero\+Vector\+Normalization\+Returns\+Unit\+Vector)
+\item 
+\doxymbox{\hyperlink{_magnitude_tests_8cpp_ac0cacb5d400211e1fd4447d4a9efc5dd}{TYPED\+\_\+\+TEST}} (\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}, Normalized\+Vector\+Is\+Always\+Typed\+Promoted\+To\+Floating\+Point\+Type)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Verifies Vector4\+D$<$bool$>$ magnitude and normalization logic. 
+
+\begin{DoxyAuthor}{Author}
+Alan Abraham P Kochumon 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Created on:\+ March 07, 2026
+\end{DoxyDate}
+
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2026 Alan Abraham P Kochumon 
+\end{DoxyCopyright}
+
+
+Definition in file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_magnitude_tests_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_magnitude_tests_8cpp_ab0d737abbd241c9a29c5444f0c8204ac}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_ab0d737abbd241c9a29c5444f0c8204ac} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}}]{}{, }\item[{One\+Component\+Vector\+Returns\+Non\+Unit\+Scalar}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000109}{Test}}]Verify that the magnitude of a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with multiple unit-\/component returns non-\/unit magnitude. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00108}{108}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_a4a85d2c34fb5ed76b5d4030ee38048b4}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_a4a85d2c34fb5ed76b5d4030ee38048b4} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}}]{}{, }\item[{Zero\+Vector\+Returns\+Zero}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000108}{Test}}]Verify that the magnitude of a zero \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} returns exactly zero. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00099}{99}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_a71d132ac96166752c50515fcf05082ea}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_a71d132ac96166752c50515fcf05082ea} 
+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}}]{}{, }\item[{Zero\+Vector\+When\+Normalization\+Causes\+Death}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000115}{Test}}]Verify that attempting to normalize a zero-\/magnitude \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} results in program termination. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00179}{179}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_a6ec81f856a24f9a546c88ab032119aa7}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_a6ec81f856a24f9a546c88ab032119aa7} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}}]{}{, }\item[{Magnitude\+Is\+Always\+Typed\+Promoted\+To\+Floating\+Point\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000111}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} magnitude calculation results in a floating-\/point type, regardless of the component type. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00130}{130}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_a4c6ac55ffa145867778c1ca15f9e3c95}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_a4c6ac55ffa145867778c1ca15f9e3c95} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}}]{}{, }\item[{Non\+Unit\+Vector\+Returns\+Correct\+Magnitude}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000110}{Test}}]Verify that the magnitude of a non-\/unit \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} returns a non-\/unit magnitude. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00117}{117}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_aa94521ee6fb71fbc95c54a9c1cf0c1c3}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_aa94521ee6fb71fbc95c54a9c1cf0c1c3} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Non\+Unit\+Vector\+Returns\+Correct\+Magnitude}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000112}{Test}}]Verify that the static magnitude wrapper of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} returns a non-\/unit magnitude. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00138}{138}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_a5cc9309a045182ec41531d3ec83b46ac}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_a5cc9309a045182ec41531d3ec83b46ac} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}}]{}{, }\item[{Non\+Zero\+Vector\+Normalization\+Returns\+Unit\+Vector}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000116}{Test}}]Verify that normalizing a \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} returns a unit vector. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00188}{188}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_ac0cacb5d400211e1fd4447d4a9efc5dd}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_ac0cacb5d400211e1fd4447d4a9efc5dd} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}}]{}{, }\item[{Normalized\+Vector\+Is\+Always\+Typed\+Promoted\+To\+Floating\+Point\+Type}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000118}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} normalization results in a floating-\/point type, regardless of the component type. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00209}{209}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_aee49267d99bf51cd148c16312c4eb70b}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_aee49267d99bf51cd148c16312c4eb70b} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Non\+Zero\+Vector\+Normalization\+Returns\+Unit\+Vector}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000117}{Test}}]Verify that \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} static wrapper normalization returns a unit vector. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00197}{197}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_ae52c9b28e22a26d6840ae0393a0c574b}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_ae52c9b28e22a26d6840ae0393a0c574b} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4\+DUnclean\+Magnitude}}}]{}{, }\item[{Non\+Unit\+Vector\+Returns\+Correct\+Magnitude\+With\+Minimal\+Precision\+Loss}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000113}{Test}}]Verify the numerical accuracy of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} magnitude calculations for non-\/unit vectors to ensure minimal precision loss. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00150}{150}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_a5b9d30e468a8c4a716ae5bff1973ac5a}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST@{TYPED\_TEST}}
+\index{TYPED\_TEST@{TYPED\_TEST}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST()}{TYPED\_TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_a5b9d30e468a8c4a716ae5bff1973ac5a} 
+TYPED\+\_\+\+TEST (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4\+DUnclean\+Magnitude}}}]{}{, }\item[{Static\+Wrapper\+\_\+\+Non\+Unit\+Vector\+Returns\+Correct\+Magnitude\+With\+Minimal\+Precision\+Loss}]{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Test}
+\item[\doxymbox{\hyperlink{test__test000114}{Test}}]Verify the numerical accuracy of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} static magnitude wrapper for non-\/unit vectors ensure minimal precision loss. \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{_magnitude_tests_8cpp_source_l00162}{162}} of file \doxymbox{\hyperlink{_magnitude_tests_8cpp_source}{Magnitude\+Tests.\+cpp}}.
+
+\Hypertarget{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4\+DMagnitude}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} magnitude, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+
+\Hypertarget{_magnitude_tests_8cpp_ae93dc8e95e82f4f60048608c94d9ce47}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_ae93dc8e95e82f4f60048608c94d9ce47} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4\+DNormalization}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} normalization, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+
+\Hypertarget{_magnitude_tests_8cpp_ae10dbcc9538462dc5b07ef215bc7533d}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_ae10dbcc9538462dc5b07ef215bc7533d} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4\+DUnclean\+Magnitude}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} magnitude, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}, for testing high-\/precision magnitude. 
+
+\Hypertarget{_magnitude_tests_8cpp_ac5c4e1d185d04d0d0efbd2b638325f35}\index{MagnitudeTests.cpp@{MagnitudeTests.cpp}!TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}}
+\index{TYPED\_TEST\_SUITE@{TYPED\_TEST\_SUITE}!MagnitudeTests.cpp@{MagnitudeTests.cpp}}
+\doxysubsubsection{\texorpdfstring{TYPED\_TEST\_SUITE()}{TYPED\_TEST\_SUITE()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{_magnitude_tests_8cpp_ac5c4e1d185d04d0d0efbd2b638325f35} 
+TYPED\+\_\+\+TEST\+\_\+\+SUITE (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector4_d_zero_normalization}{Vector4\+DZero\+Normalization}}}]{}{, }\item[{\doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Test fixture for \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} zero-\/vector normalization, parameterized by \doxylink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{Supported\+Arithmetic\+Types}. 
+

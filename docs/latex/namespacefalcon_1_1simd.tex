@@ -1,0 +1,57 @@
+\doxysection{falcon::\+simd Namespace Reference}
+\hypertarget{namespacefalcon_1_1simd}{}\label{namespacefalcon_1_1simd}\index{falcon::simd@{falcon::simd}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map}{Register\+Map}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01float_00_0116_01_4}{Register\+Map$<$ float, 16 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01double_00_0116_01_4}{Register\+Map$<$ double, 16 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01_t_00_0116_01_4}{Register\+Map$<$ T, 16 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01float_00_0132_01_4}{Register\+Map$<$ float, 32 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01double_00_0132_01_4}{Register\+Map$<$ double, 32 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01_t_00_0132_01_4}{Register\+Map$<$ T, 32 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01float_00_0164_01_4}{Register\+Map$<$ float, 64 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01double_00_0164_01_4}{Register\+Map$<$ double, 64 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_register_map_3_01_t_00_0164_01_4}{Register\+Map$<$ T, 64 $>$}}
+\item 
+struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{Packing\+Params}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{Packing\+Params}} \doxymbox{\hyperlink{namespacefalcon_1_1simd_a94fb059eb5d87491f16bc160b8fe9411}{calculate\+Packed\+Size}} (std::\+size\+\_\+t total\+Byte\+Size, std::\+size\+\_\+t max\+Align\+As)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{namespacefalcon_1_1simd_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacefalcon_1_1simd_a94fb059eb5d87491f16bc160b8fe9411}\index{falcon::simd@{falcon::simd}!calculatePackedSize@{calculatePackedSize}}
+\index{calculatePackedSize@{calculatePackedSize}!falcon::simd@{falcon::simd}}
+\doxysubsubsection{\texorpdfstring{calculatePackedSize()}{calculatePackedSize()}}
+{\footnotesize\ttfamily \label{namespacefalcon_1_1simd_a94fb059eb5d87491f16bc160b8fe9411} 
+\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{Packing\+Params}} falcon::\+simd::\+calculate\+Packed\+Size (\begin{DoxyParamCaption}\item[{std::\+size\+\_\+t}]{total\+Byte\+Size}{, }\item[{std::\+size\+\_\+t}]{max\+Align\+As}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+A calculator function that gives Aligned Byte Size, Padding, Packed Register Width, and Register Count when provided with an unaligned byte\+Size and maximum\+Alignment possible. 
+\begin{DoxyParams}{Parameters}
+{\em total\+Byte\+Size} & Total unaligned byte size. \\
+\hline
+{\em max\+Align\+As} & Max possible alignment for a given CPU architecture. 16 for SSE, 32 for AVX and AVX2, and 64 for AVX512 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Packed\+Size containing aligned\+Byte\+Size, padding, register width and register count. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_s_i_m_d_utils_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{_s_i_m_d_utils_8h_source}{SIMDUtils.\+h}}.
+

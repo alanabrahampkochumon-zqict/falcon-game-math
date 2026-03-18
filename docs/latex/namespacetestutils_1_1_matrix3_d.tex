@@ -1,0 +1,75 @@
+\doxysection{testutils::\+Matrix3D Namespace Reference}
+\hypertarget{namespacetestutils_1_1_matrix3_d}{}\label{namespacetestutils_1_1_matrix3_d}\index{testutils::Matrix3D@{testutils::Matrix3D}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T, typename U, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+U$>$$>$$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_a8226c9a5a010aec9a8bf1d95b9820845}{EXPECT\+\_\+\+MAT\+\_\+\+EQ}} (\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$ expected, \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ U $>$ actual)
+\item 
+{\footnotesize template$<$typename T, typename U, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+floating\+\_\+point\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+floating\+\_\+point\+\_\+v$<$\+U$>$$>$$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_af1d7ce95a5cd05f00d826b76b14d512d}{EXPECT\+\_\+\+MAT\+\_\+\+NEAR}} (\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$ expected, \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ U $>$ actual, double tolerance=1e-\/5)
+\item 
+{\footnotesize template$<$typename T, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_a3284f1d23dd3cdb364a8c8bf0718d521}{EXPECT\+\_\+\+MAT\+\_\+\+IDENTITY}} (\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$ actual)
+\item 
+{\footnotesize template$<$typename T, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_afc7a66e795363f370b27d4a2e55d21b3}{EXPECT\+\_\+\+MAT\+\_\+\+ZERO}} (\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$ actual)
+\item 
+{\footnotesize template$<$typename T, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$$>$ }\\void \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_aee832b2bf23231364df9fc783806ee3c}{EXPECT\+\_\+\+MAT\+\_\+\+INF}} (\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$ actual)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{namespacetestutils_1_1_matrix3_d_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetestutils_1_1_matrix3_d_a8226c9a5a010aec9a8bf1d95b9820845}\index{testutils::Matrix3D@{testutils::Matrix3D}!EXPECT\_MAT\_EQ@{EXPECT\_MAT\_EQ}}
+\index{EXPECT\_MAT\_EQ@{EXPECT\_MAT\_EQ}!testutils::Matrix3D@{testutils::Matrix3D}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_EQ()}{EXPECT\_MAT\_EQ()}}
+{\footnotesize\ttfamily \label{namespacetestutils_1_1_matrix3_d_a8226c9a5a010aec9a8bf1d95b9820845} 
+template$<$typename T, typename U, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+U$>$$>$$>$ \\
+void testutils::\+\+Matrix3\+D::\+\+EXPECT\+\_\+\+MAT\+\_\+\+EQ (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$}]{expected}{, }\item[{\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ U $>$}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00166}{166}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_1_1_matrix3_d_a3284f1d23dd3cdb364a8c8bf0718d521}\index{testutils::Matrix3D@{testutils::Matrix3D}!EXPECT\_MAT\_IDENTITY@{EXPECT\_MAT\_IDENTITY}}
+\index{EXPECT\_MAT\_IDENTITY@{EXPECT\_MAT\_IDENTITY}!testutils::Matrix3D@{testutils::Matrix3D}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_IDENTITY()}{EXPECT\_MAT\_IDENTITY()}}
+{\footnotesize\ttfamily \label{namespacetestutils_1_1_matrix3_d_a3284f1d23dd3cdb364a8c8bf0718d521} 
+template$<$typename T, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$$>$ \\
+void testutils::\+\+Matrix3\+D::\+\+EXPECT\+\_\+\+MAT\+\_\+\+IDENTITY (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00203}{203}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_1_1_matrix3_d_aee832b2bf23231364df9fc783806ee3c}\index{testutils::Matrix3D@{testutils::Matrix3D}!EXPECT\_MAT\_INF@{EXPECT\_MAT\_INF}}
+\index{EXPECT\_MAT\_INF@{EXPECT\_MAT\_INF}!testutils::Matrix3D@{testutils::Matrix3D}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_INF()}{EXPECT\_MAT\_INF()}}
+{\footnotesize\ttfamily \label{namespacetestutils_1_1_matrix3_d_aee832b2bf23231364df9fc783806ee3c} 
+template$<$typename T, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$$>$ \\
+void testutils::\+\+Matrix3\+D::\+\+EXPECT\+\_\+\+MAT\+\_\+\+INF (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00245}{245}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_1_1_matrix3_d_af1d7ce95a5cd05f00d826b76b14d512d}\index{testutils::Matrix3D@{testutils::Matrix3D}!EXPECT\_MAT\_NEAR@{EXPECT\_MAT\_NEAR}}
+\index{EXPECT\_MAT\_NEAR@{EXPECT\_MAT\_NEAR}!testutils::Matrix3D@{testutils::Matrix3D}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_NEAR()}{EXPECT\_MAT\_NEAR()}}
+{\footnotesize\ttfamily \label{namespacetestutils_1_1_matrix3_d_af1d7ce95a5cd05f00d826b76b14d512d} 
+template$<$typename T, typename U, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+floating\+\_\+point\+\_\+v$<$\+T$>$$>$, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+floating\+\_\+point\+\_\+v$<$\+U$>$$>$$>$ \\
+void testutils::\+\+Matrix3\+D::\+\+EXPECT\+\_\+\+MAT\+\_\+\+NEAR (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$}]{expected}{, }\item[{\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ U $>$}]{actual}{, }\item[{double}]{tolerance}{ = {\ttfamily 1e-\/5}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00190}{190}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{namespacetestutils_1_1_matrix3_d_afc7a66e795363f370b27d4a2e55d21b3}\index{testutils::Matrix3D@{testutils::Matrix3D}!EXPECT\_MAT\_ZERO@{EXPECT\_MAT\_ZERO}}
+\index{EXPECT\_MAT\_ZERO@{EXPECT\_MAT\_ZERO}!testutils::Matrix3D@{testutils::Matrix3D}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_MAT\_ZERO()}{EXPECT\_MAT\_ZERO()}}
+{\footnotesize\ttfamily \label{namespacetestutils_1_1_matrix3_d_afc7a66e795363f370b27d4a2e55d21b3} 
+template$<$typename T, typename = std::\+enable\+\_\+if\+\_\+t$<$std::\+is\+\_\+arithmetic\+\_\+v$<$\+T$>$$>$$>$ \\
+void testutils::\+\+Matrix3\+D::\+\+EXPECT\+\_\+\+MAT\+\_\+\+ZERO (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::\+\+Matrix3D}}$<$ T $>$}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00224}{224}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+

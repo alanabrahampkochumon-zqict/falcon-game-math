@@ -1,0 +1,46 @@
+var hierarchy =
+[
+    [ "fgm::Config", "structfgm_1_1_config.html", null ],
+    [ "fgm::Matrix2D&lt; T &gt;", "structfgm_1_1_matrix2_d.html", null ],
+    [ "fgm::Matrix3D&lt; T &gt;", "structfgm_1_1_matrix3_d.html", null ],
+    [ "fgm::Matrix4D&lt; T &gt;", "structfgm_1_1_matrix4_d.html", null ],
+    [ "falcon::simd::PackingParams", "structfalcon_1_1simd_1_1_packing_params.html", null ],
+    [ "falcon::simd::RegisterMap&lt; T, RegWidth &gt;", "structfalcon_1_1simd_1_1_register_map.html", null ],
+    [ "falcon::simd::RegisterMap&lt; double, 16 &gt;", "structfalcon_1_1simd_1_1_register_map_3_01double_00_0116_01_4.html", null ],
+    [ "falcon::simd::RegisterMap&lt; double, 32 &gt;", "structfalcon_1_1simd_1_1_register_map_3_01double_00_0132_01_4.html", null ],
+    [ "falcon::simd::RegisterMap&lt; double, 64 &gt;", "structfalcon_1_1simd_1_1_register_map_3_01double_00_0164_01_4.html", null ],
+    [ "falcon::simd::RegisterMap&lt; float, 16 &gt;", "structfalcon_1_1simd_1_1_register_map_3_01float_00_0116_01_4.html", null ],
+    [ "falcon::simd::RegisterMap&lt; float, 32 &gt;", "structfalcon_1_1simd_1_1_register_map_3_01float_00_0132_01_4.html", null ],
+    [ "falcon::simd::RegisterMap&lt; float, 64 &gt;", "structfalcon_1_1simd_1_1_register_map_3_01float_00_0164_01_4.html", null ],
+    [ "falcon::simd::RegisterMap&lt; T, 16 &gt;", "structfalcon_1_1simd_1_1_register_map_3_01_t_00_0116_01_4.html", null ],
+    [ "falcon::simd::RegisterMap&lt; T, 32 &gt;", "structfalcon_1_1simd_1_1_register_map_3_01_t_00_0132_01_4.html", null ],
+    [ "falcon::simd::RegisterMap&lt; T, 64 &gt;", "structfalcon_1_1simd_1_1_register_map_3_01_t_00_0164_01_4.html", null ],
+    [ "math::SimdTraits&lt; T, Dimension &gt;", "structmath_1_1_simd_traits.html", null ],
+    [ "testing::Test", null, [
+      [ "BooleanVectorBitOperations", "class_boolean_vector_bit_operations.html", null ],
+      [ "RegisterMapTest< T >", "class_register_map_test.html", null ],
+      [ "Vector3DInitialization< T >", "class_vector3_d_initialization.html", null ],
+      [ "Vector4DAddition< T >", "class_vector4_d_addition.html", null ],
+      [ "Vector4DComparison< T >", "class_vector4_d_comparison.html", null ],
+      [ "Vector4DDotProduct< T >", "class_vector4_d_dot_product.html", null ],
+      [ "Vector4DEquality< T >", "class_vector4_d_equality.html", null ],
+      [ "Vector4DInitialization< T >", "class_vector4_d_initialization.html", null ],
+      [ "Vector4DMagnitude< T >", "class_vector4_d_magnitude.html", null ],
+      [ "Vector4DNormalization< T >", "class_vector4_d_normalization.html", null ],
+      [ "Vector4DProjection< T >", "class_vector4_d_projection.html", null ],
+      [ "Vector4DRejection< T >", "class_vector4_d_rejection.html", null ],
+      [ "Vector4DScalarDivision< T >", "class_vector4_d_scalar_division.html", null ],
+      [ "Vector4DScalarMultiplication< T >", "class_vector4_d_scalar_multiplication.html", null ],
+      [ "Vector4DStringRepresentationTests", "class_vector4_d_string_representation_tests.html", null ],
+      [ "Vector4DSubtraction< T >", "class_vector4_d_subtraction.html", null ],
+      [ "Vector4DUncleanMagnitude< T >", "class_vector4_d_unclean_magnitude.html", null ],
+      [ "Vector4DZeroNormalization< T >", "class_vector4_d_zero_normalization.html", null ]
+    ] ],
+    [ "TestPackingParams", "struct_test_packing_params.html", null ],
+    [ "testing::TestWithParam", null, [
+      [ "PackedSizeCalculatorTests", "class_packed_size_calculator_tests.html", null ]
+    ] ],
+    [ "fgm::Vector2D&lt; T &gt;", "structfgm_1_1_vector2_d.html", null ],
+    [ "fgm::Vector3D&lt; T &gt;", "structfgm_1_1_vector3_d.html", null ],
+    [ "fgm::Vector4D&lt; T &gt;", "structfgm_1_1_vector4_d.html", null ]
+];
