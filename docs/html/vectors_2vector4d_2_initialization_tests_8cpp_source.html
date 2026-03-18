@@ -96,7 +96,7 @@ $(function(){initNavTree('vectors_2vector4d_2_initialization_tests_8cpp_source.h
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="_vector4_d_test_setup_8h.html">Vector4DTestSetup.h</a>&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacetestutils.html">testutils</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using namespace </span>testutils;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/**************************************</span></div>
@@ -112,7 +112,7 @@ $(function(){initNavTree('vectors_2vector4d_2_initialization_tests_8cpp_source.h
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
 </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="vectors_2vector4d_2_initialization_tests_8cpp.html#a7b7860d540a7355829ade90b7b7d1179">   28</a></span><a class="code hl_function" href="vectors_2vector4d_2_initialization_tests_8cpp.html#a7b7860d540a7355829ade90b7b7d1179">TYPED_TEST_SUITE</a>(<a class="code hl_class" href="class_vector4_d_initialization.html">Vector4DInitialization</a>, <a class="code hl_typedef" href="_vector3_d_test_setup_8h.html#a3ab4037b913e41688f8e8de713d957fc">SupportedTypes</a>);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="vectors_2vector4d_2_initialization_tests_8cpp.html#a7b7860d540a7355829ade90b7b7d1179">   28</a></span><a class="code hl_function" href="vectors_2vector4d_2_initialization_tests_8cpp.html#a7b7860d540a7355829ade90b7b7d1179">TYPED_TEST_SUITE</a>(<a class="code hl_class" href="class_vector4_d_initialization.html">Vector4DInitialization</a>, SupportedTypes);</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
@@ -187,12 +187,10 @@ $(function(){initNavTree('vectors_2vector4d_2_initialization_tests_8cpp_source.h
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
 </div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span></div>
-<div class="ttc" id="a_vector3_d_test_setup_8h_html_a3ab4037b913e41688f8e8de713d957fc"><div class="ttname"><a href="_vector3_d_test_setup_8h.html#a3ab4037b913e41688f8e8de713d957fc">SupportedTypes</a></div><div class="ttdeci">::testing::Types&lt; unsigned char, bool, int, unsigned int, float, double, std::size_t, long long &gt; SupportedTypes</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_test_setup_8h_source.html#l00023">Vector3DTestSetup.h:23</a></div></div>
 <div class="ttc" id="a_vector4_d_test_setup_8h_html"><div class="ttname"><a href="_vector4_d_test_setup_8h.html">Vector4DTestSetup.h</a></div><div class="ttdoc">Define test setups common to all Vector4D tests.</div></div>
 <div class="ttc" id="aclass_vector4_d_initialization_html"><div class="ttname"><a href="class_vector4_d_initialization.html">Vector4DInitialization</a></div><div class="ttdef"><b>Definition</b> <a href="#l00024">InitializationTests.cpp:25</a></div></div>
 <div class="ttc" id="agroup___vector___utils_html_ga75afee25cc06d8f63eb59d0d9769653f"><div class="ttname"><a href="group___vector___utils.html#ga75afee25cc06d8f63eb59d0d9769653f">testutils::EXPECT_VEC_CONTAINS</a></div><div class="ttdeci">void EXPECT_VEC_CONTAINS(const fgm::Vector2D&lt; T &gt; &amp;vector, T x, T y)</div><div class="ttdoc">Performs a strict component-wise validation of a fgm::Vector2D against discrete scalar values.</div><div class="ttdef"><b>Definition</b> <a href="_vector_utils_8h_source.html#l00075">VectorUtils.h:75</a></div></div>
 <div class="ttc" id="agroup___vector___utils_html_gae7dd463db7e44961df742eaebdb34400"><div class="ttname"><a href="group___vector___utils.html#gae7dd463db7e44961df742eaebdb34400">testutils::EXPECT_VEC_ZERO</a></div><div class="ttdeci">void EXPECT_VEC_ZERO(const T &amp;vector)</div><div class="ttdoc">Validates that the provided vector contains only zero components.</div><div class="ttdef"><b>Definition</b> <a href="_vector_utils_8h_source.html#l00208">VectorUtils.h:208</a></div></div>
-<div class="ttc" id="anamespacetestutils_html"><div class="ttname"><a href="namespacetestutils.html">testutils</a></div><div class="ttdef"><b>Definition</b> <a href="_matrix_utils_8h_source.html#l00023">MatrixUtils.h:24</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector2_d_html"><div class="ttname"><a href="structfgm_1_1_vector2_d.html">fgm::Vector2D</a></div><div class="ttdef"><b>Definition</b> <a href="_vector2_d_8h_source.html#l00010">Vector2D.h:11</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html"><div class="ttname"><a href="structfgm_1_1_vector3_d.html">fgm::Vector3D</a></div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00027">Vector3D.h:28</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector4_d_html"><div class="ttname"><a href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a></div><div class="ttdef"><b>Definition</b> <a href="_vector4_d_8h_source.html#l00037">Vector4D.h:38</a></div></div>
@@ -203,7 +201,7 @@ $(function(){initNavTree('vectors_2vector4d_2_initialization_tests_8cpp_source.h
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_4c62c5705c93f307172a2812dbe6d6e8.html">test-suite</a></li><li class="navelem"><a href="dir_721e3eff7b86a6dac1d7f8d9226b28bd.html">src</a></li><li class="navelem"><a href="dir_6b30b9d4464f22611f7803a12a4299c1.html">vectors</a></li><li class="navelem"><a href="dir_ddedd587ceb45fc31336532be7e660bd.html">vector4d</a></li><li class="navelem"><a href="vectors_2vector4d_2_initialization_tests_8cpp.html">InitializationTests.cpp</a></li>
+    <li class="navelem"><b>test-suite</b></li><li class="navelem"><b>src</b></li><li class="navelem"><b>vectors</b></li><li class="navelem"><b>vector4d</b></li><li class="navelem"><a href="vectors_2vector4d_2_initialization_tests_8cpp.html">InitializationTests.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

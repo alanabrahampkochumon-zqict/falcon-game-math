@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 18, 2026
  *
- * @brief Definitions for doxygen groups used across fgm.
+ * @brief Definitions for doxygen groups used across fgm test harness.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -12,7 +12,7 @@
 
 // clang-format off
 /**
- * @defgroup FGMTestSuite Falcon Game Math Library Test Suite
+ * @defgroup FGMTestSuite Test Suite
  * @brief Master test suite for Falcon Game Math Library.
  * @{
  */

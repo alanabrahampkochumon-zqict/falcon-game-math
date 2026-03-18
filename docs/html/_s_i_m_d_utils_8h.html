@@ -103,14 +103,9 @@ $(function(){initNavTree('_s_i_m_d_utils_8h.html','',''); });
 Classes</h2></td></tr>
 <tr class="memitem:falcon_3A_3Asimd_3A_3APackingParams" id="r_falcon_3A_3Asimd_3A_3APackingParams"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfalcon_1_1simd_1_1_packing_params.html">falcon::simd::PackingParams</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:falcon" id="r_falcon"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacefalcon.html">falcon</a></td></tr>
-<tr class="memitem:falcon_3A_3Asimd" id="r_falcon_3A_3Asimd"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacefalcon_1_1simd.html">falcon::simd</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a94fb059eb5d87491f16bc160b8fe9411" id="r_a94fb059eb5d87491f16bc160b8fe9411"><td class="memItemLeft">constexpr <a class="el" href="structfalcon_1_1simd_1_1_packing_params.html">PackingParams</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacefalcon_1_1simd.html#a94fb059eb5d87491f16bc160b8fe9411">falcon::simd::calculatePackedSize</a> (std::size_t totalByteSize, std::size_t maxAlignAs)</td></tr>
+<tr class="memitem:a94fb059eb5d87491f16bc160b8fe9411" id="r_a94fb059eb5d87491f16bc160b8fe9411"><td class="memItemLeft">constexpr <a class="el" href="structfalcon_1_1simd_1_1_packing_params.html">PackingParams</a>&#160;</td><td class="memItemRight"><a class="el" href="#a94fb059eb5d87491f16bc160b8fe9411">falcon::simd::calculatePackedSize</a> (std::size_t totalByteSize, std::size_t maxAlignAs)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>SIMD utility functions. </p>
@@ -119,7 +114,47 @@ Functions</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2026 Alan Abraham P Kochumon </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="_s_i_m_d_utils_8h_source.html">SIMDUtils.h</a>.</p>
-</div></div><!-- contents -->
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a94fb059eb5d87491f16bc160b8fe9411" name="a94fb059eb5d87491f16bc160b8fe9411"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94fb059eb5d87491f16bc160b8fe9411">&#9670;&#160;</a></span>calculatePackedSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">PackingParams falcon::simd::calculatePackedSize </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>totalByteSize</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>maxAlignAs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A calculator function that gives Aligned Byte Size, Padding, Packed Register Width, and Register Count when provided with an unaligned byteSize and maximumAlignment possible. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">totalByteSize</td><td>Total unaligned byte size. </td></tr>
+    <tr><td class="paramname">maxAlignAs</td><td>Max possible alignment for a given CPU architecture. 16 for SSE, 32 for AVX and AVX2, and 64 for AVX512 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>PackedSize containing alignedByteSize, padding, register width and register count. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_s_i_m_d_utils_8h_source.html#l00035">35</a> of file <a class="el" href="_s_i_m_d_utils_8h_source.html">SIMDUtils.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -132,7 +167,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_438dd2bc29fc0ff4a3e7d65d3220f2b7.html">simd</a></li><li class="navelem"><a href="dir_952b1643a54653e57d345fdcb250a700.html">include</a></li><li class="navelem"><a href="_s_i_m_d_utils_8h.html">SIMDUtils.h</a></li>
+    <li class="navelem"><b>simd</b></li><li class="navelem"><b>include</b></li><li class="navelem"><a href="_s_i_m_d_utils_8h.html">SIMDUtils.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

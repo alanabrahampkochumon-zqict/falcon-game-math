@@ -1,6 +1,6 @@
 var _comparison_tests_8cpp =
 [
-    [ "Vector4DComparison&lt; T &gt;", "class_vector4_d_comparison.html", "class_vector4_d_comparison" ],
+    [ "Vector4DComparison&lt; T &gt;", "class_vector4_d_comparison.html", null ],
     [ "TYPED_TEST_SUITE", "_comparison_tests_8cpp.html#a885d6bacff4a6d2b2f065aafc5a0dc51", null ],
     [ "Vector4DComparison_GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue", "group___f_g_m___vec4___g_t___comp.html#ga0975f4c32bdc910c037444bae5372efc", null ],
     [ "Vector4DComparison_GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue", "group___f_g_m___vec4___g_t___comp.html#ga7a69e7e3f6188ba06e7b7038e1580c97", null ],

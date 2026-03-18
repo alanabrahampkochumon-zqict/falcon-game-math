@@ -94,9 +94,9 @@ $(function(){initNavTree('_vector3_d_8h.html','',''); });
 
 <p>Templated 3D Vector supporting integral, floating-point and boolean types.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="_vector2_d_8h_source.html">Vector2D.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;Vector2D.h&quot;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
-<code>#include &quot;<a class="el" href="_vector3_d_8tpp_source.html">Vector3D.tpp</a>&quot;</code><br />
+<code>#include &quot;Vector3D.tpp&quot;</code><br />
 </div>
 <p><a href="_vector3_d_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -104,30 +104,60 @@ $(function(){initNavTree('_vector3_d_8h.html','',''); });
 Classes</h2></td></tr>
 <tr class="memitem:fgm_3A_3AVector3D_3C_20T_20_3E" id="r_fgm_3A_3AVector3D_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfgm_1_1_vector3_d.html">fgm::Vector3D&lt; T &gt;</a></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:fgm" id="r_fgm"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacefgm.html">fgm</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ae5d7d781ee2e419faff48229db52a50c" id="r_ae5d7d781ee2e419faff48229db52a50c"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacefgm.html#ae5d7d781ee2e419faff48229db52a50c">fgm::vec3</a> = <a class="el" href="structfgm_1_1_vector3_d.html">Vector3D</a>&lt;float&gt;</td></tr>
-<tr class="memitem:a78fc07c62bb74319bf946897e75f5414" id="r_a78fc07c62bb74319bf946897e75f5414"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacefgm.html#a78fc07c62bb74319bf946897e75f5414">fgm::dvec3</a> = <a class="el" href="structfgm_1_1_vector3_d.html">Vector3D</a>&lt;double&gt;</td></tr>
+<tr class="memitem:ae5d7d781ee2e419faff48229db52a50c" id="r_ae5d7d781ee2e419faff48229db52a50c"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae5d7d781ee2e419faff48229db52a50c">fgm::vec3</a> = <a class="el" href="structfgm_1_1_vector3_d.html">Vector3D</a>&lt;float&gt;</td></tr>
+<tr class="memitem:a78fc07c62bb74319bf946897e75f5414" id="r_a78fc07c62bb74319bf946897e75f5414"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a78fc07c62bb74319bf946897e75f5414">fgm::dvec3</a> = <a class="el" href="structfgm_1_1_vector3_d.html">Vector3D</a>&lt;double&gt;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afabe3f375509d8bab94708cb06578d1b" id="r_afabe3f375509d8bab94708cb06578d1b"><td class="memTemplParams" colspan="2">template&lt;Arithmetic T, Arithmetic S&gt; </td></tr>
-<tr class="memitem:afabe3f375509d8bab94708cb06578d1b template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="namespacefgm.html#afabe3f375509d8bab94708cb06578d1b">fgm::operator*</a> (S scalar, const <a class="el" href="structfgm_1_1_vector3_d.html">Vector3D</a>&lt; T &gt; &amp;vector) -&gt; <a class="el" href="structfgm_1_1_vector3_d.html">Vector3D</a>&lt; std::common_type_t&lt; T, S &gt; &gt;</td></tr>
+<tr class="memitem:afabe3f375509d8bab94708cb06578d1b" id="r_afabe3f375509d8bab94708cb06578d1b"><td class="memTemplParams" colspan="2"><a id="afabe3f375509d8bab94708cb06578d1b" name="afabe3f375509d8bab94708cb06578d1b"></a>
+template&lt;Arithmetic T, Arithmetic S&gt; </td></tr>
+<tr class="memitem:afabe3f375509d8bab94708cb06578d1b template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><b>fgm::operator*</b> (S scalar, const <a class="el" href="structfgm_1_1_vector3_d.html">Vector3D</a>&lt; T &gt; &amp;vector) -&gt; <a class="el" href="structfgm_1_1_vector3_d.html">Vector3D</a>&lt; std::common_type_t&lt; T, S &gt; &gt;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Templated 3D Vector supporting integral, floating-point and boolean types. </p>
 <dl class="section author"><dt>Author</dt><dd>Alan Abraham P Kochumon </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Created on: January 19, 2026</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Arithmetic operations are limited to numeric types via <span class="tt">StrictArithmetic</span> concept.</dd></dl>
-<dl class="section user"><dt>Configuration</dt><dd>Define <span class="tt"><a class="el" href="_vector3_d_test_setup_8h.html#ab92bccb9837c3d672a0b81db264710e0">ENABLE_FGM_SHADER_OPERATORS</a></span> to enable comparison operators (&gt;, &lt;, etc.). Even if disabled, functional comparisons like <span class="tt">greaterThan()</span> remain available. Define <span class="tt"><a class="el" href="_vector3_d_test_setup_8h.html#af26a24259eed0eef6a08c6ea73e1e024">FORCE_SCALAR</a></span> to turn off SIMD which is on by default on supported hardware.</dd></dl>
+<dl class="section user"><dt>Configuration</dt><dd>Define <span class="tt">ENABLE_FGM_SHADER_OPERATORS</span> to enable comparison operators (&gt;, &lt;, etc.). Even if disabled, functional comparisons like <span class="tt">greaterThan()</span> remain available. Define <span class="tt">FORCE_SCALAR</span> to turn off SIMD which is on by default on supported hardware.</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2026 Alan Abraham P Kochumon </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="_vector3_d_8h_source.html">Vector3D.h</a>.</p>
-</div></div><!-- contents -->
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="a78fc07c62bb74319bf946897e75f5414" name="a78fc07c62bb74319bf946897e75f5414"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78fc07c62bb74319bf946897e75f5414">&#9670;&#160;</a></span>dvec3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using fgm::dvec3 = Vector3D&lt;double&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_vector3_d_8h_source.html#l00227">227</a> of file <a class="el" href="_vector3_d_8h_source.html">Vector3D.h</a>.</p>
+
+</div>
+</div>
+<a id="ae5d7d781ee2e419faff48229db52a50c" name="ae5d7d781ee2e419faff48229db52a50c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5d7d781ee2e419faff48229db52a50c">&#9670;&#160;</a></span>vec3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using fgm::vec3 = Vector3D&lt;float&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_vector3_d_8h_source.html#l00226">226</a> of file <a class="el" href="_vector3_d_8h_source.html">Vector3D.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -140,7 +170,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_1f08789ebfd09cc610cc3060ef7bead5.html">math-lib</a></li><li class="navelem"><a href="dir_7857bb6fa2081d1ebe43d54f4a95104b.html">include</a></li><li class="navelem"><a href="dir_f22e0c17971713cf945622a55b8af9c3.html">vector</a></li><li class="navelem"><a href="_vector3_d_8h.html">Vector3D.h</a></li>
+    <li class="navelem"><b>math-lib</b></li><li class="navelem"><b>include</b></li><li class="navelem"><b>vector</b></li><li class="navelem"><a href="_vector3_d_8h.html">Vector3D.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

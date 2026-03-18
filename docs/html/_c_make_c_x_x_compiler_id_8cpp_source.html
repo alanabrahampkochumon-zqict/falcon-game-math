@@ -91,7 +91,7 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
   <div class="headertitle"><div class="title">CMakeCXXCompilerId.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_c_make_c_x_x_compiler_id_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* This source file must have a .cpp extension so that all C++ compilers</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* This source file must have a .cpp extension so that all C++ compilers</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">   recognize the extension without flags.  Borland does not know .cxx for</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">   example.  */</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#ifndef __cplusplus</span></div>
@@ -101,7 +101,7 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#if !defined(__has_include)</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">/* If the compiler does not have __has_include, pretend the answer is</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">   always no.  */</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#ae5510d82e4946f1656f4969911c54736">   11</a></span><span class="preprocessor">#  define __has_include(x) 0</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#  define __has_include(x) 0</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
@@ -533,14 +533,14 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span><span class="preprocessor"># define COMPILER_ID &quot;HP&quot;</span></div>
 <div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span> </div>
 <div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span><span class="preprocessor">#else </span><span class="comment">/* unknown compiler */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a81dee0709ded976b2e0319239f72d174">  443</a></span><span class="preprocessor"># define COMPILER_ID &quot;&quot;</span></div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span><span class="preprocessor"># define COMPILER_ID &quot;&quot;</span></div>
 <div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span> </div>
 <div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span><span class="comment">/* Construct the string literal in pieces to prevent the source from</span></div>
 <div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span><span class="comment">   getting matched.  Store it in a pointer rather than an array</span></div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span><span class="comment">   because some compilers will just produce instructions to fill the</span></div>
 <div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span><span class="comment">   array rather than assigning a pointer to a static array.  */</span></div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a4b0efeb7a5d59313986b3a0390f050f6">  450</a></span><span class="keywordtype">char</span> <span class="keyword">const</span>* <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a4b0efeb7a5d59313986b3a0390f050f6">info_compiler</a> = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;compiler[&quot;</span> <a class="code hl_define" href="_c_make_c_compiler_id_8c.html#a81dee0709ded976b2e0319239f72d174">COMPILER_ID</a> <span class="stringliteral">&quot;]&quot;</span>;</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span><span class="keywordtype">char</span> <span class="keyword">const</span>* info_compiler = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;compiler[&quot;</span> COMPILER_ID <span class="stringliteral">&quot;]&quot;</span>;</div>
 <div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span><span class="preprocessor">#ifdef SIMULATE_ID</span></div>
 <div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span><span class="keywordtype">char</span> <span class="keyword">const</span>* info_simulate = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;simulate[&quot;</span> SIMULATE_ID <span class="stringliteral">&quot;]&quot;</span>;</div>
 <div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span><span class="preprocessor">#endif</span></div>
@@ -553,8 +553,8 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span><span class="keywordtype">char</span> <span class="keyword">const</span> *info_cray = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;compiler_wrapper[CrayPrgEnv]&quot;</span>;</div>
 <div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span> </div>
-<div class="line"><a id="l00463" name="l00463"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d">  463</a></span><span class="preprocessor">#define STRINGIFY_HELPER(X) #X</span></div>
-<div class="line"><a id="l00464" name="l00464"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a43e1cad902b6477bec893cb6430bd6c8">  464</a></span><span class="preprocessor">#define STRINGIFY(X) STRINGIFY_HELPER(X)</span></div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span><span class="preprocessor">#define STRINGIFY_HELPER(X) #X</span></div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span><span class="preprocessor">#define STRINGIFY(X) STRINGIFY_HELPER(X)</span></div>
 <div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span> </div>
 <div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span><span class="comment">/* Identify known platforms by name.  */</span></div>
 <div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span><span class="preprocessor">#if defined(__linux) || defined(__linux__) || defined(linux)</span></div>
@@ -664,7 +664,7 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span><span class="preprocessor">#  define PLATFORM_ID &quot;ADSP&quot;</span></div>
 <div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> </div>
 <div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span><span class="preprocessor">#else </span><span class="comment">/* unknown platform */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#adbc5372f40838899018fadbc89bd588b">  574</a></span><span class="preprocessor"># define PLATFORM_ID</span></div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span><span class="preprocessor"># define PLATFORM_ID</span></div>
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span> </div>
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span> </div>
@@ -844,12 +844,11 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span><span class="preprocessor"># endif</span></div>
 <div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span> </div>
 <div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00754" name="l00754"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#aba35d0d200deaeb06aee95ca297acb28">  754</a></span><span class="preprocessor">#  define ARCHITECTURE_ID</span></div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span><span class="preprocessor">#  define ARCHITECTURE_ID</span></div>
 <div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span> </div>
 <div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span><span class="comment">/* Convert integer to decimal digit literals.  */</span></div>
-<div class="foldopen" id="foldopen00758" data-start="" data-end="">
-<div class="line"><a id="l00758" name="l00758"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#ad1280362da42492bbc11aa78cbf776ad">  758</a></span><span class="preprocessor">#define DEC(n)                   \</span></div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span><span class="preprocessor">#define DEC(n)                   \</span></div>
 <div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span><span class="preprocessor">  (&#39;0&#39; + (((n) / 10000000)%10)), \</span></div>
 <div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span><span class="preprocessor">  (&#39;0&#39; + (((n) / 1000000)%10)),  \</span></div>
 <div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span><span class="preprocessor">  (&#39;0&#39; + (((n) / 100000)%10)),   \</span></div>
@@ -858,11 +857,9 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span><span class="preprocessor">  (&#39;0&#39; + (((n) / 100)%10)),      \</span></div>
 <div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span><span class="preprocessor">  (&#39;0&#39; + (((n) / 10)%10)),       \</span></div>
 <div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span><span class="preprocessor">  (&#39;0&#39; +  ((n) % 10))</span></div>
-</div>
 <div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span> </div>
 <div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span><span class="comment">/* Convert integer to hex digit literals.  */</span></div>
-<div class="foldopen" id="foldopen00769" data-start="" data-end="">
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a46d5d95daa1bef867bd0179594310ed5">  769</a></span><span class="preprocessor">#define HEX(n)             \</span></div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span><span class="preprocessor">#define HEX(n)             \</span></div>
 <div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span><span class="preprocessor">  (&#39;0&#39; + ((n)&gt;&gt;28 &amp; 0xF)), \</span></div>
 <div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span><span class="preprocessor">  (&#39;0&#39; + ((n)&gt;&gt;24 &amp; 0xF)), \</span></div>
 <div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span><span class="preprocessor">  (&#39;0&#39; + ((n)&gt;&gt;20 &amp; 0xF)), \</span></div>
@@ -871,7 +868,6 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span><span class="preprocessor">  (&#39;0&#39; + ((n)&gt;&gt;8  &amp; 0xF)), \</span></div>
 <div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span><span class="preprocessor">  (&#39;0&#39; + ((n)&gt;&gt;4  &amp; 0xF)), \</span></div>
 <div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span><span class="preprocessor">  (&#39;0&#39; + ((n)     &amp; 0xF))</span></div>
-</div>
 <div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span> </div>
 <div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span><span class="comment">/* Construct a string literal encoding the version number. */</span></div>
 <div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span><span class="preprocessor">#ifdef COMPILER_VERSION</span></div>
@@ -928,17 +924,17 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span><span class="comment">   getting matched.  Store it in a pointer rather than an array</span></div>
 <div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span><span class="comment">   because some compilers will just produce instructions to fill the</span></div>
 <div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span><span class="comment">   array rather than assigning a pointer to a static array.  */</span></div>
-<div class="line"><a id="l00834" name="l00834"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a2321403dee54ee23f0c2fa849c60f7d4">  834</a></span><span class="keywordtype">char</span> <span class="keyword">const</span>* <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a2321403dee54ee23f0c2fa849c60f7d4">info_platform</a> = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;platform[&quot;</span> <a class="code hl_define" href="_c_make_c_compiler_id_8c.html#adbc5372f40838899018fadbc89bd588b">PLATFORM_ID</a> <span class="stringliteral">&quot;]&quot;</span>;</div>
-<div class="line"><a id="l00835" name="l00835"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a59647e99d304ed33b15cb284c27ed391">  835</a></span><span class="keywordtype">char</span> <span class="keyword">const</span>* <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a59647e99d304ed33b15cb284c27ed391">info_arch</a> = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;arch[&quot;</span> <a class="code hl_define" href="_c_make_c_compiler_id_8c.html#aba35d0d200deaeb06aee95ca297acb28">ARCHITECTURE_ID</a> <span class="stringliteral">&quot;]&quot;</span>;</div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span><span class="keywordtype">char</span> <span class="keyword">const</span>* info_platform = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;platform[&quot;</span> PLATFORM_ID <span class="stringliteral">&quot;]&quot;</span>;</div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span><span class="keywordtype">char</span> <span class="keyword">const</span>* info_arch = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;arch[&quot;</span> ARCHITECTURE_ID <span class="stringliteral">&quot;]&quot;</span>;</div>
 <div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span> </div>
 <div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span> </div>
 <div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span> </div>
-<div class="line"><a id="l00839" name="l00839"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a2454727f55dd7af9210ab341ca8be2c8">  839</a></span><span class="preprocessor">#define CXX_STD_98 199711L</span></div>
-<div class="line"><a id="l00840" name="l00840"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a2c21af1889e9ca5cda36069184cc3234">  840</a></span><span class="preprocessor">#define CXX_STD_11 201103L</span></div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a39fb4789a452bfb5df17d40f640dd720">  841</a></span><span class="preprocessor">#define CXX_STD_14 201402L</span></div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#ae17f1ae0bf56cf631eadff4f73e96ff9">  842</a></span><span class="preprocessor">#define CXX_STD_17 201703L</span></div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#aa52ec6104623a66734cc5d5d28733bed">  843</a></span><span class="preprocessor">#define CXX_STD_20 202002L</span></div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#ae5e2d955d2884c65b7de2e1ad29a4f1d">  844</a></span><span class="preprocessor">#define CXX_STD_23 202302L</span></div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span><span class="preprocessor">#define CXX_STD_98 199711L</span></div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span><span class="preprocessor">#define CXX_STD_11 201103L</span></div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span><span class="preprocessor">#define CXX_STD_14 201402L</span></div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span><span class="preprocessor">#define CXX_STD_17 201703L</span></div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span><span class="preprocessor">#define CXX_STD_20 202002L</span></div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span><span class="preprocessor">#define CXX_STD_23 202302L</span></div>
 <div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span> </div>
 <div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span><span class="preprocessor">#if defined(__INTEL_COMPILER) &amp;&amp; defined(_MSVC_LANG)</span></div>
 <div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span><span class="preprocessor">#  if _MSVC_LANG &gt; CXX_STD_17</span></div>
@@ -985,10 +981,10 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span><span class="preprocessor">#elif __cplusplus == 1 &amp;&amp; defined(__GXX_EXPERIMENTAL_CXX0X__)</span></div>
 <div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span><span class="preprocessor">#  define CXX_STD CXX_STD_11</span></div>
 <div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00891" name="l00891"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a34cc889e576a1ae6c84ae9e0a851ba21">  891</a></span><span class="preprocessor">#  define CXX_STD __cplusplus</span></div>
+<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span><span class="preprocessor">#  define CXX_STD __cplusplus</span></div>
 <div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span> </div>
-<div class="line"><a id="l00894" name="l00894"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a4607cccf070750927b458473ca82c090">  894</a></span><span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a4607cccf070750927b458473ca82c090">info_language_standard_default</a> = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;standard_default[&quot;</span></div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span><span class="keyword">const</span> <span class="keywordtype">char</span>* info_language_standard_default = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;standard_default[&quot;</span></div>
 <div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span><span class="preprocessor">#if CXX_STD &gt; CXX_STD_23</span></div>
 <div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>  <span class="stringliteral">&quot;26&quot;</span></div>
 <div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span><span class="preprocessor">#elif CXX_STD &gt; CXX_STD_20</span></div>
@@ -1006,7 +1002,7 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span><span class="stringliteral">&quot;]&quot;</span>;</div>
 <div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span> </div>
-<div class="line"><a id="l00912" name="l00912"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a0f46a8a39e09d9b803c4766904fd7e99">  912</a></span><span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a0f46a8a39e09d9b803c4766904fd7e99">info_language_extensions_default</a> = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;extensions_default[&quot;</span></div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span><span class="keyword">const</span> <span class="keywordtype">char</span>* info_language_extensions_default = <span class="stringliteral">&quot;INFO&quot;</span> <span class="stringliteral">&quot;:&quot;</span> <span class="stringliteral">&quot;extensions_default[&quot;</span></div>
 <div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span><span class="preprocessor">#if (defined(__clang__) || defined(__GNUC__) || defined(__xlC__) ||           \</span></div>
 <div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span><span class="preprocessor">     defined(__TI_COMPILER_VERSION__) || defined(__RENESAS__)) &amp;&amp;             \</span></div>
 <div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span><span class="preprocessor">  !defined(__STRICT_ANSI__)</span></div>
@@ -1018,13 +1014,12 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span> </div>
 <div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span><span class="comment">/*--------------------------------------------------------------------------*/</span></div>
 <div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span> </div>
-<div class="foldopen" id="foldopen00924" data-start="{" data-end="}">
-<div class="line"><a id="l00924" name="l00924"></a><span class="lineno"><a class="line" href="_c_make_c_x_x_compiler_id_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">  924</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>{</div>
 <div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>  <span class="keywordtype">int</span> require = 0;</div>
-<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>  require += <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a4b0efeb7a5d59313986b3a0390f050f6">info_compiler</a>[argc];</div>
-<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>  require += <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a2321403dee54ee23f0c2fa849c60f7d4">info_platform</a>[argc];</div>
-<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>  require += <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a59647e99d304ed33b15cb284c27ed391">info_arch</a>[argc];</div>
+<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>  require += info_compiler[argc];</div>
+<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>  require += info_platform[argc];</div>
+<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>  require += info_arch[argc];</div>
 <div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span><span class="preprocessor">#ifdef COMPILER_VERSION_MAJOR</span></div>
 <div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>  require += info_version[argc];</div>
 <div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span><span class="preprocessor">#endif</span></div>
@@ -1040,28 +1035,18 @@ $(function(){initNavTree('_c_make_c_x_x_compiler_id_8cpp_source.html','',''); })
 <div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span><span class="preprocessor">#if defined(__CRAYXT_COMPUTE_LINUX_TARGET)</span></div>
 <div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>  require += info_cray[argc];</div>
 <div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>  require += <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a4607cccf070750927b458473ca82c090">info_language_standard_default</a>[argc];</div>
-<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>  require += <a class="code hl_variable" href="_c_make_c_compiler_id_8c.html#a0f46a8a39e09d9b803c4766904fd7e99">info_language_extensions_default</a>[argc];</div>
+<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>  require += info_language_standard_default[argc];</div>
+<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>  require += info_language_extensions_default[argc];</div>
 <div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span>  (void)argv;</div>
 <div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span>  <span class="keywordflow">return</span> require;</div>
 <div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>}</div>
-</div>
-<div class="ttc" id="a_c_make_c_compiler_id_8c_html_a0f46a8a39e09d9b803c4766904fd7e99"><div class="ttname"><a href="_c_make_c_compiler_id_8c.html#a0f46a8a39e09d9b803c4766904fd7e99">info_language_extensions_default</a></div><div class="ttdeci">const char * info_language_extensions_default</div><div class="ttdef"><b>Definition</b> <a href="_c_make_c_compiler_id_8c_source.html#l00889">CMakeCCompilerId.c:889</a></div></div>
-<div class="ttc" id="a_c_make_c_compiler_id_8c_html_a2321403dee54ee23f0c2fa849c60f7d4"><div class="ttname"><a href="_c_make_c_compiler_id_8c.html#a2321403dee54ee23f0c2fa849c60f7d4">info_platform</a></div><div class="ttdeci">char const  * info_platform</div><div class="ttdef"><b>Definition</b> <a href="_c_make_c_compiler_id_8c_source.html#l00855">CMakeCCompilerId.c:855</a></div></div>
-<div class="ttc" id="a_c_make_c_compiler_id_8c_html_a4607cccf070750927b458473ca82c090"><div class="ttname"><a href="_c_make_c_compiler_id_8c.html#a4607cccf070750927b458473ca82c090">info_language_standard_default</a></div><div class="ttdeci">const char * info_language_standard_default</div><div class="ttdef"><b>Definition</b> <a href="_c_make_c_compiler_id_8c_source.html#l00886">CMakeCCompilerId.c:886</a></div></div>
-<div class="ttc" id="a_c_make_c_compiler_id_8c_html_a4b0efeb7a5d59313986b3a0390f050f6"><div class="ttname"><a href="_c_make_c_compiler_id_8c.html#a4b0efeb7a5d59313986b3a0390f050f6">info_compiler</a></div><div class="ttdeci">char const  * info_compiler</div><div class="ttdef"><b>Definition</b> <a href="_c_make_c_compiler_id_8c_source.html#l00471">CMakeCCompilerId.c:471</a></div></div>
-<div class="ttc" id="a_c_make_c_compiler_id_8c_html_a59647e99d304ed33b15cb284c27ed391"><div class="ttname"><a href="_c_make_c_compiler_id_8c.html#a59647e99d304ed33b15cb284c27ed391">info_arch</a></div><div class="ttdeci">char const  * info_arch</div><div class="ttdef"><b>Definition</b> <a href="_c_make_c_compiler_id_8c_source.html#l00856">CMakeCCompilerId.c:856</a></div></div>
-<div class="ttc" id="a_c_make_c_compiler_id_8c_html_a81dee0709ded976b2e0319239f72d174"><div class="ttname"><a href="_c_make_c_compiler_id_8c.html#a81dee0709ded976b2e0319239f72d174">COMPILER_ID</a></div><div class="ttdeci">#define COMPILER_ID</div><div class="ttdef"><b>Definition</b> <a href="_c_make_c_compiler_id_8c_source.html#l00464">CMakeCCompilerId.c:464</a></div></div>
-<div class="ttc" id="a_c_make_c_compiler_id_8c_html_aba35d0d200deaeb06aee95ca297acb28"><div class="ttname"><a href="_c_make_c_compiler_id_8c.html#aba35d0d200deaeb06aee95ca297acb28">ARCHITECTURE_ID</a></div><div class="ttdeci">#define ARCHITECTURE_ID</div><div class="ttdef"><b>Definition</b> <a href="_c_make_c_compiler_id_8c_source.html#l00775">CMakeCCompilerId.c:775</a></div></div>
-<div class="ttc" id="a_c_make_c_compiler_id_8c_html_adbc5372f40838899018fadbc89bd588b"><div class="ttname"><a href="_c_make_c_compiler_id_8c.html#adbc5372f40838899018fadbc89bd588b">PLATFORM_ID</a></div><div class="ttdeci">#define PLATFORM_ID</div><div class="ttdef"><b>Definition</b> <a href="_c_make_c_compiler_id_8c_source.html#l00595">CMakeCCompilerId.c:595</a></div></div>
-<div class="ttc" id="amain_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00003">main.cpp:3</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_4fef79e7177ba769987a8da36c892c5f.html">build</a></li><li class="navelem"><a href="dir_63772b626f2709090f0bdca0f40827b4.html">CMakeFiles</a></li><li class="navelem"><a href="dir_1a19cda96a88b3e560747d19431cf1cb.html">4.2.1</a></li><li class="navelem"><a href="dir_bd6056cd55c39d72eb37d09925926f53.html">CompilerIdCXX</a></li><li class="navelem"><a href="_c_make_c_x_x_compiler_id_8cpp.html">CMakeCXXCompilerId.cpp</a></li>
+    <li class="navelem"><b>build</b></li><li class="navelem"><b>CMakeFiles</b></li><li class="navelem"><b>4.2.1</b></li><li class="navelem"><b>CompilerIdCXX</b></li><li class="navelem"><b>CMakeCXXCompilerId.cpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

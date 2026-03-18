@@ -13,22 +13,18 @@ Templated 3D Vector supporting integral, floating-\/point and boolean types.
 \item 
 struct \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3\+D$<$ T $>$}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Namespaces}
-\begin{DoxyCompactItemize}
-\item 
-namespace \doxymbox{\hyperlink{namespacefgm}{fgm}}
-\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-using \doxymbox{\hyperlink{namespacefgm_ae5d7d781ee2e419faff48229db52a50c}{fgm::\+vec3}} = \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$float$>$
+using \doxymbox{\hyperlink{_vector3_d_8h_ae5d7d781ee2e419faff48229db52a50c}{fgm::\+vec3}} = \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$float$>$
 \item 
-using \doxymbox{\hyperlink{namespacefgm_a78fc07c62bb74319bf946897e75f5414}{fgm::\+dvec3}} = \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$double$>$
+using \doxymbox{\hyperlink{_vector3_d_8h_a78fc07c62bb74319bf946897e75f5414}{fgm::\+dvec3}} = \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$double$>$
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$Arithmetic T, Arithmetic S$>$ }\\auto \doxymbox{\hyperlink{namespacefgm_afabe3f375509d8bab94708cb06578d1b}{fgm::\+operator\texorpdfstring{$\ast$}{*}}} (S scalar, const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ T $>$ \&vector) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\Hypertarget{_vector3_d_8h_afabe3f375509d8bab94708cb06578d1b}\label{_vector3_d_8h_afabe3f375509d8bab94708cb06578d1b} 
+{\footnotesize template$<$Arithmetic T, Arithmetic S$>$ }\\auto {\bfseries fgm::\+operator\texorpdfstring{$\ast$}{*}} (S scalar, const \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ T $>$ \&vector) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
 \end{DoxyCompactItemize}
 
 
@@ -45,7 +41,7 @@ Created on:\+ January 19, 2026
 Arithmetic operations are limited to numeric types via {\ttfamily Strict\+Arithmetic} concept.
 \end{DoxyNote}
 \begin{DoxyParagraph}{Configuration}
-Define {\ttfamily \doxylink{_vector3_d_test_setup_8h_ab92bccb9837c3d672a0b81db264710e0}{ENABLE\+\_\+\+FGM\+\_\+\+SHADER\+\_\+\+OPERATORS}} to enable comparison operators (\texorpdfstring{$>$}{>}, \texorpdfstring{$<$}{<}, etc.). Even if disabled, functional comparisons like {\ttfamily greater\+Than()} remain available. Define {\ttfamily \doxylink{_vector3_d_test_setup_8h_af26a24259eed0eef6a08c6ea73e1e024}{FORCE\+\_\+\+SCALAR}} to turn off SIMD which is on by default on supported hardware.
+Define {\ttfamily ENABLE\+\_\+\+FGM\+\_\+\+SHADER\+\_\+\+OPERATORS} to enable comparison operators (\texorpdfstring{$>$}{>}, \texorpdfstring{$<$}{<}, etc.). Even if disabled, functional comparisons like {\ttfamily greater\+Than()} remain available. Define {\ttfamily FORCE\+\_\+\+SCALAR} to turn off SIMD which is on by default on supported hardware.
 \end{DoxyParagraph}
 \begin{DoxyCopyright}{Copyright}
 Copyright (c) 2026 Alan Abraham P Kochumon 
@@ -53,4 +49,29 @@ Copyright (c) 2026 Alan Abraham P Kochumon
 
 
 Definition in file \doxymbox{\hyperlink{_vector3_d_8h_source}{Vector3\+D.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_vector3_d_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_vector3_d_8h_a78fc07c62bb74319bf946897e75f5414}\index{Vector3D.h@{Vector3D.h}!dvec3@{dvec3}}
+\index{dvec3@{dvec3}!Vector3D.h@{Vector3D.h}}
+\doxysubsubsection{\texorpdfstring{dvec3}{dvec3}}
+{\footnotesize\ttfamily \label{_vector3_d_8h_a78fc07c62bb74319bf946897e75f5414} 
+using fgm::\+dvec3 = Vector3D$<$double$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector3_d_8h_source_l00227}{227}} of file \doxymbox{\hyperlink{_vector3_d_8h_source}{Vector3\+D.\+h}}.
+
+\Hypertarget{_vector3_d_8h_ae5d7d781ee2e419faff48229db52a50c}\index{Vector3D.h@{Vector3D.h}!vec3@{vec3}}
+\index{vec3@{vec3}!Vector3D.h@{Vector3D.h}}
+\doxysubsubsection{\texorpdfstring{vec3}{vec3}}
+{\footnotesize\ttfamily \label{_vector3_d_8h_ae5d7d781ee2e419faff48229db52a50c} 
+using fgm::\+vec3 = Vector3D$<$float$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{_vector3_d_8h_source_l00226}{226}} of file \doxymbox{\hyperlink{_vector3_d_8h_source}{Vector3\+D.\+h}}.
 

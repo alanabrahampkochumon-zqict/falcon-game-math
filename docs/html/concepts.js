@@ -1,6 +1,6 @@
 var concepts =
 [
-    [ "fgm", "namespacefgm.html", [
+    [ "fgm", null, [
       [ "Arithmetic", "conceptfgm_1_1_arithmetic.html", null ],
       [ "StrictArithmetic", "conceptfgm_1_1_strict_arithmetic.html", null ],
       [ "weak_arithmetic", "conceptfgm_1_1weak__arithmetic.html", null ],

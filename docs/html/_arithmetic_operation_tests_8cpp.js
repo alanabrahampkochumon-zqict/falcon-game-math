@@ -1,9 +1,9 @@
 var _arithmetic_operation_tests_8cpp =
 [
-    [ "Vector4DAddition&lt; T &gt;", "class_vector4_d_addition.html", "class_vector4_d_addition" ],
-    [ "Vector4DSubtraction&lt; T &gt;", "class_vector4_d_subtraction.html", "class_vector4_d_subtraction" ],
-    [ "Vector4DScalarMultiplication&lt; T &gt;", "class_vector4_d_scalar_multiplication.html", "class_vector4_d_scalar_multiplication" ],
-    [ "Vector4DScalarDivision&lt; T &gt;", "class_vector4_d_scalar_division.html", "class_vector4_d_scalar_division" ],
+    [ "Vector4DAddition&lt; T &gt;", "class_vector4_d_addition.html", null ],
+    [ "Vector4DSubtraction&lt; T &gt;", "class_vector4_d_subtraction.html", null ],
+    [ "Vector4DScalarMultiplication&lt; T &gt;", "class_vector4_d_scalar_multiplication.html", null ],
+    [ "Vector4DScalarDivision&lt; T &gt;", "class_vector4_d_scalar_division.html", null ],
     [ "TYPED_TEST_SUITE", "_arithmetic_operation_tests_8cpp.html#afb050afc382cfdd2d96b146f1ed1c157", null ],
     [ "TYPED_TEST_SUITE", "_arithmetic_operation_tests_8cpp.html#a8f1f2172fc74a40f88bd5f847c4798e0", null ],
     [ "TYPED_TEST_SUITE", "_arithmetic_operation_tests_8cpp.html#a396bc665ff2ebf7c97c080914ce9d683", null ],

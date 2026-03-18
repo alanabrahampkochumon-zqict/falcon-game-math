@@ -97,7 +97,7 @@ $(function(){initNavTree('_product_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="_vector4_d_test_setup_8h.html">Vector4DTestSetup.h</a>&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacetestutils.html">testutils</a>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">using namespace </span>testutils;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/**************************************</span></div>
@@ -111,32 +111,30 @@ $(function(){initNavTree('_product_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_vector4_d_dot_product.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="class_vector4_d_dot_product.html">Vector4DDotProduct</a>: <span class="keyword">public</span> ::testing::Test</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_vector4_d_dot_product.html#af5bfe03810f5932db1a2fc0415bb5c4e">   28</a></span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;T&gt;</a> <a class="code hl_variable" href="class_vector4_d_dot_product.html#af5bfe03810f5932db1a2fc0415bb5c4e">vecA</a>;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_vector4_d_dot_product.html#a020f22aa0db305c528eef24454df59a0">   29</a></span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;T&gt;</a> <a class="code hl_variable" href="class_vector4_d_dot_product.html#a020f22aa0db305c528eef24454df59a0">vecB</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;T&gt;</a> vecA;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;T&gt;</a> vecB;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_vector4_d_dot_product.html#a7db50c4a9fd4467f358aaf4a765567d2">   31</a></span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;T&gt;</a> <a class="code hl_variable" href="class_vector4_d_dot_product.html#a7db50c4a9fd4467f358aaf4a765567d2">vecAOrtho</a>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="class_vector4_d_dot_product.html#a231264af9adb598d2e4dcf3de44e050c">   32</a></span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;T&gt;</a> <a class="code hl_variable" href="class_vector4_d_dot_product.html#a231264af9adb598d2e4dcf3de44e050c">vecBOrtho</a>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;T&gt;</a> vecAOrtho;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;T&gt;</a> vecBOrtho;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_vector4_d_dot_product.html#affe2cfc87f618a6a9262d2b6fd80e595">   34</a></span>    T <a class="code hl_variable" href="class_vector4_d_dot_product.html#affe2cfc87f618a6a9262d2b6fd80e595">expected</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    T expected;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_vector4_d_dot_product.html#aabc46ede05ffc1d74b5c1c9f446873ec">   36</a></span>    T <a class="code hl_variable" href="class_vector4_d_dot_product.html#aabc46ede05ffc1d74b5c1c9f446873ec">aDotA</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    T aDotA;</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_vector4_d_dot_product.html#a23bfb1a8017eede55df51ba26adfc312">   38</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_vector4_d_dot_product.html#a23bfb1a8017eede55df51ba26adfc312">SetUp</a>()<span class="keyword"> override</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">void</span> SetUp()<span class="keyword"> override</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_variable" href="class_vector4_d_dot_product.html#af5bfe03810f5932db1a2fc0415bb5c4e">vecA</a> = { T(2), T(3), T(4), T(5) };</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_variable" href="class_vector4_d_dot_product.html#a020f22aa0db305c528eef24454df59a0">vecB</a> = { T(6), T(7), T(8), T(9) };</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_variable" href="class_vector4_d_dot_product.html#a7db50c4a9fd4467f358aaf4a765567d2">vecAOrtho</a> = { T(3), T(0), T(4), T(0) };</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_variable" href="class_vector4_d_dot_product.html#a231264af9adb598d2e4dcf3de44e050c">vecBOrtho</a> = { T(0), T(5), T(0), T(6) };</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_variable" href="class_vector4_d_dot_product.html#affe2cfc87f618a6a9262d2b6fd80e595">expected</a> = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(110);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        vecA = { T(2), T(3), T(4), T(5) };</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        vecB = { T(6), T(7), T(8), T(9) };</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        vecAOrtho = { T(3), T(0), T(4), T(0) };</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        vecBOrtho = { T(0), T(5), T(0), T(6) };</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        expected = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(110);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <a class="code hl_variable" href="class_vector4_d_dot_product.html#aabc46ede05ffc1d74b5c1c9f446873ec">aDotA</a> = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(54);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        aDotA = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(54);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
-</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
 </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="_product_tests_8cpp.html#af2ae0656edefabcdf96aade192350f82">   50</a></span><a class="code hl_function" href="_product_tests_8cpp.html#af2ae0656edefabcdf96aade192350f82">TYPED_TEST_SUITE</a>(<a class="code hl_class" href="class_vector4_d_dot_product.html">Vector4DDotProduct</a>, <a class="code hl_typedef" href="_vector3_d_test_setup_8h.html#a419bc60d90bfcd4724a953b51402235e">SupportedArithmeticTypes</a>);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="_product_tests_8cpp.html#af2ae0656edefabcdf96aade192350f82">   50</a></span><a class="code hl_function" href="_product_tests_8cpp.html#af2ae0656edefabcdf96aade192350f82">TYPED_TEST_SUITE</a>(<a class="code hl_class" href="class_vector4_d_dot_product.html">Vector4DDotProduct</a>, SupportedArithmeticTypes);</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
@@ -233,17 +231,8 @@ $(function(){initNavTree('_product_tests_8cpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span></div>
 <div class="ttc" id="a_product_tests_8cpp_html_af2ae0656edefabcdf96aade192350f82"><div class="ttname"><a href="_product_tests_8cpp.html#af2ae0656edefabcdf96aade192350f82">TYPED_TEST_SUITE</a></div><div class="ttdeci">TYPED_TEST_SUITE(Vector4DDotProduct, SupportedArithmeticTypes)</div><div class="ttdoc">Test fixture for fgm::Vector4D dot project, parameterized by SupportedArithmeticTypes.</div></div>
-<div class="ttc" id="a_vector3_d_test_setup_8h_html_a419bc60d90bfcd4724a953b51402235e"><div class="ttname"><a href="_vector3_d_test_setup_8h.html#a419bc60d90bfcd4724a953b51402235e">SupportedArithmeticTypes</a></div><div class="ttdeci">::testing::Types&lt; unsigned char, int, unsigned int, float, double, std::size_t, long long &gt; SupportedArithmeticTypes</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_test_setup_8h_source.html#l00024">Vector3DTestSetup.h:24</a></div></div>
 <div class="ttc" id="a_vector4_d_test_setup_8h_html"><div class="ttname"><a href="_vector4_d_test_setup_8h.html">Vector4DTestSetup.h</a></div><div class="ttdoc">Define test setups common to all Vector4D tests.</div></div>
 <div class="ttc" id="aclass_vector4_d_dot_product_html"><div class="ttname"><a href="class_vector4_d_dot_product.html">Vector4DDotProduct</a></div><div class="ttdef"><b>Definition</b> <a href="#l00025">ProductTests.cpp:26</a></div></div>
-<div class="ttc" id="aclass_vector4_d_dot_product_html_a020f22aa0db305c528eef24454df59a0"><div class="ttname"><a href="class_vector4_d_dot_product.html#a020f22aa0db305c528eef24454df59a0">Vector4DDotProduct::vecB</a></div><div class="ttdeci">fgm::Vector4D&lt; T &gt; vecB</div><div class="ttdef"><b>Definition</b> <a href="#l00029">ProductTests.cpp:29</a></div></div>
-<div class="ttc" id="aclass_vector4_d_dot_product_html_a231264af9adb598d2e4dcf3de44e050c"><div class="ttname"><a href="class_vector4_d_dot_product.html#a231264af9adb598d2e4dcf3de44e050c">Vector4DDotProduct::vecBOrtho</a></div><div class="ttdeci">fgm::Vector4D&lt; T &gt; vecBOrtho</div><div class="ttdef"><b>Definition</b> <a href="#l00032">ProductTests.cpp:32</a></div></div>
-<div class="ttc" id="aclass_vector4_d_dot_product_html_a23bfb1a8017eede55df51ba26adfc312"><div class="ttname"><a href="class_vector4_d_dot_product.html#a23bfb1a8017eede55df51ba26adfc312">Vector4DDotProduct::SetUp</a></div><div class="ttdeci">void SetUp() override</div><div class="ttdef"><b>Definition</b> <a href="#l00038">ProductTests.cpp:38</a></div></div>
-<div class="ttc" id="aclass_vector4_d_dot_product_html_a7db50c4a9fd4467f358aaf4a765567d2"><div class="ttname"><a href="class_vector4_d_dot_product.html#a7db50c4a9fd4467f358aaf4a765567d2">Vector4DDotProduct::vecAOrtho</a></div><div class="ttdeci">fgm::Vector4D&lt; T &gt; vecAOrtho</div><div class="ttdef"><b>Definition</b> <a href="#l00031">ProductTests.cpp:31</a></div></div>
-<div class="ttc" id="aclass_vector4_d_dot_product_html_aabc46ede05ffc1d74b5c1c9f446873ec"><div class="ttname"><a href="class_vector4_d_dot_product.html#aabc46ede05ffc1d74b5c1c9f446873ec">Vector4DDotProduct::aDotA</a></div><div class="ttdeci">T aDotA</div><div class="ttdef"><b>Definition</b> <a href="#l00036">ProductTests.cpp:36</a></div></div>
-<div class="ttc" id="aclass_vector4_d_dot_product_html_af5bfe03810f5932db1a2fc0415bb5c4e"><div class="ttname"><a href="class_vector4_d_dot_product.html#af5bfe03810f5932db1a2fc0415bb5c4e">Vector4DDotProduct::vecA</a></div><div class="ttdeci">fgm::Vector4D&lt; T &gt; vecA</div><div class="ttdef"><b>Definition</b> <a href="#l00028">ProductTests.cpp:28</a></div></div>
-<div class="ttc" id="aclass_vector4_d_dot_product_html_affe2cfc87f618a6a9262d2b6fd80e595"><div class="ttname"><a href="class_vector4_d_dot_product.html#affe2cfc87f618a6a9262d2b6fd80e595">Vector4DDotProduct::expected</a></div><div class="ttdeci">T expected</div><div class="ttdef"><b>Definition</b> <a href="#l00034">ProductTests.cpp:34</a></div></div>
-<div class="ttc" id="anamespacetestutils_html"><div class="ttname"><a href="namespacetestutils.html">testutils</a></div><div class="ttdef"><b>Definition</b> <a href="_matrix_utils_8h_source.html#l00023">MatrixUtils.h:24</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector4_d_html"><div class="ttname"><a href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a></div><div class="ttdef"><b>Definition</b> <a href="_vector4_d_8h_source.html#l00037">Vector4D.h:38</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector4_d_html_ae40204541a0a3202df4bf10a8319ee30"><div class="ttname"><a href="structfgm_1_1_vector4_d.html#ae40204541a0a3202df4bf10a8319ee30">fgm::Vector4D::dot</a></div><div class="ttdeci">auto dot(const Vector4D&lt; U &gt; &amp;other) const -&gt; std::common_type_t&lt; T, U &gt;</div><div class="ttdoc">Calculate the dot product with another vector. Computes the scalar product: .</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -252,7 +241,7 @@ $(function(){initNavTree('_product_tests_8cpp_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_4c62c5705c93f307172a2812dbe6d6e8.html">test-suite</a></li><li class="navelem"><a href="dir_721e3eff7b86a6dac1d7f8d9226b28bd.html">src</a></li><li class="navelem"><a href="dir_6b30b9d4464f22611f7803a12a4299c1.html">vectors</a></li><li class="navelem"><a href="dir_ddedd587ceb45fc31336532be7e660bd.html">vector4d</a></li><li class="navelem"><a href="_product_tests_8cpp.html">ProductTests.cpp</a></li>
+    <li class="navelem"><b>test-suite</b></li><li class="navelem"><b>src</b></li><li class="navelem"><b>vectors</b></li><li class="navelem"><b>vector4d</b></li><li class="navelem"><a href="_product_tests_8cpp.html">ProductTests.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

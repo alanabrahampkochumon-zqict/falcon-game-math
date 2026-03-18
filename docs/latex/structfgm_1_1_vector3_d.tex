@@ -1,9 +1,5 @@
 \doxysection{fgm::\+Vector3D\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Struct Template Reference}
 \hypertarget{structfgm_1_1_vector3_d}{}\label{structfgm_1_1_vector3_d}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-
-
-{\ttfamily \+\#include $<$Vector3\+D.\+h$>$}
-
 \doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -12,63 +8,82 @@ using \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a6adc237e73260d71f2900e9ffc9c
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} ()
+\Hypertarget{structfgm_1_1_vector3_d_a8c6f157c2ec3f3dbbc6e431ca8e2719d}\label{structfgm_1_1_vector3_d_a8c6f157c2ec3f3dbbc6e431ca8e2719d} 
+{\bfseries Vector3D} (T v1, T v2, T v3)
 \item 
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a8c6f157c2ec3f3dbbc6e431ca8e2719d}{Vector3D}} (T v1, T v2, T v3)
+\Hypertarget{structfgm_1_1_vector3_d_ade423d9139c8a2d34022f3bacbb60ad1}\label{structfgm_1_1_vector3_d_ade423d9139c8a2d34022f3bacbb60ad1} 
+{\bfseries Vector3D} (\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ vec, T v)
 \item 
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ade423d9139c8a2d34022f3bacbb60ad1}{Vector3D}} (\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ vec, T v)
+\Hypertarget{structfgm_1_1_vector3_d_a2808771ed28fedd6d82e9f6d5f10b5a4}\label{structfgm_1_1_vector3_d_a2808771ed28fedd6d82e9f6d5f10b5a4} 
+{\footnotesize template$<$Arithmetic S$>$ }\\{\bfseries Vector3D} (const Vector3D$<$ S $>$ \&other)
 \item 
-{\footnotesize template$<$Arithmetic S$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a2808771ed28fedd6d82e9f6d5f10b5a4}{Vector3D}} (const Vector3D$<$ S $>$ \&other)
+\Hypertarget{structfgm_1_1_vector3_d_a1a1c4efe1ef2641399912463aed3204a}\label{structfgm_1_1_vector3_d_a1a1c4efe1ef2641399912463aed3204a} 
+T \& {\bfseries operator\+[$\,$]\+} (std::\+size\+\_\+t i)
 \item 
-T \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a1a1c4efe1ef2641399912463aed3204a}{operator\+[$\,$]\+}} (std::\+size\+\_\+t i)
+\Hypertarget{structfgm_1_1_vector3_d_a04dfe635947f9c357cfb3597dfae0b0c}\label{structfgm_1_1_vector3_d_a04dfe635947f9c357cfb3597dfae0b0c} 
+const T \& {\bfseries operator\+[$\,$]\+} (std::\+size\+\_\+t i) const
 \item 
-const T \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a04dfe635947f9c357cfb3597dfae0b0c}{operator\+[$\,$]\+}} (std::\+size\+\_\+t i) const
+\Hypertarget{structfgm_1_1_vector3_d_a4f77a1dfe6a9c2fff68bea80af5bbc33}\label{structfgm_1_1_vector3_d_a4f77a1dfe6a9c2fff68bea80af5bbc33} 
+{\footnotesize template$<$Arithmetic U$>$ }\\auto {\bfseries operator+} (const Vector3D$<$ U $>$ \&other) const -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4f77a1dfe6a9c2fff68bea80af5bbc33}{operator+}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&other) const -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
+\Hypertarget{structfgm_1_1_vector3_d_a67e1bee28e1afb42ce43eab9b666b3d0}\label{structfgm_1_1_vector3_d_a67e1bee28e1afb42ce43eab9b666b3d0} 
+{\footnotesize template$<$Arithmetic U$>$ }\\Vector3D \& {\bfseries operator+=} (const Vector3D$<$ U $>$ \&other)
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a67e1bee28e1afb42ce43eab9b666b3d0}{operator+=}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&other)
+\Hypertarget{structfgm_1_1_vector3_d_a9a9c00567d0727eaa0267bf8f4abe582}\label{structfgm_1_1_vector3_d_a9a9c00567d0727eaa0267bf8f4abe582} 
+{\footnotesize template$<$Arithmetic U$>$ }\\auto {\bfseries operator-\/} (const Vector3D$<$ U $>$ \&other) const -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a9a9c00567d0727eaa0267bf8f4abe582}{operator-\/}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&other) const -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
+\Hypertarget{structfgm_1_1_vector3_d_abbbcdb135bdbea60c2ced64611e9c349}\label{structfgm_1_1_vector3_d_abbbcdb135bdbea60c2ced64611e9c349} 
+{\footnotesize template$<$Arithmetic U$>$ }\\Vector3D \& {\bfseries operator-\/=} (const Vector3D$<$ U $>$ \&other)
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d_abbbcdb135bdbea60c2ced64611e9c349}{operator-\/=}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&other)
+\Hypertarget{structfgm_1_1_vector3_d_a661e225031005881e9b55c5dcb849373}\label{structfgm_1_1_vector3_d_a661e225031005881e9b55c5dcb849373} 
+{\footnotesize template$<$Arithmetic S$>$ }\\auto {\bfseries operator\texorpdfstring{$\ast$}{*}} (S scalar) const -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
 \item 
-{\footnotesize template$<$Arithmetic S$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a661e225031005881e9b55c5dcb849373}{operator\texorpdfstring{$\ast$}{*}}} (S scalar) const -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\Hypertarget{structfgm_1_1_vector3_d_af3ba1523684d15f3947629fcdf118f55}\label{structfgm_1_1_vector3_d_af3ba1523684d15f3947629fcdf118f55} 
+{\footnotesize template$<$Arithmetic S$>$ }\\Vector3D \& {\bfseries operator\texorpdfstring{$\ast$}{*}=} (S scalar)
 \item 
-{\footnotesize template$<$Arithmetic S$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af3ba1523684d15f3947629fcdf118f55}{operator\texorpdfstring{$\ast$}{*}=}} (S scalar)
+\Hypertarget{structfgm_1_1_vector3_d_a038ffc46c4cc20ab4a1492c4d58cfeed}\label{structfgm_1_1_vector3_d_a038ffc46c4cc20ab4a1492c4d58cfeed} 
+{\footnotesize template$<$Arithmetic S$>$ }\\auto {\bfseries operator/\+} (S scalar) const -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
 \item 
-{\footnotesize template$<$Arithmetic S$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a038ffc46c4cc20ab4a1492c4d58cfeed}{operator/\+}} (S scalar) const -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$
+\Hypertarget{structfgm_1_1_vector3_d_af4a0d26bf8d23d865164783c89c3cb6b}\label{structfgm_1_1_vector3_d_af4a0d26bf8d23d865164783c89c3cb6b} 
+{\footnotesize template$<$Arithmetic S$>$ }\\Vector3D \& {\bfseries operator/\+=} (S scalar)
 \item 
-{\footnotesize template$<$Arithmetic S$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af4a0d26bf8d23d865164783c89c3cb6b}{operator/\+=}} (S scalar)
+\Hypertarget{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}\label{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c} 
+{\footnotesize template$<$Arithmetic U$>$ }\\auto {\bfseries dot} (const Vector3D$<$ U $>$ \&other) const -\/$>$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}{dot}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&other) const -\/$>$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$
+\Hypertarget{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}\label{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda} 
+{\footnotesize template$<$Arithmetic U$>$ }\\auto {\bfseries cross} (const Vector3D$<$ U $>$ \&other) const -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}{cross}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&other) const -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
+\Hypertarget{structfgm_1_1_vector3_d_a7b71db3dc802dbca471cdac2ec879812}\label{structfgm_1_1_vector3_d_a7b71db3dc802dbca471cdac2ec879812} 
+T {\bfseries mag} () const
 \item 
-T \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a7b71db3dc802dbca471cdac2ec879812}{mag}} () const
+\Hypertarget{structfgm_1_1_vector3_d_a1ba3251f712f1691ca7518543d7922c9}\label{structfgm_1_1_vector3_d_a1ba3251f712f1691ca7518543d7922c9} 
+Vector3D {\bfseries normalize} () const
 \item 
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a1ba3251f712f1691ca7518543d7922c9}{normalize}} () const
+{\footnotesize template$<$Arithmetic U$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90}{project}} (const Vector3D$<$ U $>$ \&onto, bool onto\+Normalized=false) const -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90}{project}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&onto, bool onto\+Normalized=false) const -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
-\item 
-{\footnotesize template$<$Arithmetic U$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e}{reject}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&onto, bool onto\+Normalized=false) const -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
+{\footnotesize template$<$Arithmetic U$>$ }\\auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e}{reject}} (const Vector3D$<$ U $>$ \&onto, bool onto\+Normalized=false) const -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\static auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a22993022da3c4ccc0b68e4741b5d16d9}{dot}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&vecB) -\/$>$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$
+\Hypertarget{structfgm_1_1_vector3_d_a22993022da3c4ccc0b68e4741b5d16d9}\label{structfgm_1_1_vector3_d_a22993022da3c4ccc0b68e4741b5d16d9} 
+{\footnotesize template$<$Arithmetic U$>$ }\\static auto {\bfseries dot} (const Vector3D \&vecA, const Vector3D$<$ U $>$ \&vecB) -\/$>$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\static auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a08db633c36e77f7551bfbe1fd8a950d9}{cross}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&vecB) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
+\Hypertarget{structfgm_1_1_vector3_d_a08db633c36e77f7551bfbe1fd8a950d9}\label{structfgm_1_1_vector3_d_a08db633c36e77f7551bfbe1fd8a950d9} 
+{\footnotesize template$<$Arithmetic U$>$ }\\static auto {\bfseries cross} (const Vector3D \&vecA, const Vector3D$<$ U $>$ \&vecB) -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\static auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_afec656fa42debd8a4a6ac556285fcdd2}{project}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \&vector, const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&onto, bool onto\+Normalized=false) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
+{\footnotesize template$<$Arithmetic U$>$ }\\static auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_afec656fa42debd8a4a6ac556285fcdd2}{project}} (const Vector3D \&vector, const Vector3D$<$ U $>$ \&onto, bool onto\+Normalized=false) -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\static auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_ae9393b56426dabe78afe155b715d1574}{reject}} (const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \&vector, const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&onto, bool onto\+Normalized=false) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
+{\footnotesize template$<$Arithmetic U$>$ }\\static auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d_ae9393b56426dabe78afe155b715d1574}{reject}} (const Vector3D \&vector, const Vector3D$<$ U $>$ \&onto, bool onto\+Normalized=false) -\/$>$ Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
+\Hypertarget{structfgm_1_1_vector3_d_a31f29ed427bc03342330cd46b83bc841}\label{structfgm_1_1_vector3_d_a31f29ed427bc03342330cd46b83bc841} 
 \begin{tabbing}
 xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
 union \{\\
+\Hypertarget{unionfgm_1_1_vector3_d_1_1_0d007375153267005212251105064320211352147313045355_a2ddfe045db9fe6f0590c1d89dd0ff09c}\label{unionfgm_1_1_vector3_d_1_1_0d007375153267005212251105064320211352147313045355_a2ddfe045db9fe6f0590c1d89dd0ff09c} 
 \>struct \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}}\\
 \>\>\>{\em X-\/axis component. }\\
@@ -77,6 +92,7 @@ union \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}}\\
 \>\>\>{\em Z-\/axis component. }\\
 \>\} \\
+\Hypertarget{unionfgm_1_1_vector3_d_1_1_0d007375153267005212251105064320211352147313045355_a999436b49b12b3129fe7f907738e70d7}\label{unionfgm_1_1_vector3_d_1_1_0d007375153267005212251105064320211352147313045355_a999436b49b12b3129fe7f907738e70d7} 
 \>struct \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector3_d_aba5ecb03bd7007ab7f08772041d46177}{r}}\\
 \>\>\>{\em Red channel. }\\
@@ -85,6 +101,7 @@ union \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a89f751945443bd026c361cded5e69fa6}{b}}\\
 \>\>\>{\em Blue channel. }\\
 \>\} \\
+\Hypertarget{unionfgm_1_1_vector3_d_1_1_0d007375153267005212251105064320211352147313045355_a051f8f131dc510025725ab1d82b2a9c2}\label{unionfgm_1_1_vector3_d_1_1_0d007375153267005212251105064320211352147313045355_a051f8f131dc510025725ab1d82b2a9c2} 
 \>struct \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a3e2efc3ee449c89a88ddeac6540c4982}{s}}\\
 \>\>\>{\em S-\/coordinate. }\\
@@ -93,7 +110,7 @@ union \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector3_d_a4f42e62dfc4b86140c809af64876c734}{p}}\\
 \>\>\>{\em P-\/coordinate. }\\
 \>\} \\
-\>T \doxymbox{\hyperlink{structfgm_1_1_vector3_d_aa1972950d2c93a243f45a009ab0ef13f}{elements}} \+[\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a89713385d81c6d5d9bc308cf3e963a01}{dimension}}]\+\\
+\>T \doxymbox{\hyperlink{structfgm_1_1_vector3_d_aa1972950d2c93a243f45a009ab0ef13f}{elements}} \+[dimension]\+\\
 \}; \\
 
 \end{tabbing}\end{DoxyCompactItemize}
@@ -129,174 +146,16 @@ Definition at line \doxymbox{\hyperlink{_vector3_d_8h_source_l00029}{29}} of fil
 
 
 
-\label{doc-constructors}
-\Hypertarget{structfgm_1_1_vector3_d_doc-constructors}
-\doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!Vector3D@{Vector3D}}
-\index{Vector3D@{Vector3D}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector3D()}{Vector3D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49} 
-template$<$Arithmetic T$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+\+Vector3D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-\Hypertarget{structfgm_1_1_vector3_d_a8c6f157c2ec3f3dbbc6e431ca8e2719d}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!Vector3D@{Vector3D}}
-\index{Vector3D@{Vector3D}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector3D()}{Vector3D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a8c6f157c2ec3f3dbbc6e431ca8e2719d} 
-template$<$Arithmetic T$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+\+Vector3D (\begin{DoxyParamCaption}\item[{T}]{v1}{, }\item[{T}]{v2}{, }\item[{T}]{v3}{}\end{DoxyParamCaption})}
-
-\Hypertarget{structfgm_1_1_vector3_d_ade423d9139c8a2d34022f3bacbb60ad1}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!Vector3D@{Vector3D}}
-\index{Vector3D@{Vector3D}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector3D()}{Vector3D()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_ade423d9139c8a2d34022f3bacbb60ad1} 
-template$<$Arithmetic T$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+\+Vector3D (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$}]{vec}{, }\item[{T}]{v}{}\end{DoxyParamCaption})}
-
-\Hypertarget{structfgm_1_1_vector3_d_a2808771ed28fedd6d82e9f6d5f10b5a4}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!Vector3D@{Vector3D}}
-\index{Vector3D@{Vector3D}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector3D()}{Vector3D()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a2808771ed28fedd6d82e9f6d5f10b5a4} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic S$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+\+Vector3D (\begin{DoxyParamCaption}\item[{const Vector3D$<$ S $>$ \&}]{other}{}\end{DoxyParamCaption})}
-
-
-
 \label{doc-func-members}
 \Hypertarget{structfgm_1_1_vector3_d_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{structfgm_1_1_vector3_d_a08db633c36e77f7551bfbe1fd8a950d9}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!cross@{cross}}
-\index{cross@{cross}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{cross()}{cross()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a08db633c36e77f7551bfbe1fd8a950d9} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+cross (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{vecB}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$\hspace{0.3cm}{\ttfamily [static]}}
-
-\Hypertarget{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!cross@{cross}}
-\index{cross@{cross}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{cross()}{cross()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a5cbb931c513d9d87a81e5e850a6a3fda} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+cross (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$}
-
-\Hypertarget{structfgm_1_1_vector3_d_a22993022da3c4ccc0b68e4741b5d16d9}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!dot@{dot}}
-\index{dot@{dot}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{dot()}{dot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a22993022da3c4ccc0b68e4741b5d16d9} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+dot (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{vecB}{}\end{DoxyParamCaption}) -\/$>$  std::\+common\+\_\+type\+\_\+t$<$ T, U $>$\hspace{0.3cm}{\ttfamily [static]}}
-
-\Hypertarget{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!dot@{dot}}
-\index{dot@{dot}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{dot()}{dot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a4ebbec0bd4a883801571ddde751d123c} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+dot (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const -\/$>$  std::\+common\+\_\+type\+\_\+t$<$ T, U $>$}
-
-\Hypertarget{structfgm_1_1_vector3_d_a7b71db3dc802dbca471cdac2ec879812}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!mag@{mag}}
-\index{mag@{mag}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{mag()}{mag()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a7b71db3dc802dbca471cdac2ec879812} 
-template$<$Arithmetic T$>$ \\
-T \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+mag (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
-
-\Hypertarget{structfgm_1_1_vector3_d_a1ba3251f712f1691ca7518543d7922c9}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!normalize@{normalize}}
-\index{normalize@{normalize}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{normalize()}{normalize()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a1ba3251f712f1691ca7518543d7922c9} 
-template$<$Arithmetic T$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+normalize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
-
-\Hypertarget{structfgm_1_1_vector3_d_a661e225031005881e9b55c5dcb849373}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
-\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a661e225031005881e9b55c5dcb849373} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic S$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{S}]{scalar}{}\end{DoxyParamCaption}) const -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$}
-
-\Hypertarget{structfgm_1_1_vector3_d_af3ba1523684d15f3947629fcdf118f55}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
-\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_af3ba1523684d15f3947629fcdf118f55} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic S$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{S}]{scalar}{}\end{DoxyParamCaption})}
-
-\Hypertarget{structfgm_1_1_vector3_d_a4f77a1dfe6a9c2fff68bea80af5bbc33}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator+@{operator+}}
-\index{operator+@{operator+}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a4f77a1dfe6a9c2fff68bea80af5bbc33} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator+ (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$}
-
-\Hypertarget{structfgm_1_1_vector3_d_a67e1bee28e1afb42ce43eab9b666b3d0}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator+=@{operator+=}}
-\index{operator+=@{operator+=}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a67e1bee28e1afb42ce43eab9b666b3d0} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic U$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator+= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption})}
-
-\Hypertarget{structfgm_1_1_vector3_d_a9a9c00567d0727eaa0267bf8f4abe582}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator-\/@{operator-\/}}
-\index{operator-\/@{operator-\/}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a9a9c00567d0727eaa0267bf8f4abe582} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator-\/ (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$}
-
-\Hypertarget{structfgm_1_1_vector3_d_abbbcdb135bdbea60c2ced64611e9c349}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator-\/=@{operator-\/=}}
-\index{operator-\/=@{operator-\/=}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_abbbcdb135bdbea60c2ced64611e9c349} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic U$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator-\/= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption})}
-
-\Hypertarget{structfgm_1_1_vector3_d_a038ffc46c4cc20ab4a1492c4d58cfeed}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator/@{operator/}}
-\index{operator/@{operator/}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a038ffc46c4cc20ab4a1492c4d58cfeed} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic S$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator/\+ (\begin{DoxyParamCaption}\item[{S}]{scalar}{}\end{DoxyParamCaption}) const -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, S $>$ $>$}
-
-\Hypertarget{structfgm_1_1_vector3_d_af4a0d26bf8d23d865164783c89c3cb6b}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator/=@{operator/=}}
-\index{operator/=@{operator/=}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_af4a0d26bf8d23d865164783c89c3cb6b} 
-template$<$Arithmetic T$>$ \\
-template$<$Arithmetic S$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}} \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator/\+= (\begin{DoxyParamCaption}\item[{S}]{scalar}{}\end{DoxyParamCaption})}
-
-\Hypertarget{structfgm_1_1_vector3_d_a1a1c4efe1ef2641399912463aed3204a}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator\+[]\+@{operator[]}}
-\index{operator\+[]\+@{operator[]}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a1a1c4efe1ef2641399912463aed3204a} 
-template$<$Arithmetic T$>$ \\
-T \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{std::\+size\+\_\+t}]{i}{}\end{DoxyParamCaption})}
-
-\Hypertarget{structfgm_1_1_vector3_d_a04dfe635947f9c357cfb3597dfae0b0c}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!operator\+[]\+@{operator[]}}
-\index{operator\+[]\+@{operator[]}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a04dfe635947f9c357cfb3597dfae0b0c} 
-template$<$Arithmetic T$>$ \\
-const T \& \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{std::\+size\+\_\+t}]{i}{}\end{DoxyParamCaption}) const}
-
 \Hypertarget{structfgm_1_1_vector3_d_afec656fa42debd8a4a6ac556285fcdd2}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!project@{project}}
 \index{project@{project}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{project()}{project()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_afec656fa42debd8a4a6ac556285fcdd2} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+project (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ T $>$ \&}]{vector}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{onto}{, }\item[{bool}]{onto\+Normalized}{ = {\ttfamily false}}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$\hspace{0.3cm}{\ttfamily [static]}}
+auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+project (\begin{DoxyParamCaption}\item[{const Vector3D$<$ T $>$ \&}]{vector}{, }\item[{const Vector3D$<$ U $>$ \&}]{onto}{, }\item[{bool}]{onto\+Normalized}{ = {\ttfamily false}}\end{DoxyParamCaption}) -\/$>$  Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$\hspace{0.3cm}{\ttfamily [static]}}
 
 Static wrapper for vector projection. 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -321,7 +180,7 @@ Projected vector.
 {\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_ab74a6f4ecd7be66ac80fb076e3b09f90} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+project (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{onto}{, }\item[{bool}]{onto\+Normalized}{ = {\ttfamily false}}\end{DoxyParamCaption}) const -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$}
+auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+project (\begin{DoxyParamCaption}\item[{const Vector3D$<$ U $>$ \&}]{onto}{, }\item[{bool}]{onto\+Normalized}{ = {\ttfamily false}}\end{DoxyParamCaption}) const -\/$>$  Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$}
 
 Projects the current vector onto to the {\ttfamily onto} vector. 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -344,7 +203,7 @@ Projected vector.
 {\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_ae9393b56426dabe78afe155b715d1574} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+reject (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ T $>$ \&}]{vector}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{onto}{, }\item[{bool}]{onto\+Normalized}{ = {\ttfamily false}}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$\hspace{0.3cm}{\ttfamily [static]}}
+auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+reject (\begin{DoxyParamCaption}\item[{const Vector3D$<$ T $>$ \&}]{vector}{, }\item[{const Vector3D$<$ U $>$ \&}]{onto}{, }\item[{bool}]{onto\+Normalized}{ = {\ttfamily false}}\end{DoxyParamCaption}) -\/$>$  Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$\hspace{0.3cm}{\ttfamily [static]}}
 
 Returns the perpendicular component for the current vector after projection to the {\ttfamily onto} vector. 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -369,7 +228,7 @@ Projected vector.
 {\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a0671a8745ffd7743779ea4380aab6f4e} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+reject (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ U $>$ \&}]{onto}{, }\item[{bool}]{onto\+Normalized}{ = {\ttfamily false}}\end{DoxyParamCaption}) const -\/$>$  \doxymbox{\hyperlink{structfgm_1_1_vector3_d_af9a798f9bcae44bdc750d250184a0e49}{Vector3D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$}
+auto \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+reject (\begin{DoxyParamCaption}\item[{const Vector3D$<$ U $>$ \&}]{onto}{, }\item[{bool}]{onto\+Normalized}{ = {\ttfamily false}}\end{DoxyParamCaption}) const -\/$>$  Vector3D$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$}
 
 Returns the perpendicular component for the current vector after projection to the {\ttfamily onto} vector. 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -391,10 +250,6 @@ Projected vector.
 \label{doc-variable-members}
 \Hypertarget{structfgm_1_1_vector3_d_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{structfgm_1_1_vector3_d_a31f29ed427bc03342330cd46b83bc841}\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_a31f29ed427bc03342330cd46b83bc841} 
-union  \{ ... \}  \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$}
-
 \Hypertarget{structfgm_1_1_vector3_d_a89f751945443bd026c361cded5e69fa6}\index{fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}!b@{b}}
 \index{b@{b}!fgm::Vector3D$<$ T $>$@{fgm::Vector3D$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{b}{b}}
@@ -426,7 +281,7 @@ Definition at line \doxymbox{\hyperlink{_vector3_d_8h_source_l00031}{31}} of fil
 \doxysubsubsection{\texorpdfstring{elements}{elements}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector3_d_aa1972950d2c93a243f45a009ab0ef13f} 
 template$<$Arithmetic T$>$ \\
-T \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+elements\+[\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a89713385d81c6d5d9bc308cf3e963a01}{dimension}}]\+}
+T \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::\+\+Vector3D}}$<$ T $>$::\+elements\+[dimension]\+}
 
 
 

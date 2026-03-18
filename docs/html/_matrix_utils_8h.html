@@ -97,17 +97,11 @@ $(function(){initNavTree('_matrix_utils_8h.html','',''); });
 <div class="textblock"><code>#include &lt;<a class="el" href="_math_traits_8h_source.html">MathTraits.h</a>&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;gtest/gtest.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="_matrix2_d_8h_source.html">matrix/Matrix2D.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="_matrix3_d_8h_source.html">matrix/Matrix3D.h</a>&gt;</code><br />
+<code>#include &lt;matrix/Matrix2D.h&gt;</code><br />
+<code>#include &lt;matrix/Matrix3D.h&gt;</code><br />
 </div>
 <p><a href="_matrix_utils_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:testutils" id="r_testutils"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils.html">testutils</a></td></tr>
-<tr class="memitem:testutils_3A_3AMatrix3D" id="r_testutils_3A_3AMatrix3D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix3_d.html">testutils::Matrix3D</a></td></tr>
-<tr class="memitem:testutils_3A_3AMatrix2D" id="r_testutils_3A_3AMatrix2D"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix2_d.html">testutils::Matrix2D</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gaeaa533951f000ad4a7c017b466cde69b" id="r_gaeaa533951f000ad4a7c017b466cde69b"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptfgm_1_1_matrix.html">fgm::Matrix</a> T, <a class="el" href="conceptfgm_1_1_matrix.html">fgm::Matrix</a> U&gt; </td></tr>
@@ -126,23 +120,23 @@ Functions</h2></td></tr>
 <tr class="memitem:ga312e9d515c157139838bb197fe06646b template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___matrix___utils.html#ga312e9d515c157139838bb197fe06646b">testutils::EXPECT_MAT_INF</a> (const T &amp;actual)</td></tr>
 <tr class="memdesc:ga312e9d515c157139838bb197fe06646b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates that the provided matrix conforms to an infinity matrix.  <br /></td></tr>
 <tr class="memitem:a8226c9a5a010aec9a8bf1d95b9820845" id="r_a8226c9a5a010aec9a8bf1d95b9820845"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;U&gt;&gt;&gt; </td></tr>
-<tr class="memitem:a8226c9a5a010aec9a8bf1d95b9820845 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix3_d.html#a8226c9a5a010aec9a8bf1d95b9820845">testutils::Matrix3D::EXPECT_MAT_EQ</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; expected, <a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; U &gt; actual)</td></tr>
+<tr class="memitem:a8226c9a5a010aec9a8bf1d95b9820845 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8226c9a5a010aec9a8bf1d95b9820845">testutils::Matrix3D::EXPECT_MAT_EQ</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; expected, <a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; U &gt; actual)</td></tr>
 <tr class="memitem:af1d7ce95a5cd05f00d826b76b14d512d" id="r_af1d7ce95a5cd05f00d826b76b14d512d"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U, typename = std::enable_if_t&lt;std::is_floating_point_v&lt;T&gt;&gt;, typename = std::enable_if_t&lt;std::is_floating_point_v&lt;U&gt;&gt;&gt; </td></tr>
-<tr class="memitem:af1d7ce95a5cd05f00d826b76b14d512d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix3_d.html#af1d7ce95a5cd05f00d826b76b14d512d">testutils::Matrix3D::EXPECT_MAT_NEAR</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; expected, <a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; U &gt; actual, double tolerance=1e-5)</td></tr>
+<tr class="memitem:af1d7ce95a5cd05f00d826b76b14d512d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af1d7ce95a5cd05f00d826b76b14d512d">testutils::Matrix3D::EXPECT_MAT_NEAR</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; expected, <a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; U &gt; actual, double tolerance=1e-5)</td></tr>
 <tr class="memitem:a3284f1d23dd3cdb364a8c8bf0718d521" id="r_a3284f1d23dd3cdb364a8c8bf0718d521"><td class="memTemplParams" colspan="2">template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </td></tr>
-<tr class="memitem:a3284f1d23dd3cdb364a8c8bf0718d521 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix3_d.html#a3284f1d23dd3cdb364a8c8bf0718d521">testutils::Matrix3D::EXPECT_MAT_IDENTITY</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; actual)</td></tr>
+<tr class="memitem:a3284f1d23dd3cdb364a8c8bf0718d521 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3284f1d23dd3cdb364a8c8bf0718d521">testutils::Matrix3D::EXPECT_MAT_IDENTITY</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; actual)</td></tr>
 <tr class="memitem:afc7a66e795363f370b27d4a2e55d21b3" id="r_afc7a66e795363f370b27d4a2e55d21b3"><td class="memTemplParams" colspan="2">template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </td></tr>
-<tr class="memitem:afc7a66e795363f370b27d4a2e55d21b3 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix3_d.html#afc7a66e795363f370b27d4a2e55d21b3">testutils::Matrix3D::EXPECT_MAT_ZERO</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; actual)</td></tr>
+<tr class="memitem:afc7a66e795363f370b27d4a2e55d21b3 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afc7a66e795363f370b27d4a2e55d21b3">testutils::Matrix3D::EXPECT_MAT_ZERO</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; actual)</td></tr>
 <tr class="memitem:aee832b2bf23231364df9fc783806ee3c" id="r_aee832b2bf23231364df9fc783806ee3c"><td class="memTemplParams" colspan="2">template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </td></tr>
-<tr class="memitem:aee832b2bf23231364df9fc783806ee3c template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix3_d.html#aee832b2bf23231364df9fc783806ee3c">testutils::Matrix3D::EXPECT_MAT_INF</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; actual)</td></tr>
+<tr class="memitem:aee832b2bf23231364df9fc783806ee3c template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aee832b2bf23231364df9fc783806ee3c">testutils::Matrix3D::EXPECT_MAT_INF</a> (<a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt; actual)</td></tr>
 <tr class="memitem:aa3ff8b8db5d53596130768834a2f7309" id="r_aa3ff8b8db5d53596130768834a2f7309"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;U&gt;&gt;&gt; </td></tr>
-<tr class="memitem:aa3ff8b8db5d53596130768834a2f7309 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix2_d.html#aa3ff8b8db5d53596130768834a2f7309">testutils::Matrix2D::EXPECT_MAT_EQ</a> (<a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt; expected, <a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; U &gt; actual)</td></tr>
+<tr class="memitem:aa3ff8b8db5d53596130768834a2f7309 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa3ff8b8db5d53596130768834a2f7309">testutils::Matrix2D::EXPECT_MAT_EQ</a> (<a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt; expected, <a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; U &gt; actual)</td></tr>
 <tr class="memitem:a9126a1165c9650f059be41e8edea775c" id="r_a9126a1165c9650f059be41e8edea775c"><td class="memTemplParams" colspan="2">template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </td></tr>
-<tr class="memitem:a9126a1165c9650f059be41e8edea775c template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix2_d.html#a9126a1165c9650f059be41e8edea775c">testutils::Matrix2D::EXPECT_MAT_IDENTITY</a> (<a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt; actual)</td></tr>
+<tr class="memitem:a9126a1165c9650f059be41e8edea775c template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9126a1165c9650f059be41e8edea775c">testutils::Matrix2D::EXPECT_MAT_IDENTITY</a> (<a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt; actual)</td></tr>
 <tr class="memitem:a91002780874c238ed276bcdd46adc638" id="r_a91002780874c238ed276bcdd46adc638"><td class="memTemplParams" colspan="2">template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </td></tr>
-<tr class="memitem:a91002780874c238ed276bcdd46adc638 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix2_d.html#a91002780874c238ed276bcdd46adc638">testutils::Matrix2D::EXPECT_MAT_ZERO</a> (<a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt; actual)</td></tr>
+<tr class="memitem:a91002780874c238ed276bcdd46adc638 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a91002780874c238ed276bcdd46adc638">testutils::Matrix2D::EXPECT_MAT_ZERO</a> (<a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt; actual)</td></tr>
 <tr class="memitem:a2b1747e615fc348df601bfc0de6a2e44" id="r_a2b1747e615fc348df601bfc0de6a2e44"><td class="memTemplParams" colspan="2">template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </td></tr>
-<tr class="memitem:a2b1747e615fc348df601bfc0de6a2e44 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacetestutils_1_1_matrix2_d.html#a2b1747e615fc348df601bfc0de6a2e44">testutils::Matrix2D::EXPECT_MAT_INF</a> (<a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt; actual)</td></tr>
+<tr class="memitem:a2b1747e615fc348df601bfc0de6a2e44 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2b1747e615fc348df601bfc0de6a2e44">testutils::Matrix2D::EXPECT_MAT_INF</a> (<a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt; actual)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Diagnostic and validation utilities for Matrix types. Provides specialized testing helpers and assertion wrappers for Matrix2D, Matrix3D, and Matrix4D to ensure numerical stability and geometric correctness across the fgm library. </p>
@@ -152,7 +146,214 @@ Functions</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2026 Alan Abraham P Kochumon </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
-</div></div><!-- contents -->
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="aa3ff8b8db5d53596130768834a2f7309" name="aa3ff8b8db5d53596130768834a2f7309"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3ff8b8db5d53596130768834a2f7309">&#9670;&#160;</a></span>EXPECT_MAT_EQ() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;U&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testutils::Matrix2D::EXPECT_MAT_EQ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>expected</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; U &gt;</td>          <td class="paramname"><span class="paramname"><em>actual</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_matrix_utils_8h_source.html#l00270">270</a> of file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
+
+</div>
+</div>
+<a id="a8226c9a5a010aec9a8bf1d95b9820845" name="a8226c9a5a010aec9a8bf1d95b9820845"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8226c9a5a010aec9a8bf1d95b9820845">&#9670;&#160;</a></span>EXPECT_MAT_EQ() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;U&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testutils::Matrix3D::EXPECT_MAT_EQ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>expected</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; U &gt;</td>          <td class="paramname"><span class="paramname"><em>actual</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_matrix_utils_8h_source.html#l00173">173</a> of file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
+
+</div>
+</div>
+<a id="a9126a1165c9650f059be41e8edea775c" name="a9126a1165c9650f059be41e8edea775c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9126a1165c9650f059be41e8edea775c">&#9670;&#160;</a></span>EXPECT_MAT_IDENTITY() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testutils::Matrix2D::EXPECT_MAT_IDENTITY </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>actual</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_matrix_utils_8h_source.html#l00293">293</a> of file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
+
+</div>
+</div>
+<a id="a3284f1d23dd3cdb364a8c8bf0718d521" name="a3284f1d23dd3cdb364a8c8bf0718d521"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3284f1d23dd3cdb364a8c8bf0718d521">&#9670;&#160;</a></span>EXPECT_MAT_IDENTITY() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testutils::Matrix3D::EXPECT_MAT_IDENTITY </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>actual</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_matrix_utils_8h_source.html#l00210">210</a> of file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
+
+</div>
+</div>
+<a id="a2b1747e615fc348df601bfc0de6a2e44" name="a2b1747e615fc348df601bfc0de6a2e44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b1747e615fc348df601bfc0de6a2e44">&#9670;&#160;</a></span>EXPECT_MAT_INF() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testutils::Matrix2D::EXPECT_MAT_INF </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>actual</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_matrix_utils_8h_source.html#l00335">335</a> of file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
+
+</div>
+</div>
+<a id="aee832b2bf23231364df9fc783806ee3c" name="aee832b2bf23231364df9fc783806ee3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee832b2bf23231364df9fc783806ee3c">&#9670;&#160;</a></span>EXPECT_MAT_INF() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testutils::Matrix3D::EXPECT_MAT_INF </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>actual</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_matrix_utils_8h_source.html#l00252">252</a> of file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
+
+</div>
+</div>
+<a id="af1d7ce95a5cd05f00d826b76b14d512d" name="af1d7ce95a5cd05f00d826b76b14d512d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1d7ce95a5cd05f00d826b76b14d512d">&#9670;&#160;</a></span>EXPECT_MAT_NEAR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U, typename = std::enable_if_t&lt;std::is_floating_point_v&lt;T&gt;&gt;, typename = std::enable_if_t&lt;std::is_floating_point_v&lt;U&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testutils::Matrix3D::EXPECT_MAT_NEAR </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>expected</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; U &gt;</td>          <td class="paramname"><span class="paramname"><em>actual</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>tolerance</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1e-5</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_matrix_utils_8h_source.html#l00197">197</a> of file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
+
+</div>
+</div>
+<a id="a91002780874c238ed276bcdd46adc638" name="a91002780874c238ed276bcdd46adc638"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91002780874c238ed276bcdd46adc638">&#9670;&#160;</a></span>EXPECT_MAT_ZERO() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testutils::Matrix2D::EXPECT_MAT_ZERO </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix2_d.html">fgm::Matrix2D</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>actual</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_matrix_utils_8h_source.html#l00314">314</a> of file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
+
+</div>
+</div>
+<a id="afc7a66e795363f370b27d4a2e55d21b3" name="afc7a66e795363f370b27d4a2e55d21b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc7a66e795363f370b27d4a2e55d21b3">&#9670;&#160;</a></span>EXPECT_MAT_ZERO() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename = std::enable_if_t&lt;std::is_arithmetic_v&lt;T&gt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testutils::Matrix3D::EXPECT_MAT_ZERO </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfgm_1_1_matrix3_d.html">fgm::Matrix3D</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>actual</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_matrix_utils_8h_source.html#l00231">231</a> of file <a class="el" href="_matrix_utils_8h_source.html">MatrixUtils.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -165,7 +366,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_4c62c5705c93f307172a2812dbe6d6e8.html">test-suite</a></li><li class="navelem"><a href="dir_139b481fda2b8a2e90711c428254618d.html">include</a></li><li class="navelem"><a href="dir_d652a22cc402ea8f5a4f5ccba6006afd.html">utils</a></li><li class="navelem"><a href="_matrix_utils_8h.html">MatrixUtils.h</a></li>
+    <li class="navelem"><b>test-suite</b></li><li class="navelem"><b>include</b></li><li class="navelem"><b>utils</b></li><li class="navelem"><a href="_matrix_utils_8h.html">MatrixUtils.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

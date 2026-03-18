@@ -31,7 +31,7 @@ list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
 set(MatrixTemplateDefinitionFiles Matrix2D.tpp Matrix3D.tpp Matrix4D.tpp)
 list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDirectory})
 
-set(GeneralFiles MathTraits.h SimdTraits.h Config.h)
+set(GeneralFiles MathTraits.h SimdTraits.h Config.h DoxygenGroups.h)
 list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
 
 target_sources(MathLib

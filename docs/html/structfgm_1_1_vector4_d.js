@@ -1,6 +1,5 @@
 var structfgm_1_1_vector4_d =
 [
-    [ "value_type", "structfgm_1_1_vector4_d.html#a5a773db3c567b1dbd026dcd6321f93ae", null ],
     [ "Vector4D", "structfgm_1_1_vector4_d.html#a0f7b1356fda58fa9b25eab0f6cd21f58", null ],
     [ "Vector4D", "structfgm_1_1_vector4_d.html#acd73671256c968397135a7d020798fb5", null ],
     [ "Vector4D", "structfgm_1_1_vector4_d.html#ada0d9b9e99b307416a7fc8aa7e720101", null ],
@@ -38,7 +37,6 @@ var structfgm_1_1_vector4_d =
     [ "operator<<", "structfgm_1_1_vector4_d.html#af1f96ae450d2295d43697b9bc46692ab", null ],
     [ "a", "structfgm_1_1_vector4_d.html#aa0fd2e69319c8955c34c42e8ada7c610", null ],
     [ "b", "structfgm_1_1_vector4_d.html#a8e110ad972e491284385e99c15c6579f", null ],
-    [ "elements", "structfgm_1_1_vector4_d.html#a4cf1534d33f414fe343a21f66ca7dd15", null ],
     [ "g", "structfgm_1_1_vector4_d.html#a55ea955e968f1157296eda4624dd4b4c", null ],
     [ "p", "structfgm_1_1_vector4_d.html#a1960270523fa5cbe657d9f8e5029ee91", null ],
     [ "q", "structfgm_1_1_vector4_d.html#a4427fe34e2631b80ae2aecd958bf17ef", null ],

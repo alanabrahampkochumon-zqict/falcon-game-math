@@ -1,6 +1,6 @@
 \doxysection{CMake\+CXXCompiler\+Id.\+cpp}
 \hypertarget{_c_make_c_x_x_compiler_id_8cpp_source}{}\label{_c_make_c_x_x_compiler_id_8cpp_source}\index{build/CMakeFiles/4.2.1/CompilerIdCXX/CMakeCXXCompilerId.cpp@{build/CMakeFiles/4.2.1/CompilerIdCXX/CMakeCXXCompilerId.cpp}}
-\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp}{Go to the documentation of this file.}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00001}00001\ \textcolor{comment}{/*\ This\ source\ file\ must\ have\ a\ .cpp\ extension\ so\ that\ all\ C++\ compilers}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00002}00002\ \textcolor{comment}{\ \ \ recognize\ the\ extension\ without\ flags.\ \ Borland\ does\ not\ know\ .cxx\ for}}
@@ -12,7 +12,7 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#if\ !defined(\_\_has\_include)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00009}00009\ \textcolor{comment}{/*\ If\ the\ compiler\ does\ not\ have\ \_\_has\_include,\ pretend\ the\ answer\ is}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00010}00010\ \textcolor{comment}{\ \ \ always\ no.\ \ */}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00011}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_ae5510d82e4946f1656f4969911c54736}{00011}}\ \textcolor{preprocessor}{\#\ \ define\ \_\_has\_include(x)\ 0}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#\ \ define\ \_\_has\_include(x)\ 0}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00013}00013\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00014}00014\ }
@@ -444,14 +444,14 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00440}00440\ \textcolor{preprocessor}{\#\ define\ COMPILER\_ID\ "{}HP"{}}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00441}00441\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00442}00442\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ unknown\ compiler\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00443}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a81dee0709ded976b2e0319239f72d174}{00443}}\ \textcolor{preprocessor}{\#\ define\ COMPILER\_ID\ "{}"{}}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00443}00443\ \textcolor{preprocessor}{\#\ define\ COMPILER\_ID\ "{}"{}}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00444}00444\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00445}00445\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00446}00446\ \textcolor{comment}{/*\ Construct\ the\ string\ literal\ in\ pieces\ to\ prevent\ the\ source\ from}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00447}00447\ \textcolor{comment}{\ \ \ getting\ matched.\ \ Store\ it\ in\ a\ pointer\ rather\ than\ an\ array}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00448}00448\ \textcolor{comment}{\ \ \ because\ some\ compilers\ will\ just\ produce\ instructions\ to\ fill\ the}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00449}00449\ \textcolor{comment}{\ \ \ array\ rather\ than\ assigning\ a\ pointer\ to\ a\ static\ array.\ \ */}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00450}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a4b0efeb7a5d59313986b3a0390f050f6}{00450}}\ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a4b0efeb7a5d59313986b3a0390f050f6}{info\_compiler}}\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}compiler["{}}\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a81dee0709ded976b2e0319239f72d174}{COMPILER\_ID}}\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00450}00450\ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ info\_compiler\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}compiler["{}}\ COMPILER\_ID\ \textcolor{stringliteral}{"{}]"{}};}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00451}00451\ \textcolor{preprocessor}{\#ifdef\ SIMULATE\_ID}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00452}00452\ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ info\_simulate\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}simulate["{}}\ SIMULATE\_ID\ \textcolor{stringliteral}{"{}]"{}};}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00453}00453\ \textcolor{preprocessor}{\#endif}}
@@ -464,8 +464,8 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00460}00460\ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}\ *info\_cray\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}compiler\_wrapper[CrayPrgEnv]"{}};}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00461}00461\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00462}00462\ }
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00463}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a2ae9b72bb13abaabfcf2ee0ba7d3fa1d}{00463}}\ \textcolor{preprocessor}{\#define\ STRINGIFY\_HELPER(X)\ \#X}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00464}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a43e1cad902b6477bec893cb6430bd6c8}{00464}}\ \textcolor{preprocessor}{\#define\ STRINGIFY(X)\ STRINGIFY\_HELPER(X)}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00463}00463\ \textcolor{preprocessor}{\#define\ STRINGIFY\_HELPER(X)\ \#X}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00464}00464\ \textcolor{preprocessor}{\#define\ STRINGIFY(X)\ STRINGIFY\_HELPER(X)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00465}00465\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00466}00466\ \textcolor{comment}{/*\ Identify\ known\ platforms\ by\ name.\ \ */}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00467}00467\ \textcolor{preprocessor}{\#if\ defined(\_\_linux)\ ||\ defined(\_\_linux\_\_)\ ||\ defined(linux)}}
@@ -575,7 +575,7 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00571}00571\ \textcolor{preprocessor}{\#\ \ define\ PLATFORM\_ID\ "{}ADSP"{}}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00572}00572\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00573}00573\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ unknown\ platform\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00574}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_adbc5372f40838899018fadbc89bd588b}{00574}}\ \textcolor{preprocessor}{\#\ define\ PLATFORM\_ID}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00574}00574\ \textcolor{preprocessor}{\#\ define\ PLATFORM\_ID}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00575}00575\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00576}00576\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00577}00577\ }
@@ -755,11 +755,11 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00751}00751\ \textcolor{preprocessor}{\#\ endif}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00752}00752\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00753}00753\ \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00754}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_aba35d0d200deaeb06aee95ca297acb28}{00754}}\ \textcolor{preprocessor}{\#\ \ define\ ARCHITECTURE\_ID}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00754}00754\ \textcolor{preprocessor}{\#\ \ define\ ARCHITECTURE\_ID}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00755}00755\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00756}00756\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00757}00757\ \textcolor{comment}{/*\ Convert\ integer\ to\ decimal\ digit\ literals.\ \ */}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00758}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_ad1280362da42492bbc11aa78cbf776ad}{00758}}\ \textcolor{preprocessor}{\#define\ DEC(n)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00758}00758\ \textcolor{preprocessor}{\#define\ DEC(n)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00759}00759\ \textcolor{preprocessor}{\ \ ('0'\ +\ (((n)\ /\ 10000000)\%10)),\ \(\backslash\)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00760}00760\ \textcolor{preprocessor}{\ \ ('0'\ +\ (((n)\ /\ 1000000)\%10)),\ \ \(\backslash\)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00761}00761\ \textcolor{preprocessor}{\ \ ('0'\ +\ (((n)\ /\ 100000)\%10)),\ \ \ \(\backslash\)}}
@@ -770,7 +770,7 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00766}00766\ \textcolor{preprocessor}{\ \ ('0'\ +\ \ ((n)\ \%\ 10))}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00767}00767\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00768}00768\ \textcolor{comment}{/*\ Convert\ integer\ to\ hex\ digit\ literals.\ \ */}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00769}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a46d5d95daa1bef867bd0179594310ed5}{00769}}\ \textcolor{preprocessor}{\#define\ HEX(n)\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00769}00769\ \textcolor{preprocessor}{\#define\ HEX(n)\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00770}00770\ \textcolor{preprocessor}{\ \ ('0'\ +\ ((n)>>28\ \&\ 0xF)),\ \(\backslash\)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00771}00771\ \textcolor{preprocessor}{\ \ ('0'\ +\ ((n)>>24\ \&\ 0xF)),\ \(\backslash\)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00772}00772\ \textcolor{preprocessor}{\ \ ('0'\ +\ ((n)>>20\ \&\ 0xF)),\ \(\backslash\)}}
@@ -835,17 +835,17 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00831}00831\ \textcolor{comment}{\ \ \ getting\ matched.\ \ Store\ it\ in\ a\ pointer\ rather\ than\ an\ array}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00832}00832\ \textcolor{comment}{\ \ \ because\ some\ compilers\ will\ just\ produce\ instructions\ to\ fill\ the}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00833}00833\ \textcolor{comment}{\ \ \ array\ rather\ than\ assigning\ a\ pointer\ to\ a\ static\ array.\ \ */}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00834}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a2321403dee54ee23f0c2fa849c60f7d4}{00834}}\ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a2321403dee54ee23f0c2fa849c60f7d4}{info\_platform}}\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}platform["{}}\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_adbc5372f40838899018fadbc89bd588b}{PLATFORM\_ID}}\ \textcolor{stringliteral}{"{}]"{}};}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00835}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a59647e99d304ed33b15cb284c27ed391}{00835}}\ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a59647e99d304ed33b15cb284c27ed391}{info\_arch}}\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}arch["{}}\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_aba35d0d200deaeb06aee95ca297acb28}{ARCHITECTURE\_ID}}\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00834}00834\ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ info\_platform\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}platform["{}}\ PLATFORM\_ID\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00835}00835\ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ info\_arch\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}arch["{}}\ ARCHITECTURE\_ID\ \textcolor{stringliteral}{"{}]"{}};}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00836}00836\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00837}00837\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00838}00838\ }
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00839}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a2454727f55dd7af9210ab341ca8be2c8}{00839}}\ \textcolor{preprocessor}{\#define\ CXX\_STD\_98\ 199711L}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00840}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a2c21af1889e9ca5cda36069184cc3234}{00840}}\ \textcolor{preprocessor}{\#define\ CXX\_STD\_11\ 201103L}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00841}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a39fb4789a452bfb5df17d40f640dd720}{00841}}\ \textcolor{preprocessor}{\#define\ CXX\_STD\_14\ 201402L}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00842}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_ae17f1ae0bf56cf631eadff4f73e96ff9}{00842}}\ \textcolor{preprocessor}{\#define\ CXX\_STD\_17\ 201703L}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00843}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_aa52ec6104623a66734cc5d5d28733bed}{00843}}\ \textcolor{preprocessor}{\#define\ CXX\_STD\_20\ 202002L}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00844}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_ae5e2d955d2884c65b7de2e1ad29a4f1d}{00844}}\ \textcolor{preprocessor}{\#define\ CXX\_STD\_23\ 202302L}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00839}00839\ \textcolor{preprocessor}{\#define\ CXX\_STD\_98\ 199711L}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00840}00840\ \textcolor{preprocessor}{\#define\ CXX\_STD\_11\ 201103L}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00841}00841\ \textcolor{preprocessor}{\#define\ CXX\_STD\_14\ 201402L}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00842}00842\ \textcolor{preprocessor}{\#define\ CXX\_STD\_17\ 201703L}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00843}00843\ \textcolor{preprocessor}{\#define\ CXX\_STD\_20\ 202002L}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00844}00844\ \textcolor{preprocessor}{\#define\ CXX\_STD\_23\ 202302L}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00845}00845\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00846}00846\ \textcolor{preprocessor}{\#if\ defined(\_\_INTEL\_COMPILER)\ \&\&\ defined(\_MSVC\_LANG)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00847}00847\ \textcolor{preprocessor}{\#\ \ if\ \_MSVC\_LANG\ >\ CXX\_STD\_17}}
@@ -892,10 +892,10 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00888}00888\ \textcolor{preprocessor}{\#elif\ \_\_cplusplus\ ==\ 1\ \&\&\ defined(\_\_GXX\_EXPERIMENTAL\_CXX0X\_\_)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00889}00889\ \textcolor{preprocessor}{\#\ \ define\ CXX\_STD\ CXX\_STD\_11}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00890}00890\ \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00891}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a34cc889e576a1ae6c84ae9e0a851ba21}{00891}}\ \textcolor{preprocessor}{\#\ \ define\ CXX\_STD\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00891}00891\ \textcolor{preprocessor}{\#\ \ define\ CXX\_STD\ \_\_cplusplus}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00892}00892\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00893}00893\ }
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00894}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a4607cccf070750927b458473ca82c090}{00894}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a4607cccf070750927b458473ca82c090}{info\_language\_standard\_default}}\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}standard\_default["{}}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00894}00894\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ info\_language\_standard\_default\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}standard\_default["{}}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00895}00895\ \textcolor{preprocessor}{\#if\ CXX\_STD\ >\ CXX\_STD\_23}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00896}00896\ \ \ \textcolor{stringliteral}{"{}26"{}}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00897}00897\ \textcolor{preprocessor}{\#elif\ CXX\_STD\ >\ CXX\_STD\_20}}
@@ -913,7 +913,7 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00909}00909\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00910}00910\ \textcolor{stringliteral}{"{}]"{}};}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00911}00911\ }
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00912}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a0f46a8a39e09d9b803c4766904fd7e99}{00912}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a0f46a8a39e09d9b803c4766904fd7e99}{info\_language\_extensions\_default}}\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}extensions\_default["{}}}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00912}00912\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ info\_language\_extensions\_default\ =\ \textcolor{stringliteral}{"{}INFO"{}}\ \textcolor{stringliteral}{"{}:"{}}\ \textcolor{stringliteral}{"{}extensions\_default["{}}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00913}00913\ \textcolor{preprocessor}{\#if\ (defined(\_\_clang\_\_)\ ||\ defined(\_\_GNUC\_\_)\ ||\ defined(\_\_xlC\_\_)\ ||\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00914}00914\ \textcolor{preprocessor}{\ \ \ \ \ defined(\_\_TI\_COMPILER\_VERSION\_\_)\ ||\ defined(\_\_RENESAS\_\_))\ \&\&\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00915}00915\ \textcolor{preprocessor}{\ \ !defined(\_\_STRICT\_ANSI\_\_)}}
@@ -925,12 +925,12 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00921}00921\ }
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00922}00922\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00923}00923\ }
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00924}\doxymbox{\hyperlink{_c_make_c_x_x_compiler_id_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{00924}}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00924}00924\ \textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00925}00925\ \{}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00926}00926\ \ \ \textcolor{keywordtype}{int}\ require\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00927}00927\ \ \ require\ +=\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a4b0efeb7a5d59313986b3a0390f050f6}{info\_compiler}}[argc];}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00928}00928\ \ \ require\ +=\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a2321403dee54ee23f0c2fa849c60f7d4}{info\_platform}}[argc];}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00929}00929\ \ \ require\ +=\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a59647e99d304ed33b15cb284c27ed391}{info\_arch}}[argc];}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00927}00927\ \ \ require\ +=\ info\_compiler[argc];}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00928}00928\ \ \ require\ +=\ info\_platform[argc];}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00929}00929\ \ \ require\ +=\ info\_arch[argc];}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00930}00930\ \textcolor{preprocessor}{\#ifdef\ COMPILER\_VERSION\_MAJOR}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00931}00931\ \ \ require\ +=\ info\_version[argc];}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00932}00932\ \textcolor{preprocessor}{\#endif}}
@@ -946,8 +946,8 @@
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00942}00942\ \textcolor{preprocessor}{\#if\ defined(\_\_CRAYXT\_COMPUTE\_LINUX\_TARGET)}}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00943}00943\ \ \ require\ +=\ info\_cray[argc];}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00944}00944\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00945}00945\ \ \ require\ +=\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a4607cccf070750927b458473ca82c090}{info\_language\_standard\_default}}[argc];}
-\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00946}00946\ \ \ require\ +=\ \doxymbox{\hyperlink{_c_make_c_compiler_id_8c_a0f46a8a39e09d9b803c4766904fd7e99}{info\_language\_extensions\_default}}[argc];}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00945}00945\ \ \ require\ +=\ info\_language\_standard\_default[argc];}
+\DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00946}00946\ \ \ require\ +=\ info\_language\_extensions\_default[argc];}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00947}00947\ \ \ (void)argv;}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00948}00948\ \ \ \textcolor{keywordflow}{return}\ require;}
 \DoxyCodeLine{\Hypertarget{_c_make_c_x_x_compiler_id_8cpp_source_l00949}00949\ \}}

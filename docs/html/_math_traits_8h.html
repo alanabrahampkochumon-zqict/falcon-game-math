@@ -100,10 +100,6 @@ $(function(){initNavTree('_math_traits_8h.html','',''); });
 </div>
 <p><a href="_math_traits_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:fgm" id="r_fgm"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacefgm.html">fgm</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-concepts" class="groupheader"><a id="concepts" name="concepts"></a>
 Concepts</h2></td></tr>
 <tr class="memitem:fgm_3A_3AArithmetic" id="r_fgm_3A_3AArithmetic"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptfgm_1_1_arithmetic.html">fgm::Arithmetic</a></td></tr>
@@ -116,13 +112,13 @@ Concepts</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ae5677566a8d1f8376b44eadef77a60c4" id="r_ae5677566a8d1f8376b44eadef77a60c4"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ae5677566a8d1f8376b44eadef77a60c4 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacefgm.html#ae5677566a8d1f8376b44eadef77a60c4">fgm::Magnitude</a> = std::conditional_t&lt;std::is_same_v&lt;T, float&gt;, float, double&gt;</td></tr>
+<tr class="memitem:ae5677566a8d1f8376b44eadef77a60c4 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae5677566a8d1f8376b44eadef77a60c4">fgm::Magnitude</a> = std::conditional_t&lt;std::is_same_v&lt;T, float&gt;, float, double&gt;</td></tr>
 <tr class="memdesc:ae5677566a8d1f8376b44eadef77a60c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac3c0fd59149d0159565c3254343bdcab" id="r_ac3c0fd59149d0159565c3254343bdcab"><td class="memItemLeft">constexpr double&#160;</td><td class="memItemRight"><a class="el" href="namespacefgm.html#ac3c0fd59149d0159565c3254343bdcab">fgm::FLOAT_EPSILON</a> = 1e-5</td></tr>
-<tr class="memitem:afd8d25cec58c96d01e1d8e2af5ccdd80" id="r_afd8d25cec58c96d01e1d8e2af5ccdd80"><td class="memItemLeft">constexpr double&#160;</td><td class="memItemRight"><a class="el" href="namespacefgm.html#afd8d25cec58c96d01e1d8e2af5ccdd80">fgm::DOUBLE_EPSILON</a> = 1e-12</td></tr>
+<tr class="memitem:ac3c0fd59149d0159565c3254343bdcab" id="r_ac3c0fd59149d0159565c3254343bdcab"><td class="memItemLeft">constexpr double&#160;</td><td class="memItemRight"><a class="el" href="#ac3c0fd59149d0159565c3254343bdcab">fgm::FLOAT_EPSILON</a> = 1e-5</td></tr>
+<tr class="memitem:afd8d25cec58c96d01e1d8e2af5ccdd80" id="r_afd8d25cec58c96d01e1d8e2af5ccdd80"><td class="memItemLeft">constexpr double&#160;</td><td class="memItemRight"><a class="el" href="#afd8d25cec58c96d01e1d8e2af5ccdd80">fgm::DOUBLE_EPSILON</a> = 1e-12</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concepts for Arithmetic, StrictArithmetic, Matrix, and Vector. Also contains EPSILONs for floats and doubles. </p>
@@ -131,7 +127,77 @@ Variables</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2026 Alan Abraham P Kochumon </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="_math_traits_8h_source.html">MathTraits.h</a>.</p>
-</div></div><!-- contents -->
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="ae5677566a8d1f8376b44eadef77a60c4" name="ae5677566a8d1f8376b44eadef77a60c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5677566a8d1f8376b44eadef77a60c4">&#9670;&#160;</a></span>Magnitude</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ae5677566a8d1f8376b44eadef77a60c4">fgm::Magnitude</a> = std::conditional_t&lt;std::is_same_v&lt;T, float&gt;, float, double&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision. </p>
+
+<p class="definition">Definition at line <a class="el" href="_math_traits_8h_source.html#l00075">75</a> of file <a class="el" href="_math_traits_8h_source.html">MathTraits.h</a>.</p>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="afd8d25cec58c96d01e1d8e2af5ccdd80" name="afd8d25cec58c96d01e1d8e2af5ccdd80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd8d25cec58c96d01e1d8e2af5ccdd80">&#9670;&#160;</a></span>DOUBLE_EPSILON</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fgm::DOUBLE_EPSILON = 1e-12</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_math_traits_8h_source.html#l00085">85</a> of file <a class="el" href="_math_traits_8h_source.html">MathTraits.h</a>.</p>
+
+</div>
+</div>
+<a id="ac3c0fd59149d0159565c3254343bdcab" name="ac3c0fd59149d0159565c3254343bdcab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3c0fd59149d0159565c3254343bdcab">&#9670;&#160;</a></span>FLOAT_EPSILON</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fgm::FLOAT_EPSILON = 1e-5</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_math_traits_8h_source.html#l00084">84</a> of file <a class="el" href="_math_traits_8h_source.html">MathTraits.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -144,7 +210,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_1f08789ebfd09cc610cc3060ef7bead5.html">math-lib</a></li><li class="navelem"><a href="dir_7857bb6fa2081d1ebe43d54f4a95104b.html">include</a></li><li class="navelem"><a href="_math_traits_8h.html">MathTraits.h</a></li>
+    <li class="navelem"><b>math-lib</b></li><li class="navelem"><b>include</b></li><li class="navelem"><a href="_math_traits_8h.html">MathTraits.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

@@ -99,7 +99,7 @@ $(function(){initNavTree('_math_traits_8h_source.html','',''); });
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacefgm.html">fgm</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span>fgm</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">    /**************************************</span></div>
@@ -150,7 +150,7 @@ $(function(){initNavTree('_math_traits_8h_source.html','',''); });
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keyword">requires</span> <a class="code hl_concept" href="conceptfgm_1_1_arithmetic.html">Arithmetic&lt;T&gt;</a></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespacefgm.html#ae5677566a8d1f8376b44eadef77a60c4">   75</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="namespacefgm.html#ae5677566a8d1f8376b44eadef77a60c4">Magnitude</a> = std::conditional_t&lt;std::is_same_v&lt;T, float&gt;, float, <span class="keywordtype">double</span>&gt;;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="_math_traits_8h.html#ae5677566a8d1f8376b44eadef77a60c4">   75</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="_math_traits_8h.html#ae5677566a8d1f8376b44eadef77a60c4">Magnitude</a> = std::conditional_t&lt;std::is_same_v&lt;T, float&gt;, float, <span class="keywordtype">double</span>&gt;;</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">    /**************************************</span></div>
@@ -159,27 +159,24 @@ $(function(){initNavTree('_math_traits_8h_source.html','',''); });
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">     *                                    *</span></div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">     **************************************/</span></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="namespacefgm.html#ac3c0fd59149d0159565c3254343bdcab">   84</a></span>    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespacefgm.html#ac3c0fd59149d0159565c3254343bdcab">FLOAT_EPSILON</a> = 1e-5;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="namespacefgm.html#afd8d25cec58c96d01e1d8e2af5ccdd80">   85</a></span>    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespacefgm.html#afd8d25cec58c96d01e1d8e2af5ccdd80">DOUBLE_EPSILON</a> = 1e-12;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keywordtype">double</span> FLOAT_EPSILON = 1e-5;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keywordtype">double</span> DOUBLE_EPSILON = 1e-12;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>} <span class="comment">// namespace fgm</span></div>
+<div class="ttc" id="a_math_traits_8h_html_ae5677566a8d1f8376b44eadef77a60c4"><div class="ttname"><a href="_math_traits_8h.html#ae5677566a8d1f8376b44eadef77a60c4">fgm::Magnitude</a></div><div class="ttdeci">std::conditional_t&lt; std::is_same_v&lt; T, float &gt;, float, double &gt; Magnitude</div><div class="ttdoc">Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision.</div><div class="ttdef"><b>Definition</b> <a href="#l00075">MathTraits.h:75</a></div></div>
 <div class="ttc" id="aconceptfgm_1_1_arithmetic_html"><div class="ttname"><a href="conceptfgm_1_1_arithmetic.html">fgm::Arithmetic</a></div><div class="ttdef"><b>Definition</b> <a href="#l00028">MathTraits.h:28</a></div></div>
 <div class="ttc" id="aconceptfgm_1_1_matrix_html"><div class="ttname"><a href="conceptfgm_1_1_matrix.html">fgm::Matrix</a></div><div class="ttdoc">Matrix requires a value_type, rows, columns, [] accessor, (r, c) accessor, and its value_type needs t...</div><div class="ttdef"><b>Definition</b> <a href="#l00061">MathTraits.h:61</a></div></div>
 <div class="ttc" id="aconceptfgm_1_1_strict_arithmetic_html"><div class="ttname"><a href="conceptfgm_1_1_strict_arithmetic.html">fgm::StrictArithmetic</a></div><div class="ttdef"><b>Definition</b> <a href="#l00033">MathTraits.h:33</a></div></div>
 <div class="ttc" id="aconceptfgm_1_1_vector_html"><div class="ttname"><a href="conceptfgm_1_1_vector.html">fgm::Vector</a></div><div class="ttdef"><b>Definition</b> <a href="#l00049">MathTraits.h:49</a></div></div>
 <div class="ttc" id="aconceptfgm_1_1weak__arithmetic_html"><div class="ttname"><a href="conceptfgm_1_1weak__arithmetic.html">fgm::weak_arithmetic</a></div><div class="ttdef"><b>Definition</b> <a href="#l00036">MathTraits.h:36</a></div></div>
-<div class="ttc" id="anamespacefgm_html"><div class="ttname"><a href="namespacefgm.html">fgm</a></div><div class="ttdef"><b>Definition</b> <a href="_config_8h_source.html#l00013">Config.h:14</a></div></div>
-<div class="ttc" id="anamespacefgm_html_ac3c0fd59149d0159565c3254343bdcab"><div class="ttname"><a href="namespacefgm.html#ac3c0fd59149d0159565c3254343bdcab">fgm::FLOAT_EPSILON</a></div><div class="ttdeci">constexpr double FLOAT_EPSILON</div><div class="ttdef"><b>Definition</b> <a href="#l00084">MathTraits.h:84</a></div></div>
-<div class="ttc" id="anamespacefgm_html_ae5677566a8d1f8376b44eadef77a60c4"><div class="ttname"><a href="namespacefgm.html#ae5677566a8d1f8376b44eadef77a60c4">fgm::Magnitude</a></div><div class="ttdeci">std::conditional_t&lt; std::is_same_v&lt; T, float &gt;, float, double &gt; Magnitude</div><div class="ttdoc">Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision.</div><div class="ttdef"><b>Definition</b> <a href="#l00075">MathTraits.h:75</a></div></div>
-<div class="ttc" id="anamespacefgm_html_afd8d25cec58c96d01e1d8e2af5ccdd80"><div class="ttname"><a href="namespacefgm.html#afd8d25cec58c96d01e1d8e2af5ccdd80">fgm::DOUBLE_EPSILON</a></div><div class="ttdeci">constexpr double DOUBLE_EPSILON</div><div class="ttdef"><b>Definition</b> <a href="#l00085">MathTraits.h:85</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_1f08789ebfd09cc610cc3060ef7bead5.html">math-lib</a></li><li class="navelem"><a href="dir_7857bb6fa2081d1ebe43d54f4a95104b.html">include</a></li><li class="navelem"><a href="_math_traits_8h.html">MathTraits.h</a></li>
+    <li class="navelem"><b>math-lib</b></li><li class="navelem"><b>include</b></li><li class="navelem"><a href="_math_traits_8h.html">MathTraits.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

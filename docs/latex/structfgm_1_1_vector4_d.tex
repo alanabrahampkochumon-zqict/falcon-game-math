@@ -1,9 +1,5 @@
 \doxysection{fgm::\+Vector4D\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Struct Template Reference}
 \hypertarget{structfgm_1_1_vector4_d}{}\label{structfgm_1_1_vector4_d}\index{fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}}
-
-
-{\ttfamily \+\#include $<$Vector4\+D.\+h$>$}
-
 \doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -12,11 +8,12 @@ using \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5a773db3c567b1dbd026dcd6321f
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} ()
+\Hypertarget{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}\label{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58} 
+{\bfseries Vector4D} ()
 \begin{DoxyCompactList}\small\item\em Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with zeros. \end{DoxyCompactList}\item 
 \doxymbox{\hyperlink{structfgm_1_1_vector4_d_acd73671256c968397135a7d020798fb5}{Vector4D}} (T v1, T v2, T v3, T v4)
 \begin{DoxyCompactList}\small\item\em Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with passed in values. \end{DoxyCompactList}\item 
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ada0d9b9e99b307416a7fc8aa7e720101}{Vector4D}} (\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ vec1, \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ \doxymbox{\hyperlink{namespacefgm_ad1013de6db597b4a2906d9e5d5c3ad78}{vec2}})
+\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ada0d9b9e99b307416a7fc8aa7e720101}{Vector4D}} (\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ vec1, \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$ vec2)
 \begin{DoxyCompactList}\small\item\em Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with 2 \doxylink{structfgm_1_1_vector2_d}{Vector2D}. \end{DoxyCompactList}\item 
 \doxymbox{\hyperlink{structfgm_1_1_vector4_d_aced91197636499770e3e4646aee297c7}{Vector4D}} (\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ T $>$ vec, T v)
 \begin{DoxyCompactList}\small\item\em Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with 1 \doxylink{structfgm_1_1_vector3_d}{Vector3D} and 1 T value. \end{DoxyCompactList}\item 
@@ -28,17 +25,17 @@ T \& \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a46e47b53b7cbf36ce045205b3ecb4
 \begin{DoxyCompactList}\small\item\em Accesses the component at the specified location. Provides read-\/write access to the element. \end{DoxyCompactList}\item 
 const T \& \doxymbox{\hyperlink{structfgm_1_1_vector4_d_abee31873d25a1255c5e862e1b8328ee1}{operator\+[$\,$]\+}} (std::\+size\+\_\+t i) const
 \begin{DoxyCompactList}\small\item\em Accesses the element at the specified location (read-\/only). \end{DoxyCompactList}\item 
-{\footnotesize template$<$Arithmetic U$>$ }\\bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{all\+Eq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}} :\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}) const
+{\footnotesize template$<$Arithmetic U$>$ }\\bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f}{all\+Eq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? DOUBLE\+\_\+\+EPSILON :\+FLOAT\+\_\+\+EPSILON) const
 \begin{DoxyCompactList}\small\item\em Compare all components of this vector for equality with another vector. Performs a component-\/wise comparison and returns true only if every element pair satisfies the equality condition within the given {\ttfamily epsilon}. \end{DoxyCompactList}\item 
-{\footnotesize template$<$Arithmetic U$>$ }\\bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{all\+Neq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}} :\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}) const
+{\footnotesize template$<$Arithmetic U$>$ }\\bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c}{all\+Neq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? DOUBLE\+\_\+\+EPSILON :\+FLOAT\+\_\+\+EPSILON) const
 \begin{DoxyCompactList}\small\item\em Compare components for inequality across two vectors. Performs a component-\/wise comparison and returns true if any of the pair satisfies inequality condition within the given {\ttfamily epsilon}. \end{DoxyCompactList}\item 
 {\footnotesize template$<$Arithmetic U$>$ }\\bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ac9b0f50a2d71505acc27bc6c5192a87c}{operator==}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other) const
 \begin{DoxyCompactList}\small\item\em Compare all components of this vector for equality with another vector. Performs a component-\/wise comparison and returns true only if every element pair satisfies the equality condition within the given {\ttfamily epsilon}.    \end{DoxyCompactList}\item 
 {\footnotesize template$<$Arithmetic U$>$ }\\bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae4fd0733d9230b216744425a84fe7956}{operator!=}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other) const
 \begin{DoxyCompactList}\small\item\em Compare components for inequality across two vectors. Performs a component-\/wise comparison and returns true if any of the pair satisfies inequality condition within the given {\ttfamily epsilon}.    \end{DoxyCompactList}\item 
-{\footnotesize template$<$Arithmetic U$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a2e7ec13fa642ff5f2a62c46e6d424fc3}{eq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}} :\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}) const
+{\footnotesize template$<$Arithmetic U$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a2e7ec13fa642ff5f2a62c46e6d424fc3}{eq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? DOUBLE\+\_\+\+EPSILON :\+FLOAT\+\_\+\+EPSILON) const
 \begin{DoxyCompactList}\small\item\em Perform component-\/wise equality check. Compares each component pair and returns a boolean mask. \end{DoxyCompactList}\item 
-{\footnotesize template$<$Arithmetic U$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad277e47d8c40e696323a471b7b2d102a}{neq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}} :\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}) const
+{\footnotesize template$<$Arithmetic U$>$ }\\\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad277e47d8c40e696323a471b7b2d102a}{neq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? DOUBLE\+\_\+\+EPSILON :\+FLOAT\+\_\+\+EPSILON) const
 \begin{DoxyCompactList}\small\item\em Perform component-\/wise inequality check. Compares each component pair and returns a boolean mask. \end{DoxyCompactList}\item 
 {\footnotesize template$<$Strict\+Arithmetic U$>$ \newline
 requires Strict\+Arithmetic$<$T$>$}\\\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a447d622eea025c6b76c3e72f84f9dc3c}{gt}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other) const
@@ -85,9 +82,9 @@ requires Strict\+Arithmetic$<$T$>$}\\\doxymbox{\hyperlink{structfgm_1_1_vector4_
 {\footnotesize template$<$Strict\+Arithmetic U$>$ \newline
 requires Strict\+Arithmetic$<$T$>$}\\auto \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae40204541a0a3202df4bf10a8319ee30}{dot}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&other) const -\/$>$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$
 \begin{DoxyCompactList}\small\item\em Calculate the dot product with another vector. Computes the scalar product:\+ $ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i $. \end{DoxyCompactList}\item 
-\doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_af0b8305cc8e13c7c922d09e2ae67af2f}{mag}} () const
+\doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_af0b8305cc8e13c7c922d09e2ae67af2f}{mag}} () const
 \begin{DoxyCompactList}\small\item\em Calculate the magnitude (length) of the vector. Computes the Euclidean norm:\+ $ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} $. \end{DoxyCompactList}\item 
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_aec8569c71e7779762f308d8fd4bf83f6}{normalize}} () const
+\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_aec8569c71e7779762f308d8fd4bf83f6}{normalize}} () const
 \begin{DoxyCompactList}\small\item\em Calculate the normalized (unit) form of the vector. Computes the unit vector in the same direction:\+ $ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} $. \end{DoxyCompactList}\item 
 {\footnotesize template$<$Strict\+Arithmetic U$>$ \newline
 requires Strict\+Arithmetic$<$T$>$}\\auto \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0747497f9e09cd58862012473d3f1ed6}{project}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&onto, bool onto\+Normalized=false) const -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
@@ -99,13 +96,13 @@ requires Strict\+Arithmetic$<$T$>$}\\auto \doxymbox{\hyperlink{structfgm_1_1_vec
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$Arithmetic U$>$ }\\static bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a405e62ee50fc4f04cd92dcf3dc0eab50}{all\+Eq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}} :\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}})
+{\footnotesize template$<$Arithmetic U$>$ }\\static bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a405e62ee50fc4f04cd92dcf3dc0eab50}{all\+Eq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? DOUBLE\+\_\+\+EPSILON :\+FLOAT\+\_\+\+EPSILON)
 \begin{DoxyCompactList}\small\item\em Compare all components of this vector for equality with another vector. Performs a component-\/wise comparison and returns true only if every element pair satisfies the equality condition within the given {\ttfamily epsilon}.    \end{DoxyCompactList}\item 
-{\footnotesize template$<$Arithmetic U$>$ }\\static bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a12c51f95c065b2eb8726a164e88fe7cf}{all\+Neq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}} :\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}})
+{\footnotesize template$<$Arithmetic U$>$ }\\static bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a12c51f95c065b2eb8726a164e88fe7cf}{all\+Neq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? DOUBLE\+\_\+\+EPSILON :\+FLOAT\+\_\+\+EPSILON)
 \begin{DoxyCompactList}\small\item\em Compare components for inequality across two vectors. Performs a component-\/wise comparison and returns true if any of the pair satisfies inequality condition within the given {\ttfamily epsilon}.    \end{DoxyCompactList}\item 
-{\footnotesize template$<$Arithmetic U$>$ }\\static \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a6f4e894d3e54df1048dd5742ce38f6f8}{eq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}} :\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}})
+{\footnotesize template$<$Arithmetic U$>$ }\\static \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a6f4e894d3e54df1048dd5742ce38f6f8}{eq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? DOUBLE\+\_\+\+EPSILON :\+FLOAT\+\_\+\+EPSILON)
 \begin{DoxyCompactList}\small\item\em Perform component-\/wise equality check. Compares each component pair and returns a boolean mask.    \end{DoxyCompactList}\item 
-{\footnotesize template$<$Arithmetic U$>$ }\\static \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a1360d5870c95688362e2b754dc32578e}{neq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}} :\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}})
+{\footnotesize template$<$Arithmetic U$>$ }\\static \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a1360d5870c95688362e2b754dc32578e}{neq}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB, double epsilon=(std::\+is\+\_\+same\+\_\+v$<$ T, double $>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std::\+is\+\_\+same\+\_\+v$<$ U, double $>$) ? DOUBLE\+\_\+\+EPSILON :\+FLOAT\+\_\+\+EPSILON)
 \begin{DoxyCompactList}\small\item\em Perform component-\/wise inequality check. Compares each component pair and returns a boolean mask.    \end{DoxyCompactList}\item 
 {\footnotesize template$<$Strict\+Arithmetic U$>$ \newline
 requires Strict\+Arithmetic$<$T$>$}\\static \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_af1d512d2d88516c04ee28ffa8dec1727}{gt}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB)
@@ -122,9 +119,9 @@ requires Strict\+Arithmetic$<$T$>$}\\static \doxymbox{\hyperlink{structfgm_1_1_v
 {\footnotesize template$<$Strict\+Arithmetic U$>$ \newline
 requires Strict\+Arithmetic$<$T$>$}\\static auto \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a8a63065a975273a7285ccdb181695d4d}{dot}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vecA, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&vecB) -\/$>$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$
 \begin{DoxyCompactList}\small\item\em Static wrapper that computes $ \mathbf{vecA} \cdot \mathbf{vecB} $. \end{DoxyCompactList}\item 
-static \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ab48dce53469ebab7fe4944a3947aee5f}{mag}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vec)
+static \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ab48dce53469ebab7fe4944a3947aee5f}{mag}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vec)
 \begin{DoxyCompactList}\small\item\em Calculate the magnitude (length) of the vector. Computes the Euclidean norm:\+ $ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} $.    Static wrapper that computes $ \|\mathbf{vec}\| $. \end{DoxyCompactList}\item 
-static \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ac8c105223a1c9ac8d37c55b7265c4ac8}{normalize}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vec)
+static \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ac8c105223a1c9ac8d37c55b7265c4ac8}{normalize}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vec)
 \begin{DoxyCompactList}\small\item\em Calculate the normalized (unit) form of the vector. Computes the unit vector in the same direction:\+ $ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} $.    Static wrapper that computes the unit vector $ \mathbf{\hat{v}} $. \end{DoxyCompactList}\item 
 {\footnotesize template$<$Strict\+Arithmetic U$>$ \newline
 requires Strict\+Arithmetic$<$T$>$}\\static auto \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a52f3aaa0767ddf23e8fbec972fb2518e}{project}} (const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}} \&vector, const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&onto, bool onto\+Normalized=false) -\/$>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ std::\+common\+\_\+type\+\_\+t$<$ T, U $>$ $>$
@@ -135,9 +132,11 @@ requires Strict\+Arithmetic$<$T$>$}\\static auto \doxymbox{\hyperlink{structfgm_
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
+\Hypertarget{structfgm_1_1_vector4_d_addb8e8d5230f8d5ebc0ea7be50afa71d}\label{structfgm_1_1_vector4_d_addb8e8d5230f8d5ebc0ea7be50afa71d} 
 \begin{tabbing}
 xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
 union \{\\
+\Hypertarget{unionfgm_1_1_vector4_d_1_1_0d274112142060366306164261376062266171331340111010_a81d47a75864d4c473a7c3731087bca7a}\label{unionfgm_1_1_vector4_d_1_1_0d274112142060366306164261376062266171331340111010_a81d47a75864d4c473a7c3731087bca7a} 
 \>struct \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5b123e1cdf3d7c5888546b71afec4c25}{x}}\\
 \>\>\>{\em X-\/axis component. }\\
@@ -148,6 +147,7 @@ union \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad5362e4ee59aa8dda9630e3983786d76}{w}}\\
 \>\>\>{\em W-\/axis (homogeneous) component. }\\
 \>\} \\
+\Hypertarget{unionfgm_1_1_vector4_d_1_1_0d274112142060366306164261376062266171331340111010_a83ccfd945db35d14cde7f0a813b21f87}\label{unionfgm_1_1_vector4_d_1_1_0d274112142060366306164261376062266171331340111010_a83ccfd945db35d14cde7f0a813b21f87} 
 \>struct \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector4_d_adc81716bd01a67f5f165bf8f6fed8f2d}{r}}\\
 \>\>\>{\em Red channel. }\\
@@ -158,6 +158,7 @@ union \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector4_d_aa0fd2e69319c8955c34c42e8ada7c610}{a}}\\
 \>\>\>{\em Alpha channel. }\\
 \>\} \\
+\Hypertarget{unionfgm_1_1_vector4_d_1_1_0d274112142060366306164261376062266171331340111010_adc81798ae6bb78198c39faaedbaf8aff}\label{unionfgm_1_1_vector4_d_1_1_0d274112142060366306164261376062266171331340111010_adc81798ae6bb78198c39faaedbaf8aff} 
 \>struct \{\\
 \>\>T \doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae2ea654678712d12d87ffeb1a9dd81a7}{s}}\\
 \>\>\>{\em S-\/coordinate. }\\
@@ -212,20 +213,9 @@ Definition at line \doxymbox{\hyperlink{_vector4_d_8h_source_l00039}{39}} of fil
 \label{doc-constructors}
 \Hypertarget{structfgm_1_1_vector4_d_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}\index{fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}!Vector4D@{Vector4D}}
-\index{Vector4D@{Vector4D}!fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58} 
-template$<$Arithmetic T$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+\+Vector4D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-
-
-Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with zeros. 
-
 \Hypertarget{structfgm_1_1_vector4_d_acd73671256c968397135a7d020798fb5}\index{fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}!Vector4D@{Vector4D}}
 \index{Vector4D@{Vector4D}!fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_acd73671256c968397135a7d020798fb5} 
 template$<$Arithmetic T$>$ \\
 \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+\+Vector4D (\begin{DoxyParamCaption}\item[{T}]{v1}{, }\item[{T}]{v2}{, }\item[{T}]{v3}{, }\item[{T}]{v4}{}\end{DoxyParamCaption})}
@@ -247,7 +237,7 @@ Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with passed in 
 \end{DoxyParams}
 \Hypertarget{structfgm_1_1_vector4_d_ada0d9b9e99b307416a7fc8aa7e720101}\index{fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}!Vector4D@{Vector4D}}
 \index{Vector4D@{Vector4D}!fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_ada0d9b9e99b307416a7fc8aa7e720101} 
 template$<$Arithmetic T$>$ \\
 \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+\+Vector4D (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$}]{vec1}{, }\item[{\doxymbox{\hyperlink{structfgm_1_1_vector2_d}{Vector2D}}$<$ T $>$}]{vec2}{}\end{DoxyParamCaption})}
@@ -260,12 +250,12 @@ Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with 2 \doxylin
 \begin{DoxyParams}[1]{Parameters}
 \doxymbox{\texttt{in}}  & {\em vec1} & First two entries of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em \doxylink{namespacefgm_ad1013de6db597b4a2906d9e5d5c3ad78}{vec2}} & Last two entries of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}. \\
+\doxymbox{\texttt{in}}  & {\em vec2} & Last two entries of \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{structfgm_1_1_vector4_d_aced91197636499770e3e4646aee297c7}\index{fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}!Vector4D@{Vector4D}}
 \index{Vector4D@{Vector4D}!fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_aced91197636499770e3e4646aee297c7} 
 template$<$Arithmetic T$>$ \\
 \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+\+Vector4D (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ T $>$}]{vec}{, }\item[{T}]{v}{}\end{DoxyParamCaption})}
@@ -283,7 +273,7 @@ Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with 1 \doxylin
 \end{DoxyParams}
 \Hypertarget{structfgm_1_1_vector4_d_ab6233f7754736746b9aed0786673cccb}\index{fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}!Vector4D@{Vector4D}}
 \index{Vector4D@{Vector4D}!fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_ab6233f7754736746b9aed0786673cccb} 
 template$<$Arithmetic T$>$ \\
 \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+\+Vector4D (\begin{DoxyParamCaption}\item[{T}]{v}{, }\item[{\doxymbox{\hyperlink{structfgm_1_1_vector3_d}{Vector3D}}$<$ T $>$}]{vec}{}\end{DoxyParamCaption})}
@@ -301,7 +291,7 @@ Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} with 1 T value 
 \end{DoxyParams}
 \Hypertarget{structfgm_1_1_vector4_d_a958e6f669722db55755013426c6c9217}\index{fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}!Vector4D@{Vector4D}}
 \index{Vector4D@{Vector4D}!fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+\doxysubsubsection{\texorpdfstring{Vector4D()}{Vector4D()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_a958e6f669722db55755013426c6c9217} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
@@ -332,7 +322,7 @@ Initialize \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} from another \d
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_a405e62ee50fc4f04cd92dcf3dc0eab50} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+all\+Eq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{vecB}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~\doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}}~:\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+all\+Eq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{vecB}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~DOUBLE\+\_\+EPSILON~:\+FLOAT\+\_\+EPSILON}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -352,7 +342,7 @@ To obtain a component-\/wise boolean mask, use \doxylink{structfgm_1_1_vector4_d
 \hline
 \doxymbox{\texttt{in}}  & {\em vecB} & Second vector to compare against. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to \doxylink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON} or \doxylink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON} based on type promotion. \\
+\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to DOUBLE\+\_\+\+EPSILON or FLOAT\+\_\+\+EPSILON based on type promotion. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -364,7 +354,7 @@ True if all components are equivalent within {\ttfamily epsilon}.
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_a5eb6b3dd44e398a21afd20010c43207f} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+all\+Eq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{other}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~\doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}}~:\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}}}\end{DoxyParamCaption}) const}
+bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+all\+Eq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{other}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~DOUBLE\+\_\+EPSILON~:\+FLOAT\+\_\+EPSILON}}\end{DoxyParamCaption}) const}
 
 
 
@@ -382,7 +372,7 @@ To obtain a component-\/wise boolean mask, use \doxylink{structfgm_1_1_vector4_d
 \begin{DoxyParams}[1]{Parameters}
 \doxymbox{\texttt{in}}  & {\em other} & The vector to compare against. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to \doxylink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON} or \doxylink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON} based on type promotion. \\
+\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to DOUBLE\+\_\+\+EPSILON or FLOAT\+\_\+\+EPSILON based on type promotion. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -394,7 +384,7 @@ True if all components are equivalent within {\ttfamily epsilon}.
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_a12c51f95c065b2eb8726a164e88fe7cf} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+all\+Neq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{vecB}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~\doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}}~:\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+all\+Neq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{vecB}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~DOUBLE\+\_\+EPSILON~:\+FLOAT\+\_\+EPSILON}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -414,7 +404,7 @@ To obtain a component-\/wise boolean mask, use \doxylink{structfgm_1_1_vector4_d
 \hline
 \doxymbox{\texttt{in}}  & {\em vecB} & Second vector to compare against. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to \doxylink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON} or \doxylink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON} based on type promotion. \\
+\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to DOUBLE\+\_\+\+EPSILON or FLOAT\+\_\+\+EPSILON based on type promotion. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -426,7 +416,7 @@ True if any of the components are not equivalent within the default epsilon.
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_ae33e6541a59d178deb58338339c7c94c} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+all\+Neq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{other}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~\doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}}~:\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}}}\end{DoxyParamCaption}) const}
+bool \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+all\+Neq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{other}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~DOUBLE\+\_\+EPSILON~:\+FLOAT\+\_\+EPSILON}}\end{DoxyParamCaption}) const}
 
 
 
@@ -444,7 +434,7 @@ To obtain a component-\/wise boolean mask, use \doxylink{structfgm_1_1_vector4_d
 \begin{DoxyParams}[1]{Parameters}
 \doxymbox{\texttt{in}}  & {\em other} & The vector to compare against. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to \doxylink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON} or \doxylink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON} based on type promotion. \\
+\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to DOUBLE\+\_\+\+EPSILON or FLOAT\+\_\+\+EPSILON based on type promotion. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -515,7 +505,7 @@ The scalar dot product of the two vectors.
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_a6f4e894d3e54df1048dd5742ce38f6f8} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+eq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{vecB}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~\doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}}~:\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+eq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{vecB}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~DOUBLE\+\_\+EPSILON~:\+FLOAT\+\_\+EPSILON}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -532,7 +522,7 @@ Perform component-\/wise equality check. Compares each component pair and return
 \hline
 \doxymbox{\texttt{in}}  & {\em vecB} & Second vector to compare against. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to \doxylink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON} or \doxylink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON} based on type promotion. \\
+\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to DOUBLE\+\_\+\+EPSILON or FLOAT\+\_\+\+EPSILON based on type promotion. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -544,7 +534,7 @@ A \doxylink{structfgm_1_1_vector4_d}{Vector4\+D$<$bool$>$} mask containing the r
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_a2e7ec13fa642ff5f2a62c46e6d424fc3} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+eq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{other}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~\doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}}~:\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}}}\end{DoxyParamCaption}) const}
+\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+eq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{other}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~DOUBLE\+\_\+EPSILON~:\+FLOAT\+\_\+EPSILON}}\end{DoxyParamCaption}) const}
 
 
 
@@ -562,7 +552,7 @@ To obtain a single scalar result, use \doxylink{structfgm_1_1_vector4_d_a5eb6b3d
 \begin{DoxyParams}[1]{Parameters}
 \doxymbox{\texttt{in}}  & {\em other} & The vector to compare against. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to \doxylink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON} or \doxylink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON} based on type promotion. \\
+\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to DOUBLE\+\_\+\+EPSILON or FLOAT\+\_\+\+EPSILON based on type promotion. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -789,14 +779,14 @@ A \doxylink{structfgm_1_1_vector4_d}{Vector4\+D$<$bool$>$} mask containing the r
 \doxysubsubsection{\texorpdfstring{mag()}{mag()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_af0b8305cc8e13c7c922d09e2ae67af2f} 
 template$<$Arithmetic T$>$ \\
-\doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+mag (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+\doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+mag (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
 Calculate the magnitude (length) of the vector. Computes the Euclidean norm:\+ $ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} $. 
 
 \begin{DoxyNote}{Note}
-To avoid precision loss, integral types are promoted to their corresponding floating-\/point representation via \doxylink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}.
+To avoid precision loss, integral types are promoted to their corresponding floating-\/point representation via \doxylink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}.
 \end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 The scalar magnitude of the vector. 
@@ -806,14 +796,14 @@ The scalar magnitude of the vector.
 \doxysubsubsection{\texorpdfstring{mag()}{mag()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_ab48dce53469ebab7fe4944a3947aee5f} 
 template$<$Arithmetic T$>$ \\
-\doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+mag (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+mag (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 Calculate the magnitude (length) of the vector. Computes the Euclidean norm:\+ $ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} $.    Static wrapper that computes $ \|\mathbf{vec}\| $. 
 
 \begin{DoxyNote}{Note}
-To avoid precision loss, integral types are promoted to their corresponding floating-\/point representation via \doxylink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}.
+To avoid precision loss, integral types are promoted to their corresponding floating-\/point representation via \doxylink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}.
 \end{DoxyNote}
 
 \begin{DoxyParams}[1]{Parameters}
@@ -829,7 +819,7 @@ The scalar magnitude of {\ttfamily vec}.
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_a1360d5870c95688362e2b754dc32578e} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+neq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{vecB}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~\doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}}~:\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+neq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vecA}{, }\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{vecB}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~DOUBLE\+\_\+EPSILON~:\+FLOAT\+\_\+EPSILON}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -846,7 +836,7 @@ Perform component-\/wise inequality check. Compares each component pair and retu
 \hline
 \doxymbox{\texttt{in}}  & {\em vecB} & Second vector to compare against. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to \doxylink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON} or \doxylink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON} based on type promotion. \\
+\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to DOUBLE\+\_\+\+EPSILON or FLOAT\+\_\+\+EPSILON based on type promotion. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -858,7 +848,7 @@ A \doxylink{structfgm_1_1_vector4_d}{Vector4\+D$<$bool$>$} mask containing the r
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_ad277e47d8c40e696323a471b7b2d102a} 
 template$<$Arithmetic T$>$ \\
 template$<$Arithmetic U$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+neq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{other}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~\doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON}}~:\+\doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON}}}}\end{DoxyParamCaption}) const}
+\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ bool $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+neq (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ U $>$ \&}]{other}{, }\item[{double}]{epsilon}{ = {\ttfamily (std:\+:\+is\+\_\+same\+\_\+v$<$~T,~double~$>$\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}std:\+:\+is\+\_\+same\+\_\+v$<$~U,~double~$>$)~?~DOUBLE\+\_\+EPSILON~:\+FLOAT\+\_\+EPSILON}}\end{DoxyParamCaption}) const}
 
 
 
@@ -876,7 +866,7 @@ To obtain a single scalar result, use \doxylink{structfgm_1_1_vector4_d_ae33e654
 \begin{DoxyParams}[1]{Parameters}
 \doxymbox{\texttt{in}}  & {\em other} & The vector to compare against. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to \doxylink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{DOUBLE\+\_\+\+EPSILON} or \doxylink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{FLOAT\+\_\+\+EPSILON} based on type promotion. \\
+\doxymbox{\texttt{in}}  & {\em epsilon} & Maximum allowable difference for {\ttfamily std::\+floating\+\_\+point} types. Defaults to DOUBLE\+\_\+\+EPSILON or FLOAT\+\_\+\+EPSILON based on type promotion. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -887,14 +877,14 @@ A \doxylink{structfgm_1_1_vector4_d}{Vector4\+D$<$bool$>$} mask containing the r
 \doxysubsubsection{\texorpdfstring{normalize()}{normalize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_aec8569c71e7779762f308d8fd4bf83f6} 
 template$<$Arithmetic T$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+normalize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+normalize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
 Calculate the normalized (unit) form of the vector. Computes the unit vector in the same direction:\+ $ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} $. 
 
 \begin{DoxyNote}{Note}
-To maintain precision, result components are promoted to their corresponding floating-\/point representation via \doxylink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}. 
+To maintain precision, result components are promoted to their corresponding floating-\/point representation via \doxylink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}. 
 \end{DoxyNote}
 \begin{DoxyWarning}{Warning}
 Does not check for zero-\/length vectors. \doxylink{structfgm_1_1_vector4_d_af0b8305cc8e13c7c922d09e2ae67af2f}{mag()} must be non-\/zero.
@@ -907,14 +897,14 @@ A new \doxylink{structfgm_1_1_vector4_d}{Vector4D} with a magnitude of 1.\+0.
 \doxysubsubsection{\texorpdfstring{normalize()}{normalize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_ac8c105223a1c9ac8d37c55b7265c4ac8} 
 template$<$Arithmetic T$>$ \\
-\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+normalize (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}}$<$ T $>$ $>$ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$::\+normalize (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structfgm_1_1_vector4_d_a0f7b1356fda58fa9b25eab0f6cd21f58}{Vector4D}}$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 Calculate the normalized (unit) form of the vector. Computes the unit vector in the same direction:\+ $ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} $.    Static wrapper that computes the unit vector $ \mathbf{\hat{v}} $. 
 
 \begin{DoxyNote}{Note}
-To maintain precision, result components are promoted to their corresponding floating-\/point representation via \doxylink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}.
+To maintain precision, result components are promoted to their corresponding floating-\/point representation via \doxylink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{Magnitude}.
 \end{DoxyNote}
 
 \begin{DoxyParams}[1]{Parameters}
@@ -936,7 +926,7 @@ template$<$Arithmetic T$>$ \\
 Perform component-\/wise logical NOT. Inverts each boolean component and returns a new \doxylink{structfgm_1_1_vector4_d}{Vector4\+D$<$bool$>$}. 
 
 \begin{DoxyNote}{Note}
-Only available for \doxylink{namespacefgm_ab10b0cdd0e7cb4bdde903fb3ed21953a}{b\+Vec4} and vectors with {\ttfamily bool} \doxylink{structfgm_1_1_vector4_d_a5a773db3c567b1dbd026dcd6321f93ae}{value\+\_\+type}.
+Only available for \doxylink{_vector4_d_8h_ab10b0cdd0e7cb4bdde903fb3ed21953a}{b\+Vec4} and vectors with {\ttfamily bool} value\+\_\+type.
 \end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 A \doxylink{structfgm_1_1_vector4_d}{Vector4\+D$<$bool$>$} with inverted values. 
@@ -981,7 +971,7 @@ template$<$Arithmetic T$>$ \\
 Perform component-\/wise logical AND. Computes the conjunction of each component pair. 
 
 \begin{DoxyNote}{Note}
-Only available for \doxylink{namespacefgm_ab10b0cdd0e7cb4bdde903fb3ed21953a}{b\+Vec4} and vectors with {\ttfamily bool} \doxylink{structfgm_1_1_vector4_d_a5a773db3c567b1dbd026dcd6321f93ae}{value\+\_\+type}.
+Only available for \doxylink{_vector4_d_8h_ab10b0cdd0e7cb4bdde903fb3ed21953a}{b\+Vec4} and vectors with {\ttfamily bool} value\+\_\+type.
 \end{DoxyNote}
 
 \begin{DoxyParams}[1]{Parameters}
@@ -1315,7 +1305,7 @@ template$<$Arithmetic T$>$ \\
 Perform component-\/wise logical OR. Computes the disjunction of each component pair. 
 
 \begin{DoxyNote}{Note}
-Only available for \doxylink{namespacefgm_ab10b0cdd0e7cb4bdde903fb3ed21953a}{b\+Vec4} and vectors with {\ttfamily bool} \doxylink{structfgm_1_1_vector4_d_a5a773db3c567b1dbd026dcd6321f93ae}{value\+\_\+type}.
+Only available for \doxylink{_vector4_d_8h_ab10b0cdd0e7cb4bdde903fb3ed21953a}{b\+Vec4} and vectors with {\ttfamily bool} value\+\_\+type.
 \end{DoxyNote}
 
 \begin{DoxyParams}[1]{Parameters}
@@ -1482,10 +1472,6 @@ Definition at line \doxymbox{\hyperlink{_vector4_d_8h_source_l00856}{856}} of fi
 \label{doc-variable-members}
 \Hypertarget{structfgm_1_1_vector4_d_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{structfgm_1_1_vector4_d_addb8e8d5230f8d5ebc0ea7be50afa71d}\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
-{\footnotesize\ttfamily \label{structfgm_1_1_vector4_d_addb8e8d5230f8d5ebc0ea7be50afa71d} 
-union  \{ ... \}  \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D}}$<$ T $>$}
-
 \Hypertarget{structfgm_1_1_vector4_d_aa0fd2e69319c8955c34c42e8ada7c610}\index{fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}!a@{a}}
 \index{a@{a}!fgm::Vector4D$<$ T $>$@{fgm::Vector4D$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{a}{a}}

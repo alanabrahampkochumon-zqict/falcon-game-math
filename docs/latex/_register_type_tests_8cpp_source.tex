@@ -15,7 +15,7 @@
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00019}00019\ }
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00020}00020\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00021}\doxymbox{\hyperlink{class_register_map_test}{00021}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_register_map_test}{RegisterMapTest}}:\ \textcolor{keyword}{public}\ ::testing::Test\{\};}
-\DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00022}\doxymbox{\hyperlink{_register_type_tests_8cpp_a40f1eedf2b1a34a7a841d8bc8ebf19ce}{00022}}\ \doxymbox{\hyperlink{_register_type_tests_8cpp_a40f1eedf2b1a34a7a841d8bc8ebf19ce}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_register_map_test}{RegisterMapTest}},\ \doxymbox{\hyperlink{_s_i_m_d_test_setup_8h_ab11ade80b6fec4f85a9c4def5a1d1992}{SupportedSIMDIntegralTypes}});}
+\DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00022}00022\ TYPED\_TEST\_SUITE(\doxymbox{\hyperlink{class_register_map_test}{RegisterMapTest}},\ SupportedSIMDIntegralTypes);}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00023}00023\ }
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00024}00024\ }
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00025}00025\ \textcolor{comment}{/**************************************}}
@@ -24,7 +24,7 @@
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00028}00028\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00029}00029\ \textcolor{comment}{\ **************************************/}}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00030}00030\ }
-\DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00031}\doxymbox{\hyperlink{_register_type_tests_8cpp_a7b3786e6b232179909436f72e16eaf97}{00031}}\ TEST(\doxymbox{\hyperlink{class_register_map_test}{RegisterMapTest}},\ FloatMapsToCorrectSIMDIntrinsics)}
+\DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00031}00031\ TEST(\doxymbox{\hyperlink{class_register_map_test}{RegisterMapTest}},\ FloatMapsToCorrectSIMDIntrinsics)}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00032}00032\ \{}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ Float\ with\ alignment\ of\ 16\ correctly\ maps\ to\ \_\_m128}}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00034}00034\ \ \ \ \ ::testing::StaticAssertTypeEq<falcon::simd::RegisterMap<float,\ 16>::type,\ \_\_m128>();}
@@ -36,7 +36,7 @@
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00040}00040\ \ \ \ \ ::testing::StaticAssertTypeEq<falcon::simd::RegisterMap<float,\ 64>::type,\ \_\_m512>();}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00041}00041\ \}}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00042}00042\ }
-\DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00043}\doxymbox{\hyperlink{_register_type_tests_8cpp_a4cefa64a297d3c62566f373a714c87a2}{00043}}\ TEST(\doxymbox{\hyperlink{class_register_map_test}{RegisterMapTest}},\ DoubleMapsToCorrectSIMDIntrinsics)}
+\DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00043}00043\ TEST(\doxymbox{\hyperlink{class_register_map_test}{RegisterMapTest}},\ DoubleMapsToCorrectSIMDIntrinsics)}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00044}00044\ \{}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{comment}{//\ Double\ with\ alignment\ of\ 16\ correctly\ maps\ to\ \_\_m128}}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00046}00046\ \ \ \ \ ::testing::StaticAssertTypeEq<falcon::simd::RegisterMap<double,\ 16>::type,\ \_\_m128d>();}
@@ -48,7 +48,7 @@
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00052}00052\ \ \ \ \ ::testing::StaticAssertTypeEq<falcon::simd::RegisterMap<double,\ 64>::type,\ \_\_m512d>();}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00053}00053\ \}}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00054}00054\ }
-\DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00055}\doxymbox{\hyperlink{_register_type_tests_8cpp_ae7e456ed66544534ab000ad3eb043b86}{00055}}\ TYPED\_TEST(\doxymbox{\hyperlink{class_register_map_test}{RegisterMapTest}},\ IntegralsMapToCorrectSIMDIntrinsics)}
+\DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00055}00055\ TYPED\_TEST(\doxymbox{\hyperlink{class_register_map_test}{RegisterMapTest}},\ IntegralsMapToCorrectSIMDIntrinsics)}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00056}00056\ \{}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{comment}{//\ Double\ with\ alignment\ of\ 16\ correctly\ maps\ to\ \_\_m128}}
 \DoxyCodeLine{\Hypertarget{_register_type_tests_8cpp_source_l00058}00058\ \ \ \ \ ::testing::StaticAssertTypeEq<typename\ falcon::simd::RegisterMap<TypeParam,\ 16>::type,\ \_\_m128i>();}

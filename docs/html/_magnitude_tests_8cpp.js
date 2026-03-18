@@ -1,9 +1,9 @@
 var _magnitude_tests_8cpp =
 [
-    [ "Vector4DMagnitude&lt; T &gt;", "class_vector4_d_magnitude.html", "class_vector4_d_magnitude" ],
-    [ "Vector4DUncleanMagnitude&lt; T &gt;", "class_vector4_d_unclean_magnitude.html", "class_vector4_d_unclean_magnitude" ],
-    [ "Vector4DNormalization&lt; T &gt;", "class_vector4_d_normalization.html", "class_vector4_d_normalization" ],
-    [ "Vector4DZeroNormalization&lt; T &gt;", "class_vector4_d_zero_normalization.html", "class_vector4_d_zero_normalization" ],
+    [ "Vector4DMagnitude&lt; T &gt;", "class_vector4_d_magnitude.html", null ],
+    [ "Vector4DUncleanMagnitude&lt; T &gt;", "class_vector4_d_unclean_magnitude.html", null ],
+    [ "Vector4DNormalization&lt; T &gt;", "class_vector4_d_normalization.html", null ],
+    [ "Vector4DZeroNormalization&lt; T &gt;", "class_vector4_d_zero_normalization.html", null ],
     [ "TYPED_TEST_SUITE", "_magnitude_tests_8cpp.html#ad513e09b6267f7dcfc5ddff3617f6f13", null ],
     [ "TYPED_TEST_SUITE", "_magnitude_tests_8cpp.html#ae93dc8e95e82f4f60048608c94d9ce47", null ],
     [ "TYPED_TEST_SUITE", "_magnitude_tests_8cpp.html#ae10dbcc9538462dc5b07ef215bc7533d", null ],

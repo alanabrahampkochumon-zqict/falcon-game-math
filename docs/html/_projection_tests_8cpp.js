@@ -1,7 +1,7 @@
 var _projection_tests_8cpp =
 [
-    [ "Vector4DProjection&lt; T &gt;", "class_vector4_d_projection.html", "class_vector4_d_projection" ],
-    [ "Vector4DRejection&lt; T &gt;", "class_vector4_d_rejection.html", "class_vector4_d_rejection" ],
+    [ "Vector4DProjection&lt; T &gt;", "class_vector4_d_projection.html", null ],
+    [ "Vector4DRejection&lt; T &gt;", "class_vector4_d_rejection.html", null ],
     [ "TYPED_TEST_SUITE", "_projection_tests_8cpp.html#a06bd42c85b011f8b8776edf2a61cd3a4", null ],
     [ "TYPED_TEST_SUITE", "_projection_tests_8cpp.html#a85d76c209eb46b92afb6fca4bdcb5d65", null ],
     [ "Vector4DProjection_MixedTypeProjectionPromotesType", "group___f_g_m___vec4___proj.html#ga885ce49a7546499ce3e7dd308607316c", null ],

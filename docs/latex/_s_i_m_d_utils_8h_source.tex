@@ -9,17 +9,17 @@
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <cstddef>}}
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00015}00015\ }
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00016}00016\ }
-\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00017}00017\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacefalcon_1_1simd}{falcon::simd}}}
+\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00017}00017\ \textcolor{keyword}{namespace\ }falcon::simd}
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00018}00018\ \{}
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00019}\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{00019}}\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{PackingParams}}}
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00020}00020\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00021}\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_ad3242adfa4369243c833ed2eebef2729}{00021}}\ \ \ \ \ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_ad3242adfa4369243c833ed2eebef2729}{alignedByteSize}};}
-\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00022}\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_a2dbbca11ffb213f8ad8c4832b08ad907}{00022}}\ \ \ \ \ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_a2dbbca11ffb213f8ad8c4832b08ad907}{padding}};}
-\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00023}\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_a24ed9462192143b18dd4357ac93c4fab}{00023}}\ \ \ \ \ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_a24ed9462192143b18dd4357ac93c4fab}{packedRegisterWidth}};}
-\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00024}\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_ab25593bee1441038ff788942ed75bc87}{00024}}\ \ \ \ \ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_ab25593bee1441038ff788942ed75bc87}{registerCount}};}
+\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ std::size\_t\ alignedByteSize;}
+\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ std::size\_t\ padding;}
+\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ std::size\_t\ packedRegisterWidth;}
+\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ std::size\_t\ registerCount;}
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00025}00025\ \ \ \ \ \};}
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00026}00026\ }
-\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00035}\doxymbox{\hyperlink{namespacefalcon_1_1simd_a94fb059eb5d87491f16bc160b8fe9411}{00035}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{PackingParams}}\ \doxymbox{\hyperlink{namespacefalcon_1_1simd_a94fb059eb5d87491f16bc160b8fe9411}{calculatePackedSize}}(std::size\_t\ totalByteSize,\ std::size\_t\ maxAlignAs)}
+\DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00035}\doxymbox{\hyperlink{_s_i_m_d_utils_8h_a94fb059eb5d87491f16bc160b8fe9411}{00035}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{PackingParams}}\ \doxymbox{\hyperlink{_s_i_m_d_utils_8h_a94fb059eb5d87491f16bc160b8fe9411}{calculatePackedSize}}(std::size\_t\ totalByteSize,\ std::size\_t\ maxAlignAs)}
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00036}00036\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (totalByteSize\ <\ 16)}
 \DoxyCodeLine{\Hypertarget{_s_i_m_d_utils_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{PackingParams}}\{\ 16,\ 16\ -\/\ totalByteSize,\ 16,\ 1\ \};}

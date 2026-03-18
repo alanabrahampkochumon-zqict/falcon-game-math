@@ -102,57 +102,49 @@ $(function(){initNavTree('vector3d_2_access_and_mutation_tests_8cpp_source.html'
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *                                    *</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> **************************************/</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="vector3d_2_access_and_mutation_tests_8cpp.html#aee0a2c362c0ca9440a2663bc2715035d">   20</a></span>TEST(Vector3DAccess, AccessibleAsXYZ)</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>TEST(Vector3DAccess, AccessibleAsXYZ)</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="comment">// Given a vector with arbitrary values passed in</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector3_d.html">fgm::Vector3D</a> vec(3.0f, 1.0f, 6.0f);</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="comment">// Then, it&#39;s elements are accessible as x, y, z</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    EXPECT_FLOAT_EQ(3.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a75473633e1dd4e97dc42d21a522a00b9">x</a>);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    EXPECT_FLOAT_EQ(1.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#ada5658591533a90f66bb408cf4e7fc3d">y</a>);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    EXPECT_FLOAT_EQ(6.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a018396b853d9df4e2bb48d8b65e2c450">z</a>);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    EXPECT_FLOAT_EQ(3.0f, vec.x);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    EXPECT_FLOAT_EQ(1.0f, vec.y);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    EXPECT_FLOAT_EQ(6.0f, vec.z);</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
-</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="vector3d_2_access_and_mutation_tests_8cpp.html#ad83c8f4256632951973ad97135b24914">   31</a></span>TEST(Vector3DAccess, AccessibleAsSTP)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>TEST(Vector3DAccess, AccessibleAsSTP)</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">// Given a vector with arbitrary values passed in</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector3_d.html">fgm::Vector3D</a> vec(3.0f, 1.0f, 6.0f);</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">// Then, it&#39;s elements are accessible as s, t, p</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    EXPECT_FLOAT_EQ(3.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a3e2efc3ee449c89a88ddeac6540c4982">s</a>);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    EXPECT_FLOAT_EQ(1.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a10056b4372dd4802ed419c14a47fb263">t</a>);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    EXPECT_FLOAT_EQ(6.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a4f42e62dfc4b86140c809af64876c734">p</a>);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    EXPECT_FLOAT_EQ(3.0f, vec.s);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    EXPECT_FLOAT_EQ(1.0f, vec.t);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    EXPECT_FLOAT_EQ(6.0f, vec.p);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
-</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="vector3d_2_access_and_mutation_tests_8cpp.html#a98c247fb2a469daaceed569cc0311342">   42</a></span>TEST(Vector3DAccess, AccessibleAsRGB)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>TEST(Vector3DAccess, AccessibleAsRGB)</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>{</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">// Given a vector with arbitrary values passed in</span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector3_d.html">fgm::Vector3D</a> vec(3.0f, 1.0f, 6.0f);</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">// Then, it&#39;s elements are accessible as r, g, b</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    EXPECT_FLOAT_EQ(3.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#aba5ecb03bd7007ab7f08772041d46177">r</a>);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    EXPECT_FLOAT_EQ(1.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a455fad21e53cdda2065dc5248d0e3a1a">g</a>);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    EXPECT_FLOAT_EQ(6.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a89f751945443bd026c361cded5e69fa6">b</a>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    EXPECT_FLOAT_EQ(3.0f, vec.r);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    EXPECT_FLOAT_EQ(1.0f, vec.g);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    EXPECT_FLOAT_EQ(6.0f, vec.b);</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
-</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="vector3d_2_access_and_mutation_tests_8cpp.html#a07b88123e4d507b9a736fb7b54f7eb39">   53</a></span>TEST(Vector3DAccess, AccessibleAsArray)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>TEST(Vector3DAccess, AccessibleAsArray)</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">// Given a vector with arbitrary values passed in</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector3_d.html">fgm::Vector3D</a> vec(3.0f, 1.0f, 6.0f);</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="comment">// Then, it&#39;s elements are accessible as array elements</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    EXPECT_FLOAT_EQ(3.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#aa1972950d2c93a243f45a009ab0ef13f">elements</a>[0]);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    EXPECT_FLOAT_EQ(1.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#aa1972950d2c93a243f45a009ab0ef13f">elements</a>[1]);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    EXPECT_FLOAT_EQ(6.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#aa1972950d2c93a243f45a009ab0ef13f">elements</a>[2]);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    EXPECT_FLOAT_EQ(3.0f, vec.elements[0]);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    EXPECT_FLOAT_EQ(1.0f, vec.elements[1]);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    EXPECT_FLOAT_EQ(6.0f, vec.elements[2]);</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
-</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">/**************************************</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> *                                    *</span></div>
@@ -161,8 +153,7 @@ $(function(){initNavTree('vector3d_2_access_and_mutation_tests_8cpp_source.html'
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> **************************************/</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="vector3d_2_access_and_mutation_tests_8cpp.html#a2279f1330e7895dc76d2c8aed4a07300">   71</a></span>TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZ)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZ)</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>{</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="comment">// Given a default initialized vector</span></div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_struct" href="structfgm_1_1_vector3_d.html">fgm::Vector3D&lt;float&gt;</a> vec;</div>
@@ -177,10 +168,8 @@ $(function(){initNavTree('vector3d_2_access_and_mutation_tests_8cpp_source.html'
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    EXPECT_FLOAT_EQ(1.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#ada5658591533a90f66bb408cf4e7fc3d">y</a>);</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    EXPECT_FLOAT_EQ(6.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a018396b853d9df4e2bb48d8b65e2c450">z</a>);</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
-</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="vector3d_2_access_and_mutation_tests_8cpp.html#a1b3e6630128d1628fd272f9987c6fb0e">   87</a></span>TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTP)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTP)</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>{</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="comment">// Given a default initialized vector</span></div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_struct" href="structfgm_1_1_vector3_d.html">fgm::Vector3D&lt;float&gt;</a> vec;</div>
@@ -195,10 +184,8 @@ $(function(){initNavTree('vector3d_2_access_and_mutation_tests_8cpp_source.html'
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    EXPECT_FLOAT_EQ(1.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a10056b4372dd4802ed419c14a47fb263">t</a>);</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    EXPECT_FLOAT_EQ(6.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a4f42e62dfc4b86140c809af64876c734">p</a>);</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
-</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="foldopen" id="foldopen00103" data-start="{" data-end="}">
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="vector3d_2_access_and_mutation_tests_8cpp.html#a6a778528fe71b464baf7d743c48ee791">  103</a></span>TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGB)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGB)</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>{</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="comment">// Given a default initialized vector</span></div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_struct" href="structfgm_1_1_vector3_d.html">fgm::Vector3D&lt;float&gt;</a> vec;</div>
@@ -213,10 +200,8 @@ $(function(){initNavTree('vector3d_2_access_and_mutation_tests_8cpp_source.html'
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    EXPECT_FLOAT_EQ(1.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a455fad21e53cdda2065dc5248d0e3a1a">g</a>);</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    EXPECT_FLOAT_EQ(6.0f, vec.<a class="code hl_variable" href="structfgm_1_1_vector3_d.html#a89f751945443bd026c361cded5e69fa6">b</a>);</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
-</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="foldopen" id="foldopen00119" data-start="{" data-end="}">
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="vector3d_2_access_and_mutation_tests_8cpp.html#a34140e21fa4c93bbfe275d35888db120">  119</a></span>TEST(Vector3DMutation, ElementsCanBeMutatedUsingIndex)</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>TEST(Vector3DMutation, ElementsCanBeMutatedUsingIndex)</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>{</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="comment">// Given a vector initialization without parameters</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_struct" href="structfgm_1_1_vector3_d.html">fgm::Vector3D&lt;float&gt;</a> vec;</div>
@@ -231,7 +216,6 @@ $(function(){initNavTree('vector3d_2_access_and_mutation_tests_8cpp_source.html'
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    EXPECT_FLOAT_EQ(1.0f, vec[1]);</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    EXPECT_FLOAT_EQ(6.0f, vec[2]);</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
-</div>
 <div class="ttc" id="a_vector3_d_test_setup_8h_html"><div class="ttname"><a href="_vector3_d_test_setup_8h.html">Vector3DTestSetup.h</a></div><div class="ttdoc">Define test setups common to all Vector3D tests.</div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html"><div class="ttname"><a href="structfgm_1_1_vector3_d.html">fgm::Vector3D</a></div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00027">Vector3D.h:28</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html_a018396b853d9df4e2bb48d8b65e2c450"><div class="ttname"><a href="structfgm_1_1_vector3_d.html#a018396b853d9df4e2bb48d8b65e2c450">fgm::Vector3D::z</a></div><div class="ttdeci">T z</div><div class="ttdoc">Z-axis component.</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00038">Vector3D.h:38</a></div></div>
@@ -241,7 +225,6 @@ $(function(){initNavTree('vector3d_2_access_and_mutation_tests_8cpp_source.html'
 <div class="ttc" id="astructfgm_1_1_vector3_d_html_a4f42e62dfc4b86140c809af64876c734"><div class="ttname"><a href="structfgm_1_1_vector3_d.html#a4f42e62dfc4b86140c809af64876c734">fgm::Vector3D::p</a></div><div class="ttdeci">T p</div><div class="ttdoc">P-coordinate.</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00050">Vector3D.h:50</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html_a75473633e1dd4e97dc42d21a522a00b9"><div class="ttname"><a href="structfgm_1_1_vector3_d.html#a75473633e1dd4e97dc42d21a522a00b9">fgm::Vector3D::x</a></div><div class="ttdeci">T x</div><div class="ttdoc">X-axis component.</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00036">Vector3D.h:36</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html_a89f751945443bd026c361cded5e69fa6"><div class="ttname"><a href="structfgm_1_1_vector3_d.html#a89f751945443bd026c361cded5e69fa6">fgm::Vector3D::b</a></div><div class="ttdeci">T b</div><div class="ttdoc">Blue channel.</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00044">Vector3D.h:44</a></div></div>
-<div class="ttc" id="astructfgm_1_1_vector3_d_html_aa1972950d2c93a243f45a009ab0ef13f"><div class="ttname"><a href="structfgm_1_1_vector3_d.html#aa1972950d2c93a243f45a009ab0ef13f">fgm::Vector3D::elements</a></div><div class="ttdeci">T elements[dimension]</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00053">Vector3D.h:53</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html_aba5ecb03bd7007ab7f08772041d46177"><div class="ttname"><a href="structfgm_1_1_vector3_d.html#aba5ecb03bd7007ab7f08772041d46177">fgm::Vector3D::r</a></div><div class="ttdeci">T r</div><div class="ttdoc">Red channel.</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00042">Vector3D.h:42</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html_ada5658591533a90f66bb408cf4e7fc3d"><div class="ttname"><a href="structfgm_1_1_vector3_d.html#ada5658591533a90f66bb408cf4e7fc3d">fgm::Vector3D::y</a></div><div class="ttdeci">T y</div><div class="ttdoc">Y-axis component.</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00037">Vector3D.h:37</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -250,7 +233,7 @@ $(function(){initNavTree('vector3d_2_access_and_mutation_tests_8cpp_source.html'
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_4c62c5705c93f307172a2812dbe6d6e8.html">test-suite</a></li><li class="navelem"><a href="dir_721e3eff7b86a6dac1d7f8d9226b28bd.html">src</a></li><li class="navelem"><a href="dir_6b30b9d4464f22611f7803a12a4299c1.html">vectors</a></li><li class="navelem"><a href="dir_1f34e7cd060b80617cf450bc2d114f1f.html">vector3d</a></li><li class="navelem"><a href="vector3d_2_access_and_mutation_tests_8cpp.html">AccessAndMutationTests.cpp</a></li>
+    <li class="navelem"><b>test-suite</b></li><li class="navelem"><b>src</b></li><li class="navelem"><b>vectors</b></li><li class="navelem"><b>vector3d</b></li><li class="navelem"><a href="vector3d_2_access_and_mutation_tests_8cpp.html">AccessAndMutationTests.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

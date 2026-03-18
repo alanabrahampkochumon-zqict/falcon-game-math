@@ -1,41 +1,41 @@
 \doxysection{Simd\+Utils\+Tests.\+cpp}
 \hypertarget{_simd_utils_tests_8cpp_source}{}\label{_simd_utils_tests_8cpp_source}\index{test-\/suite/src/simd/SimdUtilsTests.cpp@{test-\/suite/src/simd/SimdUtilsTests.cpp}}
-\doxymbox{\hyperlink{_simd_utils_tests_8cpp}{Go to the documentation of this file.}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{_s_i_m_d_utils_8h}{SIMDUtils.h}}>}}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <gtest/gtest.h>}}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00003}00003\ }
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00004}\doxymbox{\hyperlink{struct_test_packing_params}{00004}}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_test_packing_params}{TestPackingParams}}}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00005}00005\ \{}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00006}\doxymbox{\hyperlink{struct_test_packing_params_a9a48d15ab7dc4cf9c12be58cafc36a5a}{00006}}\ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{struct_test_packing_params_a9a48d15ab7dc4cf9c12be58cafc36a5a}{totalByteSize}};}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00007}\doxymbox{\hyperlink{struct_test_packing_params_a96c48a5544f36ecfccda3c5b5798bec4}{00007}}\ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{struct_test_packing_params_a96c48a5544f36ecfccda3c5b5798bec4}{alignAs}};}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00008}\doxymbox{\hyperlink{struct_test_packing_params_af2423033cef92f1250947c666663ea58}{00008}}\ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{struct_test_packing_params_af2423033cef92f1250947c666663ea58}{expectedByteSize}};}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00009}\doxymbox{\hyperlink{struct_test_packing_params_a2b0c97ce1d09bb4d547d5fcdc9936045}{00009}}\ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{struct_test_packing_params_a2b0c97ce1d09bb4d547d5fcdc9936045}{padding}};}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00010}\doxymbox{\hyperlink{struct_test_packing_params_ad1d8e367ddab00c45a6f3f03fd030f0a}{00010}}\ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{struct_test_packing_params_ad1d8e367ddab00c45a6f3f03fd030f0a}{packedRegisterWidth}};}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00011}\doxymbox{\hyperlink{struct_test_packing_params_abd363341004b8c4edf86369606959cc9}{00011}}\ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{struct_test_packing_params_abd363341004b8c4edf86369606959cc9}{registerCount}};}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00006}00006\ \ \ \ \ std::size\_t\ totalByteSize;}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00007}00007\ \ \ \ \ std::size\_t\ alignAs;}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00008}00008\ \ \ \ \ std::size\_t\ expectedByteSize;}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00009}00009\ \ \ \ \ std::size\_t\ padding;}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00010}00010\ \ \ \ \ std::size\_t\ packedRegisterWidth;}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00011}00011\ \ \ \ \ std::size\_t\ registerCount;}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00012}00012\ \};}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00013}00013\ }
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00014}\doxymbox{\hyperlink{class_packed_size_calculator_tests}{00014}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_packed_size_calculator_tests}{PackedSizeCalculatorTests}}:\ \textcolor{keyword}{public}\ ::testing::TestWithParam<TestPackingParams>}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00015}00015\ \{}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00016}00016\ \};}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00017}00017\ }
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00018}\doxymbox{\hyperlink{_simd_utils_tests_8cpp_a40dffab99b3816669a6ab2c7ffe499f5}{00018}}\ \doxymbox{\hyperlink{_simd_utils_tests_8cpp_a40dffab99b3816669a6ab2c7ffe499f5}{TEST\_P}}(\doxymbox{\hyperlink{class_packed_size_calculator_tests}{PackedSizeCalculatorTests}},\ CalculatesCorrectSize)}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00018}00018\ TEST\_P(\doxymbox{\hyperlink{class_packed_size_calculator_tests}{PackedSizeCalculatorTests}},\ CalculatesCorrectSize)}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00019}00019\ \{}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{comment}{//\ Given\ an\ arbitrary\ data\ type\ size\ and\ total\ byte\ size}}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ [totalByteSize,\ alignAs,\ expectedByteSize,\ expectedPadding,\ packedRegisterWidth,\ registerCount]\ =}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00022}00022\ \ \ \ \ \ \ \ \ GetParam();}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00023}00023\ }
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00024}00024\ \ \ \ \ \textcolor{comment}{//\ When\ packed\ size\ is\ calculated}}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00025}00025\ \ \ \ \ \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{falcon::simd::PackingParams}}\ packingParams\ =\ \doxymbox{\hyperlink{namespacefalcon_1_1simd_a94fb059eb5d87491f16bc160b8fe9411}{falcon::simd::calculatePackedSize}}(totalByteSize,\ alignAs);}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00025}00025\ \ \ \ \ \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{falcon::simd::PackingParams}}\ packingParams\ =\ \doxymbox{\hyperlink{_s_i_m_d_utils_8h_a94fb059eb5d87491f16bc160b8fe9411}{falcon::simd::calculatePackedSize}}(totalByteSize,\ alignAs);}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00026}00026\ }
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ It\ gives\ the\ nearest\ packed\ size\ and\ padding}}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00028}00028\ \ \ \ \ EXPECT\_EQ(expectedByteSize,\ packingParams.\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_ad3242adfa4369243c833ed2eebef2729}{alignedByteSize}});}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00029}00029\ \ \ \ \ EXPECT\_EQ(expectedPadding,\ packingParams.\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_a2dbbca11ffb213f8ad8c4832b08ad907}{padding}});}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00030}00030\ \ \ \ \ EXPECT\_EQ(packedRegisterWidth,\ packingParams.\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_a24ed9462192143b18dd4357ac93c4fab}{packedRegisterWidth}});}
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00031}00031\ \ \ \ \ EXPECT\_EQ(registerCount,\ packingParams.\doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params_ab25593bee1441038ff788942ed75bc87}{registerCount}});}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00028}00028\ \ \ \ \ EXPECT\_EQ(expectedByteSize,\ packingParams.alignedByteSize);}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00029}00029\ \ \ \ \ EXPECT\_EQ(expectedPadding,\ packingParams.padding);}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00030}00030\ \ \ \ \ EXPECT\_EQ(packedRegisterWidth,\ packingParams.packedRegisterWidth);}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00031}00031\ \ \ \ \ EXPECT\_EQ(registerCount,\ packingParams.registerCount);}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00032}00032\ \}}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00033}00033\ }
-\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00034}\doxymbox{\hyperlink{_simd_utils_tests_8cpp_a61cb89f782c6202917be995413185eee}{00034}}\ \doxymbox{\hyperlink{_simd_utils_tests_8cpp_a61cb89f782c6202917be995413185eee}{INSTANTIATE\_TEST\_SUITE\_P}}(}
+\DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00034}00034\ INSTANTIATE\_TEST\_SUITE\_P(}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00035}00035\ \ \ \ \ PackedSizeCalculatorTestSuite,\ \doxymbox{\hyperlink{class_packed_size_calculator_tests}{PackedSizeCalculatorTests}},}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00036}00036\ \ \ \ \ ::testing::Values(}
 \DoxyCodeLine{\Hypertarget{_simd_utils_tests_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SSE}}

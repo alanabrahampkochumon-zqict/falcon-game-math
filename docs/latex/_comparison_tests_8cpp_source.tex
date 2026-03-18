@@ -8,7 +8,7 @@
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector4_d_test_setup_8h}{Vector4DTestSetup.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00014}00014\ }
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00015}00015\ }
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00016}00016\ \textcolor{keyword}{using\ namespace\ }\doxymbox{\hyperlink{namespacetestutils}{testutils}};}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00016}00016\ \textcolor{keyword}{using\ namespace\ }testutils;}
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00017}00017\ }
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00018}00018\ }
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00019}00019\ \textcolor{comment}{/**************************************}}
@@ -21,22 +21,22 @@
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00026}\doxymbox{\hyperlink{class_vector4_d_comparison}{00026}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4DComparison}}:\ \textcolor{keyword}{public}\ ::testing::Test}
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00027}00027\ \{}
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00029}\doxymbox{\hyperlink{class_vector4_d_comparison_a49e78861b8b8738a7d786af58fbbc945}{00029}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_comparison_a49e78861b8b8738a7d786af58fbbc945}{vecA}};}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00030}\doxymbox{\hyperlink{class_vector4_d_comparison_a923b0e1ad1d9e7c14be6f4f2226bfe29}{00030}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_comparison_a923b0e1ad1d9e7c14be6f4f2226bfe29}{vecB}};}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00031}\doxymbox{\hyperlink{class_vector4_d_comparison_a41270ebb3848e4fd479ea1eeffe5a70a}{00031}}\ \ \ \ \ \doxymbox{\hyperlink{namespacefgm_ab10b0cdd0e7cb4bdde903fb3ed21953a}{fgm::bVec4}}\ \doxymbox{\hyperlink{class_vector4_d_comparison_a41270ebb3848e4fd479ea1eeffe5a70a}{expectedGT}},\ \doxymbox{\hyperlink{class_vector4_d_comparison_acbfe849372ead2faa120112c784bfc3d}{expectedGTE}},\ \doxymbox{\hyperlink{class_vector4_d_comparison_ac89e69922cfbdc5edbf7285283497c7a}{expectedLT}},}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00032}\doxymbox{\hyperlink{class_vector4_d_comparison_a47e7fe54069c8fbfd4cc4841b6d325fe}{00032}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_comparison_a47e7fe54069c8fbfd4cc4841b6d325fe}{expectedLTE}};\ \textcolor{comment}{//\ GT-\/>\ Greater\ Than,\ GTE-\/>\ Greater\ Than\ or\ Equal,\ LT\ -\/>\ Less\ than,\ LTE\ -\/>\ Less\ than\ or\ equal}}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00029}00029\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ vecA;}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00030}00030\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ vecB;}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00031}00031\ \ \ \ \ \doxymbox{\hyperlink{_vector4_d_8h_ab10b0cdd0e7cb4bdde903fb3ed21953a}{fgm::bVec4}}\ expectedGT,\ expectedGTE,\ expectedLT,}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ expectedLTE;\ \textcolor{comment}{//\ GT-\/>\ Greater\ Than,\ GTE-\/>\ Greater\ Than\ or\ Equal,\ LT\ -\/>\ Less\ than,\ LTE\ -\/>\ Less\ than\ or\ equal}}
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00033}00033\ }
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00034}\doxymbox{\hyperlink{class_vector4_d_comparison_a1280b2f33176b2fd4bb5a8a914ced79f}{00034}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_comparison_a1280b2f33176b2fd4bb5a8a914ced79f}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override}}
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00035}00035\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_comparison_a49e78861b8b8738a7d786af58fbbc945}{vecA}}\ =\ \{\ T(1.1234568789),\ T(2.123458319),\ T(5.123412593891),\ T(123.123489172589)\ \};}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_comparison_a923b0e1ad1d9e7c14be6f4f2226bfe29}{vecB}}\ =\ \{\ T(5.1234568789),\ T(1.123458319),\ T(8.123412593891),\ T(123.123489172589)\ \};}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_comparison_a41270ebb3848e4fd479ea1eeffe5a70a}{expectedGT}}\ =\ \{\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false}\ \};}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_comparison_acbfe849372ead2faa120112c784bfc3d}{expectedGTE}}\ =\ \{\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true}\ \};}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_comparison_ac89e69922cfbdc5edbf7285283497c7a}{expectedLT}}\ =\ \{\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}\ \};}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_comparison_a47e7fe54069c8fbfd4cc4841b6d325fe}{expectedLTE}}\ =\ \{\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ vecA\ =\ \{\ T(1.1234568789),\ T(2.123458319),\ T(5.123412593891),\ T(123.123489172589)\ \};}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ vecB\ =\ \{\ T(5.1234568789),\ T(1.123458319),\ T(8.123412593891),\ T(123.123489172589)\ \};}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ expectedGT\ =\ \{\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ expectedGTE\ =\ \{\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ expectedLT\ =\ \{\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ expectedLTE\ =\ \{\ \textcolor{keyword}{true},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true},\ \textcolor{keyword}{true}\ \};}
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00042}00042\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00043}00043\ \};}
-\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00045}\doxymbox{\hyperlink{_comparison_tests_8cpp_a885d6bacff4a6d2b2f065aafc5a0dc51}{00045}}\ \doxymbox{\hyperlink{_comparison_tests_8cpp_a885d6bacff4a6d2b2f065aafc5a0dc51}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4DComparison}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00045}\doxymbox{\hyperlink{_comparison_tests_8cpp_a885d6bacff4a6d2b2f065aafc5a0dc51}{00045}}\ \doxymbox{\hyperlink{_comparison_tests_8cpp_a885d6bacff4a6d2b2f065aafc5a0dc51}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_comparison}{Vector4DComparison}},\ SupportedArithmeticTypes);}
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00046}00046\ }
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00047}00047\ }
 \DoxyCodeLine{\Hypertarget{_comparison_tests_8cpp_source_l00048}00048\ }

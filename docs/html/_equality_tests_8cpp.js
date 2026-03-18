@@ -1,6 +1,6 @@
 var _equality_tests_8cpp =
 [
-    [ "Vector4DEquality&lt; T &gt;", "class_vector4_d_equality.html", "class_vector4_d_equality" ],
+    [ "Vector4DEquality&lt; T &gt;", "class_vector4_d_equality.html", null ],
     [ "TYPED_TEST_SUITE", "_equality_tests_8cpp.html#abccf0ab6f490f24563edb401117d539b", null ],
     [ "Vector4DEquality_Equality_DifferentVectorsReturnsFalse", "group___f_g_m___vec4___equality.html#gacaf91e72758144731131d18928043074", null ],
     [ "Vector4DEquality_Equality_IdenticalVectorsReturnsTrue", "group___f_g_m___vec4___equality.html#gaa171fa1e931412815c2284ea0fb0def3", null ],

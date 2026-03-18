@@ -12,17 +12,10 @@ SIMD utility functions.
 \item 
 struct \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{falcon::\+simd::\+\+Packing\+Params}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Namespaces}
-\begin{DoxyCompactItemize}
-\item 
-namespace \doxymbox{\hyperlink{namespacefalcon}{falcon}}
-\item 
-namespace \doxymbox{\hyperlink{namespacefalcon_1_1simd}{falcon::\+simd}}
-\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-constexpr \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{Packing\+Params}} \doxymbox{\hyperlink{namespacefalcon_1_1simd_a94fb059eb5d87491f16bc160b8fe9411}{falcon::\+simd::\+calculate\+Packed\+Size}} (std::\+size\+\_\+t total\+Byte\+Size, std::\+size\+\_\+t max\+Align\+As)
+constexpr \doxymbox{\hyperlink{structfalcon_1_1simd_1_1_packing_params}{Packing\+Params}} \doxymbox{\hyperlink{_s_i_m_d_utils_8h_a94fb059eb5d87491f16bc160b8fe9411}{falcon::\+simd::\+calculate\+Packed\+Size}} (std::\+size\+\_\+t total\+Byte\+Size, std::\+size\+\_\+t max\+Align\+As)
 \end{DoxyCompactItemize}
 
 
@@ -43,4 +36,29 @@ Copyright (c) 2026 Alan Abraham P Kochumon
 
 
 Definition in file \doxymbox{\hyperlink{_s_i_m_d_utils_8h_source}{SIMDUtils.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_s_i_m_d_utils_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_s_i_m_d_utils_8h_a94fb059eb5d87491f16bc160b8fe9411}\index{SIMDUtils.h@{SIMDUtils.h}!calculatePackedSize@{calculatePackedSize}}
+\index{calculatePackedSize@{calculatePackedSize}!SIMDUtils.h@{SIMDUtils.h}}
+\doxysubsubsection{\texorpdfstring{calculatePackedSize()}{calculatePackedSize()}}
+{\footnotesize\ttfamily \label{_s_i_m_d_utils_8h_a94fb059eb5d87491f16bc160b8fe9411} 
+Packing\+Params falcon::\+simd::\+calculate\+Packed\+Size (\begin{DoxyParamCaption}\item[{std::\+size\+\_\+t}]{total\+Byte\+Size}{, }\item[{std::\+size\+\_\+t}]{max\+Align\+As}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+A calculator function that gives Aligned Byte Size, Padding, Packed Register Width, and Register Count when provided with an unaligned byte\+Size and maximum\+Alignment possible. 
+\begin{DoxyParams}{Parameters}
+{\em total\+Byte\+Size} & Total unaligned byte size. \\
+\hline
+{\em max\+Align\+As} & Max possible alignment for a given CPU architecture. 16 for SSE, 32 for AVX and AVX2, and 64 for AVX512 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Packed\+Size containing aligned\+Byte\+Size, padding, register width and register count. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_s_i_m_d_utils_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{_s_i_m_d_utils_8h_source}{SIMDUtils.\+h}}.
 

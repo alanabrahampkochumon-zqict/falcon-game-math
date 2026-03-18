@@ -8,11 +8,11 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{_math_traits_8h}{MathTraits.h}}>}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <cmath>}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <gtest/gtest.h>}}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{_matrix2_d_8h}{matrix/Matrix2D.h}}>}}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{_matrix3_d_8h}{matrix/Matrix3D.h}}>}}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <matrix/Matrix2D.h>}}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ <matrix/Matrix3D.h>}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00021}00021\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00022}00022\ }
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00023}\doxymbox{\hyperlink{namespacetestutils}{00023}}\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacetestutils}{testutils}}}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00023}00023\ \textcolor{keyword}{namespace\ }testutils}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00024}00024\ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00025}00025\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00030}00030\ }
@@ -94,7 +94,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00162}00162\ \}\ \textcolor{comment}{//\ namespace\ testutils}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00163}00163\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00164}00164\ \textcolor{comment}{//\ TODO:\ Deprecated\ Remove\ after\ refactor}}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00165}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d}{00165}}\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d}{testutils::Matrix3D}}}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00165}00165\ \textcolor{keyword}{namespace\ }testutils::Matrix3D}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00166}00166\ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00167}00167\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00168}00168\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ SIZE\ =\ 9;}
@@ -102,7 +102,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00170}00170\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00171}00171\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ U,\ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<T>>,}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<U>>>}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00173}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_a8226c9a5a010aec9a8bf1d95b9820845}{00173}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_a8226c9a5a010aec9a8bf1d95b9820845}{EXPECT\_MAT\_EQ}}(\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::Matrix3D<T>}}\ expected,\ \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::Matrix3D<U>}}\ actual)}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00173}00173\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_MAT\_EQ(fgm::Matrix3D<T>\ expected,\ fgm::Matrix3D<U>\ actual)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00174}00174\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ SIZE;\ i++)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00176}00176\ \ \ \ \ \ \ \ \ \{}
@@ -126,7 +126,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00194}00194\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00195}00195\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ U,\ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\_v<T>>,}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\_v<U>>>}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00197}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_af1d7ce95a5cd05f00d826b76b14d512d}{00197}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_af1d7ce95a5cd05f00d826b76b14d512d}{EXPECT\_MAT\_NEAR}}(\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::Matrix3D<T>}}\ expected,\ \doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::Matrix3D<U>}}\ actual,\ \textcolor{keywordtype}{double}\ tolerance\ =\ 1e-\/5)}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00197}00197\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_MAT\_NEAR(fgm::Matrix3D<T>\ expected,\ fgm::Matrix3D<U>\ actual,\ \textcolor{keywordtype}{double}\ tolerance\ =\ 1e-\/5)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00198}00198\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00199}00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_same\_v<T,\ double>\ \&\&}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ tolerance\ ==\ 1e-\/5)\ \textcolor{comment}{//\ Hacky\ trick\ for\ only\ upgrading\ if\ user\ hasn't\ changed\ from\ default\ tolerance.}}
@@ -139,7 +139,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00207}00207\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00208}00208\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00209}00209\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<T>>>}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00210}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_a3284f1d23dd3cdb364a8c8bf0718d521}{00210}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_a3284f1d23dd3cdb364a8c8bf0718d521}{EXPECT\_MAT\_IDENTITY}}(\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::Matrix3D<T>}}\ actual)}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00210}00210\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_MAT\_IDENTITY(fgm::Matrix3D<T>\ actual)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00211}00211\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00212}00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ SIZE;\ i++)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00213}00213\ \ \ \ \ \ \ \ \ \{}
@@ -160,7 +160,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00228}00228\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00229}00229\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00230}00230\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<T>>>}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00231}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_afc7a66e795363f370b27d4a2e55d21b3}{00231}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_afc7a66e795363f370b27d4a2e55d21b3}{EXPECT\_MAT\_ZERO}}(\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::Matrix3D<T>}}\ actual)}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00231}00231\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_MAT\_ZERO(fgm::Matrix3D<T>\ actual)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00232}00232\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00233}00233\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00234}00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ SIZE;\ i++)}
@@ -181,7 +181,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00249}00249\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00250}00250\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00251}00251\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<T>>>}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00252}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_aee832b2bf23231364df9fc783806ee3c}{00252}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_1_1_matrix3_d_aee832b2bf23231364df9fc783806ee3c}{EXPECT\_MAT\_INF}}(\doxymbox{\hyperlink{structfgm_1_1_matrix3_d}{fgm::Matrix3D<T>}}\ actual)}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00252}00252\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_MAT\_INF(fgm::Matrix3D<T>\ actual)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00253}00253\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00254}00254\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ SIZE;\ i++)}
@@ -191,7 +191,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00259}00259\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00260}00260\ \}\ \textcolor{comment}{//\ namespace\ testutils::Matrix3D}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00261}00261\ }
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00262}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d}{00262}}\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d}{testutils::Matrix2D}}}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00262}00262\ \textcolor{keyword}{namespace\ }testutils::Matrix2D}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00263}00263\ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00264}00264\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00265}00265\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ SIZE\ =\ 4;}
@@ -199,7 +199,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00267}00267\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00268}00268\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ U,\ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<T>>,}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<U>>>}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00270}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d_aa3ff8b8db5d53596130768834a2f7309}{00270}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d_aa3ff8b8db5d53596130768834a2f7309}{EXPECT\_MAT\_EQ}}(\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::Matrix2D<T>}}\ expected,\ \doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::Matrix2D<U>}}\ actual)}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00270}00270\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_MAT\_EQ(fgm::Matrix2D<T>\ expected,\ fgm::Matrix2D<U>\ actual)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00271}00271\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00272}00272\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00273}00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ SIZE;\ i++)}
@@ -222,7 +222,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00290}00290\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00291}00291\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00292}00292\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<T>>>}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00293}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d_a9126a1165c9650f059be41e8edea775c}{00293}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d_a9126a1165c9650f059be41e8edea775c}{EXPECT\_MAT\_IDENTITY}}(\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::Matrix2D<T>}}\ actual)}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00293}00293\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_MAT\_IDENTITY(fgm::Matrix2D<T>\ actual)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00294}00294\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00295}00295\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ SIZE;\ i++)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00296}00296\ \ \ \ \ \ \ \ \ \{}
@@ -243,7 +243,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00311}00311\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00312}00312\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00313}00313\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<T>>>}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00314}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d_a91002780874c238ed276bcdd46adc638}{00314}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d_a91002780874c238ed276bcdd46adc638}{EXPECT\_MAT\_ZERO}}(\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::Matrix2D<T>}}\ actual)}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00314}00314\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_MAT\_ZERO(fgm::Matrix2D<T>\ actual)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00315}00315\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00316}00316\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00317}00317\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ SIZE;\ i++)}
@@ -264,7 +264,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00332}00332\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00333}00333\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00334}00334\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ =\ std::enable\_if\_t<std::is\_arithmetic\_v<T>>>}
-\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00335}\doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d_a2b1747e615fc348df601bfc0de6a2e44}{00335}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_1_1_matrix2_d_a2b1747e615fc348df601bfc0de6a2e44}{EXPECT\_MAT\_INF}}(\doxymbox{\hyperlink{structfgm_1_1_matrix2_d}{fgm::Matrix2D<T>}}\ actual)}
+\DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00335}00335\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_MAT\_INF(fgm::Matrix2D<T>\ actual)}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00336}00336\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00337}00337\ }
 \DoxyCodeLine{\Hypertarget{_matrix_utils_8h_source_l00338}00338\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ SIZE;\ i++)}

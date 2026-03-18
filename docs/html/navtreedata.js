@@ -45,39 +45,25 @@ var NAVTREE =
     [ "Math Library for CPP", "md__r_e_a_d_m_e.html", [
       [ "How to run", "md__r_e_a_d_m_e.html#autotoc_md16", null ]
     ] ],
-    [ "Test List", "test.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Topics", "topics.html", "topics" ],
-    [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
-      [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ],
-        [ "Typedefs", "namespacemembers_type.html", null ]
-      ] ]
-    ] ],
     [ "Concepts", "concepts.html", "concepts" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", "functions_dup" ],
+        [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
-        [ "Typedefs", "functions_type.html", null ],
         [ "Related Symbols", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
-        [ "All", "globals.html", "globals_dup" ],
-        [ "Functions", "globals_func.html", "globals_func" ],
-        [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ]
       ] ]
     ] ]
   ] ]
@@ -85,12 +71,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_addition_tests_8cpp.html",
-"_projection_tests_8cpp.html",
-"class_vector4_d_projection.html#ab71811e01a5f454b3caaee8598439030",
-"group___f_g_m___vec4___multiplication.html#ga5dc878b73d630c172ccf5377adcbc664",
-"structfgm_1_1_matrix3_d.html",
-"structfgm_1_1_vector4_d.html#aa0fd2e69319c8955c34c42e8ada7c610"
+"_addition_tests_8cpp_source.html",
+"group___f_g_m___vec4___l_t___comp.html#ga1e5d486f6ee6246651733a3eb0dd5a77"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

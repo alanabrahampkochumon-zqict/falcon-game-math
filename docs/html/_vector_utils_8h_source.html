@@ -91,18 +91,18 @@ $(function(){initNavTree('_vector_utils_8h_source.html','',''); });
   <div class="headertitle"><div class="title">VectorUtils.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_vector_utils_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span><span class="preprocessor"></span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;<a class="code" href="_math_traits_8h.html">MathTraits.h</a>&gt;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;gtest/gtest.h&gt;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;<a class="code" href="_vector2_d_8h.html">vector/Vector2D.h</a>&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;vector/Vector2D.h&gt;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;<a class="code" href="_vector3_d_8h.html">vector/Vector3D.h</a>&gt;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;<a class="code" href="_vector4_d_8h.html">vector/Vector4D.h</a>&gt;</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacetestutils.html">testutils</a></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span>testutils</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span></div>
@@ -118,9 +118,9 @@ $(function(){initNavTree('_vector_utils_8h_source.html','',''); });
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; elementCount; ++i)</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;ValueType, double&gt;)</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                EXPECT_NEAR(expected[i], <span class="keyword">static_cast&lt;</span>ValueType<span class="keyword">&gt;</span>(actual[i]), <a class="code hl_variable" href="namespacefgm.html#afd8d25cec58c96d01e1d8e2af5ccdd80">fgm::DOUBLE_EPSILON</a>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                EXPECT_NEAR(expected[i], <span class="keyword">static_cast&lt;</span>ValueType<span class="keyword">&gt;</span>(actual[i]), fgm::DOUBLE_EPSILON);</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_floating_point_v&lt;ValueType&gt;)</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                EXPECT_NEAR(expected[i], <span class="keyword">static_cast&lt;</span>ValueType<span class="keyword">&gt;</span>(actual[i]), <a class="code hl_variable" href="namespacefgm.html#ac3c0fd59149d0159565c3254343bdcab">fgm::FLOAT_EPSILON</a>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                EXPECT_NEAR(expected[i], <span class="keyword">static_cast&lt;</span>ValueType<span class="keyword">&gt;</span>(actual[i]), fgm::FLOAT_EPSILON);</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                EXPECT_EQ(expected[i], <span class="keyword">static_cast&lt;</span>ValueType<span class="keyword">&gt;</span>(actual[i]));</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
@@ -133,18 +133,18 @@ $(function(){initNavTree('_vector_utils_8h_source.html','',''); });
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    {</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;T, float&gt;)</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            EXPECT_FLOAT_EQ(x, vector.<a class="code hl_variable" href="structfgm_1_1_vector2_d.html#a607bc0f3470083e965f77d4c1308aeab">x</a>);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            EXPECT_FLOAT_EQ(y, vector.<a class="code hl_variable" href="structfgm_1_1_vector2_d.html#a48b6ff16588e7fe467c14a24049147e9">y</a>);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            EXPECT_FLOAT_EQ(x, vector.x);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            EXPECT_FLOAT_EQ(y, vector.y);</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        }</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_same_v&lt;T, double&gt;)</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            EXPECT_DOUBLE_EQ(x, vector.<a class="code hl_variable" href="structfgm_1_1_vector2_d.html#a607bc0f3470083e965f77d4c1308aeab">x</a>);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            EXPECT_DOUBLE_EQ(y, vector.<a class="code hl_variable" href="structfgm_1_1_vector2_d.html#a48b6ff16588e7fe467c14a24049147e9">y</a>);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            EXPECT_DOUBLE_EQ(x, vector.x);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            EXPECT_DOUBLE_EQ(y, vector.y);</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        }</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            EXPECT_EQ(x, vector.<a class="code hl_variable" href="structfgm_1_1_vector2_d.html#a607bc0f3470083e965f77d4c1308aeab">x</a>);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            EXPECT_EQ(y, vector.<a class="code hl_variable" href="structfgm_1_1_vector2_d.html#a48b6ff16588e7fe467c14a24049147e9">y</a>);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            EXPECT_EQ(x, vector.x);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            EXPECT_EQ(y, vector.y);</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        }</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
 </div>
@@ -272,7 +272,6 @@ $(function(){initNavTree('_vector_utils_8h_source.html','',''); });
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>} <span class="comment">// namespace testutils</span></div>
 <div class="ttc" id="a_math_traits_8h_html"><div class="ttname"><a href="_math_traits_8h.html">MathTraits.h</a></div><div class="ttdoc">Concepts for Arithmetic, StrictArithmetic, Matrix, and Vector. Also contains EPSILONs for floats and ...</div></div>
-<div class="ttc" id="a_vector2_d_8h_html"><div class="ttname"><a href="_vector2_d_8h.html">Vector2D.h</a></div></div>
 <div class="ttc" id="a_vector3_d_8h_html"><div class="ttname"><a href="_vector3_d_8h.html">Vector3D.h</a></div><div class="ttdoc">Templated 3D Vector supporting integral, floating-point and boolean types.</div></div>
 <div class="ttc" id="a_vector4_d_8h_html"><div class="ttname"><a href="_vector4_d_8h.html">Vector4D.h</a></div><div class="ttdoc">Templated 4D Vector supporting integral, floating-point, and boolean types.</div></div>
 <div class="ttc" id="agroup___vector___utils_html_ga12c4d4e6974106a0d0ddce9dad07584f"><div class="ttname"><a href="group___vector___utils.html#ga12c4d4e6974106a0d0ddce9dad07584f">testutils::EXPECT_VEC_ONE</a></div><div class="ttdeci">void EXPECT_VEC_ONE(const T &amp;vector)</div><div class="ttdoc">Validates that the provided vector contains only unit components.</div><div class="ttdef"><b>Definition</b> <a href="#l00181">VectorUtils.h:181</a></div></div>
@@ -281,12 +280,7 @@ $(function(){initNavTree('_vector_utils_8h_source.html','',''); });
 <div class="ttc" id="agroup___vector___utils_html_gae7dd463db7e44961df742eaebdb34400"><div class="ttname"><a href="group___vector___utils.html#gae7dd463db7e44961df742eaebdb34400">testutils::EXPECT_VEC_ZERO</a></div><div class="ttdeci">void EXPECT_VEC_ZERO(const T &amp;vector)</div><div class="ttdoc">Validates that the provided vector contains only zero components.</div><div class="ttdef"><b>Definition</b> <a href="#l00208">VectorUtils.h:208</a></div></div>
 <div class="ttc" id="agroup___vector___utils_html_gaf086eefd4f5940a7963581d949339c8f"><div class="ttname"><a href="group___vector___utils.html#gaf086eefd4f5940a7963581d949339c8f">testutils::EXPECT_VEC_EQ</a></div><div class="ttdeci">void EXPECT_VEC_EQ(const T &amp;expected, const U &amp;actual)</div><div class="ttdoc">Perform a component-wise equality comparison between two vectors of the same dimensions.</div><div class="ttdef"><b>Definition</b> <a href="#l00045">VectorUtils.h:45</a></div></div>
 <div class="ttc" id="agroup___vector___utils_html_gaf3e3755befec4337ccefebe35e82acc5"><div class="ttname"><a href="group___vector___utils.html#gaf3e3755befec4337ccefebe35e82acc5">testutils::EXPECT_VEC_INF</a></div><div class="ttdeci">void EXPECT_VEC_INF(const T &amp;vector)</div><div class="ttdoc">Validates that the provided vector contains only INFINITY components.</div><div class="ttdef"><b>Definition</b> <a href="#l00234">VectorUtils.h:234</a></div></div>
-<div class="ttc" id="anamespacefgm_html_ac3c0fd59149d0159565c3254343bdcab"><div class="ttname"><a href="namespacefgm.html#ac3c0fd59149d0159565c3254343bdcab">fgm::FLOAT_EPSILON</a></div><div class="ttdeci">constexpr double FLOAT_EPSILON</div><div class="ttdef"><b>Definition</b> <a href="_math_traits_8h_source.html#l00084">MathTraits.h:84</a></div></div>
-<div class="ttc" id="anamespacefgm_html_afd8d25cec58c96d01e1d8e2af5ccdd80"><div class="ttname"><a href="namespacefgm.html#afd8d25cec58c96d01e1d8e2af5ccdd80">fgm::DOUBLE_EPSILON</a></div><div class="ttdeci">constexpr double DOUBLE_EPSILON</div><div class="ttdef"><b>Definition</b> <a href="_math_traits_8h_source.html#l00085">MathTraits.h:85</a></div></div>
-<div class="ttc" id="anamespacetestutils_html"><div class="ttname"><a href="namespacetestutils.html">testutils</a></div><div class="ttdef"><b>Definition</b> <a href="_matrix_utils_8h_source.html#l00023">MatrixUtils.h:24</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector2_d_html"><div class="ttname"><a href="structfgm_1_1_vector2_d.html">fgm::Vector2D</a></div><div class="ttdef"><b>Definition</b> <a href="_vector2_d_8h_source.html#l00010">Vector2D.h:11</a></div></div>
-<div class="ttc" id="astructfgm_1_1_vector2_d_html_a48b6ff16588e7fe467c14a24049147e9"><div class="ttname"><a href="structfgm_1_1_vector2_d.html#a48b6ff16588e7fe467c14a24049147e9">fgm::Vector2D::y</a></div><div class="ttdeci">T y</div><div class="ttdef"><b>Definition</b> <a href="_vector2_d_8h_source.html#l00020">Vector2D.h:20</a></div></div>
-<div class="ttc" id="astructfgm_1_1_vector2_d_html_a607bc0f3470083e965f77d4c1308aeab"><div class="ttname"><a href="structfgm_1_1_vector2_d.html#a607bc0f3470083e965f77d4c1308aeab">fgm::Vector2D::x</a></div><div class="ttdeci">T x</div><div class="ttdef"><b>Definition</b> <a href="_vector2_d_8h_source.html#l00020">Vector2D.h:20</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html"><div class="ttname"><a href="structfgm_1_1_vector3_d.html">fgm::Vector3D</a></div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00027">Vector3D.h:28</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html_a018396b853d9df4e2bb48d8b65e2c450"><div class="ttname"><a href="structfgm_1_1_vector3_d.html#a018396b853d9df4e2bb48d8b65e2c450">fgm::Vector3D::z</a></div><div class="ttdeci">T z</div><div class="ttdoc">Z-axis component.</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00038">Vector3D.h:38</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector3_d_html_a75473633e1dd4e97dc42d21a522a00b9"><div class="ttname"><a href="structfgm_1_1_vector3_d.html#a75473633e1dd4e97dc42d21a522a00b9">fgm::Vector3D::x</a></div><div class="ttdeci">T x</div><div class="ttdoc">X-axis component.</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_8h_source.html#l00036">Vector3D.h:36</a></div></div>
@@ -302,7 +296,7 @@ $(function(){initNavTree('_vector_utils_8h_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_4c62c5705c93f307172a2812dbe6d6e8.html">test-suite</a></li><li class="navelem"><a href="dir_139b481fda2b8a2e90711c428254618d.html">include</a></li><li class="navelem"><a href="dir_d652a22cc402ea8f5a4f5ccba6006afd.html">utils</a></li><li class="navelem"><a href="_vector_utils_8h.html">VectorUtils.h</a></li>
+    <li class="navelem"><b>test-suite</b></li><li class="navelem"><b>include</b></li><li class="navelem"><b>utils</b></li><li class="navelem"><b>VectorUtils.h</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

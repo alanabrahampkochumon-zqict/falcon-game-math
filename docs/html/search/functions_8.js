@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['lt_0',['lt',['../structfgm_1_1_vector4_d.html#a2491fdc866fd1de403d88ec13b174c59',1,'fgm::Vector4D::lt(const Vector4D&lt; U &gt; &amp;other) const'],['../structfgm_1_1_vector4_d.html#a726e3f78bec76447460d086b43cc9c9c',1,'fgm::Vector4D::lt(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB)']]],
-  ['lte_1',['lte',['../structfgm_1_1_vector4_d.html#a9461179be0d3b6b3dbe1524e4a2eb64f',1,'fgm::Vector4D::lte(const Vector4D&lt; U &gt; &amp;other) const'],['../structfgm_1_1_vector4_d.html#a051b9f1c522d3b2d10b3d3fe37f947c5',1,'fgm::Vector4D::lte(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB)']]]
+  ['neq_0',['neq',['../structfgm_1_1_vector4_d.html#ad277e47d8c40e696323a471b7b2d102a',1,'fgm::Vector4D::neq(const Vector4D&lt; U &gt; &amp;other, double epsilon=(std::is_same_v&lt; T, double &gt;||std::is_same_v&lt; U, double &gt;) ? DOUBLE_EPSILON :FLOAT_EPSILON) const'],['../structfgm_1_1_vector4_d.html#a1360d5870c95688362e2b754dc32578e',1,'fgm::Vector4D::neq(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB, double epsilon=(std::is_same_v&lt; T, double &gt;||std::is_same_v&lt; U, double &gt;) ? DOUBLE_EPSILON :FLOAT_EPSILON)']]],
+  ['normalize_1',['normalize',['../structfgm_1_1_vector4_d.html#aec8569c71e7779762f308d8fd4bf83f6',1,'fgm::Vector4D::normalize() const'],['../structfgm_1_1_vector4_d.html#ac8c105223a1c9ac8d37c55b7265c4ac8',1,'fgm::Vector4D::normalize(const Vector4D &amp;vec)']]]
 ];

@@ -98,20 +98,20 @@ $(function(){initNavTree('_s_i_m_d_utils_8h_source.html','',''); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacefalcon_1_1simd.html">falcon::simd</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>falcon::simd</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
 <div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_packing_params.html">   19</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_packing_params.html">PackingParams</a></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_packing_params.html#ad3242adfa4369243c833ed2eebef2729">   21</a></span>        std::size_t <a class="code hl_variable" href="structfalcon_1_1simd_1_1_packing_params.html#ad3242adfa4369243c833ed2eebef2729">alignedByteSize</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_packing_params.html#a2dbbca11ffb213f8ad8c4832b08ad907">   22</a></span>        std::size_t <a class="code hl_variable" href="structfalcon_1_1simd_1_1_packing_params.html#a2dbbca11ffb213f8ad8c4832b08ad907">padding</a>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_packing_params.html#a24ed9462192143b18dd4357ac93c4fab">   23</a></span>        std::size_t <a class="code hl_variable" href="structfalcon_1_1simd_1_1_packing_params.html#a24ed9462192143b18dd4357ac93c4fab">packedRegisterWidth</a>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_packing_params.html#ab25593bee1441038ff788942ed75bc87">   24</a></span>        std::size_t <a class="code hl_variable" href="structfalcon_1_1simd_1_1_packing_params.html#ab25593bee1441038ff788942ed75bc87">registerCount</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        std::size_t alignedByteSize;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        std::size_t padding;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        std::size_t packedRegisterWidth;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        std::size_t registerCount;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    };</div>
 </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
 <div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespacefalcon_1_1simd.html#a94fb059eb5d87491f16bc160b8fe9411">   35</a></span>    <span class="keyword">constexpr</span> <a class="code hl_struct" href="structfalcon_1_1simd_1_1_packing_params.html">PackingParams</a> <a class="code hl_function" href="namespacefalcon_1_1simd.html#a94fb059eb5d87491f16bc160b8fe9411">calculatePackedSize</a>(std::size_t totalByteSize, std::size_t maxAlignAs)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="_s_i_m_d_utils_8h.html#a94fb059eb5d87491f16bc160b8fe9411">   35</a></span>    <span class="keyword">constexpr</span> <a class="code hl_struct" href="structfalcon_1_1simd_1_1_packing_params.html">PackingParams</a> <a class="code hl_function" href="_s_i_m_d_utils_8h.html#a94fb059eb5d87491f16bc160b8fe9411">calculatePackedSize</a>(std::size_t totalByteSize, std::size_t maxAlignAs)</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    {</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">if</span> (totalByteSize &lt; 16)</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structfalcon_1_1simd_1_1_packing_params.html">PackingParams</a>{ 16, 16 - totalByteSize, 16, 1 };</div>
@@ -124,20 +124,15 @@ $(function(){initNavTree('_s_i_m_d_utils_8h_source.html','',''); });
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
 </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>} <span class="comment">// namespace falcon::simd</span></div>
-<div class="ttc" id="anamespacefalcon_1_1simd_html"><div class="ttname"><a href="namespacefalcon_1_1simd.html">falcon::simd</a></div><div class="ttdef"><b>Definition</b> <a href="_s_i_m_d_8h_source.html#l00095">SIMD.h:96</a></div></div>
-<div class="ttc" id="anamespacefalcon_1_1simd_html_a94fb059eb5d87491f16bc160b8fe9411"><div class="ttname"><a href="namespacefalcon_1_1simd.html#a94fb059eb5d87491f16bc160b8fe9411">falcon::simd::calculatePackedSize</a></div><div class="ttdeci">constexpr PackingParams calculatePackedSize(std::size_t totalByteSize, std::size_t maxAlignAs)</div><div class="ttdef"><b>Definition</b> <a href="#l00035">SIMDUtils.h:35</a></div></div>
+<div class="ttc" id="a_s_i_m_d_utils_8h_html_a94fb059eb5d87491f16bc160b8fe9411"><div class="ttname"><a href="_s_i_m_d_utils_8h.html#a94fb059eb5d87491f16bc160b8fe9411">falcon::simd::calculatePackedSize</a></div><div class="ttdeci">constexpr PackingParams calculatePackedSize(std::size_t totalByteSize, std::size_t maxAlignAs)</div><div class="ttdef"><b>Definition</b> <a href="#l00035">SIMDUtils.h:35</a></div></div>
 <div class="ttc" id="astructfalcon_1_1simd_1_1_packing_params_html"><div class="ttname"><a href="structfalcon_1_1simd_1_1_packing_params.html">falcon::simd::PackingParams</a></div><div class="ttdef"><b>Definition</b> <a href="#l00019">SIMDUtils.h:20</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_packing_params_html_a24ed9462192143b18dd4357ac93c4fab"><div class="ttname"><a href="structfalcon_1_1simd_1_1_packing_params.html#a24ed9462192143b18dd4357ac93c4fab">falcon::simd::PackingParams::packedRegisterWidth</a></div><div class="ttdeci">std::size_t packedRegisterWidth</div><div class="ttdef"><b>Definition</b> <a href="#l00023">SIMDUtils.h:23</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_packing_params_html_a2dbbca11ffb213f8ad8c4832b08ad907"><div class="ttname"><a href="structfalcon_1_1simd_1_1_packing_params.html#a2dbbca11ffb213f8ad8c4832b08ad907">falcon::simd::PackingParams::padding</a></div><div class="ttdeci">std::size_t padding</div><div class="ttdef"><b>Definition</b> <a href="#l00022">SIMDUtils.h:22</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_packing_params_html_ab25593bee1441038ff788942ed75bc87"><div class="ttname"><a href="structfalcon_1_1simd_1_1_packing_params.html#ab25593bee1441038ff788942ed75bc87">falcon::simd::PackingParams::registerCount</a></div><div class="ttdeci">std::size_t registerCount</div><div class="ttdef"><b>Definition</b> <a href="#l00024">SIMDUtils.h:24</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_packing_params_html_ad3242adfa4369243c833ed2eebef2729"><div class="ttname"><a href="structfalcon_1_1simd_1_1_packing_params.html#ad3242adfa4369243c833ed2eebef2729">falcon::simd::PackingParams::alignedByteSize</a></div><div class="ttdeci">std::size_t alignedByteSize</div><div class="ttdef"><b>Definition</b> <a href="#l00021">SIMDUtils.h:21</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_438dd2bc29fc0ff4a3e7d65d3220f2b7.html">simd</a></li><li class="navelem"><a href="dir_952b1643a54653e57d345fdcb250a700.html">include</a></li><li class="navelem"><a href="_s_i_m_d_utils_8h.html">SIMDUtils.h</a></li>
+    <li class="navelem"><b>simd</b></li><li class="navelem"><b>include</b></li><li class="navelem"><a href="_s_i_m_d_utils_8h.html">SIMDUtils.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

@@ -7,7 +7,7 @@
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00011}00011\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector4_d_test_setup_8h}{Vector4DTestSetup.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00013}00013\ }
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00014}00014\ \textcolor{keyword}{using\ namespace\ }\doxymbox{\hyperlink{namespacetestutils}{testutils}};}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00014}00014\ \textcolor{keyword}{using\ namespace\ }testutils;}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00015}00015\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00016}00016\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00017}00017\ \textcolor{comment}{/**************************************}}
@@ -20,62 +20,62 @@
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00024}\doxymbox{\hyperlink{class_vector4_d_magnitude}{00024}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4DMagnitude}}:\ \textcolor{keyword}{public}\ ::testing::Test}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00025}00025\ \{}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00027}\doxymbox{\hyperlink{class_vector4_d_magnitude_adca11df4cc55a7b1f0f8ab6cbce040e1}{00027}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_magnitude_adca11df4cc55a7b1f0f8ab6cbce040e1}{vec}};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00028}\doxymbox{\hyperlink{class_vector4_d_magnitude_a9fda6c33f7d6028ae6b8303b4c1c0051}{00028}}\ \ \ \ \ \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}}\ \doxymbox{\hyperlink{class_vector4_d_magnitude_a9fda6c33f7d6028ae6b8303b4c1c0051}{magnitude}};}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00027}00027\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ vec;}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00028}00028\ \ \ \ \ \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}}\ magnitude;}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00029}00029\ }
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00030}\doxymbox{\hyperlink{class_vector4_d_magnitude_a3d2d477d6f64c1e665793764bfcbf198}{00030}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_magnitude_a3d2d477d6f64c1e665793764bfcbf198}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override}}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00031}00031\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_magnitude_adca11df4cc55a7b1f0f8ab6cbce040e1}{vec}}\ =\ \{\ T(1),\ T(2),\ T(2),\ T(4)\ \};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_magnitude_a9fda6c33f7d6028ae6b8303b4c1c0051}{magnitude}}\ =\ \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}}(5);}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ vec\ =\ \{\ T(1),\ T(2),\ T(2),\ T(4)\ \};}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ magnitude\ =\ \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}}(5);}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00034}00034\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00035}00035\ \};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00037}\doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{00037}}\ \doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4DMagnitude}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00037}\doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{00037}}\ \doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_magnitude}{Vector4DMagnitude}},\ SupportedArithmeticTypes);}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00038}00038\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00039}00039\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00040}00040\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00041}\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{00041}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4DUncleanMagnitude}}:\ \textcolor{keyword}{public}\ ::testing::Test}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00042}00042\ \{}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00044}\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude_ab65f8076bbc2bd56ffc68db3a922bdf7}{00044}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_unclean_magnitude_ab65f8076bbc2bd56ffc68db3a922bdf7}{vec}};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00045}\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude_a074e0764bec13ff9c3e96eb29de0c2da}{00045}}\ \ \ \ \ \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}}\ \doxymbox{\hyperlink{class_vector4_d_unclean_magnitude_a074e0764bec13ff9c3e96eb29de0c2da}{magnitude}};}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00044}00044\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ vec;}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00045}00045\ \ \ \ \ \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}}\ magnitude;}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00046}00046\ }
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00047}\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude_ab3a1bf1262140edf480f6350edc6ccec}{00047}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_unclean_magnitude_ab3a1bf1262140edf480f6350edc6ccec}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override}}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00048}00048\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_unclean_magnitude_ab65f8076bbc2bd56ffc68db3a922bdf7}{vec}}\ =\ \{\ T(1),\ T(2),\ T(3),\ T(4)\ \};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_unclean_magnitude_a074e0764bec13ff9c3e96eb29de0c2da}{magnitude}}\ =\ \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}}(5.477225575051661);}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ vec\ =\ \{\ T(1),\ T(2),\ T(3),\ T(4)\ \};}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ magnitude\ =\ \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}}(5.477225575051661);}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00051}00051\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00052}00052\ \};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00055}\doxymbox{\hyperlink{_magnitude_tests_8cpp_ae10dbcc9538462dc5b07ef215bc7533d}{00055}}\ \doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4DUncleanMagnitude}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00055}\doxymbox{\hyperlink{_magnitude_tests_8cpp_ae10dbcc9538462dc5b07ef215bc7533d}{00055}}\ \doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_unclean_magnitude}{Vector4DUncleanMagnitude}},\ SupportedArithmeticTypes);}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00056}00056\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00057}00057\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00058}00058\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00059}\doxymbox{\hyperlink{class_vector4_d_normalization}{00059}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4DNormalization}}:\ \textcolor{keyword}{public}\ ::testing::Test}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00060}00060\ \{}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{using\ }R\ =\ \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}};}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{using\ }R\ =\ \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{fgm::Magnitude<T>}};}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00062}00062\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00064}\doxymbox{\hyperlink{class_vector4_d_normalization_a77b7e7853fd859ab9abc7197138aed69}{00064}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_normalization_a77b7e7853fd859ab9abc7197138aed69}{vec}};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00065}\doxymbox{\hyperlink{class_vector4_d_normalization_aa737545b67702fae91c66ce301031fb7}{00065}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<R>}}\ \doxymbox{\hyperlink{class_vector4_d_normalization_aa737545b67702fae91c66ce301031fb7}{expectedVector}};}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00064}00064\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ vec;}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00065}00065\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<R>}}\ expectedVector;}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00066}00066\ }
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00067}\doxymbox{\hyperlink{class_vector4_d_normalization_a6741a246e4fa5b3e1c3d0f8f3e30bea1}{00067}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_normalization_a6741a246e4fa5b3e1c3d0f8f3e30bea1}{SetUp}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00067}00067\ \ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override}}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00068}00068\ \textcolor{keyword}{\ \ \ \ }\{}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_normalization_a77b7e7853fd859ab9abc7197138aed69}{vec}}\ =\ \{\ T(14),\ T(27),\ T(83),\ T(52)\ \};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_vector4_d_normalization_aa737545b67702fae91c66ce301031fb7}{expectedVector}}\ =\ \{\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(0.13650905255670645),\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(0.2632674585022196),}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ vec\ =\ \{\ T(14),\ T(27),\ T(83),\ T(52)\ \};}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ expectedVector\ =\ \{\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(0.13650905255670645),\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(0.2632674585022196),}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(0.8093036687290455),\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(0.5070336237820525)\ \};}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00072}00072\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00073}00073\ \};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00075}\doxymbox{\hyperlink{_magnitude_tests_8cpp_ae93dc8e95e82f4f60048608c94d9ce47}{00075}}\ \doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4DNormalization}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00075}\doxymbox{\hyperlink{_magnitude_tests_8cpp_ae93dc8e95e82f4f60048608c94d9ce47}{00075}}\ \doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_normalization}{Vector4DNormalization}},\ SupportedArithmeticTypes);}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00076}00076\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00077}00077\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00078}00078\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00079}\doxymbox{\hyperlink{class_vector4_d_zero_normalization}{00079}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_vector4_d_zero_normalization}{Vector4DZeroNormalization}}:\ \textcolor{keyword}{public}\ ::testing::Test}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00080}00080\ \{}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00081}00081\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00082}\doxymbox{\hyperlink{class_vector4_d_zero_normalization_a7ecdf048bf2e3cd59df43d1ecc71f266}{00082}}\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ \doxymbox{\hyperlink{class_vector4_d_zero_normalization_a7ecdf048bf2e3cd59df43d1ecc71f266}{vec}};}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00082}00082\ \ \ \ \ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\ vec;}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00083}00083\ }
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00084}\doxymbox{\hyperlink{class_vector4_d_zero_normalization_a067db73816efd9ac105d4b0cdbfabbd3}{00084}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_vector4_d_zero_normalization_a067db73816efd9ac105d4b0cdbfabbd3}{SetUp}}()\textcolor{keyword}{\ override\ }\{\ \doxymbox{\hyperlink{class_vector4_d_zero_normalization_a7ecdf048bf2e3cd59df43d1ecc71f266}{vec}}\ =\ \{\ T(0),\ T(0),\ T(0),\ T(0)\ \};\ \}}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00084}00084\ \ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override\ }\{\ vec\ =\ \{\ T(0),\ T(0),\ T(0),\ T(0)\ \};\ \}}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00085}00085\ \};}
-\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00087}\doxymbox{\hyperlink{_magnitude_tests_8cpp_ac5c4e1d185d04d0d0efbd2b638325f35}{00087}}\ \doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_zero_normalization}{Vector4DZeroNormalization}},\ \doxymbox{\hyperlink{_vector3_d_test_setup_8h_a419bc60d90bfcd4724a953b51402235e}{SupportedArithmeticTypes}});}
+\DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00087}\doxymbox{\hyperlink{_magnitude_tests_8cpp_ac5c4e1d185d04d0d0efbd2b638325f35}{00087}}\ \doxymbox{\hyperlink{_magnitude_tests_8cpp_ad513e09b6267f7dcfc5ddff3617f6f13}{TYPED\_TEST\_SUITE}}(\doxymbox{\hyperlink{class_vector4_d_zero_normalization}{Vector4DZeroNormalization}},\ SupportedArithmeticTypes);}
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00088}00088\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00089}00089\ }
 \DoxyCodeLine{\Hypertarget{_magnitude_tests_8cpp_source_l00090}00090\ }

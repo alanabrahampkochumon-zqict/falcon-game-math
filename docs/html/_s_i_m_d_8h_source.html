@@ -155,7 +155,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#elif defined(FALCON_SSE_SUPPORTED)</span></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">    #define MAX_HARDWARE_ALIGNMENT = 16;</span></div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="_s_i_m_d_8h.html#a4379bc653453841ce91fbffb5a72a6e0">   85</a></span><span class="preprocessor">    #define MAX_HARDWARE_ALIGNMENT = 0;</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">    #define MAX_HARDWARE_ALIGNMENT = 0;</span></div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
@@ -165,8 +165,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"> *           SIMD Registers           *</span></div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"> *                                    *</span></div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"> **************************************/</span></div>
-<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="namespacefalcon.html">   95</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacefalcon_1_1simd.html">falcon::simd</a></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keyword">namespace </span>falcon::simd</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>{</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, std::<span class="keywordtype">size_t</span> RegW<span class="keywordtype">id</span>th&gt;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map.html">   98</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>;</div>
@@ -176,7 +175,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00102" data-start="{" data-end="};">
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0116_01_4.html">  102</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>&lt;float, 16&gt;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0116_01_4.html#a71852f9ebf4afcd7e2f2e1fae5f3d6c0">  104</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0116_01_4.html#a71852f9ebf4afcd7e2f2e1fae5f3d6c0">type</a> = __m128;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keyword">using </span>type = __m128;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    };</div>
 </div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
@@ -184,7 +183,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00108" data-start="{" data-end="};">
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0116_01_4.html">  108</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>&lt;double, 16&gt;</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0116_01_4.html#a3e30419368c647c827ab1a71ee38d333">  110</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0116_01_4.html#a3e30419368c647c827ab1a71ee38d333">type</a> = __m128d;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keyword">using </span>type = __m128d;</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    };</div>
 </div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
@@ -192,7 +191,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00114" data-start="{" data-end="};">
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0116_01_4.html">  114</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>&lt;T, 16&gt;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    {</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0116_01_4.html#a314ba9d0c18f316d468cd96fab2f450f">  116</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0116_01_4.html#a314ba9d0c18f316d468cd96fab2f450f">type</a> = __m128i;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keyword">using </span>type = __m128i;</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    };</div>
 </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
@@ -200,7 +199,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00120" data-start="{" data-end="};">
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0132_01_4.html">  120</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>&lt;float, 32&gt;</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    {</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0132_01_4.html#a730c5d1b0af2a927b56f21f672a76349">  122</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0132_01_4.html#a730c5d1b0af2a927b56f21f672a76349">type</a> = __m256;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keyword">using </span>type = __m256;</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    };</div>
 </div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
@@ -208,7 +207,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00126" data-start="{" data-end="};">
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0132_01_4.html">  126</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>&lt;double, 32&gt;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0132_01_4.html#afd414b82aac46d1b43fad7b4ea7b317b">  128</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0132_01_4.html#afd414b82aac46d1b43fad7b4ea7b317b">type</a> = __m256d;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keyword">using </span>type = __m256d;</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    };</div>
 </div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
@@ -216,7 +215,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00132" data-start="{" data-end="};">
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0132_01_4.html">  132</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>&lt;T, 32&gt;</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0132_01_4.html#a10cabe7632f4e0a75d0195f167eed371">  134</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0132_01_4.html#a10cabe7632f4e0a75d0195f167eed371">type</a> = __m256i;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keyword">using </span>type = __m256i;</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    };</div>
 </div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
@@ -224,7 +223,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00138" data-start="{" data-end="};">
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0164_01_4.html">  138</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>&lt;float, 64&gt;</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0164_01_4.html#a83caedd395922272da09d83bfc79b673">  140</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0164_01_4.html#a83caedd395922272da09d83bfc79b673">type</a> = __m512;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keyword">using </span>type = __m512;</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    };</div>
 </div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
@@ -232,7 +231,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00144" data-start="{" data-end="};">
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0164_01_4.html">  144</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>&lt;double, 64&gt;</div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    {</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0164_01_4.html#a4a105ddcae9d1a6aae38c00702b708f0">  146</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0164_01_4.html#a4a105ddcae9d1a6aae38c00702b708f0">type</a> = __m512d;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keyword">using </span>type = __m512d;</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    };</div>
 </div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
@@ -240,31 +239,20 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <div class="foldopen" id="foldopen00150" data-start="{" data-end="};">
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0164_01_4.html">  150</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfalcon_1_1simd_1_1_register_map.html">RegisterMap</a>&lt;T, 64&gt;</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    {</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0164_01_4.html#ad8b72ebabc607b4b245e8e4d9cf36666">  152</a></span>        <span class="keyword">using </span><a class="code hl_typedef" href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0164_01_4.html#ad8b72ebabc607b4b245e8e4d9cf36666">type</a> = __m512i;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keyword">using </span>type = __m512i;</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    };</div>
 </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="preprocessor">    #if defined(MAX_ALIGNMENT) &amp;&amp; MAX_ALIGNMENT &gt; 0</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structfalcon_1_1simd_1_1_packing_params.html">PackingParams</a> packingParams = <a class="code hl_function" href="namespacefalcon_1_1simd.html#a94fb059eb5d87491f16bc160b8fe9411">calculatePackedSize</a>(TotalBytes, MAX_ALIGNMENT);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structfalcon_1_1simd_1_1_packing_params.html">PackingParams</a> packingParams = <a class="code hl_function" href="_s_i_m_d_utils_8h.html#a94fb059eb5d87491f16bc160b8fe9411">calculatePackedSize</a>(TotalBytes, MAX_ALIGNMENT);</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="preprocessor">    #endif</span></div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>} <span class="comment">// namespace falcon::simd</span></div>
-</div>
 <div class="ttc" id="a_s_i_m_d_utils_8h_html"><div class="ttname"><a href="_s_i_m_d_utils_8h.html">SIMDUtils.h</a></div><div class="ttdoc">SIMD utility functions.</div></div>
-<div class="ttc" id="anamespacefalcon_1_1simd_html"><div class="ttname"><a href="namespacefalcon_1_1simd.html">falcon::simd</a></div><div class="ttdef"><b>Definition</b> <a href="#l00095">SIMD.h:96</a></div></div>
-<div class="ttc" id="anamespacefalcon_1_1simd_html_a94fb059eb5d87491f16bc160b8fe9411"><div class="ttname"><a href="namespacefalcon_1_1simd.html#a94fb059eb5d87491f16bc160b8fe9411">falcon::simd::calculatePackedSize</a></div><div class="ttdeci">constexpr PackingParams calculatePackedSize(std::size_t totalByteSize, std::size_t maxAlignAs)</div><div class="ttdef"><b>Definition</b> <a href="_s_i_m_d_utils_8h_source.html#l00035">SIMDUtils.h:35</a></div></div>
+<div class="ttc" id="a_s_i_m_d_utils_8h_html_a94fb059eb5d87491f16bc160b8fe9411"><div class="ttname"><a href="_s_i_m_d_utils_8h.html#a94fb059eb5d87491f16bc160b8fe9411">falcon::simd::calculatePackedSize</a></div><div class="ttdeci">constexpr PackingParams calculatePackedSize(std::size_t totalByteSize, std::size_t maxAlignAs)</div><div class="ttdef"><b>Definition</b> <a href="_s_i_m_d_utils_8h_source.html#l00035">SIMDUtils.h:35</a></div></div>
 <div class="ttc" id="astructfalcon_1_1simd_1_1_packing_params_html"><div class="ttname"><a href="structfalcon_1_1simd_1_1_packing_params.html">falcon::simd::PackingParams</a></div><div class="ttdef"><b>Definition</b> <a href="_s_i_m_d_utils_8h_source.html#l00019">SIMDUtils.h:20</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_3_01_t_00_0116_01_4_html_a314ba9d0c18f316d468cd96fab2f450f"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0116_01_4.html#a314ba9d0c18f316d468cd96fab2f450f">falcon::simd::RegisterMap&lt; T, 16 &gt;::type</a></div><div class="ttdeci">__m128i type</div><div class="ttdef"><b>Definition</b> <a href="#l00116">SIMD.h:116</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_3_01_t_00_0132_01_4_html_a10cabe7632f4e0a75d0195f167eed371"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0132_01_4.html#a10cabe7632f4e0a75d0195f167eed371">falcon::simd::RegisterMap&lt; T, 32 &gt;::type</a></div><div class="ttdeci">__m256i type</div><div class="ttdef"><b>Definition</b> <a href="#l00134">SIMD.h:134</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_3_01_t_00_0164_01_4_html_ad8b72ebabc607b4b245e8e4d9cf36666"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map_3_01_t_00_0164_01_4.html#ad8b72ebabc607b4b245e8e4d9cf36666">falcon::simd::RegisterMap&lt; T, 64 &gt;::type</a></div><div class="ttdeci">__m512i type</div><div class="ttdef"><b>Definition</b> <a href="#l00152">SIMD.h:152</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_3_01double_00_0116_01_4_html_a3e30419368c647c827ab1a71ee38d333"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0116_01_4.html#a3e30419368c647c827ab1a71ee38d333">falcon::simd::RegisterMap&lt; double, 16 &gt;::type</a></div><div class="ttdeci">__m128d type</div><div class="ttdef"><b>Definition</b> <a href="#l00110">SIMD.h:110</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_3_01double_00_0132_01_4_html_afd414b82aac46d1b43fad7b4ea7b317b"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0132_01_4.html#afd414b82aac46d1b43fad7b4ea7b317b">falcon::simd::RegisterMap&lt; double, 32 &gt;::type</a></div><div class="ttdeci">__m256d type</div><div class="ttdef"><b>Definition</b> <a href="#l00128">SIMD.h:128</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_3_01double_00_0164_01_4_html_a4a105ddcae9d1a6aae38c00702b708f0"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map_3_01double_00_0164_01_4.html#a4a105ddcae9d1a6aae38c00702b708f0">falcon::simd::RegisterMap&lt; double, 64 &gt;::type</a></div><div class="ttdeci">__m512d type</div><div class="ttdef"><b>Definition</b> <a href="#l00146">SIMD.h:146</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_3_01float_00_0116_01_4_html_a71852f9ebf4afcd7e2f2e1fae5f3d6c0"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0116_01_4.html#a71852f9ebf4afcd7e2f2e1fae5f3d6c0">falcon::simd::RegisterMap&lt; float, 16 &gt;::type</a></div><div class="ttdeci">__m128 type</div><div class="ttdef"><b>Definition</b> <a href="#l00104">SIMD.h:104</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_3_01float_00_0132_01_4_html_a730c5d1b0af2a927b56f21f672a76349"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0132_01_4.html#a730c5d1b0af2a927b56f21f672a76349">falcon::simd::RegisterMap&lt; float, 32 &gt;::type</a></div><div class="ttdeci">__m256 type</div><div class="ttdef"><b>Definition</b> <a href="#l00122">SIMD.h:122</a></div></div>
-<div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_3_01float_00_0164_01_4_html_a83caedd395922272da09d83bfc79b673"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map_3_01float_00_0164_01_4.html#a83caedd395922272da09d83bfc79b673">falcon::simd::RegisterMap&lt; float, 64 &gt;::type</a></div><div class="ttdeci">__m512 type</div><div class="ttdef"><b>Definition</b> <a href="#l00140">SIMD.h:140</a></div></div>
 <div class="ttc" id="astructfalcon_1_1simd_1_1_register_map_html"><div class="ttname"><a href="structfalcon_1_1simd_1_1_register_map.html">falcon::simd::RegisterMap</a></div><div class="ttdef"><b>Definition</b> <a href="#l00098">SIMD.h:98</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -272,7 +260,7 @@ $(function(){initNavTree('_s_i_m_d_8h_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_438dd2bc29fc0ff4a3e7d65d3220f2b7.html">simd</a></li><li class="navelem"><a href="dir_952b1643a54653e57d345fdcb250a700.html">include</a></li><li class="navelem"><a href="_s_i_m_d_8h.html">SIMD.h</a></li>
+    <li class="navelem"><b>simd</b></li><li class="navelem"><b>include</b></li><li class="navelem"><a href="_s_i_m_d_8h.html">SIMD.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

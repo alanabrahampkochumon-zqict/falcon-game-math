@@ -1,18 +1,13 @@
 var searchData=
 [
-  ['falcon_0',['falcon',['../namespacefalcon.html',1,'']]],
-  ['falcon_20game_20math_20library_20fgm_1',['Documentation Guideline for Falcon Game Math Library (FGM)',['../md__documentation_guideline.html',1,'']]],
-  ['falcon_20game_20math_20library_20test_20suite_2',['Falcon Game Math Library Test Suite',['../group___f_g_m_test_suite.html',1,'']]],
-  ['falcon_3a_3asimd_3',['simd',['../namespacefalcon_1_1simd.html',1,'falcon']]],
-  ['fgm_4',['Documentation Guideline for Falcon Game Math Library (FGM)',['../md__documentation_guideline.html',1,'']]],
-  ['fgm_5',['fgm',['../namespacefgm.html',1,'']]],
-  ['float_5fepsilon_6',['FLOAT_EPSILON',['../namespacefgm.html#ac3c0fd59149d0159565c3254343bdcab',1,'fgm']]],
-  ['float_5fprecision_7',['FLOAT_PRECISION',['../structfgm_1_1_config.html#ad45285a7fe108014a24a64a1ee002c5d',1,'fgm::Config']]],
-  ['floatequals_8',['floatEquals',['../_float_equals_8h.html#a0672e4748831d53a100c67090a8aa6d9',1,'FloatEquals.h']]],
-  ['floatequals_2eh_9',['FloatEquals.h',['../_float_equals_8h.html',1,'']]],
-  ['for_20cpp_10',['Math Library for CPP',['../md__r_e_a_d_m_e.html',1,'']]],
-  ['for_20falcon_20game_20math_20library_20fgm_11',['Documentation Guideline for Falcon Game Math Library (FGM)',['../md__documentation_guideline.html',1,'']]],
-  ['force_5fscalar_12',['FORCE_SCALAR',['../_vector3_d_test_setup_8h.html#af26a24259eed0eef6a08c6ea73e1e024',1,'FORCE_SCALAR:&#160;Vector3DTestSetup.h'],['../_vector4_d_test_setup_8h.html#af26a24259eed0eef6a08c6ea73e1e024',1,'FORCE_SCALAR:&#160;Vector4DTestSetup.h']]],
-  ['formatted_20string_20representation_13',['Formatted String Representation',['../group___f_g_m___vec4___string___repr.html',1,'']]],
-  ['formatting_14',['1. General Language &amp;amp; Formatting',['../md__documentation_guideline.html#autotoc_md1',1,'']]]
+  ['g_0',['g',['../structfgm_1_1_vector3_d.html#a455fad21e53cdda2065dc5248d0e3a1a',1,'fgm::Vector3D::g'],['../structfgm_1_1_vector4_d.html#a55ea955e968f1157296eda4624dd4b4c',1,'fgm::Vector4D::g']]],
+  ['game_20math_20library_20fgm_1',['Documentation Guideline for Falcon Game Math Library (FGM)',['../md__documentation_guideline.html',1,'']]],
+  ['game_20math_20library_20test_20suite_2',['Falcon Game Math Library Test Suite',['../group___f_g_m_test_suite.html',1,'']]],
+  ['general_20language_20formatting_3',['1. General Language &amp;amp; Formatting',['../md__documentation_guideline.html#autotoc_md1',1,'']]],
+  ['google_20test_4',['3. Test Nomenclature (Google Test)',['../md__documentation_guideline.html#autotoc_md10',1,'']]],
+  ['greater_20than_20comparison_5',['Greater Than Comparison',['../group___f_g_m___vec4___g_t___comp.html',1,'']]],
+  ['greater_20than_20or_20equal_20comparison_6',['Greater Than or Equal Comparison',['../group___f_g_m___vec4___g_t_e___comp.html',1,'']]],
+  ['gt_7',['gt',['../structfgm_1_1_vector4_d.html#a447d622eea025c6b76c3e72f84f9dc3c',1,'fgm::Vector4D::gt(const Vector4D&lt; U &gt; &amp;other) const'],['../structfgm_1_1_vector4_d.html#af1d512d2d88516c04ee28ffa8dec1727',1,'fgm::Vector4D::gt(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB)']]],
+  ['gte_8',['gte',['../structfgm_1_1_vector4_d.html#aa1ba1715df4219dd478f81b28f34b4b1',1,'fgm::Vector4D::gte(const Vector4D&lt; U &gt; &amp;other) const'],['../structfgm_1_1_vector4_d.html#a1817fc433d2bc82ed7de91b97f9c5468',1,'fgm::Vector4D::gte(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB)']]],
+  ['guideline_20for_20falcon_20game_20math_20library_20fgm_9',['Documentation Guideline for Falcon Game Math Library (FGM)',['../md__documentation_guideline.html',1,'']]]
 ];

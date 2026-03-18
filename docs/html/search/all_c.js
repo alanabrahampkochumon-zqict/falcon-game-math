@@ -1,15 +1,16 @@
 var searchData=
 [
-  ['inequality_0',['Component-wise and Masked Inequality',['../group___f_g_m___vec4___inequality.html',1,'']]],
-  ['inequalitymask_1',['inequalityMask',['../class_vector4_d_equality.html#aaafab49cfb7c5efa9ed2c12b35c07442',1,'Vector4DEquality']]],
-  ['info_5farch_2',['info_arch',['../_c_make_c_compiler_id_8c.html#a59647e99d304ed33b15cb284c27ed391',1,'info_arch:&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#a59647e99d304ed33b15cb284c27ed391',1,'info_arch:&#160;CMakeCXXCompilerId.cpp']]],
-  ['info_5fcompiler_3',['info_compiler',['../_c_make_c_compiler_id_8c.html#a4b0efeb7a5d59313986b3a0390f050f6',1,'info_compiler:&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#a4b0efeb7a5d59313986b3a0390f050f6',1,'info_compiler:&#160;CMakeCXXCompilerId.cpp']]],
-  ['info_5flanguage_5fextensions_5fdefault_4',['info_language_extensions_default',['../_c_make_c_compiler_id_8c.html#a0f46a8a39e09d9b803c4766904fd7e99',1,'info_language_extensions_default:&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#a0f46a8a39e09d9b803c4766904fd7e99',1,'info_language_extensions_default:&#160;CMakeCXXCompilerId.cpp']]],
-  ['info_5flanguage_5fstandard_5fdefault_5',['info_language_standard_default',['../_c_make_c_compiler_id_8c.html#a4607cccf070750927b458473ca82c090',1,'info_language_standard_default:&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#a4607cccf070750927b458473ca82c090',1,'info_language_standard_default:&#160;CMakeCXXCompilerId.cpp']]],
-  ['info_5fplatform_6',['info_platform',['../_c_make_c_compiler_id_8c.html#a2321403dee54ee23f0c2fa849c60f7d4',1,'info_platform:&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#a2321403dee54ee23f0c2fa849c60f7d4',1,'info_platform:&#160;CMakeCXXCompilerId.cpp']]],
-  ['initialization_7',['Initialization',['../group___f_g_m___vec4___init.html',1,'']]],
-  ['initializationtests_2ecpp_8',['InitializationTests.cpp',['../simd_2_initialization_tests_8cpp.html',1,'(Global Namespace)'],['../vectors_2vector3d_2_initialization_tests_8cpp.html',1,'(Global Namespace)'],['../vectors_2vector4d_2_initialization_tests_8cpp.html',1,'(Global Namespace)']]],
-  ['instantiate_5ftest_5fsuite_5fp_9',['INSTANTIATE_TEST_SUITE_P',['../_simd_utils_tests_8cpp.html#a61cb89f782c6202917be995413185eee',1,'SimdUtilsTests.cpp']]],
-  ['inverse_10',['inverse',['../structfgm_1_1_matrix2_d.html#ae728a327d922232cb1e3d1e0f003086d',1,'fgm::Matrix2D::inverse() const'],['../structfgm_1_1_matrix2_d.html#aaf09ee54e896e2eb329fa0f6d7b4a15d',1,'fgm::Matrix2D::inverse(const Matrix2D &amp;matrix)'],['../structfgm_1_1_matrix3_d.html#a33981798b886a9bbdcf99fa229295c31',1,'fgm::Matrix3D::inverse() const'],['../structfgm_1_1_matrix3_d.html#ae15d29f71d9ceb288821568d0fd321c8',1,'fgm::Matrix3D::inverse(const Matrix3D &amp;matrix)']]],
-  ['ivec4_11',['iVec4',['../namespacefgm.html#a1c1317958c659deaa05ac70f0db126b8',1,'fgm']]]
+  ['language_20formatting_0',['1. General Language &amp;amp; Formatting',['../md__documentation_guideline.html#autotoc_md1',1,'']]],
+  ['length_20magnitude_1',['Scalar Length(Magnitude)',['../group___f_g_m___vec4___magnitude.html',1,'']]],
+  ['less_20than_20comparison_2',['Less Than Comparison',['../group___f_g_m___vec4___l_t___comp.html',1,'']]],
+  ['less_20than_20or_20equal_20comparison_3',['Less Than or Equal Comparison',['../group___f_g_m___vec4___l_t_e___comp.html',1,'']]],
+  ['library_4',['Math Library',['../group___f_g_m___math.html',1,'']]],
+  ['library_20fgm_5',['Documentation Guideline for Falcon Game Math Library (FGM)',['../md__documentation_guideline.html',1,'']]],
+  ['library_20for_20cpp_6',['Math Library for CPP',['../md__r_e_a_d_m_e.html',1,'']]],
+  ['library_20test_20suite_7',['Falcon Game Math Library Test Suite',['../group___f_g_m_test_suite.html',1,'']]],
+  ['list_8',['Todo List',['../todo.html',1,'']]],
+  ['log_5fprecision_9',['LOG_PRECISION',['../structfgm_1_1_config.html#a665a837a62bb9280f086fd65bb042bcd',1,'fgm::Config']]],
+  ['lt_10',['lt',['../structfgm_1_1_vector4_d.html#a2491fdc866fd1de403d88ec13b174c59',1,'fgm::Vector4D::lt(const Vector4D&lt; U &gt; &amp;other) const'],['../structfgm_1_1_vector4_d.html#a726e3f78bec76447460d086b43cc9c9c',1,'fgm::Vector4D::lt(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB)']]],
+  ['lte_11',['lte',['../structfgm_1_1_vector4_d.html#a9461179be0d3b6b3dbe1524e4a2eb64f',1,'fgm::Vector4D::lte(const Vector4D&lt; U &gt; &amp;other) const'],['../structfgm_1_1_vector4_d.html#a051b9f1c522d3b2d10b3d3fe37f947c5',1,'fgm::Vector4D::lte(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB)']]],
+  ['lvec4_12',['lVec4',['../_vector4_d_8h.html#ae6e8c3217001b4b35c326593c6b64e5e',1,'fgm']]]
 ];

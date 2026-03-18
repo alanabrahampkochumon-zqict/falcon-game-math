@@ -1,28 +1,4 @@
 var structfgm_1_1_matrix2_d =
 [
-    [ "value_type", "structfgm_1_1_matrix2_d.html#abd92d06329b3b2b2934db62b0e6b8a81", null ],
-    [ "Matrix2D", "structfgm_1_1_matrix2_d.html#a5179953fc7477af45a3085ef6346c12b", null ],
-    [ "Matrix2D", "structfgm_1_1_matrix2_d.html#a879de42ab199a190cbc9f0f540f3254b", null ],
-    [ "Matrix2D", "structfgm_1_1_matrix2_d.html#ab59266d98876782c921c4cc931705733", null ],
-    [ "Matrix2D", "structfgm_1_1_matrix2_d.html#a4965ff71e0196c532151083b72d5ec8b", null ],
-    [ "determinant", "structfgm_1_1_matrix2_d.html#a1b11525b0a1720d2dfd3248668784a9a", null ],
-    [ "inverse", "structfgm_1_1_matrix2_d.html#ae728a327d922232cb1e3d1e0f003086d", null ],
-    [ "operator()", "structfgm_1_1_matrix2_d.html#a721b87d834e94d9faac09c56de029eef", null ],
-    [ "operator()", "structfgm_1_1_matrix2_d.html#a66e9237870d8ce5e5a3d39a913de5f60", null ],
-    [ "operator*", "structfgm_1_1_matrix2_d.html#ae8bae34683a925eb976f9e691d6412af", null ],
-    [ "operator*", "structfgm_1_1_matrix2_d.html#ae419909bb3bcd54ea4286eb140912aa4", null ],
-    [ "operator*", "structfgm_1_1_matrix2_d.html#a25a91555a3181b362e214671d10038f2", null ],
-    [ "operator*=", "structfgm_1_1_matrix2_d.html#a98e55320bc47e450e5d03e964b08c35b", null ],
-    [ "operator*=", "structfgm_1_1_matrix2_d.html#a82f7c6ccd984a47d699d08e44af9677f", null ],
-    [ "operator+", "structfgm_1_1_matrix2_d.html#a4e8484373bd0408a33e8fb2ce336f68d", null ],
-    [ "operator+=", "structfgm_1_1_matrix2_d.html#a1e3083ea1614a228b13814f727deef5c", null ],
-    [ "operator-", "structfgm_1_1_matrix2_d.html#a2fd71c4558b31076fe43f858efe2a9e7", null ],
-    [ "operator-=", "structfgm_1_1_matrix2_d.html#a0512b86661a62d0a57439c155bf8d80a", null ],
-    [ "operator/", "structfgm_1_1_matrix2_d.html#a796241d8d7d711a1aac4b5ebfb70d371", null ],
-    [ "operator/=", "structfgm_1_1_matrix2_d.html#a4fe7db34d0e0e803ee476009d44af19c", null ],
-    [ "operator[]", "structfgm_1_1_matrix2_d.html#a30c69ed9dc9bd6ceba24be89858a70b2", null ],
-    [ "operator[]", "structfgm_1_1_matrix2_d.html#a7d69b73917fed64115f782d413a7cd1e", null ],
-    [ "transpose", "structfgm_1_1_matrix2_d.html#aca94866f7a81d10131101bff602d848a", null ],
-    [ "columns", "structfgm_1_1_matrix2_d.html#a544f29bc44c4b013ac0e4fe08752e862", null ],
-    [ "elements", "structfgm_1_1_matrix2_d.html#ac3c8a5257153b38c195067905c18784e", null ]
+    [ "operator*=", "structfgm_1_1_matrix2_d.html#a98e55320bc47e450e5d03e964b08c35b", null ]
 ];

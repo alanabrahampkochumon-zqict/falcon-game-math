@@ -8,11 +8,6 @@ Concepts for Arithmetic, Strict\+Arithmetic, Matrix, and Vector. Also contains E
 {\ttfamily \+\#include $<$concepts$>$}\newline
 {\ttfamily \+\#include $<$cstddef$>$}\newline
 {\ttfamily \+\#include $<$type\+\_\+traits$>$}\newline
-\doxysubsubsection*{Namespaces}
-\begin{DoxyCompactItemize}
-\item 
-namespace \doxymbox{\hyperlink{namespacefgm}{fgm}}
-\end{DoxyCompactItemize}
 \doxysubsubsection*{Concepts}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,14 +24,14 @@ concept \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T$>$ }\\using \doxymbox{\hyperlink{namespacefgm_ae5677566a8d1f8376b44eadef77a60c4}{fgm::\+\+Magnitude}} = std::\+conditional\+\_\+t$<$std::\+is\+\_\+same\+\_\+v$<$T, float$>$, float, double$>$
+{\footnotesize template$<$typename T$>$ }\\using \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{fgm::\+\+Magnitude}} = std::\+conditional\+\_\+t$<$std::\+is\+\_\+same\+\_\+v$<$T, float$>$, float, double$>$
 \begin{DoxyCompactList}\small\item\em Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-constexpr double \doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{fgm::\+\+FLOAT\+\_\+\+EPSILON}} = 1e-\/5
+constexpr double \doxymbox{\hyperlink{_math_traits_8h_ac3c0fd59149d0159565c3254343bdcab}{fgm::\+\+FLOAT\+\_\+\+EPSILON}} = 1e-\/5
 \item 
-constexpr double \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{fgm::\+\+DOUBLE\+\_\+\+EPSILON}} = 1e-\/12
+constexpr double \doxymbox{\hyperlink{_math_traits_8h_afd8d25cec58c96d01e1d8e2af5ccdd80}{fgm::\+\+DOUBLE\+\_\+\+EPSILON}} = 1e-\/12
 \end{DoxyCompactItemize}
 
 
@@ -57,4 +52,49 @@ Copyright (c) 2026 Alan Abraham P Kochumon
 
 
 Definition in file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_math_traits_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}\index{MathTraits.h@{MathTraits.h}!Magnitude@{Magnitude}}
+\index{Magnitude@{Magnitude}!MathTraits.h@{MathTraits.h}}
+\doxysubsubsection{\texorpdfstring{Magnitude}{Magnitude}}
+{\footnotesize\ttfamily \label{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4} 
+template$<$typename T$>$ \\
+using \doxymbox{\hyperlink{_math_traits_8h_ae5677566a8d1f8376b44eadef77a60c4}{fgm::\+\+Magnitude}} = std::\+conditional\+\_\+t$<$std::\+is\+\_\+same\+\_\+v$<$T, float$>$, float, double$>$}
+
+
+
+Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_math_traits_8h_source_l00075}{75}} of file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_math_traits_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_math_traits_8h_afd8d25cec58c96d01e1d8e2af5ccdd80}\index{MathTraits.h@{MathTraits.h}!DOUBLE\_EPSILON@{DOUBLE\_EPSILON}}
+\index{DOUBLE\_EPSILON@{DOUBLE\_EPSILON}!MathTraits.h@{MathTraits.h}}
+\doxysubsubsection{\texorpdfstring{DOUBLE\_EPSILON}{DOUBLE\_EPSILON}}
+{\footnotesize\ttfamily \label{_math_traits_8h_afd8d25cec58c96d01e1d8e2af5ccdd80} 
+double fgm::\+\+DOUBLE\+\_\+\+EPSILON = 1e-\/12\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_math_traits_8h_source_l00085}{85}} of file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
+
+\Hypertarget{_math_traits_8h_ac3c0fd59149d0159565c3254343bdcab}\index{MathTraits.h@{MathTraits.h}!FLOAT\_EPSILON@{FLOAT\_EPSILON}}
+\index{FLOAT\_EPSILON@{FLOAT\_EPSILON}!MathTraits.h@{MathTraits.h}}
+\doxysubsubsection{\texorpdfstring{FLOAT\_EPSILON}{FLOAT\_EPSILON}}
+{\footnotesize\ttfamily \label{_math_traits_8h_ac3c0fd59149d0159565c3254343bdcab} 
+double fgm::\+\+FLOAT\+\_\+\+EPSILON = 1e-\/5\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_math_traits_8h_source_l00084}{84}} of file \doxymbox{\hyperlink{_math_traits_8h_source}{Math\+Traits.\+h}}.
 
