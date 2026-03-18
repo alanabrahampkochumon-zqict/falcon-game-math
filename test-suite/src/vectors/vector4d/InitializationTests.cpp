@@ -28,11 +28,12 @@ class Vector4DInitialization: public ::testing::Test
 TYPED_TEST_SUITE(Vector4DInitialization, SupportedTypes);
 
 
-/**************************************
- *                                    *
- *               TESTS                *
- *                                    *
- **************************************/
+
+
+/**
+ * @addtogroup FGM_Vec4_Init
+ * @{
+ */
 
 /** @test Verify that the @ref fgm::Vector4D default constructor initializes all components to zero. */
 TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
@@ -41,7 +42,6 @@ TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
 
     EXPECT_VEC_ZERO(vec);
 }
-
 
 /**
  * @test Verify that the @ref fgm::Vector4D parameterized constructor correctly assigns components from the provided
@@ -58,7 +58,6 @@ TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue
 
     EXPECT_VEC_CONTAINS(vec, a, b, c, d);
 }
-
 
 /**
  * @test Verify that the @ref fgm::Vector4D parameterized constructor correctly composes a 4D vector from two @ref
@@ -78,7 +77,6 @@ TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
     EXPECT_VEC_CONTAINS(vec, a, b, c, d);
 }
 
-
 /**
  * @test Verify that the @ref fgm::Vector4D parameterized constructor correctly composes a 4D vector from a @ref
  *       fgm::Vector3D instance and a scalar.
@@ -96,7 +94,6 @@ TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
     EXPECT_VEC_CONTAINS(vec, a, b, c, scalar);
 }
 
-
 /**
  * @test Verify that the @ref fgm::Vector4D parameterized constructor correctly composes a 4D vector from a scalar and
  *        a @ref fgm::Vector3D instance.
@@ -113,3 +110,5 @@ TYPED_TEST(Vector4DInitialization, ScalarAnd3DVectorCanInitializeA4DVector)
 
     EXPECT_VEC_CONTAINS(vec, scalar, a, b, c);
 }
+
+/** @} */

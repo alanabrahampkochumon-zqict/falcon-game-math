@@ -1,16 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"_matrix4_d_tests_8cpp.html#adefcaf8aa02ae8029a5e6bb0e3a243b0":[8,0,4,1,0,2,8],
-"_matrix4_d_tests_8cpp.html#aea1af1af09b6a83dbab96cd716531278":[8,0,4,1,0,2,11],
-"_matrix4_d_tests_8cpp.html#afe14ffbdc399cb8086b67c3b4714d856":[8,0,4,1,0,2,13],
-"_matrix4_d_tests_8cpp_source.html":[8,0,4,1,0,2],
-"_matrix_utils_8h.html":[8,0,4,0,0,1],
-"_matrix_utils_8h_source.html":[8,0,4,0,0,1],
-"_min_size_rel_2cmake__pch_8hxx.html":[8,0,0,1,0,0,1,0],
-"_min_size_rel_2cmake__pch_8hxx_source.html":[8,0,0,1,0,0,1,0],
-"_product_tests_8cpp.html":[8,0,4,1,2,1,8],
-"_product_tests_8cpp.html#a256b4dd376ab96bfa500ffe679c8014a":[8,0,4,1,2,1,8,7],
-"_product_tests_8cpp.html#a26e51f21b6148a59ce7e29928ed19309":[8,0,4,1,2,1,8,3],
 "_product_tests_8cpp.html#a4ce7ca6be0e057f649edb97cc08fd82c":[8,0,4,1,2,1,8,2],
 "_product_tests_8cpp.html#a6365818c2ecff1a205344fbda9567bd9":[8,0,4,1,2,1,8,6],
 "_product_tests_8cpp.html#a9dcbc7ae9fb013209a64e07340fa4d97":[8,0,4,1,2,1,8,5],
@@ -249,5 +238,16 @@ var NAVTREEINDEX1 =
 "class_boolean_vector_bit_operations.html#a71d2dca435b398bd442e663df7b3a10c":[7,0,3,5],
 "class_boolean_vector_bit_operations.html#ab230850a87c30064daccada5c47bcb37":[7,0,3,3],
 "class_boolean_vector_bit_operations.html#ac9616b8573386813726ad6ceb94c7b4e":[7,0,3,4],
-"class_packed_size_calculator_tests.html":[7,0,4]
+"class_packed_size_calculator_tests.html":[7,0,4],
+"class_register_map_test.html":[7,0,5],
+"class_vector3_d_initialization.html":[7,0,7],
+"class_vector4_d_addition.html":[7,0,8],
+"class_vector4_d_addition.html#a0d122a9335b2ca9f74c62221cf60f088":[7,0,8,2],
+"class_vector4_d_addition.html#a4b0361cf543e4adaa071a61818f01f0b":[7,0,8,1],
+"class_vector4_d_addition.html#a5f70655f533e5fcd122a026776dabf93":[7,0,8,0],
+"class_vector4_d_addition.html#a716d683ee9caa4dad654acab106eebe2":[7,0,8,3],
+"class_vector4_d_comparison.html":[7,0,9],
+"class_vector4_d_comparison.html#a1280b2f33176b2fd4bb5a8a914ced79f":[7,0,9,0],
+"class_vector4_d_comparison.html#a41270ebb3848e4fd479ea1eeffe5a70a":[7,0,9,1],
+"class_vector4_d_comparison.html#a47e7fe54069c8fbfd4cc4841b6d325fe":[7,0,9,4]
 };

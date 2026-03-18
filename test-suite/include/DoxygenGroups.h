@@ -50,6 +50,7 @@
              *   @defgroup FGM_Vec4_LTE_Comp Less Than or Equal Comparison
              *   @defgroup FGM_Vec4_Equality Component-wise and Masked Equality
              *   @defgroup FGM_Vec4_Inequality Component-wise and Masked Inequality
+             *   @defgroup FGM_Vec4_Init Initialization
              *   @defgroup FGM_Vec4_Magnitude Scalar Length(Magnitude)
              *   @defgroup FGM_Vec4_Normalize Vector Normalization
              *   @defgroup FGM_Vec4_Dot Dot Product

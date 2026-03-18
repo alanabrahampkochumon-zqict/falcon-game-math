@@ -1,16 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"class_register_map_test.html":[7,0,5],
-"class_vector3_d_initialization.html":[7,0,7],
-"class_vector4_d_addition.html":[7,0,8],
-"class_vector4_d_addition.html#a0d122a9335b2ca9f74c62221cf60f088":[7,0,8,2],
-"class_vector4_d_addition.html#a4b0361cf543e4adaa071a61818f01f0b":[7,0,8,1],
-"class_vector4_d_addition.html#a5f70655f533e5fcd122a026776dabf93":[7,0,8,0],
-"class_vector4_d_addition.html#a716d683ee9caa4dad654acab106eebe2":[7,0,8,3],
-"class_vector4_d_comparison.html":[7,0,9],
-"class_vector4_d_comparison.html#a1280b2f33176b2fd4bb5a8a914ced79f":[7,0,9,0],
-"class_vector4_d_comparison.html#a41270ebb3848e4fd479ea1eeffe5a70a":[7,0,9,1],
-"class_vector4_d_comparison.html#a47e7fe54069c8fbfd4cc4841b6d325fe":[7,0,9,4],
 "class_vector4_d_comparison.html#a49e78861b8b8738a7d786af58fbbc945":[7,0,9,5],
 "class_vector4_d_comparison.html#a923b0e1ad1d9e7c14be6f4f2226bfe29":[7,0,9,6],
 "class_vector4_d_comparison.html#ac89e69922cfbdc5edbf7285283497c7a":[7,0,9,3],
@@ -202,7 +191,7 @@ var NAVTREEINDEX2 =
 "group___f_g_m___vec4___division.html#ga7a5758a23acd48130a6a550ab4933b9e":[4,0,0,0,0,6,3],
 "group___f_g_m___vec4___division.html#gab4fbb04fb9f5cc50edc858906e2fda48":[4,0,0,0,0,6,5],
 "group___f_g_m___vec4___division.html#gac0e1796c59ffa38ab278a0568abbf1af":[4,0,0,0,0,6,0],
-"group___f_g_m___vec4___dot.html":[4,0,0,0,0,16],
+"group___f_g_m___vec4___dot.html":[4,0,0,0,0,17],
 "group___f_g_m___vec4___equality.html":[4,0,0,0,0,12],
 "group___f_g_m___vec4___equality.html#ga150ab58eb607c8471f938de0f481bdfd":[4,0,0,0,0,12,3],
 "group___f_g_m___vec4___equality.html#ga192b3eec63a9287455ded5b4afe58408":[4,0,0,0,0,12,10],
@@ -249,5 +238,16 @@ var NAVTREEINDEX2 =
 "group___f_g_m___vec4___inequality.html#gaa908d51e38872e61f926b280b3d152ab":[4,0,0,0,0,13,15],
 "group___f_g_m___vec4___inequality.html#gaaac3b77d06229ae243f8e719680f3925":[4,0,0,0,0,13,1],
 "group___f_g_m___vec4___inequality.html#gab4ce5a56b230bf185812eefc55fd3811":[4,0,0,0,0,13,16],
-"group___f_g_m___vec4___inequality.html#gabbe3522220c8bd4a79ac79521b6eed4e":[4,0,0,0,0,13,12]
+"group___f_g_m___vec4___inequality.html#gabbe3522220c8bd4a79ac79521b6eed4e":[4,0,0,0,0,13,12],
+"group___f_g_m___vec4___inequality.html#gac28db5bedf0e5d06cf149ed6514c2704":[4,0,0,0,0,13,11],
+"group___f_g_m___vec4___inequality.html#gad2d129e0321231fcf0398d63c80448b9":[4,0,0,0,0,13,6],
+"group___f_g_m___vec4___inequality.html#gae1bca305566f90c8e3255e9060d92f12":[4,0,0,0,0,13,9],
+"group___f_g_m___vec4___inequality.html#gae781aebf3be7b1e0feded39e93d523bf":[4,0,0,0,0,13,14],
+"group___f_g_m___vec4___inequality.html#gaf2f688bfe04547e6432b338f1e3fde20":[4,0,0,0,0,13,2],
+"group___f_g_m___vec4___init.html":[4,0,0,0,0,14],
+"group___f_g_m___vec4___init.html#ga5a187bbade6d6f8ed6f917aba6065e4a":[4,0,0,0,0,14,4],
+"group___f_g_m___vec4___init.html#gaaea8a2b2a2c24e693c62c839b9213e84":[4,0,0,0,0,14,3],
+"group___f_g_m___vec4___init.html#gab191c534e6251a89f78d3904cafa94a7":[4,0,0,0,0,14,2],
+"group___f_g_m___vec4___init.html#gabf80101e26b45033f50dbfe802fb1703":[4,0,0,0,0,14,1],
+"group___f_g_m___vec4___init.html#gaf8befa6ae18bcf39392f885612b903c0":[4,0,0,0,0,14,0]
 };

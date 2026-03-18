@@ -186,128 +186,124 @@ $(function(){initNavTree('_magnitude_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">/**************************************</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"> *                                    *</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"> *           MAGNITUDE TESTS          *</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"> *                                    *</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"> **************************************/</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
-<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#a8a099e8beb853a0a450ab830bbb338ce">   99</a></span>TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, ZeroVectorReturnsZero)</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>{</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(0.0f, 0.0f, 0.0f, 0.0f);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    EXPECT_FLOAT_EQ(0.0f, vec.<a class="code hl_function" href="structfgm_1_1_vector4_d.html#af0b8305cc8e13c7c922d09e2ae67af2f">mag</a>());</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">/**************************************</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment"> *                                    *</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"> *           MAGNITUDE TESTS          *</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"> *                                    *</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"> **************************************/</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span></div>
+<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___magnitude.html#ga8a099e8beb853a0a450ab830bbb338ce">  104</a></span>TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, ZeroVectorReturnsZero)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>{</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(0.0f, 0.0f, 0.0f, 0.0f);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    EXPECT_FLOAT_EQ(0.0f, vec.<a class="code hl_function" href="structfgm_1_1_vector4_d.html#af0b8305cc8e13c7c922d09e2ae67af2f">mag</a>());</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
 </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
-<div class="foldopen" id="foldopen00108" data-start="{" data-end="}">
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#a57e0074f771605ffa75006a789a1bf38">  108</a></span>TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, OneComponentVectorReturnsNonUnitScalar)</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>{</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(1.0f, 1.0f, 1.0f, 1.0f);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    EXPECT_NE(1.0f, vec.<a class="code hl_function" href="structfgm_1_1_vector4_d.html#af0b8305cc8e13c7c922d09e2ae67af2f">mag</a>());</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span></div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___magnitude.html#ga57e0074f771605ffa75006a789a1bf38">  112</a></span>TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, OneComponentVectorReturnsNonUnitScalar)</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>{</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(1.0f, 1.0f, 1.0f, 1.0f);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    EXPECT_NE(1.0f, vec.<a class="code hl_function" href="structfgm_1_1_vector4_d.html#af0b8305cc8e13c7c922d09e2ae67af2f">mag</a>());</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
 </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">// TODO:Separate tests</span></div>
-<div class="foldopen" id="foldopen00117" data-start="{" data-end="}">
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#a21e4a3ee5db8c292595e4300815d31b6">  117</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, NonUnitVectorReturnsCorrectMagnitude)</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>{</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keyword">const</span> <span class="keyword">auto</span> magnitude = this-&gt;vec.mag();</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keyword">static_assert</span>(std::is_floating_point_v&lt;<span class="keyword">decltype</span>(magnitude)&gt;);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_function" href="namespacetestutils.html#a1f297fa9b099880593df66c438fa5eff">EXPECT_MAG_EQ</a>(this-&gt;magnitude, magnitude);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span></div>
+<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___magnitude.html#ga21e4a3ee5db8c292595e4300815d31b6">  120</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, NonUnitVectorReturnsCorrectMagnitude)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>{</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">const</span> <span class="keyword">auto</span> magnitude = this-&gt;vec.mag();</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">static_assert</span>(std::is_floating_point_v&lt;<span class="keyword">decltype</span>(magnitude)&gt;);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_function" href="namespacetestutils.html#a1f297fa9b099880593df66c438fa5eff">EXPECT_MAG_EQ</a>(this-&gt;magnitude, magnitude);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>}</div>
 </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
-<div class="foldopen" id="foldopen00130" data-start="{" data-end="}">
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#a94fda7188a9c870ef0f10cbf062c5584">  130</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>{</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    [[maybe_unused]] <span class="keyword">const</span> <span class="keyword">auto</span> magnitude = this-&gt;vec.mag();</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keyword">static_assert</span>(std::is_floating_point_v&lt;<span class="keyword">decltype</span>(magnitude)&gt;);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span></div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___magnitude.html#ga94fda7188a9c870ef0f10cbf062c5584">  132</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>{</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    [[maybe_unused]] <span class="keyword">const</span> <span class="keyword">auto</span> magnitude = this-&gt;vec.mag();</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keyword">static_assert</span>(std::is_floating_point_v&lt;<span class="keyword">decltype</span>(magnitude)&gt;);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
 </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span></div>
-<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#a5bfd2089d9a157b2eec7d5bd8f61f268">  138</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>{</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keyword">const</span> <span class="keyword">auto</span> magnitude = <a class="code hl_function" href="structfgm_1_1_vector4_d.html#af0b8305cc8e13c7c922d09e2ae67af2f">fgm::Vector4D&lt;TypeParam&gt;::mag</a>(this-&gt;vec);</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <a class="code hl_function" href="namespacetestutils.html#a1f297fa9b099880593df66c438fa5eff">EXPECT_MAG_EQ</a>(this-&gt;magnitude, magnitude);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>}</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span></div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___magnitude.html#ga5bfd2089d9a157b2eec7d5bd8f61f268">  139</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_magnitude.html">Vector4DMagnitude</a>, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>{</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keyword">const</span> <span class="keyword">auto</span> magnitude = <a class="code hl_function" href="structfgm_1_1_vector4_d.html#af0b8305cc8e13c7c922d09e2ae67af2f">fgm::Vector4D&lt;TypeParam&gt;::mag</a>(this-&gt;vec);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <a class="code hl_function" href="namespacetestutils.html#a1f297fa9b099880593df66c438fa5eff">EXPECT_MAG_EQ</a>(this-&gt;magnitude, magnitude);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>}</div>
 </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span></div>
 <div class="foldopen" id="foldopen00150" data-start="{" data-end="}">
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#a93f5aefd504e25dc166f5f24ebb1c394">  150</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_unclean_magnitude.html">Vector4DUncleanMagnitude</a>, NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___magnitude.html#ga93f5aefd504e25dc166f5f24ebb1c394">  150</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_unclean_magnitude.html">Vector4DUncleanMagnitude</a>, NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>{</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keyword">const</span> <span class="keyword">auto</span> magnitude = this-&gt;vec.mag();</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <a class="code hl_function" href="namespacetestutils.html#a1f297fa9b099880593df66c438fa5eff">EXPECT_MAG_EQ</a>(this-&gt;magnitude, magnitude);</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>}</div>
 </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span></div>
-<div class="foldopen" id="foldopen00162" data-start="{" data-end="}">
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#a645fd14ddd6529df29b538e3df6c7834">  162</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_unclean_magnitude.html">Vector4DUncleanMagnitude</a>, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>{</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keyword">const</span> <span class="keyword">auto</span> magnitude = <a class="code hl_function" href="structfgm_1_1_vector4_d.html#af0b8305cc8e13c7c922d09e2ae67af2f">fgm::Vector4D&lt;TypeParam&gt;::mag</a>(this-&gt;vec);</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <a class="code hl_function" href="namespacetestutils.html#a1f297fa9b099880593df66c438fa5eff">EXPECT_MAG_EQ</a>(this-&gt;magnitude, magnitude);</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>}</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span></div>
+<div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___magnitude.html#ga645fd14ddd6529df29b538e3df6c7834">  161</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_unclean_magnitude.html">Vector4DUncleanMagnitude</a>, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>{</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keyword">const</span> <span class="keyword">auto</span> magnitude = <a class="code hl_function" href="structfgm_1_1_vector4_d.html#af0b8305cc8e13c7c922d09e2ae67af2f">fgm::Vector4D&lt;TypeParam&gt;::mag</a>(this-&gt;vec);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <a class="code hl_function" href="namespacetestutils.html#a1f297fa9b099880593df66c438fa5eff">EXPECT_MAG_EQ</a>(this-&gt;magnitude, magnitude);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>}</div>
 </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span></div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">/**************************************</span></div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment"> *                                    *</span></div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment"> *        NORMALIZATION TESTS         *</span></div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment"> *                                    *</span></div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment"> **************************************/</span></div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span></div>
-<div class="foldopen" id="foldopen00179" data-start="{" data-end="}">
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#ac1e5677cd2c09846c0b63922b5b5863b">  179</a></span>TEST(<a class="code hl_class" href="class_vector4_d_normalization.html">Vector4DNormalization</a>, ZeroVectorWhenNormalizationCausesDeath)</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>{</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(0.0, 0.0, 0.0, 0.0);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    EXPECT_DEATH({ vec.<a class="code hl_function" href="structfgm_1_1_vector4_d.html#aec8569c71e7779762f308d8fd4bf83f6">normalize</a>(); }, <span class="stringliteral">&quot;Vector4D Normalization : Division by 0&quot;</span>);</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>}</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">/**************************************</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment"> *                                    *</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment"> *        NORMALIZATION TESTS         *</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment"> *                                    *</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment"> **************************************/</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span></div>
+<div class="foldopen" id="foldopen00185" data-start="{" data-end="}">
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___normalize.html#gac1e5677cd2c09846c0b63922b5b5863b">  185</a></span>TEST(<a class="code hl_class" href="class_vector4_d_normalization.html">Vector4DNormalization</a>, ZeroVectorWhenNormalizationCausesDeath)</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>{</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(0.0, 0.0, 0.0, 0.0);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    EXPECT_DEATH({ vec.<a class="code hl_function" href="structfgm_1_1_vector4_d.html#aec8569c71e7779762f308d8fd4bf83f6">normalize</a>(); }, <span class="stringliteral">&quot;Vector4D Normalization : Division by 0&quot;</span>);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>}</div>
 </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span></div>
-<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#a7dd3baea55662b88b6ed3e1dec941b0e">  188</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_normalization.html">Vector4DNormalization</a>, NonZeroVectorNormalizationReturnsUnitVector)</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>{</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> normalized = this-&gt;vec.<a class="code hl_function" href="structfgm_1_1_vector4_d.html#aec8569c71e7779762f308d8fd4bf83f6">normalize</a>();</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <a class="code hl_function" href="namespacetestutils.html#af086eefd4f5940a7963581d949339c8f">EXPECT_VEC_EQ</a>(this-&gt;expectedVector, normalized);</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>}</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span></div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___normalize.html#ga7dd3baea55662b88b6ed3e1dec941b0e">  193</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_normalization.html">Vector4DNormalization</a>, NonZeroVectorNormalizationReturnsUnitVector)</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>{</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> normalized = this-&gt;vec.<a class="code hl_function" href="structfgm_1_1_vector4_d.html#aec8569c71e7779762f308d8fd4bf83f6">normalize</a>();</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <a class="code hl_function" href="namespacetestutils.html#af086eefd4f5940a7963581d949339c8f">EXPECT_VEC_EQ</a>(this-&gt;expectedVector, normalized);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>}</div>
 </div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span></div>
-<div class="foldopen" id="foldopen00197" data-start="{" data-end="}">
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#ab9d71c1663e1936cab9d0e4f188219ce">  197</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_normalization.html">Vector4DNormalization</a>, StaticWrapper_NonZeroVectorNormalizationReturnsUnitVector)</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>{</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> normalized = <a class="code hl_function" href="structfgm_1_1_vector4_d.html#aec8569c71e7779762f308d8fd4bf83f6">fgm::Vector4D&lt;TypeParam&gt;::normalize</a>(this-&gt;vec);</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <a class="code hl_function" href="namespacetestutils.html#af086eefd4f5940a7963581d949339c8f">EXPECT_VEC_EQ</a>(this-&gt;expectedVector, normalized);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>}</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span></div>
+<div class="foldopen" id="foldopen00201" data-start="{" data-end="}">
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___normalize.html#gab9d71c1663e1936cab9d0e4f188219ce">  201</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_normalization.html">Vector4DNormalization</a>, StaticWrapper_NonZeroVectorNormalizationReturnsUnitVector)</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>{</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> normalized = <a class="code hl_function" href="structfgm_1_1_vector4_d.html#aec8569c71e7779762f308d8fd4bf83f6">fgm::Vector4D&lt;TypeParam&gt;::normalize</a>(this-&gt;vec);</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <a class="code hl_function" href="namespacetestutils.html#af086eefd4f5940a7963581d949339c8f">EXPECT_VEC_EQ</a>(this-&gt;expectedVector, normalized);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>}</div>
 </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span></div>
-<div class="foldopen" id="foldopen00209" data-start="{" data-end="}">
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="_magnitude_tests_8cpp.html#ac9f8c510ad76efdf35425d566bcb2fed">  209</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_normalization.html">Vector4DNormalization</a>, NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>{</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    [[maybe_unused]] <span class="keyword">const</span> <span class="keyword">auto</span> normalized = this-&gt;vec.normalize();</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keyword">static_assert</span>(std::is_floating_point_v&lt;<span class="keyword">typename</span> <span class="keyword">decltype</span>(normalized)::value_type&gt;);</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>}</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span></div>
+<div class="foldopen" id="foldopen00213" data-start="{" data-end="}">
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___normalize.html#gac9f8c510ad76efdf35425d566bcb2fed">  213</a></span>TYPED_TEST(<a class="code hl_class" href="class_vector4_d_normalization.html">Vector4DNormalization</a>, NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>{</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    [[maybe_unused]] <span class="keyword">const</span> <span class="keyword">auto</span> normalized = this-&gt;vec.normalize();</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keyword">static_assert</span>(std::is_floating_point_v&lt;<span class="keyword">typename</span> <span class="keyword">decltype</span>(normalized)::value_type&gt;);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>}</div>
 </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span></div>
 <div class="ttc" id="a_magnitude_tests_8cpp_html_ad513e09b6267f7dcfc5ddff3617f6f13"><div class="ttname"><a href="_magnitude_tests_8cpp.html#ad513e09b6267f7dcfc5ddff3617f6f13">TYPED_TEST_SUITE</a></div><div class="ttdeci">TYPED_TEST_SUITE(Vector4DMagnitude, SupportedArithmeticTypes)</div><div class="ttdoc">Test fixture for fgm::Vector4D magnitude, parameterized by SupportedArithmeticTypes.</div></div>
 <div class="ttc" id="a_vector3_d_test_setup_8h_html_a419bc60d90bfcd4724a953b51402235e"><div class="ttname"><a href="_vector3_d_test_setup_8h.html#a419bc60d90bfcd4724a953b51402235e">SupportedArithmeticTypes</a></div><div class="ttdeci">::testing::Types&lt; unsigned char, int, unsigned int, float, double, std::size_t, long long &gt; SupportedArithmeticTypes</div><div class="ttdef"><b>Definition</b> <a href="_vector3_d_test_setup_8h_source.html#l00024">Vector3DTestSetup.h:24</a></div></div>
 <div class="ttc" id="a_vector4_d_test_setup_8h_html"><div class="ttname"><a href="_vector4_d_test_setup_8h.html">Vector4DTestSetup.h</a></div><div class="ttdoc">Define test setups common to all Vector4D tests.</div></div>

@@ -1,7 +1,5 @@
-var vectors_2vector4d_2_initialization_tests_8cpp =
+var group___f_g_m___vec4___init =
 [
-    [ "Vector4DInitialization&lt; T &gt;", "class_vector4_d_initialization.html", null ],
-    [ "TYPED_TEST_SUITE", "vectors_2vector4d_2_initialization_tests_8cpp.html#a7b7860d540a7355829ade90b7b7d1179", null ],
     [ "Vector4DInitialization_3DVectorAndScalarCanInitializeA4DVector", "group___f_g_m___vec4___init.html#gaf8befa6ae18bcf39392f885612b903c0", null ],
     [ "Vector4DInitialization_ConstructorInitializesVectorsWithCorrectValue", "group___f_g_m___vec4___init.html#gabf80101e26b45033f50dbfe802fb1703", null ],
     [ "Vector4DInitialization_EmptyConstructorInitializesZeroVector", "group___f_g_m___vec4___init.html#gab191c534e6251a89f78d3904cafa94a7", null ],
