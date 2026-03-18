@@ -20,6 +20,6 @@ var group___f_g_m_vector4_d =
     [ "Dot Product", "group___f_g_m___vec4___dot.html", "group___f_g_m___vec4___dot" ],
     [ "Vector Projection", "group___f_g_m___vec4___proj.html", "group___f_g_m___vec4___proj" ],
     [ "Vector Rejection", "group___f_g_m___vec4___rej.html", "group___f_g_m___vec4___rej" ],
-    [ "Formatted String Representation", "group___f_g_m___vec4___string___repr.html", null ],
-    [ "Conversion Constructor", "group___f_g_m___vec4___type___conv.html", null ]
+    [ "Formatted String Representation", "group___f_g_m___vec4___string___repr.html", "group___f_g_m___vec4___string___repr" ],
+    [ "Conversion Constructor", "group___f_g_m___vec4___type___conv.html", "group___f_g_m___vec4___type___conv" ]
 ];

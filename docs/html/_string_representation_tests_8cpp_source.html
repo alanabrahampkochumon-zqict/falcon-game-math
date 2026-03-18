@@ -98,31 +98,27 @@ $(function(){initNavTree('_string_representation_tests_8cpp_source.html','','');
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/**************************************</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *                                    *</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *                SETUP               *</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> *                                    *</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> **************************************/</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_vector4_d_string_representation_tests.html">   23</a></span><span class="keyword">class </span><a class="code hl_class" href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a>: <span class="keyword">public</span> ::testing::Test</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> SetUp()<span class="keyword"> override </span>{ <a class="code hl_variable" href="structfgm_1_1_config.html#ac6854401af0ce401431a3326c6925321">fgm::Config::useFullPrecision</a> = <span class="keyword">true</span>; }</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> TearDown()<span class="keyword"> override </span>{ <a class="code hl_variable" href="structfgm_1_1_config.html#ac6854401af0ce401431a3326c6925321">fgm::Config::useFullPrecision</a> = <span class="keyword">false</span>; }</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>};</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">/**************************************</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *                                    *</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *                SETUP               *</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *                                    *</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> **************************************/</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_vector4_d_string_representation_tests.html">   22</a></span><span class="keyword">class </span><a class="code hl_class" href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a>: <span class="keyword">public</span> ::testing::Test</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> SetUp()<span class="keyword"> override </span>{ <a class="code hl_variable" href="structfgm_1_1_config.html#ac6854401af0ce401431a3326c6925321">fgm::Config::useFullPrecision</a> = <span class="keyword">true</span>; }</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> TearDown()<span class="keyword"> override </span>{ <a class="code hl_variable" href="structfgm_1_1_config.html#ac6854401af0ce401431a3326c6925321">fgm::Config::useFullPrecision</a> = <span class="keyword">false</span>; }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
 </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">/**************************************</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> *                                    *</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> *               TESTS                *</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> *                                    *</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> **************************************/</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
 <div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="_string_representation_tests_8cpp.html#a62cdd9b03764386bc89b3d41da7ded1b">   40</a></span><a class="code hl_function" href="_string_representation_tests_8cpp.html#a62cdd9b03764386bc89b3d41da7ded1b">TEST_F</a>(<a class="code hl_class" href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a>, IntegralRepresentation)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___string___repr.html#ga62cdd9b03764386bc89b3d41da7ded1b">   40</a></span><a class="code hl_function" href="group___f_g_m___vec4___string___repr.html#ga62cdd9b03764386bc89b3d41da7ded1b">TEST_F</a>(<a class="code hl_class" href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a>, IntegralRepresentation)</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(1, 2, 3, 4);</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    std::stringstream ss;</div>
@@ -132,35 +128,34 @@ $(function(){initNavTree('_string_representation_tests_8cpp_source.html','','');
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    EXPECT_EQ(ss.str(), <span class="stringliteral">&quot;&lt;1, 2, 3, 4&gt;\n&quot;</span>);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
-<div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="_string_representation_tests_8cpp.html#ae10a20c2f6cf9cf48db8c73e2790fcfc">   55</a></span><a class="code hl_function" href="_string_representation_tests_8cpp.html#a62cdd9b03764386bc89b3d41da7ded1b">TEST_F</a>(<a class="code hl_class" href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a>, FloatRepresentation)</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>{</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(1.2345f, 2.0f, 3.56789f, 4.2f);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    std::stringstream ss;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    ss &lt;&lt; vec;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    EXPECT_EQ(ss.str(), <span class="stringliteral">&quot;&lt;1.23450, 2.00000, 3.56789, 4.20000&gt;\n&quot;</span>);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___string___repr.html#gae10a20c2f6cf9cf48db8c73e2790fcfc">   54</a></span><a class="code hl_function" href="group___f_g_m___vec4___string___repr.html#ga62cdd9b03764386bc89b3d41da7ded1b">TEST_F</a>(<a class="code hl_class" href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a>, FloatRepresentation)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(1.2345f, 2.0f, 3.56789f, 4.2f);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    std::stringstream ss;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    ss &lt;&lt; vec;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    EXPECT_EQ(ss.str(), <span class="stringliteral">&quot;&lt;1.23450, 2.00000, 3.56789, 4.20000&gt;\n&quot;</span>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
 </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
-<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="_string_representation_tests_8cpp.html#a2666c87ac35f0f0bbfd0ac8fb21aa15d">   70</a></span><a class="code hl_function" href="_string_representation_tests_8cpp.html#a62cdd9b03764386bc89b3d41da7ded1b">TEST_F</a>(<a class="code hl_class" href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a>, DoubleRepresentation)</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>{</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(1.2345789777, 2.65831, 3.161285, 4.0);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    std::stringstream ss;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___string___repr.html#ga2666c87ac35f0f0bbfd0ac8fb21aa15d">   68</a></span><a class="code hl_function" href="group___f_g_m___vec4___string___repr.html#ga62cdd9b03764386bc89b3d41da7ded1b">TEST_F</a>(<a class="code hl_class" href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a>, DoubleRepresentation)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>{</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec(1.2345789777, 2.65831, 3.161285, 4.0);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    std::stringstream ss;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    ss &lt;&lt; vec;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    ss &lt;&lt; vec;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    EXPECT_EQ(ss.str(), <span class="stringliteral">&quot;&lt;1.234578977700000, 2.658310000000000, 3.161285000000000, 4.000000000000000&gt;\n&quot;</span>);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    EXPECT_EQ(ss.str(), <span class="stringliteral">&quot;&lt;1.234578977700000, 2.658310000000000, 3.161285000000000, 4.000000000000000&gt;\n&quot;</span>);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}</div>
 </div>
-<div class="ttc" id="a_string_representation_tests_8cpp_html_a62cdd9b03764386bc89b3d41da7ded1b"><div class="ttname"><a href="_string_representation_tests_8cpp.html#a62cdd9b03764386bc89b3d41da7ded1b">TEST_F</a></div><div class="ttdeci">TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)</div><div class="ttdef"><b>Definition</b> <a href="#l00040">StringRepresentationTests.cpp:40</a></div></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span></div>
 <div class="ttc" id="a_vector4_d_test_setup_8h_html"><div class="ttname"><a href="_vector4_d_test_setup_8h.html">Vector4DTestSetup.h</a></div><div class="ttdoc">Define test setups common to all Vector4D tests.</div></div>
-<div class="ttc" id="aclass_vector4_d_string_representation_tests_html"><div class="ttname"><a href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a></div><div class="ttdef"><b>Definition</b> <a href="#l00023">StringRepresentationTests.cpp:24</a></div></div>
+<div class="ttc" id="aclass_vector4_d_string_representation_tests_html"><div class="ttname"><a href="class_vector4_d_string_representation_tests.html">Vector4DStringRepresentationTests</a></div><div class="ttdef"><b>Definition</b> <a href="#l00022">StringRepresentationTests.cpp:23</a></div></div>
+<div class="ttc" id="agroup___f_g_m___vec4___string___repr_html_ga62cdd9b03764386bc89b3d41da7ded1b"><div class="ttname"><a href="group___f_g_m___vec4___string___repr.html#ga62cdd9b03764386bc89b3d41da7ded1b">TEST_F</a></div><div class="ttdeci">TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)</div><div class="ttdef"><b>Definition</b> <a href="#l00040">StringRepresentationTests.cpp:40</a></div></div>
 <div class="ttc" id="astructfgm_1_1_config_html_ac6854401af0ce401431a3326c6925321"><div class="ttname"><a href="structfgm_1_1_config.html#ac6854401af0ce401431a3326c6925321">fgm::Config::useFullPrecision</a></div><div class="ttdeci">static bool useFullPrecision</div><div class="ttdoc">Toggles between standard logging precision and type-specific maximum precision.</div><div class="ttdef"><b>Definition</b> <a href="_config_8h_source.html#l00029">Config.h:29</a></div></div>
 <div class="ttc" id="astructfgm_1_1_vector4_d_html"><div class="ttname"><a href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a></div><div class="ttdef"><b>Definition</b> <a href="_vector4_d_8h_source.html#l00037">Vector4D.h:38</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -9,11 +9,11 @@ Verifies Vector4D conversion constructor logic.
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \doxymbox{\hyperlink{_type_conversion_tests_8cpp_aa7a59762098ebf3aea4f06c9cfa6dbf4}{Vector4\+DConversion\+Constructor\+\_\+\+Promotes\+Type}} ()
+void \doxymbox{\hyperlink{group___f_g_m___vec4___type___conv_gaa7a59762098ebf3aea4f06c9cfa6dbf4}{Vector4\+DConversion\+Constructor\+\_\+\+Promotes\+Type}} ()
 \item 
-void \doxymbox{\hyperlink{_type_conversion_tests_8cpp_a5a7fa4ed84cfa76e811ccd87f44749ad}{Vector4\+DConversion\+Constructor\+\_\+\+Returns\+New\+Instance}} ()
+void \doxymbox{\hyperlink{group___f_g_m___vec4___type___conv_ga5a7fa4ed84cfa76e811ccd87f44749ad}{Vector4\+DConversion\+Constructor\+\_\+\+Returns\+New\+Instance}} ()
 \item 
-void \doxymbox{\hyperlink{_type_conversion_tests_8cpp_a0e0c185d92eb53264b7c9d6f8c087879}{Vector4\+DConversion\+Constructor\+\_\+\+Demotes\+Type}} ()
+void \doxymbox{\hyperlink{group___f_g_m___vec4___type___conv_ga0e0c185d92eb53264b7c9d6f8c087879}{Vector4\+DConversion\+Constructor\+\_\+\+Demotes\+Type}} ()
 \item 
 {\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_arithmetic}{fgm::\+\+Arithmetic}} T$>$ }\\void \doxymbox{\hyperlink{_type_conversion_tests_8cpp_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\+\_\+\+VEC\+\_\+\+CONTAINS}} (const \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{fgm::\+\+Vector2D}}$<$ T $>$ \&vector, T x, T y)
 \begin{DoxyCompactList}\small\item\em Performs a strict component-\/wise validation of a \doxylink{structfgm_1_1_vector2_d}{fgm::\+\+Vector2D} against discrete scalar values. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -73,40 +73,4 @@ Uses Google\+Test macros. Triggers a non-\/fatal test failure if the vector\text
 
 
 Definition at line \doxymbox{\hyperlink{_vector_utils_8h_source_l00070}{70}} of file \doxymbox{\hyperlink{_vector_utils_8h_source}{Vector\+Utils.\+h}}.
-
-\Hypertarget{_type_conversion_tests_8cpp_a0e0c185d92eb53264b7c9d6f8c087879}\index{TypeConversionTests.cpp@{TypeConversionTests.cpp}!Vector4DConversionConstructor\_DemotesType@{Vector4DConversionConstructor\_DemotesType}}
-\index{Vector4DConversionConstructor\_DemotesType@{Vector4DConversionConstructor\_DemotesType}!TypeConversionTests.cpp@{TypeConversionTests.cpp}}
-\doxysubsubsection{\texorpdfstring{Vector4DConversionConstructor\_DemotesType()}{Vector4DConversionConstructor\_DemotesType()}}
-{\footnotesize\ttfamily \label{_type_conversion_tests_8cpp_a0e0c185d92eb53264b7c9d6f8c087879} 
-void Vector4\+DConversion\+Constructor\+\_\+\+Demotes\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-\begin{DoxyRefDesc}{Test}
-\item[\doxymbox{\hyperlink{test__test000151}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} conversion constructor correctly demotes components from double to float. \end{DoxyRefDesc}
-
-
-Definition at line \doxymbox{\hyperlink{_type_conversion_tests_8cpp_source_l00052}{52}} of file \doxymbox{\hyperlink{_type_conversion_tests_8cpp_source}{Type\+Conversion\+Tests.\+cpp}}.
-
-\Hypertarget{_type_conversion_tests_8cpp_aa7a59762098ebf3aea4f06c9cfa6dbf4}\index{TypeConversionTests.cpp@{TypeConversionTests.cpp}!Vector4DConversionConstructor\_PromotesType@{Vector4DConversionConstructor\_PromotesType}}
-\index{Vector4DConversionConstructor\_PromotesType@{Vector4DConversionConstructor\_PromotesType}!TypeConversionTests.cpp@{TypeConversionTests.cpp}}
-\doxysubsubsection{\texorpdfstring{Vector4DConversionConstructor\_PromotesType()}{Vector4DConversionConstructor\_PromotesType()}}
-{\footnotesize\ttfamily \label{_type_conversion_tests_8cpp_aa7a59762098ebf3aea4f06c9cfa6dbf4} 
-void Vector4\+DConversion\+Constructor\+\_\+\+Promotes\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-\begin{DoxyRefDesc}{Test}
-\item[\doxymbox{\hyperlink{test__test000149}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} conversion constructor correctly promotes components from float to double. \end{DoxyRefDesc}
-
-
-Definition at line \doxymbox{\hyperlink{_type_conversion_tests_8cpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_type_conversion_tests_8cpp_source}{Type\+Conversion\+Tests.\+cpp}}.
-
-\Hypertarget{_type_conversion_tests_8cpp_a5a7fa4ed84cfa76e811ccd87f44749ad}\index{TypeConversionTests.cpp@{TypeConversionTests.cpp}!Vector4DConversionConstructor\_ReturnsNewInstance@{Vector4DConversionConstructor\_ReturnsNewInstance}}
-\index{Vector4DConversionConstructor\_ReturnsNewInstance@{Vector4DConversionConstructor\_ReturnsNewInstance}!TypeConversionTests.cpp@{TypeConversionTests.cpp}}
-\doxysubsubsection{\texorpdfstring{Vector4DConversionConstructor\_ReturnsNewInstance()}{Vector4DConversionConstructor\_ReturnsNewInstance()}}
-{\footnotesize\ttfamily \label{_type_conversion_tests_8cpp_a5a7fa4ed84cfa76e811ccd87f44749ad} 
-void Vector4\+DConversion\+Constructor\+\_\+\+Returns\+New\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-\begin{DoxyRefDesc}{Test}
-\item[\doxymbox{\hyperlink{test__test000150}{Test}}]Verify that the \doxylink{structfgm_1_1_vector4_d}{fgm::\+\+Vector4D} conversion constructor ensures deep-\/copy value semantics. \end{DoxyRefDesc}
-
-
-Definition at line \doxymbox{\hyperlink{_type_conversion_tests_8cpp_source_l00031}{31}} of file \doxymbox{\hyperlink{_type_conversion_tests_8cpp_source}{Type\+Conversion\+Tests.\+cpp}}.
 

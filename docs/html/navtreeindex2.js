@@ -1,11 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"class_vector4_d_normalization.html#aa737545b67702fae91c66ce301031fb7":[7,0,14,1],
-"class_vector4_d_projection.html":[7,0,15],
-"class_vector4_d_projection.html#a08837a82f4e66088ad8ca12b54b103c8":[7,0,15,4],
-"class_vector4_d_projection.html#a41dd876eacf6498299b8887a20e090ca":[7,0,15,1],
-"class_vector4_d_projection.html#a960f1be6410bded670185c9f90534c5e":[7,0,15,2],
-"class_vector4_d_projection.html#aacf819fd71d6d5cfb5e5a4d65d801263":[7,0,15,3],
 "class_vector4_d_projection.html#ab71811e01a5f454b3caaee8598439030":[7,0,15,0],
 "class_vector4_d_rejection.html":[7,0,16],
 "class_vector4_d_rejection.html#a3cc24ad26135ebce7dcfcf7517db4571":[7,0,16,0],
@@ -249,5 +243,11 @@ var NAVTREEINDEX2 =
 "group___f_g_m___vec4___magnitude.html#ga5bfd2089d9a157b2eec7d5bd8f61f268":[4,0,0,0,0,15,3],
 "group___f_g_m___vec4___magnitude.html#ga645fd14ddd6529df29b538e3df6c7834":[4,0,0,0,0,15,6],
 "group___f_g_m___vec4___magnitude.html#ga8a099e8beb853a0a450ab830bbb338ce":[4,0,0,0,0,15,4],
-"group___f_g_m___vec4___magnitude.html#ga93f5aefd504e25dc166f5f24ebb1c394":[4,0,0,0,0,15,5]
+"group___f_g_m___vec4___magnitude.html#ga93f5aefd504e25dc166f5f24ebb1c394":[4,0,0,0,0,15,5],
+"group___f_g_m___vec4___magnitude.html#ga94fda7188a9c870ef0f10cbf062c5584":[4,0,0,0,0,15,0],
+"group___f_g_m___vec4___multiplication.html":[4,0,0,0,0,5],
+"group___f_g_m___vec4___multiplication.html#ga146296fc0db3b7a86835ae601ff1f0c7":[4,0,0,0,0,5,5],
+"group___f_g_m___vec4___multiplication.html#ga2b987b952d2c2d1c0c9fce1143189552":[4,0,0,0,0,5,2],
+"group___f_g_m___vec4___multiplication.html#ga5dc878b73d630c172ccf5377adcbc664":[4,0,0,0,0,5,4],
+"group___f_g_m___vec4___multiplication.html#ga5fda3cce6e4b472c132be97ffbe3ed68":[4,0,0,0,0,5,1]
 };

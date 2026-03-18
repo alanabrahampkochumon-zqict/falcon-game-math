@@ -15,6 +15,11 @@ using testutils::EXPECT_VEC_CONTAINS;
 
 
 /**
+ * @addtogroup FGM_Vec4_Type_Conv
+ * @{
+ */
+
+/**
  * @test Verify that the @ref fgm::Vector4D conversion constructor correctly promotes components from float to double.
  */
 TEST(Vector4DConversionConstructor, PromotesType)
@@ -57,3 +62,5 @@ TEST(Vector4DConversionConstructor, DemotesType)
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, float>);
 }
+
+/** @} */

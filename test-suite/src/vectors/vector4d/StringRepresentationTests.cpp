@@ -13,7 +13,6 @@
 
 #include <sstream>
 
-
 /**************************************
  *                                    *
  *                SETUP               *
@@ -30,11 +29,12 @@ class Vector4DStringRepresentationTests: public ::testing::Test
 };
 
 
-/**************************************
- *                                    *
- *               TESTS                *
- *                                    *
- **************************************/
+
+
+/**
+ * @addtogroup FGM_Vec4_String_Repr
+ * @{
+ */
 
 /** @test Verify that the @ref fgm::Vector4D string representation matches the expected format for integral types. */
 TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)
@@ -46,7 +46,6 @@ TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)
 
     EXPECT_EQ(ss.str(), "<1, 2, 3, 4>\n");
 }
-
 
 /**
  * @test Verify that the @ref fgm::Vector4D string representation matches the expected format for single-precision
@@ -62,7 +61,6 @@ TEST_F(Vector4DStringRepresentationTests, FloatRepresentation)
     EXPECT_EQ(ss.str(), "<1.23450, 2.00000, 3.56789, 4.20000>\n");
 }
 
-
 /**
  * @test Verify that the @ref fgm::Vector4D string representation matches the expected format for double-precision
  *       floating-point types.
@@ -76,3 +74,5 @@ TEST_F(Vector4DStringRepresentationTests, DoubleRepresentation)
 
     EXPECT_EQ(ss.str(), "<1.234578977700000, 2.658310000000000, 3.161285000000000, 4.000000000000000>\n");
 }
+
+/** @} */

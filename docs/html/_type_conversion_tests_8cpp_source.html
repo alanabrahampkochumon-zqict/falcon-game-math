@@ -99,48 +99,50 @@ $(function(){initNavTree('_type_conversion_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using </span><a class="code hl_function" href="namespacetestutils.html#a75afee25cc06d8f63eb59d0d9769653f">testutils::EXPECT_VEC_CONTAINS</a>;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="_type_conversion_tests_8cpp.html#aa7a59762098ebf3aea4f06c9cfa6dbf4">   20</a></span>TEST(Vector4DConversionConstructor, PromotesType)</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec1(3.0f, 1.0f, 6.0f, 2.0f);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    [[maybe_unused]] <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;double&gt;</a> vec2(vec1);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;<span class="keyword">decltype</span>(vec2)::value_type, <span class="keywordtype">double</span>&gt;);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
-</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___type___conv.html#gaa7a59762098ebf3aea4f06c9cfa6dbf4">   25</a></span>TEST(Vector4DConversionConstructor, PromotesType)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec1(3.0f, 1.0f, 6.0f, 2.0f);</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
-<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="_type_conversion_tests_8cpp.html#a5a7fa4ed84cfa76e811ccd87f44749ad">   31</a></span>TEST(Vector4DConversionConstructor, ReturnsNewInstance)</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">// Given a float vector</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec1(3.0f, 1.0f, 6.0f, 2.0f);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">// When converted to a double vector</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;double&gt;</a> vec2(vec1);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// And one of its value mutated</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    vec2.<a class="code hl_variable" href="structfgm_1_1_vector2_d.html#a607bc0f3470083e965f77d4c1308aeab">x</a> = 5;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    [[maybe_unused]] <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;double&gt;</a> vec2(vec1);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;<span class="keyword">decltype</span>(vec2)::value_type, <span class="keywordtype">double</span>&gt;);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___type___conv.html#ga5a7fa4ed84cfa76e811ccd87f44749ad">   36</a></span>TEST(Vector4DConversionConstructor, ReturnsNewInstance)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// Given a float vector</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec1(3.0f, 1.0f, 6.0f, 2.0f);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// Then, the float vector remains unchanged</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_function" href="_type_conversion_tests_8cpp.html#a75afee25cc06d8f63eb59d0d9769653f">EXPECT_VEC_CONTAINS</a>(vec1, 3.0f, 1.0f, 6.0f, 2.0f);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">// And, the new vector is of type double with the mutated value</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_function" href="_type_conversion_tests_8cpp.html#a75afee25cc06d8f63eb59d0d9769653f">EXPECT_VEC_CONTAINS</a>(vec2, 5.0, 1.0, 6.0, 2.0);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// When converted to a double vector</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;double&gt;</a> vec2(vec1);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// And one of its value mutated</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    vec2.<a class="code hl_variable" href="structfgm_1_1_vector2_d.html#a607bc0f3470083e965f77d4c1308aeab">x</a> = 5;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="comment">// Then, the float vector remains unchanged</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_function" href="_type_conversion_tests_8cpp.html#a75afee25cc06d8f63eb59d0d9769653f">EXPECT_VEC_CONTAINS</a>(vec1, 3.0f, 1.0f, 6.0f, 2.0f);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="comment">// And, the new vector is of type double with the mutated value</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_function" href="_type_conversion_tests_8cpp.html#a75afee25cc06d8f63eb59d0d9769653f">EXPECT_VEC_CONTAINS</a>(vec2, 5.0, 1.0, 6.0, 2.0);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
 </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
-<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="_type_conversion_tests_8cpp.html#a0e0c185d92eb53264b7c9d6f8c087879">   52</a></span>TEST(Vector4DConversionConstructor, DemotesType)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>{</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec1(3.0, 1.0, 6.0, 2.0);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    [[maybe_unused]] <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;float&gt;</a> vec2(vec1);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;<span class="keyword">decltype</span>(vec2)::value_type, <span class="keywordtype">float</span>&gt;);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span></div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group___f_g_m___vec4___type___conv.html#ga0e0c185d92eb53264b7c9d6f8c087879">   57</a></span>TEST(Vector4DConversionConstructor, DemotesType)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>{</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D</a> vec1(3.0, 1.0, 6.0, 2.0);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    [[maybe_unused]] <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_vector4_d.html">fgm::Vector4D&lt;float&gt;</a> vec2(vec1);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;<span class="keyword">decltype</span>(vec2)::value_type, <span class="keywordtype">float</span>&gt;);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
 </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
 <div class="ttc" id="a_type_conversion_tests_8cpp_html_a75afee25cc06d8f63eb59d0d9769653f"><div class="ttname"><a href="_type_conversion_tests_8cpp.html#a75afee25cc06d8f63eb59d0d9769653f">EXPECT_VEC_CONTAINS</a></div><div class="ttdeci">void EXPECT_VEC_CONTAINS(const fgm::Vector2D&lt; T &gt; &amp;vector, T x, T y)</div><div class="ttdoc">Performs a strict component-wise validation of a fgm::Vector2D against discrete scalar values.</div><div class="ttdef"><b>Definition</b> <a href="_vector_utils_8h_source.html#l00070">VectorUtils.h:70</a></div></div>
 <div class="ttc" id="a_vector4_d_test_setup_8h_html"><div class="ttname"><a href="_vector4_d_test_setup_8h.html">Vector4DTestSetup.h</a></div><div class="ttdoc">Define test setups common to all Vector4D tests.</div></div>
 <div class="ttc" id="anamespacetestutils_html_a75afee25cc06d8f63eb59d0d9769653f"><div class="ttname"><a href="namespacetestutils.html#a75afee25cc06d8f63eb59d0d9769653f">testutils::EXPECT_VEC_CONTAINS</a></div><div class="ttdeci">void EXPECT_VEC_CONTAINS(const fgm::Vector2D&lt; T &gt; &amp;vector, T x, T y)</div><div class="ttdoc">Performs a strict component-wise validation of a fgm::Vector2D against discrete scalar values.</div><div class="ttdef"><b>Definition</b> <a href="_vector_utils_8h_source.html#l00070">VectorUtils.h:70</a></div></div>
