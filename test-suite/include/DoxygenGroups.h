@@ -61,9 +61,19 @@
              * @}
              */
 
-        /** @} */ // End of VectorTests
+        /** @} */ // End of Vectors
 
-    /** @} */ // End of MathTests
+    /** @} */ // End of VectorTests
+
+    /**
+     * @defgroup T_Utils Test Utilities
+     * @brief Diagnostic and validation utilities for testing.
+     * @ingroup FGMTestSuite
+     * @{
+     *   @defgroup Vector_Utils Vector Validation Utilities
+     *   @defgroup Matrix_Utils Matrix Validation Utilities
+     * @}
+     */
 
 /** @} */ // End of FGMTestSuite
 // clang-format on

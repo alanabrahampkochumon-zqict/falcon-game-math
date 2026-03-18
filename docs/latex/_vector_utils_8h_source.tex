@@ -16,152 +16,155 @@
 \DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00024}00024\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacetestutils}{testutils}}}
 \DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00025}00025\ \{}
 \DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00026}00026\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Vector\ T,\ fgm::Vector\ U>}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00040}\doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{00040}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_af086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(\textcolor{keyword}{const}\ T\&\ expected,\ \textcolor{keyword}{const}\ U\&\ actual)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00041}00041\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }ValueType\ =\ T::value\_type;}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00043}00043\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(T::dimension\ ==\ U::dimension,\ \textcolor{stringliteral}{"{}Vectors\ must\ have\ the\ same\ dimension\ (e.g.\ both\ 3D)"{}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00045}00045\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ std::size\_t\ elementCount\ =\ T::dimension;}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00047}00047\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ elementCount;\ ++i)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ double>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i],\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(actual[i]),\ \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{fgm::DOUBLE\_EPSILON}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<ValueType>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i],\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(actual[i]),\ \doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{fgm::FLOAT\_EPSILON}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(expected[i],\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(actual[i]));}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00055}00055\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00056}00056\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00057}00057\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Arithmetic\ T>}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00070}\doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{00070}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{fgm::Vector2D<T>}}\&\ vector,\ T\ x,\ T\ y)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00071}00071\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ float>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00073}00073\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a48b6ff16588e7fe467c14a24049147e9}{y}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00076}00076\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ double>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Vector\ T,\ fgm::Vector\ U>}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00045}\doxymbox{\hyperlink{group___vector___utils_gaf086eefd4f5940a7963581d949339c8f}{00045}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___vector___utils_gaf086eefd4f5940a7963581d949339c8f}{EXPECT\_VEC\_EQ}}(\textcolor{keyword}{const}\ T\&\ expected,\ \textcolor{keyword}{const}\ U\&\ actual)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00046}00046\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }ValueType\ =\ T::value\_type;}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(T::dimension\ ==\ U::dimension,\ \textcolor{stringliteral}{"{}Vectors\ must\ have\ the\ same\ dimension\ (e.g.\ both\ 3D)"{}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ std::size\_t\ elementCount\ =\ T::dimension;}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ elementCount;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ double>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i],\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(actual[i]),\ \doxymbox{\hyperlink{namespacefgm_afd8d25cec58c96d01e1d8e2af5ccdd80}{fgm::DOUBLE\_EPSILON}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<ValueType>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i],\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(actual[i]),\ \doxymbox{\hyperlink{namespacefgm_ac3c0fd59149d0159565c3254343bdcab}{fgm::FLOAT\_EPSILON}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(expected[i],\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(actual[i]));}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Arithmetic\ T>}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00075}\doxymbox{\hyperlink{group___vector___utils_ga75afee25cc06d8f63eb59d0d9769653f}{00075}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___vector___utils_ga75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector2_d}{fgm::Vector2D<T>}}\&\ vector,\ T\ x,\ T\ y)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00076}00076\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ float>)}
 \DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a48b6ff16588e7fe467c14a24049147e9}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a48b6ff16588e7fe467c14a24049147e9}{y}});}
 \DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ double>)}
 \DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00083}00083\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a48b6ff16588e7fe467c14a24049147e9}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a48b6ff16588e7fe467c14a24049147e9}{y}});}
 \DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00087}00087\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00088}00088\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00089}00089\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00102}00102\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Arithmetic\ T>}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00103}\doxymbox{\hyperlink{namespacetestutils_aaf56e8b74db722be7dfe45c0b2d6936c}{00103}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<T>}}\&\ vector,\ T\ x,\ T\ y,\ T\ z)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00104}00104\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ float>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00106}00106\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ double>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00112}00112\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00116}00116\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00118}00118\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00122}00122\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00123}00123\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00124}00124\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00125}00125\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00139}00139\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Arithmetic\ T>}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00140}\doxymbox{\hyperlink{namespacetestutils_a0d6edb81cb51d687ca6538d8a125c318}{00140}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_a75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\&\ vector,\ T\ x,\ T\ y,\ T\ z,\ T\ w)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00141}00141\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ float>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00143}00143\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5b123e1cdf3d7c5888546b71afec4c25}{x}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a75ad7ea209aa513c25daee7908112c54}{y}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae5fd276e681e0499943fd40f530fcd47}{z}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(w,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad5362e4ee59aa8dda9630e3983786d76}{w}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00148}00148\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<T>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00150}00150\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5b123e1cdf3d7c5888546b71afec4c25}{x}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a75ad7ea209aa513c25daee7908112c54}{y}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae5fd276e681e0499943fd40f530fcd47}{z}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(w,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad5362e4ee59aa8dda9630e3983786d76}{w}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00155}00155\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00157}00157\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5b123e1cdf3d7c5888546b71afec4c25}{x}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a75ad7ea209aa513c25daee7908112c54}{y}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae5fd276e681e0499943fd40f530fcd47}{z}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(w,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad5362e4ee59aa8dda9630e3983786d76}{w}});}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00163}00163\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00164}00164\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00165}00165\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00175}00175\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Vector\ T>}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00176}\doxymbox{\hyperlink{namespacetestutils_a12c4d4e6974106a0d0ddce9dad07584f}{00176}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_a12c4d4e6974106a0d0ddce9dad07584f}{EXPECT\_VEC\_ONE}}(\textcolor{keyword}{const}\ T\&\ vector)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00177}00177\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00178}00178\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }ValueType\ =\ T::value\_type;}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00179}00179\ \ \ \ \ \ \ \ \ ValueType\ expected\ =\ ValueType(1);}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00180}00180\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ std::size\_t\ elementCount\ =\ T::dimension;}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00182}00182\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00183}00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ elementCount;\ ++i)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ float>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(expected,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ double>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(expected,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(expected,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00190}00190\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00191}00191\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00192}00192\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00202}00202\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Vector\ T>}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00203}\doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{00203}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_ae7dd463db7e44961df742eaebdb34400}{EXPECT\_VEC\_ZERO}}(\textcolor{keyword}{const}\ T\&\ vector)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00204}00204\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00205}00205\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }ValueType\ =\ T::value\_type;}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00206}00206\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00207}00207\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ std::size\_t\ elementCount\ =\ T::dimension;}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00208}00208\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00209}00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ elementCount;\ ++i)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ float>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(0.0f,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ double>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(0.0,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(ValueType(0),\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00216}00216\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00217}00217\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00218}00218\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00228}00228\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Vector\ T>}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00229}\doxymbox{\hyperlink{namespacetestutils_af3e3755befec4337ccefebe35e82acc5}{00229}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_af3e3755befec4337ccefebe35e82acc5}{EXPECT\_VEC\_INF}}(\textcolor{keyword}{const}\ T\&\ vector)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00230}00230\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ std::size\_t\ elementCount\ =\ T::dimension;}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_floating\_point\_v<T>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ elementCount;\ ++i)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_TRUE(std::isinf(vector[i]));}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00235}00235\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00236}00236\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00237}00237\ }
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00248}00248\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::StrictArithmetic\ T>}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00249}\doxymbox{\hyperlink{namespacetestutils_a1f297fa9b099880593df66c438fa5eff}{00249}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetestutils_a1f297fa9b099880593df66c438fa5eff}{EXPECT\_MAG\_EQ}}(T\ expected,\ T\ actual)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00250}00250\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ float>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(expected,\ actual);}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00253}00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<T>)}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(expected,\ actual);}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(expected,\ actual);}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00257}00257\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00258}00258\ \}\ \textcolor{comment}{//\ namespace\ testutils}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00088}00088\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a607bc0f3470083e965f77d4c1308aeab}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector2_d_a48b6ff16588e7fe467c14a24049147e9}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00092}00092\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00107}00107\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Arithmetic\ T>}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00108}\doxymbox{\hyperlink{group___vector___utils_gaaf56e8b74db722be7dfe45c0b2d6936c}{00108}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___vector___utils_ga75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector3_d}{fgm::Vector3D<T>}}\&\ vector,\ T\ x,\ T\ y,\ T\ z)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00109}00109\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ float>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00115}00115\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ double>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00117}00117\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00121}00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00123}00123\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a75473633e1dd4e97dc42d21a522a00b9}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_ada5658591533a90f66bb408cf4e7fc3d}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector3_d_a018396b853d9df4e2bb48d8b65e2c450}{z}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00127}00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00128}00128\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00144}00144\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Arithmetic\ T>}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00145}\doxymbox{\hyperlink{group___vector___utils_ga0d6edb81cb51d687ca6538d8a125c318}{00145}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___vector___utils_ga75afee25cc06d8f63eb59d0d9769653f}{EXPECT\_VEC\_CONTAINS}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_vector4_d}{fgm::Vector4D<T>}}\&\ vector,\ T\ x,\ T\ y,\ T\ z,\ T\ w)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00146}00146\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ float>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00148}00148\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5b123e1cdf3d7c5888546b71afec4c25}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a75ad7ea209aa513c25daee7908112c54}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae5fd276e681e0499943fd40f530fcd47}{z}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(w,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad5362e4ee59aa8dda9630e3983786d76}{w}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00153}00153\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00154}00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<T>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00155}00155\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5b123e1cdf3d7c5888546b71afec4c25}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a75ad7ea209aa513c25daee7908112c54}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae5fd276e681e0499943fd40f530fcd47}{z}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(w,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad5362e4ee59aa8dda9630e3983786d76}{w}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00160}00160\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00161}00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(x,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a5b123e1cdf3d7c5888546b71afec4c25}{x}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(y,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_a75ad7ea209aa513c25daee7908112c54}{y}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(z,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ae5fd276e681e0499943fd40f530fcd47}{z}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(w,\ vector.\doxymbox{\hyperlink{structfgm_1_1_vector4_d_ad5362e4ee59aa8dda9630e3983786d76}{w}});}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00167}00167\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00168}00168\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00180}00180\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Vector\ T>}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00181}\doxymbox{\hyperlink{group___vector___utils_ga12c4d4e6974106a0d0ddce9dad07584f}{00181}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___vector___utils_ga12c4d4e6974106a0d0ddce9dad07584f}{EXPECT\_VEC\_ONE}}(\textcolor{keyword}{const}\ T\&\ vector)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00182}00182\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00183}00183\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }ValueType\ =\ T::value\_type;}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00184}00184\ \ \ \ \ \ \ \ \ ValueType\ expected\ =\ ValueType(1);}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ std::size\_t\ elementCount\ =\ T::dimension;}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ elementCount;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ float>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(expected,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ double>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(expected,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(expected,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00195}00195\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00207}00207\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Vector\ T>}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00208}\doxymbox{\hyperlink{group___vector___utils_gae7dd463db7e44961df742eaebdb34400}{00208}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___vector___utils_gae7dd463db7e44961df742eaebdb34400}{EXPECT\_VEC\_ZERO}}(\textcolor{keyword}{const}\ T\&\ vector)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00209}00209\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }ValueType\ =\ T::value\_type;}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00212}00212\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ std::size\_t\ elementCount\ =\ T::dimension;}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00214}00214\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ elementCount;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ float>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(0.0f,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<ValueType,\ double>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(0.0,\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(ValueType(0),\ \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>}(vector[i]));}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00221}00221\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00233}00233\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::Vector\ T>}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00234}\doxymbox{\hyperlink{group___vector___utils_gaf3e3755befec4337ccefebe35e82acc5}{00234}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___vector___utils_gaf3e3755befec4337ccefebe35e82acc5}{EXPECT\_VEC\_INF}}(\textcolor{keyword}{const}\ T\&\ vector)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00235}00235\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00236}00236\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ std::size\_t\ elementCount\ =\ T::dimension;}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00237}00237\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_floating\_point\_v<T>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ elementCount;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_TRUE(std::isinf(vector[i]));}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00240}00240\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00253}00253\ \ \ \ \ \textcolor{keyword}{template}\ <fgm::StrictArithmetic\ T>}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00254}\doxymbox{\hyperlink{group___vector___utils_ga1f297fa9b099880593df66c438fa5eff}{00254}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___vector___utils_ga1f297fa9b099880593df66c438fa5eff}{EXPECT\_MAG\_EQ}}(T\ expected,\ T\ actual)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00255}00255\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00256}00256\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ float>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_FLOAT\_EQ(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00258}00258\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<T>)}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00260}00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(expected,\ actual);}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00262}00262\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_vector_utils_8h_source_l00266}00266\ \}\ \textcolor{comment}{//\ namespace\ testutils}}
 
 \end{DoxyCode}

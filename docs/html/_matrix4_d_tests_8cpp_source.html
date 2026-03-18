@@ -120,7 +120,7 @@ $(function(){initNavTree('_matrix4_d_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_matrix4_d.html">fgm::Matrix4D&lt;float&gt;</a> mat;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="comment">// Then, it&#39;s elements form an identity matrix</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_function" href="namespacetestutils.html#a3ed7811d32bf5ba5896035fdb4c48a09">EXPECT_MAT_IDENTITY</a>(mat);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_function" href="group___matrix___utils.html#ga3ed7811d32bf5ba5896035fdb4c48a09">EXPECT_MAT_IDENTITY</a>(mat);</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
 </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
@@ -238,7 +238,7 @@ $(function(){initNavTree('_matrix4_d_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    copy(0, 3) = 2.0;</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="comment">// Then, the double matrix remains unchanged</span></div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <a class="code hl_function" href="namespacetestutils.html#a3ed7811d32bf5ba5896035fdb4c48a09">EXPECT_MAT_IDENTITY</a>(mat);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <a class="code hl_function" href="group___matrix___utils.html#ga3ed7811d32bf5ba5896035fdb4c48a09">EXPECT_MAT_IDENTITY</a>(mat);</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="comment">// And, the new matrix is of type float with the mutated value</span></div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;<span class="keyword">typename</span> <span class="keyword">decltype</span>(copy)::value_type, <span class="keywordtype">double</span>&gt;);</div>
@@ -269,7 +269,7 @@ $(function(){initNavTree('_matrix4_d_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    copy(0, 3) = 2.0f;</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="comment">// Then, the double matrix remains unchanged</span></div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <a class="code hl_function" href="namespacetestutils.html#a3ed7811d32bf5ba5896035fdb4c48a09">EXPECT_MAT_IDENTITY</a>(mat);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <a class="code hl_function" href="group___matrix___utils.html#ga3ed7811d32bf5ba5896035fdb4c48a09">EXPECT_MAT_IDENTITY</a>(mat);</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="comment">// And, the new matrix is of type float with the mutated value</span></div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;<span class="keyword">typename</span> <span class="keyword">decltype</span>(copy)::value_type, <span class="keywordtype">float</span>&gt;);</div>
@@ -339,7 +339,7 @@ $(function(){initNavTree('_matrix4_d_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structfgm_1_1_matrix4_d.html">fgm::Matrix4D</a> result = a + b;</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="comment">// Then, the result is the sum of individual elements</span></div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <a class="code hl_function" href="namespacetestutils.html#aeaa533951f000ad4a7c017b466cde69b">EXPECT_MAT_EQ</a>(expected, result);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <a class="code hl_function" href="group___matrix___utils.html#gaeaa533951f000ad4a7c017b466cde69b">EXPECT_MAT_EQ</a>(expected, result);</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>}</div>
 </div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
@@ -361,7 +361,7 @@ $(function(){initNavTree('_matrix4_d_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    a += b;</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="comment">// Then, the original matrix contains the sum of the elements added together</span></div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <a class="code hl_function" href="namespacetestutils.html#aeaa533951f000ad4a7c017b466cde69b">EXPECT_MAT_EQ</a>(expected, a);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <a class="code hl_function" href="group___matrix___utils.html#gaeaa533951f000ad4a7c017b466cde69b">EXPECT_MAT_EQ</a>(expected, a);</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>}</div>
 </div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
@@ -384,7 +384,7 @@ $(function(){initNavTree('_matrix4_d_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="comment">// Then, the type of the resultant matrix is of the larger of the two type</span></div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;<span class="keyword">typename</span> <span class="keyword">decltype</span>(result)::value_type, <span class="keywordtype">double</span>&gt;);</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="comment">// And, the result is the sum of individual elements</span></div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <a class="code hl_function" href="namespacetestutils.html#aeaa533951f000ad4a7c017b466cde69b">EXPECT_MAT_EQ</a>(expected, result);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <a class="code hl_function" href="group___matrix___utils.html#gaeaa533951f000ad4a7c017b466cde69b">EXPECT_MAT_EQ</a>(expected, result);</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>}</div>
 </div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
@@ -407,7 +407,7 @@ $(function(){initNavTree('_matrix4_d_tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="comment">// Then, the type of the original matrix is preserved</span></div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="keyword">static_assert</span>(std::is_same_v&lt;<span class="keyword">typename</span> <span class="keyword">decltype</span>(a)::value_type, <span class="keywordtype">float</span>&gt;);</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <span class="comment">// And, the original matrix contains the sum of the elements added together</span></div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <a class="code hl_function" href="namespacetestutils.html#aeaa533951f000ad4a7c017b466cde69b">EXPECT_MAT_EQ</a>(expected, a);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <a class="code hl_function" href="group___matrix___utils.html#gaeaa533951f000ad4a7c017b466cde69b">EXPECT_MAT_EQ</a>(expected, a);</div>
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>}</div>
 </div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
@@ -1548,9 +1548,9 @@ $(function(){initNavTree('_matrix4_d_tests_8cpp_source.html','',''); });
 <div class="ttc" id="a_matrix_utils_8h_html"><div class="ttname"><a href="_matrix_utils_8h.html">MatrixUtils.h</a></div><div class="ttdoc">Diagnostic and validation utilities for Matrix types. Provides specialized testing helpers and assert...</div></div>
 <div class="ttc" id="a_vector3_d_8h_html"><div class="ttname"><a href="_vector3_d_8h.html">Vector3D.h</a></div><div class="ttdoc">Templated 3D Vector supporting integral, floating-point and boolean types.</div></div>
 <div class="ttc" id="a_vector_utils_8h_html"><div class="ttname"><a href="_vector_utils_8h.html">VectorUtils.h</a></div></div>
+<div class="ttc" id="agroup___matrix___utils_html_ga3ed7811d32bf5ba5896035fdb4c48a09"><div class="ttname"><a href="group___matrix___utils.html#ga3ed7811d32bf5ba5896035fdb4c48a09">testutils::EXPECT_MAT_IDENTITY</a></div><div class="ttdeci">void EXPECT_MAT_IDENTITY(const T &amp;actual)</div><div class="ttdoc">Validates that the provided matrix conforms to an identity matrix within a standard epsilon.</div><div class="ttdef"><b>Definition</b> <a href="_matrix_utils_8h_source.html#l00100">MatrixUtils.h:100</a></div></div>
+<div class="ttc" id="agroup___matrix___utils_html_gaeaa533951f000ad4a7c017b466cde69b"><div class="ttname"><a href="group___matrix___utils.html#gaeaa533951f000ad4a7c017b466cde69b">testutils::EXPECT_MAT_EQ</a></div><div class="ttdeci">void EXPECT_MAT_EQ(const T &amp;expected, const U &amp;actual)</div><div class="ttdoc">Perform a component-wise strict equality comparison between two matrices of the same dimensions.</div><div class="ttdef"><b>Definition</b> <a href="_matrix_utils_8h_source.html#l00044">MatrixUtils.h:44</a></div></div>
 <div class="ttc" id="anamespacetestutils_html"><div class="ttname"><a href="namespacetestutils.html">testutils</a></div><div class="ttdef"><b>Definition</b> <a href="_matrix_utils_8h_source.html#l00023">MatrixUtils.h:24</a></div></div>
-<div class="ttc" id="anamespacetestutils_html_a3ed7811d32bf5ba5896035fdb4c48a09"><div class="ttname"><a href="namespacetestutils.html#a3ed7811d32bf5ba5896035fdb4c48a09">testutils::EXPECT_MAT_IDENTITY</a></div><div class="ttdeci">void EXPECT_MAT_IDENTITY(const T &amp;actual)</div><div class="ttdoc">Validates that the provided matrix conforms to an identity matrix within a standard epsilon.</div><div class="ttdef"><b>Definition</b> <a href="_matrix_utils_8h_source.html#l00095">MatrixUtils.h:95</a></div></div>
-<div class="ttc" id="anamespacetestutils_html_aeaa533951f000ad4a7c017b466cde69b"><div class="ttname"><a href="namespacetestutils.html#aeaa533951f000ad4a7c017b466cde69b">testutils::EXPECT_MAT_EQ</a></div><div class="ttdeci">void EXPECT_MAT_EQ(const T &amp;expected, const U &amp;actual)</div><div class="ttdoc">Perform a component-wise strict equality comparison between two matrices of the same dimensions.</div><div class="ttdef"><b>Definition</b> <a href="_matrix_utils_8h_source.html#l00039">MatrixUtils.h:39</a></div></div>
 <div class="ttc" id="astructfgm_1_1_matrix4_d_html"><div class="ttname"><a href="structfgm_1_1_matrix4_d.html">fgm::Matrix4D</a></div><div class="ttdef"><b>Definition</b> <a href="_matrix4_d_8h_source.html#l00011">Matrix4D.h:12</a></div></div>
 <div class="ttc" id="astructfgm_1_1_matrix4_d_html_a39c199bfb60e0ef109af7e578e489212"><div class="ttname"><a href="structfgm_1_1_matrix4_d.html#a39c199bfb60e0ef109af7e578e489212">fgm::Matrix4D::columns</a></div><div class="ttdeci">static constexpr std::size_t columns</div><div class="ttdef"><b>Definition</b> <a href="_matrix4_d_8h_source.html#l00015">Matrix4D.h:15</a></div></div>
 <div class="ttc" id="astructfgm_1_1_matrix4_d_html_a4f3b6f962360028b575534611db967f9"><div class="ttname"><a href="structfgm_1_1_matrix4_d.html#a4f3b6f962360028b575534611db967f9">fgm::Matrix4D::rows</a></div><div class="ttdeci">static constexpr std::size_t rows</div><div class="ttdef"><b>Definition</b> <a href="_matrix4_d_8h_source.html#l00016">Matrix4D.h:16</a></div></div>

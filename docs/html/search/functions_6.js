@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['instantiate_5ftest_5fsuite_5fp_0',['INSTANTIATE_TEST_SUITE_P',['../_simd_utils_tests_8cpp.html#a61cb89f782c6202917be995413185eee',1,'SimdUtilsTests.cpp']]],
-  ['inverse_1',['inverse',['../structfgm_1_1_matrix2_d.html#ae728a327d922232cb1e3d1e0f003086d',1,'fgm::Matrix2D::inverse() const'],['../structfgm_1_1_matrix2_d.html#aaf09ee54e896e2eb329fa0f6d7b4a15d',1,'fgm::Matrix2D::inverse(const Matrix2D &amp;matrix)'],['../structfgm_1_1_matrix3_d.html#a33981798b886a9bbdcf99fa229295c31',1,'fgm::Matrix3D::inverse() const'],['../structfgm_1_1_matrix3_d.html#ae15d29f71d9ceb288821568d0fd321c8',1,'fgm::Matrix3D::inverse(const Matrix3D &amp;matrix)']]]
+  ['gt_0',['gt',['../structfgm_1_1_vector4_d.html#a447d622eea025c6b76c3e72f84f9dc3c',1,'fgm::Vector4D::gt(const Vector4D&lt; U &gt; &amp;other) const'],['../structfgm_1_1_vector4_d.html#af1d512d2d88516c04ee28ffa8dec1727',1,'fgm::Vector4D::gt(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB)']]],
+  ['gte_1',['gte',['../structfgm_1_1_vector4_d.html#aa1ba1715df4219dd478f81b28f34b4b1',1,'fgm::Vector4D::gte(const Vector4D&lt; U &gt; &amp;other) const'],['../structfgm_1_1_vector4_d.html#a1817fc433d2bc82ed7de91b97f9c5468',1,'fgm::Vector4D::gte(const Vector4D &amp;vecA, const Vector4D&lt; U &gt; &amp;vecB)']]]
 ];

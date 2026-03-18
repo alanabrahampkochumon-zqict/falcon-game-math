@@ -1,0 +1,183 @@
+\doxysubsubsection{Matrix Validation Utilities }
+\hypertarget{group___matrix___utils}{}\label{group___matrix___utils}\index{Matrix Validation Utilities@{Matrix Validation Utilities}}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T, \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} U$>$ }\\void \doxymbox{\hyperlink{group___matrix___utils_gaeaa533951f000ad4a7c017b466cde69b}{testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+EQ}} (const T \&expected, const U \&actual)
+\begin{DoxyCompactList}\small\item\em Perform a component-\/wise strict equality comparison between two matrices of the same dimensions. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T, \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} U$>$ }\\void \doxymbox{\hyperlink{group___matrix___utils_ga21190cc65e0c0d165cc681b53a7d625a}{testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+NEAR}} (const T \&expected, const U \&actual, double tolerance=1e-\/5)
+\begin{DoxyCompactList}\small\item\em Performs a component-\/wise approximate equality comparison using an absolute epsilon. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ }\\void \doxymbox{\hyperlink{group___matrix___utils_ga3ed7811d32bf5ba5896035fdb4c48a09}{testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+IDENTITY}} (const T \&actual)
+\begin{DoxyCompactList}\small\item\em Validates that the provided matrix conforms to an identity matrix within a standard epsilon. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ }\\void \doxymbox{\hyperlink{group___matrix___utils_gadd4567e070fbc850d28ad4e7badb9994}{testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+ZERO}} (const T \&actual)
+\begin{DoxyCompactList}\small\item\em Validates that the provided matrix conforms to a zero matrix within a standard epsilon. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ }\\void \doxymbox{\hyperlink{group___matrix___utils_ga312e9d515c157139838bb197fe06646b}{testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+INF}} (const T \&actual)
+\begin{DoxyCompactList}\small\item\em Validates that the provided matrix conforms to an infinity matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___matrix___utils_doc-func-members}
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group___matrix___utils_gaeaa533951f000ad4a7c017b466cde69b}\index{Matrix Validation Utilities@{Matrix Validation Utilities}!EXPECT\_MAT\_EQ@{EXPECT\_MAT\_EQ}}
+\index{EXPECT\_MAT\_EQ@{EXPECT\_MAT\_EQ}!Matrix Validation Utilities@{Matrix Validation Utilities}}
+\doxysubsubsubsubsection{\texorpdfstring{EXPECT\_MAT\_EQ()}{EXPECT\_MAT\_EQ()}}
+{\footnotesize\ttfamily \label{group___matrix___utils_gaeaa533951f000ad4a7c017b466cde69b} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T, \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} U$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+EQ (\begin{DoxyParamCaption}\item[{const T \&}]{expected}{, }\item[{const U \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Perform a component-\/wise strict equality comparison between two matrices of the same dimensions. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of the expected matrix components. \\
+\hline
+{\em U} & Numeric type of the actual matrix components. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em expected} & The matrix serving as the reference for comparison. \\
+\hline
+{\em actual} & The matrix being evaluated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrices are out of the {\ttfamily tolerance} range. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00044}{44}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{group___matrix___utils_ga3ed7811d32bf5ba5896035fdb4c48a09}\index{Matrix Validation Utilities@{Matrix Validation Utilities}!EXPECT\_MAT\_IDENTITY@{EXPECT\_MAT\_IDENTITY}}
+\index{EXPECT\_MAT\_IDENTITY@{EXPECT\_MAT\_IDENTITY}!Matrix Validation Utilities@{Matrix Validation Utilities}}
+\doxysubsubsubsubsection{\texorpdfstring{EXPECT\_MAT\_IDENTITY()}{EXPECT\_MAT\_IDENTITY()}}
+{\footnotesize\ttfamily \label{group___matrix___utils_ga3ed7811d32bf5ba5896035fdb4c48a09} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+IDENTITY (\begin{DoxyParamCaption}\item[{const T \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Validates that the provided matrix conforms to an identity matrix within a standard epsilon. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The matrix type being evaluated. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em actual} & The matrix to verify as an identity.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrix is not identity. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00100}{100}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{group___matrix___utils_ga312e9d515c157139838bb197fe06646b}\index{Matrix Validation Utilities@{Matrix Validation Utilities}!EXPECT\_MAT\_INF@{EXPECT\_MAT\_INF}}
+\index{EXPECT\_MAT\_INF@{EXPECT\_MAT\_INF}!Matrix Validation Utilities@{Matrix Validation Utilities}}
+\doxysubsubsubsubsection{\texorpdfstring{EXPECT\_MAT\_INF()}{EXPECT\_MAT\_INF()}}
+{\footnotesize\ttfamily \label{group___matrix___utils_ga312e9d515c157139838bb197fe06646b} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+INF (\begin{DoxyParamCaption}\item[{const T \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Validates that the provided matrix conforms to an infinity matrix. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The matrix type being evaluated. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em actual} & The matrix to verify as an infinity matrix.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrix is not an infinity matrix. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00153}{153}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{group___matrix___utils_ga21190cc65e0c0d165cc681b53a7d625a}\index{Matrix Validation Utilities@{Matrix Validation Utilities}!EXPECT\_MAT\_NEAR@{EXPECT\_MAT\_NEAR}}
+\index{EXPECT\_MAT\_NEAR@{EXPECT\_MAT\_NEAR}!Matrix Validation Utilities@{Matrix Validation Utilities}}
+\doxysubsubsubsubsection{\texorpdfstring{EXPECT\_MAT\_NEAR()}{EXPECT\_MAT\_NEAR()}}
+{\footnotesize\ttfamily \label{group___matrix___utils_ga21190cc65e0c0d165cc681b53a7d625a} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T, \doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} U$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+NEAR (\begin{DoxyParamCaption}\item[{const T \&}]{expected}{, }\item[{const U \&}]{actual}{, }\item[{double}]{tolerance}{ = {\ttfamily 1e-\/5}}\end{DoxyParamCaption})}
+
+
+
+Performs a component-\/wise approximate equality comparison using an absolute epsilon. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the reference matrix. \\
+\hline
+{\em U} & The type of the matrix under test. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em expected} & The matrix serving as the ground truth. \\
+\hline
+{\em actual} & The matrix being evaluated. \\
+\hline
+{\em tolerance} & The maximum allowable absolute difference between components.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrices are out of the {\ttfamily tolerance} range. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00076}{76}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+
+\Hypertarget{group___matrix___utils_gadd4567e070fbc850d28ad4e7badb9994}\index{Matrix Validation Utilities@{Matrix Validation Utilities}!EXPECT\_MAT\_ZERO@{EXPECT\_MAT\_ZERO}}
+\index{EXPECT\_MAT\_ZERO@{EXPECT\_MAT\_ZERO}!Matrix Validation Utilities@{Matrix Validation Utilities}}
+\doxysubsubsubsubsection{\texorpdfstring{EXPECT\_MAT\_ZERO()}{EXPECT\_MAT\_ZERO()}}
+{\footnotesize\ttfamily \label{group___matrix___utils_gadd4567e070fbc850d28ad4e7badb9994} 
+template$<$\doxymbox{\hyperlink{conceptfgm_1_1_matrix}{fgm::\+\+Matrix}} T$>$ \\
+void testutils::\+\+EXPECT\+\_\+\+MAT\+\_\+\+ZERO (\begin{DoxyParamCaption}\item[{const T \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Validates that the provided matrix conforms to a zero matrix within a standard epsilon. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The matrix type being evaluated. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em actual} & The matrix to verify as a zero matrix.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Uses Google\+Test macros for validation. This function will trigger a non-\/fatal test failure if the matrix is not a zero matrix. 
+
+Triggers an assertion failure if matrix dimensions are mismatched. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_matrix_utils_8h_source_l00127}{127}} of file \doxymbox{\hyperlink{_matrix_utils_8h_source}{Matrix\+Utils.\+h}}.
+

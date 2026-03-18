@@ -30,7 +30,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d}{fgm::Matrix4D<float>}}\ mat;}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00027}00027\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{comment}{//\ Then,\ it's\ elements\ form\ an\ identity\ matrix}}
-\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00029}00029\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_a3ed7811d32bf5ba5896035fdb4c48a09}{EXPECT\_MAT\_IDENTITY}}(mat);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00029}00029\ \ \ \ \ \doxymbox{\hyperlink{group___matrix___utils_ga3ed7811d32bf5ba5896035fdb4c48a09}{EXPECT\_MAT\_IDENTITY}}(mat);}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00030}00030\ \}}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00031}00031\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00032}\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a30a507460396af49d3357645b3bc71b0}{00032}}\ TEST(Matrix4D\_Initialization,\ InitializationSupportedForIntegers)}
@@ -136,7 +136,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00132}00132\ \ \ \ \ copy(0,\ 3)\ =\ 2.0;}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00133}00133\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00134}00134\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ double\ matrix\ remains\ unchanged}}
-\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00135}00135\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_a3ed7811d32bf5ba5896035fdb4c48a09}{EXPECT\_MAT\_IDENTITY}}(mat);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00135}00135\ \ \ \ \ \doxymbox{\hyperlink{group___matrix___utils_ga3ed7811d32bf5ba5896035fdb4c48a09}{EXPECT\_MAT\_IDENTITY}}(mat);}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00136}00136\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00137}00137\ \ \ \ \ \textcolor{comment}{//\ And,\ the\ new\ matrix\ is\ of\ type\ float\ with\ the\ mutated\ value}}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00138}00138\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(copy)::value\_type,\ \textcolor{keywordtype}{double}>);}
@@ -165,7 +165,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00161}00161\ \ \ \ \ copy(0,\ 3)\ =\ 2.0f;}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00162}00162\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00163}00163\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ double\ matrix\ remains\ unchanged}}
-\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00164}00164\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_a3ed7811d32bf5ba5896035fdb4c48a09}{EXPECT\_MAT\_IDENTITY}}(mat);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00164}00164\ \ \ \ \ \doxymbox{\hyperlink{group___matrix___utils_ga3ed7811d32bf5ba5896035fdb4c48a09}{EXPECT\_MAT\_IDENTITY}}(mat);}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00165}00165\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00166}00166\ \ \ \ \ \textcolor{comment}{//\ And,\ the\ new\ matrix\ is\ of\ type\ float\ with\ the\ mutated\ value}}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00167}00167\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(copy)::value\_type,\ \textcolor{keywordtype}{float}>);}
@@ -229,7 +229,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00225}00225\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structfgm_1_1_matrix4_d}{fgm::Matrix4D}}\ result\ =\ a\ +\ b;}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00226}00226\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00227}00227\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ result\ is\ the\ sum\ of\ individual\ elements}}
-\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00228}00228\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_aeaa533951f000ad4a7c017b466cde69b}{EXPECT\_MAT\_EQ}}(expected,\ result);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00228}00228\ \ \ \ \ \doxymbox{\hyperlink{group___matrix___utils_gaeaa533951f000ad4a7c017b466cde69b}{EXPECT\_MAT\_EQ}}(expected,\ result);}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00229}00229\ \}}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00230}00230\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00231}\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a62f1ab2668ea396b38d06da09b752248}{00231}}\ TEST(Matrix4D\_Addition,\ PlusEqualsMatrixWithAnotherMatrixReturnsSameMatrixWithCorrectValues)}
@@ -249,7 +249,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00245}00245\ \ \ \ \ a\ +=\ b;}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00246}00246\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00247}00247\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ original\ matrix\ contains\ the\ sum\ of\ the\ elements\ added\ together}}
-\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00248}00248\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_aeaa533951f000ad4a7c017b466cde69b}{EXPECT\_MAT\_EQ}}(expected,\ a);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00248}00248\ \ \ \ \ \doxymbox{\hyperlink{group___matrix___utils_gaeaa533951f000ad4a7c017b466cde69b}{EXPECT\_MAT\_EQ}}(expected,\ a);}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00249}00249\ \}}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00250}00250\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00251}\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_aacf9e2af75b086d0b5e5c476c827a208}{00251}}\ TEST(Matrix4D\_Addition,\ SumOfTwoMatricesOfDifferentTypeReturnsAnotherMatrixWithTypePromotion)}
@@ -270,7 +270,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00266}00266\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ type\ of\ the\ resultant\ matrix\ is\ of\ the\ larger\ of\ the\ two\ type}}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00267}00267\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(result)::value\_type,\ \textcolor{keywordtype}{double}>);}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00268}00268\ \ \ \ \ \textcolor{comment}{//\ And,\ the\ result\ is\ the\ sum\ of\ individual\ elements}}
-\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00269}00269\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_aeaa533951f000ad4a7c017b466cde69b}{EXPECT\_MAT\_EQ}}(expected,\ result);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00269}00269\ \ \ \ \ \doxymbox{\hyperlink{group___matrix___utils_gaeaa533951f000ad4a7c017b466cde69b}{EXPECT\_MAT\_EQ}}(expected,\ result);}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00270}00270\ \}}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00271}00271\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00272}\doxymbox{\hyperlink{_matrix4_d_tests_8cpp_a40d4e7c35c57f53b0d37b1ecae5b5076}{00272}}\ TEST(Matrix4D\_Addition,\ PlusEqualsMatrixWithAnotherMatrixOfDifferentTypeReturnsSameMatrixWithoutTypePromotion)}
@@ -291,7 +291,7 @@
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00287}00287\ \ \ \ \ \textcolor{comment}{//\ Then,\ the\ type\ of\ the\ original\ matrix\ is\ preserved}}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00288}00288\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same\_v<\textcolor{keyword}{typename}\ \textcolor{keyword}{decltype}(a)::value\_type,\ \textcolor{keywordtype}{float}>);}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00289}00289\ \ \ \ \ \textcolor{comment}{//\ And,\ the\ original\ matrix\ contains\ the\ sum\ of\ the\ elements\ added\ together}}
-\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00290}00290\ \ \ \ \ \doxymbox{\hyperlink{namespacetestutils_aeaa533951f000ad4a7c017b466cde69b}{EXPECT\_MAT\_EQ}}(expected,\ a);}
+\DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00290}00290\ \ \ \ \ \doxymbox{\hyperlink{group___matrix___utils_gaeaa533951f000ad4a7c017b466cde69b}{EXPECT\_MAT\_EQ}}(expected,\ a);}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00291}00291\ \}}
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00292}00292\ }
 \DoxyCodeLine{\Hypertarget{_matrix4_d_tests_8cpp_source_l00293}00293\ \textcolor{comment}{//\ TEST(Matrix4D\_Difference,\ DifferenceOfTwoMatricesReturnsAnotherMatrixWithCorrectValues)}}

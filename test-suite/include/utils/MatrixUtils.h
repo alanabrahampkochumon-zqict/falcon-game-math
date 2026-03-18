@@ -8,7 +8,7 @@
  *        Provides specialized testing helpers and assertion wrappers for @ref Matrix2D,
  *        @ref Matrix3D, and @ref Matrix4D to ensure numerical stability and
  *        geometric correctness across the fgm library.
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -24,6 +24,11 @@ namespace testutils
 {
 
     /**
+     * @addtogroup Matrix_Utils
+     * @{
+     */
+
+    /**
      * @brief Perform a component-wise strict equality comparison between two matrices of the same dimensions.
      *
      * @tparam T Numeric type of the expected matrix components.
@@ -36,7 +41,7 @@ namespace testutils
      * @note Triggers an assertion failure if matrix dimensions are mismatched.
      */
     template <fgm::Matrix T, fgm::Matrix U>
-    void EXPECT_MAT_EQ(const T& expected,const U& actual)
+    void EXPECT_MAT_EQ(const T& expected, const U& actual)
     {
         using ValueType = T::value_type;
 
@@ -151,6 +156,8 @@ namespace testutils
             for (std::size_t j = 0; j < T::columns; ++j)
                 EXPECT_TRUE(std::isinf(actual(i, j)));
     }
+
+    /** @} */
 
 } // namespace testutils
 

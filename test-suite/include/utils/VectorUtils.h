@@ -25,6 +25,11 @@ namespace testutils
 {
 
     /**
+     * @addtogroup Vector_Utils
+     * @{
+     */
+
+    /**
      * @brief Perform a component-wise equality comparison between two vectors of the same dimensions.
      *
      * @tparam T Numeric type of the expected vector components.
@@ -255,4 +260,7 @@ namespace testutils
         else
             EXPECT_EQ(expected, actual);
     }
+
+    /** @} */
+
 } // namespace testutils
