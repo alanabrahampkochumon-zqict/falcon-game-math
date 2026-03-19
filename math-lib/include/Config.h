@@ -12,6 +12,12 @@
 
 namespace fgm
 {
+
+    /**
+     * @addtogroup FGM_Math_Config
+     * @{
+     */
+
     struct Config
     {
         /** @brief Standard precision for logging and debugging. */
@@ -27,6 +33,23 @@ namespace fgm
          * @brief Toggles between standard logging precision and type-specific maximum precision.
          */
         static inline bool useFullPrecision = false;
+
+
+
+        /***********************************!***
+         *                                    *
+         *            CUSTOM EPSILON          *
+         *                                    *
+         **************************************/
+        
+        /** @brief The smallest positive value such that 1.0 + EPSILON != 1.0 for 32-bit floats. */
+        static constexpr double FLOAT_EPSILON = 1e-5;
+
+        /** @brief The smallest positive value such that 1.0 + EPSILON != 1.0 for 64-bit floats. */
+        static constexpr double DOUBLE_EPSILON = 1e-12;
     };
+
+    /** @} */
+
 }
 

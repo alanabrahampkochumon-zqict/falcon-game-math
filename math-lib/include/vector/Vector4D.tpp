@@ -516,9 +516,9 @@ namespace fgm
         R magnitude = mag();
 
         if constexpr (std::is_same_v<R, double>)
-            assert(magnitude > DOUBLE_EPSILON && "Vector4D Normalization : Division by 0");
+            assert(magnitude > Config::DOUBLE_EPSILON && "Vector4D Normalization : Division by 0");
         else
-            assert(magnitude > FLOAT_EPSILON && "Vector4D Normalization : Division by 0");
+            assert(magnitude > Config::FLOAT_EPSILON && "Vector4D Normalization : Division by 0");
 
         return *this / magnitude;
     }

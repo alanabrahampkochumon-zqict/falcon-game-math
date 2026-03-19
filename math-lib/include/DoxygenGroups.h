@@ -101,6 +101,12 @@
      * @}
      */
 
+    /**
+     * @defgroup FGM_Math_Config Library Configuration
+     * @brief Configuration used by FGM::math.
+     * @ingroup FGM_Math
+     */
+
 /** @} */ // End of FGM_Math
 
 // clang-format on

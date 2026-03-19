@@ -52,9 +52,9 @@ namespace testutils
 
         for (std::size_t i = 0; i < elementCount; ++i)
             if constexpr (std::is_same_v<ValueType, double>)
-                EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::DOUBLE_EPSILON);
+                EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::Config::DOUBLE_EPSILON);
             else if constexpr (std::is_floating_point_v<ValueType>)
-                EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::FLOAT_EPSILON);
+                EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::Config::FLOAT_EPSILON);
             else
                 EXPECT_EQ(expected[i], static_cast<ValueType>(actual[i]));
     }

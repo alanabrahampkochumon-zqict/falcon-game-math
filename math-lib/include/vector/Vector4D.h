@@ -196,8 +196,8 @@ namespace fgm
          */
         template <Arithmetic U>
         bool allEq(const Vector4D<U>& other,
-                   double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? DOUBLE_EPSILON
-                                                                                             : FLOAT_EPSILON) const;
+                   double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? Config::DOUBLE_EPSILON
+                                                                                             : Config::FLOAT_EPSILON) const;
 
 
         /**
@@ -214,8 +214,8 @@ namespace fgm
          */
         template <Arithmetic U>
         static bool allEq(const Vector4D& vecA, const Vector4D<U>& vecB,
-                          double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? DOUBLE_EPSILON
-                                                                                                    : FLOAT_EPSILON);
+                          double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? Config::DOUBLE_EPSILON
+                                                                                                    : Config::FLOAT_EPSILON);
 
 
         /**
@@ -233,8 +233,8 @@ namespace fgm
          */
         template <Arithmetic U>
         bool allNeq(const Vector4D<U>& other,
-                    double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? DOUBLE_EPSILON
-                                                                                              : FLOAT_EPSILON) const;
+                    double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? Config::DOUBLE_EPSILON
+                                                                                              : Config::FLOAT_EPSILON) const;
 
         /**
          * @copybrief allNeq(const Vector4D<U>&, double) const
@@ -250,8 +250,8 @@ namespace fgm
          */
         template <Arithmetic U>
         static bool allNeq(const Vector4D& vecA, const Vector4D<U>& vecB,
-                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? DOUBLE_EPSILON
-                                                                                                     : FLOAT_EPSILON);
+                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? Config::DOUBLE_EPSILON
+                                                                                                     : Config::FLOAT_EPSILON);
 
 
         /**
@@ -293,8 +293,8 @@ namespace fgm
         template <Arithmetic U>
         Vector4D<bool> eq(const Vector4D<U>& other,
                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                              ? DOUBLE_EPSILON
-                              : FLOAT_EPSILON) const;
+                              ? Config::DOUBLE_EPSILON
+                              : Config::FLOAT_EPSILON) const;
 
 
         /**
@@ -310,8 +310,8 @@ namespace fgm
         template <Arithmetic U>
         static Vector4D<bool> eq(const Vector4D& vecA, const Vector4D<U>& vecB,
                                  double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                     ? DOUBLE_EPSILON
-                                     : FLOAT_EPSILON);
+                                     ? Config::DOUBLE_EPSILON
+                                     : Config::FLOAT_EPSILON);
 
 
         /**
@@ -329,8 +329,8 @@ namespace fgm
         template <Arithmetic U>
         Vector4D<bool> neq(const Vector4D<U>& other,
                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                               ? DOUBLE_EPSILON
-                               : FLOAT_EPSILON) const;
+                               ? Config::DOUBLE_EPSILON
+                               : Config::FLOAT_EPSILON) const;
 
 
         /**
@@ -346,8 +346,8 @@ namespace fgm
         template <Arithmetic U>
         static Vector4D<bool> neq(const Vector4D& vecA, const Vector4D<U>& vecB,
                                   double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                      ? DOUBLE_EPSILON
-                                      : FLOAT_EPSILON);
+                                      ? Config::DOUBLE_EPSILON
+                                      : Config::FLOAT_EPSILON);
 
         /** @} */
 

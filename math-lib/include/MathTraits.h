@@ -74,15 +74,4 @@ namespace fgm
         requires Arithmetic<T>
     using Magnitude = std::conditional_t<std::is_same_v<T, float>, float, double>;
 
-
-    /**************************************
-     *                                    *
-     *            CUSTOM EPSILON          *
-     *                                    *
-     **************************************/
-
-    inline constexpr double FLOAT_EPSILON = 1e-5;
-    inline constexpr double DOUBLE_EPSILON = 1e-12;
-
-
 } // namespace fgm
