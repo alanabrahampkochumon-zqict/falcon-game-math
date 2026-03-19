@@ -18,22 +18,38 @@
 namespace fgm
 {
 
+    /**
+     * @addtogroup FGM_Concepts
+     * @{
+     */
+
     /**************************************
      *                                    *
      *         ARITHMETIC CONCEPTS        *
      *                                    *
      **************************************/
 
+    /** @brief Validates that a type is a standard numeric primitive (integral or floating-point). */
     template <typename T>
     concept Arithmetic = (std::integral<T> || std::floating_point<T>);
 
-    // A stricter concept that doesn't allow bool as datatype
-    // Use for operations like +, -, *, / etc.. which are not defined for bool.
+
+    /**
+     * @brief Enforces numeric types suitable for linear algebra by explicitly excluding bool.
+     * @note Prevents logical types from participating in arithmetic operations like addition or division.
+     */
     template <typename T>
     concept StrictArithmetic = Arithmetic<T> && !std::is_same_v<T, bool>;
 
+
+    /**
+     * @brief Detects arithmetic capability after stripping cv-qualifiers and references.
+     * @details Uses @ref `std::decay_t` to ensure const T& or T&& types are evaluated by their underlying primitive.
+     */
     template <typename T>
-    concept weak_arithmetic = std::is_arithmetic_v<std::decay_t<T>>;
+    concept WeakArithmetic = std::is_arithmetic_v<std::decay_t<T>>;
+
+
 
 
     /**************************************
@@ -43,7 +59,9 @@ namespace fgm
      **************************************/
 
     /**
-     * `Vector` requires a value_type, dimension, [] accessor, and its value_type needs to be `Arithmetic`.
+     * @brief Defines the requirements for a linear algebraic vector.
+     * @details Requires a value_type alias, a static dimension constant, and subscript [] access. The underlying type
+     *          must satisfy @ref Arithmetic.
      */
     template <typename T>
     concept Vector = requires(T v, std::size_t i) {
@@ -54,8 +72,9 @@ namespace fgm
 
 
     /**
-     * @brief `Matrix` requires a value_type, rows, columns, [] accessor, (r, c) accessor, and its value_type needs to
-     * be `Arithmetic`.
+     * @brief Defines the structural requirements for a mathematical matrix.
+     * @details Enforces a two-dimensional interface including rows and columns constants, as well as both (r, c) and
+     *          [c] access patterns.
      */
     template <typename T>
     concept Matrix = requires(T matrix, std::size_t r, std::size_t c) {
@@ -68,10 +87,13 @@ namespace fgm
 
 
     /**
-     * @brief Custom typedef used for vector magnitudes as integral magnitudes can cause imprecision.
+     * @brief Determines the optimal high-precision type for length calculations.
+     * @note Automatically promotes integral types to double to prevent precision loss during square root operations.
      */
     template <typename T>
         requires Arithmetic<T>
     using Magnitude = std::conditional_t<std::is_same_v<T, float>, float, double>;
+
+    /** @} */
 
 } // namespace fgm
