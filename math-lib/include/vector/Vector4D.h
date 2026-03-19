@@ -33,6 +33,11 @@
 
 namespace fgm
 {
+    /**
+     * @addtogroup FGM_Vec4
+     * @{
+     */
+
     template <Arithmetic T>
     struct Vector4D
     {
@@ -906,6 +911,8 @@ namespace fgm
     using lVec4 = Vector4D<long long>;           ///< long long vector
     using dVec4 = Vector4D<double>;              ///< double vector
     using ulVec4 = Vector4D<unsigned long long>; ///< unsigned long long vector
+
+    /** @} */
 
 } // namespace fgm
 
