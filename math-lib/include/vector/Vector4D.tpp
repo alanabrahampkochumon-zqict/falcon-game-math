@@ -199,7 +199,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::gt(const Vector4D<U>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::gt(const Vector4D<U>& other) const noexcept
         requires StrictArithmetic<T>
     {
         return Vector4D(x > other.x, y > other.y, z > other.z, w > other.w);
@@ -207,7 +207,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::gt(const Vector4D& vecA, const Vector4D<U>& vecB)
+    constexpr Vector4D<bool> Vector4D<T>::gt(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept
         requires StrictArithmetic<T>
     {
         return vecA.gt(vecB);
@@ -215,7 +215,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::gte(const Vector4D<U>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::gte(const Vector4D<U>& other) const noexcept
         requires StrictArithmetic<T>
     {
         return Vector4D(x >= other.x, y >= other.y, z >= other.z, w >= other.w);
@@ -223,7 +223,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::gte(const Vector4D& vecA, const Vector4D<U>& vecB)
+    constexpr Vector4D<bool> Vector4D<T>::gte(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept
         requires StrictArithmetic<T>
     {
         return vecA.gte(vecB);
@@ -231,7 +231,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::lt(const Vector4D<U>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::lt(const Vector4D<U>& other) const noexcept
         requires StrictArithmetic<T>
     {
         return Vector4D(x < other.x, y < other.y, z < other.z, w < other.w);
@@ -239,7 +239,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::lt(const Vector4D& vecA, const Vector4D<U>& vecB)
+    constexpr Vector4D<bool> Vector4D<T>::lt(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept
         requires StrictArithmetic<T>
     {
         return vecA.lt(vecB);
@@ -248,7 +248,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::lte(const Vector4D<U>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::lte(const Vector4D<U>& other) const noexcept
         requires StrictArithmetic<T>
     {
         return Vector4D(x <= other.x, y <= other.y, z <= other.z, w <= other.w);
@@ -256,7 +256,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::lte(const Vector4D& vecA, const Vector4D<U>& vecB)
+    constexpr Vector4D<bool> Vector4D<T>::lte(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept
         requires StrictArithmetic<T>
     {
         return vecA.lte(vecB);
@@ -266,7 +266,7 @@ namespace fgm
 #ifdef ENABLE_FGM_SHADER_OPERATORS
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::operator>(const Vector4D<U>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::operator>(const Vector4D<U>& other) const noexcept
         requires StrictArithmetic<T>
     {
         return this->gt(other);
@@ -274,7 +274,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::operator>=(const Vector4D<U>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::operator>=(const Vector4D<U>& other) const noexcept
         requires StrictArithmetic<T>
     {
         return this->gte(other);
@@ -282,7 +282,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::operator<(const Vector4D<U>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::operator<(const Vector4D<U>& other) const noexcept
         requires StrictArithmetic<T>
     {
         return this->lt(other);
@@ -290,7 +290,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<bool> Vector4D<T>::operator<=(const Vector4D<U>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::operator<=(const Vector4D<U>& other) const noexcept
         requires StrictArithmetic<T>
     {
         return this->lte(other);
@@ -307,7 +307,7 @@ namespace fgm
      ***************************************/
 
     template <Arithmetic T>
-    constexpr Vector4D<bool> Vector4D<T>::operator&(const Vector4D<bool>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::operator&(const Vector4D<bool>& other) const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector4D(x & other.x, y & other.y, z & other.z, w & other.w);
@@ -322,14 +322,14 @@ namespace fgm
 
 
     template <Arithmetic T>
-    Vector4D<bool> Vector4D<T>::operator|(const Vector4D<bool>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::operator|(const Vector4D<bool>& other) const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector4D(x | other.x, y | other.y, z | other.z, w | other.w);
     }
 
     template <Arithmetic T>
-    Vector4D<bool> Vector4D<T>::operator!() const
+    constexpr Vector4D<bool> Vector4D<T>::operator!() const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector4D(!x, !y, !z, !w);
@@ -346,7 +346,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    auto Vector4D<T>::operator+(const Vector4D<U>& other) const -> Vector4D<std::common_type_t<T, U>>
+    constexpr auto Vector4D<T>::operator+(const Vector4D<U>& other) const noexcept -> Vector4D<std::common_type_t<T, U>>
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -355,7 +355,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<T>& Vector4D<T>::operator+=(const Vector4D<U>& other)
+    constexpr Vector4D<T>& Vector4D<T>::operator+=(const Vector4D<U>& other) noexcept
         requires StrictArithmetic<T>
     {
         x += static_cast<T>(other.x);
@@ -368,7 +368,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    auto Vector4D<T>::operator-(const Vector4D<U>& other) const -> Vector4D<std::common_type_t<T, U>>
+    constexpr auto Vector4D<T>::operator-(const Vector4D<U>& other) const noexcept -> Vector4D<std::common_type_t<T, U>>
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -377,7 +377,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Vector4D<T>& Vector4D<T>::operator-=(const Vector4D<U>& other)
+    constexpr Vector4D<T>& Vector4D<T>::operator-=(const Vector4D<U>& other) noexcept
         requires StrictArithmetic<T>
     {
         x -= static_cast<T>(other.x);
@@ -390,7 +390,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    auto Vector4D<T>::operator*(S scalar) const -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::operator*(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -398,7 +398,8 @@ namespace fgm
     }
 
     template <StrictArithmetic T, StrictArithmetic S>
-    auto operator*(S scalar, const Vector4D<T>& vector) -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto operator*(S scalar, const Vector4D<T>& vector) noexcept
+        ->Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         return vector * scalar;
@@ -406,7 +407,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    Vector4D<T>& Vector4D<T>::operator*=(S scalar)
+    constexpr Vector4D<T>& Vector4D<T>::operator*=(S scalar) noexcept
         requires StrictArithmetic<T>
     {
 
@@ -419,7 +420,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    auto Vector4D<T>::operator/(S scalar) const -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::operator/(S scalar) const -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -438,7 +439,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    Vector4D<T>& Vector4D<T>::operator/=(S scalar)
+    constexpr Vector4D<T>& Vector4D<T>::operator/=(S scalar)
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
