@@ -29,7 +29,8 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: &=, |=, Zero, One, Inf, -Inf, Nan, X, Y, Z, W, Safe Normalize
+// TODO: &=, |=, Zero, One, Inf, -Inf, Nan, X, Y, Z, W, Safe Normalize, Safe Project, Safe Reject
+// TODO: Make non-safe functions for normalize, divide ops, project and reject noexcept
 
 namespace fgm
 {
@@ -798,7 +799,7 @@ namespace fgm
          * @return The scalar dot product of the two vectors.
          */
         template <StrictArithmetic U>
-        auto dot(const Vector4D<U>& other) const -> std::common_type_t<T, U>
+        constexpr auto dot(const Vector4D<U>& other) const noexcept -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
 
 
@@ -814,7 +815,7 @@ namespace fgm
          * @return The scalar dot product of @p vecA and @p vecB.
          */
         template <StrictArithmetic U>
-        static auto dot(const Vector4D& vecA, const Vector4D<U>& vecB) -> std::common_type_t<T, U>
+        constexpr static auto dot(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -841,7 +842,7 @@ namespace fgm
          *
          * @return The scalar magnitude of the vector.
          */
-        Magnitude<T> mag() const
+        constexpr Magnitude<T> mag() const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -856,7 +857,7 @@ namespace fgm
          *
          * @return The scalar magnitude of @p vec.
          */
-        static Magnitude<T> mag(const Vector4D& vec)
+        constexpr static Magnitude<T> mag(const Vector4D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -877,7 +878,7 @@ namespace fgm
          *
          * @return A new @ref Vector4D with a magnitude of 1.0.
          */
-        Vector4D<Magnitude<T>> normalize() const
+        constexpr Vector4D<Magnitude<T>> normalize() const
             requires StrictArithmetic<T>;
 
 
@@ -891,7 +892,7 @@ namespace fgm
          * @param[in] vec The vector to normalize.
          * @return A new @ref Vector4D with a magnitude of 1.0.
          */
-        static Vector4D<Magnitude<T>> normalize(const Vector4D& vec)
+        constexpr static Vector4D<Magnitude<T>> normalize(const Vector4D& vec)
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -922,7 +923,7 @@ namespace fgm
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
-        auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const -> Vector4D<std::common_type_t<T, U>>
+        constexpr auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
 
@@ -939,7 +940,7 @@ namespace fgm
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
-        static auto project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized = false)
+        constexpr static auto project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized = false)
             -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
@@ -963,7 +964,7 @@ namespace fgm
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
-        auto reject(const Vector4D<U>& from, bool ontoNormalized = false) const -> Vector4D<std::common_type_t<T, U>>
+        constexpr auto reject(const Vector4D<U>& from, bool ontoNormalized = false) const -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
 
@@ -980,7 +981,7 @@ namespace fgm
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
-        static auto reject(const Vector4D& vector, const Vector4D<U>& from, bool ontoNormalized = false)
+        constexpr static auto reject(const Vector4D& vector, const Vector4D<U>& from, bool ontoNormalized = false)
             -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
@@ -1004,7 +1005,7 @@ namespace fgm
          *
          * @return A reference to the output stream @p os.
          */
-        friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
+        constexpr friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
         {
             auto precision = Config::useFullPrecision
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION

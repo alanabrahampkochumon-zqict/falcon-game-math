@@ -475,7 +475,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    auto Vector4D<T>::dot(const Vector4D<U>& other) const -> std::common_type_t<T, U>
+    constexpr auto Vector4D<T>::dot(const Vector4D<U>& other) const noexcept -> std::common_type_t<T, U>
         requires StrictArithmetic<T>
     {
         return x * other.x + y * other.y + z * other.z + w * other.w;
@@ -483,7 +483,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    auto Vector4D<T>::dot(const Vector4D& vecA, const Vector4D<U>& vecB) -> std::common_type_t<T, U>
+    constexpr auto Vector4D<T>::dot(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept -> std::common_type_t<T, U>
         requires StrictArithmetic<T>
     {
         return vecA.dot(vecB);
@@ -499,7 +499,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    Magnitude<T> Vector4D<T>::mag() const
+    constexpr Magnitude<T> Vector4D<T>::mag() const noexcept
         requires StrictArithmetic<T>
     {
         using M = Magnitude<T>;
@@ -513,7 +513,7 @@ namespace fgm
     }
 
     template <Arithmetic T>
-    Magnitude<T> Vector4D<T>::mag(const Vector4D& vec)
+    constexpr Magnitude<T> Vector4D<T>::mag(const Vector4D& vec) noexcept
         requires StrictArithmetic<T>
     {
         return vec.mag();
@@ -529,7 +529,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    Vector4D<Magnitude<T>> Vector4D<T>::normalize() const
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::normalize() const
         requires StrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -544,7 +544,7 @@ namespace fgm
     }
 
     template <Arithmetic T>
-    Vector4D<Magnitude<T>> Vector4D<T>::normalize(const Vector4D& vec)
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::normalize(const Vector4D& vec)
         requires StrictArithmetic<T>
     {
         return vec.normalize();
@@ -561,7 +561,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    auto Vector4D<T>::project(const Vector4D<U>& onto, bool ontoNormalized) const -> Vector4D<std::common_type_t<T, U>>
+    constexpr auto Vector4D<T>::project(const Vector4D<U>& onto, bool ontoNormalized) const -> Vector4D<std::common_type_t<T, U>>
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -573,7 +573,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    auto Vector4D<T>::project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized)
+    constexpr auto Vector4D<T>::project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized)
         -> Vector4D<std::common_type_t<T, U>>
         requires StrictArithmetic<T>
     {
@@ -591,7 +591,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    auto Vector4D<T>::reject(const Vector4D<U>& from, bool ontoNormalized) const -> Vector4D<std::common_type_t<T, U>>
+    constexpr auto Vector4D<T>::reject(const Vector4D<U>& from, bool ontoNormalized) const -> Vector4D<std::common_type_t<T, U>>
         requires StrictArithmetic<T>
     {
         return *this - this->project(from, ontoNormalized);
@@ -599,7 +599,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    auto Vector4D<T>::reject(const Vector4D& vector, const Vector4D<U>& from, bool ontoNormalized)
+    constexpr auto Vector4D<T>::reject(const Vector4D& vector, const Vector4D<U>& from, bool ontoNormalized)
         -> Vector4D<std::common_type_t<T, U>>
         requires StrictArithmetic<T>
     {
