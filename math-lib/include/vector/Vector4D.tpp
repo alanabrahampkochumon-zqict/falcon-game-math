@@ -58,6 +58,8 @@ namespace fgm
     }
 
 
+
+
     /*************************************
      *                                   *
      *            ACCESSORS              *
@@ -75,6 +77,8 @@ namespace fgm
     {
         return (&x)[i];
     }
+
+
 
 
     /***************************************
@@ -190,6 +194,8 @@ namespace fgm
     }
 
 
+
+
     /***************************************
      *                                     *
      *            COMPARISONS              *
@@ -297,6 +303,8 @@ namespace fgm
 #endif
 
 
+
+
     /***************************************
      *                                     *
      *      BOOLEAN BITWISE OPERATORS      *
@@ -331,6 +339,8 @@ namespace fgm
     {
         return Vector4D(!x, !y, !z, !w);
     }
+
+
 
 
     /*************************************
@@ -459,6 +469,8 @@ namespace fgm
     }
 
 
+
+
     /*************************************
      *                                   *
      *        VECTOR DOT PRODUCT         *
@@ -480,6 +492,8 @@ namespace fgm
     {
         return vecA.dot(vecB);
     }
+
+
 
 
     /*************************************
@@ -508,6 +522,8 @@ namespace fgm
     {
         return vec.mag();
     }
+
+
 
 
     /*************************************
@@ -539,6 +555,8 @@ namespace fgm
     }
 
 
+
+
     /*************************************
      *                                   *
      *        VECTOR PROJECTION          *
@@ -565,6 +583,8 @@ namespace fgm
     {
         return vector.project(onto, ontoNormalized);
     }
+
+
 
 
     /*************************************

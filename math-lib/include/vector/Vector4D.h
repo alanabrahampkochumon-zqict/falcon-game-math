@@ -77,12 +77,10 @@ namespace fgm
 
 
 
-
         /**
          * @addtogroup H_FGM_Vec4_Init
          * @{
          */
-
 
         /*************************************
          *                                   *
@@ -90,50 +88,54 @@ namespace fgm
          *                                   *
          *************************************/
 
-        /**
-         * @brief Initialize @ref fgm::Vector4D with zeros.
-         */
+        /** @brief Initialize @ref fgm::Vector4D with zeros. */
         Vector4D();
 
 
         /**
          * @brief Initialize @ref fgm::Vector4D with passed in values.
-         * @param[in]  v1 First entry of @ref fgm::Vector4D.
-         * @param[in]  v2 Second entry of @ref fgm::Vector4D.
-         * @param[in]  v3 Third entry of @ref fgm::Vector4D.
-         * @param[in]  v4 Fourth entry of @ref fgm::Vector4D.
+         *
+         * @param[in] v1 First entry of @ref fgm::Vector4D.
+         * @param[in] v2 Second entry of @ref fgm::Vector4D.
+         * @param[in] v3 Third entry of @ref fgm::Vector4D.
+         * @param[in] v4 Fourth entry of @ref fgm::Vector4D.
          */
         Vector4D(T v1, T v2, T v3, T v4);
 
 
         /**
          * @brief Initialize @ref fgm::Vector4D with 2 @ref Vector2D.
-         * @param[in]  vec1 First two entries of @ref fgm::Vector4D.
-         * @param[in]  vec2 Last two entries of @ref fgm::Vector4D.
+         *
+         * @param[in] vec1 First two entries of @ref fgm::Vector4D.
+         * @param[in] vec2 Last two entries of @ref fgm::Vector4D.
          */
         Vector4D(Vector2D<T> vec1, Vector2D<T> vec2);
 
 
         /**
          * @brief Initialize @ref fgm::Vector4D with 1 @ref Vector3D and 1 T value.
-         * @param[in]  vec First three entries of @ref fgm::Vector4D.
-         * @param[in]  v Last entry for @ref fgm::Vector4D.
+         *
+         * @param[in] vec First three entries of @ref fgm::Vector4D.
+         * @param[in] v   Last entry for @ref fgm::Vector4D.
          */
         Vector4D(Vector3D<T> vec, T v);
 
 
         /**
          * @brief Initialize @ref fgm::Vector4D with 1 T value and 1 @ref Vector3D.
-         * @param[in]  vec First three entries of @ref fgm::Vector4D.
-         * @param[in]  v Last entry for @ref fgm::Vector4D.
+         *
+         * @param[in] vec First three entries of @ref fgm::Vector4D.
+         * @param[in] v   Last entry for @ref fgm::Vector4D.
          */
         Vector4D(T v, Vector3D<T> vec);
 
 
         /**
          * @brief Initialize @ref fgm::Vector4D from another @ref fgm::Vector4D of a different type.
+         *
          * @tparam U Numeric type of the source vector.
-         * @param[in]  other Source vector to be converted.
+         *
+         * @param[in] other Source vector to be converted.
          */
         template <Arithmetic U>
         Vector4D(const Vector4D<U>& other);
@@ -146,26 +148,26 @@ namespace fgm
          *************************************/
 
         /**
-         * @brief Accesses the component at the specified location.
-         * Provides read-write access to the element.
+         * @brief Access the component at the specified location.
+         *        Provide read-write access to the element.
          *
-         * @param[in]  i Index of the vector component.
+         * @param[in] i Index of the vector component.
+         *
          * @return Reference to the vector component.
          */
         T& operator[](std::size_t i);
 
 
         /**
-         * @brief Accesses the element at the specified location (read-only).
+         * @brief Access the element at the specified location (read-only).
          *
-         * @param[in]  i Index of the vector component.
+         * @param[in] i Index of the vector component.
+         *
          * @return A const reference to the vector component.
          */
         const T& operator[](std::size_t i) const;
 
-
         /** @} */
-
 
 
 
@@ -174,25 +176,25 @@ namespace fgm
          * @{
          */
 
-
         /***************************************
          *                                     *
          *             EQUALITY                *
          *                                     *
          ***************************************/
 
-
         /**
          * @brief Compare all components of this vector for equality with another vector.
-         * Performs a component-wise comparison and returns true only if every element pair
-         * satisfies the equality condition within the given @p epsilon.
+         *        Perform a component-wise comparison and returns true only if every element pair
+         *        satisfies the equality condition within the given @p epsilon.
          *
          * @note To obtain a component-wise boolean mask, use @ref eq.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-         * @param[in] other The vector to compare against.
+         *
+         * @param[in] other   The vector to compare against.
          * @param[in] epsilon Maximum allowable difference for `std::floating_point` types.
-         *            Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
          * @return True if all components are equivalent within @p epsilon.
          */
         template <Arithmetic U>
@@ -208,10 +210,11 @@ namespace fgm
          * @note To obtain a component-wise boolean mask, use @ref eq.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-         * @param[in]  vecA First vector to compare.
-         * @param[in]  vecB Second vector to compare against.
+         *
+         * @param[in] vecA    First vector to compare.
+         * @param[in] vecB    Second vector to compare against.
          * @param[in] epsilon Maximum allowable difference for `std::floating_point` types.
-         *            Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          * @return True if all components are equivalent within @p epsilon.
          */
         template <Arithmetic U>
@@ -223,15 +226,17 @@ namespace fgm
 
         /**
          * @brief Compare components for inequality across two vectors.
-         * Performs a component-wise comparison and returns true if any of the pair satisfies inequality condition
-         * within the given @p epsilon.
+         *        Perform a component-wise comparison and returns true if any of the pair satisfies inequality condition
+         *        within the given @p epsilon.
          *
          * @note To obtain a component-wise boolean mask, use @ref neq.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-         * @param[in] other The vector to compare against.
+         *
+         * @param[in] other   The vector to compare against.
          * @param[in] epsilon Maximum allowable difference for `std::floating_point` types.
-         *            Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
          * @return True if any of the components are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
@@ -247,10 +252,12 @@ namespace fgm
          * @note To obtain a component-wise boolean mask, use @ref neq.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-         * @param[in]  vecA First vector to compare.
-         * @param[in]  vecB Second vector to compare against.
+         *
+         * @param[in] vecA    First vector to compare.
+         * @param[in] vecB    Second vector to compare against.
          * @param[in] epsilon Maximum allowable difference for `std::floating_point` types.
-         *            Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
          * @return True if any of the components are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
@@ -262,10 +269,13 @@ namespace fgm
 
         /**
          * @copybrief allEq(const Vector4D<U>&, double) const
+         *
          * @note To obtain a component-wise boolean mask, use @ref eq.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
          * @param[in] other The vector to compare against.
+         *
          * @return True if all components are equivalent within the default epsilon.
          */
         template <Arithmetic U>
@@ -274,10 +284,13 @@ namespace fgm
 
         /**
          * @copybrief allNeq(const Vector4D<U>&, double) const
+         *
          * @note To obtain a component-wise boolean mask, use @ref eq.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
          * @param[in] other The vector to compare against.
+         *
          * @return True if any of the components are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
@@ -286,14 +299,16 @@ namespace fgm
 
         /**
          * @brief Perform component-wise equality check.
-         * Compares each component pair and returns a boolean mask.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @note To obtain a single scalar result, use @ref allEq or @ref operator==.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-         * @param[in] other The vector to compare against.
+         *
+         * @param[in] other   The vector to compare against.
          * @param[in] epsilon Maximum allowable difference for `std::floating_point` types.
-         *            Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
@@ -307,10 +322,12 @@ namespace fgm
          * @copybrief eq(const Vector4D<U>&, double) const
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-         * @param[in]  vecA First vector to compare.
-         * @param[in]  vecB Second vector to compare against.
+         *
+         * @param[in] vecA    First vector to compare.
+         * @param[in] vecB    Second vector to compare against.
          * @param[in] epsilon Maximum allowable difference for `std::floating_point` types.
-         *            Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
@@ -322,14 +339,15 @@ namespace fgm
 
         /**
          * @brief Perform component-wise inequality check.
-         * Compares each component pair and returns a boolean mask.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @note To obtain a single scalar result, use @ref allNeq or @ref operator!=.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-         * @param[in] other The vector to compare against.
+         * @param[in] other   The vector to compare against.
          * @param[in] epsilon Maximum allowable difference for `std::floating_point` types.
-         *            Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
@@ -343,10 +361,12 @@ namespace fgm
          * @copybrief neq(const Vector4D<U>&, double) const
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-         * @param[in]  vecA First vector to compare.
-         * @param[in]  vecB Second vector to compare against.
+         *
+         * @param[in] vecA    First vector to compare.
+         * @param[in] vecB    Second vector to compare against.
          * @param[in] epsilon Maximum allowable difference for `std::floating_point` types.
-         *            Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
@@ -355,9 +375,7 @@ namespace fgm
                                       ? Config::DOUBLE_EPSILON
                                       : Config::FLOAT_EPSILON);
 
-
         /** @} */
-
 
 
 
@@ -366,20 +384,20 @@ namespace fgm
          * @{
          */
 
-
         /***************************************
          *                                     *
          *            COMPARISONS              *
          *                                     *
          ***************************************/
 
-
         /**
          * @brief Perform component-wise greater-than comparison.
-         * Compares each component pair and returns a boolean mask.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] other The vector to compare against.
+         * 
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
@@ -391,8 +409,10 @@ namespace fgm
          * @copybrief gt(const Vector4D<U>&) const
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in]  vecA First vector to compare.
          * @param[in]  vecB Second vector to compare against.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
@@ -402,10 +422,12 @@ namespace fgm
 
         /**
          * @brief Perform component-wise greater-than-or-equal comparison.
-         * Compares each component pair and returns a boolean mask.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] other The vector to compare against.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
@@ -417,8 +439,10 @@ namespace fgm
          * @copybrief gte(const Vector4D<U>&) const
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in]  vecA First vector to compare.
          * @param[in]  vecB Second vector to compare against.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
@@ -428,10 +452,12 @@ namespace fgm
 
         /**
          * @brief Perform component-wise less-than comparison.
-         * Compares each component pair and returns a boolean mask.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] other The vector to compare against.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
@@ -443,8 +469,10 @@ namespace fgm
          * @copybrief lt(const Vector4D<U>&) const
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in]  vecA First vector to compare.
          * @param[in]  vecB Second vector to compare against.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
@@ -454,10 +482,12 @@ namespace fgm
 
         /**
          * @brief Perform component-wise less-than-or-equal comparison.
-         * Compares each component pair and returns a boolean mask.
+         *        Compares each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] other The vector to compare against.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
@@ -469,8 +499,10 @@ namespace fgm
          * @copybrief lt(const Vector4D<U>&) const
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in]  vecA First vector to compare.
          * @param[in]  vecB Second vector to compare against.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
@@ -512,9 +544,7 @@ namespace fgm
             requires StrictArithmetic<T>;
 #endif
 
-
         /** @} */
-
 
 
 
@@ -523,21 +553,20 @@ namespace fgm
          * @{
          */
 
-
         /***************************************
          *                                     *
          *      BOOLEAN BITWISE OPERATORS      *
          *                                     *
          ***************************************/
 
-
         /**
          * @brief Perform component-wise logical AND.
-         * Computes the conjunction of each component pair.
+         *        Compute the conjunction of each component pair.
          *
          * @note Only available for @ref bVec4 and vectors with `bool` value_type.
          *
          * @param[in] other The vector to combine with.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of component-wise AND.
          */
         constexpr Vector4D<bool> operator&(const Vector4D<bool>& other) const
@@ -546,23 +575,25 @@ namespace fgm
 
         /**
          * @brief Perform component-wise logical AND.
-         * Compute the conjunction of each component pair in-place and update the calling vector.
+         *        Compute the conjunction of each component pair in-place and update the calling vector.
          *
          * @note Only available for @ref bVec4 and vectors with `bool` value_type.
          *
          * @param[in] rhs The vector to combine with.
-         * @return A @ref Vector4D<bool> mask containing the results of component-wise AND.
+         *
+         * @return A reference to this vector.
          */
         constexpr Vector4D<bool>& operator&=(const Vector4D<bool>& rhs) noexcept;
 
 
         /**
          * @brief Perform component-wise logical OR.
-         * Computes the disjunction of each component pair.
+         *        Compute the disjunction of each component pair.
          *
          * @note Only available for @ref bVec4 and vectors with `bool` value_type.
          *
          * @param[in] other The vector to combine with.
+         *
          * @return A @ref Vector4D<bool> mask containing the results of component-wise OR.
          */
         Vector4D<bool> operator|(const Vector4D<bool>& other) const
@@ -571,7 +602,7 @@ namespace fgm
 
         /**
          * @brief Perform component-wise logical NOT.
-         * Inverts each boolean component and returns a new @ref Vector4D<bool>.
+         *        Invert each boolean component and returns a new @ref Vector4D<bool>.
          *
          * @note Only available for @ref bVec4 and vectors with `bool` value_type.
          *
@@ -580,9 +611,7 @@ namespace fgm
         Vector4D<bool> operator!() const
             requires std::is_same_v<T, bool>;
 
-
         /** @} */
-
 
 
 
@@ -590,7 +619,6 @@ namespace fgm
          * @addtogroup H_FGM_Vec4_Arithmetic
          * @{
          */
-
 
         /*************************************
          *                                   *
@@ -600,13 +628,15 @@ namespace fgm
 
         /**
          * @brief Add two vectors component-wise.
-         * Computes the sum of each component pair and returns a new vector.
+         *        Compute the sum of each component pair and returns a new vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] other The vector to add.
+         *
          * @return A new @ref Vector4D containing the component-wise sum.
          */
         template <StrictArithmetic U>
@@ -616,12 +646,14 @@ namespace fgm
 
         /**
          * @brief Add another vector to this vector component-wise.
-         * Performs an in-place addition of @p other to the current instance.
+         *        Perform an in-place addition of @p other to the current instance.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] other The vector to add.
+         *
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic U>
@@ -631,13 +663,15 @@ namespace fgm
 
         /**
          * @brief Subtract two vectors component-wise.
-         * Computes the difference between each component pair and returns a new vector.
+         *        Compute the difference between each component pair and returns a new vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] other The vector to subtract.
+         *
          * @return A new @ref Vector4D containing the component-wise difference.
          */
         template <StrictArithmetic U>
@@ -647,12 +681,14 @@ namespace fgm
 
         /**
          * @brief Subtract another vector from this vector component-wise.
-         * Performs an in-place substraction of @p other from the current instance.
+         *        Perform an in-place substraction of @p other from the current instance.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] other The vector to subtract.
+         *
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic U>
@@ -662,13 +698,15 @@ namespace fgm
 
         /**
          * @brief Scale the vector by a scalar value.
-         * Multiplies each component of the vector by @p scalar and returns a new vector.
+         *        Multiply each component of the vector by @p scalar and returns a new vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] scalar The value to scale by.
+         *
          * @return A new @ref Vector4D scaled by @p scalar.
          */
         template <StrictArithmetic S>
@@ -678,12 +716,14 @@ namespace fgm
 
         /**
          * @brief Scale this vector in-place by a scalar value.
-         * Performs an in-place multiplication of each component by @p scalar.
+         *        Perform an in-place multiplication of each component by @p scalar.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] scalar The value to scale by.
+         *
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic S>
@@ -694,14 +734,16 @@ namespace fgm
         // TODO: Remove assertion, add safe divide, safe mag, and safe normalize
         /**
          * @brief Scale the vector by a scalar value.
-         * Divides each component of the vector by @p scalar and returns a new vector.
+         *        Divide each component of the vector by @p scalar and returns a new vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @warning Does not check for division by zero. @p scalar should be non-zero.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] scalar The value to scale by.
+         *
          * @return A new @ref Vector4D scaled by @p scalar.
          */
         template <StrictArithmetic S>
@@ -711,22 +753,22 @@ namespace fgm
 
         /**
          * @brief Scale this vector in-place by a scalar value.
-         * Performs an in-place division of each component by @p scalar.
+         *        Perform an in-place division of each component by @p scalar.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @warning Does not check for division by zero. @p scalar should be non-zero.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] scalar The value to scale by.
+         *
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic S>
         Vector4D& operator/=(S scalar)
             requires StrictArithmetic<T>;
 
-
         /** @} */
-
 
 
 
@@ -734,7 +776,6 @@ namespace fgm
          * @addtogroup H_FGM_Vec4_Product
          * @{
          */
-
 
         /*************************************
          *                                   *
@@ -744,13 +785,15 @@ namespace fgm
 
         /**
          * @brief Calculate the dot product with another vector.
-         * Computes the scalar product: \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
+         *        Compute the scalar product: \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] other The vector to compute the dot product with.
+         *
          * @return The scalar dot product of the two vectors.
          */
         template <StrictArithmetic U>
@@ -760,20 +803,20 @@ namespace fgm
 
         /**
          * @brief @copybrief dot(const Vector4D<U>&) const
-         * Static wrapper that computes \f$ \mathbf{vecA} \cdot \mathbf{vecB} \f$.
+         * Static wrapper that compute \f$ \mathbf{vecA} \cdot \mathbf{vecB} \f$.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
          * @param[in] vecA First vector to perform the dot product on.
          * @param[in] vecB Second vector to perform the dot product on.
+         *
          * @return The scalar dot product of @p vecA and @p vecB.
          */
         template <StrictArithmetic U>
         static auto dot(const Vector4D& vecA, const Vector4D<U>& vecB) -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
 
-
         /** @} */
-
 
 
 
@@ -781,7 +824,6 @@ namespace fgm
          * @addtogroup H_FGM_Vec4_Mag
          * @{
          */
-
 
         /*************************************
          *                                   *
@@ -791,7 +833,7 @@ namespace fgm
 
         /**
          * @brief Calculate the magnitude (length) of the vector.
-         * Computes the Euclidean norm: \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
+         *        Compute the Euclidean norm: \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
          *
          * @note To avoid precision loss, integral types are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -804,12 +846,13 @@ namespace fgm
 
         /**
          * @brief @copybrief mag() const
-         * Static wrapper that computes \f$ \|\mathbf{vec}\| \f$.
+         * Static wrapper that compute \f$ \|\mathbf{vec}\| \f$.
          *
          * @note To avoid precision loss, integral types are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
          * @param[in] vec The vector to compute the magnitude of.
+         *
          * @return The scalar magnitude of @p vec.
          */
         static Magnitude<T> mag(const Vector4D& vec)
@@ -824,7 +867,7 @@ namespace fgm
 
         /**
          * @brief Calculate the normalized (unit) form of the vector.
-         * Computes the unit vector in the same direction: \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -838,7 +881,7 @@ namespace fgm
 
         /**
          * @brief @copybrief normalize() const
-         * Static wrapper that computes the unit vector \f$ \mathbf{\hat{v}} \f$.
+         * Static wrapper that compute the unit vector \f$ \mathbf{\hat{v}} \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -849,9 +892,7 @@ namespace fgm
         static Vector4D<Magnitude<T>> normalize(const Vector4D& vec)
             requires StrictArithmetic<T>;
 
-
         /** @} */
-
 
 
 
@@ -859,7 +900,6 @@ namespace fgm
          * @addtogroup H_FGM_Vec4_Proj
          * @{
          */
-
 
         /*************************************
          *                                   *
@@ -869,12 +909,14 @@ namespace fgm
 
         /**
          * @brief Project this vector onto another vector.
-         * Computes the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         * \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-         * @param[in] onto The vector to project onto.
+         *
+         * @param[in] onto           The vector to project onto.
          * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
@@ -887,9 +929,11 @@ namespace fgm
          * Static wrapper for orthogonal projection of @p vector onto @p onto.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-         * @param[in] vector The vector to be projected.
-         * @param[in] onto The vector to project onto.
+         *
+         * @param[in] vector         The vector to be projected.
+         * @param[in] onto           The vector to project onto.
          * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
@@ -906,12 +950,14 @@ namespace fgm
 
         /**
          * @brief Compute the vector rejection of this vector from another.
-         * Computes the component of the vector perpendicular to @p onto:
-         * \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-         * @param[in] from The vector to reject from.
+         *
+         * @param[in] from           The vector to reject from.
          * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
@@ -924,9 +970,11 @@ namespace fgm
          * Static wrapper for computing the perpendicular component of @p vector relative to @p onto.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-         * @param[in] vector The vector to be rejected.
-         * @param[in] from The vector to reject from.
+         *
+         * @param[in] vector         The vector to be rejected.
+         * @param[in] from           The vector to reject from.
          * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
@@ -934,9 +982,7 @@ namespace fgm
             -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
-
         /** @} */
-
 
 
 
@@ -945,14 +991,15 @@ namespace fgm
          * @{
          */
 
-
         /**
          * @brief Write the vector to an output stream.
-         * Formats the vector as <x, y, z, w> string representation for debugging or logging.
+         *        Formats the vector as <x, y, z, w> string representation for debugging or logging.
          *
          * @tparam T Numeric type of the vector.
-         * @param os The output stream to write to.
+         *
+         * @param os     The output stream to write to.
          * @param vector The vector to be streamed.
+         *
          * @return A reference to the output stream @p os.
          */
         friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
@@ -965,10 +1012,8 @@ namespace fgm
             return os;
         }
 
-
         /** @} */
     };
-
 
 
 
@@ -977,7 +1022,6 @@ namespace fgm
      *       NON-MEMBER FUNCTIONS        *
      *                                   *
      *************************************/
-
 
     /**
      * @addtogroup H_FGM_Vec4_Arithmetic
@@ -992,17 +1036,17 @@ namespace fgm
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-     * @param[in]  scalar The value to scale by.
-     * @param[in]  vector The vector to scale[RHS].
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] vector The vector to scale[RHS].
+     *
      * @return A new @ref Vector4D scaled by @p scalar.
      */
     template <StrictArithmetic T, StrictArithmetic S>
     auto operator*(S scalar, const Vector4D<T>& vector) -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>;
 
-
     /** @} */
-
 
 
 
@@ -1017,7 +1061,6 @@ namespace fgm
      * @{
      */
 
-
     using bVec4 = Vector4D<bool>;                ///< bool vector
     using iVec4 = Vector4D<int>;                 ///< int vector
     using uVec4 = Vector4D<unsigned int>;        ///< unsigned int vector
@@ -1025,7 +1068,6 @@ namespace fgm
     using lVec4 = Vector4D<long long>;           ///< long long vector
     using dVec4 = Vector4D<double>;              ///< double vector
     using ulVec4 = Vector4D<unsigned long long>; ///< unsigned long long vector
-
 
     /** @} */
 
