@@ -57,11 +57,22 @@ class BooleanVectorBitOperations: public ::testing::Test
  * @test Verify that the @ref fgm::Vector4D<bool> bitwise AND operator performs a component-wise logical conjunction
  *        and returns the correct boolean mask.
  */
-TEST_F(BooleanVectorBitOperations, BitwiseAndReturnsComponentwiseAnd)
+TEST_F(BooleanVectorBitOperations, BitwiseAND_PerformComponentwiseConjunction)
 {
     const auto mask = this->vecA & this->vecB;
 
     EXPECT_VEC_EQ(this->expectedAndVector, mask);
+}
+
+/**
+ * @test Verify that the @ref fgm::Vector4D<bool> compound bitwise AND operator performs a
+ *       component-wise logical conjunction in-place and updates the calling vector with the resulting mask.
+ */
+TEST_F(BooleanVectorBitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
+{
+    this->vecA &= this->vecB;
+
+    EXPECT_VEC_EQ(this->expectedAndVector, this->vecA);
 }
 
 

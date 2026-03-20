@@ -5,7 +5,7 @@
  * @date Created on: January 26, 2026
  *
  * @brief @ref fgm::Vector4D template implementation.
- * @details This file contains the definitions of the template members declared in Matrix.h
+ * @details This file contains the definitions of the template members declared in Vector4D.h
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -304,11 +304,19 @@ namespace fgm
      ***************************************/
 
     template <Arithmetic T>
-    Vector4D<bool> Vector4D<T>::operator&(const Vector4D<bool>& other) const
+    constexpr Vector4D<bool> Vector4D<T>::operator&(const Vector4D<bool>& other) const
         requires std::is_same_v<T, bool>
     {
         return Vector4D(x & other.x, y & other.y, z & other.z, w & other.w);
     }
+
+
+    constexpr Vector4D<bool>& Vector4D<bool>::operator&=(const Vector4D<bool>& rhs) noexcept
+    {
+        (*this) = (*this) & rhs;
+        return *this;
+    }
+
 
     template <Arithmetic T>
     Vector4D<bool> Vector4D<T>::operator|(const Vector4D<bool>& other) const

@@ -7,7 +7,7 @@
  * @brief Templated 4D Vector supporting integral, floating-point, and boolean types.
  *
  * @todo Provides a high-performance vector implementation with SIMD acceleration
- * and support for component-wise operations.
+ *       and support for component-wise operations.
  *
  * @tparam T Type of @ref Vector4D components. Must satisfy @ref Arithmetic.
  *
@@ -83,6 +83,7 @@ namespace fgm
          * @{
          */
 
+
         /*************************************
          *                                   *
          *            INITIALIZERS           *
@@ -138,14 +139,11 @@ namespace fgm
         Vector4D(const Vector4D<U>& other);
 
 
-
-
         /*************************************
          *                                   *
          *            ACCESSORS              *
          *                                   *
          *************************************/
-
 
         /**
          * @brief Accesses the component at the specified location.
@@ -165,6 +163,7 @@ namespace fgm
          */
         const T& operator[](std::size_t i) const;
 
+
         /** @} */
 
 
@@ -175,11 +174,13 @@ namespace fgm
          * @{
          */
 
+
         /***************************************
          *                                     *
          *             EQUALITY                *
          *                                     *
          ***************************************/
+
 
         /**
          * @brief Compare all components of this vector for equality with another vector.
@@ -196,8 +197,9 @@ namespace fgm
          */
         template <Arithmetic U>
         bool allEq(const Vector4D<U>& other,
-                   double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? Config::DOUBLE_EPSILON
-                                                                                             : Config::FLOAT_EPSILON) const;
+                   double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                       ? Config::DOUBLE_EPSILON
+                       : Config::FLOAT_EPSILON) const;
 
 
         /**
@@ -214,8 +216,9 @@ namespace fgm
          */
         template <Arithmetic U>
         static bool allEq(const Vector4D& vecA, const Vector4D<U>& vecB,
-                          double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? Config::DOUBLE_EPSILON
-                                                                                                    : Config::FLOAT_EPSILON);
+                          double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                              ? Config::DOUBLE_EPSILON
+                              : Config::FLOAT_EPSILON);
 
 
         /**
@@ -233,8 +236,10 @@ namespace fgm
          */
         template <Arithmetic U>
         bool allNeq(const Vector4D<U>& other,
-                    double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? Config::DOUBLE_EPSILON
-                                                                                              : Config::FLOAT_EPSILON) const;
+                    double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                        ? Config::DOUBLE_EPSILON
+                        : Config::FLOAT_EPSILON) const;
+
 
         /**
          * @copybrief allNeq(const Vector4D<U>&, double) const
@@ -250,8 +255,9 @@ namespace fgm
          */
         template <Arithmetic U>
         static bool allNeq(const Vector4D& vecA, const Vector4D<U>& vecB,
-                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>) ? Config::DOUBLE_EPSILON
-                                                                                                     : Config::FLOAT_EPSILON);
+                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                               ? Config::DOUBLE_EPSILON
+                               : Config::FLOAT_EPSILON);
 
 
         /**
@@ -349,6 +355,7 @@ namespace fgm
                                       ? Config::DOUBLE_EPSILON
                                       : Config::FLOAT_EPSILON);
 
+
         /** @} */
 
 
@@ -359,11 +366,13 @@ namespace fgm
          * @{
          */
 
+
         /***************************************
          *                                     *
          *            COMPARISONS              *
          *                                     *
          ***************************************/
+
 
         /**
          * @brief Perform component-wise greater-than comparison.
@@ -376,6 +385,7 @@ namespace fgm
         template <StrictArithmetic U>
         Vector4D<bool> gt(const Vector4D<U>& other) const
             requires StrictArithmetic<T>;
+
 
         /**
          * @copybrief gt(const Vector4D<U>&) const
@@ -454,6 +464,7 @@ namespace fgm
         Vector4D<bool> lte(const Vector4D<U>& other) const
             requires StrictArithmetic<T>;
 
+
         /**
          * @copybrief lt(const Vector4D<U>&) const
          *
@@ -501,7 +512,10 @@ namespace fgm
             requires StrictArithmetic<T>;
 #endif
 
+
         /** @} */
+
+
 
 
         /**
@@ -509,11 +523,13 @@ namespace fgm
          * @{
          */
 
+
         /***************************************
          *                                     *
          *      BOOLEAN BITWISE OPERATORS      *
          *                                     *
          ***************************************/
+
 
         /**
          * @brief Perform component-wise logical AND.
@@ -524,8 +540,20 @@ namespace fgm
          * @param[in] other The vector to combine with.
          * @return A @ref Vector4D<bool> mask containing the results of component-wise AND.
          */
-        Vector4D<bool> operator&(const Vector4D<bool>& other) const
+        constexpr Vector4D<bool> operator&(const Vector4D<bool>& other) const
             requires std::is_same_v<T, bool>;
+
+
+        /**
+         * @brief Perform component-wise logical AND.
+         * Compute the conjunction of each component pair in-place and update the calling vector.
+         *
+         * @note Only available for @ref bVec4 and vectors with `bool` value_type.
+         *
+         * @param[in] rhs The vector to combine with.
+         * @return A @ref Vector4D<bool> mask containing the results of component-wise AND.
+         */
+        constexpr Vector4D<bool>& operator&=(const Vector4D<bool>& rhs) noexcept;
 
 
         /**
@@ -552,7 +580,9 @@ namespace fgm
         Vector4D<bool> operator!() const
             requires std::is_same_v<T, bool>;
 
+
         /** @} */
+
 
 
 
@@ -560,6 +590,7 @@ namespace fgm
          * @addtogroup H_FGM_Vec4_Arithmetic
          * @{
          */
+
 
         /*************************************
          *                                   *
@@ -660,6 +691,7 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
+        // TODO: Remove assertion, add safe divide, safe mag, and safe normalize
         /**
          * @brief Scale the vector by a scalar value.
          * Divides each component of the vector by @p scalar and returns a new vector.
@@ -692,6 +724,7 @@ namespace fgm
         Vector4D& operator/=(S scalar)
             requires StrictArithmetic<T>;
 
+
         /** @} */
 
 
@@ -701,6 +734,7 @@ namespace fgm
          * @addtogroup H_FGM_Vec4_Product
          * @{
          */
+
 
         /*************************************
          *                                   *
@@ -737,6 +771,7 @@ namespace fgm
         static auto dot(const Vector4D& vecA, const Vector4D<U>& vecB) -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
 
+
         /** @} */
 
 
@@ -746,6 +781,7 @@ namespace fgm
          * @addtogroup H_FGM_Vec4_Mag
          * @{
          */
+
 
         /*************************************
          *                                   *
@@ -765,6 +801,7 @@ namespace fgm
         Magnitude<T> mag() const
             requires StrictArithmetic<T>;
 
+
         /**
          * @brief @copybrief mag() const
          * Static wrapper that computes \f$ \|\mathbf{vec}\| \f$.
@@ -777,8 +814,6 @@ namespace fgm
          */
         static Magnitude<T> mag(const Vector4D& vec)
             requires StrictArithmetic<T>;
-
-
 
 
         /*************************************
@@ -800,6 +835,7 @@ namespace fgm
         Vector4D<Magnitude<T>> normalize() const
             requires StrictArithmetic<T>;
 
+
         /**
          * @brief @copybrief normalize() const
          * Static wrapper that computes the unit vector \f$ \mathbf{\hat{v}} \f$.
@@ -813,6 +849,7 @@ namespace fgm
         static Vector4D<Magnitude<T>> normalize(const Vector4D& vec)
             requires StrictArithmetic<T>;
 
+
         /** @} */
 
 
@@ -822,6 +859,7 @@ namespace fgm
          * @addtogroup H_FGM_Vec4_Proj
          * @{
          */
+
 
         /*************************************
          *                                   *
@@ -860,14 +898,11 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-
-
         /*************************************
          *                                   *
          *         VECTOR REJECTION          *
          *                                   *
          *************************************/
-
 
         /**
          * @brief Compute the vector rejection of this vector from another.
@@ -899,6 +934,7 @@ namespace fgm
             -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
+
         /** @} */
 
 
@@ -908,6 +944,7 @@ namespace fgm
          * @addtogroup H_FGM_Vec4_Log
          * @{
          */
+
 
         /**
          * @brief Write the vector to an output stream.
@@ -928,6 +965,7 @@ namespace fgm
             return os;
         }
 
+
         /** @} */
     };
 
@@ -939,6 +977,7 @@ namespace fgm
      *       NON-MEMBER FUNCTIONS        *
      *                                   *
      *************************************/
+
 
     /**
      * @addtogroup H_FGM_Vec4_Arithmetic
@@ -961,7 +1000,10 @@ namespace fgm
     auto operator*(S scalar, const Vector4D<T>& vector) -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>;
 
+
     /** @} */
+
+
 
 
     /*************************************
@@ -974,6 +1016,8 @@ namespace fgm
      * @addtogroup H_FGM_Vec4_Alias
      * @{
      */
+
+
     using bVec4 = Vector4D<bool>;                ///< bool vector
     using iVec4 = Vector4D<int>;                 ///< int vector
     using uVec4 = Vector4D<unsigned int>;        ///< unsigned int vector
@@ -982,8 +1026,8 @@ namespace fgm
     using dVec4 = Vector4D<double>;              ///< double vector
     using ulVec4 = Vector4D<unsigned long long>; ///< unsigned long long vector
 
-    /** @} */
 
+    /** @} */
 
 } // namespace fgm
 
