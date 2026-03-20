@@ -36,11 +36,11 @@ namespace fgm
          *                                   *
          *************************************/
 
-        Vector2D();
-        Vector2D(T v1, T v2);
+        constexpr Vector2D() noexcept;
+        constexpr Vector2D(T v1, T v2) noexcept;
 
         template <Arithmetic U>
-        Vector2D(const Vector2D<U>& other);
+        constexpr Vector2D(const Vector2D<U>& other) noexcept;
 
 
         /*************************************

@@ -59,12 +59,12 @@ namespace fgm
          *                                   *
          *************************************/
 
-        Vector3D();
-        Vector3D(T v1, T v2, T v3);
-        Vector3D(Vector2D<T> vec, T v);
+        constexpr Vector3D() noexcept;
+        constexpr Vector3D(T v1, T v2, T v3) noexcept;
+        constexpr Vector3D(Vector2D<T> vec, T v) noexcept;
 
         template <Arithmetic S>
-        Vector3D(const Vector3D<S>& other);
+        constexpr Vector3D(const Vector3D<S>& other) noexcept;
 
 
         /*************************************

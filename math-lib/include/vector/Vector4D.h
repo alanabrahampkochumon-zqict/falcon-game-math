@@ -89,7 +89,7 @@ namespace fgm
          *************************************/
 
         /** @brief Initialize @ref fgm::Vector4D with zeros. */
-        Vector4D();
+        constexpr Vector4D() noexcept;
 
 
         /**
@@ -100,7 +100,7 @@ namespace fgm
          * @param[in] v3 Third entry of @ref fgm::Vector4D.
          * @param[in] v4 Fourth entry of @ref fgm::Vector4D.
          */
-        Vector4D(T v1, T v2, T v3, T v4);
+        constexpr Vector4D(T v1, T v2, T v3, T v4) noexcept;
 
 
         /**
@@ -109,7 +109,7 @@ namespace fgm
          * @param[in] vec1 First two entries of @ref fgm::Vector4D.
          * @param[in] vec2 Last two entries of @ref fgm::Vector4D.
          */
-        Vector4D(Vector2D<T> vec1, Vector2D<T> vec2);
+        constexpr Vector4D(Vector2D<T> vec1, Vector2D<T> vec2) noexcept;
 
 
         /**
@@ -118,7 +118,7 @@ namespace fgm
          * @param[in] vec First three entries of @ref fgm::Vector4D.
          * @param[in] v   Last entry for @ref fgm::Vector4D.
          */
-        Vector4D(Vector3D<T> vec, T v);
+        constexpr Vector4D(Vector3D<T> vec, T v) noexcept;
 
 
         /**
@@ -127,7 +127,7 @@ namespace fgm
          * @param[in] vec First three entries of @ref fgm::Vector4D.
          * @param[in] v   Last entry for @ref fgm::Vector4D.
          */
-        Vector4D(T v, Vector3D<T> vec);
+        constexpr Vector4D(T v, Vector3D<T> vec) noexcept;
 
 
         /**
@@ -138,7 +138,7 @@ namespace fgm
          * @param[in] other Source vector to be converted.
          */
         template <Arithmetic U>
-        Vector4D(const Vector4D<U>& other);
+        constexpr Vector4D(const Vector4D<U>& other) noexcept;
 
 
         /*************************************
@@ -397,7 +397,7 @@ namespace fgm
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] other The vector to compare against.
-         * 
+         *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
@@ -867,7 +867,8 @@ namespace fgm
 
         /**
          * @brief Calculate the normalized (unit) form of the vector.
-         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         * \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -993,7 +994,7 @@ namespace fgm
 
         /**
          * @brief Write the vector to an output stream.
-         *        Formats the vector as <x, y, z, w> string representation for debugging or logging.
+         *        Format the vector as <x, y, z, w> string representation for debugging or logging.
          *
          * @tparam T Numeric type of the vector.
          *
@@ -1030,7 +1031,7 @@ namespace fgm
 
     /**
      * @brief Scale the vector by a scalar value.
-     * Multiplies @p scalar by each component of the vector and returns a new vector.
+     *        Multiply @p scalar by each component of the vector and returns a new vector.
      *
      * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.

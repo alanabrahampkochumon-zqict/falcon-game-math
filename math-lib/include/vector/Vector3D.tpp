@@ -23,23 +23,23 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    Vector3D<T>::Vector3D(): x(T(0)), y(T(0)), z(T(0))
+    constexpr Vector3D<T>::Vector3D() noexcept: x(T(0)), y(T(0)), z(T(0))
     {
     }
 
     template <Arithmetic T>
-    Vector3D<T>::Vector3D(T v1, T v2, T v3): x(v1), y(v2), z(v3)
+    constexpr Vector3D<T>::Vector3D(T v1, T v2, T v3) noexcept: x(v1), y(v2), z(v3)
     {
     }
 
     template <Arithmetic T>
-    Vector3D<T>::Vector3D(Vector2D<T> vec, T v): x(vec.x), y(vec.y), z(v)
+    constexpr Vector3D<T>::Vector3D(Vector2D<T> vec, T v) noexcept: x(vec.x), y(vec.y), z(v)
     {
     }
 
     template <Arithmetic T>
     template <Arithmetic U>
-    Vector3D<T>::Vector3D(const Vector3D<U>& other)
+    constexpr Vector3D<T>::Vector3D(const Vector3D<U>& other) noexcept
         : x(static_cast<T>(other.x)), y(static_cast<T>(other.y)), z(static_cast<T>(other.z))
     {
     }

@@ -24,35 +24,35 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    Vector4D<T>::Vector4D(): x(T(0)), y(T(0)), z(T(0)), w(T(0))
+    constexpr Vector4D<T>::Vector4D() noexcept: x(T(0)), y(T(0)), z(T(0)), w(T(0))
     {
     }
 
     template <Arithmetic T>
-    Vector4D<T>::Vector4D(T v1, T v2, T v3, T v4): x(v1), y(v2), z(v3), w(v4)
+    constexpr Vector4D<T>::Vector4D(T v1, T v2, T v3, T v4) noexcept: x(v1), y(v2), z(v3), w(v4)
     {
     }
 
     template <Arithmetic T>
-    Vector4D<T>::Vector4D(Vector2D<T> vec1, Vector2D<T> vec2): x(vec1.x), y(vec1.y), z(vec2.x), w(vec2.y)
+    constexpr Vector4D<T>::Vector4D(Vector2D<T> vec1, Vector2D<T> vec2) noexcept: x(vec1.x), y(vec1.y), z(vec2.x), w(vec2.y)
     {
     }
 
     template <Arithmetic T>
-    Vector4D<T>::Vector4D(Vector3D<T> vec, T v): x(vec.x), y(vec.y), z(vec.z), w(v)
+    constexpr Vector4D<T>::Vector4D(Vector3D<T> vec, T v) noexcept: x(vec.x), y(vec.y), z(vec.z), w(v)
     {
     }
 
 
     template <Arithmetic T>
-    Vector4D<T>::Vector4D(T v, Vector3D<T> vec): x(v), y(vec.x), z(vec.y), w(vec.z)
+    constexpr Vector4D<T>::Vector4D(T v, Vector3D<T> vec) noexcept: x(v), y(vec.x), z(vec.y), w(vec.z)
     {
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    Vector4D<T>::Vector4D(const Vector4D<U>& other)
+    constexpr Vector4D<T>::Vector4D(const Vector4D<U>& other) noexcept
         : x(static_cast<T>(other.x)), y(static_cast<T>(other.y)), z(static_cast<T>(other.z)), w(static_cast<T>(other.w))
     {
     }
