@@ -1,7 +1,7 @@
 add_library(FalconSIMD INTERFACE)
 
 set(IncludeDirectory "Include/")
-set(HeaderFiles "SIMD.h;SIMDUtils.h")
+set(HeaderFiles "SIMD.h;SIMDUtils.h;DoxygenGroups.h")
 list(TRANSFORM HeaderFiles PREPEND ${IncludeDirectory})
 
 set(TemplateFiles "SIMD.tpp")

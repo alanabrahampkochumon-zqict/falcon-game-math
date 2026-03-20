@@ -22,7 +22,7 @@ option(ENABLE_STRICT "Enable ASan and Strict Warnings" OFF) # To turn on ASan, u
 # Doxygen
 find_package(Doxygen)
 if (DOXYGEN_FOUND)
-    message(INFO "Doxygen found!")
+    message(STATUS "Doxygen found!")
     doxygen_add_docs(
         docs
         ${CMAKE_CURRENT_SOURCE_DIR}
