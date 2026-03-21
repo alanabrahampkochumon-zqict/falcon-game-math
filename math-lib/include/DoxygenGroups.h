@@ -103,7 +103,13 @@
 
     /**
      * @defgroup FGM_Math_Config Library Configuration
-     * @brief Configuration used by FGM::math.
+     * @brief Configuration used by FGM.
+     * @ingroup FGM_Math
+     */
+
+    /**
+     * @defgroup FGM_Math_Constants Library Constants
+     * @brief Constants defined in FGM.
      * @ingroup FGM_Math
      */
 

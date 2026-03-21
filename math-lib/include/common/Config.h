@@ -10,7 +10,7 @@
  */
 
 
-#include <limits>
+
 
 namespace fgm
 {
@@ -49,18 +49,6 @@ namespace fgm
 
         /** @brief The smallest positive value such that 1.0 + EPSILON != 1.0 for 64-bit floats. */
         static constexpr double DOUBLE_EPSILON = 1e-12;
-
-        /** @brief Positive infinity for single-precision floats. */
-        static constexpr float INFINITY_F = std::numeric_limits<float>::infinity();
-
-        /** @brief Positive infinity for double-precision floats. */
-        static constexpr double INFINITY_D = std::numeric_limits<double>::infinity();
-
-        /** @brief Quiet Not-a-Number for single-precision floats. */
-        static constexpr float NaN = std::numeric_limits<float>::quiet_NaN();
-
-        /** @brief Quiet Not-a-Number for double-precision floats. */
-        static constexpr double NaN_D = std::numeric_limits<double>::quiet_NaN();
     };
 
     /** @} */
