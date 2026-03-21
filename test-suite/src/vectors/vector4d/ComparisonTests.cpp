@@ -12,6 +12,7 @@
 
 #include "Vector4DTestSetup.h"
 
+#include <functional>
 
 using namespace testutils;
 
@@ -326,7 +327,14 @@ TEST(Vector4DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValue
     constexpr fgm::Vector4D nanVec(NaN, NaN, -5.9f, NaN);
     constexpr fgm::Vector4D expected(false, false, false, false);
 
+#if defined(_MSC_VER) && !defined(__clang__)
+    // MSVC constant evaluator incorrectly returns true for NaN comparisons.
+    // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
+    const fgm::Vector4D<bool> mask = vec.lt(nanVec);
+#else
+    // Clang and GCC follow IEEE 754 strictly at compile-time.
     constexpr fgm::Vector4D<bool> mask = vec.lt(nanVec);
+#endif
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -427,20 +435,17 @@ TEST(Vector4DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
     constexpr fgm::Vector4D nanVec(NaN, NaN, -5.9f, NaN);
     constexpr fgm::Vector4D expected(false, false, false, false);
 
+#if defined(_MSC_VER) && !defined(__clang__)
+    // MSVC constant evaluator incorrectly returns true for NaN comparisons.
+    // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
+    const fgm::Vector4D<bool> mask = vec.lte(nanVec);
+#else
+    // Clang and GCC follow IEEE 754 strictly at compile-time.
     constexpr fgm::Vector4D<bool> mask = vec.lte(nanVec);
-    EXPECT_EQ(expected.x, mask.x);
-    EXPECT_EQ(expected.y, mask.y);
-    EXPECT_EQ(expected.z, mask.z);
-    EXPECT_EQ(expected.w, mask.w);
-    //EXPECT_VEC_EQ(expected, mask);
-}
+#endif
 
-//TEST(NANTEST, SAMPLE_NAN_TEST)
-//{
-//    constexpr auto myNAN = std::numeric_limits<float>::quiet_NaN();
-//    constexpr bool result = 5.0f < myNAN;
-//    EXPECT_TRUE(false, result);
-//}
+    EXPECT_VEC_EQ(expected, mask);
+}
 
 
 /**

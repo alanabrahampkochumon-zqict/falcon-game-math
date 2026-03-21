@@ -456,6 +456,9 @@ namespace fgm
          * @brief Perform component-wise less-than comparison.
          *        Compare each component pair and returns a boolean mask.
          *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
+         *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The vector to compare against.
@@ -469,6 +472,9 @@ namespace fgm
 
         /**
          * @copybrief lt(const Vector4D<U>&) const
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -486,6 +492,9 @@ namespace fgm
          * @brief Perform component-wise less-than-or-equal comparison.
          *        Compares each component pair and returns a boolean mask.
          *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
+         *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The vector to compare against.
@@ -499,6 +508,9 @@ namespace fgm
 
         /**
          * @copybrief lt(const Vector4D<U>&) const
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -937,7 +949,8 @@ namespace fgm
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
-        constexpr auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const -> Vector4D<std::common_type_t<T, U>>
+        constexpr auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const
+            -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
 
@@ -978,7 +991,8 @@ namespace fgm
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
-        constexpr auto reject(const Vector4D<U>& from, bool ontoNormalized = false) const -> Vector4D<std::common_type_t<T, U>>
+        constexpr auto reject(const Vector4D<U>& from, bool ontoNormalized = false) const
+            -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
 
