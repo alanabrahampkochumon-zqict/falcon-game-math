@@ -27,14 +27,17 @@ namespace fgm
     constexpr Vector4D<T>::Vector4D() noexcept: x(T(0)), y(T(0)), z(T(0)), w(T(0))
     {}
 
+
     template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(T v1, T v2, T v3, T v4) noexcept: x(v1), y(v2), z(v3), w(v4)
     {}
+
 
     template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(Vector2D<T> vec1, Vector2D<T> vec2) noexcept
         : x(vec1.x), y(vec1.y), z(vec2.x), w(vec2.y)
     {}
+
 
     template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(Vector3D<T> vec, T v) noexcept: x(vec.x), y(vec.y), z(vec.z), w(v)
@@ -205,6 +208,7 @@ namespace fgm
         return Vector4D(x > other.x, y > other.y, z > other.z, w > other.w);
     }
 
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr Vector4D<bool> Vector4D<T>::gt(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept
@@ -212,6 +216,7 @@ namespace fgm
     {
         return vecA.gt(vecB);
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic U>
@@ -221,6 +226,7 @@ namespace fgm
         return Vector4D(x >= other.x, y >= other.y, z >= other.z, w >= other.w);
     }
 
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr Vector4D<bool> Vector4D<T>::gte(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept
@@ -229,6 +235,7 @@ namespace fgm
         return vecA.gte(vecB);
     }
 
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr Vector4D<bool> Vector4D<T>::lt(const Vector4D<U>& other) const noexcept
@@ -236,6 +243,7 @@ namespace fgm
     {
         return Vector4D(x < other.x, y < other.y, z < other.z, w < other.w);
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic U>
@@ -254,6 +262,7 @@ namespace fgm
         return Vector4D(x <= other.x, y <= other.y, z <= other.z, w <= other.w);
     }
 
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr Vector4D<bool> Vector4D<T>::lte(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept
@@ -264,6 +273,7 @@ namespace fgm
 
 
 #ifdef ENABLE_FGM_SHADER_OPERATORS
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr Vector4D<bool> Vector4D<T>::operator>(const Vector4D<U>& other) const noexcept
@@ -271,6 +281,7 @@ namespace fgm
     {
         return this->gt(other);
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic U>
@@ -280,6 +291,7 @@ namespace fgm
         return this->gte(other);
     }
 
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr Vector4D<bool> Vector4D<T>::operator<(const Vector4D<U>& other) const noexcept
@@ -288,6 +300,7 @@ namespace fgm
         return this->lt(other);
     }
 
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr Vector4D<bool> Vector4D<T>::operator<=(const Vector4D<U>& other) const noexcept
@@ -295,8 +308,8 @@ namespace fgm
     {
         return this->lte(other);
     }
-#endif
 
+#endif
 
 
 
@@ -346,7 +359,6 @@ namespace fgm
 
 
 
-
     /*************************************
      *                                   *
      *      ARITHMETIC OPERATORS         *
@@ -361,6 +373,7 @@ namespace fgm
         using R = std::common_type_t<T, U>;
         return Vector4D<R>(x + other.x, y + other.y, z + other.z, w + other.w);
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic U>
@@ -384,6 +397,7 @@ namespace fgm
         return Vector4D<R>(x - other.x, y - other.y, z - other.z, w - other.w);
     }
 
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr Vector4D<T>& Vector4D<T>::operator-=(const Vector4D<U>& other) noexcept
@@ -406,6 +420,7 @@ namespace fgm
         return Vector4D<R>(x * scalar, y * scalar, z * scalar, w * scalar);
     }
 
+
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr auto operator*(S scalar, const Vector4D<T>& vector) noexcept
         ->Vector4D<std::common_type_t<T, S>>
@@ -413,6 +428,7 @@ namespace fgm
     {
         return vector * scalar;
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic S>
@@ -426,6 +442,7 @@ namespace fgm
         w = static_cast<T>(scalar * w);
         return *this;
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic S>
@@ -445,6 +462,7 @@ namespace fgm
             return Vector4D<R>(x / tScalar, y / tScalar, z / tScalar, w / tScalar);
         }
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic S>
@@ -475,7 +493,6 @@ namespace fgm
 
 
 
-
     /*************************************
      *                                   *
      *        VECTOR DOT PRODUCT         *
@@ -490,6 +507,7 @@ namespace fgm
         return x * other.x + y * other.y + z * other.z + w * other.w;
     }
 
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr auto Vector4D<T>::dot(const Vector4D& vecA, const Vector4D<U>& vecB) noexcept -> std::common_type_t<T, U>
@@ -497,7 +515,6 @@ namespace fgm
     {
         return vecA.dot(vecB);
     }
-
 
 
 
@@ -521,13 +538,13 @@ namespace fgm
         return sqrt(tX * tX + tY * tY + tZ * tZ + tW * tW);
     }
 
+
     template <Arithmetic T>
     constexpr Magnitude<T> Vector4D<T>::mag(const Vector4D& vec) noexcept
         requires StrictArithmetic<T>
     {
         return vec.mag();
     }
-
 
 
 
@@ -552,13 +569,13 @@ namespace fgm
         return *this / magnitude;
     }
 
+
     template <Arithmetic T>
     constexpr Vector4D<Magnitude<T>> Vector4D<T>::normalize(const Vector4D& vec)
         requires StrictArithmetic<T>
     {
         return vec.normalize();
     }
-
 
 
 
@@ -579,6 +596,7 @@ namespace fgm
         /** @note Static cast ensures integral type dots don't lose much precision */
         return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic U>
@@ -605,6 +623,7 @@ namespace fgm
     {
         return *this - this->project(from, ontoNormalized);
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic U>
