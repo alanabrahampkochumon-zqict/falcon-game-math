@@ -15,6 +15,9 @@ target_compile_options(MathLib INTERFACE
     $<$<CXX_COMPILER_ID:Clang>:-mavx2>
 )
 
+# NOTE: If this flag is not enabled, then NAN less than and less than or equal comparison will not work properly.
+target_compile_options(MathLib INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
+
 set(IncludeDirectory "include/")
 
 set(VectorDirectory "include/vector/")

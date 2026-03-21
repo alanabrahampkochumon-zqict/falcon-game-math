@@ -49,7 +49,6 @@ if(ENABLE_STRICT)
     endif()
 endif()
 
-
 include(dependencies.cmake)
 include(simdcheck.cmake)
 

@@ -16,6 +16,10 @@
 using namespace testutils;
 
 
+constexpr auto NaN = fgm::Config::NaN;
+constexpr auto INF = fgm::Config::INFINITY_F;
+
+
 /**************************************
  *                                    *
  *                SETUP               *
@@ -100,7 +104,7 @@ TYPED_TEST(Vector4DComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWit
 TEST(Vector4DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
     constexpr fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    constexpr fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
+    constexpr fgm::Vector4D infVec(INF, INF, -INF, -INF);
     constexpr fgm::Vector4D expected(false, false, true, true);
 
     constexpr fgm::Vector4D<bool> mask = vec.gt(infVec);
@@ -116,7 +120,7 @@ TEST(Vector4DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorr
 TEST(Vector4DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
     constexpr fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
-    constexpr fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
+    constexpr fgm::Vector4D infVec(NaN, NaN, -5.9f, NaN);
     constexpr fgm::Vector4D expected(false, false, true, false);
 
     constexpr fgm::Vector4D<bool> mask = vec.gt(infVec);
@@ -202,7 +206,7 @@ TYPED_TEST(Vector4DComparison,
 TEST(Vector4DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     constexpr fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
-    constexpr fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
+    constexpr fgm::Vector4D infVec(INF, INF, -INF, -INF);
     constexpr fgm::Vector4D expected(false, false, true, true);
 
     constexpr fgm::Vector4D<bool> mask = vec.gte(infVec);
@@ -218,7 +222,7 @@ TEST(Vector4DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorW
 TEST(Vector4DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     constexpr fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    constexpr fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
+    constexpr fgm::Vector4D infVec(NaN, NaN, -5.9f, NaN);
     constexpr fgm::Vector4D expected(false, false, true, false);
 
     constexpr fgm::Vector4D<bool> mask = vec.gte(infVec);
@@ -303,7 +307,7 @@ TYPED_TEST(Vector4DComparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithEl
 TEST(Vector4DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
     constexpr fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    constexpr fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
+    constexpr fgm::Vector4D infVec(INF, INF, -INF, -INF);
     constexpr fgm::Vector4D expected(true, true, false, false);
 
     constexpr fgm::Vector4D<bool> mask = vec.lt(infVec);
@@ -319,10 +323,10 @@ TEST(Vector4DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrect
 TEST(Vector4DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
     constexpr fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
-    constexpr fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
+    constexpr fgm::Vector4D nanVec(NaN, NaN, -5.9f, NaN);
     constexpr fgm::Vector4D expected(false, false, false, false);
 
-    constexpr fgm::Vector4D<bool> mask = vec.lt(infVec);
+    constexpr fgm::Vector4D<bool> mask = vec.lt(nanVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -404,7 +408,7 @@ TYPED_TEST(Vector4DComparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVecto
 TEST(Vector4DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     constexpr fgm::Vector4D vec(1.2, 4.5, 6.8, 9.5);
-    constexpr fgm::Vector4D infVec(INFINITY, INFINITY, -INFINITY, -INFINITY);
+    constexpr fgm::Vector4D infVec(INF, INF, -INF, -INF);
     constexpr fgm::Vector4D expected(true, true, false, false);
 
     constexpr fgm::Vector4D<bool> mask = vec.lte(infVec);
@@ -420,13 +424,23 @@ TEST(Vector4DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWith
 TEST(Vector4DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     constexpr fgm::Vector4D vec(1.2f, 4.5f, 6.8f, 9.5f);
-    constexpr fgm::Vector4D infVec(NAN, NAN, -5.9f, NAN);
+    constexpr fgm::Vector4D nanVec(NaN, NaN, -5.9f, NaN);
     constexpr fgm::Vector4D expected(false, false, false, false);
 
-    constexpr fgm::Vector4D<bool> mask = vec.lte(infVec);
-
-    EXPECT_VEC_EQ(expected, mask);
+    constexpr fgm::Vector4D<bool> mask = vec.lte(nanVec);
+    EXPECT_EQ(expected.x, mask.x);
+    EXPECT_EQ(expected.y, mask.y);
+    EXPECT_EQ(expected.z, mask.z);
+    EXPECT_EQ(expected.w, mask.w);
+    //EXPECT_VEC_EQ(expected, mask);
 }
+
+//TEST(NANTEST, SAMPLE_NAN_TEST)
+//{
+//    constexpr auto myNAN = std::numeric_limits<float>::quiet_NaN();
+//    constexpr bool result = 5.0f < myNAN;
+//    EXPECT_TRUE(false, result);
+//}
 
 
 /**
