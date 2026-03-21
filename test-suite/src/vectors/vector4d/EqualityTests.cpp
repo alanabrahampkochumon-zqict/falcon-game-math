@@ -308,10 +308,10 @@ TEST(Vector4DEquality, NanInequalityReturnsTrue)
 /** @test Verify @ref fgm::Vector4D::allNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector4DEquality, InfinityInequality_IdenticalVectorsReturnsFalse)
 {
-    const fgm::Vector4D vecA = { INF, -INF, INF, -INF };
-    const fgm::Vector4D vecB = { INF, -INF, INF, -INF };
+    constexpr fgm::Vector4D vecA = { INF, -INF, INF, -INF };
+    constexpr fgm::Vector4D vecB = { INF, -INF, INF, -INF };
 
-    const bool equality = vecA.allNeq(vecB);
+    constexpr bool equality = vecA.allNeq(vecB);
 
     EXPECT_FALSE(equality);
 }
@@ -319,8 +319,8 @@ TEST(Vector4DEquality, InfinityInequality_IdenticalVectorsReturnsFalse)
 /** @test Verify @ref fgm::Vector4D::allNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector4DEquality, InfinityInequality_DifferentVectorsReturnsTrue)
 {
-    const fgm::Vector4D vecA = { INF, INF, INF, -INF };
-    const fgm::Vector4D vecB = { INF, -INF, INF, INF };
+    constexpr fgm::Vector4D vecA = { INF, INF, INF, -INF };
+    constexpr fgm::Vector4D vecB = { INF, -INF, INF, INF };
 
     const bool equality = vecA.allNeq(vecB);
 
@@ -330,10 +330,10 @@ TEST(Vector4DEquality, InfinityInequality_DifferentVectorsReturnsTrue)
 /** @test Verify @ref fgm::Vector4D::allNeq works for different vector types with identical components. */
 TYPED_TEST(Vector4DEquality, MixedType_Inequality_IdenticalVectorsReturnsFalse)
 {
-    const fgm::Vector4D vecA(1, 2, 3, 4);
-    const fgm::Vector4D vecB(1.0, 2.0, 3.0, 4.0);
+    constexpr fgm::Vector4D vecA(1, 2, 3, 4);
+    constexpr fgm::Vector4D vecB(1.0, 2.0, 3.0, 4.0);
 
-    const bool equality = vecA.allNeq(vecB);
+    constexpr bool equality = vecA.allNeq(vecB);
 
     EXPECT_FALSE(equality);
 }
@@ -341,8 +341,8 @@ TYPED_TEST(Vector4DEquality, MixedType_Inequality_IdenticalVectorsReturnsFalse)
 /** @test Verify @ref fgm::Vector4D::allNeq works for different vector types with different components. */
 TYPED_TEST(Vector4DEquality, MixedType_Inequality_DifferentVectorsReturnsTrue)
 {
-    const fgm::Vector4D vecA(5, 6, 7, 8);
-    const fgm::Vector4D vecB(1.0, 2.0, 3.0, 4.0);
+    constexpr fgm::Vector4D vecA(5, 6, 7, 8);
+    constexpr fgm::Vector4D vecB(1.0, 2.0, 3.0, 4.0);
 
     const bool equality = vecA.allNeq(vecB);
 
@@ -368,10 +368,10 @@ TYPED_TEST(Vector4DEquality, InEqualityOperator_DifferentVectorsReturnsTrue)
 /** @test Verify @ref fgm::Vector4D equality operator works for @ref fgm::Vector4D<bool> with identical components. */
 TEST(Vector4DEquality, InequalityOperator_IdenticalBooleanVectorsReturnsFalse)
 {
-    const fgm::Vector4D vecA(true, false, true, false);
-    const fgm::Vector4D vecB(true, false, true, false);
+    constexpr fgm::Vector4D vecA(true, false, true, false);
+    constexpr fgm::Vector4D vecB(true, false, true, false);
 
-    const bool equality = vecA != vecB;
+    constexpr bool equality = vecA != vecB;
 
     EXPECT_FALSE(equality);
 }
@@ -379,10 +379,10 @@ TEST(Vector4DEquality, InequalityOperator_IdenticalBooleanVectorsReturnsFalse)
 /** @test Verify @ref fgm::Vector4D equality operator works for @ref fgm::Vector4D<bool> with different components. */
 TEST(Vector4DEquality, InequalityOperator_DifferentBooleanVectorsReturnsTrue)
 {
-    const fgm::Vector4D vecA(true, false, true, false);
-    const fgm::Vector4D vecB(true, true, true, false);
+    constexpr fgm::Vector4D vecA(true, false, true, false);
+    constexpr fgm::Vector4D vecB(true, true, true, false);
 
-    const bool equality = vecA != vecB;
+    constexpr bool equality = vecA != vecB;
 
     EXPECT_TRUE(equality);
 }
@@ -398,9 +398,9 @@ TYPED_TEST(Vector4DEquality, InequalityReturnsCorrectBooleanMask)
 /** @test Verify @ref fgm::Vector4D::neq returns @ref fgm::Vector4D<bool> mask for different vectors. */
 TEST(Vector4DEquality, MixedType_InequalityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector4D vecA = { 1, 2, 3, 4 };
-    const fgm::Vector4D vecB = { 1.0, 4.0, 0.0, 4.0 };
-    const fgm::Vector4D expectedMask = { false, true, true, false };
+    constexpr fgm::Vector4D vecA = { 1, 2, 3, 4 };
+    constexpr fgm::Vector4D vecB = { 1.0, 4.0, 0.0, 4.0 };
+    constexpr fgm::Vector4D expectedMask = { false, true, true, false };
 
     const fgm::Vector4D<bool> mask = vecA.neq(vecB);
 
@@ -410,9 +410,9 @@ TEST(Vector4DEquality, MixedType_InequalityReturnsCorrectBooleanMask)
 /** @test Verify @ref fgm::Vector4D::neq follows IEEE 754 for NaN comparisons. */
 TEST(Vector4DEquality, NanInequalityReturnsTrueBooleanMask)
 {
-    const fgm::Vector4D vecA = { NaN, NaN, NaN, NaN };
-    const fgm::Vector4D<double> vecB = { 1.0, -5.88874789, INF, NaN };
-    const fgm::Vector4D expectedMask = { true, true, true, true };
+    constexpr fgm::Vector4D vecA = { NaN, NaN, NaN, NaN };
+    constexpr fgm::Vector4D<double> vecB = { 1.0, -5.88874789, INF, NaN };
+    constexpr fgm::Vector4D expectedMask = { true, true, true, true };
 
     const fgm::Vector4D mask = vecA.neq(vecB);
 
@@ -422,9 +422,9 @@ TEST(Vector4DEquality, NanInequalityReturnsTrueBooleanMask)
 /** @test Verify @ref fgm::Vector4D::neq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector4DEquality, InfinityInequalityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector4D vecA = { INF, -INF, INF, -INF };
-    const fgm::Vector4D<double> vecB = { INF, INF, 10e11, 10e11 };
-    const fgm::Vector4D expectedMask = { false, true, true, true };
+    constexpr fgm::Vector4D vecA = { INF, -INF, INF, -INF };
+    constexpr fgm::Vector4D<double> vecB = { INF, INF, 10e11, 10e11 };
+    constexpr fgm::Vector4D expectedMask = { false, true, true, true };
 
     const fgm::Vector4D mask = vecA.neq(vecB);
 
