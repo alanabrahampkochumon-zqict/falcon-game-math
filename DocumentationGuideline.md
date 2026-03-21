@@ -4,15 +4,30 @@
 
 - **Tense:** Use present tense.
 - **Dialect:** Use American English.
-- **Entity References:** - Use `@ref` for internal classes, structs, and concepts to generate hyperlinks.
-    - Use backticks ( \` \` ) for variables, constants, and `std` library types.
+- **Entity References:** - Use `@ref` for internal classes, structs, and concepts to generate hyperlinks. - Use backticks ( \` \` ) for variables, constants, and `std` library types.
 - **Formulas:** Use LaTeX (enclosed in `$`) for mathematical definitions to ensure clarity.
+
+### Doxygen Groups
+
+- **Consideration** - Use doxygen groups defined in the `DoxygenGroups.h` header of each project. If not defined, define it there.
+- **Prefixes** - Use `T_` to identify test groups (lowest level), and `B_` to to group benchmarks. Code groups can be written without prefixes.
+- **Subgroup** - Use subgroups for clarity like `Core/Mathematics/Vectors/Vector4D/GeometricProducts`
+- **Formatting** - Group attributes of the same type together without line breaks. Use a single line break to separate different attribute types (e.g., separate @tparam block from @param block).
+
+### Spacing
+
+- Use 2 line breaks between each implementation and headers.
+- Use 3 line breaks between Doxygen group closings `(@})` and new sections.
+- Use no line break between the closing `*/` of a doc-block and the function signature.
+- Use 1 line break between @brief, @param, and @return groups.
+- If a description overflows to a second line, align it with the start of the text on the previous line for better scannability.
 
 ## 2. Doxygen Nomenclature
 
 ### Brief (`@brief`)
 
-- **Style:** Single imperative sentence (e.g., "Calculate", not "Calculates"). Do not repeat the function signature.
+- **Style:** Mandatory Imperative (e.g., "Compute", "Perform", "Verify"). Do not repeat the function signature.
+- **Constraint:** Start with a capital letter and end with a period.
 - **Good:** `@brief Computes the dot product.`
 - **Bad:** `@brief This function returns the dot product as a T.`
 
@@ -50,11 +65,12 @@
 ### Test Brief
 
 - **Style:** Single sentence describing the verification goal.
-- **Example:** `/** @brief Verifies @ref Vector4D normalization logic. */`
+- **Mood:** Mandatory Imperative (e.g., "Compute", "Perform", "Verify").
+- **Example:** `/** @brief Verify that @ref fgm::Vector4D normalization return a normal vector. */`
 
 ### Test Suite & Name
 
-- **Suite Name:** Single PascalCase word (e.g., `Vector4DMath`).
+- **Suite Name:** Single PascalCase word (e.g., `Vector4DAddition`).
 - **Test Name:** Descriptive PascalCase. Use a single underscore to separate the "Target" from the "Condition".
 - **Prefixes:** - `StaticWrapper_`: For static versions of member functions.
     - `Operator_`: For operator overloads (e.g., `OperatorPlus_ReturnsCorrectSum`).
