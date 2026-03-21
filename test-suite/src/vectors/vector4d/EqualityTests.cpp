@@ -162,6 +162,7 @@ TYPED_TEST(Vector4DEquality, MixedType_Equality_DifferentVectorsReturnsFalse)
     EXPECT_FALSE(equality);
 }
 
+
 /** @test Verify @ref fgm::Vector4D equality operator returns false if any component differ. */
 TYPED_TEST(Vector4DEquality, EqualityOperator_DifferentVectorsReturnsFalse)
 {
@@ -169,6 +170,7 @@ TYPED_TEST(Vector4DEquality, EqualityOperator_DifferentVectorsReturnsFalse)
 
     EXPECT_FALSE(equality);
 }
+
 
 /** @test Verify @ref fgm::Vector4D equality operator works for bool vector with identical components. */
 TEST(Vector4DEquality, EqualityOperator_IdenticalBooleanVectorsReturnsTrue)
@@ -181,6 +183,7 @@ TEST(Vector4DEquality, EqualityOperator_IdenticalBooleanVectorsReturnsTrue)
     EXPECT_TRUE(equality);
 }
 
+
 /** @test Verify @ref fgm::Vector4D equality operator works for bool vector with different components. */
 TEST(Vector4DEquality, EqualityOperator_DifferentBooleanVectorsReturnsFalse)
 {
@@ -191,6 +194,7 @@ TEST(Vector4DEquality, EqualityOperator_DifferentBooleanVectorsReturnsFalse)
 
     EXPECT_FALSE(equality);
 }
+
 
 /** @test Verify @ref fgm::Vector4D::eq returns @ref fgm::Vector4D<bool> mask for identical vectors. */
 TYPED_TEST(Vector4DEquality, EqualityReturnsCorrectBooleanMask)
@@ -249,7 +253,6 @@ TYPED_TEST(Vector4DEquality, StaticWrapper_EqualityReturnsCorrectBooleanMask)
 }
 
 /** @} */
-
 
 
 

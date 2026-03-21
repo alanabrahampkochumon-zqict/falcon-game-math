@@ -192,6 +192,7 @@ TEST(Vector4DNormalization, ZeroVectorWhenNormalizationCausesDeath)
     EXPECT_DEATH({ vec.normalize(); }, "Vector4D Normalization : Division by 0");
 }
 
+
 /** @test Verify that normalizing a @ref fgm::Vector4D returns a unit vector. */
 TYPED_TEST(Vector4DNormalization, NonZeroVectorNormalizationReturnsUnitVector)
 {
@@ -199,6 +200,7 @@ TYPED_TEST(Vector4DNormalization, NonZeroVectorNormalizationReturnsUnitVector)
 
     EXPECT_VEC_EQ(this->expectedVector, normalized);
 }
+
 
 /** @test Verify that @ref fgm::Vector4D static wrapper normalization returns a unit vector. */
 TYPED_TEST(Vector4DNormalization, StaticWrapper_NonZeroVectorNormalizationReturnsUnitVector)
@@ -208,6 +210,7 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_NonZeroVectorNormalizationReturn
 
     EXPECT_VEC_EQ(this->expectedVector, normalized);
 }
+
 
 /**
  * @test Verify that the @ref fgm::Vector4D normalization results in a floating-point type, regardless of the

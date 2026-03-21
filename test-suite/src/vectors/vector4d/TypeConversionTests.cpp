@@ -24,9 +24,9 @@ using testutils::EXPECT_VEC_CONTAINS;
  */
 TEST(Vector4DConversionConstructor, PromotesType)
 {
-    const fgm::Vector4D vec1(3.0f, 1.0f, 6.0f, 2.0f);
+    constexpr fgm::Vector4D vec1(3.0f, 1.0f, 6.0f, 2.0f);
 
-    [[maybe_unused]] const fgm::Vector4D<double> vec2(vec1);
+    [[maybe_unused]] constexpr fgm::Vector4D<double> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, double>);
 }
@@ -36,7 +36,7 @@ TEST(Vector4DConversionConstructor, PromotesType)
 TEST(Vector4DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float vector
-    const fgm::Vector4D vec1(3.0f, 1.0f, 6.0f, 2.0f);
+    constexpr fgm::Vector4D vec1(3.0f, 1.0f, 6.0f, 2.0f);
 
     // When converted to a double vector
     fgm::Vector4D<double> vec2(vec1);
@@ -56,9 +56,9 @@ TEST(Vector4DConversionConstructor, ReturnsNewInstance)
  */
 TEST(Vector4DConversionConstructor, DemotesType)
 {
-    const fgm::Vector4D vec1(3.0, 1.0, 6.0, 2.0);
+    constexpr fgm::Vector4D vec1(3.0, 1.0, 6.0, 2.0);
 
-    [[maybe_unused]] const fgm::Vector4D<float> vec2(vec1);
+    [[maybe_unused]] constexpr fgm::Vector4D<float> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, float>);
 }
