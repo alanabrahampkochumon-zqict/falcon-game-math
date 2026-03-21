@@ -20,22 +20,28 @@ target_compile_options(MathLib INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
 
 set(IncludeDirectory "include/")
 
-set(VectorDirectory "include/vector/")
+
+set(GeneralFiles "SimdTraits.h;DoxygenGroups.h")
+list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
+
+set(CommonDirectory "${IncludeDirectory}common/")
+set(CommonFiles "MathTraits.h;Config.h;Constants.h")
+list(TRANSFORM CommonFiles PREPEND ${CommonDirectory})
+
+set(VectorDirectory "${IncludeDirectory}/vector/")
 set(VectorHeaderFiles Vector3D.h Vector2D.h Vector4D.h)
 list(TRANSFORM VectorHeaderFiles PREPEND ${VectorDirectory})
 
 set(VectorTemplateDefinitionFiles Vector2D.tpp Vector3D.tpp Vector4D.tpp)
 list(TRANSFORM VectorTemplateDefinitionFiles PREPEND ${VectorDirectory})
 
-set(MatrixDirectory "include/matrix/")
+set(MatrixDirectory "${IncludeDirectory}/matrix/")
 set(MatrixHeaderFiles Matrix2D.h Matrix3D.h Matrix4D.h)
 list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
 
 set(MatrixTemplateDefinitionFiles Matrix2D.tpp Matrix3D.tpp Matrix4D.tpp)
 list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDirectory})
 
-set(GeneralFiles MathTraits.h SimdTraits.h Config.h DoxygenGroups.h)
-list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
 
 target_sources(MathLib
     INTERFACE
@@ -47,6 +53,7 @@ target_sources(MathLib
         ${MatrixHeaderFiles}
         ${MatrixTemplateDefinitionFiles}
         ${GeneralFiles}
+        ${CommonFiles}
 )
 
 
@@ -67,9 +74,11 @@ add_custom_target(
     ${MatrixHeaderFiles}
     ${MatrixTemplateDefinitionFiles}
     ${GeneralFiles}
+    ${CommonFiles}
 )
 
 source_group("Header Files\\vector" FILES ${VectorHeaderFiles})
+source_group("Header Files\\common" FILES ${CommonFiles})
 source_group("Template Files\\vector" FILES ${VectorTemplateDefinitionFiles})
 source_group("Header Files\\matrix" FILES ${MatrixHeaderFiles})
 source_group("Template Files\\matrix" FILES ${MatrixTemplateDefinitionFiles})

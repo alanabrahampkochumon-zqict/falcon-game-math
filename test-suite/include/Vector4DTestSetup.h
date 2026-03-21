@@ -15,7 +15,7 @@
 
 #include "./utils/VectorUtils.h"
 
-#include <MathTraits.h>
+#include <common/MathTraits.h>
 #include <gtest/gtest.h>
 #include <limits>
 #include <vector/Vector4D.h>

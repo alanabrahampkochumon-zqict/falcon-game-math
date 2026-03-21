@@ -21,7 +21,8 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include "Config.h"
+#include "common/Config.h"
+#include "common/MathTraits.h"
 #include "Vector2D.h"
 #include "Vector3D.h"
 
@@ -29,7 +30,7 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: &=, |=, Zero, One, Inf, -Inf, Nan, X, Y, Z, W, Safe Normalize, Safe Project, Safe Reject
+// TODO: Zero, One, Inf, -Inf, Nan, X, Y, Z, W, Safe Normalize, Safe Project, Safe Reject, custom abs function
 // TODO: Make non-safe functions for normalize, divide ops, project and reject noexcept
 
 namespace fgm

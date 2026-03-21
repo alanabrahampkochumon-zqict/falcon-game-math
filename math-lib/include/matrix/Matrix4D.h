@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../MathTraits.h"
-#include "../vector/Vector4D.h"
+#include "common/MathTraits.h"
+#include "vector/Vector4D.h"
 
 #include <cstddef>
 

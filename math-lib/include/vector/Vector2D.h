@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MathTraits.h"
+#include "common/MathTraits.h"
 
 #include <type_traits>
 

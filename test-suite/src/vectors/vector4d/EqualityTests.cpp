@@ -12,7 +12,7 @@
 
 #include "Vector4DTestSetup.h"
 
-#include <Config.h>
+#include <common/Config.h>
 
 constexpr auto NaN = fgm::Config::NaN;
 constexpr auto INF = fgm::Config::INFINITY_F;
