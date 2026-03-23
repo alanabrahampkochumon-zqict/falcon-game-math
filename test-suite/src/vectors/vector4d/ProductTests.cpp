@@ -25,25 +25,25 @@ template <typename T>
 class Vector4DDotProduct: public ::testing::Test
 {
     protected:
-    fgm::Vector4D<T> vecA;
-    fgm::Vector4D<T> vecB;
+    fgm::Vector4D<T> _vecA;
+    fgm::Vector4D<T> _vecB;
 
-    fgm::Vector4D<T> vecAOrtho;
-    fgm::Vector4D<T> vecBOrtho;
+    fgm::Vector4D<T> _vecAOrthogonal;
+    fgm::Vector4D<T> _vecBOrthogonal;
 
-    T expected;
+    T _expectedDotProduct;
 
-    T aDotA;
+    T _expectedADotA;
 
     void SetUp() override
     {
-        vecA = { T(2), T(3), T(4), T(5) };
-        vecB = { T(6), T(7), T(8), T(9) };
-        vecAOrtho = { T(3), T(0), T(4), T(0) };
-        vecBOrtho = { T(0), T(5), T(0), T(6) };
-        expected = static_cast<T>(110);
+        _vecA = { T(2), T(3), T(4), T(5) };
+        _vecB = { T(6), T(7), T(8), T(9) };
+        _vecAOrthogonal = { T(3), T(0), T(4), T(0) };
+        _vecBOrthogonal = { T(0), T(5), T(0), T(6) };
+        _expectedDotProduct = static_cast<T>(110);
 
-        aDotA = static_cast<T>(54);
+        _expectedADotA = static_cast<T>(54);
     }
 };
 /** @brief Test fixture for @ref fgm::Vector4D dot project, parameterized by @ref SupportedArithmeticTypes */
@@ -61,21 +61,21 @@ TYPED_TEST_SUITE(Vector4DDotProduct, SupportedArithmeticTypes);
 TYPED_TEST(Vector4DDotProduct, SelfDotProductReturnsSquareMagnitude)
 {
 
-    const TypeParam result = this->vecA.dot(this->vecA);
+    const TypeParam result = this->_vecA.dot(this->_vecA);
 
     if constexpr (std::is_same_v<TypeParam, double>)
-        EXPECT_DOUBLE_EQ(this->aDotA, result);
+        EXPECT_DOUBLE_EQ(this->_expectedADotA, result);
     else if constexpr (std::is_floating_point_v<TypeParam>)
-        EXPECT_FLOAT_EQ(this->aDotA, result);
+        EXPECT_FLOAT_EQ(this->_expectedADotA, result);
     else
-        EXPECT_EQ(this->aDotA, result);
+        EXPECT_EQ(this->_expectedADotA, result);
 }
 
 
 /** @test Verify that the dot product of a @ref fgm::Vector4D with an orthogonal vector returns zero. */
 TYPED_TEST(Vector4DDotProduct, OrthogonalDotProductReturnZero)
 {
-    const TypeParam result = this->vecAOrtho.dot(this->vecBOrtho);
+    const TypeParam result = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
 
     if constexpr (std::is_same_v<TypeParam, double>)
         EXPECT_DOUBLE_EQ(0.0, result);
@@ -89,28 +89,28 @@ TYPED_TEST(Vector4DDotProduct, OrthogonalDotProductReturnZero)
 /** @test Verify that the dot product of a @ref fgm::Vector4D with a non-orthogonal vector returns a non-zero scalar. */
 TYPED_TEST(Vector4DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 {
-    const TypeParam result = this->vecA.dot(this->vecB);
+    const TypeParam result = this->_vecA.dot(this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
-        EXPECT_DOUBLE_EQ(this->expected, result);
+        EXPECT_DOUBLE_EQ(this->_expectedDotProduct, result);
     else if constexpr (std::is_floating_point_v<TypeParam>)
-        EXPECT_FLOAT_EQ(this->expected, result);
+        EXPECT_FLOAT_EQ(this->_expectedDotProduct, result);
     else
-        EXPECT_EQ(this->expected, result);
+        EXPECT_EQ(this->_expectedDotProduct, result);
 }
 
 
 /** @test Verify that the static dot product wrapper of @ref fgm::Vector4D returns a non-zero scalar. */
 TYPED_TEST(Vector4DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
 {
-    const TypeParam result = fgm::Vector4D<TypeParam>::dot(this->vecA, this->vecB);
+    const TypeParam result = fgm::Vector4D<TypeParam>::dot(this->_vecA, this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
-        EXPECT_DOUBLE_EQ(this->expected, result);
+        EXPECT_DOUBLE_EQ(this->_expectedDotProduct, result);
     else if constexpr (std::is_floating_point_v<TypeParam>)
-        EXPECT_FLOAT_EQ(this->expected, result);
+        EXPECT_FLOAT_EQ(this->_expectedDotProduct, result);
     else
-        EXPECT_EQ(this->expected, result);
+        EXPECT_EQ(this->_expectedDotProduct, result);
 }
 
 
