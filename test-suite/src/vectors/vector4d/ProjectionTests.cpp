@@ -25,17 +25,17 @@ template <typename T>
 class Vector4DProjection: public ::testing::Test
 {
     protected:
-    fgm::Vector4D<T> vec;
-    fgm::Vector4D<T> perpendicularVec;
-    fgm::Vector4D<T> onto;
-    fgm::Vector4D<T> expectedProjection;
+    fgm::Vector4D<T> _vec;
+    fgm::Vector4D<T> _perpendicularVec;
+    fgm::Vector4D<T> _ontoVec;
+    fgm::Vector4D<T> _expectedProjection;
 
     void SetUp() override
     {
-        vec = { T(5), T(6), T(7), T(8) };
-        perpendicularVec = { T(10), T(0), T(14), T(16) };
-        onto = { T(0), T(2), T(0), T(0) };
-        expectedProjection = { T(0), T(6), T(0), T(0) };
+        _vec = { T(5), T(6), T(7), T(8) };
+        _perpendicularVec = { T(10), T(0), T(14), T(16) };
+        _ontoVec = { T(0), T(2), T(0), T(0) };
+        _expectedProjection = { T(0), T(6), T(0), T(0) };
     }
 };
 /** @brief Test fixture for @ref Vector4D projection, parameterized by @ref SupportedArithmeticTypes. */
@@ -46,17 +46,17 @@ template <typename T>
 class Vector4DRejection: public ::testing::Test
 {
     protected:
-    fgm::Vector4D<T> vec;
-    fgm::Vector4D<T> parallelVec;
-    fgm::Vector4D<T> onto;
-    fgm::Vector4D<T> expectedRejection;
+    fgm::Vector4D<T> _vec;
+    fgm::Vector4D<T> _parallelVec;
+    fgm::Vector4D<T> _ontoVec;
+    fgm::Vector4D<T> _expectedRejection;
 
     void SetUp() override
     {
-        vec = { T(5), T(6), T(7), T(8) };
-        parallelVec = { T(10), T(12), T(14), T(16) };
-        onto = { T(0), T(2), T(0), T(0) };
-        expectedRejection = { T(5), T(0), T(7), T(8) };
+        _vec = { T(5), T(6), T(7), T(8) };
+        _parallelVec = { T(10), T(12), T(14), T(16) };
+        _ontoVec = { T(0), T(2), T(0), T(0) };
+        _expectedRejection = { T(5), T(0), T(7), T(8) };
     }
 };
 /** @brief Test fixture for @ref fgm::Vector4D rejection, parameterized by @ref SupportedArithmeticTypes. */
@@ -77,7 +77,7 @@ TYPED_TEST_SUITE(Vector4DRejection, SupportedArithmeticTypes);
 /** @test Verify that projecting orthogonal @ref fgm::Vector4D instances returns a zero vector. */
 TYPED_TEST(Vector4DProjection, OrthogonalVectorsReturnsZeroVector)
 {
-    const fgm::Vector4D actualProjection = this->perpendicularVec.project(this->onto);
+    const fgm::Vector4D actualProjection = this->_perpendicularVec.project(this->_ontoVec);
 
     EXPECT_VEC_ZERO(actualProjection);
 }
@@ -165,9 +165,9 @@ TEST(Vector4DProjection, ProjectionOntoWAxisReturnsVectorWithOnlyWComponent)
  */
 TYPED_TEST(Vector4DProjection, NonOrthogonalProjectionReturnsNonZeroVector)
 {
-    const fgm::Vector4D actualProjection = this->vec.project(this->onto);
+    const fgm::Vector4D actualProjection = this->_vec.project(this->_ontoVec);
 
-    EXPECT_VEC_EQ(this->expectedProjection, actualProjection);
+    EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
 }
 
 
@@ -177,9 +177,9 @@ TYPED_TEST(Vector4DProjection, NonOrthogonalProjectionReturnsNonZeroVector)
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_NonOrthogonalProjectionReturnsNonZeroVector)
 {
-    const fgm::Vector4D actualProjection = fgm::Vector4D<TypeParam>::project(this->vec, this->onto);
+    const fgm::Vector4D actualProjection = fgm::Vector4D<TypeParam>::project(this->_vec, this->_ontoVec);
 
-    EXPECT_VEC_EQ(this->expectedProjection, actualProjection);
+    EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
 }
 
 
@@ -260,7 +260,7 @@ TEST(Vector4DProjection, MixedTypeProjectionPromotesType)
 /** @test Verify that rejecting parallel @ref fgm::Vector4D instances returns a zero vector. */
 TYPED_TEST(Vector4DRejection, ParallelVectorsReturnsZeroVector)
 {
-    const fgm::Vector4D actualRejection = this->vec.reject(this->parallelVec);
+    const fgm::Vector4D actualRejection = this->_vec.reject(this->_parallelVec);
 
     EXPECT_VEC_ZERO(actualRejection);
 }
@@ -366,9 +366,9 @@ TEST(Vector4DRejection, OrthogonalRejectionReturnsOriginalVector)
  */
 TYPED_TEST(Vector4DRejection, NonOrthogonalRejectionReturnsNonZeroVector)
 {
-    const fgm::Vector4D actualRejection = this->vec.reject(this->onto);
+    const fgm::Vector4D actualRejection = this->_vec.reject(this->_ontoVec);
 
-    EXPECT_VEC_EQ(this->expectedRejection, actualRejection);
+    EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
 }
 
 
@@ -378,9 +378,9 @@ TYPED_TEST(Vector4DRejection, NonOrthogonalRejectionReturnsNonZeroVector)
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_NonOrthogonalRejectionReturnsNonZeroVector)
 {
-    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::reject(this->vec, this->onto);
+    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::reject(this->_vec, this->_ontoVec);
 
-    EXPECT_VEC_EQ(this->expectedRejection, actualRejection);
+    EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
 }
 
 
