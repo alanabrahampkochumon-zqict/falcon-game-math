@@ -25,19 +25,19 @@ using namespace testutils;
 class BooleanVectorBitOperations: public ::testing::Test
 {
     protected:
-    fgm::Vector4D<bool> vecA;
-    fgm::Vector4D<bool> vecB;
-    fgm::Vector4D<bool> expectedAndVector;
-    fgm::Vector4D<bool> expectedOrVector;
-    fgm::Vector4D<bool> expectedNotAVector;
+    fgm::Vector4D<bool> _vecA;
+    fgm::Vector4D<bool> _vecB;
+    fgm::Vector4D<bool> _expectedConjunctionVector;
+    fgm::Vector4D<bool> _expectedDisjunctionVec;
+    fgm::Vector4D<bool> _expectedInvertedVec;
 
     void SetUp() override
     {
-        vecA = { true, false, true, false };
-        vecB = { true, true, false, false };
-        expectedAndVector = { true, false, false, false };
-        expectedOrVector = { true, true, true, false };
-        expectedNotAVector = { false, true, false, true };
+        _vecA = { true, false, true, false };
+        _vecB = { true, true, false, false };
+        _expectedConjunctionVector = { true, false, false, false };
+        _expectedDisjunctionVec = { true, true, true, false };
+        _expectedInvertedVec = { false, true, false, true };
     }
 };
 
@@ -54,9 +54,9 @@ class BooleanVectorBitOperations: public ::testing::Test
  */
 TEST_F(BooleanVectorBitOperations, BitwiseAND_PerformComponentwiseConjunction)
 {
-    const auto mask = this->vecA & this->vecB;
+    const auto mask = this->_vecA & this->_vecB;
 
-    EXPECT_VEC_EQ(this->expectedAndVector, mask);
+    EXPECT_VEC_EQ(this->_expectedConjunctionVector, mask);
 }
 
 /**
@@ -65,9 +65,9 @@ TEST_F(BooleanVectorBitOperations, BitwiseAND_PerformComponentwiseConjunction)
  */
 TEST_F(BooleanVectorBitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
 {
-    this->vecA &= this->vecB;
+    this->_vecA &= this->_vecB;
 
-    EXPECT_VEC_EQ(this->expectedAndVector, this->vecA);
+    EXPECT_VEC_EQ(this->_expectedConjunctionVector, this->_vecA);
 }
 
 
@@ -77,9 +77,9 @@ TEST_F(BooleanVectorBitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
  */
 TEST_F(BooleanVectorBitOperations, BitwiseOR_PerformComponentwiseDisjunction)
 {
-    const auto mask = this->vecA | this->vecB;
+    const auto mask = this->_vecA | this->_vecB;
 
-    EXPECT_VEC_EQ(this->expectedOrVector, mask);
+    EXPECT_VEC_EQ(this->_expectedDisjunctionVec, mask);
 }
 
 
@@ -89,9 +89,9 @@ TEST_F(BooleanVectorBitOperations, BitwiseOR_PerformComponentwiseDisjunction)
  */
 TEST_F(BooleanVectorBitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
 {
-    this->vecA |= this->vecB;
+    this->_vecA |= this->_vecB;
 
-    EXPECT_VEC_EQ(this->expectedAndVector, this->vecA);
+    EXPECT_VEC_EQ(this->_expectedConjunctionVector, this->_vecA);
 }
 
 
@@ -101,9 +101,9 @@ TEST_F(BooleanVectorBitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
  */
 TEST_F(BooleanVectorBitOperations, BitwiseNOT_PerformComponentwiseInversion)
 {
-    const auto mask = !this->vecA;
+    const auto mask = !this->_vecA;
 
-    EXPECT_VEC_EQ(this->expectedNotAVector, mask);
+    EXPECT_VEC_EQ(this->_expectedInvertedVec, mask);
 }
 
 /** @} */
