@@ -25,15 +25,15 @@ template <typename T>
 class Vector4DAddition: public ::testing::Test
 {
     protected:
-    fgm::Vector4D<T> vecA;
-    fgm::Vector4D<T> vecB;
-    fgm::Vector4D<T> expected;
+    fgm::Vector4D<T> _vecA;
+    fgm::Vector4D<T> _vecB;
+    fgm::Vector4D<T> _expectedSum;
 
     void SetUp() override
     {
-        vecA = { T(3), T(1), T(6), T(2) };
-        vecB = { T(-8), T(5), T(-2), T(5) };
-        expected = { T(-5), T(6), T(4), T(7) };
+        _vecA = { T(3), T(1), T(6), T(2) };
+        _vecB = { T(-8), T(5), T(-2), T(5) };
+        _expectedSum = { T(-5), T(6), T(4), T(7) };
     }
 };
 /** @brief Test fixture for @ref fgm::Vector4D addition, parameterized by SupportedArithmeticTypes */
@@ -44,15 +44,15 @@ template <typename T>
 class Vector4DSubtraction: public ::testing::Test
 {
     protected:
-    fgm::Vector4D<T> vecA;
-    fgm::Vector4D<T> vecB;
-    fgm::Vector4D<T> expected;
+    fgm::Vector4D<T> _vecA;
+    fgm::Vector4D<T> _vecB;
+    fgm::Vector4D<T> _expectedDifference;
 
     void SetUp() override
     {
-        vecA = { T(95), T(11), T(-6), T(2) };
-        vecB = { T(-8), T(5), T(-2), T(-5) };
-        expected = { T(103), T(6), T(-4), T(7) };
+        _vecA = { T(95), T(11), T(-6), T(2) };
+        _vecB = { T(-8), T(5), T(-2), T(-5) };
+        _expectedDifference = { T(103), T(6), T(-4), T(7) };
     }
 };
 /** @brief Test fixture for @ref fgm::Vector4D subtraction, parameterized by SupportedArithmeticTypes */
@@ -63,18 +63,18 @@ template <typename T>
 class Vector4DScalarMultiplication: public ::testing::Test
 {
     protected:
-    fgm::Vector4D<T> vec;
-    T scalar;
-    fgm::Vector4D<T> expectedFloating;
-    fgm::Vector4D<T> expectedIntegral;
+    fgm::Vector4D<T> _vec;
+    T _scalar;
+    fgm::Vector4D<T> _expectedFloatingVec;
+    fgm::Vector4D<T> _expectedIntegralVec;
 
     void SetUp() override
     {
-        vec = { T(7), T(13), T(29), T(41) };
-        scalar = T(2.123456789123456);
-        expectedFloating = { T(14.864197523864192), T(27.604938258604928), T(61.580246884580224),
+        _vec = { T(7), T(13), T(29), T(41) };
+        _scalar = T(2.123456789123456);
+        _expectedFloatingVec = { T(14.864197523864192), T(27.604938258604928), T(61.580246884580224),
                              T(87.061728354061696) };
-        expectedIntegral = { T(14), T(26), T(58), T(82) };
+        _expectedIntegralVec = { T(14), T(26), T(58), T(82) };
     }
 };
 /** @brief Test fixture for @ref fgm::Vector4D scalar multiplication, parameterized by SupportedArithmeticTypes */
@@ -85,15 +85,15 @@ template <typename T>
 class Vector4DScalarDivision: public ::testing::Test
 {
     protected:
-    fgm::Vector4D<T> vec;
-    T scalar;
-    fgm::Vector4D<T> expected;
+    fgm::Vector4D<T> _vec;
+    T _scalar;
+    fgm::Vector4D<T> _expectedScaledVec;
 
     void SetUp() override
     {
-        vec = { T(17), T(31), T(59), T(73) };
-        scalar = T(13);
-        expected = { T(1.30769230769230769231), T(2.38461538461538461538), T(4.53846153846153846154),
+        _vec = { T(17), T(31), T(59), T(73) };
+        _scalar = T(13);
+        _expectedScaledVec = { T(1.30769230769230769231), T(2.38461538461538461538), T(4.53846153846153846154),
                      T(5.61538461538461538462) };
     }
 };
@@ -119,9 +119,9 @@ TYPED_TEST_SUITE(Vector4DScalarDivision, SupportedArithmeticTypes);
  */
 TYPED_TEST(Vector4DAddition, PlusOperator_ReturnsVectorSum)
 {
-    const fgm::Vector4D result = this->vecA + this->vecB;
+    const fgm::Vector4D result = this->_vecA + this->_vecB;
 
-    EXPECT_VEC_EQ(this->expected, result);
+    EXPECT_VEC_EQ(this->_expectedSum, result);
 }
 
 
@@ -131,9 +131,9 @@ TYPED_TEST(Vector4DAddition, PlusOperator_ReturnsVectorSum)
  */
 TYPED_TEST(Vector4DAddition, PlusEqualsOperator_ReturnsSameVectorWithSum)
 {
-    this->vecA += this->vecB;
+    this->_vecA += this->_vecB;
 
-    EXPECT_VEC_EQ(this->expected, this->vecA);
+    EXPECT_VEC_EQ(this->_expectedSum, this->_vecA);
 }
 
 
@@ -184,9 +184,9 @@ TEST(Vector4DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
  */
 TYPED_TEST(Vector4DSubtraction, MinusOperator_ReturnsDifference)
 {
-    const fgm::Vector4D result = this->vecA - this->vecB;
+    const fgm::Vector4D result = this->_vecA - this->_vecB;
 
-    EXPECT_VEC_EQ(this->expected, result);
+    EXPECT_VEC_EQ(this->_expectedDifference, result);
 }
 
 
@@ -196,9 +196,9 @@ TYPED_TEST(Vector4DSubtraction, MinusOperator_ReturnsDifference)
  */
 TYPED_TEST(Vector4DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
 {
-    this->vecA -= this->vecB;
+    this->_vecA -= this->_vecB;
 
-    EXPECT_VEC_EQ(this->expected, this->vecA);
+    EXPECT_VEC_EQ(this->_expectedDifference, this->_vecA);
 }
 
 
@@ -271,12 +271,12 @@ TEST(Vector4DScalarMultiplication, MultiplicationByOneReturnsOriginalVector)
  */
 TYPED_TEST(Vector4DScalarMultiplication, VectorTimesScalarReturnsScaledVector)
 {
-    const fgm::Vector4D result = this->vec * this->scalar;
+    const fgm::Vector4D result = this->_vec * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
-        EXPECT_VEC_EQ(this->expectedFloating, result);
+        EXPECT_VEC_EQ(this->_expectedFloatingVec, result);
     else
-        EXPECT_VEC_EQ(this->expectedIntegral, result);
+        EXPECT_VEC_EQ(this->_expectedIntegralVec, result);
 }
 
 
@@ -287,12 +287,12 @@ TYPED_TEST(Vector4DScalarMultiplication, VectorTimesScalarReturnsScaledVector)
  */
 TYPED_TEST(Vector4DScalarMultiplication, ScalarTimesAVectorReturnsScaledVector)
 {
-    const fgm::Vector4D result = this->scalar * this->vec;
+    const fgm::Vector4D result = this->_scalar * this->_vec;
 
     if (std::is_floating_point_v<TypeParam>)
-        EXPECT_VEC_EQ(this->expectedFloating, result);
+        EXPECT_VEC_EQ(this->_expectedFloatingVec, result);
     else
-        EXPECT_VEC_EQ(this->expectedIntegral, result);
+        EXPECT_VEC_EQ(this->_expectedIntegralVec, result);
 }
 
 
@@ -302,12 +302,12 @@ TYPED_TEST(Vector4DScalarMultiplication, ScalarTimesAVectorReturnsScaledVector)
  */
 TYPED_TEST(Vector4DScalarMultiplication, VectorTimesEqualScalarIsTheSameVectorScaled)
 {
-    this->vec *= this->scalar;
+    this->_vec *= this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
-        EXPECT_VEC_EQ(this->expectedFloating, this->vec);
+        EXPECT_VEC_EQ(this->_expectedFloatingVec, this->_vec);
     else
-        EXPECT_VEC_EQ(this->expectedIntegral, this->vec);
+        EXPECT_VEC_EQ(this->_expectedIntegralVec, this->_vec);
 }
 
 
@@ -316,7 +316,7 @@ TYPED_TEST(Vector4DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
 {
     constexpr double scalar = 2.123456789123456;
 
-    [[maybe_unused]] const fgm::Vector4D result = this->vec * scalar;
+    [[maybe_unused]] const fgm::Vector4D result = this->_vec * scalar;
 
     static_assert(std::is_same_v<typename decltype(result)::value_type, double>);
 }
@@ -370,18 +370,18 @@ TEST(Vector4DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
 TYPED_TEST(Vector4DScalarDivision, DivisionByZeroReturnsInfinityVector)
 {
     if constexpr (std::is_floating_point_v<TypeParam>)
-        EXPECT_VEC_INF(this->vec / 0);
+        EXPECT_VEC_INF(this->_vec / 0);
     else
-        EXPECT_DEATH({ this->vec / 0; }, "Integral division by zero");
+        EXPECT_DEATH({ this->_vec / 0; }, "Integral division by zero");
 }
 
 
 /** @test Verify that the binary division of a @ref fgm::Vector4D by one returns the original vector. */
 TYPED_TEST(Vector4DScalarDivision, DivisionByOneReturnsOriginalVector)
 {
-    const fgm::Vector4D result = this->vec / 1;
+    const fgm::Vector4D result = this->_vec / 1;
 
-    EXPECT_VEC_EQ(result, this->vec);
+    EXPECT_VEC_EQ(result, this->_vec);
 }
 
 
@@ -391,9 +391,9 @@ TYPED_TEST(Vector4DScalarDivision, DivisionByOneReturnsOriginalVector)
  */
 TYPED_TEST(Vector4DScalarDivision, VectorDividedByANumberReturnsAScaledVector)
 {
-    const fgm::Vector4D result = this->vec / this->scalar;
+    const fgm::Vector4D result = this->_vec / this->_scalar;
 
-    EXPECT_VEC_EQ(this->expected, result);
+    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
 }
 
 
@@ -403,9 +403,9 @@ TYPED_TEST(Vector4DScalarDivision, VectorDividedByANumberReturnsAScaledVector)
  */
 TYPED_TEST(Vector4DScalarDivision, VectorDivideEqualsANumberIsTheSameVectorScaled)
 {
-    this->vec /= this->scalar;
+    this->_vec /= this->_scalar;
 
-    EXPECT_VEC_EQ(this->expected, this->vec);
+    EXPECT_VEC_EQ(this->_expectedScaledVec, this->_vec);
 }
 
 
