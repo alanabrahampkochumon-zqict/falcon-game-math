@@ -23,7 +23,7 @@ CheckOptions:
     - { key: readability-identifier-naming.ParameterCase, value: camelBack }
 
     # Members: m_camelBack
-    - { key: readability-identifier-naming.MemberCase, value: camelBack }
+    - { key: readability-identifier-naming.MemberCase, value: CamelCase }
     - { key: readability-identifier-naming.MemberPrefix, value: "m_" }
 
     # Statics: s_camelBack
@@ -58,14 +58,31 @@ CheckOptions:
           key: readability-identifier-naming.GlobalConstantCase,
           value: UPPER_CASE,
       }
-    - { key: readability-identifier-naming.GlobalConstantPrefix, value: "" }
 
-    # Local constexpr (Inside functions): camelBack
     - {
-          key: readability-identifier-naming.ConstexprVariableCase,
+          key: readability-identifier-naming.LocalConstexprVariableCase,
           value: camelBack,
       }
-    - { key: readability-identifier-naming.ConstexprVariablePrefix, value: "" }
+
+    - {
+          key: readability-identifier-naming.GlobalConstexprVariableCase,
+          value: UPPER_CASE,
+      }
+
+    - {
+          key: readability-identifier-naming.GlobalConstantCase,
+          value: UPPER_CASE,
+      }
+    - { key: readability-identifier-naming.LocalConstantCase, value: camelBack }
+    - { key: readability-identifier-naming.LocalConstantPrefix, value: "" }
+    - {
+          key: readability-identifier-naming.VariableIgnoredRegexp,
+          value: "^(x|y|z|w|r|g|b|a|s|t|p|q)$",
+      }
+    - {
+          key: readability-identifier-naming.FunctionIgnoredRegexp,
+          value: "^(TEST|TEST_F|TYPED_TEST|TEST_P|TYPED_TEST_SUITE|SetUp)$",
+      }
 
 SystemHeaders: false
 ...
