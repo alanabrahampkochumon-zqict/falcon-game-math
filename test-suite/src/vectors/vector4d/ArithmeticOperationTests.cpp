@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verifies @ref Vector4D arithmetic operator(+, -, *, /) logic.
+ * @brief Verifies @ref fgm::Vector4D arithmetic operator(+, -, *, /) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
