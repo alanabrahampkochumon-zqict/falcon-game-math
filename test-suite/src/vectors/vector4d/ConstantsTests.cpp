@@ -28,12 +28,18 @@ TYPED_TEST_SUITE(Vector4DConstants, SupportedArithmeticTypes);
  * @{
  */
 
-/** @test Verifies that @fgm::Vector4D::one returns a 4D vector with unit components */
-TYPED_TEST(Vector4DConstants, OneReturnsVectorWithOneComponents)
+/** @test Verifies that @ref fgm::Vector4D::one returns a 4D vector with unit components */
+TYPED_TEST(Vector4DConstants, OneReturnsVectorWithUnitComponents)
 {
     constexpr TypeParam one = TypeParam(1);
-    const auto o = fgm::vec4d::one<TypeParam>;
-    EXPECT_VEC_CONTAINS(o, one, one, one, one);
+    EXPECT_VEC_CONTAINS(fgm::vec4d::one<TypeParam>, one, one, one, one);
+}
+
+
+/** @test Verifies that @ref fgm::Vector4D::zero returns a 4D vector with zero components */
+TYPED_TEST(Vector4DConstants, OneReturnsVectorWithZeroComponents)
+{
+    EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>);
 }
 
 /** @} */

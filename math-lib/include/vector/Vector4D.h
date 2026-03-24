@@ -1120,6 +1120,9 @@ namespace fgm
     {
         template <StrictArithmetic T>
         static constexpr Vector4D<T> one = Vector4D<T>(T(1), T(1), T(1), T(1)); ///< 4D-Vector with all one-components.    
+
+        template <StrictArithmetic T>
+        static constexpr Vector4D<T> zero = Vector4D<T>(T(0), T(0), T(0), T(0)); ///< 4D-Vector with all zero-components.    
     }
 
     /** @} */
