@@ -21,16 +21,16 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include "common/Config.h"
-#include "common/MathTraits.h"
 #include "Vector2D.h"
 #include "Vector3D.h"
+#include "common/Config.h"
+#include "common/MathTraits.h"
 
 #include <cstddef>
 #include <iomanip>
 #include <ostream>
 
-// TODO: Zero, One, Inf, -Inf, Nan, X, Y, Z, W, Safe Normalize, Safe Project, Safe Reject, custom abs function
+// TODO: Inf, -Inf, Nan, X, Y, Z, W, Safe Normalize, Safe Project, Safe Reject, custom abs function
 // TODO: Make non-safe functions for normalize, divide ops, project and reject noexcept
 
 namespace fgm
@@ -1045,8 +1045,6 @@ namespace fgm
         }
 
         /** @} */
-
-
     };
 
 
@@ -1118,12 +1116,25 @@ namespace fgm
      *************************************/
     namespace vec4d
     {
+        /**
+         * @brief 4D-Vector with all one-components.
+         * 
+         * @note Only available for @ref fgm::StrictArithmetic types.
+         */
         template <StrictArithmetic T>
-        static constexpr Vector4D<T> one = Vector4D<T>(T(1), T(1), T(1), T(1)); ///< 4D-Vector with all one-components.    
+        static constexpr Vector4D<T> one = Vector4D<T>(T(1), T(1), T(1), T(1));
 
+
+        /**
+         * @brief 4D-Vector with all zero-components.
+         *
+         * @note Only available for @ref fgm::StrictArithmetic types.
+         */
         template <StrictArithmetic T>
-        static constexpr Vector4D<T> zero = Vector4D<T>(T(0), T(0), T(0), T(0)); ///< 4D-Vector with all zero-components.    
-    }
+        static constexpr Vector4D<T> zero =
+            Vector4D<T>(T(0), T(0), T(0), T(0)); ///< 4D-Vector with all zero-components.
+
+    } // namespace vec4d
 
     /** @} */
 
