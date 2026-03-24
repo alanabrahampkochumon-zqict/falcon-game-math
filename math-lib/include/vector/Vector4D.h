@@ -24,6 +24,7 @@
 #include "Vector2D.h"
 #include "Vector3D.h"
 #include "common/Config.h"
+#include "common/Constants.h"
 #include "common/MathTraits.h"
 
 #include <cstddef>
@@ -1118,7 +1119,7 @@ namespace fgm
     {
         /**
          * @brief 4D-Vector with all one-components.
-         * 
+         *
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
         template <StrictArithmetic T>
@@ -1133,6 +1134,16 @@ namespace fgm
         template <StrictArithmetic T>
         static constexpr Vector4D<T> zero =
             Vector4D<T>(T(0), T(0), T(0), T(0)); ///< 4D-Vector with all zero-components.
+
+        /**
+         * @brief 4D-Vector with all infinite-components (positive infinity).
+         *
+         * @note Only available for `std::floating_point` types.
+         */
+        template <StrictArithmetic T>
+            requires std::floating_point<T>
+        static constexpr Vector4D<T> inf = Vector4D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D),
+                                                       T(constants::INFINITY_D), T(constants::INFINITY_D));
 
     } // namespace vec4d
 

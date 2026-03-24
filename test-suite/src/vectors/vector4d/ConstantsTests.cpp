@@ -42,4 +42,20 @@ TYPED_TEST(Vector4DConstants, OneReturnsVectorWithZeroComponents)
     EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>);
 }
 
+/** @test Verifies that @ref fgm::Vector4D::inf<float> returns a 4D vector with infinity components */
+TEST(Vector4DConstants, FloatInfReturnsFloatVectorWithInfinityComponents)
+{
+    constexpr auto inf = fgm::vec4d::inf<float>;
+    static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
+    EXPECT_VEC4_POS_INF(inf);
+}
+
+/** @test Verifies that @ref fgm::Vector4D::inf<double> returns a 4D vector with infinity components */
+TEST(Vector4DConstants, DoubleInfReturnsDoubleVectorWithInfinityComponents)
+{
+    constexpr auto inf = fgm::vec4d::inf<double>;
+    static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
+    EXPECT_VEC4_POS_INF(inf);
+}
+
 /** @} */
