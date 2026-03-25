@@ -490,10 +490,19 @@ TYPED_TEST(Vector4DScalarDivision, SafeDivide_ReturnsAInverseScaledVector)
 
 
 /** @test Verify that @ref fgm::Vector4D safeDiv throws `AssertionError` for zero integral scalar. */
-TEST(Vector4DScalarDivision, SafeDivideByZero_ThrowAssertionError)
+TEST(Vector4DScalarDivision, SafeDivideByIntegralZero_ThrowAssertionError)
 {
     constexpr fgm::Vector4D vec(1, 2, 3, 4);
     EXPECT_DEATH({ vec.safeDiv(0); }, "Integral division by zero");
+}
+
+
+/** @test Verify that @ref fgm::Vector4D safeDiv by floating point zero returns Infinity vector. */
+TYPED_TEST(Vector4DScalarDivision, SafeDivideByFloatZero_ReturnsInfinityVector)
+{
+    const auto result = this->_vec.safeDiv(0.0f);
+
+    EXPECT_VEC_INF(result);
 }
 
 
@@ -513,11 +522,21 @@ TYPED_TEST(Vector4DScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScale
  * @test Verify that the static safeDiv wrapper of @ref fgm::Vector4D throws `AssertionError` for
  *       zero integral scalar.
  */
-TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByZero_ThrowAssertionError)
+TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ThrowAssertionError)
 {
     constexpr fgm::Vector4D vec(1, 2, 3, 4);
     EXPECT_DEATH({ fgm::Vector4D<int>::safeDiv(vec, 0); }, "Integral division by zero");
 }
+
+
+/** @test Verify that @ref fgm::Vector4D safeDiv by floating point zero returns Infinity vector. */
+TYPED_TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsInfinityVector)
+{
+    const auto result = fgm::Vector4D<TypeParam>::safeDiv(this->_vec, 0.0f);
+
+    EXPECT_VEC_INF(result);
+}
+
 
 /** @} */
 

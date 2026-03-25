@@ -358,23 +358,6 @@ namespace fgm
     }
 
 
-    template <Arithmetic T>
-    template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::safeDiv(S scalar) const -> Vector4D<std::common_type_t<T, S>>
-        requires StrictArithmetic<T>
-    {
-        return Vector4D();
-    }
-
-
-    template <Arithmetic T>
-    template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec, S scalar) -> Vector4D<std::common_type_t<T, S>>
-        requires StrictArithmetic<T>
-    {
-        return Vector4D();
-    }
-
 
     /*************************************
      *                                   *
@@ -513,6 +496,27 @@ namespace fgm
         }
 
         return *this;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector4D<T>::safeDiv(S scalar) const -> Vector4D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
+    {
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<S>)
+            assert(scalar != 0 && "Integral division by zero");
+        
+        return (*this)/scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec, S scalar) -> Vector4D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
+    {
+        return vec.safeDiv(scalar);
     }
 
 
