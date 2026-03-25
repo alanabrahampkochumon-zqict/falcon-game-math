@@ -11,6 +11,8 @@
  */
 
 
+#include "Vector4D.h"
+
 #include <cassert>
 #include <type_traits>
 
@@ -256,10 +258,8 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, U>>;
-        return Vector4D<bool>(static_cast<R>(x) <= static_cast<R>(rhs.x), 
-                              static_cast<R>(y) <= static_cast<R>(rhs.y), 
-                              static_cast<R>(z) <= static_cast<R>(rhs.z),
-                              static_cast<R>(w) <= static_cast<R>(rhs.w));
+        return Vector4D<bool>(static_cast<R>(x) <= static_cast<R>(rhs.x), static_cast<R>(y) <= static_cast<R>(rhs.y),
+                              static_cast<R>(z) <= static_cast<R>(rhs.z), static_cast<R>(w) <= static_cast<R>(rhs.w));
     }
 
 
@@ -358,6 +358,23 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector4D<T>::safeDiv(S scalar) const -> Vector4D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
+    {
+        return Vector4D();
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec, S scalar) -> Vector4D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
+    {
+        return Vector4D();
+    }
+
 
     /*************************************
      *                                   *
@@ -412,7 +429,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<T> Vector4D<T>::operator-() const noexcept requires StrictArithmetic<T>
+    constexpr Vector4D<T> Vector4D<T>::operator-() const noexcept
+        requires StrictArithmetic<T>
     {
         return Vector4D(-x, -y, -z, -w);
     }

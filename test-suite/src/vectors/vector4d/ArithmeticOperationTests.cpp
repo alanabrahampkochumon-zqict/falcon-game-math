@@ -389,8 +389,8 @@ TEST(Vector4DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  **************************************/
 
 /**
- * @test Verify that @ref fgm::Vector4D binary division of a @ref fgm::Vector4D by a zero scalar returns an
- * infinity-vector for floating-point types and triggers program termination for integral types.
+ * @test Verify that @ref fgm::Vector4D binary division of a @ref fgm::Vector4D by zero scalar returns an
+ *       infinity-vector for floating-point types and triggers program termination for integral types.
  */
 TYPED_TEST(Vector4DScalarDivision, DivisionByZeroReturnsInfinityVector)
 {
@@ -414,7 +414,7 @@ TYPED_TEST(Vector4DScalarDivision, DivisionByOneReturnsOriginalVector)
  * @test Verify that @ref fgm::Vector4D binary division operator (vector / scalar) performs a component-wise divide
  *       and returns a new @ref fgm::Vector4D instance.
  */
-TYPED_TEST(Vector4DScalarDivision, VectorDividedByANumberReturnsAScaledVector)
+TYPED_TEST(Vector4DScalarDivision, ScalarDivision_ReturnsInverseScaledVector)
 {
     const fgm::Vector4D result = this->_vec / this->_scalar;
 
@@ -426,7 +426,7 @@ TYPED_TEST(Vector4DScalarDivision, VectorDividedByANumberReturnsAScaledVector)
  * @test Verify that @ref fgm::Vector4D compound division assignment operator performs a component-wise divide
  *       and mutates the @ref fgm::Vector4D in-place.
  */
-TYPED_TEST(Vector4DScalarDivision, VectorDivideEqualsANumberIsTheSameVectorScaled)
+TYPED_TEST(Vector4DScalarDivision, ScalarDivisionAssignment_ReturnsSameVectorInverseScaled)
 {
     this->_vec /= this->_scalar;
 
@@ -434,9 +434,11 @@ TYPED_TEST(Vector4DScalarDivision, VectorDivideEqualsANumberIsTheSameVectorScale
 }
 
 
-/** @test Verify that @ref fgm::Vector4D binary division operator performs automatic type promotion to the wider numeric
- * type. */
-TEST(Vector4DScalarDivision, MixedTypeScalarDivisionPromotesType)
+/**
+ * @test Verify that @ref fgm::Vector4D binary division operator performs automatic type promotion to the wider numeric
+ *       type.
+ */
+TEST(Vector4DScalarDivision, MixedType_ScalarDivision_PromotesType)
 {
     constexpr fgm::Vector4D vec(15.0, 0.0, -5.0, 10.0);
     constexpr double scalar = 5.0;
@@ -449,9 +451,9 @@ TEST(Vector4DScalarDivision, MixedTypeScalarDivisionPromotesType)
 
 /**
  * @test Verify that @ref fgm::Vector4D compound division assignment operator maintains the destination type and
- * performs an implicit cast.
+ *       performs an implicit cast.
  */
-TEST(Vector4DScalarDivision, MixedTypeScalarDivisionAssignmentDoesNotPromoteType)
+TEST(Vector4DScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
 {
     fgm::Vector4D vec(15.0f, 0.0f, -5.0f, 10.0f);
     constexpr double scalar = 5.0;
@@ -463,7 +465,7 @@ TEST(Vector4DScalarDivision, MixedTypeScalarDivisionAssignmentDoesNotPromoteType
 
 
 /** @test Verify that @ref fgm::Vector4D compound division operator for mixed types ensures minimal precision loss. */
-TEST(Vector4DScalarDivision, MixedTypeScalarDivisionAssignmentGivesResultWithMinimalPrecisionLoss)
+TEST(Vector4DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWithMinimalPrecisionLoss)
 {
     fgm::Vector4D vec(10, 25, -30, 2);
     constexpr double scalar = 2.5;
@@ -472,6 +474,49 @@ TEST(Vector4DScalarDivision, MixedTypeScalarDivisionAssignmentGivesResultWithMin
     vec /= scalar;
 
     EXPECT_VEC_EQ(expected, vec);
+}
+
+
+/**
+ * @test Verify that @ref fgm::Vector4D safeDiv performs a component-wise divide and returns a
+ *       new @ref fgm::Vector4D instance.
+ */
+TYPED_TEST(Vector4DScalarDivision, SafeDivide_ReturnsAInverseScaledVector)
+{
+    const auto result = this->_vec.safeDiv(this->_scalar);
+
+    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+}
+
+
+/** @test Verify that @ref fgm::Vector4D safeDiv throws `AssertionError` for zero integral scalar. */
+TEST(Vector4DScalarDivision, SafeDivideByZero_ThrowAssertionError)
+{
+    constexpr fgm::Vector4D vec(1, 2, 3, 4);
+    EXPECT_DEATH({ vec.safeDiv(0); }, "Integral division by zero");
+}
+
+
+/**
+ * @test Verify that the static safeDiv wrapper of @ref fgm::Vector4D performs a component-wise divide and returns a
+ *       new @ref fgm::Vector4D instance.
+ */
+TYPED_TEST(Vector4DScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScaledVector)
+{
+    const auto result = fgm::Vector4D<TypeParam>::safeDiv(this->_vec, this->_scalar);
+
+    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+}
+
+
+/**
+ * @test Verify that the static safeDiv wrapper of @ref fgm::Vector4D throws `AssertionError` for
+ *       zero integral scalar.
+ */
+TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByZero_ThrowAssertionError)
+{
+    constexpr fgm::Vector4D vec(1, 2, 3, 4);
+    EXPECT_DEATH({ fgm::Vector4D<int>::safeDiv(vec, 0); }, "Integral division by zero");
 }
 
 /** @} */

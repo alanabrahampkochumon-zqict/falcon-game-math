@@ -31,7 +31,7 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: Y, Z, W, Safe Normalize, Safe Project, Safe Reject, custom abs function, unary negate function.
+// TODO: Safe Normalize, Safe Project, Safe Reject, custom abs function.
 // TODO: Make non-safe functions for normalize, divide ops, project and reject noexcept
 
 namespace fgm
@@ -775,7 +775,7 @@ namespace fgm
         // TODO: Remove assertion, add safe divide, safe mag, and safe normalize
         // TODO: Update / and /= to noexcept after implementing safeDivide and safeNormalize and removing assert
         /**
-         * @brief Scale the vector by a scalar value.
+         * @brief Divide the vector by a scalar value.
          *        Divide each component of the vector by @p scalar and returns a new vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
@@ -794,7 +794,7 @@ namespace fgm
 
 
         /**
-         * @brief Scale this vector in-place by a scalar value.
+         * @brief Divide this vector in-place by a scalar value.
          *        Perform an in-place division of each component by @p scalar.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -808,6 +808,37 @@ namespace fgm
          */
         template <StrictArithmetic S>
         constexpr Vector4D& operator/=(S scalar)
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely divides the vector by a scalar value.
+         *        Divides each component of the vector by @p scalar and returns the newly computed vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] scalar The value to divide the vector components by.
+         *
+         * @return A new @ref Vector4D resulting from the division.
+         * @throw AssertionError If @p scalar is an integer type and evaluates to exactly zero.
+         */
+        template <StrictArithmetic S>
+        constexpr auto safeDiv(S scalar) const -> Vector4D<std::common_type_t<T, S>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Static wrapper for safe scalar division.
+         *
+         * @copydoc safeDiv(S) const
+         *
+         * @param[in] vec The vector to be divided.
+         */
+        template <StrictArithmetic S>
+        constexpr static auto safeDiv(const Vector4D& vec, S scalar) -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
         /** @} */
