@@ -1180,6 +1180,11 @@ namespace fgm
         inline constexpr Vector4D<T> y = Vector4D<T>(T(0), T(1), T(0), T(0));
 
 
+        /** @brief A 4D unit vector aligned with the positive Z-axis (0, 0, 1, 0). */
+        template <StrictArithmetic T>
+        inline constexpr Vector4D<T> z = Vector4D<T>(T(0), T(0), T(1), T(0));
+
+
     } // namespace vec4d
 
     /** @} */
