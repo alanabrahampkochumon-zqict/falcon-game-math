@@ -412,6 +412,13 @@ namespace fgm
 
 
     template <Arithmetic T>
+    constexpr Vector4D<T> Vector4D<T>::operator-() noexcept requires StrictArithmetic<T>
+    {
+        return Vector4D(-x, -y, -z, -w);
+    }
+
+
+    template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr auto Vector4D<T>::operator*(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>

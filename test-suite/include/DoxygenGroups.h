@@ -59,6 +59,7 @@
              *   @defgroup T_FGM_Vec4_Rej Vector Rejection
              *   @defgroup T_FGM_Vec4_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Vec4_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Vec4_Inversion Unary Inversion(-)
              * @}
              */
 

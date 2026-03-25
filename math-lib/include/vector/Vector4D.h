@@ -726,6 +726,18 @@ namespace fgm
 
 
         /**
+         * @brief Perform a component-wise inversion.
+         *        Invert the sign of each component and returns a new @ref Vector4D<T>.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @return A new @ref fgm::Vector4D with inverted components.
+         */
+        constexpr Vector4D operator-() noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
          * @brief Scale the vector by a scalar value.
          *        Multiply each component of the vector by @p scalar and returns a new vector.
          *

@@ -101,6 +101,23 @@ class Vector4DScalarDivision: public ::testing::Test
 TYPED_TEST_SUITE(Vector4DScalarDivision, SupportedArithmeticTypes);
 
 
+template <typename T>
+class Vector4DInversion: public ::testing::Test
+{
+    protected:
+    fgm::Vector4D<T> _vec;
+    fgm::Vector4D<T> _expectedInvertedVec;
+
+    void SetUp() override
+    {
+        _vec = { T(-8), T(0), T(-2), T(5) };
+        _expectedInvertedVec = { T(8), T(0), T(2), T(-5) };
+    }
+};
+/** @brief Test fixture for @ref fgm::Vector4D inversion, parameterized by SupportedArithmeticTypes */
+TYPED_TEST_SUITE(Vector4DInversion, SupportedArithmeticTypes);
+
+
 
 /**
  * @addtogroup T_FGM_Vec4_Addition
@@ -446,6 +463,22 @@ TEST(Vector4DScalarDivision, MixedTypeScalarDivisionAssignmentGivesResultWithMin
     vec /= scalar;
 
     EXPECT_VEC_EQ(expected, vec);
+}
+
+/** @} */
+
+
+
+/**
+ * @addtogroup T_FGM_Vec4_Inversion
+ * @{
+ */
+
+/** @test Verify that the compound division operator for mixed types ensures minimal precision loss. */
+TYPED_TEST(Vector4DInversion, InvertsTheSignOfComponents)
+{
+    fgm::Vector4D inverted = -this->_vec;
+    EXPECT_VEC_EQ(this->_expectedInvertedVec, inverted);
 }
 
 /** @} */
