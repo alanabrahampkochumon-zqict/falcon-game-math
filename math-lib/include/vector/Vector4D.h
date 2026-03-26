@@ -31,7 +31,7 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: Safe Normalize, Safe Project, Safe Reject, custom abs function.
+// TODO: Safe Normalize, Safe Project, Safe Reject, TryDivide, TryNormalize, TryProject, TryReject custom abs function.
 // TODO: Make non-safe functions for normalize, project and reject noexcept
 
 namespace fgm
@@ -772,8 +772,6 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // TODO: Remove assertion, add safe divide, safe mag, and safe normalize
-        // TODO: Update / and /= to noexcept after implementing safeDivide and safeNormalize and removing assert
         /**
          * @brief Divide the vector by a scalar value.
          *        Divide each component of the vector by @p scalar and returns a new vector.
@@ -965,6 +963,20 @@ namespace fgm
          * @return A new @ref Vector4D with a magnitude of 1.0.
          */
         constexpr static Vector4D<Magnitude<T>> normalize(const Vector4D& vec)
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely calculate the normalized (unit) form of the vector.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         * \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude was below machine epsilon.
+         */
+        constexpr Vector4D<Magnitude<T>> safeNormalize() const
             requires StrictArithmetic<T>;
 
         /** @} */

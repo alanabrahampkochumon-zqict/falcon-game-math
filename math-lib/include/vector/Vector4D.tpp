@@ -510,7 +510,7 @@ namespace fgm
             if (std::abs(scalar) <= std::numeric_limits<S>::epsilon())
                 return fgm::vec4d::zero<R>;
 
-        return (*this)/scalar;
+        return (*this) / scalar;
     }
 
 
@@ -608,6 +608,27 @@ namespace fgm
         return vec.normalize();
     }
 
+
+    template <Arithmetic T>
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::safeNormalize() const
+        requires StrictArithmetic<T>
+    {
+        using R = Magnitude<T>;
+        R magnitude = mag();
+
+        if constexpr (std::is_same_v<R, double>)
+        {
+            if (magnitude <= Config::DOUBLE_EPSILON)
+                return fgm::vec4d::zero<double>;
+        }
+        else
+        {
+            if (magnitude <= Config::FLOAT_EPSILON)
+                return fgm::vec4d::zero<float>;
+        }
+
+        return *this / magnitude;
+    }
 
 
     /*************************************
