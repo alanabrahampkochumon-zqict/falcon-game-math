@@ -323,7 +323,7 @@ TEST(Vector4DProjection, SafeProject_MixedTypeProjectionPromotesType)
 
 
 /**
- * @test Verify that projecting a @ref fgm::Vector4D onto the origin(0, 0, 0, 0) using @ref fgm::Vector4D::safeProject
+ * @test Verify that projecting a @ref fgm::Vector4D onto a zero length vector using @ref fgm::Vector4D::safeProject
  *       returns a type-promoted vector.
  */
 TYPED_TEST(Vector4DProjection, SafeProject_OntoOriginReturnsZeroVector)

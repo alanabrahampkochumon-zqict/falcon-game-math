@@ -821,7 +821,8 @@ namespace fgm
          *
          * @param[in] scalar The value to divide the vector components by.
          *
-         * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the epsilon threshold.
+         * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
+         * epsilon threshold.
          */
         template <StrictArithmetic S>
         constexpr auto safeDiv(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
@@ -973,11 +974,12 @@ namespace fgm
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the epsilon threshold.
+         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         * epsilon threshold.
          */
         constexpr Vector4D<Magnitude<T>> safeNormalize() const noexcept
             requires StrictArithmetic<T>;
-        
+
 
         /**
          * @brief Static wrapper for safe normalization.
@@ -1009,6 +1011,9 @@ namespace fgm
          *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
          *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
          *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] onto           The vector to project onto.
@@ -1018,13 +1023,16 @@ namespace fgm
          */
         template <StrictArithmetic U>
         constexpr auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const
-            -> Vector4D<std::common_type_t<T, U>>
+            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief @copybrief project(const Vector4D<U>&, bool) const
          * Static wrapper for orthogonal projection of @p vector onto @p onto.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -1036,7 +1044,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
         constexpr static auto project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized = false)
-            -> Vector4D<std::common_type_t<T, U>>
+            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
 
@@ -1044,6 +1052,9 @@ namespace fgm
          * @brief Safely project this vector onto another vector.
          *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
          *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
