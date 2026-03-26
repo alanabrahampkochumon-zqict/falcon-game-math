@@ -976,7 +976,7 @@ namespace fgm
          *
          * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the epsilon threshold.
          */
-        constexpr Vector4D<Magnitude<T>> safeNormalize() const
+        constexpr Vector4D<Magnitude<T>> safeNormalize() const noexcept
             requires StrictArithmetic<T>;
         
 
@@ -987,7 +987,7 @@ namespace fgm
          *
          * @param[in] vec The vector to be normalized.
          */
-        constexpr static Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vec)
+        constexpr static Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vec) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
