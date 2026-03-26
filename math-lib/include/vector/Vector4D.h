@@ -1022,7 +1022,7 @@ namespace fgm
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
-        constexpr auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const
+        constexpr auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1043,7 +1043,7 @@ namespace fgm
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
-        constexpr static auto project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized = false)
+        constexpr static auto project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized = false) noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 

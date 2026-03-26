@@ -632,7 +632,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector4D<T>::project(const Vector4D<U>& onto, bool ontoNormalized) const
+    constexpr auto Vector4D<T>::project(const Vector4D<U>& onto, bool ontoNormalized) const noexcept
         -> Vector4D<Magnitude<std::common_type_t<T, U>>>
         requires StrictArithmetic<T>
     {
@@ -646,7 +646,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector4D<T>::project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized)
+    constexpr auto Vector4D<T>::project(const Vector4D& vector, const Vector4D<U>& onto, bool ontoNormalized) noexcept
         -> Vector4D<Magnitude<std::common_type_t<T, U>>>
         requires StrictArithmetic<T>
     {
