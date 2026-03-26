@@ -31,7 +31,7 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: Safe Normalize, Safe Project, Safe Reject, TryDivide, TryNormalize, TryProject, TryReject custom abs function.
+// TODO: Safe Project, Safe Reject, TryDivide, TryNormalize, TryProject, TryReject custom abs function.
 // TODO: Make non-safe functions for normalize, project and reject noexcept
 
 namespace fgm
@@ -821,11 +821,10 @@ namespace fgm
          *
          * @param[in] scalar The value to divide the vector components by.
          *
-         * @return A new @ref Vector4D resulting from the division.
-         * @throw AssertionError If @p scalar is an integer type and evaluates to exactly zero.
+         * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the epsilon threshold.
          */
         template <StrictArithmetic S>
-        constexpr auto safeDiv(S scalar) const -> Vector4D<std::common_type_t<T, S>>
+        constexpr auto safeDiv(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
 
@@ -837,7 +836,7 @@ namespace fgm
          * @param[in] vec The vector to be divided.
          */
         template <StrictArithmetic S>
-        constexpr static auto safeDiv(const Vector4D& vec, S scalar) -> Vector4D<std::common_type_t<T, S>>
+        constexpr static auto safeDiv(const Vector4D& vec, S scalar) noexcept -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
         /** @} */

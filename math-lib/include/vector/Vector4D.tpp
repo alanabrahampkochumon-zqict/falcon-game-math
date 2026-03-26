@@ -500,12 +500,13 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::safeDiv(S scalar) const -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::safeDiv(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
-        if constexpr (std::is_integral_v<T> && std::is_integral_v<S>)
-            assert(scalar != 0 && "Integral division by zero");
+        if constexpr (std::is_integral_v<R>)
+            if (scalar == 0)
+                return fgm::vec4d::zero<R>;
         if constexpr (std::is_floating_point_v<R>)
             if (std::abs(scalar) <= std::numeric_limits<S>::epsilon())
                 return fgm::vec4d::zero<R>;
@@ -516,7 +517,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec, S scalar) -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec, S scalar) noexcept -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         return vec.safeDiv(scalar);
