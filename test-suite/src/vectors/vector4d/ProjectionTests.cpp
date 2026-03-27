@@ -440,7 +440,7 @@ TYPED_TEST(Vector4DProjection, Static_Wrapper_SafeProject_OntoZeroVectorReturnsZ
  *                                    *
  **************************************/
 
-/** @test Verify that rejecting parallel @ref fgm::Vector4D instances returns a zero vector. */
+/** @test Verify that rejecting from a parallel vector using @ref fgm::Vector4D::reject returns a zero vector. */
 TYPED_TEST(Vector4DRejection, ParallelVectorsReturnsZeroVector)
 {
     const fgm::Vector4D actualRejection = this->_vec.reject(this->_parallelVec);
@@ -450,7 +450,7 @@ TYPED_TEST(Vector4DRejection, ParallelVectorsReturnsZeroVector)
 
 
 /**
- * @test Verify that rejecting a @ref fgm::Vector4D from a target @ref fgm::Vector4D containing only an x-component
+ * @test Verify that rejecting from a vector parallel to x-axis using @ref fgm::Vector4D::reject
  *       returns a vector with a zero x-component.
  */
 TEST(Vector4DRejection, RejectionFromXAxisReturnsVectorWithZeroXComponent)
@@ -469,7 +469,7 @@ TEST(Vector4DRejection, RejectionFromXAxisReturnsVectorWithZeroXComponent)
 
 
 /**
- * @test Verify that rejecting a @ref fgm::Vector4D from a target @ref fgm::Vector4D containing only a y-component
+ * @test Verify that rejecting from a vector parallel to y-axis using @ref fgm::Vector4D::reject
  *       returns a vector with a zero y-component.
  */
 TEST(Vector4DRejection, RejectionFromYAxisReturnsVectorWithZeroYComponent)
@@ -488,8 +488,8 @@ TEST(Vector4DRejection, RejectionFromYAxisReturnsVectorWithZeroYComponent)
 
 
 /**
- *@test Verify that rejecting a @ref fgm::Vector4D from a target @ref fgm::Vector4D containing only a z-component
- *      returns a vector with a zero z-component.
+ * @test Verify that rejecting from a vector parallel to z-axis using @ref fgm::Vector4D::reject
+ *       returns a vector with a zero z-component.
  */
 TEST(Vector4DRejection, RejectionFromZAxisReturnsVectorWithZeroZComponent)
 {
@@ -507,7 +507,7 @@ TEST(Vector4DRejection, RejectionFromZAxisReturnsVectorWithZeroZComponent)
 
 
 /**
- * @test Verify that rejecting a @ref fgm::Vector4D from a target @ref fgm::Vector4D containing only a w-component
+ * @test Verify that rejecting from a vector parallel to w-axis using @ref fgm::Vector4D::reject
  *       returns a vector with a zero w-component.
  */
 TEST(Vector4DRejection, RejectionFromWAxisReturnsVectorWithZeroWComponent)
@@ -525,10 +525,7 @@ TEST(Vector4DRejection, RejectionFromWAxisReturnsVectorWithZeroWComponent)
 }
 
 
-/**
- * @test Verify that rejecting a @ref fgm::Vector4D from a target @ref fgm::Vector4D that is orthogonal returns the
- *       original vector.
- */
+/** @test Verify that rejecting an orthogonal using @ref fgm::Vector4D::reject returns the original vector. */
 TEST(Vector4DRejection, OrthogonalRejectionReturnsOriginalVector)
 {
     // Given an arbitrary vector
@@ -544,8 +541,8 @@ TEST(Vector4DRejection, OrthogonalRejectionReturnsOriginalVector)
 
 
 /**
- * @test Verify that rejecting a @ref fgm::Vector4D from a non-orthogonal @ref fgm::Vector4D returns a non-zero
- *       vector with perpendicular component.
+ * @test Verify that rejecting from a non-orthogonal vector using @ref fgm::Vector4D::reject
+ *       returns a non-zero vector with perpendicular component.
  */
 TYPED_TEST(Vector4DRejection, NonOrthogonalRejectionReturnsNonZeroVector)
 {
@@ -556,8 +553,8 @@ TYPED_TEST(Vector4DRejection, NonOrthogonalRejectionReturnsNonZeroVector)
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D static rejection wrapper returns a non-zero vector when rejecting from
- *        orthogonal instances.
+ * @test Verify that rejecting from a non-orthogonal vector using static variant of @ref fgm::Vector4D::reject
+ *       returns a non-zero vector with perpendicular component.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_NonOrthogonalRejectionReturnsNonZeroVector)
 {
@@ -568,8 +565,8 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_NonOrthogonalRejectionReturnsNonZero
 
 
 /**
- * @test Verify that rejecting from an orthogonal unit vector with the @p ontoNormalized flag enabled returns a non-zero
- *       vector with perpendicular component.
+ * @test Verify that rejecting from an orthogonal unit vector using @ref fgm::Vector4D::reject with the
+ *       @p fromNormalized flag enabled returns a non-zero vector with perpendicular component.
  */
 TEST(Vector4DRejection, RejectionFromNormalizedVectorReturnsNonZeroVector)
 {
@@ -587,8 +584,8 @@ TEST(Vector4DRejection, RejectionFromNormalizedVectorReturnsNonZeroVector)
 
 
 /**
- * @test Verify that rejecting a @ref fgm::Vector4D from an orthogonal @ref fgm::Vector4D pointing in the opposite
- *        direction returns a non-zero vector with perpendicular components.
+ * @test Verify that rejecting from an orthogonal vector pointing in the opposite direction
+ *       using @ref fgm::Vector4D::reject returns a non-zero vector with perpendicular components.
  */
 TEST(Vector4DRejection, RejectionFromVectorInOppositeDirectionReturnsVectorWithPerpendicularComponents)
 {
@@ -606,8 +603,8 @@ TEST(Vector4DRejection, RejectionFromVectorInOppositeDirectionReturnsVectorWithP
 
 
 /**
- * @test Verify that rejecting a @ref fgm::Vector4D from another @ref fgm::Vector4D of a different numeric
- *       type returns a type-promoted vector.
+ * @test Verify that rejecting a vector from another vector of different numeric type using @ref fgm::Vector4D::reject
+ *       returns a type-promoted vector.
  */
 TEST(Vector4DRejection, MixedTypeRejectionPromotesType)
 {
@@ -633,8 +630,8 @@ TEST(Vector4DRejection, MixedTypeRejectionPromotesType)
  **************************************/
 
 /**
- * @test Verify that safely rejecting parallel @ref fgm::Vector4D instances using @ref fgm::Vector4D::safeReject returns
- *       a zero vector.
+ * @test Verify that safely rejecting from a parallel vector using @ref fgm::Vector4D::safeReject
+ *       returns a zero vector.
  */
 TYPED_TEST(Vector4DRejection, SafeReject_ParallelVectorsReturnsZeroVector)
 {
@@ -645,8 +642,8 @@ TYPED_TEST(Vector4DRejection, SafeReject_ParallelVectorsReturnsZeroVector)
 
 
 /**
- * @test Verify that safely rejecting a @ref fgm::Vector4D from a target @ref fgm::Vector4D that is orthogonal using
- *       @ref fgm::Vector4D::safeReject returns the original vector.
+ * @test Verify that safely rejecting from orthogonal using @ref fgm::Vector4D::safeReject
+ *       returns the original vector.
  */
 TEST(Vector4DRejection, SafeReject_OrthogonalRejectionReturnsOriginalVector)
 {
@@ -663,8 +660,8 @@ TEST(Vector4DRejection, SafeReject_OrthogonalRejectionReturnsOriginalVector)
 
 
 /**
- * @test Verify that safely rejecting a @ref fgm::Vector4D from a non-orthogonal @ref fgm::Vector4D using
- *       @ref fgm::Vector4D::safeReject returns a non-zero vector with perpendicular component.
+ * @test Verify that safely rejecting from a non-orthogonal vector using @ref fgm::Vector4D::safeReject
+ *       returns a non-zero vector with perpendicular component.
  */
 TYPED_TEST(Vector4DRejection, SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
 {
@@ -694,7 +691,7 @@ TEST(Vector4DRejection, SafeReject_FromNormalizedVectorReturnsNonZeroVector)
 
 
 /**
- * @test Verify that safely rejecting a @ref fgm::Vector4D from another @ref fgm::Vector4D of a different numeric
+ * @test Verify that safely rejecting a vector from another vector of different numeric
  *       type using @ref fgm::Vector4D::safeReject returns a type-promoted vector.
  */
 TEST(Vector4DRejection, SafeReject_MixedTypeRejectionPromotesType)
@@ -730,8 +727,8 @@ TYPED_TEST(Vector4DRejection, SafeReject_FromZeroVectorReturnsSameVector)
 
 
 /**
- * @test Verify that safely rejecting parallel vector using static variant of @ref fgm::Vector4D::safeReject returns
- *       a zero vector.
+ * @test Verify that safely rejecting from a parallel vector using static variant of @ref fgm::Vector4D::safeReject
+ *       returns a zero vector.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_ParallelVectorsReturnsZeroVector)
 {
@@ -757,7 +754,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeReject_OrthogonalRejectionReturnsOrigi
 
 
 /**
- * @test Verify that safely rejecting a vector from a non-orthogonal vector using static variant of
+ * @test Verify that safely rejecting from a non-orthogonal vector using static variant of
  *       @ref fgm::Vector4D::safeReject returns a non-zero vector with perpendicular component.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
