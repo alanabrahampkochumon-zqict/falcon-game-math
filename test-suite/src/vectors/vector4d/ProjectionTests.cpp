@@ -287,7 +287,7 @@ TEST(Vector4DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZer
  * @test Verify that projecting a @ref fgm::Vector4D onto a non-orthogonal @ref fgm::Vector4D pointing in the opposite
  *       direction using @ref fgm::Vector4D::safeProject returns a non-zero vector.
  */
-TEST(Vector4DProjection, SafeProject_ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVectorInSameDirection)
+TEST(Vector4DProjection, SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
     constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
@@ -325,12 +325,12 @@ TEST(Vector4DProjection, SafeProject_MixedTypeProjectionPromotesType)
  * @test Verify that projecting a @ref fgm::Vector4D onto a zero length vector using @ref fgm::Vector4D::safeProject
  *       returns a type-promoted vector.
  */
-TYPED_TEST(Vector4DProjection, SafeProject_OntoOriginReturnsZeroVector)
+TYPED_TEST(Vector4DProjection, SafeProject_OntoZeroReturnsZeroVector)
 {
     constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector4D origin(zero, zero, zero, zero);
+    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
 
-    const fgm::Vector4D actualProjection = this->_vec.safeProject(origin);
+    const fgm::Vector4D actualProjection = this->_vec.safeProject(zeroVec);
 
     EXPECT_VEC_ZERO(actualProjection);
 }
@@ -376,7 +376,7 @@ TEST(Vector4DProjection, Static_Wrapper_SafeProject_ProjectionOntoNormalizedVect
  *       direction using static variant of @ref fgm::Vector4D::safeProject returns a non-zero vector.
  */
 TEST(Vector4DProjection,
-     Static_Wrapper_SafeProject_ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVectorInSameDirection)
+     Static_Wrapper_SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
     constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
@@ -416,7 +416,7 @@ TEST(Vector4DProjection, Static_Wrapper_SafeProject_MixedTypeProjectionPromotesT
  * @test Verify that projecting a @ref fgm::Vector4D onto a zero length vector using static variant of
  *       @ref fgm::Vector4D::safeProject returns a type-promoted vector.
  */
-TYPED_TEST(Vector4DProjection, Static_Wrapper_SafeProject_OntoOriginReturnsZeroVector)
+TYPED_TEST(Vector4DProjection, Static_Wrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
 {
     constexpr TypeParam zero = TypeParam(0);
     constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
