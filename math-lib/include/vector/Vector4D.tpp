@@ -12,7 +12,6 @@
 
 
 #include "Vector4D.h"
-#include "Vector4D.h"
 
 #include <cassert>
 #include <type_traits>
@@ -667,7 +666,7 @@ namespace fgm
 
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<Magnitude<R>>(onto.dot(onto));
-        
+
         if (ontoSquared <= Config::EPSILON<decltype(ontoSquared)>)
             return fgm::vec4d::zero<decltype(ontoSquared)>;
 
@@ -677,8 +676,9 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector4D<T>::safeProject(const Vector4D& vec, const Vector4D<U>& onto,
-        bool ontoNormalized) noexcept -> Vector4D<Magnitude<std::common_type_t<T, U>>> requires StrictArithmetic<T>
+    constexpr auto Vector4D<T>::safeProject(const Vector4D& vec, const Vector4D<U>& onto, bool ontoNormalized) noexcept
+        -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
     {
         return vec.safeProject(onto, ontoNormalized);
     }
@@ -717,6 +717,16 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         return *this - safeProject(from, ontoNormalized);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector4D<T>::safeReject(const Vector4D& vec, const Vector4D<U>& from, bool ontoNormalized) noexcept
+        -> Vector4D<std::common_type_t<T, U>>
+        requires StrictArithmetic<T>
+    {
+        return vec.safeReject(from, ontoNormalized);
     }
 
 } // namespace fgm

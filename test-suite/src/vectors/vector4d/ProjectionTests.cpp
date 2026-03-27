@@ -715,7 +715,8 @@ TEST(Vector4DRejection, SafeReject_MixedTypeRejectionPromotesType)
 
 
 /**
- * @test Verify that safely rejecting from a zero vector returns the same vector.
+ * @test Verify that safely rejecting from a zero vector using @ref fgm::Vector4D::safeReject
+ *       returns the same vector.
  */
 TYPED_TEST(Vector4DRejection, SafeReject_FromZeroVectorReturnsSameVector)
 {
@@ -723,6 +724,101 @@ TYPED_TEST(Vector4DRejection, SafeReject_FromZeroVectorReturnsSameVector)
     constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
 
     const fgm::Vector4D actualRejection = this->_vec.safeReject(zeroVec);
+
+    EXPECT_VEC_EQ(this->_vec, actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting parallel vector using static variant of @ref fgm::Vector4D::safeReject returns
+ *       a zero vector.
+ */
+TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_ParallelVectorsReturnsZeroVector)
+{
+    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::safeReject(this->_vec, this->_parallelVec);
+
+    EXPECT_VEC_ZERO(actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting a vector from an orthogonal vector using
+ *       static variant of @ref fgm::Vector4D::safeReject returns the original vector.
+ */
+TEST(Vector4DRejection, StaticWrapper_SafeReject_OrthogonalRejectionReturnsOriginalVector)
+{
+    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 0.0f);
+    constexpr fgm::Vector4D b(0.0f, 0.0f, 0.0f, 1.0f);
+
+    constexpr fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(a, b);
+
+    EXPECT_VEC_EQ(a, actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting a vector from a non-orthogonal vector using static variant of
+ *       @ref fgm::Vector4D::safeReject returns a non-zero vector with perpendicular component.
+ */
+TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
+{
+    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::safeReject(this->_vec, this->_ontoVec);
+
+    EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting from an orthogonal unit vector using static variant of
+ *       @ref fgm::Vector4D::safeReject with the @p ontoNormalized flag enabled returns a non-zero vector with
+ *       perpendicular component.
+ */
+TEST(Vector4DRejection, StaticWrapper_SafeReject_FromNormalizedVectorReturnsNonZeroVector)
+{
+    // Given an arbitrary vector and a normalized vector
+    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    constexpr fgm::Vector4D expectedRejection(0.0f, 2.0f, 3.0f, 4.0f);
+
+    // When rejected from another
+    constexpr fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(a, b, true);
+
+    // Then, the resultant vector has components perpendicular to the `from` vector.
+    EXPECT_VEC_EQ(expectedRejection, actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting a vector from another vector of different numeric type
+ *       using static variant of @ref fgm::Vector4D::safeReject returns a type-promoted vector.
+ */
+TEST(Vector4DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
+{
+    // Given two arbitrary vectors
+    constexpr fgm::Vector4D vec(7, 13, 29, 41);
+    constexpr fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
+    constexpr fgm::Vector4D expectedRejection(-6.2, -13.4, 2.6, 27.8);
+
+    // When rejected from another
+    constexpr fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(vec, onto);
+
+    // Then, the resultant vector is type promoted
+    static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
+    // and is the rejection
+    EXPECT_VEC_EQ(expectedRejection, actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting from a zero vector using static variant of @ref fgm::Vector4D::safeReject returns
+ *       the same vector.
+ */
+TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_FromZeroVectorReturnsSameVector)
+{
+    constexpr TypeParam zero = TypeParam(0);
+    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+
+    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::safeReject(this->_vec, zeroVec);
 
     EXPECT_VEC_EQ(this->_vec, actualRejection);
 }
