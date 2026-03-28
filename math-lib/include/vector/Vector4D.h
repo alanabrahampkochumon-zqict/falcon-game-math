@@ -32,10 +32,7 @@
 #include <ostream>
 
 // TODO: TryDivide, TryNormalize, TryProject, TryReject custom abs function.
-// TODO: In Safe Project, use SQUARE_EPSILON
-// TODO: Make non-safe functions for normalize, project and reject noexcept
 // TODO: Make all functions [[nodiscard]]
-// TODO: Update Test Doc guideline to use verbosity and @ref function_name only when there are variants like safeDiv, /, tryDiv etc.
 
 namespace fgm
 {

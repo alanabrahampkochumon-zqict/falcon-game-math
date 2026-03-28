@@ -225,6 +225,25 @@ TEST(Vector4DProjection, MixedTypeProjectionPromotesType)
 }
 
 
+/**
+ * @test Verify that projection using static variant of @ref fgm::Vector4D::project
+ *       always return floating-point vector.
+ */
+TYPED_TEST(Vector4DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVector)
+{
+    [[maybe_unused]] const fgm::Vector4D projection = fgm::Vector4D<float>::project(this->_vec, this->_ontoVec);
+    static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
+}
+
+
+/** @test Verify that projection using @ref fgm::Vector4D::project always return floating-point vector. */
+TYPED_TEST(Vector4DProjection, Project_AlwaysReturnFloatingPointVector)
+{
+    [[maybe_unused]] const fgm::Vector4D projection = this->_vec.project(this->_ontoVec);
+    static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
+}
+
+
 /**************************************
  *                                    *
  *        SAFE PROJECTION TESTS       *
@@ -324,7 +343,7 @@ TYPED_TEST(Vector4DProjection, SafeProject_OntoZeroReturnsZeroVector)
  * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vector4D::safeProject
  *       returns a non-zero vector.
  */
-TYPED_TEST(Vector4DProjection, Static_Wrapper_SafeProject_NonOrthogonalProjectionReturnsNonZeroVector)
+TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_NonOrthogonalProjectionReturnsNonZeroVector)
 {
     const fgm::Vector4D actualProjection = fgm::Vector4D<TypeParam>::safeProject(this->_vec, this->_ontoVec);
 
@@ -355,10 +374,10 @@ TEST(Vector4DProjection, Static_Wrapper_SafeProject_ProjectionOntoNormalizedVect
 
 
 /**
- * @test Verify that projecting a @ref fgm::Vector4D onto a non-orthogonal @ref fgm::Vector4D pointing in the opposite
- *       direction using static variant of @ref fgm::Vector4D::safeProject returns a non-zero vector.
+ * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ *       using static variant of @ref fgm::Vector4D::safeProject returns a non-zero vector.
  */
-TEST(Vector4DProjection, Static_Wrapper_SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
+TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
     constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
@@ -374,10 +393,10 @@ TEST(Vector4DProjection, Static_Wrapper_SafeProject_OntoVectorInOppositeDirectio
 
 
 /**
- * @test Verify that projecting a @ref fgm::Vector4D onto a non-orthogonal @ref fgm::Vector4D of a different numeric
- *       type using static variant of @ref fgm::Vector4D::safeProject returns a type-promoted vector.
+ * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
+ *       using static variant of @ref fgm::Vector4D::safeProject returns a type-promoted vector.
  */
-TEST(Vector4DProjection, Static_Wrapper_SafeProject_MixedTypeProjectionPromotesType)
+TEST(Vector4DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
     constexpr fgm::Vector4D vec(7, 13, 29, 41);
@@ -395,10 +414,10 @@ TEST(Vector4DProjection, Static_Wrapper_SafeProject_MixedTypeProjectionPromotesT
 
 
 /**
- * @test Verify that projecting a @ref fgm::Vector4D onto a zero length vector using static variant of
- *       @ref fgm::Vector4D::safeProject returns a type-promoted vector.
+ * @test Verify that projecting onto a zero length vector using static variant of @ref fgm::Vector4D::safeProject
+ *       returns a type-promoted vector.
  */
-TYPED_TEST(Vector4DProjection, Static_Wrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
+TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
 {
     constexpr TypeParam zero = TypeParam(0);
     constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
@@ -407,5 +426,25 @@ TYPED_TEST(Vector4DProjection, Static_Wrapper_SafeProject_OntoZeroVectorReturnsZ
 
     EXPECT_VEC_ZERO(actualProjection);
 }
+
+
+/**
+ * @test Verify that projection using static variant of @ref fgm::Vector4D::safeProject
+ *       always return floating-point vector.
+ */
+TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_AlwaysReturnFloatingPointVector)
+{
+    [[maybe_unused]] const fgm::Vector4D projection = fgm::Vector4D<float>::safeProject(this->_vec, this->_ontoVec);
+    static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
+}
+
+
+/** @test Verify that projection using @ref fgm::Vector4D::safeProject always return floating-point vector. */
+TYPED_TEST(Vector4DProjection, SafeProject_AlwaysReturnFloatingPointVector)
+{
+    [[maybe_unused]] const fgm::Vector4D projection = this->_vec.safeProject(this->_ontoVec);
+    static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
+}
+
 
 /** @} */
