@@ -4,7 +4,7 @@
  * @date Created on: March 28, 2026
  *
  * @brief Verifies @ref fgm::Vector4D normalization logic.
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -69,7 +69,7 @@ TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
-/** @test Verify that normalizing a vector using @ref fgm::safeNormalize returns a unit vector. */
+/** @test Verify that normalizing a vector using @ref fgm::Vector4D::normalize returns a unit vector. */
 TYPED_TEST(Vector4DNormalization, Normalize_NonZeroVectorReturnsUnitVector)
 {
     const fgm::Vector4D normalized = this->_vec.normalize();
@@ -78,7 +78,10 @@ TYPED_TEST(Vector4DNormalization, Normalize_NonZeroVectorReturnsUnitVector)
 }
 
 
-/** @test Verify that @ref fgm::Vector4D static wrapper normalization returns a unit vector. */
+/**
+ * @test Verify that normalizing a vector using static variant of @ref fgm::Vector4D::normalize
+ *       returns a unit vector.
+ */
 TYPED_TEST(Vector4DNormalization, StaticWrapper_Normalize_NonZeroVectorReturnsUnitVector)
 {
     const fgm::Vector4D normalized = fgm::Vector4D<TypeParam>::normalize(this->_vec);
@@ -88,8 +91,8 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_Normalize_NonZeroVectorReturnsUn
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D normalization results in a floating-point type, regardless of the
- *       component type.
+ * @test Verify that normalization a vector using @ref fgm::Vector4D::normalize
+ *       always return a floating-point vector.
  */
 TYPED_TEST(Vector4DNormalization, NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
@@ -104,7 +107,7 @@ TYPED_TEST(Vector4DNormalization, NormalizedVectorIsAlwaysTypedPromotedToFloatin
  *                                    *
  **************************************/
 
-/** @test Verify that normalizing a 4D vector using @ref fgm::Vector4D::safeNormalize returns a unit vector. */
+/** @test Verify that normalizing a vector using @ref fgm::Vector4D::safeNormalize returns a unit vector. */
 TYPED_TEST(Vector4DNormalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
 {
     const fgm::Vector4D normalized = this->_vec.safeNormalize();
@@ -113,8 +116,8 @@ TYPED_TEST(Vector4DNormalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
 
 
 /**
- * @test Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vector4D::safeNormalize returns a
- *       zero-vector.
+ * @test Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vector4D::safeNormalize
+ *       returns a zero-vector.
  */
 TEST(Vector4DNormalization, SafeNormalize_ZeroVectorCausesDeath)
 {
@@ -124,8 +127,8 @@ TEST(Vector4DNormalization, SafeNormalize_ZeroVectorCausesDeath)
 
 
 /**
- * @test Verify that the normalizing a 4D vector using @ref fgm::Vector4D::safeNormalize results in a floating-point
- *       type, regardless of the component type.
+ * @test Verify that normalization a vector using @ref fgm::Vector4D::safeNormalize always
+ *       return a floating-point vector.
  */
 TYPED_TEST(Vector4DNormalization, SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
@@ -135,8 +138,8 @@ TYPED_TEST(Vector4DNormalization, SafeNormalize_NormalizedVectorIsAlwaysTypedPro
 
 
 /**
- * @test Verify that normalizing a 4D vector using static variant of @ref fgm::Vector4D::safeNormalize returns a
- *       unit vector.
+ * @test Verify that normalizing a 4D vector using static variant of @ref fgm::Vector4D::safeNormalize
+ *       returns a unit vector.
  */
 TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorReturnsUnitVector)
 {
@@ -157,8 +160,8 @@ TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_ZeroVectorCausesDeath)
 
 
 /**
- * @test Verify that the normalizing a 4D vector using static variant of @ref fgm::Vector4D::safeNormalize results in a
- *       floating-point type, regardless of the component type.
+ * @test Verify that the normalizing a 4D vector using static variant of @ref fgm::Vector4D::safeNormalize
+ *       always return a floating-point vector.
  */
 TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
