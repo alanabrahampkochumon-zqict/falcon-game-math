@@ -605,7 +605,7 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        [[nodiscard]] constexpr Vector4D<bool>& operator&=(const Vector4D<bool>& rhs) noexcept;
+        constexpr Vector4D<bool>& operator&=(const Vector4D<bool>& rhs) noexcept;
 
 
         /**
@@ -632,7 +632,7 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        [[nodiscard]] constexpr Vector4D<bool>& operator|=(const Vector4D<bool>& rhs) noexcept;
+        constexpr Vector4D<bool>& operator|=(const Vector4D<bool>& rhs) noexcept;
 
 
         /**
@@ -693,7 +693,7 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector4D& operator+=(const Vector4D<U>& rhs) noexcept
+        constexpr Vector4D& operator+=(const Vector4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -729,7 +729,7 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector4D& operator-=(const Vector4D<U>& rhs) noexcept
+        constexpr Vector4D& operator-=(const Vector4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -776,7 +776,7 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr Vector4D& operator*=(S scalar) noexcept
+        constexpr Vector4D& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -813,7 +813,7 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr Vector4D& operator/=(S scalar) noexcept
+        constexpr Vector4D& operator/=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
