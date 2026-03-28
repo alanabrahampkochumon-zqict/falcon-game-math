@@ -97,7 +97,7 @@ class Vector4DScalarDivision: public ::testing::Test
                                T(5.61538461538461538462) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D division, parameterized by SupportedArithmeticTypes */
+/** @brief Test fixture for @ref fgm::Vector4D division, parameterized by @ref SupportedArithmeticTypes */
 TYPED_TEST_SUITE(Vector4DScalarDivision, SupportedArithmeticTypes);
 
 
@@ -114,8 +114,8 @@ class Vector4DInversion: public ::testing::Test
         _expectedInvertedVec = { T(8), T(0), T(2), T(-5) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D inversion, parameterized by SupportedArithmeticTypes */
-TYPED_TEST_SUITE(Vector4DInversion, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector4D inversion, parameterized by @ref SupportedSignedArithmeticTypes */
+TYPED_TEST_SUITE(Vector4DInversion, SupportedSignedArithmeticTypes);
 
 
 

@@ -24,3 +24,4 @@
 using SupportedTypes = ::testing::Types<unsigned char, bool, int, unsigned int, float, double, std::size_t, long long>;
 using SupportedArithmeticTypes =
     ::testing::Types<unsigned char, int, unsigned int, float, double, std::size_t, long long>;
+using SupportedSignedArithmeticTypes = ::testing::Types<short, int, float, double, long long>;

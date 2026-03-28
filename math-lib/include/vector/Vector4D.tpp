@@ -414,7 +414,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Vector4D<T> Vector4D<T>::operator-() const noexcept
-        requires StrictArithmetic<T>
+        requires SignedStrictArithmetic<T>
     {
         return Vector4D(-x, -y, -z, -w);
     }

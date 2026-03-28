@@ -31,11 +31,20 @@ namespace fgm
 
     /** @brief Validates that a type is a standard numeric primitive (integral or floating-point). */
     template <typename T>
-    concept Arithmetic = (std::integral<T> || std::floating_point<T>);
+    concept Arithmetic = std::integral<T> || std::floating_point<T>;
+
+    /**
+     * @brief Validates that a type is a signed numeric primitive (integral or floating-point) suitable for linear algebra.
+     * 
+     * @note Excludes `bool` type to ensure logical inversions remain separate from algebraic inversions.
+     */
+    template <typename T>
+    concept SignedStrictArithmetic = (std::signed_integral<T> || std::floating_point<T>) && !std::is_same_v<T, bool>;
 
 
     /**
      * @brief Enforces numeric types suitable for linear algebra by explicitly excluding bool.
+     *
      * @note Prevents logical types from participating in arithmetic operations like addition or division.
      */
     template <typename T>

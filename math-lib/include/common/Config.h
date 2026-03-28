@@ -59,8 +59,8 @@ namespace fgm
          * @brief The squared tolerance threshold for floating-point zero-state comparisons.
          *
          * @details Used primarily to safely evaluate squared vector magnitudes (e.g., dot products) against zero
-         * without incurring the performance penalty of a square root operation.
-         * Mathematically calibrated to prevent underflow when comparing squared lengths.
+         *          without incurring the performance penalty of a square root operation.
+         *          Mathematically calibrated to prevent underflow when comparing squared lengths.
          */
         template <typename T>
             requires std::floating_point<T>
