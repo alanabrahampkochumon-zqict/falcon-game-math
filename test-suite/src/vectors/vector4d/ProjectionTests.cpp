@@ -54,7 +54,7 @@ TYPED_TEST_SUITE(Vector4DProjection, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
-/** @test Verify that projecting orthogonal @ref fgm::Vector4D instances returns a zero vector. */
+/** @test Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::project returns a zero vector. */
 TYPED_TEST(Vector4DProjection, OrthogonalVectorsReturnsZeroVector)
 {
     const fgm::Vector4D actualProjection = this->_perpendicularVec.project(this->_ontoVec);
@@ -64,7 +64,7 @@ TYPED_TEST(Vector4DProjection, OrthogonalVectorsReturnsZeroVector)
 
 
 /**
- * @test Verify that projecting a @ref fgm::Vector4D onto another @ref fgm::Vector4D containing only an x-component
+ * @test Verify that projecting onto a vector parallel to x-axis using @ref fgm::Vector4D::project
  *       returns a vector containing only an x-component.
  */
 TEST(Vector4DProjection, ProjectionOntoXAxisReturnsVectorWithOnlyXComponent)

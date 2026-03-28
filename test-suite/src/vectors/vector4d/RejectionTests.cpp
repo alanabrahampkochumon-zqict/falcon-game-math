@@ -22,14 +22,14 @@ class Vector4DRejection: public ::testing::Test
     protected:
     fgm::Vector4D<T> _vec;
     fgm::Vector4D<T> _parallelVec;
-    fgm::Vector4D<T> _ontoVec;
+    fgm::Vector4D<T> _fromVec;
     fgm::Vector4D<T> _expectedRejection;
 
     void SetUp() override
     {
         _vec = { T(5), T(6), T(7), T(8) };
         _parallelVec = { T(10), T(12), T(14), T(16) };
-        _ontoVec = { T(0), T(2), T(0), T(0) };
+        _fromVec = { T(0), T(2), T(0), T(0) };
         _expectedRejection = { T(5), T(0), T(7), T(8) };
     }
 };
@@ -155,7 +155,7 @@ TEST(Vector4DRejection, OrthogonalRejectionReturnsOriginalVector)
  */
 TYPED_TEST(Vector4DRejection, NonOrthogonalRejectionReturnsNonZeroVector)
 {
-    const fgm::Vector4D actualRejection = this->_vec.reject(this->_ontoVec);
+    const fgm::Vector4D actualRejection = this->_vec.reject(this->_fromVec);
 
     EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
 }
@@ -167,7 +167,7 @@ TYPED_TEST(Vector4DRejection, NonOrthogonalRejectionReturnsNonZeroVector)
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_NonOrthogonalRejectionReturnsNonZeroVector)
 {
-    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::reject(this->_vec, this->_ontoVec);
+    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::reject(this->_vec, this->_fromVec);
 
     EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
 }
@@ -203,7 +203,7 @@ TEST(Vector4DRejection, RejectionFromVectorInOppositeDirectionReturnsVectorWithP
     constexpr fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
     constexpr fgm::Vector4D expectedRejection(4.0f, 4.0f, 0.0f, 4.0f);
 
-    // When rejection onto a vector in opposite direction
+    // When rejected from a vector in opposite direction
     constexpr fgm::Vector4D actualRejection = a.reject(negativeZAxis);
 
     // Then, the resultant vector has components perpendicular to the `from` vector in the same direction.
@@ -274,7 +274,7 @@ TEST(Vector4DRejection, SafeReject_OrthogonalRejectionReturnsOriginalVector)
  */
 TYPED_TEST(Vector4DRejection, SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
 {
-    const fgm::Vector4D actualRejection = this->_vec.safeReject(this->_ontoVec);
+    const fgm::Vector4D actualRejection = this->_vec.safeReject(this->_fromVec);
 
     EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
 }
@@ -368,7 +368,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeReject_OrthogonalRejectionReturnsOrigi
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
 {
-    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::safeReject(this->_vec, this->_ontoVec);
+    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::safeReject(this->_vec, this->_fromVec);
 
     EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
 }
