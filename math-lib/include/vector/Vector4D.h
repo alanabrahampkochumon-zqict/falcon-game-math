@@ -92,7 +92,7 @@ namespace fgm
          *************************************/
 
         /** @brief Initialize @ref fgm::Vector4D with zeros. */
-        constexpr Vector4D() noexcept;
+        [[nodiscard]] constexpr Vector4D() noexcept;
 
 
         /**
@@ -103,7 +103,7 @@ namespace fgm
          * @param[in] v3 Third entry of @ref fgm::Vector4D.
          * @param[in] v4 Fourth entry of @ref fgm::Vector4D.
          */
-        constexpr Vector4D(T v1, T v2, T v3, T v4) noexcept;
+        [[nodiscard]] constexpr Vector4D(T v1, T v2, T v3, T v4) noexcept;
 
 
         /**
@@ -112,7 +112,7 @@ namespace fgm
          * @param[in] vec1 First two entries of @ref fgm::Vector4D.
          * @param[in] vec2 Last two entries of @ref fgm::Vector4D.
          */
-        constexpr Vector4D(Vector2D<T> vec1, Vector2D<T> vec2) noexcept;
+        [[nodiscard]] constexpr Vector4D(Vector2D<T> vec1, Vector2D<T> vec2) noexcept;
 
 
         /**
@@ -121,7 +121,7 @@ namespace fgm
          * @param[in] vec First three entries of @ref fgm::Vector4D.
          * @param[in] v   Last entry for @ref fgm::Vector4D.
          */
-        constexpr Vector4D(Vector3D<T> vec, T v) noexcept;
+        [[nodiscard]] constexpr Vector4D(Vector3D<T> vec, T v) noexcept;
 
 
         /**
@@ -130,7 +130,7 @@ namespace fgm
          * @param[in] vec First three entries of @ref fgm::Vector4D.
          * @param[in] v   Last entry for @ref fgm::Vector4D.
          */
-        constexpr Vector4D(T v, Vector3D<T> vec) noexcept;
+        [[nodiscard]] constexpr Vector4D(T v, Vector3D<T> vec) noexcept;
 
 
         /**
@@ -141,7 +141,7 @@ namespace fgm
          * @param[in] other Source vector to be converted.
          */
         template <Arithmetic U>
-        constexpr Vector4D(const Vector4D<U>& other) noexcept;
+        [[nodiscard]] constexpr Vector4D(const Vector4D<U>& other) noexcept;
 
 
         /*************************************
@@ -158,7 +158,7 @@ namespace fgm
          *
          * @return Reference to the vector component.
          */
-        constexpr T& operator[](std::size_t i) noexcept;
+        [[nodiscard]] constexpr T& operator[](std::size_t i) noexcept;
 
 
         /**
@@ -168,7 +168,7 @@ namespace fgm
          *
          * @return A const reference to the vector component.
          */
-        constexpr const T& operator[](std::size_t i) const noexcept;
+        [[nodiscard]] constexpr const T& operator[](std::size_t i) const noexcept;
 
         /** @} */
 
@@ -201,10 +201,10 @@ namespace fgm
          * @return True if all components are equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        constexpr bool allEq(const Vector4D<U>& rhs,
-                             double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                 ? Config::DOUBLE_EPSILON
-                                 : Config::FLOAT_EPSILON) const noexcept;
+        [[nodiscard]] constexpr bool allEq(const Vector4D<U>& rhs,
+                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                               ? Config::DOUBLE_EPSILON
+                                               : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -221,10 +221,11 @@ namespace fgm
          * @return True if all components are equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        constexpr static bool allEq(const Vector4D& lhs, const Vector4D<U>& rhs,
-                                    double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                        ? Config::DOUBLE_EPSILON
-                                        : Config::FLOAT_EPSILON) noexcept;
+        [[nodiscard]] constexpr static bool allEq(const Vector4D& lhs, const Vector4D<U>& rhs,
+                                                  double epsilon = (std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>)
+                                                      ? Config::DOUBLE_EPSILON
+                                                      : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -243,10 +244,10 @@ namespace fgm
          * @return True if any of the components are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
-        constexpr bool allNeq(const Vector4D<U>& rhs,
-                              double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                  ? Config::DOUBLE_EPSILON
-                                  : Config::FLOAT_EPSILON) const noexcept;
+        [[nodiscard]] constexpr bool allNeq(const Vector4D<U>& rhs,
+                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                                ? Config::DOUBLE_EPSILON
+                                                : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -264,10 +265,11 @@ namespace fgm
          * @return True if any of the components are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
-        constexpr static bool allNeq(const Vector4D& lhs, const Vector4D<U>& rhs,
-                                     double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                         ? Config::DOUBLE_EPSILON
-                                         : Config::FLOAT_EPSILON) noexcept;
+        [[nodiscard]] constexpr static bool allNeq(const Vector4D& lhs, const Vector4D<U>& rhs,
+                                                   double epsilon = (std::is_same_v<T, double> ||
+                                                                     std::is_same_v<U, double>)
+                                                       ? Config::DOUBLE_EPSILON
+                                                       : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -282,7 +284,7 @@ namespace fgm
          * @return True if all components are equivalent within the default epsilon.
          */
         template <Arithmetic U>
-        constexpr bool operator==(const Vector4D<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator==(const Vector4D<U>& rhs) const noexcept;
 
 
         /**
@@ -297,7 +299,7 @@ namespace fgm
          * @return True if any of the components are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
-        constexpr bool operator!=(const Vector4D<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator!=(const Vector4D<U>& rhs) const noexcept;
 
 
         /**
@@ -315,10 +317,11 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
-        constexpr Vector4D<bool> eq(const Vector4D<U>& rhs,
-                                    double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                        ? Config::DOUBLE_EPSILON
-                                        : Config::FLOAT_EPSILON) const noexcept;
+        [[nodiscard]] constexpr Vector4D<bool> eq(const Vector4D<U>& rhs,
+                                                  double epsilon = (std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>)
+                                                      ? Config::DOUBLE_EPSILON
+                                                      : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -334,10 +337,11 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
-        constexpr static Vector4D<bool> eq(const Vector4D& lhs, const Vector4D<U>& rhs,
-                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                               ? Config::DOUBLE_EPSILON
-                                               : Config::FLOAT_EPSILON) noexcept;
+        [[nodiscard]] constexpr static Vector4D<bool> eq(const Vector4D& lhs, const Vector4D<U>& rhs,
+                                                         double epsilon = (std::is_same_v<T, double> ||
+                                                                           std::is_same_v<U, double>)
+                                                             ? Config::DOUBLE_EPSILON
+                                                             : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -355,10 +359,11 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
-        constexpr Vector4D<bool> neq(const Vector4D<U>& rhs,
-                                     double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                         ? Config::DOUBLE_EPSILON
-                                         : Config::FLOAT_EPSILON) const noexcept;
+        [[nodiscard]] constexpr Vector4D<bool> neq(const Vector4D<U>& rhs,
+                                                   double epsilon = (std::is_same_v<T, double> ||
+                                                                     std::is_same_v<U, double>)
+                                                       ? Config::DOUBLE_EPSILON
+                                                       : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -374,10 +379,11 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
-        constexpr static Vector4D<bool> neq(const Vector4D& lhs, const Vector4D<U>& rhs,
-                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                                ? Config::DOUBLE_EPSILON
-                                                : Config::FLOAT_EPSILON) noexcept;
+        [[nodiscard]] constexpr static Vector4D<bool> neq(const Vector4D& lhs, const Vector4D<U>& rhs,
+                                                          double epsilon = (std::is_same_v<T, double> ||
+                                                                            std::is_same_v<U, double>)
+                                                              ? Config::DOUBLE_EPSILON
+                                                              : Config::FLOAT_EPSILON) noexcept;
 
         /** @} */
 
@@ -405,7 +411,7 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
-        constexpr Vector4D<bool> gt(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> gt(const Vector4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -420,7 +426,7 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
-        constexpr static Vector4D<bool> gt(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] constexpr static Vector4D<bool> gt(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -435,7 +441,7 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
-        constexpr Vector4D<bool> gte(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> gte(const Vector4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -450,7 +456,7 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
-        constexpr static Vector4D<bool> gte(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] constexpr static Vector4D<bool> gte(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -459,7 +465,7 @@ namespace fgm
          *        Compare each component pair and returns a boolean mask.
          *
          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
-         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -468,7 +474,7 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
-        constexpr Vector4D<bool> lt(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> lt(const Vector4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -486,7 +492,7 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
-        constexpr static Vector4D<bool> lt(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] constexpr static Vector4D<bool> lt(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -504,7 +510,7 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
-        constexpr Vector4D<bool> lte(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> lte(const Vector4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -522,7 +528,7 @@ namespace fgm
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
-        constexpr static Vector4D<bool> lte(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] constexpr static Vector4D<bool> lte(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -532,7 +538,7 @@ namespace fgm
          * @copydoc gt(const Vector4D<U>&) const
          */
         template <StrictArithmetic U>
-        constexpr Vector4D<bool> operator>(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> operator>(const Vector4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -540,7 +546,7 @@ namespace fgm
          * @copydoc gte(const Vector4D<U>&) const
          */
         template <StrictArithmetic U>
-        constexpr Vector4D<bool> operator>=(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> operator>=(const Vector4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -548,7 +554,7 @@ namespace fgm
          * @copydoc lt(const Vector4D<U>&) const
          */
         template <StrictArithmetic U>
-        constexpr Vector4D<bool> operator<(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> operator<(const Vector4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -556,7 +562,7 @@ namespace fgm
          * @copydoc lte(const Vector4D<U>&) const
          */
         template <StrictArithmetic U>
-        constexpr Vector4D<bool> operator<=(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> operator<=(const Vector4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 #endif
 
@@ -585,7 +591,7 @@ namespace fgm
          *
          * @return A @ref Vector4D<bool> mask containing the results of component-wise AND.
          */
-        constexpr Vector4D<bool> operator&(const Vector4D<bool>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> operator&(const Vector4D<bool>& rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -599,7 +605,7 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector4D<bool>& operator&=(const Vector4D<bool>& rhs) noexcept;
+        [[nodiscard]] constexpr Vector4D<bool>& operator&=(const Vector4D<bool>& rhs) noexcept;
 
 
         /**
@@ -612,7 +618,7 @@ namespace fgm
          *
          * @return A @ref Vector4D<bool> mask containing the results of component-wise OR.
          */
-        constexpr Vector4D<bool> operator|(const Vector4D<bool>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> operator|(const Vector4D<bool>& rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -626,7 +632,7 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector4D<bool>& operator|=(const Vector4D<bool>& rhs) noexcept;
+        [[nodiscard]] constexpr Vector4D<bool>& operator|=(const Vector4D<bool>& rhs) noexcept;
 
 
         /**
@@ -637,7 +643,7 @@ namespace fgm
          *
          * @return A @ref Vector4D<bool> with inverted values.
          */
-        constexpr Vector4D<bool> operator!() const noexcept
+        [[nodiscard]] constexpr Vector4D<bool> operator!() const noexcept
             requires std::is_same_v<T, bool>;
 
         /** @} */
@@ -669,7 +675,8 @@ namespace fgm
          * @return A new @ref Vector4D containing the component-wise sum.
          */
         template <StrictArithmetic U>
-        constexpr auto operator+(const Vector4D<U>& rhs) const noexcept -> Vector4D<std::common_type_t<T, U>>
+        [[nodiscard]] constexpr auto operator+(const Vector4D<U>& rhs) const noexcept
+            -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
 
@@ -686,7 +693,7 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic U>
-        constexpr Vector4D& operator+=(const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] constexpr Vector4D& operator+=(const Vector4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -704,7 +711,8 @@ namespace fgm
          * @return A new @ref Vector4D containing the component-wise difference.
          */
         template <StrictArithmetic U>
-        constexpr auto operator-(const Vector4D<U>& rhs) const noexcept -> Vector4D<std::common_type_t<T, U>>
+        [[nodiscard]] constexpr auto operator-(const Vector4D<U>& rhs) const noexcept
+            -> Vector4D<std::common_type_t<T, U>>
             requires StrictArithmetic<T>;
 
 
@@ -721,7 +729,7 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic U>
-        constexpr Vector4D& operator-=(const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] constexpr Vector4D& operator-=(const Vector4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -733,7 +741,7 @@ namespace fgm
          *
          * @return A new @ref fgm::Vector4D with inverted components.
          */
-        constexpr Vector4D operator-() const noexcept
+        [[nodiscard]] constexpr Vector4D operator-() const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -751,7 +759,7 @@ namespace fgm
          * @return A new @ref Vector4D scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        constexpr auto operator*(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr auto operator*(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
 
@@ -768,7 +776,7 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic S>
-        constexpr Vector4D& operator*=(S scalar) noexcept
+        [[nodiscard]] constexpr Vector4D& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -787,7 +795,7 @@ namespace fgm
          * @return A new @ref Vector4D scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        constexpr auto operator/(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr auto operator/(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
 
@@ -805,7 +813,7 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic S>
-        constexpr Vector4D& operator/=(S scalar) noexcept
+        [[nodiscard]] constexpr Vector4D& operator/=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -825,7 +833,7 @@ namespace fgm
          * epsilon threshold.
          */
         template <StrictArithmetic S>
-        constexpr auto safeDiv(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr auto safeDiv(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
 
@@ -846,7 +854,8 @@ namespace fgm
          * epsilon threshold.
          */
         template <StrictArithmetic S>
-        constexpr static auto safeDiv(const Vector4D& vec, S scalar) noexcept -> Vector4D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr static auto safeDiv(const Vector4D& vec, S scalar) noexcept
+            -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -878,7 +887,7 @@ namespace fgm
          * @return The scalar dot product of the two vectors.
          */
         template <StrictArithmetic U>
-        constexpr auto dot(const Vector4D<U>& rhs) const noexcept -> std::common_type_t<T, U>
+        [[nodiscard]] constexpr auto dot(const Vector4D<U>& rhs) const noexcept -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
 
 
@@ -894,7 +903,8 @@ namespace fgm
          * @return The scalar dot product of @p lhs and @p rhs.
          */
         template <StrictArithmetic U>
-        constexpr static auto dot(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept -> std::common_type_t<T, U>
+        [[nodiscard]] constexpr static auto dot(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+            -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -921,7 +931,7 @@ namespace fgm
          *
          * @return The scalar magnitude of the vector.
          */
-        constexpr Magnitude<T> mag() const noexcept
+        [[nodiscard]] constexpr Magnitude<T> mag() const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -936,7 +946,7 @@ namespace fgm
          *
          * @return The scalar magnitude of @p vec.
          */
-        constexpr static Magnitude<T> mag(const Vector4D& vec) noexcept
+        [[nodiscard]] constexpr static Magnitude<T> mag(const Vector4D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -957,7 +967,7 @@ namespace fgm
          *
          * @return A new @ref Vector4D with a magnitude of 1.0.
          */
-        constexpr Vector4D<Magnitude<T>> normalize() const noexcept
+        [[nodiscard]] constexpr Vector4D<Magnitude<T>> normalize() const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -971,7 +981,7 @@ namespace fgm
          * @param[in] vec The vector to normalize.
          * @return A new @ref Vector4D with a magnitude of 1.0.
          */
-        constexpr static Vector4D<Magnitude<T>> normalize(const Vector4D& vec) noexcept
+        [[nodiscard]] constexpr static Vector4D<Magnitude<T>> normalize(const Vector4D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -986,7 +996,7 @@ namespace fgm
          * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          * epsilon threshold.
          */
-        constexpr Vector4D<Magnitude<T>> safeNormalize() const noexcept
+        [[nodiscard]] constexpr Vector4D<Magnitude<T>> safeNormalize() const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -997,7 +1007,7 @@ namespace fgm
          *
          * @param[in] vec The vector to be normalized.
          */
-        constexpr static Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vec) noexcept
+        [[nodiscard]] constexpr static Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vec) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1031,7 +1041,7 @@ namespace fgm
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
-        constexpr auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const noexcept
+        [[nodiscard]] constexpr auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1054,8 +1064,8 @@ namespace fgm
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
-        constexpr static auto project(const Vector4D& vec, const Vector4D<U>& onto,
-                                      bool ontoNormalized = false) noexcept
+        [[nodiscard]] constexpr static auto project(const Vector4D& vec, const Vector4D<U>& onto,
+                                                    bool ontoNormalized = false) noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1073,10 +1083,10 @@ namespace fgm
          * @param[in] onto           The vector to project onto.
          * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector..
+         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector.
          */
         template <StrictArithmetic U>
-        constexpr auto safeProject(const Vector4D<U>& onto, bool ontoNormalized = false) const noexcept
+        [[nodiscard]] constexpr auto safeProject(const Vector4D<U>& onto, bool ontoNormalized = false) const noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1099,8 +1109,8 @@ namespace fgm
          * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector.
          */
         template <StrictArithmetic U>
-        constexpr static auto safeProject(const Vector4D& vec, const Vector4D<U>& onto,
-                                          bool ontoNormalized = false) noexcept
+        [[nodiscard]] constexpr static auto safeProject(const Vector4D& vec, const Vector4D<U>& onto,
+                                                        bool ontoNormalized = false) noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1127,7 +1137,7 @@ namespace fgm
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
-        constexpr auto reject(const Vector4D<U>& from, bool fromNormalized = false) const noexcept
+        [[nodiscard]] constexpr auto reject(const Vector4D<U>& from, bool fromNormalized = false) const noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1148,8 +1158,8 @@ namespace fgm
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
-        constexpr static auto reject(const Vector4D& vector, const Vector4D<U>& from,
-                                     bool fromNormalized = false) noexcept
+        [[nodiscard]] constexpr static auto reject(const Vector4D& vector, const Vector4D<U>& from,
+                                                   bool fromNormalized = false) noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1170,7 +1180,7 @@ namespace fgm
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
-        constexpr auto safeReject(const Vector4D<U>& from, bool fromNormalized = false) const noexcept
+        [[nodiscard]] constexpr auto safeReject(const Vector4D<U>& from, bool fromNormalized = false) const noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1192,8 +1202,8 @@ namespace fgm
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
-        constexpr static auto safeReject(const Vector4D& vec, const Vector4D<U>& from,
-                                         bool fromNormalized = false) noexcept
+        [[nodiscard]] constexpr static auto safeReject(const Vector4D& vec, const Vector4D<U>& from,
+                                                       bool fromNormalized = false) noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1217,7 +1227,7 @@ namespace fgm
          *
          * @return A reference to the output stream @p os.
          */
-        constexpr friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
+        [[nodiscard]] constexpr friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
         {
             auto precision = Config::useFullPrecision
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
@@ -1258,7 +1268,8 @@ namespace fgm
      * @return A new @ref Vector4D scaled by @p scalar.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    constexpr auto operator*(S scalar, const Vector4D<T>& vector) noexcept -> Vector4D<std::common_type_t<T, S>>
+    [[nodiscard]] constexpr auto operator*(S scalar, const Vector4D<T>& vector) noexcept
+        -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>;
 
     /** @} */
@@ -1276,13 +1287,13 @@ namespace fgm
      * @{
      */
 
-    using bVec4 = Vector4D<bool>;                ///< bool vector
-    using iVec4 = Vector4D<int>;                 ///< int vector
-    using uVec4 = Vector4D<unsigned int>;        ///< unsigned int vector
-    using vec4 = Vector4D<float>;                ///< float vector
-    using lVec4 = Vector4D<long long>;           ///< long long vector
-    using dVec4 = Vector4D<double>;              ///< double vector
-    using ulVec4 = Vector4D<unsigned long long>; ///< unsigned long long vector
+    using bVec4 = Vector4D<bool>;                ///< `bool` vector
+    using iVec4 = Vector4D<int>;                 ///< `int` vector
+    using uVec4 = Vector4D<unsigned int>;        ///< `unsigned int` vector
+    using vec4 = Vector4D<float>;                ///< `float` vector
+    using lVec4 = Vector4D<long long>;           ///< `long long` vector
+    using dVec4 = Vector4D<double>;              ///< `double` vector
+    using ulVec4 = Vector4D<unsigned long long>; ///< `unsigned long long` vector
 
 
 
@@ -1306,7 +1317,7 @@ namespace fgm
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> one = Vector4D<T>(T(1), T(1), T(1), T(1));
+        [[nodiscard]] inline constexpr Vector4D<T> one = Vector4D<T>(T(1), T(1), T(1), T(1));
 
 
         /**
@@ -1315,7 +1326,7 @@ namespace fgm
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> zero =
+        [[nodiscard]] inline constexpr Vector4D<T> zero =
             Vector4D<T>(T(0), T(0), T(0), T(0)); ///< 4D-Vector with all zero-components.
 
 
@@ -1326,8 +1337,8 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector4D<T> inf = Vector4D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D),
-                                                       T(constants::INFINITY_D), T(constants::INFINITY_D));
+        [[nodiscard]] inline constexpr Vector4D<T> inf = Vector4D<T>(
+            T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D));
 
 
         /**
@@ -1337,8 +1348,8 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector4D<T> infN = Vector4D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D),
-                                                        T(-constants::INFINITY_D), T(-constants::INFINITY_D));
+        [[nodiscard]] inline constexpr Vector4D<T> infN = Vector4D<T>(
+            T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D));
 
 
         /**
@@ -1348,27 +1359,27 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector4D<T> nan =
+        [[nodiscard]] inline constexpr Vector4D<T> nan =
             Vector4D<T>(T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D));
 
 
         /** @brief A 4D unit vector aligned with the positive X-axis (1, 0, 0, 0). */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> x = Vector4D<T>(T(1), T(0), T(0), T(0));
+        [[nodiscard]] inline constexpr Vector4D<T> x = Vector4D<T>(T(1), T(0), T(0), T(0));
 
 
         /** @brief A 4D unit vector aligned with the positive Y-axis (0, 1, 0, 0). */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> y = Vector4D<T>(T(0), T(1), T(0), T(0));
+        [[nodiscard]] inline constexpr Vector4D<T> y = Vector4D<T>(T(0), T(1), T(0), T(0));
 
 
         /** @brief A 4D unit vector aligned with the positive Z-axis (0, 0, 1, 0). */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> z = Vector4D<T>(T(0), T(0), T(1), T(0));
+        [[nodiscard]] inline constexpr Vector4D<T> z = Vector4D<T>(T(0), T(0), T(1), T(0));
 
         /** @brief A 4D unit vector aligned with the positive W-axis (0, 0, 0, 1). */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> w = Vector4D<T>(T(0), T(0), T(0), T(1));
+        [[nodiscard]] inline constexpr Vector4D<T> w = Vector4D<T>(T(0), T(0), T(0), T(1));
 
 
     } // namespace vec4d

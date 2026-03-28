@@ -541,7 +541,6 @@ TYPED_TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsIn
     EXPECT_VEC_ZERO(result);
 }
 
-
 /** @} */
 
 
