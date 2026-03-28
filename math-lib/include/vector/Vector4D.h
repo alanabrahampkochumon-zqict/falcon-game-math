@@ -112,7 +112,7 @@ namespace fgm
          * @param[in] vec1 First two entries of @ref fgm::Vector4D.
          * @param[in] vec2 Last two entries of @ref fgm::Vector4D.
          */
-        [[nodiscard]] constexpr Vector4D(Vector2D<T> vec1, Vector2D<T> vec2) noexcept;
+        [[nodiscard]] constexpr Vector4D(const Vector2D<T>& vec1, const Vector2D<T>& vec2) noexcept;
 
 
         /**
@@ -121,7 +121,7 @@ namespace fgm
          * @param[in] vec First three entries of @ref fgm::Vector4D.
          * @param[in] v   Last entry for @ref fgm::Vector4D.
          */
-        [[nodiscard]] constexpr Vector4D(Vector3D<T> vec, T v) noexcept;
+        [[nodiscard]] constexpr Vector4D(const Vector3D<T>& vec, T v) noexcept;
 
 
         /**
@@ -130,7 +130,7 @@ namespace fgm
          * @param[in] vec First three entries of @ref fgm::Vector4D.
          * @param[in] v   Last entry for @ref fgm::Vector4D.
          */
-        [[nodiscard]] constexpr Vector4D(T v, Vector3D<T> vec) noexcept;
+        [[nodiscard]] constexpr Vector4D(T v, const Vector3D<T>& vec) noexcept;
 
 
         /**
