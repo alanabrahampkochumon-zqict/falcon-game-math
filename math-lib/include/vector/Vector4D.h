@@ -824,7 +824,8 @@ namespace fgm
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if dividing by a floating point zero.
+         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
@@ -843,8 +844,10 @@ namespace fgm
          *
          * @copybrief tryDiv(S) const
          *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if dividing by a floating point zero.
+         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
@@ -866,7 +869,10 @@ namespace fgm
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if dividing by a floating point zero.
+         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         *       invalidity (Division by Zero) when reporting status.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
@@ -889,7 +895,10 @@ namespace fgm
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if dividing by a floating point zero.
+         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         *       invalidity (Division by Zero) when reporting status.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *

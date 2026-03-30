@@ -12,7 +12,6 @@
 
 
 #include "Vector4D.h"
-#include "Vector4D.h"
 
 #include <cassert>
 #include <type_traits>
@@ -529,19 +528,44 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::tryDiv(S scalar,
-        OperationStatus& status) const noexcept -> Vector4D<std::common_type_t<T, S>> requires StrictArithmetic<T>
+    constexpr auto Vector4D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
+        -> Vector4D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
     {
-        scalar;
-        status;
-        return Vector4D();
+        using R = std::common_type_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            if (hasNaN() | std::isnan(scalar))
+            {
+                status = OperationStatus::NANOPERAND;
+                return fgm::vec4d::zero<R>;
+            }
+            if (std::abs(scalar) <= std::numeric_limits<S>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return fgm::vec4d::zero<R>;
+            }
+        }
+        
+        if constexpr (std::is_integral_v<R>)
+            if (scalar == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return fgm::vec4d::zero<R>;
+            }
+
+
+        status = OperationStatus::SUCCESS;
+        return (*this) / scalar;
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::tryDiv(const Vector4D& vec, S scalar,
-        OperationStatus& status) noexcept -> Vector4D<std::common_type_t<T, S>> requires StrictArithmetic<T>
+    constexpr auto Vector4D<T>::tryDiv(const Vector4D& vec, S scalar, OperationStatus& status) noexcept
+        -> Vector4D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
     {
         return vec.tryDiv(scalar, status);
     }
