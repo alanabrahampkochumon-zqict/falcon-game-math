@@ -55,6 +55,10 @@ if(ENABLE_STRICT)
         target_link_options(StrictWarnings INTERFACE 
             $<$<CONFIG:Debug>:/INCREMENTAL:NO>
         )
+        target_compile_definitions(StrictWarnings INTERFACE
+        $<$<CONFIG:Debug>:_DISABLE_VECTOR_ANNOTATION>
+        $<$<CONFIG:Debug>:_DISABLE_STRING_ANNOTATION>
+        )
     else()
         target_compile_options(StrictWarnings INTERFACE
             $<$<CONFIG:Debug>:-fsanitize=address;-fno-omit-frame-pointer>
