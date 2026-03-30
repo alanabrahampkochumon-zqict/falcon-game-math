@@ -26,6 +26,7 @@
 #include "common/Config.h"
 #include "common/Constants.h"
 #include "common/MathTraits.h"
+#include "common/OperationStatus.h"
 
 #include <cstddef>
 #include <iomanip>
@@ -830,7 +831,7 @@ namespace fgm
          * @param[in] scalar The value to divide the vector components by.
          *
          * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
-         * epsilon threshold.
+         *         epsilon threshold.
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr auto safeDiv(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
@@ -840,21 +841,67 @@ namespace fgm
         /**
          * @brief Static wrapper for safe scalar division.
          *
-         * @copybrief safeDiv(S) const
+         * @copybrief tryDiv(S) const
          *
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note Returns a zero-vector if dividing by a floating point zero.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
-         * @param[in] vec The vector to be divided.
+         * @param[in] vec The vector to divide.
          * @param[in] scalar The value to divide the vector components by.
          *
          * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
-         * epsilon threshold.
+         *         epsilon threshold.
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr static auto safeDiv(const Vector4D& vec, S scalar) noexcept
+            -> Vector4D<std::common_type_t<T, S>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely divides this vector by a scalar value and set @p status to the division operation result.
+         *        Divides each component of the vector by @p scalar and returns the newly computed vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Returns a zero-vector if dividing by a floating point zero.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] scalar  The value to divide the vector components by.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr auto tryDiv(S scalar, OperationStatus& status) const noexcept -> Vector4D<std::common_type_t<T, S>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely divides a vector by a scalar value and set @p status to the division operation result.
+         *        Divides each component of the vector by @p scalar and returns the newly computed vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Returns a zero-vector if dividing by a floating point zero.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] vec     The vector to divide.
+         * @param[in] scalar  The value to divide the vector components by.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] static constexpr auto tryDiv(const Vector4D& vec, S scalar, OperationStatus& status) noexcept
             -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
@@ -1206,6 +1253,25 @@ namespace fgm
                                                        bool fromNormalized = false) noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
+
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Vec4_Utils
+         * @{
+         */
+        
+        /**
+         * @brief Check if any component of this vector is an IEEE 754 infinity.
+         *
+         * @note Always returns false for integral types.
+         *
+         * @return True if at least one component is positive or negative infinity.
+         */
+        [[nodiscard]] constexpr bool hasInf() noexcept;
+
 
         /** @} */
 

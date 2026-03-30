@@ -12,6 +12,7 @@
 
 
 #include "Vector4D.h"
+#include "Vector4D.h"
 
 #include <cassert>
 #include <type_traits>
@@ -525,6 +526,25 @@ namespace fgm
         return vec.safeDiv(scalar);
     }
 
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector4D<T>::tryDiv(S scalar,
+        OperationStatus& status) const noexcept -> Vector4D<std::common_type_t<T, S>> requires StrictArithmetic<T>
+    {
+        scalar;
+        status;
+        return Vector4D();
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector4D<T>::tryDiv(const Vector4D& vec, S scalar,
+        OperationStatus& status) noexcept -> Vector4D<std::common_type_t<T, S>> requires StrictArithmetic<T>
+    {
+        return vec.tryDiv(scalar, status);
+    }
 
 
     /*************************************

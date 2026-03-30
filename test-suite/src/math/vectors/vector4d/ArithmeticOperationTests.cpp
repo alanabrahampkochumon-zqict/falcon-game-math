@@ -486,6 +486,12 @@ TEST(Vector4DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWit
 }
 
 
+/**************************************
+ *                                    *
+ *        SAFE DIVISION TESTS         *
+ *                                    *
+ **************************************/
+
 /**
  * @test Verify that @ref fgm::Vector4D safeDiv performs a component-wise divide and returns a
  *       new @ref fgm::Vector4D instance.
@@ -498,19 +504,18 @@ TYPED_TEST(Vector4DScalarDivision, SafeDivide_ReturnsAInverseScaledVector)
 }
 
 
-/** @test Verify that @ref fgm::Vector4D safeDiv return a zero-vector. */
-TEST(Vector4DScalarDivision, SafeDivideByIntegralZero_ReturnsZeroVector)
+/** @test Verify that @ref fgm::Vector4D safeDiv return a zero vector. */
+TYPED_TEST(Vector4DScalarDivision, SafeDivideByIntegralZero_ReturnsZeroVector)
 {
-    constexpr fgm::Vector4D vec(1, 2, 3, 4);
-    EXPECT_VEC_ZERO(vec.safeDiv(0));
+    const auto result = this->_vec.safeDiv(0);
+    EXPECT_VEC_ZERO(result);
 }
 
 
-/** @test Verify that @ref fgm::Vector4D safeDiv by floating point zero returns Infinity vector. */
-TYPED_TEST(Vector4DScalarDivision, SafeDivideByFloatZero_ReturnsInfinityVector)
+/** @test Verify that @ref fgm::Vector4D safeDiv by floating point zero returns zero vector. */
+TYPED_TEST(Vector4DScalarDivision, SafeDivideByFloatZero_ReturnsZeroVector)
 {
     const auto result = this->_vec.safeDiv(0.0f);
-
     EXPECT_VEC_ZERO(result);
 }
 
@@ -526,7 +531,7 @@ TYPED_TEST(Vector4DScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScale
 }
 
 
-/** @test Verify that the static safeDiv wrapper of @ref fgm::Vector4D returns a zero-vector. */
+/** @test Verify that the static safeDiv wrapper of @ref fgm::Vector4D returns a zero vector. */
 TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroVector)
 {
     constexpr fgm::Vector4D vec(1, 2, 3, 4);
@@ -534,12 +539,156 @@ TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZero
 }
 
 
-/** @test Verify that @ref fgm::Vector4D safeDiv by floating point zero returns Infinity vector. */
-TYPED_TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsInfinityVector)
+/** @test Verify that @ref fgm::Vector4D safeDiv by floating point zero returns zero vector. */
+TYPED_TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZeroVector)
 {
     const auto result = fgm::Vector4D<TypeParam>::safeDiv(this->_vec, 0.0f);
     EXPECT_VEC_ZERO(result);
 }
+
+
+/**************************************
+ *                                    *
+ *         TRY DIVISION TESTS         *
+ *                                    *
+ **************************************/
+
+/**
+ * @test Verify that performing scalar division on a vector using @ref fgm::Vector4D::tryDiv
+ *       returns a new instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector4DScalarDivision, TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = this->_vec.tryDiv(this->_scalar, flag);
+
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+}
+
+
+/**
+ * @test Verify that performing scalar division on a vector using @ref fgm::Vector4D::tryDiv by an integral zero
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector4DScalarDivision, TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = this->_vec.tryDiv(0, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that performing scalar division on a vector using @ref fgm::Vector4D::tryDiv by floating point zero
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector4DScalarDivision, TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = this->_vec.tryDiv(0.0, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+/**
+ * @test Verify that performing scalar division on a nan vector using @ref fgm::Vector4D::tryDiv
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector4DScalarDivision, TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::vec4d::nan<double>.tryDiv(3, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+/**
+ * @test Verify that performing scalar division on a vector using @ref fgm::Vector4D::tryDiv by nan
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TYPED_TEST(Vector4DScalarDivision, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = this->_vec.tryDiv(fgm::constants::NaN, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that performing scalar division on a vector using static variant of @ref fgm::Vector4D::tryDiv
+ *       returns a new instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector4D<TypeParam>::tryDiv(this->_vec, this->_scalar, flag);
+
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+}
+
+
+/**
+ * @test Verify that performing scalar division on a vector using static variant of @ref fgm::Vector4D::tryDiv
+ *       by an integral zero returns a zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector4D<TypeParam>::tryDiv(this->_vec, 0, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that performing scalar division on a vector using static variant of @ref fgm::Vector4D::tryDiv
+ *       by a floating point zero returns a zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector4D<TypeParam>::tryDiv(this->_vec, 0.0, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that performing scalar division on a nan vector using static variant of @ref fgm::Vector4D::tryDiv
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector4DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector4D<double>::tryDiv(fgm::vec4d::nan<double>, 3, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+/**
+ * @test Verify that performing scalar division on a vector using static variant of @ref fgm::Vector4D::tryDiv by nan
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector4D<double>::tryDiv(this->_vec,fgm::constants::NaN, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
 
 /** @} */
 
