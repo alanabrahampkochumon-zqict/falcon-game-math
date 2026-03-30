@@ -89,8 +89,20 @@ enable_testing()
 include(GoogleTest)
 gtest_discover_tests(TestSuite)
 
-source_group("Source Files\\Vectors\\Vector3D" FILES ${Vector3DTestFiles})
-source_group("Source Files\\Vectors\\Vector4D" FILES ${Vector4DTestFiles})
-source_group("Source Files\\Vectors" FILES ${VectorTestFiles}) # TODO: Remove after migration
-source_group("Source Files\\Matrices" FILES ${MatrixTestFiles})
-source_group("Source Files\\Simd" FILES ${SimdTestFiles})
+source_group (
+    TREE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/"
+    PREFIX "Source Files"
+    FILES
+    ${Vector2DTestFiles}
+    ${Vector4DTestFiles}
+    ${VectorTestFiles}
+    ${MatrixTestFiles}
+    ${SimdTestFiles}
+)
+
+# source_group("Source Files\\Vectors\\Vector3D" FILES ${Vector3DTestFiles})
+# source_group("Source Files\\Vectors\\Vector4D" FILES ${Vector4DTestFiles})
+# source_group("Source Files\\Vectors" FILES ${VectorTestFiles}) # TODO: Remove after migration
+# source_group("Source Files\\Matrices" FILES ${MatrixTestFiles})
+# source_group("Source Files\\Simd" FILES ${SimdTestFiles})
