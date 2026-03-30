@@ -770,6 +770,13 @@ namespace fgm
 
 
     template <Arithmetic T>
+    constexpr bool Vector4D<T>::hasInf(const Vector4D& vec) noexcept
+    {
+        return vec.hasInf();
+    }
+
+
+    template <Arithmetic T>
     constexpr bool Vector4D<T>::hasNaN() const noexcept
     {
         if constexpr (std::is_floating_point_v<T>)
