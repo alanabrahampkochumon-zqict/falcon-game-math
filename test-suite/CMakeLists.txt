@@ -15,22 +15,22 @@ set(SetupFiles "Vector3DTestSetup.h;Vector4DTestSetup.h;SIMDTestSetup.h;DoxygenG
 list(TRANSFORM SetupFiles PREPEND ${IncludeDirectory})
 
 # Vector Test Sources
-set(Vector4DTestDirectory "src/vectors/vector4d/")
+set(Vector4DTestDirectory "src/math/vectors/vector4d/")
 set(Vector4DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp")
 list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDirectory})
 
 # Vector Test Sources
-set(Vector3DTestDirectory "src/vectors/vector3d/")
+set(Vector3DTestDirectory "src/math/vectors/vector3d/")
 set(Vector3DTestFiles "AccessAndMutationTests.cpp;InitializationTests.cpp;")
 list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDirectory})
 
 
-set(VectorTestDirectory "src/vectors/") # TODO: Remove after migration to different test
+set(VectorTestDirectory "src/math/vectors/") # TODO: Remove after migration to different test
 set(VectorTestFiles Vector2DTests.cpp Vector3DTests.cpp)
 list(TRANSFORM VectorTestFiles PREPEND ${VectorTestDirectory})
 
 # Matrix Test Sources
-set(MatrixTestDirectory "src/matrix/")
+set(MatrixTestDirectory "src/math/matrix/")
 set(MatrixTestFiles Matrix2DTests.cpp Matrix3DTests.cpp Matrix4DTests.cpp )
 list(TRANSFORM MatrixTestFiles PREPEND ${MatrixTestDirectory})
 
