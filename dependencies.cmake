@@ -18,6 +18,8 @@ set_target_properties(
     PROPERTIES FOLDER "Google Test"
 )
 
+set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+
 if(MSVC)
     target_compile_options(gtest PRIVATE /WX- /W0)
     target_compile_options(gtest_main PRIVATE /WX- /W0)

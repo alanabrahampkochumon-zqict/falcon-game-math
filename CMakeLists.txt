@@ -55,10 +55,10 @@ if(ENABLE_STRICT)
         target_link_options(StrictWarnings INTERFACE 
             $<$<CONFIG:Debug>:/INCREMENTAL:NO>
         )
-        target_compile_definitions(StrictWarnings INTERFACE
-        $<$<CONFIG:Debug>:_DISABLE_VECTOR_ANNOTATION>
-        $<$<CONFIG:Debug>:_DISABLE_STRING_ANNOTATION>
-        )
+        # target_compile_definitions(StrictWarnings INTERFACE
+        # $<$<CONFIG:Debug>:_DISABLE_VECTOR_ANNOTATION>
+        # $<$<CONFIG:Debug>:_DISABLE_STRING_ANNOTATION>
+        # )
     else()
         target_compile_options(StrictWarnings INTERFACE
             $<$<CONFIG:Debug>:-fsanitize=address;-fno-omit-frame-pointer>
@@ -71,6 +71,12 @@ if(ENABLE_STRICT)
 endif()
 
 include(dependencies.cmake)
+if(TARGET gtest)
+    target_link_libraries(gtest PRIVATE StrictWarnings)
+    target_link_libraries(gmock PRIVATE StrictWarnings)
+    target_link_libraries(gtest_main PRIVATE StrictWarnings)
+endif()
+
 include(simdcheck.cmake)
 
 add_subdirectory(math-lib)
@@ -82,6 +88,7 @@ target_link_libraries(TestSuite PRIVATE StrictWarnings)
 target_link_libraries(FalconSIMD INTERFACE StrictWarnings)
 target_link_libraries(MathLib INTERFACE StrictWarnings)
 target_link_libraries(Playground PRIVATE StrictWarnings)
+
 
 AddSIMDCompilerFlag(TestSuite)
 
