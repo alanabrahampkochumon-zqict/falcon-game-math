@@ -46,6 +46,12 @@ TYPED_TEST_SUITE(Vector4DIntegralUtilityTests, SupportedIntegralTypes);
  * @{
  */
 
+/**************************************
+ *                                    *
+ *      INFINITY CHECKER TESTS        *
+ *                                    *
+ **************************************/
+
 /**
  * @test Verify that @ref std::Vector4D::hasInf returns True if any of components are IEE754 infinity
  *       and False otherwise.
@@ -86,6 +92,7 @@ TEST_P(Vector4DInfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity
     EXPECT_EQ(expected, fgm::Vector4D<float>::hasInf(vec));
 }
 
+
 /** @test Verify that the static variant of @ref std::Vector4D::hasInf returns False for integral types. */
 TYPED_TEST(Vector4DIntegralUtilityTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
@@ -93,6 +100,12 @@ TYPED_TEST(Vector4DIntegralUtilityTests, StaticWrapper_HasInf_ReturnsFalseForInt
     EXPECT_FALSE(fgm::Vector4D<TypeParam>::hasInf(fgm::Vector4D(value, value, value, value)));
 }
 
+
+/**************************************
+ *                                    *
+ *         NAN CHECKER TESTS          *
+ *                                    *
+ **************************************/
 
 /**
  * @test Verify that @ref std::Vector4D::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)

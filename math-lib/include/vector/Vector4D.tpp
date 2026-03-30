@@ -759,6 +759,14 @@ namespace fgm
     }
 
 
+
+
+    /**************************************
+     *                                    *
+     *             Utilities              *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     constexpr bool Vector4D<T>::hasInf() const noexcept
     {
