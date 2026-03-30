@@ -13,17 +13,21 @@
 #include <cstdint>
 
 
-// TODO: Add tests
-// TODO: Add doxygen group
 
 namespace fgm
 {
+
+    /**
+     * @addtogroup FGM_Math_Common
+     * @{
+     */
+
     /** @brief Operation status flags used for flagging exceptions and unexpected behavior. */
     enum class OperationStatus : uint8_t
     {
-        SUCCESS = 0,
-        DIVISIONBYZERO,
-        NANOPERAND
+        SUCCESS = 0,    //< Flag indicating operation success.
+        DIVISIONBYZERO, //< Flag indicating that division by zero has occured.
+        NANOPERAND      //< Flag indicating that one or more operands are NaN.
     };
 
 
@@ -48,4 +52,7 @@ namespace fgm
                 return "Failure: Unknown error";
         }
     }
+
+    /** @} */
+
 } // namespace fgm

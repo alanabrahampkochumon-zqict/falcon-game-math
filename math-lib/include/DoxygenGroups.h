@@ -103,7 +103,7 @@
      *   @defgroup FGM_Concepts Math Concepts
      * @}
      */
-
+    //TODO: Update description
     /**
      * @defgroup FGM_Math_Config Library Configuration
      * @brief Configuration used by FGM.
@@ -113,6 +113,12 @@
     /**
      * @defgroup FGM_Math_Constants Library Constants
      * @brief Constants defined in FGM.
+     * @ingroup FGM_Math
+     */
+
+    /**
+     * @defgroup FGM_Math_Common Library Utilities
+     * @brief Common utilities used by FGM.
      * @ingroup FGM_Math
      */
 
