@@ -8,6 +8,8 @@ target_compile_features(TestSuite PRIVATE cxx_std_20)
 #     $<$<CXX_COMPILER_ID:Clang>:-Wall;-Wextra;-Wpedantic;-Wno-gnu-anonymous-struct;-Werror;>
 # )
 
+# TODO: Refactor math files into math directory of src
+
 set(IncludeDirectory "include/")
 set(SetupFiles "Vector3DTestSetup.h;Vector4DTestSetup.h;SIMDTestSetup.h;DoxygenGroups.h")
 list(TRANSFORM SetupFiles PREPEND ${IncludeDirectory})
@@ -32,6 +34,10 @@ set(MatrixTestDirectory "src/matrix/")
 set(MatrixTestFiles Matrix2DTests.cpp Matrix3DTests.cpp Matrix4DTests.cpp )
 list(TRANSFORM MatrixTestFiles PREPEND ${MatrixTestDirectory})
 
+set(MathCommonDir "src/math/common/")
+set(MathCommonTestFiles "OperationStatusTests.cpp")
+list(TRANSFORM MathCommonTestFiles PREPEND ${MathCommonDir})
+
 set(UtilityDirectory "include/utils/")
 set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h")
 list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
@@ -48,6 +54,7 @@ target_sources(
         ${VectorTestFiles}
         ${MatrixTestFiles}
         ${SimdTestFiles}
+        ${MathCommonTestFiles}
     
     PRIVATE
     FILE_SET HEADERS
@@ -99,6 +106,7 @@ source_group (
     ${VectorTestFiles}
     ${MatrixTestFiles}
     ${SimdTestFiles}
+    ${MathCommonTestFiles}
 )
 
 # source_group("Source Files\\Vectors\\Vector3D" FILES ${Vector3DTestFiles})

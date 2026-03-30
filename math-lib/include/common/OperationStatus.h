@@ -16,33 +16,36 @@
 // TODO: Add tests
 // TODO: Add doxygen group
 
-/** @brief Operation status flags used for flagging exceptions and unexpected behavior. */
-enum class OperationStatus : uint8_t
+namespace fgm
 {
-    SUCCESS = 0,
-    DIVISIONBYZERO,
-    NANOPERAND
-};
-
-
-/**
- * @brief Translates @ref OperationStatus into a verbose message.
- *
- * @param[in] status The status to convert.
- *
- * @return The status message.
- */
-constexpr const char* getStatusMessage(const OperationStatus status) noexcept
-{
-    switch (status)
+    /** @brief Operation status flags used for flagging exceptions and unexpected behavior. */
+    enum class OperationStatus : uint8_t
     {
-        case OperationStatus::SUCCESS:
-            return "Operation success!";
-        case OperationStatus::DIVISIONBYZERO:
-            return "Failure: Division by Zero";
-        case OperationStatus::NANOPERAND:
-            return "Failure: NaN operand encountered.";
-        default:
-            return "Failure: Unknown error.";
+        SUCCESS = 0,
+        DIVISIONBYZERO,
+        NANOPERAND
+    };
+
+
+    /**
+     * @brief Translates @ref OperationStatus into a verbose message.
+     *
+     * @param[in] status The status to convert.
+     *
+     * @return The status message.
+     */
+    constexpr const char* getStatusMessage(const OperationStatus status) noexcept
+    {
+        switch (status)
+        {
+            case OperationStatus::SUCCESS:
+                return "Operation success!";
+            case OperationStatus::DIVISIONBYZERO:
+                return "Failure: Division by Zero";
+            case OperationStatus::NANOPERAND:
+                return "Failure: NaN operand encountered";
+            default:
+                return "Failure: Unknown error";
+        }
     }
-}
+} // namespace fgm

@@ -65,6 +65,15 @@
 
         /** @} */ // End of Vectors
 
+        /**
+         * @defgroup FGM_Common_Tests Common 
+         * @brief Test Suite for functions common used in FGM math library.
+         * @ingroup MathTests
+         * @{
+         *   @defgroup T_Op_Status Operation Status
+         * @}
+         */
+
     /** @} */ // End of VectorTests
 
     /**

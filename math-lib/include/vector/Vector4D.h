@@ -1227,7 +1227,7 @@ namespace fgm
          *
          * @return A reference to the output stream @p os.
          */
-        [[nodiscard]] constexpr friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
+        constexpr friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
         {
             auto precision = Config::useFullPrecision
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
