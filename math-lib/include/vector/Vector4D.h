@@ -1296,6 +1296,18 @@ namespace fgm
         [[nodiscard]] constexpr bool hasNaN() const noexcept;
 
 
+        /**
+         * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always returns false for integral types.
+         *
+         * @param vec The vector to evaluate for indefinite components.
+         *
+         * @return True if at least one component is NaN.
+         */
+        [[nodiscard]] constexpr static bool hasNaN(const Vector4D& vec) noexcept;
+
+
         /** @} */
 
 

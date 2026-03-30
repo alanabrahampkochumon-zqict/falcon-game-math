@@ -785,4 +785,11 @@ namespace fgm
             return false;
     }
 
+
+    template <Arithmetic T>
+    constexpr bool Vector4D<T>::hasNaN(const Vector4D& vec) noexcept
+    {
+        return vec.hasNaN();
+    }
+
 } // namespace fgm
