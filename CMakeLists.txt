@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
-project(FalconGameMath)
 
+project(FalconGameMath LANGUAGES CXX)
+
+add_library(StrictWarnings INTERFACE)
 
 # Clang Formatter
 find_program(CLANG_FORMATTER NAMES clang-format)
@@ -46,9 +48,11 @@ if(ENABLE_STRICT)
     message(STATUS "Turning on Address Sanitizer")
     if(MSVC)
         add_compile_options(/fsanitize=address)
+        target_compile_options(StrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict;/wd4201;/wd26495;/wd26439>)
     else()
         add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
         add_link_options(-fsanitize=address)
+        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer;-Wall;-Wextra;-Werror;-pedantic-errors>)
     endif()
 endif()
 
@@ -59,6 +63,11 @@ add_subdirectory(math-lib)
 add_subdirectory(playground)
 add_subdirectory(test-suite)
 add_subdirectory(simd)
+
+target_link_libraries(TestSuite PRIVATE StrictWarnings)
+target_link_libraries(FalconSIMD INTERFACE StrictWarnings)
+target_link_libraries(MathLib INTERFACE StrictWarnings)
+target_link_libraries(Playground PRIVATE StrictWarnings)
 
 AddSIMDCompilerFlag(TestSuite)
 
