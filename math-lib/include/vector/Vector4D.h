@@ -878,7 +878,8 @@ namespace fgm
          *         epsilon threshold.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr auto tryDiv(S scalar, OperationStatus& status) const noexcept -> Vector4D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr auto tryDiv(S scalar, OperationStatus& status) const noexcept
+            -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
 
@@ -1262,7 +1263,7 @@ namespace fgm
          * @addtogroup FGM_Vec4_Utils
          * @{
          */
-        
+
         /**
          * @brief Check if any component of this vector is an IEEE 754 infinity.
          *
@@ -1270,7 +1271,17 @@ namespace fgm
          *
          * @return True if at least one component is positive or negative infinity.
          */
-        [[nodiscard]] constexpr bool hasInf() noexcept;
+        [[nodiscard]] constexpr bool hasInf() const noexcept;
+
+
+        /**
+         * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always returns false for integral types.
+         *
+         * @return True if at least one component is NaN.
+         */
+        [[nodiscard]] constexpr bool hasNaN() const noexcept;
 
 
         /** @} */

@@ -758,4 +758,24 @@ namespace fgm
         return vec.safeReject(from, fromNormalized);
     }
 
+
+    template <Arithmetic T>
+    constexpr bool Vector4D<T>::hasInf() const noexcept
+    {
+        if constexpr (std::is_floating_point_v<T>)
+            return std::isinf(x) | std::isinf(y) | std::isinf(z) | std::isinf(w);
+        else
+            return false;
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Vector4D<T>::hasNaN() const noexcept
+    {
+        if constexpr (std::is_floating_point_v<T>)
+            return std::isnan(x) | std::isnan(y) | std::isnan(z) | std::isnan(w);
+        else
+            return false;
+    }
+
 } // namespace fgm
