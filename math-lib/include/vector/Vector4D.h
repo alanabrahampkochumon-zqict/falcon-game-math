@@ -33,9 +33,9 @@
 #include <ostream>
 
 // TODO: Add Nan checking for all safe Ops and update docs.
-// TODO: Add NaN precedence tests for TryNormalize.
+// TODO: Add NaN precedence tests for TryNormalize, TryProject, TryReject.
 // TODO: TryNormalize, TryProject, TryReject custom abs function.
-// TODO: Make all functions [[nodiscard]]
+// TODO: Add tests for vector.safeDiv(nan)
 
 namespace fgm
 {

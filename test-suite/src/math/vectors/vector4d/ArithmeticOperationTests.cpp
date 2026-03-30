@@ -609,8 +609,8 @@ TEST(Vector4DScalarDivision, TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectF
 
 
 /**
- * @test Verify that dividing a NaN vector by zero using @ref fgm::Vector4D::tryDiv @ref fgm::OperationStatus::NANOPERAND
- *       takes precedence over @ref fgm::OperationStatus::DIVISIONBYZERO.
+ * @test Verify that dividing a NaN vector by zero using @ref fgm::Vector4D::tryDiv @ref
+ * fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TEST(Vector4DScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
 {
@@ -691,7 +691,7 @@ TEST(Vector4DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorA
 
 
 /**
- * @test Verify that dividing a NaN vector by zero using the static variant of @ref fgm::Vector4D::tryDiv 
+ * @test Verify that dividing a NaN vector by zero using the static variant of @ref fgm::Vector4D::tryDiv
  *       @ref fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TEST(Vector4DScalarDivision, StaticWrapper_TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
@@ -709,9 +709,59 @@ TEST(Vector4DScalarDivision, StaticWrapper_TryDivideNaNVectorByZero_NaNOperandSt
 TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const auto result = fgm::Vector4D<double>::tryDiv(this->_vec,fgm::constants::NaN, flag);
+    const auto result = fgm::Vector4D<double>::tryDiv(this->_vec, fgm::constants::NaN, flag);
 
     EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**************************************
+ *                                    *
+ *         NaN DIVISION TESTS         *
+ *                                    *
+ **************************************/
+
+/** @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::safeDiv returns a zero vector. */
+TEST_P(Vector4DNaNTests, SafeDiv_ReturnsZeroVector)
+{
+    const auto& vec = GetParam();
+    EXPECT_VEC_ZERO(vec.safeDiv(3));
+}
+
+/**
+ * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector4D::safeDiv
+ *       returns a zero vector.
+ */
+TEST_P(Vector4DNaNTests, StaticWrapper_SafeDiv_ReturnsZeroVector)
+{
+    const auto& vec = GetParam();
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeDiv(vec, 3));
+}
+
+
+/** 
+ * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::try returns a zero vector 
+ *       and sets correct flag. 
+ */
+TEST_P(Vector4DNaNTests, TryDiv_ReturnsZeroVector)
+{
+    const auto& vec = GetParam();
+    fgm::OperationStatus flag;
+    EXPECT_VEC_ZERO(vec.tryDiv(3, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector4D::tryDiv
+ *       returns a zero vector and sets correct flag.
+ */
+TEST_P(Vector4DNaNTests, StaticWrapper_TryDiv_ReturnsZeroVector)
+{
+    const auto& vec = GetParam();
+    fgm::OperationStatus flag;
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryDiv(vec, 3, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
