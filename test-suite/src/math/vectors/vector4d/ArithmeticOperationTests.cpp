@@ -607,6 +607,19 @@ TEST(Vector4DScalarDivision, TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectF
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
+
+/**
+ * @test Verify that dividing a NaN vector by zero using @ref fgm::Vector4D::tryDiv @ref fgm::OperationStatus::NANOPERAND
+ *       takes precedence over @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TEST(Vector4DScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
+{
+    fgm::OperationStatus flag;
+    [[maybe_unused]] const auto result = fgm::vec4d::nan<double>.tryDiv(0, flag);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
 /**
  * @test Verify that performing scalar division on a vector using @ref fgm::Vector4D::tryDiv by nan
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
@@ -675,6 +688,19 @@ TEST(Vector4DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorA
     EXPECT_VEC_ZERO(result);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
+
+
+/**
+ * @test Verify that dividing a NaN vector by zero using the static variant of @ref fgm::Vector4D::tryDiv 
+ *       @ref fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TEST(Vector4DScalarDivision, StaticWrapper_TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
+{
+    fgm::OperationStatus flag;
+    [[maybe_unused]] const auto result = fgm::Vector4D<double>::tryDiv(fgm::vec4d::nan<double>, 0, flag);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
 
 /**
  * @test Verify that performing scalar division on a vector using static variant of @ref fgm::Vector4D::tryDiv by nan

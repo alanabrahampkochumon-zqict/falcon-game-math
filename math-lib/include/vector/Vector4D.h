@@ -32,7 +32,9 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: TryDivide, TryNormalize, TryProject, TryReject custom abs function.
+// TODO: Add Nan checking for all safe Ops and update docs.
+// TODO: Add NaN precedence tests for TryNormalize.
+// TODO: TryNormalize, TryProject, TryReject custom abs function.
 // TODO: Make all functions [[nodiscard]]
 
 namespace fgm
@@ -820,7 +822,7 @@ namespace fgm
 
         /**
          * @brief Safely divides the vector by a scalar value.
-         *        Divides each component of the vector by @p scalar and returns the newly computed vector.
+         *        Divide each component of the vector by @p scalar and returns the newly computed vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
@@ -844,7 +846,7 @@ namespace fgm
          *
          * @copybrief tryDiv(S) const
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promote the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -864,7 +866,7 @@ namespace fgm
 
 
         /**
-         * @brief Safely divides this vector by a scalar value and set @p status to the division operation result.
+         * @brief Safely divide this vector by a scalar value and set @p status to the division operation result.
          *        Divides each component of the vector by @p scalar and returns the newly computed vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
@@ -890,7 +892,7 @@ namespace fgm
 
 
         /**
-         * @brief Safely divides a vector by a scalar value and set @p status to the division operation result.
+         * @brief Safely divide a vector by a scalar value and set @p status to the division operation result.
          *        Divides each component of the vector by @p scalar and returns the newly computed vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
