@@ -43,14 +43,17 @@ endif()
 # Turn on solution folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# Enables ASan for all the projects globally.
+
 # Enables Strict Warnings and Debug-only ASan
 if(ENABLE_STRICT)
     message(STATUS "Configuring Strict Warnings (ASan enabled for Debug builds only)")
     if(MSVC)
         target_compile_options(StrictWarnings INTERFACE
-            $<$<CONFIG:Debug>:/fsanitize=address>
+            $<$<CONFIG:Debug>:/fsanitize=address;/Zi>
             $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict;/wd4201;/wd26495;/wd26439;/wd4723>
+        )
+        target_link_options(StrictWarnings INTERFACE 
+            $<$<CONFIG:Debug>:/INCREMENTAL:NO>
         )
     else()
         target_compile_options(StrictWarnings INTERFACE
