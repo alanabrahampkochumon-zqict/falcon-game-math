@@ -44,15 +44,22 @@ endif()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # Enables ASan for all the projects globally.
+# Enables Strict Warnings and Debug-only ASan
 if(ENABLE_STRICT)
-    message(STATUS "Turning on Address Sanitizer")
+    message(STATUS "Configuring Strict Warnings (ASan enabled for Debug builds only)")
     if(MSVC)
-        add_compile_options(/fsanitize=address)
-        target_compile_options(StrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict;/wd4201;/wd26495;/wd26439>)
+        target_compile_options(StrictWarnings INTERFACE
+            $<$<CONFIG:Debug>:/fsanitize=address>
+            $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict;/wd4201;/wd26495;/wd26439;/wd4723>
+        )
     else()
-        add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
-        add_link_options(-fsanitize=address)
-        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer;-Wall;-Wextra;-Werror;-pedantic-errors>)
+        target_compile_options(StrictWarnings INTERFACE
+            $<$<CONFIG:Debug>:-fsanitize=address;-fno-omit-frame-pointer>
+            $<$<COMPILE_LANGUAGE:CXX>:-Wall;-Wextra;-Werror;-pedantic-errors>
+        )
+        target_link_options(StrictWarnings INTERFACE
+            $<$<CONFIG:Debug>:-fsanitize=address>
+        )
     endif()
 endif()
 

@@ -156,6 +156,8 @@ namespace fgm
         return *this;
     }
 
+#pragma warning(push)
+#pragma warning(disable : 4723) // Suppress division by zero
     template <typename T>
     template <typename S, typename>
     Matrix2D<T> Matrix2D<T>::operator/(const S& scalar) const
@@ -163,6 +165,7 @@ namespace fgm
         T factor = T(1) / static_cast<T>(scalar);
         return factor * (*this);
     }
+#pragma warning(pop)
 
     template <typename T>
     template <typename S, typename>

@@ -280,6 +280,8 @@ namespace fgm
         return *this = (*this) * other;
     }
 
+#pragma warning(push)
+#pragma warning(disable : 4723) // Suppress division by zero
     template <typename T>
     template <typename S, typename>
     auto Matrix3D<T>::operator/(const S& scalar) const -> Matrix3D<std::common_type_t<T, S>>
@@ -288,6 +290,7 @@ namespace fgm
         R factor = R(1) / static_cast<R>(scalar);
         return Matrix3D<R>(columns[0] * factor, columns[1] * factor, columns[2] * factor);
     }
+#pragma warning(pop)
 
     template <typename T>
     template <typename S, typename>

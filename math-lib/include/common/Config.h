@@ -53,7 +53,7 @@ namespace fgm
         /** @brief The smallest positive value such that 1.0 + EPSILON != 1.0 for floating point types. */
         template <typename T>
             requires std::floating_point<T>
-        static constexpr T EPSILON = std::is_same_v<T, double> ? DOUBLE_EPSILON : FLOAT_EPSILON;
+        static constexpr double EPSILON = std::is_same_v<T, double> ? DOUBLE_EPSILON : FLOAT_EPSILON;
 
         /**
          * @brief The squared tolerance threshold for floating-point zero-state comparisons.
@@ -64,7 +64,7 @@ namespace fgm
          */
         template <typename T>
             requires std::floating_point<T>
-        static constexpr T EPSILON_SQUARE = std::is_same_v<T, double> ? 1e-24 : 1e-10;
+        static constexpr double EPSILON_SQUARE = std::is_same_v<T, double> ? 1e-24 : 1e-10;
     };
 
     /** @} */
