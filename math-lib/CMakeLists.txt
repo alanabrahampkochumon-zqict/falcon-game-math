@@ -28,14 +28,14 @@ set(CommonDirectory "${IncludeDirectory}common/")
 set(CommonFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h")
 list(TRANSFORM CommonFiles PREPEND ${CommonDirectory})
 
-set(VectorDirectory "${IncludeDirectory}/vector/")
+set(VectorDirectory "${IncludeDirectory}vector/")
 set(VectorHeaderFiles Vector3D.h Vector2D.h Vector4D.h)
 list(TRANSFORM VectorHeaderFiles PREPEND ${VectorDirectory})
 
 set(VectorTemplateDefinitionFiles Vector2D.tpp Vector3D.tpp Vector4D.tpp)
 list(TRANSFORM VectorTemplateDefinitionFiles PREPEND ${VectorDirectory})
 
-set(MatrixDirectory "${IncludeDirectory}/matrix/")
+set(MatrixDirectory "${IncludeDirectory}matrix/")
 set(MatrixHeaderFiles Matrix2D.h Matrix3D.h Matrix4D.h)
 list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
 
