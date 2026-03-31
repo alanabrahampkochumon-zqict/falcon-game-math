@@ -820,7 +820,7 @@ namespace fgm
 
 
         /**
-         * @brief Safely divides the vector by a scalar value.
+         * @brief Safely divide each component of this vector by a scalar value.
          *        Divide each component of the vector by @p scalar and returns the newly computed vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
@@ -841,9 +841,9 @@ namespace fgm
 
 
         /**
-         * @brief Static wrapper for safe scalar division.
+         * @brief Safely divide each component of a vector by a scalar value.
+         *        Divide each component of the vector by @p scalar and returns the newly computed vector.
          *
-         * @copybrief tryDiv(S) const
          *
          * @note Promote the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
@@ -1075,6 +1075,46 @@ namespace fgm
          *         epsilon threshold.
          */
         [[nodiscard]] constexpr static Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vec) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely calculate the normalized (unit) form of this vector and
+         *        set @p status to the division operation result.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @param[out] status The status flag to store the status of the current operation result.*
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector
+         *         if the original magnitude is below the epsilon threshold.
+         */
+        [[nodiscard]] constexpr Vector4D<Magnitude<T>> tryNormalize(const OperationStatus& status) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely calculate the normalized (unit) form of the vector and
+         *        set @p status to the division operation result.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @param[in] vec The vector to be normalized.
+         * @param[out] status The status flag to store the status of the current operation result.*
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector
+         *         if the original magnitude is below the epsilon threshold.
+         */
+        [[nodiscard]] constexpr static Vector4D<Magnitude<T>> tryNormalize(const Vector4D& vec,
+                                                                           const OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

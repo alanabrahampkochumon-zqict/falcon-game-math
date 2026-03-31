@@ -12,6 +12,7 @@
 
 
 #include "Vector4D.h"
+#include "Vector4D.h"
 
 #include <cassert>
 #include <type_traits>
@@ -670,6 +671,22 @@ namespace fgm
         return vec.safeNormalize();
     }
 
+
+    template <Arithmetic T>
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(const OperationStatus& status) const noexcept requires
+        StrictArithmetic<T>
+    {
+        status;
+        return Vector4D();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(const Vector4D& vec,
+        const OperationStatus& status) noexcept requires StrictArithmetic<T>
+    {
+        return vec.tryNormalize(status);
+    }
 
 
     /*************************************
