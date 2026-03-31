@@ -27,10 +27,10 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(5), T(6), T(7), T(8) };
-        _parallelVec = { T(10), T(12), T(14), T(16) };
+        _vec = { T(1), T(2), T(3), T(4) };
+        _parallelVec = { T(2), T(4), T(6), T(8) };
         _fromVec = { T(0), T(2), T(0), T(0) };
-        _expectedRejection = { T(5), T(0), T(7), T(8) };
+        _expectedRejection = { T(1), T(0), T(3), T(4) };
     }
 };
 /** @brief Test fixture for @ref fgm::Vector4D rejection, parameterized by @ref SupportedArithmeticTypes. */

@@ -94,7 +94,7 @@ target_include_directories(
 enable_testing()
 
 include(GoogleTest)
-gtest_discover_tests(TestSuite)
+gtest_discover_tests(TestSuite DISCOVERY_MODE PRE_TEST)
 
 source_group (
     TREE
