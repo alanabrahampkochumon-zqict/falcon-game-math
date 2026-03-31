@@ -656,7 +656,8 @@ namespace fgm
     {
         using R = Magnitude<T>;
         R magnitude = mag();
-
+        if (std::isnan(magnitude))
+            return fgm::vec4d::zero<R>;
         if (magnitude <= Config::EPSILON_SQUARE<R>)
             return fgm::vec4d::zero<R>;
 

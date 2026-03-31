@@ -119,10 +119,19 @@ TYPED_TEST(Vector4DNormalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
  * @test Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vector4D::safeNormalize
  *       returns a zero-vector.
  */
-TEST(Vector4DNormalization, SafeNormalize_ZeroVectorReturnsZeroVector)
+TYPED_TEST(Vector4DNormalization, SafeNormalize_ZeroVectorReturnsZeroVector)
 {
-    constexpr fgm::Vector4D vec(0.0, 0.0, 0.0, 0.0);
-    EXPECT_VEC_ZERO(vec.safeNormalize());
+    EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>.safeNormalize());
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using @ref fgm::Vector4D::safeNormalize
+ *       returns a zero-vector.
+ */
+TEST(Vector4DNormalization, SafeNormalize_NaNVectorReturnsZeroVector)
+{
+    EXPECT_VEC_ZERO(fgm::vec4d::nan<float>.safeNormalize());
 }
 
 
@@ -152,10 +161,19 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorRetur
  * @test Verify that attempting to normalize a zero-magnitude vector using static variant of
  *       @ref fgm::Vector4D::safeNormalize returns a zero-vector.
  */
-TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_ZeroVectorCausesDeath)
+TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
 {
-    constexpr fgm::Vector4D vec(0.0, 0.0, 0.0, 0.0);
-    EXPECT_VEC_ZERO(fgm::Vector4D<double>::safeNormalize(vec));
+    EXPECT_VEC_ZERO(fgm::Vector4D<double>::safeNormalize(fgm::vec4d::zero<TypeParam>));
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector4D::safeNormalize
+ *       returns a zero-vector.
+ */
+TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
+{
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeNormalize(fgm::vec4d::nan<float>));
 }
 
 
