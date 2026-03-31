@@ -239,8 +239,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector3D<T>::project(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized)
-        -> Vector3D<std::common_type_t<T, U>>
+    auto Vector3D<T>::project(const Vector3D& vector, const Vector3D<U>& onto,
+                              bool ontoNormalized) -> Vector3D<std::common_type_t<T, U>>
     {
         return vector.project(onto, ontoNormalized);
     }
@@ -261,8 +261,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector3D<T>::reject(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized)
-        -> Vector3D<std::common_type_t<T, U>>
+    auto Vector3D<T>::reject(const Vector3D& vector, const Vector3D<U>& onto,
+                             bool ontoNormalized) -> Vector3D<std::common_type_t<T, U>>
     {
         return vector.reject(onto, ontoNormalized);
     }

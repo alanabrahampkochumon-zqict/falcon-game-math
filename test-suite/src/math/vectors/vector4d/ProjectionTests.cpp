@@ -24,7 +24,7 @@ using namespace testutils;
 template <typename T>
 class Vector4DProjection: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vec;
     fgm::Vector4D<T> _perpendicularVec;
     fgm::Vector4D<T> _ontoVec;

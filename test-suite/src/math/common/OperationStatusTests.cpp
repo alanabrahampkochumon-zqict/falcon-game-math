@@ -40,11 +40,12 @@ TEST_P(OperationStatusMappingTests, ReturnsCorrectMessage)
 }
 
 
-INSTANTIATE_TEST_SUITE_P(OperationStatusMappingTestSuite, OperationStatusMappingTests,
+INSTANTIATE_TEST_SUITE_P(
+    OperationStatusMappingTestSuite, OperationStatusMappingTests,
     ::testing::Values(OperationStatusMappingParams{ fgm::OperationStatus::SUCCESS, "Operation success!" },
                       OperationStatusMappingParams{ fgm::OperationStatus::DIVISIONBYZERO, "Failure: Division by Zero" },
-                      OperationStatusMappingParams{ fgm::OperationStatus::NANOPERAND, "Failure: NaN operand encountered" },
-        OperationStatusMappingParams{ static_cast<fgm::OperationStatus>(7), "Failure: Unknown error" }
-                      ));
+                      OperationStatusMappingParams{ fgm::OperationStatus::NANOPERAND,
+                                                    "Failure: NaN operand encountered" },
+                      OperationStatusMappingParams{ static_cast<fgm::OperationStatus>(7), "Failure: Unknown error" }));
 
 /** @} */

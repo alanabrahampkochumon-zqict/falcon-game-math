@@ -34,8 +34,9 @@ namespace fgm
     concept Arithmetic = std::integral<T> || std::floating_point<T>;
 
     /**
-     * @brief Validates that a type is a signed numeric primitive (integral or floating-point) suitable for linear algebra.
-     * 
+     * @brief Validates that a type is a signed numeric primitive (integral or floating-point) suitable for linear
+     * algebra.
+     *
      * @note Excludes `bool` type to ensure logical inversions remain separate from algebraic inversions.
      */
     template <typename T>

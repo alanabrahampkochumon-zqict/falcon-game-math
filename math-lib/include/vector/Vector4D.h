@@ -859,8 +859,8 @@ namespace fgm
          *         epsilon threshold.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr static auto safeDiv(const Vector4D& vec, S scalar) noexcept
-            -> Vector4D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr static auto safeDiv(const Vector4D& vec,
+                                                    S scalar) noexcept -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
 
@@ -961,8 +961,8 @@ namespace fgm
          * @return The scalar dot product of @p lhs and @p rhs.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto dot(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
-            -> std::common_type_t<T, U>
+        [[nodiscard]] constexpr static auto dot(const Vector4D& lhs,
+                                                const Vector4D<U>& rhs) noexcept -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1428,8 +1428,8 @@ namespace fgm
      * @return A new @ref Vector4D scaled by @p scalar.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr auto operator*(S scalar, const Vector4D<T>& vector) noexcept
-        -> Vector4D<std::common_type_t<T, S>>
+    [[nodiscard]] constexpr auto operator*(S scalar,
+                                           const Vector4D<T>& vector) noexcept -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>;
 
     /** @} */

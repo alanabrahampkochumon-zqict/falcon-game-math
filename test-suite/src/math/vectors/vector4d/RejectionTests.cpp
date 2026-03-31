@@ -4,7 +4,7 @@
  * @date Created on: March 28, 2026
  *
  * @brief Verifies @ref fgm::Vector4D rejection logic.
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -19,7 +19,7 @@ using namespace testutils;
 template <typename T>
 class Vector4DRejection: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vec;
     fgm::Vector4D<T> _parallelVec;
     fgm::Vector4D<T> _fromVec;

@@ -24,7 +24,7 @@ using namespace testutils;
 template <typename T>
 class Vector4DDotProduct: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vecA;
     fgm::Vector4D<T> _vecB;
 

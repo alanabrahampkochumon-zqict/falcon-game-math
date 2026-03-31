@@ -24,7 +24,7 @@ using namespace testutils;
 template <typename T>
 class Vector4DAddition: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vecA;
     fgm::Vector4D<T> _vecB;
     fgm::Vector4D<T> _expectedSum;
@@ -43,7 +43,7 @@ TYPED_TEST_SUITE(Vector4DAddition, SupportedArithmeticTypes);
 template <typename T>
 class Vector4DSubtraction: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vecA;
     fgm::Vector4D<T> _vecB;
     fgm::Vector4D<T> _expectedDifference;
@@ -62,7 +62,7 @@ TYPED_TEST_SUITE(Vector4DSubtraction, SupportedArithmeticTypes);
 template <typename T>
 class Vector4DScalarMultiplication: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vec;
     T _scalar;
     fgm::Vector4D<T> _expectedFloatingVec;
@@ -84,7 +84,7 @@ TYPED_TEST_SUITE(Vector4DScalarMultiplication, SupportedArithmeticTypes);
 template <typename T>
 class Vector4DScalarDivision: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vec;
     T _scalar;
     fgm::Vector4D<T> _expectedScaledVec;
@@ -104,7 +104,7 @@ TYPED_TEST_SUITE(Vector4DScalarDivision, SupportedArithmeticTypes);
 template <typename T>
 class Vector4DInversion: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vec;
     fgm::Vector4D<T> _expectedInvertedVec;
 
@@ -764,9 +764,9 @@ TEST_P(Vector4DNaNTests, StaticWrapper_SafeDiv_ReturnsZeroVector)
 }
 
 
-/** 
- * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::try returns a zero vector 
- *       and sets correct flag. 
+/**
+ * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::try returns a zero vector
+ *       and sets correct flag.
  */
 TEST_P(Vector4DNaNTests, TryDiv_ReturnsZeroVector)
 {

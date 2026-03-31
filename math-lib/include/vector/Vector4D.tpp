@@ -12,7 +12,6 @@
 
 
 #include "Vector4D.h"
-#include "Vector4D.h"
 
 #include <cassert>
 #include <type_traits>
@@ -520,8 +519,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec, const S scalar) noexcept
-        -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec,
+                                        const S scalar) noexcept -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         return vec.safeDiv(scalar);
@@ -530,8 +529,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
-        -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::tryDiv(S scalar,
+                                       OperationStatus& status) const noexcept -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -565,8 +564,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::tryDiv(const Vector4D& vec, S scalar, OperationStatus& status) noexcept
-        -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::tryDiv(const Vector4D& vec, S scalar,
+                                       OperationStatus& status) noexcept -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         return vec.tryDiv(scalar, status);
@@ -674,10 +673,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(OperationStatus& status) const noexcept requires
-        StrictArithmetic<T>
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(OperationStatus& status) const noexcept
+        requires StrictArithmetic<T>
     {
-        
+
         using R = Magnitude<T>;
         R magnitude = mag();
         if (std::isnan(magnitude))
@@ -697,8 +696,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(const Vector4D& vec,
-        OperationStatus& status) noexcept requires StrictArithmetic<T>
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(const Vector4D& vec, OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
     {
         return vec.tryNormalize(status);
     }

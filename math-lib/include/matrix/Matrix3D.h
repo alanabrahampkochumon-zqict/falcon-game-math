@@ -13,13 +13,13 @@ namespace fgm
                       "Matrix3D can only be instantiated with numbers like floats, integers, etc.");
         using value_type = T;
 
-        private:
+    private:
         union {
             T elements[3][3];
             Vector3D<T> columns[3];
         };
 
-        public:
+    public:
         Matrix3D();
         Matrix3D(T v_0_0, T v_0_1, T v_0_2, T v_1_0, T v_1_1, T v_1_2, T v_2_0, T v_2_1, T v_2_2);
         Matrix3D(Vector3D<T> col0, Vector3D<T> col1, Vector3D<T> col2);

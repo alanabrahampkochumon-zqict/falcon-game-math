@@ -13,8 +13,8 @@
  */
 
 
-#include <common/MathTraits.h>
 #include <cmath>
+#include <common/MathTraits.h>
 #include <gtest/gtest.h>
 #include <type_traits>
 #include <vector/Vector2D.h>
@@ -282,7 +282,7 @@ namespace testutils
             EXPECT_TRUE(std::isinf((vec).x) && std::signbit((vec).x)); \
             EXPECT_TRUE(std::isinf((vec).y) && std::signbit((vec).y)); \
             EXPECT_TRUE(std::isinf((vec).z) && std::signbit((vec).z)); \
-            EXPECT_TRUE(std::isinf((vec).w) && std::signbit((vec).w)); 
+            EXPECT_TRUE(std::isinf((vec).w) && std::signbit((vec).w));
     // clang-format on
 
     /** @} */

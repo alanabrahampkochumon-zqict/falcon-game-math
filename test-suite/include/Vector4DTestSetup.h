@@ -25,7 +25,8 @@ using SupportedTypes = ::testing::Types<unsigned char, bool, int, unsigned int, 
 using SupportedArithmeticTypes =
     ::testing::Types<unsigned char, int, unsigned int, float, double, std::size_t, long long>;
 using SupportedSignedArithmeticTypes = ::testing::Types<short, int, float, double, long long>;
-using SupportedIntegralTypes = ::testing::Types<int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t, int64_t, uint64_t>;
+using SupportedIntegralTypes =
+    ::testing::Types<int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t, int64_t, uint64_t>;
 
 
 /** @brief Test fixture for @fgm::Vector4D NaN tests */

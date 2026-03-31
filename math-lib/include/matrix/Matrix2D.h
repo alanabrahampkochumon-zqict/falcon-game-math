@@ -14,13 +14,13 @@ namespace fgm
 
         using value_type = T;
 
-        private:
+    private:
         union {
             Vector2D<T> columns[2];
             T elements[2][2];
         };
 
-        public:
+    public:
         Matrix2D();
         Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1);
         Matrix2D(Vector2D<T> col0, Vector2D<T> col1);

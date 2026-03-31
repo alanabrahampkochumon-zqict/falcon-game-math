@@ -27,7 +27,7 @@ class Vector4DNormalization: public ::testing::Test
 {
     using R = fgm::Magnitude<T>;
 
-    protected:
+protected:
     fgm::Vector4D<T> _vec;
     fgm::Vector4D<R> _expectedUnitVec;
 
@@ -45,7 +45,7 @@ TYPED_TEST_SUITE(Vector4DNormalization, SupportedArithmeticTypes);
 template <typename T>
 class Vector4DZeroNormalization: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vec;
 
     void SetUp() override

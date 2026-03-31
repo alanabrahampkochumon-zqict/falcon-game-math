@@ -175,8 +175,8 @@ namespace fgm
          * @return Projected vector.
          */
         template <Arithmetic U>
-        static auto project(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized = false)
-            -> Vector3D<std::common_type_t<T, U>>;
+        static auto project(const Vector3D& vector, const Vector3D<U>& onto,
+                            bool ontoNormalized = false) -> Vector3D<std::common_type_t<T, U>>;
 
 
         /*************************************
@@ -206,8 +206,8 @@ namespace fgm
          * @return Projected vector.
          */
         template <Arithmetic U>
-        static auto reject(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized = false)
-            -> Vector3D<std::common_type_t<T, U>>;
+        static auto reject(const Vector3D& vector, const Vector3D<U>& onto,
+                           bool ontoNormalized = false) -> Vector3D<std::common_type_t<T, U>>;
     };
 
     /*************************************

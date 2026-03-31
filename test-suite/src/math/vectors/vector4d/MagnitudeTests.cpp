@@ -24,7 +24,7 @@ using namespace testutils;
 template <typename T>
 class Vector4DMagnitude: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vec;
     fgm::Magnitude<T> _expectedMagnitude;
 
@@ -41,7 +41,7 @@ TYPED_TEST_SUITE(Vector4DMagnitude, SupportedArithmeticTypes);
 template <typename T>
 class Vector4DUncleanMagnitude: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vec;
     fgm::Magnitude<T> _expectedMagnitude;
 
@@ -121,7 +121,7 @@ TYPED_TEST(Vector4DUncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMin
 }
 
 
-/** 
+/**
  * @test Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vector4D::mag
  *       ensure minimal precision loss.
  */

@@ -23,7 +23,7 @@ using namespace testutils;
 template <typename T>
 class Vector4DEquality: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _eqVecA;
     fgm::Vector4D<T> _eqVecB;
     fgm::Vector4D<T> _dissimilarVec;
@@ -108,8 +108,7 @@ TEST(Vector4DEquality, NanEqualityReturnsFalse)
 /** @test Verify @ref fgm::Vector4D::allEq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector4DEquality, InfinityEquality_IdenticalVectorsReturnsTrue)
 {
-    constexpr fgm::Vector4D vecA = { 
-        INF, -INF, INF, -INF };
+    constexpr fgm::Vector4D vecA = { INF, -INF, INF, -INF };
     constexpr fgm::Vector4D vecB = { INF, -INF, INF, -INF };
 
     constexpr bool equality = vecA.allEq(vecB);

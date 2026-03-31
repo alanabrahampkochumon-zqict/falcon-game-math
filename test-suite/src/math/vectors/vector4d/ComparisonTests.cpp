@@ -11,6 +11,7 @@
 
 
 #include "Vector4DTestSetup.h"
+
 #include <common/Constants.h>
 
 using namespace testutils;
@@ -29,7 +30,7 @@ constexpr auto INF = fgm::constants::INFINITY_F;
 template <typename T>
 class Vector4DComparison: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<T> _vecA;
     fgm::Vector4D<T> _vecB;
     fgm::bVec4 _expectedGT, _expectedGTE, _expectedLT,

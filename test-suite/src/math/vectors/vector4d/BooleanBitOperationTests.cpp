@@ -24,7 +24,7 @@ using namespace testutils;
 /** @brief Test fixture for @ref Vector4D<bool> bitwise operations */
 class BooleanVectorBitOperations: public ::testing::Test
 {
-    protected:
+protected:
     fgm::Vector4D<bool> _vecA;
     fgm::Vector4D<bool> _vecB;
     fgm::Vector4D<bool> _expectedConjunctionVector;

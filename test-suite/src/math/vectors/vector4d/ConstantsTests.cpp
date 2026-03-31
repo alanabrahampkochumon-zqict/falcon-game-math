@@ -4,7 +4,7 @@
  * @date Created on: March 24, 2026
  *
  * @brief Verifies @ref fgm::Vector4D constants (@ref fgm::Vector4D::one, @ref fgm::Vector4D::zero, etc).
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
