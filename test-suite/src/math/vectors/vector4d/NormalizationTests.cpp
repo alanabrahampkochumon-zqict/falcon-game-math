@@ -190,7 +190,7 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_NormalizedVectorIs
 
 /**************************************
  *                                    *
- *     SAFE NORMALIZATION TESTS       *
+ *      TRY NORMALIZATION TESTS       *
  *                                    *
  **************************************/
 

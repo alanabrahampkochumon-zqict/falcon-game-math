@@ -250,7 +250,6 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVe
  *                                    *
  **************************************/
 
-
 /**
  * @test Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::safeProject
  *       returns a zero vector.
@@ -355,7 +354,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_NonOrthogonalProjection
  * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::safeProject with the @p ontoNormalized flag enabled returns a non-zero vector.
  */
-TEST(Vector4DProjection, Static_Wrapper_SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
+TEST(Vector4DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
     constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
@@ -443,6 +442,244 @@ TYPED_TEST(Vector4DProjection, SafeProject_AlwaysReturnFloatingPointVector)
 TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vector4D projection = fgm::Vector4D<float>::safeProject(this->_vec, this->_ontoVec);
+    static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
+}
+
+
+/**************************************
+ *                                    *
+ *         TRY PROJECTION TESTS       *
+ *                                    *
+ **************************************/
+
+/**
+ * @test Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::tryProject
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector4DProjection, TryProject_NonOrthogonalProjectionReturnsNonZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const fgm::Vector4D actualProjection = this->_vec.tryProject(this->_ontoVec, flag);
+
+    EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+/**
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::tryProject with the
+ *       @p ontoNormalized flag enabled returns a non-zero vector and
+ *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+    // When the vector is projected onto the normalized vector
+    const fgm::Vector4D actualProjection = a.tryProject(b, flag, true);
+
+    // Then, the resultant vector has components that is parallel to the projected vector
+    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
+    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
+    EXPECT_FLOAT_EQ(expectedProjection.z, actualProjection.z);
+    EXPECT_FLOAT_EQ(expectedProjection.w, actualProjection.w);
+    // And sets the flag to SUCCESS
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ *       using @ref fgm::Vector4D::tryProject returns a non-zero vector
+ *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DProjection, TryProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
+{
+    // Given an arbitrary vector and a vector in the opposite Direction
+    constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
+    constexpr fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
+    constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+    // When projected
+    const fgm::Vector4D<float> actualProjection = a.tryProject(negativeZAxis, flag);
+
+    // Then, the resultant vector is non-zero and in the same direction
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
+    // And sets the flag to SUCCESS
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
+ *       using @ref fgm::Vector4D::tryProject returns a type-promoted vector
+ *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DProjection, TryProject_MixedTypeProjectionPromotesType)
+{
+    // Given two arbitrary vectors
+    constexpr fgm::Vector4D vec(7, 13, 29, 41);
+    constexpr fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
+    constexpr fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
+    fgm::OperationStatus flag;
+
+    // When projected onto another
+    const fgm::Vector4D actualProjection = vec.tryProject(onto, flag);
+
+    // Then, the resultant vector is type promoted
+    static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
+    // and is the projection
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
+    // And sets the flag to SUCCESS
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that projecting onto a zero length vector using @ref fgm::Vector4D::tryProject
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector4DProjection, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
+{
+    constexpr TypeParam zero = TypeParam(0);
+    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    fgm::OperationStatus flag;
+
+
+    const fgm::Vector4D actualProjection = this->_vec.tryProject(zeroVec, flag);
+
+    EXPECT_VEC_ZERO(actualProjection);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vector4D::tryProject
+ *       returns a non-zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_NonOrthogonalProjectionReturnsNonZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const fgm::Vector4D actualProjection = fgm::Vector4D<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
+
+    EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
+ *       @ref fgm::Vector4D::tryProject with the @p ontoNormalized flag enabled returns a non-zero vector
+ *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DProjection, StaticWrapper_TryProject_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+    // When the vector is projected onto the normalized vector
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::tryProject(a, b, flag, true);
+
+    // Then, the resultant vector has components that is parallel to the projected vector
+    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
+    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
+    EXPECT_FLOAT_EQ(expectedProjection.z, actualProjection.z);
+    EXPECT_FLOAT_EQ(expectedProjection.w, actualProjection.w);
+    // And sets the flag to SUCCESS
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ *       using static variant of @ref fgm::Vector4D::tryProject returns a non-zero vector
+ *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DProjection,
+     StaticWrapper_TryProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
+{
+    // Given an arbitrary vector and a vector in the opposite Direction
+    constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
+    constexpr fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
+    constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+    // When projected
+    const fgm::Vector4D<float> actualProjection = fgm::Vector4D<float>::tryProject(a, negativeZAxis, flag);
+
+    // Then, the resultant vector is non-zero and in the same direction
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
+    // And sets the flag to SUCCESS
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
+ *       using static variant of @ref fgm::Vector4D::tryProject returns a type-promoted vector
+ *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTypeAndSetsCorrectFlag)
+{
+    // Given two arbitrary vectors
+    constexpr fgm::Vector4D vec(7, 13, 29, 41);
+    constexpr fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
+    constexpr fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
+    fgm::OperationStatus flag;
+
+    // When projected onto another
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::tryProject(vec, onto, flag);
+
+    // Then, the resultant vector is type promoted
+    static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
+    // and is the projection
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
+    // And sets the flag to SUCCESS
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that projecting onto a zero length vector using static variant of @ref fgm::Vector4D::tryProject
+ *       returns a type-promoted vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    constexpr TypeParam zero = TypeParam(0);
+    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    fgm::OperationStatus flag;
+
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::tryProject(this->_vec, zeroVec, flag);
+
+    EXPECT_VEC_ZERO(actualProjection);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/** @test Verify that projection using @ref fgm::Vector4D::tryProject always return floating-point vector. */
+TYPED_TEST(Vector4DProjection, SafeProject_AlwaysReturnFloatingPointVectorAndSetsCorrectFlag)
+{
+    [[maybe_unused]] fgm::OperationStatus flag;
+    [[maybe_unused]] const fgm::Vector4D projection = this->_vec.tryProject(this->_ontoVec, flag);
+    static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
+}
+
+
+/**
+ * @test Verify that projection using static variant of @ref fgm::Vector4D::tryProject
+ *       always return floating-point vector.
+ */
+TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_AlwaysReturnFloatingPointVector)
+{
+    [[maybe_unused]] fgm::OperationStatus flag;
+    [[maybe_unused]] const fgm::Vector4D projection =
+        fgm::Vector4D<float>::tryProject(this->_vec, this->_ontoVec, flag);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 

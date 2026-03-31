@@ -32,7 +32,8 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: Add Nan checking for all safe Ops and update docs.
+// TODO: Add NaN returning zerovec to docs of safeDiv, safeNormalize, safeProject and safeReject, and their
+// normalization variants.
 // TODO: Add NaN precedence tests for TryNormalize, TryProject, TryReject.
 // TODO: TryNormalize, TryProject, TryReject custom abs function.
 
@@ -859,8 +860,8 @@ namespace fgm
          *         epsilon threshold.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr static auto safeDiv(const Vector4D& vec,
-                                                    S scalar) noexcept -> Vector4D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr static auto safeDiv(const Vector4D& vec, S scalar) noexcept
+            -> Vector4D<std::common_type_t<T, S>>
             requires StrictArithmetic<T>;
 
 
@@ -961,8 +962,8 @@ namespace fgm
          * @return The scalar dot product of @p lhs and @p rhs.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto dot(const Vector4D& lhs,
-                                                const Vector4D<U>& rhs) noexcept -> std::common_type_t<T, U>
+        [[nodiscard]] constexpr static auto dot(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+            -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1080,7 +1081,7 @@ namespace fgm
 
         /**
          * @brief Safely calculate the normalized (unit) form of this vector and
-         *        set @p status to the division operation result.
+         *        set @p status to the normalization operation result.
          *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
          *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
@@ -1099,7 +1100,7 @@ namespace fgm
 
         /**
          * @brief Safely calculate the normalized (unit) form of the vector and
-         *        set @p status to the division operation result.
+         *        set @p status to the normalization operation result.
          *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
          *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
@@ -1218,6 +1219,58 @@ namespace fgm
         template <StrictArithmetic U>
         [[nodiscard]] constexpr static auto safeProject(const Vector4D& vec, const Vector4D<U>& onto,
                                                         bool ontoNormalized = false) noexcept
+            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project this vector onto another vector and set @p status to the projection operation result.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] onto           The vector to project onto.
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
+         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
+         *         vector has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto tryProject(const Vector4D<U>& onto, OperationStatus& status,
+                                                bool ontoNormalized = false) const noexcept
+            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project a vector onto another vector and set @p status to the projection operation result.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Static wrapper for safe projection.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to project.
+         * @param[in] onto           The vector to project onto.
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
+         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
+         *         vector has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static auto tryProject(const Vector4D& vec, const Vector4D<U>& onto,
+                                                       OperationStatus& status, bool ontoNormalized = false) noexcept
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
@@ -1428,8 +1481,8 @@ namespace fgm
      * @return A new @ref Vector4D scaled by @p scalar.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr auto operator*(S scalar,
-                                           const Vector4D<T>& vector) noexcept -> Vector4D<std::common_type_t<T, S>>
+    [[nodiscard]] constexpr auto operator*(S scalar, const Vector4D<T>& vector) noexcept
+        -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>;
 
     /** @} */

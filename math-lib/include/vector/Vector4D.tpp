@@ -766,6 +766,50 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector4D<T>::tryProject(const Vector4D<U>& onto,
+        OperationStatus& status, const bool ontoNormalized) const noexcept -> Vector4D<Magnitude<std::common_type_t<T, U>>> requires
+        StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        using MagType = Magnitude<R>;
+
+        /** @note Static cast ensures integral type dots don't lose much precision */
+        const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
+
+        if (hasNaN() | std::isnan(ontoSquared))
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec4d::zero<MagType>;
+        }
+
+        if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
+        {
+            status = OperationStatus::DIVISIONBYZERO;
+            return fgm::vec4d::zero<MagType>;
+        }
+
+        if (ontoNormalized)
+        {
+            status = OperationStatus::SUCCESS;
+            return this->dot(onto) * onto;
+        }
+
+        status = OperationStatus::SUCCESS;
+        return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector4D<T>::tryProject(const Vector4D& vec, const Vector4D<U>& onto,
+        OperationStatus& status, const bool ontoNormalized) noexcept -> Vector4D<Magnitude<std::common_type_t<T, U>>> requires StrictArithmetic<T>
+    {
+        return vec.tryProject(onto, status, ontoNormalized);
+    }
+
+
 
     /*************************************
      *                                   *
@@ -813,7 +857,6 @@ namespace fgm
     {
         return vec.safeReject(from, fromNormalized);
     }
-
 
 
 
