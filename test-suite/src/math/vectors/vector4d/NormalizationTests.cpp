@@ -57,6 +57,15 @@ protected:
 TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);
 
 
+INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNaNTests,
+                         ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
+                                           fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
+                                           fgm::Vector4D<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
+                                           fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, fgm ::constants::NaN),
+                                           fgm::Vector4D<float>(fgm ::constants::NaN, fgm ::constants::NaN,
+                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
+
+
 
 /**
  * @addtogroup T_FGM_Vec4_Normalize

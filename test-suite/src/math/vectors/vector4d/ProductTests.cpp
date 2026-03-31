@@ -51,7 +51,6 @@ TYPED_TEST_SUITE(Vector4DDotProduct, SupportedArithmeticTypes);
 
 
 
-
 /**
  * @addtogroup T_FGM_Vec4_Dot
  * @{

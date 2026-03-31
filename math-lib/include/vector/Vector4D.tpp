@@ -872,7 +872,13 @@ namespace fgm
         -> Vector4D<Magnitude<std::common_type_t<T, U>>>
         requires StrictArithmetic<T>
     {
-        return *this - tryProject(from, status, fromNormalized);
+        if (hasNaN())
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec4d::zero<std::common_type_t<T, U>>;
+        }
+
+        return *this - this->tryProject(from, status, fromNormalized);
     }
 
 

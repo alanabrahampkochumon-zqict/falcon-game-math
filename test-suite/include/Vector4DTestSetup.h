@@ -32,10 +32,3 @@ using SupportedIntegralTypes =
 /** @brief Test fixture for @fgm::Vector4D NaN tests */
 class Vector4DNaNTests: public ::testing::TestWithParam<fgm::Vector4D<float>>
 {};
-INSTANTIATE_TEST_SUITE_P(Vector4DNaNTestSuite, Vector4DNaNTests,
-                         ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
-                                           fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
-                                           fgm::Vector4D<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
-                                           fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, fgm ::constants::NaN),
-                                           fgm::Vector4D<float>(fgm ::constants::NaN, fgm ::constants::NaN,
-                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
