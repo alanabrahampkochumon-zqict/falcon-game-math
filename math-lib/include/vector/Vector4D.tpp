@@ -748,6 +748,9 @@ namespace fgm
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
+        if (hasNaN() | std::isnan(ontoSquared))
+            return fgm::vec4d::zero<MagType>;
+        
         if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
             return fgm::vec4d::zero<MagType>;
 
@@ -775,6 +778,12 @@ namespace fgm
         using R = std::common_type_t<T, U>;
         using MagType = Magnitude<R>;
 
+         if (ontoNormalized)
+        {
+            status = OperationStatus::SUCCESS;
+            return this->dot(onto) * onto;
+        }
+
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
@@ -788,12 +797,6 @@ namespace fgm
         {
             status = OperationStatus::DIVISIONBYZERO;
             return fgm::vec4d::zero<MagType>;
-        }
-
-        if (ontoNormalized)
-        {
-            status = OperationStatus::SUCCESS;
-            return this->dot(onto) * onto;
         }
 
         status = OperationStatus::SUCCESS;

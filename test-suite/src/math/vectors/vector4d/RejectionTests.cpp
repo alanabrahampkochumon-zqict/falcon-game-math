@@ -280,7 +280,7 @@ TEST(Vector4DRejection, SafeReject_OrthogonalRejectionReturnsOriginalVector)
     constexpr fgm::Vector4D b(0.0f, 0.0f, 0.0f, 1.0f);
 
     // When rejected from an orthogonal vector
-    constexpr fgm::Vector4D actualRejection = a.safeReject(b);
+    const fgm::Vector4D actualRejection = a.safeReject(b);
 
     // Then, the resultant is same the original vector
     EXPECT_VEC_EQ(a, actualRejection);
@@ -330,7 +330,7 @@ TEST(Vector4DRejection, SafeReject_MixedTypeRejectionPromotesType)
     constexpr fgm::Vector4D expectedRejection(-6.2, -13.4, 2.6, 27.8);
 
     // When rejected from another
-    constexpr fgm::Vector4D actualRejection = vec.safeReject(from);
+    const fgm::Vector4D actualRejection = vec.safeReject(from);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
@@ -375,7 +375,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeReject_OrthogonalRejectionReturnsOrigi
     constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 0.0f);
     constexpr fgm::Vector4D b(0.0f, 0.0f, 0.0f, 1.0f);
 
-    constexpr fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(a, b);
+    const fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(a, b);
 
     EXPECT_VEC_EQ(a, actualRejection);
 }
@@ -425,7 +425,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
     constexpr fgm::Vector4D expectedRejection(-6.2, -13.4, 2.6, 27.8);
 
     // When rejected from another
-    constexpr fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(vec, from);
+    const fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(vec, from);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
