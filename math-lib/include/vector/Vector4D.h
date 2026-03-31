@@ -1530,7 +1530,7 @@ namespace fgm
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        [[nodiscard]] inline constexpr Vector4D<T> one = Vector4D<T>(T(1), T(1), T(1), T(1));
+        inline constexpr Vector4D<T> one = Vector4D<T>(T(1), T(1), T(1), T(1));
 
 
         /**
@@ -1539,7 +1539,7 @@ namespace fgm
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        [[nodiscard]] inline constexpr Vector4D<T> zero =
+        inline constexpr Vector4D<T> zero =
             Vector4D<T>(T(0), T(0), T(0), T(0)); ///< 4D-Vector with all zero-components.
 
 
@@ -1550,8 +1550,8 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        [[nodiscard]] inline constexpr Vector4D<T> inf = Vector4D<T>(
-            T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D));
+        inline constexpr Vector4D<T> inf = Vector4D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D),
+                                                       T(constants::INFINITY_D), T(constants::INFINITY_D));
 
 
         /**
@@ -1561,8 +1561,8 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        [[nodiscard]] inline constexpr Vector4D<T> infN = Vector4D<T>(
-            T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D));
+        inline constexpr Vector4D<T> infN = Vector4D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D),
+                                                        T(-constants::INFINITY_D), T(-constants::INFINITY_D));
 
 
         /**
@@ -1572,27 +1572,27 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        [[nodiscard]] inline constexpr Vector4D<T> nan =
+        inline constexpr Vector4D<T> nan =
             Vector4D<T>(T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D));
 
 
         /** @brief A 4D unit vector aligned with the positive X-axis (1, 0, 0, 0). */
         template <StrictArithmetic T>
-        [[nodiscard]] inline constexpr Vector4D<T> x = Vector4D<T>(T(1), T(0), T(0), T(0));
+        inline constexpr Vector4D<T> x = Vector4D<T>(T(1), T(0), T(0), T(0));
 
 
         /** @brief A 4D unit vector aligned with the positive Y-axis (0, 1, 0, 0). */
         template <StrictArithmetic T>
-        [[nodiscard]] inline constexpr Vector4D<T> y = Vector4D<T>(T(0), T(1), T(0), T(0));
+        inline constexpr Vector4D<T> y = Vector4D<T>(T(0), T(1), T(0), T(0));
 
 
         /** @brief A 4D unit vector aligned with the positive Z-axis (0, 0, 1, 0). */
         template <StrictArithmetic T>
-        [[nodiscard]] inline constexpr Vector4D<T> z = Vector4D<T>(T(0), T(0), T(1), T(0));
+        inline constexpr Vector4D<T> z = Vector4D<T>(T(0), T(0), T(1), T(0));
 
         /** @brief A 4D unit vector aligned with the positive W-axis (0, 0, 0, 1). */
         template <StrictArithmetic T>
-        [[nodiscard]] inline constexpr Vector4D<T> w = Vector4D<T>(T(0), T(0), T(0), T(1));
+        inline constexpr Vector4D<T> w = Vector4D<T>(T(0), T(0), T(0), T(1));
 
 
     } // namespace vec4d
