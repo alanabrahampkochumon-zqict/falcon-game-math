@@ -35,7 +35,6 @@
 // TODO: Add Nan checking for all safe Ops and update docs.
 // TODO: Add NaN precedence tests for TryNormalize, TryProject, TryReject.
 // TODO: TryNormalize, TryProject, TryReject custom abs function.
-// TODO: Add tests for vector.safeDiv(nan)
 
 namespace fgm
 {
@@ -1016,12 +1015,13 @@ namespace fgm
          *************************************/
 
         /**
-         * @brief Calculate the normalized (unit) form of the vector.
+         * @brief Calculate the normalized (unit) form of this vector.
          *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
-         * \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         *
          * @warning Does not check for zero-length vectors. @ref mag() must be non-zero.
          *
          * @return A new @ref Vector4D with a magnitude of 1.0.
@@ -1031,13 +1031,15 @@ namespace fgm
 
 
         /**
-         * @brief @copybrief normalize() const
-         * Static wrapper that compute the unit vector \f$ \mathbf{\hat{v}} \f$.
+         * @brief Calculate the normalized (unit) form of the vector.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
          * @param[in] vec The vector to normalize.
+         *
          * @return A new @ref Vector4D with a magnitude of 1.0.
          */
         [[nodiscard]] constexpr static Vector4D<Magnitude<T>> normalize(const Vector4D& vec) noexcept
@@ -1045,26 +1047,32 @@ namespace fgm
 
 
         /**
-         * @brief Safely calculate the normalized (unit) form of the vector.
+         * @brief Safely calculate the normalized (unit) form of this vector.
          *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
-         * \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
          * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
-         * epsilon threshold.
+         *         epsilon threshold.
          */
         [[nodiscard]] constexpr Vector4D<Magnitude<T>> safeNormalize() const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Static wrapper for safe normalization.
+         * @brief Safely calculate the normalized (unit) form of the vector.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
-         * @copydoc safeNormalize() const
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          *
          * @param[in] vec The vector to be normalized.
+         *
+         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         *         epsilon threshold.
          */
         [[nodiscard]] constexpr static Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vec) noexcept
             requires StrictArithmetic<T>;
