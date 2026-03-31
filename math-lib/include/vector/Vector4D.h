@@ -32,10 +32,10 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: Add NaN returning zerovec to docs of safeDiv, safeNormalize, safeProject and safeReject, and their
+// TODO: Add NaN returning zerovec to docs of safeDiv, safeNormalize, and safeReject, and their
 // normalization variants.
-// TODO: Add NaN precedence tests for TryNormalize, TryProject, TryReject.
 // TODO: TryNormalize, TryProject, TryReject custom abs function.
+// Todo: Investigate abnormal test count for NaNs
 
 namespace fgm
 {
