@@ -467,4 +467,321 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPoint
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
+
+
+/**************************************
+ *                                    *
+ *        TRY REJECTION TESTS         *
+ *                                    *
+ **************************************/
+
+/**
+ * @test Verify that safely rejecting from a parallel vector using @ref fgm::Vector4D::tryReject
+ *       returns a zero vector  and sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector4DRejection, TryReject_ParallelVectorsReturnsZeroVectorAndSetsCorrectStatusFlag)
+{
+    fgm::OperationStatus flag;
+    const fgm::Vector4D actualRejection = this->_vec.tryReject(this->_parallelVec, flag);
+
+    EXPECT_VEC_ZERO(actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting from orthogonal using @ref fgm::Vector4D::tryReject
+ *       returns the original vector and sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DRejection, TryReject_OrthogonalRejectionReturnsOriginalVectorAndSetsCorrectStatusFlag)
+{
+    // Given an arbitrary vector
+    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 0.0f);
+    constexpr fgm::Vector4D b(0.0f, 0.0f, 0.0f, 1.0f);
+    fgm::OperationStatus flag;
+
+    // When rejected from an orthogonal vector
+    const fgm::Vector4D actualRejection = a.tryReject(b, flag);
+
+    // Then, the resultant is same the original vector
+    EXPECT_VEC_EQ(a, actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting from a non-orthogonal vector using @ref fgm::Vector4D::tryReject
+ *       returns a non-zero vector with perpendicular component sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector4DRejection, TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+{
+    fgm::OperationStatus flag;
+    const fgm::Vector4D actualRejection = this->_vec.tryReject(this->_fromVec, flag);
+
+    EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector4D::tryReject with the
+ *       @p fromNormalized flag enabled returns a non-zero vector with perpendicular component
+ *       sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DRejection, TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    constexpr fgm::Vector4D expectedRejection(0.0f, 2.0f, 3.0f, 4.0f);
+    fgm::OperationStatus flag;
+
+
+    // When rejected from another
+    const fgm::Vector4D actualRejection = a.tryReject(b, flag, true);
+
+    // Then, the resultant vector has components perpendicular to the `from` vector.
+    EXPECT_VEC_EQ(expectedRejection, actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting a vector from another vector of different numeric
+ *       type using @ref fgm::Vector4D::tryReject returns a type-promoted vector
+ *       sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DRejection, TryReject_MixedTypeRejectionPromotesType)
+{
+    // Given two arbitrary vectors
+    constexpr fgm::Vector4D vec(7, 13, 29, 41);
+    constexpr fgm::Vector4D from(2.0, 4.0, 4.0, 2.0);
+    constexpr fgm::Vector4D expectedRejection(-6.2, -13.4, 2.6, 27.8);
+    fgm::OperationStatus flag;
+
+    // When rejected from another
+    const fgm::Vector4D actualRejection = vec.tryReject(from, flag);
+
+    // Then, the resultant vector is type promoted
+    static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
+    // and is the rejection
+    EXPECT_VEC_EQ(expectedRejection, actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting from a zero vector using @ref fgm::Vector4D::tryReject
+ *       returns the same vector and sets flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector4DRejection, TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
+{
+    constexpr TypeParam zero = TypeParam(0);
+    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    fgm::OperationStatus flag;
+
+    const fgm::Vector4D actualRejection = this->_vec.tryReject(zeroVec, flag);
+
+    EXPECT_VEC_EQ(this->_vec, actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting from a parallel vector using static variant of @ref fgm::Vector4D::tryReject
+ *       returns a zero vector and sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_ParallelVectorsReturnsZeroVectorAndSetsCorrectStatusFlag)
+{
+    fgm::OperationStatus flag;
+
+    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::tryReject(this->_vec, this->_parallelVec, flag);
+
+    EXPECT_VEC_ZERO(actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting a vector from an orthogonal vector using
+ *       static variant of @ref fgm::Vector4D::tryReject returns the original vector
+ *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DRejection, StaticWrapper_TryReject_OrthogonalRejectionReturnsOriginalVectorAndSetsCorrectStatusFlag)
+{
+    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 0.0f);
+    constexpr fgm::Vector4D b(0.0f, 0.0f, 0.0f, 1.0f);
+    fgm::OperationStatus flag;
+
+    const fgm::Vector4D actualRejection = fgm::Vector4D<float>::tryReject(a, b, flag);
+
+    EXPECT_VEC_EQ(a, actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting from a non-orthogonal vector using static variant of
+ *       @ref fgm::Vector4D::tryReject returns a non-zero vector with perpendicular component
+ *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector4DRejection,
+           StaticWrapper_TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+{
+    fgm::OperationStatus flag;
+
+    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::tryReject(this->_vec, this->_fromVec, flag);
+
+    EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting from an orthogonal unit vector using static variant of
+ *       @ref fgm::Vector4D::tryReject with the @p fromNormalized flag enabled returns a non-zero vector with
+ *       perpendicular component and sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DRejection, StaticWrapper_TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    constexpr fgm::Vector4D expectedRejection(0.0f, 2.0f, 3.0f, 4.0f);
+    fgm::OperationStatus flag;
+
+    // When rejected from another
+    const fgm::Vector4D actualRejection = fgm::Vector4D<float>::tryReject(a, b, flag, true);
+
+    // Then, the resultant vector has components perpendicular to the `from` vector.
+    EXPECT_VEC_EQ(expectedRejection, actualRejection);
+    // Flag is set to SUCCESS
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting a vector from another vector of different numeric type
+ *       using static variant of @ref fgm::Vector4D::tryReject returns a type-promoted vector
+ *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TEST(Vector4DRejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
+{
+    // Given two arbitrary vectors
+    constexpr fgm::Vector4D vec(7, 13, 29, 41);
+    constexpr fgm::Vector4D from(2.0, 4.0, 4.0, 2.0);
+    constexpr fgm::Vector4D expectedRejection(-6.2, -13.4, 2.6, 27.8);
+    fgm::OperationStatus flag;
+
+    // When rejected from another
+    const fgm::Vector4D actualRejection = fgm::Vector4D<float>::tryReject(vec, from, flag);
+
+    // Then, the resultant vector is type promoted
+    static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
+    // and is the rejection
+    EXPECT_VEC_EQ(expectedRejection, actualRejection);
+    // Flag is set to SUCCESS
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting from a zero length vector using static variant of @ref fgm::Vector4D::tryReject
+ *       returns the same vector and sets flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
+{
+    constexpr TypeParam zero = TypeParam(0);
+    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    fgm::OperationStatus flag;
+
+    const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::tryReject(this->_vec, zeroVec, flag);
+
+    EXPECT_VEC_EQ(this->_vec, actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/** @test Verify that rejection using @ref fgm::Vector4D::tryReject always return floating-point vector. */
+TYPED_TEST(Vector4DRejection, TryRejectAlwaysReturnFloatingPointVector)
+{
+    [[maybe_unused]] fgm::OperationStatus status;
+    [[maybe_unused]] const fgm::Vector4D rejection = this->_vec.tryReject(this->_fromVec, status);
+    static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
+}
+
+
+/**
+ * @test Verify that rejection using static variant of @ref fgm::Vector4D::tryReject
+ *       always return floating-point vector.
+ */
+TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointVector)
+{
+    [[maybe_unused]] fgm::OperationStatus status;
+    [[maybe_unused]] const fgm::Vector4D rejection =
+        fgm::Vector4D<float>::tryReject(this->_vec, this->_fromVec, status);
+    static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
+}
+
+
+
+/**
+ * @test Verify that rejection of NaN vector using @ref fgm::Vector4D::tryReject
+ *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector4DNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    const auto& nanVec = GetParam();
+    const auto& ontoVec = fgm::vec4d::one<float>;
+    fgm::OperationStatus flag;
+
+    EXPECT_VEC_ZERO(nanVec.tryProject(ontoVec, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that rejection onto NaN vector using @ref fgm::Vector4D::tryReject
+ *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector4DNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    const auto& oneVec = fgm::vec4d::one<float>;
+    const auto& ontoNaNVec = GetParam();
+    fgm::OperationStatus flag;
+
+    EXPECT_VEC_ZERO(oneVec.tryProject(ontoNaNVec, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that rejection of NaN vector using static variant of @ref fgm::Vector4D::tryReject
+ *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector4DNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    const auto& nanVec = GetParam();
+    const auto& ontoVec = fgm::vec4d::one<float>;
+    fgm::OperationStatus flag;
+
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryProject(nanVec, ontoVec, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that rejection onto NaN vector using static variant of @ref fgm::Vector4D::tryReject
+ *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector4DNaNTests, StaticWrapper_TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    const auto& oneVec = fgm::vec4d::one<float>;
+    const auto& ontoNaNVec = GetParam();
+    fgm::OperationStatus flag;
+
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryProject(oneVec, ontoNaNVec, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
 /** @} */

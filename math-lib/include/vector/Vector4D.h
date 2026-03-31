@@ -1367,6 +1367,56 @@ namespace fgm
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
+        // TODO: Refine documentation of return statement
+        /**
+         * @brief Safely compute rejection of this vector from another vector and set @p status to the result of
+         * rejection operation. Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] from           The vector to reject from
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
+         *
+         * @return The perpendicular @ref Vector4D component or a zero vector if either vector has NaN(Not-a-Number)
+         * passed-in or as a result of an intermediary operation.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto tryReject(const Vector4D<U>& from, OperationStatus& status,
+                                               bool fromNormalized = false) const noexcept
+            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute rejection of a vector from another vector and set @p status to the result of rejection
+         * operation. Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to reject.
+         * @param[in] from           The vector to reject from.
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
+         *
+         * @return The perpendicular @ref Vector4D component.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static auto tryReject(const Vector4D& vec, const Vector4D<U>& from,
+                                                      OperationStatus& status, bool fromNormalized = false) noexcept
+            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
         /** @} */
 
 

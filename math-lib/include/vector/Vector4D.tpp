@@ -519,8 +519,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec,
-                                        const S scalar) noexcept -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec, const S scalar) noexcept
+        -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         return vec.safeDiv(scalar);
@@ -529,8 +529,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::tryDiv(S scalar,
-                                       OperationStatus& status) const noexcept -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
+        -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -564,8 +564,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::tryDiv(const Vector4D& vec, S scalar,
-                                       OperationStatus& status) noexcept -> Vector4D<std::common_type_t<T, S>>
+    constexpr auto Vector4D<T>::tryDiv(const Vector4D& vec, S scalar, OperationStatus& status) noexcept
+        -> Vector4D<std::common_type_t<T, S>>
         requires StrictArithmetic<T>
     {
         return vec.tryDiv(scalar, status);
@@ -750,7 +750,7 @@ namespace fgm
 
         if (hasNaN() | std::isnan(ontoSquared))
             return fgm::vec4d::zero<MagType>;
-        
+
         if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
             return fgm::vec4d::zero<MagType>;
 
@@ -771,14 +771,15 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector4D<T>::tryProject(const Vector4D<U>& onto,
-        OperationStatus& status, const bool ontoNormalized) const noexcept -> Vector4D<Magnitude<std::common_type_t<T, U>>> requires
-        StrictArithmetic<T>
+    constexpr auto Vector4D<T>::tryProject(const Vector4D<U>& onto, OperationStatus& status,
+                                           const bool ontoNormalized) const noexcept
+        -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
         using MagType = Magnitude<R>;
 
-         if (ontoNormalized)
+        if (ontoNormalized)
         {
             status = OperationStatus::SUCCESS;
             return this->dot(onto) * onto;
@@ -806,8 +807,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector4D<T>::tryProject(const Vector4D& vec, const Vector4D<U>& onto,
-        OperationStatus& status, const bool ontoNormalized) noexcept -> Vector4D<Magnitude<std::common_type_t<T, U>>> requires StrictArithmetic<T>
+    constexpr auto Vector4D<T>::tryProject(const Vector4D& vec, const Vector4D<U>& onto, OperationStatus& status,
+                                           const bool ontoNormalized) noexcept
+        -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
     {
         return vec.tryProject(onto, status, ontoNormalized);
     }
@@ -861,6 +864,26 @@ namespace fgm
         return vec.safeReject(from, fromNormalized);
     }
 
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector4D<T>::tryReject(const Vector4D<U>& from, OperationStatus& status,
+                                          bool fromNormalized) const noexcept
+        -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        return *this - tryProject(from, status, fromNormalized);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector4D<T>::tryReject(const Vector4D& vec, const Vector4D<U>& from, OperationStatus& status,
+                                          bool fromNormalized) noexcept -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        return vec.tryReject(from, status, fromNormalized);
+    }
 
 
     /**************************************
