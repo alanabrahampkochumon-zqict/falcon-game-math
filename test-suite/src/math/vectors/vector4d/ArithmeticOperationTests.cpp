@@ -547,6 +547,30 @@ TYPED_TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZe
 }
 
 
+/**
+ * @test Verify that performing scalar division on a vector using @ref fgm::Vector4D::safeDiv by nan
+ *       returns a zero vector.
+ */
+TYPED_TEST(Vector4DScalarDivision, SafeDivideByNaN_ReturnsZeroVector)
+{
+    const auto result = this->_vec.safeDiv(fgm::constants::NaN);
+
+    EXPECT_VEC_ZERO(result);
+}
+
+
+/**
+ * @test Verify that performing scalar division on a vector using the static variant of
+ *       @ref fgm::Vector4D::safeDiv by nan returns a zero vector.
+ */
+TYPED_TEST(Vector4DScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroVector)
+{
+    const auto result = fgm::Vector4D<TypeParam>::safeDiv(this->_vec, fgm::constants::INFINITY_F);
+
+    EXPECT_VEC_ZERO(result);
+}
+
+
 /**************************************
  *                                    *
  *         TRY DIVISION TESTS         *
@@ -610,7 +634,7 @@ TEST(Vector4DScalarDivision, TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectF
 
 /**
  * @test Verify that dividing a NaN vector by zero using @ref fgm::Vector4D::tryDiv @ref
- * fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::DIVISIONBYZERO.
+ *       fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TEST(Vector4DScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
 {
