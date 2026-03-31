@@ -1093,7 +1093,7 @@ namespace fgm
          * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector
          *         if the original magnitude is below the epsilon threshold.
          */
-        [[nodiscard]] constexpr Vector4D<Magnitude<T>> tryNormalize(const OperationStatus& status) const noexcept
+        [[nodiscard]] constexpr Vector4D<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1114,7 +1114,7 @@ namespace fgm
          *         if the original magnitude is below the epsilon threshold.
          */
         [[nodiscard]] constexpr static Vector4D<Magnitude<T>> tryNormalize(const Vector4D& vec,
-                                                                           const OperationStatus& status) noexcept
+                                                                           OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

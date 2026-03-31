@@ -673,17 +673,31 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(const OperationStatus& status) const noexcept requires
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(OperationStatus& status) const noexcept requires
         StrictArithmetic<T>
     {
-        status;
-        return Vector4D();
+        
+        using R = Magnitude<T>;
+        R magnitude = mag();
+        if (std::isnan(magnitude))
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec4d::zero<R>;
+        }
+        if (magnitude <= Config::EPSILON_SQUARE<R>)
+        {
+            status = OperationStatus::DIVISIONBYZERO;
+            return fgm::vec4d::zero<R>;
+        }
+
+        status = OperationStatus::SUCCESS;
+        return *this / magnitude;
     }
 
 
     template <Arithmetic T>
     constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(const Vector4D& vec,
-        const OperationStatus& status) noexcept requires StrictArithmetic<T>
+        OperationStatus& status) noexcept requires StrictArithmetic<T>
     {
         return vec.tryNormalize(status);
     }
