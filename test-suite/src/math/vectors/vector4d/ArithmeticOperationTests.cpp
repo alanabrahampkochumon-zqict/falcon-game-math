@@ -118,13 +118,25 @@ protected:
 TYPED_TEST_SUITE(Vector4DInversion, SupportedSignedArithmeticTypes);
 
 
-INSTANTIATE_TEST_SUITE_P(Vector4DDivisionNaNTestSuite, Vector4DNaNTests,
-                         ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
-                                           fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
-                                           fgm::Vector4D<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
-                                           fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, fgm ::constants::NaN),
-                                           fgm::Vector4D<float>(fgm ::constants::NaN, fgm ::constants::NaN,
-                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
+/** @brief Test fixture for @fgm::Vector4D NaN tests */
+template <typename T>
+    requires std::floating_point<T>
+struct Vector4DDivisionNaNParams
+{
+    fgm::Vector4D<T> nanVector;
+    T scalar;
+};
+class Vector4DDivisionNaNTests: public ::testing::TestWithParam<Vector4DDivisionNaNParams<float>>
+{};
+INSTANTIATE_TEST_SUITE_P(
+    Vector4DDivisionNaNTestSuite, Vector4DDivisionNaNTests,
+    ::testing::Values(Vector4DDivisionNaNParams{ fgm::Vector4D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f), 3.0f },
+                      Vector4DDivisionNaNParams{ fgm::Vector4D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f), 3.0f },
+                      Vector4DDivisionNaNParams{ fgm::Vector4D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f), 3.0f },
+                      Vector4DDivisionNaNParams{ fgm::Vector4D<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN), 3.0f },
+                      Vector4DDivisionNaNParams{ fgm::Vector4D<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                                                                      fgm ::constants::NaN, fgm ::constants::NaN),
+                                                 3.0f }));
 
 
 
@@ -755,49 +767,52 @@ TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVecto
  *                                    *
  **************************************/
 
-/** @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::safeDiv returns a zero vector. */
-TEST_P(Vector4DNaNTests, SafeDiv_ReturnsZeroVector)
+
+/**
+ * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::safeDiv
+ *       returns vector with NaN-components as zero.
+ */
+TEST_P(Vector4DDivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
-    const auto& vec = GetParam();
-    EXPECT_VEC_ZERO(vec.safeDiv(3));
+    const auto& [vec, scalar] = GetParam();
+    EXPECT_VEC_ZERO(vec.safeDiv(scalar));
 }
 
 /**
  * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector4D::safeDiv
- *       returns a zero vector.
+ *       returns zero vector.
  */
-TEST_P(Vector4DNaNTests, StaticWrapper_SafeDiv_ReturnsZeroVector)
+TEST_P(Vector4DDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
-    const auto& vec = GetParam();
-    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeDiv(vec, 3));
+    const auto& [vec, scalar] = GetParam();
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeDiv(vec, scalar));
 }
 
 
 /**
- * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::try returns a zero vector
- *       and sets correct flag.
+ * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::tryDiv
+ *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, TryDiv_ReturnsZeroVector)
+TEST_P(Vector4DDivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
-    const auto& vec = GetParam();
+    const auto& [vec, scalar] = GetParam();
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(vec.tryDiv(3, flag));
+    EXPECT_VEC_ZERO(vec.tryDiv(scalar, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
  * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector4D::tryDiv
- *       returns a zero vector and sets correct flag.
+ *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, StaticWrapper_TryDiv_ReturnsZeroVector)
+TEST_P(Vector4DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
-    const auto& vec = GetParam();
+    const auto& [vec, scalar] = GetParam();
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryDiv(vec, 3, flag));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryDiv(vec, scalar, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
-
 
 /** @} */
 

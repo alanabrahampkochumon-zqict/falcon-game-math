@@ -56,14 +56,26 @@ protected:
 /** @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);
 
-
-INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNaNTests,
-                         ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
-                                           fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
-                                           fgm::Vector4D<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
-                                           fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, fgm ::constants::NaN),
-                                           fgm::Vector4D<float>(fgm ::constants::NaN, fgm ::constants::NaN,
-                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
+// TODO: Add NaN tests
+INSTANTIATE_TEST_SUITE_P(
+    Vector4DNormalizationNaNTestSuite, Vector4DNaNTests,
+    ::testing::Values(Vector4DNaNParams{ fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
+                                         fgm::Vector4D<float>(0.0f, 1.0f, 1.0f, 1.0f) },
+                      Vector4DNaNParams{
+                          fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
+                          fgm::Vector4D<float>(1.0f, 0.0f, 1.0f, 1.0f),
+                      },
+                      Vector4DNaNParams{
+                          fgm::Vector4D<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
+                          fgm::Vector4D<float>(1.0f, 1.0f, 0.0f, 1.0f),
+                      },
+                      Vector4DNaNParams{
+                          fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, fgm::constants::NaN),
+                          fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, 0.0f),
+                      },
+                      Vector4DNaNParams{ fgm::Vector4D<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                                                              fgm ::constants::NaN, fgm ::constants::NaN),
+                                         fgm::vec4d::zero<float> }));
 
 
 
