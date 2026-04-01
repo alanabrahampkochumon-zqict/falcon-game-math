@@ -50,29 +50,18 @@ protected:
         _vec = { T(0), T(0), T(0), T(0) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by @ref SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by @ref
+ * SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);
 
 // TODO: Add NaN tests
-INSTANTIATE_TEST_SUITE_P(
-    Vector4DNormalizationNaNTestSuite, _Vector4DNaNTests,
-    ::testing::Values(Vector4DNaNParams{ fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
-                                         fgm::Vector4D<float>(0.0f, 1.0f, 1.0f, 1.0f) },
-                      Vector4DNaNParams{
-                          fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
-                          fgm::Vector4D<float>(1.0f, 0.0f, 1.0f, 1.0f),
-                      },
-                      Vector4DNaNParams{
-                          fgm::Vector4D<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
-                          fgm::Vector4D<float>(1.0f, 1.0f, 0.0f, 1.0f),
-                      },
-                      Vector4DNaNParams{
-                          fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, fgm::constants::NaN),
-                          fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, 0.0f),
-                      },
-                      Vector4DNaNParams{ fgm::Vector4D<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                              fgm ::constants::NaN, fgm ::constants::NaN),
-                                         fgm::vec4d::zero<float> }));
+INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNaNTests,
+                         ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
+                                           fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
+                                           fgm::Vector4D<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
+                                           fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, fgm::constants::NaN),
+                                           fgm::Vector4D<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
 
@@ -310,6 +299,33 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_TryNormalize_NormalizedVectorIsA
     [[maybe_unused]] fgm::OperationStatus flag;
     [[maybe_unused]] const auto normalized = fgm::Vector4D<TypeParam>::tryNormalize(this->_vec, flag);
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
+}
+
+/**
+ * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vector4D::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector4DNaNTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto& vec = GetParam();
+
+    EXPECT_VEC_ZERO(vec.tryNormalize(flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector4D::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector4DNaNTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto& vec = GetParam();
+
+    EXPECT_VEC_ZERO(fgm::Vector4D<ParamType::value_type>::tryNormalize(vec, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
 /** @} */
