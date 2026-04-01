@@ -301,6 +301,37 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_TryNormalize_NormalizedVectorIsA
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
 
+
+/**************************************
+ *                                    *
+ *      NAN NORMALIZATION TESTS       *
+ *                                    *
+ **************************************/
+
+/**
+ * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vector4D::safeNormalize
+ *       returns a zero-vector.
+ */
+TEST_P(Vector4DNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
+{
+    const auto& vec = GetParam();
+
+    EXPECT_VEC_ZERO(vec.safeNormalize());
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector4D::safeNormalize
+ *       returns a zero-vector.
+ */
+TEST_P(Vector4DNaNTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
+{
+    const auto& vec = GetParam();
+
+    EXPECT_VEC_ZERO(fgm::Vector4D<ParamType::value_type>::safeNormalize(vec));
+}
+
+
 /**
  * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vector4D::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
