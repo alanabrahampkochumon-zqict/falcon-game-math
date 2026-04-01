@@ -43,7 +43,7 @@ class Vector4DStringRepresentationTests: public ::testing::Test
  * @{
  */
 
-/** @test Verify that the @ref fgm::Vector4D string representation matches the expected format for integral types. */
+/** @test Verify that the string representation matches the expected format for integral types. */
 TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)
 {
     constexpr fgm::Vector4D vec(1, 2, 3, 4);
@@ -56,7 +56,7 @@ TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D string representation matches the expected format for single-precision
+ * @test Verify that the string representation matches the expected format for single-precision
  *       floating-point types.
  */
 TEST_F(Vector4DStringRepresentationTests, FloatRepresentation)
@@ -71,7 +71,7 @@ TEST_F(Vector4DStringRepresentationTests, FloatRepresentation)
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D string representation matches the expected format for double-precision
+ * @test Verify that the string representation matches the expected format for double-precision
  *       floating-point types.
  */
 TEST_F(Vector4DStringRepresentationTests, DoubleRepresentation)
