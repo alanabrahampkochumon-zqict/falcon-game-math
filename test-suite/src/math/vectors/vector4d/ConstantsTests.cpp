@@ -12,9 +12,6 @@
 #include "Vector4DTestSetup.h"
 
 
-using namespace testutils;
-
-
 
 template <typename T>
 class Vector4DConstants: public ::testing::Test

@@ -12,9 +12,6 @@
 #include "Vector4DTestSetup.h"
 
 
-using namespace testutils;
-
-
 
 template <typename T>
 class Vector4DRejection: public ::testing::Test
@@ -39,7 +36,7 @@ TYPED_TEST_SUITE(Vector4DRejection, SupportedArithmeticTypes);
 
 
 INSTANTIATE_TEST_SUITE_P(
-    Vector4RejectionTestSuite, Vector4DNaNTests,
+    Vector4RejectionTestSuite, _Vector4DNaNTests,
     ::testing::Values(Vector4DNaNParams{ fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
                                          fgm::Vector4D<float>(0.0f, 1.0f, 1.0f, 1.0f) },
                       Vector4DNaNParams{
@@ -752,7 +749,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointV
  * @test Verify that rejection of NaN vector using @ref fgm::Vector4D::tryReject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(_Vector4DNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& [nanVec, expected] = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
@@ -767,7 +764,7 @@ TEST_P(Vector4DNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
  * @test Verify that rejection onto NaN vector using @ref fgm::Vector4D::tryReject
  *       returns original vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(_Vector4DNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& oneVec = fgm::vec4d::one<float>;
     const auto& [ontoNaNVec, expected] = GetParam();
@@ -782,7 +779,7 @@ TEST_P(Vector4DNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectF
  * @test Verify that rejection of NaN vector using static variant of @ref fgm::Vector4D::tryReject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(_Vector4DNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& [nanVec, expected] = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
@@ -797,7 +794,7 @@ TEST_P(Vector4DNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVectorAndSe
  * @test Verify that rejection onto NaN vector using static variant of @ref fgm::Vector4D::tryReject
  *       returns original vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, StaticWrapper_TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(_Vector4DNaNTests, StaticWrapper_TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& oneVec = fgm::vec4d::one<float>;
     const auto& [ontoNaNVec, expected] = GetParam();

@@ -12,9 +12,6 @@
 #include "Vector4DTestSetup.h"
 
 
-using namespace testutils;
-
-
 
 /**************************************
  *                                    *
@@ -58,7 +55,7 @@ TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);
 
 // TODO: Add NaN tests
 INSTANTIATE_TEST_SUITE_P(
-    Vector4DNormalizationNaNTestSuite, Vector4DNaNTests,
+    Vector4DNormalizationNaNTestSuite, _Vector4DNaNTests,
     ::testing::Values(Vector4DNaNParams{ fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
                                          fgm::Vector4D<float>(0.0f, 1.0f, 1.0f, 1.0f) },
                       Vector4DNaNParams{

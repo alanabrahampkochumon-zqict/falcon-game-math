@@ -11,7 +11,6 @@
 
 #include "Vector4DTestSetup.h"
 
-using testutils::EXPECT_VEC_CONTAINS;
 
 
 /**
@@ -20,7 +19,7 @@ using testutils::EXPECT_VEC_CONTAINS;
  */
 
 /**
- * @test Verify that the @ref fgm::Vector4D conversion constructor correctly promotes components from float to double.
+ * @test Verify that the conversion constructor correctly promotes components from float to double.
  */
 TEST(Vector4DConversionConstructor, PromotesType)
 {
@@ -32,7 +31,7 @@ TEST(Vector4DConversionConstructor, PromotesType)
 }
 
 
-/** @test Verify that the @ref fgm::Vector4D conversion constructor ensures deep-copy value semantics. */
+/** @test Verify that the conversion constructor ensures deep-copy value semantics. */
 TEST(Vector4DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float vector
@@ -52,7 +51,7 @@ TEST(Vector4DConversionConstructor, ReturnsNewInstance)
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D conversion constructor correctly demotes components from double to float.
+ * @test Verify that the conversion constructor correctly demotes components from double to float.
  */
 TEST(Vector4DConversionConstructor, DemotesType)
 {

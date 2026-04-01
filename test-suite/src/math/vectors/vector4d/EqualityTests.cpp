@@ -14,10 +14,10 @@
 
 #include <common/Constants.h>
 
+
 constexpr auto NAN_F = fgm::constants::NaN;
 constexpr auto INF = fgm::constants::INFINITY_F;
 
-using namespace testutils;
 
 
 template <typename T>

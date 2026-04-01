@@ -12,13 +12,14 @@
 
 #include "Vector4DTestSetup.h"
 
+
 #include <common/Constants.h>
 
-using namespace testutils;
 
 
 constexpr auto NAN_F = fgm::constants::NaN;
 constexpr auto INF = fgm::constants::INFINITY_F;
+
 
 
 /**************************************
