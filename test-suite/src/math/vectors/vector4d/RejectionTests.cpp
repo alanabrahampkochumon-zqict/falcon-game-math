@@ -320,7 +320,7 @@ TEST(Vector4DRejection, SafeReject_FromNormalizedVectorReturnsNonZeroVector)
     constexpr fgm::Vector4D expectedRejection(0.0f, 2.0f, 3.0f, 4.0f);
 
     // When rejected from another
-    constexpr fgm::Vector4D actualRejection = a.safeReject(b, true);
+    const fgm::Vector4D actualRejection = a.safeReject(b, true);
 
     // Then, the resultant vector has components perpendicular to the `from` vector.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -415,7 +415,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeReject_FromNormalizedVectorReturnsNonZ
     constexpr fgm::Vector4D expectedRejection(0.0f, 2.0f, 3.0f, 4.0f);
 
     // When rejected from another
-    constexpr fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(a, b, true);
+    const fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(a, b, true);
 
     // Then, the resultant vector has components perpendicular to the `from` vector.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -476,6 +476,57 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPoint
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
+
+/**
+ * @test Verify that the rejection of NaN vector using @ref fgm::Vector4D::safeReject
+ *       returns zero vector.
+ */
+TEST_P(Vector4DRejectionNaNTests, SafeReject_NaNVectorReturnsZeroVector)
+{
+    const auto& nanVec = GetParam();
+    const auto& ontoVec = fgm::vec4d::one<float>;
+
+    EXPECT_VEC_ZERO(nanVec.safeReject(ontoVec));
+}
+
+
+/**
+ * @test Verify that rejecting onto NaN vector using @ref fgm::Vector4D::safeReject
+ *       returns zero vector.
+ */
+TEST_P(Vector4DRejectionNaNTests, SafeReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    const auto& oneVec = fgm::vec4d::one<float>;
+    const auto& ontoNaNVec = GetParam();
+
+    EXPECT_VEC_ZERO(oneVec.safeReject(ontoNaNVec));
+}
+
+
+/**
+ * @test Verify that the rejection of NaN vector using static variant of @ref fgm::Vector4D::safeReject
+ *       returns zero vector.
+ */
+TEST_P(Vector4DRejectionNaNTests, StaticWrapper_SafeReject_NaNVectorReturnsZeroVector)
+{
+    const auto& nanVec = GetParam();
+    const auto& ontoVec = fgm::vec4d::one<float>;
+
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeReject(nanVec, ontoVec));
+}
+
+
+/**
+ * @test Verify that rejecting onto a NaN vector using static variant of @ref fgm::Vector4D::safeReject
+ *       returns zero vector.
+ */
+TEST_P(Vector4DRejectionNaNTests, StaticWrapper_SafeReject_OntoNaNVectorReturnsZeroVector)
+{
+    const auto& oneVec = fgm::vec4d::one<float>;
+    const auto& ontoNaNVec = GetParam();
+
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeReject(oneVec, ontoNaNVec));
+}
 
 
 /**************************************
@@ -735,7 +786,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointV
 
 
 /**
- * @test Verify that rejection of NaN vector using @ref fgm::Vector4D::tryReject
+ * @test Verify that the rejection of NaN vector using @ref fgm::Vector4D::tryReject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DRejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -744,14 +795,14 @@ TEST_P(Vector4DRejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCor
     const auto& ontoVec = fgm::vec4d::one<float>;
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_ZERO(nanVec.tryProject(ontoVec, flag));
+    EXPECT_VEC_ZERO(nanVec.tryReject(ontoVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that rejection onto NaN vector using @ref fgm::Vector4D::tryReject
- *       returns original vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that the rejection onto NaN vector using @ref fgm::Vector4D::tryReject
+ *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DRejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
@@ -759,13 +810,13 @@ TEST_P(Vector4DRejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSet
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_ZERO(oneVec.tryProject(ontoNaNVec, flag));
+    EXPECT_VEC_ZERO(oneVec.tryReject(ontoNaNVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that rejection of NaN vector using static variant of @ref fgm::Vector4D::tryReject
+ * @test Verify that the rejection of NaN vector using static variant of @ref fgm::Vector4D::tryReject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -774,14 +825,14 @@ TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVe
     const auto& ontoVec = fgm::vec4d::one<float>;
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryProject(nanVec, ontoVec, flag));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryReject(nanVec, ontoVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that rejection onto NaN vector using static variant of @ref fgm::Vector4D::tryReject
- *       returns original vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that the rejection onto NaN vector using static variant of @ref fgm::Vector4D::tryReject
+ *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
@@ -789,7 +840,7 @@ TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_OntoNaNVectorReturnsZe
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryProject(oneVec, ontoNaNVec, flag));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryReject(oneVec, ontoNaNVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 

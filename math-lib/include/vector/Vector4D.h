@@ -35,7 +35,7 @@
 // TODO: Add NaN returning zerovec to docs of safeDiv, safeNormalize, and safeReject, and their
 // normalization variants.
 // TODO: TryNormalize, TryProject, TryReject custom abs function.
-// Todo: Investigate abnormal test count for NaNs
+// TODO: Use fused multiply for dot product
 
 namespace fgm
 {

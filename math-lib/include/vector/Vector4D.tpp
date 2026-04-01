@@ -850,6 +850,9 @@ namespace fgm
         -> Vector4D<Magnitude<std::common_type_t<T, U>>>
         requires StrictArithmetic<T>
     {
+        if (hasNaN())
+            return fgm::vec4d::zero<std::common_type_t<T, U>>;
+
         return *this - safeProject(from, fromNormalized);
     }
 
