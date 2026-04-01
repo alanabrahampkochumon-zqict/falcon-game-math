@@ -124,17 +124,14 @@ struct Vector4DDivisionNaNParams
     fgm::Vector4D<T> nanVector;
     T scalar;
 };
-class Vector4DDivisionNaNTests: public ::testing::TestWithParam<Vector4DDivisionNaNParams<float>>
-{};
-INSTANTIATE_TEST_SUITE_P(
-    Vector4DDivisionNaNTestSuite, Vector4DDivisionNaNTests,
-    ::testing::Values(Vector4DDivisionNaNParams{ fgm::Vector4D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f), 3.0f },
-                      Vector4DDivisionNaNParams{ fgm::Vector4D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f), 3.0f },
-                      Vector4DDivisionNaNParams{ fgm::Vector4D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f), 3.0f },
-                      Vector4DDivisionNaNParams{ fgm::Vector4D<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN), 3.0f },
-                      Vector4DDivisionNaNParams{ fgm::Vector4D<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                      fgm ::constants::NaN, fgm ::constants::NaN),
-                                                 3.0f }));
+
+INSTANTIATE_TEST_SUITE_P(Vector4DDivisionTestSuite, Vector4DNaNTests,
+                         ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
+                                           fgm::Vector4D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
+                                           fgm::Vector4D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
+                                           fgm::Vector4D<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
+                                           fgm::Vector4D<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
 
@@ -762,20 +759,20 @@ TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVecto
  * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::safeDiv
  *       returns vector with NaN-components as zero.
  */
-TEST_P(Vector4DDivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
+TEST_P(Vector4DNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
-    const auto& [vec, scalar] = GetParam();
-    EXPECT_VEC_ZERO(vec.safeDiv(scalar));
+    const auto& vec = GetParam();
+    EXPECT_VEC_ZERO(vec.safeDiv(3));
 }
 
 /**
  * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector4D::safeDiv
  *       returns zero vector.
  */
-TEST_P(Vector4DDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
+TEST_P(Vector4DNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
-    const auto& [vec, scalar] = GetParam();
-    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeDiv(vec, scalar));
+    const auto& vec = GetParam();
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeDiv(vec, 3));
 }
 
 
@@ -783,11 +780,11 @@ TEST_P(Vector4DDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNCompo
  * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DDivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
+TEST_P(Vector4DNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
-    const auto& [vec, scalar] = GetParam();
+    const auto& vec = GetParam();
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(vec.tryDiv(scalar, flag));
+    EXPECT_VEC_ZERO(vec.tryDiv(3, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -796,11 +793,11 @@ TEST_P(Vector4DDivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
  * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector4D::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
+TEST_P(Vector4DNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
-    const auto& [vec, scalar] = GetParam();
+    const auto& vec = GetParam();
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryDiv(vec, scalar, flag));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryDiv(vec, 3, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
