@@ -50,12 +50,17 @@ protected:
         _vec = { T(0), T(0), T(0), T(0) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by @ref
- * SupportedArithmeticTypes. */
+/** 
+ * @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by 
+ * @ref SupportedArithmeticTypes.
+ */
 TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);
 
-// TODO: Add NaN tests
-INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNaNTests,
+
+/** @brief Test fixture for @fgm::Vector4D normalization with NaN vectors. */
+class Vector4DNormalizationNaNTests: public ::testing::TestWithParam<fgm::Vector4D<float>>
+{};
+INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNormalizationNaNTests,
                          ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
                                            fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
                                            fgm::Vector4D<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
@@ -312,7 +317,7 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_TryNormalize_NormalizedVectorIsA
  * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vector4D::safeNormalize
  *       returns a zero-vector.
  */
-TEST_P(Vector4DNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
+TEST_P(Vector4DNormalizationNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
 {
     const auto& vec = GetParam();
 
@@ -324,7 +329,7 @@ TEST_P(Vector4DNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
  * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector4D::safeNormalize
  *       returns a zero-vector.
  */
-TEST_P(Vector4DNaNTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
+TEST_P(Vector4DNormalizationNaNTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
 {
     const auto& vec = GetParam();
 
@@ -336,7 +341,7 @@ TEST_P(Vector4DNaNTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
  * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vector4D::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DNormalizationNaNTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto& vec = GetParam();
@@ -350,7 +355,7 @@ TEST_P(Vector4DNaNTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFl
  * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector4D::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DNormalizationNaNTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto& vec = GetParam();

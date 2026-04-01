@@ -116,16 +116,7 @@ protected:
 TYPED_TEST_SUITE(Vector4DInversion, SupportedSignedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector4D NaN tests. */
-template <typename T>
-    requires std::floating_point<T>
-struct Vector4DDivisionNaNParams
-{
-    fgm::Vector4D<T> nanVector;
-    T scalar;
-};
-
-/** @brief Test fixture for @fgm::Vector4D division NaN tests. */
+/** @brief Test fixture for @fgm::Vector4D division with NaN vectors. */
 class Vector4DDivisionNaNTests: public ::testing::TestWithParam<fgm::Vector4D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Vector4DDivisionTestSuite, Vector4DDivisionNaNTests,

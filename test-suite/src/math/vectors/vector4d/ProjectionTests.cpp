@@ -40,10 +40,10 @@ protected:
 TYPED_TEST_SUITE(Vector4DProjection, SupportedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector4D projection NaN tests */
-class Vector4DProjectNaNTests: public ::testing::TestWithParam<fgm::Vector4D<float>>
+/** @brief Test fixture for @fgm::Vector4D projection with NaN vectors. */
+class Vector4DProjectionNaNTests: public ::testing::TestWithParam<fgm::Vector4D<float>>
 {};
-INSTANTIATE_TEST_SUITE_P(Vector4DProjectionTestSuite, Vector4DProjectNaNTests,
+INSTANTIATE_TEST_SUITE_P(Vector4DProjectionTestSuite, Vector4DProjectionNaNTests,
                          ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
                                            fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
                                            fgm::Vector4D<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
@@ -460,7 +460,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_AlwaysReturnFloatingPoi
  * @test Verify that projection of NaN vector using @ref fgm::Vector4D::safeProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DProjectNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
@@ -473,7 +473,7 @@ TEST_P(Vector4DProjectNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCor
  * @test Verify that projection onto NaN vector using @ref fgm::Vector4D::safeProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DProjectNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& oneVec = fgm::vec4d::one<float>;
     const auto& ontoNaNVec = GetParam();
@@ -486,7 +486,7 @@ TEST_P(Vector4DProjectNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSet
  * @test Verify that projection of NaN vector using static variant of @ref fgm::Vector4D::safeProject
  *       returns zero vector.
  */
-TEST_P(Vector4DProjectNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
@@ -499,7 +499,7 @@ TEST_P(Vector4DProjectNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVe
  * @test Verify that projection onto NaN vector using static variant of @ref fgm::Vector4D::safeProject
  *       returns zero vector.
  */
-TEST_P(Vector4DProjectNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& oneVec = fgm::vec4d::one<float>;
     const auto& ontoNaNVec = GetParam();
@@ -750,7 +750,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_AlwaysReturnFloatingPoin
  * @test Verify that projection of NaN vector using @ref fgm::Vector4D::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DProjectNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
@@ -765,7 +765,7 @@ TEST_P(Vector4DProjectNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorr
  * @test Verify that projection onto NaN vector using @ref fgm::Vector4D::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DProjectNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& oneVec = fgm::vec4d::one<float>;
     const auto& ontoNaNVec = GetParam();
@@ -780,7 +780,7 @@ TEST_P(Vector4DProjectNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSets
  * @test Verify that projection of NaN vector using static variant of @ref fgm::Vector4D::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DProjectNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
@@ -795,7 +795,7 @@ TEST_P(Vector4DProjectNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVec
  * @test Verify that projection onto NaN vector using static variant of @ref fgm::Vector4D::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DProjectNaNTests, StaticWrapper_TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST_P(Vector4DProjectionNaNTests, StaticWrapper_TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& oneVec = fgm::vec4d::one<float>;
     const auto& ontoNaNVec = GetParam();
