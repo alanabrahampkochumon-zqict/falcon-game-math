@@ -159,7 +159,7 @@ namespace fgm
          *
          * @param[in] i Index of the vector component.
          *
-         * @return Reference to the vector component.
+         * @return A reference to the vector component.
          */
         [[nodiscard]] constexpr T& operator[](std::size_t i) noexcept;
 
@@ -518,7 +518,7 @@ namespace fgm
 
 
         /**
-         * @copybrief lt(const Vector4D<U>&) const
+         * @copybrief lte(const Vector4D<U>&) const
          *
          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
          *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
@@ -834,7 +834,7 @@ namespace fgm
          * @param[in] scalar The value to divide the vector components by.
          *
          * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
-         *         epsilon threshold.
+         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr auto safeDiv(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
@@ -844,7 +844,6 @@ namespace fgm
         /**
          * @brief Safely divide each component of a vector by a scalar value.
          *        Divide each component of the vector by @p scalar and returns the newly computed vector.
-         *
          *
          * @note Promote the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
@@ -857,7 +856,7 @@ namespace fgm
          * @param[in] scalar The value to divide the vector components by.
          *
          * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
-         *         epsilon threshold.
+         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr static auto safeDiv(const Vector4D& vec, S scalar) noexcept
@@ -883,7 +882,7 @@ namespace fgm
          *                    For details on status codes see @ref OperationStatus.
          *
          * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
-         *         epsilon threshold.
+         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr auto tryDiv(S scalar, OperationStatus& status) const noexcept
@@ -910,7 +909,7 @@ namespace fgm
          *                    For details on status codes see @ref OperationStatus.
          *
          * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
-         *         epsilon threshold.
+         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr auto tryDiv(const Vector4D& vec, S scalar, OperationStatus& status) noexcept
@@ -933,7 +932,7 @@ namespace fgm
          *************************************/
 
         /**
-         * @brief Calculate the dot product with another vector.
+         * @brief Calculate the dot product of this vector with another vector.
          *        Compute the scalar product: \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
@@ -951,8 +950,11 @@ namespace fgm
 
 
         /**
-         * @brief @copybrief dot(const Vector4D<U>&) const
-         * Static wrapper that compute \f$ \mathbf{lhs} \cdot \mathbf{rhs} \f$.
+         * @brief Calculate the dot product of a vector with another vector.
+         *        Compute the scalar product: \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -982,7 +984,7 @@ namespace fgm
          *************************************/
 
         /**
-         * @brief Calculate the magnitude (length) of the vector.
+         * @brief Calculate the magnitude (length) of this vector.
          *        Compute the Euclidean norm: \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
          *
          * @note To avoid precision loss, integral types are promoted to their
@@ -995,8 +997,8 @@ namespace fgm
 
 
         /**
-         * @brief @copybrief mag() const
-         * Static wrapper that compute \f$ \|\mathbf{vec}\| \f$.
+         * @brief Calculate the magnitude (length) of a vector.
+         *        Compute the Euclidean norm: \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
          *
          * @note To avoid precision loss, integral types are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1056,7 +1058,7 @@ namespace fgm
          *       corresponding floating-point representation via @ref Magnitude.
          *
          * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
-         *         epsilon threshold.
+         *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vector4D<Magnitude<T>> safeNormalize() const noexcept
             requires StrictArithmetic<T>;
@@ -1073,7 +1075,7 @@ namespace fgm
          * @param[in] vec The vector to be normalized.
          *
          * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
-         *         epsilon threshold.
+         *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr static Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vec) noexcept
             requires StrictArithmetic<T>;
@@ -1091,8 +1093,8 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector
-         *         if the original magnitude is below the epsilon threshold.
+         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vector4D<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
@@ -1107,12 +1109,12 @@ namespace fgm
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @param[in] vec The vector to be normalized.
+         * @param[in] vec     The vector to be normalized.
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector
-         *         if the original magnitude is below the epsilon threshold.
+         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr static Vector4D<Magnitude<T>> tryNormalize(const Vector4D& vec,
                                                                            OperationStatus& status) noexcept
@@ -1158,7 +1160,6 @@ namespace fgm
          * @brief Project a vector onto another vector.
          *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
          *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
-         * @brief Static wrapper for orthogonal projection of @p vector onto @p onto.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1191,7 +1192,8 @@ namespace fgm
          * @param[in] onto           The vector to project onto.
          * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector.
+         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors have NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr auto safeProject(const Vector4D<U>& onto, bool ontoNormalized = false) const noexcept
@@ -1203,7 +1205,6 @@ namespace fgm
          * @brief Safely project a vector onto another vector.
          *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
          *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
-         * @brief Static wrapper for safe projection.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1214,7 +1215,8 @@ namespace fgm
          * @param[in] onto           The vector to project onto.
          * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector.
+         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors have NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr static auto safeProject(const Vector4D& vec, const Vector4D<U>& onto,
@@ -1252,7 +1254,6 @@ namespace fgm
          * @brief Safely project a vector onto another vector and set @p status to the projection operation result.
          *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
          *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
-         * @brief Static wrapper for safe projection.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1303,8 +1304,9 @@ namespace fgm
 
 
         /**
-         * @brief @copybrief reject(const Vector4D<U>&, bool) const
-         * Static wrapper for computing the perpendicular component of @p vector relative to @p onto.
+         * @brief Compute the vector rejection of a vector from another.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1337,7 +1339,8 @@ namespace fgm
          * @param[in] from           The vector to reject from.
          * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
-         * @return The perpendicular @ref Vector4D component.
+         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors have NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr auto safeReject(const Vector4D<U>& from, bool fromNormalized = false) const noexcept
@@ -1359,7 +1362,8 @@ namespace fgm
          * @param[in] from           The vector to reject from.
          * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
-         * @return The perpendicular @ref Vector4D component.
+         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors have NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr static auto safeReject(const Vector4D& vec, const Vector4D<U>& from,
@@ -1367,10 +1371,11 @@ namespace fgm
             -> Vector4D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
-        // TODO: Refine documentation of return statement
+
         /**
-         * @brief Safely compute rejection of this vector from another vector and set @p status to the result of
-         * rejection operation. Compute the component of the vector perpendicular to @p onto:
+         * @brief Safely compute rejection of this vector from another vector and 
+         *        set @p status to the result of rejection operation.
+         *        Compute the component of the vector perpendicular to @p onto:
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
          * @note To maintain precision, result components are promoted to their
@@ -1383,8 +1388,8 @@ namespace fgm
          *                           For details on status codes see @ref OperationStatus.
          * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
-         * @return The perpendicular @ref Vector4D component or a zero vector if either vector has NaN(Not-a-Number)
-         * passed-in or as a result of an intermediary operation.
+         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors have NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr auto tryReject(const Vector4D<U>& from, OperationStatus& status,
@@ -1394,8 +1399,9 @@ namespace fgm
 
 
         /**
-         * @brief Safely compute rejection of a vector from another vector and set @p status to the result of rejection
-         * operation. Compute the component of the vector perpendicular to @p onto:
+         * @brief Safely compute rejection of a vector from another vector and 
+         *        set @p status to the result of rejection operation.
+         *        Compute the component of the vector perpendicular to @p onto:
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
          * @note To maintain precision, result components are promoted to their
@@ -1409,7 +1415,8 @@ namespace fgm
          *                           For details on status codes see @ref OperationStatus.
          * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
-         * @return The perpendicular @ref Vector4D component.
+         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors have NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr static auto tryReject(const Vector4D& vec, const Vector4D<U>& from,
