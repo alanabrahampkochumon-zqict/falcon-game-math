@@ -39,7 +39,7 @@ TYPED_TEST_SUITE(Vector4DRejection, SupportedArithmeticTypes);
 
 
 INSTANTIATE_TEST_SUITE_P(
-    Vector4RejectionNaNTestSuite, Vector4DNaNTests,
+    Vector4RejectionTestSuite, Vector4DNaNTests,
     ::testing::Values(Vector4DNaNParams{ fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
                                          fgm::Vector4D<float>(0.0f, 1.0f, 1.0f, 1.0f) },
                       Vector4DNaNParams{
@@ -758,7 +758,7 @@ TEST_P(Vector4DNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
     const auto& ontoVec = fgm::vec4d::one<float>;
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_EQ(expected, nanVec.tryProject(ontoVec, flag));
+    EXPECT_VEC_ZERO(nanVec.tryProject(ontoVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -773,7 +773,7 @@ TEST_P(Vector4DNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectF
     const auto& [ontoNaNVec, expected] = GetParam();
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_EQ(oneVec, oneVec.tryProject(ontoNaNVec, flag));
+    EXPECT_VEC_ZERO(oneVec.tryProject(ontoNaNVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -788,7 +788,7 @@ TEST_P(Vector4DNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVectorAndSe
     const auto& ontoVec = fgm::vec4d::one<float>;
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_EQ(expected, fgm::Vector4D<float>::tryProject(nanVec, ontoVec, flag));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryProject(nanVec, ontoVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -803,7 +803,7 @@ TEST_P(Vector4DNaNTests, StaticWrapper_TryReject_OntoNaNVectorReturnsZeroVectorA
     const auto& [ontoNaNVec, expected] = GetParam();
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_EQ(oneVec, fgm::Vector4D<float>::tryProject(oneVec, ontoNaNVec, flag));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryProject(oneVec, ontoNaNVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
