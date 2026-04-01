@@ -50,7 +50,7 @@ TEST(Vector4DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 {
     constexpr auto inf = fgm::vec4d::inf<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
-    EXPECT_VEC4_POS_INF(inf);
+    EXPECT_VEC4_POS_INF(inf)
 }
 
 
@@ -59,7 +59,7 @@ TEST(Vector4DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 {
     constexpr auto inf = fgm::vec4d::inf<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
-    EXPECT_VEC4_POS_INF(inf);
+    EXPECT_VEC4_POS_INF(inf)
 }
 
 
@@ -68,7 +68,7 @@ TEST(Vector4DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityC
 {
     constexpr auto inf = fgm::vec4d::infN<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
-    EXPECT_VEC4_NEG_INF(inf);
+    EXPECT_VEC4_NEG_INF(inf)
 }
 
 
@@ -77,7 +77,7 @@ TEST(Vector4DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 {
     constexpr auto inf = fgm::vec4d::infN<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
-    EXPECT_VEC4_NEG_INF(inf);
+    EXPECT_VEC4_NEG_INF(inf)
 }
 
 
@@ -111,7 +111,7 @@ TYPED_TEST(Vector4DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 }
 
 
-/** @test Verifies that @ref fgm::Vector4D::x returns a unit vector aligned with y-axis. */
+/** @test Verifies that @ref fgm::Vector4D::y returns a unit vector aligned with y-axis. */
 TYPED_TEST(Vector4DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 {
     constexpr auto y = fgm::vec4d::y<TypeParam>;
@@ -119,7 +119,7 @@ TYPED_TEST(Vector4DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 }
 
 
-/** @test Verifies that @ref fgm::Vector4D::x returns a unit vector aligned with z-axis. */
+/** @test Verifies that @ref fgm::Vector4D::z returns a unit vector aligned with z-axis. */
 TYPED_TEST(Vector4DConstants, Z_ReturnsUnitVectorWithOnlyZComponent)
 {
     constexpr auto z = fgm::vec4d::z<TypeParam>;
@@ -127,7 +127,7 @@ TYPED_TEST(Vector4DConstants, Z_ReturnsUnitVectorWithOnlyZComponent)
 }
 
 
-/** @test Verifies that @ref fgm::Vector4D::x returns a unit vector aligned with w-axis. */
+/** @test Verifies that @ref fgm::Vector4D::w returns a unit vector aligned with w-axis. */
 TYPED_TEST(Vector4DConstants, W_ReturnsUnitVectorWithOnlyWComponent)
 {
     constexpr auto w = fgm::vec4d::w<TypeParam>;
