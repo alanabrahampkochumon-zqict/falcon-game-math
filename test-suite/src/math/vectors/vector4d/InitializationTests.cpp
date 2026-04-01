@@ -60,7 +60,7 @@ TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D parameterized constructor correctly composes a 4D vector from
+ * @test Verify that the parameterized constructor correctly composes a 4D vector from
  *       two @ref fgm::Vector2D instances.
  */
 TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
@@ -79,7 +79,7 @@ TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D parameterized constructor correctly composes a 4D vector from a
+ * @test Verify that the parameterized constructor correctly composes a 4D vector from a
  *       @ref fgm::Vector3D instance and a scalar.
  */
 TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
@@ -97,7 +97,7 @@ TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D parameterized constructor correctly composes a 4D vector from a scalar and
+ * @test Verify that the parameterized constructor correctly composes a 4D vector from a scalar and
  *        a @ref fgm::Vector3D instance.
  */
 TYPED_TEST(Vector4DInitialization, ScalarAnd3DVectorCanInitializeA4DVector)

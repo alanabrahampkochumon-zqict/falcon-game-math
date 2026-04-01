@@ -35,7 +35,7 @@ protected:
                              static_cast<R>(0.8093036687290455), static_cast<R>(0.5070336237820525) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D normalization, parameterized by SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Vector4D normalization, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DNormalization, SupportedArithmeticTypes);
 
 
@@ -50,7 +50,7 @@ protected:
         _vec = { T(0), T(0), T(0), T(0) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);
 
 // TODO: Add NaN tests
