@@ -34,7 +34,7 @@ protected:
         _expectedSum = { T(-5), T(6), T(4), T(7) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D addition, parameterized by SupportedArithmeticTypes */
+/** @brief Test fixture for @ref fgm::Vector4D addition, parameterized by SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DAddition, SupportedArithmeticTypes);
 
 
@@ -53,7 +53,7 @@ protected:
         _expectedDifference = { T(103), T(6), T(-4), T(7) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D subtraction, parameterized by SupportedArithmeticTypes */
+/** @brief Test fixture for @ref fgm::Vector4D subtraction, parameterized by SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DSubtraction, SupportedArithmeticTypes);
 
 
@@ -75,7 +75,7 @@ protected:
         _expectedIntegralVec = { T(14), T(26), T(58), T(82) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D scalar multiplication, parameterized by SupportedArithmeticTypes */
+/** @brief Test fixture for @ref fgm::Vector4D scalar multiplication, parameterized by SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DScalarMultiplication, SupportedArithmeticTypes);
 
 
@@ -95,7 +95,7 @@ protected:
                                T(5.61538461538461538462) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D division, parameterized by @ref SupportedArithmeticTypes */
+/** @brief Test fixture for @ref fgm::Vector4D division, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DScalarDivision, SupportedArithmeticTypes);
 
 
@@ -112,11 +112,11 @@ protected:
         _expectedInvertedVec = { T(8), T(0), T(2), T(-5) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D inversion, parameterized by @ref SupportedSignedArithmeticTypes */
+/** @brief Test fixture for @ref fgm::Vector4D inversion, parameterized by @ref SupportedSignedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DInversion, SupportedSignedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector4D NaN tests */
+/** @brief Test fixture for @fgm::Vector4D NaN tests. */
 template <typename T>
     requires std::floating_point<T>
 struct Vector4DDivisionNaNParams
@@ -125,7 +125,10 @@ struct Vector4DDivisionNaNParams
     T scalar;
 };
 
-INSTANTIATE_TEST_SUITE_P(Vector4DDivisionTestSuite, Vector4DNaNTests,
+/** @brief Test fixture for @fgm::Vector4D division NaN tests. */
+class Vector4DDivisionNaNTests: public ::testing::TestWithParam<fgm::Vector4D<float>>
+{};
+INSTANTIATE_TEST_SUITE_P(Vector4DDivisionTestSuite, Vector4DDivisionNaNTests,
                          ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
                                            fgm::Vector4D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
                                            fgm::Vector4D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
@@ -759,7 +762,7 @@ TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVecto
  * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::safeDiv
  *       returns vector with NaN-components as zero.
  */
-TEST_P(Vector4DNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
+TEST_P(Vector4DDivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
     const auto& vec = GetParam();
     EXPECT_VEC_ZERO(vec.safeDiv(3));
@@ -769,7 +772,7 @@ TEST_P(Vector4DNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
  * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector4D::safeDiv
  *       returns zero vector.
  */
-TEST_P(Vector4DNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
+TEST_P(Vector4DDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
     const auto& vec = GetParam();
     EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeDiv(vec, 3));
@@ -780,7 +783,7 @@ TEST_P(Vector4DNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZ
  * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
+TEST_P(Vector4DDivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
     const auto& vec = GetParam();
     fgm::OperationStatus flag;
@@ -793,7 +796,7 @@ TEST_P(Vector4DNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
  * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector4D::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
-TEST_P(Vector4DNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
+TEST_P(Vector4DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
     const auto& vec = GetParam();
     fgm::OperationStatus flag;
