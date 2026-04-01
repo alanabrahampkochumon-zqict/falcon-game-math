@@ -477,7 +477,7 @@ TEST_P(Vector4DNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFla
     const auto& [nanVec, expected] = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
 
-    EXPECT_VEC_EQ(expected, nanVec.safeProject(ontoVec));
+    EXPECT_VEC_ZERO(nanVec.safeProject(ontoVec));
 }
 
 
@@ -490,7 +490,7 @@ TEST_P(Vector4DNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrec
     const auto& oneVec = fgm::vec4d::one<float>;
     const auto& [ontoNaNVec, expected] = GetParam();
 
-    EXPECT_VEC_EQ(expected, oneVec.safeProject(ontoNaNVec));
+    EXPECT_VEC_ZERO(oneVec.safeProject(ontoNaNVec));
 }
 
 
@@ -503,7 +503,7 @@ TEST_P(Vector4DNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVectorAnd
     const auto& [nanVec, expected] = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
 
-    EXPECT_VEC_EQ(expected, fgm::Vector4D<float>::safeProject(nanVec, ontoVec));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeProject(nanVec, ontoVec));
 }
 
 
@@ -516,7 +516,7 @@ TEST_P(Vector4DNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZeroVecto
     const auto& oneVec = fgm::vec4d::one<float>;
     const auto& [ontoNaNVec, expected] = GetParam();
 
-    EXPECT_VEC_EQ(expected, fgm::Vector4D<float>::safeProject(oneVec, ontoNaNVec));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeProject(oneVec, ontoNaNVec));
 }
 
 
@@ -768,7 +768,7 @@ TEST_P(Vector4DNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag
     const auto& ontoVec = fgm::vec4d::one<float>;
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_EQ(expected, nanVec.tryProject(ontoVec, flag));
+    EXPECT_VEC_ZERO(nanVec.tryProject(ontoVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -783,7 +783,7 @@ TEST_P(Vector4DNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrect
     const auto& [ontoNaNVec, expected] = GetParam();
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_EQ(expected, oneVec.tryProject(ontoNaNVec, flag));
+    EXPECT_VEC_ZERO(oneVec.tryProject(ontoNaNVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -798,7 +798,7 @@ TEST_P(Vector4DNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVectorAndS
     const auto& ontoVec = fgm::vec4d::one<float>;
     fgm::OperationStatus flag;
 
-    EXPECT_VEC_EQ(expected, fgm::Vector4D<float>::tryProject(nanVec, ontoVec, flag));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryProject(nanVec, ontoVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -812,8 +812,7 @@ TEST_P(Vector4DNaNTests, StaticWrapper_TryProject_OntoNaNVectorReturnsZeroVector
     const auto& oneVec = fgm::vec4d::one<float>;
     const auto& [ontoNaNVec, expected] = GetParam();
     fgm::OperationStatus flag;
-
-    EXPECT_VEC_EQ(expected,fgm::Vector4D<float>::tryProject(oneVec, ontoNaNVec, flag));
+    EXPECT_VEC_ZERO(fgm::Vector4D<float>::tryProject(oneVec, ontoNaNVec, flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
