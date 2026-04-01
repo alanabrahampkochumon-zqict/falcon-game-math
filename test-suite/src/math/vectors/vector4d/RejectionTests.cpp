@@ -73,7 +73,6 @@ INSTANTIATE_TEST_SUITE_P(
 TYPED_TEST(Vector4DRejection, ParallelVectorsReturnsZeroVector)
 {
     const fgm::Vector4D actualRejection = this->_vec.reject(this->_parallelVec);
-
     EXPECT_VEC_ZERO(actualRejection);
 }
 
