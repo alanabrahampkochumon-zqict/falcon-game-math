@@ -453,7 +453,7 @@ TEST(Vector4DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) perform a component-wise comparison 
+ * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison 
  *       when handling vectors of different types.
  */
 TEST(Vector4DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)

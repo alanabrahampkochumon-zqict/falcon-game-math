@@ -47,8 +47,8 @@ protected:
  */
 
 /**
- * @test Verify that the @ref fgm::Vector4D<bool> bitwise AND operator performs a component-wise logical conjunction
- *        and returns the correct boolean mask.
+ * @test Verify that the bitwise AND operator perform a component-wise logical conjunction and
+ *       returns the correct boolean mask.
  */
 TEST_F(BooleanVectorBitOperations, BitwiseAND_PerformComponentwiseConjunction)
 {
@@ -58,8 +58,8 @@ TEST_F(BooleanVectorBitOperations, BitwiseAND_PerformComponentwiseConjunction)
 }
 
 /**
- * @test Verify that the @ref fgm::Vector4D<bool> compound bitwise AND operator performs a
- *       component-wise logical conjunction in-place and updates the calling vector with the resulting mask.
+ * @test Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
+ *       and updates the calling vector with the resulting mask.
  */
 TEST_F(BooleanVectorBitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
 {
@@ -70,8 +70,8 @@ TEST_F(BooleanVectorBitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D<bool> bitwise OR operator performs a component-wise logical disjunction
- *        and returns the correct boolean mask.
+ * @test Verify that the bitwise OR operator performs a component-wise logical disjunction and
+ *       returns the correct boolean mask.
  */
 TEST_F(BooleanVectorBitOperations, BitwiseOR_PerformComponentwiseDisjunction)
 {
@@ -82,8 +82,8 @@ TEST_F(BooleanVectorBitOperations, BitwiseOR_PerformComponentwiseDisjunction)
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D<bool> compound bitwise OR operator performs a
- *       component-wise logical disjunction in-place and updates the calling vector with the resulting mask.
+ * @test Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place 
+ *       and updates the calling vector with the resulting mask.
  */
 TEST_F(BooleanVectorBitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
 {
@@ -94,8 +94,8 @@ TEST_F(BooleanVectorBitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
 
 
 /**
- * @test Verify that the @ref fgm::Vector4D<bool> bitwise NOT operator performs a component-wise logical inversion
- *        and returns the correct boolean mask.
+ * @test Verify that the bitwise NOT operator performs a component-wise logical inversion and
+ *       returns the correct boolean mask.
  */
 TEST_F(BooleanVectorBitOperations, BitwiseNOT_PerformComponentwiseInversion)
 {
