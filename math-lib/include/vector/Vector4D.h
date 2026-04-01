@@ -6,7 +6,7 @@
  *
  * @brief Templated 4D Vector supporting integral, floating-point, and boolean types.
  *
- * @todo Provides a high-performance vector implementation with SIMD acceleration
+ * @details Provides a high-performance vector implementation with SIMD acceleration
  *       and support for component-wise operations.
  *
  * @tparam T Type of @ref Vector4D components. Must satisfy @ref Arithmetic.
@@ -32,8 +32,6 @@
 #include <iomanip>
 #include <ostream>
 
-// TODO: Add NaN returning zerovec to docs of safeDiv, safeNormalize, and safeReject, and their
-// normalization variants.
 // TODO: TryNormalize, TryProject, TryReject custom abs function.
 // TODO: Use fused multiply for dot product
 
@@ -834,7 +832,7 @@ namespace fgm
          * @param[in] scalar The value to divide the vector components by.
          *
          * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
-         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
+         *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr auto safeDiv(S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
@@ -856,7 +854,7 @@ namespace fgm
          * @param[in] scalar The value to divide the vector components by.
          *
          * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
-         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
+         *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr static auto safeDiv(const Vector4D& vec, S scalar) noexcept
@@ -1499,11 +1497,18 @@ namespace fgm
          */
         constexpr friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
         {
+            const std::streamsize oldPrecision = os.precision();
+            const std::ios_base::fmtflags oldFlags = os.flags();
+
             auto precision = Config::useFullPrecision
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
             os << "<" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ">\n";
+
+            os.precision(oldPrecision);
+            os.flags(oldFlags);
+
             return os;
         }
 
