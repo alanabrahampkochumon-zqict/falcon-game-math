@@ -73,7 +73,7 @@ namespace fgm
 
 
 
-    
+
     /***************************************
      *                                     *
      *             EQUALITY                *
@@ -111,8 +111,7 @@ namespace fgm
         else
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
             return (x != rhs.x && !(std::abs(x - rhs.x) <= epsilon)) ||
-                (y != rhs.y && !(std::abs(y - rhs.y) <= epsilon)) ||
-                (z != rhs.z && !(std::abs(z - rhs.z) <= epsilon));
+                (y != rhs.y && !(std::abs(y - rhs.y) <= epsilon)) || (z != rhs.z && !(std::abs(z - rhs.z) <= epsilon));
     }
 
 
@@ -147,9 +146,9 @@ namespace fgm
             return Vector3D(x == rhs.x, y == rhs.y, z == rhs.z);
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return Vector3D(
-                (x == rhs.x || std::abs(x - rhs.x) <= epsilon), (y == rhs.y || std::abs(y - rhs.y) <= epsilon),
-                (z == rhs.z || std::abs(z - rhs.z) <= epsilon));
+            return Vector3D((x == rhs.x || std::abs(x - rhs.x) <= epsilon),
+                            (y == rhs.y || std::abs(y - rhs.y) <= epsilon),
+                            (z == rhs.z || std::abs(z - rhs.z) <= epsilon));
     }
 
 
@@ -169,9 +168,9 @@ namespace fgm
             return Vector3D(x != rhs.x, y != rhs.y, z != rhs.z);
         else
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return Vector3D<bool>(
-                (x != rhs.x) && !(std::abs(x - rhs.x) <= epsilon), (y != rhs.y) && !(std::abs(y - rhs.y) <= epsilon),
-                (z != rhs.z) && !(std::abs(z - rhs.z) <= epsilon));
+            return Vector3D<bool>((x != rhs.x) && !(std::abs(x - rhs.x) <= epsilon),
+                                  (y != rhs.y) && !(std::abs(y - rhs.y) <= epsilon),
+                                  (z != rhs.z) && !(std::abs(z - rhs.z) <= epsilon));
     }
 
 
@@ -186,7 +185,6 @@ namespace fgm
 
 
 
-    
     /***************************************
      *                                     *
      *            COMPARISONS              *
@@ -307,7 +305,7 @@ namespace fgm
 #endif
 
 
-    
+
 
     /***************************************
      *                                     *
@@ -354,7 +352,7 @@ namespace fgm
     }
 
 
-    
+
     /*************************************
      *                                   *
      *      ARITHMETIC OPERATORS         *
@@ -489,12 +487,12 @@ namespace fgm
     }
 
 
-    //template <Arithmetic T>
-    //template <StrictArithmetic S>
-    //constexpr auto Vector3D<T>::safeDiv(const S scalar) const noexcept -> Vector3D<std::common_type_t<T, S>>
-    //    requires StrictArithmetic<T>
+    // template <Arithmetic T>
+    // template <StrictArithmetic S>
+    // constexpr auto Vector3D<T>::safeDiv(const S scalar) const noexcept -> Vector3D<std::common_type_t<T, S>>
+    //     requires StrictArithmetic<T>
     //{
-    //    using R = std::common_type_t<T, S>;
+    //     using R = std::common_type_t<T, S>;
 
     //    if constexpr (std::is_floating_point_v<R>)
     //        if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<S>::epsilon()))
@@ -507,23 +505,23 @@ namespace fgm
     //}
 
 
-    //template <Arithmetic T>
-    //template <StrictArithmetic S>
-    //constexpr auto Vector3D<T>::safeDiv(const Vector3D& vec, const S scalar) noexcept
-    //    -> Vector3D<std::common_type_t<T, S>>
-    //    requires StrictArithmetic<T>
+    // template <Arithmetic T>
+    // template <StrictArithmetic S>
+    // constexpr auto Vector3D<T>::safeDiv(const Vector3D& vec, const S scalar) noexcept
+    //     -> Vector3D<std::common_type_t<T, S>>
+    //     requires StrictArithmetic<T>
     //{
-    //    return vec.safeDiv(scalar);
-    //}
+    //     return vec.safeDiv(scalar);
+    // }
 
 
-    //template <Arithmetic T>
-    //template <StrictArithmetic S>
-    //constexpr auto Vector3D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
-    //    -> Vector3D<std::common_type_t<T, S>>
-    //    requires StrictArithmetic<T>
+    // template <Arithmetic T>
+    // template <StrictArithmetic S>
+    // constexpr auto Vector3D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
+    //     -> Vector3D<std::common_type_t<T, S>>
+    //     requires StrictArithmetic<T>
     //{
-    //    using R = std::common_type_t<T, S>;
+    //     using R = std::common_type_t<T, S>;
 
     //    if constexpr (std::is_floating_point_v<R>)
     //    {
@@ -552,14 +550,14 @@ namespace fgm
     //}
 
 
-    //template <Arithmetic T>
-    //template <StrictArithmetic S>
-    //constexpr auto Vector3D<T>::tryDiv(const Vector3D& vec, S scalar, OperationStatus& status) noexcept
-    //    -> Vector3D<std::common_type_t<T, S>>
-    //    requires StrictArithmetic<T>
+    // template <Arithmetic T>
+    // template <StrictArithmetic S>
+    // constexpr auto Vector3D<T>::tryDiv(const Vector3D& vec, S scalar, OperationStatus& status) noexcept
+    //     -> Vector3D<std::common_type_t<T, S>>
+    //     requires StrictArithmetic<T>
     //{
-    //    return vec.tryDiv(scalar, status);
-    //}
+    //     return vec.tryDiv(scalar, status);
+    // }
 
 
     /*************************************
@@ -680,4 +678,45 @@ namespace fgm
         return vector.reject(onto, ontoNormalized);
     }
 
+
+
+
+    /**************************************
+     *                                    *
+     *             UTILITIES              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr bool Vector3D<T>::hasInf() const noexcept
+    {
+        if constexpr (std::is_floating_point_v<T>)
+            return std::isinf(x) | std::isinf(y) | std::isinf(z);
+        else
+            return false;
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Vector3D<T>::hasInf(const Vector3D& vec) noexcept
+    {
+        return vec.hasInf();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Vector3D<T>::hasNaN() const noexcept
+    {
+        if constexpr (std::is_floating_point_v<T>)
+            return std::isnan(x) | std::isnan(y) | std::isnan(z);
+        else
+            return false;
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Vector3D<T>::hasNaN(const Vector3D& vec) noexcept
+    {
+        return vec.hasNaN();
+    }
 } // namespace fgm

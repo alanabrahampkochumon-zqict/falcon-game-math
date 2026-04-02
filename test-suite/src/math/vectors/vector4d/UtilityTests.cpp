@@ -19,17 +19,17 @@
  **************************************/
 template <typename T>
     requires std::floating_point<T>
-struct VectorUtilityParams
+struct Vector4DUtilityParams
 {
     fgm::Vector4D<T> vec;
     bool expected;
 };
 /** @brief Test fixture for @ref fgm::Vector4D infinity checker, parameterized by @ref VectorUtilityParams */
-class Vector4DInfCheckerTests: public ::testing::TestWithParam<VectorUtilityParams<float>>
+class Vector4DInfCheckerTests: public ::testing::TestWithParam<Vector4DUtilityParams<float>>
 {};
 
 /** @brief Test fixture for @ref fgm::Vector4D NaN checker, parameterized by @ref VectorUtilityParams */
-class Vector4DNaNCheckerTests: public ::testing::TestWithParam<VectorUtilityParams<float>>
+class Vector4DNaNCheckerTests: public ::testing::TestWithParam<Vector4DUtilityParams<float>>
 {};
 
 
@@ -63,15 +63,15 @@ TEST_P(Vector4DInfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
 }
 INSTANTIATE_TEST_SUITE_P(
     Vector4DNaNCheckerTestSuite, Vector4DInfCheckerTests,
-    ::testing::Values(VectorUtilityParams{ fgm::Vector4D(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-                      VectorUtilityParams{ fgm::Vector4D(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+    ::testing::Values(Vector4DUtilityParams{ fgm::Vector4D(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                                          fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
                                            true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, 1.0f), false }));
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
 /** @test Verify that @ref std::Vector4D::hasInf returns False for integral types. */
@@ -118,15 +118,15 @@ TEST_P(Vector4DNaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
 }
 INSTANTIATE_TEST_SUITE_P(
     Vector4DNaNCheckerTestSuite, Vector4DNaNCheckerTests,
-    ::testing::Values(VectorUtilityParams{ fgm::Vector4D(fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      VectorUtilityParams{ fgm::Vector4D(fgm::constants::NaN, fgm::constants::INFINITY_F,
+    ::testing::Values(Vector4DUtilityParams{ fgm::Vector4D(fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
+                      Vector4DUtilityParams{ fgm::Vector4D(fgm::constants::NaN, fgm::constants::INFINITY_F,
                                                          fgm::constants::NaN, fgm::constants::NaN),
                                            true },
-                      VectorUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, 1.0f), false }));
+                      Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
 /** @test Verify that @ref std::Vector4D::hasNaN returns False for integral types. */
