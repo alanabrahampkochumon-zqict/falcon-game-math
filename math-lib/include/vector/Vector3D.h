@@ -80,7 +80,7 @@ namespace fgm
         /**
          * @brief Initialize @ref fgm::Vector3D with passed in values.
          *
-         * @param[in] v1 The first entry of @ref fgm::Vector3D.
+         * @param[in] v1 The first entry of @ref Vector3D.
          * @param[in] v2 The second entry of @ref fgm::Vector3D.
          * @param[in] v3 The third entry of @ref fgm::Vector3D.
          */
@@ -99,7 +99,7 @@ namespace fgm
         /**
          * @brief Initialize @ref fgm::Vector3D with 1 @ref T value and 1 @ref Vector2D.
          *
-         * @param[in] v   The first entry for @ref fgm::Vector3D.
+         * @param[in] v   The first entry of @ref fgm::Vector3D.
          * @param[in] vec The last two entries of @ref fgm::Vector3D.
          */
         [[nodiscard]] constexpr Vector3D(T v, Vector2D<T> vec) noexcept;

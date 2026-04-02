@@ -91,17 +91,17 @@ namespace fgm
          *                                   *
          *************************************/
 
-        /** @brief Initialize @ref fgm::Vector4D with zeros. */
+        /** @brief Initialize @ref Vector4D with zeros. */
         [[nodiscard]] constexpr Vector4D() noexcept;
 
 
         /**
          * @brief Initialize @ref fgm::Vector4D with passed in values.
          *
-         * @param[in] v1 First entry of @ref fgm::Vector4D.
-         * @param[in] v2 Second entry of @ref fgm::Vector4D.
-         * @param[in] v3 Third entry of @ref fgm::Vector4D.
-         * @param[in] v4 Fourth entry of @ref fgm::Vector4D.
+         * @param[in] v1 The first entry of @ref Vector4D.
+         * @param[in] v2 The second entry of @ref Vector4D.
+         * @param[in] v3 The third entry of @ref Vector4D.
+         * @param[in] v4 The fourth entry of @ref Vector4D.
          */
         [[nodiscard]] constexpr Vector4D(T v1, T v2, T v3, T v4) noexcept;
 
@@ -118,8 +118,8 @@ namespace fgm
         /**
          * @brief Initialize @ref fgm::Vector4D with 1 @ref Vector3D and 1 @ref T value.
          *
-         * @param[in] vec First three entries of @ref fgm::Vector4D.
-         * @param[in] v   Last entry for @ref fgm::Vector4D.
+         * @param[in] vec The first three entries of @ref fgm::Vector4D.
+         * @param[in] v   The last entry of @ref fgm::Vector4D.
          */
         [[nodiscard]] constexpr Vector4D(const Vector3D<T>& vec, T v) noexcept;
 
@@ -127,8 +127,8 @@ namespace fgm
         /**
          * @brief Initialize @ref fgm::Vector4D with 1 T value and 1 @ref Vector3D.
          *
-         * @param[in] vec First three entries of @ref fgm::Vector4D.
-         * @param[in] v   Last entry for @ref fgm::Vector4D.
+         * @param[in] vec The first three entries of @ref fgm::Vector4D.
+         * @param[in] v   The last entry of @ref fgm::Vector4D.
          */
         [[nodiscard]] constexpr Vector4D(T v, const Vector3D<T>& vec) noexcept;
 
@@ -138,7 +138,7 @@ namespace fgm
          *
          * @tparam U Numeric type of the source vector.
          *
-         * @param[in] other Source vector to be converted.
+         * @param[in] other The source vector to be converted.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector4D(const Vector4D<U>& other) noexcept;
@@ -154,7 +154,7 @@ namespace fgm
          * @brief Access the component at the specified location.
          *        Provide read-write access to the element.
          *
-         * @param[in] i Index of the vector component.
+         * @param[in] i The index of the vector component.
          *
          * @return A reference to the vector component.
          */
@@ -164,7 +164,7 @@ namespace fgm
         /**
          * @brief Access the element at the specified location (read-only).
          *
-         * @param[in] i Index of the vector component.
+         * @param[in] i The index of the vector component.
          *
          * @return A const reference to the vector component.
          */
