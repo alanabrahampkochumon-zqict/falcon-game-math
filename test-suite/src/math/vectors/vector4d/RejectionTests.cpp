@@ -79,7 +79,7 @@ TEST(Vector4DRejection, RejectionFromXAxisReturnsVectorWithZeroXComponent)
     constexpr fgm::Vector4D expectedRejection(0.0f, 20.0f, 30.0f, 40.f);
 
     // When rejected from x-axis
-    constexpr fgm::Vector4D actualRejection = a.reject(xAxis);
+    const fgm::Vector4D actualRejection = a.reject(xAxis);
 
     // Then, the resultant vector has zero x-component
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -98,7 +98,7 @@ TEST(Vector4DRejection, RejectionFromYAxisReturnsVectorWithZeroYComponent)
     constexpr fgm::Vector4D expectedRejection(10.0f, 0.0f, 30.0f, 40.0f);
 
     // When rejected from y-axis
-    constexpr fgm::Vector4D actualRejection = a.reject(yAxis);
+    const fgm::Vector4D actualRejection = a.reject(yAxis);
 
     // Then, the resultant vector has zero y-component
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -117,7 +117,7 @@ TEST(Vector4DRejection, RejectionFromZAxisReturnsVectorWithZeroZComponent)
     constexpr fgm::Vector4D expectedRejection(10.0f, 20.0f, 0.0f, 40.0f);
 
     // When rejected from z-axis
-    constexpr fgm::Vector4D actualRejection = a.reject(zAxis);
+    const fgm::Vector4D actualRejection = a.reject(zAxis);
 
     // Then, the resultant vector has zero z-component
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -136,7 +136,7 @@ TEST(Vector4DRejection, RejectionFromWAxisReturnsVectorWithZeroWComponent)
     constexpr fgm::Vector4D expectedRejection(10.0f, 20.0f, 30.0f, 0.0f);
 
     // When rejected from w-axis
-    constexpr fgm::Vector4D actualRejection = a.reject(wAxis);
+    const fgm::Vector4D actualRejection = a.reject(wAxis);
 
     // Then, the resultant vector has zero w-component
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -151,7 +151,7 @@ TEST(Vector4DRejection, OrthogonalRejectionReturnsOriginalVector)
     constexpr fgm::Vector4D b(0.0f, 0.0f, 0.0f, 1.0f);
 
     // When rejected on to an orthogonal vector
-    constexpr fgm::Vector4D actualRejection = a.reject(b);
+    const fgm::Vector4D actualRejection = a.reject(b);
 
     // Then, the resultant is same the original vector
     EXPECT_VEC_EQ(a, actualRejection);
@@ -194,7 +194,7 @@ TEST(Vector4DRejection, RejectionFromNormalizedVectorReturnsNonZeroVector)
     constexpr fgm::Vector4D expectedRejection(0.0f, 2.0f, 3.0f, 4.0f);
 
     // When rejected from another
-    constexpr fgm::Vector4D actualRejection = a.reject(b, true);
+    const fgm::Vector4D actualRejection = a.reject(b, true);
 
     // Then, the resultant vector has components perpendicular to the `from` vector.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -213,7 +213,7 @@ TEST(Vector4DRejection, RejectionFromVectorInOppositeDirectionReturnsVectorWithP
     constexpr fgm::Vector4D expectedRejection(4.0f, 4.0f, 0.0f, 4.0f);
 
     // When rejected from a vector in opposite direction
-    constexpr fgm::Vector4D actualRejection = a.reject(negativeZAxis);
+    const fgm::Vector4D actualRejection = a.reject(negativeZAxis);
 
     // Then, the resultant vector has components perpendicular to the `from` vector in the same direction.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -232,7 +232,7 @@ TEST(Vector4DRejection, MixedTypeRejectionPromotesType)
     constexpr fgm::Vector4D expectedRejection(-6.2, -13.4, 2.6, 27.8);
 
     // When reject from another
-    constexpr fgm::Vector4D actualRejection = vec.reject(from);
+    const fgm::Vector4D actualRejection = vec.reject(from);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);

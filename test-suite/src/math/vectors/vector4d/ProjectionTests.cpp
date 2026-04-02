@@ -85,7 +85,7 @@ TEST(Vector4DProjection, ProjectionOntoXAxisReturnsVectorWithOnlyXComponent)
     constexpr fgm::Vector4D expectedProjection(10.0f, 0.0f, 0.0f, 0.0f);
 
     // When projected onto x-axis
-    constexpr fgm::Vector4D actualProjection = a.project(xAxis);
+    const fgm::Vector4D actualProjection = a.project(xAxis);
 
     // Then, the resultant vector only has x-component as non-zero
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -104,7 +104,7 @@ TEST(Vector4DProjection, ProjectionOntoYAxisReturnsVectorWithOnlyYComponent)
     constexpr fgm::Vector4D expectedProjection(0.0f, 20.0f, 0.0f, 0.0f);
 
     // When projected onto y-axis
-    constexpr fgm::Vector4D actualProjection = a.project(yAxis);
+    const fgm::Vector4D actualProjection = a.project(yAxis);
 
     // Then, the resultant vector only has y-component as non-zero
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -123,7 +123,7 @@ TEST(Vector4DProjection, ProjectionOntoZAxisReturnsVectorWithOnlyZComponent)
     constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 30.0f, 0.0f);
 
     // When projected onto z-axis
-    constexpr fgm::Vector4D actualProjection = a.project(zAxis);
+    const fgm::Vector4D actualProjection = a.project(zAxis);
 
     // Then, the resultant vector only has z-component as non-zero
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -142,7 +142,7 @@ TEST(Vector4DProjection, ProjectionOntoWAxisReturnsVectorWithOnlyWComponent)
     constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 0.0f, 40.0f);
 
     // When projected onto w-axis
-    constexpr fgm::Vector4D actualProjection = a.project(wAxis);
+    const fgm::Vector4D actualProjection = a.project(wAxis);
 
     // Then, the resultant vector only has w-component as non-zero
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -185,7 +185,7 @@ TEST(Vector4DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
     constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    constexpr fgm::Vector4D actualProjection = a.project(b, true);
+    const fgm::Vector4D actualProjection = a.project(b, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
@@ -207,7 +207,7 @@ TEST(Vector4DProjection, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVe
     constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
 
     // When projected
-    constexpr fgm::Vector4D<float> actualProjection = a.project(negativeZAxis);
+    const fgm::Vector4D<float> actualProjection = a.project(negativeZAxis);
 
     // Then, the resultant vector is non-zero and in the same direction
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -226,7 +226,7 @@ TEST(Vector4DProjection, MixedTypeProjectionPromotesType)
     constexpr fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
 
     // When projected onto another
-    constexpr fgm::Vector4D actualProjection = vec.project(onto);
+    const fgm::Vector4D actualProjection = vec.project(onto);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
@@ -284,7 +284,7 @@ TEST(Vector4DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZer
     constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    constexpr fgm::Vector4D actualProjection = a.safeProject(b, true);
+    const fgm::Vector4D actualProjection = a.safeProject(b, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
@@ -372,7 +372,7 @@ TEST(Vector4DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVecto
     constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    constexpr fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProject(a, b, true);
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProject(a, b, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);

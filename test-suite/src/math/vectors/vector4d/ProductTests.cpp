@@ -122,7 +122,7 @@ TEST(Vector4DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
     constexpr fgm::Vector4D vecB(1.0, 0.0, 0.0, 0.0);
 
     // When dot with each other
-    constexpr double result = vecA.dot(vecB);
+    const double result = vecA.dot(vecB);
 
     // Then, the dot product is -1
     EXPECT_DOUBLE_EQ(-1.0, result);
@@ -140,7 +140,7 @@ TEST(Vector4DDotProduct, MixedTypeDotProductPromotesType)
     constexpr fgm::Vector4D vecB(1.123456789, 2.123456789, 3.123456789, 4.123456789);
 
     // When dot with each other
-    constexpr auto result = vecA.dot(vecB);
+    const auto result = vecA.dot(vecB);
 
     // Then, the dot product is type promoted
     static_assert(std::is_same_v<decltype(result), const double>);

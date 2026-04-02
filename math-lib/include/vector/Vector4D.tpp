@@ -14,6 +14,7 @@
 #include "Vector4D.h"
 
 #include <cassert>
+#include <cmath>
 #include <type_traits>
 
 namespace fgm
@@ -583,7 +584,18 @@ namespace fgm
     constexpr auto Vector4D<T>::dot(const Vector4D<U>& rhs) const noexcept -> std::common_type_t<T, U>
         requires StrictArithmetic<T>
     {
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
+        using R = std::common_type_t<T, U>;
+        if constexpr (std::is_floating_point_v<R>)
+            return std::fma(static_cast<R>(x), static_cast<R>(rhs.x),
+                            std::fma(static_cast<R>(y), static_cast<R>(rhs.y),
+                                     std::fma(static_cast<R>(z), static_cast<R>(rhs.z),
+                                              std::fma(static_cast<R>(w), static_cast<R>(rhs.w), T(0)))));
+        else
+            return x * rhs.x + y * rhs.y + z * rhs.z + w * rhs.w;
+#else
         return x * rhs.x + y * rhs.y + z * rhs.z + w * rhs.w;
+#endif
     }
 
 
