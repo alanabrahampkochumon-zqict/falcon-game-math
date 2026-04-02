@@ -505,7 +505,6 @@ TEST(Vector4DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWit
  *                                    *
  **************************************/
 
-
 /**
  * @test Verify that dividing a vector using @ref fgm::Vector4D::safeDiv perform a component-wise divide and
  *       returns a new vector instance.
@@ -747,7 +746,6 @@ TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVecto
  *         NaN DIVISION TESTS         *
  *                                    *
  **************************************/
-
 
 /**
  * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector4D::safeDiv

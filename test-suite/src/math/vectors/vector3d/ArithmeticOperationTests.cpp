@@ -48,8 +48,8 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(95), T(11), T(-6)};
-        _vecB = { T(-8), T(5), T(-2)};
+        _vecA = { T(95), T(11), T(-6) };
+        _vecB = { T(-8), T(5), T(-2) };
         _expectedDifference = { T(103), T(6), T(-4) };
     }
 };
@@ -71,7 +71,7 @@ protected:
         _vec = { T(7), T(13), T(29) };
         _scalar = T(2.123456789123456);
         _expectedFloatingVec = { T(14.864197523864192), T(27.604938258604928), T(61.580246884580224) };
-        _expectedIntegralVec = { T(14), T(26), T(58)};
+        _expectedIntegralVec = { T(14), T(26), T(58) };
     }
 };
 /** @brief Test fixture for @ref fgm::Vector3D scalar multiplication, parameterized by SupportedArithmeticTypes. */
@@ -496,301 +496,299 @@ TEST(Vector3DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWit
 }
 
 
-///**************************************
-// *                                    *
-// *        SAFE DIVISION TESTS         *
-// *                                    *
-// **************************************/
-//
-//
-///**
-// * @test Verify that dividing a vector using @ref fgm::Vector3D::safeDiv perform a component-wise divide and
-// *       returns a new vector instance.
-// */
-//TYPED_TEST(Vector3DScalarDivision, SafeDivide_ReturnsAInverseScaledVector)
-//{
-//    const auto result = this->_vec.safeDiv(this->_scalar);
-//
-//    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by integral zero using @ref fgm::Vector3D::safeDiv
-// *       perform a component-wise divide and returns a new vector instance.
-// */
-//TYPED_TEST(Vector3DScalarDivision, SafeDivideByIntegralZero_ReturnsZeroVector)
-//{
-//    const auto result = this->_vec.safeDiv(0);
-//    EXPECT_VEC_ZERO(result);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by floating point zero using @ref fgm::Vector3D::safeDiv
-// *       perform a component-wise divide and returns a new vector instance.
-// */
-//TYPED_TEST(Vector3DScalarDivision, SafeDivideByFloatZero_ReturnsZeroVector)
-//{
-//    const auto result = this->_vec.safeDiv(0.0f);
-//    EXPECT_VEC_ZERO(result);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector using static variant of @ref fgm::Vector3D::safeDiv
-// *       perform a component-wise divide and returns a new vector instance.
-// */
-//TYPED_TEST(Vector3DScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScaledVector)
-//{
-//    const auto result = fgm::Vector3D<TypeParam>::safeDiv(this->_vec, this->_scalar);
-//    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by integral zero using static variant of @ref fgm::Vector3D::safeDiv
-// *       perform a component-wise divide and returns a new vector instance.
-// */
-//TEST(Vector3DScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroVector)
-//{
-//    constexpr fgm::Vector3D vec(1, 2, 3);
-//    EXPECT_VEC_ZERO(fgm::Vector3D<int>::safeDiv(vec, 0));
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by floating point zero using static variant @ref fgm::Vector3D::safeDiv
-// *       perform a component-wise divide and returns a new vector instance.
-// */
-//TYPED_TEST(Vector3DScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZeroVector)
-//{
-//    const auto result = fgm::Vector3D<TypeParam>::safeDiv(this->_vec, 0.0f);
-//    EXPECT_VEC_ZERO(result);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by NaN using @ref fgm::Vector3D::safeDiv
-// *       returns a zero vector.
-// */
-//TYPED_TEST(Vector3DScalarDivision, SafeDivideByNaN_ReturnsZeroVector)
-//{
-//    const auto result = this->_vec.safeDiv(fgm::constants::NaN);
-//
-//    EXPECT_VEC_ZERO(result);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vector3D::safeDiv
-// *       returns a zero vector.
-// */
-//TYPED_TEST(Vector3DScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroVector)
-//{
-//    const auto result = fgm::Vector3D<TypeParam>::safeDiv(this->_vec, fgm::constants::INFINITY_F);
-//
-//    EXPECT_VEC_ZERO(result);
-//}
-//
-//
-///**************************************
-// *                                    *
-// *         TRY DIVISION TESTS         *
-// *                                    *
-// **************************************/
-//
-///**
-// * @test Verify that dividing a vector using @ref fgm::Vector3D::tryDiv perform a component-wise divide and
-// *       returns a new vector instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
-// */
-//TYPED_TEST(Vector3DScalarDivision, TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto result = this->_vec.tryDiv(this->_scalar, flag);
-//
-//    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-//    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by integral zero using @ref fgm::Vector3D::tryDiv returns zero vector and
-// *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-// */
-//TYPED_TEST(Vector3DScalarDivision, TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto result = this->_vec.tryDiv(0, flag);
-//
-//    EXPECT_VEC_ZERO(result);
-//    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by floating point zero using @ref fgm::Vector3D::tryDiv returns zero vector and
-// *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-// */
-//TYPED_TEST(Vector3DScalarDivision, TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto result = this->_vec.tryDiv(0.0, flag);
-//
-//    EXPECT_VEC_ZERO(result);
-//    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-//}
-//
-//
-///**
-// * @test Verify that dividing a NaN vector by zero using @ref fgm::Vector3D::tryDiv
-// *       @ref fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::NANOPERAND.
-// */
-//TEST(Vector3DScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
-//{
-//    fgm::OperationStatus flag;
-//    [[maybe_unused]] const auto result = fgm::vec4d::nan<double>.tryDiv(0, flag);
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by NaN using @ref fgm::Vector3D::tryDiv returns a zero vector and
-// *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-// */
-//TYPED_TEST(Vector3DScalarDivision, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto result = this->_vec.tryDiv(fgm::constants::NaN, flag);
-//
-//    EXPECT_VEC_ZERO(result);
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector using static variant of @ref fgm::Vector3D::tryDiv
-// *       perform a component-wise divide and returns a new vector instance and
-// *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
-// */
-//TYPED_TEST(Vector3DScalarDivision, StaticWrapper_TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto result = fgm::Vector3D<TypeParam>::tryDiv(this->_vec, this->_scalar, flag);
-//
-//    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
-//    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by integral zero using static variant of @ref fgm::Vector3D::tryDiv
-// *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-// */
-//TYPED_TEST(Vector3DScalarDivision, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto result = fgm::Vector3D<TypeParam>::tryDiv(this->_vec, 0, flag);
-//
-//    EXPECT_VEC_ZERO(result);
-//    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vector3D::tryDiv
-// *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-// */
-//TYPED_TEST(Vector3DScalarDivision, StaticWrapper_TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto result = fgm::Vector3D<TypeParam>::tryDiv(this->_vec, 0.0, flag);
-//
-//    EXPECT_VEC_ZERO(result);
-//    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vector3D::tryDiv
-// *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-// */
-//TEST(Vector3DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto result = fgm::Vector3D<double>::tryDiv(fgm::vec4d::nan<double>, 3, flag);
-//
-//    EXPECT_VEC_ZERO(result);
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
-//
-//
-///**
-// * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vector3D::tryDiv returns zero vector and
-// *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-// */
-//TYPED_TEST(Vector3DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto result = fgm::Vector3D<double>::tryDiv(this->_vec, fgm::constants::NaN, flag);
-//
-//    EXPECT_VEC_ZERO(result);
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
-//
-//
-///**************************************
-// *                                    *
-// *         NaN DIVISION TESTS         *
-// *                                    *
-// **************************************/
-//
-//
-///**
-// * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector3D::safeDiv
-// *       returns vector with NaN-components as zero.
-// */
-//TEST_P(Vector3DDivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
-//{
-//    const auto& vec = GetParam();
-//    EXPECT_VEC_ZERO(vec.safeDiv(3));
-//}
-//
-///**
-// * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector3D::safeDiv
-// *       returns zero vector.
-// */
-//TEST_P(Vector3DDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
-//{
-//    const auto& vec = GetParam();
-//    EXPECT_VEC_ZERO(fgm::Vector3D<float>::safeDiv(vec, 3));
-//}
-//
-//
-///**
-// * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector3D::tryDiv
-// *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
-// */
-//TEST_P(Vector3DDivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
-//{
-//    const auto& vec = GetParam();
-//    fgm::OperationStatus flag;
-//    EXPECT_VEC_ZERO(vec.tryDiv(3, flag));
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
-//
-//
-///**
-// * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector3D::tryDiv
-// *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
-// */
-//TEST_P(Vector3DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
-//{
-//    const auto& vec = GetParam();
-//    fgm::OperationStatus flag;
-//    EXPECT_VEC_ZERO(fgm::Vector3D<float>::tryDiv(vec, 3, flag));
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
+/**************************************
+ *                                    *
+ *        SAFE DIVISION TESTS         *
+ *                                    *
+ **************************************/
+
+/**
+ * @test Verify that dividing a vector using @ref fgm::Vector3D::safeDiv perform a component-wise divide and
+ *       returns a new vector instance.
+ */
+TYPED_TEST(Vector3DScalarDivision, SafeDivide_ReturnsAInverseScaledVector)
+{
+    const auto result = this->_vec.safeDiv(this->_scalar);
+
+    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+}
+
+
+/**
+ * @test Verify that dividing a vector by integral zero using @ref fgm::Vector3D::safeDiv
+ *       perform a component-wise divide and returns a new vector instance.
+ */
+TYPED_TEST(Vector3DScalarDivision, SafeDivideByIntegralZero_ReturnsZeroVector)
+{
+    const auto result = this->_vec.safeDiv(0);
+    EXPECT_VEC_ZERO(result);
+}
+
+
+/**
+ * @test Verify that dividing a vector by floating point zero using @ref fgm::Vector3D::safeDiv
+ *       perform a component-wise divide and returns a new vector instance.
+ */
+TYPED_TEST(Vector3DScalarDivision, SafeDivideByFloatZero_ReturnsZeroVector)
+{
+    const auto result = this->_vec.safeDiv(0.0f);
+    EXPECT_VEC_ZERO(result);
+}
+
+
+/**
+ * @test Verify that dividing a vector using static variant of @ref fgm::Vector3D::safeDiv
+ *       perform a component-wise divide and returns a new vector instance.
+ */
+TYPED_TEST(Vector3DScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScaledVector)
+{
+    const auto result = fgm::Vector3D<TypeParam>::safeDiv(this->_vec, this->_scalar);
+    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+}
+
+
+/**
+ * @test Verify that dividing a vector by integral zero using static variant of @ref fgm::Vector3D::safeDiv
+ *       perform a component-wise divide and returns a new vector instance.
+ */
+TEST(Vector3DScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroVector)
+{
+    constexpr fgm::Vector3D vec(1, 2, 3);
+    EXPECT_VEC_ZERO(fgm::Vector3D<int>::safeDiv(vec, 0));
+}
+
+
+/**
+ * @test Verify that dividing a vector by floating point zero using static variant @ref fgm::Vector3D::safeDiv
+ *       perform a component-wise divide and returns a new vector instance.
+ */
+TYPED_TEST(Vector3DScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZeroVector)
+{
+    const auto result = fgm::Vector3D<TypeParam>::safeDiv(this->_vec, 0.0f);
+    EXPECT_VEC_ZERO(result);
+}
+
+
+/**
+ * @test Verify that dividing a vector by NaN using @ref fgm::Vector3D::safeDiv
+ *       returns a zero vector.
+ */
+TYPED_TEST(Vector3DScalarDivision, SafeDivideByNaN_ReturnsZeroVector)
+{
+    const auto result = this->_vec.safeDiv(fgm::constants::NaN);
+
+    EXPECT_VEC_ZERO(result);
+}
+
+
+/**
+ * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vector3D::safeDiv
+ *       returns a zero vector.
+ */
+TYPED_TEST(Vector3DScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroVector)
+{
+    const auto result = fgm::Vector3D<TypeParam>::safeDiv(this->_vec, fgm::constants::INFINITY_F);
+
+    EXPECT_VEC_ZERO(result);
+}
+
+
+/**************************************
+ *                                    *
+ *         TRY DIVISION TESTS         *
+ *                                    *
+ **************************************/
+
+/**
+ * @test Verify that dividing a vector using @ref fgm::Vector3D::tryDiv perform a component-wise divide and
+ *       returns a new vector instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector3DScalarDivision, TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = this->_vec.tryDiv(this->_scalar, flag);
+
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+}
+
+
+/**
+ * @test Verify that dividing a vector by integral zero using @ref fgm::Vector3D::tryDiv returns zero vector and
+ *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector3DScalarDivision, TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = this->_vec.tryDiv(0, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that dividing a vector by floating point zero using @ref fgm::Vector3D::tryDiv returns zero vector and
+ *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector3DScalarDivision, TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = this->_vec.tryDiv(0.0, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that dividing a NaN vector by zero using @ref fgm::Vector3D::tryDiv
+ *       @ref fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector3DScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
+{
+    fgm::OperationStatus flag;
+    [[maybe_unused]] const auto result = fgm::vec4d::nan<double>.tryDiv(0, flag);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that dividing a vector by NaN using @ref fgm::Vector3D::tryDiv returns a zero vector and
+ *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TYPED_TEST(Vector3DScalarDivision, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = this->_vec.tryDiv(fgm::constants::NaN, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that dividing a vector using static variant of @ref fgm::Vector3D::tryDiv
+ *       perform a component-wise divide and returns a new vector instance and
+ *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector3DScalarDivision, StaticWrapper_TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector3D<TypeParam>::tryDiv(this->_vec, this->_scalar, flag);
+
+    EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that dividing a vector by integral zero using static variant of @ref fgm::Vector3D::tryDiv
+ *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector3DScalarDivision, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector3D<TypeParam>::tryDiv(this->_vec, 0, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vector3D::tryDiv
+ *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector3DScalarDivision, StaticWrapper_TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector3D<TypeParam>::tryDiv(this->_vec, 0.0, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vector3D::tryDiv
+ *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector3DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector3D<double>::tryDiv(fgm::vec3d::nan<double>, 3, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vector3D::tryDiv returns zero vector and
+ *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TYPED_TEST(Vector3DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto result = fgm::Vector3D<double>::tryDiv(this->_vec, fgm::constants::NaN, flag);
+
+    EXPECT_VEC_ZERO(result);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**************************************
+ *                                    *
+ *         NaN DIVISION TESTS         *
+ *                                    *
+ **************************************/
+
+/**
+ * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector3D::safeDiv
+ *       returns vector with NaN-components as zero.
+ */
+TEST_P(Vector3DDivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
+{
+    const auto& vec = GetParam();
+    EXPECT_VEC_ZERO(vec.safeDiv(3));
+}
+
+/**
+ * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector3D::safeDiv
+ *       returns zero vector.
+ */
+TEST_P(Vector3DDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
+{
+    const auto& vec = GetParam();
+    EXPECT_VEC_ZERO(fgm::Vector3D<float>::safeDiv(vec, 3));
+}
+
+
+/**
+ * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector3D::tryDiv
+ *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector3DDivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
+{
+    const auto& vec = GetParam();
+    fgm::OperationStatus flag;
+    EXPECT_VEC_ZERO(vec.tryDiv(3, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector3D::tryDiv
+ *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector3DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
+{
+    const auto& vec = GetParam();
+    fgm::OperationStatus flag;
+    EXPECT_VEC_ZERO(fgm::Vector3D<float>::tryDiv(vec, 3, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
 
 /** @} */
 
