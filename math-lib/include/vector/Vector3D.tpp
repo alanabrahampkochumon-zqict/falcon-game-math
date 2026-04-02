@@ -184,7 +184,54 @@ namespace fgm
     }
 
 
+    
 
+    /***************************************
+     *                                     *
+     *      BOOLEAN BITWISE OPERATORS      *
+     *                                     *
+     ***************************************/
+
+    template <Arithmetic T>
+    constexpr Vector3D<bool> Vector3D<T>::operator&(const Vector3D<bool>& rhs) const noexcept
+        requires std::is_same_v<T, bool>
+    {
+        return Vector3D(x & rhs.x, y & rhs.y, z & rhs.z);
+    }
+
+
+    constexpr Vector3D<bool>& Vector3D<bool>::operator&=(const Vector3D<bool>& rhs) noexcept
+    {
+        (*this) = (*this) & rhs;
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector3D<bool> Vector3D<T>::operator|(const Vector3D<bool>& rhs) const noexcept
+        requires std::is_same_v<T, bool>
+    {
+        return Vector3D(x | rhs.x, y | rhs.y, z | rhs.z);
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector3D<bool>& Vector3D<T>::operator|=(const Vector3D<bool>& rhs) noexcept
+    {
+        (*this) = (*this) & rhs;
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector3D<bool> Vector3D<T>::operator!() const noexcept
+        requires std::is_same_v<T, bool>
+    {
+        return Vector3D(!x, !y, !z);
+    }
+
+
+    
 
     /*************************************
      *                                   *

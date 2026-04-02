@@ -258,7 +258,7 @@ TYPED_TEST(Vector3DEquality, StaticWrapper_EqualityReturnsCorrectBooleanMask)
 
 
 /**
- * @addtogroup T_FGM_Vec4_Inequality
+ * @addtogroup T_FGM_Vec3_Inequality
  * @{
  */
 

@@ -367,6 +367,89 @@ namespace fgm
 
 
 
+        
+        /**
+         * @addtogroup FGM_Vec3_Bitwise
+         * @{
+         */
+
+        /***************************************
+         *                                     *
+         *      BOOLEAN BITWISE OPERATORS      *
+         *                                     *
+         ***************************************/
+
+        /**
+         * @brief Perform component-wise logical AND.
+         *        Compute the conjunction of each component pair.
+         *
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
+         *
+         * @param[in] rhs The vector to combine with.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of component-wise AND.
+         */
+        [[nodiscard]] constexpr Vector3D<bool> operator&(const Vector3D<bool>& rhs) const noexcept
+            requires std::is_same_v<T, bool>;
+
+
+        /**
+         * @brief Perform component-wise logical AND.
+         *        Compute the conjunction of each component pair in-place and update the calling vector.
+         *
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
+         *
+         * @param[in] rhs The vector to combine with.
+         *
+         * @return A reference to this vector (*this).
+         */
+        constexpr Vector3D<bool>& operator&=(const Vector3D<bool>& rhs) noexcept;
+
+
+        /**
+         * @brief Perform component-wise logical OR.
+         *        Compute the disjunction of each component pair.
+         *
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
+         *
+         * @param[in] rhs The vector to combine with.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of component-wise OR.
+         */
+        [[nodiscard]] constexpr Vector3D<bool> operator|(const Vector3D<bool>& rhs) const noexcept
+            requires std::is_same_v<T, bool>;
+
+
+        /**
+         * @brief Perform component-wise logical OR.
+         *        Compute the disjunction of each component pair in-place and update the calling vector.
+         *
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
+         *
+         * @param[in] rhs The vector to combine with.
+         *
+         * @return A reference to this vector (*this).
+         */
+        constexpr Vector3D<bool>& operator|=(const Vector3D<bool>& rhs) noexcept;
+
+
+        /**
+         * @brief Perform component-wise logical NOT.
+         *        Invert each boolean component and returns a new @ref Vector3D<bool>.
+         *
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
+         *
+         * @return A @ref Vector3D<bool> with inverted values.
+         */
+        [[nodiscard]] constexpr Vector3D<bool> operator!() const noexcept
+            requires std::is_same_v<T, bool>;
+
+        /** @} */
+
+
+
+
+
         /*************************************
          *                                   *
          *      ARITHMETIC OPERATORS         *
