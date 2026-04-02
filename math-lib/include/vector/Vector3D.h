@@ -4,7 +4,11 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: January 19, 2026
  *
- * @brief Templated 3D Vector supporting integral, floating-point and boolean types.
+ * @brief Templated 3D Vector supporting integral, floating-point, and boolean types.
+ *
+ * @details Provides a high-performance vector implementation with SIMD acceleration
+ *          and support for component-wise operations.
+ *
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
  *
  * @par Configuration
