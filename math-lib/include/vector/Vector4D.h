@@ -1191,7 +1191,7 @@ namespace fgm
          * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
-         *         or if either of the vectors have NaN(Not-a-Number) component(s).
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr auto safeProject(const Vector4D<U>& onto, bool ontoNormalized = false) const noexcept
@@ -1214,7 +1214,7 @@ namespace fgm
          * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
-         *         or if either of the vectors have NaN(Not-a-Number) component(s).
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr static auto safeProject(const Vector4D& vec, const Vector4D<U>& onto,
@@ -1338,7 +1338,7 @@ namespace fgm
          * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
-         *         or if either of the vectors have NaN(Not-a-Number) component(s).
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr auto safeReject(const Vector4D<U>& from, bool fromNormalized = false) const noexcept
@@ -1361,7 +1361,7 @@ namespace fgm
          * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
-         *         or if either of the vectors have NaN(Not-a-Number) component(s).
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr static auto safeReject(const Vector4D& vec, const Vector4D<U>& from,
@@ -1387,7 +1387,7 @@ namespace fgm
          * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
-         *         or if either of the vectors have NaN(Not-a-Number) component(s).
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr auto tryReject(const Vector4D<U>& from, OperationStatus& status,
@@ -1414,7 +1414,7 @@ namespace fgm
          * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
-         *         or if either of the vectors have NaN(Not-a-Number) component(s).
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr static auto tryReject(const Vector4D& vec, const Vector4D<U>& from,
