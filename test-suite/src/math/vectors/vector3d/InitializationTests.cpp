@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief `Vector3D` initialization tests.
+ * @brief Verifies @ref fgm::Vector3D initialization logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,49 +24,49 @@ using namespace testutils;
 template <typename T>
 class Vector3DInitialization: public ::testing::Test
 {};
+/** @brief Test fixture for @ref fgm::Vector3D initialization, parameterized by @ref SupportedTypes */
 TYPED_TEST_SUITE(Vector3DInitialization, SupportedTypes);
 
 
-/**************************************
- *                                    *
- *               TESTS                *
- *                                    *
- **************************************/
 
+/**
+ * @addtogroup T_FGM_Vec4_Init
+ * @{
+ */
+/** @test Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector3DInitialization, EmptyConstructorInitializesZeroVector)
 {
-    // Given a vector initialized without parameters
     const fgm::Vector3D<TypeParam> vec;
 
-    // Then, it's elements form a zero vector
     EXPECT_VEC_ZERO(vec);
 }
 
+
+/** @test Verify that the parameterized constructor correctly assigns components from the provided arguments. */
 TYPED_TEST(Vector3DInitialization, ConstructorParametersInitializesVector)
 {
-    // Given 3 different values
     TypeParam a = static_cast<TypeParam>(3);
     TypeParam b = static_cast<TypeParam>(1);
     TypeParam c = static_cast<TypeParam>(6);
 
-    // When, a vector is initialized with those values
     const fgm::Vector3D<TypeParam> vec(a, b, c);
 
-    // Then, the values are stored as elements of the vector
     EXPECT_VEC_CONTAINS(vec, a, b, c);
 }
 
+
+/**
+ * @test Verify that the parameterized constructor correctly composes a 4D vector from a
+ *       @ref fgm::Vector2D instance and a scalar.
+ */
 TYPED_TEST(Vector3DInitialization, One2DVectorAndScalarCanInitializeA3DVector)
 {
-    // Given one 2D Vector and a scalar
     TypeParam a = static_cast<TypeParam>(3);
     TypeParam b = static_cast<TypeParam>(1);
     const fgm::Vector2D<TypeParam> vec1(a, b);
     TypeParam scalar = static_cast<TypeParam>(6);
 
-    // When a Vector3D is initialized with that vec2d and scalar
     const fgm::Vector3D<TypeParam> vec(vec1, scalar);
 
-    // Then, the 2D vector elements + scalar form the 3D vector in the passed-in format
     EXPECT_VEC_CONTAINS(vec, a, b, scalar);
 }

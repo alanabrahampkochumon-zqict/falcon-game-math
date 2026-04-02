@@ -26,6 +26,11 @@ namespace fgm
     template <Arithmetic T>
     struct Vector3D
     {
+        /**
+         * @addtogroup FGM_Vec4_Members
+         * @{
+         */
+
         using value_type = T;
 
         static constexpr std::size_t dimension = 3;
@@ -53,18 +58,44 @@ namespace fgm
             T elements[dimension];
         };
 
+        /** @} */
+        
+
+
+        /**
+         * @addtogroup FGM_Vec4_Init
+         * @{
+         */
+
         /*************************************
          *                                   *
          *            INITIALIZERS           *
          *                                   *
          *************************************/
 
-        constexpr Vector3D() noexcept;
-        constexpr Vector3D(T v1, T v2, T v3) noexcept;
-        constexpr Vector3D(Vector2D<T> vec, T v) noexcept;
+        /** @brief Initialize @ref fgm::Vector3D with zeros. */
+        [[nodiscard]] constexpr Vector3D() noexcept;
+
+
+        /**
+         * @brief Initialize @ref fgm::Vector3D with passed in values.
+         *
+         * @param[in] v1 First entry of @ref fgm::Vector3D.
+         * @param[in] v2 Second entry of @ref fgm::Vector3D.
+         * @param[in] v3 Third entry of @ref fgm::Vector3D.
+         */
+        [[nodiscard]] constexpr Vector3D(T v1, T v2, T v3) noexcept;
+
+        /**
+         * @brief Initialize @ref fgm::Vector3D with 1 @ref Vector2D and 1 @ref T value.
+         *
+         * @param[in] vec First two entries of @ref fgm::Vector3D.
+         * @param[in] v   Last entry for @ref fgm::Vector4D.
+         */
+        [[nodiscard]] constexpr Vector3D(Vector2D<T> vec, T v) noexcept;
 
         template <Arithmetic S>
-        constexpr Vector3D(const Vector3D<S>& other) noexcept;
+        [[nodiscard]] constexpr Vector3D(const Vector3D<S>& other) noexcept;
 
 
         /*************************************
