@@ -59,7 +59,7 @@ namespace fgm
         };
 
         /** @} */
-        
+
 
 
         /**
@@ -105,8 +105,15 @@ namespace fgm
         [[nodiscard]] constexpr Vector3D(T v, Vector2D<T> vec) noexcept;
 
 
-        template <Arithmetic S>
-        [[nodiscard]] constexpr Vector3D(const Vector3D<S>& other) noexcept;
+        /**
+         * @brief Initialize @ref Vector3D from another @ref Vector3D of a different type.
+         *
+         * @tparam U Numeric type of the source vector.
+         *
+         * @param[in] other Source vector to be converted.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr Vector3D(const Vector3D<U>& other) noexcept;
 
 
         /*************************************
@@ -117,6 +124,9 @@ namespace fgm
 
         T& operator[](std::size_t i);
         const T& operator[](std::size_t i) const;
+
+        /** @} */
+
 
 
         /*************************************
@@ -217,8 +227,8 @@ namespace fgm
          * @return Projected vector.
          */
         template <Arithmetic U>
-        static auto project(const Vector3D& vector, const Vector3D<U>& onto,
-                            bool ontoNormalized = false) -> Vector3D<std::common_type_t<T, U>>;
+        static auto project(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized = false)
+            -> Vector3D<std::common_type_t<T, U>>;
 
 
         /*************************************
@@ -248,8 +258,8 @@ namespace fgm
          * @return Projected vector.
          */
         template <Arithmetic U>
-        static auto reject(const Vector3D& vector, const Vector3D<U>& onto,
-                           bool ontoNormalized = false) -> Vector3D<std::common_type_t<T, U>>;
+        static auto reject(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized = false)
+            -> Vector3D<std::common_type_t<T, U>>;
     };
 
     /*************************************

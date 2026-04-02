@@ -134,7 +134,7 @@ namespace fgm
 
 
         /**
-         * @brief Initialize @ref fgm::Vector4D from another @ref fgm::Vector4D of a different type.
+         * @brief Initialize @ref Vector4D from another @ref Vector4D of a different type.
          *
          * @tparam U Numeric type of the source vector.
          *
