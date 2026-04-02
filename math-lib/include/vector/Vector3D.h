@@ -148,7 +148,218 @@ namespace fgm
 
 
 
-        
+        /**
+         * @addtogroup FGM_Vec3_Equality
+         * @{
+         */
+
+        /***************************************
+         *                                     *
+         *             EQUALITY                *
+         *                                     *
+         ***************************************/
+
+        /**
+         * @brief Compare all components of this vector for equality with another vector.
+         *        Perform a component-wise comparison and returns true only if every element pair
+         *        satisfies the equality condition within the given @p epsilon.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The vector to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if all components are equivalent within @p epsilon.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr bool allEq(const Vector3D<U>& rhs,
+                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                               ? Config::DOUBLE_EPSILON
+                                               : Config::FLOAT_EPSILON) const noexcept;
+
+
+        /**
+         * @copybrief allEq(const Vector3D<U>&, double) const
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         * @return True if all components are equivalent within @p epsilon.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr static bool allEq(const Vector3D& lhs, const Vector3D<U>& rhs,
+                                                  double epsilon = (std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>)
+                                                      ? Config::DOUBLE_EPSILON
+                                                      : Config::FLOAT_EPSILON) noexcept;
+
+
+        /**
+         * @brief Compare components for inequality across two vectors.
+         *        Perform a component-wise comparison and returns true if any of the pair satisfies inequality condition
+         *        within the given @p epsilon.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref neq.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The vector to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if any of the components are not equivalent within the default epsilon.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr bool allNeq(const Vector3D<U>& rhs,
+                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                                ? Config::DOUBLE_EPSILON
+                                                : Config::FLOAT_EPSILON) const noexcept;
+
+
+        /**
+         * @copybrief allNeq(const Vector3D<U>&, double) const
+         *
+         * @note To obtain a component-wise boolean mask, use @ref neq.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if any of the components are not equivalent within the default epsilon.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr static bool allNeq(const Vector3D& lhs, const Vector3D<U>& rhs,
+                                                   double epsilon = (std::is_same_v<T, double> ||
+                                                                     std::is_same_v<U, double>)
+                                                       ? Config::DOUBLE_EPSILON
+                                                       : Config::FLOAT_EPSILON) noexcept;
+
+
+        /**
+         * @copybrief allEq(const Vector3D<U>&, double) const
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return True if all components are equivalent within the default epsilon.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr bool operator==(const Vector3D<U>& rhs) const noexcept;
+
+
+        /**
+         * @copybrief allNeq(const Vector3D<U>&, double) const
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return True if any of the components are not equivalent within the default epsilon.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr bool operator!=(const Vector3D<U>& rhs) const noexcept;
+
+
+        /**
+         * @brief Perform component-wise equality check.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note To obtain a single scalar result, use @ref allEq or @ref operator==.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The vector to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> eq(const Vector3D<U>& rhs,
+                                                  double epsilon = (std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>)
+                                                      ? Config::DOUBLE_EPSILON
+                                                      : Config::FLOAT_EPSILON) const noexcept;
+
+
+        /**
+         * @copybrief eq(const Vector3D<U>&, double) const
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr static Vector3D<bool> eq(const Vector3D& lhs, const Vector3D<U>& rhs,
+                                                         double epsilon = (std::is_same_v<T, double> ||
+                                                                           std::is_same_v<U, double>)
+                                                             ? Config::DOUBLE_EPSILON
+                                                             : Config::FLOAT_EPSILON) noexcept;
+
+
+        /**
+         * @brief Perform component-wise inequality check.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note To obtain a single scalar result, use @ref allNeq or @ref operator!=.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The vector to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> neq(const Vector3D<U>& rhs,
+                                                   double epsilon = (std::is_same_v<T, double> ||
+                                                                     std::is_same_v<U, double>)
+                                                       ? Config::DOUBLE_EPSILON
+                                                       : Config::FLOAT_EPSILON) const noexcept;
+
+
+        /**
+         * @copybrief neq(const Vector3D<U>&, double) const
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr static Vector3D<bool> neq(const Vector3D& lhs, const Vector3D<U>& rhs,
+                                                          double epsilon = (std::is_same_v<T, double> ||
+                                                                            std::is_same_v<U, double>)
+                                                              ? Config::DOUBLE_EPSILON
+                                                              : Config::FLOAT_EPSILON) noexcept;
+
+        /** @} */
 
 
 

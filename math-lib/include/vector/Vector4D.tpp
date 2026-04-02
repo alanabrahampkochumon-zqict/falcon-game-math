@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: January 26, 2026
  *
- * @brief @ref fgm::Vector4D template implementation.
+ * @brief @ref Vector4D template implementation.
  * @details This file contains the definitions of the template members declared in Vector4D.h
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon

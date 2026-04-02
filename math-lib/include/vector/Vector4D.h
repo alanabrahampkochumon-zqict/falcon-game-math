@@ -214,8 +214,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
          *
-         * @param[in] lhs     The first vector to compare.
-         * @param[in] rhs     The second vector to compare against.
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          * @return True if all components are equivalent within @p epsilon.
@@ -257,8 +257,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
          *
-         * @param[in] lhs     The first vector to compare.
-         * @param[in] rhs     The second vector to compare against.
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
@@ -329,8 +329,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
          *
-         * @param[in] lhs     The first vector to compare.
-         * @param[in] rhs     The second vector to compare against.
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
@@ -371,8 +371,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
          *
-         * @param[in] lhs     The first vector to compare.
-         * @param[in] rhs     The second vector to compare against.
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *

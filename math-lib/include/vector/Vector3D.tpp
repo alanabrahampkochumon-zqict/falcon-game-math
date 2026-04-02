@@ -4,7 +4,8 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: January 19, 2026
  *
- * @brief `Vector3D` implementation.
+ * @brief @ref Vector3D template implementation.
+ * @details This file contains the definitions of the template members declared in Vector3D.h
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,23 +27,29 @@ namespace fgm
     constexpr Vector3D<T>::Vector3D() noexcept: x(T(0)), y(T(0)), z(T(0))
     {}
 
+
     template <Arithmetic T>
     constexpr Vector3D<T>::Vector3D(T v1, T v2, T v3) noexcept: x(v1), y(v2), z(v3)
     {}
+
 
     template <Arithmetic T>
     constexpr Vector3D<T>::Vector3D(Vector2D<T> vec, T v) noexcept: x(vec.x), y(vec.y), z(v)
     {}
 
+
     template <Arithmetic T>
     constexpr Vector3D<T>::Vector3D(T v, Vector2D<T> vec) noexcept: x(v), y(vec.x), z(vec.y)
     {}
+
 
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr Vector3D<T>::Vector3D(const Vector3D<U>& other) noexcept
         : x(static_cast<T>(other.x)), y(static_cast<T>(other.y)), z(static_cast<T>(other.z))
     {}
+
+
 
 
     /*************************************
@@ -57,11 +64,126 @@ namespace fgm
         return ((&x)[i]);
     }
 
+
     template <Arithmetic T>
     const T& Vector3D<T>::operator[](std::size_t i) const
     {
         return ((&x)[i]);
     }
+
+
+
+    
+    /***************************************
+     *                                     *
+     *             EQUALITY                *
+     *                                     *
+     ***************************************/
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector3D<T>::allEq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    {
+
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+            return x == rhs.x && y == rhs.y && z == rhs.z;
+        else
+            /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
+            return (x == rhs.x || std::abs(x - rhs.x) <= epsilon) && (y == rhs.y || std::abs(y - rhs.y) <= epsilon) &&
+                (z == rhs.z || std::abs(z - rhs.z) <= epsilon);
+    }
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector3D<T>::allEq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
+    {
+        return lhs.allEq(rhs, epsilon);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector3D<T>::allNeq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    {
+
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+            return x != rhs.x || y != rhs.y || z != rhs.z;
+        else
+            /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
+            return (x != rhs.x && !(std::abs(x - rhs.x) <= epsilon)) ||
+                (y != rhs.y && !(std::abs(y - rhs.y) <= epsilon)) ||
+                (z != rhs.z && !(std::abs(z - rhs.z) <= epsilon));
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector3D<T>::allNeq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
+    {
+        return lhs.allNeq(rhs, epsilon);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector3D<T>::operator==(const Vector3D<U>& rhs) const noexcept
+    {
+        return this->allEq(rhs);
+    }
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector3D<T>::operator!=(const Vector3D<U>& rhs) const noexcept
+    {
+        return this->allNeq(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::eq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    {
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+            return Vector3D(x == rhs.x, y == rhs.y, z == rhs.z);
+        else
+            /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
+            return Vector3D(
+                (x == rhs.x || std::abs(x - rhs.x) <= epsilon), (y == rhs.y || std::abs(y - rhs.y) <= epsilon),
+                (z == rhs.z || std::abs(z - rhs.z) <= epsilon));
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::eq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
+    {
+        return lhs.eq(rhs, epsilon);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::neq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    {
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+            return Vector3D(x != rhs.x, y != rhs.y, z != rhs.z);
+        else
+            /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
+            return Vector3D<bool>(
+                (x != rhs.x) && !(std::abs(x - rhs.x) <= epsilon), (y != rhs.y) && !(std::abs(y - rhs.y) <= epsilon),
+                (z != rhs.z) && !(std::abs(z - rhs.z) <= epsilon));
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::neq(const Vector3D& lhs, const Vector3D<U>& rhs,
+                                              const double epsilon) noexcept
+    {
+        return lhs.neq(rhs, epsilon);
+    }
+
+
 
 
     /*************************************
