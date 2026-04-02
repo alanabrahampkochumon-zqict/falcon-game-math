@@ -24,6 +24,7 @@
 
 #include "common/Config.h"
 #include "common/OperationStatus.h"
+#include "common/Constants.h"
 
 #include <type_traits>
 
@@ -1026,6 +1027,92 @@ namespace fgm
     using lVec3 = Vector3D<long long>;           ///< `long long` vector
     using dVec3 = Vector3D<double>;              ///< `double` vector
     using ulVec3 = Vector3D<unsigned long long>; ///< `unsigned long long` vector
+
+    /** @} */
+
+
+
+    /**
+     * @addtogroup FGM_Vec3_Const
+     * @{
+     */
+
+    /*************************************
+     *                                   *
+     *            CONSTANTS              *
+     *                                   *
+     *************************************/
+    namespace vec3d
+    {
+
+        /**
+         * @brief A 3D vector with all components set to one (1, 1, 1).
+         *
+         * @note Only available for @ref fgm::StrictArithmetic types.
+         */
+        template <StrictArithmetic T>
+        inline constexpr Vector3D<T> one = Vector3D<T>(T(1), T(1), T(1));
+
+
+        /**
+         * @brief A 3D vector with all components set to zero (0, 0, 0).
+         *
+         * @note Only available for @ref fgm::StrictArithmetic types.
+         */
+        template <StrictArithmetic T>
+        inline constexpr Vector3D<T> zero =
+            Vector3D<T>(T(0), T(0), T(0)); ///< 3D-Vector with all zero-components.
+
+
+        /**
+         * @brief A 3D vector with all components set to positive infinity.
+         *
+         * @note Only available for `std::floating_point` types.
+         */
+        template <StrictArithmetic T>
+            requires std::floating_point<T>
+        inline constexpr Vector3D<T> inf = Vector3D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D),
+                                                       T(constants::INFINITY_D));
+
+
+        /**
+         * @brief A 3D vector with all components set to negative infinity.
+         *
+         * @note Only available for `std::floating_point` types.
+         */
+        template <StrictArithmetic T>
+            requires std::floating_point<T>
+        inline constexpr Vector3D<T> infN = Vector3D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D),
+                                                        T(-constants::INFINITY_D));
+
+
+        /**
+         * @brief A 3D vector with all components set to Not-A-Number (NaN).
+         *
+         * @note Only available for `std::floating_point` types.
+         */
+        template <StrictArithmetic T>
+            requires std::floating_point<T>
+        inline constexpr Vector3D<T> nan =
+            Vector3D<T>(T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D));
+
+
+        /** @brief A 3D unit vector aligned with the positive X-axis (1, 0, 0). */
+        template <StrictArithmetic T>
+        inline constexpr Vector3D<T> x = Vector3D<T>(T(1), T(0), T(0));
+
+
+        /** @brief A 3D unit vector aligned with the positive Y-axis (0, 1, 0). */
+        template <StrictArithmetic T>
+        inline constexpr Vector3D<T> y = Vector3D<T>(T(0), T(1), T(0));
+
+
+        /** @brief A 3D unit vector aligned with the positive Z-axis (0, 0, 1). */
+        template <StrictArithmetic T>
+        inline constexpr Vector3D<T> z = Vector3D<T>(T(0), T(0), T(1));
+
+
+    } // namespace vec4d
 
     /** @} */
 
