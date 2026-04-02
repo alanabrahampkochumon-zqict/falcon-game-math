@@ -955,8 +955,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] lhs First vector to perform the dot product on.
-         * @param[in] rhs Second vector to perform the dot product on.
+         * @param[in] lhs The first vector to compute the dot product with.
+         * @param[in] rhs The second vector to compute the dot product with.
          *
          * @return The scalar dot product of @p lhs and @p rhs.
          */

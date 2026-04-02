@@ -896,16 +896,55 @@ namespace fgm
         /** @} */
 
 
+        /**
+         * @addtogroup FGM_Vec4_Product
+         * @{
+         */
+
         /*************************************
          *                                   *
-         *       VECTOR DOT PRODUCT          *
+         *        VECTOR DOT PRODUCT         *
          *                                   *
          *************************************/
-        template <Arithmetic U>
-        auto dot(const Vector3D<U>& other) const -> std::common_type_t<T, U>;
 
-        template <Arithmetic U>
-        static auto dot(const Vector3D& vecA, const Vector3D<U>& vecB) -> std::common_type_t<T, U>;
+        /**
+         * @brief Calculate the dot product of this vector with another vector.
+         *        Compute the scalar product: \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compute the dot product with.
+         *
+         * @return The scalar dot product of the two vectors.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto dot(const Vector3D<U>& rhs) const noexcept -> std::common_type_t<T, U>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Calculate the dot product of a vector with another vector.
+         *        Compute the scalar product: \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first vector to compute the dot product with.
+         * @param[in] rhs The second vector to compute the dot product with.
+         *
+         * @return The scalar dot product of @p lhs and @p rhs.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static auto dot(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+            -> std::common_type_t<T, U>
+            requires StrictArithmetic<T>;
+
+        /** @} */
 
 
         /*************************************

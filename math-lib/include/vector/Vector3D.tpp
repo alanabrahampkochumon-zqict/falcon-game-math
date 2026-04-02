@@ -560,6 +560,8 @@ namespace fgm
     }
 
 
+
+
     /*************************************
      *                                   *
      *         VECTOR MAGNITUDE          *
@@ -573,6 +575,8 @@ namespace fgm
     }
 
 
+
+
     /*************************************
      *                                   *
      *       VECTOR NORMALIZATION        *
@@ -584,24 +588,41 @@ namespace fgm
         return (*this) / mag();
     }
 
+
+
     /*************************************
      *                                   *
      *        VECTOR DOT PRODUCT         *
      *                                   *
      *************************************/
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector3D<T>::dot(const Vector3D<U>& other) const -> std::common_type_t<T, U>
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::dot(const Vector3D<U>& rhs) const noexcept -> std::common_type_t<T, U>
+        requires StrictArithmetic<T>
     {
-        return x * other.x + y * other.y + z * other.z;
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
+        using R = std::common_type_t<T, U>;
+        if constexpr (std::is_floating_point_v<R>)
+            return std::fma(static_cast<R>(x), static_cast<R>(rhs.x),
+                            std::fma(static_cast<R>(y), static_cast<R>(rhs.y),
+                                     std::fma(static_cast<R>(z), static_cast<R>(rhs.z), T(0))));
+        else
+            return x * rhs.x + y * rhs.y + z * rhs.z;
+#else
+        return x * rhs.x + y * rhs.y + z * rhs.z;
+#endif
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector3D<T>::dot(const Vector3D& vecA, const Vector3D<U>& vecB) -> std::common_type_t<T, U>
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::dot(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept -> std::common_type_t<T, U>
+        requires StrictArithmetic<T>
     {
-        return vecA.dot(vecB);
+        return lhs.dot(rhs);
     }
+
+
 
 
     /*************************************
