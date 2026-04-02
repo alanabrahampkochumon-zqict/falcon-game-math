@@ -80,9 +80,9 @@ namespace fgm
         /**
          * @brief Initialize @ref fgm::Vector3D with passed in values.
          *
-         * @param[in] v1 First entry of @ref fgm::Vector3D.
-         * @param[in] v2 Second entry of @ref fgm::Vector3D.
-         * @param[in] v3 Third entry of @ref fgm::Vector3D.
+         * @param[in] v1 The first entry of @ref fgm::Vector3D.
+         * @param[in] v2 The second entry of @ref fgm::Vector3D.
+         * @param[in] v3 The third entry of @ref fgm::Vector3D.
          */
         [[nodiscard]] constexpr Vector3D(T v1, T v2, T v3) noexcept;
 
@@ -90,8 +90,8 @@ namespace fgm
         /**
          * @brief Initialize @ref fgm::Vector3D with 1 @ref Vector2D and 1 @ref T value.
          *
-         * @param[in] vec First two entries of @ref fgm::Vector3D.
-         * @param[in] v   Last entry for @ref fgm::Vector3D.
+         * @param[in] vec The first two entries of @ref fgm::Vector3D.
+         * @param[in] v   The last entry of @ref fgm::Vector3D.
          */
         [[nodiscard]] constexpr Vector3D(Vector2D<T> vec, T v) noexcept;
 
@@ -99,8 +99,8 @@ namespace fgm
         /**
          * @brief Initialize @ref fgm::Vector3D with 1 @ref T value and 1 @ref Vector2D.
          *
-         * @param[in] v   First entry for @ref fgm::Vector3D.
-         * @param[in] vec Last two entries of @ref fgm::Vector3D.
+         * @param[in] v   The first entry for @ref fgm::Vector3D.
+         * @param[in] vec The last two entries of @ref fgm::Vector3D.
          */
         [[nodiscard]] constexpr Vector3D(T v, Vector2D<T> vec) noexcept;
 
@@ -110,7 +110,7 @@ namespace fgm
          *
          * @tparam U Numeric type of the source vector.
          *
-         * @param[in] other Source vector to be converted.
+         * @param[in] other The source vector to be converted.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector3D(const Vector3D<U>& other) noexcept;
@@ -122,7 +122,24 @@ namespace fgm
          *                                   *
          *************************************/
 
+        /**
+         * @brief Access the component at the specified location.
+         *        Provide read-write access to the element.
+         *
+         * @param[in] i The index of the vector component.
+         *
+         * @return A reference to the vector component.
+         */
         T& operator[](std::size_t i);
+
+
+        /**
+         * @brief Access the element at the specified location (read-only).
+         *
+         * @param[in] i The index of the vector component.
+         *
+         * @return A const reference to the vector component.
+         */
         const T& operator[](std::size_t i) const;
 
         /** @} */
