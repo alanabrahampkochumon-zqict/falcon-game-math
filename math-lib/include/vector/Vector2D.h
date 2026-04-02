@@ -49,8 +49,8 @@ namespace fgm
          *                                   *
          *************************************/
 
-        T& operator[](std::size_t i);
-        const T& operator[](std::size_t i) const;
+        constexpr T& operator[](std::size_t i) noexcept;
+        constexpr const T& operator[](std::size_t i) const noexcept;
 
 
         /*************************************

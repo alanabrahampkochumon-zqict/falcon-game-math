@@ -35,6 +35,10 @@ namespace fgm
     {}
 
     template <Arithmetic T>
+    constexpr Vector3D<T>::Vector3D(T v, Vector2D<T> vec) noexcept: x(v), y(vec.x), z(vec.y)
+    {}
+
+    template <Arithmetic T>
     template <Arithmetic U>
     constexpr Vector3D<T>::Vector3D(const Vector3D<U>& other) noexcept
         : x(static_cast<T>(other.x)), y(static_cast<T>(other.y)), z(static_cast<T>(other.z))
@@ -239,8 +243,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector3D<T>::project(const Vector3D& vector, const Vector3D<U>& onto,
-                              bool ontoNormalized) -> Vector3D<std::common_type_t<T, U>>
+    auto Vector3D<T>::project(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized)
+        -> Vector3D<std::common_type_t<T, U>>
     {
         return vector.project(onto, ontoNormalized);
     }
@@ -261,8 +265,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector3D<T>::reject(const Vector3D& vector, const Vector3D<U>& onto,
-                             bool ontoNormalized) -> Vector3D<std::common_type_t<T, U>>
+    auto Vector3D<T>::reject(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized)
+        -> Vector3D<std::common_type_t<T, U>>
     {
         return vector.reject(onto, ontoNormalized);
     }

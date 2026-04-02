@@ -86,13 +86,24 @@ namespace fgm
          */
         [[nodiscard]] constexpr Vector3D(T v1, T v2, T v3) noexcept;
 
+
         /**
          * @brief Initialize @ref fgm::Vector3D with 1 @ref Vector2D and 1 @ref T value.
          *
          * @param[in] vec First two entries of @ref fgm::Vector3D.
-         * @param[in] v   Last entry for @ref fgm::Vector4D.
+         * @param[in] v   Last entry for @ref fgm::Vector3D.
          */
         [[nodiscard]] constexpr Vector3D(Vector2D<T> vec, T v) noexcept;
+
+
+        /**
+         * @brief Initialize @ref fgm::Vector3D with 1 @ref T value and 1 @ref Vector2D.
+         *
+         * @param[in] v   First entry for @ref fgm::Vector3D.
+         * @param[in] vec Last two entries of @ref fgm::Vector3D.
+         */
+        [[nodiscard]] constexpr Vector3D(T v, Vector2D<T> vec) noexcept;
+
 
         template <Arithmetic S>
         [[nodiscard]] constexpr Vector3D(const Vector3D<S>& other) noexcept;
