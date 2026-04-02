@@ -1005,13 +1005,29 @@ namespace fgm
     template <Arithmetic T, Arithmetic S>
     auto operator*(S scalar, const Vector3D<T>& vector) -> Vector3D<std::common_type_t<T, S>>;
 
+
+
+
+    /**
+     * @addtogroup FGM_Vec4_Alias
+     * @{
+     */
+
     /*************************************
      *                                   *
      *             ALIASES               *
      *                                   *
      *************************************/
-    using vec3 = Vector3D<float>;
-    using dvec3 = Vector3D<double>;
+
+    using bVec3 = Vector3D<bool>;                ///< `bool` vector
+    using iVec3 = Vector3D<int>;                 ///< `int` vector
+    using uVec3 = Vector3D<unsigned int>;        ///< `unsigned int` vector
+    using vec3 = Vector3D<float>;                ///< `float` vector
+    using lVec3 = Vector3D<long long>;           ///< `long long` vector
+    using dVec3 = Vector3D<double>;              ///< `double` vector
+    using ulVec3 = Vector3D<unsigned long long>; ///< `unsigned long long` vector
+
+    /** @} */
 
 } // namespace fgm
 

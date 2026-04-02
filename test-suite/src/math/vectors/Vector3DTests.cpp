@@ -27,7 +27,7 @@ TEST(Vector3D_Helper, vec3Return3DFloatVector)
 TEST(Vector3D_Helper, dvec3Return3DDoubleVector)
 {
     // Arrange & Act
-    constexpr bool isCorrectType = std::is_same_v<fgm::dvec3, fgm::Vector3D<double>>;
+    constexpr bool isCorrectType = std::is_same_v<fgm::dVec3, fgm::Vector3D<double>>;
 
     // Assert
     EXPECT_TRUE(isCorrectType);

@@ -1550,16 +1550,16 @@ namespace fgm
 
 
 
+    /**
+     * @addtogroup FGM_Vec4_Alias
+     * @{
+     */
+
     /*************************************
      *                                   *
      *             ALIASES               *
      *                                   *
      *************************************/
-
-    /**
-     * @addtogroup FGM_Vec4_Alias
-     * @{
-     */
 
     using bVec4 = Vector4D<bool>;                ///< `bool` vector
     using iVec4 = Vector4D<int>;                 ///< `int` vector
@@ -1569,9 +1569,10 @@ namespace fgm
     using dVec4 = Vector4D<double>;              ///< `double` vector
     using ulVec4 = Vector4D<unsigned long long>; ///< `unsigned long long` vector
 
-
-
     /** @} */
+
+
+
     /**
      * @addtogroup FGM_Vec4_Const
      * @{

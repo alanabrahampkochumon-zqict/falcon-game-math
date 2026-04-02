@@ -575,11 +575,11 @@ TEST(Matrix3D_Product, DoubleVectorTimesAMatrixReturnsANewVectorWithPromotedType
     // Arrange
     const fgm::Matrix3D mat = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f };
 
-    fgm::dvec3 vec(2.0, 1.0, 3.0);
-    const fgm::dvec3 expected(27.0, 33.0, 39.0);
+    fgm::dVec3 vec(2.0, 1.0, 3.0);
+    const fgm::dVec3 expected(27.0, 33.0, 39.0);
 
     // Act
-    const fgm::dvec3 actual = vec * mat;
+    const fgm::dVec3 actual = vec * mat;
 
     // Assert
     static_assert(std::is_same_v<typename decltype(actual)::value_type, double>,
@@ -593,7 +593,7 @@ TEST(Matrix3D_Product, DoubleVectorTimesEqualAMatrixReturnsANewVectorWithPromote
     const fgm::Matrix3D mat = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f };
 
     fgm::vec3 vec(2.0f, 1.0f, 3.0f);
-    const fgm::dvec3 expected(27.0, 33.0, 39.0);
+    const fgm::dVec3 expected(27.0, 33.0, 39.0);
 
     // Act
     vec *= mat;
