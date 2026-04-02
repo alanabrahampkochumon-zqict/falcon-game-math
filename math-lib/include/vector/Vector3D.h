@@ -1057,9 +1057,32 @@ namespace fgm
      *       NON-MEMBER FUNCTIONS        *
      *                                   *
      *************************************/
-    template <Arithmetic T, Arithmetic S>
-    auto operator*(S scalar, const Vector3D<T>& vector) -> Vector3D<std::common_type_t<T, S>>;
 
+    /**
+     * @addtogroup FGM_Vec4_Arithmetic
+     * @{
+     */
+
+    /**
+     * @brief Scale the vector by a scalar value.
+     *        Multiply @p scalar by each component of the vector and returns a new vector.
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] vector The vector to scale[RHS].
+     *
+     * @return A new @ref Vector4D scaled by @p scalar.
+     */
+    template <StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] constexpr auto operator*(S scalar, const Vector3D<T>& vector) noexcept
+        -> Vector3D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>;
+
+    /** @} */
 
 
 
