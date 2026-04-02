@@ -18,6 +18,8 @@
 
 #include "Vector2D.h"
 
+#include "common/Config.h"
+
 #include <type_traits>
 
 
@@ -143,6 +145,10 @@ namespace fgm
         const T& operator[](std::size_t i) const;
 
         /** @} */
+
+
+
+        
 
 
 
