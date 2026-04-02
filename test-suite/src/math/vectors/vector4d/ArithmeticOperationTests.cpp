@@ -804,8 +804,10 @@ TEST_P(Vector4DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNCompon
  * @{
  */
 
-/** @test Verify that  @ref fgm::Vector4D unary minus operator inverts each component and returns a new @ref
- * fgm::Vector4D. */
+/** 
+ * @test Verify that  @ref fgm::Vector4D unary minus operator inverts each component and
+ *       returns a new vector.
+ */
 TYPED_TEST(Vector4DInversion, InvertsTheSignOfEachComponents)
 {
     const fgm::Vector4D inverted = -this->_vec;

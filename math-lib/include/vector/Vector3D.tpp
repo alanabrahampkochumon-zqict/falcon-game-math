@@ -355,7 +355,6 @@ namespace fgm
 
 
     
-
     /*************************************
      *                                   *
      *      ARITHMETIC OPERATORS         *
@@ -363,86 +362,204 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector3D<T>::operator+(const Vector3D<U>& other) const -> Vector3D<std::common_type_t<T, U>>
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::operator+(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>>
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        return Vector3D<R>(x + other.x, y + other.y, z + other.z);
+        return Vector3D<R>(x + rhs.x, y + rhs.y, z + rhs.z);
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic U>
-    Vector3D<T>& Vector3D<T>::operator+=(const Vector3D<U>& other)
+    template <StrictArithmetic U>
+    constexpr Vector3D<T>& Vector3D<T>::operator+=(const Vector3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
     {
-        x += static_cast<T>(other.x);
-        y += static_cast<T>(other.y);
-        z += static_cast<T>(other.z);
+        x += static_cast<T>(rhs.x);
+        y += static_cast<T>(rhs.y);
+        z += static_cast<T>(rhs.z);
         return *this;
     }
 
-    template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector3D<T>::operator-(const Vector3D<U>& other) const -> Vector3D<std::common_type_t<T, U>>
-    {
-        using R = std::common_type_t<T, U>;
-        return Vector3D<R>(x - other.x, y - other.y, z - other.z);
-    }
 
     template <Arithmetic T>
-    template <Arithmetic U>
-    Vector3D<T>& Vector3D<T>::operator-=(const Vector3D<U>& other)
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::operator-(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>>
+        requires StrictArithmetic<T>
     {
-        x -= static_cast<T>(other.x);
-        y -= static_cast<T>(other.y);
-        z -= static_cast<T>(other.z);
+        using R = std::common_type_t<T, U>;
+        return Vector3D<R>(x - rhs.x, y - rhs.y, z - rhs.z);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<T>& Vector3D<T>::operator-=(const Vector3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        x -= static_cast<T>(rhs.x);
+        y -= static_cast<T>(rhs.y);
+        z -= static_cast<T>(rhs.z);
         return *this;
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic S>
-    auto Vector3D<T>::operator*(S scalar) const -> Vector3D<std::common_type_t<T, S>>
+    constexpr Vector3D<T> Vector3D<T>::operator-() const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        return Vector3D(-x, -y, -z);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector3D<T>::operator*(const S scalar) const noexcept -> Vector3D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
         return Vector3D<R>(x * scalar, y * scalar, z * scalar);
     }
 
 
-    template <Arithmetic T, Arithmetic S>
-    auto operator*(S scalar, const Vector3D<T>& vector) -> Vector3D<std::common_type_t<T, S>>
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr auto operator*(const S scalar, const Vector3D<T>& vector) noexcept -> Vector3D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
     {
         return vector * scalar;
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic S>
-    Vector3D<T>& Vector3D<T>::operator*=(S scalar)
+    template <StrictArithmetic S>
+    constexpr Vector3D<T>& Vector3D<T>::operator*=(const S scalar) noexcept
+        requires StrictArithmetic<T>
     {
+
         x = static_cast<T>(scalar * x);
         y = static_cast<T>(scalar * y);
         z = static_cast<T>(scalar * z);
-        return (*this);
+        return *this;
     }
 
-    template <Arithmetic T>
-    template <Arithmetic S>
-    auto Vector3D<T>::operator/(S scalar) const -> Vector3D<std::common_type_t<T, S>>
-    {
-        using R = std::common_type_t<T, S>;
-        R factor = R(1) / scalar;
-        return Vector3D<R>(factor * x, factor * y, factor * z);
-    }
 
     template <Arithmetic T>
-    template <Arithmetic S>
-    Vector3D<T>& Vector3D<T>::operator/=(S scalar)
+    template <StrictArithmetic S>
+    constexpr auto Vector3D<T>::operator/(const S scalar) const noexcept -> Vector3D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
-        R factor = R(1) / scalar;
-        x = static_cast<T>(x * factor);
-        y = static_cast<T>(y * factor);
-        z = static_cast<T>(z * factor);
-        return (*this);
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            R factor = R(1) / static_cast<R>(scalar);
+            return Vector3D<R>(x * factor, y * factor, z * factor);
+        }
+        else
+        {
+            assert(scalar != 0 && "Integral division by zero");
+            R tScalar = static_cast<R>(scalar);
+            return Vector3D<R>(x / tScalar, y / tScalar, z / tScalar);
+        }
     }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vector3D<T>& Vector3D<T>::operator/=(const S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, S>;
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            R factor = R(1) / static_cast<R>(scalar);
+
+            x = static_cast<T>(factor * x);
+            y = static_cast<T>(factor * y);
+            z = static_cast<T>(factor * z);
+        }
+        else
+        {
+            x /= static_cast<T>(scalar);
+            y /= static_cast<T>(scalar);
+            z /= static_cast<T>(scalar);
+        }
+
+        return *this;
+    }
+
+
+    //template <Arithmetic T>
+    //template <StrictArithmetic S>
+    //constexpr auto Vector3D<T>::safeDiv(const S scalar) const noexcept -> Vector3D<std::common_type_t<T, S>>
+    //    requires StrictArithmetic<T>
+    //{
+    //    using R = std::common_type_t<T, S>;
+
+    //    if constexpr (std::is_floating_point_v<R>)
+    //        if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+    //            return fgm::vec4d::zero<R>;
+    //    if constexpr (std::is_integral_v<R>)
+    //        if (scalar == 0)
+    //            return fgm::vec4d::zero<R>;
+
+    //    return (*this) / scalar;
+    //}
+
+
+    //template <Arithmetic T>
+    //template <StrictArithmetic S>
+    //constexpr auto Vector3D<T>::safeDiv(const Vector3D& vec, const S scalar) noexcept
+    //    -> Vector3D<std::common_type_t<T, S>>
+    //    requires StrictArithmetic<T>
+    //{
+    //    return vec.safeDiv(scalar);
+    //}
+
+
+    //template <Arithmetic T>
+    //template <StrictArithmetic S>
+    //constexpr auto Vector3D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
+    //    -> Vector3D<std::common_type_t<T, S>>
+    //    requires StrictArithmetic<T>
+    //{
+    //    using R = std::common_type_t<T, S>;
+
+    //    if constexpr (std::is_floating_point_v<R>)
+    //    {
+    //        if (hasNaN() | std::isnan(scalar))
+    //        {
+    //            status = OperationStatus::NANOPERAND;
+    //            return fgm::vec4d::zero<R>;
+    //        }
+    //        if (std::abs(scalar) <= std::numeric_limits<S>::epsilon())
+    //        {
+    //            status = OperationStatus::DIVISIONBYZERO;
+    //            return fgm::vec4d::zero<R>;
+    //        }
+    //    }
+
+    //    if constexpr (std::is_integral_v<R>)
+    //        if (scalar == 0)
+    //        {
+    //            status = OperationStatus::DIVISIONBYZERO;
+    //            return fgm::vec4d::zero<R>;
+    //        }
+
+
+    //    status = OperationStatus::SUCCESS;
+    //    return (*this) / scalar;
+    //}
+
+
+    //template <Arithmetic T>
+    //template <StrictArithmetic S>
+    //constexpr auto Vector3D<T>::tryDiv(const Vector3D& vec, S scalar, OperationStatus& status) noexcept
+    //    -> Vector3D<std::common_type_t<T, S>>
+    //    requires StrictArithmetic<T>
+    //{
+    //    return vec.tryDiv(scalar, status);
+    //}
 
 
     /*************************************
