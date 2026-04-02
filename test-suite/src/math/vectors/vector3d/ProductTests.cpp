@@ -1,15 +1,15 @@
 /**
  * @file ProductTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: March 07, 2026
+ * @date Created on: April 02, 2026
  *
- * @brief Verifies @ref fgm::Vector4D dot product logic.
+ * @brief Verifies @ref fgm::Vector3D dot product logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector4DTestSetup.h"
+#include "Vector3DTestSetup.h"
 
 
 
@@ -20,14 +20,14 @@
  **************************************/
 
 template <typename T>
-class Vector4DDotProduct: public ::testing::Test
+class Vector3DDotProduct: public ::testing::Test
 {
 protected:
-    fgm::Vector4D<T> _vecA;
-    fgm::Vector4D<T> _vecB;
+    fgm::Vector3D<T> _vecA;
+    fgm::Vector3D<T> _vecB;
 
-    fgm::Vector4D<T> _vecAOrthogonal;
-    fgm::Vector4D<T> _vecBOrthogonal;
+    fgm::Vector3D<T> _vecAOrthogonal;
+    fgm::Vector3D<T> _vecBOrthogonal;
 
     T _expectedDotProduct;
 
@@ -35,27 +35,28 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(2), T(3), T(4), T(5) };
-        _vecB = { T(6), T(7), T(8), T(9) };
-        _vecAOrthogonal = { T(3), T(0), T(4), T(0) };
-        _vecBOrthogonal = { T(0), T(5), T(0), T(6) };
-        _expectedDotProduct = static_cast<T>(110);
+        _vecA = { T(2), T(3), T(4) };
+        _vecB = { T(6), T(7), T(8) };
+        // TODO: Add orthogonal
+        _vecAOrthogonal = { T(3), T(0), T(4) };
+        _vecBOrthogonal = { T(0), T(5), T(0) };
+        _expectedDotProduct = static_cast<T>(65);
 
-        _expectedADotA = static_cast<T>(54);
+        _expectedADotA = static_cast<T>(29);
     }
 };
-/** @brief Test fixture for @ref fgm::Vector4D dot project, parameterized by @ref SupportedArithmeticTypes */
-TYPED_TEST_SUITE(Vector4DDotProduct, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector3D dot project, parameterized by @ref SupportedArithmeticTypes */
+TYPED_TEST_SUITE(Vector3DDotProduct, SupportedArithmeticTypes);
 
 
 
 /**
- * @addtogroup T_FGM_Vec4_Dot
+ * @addtogroup T_FGM_Vec3_Dot
  * @{
  */
 
 /** @test Verify that the dot product of a vector with itself returns its squared magnitude. */
-TYPED_TEST(Vector4DDotProduct, SelfDotProductReturnsSquareMagnitude)
+TYPED_TEST(Vector3DDotProduct, SelfDotProductReturnsSquareMagnitude)
 {
 
     const TypeParam result = this->_vecA.dot(this->_vecA);
@@ -70,7 +71,7 @@ TYPED_TEST(Vector4DDotProduct, SelfDotProductReturnsSquareMagnitude)
 
 
 /** @test Verify that the dot product of a vector with an orthogonal vector returns zero. */
-TYPED_TEST(Vector4DDotProduct, OrthogonalDotProductReturnZero)
+TYPED_TEST(Vector3DDotProduct, OrthogonalDotProductReturnZero)
 {
     const TypeParam result = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
 
@@ -84,7 +85,7 @@ TYPED_TEST(Vector4DDotProduct, OrthogonalDotProductReturnZero)
 
 
 /** @test Verify that the dot product of a vector with a non-orthogonal vector returns a non-zero scalar. */
-TYPED_TEST(Vector4DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
+TYPED_TEST(Vector3DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 {
     const TypeParam result = this->_vecA.dot(this->_vecB);
 
@@ -97,10 +98,10 @@ TYPED_TEST(Vector4DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 }
 
 
-/** @test Verify that the static variant of @ref fgm::Vector4D::dot returns a non-zero scalar. */
-TYPED_TEST(Vector4DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
+/** @test Verify that the static variant of @ref fgm::Vector3D::dot returns a non-zero scalar. */
+TYPED_TEST(Vector3DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
 {
-    const TypeParam result = fgm::Vector4D<TypeParam>::dot(this->_vecA, this->_vecB);
+    const TypeParam result = fgm::Vector3D<TypeParam>::dot(this->_vecA, this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
         EXPECT_DOUBLE_EQ(this->_expectedDotProduct, result);
@@ -115,11 +116,11 @@ TYPED_TEST(Vector4DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZe
  * @test Verify that the dot product of a vector with another vector in opposite direction
  *        returns a negative scalar.
  */
-TEST(Vector4DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
+TEST(Vector3DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
 {
     // Given two opposite vectors
-    constexpr fgm::Vector4D vecA(-1.0, 0.0, 0.0, 0.0);
-    constexpr fgm::Vector4D vecB(1.0, 0.0, 0.0, 0.0);
+    constexpr fgm::Vector3D vecA(-1.0, 0.0, 0.0);
+    constexpr fgm::Vector3D vecB(1.0, 0.0, 0.0);
 
     // When dot with each other
     const double result = vecA.dot(vecB);
@@ -133,11 +134,11 @@ TEST(Vector4DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
  * @test Verify that the dot product of a vector with another vector of different type
  *        returns a type promoted vector.
  */
-TEST(Vector4DDotProduct, MixedTypeDotProductPromotesType)
+TEST(Vector3DDotProduct, MixedTypeDotProductPromotesType)
 {
     // Given two vectors of different type
-    constexpr fgm::Vector4D vecA(7, 13, 29, 41);
-    constexpr fgm::Vector4D vecB(1.123456789, 2.123456789, 3.123456789, 4.123456789);
+    constexpr fgm::Vector3D vecA(7, 13, 29);
+    constexpr fgm::Vector3D vecB(1.123456789, 2.123456789, 3.123456789);
 
     // When dot with each other
     const auto result = vecA.dot(vecB);
@@ -146,7 +147,7 @@ TEST(Vector4DDotProduct, MixedTypeDotProductPromotesType)
     static_assert(std::is_same_v<decltype(result), const double>);
 
     // Then, the dot product is non-zero
-    EXPECT_DOUBLE_EQ(295.11111101, result);
+    EXPECT_DOUBLE_EQ(126.049382661, result);
 }
 
 /** @} */
