@@ -96,7 +96,7 @@ namespace fgm
 
 
         /**
-         * @brief Initialize @ref fgm::Vector4D with passed in values.
+         * @brief Initialize @ref Vector4D with passed in values.
          *
          * @param[in] v1 The first entry of @ref Vector4D.
          * @param[in] v2 The second entry of @ref Vector4D.
@@ -107,16 +107,16 @@ namespace fgm
 
 
         /**
-         * @brief Initialize @ref fgm::Vector4D with 2 @ref Vector2D.
+         * @brief Initialize @ref Vector4D with 2 @ref Vector2D.
          *
-         * @param[in] vec1 First two entries of @ref Vector4D.
-         * @param[in] vec2 Last two entries of @ref Vector4D.
+         * @param[in] vec1 The first two entries of @ref Vector4D.
+         * @param[in] vec2 The last two entries of @ref Vector4D.
          */
         [[nodiscard]] constexpr Vector4D(const Vector2D<T>& vec1, const Vector2D<T>& vec2) noexcept;
 
 
         /**
-         * @brief Initialize @ref fgm::Vector4D with 1 @ref Vector3D and 1 @ref T value.
+         * @brief Initialize @ref Vector4D with 1 @ref Vector3D and 1 @ref T value.
          *
          * @param[in] vec The first three entries of @ref Vector4D.
          * @param[in] v   The last entry of @ref Vector4D.
@@ -125,7 +125,7 @@ namespace fgm
 
 
         /**
-         * @brief Initialize @ref fgm::Vector4D with 1 T value and 1 @ref Vector3D.
+         * @brief Initialize @ref Vector4D with 1 T value and 1 @ref Vector3D.
          *
          * @param[in] vec The first three entries of @ref Vector4D.
          * @param[in] v   The last entry of @ref Vector4D.
