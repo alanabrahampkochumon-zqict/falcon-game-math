@@ -420,8 +420,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in]  lhs First vector to compare.
-         * @param[in]  rhs Second vector to compare against.
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
          *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
@@ -450,8 +450,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in]  lhs First vector to compare.
-         * @param[in]  rhs Second vector to compare against.
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
          *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
@@ -486,8 +486,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in]  lhs First vector to compare.
-         * @param[in]  rhs Second vector to compare against.
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
          *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */
@@ -522,8 +522,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in]  lhs First vector to compare.
-         * @param[in]  rhs Second vector to compare against.
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
          *
          * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
          */

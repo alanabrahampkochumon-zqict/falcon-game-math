@@ -315,6 +315,7 @@ namespace fgm
 
 
 
+
     /***************************************
      *                                     *
      *      BOOLEAN BITWISE OPERATORS      *

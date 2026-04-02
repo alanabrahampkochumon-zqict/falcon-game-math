@@ -367,6 +367,186 @@ namespace fgm
 
 
 
+        /**
+         * @addtogroup FGM_Vec4_Comparison
+         * @{
+         */
+
+        /***************************************
+         *                                     *
+         *            COMPARISONS              *
+         *                                     *
+         ***************************************/
+
+        /**
+         * @brief Perform component-wise greater-than comparison.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> gt(const Vector3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copybrief gt(const Vector3D<U>&) const
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector3D<bool> gt(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise greater-than-or-equal comparison.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> gte(const Vector3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copybrief gte(const Vector3D<U>&) const
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector3D<bool> gte(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise less-than comparison.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> lt(const Vector3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copybrief lt(const Vector3D<U>&) const
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector3D<bool> lt(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise less-than-or-equal comparison.
+         *        Compares each component pair and returns a boolean mask.
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> lte(const Vector3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copybrief lte(const Vector3D<U>&) const
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector3D<bool> lte(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+#ifdef ENABLE_FGM_SHADER_OPERATORS
+
+        /**
+         * @copydoc gt(const Vector3D<U>&) const
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> operator>(const Vector3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copydoc gte(const Vector3D<U>&) const
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> operator>=(const Vector3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copydoc lt(const Vector3D<U>&) const
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> operator<(const Vector3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copydoc lte(const Vector3D<U>&) const
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector3D<bool> operator<=(const Vector3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+#endif
+
+        /** @} */
+
+
         
         /**
          * @addtogroup FGM_Vec3_Bitwise

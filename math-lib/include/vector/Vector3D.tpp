@@ -184,6 +184,129 @@ namespace fgm
     }
 
 
+
+
+    
+    /***************************************
+     *                                     *
+     *            COMPARISONS              *
+     *                                     *
+     ***************************************/
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::gt(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return Vector3D(x > rhs.x, y > rhs.y, z > rhs.z);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::gt(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        return lhs.gt(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::gte(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return Vector3D(x >= rhs.x, y >= rhs.y, z >= rhs.z);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::gte(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        return lhs.gte(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::lt(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return Vector3D(x < rhs.x, y < rhs.y, z < rhs.z);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::lt(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        return lhs.lt(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::lte(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = Magnitude<std::common_type_t<T, U>>;
+        return Vector3D<bool>(static_cast<R>(x) <= static_cast<R>(rhs.x), static_cast<R>(y) <= static_cast<R>(rhs.y),
+                              static_cast<R>(z) <= static_cast<R>(rhs.z));
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::lte(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        return lhs.lte(rhs);
+    }
+
+
+#ifdef ENABLE_FGM_SHADER_OPERATORS
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::operator>(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return this->gt(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::operator>=(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return this->gte(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::operator<(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return this->lt(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector3D<bool> Vector3D<T>::operator<=(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return this->lte(rhs);
+    }
+
+#endif
+
+
     
 
     /***************************************
