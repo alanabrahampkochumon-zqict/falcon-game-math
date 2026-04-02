@@ -64,11 +64,45 @@
              * @}
              */
 
+/**
+             * @defgroup FGM_Vector3D_Tests Vector4D Test Suite
+             * @brief Verification of 3D Euclidean vector operations.
+             * @ingroup VectorTests
+             * @{
+             *   @defgroup T_FGM_Vec3_Access Component Access
+             *   @defgroup T_FGM_Vec3_Mutation Component Mutation
+             *   @defgroup T_FGM_Vec3_Alias Spatial Aliasing
+             *   @defgroup T_FGM_Vec3_Const Vector Constants
+             *   @defgroup T_FGM_Vec3_Addition Addition
+             *   @defgroup T_FGM_Vec3_Subtraction Subtraction
+             *   @defgroup T_FGM_Vec3_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Vec3_Division Scalar Division
+             *   @defgroup T_FGM_Vec3_Bool_Bit Boolean Bitwise Operation
+             *   @defgroup T_FGM_Vec3_GT_Comp Greater Than Comparison
+             *   @defgroup T_FGM_Vec3_GTE_Comp Greater Than or Equal Comparison
+             *   @defgroup T_FGM_Vec3_LT_Comp Less Than Comparison
+             *   @defgroup T_FGM_Vec3_LTE_Comp Less Than or Equal Comparison
+             *   @defgroup T_FGM_Vec3_Equality Component-wise and Masked Equality
+             *   @defgroup T_FGM_Vec3_Inequality Component-wise and Masked Inequality
+             *   @defgroup T_FGM_Vec3_Init Initialization
+             *   @defgroup T_FGM_Vec3_Magnitude Scalar Length(Magnitude)
+             *   @defgroup T_FGM_Vec3_Normalize Vector Normalization
+             *   @defgroup T_FGM_Vec3_Dot Dot Product
+             *   @defgroup T_FGM_Vec3_Proj Vector Projection
+             *   @defgroup T_FGM_Vec3_Rej Vector Rejection
+             *   @defgroup T_FGM_Vec3_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Vec3_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Vec3_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Vec3_Utils Vector Utilities
+             * @}
+             */
+
         /** @} */ // End of Vectors
-        //TODO: Update Description
+
+
         /**
          * @defgroup FGM_Common_Tests Common 
-         * @brief Test suite for functions common used in FGM math library.
+         * @brief Verifies general function operations exposed by FGM library.
          * @ingroup MathTests
          * @{
          *   @defgroup T_Op_Status Operation Status

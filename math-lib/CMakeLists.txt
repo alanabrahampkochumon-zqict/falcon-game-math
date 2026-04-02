@@ -79,6 +79,6 @@ add_custom_target(
 
 source_group("Header Files\\vector" FILES ${VectorHeaderFiles})
 source_group("Header Files\\common" FILES ${CommonFiles})
-source_group("Template Files\\vector" FILES ${VectorTemplateDefinitionFiles})
 source_group("Header Files\\matrix" FILES ${MatrixHeaderFiles})
+source_group("Template Files\\vector" FILES ${VectorTemplateDefinitionFiles})
 source_group("Template Files\\matrix" FILES ${MatrixTemplateDefinitionFiles})

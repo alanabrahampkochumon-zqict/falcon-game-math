@@ -10,19 +10,19 @@ target_compile_features(TestSuite PRIVATE cxx_std_20)
 
 # TODO: Refactor math files into math directory of src
 
-set(IncludeDirectory "include/")
+set(IncludeDir "include/")
 set(SetupFiles "Vector3DTestSetup.h;Vector4DTestSetup.h;SIMDTestSetup.h;DoxygenGroups.h")
-list(TRANSFORM SetupFiles PREPEND ${IncludeDirectory})
+list(TRANSFORM SetupFiles PREPEND ${IncludeDir})
 
 # Vector Test Sources
-set(Vector4DTestDirectory "src/math/vectors/vector4d/")
+set(Vector4DTestDir "src/math/vectors/vector4d/")
 set(Vector4DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;")
-list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDirectory})
+list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDir})
 
 # Vector Test Sources
-set(Vector3DTestDirectory "src/math/vectors/vector3d/")
+set(Vector3DTestDir "src/math/vectors/vector3d/")
 set(Vector3DTestFiles "AccessAndMutationTests.cpp;InitializationTests.cpp;")
-list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDirectory})
+list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDir})
 
 
 set(VectorTestDirectory "src/math/vectors/") # TODO: Remove after migration to different test
@@ -101,16 +101,10 @@ source_group (
     "${CMAKE_CURRENT_SOURCE_DIR}/src/"
     PREFIX "Source Files"
     FILES
-    ${Vector2DTestFiles}
+    ${Vector3DTestFiles}
     ${Vector4DTestFiles}
     ${VectorTestFiles}
     ${MatrixTestFiles}
     ${SimdTestFiles}
     ${MathCommonTestFiles}
 )
-
-# source_group("Source Files\\Vectors\\Vector3D" FILES ${Vector3DTestFiles})
-# source_group("Source Files\\Vectors\\Vector4D" FILES ${Vector4DTestFiles})
-# source_group("Source Files\\Vectors" FILES ${VectorTestFiles}) # TODO: Remove after migration
-# source_group("Source Files\\Matrices" FILES ${MatrixTestFiles})
-# source_group("Source Files\\Simd" FILES ${SimdTestFiles})

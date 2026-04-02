@@ -3,20 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 10, 2026
  *
- * @brief Verifies @ref fgm::Vector3D accessors and mutators.
+ * @brief `Vector3D` access and mutation tests.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-
 #include "Vector3DTestSetup.h"
 
-
-
-/**
- * @addtogroup T_FGM_Vec3_Access
- * @{
- */
 
 /**************************************
  *                                    *
@@ -24,57 +17,49 @@
  *                                    *
  **************************************/
 
-/** @test Verify that the components are accessible via named spatial aliases (x, y, z, w). */
-TEST(Vector3DAccess, AccessibleAsXYZW)
+TEST(Vector3DAccess, AccessibleAsXYZ)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    // Given a vector with arbitrary values passed in
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
+    // Then, it's elements are accessible as x, y, z
     EXPECT_FLOAT_EQ(3.0f, vec.x);
     EXPECT_FLOAT_EQ(1.0f, vec.y);
     EXPECT_FLOAT_EQ(6.0f, vec.z);
 }
 
-
-/** @test Verify that the components are accessible via named spatial aliases (s, t, p, q). */
-TEST(Vector3DAccess, AccessibleAsSTPQ)
+TEST(Vector3DAccess, AccessibleAsSTP)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    // Given a vector with arbitrary values passed in
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
+    // Then, it's elements are accessible as s, t, p
     EXPECT_FLOAT_EQ(3.0f, vec.s);
     EXPECT_FLOAT_EQ(1.0f, vec.t);
     EXPECT_FLOAT_EQ(6.0f, vec.p);
 }
 
-
-/** @test Verify that the components are accessible via named spatial aliases (r, g, b, a). */
-TEST(Vector3DAccess, AccessibleAsRGBA)
+TEST(Vector3DAccess, AccessibleAsRGB)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    // Given a vector with arbitrary values passed in
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
+    // Then, it's elements are accessible as r, g, b
     EXPECT_FLOAT_EQ(3.0f, vec.r);
     EXPECT_FLOAT_EQ(1.0f, vec.g);
     EXPECT_FLOAT_EQ(6.0f, vec.b);
 }
 
-
-/** @test Verify that the components are accessible via subscript indexing for reads. */
 TEST(Vector3DAccess, AccessibleAsArray)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    // Given a vector with arbitrary values passed in
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
+    // Then, it's elements are accessible as array elements
     EXPECT_FLOAT_EQ(3.0f, vec.elements[0]);
     EXPECT_FLOAT_EQ(1.0f, vec.elements[1]);
     EXPECT_FLOAT_EQ(6.0f, vec.elements[2]);
 }
-
-/** @} */
-
-
-
-/**
- * @addtogroup T_FGM_Vec3_Mutation
- * @{
- */
 
 /**************************************
  *                                    *
@@ -82,63 +67,67 @@ TEST(Vector3DAccess, AccessibleAsArray)
  *                                    *
  **************************************/
 
-/** @test Verify that the components can be mutated via named spatial aliases (x, y, z, w). */
-TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZW)
+
+TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZ)
 {
+    // Given a default initialized vector
     fgm::Vector3D<float> vec;
 
+    // When, it's elements are modified using x, y, z
     vec.x = 3.0f;
     vec.y = 1.0f;
     vec.z = 6.0f;
 
+    // Then, it's element reflect the change
     EXPECT_FLOAT_EQ(3.0f, vec.x);
     EXPECT_FLOAT_EQ(1.0f, vec.y);
     EXPECT_FLOAT_EQ(6.0f, vec.z);
 }
 
-
-/** @test Verify that the components can be mutated via named spatial aliases (s, t, p, q). */
-TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTPQ)
+TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTP)
 {
+    // Given a default initialized vector
     fgm::Vector3D<float> vec;
 
+    // When, it's elements are modified using s, t, p
     vec.s = 3.0f;
     vec.t = 1.0f;
     vec.p = 6.0f;
 
+    // Then, it's element reflect the change
     EXPECT_FLOAT_EQ(3.0f, vec.s);
     EXPECT_FLOAT_EQ(1.0f, vec.t);
     EXPECT_FLOAT_EQ(6.0f, vec.p);
 }
 
-
-/** @test Verify that the components can be mutated via named spatial aliases (r, g, b, a). */
-TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGBA)
+TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGB)
 {
+    // Given a default initialized vector
     fgm::Vector3D<float> vec;
 
+    // When, it's elements are modified using r, g, b
     vec.r = 3.0f;
     vec.g = 1.0f;
     vec.b = 6.0f;
 
+    // Then, it's element reflect the change
     EXPECT_FLOAT_EQ(3.0f, vec.r);
     EXPECT_FLOAT_EQ(1.0f, vec.g);
     EXPECT_FLOAT_EQ(6.0f, vec.b);
 }
 
-
-/** @test Verify that the components are accessible via subscript indexing for writing. */
 TEST(Vector3DMutation, ElementsCanBeMutatedUsingIndex)
 {
+    // Given a vector initialization without parameters
     fgm::Vector3D<float> vec;
 
+    // When it's elements are mutated at a particular index
     vec[0] = 3.0f;
     vec[1] = 1.0f;
     vec[2] = 6.0f;
 
+    // Then, it's element reflect the change
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
     EXPECT_FLOAT_EQ(6.0f, vec[2]);
 }
-
-/** @} */

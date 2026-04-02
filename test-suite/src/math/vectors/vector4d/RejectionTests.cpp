@@ -45,8 +45,7 @@ INSTANTIATE_TEST_SUITE_P(Vector4RejectionTestSuite, Vector4DRejectionNaNTests,
                                            fgm::Vector4D<float>(fgm ::constants::NaN, fgm::constants::NaN,
                                                                 fgm ::constants::NaN, fgm ::constants::NaN)));
 
-// TODO: SafeRejection tests for NaN
-// TODO: Update rejection tests
+
 
 /**
  * @addtogroup T_FGM_Vec4_Rej
