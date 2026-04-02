@@ -24,7 +24,7 @@
  *                                    *
  **************************************/
 
-/** @test Verify that the components are accessible via named spatial aliases (x, y, z, w). */
+/** @test Verify that the components are accessible via named spatial aliases (x, y, z). */
 TEST(Vector3DAccess, AccessibleAsXYZW)
 {
     constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -35,7 +35,7 @@ TEST(Vector3DAccess, AccessibleAsXYZW)
 }
 
 
-/** @test Verify that the components are accessible via named spatial aliases (s, t, p, q). */
+/** @test Verify that the components are accessible via named spatial aliases (s, t, p). */
 TEST(Vector3DAccess, AccessibleAsSTPQ)
 {
     constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -46,7 +46,7 @@ TEST(Vector3DAccess, AccessibleAsSTPQ)
 }
 
 
-/** @test Verify that the components are accessible via named spatial aliases (r, g, b, a). */
+/** @test Verify that the components are accessible via named spatial aliases (r, g, b). */
 TEST(Vector3DAccess, AccessibleAsRGBA)
 {
     constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -82,7 +82,7 @@ TEST(Vector3DAccess, AccessibleAsArray)
  *                                    *
  **************************************/
 
-/** @test Verify that the components can be mutated via named spatial aliases (x, y, z, w). */
+/** @test Verify that the components can be mutated via named spatial aliases (x, y, z). */
 TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZW)
 {
     fgm::Vector3D<float> vec;
@@ -97,7 +97,7 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZW)
 }
 
 
-/** @test Verify that the components can be mutated via named spatial aliases (s, t, p, q). */
+/** @test Verify that the components can be mutated via named spatial aliases (s, t, p). */
 TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTPQ)
 {
     fgm::Vector3D<float> vec;
@@ -112,7 +112,7 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTPQ)
 }
 
 
-/** @test Verify that the components can be mutated via named spatial aliases (r, g, b, a). */
+/** @test Verify that the components can be mutated via named spatial aliases (r, g, b). */
 TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGBA)
 {
     fgm::Vector3D<float> vec;
