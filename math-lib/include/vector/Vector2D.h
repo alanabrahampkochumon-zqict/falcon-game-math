@@ -1,14 +1,41 @@
 #pragma once
+/**
+ * @file Vector2D.h
+ * @author Alan Abraham P Kochumon
+ * @date Created on: January 24, 2026
+ *
+ * @brief Templated 2D Vector supporting integral, floating-point, and boolean types.
+ *
+ * @details Provides a high-performance vector implementation with SIMD acceleration
+ *          and support for component-wise operations.
+ *
+ * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
+ *
+ * @par Configuration
+ * Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
+ * Even if disabled, functional comparisons like `greaterThan()` remain available.
+ * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
 
 #include "common/MathTraits.h"
 
 #include <type_traits>
+
+
 
 namespace fgm
 {
     template <Arithmetic T>
     struct Vector2D
     {
+
+        /**
+         * @addtogroup FGM_Vec2_Members
+         * @{
+         */
 
         using value_type = T;
 
@@ -17,18 +44,31 @@ namespace fgm
         union {
             struct
             {
-                T x, y;
+                T x; ///< X-axis component
+                T y; ///< Y-axis component
             };
             struct
             {
-                T r, g;
+                T r; ///< Red channel
+                T g; ///< Green channel
             };
             struct
             {
-                T s, t;
+                T s; ///< S-coordinate
+                T t; ///< T-coordinate
             };
+
             T elements[dimension];
         };
+
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Vec2_Init
+         * @{
+         */
 
         /*************************************
          *                                   *
@@ -36,11 +76,28 @@ namespace fgm
          *                                   *
          *************************************/
 
-        constexpr Vector2D() noexcept;
-        constexpr Vector2D(T v1, T v2) noexcept;
+        /** @brief Initialize @ref Vector2D with zeros. */
+        [[nodiscard]] constexpr Vector2D() noexcept;
 
+
+        /**
+         * @brief Initialize @ref Vector2D with passed in values.
+         *
+         * @param[in] v1 The first entry of @ref Vector2D.
+         * @param[in] v2 The second entry of @ref Vector2D.
+         */
+        [[nodiscard]] constexpr Vector2D(T v1, T v2) noexcept;
+
+
+        /**
+         * @brief Initialize @ref Vector2D from another @ref Vector2D of a different type.
+         *
+         * @tparam U Numeric type of the source vector.
+         *
+         * @param[in] other The source vector to be converted.
+         */
         template <Arithmetic U>
-        constexpr Vector2D(const Vector2D<U>& other) noexcept;
+        [[nodiscard]] constexpr Vector2D(const Vector2D<U>& other) noexcept;
 
 
         /*************************************
@@ -49,8 +106,28 @@ namespace fgm
          *                                   *
          *************************************/
 
+        /**
+         * @brief Access the component at the specified location.
+         *        Provide read-write access to the element.
+         *
+         * @param[in] i The index of the vector component.
+         *
+         * @return A reference to the vector component.
+         */
         constexpr T& operator[](std::size_t i) noexcept;
+
+
+        /**
+         * @brief Access the element at the specified location (read-only).
+         *
+         * @param[in] i The index of the vector component.
+         *
+         * @return A const reference to the vector component.
+         */
         constexpr const T& operator[](std::size_t i) const noexcept;
+
+        /** @} */
+
 
 
         /*************************************

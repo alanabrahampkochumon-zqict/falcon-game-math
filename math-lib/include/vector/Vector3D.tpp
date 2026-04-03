@@ -11,7 +11,6 @@
  */
 
 
-// TODO: Enable strict types using `using R = std::common_type_t<T, U>`
 
 namespace fgm
 {

@@ -1,8 +1,21 @@
 #pragma once
+/**
+ * @file Vector2D.tpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: January 24, 2026
+ *
+ * @brief @ref Vector2D template implementation.
+ * @details This file contains the definitions of the template members declared in Vector3D.h
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
 
 #include "Vector2D.h"
 
 #include <type_traits>
+
+
 
 namespace fgm
 {
@@ -17,15 +30,19 @@ namespace fgm
     constexpr Vector2D<T>::Vector2D() noexcept: x(T(0)), y(T(0))
     {}
 
+
     template <Arithmetic T>
     constexpr Vector2D<T>::Vector2D(T v1, T v2) noexcept: x(v1), y(v2)
     {}
+
 
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr Vector2D<T>::Vector2D(const Vector2D<U>& other) noexcept
         : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))
     {}
+
+
 
 
     /*************************************
@@ -40,11 +57,14 @@ namespace fgm
         return (&x)[i];
     }
 
+
     template <Arithmetic T>
     constexpr const T& Vector2D<T>::operator[](std::size_t i) const noexcept
     {
         return (&x)[i];
     }
+
+
 
 
     /*************************************

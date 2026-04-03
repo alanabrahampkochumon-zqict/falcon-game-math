@@ -8,10 +8,8 @@ target_compile_features(TestSuite PRIVATE cxx_std_20)
 #     $<$<CXX_COMPILER_ID:Clang>:-Wall;-Wextra;-Wpedantic;-Wno-gnu-anonymous-struct;-Werror;>
 # )
 
-# TODO: Refactor math files into math directory of src
-
 set(IncludeDir "include/")
-set(SetupFiles "Vector3DTestSetup.h;Vector4DTestSetup.h;SIMDTestSetup.h;DoxygenGroups.h")
+set(SetupFiles "Vector2DTestSetup.h;Vector3DTestSetup.h;Vector4DTestSetup.h;SIMDTestSetup.h;DoxygenGroups.h")
 list(TRANSFORM SetupFiles PREPEND ${IncludeDir})
 
 # Vector Test Sources
@@ -19,10 +17,13 @@ set(Vector4DTestDir "src/math/vectors/vector4d/")
 set(Vector4DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;")
 list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDir})
 
-# Vector Test Sources
 set(Vector3DTestDir "src/math/vectors/vector3d/")
 set(Vector3DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;")
 list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDir})
+
+set(Vector2DTestDir "src/math/vectors/vector2d/")
+set(Vector2DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;")
+list(TRANSFORM Vector2DTestFiles PREPEND ${Vector2DTestDir})
 
 
 set(VectorTestDirectory "src/math/vectors/") # TODO: Remove after migration to different test
@@ -49,6 +50,7 @@ list(TRANSFORM SimdTestFiles PREPEND ${SimdTestDirectory})
 target_sources(
     TestSuite
     PRIVATE
+        ${Vector2DTestFiles}
         ${Vector3DTestFiles}
         ${Vector4DTestFiles}
         ${VectorTestFiles}
@@ -101,6 +103,7 @@ source_group (
     "${CMAKE_CURRENT_SOURCE_DIR}/src/"
     PREFIX "Source Files"
     FILES
+    ${Vector2DTestFiles}
     ${Vector3DTestFiles}
     ${Vector4DTestFiles}
     ${VectorTestFiles}
