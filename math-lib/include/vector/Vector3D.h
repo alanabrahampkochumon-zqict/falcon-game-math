@@ -966,7 +966,7 @@ namespace fgm
          * @return The vector cross product of the two vectors.
          */
         template <Arithmetic U>
-        auto cross(const Vector3D<U>& rhs) const -> Vector3D<std::common_type_t<T, U>>;
+        constexpr auto cross(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>>;
 
 
         /**
@@ -985,7 +985,8 @@ namespace fgm
          * @return The vector cross product of the two vectors.
          */
         template <Arithmetic U>
-        static auto cross(const Vector3D& lhs, const Vector3D<U>& rhs) -> Vector3D<std::common_type_t<T, U>>;
+        constexpr static auto cross(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+            -> Vector3D<std::common_type_t<T, U>>;
 
         /** @} */
 

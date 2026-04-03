@@ -54,7 +54,7 @@
              *   @defgroup T_FGM_Vec4_Init Initialization
              *   @defgroup T_FGM_Vec4_Magnitude Scalar Length(Magnitude)
              *   @defgroup T_FGM_Vec4_Normalize Vector Normalization
-             *   @defgroup T_FGM_Vec4_Dot Dot Product
+             *   @defgroup T_FGM_Vec4_Product Dot Product
              *   @defgroup T_FGM_Vec4_Proj Vector Projection
              *   @defgroup T_FGM_Vec4_Rej Vector Rejection
              *   @defgroup T_FGM_Vec4_String_Repr Formatted String Representation
@@ -64,7 +64,7 @@
              * @}
              */
 
-/**
+            /**
              * @defgroup FGM_Vector3D_Tests Vector4D Test Suite
              * @brief Verification of 3D Euclidean vector operations.
              * @ingroup VectorTests
@@ -87,7 +87,7 @@
              *   @defgroup T_FGM_Vec3_Init Initialization
              *   @defgroup T_FGM_Vec3_Magnitude Scalar Length(Magnitude)
              *   @defgroup T_FGM_Vec3_Normalize Vector Normalization
-             *   @defgroup T_FGM_Vec3_Dot Dot Product
+             *   @defgroup T_FGM_Vec3_Product Dot and Cross Product
              *   @defgroup T_FGM_Vec3_Proj Vector Projection
              *   @defgroup T_FGM_Vec3_Rej Vector Rejection
              *   @defgroup T_FGM_Vec3_String_Repr Formatted String Representation
