@@ -26,7 +26,7 @@ list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDir})
 
 
 set(VectorTestDirectory "src/math/vectors/") # TODO: Remove after migration to different test
-set(VectorTestFiles Vector2DTests.cpp Vector3DTests.cpp)
+set(VectorTestFiles Vector2DTests.cpp)
 list(TRANSFORM VectorTestFiles PREPEND ${VectorTestDirectory})
 
 # Matrix Test Sources
