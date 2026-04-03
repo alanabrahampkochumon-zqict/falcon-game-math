@@ -127,7 +127,7 @@ INSTANTIATE_TEST_SUITE_P(Vector3DDivisionTestSuite, Vector3DDivisionNaNTests,
 
 
 /**
- * @addtogroup T_FGM_Vec4_Addition
+ * @addtogroup T_FGM_Vec3_Addition
  * @{
  */
 
@@ -195,7 +195,7 @@ TEST(Vector3DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
 
 
 /**
- * @addtogroup T_FGM_Vec4_Subtraction
+ * @addtogroup T_FGM_Vec3_Subtraction
  * @{
  */
 
@@ -263,7 +263,7 @@ TEST(Vector3DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 
 
 /**
- * @addtogroup T_FGM_Vec4_Multiplication
+ * @addtogroup T_FGM_Vec3_Multiplication
  * @{
  */
 
@@ -388,7 +388,7 @@ TEST(Vector3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
 
 
 /**
- * @addtogroup T_FGM_Vec4_Division
+ * @addtogroup T_FGM_Vec3_Division
  * @{
  */
 
@@ -648,7 +648,7 @@ TYPED_TEST(Vector3DScalarDivision, TryDivideByFloatZero_ReturnsZeroVectorAndSets
 TEST(Vector3DScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
 {
     fgm::OperationStatus flag;
-    [[maybe_unused]] const auto result = fgm::vec4d::nan<double>.tryDiv(0, flag);
+    [[maybe_unused]] const auto result = fgm::vec3d::nan<double>.tryDiv(0, flag);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -795,7 +795,7 @@ TEST_P(Vector3DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNCompon
 
 
 /**
- * @addtogroup T_FGM_Vec4_Inversion
+ * @addtogroup T_FGM_Vec3_Inversion
  * @{
  */
 
