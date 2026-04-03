@@ -679,7 +679,14 @@ namespace fgm
     constexpr Vector3D<Magnitude<T>> Vector3D<T>::safeNormalize() const noexcept
         requires StrictArithmetic<T>
     {
-        return normalize();
+        using R = Magnitude<T>;
+        R magnitude = mag();
+        if (std::isnan(magnitude))
+            return fgm::vec3d::zero<R>;
+        if (magnitude <= Config::EPSILON_SQUARE<R>)
+            return fgm::vec3d::zero<R>;
+
+        return *this / magnitude;
     }
 
 
@@ -687,7 +694,7 @@ namespace fgm
     constexpr Vector3D<Magnitude<T>> Vector3D<T>::safeNormalize(const Vector3D& vec) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.normalize();
+        return vec.safeNormalize();
     }
 
 
@@ -695,7 +702,21 @@ namespace fgm
     constexpr Vector3D<Magnitude<T>> Vector3D<T>::tryNormalize(OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        return normalize();
+        using R = Magnitude<T>;
+        R magnitude = mag();
+        if (std::isnan(magnitude))
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec3d::zero<R>;
+        }
+        if (magnitude <= Config::EPSILON_SQUARE<R>)
+        {
+            status = OperationStatus::DIVISIONBYZERO;
+            return fgm::vec3d::zero<R>;
+        }
+
+        status = OperationStatus::SUCCESS;
+        return *this / magnitude;
     }
 
 
@@ -703,7 +724,7 @@ namespace fgm
     constexpr Vector3D<Magnitude<T>> Vector3D<T>::tryNormalize(const Vector3D& vec, OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.normalize();
+        return vec.tryNormalize(status);
     }
 
 

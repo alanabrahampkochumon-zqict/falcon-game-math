@@ -111,256 +111,256 @@ TYPED_TEST(Vector3DNormalization, NormalizedVectorIsAlwaysTypedPromotedToFloatin
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
 
-//
-///**************************************
-// *                                    *
-// *     SAFE NORMALIZATION TESTS       *
-// *                                    *
-// **************************************/
-//
-///** @test Verify that normalizing a vector using @ref fgm::Vector3D::safeNormalize returns a unit vector. */
-//TYPED_TEST(Vector3DNormalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
-//{
-//    const fgm::Vector3D normalized = this->_vec.safeNormalize();
-//    EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vector3D::safeNormalize
-// *       returns a zero-vector.
-// */
-//TYPED_TEST(Vector3DNormalization, SafeNormalize_ZeroVectorReturnsZeroVector)
-//{
-//    EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>.safeNormalize());
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a NaN vector using @ref fgm::Vector3D::safeNormalize
-// *       returns a zero-vector.
-// */
-//TEST(Vector3DNormalization, SafeNormalize_NaNVectorReturnsZeroVector)
-//{
-//    EXPECT_VEC_ZERO(fgm::vec4d::nan<float>.safeNormalize());
-//}
-//
-//
-///**
-// * @test Verify that normalizing a vector using @ref fgm::Vector3D::safeNormalize always
-// *       return a floating-point vector.
-// */
-//TYPED_TEST(Vector3DNormalization, SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
-//{
-//    [[maybe_unused]] const auto normalized = this->_vec.safeNormalize();
-//    static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
-//}
-//
-//
-///**
-// * @test Verify that normalizing a 4D vector using static variant of @ref fgm::Vector3D::safeNormalize
-// *       returns a unit vector.
-// */
-//TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorReturnsUnitVector)
-//{
-//    const fgm::Vector3D normalized = fgm::Vector3D<TypeParam>::safeNormalize(this->_vec);
-//    EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a zero-magnitude vector using static variant of
-// *       @ref fgm::Vector3D::safeNormalize returns a zero-vector.
-// */
-//TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
-//{
-//    EXPECT_VEC_ZERO(fgm::Vector3D<double>::safeNormalize(fgm::vec4d::zero<TypeParam>));
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector3D::safeNormalize
-// *       returns a zero-vector.
-// */
-//TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
-//{
-//    EXPECT_VEC_ZERO(fgm::Vector3D<float>::safeNormalize(fgm::vec4d::nan<float>));
-//}
-//
-//
-///**
-// * @test Verify that the normalizing a 4D vector using static variant of @ref fgm::Vector3D::safeNormalize
-// *       always return a floating-point vector.
-// */
-//TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
-//{
-//    [[maybe_unused]] const auto normalized = fgm::Vector3D<TypeParam>::safeNormalize(this->_vec);
-//    static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
-//}
-//
-//
-///**************************************
-// *                                    *
-// *      TRY NORMALIZATION TESTS       *
-// *                                    *
-// **************************************/
-//
-///**
-// * @test Verify that normalizing a vector using @ref fgm::Vector3D::tryNormalize
-// *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
-// */
-//TYPED_TEST(Vector3DNormalization, TryNormalize_NonZeroVectorReturnsUnitVector)
-//{
-//    fgm::OperationStatus flag;
-//    const fgm::Vector3D normalized = this->_vec.tryNormalize(flag);
-//
-//    EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
-//    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vector3D::tryNormalize
-// *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-// */
-//TYPED_TEST(Vector3DNormalization, TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>.tryNormalize(flag));
-//    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a NaN vector using @ref fgm::Vector3D::tryNormalize
-// *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-// */
-//TEST(Vector3DNormalization, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    EXPECT_VEC_ZERO(fgm::vec4d::nan<float>.tryNormalize(flag));
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
-//
-//
-///**
-// * @test Verify that normalizing a vector using @ref fgm::Vector3D::tryNormalize always
-// *       return a floating-point vector.
-// */
-//TYPED_TEST(Vector3DNormalization, TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
-//{
-//    [[maybe_unused]] fgm::OperationStatus flag;
-//    [[maybe_unused]] const auto normalized = this->_vec.tryNormalize(flag);
-//    static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
-//}
-//
-//
-///**
-// * @test Verify that normalizing a 4D vector using static variant of @ref fgm::Vector3D::tryNormalize
-// *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
-// */
-//TYPED_TEST(Vector3DNormalization, StaticWrapper_TryNormalize_NonZeroVectorReturnsUnitVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const fgm::Vector3D normalized = fgm::Vector3D<TypeParam>::tryNormalize(this->_vec, flag);
-//
-//    EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
-//    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a zero-magnitude vector using static variant of
-// *       @ref fgm::Vector3D::tryNormalize returns a zero-vector and
-// *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-// */
-//TYPED_TEST(Vector3DNormalization, StaticWrapper_TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>.tryNormalize(flag));
-//    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector3D::tryNormalize
-// *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-// */
-//TEST(Vector3DNormalization, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    EXPECT_VEC_ZERO(fgm::Vector3D<float>::tryNormalize(fgm::vec4d::nan<float>, flag));
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
-//
-//
-///**
-// * @test Verify that the normalizing a 4D vector using static variant of @ref fgm::Vector3D::tryNormalize
-// *       always return a floating-point vector.
-// */
-//TYPED_TEST(Vector3DNormalization, StaticWrapper_TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
-//{
-//    [[maybe_unused]] fgm::OperationStatus flag;
-//    [[maybe_unused]] const auto normalized = fgm::Vector3D<TypeParam>::tryNormalize(this->_vec, flag);
-//    static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
-//}
-//
-//
-///**************************************
-// *                                    *
-// *      NAN NORMALIZATION TESTS       *
-// *                                    *
-// **************************************/
-//
-///**
-// * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vector3D::safeNormalize
-// *       returns a zero-vector.
-// */
-//TEST_P(Vector3DNormalizationNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
-//{
-//    const auto& vec = GetParam();
-//
-//    EXPECT_VEC_ZERO(vec.safeNormalize());
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector3D::safeNormalize
-// *       returns a zero-vector.
-// */
-//TEST_P(Vector3DNormalizationNaNTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
-//{
-//    const auto& vec = GetParam();
-//
-//    EXPECT_VEC_ZERO(fgm::Vector3D<ParamType::value_type>::safeNormalize(vec));
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vector3D::tryNormalize
-// *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-// */
-//TEST_P(Vector3DNormalizationNaNTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto& vec = GetParam();
-//
-//    EXPECT_VEC_ZERO(vec.tryNormalize(flag));
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
-//
-//
-///**
-// * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector3D::tryNormalize
-// *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-// */
-//TEST_P(Vector3DNormalizationNaNTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
-//{
-//    fgm::OperationStatus flag;
-//    const auto& vec = GetParam();
-//
-//    EXPECT_VEC_ZERO(fgm::Vector3D<ParamType::value_type>::tryNormalize(vec, flag));
-//    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-//}
+
+/**************************************
+ *                                    *
+ *     SAFE NORMALIZATION TESTS       *
+ *                                    *
+ **************************************/
+
+/** @test Verify that normalizing a vector using @ref fgm::Vector3D::safeNormalize returns a unit vector. */
+TYPED_TEST(Vector3DNormalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
+{
+    const fgm::Vector3D normalized = this->_vec.safeNormalize();
+    EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
+}
+
+
+/**
+ * @test Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vector3D::safeNormalize
+ *       returns a zero-vector.
+ */
+TYPED_TEST(Vector3DNormalization, SafeNormalize_ZeroVectorReturnsZeroVector)
+{
+    EXPECT_VEC_ZERO(fgm::vec3d::zero<TypeParam>.safeNormalize());
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using @ref fgm::Vector3D::safeNormalize
+ *       returns a zero-vector.
+ */
+TEST(Vector3DNormalization, SafeNormalize_NaNVectorReturnsZeroVector)
+{
+    EXPECT_VEC_ZERO(fgm::vec3d::nan<float>.safeNormalize());
+}
+
+
+/**
+ * @test Verify that normalizing a vector using @ref fgm::Vector3D::safeNormalize always
+ *       return a floating-point vector.
+ */
+TYPED_TEST(Vector3DNormalization, SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+{
+    [[maybe_unused]] const auto normalized = this->_vec.safeNormalize();
+    static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
+}
+
+
+/**
+ * @test Verify that normalizing a 3D vector using static variant of @ref fgm::Vector3D::safeNormalize
+ *       returns a unit vector.
+ */
+TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorReturnsUnitVector)
+{
+    const fgm::Vector3D normalized = fgm::Vector3D<TypeParam>::safeNormalize(this->_vec);
+    EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
+}
+
+
+/**
+ * @test Verify that attempting to normalize a zero-magnitude vector using static variant of
+ *       @ref fgm::Vector3D::safeNormalize returns a zero-vector.
+ */
+TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
+{
+    EXPECT_VEC_ZERO(fgm::Vector3D<double>::safeNormalize(fgm::vec3d::zero<TypeParam>));
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector3D::safeNormalize
+ *       returns a zero-vector.
+ */
+TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
+{
+    EXPECT_VEC_ZERO(fgm::Vector3D<float>::safeNormalize(fgm::vec3d::nan<float>));
+}
+
+
+/**
+ * @test Verify that the normalizing a 3D vector using static variant of @ref fgm::Vector3D::safeNormalize
+ *       always return a floating-point vector.
+ */
+TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+{
+    [[maybe_unused]] const auto normalized = fgm::Vector3D<TypeParam>::safeNormalize(this->_vec);
+    static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
+}
+
+
+/**************************************
+ *                                    *
+ *      TRY NORMALIZATION TESTS       *
+ *                                    *
+ **************************************/
+
+/**
+ * @test Verify that normalizing a vector using @ref fgm::Vector3D::tryNormalize
+ *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector3DNormalization, TryNormalize_NonZeroVectorReturnsUnitVector)
+{
+    fgm::OperationStatus flag;
+    const fgm::Vector3D normalized = this->_vec.tryNormalize(flag);
+
+    EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vector3D::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector3DNormalization, TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    EXPECT_VEC_ZERO(fgm::vec3d::zero<TypeParam>.tryNormalize(flag));
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using @ref fgm::Vector3D::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector3DNormalization, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    EXPECT_VEC_ZERO(fgm::vec3d::nan<float>.tryNormalize(flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that normalizing a vector using @ref fgm::Vector3D::tryNormalize always
+ *       return a floating-point vector.
+ */
+TYPED_TEST(Vector3DNormalization, TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+{
+    [[maybe_unused]] fgm::OperationStatus flag;
+    [[maybe_unused]] const auto normalized = this->_vec.tryNormalize(flag);
+    static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
+}
+
+
+/**
+ * @test Verify that normalizing a 3D vector using static variant of @ref fgm::Vector3D::tryNormalize
+ *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Vector3DNormalization, StaticWrapper_TryNormalize_NonZeroVectorReturnsUnitVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const fgm::Vector3D normalized = fgm::Vector3D<TypeParam>::tryNormalize(this->_vec, flag);
+
+    EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that attempting to normalize a zero-magnitude vector using static variant of
+ *       @ref fgm::Vector3D::tryNormalize returns a zero-vector and
+ *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Vector3DNormalization, StaticWrapper_TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    EXPECT_VEC_ZERO(fgm::vec3d::zero<TypeParam>.tryNormalize(flag));
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector3D::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector3DNormalization, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    EXPECT_VEC_ZERO(fgm::Vector3D<float>::tryNormalize(fgm::vec3d::nan<float>, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that the normalizing a 3D vector using static variant of @ref fgm::Vector3D::tryNormalize
+ *       always return a floating-point vector.
+ */
+TYPED_TEST(Vector3DNormalization, StaticWrapper_TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+{
+    [[maybe_unused]] fgm::OperationStatus flag;
+    [[maybe_unused]] const auto normalized = fgm::Vector3D<TypeParam>::tryNormalize(this->_vec, flag);
+    static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
+}
+
+
+/**************************************
+ *                                    *
+ *      NAN NORMALIZATION TESTS       *
+ *                                    *
+ **************************************/
+
+/**
+ * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vector3D::safeNormalize
+ *       returns a zero-vector.
+ */
+TEST_P(Vector3DNormalizationNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
+{
+    const auto& vec = GetParam();
+
+    EXPECT_VEC_ZERO(vec.safeNormalize());
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector3D::safeNormalize
+ *       returns a zero-vector.
+ */
+TEST_P(Vector3DNormalizationNaNTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
+{
+    const auto& vec = GetParam();
+
+    EXPECT_VEC_ZERO(fgm::Vector3D<ParamType::value_type>::safeNormalize(vec));
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vector3D::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector3DNormalizationNaNTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto& vec = GetParam();
+
+    EXPECT_VEC_ZERO(vec.tryNormalize(flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vector3D::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST_P(Vector3DNormalizationNaNTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    fgm::OperationStatus flag;
+    const auto& vec = GetParam();
+
+    EXPECT_VEC_ZERO(fgm::Vector3D<ParamType::value_type>::tryNormalize(vec, flag));
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
 
 /** @} */
