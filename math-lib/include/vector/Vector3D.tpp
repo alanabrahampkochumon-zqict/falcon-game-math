@@ -650,7 +650,7 @@ namespace fgm
         return vec.mag();
     }
 
-
+    
 
 
     /*************************************
@@ -660,9 +660,50 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    Vector3D<T> Vector3D<T>::normalize() const
+    constexpr Vector3D<Magnitude<T>> Vector3D<T>::normalize() const noexcept
+        requires StrictArithmetic<T>
     {
         return (*this) / mag();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector3D<Magnitude<T>> Vector3D<T>::normalize(const Vector3D& vec) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.normalize();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector3D<Magnitude<T>> Vector3D<T>::safeNormalize() const noexcept
+        requires StrictArithmetic<T>
+    {
+        return normalize();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector3D<Magnitude<T>> Vector3D<T>::safeNormalize(const Vector3D& vec) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.normalize();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector3D<Magnitude<T>> Vector3D<T>::tryNormalize(OperationStatus& status) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return normalize();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector3D<Magnitude<T>> Vector3D<T>::tryNormalize(const Vector3D& vec, OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.normalize();
     }
 
 
