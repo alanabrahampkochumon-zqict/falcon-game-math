@@ -564,35 +564,6 @@ namespace fgm
 
     /*************************************
      *                                   *
-     *         VECTOR MAGNITUDE          *
-     *                                   *
-     *************************************/
-
-    template <Arithmetic T>
-    T Vector3D<T>::mag() const
-    {
-        return sqrt(x * x + y * y + z * z);
-    }
-
-
-
-
-    /*************************************
-     *                                   *
-     *       VECTOR NORMALIZATION        *
-     *                                   *
-     *************************************/
-
-    template <Arithmetic T>
-    Vector3D<T> Vector3D<T>::normalize() const
-    {
-        return (*this) / mag();
-    }
-
-
-
-    /*************************************
-     *                                   *
      *        VECTOR DOT PRODUCT         *
      *                                   *
      *************************************/
@@ -648,6 +619,50 @@ namespace fgm
         -> Vector3D<std::common_type_t<T, U>>
     {
         return lhs.cross(rhs);
+    }
+
+
+
+
+    /*************************************
+     *                                   *
+     *         VECTOR MAGNITUDE          *
+     *                                   *
+     *************************************/
+
+    template <Arithmetic T>
+    constexpr Magnitude<T> Vector3D<T>::mag() const noexcept
+        requires StrictArithmetic<T>
+    {
+        using M = Magnitude<T>;
+
+        M tX = static_cast<M>(x);
+        M tY = static_cast<M>(y);
+        M tZ = static_cast<M>(z);
+
+        return sqrt(tX * tX + tY * tY + tZ * tZ);
+    }
+
+    template <Arithmetic T>
+    constexpr Magnitude<T> Vector3D<T>::mag(const Vector3D& vec) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.mag();
+    }
+
+
+
+
+    /*************************************
+     *                                   *
+     *       VECTOR NORMALIZATION        *
+     *                                   *
+     *************************************/
+
+    template <Arithmetic T>
+    Vector3D<T> Vector3D<T>::normalize() const
+    {
+        return (*this) / mag();
     }
 
 

@@ -992,12 +992,44 @@ namespace fgm
 
 
 
+        /**
+         * @addtogroup FGM_Vec4_Mag
+         * @{
+         */
+
         /*************************************
          *                                   *
          *         VECTOR MAGNITUDE          *
          *                                   *
          *************************************/
-        T mag() const;
+
+        /**
+         * @brief Calculate the magnitude (length) of this vector.
+         *        Compute the Euclidean norm: \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
+         *
+         * @note To avoid precision loss, integral types are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @return The scalar magnitude of the vector.
+         */
+        [[nodiscard]] constexpr Magnitude<T> mag() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Calculate the magnitude (length) of a vector.
+         *        Compute the Euclidean norm: \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
+         *
+         * @note To avoid precision loss, integral types are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @param[in] vec The vector to compute the magnitude of.
+         *
+         * @return The scalar magnitude of @p vec.
+         */
+        [[nodiscard]] constexpr static Magnitude<T> mag(const Vector3D& vec) noexcept
+            requires StrictArithmetic<T>;
+
 
 
         /*************************************
@@ -1007,6 +1039,7 @@ namespace fgm
          *************************************/
         Vector3D normalize() const;
 
+        /** @} */
 
         /*************************************
          *                                   *
