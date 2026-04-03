@@ -255,7 +255,7 @@ TEST(Vector3DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
 
 
 /**
- * @addtogroup T_FGM_Vec4_LT_Comp
+ * @addtogroup T_FGM_Vec3_LT_Comp
  * @{
  */
 
@@ -365,7 +365,7 @@ TEST(Vector3DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValue
 
 
 /**
- * @addtogroup T_FGM_Vec4_LTE_Comp
+ * @addtogroup T_FGM_Vec3_LTE_Comp
  * @{
  */
 

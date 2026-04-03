@@ -37,7 +37,6 @@ protected:
     {
         _vecA = { T(2), T(3), T(4) };
         _vecB = { T(6), T(7), T(8) };
-        // TODO: Add orthogonal
         _vecAOrthogonal = { T(3), T(0), T(4) };
         _vecBOrthogonal = { T(0), T(5), T(0) };
         _expectedDotProduct = static_cast<T>(65);
@@ -282,7 +281,7 @@ TYPED_TEST(Vector3DCrossProduct, BetweenTwoNonParallelVectorsReturnAVectorPerpen
 
 /**
  * @brief Verify that the cross product of vector with a non-parallel vector using static variant of @ref
- * fgm::Vector4D::cross returns a new vector.
+ * fgm::Vector3D::cross returns a new vector.
  */
 TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnsNewProduct)
 {
@@ -294,7 +293,7 @@ TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsRetur
 
 /**
  * @brief Verify that the cross product of vector with a non-parallel vector using static variant of @ref
- * fgm::Vector4D::cross returns a new vector perpendicular to both.
+ * fgm::Vector3D::cross returns a new vector perpendicular to both.
  */
 TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnAVectorPerpendicularToBoth)
 {

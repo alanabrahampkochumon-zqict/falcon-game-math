@@ -30,7 +30,7 @@ TYPED_TEST_SUITE(Vector3DInitialization, SupportedTypes);
 
 
 /**
- * @addtogroup T_FGM_Vec4_Init
+ * @addtogroup T_FGM_Vec3_Init
  * @{
  */
 /** @test Verify that the default constructor initializes all components to zero. */
@@ -56,7 +56,7 @@ TYPED_TEST(Vector3DInitialization, ConstructorParametersInitializesVector)
 
 
 /**
- * @test Verify that the parameterized constructor correctly composes a 4D vector from a
+ * @test Verify that the parameterized constructor correctly composes a 3D vector from a
  *       @ref fgm::Vector2D instance and a scalar.
  */
 TYPED_TEST(Vector3DInitialization, 2DVectorAndScalarCanInitializeA3DVector)
@@ -73,7 +73,7 @@ TYPED_TEST(Vector3DInitialization, 2DVectorAndScalarCanInitializeA3DVector)
 
 
 /**
- * @test Verify that the parameterized constructor correctly composes a 4D vector from a
+ * @test Verify that the parameterized constructor correctly composes a 3D vector from a
  *       @ref fgm::Vector2D instance and a scalar.
  */
 TYPED_TEST(Vector3DInitialization, ScalarAnd2DVectorCanInitializeA3DVector)
