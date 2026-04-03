@@ -21,10 +21,9 @@
 
 
 #include "Vector2D.h"
-
 #include "common/Config.h"
-#include "common/OperationStatus.h"
 #include "common/Constants.h"
+#include "common/OperationStatus.h"
 
 #include <type_traits>
 
@@ -549,7 +548,7 @@ namespace fgm
         /** @} */
 
 
-        
+
         /**
          * @addtogroup FGM_Vec3_Bitwise
          * @{
@@ -944,7 +943,6 @@ namespace fgm
             -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
 
-        /** @} */
 
 
         /*************************************
@@ -952,11 +950,45 @@ namespace fgm
          *       VECTOR CROSS PRODUCT        *
          *                                   *
          *************************************/
-        template <Arithmetic U>
-        auto cross(const Vector3D<U>& other) const -> Vector3D<std::common_type_t<T, U>>;
 
+        /**
+         * @brief Calculate the cross product of this vector with another vector.
+         *        Compute the vector product: \f$ \mathbf{a}\times\mathbf{b} = (a_2\cdot b_3 - a_3\cdot b_2) - (a_1\cdot
+         *                                         b_3 - a_3\cdot b_1) + (a_1\cdot b_2 - a_2\cdot b_1) \f$.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compute the cross product with.
+         *
+         * @return The vector cross product of the two vectors.
+         */
         template <Arithmetic U>
-        static auto cross(const Vector3D& vecA, const Vector3D<U>& vecB) -> Vector3D<std::common_type_t<T, U>>;
+        auto cross(const Vector3D<U>& rhs) const -> Vector3D<std::common_type_t<T, U>>;
+
+
+        /**
+         * @brief Calculate the cross product of a vector with another vector.
+         *        Compute the vector product: \f$ \mathbf{a}\times\mathbf{b} = (a_2\cdot b_3 - a_3\cdot b_2) - (a_1\cdot
+         *                                         b_3 - a_3\cdot b_1) + (a_1\cdot b_2 - a_2\cdot b_1) \f$.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The vector to compute the cross product with.
+         * @param[in] rhs The vector to compute the cross product with.
+         *
+         * @return The vector cross product of the two vectors.
+         */
+        template <Arithmetic U>
+        static auto cross(const Vector3D& lhs, const Vector3D<U>& rhs) -> Vector3D<std::common_type_t<T, U>>;
+
+        /** @} */
+
 
 
         /*************************************
@@ -1036,7 +1068,7 @@ namespace fgm
         static auto reject(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized = false)
             -> Vector3D<std::common_type_t<T, U>>;
 
-        
+
         /**
          * @addtogroup FGM_Vec3_Utils
          * @{
@@ -1086,7 +1118,6 @@ namespace fgm
         [[nodiscard]] constexpr static bool hasNaN(const Vector3D& vec) noexcept;
 
         /** @} */
-
     };
 
 
@@ -1176,8 +1207,7 @@ namespace fgm
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Vector3D<T> zero =
-            Vector3D<T>(T(0), T(0), T(0)); ///< 3D-Vector with all zero-components.
+        inline constexpr Vector3D<T> zero = Vector3D<T>(T(0), T(0), T(0)); ///< 3D-Vector with all zero-components.
 
 
         /**
@@ -1187,8 +1217,8 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector3D<T> inf = Vector3D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D),
-                                                       T(constants::INFINITY_D));
+        inline constexpr Vector3D<T> inf =
+            Vector3D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D));
 
 
         /**
@@ -1198,8 +1228,8 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector3D<T> infN = Vector3D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D),
-                                                        T(-constants::INFINITY_D));
+        inline constexpr Vector3D<T> infN =
+            Vector3D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D));
 
 
         /**
@@ -1209,8 +1239,7 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector3D<T> nan =
-            Vector3D<T>(T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D));
+        inline constexpr Vector3D<T> nan = Vector3D<T>(T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D));
 
 
         /** @brief A 3D unit vector aligned with the positive X-axis (1, 0, 0). */
@@ -1228,7 +1257,7 @@ namespace fgm
         inline constexpr Vector3D<T> z = Vector3D<T>(T(0), T(0), T(1));
 
 
-    } // namespace vec4d
+    } // namespace vec3d
 
     /** @} */
 

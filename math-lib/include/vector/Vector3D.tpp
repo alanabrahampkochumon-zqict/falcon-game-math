@@ -633,18 +633,20 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector3D<T>::cross(const Vector3D<U>& other) const -> Vector3D<std::common_type_t<T, U>>
+    auto Vector3D<T>::cross(const Vector3D<U>& rhs) const -> Vector3D<std::common_type_t<T, U>>
     {
         using R = std::common_type_t<T, U>;
-        return Vector3D<R>(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x);
+        return Vector3D<R>(y * rhs.z - z * rhs.y, z * rhs.x - x * rhs.z, x * rhs.y - y * rhs.x);
     }
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector3D<T>::cross(const Vector3D& vecA, const Vector3D<U>& vecB) -> Vector3D<std::common_type_t<T, U>>
+    auto Vector3D<T>::cross(const Vector3D& lhs, const Vector3D<U>& rhs) -> Vector3D<std::common_type_t<T, U>>
     {
-        return vecA.cross(vecB);
+        return lhs.cross(rhs);
     }
+
+
 
 
     /*************************************
