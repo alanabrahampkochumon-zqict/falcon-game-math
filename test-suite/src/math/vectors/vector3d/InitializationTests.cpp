@@ -12,8 +12,6 @@
 #include "Vector3DTestSetup.h"
 
 
-using namespace testutils;
-
 
 /**************************************
  *                                    *

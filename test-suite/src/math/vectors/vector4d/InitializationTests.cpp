@@ -12,9 +12,6 @@
 #include "Vector4DTestSetup.h"
 
 
-using namespace testutils;
-
-
 
 /**************************************
  *                                    *
