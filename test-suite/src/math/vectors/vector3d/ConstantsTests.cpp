@@ -26,7 +26,7 @@ TYPED_TEST_SUITE(Vector3DConstants, SupportedArithmeticTypes);
 
 
 /**
- * @addtogroup T_FGM_Vec4_Const
+ * @addtogroup T_FGM_Vec3_Const
  * @{
  */
 
