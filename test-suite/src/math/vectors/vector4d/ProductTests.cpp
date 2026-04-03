@@ -58,56 +58,56 @@ TYPED_TEST_SUITE(Vector4DDotProduct, SupportedArithmeticTypes);
 TYPED_TEST(Vector4DDotProduct, SelfDotProductReturnsSquareMagnitude)
 {
 
-    const TypeParam result = this->_vecA.dot(this->_vecA);
+    const TypeParam dotProduct = this->_vecA.dot(this->_vecA);
 
     if constexpr (std::is_same_v<TypeParam, double>)
-        EXPECT_DOUBLE_EQ(this->_expectedADotA, result);
+        EXPECT_DOUBLE_EQ(this->_expectedADotA, dotProduct);
     else if constexpr (std::is_floating_point_v<TypeParam>)
-        EXPECT_FLOAT_EQ(this->_expectedADotA, result);
+        EXPECT_FLOAT_EQ(this->_expectedADotA, dotProduct);
     else
-        EXPECT_EQ(this->_expectedADotA, result);
+        EXPECT_EQ(this->_expectedADotA, dotProduct);
 }
 
 
 /** @test Verify that the dot product of a vector with an orthogonal vector returns zero. */
 TYPED_TEST(Vector4DDotProduct, OrthogonalDotProductReturnZero)
 {
-    const TypeParam result = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
+    const TypeParam dotProduct = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
 
     if constexpr (std::is_same_v<TypeParam, double>)
-        EXPECT_DOUBLE_EQ(0.0, result);
+        EXPECT_DOUBLE_EQ(0.0, dotProduct);
     else if constexpr (std::is_floating_point_v<TypeParam>)
-        EXPECT_FLOAT_EQ(0.0f, result);
+        EXPECT_FLOAT_EQ(0.0f, dotProduct);
     else
-        EXPECT_EQ(0, result);
+        EXPECT_EQ(0, dotProduct);
 }
 
 
 /** @test Verify that the dot product of a vector with a non-orthogonal vector returns a non-zero scalar. */
 TYPED_TEST(Vector4DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 {
-    const TypeParam result = this->_vecA.dot(this->_vecB);
+    const TypeParam dotProduct = this->_vecA.dot(this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
-        EXPECT_DOUBLE_EQ(this->_expectedDotProduct, result);
+        EXPECT_DOUBLE_EQ(this->_expectedDotProduct, dotProduct);
     else if constexpr (std::is_floating_point_v<TypeParam>)
-        EXPECT_FLOAT_EQ(this->_expectedDotProduct, result);
+        EXPECT_FLOAT_EQ(this->_expectedDotProduct, dotProduct);
     else
-        EXPECT_EQ(this->_expectedDotProduct, result);
+        EXPECT_EQ(this->_expectedDotProduct, dotProduct);
 }
 
 
 /** @test Verify that the static variant of @ref fgm::Vector4D::dot returns a non-zero scalar. */
 TYPED_TEST(Vector4DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
 {
-    const TypeParam result = fgm::Vector4D<TypeParam>::dot(this->_vecA, this->_vecB);
+    const TypeParam dotProduct = fgm::Vector4D<TypeParam>::dot(this->_vecA, this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
-        EXPECT_DOUBLE_EQ(this->_expectedDotProduct, result);
+        EXPECT_DOUBLE_EQ(this->_expectedDotProduct, dotProduct);
     else if constexpr (std::is_floating_point_v<TypeParam>)
-        EXPECT_FLOAT_EQ(this->_expectedDotProduct, result);
+        EXPECT_FLOAT_EQ(this->_expectedDotProduct, dotProduct);
     else
-        EXPECT_EQ(this->_expectedDotProduct, result);
+        EXPECT_EQ(this->_expectedDotProduct, dotProduct);
 }
 
 
@@ -122,10 +122,10 @@ TEST(Vector4DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
     constexpr fgm::Vector4D vecB(1.0, 0.0, 0.0, 0.0);
 
     // When dot with each other
-    const double result = vecA.dot(vecB);
+    const double dotProduct = vecA.dot(vecB);
 
     // Then, the dot product is -1
-    EXPECT_DOUBLE_EQ(-1.0, result);
+    EXPECT_DOUBLE_EQ(-1.0, dotProduct);
 }
 
 
@@ -140,13 +140,13 @@ TEST(Vector4DDotProduct, MixedTypeDotProductPromotesType)
     constexpr fgm::Vector4D vecB(1.123456789, 2.123456789, 3.123456789, 4.123456789);
 
     // When dot with each other
-    const auto result = vecA.dot(vecB);
+    const auto dotProduct = vecA.dot(vecB);
 
     // Then, the dot product is type promoted
-    static_assert(std::is_same_v<decltype(result), const double>);
+    static_assert(std::is_same_v<decltype(dotProduct), const double>);
 
     // Then, the dot product is non-zero
-    EXPECT_DOUBLE_EQ(295.11111101, result);
+    EXPECT_DOUBLE_EQ(295.11111101, dotProduct);
 }
 
 /** @} */
