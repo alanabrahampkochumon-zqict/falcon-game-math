@@ -21,7 +21,7 @@ list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDir})
 
 # Vector Test Sources
 set(Vector3DTestDir "src/math/vectors/vector3d/")
-set(Vector3DTestFiles "AccessAndMutationTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;EqualityTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ArithmeticOperationTests.cpp;AliasTests.cpp;ConstantsTests.cpp;UtilityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;NormalizationTests.cpp;ProjectionTests.cpp;RejectionTests.cpp;")
+set(Vector3DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;")
 list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDir})
 
 

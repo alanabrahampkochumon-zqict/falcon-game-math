@@ -26,6 +26,7 @@
 #include "common/OperationStatus.h"
 
 #include <type_traits>
+#include <iomanip>
 
 
 namespace fgm
@@ -34,7 +35,7 @@ namespace fgm
     struct Vector3D
     {
         /**
-         * @addtogroup FGM_Vec4_Members
+         * @addtogroup FGM_Vec3_Members
          * @{
          */
 
@@ -70,7 +71,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Init
+         * @addtogroup FGM_Vec3_Init
          * @{
          */
 
@@ -369,7 +370,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Comparison
+         * @addtogroup FGM_Vec3_Comparison
          * @{
          */
 
@@ -896,7 +897,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Product
+         * @addtogroup FGM_Vec3_Product
          * @{
          */
 
@@ -993,7 +994,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Mag
+         * @addtogroup FGM_Vec3_Mag
          * @{
          */
 
@@ -1498,6 +1499,44 @@ namespace fgm
         [[nodiscard]] constexpr static bool hasNaN(const Vector3D& vec) noexcept;
 
         /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Vec3_Log
+         * @{
+         */
+
+        /**
+         * @brief Write the vector to an output stream.
+         *        Format the vector as <x, y, z, w> string representation for debugging or logging.
+         *
+         * @tparam T Numeric type of the vector.
+         *
+         * @param os     The output stream to write to.
+         * @param vector The vector to be streamed.
+         *
+         * @return A reference to the output stream @p os.
+         */
+        constexpr friend std::ostream& operator<<(std::ostream& os, const Vector3D& vector)
+        {
+            const std::streamsize oldPrecision = os.precision();
+            const std::ios_base::fmtflags oldFlags = os.flags();
+
+            auto precision = Config::useFullPrecision
+                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+                : Config::LOG_PRECISION;
+            os << std::setprecision(precision) << std::fixed;
+            os << "<" << vector.x << ", " << vector.y << ", " << vector.z << ">\n";
+
+            os.precision(oldPrecision);
+            os.flags(oldFlags);
+
+            return os;
+        }
+
+        /** @} */
+
     };
 
 
@@ -1509,7 +1548,7 @@ namespace fgm
      *************************************/
 
     /**
-     * @addtogroup FGM_Vec4_Arithmetic
+     * @addtogroup FGM_Vec3_Arithmetic
      * @{
      */
 
@@ -1537,7 +1576,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Vec4_Alias
+     * @addtogroup FGM_Vec3_Alias
      * @{
      */
 
