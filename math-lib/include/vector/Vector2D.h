@@ -614,6 +614,7 @@ namespace fgm
          *      ARITHMETIC OPERATORS         *
          *                                   *
          *************************************/
+
         template <Arithmetic U>
         auto operator+(const Vector2D<U>& other) const -> Vector2D<std::common_type_t<U, T>>;
 
