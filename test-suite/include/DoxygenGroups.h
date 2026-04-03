@@ -32,37 +32,38 @@
          */
 
             /**
-             * @defgroup FGM_Vector4D_Tests Vector4D Test Suite
-             * @brief Verification of 4D Euclidean vector operations.
+             * @defgroup FGM_Vector2D_Tests Vector4D Test Suite
+             * @brief Verification of 2D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
-             *   @defgroup T_FGM_Vec4_Access Component Access
-             *   @defgroup T_FGM_Vec4_Mutation Component Mutation
-             *   @defgroup T_FGM_Vec4_Alias Spatial Aliasing
-             *   @defgroup T_FGM_Vec4_Const Vector Constants
-             *   @defgroup T_FGM_Vec4_Addition Addition
-             *   @defgroup T_FGM_Vec4_Subtraction Subtraction
-             *   @defgroup T_FGM_Vec4_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Vec4_Division Scalar Division
-             *   @defgroup T_FGM_Vec4_Bool_Bit Boolean Bitwise Operation
-             *   @defgroup T_FGM_Vec4_GT_Comp Greater Than Comparison
-             *   @defgroup T_FGM_Vec4_GTE_Comp Greater Than or Equal Comparison
-             *   @defgroup T_FGM_Vec4_LT_Comp Less Than Comparison
-             *   @defgroup T_FGM_Vec4_LTE_Comp Less Than or Equal Comparison
-             *   @defgroup T_FGM_Vec4_Equality Component-wise and Masked Equality
-             *   @defgroup T_FGM_Vec4_Inequality Component-wise and Masked Inequality
-             *   @defgroup T_FGM_Vec4_Init Initialization
-             *   @defgroup T_FGM_Vec4_Magnitude Scalar Length(Magnitude)
-             *   @defgroup T_FGM_Vec4_Normalize Vector Normalization
-             *   @defgroup T_FGM_Vec4_Product Dot Product
-             *   @defgroup T_FGM_Vec4_Proj Vector Projection
-             *   @defgroup T_FGM_Vec4_Rej Vector Rejection
-             *   @defgroup T_FGM_Vec4_String_Repr Formatted String Representation
-             *   @defgroup T_FGM_Vec4_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Vec4_Inversion Unary Inversion(-)
-             *   @defgroup T_FGM_Vec4_Utils Vector Utilities
+             *   @defgroup T_FGM_Vec2_Access Component Access
+             *   @defgroup T_FGM_Vec2_Mutation Component Mutation
+             *   @defgroup T_FGM_Vec2_Alias Spatial Aliasing
+             *   @defgroup T_FGM_Vec2_Const Vector Constants
+             *   @defgroup T_FGM_Vec2_Addition Addition
+             *   @defgroup T_FGM_Vec2_Subtraction Subtraction
+             *   @defgroup T_FGM_Vec2_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Vec2_Division Scalar Division
+             *   @defgroup T_FGM_Vec2_Bool_Bit Boolean Bitwise Operation
+             *   @defgroup T_FGM_Vec2_GT_Comp Greater Than Comparison
+             *   @defgroup T_FGM_Vec2_GTE_Comp Greater Than or Equal Comparison
+             *   @defgroup T_FGM_Vec2_LT_Comp Less Than Comparison
+             *   @defgroup T_FGM_Vec2_LTE_Comp Less Than or Equal Comparison
+             *   @defgroup T_FGM_Vec2_Equality Component-wise and Masked Equality
+             *   @defgroup T_FGM_Vec2_Inequality Component-wise and Masked Inequality
+             *   @defgroup T_FGM_Vec2_Init Initialization
+             *   @defgroup T_FGM_Vec2_Magnitude Scalar Length(Magnitude)
+             *   @defgroup T_FGM_Vec2_Normalize Vector Normalization
+             *   @defgroup T_FGM_Vec2_Product Dot and Cross Product
+             *   @defgroup T_FGM_Vec2_Proj Vector Projection
+             *   @defgroup T_FGM_Vec2_Rej Vector Rejection
+             *   @defgroup T_FGM_Vec2_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Vec2_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Vec2_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Vec2_Utils Vector Utilities
              * @}
              */
+
 
             /**
              * @defgroup FGM_Vector3D_Tests Vector4D Test Suite
@@ -94,6 +95,40 @@
              *   @defgroup T_FGM_Vec3_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Vec3_Inversion Unary Inversion(-)
              *   @defgroup T_FGM_Vec3_Utils Vector Utilities
+             * @}
+             */
+
+
+            /**
+             * @defgroup FGM_Vector4D_Tests Vector4D Test Suite
+             * @brief Verification of 4D Euclidean vector operations.
+             * @ingroup VectorTests
+             * @{
+             *   @defgroup T_FGM_Vec4_Access Component Access
+             *   @defgroup T_FGM_Vec4_Mutation Component Mutation
+             *   @defgroup T_FGM_Vec4_Alias Spatial Aliasing
+             *   @defgroup T_FGM_Vec4_Const Vector Constants
+             *   @defgroup T_FGM_Vec4_Addition Addition
+             *   @defgroup T_FGM_Vec4_Subtraction Subtraction
+             *   @defgroup T_FGM_Vec4_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Vec4_Division Scalar Division
+             *   @defgroup T_FGM_Vec4_Bool_Bit Boolean Bitwise Operation
+             *   @defgroup T_FGM_Vec4_GT_Comp Greater Than Comparison
+             *   @defgroup T_FGM_Vec4_GTE_Comp Greater Than or Equal Comparison
+             *   @defgroup T_FGM_Vec4_LT_Comp Less Than Comparison
+             *   @defgroup T_FGM_Vec4_LTE_Comp Less Than or Equal Comparison
+             *   @defgroup T_FGM_Vec4_Equality Component-wise and Masked Equality
+             *   @defgroup T_FGM_Vec4_Inequality Component-wise and Masked Inequality
+             *   @defgroup T_FGM_Vec4_Init Initialization
+             *   @defgroup T_FGM_Vec4_Magnitude Scalar Length(Magnitude)
+             *   @defgroup T_FGM_Vec4_Normalize Vector Normalization
+             *   @defgroup T_FGM_Vec4_Product Dot Product
+             *   @defgroup T_FGM_Vec4_Proj Vector Projection
+             *   @defgroup T_FGM_Vec4_Rej Vector Rejection
+             *   @defgroup T_FGM_Vec4_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Vec4_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Vec4_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Vec4_Utils Vector Utilities
              * @}
              */
 
