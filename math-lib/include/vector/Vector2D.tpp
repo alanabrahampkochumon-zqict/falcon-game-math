@@ -175,6 +175,126 @@ namespace fgm
 
 
 
+    /***************************************
+     *                                     *
+     *            COMPARISONS              *
+     *                                     *
+     ***************************************/
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::gt(const Vector2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return Vector2D(x > rhs.x, y > rhs.y);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::gt(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        return lhs.gt(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::gte(const Vector2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return Vector2D(x >= rhs.x, y >= rhs.y);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::gte(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        return lhs.gte(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::lt(const Vector2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return Vector2D(x < rhs.x, y < rhs.y);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::lt(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        return lhs.lt(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::lte(const Vector2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = Magnitude<std::common_type_t<T, U>>;
+        return Vector2D<bool>(static_cast<R>(x) <= static_cast<R>(rhs.x), static_cast<R>(y) <= static_cast<R>(rhs.y));
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::lte(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        return lhs.lte(rhs);
+    }
+
+
+#ifdef ENABLE_FGM_SHADER_OPERATORS
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::operator>(const Vector2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return this->gt(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::operator>=(const Vector2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return this->gte(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::operator<(const Vector2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return this->lt(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::operator<=(const Vector2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return this->lte(rhs);
+    }
+
+#endif
+
+
+
     /*************************************
      *                                   *
      *      ARITHMETIC OPERATORS         *

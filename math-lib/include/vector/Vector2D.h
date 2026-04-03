@@ -346,6 +346,188 @@ namespace fgm
         /** @} */
 
 
+
+        /**
+         * @addtogroup FGM_Vec2_Comparison
+         * @{
+         */
+
+        /***************************************
+         *                                     *
+         *            COMPARISONS              *
+         *                                     *
+         ***************************************/
+
+        /**
+         * @brief Perform component-wise greater-than comparison.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> gt(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copybrief gt(const Vector2D<U>&) const
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> gt(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise greater-than-or-equal comparison.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> gte(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copybrief gte(const Vector2D<U>&) const
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> gte(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise less-than comparison.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> lt(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copybrief lt(const Vector2D<U>&) const
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> lt(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise less-than-or-equal comparison.
+         *        Compares each component pair and returns a boolean mask.
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> lte(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copybrief lte(const Vector2D<U>&) const
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
+         *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> lte(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+#ifdef ENABLE_FGM_SHADER_OPERATORS
+
+        /**
+         * @copydoc gt(const Vector2D<U>&) const
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> operator>(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copydoc gte(const Vector2D<U>&) const
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> operator>=(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copydoc lt(const Vector2D<U>&) const
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> operator<(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copydoc lte(const Vector2D<U>&) const
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> operator<=(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+#endif
+
+        /** @} */
+
+
+
         /*************************************
          *                                   *
          *      ARITHMETIC OPERATORS         *
