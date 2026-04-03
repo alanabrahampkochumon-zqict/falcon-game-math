@@ -650,7 +650,7 @@ namespace fgm
         return vec.mag();
     }
 
-    
+
 
 
     /*************************************
@@ -737,46 +737,129 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector3D<T>::project(const Vector3D<U>& onto, bool ontoNormalized) const -> Vector3D<std::common_type_t<T, U>>
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::project(const Vector3D<U>& onto, const bool ontoNormalized) const noexcept
+        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
     {
+        using R = std::common_type_t<T, U>;
         if (ontoNormalized)
-        {
-            // Pb||a^ = a.dot(b) * b
-            return this->dot(onto) * onto;
-        }
-        else
-        {
-            // Pb||a^ = a.dot(b) / b.dot(b) * b
-            return this->dot(onto) / onto.dot(onto) * onto;
-        }
+            return this->dot(onto) * onto; // a.dot(b) * b
+
+        /** @note Static cast ensures integral type dots don't lose much precision */
+        return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
     }
+
 
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector3D<T>::project(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized)
-        -> Vector3D<std::common_type_t<T, U>>
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::project(const Vector3D& vec, const Vector3D<U>& onto, const bool ontoNormalized) noexcept
+        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
     {
-        return vector.project(onto, ontoNormalized);
+        return vec.project(onto, ontoNormalized);
     }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::safeProject(const Vector3D<U>& onto, const bool ontoNormalized) const noexcept
+        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        using MagType = Magnitude<R>;
+        if (ontoNormalized)
+            return this->dot(onto) * onto;
+
+        /** @note Static cast ensures integral type dots don't lose much precision */
+        const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
+
+        if (hasNaN() | std::isnan(ontoSquared))
+            return fgm::vec3d::zero<MagType>;
+
+        if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
+            return fgm::vec3d::zero<MagType>;
+
+        return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::safeProject(const Vector3D& vec, const Vector3D<U>& onto, const bool ontoNormalized) noexcept
+        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        return vec.safeProject(onto, ontoNormalized);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::tryProject(const Vector3D<U>& onto, OperationStatus& status,
+                                           const bool ontoNormalized) const noexcept
+        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        using MagType = Magnitude<R>;
+
+        if (ontoNormalized)
+        {
+            status = OperationStatus::SUCCESS;
+            return this->dot(onto) * onto;
+        }
+
+        /** @note Static cast ensures integral type dots don't lose much precision */
+        const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
+
+        if (hasNaN() | std::isnan(ontoSquared))
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec3d::zero<MagType>;
+        }
+
+        if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
+        {
+            status = OperationStatus::DIVISIONBYZERO;
+            return fgm::vec3d::zero<MagType>;
+        }
+
+        status = OperationStatus::SUCCESS;
+        return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector3D<T>::tryProject(const Vector3D& vec, const Vector3D<U>& onto, OperationStatus& status,
+                                           const bool ontoNormalized) noexcept
+        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        return vec.tryProject(onto, status, ontoNormalized);
+    }
+
+
+    
+    
     /*************************************
      *                                   *
      *         VECTOR REJECTION          *
      *                                   *
      *************************************/
-
+    
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector3D<T>::reject(const Vector3D<U>& onto, bool ontoNormalized) const -> Vector3D<std::common_type_t<T, U>>
+    auto Vector3D<T>::reject(const Vector3D<U>& onto, const bool ontoNormalized) const -> Vector3D<std::common_type_t<T, U>>
     {
         return *this - this->project(onto, ontoNormalized);
     }
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector3D<T>::reject(const Vector3D& vector, const Vector3D<U>& onto, bool ontoNormalized)
+    auto Vector3D<T>::reject(const Vector3D& vector, const Vector3D<U>& onto, const bool ontoNormalized)
         -> Vector3D<std::common_type_t<T, U>>
     {
         return vector.reject(onto, ontoNormalized);
