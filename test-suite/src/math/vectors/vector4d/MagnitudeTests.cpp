@@ -50,8 +50,8 @@ protected:
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Vector4D magnitude, parameterized by SupportedArithmeticTypes, for testing
- *        high-precision magnitude.
+ * @brief Test fixture for @ref fgm::Vector4D magnitude, parameterized by @ref SupportedArithmeticTypes,
+ *        for testing high-precision magnitude.
  */
 TYPED_TEST_SUITE(Vector4DUncleanMagnitude, SupportedArithmeticTypes);
 
