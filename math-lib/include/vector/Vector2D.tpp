@@ -5,7 +5,7 @@
  * @date Created on: January 24, 2026
  *
  * @brief @ref Vector2D template implementation.
- * @details This file contains the definitions of the template members declared in Vector3D.h
+ * @details This file contains the definitions of the template members declared in Vector2D.h
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -62,6 +62,114 @@ namespace fgm
     constexpr const T& Vector2D<T>::operator[](std::size_t i) const noexcept
     {
         return (&x)[i];
+    }
+
+
+
+
+    /***************************************
+     *                                     *
+     *             EQUALITY                *
+     *                                     *
+     ***************************************/
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector2D<T>::allEq(const Vector2D<U>& rhs, const double epsilon) const noexcept
+    {
+
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+            return x == rhs.x && y == rhs.y;
+        else
+            /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
+            return (x == rhs.x || std::abs(x - rhs.x) <= epsilon) && (y == rhs.y || std::abs(y - rhs.y) <= epsilon);
+    }
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector2D<T>::allEq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept
+    {
+        return lhs.allEq(rhs, epsilon);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector2D<T>::allNeq(const Vector2D<U>& rhs, const double epsilon) const noexcept
+    {
+
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+            return x != rhs.x || y != rhs.y;
+        else
+            /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
+            return (x != rhs.x && !(std::abs(x - rhs.x) <= epsilon)) ||
+                (y != rhs.y && !(std::abs(y - rhs.y) <= epsilon));
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector2D<T>::allNeq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept
+    {
+        return lhs.allNeq(rhs, epsilon);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector2D<T>::operator==(const Vector2D<U>& rhs) const noexcept
+    {
+        return this->allEq(rhs);
+    }
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Vector2D<T>::operator!=(const Vector2D<U>& rhs) const noexcept
+    {
+        return this->allNeq(rhs);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D<U>& rhs, const double epsilon) const noexcept
+    {
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+            return Vector2D(x == rhs.x, y == rhs.y);
+        else
+            /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
+            return Vector2D((x == rhs.x || std::abs(x - rhs.x) <= epsilon),
+                            (y == rhs.y || std::abs(y - rhs.y) <= epsilon));
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept
+    {
+        return lhs.eq(rhs, epsilon);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::neq(const Vector2D<U>& rhs, const double epsilon) const noexcept
+    {
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+            return Vector2D(x != rhs.x, y != rhs.y);
+        else
+            /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
+            return Vector2D<bool>((x != rhs.x) && !(std::abs(x - rhs.x) <= epsilon),
+                                  (y != rhs.y) && !(std::abs(y - rhs.y) <= epsilon));
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr Vector2D<bool> Vector2D<T>::neq(const Vector2D& lhs, const Vector2D<U>& rhs,
+                                              const double epsilon) noexcept
+    {
+        return lhs.neq(rhs, epsilon);
     }
 
 
