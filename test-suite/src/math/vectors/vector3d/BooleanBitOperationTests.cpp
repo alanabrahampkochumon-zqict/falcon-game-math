@@ -20,7 +20,7 @@
  **************************************/
 
 /** @brief Test fixture for @ref Vector3D<bool> bitwise operations */
-class BooleanVector3DBitOperationTests: public ::testing::Test
+class BooleanVector3DBitOperations: public ::testing::Test
 {
 protected:
     fgm::Vector3D<bool> _vecA;
@@ -50,7 +50,7 @@ protected:
  * @test Verify that the bitwise AND operator perform a component-wise logical conjunction and
  *       returns the correct boolean mask.
  */
-TEST_F(BooleanVector3DBitOperationTests, BitwiseAND_PerformComponentwiseConjunction)
+TEST_F(BooleanVector3DBitOperations, BitwiseAND_PerformComponentwiseConjunction)
 {
     const auto mask = this->_vecA & this->_vecB;
 
@@ -61,7 +61,7 @@ TEST_F(BooleanVector3DBitOperationTests, BitwiseAND_PerformComponentwiseConjunct
  * @test Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
-TEST_F(BooleanVector3DBitOperationTests, CompoundBitwiseAND_PerformInPlaceConjunction)
+TEST_F(BooleanVector3DBitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
 {
     this->_vecA &= this->_vecB;
 
@@ -73,7 +73,7 @@ TEST_F(BooleanVector3DBitOperationTests, CompoundBitwiseAND_PerformInPlaceConjun
  * @test Verify that the bitwise OR operator performs a component-wise logical disjunction and
  *       returns the correct boolean mask.
  */
-TEST_F(BooleanVector3DBitOperationTests, BitwiseOR_PerformComponentwiseDisjunction)
+TEST_F(BooleanVector3DBitOperations, BitwiseOR_PerformComponentwiseDisjunction)
 {
     const auto mask = this->_vecA | this->_vecB;
 
@@ -85,7 +85,7 @@ TEST_F(BooleanVector3DBitOperationTests, BitwiseOR_PerformComponentwiseDisjuncti
  * @test Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place 
  *       and updates the calling vector with the resulting mask.
  */
-TEST_F(BooleanVector3DBitOperationTests, CompoundBitwiseOR_PerformInPlaceDisjunction)
+TEST_F(BooleanVector3DBitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
 {
     this->_vecA |= this->_vecB;
 
@@ -97,7 +97,7 @@ TEST_F(BooleanVector3DBitOperationTests, CompoundBitwiseOR_PerformInPlaceDisjunc
  * @test Verify that the bitwise NOT operator performs a component-wise logical inversion and
  *       returns the correct boolean mask.
  */
-TEST_F(BooleanVector3DBitOperationTests, BitwiseNOT_PerformComponentwiseInversion)
+TEST_F(BooleanVector3DBitOperations, BitwiseNOT_PerformComponentwiseInversion)
 {
     const auto mask = !this->_vecA;
 

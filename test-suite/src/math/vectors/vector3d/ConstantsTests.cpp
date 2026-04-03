@@ -14,14 +14,14 @@
 
 
 template <typename T>
-class Vector3DConstantTests: public ::testing::Test
+class Vector3DConstants: public ::testing::Test
 {
 protected:
     T _one = T(1);
     T _zero = T(0);
 };
 /** @brief Test fixture for @ref fgm::Vector3D constants, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vector3DConstantTests, SupportedArithmeticTypes);
+TYPED_TEST_SUITE(Vector3DConstants, SupportedArithmeticTypes);
 
 
 
@@ -31,7 +31,7 @@ TYPED_TEST_SUITE(Vector3DConstantTests, SupportedArithmeticTypes);
  */
 
 /** @test Verifies that @ref fgm::vec3d::one returns a 3D vector with unit components. */
-TYPED_TEST(Vector3DConstantTests, One_ReturnsVectorWithUnitComponents)
+TYPED_TEST(Vector3DConstants, One_ReturnsVectorWithUnitComponents)
 {
     constexpr TypeParam one = TypeParam(1);
     EXPECT_VEC_CONTAINS(fgm::vec3d::one<TypeParam>, one, one, one);
@@ -39,7 +39,7 @@ TYPED_TEST(Vector3DConstantTests, One_ReturnsVectorWithUnitComponents)
 
 
 /** @test Verifies that @ref fgm::vec3d::zero returns a 3D vector with zero components. */
-TYPED_TEST(Vector3DConstantTests, Zero_ReturnsVectorWithZeroComponents)
+TYPED_TEST(Vector3DConstants, Zero_ReturnsVectorWithZeroComponents)
 {
     EXPECT_VEC_ZERO(fgm::vec3d::zero<TypeParam>);
 }
@@ -102,7 +102,7 @@ TEST(Vector3DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 
 
 /** @test Verifies that @ref fgm::vec3d::x returns a unit vector aligned with x-axis. */
-TYPED_TEST(Vector3DConstantTests, X_ReturnsUnitVectorWithOnlyXComponent)
+TYPED_TEST(Vector3DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 {
     constexpr auto x = fgm::vec3d::x<TypeParam>;
     EXPECT_VEC_CONTAINS(x, this->_one, this->_zero, this->_zero);
@@ -110,7 +110,7 @@ TYPED_TEST(Vector3DConstantTests, X_ReturnsUnitVectorWithOnlyXComponent)
 
 
 /** @test Verifies that @ref fgm::vec3d::y returns a unit vector aligned with y-axis. */
-TYPED_TEST(Vector3DConstantTests, Y_ReturnsUnitVectorWithOnlyYComponent)
+TYPED_TEST(Vector3DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 {
     constexpr auto y = fgm::vec3d::y<TypeParam>;
     EXPECT_VEC_CONTAINS(y, this->_zero, this->_one, this->_zero);
@@ -118,7 +118,7 @@ TYPED_TEST(Vector3DConstantTests, Y_ReturnsUnitVectorWithOnlyYComponent)
 
 
 /** @test Verifies that @ref fgm::vec3d::z returns a unit vector aligned with z-axis. */
-TYPED_TEST(Vector3DConstantTests, Z_ReturnsUnitVectorWithOnlyZComponent)
+TYPED_TEST(Vector3DConstants, Z_ReturnsUnitVectorWithOnlyZComponent)
 {
     constexpr auto z = fgm::vec3d::z<TypeParam>;
     EXPECT_VEC_CONTAINS(z, this->_zero, this->_zero, this->_one);

@@ -582,6 +582,7 @@ namespace fgm
      *       VECTOR NORMALIZATION        *
      *                                   *
      *************************************/
+
     template <Arithmetic T>
     Vector3D<T> Vector3D<T>::normalize() const
     {
@@ -595,6 +596,7 @@ namespace fgm
      *        VECTOR DOT PRODUCT         *
      *                                   *
      *************************************/
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr auto Vector3D<T>::dot(const Vector3D<U>& rhs) const noexcept -> std::common_type_t<T, U>
