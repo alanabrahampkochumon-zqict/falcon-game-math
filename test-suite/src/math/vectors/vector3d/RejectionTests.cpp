@@ -37,7 +37,7 @@ TYPED_TEST_SUITE(Vector3DRejection, SupportedArithmeticTypes);
 /** @brief Test fixture for @fgm::Vector3D rejection with NaN vectors. */
 class Vector3DRejectionNaNTests: public ::testing::TestWithParam<fgm::Vector3D<float>>
 {};
-INSTANTIATE_TEST_SUITE_P(Vector4RejectionTestSuite, Vector3DRejectionNaNTests,
+INSTANTIATE_TEST_SUITE_P(Vector3DRejectionTestSuite, Vector3DRejectionNaNTests,
                          ::testing::Values(fgm::Vector3D<float>(fgm::constants::NaN, 1.0f, 1.0f),
                                            fgm::Vector3D<float>(1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vector3D<float>(1.0f, 1.0f, fgm::constants::NaN),
