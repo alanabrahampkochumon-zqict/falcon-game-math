@@ -590,17 +590,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr auto Vector2D<T>::cross(const Vector2D<U>& rhs) const noexcept -> Vector2D<std::common_type_t<T, U>>
+    constexpr auto Vector2D<T>::cross(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>
     {
         using R = std::common_type_t<T, U>;
-        return Vector2D<R>(x * rhs.y - y * rhs.x);
+        return R(x * rhs.y - y * rhs.x);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr auto Vector2D<T>::cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
-        -> Vector2D<std::common_type_t<T, U>>
+        -> std::common_type_t<T, U>
     {
         return lhs.cross(rhs);
     }

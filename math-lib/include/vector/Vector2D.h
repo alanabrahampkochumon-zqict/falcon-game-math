@@ -945,10 +945,10 @@ namespace fgm
          *
          * @param[in] rhs The vector to compute the cross product with.
          *
-         * @return The vector cross product of the two vectors.
+         * @return The pseudo-cross cross product of the two vectors.
          */
         template <Arithmetic U>
-        constexpr auto cross(const Vector2D<U>& rhs) const noexcept -> Vector2D<std::common_type_t<T, U>>;
+        constexpr auto cross(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>;
 
 
         /**
@@ -963,11 +963,11 @@ namespace fgm
          * @param[in] lhs The vector to compute the cross product with.
          * @param[in] rhs The vector to compute the cross product with.
          *
-         * @return The vector cross product of the two vectors.
+         * @return The pseudo-cross product of the two vectors.
          */
         template <Arithmetic U>
         constexpr static auto cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
-            -> Vector2D<std::common_type_t<T, U>>;
+            -> std::common_type_t<T, U>;
 
         /** @} */
 

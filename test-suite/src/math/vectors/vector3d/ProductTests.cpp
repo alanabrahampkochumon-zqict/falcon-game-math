@@ -280,20 +280,20 @@ TYPED_TEST(Vector3DCrossProduct, BetweenTwoNonParallelVectorsReturnAVectorPerpen
 
 
 /**
- * @brief Verify that the cross product of vector with a non-parallel vector using static variant of @ref
- * fgm::Vector3D::cross returns a new vector.
+ * @brief Verify that the cross product of vector with a non-parallel vector using static variant of
+ *        @ref fgm::Vector3D::cross returns a new vector.
  */
 TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnsNewProduct)
 {
-    const fgm::Vector3D crossProduct = this->_vecA.cross(this->_vecB);
+    const fgm::Vector3D crossProduct = fgm::Vector3D<TypeParam>::cross(this->_vecA, this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedCrossProduct, crossProduct);
 }
 
 
 /**
- * @brief Verify that the cross product of vector with a non-parallel vector using static variant of @ref
- * fgm::Vector3D::cross returns a new vector perpendicular to both.
+ * @brief Verify that the cross product of vector with a non-parallel vector using static variant of
+ *        @ref fgm::Vector3D::cross returns a new vector perpendicular to both.
  */
 TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnAVectorPerpendicularToBoth)
 {
@@ -352,9 +352,9 @@ TEST(Vector3DCrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
     constexpr fgm::Vector3D vecA(2.0f, 3.0f, 4.0f);
     constexpr fgm::Vector3D vecB(5.0, 6.0, 7.0);
 
-    [[maybe_unused]] const fgm::Vector3D actual = vecA.cross(vecB);
+    [[maybe_unused]] constexpr fgm::Vector3D crossProduct = vecA.cross(vecB);
 
-    static_assert(std::is_same_v<typename decltype(actual)::value_type, double>);
+    static_assert(std::is_same_v<typename decltype(crossProduct)::value_type, double>);
 }
 
 /** @} */
