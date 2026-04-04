@@ -5,8 +5,8 @@
  * @date Created on: February 16, 2026
  *
  * @brief Diagnostic and validation utilities for Matrix types.
- *        Provides specialized testing helpers and assertion wrappers for @ref Matrix2D,
- *        @ref Matrix3D, and @ref Matrix4D to ensure numerical stability and
+ *        Provides specialized testing helpers and assertion wrappers for @ref fgm::Matrix2D,
+ *        @ref fgm::Matrix3D, and @ref fgm::Matrix4D to ensure numerical stability and
  *        geometric correctness across the fgm library.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -18,6 +18,7 @@
 #include <gtest/gtest.h>
 #include <matrix/Matrix2D.h>
 #include <matrix/Matrix3D.h>
+
 
 
 namespace testutils
@@ -35,7 +36,7 @@ namespace testutils
      * @tparam U The numeric type of the actual matrix components.
      *
      * @param expected The matrix serving as the reference for comparison.
-     * @param actual The matrix being evaluated.
+     * @param actual   The matrix being evaluated.
      *
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
      *       if the matrices are out of the @p tolerance range.
@@ -66,8 +67,8 @@ namespace testutils
      * @tparam T The numeric type of the expected matrix components.
      * @tparam U The numeric type of the actual matrix components.
      *
-     * @param expected The matrix serving as the ground truth.
-     * @param actual The matrix being evaluated.
+     * @param expected  The matrix serving as the ground truth.
+     * @param actual    The matrix being evaluated.
      * @param tolerance The maximum allowable absolute difference between components.
      *
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
