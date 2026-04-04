@@ -666,4 +666,47 @@ namespace fgm
     {
         return vector.reject(onto, ontoNormalized);
     }
+
+
+
+
+    /**************************************
+     *                                    *
+     *             UTILITIES              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr bool Vector2D<T>::hasInf() const noexcept
+    {
+        if constexpr (std::is_floating_point_v<T>)
+            return std::isinf(x) | std::isinf(y);
+        else
+            return false;
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Vector2D<T>::hasInf(const Vector2D& vec) noexcept
+    {
+        return vec.hasInf();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Vector2D<T>::hasNaN() const noexcept
+    {
+        if constexpr (std::is_floating_point_v<T>)
+            return std::isnan(x) | std::isnan(y);
+        else
+            return false;
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Vector2D<T>::hasNaN(const Vector2D& vec) noexcept
+    {
+        return vec.hasNaN();
+    }
+
 } // namespace fgm

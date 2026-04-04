@@ -962,4 +962,5 @@ namespace fgm
     {
         return vec.hasNaN();
     }
+
 } // namespace fgm

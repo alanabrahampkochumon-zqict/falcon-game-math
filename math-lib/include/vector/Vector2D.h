@@ -976,6 +976,58 @@ namespace fgm
         template <Arithmetic U>
         static auto reject(const Vector2D& vector, const Vector2D<U>& onto, bool ontoNormalized = false)
             -> Vector2D<std::common_type_t<T, U>>;
+
+
+
+        /**
+         * @addtogroup FGM_Vec2_Utils
+         * @{
+         */
+
+        /**
+         * @brief Check if any component of this vector is an IEEE 754 infinity.
+         *
+         * @note Always returns false for integral types.
+         *
+         * @return True if at least one component is positive or negative infinity.
+         */
+        [[nodiscard]] constexpr bool hasInf() const noexcept;
+
+
+        /**
+         * @brief Check if any component of a vector is an IEEE 754 infinity.
+         *
+         * @note Always returns false for integral types.
+         *
+         * @param vec The vector to evaluate for indefinite components.
+         *
+         * @return True if at least one component is positive or negative infinity.
+         */
+        [[nodiscard]] constexpr static bool hasInf(const Vector2D& vec) noexcept;
+
+
+        /**
+         * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always returns false for integral types.
+         *
+         * @return True if at least one component is NaN.
+         */
+        [[nodiscard]] constexpr bool hasNaN() const noexcept;
+
+
+        /**
+         * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always returns false for integral types.
+         *
+         * @param vec The vector to evaluate for indefinite components.
+         *
+         * @return True if at least one component is NaN.
+         */
+        [[nodiscard]] constexpr static bool hasNaN(const Vector2D& vec) noexcept;
+
+        /** @} */
     };
 
 
