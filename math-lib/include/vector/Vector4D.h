@@ -1473,7 +1473,6 @@ namespace fgm
          */
         [[nodiscard]] constexpr static bool hasNaN(const Vector4D& vec) noexcept;
 
-
         /** @} */
 
 

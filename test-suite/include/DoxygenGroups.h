@@ -132,8 +132,45 @@
              * @}
              */
 
-        /** @} */ // End of Vectors
+        /** @} */ // End of VectorTests
 
+    
+        /**
+         * @defgroup MatrixTests Matrices
+         * @brief Test suite for vectors.
+         * @ingroup MathTests
+         * @{
+         */
+        
+            /**
+             * @defgroup FGM_Mat2x2_Tests 2x2 Matrix Test Suite
+             * @brief Verification of 2x2 square matrix operations.
+             * @ingroup MatrixTests
+             * @{
+             *   @defgroup T_FGM_Mat2x2_Access Component Access
+             *   @defgroup T_FGM_Mat2x2_Mutation Component Mutation
+             *   @defgroup T_FGM_Mat2x2_Alias Spatial Aliasing
+             *   @defgroup T_FGM_Mat2x2_Const Vector Constants
+             *   @defgroup T_FGM_Mat2x2_Addition Addition
+             *   @defgroup T_FGM_Mat2x2_Subtraction Subtraction
+             *   @defgroup T_FGM_Mat2x2_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat2x2_Division Scalar Division
+             *   @defgroup T_FGM_Mat2x2_Bool_Bit Boolean Bitwise Operation
+             *   @defgroup T_FGM_Mat2x2_GT_Comp Greater Than Comparison
+             *   @defgroup T_FGM_Mat2x2_GTE_Comp Greater Than or Equal Comparison
+             *   @defgroup T_FGM_Mat2x2_LT_Comp Less Than Comparison
+             *   @defgroup T_FGM_Mat2x2_LTE_Comp Less Than or Equal Comparison
+             *   @defgroup T_FGM_Mat2x2_Equality Component-wise and Masked Equality
+             *   @defgroup T_FGM_Mat2x2_Inequality Component-wise and Masked Inequality
+             *   @defgroup T_FGM_Mat2x2_Init Initialization
+             *   @defgroup T_FGM_Mat2x2_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Mat2x2_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Mat2x2_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat2x2_Utils Matrix Utilities
+             * @}
+             */
+
+        /** @} */ // End of MatrixTests
 
         /**
          * @defgroup FGM_Common_Tests Common 
@@ -144,7 +181,7 @@
          * @}
          */
 
-    /** @} */ // End of VectorTests
+    /** @} */ // End of MathTests
 
     /**
      * @defgroup T_Utils Test Utilities

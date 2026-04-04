@@ -32,8 +32,8 @@ namespace testutils
     /**
      * @brief Perform a component-wise strict equality comparison between two matrices of the same dimensions.
      *
-     * @tparam T The numeric type of the expected matrix components.
-     * @tparam U The numeric type of the actual matrix components.
+     * @tparam T The type of expected matrix.
+     * @tparam U The type of actual matrix.
      *
      * @param expected The matrix serving as the reference for comparison.
      * @param actual   The matrix being evaluated.
@@ -62,10 +62,41 @@ namespace testutils
 
 
     /**
+     * @brief Perform a component-wise strict equality comparison of the data elements expected in the matrix
+     *        with the actual matrix elements.
+     *
+     * @tparam T The numeric type of the expected data.
+     * @tparam U The type of the actual matrix.
+     *
+     * @param expectedElements The elements in row-major order that forms the elements of the matrix.
+     * @param actual           The matrix being evaluated.
+     *
+     * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
+     *       if the matrix is not a zero matrix.
+     * @note Triggers an assertion failure if matrix dimension doesn't match the size of data elements.
+     */
+    template <fgm::Arithmetic T, fgm::Matrix U>
+    void EXPECT_MAT_CONTAINS(const std::vector<T>& expectedElements, const U& actual)
+    {
+        static_assert(expectedElements.size == U::rows * U::columns,
+                      "Size of data elements must match the matrix dimension, e.g: 9 to 3x3");
+
+        for (std::size_t i = 0; i < U::rows; ++i)
+            for (std::size_t j = 0; j < U::columns; ++j)
+                if constexpr (std::is_same_v<T, double>)
+                    EXPECT_DOUBLE_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
+                else if constexpr (std::is_same_v<T, float>)
+                    EXPECT_FLOAT_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
+                else
+                    EXPECT_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
+    }
+
+
+    /**
      * @brief Performs a component-wise approximate equality comparison using an absolute epsilon.
      *
-     * @tparam T The numeric type of the expected matrix components.
-     * @tparam U The numeric type of the actual matrix components.
+     * @tparam T The type of expected matrix.
+     * @tparam U The type of actual matrix.
      *
      * @param expected  The matrix serving as the ground truth.
      * @param actual    The matrix being evaluated.
@@ -92,7 +123,7 @@ namespace testutils
     /**
      * @brief Validates that the provided matrix conforms to an identity matrix within a standard epsilon.
      *
-     * @tparam T The numeric type of the matrix components.
+     * @tparam T The type of the matrix.
      *
      * @param actual The matrix to verify as an identity matrix.
      *
@@ -120,7 +151,7 @@ namespace testutils
     /**
      * @brief Validates that the provided matrix conforms to a zero matrix within a standard epsilon.
      *
-     * @tparam T The numeric type of the expected matrix components.
+     * @tparam T The type of the matrix.
      *
      * @param actual The matrix to verify as a zero matrix.
      *
@@ -146,8 +177,8 @@ namespace testutils
 
     /**
      * @brief Validates that the provided matrix conforms to an infinity matrix.
-     * 
-     * @tparam T The numeric type of the expected matrix components.
+     *
+     * @tparam T The type of the matrix.
      *
      * @param actual The matrix to verify as an infinity matrix.
      *

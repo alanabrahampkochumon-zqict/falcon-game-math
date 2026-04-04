@@ -56,7 +56,7 @@ namespace fgm
          */
 
         /** @brief Initialize a 2x2 identity matrix. */
-        constexpr Matrix2D() noexcept;
+        [[nodiscard]] constexpr Matrix2D() noexcept;
 
         /**
          * Initialize a 2x2 matrix from the passed-in elements.
@@ -66,7 +66,7 @@ namespace fgm
          * @param v_1_0 The element to insert into row two, column one.
          * @param v_1_1 The element to insert into row two, column two.
          */
-        constexpr Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1) noexcept;
+        [[nodiscard]] constexpr Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1) noexcept;
 
 
         /**
@@ -75,7 +75,8 @@ namespace fgm
          * @param col0 The 2D-vector to use as the first column entry.
          * @param col1 The 2D-vector to use as the second column entry.
          */
-        constexpr Matrix2D(const Vector2D<T>& col0, const Vector2D<T>& col1) noexcept;
+        [[nodiscard]] constexpr Matrix2D(const Vector2D<T>& col0, const Vector2D<T>& col1) noexcept;
+
 
         template <Arithmetic S>
         Matrix2D(const Matrix2D& other);
