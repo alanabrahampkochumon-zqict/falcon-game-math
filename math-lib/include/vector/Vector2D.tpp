@@ -342,6 +342,7 @@ namespace fgm
 
 
 
+
     /*************************************
      *                                   *
      *      ARITHMETIC OPERATORS         *
@@ -349,81 +350,200 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <Arithmetic S>
-    auto Vector2D<T>::operator+(const Vector2D<S>& other) const -> Vector2D<std::common_type_t<S, T>>
-    {
-        using R = std::common_type_t<T, S>;
-        return Vector2D<R>(x + other.x, y + other.y);
-    }
-
-    template <Arithmetic T>
-    template <Arithmetic U>
-    Vector2D<T>& Vector2D<T>::operator+=(const Vector2D<U>& other)
-    {
-        x += static_cast<T>(other.x);
-        y += static_cast<T>(other.y);
-        return *this;
-    }
-
-    template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector2D<T>::operator-(const Vector2D<U>& other) const -> Vector2D<std::common_type_t<T, U>>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::operator+(const Vector2D<U>& rhs) const noexcept -> Vector2D<std::common_type_t<T, U>>
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        return Vector2D<R>(x - other.x, y - other.y);
+        return Vector2D<R>(x + rhs.x, y + rhs.y);
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic U>
-    Vector2D<T>& Vector2D<T>::operator-=(const Vector2D<U>& other)
+    template <StrictArithmetic U>
+    constexpr Vector2D<T>& Vector2D<T>::operator+=(const Vector2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
     {
-        x -= static_cast<T>(other.x);
-        y -= static_cast<T>(other.y);
+        x += static_cast<T>(rhs.x);
+        y += static_cast<T>(rhs.y);
         return *this;
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic S>
-    auto Vector2D<T>::operator*(S scalar) const -> Vector2D<std::common_type_t<T, S>>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::operator-(const Vector2D<U>& rhs) const noexcept -> Vector2D<std::common_type_t<T, U>>
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        return Vector2D<R>(x - rhs.x, y - rhs.y);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Vector2D<T>& Vector2D<T>::operator-=(const Vector2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        x -= static_cast<T>(rhs.x);
+        y -= static_cast<T>(rhs.y);
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector2D<T> Vector2D<T>::operator-() const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        return Vector2D(-x, -y);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector2D<T>::operator*(const S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
         return Vector2D<R>(x * scalar, y * scalar);
     }
 
-    template <Arithmetic T, Arithmetic S>
-    auto operator*(S scalar, const Vector2D<T>& vector) -> Vector2D<std::common_type_t<S, T>>
+
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr auto operator*(const S scalar, const Vector2D<T>& vector) noexcept -> Vector2D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
     {
         return vector * scalar;
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic S>
-    Vector2D<T>& Vector2D<T>::operator*=(S scalar)
+    template <StrictArithmetic S>
+    constexpr Vector2D<T>& Vector2D<T>::operator*=(const S scalar) noexcept
+        requires StrictArithmetic<T>
     {
+
         x = static_cast<T>(scalar * x);
         y = static_cast<T>(scalar * y);
         return *this;
     }
 
-    template <Arithmetic T>
-    template <Arithmetic S>
-    auto Vector2D<T>::operator/(S scalar) const -> Vector2D<std::common_type_t<T, S>>
-    {
-        using R = std::common_type_t<T, S>;
-        R factor = R(1) / static_cast<R>(scalar);
-        return Vector2D<R>(x * factor, y * factor);
-    }
 
     template <Arithmetic T>
-    template <Arithmetic S>
-    Vector2D<T>& Vector2D<T>::operator/=(S scalar)
+    template <StrictArithmetic S>
+    constexpr auto Vector2D<T>::operator/(const S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
-        R factor = R(1) / static_cast<R>(scalar);
-        x = static_cast<T>(factor * x);
-        y = static_cast<T>(factor * y);
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            R factor = R(1) / static_cast<R>(scalar);
+            return Vector2D<R>(x * factor, y * factor);
+        }
+        else
+        {
+            assert(scalar != 0 && "Integral division by zero");
+            R tScalar = static_cast<R>(scalar);
+            return Vector2D<R>(x / tScalar, y / tScalar);
+        }
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vector2D<T>& Vector2D<T>::operator/=(const S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, S>;
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            R factor = R(1) / static_cast<R>(scalar);
+
+            x = static_cast<T>(factor * x);
+            y = static_cast<T>(factor * y);
+        }
+        else
+        {
+            x /= static_cast<T>(scalar);
+            y /= static_cast<T>(scalar);
+        }
+
         return *this;
     }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector2D<T>::safeDiv(const S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+            //if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+                return fgm::vec2d::zero<R>;
+        if constexpr (std::is_integral_v<R>)
+            if (scalar == 0)
+                return fgm::vec2d::zero<R>;
+
+        return (*this) / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector2D<T>::safeDiv(const Vector2D& vec, const S scalar) noexcept
+        -> Vector2D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
+    {
+        return vec.safeDiv(scalar);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector2D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
+        -> Vector2D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            //if (hasNaN() | std::isnan(scalar))
+            {
+                status = OperationStatus::NANOPERAND;
+                return fgm::vec2d::zero<R>;
+            }
+            if (std::abs(scalar) <= std::numeric_limits<S>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return fgm::vec2d::zero<R>;
+            }
+        }
+
+        if constexpr (std::is_integral_v<R>)
+            if (scalar == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return fgm::vec2d::zero<R>;
+            }
+
+
+        status = OperationStatus::SUCCESS;
+        return (*this) / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr auto Vector2D<T>::tryDiv(const Vector2D& vec, S scalar, OperationStatus& status) noexcept
+        -> Vector2D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>
+    {
+        return vec.tryDiv(scalar, status);
+    }
+
 
 
 

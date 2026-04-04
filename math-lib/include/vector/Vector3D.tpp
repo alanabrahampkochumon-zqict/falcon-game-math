@@ -352,6 +352,7 @@ namespace fgm
 
 
 
+
     /*************************************
      *                                   *
      *      ARITHMETIC OPERATORS         *

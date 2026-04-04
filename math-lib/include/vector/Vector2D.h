@@ -20,9 +20,10 @@
  */
 
 
-#include "common/MathTraits.h"
-#include "common/Constants.h"
 #include "common/Config.h"
+#include "common/Constants.h"
+#include "common/MathTraits.h"
+#include "common/OperationStatus.h"
 
 #include <type_traits>
 
@@ -609,35 +610,270 @@ namespace fgm
 
 
 
+        /**
+         * @addtogroup FGM_Vec2_Arithmetic
+         * @{
+         */
+
         /*************************************
          *                                   *
          *      ARITHMETIC OPERATORS         *
          *                                   *
          *************************************/
 
-        template <Arithmetic U>
-        auto operator+(const Vector2D<U>& other) const -> Vector2D<std::common_type_t<U, T>>;
+        /**
+         * @brief Add two vectors component-wise.
+         *        Compute the sum of each component pair and returns a new vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to add.
+         *
+         * @return A new @ref Vector2D containing the component-wise sum.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto operator+(const Vector2D<U>& rhs) const noexcept
+            -> Vector2D<std::common_type_t<T, U>>
+            requires StrictArithmetic<T>;
 
-        template <Arithmetic U>
-        Vector2D& operator+=(const Vector2D<U>& other);
 
-        template <Arithmetic U>
-        auto operator-(const Vector2D<U>& other) const -> Vector2D<std::common_type_t<T, U>>;
+        /**
+         * @brief Add another vector to this vector component-wise.
+         *        Perform an in-place addition of @p rhs to the current instance.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to add.
+         *
+         * @return A reference to this vector (*this).
+         */
+        template <StrictArithmetic U>
+        constexpr Vector2D& operator+=(const Vector2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
 
-        template <Arithmetic U>
-        Vector2D& operator-=(const Vector2D<U>& other);
 
-        template <Arithmetic S>
-        auto operator*(S scalar) const -> Vector2D<std::common_type_t<T, S>>;
+        /**
+         * @brief Subtract two vectors component-wise.
+         *        Compute the difference between each component pair and returns a new vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to subtract.
+         *
+         * @return A new @ref Vector2D containing the component-wise difference.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto operator-(const Vector2D<U>& rhs) const noexcept
+            -> Vector2D<std::common_type_t<T, U>>
+            requires StrictArithmetic<T>;
 
-        template <Arithmetic S>
-        Vector2D& operator*=(S scalar);
 
-        template <Arithmetic S>
-        auto operator/(S scalar) const -> Vector2D<std::common_type_t<T, S>>;
+        /**
+         * @brief Subtract another vector from this vector component-wise.
+         *        Perform an in-place substraction of @p rhs from the current instance.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to subtract.
+         *
+         * @return A reference to this vector (*this).
+         */
+        template <StrictArithmetic U>
+        constexpr Vector2D& operator-=(const Vector2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
 
-        template <Arithmetic S>
-        Vector2D& operator/=(S scalar);
+
+        /**
+         * @brief Perform a component-wise inversion.
+         *        Invert the sign of each component and returns a new @ref Vector2D<T>.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @return A new @ref fgm::Vector2D with inverted components.
+         */
+        [[nodiscard]] constexpr Vector2D operator-() const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Scale the vector by a scalar value.
+         *        Multiply each component of the vector by @p scalar and returns a new vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Vector2D scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr auto operator*(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Scale this vector in-place by a scalar value.
+         *        Perform an in-place multiplication of each component by @p scalar.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this vector (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Vector2D& operator*=(S scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Divide the vector by a scalar value.
+         *        Divide each component of the vector by @p scalar and returns a new vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @warning Does not check for division by zero. @p scalar should be non-zero.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Vector2D scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr auto operator/(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Divide this vector in-place by a scalar value.
+         *        Perform an in-place division of each component by @p scalar.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @warning Does not check for division by zero. @p scalar should be non-zero.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this vector (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Vector2D& operator/=(S scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely divide each component of this vector by a scalar value.
+         *        Divide each component of the vector by @p scalar and returns the newly computed vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] scalar The value to divide the vector components by.
+         *
+         * @return A new @ref Vector2D resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr auto safeDiv(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely divide each component of a vector by a scalar value.
+         *        Divide each component of the vector by @p scalar and returns the newly computed vector.
+         *
+         * @note Promote the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] vec The vector to divide.
+         * @param[in] scalar The value to divide the vector components by.
+         *
+         * @return A new @ref Vector2D resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr static auto safeDiv(const Vector2D& vec, S scalar) noexcept
+            -> Vector2D<std::common_type_t<T, S>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely divide this vector by a scalar value and set @p status to the division operation result.
+         *        Divides each component of the vector by @p scalar and returns the newly computed vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         *       invalidity (Division by Zero) when reporting status.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] scalar  The value to divide the vector components by.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A new @ref Vector2D resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr auto tryDiv(S scalar, OperationStatus& status) const noexcept
+            -> Vector2D<std::common_type_t<T, S>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely divide a vector by a scalar value and set @p status to the division operation result.
+         *        Divides each component of the vector by @p scalar and returns the newly computed vector.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         *       invalidity (Division by Zero) when reporting status.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] vec     The vector to divide.
+         * @param[in] scalar  The value to divide the vector components by.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A new @ref Vector2D resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] static constexpr auto tryDiv(const Vector2D& vec, S scalar, OperationStatus& status) noexcept
+            -> Vector2D<std::common_type_t<T, S>>
+            requires StrictArithmetic<T>;
+
+        /** @} */
 
 
         /*************************************
@@ -707,8 +943,8 @@ namespace fgm
          * @return Projected vector.
          */
         template <Arithmetic U>
-        static auto project(const Vector2D& vector, const Vector2D<U>& onto,
-                            bool ontoNormalized = false) -> Vector2D<std::common_type_t<T, U>>;
+        static auto project(const Vector2D& vector, const Vector2D<U>& onto, bool ontoNormalized = false)
+            -> Vector2D<std::common_type_t<T, U>>;
 
 
         /*************************************
@@ -738,8 +974,8 @@ namespace fgm
          * @return Projected vector.
          */
         template <Arithmetic U>
-        static auto reject(const Vector2D& vector, const Vector2D<U>& onto,
-                           bool ontoNormalized = false) -> Vector2D<std::common_type_t<T, U>>;
+        static auto reject(const Vector2D& vector, const Vector2D<U>& onto, bool ontoNormalized = false)
+            -> Vector2D<std::common_type_t<T, U>>;
     };
 
 
@@ -749,8 +985,31 @@ namespace fgm
      *                                   *
      *************************************/
 
-    template <Arithmetic T, Arithmetic S>
-    auto operator*(S scalar, const Vector2D<T>& vector) -> Vector2D<std::common_type_t<S, T>>;
+    /**
+     * @addtogroup FGM_Vec2_Arithmetic
+     * @{
+     */
+
+    /**
+     * @brief Scale the vector by a scalar value.
+     *        Multiply @p scalar by each component of the vector and returns a new vector.
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] vector The vector to scale[RHS].
+     *
+     * @return A new @ref Vector2D scaled by @p scalar.
+     */
+    template <StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] constexpr auto operator*(S scalar, const Vector2D<T>& vector) noexcept
+        -> Vector2D<std::common_type_t<T, S>>
+        requires StrictArithmetic<T>;
+
+    /** @} */
 
 
 
@@ -817,8 +1076,7 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector2D<T> inf =
-            Vector2D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D));
+        inline constexpr Vector2D<T> inf = Vector2D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D));
 
 
         /**
@@ -828,8 +1086,7 @@ namespace fgm
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector2D<T> infN =
-            Vector2D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D));
+        inline constexpr Vector2D<T> infN = Vector2D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D));
 
 
         /**
@@ -851,7 +1108,7 @@ namespace fgm
         template <StrictArithmetic T>
         inline constexpr Vector2D<T> y = Vector2D<T>(T(0), T(1));
 
-    } // namespace vec3d
+    } // namespace vec2d
 
     /** @} */
 
