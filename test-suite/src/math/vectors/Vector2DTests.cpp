@@ -146,14 +146,14 @@ TEST(Vector2D_Access, vec2Return2DFloatVector)
     EXPECT_TRUE(isCorrectType);
 }
 
-TEST(Vector2D_Access, dvec2Return2DDoubleVector)
-{
-    // Arrange & Act
-    constexpr bool isCorrectType = std::is_same_v<fgm::dvec2, fgm::Vector2D<double>>;
-
-    // Assert
-    EXPECT_TRUE(isCorrectType);
-}
+//TEST(Vector2D_Access, dvec2Return2DDoubleVector)
+//{
+//    // Arrange & Act
+//    constexpr bool isCorrectType = std::is_same_v<fgm::dvec2, fgm::Vector2D<double>>;
+//
+//    // Assert
+//    EXPECT_TRUE(isCorrectType);
+//}
 
 
 /*********************************

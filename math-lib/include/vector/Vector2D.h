@@ -753,13 +753,28 @@ namespace fgm
     auto operator*(S scalar, const Vector2D<T>& vector) -> Vector2D<std::common_type_t<S, T>>;
 
 
+
+
+    /**
+     * @addtogroup FGM_Vec2_Alias
+     * @{
+     */
+
     /*************************************
      *                                   *
      *             ALIASES               *
      *                                   *
      *************************************/
-    using vec2 = Vector2D<float>;
-    using dvec2 = Vector2D<double>;
+
+    using bVec2 = Vector2D<bool>;                ///< `bool` vector
+    using iVec2 = Vector2D<int>;                 ///< `int` vector
+    using uVec2 = Vector2D<unsigned int>;        ///< `unsigned int` vector
+    using vec2 = Vector2D<float>;                ///< `float` vector
+    using lVec2 = Vector2D<long long>;           ///< `long long` vector
+    using dVec2 = Vector2D<double>;              ///< `double` vector
+    using ulVec2 = Vector2D<unsigned long long>; ///< `unsigned long long` vector
+
+    /** @} */
 
 
 
