@@ -60,6 +60,7 @@ namespace fgm
 
         /**
          * Initialize a 2x2 matrix from the passed-in elements.
+         *
          * @param v_0_0 The element to insert into row one, column one.
          * @param v_0_1 The element to insert into row one, column two.
          * @param v_1_0 The element to insert into row two, column one.
@@ -67,8 +68,10 @@ namespace fgm
          */
         constexpr Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1) noexcept;
 
+
         /**
          * Initialize a 2x2 matrix from the passed-in vectors as columns.
+         *
          * @param col0 The 2D-vector to use as the first column entry.
          * @param col1 The 2D-vector to use as the second column entry.
          */

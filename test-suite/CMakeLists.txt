@@ -3,7 +3,7 @@ add_executable(TestSuite)
 target_compile_features(TestSuite PRIVATE cxx_std_20)
 
 set(IncludeDir "include/")
-set(SetupFiles "Vector2DTestSetup.h;Vector3DTestSetup.h;Vector4DTestSetup.h;SIMDTestSetup.h;DoxygenGroups.h")
+set(SetupFiles "Vector2DTestSetup.h;Vector3DTestSetup.h;Vector4DTestSetup.h;SIMDTestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;")
 list(TRANSFORM SetupFiles PREPEND ${IncludeDir})
 
 # Vector Test Sources
