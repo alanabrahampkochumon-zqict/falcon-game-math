@@ -1,4 +1,23 @@
 #pragma once
+/**
+ * @file Matrix2D.h
+ * @author Alan Abraham P Kochumon
+ * @date Created on: January 30, 2026
+ *
+ * @brief Templated 2x2 Matrix supporting integral, floating-point, and boolean types.
+ *
+ * @details Provide high-performance 2x2 matrix implementation with SIMD acceleration
+ *          and support for component-wise operations.
+ *
+ * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
+ *
+ * @par Configuration
+ * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
 #include "vector/Vector2D.h"
 
 #include <cstddef>
@@ -6,26 +25,42 @@
 
 namespace fgm
 {
-    template <typename T>
+    template <Arithmetic T>
     struct Matrix2D
     {
-        static_assert(std::is_arithmetic_v<T>,
-                      "Matrix2D can only be instantiated with numbers like floats, integers, etc.");
+
+        /**
+         * @addtogroup FGM_Mat2x2_Members
+         * @{
+         */
+
+        static constexpr std::size_t columns = 2;
+        static constexpr std::size_t rows = 2;
 
         using value_type = T;
 
     private:
         union {
-            Vector2D<T> columns[2];
-            T elements[2][2];
+            Vector2D<T> columnVectors[columns]; ///< 2D vector composition of matrix columns.
+            T elements[columns][rows];          ///< Elemental composition of matrix, stored in column-major form.
         };
 
+        /** @} */
+
+
+
     public:
+        /**
+         * @addtogroup FGM_Mat2x2_Init
+         * @{
+         */
+
+        /** @brief Initialize a 2x2 identity matrix. */
         Matrix2D();
         Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1);
         Matrix2D(Vector2D<T> col0, Vector2D<T> col1);
 
-        template <typename S, std::enable_if_t<std::is_arithmetic_v<S>>>
+        template <Arithmetic S>
         Matrix2D(const Matrix2D& other);
 
         Vector2D<T>& operator[](size_t index);
@@ -34,6 +69,8 @@ namespace fgm
         T& operator()(size_t row, size_t col);
         const T& operator()(size_t row, size_t col) const;
 
+        /** @} */
+
         // Math Operators
         Matrix2D operator+(const Matrix2D& other) const;
         Matrix2D& operator+=(const Matrix2D& other);
@@ -41,16 +78,16 @@ namespace fgm
         Matrix2D operator-(const Matrix2D& other) const;
         Matrix2D& operator-=(const Matrix2D& other);
 
-        template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+        template <StrictArithmetic S>
         Matrix2D operator*(const S& scalar) const;
 
-        template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+        template <StrictArithmetic S>
         Matrix2D& operator*=(const S& scalar);
 
-        template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+        template <StrictArithmetic S>
         Vector2D<T> operator*(const Vector2D<S>& vec) const;
 
-        template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+        template <StrictArithmetic S>
         Matrix2D<T> operator*(const Matrix2D<S>& other) const;
 
         /**
@@ -59,12 +96,12 @@ namespace fgm
          * @param other The matrix to be multiplied with.
          * @return Matrix on which *= is called, but with new values
          */
-        template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+        template <StrictArithmetic S>
         Matrix2D& operator*=(const Matrix2D<S>& other);
 
-        template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+        template <StrictArithmetic S>
         Matrix2D operator/(const S& scalar) const;
-        template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+        template <StrictArithmetic S>
         Matrix2D& operator/=(const S& scalar);
 
         // Determinants
@@ -85,7 +122,7 @@ namespace fgm
         static Matrix2D inverse(const Matrix2D& matrix);
     };
 
-    template <typename T, typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+    template <StrictArithmetic T, StrictArithmetic S>
     Matrix2D<T> operator*(const S& scalar, const Matrix2D<T>& matrix);
 
     /**
@@ -97,7 +134,7 @@ namespace fgm
      * @param mat matrix to be multiplied against.
      * @return a new Vector2D transposed(row major form)
      */
-    template <typename T, typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+    template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*(const Vector2D<S>& vec, const Matrix2D<T>& mat);
 
     /**
@@ -111,7 +148,7 @@ namespace fgm
      * @param mat matrix to be multiplied against.
      * @return the passed in vector
      */
-    template <typename T, typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
+    template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*=(Vector2D<S>& vec, const Matrix2D<T>& mat);
 
 

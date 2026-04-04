@@ -6,7 +6,7 @@
  *
  * @brief Templated 3D Vector supporting integral, floating-point, and boolean types.
  *
- * @details Provides a high-performance vector implementation with SIMD acceleration
+ * @details Provide high-performance 3D vector implementation with SIMD acceleration
  *          and support for component-wise operations.
  *
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.

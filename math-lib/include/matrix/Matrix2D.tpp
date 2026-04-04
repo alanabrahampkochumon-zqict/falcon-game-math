@@ -5,7 +5,7 @@
 
 namespace fgm
 {
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T>::Matrix2D()
     {
         // First Column
@@ -17,7 +17,7 @@ namespace fgm
         elements[1][1] = 1;
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T>::Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1)
     {
         // First Column
@@ -29,52 +29,52 @@ namespace fgm
         elements[1][1] = v_1_1;
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T>::Matrix2D(Vector2D<T> col0, Vector2D<T> vec2)
     {
-        columns[0] = col0;
-        columns[1] = vec2;
+        columnVectors[0] = col0;
+        columnVectors[1] = vec2;
     }
 
-    template <typename T>
-    template <typename S, std::enable_if_t<std::is_arithmetic_v<S>>>
+    template <Arithmetic T>
+    template <Arithmetic S>
     Matrix2D<T>::Matrix2D(const Matrix2D& other)
     {
         // TODO:
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Vector2D<T>& Matrix2D<T>::operator[](size_t index)
     {
-        return columns[index];
+        return columnVectors[index];
     }
 
-    template <typename T>
+    template <Arithmetic T>
     const Vector2D<T>& Matrix2D<T>::operator[](size_t index) const
     {
-        return columns[index];
+        return columnVectors[index];
     }
 
-    template <typename T>
+    template <Arithmetic T>
     T& Matrix2D<T>::operator()(size_t row, size_t col)
     {
         return elements[col][row];
     }
 
-    template <typename T>
+    template <Arithmetic T>
     const T& Matrix2D<T>::operator()(size_t row, size_t col) const
     {
         return elements[col][row];
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T> Matrix2D<T>::operator+(const Matrix2D& other) const
     {
         return Matrix2D(elements[0][0] + other(0, 0), elements[1][0] + other(0, 1), elements[0][1] + other(1, 0),
                         elements[1][1] + other(1, 1));
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T>& Matrix2D<T>::operator+=(const Matrix2D& other)
     {
         elements[0][0] += other(0, 0);
@@ -84,14 +84,14 @@ namespace fgm
         return *this;
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T> Matrix2D<T>::operator-(const Matrix2D& other) const
     {
         return Matrix2D(elements[0][0] - other(0, 0), elements[1][0] - other(0, 1), elements[0][1] - other(1, 0),
                         elements[1][1] - other(1, 1));
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T>& Matrix2D<T>::operator-=(const Matrix2D& other)
     {
         elements[0][0] -= other(0, 0);
@@ -102,16 +102,16 @@ namespace fgm
         return *this;
     }
 
-    template <typename T>
-    template <typename S, typename>
+    template <Arithmetic T>
+    template <StrictArithmetic S>
     Matrix2D<T> Matrix2D<T>::operator*(const S& scalar) const
     {
         return Matrix2D(elements[0][0] * scalar, elements[1][0] * scalar, elements[0][1] * scalar,
                         elements[1][1] * scalar);
     }
 
-    template <typename T>
-    template <typename S, typename>
+    template <Arithmetic T>
+    template <StrictArithmetic S>
     Matrix2D<T>& Matrix2D<T>::operator*=(const S& scalar)
     {
         elements[0][0] *= scalar;
@@ -121,8 +121,8 @@ namespace fgm
         return *this;
     }
 
-    template <typename T>
-    template <typename S, typename>
+    template <Arithmetic T>
+    template <StrictArithmetic S>
     Vector2D<T> Matrix2D<T>::operator*(const Vector2D<S>& vec) const
     {
         // 0_0 1_0     x
@@ -132,8 +132,8 @@ namespace fgm
                            elements[0][1] * vec.x + elements[1][1] * vec.y);
     }
 
-    template <typename T>
-    template <typename S, typename>
+    template <Arithmetic T>
+    template <StrictArithmetic S>
     Matrix2D<T> Matrix2D<T>::operator*(const Matrix2D<S>& other) const
     {
         return Matrix2D<T>(elements[0][0] * other(0, 0) + elements[1][0] * other(1, 0),
@@ -142,8 +142,8 @@ namespace fgm
                            elements[0][1] * other(0, 1) + elements[1][1] * other(1, 1));
     }
 
-    template <typename T>
-    template <typename S, typename>
+    template <Arithmetic T>
+    template <StrictArithmetic S>
     Matrix2D<T>& Matrix2D<T>::operator*=(const Matrix2D<S>& other)
     {
         Matrix2D&& temp = Matrix2D<T>(elements[0][0] * other(0, 0) + elements[1][0] * other(1, 0),
@@ -158,8 +158,8 @@ namespace fgm
 
 #pragma warning(push)
 #pragma warning(disable : 4723) // Suppress division by zero
-    template <typename T>
-    template <typename S, typename>
+    template <Arithmetic T>
+    template <StrictArithmetic S>
     Matrix2D<T> Matrix2D<T>::operator/(const S& scalar) const
     {
         T factor = T(1) / static_cast<T>(scalar);
@@ -167,8 +167,8 @@ namespace fgm
     }
 #pragma warning(pop)
 
-    template <typename T>
-    template <typename S, typename>
+    template <Arithmetic T>
+    template <StrictArithmetic S>
     Matrix2D<T>& Matrix2D<T>::operator/=(const S& scalar)
     {
         T factor = T(1) / static_cast<T>(scalar);
@@ -176,7 +176,7 @@ namespace fgm
         return *this;
     }
 
-    template <typename T>
+    template <Arithmetic T>
     T Matrix2D<T>::determinant() const
     {
         // 0_0  1_0
@@ -185,25 +185,25 @@ namespace fgm
         return elements[0][0] * elements[1][1] - elements[1][0] * elements[0][1];
     }
 
-    template <typename T>
+    template <Arithmetic T>
     T Matrix2D<T>::determinant(const Matrix2D<T>& matrix)
     {
         return matrix.determinant();
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T> Matrix2D<T>::transpose() const
     {
         return Matrix2D<T>(elements[0][0], elements[0][1], elements[1][0], elements[1][1]);
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T> Matrix2D<T>::transpose(const Matrix2D& matrix)
     {
         return matrix.transpose();
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T> Matrix2D<T>::inverse() const
     {
         T det = determinant();
@@ -215,25 +215,25 @@ namespace fgm
         return factor * Matrix2D(elements[1][1], -elements[1][0], -elements[0][1], elements[0][0]);
     }
 
-    template <typename T>
+    template <Arithmetic T>
     Matrix2D<T> Matrix2D<T>::inverse(const Matrix2D& matrix)
     {
         return matrix.inverse();
     }
 
-    template <typename T, typename S, typename>
+    template <StrictArithmetic T, StrictArithmetic S>
     Matrix2D<T> operator*(const S& scalar, const Matrix2D<T>& matrix)
     {
         return matrix * scalar;
     }
 
-    template <typename T, typename S, typename>
+    template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*(const Vector2D<S>& vec, const Matrix2D<T>& mat)
     {
         return Vector2D(vec.x * mat(0, 0) + vec.y * mat(1, 0), vec.x * mat(0, 1) + vec.y * mat(1, 1));
     }
 
-    template <typename T, typename S, typename>
+    template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*=(Vector2D<S>& vec, const Matrix2D<T>& mat)
     {
         vec = Vector2D(vec.x * mat(0, 0) + vec.y * mat(1, 0), vec.x * mat(0, 1) + vec.y * mat(1, 1));

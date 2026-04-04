@@ -6,7 +6,7 @@
  *
  * @brief Templated 4D Vector supporting integral, floating-point, and boolean types.
  *
- * @details Provides a high-performance vector implementation with SIMD acceleration
+ * @details Provide high-performance 4D vector implementation with SIMD acceleration
  *          and support for component-wise operations.
  *
  * @tparam T Type of @ref Vector4D components. Must satisfy @ref Arithmetic.
