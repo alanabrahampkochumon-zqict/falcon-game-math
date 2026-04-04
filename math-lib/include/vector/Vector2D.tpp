@@ -554,18 +554,32 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <Arithmetic S>
-    auto Vector2D<T>::dot(const Vector2D<S>& other) const -> std::common_type_t<T, S>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::dot(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>
+        requires StrictArithmetic<T>
     {
-        return x * other.x + y * other.y;
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
+        using R = std::common_type_t<T, U>;
+        if constexpr (std::is_floating_point_v<R>)
+            return std::fma(static_cast<R>(x), static_cast<R>(rhs.x),
+                            std::fma(static_cast<R>(y), static_cast<R>(rhs.y), T(0)));
+        else
+            return x * rhs.x + y * rhs.y;
+#else
+        return x * rhs.x + y * rhs.y;
+#endif
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector2D<T>::dot(const Vector2D& vectorA, const Vector2D<U>& vectorB) -> std::common_type_t<T, U>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::dot(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept -> std::common_type_t<T, U>
+        requires StrictArithmetic<T>
     {
-        return vectorA.dot(vectorB);
+        return lhs.dot(rhs);
     }
+
+
 
 
     /*************************************
@@ -576,17 +590,22 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector2D<T>::cross(const Vector2D<U>& other) const -> std::common_type_t<T, U>
+    constexpr auto Vector2D<T>::cross(const Vector2D<U>& rhs) const noexcept -> Vector2D<std::common_type_t<T, U>>
     {
-        return x * other.y - y * other.x;
+        using R = std::common_type_t<T, U>;
+        return Vector2D<R>(x * rhs.y - y * rhs.x);
     }
+
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector2D<T>::cross(const Vector2D<T>& vectorA, const Vector2D<U>& vectorB) -> std::common_type_t<T, U>
+    constexpr auto Vector2D<T>::cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        -> Vector2D<std::common_type_t<T, U>>
     {
-        return vectorA.cross(vectorB);
+        return lhs.cross(rhs);
     }
+
+
 
 
     /*************************************
@@ -623,7 +642,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector2D<T>::project(const Vector2D<U>& onto, const bool ontoNormalized) const -> Vector2D<std::common_type_t<T, U>>
+    auto Vector2D<T>::project(const Vector2D<U>& onto, const bool ontoNormalized) const
+        -> Vector2D<std::common_type_t<T, U>>
     {
         if (ontoNormalized)
         {

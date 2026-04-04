@@ -25,8 +25,8 @@
 #include "common/Constants.h"
 #include "common/OperationStatus.h"
 
-#include <type_traits>
 #include <iomanip>
+#include <type_traits>
 
 
 namespace fgm
@@ -954,8 +954,8 @@ namespace fgm
 
         /**
          * @brief Calculate the cross product of this vector with another vector.
-         *        Compute the vector product: \f$ \mathbf{a}\times\mathbf{b} = (a_2\cdot b_3 - a_3\cdot b_2) - (a_1\cdot
-         *                                         b_3 - a_3\cdot b_1) + (a_1\cdot b_2 - a_2\cdot b_1) \f$.
+         *        Compute the vector product: \f$ \mathbf{a}\times\mathbf{b} = (a_y\cdot b_z - a_z\cdot b_y) - (a_x\cdot
+         *                                         b_z - a_z\cdot b_x) + (a_x\cdot b_y - a_y\cdot b_x) \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -972,8 +972,8 @@ namespace fgm
 
         /**
          * @brief Calculate the cross product of a vector with another vector.
-         *        Compute the vector product: \f$ \mathbf{a}\times\mathbf{b} = (a_2\cdot b_3 - a_3\cdot b_2) - (a_1\cdot
-         *                                         b_3 - a_3\cdot b_1) + (a_1\cdot b_2 - a_2\cdot b_1) \f$.
+         *        Compute the vector product: \f$ \mathbf{a}\times\mathbf{b} = (a_y\cdot b_z - a_z\cdot b_y) - (a_x\cdot
+         *                                         b_z - a_z\cdot b_x) + (a_x\cdot b_y - a_y\cdot b_x) \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1297,7 +1297,7 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        
+
         /*************************************
          *                                   *
          *         VECTOR REJECTION          *
@@ -1536,7 +1536,6 @@ namespace fgm
         }
 
         /** @} */
-
     };
 
 

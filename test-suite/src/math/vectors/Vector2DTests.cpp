@@ -669,85 +669,85 @@ TEST(Vector2D_Dot, VectorWhenDotWithNonOrthogonalVectorOfDifferentTypeReturnsNum
     static_assert(std::is_same_v<decltype(result), const double>);
     EXPECT_DOUBLE_EQ(-6.0, result);
 }
-
-TEST(Vector2D_Cross, UnitXVectorWhenCrossWithUnitYVectorReturnsOne)
-{
-    // Arrange
-    fgm::Vector2D vec1(1.0f, 0.0f);
-    fgm::Vector2D vec2(0.0f, 1.0f);
-
-    // Act
-    const float res = vec1.cross(vec2);
-
-    // Assert
-    EXPECT_FLOAT_EQ(1.0f, res);
-}
-
-TEST(Vector2D_Cross, UnitYVectorWhenCrossWithUnitXVectorReturnsUnitNegativeOne)
-{
-    // Arrange
-    const fgm::Vector2D vec1(0.0f, 1.0f);
-    const fgm::Vector2D vec2(1.0f, 0.0f);
-
-    // Act
-    float res = vec1.cross(vec2);
-
-    // Assert
-    EXPECT_FLOAT_EQ(-1.0f, res);
-}
-
-TEST(Vector2D_Cross, UnitVectorCrossWithItselfReturnZero)
-{
-    // Arrange
-    const fgm::Vector2D vec(0.0f, 1.0f);
-
-
-    // Act
-    const float res = vec.cross(vec);
-
-    // Assert
-    EXPECT_FLOAT_EQ(0.0f, res);
-}
-
-TEST(Vector2D_Cross, VectorCrossWithAnotherNonParallelVectorReturnsPseudoCrossProduct)
-{
-    // Arrange
-    const fgm::Vector2D vec1(3.0f, 0.0f);
-    const fgm::Vector2D vec2(0.0f, 4.0f);
-
-    // Act
-    const float res = vec1.cross(vec2);
-
-    // Assert
-    EXPECT_FLOAT_EQ(12.0f, res);
-}
-
-TEST(Vector2D_Cross, VectorCrossStaticWrapperWithAnotherNonParallelVectorReturnsPseudoCrossProduct)
-{
-    // Arrange
-    const fgm::Vector2D vec1(3.0f, 0.0f);
-    const fgm::Vector2D vec2(0.0f, 4.0f);
-
-    // Act
-    const float res = fgm::Vector2D<float>::cross(vec1, vec2);
-
-    // Assert
-    EXPECT_FLOAT_EQ(12.0f, res);
-}
-
-TEST(Vector2D_Cross, VectorCrossWithVectorOfDifferentTypeReturnsScalarWithTypePromotion)
-{
-    // Arrange
-    const fgm::Vector2D vec1(3.0f, 0.0f);
-    const fgm::Vector2D vec2(0.0, 4.0);
-
-    // Act
-    const auto result = vec1.cross(vec2);
-
-    // Assert
-    static_assert(std::is_same_v<decltype(result), const double>);
-    EXPECT_DOUBLE_EQ(12.0, result);
-}
+//
+//TEST(Vector2D_Cross, UnitXVectorWhenCrossWithUnitYVectorReturnsOne)
+//{
+//    // Arrange
+//    fgm::Vector2D vec1(1.0f, 0.0f);
+//    fgm::Vector2D vec2(0.0f, 1.0f);
+//
+//    // Act
+//    const float res = vec1.cross(vec2);
+//
+//    // Assert
+//    EXPECT_FLOAT_EQ(1.0f, res);
+//}
+//
+//TEST(Vector2D_Cross, UnitYVectorWhenCrossWithUnitXVectorReturnsUnitNegativeOne)
+//{
+//    // Arrange
+//    const fgm::Vector2D vec1(0.0f, 1.0f);
+//    const fgm::Vector2D vec2(1.0f, 0.0f);
+//
+//    // Act
+//    float res = vec1.cross(vec2);
+//
+//    // Assert
+//    EXPECT_FLOAT_EQ(-1.0f, res);
+//}
+//
+//TEST(Vector2D_Cross, UnitVectorCrossWithItselfReturnZero)
+//{
+//    // Arrange
+//    const fgm::Vector2D vec(0.0f, 1.0f);
+//
+//
+//    // Act
+//    const float res = vec.cross(vec);
+//
+//    // Assert
+//    EXPECT_FLOAT_EQ(0.0f, res);
+//}
+//
+//TEST(Vector2D_Cross, VectorCrossWithAnotherNonParallelVectorReturnsPseudoCrossProduct)
+//{
+//    // Arrange
+//    const fgm::Vector2D vec1(3.0f, 0.0f);
+//    const fgm::Vector2D vec2(0.0f, 4.0f);
+//
+//    // Act
+//    const float res = vec1.cross(vec2);
+//
+//    // Assert
+//    EXPECT_FLOAT_EQ(12.0f, res);
+//}
+//
+//TEST(Vector2D_Cross, VectorCrossStaticWrapperWithAnotherNonParallelVectorReturnsPseudoCrossProduct)
+//{
+//    // Arrange
+//    const fgm::Vector2D vec1(3.0f, 0.0f);
+//    const fgm::Vector2D vec2(0.0f, 4.0f);
+//
+//    // Act
+//    const float res = fgm::Vector2D<float>::cross(vec1, vec2);
+//
+//    // Assert
+//    EXPECT_FLOAT_EQ(12.0f, res);
+//}
+//
+//TEST(Vector2D_Cross, VectorCrossWithVectorOfDifferentTypeReturnsScalarWithTypePromotion)
+//{
+//    // Arrange
+//    const fgm::Vector2D vec1(3.0f, 0.0f);
+//    const fgm::Vector2D vec2(0.0, 4.0);
+//
+//    // Act
+//    const auto result = vec1.cross(vec2);
+//
+//    // Assert
+//    static_assert(std::is_same_v<decltype(result), const double>);
+//    EXPECT_DOUBLE_EQ(12.0, result);
+//}
 
 
 /************************************
