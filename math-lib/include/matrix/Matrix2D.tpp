@@ -86,6 +86,31 @@ namespace fgm
         return elements[col][row];
     }
 
+
+
+
+    /***************************************
+     *                                     *
+     *             EQUALITY                *
+     *                                     *
+     ***************************************/
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix2D<T>::allEq(const Matrix2D<U>& rhs, double epsilon) const noexcept
+    {
+        return columnVectors[0].allEq(rhs[0], epsilon) && columnVectors[1].allEq(rhs[1], epsilon);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix2D<T>::allEq(const Matrix2D& lhs, const Matrix2D<U>& rhs, double epsilon) noexcept
+    {
+        return lhs.allEq(rhs, epsilon);
+    }
+
+
     template <Arithmetic T>
     Matrix2D<T> Matrix2D<T>::operator+(const Matrix2D& other) const
     {

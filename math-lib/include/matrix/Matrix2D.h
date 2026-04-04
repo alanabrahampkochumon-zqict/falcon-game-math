@@ -149,6 +149,63 @@ namespace fgm
         /** @} */
 
 
+
+        /**
+         * @addtogroup FGM_Vec3_Equality
+         * @{
+         */
+
+        /***************************************
+         *                                     *
+         *             EQUALITY                *
+         *                                     *
+         ***************************************/
+
+        /**
+         * @brief Compare all components of this matrix for equality with another matrix.
+         *        Perform a component-wise comparison and returns true only if every element pair
+         *        satisfies the equality condition within the given @p epsilon.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The vector to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if all components are equivalent within @p epsilon.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr bool allEq(const Matrix2D<U>& rhs,
+                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                               ? Config::DOUBLE_EPSILON
+                                               : Config::FLOAT_EPSILON) const noexcept;
+
+
+        /**
+         * @brief Compare all components of a matrix for equality with another matrix.
+         *        Perform a component-wise comparison and returns true only if every element pair
+         *        satisfies the equality condition within the given @p epsilon.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The matrix to compare.
+         * @param[in] rhs     The matrix to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         * @return True if all components are equivalent within @p epsilon.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr static bool allEq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
+                                                  double epsilon = (std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>)
+                                                      ? Config::DOUBLE_EPSILON
+                                                      : Config::FLOAT_EPSILON) noexcept;
+
+        /** @} */
+
+
         // Math Operators
         Matrix2D operator+(const Matrix2D& other) const;
         Matrix2D& operator+=(const Matrix2D& other);
