@@ -262,9 +262,11 @@ namespace testutils
     }
 
 
+
     // clang-format off
     /**
      * @brief Validates that a @ref fgm::Vector4D components are positive `INFINITY`.
+     *
      * @param vec The vector to evaluate.
      */
     #define EXPECT_VEC4_POS_INF(vec) \
@@ -276,6 +278,7 @@ namespace testutils
 
     /**
      * @brief Validates that a @ref fgm::Vector4D components are negative `INFINITY`.
+     *
      * @param vec The vector to evaluate.
      */
     #define EXPECT_VEC4_NEG_INF(vec) \
@@ -287,6 +290,7 @@ namespace testutils
 
     /**
      * @brief Validates that a @ref fgm::Vector3D components are positive `INFINITY`.
+     *
      * @param vec The vector to evaluate.
      */
     #define EXPECT_VEC3_POS_INF(vec) \
@@ -297,12 +301,33 @@ namespace testutils
 
     /**
      * @brief Validates that a @ref fgm::Vector3D components are negative `INFINITY`.
+     *
      * @param vec The vector to evaluate.
      */
     #define EXPECT_VEC3_NEG_INF(vec) \
             EXPECT_TRUE(std::isinf((vec).x) && std::signbit((vec).x)); \
             EXPECT_TRUE(std::isinf((vec).y) && std::signbit((vec).y)); \
             EXPECT_TRUE(std::isinf((vec).z) && std::signbit((vec).z));
+
+
+    /**
+     * @brief Validates that a @ref fgm::Vector2D components are positive `INFINITY`.
+     *
+     * @param vec The vector to evaluate.
+     */
+    #define EXPECT_VEC2_POS_INF(vec) \
+            EXPECT_TRUE(std::isinf((vec).x) && !std::signbit((vec).x)); \
+            EXPECT_TRUE(std::isinf((vec).y) && !std::signbit((vec).y));
+
+
+    /**
+     * @brief Validates that a @ref fgm::Vector2D components are negative `INFINITY`.
+     *
+     * @param vec The vector to evaluate.
+     */
+    #define EXPECT_VEC2_NEG_INF(vec) \
+            EXPECT_TRUE(std::isinf((vec).x) && std::signbit((vec).x)); \
+            EXPECT_TRUE(std::isinf((vec).y) && std::signbit((vec).y));
     // clang-format on
 
     /** @} */
