@@ -102,13 +102,52 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] constexpr Matrix2D(const Matrix2D<U>& other) noexcept;
 
-        constexpr Vector2D<T>& operator[](size_t index) noexcept;
-        constexpr const Vector2D<T>& operator[](size_t index) const noexcept;
 
-        constexpr T& operator()(size_t row, size_t col) noexcept;
-        constexpr const T& operator()(size_t row, size_t col) const noexcept;
+        /**
+         * @brief Access the column vector at the specified location.
+         *        Provide read-write access to the element.
+         *
+         * @param[in] col The column index of the matrix.
+         *
+         * @return A reference to the column vector.
+         */
+        [[nodiscard]] constexpr Vector2D<T>& operator[](std::size_t col) noexcept;
+
+
+        /**
+         * @brief Access the column vector at the specified location (read-only).
+         *
+         * @param[in] col The column index of the matrix.
+         *
+         * @return A const reference to the column vector.
+         */
+        [[nodiscard]] constexpr const Vector2D<T>& operator[](std::size_t col) const noexcept;
+
+
+        /**
+         * @brief Access the element at the specified row, column index.
+         *        Provide read-write access to the element.
+         *
+         * @param[in] row The row index of the matrix entry.
+         * @param[in] col The column index of the matrix entry.
+         *
+         * @return A reference to the element at row, col.
+         */
+        [[nodiscard]] constexpr T& operator()(std::size_t row, std::size_t col) noexcept;
+
+
+        /**
+         * @brief Access the element at the specified row, column index (read-only).
+         *
+         * @param[in] row The row index of the matrix entry.
+         * @param[in] col The column index of the matrix entry.
+         *
+         * @return A const reference to the element at row, col.
+         */
+        [[nodiscard]] constexpr const T& operator()(std::size_t row, std::size_t col) const noexcept;
 
         /** @} */
+
 
         // Math Operators
         Matrix2D operator+(const Matrix2D& other) const;
