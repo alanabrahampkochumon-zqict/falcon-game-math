@@ -6,7 +6,7 @@
 namespace fgm
 {
     template <Arithmetic T>
-    Matrix2D<T>::Matrix2D()
+    constexpr Matrix2D<T>::Matrix2D() noexcept
     {
         // First Column
         elements[0][0] = 1;
@@ -17,8 +17,9 @@ namespace fgm
         elements[1][1] = 1;
     }
 
+
     template <Arithmetic T>
-    Matrix2D<T>::Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1)
+    constexpr Matrix2D<T>::Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1) noexcept
     {
         // First Column
         elements[0][0] = v_0_0;
@@ -29,12 +30,15 @@ namespace fgm
         elements[1][1] = v_1_1;
     }
 
+
     template <Arithmetic T>
-    Matrix2D<T>::Matrix2D(Vector2D<T> col0, Vector2D<T> vec2)
+    constexpr Matrix2D<T>::Matrix2D(const Vector2D<T>& col0, const Vector2D<T>& col1) noexcept
     {
         columnVectors[0] = col0;
-        columnVectors[1] = vec2;
+        columnVectors[1] = col1;
     }
+
+
 
     template <Arithmetic T>
     template <Arithmetic S>
