@@ -168,9 +168,7 @@ TEST(Vector3DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
     const fgm::Vector3D actualProjection = a.project(b, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
-    EXPECT_FLOAT_EQ(expectedProjection.z, actualProjection.z);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
 
 
@@ -266,9 +264,7 @@ TEST(Vector3DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZer
     const fgm::Vector3D actualProjection = a.safeProject(b, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
-    EXPECT_FLOAT_EQ(expectedProjection.z, actualProjection.z);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
 
 
@@ -353,9 +349,7 @@ TEST(Vector3DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVecto
     const fgm::Vector3D actualProjection = fgm::Vector3D<float>::safeProject(a, b, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
-    EXPECT_FLOAT_EQ(expectedProjection.z, actualProjection.z);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
 
 
@@ -520,9 +514,7 @@ TEST(Vector3DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZero
     const fgm::Vector3D actualProjection = a.tryProject(b, flag, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
-    EXPECT_FLOAT_EQ(expectedProjection.z, actualProjection.z);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
@@ -625,9 +617,7 @@ TEST(Vector3DProjection, StaticWrapper_TryProject_ProjectionOntoNormalizedVector
     const fgm::Vector3D actualProjection = fgm::Vector3D<float>::tryProject(a, b, flag, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
-    EXPECT_FLOAT_EQ(expectedProjection.z, actualProjection.z);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }

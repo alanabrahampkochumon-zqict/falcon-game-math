@@ -147,8 +147,7 @@ TEST(Vector2DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
     const fgm::Vector2D actualProjection = a.project(b, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
 
 
@@ -244,8 +243,7 @@ TEST(Vector2DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZer
     const fgm::Vector2D actualProjection = a.safeProject(b, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
 
 
@@ -330,8 +328,7 @@ TEST(Vector2DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVecto
     const fgm::Vector2D actualProjection = fgm::Vector2D<float>::safeProject(a, b, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
 
 
@@ -496,8 +493,7 @@ TEST(Vector2DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZero
     const fgm::Vector2D actualProjection = a.tryProject(b, flag, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
@@ -600,8 +596,7 @@ TEST(Vector2DProjection, StaticWrapper_TryProject_ProjectionOntoNormalizedVector
     const fgm::Vector2D actualProjection = fgm::Vector2D<float>::tryProject(a, b, flag, true);
 
     // Then, the resultant vector has components that is parallel to the projected vector
-    EXPECT_FLOAT_EQ(expectedProjection.x, actualProjection.x);
-    EXPECT_FLOAT_EQ(expectedProjection.y, actualProjection.y);
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
