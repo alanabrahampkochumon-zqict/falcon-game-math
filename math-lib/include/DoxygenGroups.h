@@ -106,10 +106,10 @@
      *   @defgroup FGM_Concepts Math Concepts
      * @}
      */
-    //TODO: Update description
+    
     /**
      * @defgroup FGM_Math_Config Library Configuration
-     * @brief Configuration used by FGM.
+     * @brief Configurations that dictate certain library behaviors.
      * @ingroup FGM_Math
      */
 

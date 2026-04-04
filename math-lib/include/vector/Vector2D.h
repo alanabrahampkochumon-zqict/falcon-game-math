@@ -1517,6 +1517,7 @@ namespace fgm
     };
 
 
+
     /*************************************
      *                                   *
      *       NON-MEMBER FUNCTIONS        *
@@ -1548,7 +1549,6 @@ namespace fgm
         requires StrictArithmetic<T>;
 
     /** @} */
-
 
 
 
