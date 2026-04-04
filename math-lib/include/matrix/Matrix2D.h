@@ -10,6 +10,9 @@
  *          and support for component-wise operations.
  *
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
+ * @note Matrices utilize a strict column-major internal memory layout. To align with standard mathematical notations,
+ *       scalar constructors accept elements in row-major reading order. Vector-based constructors and array-style access
+ *       (operator[]) operate directly on columns.
  *
  * @par Configuration
  * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
@@ -58,24 +61,36 @@ namespace fgm
         /** @brief Initialize a 2x2 identity matrix. */
         [[nodiscard]] constexpr Matrix2D() noexcept;
 
+
         /**
-         * Initialize a 2x2 matrix from the passed-in elements.
+         * @brief Initialize a 2x2 matrix from the passed-in scalar elements.
          *
-         * @param v_0_0 The element to insert into row one, column one.
-         * @param v_0_1 The element to insert into row one, column two.
-         * @param v_1_0 The element to insert into row two, column one.
-         * @param v_1_1 The element to insert into row two, column two.
+         * @param[in] v_0_0 The element to insert into row one, column one.
+         * @param[in] v_0_1 The element to insert into row one, column two.
+         * @param[in] v_1_0 The element to insert into row two, column one.
+         * @param[in] v_1_1 The element to insert into row two, column two.
          */
         [[nodiscard]] constexpr Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1) noexcept;
 
 
         /**
-         * Initialize a 2x2 matrix from the passed-in vectors as columns.
+         * @brief Initialize a 2x2 matrix from the passed-in vectors as columns.
          *
-         * @param col0 The 2D-vector to use as the first column entry.
-         * @param col1 The 2D-vector to use as the second column entry.
+         * @param[in] col0 The 2D-vector to use as the first column entry.
+         * @param[in] col1 The 2D-vector to use as the second column entry.
          */
         [[nodiscard]] constexpr Matrix2D(const Vector2D<T>& col0, const Vector2D<T>& col1) noexcept;
+
+
+        /**
+         * @brief Initialize a diagonal matrix from the passed-in scalar entries.
+         * All non-diagonal elements are initialized to zero.
+         *
+         * @param[in] d0 The first diagonal entry of the matrix (v_0_0).
+         * @param[in] d1 The second diagonal entry of the matrix (v_1_1).
+         */
+        [[nodiscard]] constexpr Matrix2D(T d0, T d1) noexcept;
+
 
 
         template <Arithmetic S>

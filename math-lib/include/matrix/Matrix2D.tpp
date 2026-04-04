@@ -38,6 +38,17 @@ namespace fgm
         columnVectors[1] = col1;
     }
 
+    template <Arithmetic T>
+    constexpr Matrix2D<T>::Matrix2D(T d0, T d1) noexcept
+    {
+        // First Column
+        elements[0][0] = d0;
+        elements[0][1] = T(0);
+
+        // Second Column
+        elements[1][0] = T(0);
+        elements[1][1] = d1;
+    }
 
 
     template <Arithmetic T>
