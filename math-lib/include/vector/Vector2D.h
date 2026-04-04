@@ -760,6 +760,88 @@ namespace fgm
      *************************************/
     using vec2 = Vector2D<float>;
     using dvec2 = Vector2D<double>;
+
+
+
+    /**
+     * @addtogroup FGM_Vec2_Const
+     * @{
+     */
+
+    /*************************************
+     *                                   *
+     *            CONSTANTS              *
+     *                                   *
+     *************************************/
+
+    namespace vec2d
+    {
+
+        /**
+         * @brief A 2D vector with all components set to one (1, 1).
+         *
+         * @note Only available for @ref fgm::StrictArithmetic types.
+         */
+        template <StrictArithmetic T>
+        inline constexpr Vector2D<T> one = Vector2D<T>(T(1), T(1));
+
+
+        /**
+         * @brief A 2D vector with all components set to zero (0, 0).
+         *
+         * @note Only available for @ref fgm::StrictArithmetic types.
+         */
+        template <StrictArithmetic T>
+        inline constexpr Vector2D<T> zero = Vector2D<T>(T(0), T(0)); ///< 2D-Vector with all zero-components.
+
+
+        /**
+         * @brief A 2D vector with all components set to positive infinity.
+         *
+         * @note Only available for `std::floating_point` types.
+         */
+        template <StrictArithmetic T>
+            requires std::floating_point<T>
+        inline constexpr Vector2D<T> inf =
+            Vector2D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D));
+
+
+        /**
+         * @brief A 2D vector with all components set to negative infinity.
+         *
+         * @note Only available for `std::floating_point` types.
+         */
+        template <StrictArithmetic T>
+            requires std::floating_point<T>
+        inline constexpr Vector2D<T> infN =
+            Vector2D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D));
+
+
+        /**
+         * @brief A 2D vector with all components set to Not-A-Number (NaN).
+         *
+         * @note Only available for `std::floating_point` types.
+         */
+        template <StrictArithmetic T>
+            requires std::floating_point<T>
+        inline constexpr Vector2D<T> nan = Vector2D<T>(T(constants::NaN_D), T(constants::NaN_D));
+
+
+        /** @brief A 2D unit vector aligned with the positive X-axis (1, 0). */
+        template <StrictArithmetic T>
+        inline constexpr Vector2D<T> x = Vector2D<T>(T(1), T(0));
+
+
+        /** @brief A 2D unit vector aligned with the positive Y-axis (0, 1). */
+        template <StrictArithmetic T>
+        inline constexpr Vector2D<T> y = Vector2D<T>(T(0), T(1));
+
+    } // namespace vec3d
+
+    /** @} */
+
+
 } // namespace fgm
+
 
 #include "Vector2D.tpp"
