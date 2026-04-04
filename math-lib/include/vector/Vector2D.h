@@ -111,7 +111,7 @@ namespace fgm
          *************************************/
 
         /**
-         * @brief Access the component at the specified location.
+         * @brief Access the element at the specified location (read-only).
          *        Provide read-write access to the element.
          *
          * @param[in] i The index of the vector component.

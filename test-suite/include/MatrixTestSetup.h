@@ -12,6 +12,7 @@
 #define FORCE_SCALAR
 
 #include "utils/MatrixUtils.h"
+#include "utils/VectorUtils.h"
 
 #include <common/MathTraits.h>
 #include <gtest/gtest.h>

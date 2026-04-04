@@ -63,15 +63,15 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector2D<T>& Matrix2D<T>::operator[](size_t colIdx) noexcept
+    constexpr Vector2D<T>& Matrix2D<T>::operator[](size_t col) noexcept
     {
-        return columnVectors[colIdx];
+        return columnVectors[col];
     }
 
     template <Arithmetic T>
-    constexpr const Vector2D<T>& Matrix2D<T>::operator[](size_t colIdx) const noexcept
+    constexpr const Vector2D<T>& Matrix2D<T>::operator[](size_t col) const noexcept
     {
-        return columnVectors[colIdx];
+        return columnVectors[col];
     }
 
     template <Arithmetic T>
