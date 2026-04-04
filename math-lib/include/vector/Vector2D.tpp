@@ -480,7 +480,7 @@ namespace fgm
         using R = std::common_type_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
-            //if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+            if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<S>::epsilon()))
                 return fgm::vec2d::zero<R>;
         if constexpr (std::is_integral_v<R>)
             if (scalar == 0)
@@ -510,7 +510,7 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            //if (hasNaN() | std::isnan(scalar))
+            if (hasNaN() | std::isnan(scalar))
             {
                 status = OperationStatus::NANOPERAND;
                 return fgm::vec2d::zero<R>;
@@ -623,7 +623,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    auto Vector2D<T>::project(const Vector2D<U>& onto, bool ontoNormalized) const -> Vector2D<std::common_type_t<T, U>>
+    auto Vector2D<T>::project(const Vector2D<U>& onto, const bool ontoNormalized) const -> Vector2D<std::common_type_t<T, U>>
     {
         if (ontoNormalized)
         {
