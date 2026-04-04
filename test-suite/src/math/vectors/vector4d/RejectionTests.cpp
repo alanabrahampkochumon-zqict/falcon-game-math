@@ -353,8 +353,7 @@ TEST(Vector4DRejection, SafeReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector4DRejection, SafeReject_FromZeroVectorReturnsSameVector)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
 
     const fgm::Vector4D actualRejection = this->_vec.safeReject(zeroVec);
 
@@ -448,8 +447,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_FromZeroVectorReturnsSameVector)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
 
     const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::safeReject(this->_vec, zeroVec);
 
@@ -635,8 +633,7 @@ TEST(Vector4DRejection, TryReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector4DRejection, TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
     const fgm::Vector4D actualRejection = this->_vec.tryReject(zeroVec, flag);
@@ -750,8 +747,7 @@ TEST(Vector4DRejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
     const fgm::Vector4D actualRejection = fgm::Vector4D<TypeParam>::tryReject(this->_vec, zeroVec, flag);

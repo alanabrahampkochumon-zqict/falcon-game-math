@@ -293,8 +293,7 @@ TEST(Vector2DProjection, SafeProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector2DProjection, SafeProject_OntoZeroReturnsZeroVector)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector2D zeroVec(zero, zero);
+    constexpr fgm::Vector2D zeroVec = fgm::vec2d::zero<TypeParam>;
 
     const fgm::Vector2D actualProjection = this->_vec.safeProject(zeroVec);
 
@@ -378,8 +377,7 @@ TEST(Vector2DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTy
  */
 TYPED_TEST(Vector2DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector2D zeroVec(zero, zero);
+    constexpr fgm::Vector2D zeroVec = fgm::vec2d::zero<TypeParam>;
 
     const fgm::Vector2D actualProjection = fgm::Vector2D<float>::safeProject(this->_vec, zeroVec);
 
@@ -553,8 +551,7 @@ TEST(Vector2DProjection, TryProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector2DProjection, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector2D zeroVec(zero, zero);
+    constexpr fgm::Vector2D zeroVec = fgm::vec2d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
 
@@ -657,8 +654,7 @@ TEST(Vector2DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTyp
  */
 TYPED_TEST(Vector2DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector2D zeroVec(zero, zero);
+    constexpr fgm::Vector2D zeroVec = fgm::vec2d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
     const fgm::Vector2D actualProjection = fgm::Vector2D<float>::tryProject(this->_vec, zeroVec, flag);

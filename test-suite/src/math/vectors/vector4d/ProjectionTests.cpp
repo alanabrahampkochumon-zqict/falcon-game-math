@@ -334,8 +334,7 @@ TEST(Vector4DProjection, SafeProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector4DProjection, SafeProject_OntoZeroReturnsZeroVector)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
 
     const fgm::Vector4D actualProjection = this->_vec.safeProject(zeroVec);
 
@@ -419,8 +418,7 @@ TEST(Vector4DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTy
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
 
     const fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProject(this->_vec, zeroVec);
 
@@ -594,8 +592,7 @@ TEST(Vector4DProjection, TryProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector4DProjection, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
 
@@ -698,8 +695,7 @@ TEST(Vector4DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTyp
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector4D zeroVec(zero, zero, zero, zero);
+    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
     const fgm::Vector4D actualProjection = fgm::Vector4D<float>::tryProject(this->_vec, zeroVec, flag);

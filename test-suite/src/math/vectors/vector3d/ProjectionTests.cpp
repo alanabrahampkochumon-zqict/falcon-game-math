@@ -314,8 +314,7 @@ TEST(Vector3DProjection, SafeProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector3DProjection, SafeProject_OntoZeroReturnsZeroVector)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector3D zeroVec(zero, zero, zero);
+    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
 
     const fgm::Vector3D actualProjection = this->_vec.safeProject(zeroVec);
 
@@ -399,8 +398,7 @@ TEST(Vector3DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTy
  */
 TYPED_TEST(Vector3DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector3D zeroVec(zero, zero, zero);
+    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
 
     const fgm::Vector3D actualProjection = fgm::Vector3D<float>::safeProject(this->_vec, zeroVec);
 
@@ -574,8 +572,7 @@ TEST(Vector3DProjection, TryProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector3DProjection, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector3D zeroVec(zero, zero, zero);
+    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
 
@@ -678,8 +675,7 @@ TEST(Vector3DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTyp
  */
 TYPED_TEST(Vector3DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr TypeParam zero = TypeParam(0);
-    constexpr fgm::Vector3D zeroVec(zero, zero, zero);
+    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
     const fgm::Vector3D actualProjection = fgm::Vector3D<float>::tryProject(this->_vec, zeroVec, flag);
