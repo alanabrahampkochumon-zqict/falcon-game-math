@@ -2,12 +2,6 @@ add_executable(TestSuite)
 
 target_compile_features(TestSuite PRIVATE cxx_std_20)
 
-# target_compile_options(TestSuite PRIVATE # TODO: Change to the compile target
-#     $<$<CXX_COMPILER_ID:MSVC>:/W4;/wd4201;/wd26495;/wd26439>
-#     $<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wpedantic;-Wno-gnu-anonymous-struct;-Werror;>
-#     $<$<CXX_COMPILER_ID:Clang>:-Wall;-Wextra;-Wpedantic;-Wno-gnu-anonymous-struct;-Werror;>
-# )
-
 set(IncludeDir "include/")
 set(SetupFiles "Vector2DTestSetup.h;Vector3DTestSetup.h;Vector4DTestSetup.h;SIMDTestSetup.h;DoxygenGroups.h")
 list(TRANSFORM SetupFiles PREPEND ${IncludeDir})
@@ -26,9 +20,6 @@ set(Vector2DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;B
 list(TRANSFORM Vector2DTestFiles PREPEND ${Vector2DTestDir})
 
 
-set(VectorTestDirectory "src/math/vectors/") # TODO: Remove after migration to different test
-set(VectorTestFiles Vector2DTests.cpp)
-list(TRANSFORM VectorTestFiles PREPEND ${VectorTestDirectory})
 
 # Matrix Test Sources
 set(MatrixTestDirectory "src/math/matrix/")
@@ -53,7 +44,6 @@ target_sources(
         ${Vector2DTestFiles}
         ${Vector3DTestFiles}
         ${Vector4DTestFiles}
-        ${VectorTestFiles}
         ${MatrixTestFiles}
         ${SimdTestFiles}
         ${MathCommonTestFiles}
@@ -106,7 +96,6 @@ source_group (
     ${Vector2DTestFiles}
     ${Vector3DTestFiles}
     ${Vector4DTestFiles}
-    ${VectorTestFiles}
     ${MatrixTestFiles}
     ${SimdTestFiles}
     ${MathCommonTestFiles}
