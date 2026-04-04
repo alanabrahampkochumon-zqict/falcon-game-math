@@ -31,8 +31,9 @@ namespace testutils
     /**
      * @brief Perform a component-wise strict equality comparison between two matrices of the same dimensions.
      *
-     * @tparam T Numeric type of the expected matrix components.
-     * @tparam U Numeric type of the actual matrix components.
+     * @tparam T The numeric type of the expected matrix components.
+     * @tparam U The numeric type of the actual matrix components.
+     *
      * @param expected The matrix serving as the reference for comparison.
      * @param actual The matrix being evaluated.
      *
@@ -51,19 +52,20 @@ namespace testutils
         for (std::size_t i = 0; i < T::rows; ++i)
             for (std::size_t j = 0; j < T::columns; ++j)
                 if constexpr (std::is_same_v<ValueType, double>)
-                    ASSERT_DOUBLE_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
+                    EXPECT_DOUBLE_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
                 else if constexpr (std::is_same_v<ValueType, float>)
-                    ASSERT_FLOAT_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
+                    EXPECT_FLOAT_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
                 else
-                    ASSERT_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
+                    EXPECT_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
     }
 
 
     /**
      * @brief Performs a component-wise approximate equality comparison using an absolute epsilon.
      *
-     * @tparam T The type of the reference matrix.
-     * @tparam U The type of the matrix under test.
+     * @tparam T The numeric type of the expected matrix components.
+     * @tparam U The numeric type of the actual matrix components.
+     *
      * @param expected The matrix serving as the ground truth.
      * @param actual The matrix being evaluated.
      * @param tolerance The maximum allowable absolute difference between components.
@@ -89,8 +91,9 @@ namespace testutils
     /**
      * @brief Validates that the provided matrix conforms to an identity matrix within a standard epsilon.
      *
-     * @tparam T The matrix type being evaluated.
-     * @param actual The matrix to verify as an identity.
+     * @tparam T The numeric type of the matrix components.
+     *
+     * @param actual The matrix to verify as an identity matrix.
      *
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
      *       if the matrix is not identity.
@@ -105,18 +108,19 @@ namespace testutils
         for (std::size_t i = 0; i < T::rows; ++i)
             for (std::size_t j = 0; j < T::columns; ++j)
                 if constexpr (std::is_same_v<ValueType, double>)
-                    ASSERT_DOUBLE_EQ(i == j, actual(i, j));
+                    EXPECT_DOUBLE_EQ(i == j, actual(i, j));
                 else if constexpr (std::is_same_v<ValueType, float>)
-                    ASSERT_FLOAT_EQ(i == j, actual(i, j));
+                    EXPECT_FLOAT_EQ(i == j, actual(i, j));
                 else
-                    ASSERT_EQ(i == j, actual(i, j));
+                    EXPECT_EQ(i == j, actual(i, j));
     }
 
 
     /**
      * @brief Validates that the provided matrix conforms to a zero matrix within a standard epsilon.
      *
-     * @tparam T The matrix type being evaluated.
+     * @tparam T The numeric type of the expected matrix components.
+     *
      * @param actual The matrix to verify as a zero matrix.
      *
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
@@ -131,18 +135,19 @@ namespace testutils
         for (std::size_t i = 0; i < T::rows; ++i)
             for (std::size_t j = 0; j < T::columns; ++j)
                 if constexpr (std::is_same_v<ValueType, double>)
-                    ASSERT_DOUBLE_EQ(0.0, actual(i, j));
+                    EXPECT_DOUBLE_EQ(0.0, actual(i, j));
                 else if constexpr (std::is_same_v<ValueType, float>)
-                    ASSERT_FLOAT_EQ(0.0f, actual(i, j));
+                    EXPECT_FLOAT_EQ(0.0f, actual(i, j));
                 else
-                    ASSERT_EQ(ValueType(0), actual(i, j));
+                    EXPECT_EQ(ValueType(0), actual(i, j));
     }
 
 
     /**
      * @brief Validates that the provided matrix conforms to an infinity matrix.
+     * 
+     * @tparam T The numeric type of the expected matrix components.
      *
-     * @tparam T The matrix type being evaluated.
      * @param actual The matrix to verify as an infinity matrix.
      *
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
