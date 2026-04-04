@@ -709,6 +709,7 @@ namespace fgm
     }
 
 
+    
     /*************************************
      *                                   *
      *        VECTOR PROJECTION          *
@@ -716,28 +717,110 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector2D<T>::project(const Vector2D<U>& onto, const bool ontoNormalized) const
-        -> Vector2D<std::common_type_t<T, U>>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::project(const Vector2D<U>& onto, const bool ontoNormalized) const noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
     {
+        using R = std::common_type_t<T, U>;
         if (ontoNormalized)
-        {
-            // Pb||a^ = dot(a, b) * b;
-            return this->dot(onto) * onto;
-        }
-        else
-        {
-            // Pb||a = dot(a, b)/dot(b,b) * b;
-            return this->dot(onto) / onto.dot(onto) * onto;
-        }
+            return this->dot(onto) * onto; // a.dot(b) * b
+
+        /** @note Static cast ensures integral type dots don't lose much precision */
+        return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector2D<T>::project(const Vector2D& vector, const Vector2D<U>& onto, bool ontoNormalized)
-        -> Vector2D<std::common_type_t<T, U>>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::project(const Vector2D& vec, const Vector2D<U>& onto,
+                                        const bool ontoNormalized) noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
     {
-        return vector.project(onto, ontoNormalized);
+        return vec.project(onto, ontoNormalized);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::safeProject(const Vector2D<U>& onto, const bool ontoNormalized) const noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        using MagType = Magnitude<R>;
+        if (ontoNormalized)
+            return this->dot(onto) * onto;
+
+        /** @note Static cast ensures integral type dots don't lose much precision */
+        const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
+
+        if (hasNaN() | std::isnan(ontoSquared))
+            return fgm::vec2d::zero<MagType>;
+
+        if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
+            return fgm::vec2d::zero<MagType>;
+
+        return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::safeProject(const Vector2D& vec, const Vector2D<U>& onto,
+                                            const bool ontoNormalized) noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        return vec.safeProject(onto, ontoNormalized);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::tryProject(const Vector2D<U>& onto, OperationStatus& status,
+                                           const bool ontoNormalized) const noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        using MagType = Magnitude<R>;
+
+        if (ontoNormalized)
+        {
+            status = OperationStatus::SUCCESS;
+            return this->dot(onto) * onto;
+        }
+
+        /** @note Static cast ensures integral type dots don't lose much precision */
+        const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
+
+        if (hasNaN() | std::isnan(ontoSquared))
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec2d::zero<MagType>;
+        }
+
+        if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
+        {
+            status = OperationStatus::DIVISIONBYZERO;
+            return fgm::vec2d::zero<MagType>;
+        }
+
+        status = OperationStatus::SUCCESS;
+        return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::tryProject(const Vector2D& vec, const Vector2D<U>& onto, OperationStatus& status,
+                                           const bool ontoNormalized) noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        return vec.tryProject(onto, status, ontoNormalized);
     }
 
 

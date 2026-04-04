@@ -25,8 +25,8 @@
 #include "common/MathTraits.h"
 #include "common/OperationStatus.h"
 
-#include <type_traits>
 #include <iomanip>
+#include <type_traits>
 
 
 
@@ -879,7 +879,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Product
+         * @addtogroup FGM_Vec2_Product
          * @{
          */
 
@@ -966,8 +966,7 @@ namespace fgm
          * @return The pseudo-cross product of the two vectors.
          */
         template <Arithmetic U>
-        constexpr static auto cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
-            -> std::common_type_t<T, U>;
+        constexpr static auto cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept -> std::common_type_t<T, U>;
 
         /** @} */
 
@@ -1123,13 +1122,11 @@ namespace fgm
         /** @} */
 
 
-        /*************************************
-         *                                   *
-         *       VECTOR NORMALIZATION        *
-         *                                   *
-         *************************************/
-        Vector2D normalize() const;
 
+        /**
+         * @addtogroup FGM_Vec2_Proj
+         * @{
+         */
 
         /*************************************
          *                                   *
@@ -1138,28 +1135,146 @@ namespace fgm
          *************************************/
 
         /**
-         * Projects the current vector onto to the `onto` vector.
-         * @tparam U Type of the vector to be projected on to (b).
-         * @param onto Vector to be projected onto.
-         * @param ontoNormalized A flag for optimizing the by ignoring the division, given the vector that is projected
-         * onto is normalized.
-         * @return Projected vector.
+         * @brief Project this vector onto another vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] onto           The vector to project onto.
+         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
+         * @return The projected @ref Vector2D.
          */
-        template <Arithmetic U>
-        auto project(const Vector2D<U>& onto, bool ontoNormalized = false) const -> Vector2D<std::common_type_t<T, U>>;
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto project(const Vector2D<U>& onto, bool ontoNormalized = false) const noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
 
         /**
-         * Static wrapper for vector projection.
-         * @tparam U Type of the vector to be projected to.
-         * @param vector Vector to project.
-         * @param onto Vector to be projected onto.
-         * @param ontoNormalized A flag for optimizing the by ignoring the division, given the vector that is projected
-         * onto is normalized.
-         * @return Projected vector.
+         * @brief Project a vector onto another vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to project.
+         * @param[in] onto           The vector to project onto.
+         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
+         * @return The projected @ref Vector2D.
          */
-        template <Arithmetic U>
-        static auto project(const Vector2D& vector, const Vector2D<U>& onto, bool ontoNormalized = false)
-            -> Vector2D<std::common_type_t<T, U>>;
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static auto project(const Vector2D& vec, const Vector2D<U>& onto,
+                                                    bool ontoNormalized = false) noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project this vector onto another vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] onto           The vector to project onto.
+         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
+         * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto safeProject(const Vector2D<U>& onto, bool ontoNormalized = false) const noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project a vector onto another vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to project.
+         * @param[in] onto           The vector to project onto.
+         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
+         * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static auto safeProject(const Vector2D& vec, const Vector2D<U>& onto,
+                                                        bool ontoNormalized = false) noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project this vector onto another vector and set @p status to the projection operation result.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] onto           The vector to project onto.
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
+         * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
+         *         vector has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto tryProject(const Vector2D<U>& onto, OperationStatus& status,
+                                                bool ontoNormalized = false) const noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project a vector onto another vector and set @p status to the projection operation result.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to project.
+         * @param[in] onto           The vector to project onto.
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
+         *
+         * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
+         *         vector has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static auto tryProject(const Vector2D& vec, const Vector2D<U>& onto,
+                                                       OperationStatus& status, bool ontoNormalized = false) noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+        /** @} */
 
 
         /*************************************
@@ -1280,7 +1395,6 @@ namespace fgm
         }
 
         /** @} */
-
     };
 
 
