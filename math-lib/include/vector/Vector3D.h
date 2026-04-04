@@ -1509,7 +1509,7 @@ namespace fgm
 
         /**
          * @brief Write the vector to an output stream.
-         *        Format the vector as <x, y, z, w> string representation for debugging or logging.
+         *        Format the vector as <x, y, z> string representation for debugging or logging.
          *
          * @tparam T Numeric type of the vector.
          *

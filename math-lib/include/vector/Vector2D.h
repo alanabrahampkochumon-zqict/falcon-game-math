@@ -26,6 +26,7 @@
 #include "common/OperationStatus.h"
 
 #include <type_traits>
+#include <iomanip>
 
 
 
@@ -1028,6 +1029,44 @@ namespace fgm
         [[nodiscard]] constexpr static bool hasNaN(const Vector2D& vec) noexcept;
 
         /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Vec2_Log
+         * @{
+         */
+
+        /**
+         * @brief Write the vector to an output stream.
+         *        Format the vector as <x, y> string representation for debugging or logging.
+         *
+         * @tparam T Numeric type of the vector.
+         *
+         * @param os     The output stream to write to.
+         * @param vector The vector to be streamed.
+         *
+         * @return A reference to the output stream @p os.
+         */
+        constexpr friend std::ostream& operator<<(std::ostream& os, const Vector2D& vector)
+        {
+            const std::streamsize oldPrecision = os.precision();
+            const std::ios_base::fmtflags oldFlags = os.flags();
+
+            auto precision = Config::useFullPrecision
+                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+                : Config::LOG_PRECISION;
+            os << std::setprecision(precision) << std::fixed;
+            os << "<" << vector.x << ", " << vector.y << ">\n";
+
+            os.precision(oldPrecision);
+            os.flags(oldFlags);
+
+            return os;
+        }
+
+        /** @} */
+
     };
 
 
