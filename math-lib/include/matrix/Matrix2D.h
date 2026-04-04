@@ -92,15 +92,21 @@ namespace fgm
         [[nodiscard]] constexpr Matrix2D(T d0, T d1) noexcept;
 
 
+        /**
+         * @brief Initialize @ref Matrix2D from another @ref Matrix2D of a different type.
+         *
+         * @tparam U Numeric type of the source matrix.
+         *
+         * @param[in] other The source matrix to be converted.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr Matrix2D(const Matrix2D<U>& other) noexcept;
 
-        template <Arithmetic S>
-        Matrix2D(const Matrix2D& other);
+        constexpr Vector2D<T>& operator[](size_t index) noexcept;
+        constexpr const Vector2D<T>& operator[](size_t index) const noexcept;
 
-        Vector2D<T>& operator[](size_t index);
-        const Vector2D<T>& operator[](size_t index) const;
-
-        T& operator()(size_t row, size_t col);
-        const T& operator()(size_t row, size_t col) const;
+        constexpr T& operator()(size_t row, size_t col) noexcept;
+        constexpr const T& operator()(size_t row, size_t col) const noexcept;
 
         /** @} */
 

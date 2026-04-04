@@ -1,6 +1,5 @@
 #pragma once
 
-#include <type_traits>
 #include <valarray>
 
 namespace fgm
@@ -38,6 +37,7 @@ namespace fgm
         columnVectors[1] = col1;
     }
 
+
     template <Arithmetic T>
     constexpr Matrix2D<T>::Matrix2D(T d0, T d1) noexcept
     {
@@ -52,32 +52,36 @@ namespace fgm
 
 
     template <Arithmetic T>
-    template <Arithmetic S>
-    Matrix2D<T>::Matrix2D(const Matrix2D& other)
+    template <Arithmetic U>
+    constexpr Matrix2D<T>::Matrix2D(const Matrix2D<U>& other) noexcept
     {
-        // TODO:
+        elements[0][0] = static_cast<T>(other(0, 0));
+        elements[0][1] = static_cast<T>(other(1, 0));
+        elements[1][0] = static_cast<T>(other(0, 1));
+        elements[1][1] = static_cast<T>(other(1, 1));
     }
 
-    template <Arithmetic T>
-    Vector2D<T>& Matrix2D<T>::operator[](size_t index)
-    {
-        return columnVectors[index];
-    }
 
     template <Arithmetic T>
-    const Vector2D<T>& Matrix2D<T>::operator[](size_t index) const
+    constexpr Vector2D<T>& Matrix2D<T>::operator[](size_t index) noexcept
     {
         return columnVectors[index];
     }
 
     template <Arithmetic T>
-    T& Matrix2D<T>::operator()(size_t row, size_t col)
+    constexpr const Vector2D<T>& Matrix2D<T>::operator[](size_t index) const noexcept
+    {
+        return columnVectors[index];
+    }
+
+    template <Arithmetic T>
+    constexpr T& Matrix2D<T>::operator()(size_t row, size_t col) noexcept
     {
         return elements[col][row];
     }
 
     template <Arithmetic T>
-    const T& Matrix2D<T>::operator()(size_t row, size_t col) const
+    constexpr const T& Matrix2D<T>::operator()(size_t row, size_t col) const noexcept
     {
         return elements[col][row];
     }
