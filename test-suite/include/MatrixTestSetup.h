@@ -17,6 +17,7 @@
 #include <gtest/gtest.h>
 #include <limits>
 #include <matrix/Matrix2D.h>
+#include <vector>
 
 
 using namespace testutils;

@@ -17,10 +17,13 @@
 template <typename T>
 class Matrix2DInitialization: public ::testing::Test
 {
-    T _v00;
-    T _v01;
-    T _v10;
-    T _v11;
+protected:
+    std::vector<T> _elements;
+
+    void SetUp() override
+    {
+        _elements = { T(1), T(2), T(3), T(4) };
+    }
 };
 TYPED_TEST_SUITE(Matrix2DInitialization, SupportedTypes);
 
@@ -38,7 +41,11 @@ TYPED_TEST(Matrix2DInitialization, EmptyConstructorReturnsIdentityMatrix)
     EXPECT_MAT_IDENTITY(matrix);
 }
 
-/** @brief Verify that the parameterized constructor initializes matrix with element-wise entries. */
-TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesMatrixWithElements) {}
+/** @brief Verify that the parameterized constructor can initialize matrix with elements. */
+TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesMatrixWithElements)
+{
+    const fgm::Matrix2D<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3]);
+    EXPECT_MAT_CONTAINS(this->_elements, matrix);
+}
 
 /** @} */

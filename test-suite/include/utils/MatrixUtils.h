@@ -14,10 +14,12 @@
 
 
 #include <cmath>
+#include <cassert>
 #include <common/MathTraits.h>
 #include <gtest/gtest.h>
 #include <matrix/Matrix2D.h>
 #include <matrix/Matrix3D.h>
+#include <vector>
 
 
 
@@ -78,7 +80,7 @@ namespace testutils
     template <fgm::Arithmetic T, fgm::Matrix U>
     void EXPECT_MAT_CONTAINS(const std::vector<T>& expectedElements, const U& actual)
     {
-        static_assert(expectedElements.size == U::rows * U::columns,
+        assert(expectedElements.size() == (U::rows * U::columns) &&
                       "Size of data elements must match the matrix dimension, e.g: 9 to 3x3");
 
         for (std::size_t i = 0; i < U::rows; ++i)

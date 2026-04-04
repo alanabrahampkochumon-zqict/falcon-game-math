@@ -19,7 +19,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T>::Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1) noexcept
+    constexpr Matrix2D<T>::Matrix2D(const T v_0_0, const T v_0_1, const T v_1_0, const T v_1_1) noexcept
     {
         // First Column
         elements[0][0] = v_0_0;
