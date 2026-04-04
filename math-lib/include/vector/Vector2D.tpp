@@ -641,9 +641,71 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    Vector2D<T> Vector2D<T>::normalize() const
+    constexpr Vector2D<Magnitude<T>> Vector2D<T>::normalize() const noexcept
+        requires StrictArithmetic<T>
     {
-        return (*this) / this->mag();
+        return (*this) / mag();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector2D<Magnitude<T>> Vector2D<T>::normalize(const Vector2D& vec) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.normalize();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector2D<Magnitude<T>> Vector2D<T>::safeNormalize() const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = Magnitude<T>;
+        R magnitude = mag();
+        if (std::isnan(magnitude))
+            return fgm::vec2d::zero<R>;
+        if (magnitude <= Config::EPSILON_SQUARE<R>)
+            return fgm::vec2d::zero<R>;
+
+        return *this / magnitude;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector2D<Magnitude<T>> Vector2D<T>::safeNormalize(const Vector2D& vec) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.safeNormalize();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector2D<Magnitude<T>> Vector2D<T>::tryNormalize(OperationStatus& status) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = Magnitude<T>;
+        R magnitude = mag();
+        if (std::isnan(magnitude))
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec2d::zero<R>;
+        }
+        if (magnitude <= Config::EPSILON_SQUARE<R>)
+        {
+            status = OperationStatus::DIVISIONBYZERO;
+            return fgm::vec2d::zero<R>;
+        }
+
+        status = OperationStatus::SUCCESS;
+        return *this / magnitude;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Vector2D<Magnitude<T>> Vector2D<T>::tryNormalize(const Vector2D& vec, OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.tryNormalize(status);
     }
 
 

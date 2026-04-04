@@ -1011,6 +1011,114 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
+        /*************************************
+         *                                   *
+         *       VECTOR NORMALIZATION        *
+         *                                   *
+         *************************************/
+
+        /**
+         * @brief Calculate the normalized (unit) form of this vector.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @warning Does not check for zero-length vectors. @ref mag() must be non-zero.
+         *
+         * @return A new @ref Vector2D with a magnitude of 1.0.
+         */
+        [[nodiscard]] constexpr Vector2D<Magnitude<T>> normalize() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Calculate the normalized (unit) form of the vector.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @param[in] vec The vector to normalize.
+         *
+         * @return A new @ref Vector2D with a magnitude of 1.0.
+         */
+        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> normalize(const Vector2D& vec) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely calculate the normalized (unit) form of this vector.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr Vector2D<Magnitude<T>> safeNormalize() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely calculate the normalized (unit) form of the vector.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @param[in] vec The vector to be normalized.
+         *
+         * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> safeNormalize(const Vector2D& vec) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely calculate the normalized (unit) form of this vector and
+         *        set @p status to the normalization operation result.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @param[out] status The status flag to store the status of the current operation result.*
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr Vector2D<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely calculate the normalized (unit) form of the vector and
+         *        set @p status to the normalization operation result.
+         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
+         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @param[in] vec     The vector to be normalized.
+         * @param[out] status The status flag to store the status of the current operation result.*
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> tryNormalize(const Vector2D& vec,
+                                                                           OperationStatus& status) noexcept
+            requires StrictArithmetic<T>;
 
         /** @} */
 
