@@ -123,7 +123,7 @@ INSTANTIATE_TEST_SUITE_P(
                       Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
                       Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
                       Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      Vector4DUtilityParams{ fgm::Vector4D(fgm::constants::NaN, fgm::constants::INFINITY_F,
+                      Vector4DUtilityParams{ fgm::Vector4D(fgm::constants::NaN, fgm::constants::NaN,
                                                          fgm::constants::NaN, fgm::constants::NaN),
                                            true },
                       Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, 1.0f), false }));
