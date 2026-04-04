@@ -1274,7 +1274,6 @@ namespace fgm
             -> Vector2D<Magnitude<std::common_type_t<T, U>>>
             requires StrictArithmetic<T>;
 
-        /** @} */
 
 
         /*************************************
@@ -1284,28 +1283,148 @@ namespace fgm
          *************************************/
 
         /**
-         * Returns the perpendicular component for the current vector after projection to the `onto` vector.
-         * @tparam U Type of the vector to be vector projected onto.
-         * @param onto Vector to be projected onto.
-         * @param ontoNormalized A flag for optimizing the by ignoring the division, given the vector that is projected
-         * onto is normalized.
-         * @return Projected vector.
+         * @brief Compute the vector rejection of this vector from another.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] from           The vector to reject from.
+         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
+         *
+         * @return The perpendicular @ref Vector2D component.
          */
-        template <Arithmetic U>
-        auto reject(const Vector2D<U>& onto, bool ontoNormalized = false) const -> Vector2D<std::common_type_t<T, U>>;
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto reject(const Vector2D<U>& from, bool fromNormalized = false) const noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
 
         /**
-         * Returns the perpendicular component for the current vector after projection to the `onto` vector.
-         * @tparam U Type of the vector to be vector projected onto.
-         * @param vector whose rejection(perpendicular) component on to `onto` we need to find.
-         * @param onto Vector to be projected onto.
-         * @param ontoNormalized A flag for optimizing the by ignoring the division, given the vector that is projected
-         * onto is normalized.
-         * @return Projected vector.
+         * @brief Compute the vector rejection of a vector from another.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vector         The vector to be rejected.
+         * @param[in] from           The vector to reject from.
+         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
+         *
+         * @return The perpendicular @ref Vector2D component.
          */
-        template <Arithmetic U>
-        static auto reject(const Vector2D& vector, const Vector2D<U>& onto, bool ontoNormalized = false)
-            -> Vector2D<std::common_type_t<T, U>>;
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static auto reject(const Vector2D& vector, const Vector2D<U>& from,
+                                                   bool fromNormalized = false) noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute rejection of this vector from another vector.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] from           The vector to reject from.
+         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
+         *
+         * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto safeReject(const Vector2D<U>& from, bool fromNormalized = false) const noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute rejection of a vector from another vector.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to reject.
+         * @param[in] from           The vector to reject from.
+         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
+         *
+         * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static auto safeReject(const Vector2D& vec, const Vector2D<U>& from,
+                                                       bool fromNormalized = false) noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute rejection of this vector from another vector and
+         *        set @p status to the result of rejection operation.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] from           The vector to reject from
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
+         *
+         * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr auto tryReject(const Vector2D<U>& from, OperationStatus& status,
+                                               bool fromNormalized = false) const noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute rejection of a vector from another vector and
+         *        set @p status to the result of rejection operation.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to reject.
+         * @param[in] from           The vector to reject from.
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
+         *
+         * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static auto tryReject(const Vector2D& vec, const Vector2D<U>& from,
+                                                      OperationStatus& status, bool fromNormalized = false) noexcept
+            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+            requires StrictArithmetic<T>;
+
+        /** @} */
 
 
 

@@ -807,7 +807,7 @@ namespace fgm
             status = OperationStatus::DIVISIONBYZERO;
             return fgm::vec2d::zero<MagType>;
         }
-
+         
         status = OperationStatus::SUCCESS;
         return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
     }
@@ -824,6 +824,8 @@ namespace fgm
     }
 
 
+    
+    
     /*************************************
      *                                   *
      *         VECTOR REJECTION          *
@@ -831,18 +833,74 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector2D<T>::reject(const Vector2D<U>& onto, bool ontoNormalized) const -> Vector2D<std::common_type_t<T, U>>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::reject(const Vector2D<U>& from, const bool fromNormalized) const noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
     {
-        return *this - this->project(onto, ontoNormalized);
+        return *this - this->project(from, fromNormalized);
     }
 
+
     template <Arithmetic T>
-    template <Arithmetic U>
-    auto Vector2D<T>::reject(const Vector2D& vector, const Vector2D<U>& onto, bool ontoNormalized)
-        -> Vector2D<std::common_type_t<T, U>>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::reject(const Vector2D& vector, const Vector2D<U>& from,
+                                       const bool fromNormalized) noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
     {
-        return vector.reject(onto, ontoNormalized);
+        return vector.reject(from, fromNormalized);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::safeReject(const Vector2D<U>& from, const bool fromNormalized) const noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        if (hasNaN() || from.hasNaN())
+            return fgm::vec2d::zero<std::common_type_t<T, U>>;
+
+        return *this - safeProject(from, fromNormalized);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::safeReject(const Vector2D& vec, const Vector2D<U>& from,
+                                           const bool fromNormalized) noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        return vec.safeReject(from, fromNormalized);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::tryReject(const Vector2D<U>& from, OperationStatus& status,
+                                          bool fromNormalized) const noexcept
+        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        if (hasNaN() || from.hasNaN())
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec2d::zero<std::common_type_t<T, U>>;
+        }
+
+        return *this - this->tryProject(from, status, fromNormalized);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr auto Vector2D<T>::tryReject(const Vector2D& vec, const Vector2D<U>& from, OperationStatus& status,
+                                          bool fromNormalized) noexcept -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        requires StrictArithmetic<T>
+    {
+        return vec.tryReject(from, status, fromNormalized);
     }
 
 

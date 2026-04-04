@@ -1297,7 +1297,6 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-
         /*************************************
          *                                   *
          *         VECTOR REJECTION          *
