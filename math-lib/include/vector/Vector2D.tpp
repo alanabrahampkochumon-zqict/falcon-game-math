@@ -615,9 +615,22 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    T Vector2D<T>::mag() const
+    constexpr Magnitude<T> Vector2D<T>::mag() const noexcept
+        requires StrictArithmetic<T>
     {
-        return sqrt(x * x + y * y);
+        using M = Magnitude<T>;
+
+        M tX = static_cast<M>(x);
+        M tY = static_cast<M>(y);
+
+        return sqrt(tX * tX + tY * tY);
+    }
+
+    template <Arithmetic T>
+    constexpr Magnitude<T> Vector2D<T>::mag(const Vector2D& vec) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.mag();
     }
 
 
