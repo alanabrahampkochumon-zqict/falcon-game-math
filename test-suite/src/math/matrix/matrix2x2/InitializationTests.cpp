@@ -53,7 +53,8 @@ TYPED_TEST(Matrix2DInitialization, EmptyConstructorReturnsIdentityMatrix)
 /** @brief Verify that the parameterized constructor can initialize matrix with elements. */
 TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
-    const fgm::Matrix2D<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3]);
+    const fgm::Matrix2D<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
+                                          this->_elements[3]);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
@@ -71,6 +72,14 @@ TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesDiagonalMa
 {
     const fgm::Matrix2D<TypeParam> matrix(this->_diagonal0, this->_diagonal1);
     EXPECT_MAT_CONTAINS(this->_diagonalElements, matrix);
+}
+
+
+/** @brief Verify that a matrix can be initialized with implicit braced initialization. */
+TYPED_TEST(Matrix2DInitialization, CanBeConstructedWithBracedInitialization)
+{
+    const fgm::Matrix2D<TypeParam> matrix = { { TypeParam(1), TypeParam(3) }, { TypeParam(2), TypeParam(4) } };
+    EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
 /** @} */
