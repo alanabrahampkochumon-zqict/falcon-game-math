@@ -70,6 +70,12 @@ if(ENABLE_STRICT)
     endif()
 endif()
 
+# Multipli processor compilation
+if(MSVC)
+    message(STATUS "Enabling Multiprocessor compilation on MSVC")
+    add_compile_options("/MP")
+endif()
+
 include(dependencies.cmake)
 # if(TARGET gtest)
 #     target_link_libraries(gtest PRIVATE StrictWarnings)
