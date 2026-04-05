@@ -43,28 +43,28 @@ namespace fgm
 
         static constexpr std::size_t dimension = 3;
 
-        union {
-            struct
-            {
-                T x; ///< X-axis component
-                T y; ///< Y-axis component
-                T z; ///< Z-axis component
-            };
-            struct
-            {
-                T r; ///< Red channel
-                T g; ///< Green channel
-                T b; ///< Blue channel
-            };
-            struct
-            {
-                T s; ///< S-coordinate
-                T t; ///< T-coordinate
-                T p; ///< P-coordinate
-            };
+        //union {
+        //    struct
+        //    {
+        //        T x; ///< X-axis component
+        //        T y; ///< Y-axis component
+        //        T z; ///< Z-axis component
+        //    };
+        //    struct
+        //    {
+        //        T r; ///< Red channel
+        //        T g; ///< Green channel
+        //        T b; ///< Blue channel
+        //    };
+        //    struct
+        //    {
+        //        T s; ///< S-coordinate
+        //        T t; ///< T-coordinate
+        //        T p; ///< P-coordinate
+        //    };
 
-            T elements[dimension];
-        };
+        //    T elements[dimension];
+        //};
 
         /** @} */
 
@@ -131,14 +131,140 @@ namespace fgm
          *************************************/
 
         /**
-         * @brief Access the component at the specified location.
+         * @brief Access the element at the first location (read-only).
+         * @return A copy of the first vector element.
+         */
+        [[nodiscard]] constexpr T x() const noexcept;
+
+
+        /**
+         * @brief Access the element at the first location (read-write access).
+         * @return A reference to the first element of the vector.
+         */
+        [[nodiscard]] constexpr T& x() noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-only).
+         * @return A copy of the last vector element.
+         */
+        [[nodiscard]] constexpr T y() const noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-write access).
+         * @return A reference to the last element of the vector.
+         */
+        [[nodiscard]] constexpr T& y() noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-only).
+         * @return A copy of the last vector element.
+         */
+        [[nodiscard]] constexpr T z() const noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-write access).
+         * @return A reference to the last element of the vector.
+         */
+        [[nodiscard]] constexpr T& z() noexcept;
+
+
+        /**
+         * @brief Access the element at the first location (read-only).
+         * @return A copy of the first vector element.
+         */
+        [[nodiscard]] constexpr T s() const noexcept;
+
+
+        /**
+         * @brief Access the element at the first location (read-write access).
+         * @return A reference to the first element of the vector.
+         */
+        [[nodiscard]] constexpr T& s() noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-only).
+         * @return A copy of the last vector element.
+         */
+        [[nodiscard]] constexpr T t() const noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-write access).
+         * @return A reference to the last element of the vector.
+         */
+        [[nodiscard]] constexpr T& t() noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-only).
+         * @return A copy of the last vector element.
+         */
+        [[nodiscard]] constexpr T p() const noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-write access).
+         * @return A reference to the last element of the vector.
+         */
+        [[nodiscard]] constexpr T& p() noexcept;
+
+
+        /**
+         * @brief Access the element at the first location (read-only).
+         * @return A copy of the first vector element.
+         */
+        [[nodiscard]] constexpr T r() const noexcept;
+
+
+        /**
+         * @brief Access the element at the first location (read-write access).
+         * @return A reference to the first element of the vector.
+         */
+        [[nodiscard]] constexpr T& r() noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-only).
+         * @return A copy of the last vector element.
+         */
+        [[nodiscard]] constexpr T g() const noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-write access).
+         * @return A reference to the last element of the vector.
+         */
+        [[nodiscard]] constexpr T& g() noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-only).
+         * @return A copy of the last vector element.
+         */
+        [[nodiscard]] constexpr T b() const noexcept;
+
+
+        /**
+         * @brief Access the element at the last location (read-write access).
+         * @return A reference to the last element of the vector.
+         */
+        [[nodiscard]] constexpr T& b() noexcept;
+
+
+        /**
+         * @brief Access the element at the specified location (read-only).
          *        Provide read-write access to the element.
          *
          * @param[in] i The index of the vector component.
          *
          * @return A reference to the vector component.
          */
-        T& operator[](std::size_t i);
+        constexpr T& operator[](std::size_t i) noexcept;
 
 
         /**
@@ -146,9 +272,11 @@ namespace fgm
          *
          * @param[in] i The index of the vector component.
          *
-         * @return A const reference to the vector component.
+         * @return A copy of the vector component.
          */
-        const T& operator[](std::size_t i) const;
+        constexpr T operator[](std::size_t i) const noexcept;
+
+        /** @} */
 
         /** @} */
 

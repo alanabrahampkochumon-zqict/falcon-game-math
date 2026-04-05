@@ -106,11 +106,18 @@ namespace fgm
         [[nodiscard]] constexpr Vector2D(const Vector2D<U>& other) noexcept;
 
 
+
         /*************************************
          *                                   *
          *            ACCESSORS              *
          *                                   *
          *************************************/
+
+        /**************************************
+         *                                    *
+         *        SPATIAL COORDINATES         *
+         *                                    *
+         **************************************/
 
         /**
          * @brief Access the element at the first location (read-only).
@@ -140,6 +147,12 @@ namespace fgm
         [[nodiscard]] constexpr T& y() noexcept;
 
 
+        /**************************************
+         *                                    *
+         *           STP COORDINATES          *
+         *                                    *
+         **************************************/
+
         /**
          * @brief Access the element at the first location (read-only).
          * @return A copy of the first vector element.
@@ -168,6 +181,12 @@ namespace fgm
         [[nodiscard]] constexpr T& t() noexcept;
 
 
+        /**************************************
+         *                                    *
+         *         COLOR COORDINATES          *
+         *                                    *
+         **************************************/
+        
         /**
          * @brief Access the element at the first location (read-only).
          * @return A copy of the first vector element.
@@ -195,6 +214,12 @@ namespace fgm
          */
         [[nodiscard]] constexpr T& g() noexcept;
 
+
+        /**************************************
+         *                                    *
+         *              INDEXING              *
+         *                                    *
+         **************************************/
 
         /**
          * @brief Access the element at the specified location (read-only).
