@@ -27,22 +27,28 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector2D<T>::Vector2D() noexcept: x(T(0)), y(T(0))
-    {}
+    constexpr Vector2D<T>::Vector2D() noexcept
+    {
+        _data[0] = 0;
+        _data[1] = 0;
+    }
 
 
     template <Arithmetic T>
-    constexpr Vector2D<T>::Vector2D(T v1, T v2) noexcept: x(v1), y(v2)
-    {}
+    constexpr Vector2D<T>::Vector2D(T v1, T v2) noexcept
+    {
+        _data[0] = v1;
+        _data[1] = v2;
+    }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr Vector2D<T>::Vector2D(const Vector2D<U>& other) noexcept
-        : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))
-    {}
-
-
+    {
+        _data[0] = static_cast<T>(other.x());
+        _data[1] = static_cast<T>(other.y());
+    }
 
 
     /*************************************
@@ -52,16 +58,99 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr T& Vector2D<T>::operator[](std::size_t i) noexcept
+    constexpr T Vector2D<T>::x() const noexcept
     {
-        return (&x)[i];
+        return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr const T& Vector2D<T>::operator[](std::size_t i) const noexcept
+    constexpr T& Vector2D<T>::x() noexcept
     {
-        return (&x)[i];
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::y() const noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector2D<T>::y() noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::s() const noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector2D<T>::s() noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::t() const noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector2D<T>::t() noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::r() const noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector2D<T>::r() noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::g() const noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector2D<T>::g() noexcept
+    {
+        return _data[1];
+    }
+
+    template <Arithmetic T>
+    constexpr T& Vector2D<T>::operator[](const std::size_t i) noexcept
+    {
+        return _data[i];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::operator[](const std::size_t i) const noexcept
+    {
+        return _data[i];
     }
 
 
@@ -222,7 +311,7 @@ namespace fgm
     constexpr Vector2D<bool> Vector2D<T>::lt(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector2D(x < rhs.x, y < rhs.y);
+        return Vector2D(_data[0] < rhs[0], _data[1] < rhs[1]);
     }
 
 
