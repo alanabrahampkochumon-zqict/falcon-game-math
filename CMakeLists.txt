@@ -71,11 +71,11 @@ if(ENABLE_STRICT)
 endif()
 
 include(dependencies.cmake)
-if(TARGET gtest)
-    target_link_libraries(gtest PRIVATE StrictWarnings)
-    target_link_libraries(gmock PRIVATE StrictWarnings)
-    target_link_libraries(gtest_main PRIVATE StrictWarnings)
-endif()
+# if(TARGET gtest)
+#     target_link_libraries(gtest PRIVATE StrictWarnings)
+#     target_link_libraries(gmock PRIVATE StrictWarnings)
+#     target_link_libraries(gtest_main PRIVATE StrictWarnings)
+# endif()
 
 include(simdcheck.cmake)
 
