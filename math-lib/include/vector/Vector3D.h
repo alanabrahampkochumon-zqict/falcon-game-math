@@ -124,11 +124,19 @@ namespace fgm
         [[nodiscard]] constexpr Vector3D(const Vector3D<U>& other) noexcept;
 
 
+
         /*************************************
          *                                   *
          *            ACCESSORS              *
          *                                   *
          *************************************/
+
+
+        /**************************************
+         *                                    *
+         *        SPATIAL COORDINATES         *
+         *                                    *
+         **************************************/
 
         /**
          * @brief Access the element at the first location (read-only).
@@ -145,32 +153,38 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the last location (read-only).
-         * @return A copy of the last vector element.
+         * @brief Access the element at the second location (read-only).
+         * @return A copy of the second vector element.
          */
         [[nodiscard]] constexpr T y() const noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-write access).
-         * @return A reference to the last element of the vector.
+         * @brief Access the element at the second location (read-write access).
+         * @return A reference to the second element of the vector.
          */
         [[nodiscard]] constexpr T& y() noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-only).
-         * @return A copy of the last vector element.
+         * @brief Access the element at the third location (read-only).
+         * @return A copy of the third vector element.
          */
         [[nodiscard]] constexpr T z() const noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-write access).
-         * @return A reference to the last element of the vector.
+         * @brief Access the element at the third location (read-write access).
+         * @return A reference to the third element of the vector.
          */
         [[nodiscard]] constexpr T& z() noexcept;
 
+
+        /**************************************
+         *                                    *
+         *           STP COORDINATES          *
+         *                                    *
+         **************************************/
 
         /**
          * @brief Access the element at the first location (read-only).
@@ -187,32 +201,38 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the last location (read-only).
-         * @return A copy of the last vector element.
+         * @brief Access the element at the second location (read-only).
+         * @return A copy of the third second element.
          */
         [[nodiscard]] constexpr T t() const noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-write access).
-         * @return A reference to the last element of the vector.
+         * @brief Access the element at the second location (read-write access).
+         * @return A reference to the second element of the vector.
          */
         [[nodiscard]] constexpr T& t() noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-only).
-         * @return A copy of the last vector element.
+         * @brief Access the element at the third location (read-only).
+         * @return A copy of the third vector element.
          */
         [[nodiscard]] constexpr T p() const noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-write access).
-         * @return A reference to the last element of the vector.
+         * @brief Access the element at the third location (read-write access).
+         * @return A reference to the third element of the vector.
          */
         [[nodiscard]] constexpr T& p() noexcept;
 
+
+        /**************************************
+         *                                    *
+         *         COLOR COORDINATES          *
+         *                                    *
+         **************************************/
 
         /**
          * @brief Access the element at the first location (read-only).
@@ -229,32 +249,38 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the last location (read-only).
-         * @return A copy of the last vector element.
+         * @brief Access the element at the second location (read-only).
+         * @return A copy of the second vector element.
          */
         [[nodiscard]] constexpr T g() const noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-write access).
-         * @return A reference to the last element of the vector.
+         * @brief Access the element at the second location (read-write access).
+         * @return A reference to the second element of the vector.
          */
         [[nodiscard]] constexpr T& g() noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-only).
-         * @return A copy of the last vector element.
+         * @brief Access the element at the third location (read-only).
+         * @return A copy of the third vector element.
          */
         [[nodiscard]] constexpr T b() const noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-write access).
-         * @return A reference to the last element of the vector.
+         * @brief Access the element at the third location (read-write access).
+         * @return A reference to the third element of the vector.
          */
         [[nodiscard]] constexpr T& b() noexcept;
 
+
+        /**************************************
+         *                                    *
+         *              INDEXING              *
+         *                                    *
+         **************************************/
 
         /**
          * @brief Access the element at the specified location (read-only).
@@ -275,8 +301,6 @@ namespace fgm
          * @return A copy of the vector component.
          */
         constexpr T operator[](std::size_t i) const noexcept;
-
-        /** @} */
 
         /** @} */
 
@@ -1654,7 +1678,7 @@ namespace fgm
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
-            os << "<" << vector.x << ", " << vector.y << ", " << vector.z << ">\n";
+            os << "<" << vector[0] << ", " << vector[1] << ", " << vector[2] << ">\n";
 
             os.precision(oldPrecision);
             os.flags(oldFlags);
@@ -1663,6 +1687,9 @@ namespace fgm
         }
 
         /** @} */
+
+    private:
+        T _data[dimension];
     };
 
 
