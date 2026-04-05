@@ -9,17 +9,12 @@
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
-// REGEXES
-// ([\s*|\(])x([\s*|\)]) -> $1_data[0]$2
-// ([\s*|\(])y([\s*|\)]) -> $1_data[1]$2
-// ([\s*|\(])z([\s*|\)]) -> $1_data[2]$2
-// rhs[0] -> rhs[0]
-// rhs[1] -> rhs[1]
+
+
 
 
 namespace fgm
 {
-
 
     /*************************************
      *                                   *
@@ -29,9 +24,9 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Vector3D<T>::Vector3D() noexcept {
-        _data[0] = 0;
-        _data[1] = 0;
-        _data[2] = 0;
+        _data[0] = T(0);
+        _data[1] = T(0);
+        _data[2] = T(0);
     }
 
 
@@ -185,13 +180,13 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::operator[](std::size_t i) noexcept {
+    constexpr T& Vector3D<T>::operator[](const std::size_t i) noexcept {
         return _data[i];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::operator[](std::size_t i) const noexcept {
+    constexpr T Vector3D<T>::operator[](const std::size_t i) const noexcept {
         return _data[i];
     }
 

@@ -16,7 +16,13 @@
 #include <cassert>
 #include <cmath>
 #include <type_traits>
-
+// REGEXES
+// ([\s*|\(])x([\s*|\)]) -> $1_data[0]$2
+// ([\s*|\(])y([\s*|\)]) -> $1_data[1]$2
+// ([\s*|\(])z([\s*|\)]) -> $1_data[2]$2
+// ([\s*|\(])w([\s*|\)]) -> $1_data[3]$2
+// rhs[0] -> rhs[0]
+// rhs[1] -> rhs[1]
 namespace fgm
 {
 
@@ -27,36 +33,64 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector4D<T>::Vector4D() noexcept: x(T(0)), y(T(0)), z(T(0)), w(T(0))
-    {}
+    constexpr Vector4D<T>::Vector4D() noexcept
+    {
+        _data[0] = T(0);
+        _data[1] = T(0);
+        _data[2] = T(0);
+        _data[3] = T(0);
+    }
 
 
     template <Arithmetic T>
-    constexpr Vector4D<T>::Vector4D(const T v1, const T v2, const T v3, const T v4) noexcept: x(v1), y(v2), z(v3), w(v4)
-    {}
+    constexpr Vector4D<T>::Vector4D(const T v1, const T v2, const T v3, const T v4) noexcept
+    {
+        _data[0] = v1;
+        _data[1] = v2;
+        _data[2] = v3;
+        _data[3] = v4;
+    }
 
 
     template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(const Vector2D<T>& vec1, const Vector2D<T>& vec2) noexcept
-        : x(vec1.x()), y(vec1.y()), z(vec2.x()), w(vec2.y())
-    {}
+    {
+        _data[0] = vec1[0];
+        _data[1] = vec1[1];
+        _data[2] = vec2[0];
+        _data[3] = vec2[1];
+    }
 
 
     template <Arithmetic T>
-    constexpr Vector4D<T>::Vector4D(const Vector3D<T>& vec, const T v) noexcept: x(vec.x()), y(vec.y()), z(vec.z()), w(v)
-    {}
+    constexpr Vector4D<T>::Vector4D(const Vector3D<T>& vec, const T v) noexcept
+    {
+        _data[0] = vec[0];
+        _data[1] = vec[1];
+        _data[2] = vec[2];
+        _data[3] = v;
+    }
 
 
     template <Arithmetic T>
-    constexpr Vector4D<T>::Vector4D(const T v, const Vector3D<T>& vec) noexcept: x(v), y(vec.x()), z(vec.y()), w(vec.z())
-    {}
+    constexpr Vector4D<T>::Vector4D(const T v, const Vector3D<T>& vec) noexcept
+    {
+        _data[0] = v;
+        _data[1] = vec[0];
+        _data[2] = vec[1];
+        _data[3] = vec[2];
+    }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr Vector4D<T>::Vector4D(const Vector4D<U>& other) noexcept
-        : x(static_cast<T>(other.x)), y(static_cast<T>(other.y)), z(static_cast<T>(other.z)), w(static_cast<T>(other.w))
-    {}
+    {
+        _data[0] = static_cast<T>(other[0]);
+        _data[1] = static_cast<T>(other[1]);
+        _data[2] = static_cast<T>(other[2]);
+        _data[3] = static_cast<T>(other[3]);
+    }
 
 
 
@@ -68,15 +102,183 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
+    constexpr T Vector4D<T>::x() const noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::x() noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::y() const noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::y() noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::z() const noexcept
+    {
+        return _data[2];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::z() noexcept
+    {
+        return _data[2];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::w() const noexcept
+    {
+        return _data[3];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::w() noexcept
+    {
+        return _data[3];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::s() const noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::s() noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::t() const noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::t() noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::p() const noexcept
+    {
+        return _data[2];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::p() noexcept
+    {
+        return _data[2];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::q() const noexcept
+    {
+        return _data[3];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::q() noexcept
+    {
+        return _data[3];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::r() const noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::r() noexcept
+    {
+        return _data[0];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::g() const noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::g() noexcept
+    {
+        return _data[1];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::b() const noexcept
+    {
+        return _data[2];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::b() noexcept
+    {
+        return _data[2];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::a() const noexcept
+    {
+        return _data[3];
+    }
+
+
+    template <Arithmetic T>
+    constexpr T& Vector4D<T>::a() noexcept
+    {
+        return _data[3];
+    }
+
+
+    template <Arithmetic T>
     constexpr T& Vector4D<T>::operator[](const std::size_t i) noexcept
     {
-        return (&x)[i];
+        return _data[i];
     }
 
     template <Arithmetic T>
-    constexpr const T& Vector4D<T>::operator[](const std::size_t i) const noexcept
+    constexpr T Vector4D<T>::operator[](const std::size_t i) const noexcept
     {
-        return (&x)[i];
+        return _data[i];
     }
 
 
@@ -94,11 +296,11 @@ namespace fgm
     {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-            return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w;
+            return _data[0] == rhs[0] && _data[1] == rhs[1] && _data[2] == rhs[2] && _data[3] == rhs[3];
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return (x == rhs.x || std::abs(x - rhs.x) <= epsilon) && (y == rhs.y || std::abs(y - rhs.y) <= epsilon) &&
-                (z == rhs.z || std::abs(z - rhs.z) <= epsilon) && (w == rhs.w || std::abs(w - rhs.w) <= epsilon);
+            return (_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon) && (_data[1] == rhs[1] || std::abs(_data[1] - rhs[1]) <= epsilon) &&
+                (_data[2] == rhs[2] || std::abs(_data[2] - rhs[2]) <= epsilon) && (_data[3] == rhs[3] || std::abs(_data[3] - rhs[3]) <= epsilon);
     }
 
     template <Arithmetic T>
@@ -115,12 +317,12 @@ namespace fgm
     {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-            return x != rhs.x || y != rhs.y || z != rhs.z || w != rhs.w;
+            return _data[0] != rhs[0] || _data[1] != rhs[1] || _data[2] != rhs[2] || _data[3] != rhs[3];
         else
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return (x != rhs.x && !(std::abs(x - rhs.x) <= epsilon)) ||
-                (y != rhs.y && !(std::abs(y - rhs.y) <= epsilon)) ||
-                (z != rhs.z && !(std::abs(z - rhs.z) <= epsilon)) || (w != rhs.w && !(std::abs(w - rhs.w) <= epsilon));
+            return (_data[0] != rhs[0] && !(std::abs(_data[0] - rhs[0]) <= epsilon)) ||
+                (_data[1] != rhs[1] && !(std::abs(_data[1] - rhs[1]) <= epsilon)) ||
+                (_data[2] != rhs[2] && !(std::abs(_data[2] - rhs[2]) <= epsilon)) || (_data[3] != rhs[3] && !(std::abs(_data[3] - rhs[3]) <= epsilon));
     }
 
 
@@ -152,12 +354,12 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::eq(const Vector4D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-            return Vector4D(x == rhs.x, y == rhs.y, z == rhs.z, w == rhs.w);
+            return Vector4D(_data[0] == rhs[0], _data[1] == rhs[1], _data[2] == rhs[2], _data[3] == rhs[3]);
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
             return Vector4D(
-                (x == rhs.x || std::abs(x - rhs.x) <= epsilon), (y == rhs.y || std::abs(y - rhs.y) <= epsilon),
-                (z == rhs.z || std::abs(z - rhs.z) <= epsilon), (w == rhs.w || std::abs(w - rhs.w) <= epsilon));
+                (_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon), (_data[1] == rhs[1] || std::abs(_data[1] - rhs[1]) <= epsilon),
+                (_data[2] == rhs[2] || std::abs(_data[2] - rhs[2]) <= epsilon), (_data[3] == rhs[3] || std::abs(_data[3] - rhs[3]) <= epsilon));
     }
 
 
@@ -174,12 +376,12 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::neq(const Vector4D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-            return Vector4D(x != rhs.x, y != rhs.y, z != rhs.z, w != rhs.w);
+            return Vector4D(_data[0] != rhs[0], _data[1] != rhs[1], _data[2] != rhs[2], _data[3] != rhs[3]);
         else
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
             return Vector4D<bool>(
-                (x != rhs.x) && !(std::abs(x - rhs.x) <= epsilon), (y != rhs.y) && !(std::abs(y - rhs.y) <= epsilon),
-                (z != rhs.z) && !(std::abs(z - rhs.z) <= epsilon), (w != rhs.w) && !(std::abs(w - rhs.w) <= epsilon));
+                (_data[0] != rhs[0]) && !(std::abs(_data[0] - rhs[0]) <= epsilon), (_data[1] != rhs[1]) && !(std::abs(_data[1] - rhs[1]) <= epsilon),
+                (_data[2] != rhs[2]) && !(std::abs(_data[2] - rhs[2]) <= epsilon), (_data[3] != rhs[3]) && !(std::abs(_data[3] - rhs[3]) <= epsilon));
     }
 
 
@@ -205,7 +407,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::gt(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector4D(x > rhs.x, y > rhs.y, z > rhs.z, w > rhs.w);
+        return Vector4D(_data[0] > rhs[0], _data[1] > rhs[1], _data[2] > rhs[2], _data[3] > rhs[3]);
     }
 
 
@@ -223,7 +425,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::gte(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector4D(x >= rhs.x, y >= rhs.y, z >= rhs.z, w >= rhs.w);
+        return Vector4D(_data[0] >= rhs[0], _data[1] >= rhs[1], _data[2] >= rhs[2], _data[3] >= rhs[3]);
     }
 
 
@@ -241,7 +443,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::lt(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector4D(x < rhs.x, y < rhs.y, z < rhs.z, w < rhs.w);
+        return Vector4D(_data[0] < rhs[0], _data[1] < rhs[1], _data[2] < rhs[2], _data[3] < rhs[3]);
     }
 
 
@@ -260,8 +462,8 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, U>>;
-        return Vector4D<bool>(static_cast<R>(x) <= static_cast<R>(rhs.x), static_cast<R>(y) <= static_cast<R>(rhs.y),
-                              static_cast<R>(z) <= static_cast<R>(rhs.z), static_cast<R>(w) <= static_cast<R>(rhs.w));
+        return Vector4D<bool>(static_cast<R>(_data[0]) <= static_cast<R>(rhs[0]), static_cast<R>(_data[1]) <= static_cast<R>(rhs[1]),
+                              static_cast<R>(_data[2]) <= static_cast<R>(rhs[2]), static_cast<R>(_data[3]) <= static_cast<R>(rhs[3]));
     }
 
 
@@ -326,7 +528,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::operator&(const Vector4D<bool>& rhs) const noexcept
         requires std::is_same_v<T, bool>
     {
-        return Vector4D(x & rhs.x, y & rhs.y, z & rhs.z, w & rhs.w);
+        return Vector4D(_data[0] & rhs[0], _data[1] & rhs[1], _data[2] & rhs[2], _data[3] & rhs[3]);
     }
 
 
@@ -341,7 +543,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::operator|(const Vector4D<bool>& rhs) const noexcept
         requires std::is_same_v<T, bool>
     {
-        return Vector4D(x | rhs.x, y | rhs.y, z | rhs.z, w | rhs.w);
+        return Vector4D(_data[0] | rhs[0], _data[1] | rhs[1], _data[2] | rhs[2], _data[3] | rhs[3]);
     }
 
 
@@ -357,7 +559,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::operator!() const noexcept
         requires std::is_same_v<T, bool>
     {
-        return Vector4D(!x, !y, !z, !w);
+        return Vector4D(!_data[0], !_data[1], !_data[2], !_data[3]);
     }
 
 
@@ -375,7 +577,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        return Vector4D<R>(x + rhs.x, y + rhs.y, z + rhs.z, w + rhs.w);
+        return Vector4D<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + rhs[2], _data[3] + rhs[3]);
     }
 
 
@@ -384,10 +586,10 @@ namespace fgm
     constexpr Vector4D<T>& Vector4D<T>::operator+=(const Vector4D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
-        x += static_cast<T>(rhs.x);
-        y += static_cast<T>(rhs.y);
-        z += static_cast<T>(rhs.z);
-        w += static_cast<T>(rhs.w);
+        _data[0] += static_cast<T>(rhs[0]);
+        _data[1] += static_cast<T>(rhs[1]);
+        _data[2] += static_cast<T>(rhs[2]);
+        _data[3] += static_cast<T>(rhs[3]);
         return *this;
     }
 
@@ -398,7 +600,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        return Vector4D<R>(x - rhs.x, y - rhs.y, z - rhs.z, w - rhs.w);
+        return Vector4D<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2], _data[3] - rhs[3]);
     }
 
 
@@ -407,10 +609,10 @@ namespace fgm
     constexpr Vector4D<T>& Vector4D<T>::operator-=(const Vector4D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
-        x -= static_cast<T>(rhs.x);
-        y -= static_cast<T>(rhs.y);
-        z -= static_cast<T>(rhs.z);
-        w -= static_cast<T>(rhs.w);
+        _data[0] -= static_cast<T>(rhs[0]);
+        _data[1] -= static_cast<T>(rhs[1]);
+        _data[2] -= static_cast<T>(rhs[2]);
+        _data[3] -= static_cast<T>(rhs[3]);
         return *this;
     }
 
@@ -429,7 +631,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
-        return Vector4D<R>(x * scalar, y * scalar, z * scalar, w * scalar);
+        return Vector4D<R>(_data[0] * scalar, _data[1] * scalar, _data[2] * scalar, _data[3] * scalar);
     }
 
 
@@ -447,10 +649,10 @@ namespace fgm
         requires StrictArithmetic<T>
     {
 
-        x = static_cast<T>(scalar * x);
-        y = static_cast<T>(scalar * y);
-        z = static_cast<T>(scalar * z);
-        w = static_cast<T>(scalar * w);
+        _data[0] = static_cast<T>(scalar * _data[0]);
+        _data[1] = static_cast<T>(scalar * _data[1]);
+        _data[2] = static_cast<T>(scalar * _data[2]);
+        _data[3] = static_cast<T>(scalar * _data[3]);
         return *this;
     }
 
@@ -464,13 +666,13 @@ namespace fgm
         if constexpr (std::is_floating_point_v<R>)
         {
             R factor = R(1) / static_cast<R>(scalar);
-            return Vector4D<R>(x * factor, y * factor, z * factor, w * factor);
+            return Vector4D<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor, _data[3] * factor);
         }
         else
         {
             assert(scalar != 0 && "Integral division by zero");
             R tScalar = static_cast<R>(scalar);
-            return Vector4D<R>(x / tScalar, y / tScalar, z / tScalar, w / tScalar);
+            return Vector4D<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar, _data[3] / tScalar);
         }
     }
 
@@ -485,17 +687,17 @@ namespace fgm
         {
             R factor = R(1) / static_cast<R>(scalar);
 
-            x = static_cast<T>(factor * x);
-            y = static_cast<T>(factor * y);
-            z = static_cast<T>(factor * z);
-            w = static_cast<T>(factor * w);
+            _data[0] = static_cast<T>(factor * _data[0]);
+            _data[1] = static_cast<T>(factor * _data[1]);
+            _data[2] = static_cast<T>(factor * _data[2]);
+            _data[3] = static_cast<T>(factor * _data[3]);
         }
         else
         {
-            x /= static_cast<T>(scalar);
-            y /= static_cast<T>(scalar);
-            z /= static_cast<T>(scalar);
-            w /= static_cast<T>(scalar);
+            _data[0] /= static_cast<T>(scalar);
+            _data[1] /= static_cast<T>(scalar);
+            _data[2] /= static_cast<T>(scalar);
+            _data[3] /= static_cast<T>(scalar);
         }
 
         return *this;
@@ -589,14 +791,14 @@ namespace fgm
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
         using R = std::common_type_t<T, U>;
         if constexpr (std::is_floating_point_v<R>)
-            return std::fma(static_cast<R>(x), static_cast<R>(rhs.x),
-                            std::fma(static_cast<R>(y), static_cast<R>(rhs.y),
-                                     std::fma(static_cast<R>(z), static_cast<R>(rhs.z),
-                                              std::fma(static_cast<R>(w), static_cast<R>(rhs.w), T(0)))));
+            return std::fma(static_cast<R>(_data[0]), static_cast<R>(rhs[0]),
+                            std::fma(static_cast<R>(_data[1]), static_cast<R>(rhs[1]),
+                                     std::fma(static_cast<R>(_data[2]), static_cast<R>(rhs[2]),
+                                              std::fma(static_cast<R>(_data[3]), static_cast<R>(rhs[3]), T(0)))));
         else
-            return x * rhs.x + y * rhs.y + z * rhs.z + w * rhs.w;
+            return _data[0] * rhs[0] + _data[1] * rhs[1] + _data[2] * rhs[2] + _data[3] * rhs[3];
 #else
-        return x * rhs.x + y * rhs.y + z * rhs.z + w * rhs.w;
+        return _data[0] * rhs[0] + _data[1] * rhs[1] + _data[2] * rhs[2] + _data[3] * rhs[3];
 #endif
     }
 
@@ -623,10 +825,10 @@ namespace fgm
     {
         using M = Magnitude<T>;
 
-        M tX = static_cast<M>(x);
-        M tY = static_cast<M>(y);
-        M tZ = static_cast<M>(z);
-        M tW = static_cast<M>(w);
+        M tX = static_cast<M>(_data[0]);
+        M tY = static_cast<M>(_data[1]);
+        M tZ = static_cast<M>(_data[2]);
+        M tW = static_cast<M>(_data[3]);
 
         return sqrt(tX * tX + tY * tY + tZ * tZ + tW * tW);
     }
@@ -921,7 +1123,7 @@ namespace fgm
     constexpr bool Vector4D<T>::hasInf() const noexcept
     {
         if constexpr (std::is_floating_point_v<T>)
-            return std::isinf(x) | std::isinf(y) | std::isinf(z) | std::isinf(w);
+            return std::isinf(_data[0]) | std::isinf(_data[1]) | std::isinf(_data[2]) | std::isinf(_data[3]);
         else
             return false;
     }
@@ -938,7 +1140,7 @@ namespace fgm
     constexpr bool Vector4D<T>::hasNaN() const noexcept
     {
         if constexpr (std::is_floating_point_v<T>)
-            return std::isnan(x) | std::isnan(y) | std::isnan(z) | std::isnan(w);
+            return std::isnan(_data[0]) | std::isnan(_data[1]) | std::isnan(_data[2]) | std::isnan(_data[3]);
         else
             return false;
     }

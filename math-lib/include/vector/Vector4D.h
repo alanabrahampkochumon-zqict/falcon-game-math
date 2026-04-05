@@ -50,31 +50,31 @@ namespace fgm
 
         static constexpr std::size_t dimension = 4; ///< Vector Dimension
 
-        union {
-            struct
-            {
-                T x; ///< X-axis component
-                T y; ///< Y-axis component
-                T z; ///< Z-axis component
-                T w; ///< W-axis (homogeneous) component
-            };
-            struct
-            {
-                T r; ///< Red channel
-                T g; ///< Green channel
-                T b; ///< Blue channel
-                T a; ///< Alpha channel
-            };
-            struct
-            {
-                T s; ///< S-coordinate
-                T t; ///< T-coordinate
-                T p; ///< P-coordinate
-                T q; ///< Q-coordinate
-            };
+        //union {
+        //    struct
+        //    {
+        //        T x; ///< X-axis component
+        //        T y; ///< Y-axis component
+        //        T z; ///< Z-axis component
+        //        T w; ///< W-axis (homogeneous) component
+        //    };
+        //    struct
+        //    {
+        //        T r; ///< Red channel
+        //        T g; ///< Green channel
+        //        T b; ///< Blue channel
+        //        T a; ///< Alpha channel
+        //    };
+        //    struct
+        //    {
+        //        T s; ///< S-coordinate
+        //        T t; ///< T-coordinate
+        //        T p; ///< P-coordinate
+        //        T q; ///< Q-coordinate
+        //    };
 
-            T elements[dimension];
-        };
+        //    T elements[dimension];
+        //};
 
         /** @} */
 
@@ -150,15 +150,208 @@ namespace fgm
          *                                   *
          *************************************/
 
+
+        /**************************************
+         *                                    *
+         *        SPATIAL COORDINATES         *
+         *                                    *
+         **************************************/
+
         /**
-         * @brief Access the component at the specified location.
+         * @brief Access the element at the first location (read-only).
+         * @return A copy of the first vector element.
+         */
+        [[nodiscard]] constexpr T x() const noexcept;
+
+
+        /**
+         * @brief Access the element at the first location (read-write access).
+         * @return A reference to the first element of the vector.
+         */
+        [[nodiscard]] constexpr T& x() noexcept;
+
+
+        /**
+         * @brief Access the element at the second location (read-only).
+         * @return A copy of the second vector element.
+         */
+        [[nodiscard]] constexpr T y() const noexcept;
+
+
+        /**
+         * @brief Access the element at the second location (read-write access).
+         * @return A reference to the second element of the vector.
+         */
+        [[nodiscard]] constexpr T& y() noexcept;
+
+
+        /**
+         * @brief Access the element at the third location (read-only).
+         * @return A copy of the third vector element.
+         */
+        [[nodiscard]] constexpr T z() const noexcept;
+
+
+        /**
+         * @brief Access the element at the third location (read-write access).
+         * @return A reference to the third element of the vector.
+         */
+        [[nodiscard]] constexpr T& z() noexcept;
+
+
+        /**
+         * @brief Access the element at the fourth location (read-only).
+         * @return A copy of the fourth vector element.
+         */
+        [[nodiscard]] constexpr T w() const noexcept;
+
+
+        /**
+         * @brief Access the element at the fourth location (read-write access).
+         * @return A reference to the fourth element of the vector.
+         */
+        [[nodiscard]] constexpr T& w() noexcept;
+
+
+        /**************************************
+         *                                    *
+         *           STP COORDINATES          *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief Access the element at the first location (read-only).
+         * @return A copy of the first vector element.
+         */
+        [[nodiscard]] constexpr T s() const noexcept;
+
+
+        /**
+         * @brief Access the element at the first location (read-write access).
+         * @return A reference to the first element of the vector.
+         */
+        [[nodiscard]] constexpr T& s() noexcept;
+
+
+        /**
+         * @brief Access the element at the second location (read-only).
+         * @return A copy of the third second element.
+         */
+        [[nodiscard]] constexpr T t() const noexcept;
+
+
+        /**
+         * @brief Access the element at the second location (read-write access).
+         * @return A reference to the second element of the vector.
+         */
+        [[nodiscard]] constexpr T& t() noexcept;
+
+
+        /**
+         * @brief Access the element at the third location (read-only).
+         * @return A copy of the third vector element.
+         */
+        [[nodiscard]] constexpr T p() const noexcept;
+
+
+        /**
+         * @brief Access the element at the third location (read-write access).
+         * @return A reference to the third element of the vector.
+         */
+        [[nodiscard]] constexpr T& p() noexcept;
+
+
+        /**
+         * @brief Access the element at the fourth location (read-only).
+         * @return A copy of the fourth vector element.
+         */
+        [[nodiscard]] constexpr T q() const noexcept;
+
+
+        /**
+         * @brief Access the element at the fourth location (read-write access).
+         * @return A reference to the fourth element of the vector.
+         */
+        [[nodiscard]] constexpr T& q() noexcept;
+
+
+        /**************************************
+         *                                    *
+         *         COLOR COORDINATES          *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief Access the element at the first location (read-only).
+         * @return A copy of the first vector element.
+         */
+        [[nodiscard]] constexpr T r() const noexcept;
+
+
+        /**
+         * @brief Access the element at the first location (read-write access).
+         * @return A reference to the first element of the vector.
+         */
+        [[nodiscard]] constexpr T& r() noexcept;
+
+
+        /**
+         * @brief Access the element at the second location (read-only).
+         * @return A copy of the second vector element.
+         */
+        [[nodiscard]] constexpr T g() const noexcept;
+
+
+        /**
+         * @brief Access the element at the second location (read-write access).
+         * @return A reference to the second element of the vector.
+         */
+        [[nodiscard]] constexpr T& g() noexcept;
+
+
+        /**
+         * @brief Access the element at the third location (read-only).
+         * @return A copy of the third vector element.
+         */
+        [[nodiscard]] constexpr T b() const noexcept;
+
+
+        /**
+         * @brief Access the element at the third location (read-write access).
+         * @return A reference to the third element of the vector.
+         */
+        [[nodiscard]] constexpr T& b() noexcept;
+
+
+        /**
+         * @brief Access the element at the fourth location (read-only).
+         * @return A copy of the fourth vector element.
+         */
+        [[nodiscard]] constexpr T a() const noexcept;
+
+
+        /**
+         * @brief Access the element at the fourth location (read-write access).
+         * @return A reference to the fourth element of the vector.
+         */
+        [[nodiscard]] constexpr T& a() noexcept;
+
+
+        /**************************************
+         *                                    *
+         *              INDEXING              *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief Access the element at the specified location (read-only).
          *        Provide read-write access to the element.
          *
          * @param[in] i The index of the vector component.
          *
          * @return A reference to the vector component.
          */
-        [[nodiscard]] constexpr T& operator[](std::size_t i) noexcept;
+        constexpr T& operator[](std::size_t i) noexcept;
 
 
         /**
@@ -166,9 +359,9 @@ namespace fgm
          *
          * @param[in] i The index of the vector component.
          *
-         * @return A const reference to the vector component.
+         * @return A copy of the vector component.
          */
-        [[nodiscard]] constexpr const T& operator[](std::size_t i) const noexcept;
+        constexpr T operator[](std::size_t i) const noexcept;
 
         /** @} */
 
@@ -1511,6 +1704,9 @@ namespace fgm
         }
 
         /** @} */
+
+    private:
+        T _data[dimension];
     };
 
 

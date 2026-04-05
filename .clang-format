@@ -17,7 +17,6 @@ BraceWrapping:
     SplitEmptyFunction: false
     SplitEmptyRecord: false
     SplitEmptyNamespace: false
-    AfterFunction: false
 BreakBeforeTernaryOperators: "true"
 CompactNamespaces: "false"
 ConstructorInitializerAllOnOneLineOrOnePerLine: "true"

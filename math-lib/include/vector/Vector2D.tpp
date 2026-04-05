@@ -26,8 +26,8 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Vector2D<T>::Vector2D() noexcept {
-        _data[0] = 0;
-        _data[1] = 0;
+        _data[0] = T(0);
+        _data[1] = T(0);
     }
 
 
