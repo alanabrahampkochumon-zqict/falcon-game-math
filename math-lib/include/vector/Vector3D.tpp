@@ -204,11 +204,11 @@ namespace fgm
     constexpr bool Vector3D<T>::allEq(const Vector3D<U>& rhs, const double epsilon) const noexcept {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-            return x == rhs.x && y == rhs.y && z == rhs.z;
+            return _data[0] == rhs[0] && y == rhs[1] && z == rhs[2];
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return (x == rhs.x || std::abs(x - rhs.x) <= epsilon) && (y == rhs.y || std::abs(y - rhs.y) <= epsilon) &&
-                (z == rhs.z || std::abs(z - rhs.z) <= epsilon);
+            return (_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon) && (y == rhs[1] || std::abs(y - rhs[1]) <= epsilon) &&
+                (z == rhs[2] || std::abs(z - rhs[2]) <= epsilon);
     }
 
     template <Arithmetic T>
@@ -223,11 +223,11 @@ namespace fgm
     constexpr bool Vector3D<T>::allNeq(const Vector3D<U>& rhs, const double epsilon) const noexcept {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-            return x != rhs.x || y != rhs.y || z != rhs.z;
+            return _data[0] != rhs[0] || y != rhs[1] || z != rhs[2];
         else
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return (x != rhs.x && !(std::abs(x - rhs.x) <= epsilon)) ||
-                (y != rhs.y && !(std::abs(y - rhs.y) <= epsilon)) || (z != rhs.z && !(std::abs(z - rhs.z) <= epsilon));
+            return (_data[0] != rhs[0] && !(std::abs(_data[0] - rhs[0]) <= epsilon)) ||
+                (y != rhs[1] && !(std::abs(y - rhs[1]) <= epsilon)) || (z != rhs[2] && !(std::abs(z - rhs[2]) <= epsilon));
     }
 
 
@@ -255,12 +255,12 @@ namespace fgm
     template <Arithmetic U>
     constexpr Vector3D<bool> Vector3D<T>::eq(const Vector3D<U>& rhs, const double epsilon) const noexcept {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-            return Vector3D(x == rhs.x, y == rhs.y, z == rhs.z);
+            return Vector3D(_data[0] == rhs[0], y == rhs[1], z == rhs[2]);
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return Vector3D((x == rhs.x || std::abs(x - rhs.x) <= epsilon),
-                            (y == rhs.y || std::abs(y - rhs.y) <= epsilon),
-                            (z == rhs.z || std::abs(z - rhs.z) <= epsilon));
+            return Vector3D((_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon),
+                            (y == rhs[1] || std::abs(y - rhs[1]) <= epsilon),
+                            (z == rhs[2] || std::abs(z - rhs[2]) <= epsilon));
     }
 
 
@@ -276,12 +276,12 @@ namespace fgm
     template <Arithmetic U>
     constexpr Vector3D<bool> Vector3D<T>::neq(const Vector3D<U>& rhs, const double epsilon) const noexcept {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-            return Vector3D(x != rhs.x, y != rhs.y, z != rhs.z);
+            return Vector3D(_data[0] != rhs[0], y != rhs[1], z != rhs[2]);
         else
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return Vector3D<bool>((x != rhs.x) && !(std::abs(x - rhs.x) <= epsilon),
-                                  (y != rhs.y) && !(std::abs(y - rhs.y) <= epsilon),
-                                  (z != rhs.z) && !(std::abs(z - rhs.z) <= epsilon));
+            return Vector3D<bool>((_data[0] != rhs[0]) && !(std::abs(_data[0] - rhs[0]) <= epsilon),
+                                  (y != rhs[1]) && !(std::abs(y - rhs[1]) <= epsilon),
+                                  (z != rhs[2]) && !(std::abs(z - rhs[2]) <= epsilon));
     }
 
 
@@ -306,7 +306,7 @@ namespace fgm
     constexpr Vector3D<bool> Vector3D<T>::gt(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector3D(x > rhs.x, y > rhs.y, z > rhs.z);
+        return Vector3D(_data[0] > rhs[0], y > rhs[1], z > rhs[2]);
     }
 
 
@@ -324,7 +324,7 @@ namespace fgm
     constexpr Vector3D<bool> Vector3D<T>::gte(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector3D(x >= rhs.x, y >= rhs.y, z >= rhs.z);
+        return Vector3D(_data[0] >= rhs[0], y >= rhs[1], z >= rhs[2]);
     }
 
 
@@ -342,7 +342,7 @@ namespace fgm
     constexpr Vector3D<bool> Vector3D<T>::lt(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector3D(x < rhs.x, y < rhs.y, z < rhs.z);
+        return Vector3D(_data[0] < rhs[0], y < rhs[1], z < rhs[2]);
     }
 
 
@@ -361,8 +361,8 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, U>>;
-        return Vector3D<bool>(static_cast<R>(x) <= static_cast<R>(rhs.x), static_cast<R>(y) <= static_cast<R>(rhs.y),
-                              static_cast<R>(z) <= static_cast<R>(rhs.z));
+        return Vector3D<bool>(static_cast<R>(_data[0]) <= static_cast<R>(rhs[0]), static_cast<R>(y) <= static_cast<R>(rhs[1]),
+                              static_cast<R>(z) <= static_cast<R>(rhs[2]));
     }
 
 
@@ -427,7 +427,7 @@ namespace fgm
     constexpr Vector3D<bool> Vector3D<T>::operator&(const Vector3D<bool>& rhs) const noexcept
         requires std::is_same_v<T, bool>
     {
-        return Vector3D(x & rhs.x, y & rhs.y, z & rhs.z);
+        return Vector3D(_data[0] & rhs[0], y & rhs[1], z & rhs[2]);
     }
 
 
@@ -441,7 +441,7 @@ namespace fgm
     constexpr Vector3D<bool> Vector3D<T>::operator|(const Vector3D<bool>& rhs) const noexcept
         requires std::is_same_v<T, bool>
     {
-        return Vector3D(x | rhs.x, y | rhs.y, z | rhs.z);
+        return Vector3D(_data[0] | rhs[0], y | rhs[1], z | rhs[2]);
     }
 
 
@@ -474,7 +474,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        return Vector3D<R>(x + rhs.x, y + rhs.y, z + rhs.z);
+        return Vector3D<R>(_data[0] + rhs[0], y + rhs[1], z + rhs[2]);
     }
 
 
@@ -483,9 +483,9 @@ namespace fgm
     constexpr Vector3D<T>& Vector3D<T>::operator+=(const Vector3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
-        x += static_cast<T>(rhs.x);
-        y += static_cast<T>(rhs.y);
-        z += static_cast<T>(rhs.z);
+        _data[0] += static_cast<T>(rhs[0]);
+        y += static_cast<T>(rhs[1]);
+        z += static_cast<T>(rhs[2]);
         return *this;
     }
 
@@ -496,7 +496,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        return Vector3D<R>(x - rhs.x, y - rhs.y, z - rhs.z);
+        return Vector3D<R>(_data[0] - rhs[0], y - rhs[1], z - rhs[2]);
     }
 
 
@@ -505,9 +505,9 @@ namespace fgm
     constexpr Vector3D<T>& Vector3D<T>::operator-=(const Vector3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
-        x -= static_cast<T>(rhs.x);
-        y -= static_cast<T>(rhs.y);
-        z -= static_cast<T>(rhs.z);
+        _data[0] -= static_cast<T>(rhs[0]);
+        y -= static_cast<T>(rhs[1]);
+        z -= static_cast<T>(rhs[2]);
         return *this;
     }
 
@@ -526,7 +526,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
-        return Vector3D<R>(x * scalar, y * scalar, z * scalar);
+        return Vector3D<R>(_data[0] * scalar, y * scalar, z * scalar);
     }
 
 
@@ -544,7 +544,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
 
-        x = static_cast<T>(scalar * x);
+        _data[0] = static_cast<T>(scalar * _data[0]);
         y = static_cast<T>(scalar * y);
         z = static_cast<T>(scalar * z);
         return *this;
@@ -560,13 +560,13 @@ namespace fgm
         if constexpr (std::is_floating_point_v<R>)
         {
             R factor = R(1) / static_cast<R>(scalar);
-            return Vector3D<R>(x * factor, y * factor, z * factor);
+            return Vector3D<R>(_data[0] * factor, y * factor, z * factor);
         }
         else
         {
             assert(scalar != 0 && "Integral division by zero");
             R tScalar = static_cast<R>(scalar);
-            return Vector3D<R>(x / tScalar, y / tScalar, z / tScalar);
+            return Vector3D<R>(_data[0] / tScalar, y / tScalar, z / tScalar);
         }
     }
 
@@ -581,13 +581,13 @@ namespace fgm
         {
             R factor = R(1) / static_cast<R>(scalar);
 
-            x = static_cast<T>(factor * x);
+            _data[0] = static_cast<T>(factor * _data[0]);
             y = static_cast<T>(factor * y);
             z = static_cast<T>(factor * z);
         }
         else
         {
-            x /= static_cast<T>(scalar);
+            _data[0] /= static_cast<T>(scalar);
             y /= static_cast<T>(scalar);
             z /= static_cast<T>(scalar);
         }
@@ -685,13 +685,13 @@ namespace fgm
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
         using R = std::common_type_t<T, U>;
         if constexpr (std::is_floating_point_v<R>)
-            return std::fma(static_cast<R>(x), static_cast<R>(rhs.x),
-                            std::fma(static_cast<R>(y), static_cast<R>(rhs.y),
-                                     std::fma(static_cast<R>(z), static_cast<R>(rhs.z), T(0))));
+            return std::fma(static_cast<R>(_data[0]), static_cast<R>(rhs[0]),
+                            std::fma(static_cast<R>(y), static_cast<R>(rhs[1]),
+                                     std::fma(static_cast<R>(z), static_cast<R>(rhs[2]), T(0))));
         else
-            return x * rhs.x + y * rhs.y + z * rhs.z;
+            return _data[0] * rhs[0] + y * rhs[1] + z * rhs[2];
 #else
-        return x * rhs.x + y * rhs.y + z * rhs.z;
+        return _data[0] * rhs[0] + y * rhs[1] + z * rhs[2];
 #endif
     }
 
@@ -717,7 +717,7 @@ namespace fgm
     template <Arithmetic U>
     constexpr auto Vector3D<T>::cross(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>> {
         using R = std::common_type_t<T, U>;
-        return Vector3D<R>(y * rhs.z - z * rhs.y, z * rhs.x - x * rhs.z, x * rhs.y - y * rhs.x);
+        return Vector3D<R>(y * rhs[2] - z * rhs[1], z * rhs[0] - _data[0] * rhs[2], _data[0] * rhs[1] - y * rhs[0]);
     }
 
 
@@ -743,7 +743,7 @@ namespace fgm
     {
         using M = Magnitude<T>;
 
-        M tX = static_cast<M>(x);
+        M tX = static_cast<M>(_data[0]);
         M tY = static_cast<M>(y);
         M tZ = static_cast<M>(z);
 
@@ -1042,7 +1042,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr bool Vector3D<T>::hasInf() const noexcept {
         if constexpr (std::is_floating_point_v<T>)
-            return std::isinf(x) | std::isinf(y) | std::isinf(z);
+            return std::isinf(_data[0]) | std::isinf(y) | std::isinf(z);
         else
             return false;
     }
@@ -1057,7 +1057,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr bool Vector3D<T>::hasNaN() const noexcept {
         if constexpr (std::is_floating_point_v<T>)
-            return std::isnan(x) | std::isnan(y) | std::isnan(z);
+            return std::isnan(_data[0]) | std::isnan(y) | std::isnan(z);
         else
             return false;
     }
