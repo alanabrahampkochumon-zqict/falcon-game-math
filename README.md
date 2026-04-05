@@ -1,8 +1,7 @@
-# Math Library for CPP
+# Falcon Game Math
 
-Math Library build in CPP for Game Engine following Eric Lengyel's <a href="https://foundationsofgameenginedev.com/" target="_blank">Foundations fo Game Engine Development Series</a>
-
-Project uses CMake as it's build system.
+High performance math library written in modern C++.
+NOTE: Project requires atleast C++ 20, and C++ 23 is recommended to enable `constexpr` evaluations.
 
 ## How to run
 
@@ -24,3 +23,7 @@ Project uses CMake as it's build system.
     ```
     OR
     Run it in Visual Studio or your IDE of choice.
+
+## References
+
+<a href="https://foundationsofgameenginedev.com/" target="_blank">Eric Lengyel's Foundations fo Game Engine Development Series</a>
