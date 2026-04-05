@@ -43,29 +43,6 @@ namespace fgm
 
         static constexpr std::size_t dimension = 3;
 
-        //union {
-        //    struct
-        //    {
-        //        T x; ///< X-axis component
-        //        T y; ///< Y-axis component
-        //        T z; ///< Z-axis component
-        //    };
-        //    struct
-        //    {
-        //        T r; ///< Red channel
-        //        T g; ///< Green channel
-        //        T b; ///< Blue channel
-        //    };
-        //    struct
-        //    {
-        //        T s; ///< S-coordinate
-        //        T t; ///< T-coordinate
-        //        T p; ///< P-coordinate
-        //    };
-
-        //    T elements[dimension];
-        //};
-
         /** @} */
 
 

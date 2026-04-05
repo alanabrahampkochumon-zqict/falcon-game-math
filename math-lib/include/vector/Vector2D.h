@@ -47,27 +47,6 @@ namespace fgm
 
         /** @} */
 
-        // union {
-        //     struct
-        //     {
-        //         T x; ///< X-axis component
-        //         T y; ///< Y-axis component
-        //     };
-        //     struct
-        //     {
-        //         T r; ///< Red channel
-        //         T g; ///< Green channel
-        //     };
-        //     struct
-        //     {
-        //         T s; ///< S-coordinate
-        //         T t; ///< T-coordinate
-        //     };
-
-        //    T elements[dimension];
-        //};
-
-        /** @} */
 
 
 
