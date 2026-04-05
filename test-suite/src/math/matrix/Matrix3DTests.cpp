@@ -148,9 +148,9 @@ TEST(Matrix3D_Access, CanBeAccessedAsAVectorAtIndex)
     fgm::Vector3D vec = mat[1];
 
     // Assert
-    EXPECT_FLOAT_EQ(0.0f, vec.x);
-    EXPECT_FLOAT_EQ(1.0f, vec.y);
-    EXPECT_FLOAT_EQ(0.0f, vec.z);
+    EXPECT_FLOAT_EQ(0.0f, vec.x());
+    EXPECT_FLOAT_EQ(1.0f, vec.y());
+    EXPECT_FLOAT_EQ(0.0f, vec.z());
 }
 
 TEST(Matrix3D_Access, CanBeAccessedAsAValueAtRowColumn)

@@ -109,21 +109,21 @@ namespace testutils
     {
         if constexpr (std::is_same_v<T, float>)
         {
-            EXPECT_FLOAT_EQ(x, vector.x);
-            EXPECT_FLOAT_EQ(y, vector.y);
-            EXPECT_FLOAT_EQ(z, vector.z);
+            EXPECT_FLOAT_EQ(x, vector.x());
+            EXPECT_FLOAT_EQ(y, vector.y());
+            EXPECT_FLOAT_EQ(z, vector.z());
         }
         else if constexpr (std::is_same_v<T, double>)
         {
-            EXPECT_DOUBLE_EQ(x, vector.x);
-            EXPECT_DOUBLE_EQ(y, vector.y);
-            EXPECT_DOUBLE_EQ(z, vector.z);
+            EXPECT_DOUBLE_EQ(x, vector.x());
+            EXPECT_DOUBLE_EQ(y, vector.y());
+            EXPECT_DOUBLE_EQ(z, vector.z());
         }
         else
         {
-            EXPECT_EQ(x, vector.x);
-            EXPECT_EQ(y, vector.y);
-            EXPECT_EQ(z, vector.z);
+            EXPECT_EQ(x, vector.x());
+            EXPECT_EQ(y, vector.y());
+            EXPECT_EQ(z, vector.z());
         }
     }
 
@@ -294,9 +294,9 @@ namespace testutils
      * @param vec The vector to evaluate.
      */
     #define EXPECT_VEC3_POS_INF(vec) \
-            EXPECT_TRUE(std::isinf((vec).x) && !std::signbit((vec).x)); \
-            EXPECT_TRUE(std::isinf((vec).y) && !std::signbit((vec).y)); \
-            EXPECT_TRUE(std::isinf((vec).z) && !std::signbit((vec).z));
+            EXPECT_TRUE(std::isinf((vec).x()) && !std::signbit((vec).x())); \
+            EXPECT_TRUE(std::isinf((vec).y()) && !std::signbit((vec).y())); \
+            EXPECT_TRUE(std::isinf((vec).z()) && !std::signbit((vec).z()));
 
 
     /**
@@ -305,9 +305,9 @@ namespace testutils
      * @param vec The vector to evaluate.
      */
     #define EXPECT_VEC3_NEG_INF(vec) \
-            EXPECT_TRUE(std::isinf((vec).x) && std::signbit((vec).x)); \
-            EXPECT_TRUE(std::isinf((vec).y) && std::signbit((vec).y)); \
-            EXPECT_TRUE(std::isinf((vec).z) && std::signbit((vec).z));
+            EXPECT_TRUE(std::isinf((vec).x()) && std::signbit((vec).x())); \
+            EXPECT_TRUE(std::isinf((vec).y()) && std::signbit((vec).y())); \
+            EXPECT_TRUE(std::isinf((vec).z()) && std::signbit((vec).z()));
 
 
     /**

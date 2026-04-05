@@ -85,9 +85,9 @@ TEST(Vector3DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 TEST(Vector3DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
     constexpr auto nan = fgm::vec3d::nan<float>;
-    EXPECT_TRUE(std::isnan(nan.x));
-    EXPECT_TRUE(std::isnan(nan.y));
-    EXPECT_TRUE(std::isnan(nan.z));
+    EXPECT_TRUE(std::isnan(nan.x()));
+    EXPECT_TRUE(std::isnan(nan.y()));
+    EXPECT_TRUE(std::isnan(nan.z()));
 }
 
 
@@ -95,9 +95,9 @@ TEST(Vector3DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 TEST(Vector3DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
     constexpr auto nan = fgm::vec3d::nan<double>;
-    EXPECT_TRUE(std::isnan(nan.x));
-    EXPECT_TRUE(std::isnan(nan.y));
-    EXPECT_TRUE(std::isnan(nan.z));
+    EXPECT_TRUE(std::isnan(nan.x()));
+    EXPECT_TRUE(std::isnan(nan.y()));
+    EXPECT_TRUE(std::isnan(nan.z()));
 }
 
 

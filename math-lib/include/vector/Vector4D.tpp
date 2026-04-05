@@ -43,12 +43,12 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<T>::Vector4D(const Vector3D<T>& vec, const T v) noexcept: x(vec.x), y(vec.y), z(vec.z), w(v)
+    constexpr Vector4D<T>::Vector4D(const Vector3D<T>& vec, const T v) noexcept: x(vec.x()), y(vec.y()), z(vec.z()), w(v)
     {}
 
 
     template <Arithmetic T>
-    constexpr Vector4D<T>::Vector4D(const T v, const Vector3D<T>& vec) noexcept: x(v), y(vec.x), z(vec.y), w(vec.z)
+    constexpr Vector4D<T>::Vector4D(const T v, const Vector3D<T>& vec) noexcept: x(v), y(vec.x()), z(vec.y()), w(vec.z())
     {}
 
 

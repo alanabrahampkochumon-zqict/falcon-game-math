@@ -29,9 +29,9 @@ TEST(Vector3DAccess, AccessibleAsXYZW)
 {
     constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
-    EXPECT_FLOAT_EQ(3.0f, vec.x);
-    EXPECT_FLOAT_EQ(1.0f, vec.y);
-    EXPECT_FLOAT_EQ(6.0f, vec.z);
+    EXPECT_FLOAT_EQ(3.0f, vec.x());
+    EXPECT_FLOAT_EQ(1.0f, vec.y());
+    EXPECT_FLOAT_EQ(6.0f, vec.z());
 }
 
 
@@ -40,9 +40,9 @@ TEST(Vector3DAccess, AccessibleAsSTPQ)
 {
     constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
-    EXPECT_FLOAT_EQ(3.0f, vec.s);
-    EXPECT_FLOAT_EQ(1.0f, vec.t);
-    EXPECT_FLOAT_EQ(6.0f, vec.p);
+    EXPECT_FLOAT_EQ(3.0f, vec.s());
+    EXPECT_FLOAT_EQ(1.0f, vec.t());
+    EXPECT_FLOAT_EQ(6.0f, vec.p());
 }
 
 
@@ -51,9 +51,9 @@ TEST(Vector3DAccess, AccessibleAsRGBA)
 {
     constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
-    EXPECT_FLOAT_EQ(3.0f, vec.r);
-    EXPECT_FLOAT_EQ(1.0f, vec.g);
-    EXPECT_FLOAT_EQ(6.0f, vec.b);
+    EXPECT_FLOAT_EQ(3.0f, vec.r());
+    EXPECT_FLOAT_EQ(1.0f, vec.g());
+    EXPECT_FLOAT_EQ(6.0f, vec.b());
 }
 
 
@@ -62,9 +62,9 @@ TEST(Vector3DAccess, AccessibleAsArray)
 {
     constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
-    EXPECT_FLOAT_EQ(3.0f, vec.elements[0]);
-    EXPECT_FLOAT_EQ(1.0f, vec.elements[1]);
-    EXPECT_FLOAT_EQ(6.0f, vec.elements[2]);
+    EXPECT_FLOAT_EQ(3.0f, vec[0]);
+    EXPECT_FLOAT_EQ(1.0f, vec[1]);
+    EXPECT_FLOAT_EQ(6.0f, vec[2]);
 }
 
 /** @} */
@@ -87,13 +87,13 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZW)
 {
     fgm::Vector3D<float> vec;
 
-    vec.x = 3.0f;
-    vec.y = 1.0f;
-    vec.z = 6.0f;
+    vec.x() = 3.0f;
+    vec.y() = 1.0f;
+    vec.z() = 6.0f;
 
-    EXPECT_FLOAT_EQ(3.0f, vec.x);
-    EXPECT_FLOAT_EQ(1.0f, vec.y);
-    EXPECT_FLOAT_EQ(6.0f, vec.z);
+    EXPECT_FLOAT_EQ(3.0f, vec.x());
+    EXPECT_FLOAT_EQ(1.0f, vec.y());
+    EXPECT_FLOAT_EQ(6.0f, vec.z());
 }
 
 
@@ -102,13 +102,13 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTPQ)
 {
     fgm::Vector3D<float> vec;
 
-    vec.s = 3.0f;
-    vec.t = 1.0f;
-    vec.p = 6.0f;
+    vec.s() = 3.0f;
+    vec.t() = 1.0f;
+    vec.p() = 6.0f;
 
-    EXPECT_FLOAT_EQ(3.0f, vec.s);
-    EXPECT_FLOAT_EQ(1.0f, vec.t);
-    EXPECT_FLOAT_EQ(6.0f, vec.p);
+    EXPECT_FLOAT_EQ(3.0f, vec.s());
+    EXPECT_FLOAT_EQ(1.0f, vec.t());
+    EXPECT_FLOAT_EQ(6.0f, vec.p());
 }
 
 
@@ -117,13 +117,13 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGBA)
 {
     fgm::Vector3D<float> vec;
 
-    vec.r = 3.0f;
-    vec.g = 1.0f;
-    vec.b = 6.0f;
+    vec.r() = 3.0f;
+    vec.g() = 1.0f;
+    vec.b() = 6.0f;
 
-    EXPECT_FLOAT_EQ(3.0f, vec.r);
-    EXPECT_FLOAT_EQ(1.0f, vec.g);
-    EXPECT_FLOAT_EQ(6.0f, vec.b);
+    EXPECT_FLOAT_EQ(3.0f, vec.r());
+    EXPECT_FLOAT_EQ(1.0f, vec.g());
+    EXPECT_FLOAT_EQ(6.0f, vec.b());
 }
 
 

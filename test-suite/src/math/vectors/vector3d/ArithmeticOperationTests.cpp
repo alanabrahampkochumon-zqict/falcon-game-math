@@ -841,9 +841,9 @@ TEST(Vector3DInversion, NoOpOnNaNVectors)
 
     constexpr fgm::Vector3D<float> inverted = -nanVec;
 
-    EXPECT_TRUE(std::isnan(inverted.x));
-    EXPECT_TRUE(std::isnan(inverted.y));
-    EXPECT_TRUE(std::isnan(inverted.z));
+    EXPECT_TRUE(std::isnan(inverted.x()));
+    EXPECT_TRUE(std::isnan(inverted.y()));
+    EXPECT_TRUE(std::isnan(inverted.z()));
 }
 
 /** @} */

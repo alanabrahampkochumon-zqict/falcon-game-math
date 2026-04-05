@@ -40,7 +40,7 @@ TEST(Vector3DConversionConstructor, ReturnsNewInstance)
     // When converted to a double vector
     fgm::Vector3D<double> vec2(vec1);
     // And one of its value mutated
-    vec2.x = 5;
+    vec2.x() = 5;
 
     // Then, the float vector remains unchanged
     EXPECT_VEC_CONTAINS(vec1, 3.0f, 1.0f, 6.0f);

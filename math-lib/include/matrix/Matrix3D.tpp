@@ -238,9 +238,9 @@ namespace fgm
     template <typename S, typename>
     auto Matrix3D<T>::operator*(const Vector3D<S>& vec) const -> Vector3D<std::common_type_t<T, S>>
     {
-        return Vector3D(elements[0][0] * vec.x + elements[1][0] * vec.y + elements[2][0] * vec.z, // First Row * Vec
-                        elements[0][1] * vec.x + elements[1][1] * vec.y + elements[2][1] * vec.z, // Second Row * Vec
-                        elements[0][2] * vec.x + elements[1][2] * vec.y + elements[2][2] * vec.z  // Third Row * Vec
+        return Vector3D(elements[0][0] * vec.x() + elements[1][0] * vec.y() + elements[2][0] * vec.z(), // First Row * Vec
+                        elements[0][1] * vec.x() + elements[1][1] * vec.y() + elements[2][1] * vec.z(), // Second Row * Vec
+                        elements[0][2] * vec.x() + elements[1][2] * vec.y() + elements[2][2] * vec.z()  // Third Row * Vec
         );
     }
 
@@ -349,7 +349,8 @@ namespace fgm
         const Vector3D<T> col2 = columns[2].cross(columns[0]);
         const Vector3D<T> col3 = columns[0].cross(columns[1]);
 
-        return factor * Matrix3D(col1.x, col1.y, col1.z, col2.x, col2.y, col2.z, col3.x, col3.y, col3.z);
+        return factor *
+            Matrix3D(col1.x(), col1.y(), col1.z(), col2.x(), col2.y(), col2.z(), col3.x(), col3.y(), col3.z());
 
         // NOTE: Left for profiling
         // return factor * Matrix3D<T>(
