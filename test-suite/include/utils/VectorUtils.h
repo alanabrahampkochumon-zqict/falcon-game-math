@@ -146,24 +146,24 @@ namespace testutils
     {
         if constexpr (std::is_same_v<T, float>)
         {
-            EXPECT_FLOAT_EQ(x, vector.x);
-            EXPECT_FLOAT_EQ(y, vector.y);
-            EXPECT_FLOAT_EQ(z, vector.z);
-            EXPECT_FLOAT_EQ(w, vector.w);
+            EXPECT_FLOAT_EQ(x, vector.x());
+            EXPECT_FLOAT_EQ(y, vector.y());
+            EXPECT_FLOAT_EQ(z, vector.z());
+            EXPECT_FLOAT_EQ(w, vector.w());
         }
         else if constexpr (std::is_floating_point_v<T>)
         {
-            EXPECT_DOUBLE_EQ(x, vector.x);
-            EXPECT_DOUBLE_EQ(y, vector.y);
-            EXPECT_DOUBLE_EQ(z, vector.z);
-            EXPECT_DOUBLE_EQ(w, vector.w);
+            EXPECT_DOUBLE_EQ(x, vector.x());
+            EXPECT_DOUBLE_EQ(y, vector.y());
+            EXPECT_DOUBLE_EQ(z, vector.z());
+            EXPECT_DOUBLE_EQ(w, vector.w());
         }
         else
         {
-            EXPECT_EQ(x, vector.x);
-            EXPECT_EQ(y, vector.y);
-            EXPECT_EQ(z, vector.z);
-            EXPECT_EQ(w, vector.w);
+            EXPECT_EQ(x, vector.x());
+            EXPECT_EQ(y, vector.y());
+            EXPECT_EQ(z, vector.z());
+            EXPECT_EQ(w, vector.w());
         }
     }
 
@@ -270,10 +270,10 @@ namespace testutils
      * @param vec The vector to evaluate.
      */
     #define EXPECT_VEC4_POS_INF(vec) \
-            EXPECT_TRUE(std::isinf((vec).x) && !std::signbit((vec).x)); \
-            EXPECT_TRUE(std::isinf((vec).y) && !std::signbit((vec).y)); \
-            EXPECT_TRUE(std::isinf((vec).z) && !std::signbit((vec).z)); \
-            EXPECT_TRUE(std::isinf((vec).w) && !std::signbit((vec).w));
+            EXPECT_TRUE(std::isinf((vec).x()) && !std::signbit((vec).x())); \
+            EXPECT_TRUE(std::isinf((vec).y()) && !std::signbit((vec).y())); \
+            EXPECT_TRUE(std::isinf((vec).z()) && !std::signbit((vec).z())); \
+            EXPECT_TRUE(std::isinf((vec).w()) && !std::signbit((vec).w()));
 
 
     /**
@@ -282,10 +282,10 @@ namespace testutils
      * @param vec The vector to evaluate.
      */
     #define EXPECT_VEC4_NEG_INF(vec) \
-            EXPECT_TRUE(std::isinf((vec).x) && std::signbit((vec).x)); \
-            EXPECT_TRUE(std::isinf((vec).y) && std::signbit((vec).y)); \
-            EXPECT_TRUE(std::isinf((vec).z) && std::signbit((vec).z)); \
-            EXPECT_TRUE(std::isinf((vec).w) && std::signbit((vec).w));
+            EXPECT_TRUE(std::isinf((vec).x()) && std::signbit((vec).x())); \
+            EXPECT_TRUE(std::isinf((vec).y()) && std::signbit((vec).y())); \
+            EXPECT_TRUE(std::isinf((vec).z()) && std::signbit((vec).z())); \
+            EXPECT_TRUE(std::isinf((vec).w()) && std::signbit((vec).w()));
 
 
     /**

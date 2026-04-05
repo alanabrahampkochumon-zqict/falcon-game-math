@@ -185,10 +185,10 @@ TEST(Matrix4D_Access, CanBeAccessedAsAVectorAtIndex)
     fgm::Vector4D vec = mat[1];
 
     // Returns a vector with the correct value
-    EXPECT_FLOAT_EQ(0.0f, vec.x);
-    EXPECT_FLOAT_EQ(1.0f, vec.y);
-    EXPECT_FLOAT_EQ(0.0f, vec.z);
-    EXPECT_FLOAT_EQ(0.0f, vec.w);
+    EXPECT_FLOAT_EQ(0.0f, vec.x());
+    EXPECT_FLOAT_EQ(1.0f, vec.y());
+    EXPECT_FLOAT_EQ(0.0f, vec.z());
+    EXPECT_FLOAT_EQ(0.0f, vec.w());
 }
 
 TEST(Matrix4D_Access, CanBeAccessedAsAValueAtRowColumn)

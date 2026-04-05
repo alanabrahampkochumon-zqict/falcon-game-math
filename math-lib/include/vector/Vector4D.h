@@ -50,28 +50,28 @@ namespace fgm
 
         static constexpr std::size_t dimension = 4; ///< Vector Dimension
 
-        //union {
-        //    struct
-        //    {
-        //        T x; ///< X-axis component
-        //        T y; ///< Y-axis component
-        //        T z; ///< Z-axis component
-        //        T w; ///< W-axis (homogeneous) component
-        //    };
-        //    struct
-        //    {
-        //        T r; ///< Red channel
-        //        T g; ///< Green channel
-        //        T b; ///< Blue channel
-        //        T a; ///< Alpha channel
-        //    };
-        //    struct
-        //    {
-        //        T s; ///< S-coordinate
-        //        T t; ///< T-coordinate
-        //        T p; ///< P-coordinate
-        //        T q; ///< Q-coordinate
-        //    };
+        // union {
+        //     struct
+        //     {
+        //         T x; ///< X-axis component
+        //         T y; ///< Y-axis component
+        //         T z; ///< Z-axis component
+        //         T w; ///< W-axis (homogeneous) component
+        //     };
+        //     struct
+        //     {
+        //         T r; ///< Red channel
+        //         T g; ///< Green channel
+        //         T b; ///< Blue channel
+        //         T a; ///< Alpha channel
+        //     };
+        //     struct
+        //     {
+        //         T s; ///< S-coordinate
+        //         T t; ///< T-coordinate
+        //         T p; ///< P-coordinate
+        //         T q; ///< Q-coordinate
+        //     };
 
         //    T elements[dimension];
         //};
@@ -1563,7 +1563,7 @@ namespace fgm
 
 
         /**
-         * @brief Safely compute rejection of this vector from another vector and 
+         * @brief Safely compute rejection of this vector from another vector and
          *        set @p status to the result of rejection operation.
          *        Compute the component of the vector perpendicular to @p onto:
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
@@ -1589,7 +1589,7 @@ namespace fgm
 
 
         /**
-         * @brief Safely compute rejection of a vector from another vector and 
+         * @brief Safely compute rejection of a vector from another vector and
          *        set @p status to the result of rejection operation.
          *        Compute the component of the vector perpendicular to @p onto:
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
@@ -1695,7 +1695,8 @@ namespace fgm
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
-            os << "<" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ">\n";
+            os << "<" << vector._data[0] << ", " << vector._data[1] << ", " << vector._data[2] << ", "
+               << vector._data[3] << ">\n";
 
             os.precision(oldPrecision);
             os.flags(oldFlags);

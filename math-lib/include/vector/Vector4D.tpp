@@ -299,8 +299,10 @@ namespace fgm
             return _data[0] == rhs[0] && _data[1] == rhs[1] && _data[2] == rhs[2] && _data[3] == rhs[3];
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return (_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon) && (_data[1] == rhs[1] || std::abs(_data[1] - rhs[1]) <= epsilon) &&
-                (_data[2] == rhs[2] || std::abs(_data[2] - rhs[2]) <= epsilon) && (_data[3] == rhs[3] || std::abs(_data[3] - rhs[3]) <= epsilon);
+            return (_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon) &&
+                (_data[1] == rhs[1] || std::abs(_data[1] - rhs[1]) <= epsilon) &&
+                (_data[2] == rhs[2] || std::abs(_data[2] - rhs[2]) <= epsilon) &&
+                (_data[3] == rhs[3] || std::abs(_data[3] - rhs[3]) <= epsilon);
     }
 
     template <Arithmetic T>
@@ -322,7 +324,8 @@ namespace fgm
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
             return (_data[0] != rhs[0] && !(std::abs(_data[0] - rhs[0]) <= epsilon)) ||
                 (_data[1] != rhs[1] && !(std::abs(_data[1] - rhs[1]) <= epsilon)) ||
-                (_data[2] != rhs[2] && !(std::abs(_data[2] - rhs[2]) <= epsilon)) || (_data[3] != rhs[3] && !(std::abs(_data[3] - rhs[3]) <= epsilon));
+                (_data[2] != rhs[2] && !(std::abs(_data[2] - rhs[2]) <= epsilon)) ||
+                (_data[3] != rhs[3] && !(std::abs(_data[3] - rhs[3]) <= epsilon));
     }
 
 
@@ -357,9 +360,10 @@ namespace fgm
             return Vector4D(_data[0] == rhs[0], _data[1] == rhs[1], _data[2] == rhs[2], _data[3] == rhs[3]);
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return Vector4D(
-                (_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon), (_data[1] == rhs[1] || std::abs(_data[1] - rhs[1]) <= epsilon),
-                (_data[2] == rhs[2] || std::abs(_data[2] - rhs[2]) <= epsilon), (_data[3] == rhs[3] || std::abs(_data[3] - rhs[3]) <= epsilon));
+            return Vector4D((_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon),
+                            (_data[1] == rhs[1] || std::abs(_data[1] - rhs[1]) <= epsilon),
+                            (_data[2] == rhs[2] || std::abs(_data[2] - rhs[2]) <= epsilon),
+                            (_data[3] == rhs[3] || std::abs(_data[3] - rhs[3]) <= epsilon));
     }
 
 
@@ -379,9 +383,10 @@ namespace fgm
             return Vector4D(_data[0] != rhs[0], _data[1] != rhs[1], _data[2] != rhs[2], _data[3] != rhs[3]);
         else
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return Vector4D<bool>(
-                (_data[0] != rhs[0]) && !(std::abs(_data[0] - rhs[0]) <= epsilon), (_data[1] != rhs[1]) && !(std::abs(_data[1] - rhs[1]) <= epsilon),
-                (_data[2] != rhs[2]) && !(std::abs(_data[2] - rhs[2]) <= epsilon), (_data[3] != rhs[3]) && !(std::abs(_data[3] - rhs[3]) <= epsilon));
+            return Vector4D<bool>((_data[0] != rhs[0]) && !(std::abs(_data[0] - rhs[0]) <= epsilon),
+                                  (_data[1] != rhs[1]) && !(std::abs(_data[1] - rhs[1]) <= epsilon),
+                                  (_data[2] != rhs[2]) && !(std::abs(_data[2] - rhs[2]) <= epsilon),
+                                  (_data[3] != rhs[3]) && !(std::abs(_data[3] - rhs[3]) <= epsilon));
     }
 
 
@@ -462,8 +467,9 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, U>>;
-        return Vector4D<bool>(static_cast<R>(_data[0]) <= static_cast<R>(rhs[0]), static_cast<R>(_data[1]) <= static_cast<R>(rhs[1]),
-                              static_cast<R>(_data[2]) <= static_cast<R>(rhs[2]), static_cast<R>(_data[3]) <= static_cast<R>(rhs[3]));
+        return Vector4D<bool>(
+            static_cast<R>(_data[0]) <= static_cast<R>(rhs[0]), static_cast<R>(_data[1]) <= static_cast<R>(rhs[1]),
+            static_cast<R>(_data[2]) <= static_cast<R>(rhs[2]), static_cast<R>(_data[3]) <= static_cast<R>(rhs[3]));
     }
 
 
@@ -621,7 +627,7 @@ namespace fgm
     constexpr Vector4D<T> Vector4D<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
     {
-        return Vector4D(-x, -y, -z, -w);
+        return Vector4D(-_data[0], -_data[1], -_data[2], -_data[3]);
     }
 
 

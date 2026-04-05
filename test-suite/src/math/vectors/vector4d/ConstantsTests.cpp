@@ -85,10 +85,10 @@ TEST(Vector4DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 TEST(Vector4DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
     constexpr auto nan = fgm::vec4d::nan<float>;
-    EXPECT_TRUE(std::isnan(nan.x));
-    EXPECT_TRUE(std::isnan(nan.y));
-    EXPECT_TRUE(std::isnan(nan.z));
-    EXPECT_TRUE(std::isnan(nan.w));
+    EXPECT_TRUE(std::isnan(nan.x()));
+    EXPECT_TRUE(std::isnan(nan.y()));
+    EXPECT_TRUE(std::isnan(nan.z()));
+    EXPECT_TRUE(std::isnan(nan.w()));
 }
 
 
@@ -96,10 +96,10 @@ TEST(Vector4DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 TEST(Vector4DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
     constexpr auto nan = fgm::vec4d::nan<double>;
-    EXPECT_TRUE(std::isnan(nan.x));
-    EXPECT_TRUE(std::isnan(nan.y));
-    EXPECT_TRUE(std::isnan(nan.z));
-    EXPECT_TRUE(std::isnan(nan.w));
+    EXPECT_TRUE(std::isnan(nan.x()));
+    EXPECT_TRUE(std::isnan(nan.y()));
+    EXPECT_TRUE(std::isnan(nan.z()));
+    EXPECT_TRUE(std::isnan(nan.w()));
 }
 
 
