@@ -34,8 +34,9 @@ namespace testutils
      *
      * @tparam T Numeric type of the expected vector components.
      * @tparam U Numeric type of the actual vector components.
+     *
      * @param expected The vector serving as the reference for comparison.
-     * @param actual The vector being evaluated.
+     * @param actual   The vector being evaluated.
      *
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
      *       if the vectors are not equal.
@@ -64,9 +65,10 @@ namespace testutils
      * @brief Performs a strict component-wise validation of a @ref fgm::Vector2D against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
+     *
      * @param vector The 2D vector instance being evaluated.
-     * @param x The expected value for the x-component.
-     * @param y The expected value for the y-component.
+     * @param x      The expected value for the x-component.
+     * @param y      The expected value for the y-component.
      *
      * @note Uses GoogleTest macros. Triggers a non-fatal test failure if the vector's
      *       internal state does not match the provided scalars.
@@ -96,10 +98,11 @@ namespace testutils
      * @brief Performs a strict component-wise validation of a @ref fgm::Vector3D against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
+     *
      * @param vector The 3D vector instance being evaluated.
-     * @param x The expected value for the x-component.
-     * @param y The expected value for the y-component.
-     * @param z The expected value for the z-component.
+     * @param x      The expected value for the x-component.
+     * @param y      The expected value for the y-component.
+     * @param z      The expected value for the z-component.
      *
      * @note Uses GoogleTest macros. Triggers a non-fatal test failure if the vector's
      *       internal state does not match the provided scalars.
@@ -132,11 +135,12 @@ namespace testutils
      * @brief Performs a strict component-wise validation of a @ref fgm::Vector4D against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
+     *
      * @param vector The 4D vector instance being evaluated.
-     * @param x The expected value for the x-component.
-     * @param y The expected value for the y-component.
-     * @param z The expected value for the z-component.
-     * @param w The expected value for the w-component.
+     * @param x      The expected value for the x-component.
+     * @param y      The expected value for the y-component.
+     * @param z      The expected value for the z-component.
+     * @param w      The expected value for the w-component.
      *
      * @note Uses GoogleTest macros. Triggers a non-fatal test failure if the vector's
      *       internal state does not match the provided scalars.
@@ -172,6 +176,7 @@ namespace testutils
      * @brief Validates that the provided vector contains only unit components.
      *
      * @tparam T Numeric type of the actual vector components.
+     *
      * @param vector The vector being evaluated.
      *
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
@@ -199,6 +204,7 @@ namespace testutils
      * @brief Validates that the provided vector contains only zero components.
      *
      * @tparam T Numeric type of the actual vector components.
+     *
      * @param vector The vector being evaluated.
      *
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
@@ -225,6 +231,7 @@ namespace testutils
      * @brief Validates that the provided vector contains only @ref INFINITY components.
      *
      * @tparam T Numeric type of the actual vector components.
+     *
      * @param vector The vector being evaluated.
      *
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
@@ -244,8 +251,9 @@ namespace testutils
      * @brief Validates that two scalar values are equal within a defined numerical tolerance.
      *
      * @tparam T Numeric type of the values being compared.
+     *
      * @param expected The ground-truth reference value.
-     * @param actual The value being evaluated.
+     * @param actual   The value being evaluated.
      *
      * @note Uses GoogleTest macros. Triggers a non-fatal failure if the absolute difference
      *       between expected and actual exceeds the library's standard epsilon.
