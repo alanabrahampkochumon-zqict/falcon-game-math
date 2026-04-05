@@ -836,8 +836,8 @@ TEST(Vector2DInversion, NoOpOnNaNVectors)
 
     constexpr fgm::Vector2D<float> inverted = -nanVec;
 
-    EXPECT_TRUE(std::isnan(inverted.x));
-    EXPECT_TRUE(std::isnan(inverted.y));
+    EXPECT_TRUE(std::isnan(inverted.x()));
+    EXPECT_TRUE(std::isnan(inverted.y()));
 }
 
 /** @} */

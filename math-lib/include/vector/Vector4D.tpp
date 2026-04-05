@@ -38,7 +38,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(const Vector2D<T>& vec1, const Vector2D<T>& vec2) noexcept
-        : x(vec1.x), y(vec1.y), z(vec2.x), w(vec2.y)
+        : x(vec1.x()), y(vec1.y()), z(vec2.x()), w(vec2.y())
     {}
 
 

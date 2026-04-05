@@ -172,8 +172,8 @@ namespace fgm
         // 0_0 1_0     x
         //           *
         // 0_1 1_1     y
-        return Vector2D<T>(elements[0][0] * vec.x + elements[1][0] * vec.y,
-                           elements[0][1] * vec.x + elements[1][1] * vec.y);
+        return Vector2D<T>(elements[0][0] * vec.x() + elements[1][0] * vec.y(),
+                           elements[0][1] * vec.x() + elements[1][1] * vec.y());
     }
 
     template <Arithmetic T>
@@ -274,13 +274,13 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*(const Vector2D<S>& vec, const Matrix2D<T>& mat)
     {
-        return Vector2D(vec.x * mat(0, 0) + vec.y * mat(1, 0), vec.x * mat(0, 1) + vec.y * mat(1, 1));
+        return Vector2D(vec.x() * mat(0, 0) + vec.y() * mat(1, 0), vec.x() * mat(0, 1) + vec.y() * mat(1, 1));
     }
 
     template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*=(Vector2D<S>& vec, const Matrix2D<T>& mat)
     {
-        vec = Vector2D(vec.x * mat(0, 0) + vec.y * mat(1, 0), vec.x * mat(0, 1) + vec.y * mat(1, 1));
+        vec = Vector2D(vec.x() * mat(0, 0) + vec.y() * mat(1, 0), vec.x() * mat(0, 1) + vec.y() * mat(1, 1));
         return vec;
     }
 } // namespace fgm

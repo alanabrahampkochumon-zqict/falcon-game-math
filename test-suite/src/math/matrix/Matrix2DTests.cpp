@@ -102,8 +102,8 @@ TEST(Matrix2D_Access, CanBeAccessedAsAVectorAtIndex)
     fgm::Vector2D vec = mat[1];
 
     // Assert
-    EXPECT_FLOAT_EQ(0.0f, vec.x);
-    EXPECT_FLOAT_EQ(1.0f, vec.y);
+    EXPECT_FLOAT_EQ(0.0f, vec.x());
+    EXPECT_FLOAT_EQ(1.0f, vec.y());
 }
 
 TEST(Matrix2D_Access, CanBeAccessedAsAValueAtRowColumn)

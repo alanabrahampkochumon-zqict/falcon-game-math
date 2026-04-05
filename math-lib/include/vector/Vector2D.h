@@ -1591,7 +1591,7 @@ namespace fgm
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
-            os << "<" << vector.x << ", " << vector.y << ">\n";
+            os << "<" << vector[0] << ", " << vector[1] << ">\n";
 
             os.precision(oldPrecision);
             os.flags(oldFlags);
@@ -1602,7 +1602,7 @@ namespace fgm
         /** @} */
 
     private:
-        T _elements[dimension];
+        T _data[dimension];
     };
 
 

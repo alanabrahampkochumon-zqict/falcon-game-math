@@ -85,8 +85,8 @@ TEST(Vector2DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 TEST(Vector2DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
     constexpr auto nan = fgm::vec2d::nan<float>;
-    EXPECT_TRUE(std::isnan(nan.x));
-    EXPECT_TRUE(std::isnan(nan.y));
+    EXPECT_TRUE(std::isnan(nan.x()));
+    EXPECT_TRUE(std::isnan(nan.y()));
 }
 
 
@@ -94,8 +94,8 @@ TEST(Vector2DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 TEST(Vector2DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
     constexpr auto nan = fgm::vec2d::nan<double>;
-    EXPECT_TRUE(std::isnan(nan.x));
-    EXPECT_TRUE(std::isnan(nan.y));
+    EXPECT_TRUE(std::isnan(nan.x()));
+    EXPECT_TRUE(std::isnan(nan.y()));
 }
 
 

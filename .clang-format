@@ -6,8 +6,8 @@ AlignConsecutiveMacros: "true"
 AlignConsecutiveAssignments: "false"
 AlignOperands: "false"
 AlignTrailingComments: "true"
-AllowShortBlocksOnASingleLine: Empty
-AllowShortFunctionsOnASingleLine: Empty
+AllowShortBlocksOnASingleLine: Always
+AllowShortFunctionsOnASingleLine: All
 AllowShortLambdasOnASingleLine: Empty
 AlwaysBreakBeforeMultilineStrings: "true"
 AlwaysBreakTemplateDeclarations: "Yes"
@@ -17,6 +17,7 @@ BraceWrapping:
     SplitEmptyFunction: false
     SplitEmptyRecord: false
     SplitEmptyNamespace: false
+    AfterFunction: false
 BreakBeforeTernaryOperators: "true"
 CompactNamespaces: "false"
 ConstructorInitializerAllOnOneLineOrOnePerLine: "true"
