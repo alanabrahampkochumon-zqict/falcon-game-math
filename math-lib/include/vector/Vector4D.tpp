@@ -270,15 +270,15 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T& Vector4D<T>::operator[](const std::size_t i) noexcept
+    constexpr T& Vector4D<T>::operator[](const std::size_t idx) noexcept
     {
-        return _data[i];
+        return _data[idx];
     }
 
     template <Arithmetic T>
-    constexpr T Vector4D<T>::operator[](const std::size_t i) const noexcept
+    constexpr T Vector4D<T>::operator[](const std::size_t idx) const noexcept
     {
-        return _data[i];
+        return _data[idx];
     }
 
 

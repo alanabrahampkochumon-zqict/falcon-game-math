@@ -204,21 +204,21 @@ namespace fgm
          * @brief Access the element at the specified location (read-only).
          *        Provide read-write access to the element.
          *
-         * @param[in] i The index of the vector component.
+         * @param[in] idx The index of the vector component.
          *
          * @return A reference to the vector component.
          */
-        constexpr T& operator[](std::size_t i) noexcept;
+        constexpr T& operator[](std::size_t idx) noexcept;
 
 
         /**
          * @brief Access the element at the specified location (read-only).
          *
-         * @param[in] i The index of the vector component.
+         * @param[in] idx The index of the vector component.
          *
          * @return A copy of the vector component.
          */
-        constexpr T operator[](std::size_t i) const noexcept;
+        constexpr T operator[](std::size_t idx) const noexcept;
 
         /** @} */
 
