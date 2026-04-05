@@ -16,13 +16,9 @@
 #include <cassert>
 #include <cmath>
 #include <type_traits>
-// REGEXES
-// ([\s*|\(])x([\s*|\)]) -> $1_data[0]$2
-// ([\s*|\(])y([\s*|\)]) -> $1_data[1]$2
-// ([\s*|\(])z([\s*|\)]) -> $1_data[2]$2
-// ([\s*|\(])w([\s*|\)]) -> $1_data[3]$2
-// rhs[0] -> rhs[0]
-// rhs[1] -> rhs[1]
+
+
+
 namespace fgm
 {
 
