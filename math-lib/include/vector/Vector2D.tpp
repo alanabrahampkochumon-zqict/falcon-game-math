@@ -138,7 +138,15 @@ namespace fgm
     template <std::size_t... Indices>
     constexpr auto Vector2D<T>::swizzle() const noexcept
     {
-        return *this;
+        constexpr std::size_t swizzleDimension = sizeof...(Indices);
+
+        static_assert(((Indices < dimension) && ...), "Index out of bounds!");
+        static_assert(swizzleDimension > 0 && swizzleDimension <= dimension &&
+                      "Swizzle must return a scalar, or a 2D vector.");
+        if constexpr (swizzleDimension == 2)
+            return Vector2D(_data[Indices]...);
+        else
+            return T(_data[Indices]...);
     }
 
 
