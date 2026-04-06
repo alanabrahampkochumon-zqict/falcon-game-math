@@ -45,7 +45,7 @@
 
 
 /**
- * @brief Statically verify that the swizzle variadic template of @ref std::Vector4D returns correct vectors 
+ * @brief Statically verify that the swizzle variadic template of @ref std::Vector4D returns correct vectors
  *        for axis coordinates.
  */
 namespace
@@ -223,5 +223,40 @@ namespace
     static_assert(VECTOR.swizzle<Q>() == 4.0f);
 
 } // namespace
+
+
+/**
+ * @brief Test fixture for @ref fgm::Vector4D swizzling,
+ *        for verifying swizzling across different types.
+ */
+template <typename T>
+class Vector4DSwizzlingTest: public ::testing::Test
+{};
+TYPED_TEST_SUITE(Vector4DSwizzlingTest, SupportedArithmeticTypes);
+
+
+
+/** @brief Verify that swizzling returns shuffled vector across different numeric. */
+TYPED_TEST(Vector4DSwizzlingTest, SwizzlingWorksAcrossDifferentTypes)
+{
+    constexpr fgm::Vector4D vector(TypeParam(1), TypeParam(2), TypeParam(3), TypeParam(4));
+    constexpr fgm::Vector4D expectedSwizzling(TypeParam(4), TypeParam(3), TypeParam(2), TypeParam(1));
+    
+    constexpr auto swizzledVector = vector.template swizzle<W, Z, Y, X>();
+
+    EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
+}
+
+/** @brief Verify that swizzling returns shuffled vector for boolean vector. */
+TEST(Vector4DSwizzlingTest, SwizzlingWorksForBooleanVector)
+{
+    constexpr fgm::Vector4D vector(true, true, false, false);
+    constexpr fgm::Vector4D expectedSwizzling(false, false, true, true);
+
+    constexpr auto swizzledVector = vector.swizzle<W, Z, Y, X>();
+
+    EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
+}
+
 
 /** @} */
