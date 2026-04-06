@@ -49,6 +49,7 @@
              *   @defgroup FGM_Vec2_Log String Representation
              *   @defgroup FGM_Vec2_Const Vector Constants
              *   @defgroup FGM_Vec2_Utils Vector Utilities
+             *   @defgroup FGM_Vec2_Swizzle Vector Swizzling
              * @}
              */
 
@@ -70,6 +71,7 @@
              *   @defgroup FGM_Vec3_Log String Representation
              *   @defgroup FGM_Vec3_Const Vector Constants
              *   @defgroup FGM_Vec3_Utils Vector Utilities
+             *   @defgroup FGM_Vec3_Swizzle Vector Swizzling
              * @}
              */
 
@@ -91,6 +93,7 @@
              *   @defgroup FGM_Vec4_Log String Representation
              *   @defgroup FGM_Vec4_Const Vector Constants
              *   @defgroup FGM_Vec4_Utils Vector Utilities
+             *   @defgroup FGM_Vec4_Swizzle Vector Swizzling
              * @}
              */
 

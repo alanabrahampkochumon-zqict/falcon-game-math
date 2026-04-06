@@ -31,6 +31,7 @@
 #include <cstddef>
 #include <iomanip>
 #include <ostream>
+#include <variant>
 
 
 
@@ -336,6 +337,31 @@ namespace fgm
          * @return A copy of the vector component.
          */
         constexpr T operator[](std::size_t idx) const noexcept;
+
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Vec4_Swizzle
+         * @{
+         */
+
+        /**
+         * @brief Constructs a new vector by rearranging, duplicating, or isolating components of the current vector.
+         * 
+         * @note Bounds checking for the provided indices is strictly enforced at compile-time.
+         *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime overhead.
+         *
+         * @tparam Indices The component indices used to construct the new vector.
+         *                 @see @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *
+         * @return A new vector containing the requested components or the component if @p Indices is 1.
+         *         The dimension of the returned vector perfectly matches the number of indices provided.
+         */
+        template <std::size_t... Indices>
+        [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
+        constexpr auto swizzle() const noexcept;
 
         /** @} */
 
