@@ -134,7 +134,12 @@ namespace fgm
         return _data[idx];
     }
 
-
+    template <Arithmetic T>
+    template <std::size_t... Indices>
+    constexpr auto Vector2D<T>::swizzle() const noexcept
+    {
+        return *this;
+    }
 
 
     /***************************************
