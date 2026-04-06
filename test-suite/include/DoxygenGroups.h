@@ -61,6 +61,7 @@
              *   @defgroup T_FGM_Vec2_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Vec2_Inversion Unary Inversion(-)
              *   @defgroup T_FGM_Vec2_Utils Vector Utilities
+             *   @defgroup T_FGM_Vec2_Swizzle Vector Swizzling
              * @}
              */
 
@@ -95,6 +96,7 @@
              *   @defgroup T_FGM_Vec3_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Vec3_Inversion Unary Inversion(-)
              *   @defgroup T_FGM_Vec3_Utils Vector Utilities
+             *   @defgroup T_FGM_Vec3_Swizzle Vector Swizzling
              * @}
              */
 
@@ -129,6 +131,7 @@
              *   @defgroup T_FGM_Vec4_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Vec4_Inversion Unary Inversion(-)
              *   @defgroup T_FGM_Vec4_Utils Vector Utilities
+             *   @defgroup T_FGM_Vec4_Swizzle Vector Swizzling
              * @}
              */
 
