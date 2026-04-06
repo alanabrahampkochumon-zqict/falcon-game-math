@@ -191,6 +191,12 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <std::size_t... Indices>
+    constexpr auto Vector3D<T>::swizzle() const noexcept
+    {
+        return *this;
+    }
 
 
     /***************************************
