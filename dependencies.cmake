@@ -17,6 +17,8 @@ set_target_properties(
     gtest gtest_main gmock gmock_main
     PROPERTIES FOLDER "Google Test"
 )
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
 
 set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 

@@ -38,40 +38,6 @@ namespace
     constexpr fgm::Vector3D VECTOR(1.0f, 2.0f, 3.0f);
 
     using namespace fgm::axis;
-    static_assert(VECTOR.swizzle<X, Y, Z, W>().x() == 1.0f);
-    static_assert(VECTOR.swizzle<X, Y, Z, W>().y() == 2.0f);
-    static_assert(VECTOR.swizzle<X, Y, Z, W>().z() == 3.0f);
-    static_assert(VECTOR.swizzle<X, Y, Z, W>().w() == 0.0f);
-
-    static_assert(VECTOR.swizzle<X, X, Y, Y>().x() == 1.0f);
-    static_assert(VECTOR.swizzle<X, X, Y, Y>().y() == 1.0f);
-    static_assert(VECTOR.swizzle<X, X, Y, Y>().z() == 2.0f);
-    static_assert(VECTOR.swizzle<X, X, Y, Y>().w() == 2.0f);
-
-    static_assert(VECTOR.swizzle<X, X, X, Y>().x() == 1.0f);
-    static_assert(VECTOR.swizzle<X, X, X, Y>().y() == 1.0f);
-    static_assert(VECTOR.swizzle<X, X, X, Y>().z() == 1.0f);
-    static_assert(VECTOR.swizzle<X, X, X, Y>().w() == 2.0f);
-
-    static_assert(VECTOR.swizzle<X, X, X, X>().x() == 1.0f);
-    static_assert(VECTOR.swizzle<X, X, X, X>().y() == 1.0f);
-    static_assert(VECTOR.swizzle<X, X, X, X>().z() == 1.0f);
-    static_assert(VECTOR.swizzle<X, X, X, X>().w() == 1.0f);
-
-    static_assert(VECTOR.swizzle<Y, Y, Z, Z>().x() == 2.0f);
-    static_assert(VECTOR.swizzle<Y, Y, Z, Z>().y() == 2.0f);
-    static_assert(VECTOR.swizzle<Y, Y, Z, Z>().z() == 3.0f);
-    static_assert(VECTOR.swizzle<Y, Y, Z, Z>().w() == 3.0f);
-
-    static_assert(VECTOR.swizzle<W, Z, Y, X>().x() == 0.0f);
-    static_assert(VECTOR.swizzle<W, Z, Y, X>().y() == 3.0f);
-    static_assert(VECTOR.swizzle<W, Z, Y, X>().z() == 2.0f);
-    static_assert(VECTOR.swizzle<W, Z, Y, X>().w() == 1.0f);
-
-    static_assert(VECTOR.swizzle<Z, W, Y, X>().x() == 3.0f);
-    static_assert(VECTOR.swizzle<Z, W, Y, X>().y() == 0.0f);
-    static_assert(VECTOR.swizzle<Z, W, Y, X>().z() == 2.0f);
-    static_assert(VECTOR.swizzle<Z, W, Y, X>().w() == 1.0f);
 
     static_assert(VECTOR.swizzle<X, Y, Z>().x() == 1.0f);
     static_assert(VECTOR.swizzle<X, Y, Z>().y() == 2.0f);
@@ -93,10 +59,6 @@ namespace
     static_assert(VECTOR.swizzle<Y, Y, Z>().y() == 2.0f);
     static_assert(VECTOR.swizzle<Y, Y, Z>().z() == 3.0f);
 
-    static_assert(VECTOR.swizzle<W, Z, Y>().x() == 0.0f);
-    static_assert(VECTOR.swizzle<W, Z, Y>().y() == 3.0f);
-    static_assert(VECTOR.swizzle<W, Z, Y>().z() == 2.0f);
-
     static_assert(VECTOR.swizzle<Z, Y, X>().x() == 3.0f);
     static_assert(VECTOR.swizzle<Z, Y, X>().y() == 2.0f);
     static_assert(VECTOR.swizzle<Z, Y, X>().z() == 1.0f);
@@ -110,16 +72,12 @@ namespace
     static_assert(VECTOR.swizzle<Y, Y>().x() == 2.0f);
     static_assert(VECTOR.swizzle<Y, Y>().y() == 2.0f);
 
-    static_assert(VECTOR.swizzle<W, Z>().x() == 0.0f);
-    static_assert(VECTOR.swizzle<W, Z>().y() == 3.0f);
-
     static_assert(VECTOR.swizzle<Y, X>().x() == 2.0f);
     static_assert(VECTOR.swizzle<Y, X>().y() == 1.0f);
 
     static_assert(VECTOR.swizzle<X>() == 1.0f);
     static_assert(VECTOR.swizzle<Y>() == 2.0f);
     static_assert(VECTOR.swizzle<Z>() == 3.0f);
-    static_assert(VECTOR.swizzle<W>() == 0.0f);
 
 } // namespace
 
@@ -131,38 +89,24 @@ namespace
 namespace
 {
     using namespace fgm::colors;
-    static_assert(VECTOR.swizzle<R, G, B, A>().r() == 1.0f);
-    static_assert(VECTOR.swizzle<R, G, B, A>().g() == 2.0f);
-    static_assert(VECTOR.swizzle<R, G, B, A>().b() == 3.0f);
-    static_assert(VECTOR.swizzle<R, G, B, A>().a() == 0.0f);
-
-    static_assert(VECTOR.swizzle<A, B, G, R>().r() == 0.0f);
-    static_assert(VECTOR.swizzle<A, B, G, R>().g() == 3.0f);
-    static_assert(VECTOR.swizzle<A, B, G, R>().b() == 2.0f);
-    static_assert(VECTOR.swizzle<A, B, G, R>().a() == 1.0f);
 
     static_assert(VECTOR.swizzle<R, G, B>().r() == 1.0f);
     static_assert(VECTOR.swizzle<R, G, B>().g() == 2.0f);
     static_assert(VECTOR.swizzle<R, G, B>().b() == 3.0f);
 
-    static_assert(VECTOR.swizzle<A, B, G>().r() == 0.0f);
-    static_assert(VECTOR.swizzle<A, B, G>().g() == 3.0f);
-    static_assert(VECTOR.swizzle<A, B, G>().b() == 2.0f);
+    static_assert(VECTOR.swizzle<B, G, R>().r() == 3.0f);
+    static_assert(VECTOR.swizzle<B, G, R>().g() == 2.0f);
+    static_assert(VECTOR.swizzle<B, G, R>().b() == 1.0f);
 
     static_assert(VECTOR.swizzle<R, G>().r() == 1.0f);
     static_assert(VECTOR.swizzle<R, G>().g() == 2.0f);
-    static_assert(VECTOR.swizzle<B, A>().r() == 3.0f);
-    static_assert(VECTOR.swizzle<B, A>().g() == 0.0f);
 
-    static_assert(VECTOR.swizzle<A, B>().r() == 0.0f);
-    static_assert(VECTOR.swizzle<A, B>().g() == 3.0f);
     static_assert(VECTOR.swizzle<G, R>().r() == 2.0f);
     static_assert(VECTOR.swizzle<G, R>().g() == 1.0f);
 
     static_assert(VECTOR.swizzle<R>() == 1.0f);
     static_assert(VECTOR.swizzle<G>() == 2.0f);
     static_assert(VECTOR.swizzle<B>() == 3.0f);
-    static_assert(VECTOR.swizzle<A>() == 0.0f);
 
 } // namespace
 
@@ -174,38 +118,24 @@ namespace
 namespace
 {
     using namespace fgm::stp;
-    static_assert(VECTOR.swizzle<S, T, P, Q>().s() == 1.0f);
-    static_assert(VECTOR.swizzle<S, T, P, Q>().t() == 2.0f);
-    static_assert(VECTOR.swizzle<S, T, P, Q>().p() == 3.0f);
-    static_assert(VECTOR.swizzle<S, T, P, Q>().q() == 0.0f);
-
-    static_assert(VECTOR.swizzle<Q, P, T, S>().s() == 0.0f);
-    static_assert(VECTOR.swizzle<Q, P, T, S>().t() == 3.0f);
-    static_assert(VECTOR.swizzle<Q, P, T, S>().p() == 2.0f);
-    static_assert(VECTOR.swizzle<Q, P, T, S>().q() == 1.0f);
 
     static_assert(VECTOR.swizzle<S, T, P>().s() == 1.0f);
     static_assert(VECTOR.swizzle<S, T, P>().t() == 2.0f);
     static_assert(VECTOR.swizzle<S, T, P>().p() == 3.0f);
 
-    static_assert(VECTOR.swizzle<Q, P, T>().s() == 0.0f);
-    static_assert(VECTOR.swizzle<Q, P, T>().t() == 3.0f);
-    static_assert(VECTOR.swizzle<Q, P, T>().p() == 2.0f);
+    static_assert(VECTOR.swizzle<P, T, S>().s() == 3.0f);
+    static_assert(VECTOR.swizzle<P, T, S>().t() == 2.0f);
+    static_assert(VECTOR.swizzle<P, T, S>().p() == 1.0f);
 
     static_assert(VECTOR.swizzle<S, T>().s() == 1.0f);
     static_assert(VECTOR.swizzle<S, T>().t() == 2.0f);
-    static_assert(VECTOR.swizzle<P, Q>().s() == 3.0f);
-    static_assert(VECTOR.swizzle<P, Q>().t() == 0.0f);
 
-    static_assert(VECTOR.swizzle<Q, P>().s() == 0.0f);
-    static_assert(VECTOR.swizzle<Q, P>().t() == 3.0f);
     static_assert(VECTOR.swizzle<T, S>().s() == 2.0f);
     static_assert(VECTOR.swizzle<T, S>().t() == 1.0f);
 
     static_assert(VECTOR.swizzle<S>() == 1.0f);
     static_assert(VECTOR.swizzle<T>() == 2.0f);
     static_assert(VECTOR.swizzle<P>() == 3.0f);
-    static_assert(VECTOR.swizzle<Q>() == 0.0f);
 
 } // namespace
 
