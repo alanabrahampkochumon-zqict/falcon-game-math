@@ -1,5 +1,5 @@
 /**
- * @file Swizzling.cpp
+ * @file SwizzlingTests.cpp
  * @author Alan Abraham P Kochumon
  * @date Created on: April 06, 2026
  *
@@ -24,7 +24,7 @@ TYPED_TEST_SUITE(Vector3DSwizzlingTest, SupportedArithmeticTypes);
 
 
 /**
- * @addtogroup T_FGM_Vec4_Swizzle
+ * @addtogroup T_FGM_Vec2_Swizzle
  * @{
  */
 
