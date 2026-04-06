@@ -12,7 +12,7 @@ set(Vector4DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;B
 list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDir})
 
 set(Vector3DTestDir "src/math/vectors/vector3d/")
-set(Vector3DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;")
+set(Vector3DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;SwizzlingTests.cpp;")
 list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDir})
 
 set(Vector2DTestDir "src/math/vectors/vector2d/")

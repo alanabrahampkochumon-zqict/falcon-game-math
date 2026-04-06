@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 06, 2026
  *
- * @brief Verifies @ref fgm::Vector4D swizzling logic.
+ * @brief Verifies @ref fgm::Vector3D swizzling logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -13,21 +13,36 @@
 
 
 
-/**
- * @brief Test fixture for @ref fgm::Vector4D swizzling,
- *        for verifying swizzling across different types.
- */
-template <typename T>
-class Vector4DSwizzlingTest: public ::testing::Test
-{};
-TYPED_TEST_SUITE(Vector4DSwizzlingTest, SupportedArithmeticTypes);
-
-
+// template <fgm::Arithmetic T, typename U>
+//     requires fgm::Arithmetic<U> || fgm::Vector<U>
+// struct Vector4DSwizzlingParams
+//{
+//     fgm::Vector4D<T> VECTOR;
+//     U swizzledResult;
+// };
+//
+///** @brief Test fixture for testing @fgm::Vector4D swizzling, paramterized by @ref Vec
+// class Vector4DToVector4DSwizzleTests
+//     : public ::testing::TestWithParam<Vector4DSwizzlingParams<float, fgm::Vector4D<float>>>
+//{};
+//
+// class Vector4DToVector3DSwizzleTests
+//     : public ::testing::TestWithParam<Vector4DSwizzlingParams<float, fgm::Vector4D<float>>>
+//{};
+//
+// class Vector4DToVector2DSwizzleTests
+//     : public ::testing::TestWithParam<Vector4DSwizzlingParams<float, fgm::Vector4D<float>>>
+//{};
+//
+// class Vector4DToScalarSwizzleTests
+//     : public ::testing::TestWithParam<Vector4DSwizzlingParams<float, fgm::Vector4D<float>>>
+//{};
 
 /**
  * @addtogroup T_FGM_Vec4_Swizzle
  * @{
  */
+
 
 /**
  * @brief Statically verify that the swizzle variadic template of @ref std::Vector4D returns correct vectors
@@ -210,6 +225,17 @@ namespace
 } // namespace
 
 
+/**
+ * @brief Test fixture for @ref fgm::Vector4D swizzling,
+ *        for verifying swizzling across different types.
+ */
+template <typename T>
+class Vector4DSwizzlingTest: public ::testing::Test
+{};
+TYPED_TEST_SUITE(Vector4DSwizzlingTest, SupportedArithmeticTypes);
+
+
+
 /** @brief Verify that swizzling returns shuffled vector across different numeric. */
 TYPED_TEST(Vector4DSwizzlingTest, SwizzlingWorksAcrossDifferentTypes)
 {
@@ -220,7 +246,6 @@ TYPED_TEST(Vector4DSwizzlingTest, SwizzlingWorksAcrossDifferentTypes)
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }
-
 
 /** @brief Verify that swizzling returns shuffled vector for boolean vector. */
 TEST(Vector4DSwizzlingTest, SwizzlingWorksForBooleanVector)
