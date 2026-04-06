@@ -35,6 +35,33 @@ namespace fgm::constants
 
 } // namespace fgm::constants
 
+
+namespace fgm::axis
+{
+    inline constexpr std::size_t X = 0; ///< Alias for x-coordinate
+    inline constexpr std::size_t Y = 1; ///< Alias for y-coordinate
+    inline constexpr std::size_t Z = 2; ///< Alias for z-coordinate
+    inline constexpr std::size_t W = 3; ///< Alias for w-coordinate
+} // namespace fgm::axis
+
+
+namespace fgm::colors
+{
+    inline constexpr std::size_t R = 0; ///< Alias for red channel
+    inline constexpr std::size_t G = 1; ///< Alias for green channel
+    inline constexpr std::size_t B = 2; ///< Alias for blue channel
+    inline constexpr std::size_t A = 3; ///< Alias for alpha channel
+} // namespace fgm::colors
+
+
+namespace fgm::stp
+{
+    inline constexpr std::size_t S = 0; ///< Alias for s-coordinate
+    inline constexpr std::size_t T = 1; ///< Alias for t-coordinate
+    inline constexpr std::size_t P = 2; ///< Alias for p-coordinate
+    inline constexpr std::size_t Q = 3; ///< Alias for q-coordinate
+} // namespace fgm::stp
+
 /**
  * @}
  */
