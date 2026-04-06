@@ -33,6 +33,9 @@ namespace fgm::constants
     /** @brief Quiet Not-a-Number for double-precision floats. */
     static constexpr double NaN_D = std::numeric_limits<double>::quiet_NaN();
 
+    /** @brief The maximum possible swizzling dimension allowable for @ref fgm::Vector. */
+    inline constexpr std::size_t MAX_VECTOR_SWIZZLE_DIMENSION = 4;
+
 } // namespace fgm::constants
 
 

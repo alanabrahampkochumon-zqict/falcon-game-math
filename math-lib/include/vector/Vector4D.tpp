@@ -12,6 +12,7 @@
 
 
 #include "Vector4D.h"
+#include "Vector4D.h"
 
 #include <cassert>
 #include <cmath>
@@ -282,7 +283,20 @@ namespace fgm
     template <std::size_t... Indices>
     constexpr auto Vector4D<T>::swizzle() const noexcept
     {
-        return *this;
+        constexpr std::size_t swizzleDimension = sizeof...(Indices);
+
+        static_assert(((Indices < dimension) && ...), "Index out of bounds!");
+        static_assert(swizzleDimension > 0 && swizzleDimension <= constants::MAX_VECTOR_SWIZZLE_DIMENSION &&
+                      "Swizzle must return a scalar, or a 2D, 3D, or 4D vector.");
+
+        if constexpr (swizzleDimension == 4)
+            return Vector4D(_data[Indices]...);
+        else if constexpr (swizzleDimension == 3)
+            return Vector3D(_data[Indices]...);
+        else if constexpr (swizzleDimension == 2)
+            return Vector2D(_data[Indices]...);
+        else
+            return T(_data[Indices]...);
     }
 
 
