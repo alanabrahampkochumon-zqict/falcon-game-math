@@ -24,13 +24,12 @@ TYPED_TEST_SUITE(Vector3DSwizzlingTest, SupportedArithmeticTypes);
 
 
 /**
- * @addtogroup T_FGM_Vec2_Swizzle
+ * @addtogroup T_FGM_Vec3_Swizzle
  * @{
  */
 
-
 /**
- * @brief Statically verify that the swizzle variadic template of @ref std::Vector3D returns correct vectors
+ * @brief Statically verify that the static variant of swizzle variadic template returns correct vectors
  *        for axis coordinates.
  */
 namespace
@@ -83,7 +82,7 @@ namespace
 
 
 /**
- * @brief Statically verify that the swizzle variadic template of @ref std::Vector3D returns correct vectors
+ * @brief Statically verify that the static variant of swizzle variadic template returns correct vectors
  *        for color coordinates.
  */
 namespace
@@ -112,7 +111,7 @@ namespace
 
 
 /**
- * @brief Statically verify that the swizzle variadic template of @ref std::Vector3D returns correct vectors
+ * @brief Statically verify that the static variant of swizzle variadic template returns correct vectors
  *        for STP coordinates.
  */
 namespace
@@ -145,7 +144,7 @@ TYPED_TEST(Vector3DSwizzlingTest, SwizzlingWorksAcrossDifferentTypes)
 {
     constexpr fgm::Vector3D vector(TypeParam(1), TypeParam(2), TypeParam(3));
     constexpr fgm::Vector3D expectedSwizzling(TypeParam(3), TypeParam(2), TypeParam(1));
-    
+
     constexpr auto swizzledVector = vector.template swizzle<Z, Y, X>();
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
@@ -163,5 +162,137 @@ TEST(Vector3DSwizzlingTest, SwizzlingWorksForBooleanVector)
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }
 
+
+/**
+ * @brief Statically verify that the swizzle variadic template returns correct vectors
+ *        for axis coordinates.
+ */
+namespace
+{
+    using namespace fgm::axis;
+
+    static_assert(fgm::Vector3D<float>::swizzle<X, Y, Z>(VECTOR).x() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, Y, Z>(VECTOR).y() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, Y, Z>(VECTOR).z() == 3.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<X, Y, Y>(VECTOR).x() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, Y, Y>(VECTOR).y() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, Y, Y>(VECTOR).z() == 2.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<X, X, Y>(VECTOR).x() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, X, Y>(VECTOR).y() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, X, Y>(VECTOR).z() == 2.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<X, X, X>(VECTOR).x() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, X, X>(VECTOR).y() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, X, X>(VECTOR).z() == 1.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<Y, Y, Z>(VECTOR).x() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<Y, Y, Z>(VECTOR).y() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<Y, Y, Z>(VECTOR).z() == 3.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<Z, Y, X>(VECTOR).x() == 3.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<Z, Y, X>(VECTOR).y() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<Z, Y, X>(VECTOR).z() == 1.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<X, Y>(VECTOR).x() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, Y>(VECTOR).y() == 2.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<X, X>(VECTOR).x() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<X, X>(VECTOR).y() == 1.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<Y, Y>(VECTOR).x() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<Y, Y>(VECTOR).y() == 2.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<Y, X>(VECTOR).x() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<Y, X>(VECTOR).y() == 1.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<X>(VECTOR) == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<Y>(VECTOR) == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<Z>(VECTOR) == 3.0f);
+
+} // namespace
+
+
+/**
+ * @brief Statically verify that the swizzle variadic template returns correct vectors
+ *        for color coordinates.
+ */
+namespace
+{
+    using namespace fgm::colors;
+
+    static_assert(fgm::Vector3D<float>::swizzle<R, G, B>(VECTOR).r() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<R, G, B>(VECTOR).g() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<R, G, B>(VECTOR).b() == 3.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<B, G, R>(VECTOR).r() == 3.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<B, G, R>(VECTOR).g() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<B, G, R>(VECTOR).b() == 1.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<R, G>(VECTOR).r() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<R, G>(VECTOR).g() == 2.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<G, R>(VECTOR).r() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<G, R>(VECTOR).g() == 1.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<R>(VECTOR) == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<G>(VECTOR) == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<B>(VECTOR) == 3.0f);
+
+} // namespace
+
+
+/**
+ * @brief Statically verify that the swizzle variadic template returns correct vectors
+ *        for STP coordinates.
+ */
+namespace
+{
+    using namespace fgm::stp;
+
+    static_assert(fgm::Vector3D<float>::swizzle<S, T, P>(VECTOR).s() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<S, T, P>(VECTOR).t() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<S, T, P>(VECTOR).p() == 3.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<P, T, S>(VECTOR).s() == 3.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<P, T, S>(VECTOR).t() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<P, T, S>(VECTOR).p() == 1.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<S, T>(VECTOR).s() == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<S, T>(VECTOR).t() == 2.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<T, S>(VECTOR).s() == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<T, S>(VECTOR).t() == 1.0f);
+
+    static_assert(fgm::Vector3D<float>::swizzle<S>(VECTOR) == 1.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<T>(VECTOR) == 2.0f);
+    static_assert(fgm::Vector3D<float>::swizzle<P>(VECTOR) == 3.0f);
+
+} // namespace
+
+
+/** @brief Verify that static variant of swizzling returns shuffled vector across different numeric. */
+TYPED_TEST(Vector3DSwizzlingTest, StaticVariant_SwizzlingWorksAcrossDifferentTypes)
+{
+    constexpr fgm::Vector3D vector(TypeParam(1), TypeParam(2), TypeParam(3));
+    constexpr fgm::Vector3D expectedSwizzling(TypeParam(3), TypeParam(2), TypeParam(1));
+
+    constexpr auto swizzledVector = fgm::Vector3D<TypeParam>::template swizzle<Z, Y, X>(vector);
+
+    EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
+}
+
+
+/** @brief Verify that static variant of swizzling returns shuffled vector for boolean vector. */
+TEST(Vector3DSwizzlingTest, StaticVariant_SwizzlingWorksForBooleanVector)
+{
+    constexpr fgm::Vector3D vector(true, false, false);
+    constexpr fgm::Vector3D expectedSwizzling(false, false, true);
+
+    constexpr auto swizzledVector = fgm::Vector3D<bool>::swizzle<Z, Y, X>(vector);
+
+    EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
+}
 
 /** @} */

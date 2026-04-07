@@ -30,8 +30,8 @@ TYPED_TEST_SUITE(Vector2DSwizzlingTest, SupportedArithmeticTypes);
 
 
 /**
- * @brief Statically verify that the swizzle variadic template of @ref std::Vector2D returns correct vectors
- *        for axis coordinates.
+ * @brief Statically verify that the swizzle variadic template
+ *        returns correct vectors for spatial axis coordinates.
  */
 namespace
 {
@@ -58,8 +58,8 @@ namespace
 
 
 /**
- * @brief Statically verify that the swizzle variadic template of @ref std::Vector2D returns correct vectors
- *        for color coordinates.
+ * @brief Statically verify that the swizzle variadic template
+ *        returns correct vectors for color coordinates.
  */
 namespace
 {
@@ -75,8 +75,8 @@ namespace
 
 
 /**
- * @brief Statically verify that the swizzle variadic template of @ref std::Vector2D returns correct vectors
- *        for STP coordinates.
+ * @brief Statically verify that the swizzle variadic template
+ *        returns correct vectors for STP coordinates.
  */
 namespace
 {
