@@ -246,6 +246,26 @@ namespace fgm
         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
         constexpr auto swizzle() const noexcept;
 
+
+        /**
+         * @brief Constructs a new vector by rearranging, duplicating, or isolating components of the given vector.
+         *
+         * @note Bounds checking for the provided indices is strictly enforced at compile-time.
+         *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime
+         *       overhead.
+         *
+         * @tparam Indices The component indices used to construct the new vector.
+         *                 @see @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *
+         * @param vec The vector to shuffle, rearrange or isolate components.
+         *
+         * @return A new vector containing the requested components or the component if @p Indices is 1.
+         *         The dimension of the returned vector perfectly matches the number of indices provided.
+         */
+        template <std::size_t... Indices>
+        [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
+        static constexpr auto swizzle(const Vector2D& vec) noexcept;
+
         /** @} */
 
 
