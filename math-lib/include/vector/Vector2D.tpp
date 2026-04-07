@@ -385,21 +385,24 @@ namespace fgm
      ***************************************/
 
     template <Arithmetic T>
-    constexpr Vector2D<bool> Vector2D<T>::operator&(const Vector2D<bool>& rhs) const noexcept
+    constexpr Vector2D<T> Vector2D<T>::operator&(const Vector2D& rhs) const noexcept 
         requires std::is_same_v<T, bool>
     {
         return Vector2D(_data[0] & rhs[0], _data[1] & rhs[1]);
     }
 
 
-    constexpr Vector2D<bool>& Vector2D<bool>::operator&=(const Vector2D<bool>& rhs) noexcept {
+    template <Arithmetic T>
+    constexpr Vector2D<T>& Vector2D<T>::operator&=(const Vector2D& rhs) noexcept
+        requires std::is_same_v<T, bool>
+    {
         (*this) = (*this) & rhs;
         return *this;
     }
 
 
     template <Arithmetic T>
-    constexpr Vector2D<bool> Vector2D<T>::operator|(const Vector2D<bool>& rhs) const noexcept
+    constexpr Vector2D<T> Vector2D<T>::operator|(const Vector2D& rhs) const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector2D(_data[0] | rhs[0], _data[1] | rhs[1]);
@@ -407,14 +410,16 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector2D<bool>& Vector2D<T>::operator|=(const Vector2D<bool>& rhs) noexcept {
+    constexpr Vector2D<T>& Vector2D<T>::operator|=(const Vector2D& rhs) noexcept
+        requires std::is_same_v<T, bool>
+    {
         (*this) = (*this) & rhs;
         return *this;
     }
 
 
     template <Arithmetic T>
-    constexpr Vector2D<bool> Vector2D<T>::operator!() const noexcept
+    constexpr Vector2D<T> Vector2D<T>::operator!() const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector2D(!_data[0], !_data[1]);

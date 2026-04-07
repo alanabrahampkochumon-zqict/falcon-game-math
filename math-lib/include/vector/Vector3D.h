@@ -746,7 +746,7 @@ namespace fgm
          *
          * @return A @ref Vector3D<bool> mask containing the results of component-wise AND.
          */
-        [[nodiscard]] constexpr Vector3D<bool> operator&(const Vector3D<bool>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<T> operator&(const Vector3D& rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -760,7 +760,7 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector3D<bool>& operator&=(const Vector3D<bool>& rhs) noexcept;
+        constexpr Vector3D<T>& operator&=(const Vector3D& rhs) noexcept requires std::is_same_v<T, bool>;
 
 
         /**
@@ -773,7 +773,7 @@ namespace fgm
          *
          * @return A @ref Vector3D<bool> mask containing the results of component-wise OR.
          */
-        [[nodiscard]] constexpr Vector3D<bool> operator|(const Vector3D<bool>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<T> operator|(const Vector3D& rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -787,7 +787,8 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector3D<bool>& operator|=(const Vector3D<bool>& rhs) noexcept;
+        constexpr Vector3D<T>& operator|=(const Vector3D& rhs) noexcept
+            requires std::is_same_v<T, bool>;
 
 
         /**
@@ -798,7 +799,7 @@ namespace fgm
          *
          * @return A @ref Vector3D<bool> with inverted values.
          */
-        [[nodiscard]] constexpr Vector3D<bool> operator!() const noexcept
+        [[nodiscard]] constexpr Vector3D<T> operator!() const noexcept
             requires std::is_same_v<T, bool>;
 
         /** @} */

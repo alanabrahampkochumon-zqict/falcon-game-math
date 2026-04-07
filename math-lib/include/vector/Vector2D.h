@@ -688,7 +688,7 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of component-wise AND.
          */
-        [[nodiscard]] constexpr Vector2D<bool> operator&(const Vector2D<bool>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector2D operator&(const Vector2D& rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -702,7 +702,8 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector2D<bool>& operator&=(const Vector2D<bool>& rhs) noexcept;
+        constexpr Vector2D& operator&=(const Vector2D& rhs) noexcept
+            requires std::is_same_v<T, bool>;
 
 
         /**
@@ -715,7 +716,7 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of component-wise OR.
          */
-        [[nodiscard]] constexpr Vector2D<bool> operator|(const Vector2D<bool>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector2D operator|(const Vector2D& rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -729,7 +730,8 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector2D<bool>& operator|=(const Vector2D<bool>& rhs) noexcept;
+        constexpr Vector2D& operator|=(const Vector2D& rhs) noexcept
+            requires std::is_same_v<T, bool>;
 
 
         /**
@@ -740,7 +742,7 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> with inverted values.
          */
-        [[nodiscard]] constexpr Vector2D<bool> operator!() const noexcept
+        [[nodiscard]] constexpr Vector2D operator!() const noexcept
             requires std::is_same_v<T, bool>;
 
         /** @} */

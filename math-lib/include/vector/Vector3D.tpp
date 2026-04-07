@@ -23,7 +23,8 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector3D<T>::Vector3D() noexcept {
+    constexpr Vector3D<T>::Vector3D() noexcept
+    {
         _data[0] = T(0);
         _data[1] = T(0);
         _data[2] = T(0);
@@ -31,7 +32,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector3D<T>::Vector3D(T v1, T v2, T v3) noexcept {
+    constexpr Vector3D<T>::Vector3D(T v1, T v2, T v3) noexcept
+    {
         _data[0] = v1;
         _data[1] = v2;
         _data[2] = v3;
@@ -39,7 +41,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector3D<T>::Vector3D(Vector2D<T> vec, T v) noexcept {
+    constexpr Vector3D<T>::Vector3D(Vector2D<T> vec, T v) noexcept
+    {
         _data[0] = vec[0];
         _data[1] = vec[1];
         _data[2] = v;
@@ -47,7 +50,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector3D<T>::Vector3D(T v, Vector2D<T> vec) noexcept {
+    constexpr Vector3D<T>::Vector3D(T v, Vector2D<T> vec) noexcept
+    {
         _data[0] = v;
         _data[1] = vec[0];
         _data[2] = vec[1];
@@ -56,7 +60,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Vector3D<T>::Vector3D(const Vector3D<U>& other) noexcept {
+    constexpr Vector3D<T>::Vector3D(const Vector3D<U>& other) noexcept
+    {
         _data[0] = static_cast<T>(other[0]);
         _data[1] = static_cast<T>(other[1]);
         _data[2] = static_cast<T>(other[2]);
@@ -72,121 +77,141 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::x() const noexcept {
+    constexpr T Vector3D<T>::x() const noexcept
+    {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::x() noexcept {
+    constexpr T& Vector3D<T>::x() noexcept
+    {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::y() const noexcept {
+    constexpr T Vector3D<T>::y() const noexcept
+    {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::y() noexcept {
+    constexpr T& Vector3D<T>::y() noexcept
+    {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::z() const noexcept {
+    constexpr T Vector3D<T>::z() const noexcept
+    {
         return _data[2];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::z() noexcept {
+    constexpr T& Vector3D<T>::z() noexcept
+    {
         return _data[2];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::s() const noexcept {
+    constexpr T Vector3D<T>::s() const noexcept
+    {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::s() noexcept {
+    constexpr T& Vector3D<T>::s() noexcept
+    {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::t() const noexcept {
+    constexpr T Vector3D<T>::t() const noexcept
+    {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::t() noexcept {
+    constexpr T& Vector3D<T>::t() noexcept
+    {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::p() const noexcept {
+    constexpr T Vector3D<T>::p() const noexcept
+    {
         return _data[2];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::p() noexcept {
+    constexpr T& Vector3D<T>::p() noexcept
+    {
         return _data[2];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::r() const noexcept {
+    constexpr T Vector3D<T>::r() const noexcept
+    {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::r() noexcept {
+    constexpr T& Vector3D<T>::r() noexcept
+    {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::g() const noexcept {
+    constexpr T Vector3D<T>::g() const noexcept
+    {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::g() noexcept {
+    constexpr T& Vector3D<T>::g() noexcept
+    {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::b() const noexcept {
+    constexpr T Vector3D<T>::b() const noexcept
+    {
         return _data[2];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::b() noexcept {
+    constexpr T& Vector3D<T>::b() noexcept
+    {
         return _data[2];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector3D<T>::operator[](const std::size_t idx) noexcept {
+    constexpr T& Vector3D<T>::operator[](const std::size_t idx) noexcept
+    {
         return _data[idx];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::operator[](const std::size_t idx) const noexcept {
+    constexpr T Vector3D<T>::operator[](const std::size_t idx) const noexcept
+    {
         return _data[idx];
     }
 
@@ -225,7 +250,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::allEq(const Vector3D<U>& rhs, const double epsilon) const noexcept {
+    constexpr bool Vector3D<T>::allEq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] == rhs[0] && _data[1] == rhs[1] && _data[2] == rhs[2];
@@ -238,14 +264,16 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::allEq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept {
+    constexpr bool Vector3D<T>::allEq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
+    {
         return lhs.allEq(rhs, epsilon);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::allNeq(const Vector3D<U>& rhs, const double epsilon) const noexcept {
+    constexpr bool Vector3D<T>::allNeq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] != rhs[0] || _data[1] != rhs[1] || _data[2] != rhs[2];
@@ -259,27 +287,31 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::allNeq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept {
+    constexpr bool Vector3D<T>::allNeq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
+    {
         return lhs.allNeq(rhs, epsilon);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::operator==(const Vector3D<U>& rhs) const noexcept {
+    constexpr bool Vector3D<T>::operator==(const Vector3D<U>& rhs) const noexcept
+    {
         return this->allEq(rhs);
     }
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::operator!=(const Vector3D<U>& rhs) const noexcept {
+    constexpr bool Vector3D<T>::operator!=(const Vector3D<U>& rhs) const noexcept
+    {
         return this->allNeq(rhs);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Vector3D<bool> Vector3D<T>::eq(const Vector3D<U>& rhs, const double epsilon) const noexcept {
+    constexpr Vector3D<bool> Vector3D<T>::eq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return Vector3D(_data[0] == rhs[0], _data[1] == rhs[1], _data[2] == rhs[2]);
         else
@@ -292,15 +324,16 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Vector3D<bool> Vector3D<T>::eq(const Vector3D& lhs, const Vector3D<U>& rhs,
-                                             const double epsilon) noexcept {
+    constexpr Vector3D<bool> Vector3D<T>::eq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
+    {
         return lhs.eq(rhs, epsilon);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Vector3D<bool> Vector3D<T>::neq(const Vector3D<U>& rhs, const double epsilon) const noexcept {
+    constexpr Vector3D<bool> Vector3D<T>::neq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return Vector3D(_data[0] != rhs[0], _data[1] != rhs[1], _data[2] != rhs[2]);
         else
@@ -314,7 +347,8 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr Vector3D<bool> Vector3D<T>::neq(const Vector3D& lhs, const Vector3D<U>& rhs,
-                                              const double epsilon) noexcept {
+                                              const double epsilon) noexcept
+    {
         return lhs.neq(rhs, epsilon);
     }
 
@@ -451,21 +485,24 @@ namespace fgm
      ***************************************/
 
     template <Arithmetic T>
-    constexpr Vector3D<bool> Vector3D<T>::operator&(const Vector3D<bool>& rhs) const noexcept
+    constexpr Vector3D<T> Vector3D<T>::operator&(const Vector3D& rhs) const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector3D(_data[0] & rhs[0], _data[1] & rhs[1], _data[2] & rhs[2]);
     }
 
 
-    constexpr Vector3D<bool>& Vector3D<bool>::operator&=(const Vector3D<bool>& rhs) noexcept {
+    template <Arithmetic T>
+    constexpr Vector3D<T>& Vector3D<T>::operator&=(const Vector3D& rhs) noexcept
+        requires std::is_same_v<T, bool>
+    {
         (*this) = (*this) & rhs;
         return *this;
     }
 
 
     template <Arithmetic T>
-    constexpr Vector3D<bool> Vector3D<T>::operator|(const Vector3D<bool>& rhs) const noexcept
+    constexpr Vector3D<T> Vector3D<T>::operator|(const Vector3D& rhs) const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector3D(_data[0] | rhs[0], _data[1] | rhs[1], _data[2] | rhs[2]);
@@ -473,14 +510,16 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector3D<bool>& Vector3D<T>::operator|=(const Vector3D<bool>& rhs) noexcept {
+    constexpr Vector3D<T>& Vector3D<T>::operator|=(const Vector3D& rhs) noexcept
+        requires std::is_same_v<T, bool>
+    {
         (*this) = (*this) & rhs;
         return *this;
     }
 
 
     template <Arithmetic T>
-    constexpr Vector3D<bool> Vector3D<T>::operator!() const noexcept
+    constexpr Vector3D<T> Vector3D<T>::operator!() const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector3D(!_data[0], !_data[1], !_data[2]);
@@ -742,7 +781,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr auto Vector3D<T>::cross(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>> {
+    constexpr auto Vector3D<T>::cross(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>>
+    {
         using R = std::common_type_t<T, U>;
         return Vector3D<R>(_data[1] * rhs[2] - _data[2] * rhs[1], _data[2] * rhs[0] - _data[0] * rhs[2],
                            _data[0] * rhs[1] - _data[1] * rhs[0]);
@@ -752,7 +792,8 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr auto Vector3D<T>::cross(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
-        -> Vector3D<std::common_type_t<T, U>> {
+        -> Vector3D<std::common_type_t<T, U>>
+    {
         return lhs.cross(rhs);
     }
 
@@ -1068,7 +1109,8 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    constexpr bool Vector3D<T>::hasInf() const noexcept {
+    constexpr bool Vector3D<T>::hasInf() const noexcept
+    {
         if constexpr (std::is_floating_point_v<T>)
             return std::isinf(_data[0]) | std::isinf(_data[1]) | std::isinf(_data[2]);
         else
@@ -1077,13 +1119,15 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr bool Vector3D<T>::hasInf(const Vector3D& vec) noexcept {
+    constexpr bool Vector3D<T>::hasInf(const Vector3D& vec) noexcept
+    {
         return vec.hasInf();
     }
 
 
     template <Arithmetic T>
-    constexpr bool Vector3D<T>::hasNaN() const noexcept {
+    constexpr bool Vector3D<T>::hasNaN() const noexcept
+    {
         if constexpr (std::is_floating_point_v<T>)
             return std::isnan(_data[0]) | std::isnan(_data[1]) | std::isnan(_data[2]);
         else
@@ -1092,7 +1136,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr bool Vector3D<T>::hasNaN(const Vector3D& vec) noexcept {
+    constexpr bool Vector3D<T>::hasNaN(const Vector3D& vec) noexcept
+    {
         return vec.hasNaN();
     }
 

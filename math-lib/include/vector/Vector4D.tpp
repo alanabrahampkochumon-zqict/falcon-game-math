@@ -555,14 +555,15 @@ namespace fgm
      ***************************************/
 
     template <Arithmetic T>
-    constexpr Vector4D<bool> Vector4D<T>::operator&(const Vector4D<bool>& rhs) const noexcept
+    constexpr Vector4D<T> Vector4D<T>::operator&(const Vector4D& rhs) const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector4D(_data[0] & rhs[0], _data[1] & rhs[1], _data[2] & rhs[2], _data[3] & rhs[3]);
     }
 
-
-    constexpr Vector4D<bool>& Vector4D<bool>::operator&=(const Vector4D<bool>& rhs) noexcept
+    template <Arithmetic T>
+    constexpr Vector4D<T>& Vector4D<T>::operator&=(const Vector4D& rhs) noexcept
+        requires std::is_same_v<T, bool>
     {
         (*this) = (*this) & rhs;
         return *this;
@@ -570,7 +571,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<bool> Vector4D<T>::operator|(const Vector4D<bool>& rhs) const noexcept
+    constexpr Vector4D<T> Vector4D<T>::operator|(const Vector4D& rhs) const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector4D(_data[0] | rhs[0], _data[1] | rhs[1], _data[2] | rhs[2], _data[3] | rhs[3]);
@@ -578,7 +579,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<bool>& Vector4D<T>::operator|=(const Vector4D<bool>& rhs) noexcept
+    constexpr Vector4D<T>& Vector4D<T>::operator|=(const Vector4D& rhs) noexcept
+        requires std::is_same_v<T, bool>
     {
         (*this) = (*this) & rhs;
         return *this;
@@ -586,7 +588,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<bool> Vector4D<T>::operator!() const noexcept
+    constexpr Vector4D<T> Vector4D<T>::operator!() const noexcept
         requires std::is_same_v<T, bool>
     {
         return Vector4D(!_data[0], !_data[1], !_data[2], !_data[3]);
