@@ -6,6 +6,7 @@ add_library(StrictWarnings INTERFACE)
 
 # Clang Formatter
 find_program(CLANG_FORMATTER NAMES clang-format)
+find_program(CLANG_TIDY_EXE NAMES clang-tidy)
 
 if(CLANG_FORMATTER)
     file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h *.cxx *.hxx *.hpp *.cc *.hh *.tpp *.inl)
@@ -19,11 +20,21 @@ else()
     message(WARNING "clang-format not found")
 endif()
 
-option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-option(ENABLE_CLANG_TIDY "Run clang-tidy with the compiler" OFF)
-if(ENABLE_CLANG_TIDY)
-    set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
+if(CLANG_TIDY_EXE)
+    # Create a custom target that you manually trigger
+    add_custom_target(
+        lint
+        COMMAND ${CMAKE_COMMAND} -E echo "Running Clang-Tidy on MathLib..."
+        COMMAND run-clang-tidy -p ${CMAKE_BINARY_DIR} -header-filter=.*
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Running static analysis..."
+    )
+else()
+    message(WARNING "clang-tidy not found")
 endif()
+
+option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 
 option(ENABLE_STRICT "Enable ASan and Strict Warnings" OFF) # To turn on ASan, use cmake -D
 
