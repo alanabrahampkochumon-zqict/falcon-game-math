@@ -153,7 +153,7 @@ namespace falcon::simd
     };
 
 #if defined(MAX_ALIGNMENT) && MAX_ALIGNMENT > 0
-    const PackingParams packingParams = calculatePackedSize(TotalBytes, MAX_ALIGNMENT);
+    constexpr PackingParams packingParams = calculatePackedSize(TotalBytes, MAX_ALIGNMENT);
 #endif
 
 

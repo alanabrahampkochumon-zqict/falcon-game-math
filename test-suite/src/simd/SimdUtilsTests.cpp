@@ -10,24 +10,31 @@ struct TestPackingParams
     std::size_t packedRegisterWidth;
     std::size_t registerCount;
 };
-
+/** @brief Test fixture for register packed size calculation, parameterized by @ref TestPackingParams */
 class PackedSizeCalculatorTests: public ::testing::TestWithParam<TestPackingParams>
 {};
 
+
+
+/**
+ * @brief Verify that the packed size parameter returns the correct aligned byte size, padding, register width
+ *        and count.
+ */
 TEST_P(PackedSizeCalculatorTests, CalculatesCorrectSize)
 {
     // Given an arbitrary data type size and total byte size
-    const auto [totalByteSize, alignAs, expectedByteSize, expectedPadding, packedRegisterWidth, registerCount] =
+    const auto [totalByteSize, alignAs, expectedByteSize, expectedPadding, expectedPackedRegisterWidth, expectedRegisterCount] =
         GetParam();
 
     // When packed size is calculated
-    falcon::simd::PackingParams packingParams = falcon::simd::calculatePackedSize(totalByteSize, alignAs);
+    const auto [alignedByteSize, padding, packedRegisterWidth, registerCount] =
+        falcon::simd::calculatePackedSize(totalByteSize, alignAs);
 
     // It gives the nearest packed size and padding
-    EXPECT_EQ(expectedByteSize, packingParams.alignedByteSize);
-    EXPECT_EQ(expectedPadding, packingParams.padding);
-    EXPECT_EQ(packedRegisterWidth, packingParams.packedRegisterWidth);
-    EXPECT_EQ(registerCount, packingParams.registerCount);
+    EXPECT_EQ(expectedByteSize, alignedByteSize);
+    EXPECT_EQ(expectedPadding, padding);
+    EXPECT_EQ(expectedPackedRegisterWidth, packedRegisterWidth);
+    EXPECT_EQ(expectedRegisterCount, registerCount);
 }
 
 INSTANTIATE_TEST_SUITE_P(
