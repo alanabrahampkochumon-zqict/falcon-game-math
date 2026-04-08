@@ -218,7 +218,7 @@ namespace fgm
          *
          * @return A copy of the vector component.
          */
-        constexpr T operator[](std::size_t idx) const noexcept;
+        constexpr const T& operator[](std::size_t idx) const noexcept;
 
         /** @} */
 

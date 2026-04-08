@@ -42,12 +42,6 @@ namespace fgm
 
         using value_type = T;
 
-    private:
-        union {
-            Vector2D<T> columnVectors[columns]; ///< 2D vector composition of matrix columns.
-            T elements[columns][rows];          ///< Elemental composition of matrix, stored in column-major form.
-        };
-
         /** @} */
 
 
@@ -65,12 +59,12 @@ namespace fgm
         /**
          * @brief Initialize a 2x2 matrix from the passed-in scalar elements.
          *
-         * @param[in] v_0_0 The element to insert into row one, column one.
-         * @param[in] v_0_1 The element to insert into row one, column two.
-         * @param[in] v_1_0 The element to insert into row two, column one.
-         * @param[in] v_1_1 The element to insert into row two, column two.
+         * @param[in] m00 The element to insert into row one, column one.
+         * @param[in] m01 The element to insert into row one, column two.
+         * @param[in] m10 The element to insert into row two, column one.
+         * @param[in] m11 The element to insert into row two, column two.
          */
-        [[nodiscard]] constexpr Matrix2D(T v_0_0, T v_0_1, T v_1_0, T v_1_1) noexcept;
+        [[nodiscard]] constexpr Matrix2D(T m00, T m01, T m10, T m11) noexcept;
 
 
         /**
@@ -84,10 +78,10 @@ namespace fgm
 
         /**
          * @brief Initialize a diagonal matrix from the passed-in scalar entries.
-         * All non-diagonal elements are initialized to zero.
+         *        All non-diagonal elements are initialized to zero.
          *
-         * @param[in] d0 The first diagonal entry of the matrix (v_0_0).
-         * @param[in] d1 The second diagonal entry of the matrix (v_1_1).
+         * @param[in] d0 The first diagonal entry of the matrix (m00).
+         * @param[in] d1 The second diagonal entry of the matrix (m11).
          */
         [[nodiscard]] constexpr Matrix2D(T d0, T d1) noexcept;
 
@@ -255,6 +249,10 @@ namespace fgm
         Matrix2D inverse() const;
 
         static Matrix2D inverse(const Matrix2D& matrix);
+
+
+    private:
+        Vector2D<T> _data[columns];
     };
 
     template <StrictArithmetic T, StrictArithmetic S>

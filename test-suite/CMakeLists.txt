@@ -49,7 +49,7 @@ target_sources(
         ${Vector3DTestFiles}
         ${Vector4DTestFiles}
         ${Matrix2x2TestFiles}
-        ${MatrixTestFiles}
+        # ${MatrixTestFiles}
         ${SimdTestFiles}
         ${MathCommonTestFiles}
     

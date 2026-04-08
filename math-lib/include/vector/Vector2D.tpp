@@ -130,7 +130,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T Vector2D<T>::operator[](const std::size_t idx) const noexcept {
+    constexpr const T& Vector2D<T>::operator[](const std::size_t idx) const noexcept {
         return _data[idx];
     }
 

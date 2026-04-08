@@ -76,7 +76,7 @@ add_custom_target(
     ${GeneralFiles}
     ${CommonFiles}
 )
-
+# TODO: Group General and common files into a "Header Files" directory.
 source_group("Header Files\\vector" FILES ${VectorHeaderFiles})
 source_group("Header Files\\common" FILES ${CommonFiles})
 source_group("Header Files\\matrix" FILES ${MatrixHeaderFiles})
