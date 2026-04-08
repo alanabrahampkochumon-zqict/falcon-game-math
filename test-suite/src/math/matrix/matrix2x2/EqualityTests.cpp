@@ -125,6 +125,30 @@ TEST(Matrix2DEquality, InfinityEquality_DifferentMatricesReturnFalse)
     EXPECT_FALSE(equality);
 }
 
+/** @test Verify that @ref fgm::Matrix2D::allEq works for different vector types with identical components. */
+ TYPED_TEST(Matrix2DEquality, MixedType_Equality_IdenticalMatricesReturnTrue)
+{
+     constexpr fgm::Matrix2D matA(1, 2);
+     constexpr fgm::Matrix2D matB(1.0, 2.0);
+
+     constexpr bool equality = matA.allEq(matB);
+
+     EXPECT_TRUE(equality);
+ }
+
+
+/** @test Verify that @ref fgm::Matrix2D::allEq works for different vector types with different components. */
+ TYPED_TEST(Matrix2DEquality, MixedType_Equality_DifferentMatricesReturnFalse)
+ {
+     constexpr fgm::Matrix2D matA(5, 6);
+     constexpr fgm::Matrix2D matB(1.0, 2.0);
+
+     const bool equality = matA.allEq(matB);
+
+     EXPECT_FALSE(equality);
+ }
+
+
 
 ///** @test Verify that the equality operator returns true for identical vectors. */
 // TYPED_TEST(Matrix2DEquality, EqualityOperator_IdenticalVectorsReturnsTrue)
@@ -135,30 +159,7 @@ TEST(Matrix2DEquality, InfinityEquality_DifferentMatricesReturnFalse)
 // }
 //
 //
-///** @test Verify that @ref fgm::Matrix2D::allEq works for different vector types with identical components. */
-// TYPED_TEST(Matrix2DEquality, MixedType_Equality_IdenticalVectorsReturnsTrue)
-//{
-//     constexpr fgm::Matrix2D matA(1, 2);
-//     constexpr fgm::Matrix2D matB(1.0, 2.0);
-//
-//     constexpr bool equality = matA.allEq(matB);
-//
-//     EXPECT_TRUE(equality);
-// }
-//
-//
-///** @test Verify that @ref fgm::Matrix2D::allEq works for different vector types with different components. */
-// TYPED_TEST(Matrix2DEquality, MixedType_Equality_DifferentVectorsReturnsFalse)
-//{
-//     constexpr fgm::Matrix2D matA(5, 6);
-//     constexpr fgm::Matrix2D matB(1.0, 2.0);
-//
-//     const bool equality = matA.allEq(matB);
-//
-//     EXPECT_FALSE(equality);
-// }
-//
-//
+
 ///** @test Verify that the equality operator returns false if any component differ. */
 // TYPED_TEST(Matrix2DEquality, EqualityOperator_DifferentVectorsReturnsFalse)
 //{
