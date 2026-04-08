@@ -25,14 +25,17 @@ namespace falcon::simd
     };
 
     /**
-     * A calculator function that gives Aligned Byte Size, Padding, Packed Register Width, and Register Count
-     * when provided with an unaligned byteSize and maximumAlignment possible.
-     * @param totalByteSize Total unaligned byte size.
-     * @param maxAlignAs Max possible alignment for a given CPU architecture. 16 for SSE, 32 for AVX and AVX2, and 64
-     * for AVX512
-     * @return PackedSize containing alignedByteSize, padding, register width and register count.
+     * @brief Calculate the aligned Byte Size, padding, packed register width, and number of registers required to store
+     *        the given bytes, with a given alignment.
+     *
+     * @param totalByteSize The total unaligned byte size.
+     * @param maxAlignAs    The maximum possible alignment for a given CPU architecture.
+     *                      **16 for SSE, 32 for AVX and AVX2, and 64 for AVX512**
+     *
+     * @return The aligned byte size, additional required padding, target register width,
+     *         and number of registers required to pack the given bytes.
      */
-    constexpr PackingParams calculatePackedSize(std::size_t totalByteSize, std::size_t maxAlignAs)
+    constexpr PackingParams calculatePackedSize(const std::size_t totalByteSize, const std::size_t maxAlignAs)
     {
         if (totalByteSize < 16)
             return PackingParams{ 16, 16 - totalByteSize, 16, 1 };
