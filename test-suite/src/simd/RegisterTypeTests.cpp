@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 10, 2026
  *
- * @brief `RegisterType` tests.
+ * @brief Verifies @ref falcon::simd::RegisterMap correctly maps register depending on the data type and size(bytes).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
