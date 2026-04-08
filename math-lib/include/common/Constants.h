@@ -22,16 +22,16 @@ namespace fgm::constants
 {
 
     /** @brief Positive infinity for single-precision floats. */
-    static constexpr float INFINITY_F = std::numeric_limits<float>::infinity();
+    inline constexpr float INFINITY_F = std::numeric_limits<float>::infinity();
 
     /** @brief Positive infinity for double-precision floats. */
-    static constexpr double INFINITY_D = std::numeric_limits<double>::infinity();
+    inline constexpr double INFINITY_D = std::numeric_limits<double>::infinity();
 
     /** @brief Quiet Not-a-Number for single-precision floats. */
-    static constexpr float NaN = std::numeric_limits<float>::quiet_NaN();
+    inline constexpr float NaN = std::numeric_limits<float>::quiet_NaN();
 
     /** @brief Quiet Not-a-Number for double-precision floats. */
-    static constexpr double NaN_D = std::numeric_limits<double>::quiet_NaN();
+    inline constexpr double NaN_D = std::numeric_limits<double>::quiet_NaN();
 
     /** @brief The maximum possible swizzling dimension allowable for @ref fgm::Vector. */
     inline constexpr std::size_t MAX_VECTOR_SWIZZLE_DIMENSION = 4;
