@@ -12,39 +12,17 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix2D<T>::Matrix2D(const T m00, const T m01, const T m10, const T m11) noexcept
         : _data{ Vector2D<T>(m00, m10), Vector2D<T>(m01, m11) }
-    {
-        // First Column
-        // elements[0][0] = m00;
-        // elements[0][1] = m10;
-
-        //// Second Column
-        // elements[1][0] = m01;
-        // elements[1][1] = m11;
-        //  Due to column major order of vectors the data needs to be transposed.
-        //_data = { { m00, m10 }, { m01, m11 } };
-    }
+    {}
 
 
     template <Arithmetic T>
     constexpr Matrix2D<T>::Matrix2D(const Vector2D<T>& col0, const Vector2D<T>& col1) noexcept: _data{ col0, col1 }
-    {
-        //_data[0] = col0;
-        //_data[1] = col1;
-    }
+    {}
 
 
     template <Arithmetic T>
     constexpr Matrix2D<T>::Matrix2D(T d0, T d1) noexcept: _data{ Vector2D<T>(d0, 0), Vector2D<T>(0, d1) }
-    {
-        // First Column
-        // elements[0][0] = d0;
-        // elements[0][1] = T(0);
-
-        //// Second Column
-        // elements[1][0] = T(0);
-        // elements[1][1] = d1;
-        //_data = { { d0, T(0) }, { T(0), d1 } };
-    }
+    {}
 
 
     template <Arithmetic T>
