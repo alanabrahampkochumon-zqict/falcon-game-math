@@ -261,8 +261,8 @@ namespace fgm
          *
          * @return True if any of the components are not equivalent within the default epsilon.
          */
-        //template <Arithmetic U>
-        //[[nodiscard]] constexpr bool operator!=(const Matrix2D<U>& rhs) const noexcept;
+        template <Arithmetic U>
+        [[nodiscard]] constexpr bool operator!=(const Matrix2D<U>& rhs) const noexcept;
 
         /** @} */
 

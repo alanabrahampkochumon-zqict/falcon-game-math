@@ -109,9 +109,12 @@ namespace fgm
     }
 
 
-    //template <Arithmetic T>
-    //template <Arithmetic U>
-    //constexpr bool Matrix2D<T>::operator!=(const Matrix2D<U>& rhs) const noexcept {}
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix2D<T>::operator!=(const Matrix2D<U>& rhs) const noexcept
+    {
+        return allNeq(rhs);
+    }
 
 
     ///////////////////////////////////
@@ -145,7 +148,6 @@ namespace fgm
     template <StrictArithmetic S>
     Matrix2D<T> Matrix2D<T>::operator*(const S& scalar) const
     {
-
         return *this;
     }
 
