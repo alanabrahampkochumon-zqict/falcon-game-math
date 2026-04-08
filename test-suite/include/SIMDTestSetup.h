@@ -10,7 +10,8 @@
  */
 
 
-#include <SIMD.h>
+
+#include <simd/SIMD.h>
 #include <gtest/gtest.h>
 
 

@@ -73,7 +73,7 @@ source_group (
 
 source_group(
     TREE
-    "${CMAKE_CURRENT_SOURCE_DIR}/${DOCSDIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/${DocsDir}"
     PREFIX "Documentation Files"
     FILES
     ${DocFiles}
