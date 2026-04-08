@@ -186,6 +186,18 @@
 
     /** @} */ // End of MathTests
 
+
+    /**
+     * @defgroup FGM_SIMD_Tests SIMD
+     * @brief Test suite for SIMD operations and functions.
+     * @ingroup FGMTestSuite
+     * @{
+     *   @defgroup T_Reg_Type Register Type
+     *   @defgroup T_Packing_Calc Byte Packing Calculation
+     * @}
+     */
+
+
     /**
      * @defgroup T_Utils Test Utilities
      * @brief Diagnostic and validation utilities for testing.

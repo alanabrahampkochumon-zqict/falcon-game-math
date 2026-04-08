@@ -11,6 +11,8 @@
 
 #include "SIMDTestSetup.h"
 
+
+
 /**************************************
  *                                    *
  *                SETUP               *
@@ -23,12 +25,13 @@ class RegisterMapTest: public ::testing::Test
 TYPED_TEST_SUITE(RegisterMapTest, SupportedSIMDIntegralTypes);
 
 
-/**************************************
- *                                    *
- *                TESTS               *
- *                                    *
- **************************************/
 
+/**
+ * @addtogroup T_Reg_Type
+ * @{
+ */
+
+/** @brief Verify that the `float` @ref falcon::simd::RegisterMap maps to correct SIMD register. */
 TEST(RegisterMapTest, FloatMapsToCorrectSIMDIntrinsics)
 {
     // Float with alignment of 16 correctly maps to __m128
@@ -41,6 +44,8 @@ TEST(RegisterMapTest, FloatMapsToCorrectSIMDIntrinsics)
     ::testing::StaticAssertTypeEq<falcon::simd::RegisterMap<float, 64>::type, __m512>();
 }
 
+
+/** @brief Verify that the `double` @ref falcon::simd::RegisterMap maps to correct SIMD register. */
 TEST(RegisterMapTest, DoubleMapsToCorrectSIMDIntrinsics)
 {
     // Double with alignment of 16 correctly maps to __m128
@@ -53,6 +58,8 @@ TEST(RegisterMapTest, DoubleMapsToCorrectSIMDIntrinsics)
     ::testing::StaticAssertTypeEq<falcon::simd::RegisterMap<double, 64>::type, __m512d>();
 }
 
+
+/** @brief Verify that `integral` @ref falcon::simd::RegisterMap maps to correct SIMD register. */
 TYPED_TEST(RegisterMapTest, IntegralsMapToCorrectSIMDIntrinsics)
 {
     // Double with alignment of 16 correctly maps to __m128
@@ -64,3 +71,5 @@ TYPED_TEST(RegisterMapTest, IntegralsMapToCorrectSIMDIntrinsics)
     // Double with alignment of 64 correctly maps to __m512
     ::testing::StaticAssertTypeEq<typename falcon::simd::RegisterMap<TypeParam, 64>::type, __m512i>();
 }
+
+/** @} */
