@@ -211,7 +211,7 @@ namespace fgm
          * @return True if all components are equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr bool allNeq(const Matrix2D<U>& rhs,
+        [[nodiscard]] constexpr bool anyNeq(const Matrix2D<U>& rhs,
                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
                                                ? Config::DOUBLE_EPSILON
                                                : Config::FLOAT_EPSILON) const noexcept;
@@ -232,7 +232,7 @@ namespace fgm
          * @return True if all components are equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr static bool allNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
+        [[nodiscard]] constexpr static bool anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
                                                   double epsilon = (std::is_same_v<T, double> ||
                                                                     std::is_same_v<U, double>)
                                                       ? Config::DOUBLE_EPSILON
@@ -253,7 +253,7 @@ namespace fgm
 
 
         /**
-         * @copybrief allNeq(const Vector2D<U>&, double) const noexcept
+         * @copybrief anyNeq(const Vector2D<U>&, double) const noexcept
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *

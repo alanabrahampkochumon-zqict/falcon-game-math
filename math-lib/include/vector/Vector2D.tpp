@@ -184,7 +184,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector2D<T>::allNeq(const Vector2D<U>& rhs, const double epsilon) const noexcept {
+    constexpr bool Vector2D<T>::anyNeq(const Vector2D<U>& rhs, const double epsilon) const noexcept {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] != rhs[0] || _data[1] != rhs[1];
         else
@@ -196,8 +196,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector2D<T>::allNeq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept {
-        return lhs.allNeq(rhs, epsilon);
+    constexpr bool Vector2D<T>::anyNeq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept {
+        return lhs.anyNeq(rhs, epsilon);
     }
 
 
@@ -210,7 +210,7 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Vector2D<T>::operator!=(const Vector2D<U>& rhs) const noexcept {
-        return this->allNeq(rhs);
+        return this->anyNeq(rhs);
     }
 
 

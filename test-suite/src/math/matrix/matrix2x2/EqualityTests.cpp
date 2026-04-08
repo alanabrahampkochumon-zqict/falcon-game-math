@@ -4,7 +4,7 @@
  * @date Created on: April 04, 2026
  *
  * @brief Verifies @ref fgm::Matrix2D equality operator (==, !=) and their functional counterpart's
- *        (eq, neq, allEq, allNeq) logic.
+ *        (eq, neq, allEq, anyNeq) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -208,97 +208,97 @@ TYPED_TEST(Matrix2DEquality, MixedType_Equality_DifferentMatricesReturnFalse)
  **************************************/
 
 
-/** @test Verify that @ref fgm::Matrix2D::allNeq returns false for identical matrices. */
+/** @test Verify that @ref fgm::Matrix2D::anyNeq returns false for identical matrices. */
 TYPED_TEST(Matrix2DEquality, Inequality_IdenticalMatricesReturnFalse)
 {
-    const bool inequality = this->_eqMatA.allNeq(this->_eqMatB);
+    const bool inequality = this->_eqMatA.anyNeq(this->_eqMatB);
         
     EXPECT_FALSE(inequality);
 }
 
 
-/** @test Verify that @ref fgm::Matrix2D::allNeq returns true if any component differ. */
+/** @test Verify that @ref fgm::Matrix2D::anyNeq returns true if any component differ. */
 TYPED_TEST(Matrix2DEquality, Inequality_DifferentMatricesReturnTrue)
 {
-    const bool inequality = this->_eqMatA.allNeq(this->_dissimilarMat);
+    const bool inequality = this->_eqMatA.anyNeq(this->_dissimilarMat);
 
     EXPECT_TRUE(inequality);
 }
 
 
-/** @test Verify that the static variant of @ref fgm::Matrix2D::allNeq for identical matrices. */
+/** @test Verify that the static variant of @ref fgm::Matrix2D::anyNeq for identical matrices. */
 TYPED_TEST(Matrix2DEquality, StaticWrapper_Inequality_IdenticalMatricesReturnFalse)
 {
-    const bool inequality = fgm::Matrix2D<TypeParam>::allNeq(this->_eqMatA, this->_eqMatB);
+    const bool inequality = fgm::Matrix2D<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
 
     EXPECT_FALSE(inequality);
 }
 
 
-/** @test Verify that the static variant of @ref fgm::Matrix2D::allNeq for different matrices. */
+/** @test Verify that the static variant of @ref fgm::Matrix2D::anyNeq for different matrices. */
 TYPED_TEST(Matrix2DEquality, StaticWrapper_Inequality_DifferentMatricesReturnTrue)
 {
-    const bool inequality = fgm::Matrix2D<TypeParam>::allNeq(this->_eqMatA, this->_dissimilarMat);
+    const bool inequality = fgm::Matrix2D<TypeParam>::anyNeq(this->_eqMatA, this->_dissimilarMat);
 
     EXPECT_TRUE(inequality);
 }
 
 
-/** @test Verify that @ref fgm::Matrix2D::allNeq follows IEEE 754 for NaN comparisons. */
+/** @test Verify that @ref fgm::Matrix2D::anyNeq follows IEEE 754 for NaN comparisons. */
 TEST(Matrix2DEquality, NanInequalityReturnsTrue)
 {
     constexpr fgm::Matrix2D matA( NAN_F, NAN_F, NAN_F, NAN_F );
     constexpr fgm::Matrix2D matB(1.0f, -5.88874789f, INF, -INF);
 
-    const bool inequality = matA.allNeq(matB);
+    const bool inequality = matA.anyNeq(matB);
 
     EXPECT_TRUE(inequality);
 }
 
 
-/** @test Verify that @ref fgm::Matrix2D::allNeq follows IEEE 754 for INFINITY comparisons. */
+/** @test Verify that @ref fgm::Matrix2D::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix2DEquality, InfinityInequality_IdenticalMatricesReturnFalse)
 {
     constexpr fgm::Matrix2D matA(INF, -INF, INF, -INF);
     constexpr fgm::Matrix2D matB(INF, -INF, INF, -INF);
 
-    const bool inequality = matA.allNeq(matB);
+    const bool inequality = matA.anyNeq(matB);
 
     EXPECT_FALSE(inequality);
 }
 
 
-/** @test Verify that @ref fgm::Matrix2D::allNeq follows IEEE 754 for INFINITY comparisons. */
+/** @test Verify that @ref fgm::Matrix2D::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix2DEquality, InfinityInequality_DifferentMatricesReturnTrue)
 {
     constexpr fgm::Matrix2D matA(-INF, INF, INF, -INF);
     constexpr fgm::Matrix2D matB(INF, INF, -INF, -INF);
 
-    const bool inequality = matA.allNeq(matB);
+    const bool inequality = matA.anyNeq(matB);
 
     EXPECT_TRUE(inequality);
 }
 
 
-/** @test Verify that @ref fgm::Matrix2D::allNeq works for different vector types with identical components. */
+/** @test Verify that @ref fgm::Matrix2D::anyNeq works for different vector types with identical components. */
 TYPED_TEST(Matrix2DEquality, MixedType_Inequality_IdenticalMatricesReturnFalse)
 {
     constexpr fgm::Matrix2D matA(1, 2, 3, 4);
     constexpr fgm::Matrix2D matB(1.0, 2.0, 3.0, 4.0);
 
-    const bool inequality = matA.allNeq(matB);
+    const bool inequality = matA.anyNeq(matB);
 
     EXPECT_FALSE(inequality);
 }
 
 
-/** @test Verify that @ref fgm::Matrix2D::allNeq works for different vector types with different components. */
+/** @test Verify that @ref fgm::Matrix2D::anyNeq works for different vector types with different components. */
 TYPED_TEST(Matrix2DEquality, MixedType_Inequality_DifferentMatricesReturnTrue)
 {
     constexpr fgm::Matrix2D matA(5, 6, 7, 8);
     constexpr fgm::Matrix2D matB(1.0, 2.0, 7.0, 8.0);
 
-    const bool inequality = matA.allNeq(matB);
+    const bool inequality = matA.anyNeq(matB);
 
     EXPECT_TRUE(inequality);
 }

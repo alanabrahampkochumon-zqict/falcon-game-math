@@ -4,7 +4,7 @@
  * @date Created on: April 02, 2026
  *
  * @brief Verifies @ref fgm::Vector3D equality operator (==, !=) and their functional counterpart's (eq, neq, allEq,
- * allNeq) logic.
+ * anyNeq) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -269,97 +269,97 @@ TYPED_TEST(Vector3DEquality, StaticWrapper_EqualityReturnsCorrectBooleanMask)
  **************************************/
 
 
-/** @test Verify that @ref fgm::Vector3D::allNeq returns false for identical vectors. */
+/** @test Verify that @ref fgm::Vector3D::anyNeq returns false for identical vectors. */
 TYPED_TEST(Vector3DEquality, Inequality_IdenticalVectorsReturnsFalse)
 {
-    const bool equality = this->_eqVecA.allNeq(this->_eqVecB);
+    const bool equality = this->_eqVecA.anyNeq(this->_eqVecB);
 
     EXPECT_FALSE(equality);
 }
 
 
-/** @test Verify that @ref fgm::Vector3D::allNeq returns true if any component differ. */
+/** @test Verify that @ref fgm::Vector3D::anyNeq returns true if any component differ. */
 TYPED_TEST(Vector3DEquality, Inequality_DifferentVectorsReturnsTrue)
 {
-    const bool equality = this->_eqVecA.allNeq(this->_dissimilarVec);
+    const bool equality = this->_eqVecA.anyNeq(this->_dissimilarVec);
 
     EXPECT_TRUE(equality);
 }
 
 
-/** @test Verify that the static variant of @ref fgm::Vector3D::allNeq for identical vectors. */
+/** @test Verify that the static variant of @ref fgm::Vector3D::anyNeq for identical vectors. */
 TYPED_TEST(Vector3DEquality, StaticWrapper_Inequality_IdenticalVectorsReturnsFalse)
 {
-    const bool equality = fgm::Vector3D<TypeParam>::allNeq(this->_eqVecA, this->_eqVecB);
+    const bool equality = fgm::Vector3D<TypeParam>::anyNeq(this->_eqVecA, this->_eqVecB);
 
     EXPECT_FALSE(equality);
 }
 
 
-/** @test Verify that the static variant of @ref fgm::Vector3D::allNeq for different vectors. */
+/** @test Verify that the static variant of @ref fgm::Vector3D::anyNeq for different vectors. */
 TYPED_TEST(Vector3DEquality, StaticWrapper_Inequality_DifferentVectorsReturnsTrue)
 {
-    const bool equality = fgm::Vector3D<TypeParam>::allNeq(this->_eqVecA, this->_dissimilarVec);
+    const bool equality = fgm::Vector3D<TypeParam>::anyNeq(this->_eqVecA, this->_dissimilarVec);
 
     EXPECT_TRUE(equality);
 }
 
 
-/** @test Verify that @ref fgm::Vector3D::allNeq follows IEEE 754 for NaN comparisons. */
+/** @test Verify that @ref fgm::Vector3D::anyNeq follows IEEE 754 for NaN comparisons. */
 TEST(Vector3DEquality, NanInequalityReturnsTrue)
 {
     constexpr fgm::Vector3D vecA = { NAN_F, NAN_F, NAN_F };
     constexpr fgm::Vector3D<double> vecB = { 1.0, -5.88874789, fgm::constants::INFINITY_D, };
 
-    const bool equality = vecA.allNeq(vecB);
+    const bool equality = vecA.anyNeq(vecB);
 
     EXPECT_TRUE(equality);
 }
 
 
-/** @test Verify that @ref fgm::Vector3D::allNeq follows IEEE 754 for INFINITY comparisons. */
+/** @test Verify that @ref fgm::Vector3D::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector3DEquality, InfinityInequality_IdenticalVectorsReturnsFalse)
 {
     constexpr fgm::Vector3D vecA = { INF, -INF, INF };
     constexpr fgm::Vector3D vecB = { INF, -INF, INF };
 
-    constexpr bool equality = vecA.allNeq(vecB);
+    constexpr bool equality = vecA.anyNeq(vecB);
 
     EXPECT_FALSE(equality);
 }
 
 
-/** @test Verify that @ref fgm::Vector3D::allNeq follows IEEE 754 for INFINITY comparisons. */
+/** @test Verify that @ref fgm::Vector3D::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector3DEquality, InfinityInequality_DifferentVectorsReturnsTrue)
 {
     constexpr fgm::Vector3D vecA = { INF, INF, INF };
     constexpr fgm::Vector3D vecB = { INF, -INF, INF };
 
-    const bool equality = vecA.allNeq(vecB);
+    const bool equality = vecA.anyNeq(vecB);
 
     EXPECT_TRUE(equality);
 }
 
 
-/** @test Verify that @ref fgm::Vector3D::allNeq works for different vector types with identical components. */
+/** @test Verify that @ref fgm::Vector3D::anyNeq works for different vector types with identical components. */
 TYPED_TEST(Vector3DEquality, MixedType_Inequality_IdenticalVectorsReturnsFalse)
 {
     constexpr fgm::Vector3D vecA(1, 2, 3);
     constexpr fgm::Vector3D vecB(1.0, 2.0, 3.0);
 
-    constexpr bool equality = vecA.allNeq(vecB);
+    constexpr bool equality = vecA.anyNeq(vecB);
 
     EXPECT_FALSE(equality);
 }
 
 
-/** @test Verify that @ref fgm::Vector3D::allNeq works for different vector types with different components. */
+/** @test Verify that @ref fgm::Vector3D::anyNeq works for different vector types with different components. */
 TYPED_TEST(Vector3DEquality, MixedType_Inequality_DifferentVectorsReturnsTrue)
 {
     constexpr fgm::Vector3D vecA(5, 6, 7);
     constexpr fgm::Vector3D vecB(1.0, 2.0, 3.0);
 
-    const bool equality = vecA.allNeq(vecB);
+    const bool equality = vecA.anyNeq(vecB);
 
     EXPECT_TRUE(equality);
 }

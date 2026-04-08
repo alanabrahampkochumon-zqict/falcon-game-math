@@ -457,14 +457,14 @@ namespace fgm
          * @return True if any of the components are not equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr bool allNeq(const Vector4D<U>& rhs,
+        [[nodiscard]] constexpr bool anyNeq(const Vector4D<U>& rhs,
                                             double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
                                                 ? Config::DOUBLE_EPSILON
                                                 : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
-         * @copybrief allNeq(const Vector4D<U>&, double) const
+         * @copybrief anyNeq(const Vector4D<U>&, double) const
          *
          * @note To obtain a component-wise boolean mask, use @ref neq.
          *
@@ -478,7 +478,7 @@ namespace fgm
          * @return True if any of the components are not equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr static bool allNeq(const Vector4D& lhs, const Vector4D<U>& rhs,
+        [[nodiscard]] constexpr static bool anyNeq(const Vector4D& lhs, const Vector4D<U>& rhs,
                                                    double epsilon = (std::is_same_v<T, double> ||
                                                                      std::is_same_v<U, double>)
                                                        ? Config::DOUBLE_EPSILON
@@ -501,7 +501,7 @@ namespace fgm
 
 
         /**
-         * @copybrief allNeq(const Vector4D<U>&, double) const
+         * @copybrief anyNeq(const Vector4D<U>&, double) const
          *
          * @note To obtain a component-wise boolean mask, use @ref eq.
          *
@@ -561,7 +561,7 @@ namespace fgm
          * @brief Perform component-wise inequality check.
          *        Compare each component pair and returns a boolean mask.
          *
-         * @note To obtain a single scalar result, use @ref allNeq or @ref operator!=.
+         * @note To obtain a single scalar result, use @ref anyNeq or @ref operator!=.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
          *

@@ -272,7 +272,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::allNeq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    constexpr bool Vector3D<T>::anyNeq(const Vector3D<U>& rhs, const double epsilon) const noexcept
     {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
@@ -287,9 +287,9 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::allNeq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
+    constexpr bool Vector3D<T>::anyNeq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
     {
-        return lhs.allNeq(rhs, epsilon);
+        return lhs.anyNeq(rhs, epsilon);
     }
 
 
@@ -304,7 +304,7 @@ namespace fgm
     template <Arithmetic U>
     constexpr bool Vector3D<T>::operator!=(const Vector3D<U>& rhs) const noexcept
     {
-        return this->allNeq(rhs);
+        return this->anyNeq(rhs);
     }
 
 

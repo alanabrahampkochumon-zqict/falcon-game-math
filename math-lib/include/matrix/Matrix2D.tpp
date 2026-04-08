@@ -87,17 +87,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Matrix2D<T>::allNeq(const Matrix2D<U>& rhs, double epsilon) const noexcept
+    constexpr bool Matrix2D<T>::anyNeq(const Matrix2D<U>& rhs, double epsilon) const noexcept
     {
-        return _data[0].allNeq(rhs[0], epsilon) || _data[1].allNeq(rhs[1], epsilon);
+        return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Matrix2D<T>::allNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs, double epsilon) noexcept
+    constexpr bool Matrix2D<T>::anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs, double epsilon) noexcept
     {
-        return lhs.allNeq(rhs, epsilon);
+        return lhs.anyNeq(rhs, epsilon);
     }
 
 
@@ -113,7 +113,7 @@ namespace fgm
     template <Arithmetic U>
     constexpr bool Matrix2D<T>::operator!=(const Matrix2D<U>& rhs) const noexcept
     {
-        return allNeq(rhs);
+        return anyNeq(rhs);
     }
 
 
