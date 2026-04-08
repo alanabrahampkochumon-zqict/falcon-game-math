@@ -38,6 +38,8 @@
  *            PREPROCESSORS           *
  *                                    *
  **************************************/
+
+// Falcon specific preprocessor definition for SIMD support.
 #if defined(FORCE_AVX512) && defined(__AVX512F__)
     #define FALCON_AVX512_SUPPORTED
 #endif
