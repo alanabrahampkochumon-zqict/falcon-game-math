@@ -385,7 +385,7 @@ namespace fgm
 
         /**
          * @brief Compare components for inequality across two vectors.
-         *        Performs a component-wise comparison and returns true if any corresponding elements differ by more
+         *        Perform a component-wise comparison and returns true if any corresponding elements differ by more
          *        than @p epsilon.
          *
          * @note To obtain a component-wise boolean mask, use @ref neq.
@@ -396,7 +396,7 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return True if any of the components are not equivalent within the default epsilon.
+         * @return True if any of the components are not equivalent within @p epsilon.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool allNeq(const Vector3D<U>& rhs,
@@ -417,7 +417,7 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return True if any of the components are not equivalent within the default epsilon.
+         * @return True if any of the components are not equivalent within @p epsilon.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr static bool allNeq(const Vector3D& lhs, const Vector3D<U>& rhs,

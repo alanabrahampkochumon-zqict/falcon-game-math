@@ -199,8 +199,8 @@ namespace fgm
 
         /**
          * @brief Compare all components of this matrix for equality with another matrix.
-         *        Perform a component-wise comparison and returns true if any of the element pair
-         *        satisfies the inequality condition within the given @p epsilon.
+         *        Perform a component-wise comparison and returns true if any corresponding elements differ by more
+         *        than @p epsilon.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *
