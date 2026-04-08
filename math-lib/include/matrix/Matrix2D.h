@@ -238,6 +238,32 @@ namespace fgm
                                                       ? Config::DOUBLE_EPSILON
                                                       : Config::FLOAT_EPSILON) noexcept;
 
+
+        /**
+         * @copybrief allEq(const Matrix2D<U>&, double) const noexcept
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs The matrix to compare against.
+         *
+         * @return True if all components are equivalent within the default epsilon.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] constexpr bool operator==(const Matrix2D<U>& rhs) const noexcept;
+
+
+        /**
+         * @copybrief allNeq(const Vector2D<U>&, double) const noexcept
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs The matrix to compare against.
+         *
+         * @return True if any of the components are not equivalent within the default epsilon.
+         */
+        //template <Arithmetic U>
+        //[[nodiscard]] constexpr bool operator!=(const Matrix2D<U>& rhs) const noexcept;
+
         /** @} */
 
 

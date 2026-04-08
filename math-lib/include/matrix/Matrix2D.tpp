@@ -101,6 +101,19 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix2D<T>::operator==(const Matrix2D<U>& rhs) const noexcept
+    {
+        return allEq(rhs);
+    }
+
+
+    //template <Arithmetic T>
+    //template <Arithmetic U>
+    //constexpr bool Matrix2D<T>::operator!=(const Matrix2D<U>& rhs) const noexcept {}
+
+
     ///////////////////////////////////
 
     template <Arithmetic T>
