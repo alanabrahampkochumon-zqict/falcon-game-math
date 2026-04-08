@@ -1,4 +1,4 @@
-#include <SIMDUtils.h>
+#include <utils/SIMDUtils.h>
 #include <gtest/gtest.h>
 
 struct TestPackingParams

@@ -12,9 +12,9 @@
 
 #include <simd/SIMD.h>
 #include <gtest/gtest.h>
-
+#include <cstdint>
 
 
 using SupportedSIMDTypes =
-    ::testing::Types<unsigned char, bool, int, unsigned int, float, double, std::size_t, long long>;
-using SupportedSIMDIntegralTypes = ::testing::Types<unsigned char, bool, int, unsigned int, std::size_t, long long>;
+    ::testing::Types<int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t, int64_t, uint64_t, double, float>;
+using SupportedSIMDIntegralTypes = ::testing::Types<int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t, int64_t, uint64_t>;
