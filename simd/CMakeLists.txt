@@ -1,17 +1,19 @@
 add_library(FalconSIMD INTERFACE)
 
-set(SIMDDir "include/simd/")
 
 set(IncludeDirectory "include/")
 
-set(GeneralFiles "SIMDUtils.h;DoxygenGroups.h")
-list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
+set(DocsDir "docs/")
+set(DocFiles "DoxygenGroups.h")
+list(TRANSFORM DocFiles PREPEND ${DocsDir})
 
 set(UtilityDir "include/utils/")
 set(UtilityFiles "SIMDUtils.h")
 list(TRANSFORM UtilityFiles PREPEND ${UtilityDir})
 
-set(SIMDHeaderFiles "SIMD.h;SIMDMemory.tpp;")
+set(SIMDDir "include/simd/")
+
+set(SIMDHeaderFiles "SIMD.h;SIMDMemory.h;")
 list(TRANSFORM SIMDHeaderFiles PREPEND ${SIMDDir})
 
 set(SIMDTemplateFiles "SIMD.tpp;SIMDMemory.tpp")
@@ -37,7 +39,6 @@ target_sources(
     FILE_SET HEADERS
     BASE_DIRS ${IncludeDirectory}
     FILES
-    ${GeneralFiles}
     ${UtilityFiles}
     ${SIMDHeaderFiles}
     ${SIMDTemplateFiles}
@@ -55,7 +56,7 @@ add_custom_target(
     SIMD
     ALL
     SOURCES
-    ${GeneralFiles}
+    ${DocFiles}
     ${UtilityFiles}
     ${SIMDHeaderFiles}
     ${SIMDTemplateFiles}
@@ -68,7 +69,14 @@ source_group (
     FILES
     ${SIMDHeaderFiles}
     ${UtilityFiles}
-    ${HeaderFiles}
+)
+
+source_group(
+    TREE
+    "${CMAKE_CURRENT_SOURCE_DIR}/${DOCSDIR}"
+    PREFIX "Documentation Files"
+    FILES
+    ${DocFiles}
 )
 
 source_group (
