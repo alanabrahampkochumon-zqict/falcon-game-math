@@ -73,5 +73,4 @@ INSTANTIATE_TEST_SUITE_P(
         TestPackingParams{ 192, 64, 256, 64, 64, 4 }, TestPackingParams{ 256, 64, 256, 0, 64, 4 },
         TestPackingParams{ 512, 64, 512, 0, 64, 8 }, TestPackingParams{ 777, 64, 1024, 247, 64, 16 },
         TestPackingParams{ 1024, 64, 1024, 0, 64, 16 }
-
         ));

@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 18, 2026
  *
- * @brief Definitions for doxygen groups used across fgm test harness.
+ * @brief Doxygen groups for categorizing tests across different math and SIMD operations.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
