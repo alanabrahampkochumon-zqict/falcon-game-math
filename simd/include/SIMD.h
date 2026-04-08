@@ -81,13 +81,13 @@
 #endif
 
 #ifdef FALCON_AVX512_SUPPORTED
-    #define MAX_HARDWARE_ALIGNMENT = 64;
+    #define MAX_HARDWARE_ALIGNMENT 64;
 #elif defined(FALCON_AVX2_SUPPORTED) || defined(FALCON_AVX_SUPPORTED)
-    #define MAX_HARDWARE_ALIGNMENT = 32;
+    #define MAX_HARDWARE_ALIGNMENT 32;
 #elif defined(FALCON_SSE_SUPPORTED)
-    #define MAX_HARDWARE_ALIGNMENT = 16;
+    #define MAX_HARDWARE_ALIGNMENT 16;
 #else
-    #define MAX_HARDWARE_ALIGNMENT = 0;
+    #define MAX_HARDWARE_ALIGNMENT 0;
 #endif
 
 /** @} */
@@ -117,7 +117,10 @@ namespace falcon::simd
     struct RegisterMap;
 
 
-    /** @brief Template specialization of @ref Register map for 128-bit (16 byte) aligned float. */
+    /** 
+     * @brief Template specialization of @ref RegisterMap for 128-bit (16 byte) aligned `float`.
+     *        Maps `float` to the SSE single precision floating point register `__m128`.
+     */
     template <>
     struct RegisterMap<float, 16>
     {
@@ -125,7 +128,10 @@ namespace falcon::simd
     };
 
 
-    /** @brief Template specialization of @ref Register map for 128-bit (16 byte) aligned double. */
+    /**
+     * @brief Template specialization of @ref RegisterMap for 128-bit (16 byte) aligned `double`.
+     *        Maps `double` to the SSE double precision floating point register `__m128d`.
+     */
     template <>
     struct RegisterMap<double, 16>
     {
@@ -133,9 +139,10 @@ namespace falcon::simd
     };
 
 
-    /** 
-     * @brief Template specialization of @ref Register map for 128-bit (16 byte) aligned integrals(`char`, `short`,
-     *        `int`, `long long` and their unsigned variants).
+    /**
+     *  @brief Template specialization of @ref RegisterMap for 128-bit (16-byte) aligned integrals.
+     *         Maps standard integral types (`char`, `short`, `int`, `long long`, and unsigned variants)
+     *         to the SSE integer register `__m128i`.
      *
      * @tparam T The numeric type of data. Must satisfy `std::integral`.
      */
@@ -146,7 +153,10 @@ namespace falcon::simd
     };
 
 
-    /** @brief Template specialization of @ref Register map for 256-bit (32 byte) aligned float. */
+    /**
+     * @brief Template specialization of @ref RegisterMap for 256-bit (32 byte) aligned `float`.
+     *        Maps `float` to the AVX single precision floating point register `__m256`.
+     */
     template <>
     struct RegisterMap<float, 32>
     {
@@ -154,7 +164,10 @@ namespace falcon::simd
     };
 
 
-    /** @brief Template specialization of @ref Register map for 256-bit (32 byte) aligned double. */
+    /**
+     * @brief Template specialization of @ref RegisterMap for 256-bit (32 byte) aligned `double`.
+     *        Maps `double` to the AVX double precision floating point register `__m256d`.
+     */
     template <>
     struct RegisterMap<double, 32>
     {
@@ -162,9 +175,10 @@ namespace falcon::simd
     };
 
 
-    /**
-     * @brief Template specialization of @ref Register map for 256-bit (32 byte) aligned integrals(`char`, `short`,
-     *        `int`, `long long` and their unsigned variants).
+    /** 
+     *  @brief Template specialization of @ref RegisterMap for 256-bit (32-byte) aligned integrals.
+     *         Maps standard integral types (`char`, `short`, `int`, `long long`, and unsigned variants)
+     *         to the AVX2 integer register `__m256i`.
      *
      * @tparam T The numeric type of data. Must satisfy `std::integral`.
      */
@@ -175,7 +189,10 @@ namespace falcon::simd
     };
 
 
-    /** @brief Template specialization of @ref Register map for 512-bit (64 byte) aligned float. */
+    /**
+     * @brief Template specialization of @ref RegisterMap for 512-bit (64 byte) aligned `float`.
+     *        Maps `float` to the AVX512 single precision floating point register `__m512`.
+     */
     template <>
     struct RegisterMap<float, 64>
     {
@@ -183,7 +200,10 @@ namespace falcon::simd
     };
 
 
-    /** @brief Template specialization of @ref Register map for 512-bit (64 byte) aligned double. */
+    /**
+     * @brief Template specialization of @ref RegisterMap for 512-bit (64 byte) aligned `double`.
+     *        Maps `double` to the AVX512 double precision floating point register `__m512d`.
+     */
     template <>
     struct RegisterMap<double, 64>
     {
@@ -192,8 +212,9 @@ namespace falcon::simd
 
 
     /**
-     * @brief Template specialization of @ref Register map for 512-bit (64 byte) aligned integrals(`char`, `short`,
-     *        `int`, `long long` and their unsigned variants).
+     *  @brief Template specialization of @ref RegisterMap for 512-bit (64-byte) aligned integrals.
+     *         Maps standard integral types (`char`, `short`, `int`, `long long`, and unsigned variants)
+     *         to the AVX512 integer register `__m512i`.
      *
      * @tparam T The numeric type of data. Must satisfy `std::integral`.
      */
