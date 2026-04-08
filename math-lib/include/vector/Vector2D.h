@@ -165,7 +165,7 @@ namespace fgm
          *         COLOR COORDINATES          *
          *                                    *
          **************************************/
-        
+
         /**
          * @brief Access the element at the first location (read-only).
          * @return A copy of the first vector element.
@@ -326,8 +326,8 @@ namespace fgm
 
         /**
          * @brief Compare components for inequality across two vectors.
-         *        Perform a component-wise comparison and returns true if any of the pair satisfies inequality condition
-         *        within the given @p epsilon.
+         *        Performs a component-wise comparison and returns true if any corresponding elements differ by more
+         *        than @p epsilon.
          *
          * @note To obtain a component-wise boolean mask, use @ref neq.
          *
