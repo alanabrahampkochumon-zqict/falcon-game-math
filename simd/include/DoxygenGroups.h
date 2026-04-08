@@ -9,3 +9,26 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+
+// clang-format off
+/**
+ * @defgroup FalconSIMD Falcon SIMD
+ * @brief Complete SIMD Suite for FGM.
+ * @{
+ */
+    
+
+    /**
+     * @defgroup StaticDispatch Static SIMD Dispatch
+     * @brief Function, data structures, and preprocessors related to static time dispatch of SIMD.
+     * @ingroup FalconSIMD
+     * @{
+     *   @defgroup S_SIMD_Preprocessors Preprocessor Definitions
+     *   @defgroup S_SIMD_RegisterType Register Type
+     *   @defgroup S_SIMD_Utils SIMD Utilities
+     * @}
+     */
+
+
+/** @} */ // End of FalconSIMD
+// clang-format on

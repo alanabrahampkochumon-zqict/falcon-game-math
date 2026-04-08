@@ -4,18 +4,18 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Architecture-agnostic SIMD abstractions and feature detection macros
+ * @brief Architecture-agnostic SIMD abstractions and feature detection macros.
  *
  * @par Configuration
- * Define FORCE_SSE to turn on SSE, even if hardware supports newer instructions
- * Similar options include FORCE_AVX512, FORCE_AVX2, FORCE_SSE, and FORCE_SCALAR which will completely turn off SIMD.
- * @note Even if flags are specified, it will only default to the max that the CPU architecture supports
+ *      Define FORCE_SSE to turn on SSE, even if hardware supports newer instructions
+ *      Similar options include FORCE_AVX512, FORCE_AVX2, FORCE_SSE, and FORCE_SCALAR which will completely turn off SIMD.
+ *      @note Even if flags are specified, it will only default to the max that the CPU architecture supports
  *
- * @par Compiler note
- * Make sure compiler flags are turned on:
- * -mavx2 (GCC/Clang) or /arch:AVX2(MSVC) for turning on AVX2 support
- * -mavx512 (GCC/Clang) or /arch:AVX512 (MSVC) for turning on AVX512 supported.
- * @note If you compile using the supplied CMakeList.txt, then, it will turn on the flag supported by the CPU.
+ * @par Compiler note (Static Dispatch)
+ *      Make sure compiler flags are turned on:
+ *      -mavx2 (GCC/Clang) or /arch:AVX2(MSVC) for turning on AVX2 support
+ *      -mavx512 (GCC/Clang) or /arch:AVX512 (MSVC) for turning on AVX512 supported.
+ *      @note If you compile using the supplied CMakeList.txt, then, it will turn on the flag supported by the CPU.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -27,6 +27,11 @@
 #include <cstddef>
 #include <immintrin.h>
 
+
+/**
+ * @addtogroup S_SIMD_Preprocessors
+ * @{
+ */
 
 /**************************************
  *                                    *
@@ -85,76 +90,124 @@
     #define MAX_HARDWARE_ALIGNMENT = 0;
 #endif
 
+/** @} */
 
+
+
+/**
+ * @addtogroup S_SIMD_RegisterType
+ * @{
+ */
 
 /**************************************
  *                                    *
  *           SIMD Registers           *
  *                                    *
  **************************************/
+
 namespace falcon::simd
 {
+    /**
+     * @brief Templated data structure for wrapping register of a given size and byte alignment/register width.
+     *
+     * @tparam T        The data-type of the register.
+     * @tparam RegWidth The size of the register in bytes.
+     */
     template <typename T, std::size_t RegWidth>
     struct RegisterMap;
 
 
+    /** @brief Template specialization of @ref Register map for 128-bit (16 byte) aligned float. */
     template <>
     struct RegisterMap<float, 16>
     {
         using type = __m128;
     };
 
+
+    /** @brief Template specialization of @ref Register map for 128-bit (16 byte) aligned double. */
     template <>
     struct RegisterMap<double, 16>
     {
         using type = __m128d;
     };
 
+
+    /** 
+     * @brief Template specialization of @ref Register map for 128-bit (16 byte) aligned integrals(`char`, `short`,
+     *        `int`, `long long` and their unsigned variants).
+     *
+     * @tparam T The numeric type of data. Must satisfy `std::integral`.
+     */
     template <std::integral T>
     struct RegisterMap<T, 16>
     {
         using type = __m128i;
     };
 
+
+    /** @brief Template specialization of @ref Register map for 256-bit (32 byte) aligned float. */
     template <>
     struct RegisterMap<float, 32>
     {
         using type = __m256;
     };
 
+
+    /** @brief Template specialization of @ref Register map for 256-bit (32 byte) aligned double. */
     template <>
     struct RegisterMap<double, 32>
     {
         using type = __m256d;
     };
 
+
+    /**
+     * @brief Template specialization of @ref Register map for 256-bit (32 byte) aligned integrals(`char`, `short`,
+     *        `int`, `long long` and their unsigned variants).
+     *
+     * @tparam T The numeric type of data. Must satisfy `std::integral`.
+     */
     template <std::integral T>
     struct RegisterMap<T, 32>
     {
         using type = __m256i;
     };
 
+
+    /** @brief Template specialization of @ref Register map for 512-bit (64 byte) aligned float. */
     template <>
     struct RegisterMap<float, 64>
     {
         using type = __m512;
     };
 
+
+    /** @brief Template specialization of @ref Register map for 512-bit (64 byte) aligned double. */
     template <>
     struct RegisterMap<double, 64>
     {
         using type = __m512d;
     };
 
+
+    /**
+     * @brief Template specialization of @ref Register map for 512-bit (64 byte) aligned integrals(`char`, `short`,
+     *        `int`, `long long` and their unsigned variants).
+     *
+     * @tparam T The numeric type of data. Must satisfy `std::integral`.
+     */
     template <std::integral T>
     struct RegisterMap<T, 64>
     {
         using type = __m512i;
     };
 
-#if defined(MAX_ALIGNMENT) && MAX_ALIGNMENT > 0
-    constexpr PackingParams packingParams = calculatePackedSize(TotalBytes, MAX_ALIGNMENT);
-#endif
+    /** @} */
+
+    // #if defined(MAX_ALIGNMENT) && MAX_ALIGNMENT > 0
+    //     constexpr PackingParams packingParams = calculatePackedSize(TotalBytes, MAX_ALIGNMENT);
+    // #endif
 
 
 
