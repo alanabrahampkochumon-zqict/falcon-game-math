@@ -310,7 +310,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] Matrix2D& operator+=(const Matrix2D<U>& rhs) noexcept
+        Matrix2D& operator+=(const Matrix2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -325,14 +325,14 @@ namespace fgm
          *
          * @param[in] rhs The matrix to subtract.
          *
-         * @return A new @ref Matrix2D containing the component-wise difference.
+         * @return A new @ref Matrix2D containing the element-wise difference.
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator-(const Matrix2D<U>& rhs) const noexcept;
 
 
         /**
-         * @brief Subtract another matrix from this matrix component-wise.
+         * @brief Subtract another matrix from this matrix element-wise.
          *        Perform an in-place substraction of @p rhs from the current instance.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -343,7 +343,7 @@ namespace fgm
          *
          * @return A reference to this matrix (*this).
          */
-        [[nodiscard]] constexpr Matrix2D& operator-=(const Matrix2D& rhs) noexcept;
+        constexpr Matrix2D& operator-=(const Matrix2D& rhs) noexcept;
 
         template <StrictArithmetic S>
         Matrix2D operator*(const S& scalar) const;
