@@ -11,8 +11,8 @@
  *
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
  * @note Matrices utilize a strict column-major internal memory layout. To align with standard mathematical notations,
- *       scalar constructors accept elements in row-major reading order. Vector-based constructors and array-style access
- *       (operator[]) operate directly on columns.
+ *       scalar constructors accept elements in row-major reading order. Vector-based constructors and array-style
+ * access (operator[]) operate directly on columns.
  *
  * @par Configuration
  * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
@@ -212,9 +212,9 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool anyNeq(const Matrix2D<U>& rhs,
-                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                               ? Config::DOUBLE_EPSILON
-                                               : Config::FLOAT_EPSILON) const noexcept;
+                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                                ? Config::DOUBLE_EPSILON
+                                                : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -233,10 +233,10 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr static bool anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
-                                                  double epsilon = (std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>)
-                                                      ? Config::DOUBLE_EPSILON
-                                                      : Config::FLOAT_EPSILON) noexcept;
+                                                   double epsilon = (std::is_same_v<T, double> ||
+                                                                     std::is_same_v<U, double>)
+                                                       ? Config::DOUBLE_EPSILON
+                                                       : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -267,8 +267,27 @@ namespace fgm
         /** @} */
 
 
-        // Math Operators
-        Matrix2D operator+(const Matrix2D& other) const;
+        /*************************************
+         *                                   *
+         *      ARITHMETIC OPERATORS         *
+         *                                   *
+         *************************************/
+
+        /**
+         * @brief Add two matrix element-wise.
+         *        Compute the sum of each element pair and returns a new matrix.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to add.
+         *
+         * @return A new @ref Matrix2D containing the element-wise sum.
+         */
+        template<StrictArithmetic U>
+        PromotedMatrix2D<T, U> operator+(const Matrix2D& rhs) const requires StrictArithmetic<T>;
         Matrix2D& operator+=(const Matrix2D& other);
 
         Matrix2D operator-(const Matrix2D& other) const;

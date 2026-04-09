@@ -153,7 +153,7 @@
              *   @defgroup T_FGM_Mat2x2_Access Component Access
              *   @defgroup T_FGM_Mat2x2_Mutation Component Mutation
              *   @defgroup T_FGM_Mat2x2_Alias Spatial Aliasing
-             *   @defgroup T_FGM_Mat2x2_Const Vector Constants
+             *   @defgroup T_FGM_Mat2x2_Const Matrix Constants
              *   @defgroup T_FGM_Mat2x2_Addition Addition
              *   @defgroup T_FGM_Mat2x2_Subtraction Subtraction
              *   @defgroup T_FGM_Mat2x2_Multiplication Scalar Multiplication
