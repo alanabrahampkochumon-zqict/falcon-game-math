@@ -51,7 +51,7 @@ TYPED_TEST_SUITE(Matrix2DSubtraction, SupportedArithmeticTypes);
 
 /**
  * @test Verify that the binary subtraction operator perform an element-wise subtraction and
- *       returns a new vector instance.
+ *       returns a new matrix instance.
  */
 TYPED_TEST(Matrix2DSubtraction, MinusOperator_ReturnsDifference)
 {
@@ -78,28 +78,28 @@ TEST(Matrix2DSubtraction, MixedTypeSubtractionPromotesType)
 
 /**
  * @test Verify that the compound subtraction assignment operator perform an element-wise subtraction
- *       and mutates the vector in-place.
+ *       and mutates the matrix in-place.
  */
-//TYPED_TEST(Matrix2DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
-//{
-//    this->_matA -= this->_matB;
-//
-//    EXPECT_MAT_EQ(this->_expectedDifference, this->_matA);
-//}
-//
-//
-///**
-// * @test Verify that the compound subtraction assignment operator maintains the destination type and
-// *       perform an implicit cast.
-// */
-//TEST(Matrix2DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
-//{
-//    fgm::Matrix2D vec1(3.0f, -1.0f);
-//    constexpr fgm::Matrix2D vec2(9.0, 10.0);
-//
-//    vec1 -= vec2;
-//
-//    static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
-//}
+TYPED_TEST(Matrix2DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
+{
+    this->_matA -= this->_matB;
+
+    EXPECT_MAT_EQ(this->_expectedDifference, this->_matA);
+}
+
+
+/**
+ * @test Verify that the compound subtraction assignment operator maintains the destination type and
+ *       perform an implicit cast.
+ */
+TEST(Matrix2DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+{
+    fgm::Matrix2D mat1(3.0f, -1.0f, 4.0f, -23.0f);
+    constexpr fgm::Matrix2D mat2(9.0, 10.0, 3.0, 4.0);
+
+    mat1 -= mat2;
+
+    static_assert(std::is_same_v<decltype(mat1)::value_type, float>);
+}
 
 /** @} */

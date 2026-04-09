@@ -169,10 +169,13 @@ namespace fgm
     
 
     template <Arithmetic T>
-    Matrix2D<T>& Matrix2D<T>::operator-=(const Matrix2D& other)
+    constexpr Matrix2D<T>& Matrix2D<T>::operator-=(const Matrix2D& rhs) noexcept
     {
+        _data[0] -=rhs[0];
+        _data[1] -=rhs[1];
         return *this;
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic S>
