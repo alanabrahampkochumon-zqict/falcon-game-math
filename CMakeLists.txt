@@ -96,7 +96,7 @@ if(TARGET gtest)
     target_link_libraries(gtest_main PRIVATE ProjectSanitizers)
 endif()
 
-# include(simdcheck.cmake)
+include(simdcheck.cmake)
 
 add_subdirectory(math-lib)
 add_subdirectory(playground)
@@ -115,7 +115,7 @@ target_link_libraries(MathLib INTERFACE StrictWarnings ProjectSanitizers)
 target_link_libraries(Playground PRIVATE StrictWarnings ProjectSanitizers)
 
 
-# AddSIMDCompilerFlag(TestSuite)
+AddSIMDCompilerFlag(TestSuite)
 
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Playground)
