@@ -18,6 +18,33 @@
  * @{
  */
 
+
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that matrix accessors are available at compile time. */
+namespace 
+{
+    constexpr fgm::Matrix2D matrix(1, 2, 3, 4);
+    constexpr fgm::Vector2D vec0(1, 3);
+    constexpr fgm::Vector2D vec1(2, 4);
+
+    // Verify that matrix elements are accessible as (row, column) during compile time.
+    static_assert(matrix(0, 0) == 1);
+    static_assert(matrix(0, 1) == 2);
+    static_assert(matrix(1, 0) == 3);
+    static_assert(matrix(1, 1) == 4);
+
+    // Verify that matrix columns are accessible as 2D-vectors during compile time.
+    static_assert(matrix[0].x() == vec0[0]);
+    static_assert(matrix[0].y() == vec0[1]);
+    static_assert(matrix[1].x() == vec1[0]);
+    static_assert(matrix[1].y() == vec1[1]);
+}
+
 /**************************************
  *                                    *
  *            ACCESS TESTS            *
