@@ -289,7 +289,23 @@ namespace fgm
         template <StrictArithmetic U>
         [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator+(const Matrix2D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
-        Matrix2D& operator+=(const Matrix2D& other);
+
+
+        /**
+         * @brief Add another matrix to this matrix element-wise.
+         *        Perform an in-place addition of @p rhs to the current instance.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to add.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] Matrix2D& operator+=(const Matrix2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
 
         Matrix2D operator-(const Matrix2D& other) const;
         Matrix2D& operator-=(const Matrix2D& other);

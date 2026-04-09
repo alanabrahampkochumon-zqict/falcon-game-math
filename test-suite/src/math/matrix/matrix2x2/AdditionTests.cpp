@@ -78,26 +78,26 @@ TEST(Matrix2DAddition, MixedTypeAdditionPromotesType)
  * @test Verify that the compound addition assignment operator perform a component-wise addition and
  *       mutates the matrix in-place.
  */
-// TYPED_TEST(Matrix2DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
-//{
-//     this->_matA += this->_matB;
-//
-//     EXPECT_MAT_EQ(this->_expectedSum, this->_matA);
-// }
+ TYPED_TEST(Matrix2DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
+{
+     this->_matA += this->_matB;
+
+     EXPECT_MAT_EQ(this->_expectedSum, this->_matA);
+ }
 
 
 /**
  * @test Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-//TEST(Matrix2DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
-//{
-//    fgm::Matrix2D mat1{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ -3.0f, -4.0f } };
-//    constexpr fgm::Matrix2D mat2{ fgm::Vector2D{ 10.0, 2.0 }, fgm::Vector2D{ 3.0, 8.0 } };
-//
-//    mat1 += mat2;
-//
-//    static_assert(std::is_same_v<decltype(mat1)::value_type, float>);
-//}
+TEST(Matrix2DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
+{
+    fgm::Matrix2D mat1{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ -3.0f, -4.0f } };
+    constexpr fgm::Matrix2D mat2{ fgm::Vector2D{ 10.0, 2.0 }, fgm::Vector2D{ 3.0, 8.0 } };
+
+    mat1 += mat2;
+
+    static_assert(std::is_same_v<decltype(mat1)::value_type, float>);
+}
 
 /** @} */

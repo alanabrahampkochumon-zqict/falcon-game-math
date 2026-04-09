@@ -149,8 +149,11 @@ namespace fgm
 
 
     template <Arithmetic T>
-    Matrix2D<T>& Matrix2D<T>::operator+=(const Matrix2D& other)
+    template <StrictArithmetic U>
+    Matrix2D<T>& Matrix2D<T>::operator+=(const Matrix2D<U>& rhs) noexcept requires StrictArithmetic<T>
     {
+        _data[0] +=rhs[0];
+        _data[1] +=rhs[1];
         return *this;
     }
 
