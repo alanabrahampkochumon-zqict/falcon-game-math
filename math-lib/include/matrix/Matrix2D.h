@@ -267,6 +267,12 @@ namespace fgm
         /** @} */
 
 
+
+        /**
+         * @addtogroup FGM_Mat2x2_Arithmetic
+         * @{
+         */
+
         /*************************************
          *                                   *
          *       ARITHMETIC OPERATORS        *
@@ -335,6 +341,9 @@ namespace fgm
         Matrix2D operator/(const S& scalar) const;
         template <StrictArithmetic S>
         Matrix2D& operator/=(const S& scalar);
+
+        /** @} */
+
 
         // Determinants
         // Calculates the determinant for the current Matrix2D.
