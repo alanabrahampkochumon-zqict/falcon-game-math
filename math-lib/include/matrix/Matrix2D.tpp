@@ -210,7 +210,7 @@ namespace fgm
     T Matrix2D<T>::determinant(const Matrix2D<T>& matrix)
     {
 
-        return *this;
+        return matrix.determinant();
     }
 
     template <Arithmetic T>

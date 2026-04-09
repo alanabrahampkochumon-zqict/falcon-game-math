@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.25)
 project(FalconGameMath LANGUAGES CXX)
 
 add_library(StrictWarnings INTERFACE)
+add_library(ProjectSanitizers INTERFACE)
 
 # Clang Formatter
 find_program(CLANG_FORMATTER NAMES clang-format)
@@ -61,25 +62,23 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # Enables Strict Warnings and Debug-only ASan
 if(ENABLE_STRICT)
     message(STATUS "Configuring Strict Warnings (ASan enabled for Debug builds only)")
-    if(MSVC)
+    if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        target_compile_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:/fsanitize=address;/Zi>)
+        target_link_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:/INCREMENTAL:NO>)
+    else()
+        target_compile_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:-fsanitize=address;-fno-omit-frame-pointer>)
+        target_link_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:-fsanitize=address>)
+    endif()
+
+    if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         target_compile_options(StrictWarnings INTERFACE
-            $<$<CONFIG:Debug>:/fsanitize=address;/Zi>
-            $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict;/wd4201;/wd26495;/wd26439;/wd4723>
+            $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict>
         )
-        target_link_options(StrictWarnings INTERFACE 
-            $<$<CONFIG:Debug>:/INCREMENTAL:NO>
-        )
-        # target_compile_definitions(StrictWarnings INTERFACE
-        # $<$<CONFIG:Debug>:_DISABLE_VECTOR_ANNOTATION>
-        # $<$<CONFIG:Debug>:_DISABLE_STRING_ANNOTATION>
-        # )
     else()
         target_compile_options(StrictWarnings INTERFACE
-            $<$<CONFIG:Debug>:-fsanitize=address;-fno-omit-frame-pointer>
             $<$<COMPILE_LANGUAGE:CXX>:-Wall;-Wextra;-Werror;-pedantic-errors>
-        )
-        target_link_options(StrictWarnings INTERFACE
-            $<$<CONFIG:Debug>:-fsanitize=address>
+            $<$<CXX_COMPILER_ID:Clang>:-Wno-c++98-compat;-Wno-c++98-compat-pedantic;-Wno-pre-c++14-compat;-Wno-pre-c++17-compat;-Wno-c++20-compat>
+            $<$<CXX_COMPILER_ID:AppleClang>:-Wno-c++98-compat;-Wno-c++98-compat-pedantic;-Wno-pre-c++14-compat;-Wno-pre-c++17-compat;-Wno-c++20-compat>
         )
     endif()
 endif()
@@ -92,25 +91,31 @@ endif()
 
 include(dependencies.cmake)
 if(TARGET gtest)
-    target_link_libraries(gtest PRIVATE StrictWarnings)
-    target_link_libraries(gmock PRIVATE StrictWarnings)
-    target_link_libraries(gtest_main PRIVATE StrictWarnings)
+    target_link_libraries(gtest PRIVATE ProjectSanitizers)
+    target_link_libraries(gmock PRIVATE ProjectSanitizers)
+    target_link_libraries(gtest_main PRIVATE ProjectSanitizers)
 endif()
 
-include(simdcheck.cmake)
+# include(simdcheck.cmake)
 
 add_subdirectory(math-lib)
 add_subdirectory(playground)
 add_subdirectory(test-suite)
 add_subdirectory(simd)
 
-target_link_libraries(TestSuite PRIVATE StrictWarnings)
-target_link_libraries(FalconSIMD INTERFACE StrictWarnings)
-target_link_libraries(MathLib INTERFACE StrictWarnings)
-target_link_libraries(Playground PRIVATE StrictWarnings)
+target_compile_features(TestSuite PRIVATE cxx_std_20)
+target_compile_features(FalconSIMD INTERFACE cxx_std_20)
+target_compile_features(MathLib INTERFACE cxx_std_20)
+target_compile_features(Playground PRIVATE cxx_std_20)
 
 
-AddSIMDCompilerFlag(TestSuite)
+target_link_libraries(TestSuite PRIVATE StrictWarnings ProjectSanitizers)
+target_link_libraries(FalconSIMD INTERFACE StrictWarnings ProjectSanitizers)
+target_link_libraries(MathLib INTERFACE StrictWarnings ProjectSanitizers)
+target_link_libraries(Playground PRIVATE StrictWarnings ProjectSanitizers)
+
+
+# AddSIMDCompilerFlag(TestSuite)
 
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Playground)
