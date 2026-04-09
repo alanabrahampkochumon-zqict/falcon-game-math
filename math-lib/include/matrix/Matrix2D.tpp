@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Matrix2D.h"
+
 #include <valarray>
 
 namespace fgm
@@ -147,7 +149,7 @@ namespace fgm
         return Matrix2D(_data[0] + rhs[0], _data[1] + rhs[1]);
     }
 
-
+   
     template <Arithmetic T>
     template <StrictArithmetic U>
     Matrix2D<T>& Matrix2D<T>::operator+=(const Matrix2D<U>& rhs) noexcept requires StrictArithmetic<T>
@@ -157,12 +159,14 @@ namespace fgm
         return *this;
     }
 
-    template <Arithmetic T>
-    Matrix2D<T> Matrix2D<T>::operator-(const Matrix2D& other) const
-    {
 
-        return *this;
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator-(const Matrix2D<U>& rhs) const noexcept
+    {
+        return Matrix2D(_data[0] - rhs[0], _data[1] - rhs[1]);
     }
+    
 
     template <Arithmetic T>
     Matrix2D<T>& Matrix2D<T>::operator-=(const Matrix2D& other)

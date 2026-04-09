@@ -32,7 +32,7 @@ protected:
         _expectedSum = { fgm::Vector2D<T>(6, 8), fgm::Vector2D<T>(10, 12) };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D addition, parameterized by SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Matrix2D addition, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Matrix2DAddition, SupportedArithmeticTypes);
 
 
@@ -54,9 +54,9 @@ TYPED_TEST_SUITE(Matrix2DAddition, SupportedArithmeticTypes);
  */
 TYPED_TEST(Matrix2DAddition, PlusOperator_ReturnsMatrixSum)
 {
-    const fgm::Matrix2D result = this->_matA + this->_matB;
+    const fgm::Matrix2D sum = this->_matA + this->_matB;
 
-    EXPECT_MAT_EQ(this->_expectedSum, result);
+    EXPECT_MAT_EQ(this->_expectedSum, sum);
 }
 
 
@@ -68,9 +68,9 @@ TEST(Matrix2DAddition, MixedTypeAdditionPromotesType)
 {
     constexpr fgm::Matrix2D mat1{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ -3.0f, -4.0f } };
     constexpr fgm::Matrix2D mat2{ fgm::Vector2D{ 10.0, 2.0 }, fgm::Vector2D{ 3.0, 8.0 } };
-    [[maybe_unused]] constexpr fgm::Matrix2D result = mat1 + mat2;
+    [[maybe_unused]] constexpr fgm::Matrix2D sum = mat1 + mat2;
 
-    static_assert(std::is_same_v<decltype(result)::value_type, double>);
+    static_assert(std::is_same_v<decltype(sum)::value_type, double>);
 }
 
 

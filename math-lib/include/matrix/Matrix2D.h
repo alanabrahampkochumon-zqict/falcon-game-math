@@ -7,7 +7,7 @@
  * @brief Templated 2x2 Matrix supporting integral, floating-point, and boolean types.
  *
  * @details Provide high-performance 2x2 matrix implementation with SIMD acceleration
- *          and support for component-wise operations.
+ *          and support for element-wise operations.
  *
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
  * @note Matrices utilize a strict column-major internal memory layout. To align with standard mathematical notations,
@@ -156,8 +156,8 @@ namespace fgm
          ***************************************/
 
         /**
-         * @brief Compare all components of this matrix for equality with another matrix.
-         *        Perform a component-wise comparison and returns true only if every element pair
+         * @brief Compare all elements of this matrix for equality with another matrix.
+         *        Perform a element-wise comparison and returns true only if every element pair
          *        satisfies the equality condition within the given @p epsilon.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
@@ -166,7 +166,7 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return True if all components are equivalent within @p epsilon.
+         * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool allEq(const Matrix2D<U>& rhs,
@@ -176,11 +176,11 @@ namespace fgm
 
 
         /**
-         * @brief Compare all components of a matrix for equality with another matrix.
-         *        Perform a component-wise comparison and returns true only if every element pair
+         * @brief Compare all elements of a matrix for equality with another matrix.
+         *        Perform a element-wise comparison and returns true only if every element pair
          *        satisfies the equality condition within the given @p epsilon.
          *
-         * @note To obtain a component-wise boolean mask, use @ref eq.
+         * @note To obtain a element-wise boolean mask, use @ref eq.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *
@@ -188,7 +188,7 @@ namespace fgm
          * @param[in] rhs     The matrix to compare against.
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-         * @return True if all components are equivalent within @p epsilon.
+         * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr static bool allEq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
@@ -198,8 +198,8 @@ namespace fgm
                                                       : Config::FLOAT_EPSILON) noexcept;
 
         /**
-         * @brief Compare all components of this matrix for equality with another matrix.
-         *        Perform a component-wise comparison and returns true if any corresponding elements differ by more
+         * @brief Compare all elements of this matrix for equality with another matrix.
+         *        Perform a element-wise comparison and returns true if any corresponding elements differ by more
          *        than @p epsilon.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
@@ -208,7 +208,7 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return True if all components are equivalent within @p epsilon.
+         * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool anyNeq(const Matrix2D<U>& rhs,
@@ -218,8 +218,8 @@ namespace fgm
 
 
         /**
-         * @brief Compare all components of this matrix for equality with another matrix.
-         *        Perform a component-wise comparison and returns true if any corresponding elements differ by more
+         * @brief Compare all elements of this matrix for equality with another matrix.
+         *        Perform a element-wise comparison and returns true if any corresponding elements differ by more
          *        than @p epsilon.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
@@ -229,7 +229,7 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return True if all components are equivalent within @p epsilon.
+         * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr static bool anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
@@ -246,7 +246,7 @@ namespace fgm
          *
          * @param[in] rhs The matrix to compare against.
          *
-         * @return True if all components are equivalent within the default epsilon.
+         * @return True if all elements are equivalent within the default epsilon.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool operator==(const Matrix2D<U>& rhs) const noexcept;
@@ -259,7 +259,7 @@ namespace fgm
          *
          * @param[in] rhs The matrix to compare against.
          *
-         * @return True if any of the components are not equivalent within the default epsilon.
+         * @return True if any of the elements are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool operator!=(const Matrix2D<U>& rhs) const noexcept;
@@ -313,7 +313,23 @@ namespace fgm
         [[nodiscard]] Matrix2D& operator+=(const Matrix2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
-        Matrix2D operator-(const Matrix2D& other) const;
+        /**
+         * @brief Subtract two matrixs element-wise.
+         *        Compute the difference between each element pair and returns a new matrix.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to subtract.
+         *
+         * @return A new @ref matrix2D containing the component-wise difference.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator-(const Matrix2D<U>& rhs) const noexcept;
+
+
         Matrix2D& operator-=(const Matrix2D& other);
 
         template <StrictArithmetic S>

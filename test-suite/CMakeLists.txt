@@ -23,7 +23,7 @@ list(TRANSFORM Vector2DTestFiles PREPEND ${Vector2DTestDir})
 
 # Matrix Test Sources
 set(Matrix2x2TestDir "src/math/matrix/matrix2x2/")
-set(Matrix2x2TestFiles "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;AdditionTests.cpp;")
+set(Matrix2x2TestFiles "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;AdditionTests.cpp;SubtractionTests.cpp")
 list(TRANSFORM Matrix2x2TestFiles PREPEND ${Matrix2x2TestDir})
 
 set(MatrixTestDirectory "src/math/matrix/")
@@ -39,7 +39,7 @@ set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h")
 list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
 
 set(SimdTestDirectory "src/simd/")
-set(SimdTestFiles "RegisterTypeTests.cpp;AdditionTests.cpp;InitializationTests.cpp;SimdUtilsTests.cpp")
+set(SimdTestFiles "RegisterTypeTests.cpp;AdditionTests.cpp;InitializationTests.cpp;SimdUtilsTests.cpp;")
 list(TRANSFORM SimdTestFiles PREPEND ${SimdTestDirectory})
 
 target_sources(
