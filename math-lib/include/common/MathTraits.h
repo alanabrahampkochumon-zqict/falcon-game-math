@@ -129,7 +129,7 @@ namespace fgm
     struct Matrix2D;
 
 
-    /** @brief Alias for promoted value type @ref Matrix2D. */
+    /** @brief Alias for @ref Matrix2D with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromoteValue_t<T, U>>
     using PromotedMatrix2D = Matrix2D<PromoteValue_t<T, U>>;

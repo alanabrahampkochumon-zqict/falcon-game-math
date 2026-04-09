@@ -4,6 +4,13 @@
 
 namespace fgm
 {
+
+    /*************************************
+     *                                   *
+     *            INITIALIZERS           *
+     *                                   *
+     *************************************/
+
     template <Arithmetic T>
     constexpr Matrix2D<T>::Matrix2D() noexcept: _data{ Vector2D<T>(1, 0), Vector2D<T>(0, 1) }
     {}
@@ -35,6 +42,14 @@ namespace fgm
         (*this)(1, 1) = static_cast<T>(other(1, 1));
     }
 
+
+
+
+    /*************************************
+     *                                   *
+     *            ACCESSORS              *
+     *                                   *
+     *************************************/
 
     template <Arithmetic T>
     constexpr Vector2D<T>& Matrix2D<T>::operator[](size_t col) noexcept
@@ -117,13 +132,21 @@ namespace fgm
     }
 
 
-    ///////////////////////////////////
+
+
+    /**************************************
+     *                                    *
+     *        ARITHMETIC OPERATORS        *
+     *                                    *
+     **************************************/
 
     template <Arithmetic T>
-    Matrix2D<T> Matrix2D<T>::operator+(const Matrix2D& other) const
+    template <StrictArithmetic U>
+    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator+(const Matrix2D<U>& rhs) const noexcept requires StrictArithmetic<T>
     {
-        return *this;
+        return Matrix2D(_data[0] + rhs[0], _data[1] + rhs[1]);
     }
+
 
     template <Arithmetic T>
     Matrix2D<T>& Matrix2D<T>::operator+=(const Matrix2D& other)

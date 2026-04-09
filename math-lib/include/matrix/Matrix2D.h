@@ -269,7 +269,7 @@ namespace fgm
 
         /*************************************
          *                                   *
-         *      ARITHMETIC OPERATORS         *
+         *       ARITHMETIC OPERATORS        *
          *                                   *
          *************************************/
 
@@ -286,8 +286,9 @@ namespace fgm
          *
          * @return A new @ref Matrix2D containing the element-wise sum.
          */
-        template<StrictArithmetic U>
-        PromotedMatrix2D<T, U> operator+(const Matrix2D& rhs) const requires StrictArithmetic<T>;
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator+(const Matrix2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
         Matrix2D& operator+=(const Matrix2D& other);
 
         Matrix2D operator-(const Matrix2D& other) const;
