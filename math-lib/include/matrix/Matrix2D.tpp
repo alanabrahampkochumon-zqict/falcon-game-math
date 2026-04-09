@@ -162,14 +162,15 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator-(const Matrix2D<U>& rhs) const noexcept
+    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator-(const Matrix2D<U>& rhs) const noexcept requires StrictArithmetic<T>
     {
         return Matrix2D(_data[0] - rhs[0], _data[1] - rhs[1]);
     }
     
 
     template <Arithmetic T>
-    constexpr Matrix2D<T>& Matrix2D<T>::operator-=(const Matrix2D& rhs) noexcept
+    template <StrictArithmetic U>
+    constexpr Matrix2D<T>& Matrix2D<T>::operator-=(const Matrix2D<U>& rhs) noexcept requires StrictArithmetic<T>
     {
         _data[0] -=rhs[0];
         _data[1] -=rhs[1];

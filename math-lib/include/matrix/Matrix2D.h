@@ -328,7 +328,8 @@ namespace fgm
          * @return A new @ref Matrix2D containing the element-wise difference.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator-(const Matrix2D<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator-(const Matrix2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
 
 
         /**
@@ -343,7 +344,9 @@ namespace fgm
          *
          * @return A reference to this matrix (*this).
          */
-        constexpr Matrix2D& operator-=(const Matrix2D& rhs) noexcept;
+        template <StrictArithmetic U>
+        constexpr Matrix2D& operator-=(const Matrix2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
 
         template <StrictArithmetic S>
         Matrix2D operator*(const S& scalar) const;
