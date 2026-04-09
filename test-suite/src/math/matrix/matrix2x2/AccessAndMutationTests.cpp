@@ -45,6 +45,8 @@ namespace
     static_assert(matrix[1].y() == vec1[1]);
 }
 
+
+
 /**************************************
  *                                    *
  *            ACCESS TESTS            *

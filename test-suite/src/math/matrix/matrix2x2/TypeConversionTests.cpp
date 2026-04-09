@@ -18,6 +18,34 @@
  * @{
  */
 
+/**************************************
+ *                                    *
+ *           STATIC TESTS             *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that the matrix can be type promoted and demoted at compile time. */
+namespace 
+{
+    constexpr fgm::Matrix2D s_Mat(1.0f, 2.0f, 3.0f, 4.0f);
+
+    // Verify that the matrix can be type promoted at compile time.
+    constexpr fgm::Matrix2D<double> s_MatD(s_Mat);
+    static_assert(std::is_same_v<decltype(s_MatD)::value_type, double>);
+
+    // Verify that the matrix can be type demoted at compile time.
+    constexpr fgm::Matrix2D<int> s_MatI(s_Mat);
+    static_assert(std::is_same_v<decltype(s_MatI)::value_type, int>);
+}
+
+
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
+
 /**
  * @test Verify that the conversion constructor correctly promotes components from float to double.
  */

@@ -51,7 +51,7 @@ TYPED_TEST_SUITE(Matrix2DInitialization, SupportedTypes);
 /** @brief Verify that the matrix can be initialized at compile time. */
 namespace 
 {
-    // Verify that the matrix can be initialized at compile time using values.
+    // Verify that the matrix can be initialized at compile time using scalar values.
     constexpr fgm::Matrix2D s_Mat1(1, 2, 3, 4);
     static_assert(s_Mat1(0, 0) == 1);
     static_assert(s_Mat1(0, 1) == 2);
@@ -67,6 +67,8 @@ namespace
     static_assert(s_Mat1(1, 1) == 4);
     
 }
+
+
 
 /**************************************
  *                                    *
