@@ -99,6 +99,19 @@ TEST(Matrix2DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 }
 
 
+/** @test Verify that scalar multiplication by one returns original matrix. */
+TEST(Matrix2DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
+{
+    constexpr fgm::Matrix2D mat = { 1.0f, -2.0f, -4.0f, 5.0f };
+    constexpr fgm::Matrix2D expected = { -2.0f, 4.0f, 8.0f, -10.0f };
+    constexpr float scalar = -2.0f;
+
+    constexpr fgm::Matrix2D<float> product = mat * scalar;
+
+    EXPECT_MAT_EQ(expected, product);
+}
+
+
 /**
  * @test Verify that the binary multiplication operator (matrix * scalar) perform an element-wise product
  *       and returns a new matrix instance.
