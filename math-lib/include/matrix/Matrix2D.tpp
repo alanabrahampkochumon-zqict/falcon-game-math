@@ -195,19 +195,19 @@ namespace fgm
         return *this;
     }
 
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedVector2D<T, U> Matrix2D<T>::operator*(const Vector2D<U>& vec) const requires StrictArithmetic<T
+        >
+    {
+        return Vector2D(_data[0][0] * vec[0] + _data[1][0] * vec[1], _data[0][1] * vec[0] + _data[1][1] * vec[1]);   
+    }
+
 
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedMatrix2D<T, S> operator*(const S scalar, const Matrix2D<T>& mat) noexcept
     {
         return mat * scalar;
-    }
-
-
-    template <Arithmetic T>
-    template <StrictArithmetic S>
-    Vector2D<T> Matrix2D<T>::operator*(const Vector2D<S>& vec) const
-    {
-        return *this;
     }
 
 

@@ -126,7 +126,17 @@ namespace fgm
 
     // Forward declarations
     template <Arithmetic T>
+    struct Vector2D;
+
+    template <Arithmetic T>
     struct Matrix2D;
+    
+
+
+    /** @brief Alias for @ref Vector2D with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromoteValue_t<T, U>>
+    using PromotedVector2D = Vector2D<PromoteValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Matrix2D with promoted value type. */

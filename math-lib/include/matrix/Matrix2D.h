@@ -382,8 +382,24 @@ namespace fgm
         constexpr Matrix2D& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
-        template <StrictArithmetic S>
-        Vector2D<T> operator*(const Vector2D<S>& vec) const;
+
+        /**
+         * @brief Transform the **column vector** by this matrix.
+         *        Perform the linear transformation: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot
+         *                                               \begin{bmatrix} x \\ y \end{bmatrix}  = \begin{bmatrix} x'
+         *                                               \\ y' \end{bmatrix} \f$
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec The column vector to transformed.
+         *
+         * @return A new @ref Vector2D with applied linear transformations.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const requires StrictArithmetic<T>;
 
         template <StrictArithmetic S>
         Matrix2D<T> operator*(const Matrix2D<S>& other) const;
