@@ -209,8 +209,8 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF)
-    #error "FMA IS ALIVE AND COMPILING!"
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
+    // #error "FMA IS ALIVE AND COMPILING!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
         {
             return Vector2D<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
