@@ -93,6 +93,15 @@ enable_testing()
 include(GoogleTest)
 gtest_discover_tests(TestSuite DISCOVERY_MODE PRE_TEST)
 
+source_group(
+    TREE
+    "${CMAKE_CURRENT_SOURCE_DIR}/${IncludeDir}"
+    PREFIX "Header Files"
+    FILES
+    ${SetupFiles}
+    ${Utilities}
+)
+
 source_group (
     TREE
     "${CMAKE_CURRENT_SOURCE_DIR}/src/"
