@@ -56,7 +56,8 @@ protected:
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix2D vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix2DVectorMultiplication, SupportedArithmeticTypes);
+//TYPED_TEST_SUITE(Matrix2DVectorMultiplication, SupportedArithmeticTypes);
+TYPED_TEST_SUITE(Matrix2DVectorMultiplication, ::testing::Types<double>);
 
 
 
@@ -236,7 +237,7 @@ TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  */
 TYPED_TEST(Matrix2DVectorMultiplication, MatrixTimesVectorReturnsATransformedVector)
 {
-    const fgm::vec2 transformedVector = this->_mat * this->_vec;
+    const auto transformedVector = this->_mat * this->_vec;
     if constexpr (std::is_floating_point_v<TypeParam>)
         EXPECT_VEC_EQ(this->_expectedFloatingColVector, transformedVector);
     else

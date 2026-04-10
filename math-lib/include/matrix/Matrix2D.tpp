@@ -208,7 +208,6 @@ namespace fgm
 
         R y = static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) +
               static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
-
         return Vector2D<R>(x, y); 
     }
 
