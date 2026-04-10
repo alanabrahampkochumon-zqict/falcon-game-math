@@ -34,7 +34,7 @@ protected:
         _expectedSum = { T(-5), T(6) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector2D addition, parameterized by SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Vector2D addition, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DAddition, SupportedArithmeticTypes);
 
 
@@ -53,7 +53,7 @@ protected:
         _expectedDifference = { T(103), T(6) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector2D subtraction, parameterized by SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Vector2D subtraction, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DSubtraction, SupportedArithmeticTypes);
 
 
@@ -74,7 +74,7 @@ protected:
         _expectedIntegralVec = { T(14), T(26) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector2D scalar multiplication, parameterized by SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Vector2D scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DScalarMultiplication, SupportedArithmeticTypes);
 
 
