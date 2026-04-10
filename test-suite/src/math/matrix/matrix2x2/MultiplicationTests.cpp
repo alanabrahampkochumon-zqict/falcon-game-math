@@ -22,6 +22,8 @@ protected:
     fgm::Matrix2D<T> _expectedFloatingMat;
     fgm::Matrix2D<T> _expectedIntegralMat;
 
+
+
     void SetUp() override
     {
         _mat = { fgm::Vector2D{ T(7), T(13) }, fgm::Vector2D{ T(5), T(4) } };
@@ -33,6 +35,28 @@ protected:
 };
 /** @brief Test fixture for @ref fgm::Matrix2D scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Matrix2DScalarMultiplication, SupportedArithmeticTypes);
+
+
+template <typename T>
+class Matrix2DVectorMultiplication: public ::testing::Test
+{
+protected:
+    fgm::Matrix2D<T> _mat;
+    fgm::Vector2D<T> _vec;
+    fgm::Vector2D<T> _expectedFloatingColVector;
+    fgm::Vector2D<T> _expectedIntegralColVector;
+
+    void SetUp() override
+    {
+        _mat = { fgm::Vector2D{ T(7.12345678912345), T(13.12345678912345) },
+                 fgm::Vector2D{ T(5.12345678912345), T(4.12345678912345) } };
+        _vec = { T(2.123456789123456), T(3.123456832912) };
+        _expectedFloatingColVector = { T(31.129248797008778), T(40.74653269883751) };
+        _expectedIntegralColVector = { T(29), T(38) };
+    }
+};
+/** @brief Test fixture for @ref fgm::Matrix2D vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix2DVectorMultiplication, SupportedArithmeticTypes);
 
 
 
@@ -143,7 +167,7 @@ TYPED_TEST(Matrix2DScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 
 
 /**
- * @test Verify that the compound multiplication assignment operator performs an element-wise product
+ * @test Verify that the compound multiplication assignment operator (scalar) performs an element-wise product
  *       and mutates the matrix in-place.
  */
 TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScaled)
@@ -158,7 +182,7 @@ TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixSc
 
 
 /**
- * @test Verify that the binary multiplication operator perform automatic type promotion
+ * @test Verify that the binary multiplication operator (scalar) perform automatic type promotion
  *       to the wider numeric type.
  */
 TYPED_TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
@@ -172,7 +196,7 @@ TYPED_TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
 
 
 /**
- * @test Verify that the compound multiplication assignment operator maintains the destination type and
+ * @test Verify that the compound multiplication assignment operator (scalar) maintains the destination type and
  *       perform an implicit cast.
  */
 TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
@@ -186,7 +210,7 @@ TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
 
 
 /**
- * @test Verify that the compound multiplication operator for mixed types
+ * @test Verify that the compound multiplication operator (scalar) for mixed type
  *       ensure minimal precision loss.
  */
 TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
@@ -199,5 +223,61 @@ TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
 
     EXPECT_MAT_EQ(expected, mat);
 }
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation perform linear transformation
+ *        and returns a new column vector.
+ */
+TYPED_TEST(Matrix2DVectorMultiplication, MatrixTimesVectorReturnsATransformedVector)
+{
+    const fgm::vec2 transformedVector = this->_mat * this->_vec;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_VEC_EQ(this->_expectedFloatingColVector, transformedVector);
+    else
+        EXPECT_VEC_EQ(this->_expectedIntegralColVector, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation with identity matrix perform linear transformation
+ *        and returns a new column vector.
+ */
+TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
+{
+    constexpr fgm::Matrix2D<float> iMatrix;
+    constexpr fgm::vec2 vec(2.0f, 1.0f);
+
+    const fgm::vec2 transformedVector = iMatrix * vec;
+
+    EXPECT_VEC_EQ(vec, transformedVector);
+}
+
+//TEST(Matrix2D_Product, VectorTimesAMatrixReturnsANewVectorWithCorrectValues)
+//{
+//    // Arrange
+//    const fgm::Matrix2D mat = { 1.0f, 2.0f, 4.0f, 5.0f };
+//    const fgm::vec2 vec(2.0f, 1.0f);
+//    const fgm::vec2 expected(6.0f, 9.0f);
+//
+//    // Act
+//    const fgm::vec2 actual = vec * mat;
+//
+//    // Assert
+//    testutils::EXPECT_VEC_EQ(expected, actual);
+//}
+//
+//TEST(Matrix2D_Product, VectorTimesIdentityMatrixReturnsTheSameMatrix)
+//{
+//    // Arrange
+//    const fgm::Matrix2D<float> mat;
+//    fgm::vec2 vec(2.0f, 1.0f);
+//
+//    // Act
+//    const fgm::vec2 actual = vec * mat;
+//
+//    // Assert
+//    testutils::EXPECT_VEC_EQ(vec, actual);
+//}
 
 /** @} */
