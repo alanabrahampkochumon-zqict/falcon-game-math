@@ -379,7 +379,8 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic S>
-        constexpr Matrix2D& operator*=(S scalar) noexcept requires StrictArithmetic<T>;
+        constexpr Matrix2D& operator*=(S scalar) noexcept
+            requires StrictArithmetic<T>;
 
         template <StrictArithmetic S>
         Vector2D<T> operator*(const Vector2D<S>& vec) const;
@@ -427,6 +428,12 @@ namespace fgm
     };
 
 
+
+    /**
+     * @addtogroup FGM_Mat2x2_Arithmetic
+     * @{
+     */
+
     /**
      * @brief Scale the matrix by a scalar value.
      *        Multiply each element of the matrix by @p scalar and returns a new matrix.
@@ -444,6 +451,7 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic S>
     [[nodiscard]] constexpr PromotedMatrix2D<T, S> operator*(S scalar, const Matrix2D<T>& mat) noexcept;
 
+
     /**
      * Multiplies a Vector2D by a Matrix2D.
      * NOTE: This operation transposes the 3x1 vector to a 1x3 vector(matrix), and may not be desirable in engine code.
@@ -456,6 +464,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*(const Vector2D<S>& vec, const Matrix2D<T>& mat);
+
 
     /**
      * Multiplies a Vector2D by a Matrix2D.
@@ -471,7 +480,9 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*=(Vector2D<S>& vec, const Matrix2D<T>& mat);
 
+    /** @} */
 
 } // namespace fgm
+
 
 #include "Matrix2D.tpp"
