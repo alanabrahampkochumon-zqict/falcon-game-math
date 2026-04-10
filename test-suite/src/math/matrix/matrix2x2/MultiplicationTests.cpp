@@ -75,28 +75,28 @@ TYPED_TEST_SUITE(Matrix2DVectorMultiplication, ::testing::Types<double>);
 /** @brief Verify that matrix multiplication operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix2D s_Mat1(1, 2, 3, 4);
-    constexpr fgm::Vector2D s_Vec(1, 2);
+    constexpr fgm::Matrix2D MAT(1, 2, 3, 4);
+    constexpr fgm::Vector2D VEC(1, 2);
 
     // Verify matrix * scalar multiplication
-    constexpr fgm::Matrix2D s_BinaryProduct1 = s_Mat1 * 2;
-    static_assert(s_BinaryProduct1(0, 0) == 2);
-    static_assert(s_BinaryProduct1(0, 1) == 4);
-    static_assert(s_BinaryProduct1(1, 0) == 6);
-    static_assert(s_BinaryProduct1(1, 1) == 8);
+    constexpr fgm::Matrix2D BINARY_PRODUCT_1 = MAT * 2;
+    static_assert(BINARY_PRODUCT_1(0, 0) == 2);
+    static_assert(BINARY_PRODUCT_1(0, 1) == 4);
+    static_assert(BINARY_PRODUCT_1(1, 0) == 6);
+    static_assert(BINARY_PRODUCT_1(1, 1) == 8);
 
 
     // Verify scalar * matrix multiplication
-    constexpr fgm::Matrix2D s_BinaryProduct2 = 2 * s_Mat1;
-    static_assert(s_BinaryProduct2(0, 0) == 2);
-    static_assert(s_BinaryProduct2(0, 1) == 4);
-    static_assert(s_BinaryProduct2(1, 0) == 6);
-    static_assert(s_BinaryProduct2(1, 1) == 8);
+    constexpr fgm::Matrix2D BINARY_PRODUCT_2 = 2 * MAT;
+    static_assert(BINARY_PRODUCT_2(0, 0) == 2);
+    static_assert(BINARY_PRODUCT_2(0, 1) == 4);
+    static_assert(BINARY_PRODUCT_2(1, 0) == 6);
+    static_assert(BINARY_PRODUCT_2(1, 1) == 8);
 
     // Verify matrix * vector multiplication
-    constexpr fgm::Vector2D s_ColVecProduct = s_Mat1 * s_Vec;
-    static_assert(s_ColVecProduct[0] == 5);
-    static_assert(s_ColVecProduct[1] == 11);
+    constexpr fgm::Vector2D COL_VECTOR_PRODUCT = MAT * VEC;
+    static_assert(COL_VECTOR_PRODUCT[0] == 5);
+    static_assert(COL_VECTOR_PRODUCT[1] == 11);
 } // namespace
 
 

@@ -3,6 +3,7 @@
 #include "Matrix2D.h"
 
 #include <valarray>
+#include <cmath>
 
 namespace fgm
 {
@@ -144,43 +145,48 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator+(const Matrix2D<U>& rhs) const noexcept requires StrictArithmetic<T>
+    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator+(const Matrix2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
     {
         return Matrix2D(_data[0] + rhs[0], _data[1] + rhs[1]);
     }
 
-   
+
     template <Arithmetic T>
     template <StrictArithmetic U>
-    Matrix2D<T>& Matrix2D<T>::operator+=(const Matrix2D<U>& rhs) noexcept requires StrictArithmetic<T>
+    Matrix2D<T>& Matrix2D<T>::operator+=(const Matrix2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
     {
-        _data[0] +=rhs[0];
-        _data[1] +=rhs[1];
+        _data[0] += rhs[0];
+        _data[1] += rhs[1];
         return *this;
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator-(const Matrix2D<U>& rhs) const noexcept requires StrictArithmetic<T>
+    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator-(const Matrix2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
     {
         return Matrix2D(_data[0] - rhs[0], _data[1] - rhs[1]);
     }
-    
+
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr Matrix2D<T>& Matrix2D<T>::operator-=(const Matrix2D<U>& rhs) noexcept requires StrictArithmetic<T>
+    constexpr Matrix2D<T>& Matrix2D<T>::operator-=(const Matrix2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
     {
-        _data[0] -=rhs[0];
-        _data[1] -=rhs[1];
+        _data[0] -= rhs[0];
+        _data[1] -= rhs[1];
         return *this;
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::operator*(const S scalar) const noexcept requires StrictArithmetic<T>
+    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::operator*(const S scalar) const noexcept
+        requires StrictArithmetic<T>
     {
         return Matrix2D(scalar * _data[0], scalar * _data[1]);
     }
@@ -188,27 +194,47 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Matrix2D<T>& Matrix2D<T>::operator*=(const S scalar) noexcept requires StrictArithmetic<T>
+    constexpr Matrix2D<T>& Matrix2D<T>::operator*=(const S scalar) noexcept
+        requires StrictArithmetic<T>
     {
         _data[0] *= scalar;
         _data[1] *= scalar;
         return *this;
     }
 
-    // TODO: Use FMA
+
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedVector2D<T, U> Matrix2D<T>::operator*(const Vector2D<U>& vec) const requires StrictArithmetic<T
-        >
+    constexpr PromotedVector2D<T, U> Matrix2D<T>::operator*(const Vector2D<U>& vec) const
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF)
+    #error "FMA IS ALIVE AND COMPILING!"
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            return Vector2D<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
+                                        static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
+                               std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
+                                        static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
+        }
+        else
+        {
+            R x = static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) +
+                static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]);
 
-        R x = static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) +
-              static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]);
+            R y = static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) +
+                static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
+            return Vector2D<R>(x, y);
+        }
+#else
+        R x =
+            static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]);
 
-        R y = static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) +
-              static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
-        return Vector2D<R>(x, y); 
+        R y =
+            static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
+        return Vector2D<R>(x, y);
+#endif
     }
 
 
