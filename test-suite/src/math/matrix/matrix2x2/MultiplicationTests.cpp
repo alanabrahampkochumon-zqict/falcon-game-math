@@ -134,7 +134,7 @@ TYPED_TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
  */
 TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
-    fgm::Matrix2D mat(3.0f, -1.0f);
+    fgm::Matrix2D mat(3.0f, -1.0f, -12.0f, 14.0f);
     constexpr double scalar = 5.0;
     mat *= scalar;
 

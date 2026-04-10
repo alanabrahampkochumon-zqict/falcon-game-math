@@ -180,17 +180,28 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    Matrix2D<T> Matrix2D<T>::operator*(const S& scalar) const
+    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::operator*(const S scalar) const noexcept requires StrictArithmetic<T>
     {
-        return *this;
+        return Matrix2D(scalar * _data[0], scalar * _data[1]);
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    Matrix2D<T>& Matrix2D<T>::operator*=(const S& scalar)
+    constexpr Matrix2D<T>& Matrix2D<T>::operator*=(const S scalar) noexcept requires StrictArithmetic<T>
     {
+        _data[0] *= scalar;
+        _data[1] *= scalar;
         return *this;
     }
+
+
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr PromotedMatrix2D<T, S> operator*(const S scalar, const Matrix2D<T>& mat) noexcept
+    {
+        return mat * scalar;
+    }
+
 
     template <Arithmetic T>
     template <StrictArithmetic S>
@@ -198,6 +209,7 @@ namespace fgm
     {
         return *this;
     }
+
 
     template <Arithmetic T>
     template <StrictArithmetic S>
@@ -273,12 +285,6 @@ namespace fgm
         return matrix.inverse();
     }
 
-    template <StrictArithmetic T, StrictArithmetic S>
-    Matrix2D<T> operator*(const S& scalar, const Matrix2D<T>& matrix)
-    {
-
-        return matrix;
-    }
 
     template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*(const Vector2D<S>& vec, const Matrix2D<T>& mat)

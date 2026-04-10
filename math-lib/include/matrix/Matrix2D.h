@@ -348,11 +348,38 @@ namespace fgm
         constexpr Matrix2D& operator-=(const Matrix2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
+        /**
+         * @brief Scale the matrix by a scalar value.
+         *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Matrix2D scaled by @p scalar.
+         */
         template <StrictArithmetic S>
-        Matrix2D operator*(const S& scalar) const;
+        [[nodiscard]] constexpr PromotedMatrix2D<T, S> operator*(S scalar) const noexcept
+            requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Scale this matrix in-place by a scalar value.
+         *        Perform an in-place multiplication of each element by @p scalar.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
         template <StrictArithmetic S>
-        Matrix2D& operator*=(const S& scalar);
+        constexpr Matrix2D& operator*=(S scalar) noexcept requires StrictArithmetic<T>;
 
         template <StrictArithmetic S>
         Vector2D<T> operator*(const Vector2D<S>& vec) const;
@@ -399,8 +426,23 @@ namespace fgm
         Vector2D<T> _data[columns];
     };
 
+
+    /**
+     * @brief Scale the matrix by a scalar value.
+     *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] mat    The matrix to scale.
+     *
+     * @return A new @ref Matrix2D scaled by @p scalar.
+     */
     template <StrictArithmetic T, StrictArithmetic S>
-    Matrix2D<T> operator*(const S& scalar, const Matrix2D<T>& matrix);
+    [[nodiscard]] constexpr PromotedMatrix2D<T, S> operator*(S scalar, const Matrix2D<T>& mat) noexcept;
 
     /**
      * Multiplies a Vector2D by a Matrix2D.
@@ -411,6 +453,7 @@ namespace fgm
      * @param mat matrix to be multiplied against.
      * @return a new Vector2D transposed(row major form)
      */
+
     template <StrictArithmetic T, StrictArithmetic S>
     Vector2D<T> operator*(const Vector2D<S>& vec, const Matrix2D<T>& mat);
 
