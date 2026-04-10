@@ -43,6 +43,36 @@ TYPED_TEST_SUITE(Matrix2DScalarMultiplication, SupportedArithmeticTypes);
 
 /**************************************
  *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that matrix multiplication operations are available at compile time. */
+namespace
+{
+    constexpr fgm::Matrix2D s_Mat1(1, 2, 3, 4);
+
+    // Verify matrix * scalar multiplication
+    constexpr fgm::Matrix2D s_BinaryProduct1 = s_Mat1 * 2;
+    static_assert(s_BinaryProduct1(0, 0) == 2);
+    static_assert(s_BinaryProduct1(0, 1) == 4);
+    static_assert(s_BinaryProduct1(1, 0) == 6);
+    static_assert(s_BinaryProduct1(1, 1) == 8);
+
+
+    // Verify scalar * matrix multiplication
+    constexpr fgm::Matrix2D s_BinaryProduct2 = 2 * s_Mat1;
+    static_assert(s_BinaryProduct2(0, 0) == 2);
+    static_assert(s_BinaryProduct2(0, 1) == 4);
+    static_assert(s_BinaryProduct2(1, 0) == 6);
+    static_assert(s_BinaryProduct2(1, 1) == 8);
+
+} // namespace
+
+
+
+/**************************************
+ *                                    *
  *     SCALAR MULTIPLICATION TESTS    *
  *                                    *
  **************************************/
