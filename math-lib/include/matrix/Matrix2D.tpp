@@ -2,8 +2,8 @@
 
 #include "Matrix2D.h"
 
-#include <valarray>
 #include <cmath>
+#include <valarray>
 
 namespace fgm
 {
@@ -210,31 +210,20 @@ namespace fgm
     {
         using R = std::common_type_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-    // #error "FMA IS ALIVE AND COMPILING!" // For checking if FMA execution path is active.
+        // #error "FMA IS ALIVE AND COMPILING!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
-        {
-            return Vector2D<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
-                                        static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
-                               std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
-                                        static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
-        }
-        else
-        {
-            R x = static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) +
-                static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]);
-
-            R y = static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) +
-                static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
-            return Vector2D<R>(x, y);
-        }
-#else
+            if (!std::is_constant_evaluated())
+                return Vector2D<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
+                                            static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
+                                   std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
+                                            static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
+#endif
         R x =
             static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]);
 
         R y =
             static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
         return Vector2D<R>(x, y);
-#endif
     }
 
 
