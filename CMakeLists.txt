@@ -114,6 +114,10 @@ target_link_libraries(FalconSIMD INTERFACE StrictWarnings ProjectSanitizers)
 target_link_libraries(MathLib INTERFACE StrictWarnings ProjectSanitizers)
 target_link_libraries(Playground PRIVATE StrictWarnings ProjectSanitizers)
 
+set_target_properties(
+    docs format lint
+    PROPERTIES FOLDER "Dev Utilities"
+)
 
 AddSIMDCompilerFlag(TestSuite)
 
