@@ -195,12 +195,21 @@ namespace fgm
         return *this;
     }
 
+    // TODO: Use FMA
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr PromotedVector2D<T, U> Matrix2D<T>::operator*(const Vector2D<U>& vec) const requires StrictArithmetic<T
         >
     {
-        return Vector2D(_data[0][0] * vec[0] + _data[1][0] * vec[1], _data[0][1] * vec[0] + _data[1][1] * vec[1]);   
+        using R = std::common_type_t<T, U>;
+
+        R x = static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) +
+              static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]);
+
+        R y = static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) +
+              static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
+
+        return Vector2D<R>(x, y); 
     }
 
 

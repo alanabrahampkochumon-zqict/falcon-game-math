@@ -75,6 +75,7 @@ TYPED_TEST_SUITE(Matrix2DVectorMultiplication, SupportedArithmeticTypes);
 namespace
 {
     constexpr fgm::Matrix2D s_Mat1(1, 2, 3, 4);
+    constexpr fgm::Vector2D s_Vec(1, 2);
 
     // Verify matrix * scalar multiplication
     constexpr fgm::Matrix2D s_BinaryProduct1 = s_Mat1 * 2;
@@ -91,6 +92,10 @@ namespace
     static_assert(s_BinaryProduct2(1, 0) == 6);
     static_assert(s_BinaryProduct2(1, 1) == 8);
 
+    // Verify matrix * vector multiplication
+    constexpr fgm::Vector2D s_ColVecProduct = s_Mat1 * s_Vec;
+    static_assert(s_ColVecProduct[0] == 5);
+    static_assert(s_ColVecProduct[1] == 11);
 } // namespace
 
 
@@ -248,7 +253,7 @@ TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
     constexpr fgm::Matrix2D<float> iMatrix;
     constexpr fgm::vec2 vec(2.0f, 1.0f);
 
-    const fgm::vec2 transformedVector = iMatrix * vec;
+    constexpr fgm::vec2 transformedVector = iMatrix * vec;
 
     EXPECT_VEC_EQ(vec, transformedVector);
 }
