@@ -260,6 +260,20 @@ TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
     EXPECT_VEC_EQ(vec, transformedVector);
 }
 
+/**
+ * @brief Verify that the binary vector multiplication operation perform automatic type promotion
+ *        to the wider numeric type.
+ */
+TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
+{
+    constexpr fgm::Matrix2D<double> iMatrix;
+    [[maybe_unused]] fgm::iVec2 vec(2, 1);
+
+    vec *= iMatrix;
+    static_assert(std::is_same_v<decltype(vec)::value_type, int>);
+}
+
+
 
 /**
  * @brief Verify that the compound vector multiplication operation perform linear transformation
@@ -294,13 +308,13 @@ TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
  * @brief Verify that the compound vector multiplication operation maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
+TEST(Matrix2DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
-    constexpr fgm::Matrix2D<double> iMatrix;
-    [[maybe_unused]] fgm::iVec2 vec(2, 1);
+    constexpr fgm::Matrix2D mat(1.0, 2.0);
+    constexpr fgm::iVec2 vec(2, 1);
 
-    vec *= iMatrix;
-    static_assert(std::is_same_v<decltype(vec)::value_type, int>);
+    constexpr auto transformedVector = mat * vec;
+    static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
 }
 
 /**
@@ -317,8 +331,6 @@ TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsure
 
     EXPECT_VEC_EQ(expected, vec);
 }
-
-// TODO: Minimal precision loss for integral * float
 
 
 // TEST(Matrix2D_Product, VectorTimesAMatrixReturnsANewVectorWithCorrectValues)
