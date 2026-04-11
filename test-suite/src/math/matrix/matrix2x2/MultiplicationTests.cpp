@@ -222,9 +222,9 @@ TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
  */
 TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    fgm::Matrix2D mat(3, -1);
+    fgm::Matrix2D mat(3, -1, 10, 5);
     constexpr double scalar = 2.5;
-    constexpr fgm::Matrix2D expected(7, -2);
+    constexpr fgm::Matrix2D expected(7, -2, 25, 12);
 
     mat *= scalar;
 
@@ -303,7 +303,23 @@ TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNo
     static_assert(std::is_same_v<decltype(vec)::value_type, int>);
 }
 
+/**
+ * @test Verify that the compound multiplication operator (vector) for mixed type
+ *       ensure minimal precision loss.
+ */
+TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+{
+    constexpr fgm::Matrix2D mat(2.5, 3.5, 0.5, 1.5);
+    fgm::Vector2D vec(10, 20);
+    constexpr fgm::Vector2D expected(35, 65);
+
+    vec *= mat;
+
+    EXPECT_VEC_EQ(expected, vec);
+}
+
 // TODO: Minimal precision loss for integral * float
+
 
 // TEST(Matrix2D_Product, VectorTimesAMatrixReturnsANewVectorWithCorrectValues)
 //{

@@ -236,7 +236,7 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    static constexpr PromotedVector2D<T, U> operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
+    static constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
     {
         using R = std::common_type_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
