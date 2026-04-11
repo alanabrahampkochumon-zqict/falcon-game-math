@@ -235,6 +235,28 @@ namespace fgm
     }
 
 
+    template <StrictArithmetic T, StrictArithmetic U>
+    constexpr PromotedVector2D<T, U> operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
+    {
+        using R = std::common_type_t<T, U>;
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
+        #error "FMA IS ALIVE AND COMPILING!" // For checking if FMA execution path is active.
+        if constexpr (std::is_floating_point_v<R>)
+            if (!std::is_constant_evaluated())
+                return Vector2D<R>(std::fma(static_cast<R>(vec[0], static_cast<R>(mat._data[0][0])),
+                                            static_cast<R>(vec[1]) * static_cast<R>(mat._data[0][1])),
+                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(mat._data[1][0]),
+                                            static_cast<R>(vec[1]) * static_cast<R>(mat._data[1][1])));
+#endif
+        R x = static_cast<R>(vec[0]) * static_cast<R>(mat._data[0][0]) +
+            static_cast<R>(vec[1]) * static_cast<R>(mat._data[0][1]);
+
+        R y = static_cast<R>(vec[0]) * static_cast<R>(mat._data[1][0]) +
+            static_cast<R>(vec[1]) * static_cast<R>(mat._data[1][1]);
+        return Vector2D<R>(x, y);
+    }
+
+
     template <Arithmetic T>
     template <StrictArithmetic S>
     Matrix2D<T> Matrix2D<T>::operator*(const Matrix2D<S>& other) const

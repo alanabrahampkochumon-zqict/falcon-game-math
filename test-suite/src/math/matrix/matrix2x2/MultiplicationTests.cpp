@@ -253,7 +253,6 @@ TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
     constexpr fgm::Matrix2D<float> iMatrix;
     constexpr fgm::vec2 vec(2.0f, 1.0f);
 
-    // NOTE: The multiplication is not compile time evaluated since fma is not constexpr till C++23.
     constexpr fgm::vec2 transformedVector = iMatrix * vec;
 
     EXPECT_VEC_EQ(vec, transformedVector);

@@ -17,7 +17,6 @@
  * @addtogroup FGM_Math_Constants
  * @{
  */
-
 namespace fgm::constants
 {
 

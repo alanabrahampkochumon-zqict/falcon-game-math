@@ -399,7 +399,8 @@ namespace fgm
          * @return A new @ref Vector2D with applied linear transformations.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const requires StrictArithmetic<T>;
+        [[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const
+            requires StrictArithmetic<T>;
 
         template <StrictArithmetic S>
         Matrix2D<T> operator*(const Matrix2D<S>& other) const;
@@ -483,18 +484,23 @@ namespace fgm
 
 
     /**
-     * Multiplies a Vector2D by a Matrix2D.
-     * NOTE: This operation transposes the 3x1 vector to a 1x3 vector(matrix), and may not be desirable in engine code.
-     * NOTE: This operation returns a new vector so it is strictly for testing purposes and completeness and is not
-     * desirable to be used in game engine.
-     * @tparam T Type for matrix values
-     * @tparam S Type for vector values
-     * @param vec vector to be multiplied.
-     * @param mat matrix to be multiplied against.
-     * @return the passed in vector
+     * @brief Transform this **row vector** by a matrix.
+     *        Perform the linear transformation: \f$ \begin{bmatrix} x & y \end{bmatrix} \cdot \begin{bmatrix} a & b
+     *                                               \\ c & d \end{bmatrix}  = \begin{bmatrix} x' & y' \end{bmatrix} \f$
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
+     * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] vec The column vector to transformed.
+     * @param[in] mat The transformation matrix.
+     *
+     * @return The passed-in @p vec with the transformations applied.
      */
-    template <StrictArithmetic T, StrictArithmetic S>
-    Vector2D<T> operator*=(Vector2D<S>& vec, const Matrix2D<T>& mat);
+    template <StrictArithmetic T, StrictArithmetic U>
+    [[nodiscard]] constexpr PromotedVector2D<T, U> operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept;
 
     /** @} */
 
