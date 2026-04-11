@@ -3,6 +3,7 @@
 #include "Matrix2D.h"
 
 #include <cmath>
+#include <type_traits>
 #include <valarray>
 
 namespace fgm

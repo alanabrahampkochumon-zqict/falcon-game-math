@@ -56,8 +56,7 @@ protected:
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix2D vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
-//TYPED_TEST_SUITE(Matrix2DVectorMultiplication, SupportedArithmeticTypes);
-TYPED_TEST_SUITE(Matrix2DVectorMultiplication, ::testing::Types<double>);
+TYPED_TEST_SUITE(Matrix2DVectorMultiplication, SupportedArithmeticTypes);
 
 
 
