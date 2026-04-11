@@ -75,7 +75,7 @@ protected:
                   fgm::Vector2D{ T(8.12345678912345), T(3.12345678912345) } };
 
         _expectedFloatingMat = { fgm::Vector2D{ T(74.11690288564759), T(82.73418683126485) },
-                                   fgm::Vector2D{ T(73.8699893074007), T(119.48727325301795) } };
+                                 fgm::Vector2D{ T(73.8699893074007), T(119.48727325301795) } };
         _expectedIntegralMat = { fgm::Vector2D{ T(71), T(79) }, fgm::Vector2D{ T(71), T(116) } };
     }
 };
@@ -355,7 +355,7 @@ TEST(Matrix2DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationProm
 
 /**
  * @brief Verify that the compound vector multiplication operation perform linear transformation
- *        and returns a new row vector.
+ *        and mutates the vector in-place.
  */
 TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesEqualMatrixReturnsATransformedVector)
 {
@@ -370,7 +370,7 @@ TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
 
 /**
  * @brief Verify that the compound vector multiplication operation with identity matrix
- *        and returns the original column vector.
+ *        does not mutate the row vector components.
  */
 TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
 {
@@ -435,7 +435,7 @@ TYPED_TEST(Matrix2DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
  * @brief Verify that binary matrix multiplication with identity matrix
  *        returns original matrix.
  */
-TEST(Matrix2DMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
+TEST(Matrix2DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
 {
     constexpr fgm::Matrix2D<float> iMatrix;
     constexpr fgm::Matrix2D mat(1.0f, 2.0f, 3.0f, 4.0f);
@@ -452,11 +452,67 @@ TEST(Matrix2DMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
  */
 TEST(Matrix2DMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
-    constexpr fgm::Matrix2D mat(1.0, 2.0);
-    constexpr fgm::Matrix2D vec(2, 1);
+    constexpr fgm::Matrix2D matA(1.0, 2.0);
+    constexpr fgm::Matrix2D matB(2, 1);
 
-    [[maybe_unused]] constexpr auto transformedVector = mat * vec;
+    [[maybe_unused]] constexpr auto transformedVector = matA * matB;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
+}
+
+
+/** @brief Verify that the compound vector multiplication operation perform an in-place matrix multiplication. */
+TYPED_TEST(Matrix2DMultiplication, CompoundMultiplicationOperationPerformInPlaceMatrixMultiplication)
+{
+    auto transformedVector = this->_matA;
+    transformedVector *= this->_matB;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+    else
+        EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
+}
+
+
+/**
+ * @brief Verify that components matrix multiplication with identity matrix
+ *        does not mutate the calling matrix.
+ */
+TEST(Matrix2DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
+{
+    constexpr fgm::Matrix2D<float> iMatrix;
+    fgm::Matrix2D mat(1.0f, 2.0f, 3.0f, 4.0f);
+
+    mat *= iMatrix;
+    EXPECT_MAT_CONTAINS(std::vector{ 1.0f, 2.0f, 3.0f, 4.0f }, mat);
+}
+
+
+/**
+ * @brief Verify that the compound matrix multiplication operation maintains the destination type and
+ *       perform an implicit cast.
+ */
+TEST(Matrix2DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
+{
+    constexpr fgm::Matrix2D<double> iMatrix;
+    fgm::Matrix2D mat(1, 2, 3, 4);
+
+    mat *= iMatrix;
+    static_assert(std::is_same_v<decltype(mat)::value_type, int>);
+}
+
+
+/**
+ * @test Verify that the compound multiplication operator (matrix) for mixed type
+ *       ensure minimal precision loss.
+ */
+TEST(Matrix2DMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+{
+    constexpr fgm::Matrix2D matA(2.5, 3.5, 0.5, 1.5);
+    fgm::Matrix2D matB(5, 10, 15, 20);
+    constexpr fgm::Matrix2D expectedMatrix(17, 32, 47, 82);
+
+    matB *= matA;
+
+    EXPECT_MAT_EQ(expectedMatrix, matB);
 }
 
 

@@ -298,9 +298,9 @@ namespace fgm
     template <StrictArithmetic U>
     constexpr Matrix2D<T>& Matrix2D<T>::operator*=(const Matrix2D<U>& rhs) noexcept requires StrictArithmetic<T>
     {
-        constexpr auto mat = (*this) * rhs;
-        _data[0] = static_cast<T>(mat[0]);
-        _data[1] = static_cast<U>(mat[1]);
+        const auto mat = (*this) * rhs;
+        _data[0] = mat[0];
+        _data[1] = mat[1];
         return *this;
     }
 
