@@ -500,7 +500,7 @@ namespace fgm
      * @return The passed-in @p vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
-    [[nodiscard]] constexpr PromotedVector2D<T, U> operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept;
+    static constexpr PromotedVector2D<T, U> operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept;
 
     /** @} */
 

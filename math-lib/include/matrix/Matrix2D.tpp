@@ -236,24 +236,31 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    constexpr PromotedVector2D<T, U> operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
+    static constexpr PromotedVector2D<T, U> operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
     {
         using R = std::common_type_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-        #error "FMA IS ALIVE AND COMPILING!" // For checking if FMA execution path is active.
+        // #error "FMA IS ALIVE AND COMPILING!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
             if (!std::is_constant_evaluated())
-                return Vector2D<R>(std::fma(static_cast<R>(vec[0], static_cast<R>(mat._data[0][0])),
-                                            static_cast<R>(vec[1]) * static_cast<R>(mat._data[0][1])),
-                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(mat._data[1][0]),
-                                            static_cast<R>(vec[1]) * static_cast<R>(mat._data[1][1])));
+            {
+                R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
+                               static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)));
+                R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
+                               static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1)));
+                vec.x() = static_cast<T>(x);
+                vec.y() = static_cast<T>(y);
+                return vec;
+            }
 #endif
-        R x = static_cast<R>(vec[0]) * static_cast<R>(mat._data[0][0]) +
-            static_cast<R>(vec[1]) * static_cast<R>(mat._data[0][1]);
+        R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) +
+            static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0));
 
-        R y = static_cast<R>(vec[0]) * static_cast<R>(mat._data[1][0]) +
-            static_cast<R>(vec[1]) * static_cast<R>(mat._data[1][1]);
-        return Vector2D<R>(x, y);
+        R y = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 1)) +
+            static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1));
+        vec.x() = static_cast<T>(x);
+        vec.y() = static_cast<T>(y);
+        return vec;
     }
 
 
@@ -338,12 +345,12 @@ namespace fgm
         return Vector2D(vec.x() * mat(0, 0) + vec.y() * mat(1, 0), vec.x() * mat(0, 1) + vec.y() * mat(1, 1));
     }
 
-    template <StrictArithmetic T, StrictArithmetic S>
-    Vector2D<T> operator*=(Vector2D<S>& vec, const Matrix2D<T>& mat)
-    {
-        vec = Vector2D(vec.x() * mat(0, 0) + vec.y() * mat(1, 0), vec.x() * mat(0, 1) + vec.y() * mat(1, 1));
-        return vec;
-    }
+    //template <StrictArithmetic T, StrictArithmetic S>
+    //Vector2D<T> operator*=(Vector2D<S>& vec, const Matrix2D<T>& mat)
+    //{
+    //    vec = Vector2D(vec.x() * mat(0, 0) + vec.y() * mat(1, 0), vec.x() * mat(0, 1) + vec.y() * mat(1, 1));
+    //    return vec;
+    //}
 
 
 

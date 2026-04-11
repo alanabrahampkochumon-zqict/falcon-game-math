@@ -43,8 +43,8 @@ class Matrix2DVectorMultiplication: public ::testing::Test
 protected:
     fgm::Matrix2D<T> _mat;
     fgm::Vector2D<T> _vec;
-    fgm::Vector2D<T> _expectedFloatingColVector;
-    fgm::Vector2D<T> _expectedIntegralColVector;
+    fgm::Vector2D<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
+        _expectedIntegralRowVector;
 
     void SetUp() override
     {
@@ -53,6 +53,8 @@ protected:
         _vec = { T(2.123456789123456), T(3.123456832912) };
         _expectedFloatingColVector = { T(31.129248797008778), T(40.74653269883751) };
         _expectedIntegralColVector = { T(29), T(38) };
+        _expectedFloatingRowVector = { T(56.116903460304776), T(23.75887838584987) };
+        _expectedIntegralRowVector = { T(53), T(22) };
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix2D vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
@@ -245,8 +247,8 @@ TYPED_TEST(Matrix2DVectorMultiplication, MatrixTimesVectorReturnsATransformedVec
 
 
 /**
- * @brief Verify that the binary vector multiplication operation with identity matrix perform linear transformation
- *        and returns a new column vector.
+ * @brief Verify that the binary vector multiplication operation with identity matrix
+ *        and returns the original column vector.
  */
 TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
@@ -258,31 +260,76 @@ TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
     EXPECT_VEC_EQ(vec, transformedVector);
 }
 
-//TEST(Matrix2D_Product, VectorTimesAMatrixReturnsANewVectorWithCorrectValues)
+
+/**
+ * @brief Verify that the compound vector multiplication operation perform linear transformation
+ *        and returns a new row vector.
+ */
+TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesEqualMatrixReturnsATransformedVector)
+{
+    auto transformedVector = this->_vec;
+    transformedVector *= this->_mat;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
+    else
+        EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the compound vector multiplication operation with identity matrix
+ *        and returns the original column vector.
+ */
+TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
+{
+    constexpr fgm::Matrix2D<float> iMatrix;
+    fgm::vec2 vec(2.0f, 1.0f);
+
+    vec *= iMatrix;
+
+    EXPECT_VEC_CONTAINS(vec, 2.0f, 1.0f);
+}
+
+/**
+ * @brief Verify that the compound vector multiplication operation maintains the destination type and
+ *       perform an implicit cast.
+ */
+TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
+{
+    constexpr fgm::Matrix2D<double> iMatrix;
+    [[maybe_unused]] fgm::iVec2 vec(2, 1);
+
+    vec *= iMatrix;
+    static_assert(std::is_same_v<decltype(vec)::value_type, int>);
+}
+
+// TODO: Minimal precision loss for integral * float
+
+// TEST(Matrix2D_Product, VectorTimesAMatrixReturnsANewVectorWithCorrectValues)
 //{
-//    // Arrange
-//    const fgm::Matrix2D mat = { 1.0f, 2.0f, 4.0f, 5.0f };
-//    const fgm::vec2 vec(2.0f, 1.0f);
-//    const fgm::vec2 expected(6.0f, 9.0f);
+//     // Arrange
+//     const fgm::Matrix2D mat = { 1.0f, 2.0f, 4.0f, 5.0f };
+//     const fgm::vec2 vec(2.0f, 1.0f);
+//     const fgm::vec2 expected(6.0f, 9.0f);
 //
-//    // Act
-//    const fgm::vec2 actual = vec * mat;
+//     // Act
+//     const fgm::vec2 actual = vec * mat;
 //
-//    // Assert
-//    testutils::EXPECT_VEC_EQ(expected, actual);
-//}
+//     // Assert
+//     testutils::EXPECT_VEC_EQ(expected, actual);
+// }
 //
-//TEST(Matrix2D_Product, VectorTimesIdentityMatrixReturnsTheSameMatrix)
+// TEST(Matrix2D_Product, VectorTimesIdentityMatrixReturnsTheSameMatrix)
 //{
-//    // Arrange
-//    const fgm::Matrix2D<float> mat;
-//    fgm::vec2 vec(2.0f, 1.0f);
+//     // Arrange
+//     const fgm::Matrix2D<float> mat;
+//     fgm::vec2 vec(2.0f, 1.0f);
 //
-//    // Act
-//    const fgm::vec2 actual = vec * mat;
+//     // Act
+//     const fgm::vec2 actual = vec * mat;
 //
-//    // Assert
-//    testutils::EXPECT_VEC_EQ(vec, actual);
-//}
+//     // Assert
+//     testutils::EXPECT_VEC_EQ(vec, actual);
+// }
 
 /** @} */
