@@ -405,8 +405,9 @@ namespace fgm
 
         /**
          * @brief Compose this matrix with another to form a new matrix.
-         *        Perform the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
-         * f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w \end{bmatrix} \f$
+         *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
+         *                                        f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
+         *                                        \end{bmatrix} \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -421,14 +422,24 @@ namespace fgm
         [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator*(const Matrix2D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
+
         /**
-         * Multiplies a matrix by a matrix with *= operator.
-         * @tparam S Type of the other Matrix
-         * @param other The matrix to be multiplied with.
-         * @return Matrix on which *= is called, but with new values
+         * @brief Compose this matrix with another matrix in-place.
+         *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
+         *                                        f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
+         *                                        \end{bmatrix} \f$
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to multiply.
+         *
+         * @return A new @ref Matrix2D containing the composition of linear transformations.
          */
-        template <StrictArithmetic S>
-        Matrix2D& operator*=(const Matrix2D<S>& other);
+        template <StrictArithmetic U>
+        constexpr Matrix2D& operator*=(const Matrix2D<U>& rhs) noexcept requires StrictArithmetic<T>;
 
         template <StrictArithmetic S>
         Matrix2D operator/(const S& scalar) const;
