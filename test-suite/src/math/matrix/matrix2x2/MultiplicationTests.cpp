@@ -98,6 +98,11 @@ namespace
     constexpr fgm::Vector2D COL_VECTOR_PRODUCT = MAT * VEC;
     static_assert(COL_VECTOR_PRODUCT[0] == 5);
     static_assert(COL_VECTOR_PRODUCT[1] == 11);
+
+    // Verify vector * matrix multiplication
+    constexpr fgm::Vector2D ROW_VEC_PRODUCT = VEC * MAT;
+    static_assert(ROW_VEC_PRODUCT[0] == 7);
+    static_assert(ROW_VEC_PRODUCT[1] == 10);
 } // namespace
 
 
@@ -230,6 +235,7 @@ TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
 
     EXPECT_MAT_EQ(expected, mat);
 }
+
 
 
 /**************************************
@@ -385,31 +391,12 @@ TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsure
 }
 
 
-// TEST(Matrix2D_Product, VectorTimesAMatrixReturnsANewVectorWithCorrectValues)
-//{
-//     // Arrange
-//     const fgm::Matrix2D mat = { 1.0f, 2.0f, 4.0f, 5.0f };
-//     const fgm::vec2 vec(2.0f, 1.0f);
-//     const fgm::vec2 expected(6.0f, 9.0f);
-//
-//     // Act
-//     const fgm::vec2 actual = vec * mat;
-//
-//     // Assert
-//     testutils::EXPECT_VEC_EQ(expected, actual);
-// }
-//
-// TEST(Matrix2D_Product, VectorTimesIdentityMatrixReturnsTheSameMatrix)
-//{
-//     // Arrange
-//     const fgm::Matrix2D<float> mat;
-//     fgm::vec2 vec(2.0f, 1.0f);
-//
-//     // Act
-//     const fgm::vec2 actual = vec * mat;
-//
-//     // Assert
-//     testutils::EXPECT_VEC_EQ(vec, actual);
-// }
+
+/**************************************
+ *                                    *
+ *    MATRIX MULTIPLICATION TESTS     *
+ *                                    *
+ **************************************/
+
 
 /** @} */
