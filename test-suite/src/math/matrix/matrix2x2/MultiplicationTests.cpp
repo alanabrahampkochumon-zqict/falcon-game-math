@@ -232,6 +232,12 @@ TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
 }
 
 
+/**************************************
+ *                                    *
+ *    VECTOR MULTIPLICATION TESTS     *
+ *                                    *
+ **************************************/
+
 /**
  * @brief Verify that the binary vector multiplication operation perform linear transformation
  *        and returns a new column vector.
@@ -247,7 +253,7 @@ TYPED_TEST(Matrix2DVectorMultiplication, MatrixTimesVectorReturnsATransformedVec
 
 
 /**
- * @brief Verify that the binary vector multiplication operation with identity matrix
+ * @brief Verify that the binary vector multiplication operation(mat * vec) with identity matrix
  *        and returns the original column vector.
  */
 TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
@@ -260,19 +266,63 @@ TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
     EXPECT_VEC_EQ(vec, transformedVector);
 }
 
+
 /**
  * @brief Verify that the binary vector multiplication operation perform automatic type promotion
  *        to the wider numeric type.
  */
-TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
+TEST(Matrix2DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
-    constexpr fgm::Matrix2D<double> iMatrix;
-    [[maybe_unused]] fgm::iVec2 vec(2, 1);
+    constexpr fgm::Matrix2D mat(1.0, 2.0);
+    constexpr fgm::iVec2 vec(2, 1);
 
-    vec *= iMatrix;
-    static_assert(std::is_same_v<decltype(vec)::value_type, int>);
+    constexpr auto transformedVector = mat * vec;
+    static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
 }
 
+
+/**
+ * @brief Verify that the binary vector multiplication operation perform linear transformation
+ *        and returns a new row vector.
+ */
+TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesMatrixReturnsATransformedVector)
+{
+    const auto transformedVector = this->_vec * this->_mat;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
+    else
+        EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation with identity matrix
+ *        and returns the original row vector.
+ */
+TEST(Matrix2DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
+{
+    constexpr fgm::Matrix2D<float> iMatrix;
+    constexpr fgm::vec2 vec(2.0f, 1.0f);
+
+    constexpr fgm::vec2 transformedVector = vec * iMatrix;
+
+    EXPECT_VEC_EQ(vec, transformedVector);
+}
+
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation perform automatic type promotion
+ *        to the wider numeric type.
+ */
+TEST(Matrix2DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationPromotesType)
+{
+    constexpr fgm::Matrix2D mat(1.0, 2.0);
+    constexpr fgm::iVec2 vec(2, 1);
+
+    constexpr auto transformedVector = vec * mat;
+    static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
+}
 
 
 /**
@@ -304,18 +354,20 @@ TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
     EXPECT_VEC_CONTAINS(vec, 2.0f, 1.0f);
 }
 
+
 /**
  * @brief Verify that the compound vector multiplication operation maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix2DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
+TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    constexpr fgm::Matrix2D mat(1.0, 2.0);
-    constexpr fgm::iVec2 vec(2, 1);
+    constexpr fgm::Matrix2D<double> iMatrix;
+    [[maybe_unused]] fgm::iVec2 vec(2, 1);
 
-    constexpr auto transformedVector = mat * vec;
-    static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
+    vec *= iMatrix;
+    static_assert(std::is_same_v<decltype(vec)::value_type, int>);
 }
+
 
 /**
  * @test Verify that the compound multiplication operator (vector) for mixed type

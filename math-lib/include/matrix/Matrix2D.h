@@ -470,17 +470,23 @@ namespace fgm
 
 
     /**
-     * Multiplies a Vector2D by a Matrix2D.
-     * NOTE: This operation transposes the 3x1 vector to a 1x3 vector(matrix), and may not be desirable in engine code.
-     * @tparam T Type for matrix values
-     * @tparam S Type for vector values
-     * @param vec vector to be multiplied.
-     * @param mat matrix to be multiplied against.
-     * @return a new Vector2D transposed(row major form)
+     * @brief Transform the **row vector** by a matrix.
+     *        Perform the linear transformation: \f$ \begin{bmatrix} x & y \end{bmatrix} \cdot \begin{bmatrix} a & b
+     *                                               \\ c & d \end{bmatrix}  = \begin{bmatrix} x' & y' \end{bmatrix} \f$
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
+     * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] vec The row vector to transformed.
+     * @param[in] mat The transformation matrix.
+     *
+     * @return The passed-in @p vec with the transformations applied.
      */
-
-    template <StrictArithmetic T, StrictArithmetic S>
-    Vector2D<T> operator*(const Vector2D<S>& vec, const Matrix2D<T>& mat);
+    template <StrictArithmetic T, StrictArithmetic U>
+    static constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept;
 
 
     /**
@@ -494,7 +500,7 @@ namespace fgm
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
      * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
      *
-     * @param[in] vec The column vector to transformed.
+     * @param[in] vec The row vector to transformed.
      * @param[in] mat The transformation matrix.
      *
      * @return The passed-in @p vec with the transformations applied.
