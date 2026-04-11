@@ -206,7 +206,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedVector2D<T, U> Matrix2D<T>::operator*(const Vector2D<U>& vec) const
+    constexpr PromotedVector2D<T, U> Matrix2D<T>::operator*(const Vector2D<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -226,6 +226,8 @@ namespace fgm
             static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
         return Vector2D<R>(x, y);
     }
+
+
 
 
     template <StrictArithmetic T, StrictArithmetic S>
@@ -284,11 +286,11 @@ namespace fgm
 
 
     template <Arithmetic T>
-    template <StrictArithmetic S>
-    Matrix2D<T> Matrix2D<T>::operator*(const Matrix2D<S>& other) const
+    template <StrictArithmetic U>
+    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator*(const Matrix2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
     {
-
-        return *this;
+        return Matrix2D((*this) * rhs[0], (*this) * rhs[1]);
     }
 
     template <Arithmetic T>
@@ -298,8 +300,7 @@ namespace fgm
         return *this;
     }
 
-#pragma warning(push)
-#pragma warning(disable : 4723) // Suppress division by zero
+
     template <Arithmetic T>
     template <StrictArithmetic S>
     Matrix2D<T> Matrix2D<T>::operator/(const S& scalar) const
@@ -307,7 +308,6 @@ namespace fgm
 
         return *this;
     }
-#pragma warning(pop)
 
     template <Arithmetic T>
     template <StrictArithmetic S>
@@ -358,11 +358,11 @@ namespace fgm
     }
 
 
-    //template <StrictArithmetic T, StrictArithmetic S>
-    //Vector2D<T> operator*(const Vector2D<S>& vec, const Matrix2D<T>& mat)
+    // template <StrictArithmetic T, StrictArithmetic S>
+    // Vector2D<T> operator*(const Vector2D<S>& vec, const Matrix2D<T>& mat)
     //{
-    //    return Vector2D(vec.x() * mat(0, 0) + vec.y() * mat(1, 0), vec.x() * mat(0, 1) + vec.y() * mat(1, 1));
-    //}
+    //     return Vector2D(vec.x() * mat(0, 0) + vec.y() * mat(1, 0), vec.x() * mat(0, 1) + vec.y() * mat(1, 1));
+    // }
 
     // template <StrictArithmetic T, StrictArithmetic S>
     // Vector2D<T> operator*=(Vector2D<S>& vec, const Matrix2D<T>& mat)

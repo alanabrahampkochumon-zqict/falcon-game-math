@@ -392,18 +392,34 @@ namespace fgm
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
-         * @tparam S Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+         * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec The column vector to transformed.
          *
          * @return A new @ref Vector2D with applied linear transformations.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const
+        [[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
-        template <StrictArithmetic S>
-        Matrix2D<T> operator*(const Matrix2D<S>& other) const;
+
+        /**
+         * @brief Compose this matrix with another to form a new matrix.
+         *        Perform the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
+         * f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w \end{bmatrix} \f$
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to multiply.
+         *
+         * @return A new @ref Matrix2D containing the composition of linear transformations.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator*(const Matrix2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
 
         /**
          * Multiplies a matrix by a matrix with *= operator.

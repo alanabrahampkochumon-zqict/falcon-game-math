@@ -61,6 +61,28 @@ protected:
 TYPED_TEST_SUITE(Matrix2DVectorMultiplication, SupportedArithmeticTypes);
 
 
+template <typename T>
+class Matrix2DMultiplication: public ::testing::Test
+{
+protected:
+    fgm::Matrix2D<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
+
+    void SetUp() override
+    {
+        _matA = { fgm::Vector2D{ T(7.12345678912345), T(13.12345678912345) },
+                  fgm::Vector2D{ T(5.12345678912345), T(4.12345678912345) } };
+        _matB = { fgm::Vector2D{ T(3.12345678912345), T(10.12345678912345) },
+                  fgm::Vector2D{ T(8.12345678912345), T(3.12345678912345) } };
+
+        _expectedFloatingMat = { fgm::Vector2D{ T(74.11690288564759), T(82.73418683126485) },
+                                   fgm::Vector2D{ T(73.8699893074007), T(119.48727325301795) } };
+        _expectedIntegralMat = { fgm::Vector2D{ T(71), T(79) }, fgm::Vector2D{ T(71), T(116) } };
+    }
+};
+/** @brief Test fixture for @ref fgm::Matrix2D matrix multiplication, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix2DMultiplication, SupportedArithmeticTypes);
+
+
 
 /**
  * @addtogroup T_FGM_Mat2x2_Multiplication
@@ -326,7 +348,7 @@ TEST(Matrix2DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationProm
     constexpr fgm::Matrix2D mat(1.0, 2.0);
     constexpr fgm::iVec2 vec(2, 1);
 
-    constexpr auto transformedVector = vec * mat;
+    [[maybe_unused]] constexpr auto transformedVector = vec * mat;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
 }
 
@@ -397,6 +419,45 @@ TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsure
  *    MATRIX MULTIPLICATION TESTS     *
  *                                    *
  **************************************/
+
+/** @brief Verify that the binary vector multiplication operation return matrix product. */
+TYPED_TEST(Matrix2DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
+{
+    const auto transformedVector = this->_matA * this->_matB;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+    else
+        EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
+}
+
+
+/**
+ * @brief Verify that binary matrix multiplication with identity matrix
+ *        returns original matrix.
+ */
+TEST(Matrix2DMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
+{
+    constexpr fgm::Matrix2D<float> iMatrix;
+    constexpr fgm::Matrix2D mat(1.0f, 2.0f, 3.0f, 4.0f);
+
+    constexpr fgm::Matrix2D matrixProduct = iMatrix * mat;
+
+    EXPECT_MAT_EQ(mat, matrixProduct);
+}
+
+
+/**
+ * @brief Verify that the binary matrix multiplication operation perform automatic type promotion
+ *        to the wider numeric type.
+ */
+TEST(Matrix2DMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
+{
+    constexpr fgm::Matrix2D mat(1.0, 2.0);
+    constexpr fgm::Matrix2D vec(2, 1);
+
+    [[maybe_unused]] constexpr auto transformedVector = mat * vec;
+    static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
+}
 
 
 /** @} */
