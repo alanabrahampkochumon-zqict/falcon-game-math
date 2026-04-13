@@ -68,36 +68,30 @@ TYPED_TEST(Matrix2DDivision, AlwaysReturnFloatingPointMatrix)
 }
 
 
-/** @brief Verify that assertion is triggered when dividing by zero in Debug mode. */
+/** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix2DDivision, ByZero_TriggersAssertInDebugMode)
 {
     EXPECT_DEBUG_DEATH(this->_matrix / 0, "Matrix division by zero");
 }
 
-///**
-// * @brief Verify that the binary division operator perform an element-wise divide
-// *        and returns a new matrix instance.
-// */
-//TYPED_TEST(Matrix2DDivision, ReturnsInverseScaledMatrix)
-//{
-//    const fgm::Matrix2D inverseScaledMat = this->_matrix / this->_scalar;
-//
-//    EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
-//}
-//
-//
-///** @brief Verify that the binary division operator always return a floating-point matrix. */
-//TYPED_TEST(Matrix2DDivision, AlwaysReturnFloatingPointMatrix)
-//{
-//    [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = this->_matrix / this->_scalar;
-//    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
-//}
-//
-//
-///** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
-//TYPED_TEST(Matrix2DDivision, ByZero_TriggersAssertInDebugMode)
-//{
-//    EXPECT_DEBUG_DEATH(this->_matrix / 0, "Matrix division by zero");
-//}
+
+/**
+ * @brief Verify that the compound division operator perform an element-wise divide
+ *        and mutates the matrix in-place.
+ */
+TYPED_TEST(Matrix2DDivision, CompoundDivision_InverseScalesMatrixInPlace)
+{
+    fgm::Matrix2D matrix = this->_matrix;
+    matrix /= this->_scalar;
+
+    EXPECT_MAT_EQ(this->_expectedMatrix, matrix);
+}
+
+
+/** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
+TYPED_TEST(Matrix2DDivision, CompoundDivision_ByZero_TriggersAssertInDebugMode)
+{
+    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "Matrix division by zero");
+}
 
 /** @} */
