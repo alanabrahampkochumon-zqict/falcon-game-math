@@ -114,6 +114,7 @@
              *   @defgroup FGM_Mat2x2_Members Class Members
              *   @defgroup FGM_Mat2x2_Init Accessors and Initializers
              *   @defgroup FGM_Mat2x2_Arithmetic Arithmetic Operations
+             *   @defgroup FGM_Mat2x2_Algebra Matrix Algebra
              *   @defgroup FGM_Mat2x2_Bitwise Boolean Bitwise Operations
              *   @defgroup FGM_Mat2x2_Equality Equality
              *   @defgroup FGM_Mat2x2_Comparison Comparisons

@@ -169,6 +169,7 @@
              *   @defgroup T_FGM_Mat2x2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x2_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Mat2x2_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat2x2_Det Determinants
              *   @defgroup T_FGM_Mat2x2_Utils Matrix Utilities
              * @}
              */

@@ -449,12 +449,30 @@ namespace fgm
         /** @} */
 
 
-        // Determinants
-        // Calculates the determinant for the current Matrix2D.
-        T determinant() const;
 
-        // Static wrapper for Matrix 3D determinants.
-        static T determinant(const Matrix2D<T>& matrix);
+        /**
+         * @addtogroup FGM_Mat2x2_Algebra
+         * @{
+         */
+
+        /**
+         * @brief Compute the determinant (scaling factor) of this matrix.
+         *        Calculate determinant: \f$ \text{det(A)} = \text{a}\cdot\text{d} - \text{b}\cdot\text{c} \f$
+         *
+         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         */
+        [[nodiscard]] constexpr T determinant() const noexcept;
+
+
+        /**
+         * @brief Compute the determinant (scaling factor) of a matrix.
+         *        Calculate determinant: \f$ \text{det(A)} = \text{a}\cdot\text{d} - \text{b}\cdot\text{c} \f$
+         *
+         * @param mat The matrix to compute the determinant of.
+         *
+         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         */
+        static constexpr T determinant(const Matrix2D& mat) noexcept;
 
         // Transpose
         Matrix2D transpose() const;
@@ -466,6 +484,7 @@ namespace fgm
 
         static Matrix2D inverse(const Matrix2D& matrix);
 
+        /** @} */
 
     private:
         Vector2D<T> _data[columns];

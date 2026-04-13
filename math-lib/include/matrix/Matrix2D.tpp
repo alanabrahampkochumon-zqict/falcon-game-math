@@ -321,18 +321,26 @@ namespace fgm
         return *this;
     }
 
-    template <Arithmetic T>
-    T Matrix2D<T>::determinant() const
-    {
 
-        return *this;
+
+    /**************************************
+     *                                    *
+     *           MATRIX ALGEBRA           *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr T Matrix2D<T>::determinant() const noexcept
+    {
+        return T(0);
+        //return *this;
     }
 
     template <Arithmetic T>
-    T Matrix2D<T>::determinant(const Matrix2D<T>& matrix)
+    constexpr T Matrix2D<T>::determinant(const Matrix2D<T>& mat) noexcept
     {
 
-        return matrix.determinant();
+        return mat.determinant();
     }
 
     template <Arithmetic T>
