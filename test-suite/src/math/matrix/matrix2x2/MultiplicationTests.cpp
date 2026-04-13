@@ -143,7 +143,7 @@ namespace
  *                                    *
  **************************************/
 
-/** @test Verify that scalar multiplication by zero returns a zero matrix. */
+/** @brief Verify that scalar multiplication by zero returns a zero matrix. */
 TEST(Matrix2DScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 {
     constexpr fgm::Matrix2D mat(3.0f, 4.0f, 5.0f, 6.0f);
@@ -154,7 +154,7 @@ TEST(Matrix2DScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 }
 
 
-/** @test Verify that scalar multiplication by one returns original matrix. */
+/** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix2DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 {
     constexpr fgm::Matrix2D mat(3.0f, 4.0f, 5.0f, 6.0f);
@@ -165,7 +165,7 @@ TEST(Matrix2DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 }
 
 
-/** @test Verify that scalar multiplication by one returns original matrix. */
+/** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix2DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
     constexpr fgm::Matrix2D mat = { 1.0f, -2.0f, -4.0f, 5.0f };
@@ -179,8 +179,8 @@ TEST(Matrix2DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 
 
 /**
- * @test Verify that the binary multiplication operator (matrix * scalar) perform an element-wise product
- *       and returns a new matrix instance.
+ * @brief Verify that the binary multiplication operator (matrix * scalar) perform an element-wise product
+ *        and returns a new matrix instance.
  */
 TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
 {
@@ -194,8 +194,8 @@ TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
 
 
 /**
- * @test Verify that the binary multiplication operator (scalar * matrix) perform an element-wise product
- *       and returns a new matrix instance.
+ * @brief Verify that the binary multiplication operator (scalar * matrix) perform an element-wise product
+ *        and returns a new matrix instance.
  */
 TYPED_TEST(Matrix2DScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 {
@@ -209,8 +209,8 @@ TYPED_TEST(Matrix2DScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 
 
 /**
- * @test Verify that the compound multiplication assignment operator (scalar) performs an element-wise product
- *       and mutates the matrix in-place.
+ * @brief Verify that the compound multiplication assignment operator (scalar) performs an element-wise product
+ *        and mutates the matrix in-place.
  */
 TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScaled)
 {
@@ -224,8 +224,8 @@ TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixSc
 
 
 /**
- * @test Verify that the binary multiplication operator (scalar) perform automatic type promotion
- *       to the wider numeric type.
+ * @brief Verify that the binary multiplication operator (scalar) perform automatic type promotion
+ *        to the wider numeric type.
  */
 TYPED_TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
 {
@@ -238,8 +238,8 @@ TYPED_TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
 
 
 /**
- * @test Verify that the compound multiplication assignment operator (scalar) maintains the destination type and
- *       perform an implicit cast.
+ * @brief Verify that the compound multiplication assignment operator (scalar) maintains the destination type and
+ *        perform an implicit cast.
  */
 TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
@@ -252,8 +252,8 @@ TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
 
 
 /**
- * @test Verify that the compound multiplication operator (scalar) for mixed type
- *       ensure minimal precision loss.
+ * @brief Verify that the compound multiplication operator (scalar) for mixed type
+ *        ensure minimal precision loss.
  */
 TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
@@ -393,7 +393,7 @@ TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
 
 /**
  * @brief Verify that the compound vector multiplication operation maintains the destination type and
- *       perform an implicit cast.
+ *        perform an implicit cast.
  */
 TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
@@ -406,8 +406,8 @@ TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNo
 
 
 /**
- * @test Verify that the compound multiplication operator (vector) for mixed type
- *       ensure minimal precision loss.
+ * @brief Verify that the compound multiplication operator (vector) for mixed type
+ *        ensure minimal precision loss.
  */
 TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
@@ -496,7 +496,7 @@ TEST(Matrix2DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
 
 /**
  * @brief Verify that the compound matrix multiplication operation maintains the destination type and
- *       perform an implicit cast.
+ *        perform an implicit cast.
  */
 TEST(Matrix2DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
@@ -509,8 +509,8 @@ TEST(Matrix2DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromo
 
 
 /**
- * @test Verify that the compound multiplication operator (matrix) for mixed type
- *       ensure minimal precision loss.
+ * @brief Verify that the compound multiplication operator (matrix) for mixed type
+ *        ensure minimal precision loss.
  */
 TEST(Matrix2DMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
