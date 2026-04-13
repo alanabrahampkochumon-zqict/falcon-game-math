@@ -67,13 +67,24 @@ TEST_P(SingularMatrix2D, SingularMatrixReturnsZero)
 }
 
 
-///**
-// * @brief Verify that computing the determinant of a non-singular matrix using static variant of
-// *        @ref fgm::Matrix2D::determinant returns a non-zero value.
-// */
-// TYPED_TEST(Matrix2DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
-//{
-//    EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix2D<TypeParam>::determinant(this->_matrix));
-//}
+/**
+ * @brief Verify that computing the determinant of a non-singular matrix using static variant of
+ *        @ref fgm::Matrix2D::determinant returns a non-zero value.
+ */
+ TYPED_TEST(Matrix2DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
+{
+    EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix2D<TypeParam>::determinant(this->_matrix));
+}
+
+
+/** 
+ * @brief Verify that computing the determinant of a singular matrix using static variant of
+ *        @ref fgm::Matrix2D::determinant returns zero.
+ */
+TEST_P(SingularMatrix2D, StaticWrapper_SingularMatrixReturnsZero)
+{
+    const auto& matrix = GetParam();
+    EXPECT_MAG_EQ(0.0f, fgm::Matrix2D<float>::determinant(matrix));
+}
 
 /** @} */
