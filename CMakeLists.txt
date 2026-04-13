@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(FalconGameMath LANGUAGES CXX)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(StrictWarnings INTERFACE)
 add_library(ProjectSanitizers INTERFACE)
