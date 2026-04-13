@@ -3,6 +3,7 @@
 #include "Matrix2D.h"
 
 #include <cmath>
+#include <cassert>
 #include <type_traits>
 #include <valarray>
 
@@ -312,9 +313,12 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, S>>;
-        return Matrix2D<R>(
-            static_cast<R>(_data[0][0]) / static_cast<R>(scalar), static_cast<R>(_data[1][0]) / static_cast<R>(scalar),
-            static_cast<R>(_data[0][1]) / static_cast<R>(scalar), static_cast<R>(_data[1][1]) / static_cast<R>(scalar));
+
+        assert(R(scalar) > fgm::Config::EPSILON<R> && "Matrix division by zero"); // TODO: Change to custom assert
+        
+        R factor = R(1) / static_cast<R>(scalar);
+        return Matrix2D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
+                           static_cast<R>(_data[0][1]) * factor, static_cast<R>(_data[1][1]) * factor);
     }
 
 
