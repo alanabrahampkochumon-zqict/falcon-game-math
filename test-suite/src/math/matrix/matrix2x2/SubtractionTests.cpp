@@ -52,14 +52,14 @@ TYPED_TEST_SUITE(Matrix2DSubtraction, SupportedArithmeticTypes);
 /** @brief Verify that matrix subtraction operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix2D s_Mat1(8, 2, 12, 4);
-    constexpr fgm::Matrix2D s_Mat2(5, 6, 7, 8);
-    constexpr fgm::Matrix2D s_BinaryDiff = s_Mat1 - s_Mat2;
+    constexpr fgm::Matrix2D MAT1(8, 2, 12, 4);
+    constexpr fgm::Matrix2D MAT2(5, 6, 7, 8);
+    constexpr fgm::Matrix2D BINARY_DIFF = MAT1 - MAT2;
 
-    static_assert(s_BinaryDiff(0, 0) == 3);
-    static_assert(s_BinaryDiff(0, 1) == -4);
-    static_assert(s_BinaryDiff(1, 0) == 5);
-    static_assert(s_BinaryDiff(1, 1) == -4);
+    static_assert(BINARY_DIFF(0, 0) == 3);
+    static_assert(BINARY_DIFF(0, 1) == -4);
+    static_assert(BINARY_DIFF(1, 0) == 5);
+    static_assert(BINARY_DIFF(1, 1) == -4);
 
 } // namespace
 

@@ -51,14 +51,14 @@ TYPED_TEST_SUITE(Matrix2DAddition, SupportedArithmeticTypes);
 /** @brief Verify that matrix addition operations are available at compile time. */
 namespace 
 {
-    constexpr fgm::Matrix2D s_Mat1(1, 2, 3, 4);
-    constexpr fgm::Matrix2D s_Mat2(5, 6, 7, 8);
-    constexpr fgm::Matrix2D s_BinarySum = s_Mat1 + s_Mat2;
+    constexpr fgm::Matrix2D MAT1(1, 2, 3, 4);
+    constexpr fgm::Matrix2D MAT2(5, 6, 7, 8);
+    constexpr fgm::Matrix2D BINARY_SUM = MAT1 + MAT2;
 
-    static_assert(s_BinarySum(0, 0) == 6);
-    static_assert(s_BinarySum(0, 1) == 8);
-    static_assert(s_BinarySum(1, 0) == 10);
-    static_assert(s_BinarySum(1, 1) == 12);
+    static_assert(BINARY_SUM(0, 0) == 6);
+    static_assert(BINARY_SUM(0, 1) == 8);
+    static_assert(BINARY_SUM(1, 0) == 10);
+    static_assert(BINARY_SUM(1, 1) == 12);
 
 }
 

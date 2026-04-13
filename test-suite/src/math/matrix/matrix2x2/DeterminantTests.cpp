@@ -62,11 +62,13 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DDeterminantTestSuite, SingularMatrix2D,
 /** @brief Verify that matrix determinant operation is available at compile time. */
 namespace 
 {
-    constexpr fgm::Matrix2D MATRIX{ fgm::Vector2D{ 4, 2 }, fgm::Vector2D{ 3, 4 } };
+    constexpr fgm::Matrix2D MAT{ fgm::Vector2D{ 4, 2 }, fgm::Vector2D{ 3, 4 } };
     
-    // Determinant
-    static_assert(MATRIX.determinant() == 10);
-    static_assert(fgm::Matrix2D<int>::determinant(MATRIX) == 10);
+    // Verify determinant (member function)
+    static_assert(MAT.determinant() == 10);
+
+    // Verify determinant (static function)
+    static_assert(fgm::Matrix2D<int>::determinant(MAT) == 10);
 
 }
 

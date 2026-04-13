@@ -27,21 +27,21 @@
 /** @brief Verify that matrix accessors are available at compile time. */
 namespace 
 {
-    constexpr fgm::Matrix2D matrix(1, 2, 3, 4);
-    constexpr fgm::Vector2D vec0(1, 3);
-    constexpr fgm::Vector2D vec1(2, 4);
+    constexpr fgm::Matrix2D MAT(1, 2, 3, 4);
+    constexpr fgm::Vector2D VEC0(1, 3);
+    constexpr fgm::Vector2D VEC1(2, 4);
 
     // Verify that matrix elements are accessible as (row, column) during compile time.
-    static_assert(matrix(0, 0) == 1);
-    static_assert(matrix(0, 1) == 2);
-    static_assert(matrix(1, 0) == 3);
-    static_assert(matrix(1, 1) == 4);
+    static_assert(MAT(0, 0) == 1);
+    static_assert(MAT(0, 1) == 2);
+    static_assert(MAT(1, 0) == 3);
+    static_assert(MAT(1, 1) == 4);
 
     // Verify that matrix columns are accessible as 2D-vectors during compile time.
-    static_assert(matrix[0].x() == vec0[0]);
-    static_assert(matrix[0].y() == vec0[1]);
-    static_assert(matrix[1].x() == vec1[0]);
-    static_assert(matrix[1].y() == vec1[1]);
+    static_assert(MAT[0].x() == VEC0[0]);
+    static_assert(MAT[0].y() == VEC0[1]);
+    static_assert(MAT[1].x() == VEC1[0]);
+    static_assert(MAT[1].y() == VEC1[1]);
 }
 
 

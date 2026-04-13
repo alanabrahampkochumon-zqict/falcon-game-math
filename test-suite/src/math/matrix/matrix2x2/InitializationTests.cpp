@@ -52,19 +52,19 @@ TYPED_TEST_SUITE(Matrix2DInitialization, SupportedTypes);
 namespace 
 {
     // Verify that the matrix can be initialized at compile time using scalar values.
-    constexpr fgm::Matrix2D s_Mat1(1, 2, 3, 4);
-    static_assert(s_Mat1(0, 0) == 1);
-    static_assert(s_Mat1(0, 1) == 2);
-    static_assert(s_Mat1(1, 0) == 3);
-    static_assert(s_Mat1(1, 1) == 4);
+    constexpr fgm::Matrix2D MAT1(1, 2, 3, 4);
+    static_assert(MAT1(0, 0) == 1);
+    static_assert(MAT1(0, 1) == 2);
+    static_assert(MAT1(1, 0) == 3);
+    static_assert(MAT1(1, 1) == 4);
 
 
     // Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Matrix2D s_Mat2(fgm::Vector2D(1, 3), fgm::Vector2D(2, 4));
-    static_assert(s_Mat1(0, 0) == 1);
-    static_assert(s_Mat1(0, 1) == 2);
-    static_assert(s_Mat1(1, 0) == 3);
-    static_assert(s_Mat1(1, 1) == 4);
+    constexpr fgm::Matrix2D MAT2(fgm::Vector2D(1, 3), fgm::Vector2D(2, 4));
+    static_assert(MAT2(0, 0) == 1);
+    static_assert(MAT2(0, 1) == 2);
+    static_assert(MAT2(1, 0) == 3);
+    static_assert(MAT2(1, 1) == 4);
     
 }
 
