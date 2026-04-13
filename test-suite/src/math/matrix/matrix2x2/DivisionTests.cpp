@@ -84,7 +84,7 @@ TYPED_TEST(Matrix2DDivision, CompoundDivision_InverseScalesMatrixInPlace)
     fgm::Matrix2D matrix = this->_matrix;
     matrix /= this->_scalar;
 
-    EXPECT_MAT_EQ(this->_expectedMatrix, matrix);
+    EXPECT_MAT_EQ(this->_expectedTypedMatrix, matrix);
 }
 
 

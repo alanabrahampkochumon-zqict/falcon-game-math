@@ -327,7 +327,16 @@ namespace fgm
     template <StrictArithmetic S>
     Matrix2D<T>& Matrix2D<T>::operator/=(const S& scalar)
     {
+        using R = Magnitude<std::common_type_t<T, S>>;
 
+        assert(R(scalar) > fgm::Config::EPSILON<R> && "Matrix division by zero"); // TODO: Change to custom assert
+
+        R factor = R(1) / static_cast<R>(scalar);
+
+        _data[0][0] = _data[0][0] * factor;
+        _data[1][0] = _data[1][0] * factor;
+        _data[0][1] = _data[0][1] * factor;
+        _data[1][1] = _data[1][1] * factor;
         return *this;
     }
 
