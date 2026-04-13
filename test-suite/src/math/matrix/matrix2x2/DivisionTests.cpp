@@ -25,14 +25,14 @@ class Matrix2DDivision: public ::testing::Test
 protected:
     fgm::Matrix2D<T> _matrix;
     T _scalar;
-    fgm::Magnitude<T> _expectedMatrix;
+    fgm::Matrix2D<fgm::Magnitude<T>> _expectedMatrix;
 
     void SetUp() override
     {
         _matrix = { fgm::Vector2D<T>{ 7, 3 }, fgm::Vector2D<T>{ 1, 6 } };
         _scalar = T(3);
-        _expectedMatrix = { fgm::Vector2D<T>{ T(2.333333333333333), T(1) },
-                            fgm::Vector2D<T>{ T(0.3333333333333333), T(2) } };
+        _expectedMatrix = { fgm::Vector2D{ fgm::Magnitude<T>(2.333333333333333), fgm::Magnitude<T>(1) },
+                            fgm::Vector2D{ fgm::Magnitude<T>(0.3333333333333333),fgm::Magnitude<T>(2) } };
     }
 };
 /** Test fixture for @ref fgm::Matrix2D division, parameterized by @ref SupportedArithmeticTypes */
@@ -51,7 +51,7 @@ TYPED_TEST_SUITE(Matrix2DDivision, SupportedArithmeticTypes);
  */
 TYPED_TEST(Matrix2DDivision, ReturnsInverseScaledMatrix)
 {
-    constexpr fgm::Matrix2D inverseScaledMat = this->_matrix / this->_scalar;
+    const fgm::Matrix2D inverseScaledMat = this->_matrix / this->_scalar;
 
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
 }
@@ -59,7 +59,7 @@ TYPED_TEST(Matrix2DDivision, ReturnsInverseScaledMatrix)
 /** @brief Verify that the binary division operator always return a floating-point matrix. */
 TYPED_TEST(Matrix2DDivision, AlwaysReturnFloatingPointMatrix)
 {
-    [[maybe_unused]] constexpr fgm::Matrix2D inverseScaledMat = this->_matrix / this->_scalar;
+    [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = this->_matrix / this->_scalar;
     static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
 }
 

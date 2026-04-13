@@ -456,7 +456,7 @@ namespace fgm
          * @return A new @ref Matrix2D inverse scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr Matrix2D<Magnitude<T>> operator/(const S& scalar) const noexcept requires StrictArithmetic<T>;
+        [[nodiscard]] constexpr Matrix2D<Magnitude<std::common_type_t<T, S>>> operator/(const S& scalar) const noexcept requires StrictArithmetic<T>;
 
         template <StrictArithmetic S>
         Matrix2D& operator/=(const S& scalar);

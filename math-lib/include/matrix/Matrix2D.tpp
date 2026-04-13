@@ -308,10 +308,13 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::operator/(const S& scalar) const noexcept
+    constexpr Matrix2D<Magnitude<std::common_type_t<T, S>>> Matrix2D<T>::operator/(const S& scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        return *this;
+        using R = Magnitude<std::common_type_t<T, S>>;
+        return Matrix2D<R>(
+            static_cast<R>(_data[0][0]) / static_cast<R>(scalar), static_cast<R>(_data[1][0]) / static_cast<R>(scalar),
+            static_cast<R>(_data[0][1]) / static_cast<R>(scalar), static_cast<R>(_data[1][1]) / static_cast<R>(scalar));
     }
 
 
