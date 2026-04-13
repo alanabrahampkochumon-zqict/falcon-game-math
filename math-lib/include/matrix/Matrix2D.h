@@ -442,8 +442,22 @@ namespace fgm
         constexpr Matrix2D& operator*=(const Matrix2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
+        /**
+         * @brief Inverse-scale the matrix by a scalar value.
+         *        Divide each element of the matrix by @p scalar and returns a new matrix.
+         *
+         * @note Promotes the result to a floating point result using @ref fgm::Magnitude.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Matrix2D inverse scaled by @p scalar.
+         */
         template <StrictArithmetic S>
-        Matrix2D operator/(const S& scalar) const;
+        [[nodiscard]] constexpr Matrix2D<Magnitude<T>> operator/(const S& scalar) const noexcept requires StrictArithmetic<T>;
+
         template <StrictArithmetic S>
         Matrix2D& operator/=(const S& scalar);
 

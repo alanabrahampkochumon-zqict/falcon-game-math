@@ -296,7 +296,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr Matrix2D<T>& Matrix2D<T>::operator*=(const Matrix2D<U>& rhs) noexcept requires StrictArithmetic<T>
+    constexpr Matrix2D<T>& Matrix2D<T>::operator*=(const Matrix2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
     {
         const auto mat = (*this) * rhs;
         _data[0] = mat[0];
@@ -307,11 +308,13 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    Matrix2D<T> Matrix2D<T>::operator/(const S& scalar) const
+    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::operator/(const S& scalar) const noexcept
+        requires StrictArithmetic<T>
     {
-
         return *this;
     }
+
+
 
     template <Arithmetic T>
     template <StrictArithmetic S>
