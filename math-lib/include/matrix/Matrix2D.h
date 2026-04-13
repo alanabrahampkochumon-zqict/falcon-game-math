@@ -436,7 +436,7 @@ namespace fgm
          *
          * @param[in] rhs The matrix to multiply.
          *
-         * @return A new @ref Matrix2D containing the composition of linear transformations.
+         * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
         constexpr Matrix2D& operator*=(const Matrix2D<U>& rhs) noexcept
@@ -458,8 +458,22 @@ namespace fgm
         template <StrictArithmetic S>
         [[nodiscard]] constexpr Matrix2D<Magnitude<std::common_type_t<T, S>>> operator/(const S& scalar) const noexcept requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Inverse-scale this matrix by a scalar value.
+         *        Perform an in-place divide of each element by @p scalar.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
         template <StrictArithmetic S>
-        Matrix2D& operator/=(const S& scalar);
+        constexpr Matrix2D& operator/=(const S& scalar) noexcept
+            requires StrictArithmetic<T>;
 
         /** @} */
 
