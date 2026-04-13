@@ -29,8 +29,8 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { fgm::Vector2D<T>{ 4, 1 }, fgm::Vector2D<T>{ 1, 5 } };
-        _expectedDeterminant = 17;
+        _matrix = { fgm::Vector2D<T>{ 4, 1 }, fgm::Vector2D<T>{ 2, 5 } };
+        _expectedDeterminant = 18;
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix2D determinant, parameterized by @ref SupportedArithmeticTypes. */
@@ -41,7 +41,6 @@ class SingularMatrix2D: public ::testing::TestWithParam<fgm::Matrix2D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Matrix2DDeterminantTestSuite, SingularMatrix2D,
                          ::testing::Values(fgm::Matrix2D{ fgm::Vector2D{ 1, 2 }, fgm::Vector2D{ 1, 2 } },
-                                           fgm::Matrix2D{ fgm::Vector2D{ 3, 3 }, fgm::Vector2D{4, 5} },
                                            fgm::Matrix2D{ fgm::Vector2D{ 2, 2 }, fgm::Vector2D{2, 2} },
                                            fgm::Matrix2D{ fgm::Vector2D{ 0, 0 }, fgm::Vector2D{4, 5} },
                                            fgm::Matrix2D{ fgm::Vector2D{ 0, 3 }, fgm::Vector2D{0, 5} }

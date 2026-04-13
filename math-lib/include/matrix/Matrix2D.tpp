@@ -332,8 +332,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr T Matrix2D<T>::determinant() const noexcept
     {
-        return T(0);
-        //return *this;
+        return _data[0][0] * _data[1][1] - _data[0][1] * _data[1][0];
     }
 
     template <Arithmetic T>
