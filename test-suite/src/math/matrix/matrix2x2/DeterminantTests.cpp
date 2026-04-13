@@ -33,19 +33,18 @@ protected:
         _expectedDeterminant = 18;
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D determinant, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix2DDeterminant, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix2D determinant, parameterized by @ref SupportedSignedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix2DDeterminant, SupportedSignedArithmeticTypes);
 
 
 class SingularMatrix2D: public ::testing::TestWithParam<fgm::Matrix2D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Matrix2DDeterminantTestSuite, SingularMatrix2D,
-                         ::testing::Values(fgm::Matrix2D{ fgm::Vector2D{ 1, 2 }, fgm::Vector2D{ 1, 2 } },
-                                           fgm::Matrix2D{ fgm::Vector2D{ 2, 2 }, fgm::Vector2D{2, 2} },
-                                           fgm::Matrix2D{ fgm::Vector2D{ 3, 2 }, fgm::Vector2D{6, 4} },
-                                           fgm::Matrix2D{ fgm::Vector2D{ 0, 0 }, fgm::Vector2D{4, 5} },
-                                           fgm::Matrix2D{ fgm::Vector2D{ 0, 3 }, fgm::Vector2D{0, 5} }
-                                           ));
+                         ::testing::Values(fgm::Matrix2D{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ 1.0f, 2.0f } },
+                                           fgm::Matrix2D{ fgm::Vector2D{ 2.0f, 2.0f }, fgm::Vector2D{ 2.0f, 2.0f } },
+                                           fgm::Matrix2D{ fgm::Vector2D{ 3.0f, 2.0f }, fgm::Vector2D{ 6.0f, 4.0f } },
+                                           fgm::Matrix2D{ fgm::Vector2D{ 0.0f, 0.0f }, fgm::Vector2D{ 4.0f, 5.0f } },
+                                           fgm::Matrix2D{ fgm::Vector2D{ 0.0f, 3.0f }, fgm::Vector2D{ 0.0f, 5.0f } }));
 
 
 /**
@@ -60,17 +59,17 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DDeterminantTestSuite, SingularMatrix2D,
  **************************************/
 
 /** @brief Verify that matrix determinant operation is available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Matrix2D MAT{ fgm::Vector2D{ 4, 2 }, fgm::Vector2D{ 3, 4 } };
-    
+
     // Verify determinant (member function)
     static_assert(MAT.determinant() == 10);
 
     // Verify determinant (static function)
     static_assert(fgm::Matrix2D<int>::determinant(MAT) == 10);
 
-}
+} // namespace
 
 
 
@@ -100,13 +99,13 @@ TEST_P(SingularMatrix2D, SingularMatrixReturnsZero)
  * @brief Verify that computing the determinant of a non-singular matrix using static variant of
  *        @ref fgm::Matrix2D::determinant returns a non-zero value.
  */
- TYPED_TEST(Matrix2DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
+TYPED_TEST(Matrix2DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
 {
     EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix2D<TypeParam>::determinant(this->_matrix));
 }
 
 
-/** 
+/**
  * @brief Verify that computing the determinant of a singular matrix using static variant of
  *        @ref fgm::Matrix2D::determinant returns zero.
  */

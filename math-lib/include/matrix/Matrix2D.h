@@ -439,7 +439,8 @@ namespace fgm
          * @return A new @ref Matrix2D containing the composition of linear transformations.
          */
         template <StrictArithmetic U>
-        constexpr Matrix2D& operator*=(const Matrix2D<U>& rhs) noexcept requires StrictArithmetic<T>;
+        constexpr Matrix2D& operator*=(const Matrix2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
 
         template <StrictArithmetic S>
         Matrix2D operator/(const S& scalar) const;
@@ -455,24 +456,31 @@ namespace fgm
          * @{
          */
 
+
         /**
          * @brief Compute the determinant (scaling factor) of this matrix.
          *        Calculate determinant: \f$ \text{det(A)} = \text{a}\cdot\text{d} - \text{b}\cdot\text{c} \f$
+         * 
+         * @note Operation is only available for signed integrals and floating point number.
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
          */
-        [[nodiscard]] constexpr T determinant() const noexcept;
+        [[nodiscard]] constexpr T determinant() const noexcept
+            requires SignedStrictArithmetic<T>;
 
 
         /**
          * @brief Compute the determinant (scaling factor) of a matrix.
          *        Calculate determinant: \f$ \text{det(A)} = \text{a}\cdot\text{d} - \text{b}\cdot\text{c} \f$
          *
+         * @note Operation is only available for signed integrals and floating point number.
+         *
          * @param mat The matrix to compute the determinant of.
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
          */
-        static constexpr T determinant(const Matrix2D& mat) noexcept;
+        static constexpr T determinant(const Matrix2D& mat) noexcept
+            requires SignedStrictArithmetic<T>;
 
         // Transpose
         Matrix2D transpose() const;
