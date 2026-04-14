@@ -355,6 +355,7 @@ namespace fgm
         return _data[0][0] * _data[1][1] - _data[0][1] * _data[1][0];
     }
 
+
     template <Arithmetic T>
     constexpr T Matrix2D<T>::determinant(const Matrix2D<T>& mat) noexcept
         requires SignedStrictArithmetic<T>
@@ -363,18 +364,20 @@ namespace fgm
         return mat.determinant();
     }
 
-    template <Arithmetic T>
-    Matrix2D<T> Matrix2D<T>::transpose() const
-    {
 
+    template <Arithmetic T>
+    constexpr Matrix2D<T> Matrix2D<T>::transpose() const noexcept
+    {
         return *this;
     }
 
+
     template <Arithmetic T>
-    Matrix2D<T> Matrix2D<T>::transpose(const Matrix2D& matrix)
+    constexpr Matrix2D<T> Matrix2D<T>::transpose(const Matrix2D& mat) noexcept
     {
-        return matrix.transpose();
+        return mat.transpose();
     }
+
 
     template <Arithmetic T>
     Matrix2D<T> Matrix2D<T>::inverse() const
@@ -382,6 +385,7 @@ namespace fgm
 
         return *this;
     }
+
 
     template <Arithmetic T>
     Matrix2D<T> Matrix2D<T>::inverse(const Matrix2D& matrix)

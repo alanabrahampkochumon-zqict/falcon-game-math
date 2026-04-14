@@ -442,6 +442,7 @@ namespace fgm
         constexpr Matrix2D& operator*=(const Matrix2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
+
         /**
          * @brief Inverse-scale the matrix by a scalar value.
          *        Divide each element of the matrix by @p scalar and returns a new matrix.
@@ -456,7 +457,8 @@ namespace fgm
          * @return A new @ref Matrix2D inverse scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr Matrix2D<Magnitude<std::common_type_t<T, S>>> operator/(const S& scalar) const noexcept requires StrictArithmetic<T>;
+        [[nodiscard]] constexpr Matrix2D<Magnitude<std::common_type_t<T, S>>> operator/(const S& scalar) const noexcept
+            requires StrictArithmetic<T>;
 
 
         /**
@@ -484,11 +486,10 @@ namespace fgm
          * @{
          */
 
-
         /**
          * @brief Compute the determinant (scaling factor) of this matrix.
          *        Calculate determinant: \f$ \text{det(A)} = \text{a}\cdot\text{d} - \text{b}\cdot\text{c} \f$
-         * 
+         *
          * @note Operation is only available for signed integrals and floating point number.
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
@@ -510,10 +511,28 @@ namespace fgm
         static constexpr T determinant(const Matrix2D& mat) noexcept
             requires SignedStrictArithmetic<T>;
 
-        // Transpose
-        Matrix2D transpose() const;
 
-        static Matrix2D transpose(const Matrix2D& matrix);
+        /**
+         * @brief Transpose this matrix by swapping the rows and columns.
+         *        Compute transpose: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix}\textsuperscript{T}  =
+         *                               \begin{bmatrix} a & c \\ b & d \end{bmatrix} \f$
+         *
+         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any results.")]]
+        constexpr Matrix2D transpose() const noexcept;
+
+
+        /**
+         * @brief Transpose a matrix by swapping the rows and columns.
+         *        Compute transpose: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix}\textsuperscript{T}  =
+         *                               \begin{bmatrix} a & c \\ b & d \end{bmatrix} \f$
+         *
+         * @param mat The matrix to compute the determinant of.
+         *
+         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any results.")]] constexpr static Matrix2D transpose(const Matrix2D& mat) noexcept;
 
         // Matrix Inverse
         Matrix2D inverse() const;
