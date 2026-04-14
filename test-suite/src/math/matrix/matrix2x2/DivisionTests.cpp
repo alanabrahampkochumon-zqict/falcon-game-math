@@ -47,6 +47,31 @@ TYPED_TEST_SUITE(Matrix2DDivision, SupportedArithmeticTypes);
  * @{
  */
 
+/**************************************
+ *                                    *
+ *           STATIC TESTS             *
+ *                                    *
+ **************************************/
+
+namespace 
+{
+    constexpr fgm::Matrix2D MAT(2, 4, 6, 8);
+
+    // Matrix scalar division
+    constexpr fgm::Matrix2D DIV_RESULT_1 = MAT / 2;
+    static_assert(DIV_RESULT_1(0, 0) == 1);
+    static_assert(DIV_RESULT_1(0, 1) == 2);
+    static_assert(DIV_RESULT_1(1, 0) == 3);
+    static_assert(DIV_RESULT_1(1, 1) == 4);
+}
+
+
+
+/**************************************
+ *                                    *
+ *      DIVISION TESTS (RUNTIME)      *
+ *                                    *
+ **************************************/
 
 /**
  * @brief Verify that the binary division operator perform an element-wise divide
