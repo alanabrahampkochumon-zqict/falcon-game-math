@@ -158,6 +158,7 @@
              *   @defgroup T_FGM_Mat2x2_Subtraction Subtraction
              *   @defgroup T_FGM_Mat2x2_Multiplication Scalar Multiplication
              *   @defgroup T_FGM_Mat2x2_Division Scalar Division
+             *   @defgroup T_FGM_Mat2x2_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x2_Bool_Bit Boolean Bitwise Operation
              *   @defgroup T_FGM_Mat2x2_GT_Comp Greater Than Comparison
              *   @defgroup T_FGM_Mat2x2_GTE_Comp Greater Than or Equal Comparison

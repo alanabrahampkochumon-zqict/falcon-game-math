@@ -532,7 +532,8 @@ namespace fgm
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
          */
-        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any results.")]] constexpr static Matrix2D transpose(const Matrix2D& mat) noexcept;
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any results.")]]
+        constexpr static Matrix2D transpose(const Matrix2D& mat) noexcept;
 
         // Matrix Inverse
         Matrix2D inverse() const;
