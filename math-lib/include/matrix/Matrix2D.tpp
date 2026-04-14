@@ -260,7 +260,7 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    static constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
+    constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
     {
         using R = std::common_type_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -314,7 +314,8 @@ namespace fgm
     {
         using R = Magnitude<std::common_type_t<T, S>>;
 
-        assert(R(scalar) > fgm::Config::EPSILON<R> && "Matrix division by zero"); // TODO: Change to custom assert
+        assert(std::abs(R(scalar)) > fgm::Config::EPSILON<R> &&
+               "Matrix division by zero"); // TODO: Change to custom assert and add custom abs
 
         R factor = R(1) / static_cast<R>(scalar);
         return Matrix2D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
@@ -330,14 +331,15 @@ namespace fgm
     {
         using R = Magnitude<std::common_type_t<T, S>>;
 
-        assert(R(scalar) > fgm::Config::EPSILON<R> && "Matrix division by zero"); // TODO: Change to custom assert
+        assert(std::abs(R(scalar)) > fgm::Config::EPSILON<R> &&
+               "Matrix division by zero"); // TODO: Change to custom assert and add custom abs
 
         R factor = R(1) / static_cast<R>(scalar);
 
-        _data[0][0] = _data[0][0] * factor;
-        _data[1][0] = _data[1][0] * factor;
-        _data[0][1] = _data[0][1] * factor;
-        _data[1][1] = _data[1][1] * factor;
+        _data[0][0] = static_cast<T>(static_cast<R>(_data[0][0]) * factor);
+        _data[1][0] = static_cast<T>(static_cast<R>(_data[1][0]) * factor);
+        _data[0][1] = static_cast<T>(static_cast<R>(_data[0][1]) * factor);
+        _data[1][1] = static_cast<T>(static_cast<R>(_data[1][1]) * factor);
         return *this;
     }
 
@@ -385,8 +387,16 @@ namespace fgm
     constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::inverse() const noexcept
         requires SignedStrictArithmetic<T>
     {
+        using R = Magnitude<T>;
 
-        return *this;
+        R det = determinant();
+        assert(determinant() > fgm::Config::EPSILON<R> &&
+               "[Matrix2D Determinant]: Division by zero."); // TODO: Update to custom assert
+
+        R factor = R(1) / det;
+
+        return Matrix2D<R>(static_cast<R>(_data[1][1]) * factor, static_cast<R>(-_data[1][0]) * factor,
+                           static_cast<R>(-_data[0][1]) * factor, static_cast<R>(_data[0][0]) * factor);
     }
 
 
