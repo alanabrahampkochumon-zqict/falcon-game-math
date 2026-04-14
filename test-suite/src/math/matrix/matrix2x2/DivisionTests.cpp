@@ -53,6 +53,7 @@ TYPED_TEST_SUITE(Matrix2DDivision, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
+/** @brief Verify that matrix division operations are available at compile time. */
 namespace 
 {
     constexpr fgm::Matrix2D MAT(2, 4, 6, 8);

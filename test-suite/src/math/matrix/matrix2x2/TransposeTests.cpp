@@ -38,6 +38,41 @@ TYPED_TEST_SUITE(Matrix2DTranspose, SupportedTypes);
  * @{
  */
 
+/**************************************
+ *                                    *
+ *           STATIC TESTS             *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that matrix transpose is available at compile time. */
+namespace 
+{
+    constexpr fgm::Matrix2D MAT(1, 2, 3, 4);
+
+    // Verify matrix transpose (member function)
+    constexpr fgm::Matrix2D TRANS_MAT = MAT.transpose();
+    static_assert(TRANS_MAT(0, 0) == 1);
+    static_assert(TRANS_MAT(0, 1) == 3);
+    static_assert(TRANS_MAT(1, 0) == 2);
+    static_assert(TRANS_MAT(1, 1) == 4);
+
+    // Verify matrix transpose (static function)
+    constexpr fgm::Matrix2D TRANS_MAT_S = fgm::Matrix2D<int>::transpose(MAT);
+    static_assert(TRANS_MAT_S(0, 0) == 1);
+    static_assert(TRANS_MAT_S(0, 1) == 3);
+    static_assert(TRANS_MAT_S(1, 0) == 2);
+    static_assert(TRANS_MAT_S(1, 1) == 4);
+}
+
+
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
+
+
 /** @brief Verify that transposing a matrix exchanges row and column elements and returns a new matrix. */
 TYPED_TEST(Matrix2DTranspose, ExchangesRowsAndColumnElements)
 {
