@@ -490,7 +490,7 @@ namespace fgm
          * @brief Compute the determinant (scaling factor) of this matrix.
          *        Calculate determinant: \f$ \text{det(A)} = \text{a}\cdot\text{d} - \text{b}\cdot\text{c} \f$
          *
-         * @note Operation is only available for signed integrals and floating point number.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
          */
@@ -502,7 +502,7 @@ namespace fgm
          * @brief Compute the determinant (scaling factor) of a matrix.
          *        Calculate determinant: \f$ \text{det(A)} = \text{a}\cdot\text{d} - \text{b}\cdot\text{c} \f$
          *
-         * @note Operation is only available for signed integrals and floating point number.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          *
          * @param mat The matrix to compute the determinant of.
          *
@@ -541,10 +541,13 @@ namespace fgm
          *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
          *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
          *
-         * @return A new @ref Matrix2D such that \f$ A \cdot A^-1 = I \f$.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
-        constexpr Matrix2D inverse() const noexcept;
+        constexpr Matrix2D inverse() const noexcept
+            requires SignedStrictArithmetic<T>;
 
 
         /**
@@ -552,9 +555,13 @@ namespace fgm
          *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
          *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
          *
-         * @return A new @ref Matrix2D such that \f$ A \cdot A^-1 = I \f$.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$.
          */
-        static Matrix2D inverse(const Matrix2D& matrix);
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        constexpr static Matrix2D inverse(const Matrix2D& matrix) noexcept
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
 

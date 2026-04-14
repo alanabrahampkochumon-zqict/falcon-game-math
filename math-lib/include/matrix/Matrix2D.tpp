@@ -1,10 +1,9 @@
 #pragma once
 
 #include "Matrix2D.h"
-#include "Matrix2D.h"
 
-#include <cmath>
 #include <cassert>
+#include <cmath>
 #include <type_traits>
 #include <valarray>
 
@@ -316,7 +315,7 @@ namespace fgm
         using R = Magnitude<std::common_type_t<T, S>>;
 
         assert(R(scalar) > fgm::Config::EPSILON<R> && "Matrix division by zero"); // TODO: Change to custom assert
-        
+
         R factor = R(1) / static_cast<R>(scalar);
         return Matrix2D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
                            static_cast<R>(_data[0][1]) * factor, static_cast<R>(_data[1][1]) * factor);
@@ -326,7 +325,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Matrix2D<T>& Matrix2D<T>::operator/=(const S& scalar) noexcept requires StrictArithmetic<T>
+    constexpr Matrix2D<T>& Matrix2D<T>::operator/=(const S& scalar) noexcept
+        requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, S>>;
 
@@ -382,7 +382,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    Matrix2D<T> Matrix2D<T>::inverse() const
+    constexpr Matrix2D<T> Matrix2D<T>::inverse() const noexcept
+        requires SignedStrictArithmetic<T>
     {
 
         return *this;
@@ -390,7 +391,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    Matrix2D<T> Matrix2D<T>::inverse(const Matrix2D& matrix)
+    constexpr Matrix2D<T> Matrix2D<T>::inverse(const Matrix2D& matrix) noexcept
+        requires SignedStrictArithmetic<T>
     {
         return matrix.inverse();
     }
