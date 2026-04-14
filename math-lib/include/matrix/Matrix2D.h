@@ -513,31 +513,47 @@ namespace fgm
 
 
         /**
-         * @brief Transpose this matrix by swapping the rows and columns.
+         * @brief Transpose this matrix by swapping its rows and columns.
          *        Compute transpose: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix}\textsuperscript{T}  =
          *                               \begin{bmatrix} a & c \\ b & d \end{bmatrix} \f$
          *
-         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         * @return A new @ref Matrix2D with its elements flipped along the diagonal.
          */
-        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any results.")]]
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any changes.")]]
         constexpr Matrix2D transpose() const noexcept;
 
 
         /**
-         * @brief Transpose a matrix by swapping the rows and columns.
+         * @brief Transpose a matrix by swapping its rows and columns.
          *        Compute transpose: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix}\textsuperscript{T}  =
          *                               \begin{bmatrix} a & c \\ b & d \end{bmatrix} \f$
          *
-         * @param mat The matrix to compute the determinant of.
+         * @param mat The matrix to transpose.
          *
-         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         * @return A new @ref Matrix2D with its elements flipped along the diagonal.
          */
-        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any results.")]]
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any changes.")]]
         constexpr static Matrix2D transpose(const Matrix2D& mat) noexcept;
 
-        // Matrix Inverse
-        Matrix2D inverse() const;
 
+        /**
+         * @brief Compute the inverse of this matrix.
+         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
+         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *
+         * @return A new @ref Matrix2D such that \f$ A \cdot A^-1 = I \f$.
+         */
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        constexpr Matrix2D inverse() const noexcept;
+
+
+        /**
+         * @brief Compute the inverse of a matrix.
+         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
+         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *
+         * @return A new @ref Matrix2D such that \f$ A \cdot A^-1 = I \f$.
+         */
         static Matrix2D inverse(const Matrix2D& matrix);
 
         /** @} */
