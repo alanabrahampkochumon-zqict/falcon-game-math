@@ -490,7 +490,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
-        return Vector2D<R>(_data[0] * scalar, _data[1] * scalar);
+        return Vector2D<R>(static_cast<R>(_data[0]) * static_cast<R>(scalar), static_cast<R>(_data[1]) * static_cast<R>(scalar));
     }
 
 
@@ -507,7 +507,7 @@ namespace fgm
     constexpr Vector2D<T>& Vector2D<T>::operator*=(const S scalar) noexcept
         requires StrictArithmetic<T>
     {
-
+        // TODO: Update for type promotion.
         _data[0] = static_cast<T>(scalar *_data[0]);
         _data[1] = static_cast<T>(scalar * _data[1]);
         return *this;
