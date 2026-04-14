@@ -34,8 +34,8 @@ protected:
                              fgm::Vector2D{ Mag(-0.2857142857142857), Mag(0.7142857142857143) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D inverse, parameterized @ref SupportedTypes */
-TYPED_TEST_SUITE(Matrix2DInverse, SupportedTypes);
+/** @brief Test fixture for @ref fgm::Matrix2D inverse, parameterized @ref SupportedSignedArithmeticTypes */
+TYPED_TEST_SUITE(Matrix2DInverse, SupportedSignedArithmeticTypes);
 
 
 

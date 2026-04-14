@@ -447,7 +447,7 @@ namespace fgm
          * @brief Inverse-scale the matrix by a scalar value.
          *        Divide each element of the matrix by @p scalar and returns a new matrix.
          *
-         * @note Promotes the result to a floating point result using @ref fgm::Magnitude.
+         * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -541,12 +541,13 @@ namespace fgm
          *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
          *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
          *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          *
          * @return A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
-        constexpr Matrix2D inverse() const noexcept
+        constexpr Matrix2D<Magnitude<T>> inverse() const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -555,12 +556,13 @@ namespace fgm
          *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
          *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
          *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          *
          * @return A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
-        constexpr static Matrix2D inverse(const Matrix2D& matrix) noexcept
+        constexpr static Matrix2D<Magnitude<T>> inverse(const Matrix2D& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
         /** @} */

@@ -382,7 +382,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::inverse() const noexcept
+    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::inverse() const noexcept
         requires SignedStrictArithmetic<T>
     {
 
@@ -391,7 +391,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::inverse(const Matrix2D& matrix) noexcept
+    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::inverse(const Matrix2D& matrix) noexcept
         requires SignedStrictArithmetic<T>
     {
         return matrix.inverse();
