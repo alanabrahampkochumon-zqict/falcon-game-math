@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Matrix2D.h"
+#include "Matrix2D.h"
 
 #include <cmath>
 #include <cassert>
@@ -368,7 +369,8 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix2D<T> Matrix2D<T>::transpose() const noexcept
     {
-        return *this;
+        // NOTE: _data is a column major vector so _data[0][1] gives element at first row and zeroth column.
+        return Matrix2D(_data[0][0], _data[0][1], _data[1][0], _data[1][1]);
     }
 
 
