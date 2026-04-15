@@ -372,7 +372,16 @@ namespace fgm
     constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(S scalar, const fgm::Matrix2D<T>& fallback) const noexcept
         requires StrictArithmetic<T>
     {
-        return *this;
+        using R = std::common_type_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+            if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+                return fallback;
+        if constexpr (std::is_integral_v<R>)
+            if (scalar == 0)
+                return fallback;
+
+        return (*this) / scalar;
     }
 
 
