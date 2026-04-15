@@ -433,7 +433,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr bool Matrix2D<T>::hasNaN() const noexcept
     {
-        return false;
+        return _data[0].hasNaN() || _data[1].hasNaN();
     }
 
 
