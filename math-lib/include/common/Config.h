@@ -48,7 +48,7 @@ namespace fgm
         static constexpr double FLOAT_EPSILON = 1e-5;
 
         /** @brief The smallest positive value such that 1.0 + EPSILON != 1.0 for 64-bit floats. */
-        static constexpr double DOUBLE_EPSILON = 1e-12;
+        static constexpr double DOUBLE_EPSILON = 1e-14;
 
         /** @brief The smallest positive value such that 1.0 + EPSILON != 1.0 for floating point types. */
         template <typename T>
