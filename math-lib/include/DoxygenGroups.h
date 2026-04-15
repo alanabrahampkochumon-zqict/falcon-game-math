@@ -115,16 +115,11 @@
              *   @defgroup FGM_Mat2x2_Init Accessors and Initializers
              *   @defgroup FGM_Mat2x2_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Mat2x2_Algebra Matrix Algebra
-             *   @defgroup FGM_Mat2x2_Bitwise Boolean Bitwise Operations
              *   @defgroup FGM_Mat2x2_Equality Equality
-             *   @defgroup FGM_Mat2x2_Comparison Comparisons
              *   @defgroup FGM_Mat2x2_Product Geometric Products
-             *   @defgroup FGM_Mat2x2_Mag Scalar Magnitude and Normalization
-             *   @defgroup FGM_Mat2x2_Proj Vector Projection and Rejection
-             *   @defgroup FGM_Mat2x2_Alias Spatial Alias
              *   @defgroup FGM_Mat2x2_Log String Representation
-             *   @defgroup FGM_Mat2x2_Const Vector Constants
-             *   @defgroup FGM_Mat2x2_Utils Vector Utilities
+             *   @defgroup FGM_Mat2x2_Const Matrix Constants
+             *   @defgroup FGM_Mat2x2_Utils Matrix Utilities
              * @}
              */
         

@@ -567,6 +567,37 @@ namespace fgm
 
         /** @} */
 
+
+
+        /**
+         * @addtogroup FGM_Mat2x2_Utils
+         * @{
+         */
+
+        /**
+         * @brief Check if any element of this matrix is an IEEE 754 infinity.
+         *
+         * @note Always returns false for integral types.
+         *
+         * @return True if at least one element is positive or negative infinity.
+         */
+        [[nodiscard]] constexpr bool hasInf() const noexcept;
+
+
+        /**
+         * @brief Check if any element of a matrix is an IEEE 754 infinity.
+         *
+         * @note Always returns false for integral types.
+         *
+         * @param mat The matrix to evaluate for indefinite elements.
+         *
+         * @return True if at least one element is positive or negative infinity.
+         */
+        [[nodiscard]] constexpr static bool hasInf(const Matrix2D& mat) noexcept;
+
+        /** @} */
+
+
     private:
         Vector2D<T> _data[columns];
     };

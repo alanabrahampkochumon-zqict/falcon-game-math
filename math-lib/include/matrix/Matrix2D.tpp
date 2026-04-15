@@ -411,4 +411,21 @@ namespace fgm
         return matrix.inverse();
     }
 
+
+
+    /**************************************
+     *                                    *
+     *             UTILITIES              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr bool Matrix2D<T>::hasInf() const noexcept
+    {
+        return false;
+    }
+
+    template <Arithmetic T>
+    constexpr bool Matrix2D<T>::hasInf(const Matrix2D& mat) noexcept {return true;}
+
 } // namespace fgm
