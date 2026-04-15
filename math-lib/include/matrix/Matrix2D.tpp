@@ -150,7 +150,7 @@ namespace fgm
     constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator+(const Matrix2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = std::common_type_t<T, U>;
         return Matrix2D<R>(_data[0] + rhs[0], _data[1] + rhs[1]);
     }
 
@@ -171,7 +171,7 @@ namespace fgm
     constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator-(const Matrix2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = std::common_type_t<T, U>;
         return Matrix2D<R>(_data[0] - rhs[0], _data[1] - rhs[1]);
     }
 

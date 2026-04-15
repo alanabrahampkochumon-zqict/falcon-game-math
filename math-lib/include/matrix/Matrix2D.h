@@ -637,6 +637,35 @@ namespace fgm
 
     /** @} */
 
+
+    /**
+     * @addtogroup T_FGM_Mat2x2_Constant
+     * @{
+     */
+    namespace mat2d
+    {
+        /**
+         * @brief A 2D matrix with ones on the main diagonal and zeros elsewhere.
+         *
+         * @note Only available for @ref fgm::StrictArithmetic types.
+         */
+        template<StrictArithmetic T>
+        inline constexpr Matrix2D<T> eye(T(1), T(0), T(0), T(1));
+
+
+        /**
+         * @brief A 2D matrix with all zero elements.
+         *
+         * @note Only available for @ref fgm::StrictArithmetic types.
+         */
+        template <StrictArithmetic T>
+        inline constexpr Matrix2D<T> zero(T(0), T(0), T(0), T(0));
+    }
+
+
+    /** @} */
+
+
 } // namespace fgm
 
 
