@@ -62,6 +62,30 @@ TYPED_TEST_SUITE(Matrix2DVectorMultiplication, SupportedArithmeticTypes);
 
 
 template <typename T>
+class Matrix2DVectorFractionalMultiplication: public ::testing::Test
+{
+protected:
+    fgm::Matrix2D<T> _mat;
+    fgm::Vector2D<T> _vec, _expectedColVector, _expectedRowVector;
+
+    void SetUp() override
+    {
+        _mat = { fgm::Vector2D{ T(0.1234568989329), T(0.1234214891234) },
+                  fgm::Vector2D{ T(-0.123489823149), T(-0.123489757623) } };
+        _vec = fgm::Vector2D{ T(0.8923764912287), T(0.78352829112384) };
+
+        _expectedColVector = fgm::Vector2D{ T(0.013412264184596345), T(0.013380716644514457) };
+        _expectedRowVector = fgm::Vector2D{ T(0.20687426274853477), T(-0.20695713384580372) };
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Matrix2D vector multiplication with denormals,
+ *        parameterized by @ref SupportedFloatingPointTypes.
+ */
+TYPED_TEST_SUITE(Matrix2DVectorFractionalMultiplication, SupportedFloatingPointTypes);
+
+
+template <typename T>
 class Matrix2DMultiplication: public ::testing::Test
 {
 protected:
@@ -84,10 +108,10 @@ TYPED_TEST_SUITE(Matrix2DMultiplication, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Matrix2DDenormalsMultiplication: public ::testing::Test
+class Matrix2DFractionalMultiplication: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
+    fgm::Matrix2D<T> _matA, _matB, _expectedMat;
 
     void SetUp() override
     {
@@ -96,14 +120,13 @@ protected:
         _matB = { fgm::Vector2D{ T(0.8923764912287), T(0.78352829112384) },
                   fgm::Vector2D{ T(0.0123412348958), T(-0.0231423489589) } };
 
-        _expectedFloatingMat = { fgm::Vector2D{ T(0.013412264184596345), T(0.013380716644514457) },
-                                 fgm::Vector2D{ T(0.004381455169424965), T(0.004381016652222751) } };
-        _expectedIntegralMat = { fgm::Vector2D{ T(71), T(79) }, fgm::Vector2D{ T(71), T(116) } };
+        _expectedMat = { fgm::Vector2D{ T(0.013412264184596345), T(0.013380716644514457) },
+                         fgm::Vector2D{ T(0.004381455169424965), T(0.004381016652222751) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D matrix multiplication with denormals, parameterized by @ref
+/** @brief Test fixture for @ref fgm::Matrix2D matrix multiplication with fractional values(<1), parameterized by @ref
  * SupportedFloatingPointTypes. */
-TYPED_TEST_SUITE(Matrix2DDenormalsMultiplication, SupportedFloatingPointTypes);
+TYPED_TEST_SUITE(Matrix2DFractionalMultiplication, SupportedFloatingPointTypes);
 
 
 
@@ -312,6 +335,17 @@ TYPED_TEST(Matrix2DVectorMultiplication, MatrixTimesVectorReturnsATransformedVec
 
 
 /**
+ * @brief Verify that the binary vector multiplication operation with fractional values perform linear transformation
+ *        and returns a new column vector.
+ */
+TYPED_TEST(Matrix2DVectorFractionalMultiplication, MatrixTimesVectorReturnsATransformedVectorWithPrecision)
+{
+    const auto transformedVector = this->_mat * this->_vec;
+        EXPECT_VEC_EQ(this->_expectedColVector, transformedVector);
+}
+
+
+/**
  * @brief Verify that the binary vector multiplication operation(mat * vec) with identity matrix
  *        and returns the original column vector.
  */
@@ -351,6 +385,17 @@ TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesMatrixReturnsATransformedVec
         EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
     else
         EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation with fractional values perform linear transformation
+ *        and returns a new row vector.
+ */
+TYPED_TEST(Matrix2DVectorFractionalMultiplication, VectorTimesMatrixReturnsATransformedVectorWithPrecision)
+{
+    const auto transformedVector = this->_vec * this->_mat;
+    EXPECT_VEC_EQ(this->_expectedRowVector, transformedVector);
 }
 
 
@@ -463,10 +508,10 @@ TYPED_TEST(Matrix2DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
 
 
 /** @brief Verify that the binary vector multiplication operation return matrix product for denormals. */
-TYPED_TEST(Matrix2DDenormalsMultiplication, ReturnsMatrixWithPrecision)
+TYPED_TEST(Matrix2DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithPrecision)
 {
     const auto transformedVector = this->_matA * this->_matB;
-    EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+    EXPECT_MAT_EQ(this->_expectedMat, transformedVector);
 }
 
 
