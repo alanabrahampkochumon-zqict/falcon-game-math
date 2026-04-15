@@ -91,13 +91,13 @@ namespace fgm
      *                                    *
      **************************************/
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::eye()
+    constexpr Matrix2D<T> Matrix2D<T>::eye() noexcept
     {
         return Matrix2D(T(1), T(1));
     }
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::zero()
+    constexpr Matrix2D<T> Matrix2D<T>::zero() noexcept
     {
         return Matrix2D(T(0), T(0));
     }

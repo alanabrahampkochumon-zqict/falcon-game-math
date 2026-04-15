@@ -161,7 +161,7 @@ namespace fgm
          *
          * @return A 2D identity matrix.
          */
-        static constexpr Matrix2D eye();
+        [[nodiscard]] static constexpr Matrix2D eye() noexcept;
 
 
         /**
@@ -171,7 +171,7 @@ namespace fgm
          *
          * @return A 2D zero matrix.
          */
-        static constexpr Matrix2D zero();
+        [[nodiscard]] static constexpr Matrix2D zero() noexcept;
 
         /** @} */
 
@@ -509,48 +509,48 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Safely divide each element of this matrix by a scalar value.
-         *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
-         *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-matrix if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
-         *
-         * @param[in] scalar The value to divide the matrix elements by.
-         *
-         * @return A new @ref Matrix2D resulting from the division or a zero-matrix if the @p scalar is below the
-         *         epsilon threshold or if either of the matrix has NaN(Not-a-Number) element(s).
-         */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, S> safeDiv(S scalar,
-                                                               fgm::Matrix2D fallback = fgm::mat2d::eye) const noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Safely divide each element of this matrix by a scalar value.
+        // *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
+        // *
+        // * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+        // * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+        // * @note Returns a zero-matrix if attempting to divide by zero (or below the epsilon threshold), or if any
+        // *       operand contains NaN.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+        // *
+        // * @param[in] scalar The value to divide the matrix elements by.
+        // *
+        // * @return A new @ref Matrix2D resulting from the division or a zero-matrix if the @p scalar is below the
+        // *         epsilon threshold or if either of the matrix has NaN(Not-a-Number) element(s).
+        // */
+        //template <StrictArithmetic S>
+        //[[nodiscard]] constexpr PromotedMatrix2D<T, S> safeDiv(S scalar,
+        //                                                       fgm::Matrix2D fallback = fgm::mat2d::eye) const noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Safely divide each element of a matrix by a scalar value.
-         *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
-         *
-         * @note Promote the result to the `std::common_type_t` of `T` and `S`.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-matrix if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
-         *
-         * @param[in] mat The matrix to divide.
-         * @param[in] scalar The value to divide the matrix elements by.
-         *
-         * @return A new @ref Matrix2D resulting from the division or a zero-matrix if the @p scalar is below the
-         *         epsilon threshold or if either of the matrix has NaN(Not-a-Number) element(s).
-         */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr static PromotedMatrix2D<T, S> safeDiv(const Matrix2D& mat, S scalar) noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Safely divide each element of a matrix by a scalar value.
+        // *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
+        // *
+        // * @note Promote the result to the `std::common_type_t` of `T` and `S`.
+        // * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+        // * @note Returns a zero-matrix if attempting to divide by zero (or below the epsilon threshold), or if any
+        // *       operand contains NaN.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+        // *
+        // * @param[in] mat The matrix to divide.
+        // * @param[in] scalar The value to divide the matrix elements by.
+        // *
+        // * @return A new @ref Matrix2D resulting from the division or a zero-matrix if the @p scalar is below the
+        // *         epsilon threshold or if either of the matrix has NaN(Not-a-Number) element(s).
+        // */
+        //template <StrictArithmetic S>
+        //[[nodiscard]] constexpr static PromotedMatrix2D<T, S> safeDiv(const Matrix2D& mat, S scalar) noexcept
+        //    requires StrictArithmetic<T>;
 
         /** @} */
 
