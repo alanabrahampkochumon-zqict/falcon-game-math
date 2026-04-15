@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Matrix2D.h"
+#include "Matrix2D.h"
+#include "Matrix2D.h"
 
 #include <cassert>
 #include <cmath>
@@ -78,6 +80,26 @@ namespace fgm
     constexpr const T& Matrix2D<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
     {
         return _data[col][row];
+    }
+
+
+
+
+    /**************************************
+     *                                    *
+     *           CONSTANTS           *
+     *                                    *
+     **************************************/
+    template <Arithmetic T>
+    constexpr Matrix2D<T> Matrix2D<T>::eye()
+    {
+        return Matrix2D(T(1), T(1));
+    }
+
+    template <Arithmetic T>
+    constexpr Matrix2D<T> Matrix2D<T>::zero()
+    {
+        return Matrix2D(T(0), T(0));
     }
 
 
