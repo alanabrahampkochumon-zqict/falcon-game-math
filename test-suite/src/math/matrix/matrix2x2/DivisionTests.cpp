@@ -42,6 +42,18 @@ protected:
 TYPED_TEST_SUITE(Matrix2DDivision, SupportedArithmeticTypes);
 
 
+/** @brief Test fixture for @ref fgm::Matrix2D division with NaN vectors. */
+class Matrix2DDivisionNaNTests: public ::testing::TestWithParam<fgm::Matrix2D<float>>
+{};
+INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, Matrix2DDivisionNaNTests,
+                         ::testing::Values(fgm::Matrix2D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
+                                           fgm::Matrix2D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
+                                           fgm::Matrix2D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
+                                           fgm::Matrix2D<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
+                                           fgm::Matrix2D<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
+
+
 
 //TODO: Add safeDiv and tryDiv NaN tests
 /**
@@ -173,6 +185,28 @@ TYPED_TEST(Matrix2DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
     const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::mat2d::zero<TypeParam>);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
+
+/**
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::safeDiv
+ *        returns identity matrix by default.
+ */
+TEST_P(Matrix2DDivisionNaNTests, SafeDivide_ReturnsIdentityMatrixByDefault)
+{
+    const fgm::Matrix2D inverseScaledMat = GetParam().safeDiv(2.5);
+    EXPECT_MAT_IDENTITY(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::safeDiv
+ *        returns passed-in fallback.
+ */
+TEST_P(Matrix2DDivisionNaNTests, SafeDivide_ReturnsPassedInFallback)
+{
+    const fgm::Matrix2D inverseScaledMat = GetParam().safeDiv(2.5);
+    EXPECT_MAT_ZERO(inverseScaledMat);
+}
+
 
 /**
  * @brief Verify that dividing a matrix using static variant of @ref fgm::Matrix2D::safeDiv

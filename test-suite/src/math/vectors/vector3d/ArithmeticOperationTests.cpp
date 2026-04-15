@@ -114,7 +114,7 @@ protected:
 TYPED_TEST_SUITE(Vector3DInversion, SupportedSignedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector3D division with NaN vectors. */
+/** @brief Test fixture for @ref fgm::Vector3D division with NaN vectors. */
 class Vector3DDivisionNaNTests: public ::testing::TestWithParam<fgm::Vector3D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Vector3DDivisionTestSuite, Vector3DDivisionNaNTests,
