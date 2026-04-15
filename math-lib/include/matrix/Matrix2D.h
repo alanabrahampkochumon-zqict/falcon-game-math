@@ -621,6 +621,44 @@ namespace fgm
 
 
 
+        /**
+         * @addtogroup FGM_Mat2x2_Log
+         * @{
+         */
+
+        /**
+         * @brief Write the matrix to an output stream in **row-major** order.
+         *        Format the matrix as \f$\begin{bmatrix} a & b \\ c & d \end{bmatrix} string representation for
+         *        debugging or logging.
+         *
+         * @tparam T Numeric type of the matrix.
+         *
+         * @param os     The output stream to write to.
+         * @param matrix The matrix to be streamed.
+         *
+         * @return A reference to the output stream @p os.
+         */
+        constexpr friend std::ostream& operator<<(std::ostream& os, const Matrix2D& matrix)
+        {
+            const std::streamsize oldPrecision = os.precision();
+            const std::ios_base::fmtflags oldFlags = os.flags();
+
+            auto precision = Config::useFullPrecision
+                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+                : Config::LOG_PRECISION;
+            os << std::setprecision(precision) << std::fixed;
+            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << "|\n";
+            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << "|\n";
+
+            os.precision(oldPrecision);
+            os.flags(oldFlags);
+
+            return os;
+        }
+
+        /** @} */
+
+
     private:
         Vector2D<T> _data[columns];
     };
@@ -721,10 +759,18 @@ namespace fgm
     /** @} */
 
 
+
     /**
      * @addtogroup T_FGM_Mat2x2_Constant
      * @{
      */
+
+    /**************************************
+     *                                    *
+     *             CONSTANTS              *
+     *                                    *
+     **************************************/
+
     namespace mat2d
     {
         /**
@@ -732,7 +778,7 @@ namespace fgm
          *
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
-        template<StrictArithmetic T>
+        template <StrictArithmetic T>
         inline constexpr Matrix2D<T> eye(T(1), T(0), T(0), T(1));
 
 
@@ -743,7 +789,7 @@ namespace fgm
          */
         template <StrictArithmetic T>
         inline constexpr Matrix2D<T> zero(T(0), T(0), T(0), T(0));
-    }
+    } // namespace mat2d
 
 
     /** @} */

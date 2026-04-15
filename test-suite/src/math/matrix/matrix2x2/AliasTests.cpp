@@ -31,8 +31,8 @@ namespace
     static_assert(std::is_same_v<fgm::iMat2, fgm::Matrix2D<int>> && "iMat2 must be an alias of Matrix2D<int>");
 
 
-    /** Verify @ref fgm::uMat2 has `unsigned int` value_type. */ 7 static_assert(
-        std::is_same_v<fgm::uMat2::value_type, unsigned int> && "uMat2 must contain unsigned int elements");
+    /** Verify @ref fgm::uMat2 has `unsigned int` value_type. */
+    static_assert(std::is_same_v<fgm::uMat2::value_type, unsigned int> && "uMat2 must contain unsigned int elements");
     static_assert(std::is_same_v<fgm::uMat2, fgm::Matrix2D<unsigned int>> &&
                   "uMat2 must be an alias of Matrix2D<unsigned int>");
 
