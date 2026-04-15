@@ -611,13 +611,14 @@ namespace fgm
          *
          * @note Always return false for integral types.
          *
-         * @param vec The matrix to evaluate for indefinite elements.
+         * @param mat The matrix to evaluate for indefinite elements.
          *
          * @return True if at least one element is NaN.
          */
         [[nodiscard]] constexpr static bool hasNaN(const Matrix2D& mat) noexcept;
 
         /** @} */
+
 
 
     private:
@@ -627,9 +628,38 @@ namespace fgm
 
 
     /**
+     * @addtogroup FGM_Mat2x2_Alias
+     * @{
+     */
+
+    /*************************************
+     *                                   *
+     *             ALIASES               *
+     *                                   *
+     *************************************/
+
+    using bMat2 = Matrix2D<bool>;                ///< `bool` matrix
+    using iMat2 = Matrix2D<int>;                 ///< `int` matrix
+    using uMat2 = Matrix2D<unsigned int>;        ///< `unsigned int` matrix
+    using mat2 = Matrix2D<float>;                ///< `float` matrix
+    using lMat2 = Matrix2D<long long>;           ///< `long long` matrix
+    using dMat2 = Matrix2D<double>;              ///< `double` matrix
+    using ulMat2 = Matrix2D<unsigned long long>; ///< `unsigned long long` matrix
+
+    /** @} */
+
+
+
+    /**
      * @addtogroup FGM_Mat2x2_Arithmetic
      * @{
      */
+
+    /**************************************
+     *                                    *
+     *        NON-MEMBER FUNCTIONS        *
+     *                                    *
+     **************************************/
 
     /**
      * @brief Scale the matrix by a scalar value.
