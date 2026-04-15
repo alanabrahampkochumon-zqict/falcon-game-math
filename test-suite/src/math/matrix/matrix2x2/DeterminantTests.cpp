@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 13, 2026
  *
- * @brief Verifies @ref fgm::Matrix2D determinant logic.
+ * @brief Verify @ref fgm::Matrix2D determinant logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

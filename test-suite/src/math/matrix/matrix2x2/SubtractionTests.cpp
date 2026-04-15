@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 09, 2026
  *
- * @brief Verifies @ref fgm::Matrix2D subtraction logic.
+ * @brief Verify @ref fgm::Matrix2D subtraction logic.
  * 
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

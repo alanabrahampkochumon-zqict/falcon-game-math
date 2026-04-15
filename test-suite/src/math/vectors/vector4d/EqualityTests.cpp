@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verifies @ref fgm::Vector4D equality operator (==, !=) and their functional counterpart's (eq, neq, allEq,
+ * @brief Verify @ref fgm::Vector4D equality operator (==, !=) and their functional counterpart's (eq, neq, allEq,
  * anyNeq) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon

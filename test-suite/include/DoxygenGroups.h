@@ -180,7 +180,7 @@
 
         /**
          * @defgroup FGM_Common_Tests Common 
-         * @brief Verifies general function operations exposed by FGM library.
+         * @brief Verify general function operations exposed by FGM library.
          * @ingroup MathTests
          * @{
          *   @defgroup T_Op_Status Operation Status

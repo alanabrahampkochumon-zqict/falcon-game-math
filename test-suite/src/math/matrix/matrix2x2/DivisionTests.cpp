@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 13, 2026
  *
- * @brief Verifies @ref fgm::Matrix2D division logic.
+ * @brief Verify @ref fgm::Matrix2D division logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

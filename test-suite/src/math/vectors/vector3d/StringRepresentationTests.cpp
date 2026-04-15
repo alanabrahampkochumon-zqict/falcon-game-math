@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 03, 2026
  *
- * @brief Verifies @ref fgm::Vector3D string representation.
+ * @brief Verify @ref fgm::Vector3D string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
