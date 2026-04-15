@@ -292,7 +292,8 @@ namespace fgm
     constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator*(const Matrix2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Matrix2D((*this) * rhs[0], (*this) * rhs[1]);
+        using R = std::common_type_t<T, U>;
+        return Matrix2D<R>((*this) * rhs[0], (*this) * rhs[1]);
     }
 
 

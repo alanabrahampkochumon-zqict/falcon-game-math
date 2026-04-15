@@ -83,6 +83,29 @@ protected:
 TYPED_TEST_SUITE(Matrix2DMultiplication, SupportedArithmeticTypes);
 
 
+template <typename T>
+class Matrix2DDenormalsMultiplication: public ::testing::Test
+{
+protected:
+    fgm::Matrix2D<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
+
+    void SetUp() override
+    {
+        _matA = { fgm::Vector2D{ T(0.1234568989329), T(0.1234214891234) },
+                  fgm::Vector2D{ T(-0.123489823149), T(-0.123489757623) } };
+        _matB = { fgm::Vector2D{ T(0.8923764912287), T(0.78352829112384) },
+                  fgm::Vector2D{ T(0.0123412348958), T(-0.0231423489589) } };
+
+        _expectedFloatingMat = { fgm::Vector2D{ T(0.013412264184596345), T(0.013380716644514457) },
+                                 fgm::Vector2D{ T(0.004381455169424965), T(0.004381016652222751) } };
+        _expectedIntegralMat = { fgm::Vector2D{ T(71), T(79) }, fgm::Vector2D{ T(71), T(116) } };
+    }
+};
+/** @brief Test fixture for @ref fgm::Matrix2D matrix multiplication with denormals, parameterized by @ref
+ * SupportedFloatingPointTypes. */
+TYPED_TEST_SUITE(Matrix2DDenormalsMultiplication, SupportedFloatingPointTypes);
+
+
 
 /**
  * @addtogroup T_FGM_Mat2x2_Multiplication
@@ -436,6 +459,14 @@ TYPED_TEST(Matrix2DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
         EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
     else
         EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
+}
+
+
+/** @brief Verify that the binary vector multiplication operation return matrix product for denormals. */
+TYPED_TEST(Matrix2DDenormalsMultiplication, ReturnsMatrixWithPrecision)
+{
+    const auto transformedVector = this->_matA * this->_matB;
+    EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
 }
 
 
