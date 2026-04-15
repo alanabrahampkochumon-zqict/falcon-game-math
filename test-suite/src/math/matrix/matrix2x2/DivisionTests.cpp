@@ -54,18 +54,18 @@ TYPED_TEST_SUITE(Matrix2DDivision, SupportedArithmeticTypes);
  **************************************/
 
 /** @brief Verify that matrix division operations are available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Matrix2D MAT(2, 4, 6, 8);
 
     // Matrix scalar division
-    //constexpr fgm::Matrix2D DIV_RESULT_1 = MAT / 2;
-    //static_assert(DIV_RESULT_1(0, 0) == 1);
-    //static_assert(DIV_RESULT_1(0, 1) == 2);
-    //static_assert(DIV_RESULT_1(1, 0) == 3);
-    //static_assert(DIV_RESULT_1(1, 1) == 4); 
+    // constexpr fgm::Matrix2D DIV_RESULT_1 = MAT / 2;
+    // static_assert(DIV_RESULT_1(0, 0) == 1);
+    // static_assert(DIV_RESULT_1(0, 1) == 2);
+    // static_assert(DIV_RESULT_1(1, 0) == 3);
+    // static_assert(DIV_RESULT_1(1, 1) == 4);
     // TODO: Add back static tests after implementing custom abs function
-}
+} // namespace
 
 
 
@@ -120,5 +120,77 @@ TYPED_TEST(Matrix2DDivision, CompoundDivision_ByZero_TriggersAssertInDebugMode)
 {
     EXPECT_DEBUG_DEATH(this->_matrix /= 0, "Matrix division by zero");
 }
+
+
+/**************************************
+ *                                    *
+ *         SAFE DIVISION TESTS        *
+ *                                    *
+ **************************************/
+
+
+/**
+ * @brief Verify that dividing a matrix using @ref fgm::Matrix2D::safeDiv perform an element-wise divide
+ *        and returns a new matrix instance.
+ */
+TYPED_TEST(Matrix2DDivision, SafeDivision_ReturnsInverseScaledMatrix)
+{
+    const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
+
+    EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix using @ref fgm::Matrix2D::safeDiv always
+ *        return a floating-point matrix.
+ */
+TYPED_TEST(Matrix2DDivision, SafeDivision_AlwaysReturnFloatingPointMatrix)
+{
+    [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
+    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::safeDiv
+ *        returns identity matrix by default.
+ */
+TYPED_TEST(Matrix2DDivision, SafeDivision_DivisionByZero_ReturnsIdentityMatrixByDefault)
+{
+    const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0));
+    EXPECT_MAT_IDENTITY(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::safeDiv
+ *        returns identity matrix by default.
+ */
+TYPED_TEST(Matrix2DDivision, SafeDivision_DivisionByZero_ReturnsPassedInFallback)
+{
+    const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::mat2d::zero<TypeParam>);
+    EXPECT_MAT_ZERO(inverseScaledMat);
+}
+
+
+///**
+// * @brief Verify that the compound division operator perform an element-wise divide
+// *        and mutates the matrix in-place.
+// */
+//TYPED_TEST(Matrix2DDivision, CompoundDivision_InverseScalesMatrixInPlace)
+//{
+//    fgm::Matrix2D matrix = this->_matrix;
+//    matrix /= this->_scalar;
+//
+//    EXPECT_MAT_EQ(this->_expectedTypedMatrix, matrix);
+//}
+//
+//
+///** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
+//TYPED_TEST(Matrix2DDivision, CompoundDivision_ByZero_TriggersAssertInDebugMode)
+//{
+//    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "Matrix division by zero");
+//}
 
 /** @} */

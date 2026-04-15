@@ -144,6 +144,11 @@ namespace fgm
         requires Arithmetic<PromoteValue_t<T, U>>
     using PromotedMatrix2D = Matrix2D<PromoteValue_t<T, U>>;
 
+
+    /** @brief Alias for @ref Matrix2D with a `value_type` of @ref Magnitude of the wider type. */
+    template<Arithmetic T, Arithmetic U>
+    using PromotedFloatMatrix2D = Matrix2D<Magnitude<std::common_type_t<T, U>>>;
+
     /** @} */
 
 } // namespace fgm

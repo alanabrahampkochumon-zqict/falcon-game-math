@@ -1,8 +1,5 @@
 #pragma once
 
-#include "Matrix2D.h"
-#include "Matrix2D.h"
-#include "Matrix2D.h"
 
 #include <cassert>
 #include <cmath>
@@ -335,7 +332,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Matrix2D<Magnitude<std::common_type_t<T, S>>> Matrix2D<T>::operator/(const S& scalar) const noexcept
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::operator/(const S& scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, S>>;
@@ -369,6 +366,23 @@ namespace fgm
         return *this;
     }
 
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(S scalar, const fgm::Matrix2D<T>& fallback) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const Matrix2D& mat, S scalar,
+        const fgm::Matrix2D<T>& fallback) noexcept requires StrictArithmetic<T>
+    {
+        return mat.safeDiv(scalar, fallback);
+    }
 
 
     /**************************************
