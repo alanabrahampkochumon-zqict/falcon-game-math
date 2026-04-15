@@ -63,7 +63,7 @@ TEST_P(Vector3DInfChecker, ReturnTrueIfAnyComponentIsInfinity)
     EXPECT_EQ(expected, vec.hasInf());
 }
 INSTANTIATE_TEST_SUITE_P(
-    Vector3DNaNCheckerTestSuite, Vector3DInfChecker,
+    Vector3DInfCheckerTestSuite, Vector3DInfChecker,
     ::testing::Values(Vector3DUtilityParams{ fgm::Vector3D(fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
                       Vector3DUtilityParams{ fgm::Vector3D(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
                       Vector3DUtilityParams{ fgm::Vector3D(1.0f, 1.0f, fgm::constants::INFINITY_F), true },

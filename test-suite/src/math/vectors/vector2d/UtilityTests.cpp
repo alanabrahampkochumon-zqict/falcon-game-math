@@ -63,7 +63,7 @@ TEST_P(Vector2DInfChecker, ReturnTrueIfAnyComponentIsInfinity)
     EXPECT_EQ(expected, vec.hasInf());
 }
 INSTANTIATE_TEST_SUITE_P(
-    Vector2DNaNCheckerTestSuite, Vector2DInfChecker,
+    Vector2DInfCheckerTestSuite, Vector2DInfChecker,
     ::testing::Values(Vector2DUtilityParams{ fgm::Vector2D(fgm::constants::INFINITY_F, 1.0f), true },
                       Vector2DUtilityParams{ fgm::Vector2D(1.0f, fgm::constants::INFINITY_F), true },
                       Vector2DUtilityParams{ fgm::Vector2D(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
