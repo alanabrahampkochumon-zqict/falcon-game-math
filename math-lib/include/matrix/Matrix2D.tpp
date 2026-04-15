@@ -422,10 +422,11 @@ namespace fgm
     template <Arithmetic T>
     constexpr bool Matrix2D<T>::hasInf() const noexcept
     {
-        return false;
+        return _data[0].hasInf() || _data[1].hasInf();
     }
 
+
     template <Arithmetic T>
-    constexpr bool Matrix2D<T>::hasInf(const Matrix2D& mat) noexcept {return true;}
+    constexpr bool Matrix2D<T>::hasInf(const Matrix2D& mat) noexcept {return mat.hasInf();}
 
 } // namespace fgm

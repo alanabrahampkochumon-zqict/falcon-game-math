@@ -68,10 +68,9 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Values(Matrix2DUtilityParams{ fgm::Matrix2D(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
                       Matrix2DUtilityParams{ fgm::Matrix2D(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
                       Matrix2DUtilityParams{ fgm::Matrix2D(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                      Matrix2DUtilityParams{ fgm::Matrix2D(1.0f, 1.0f, 1.0f fgm::constants::INFINITY_F), true },
+                      Matrix2DUtilityParams{ fgm::Matrix2D(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
                       Matrix2DUtilityParams{ fgm::Matrix2D(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                           fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                                             true },
+                                                           fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),true },
                       Matrix2DUtilityParams{ fgm::Matrix2D(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
