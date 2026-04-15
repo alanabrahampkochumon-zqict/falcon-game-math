@@ -394,6 +394,24 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(S scalar, OperationStatus& status,
+        const fgm::Matrix2D<T>& fallback) const noexcept requires StrictArithmetic<T>
+    {
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const Matrix2D& mat, S scalar, OperationStatus& status,
+        const fgm::Matrix2D<T>& fallback) noexcept requires StrictArithmetic<T>
+    {
+        return mat.tryDiv(scalar, status, fallback);
+    }
+
+
     /**************************************
      *                                    *
      *           MATRIX ALGEBRA           *

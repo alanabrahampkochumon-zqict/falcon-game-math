@@ -42,6 +42,8 @@ protected:
 TYPED_TEST_SUITE(Matrix2DDivision, SupportedArithmeticTypes);
 
 
+
+//TODO: Add safeDiv and tryDiv NaN tests
 /**
  * @addtogroup T_FGM_Mat2x2_Division
  * @{
@@ -132,7 +134,7 @@ TYPED_TEST(Matrix2DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix using @ref fgm::Matrix2D::safeDiv perform an element-wise divide
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Matrix2DDivision, SafeDivision_ReturnsInverseScaledMatrix)
+TYPED_TEST(Matrix2DDivision, SafeDivide_ReturnsInverseScaledMatrix)
 {
     const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
 
@@ -144,7 +146,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivision_ReturnsInverseScaledMatrix)
  * @brief Verify that dividing a matrix using @ref fgm::Matrix2D::safeDiv always
  *        return a floating-point matrix.
  */
-TYPED_TEST(Matrix2DDivision, SafeDivision_AlwaysReturnFloatingPointMatrix)
+TYPED_TEST(Matrix2DDivision, SafeDivide_AlwaysReturnFloatingPointMatrix)
 {
     [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
     static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
@@ -155,7 +157,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivision_AlwaysReturnFloatingPointMatrix)
  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::safeDiv
  *        returns identity matrix by default.
  */
-TYPED_TEST(Matrix2DDivision, SafeDivision_DivisionByZeroReturnsIdentityMatrixByDefault)
+TYPED_TEST(Matrix2DDivision, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
 {
     const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0));
     EXPECT_MAT_IDENTITY(inverseScaledMat);
@@ -166,7 +168,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivision_DivisionByZeroReturnsIdentityMatrixByD
  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::safeDiv
  *        returns passed-in fallback.
  */
-TYPED_TEST(Matrix2DDivision, SafeDivision_DivisionByZero_ReturnsPassedInFallback)
+TYPED_TEST(Matrix2DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
 {
     const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::mat2d::zero<TypeParam>);
     EXPECT_MAT_ZERO(inverseScaledMat);
@@ -176,7 +178,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivision_DivisionByZero_ReturnsPassedInFallback
  * @brief Verify that dividing a matrix using static variant of @ref fgm::Matrix2D::safeDiv
  *        perform an element-wise divide and returns a new matrix instance.
  */
-TYPED_TEST(Matrix2DDivision, SafeDivision_StaticWrapper_ReturnsInverseScaledMatrix)
+TYPED_TEST(Matrix2DDivision, SafeDivide_StaticWrapper_ReturnsInverseScaledMatrix)
 {
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
 
@@ -188,7 +190,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivision_StaticWrapper_ReturnsInverseScaledMatr
  * @brief Verify that dividing a matrix using static variant of @ref fgm::Matrix2D::safeDiv always
  *        return a floating-point matrix.
  */
-TYPED_TEST(Matrix2DDivision, SafeDivision_StaticWrapper_AlwaysReturnFloatingPointMatrix)
+TYPED_TEST(Matrix2DDivision, SafeDivide_StaticWrapper_AlwaysReturnFloatingPointMatrix)
 {
     [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
     static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
@@ -199,7 +201,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivision_StaticWrapper_AlwaysReturnFloatingPoin
  * @brief Verify that dividing a matrix by zero using static variant of @ref fgm::Matrix2D::safeDiv
  *        returns identity matrix by default.
  */
-TYPED_TEST(Matrix2DDivision, SafeDivision_StaticWrapper_DivisionByZeroReturnsIdentityMatrixByDefault)
+TYPED_TEST(Matrix2DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsIdentityMatrixByDefault)
 {
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::safeDiv(this->_matrix, TypeParam(0));
     EXPECT_MAT_IDENTITY(inverseScaledMat);
@@ -210,10 +212,120 @@ TYPED_TEST(Matrix2DDivision, SafeDivision_StaticWrapper_DivisionByZeroReturnsIde
  * @brief Verify that dividing a matrix by zero using static variant of @ref fgm::Matrix2D::safeDiv
  *        returns passed-in fallback.
  */
-TYPED_TEST(Matrix2DDivision, SafeDivision_StaticWrapper_DivisionByZeroReturnsPassedInFallback)
+TYPED_TEST(Matrix2DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsPassedInFallback)
 {
     const fgm::Matrix2D inverseScaledMat =
         fgm::Matrix2D<TypeParam>::safeDiv(this->_matrix, TypeParam(0), fgm::mat2d::zero<TypeParam>);
     EXPECT_MAT_ZERO(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix using @ref fgm::Matrix2D::tryDiv perform an element-wise divide
+ *        returns a new matrix instance and set flag to @ref OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Matrix2DDivision, TryDivide_ReturnsInverseScaledMatrix)
+{
+    fgm::OperationStatus flag;
+    const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
+
+    EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix using @ref fgm::Matrix2D::tryDiv always
+ *        return a floating-point matrix and set flag to @ref OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Matrix2DDivision, TryDivide_AlwaysReturnFloatingPointMatrix)
+{
+    fgm::OperationStatus flag;
+    [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
+    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::tryDiv
+ *        returns identity matrix by default and set flag to @ref OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
+{
+    fgm::OperationStatus flag;
+    const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag);
+
+    EXPECT_MAT_IDENTITY(inverseScaledMat);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::tryDiv
+ *        returns passed-in fallback and set flag to @ref OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsPassedInFallback)
+{
+    fgm::OperationStatus flag;
+    const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag, fgm::mat2d::zero<TypeParam>);
+
+    EXPECT_MAT_ZERO(inverseScaledMat);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+}
+
+/**
+ * @brief Verify that dividing a matrix using static variant of @ref fgm::Matrix2D::tryDiv
+ *        perform an element-wise divide, returns a new matrix instance
+ *        and set flag to @ref OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_ReturnsInverseScaledMatrix)
+{
+    fgm::OperationStatus flag;
+    const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, this->_scalar, flag);
+
+    EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix using static variant of @ref fgm::Matrix2D::tryDiv always
+ *        return a floating-point matrix and set flag to @ref OperationStatus::SUCCESS.
+ */
+TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_AlwaysReturnFloatingPointMatrix)
+{
+    fgm::OperationStatus flag;
+    [[maybe_unused]] const fgm::Matrix2D inverseScaledMat =
+        fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, this->_scalar, flag);
+    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using static variant of @ref fgm::Matrix2D::tryDiv
+ *        returns identity matrix by default and set flag to @ref OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_DivisionByZeroReturnsIdentityMatrixByDefault)
+{
+    fgm::OperationStatus flag;
+    const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag);
+    EXPECT_MAT_IDENTITY(inverseScaledMat);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using static variant of @ref fgm::Matrix2D::tryDiv
+ *        returns passed-in fallback and set flag to @ref OperationStatus::DIVISIONBYZERO.
+ */
+TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_DivisionByZeroReturnsPassedInFallback)
+{
+    fgm::OperationStatus flag;
+    const fgm::Matrix2D inverseScaledMat =
+        fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag, fgm::mat2d::zero<TypeParam>);
+    EXPECT_MAT_ZERO(inverseScaledMat);
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
 /** @} */
