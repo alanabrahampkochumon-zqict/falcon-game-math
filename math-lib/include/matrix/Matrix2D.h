@@ -595,6 +595,28 @@ namespace fgm
          */
         [[nodiscard]] constexpr static bool hasInf(const Matrix2D& mat) noexcept;
 
+
+        /**
+         * @brief Check if any element of this matrix is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @return True if at least one element is NaN.
+         */
+        [[nodiscard]] constexpr bool hasNaN() const noexcept;
+
+
+        /**
+         * @brief Check if any element of this matrix is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @param vec The matrix to evaluate for indefinite elements.
+         *
+         * @return True if at least one element is NaN.
+         */
+        [[nodiscard]] constexpr static bool hasNaN(const Matrix2D& mat) noexcept;
+
         /** @} */
 
 

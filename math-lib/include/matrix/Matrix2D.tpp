@@ -429,4 +429,18 @@ namespace fgm
     template <Arithmetic T>
     constexpr bool Matrix2D<T>::hasInf(const Matrix2D& mat) noexcept {return mat.hasInf();}
 
+
+    template <Arithmetic T>
+    constexpr bool Matrix2D<T>::hasNaN() const noexcept
+    {
+        return false;
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix2D<T>::hasNaN(const Matrix2D& mat) noexcept
+    {
+        return mat.hasNaN();
+    }
+
 } // namespace fgm

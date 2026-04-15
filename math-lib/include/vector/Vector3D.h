@@ -1633,7 +1633,7 @@ namespace fgm
         /**
          * @brief Check if any component of this vector is an IEEE 754 infinity.
          *
-         * @note Always returns false for integral types.
+         * @note Always return false for integral types.
          *
          * @return True if at least one component is positive or negative infinity.
          */
@@ -1643,7 +1643,7 @@ namespace fgm
         /**
          * @brief Check if any component of a vector is an IEEE 754 infinity.
          *
-         * @note Always returns false for integral types.
+         * @note Always return false for integral types.
          *
          * @param vec The vector to evaluate for indefinite components.
          *
@@ -1655,7 +1655,7 @@ namespace fgm
         /**
          * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
          *
-         * @note Always returns false for integral types.
+         * @note Always return false for integral types.
          *
          * @return True if at least one component is NaN.
          */
@@ -1665,7 +1665,7 @@ namespace fgm
         /**
          * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
          *
-         * @note Always returns false for integral types.
+         * @note Always return false for integral types.
          *
          * @param vec The vector to evaluate for indefinite components.
          *
