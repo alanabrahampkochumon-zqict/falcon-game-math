@@ -387,7 +387,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const Matrix2D& mat, S scalar,
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const Matrix2D& mat, const S scalar,
         const fgm::Matrix2D<T>& fallback) noexcept requires StrictArithmetic<T>
     {
         return mat.safeDiv(scalar, fallback);
@@ -396,16 +396,41 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(S scalar, OperationStatus& status,
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const S scalar, OperationStatus& status,
         const fgm::Matrix2D<T>& fallback) const noexcept requires StrictArithmetic<T>
     {
-        return *this;
+        using R = std::common_type_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            if (hasNaN() | std::isnan(scalar))
+            {
+                status = OperationStatus::NANOPERAND;
+                return fallback;
+            }
+            if (std::abs(scalar) <= std::numeric_limits<S>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return fallback;
+            }
+        }
+
+        if constexpr (std::is_integral_v<R>)
+            if (scalar == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return fallback;
+            }
+
+
+        status = OperationStatus::SUCCESS;
+        return (*this) / scalar;
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const Matrix2D& mat, S scalar, OperationStatus& status,
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const Matrix2D& mat, const S scalar, OperationStatus& status,
         const fgm::Matrix2D<T>& fallback) noexcept requires StrictArithmetic<T>
     {
         return mat.tryDiv(scalar, status, fallback);

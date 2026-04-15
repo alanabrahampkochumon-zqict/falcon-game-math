@@ -220,11 +220,18 @@ TYPED_TEST(Matrix2DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsPasse
 }
 
 
+
+/**************************************
+ *                                    *
+ *         TRY DIVISION TESTS         *
+ *                                    *
+ **************************************/
+
 /**
  * @brief Verify that dividing a matrix using @ref fgm::Matrix2D::tryDiv perform an element-wise divide
  *        returns a new matrix instance and set flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix2DDivision, TryDivide_ReturnsInverseScaledMatrix)
+TYPED_TEST(Matrix2DDivision, TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
@@ -238,7 +245,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_ReturnsInverseScaledMatrix)
  * @brief Verify that dividing a matrix using @ref fgm::Matrix2D::tryDiv always
  *        return a floating-point matrix and set flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix2DDivision, TryDivide_AlwaysReturnFloatingPointMatrix)
+TYPED_TEST(Matrix2DDivision, TryDivide_AlwaysReturnFloatingPointMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
@@ -251,7 +258,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_AlwaysReturnFloatingPointMatrix)
  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::tryDiv
  *        returns identity matrix by default and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
+TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag);
@@ -265,7 +272,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefa
  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsPassedInFallback)
+TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag, fgm::mat2d::zero<TypeParam>);
@@ -279,7 +286,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsPassedInFallback)
  *        perform an element-wise divide, returns a new matrix instance
  *        and set flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_ReturnsInverseScaledMatrix)
+TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, this->_scalar, flag);
@@ -293,7 +300,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_ReturnsInverseScaledMatrix)
  * @brief Verify that dividing a matrix using static variant of @ref fgm::Matrix2D::tryDiv always
  *        return a floating-point matrix and set flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_AlwaysReturnFloatingPointMatrix)
+TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_AlwaysReturnFloatingPointMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Matrix2D inverseScaledMat =
@@ -307,12 +314,12 @@ TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_AlwaysReturnFloatingPointMa
  * @brief Verify that dividing a matrix by zero using static variant of @ref fgm::Matrix2D::tryDiv
  *        returns identity matrix by default and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_DivisionByZeroReturnsIdentityMatrixByDefault)
+TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
@@ -320,12 +327,12 @@ TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_DivisionByZeroReturnsIdenti
  * @brief Verify that dividing a matrix by zero using static variant of @ref fgm::Matrix2D::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_DivisionByZeroReturnsPassedInFallback)
+TYPED_TEST(Matrix2DDivision, TryDivide_StaticWrapper_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix2D inverseScaledMat =
         fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag, fgm::mat2d::zero<TypeParam>);
     EXPECT_MAT_ZERO(inverseScaledMat);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 /** @} */
