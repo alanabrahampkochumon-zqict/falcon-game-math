@@ -13,8 +13,8 @@
  */
 
 
-#include <cmath>
 #include <cassert>
+#include <cmath>
 #include <common/MathTraits.h>
 #include <gtest/gtest.h>
 #include <matrix/Matrix2D.h>
@@ -81,14 +81,16 @@ namespace testutils
     void EXPECT_MAT_CONTAINS(const std::vector<T>& expectedElements, const U& actual)
     {
         assert(expectedElements.size() == (U::rows * U::columns) &&
-                      "Size of data elements must match the matrix dimension, e.g: 9 to 3x3");
+               "Size of data elements must match the matrix dimension, e.g: 9 to 3x3");
 
         for (std::size_t i = 0; i < U::rows; ++i)
             for (std::size_t j = 0; j < U::columns; ++j)
                 if constexpr (std::is_same_v<T, double>)
-                    EXPECT_DOUBLE_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
+                    EXPECT_NEAR(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)),
+                                fgm::Config::DOUBLE_EPSILON);
                 else if constexpr (std::is_same_v<T, float>)
-                    EXPECT_FLOAT_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
+                    EXPECT_NEAR(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)),
+                                fgm::Config::FLOAT_EPSILON);
                 else
                     EXPECT_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
     }
@@ -142,9 +144,9 @@ namespace testutils
         for (std::size_t i = 0; i < T::rows; ++i)
             for (std::size_t j = 0; j < T::columns; ++j)
                 if constexpr (std::is_same_v<ValueType, double>)
-                    EXPECT_DOUBLE_EQ(i == j, actual(i, j));
+                    EXPECT_NEAR(i == j, actual(i, j), fgm::Config::DOUBLE_EPSILON);
                 else if constexpr (std::is_same_v<ValueType, float>)
-                    EXPECT_FLOAT_EQ(i == j, actual(i, j));
+                    EXPECT_NEAR(i == j, actual(i, j), fgm::Config::FLOAT_EPSILON);
                 else
                     EXPECT_EQ(i == j, actual(i, j));
     }
@@ -169,9 +171,9 @@ namespace testutils
         for (std::size_t i = 0; i < T::rows; ++i)
             for (std::size_t j = 0; j < T::columns; ++j)
                 if constexpr (std::is_same_v<ValueType, double>)
-                    EXPECT_DOUBLE_EQ(0.0, actual(i, j));
+                    EXPECT_NEAR(0.0, actual(i, j), fgm::Config::DOUBLE_EPSILON);
                 else if constexpr (std::is_same_v<ValueType, float>)
-                    EXPECT_FLOAT_EQ(0.0f, actual(i, j));
+                    EXPECT_NEAR(0.0f, actual(i, j), fgm::Config::FLOAT_EPSILON);
                 else
                     EXPECT_EQ(ValueType(0), actual(i, j));
     }
