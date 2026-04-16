@@ -188,7 +188,7 @@ namespace fgm
 
         /**
          * @brief Compare all elements of this matrix for equality with another matrix.
-         *        Perform a element-wise comparison and returns true only if every element pair
+         *        Perform an element-wise comparison and returns true only if every element pair
          *        satisfies the equality condition within the given @p epsilon.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
@@ -208,10 +208,10 @@ namespace fgm
 
         /**
          * @brief Compare all elements of a matrix for equality with another matrix.
-         *        Perform a element-wise comparison and returns true only if every element pair
+         *        Perform an element-wise comparison and returns true only if every element pair
          *        satisfies the equality condition within the given @p epsilon.
          *
-         * @note To obtain a element-wise boolean mask, use @ref eq.
+         * @note To obtain an element-wise boolean mask, use @ref eq.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *
@@ -230,7 +230,7 @@ namespace fgm
 
         /**
          * @brief Compare all elements of this matrix for equality with another matrix.
-         *        Perform a element-wise comparison and returns true if any corresponding elements differ by more
+         *        Perform an element-wise comparison and returns true if any corresponding elements differ by more
          *        than @p epsilon.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
@@ -250,7 +250,7 @@ namespace fgm
 
         /**
          * @brief Compare all elements of this matrix for equality with another matrix.
-         *        Perform a element-wise comparison and returns true if any corresponding elements differ by more
+         *        Perform an element-wise comparison and returns true if any corresponding elements differ by more
          *        than @p epsilon.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
@@ -425,7 +425,7 @@ namespace fgm
          *
          * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec The column vector to transformed.
+         * @param[in] vec The column vector to transform.
          *
          * @return A new @ref Vector2D with applied linear transformations.
          */
@@ -494,7 +494,7 @@ namespace fgm
 
         /**
          * @brief Inverse-scale this matrix by a scalar value.
-         *        Perform an in-place divide of each element by @p scalar.
+         *        Perform an in-place division of each element by @p scalar.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
@@ -525,7 +525,7 @@ namespace fgm
          *                     element.
          *
          * @return A new @ref Matrix2D resulting from the division or @p fallback if the @p scalar is below the
-         *         epsilon threshold or if either of the matrix has NaN(Not-a-Number) element(s).
+         *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix2D<T, S> safeDiv(
@@ -550,7 +550,7 @@ namespace fgm
          *                     element.
          *
          * @return A new @ref Matrix2D resulting from the division or @p fallback if the @p scalar is below the
-         *         epsilon threshold or if either of the matrix has NaN(Not-a-Number) element(s).
+         *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr static PromotedFloatMatrix2D<T, S> safeDiv(
@@ -560,7 +560,7 @@ namespace fgm
 
         /**
          * @brief Safely divide this matrix by a scalar value and set @p status to the division operation result.
-         *        Divides each component of the matrix by @p scalar and returns the newly computed matrix.
+         *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
@@ -571,14 +571,14 @@ namespace fgm
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
-         * @param[in] scalar   The value to divide the matrix components by.
+         * @param[in] scalar   The value to divide the matrix elements by.
          * @param[out] status  The status flag to store the status of the current operation result.
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
          * @return A new @ref Matrix2D resulting from the division or @p fallback if the @p scalar is below the
-         *         epsilon threshold or if either of the matrixs+ has NaN(Not-a-Number) component(s).
+         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix2D<T, S> tryDiv(
@@ -589,7 +589,7 @@ namespace fgm
 
         /**
          * @brief Safely divide a matrix by a scalar value and set @p status to the division operation result.
-         *        Divides each component of the matrix by @p scalar and returns the newly computed matrix.
+         *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
@@ -601,14 +601,14 @@ namespace fgm
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
          * @param[in] mat      The matrix to divide.
-         * @param[in] scalar   The value to divide the matrix components by.
+         * @param[in] scalar   The value to divide the matrix elements by.
          * @param[out] status  The status flag to store the status of the current operation result.
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
          * @return A new @ref Matrix2D resulting from the division or @p fallback if the @p scalar is below the
-         *         epsilon threshold or if either of the matrixs+ has NaN(Not-a-Number) component(s).
+         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedFloatMatrix2D<T, S> tryDiv(
@@ -719,7 +719,7 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
          * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
-         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) component(s).
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
         constexpr Matrix2D<Magnitude<T>> safeInverse(
@@ -740,7 +740,7 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
          * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
-         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) component(s).
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
         static constexpr Matrix2D<Magnitude<T>> safeInverseOf(
@@ -762,7 +762,7 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
          * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
-         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) component(s).
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
         constexpr Matrix2D<Magnitude<T>> tryInverse(OperationStatus& status,
@@ -785,7 +785,7 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
          * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
-         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) component(s).
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
         static constexpr Matrix2D<Magnitude<T>> tryInverseOf(const Matrix2D& matrix, OperationStatus& status,
