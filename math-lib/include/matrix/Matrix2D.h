@@ -93,7 +93,7 @@ namespace fgm
          * @param[in] other The source matrix to be converted.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr Matrix2D(const Matrix2D<U>& other) noexcept;
+        [[nodiscard]] explicit constexpr Matrix2D(const Matrix2D<U>& other) noexcept;
 
 
         /**
