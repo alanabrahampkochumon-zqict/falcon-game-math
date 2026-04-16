@@ -84,9 +84,10 @@ namespace fgm
 
     /**************************************
      *                                    *
-     *           CONSTANTS           *
+     *             CONSTANTS              *
      *                                    *
      **************************************/
+
     template <Arithmetic T>
     constexpr Matrix2D<T> Matrix2D<T>::eye() noexcept
     {
@@ -337,7 +338,7 @@ namespace fgm
     {
         using R = Magnitude<std::common_type_t<T, S>>;
 
-        assert(std::abs(R(scalar)) > fgm::Config::EPSILON<R> &&
+        assert(std::abs(R(scalar)) > Config::EPSILON<R> &&
                "Matrix division by zero"); // TODO: Change to custom assert and add custom abs
 
         R factor = R(1) / static_cast<R>(scalar);
@@ -369,7 +370,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(S scalar, const fgm::Matrix2D<T>& fallback) const noexcept
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const S scalar, const Matrix2D<T>& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -388,7 +389,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const Matrix2D& mat, const S scalar,
-        const fgm::Matrix2D<T>& fallback) noexcept requires StrictArithmetic<T>
+        const Matrix2D<T>& fallback) noexcept requires StrictArithmetic<T>
     {
         return mat.safeDiv(scalar, fallback);
     }
@@ -397,7 +398,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const S scalar, OperationStatus& status,
-        const fgm::Matrix2D<T>& fallback) const noexcept requires StrictArithmetic<T>
+        const Matrix2D<T>& fallback) const noexcept requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
 
@@ -435,6 +436,8 @@ namespace fgm
     {
         return mat.tryDiv(scalar, status, fallback);
     }
+
+
 
 
     /**************************************
