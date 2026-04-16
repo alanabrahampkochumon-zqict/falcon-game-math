@@ -1,6 +1,8 @@
 #pragma once
 
 
+#include "Matrix2D.h"
+
 #include <cassert>
 #include <cmath>
 #include <type_traits>
@@ -370,17 +372,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const S scalar, const Matrix2D<T>& fallback) const noexcept
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const S scalar, const Matrix2D& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
             if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<R>::epsilon()))
-                return fallback;
+                return Matrix2D<R>(fallback);
         if constexpr (std::is_integral_v<R>)
             if (scalar == 0)
-                return fallback;
+                return Matrix2D<Magnitude<R>>(fallback);
 
         return (*this) / scalar;
     }
@@ -407,12 +409,12 @@ namespace fgm
             if (hasNaN() | std::isnan(scalar))
             {
                 status = OperationStatus::NANOPERAND;
-                return fallback;
+                return Matrix2D<R>(fallback);
             }
             if (std::abs(scalar) <= std::numeric_limits<R>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return fallback;
+                return Matrix2D<R>(fallback);
             }
         }
 
@@ -420,7 +422,7 @@ namespace fgm
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return fallback;
+                return Matrix2D<Magnitude<R>>(fallback);
             }
 
 
@@ -507,14 +509,16 @@ namespace fgm
     constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverse(const Matrix2D& fallback) const noexcept requires
         SignedStrictArithmetic<T>
     {
+        using R = Magnitude<T>;
+
         T det = determinant();
 
         if constexpr (std::is_floating_point_v<T>)
             if (hasNaN() || (std::abs(det) <= std::numeric_limits<T>::epsilon()))
-                return fallback;
+                return Matrix2D<R>(fallback);
         if constexpr (std::is_integral_v<T>)
             if (det == 0)
-                return fallback;
+                return Matrix2D<R>(fallback);
 
         return inverse();
     }
@@ -532,6 +536,8 @@ namespace fgm
     constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::tryInverse(OperationStatus& status,
         const Matrix2D& fallback) const noexcept requires SignedStrictArithmetic<T>
     {
+        using R = Magnitude<T>;
+
         T det = determinant();
 
         if constexpr (std::is_floating_point_v<T>)
@@ -539,12 +545,12 @@ namespace fgm
             if (hasNaN())
             {
                 status = OperationStatus::NANOPERAND;
-                return fallback;
+                return Matrix2D<R>(fallback);
             }
             if (std::abs(det) <= std::numeric_limits<T>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return fallback;
+                return Matrix2D<R>(fallback);
             }
         }
 
@@ -552,7 +558,7 @@ namespace fgm
             if (det == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return fallback;
+                return Matrix2D<R>(fallback);
             }
 
 

@@ -157,7 +157,7 @@ namespace fgm
         /**
          * @brief A 2D matrix with ones on the main diagonal and zeros elsewhere.
          *
-         * @note Only available for @ref fgm::StrictArithmetic types.
+         * @note Only available for @ref StrictArithmetic types.
          *
          * @return A 2D identity matrix.
          */
@@ -167,7 +167,7 @@ namespace fgm
         /**
          * @brief A 2D matrix with all zero elements.
          *
-         * @note Only available for @ref fgm::StrictArithmetic types.
+         * @note Only available for @ref StrictArithmetic types.
          *
          * @return A 2D zero matrix.
          */
@@ -514,11 +514,11 @@ namespace fgm
          *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] scalar   The value to divide the matrix elements by.
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
@@ -529,7 +529,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix2D<T, S> safeDiv(
-            S scalar, const fgm::Matrix2D<T>& fallback = fgm::Matrix2D<T>::eye()) const noexcept
+            S scalar, const Matrix2D<T>& fallback = Matrix2D<T>::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -538,11 +538,11 @@ namespace fgm
          *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] mat      The matrix to divide.
          * @param[in] scalar   The value to divide the matrix elements by.
@@ -554,7 +554,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr static PromotedFloatMatrix2D<T, S> safeDiv(
-            const Matrix2D& mat, S scalar, const fgm::Matrix2D<T>& fallback = fgm::Matrix2D<T>::eye()) noexcept
+            const Matrix2D& mat, S scalar, const Matrix2D<T>& fallback = Matrix2D<T>::eye()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -563,13 +563,13 @@ namespace fgm
          *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] scalar   The value to divide the matrix elements by.
          * @param[out] status  The status flag to store the status of the current operation result.
@@ -583,7 +583,7 @@ namespace fgm
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix2D<T, S> tryDiv(
             S scalar, OperationStatus& status,
-            const fgm::Matrix2D<T>& fallback = fgm::Matrix2D<T>::eye()) const noexcept
+            const Matrix2D<T>& fallback = Matrix2D<T>::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -592,13 +592,13 @@ namespace fgm
          *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] mat      The matrix to divide.
          * @param[in] scalar   The value to divide the matrix elements by.
@@ -613,7 +613,7 @@ namespace fgm
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedFloatMatrix2D<T, S> tryDiv(
             const Matrix2D& mat, S scalar, OperationStatus& status,
-            const fgm::Matrix2D<T>& fallback = fgm::Matrix2D<T>::eye()) noexcept
+            const Matrix2D<T>& fallback = Matrix2D<T>::eye()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1003,7 +1003,7 @@ namespace fgm
         /**
          * @brief A 2D matrix with ones on the main diagonal and zeros elsewhere.
          *
-         * @note Only available for @ref fgm::StrictArithmetic types.
+         * @note Only available for @ref StrictArithmetic types.
          */
         template <StrictArithmetic T>
         inline constexpr Matrix2D<T> eye(T(1), T(0), T(0), T(1));
@@ -1012,7 +1012,7 @@ namespace fgm
         /**
          * @brief A 2D matrix with all zero elements.
          *
-         * @note Only available for @ref fgm::StrictArithmetic types.
+         * @note Only available for @ref StrictArithmetic types.
          */
         template <StrictArithmetic T>
         inline constexpr Matrix2D<T> zero(T(0), T(0), T(0), T(0));
