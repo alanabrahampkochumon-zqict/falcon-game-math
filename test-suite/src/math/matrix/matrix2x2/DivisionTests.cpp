@@ -203,7 +203,7 @@ TEST_P(Matrix2DDivisionNaNTests, SafeDivide_ReturnsIdentityMatrixByDefault)
  */
 TEST_P(Matrix2DDivisionNaNTests, SafeDivide_ReturnsPassedInFallback)
 {
-    const fgm::Matrix2D inverseScaledMat = GetParam().safeDiv(2.5);
+    const fgm::Matrix2D inverseScaledMat = GetParam().safeDiv(2.5, fgm::mat2d::zero<ParamType::value_type>);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
