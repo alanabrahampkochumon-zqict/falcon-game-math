@@ -500,6 +500,21 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverse(const Matrix2D& fallback) const noexcept requires
+        SignedStrictArithmetic<T>
+    {
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverseOf(const Matrix2D& matrix,
+        const Matrix2D<T>& fallback) noexcept requires SignedStrictArithmetic<T>
+    {
+        return matrix.safeInverse(fallback);
+    }
+
 
     /**************************************
      *                                    *

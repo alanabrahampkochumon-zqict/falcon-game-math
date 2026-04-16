@@ -74,12 +74,14 @@ TYPED_TEST_SUITE(Matrix2DInverse, SupportedSignedArithmeticTypes);
 
 /**************************************
  *                                    *
- *           RUNTIME TESTS            *
+ *       INVERSE TESTS (RUNTIME)      *
  *                                    *
  **************************************/
 
-
-/** @brief Verify that inverting a matrix returns the correct matrix. */
+/**
+ * @brief Verify that inverting a matrix using @ref fgm::Matrix2D::inverse exchanges row and
+ *        column elements and returns a new matrix.
+ */
 TYPED_TEST(Matrix2DInverse, ExchangesRowsAndColumnElements)
 {
     EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse());
@@ -108,6 +110,51 @@ TYPED_TEST(Matrix2DInverse, StaticWrapper_ExchangesRowsAndColumnElements)
 TYPED_TEST(Matrix2DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
 {
     const auto invMatrix = fgm::Matrix2D<TypeParam>::inverse(this->_matrix);
+    EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
+}
+
+
+/**************************************
+ *                                    *
+ *          SAFE INVERSE TESTS        *
+ *                                    *
+ **************************************/
+
+/**
+ * @brief Verify that inverting a matrix using @ref fgm::Matrix2D::safeInverse exchanges row and
+ *        column elements and returns a new matrix.
+ */
+TYPED_TEST(Matrix2DInverse, SafeInverse_ExchangesRowsAndColumnElements)
+{
+    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
+}
+
+
+/** @brief Verify that inverse of matrix (using @ref fgm::Matrix2D::safeInverse) times itself is an identity matrix. */
+TYPED_TEST(Matrix2DInverse, SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
+{
+    const auto invMatrix = this->_matrix.safeInverse();
+    EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
+}
+
+
+/**
+ * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix2D::safeInverse exchanges row and
+ *        column elements and returns a new matrix.
+ */
+TYPED_TEST(Matrix2DInverse, StaticWrapper_SafeInverse_ExchangesRowsAndColumnElements)
+{
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2D<TypeParam>::safeInverseOf(this->_matrix));
+}
+
+
+/**
+ * @brief Verify that inverse of matrix (using static variant of @ref fgm::Matrix2D::safeInverse) times itself is an
+ *        identity matrix.
+ */
+TYPED_TEST(Matrix2DInverse, StaticWrapper_SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
+{
+    const auto invMatrix = fgm::Matrix2D<TypeParam>::safeInverseOf(this->_matrix);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
