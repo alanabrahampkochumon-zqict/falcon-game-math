@@ -355,7 +355,7 @@ namespace fgm
     {
         using R = Magnitude<std::common_type_t<T, S>>;
 
-        assert(std::abs(R(scalar)) > fgm::Config::EPSILON<R> &&
+        assert(std::abs(R(scalar)) > Config::EPSILON<R> &&
                "Matrix division by zero"); // TODO: Change to custom assert and add custom abs
 
         R factor = R(1) / static_cast<R>(scalar);
@@ -432,7 +432,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const Matrix2D& mat, const S scalar, OperationStatus& status,
-        const fgm::Matrix2D<T>& fallback) noexcept requires StrictArithmetic<T>
+        const Matrix2D<T>& fallback) noexcept requires StrictArithmetic<T>
     {
         return mat.tryDiv(scalar, status, fallback);
     }
@@ -485,7 +485,7 @@ namespace fgm
         using R = Magnitude<T>;
 
         R det = determinant();
-        assert(determinant() > fgm::Config::EPSILON<R> &&
+        assert(determinant() > Config::EPSILON<R> &&
                "[Matrix2D Determinant]: Division by zero."); // TODO: Update to custom assert
 
         R factor = R(1) / det;
