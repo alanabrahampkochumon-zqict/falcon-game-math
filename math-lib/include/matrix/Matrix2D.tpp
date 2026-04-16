@@ -504,7 +504,16 @@ namespace fgm
     constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverse(const Matrix2D& fallback) const noexcept requires
         SignedStrictArithmetic<T>
     {
-        return *this;
+        T det = determinant();
+
+        if constexpr (std::is_floating_point_v<T>)
+            if (hasNaN() | (std::abs(det) <= std::numeric_limits<T>::epsilon()))
+                return fallback;
+        if constexpr (std::is_integral_v<T>)
+            if (det == 0)
+                return fallback;
+
+        return inverse();
     }
 
 
