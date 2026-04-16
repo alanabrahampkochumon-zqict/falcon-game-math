@@ -38,6 +38,18 @@ protected:
 TYPED_TEST_SUITE(Matrix2DInverse, SupportedSignedArithmeticTypes);
 
 
+/** @brief Test fixture for calculating @ref fgm::Matrix2D inverse with singular matrices */
+class SingularMatrix2DInverse: public ::testing::TestWithParam<fgm::Matrix2D<float>>
+{};
+INSTANTIATE_TEST_SUITE_P(Matrix2DInverseTestSuite, SingularMatrix2DInverse,
+                         ::testing::Values(fgm::Matrix2D{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ 1.0f, 2.0f } },
+                                           fgm::Matrix2D{ fgm::Vector2D{ 2.0f, 2.0f }, fgm::Vector2D{ 2.0f, 2.0f } },
+                                           fgm::Matrix2D{ fgm::Vector2D{ 3.0f, 2.0f }, fgm::Vector2D{ 6.0f, 4.0f } },
+                                           fgm::Matrix2D{ fgm::Vector2D{ 0.0f, 0.0f }, fgm::Vector2D{ 4.0f, 5.0f } },
+                                           fgm::Matrix2D{ fgm::Vector2D{ 0.0f, 3.0f }, fgm::Vector2D{ 0.0f, 5.0f } }));
+
+
+
 
 /**
  * @addtogroup T_FGM_Mat2x2_Inverse
@@ -138,6 +150,28 @@ TYPED_TEST(Matrix2DInverse, SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
 }
 
 
+/** 
+ * @brief Verify that inverting a singular matrix using @ref fgm::Matrix2D::safeInverse
+ *         returns identity matrix by default.
+ */
+TEST_P(SingularMatrix2DInverse, SingularMatrixReturnsIdentityMatrixByDefault)
+{
+    const auto& matrix = GetParam();
+    EXPECT_MAT_IDENTITY(matrix.safeInverse());
+}
+
+
+/**
+ * @brief Verify that inverting a singular matrix using @ref fgm::Matrix2D::safeInverse
+ *         returns passed-in fallback.
+ */
+TEST_P(SingularMatrix2DInverse, SingularMatrixReturnsPassedInFallback)
+{
+    const auto& inverseMatrix = GetParam().safeInverse(fgm::mat2d::zero<ParamType::value_type>);
+    EXPECT_MAT_ZERO(inverseMatrix);
+}
+
+
 /**
  * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix2D::safeInverse exchanges row and
  *        column elements and returns a new matrix.
@@ -156,6 +190,27 @@ TYPED_TEST(Matrix2DInverse, StaticWrapper_SafeInverse_InverseTimesMatrixReturnsI
 {
     const auto invMatrix = fgm::Matrix2D<TypeParam>::safeInverseOf(this->_matrix);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
+}
+
+/**
+ * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix2D::safeInverseOf
+ *         returns identity matrix by default.
+ */
+TEST_P(SingularMatrix2DInverse, StaticWrapper_SingularMatrixReturnsIdentityMatrixByDefault)
+{
+    const auto& matrix = GetParam();
+    EXPECT_MAT_IDENTITY(ParamType::safeInverseOf(matrix));
+}
+
+
+/**
+ * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix2D::safeInverseOf
+ *         returns passed-in fallback.
+ */
+TEST_P(SingularMatrix2DInverse, StaticWrapper_SingularMatrixReturnsPassedInFallback)
+{
+    const auto& matrix = GetParam();
+    EXPECT_MAT_ZERO(ParamType::safeInverseOf(matrix, fgm::mat2d::zero<ParamType::value_type>));
 }
 
 /** @} */

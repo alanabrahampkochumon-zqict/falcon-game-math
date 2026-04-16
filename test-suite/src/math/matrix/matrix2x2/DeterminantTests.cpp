@@ -36,10 +36,10 @@ protected:
 /** @brief Test fixture for @ref fgm::Matrix2D determinant, parameterized by @ref SupportedSignedArithmeticTypes. */
 TYPED_TEST_SUITE(Matrix2DDeterminant, SupportedSignedArithmeticTypes);
 
-
-class SingularMatrix2D: public ::testing::TestWithParam<fgm::Matrix2D<float>>
+/** @brief Test fixture for calculating @ref fgm::Matrix2D determinant with singular matrices */
+class SingularMatrix2DDeterminant: public ::testing::TestWithParam<fgm::Matrix2D<float>>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix2DDeterminantTestSuite, SingularMatrix2D,
+INSTANTIATE_TEST_SUITE_P(Matrix2DDeterminantTestSuite, SingularMatrix2DDeterminant,
                          ::testing::Values(fgm::Matrix2D{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ 1.0f, 2.0f } },
                                            fgm::Matrix2D{ fgm::Vector2D{ 2.0f, 2.0f }, fgm::Vector2D{ 2.0f, 2.0f } },
                                            fgm::Matrix2D{ fgm::Vector2D{ 3.0f, 2.0f }, fgm::Vector2D{ 6.0f, 4.0f } },
@@ -88,7 +88,7 @@ TYPED_TEST(Matrix2DDeterminant, ReturnsNonZeroScalar)
 
 
 /** @brief Verify that computing the determinant of a singular matrix returns zero. */
-TEST_P(SingularMatrix2D, SingularMatrixReturnsZero)
+TEST_P(SingularMatrix2DDeterminant, SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();
     EXPECT_MAG_EQ(0.0f, matrix.determinant());
@@ -109,7 +109,7 @@ TYPED_TEST(Matrix2DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
  * @brief Verify that computing the determinant of a singular matrix using static variant of
  *        @ref fgm::Matrix2D::determinant returns zero.
  */
-TEST_P(SingularMatrix2D, StaticWrapper_SingularMatrixReturnsZero)
+TEST_P(SingularMatrix2DDeterminant, StaticWrapper_SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();
     EXPECT_MAG_EQ(0.0f, fgm::Matrix2D<float>::determinant(matrix));
