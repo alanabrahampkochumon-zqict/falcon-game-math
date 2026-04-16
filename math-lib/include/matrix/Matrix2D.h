@@ -715,6 +715,7 @@ namespace fgm
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+         *
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
          * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
@@ -744,6 +745,51 @@ namespace fgm
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
         static constexpr Matrix2D<Magnitude<T>> safeInverseOf(
             const Matrix2D& matrix, const Matrix2D& fallback = Matrix2D::eye()) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute the inverse of this matrix and set @p status to the matrix inversion result.
+         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
+         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+         * 
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+         *
+         * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        constexpr Matrix2D<Magnitude<T>> tryInverse(OperationStatus& status,
+                                                    const Matrix2D& fallback = Matrix2D::eye()) const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute the inverse of a matrix and set @p status to the matrix inversion result.
+         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
+         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+         *
+         * @param[in] matrix   The matrix to invert.
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+         *
+         * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        static constexpr Matrix2D<Magnitude<T>> tryInverseOf(const Matrix2D& matrix, OperationStatus& status,
+                                                              const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
         /** @} */
