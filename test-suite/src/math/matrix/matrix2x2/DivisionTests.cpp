@@ -43,9 +43,9 @@ TYPED_TEST_SUITE(Matrix2DDivision, SupportedArithmeticTypes);
 
 
 /** @brief Test fixture for @ref fgm::Matrix2D division with NaN vectors. */
-class Matrix2DDivisionNaNTests: public ::testing::TestWithParam<fgm::Matrix2D<float>>
+class NaNMatrix2DDivision: public ::testing::TestWithParam<fgm::Matrix2D<float>>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, Matrix2DDivisionNaNTests,
+INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, NaNMatrix2DDivision,
                          ::testing::Values(fgm::Matrix2D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
                                            fgm::Matrix2D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
                                            fgm::Matrix2D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
@@ -55,7 +55,6 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, Matrix2DDivisionNaNTests,
 
 
 
-// TODO: Add safeDiv and tryDiv NaN tests
 /**
  * @addtogroup T_FGM_Mat2x2_Division
  * @{
@@ -191,7 +190,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
  * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix2D::safeDiv
  *        returns identity matrix by default.
  */
-TEST_P(Matrix2DDivisionNaNTests, SafeDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix2DDivision, SafeDivide_ReturnsIdentityMatrixByDefault)
 {
     const fgm::Matrix2D inverseScaledMat = GetParam().safeDiv(2.5);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
@@ -202,7 +201,7 @@ TEST_P(Matrix2DDivisionNaNTests, SafeDivide_ReturnsIdentityMatrixByDefault)
  * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix2D::safeDiv
  *        returns passed-in fallback.
  */
-TEST_P(Matrix2DDivisionNaNTests, SafeDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix2DDivision, SafeDivide_ReturnsPassedInFallback)
 {
     const fgm::Matrix2D inverseScaledMat = GetParam().safeDiv(2.5, fgm::mat2d::zero<ParamType::value_type>);
     EXPECT_MAT_ZERO(inverseScaledMat);
@@ -260,7 +259,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsPasse
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix2D::safeDiv
  *        returns identity matrix by default.
  */
-TEST_P(Matrix2DDivisionNaNTests, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix2DDivision, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefault)
 {
     using T = ParamType::value_type;
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::safeDiv(GetParam(), 2.5);
@@ -272,7 +271,7 @@ TEST_P(Matrix2DDivisionNaNTests, SafeDivide_StaticWrapper_ReturnsIdentityMatrixB
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix2D::safeDiv
  *        returns passed-in fallback.
  */
-TEST_P(Matrix2DDivisionNaNTests, SafeDivide_StaticWrapper_ReturnsPassedInFallback)
+TEST_P(NaNMatrix2DDivision, SafeDivide_StaticWrapper_ReturnsPassedInFallback)
 {
     using T = ParamType::value_type;
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::safeDiv(GetParam(), 2.5, fgm::mat2d::zero<T>);
@@ -345,7 +344,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndS
  * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix2D::tryDiv returns identity matrix
  *        by default and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(Matrix2DDivisionNaNTests, TryDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix2DDivision, TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix2D inverseScaledMat = GetParam().tryDiv(2.5, flag);
@@ -358,7 +357,7 @@ TEST_P(Matrix2DDivisionNaNTests, TryDivide_ReturnsIdentityMatrixByDefault)
  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(Matrix2DDivisionNaNTests, TryDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix2DDivision, TryDivide_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix2D inverseScaledMat = GetParam().tryDiv(2.5, flag, fgm::mat2d::zero<ParamType::value_type>);
@@ -427,7 +426,7 @@ TYPED_TEST(Matrix2DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsPassed
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix2D::tryDiv
  *        returns identity matrix by default and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(Matrix2DDivisionNaNTests, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     using T = ParamType::value_type;
@@ -442,7 +441,7 @@ TEST_P(Matrix2DDivisionNaNTests, StaticWrapper_TryDivide_ReturnsIdentityMatrixBy
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix2D::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(Matrix2DDivisionNaNTests, StaticWrapper_TryDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     using T = ParamType::value_type;

@@ -50,6 +50,18 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DInverseTestSuite, SingularMatrix2DInverse,
 
 
 
+/** @brief Test fixture for @ref fgm::Matrix2D inverse with NaN vectors. */
+class NaNMatrix2DInverse: public ::testing::TestWithParam<fgm::Matrix2D<float>>
+{};
+INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, NaNMatrix2DInverse,
+                         ::testing::Values(fgm::Matrix2D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
+                                           fgm::Matrix2D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
+                                           fgm::Matrix2D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
+                                           fgm::Matrix2D<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
+                                           fgm::Matrix2D<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
+
+
 
 /**
  * @addtogroup T_FGM_Mat2x2_Inverse
@@ -152,9 +164,9 @@ TYPED_TEST(Matrix2DInverse, SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
 
 /** 
  * @brief Verify that inverting a singular matrix using @ref fgm::Matrix2D::safeInverse
- *         returns identity matrix by default.
+ *        returns identity matrix by default.
  */
-TEST_P(SingularMatrix2DInverse, SingularMatrixReturnsIdentityMatrixByDefault)
+TEST_P(SingularMatrix2DInverse, ReturnsIdentityMatrixByDefault)
 {
     const auto& matrix = GetParam();
     EXPECT_MAT_IDENTITY(matrix.safeInverse());
@@ -163,9 +175,31 @@ TEST_P(SingularMatrix2DInverse, SingularMatrixReturnsIdentityMatrixByDefault)
 
 /**
  * @brief Verify that inverting a singular matrix using @ref fgm::Matrix2D::safeInverse
- *         returns passed-in fallback.
+ *        returns passed-in fallback.
  */
-TEST_P(SingularMatrix2DInverse, SingularMatrixReturnsPassedInFallback)
+TEST_P(SingularMatrix2DInverse, ReturnsPassedInFallback)
+{
+    const auto& inverseMatrix = GetParam().safeInverse(fgm::mat2d::zero<ParamType::value_type>);
+    EXPECT_MAT_ZERO(inverseMatrix);
+}
+
+
+/**
+ * @brief Verify that inverting a NaN matrix using @ref fgm::Matrix2D::safeInverse
+ *        returns identity matrix by default.
+ */
+TEST_P(NaNMatrix2DInverse, ReturnsIdentityMatrixByDefault)
+{
+    const auto& matrix = GetParam();
+    EXPECT_MAT_IDENTITY(matrix.safeInverse());
+}
+
+
+/**
+ * @brief Verify that inverting a NaN matrix using @ref fgm::Matrix2D::safeInverse
+ *        returns passed-in fallback.
+ */
+TEST_P(NaNMatrix2DInverse, ReturnsPassedInFallback)
 {
     const auto& inverseMatrix = GetParam().safeInverse(fgm::mat2d::zero<ParamType::value_type>);
     EXPECT_MAT_ZERO(inverseMatrix);
@@ -192,11 +226,12 @@ TYPED_TEST(Matrix2DInverse, StaticWrapper_SafeInverse_InverseTimesMatrixReturnsI
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
+
 /**
  * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix2D::safeInverseOf
  *         returns identity matrix by default.
  */
-TEST_P(SingularMatrix2DInverse, StaticWrapper_SingularMatrixReturnsIdentityMatrixByDefault)
+TEST_P(SingularMatrix2DInverse, StaticWrapper_ReturnsIdentityMatrixByDefault)
 {
     const auto& matrix = GetParam();
     EXPECT_MAT_IDENTITY(ParamType::safeInverseOf(matrix));
@@ -207,10 +242,32 @@ TEST_P(SingularMatrix2DInverse, StaticWrapper_SingularMatrixReturnsIdentityMatri
  * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix2D::safeInverseOf
  *         returns passed-in fallback.
  */
-TEST_P(SingularMatrix2DInverse, StaticWrapper_SingularMatrixReturnsPassedInFallback)
+TEST_P(SingularMatrix2DInverse, StaticWrapper_ReturnsPassedInFallback)
 {
     const auto& matrix = GetParam();
     EXPECT_MAT_ZERO(ParamType::safeInverseOf(matrix, fgm::mat2d::zero<ParamType::value_type>));
+}
+
+
+/**
+ * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Matrix2D::safeInverse
+ *        returns identity matrix by default.
+ */
+TEST_P(NaNMatrix2DInverse, StaticWrapper_ReturnsIdentityMatrixByDefault)
+{
+    const auto& matrix = GetParam();
+    EXPECT_MAT_IDENTITY(ParamType::safeInverseOf(matrix));
+}
+
+
+/**
+ * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Matrix2D::safeInverse
+ *        returns passed-in fallback.
+ */
+TEST_P(NaNMatrix2DInverse, StaticWrapper_ReturnsPassedInFallback)
+{
+    const auto& inverseMatrix = ParamType::safeInverseOf(GetParam(),fgm::mat2d::zero<ParamType::value_type>);
+    EXPECT_MAT_ZERO(inverseMatrix);
 }
 
 /** @} */

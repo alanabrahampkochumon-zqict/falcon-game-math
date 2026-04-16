@@ -47,6 +47,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DDeterminantTestSuite, SingularMatrix2DDetermina
                                            fgm::Matrix2D{ fgm::Vector2D{ 0.0f, 3.0f }, fgm::Vector2D{ 0.0f, 5.0f } }));
 
 
+
 /**
  * @addtogroup T_FGM_Mat2x2_Det
  * @{
