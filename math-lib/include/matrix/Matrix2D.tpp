@@ -375,7 +375,7 @@ namespace fgm
         using R = std::common_type_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
-            if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+            if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<R>::epsilon()))
                 return fallback;
         if constexpr (std::is_integral_v<R>)
             if (scalar == 0)
@@ -408,7 +408,7 @@ namespace fgm
                 status = OperationStatus::NANOPERAND;
                 return fallback;
             }
-            if (std::abs(scalar) <= std::numeric_limits<S>::epsilon())
+            if (std::abs(scalar) <= std::numeric_limits<R>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return fallback;
@@ -519,7 +519,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverseOf(const Matrix2D& matrix,
-        const Matrix2D<T>& fallback) noexcept requires SignedStrictArithmetic<T>
+        const Matrix2D& fallback) noexcept requires SignedStrictArithmetic<T>
     {
         return matrix.safeInverse(fallback);
     }
