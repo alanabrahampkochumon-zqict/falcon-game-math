@@ -11,9 +11,6 @@
  */
 
 
-#include "Vector4D.h"
-#include "Vector4D.h"
-
 #include <cassert>
 #include <cmath>
 #include <type_traits>
