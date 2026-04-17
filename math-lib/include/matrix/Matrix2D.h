@@ -12,10 +12,13 @@
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
  * @note Matrices utilize a strict column-major internal memory layout. To align with standard mathematical notations,
  *       scalar constructors accept elements in row-major reading order. Vector-based constructors and array-style
- * access (operator[]) operate directly on columns.
+ *       access (operator[]) operate directly on columns.
+ * @note FGM uses **Right-Handed** coordinate system by default. To use **Left-Handed** coordinate system define
+ *       `FGM_LEFT_HANDED` preprocessor macro.
  *
  * @par Configuration
- * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
+ *      Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
+ *      Define `FGM_LEFT_HANDED` to configure library to use left-handed coordinated system.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -811,6 +814,15 @@ namespace fgm
          */
         [[nodiscard]] static constexpr T trace(const Matrix2D& mat) noexcept
             requires StrictArithmetic<T>;
+
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Mat2x2_Transforms
+         * @{
+         */
 
         /** @} */
 

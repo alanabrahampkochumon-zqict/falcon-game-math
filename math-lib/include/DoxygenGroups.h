@@ -120,6 +120,7 @@
              *   @defgroup FGM_Mat2x2_Log String Representation
              *   @defgroup FGM_Mat2x2_Const Matrix Constants
              *   @defgroup FGM_Mat2x2_Utils Matrix Utilities
+             *   @defgroup FGM_Mat2x2_Transformation Matrix Transformation Factories
              * @}
              */
         
