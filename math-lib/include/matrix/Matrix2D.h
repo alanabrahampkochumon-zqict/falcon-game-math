@@ -585,8 +585,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix2D<T, S> tryDiv(
-            S scalar, OperationStatus& status,
-            const Matrix2D<T>& fallback = Matrix2D<T>::eye()) const noexcept
+            S scalar, OperationStatus& status, const Matrix2D<T>& fallback = Matrix2D<T>::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -725,8 +724,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
-        constexpr Matrix2D<Magnitude<T>> safeInverse(
-            const Matrix2D& fallback = Matrix2D::eye()) const noexcept
+        constexpr Matrix2D<Magnitude<T>> safeInverse(const Matrix2D& fallback = Matrix2D::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -746,8 +744,8 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
-        static constexpr Matrix2D<Magnitude<T>> safeInverseOf(
-            const Matrix2D& matrix, const Matrix2D& fallback = Matrix2D::eye()) noexcept
+        static constexpr Matrix2D<Magnitude<T>> safeInverseOf(const Matrix2D& matrix,
+                                                              const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -759,7 +757,7 @@ namespace fgm
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
-         * 
+         *
          * @param[out] status  The status flag to store the status of the current operation result.
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
@@ -792,7 +790,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
         static constexpr Matrix2D<Magnitude<T>> tryInverseOf(const Matrix2D& matrix, OperationStatus& status,
-                                                              const Matrix2D& fallback = Matrix2D::eye()) noexcept
+                                                             const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -914,6 +912,38 @@ namespace fgm
 
             return os;
         }
+
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Mat2x2_Transforms
+         * @{
+         */
+
+        /**
+         * @brief Construct a 2D rotation matrix for a given angle.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):** \f$ \begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) &
+         *                                            \cos(\theta) \end{bmatrix} \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):** \f$ \begin{bmatrix} \cos(\theta) & \sin(\theta)
+         *                                                   \\ -\sin(\theta) & \cos(\theta) \end{bmatrix} \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle The rotation angle in radians.
+         *
+         * @return A new @ref Matrix2D representing the linear rotation.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Matrix2D makeRotation(U angle) noexcept
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
 

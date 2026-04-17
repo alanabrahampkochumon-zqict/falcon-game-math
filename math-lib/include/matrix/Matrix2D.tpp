@@ -2,6 +2,7 @@
 
 
 #include "Matrix2D.h"
+#include "Matrix2D.h"
 
 #include <cassert>
 #include <cmath>
@@ -631,6 +632,14 @@ namespace fgm
     constexpr bool Matrix2D<T>::hasNaN(const Matrix2D& mat) noexcept
     {
         return mat.hasNaN();
+    }
+
+
+    template <Arithmetic T>
+    template <std::floating_point U>
+    constexpr Matrix2D<T> Matrix2D<T>::makeRotation(U angle) noexcept requires SignedStrictArithmetic<T>
+    {
+        return Matrix2D(1, 1);
     }
 
 } // namespace fgm
