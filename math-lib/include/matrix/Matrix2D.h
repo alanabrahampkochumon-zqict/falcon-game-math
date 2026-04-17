@@ -792,6 +792,26 @@ namespace fgm
                                                               const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
+
+        /**
+         * @brief Compute the sum of diagonal entries of this matrix.
+         *
+         * @return The sum of entries along the main diagonal of this matrix.
+         */
+        [[nodiscard]] constexpr T trace() noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the sum of diagonal entries of a matrix.
+         *
+         * @param mat The matrix whose trace is to be computed.
+         *
+         * @return The sum of entries along the main diagonal of the given matrix.
+         */
+        [[nodiscard]] static constexpr T trace(const Matrix2D& mat) noexcept
+            requires StrictArithmetic<T>;
+
         /** @} */
 
 

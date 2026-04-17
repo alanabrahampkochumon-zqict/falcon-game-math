@@ -161,18 +161,15 @@
              *   @defgroup T_FGM_Mat2x2_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x2_Inverse Matrix Inverse
              *   @defgroup T_FGM_Mat2x2_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat2x2_Bool_Bit Boolean Bitwise Operation
-             *   @defgroup T_FGM_Mat2x2_GT_Comp Greater Than Comparison
-             *   @defgroup T_FGM_Mat2x2_GTE_Comp Greater Than or Equal Comparison
-             *   @defgroup T_FGM_Mat2x2_LT_Comp Less Than Comparison
-             *   @defgroup T_FGM_Mat2x2_LTE_Comp Less Than or Equal Comparison
-             *   @defgroup T_FGM_Mat2x2_Equality Component-wise and Masked Equality
-             *   @defgroup T_FGM_Mat2x2_Inequality Component-wise and Masked Inequality
+             *   @defgroup T_FGM_Mat2x2_Equality Equality
+             *   @defgroup T_FGM_Mat2x2_Inequality  Inequality
              *   @defgroup T_FGM_Mat2x2_Init Initialization
              *   @defgroup T_FGM_Mat2x2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x2_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Mat2x2_Inversion Unary Inversion(-)
              *   @defgroup T_FGM_Mat2x2_Det Determinants
+             *   @defgroup T_FGM_Mat2x2_Trace Trace
+             *   @defgroup T_FGM_Mat2x2_Transforms Transformation Factories
              *   @defgroup T_FGM_Mat2x2_Utils Matrix Utilities
              * @}
              */

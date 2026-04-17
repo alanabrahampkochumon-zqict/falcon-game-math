@@ -23,7 +23,7 @@ list(TRANSFORM Vector2DTestFiles PREPEND ${Vector2DTestDir})
 
 # Matrix Test Sources
 set(Matrix2x2TestDir "src/math/matrix/matrix2x2/")
-set(Matrix2x2TestFiles "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DeterminantTests.cpp;DivisionTests.cpp;TransposeTests.cpp;InverseTests.cpp;ConstantTests.cpp;UtilityTests.cpp;AliasTests.cpp;StringRepresentationTests.cpp;")
+set(Matrix2x2TestFiles "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DeterminantTests.cpp;DivisionTests.cpp;TransposeTests.cpp;InverseTests.cpp;ConstantTests.cpp;UtilityTests.cpp;AliasTests.cpp;StringRepresentationTests.cpp;TraceTests.cpp;TransformationFactoryTests.cpp;")
 list(TRANSFORM Matrix2x2TestFiles PREPEND ${Matrix2x2TestDir})
 
 set(MatrixTestDirectory "src/math/matrix/")
