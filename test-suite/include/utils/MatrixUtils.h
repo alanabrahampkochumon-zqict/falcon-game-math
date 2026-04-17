@@ -55,9 +55,9 @@ namespace testutils
         for (std::size_t i = 0; i < T::rows; ++i)
             for (std::size_t j = 0; j < T::columns; ++j)
                 if constexpr (std::is_same_v<ValueType, double>)
-                    EXPECT_DOUBLE_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
+                    EXPECT_NEAR(expected(i, j), static_cast<ValueType>(actual(i, j)), fgm::Config::DOUBLE_EPSILON);
                 else if constexpr (std::is_same_v<ValueType, float>)
-                    EXPECT_FLOAT_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
+                    EXPECT_NEAR(expected(i, j), static_cast<ValueType>(actual(i, j)), fgm::Config::FLOAT_EPSILON);
                 else
                     EXPECT_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
     }

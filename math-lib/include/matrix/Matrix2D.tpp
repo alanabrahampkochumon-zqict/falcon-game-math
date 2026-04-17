@@ -2,12 +2,12 @@
 
 
 #include "Matrix2D.h"
-#include "Matrix2D.h"
 
 #include <cassert>
 #include <cmath>
 #include <type_traits>
 #include <valarray>
+#include <cmath>
 
 namespace fgm
 {
@@ -637,9 +637,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr Matrix2D<T> Matrix2D<T>::makeRotation(U angle) noexcept requires SignedStrictArithmetic<T>
+    constexpr Matrix2D<T> Matrix2D<T>::makeRotation(U angle) noexcept
+        requires SignedStrictArithmetic<T>
     {
-        return Matrix2D(1, 1);
+        using R = std::common_type_t<T, U>;
+        R cos = std::cos(angle);
+        R sine = std::sin(angle);
+#ifdef FGM_LEFT_HANDED
+        return Matrix2D(cos, sine, -sine, cos);
+#else
+        return Matrix2D(cos, -sine, sine, cos);
+#endif
     }
 
 } // namespace fgm

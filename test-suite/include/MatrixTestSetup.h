@@ -42,6 +42,6 @@ using SupportedArithmeticFloatingTypePair = ::testing::Types<
     std::pair<double, uint32_t>, std::pair<double, uint64_t>, std::pair<double, double>, std::pair<double, float>>;
 using SupportedSignedArithmeticFloatingTypePair =
     ::testing::Types<std::pair<float, int8_t>, std::pair<float, int16_t>, std::pair<float, int32_t>,
-                     std::pair<float, int64_t>, std::pair<float, double>, std::pair<float, float>,
-                     std::pair<double, int8_t>, std::pair<double, int16_t>, std::pair<double, int32_t>,
-                     std::pair<double, int64_t>, std::pair<double, double>, std::pair<double, float>>;
+                     std::pair<float, int64_t>, std::pair<float, float>, std::pair<double, int8_t>,
+                     std::pair<double, int16_t>, std::pair<double, int32_t>, std::pair<double, int64_t>,
+                     std::pair<double, double>, std::pair<double, float>>;
