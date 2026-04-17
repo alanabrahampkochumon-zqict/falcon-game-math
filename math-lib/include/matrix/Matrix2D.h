@@ -798,7 +798,7 @@ namespace fgm
          *
          * @return The sum of entries along the main diagonal of this matrix.
          */
-        [[nodiscard]] constexpr T trace() noexcept
+        [[nodiscard]] constexpr T trace() const noexcept
             requires StrictArithmetic<T>;
 
 

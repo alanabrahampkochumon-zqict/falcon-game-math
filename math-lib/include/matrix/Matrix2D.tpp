@@ -391,7 +391,8 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const Matrix2D& mat, const S scalar,
-        const Matrix2D<T>& fallback) noexcept requires StrictArithmetic<T>
+                                                               const Matrix2D<T>& fallback) noexcept
+        requires StrictArithmetic<T>
     {
         return mat.safeDiv(scalar, fallback);
     }
@@ -400,7 +401,8 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const S scalar, OperationStatus& status,
-        const Matrix2D<T>& fallback) const noexcept requires StrictArithmetic<T>
+                                                              const Matrix2D<T>& fallback) const noexcept
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
 
@@ -433,8 +435,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const Matrix2D& mat, const S scalar, OperationStatus& status,
-        const Matrix2D& fallback) noexcept requires StrictArithmetic<T>
+    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const Matrix2D& mat, const S scalar,
+                                                              OperationStatus& status,
+                                                              const Matrix2D& fallback) noexcept
+        requires StrictArithmetic<T>
     {
         return mat.tryDiv(scalar, status, fallback);
     }
@@ -506,8 +510,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverse(const Matrix2D& fallback) const noexcept requires
-        SignedStrictArithmetic<T>
+    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverse(const Matrix2D& fallback) const noexcept
+        requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
 
@@ -526,7 +530,8 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverseOf(const Matrix2D& matrix,
-        const Matrix2D& fallback) noexcept requires SignedStrictArithmetic<T>
+                                                                const Matrix2D& fallback) noexcept
+        requires SignedStrictArithmetic<T>
     {
         return matrix.safeInverse(fallback);
     }
@@ -534,7 +539,8 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::tryInverse(OperationStatus& status,
-        const Matrix2D& fallback) const noexcept requires SignedStrictArithmetic<T>
+                                                             const Matrix2D& fallback) const noexcept
+        requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
 
@@ -569,21 +575,29 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::tryInverseOf(const Matrix2D& matrix, OperationStatus& status,
-        const Matrix2D& fallback) noexcept requires SignedStrictArithmetic<T>
+                                                               const Matrix2D& fallback) noexcept
+        requires SignedStrictArithmetic<T>
     {
         return matrix.tryInverse(status, fallback);
     }
 
 
     template <Arithmetic T>
-    constexpr T Matrix2D<T>::trace() noexcept requires StrictArithmetic<T> {
-    return 0;}
+    constexpr T Matrix2D<T>::trace() const noexcept
+        requires StrictArithmetic<T>
+    {
+        return _data[0][0] + _data[1][1];
+    }
 
 
     template <Arithmetic T>
-    constexpr T Matrix2D<T>::trace(const Matrix2D& mat) noexcept requires StrictArithmetic<T> {
-        return 0;
+    constexpr T Matrix2D<T>::trace(const Matrix2D& mat) noexcept
+        requires StrictArithmetic<T>
+    {
+        return mat.trace();
     }
+
+
 
 
     /**************************************
@@ -600,7 +614,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr bool Matrix2D<T>::hasInf(const Matrix2D& mat) noexcept {return mat.hasInf();}
+    constexpr bool Matrix2D<T>::hasInf(const Matrix2D& mat) noexcept
+    {
+        return mat.hasInf();
+    }
 
 
     template <Arithmetic T>
