@@ -13,7 +13,6 @@
 
 
 
-// TODO: ADD STATUS FLAG PRECEDENCE TESTS FOR TRYDIVIDE
 /**************************************
  *                                    *
  *              SETUP                 *

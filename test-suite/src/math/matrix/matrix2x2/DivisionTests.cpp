@@ -354,7 +354,7 @@ TEST_P(NaNMatrix2DDivision, TryDivide_ReturnsIdentityMatrixByDefault)
 
 
 /**
- * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::tryDiv
+ * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix2D::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::NANOPERAND.
  */
 TEST_P(NaNMatrix2DDivision, TryDivide_ReturnsPassedInFallback)
@@ -362,6 +362,19 @@ TEST_P(NaNMatrix2DDivision, TryDivide_ReturnsPassedInFallback)
     fgm::OperationStatus flag;
     const fgm::Matrix2D inverseScaledMat = GetParam().tryDiv(2.5, flag, fgm::mat2d::zero<ParamType::value_type>);
     EXPECT_MAT_ZERO(inverseScaledMat);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @brief Verify that dividing a NaN matrix by zero using @ref fgm::Matrix2D::tryDiv
+ *        returns set flag to @ref OperationStatus::NANOPERAND.
+ */
+TEST_P(NaNMatrix2DDivision, TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
+{
+    fgm::OperationStatus flag;
+    [[maybe_unused]] const fgm::Matrix2D inverseScaledMat =
+        GetParam().tryDiv(0, flag, fgm::mat2d::zero<ParamType::value_type>);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -433,6 +446,19 @@ TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefau
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::tryDiv(GetParam(), 2.5, flag);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @brief Verify that dividing a NaN matrix by zero using the static variant of @ref fgm::Matrix2D::tryDiv
+ *        set flag to @ref OperationStatus::NANOPERAND.
+ */
+TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
+{
+    fgm::OperationStatus flag;
+    using T = ParamType::value_type;
+    [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::tryDiv(GetParam(), T(0), flag);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
