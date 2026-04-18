@@ -7,7 +7,6 @@
 #include <cmath>
 #include <type_traits>
 #include <valarray>
-#include <cmath>
 
 namespace fgm
 {
@@ -645,7 +644,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr Matrix2D<T> Matrix2D<T>::makeRotation(U angle) noexcept
+    constexpr Matrix2D<T> Matrix2D<T>::makeRotation(const U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -660,16 +659,26 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::makeScale(T scale) noexcept requires StrictArithmetic<T>
+    constexpr Matrix2D<T> Matrix2D<T>::makeScale(const T scale) noexcept
+        requires StrictArithmetic<T>
     {
         return Matrix2D(scale, T(0), T(0), scale);
     }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::makeScale(T scaleX, T scaleY) noexcept requires StrictArithmetic<T>
+    constexpr Matrix2D<T> Matrix2D<T>::makeScale(const T scaleX, const T scaleY) noexcept
+        requires StrictArithmetic<T>
     {
         return Matrix2D(scaleX, T(0), T(0), scaleY);
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix2D<T> Matrix2D<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
+        requires StrictArithmetic<T>
+    {
+        return Matrix2D();
     }
 
 } // namespace fgm

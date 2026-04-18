@@ -967,6 +967,20 @@ namespace fgm
         [[nodiscard]] static constexpr Matrix2D makeScale(T scaleX, T scaleY) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Construct a reflection 2D matrix for reflection along coordinate axis(X, Y, and Origin<0, 0>).
+         * 
+         * @note To construction a reflection matrix around origin, set all axis reflection to true.
+         *
+         * @param[in] reflectX A flag to whether reflect in the x-direction.
+         * @param[in] reflectY A flag to whether reflect in the y-direction.
+         *
+         * @return A new @ref Matrix2D representing the axis-aligned reflection.
+         */
+        [[nodiscard]] static constexpr Matrix2D makeReflection(bool reflectX, bool reflectY) noexcept
+            requires StrictArithmetic<T>;
+
         /** @} */
 
 
