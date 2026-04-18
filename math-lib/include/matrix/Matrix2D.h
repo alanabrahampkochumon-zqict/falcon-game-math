@@ -945,6 +945,18 @@ namespace fgm
         [[nodiscard]] static constexpr Matrix2D makeRotation(U angle) noexcept
             requires SignedStrictArithmetic<T>;
 
+        /**
+         * @brief Construct a uniform scale 2D matrix.
+         *
+         * @tparam U Numeric type of the scale factor. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scale The scale factor.
+         *
+         * @return A new @ref Matrix2D representing the uniform scale.
+         */
+        [[nodiscard]] static constexpr Matrix2D makeScale(T scale) noexcept
+            requires StrictArithmetic<T>;
+
         /** @} */
 
 
