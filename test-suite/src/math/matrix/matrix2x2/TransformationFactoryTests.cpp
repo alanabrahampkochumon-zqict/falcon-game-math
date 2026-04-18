@@ -46,23 +46,41 @@ template <typename T>
 class Matrix2DUniformScale: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _mat, _expectedMat;
+    fgm::Matrix2D<T> _expectedMat;
     T _scale;
 
     void SetUp() override
     {
-        _mat = { fgm::Vector2D{ T(4.12349891123), T(5.12343214891234) },
-                 fgm::Vector2D{ T(3.12819385912319), T(5.8238991932838) } };
         _expectedMat = { fgm::Vector2D{ T(5.3821839321), T(0) }, fgm::Vector2D{ T(0), T(5.3821839321) } };
         _scale = T(5.3821839321);
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Matrix2D scale factory, parameterized
- *        @ref SupportedSignedArithmeticFloatingTypePair
+ * @brief Test fixture for @ref fgm::Matrix2D uniform scale factory, parameterized
+ *        @ref SupportedArithmeticTypes
  */
 TYPED_TEST_SUITE(Matrix2DUniformScale, SupportedArithmeticTypes);
 
+
+template <typename T>
+class Matrix2DNonUniformScale: public ::testing::Test
+{
+protected:
+    fgm::Matrix2D<T> _expectedMat;
+    T _scaleX, _scaleY;
+
+    void SetUp() override
+    {
+        _expectedMat = { fgm::Vector2D{ T(5.3821839321), T(0) }, fgm::Vector2D{ T(0), T(8.1234921348) } };
+        _scaleX = T(5.3821839321);
+        _scaleY = T(8.1234921348);
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Matrix2D non-uniform scale factory, parameterized
+ *        @ref SupportedArithmeticTypes
+ */
+TYPED_TEST_SUITE(Matrix2DNonUniformScale, SupportedArithmeticTypes);
 
 
 /**
@@ -94,10 +112,18 @@ TYPED_TEST(Matrix2DRotation, ReturnsExpectedRotationMatrix)
     EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<typename TypeParam::first_type>::makeRotation(this->_angle));
 }
 
+
 /** @brief Verify that uniform scale transformation factory returns a scale matrix. */
-TYPED_TEST(Matrix2DUniformScale, ReturnsExpectedRotationMatrix)
+TYPED_TEST(Matrix2DUniformScale, ReturnsExpectedScaleMatrix)
 {
     EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeScale(this->_scale));
+}
+
+
+/** @brief Verify that non-uniform scale transformation factory returns a non-uniform scale matrix. */
+TYPED_TEST(Matrix2DNonUniformScale, ReturnsExpectedScaleMatrix)
+{
+    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeScale(this->_scaleX, this->_scaleY));
 }
 
 /** @} */

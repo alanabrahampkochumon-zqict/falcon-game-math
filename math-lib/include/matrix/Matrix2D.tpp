@@ -657,4 +657,11 @@ namespace fgm
         return Matrix2D(scale, T(0), T(0), scale);
     }
 
+
+    template <Arithmetic T>
+    constexpr Matrix2D<T> Matrix2D<T>::makeScale(T scaleX, T scaleY) noexcept requires StrictArithmetic<T>
+    {
+        return Matrix2D();
+    }
+
 } // namespace fgm

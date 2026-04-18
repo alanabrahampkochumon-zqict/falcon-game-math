@@ -948,13 +948,23 @@ namespace fgm
         /**
          * @brief Construct a uniform scale 2D matrix.
          *
-         * @tparam U Numeric type of the scale factor. Must satisfy @ref StrictArithmetic.
-         *
          * @param[in] scale The scale factor.
          *
          * @return A new @ref Matrix2D representing the uniform scale.
          */
         [[nodiscard]] static constexpr Matrix2D makeScale(T scale) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a non-uniform scale 2D matrix.
+         *
+         * @param[in] scaleX The scale factor in the x-direction.
+         * @param[in] scaleY The scale factor in the y-direction.
+         *
+         * @return A new @ref Matrix2D representing the uniform scale.
+         */
+        [[nodiscard]] static constexpr Matrix2D makeScale(T scaleX, T scaleY) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
