@@ -678,7 +678,7 @@ namespace fgm
     constexpr Matrix2D<T> Matrix2D<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
         requires StrictArithmetic<T>
     {
-        return Matrix2D();
+        return Matrix2D(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1));
     }
 
 } // namespace fgm
