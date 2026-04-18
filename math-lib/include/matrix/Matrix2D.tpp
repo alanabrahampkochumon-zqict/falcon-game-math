@@ -635,6 +635,14 @@ namespace fgm
     }
 
 
+
+
+    /**************************************
+     *                                    *
+     *       TRANSFORMATION FACTORIES     *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     template <std::floating_point U>
     constexpr Matrix2D<T> Matrix2D<T>::makeRotation(U angle) noexcept
@@ -661,7 +669,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix2D<T> Matrix2D<T>::makeScale(T scaleX, T scaleY) noexcept requires StrictArithmetic<T>
     {
-        return Matrix2D();
+        return Matrix2D(scaleX, T(0), T(0), scaleY);
     }
 
 } // namespace fgm
