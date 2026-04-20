@@ -369,7 +369,7 @@ TEST(Matrix2DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationProm
     constexpr fgm::Matrix2D mat(1.0, 2.0);
     constexpr fgm::iVec2 vec(2, 1);
 
-    constexpr auto transformedVector = mat * vec;
+    [[maybe_unused]] constexpr auto transformedVector = mat * vec;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
 }
 
@@ -468,7 +468,7 @@ TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNo
     constexpr fgm::Matrix2D<double> iMatrix;
     [[maybe_unused]] fgm::iVec2 vec(2, 1);
 
-    vec *= iMatrix;
+    (void)(vec *= iMatrix);
     static_assert(std::is_same_v<decltype(vec)::value_type, int>);
 }
 

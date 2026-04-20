@@ -12,11 +12,13 @@
 #include "MatrixTestSetup.h"
 
 
+
 /**************************************
  *                                    *
  *              SETUP                 *
  *                                    *
  **************************************/
+
 template <typename T>
 class Matrix2DTranspose: public ::testing::Test
 {
@@ -31,6 +33,7 @@ protected:
 };
 /** @brief Test fixture for @ref fgm::Matrix2D transpose, parameterized @ref SupportedTypes */
 TYPED_TEST_SUITE(Matrix2DTranspose, SupportedTypes);
+
 
 
 /**

@@ -56,9 +56,10 @@ TYPED_TEST_SUITE(Matrix2DIntegralUtility, SupportedIntegralTypes);
 
 namespace 
 {
-    constexpr fgm::Matrix2D INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f);
-    constexpr fgm::Matrix2D NAN_MAT(fgm::constants::NaN, 1.0f);
-    constexpr fgm::Matrix2D MAT(1.0f, 1.0f, 1.0f, 1.0f);
+    // TODO: Remove maybe_unused
+    [[maybe_unused]] constexpr fgm::Matrix2D INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f);
+    [[maybe_unused]] constexpr fgm::Matrix2D NAN_MAT(fgm::constants::NaN, 1.0f);
+    [[maybe_unused]] constexpr fgm::Matrix2D MAT(1.0f, 1.0f, 1.0f, 1.0f);
 
 
     /** @brief Verify that the matrix hasNaN utility is available at compile time. */
