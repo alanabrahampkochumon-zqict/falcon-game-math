@@ -13,8 +13,10 @@ set(GeneralFiles "SimdTraits.h;DoxygenGroups.h")
 list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
 
 set(CommonDirectory "${IncludeDirectory}common/")
-set(CommonFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h")
-list(TRANSFORM CommonFiles PREPEND ${CommonDirectory})
+set(CommonHeaderFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h;Wrappers.h")
+list(TRANSFORM CommonHeaderFiles PREPEND ${CommonDirectory})
+set(CommonTemplateFiles "Wrappers.tpp;")
+list(TRANSFORM CommonTemplateFiles PREPEND ${CommonDirectory})
 
 set(VectorDirectory "${IncludeDirectory}vector/")
 set(VectorHeaderFiles Vector3D.h Vector2D.h Vector4D.h)
@@ -41,7 +43,8 @@ target_sources(MathLib
         ${MatrixHeaderFiles}
         ${MatrixTemplateDefinitionFiles}
         ${GeneralFiles}
-        ${CommonFiles}
+        ${CommonHeaderFiles}
+        ${CommonTemplateFiles}
 )
 
 
@@ -62,11 +65,13 @@ add_custom_target(
     ${MatrixHeaderFiles}
     ${MatrixTemplateDefinitionFiles}
     ${GeneralFiles}
-    ${CommonFiles}
+    ${CommonHeaderFiles}
+    ${CommonTemplateFiles}
 )
 # TODO: Group General and common files into a "Header Files" directory.
 source_group("Header Files\\vector" FILES ${VectorHeaderFiles})
-source_group("Header Files\\common" FILES ${CommonFiles})
+source_group("Header Files\\common" FILES ${CommonHeaderFiles})
 source_group("Header Files\\matrix" FILES ${MatrixHeaderFiles})
 source_group("Template Files\\vector" FILES ${VectorTemplateDefinitionFiles})
 source_group("Template Files\\matrix" FILES ${MatrixTemplateDefinitionFiles})
+source_group("Template Files\\common" FILES ${CommonTemplateFiles})

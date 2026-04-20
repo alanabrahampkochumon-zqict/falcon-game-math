@@ -31,7 +31,7 @@ set(MatrixTestFiles Matrix2DTests.cpp Matrix3DTests.cpp Matrix4DTests.cpp )
 list(TRANSFORM MatrixTestFiles PREPEND ${MatrixTestDirectory})
 
 set(MathCommonDir "src/math/common/")
-set(MathCommonTestFiles "OperationStatusTests.cpp")
+set(MathCommonTestFiles "OperationStatusTests.cpp;WrapperTests.cpp;")
 list(TRANSFORM MathCommonTestFiles PREPEND ${MathCommonDir})
 
 set(UtilityDirectory "include/utils/")
