@@ -51,7 +51,7 @@ namespace fgm
 
         /** @} */
 
-
+        
 
         /**
          * @addtogroup FGM_Mat2x2_Init
@@ -973,7 +973,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a reflection 2D matrix for reflection along coordinate axis(X, Y, and Origin<0, 0>).
+         * @brief Construct a reflection 2D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
          * 
          * @note To construction a reflection matrix around origin, set all axis reflection to true.
          *

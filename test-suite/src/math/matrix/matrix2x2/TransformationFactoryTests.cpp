@@ -10,6 +10,7 @@
 
 
 #include "MatrixTestSetup.h"
+
 #include <utility>
 
 
@@ -105,10 +106,7 @@ class Matrix2DXAxisReflection: public ::testing::Test
 protected:
     fgm::Matrix2D<T> _expectedMat;
 
-    void SetUp() override
-    {
-        _expectedMat = { fgm::Vector2D{ T(-1), T(0) }, fgm::Vector2D{ T(0), T(1) } };
-    }
+    void SetUp() override { _expectedMat = { fgm::Vector2D{ T(-1), T(0) }, fgm::Vector2D{ T(0), T(1) } }; }
 };
 /**
  * @brief Test fixture for @ref fgm::Matrix2D reflection along x-axis, parameterized
@@ -155,13 +153,62 @@ TYPED_TEST_SUITE(Matrix2DOriginReflection, SupportedSignedArithmeticTypes);
 
 /**************************************
  *                                    *
- *         COMPILE TIME TESTS         *
+ *           STATIC TESTS             *
  *                                    *
  **************************************/
+
 namespace
 {
-    // TODO: Add tests
-}
+    /**
+     * @brief Verify that rotation transform factory is available at compile time.
+     *         Only available for **C++26 and above** since trigonometric functions
+     *         are constexpr starting from C++26.
+     */
+    namespace
+    {
+#if __cplusplus >= 202603L
+        // Rotation matrix for 180° or 2π radians
+        constexpr auto ROTATION_MAT = fgm::Matrix2D<int>::makeRotation(fgm::constants::PI<float>);
+        static_assert(ROTATION_MAT(0, 0) == 0);
+        static_assert(ROTATION_MAT(0, 1) == -1);
+        static_assert(ROTATION_MAT(1, 0) == 1);
+        static_assert(ROTATION_MAT(1, 1) == 0);
+#endif
+
+    } // namespace
+
+
+    /** @brief Verify that scale transform factory is available at compile time.  */
+    namespace
+    {
+        // Uniform scale
+        constexpr auto U_SCALE_MAT = fgm::Matrix2D<int>::makeScale(2);
+        static_assert(U_SCALE_MAT(0, 0) == 2);
+        static_assert(U_SCALE_MAT(0, 1) == 0);
+        static_assert(U_SCALE_MAT(1, 0) == 0);
+        static_assert(U_SCALE_MAT(1, 1) == 2);
+
+        // Non-uniform scale
+        constexpr auto SCALE_MAT = fgm::Matrix2D<int>::makeScale(2, 3);
+        static_assert(SCALE_MAT(0, 0) == 2);
+        static_assert(SCALE_MAT(0, 1) == 0);
+        static_assert(SCALE_MAT(1, 0) == 0);
+        static_assert(SCALE_MAT(1, 1) == 3);
+    } // namespace
+
+
+    /** @brief Verify that reflection transform factory is available at compile time.  */
+    namespace
+    {
+        // Reflection through origin
+        constexpr auto REFLECTION_MAT = fgm::Matrix2D<int>::makeReflection(true, true);
+        static_assert(REFLECTION_MAT(0, 0) == -1);
+        static_assert(REFLECTION_MAT(0, 1) == 0);
+        static_assert(REFLECTION_MAT(1, 0) == 0);
+        static_assert(REFLECTION_MAT(1, 1) == -1);
+
+    } // namespace
+} // namespace
 
 
 
@@ -206,9 +253,9 @@ TYPED_TEST(Matrix2DNonUniformScale, ReturnsScaleMatrix)
  *                                    *
  **************************************/
 
-/** 
- * @brief Verify that reflection transformation factory for no reflection along any axis 
- *        returns a reflection matrix. 
+/**
+ * @brief Verify that reflection transformation factory for no reflection along any axis
+ *        returns a reflection matrix.
  */
 TYPED_TEST(Matrix2DNoReflection, ReturnsReflectionMatrix)
 {
