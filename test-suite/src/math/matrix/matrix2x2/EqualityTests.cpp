@@ -50,6 +50,50 @@ TYPED_TEST_SUITE(Matrix2DEquality, SupportedArithmeticTypes);
 
 /**************************************
  *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+namespace 
+{
+
+    constexpr fgm::Matrix2D MAT1(1, 2, 3, 4);
+    constexpr fgm::Matrix2D MAT2(1, 2, 3, 4);
+    constexpr fgm::Matrix2D MAT3(4, 2, 2, 4);
+
+    /** @brief Verify that matrix equality check is available at compile time. */
+    namespace 
+    {
+        // Member functions
+        static_assert(MAT1.allEq(MAT2) == true);
+        static_assert(MAT1.allEq(MAT3) == false);
+
+
+        // Static functions
+        static_assert(fgm::Matrix2D<int>::allEq(MAT1, MAT2) == true);
+        static_assert(fgm::Matrix2D<int>::allEq(MAT1, MAT3) == false);
+
+    }
+
+
+    /** @brief Verify that matrix inequality check is available at compile time. */
+    namespace
+    {
+        // Member functions
+        static_assert(MAT1.anyNeq(MAT2) == false);
+        static_assert(MAT1.anyNeq(MAT3) == true);
+
+
+        // Static functions
+        static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT2) == false);
+        static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT3) == true);
+
+    } // namespace
+}
+
+
+/**************************************
+ *                                    *
  *           EQUALITY TESTS           *
  *                                    *
  **************************************/
