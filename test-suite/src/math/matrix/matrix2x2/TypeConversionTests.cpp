@@ -27,15 +27,15 @@
 /** @brief Verify that the matrix can be type promoted and demoted at compile time. */
 namespace 
 {
-    constexpr fgm::Matrix2D s_Mat(1.0f, 2.0f, 3.0f, 4.0f);
+    constexpr fgm::Matrix2D MAT(1.0f, 2.0f, 3.0f, 4.0f);
 
     // Verify that the matrix can be type promoted at compile time.
-    constexpr fgm::Matrix2D<double> s_MatD(s_Mat);
-    static_assert(std::is_same_v<decltype(s_MatD)::value_type, double>);
+    constexpr fgm::Matrix2D<double> MAT_D(MAT);
+    static_assert(std::is_same_v<decltype(MAT_D)::value_type, double>);
 
     // Verify that the matrix can be type demoted at compile time.
-    constexpr fgm::Matrix2D<int> s_MatI(s_Mat);
-    static_assert(std::is_same_v<decltype(s_MatI)::value_type, int>);
+    constexpr fgm::Matrix2D<int> MATI(MAT);
+    static_assert(std::is_same_v<decltype(MATI)::value_type, int>);
 }
 
 
