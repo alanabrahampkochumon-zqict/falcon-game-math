@@ -16,9 +16,15 @@
 
 namespace fgm
 {
+
+    /**
+     * @addtogroup FGM_Wrappers
+     * @{
+     */
+
     /**
      * @brief Compute the absolute value of an integral or floating-point value.
-     *        Wrapper around the `std::abs`/`std::fabs` function, to enable constexpr evaluation in pre-C++23 programs.
+     *        Wrapper around the `std::abs`/`std::fabs` function, to enable constexpr evaluation in pre-C++23.
      *
      * @tparam T The numeric type of the value.
      *
@@ -28,6 +34,8 @@ namespace fgm
      */
     template<StrictArithmetic T>
     constexpr T abs(T num) noexcept;
+
+    /** @} */
 
 }
 

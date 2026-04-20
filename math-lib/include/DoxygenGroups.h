@@ -132,9 +132,6 @@
      * @defgroup FGM_Concepts Concepts
      * @brief Fundamental mathematical constraints.
      * @ingroup FGM_Math
-     * @{
-     *   @defgroup FGM_Concepts Math Concepts
-     * @}
      */
     
     /**
@@ -152,6 +149,12 @@
     /**
      * @defgroup FGM_Math_Common Library Utilities
      * @brief Common utilities used by FGM.
+     * @ingroup FGM_Math
+     */
+
+    /**
+     * @defgroup FGM_Wrappers Wrapper Functions
+     * @brief Wrapper for `std` functions to enable compile time evaluation in pre-C++23/26.
      * @ingroup FGM_Math
      */
 

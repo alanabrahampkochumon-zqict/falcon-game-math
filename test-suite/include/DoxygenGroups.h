@@ -182,6 +182,7 @@
          * @ingroup MathTests
          * @{
          *   @defgroup T_Op_Status Operation Status
+         *   @defgroup T_Wrappers Wrapper Utilities
          * @}
          */
 
