@@ -876,7 +876,7 @@ namespace fgm
             return this->dot(onto) * onto;
         }
 
-        /** @note Static cast ensures integral type dots don't lose much precision */
+        /** @note Static cast ensures integral type dots don't lose too much precision. */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
         if (hasNaN() | std::isnan(ontoSquared))

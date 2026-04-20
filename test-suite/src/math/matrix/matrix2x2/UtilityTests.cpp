@@ -50,6 +50,46 @@ TYPED_TEST_SUITE(Matrix2DIntegralUtility, SupportedIntegralTypes);
 
 /**************************************
  *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+namespace 
+{
+    constexpr fgm::Matrix2D INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f);
+    constexpr fgm::Matrix2D NAN_MAT(fgm::constants::NaN, 1.0f);
+    constexpr fgm::Matrix2D MAT(1.0f, 1.0f, 1.0f, 1.0f);
+
+
+    /** @brief Verify that the matrix hasNaN utility is available at compile time. */
+    namespace 
+    {
+        //// Member functions
+        //static_assert(NAN_MAT.hasNaN() == true);
+        //static_assert(MAT.hasNaN() == false);
+
+        //// Static functions
+        //static_assert(fgm::Matrix2D<float>::hasNaN(NAN_MAT) == true);
+        //static_assert(fgm::Matrix2D<float>::hasNaN(MAT) == false);
+    }
+
+
+    /** @brief Verify that the matrix hasInf utility is available at compile time. */
+    namespace
+    {
+        //// Member functions
+        // static_assert(INF_MAT.hasNaN() == true);
+        // static_assert(MAT.hasNaN() == false);
+
+        //// Static functions
+        // static_assert(fgm::Matrix2D<float>::hasNaN(INF_MAT) == true);
+        // static_assert(fgm::Matrix2D<float>::hasNaN(MAT) == false);
+    } // namespace
+}
+
+
+/**************************************
+ *                                    *
  *      INFINITY CHECKER TESTS        *
  *                                    *
  **************************************/

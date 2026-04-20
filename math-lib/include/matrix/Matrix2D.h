@@ -29,6 +29,10 @@
 #include <cstddef>
 #include <type_traits>
 
+// TODO: Rotate around a point
+// TODO: Reflect around line
+// TODO: Add makeShear
+
 namespace fgm
 {
     template <Arithmetic T>
