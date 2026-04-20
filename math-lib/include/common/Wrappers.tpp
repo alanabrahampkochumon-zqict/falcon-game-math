@@ -10,11 +10,20 @@
  */
 
 
+#include <cstdlib>
+
+
+
 namespace fgm
 {
-    template <StrictArithmetic T>
+    template <SignedStrictArithmetic T>
     constexpr T abs(T num) noexcept
     {
-        return 0;
+        if (std::is_constant_evaluated())
+            return num > T(0) ? num : -num;
+        if constexpr (std::is_floating_point_v<T>)
+            return std::fabs(num);
+        else
+            return std::abs(num);
     }
 }
