@@ -12,6 +12,7 @@
 
 #include <cstdlib>
 #include <cmath>
+#include <limits>
 
 
 
@@ -42,6 +43,8 @@ namespace fgm
     template <std::floating_point T>
     constexpr bool isinf(T num) noexcept
     {
-        return false;
+        if (std::is_constant_evaluated())
+            return std::numeric_limits<T>::infinity() == num || -std::numeric_limits<T>::infinity() == num;
+        return std::isinf(num);
     }
 }
