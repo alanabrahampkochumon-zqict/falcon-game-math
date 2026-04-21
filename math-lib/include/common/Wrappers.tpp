@@ -37,4 +37,11 @@ namespace fgm
             return num != num;
         return std::isnan(num); // Standard library function for compile time evaluation.
     }
+
+
+    template <std::floating_point T>
+    constexpr bool isinf(T num) noexcept
+    {
+        return false;
+    }
 }

@@ -60,6 +60,16 @@ namespace
         static_assert(fgm::isnan(fgm::constants::NaN) == true);
     } // namespace
 
+
+    /** Verify that @ref fgm::isinf is available at compile time. */
+    namespace
+    {
+        static_assert(fgm::isinf(-3.53) == false);
+        static_assert(fgm::isinf(3.53) == false);
+        static_assert(fgm::isinf(fgm::constants::INFINITY_F) == true);
+        static_assert(fgm::isinf(-fgm::constants::INFINITY_F) == true);
+    } // namespace
+
 } // namespace
 
 
@@ -73,17 +83,37 @@ namespace
 TYPED_TEST(AbsTest, ReturnsAbsoluteValue) { testutils::EXPECT_MAG_EQ(this->_expectedAbsValue, fgm::abs(this->_value)); }
 
 
+
 /**************************************
  *                                    *
- *             NAN TESTS              *
+ *            ISNAN TESTS             *
  *                                    *
  **************************************/
 
-/** @brief Verify that check for NaN using @ref fgm::isnan returns true for a standard quiet NaN. */
-TEST(NaNTests, NaNReturnsTrue) { EXPECT_TRUE(fgm::isnan(fgm::constants::NaN)); }
+/** @brief Verify that check for IEEE 754 NaN using @ref fgm::isnan returns true for a standard quiet NaN. */
+TEST(IsNaNTests, NaNReturnsTrue) { EXPECT_TRUE(fgm::isnan(fgm::constants::NaN)); }
 
 
-/** @brief Verify that check for NaN using @ref fgm::isnan returns false for a non-NaN. */
-TEST(NaNTests, NumberReturnsFalse) { EXPECT_FALSE(fgm::isnan(3.16f)); }
+/** @brief Verify that check for IEEE 754 NaN using @ref fgm::isnan returns false for a non-NaN. */
+TEST(IsNaNTests, NumberReturnsFalse) { EXPECT_FALSE(fgm::isnan(3.16f)); }
+
+
+
+/**************************************
+ *                                    *
+ *            ISINF TESTS             *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that check for IEEE 754 infinity using @ref fgm::isinf returns true for a positive infinity. */
+TEST(IsInfTests, PositiveInfinityReturnsTrue) { EXPECT_TRUE(fgm::isinf(fgm::constants::INFINITY_F)); }
+
+
+/** @brief Verify that check for IEEE 754 infinity using @ref fgm::isinf returns true for a negative infinity. */
+TEST(IsInfTests, NegativeInfinityReturnsTrue) { EXPECT_TRUE(fgm::isinf(-fgm::constants::INFINITY_F)); }
+
+
+/** @brief Verify that check for IEEE 754 infinity using @ref fgm::isinf returns true for a non-infinity value. */
+TEST(IsInfTests, NonInfiniteNumberReturnsFalse) { EXPECT_FALSE(fgm::isinf(3.16f)); }
 
 /** @} */

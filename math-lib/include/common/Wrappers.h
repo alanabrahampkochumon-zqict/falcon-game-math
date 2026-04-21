@@ -5,7 +5,7 @@
  * @date Created on: April 20, 2026
  *
  * @brief Wrapper for C++ `std` functions, to enable constexpr evaluation in pre-C++23.
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -33,7 +33,7 @@ namespace fgm
      * @return Return the absolute value of @p value.
      */
     template <SignedStrictArithmetic T>
-    constexpr T abs(T num) noexcept;
+    [[nodiscard]] constexpr T abs(T num) noexcept;
 
 
     /**
@@ -47,11 +47,25 @@ namespace fgm
      * @return Return the absolute value of @p value.
      */
     template <std::floating_point T>
-    constexpr bool isnan(T num) noexcept;
+    [[nodiscard]] constexpr bool isnan(T num) noexcept;
+
+
+    /**
+     * @brief Determine if a floating-point value is positive or negative infinity.
+     *        Wrapper around the `std::isinf` function, to enable constexpr evaluation in pre-C++23.
+     *
+     * @tparam T The numeric type of the value. Must satisfy `std::floating_point`.
+     *
+     * @param num The number to check for indefinite value.
+     *
+     * @return Return the absolute value of @p value.
+     */
+    template <std::floating_point T>
+    [[nodiscard]] constexpr bool isinf(T num) noexcept;
 
     /** @} */
 
-}
+} // namespace fgm
 
 
 #include "Wrappers.tpp"
