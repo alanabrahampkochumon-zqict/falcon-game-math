@@ -26,7 +26,7 @@ namespace fgm
      * @brief Compute the absolute value of an integral or floating-point value.
      *        Wrapper around the `std::abs`/`std::fabs` function, to enable constexpr evaluation in pre-C++23.
      *
-     * @tparam T The numeric type of the value.
+     * @tparam T The numeric type of the value. Must satisfy @ref SignedStrictArithmetic.
      *
      * @param num The number to take the absolute value of.
      *
@@ -34,6 +34,20 @@ namespace fgm
      */
     template <SignedStrictArithmetic T>
     constexpr T abs(T num) noexcept;
+
+
+    /**
+     * @brief Determine if a floating-point value is a Not-a-Number(NaN) value.
+     *        Wrapper around the `std::isnan` function, to enable constexpr evaluation in pre-C++23.
+     *
+     * @tparam T The numeric type of the value. Must satisfy `std::floating_point`.
+     *
+     * @param num The number to check for NaN.
+     *
+     * @return Return the absolute value of @p value.
+     */
+    template <std::floating_point T>
+    constexpr bool isnan(T num) noexcept;
 
     /** @} */
 

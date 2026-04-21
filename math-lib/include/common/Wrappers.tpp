@@ -20,10 +20,14 @@ namespace fgm
     constexpr T abs(T num) noexcept
     {
         if (std::is_constant_evaluated())
-            return num > T(0) ? num : -num;
+            return num < T(0) ? -num : num;
         if constexpr (std::is_floating_point_v<T>)
             return std::fabs(num);
         else
             return std::abs(num);
     }
+
+
+    template <std::floating_point T>
+    constexpr bool isnan(T num) noexcept {}
 }
