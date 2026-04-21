@@ -2,9 +2,9 @@
 
 
 #include "Matrix2D.h"
+#include "common/Wrappers.tpp"
 
 #include <cassert>
-#include <cmath>
 #include <type_traits>
 #include <valarray>
 
@@ -340,7 +340,7 @@ namespace fgm
     {
         using R = Magnitude<std::common_type_t<T, S>>;
 
-        assert(std::abs(R(scalar)) > Config::EPSILON<R> &&
+        assert(fgm::abs(R(scalar)) > Config::EPSILON<R> &&
                "Matrix division by zero"); // TODO: Change to custom assert and add custom abs
 
         R factor = R(1) / static_cast<R>(scalar);
@@ -357,7 +357,7 @@ namespace fgm
     {
         using R = Magnitude<std::common_type_t<T, S>>;
 
-        assert(std::abs(R(scalar)) > Config::EPSILON<R> &&
+        assert(fgm::abs(R(scalar)) > Config::EPSILON<R> &&
                "Matrix division by zero"); // TODO: Change to custom assert and add custom abs
 
         R factor = R(1) / static_cast<R>(scalar);
@@ -378,7 +378,7 @@ namespace fgm
         using R = std::common_type_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
-            if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<R>::epsilon()))
+            if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon()))
                 return Matrix2D<R>(fallback);
         if constexpr (std::is_integral_v<R>)
             if (scalar == 0)
@@ -408,12 +408,12 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (hasNaN() | std::isnan(scalar))
+            if (hasNaN() | fgm::isnan(scalar))
             {
                 status = OperationStatus::NANOPERAND;
                 return Matrix2D<R>(fallback);
             }
-            if (std::abs(scalar) <= std::numeric_limits<R>::epsilon())
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return Matrix2D<R>(fallback);
@@ -518,7 +518,7 @@ namespace fgm
         T det = determinant();
 
         if constexpr (std::is_floating_point_v<T>)
-            if (hasNaN() || (std::abs(det) <= std::numeric_limits<T>::epsilon()))
+            if (hasNaN() || (fgm::abs(det) <= std::numeric_limits<T>::epsilon()))
                 return Matrix2D<R>(fallback);
         if constexpr (std::is_integral_v<T>)
             if (det == 0)
@@ -553,7 +553,7 @@ namespace fgm
                 status = OperationStatus::NANOPERAND;
                 return Matrix2D<R>(fallback);
             }
-            if (std::abs(det) <= std::numeric_limits<T>::epsilon())
+            if (fgm::abs(det) <= std::numeric_limits<T>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return Matrix2D<R>(fallback);
