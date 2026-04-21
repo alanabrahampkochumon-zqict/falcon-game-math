@@ -30,7 +30,7 @@ namespace fgm
     }
 
 
-    template <std::floating_point T>
+    template <Arithmetic T>
     constexpr bool isnan(T num) noexcept
     {
         if (std::is_constant_evaluated())
@@ -40,11 +40,14 @@ namespace fgm
     }
 
 
-    template <std::floating_point T>
+    template <Arithmetic T>
     constexpr bool isinf(T num) noexcept
     {
         if (std::is_constant_evaluated())
-            return std::numeric_limits<T>::infinity() == num || -std::numeric_limits<T>::infinity() == num;
+            if (std::numeric_limits<T>::has_infinity)
+                return std::numeric_limits<T>::infinity() == num || -std::numeric_limits<T>::infinity() == num;
+            else
+                return false;
         return std::isinf(num);
     }
 }

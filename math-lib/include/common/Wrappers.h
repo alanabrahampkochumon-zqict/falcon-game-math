@@ -40,13 +40,13 @@ namespace fgm
      * @brief Determine if a floating-point value is a Not-a-Number(NaN) value.
      *        Wrapper around the `std::isnan` function, to enable constexpr evaluation in pre-C++23.
      *
-     * @tparam T The numeric type of the value. Must satisfy `std::floating_point`.
+     * @tparam T The numeric type of the value. Must satisfy @ref Arithmetic.
      *
      * @param num The number to check for NaN.
      *
      * @return Return the absolute value of @p value.
      */
-    template <std::floating_point T>
+    template <Arithmetic T>
     [[nodiscard]] constexpr bool isnan(T num) noexcept;
 
 
@@ -54,13 +54,13 @@ namespace fgm
      * @brief Determine if a floating-point value is positive or negative infinity.
      *        Wrapper around the `std::isinf` function, to enable constexpr evaluation in pre-C++23.
      *
-     * @tparam T The numeric type of the value. Must satisfy `std::floating_point`.
+     * @tparam T The numeric type of the value. Must satisfy @ref Arithmetic.
      *
      * @param num The number to check for indefinite value.
      *
      * @return Return the absolute value of @p value.
      */
-    template <std::floating_point T>
+    template <Arithmetic T>
     [[nodiscard]] constexpr bool isinf(T num) noexcept;
 
     /** @} */

@@ -12,8 +12,8 @@
 
 
 #include "Vector2D.h"
-#include "common/Wrappers.tpp"
 
+#include "common/Wrappers.tpp"
 #include <type_traits>
 
 namespace fgm
@@ -26,16 +26,14 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector2D<T>::Vector2D() noexcept
-    {
+    constexpr Vector2D<T>::Vector2D() noexcept {
         _data[0] = T(0);
         _data[1] = T(0);
     }
 
 
     template <Arithmetic T>
-    constexpr Vector2D<T>::Vector2D(T v1, T v2) noexcept
-    {
+    constexpr Vector2D<T>::Vector2D(T v1, T v2) noexcept {
         _data[0] = v1;
         _data[1] = v2;
     }
@@ -43,8 +41,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Vector2D<T>::Vector2D(const Vector2D<U>& other) noexcept
-    {
+    constexpr Vector2D<T>::Vector2D(const Vector2D<U>& other) noexcept {
         _data[0] = static_cast<T>(other.x());
         _data[1] = static_cast<T>(other.y());
     }
@@ -57,98 +54,84 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr T Vector2D<T>::x() const noexcept
-    {
+    constexpr T Vector2D<T>::x() const noexcept {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector2D<T>::x() noexcept
-    {
+    constexpr T& Vector2D<T>::x() noexcept {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector2D<T>::y() const noexcept
-    {
+    constexpr T Vector2D<T>::y() const noexcept {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector2D<T>::y() noexcept
-    {
+    constexpr T& Vector2D<T>::y() noexcept {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector2D<T>::s() const noexcept
-    {
+    constexpr T Vector2D<T>::s() const noexcept {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector2D<T>::s() noexcept
-    {
+    constexpr T& Vector2D<T>::s() noexcept {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector2D<T>::t() const noexcept
-    {
+    constexpr T Vector2D<T>::t() const noexcept {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector2D<T>::t() noexcept
-    {
+    constexpr T& Vector2D<T>::t() noexcept {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector2D<T>::r() const noexcept
-    {
+    constexpr T Vector2D<T>::r() const noexcept {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector2D<T>::r() noexcept
-    {
+    constexpr T& Vector2D<T>::r() noexcept {
         return _data[0];
     }
 
 
     template <Arithmetic T>
-    constexpr T Vector2D<T>::g() const noexcept
-    {
+    constexpr T Vector2D<T>::g() const noexcept {
         return _data[1];
     }
 
 
     template <Arithmetic T>
-    constexpr T& Vector2D<T>::g() noexcept
-    {
+    constexpr T& Vector2D<T>::g() noexcept {
         return _data[1];
     }
 
     template <Arithmetic T>
-    constexpr T& Vector2D<T>::operator[](const std::size_t idx) noexcept
-    {
+    constexpr T& Vector2D<T>::operator[](const std::size_t idx) noexcept {
         return _data[idx];
     }
 
 
     template <Arithmetic T>
-    constexpr const T& Vector2D<T>::operator[](const std::size_t idx) const noexcept
-    {
+    constexpr const T& Vector2D<T>::operator[](const std::size_t idx) const noexcept {
         return _data[idx];
     }
 
@@ -184,29 +167,25 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector2D<T>::allEq(const Vector2D<U>& rhs, const double epsilon) const noexcept
-    {
+    constexpr bool Vector2D<T>::allEq(const Vector2D<U>& rhs, const double epsilon) const noexcept {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] == rhs[0] && _data[1] == rhs[1];
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
-                (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
+            return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) && (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
     }
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector2D<T>::allEq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept
-    {
+    constexpr bool Vector2D<T>::allEq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept {
         return lhs.allEq(rhs, epsilon);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector2D<T>::anyNeq(const Vector2D<U>& rhs, const double epsilon) const noexcept
-    {
+    constexpr bool Vector2D<T>::anyNeq(const Vector2D<U>& rhs, const double epsilon) const noexcept {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] != rhs[0] || _data[1] != rhs[1];
         else
@@ -218,31 +197,27 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector2D<T>::anyNeq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept
-    {
+    constexpr bool Vector2D<T>::anyNeq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept {
         return lhs.anyNeq(rhs, epsilon);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector2D<T>::operator==(const Vector2D<U>& rhs) const noexcept
-    {
+    constexpr bool Vector2D<T>::operator==(const Vector2D<U>& rhs) const noexcept {
         return this->allEq(rhs);
     }
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector2D<T>::operator!=(const Vector2D<U>& rhs) const noexcept
-    {
+    constexpr bool Vector2D<T>::operator!=(const Vector2D<U>& rhs) const noexcept {
         return this->anyNeq(rhs);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D<U>& rhs, const double epsilon) const noexcept
-    {
+    constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D<U>& rhs, const double epsilon) const noexcept {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return Vector2D(_data[0] == rhs[0], _data[1] == rhs[1]);
         else
@@ -254,16 +229,15 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept
-    {
+    constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D& lhs, const Vector2D<U>& rhs,
+                                             const double epsilon) noexcept {
         return lhs.eq(rhs, epsilon);
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Vector2D<bool> Vector2D<T>::neq(const Vector2D<U>& rhs, const double epsilon) const noexcept
-    {
+    constexpr Vector2D<bool> Vector2D<T>::neq(const Vector2D<U>& rhs, const double epsilon) const noexcept {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return Vector2D(_data[0] != rhs[0], _data[1] != rhs[1]);
         else
@@ -276,8 +250,7 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr Vector2D<bool> Vector2D<T>::neq(const Vector2D& lhs, const Vector2D<U>& rhs,
-                                              const double epsilon) noexcept
-    {
+                                              const double epsilon) noexcept {
         return lhs.neq(rhs, epsilon);
     }
 
@@ -413,7 +386,7 @@ namespace fgm
      ***************************************/
 
     template <Arithmetic T>
-    constexpr Vector2D<T> Vector2D<T>::operator&(const Vector2D& rhs) const noexcept
+    constexpr Vector2D<T> Vector2D<T>::operator&(const Vector2D& rhs) const noexcept 
         requires std::is_same_v<T, bool>
     {
         return Vector2D(_data[0] & rhs[0], _data[1] & rhs[1]);
@@ -518,8 +491,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
-        return Vector2D<R>(static_cast<R>(_data[0]) * static_cast<R>(scalar),
-                           static_cast<R>(_data[1]) * static_cast<R>(scalar));
+        return Vector2D<R>(static_cast<R>(_data[0]) * static_cast<R>(scalar), static_cast<R>(_data[1]) * static_cast<R>(scalar));
     }
 
 
@@ -537,7 +509,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         // TODO: Update for type promotion.
-        _data[0] = static_cast<T>(scalar * _data[0]);
+        _data[0] = static_cast<T>(scalar *_data[0]);
         _data[1] = static_cast<T>(scalar * _data[1]);
         return *this;
     }
@@ -704,8 +676,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr auto Vector2D<T>::cross(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>
-    {
+    constexpr auto Vector2D<T>::cross(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U> {
         using R = std::common_type_t<T, U>;
         return R(_data[0] * rhs[1] - _data[1] * rhs[0]);
     }
@@ -713,8 +684,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr auto Vector2D<T>::cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept -> std::common_type_t<T, U>
-    {
+    constexpr auto Vector2D<T>::cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        -> std::common_type_t<T, U> {
         return lhs.cross(rhs);
     }
 
@@ -1026,8 +997,7 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    constexpr bool Vector2D<T>::hasInf() const noexcept
-    {
+    constexpr bool Vector2D<T>::hasInf() const noexcept {
         if constexpr (std::is_floating_point_v<T>)
             return fgm::isinf(_data[0]) | fgm::isinf(_data[1]);
         else
@@ -1036,15 +1006,13 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr bool Vector2D<T>::hasInf(const Vector2D& vec) noexcept
-    {
+    constexpr bool Vector2D<T>::hasInf(const Vector2D& vec) noexcept {
         return vec.hasInf();
     }
 
 
     template <Arithmetic T>
-    constexpr bool Vector2D<T>::hasNaN() const noexcept
-    {
+    constexpr bool Vector2D<T>::hasNaN() const noexcept {
         if constexpr (std::is_floating_point_v<T>)
             return fgm::isnan(_data[0]) | fgm::isnan(_data[1]);
         else
@@ -1053,8 +1021,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr bool Vector2D<T>::hasNaN(const Vector2D& vec) noexcept
-    {
+    constexpr bool Vector2D<T>::hasNaN(const Vector2D& vec) noexcept {
         return vec.hasNaN();
     }
 
