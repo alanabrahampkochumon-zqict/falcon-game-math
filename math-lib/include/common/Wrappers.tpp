@@ -11,6 +11,7 @@
 
 
 #include <cstdlib>
+#include <cmath>
 
 
 
@@ -29,5 +30,11 @@ namespace fgm
 
 
     template <std::floating_point T>
-    constexpr bool isnan(T num) noexcept {}
+    constexpr bool isnan(T num) noexcept
+    {
+        if (std::is_constant_evaluated())
+            // noinspection CppEqualOperandsInBinaryExpression
+            return num != num;
+        return std::isnan(num); // Standard library function for compile time evaluation.
+    }
 }

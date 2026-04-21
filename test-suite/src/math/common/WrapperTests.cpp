@@ -56,8 +56,8 @@ namespace
     /** Verify that @ref fgm::isnan is available at compile time. */
     namespace
     {
-        static_assert(fgm::isnan(-3.53) ==false);
-        static_assert(fgm::isnan(fgm::constants::NaN) ==true);
+        static_assert(fgm::isnan(-3.53) == false);
+        static_assert(fgm::isnan(fgm::constants::NaN) == true);
     } // namespace
 
 } // namespace
