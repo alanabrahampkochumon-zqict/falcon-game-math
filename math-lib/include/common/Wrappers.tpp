@@ -33,10 +33,18 @@ namespace fgm
     template <Arithmetic T>
     constexpr bool isnan(T num) noexcept
     {
-        if (std::is_constant_evaluated())
-            // noinspection CppEqualOperandsInBinaryExpression
-            return num != num;
-        return std::isnan(num); // Standard library function for compile time evaluation.
+        if constexpr (std::is_floating_point_v<T>)
+        {
+            if (std::is_constant_evaluated())
+            {
+                // noinspection CppEqualOperandsInBinaryExpression
+                return num != num;
+            }
+            return std::isnan(num);
+        }
+        else
+            return false;
+
     }
 
 

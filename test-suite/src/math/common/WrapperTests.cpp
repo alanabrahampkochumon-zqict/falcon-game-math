@@ -58,6 +58,7 @@ namespace
     {
         static_assert(fgm::isnan(-3.53) == false);
         static_assert(fgm::isnan(fgm::constants::NaN) == true);
+        static_assert(fgm::isnan(fgm::constants::NaN_D) == true);
     } // namespace
 
 
