@@ -218,14 +218,13 @@ namespace fgm
          *        Perform an element-wise comparison and returns true only if every element pair
          *        satisfies the equality condition within the given @p epsilon.
          *
-         * @note To obtain an element-wise boolean mask, use @ref eq.
-         *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *
          * @param[in] lhs     The matrix to compare.
          * @param[in] rhs     The matrix to compare against.
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
@@ -234,6 +233,7 @@ namespace fgm
                                                                     std::is_same_v<U, double>)
                                                       ? Config::DOUBLE_EPSILON
                                                       : Config::FLOAT_EPSILON) noexcept;
+
 
         /**
          * @brief Compare all elements of this matrix for equality with another matrix.
@@ -386,6 +386,7 @@ namespace fgm
         constexpr Matrix2D& operator-=(const Matrix2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
+
         /**
          * @brief Scale the matrix by a scalar value.
          *        Multiply each element of the matrix by @p scalar and returns a new matrix.
@@ -424,8 +425,8 @@ namespace fgm
         /**
          * @brief Transform the **column vector** by this matrix.
          *        Perform the linear transformation: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot
-         *                                               \begin{bmatrix} x \\ y \end{bmatrix}  = \begin{bmatrix} x'
-         *                                               \\ y' \end{bmatrix} \f$
+         *                                           \begin{bmatrix} x \\ y \end{bmatrix}  = \begin{bmatrix} x'
+         *                                           \\ y' \end{bmatrix} \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -444,8 +445,8 @@ namespace fgm
         /**
          * @brief Compose this matrix with another to form a new matrix.
          *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
-         *                                        f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
-         *                                        \end{bmatrix} \f$
+         *                                     f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
+         *                                     \end{bmatrix} \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -816,15 +817,6 @@ namespace fgm
          */
         [[nodiscard]] static constexpr T trace(const Matrix2D& mat) noexcept
             requires StrictArithmetic<T>;
-
-        /** @} */
-
-
-
-        /**
-         * @addtogroup FGM_Mat2x2_Transforms
-         * @{
-         */
 
         /** @} */
 

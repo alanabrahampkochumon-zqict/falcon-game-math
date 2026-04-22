@@ -123,6 +123,25 @@
              *   @defgroup FGM_Mat2x2_Transforms Matrix Transformation Factories
              * @}
              */
+
+            
+            /**
+             * @defgroup FGM_Mat3x3 3x3 Square Matrix
+             * @brief 3x3 Square Matrix.
+             * @ingroup FGM_Matrices
+             * @{
+             *   @defgroup FGM_Mat3x3_Members Class Members
+             *   @defgroup FGM_Mat3x3_Init Accessors and Initializers
+             *   @defgroup FGM_Mat3x3_Arithmetic Arithmetic Operations
+             *   @defgroup FGM_Mat3x3_Algebra Matrix Algebra
+             *   @defgroup FGM_Mat3x3_Equality Equality
+             *   @defgroup FGM_Mat3x3_Product Geometric Products
+             *   @defgroup FGM_Mat3x3_Log String Representation
+             *   @defgroup FGM_Mat3x3_Const Matrix Constants
+             *   @defgroup FGM_Mat3x3_Utils Matrix Utilities
+             *   @defgroup FGM_Mat3x3_Transforms Matrix Transformation Factories
+             * @}
+             */
         
         /** @} */ // FGM_Matrices
 
