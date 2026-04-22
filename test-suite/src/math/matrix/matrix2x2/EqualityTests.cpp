@@ -91,14 +91,14 @@ namespace
         // Member functions
         static_assert(MAT1.anyNeq(MAT2) == false);
         static_assert(MAT1.anyNeq(MAT3) == true);
-//        static_assert(NAN_MAT.anyNeq(MAT1) == true);
+        static_assert(NAN_MAT.anyNeq(MAT1) == true);
         static_assert(INF_MAT1.anyNeq(INF_MAT2) == false);
 
 
         // Static functions
         static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT2) == false);
         static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT3) == true);
-//        static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, NAN_MAT) == true);
+        static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, NAN_MAT) == true);
         static_assert(fgm::Matrix2D<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
 
     } // namespace
