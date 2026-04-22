@@ -199,7 +199,7 @@ namespace fgm
             // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
             if (std::is_constant_evaluated())
-                if (hasNaN())
+                if (hasNaN() || rhs.hasNaN())
                     return false;
 #endif
             return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
