@@ -110,7 +110,7 @@ TEST(Vector2DEquality, InfinityEquality_IdenticalVectorsReturnsTrue)
     constexpr fgm::Vector2D vecA = { INF, -INF };
     constexpr fgm::Vector2D vecB = { INF, -INF };
 
-    const bool equality = vecA.allEq(vecB);
+    constexpr bool equality = vecA.allEq(vecB);
 
     EXPECT_TRUE(equality);
 }

@@ -250,7 +250,7 @@ namespace fgm
         return this->anyNeq(rhs);
     }
 
-
+    // TODO: Add MSVC NaN check tests + add new implementation as required.
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D<U>& rhs, const double epsilon) const noexcept

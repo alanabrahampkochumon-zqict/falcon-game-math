@@ -79,7 +79,7 @@ namespace
         // Static functions
         static_assert(fgm::Matrix2D<int>::allEq(MAT1, MAT2) == true);
         static_assert(fgm::Matrix2D<int>::allEq(MAT1, MAT3) == false);
-//        static_assert(fgm::Matrix2D<int>::allEq(MAT1, NAN_MAT) == false);
+        static_assert(fgm::Matrix2D<int>::allEq(MAT1, NAN_MAT) == false);
         static_assert(fgm::Matrix2D<float>::allEq(INF_MAT1, INF_MAT2) == true);
 
     } // namespace
@@ -98,7 +98,7 @@ namespace
         // Static functions
         static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT2) == false);
         static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT3) == true);
-//         static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, NAN_MAT) == true);
+//        static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, NAN_MAT) == true);
         static_assert(fgm::Matrix2D<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
 
     } // namespace
