@@ -50,6 +50,7 @@ namespace
         static_assert(fgm::abs(static_cast<char>(-3.5312893)) == 3);
         static_assert(fgm::abs(-0.0000000000053) == 0.0000000000053);
         static_assert(fgm::abs(-3) == 3);
+        static_assert(fgm::abs(fgm::constants::NaN_D) != fgm::constants::NaN_D);
     } // namespace
 
 

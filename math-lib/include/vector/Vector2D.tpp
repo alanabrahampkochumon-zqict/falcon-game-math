@@ -173,7 +173,8 @@ namespace fgm
             return _data[0] == rhs[0] && _data[1] == rhs[1];
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) && (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
+            return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
+                (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
     }
 
     template <Arithmetic T>
