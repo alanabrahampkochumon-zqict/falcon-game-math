@@ -153,7 +153,7 @@ TEST(Matrix2DEquality, NanEqualityReturnsFalse)
     constexpr fgm::Matrix2D matA(NAN_F, NAN_F, NAN_F, NAN_F);
     constexpr fgm::Matrix2D matB(1.0f, -5.88874789f, 2.0f, 0.888749f);
 
-    const bool equality = matA.allEq(matB);
+    constexpr bool equality = matA.allEq(matB);
 
     EXPECT_FALSE(equality);
 }
@@ -165,7 +165,7 @@ TEST(Matrix2DEquality, InfinityEquality_IdenticalMatricesReturnTrue)
     constexpr fgm::Matrix2D matA(INF, -INF, INF, -INF);
     constexpr fgm::Matrix2D matB(INF, -INF, INF, -INF);
 
-    const bool equality = matA.allEq(matB);
+    constexpr bool equality = matA.allEq(matB);
 
     EXPECT_TRUE(equality);
 }
@@ -188,7 +188,7 @@ TYPED_TEST(Matrix2DEquality, MixedType_Equality_IdenticalMatricesReturnTrue)
     constexpr fgm::Matrix2D matA(1, 2);
     constexpr fgm::Matrix2D matB(1.0, 2.0);
 
-    const bool equality = matA.allEq(matB);
+    constexpr bool equality = matA.allEq(matB);
 
     EXPECT_TRUE(equality);
 }

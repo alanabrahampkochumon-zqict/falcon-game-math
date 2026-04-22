@@ -93,15 +93,13 @@ TYPED_TEST(Vector2DEquality, StaticWrapper_Equality_DifferentVectorsReturnsFalse
 }
 
 
-#include <iostream>
 /** @test Verify that @ref fgm::Vector2D::allEq follows IEEE 754 for NaN comparisons. */
 TEST(Vector2DEquality, NanEqualityReturnsFalse)
 {
     constexpr fgm::Vector2D vecA = { NAN_F, NAN_F };
     constexpr fgm::Vector2D vecB = { 1.0, -5.88874789 };
 
-    const bool equality = vecA.allEq(vecB);
-    std::cout << "EQ RESULT " << equality << '\n';
+    constexpr bool equality = vecA.allEq(vecB);
     EXPECT_FALSE(equality) << "NaN vector shouldn't equal anything!";
 }
 

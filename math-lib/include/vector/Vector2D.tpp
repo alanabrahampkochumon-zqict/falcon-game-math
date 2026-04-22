@@ -194,13 +194,15 @@ namespace fgm
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
         {
-            std::cout << "_data[0] != rhs[0] " << (_data[0] != rhs[0]) << '\n';
-            std::cout << "\n";
-            std::cout << "!(fgm::abs(_data[0] - rhs[0]) <= epsilon)) " << !(fgm::abs(_data[0] - rhs[0]) <= epsilon)
-                      << '\n';
-            std::cout << "_data[1] != rhs[1] " << (_data[1] != rhs[1]) << '\n';
-            std::cout << "!(fgm::abs(_data[1] - rhs[1]) <= epsilon) " << !(fgm::abs(_data[1] - rhs[1]) <= epsilon)
-                      << '\n';   
+            // MSVC compile time evaluator has a bug where NaN's values return true at compile time.
+            // However, runtime evaluations are correct, to bypass the bug during compile time, 
+            // we add a check and if any element in the vector has a NaN,
+            // the equality returns false.
+            #ifdef _MSC_VER
+            if (std::is_constant_evaluated())
+                if (hasNaN())
+                    return false;
+            #endif
             return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
                 (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
         }
