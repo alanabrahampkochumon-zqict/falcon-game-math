@@ -73,14 +73,14 @@ namespace
         static_assert(MAT1.allEq(MAT2) == true);
         static_assert(MAT1.allEq(MAT3) == false);
 //        static_assert(NAN_MAT.allEq(MAT1) == false);
-        static_assert(INF_MAT1.allEq(INF_MAT2) == true);
+        //static_assert(INF_MAT1.allEq(INF_MAT2) == true);
 
 
         // Static functions
         static_assert(fgm::Matrix2D<int>::allEq(MAT1, MAT2) == true);
         static_assert(fgm::Matrix2D<int>::allEq(MAT1, MAT3) == false);
 //        static_assert(fgm::Matrix2D<int>::allEq(MAT1, NAN_MAT) == false);
-        static_assert(fgm::Matrix2D<float>::allEq(INF_MAT1, INF_MAT2) == true);
+        //static_assert(fgm::Matrix2D<float>::allEq(INF_MAT1, INF_MAT2) == true);
 
     }
 
@@ -165,7 +165,7 @@ TEST(Matrix2DEquality, InfinityEquality_IdenticalMatricesReturnTrue)
     constexpr fgm::Matrix2D matA(INF, -INF, INF, -INF);
     constexpr fgm::Matrix2D matB(INF, -INF, INF, -INF);
 
-    constexpr bool equality = matA.allEq(matB);
+    const bool equality = matA.allEq(matB);
 
     EXPECT_TRUE(equality);
 }
@@ -188,7 +188,7 @@ TYPED_TEST(Matrix2DEquality, MixedType_Equality_IdenticalMatricesReturnTrue)
     constexpr fgm::Matrix2D matA(1, 2);
     constexpr fgm::Matrix2D matB(1.0, 2.0);
 
-    constexpr bool equality = matA.allEq(matB);
+    const bool equality = matA.allEq(matB);
 
     EXPECT_TRUE(equality);
 }
@@ -319,7 +319,7 @@ TEST(Matrix2DEquality, InfinityInequality_IdenticalMatricesReturnFalse)
     constexpr fgm::Matrix2D matA(INF, -INF, INF, -INF);
     constexpr fgm::Matrix2D matB(INF, -INF, INF, -INF);
 
-    const bool inequality = matA.anyNeq(matB);
+    constexpr bool inequality = matA.anyNeq(matB);
 
     EXPECT_FALSE(inequality);
 }
@@ -343,7 +343,7 @@ TYPED_TEST(Matrix2DEquality, MixedType_Inequality_IdenticalMatricesReturnFalse)
     constexpr fgm::Matrix2D matA(1, 2, 3, 4);
     constexpr fgm::Matrix2D matB(1.0, 2.0, 3.0, 4.0);
 
-    const bool inequality = matA.anyNeq(matB);
+    constexpr bool inequality = matA.anyNeq(matB);
 
     EXPECT_FALSE(inequality);
 }

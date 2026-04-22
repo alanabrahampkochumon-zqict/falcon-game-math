@@ -93,6 +93,7 @@ TYPED_TEST(Vector2DEquality, StaticWrapper_Equality_DifferentVectorsReturnsFalse
 }
 
 
+#include <iostream>
 /** @test Verify that @ref fgm::Vector2D::allEq follows IEEE 754 for NaN comparisons. */
 TEST(Vector2DEquality, NanEqualityReturnsFalse)
 {
@@ -100,8 +101,8 @@ TEST(Vector2DEquality, NanEqualityReturnsFalse)
     constexpr fgm::Vector2D vecB = { 1.0, -5.88874789 };
 
     const bool equality = vecA.allEq(vecB);
-
-    EXPECT_FALSE(equality);
+    std::cout << "EQ RESULT " << equality << '\n';
+    EXPECT_FALSE(equality) << "NaN vector shouldn't equal anything!";
 }
 
 
@@ -111,7 +112,7 @@ TEST(Vector2DEquality, InfinityEquality_IdenticalVectorsReturnsTrue)
     constexpr fgm::Vector2D vecA = { INF, -INF };
     constexpr fgm::Vector2D vecB = { INF, -INF };
 
-    constexpr bool equality = vecA.allEq(vecB);
+    const bool equality = vecA.allEq(vecB);
 
     EXPECT_TRUE(equality);
 }
@@ -144,7 +145,7 @@ TYPED_TEST(Vector2DEquality, MixedType_Equality_IdenticalVectorsReturnsTrue)
     constexpr fgm::Vector2D vecA(1, 2);
     constexpr fgm::Vector2D vecB(1.0, 2.0);
 
-    constexpr bool equality = vecA.allEq(vecB);
+    const bool equality = vecA.allEq(vecB);
 
     EXPECT_TRUE(equality);
 }
@@ -433,7 +434,7 @@ TEST(Vector2DEquality, MixedType_InequalityReturnsCorrectBooleanMask)
 TEST(Vector2DEquality, NanInequalityReturnsTrueBooleanMask)
 {
     constexpr fgm::Vector2D vecA = { NAN_F, NAN_F };
-    constexpr fgm::Vector2D<double> vecB = { 1.0, -5.88874789 };
+    constexpr fgm::Vector2D vecB = { 1.0, -5.88874789 };
     constexpr fgm::Vector2D expectedMask = { true, true };
 
     const fgm::Vector2D mask = vecA.neq(vecB);

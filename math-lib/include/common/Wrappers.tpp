@@ -26,16 +26,16 @@ namespace fgm
             if constexpr (std::is_floating_point_v<T>)
             {
 // In MSVC, taking abs with NaN returns wrong results, so an explicit check is required.
-#ifdef _MSC_VER
-                if constexpr (isnan(num))
-                    return num;
-#endif
+//#ifdef _MSC_VER
+//                if (isnan(num))
+//                    return num;
+//#endif
                 if constexpr (sizeof(T) == 4)
                 {
                     auto bits = std::bit_cast<std::uint32_t>(num);
                     return std::bit_cast<T>(bits & 0x7FFFFFFFu);
                 }
-                else if (sizeof(T) == 8)
+                else if constexpr (sizeof(T) == 8)
                 {
                     auto bits = std::bit_cast<std::uint64_t>(num);
                     return std::bit_cast<T>(bits & 0x7FFFFFFFFFFFFFFFull);
@@ -66,6 +66,21 @@ namespace fgm
             {
                 // noinspection CppEqualOperandsInBinaryExpression
                 return num != num;
+                //if constexpr (std::is_floating_point_v<T>)
+                //{
+                //    if constexpr (sizeof(T) == 4)
+                //    {
+                //        auto bits = std::bit_cast<uint32_t>(num);
+                //        return NAN_DOUBLE_WORD & bits == NAN_DOUBLE_WORD;
+                //    }
+                //    else if constexpr (sizeof(T) == 8)
+                //    {
+                //        auto bits = std::bit_cast<uint64_t>(num);
+                //        return NAN_QUAD_WORD & bits == NAN_QUAD_WORD;
+                //    }
+                //    return num != num;
+                //}
+                //return num != num;
             }
             return std::isnan(num);
         }
