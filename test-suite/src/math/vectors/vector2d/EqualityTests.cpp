@@ -143,7 +143,7 @@ TYPED_TEST(Vector2DEquality, MixedType_Equality_IdenticalVectorsReturnsTrue)
     constexpr fgm::Vector2D vecA(1, 2);
     constexpr fgm::Vector2D vecB(1.0, 2.0);
 
-    const bool equality = vecA.allEq(vecB);
+    constexpr bool equality = vecA.allEq(vecB);
 
     EXPECT_TRUE(equality);
 }

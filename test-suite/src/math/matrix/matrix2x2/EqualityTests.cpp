@@ -54,35 +54,35 @@ TYPED_TEST_SUITE(Matrix2DEquality, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
-namespace 
+namespace
 {
 
     constexpr fgm::Matrix2D MAT1(1, 2, 3, 4);
     constexpr fgm::Matrix2D MAT2(1, 2, 3, 4);
     constexpr fgm::Matrix2D MAT3(4, 2, 2, 4);
     constexpr fgm::Matrix2D NAN_MAT(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN);
-    constexpr fgm::Matrix2D INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, -fgm::constants::INFINITY_F,
-                                    fgm::constants::INFINITY_F);
+    constexpr fgm::Matrix2D INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                                     -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
     constexpr fgm::Matrix2D INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                    -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
-
+                                     -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
+    // Add polyfill workarounds to static wrappers
     /** @brief Verify that matrix equality check is available at compile time. */
-    namespace 
+    namespace
     {
         // Member functions
         static_assert(MAT1.allEq(MAT2) == true);
         static_assert(MAT1.allEq(MAT3) == false);
-//        static_assert(NAN_MAT.allEq(MAT1) == false);
-        //static_assert(INF_MAT1.allEq(INF_MAT2) == true);
+        static_assert(NAN_MAT.allEq(MAT1) == false);
+        static_assert(INF_MAT1.allEq(INF_MAT2) == true);
 
 
         // Static functions
         static_assert(fgm::Matrix2D<int>::allEq(MAT1, MAT2) == true);
         static_assert(fgm::Matrix2D<int>::allEq(MAT1, MAT3) == false);
 //        static_assert(fgm::Matrix2D<int>::allEq(MAT1, NAN_MAT) == false);
-        //static_assert(fgm::Matrix2D<float>::allEq(INF_MAT1, INF_MAT2) == true);
+        static_assert(fgm::Matrix2D<float>::allEq(INF_MAT1, INF_MAT2) == true);
 
-    }
+    } // namespace
 
 
     /** @brief Verify that matrix inequality check is available at compile time. */
@@ -91,18 +91,18 @@ namespace
         // Member functions
         static_assert(MAT1.anyNeq(MAT2) == false);
         static_assert(MAT1.anyNeq(MAT3) == true);
-        //static_assert(NAN_MAT.anyNeq(MAT1) == true);
+//        static_assert(NAN_MAT.anyNeq(MAT1) == true);
         static_assert(INF_MAT1.anyNeq(INF_MAT2) == false);
 
 
         // Static functions
         static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT2) == false);
         static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT3) == true);
-        //static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, NAN_MAT) == true);
+//         static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, NAN_MAT) == true);
         static_assert(fgm::Matrix2D<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
 
     } // namespace
-}
+} // namespace
 
 
 /**************************************
@@ -208,46 +208,46 @@ TYPED_TEST(Matrix2DEquality, MixedType_Equality_DifferentMatricesReturnFalse)
 
 
 /** @test Verify that the equality operator returns true for identical matrices. */
- TYPED_TEST(Matrix2DEquality, EqualityOperator_IdenticalMatricesReturnTrue)
+TYPED_TEST(Matrix2DEquality, EqualityOperator_IdenticalMatricesReturnTrue)
 {
-     const bool equality = this->_eqMatA == this->_eqMatB;
+    const bool equality = this->_eqMatA == this->_eqMatB;
 
-     EXPECT_TRUE(equality);
- }
+    EXPECT_TRUE(equality);
+}
 
 
 
 /** @test Verify that the equality operator returns false if any component differ. */
- TYPED_TEST(Matrix2DEquality, EqualityOperator_DifferentMatricesReturnFalse)
+TYPED_TEST(Matrix2DEquality, EqualityOperator_DifferentMatricesReturnFalse)
 {
-     const bool equality = this->_eqMatA == this->_dissimilarMat;
+    const bool equality = this->_eqMatA == this->_dissimilarMat;
 
-     EXPECT_FALSE(equality);
- }
+    EXPECT_FALSE(equality);
+}
 
 
 /** @test Verify that the equality operator works for bool matrix with identical components. */
- TEST(Matrix2DEquality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
+TEST(Matrix2DEquality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
 {
-     constexpr fgm::Matrix2D matA(true, false, true, false);
-     constexpr fgm::Matrix2D matB(true, false, true, false);
+    constexpr fgm::Matrix2D matA(true, false, true, false);
+    constexpr fgm::Matrix2D matB(true, false, true, false);
 
-     constexpr bool equality = matA == matB;
+    constexpr bool equality = matA == matB;
 
-     EXPECT_TRUE(equality);
- }
+    EXPECT_TRUE(equality);
+}
 
 
 /** @test Verify that the equality operator works for bool matrix with different components. */
- TEST(Matrix2DEquality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
+TEST(Matrix2DEquality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
 {
-     constexpr fgm::Matrix2D matA(true, false, false, true);
-     constexpr fgm::Matrix2D matB(true, true, false, true);
+    constexpr fgm::Matrix2D matA(true, false, false, true);
+    constexpr fgm::Matrix2D matB(true, true, false, true);
 
-     constexpr bool equality = matA == matB;
+    constexpr bool equality = matA == matB;
 
-     EXPECT_FALSE(equality);
- }
+    EXPECT_FALSE(equality);
+}
 
 /** @} */
 
@@ -269,7 +269,7 @@ TYPED_TEST(Matrix2DEquality, MixedType_Equality_DifferentMatricesReturnFalse)
 TYPED_TEST(Matrix2DEquality, Inequality_IdenticalMatricesReturnFalse)
 {
     const bool inequality = this->_eqMatA.anyNeq(this->_eqMatB);
-        
+
     EXPECT_FALSE(inequality);
 }
 
@@ -304,7 +304,7 @@ TYPED_TEST(Matrix2DEquality, StaticWrapper_Inequality_DifferentMatricesReturnTru
 /** @test Verify that @ref fgm::Matrix2D::anyNeq follows IEEE 754 for NaN comparisons. */
 TEST(Matrix2DEquality, NanInequalityReturnsTrue)
 {
-    constexpr fgm::Matrix2D matA( NAN_F, NAN_F, NAN_F, NAN_F );
+    constexpr fgm::Matrix2D matA(NAN_F, NAN_F, NAN_F, NAN_F);
     constexpr fgm::Matrix2D matB(1.0f, -5.88874789f, INF, -INF);
 
     const bool inequality = matA.anyNeq(matB);
@@ -362,44 +362,44 @@ TYPED_TEST(Matrix2DEquality, MixedType_Inequality_DifferentMatricesReturnTrue)
 
 
 /** @test Verify that the operator returns false for identical matrices. */
- TYPED_TEST(Matrix2DEquality, InEqualityOperator_IdenticalMatricesReturnFalse)
+TYPED_TEST(Matrix2DEquality, InEqualityOperator_IdenticalMatricesReturnFalse)
 {
-     const bool inequality = this->_eqMatA != this->_eqMatB;
+    const bool inequality = this->_eqMatA != this->_eqMatB;
 
-     EXPECT_FALSE(inequality);
- }
+    EXPECT_FALSE(inequality);
+}
 
 
 /** @test Verify that the inequality operator returns true for different matrices. */
- TYPED_TEST(Matrix2DEquality, InEqualityOperator_DifferentMatricesReturnTrue)
+TYPED_TEST(Matrix2DEquality, InEqualityOperator_DifferentMatricesReturnTrue)
 {
-     const bool inequality = this->_eqMatA != this->_dissimilarMat;
+    const bool inequality = this->_eqMatA != this->_dissimilarMat;
 
-     EXPECT_TRUE(inequality);
- }
+    EXPECT_TRUE(inequality);
+}
 
 
 /** @test Verify that the inequality operator works for @ref fgm::Matrix2D<bool> with identical components. */
- TEST(Matrix2DEquality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
+TEST(Matrix2DEquality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 {
-     constexpr fgm::Matrix2D matA(true, false);
-     constexpr fgm::Matrix2D matB(true, false);
+    constexpr fgm::Matrix2D matA(true, false);
+    constexpr fgm::Matrix2D matB(true, false);
 
-     constexpr bool inequality = matA != matB;
+    constexpr bool inequality = matA != matB;
 
-     EXPECT_FALSE(inequality);
- }
+    EXPECT_FALSE(inequality);
+}
 
 
 /** @test Verify that the inequality operator works for @ref fgm::Matrix2D<bool> with different components. */
- TEST(Matrix2DEquality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
+TEST(Matrix2DEquality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
 {
-     constexpr fgm::Matrix2D matA(true, false, true, false);
-     constexpr fgm::Matrix2D matB(true, true, false, true);
+    constexpr fgm::Matrix2D matA(true, false, true, false);
+    constexpr fgm::Matrix2D matB(true, true, false, true);
 
-     constexpr bool inequality = matA != matB;
+    constexpr bool inequality = matA != matB;
 
-     EXPECT_TRUE(inequality);
- }
+    EXPECT_TRUE(inequality);
+}
 
 /** @} */
