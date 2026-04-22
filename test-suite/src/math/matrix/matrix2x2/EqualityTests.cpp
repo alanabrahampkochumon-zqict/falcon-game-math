@@ -232,7 +232,7 @@ TYPED_TEST(Matrix2DEquality, MixedType_Equality_DifferentMatricesReturnFalse)
      constexpr fgm::Matrix2D matA(true, false, true, false);
      constexpr fgm::Matrix2D matB(true, false, true, false);
 
-     const bool equality = matA == matB;
+     constexpr bool equality = matA == matB;
 
      EXPECT_TRUE(equality);
  }
@@ -244,7 +244,7 @@ TYPED_TEST(Matrix2DEquality, MixedType_Equality_DifferentMatricesReturnFalse)
      constexpr fgm::Matrix2D matA(true, false, false, true);
      constexpr fgm::Matrix2D matB(true, true, false, true);
 
-     const bool equality = matA == matB;
+     constexpr bool equality = matA == matB;
 
      EXPECT_FALSE(equality);
  }

@@ -12,10 +12,10 @@
 
 
 
-#include <iostream> // TODO: REMOVE
 #include "Vector2D.h"
 #include "common/Wrappers.tpp"
 
+#include <iostream> // TODO: REMOVE
 #include <type_traits>
 
 namespace fgm
@@ -192,17 +192,16 @@ namespace fgm
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] == rhs[0] && _data[1] == rhs[1];
         else
-            /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
+        /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
         {
-            // MSVC compile time evaluator has a bug where NaN's values return true at compile time.
-            // However, runtime evaluations are correct, to bypass the bug during compile time, 
-            // we add a check and if any element in the vector has a NaN,
-            // the equality returns false.
-            #ifdef _MSC_VER
+            // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+            // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+            // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+#ifdef _MSC_VER
             if (std::is_constant_evaluated())
                 if (hasNaN())
                     return false;
-            #endif
+#endif
             return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
                 (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
         }
@@ -223,7 +222,7 @@ namespace fgm
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] != rhs[0] || _data[1] != rhs[1];
         else
-        /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
+            /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
             return (_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon)) ||
                 (_data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon));
     }

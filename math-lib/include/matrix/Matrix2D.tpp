@@ -115,6 +115,14 @@ namespace fgm
     template <Arithmetic U>
     constexpr bool Matrix2D<T>::allEq(const Matrix2D<U>& rhs, const double epsilon) const noexcept
     {
+        // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+        // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+        // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+#ifdef _MSC_VER
+        if (std::is_constant_evaluated())
+            if (_data[0].hasNaN() || _data[1].hasNaN())
+                return false;
+#endif
         return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon);
     }
 
