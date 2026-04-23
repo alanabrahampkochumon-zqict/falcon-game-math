@@ -41,9 +41,9 @@ namespace fgm
          * @{
          */
 
-        using value_type = T;
+        using value_type = T; ///< The numeric type of the vector components.
 
-        static constexpr std::size_t dimension = 2;
+        static constexpr std::size_t dimension = 2; ///< The number of components of the vector.
 
         /** @} */
 

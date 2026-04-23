@@ -44,10 +44,11 @@ namespace fgm
          * @{
          */
 
-        static constexpr std::size_t columns = 2;
-        static constexpr std::size_t rows = 2;
+        using value_type = T; ///< The numeric type of the vector components.
 
-        using value_type = T;
+        static constexpr std::size_t columns = 2; ///< Matrix column count.
+        static constexpr std::size_t rows = 2;    ///< Matrix row count.
+
 
         /** @} */
 

@@ -2,7 +2,7 @@
 /**
  * @file Matrix3D.tpp
  * @author Alan Abraham P Kochumon
- * @date Created on: January 30, 2026
+ * @date Created on: February 15, 2026
  *
  * @brief @ref Matrix3D template implementation.
  * @details This file contains the definitions of the template members declared in Matrix3D.h

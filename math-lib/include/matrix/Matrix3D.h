@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file Matrix2D.h
+ * @file Matrix3D.h
  * @author Alan Abraham P Kochumon
  * @date Created on: February 15, 2026
  *
@@ -24,10 +24,9 @@
  */
 
 
-#include "../vector/Vector3D.h"
+#include "vector/Vector3D.h"
 
 #include <cstddef>
-#include <type_traits>
 
 namespace fgm
 {
@@ -39,10 +38,10 @@ namespace fgm
          * @{
          */
 
-        static constexpr std::size_t columns = 3;
-        static constexpr std::size_t rows = 3;
+        using value_type = T; ///< The numeric type of the vector components.
 
-        using value_type = T;
+        static constexpr std::size_t columns = 3; ///< Matrix column count.
+        static constexpr std::size_t rows = 3; ///< Matrix row count.
 
         /** @} */
 
