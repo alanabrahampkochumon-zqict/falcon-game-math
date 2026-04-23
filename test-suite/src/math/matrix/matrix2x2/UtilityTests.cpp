@@ -35,10 +35,10 @@ class Matrix2DNaNChecker: public ::testing::TestWithParam<Matrix2DUtilityParams<
 {};
 
 
-/** @brief Test fixture for @ref fgm::Matrix2D utilities, parameterized by @ref SupportedIntegralTypes */
 template <typename T>
 class Matrix2DIntegralUtility: public ::testing::Test
 {};
+/** @brief Test fixture for @ref fgm::Matrix2D utilities, parameterized by @ref SupportedIntegralTypes */
 TYPED_TEST_SUITE(Matrix2DIntegralUtility, SupportedIntegralTypes);
 
 
