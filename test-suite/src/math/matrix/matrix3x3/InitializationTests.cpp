@@ -28,7 +28,7 @@ protected:
         _diagonalElements = { T(2), T(0), T(0), T(0), T(3), T(0), T(0), T(0), T(5) };
         _col0 = { T(1), T(4), T(7) };
         _col1 = { T(2), T(5), T(8) };
-        _col1 = { T(3), T(6), T(9) };
+        _col2 = { T(3), T(6), T(9) };
         _diagonal0 = T(2);
         _diagonal1 = T(3);
         _diagonal2 = T(5);
@@ -38,11 +38,11 @@ protected:
 TYPED_TEST_SUITE(Matrix3DInitialization, SupportedTypes);
 
 
+
 /**
  * @addtogroup T_FGM_Mat3x3_Init
  * @{
  */
-
 
 /**************************************
  *                                    *
@@ -126,7 +126,9 @@ TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesDiagonalMa
 /** @brief Verify that a matrix can be initialized with implicit braced initialization. */
 TYPED_TEST(Matrix3DInitialization, CanBeConstructedWithBracedInitialization)
 {
-    const fgm::Matrix3D<TypeParam> matrix = { { TypeParam(1), TypeParam(3) }, { TypeParam(2), TypeParam(4) } };
+    const fgm::Matrix3D<TypeParam> matrix = { { TypeParam(1), TypeParam(4), TypeParam(7) },
+                                              { TypeParam(2), TypeParam(5), TypeParam(8) },
+                                              { TypeParam(3), TypeParam(6), TypeParam(9) } };
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 

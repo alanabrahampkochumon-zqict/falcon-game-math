@@ -70,19 +70,31 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector3D<T>& Matrix3D<T>::operator[](std::size_t col) noexcept {}
+    constexpr Vector3D<T>& Matrix3D<T>::operator[](std::size_t col) noexcept
+    {
+        return _data[col];
+    }
 
 
     template <Arithmetic T>
-    constexpr const Vector3D<T>& Matrix3D<T>::operator[](std::size_t col) const noexcept {}
+    constexpr const Vector3D<T>& Matrix3D<T>::operator[](std::size_t col) const noexcept
+    {
+        return _data[col];
+    }
 
 
     template <Arithmetic T>
-    constexpr T& Matrix3D<T>::operator()(std::size_t row, std::size_t col) noexcept {}
+    constexpr T& Matrix3D<T>::operator()(std::size_t row, std::size_t col) noexcept
+    {
+        return _data[col][row];
+    }
 
 
     template <Arithmetic T>
-    constexpr const T& Matrix3D<T>::operator()(std::size_t row, std::size_t col) const noexcept {}
+    constexpr const T& Matrix3D<T>::operator()(std::size_t row, std::size_t col) const noexcept
+    {
+        return _data[col][row];
+    }
 
 
     // template <typename T>
