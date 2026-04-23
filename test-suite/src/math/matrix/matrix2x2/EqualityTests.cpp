@@ -15,9 +15,9 @@
 #include <common/Constants.h>
 
 
+
 constexpr auto NAN_F = fgm::constants::NaN;
 constexpr auto INF = fgm::constants::INFINITY_F;
-
 
 
 template <typename T>
@@ -36,9 +36,10 @@ protected:
         _dissimilarMat = { { T(1.1234568789), T(4.5238852912) }, { T(3.1234568789), T(6.123458319) } };
     }
 };
-
-/** @brief Test fixture for @ref fgm::Matrix2D equality and inequality checks, parameterized by @ref
- * SupportedArithmeticTypes. */
+/** 
+ * @brief Test fixture for @ref fgm::Matrix2D equality and inequality checks, parameterized by 
+ *        @ref SupportedArithmeticTypes.
+ */
 TYPED_TEST_SUITE(Matrix2DEquality, SupportedArithmeticTypes);
 
 
@@ -65,7 +66,8 @@ namespace
                                      -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
     constexpr fgm::Matrix2D INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                      -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
-    // Add polyfill workarounds to static wrappers
+
+
     /** @brief Verify that matrix equality check is available at compile time. */
     namespace
     {
@@ -84,30 +86,12 @@ namespace
 
     } // namespace
 
-
-    /** @brief Verify that matrix inequality check is available at compile time. */
-    namespace
-    {
-        // Member functions
-        static_assert(MAT1.anyNeq(MAT2) == false);
-        static_assert(MAT1.anyNeq(MAT3) == true);
-        static_assert(NAN_MAT.anyNeq(MAT1) == true);
-        static_assert(INF_MAT1.anyNeq(INF_MAT2) == false);
-
-
-        // Static functions
-        static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT2) == false);
-        static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT3) == true);
-        static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, NAN_MAT) == true);
-        static_assert(fgm::Matrix2D<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
-
-    } // namespace
 } // namespace
 
 
 /**************************************
  *                                    *
- *           EQUALITY TESTS           *
+ *           RUNTIME TESTS            *
  *                                    *
  **************************************/
 
@@ -260,10 +244,35 @@ TEST(Matrix2DEquality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
 
 /**************************************
  *                                    *
- *          INEQUALITY TESTS          *
+ *           STATIC TESTS             *
  *                                    *
  **************************************/
 
+/** @brief Verify that matrix inequality check is available at compile time. */
+namespace
+{
+    // Member functions
+    static_assert(MAT1.anyNeq(MAT2) == false);
+    static_assert(MAT1.anyNeq(MAT3) == true);
+    static_assert(NAN_MAT.anyNeq(MAT1) == true);
+    static_assert(INF_MAT1.anyNeq(INF_MAT2) == false);
+
+
+    // Static functions
+    static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT2) == false);
+    static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, MAT3) == true);
+    static_assert(fgm::Matrix2D<int>::anyNeq(MAT1, NAN_MAT) == true);
+    static_assert(fgm::Matrix2D<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
+
+} // namespace
+
+
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
 
 /** @test Verify that @ref fgm::Matrix2D::anyNeq returns false for identical matrices. */
 TYPED_TEST(Matrix2DEquality, Inequality_IdenticalMatricesReturnFalse)
@@ -307,7 +316,7 @@ TEST(Matrix2DEquality, NanInequalityReturnsTrue)
     constexpr fgm::Matrix2D matA(NAN_F, NAN_F, NAN_F, NAN_F);
     constexpr fgm::Matrix2D matB(1.0f, -5.88874789f, INF, -INF);
 
-    const bool inequality = matA.anyNeq(matB);
+    constexpr bool inequality = matA.anyNeq(matB);
 
     EXPECT_TRUE(inequality);
 }
@@ -331,7 +340,7 @@ TEST(Matrix2DEquality, InfinityInequality_DifferentMatricesReturnTrue)
     constexpr fgm::Matrix2D matA(-INF, INF, INF, -INF);
     constexpr fgm::Matrix2D matB(INF, INF, -INF, -INF);
 
-    const bool inequality = matA.anyNeq(matB);
+    constexpr bool inequality = matA.anyNeq(matB);
 
     EXPECT_TRUE(inequality);
 }
