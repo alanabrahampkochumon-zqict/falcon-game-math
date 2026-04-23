@@ -191,25 +191,24 @@ namespace fgm
 
         /** @} */
 
+
+
         /**
-         * @addtogroup FGM_Vec3_Equality
+         * @addtogroup FGM_Mat2x2_Equality
          * @{
          */
-
-        /***************************************
-         *                                     *
-         *             EQUALITY                *
-         *                                     *
-         ***************************************/
 
         /**
          * @brief Compare all elements of this matrix for equality with another matrix.
          *        Perform an element-wise comparison and returns true only if every element pair
          *        satisfies the equality condition within the given @p epsilon.
          *
+         * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
+         *       during static evaluation.
+         *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *
-         * @param[in] rhs     The vector to compare against.
+         * @param[in] rhs     The matrix to compare against.
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
@@ -226,6 +225,9 @@ namespace fgm
          * @brief Compare all elements of a matrix for equality with another matrix.
          *        Perform an element-wise comparison and returns true only if every element pair
          *        satisfies the equality condition within the given @p epsilon.
+         *
+         * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
+         *       during static evaluation.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *
@@ -249,6 +251,9 @@ namespace fgm
          *        Perform an element-wise comparison and returns true if any corresponding elements differ by more
          *        than @p epsilon.
          *
+         * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
+         *       during static evaluation.
+         *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *
          * @param[in] rhs     The matrix to compare against.
@@ -268,6 +273,9 @@ namespace fgm
          * @brief Compare all elements of this matrix for equality with another matrix.
          *        Perform an element-wise comparison and returns true if any corresponding elements differ by more
          *        than @p epsilon.
+         *
+         * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
+         *       during static evaluation.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *
@@ -289,6 +297,9 @@ namespace fgm
         /**
          * @copybrief allEq(const Matrix2D<U>&, double) const noexcept
          *
+         * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
+         *       during static evaluation.
+         *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *
          * @param[in] rhs The matrix to compare against.
@@ -301,6 +312,9 @@ namespace fgm
 
         /**
          * @copybrief anyNeq(const Vector2D<U>&, double) const noexcept
+         *
+         * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
+         *       during static evaluation.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref Arithmetic.
          *

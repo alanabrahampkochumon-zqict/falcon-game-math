@@ -118,6 +118,38 @@ namespace fgm
     }
 
 
+
+    /***************************************
+     *                                     *
+     *             EQUALITY                *
+     *                                     *
+     ***************************************/
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix3D<T>::allEq(const Matrix3D<U>& rhs, double epsilon) const noexcept {}
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix3D<T>::allEq(const Matrix3D& lhs, const Matrix3D<U>& rhs, double epsilon) noexcept {}
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix3D<T>::anyNeq(const Matrix3D<U>& rhs, double epsilon) const noexcept {}
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix3D<T>::anyNeq(const Matrix3D& lhs, const Matrix3D<U>& rhs, double epsilon) noexcept {}
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix3D<T>::operator==(const Matrix3D<U>& rhs) const noexcept {}
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+    constexpr bool Matrix3D<T>::operator!=(const Matrix3D<U>& rhs) const noexcept {}
+
+
     // template <typename T>
     // Matrix3D<T>::Matrix3D()
     //{
