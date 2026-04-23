@@ -160,6 +160,38 @@ namespace fgm
 
 
 
+        /**
+         * @addtogroup T_FGM_Mat3x3_Constant
+         * @{
+         */
+
+        /**************************************
+         *                                    *
+         *             CONSTANTS              *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
+         *
+         * @note Only available for @ref StrictArithmetic types.
+         *
+         * @return A 3D identity matrix.
+         */
+        [[nodiscard]] static constexpr Matrix3D eye() noexcept;
+
+
+        /**
+         * @brief A 3D matrix with all zero elements.
+         *
+         * @note Only available for @ref StrictArithmetic types.
+         *
+         * @return A 3D zero matrix.
+         */
+        [[nodiscard]] static constexpr Matrix3D zero() noexcept;
+
+        /** @} */
+
         // template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>> // Added 'typename' and ', int'
         // Matrix3D(const Matrix3D<S>& other)
         //{

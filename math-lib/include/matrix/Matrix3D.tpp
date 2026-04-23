@@ -97,6 +97,27 @@ namespace fgm
     }
 
 
+
+    /**************************************
+     *                                    *
+     *             CONSTANTS              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr Matrix3D<T> Matrix3D<T>::eye() noexcept
+    {
+        return Matrix3(T(1), T(1), T(1));
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix3D<T> Matrix3D<T>::zero() noexcept
+    {
+        return Matrix3(T(0), T(0), T(0));
+    }
+
+
     // template <typename T>
     // Matrix3D<T>::Matrix3D()
     //{
