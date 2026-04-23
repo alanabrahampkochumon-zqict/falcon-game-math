@@ -127,27 +127,65 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Matrix3D<T>::allEq(const Matrix3D<U>& rhs, double epsilon) const noexcept {}
+    constexpr bool Matrix3D<T>::allEq(const Matrix3D<U>& rhs, double epsilon) const noexcept
+    {
+        // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+        // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+        // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+#ifdef _MSC_VER
+        if (std::is_constant_evaluated())
+            if (hasNaN() || rhs.hasNaN())
+                return false;
+#endif
+        return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon) && _data[2].allEq(rhs[2], epsilon);
+    }
+
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Matrix3D<T>::allEq(const Matrix3D& lhs, const Matrix3D<U>& rhs, double epsilon) noexcept {}
+    constexpr bool Matrix3D<T>::allEq(const Matrix3D& lhs, const Matrix3D<U>& rhs, double epsilon) noexcept
+    {
+        return lhs.allEq(rhs, epsilon);
+    }
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Matrix3D<T>::anyNeq(const Matrix3D<U>& rhs, double epsilon) const noexcept {}
+    constexpr bool Matrix3D<T>::anyNeq(const Matrix3D<U>& rhs, double epsilon) const noexcept
+    {
+        // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+        // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+        // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+#ifdef _MSC_VER
+        if (std::is_constant_evaluated())
+            if (hasNaN() || rhs.hasNaN())
+                return true;
+#endif
+        return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon) || _data[2].anyNeq(rhs[2], epsilon);
+    }
+
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Matrix3D<T>::anyNeq(const Matrix3D& lhs, const Matrix3D<U>& rhs, double epsilon) noexcept {}
+    constexpr bool Matrix3D<T>::anyNeq(const Matrix3D& lhs, const Matrix3D<U>& rhs, double epsilon) noexcept
+    {
+        return lhs.anyNeq(rhs, epsilon);
+    }
+
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Matrix3D<T>::operator==(const Matrix3D<U>& rhs) const noexcept {}
+    constexpr bool Matrix3D<T>::operator==(const Matrix3D<U>& rhs) const noexcept
+    {
+        return allEq(rhs);
+    }
+
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Matrix3D<T>::operator!=(const Matrix3D<U>& rhs) const noexcept {}
+    constexpr bool Matrix3D<T>::operator!=(const Matrix3D<U>& rhs) const noexcept
+    {
+        return anyNeq(rhs);
+    }
 
 
     // template <typename T>
