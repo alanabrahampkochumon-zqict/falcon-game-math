@@ -13,7 +13,7 @@ set(GeneralFiles "SimdTraits.h;DoxygenGroups.h")
 list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
 
 set(CommonDirectory "${IncludeDirectory}common/")
-set(CommonHeaderFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h;Wrappers.h")
+set(CommonHeaderFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h;Wrappers.h;PreprocessorDefinitions.h")
 list(TRANSFORM CommonHeaderFiles PREPEND ${CommonDirectory})
 set(CommonTemplateFiles "Wrappers.tpp;")
 list(TRANSFORM CommonTemplateFiles PREPEND ${CommonDirectory})

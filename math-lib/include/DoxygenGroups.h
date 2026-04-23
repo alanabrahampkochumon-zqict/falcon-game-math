@@ -182,6 +182,12 @@
      * @ingroup FGM_Math
      */
 
+    /**
+     * @defgroup FGM_Macro Preprocessor Macros
+     * @brief Preprocessor macro for assertions and compiler intrinsic debug breaks.
+     * @ingroup FGM_Math
+     */
+
 /** @} */ // End of FGM_Math
 
 // clang-format on
