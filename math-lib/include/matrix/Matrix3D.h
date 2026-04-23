@@ -41,7 +41,7 @@ namespace fgm
         using value_type = T; ///< The numeric type of the vector components.
 
         static constexpr std::size_t columns = 3; ///< Matrix column count.
-        static constexpr std::size_t rows = 3; ///< Matrix row count.
+        static constexpr std::size_t rows = 3;    ///< Matrix row count.
 
         /** @} */
 
@@ -334,7 +334,7 @@ namespace fgm
          * @note Only available for @ref StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Matrix2D<T> eye(T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1));
+        inline constexpr Matrix3D<T> eye(T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1));
 
 
         /**
@@ -343,7 +343,7 @@ namespace fgm
          * @note Only available for @ref StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Matrix2D<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0));
+        inline constexpr Matrix3D<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0));
     } // namespace mat3d
 
     /** @} */
