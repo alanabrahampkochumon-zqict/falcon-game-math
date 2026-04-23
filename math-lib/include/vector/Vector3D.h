@@ -52,12 +52,6 @@ namespace fgm
          * @{
          */
 
-        /*************************************
-         *                                   *
-         *            INITIALIZERS           *
-         *                                   *
-         *************************************/
-
         /** @brief Initialize @ref Vector3D with zeros. */
         [[nodiscard]] constexpr Vector3D() noexcept;
 
@@ -334,12 +328,6 @@ namespace fgm
          * @{
          */
 
-        /***************************************
-         *                                     *
-         *             EQUALITY                *
-         *                                     *
-         ***************************************/
-
         /**
          * @brief Compare all components of this vector for equality with another vector.
          *        Perform a component-wise comparison and returns true only if every element pair
@@ -549,12 +537,6 @@ namespace fgm
          * @{
          */
 
-        /***************************************
-         *                                     *
-         *            COMPARISONS              *
-         *                                     *
-         ***************************************/
-
         /**
          * @brief Perform component-wise greater-than comparison.
          *        Compare each component pair and returns a boolean mask.
@@ -730,12 +712,6 @@ namespace fgm
          * @{
          */
 
-        /***************************************
-         *                                     *
-         *      BOOLEAN BITWISE OPERATORS      *
-         *                                     *
-         ***************************************/
-
         /**
          * @brief Perform component-wise logical AND.
          *        Compute the conjunction of each component pair.
@@ -810,12 +786,6 @@ namespace fgm
          * @addtogroup FGM_Vec3_Arithmetic
          * @{
          */
-
-        /*************************************
-         *                                   *
-         *      ARITHMETIC OPERATORS         *
-         *                                   *
-         *************************************/
 
         /**
          * @brief Add two vectors component-wise.

@@ -45,11 +45,7 @@ namespace fgm
 
         /** @} */
 
-    //private:
-    //    union {
-    //        T elements[3][3];
-    //        Vector3D<T> columns[3];
-    //    };
+
 
         /**
          * @addtogroup FGM_Mat3x3_Init
@@ -108,9 +104,14 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] explicit constexpr Matrix3D(const Matrix3D<U>& other) noexcept;
 
+        /** @} */
 
 
 
+        /**
+         * @addtogroup FGM_Mat3x3_Access
+         * @{
+         */
 
         /**
          * @brief Access the column vector at the specified location.

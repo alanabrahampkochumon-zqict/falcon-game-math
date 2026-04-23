@@ -103,6 +103,14 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] explicit constexpr Matrix2D(const Matrix2D<U>& other) noexcept;
 
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Mat3x3_Access
+         * @{
+         */
 
         /**
          * @brief Access the column vector at the specified location.
