@@ -62,6 +62,29 @@ namespace fgm
     }
 
 
+
+    /*************************************
+     *                                   *
+     *            ACCESSORS              *
+     *                                   *
+     *************************************/
+
+    template <Arithmetic T>
+    constexpr Vector3D<T>& Matrix3D<T>::operator[](std::size_t col) noexcept {}
+
+
+    template <Arithmetic T>
+    constexpr const Vector3D<T>& Matrix3D<T>::operator[](std::size_t col) const noexcept {}
+
+
+    template <Arithmetic T>
+    constexpr T& Matrix3D<T>::operator()(std::size_t row, std::size_t col) noexcept {}
+
+
+    template <Arithmetic T>
+    constexpr const T& Matrix3D<T>::operator()(std::size_t row, std::size_t col) const noexcept {}
+
+
     // template <typename T>
     // Matrix3D<T>::Matrix3D()
     //{

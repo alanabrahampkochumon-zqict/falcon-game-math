@@ -55,12 +55,6 @@ namespace fgm
          * @{
          */
 
-        /*************************************
-         *                                   *
-         *            INITIALIZERS           *
-         *                                   *
-         *************************************/
-
         /** @brief Initialize @ref Vector2D with zeros. */
         [[nodiscard]] constexpr Vector2D() noexcept;
 
@@ -83,14 +77,15 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector2D(const Vector2D<U>& other) noexcept;
+        
+        /** @} */
 
 
 
-        /*************************************
-         *                                   *
-         *            ACCESSORS              *
-         *                                   *
-         *************************************/
+        /**
+         * @addtogroup FGM_Vec2_Access
+         * @{
+         */
 
         /**************************************
          *                                    *
@@ -274,12 +269,6 @@ namespace fgm
          * @addtogroup FGM_Vec2_Equality
          * @{
          */
-
-        /***************************************
-         *                                     *
-         *             EQUALITY                *
-         *                                     *
-         ***************************************/
 
         /**
          * @brief Compare all components of this vector for equality with another vector.
@@ -490,12 +479,6 @@ namespace fgm
          * @{
          */
 
-        /***************************************
-         *                                     *
-         *            COMPARISONS              *
-         *                                     *
-         ***************************************/
-
         /**
          * @brief Perform component-wise greater-than comparison.
          *        Compare each component pair and returns a boolean mask.
@@ -672,12 +655,6 @@ namespace fgm
          * @{
          */
 
-        /***************************************
-         *                                     *
-         *      BOOLEAN BITWISE OPERATORS      *
-         *                                     *
-         ***************************************/
-
         /**
          * @brief Perform component-wise logical AND.
          *        Compute the conjunction of each component pair.
@@ -753,12 +730,6 @@ namespace fgm
          * @addtogroup FGM_Vec2_Arithmetic
          * @{
          */
-
-        /*************************************
-         *                                   *
-         *      ARITHMETIC OPERATORS         *
-         *                                   *
-         *************************************/
 
         /**
          * @brief Add two vectors component-wise.

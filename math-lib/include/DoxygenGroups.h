@@ -37,7 +37,8 @@
              * @ingroup FGM_Vectors
              * @{
              *   @defgroup FGM_Vec2_Members Class Members
-             *   @defgroup FGM_Vec2_Init Accessors and Initializers
+             *   @defgroup FGM_Vec2_Init Constructors
+             *   @defgroup FGM_Vec2_Access Accessors
              *   @defgroup FGM_Vec2_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Vec2_Bitwise Boolean Bitwise Operations
              *   @defgroup FGM_Vec2_Equality Equality
@@ -59,7 +60,8 @@
              * @ingroup FGM_Vectors
              * @{
              *   @defgroup FGM_Vec3_Members Class Members
-             *   @defgroup FGM_Vec3_Init Accessors and Initializers
+             *   @defgroup FGM_Vec3_Init Constructors
+             *   @defgroup FGM_Vec3_Access Accessors
              *   @defgroup FGM_Vec3_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Vec3_Bitwise Boolean Bitwise Operations
              *   @defgroup FGM_Vec3_Equality Equality
@@ -81,7 +83,8 @@
              * @ingroup FGM_Vectors
              * @{
              *   @defgroup FGM_Vec4_Members Class Members
-             *   @defgroup FGM_Vec4_Init Accessors and Initializers
+             *   @defgroup FGM_Vec4_Init Constructors
+             *   @defgroup FGM_Vec4_Access Accessors
              *   @defgroup FGM_Vec4_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Vec4_Bitwise Boolean Bitwise Operations
              *   @defgroup FGM_Vec4_Equality Equality
@@ -112,7 +115,8 @@
              * @ingroup FGM_Matrices
              * @{
              *   @defgroup FGM_Mat2x2_Members Class Members
-             *   @defgroup FGM_Mat2x2_Init Accessors and Initializers
+             *   @defgroup FGM_Mat2x2_Init Constructors
+             *   @defgroup FGM_Mat2x2_Access Accessors
              *   @defgroup FGM_Mat2x2_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Mat2x2_Algebra Matrix Algebra
              *   @defgroup FGM_Mat2x2_Equality Equality
@@ -131,7 +135,8 @@
              * @ingroup FGM_Matrices
              * @{
              *   @defgroup FGM_Mat3x3_Members Class Members
-             *   @defgroup FGM_Mat3x3_Init Accessors and Initializers
+             *   @defgroup FGM_Mat3x3_Init Constructors
+             *   @defgroup FGM_Mat3x3_Access Accessors
              *   @defgroup FGM_Mat3x3_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Mat3x3_Algebra Matrix Algebra
              *   @defgroup FGM_Mat3x3_Equality Equality

@@ -100,14 +100,14 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector3D(const Vector3D<U>& other) noexcept;
 
+        /** @} */
 
 
-        /*************************************
-         *                                   *
-         *            ACCESSORS              *
-         *                                   *
-         *************************************/
 
+        /**
+         * @addtogroup FGM_Vec3_Access
+         * @{
+         */
 
         /**************************************
          *                                    *
