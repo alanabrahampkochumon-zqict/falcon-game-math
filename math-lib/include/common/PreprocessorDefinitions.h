@@ -34,7 +34,7 @@
  * @brief Asserts a condition is `true`, breaking into the debugger with a custom message if `false`.
  *
  * @note This macro is strictly active only in **Debug** builds. In **Release** builds
- *       (when `NDEBUG` is defined), it evaporates into a zero-cost void cast.
+ *       (when `NDEBUG` is defined), it expands into a zero-cost void cast.
  *
  * @param condition The boolean expression to evaluate.
  * @param message   A string literal or streamable object providing context on the failure.
@@ -61,7 +61,7 @@
  * @brief Asserts a condition is `true`, breaking into the debugger if `false`.
  *
  * @note This macro is strictly active only in **Debug** builds. In **Release** builds
- *       (when `NDEBUG` is defined), it evaporates into a zero-cost void cast.
+ *       (when `NDEBUG` is defined), it expands into a zero-cost void cast.
  *
  * @param condition The boolean expression to evaluate.
  */
