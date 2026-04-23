@@ -51,7 +51,6 @@ namespace fgm
     //        Vector3D<T> columns[3];
     //    };
 
-    public:
         /**
          * @addtogroup FGM_Mat3x3_Init
          * @{
@@ -241,6 +240,8 @@ namespace fgm
         Vector3D<T> _data[columns];
     };
 
+
+
     // template <typename T, typename S, typename = std::enable_if_t<std::is_arithmetic_v<T>>,
     //           typename = std::enable_if_t<std::is_arithmetic_v<S>>>
     // auto operator*(const S& scalar, const Matrix3D<T>& matrix) -> Matrix3D<std::common_type_t<T, S>>;
@@ -280,5 +281,6 @@ namespace fgm
 
 
 }; // namespace fgm
+
 
 #include "Matrix3D.tpp"
