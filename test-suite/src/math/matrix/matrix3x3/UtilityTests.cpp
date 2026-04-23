@@ -56,35 +56,36 @@ TYPED_TEST_SUITE(Matrix3DIntegralUtility, SupportedIntegralTypes);
 
 namespace
 {
-    [[maybe_unused]] constexpr fgm::Matrix3D INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f);
-    [[maybe_unused]] constexpr fgm::Matrix3D NAN_MAT(fgm::constants::NaN, 1.0f, 1.0f);
-    [[maybe_unused]] constexpr fgm::Matrix3D MAT(1.0f, 1.0f, 1.0f);
+    constexpr fgm::Matrix3D INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f);
+    constexpr fgm::Matrix3D NAN_MAT(fgm::constants::NaN, 1.0f, 1.0f);
+    constexpr fgm::Matrix3D MAT(1.0f, 1.0f, 1.0f);
 
 
     /** @brief Verify that the matrix hasNaN utility is available at compile time. */
     namespace
     {
-        //// Member functions
-        // static_assert(NAN_MAT.hasNaN() == true);
-        // static_assert(MAT.hasNaN() == false);
+        // Member functions
+        static_assert(NAN_MAT.hasNaN() == true);
+        static_assert(MAT.hasNaN() == false);
 
-        //// Static functions
-        // static_assert(fgm::Matrix3D<float>::hasNaN(NAN_MAT) == true);
-        // static_assert(fgm::Matrix3D<float>::hasNaN(MAT) == false);
+        // Static functions
+         static_assert(fgm::Matrix3D<float>::hasNaN(NAN_MAT) == true);
+         static_assert(fgm::Matrix3D<float>::hasNaN(MAT) == false);
     } // namespace
 
 
     /** @brief Verify that the matrix hasInf utility is available at compile time. */
     namespace
     {
-        //// Member functions
-        // static_assert(INF_MAT.hasNaN() == true);
-        // static_assert(MAT.hasNaN() == false);
+        // Member functions
+         static_assert(INF_MAT.hasInf() == true);
+        static_assert(MAT.hasInf() == false);
 
-        //// Static functions
-        // static_assert(fgm::Matrix3D<float>::hasNaN(INF_MAT) == true);
-        // static_assert(fgm::Matrix3D<float>::hasNaN(MAT) == false);
+        // Static functions
+        static_assert(fgm::Matrix3D<float>::hasInf(INF_MAT) == true);
+        static_assert(fgm::Matrix3D<float>::hasInf(MAT) == false);
     } // namespace
+
 } // namespace
 
 
