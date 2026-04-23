@@ -315,6 +315,38 @@ namespace fgm
 
 
 
+    /**
+     * @addtogroup T_FGM_Mat3x3_Constant
+     * @{
+     */
+
+    /**************************************
+     *                                    *
+     *             CONSTANTS              *
+     *                                    *
+     **************************************/
+
+    namespace mat3d
+    {
+        /**
+         * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
+         *
+         * @note Only available for @ref StrictArithmetic types.
+         */
+        template <StrictArithmetic T>
+        inline constexpr Matrix2D<T> eye(T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1));
+
+
+        /**
+         * @brief A 3D matrix with all zero elements.
+         *
+         * @note Only available for @ref StrictArithmetic types.
+         */
+        template <StrictArithmetic T>
+        inline constexpr Matrix2D<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0));
+    } // namespace mat3d
+
+    /** @} */
 
 }; // namespace fgm
 

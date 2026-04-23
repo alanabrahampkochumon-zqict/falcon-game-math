@@ -1121,7 +1121,6 @@ namespace fgm
         inline constexpr Matrix2D<T> zero(T(0), T(0), T(0), T(0));
     } // namespace mat2d
 
-
     /** @} */
 
 
