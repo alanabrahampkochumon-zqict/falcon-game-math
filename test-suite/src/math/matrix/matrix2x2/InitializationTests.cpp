@@ -13,7 +13,6 @@
 
 
 
-/** Test fixture for @ref fgm::Matrix2D, parameterized by @ref SupportedTypes. */
 template <typename T>
 class Matrix2DInitialization: public ::testing::Test
 {
@@ -33,14 +32,15 @@ protected:
         _diagonal1 = T(3);
     }
 };
+/** Test fixture for @ref fgm::Matrix2D initialization, parameterized by @ref SupportedTypes. */
 TYPED_TEST_SUITE(Matrix2DInitialization, SupportedTypes);
+
 
 
 /**
  * @addtogroup T_FGM_Mat2x2_Init
  * @{
  */
-
 
 /**************************************
  *                                    *

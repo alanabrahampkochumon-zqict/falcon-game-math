@@ -108,14 +108,14 @@ TEST(Matrix2DAccess, ElementsCanBeMutatedUsingIndex)
 /** @brief Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Matrix2DAccess, ColumnsCanBeMutatedUsingIndex)
 {
-    constexpr fgm::Vector2D col1 = {1.0f, 3.0f};
-    constexpr fgm::Vector2D col2 = {2.0f, 4.0f};
+    constexpr fgm::Vector2D col0 = {1.0f, 3.0f};
+    constexpr fgm::Vector2D col1 = {2.0f, 4.0f};
     fgm::Matrix2D<float> mat;
 
-    mat[0] = col1;
-    mat[1] = col2;
+    mat[0] = col0;
+    mat[1] = col1;
 
-    EXPECT_VEC_EQ(col1, mat[0]);
-    EXPECT_VEC_EQ(col2, mat[1]);
+    EXPECT_VEC_EQ(col0, mat[0]);
+    EXPECT_VEC_EQ(col1, mat[1]);
 }
 /** @} */

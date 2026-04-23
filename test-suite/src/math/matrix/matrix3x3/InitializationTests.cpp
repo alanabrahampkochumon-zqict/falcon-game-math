@@ -34,7 +34,7 @@ protected:
         _diagonal2 = T(5);
     }
 };
-/** Test fixture for @ref fgm::Matrix3D, parameterized by @ref SupportedTypes. */
+/** Test fixture for @ref fgm::Matrix3D initialization, parameterized by @ref SupportedTypes. */
 TYPED_TEST_SUITE(Matrix3DInitialization, SupportedTypes);
 
 
