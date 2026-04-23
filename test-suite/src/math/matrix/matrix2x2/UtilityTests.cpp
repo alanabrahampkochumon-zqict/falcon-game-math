@@ -56,35 +56,34 @@ TYPED_TEST_SUITE(Matrix2DIntegralUtility, SupportedIntegralTypes);
 
 namespace 
 {
-    // TODO: Remove maybe_unused
-    [[maybe_unused]] constexpr fgm::Matrix2D INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f);
-    [[maybe_unused]] constexpr fgm::Matrix2D NAN_MAT(fgm::constants::NaN, 1.0f);
-    [[maybe_unused]] constexpr fgm::Matrix2D MAT(1.0f, 1.0f, 1.0f, 1.0f);
+    constexpr fgm::Matrix2D INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f);
+    constexpr fgm::Matrix2D NAN_MAT(fgm::constants::NaN, 1.0f);
+    constexpr fgm::Matrix2D MAT(1.0f, 1.0f, 1.0f, 1.0f);
 
 
     /** @brief Verify that the matrix hasNaN utility is available at compile time. */
     namespace 
     {
-        //// Member functions
-        //static_assert(NAN_MAT.hasNaN() == true);
-        //static_assert(MAT.hasNaN() == false);
+        // Member functions
+        static_assert(NAN_MAT.hasNaN() == true);
+        static_assert(MAT.hasNaN() == false);
 
-        //// Static functions
-        //static_assert(fgm::Matrix2D<float>::hasNaN(NAN_MAT) == true);
-        //static_assert(fgm::Matrix2D<float>::hasNaN(MAT) == false);
+        // Static functions
+        static_assert(fgm::Matrix2D<float>::hasNaN(NAN_MAT) == true);
+        static_assert(fgm::Matrix2D<float>::hasNaN(MAT) == false);
     }
 
 
     /** @brief Verify that the matrix hasInf utility is available at compile time. */
     namespace
     {
-        //// Member functions
-        // static_assert(INF_MAT.hasNaN() == true);
-        // static_assert(MAT.hasNaN() == false);
+        // Member functions
+        static_assert(INF_MAT.hasNaN() == false);
+        static_assert(MAT.hasNaN() == false);
 
-        //// Static functions
-        // static_assert(fgm::Matrix2D<float>::hasNaN(INF_MAT) == true);
-        // static_assert(fgm::Matrix2D<float>::hasNaN(MAT) == false);
+        // Static functions
+        static_assert(fgm::Matrix2D<float>::hasNaN(INF_MAT) == false);
+        static_assert(fgm::Matrix2D<float>::hasNaN(MAT) == false);
     } // namespace
 }
 
