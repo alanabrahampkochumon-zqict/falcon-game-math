@@ -188,6 +188,41 @@ namespace fgm
     }
 
 
+
+    /**************************************
+     *                                    *
+     *             UTILITIES              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr bool Matrix3D<T>::hasInf() const noexcept
+    {
+        return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix3D<T>::hasInf(const Matrix3D& mat) noexcept
+    {
+        return mat.hasInf();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix3D<T>::hasNaN() const noexcept
+    {
+        return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix3D<T>::hasNaN(const Matrix3D& mat) noexcept
+    {
+        return mat.hasNaN();
+    }
+
+
     // template <typename T>
     // Matrix3D<T>::Matrix3D()
     //{
