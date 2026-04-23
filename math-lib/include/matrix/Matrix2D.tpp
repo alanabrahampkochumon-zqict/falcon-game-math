@@ -1,4 +1,16 @@
 #pragma once
+/**
+ * @file Matrix2D.tpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: January 30, 2026
+ *
+ * @brief @ref Matrix2D template implementation.
+ * @details This file contains the definitions of the template members declared in Matrix2D.h
+ * 
+ * 
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
 
 
 #include "Matrix2D.h"
