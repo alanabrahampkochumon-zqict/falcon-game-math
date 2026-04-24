@@ -370,39 +370,39 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Subtract two matrices element-wise.
-        // *        Compute the difference between each element pair and returns a new matrix.
-        // *
-        // * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
-        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        // *
-        // * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        // *
-        // * @param[in] rhs The matrix to subtract.
-        // *
-        // * @return A new @ref Matrix3D containing the element-wise difference.
-        // */
-        //template <StrictArithmetic U>
-        //[[nodiscard]] constexpr PromotedMatrix3D<T, U> operator-(const Matrix3D<U>& rhs) const noexcept
-        //    requires StrictArithmetic<T>;
+        /**
+         * @brief Subtract two matrices element-wise.
+         *        Compute the difference between each element pair and returns a new matrix.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to subtract.
+         *
+         * @return A new @ref Matrix3D containing the element-wise difference.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator-(const Matrix3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Subtract another matrix from this matrix element-wise.
-        // *        Perform an in-place substraction of @p rhs from the current instance.
-        // *
-        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        // *
-        // * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        // *
-        // * @param[in] rhs The matrix to subtract.
-        // *
-        // * @return A reference to this matrix (*this).
-        // */
-        //template <StrictArithmetic U>
-        //constexpr Matrix3D& operator-=(const Matrix3D<U>& rhs) noexcept
-        //    requires StrictArithmetic<T>;
+        /**
+         * @brief Subtract another matrix from this matrix element-wise.
+         *        Perform an in-place substraction of @p rhs from the current instance.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to subtract.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic U>
+        constexpr Matrix3D& operator-=(const Matrix3D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
 
 
         ///**
