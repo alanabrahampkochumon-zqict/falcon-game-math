@@ -691,7 +691,10 @@ namespace fgm
 
         /**
          * @brief Compute the determinant (scaling factor) of this matrix.
-         *        Calculate determinant: \f$ \text{det(A)} = \text{a}\cdot\text{d} - \text{b}\cdot\text{c} \f$
+         *        Calculate determinant: 
+         *        \f$
+         *            \text{det(A)} = A_{00} \cdot A_{11} - A_{01} \cdot A_{10}
+         *        \f$
          *
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          *
@@ -703,7 +706,10 @@ namespace fgm
 
         /**
          * @brief Compute the determinant (scaling factor) of a matrix.
-         *        Calculate determinant: \f$ \text{det(A)} = \text{a}\cdot\text{d} - \text{b}\cdot\text{c} \f$
+         *        Calculate determinant:
+         *        \f$
+         *            \text{det(A)} = A_{00} \cdot A_{11} - A_{01} \cdot A_{10}
+         *        \f$
          *
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          *
@@ -717,64 +723,117 @@ namespace fgm
 
         /**
          * @brief Transpose this matrix by swapping its rows and columns.
-         *        Compute transpose: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix}\textsuperscript{T}  =
-         *                               \begin{bmatrix} a & c \\ b & d \end{bmatrix} \f$
+         *        Compute transpose: 
+         *        \f$ 
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix} ^ \top
+         *            = 
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} \\
+         *                 A_{01} & A_{11}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @return A new @ref Matrix2D with its elements flipped along the diagonal.
          */
-        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Matrix2D transpose() const noexcept;
 
 
         /**
          * @brief Transpose a matrix by swapping its rows and columns.
-         *        Compute transpose: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix}\textsuperscript{T}  =
-         *                               \begin{bmatrix} a & c \\ b & d \end{bmatrix} \f$
+         *        Compute transpose:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix} ^ \top
+         *            =
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} \\
+         *                 A_{01} & A_{11}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @param mat The matrix to transpose.
          *
          * @return A new @ref Matrix2D with its elements flipped along the diagonal.
          */
-        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr static Matrix2D transpose(const Matrix2D& mat) noexcept;
 
 
         /**
          * @brief Compute the inverse of this matrix.
-         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
-         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \begin{bmatrix}
+         *                 A_{11} & -A_{01} \\
+         *                 -A_{10} & A_{00}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$.
+         * @return A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$.
          */
-        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Matrix2D<Magnitude<T>> inverse() const noexcept
             requires SignedStrictArithmetic<T>;
 
 
         /**
          * @brief Compute the inverse of a matrix.
-         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
-         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \begin{bmatrix}
+         *                 A_{11} & -A_{01} \\
+         *                 -A_{10} & A_{00}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          *
          * @param[in] matrix The matrix to invert.
          *
-         * @return A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$.
+         * @return A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$.
          */
-        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr static Matrix2D<Magnitude<T>> inverse(const Matrix2D& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
         /**
          * @brief Safely compute the inverse of this matrix.
-         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
-         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \begin{bmatrix}
+         *                 A_{11} & -A_{01} \\
+         *                 -A_{10} & A_{00}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
@@ -782,18 +841,29 @@ namespace fgm
          *
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
+         * @return  A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
-        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Matrix2D<Magnitude<T>> safeInverse(const Matrix2D& fallback = Matrix2D::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
         /**
          * @brief Safely compute the inverse of a matrix.
-         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
-         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \begin{bmatrix}
+         *                 A_{11} & -A_{01} \\
+         *                 -A_{10} & A_{00}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
@@ -802,10 +872,10 @@ namespace fgm
          * @param[in] matrix   The matrix to invert.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
+         * @return  A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
-        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix2D<Magnitude<T>> safeInverseOf(const Matrix2D& matrix,
                                                               const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
@@ -813,8 +883,19 @@ namespace fgm
 
         /**
          * @brief Safely compute the inverse of this matrix and set @p status to the matrix inversion result.
-         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
-         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \begin{bmatrix}
+         *                 A_{11} & -A_{01} \\
+         *                 -A_{10} & A_{00}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
@@ -824,10 +905,10 @@ namespace fgm
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
+         * @return  A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
-        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Matrix2D<Magnitude<T>> tryInverse(OperationStatus& status,
                                                     const Matrix2D& fallback = Matrix2D::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
@@ -835,8 +916,19 @@ namespace fgm
 
         /**
          * @brief Safely compute the inverse of a matrix and set @p status to the matrix inversion result.
-         *        Calculate inverse: \f$ \mathbf{A\textsuperscript{-1}} = $ \frac{\text{1}}{\text{det(A)}} \cdot
-         *                               \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} $ \f$
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \begin{bmatrix}
+         *                 A_{11} & -A_{01} \\
+         *                 -A_{10} & A_{00}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
@@ -847,10 +939,10 @@ namespace fgm
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix2D such that \f$ A \cdot \mathbf{A\textsuperscript{-1}} = I \f$ or
+         * @return  A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
-        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any changes.")]]
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix2D<Magnitude<T>> tryInverseOf(const Matrix2D& matrix, OperationStatus& status,
                                                              const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
@@ -938,8 +1030,13 @@ namespace fgm
 
         /**
          * @brief Write the matrix to an output stream in **row-major** order.
-         *        Format the matrix as \f$\begin{bmatrix} a & b \\ c & d \end{bmatrix} \f$ string representation for
-         *        debugging or logging.
+         *        Format the matrix as 
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} \\
+         *                 A_{01} & A_{11}
+         *            \end{bmatrix}
+         *        \f$ string representation for debugging or logging.
          *
          * @tparam T Numeric type of the matrix.
          *
@@ -979,10 +1076,20 @@ namespace fgm
          * @brief Construct a 2D rotation matrix for a given angle.
          *
          * @details The layout of the returned matrix adapts to the library's active coordinate system:
-         *          - **Right-Handed (Default):** \f$ \begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) &
-         *                                            \cos(\theta) \end{bmatrix} \f$
-         *          - **Left-Handed (FGM_LEFT_HANDED):** \f$ \begin{bmatrix} \cos(\theta) & \sin(\theta)
-         *                                                   \\ -\sin(\theta) & \cos(\theta) \end{bmatrix} \f$
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                    cos(\theta) & -sin(\theta) \\
+         *                    sin(\theta) & cos(\theta)
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                    cos(\theta) & sin(\theta) \\
+         *                    -sin(\theta) & cos(\theta)
+         *                \end{bmatrix}
+         *            \f$
          *
          * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
          *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
