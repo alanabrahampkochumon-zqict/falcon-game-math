@@ -6,8 +6,8 @@
  *
  * @brief @ref Matrix2D template implementation.
  * @details This file contains the definitions of the template members declared in Matrix2D.h
- * 
- * 
+ *
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -253,6 +253,12 @@ namespace fgm
         return *this;
     }
 
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr PromotedMatrix2D<T, S> operator*(const S scalar, const Matrix2D<T>& mat) noexcept
+    {
+        return mat * scalar;
+    }
+
 
     template <Arithmetic T>
     template <StrictArithmetic U>
@@ -261,7 +267,7 @@ namespace fgm
     {
         using R = std::common_type_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-        // #error "FMA IS ALIVE AND COMPILING!" // For checking if FMA execution path is active.
+        // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
             if (!std::is_constant_evaluated())
                 return Vector2D<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
@@ -278,21 +284,12 @@ namespace fgm
     }
 
 
-
-
-    template <StrictArithmetic T, StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> operator*(const S scalar, const Matrix2D<T>& mat) noexcept
-    {
-        return mat * scalar;
-    }
-
-
     template <StrictArithmetic T, StrictArithmetic U>
     constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
     {
         using R = std::common_type_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-        // #error "FMA IS ALIVE AND COMPILING!" // For checking if FMA execution path is active.
+        // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
             if (!std::is_constant_evaluated())
                 return Vector2D<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
@@ -313,7 +310,7 @@ namespace fgm
     {
         using R = std::common_type_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-        // #error "FMA IS ALIVE AND COMPILING!" // For checking if FMA execution path is active.
+        // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
             if (!std::is_constant_evaluated())
             {
@@ -363,7 +360,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, S>>;
-
+        // TODO: Update to use FMGASSERT, refactor tests accordingly
         assert(fgm::abs(R(scalar)) > Config::EPSILON<R> &&
                "Matrix division by zero"); // TODO: Change to custom assert and add custom abs
 

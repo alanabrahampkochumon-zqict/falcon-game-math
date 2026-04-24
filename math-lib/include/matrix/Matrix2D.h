@@ -1105,6 +1105,7 @@ namespace fgm
         [[nodiscard]] static constexpr Matrix2D makeRotation(U angle) noexcept
             requires SignedStrictArithmetic<T>;
 
+
         /**
          * @brief Construct a uniform scale 2D matrix.
          *

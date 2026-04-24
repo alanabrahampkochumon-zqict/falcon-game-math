@@ -219,8 +219,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator-(const Matrix3D<U>& rhs) const noexcept requires
-        StrictArithmetic<T>
+    constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator-(const Matrix3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
         return Matrix3D<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2]);
@@ -229,7 +229,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr Matrix3D<T>& Matrix3D<T>::operator-=(const Matrix3D<U>& rhs) noexcept requires StrictArithmetic<T>
+    constexpr Matrix3D<T>& Matrix3D<T>::operator-=(const Matrix3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
     {
         _data[0] -= rhs[0];
         _data[1] -= rhs[1];
@@ -240,44 +241,146 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::operator*(S scalar) const noexcept requires StrictArithmetic<T> {}
+    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::operator*(S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, S>;
+        return Matrix3D<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2]);
+    }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Matrix3D<T>& Matrix3D<T>::operator*=(S scalar) noexcept requires StrictArithmetic<T> {}
+    constexpr Matrix3D<T>& Matrix3D<T>::operator*=(S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] *= scalar;
+        _data[1] *= scalar;
+        _data[2] *= scalar;
+        return *this;
+    }
 
 
-    template <Arithmetic T>
-    template <StrictArithmetic U>
-    constexpr PromotedVector3D<T, U> Matrix3D<T>::operator*(const Vector3D<U>& vec) const noexcept requires
-        StrictArithmetic<T> {}
-
-
-    template <Arithmetic T>
-    template <StrictArithmetic U>
-    constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator*(const Matrix3D<U>& rhs) const noexcept requires
-        StrictArithmetic<T> {}
-
-
-    template <Arithmetic T>
-    template <StrictArithmetic U>
-    constexpr Matrix3D<T>& Matrix3D<T>::operator*=(const Matrix3D<U>& rhs) noexcept requires StrictArithmetic<T> {}
-
-    
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedMatrix3D<T, S> operator*(S scalar, const Matrix3D<T>& mat) noexcept
-    {}
+    {
+        return mat * scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedVector3D<T, U> Matrix3D<T>::operator*(const Vector3D<U>& vec) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        // TODO: Refactor FMA for 3D vec
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
+        // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
+        if constexpr (std::is_floating_point_v<R>)
+            if (!std::is_constant_evaluated())
+                return Vector3D<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
+                                            static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
+                                   std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
+                                            static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
+#endif
+        R x = static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) +
+            static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]) + static_cast<R>(_data[2][0]) * static_cast<R>(vec[2]);
+
+        R y = static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) +
+            static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]) + static_cast<R>(_data[2][1]) * static_cast<R>(vec[2]);
+
+        R z = static_cast<R>(_data[0][2]) * static_cast<R>(vec[0]) +
+            static_cast<R>(_data[1][2]) * static_cast<R>(vec[1]) + static_cast<R>(_data[2][2]) * static_cast<R>(vec[2]);
+
+        return Vector3D<R>(x, y, z);
+    }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
     constexpr PromotedVector3D<T, U> operator*(const Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept
-    {}
+    {
+        using R = std::common_type_t<T, U>;
+        // TODO: Refactor FMA for 3D vec
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
+        // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
+        if constexpr (std::is_floating_point_v<R>)
+            if (!std::is_constant_evaluated())
+                return Vector2D<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
+                                            static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0))),
+                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
+                                            static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1))));
+
+#endif
+        R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 0));
+
+        R y = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 1));
+
+        R z = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 2)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 2)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 2));
+
+        return Vector3D<R>(x, y, z);
+    }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
     constexpr Vector3D<T>& operator*=(Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept
-    {}
+    {
+        using R = std::common_type_t<T, U>;
+        // TODO: Refactor FMA for 3D vec
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
+        // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
+        if constexpr (std::is_floating_point_v<R>)
+            if (!std::is_constant_evaluated())
+            {
+                R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
+                               static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)));
+                R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
+                               static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1)));
+                vec.x() = static_cast<T>(x);
+                vec.y() = static_cast<T>(y);
+                return vec;
+            }
+#endif
+        R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 0));
+
+        R y = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 1));
+
+        R z = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 2)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 2)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 2));
+        vec.x() = static_cast<T>(x);
+        vec.y() = static_cast<T>(y);
+        vec.z() = static_cast<T>(z);
+        return vec;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator*(const Matrix3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        return Matrix3D<R>((*this) * rhs[0], (*this) * rhs[1], (*this) * rhs[2]);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Matrix3D<T>& Matrix3D<T>::operator*=(const Matrix3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        const auto mat = (*this) * rhs;
+        _data[0] = mat[0];
+        _data[1] = mat[1];
+        _data[2] = mat[2];
+        return *this;
+    }
+
 
 
     /**************************************
@@ -314,7 +417,6 @@ namespace fgm
     }
 
 
-    
 
 
     // template <typename T>
