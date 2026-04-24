@@ -441,9 +441,21 @@ namespace fgm
 
         /**
          * @brief Transform the **column vector** by this matrix.
-         *        Perform the linear transformation: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot
-         *                                           \begin{bmatrix} x \\ y \end{bmatrix}  = \begin{bmatrix} x'
-         *                                           \\ y' \end{bmatrix} \f$
+         *        Perform the linear transformation:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}
+         *            \cdot
+         *            \begin{bmatrix}
+         *                  x \\ y
+         *            \end{bmatrix}
+         *            =
+         *            \begin{bmatrix}
+         *                  x' \\ y'
+         *            \end{bmatrix}
+         *        \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -461,9 +473,23 @@ namespace fgm
 
         /**
          * @brief Compose this matrix with another to form a new matrix.
-         *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
-         *                                     f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
-         *                                     \end{bmatrix} \f$
+         *        Compute the matrix product:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}
+         *            \cdot
+         *            \begin{bmatrix}
+         *                  B_{00} & B_{01} \\
+         *                  B_{10} & B_{11}
+         *            \end{bmatrix}
+         *            =
+         *            \begin{bmatrix}
+         *                  C_{00} & C_{01} \\
+         *                  C_{10} & C_{11}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -481,9 +507,23 @@ namespace fgm
 
         /**
          * @brief Compose this matrix with another matrix in-place.
-         *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
-         *                                        f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
-         *                                        \end{bmatrix} \f$
+         *        Compute the matrix product:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}
+         *            \cdot
+         *            \begin{bmatrix}
+         *                  B_{00} & B_{01} \\
+         *                  B_{10} & B_{11}
+         *            \end{bmatrix}
+         *            =
+         *            \begin{bmatrix}
+         *                  C_{00} & C_{01} \\
+         *                  C_{10} & C_{11}
+         *            \end{bmatrix}
+         *        \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1057,8 +1097,21 @@ namespace fgm
 
     /**
      * @brief Transform the **row vector** by a matrix.
-     *        Perform the linear transformation: \f$ \begin{bmatrix} x & y \end{bmatrix} \cdot \begin{bmatrix} a & b
-     *                                               \\ c & d \end{bmatrix}  = \begin{bmatrix} x' & y' \end{bmatrix} \f$
+     *        Perform the linear transformation:
+     *        \f$
+     *            \begin{bmatrix}
+     *                x & y
+     *            \end{bmatrix}
+     *            \cdot
+     *            \begin{bmatrix}
+     *                A_{00} & A_{01} \\
+     *                A_{10} & A_{11}
+     *            \end{bmatrix}
+     *            =
+     *            \begin{bmatrix}
+     *                x' & y'
+     *            \end{bmatrix}
+     *        \f$
      *
      * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1077,8 +1130,21 @@ namespace fgm
 
     /**
      * @brief Transform this **row vector** by a matrix.
-     *        Perform the linear transformation: \f$ \begin{bmatrix} x & y \end{bmatrix} \cdot \begin{bmatrix} a & b
-     *                                               \\ c & d \end{bmatrix}  = \begin{bmatrix} x' & y' \end{bmatrix} \f$
+     *        Perform the linear transformation:
+     *        \f$
+     *            \begin{bmatrix}
+     *                x & y
+     *            \end{bmatrix}
+     *            \cdot
+     *            \begin{bmatrix}
+     *                A_{00} & A_{01} \\
+     *                A_{10} & A_{11}
+     *            \end{bmatrix}
+     *            =
+     *            \begin{bmatrix}
+     *                x' & y'
+     *            \end{bmatrix}
+     *        \f$
      *
      * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.

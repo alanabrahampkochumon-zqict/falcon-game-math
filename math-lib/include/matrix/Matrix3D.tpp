@@ -250,7 +250,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedVector2D<T, U> Matrix3D<T>::operator*(const Vector2D<U>& vec) const noexcept requires
+    constexpr PromotedVector3D<T, U> Matrix3D<T>::operator*(const Vector3D<U>& vec) const noexcept requires
         StrictArithmetic<T> {}
 
 
