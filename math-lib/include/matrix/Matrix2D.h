@@ -334,12 +334,6 @@ namespace fgm
          * @{
          */
 
-        /*************************************
-         *                                   *
-         *       ARITHMETIC OPERATORS        *
-         *                                   *
-         *************************************/
-
         /**
          * @brief Add two matrices element-wise.
          *        Compute the sum of each element pair and returns a new matrix.
