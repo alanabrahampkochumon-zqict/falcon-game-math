@@ -201,7 +201,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        return Matrix3D<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + _data[2]);
+        return Matrix3D<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + rhs[2]);
     }
 
 
