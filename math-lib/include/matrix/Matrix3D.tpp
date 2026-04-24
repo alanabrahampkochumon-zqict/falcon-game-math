@@ -191,6 +191,34 @@ namespace fgm
 
     /**************************************
      *                                    *
+     *        ARITHMETIC OPERATORS        *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator+(const Matrix3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        return Matrix3D<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + _data[2]);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    Matrix3D<T>& Matrix3D<T>::operator+=(const Matrix3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] += rhs[0];
+        _data[1] += rhs[1];
+        _data[2] += rhs[2];
+        return *this;
+    }
+
+
+    /**************************************
+     *                                    *
      *             UTILITIES              *
      *                                    *
      **************************************/

@@ -62,7 +62,6 @@ namespace fgm
 
 
 
-
     /*************************************
      *                                   *
      *            ACCESSORS              *
@@ -95,7 +94,6 @@ namespace fgm
 
 
 
-
     /**************************************
      *                                    *
      *             CONSTANTS              *
@@ -113,7 +111,6 @@ namespace fgm
     {
         return Matrix2D(T(0), T(0));
     }
-
 
 
 
@@ -185,7 +182,6 @@ namespace fgm
     {
         return anyNeq(rhs);
     }
-
 
 
 

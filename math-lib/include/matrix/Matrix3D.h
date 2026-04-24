@@ -331,7 +331,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Arithmetic
+         * @addtogroup FGM_Mat3x3_Arithmetic
          * @{
          */
 
@@ -370,276 +370,276 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Subtract two matrices element-wise.
-         *        Compute the difference between each element pair and returns a new matrix.
-         *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
-         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] rhs The matrix to subtract.
-         *
-         * @return A new @ref Matrix3D containing the element-wise difference.
-         */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator-(const Matrix3D<U>& rhs) const noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Subtract two matrices element-wise.
+        // *        Compute the difference between each element pair and returns a new matrix.
+        // *
+        // * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // *
+        // * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] rhs The matrix to subtract.
+        // *
+        // * @return A new @ref Matrix3D containing the element-wise difference.
+        // */
+        //template <StrictArithmetic U>
+        //[[nodiscard]] constexpr PromotedMatrix3D<T, U> operator-(const Matrix3D<U>& rhs) const noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Subtract another matrix from this matrix element-wise.
-         *        Perform an in-place substraction of @p rhs from the current instance.
-         *
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
-         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] rhs The matrix to subtract.
-         *
-         * @return A reference to this matrix (*this).
-         */
-        template <StrictArithmetic U>
-        constexpr Matrix3D& operator-=(const Matrix3D<U>& rhs) noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Subtract another matrix from this matrix element-wise.
+        // *        Perform an in-place substraction of @p rhs from the current instance.
+        // *
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // *
+        // * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] rhs The matrix to subtract.
+        // *
+        // * @return A reference to this matrix (*this).
+        // */
+        //template <StrictArithmetic U>
+        //constexpr Matrix3D& operator-=(const Matrix3D<U>& rhs) noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Scale the matrix by a scalar value.
-         *        Multiply each element of the matrix by @p scalar and returns a new matrix.
-         *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] scalar The value to scale by.
-         *
-         * @return A new @ref Matrix3D scaled by @p scalar.
-         */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar) const noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Scale the matrix by a scalar value.
+        // *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+        // *
+        // * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] scalar The value to scale by.
+        // *
+        // * @return A new @ref Matrix3D scaled by @p scalar.
+        // */
+        //template <StrictArithmetic S>
+        //[[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar) const noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Scale this matrix in-place by a scalar value.
-         *        Perform an in-place multiplication of each element by @p scalar.
-         *
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] scalar The value to scale by.
-         *
-         * @return A reference to this matrix (*this).
-         */
-        template <StrictArithmetic S>
-        constexpr Matrix3D& operator*=(S scalar) noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Scale this matrix in-place by a scalar value.
+        // *        Perform an in-place multiplication of each element by @p scalar.
+        // *
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] scalar The value to scale by.
+        // *
+        // * @return A reference to this matrix (*this).
+        // */
+        //template <StrictArithmetic S>
+        //constexpr Matrix3D& operator*=(S scalar) noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Transform the **column vector** by this matrix.
-         *        Perform the linear transformation: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot
-         *                                           \begin{bmatrix} x \\ y \end{bmatrix}  = \begin{bmatrix} x'
-         *                                           \\ y' \end{bmatrix} \f$
-         *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
-         * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] vec The column vector to transform.
-         *
-         * @return A new @ref Vector2D with applied linear transformations.
-         */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Transform the **column vector** by this matrix.
+        // *        Perform the linear transformation: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot
+        // *                                           \begin{bmatrix} x \\ y \end{bmatrix}  = \begin{bmatrix} x'
+        // *                                           \\ y' \end{bmatrix} \f$
+        // *
+        // * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // *
+        // * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] vec The column vector to transform.
+        // *
+        // * @return A new @ref Vector2D with applied linear transformations.
+        // */
+        //template <StrictArithmetic U>
+        //[[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Compose this matrix with another to form a new matrix.
-         *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
-         *                                     f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
-         *                                     \end{bmatrix} \f$
-         *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
-         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] rhs The matrix to multiply.
-         *
-         * @return A new @ref Matrix3D containing the composition of linear transformations.
-         */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator*(const Matrix3D<U>& rhs) const noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Compose this matrix with another to form a new matrix.
+        // *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
+        // *                                     f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
+        // *                                     \end{bmatrix} \f$
+        // *
+        // * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // *
+        // * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] rhs The matrix to multiply.
+        // *
+        // * @return A new @ref Matrix3D containing the composition of linear transformations.
+        // */
+        //template <StrictArithmetic U>
+        //[[nodiscard]] constexpr PromotedMatrix3D<T, U> operator*(const Matrix3D<U>& rhs) const noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Compose this matrix with another matrix in-place.
-         *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
-         *                                        f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
-         *                                        \end{bmatrix} \f$
-         *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
-         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] rhs The matrix to multiply.
-         *
-         * @return A reference to this matrix (*this).
-         */
-        template <StrictArithmetic U>
-        constexpr Matrix3D& operator*=(const Matrix3D<U>& rhs) noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Compose this matrix with another matrix in-place.
+        // *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
+        // *                                        f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
+        // *                                        \end{bmatrix} \f$
+        // *
+        // * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // *
+        // * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] rhs The matrix to multiply.
+        // *
+        // * @return A reference to this matrix (*this).
+        // */
+        //template <StrictArithmetic U>
+        //constexpr Matrix3D& operator*=(const Matrix3D<U>& rhs) noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Inverse-scale the matrix by a scalar value.
-         *        Divide each element of the matrix by @p scalar and returns a new matrix.
-         *
-         * @note Promotes the result to a floating point result using @ref Magnitude.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] scalar The value to scale by.
-         *
-         * @return A new @ref Matrix3D inverse scaled by @p scalar.
-         */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> operator/(const S& scalar) const noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Inverse-scale the matrix by a scalar value.
+        // *        Divide each element of the matrix by @p scalar and returns a new matrix.
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] scalar The value to scale by.
+        // *
+        // * @return A new @ref Matrix3D inverse scaled by @p scalar.
+        // */
+        //template <StrictArithmetic S>
+        //[[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> operator/(const S& scalar) const noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Inverse-scale this matrix by a scalar value.
-         *        Perform an in-place division of each element by @p scalar.
-         *
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] scalar The value to scale by.
-         *
-         * @return A reference to this matrix (*this).
-         */
-        template <StrictArithmetic S>
-        constexpr Matrix3D& operator/=(const S& scalar) noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Inverse-scale this matrix by a scalar value.
+        // *        Perform an in-place division of each element by @p scalar.
+        // *
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] scalar The value to scale by.
+        // *
+        // * @return A reference to this matrix (*this).
+        // */
+        //template <StrictArithmetic S>
+        //constexpr Matrix3D& operator/=(const S& scalar) noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Safely divide each element of this matrix by a scalar value.
-         *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
-         *
-         * @note Promotes the result to a floating point result using @ref Magnitude.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] scalar   The value to divide the matrix elements by.
-         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
-         *                     element.
-         *
-         * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
-         *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
-         */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> safeDiv(
-            S scalar, const Matrix3D<T>& fallback = Matrix3D<T>::eye()) const noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Safely divide each element of this matrix by a scalar value.
+        // *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+        // *       operand contains NaN.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] scalar   The value to divide the matrix elements by.
+        // * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+        // *                     element.
+        // *
+        // * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
+        // *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
+        // */
+        //template <StrictArithmetic S>
+        //[[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> safeDiv(
+        //    S scalar, const Matrix3D<T>& fallback = Matrix3D<T>::eye()) const noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Safely divide each element of a matrix by a scalar value.
-         *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
-         *
-         * @note Promotes the result to a floating point result using @ref Magnitude.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] mat      The matrix to divide.
-         * @param[in] scalar   The value to divide the matrix elements by.
-         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
-         *                     element.
-         *
-         * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
-         *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
-         */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr static PromotedFloatMatrix3D<T, S> safeDiv(
-            const Matrix3D& mat, S scalar, const Matrix3D<T>& fallback = Matrix3D<T>::eye()) noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Safely divide each element of a matrix by a scalar value.
+        // *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+        // *       operand contains NaN.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] mat      The matrix to divide.
+        // * @param[in] scalar   The value to divide the matrix elements by.
+        // * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+        // *                     element.
+        // *
+        // * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
+        // *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
+        // */
+        //template <StrictArithmetic S>
+        //[[nodiscard]] constexpr static PromotedFloatMatrix3D<T, S> safeDiv(
+        //    const Matrix3D& mat, S scalar, const Matrix3D<T>& fallback = Matrix3D<T>::eye()) noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Safely divide this matrix by a scalar value and set @p status to the division operation result.
-         *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
-         *
-         * @note Promotes the result to a floating point result using @ref Magnitude.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
-         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
-         *       invalidity (Division by Zero) when reporting status.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] scalar   The value to divide the matrix elements by.
-         * @param[out] status  The status flag to store the status of the current operation result.
-         *                     For details on status codes see @ref OperationStatus.
-         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
-         *                     element.
-         *
-         * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
-         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
-         */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> tryDiv(
-            S scalar, OperationStatus& status, const Matrix3D<T>& fallback = Matrix3D<T>::eye()) const noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Safely divide this matrix by a scalar value and set @p status to the division operation result.
+        // *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+        // *       operand contains NaN.
+        // * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+        // *       invalidity (Division by Zero) when reporting status.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] scalar   The value to divide the matrix elements by.
+        // * @param[out] status  The status flag to store the status of the current operation result.
+        // *                     For details on status codes see @ref OperationStatus.
+        // * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+        // *                     element.
+        // *
+        // * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
+        // *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+        // */
+        //template <StrictArithmetic S>
+        //[[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> tryDiv(
+        //    S scalar, OperationStatus& status, const Matrix3D<T>& fallback = Matrix3D<T>::eye()) const noexcept
+        //    requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Safely divide a matrix by a scalar value and set @p status to the division operation result.
-         *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
-         *
-         * @note Promotes the result to a floating point result using @ref Magnitude.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
-         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
-         *       invalidity (Division by Zero) when reporting status.
-         *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] mat      The matrix to divide.
-         * @param[in] scalar   The value to divide the matrix elements by.
-         * @param[out] status  The status flag to store the status of the current operation result.
-         *                     For details on status codes see @ref OperationStatus.
-         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
-         *                     element.
-         *
-         * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
-         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
-         */
-        template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedFloatMatrix3D<T, S> tryDiv(
-            const Matrix3D& mat, S scalar, OperationStatus& status,
-            const Matrix3D<T>& fallback = Matrix3D<T>::eye()) noexcept
-            requires StrictArithmetic<T>;
+        ///**
+        // * @brief Safely divide a matrix by a scalar value and set @p status to the division operation result.
+        // *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        // * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+        // *       operand contains NaN.
+        // * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+        // *       invalidity (Division by Zero) when reporting status.
+        // *
+        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        // *
+        // * @param[in] mat      The matrix to divide.
+        // * @param[in] scalar   The value to divide the matrix elements by.
+        // * @param[out] status  The status flag to store the status of the current operation result.
+        // *                     For details on status codes see @ref OperationStatus.
+        // * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+        // *                     element.
+        // *
+        // * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
+        // *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+        // */
+        //template <StrictArithmetic S>
+        //[[nodiscard]] static constexpr PromotedFloatMatrix3D<T, S> tryDiv(
+        //    const Matrix3D& mat, S scalar, OperationStatus& status,
+        //    const Matrix3D<T>& fallback = Matrix3D<T>::eye()) noexcept
+        //    requires StrictArithmetic<T>;
 
         /** @} */
 

@@ -152,6 +152,7 @@ namespace fgm
     using PromotedVector3D = Vector3D<PromoteValue_t<T, U>>;
 
 
+
     /** @brief Alias for @ref Matrix2D with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromoteValue_t<T, U>>
