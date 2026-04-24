@@ -238,6 +238,47 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::operator*(S scalar) const noexcept requires StrictArithmetic<T> {}
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Matrix3D<T>& Matrix3D<T>::operator*=(S scalar) noexcept requires StrictArithmetic<T> {}
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedVector2D<T, U> Matrix3D<T>::operator*(const Vector2D<U>& vec) const noexcept requires
+        StrictArithmetic<T> {}
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator*(const Matrix3D<U>& rhs) const noexcept requires
+        StrictArithmetic<T> {}
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Matrix3D<T>& Matrix3D<T>::operator*=(const Matrix3D<U>& rhs) noexcept requires StrictArithmetic<T> {}
+
+    
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr PromotedMatrix3D<T, S> operator*(S scalar, const Matrix3D<T>& mat) noexcept
+    {}
+
+
+    template <StrictArithmetic T, StrictArithmetic U>
+    constexpr PromotedVector3D<T, U> operator*(const Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept
+    {}
+
+
+    template <StrictArithmetic T, StrictArithmetic U>
+    constexpr Vector3D<T>& operator*=(Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept
+    {}
+
 
     /**************************************
      *                                    *
@@ -271,6 +312,9 @@ namespace fgm
     {
         return mat.hasNaN();
     }
+
+
+    
 
 
     // template <typename T>

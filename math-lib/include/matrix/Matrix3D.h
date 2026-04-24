@@ -405,99 +405,99 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Scale the matrix by a scalar value.
-        // *        Multiply each element of the matrix by @p scalar and returns a new matrix.
-        // *
-        // * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        // *
-        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        // *
-        // * @param[in] scalar The value to scale by.
-        // *
-        // * @return A new @ref Matrix3D scaled by @p scalar.
-        // */
-        //template <StrictArithmetic S>
-        //[[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar) const noexcept
-        //    requires StrictArithmetic<T>;
+        /**
+         * @brief Scale the matrix by a scalar value.
+         *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Matrix3D scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar) const noexcept
+            requires StrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Scale this matrix in-place by a scalar value.
-        // *        Perform an in-place multiplication of each element by @p scalar.
-        // *
-        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        // *
-        // * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        // *
-        // * @param[in] scalar The value to scale by.
-        // *
-        // * @return A reference to this matrix (*this).
-        // */
-        //template <StrictArithmetic S>
-        //constexpr Matrix3D& operator*=(S scalar) noexcept
-        //    requires StrictArithmetic<T>;
+        /**
+         * @brief Scale this matrix in-place by a scalar value.
+         *        Perform an in-place multiplication of each element by @p scalar.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Matrix3D& operator*=(S scalar) noexcept
+            requires StrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Transform the **column vector** by this matrix.
-        // *        Perform the linear transformation: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot
-        // *                                           \begin{bmatrix} x \\ y \end{bmatrix}  = \begin{bmatrix} x'
-        // *                                           \\ y' \end{bmatrix} \f$
-        // *
-        // * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        // *
-        // * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
-        // *
-        // * @param[in] vec The column vector to transform.
-        // *
-        // * @return A new @ref Vector2D with applied linear transformations.
-        // */
-        //template <StrictArithmetic U>
-        //[[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const noexcept
-        //    requires StrictArithmetic<T>;
+        /**
+         * @brief Transform the **column vector** by this matrix.
+         *        Perform the linear transformation: \f$ \begin{bmatrix} x & y & z \end{bmatrix} \cdot
+         *                                               \begin{bmatrix} a & b & c  \\ d & e & f \\ g & h & i
+         *                                               \end{bmatrix} = \begin{bmatrix} x' & y' & z` \end{bmatrix} \f$
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec The column vector to transform.
+         *
+         * @return A new @ref Vector3D with applied linear transformations.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedVector3D<T, U> operator*(const Vector3D<U>& vec) const noexcept
+            requires StrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Compose this matrix with another to form a new matrix.
-        // *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
-        // *                                     f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
-        // *                                     \end{bmatrix} \f$
-        // *
-        // * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        // *
-        // * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        // *
-        // * @param[in] rhs The matrix to multiply.
-        // *
-        // * @return A new @ref Matrix3D containing the composition of linear transformations.
-        // */
-        //template <StrictArithmetic U>
-        //[[nodiscard]] constexpr PromotedMatrix3D<T, U> operator*(const Matrix3D<U>& rhs) const noexcept
-        //    requires StrictArithmetic<T>;
+        /**
+         * @brief Compose this matrix with another to form a new matrix.
+         *        Compute the matrix product: \f$ \begin{bmatrix} a & b & c \\ d & e & f \\ g & h & i \end{bmatrix}
+         *                                    \cdot \begin{bmatrix} j & k & l \\ m & n & o \\ p & q & r \end{bmatrix}
+         *                                    = \begin{bmatrix} x & y \\ y & z & w \end{bmatrix} \f$
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to multiply.
+         *
+         * @return A new @ref Matrix3D containing the composition of linear transformations.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator*(const Matrix3D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Compose this matrix with another matrix in-place.
-        // *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
-        // *                                        f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
-        // *                                        \end{bmatrix} \f$
-        // *
-        // * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-        // * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        // *
-        // * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        // *
-        // * @param[in] rhs The matrix to multiply.
-        // *
-        // * @return A reference to this matrix (*this).
-        // */
-        //template <StrictArithmetic U>
-        //constexpr Matrix3D& operator*=(const Matrix3D<U>& rhs) noexcept
-        //    requires StrictArithmetic<T>;
+        /**
+         * @brief Compose this matrix with another matrix in-place.
+         *        Compute the matrix product: \f$ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \cdot \begin{bmatrix} e &
+         *                                        f \\ g & h \end{bmatrix}  = \begin{bmatrix} x & y \\ z & w
+         *                                        \end{bmatrix} \f$
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to multiply.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic U>
+        constexpr Matrix3D& operator*=(const Matrix3D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
 
 
         ///**
@@ -513,7 +513,7 @@ namespace fgm
         // *
         // * @return A new @ref Matrix3D inverse scaled by @p scalar.
         // */
-        //template <StrictArithmetic S>
+        // template <StrictArithmetic S>
         //[[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> operator/(const S& scalar) const noexcept
         //    requires StrictArithmetic<T>;
 
@@ -530,8 +530,8 @@ namespace fgm
         // *
         // * @return A reference to this matrix (*this).
         // */
-        //template <StrictArithmetic S>
-        //constexpr Matrix3D& operator/=(const S& scalar) noexcept
+        // template <StrictArithmetic S>
+        // constexpr Matrix3D& operator/=(const S& scalar) noexcept
         //    requires StrictArithmetic<T>;
 
 
@@ -553,7 +553,7 @@ namespace fgm
         // * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
         // *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
         // */
-        //template <StrictArithmetic S>
+        // template <StrictArithmetic S>
         //[[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> safeDiv(
         //    S scalar, const Matrix3D<T>& fallback = Matrix3D<T>::eye()) const noexcept
         //    requires StrictArithmetic<T>;
@@ -578,7 +578,7 @@ namespace fgm
         // * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
         // *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
         // */
-        //template <StrictArithmetic S>
+        // template <StrictArithmetic S>
         //[[nodiscard]] constexpr static PromotedFloatMatrix3D<T, S> safeDiv(
         //    const Matrix3D& mat, S scalar, const Matrix3D<T>& fallback = Matrix3D<T>::eye()) noexcept
         //    requires StrictArithmetic<T>;
@@ -606,7 +606,7 @@ namespace fgm
         // * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
         // *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
         // */
-        //template <StrictArithmetic S>
+        // template <StrictArithmetic S>
         //[[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> tryDiv(
         //    S scalar, OperationStatus& status, const Matrix3D<T>& fallback = Matrix3D<T>::eye()) const noexcept
         //    requires StrictArithmetic<T>;
@@ -635,7 +635,7 @@ namespace fgm
         // * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
         // *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
         // */
-        //template <StrictArithmetic S>
+        // template <StrictArithmetic S>
         //[[nodiscard]] static constexpr PromotedFloatMatrix3D<T, S> tryDiv(
         //    const Matrix3D& mat, S scalar, OperationStatus& status,
         //    const Matrix3D<T>& fallback = Matrix3D<T>::eye()) noexcept
@@ -781,40 +781,77 @@ namespace fgm
 
 
 
-    // template <typename T, typename S, typename = std::enable_if_t<std::is_arithmetic_v<T>>,
-    //           typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-    // auto operator*(const S& scalar, const Matrix3D<T>& matrix) -> Matrix3D<std::common_type_t<T, S>>;
+    /**
+     * @addtogroup FGM_Mat3x3_Arithmetic
+     * @{
+     */
 
-    ///**
-    // * Multiplies a Vector3D by a Matrix3D.
-    // * NOTE: This operation transposes the 3x1 vector to a 1x3 vector(matrix), and may not be desirable in engine
-    // code.
-    // * @tparam T Type for matrix values
-    // * @tparam S Type for vector values
-    // * @param vec vector to be multiplied.
-    // * @param mat matrix to be multiplied against.
-    // * @return a new Vector3D transposed(row major form)
-    // */
-    // template <typename T, typename S, typename = std::enable_if_t<std::is_arithmetic_v<T>>,
-    //          typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-    // auto operator*(const Vector3D<S>& vec, const Matrix3D<T>& mat) -> Vector3D<std::common_type_t<T, S>>;
+    /**************************************
+     *                                    *
+     *        NON-MEMBER FUNCTIONS        *
+     *                                    *
+     **************************************/
 
-    ///**
-    // * Multiplies a Vector3D by a Matrix3D.
-    // * NOTE: This operation transposes the 3x1 vector to a 1x3 vector(matrix), and may not be desirable in engine
-    // code.
-    // * NOTE: This operation returns a new vector so it is strictly for testing purposes and completeness and is
-    // not
-    // * desirable to be used in game engine.
-    // * @tparam T Type for matrix values
-    // * @tparam S Type for vector values
-    // * @param vec vector to be multiplied.
-    // * @param mat matrix to be multiplied against.
-    // * @return the passed in vector
-    // */
-    // template <typename T, typename S, typename = std::enable_if_t<std::is_arithmetic_v<T>>,
-    //          typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-    // auto operator*=(Vector3D<S>& vec, const Matrix3D<T>& mat) -> Vector3D<std::common_type_t<T, S>>;
+    /**
+     * @brief Scale the matrix by a scalar value.
+     *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] mat    The matrix to scale.
+     *
+     * @return A new @ref Matrix3D scaled by @p scalar.
+     */
+    template <StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar, const Matrix3D<T>& mat) noexcept;
+
+
+    /**
+     * @brief Transform the **row vector** by a matrix.
+     *        Perform the linear transformation: \f$ \begin{bmatrix} x & y & z \end{bmatrix} \cdot
+     *                                               \begin{bmatrix} a & b & c  \\ d & e & f \\ g & h & i
+     *                                               \end{bmatrix}  = \begin{bmatrix} x' & y' & z` \end{bmatrix} \f$
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
+     * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] vec The row vector to transformed.
+     * @param[in] mat The transformation matrix.
+     *
+     * @return The passed-in @p vec with the transformations applied.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+    static constexpr PromotedVector3D<T, U> operator*(const Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept;
+
+
+    /**
+     * @brief Transform this **row vector** by a matrix.
+     *        Perform the linear transformation: \f$ \begin{bmatrix} x & y & z \end{bmatrix} \cdot
+     *                                               \begin{bmatrix} a & b & c  \\ d & e & f \\ g & h & i
+     *                                               \end{bmatrix}  = \begin{bmatrix} x' & y' & z` \end{bmatrix} \f$
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
+     * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] vec The row vector to transformed.
+     * @param[in] mat The transformation matrix.
+     *
+     * @return The passed-in @p vec with the transformations applied.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+    static constexpr Vector3D<T>& operator*=(Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept;
+
+    /** @} */
 
 
 
