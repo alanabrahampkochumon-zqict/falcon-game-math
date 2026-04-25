@@ -12,6 +12,9 @@
  */
 
 
+#include "common/Messages.h"
+
+
 
 namespace fgm
 {
@@ -406,7 +409,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, S>>;
-        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, "Matrix division by zero");
+        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
 
         R factor = R(1) / static_cast<R>(scalar);
         return Matrix2D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
@@ -422,7 +425,7 @@ namespace fgm
     {
         using R = Magnitude<std::common_type_t<T, S>>;
 
-        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, "Matrix division by zero");
+        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
 
         R factor = R(1) / static_cast<R>(scalar);
 

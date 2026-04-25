@@ -188,6 +188,12 @@
      * @ingroup FGM_Math
      */
 
+    /**
+     * @defgroup FGM_Messages Messages
+     * @brief Central repository for all library string resources.
+     * @ingroup FGM_Math
+     */
+
 /** @} */ // End of FGM_Math
 
 // clang-format on
