@@ -274,15 +274,19 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        // TODO: Refactor FMA for 3D vec
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
             if (!std::is_constant_evaluated())
                 return Vector3D<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
-                                            static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
+                                            std::fma(static_cast<R>(_data[1][0]), static_cast<R>(vec[1]),
+                                                     static_cast<R>(_data[2][0]) * static_cast<R>(vec[2]))),
                                    std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
-                                            static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
+                                            std::fma(static_cast<R>(_data[1][1]), static_cast<R>(vec[1]),
+                                                     static_cast<R>(_data[2][1]) * static_cast<R>(vec[2]))),
+                                   std::fma(static_cast<R>(_data[0][2]), static_cast<R>(vec[0]),
+                                            std::fma(static_cast<R>(_data[1][2]), static_cast<R>(vec[1]),
+                                                     static_cast<R>(_data[2][2]) * static_cast<R>(vec[2]))));
 #endif
         R x = static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) +
             static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]) + static_cast<R>(_data[2][0]) * static_cast<R>(vec[2]);
@@ -301,15 +305,19 @@ namespace fgm
     constexpr PromotedVector3D<T, U> operator*(const Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept
     {
         using R = std::common_type_t<T, U>;
-        // TODO: Refactor FMA for 3D vec
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
             if (!std::is_constant_evaluated())
-                return Vector2D<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
-                                            static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0))),
-                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
-                                            static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1))));
+                return Vector3D<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)), // x
+                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 0)),
+                                                     static_cast<R>(vec[2]) * static_cast<R>(mat(2, 0)))),
+                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)), // y
+                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 1)),
+                                                     static_cast<R>(vec[2]) * static_cast<R>(mat(2, 1)))),
+                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 2)), // z
+                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 2)),
+                                                     static_cast<R>(vec[2]) * static_cast<R>(mat(2, 2)))));
 
 #endif
         R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)) +
@@ -329,18 +337,23 @@ namespace fgm
     constexpr Vector3D<T>& operator*=(Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept
     {
         using R = std::common_type_t<T, U>;
-        // TODO: Refactor FMA for 3D vec
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
             if (!std::is_constant_evaluated())
             {
                 R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
-                               static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)));
+                               std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 0)),
+                                        static_cast<R>(vec[2]) * static_cast<R>(mat(2, 0))));
                 R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
-                               static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1)));
+                               std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 1)),
+                                        static_cast<R>(vec[2]) * static_cast<R>(mat(2, 1))));
+                R z = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 2)),
+                               std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 2)),
+                                        static_cast<R>(vec[2]) * static_cast<R>(mat(2, 2))));
                 vec.x() = static_cast<T>(x);
                 vec.y() = static_cast<T>(y);
+                vec.z() = static_cast<T>(z);
                 return vec;
             }
 #endif
