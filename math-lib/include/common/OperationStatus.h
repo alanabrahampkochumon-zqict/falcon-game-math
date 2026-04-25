@@ -12,6 +12,7 @@
 
 #include <cstdint>
 
+#include "common/Messages.h"
 
 
 namespace fgm
@@ -38,18 +39,18 @@ namespace fgm
      *
      * @return The status message.
      */
-    constexpr const char* getStatusMessage(const OperationStatus status) noexcept
+    constexpr std::string_view getStatusMessage(const OperationStatus status) noexcept
     {
         switch (status)
         {
             case OperationStatus::SUCCESS:
-                return "Operation success!";
+                return messages::opstatus::OPERATION_SUCCESS;
             case OperationStatus::DIVISIONBYZERO:
-                return "Failure: Division by Zero";
+                return messages::opstatus::OPERATION_DIV_BY_ZERO;
             case OperationStatus::NANOPERAND:
-                return "Failure: NaN operand encountered";
+                return messages::opstatus::OPERATION_NAN_OPERAND;
             default:
-                return "Failure: Unknown error";
+                return messages::opstatus::OPERATION_UNKNOWN_FAILURE;
         }
     }
 

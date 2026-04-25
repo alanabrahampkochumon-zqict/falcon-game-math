@@ -11,6 +11,7 @@
 
 
 #include <string>
+#include <string_view>
 
 
 
@@ -20,9 +21,29 @@
  */
 
 namespace fgm::messages::assertion
+{} // namespace fgm::messages::assertion
+
+
+namespace fgm::messages
 {
-    /** @brief Assertion message thrown when a matrix division by zero occurs. */
-    inline constexpr std::string MAT_DIV_BY_ZERO = "Matrix division by zero";
-} // namespace fgm::messages::assertion
+    namespace assertion
+    {
+        /** @brief Assertion message thrown when a matrix division by zero occurs. */
+        inline constexpr std::string MAT_DIV_BY_ZERO = "Matrix division by zero";
+
+    } // namespace assertion
+
+
+    /** @brief Message mapping for @ref OperationStatus status code. */
+    namespace opstatus
+    {
+        inline constexpr std::string_view OPERATION_SUCCESS = "Operation success!";
+        inline constexpr std::string_view OPERATION_DIV_BY_ZERO = "Failure: Division by Zero";
+        inline constexpr std::string_view OPERATION_NAN_OPERAND = "Failure: NaN operand encountered";
+        inline constexpr std::string_view OPERATION_UNKNOWN_FAILURE = "Failure: Unknown error";
+
+    } // namespace opstatus
+
+} // namespace fgm::messages
 
 /** @} */
