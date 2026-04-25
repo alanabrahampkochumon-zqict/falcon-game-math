@@ -79,7 +79,7 @@ protected:
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Matrix2D vector multiplication with denormals,
+ * @brief Test fixture for @ref fgm::Matrix2D vector multiplication with small fractions,
  *        parameterized by @ref SupportedFloatingPointTypes.
  */
 TYPED_TEST_SUITE(Matrix2DVectorFractionalMultiplication, SupportedFloatingPointTypes);
