@@ -351,9 +351,11 @@ namespace fgm
                 R z = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 2)),
                                std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 2)),
                                         static_cast<R>(vec[2]) * static_cast<R>(mat(2, 2))));
+
                 vec.x() = static_cast<T>(x);
                 vec.y() = static_cast<T>(y);
                 vec.z() = static_cast<T>(z);
+
                 return vec;
             }
 #endif
@@ -365,9 +367,11 @@ namespace fgm
 
         R z = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 2)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 2)) +
             static_cast<R>(vec[2]) * static_cast<R>(mat(2, 2));
+
         vec.x() = static_cast<T>(x);
         vec.y() = static_cast<T>(y);
         vec.z() = static_cast<T>(z);
+
         return vec;
     }
 

@@ -275,11 +275,12 @@ namespace fgm
                                    std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
                                             static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
 #endif
+
         R x =
             static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]);
-
         R y =
             static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
+
         return Vector2D<R>(x, y);
     }
 
@@ -299,8 +300,8 @@ namespace fgm
 
 #endif
         R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0));
-
         R y = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1));
+
         return Vector2D<R>(x, y);
     }
 
@@ -318,16 +319,19 @@ namespace fgm
                                static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)));
                 R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
                                static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1)));
+
                 vec.x() = static_cast<T>(x);
                 vec.y() = static_cast<T>(y);
+
                 return vec;
             }
 #endif
         R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0));
-
         R y = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1));
+
         vec.x() = static_cast<T>(x);
         vec.y() = static_cast<T>(y);
+
         return vec;
     }
 
