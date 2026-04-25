@@ -92,50 +92,60 @@ protected:
 TYPED_TEST_SUITE(Matrix3DVectorFractionalMultiplication, SupportedFloatingPointTypes);
 
 
-// template <typename T>
-// class Matrix3DMultiplication: public ::testing::Test
-//{
-// protected:
-//     fgm::Matrix3D<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
-//
-//     void SetUp() override
-//     {
-//         _matA = { fgm::Vector3D{ T(7.12345678912345), T(13.12345678912345) },
-//                   fgm::Vector3D{ T(5.12345678912345), T(4.12345678912345) } };
-//         _matB = { fgm::Vector3D{ T(3.12345678912345), T(10.12345678912345) },
-//                   fgm::Vector3D{ T(8.12345678912345), T(3.12345678912345) } };
-//
-//         _expectedFloatingMat = { fgm::Vector3D{ T(74.11690288564759), T(82.73418683126485) },
-//                                  fgm::Vector3D{ T(73.8699893074007), T(119.48727325301795) } };
-//         _expectedIntegralMat = { fgm::Vector3D{ T(71), T(79) }, fgm::Vector3D{ T(71), T(116) } };
-//     }
-// };
-///** @brief Test fixture for @ref fgm::Matrix3D matrix multiplication, parameterized by @ref SupportedArithmeticTypes.
-///*/
-// TYPED_TEST_SUITE(Matrix3DMultiplication, SupportedArithmeticTypes);
+template <typename T>
+class Matrix3DMultiplication: public ::testing::Test
+{
+protected:
+    fgm::Matrix3D<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
+
+    void SetUp() override
+    {
+        _matA = { fgm::Vector3D{ T(7.12345678912345), T(6.12345678912345), T(1.2389123488213) },
+                  fgm::Vector3D{ T(5.12345678912345), T(4.12345678912345), T(2.53283924821338) },
+                  fgm::Vector3D{ T(9.32189342348), T(8.238192312343), T(5.12398423821223) } };
+        _matB = { fgm::Vector3D{ T(3.12345678912345), T(5.12345678912345), T(1.213849123421) },
+                  fgm::Vector3D{ T(8.12345678912345), T(3.12345678912345), T(2.3218934118233) },
+                  fgm::Vector3D{ T(7.23912389492341), T(4.291238423419123), T(4.18234983241234) } };
+
+        _expectedFloatingMat = { fgm::Vector3D{ T(59.81499110074553), T(50.25262787869462), T(23.066325405048886) },
+                                 fgm::Vector3D{ T(95.51443223309786), T(81.75128018451636), T(29.872810121743093) },
+                                 fgm::Vector3D{ T(112.54098028826937), T(96.47820080937791), T(41.267951710315614) } };
+
+        _expectedIntegralMat = { fgm::Vector3D{ T(55), T(46), T(18) }, fgm::Vector3D{ T(89), T(76), T(24) },
+                                 fgm::Vector3D{ T(105), T(90), T(35) } };
+    }
+};
+/** @brief Test fixture for @ref fgm::Matrix3D matrix multiplication, parameterized by @ref SupportedArithmeticTypes.
+/*/
+TYPED_TEST_SUITE(Matrix3DMultiplication, SupportedArithmeticTypes);
 
 
-// template <typename T>
-// class Matrix3DFractionalMultiplication: public ::testing::Test
-//{
-// protected:
-//     fgm::Matrix3D<T> _matA, _matB, _expectedMat;
-//
-//     void SetUp() override
-//     {
-//         _matA = { fgm::Vector3D{ T(0.1234568989329), T(0.1234214891234) },
-//                   fgm::Vector3D{ T(-0.123489823149), T(-0.123489757623) } };
-//         _matB = { fgm::Vector3D{ T(0.8923764912287), T(0.78352829112384) },
-//                   fgm::Vector3D{ T(0.0123412348958), T(-0.0231423489589) } };
-//
-//         _expectedMat = { fgm::Vector3D{ T(0.013412264184596345), T(0.013380716644514457) },
-//                          fgm::Vector3D{ T(0.004381455169424965), T(0.004381016652222751) } };
-//     }
-// };
-///** @brief Test fixture for @ref fgm::Matrix3D matrix multiplication with fractional values(<1), parameterized by @ref
-// * SupportedFloatingPointTypes. */
-// TYPED_TEST_SUITE(Matrix3DFractionalMultiplication, SupportedFloatingPointTypes);
-//
+template <typename T>
+class Matrix3DFractionalMultiplication: public ::testing::Test
+{
+protected:
+    fgm::Matrix3D<T> _matA, _matB, _expectedMat;
+
+    void SetUp() override
+    {
+        _matA = { fgm::Vector3D{ T(0.1234568989329), T(0.1234214891234), T(0.382348912394) },
+                  fgm::Vector3D{ T(-0.123489823149), T(-0.123489757623), T(0.093218349323) },
+                  fgm::Vector3D{ T(0.0123489823149), T(0.53489757623), T(-0.93218349323) } };
+        _matB = { fgm::Vector3D{ T(0.8923764912287), T(0.78352829112384), T(0.0523812349234) },
+                  fgm::Vector3D{ T(0.0123412348958), T(-0.0231423489589), T(0.3829123948324) },
+                  fgm::Vector3D{ T(-0.539282348958), T(0.00033423489589), T(-0.8239123948324) } };
+
+        _expectedMat = { fgm::Vector3D{ 0.014059119128298, 0.041399312244975, 0.365409472263106 },
+                         fgm::Vector3D{ 0.009110033561366, 0.209199928556498, -0.354383247645329 },
+                         fgm::Vector3D{ -0.076793880652601, -0.50730904817435, 0.56187467155827 } };
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Matrix3D matrix multiplication with fractional values(<1),
+ *        parameterized by @ref SupportedFloatingPointTypes.
+ */
+TYPED_TEST_SUITE(Matrix3DFractionalMultiplication, SupportedFloatingPointTypes);
+
 
 
 /**
@@ -193,17 +203,17 @@ namespace
     static_assert(ROW_VEC_PRODUCT[1] == 36);
     static_assert(ROW_VEC_PRODUCT[2] == 42);
 
-    //// Verify matrix * matrix multiplication
-    // constexpr fgm::Matrix3D MAT_PRODUCT = MAT1 * MAT2;
-    // static_assert(MAT_PRODUCT(0, 0) == 2);
-    // static_assert(MAT_PRODUCT(0, 1) == 4);
-    // static_assert(MAT_PRODUCT(0, 2) == 6);
-    // static_assert(MAT_PRODUCT(1, 0) == 8);
-    // static_assert(MAT_PRODUCT(1, 1) == 10);
-    // static_assert(MAT_PRODUCT(1, 2) == 12);
-    // static_assert(MAT_PRODUCT(2, 0) == 14);
-    // static_assert(MAT_PRODUCT(2, 1) == 16);
-    // static_assert(MAT_PRODUCT(2, 2) == 18);
+    // Verify matrix * matrix multiplication
+    constexpr fgm::Matrix3D MAT_PRODUCT = MAT1 * MAT2;
+    static_assert(MAT_PRODUCT(0, 0) == 57);
+    static_assert(MAT_PRODUCT(0, 1) == 65);
+    static_assert(MAT_PRODUCT(0, 2) == 71);
+    static_assert(MAT_PRODUCT(1, 0) == 132);
+    static_assert(MAT_PRODUCT(1, 1) == 152);
+    static_assert(MAT_PRODUCT(1, 2) == 167);
+    static_assert(MAT_PRODUCT(2, 0) == 207);
+    static_assert(MAT_PRODUCT(2, 1) == 239);
+    static_assert(MAT_PRODUCT(2, 2) == 263);
 } // namespace
 
 
@@ -520,109 +530,109 @@ TEST(Matrix3DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsure
  *    MATRIX MULTIPLICATION TESTS     *
  *                                    *
  **************************************/
-//
-///** @brief Verify that the binary vector multiplication operation return matrix product. */
-// TYPED_TEST(Matrix3DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
-//{
-//     const auto transformedVector = this->_matA * this->_matB;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//         EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
-//     else
-//         EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
-// }
-//
-//
-///** @brief Verify that the binary vector multiplication operation return matrix product for denormals. */
-// TYPED_TEST(Matrix3DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithPrecision)
-//{
-//     const auto transformedVector = this->_matA * this->_matB;
-//     EXPECT_MAT_EQ(this->_expectedMat, transformedVector);
-// }
-//
-//
-///**
-// * @brief Verify that binary matrix multiplication with identity matrix
-// *        returns original matrix.
-// */
-// TEST(Matrix3DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
-//{
-//    constexpr fgm::Matrix3D<float> iMatrix;
-//    constexpr fgm::Matrix3D mat(1.0f, 2.0f, 3.0f, 4.0f);
-//
-//    constexpr fgm::Matrix3D matrixProduct = iMatrix * mat;
-//
-//    EXPECT_MAT_EQ(mat, matrixProduct);
-//}
-//
-//
-///**
-// * @brief Verify that the binary matrix multiplication operation perform automatic type promotion
-// *        to the wider numeric type.
-// */
-// TEST(Matrix3DMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
-//{
-//    constexpr fgm::Matrix3D matA(1.0, 2.0);
-//    constexpr fgm::Matrix3D matB(2, 1);
-//
-//    [[maybe_unused]] constexpr auto transformedVector = matA * matB;
-//    static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
-//}
-//
-//
-///** @brief Verify that the compound vector multiplication operation perform an in-place matrix multiplication. */
-// TYPED_TEST(Matrix3DMultiplication, CompoundMultiplicationOperationPerformInPlaceMatrixMultiplication)
-//{
-//     auto transformedVector = this->_matA;
-//     transformedVector *= this->_matB;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//         EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
-//     else
-//         EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
-// }
-//
-//
-///**
-// * @brief Verify that components matrix multiplication with identity matrix
-// *        does not mutate the calling matrix.
-// */
-// TEST(Matrix3DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
-//{
-//    constexpr fgm::Matrix3D<float> iMatrix;
-//    fgm::Matrix3D mat(1.0f, 2.0f, 3.0f, 4.0f);
-//
-//    mat *= iMatrix;
-//    EXPECT_MAT_CONTAINS(std::vector{ 1.0f, 2.0f, 3.0f, 4.0f }, mat);
-//}
-//
-//
-///**
-// * @brief Verify that the compound matrix multiplication operation maintains the destination type and
-// *        perform an implicit cast.
-// */
-// TEST(Matrix3DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
-//{
-//    constexpr fgm::Matrix3D<double> iMatrix;
-//    fgm::Matrix3D mat(1, 2, 3, 4);
-//
-//    mat *= iMatrix;
-//    static_assert(std::is_same_v<decltype(mat)::value_type, int>);
-//}
-//
-//
-///**
-// * @brief Verify that the compound multiplication operator (matrix) for mixed type
-// *        ensure minimal precision loss.
-// */
-// TEST(Matrix3DMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
-//{
-//    constexpr fgm::Matrix3D matA(2.5, 3.5, 0.5, 1.5);
-//    fgm::Matrix3D matB(5, 10, 15, 20);
-//    constexpr fgm::Matrix3D expectedMatrix(17, 32, 47, 82);
-//
-//    matB *= matA;
-//
-//    EXPECT_MAT_EQ(expectedMatrix, matB);
-//}
+
+/** @brief Verify that the binary vector multiplication operation return matrix product. */
+TYPED_TEST(Matrix3DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
+{
+    const auto transformedVector = this->_matA * this->_matB;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+    else
+        EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
+}
+
+
+/** @brief Verify that the binary vector multiplication operation return matrix product for denormals. */
+TYPED_TEST(Matrix3DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithPrecision)
+{
+    const auto transformedVector = this->_matA * this->_matB;
+    EXPECT_MAT_EQ(this->_expectedMat, transformedVector);
+}
+
+
+/**
+ * @brief Verify that binary matrix multiplication with identity matrix
+ *        returns original matrix.
+ */
+TEST(Matrix3DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
+{
+    constexpr fgm::Matrix3D<float> iMatrix;
+    constexpr fgm::Matrix3D mat{ 1.0f, 2.0f, 3.0f };
+
+    constexpr fgm::Matrix3D matrixProduct = iMatrix * mat;
+
+    EXPECT_MAT_EQ(mat, matrixProduct);
+}
+
+
+/**
+ * @brief Verify that the binary matrix multiplication operation perform automatic type promotion
+ *        to the wider numeric type.
+ */
+TEST(Matrix3DMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
+{
+    constexpr fgm::Matrix3D matA{ 1.0, 2.0, 3.0 };
+    constexpr fgm::Matrix3D matB{ 2, 1, 3 };
+
+    [[maybe_unused]] constexpr auto transformedVector = matA * matB;
+    static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
+}
+
+
+/** @brief Verify that the compound vector multiplication operation perform an in-place matrix multiplication. */
+TYPED_TEST(Matrix3DMultiplication, CompoundMultiplicationOperationPerformInPlaceMatrixMultiplication)
+{
+    auto transformedVector = this->_matA;
+    transformedVector *= this->_matB;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+    else
+        EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
+}
+
+
+/**
+ * @brief Verify that components matrix multiplication with identity matrix
+ *        does not mutate the calling matrix.
+ */
+TEST(Matrix3DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
+{
+    constexpr fgm::Matrix3D<float> iMatrix;
+    fgm::Matrix3D mat{ 1.0f, 2.0f, 3.0f };
+
+    mat *= iMatrix;
+    EXPECT_MAT_CONTAINS(std::vector{ 1.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 0.0f, 3.0f }, mat);
+}
+
+
+/**
+ * @brief Verify that the compound matrix multiplication operation maintains the destination type and
+ *        perform an implicit cast.
+ */
+TEST(Matrix3DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
+{
+    constexpr fgm::Matrix3D<double> iMatrix;
+    fgm::Matrix3D mat{ 1, 2, 3 };
+
+    mat *= iMatrix;
+    static_assert(std::is_same_v<decltype(mat)::value_type, int>);
+}
+
+
+/**
+ * @brief Verify that the compound multiplication operator (matrix) for mixed type
+ *        ensure minimal precision loss.
+ */
+TEST(Matrix3DMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+{
+    constexpr fgm::Matrix3D matA{ 2.5, 3.5, 0.5, 1.5, 2.5, -12.5, 5.45, 23.25, 85.5 };
+    fgm::Matrix3D matB{ 5, 10, 15, 20, 25, 30, 35, 40, 45 };
+    constexpr fgm::Matrix3D expectedMatrix{ 109, 391, 1160, 251, 830, 2262, 392, 1268, 3365 };
+
+    matB *= matA;
+
+    EXPECT_MAT_EQ(expectedMatrix, matB);
+}
 
 
 /** @} */
