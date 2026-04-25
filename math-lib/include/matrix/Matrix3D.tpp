@@ -1,4 +1,5 @@
 #pragma once
+#include "common/PreprocessorDefinitions.h"
 /**
  * @file Matrix3D.tpp
  * @author Alan Abraham P Kochumon
@@ -398,6 +399,44 @@ namespace fgm
         return *this;
     }
 
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::operator/(const S& scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = Magnitude<std::common_type_t<T, S>>;
+        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, "Matrix division by zero");
+
+        R factor = R(1) / static_cast<R>(scalar);
+        return Matrix2D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
+                           static_cast<R>(_data[0][1]) * factor, static_cast<R>(_data[1][1]) * factor,
+                           static_cast<R>(_data[0][2]) * factor, static_cast<R>(_data[1][2]) * factor);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Matrix3D<T>& Matrix3D<T>::operator/=(const S& scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = Magnitude<std::common_type_t<T, S>>;
+
+        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, "Matrix division by zero");
+
+        R factor = R(1) / static_cast<R>(scalar);
+
+        _data[0][0] = static_cast<T>(static_cast<R>(_data[0][0]) * factor);
+        _data[1][0] = static_cast<T>(static_cast<R>(_data[1][0]) * factor);
+        _data[2][0] = static_cast<T>(static_cast<R>(_data[2][0]) * factor);
+        _data[0][1] = static_cast<T>(static_cast<R>(_data[0][1]) * factor);
+        _data[1][1] = static_cast<T>(static_cast<R>(_data[1][1]) * factor);
+        _data[2][1] = static_cast<T>(static_cast<R>(_data[2][1]) * factor);
+        _data[0][2] = static_cast<T>(static_cast<R>(_data[0][2]) * factor);
+        _data[1][2] = static_cast<T>(static_cast<R>(_data[1][2]) * factor);
+        _data[2][2] = static_cast<T>(static_cast<R>(_data[2][2]) * factor);
+        return *this;
+    }
 
 
     /**************************************
