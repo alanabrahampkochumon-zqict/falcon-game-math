@@ -27,7 +27,7 @@ namespace fgm::messages::assertion
 namespace fgm::messages
 {
     namespace assertion
-    {
+    {              
         /** @brief Assertion message thrown when a matrix division by zero occurs. */
         inline constexpr std::string MAT_DIV_BY_ZERO = "Matrix division by zero";
 

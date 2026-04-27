@@ -1,5 +1,4 @@
 #pragma once
-#include "common/PreprocessorDefinitions.h"
 /**
  * @file Matrix3D.tpp
  * @author Alan Abraham P Kochumon
@@ -13,6 +12,7 @@
 
 
 #include "common/Messages.h"
+#include "common/PreprocessorDefinitions.h"
 
 
 
@@ -204,7 +204,7 @@ namespace fgm
     constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator+(const Matrix3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromoteValue_t<T, U>;
         return Matrix3D<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + rhs[2]);
     }
 
@@ -226,7 +226,7 @@ namespace fgm
     constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator-(const Matrix3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromoteValue_t<T, U>;
         return Matrix3D<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2]);
     }
 
@@ -248,7 +248,7 @@ namespace fgm
     constexpr PromotedMatrix3D<T, S> Matrix3D<T>::operator*(S scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromoteValue_t<T, S>;
         return Matrix3D<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2]);
     }
 
@@ -277,7 +277,7 @@ namespace fgm
     constexpr PromotedVector3D<T, U> Matrix3D<T>::operator*(const Vector3D<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromoteValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
@@ -308,7 +308,7 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic U>
     constexpr PromotedVector3D<T, U> operator*(const Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromoteValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
@@ -340,7 +340,7 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic U>
     constexpr Vector3D<T>& operator*=(Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromoteValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
@@ -385,7 +385,7 @@ namespace fgm
     constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator*(const Matrix3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromoteValue_t<T, U>;
         return Matrix3D<R>((*this) * rhs[0], (*this) * rhs[1], (*this) * rhs[2]);
     }
 
@@ -408,7 +408,7 @@ namespace fgm
     constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::operator/(const S& scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<std::common_type_t<T, S>>;
+        using R = Magnitude<PromoteValue_t<T, S>>;
         FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
 
         R factor = R(1) / static_cast<R>(scalar);
@@ -423,7 +423,7 @@ namespace fgm
     constexpr Matrix3D<T>& Matrix3D<T>::operator/=(const S& scalar) noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<std::common_type_t<T, S>>;
+        using R = Magnitude<PromoteValue_t<T, S>>;
 
         FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
 
@@ -579,7 +579,7 @@ namespace fgm
 
     //    template <typename T>
     //    template <typename S, typename>
-    //    auto Matrix3D<T>::operator+(const Matrix3D<S>& other) const -> Matrix3D<std::common_type_t<T, S>>
+    //    auto Matrix3D<T>::operator+(const Matrix3D<S>& other) const -> Matrix3D<PromoteValue_t<T, S>>
     //    {
     //        // Commented out for profiling
     //        // Since `this` elements[0] is the first column, we need to take the rows first (this[c][r]) and add them
@@ -594,7 +594,7 @@ namespace fgm
     //        //);
     //
     //        // Using Vector3D ops
-    //        using R = std::common_type_t<T, S>;
+    //        using R = PromoteValue_t<T, S>;
     //        return Matrix3D<R>(columns[0] + other[0], columns[1] + other[1], columns[2] + other[2]);
     //    }
     //
@@ -625,7 +625,7 @@ namespace fgm
     //
     //    template <typename T>
     //    template <typename S, typename>
-    //    auto Matrix3D<T>::operator-(const Matrix3D<S>& other) const -> Matrix3D<std::common_type_t<T, S>>
+    //    auto Matrix3D<T>::operator-(const Matrix3D<S>& other) const -> Matrix3D<PromoteValue_t<T, S>>
     //    {
     //        // NOTE: Commented out for profiling
     //        // Since `this` elements[0] is the first column, we need to take the rows first (this[c][r]) and add them
@@ -639,7 +639,7 @@ namespace fgm
     //        //     elements[0][2] - other(2, 0), elements[1][2] - other(2, 1), elements[2][2] - other(2, 2));
     //
     //        // Using Vector3D ops
-    //        using R = std::common_type_t<T, S>;
+    //        using R = PromoteValue_t<T, S>;
     //        return Matrix3D<R>(columns[0] - other[0], columns[1] - other[1], columns[2] - other[2]);
     //    }
     //
@@ -671,27 +671,27 @@ namespace fgm
     //
     //    template <typename T>
     //    template <typename S, typename>
-    //    auto Matrix3D<T>::operator*(const S& scalar) const -> Matrix3D<std::common_type_t<T, S>>
+    //    auto Matrix3D<T>::operator*(const S& scalar) const -> Matrix3D<PromoteValue_t<T, S>>
     //    {
-    //        using R = std::common_type_t<T, S>;
+    //        using R = PromoteValue_t<T, S>;
     //        return Matrix3D<R>(columns[0] * scalar, columns[1] * scalar, columns[2] * scalar);
     //    }
     //
     //    template <typename T, typename S, typename, typename>
-    //    auto operator*(const S& scalar, const Matrix3D<T>& matrix) -> Matrix3D<std::common_type_t<T, S>>
+    //    auto operator*(const S& scalar, const Matrix3D<T>& matrix) -> Matrix3D<PromoteValue_t<T, S>>
     //    {
     //        return Matrix3D(matrix[0] * scalar, matrix[1] * scalar, matrix[2] * scalar);
     //    }
     //
     //    template <typename T, typename S, typename, typename>
-    //    auto operator*(const Vector3D<S>& vec, const Matrix3D<T>& mat) -> Vector3D<std::common_type_t<T, S>>
+    //    auto operator*(const Vector3D<S>& vec, const Matrix3D<T>& mat) -> Vector3D<PromoteValue_t<T, S>>
     //    {
     //        return Vector3D(Vector3D<T>::dot(vec, mat[0]), Vector3D<T>::dot(vec, mat[1]), Vector3D<T>::dot(vec,
     //        mat[2]));
     //    }
     //
     //    template <typename T, typename S, typename, typename>
-    //    auto operator*=(Vector3D<S>& vec, const Matrix3D<T>& mat) -> Vector3D<std::common_type_t<T, S>>
+    //    auto operator*=(Vector3D<S>& vec, const Matrix3D<T>& mat) -> Vector3D<PromoteValue_t<T, S>>
     //    {
     //        vec = Vector3D(Vector3D<T>::dot(vec, mat[0]), Vector3D<T>::dot(vec, mat[1]), Vector3D<T>::dot(vec,
     //        mat[2])); return vec;
@@ -709,7 +709,7 @@ namespace fgm
     //
     //    template <typename T>
     //    template <typename S, typename>
-    //    auto Matrix3D<T>::operator*(const Vector3D<S>& vec) const -> Vector3D<std::common_type_t<T, S>>
+    //    auto Matrix3D<T>::operator*(const Vector3D<S>& vec) const -> Vector3D<PromoteValue_t<T, S>>
     //    {
     //        return Vector3D(elements[0][0] * vec.x() + elements[1][0] * vec.y() + elements[2][0] * vec.z(), // First
     //        Row * Vec
@@ -721,7 +721,7 @@ namespace fgm
     //
     //    template <typename T>
     //    template <typename S, typename>
-    //    auto Matrix3D<T>::operator*(const Matrix3D<S>& other) const -> Matrix3D<std::common_type_t<T, S>>
+    //    auto Matrix3D<T>::operator*(const Matrix3D<S>& other) const -> Matrix3D<PromoteValue_t<T, S>>
     //    {
     //        // TODO: Profiling
     //        // return Matrix3D(
@@ -744,7 +744,7 @@ namespace fgm
     //        +
     //        // elements[1][2] * other(1, 2) + elements[2][2] * other(2, 2)
     //        //);
-    //        using R = std::common_type_t<T, S>;
+    //        using R = PromoteValue_t<T, S>;
     //        return Matrix3D<R>(
     //            // Matrix * First Column Vector
     //            (*this) * other[0],
@@ -765,9 +765,9 @@ namespace fgm
     // #pragma warning(disable : 4723) // Suppress division by zero
     //    template <typename T>
     //    template <typename S, typename>
-    //    auto Matrix3D<T>::operator/(const S& scalar) const -> Matrix3D<std::common_type_t<T, S>>
+    //    auto Matrix3D<T>::operator/(const S& scalar) const -> Matrix3D<PromoteValue_t<T, S>>
     //    {
-    //        using R = std::common_type_t<T, S>;
+    //        using R = PromoteValue_t<T, S>;
     //        R factor = R(1) / static_cast<R>(scalar);
     //        return Matrix3D<R>(columns[0] * factor, columns[1] * factor, columns[2] * factor);
     //    }
@@ -777,7 +777,7 @@ namespace fgm
     //    template <typename S, typename>
     //    Matrix3D<T>& Matrix3D<T>::operator/=(const S& scalar)
     //    {
-    //        using R = std::common_type_t<T, S>;
+    //        using R = PromoteValue_t<T, S>;
     //        R factor = R(1) / static_cast<R>(scalar);
     //
     //        columns[0] *= factor;
