@@ -115,7 +115,7 @@ namespace
 
 
     // Matrix Try Division
-    // NOT available at compile time due to [out] parameter(status flag)
+    // NOT available at compile time due to [out] parameter (OperationStatus).
 } // namespace
 
 

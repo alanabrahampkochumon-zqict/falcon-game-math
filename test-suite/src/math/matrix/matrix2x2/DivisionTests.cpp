@@ -72,12 +72,28 @@ namespace
     constexpr fgm::Matrix2D MAT(2, 4, 6, 8);
 
     // Matrix scalar division
-    // constexpr fgm::Matrix2D DIV_RESULT_1 = MAT / 2;
-    // static_assert(DIV_RESULT_1(0, 0) == 1);
-    // static_assert(DIV_RESULT_1(0, 1) == 2);
-    // static_assert(DIV_RESULT_1(1, 0) == 3);
-    // static_assert(DIV_RESULT_1(1, 1) == 4);
-    // TODO: Add back static tests after implementing custom abs function
+    constexpr fgm::Matrix2D DIV_RESULT_1 = MAT / 2;
+    static_assert(DIV_RESULT_1(0, 0) == 1);
+    static_assert(DIV_RESULT_1(0, 1) == 2);
+    static_assert(DIV_RESULT_1(1, 0) == 3);
+    static_assert(DIV_RESULT_1(1, 1) == 4);
+
+    // Matrix safe division
+    constexpr fgm::Matrix2D DIV_RESULT_2 = MAT.safeDiv(2);
+    static_assert(DIV_RESULT_2(0, 0) == 1);
+    static_assert(DIV_RESULT_2(0, 1) == 2);
+    static_assert(DIV_RESULT_2(1, 0) == 3);
+    static_assert(DIV_RESULT_2(1, 1) == 4);
+
+    constexpr fgm::Matrix2D DIV_RESULT_3 = fgm::Matrix2D<int>::safeDiv(MAT, 2);
+    static_assert(DIV_RESULT_3(0, 0) == 1);
+    static_assert(DIV_RESULT_3(0, 1) == 2);
+    static_assert(DIV_RESULT_3(1, 0) == 3);
+    static_assert(DIV_RESULT_3(1, 1) == 4);
+
+    // Matrix Try Division
+    // NOT available at compile time due to [out] parameter (OperationStatus).
+
 } // namespace
 
 
@@ -327,7 +343,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefa
 
 
 /**
- * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::tryDiv returns passed-in fallback 
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix2D::tryDiv returns passed-in fallback
  *        and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
