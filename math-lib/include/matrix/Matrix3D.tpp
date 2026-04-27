@@ -446,7 +446,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::safeDiv(S scalar, const Matrix3D<T>& fallback) const noexcept
+    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::safeDiv(S scalar, const Matrix3D& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -465,9 +465,53 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::safeDiv(const Matrix3D& mat, S scalar,
-        const Matrix3D<T>& fallback) noexcept requires StrictArithmetic<T>
+        const Matrix3D& fallback) noexcept requires StrictArithmetic<T>
     {
         return mat.safeDiv(scalar, fallback);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::tryDiv(S scalar, OperationStatus& status,
+        const Matrix3D& fallback) const noexcept requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            // TODO: Check || vs | with benchmarks
+            if (hasNaN() | fgm::isnan(scalar))
+            {
+                status = OperationStatus::NANOPERAND;
+                return Matrix2D<R>(fallback);
+            }
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Matrix2D<R>(fallback);
+            }
+        }
+
+        if constexpr (std::is_integral_v<R>)
+            if (scalar == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Matrix2D<Magnitude<R>>(fallback);
+            }
+
+
+        status = OperationStatus::SUCCESS;
+        return (*this) / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::tryDiv(const Matrix3D& mat, S scalar, OperationStatus& status,
+        const Matrix3D& fallback) noexcept requires StrictArithmetic<T>
+    {
+        return mat.tryDiv(scalar, status, fallback);
     }
 
 

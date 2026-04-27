@@ -70,7 +70,7 @@ namespace fgm
 
     /** @brief Centralized value promotion logic for all math types. */
     template <Arithmetic T, Arithmetic U>
-    using PromoteValue_t = std::common_type_t<T, U>;
+    using PromotedValue_t = std::common_type_t<T, U>;
 
 
 
@@ -142,21 +142,21 @@ namespace fgm
 
     /** @brief Alias for @ref Vector2D with promoted value type. */
     template <Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromoteValue_t<T, U>>
-    using PromotedVector2D = Vector2D<PromoteValue_t<T, U>>;
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedVector2D = Vector2D<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Vector3D with promoted value type. */
     template <Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromoteValue_t<T, U>>
-    using PromotedVector3D = Vector3D<PromoteValue_t<T, U>>;
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedVector3D = Vector3D<PromotedValue_t<T, U>>;
 
 
 
     /** @brief Alias for @ref Matrix2D with promoted value type. */
     template <Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromoteValue_t<T, U>>
-    using PromotedMatrix2D = Matrix2D<PromoteValue_t<T, U>>;
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix2D = Matrix2D<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Matrix2D with a `value_type` of @ref Magnitude of the wider type. */
@@ -166,8 +166,8 @@ namespace fgm
 
     /** @brief Alias for @ref Matrix3D with promoted value type. */
     template <Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromoteValue_t<T, U>>
-    using PromotedMatrix3D = Matrix3D<PromoteValue_t<T, U>>;
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix3D = Matrix3D<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Matrix3D with a `value_type` of @ref Magnitude of the wider type. */
