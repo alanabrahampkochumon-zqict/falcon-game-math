@@ -481,15 +481,16 @@ namespace fgm
         if constexpr (std::is_floating_point_v<R>)
         {
             // TODO: Check || vs | with benchmarks
+            // Theoretically the slowest method since NaN checks are performed before division by zero
             if (hasNaN() | fgm::isnan(scalar))
             {
                 status = OperationStatus::NANOPERAND;
-                return Matrix2D<R>(fallback);
+                return Matrix3D<R>(fallback);
             }
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Matrix2D<R>(fallback);
+                return Matrix3D<R>(fallback);
             }
         }
 
@@ -497,7 +498,7 @@ namespace fgm
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Matrix2D<Magnitude<R>>(fallback);
+                return Matrix3D<Magnitude<R>>(fallback);
             }
 
 
