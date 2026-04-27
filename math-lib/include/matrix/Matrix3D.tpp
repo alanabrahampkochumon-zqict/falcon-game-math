@@ -452,7 +452,7 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
-            if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon()))
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
                 return Matrix3D<R>(fallback);
         if constexpr (std::is_integral_v<R>)
             if (scalar == 0)
