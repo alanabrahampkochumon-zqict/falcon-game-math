@@ -516,6 +516,20 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    constexpr T Matrix3D<T>::determinant() const noexcept requires SignedStrictArithmetic<T>
+    {
+        return T(0);
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Matrix3D<T>::determinant(const Matrix3D& mat) noexcept requires SignedStrictArithmetic<T>
+    {
+        return T(0);
+    }
+
+
     /**************************************
      *                                    *
      *             UTILITIES              *

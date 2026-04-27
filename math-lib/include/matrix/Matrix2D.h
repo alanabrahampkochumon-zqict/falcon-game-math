@@ -594,7 +594,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix2D<T, S> safeDiv(
-            S scalar, const Matrix2D<T>& fallback = Matrix2D<T>::eye()) const noexcept
+            S scalar, const Matrix2D& fallback = Matrix2D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -619,7 +619,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr static PromotedFloatMatrix2D<T, S> safeDiv(
-            const Matrix2D& mat, S scalar, const Matrix2D<T>& fallback = Matrix2D<T>::eye()) noexcept
+            const Matrix2D& mat, S scalar, const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -647,7 +647,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix2D<T, S> tryDiv(
-            S scalar, OperationStatus& status, const Matrix2D<T>& fallback = Matrix2D<T>::eye()) const noexcept
+            S scalar, OperationStatus& status, const Matrix2D& fallback = Matrix2D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -677,7 +677,7 @@ namespace fgm
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedFloatMatrix2D<T, S> tryDiv(
             const Matrix2D& mat, S scalar, OperationStatus& status,
-            const Matrix2D<T>& fallback = Matrix2D<T>::eye()) noexcept
+            const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

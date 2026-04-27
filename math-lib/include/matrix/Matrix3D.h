@@ -691,6 +691,292 @@ namespace fgm
         /** @} */
 
 
+        /**
+         * @addtogroup FGM_Mat3x3_Algebra
+         * @{
+         */
+
+        /**
+         * @brief Compute the determinant (scaling factor) of this matrix.
+         *        Calculate determinant:
+         *        \f$
+         *            \text{det(A)} = A_{00} \cdot A_{11} - A_{01} \cdot A_{10}
+         *        \f$
+         *
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         */
+        [[nodiscard]] constexpr T determinant() const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the determinant (scaling factor) of a matrix.
+         *        Calculate determinant:
+         *        \f$
+         *            \text{det(A)} = A_{00} \cdot A_{11} - A_{01} \cdot A_{10}
+         *        \f$
+         *
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         *
+         * @param mat The matrix to compute the determinant of.
+         *
+         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         */
+        static constexpr T determinant(const Matrix3D& mat) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        ///**
+        // * @brief Transpose this matrix by swapping its rows and columns.
+        // *        Compute transpose:
+        // *        \f$
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{01} \\
+        // *                 A_{10} & A_{11}
+        // *            \end{bmatrix} ^ \top
+        // *            =
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{10} \\
+        // *                 A_{01} & A_{11}
+        // *            \end{bmatrix}
+        // *        \f$
+        // *
+        // * @return A new @ref Matrix3D with its elements flipped along the diagonal.
+        // */
+        //[[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+        //constexpr Matrix3D transpose() const noexcept;
+
+
+        ///**
+        // * @brief Transpose a matrix by swapping its rows and columns.
+        // *        Compute transpose:
+        // *        \f$
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{01} \\
+        // *                 A_{10} & A_{11}
+        // *            \end{bmatrix} ^ \top
+        // *            =
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{10} \\
+        // *                 A_{01} & A_{11}
+        // *            \end{bmatrix}
+        // *        \f$
+        // *
+        // * @param mat The matrix to transpose.
+        // *
+        // * @return A new @ref Matrix3D with its elements flipped along the diagonal.
+        // */
+        //[[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+        //constexpr static Matrix3D transpose(const Matrix3D& mat) noexcept;
+
+
+        ///**
+        // * @brief Compute the inverse of this matrix.
+        // *        Calculate inverse:
+        // *        \f$
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{01} \\
+        // *                 A_{10} & A_{11}
+        // *            \end{bmatrix}^{-1}
+        // *            =
+        // *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+        // *            \begin{bmatrix}
+        // *                 A_{11} & -A_{01} \\
+        // *                 -A_{10} & A_{00}
+        // *            \end{bmatrix}
+        // *        \f$
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+        // *
+        // * @return A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$.
+        // */
+        //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        //constexpr Matrix3D<Magnitude<T>> inverse() const noexcept
+        //    requires SignedStrictArithmetic<T>;
+
+
+        ///**
+        // * @brief Compute the inverse of a matrix.
+        // *        Calculate inverse:
+        // *        \f$
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{01} \\
+        // *                 A_{10} & A_{11}
+        // *            \end{bmatrix}^{-1}
+        // *            =
+        // *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+        // *            \begin{bmatrix}
+        // *                 A_{11} & -A_{01} \\
+        // *                 -A_{10} & A_{00}
+        // *            \end{bmatrix}
+        // *        \f$
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+        // *
+        // * @param[in] matrix The matrix to invert.
+        // *
+        // * @return A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$.
+        // */
+        //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        //constexpr static Matrix3D<Magnitude<T>> inverse(const Matrix3D& matrix) noexcept
+        //    requires SignedStrictArithmetic<T>;
+
+
+        ///**
+        // * @brief Safely compute the inverse of this matrix.
+        // *        Calculate inverse:
+        // *        \f$
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{01} \\
+        // *                 A_{10} & A_{11}
+        // *            \end{bmatrix}^{-1}
+        // *            =
+        // *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+        // *            \begin{bmatrix}
+        // *                 A_{11} & -A_{01} \\
+        // *                 -A_{10} & A_{00}
+        // *            \end{bmatrix}
+        // *        \f$
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+        // * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+        // *
+        // * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+        // *
+        // * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+        // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
+        // */
+        //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        //constexpr Matrix3D<Magnitude<T>> safeInverse(const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        //    requires SignedStrictArithmetic<T>;
+
+
+        ///**
+        // * @brief Safely compute the inverse of a matrix.
+        // *        Calculate inverse:
+        // *        \f$
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{01} \\
+        // *                 A_{10} & A_{11}
+        // *            \end{bmatrix}^{-1}
+        // *            =
+        // *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+        // *            \begin{bmatrix}
+        // *                 A_{11} & -A_{01} \\
+        // *                 -A_{10} & A_{00}
+        // *            \end{bmatrix}
+        // *        \f$
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+        // * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+        // *
+        // * @param[in] matrix   The matrix to invert.
+        // * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+        // *
+        // * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+        // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
+        // */
+        //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        //static constexpr Matrix3D<Magnitude<T>> safeInverseOf(const Matrix3D& matrix,
+        //                                                      const Matrix3D& fallback = Matrix3D::eye()) noexcept
+        //    requires SignedStrictArithmetic<T>;
+
+
+        ///**
+        // * @brief Safely compute the inverse of this matrix and set @p status to the matrix inversion result.
+        // *        Calculate inverse:
+        // *        \f$
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{01} \\
+        // *                 A_{10} & A_{11}
+        // *            \end{bmatrix}^{-1}
+        // *            =
+        // *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+        // *            \begin{bmatrix}
+        // *                 A_{11} & -A_{01} \\
+        // *                 -A_{10} & A_{00}
+        // *            \end{bmatrix}
+        // *        \f$
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+        // * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+        // *
+        // * @param[out] status  The status flag to store the status of the current operation result.
+        // *                     For details on status codes see @ref OperationStatus.
+        // * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+        // *
+        // * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+        // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
+        // */
+        //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        //constexpr Matrix3D<Magnitude<T>> tryInverse(OperationStatus& status,
+        //                                            const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        //    requires SignedStrictArithmetic<T>;
+
+
+        ///**
+        // * @brief Safely compute the inverse of a matrix and set @p status to the matrix inversion result.
+        // *        Calculate inverse:
+        // *        \f$
+        // *            \begin{bmatrix}
+        // *                 A_{00} & A_{01} \\
+        // *                 A_{10} & A_{11}
+        // *            \end{bmatrix}^{-1}
+        // *            =
+        // *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+        // *            \begin{bmatrix}
+        // *                 A_{11} & -A_{01} \\
+        // *                 -A_{10} & A_{00}
+        // *            \end{bmatrix}
+        // *        \f$
+        // *
+        // * @note Promotes the result to a floating point result using @ref Magnitude.
+        // * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+        // * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+        // *
+        // * @param[in] matrix   The matrix to invert.
+        // * @param[out] status  The status flag to store the status of the current operation result.
+        // *                     For details on status codes see @ref OperationStatus.
+        // * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+        // *
+        // * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+        // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
+        // */
+        //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        //static constexpr Matrix3D<Magnitude<T>> tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
+        //                                                     const Matrix3D& fallback = Matrix3D::eye()) noexcept
+        //    requires SignedStrictArithmetic<T>;
+
+
+        ///**
+        // * @brief Compute the sum of diagonal entries of this matrix.
+        // *
+        // * @return The sum of entries along the main diagonal of this matrix.
+        // */
+        //[[nodiscard]] constexpr T trace() const noexcept
+        //    requires StrictArithmetic<T>;
+
+
+        ///**
+        // * @brief Compute the sum of diagonal entries of a matrix.
+        // *
+        // * @param mat The matrix whose trace is to be computed.
+        // *
+        // * @return The sum of entries along the main diagonal of the given matrix.
+        // */
+        //[[nodiscard]] static constexpr T trace(const Matrix3D& mat) noexcept
+        //    requires StrictArithmetic<T>;
+
+        /** @} */
+
+
 
         /**
          * @addtogroup FGM_Mat3x3_Utils
@@ -741,6 +1027,9 @@ namespace fgm
         [[nodiscard]] constexpr static bool hasNaN(const Matrix3D& mat) noexcept;
 
         /** @} */
+
+
+        
 
         // template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>> // Added 'typename' and ', int'
         // Matrix3D(const Matrix3D<S>& other)

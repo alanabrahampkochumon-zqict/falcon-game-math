@@ -29,7 +29,7 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { fgm::Vector2D<T>{ 4, 1 }, fgm::Vector2D<T>{ 2, 5 } };
+        _matrix = { { T(1), T(2), T(5) }, { T(5), T(1), T(7) }, { T(8), T(9), T(10) } };
         _expectedDeterminant = 18;
     }
 };
