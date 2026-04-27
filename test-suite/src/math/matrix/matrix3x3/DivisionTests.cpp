@@ -89,17 +89,33 @@ namespace
     static_assert(DIV_RESULT_1(2, 1) == 8);
     static_assert(DIV_RESULT_1(2, 2) == 9);
 
+
     // Matrix Safe Division
-    //constexpr fgm::Matrix3D DIV_RESULT_2 = MAT.safeDiv(2);
-    //static_assert(DIV_RESULT_1(0, 0) == 1);
-    //static_assert(DIV_RESULT_1(0, 1) == 2);
-    //static_assert(DIV_RESULT_1(0, 2) == 3);
-    //static_assert(DIV_RESULT_1(1, 0) == 4);
-    //static_assert(DIV_RESULT_1(1, 1) == 5);
-    //static_assert(DIV_RESULT_1(1, 2) == 6);
-    //static_assert(DIV_RESULT_1(2, 0) == 7);
-    //static_assert(DIV_RESULT_1(2, 1) == 8);
-    //static_assert(DIV_RESULT_1(2, 2) == 9);
+    constexpr fgm::Matrix3D DIV_RESULT_2 = MAT.safeDiv(2);
+    static_assert(DIV_RESULT_2(0, 0) == 1);
+    static_assert(DIV_RESULT_2(0, 1) == 2);
+    static_assert(DIV_RESULT_2(0, 2) == 3);
+    static_assert(DIV_RESULT_2(1, 0) == 4);
+    static_assert(DIV_RESULT_2(1, 1) == 5);
+    static_assert(DIV_RESULT_2(1, 2) == 6);
+    static_assert(DIV_RESULT_2(2, 0) == 7);
+    static_assert(DIV_RESULT_2(2, 1) == 8);
+    static_assert(DIV_RESULT_2(2, 2) == 9);
+
+    constexpr fgm::Matrix3D DIV_RESULT_3 = fgm::Matrix3D<int>::safeDiv(MAT, 2);
+    static_assert(DIV_RESULT_3(0, 0) == 1);
+    static_assert(DIV_RESULT_3(0, 1) == 2);
+    static_assert(DIV_RESULT_3(0, 2) == 3);
+    static_assert(DIV_RESULT_3(1, 0) == 4);
+    static_assert(DIV_RESULT_3(1, 1) == 5);
+    static_assert(DIV_RESULT_3(1, 2) == 6);
+    static_assert(DIV_RESULT_3(2, 0) == 7);
+    static_assert(DIV_RESULT_3(2, 1) == 8);
+    static_assert(DIV_RESULT_3(2, 2) == 9);
+
+
+    // Matrix Try Division
+    // NOT available at compile time due to [out] parameter(status flag)
 } // namespace
 
 
