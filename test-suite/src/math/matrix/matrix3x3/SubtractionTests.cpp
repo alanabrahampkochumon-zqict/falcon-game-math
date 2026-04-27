@@ -39,7 +39,7 @@ TYPED_TEST_SUITE(Matrix3DSubtraction, SupportedArithmeticTypes);
 
 
 /**
- * @addtogroup T_FGM_Mat2x2_Subtraction
+ * @addtogroup T_FGM_Mat3x3_Subtraction
  * @{
  */
 

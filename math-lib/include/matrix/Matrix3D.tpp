@@ -412,9 +412,11 @@ namespace fgm
         FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
 
         R factor = R(1) / static_cast<R>(scalar);
-        return Matrix2D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
-                           static_cast<R>(_data[0][1]) * factor, static_cast<R>(_data[1][1]) * factor,
-                           static_cast<R>(_data[0][2]) * factor, static_cast<R>(_data[1][2]) * factor);
+        return Matrix3D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
+                           static_cast<R>(_data[2][0]) * factor, static_cast<R>(_data[0][1]) * factor,
+                           static_cast<R>(_data[1][1]) * factor, static_cast<R>(_data[2][1]) * factor,
+                           static_cast<R>(_data[0][2]) * factor, static_cast<R>(_data[1][2]) * factor,
+                           static_cast<R>(_data[2][2]) * factor);
     }
 
 

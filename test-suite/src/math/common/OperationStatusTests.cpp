@@ -36,7 +36,7 @@ TEST_P(OperationStatusMappingTests, ReturnsCorrectMessage)
 {
     const auto& [status, expectedMessage] = GetParam();
     const auto message = fgm::getStatusMessage(status);
-    EXPECT_STREQ(expectedMessage, message);
+    EXPECT_EQ(expectedMessage, message);
 }
 
 
