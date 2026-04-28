@@ -774,7 +774,7 @@ namespace fgm
          *                 A_{10} & A_{11}
          *            \end{bmatrix}^{-1}
          *            =
-         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \frac{1}{det(A)}
          *            \begin{bmatrix}
          *                 A_{11} & -A_{01} \\
          *                 -A_{10} & A_{00}
@@ -800,7 +800,7 @@ namespace fgm
          *                 A_{10} & A_{11}
          *            \end{bmatrix}^{-1}
          *            =
-         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \frac{1}{det(A)}
          *            \begin{bmatrix}
          *                 A_{11} & -A_{01} \\
          *                 -A_{10} & A_{00}
