@@ -465,7 +465,8 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::safeDiv(const Matrix3D& mat, S scalar,
-        const Matrix3D& fallback) noexcept requires StrictArithmetic<T>
+                                                               const Matrix3D& fallback) noexcept
+        requires StrictArithmetic<T>
     {
         return mat.safeDiv(scalar, fallback);
     }
@@ -474,7 +475,8 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::tryDiv(S scalar, OperationStatus& status,
-        const Matrix3D& fallback) const noexcept requires StrictArithmetic<T>
+                                                              const Matrix3D& fallback) const noexcept
+        requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
 
@@ -510,23 +512,28 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::tryDiv(const Matrix3D& mat, S scalar, OperationStatus& status,
-        const Matrix3D& fallback) noexcept requires StrictArithmetic<T>
+                                                              const Matrix3D& fallback) noexcept
+        requires StrictArithmetic<T>
     {
         return mat.tryDiv(scalar, status, fallback);
     }
 
 
     template <Arithmetic T>
-    constexpr T Matrix3D<T>::determinant() const noexcept requires SignedStrictArithmetic<T>
+    constexpr T Matrix3D<T>::determinant() const noexcept
+        requires SignedStrictArithmetic<T>
     {
-        return T(0);
+        return _data[0][0] * (_data[1][1] * _data[2][2] - _data[2][1] * _data[1][2]) -
+            _data[1][0] * (_data[0][1] * _data[2][2] - _data[0][2] * _data[2][1]) +
+            _data[2][0] * (_data[0][1] * _data[1][2] - _data[0][2] * _data[1][1]);
     }
 
 
     template <Arithmetic T>
-    constexpr T Matrix3D<T>::determinant(const Matrix3D& mat) noexcept requires SignedStrictArithmetic<T>
+    constexpr T Matrix3D<T>::determinant(const Matrix3D& mat) noexcept
+        requires SignedStrictArithmetic<T>
     {
-        return T(0);
+        return mat.determinant();
     }
 
 

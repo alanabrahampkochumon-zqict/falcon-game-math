@@ -30,7 +30,7 @@ protected:
     void SetUp() override
     {
         _matrix = { { T(1), T(2), T(5) }, { T(5), T(1), T(7) }, { T(8), T(9), T(10) } };
-        _expectedDeterminant = 18;
+        _expectedDeterminant = 144;
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix3D determinant, parameterized by @ref SupportedSignedArithmeticTypes. */
@@ -74,10 +74,10 @@ namespace
     constexpr fgm::Matrix3D MAT{ fgm::Vector3D{ 1, 2, 5 }, fgm::Vector3D{ 5, 1, 7 }, fgm::Vector3D{ 8, 9, 10 } };
 
     // Verify determinant (member function)
-    static_assert(MAT.determinant() == 18);
+    static_assert(MAT.determinant() == 144);
 
     // Verify determinant (static function)
-    static_assert(fgm::Matrix3D<int>::determinant(MAT) == 18);
+    static_assert(fgm::Matrix3D<int>::determinant(MAT) == 144);
 
 } // namespace
 
