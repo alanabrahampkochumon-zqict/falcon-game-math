@@ -11,6 +11,7 @@
  */
 
 
+#include "Matrix3D.h"
 #include "common/Messages.h"
 #include "common/PreprocessorDefinitions.h"
 
@@ -545,7 +546,12 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix3D<T> Matrix3D<T>::transpose() const noexcept
     {
-        return *this;
+        /**
+         * @note Although the code doesn't seem to transpose, since we are storing in column major order
+         *       _data[row][col] actually gives _data[col][row]
+         */
+        return Matrix3D(_data[0][0], _data[0][1], _data[0][2], _data[1][0], _data[1][1], _data[1][2], _data[2][0],
+                        _data[2][1], _data[2][2]);
     }
 
 
@@ -554,7 +560,7 @@ namespace fgm
     {
         return mat.transpose();
     }
-    
+
 
 
     /**************************************
