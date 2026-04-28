@@ -699,7 +699,11 @@ namespace fgm
          * @brief Compute the determinant (scaling factor) of this matrix.
          *        Calculate determinant:
          *        \f$
-         *            \text{det(A)} = A_{00} \cdot A_{11} - A_{01} \cdot A_{10}
+         *            \begin{align*}
+         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
+         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
+         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
+         *            \end{align*}
          *        \f$
          *
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
@@ -731,48 +735,48 @@ namespace fgm
             requires SignedStrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Transpose this matrix by swapping its rows and columns.
-        // *        Compute transpose:
-        // *        \f$
-        // *            \begin{bmatrix}
-        // *                 A_{00} & A_{01} \\
-        // *                 A_{10} & A_{11}
-        // *            \end{bmatrix} ^ \top
-        // *            =
-        // *            \begin{bmatrix}
-        // *                 A_{00} & A_{10} \\
-        // *                 A_{01} & A_{11}
-        // *            \end{bmatrix}
-        // *        \f$
-        // *
-        // * @return A new @ref Matrix3D with its elements flipped along the diagonal.
-        // */
-        //[[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        // constexpr Matrix3D transpose() const noexcept;
+        /**
+         * @brief Transpose this matrix by swapping its rows and columns.
+         *        Compute transpose:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix} ^ \top
+         *            =
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} \\
+         *                 A_{01} & A_{11}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @return A new @ref Matrix3D with its elements flipped along the diagonal.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+         constexpr Matrix3D transpose() const noexcept;
 
 
-        ///**
-        // * @brief Transpose a matrix by swapping its rows and columns.
-        // *        Compute transpose:
-        // *        \f$
-        // *            \begin{bmatrix}
-        // *                 A_{00} & A_{01} \\
-        // *                 A_{10} & A_{11}
-        // *            \end{bmatrix} ^ \top
-        // *            =
-        // *            \begin{bmatrix}
-        // *                 A_{00} & A_{10} \\
-        // *                 A_{01} & A_{11}
-        // *            \end{bmatrix}
-        // *        \f$
-        // *
-        // * @param mat The matrix to transpose.
-        // *
-        // * @return A new @ref Matrix3D with its elements flipped along the diagonal.
-        // */
-        //[[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        // constexpr static Matrix3D transpose(const Matrix3D& mat) noexcept;
+        /**
+         * @brief Transpose a matrix by swapping its rows and columns.
+         *        Compute transpose:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix} ^ \top
+         *            =
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} \\
+         *                 A_{01} & A_{11}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @param mat The matrix to transpose.
+         *
+         * @return A new @ref Matrix3D with its elements flipped along the diagonal.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+         constexpr static Matrix3D transpose(const Matrix3D& mat) noexcept;
 
 
         ///**

@@ -1,7 +1,7 @@
 /**
  * @file DeterminantTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: April 13, 2026
+ * @date Created on: April 27, 2026
  *
  * @brief Verify @ref fgm::Matrix3D determinant logic.
  *

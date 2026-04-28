@@ -542,6 +542,21 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    constexpr Matrix3D<T> Matrix3D<T>::transpose() const noexcept
+    {
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix3D<T> Matrix3D<T>::transpose(const Matrix3D& mat) noexcept
+    {
+        return mat.transpose();
+    }
+    
+
+
     /**************************************
      *                                    *
      *             UTILITIES              *

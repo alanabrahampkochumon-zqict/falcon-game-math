@@ -53,18 +53,18 @@ namespace
     constexpr fgm::Matrix2D MAT(1, 2, 3, 4);
 
     // Verify matrix transpose (member function)
-    constexpr fgm::Matrix2D TRANS_MAT = MAT.transpose();
-    static_assert(TRANS_MAT(0, 0) == 1);
-    static_assert(TRANS_MAT(0, 1) == 3);
-    static_assert(TRANS_MAT(1, 0) == 2);
-    static_assert(TRANS_MAT(1, 1) == 4);
+    constexpr fgm::Matrix2D TRANSPOSE_MAT = MAT.transpose();
+    static_assert(TRANSPOSE_MAT(0, 0) == 1);
+    static_assert(TRANSPOSE_MAT(0, 1) == 3);
+    static_assert(TRANSPOSE_MAT(1, 0) == 2);
+    static_assert(TRANSPOSE_MAT(1, 1) == 4);
 
     // Verify matrix transpose (static function)
-    constexpr fgm::Matrix2D TRANS_MAT_S = fgm::Matrix2D<int>::transpose(MAT);
-    static_assert(TRANS_MAT_S(0, 0) == 1);
-    static_assert(TRANS_MAT_S(0, 1) == 3);
-    static_assert(TRANS_MAT_S(1, 0) == 2);
-    static_assert(TRANS_MAT_S(1, 1) == 4);
+    constexpr fgm::Matrix2D TRANSPOSE_MAT_S = fgm::Matrix2D<int>::transpose(MAT);
+    static_assert(TRANSPOSE_MAT_S(0, 0) == 1);
+    static_assert(TRANSPOSE_MAT_S(0, 1) == 3);
+    static_assert(TRANSPOSE_MAT_S(1, 0) == 2);
+    static_assert(TRANSPOSE_MAT_S(1, 1) == 4);
 }
 
 
