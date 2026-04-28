@@ -523,6 +523,11 @@ namespace fgm
     constexpr T Matrix3D<T>::determinant() const noexcept
         requires SignedStrictArithmetic<T>
     {
+        /**
+         * @note The documentation shows the determinant of a Matrix stored in row major,
+         *       but the implementation uses column major, so row and column indices are swapped,
+         *       although it will not affect the final value, as det(A) == det(A^T).
+         */
         return _data[0][0] * (_data[1][1] * _data[2][2] - _data[2][1] * _data[1][2]) -
             _data[1][0] * (_data[0][1] * _data[2][2] - _data[0][2] * _data[2][1]) +
             _data[2][0] * (_data[0][1] * _data[1][2] - _data[0][2] * _data[1][1]);

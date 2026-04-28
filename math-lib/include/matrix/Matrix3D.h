@@ -684,8 +684,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedFloatMatrix3D<T, S> tryDiv(
-            const Matrix3D& mat, S scalar, OperationStatus& status,
-            const Matrix3D& fallback = Matrix3D::eye()) noexcept
+            const Matrix3D& mat, S scalar, OperationStatus& status, const Matrix3D& fallback = Matrix3D::eye()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -715,7 +714,11 @@ namespace fgm
          * @brief Compute the determinant (scaling factor) of a matrix.
          *        Calculate determinant:
          *        \f$
-         *            \text{det(A)} = A_{00} \cdot A_{11} - A_{01} \cdot A_{10}
+         *            \begin{align*}
+         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
+         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
+         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
+         *            \end{align*}
          *        \f$
          *
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
@@ -746,7 +749,7 @@ namespace fgm
         // * @return A new @ref Matrix3D with its elements flipped along the diagonal.
         // */
         //[[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        //constexpr Matrix3D transpose() const noexcept;
+        // constexpr Matrix3D transpose() const noexcept;
 
 
         ///**
@@ -769,7 +772,7 @@ namespace fgm
         // * @return A new @ref Matrix3D with its elements flipped along the diagonal.
         // */
         //[[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        //constexpr static Matrix3D transpose(const Matrix3D& mat) noexcept;
+        // constexpr static Matrix3D transpose(const Matrix3D& mat) noexcept;
 
 
         ///**
@@ -794,7 +797,7 @@ namespace fgm
         // * @return A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$.
         // */
         //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        //constexpr Matrix3D<Magnitude<T>> inverse() const noexcept
+        // constexpr Matrix3D<Magnitude<T>> inverse() const noexcept
         //    requires SignedStrictArithmetic<T>;
 
 
@@ -822,7 +825,7 @@ namespace fgm
         // * @return A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$.
         // */
         //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        //constexpr static Matrix3D<Magnitude<T>> inverse(const Matrix3D& matrix) noexcept
+        // constexpr static Matrix3D<Magnitude<T>> inverse(const Matrix3D& matrix) noexcept
         //    requires SignedStrictArithmetic<T>;
 
 
@@ -852,7 +855,7 @@ namespace fgm
         // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
         // */
         //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        //constexpr Matrix3D<Magnitude<T>> safeInverse(const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        // constexpr Matrix3D<Magnitude<T>> safeInverse(const Matrix3D& fallback = Matrix3D::eye()) const noexcept
         //    requires SignedStrictArithmetic<T>;
 
 
@@ -883,7 +886,7 @@ namespace fgm
         // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
         // */
         //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        //static constexpr Matrix3D<Magnitude<T>> safeInverseOf(const Matrix3D& matrix,
+        // static constexpr Matrix3D<Magnitude<T>> safeInverseOf(const Matrix3D& matrix,
         //                                                      const Matrix3D& fallback = Matrix3D::eye()) noexcept
         //    requires SignedStrictArithmetic<T>;
 
@@ -916,7 +919,7 @@ namespace fgm
         // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
         // */
         //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        //constexpr Matrix3D<Magnitude<T>> tryInverse(OperationStatus& status,
+        // constexpr Matrix3D<Magnitude<T>> tryInverse(OperationStatus& status,
         //                                            const Matrix3D& fallback = Matrix3D::eye()) const noexcept
         //    requires SignedStrictArithmetic<T>;
 
@@ -950,7 +953,7 @@ namespace fgm
         // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
         // */
         //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        //static constexpr Matrix3D<Magnitude<T>> tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
+        // static constexpr Matrix3D<Magnitude<T>> tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
         //                                                     const Matrix3D& fallback = Matrix3D::eye()) noexcept
         //    requires SignedStrictArithmetic<T>;
 
@@ -1029,7 +1032,7 @@ namespace fgm
         /** @} */
 
 
-        
+
 
         // template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>> // Added 'typename' and ', int'
         // Matrix3D(const Matrix3D<S>& other)
