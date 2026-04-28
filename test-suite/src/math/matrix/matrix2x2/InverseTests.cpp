@@ -78,7 +78,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, NaNMatrix2DInverse,
 // namespace
 //{
 //     constexpr fgm::Matrix2D MAT(1, 2, 3, 4);
-//
+//     // TODO: Add static test for inverse
 //     // Verify matrix transpose (member function)
 //     constexpr fgm::Matrix2D TRANS_MAT = MAT.transpose();
 //     static_assert(TRANS_MAT(0, 0) == 1);
