@@ -10,6 +10,9 @@
  */
 
 
+#include <type_traits>
+
+
 
 /**
  * @addtogroup FGM_Macro
@@ -35,6 +38,8 @@
  *
  * @note This macro is strictly active only in **Debug** builds. In **Release** builds
  *       (when `NDEBUG` is defined), it expands into a zero-cost void cast.
+ * @note To ensure that the macro support compile-time evaluation an exception is thrown,
+ *       instead of logging during compile time.
  *
  * @param condition The boolean expression to evaluate.
  * @param message   A string literal or streamable object providing context on the failure.
@@ -43,13 +48,21 @@
     #define FGM_ASSERT_MSG(condition, message)                                                                         \
         do                                                                                                             \
         {                                                                                                              \
-            if (!(condition))                                                                                          \
+            if (std::is_constant_evaluated())                                                                          \
             {                                                                                                          \
-                std::cerr << "[FGM ASSERTION FAILED]\n"                                                                \
-                          << "Condition: " << #condition << "\n"                                                       \
-                          << "Message:   " << (message) << "\n"                                                        \
-                          << "Location:  " << __FILE__ << ":" << __LINE__ << std::endl;                                \
-                FGM_DEBUG_BREAK();                                                                                     \
+                if (!(condition))                                                                                      \
+                    throw message;                                                                                     \
+            }                                                                                                          \
+            else                                                                                                       \
+            {                                                                                                          \
+                if (!(condition))                                                                                      \
+                {                                                                                                      \
+                    std::cerr << "[FGM ASSERTION FAILED]\n"                                                            \
+                              << "Condition: " << #condition << "\n"                                                   \
+                              << "Message:   " << (message) << "\n"                                                    \
+                              << "Location:  " << __FILE__ << ":" << __LINE__ << std::endl;                            \
+                    FGM_DEBUG_BREAK();                                                                                 \
+                }                                                                                                      \
             }                                                                                                          \
         } while (false)
 #else
@@ -62,6 +75,8 @@
  *
  * @note This macro is strictly active only in **Debug** builds. In **Release** builds
  *       (when `NDEBUG` is defined), it expands into a zero-cost void cast.
+ * @note To ensure that the macro support compile-time evaluation an exception is thrown,
+ *       instead of logging during compile time.
  *
  * @param condition The boolean expression to evaluate.
  */
@@ -69,15 +84,22 @@
     #define FGM_ASSERT(condition)                                                                                      \
         do                                                                                                             \
         {                                                                                                              \
-            if (!(condition))                                                                                          \
+            if (std::is_constant_evaluated())                                                                          \
             {                                                                                                          \
-                std::cerr << "[FGM ASSERTION FAILED]\n"                                                                \
-                          << "Condition: " << #condition << "\n"                                                       \
-                          << "Location:  " << __FILE__ << ":" << __LINE__ << std::endl;                                \
-                FGM_DEBUG_BREAK();                                                                                     \
+                if (!(condition))                                                                                      \
+                    throw std::string("[FGM ASSERTION FAILED]\n") + std::string(#condition);                           \
             }                                                                                                          \
-        } while (false)
-#else
+            else                                                                                                       \
+            {                                                                                                          \
+                if (!(condition))                                                                                      \
+                {                                                                                                      \
+                    std::cerr << "[FGM ASSERTION FAILED]\n"                                                            \
+                              << "Condition: " << #condition << "\n"                                                   \
+                              << "Location:  " << __FILE__ << ":" << __LINE__ << std::endl;                            \
+                    FGM_DEBUG_BREAK();                                                                                 \
+                }                                                                                                      \
+            }                                                                                                          \
+        } while (false) #else
     #define FGM_ASSERT(condition) ((void) 0)
 #endif
 
