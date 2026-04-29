@@ -87,22 +87,30 @@ INSTANTIATE_TEST_SUITE_P(
 namespace
 {
     constexpr fgm::Matrix3D MAT(1.0f, 2.0f, 3.0f, 0.0f, 1.0f, 4.0f, 5.0f, 6.0f, 0.0f);
-    //constexpr fgm::Matrix3D INV_MAT(-24.0f, 18.0f, 5.0f, 20.0f, -15.0f, -4.0f, -5.0f, 4.0f, 1.0f);
-    constexpr fgm::Matrix3D INV_MAT = MAT.inverse();
+
     // Verify matrix transpose (member function)
-    static_assert(EXPECT_MAT_CONTAINS(std::vector{ -24.0f, 18.0f, 5.0f, 20.0f, -15.0f, -4.0f, -5.0f, 4.0f, 1.0f },
-                                      INV_MAT));
+    constexpr fgm::Matrix3D INV_MAT = MAT.inverse();
     static_assert(INV_MAT(0, 0) == -24.0f);
     static_assert(INV_MAT(0, 1) == 18.0f);
-    static_assert(INV_MAT(1, 0) == 2);
-    static_assert(INV_MAT(1, 1) == 4);
+    static_assert(INV_MAT(0, 2) == 5.0f);
+    static_assert(INV_MAT(1, 0) == 20.0f);
+    static_assert(INV_MAT(1, 1) == -15.0f);
+    static_assert(INV_MAT(1, 2) == -4.0f);
+    static_assert(INV_MAT(2, 0) == -5.0f);
+    static_assert(INV_MAT(2, 1) == 4.0f);
+    static_assert(INV_MAT(2, 2) == 1.0f);
 
     // Verify matrix transpose (static function)
     constexpr fgm::Matrix3D INV_MAT_S = fgm::Matrix3D<float>::inverse(MAT);
-    static_assert(INV_MAT_S(0, 0) == 1);
-    static_assert(INV_MAT_S(0, 1) == 3);
-    static_assert(INV_MAT_S(1, 0) == 2);
-    static_assert(INV_MAT_S(1, 1) == 4);
+    static_assert(INV_MAT_S(0, 0) == -24.0f);
+    static_assert(INV_MAT_S(0, 1) == 18.0f);
+    static_assert(INV_MAT_S(0, 2) == 5.0f);
+    static_assert(INV_MAT_S(1, 0) == 20.0f);
+    static_assert(INV_MAT_S(1, 1) == -15.0f);
+    static_assert(INV_MAT_S(1, 2) == -4.0f);
+    static_assert(INV_MAT_S(2, 0) == -5.0f);
+    static_assert(INV_MAT_S(2, 1) == 4.0f);
+    static_assert(INV_MAT_S(2, 2) == 1.0f);
 } // namespace
 
 
