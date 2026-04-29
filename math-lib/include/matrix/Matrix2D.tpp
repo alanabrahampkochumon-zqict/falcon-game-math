@@ -14,6 +14,7 @@
 
 
 #include "Matrix2D.h"
+#include "common/PreprocessorDefinitions.h"
 #include "common/Wrappers.tpp"
 
 #include <cassert>
@@ -364,9 +365,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = Magnitude<std::common_type_t<T, S>>;
-        // TODO: Update to use FMGASSERT, refactor tests accordingly
-        assert(fgm::abs(R(scalar)) > Config::EPSILON<R> &&
-               "Matrix division by zero"); // TODO: Change to custom assert and add custom abs
+        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, "Matrix division by zero");
 
         R factor = R(1) / static_cast<R>(scalar);
         return Matrix2D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
@@ -516,8 +515,8 @@ namespace fgm
         using R = Magnitude<T>;
 
         R det = determinant();
-        assert(determinant() > Config::EPSILON<R> &&
-               "[Matrix2D Determinant]: Division by zero."); // TODO: Update to custom assert
+
+        FGM_ASSERT_MSG(determinant() > Config::EPSILON<R>, "[Matrix2D Determinant]: Division by zero.");
 
         R factor = R(1) / det;
 
