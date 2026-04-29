@@ -10,6 +10,7 @@
  */
 
 
+#include <string>
 #include <type_traits>
 
 
@@ -31,6 +32,21 @@
     #define FGM_DEBUG_BREAK() raise(SIGTRAP)
 #endif
 
+/**
+ * @brief Log the assertion message and status to console.
+ *
+ * @param condition The condition that triggered the assertion.
+ * @param message   An optional message, stating the reason behind assertion failure.
+ * @param file      The name of the file that triggered the assertion.
+ * @param line      The line number of hte code that triggered the assertion.
+ */
+inline void logAssertion(const char* condition, const char* message, const char* file, const int line)
+{
+    std::cerr << "[FGM ASSERTION FAILED]\n"
+              << "Condition: " << condition << '\n'
+              << "Message:   " << (message ? message : "None") << '\n'
+              << "Location:  " << file << ":" << line << '\n';
+}
 
 /**
  * @def FGM_ASSERT_MSG(condition, message)
@@ -48,22 +64,11 @@
     #define FGM_ASSERT_MSG(condition, message)                                                                         \
         do                                                                                                             \
         {                                                                                                              \
-            if (std::is_constant_evaluated())                                                                          \
-            {                                                                                                          \
-                if (!(condition))                                                                                      \
-                    throw message;                                                                                     \
-            }                                                                                                          \
-            else                                                                                                       \
-            {                                                                                                          \
-                if (!(condition))                                                                                      \
-                {                                                                                                      \
-                    std::cerr << "[FGM ASSERTION FAILED]\n"                                                            \
-                              << "Condition: " << #condition << "\n"                                                   \
-                              << "Message:   " << (message) << "\n"                                                    \
-                              << "Location:  " << __FILE__ << ":" << __LINE__ << std::endl;                            \
-                    FGM_DEBUG_BREAK();                                                                                 \
-                }                                                                                                      \
-            }                                                                                                          \
+            (condition) ? void(0)                                                                                      \
+                        : (std::is_constant_evaluated() ? throw message                                                \
+                                                        : logAssertion(#condition, message, __FILE__, __LINE__),       \
+                           FGM_DEBUG_BREAK());                                                                         \
+                                                                                                                       \
         } while (false)
 #else
     #define FGM_ASSERT_MSG(condition, message) ((void) 0)
@@ -84,22 +89,13 @@
     #define FGM_ASSERT(condition)                                                                                      \
         do                                                                                                             \
         {                                                                                                              \
-            if (std::is_constant_evaluated())                                                                          \
-            {                                                                                                          \
-                if (!(condition))                                                                                      \
-                    throw std::string("[FGM ASSERTION FAILED]\n") + std::string(#condition);                           \
-            }                                                                                                          \
-            else                                                                                                       \
-            {                                                                                                          \
-                if (!(condition))                                                                                      \
-                {                                                                                                      \
-                    std::cerr << "[FGM ASSERTION FAILED]\n"                                                            \
-                              << "Condition: " << #condition << "\n"                                                   \
-                              << "Location:  " << __FILE__ << ":" << __LINE__ << std::endl;                            \
-                    FGM_DEBUG_BREAK();                                                                                 \
-                }                                                                                                      \
-            }                                                                                                          \
-        } while (false) #else
+            (condition)                                                                                                \
+                ? void(0)                                                                                              \
+                : (std::is_constant_evaluated() ? throw message : logAssertion(#condition, "", __FILE__, __LINE__),    \
+                   FGM_DEBUG_BREAK());                                                                                 \
+                                                                                                                       \
+        } while (false)
+#else
     #define FGM_ASSERT(condition) ((void) 0)
 #endif
 

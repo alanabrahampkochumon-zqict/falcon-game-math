@@ -63,7 +63,7 @@ namespace
     static_assert(TRANSPOSE_MAT(1, 2) == 8);
 
     static_assert(TRANSPOSE_MAT(2, 0) == 3);
-    static_assert(TRANSPOSE_MAT(2, 1) == 7);
+    static_assert(TRANSPOSE_MAT(2, 1) == 6);
     static_assert(TRANSPOSE_MAT(2, 2) == 9);
 
 
@@ -78,7 +78,7 @@ namespace
     static_assert(TRANSPOSE_MAT_S(1, 2) == 8);
 
     static_assert(TRANSPOSE_MAT_S(2, 0) == 3);
-    static_assert(TRANSPOSE_MAT_S(2, 1) == 7);
+    static_assert(TRANSPOSE_MAT_S(2, 1) == 6);
     static_assert(TRANSPOSE_MAT_S(2, 2) == 9);
 }
 

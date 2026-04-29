@@ -28,8 +28,8 @@ namespace fgm::messages
     namespace assertion
     {              
         /** @brief Assertion message thrown when a matrix division by zero occurs. */
-        inline constexpr std::string_view MAT_DIV_BY_ZERO = "[Matrix]: Division by zero";
-        inline constexpr std::string_view MAT_DET_DIV_BY_ZERO = "[Matrix Determinant]: Division by zero.";
+        inline constexpr auto MAT_DIV_BY_ZERO = "[Matrix]: Division by zero";
+        inline constexpr auto MAT_DET_DIV_BY_ZERO = "[Matrix Determinant]: Division by zero.";
 
     } // namespace assertion
 
