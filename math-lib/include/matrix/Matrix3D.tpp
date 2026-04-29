@@ -562,6 +562,26 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::inverse() const noexcept requires SignedStrictArithmetic<T>
+    {
+        using R = Magnitude<T>;
+
+        R det = determinant();
+
+        FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
+
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::inverse(const Matrix3D& matrix) noexcept requires
+        SignedStrictArithmetic<T>
+    {
+        return matrix.inverse();
+    }
+
 
     /**************************************
      *                                    *

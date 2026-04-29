@@ -40,9 +40,10 @@ TYPED_TEST_SUITE(Matrix3DInverse, SupportedSignedArithmeticTypes);
 
 
 /** @brief Test fixture for calculating @ref fgm::Matrix3D inverse with singular matrices */
- class SingularMatrix3DInverse: public ::testing::TestWithParam<fgm::Matrix3D<float>>
+class SingularMatrix3DInverse: public ::testing::TestWithParam<fgm::Matrix3D<float>>
 {};
- INSTANTIATE_TEST_SUITE_P(Matrix3DInverseTestSuite, SingularMatrix3DInverse,
+INSTANTIATE_TEST_SUITE_P(
+    Matrix3DInverseTestSuite, SingularMatrix3DInverse,
     ::testing::Values(fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ 1.0f, 2.0f, 3.0f },
                                      fgm::Vector3D{ 7.0f, 8.0f, 9.0f } },
                       fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 1.0f, 5.0f }, fgm::Vector3D{ 2.0f, 2.0f, 3.0f },
@@ -70,38 +71,39 @@ TYPED_TEST_SUITE(Matrix3DInverse, SupportedSignedArithmeticTypes);
 //                                                                 fgm ::constants::NaN, fgm ::constants::NaN)));
 //
 //
-//
-///**
-// * @addtogroup T_FGM_Mat2x2_Inverse
-// * @{
-// */
-//
-///**************************************
-// *                                    *
-// *           STATIC TESTS             *
-// *                                    *
-// **************************************/
-//
-///** @brief Verify that matrix inverse is available at compile time. */
-//// namespace
-////{
-////     constexpr fgm::Matrix3D MAT(1, 2, 3, 4);
-////    const fgm::Matrix3D mat(1.0f, 2.0f, 3.0f, 0.0f, 1.0f, 4.0f, 5.0f, 6.0f, 0.0f);
-////    const fgm::Matrix3D expectedInverse(-24.0f, 18.0f, 5.0f, 20.0f, -15.0f, -4.0f, -5.0f, 4.0f, 1.0f);
-////     // Verify matrix transpose (member function)
-////     constexpr fgm::Matrix3D TRANS_MAT = MAT.transpose();
-////     static_assert(TRANS_MAT(0, 0) == 1);
-////     static_assert(TRANS_MAT(0, 1) == 3);
-////     static_assert(TRANS_MAT(1, 0) == 2);
-////     static_assert(TRANS_MAT(1, 1) == 4);
-////
-////     // Verify matrix transpose (static function)
-////     constexpr fgm::Matrix3D TRANS_MAT_S = fgm::Matrix3D<int>::transpose(MAT);
-////     static_assert(TRANS_MAT_S(0, 0) == 1);
-////     static_assert(TRANS_MAT_S(0, 1) == 3);
-////     static_assert(TRANS_MAT_S(1, 0) == 2);
-////     static_assert(TRANS_MAT_S(1, 1) == 4);
-//// } // namespace
+
+/**
+ * @addtogroup T_FGM_Mat3x3_Inverse
+ * @{
+ */
+
+/**************************************
+ *                                    *
+ *           STATIC TESTS             *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that matrix inverse is available at compile time. */
+namespace
+{
+    constexpr fgm::Matrix3D MAT(1.0f, 2.0f, 3.0f, 0.0f, 1.0f, 4.0f, 5.0f, 6.0f, 0.0f);
+    //constexpr fgm::Matrix3D INV_MAT(-24.0f, 18.0f, 5.0f, 20.0f, -15.0f, -4.0f, -5.0f, 4.0f, 1.0f);
+    constexpr fgm::Matrix3D INV_MAT = MAT.inverse();
+    // Verify matrix transpose (member function)
+    static_assert(EXPECT_MAT_CONTAINS(std::vector{ -24.0f, 18.0f, 5.0f, 20.0f, -15.0f, -4.0f, -5.0f, 4.0f, 1.0f },
+                                      INV_MAT));
+    static_assert(INV_MAT(0, 0) == -24.0f);
+    static_assert(INV_MAT(0, 1) == 18.0f);
+    static_assert(INV_MAT(1, 0) == 2);
+    static_assert(INV_MAT(1, 1) == 4);
+
+    // Verify matrix transpose (static function)
+    constexpr fgm::Matrix3D INV_MAT_S = fgm::Matrix3D<float>::inverse(MAT);
+    static_assert(INV_MAT_S(0, 0) == 1);
+    static_assert(INV_MAT_S(0, 1) == 3);
+    static_assert(INV_MAT_S(1, 0) == 2);
+    static_assert(INV_MAT_S(1, 1) == 4);
+} // namespace
 
 
 
@@ -115,36 +117,36 @@ TYPED_TEST_SUITE(Matrix3DInverse, SupportedSignedArithmeticTypes);
  * @brief Verify that inverting a matrix using @ref fgm::Matrix3D::inverse exchanges row and
  *        column elements and returns a new matrix.
  */
- TYPED_TEST(Matrix3DInverse, ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix3DInverse, ExchangesRowsAndColumnElements)
 {
     EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse());
 }
 
 
 /** @brief Verify that inverse of matrix times itself is an identity matrix. */
- TYPED_TEST(Matrix3DInverse, InverseTimesMatrixReturnsIdentityMatrix)
+TYPED_TEST(Matrix3DInverse, InverseTimesMatrixReturnsIdentityMatrix)
 {
-     const auto invMatrix = this->_matrix.inverse();
-     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
- }
+    const auto invMatrix = this->_matrix.inverse();
+    EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
+}
 
 
 /**
  * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix3D::inverse exchanges row and
  *        column elements and returns a new matrix.
  */
- TYPED_TEST(Matrix3DInverse, StaticWrapper_ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix3DInverse, StaticWrapper_ExchangesRowsAndColumnElements)
 {
     EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::inverse(this->_matrix));
 }
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
- TYPED_TEST(Matrix3DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
+TYPED_TEST(Matrix3DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
 {
-     const auto invMatrix = fgm::Matrix3D<TypeParam>::inverse(this->_matrix);
-     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
- }
+    const auto invMatrix = fgm::Matrix3D<TypeParam>::inverse(this->_matrix);
+    EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
+}
 
 
 ///**************************************
