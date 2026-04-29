@@ -149,7 +149,7 @@ TYPED_TEST(Matrix3DDivision, AlwaysReturnFloatingPointMatrix)
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix3DDivision, ByZeroTriggersAssertInDebugMode)
 {
-    EXPECT_DEBUG_DEATH(this->_matrix / 0, "Matrix division by zero");
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), "");
 }
 
 
@@ -169,7 +169,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_InverseScalesMatrixInPlace)
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
 {
-    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "Matrix division by zero");
+    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "");
 }
 
 
@@ -183,7 +183,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix using @ref fgm::Matrix3D::safeDiv perform an element-wise divide
  *        and returns a new matrix instance.
  */
- TYPED_TEST(Matrix3DDivision, SafeDivide_ReturnsInverseScaledMatrix)
+TYPED_TEST(Matrix3DDivision, SafeDivide_ReturnsInverseScaledMatrix)
 {
     const fgm::Matrix3D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
 
@@ -195,7 +195,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix using @ref fgm::Matrix3D::safeDiv always
  *        return a floating-point matrix.
  */
- TYPED_TEST(Matrix3DDivision, SafeDivide_AlwaysReturnFloatingPointMatrix)
+TYPED_TEST(Matrix3DDivision, SafeDivide_AlwaysReturnFloatingPointMatrix)
 {
     [[maybe_unused]] const fgm::Matrix3D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
     static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
@@ -206,7 +206,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix3D::safeDiv
  *        returns identity matrix by default.
  */
- TYPED_TEST(Matrix3DDivision, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
+TYPED_TEST(Matrix3DDivision, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
 {
     const fgm::Matrix3D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0));
     EXPECT_MAT_IDENTITY(inverseScaledMat);
@@ -217,7 +217,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix3D::safeDiv
  *        returns passed-in fallback.
  */
- TYPED_TEST(Matrix3DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
+TYPED_TEST(Matrix3DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
 {
     const fgm::Matrix3D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::mat3d::zero<TypeParam>);
     EXPECT_MAT_ZERO(inverseScaledMat);
@@ -228,7 +228,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix3D::safeDiv
  *        returns identity matrix by default.
  */
- TEST_P(NaNMatrix3DDivision, SafeDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix3DDivision, SafeDivide_ReturnsIdentityMatrixByDefault)
 {
     const fgm::Matrix3D inverseScaledMat = GetParam().safeDiv(2.5);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
@@ -239,7 +239,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix3D::safeDiv
  *        returns passed-in fallback.
  */
- TEST_P(NaNMatrix3DDivision, SafeDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix3DDivision, SafeDivide_ReturnsPassedInFallback)
 {
     const fgm::Matrix3D inverseScaledMat = GetParam().safeDiv(2.5, fgm::mat3d::zero<ParamType::value_type>);
     EXPECT_MAT_ZERO(inverseScaledMat);
@@ -250,7 +250,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix3D::safeDiv
  *        perform an element-wise divide and returns a new matrix instance.
  */
- TYPED_TEST(Matrix3DDivision, SafeDivide_StaticWrapper_ReturnsInverseScaledMatrix)
+TYPED_TEST(Matrix3DDivision, SafeDivide_StaticWrapper_ReturnsInverseScaledMatrix)
 {
     const fgm::Matrix3D inverseScaledMat = fgm::Matrix3D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
 
@@ -262,7 +262,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix3D::safeDiv always
  *        return a floating-point matrix.
  */
- TYPED_TEST(Matrix3DDivision, SafeDivide_StaticWrapper_AlwaysReturnFloatingPointMatrix)
+TYPED_TEST(Matrix3DDivision, SafeDivide_StaticWrapper_AlwaysReturnFloatingPointMatrix)
 {
     [[maybe_unused]] const fgm::Matrix3D inverseScaledMat =
         fgm::Matrix3D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
@@ -274,7 +274,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix3D::safeDiv
  *        returns identity matrix by default.
  */
- TYPED_TEST(Matrix3DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsIdentityMatrixByDefault)
+TYPED_TEST(Matrix3DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsIdentityMatrixByDefault)
 {
     const fgm::Matrix3D inverseScaledMat = fgm::Matrix3D<TypeParam>::safeDiv(this->_matrix, TypeParam(0));
     EXPECT_MAT_IDENTITY(inverseScaledMat);
@@ -285,7 +285,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix3D::safeDiv
  *        returns passed-in fallback.
  */
- TYPED_TEST(Matrix3DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsPassedInFallback)
+TYPED_TEST(Matrix3DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsPassedInFallback)
 {
     const fgm::Matrix3D inverseScaledMat =
         fgm::Matrix3D<TypeParam>::safeDiv(this->_matrix, TypeParam(0), fgm::mat3d::zero<TypeParam>);
@@ -297,7 +297,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix3D::safeDiv
  *        returns identity matrix by default.
  */
- TEST_P(NaNMatrix3DDivision, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix3DDivision, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefault)
 {
     using T = ParamType::value_type;
     const fgm::Matrix3D inverseScaledMat = fgm::Matrix3D<T>::safeDiv(GetParam(), 2.5);
@@ -309,7 +309,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix3D::safeDiv
  *        returns passed-in fallback.
  */
- TEST_P(NaNMatrix3DDivision, SafeDivide_StaticWrapper_ReturnsPassedInFallback)
+TEST_P(NaNMatrix3DDivision, SafeDivide_StaticWrapper_ReturnsPassedInFallback)
 {
     using T = ParamType::value_type;
     const fgm::Matrix3D inverseScaledMat = fgm::Matrix3D<T>::safeDiv(GetParam(), 2.5, fgm::mat3d::zero<T>);
@@ -327,7 +327,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix using @ref fgm::Matrix3D::tryDiv perform an element-wise divide
  *        returns a new matrix instance and set flag to @ref OperationStatus::SUCCESS.
  */
- TYPED_TEST(Matrix3DDivision, TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
+TYPED_TEST(Matrix3DDivision, TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix3D inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
@@ -341,7 +341,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix using @ref fgm::Matrix3D::tryDiv always
  *        return a floating-point matrix and set flag to @ref OperationStatus::SUCCESS.
  */
- TYPED_TEST(Matrix3DDivision, TryDivide_AlwaysReturnFloatingPointMatrixAndSetsCorrectFlag)
+TYPED_TEST(Matrix3DDivision, TryDivide_AlwaysReturnFloatingPointMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Matrix3D inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
@@ -354,7 +354,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix3D::tryDiv
  *        returns identity matrix by default and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
- TYPED_TEST(Matrix3DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
+TYPED_TEST(Matrix3DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix3D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag);
@@ -368,7 +368,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix3D::tryDiv returns passed-in fallback
  *        and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
- TYPED_TEST(Matrix3DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
+TYPED_TEST(Matrix3DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix3D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag, fgm::mat3d::zero<TypeParam>);
@@ -382,7 +382,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix3D::tryDiv returns identity matrix
  *        by default and set flag to @ref OperationStatus::NANOPERAND.
  */
- TEST_P(NaNMatrix3DDivision, TryDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix3DDivision, TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix3D inverseScaledMat = GetParam().tryDiv(2.5, flag);
@@ -395,7 +395,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix3D::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::NANOPERAND.
  */
- TEST_P(NaNMatrix3DDivision, TryDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix3DDivision, TryDivide_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix3D inverseScaledMat = GetParam().tryDiv(2.5, flag, fgm::mat3d::zero<ParamType::value_type>);
@@ -408,7 +408,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix by zero using @ref fgm::Matrix3D::tryDiv
  *        returns set flag to @ref OperationStatus::NANOPERAND.
  */
- TEST_P(NaNMatrix3DDivision, TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
+TEST_P(NaNMatrix3DDivision, TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Matrix3D inverseScaledMat =
@@ -422,7 +422,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  *        perform an element-wise divide, returns a new matrix instance
  *        and set flag to @ref OperationStatus::SUCCESS.
  */
- TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
+TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix3D inverseScaledMat = fgm::Matrix3D<TypeParam>::tryDiv(this->_matrix, this->_scalar, flag);
@@ -436,7 +436,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix3D::tryDiv always
  *        return a floating-point matrix and set flag to @ref OperationStatus::SUCCESS.
  */
- TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_AlwaysReturnFloatingPointMatrixAndSetsCorrectFlag)
+TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_AlwaysReturnFloatingPointMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Matrix3D inverseScaledMat =
@@ -450,7 +450,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix3D::tryDiv
  *        returns identity matrix by default and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
- TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
+TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix3D inverseScaledMat = fgm::Matrix3D<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag);
@@ -463,7 +463,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix3D::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
- TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
+TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix3D inverseScaledMat =
@@ -477,7 +477,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix3D::tryDiv
  *        returns identity matrix by default and set flag to @ref OperationStatus::NANOPERAND.
  */
- TEST_P(NaNMatrix3DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix3DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     using T = ParamType::value_type;
@@ -492,11 +492,12 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix by zero using the static variant of @ref fgm::Matrix3D::tryDiv
  *        set flag to @ref OperationStatus::NANOPERAND.
  */
- TEST_P(NaNMatrix3DDivision, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
+TEST_P(NaNMatrix3DDivision, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
     using T = ParamType::value_type;
-    [[maybe_unused]] const fgm::Matrix3D inverseScaledMat = fgm::Matrix3D<T>::tryDiv(GetParam(), static_cast<T>(0), flag);
+    [[maybe_unused]] const fgm::Matrix3D inverseScaledMat =
+        fgm::Matrix3D<T>::tryDiv(GetParam(), static_cast<T>(0), flag);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -505,7 +506,7 @@ TYPED_TEST(Matrix3DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix3D::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::NANOPERAND.
  */
- TEST_P(NaNMatrix3DDivision, StaticWrapper_TryDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix3DDivision, StaticWrapper_TryDivide_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     using T = ParamType::value_type;

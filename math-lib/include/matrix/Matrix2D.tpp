@@ -515,7 +515,7 @@ namespace fgm
 
         R det = determinant();
 
-        FGM_ASSERT_MSG(determinant() > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
+        FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
 
         R factor = R(1) / det;
 

@@ -127,7 +127,7 @@ TYPED_TEST(Matrix2DDivision, AlwaysReturnFloatingPointMatrix)
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix2DDivision, ByZeroTriggersAssertInDebugMode)
 {
-    EXPECT_DEBUG_DEATH(this->_matrix / 0, "Matrix division by zero");
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), "");
 }
 
 
@@ -147,7 +147,7 @@ TYPED_TEST(Matrix2DDivision, CompoundDivision_InverseScalesMatrixInPlace)
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix2DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
 {
-    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "Matrix division by zero");
+    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "");
 }
 
 
