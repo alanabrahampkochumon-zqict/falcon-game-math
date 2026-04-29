@@ -48,6 +48,7 @@ inline void logAssertion(const char* condition, const char* message, const char*
               << "Location:  " << file << ":" << line << '\n';
 }
 
+
 /**
  * @def FGM_ASSERT_MSG(condition, message)
  * @brief Asserts a condition is `true`, breaking into the debugger with a custom message if `false`.
