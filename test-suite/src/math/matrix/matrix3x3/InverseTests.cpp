@@ -88,7 +88,7 @@ namespace
 {
     constexpr fgm::Matrix3D MAT(1.0f, 2.0f, 3.0f, 0.0f, 1.0f, 4.0f, 5.0f, 6.0f, 0.0f);
 
-    // Verify matrix transpose (member function)
+    // Verify matrix inverse (member function)
     constexpr fgm::Matrix3D INV_MAT = MAT.inverse();
     static_assert(INV_MAT(0, 0) == -24.0f);
     static_assert(INV_MAT(0, 1) == 18.0f);
@@ -100,7 +100,7 @@ namespace
     static_assert(INV_MAT(2, 1) == 4.0f);
     static_assert(INV_MAT(2, 2) == 1.0f);
 
-    // Verify matrix transpose (static function)
+    // Verify matrix inverse (static function)
     constexpr fgm::Matrix3D INV_MAT_S = fgm::Matrix3D<float>::inverse(MAT);
     static_assert(INV_MAT_S(0, 0) == -24.0f);
     static_assert(INV_MAT_S(0, 1) == 18.0f);

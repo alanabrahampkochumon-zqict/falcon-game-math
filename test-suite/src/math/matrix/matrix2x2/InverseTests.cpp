@@ -78,15 +78,14 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, NaNMatrix2DInverse,
  namespace
 {
      constexpr fgm::Matrix2D MAT(1.0f, 2.0f, 3.0f, 4.0f);
-     // TODO: Add static test for inverse
-     // Verify matrix transpose (member function)
+     // Verify matrix inverse (member function)
      constexpr fgm::Matrix2D INV_MAT = MAT.inverse();
      static_assert(INV_MAT(0, 0) == -2.0f);
      static_assert(INV_MAT(0, 1) == 1.0f);
      static_assert(INV_MAT(1, 0) == 1.5f);
      static_assert(INV_MAT(1, 1) == -0.5f);
 
-     // Verify matrix transpose (static function)
+     // Verify matrix inverse (static function)
      constexpr fgm::Matrix2D INV_MAT_S = fgm::Matrix2D<float>::inverse(MAT);
      static_assert(INV_MAT_S(0, 0) == -2.0f);
      static_assert(INV_MAT_S(0, 1) == 1.0f);
