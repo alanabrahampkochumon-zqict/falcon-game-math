@@ -575,8 +575,9 @@ namespace fgm
 
         // Since the cross product is already computed, it takes less operation compared to calling determinant.
         // TODO: Investigate why a dot result of 0 is tripping the compiler both in division and FGM_ASSERT
+        // TODO: Error recreation set R det = _data[1].dot(row0);
         R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
-        // FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
+        FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
 
         R factor = R(1) / det;
         return Matrix3D<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(), factor * row1.y(),

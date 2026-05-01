@@ -93,7 +93,6 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-enable_testing()
 
 include(GoogleTest)
 gtest_discover_tests(TestSuite DISCOVERY_MODE PRE_TEST)
