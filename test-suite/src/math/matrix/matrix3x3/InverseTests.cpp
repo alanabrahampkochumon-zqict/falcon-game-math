@@ -110,6 +110,31 @@ namespace
     static_assert(INV_MAT_S(2, 0) - -5.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(INV_MAT_S(2, 1) - 4.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(INV_MAT_S(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
+
+
+    // Verify matrix safeInverse (member function)
+    constexpr fgm::Matrix3D SAFE_INV_MAT = MAT.safeInverse();
+    static_assert(SAFE_INV_MAT(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT(1, 0) - 20.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT(1, 1) - -15.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT(1, 2) - -4.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT(2, 0) - -5.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT(2, 1) - 4.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
+
+    // Verify matrix safeInverse (static function)
+    constexpr fgm::Matrix3D SAFE_INV_MAT_S = fgm::Matrix3D<float>::safeInverseOf(MAT);
+    static_assert(SAFE_INV_MAT_S(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT_S(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT_S(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT_S(1, 0) - 20.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT_S(1, 1) - -15.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT_S(1, 2) - -4.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT_S(2, 0) - -5.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT_S(2, 1) - 4.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(SAFE_INV_MAT_S(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
 } // namespace
 
 
