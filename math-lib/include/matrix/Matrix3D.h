@@ -795,8 +795,9 @@ namespace fgm
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 A_{11} & -A_{01} \\
-         *                 -A_{10} & A_{00}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b 
          *            \end{bmatrix}
          *        \f$
          *
@@ -822,8 +823,9 @@ namespace fgm
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 A_{11} & -A_{01} \\
-         *                 -A_{10} & A_{00}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b 
          *            \end{bmatrix}
          *        \f$
          *
