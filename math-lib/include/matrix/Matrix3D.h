@@ -24,6 +24,8 @@
  */
 
 
+#include "common/MathTraits.h"
+#include "common/Config.h"
 #include "vector/Vector3D.h"
 
 #include <cstddef>
@@ -92,7 +94,7 @@ namespace fgm
          *
          * @param[in] d0 The first diagonal entry of the matrix (m00).
          * @param[in] d1 The second diagonal entry of the matrix (m11).
-         * @param[in] d2 The third diagonal entry of the matrix (m11).
+         * @param[in] d2 The third diagonal entry of the matrix (m22).
          */
         [[nodiscard]] constexpr Matrix3D(T d0, T d1, T d2) noexcept;
 
@@ -315,7 +317,7 @@ namespace fgm
 
 
         /**
-         * @copybrief anyNeq(const Vector2D<U>&, double) const noexcept
+         * @copybrief anyNeq(const Vector3D<U>&, double) const noexcept
          *
          * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
          *       during static evaluation.

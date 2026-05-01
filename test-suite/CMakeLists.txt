@@ -30,6 +30,10 @@ set(Matrix3x3TestDir "src/math/matrix/matrix3x3/")
 set(Matrix3x3TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeConversionTests.cpp;ConstantTests.cpp;UtilityTests.cpp;EqualityTests.cpp;AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DivisionTests.cpp;DeterminantTests.cpp;TransposeTests.cpp;InverseTests.cpp;TraceTests.cpp;StringRepresentationTests.cpp;AliasTests.cpp;")
 list(TRANSFORM Matrix3x3TestFiles PREPEND ${Matrix3x3TestDir})
 
+set(Matrix4x4TestDir "src/math/matrix/matrix4x4/")
+set(Matrix4x4TestFiles "InitializationTests.cpp;")
+list(TRANSFORM Matrix4x4TestFiles PREPEND ${Matrix4x4TestDir})
+
 set(MatrixTestDirectory "src/math/matrix/")
 set(MatrixTestFiles Matrix2DTests.cpp Matrix3DTests.cpp Matrix4DTests.cpp )
 list(TRANSFORM MatrixTestFiles PREPEND ${MatrixTestDirectory})
@@ -54,6 +58,7 @@ target_sources(
         ${Vector4DTestFiles}
         ${Matrix2x2TestFiles}
         ${Matrix3x3TestFiles}
+        ${Matrix4x4TestFiles}
         # ${MatrixTestFiles}
         ${SimdTestFiles}
         ${MathCommonTestFiles}
@@ -116,6 +121,7 @@ source_group (
     ${Vector4DTestFiles}
     ${Matrix2x2TestFiles}
     ${Matrix3x3TestFiles}
+    ${Matrix4x4TestFiles}
     ${MatrixTestFiles}
     ${SimdTestFiles}
     ${MathCommonTestFiles}

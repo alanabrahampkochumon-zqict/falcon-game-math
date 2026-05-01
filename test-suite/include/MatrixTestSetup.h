@@ -17,6 +17,8 @@
 
 #include <common/MathTraits.h>
 #include <matrix/Matrix2D.h>
+#include <matrix/Matrix3D.h>
+#include <matrix/Matrix4D.h>
 
 
 
