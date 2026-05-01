@@ -758,14 +758,18 @@ namespace fgm
     constexpr auto Vector3D<T>::dot(const Vector3D<U>& rhs) const noexcept -> std::common_type_t<T, U>
         requires StrictArithmetic<T>
     {
+#define FP_FAST_FMA
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
         using R = std::common_type_t<T, U>;
         if constexpr (std::is_floating_point_v<R>)
-            return std::fma(static_cast<R>(_data[0]), static_cast<R>(rhs[0]),
-                            std::fma(static_cast<R>(_data[1]), static_cast<R>(rhs[1]),
-                                     std::fma(static_cast<R>(_data[2]), static_cast<R>(rhs[2]), T(0))));
-        else
-            return _data[0] * rhs[0] + _data[1] * rhs[1] + _data[2] * rhs[2];
+        {
+            if (!std::is_constant_evaluated())
+                return std::fma(static_cast<R>(_data[0]), static_cast<R>(rhs[0]),
+                                std::fma(static_cast<R>(_data[1]), static_cast<R>(rhs[1]),
+                                         std::fma(static_cast<R>(_data[2]), static_cast<R>(rhs[2]), T(0))));
+
+        }
+        return _data[0] * rhs[0] + _data[1] * rhs[1] + _data[2] * rhs[2];
 #else
         return _data[0] * rhs[0] + _data[1] * rhs[1] + _data[2] * rhs[2];
 #endif

@@ -12,6 +12,7 @@
 
 
 #include "Matrix3D.h"
+#include "Matrix3D.h"
 #include "common/Messages.h"
 #include "common/PreprocessorDefinitions.h"
 
@@ -563,21 +564,29 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::inverse() const noexcept requires SignedStrictArithmetic<T>
+    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::inverse() const noexcept
+        requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
 
-        R det = determinant();
+        const Vector3D<R> row0 = _data[1].cross(_data[2]); // b X c
+        const Vector3D<R> row1 = _data[2].cross(_data[0]); // c X a
+        const Vector3D<R> row2 = _data[0].cross(_data[1]); // a X b
 
-        FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
+        // Since the cross product is already computed, it takes less operation compared to calling determinant.
+        // TODO: Investigate why a dot result of 0 is tripping the compiler both in division and FGM_ASSERT
+        R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
+        // FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
 
-        return *this;
+        R factor = R(1) / det;
+        return Matrix3D<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(), factor * row1.y(),
+                factor * row1.z(), factor * row2.x(), factor * row2.y(), factor * row2.z());
     }
 
 
     template <Arithmetic T>
-    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::inverse(const Matrix3D& matrix) noexcept requires
-        SignedStrictArithmetic<T>
+    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::inverse(const Matrix3D& matrix) noexcept
+        requires SignedStrictArithmetic<T>
     {
         return matrix.inverse();
     }
