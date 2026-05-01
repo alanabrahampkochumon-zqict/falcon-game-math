@@ -539,7 +539,8 @@ namespace fgm
         using R = Magnitude<T>;
 
         T det = determinant();
-
+        // TODO: Update to use directly compute inverse to reduce operation
+        // TODO: Do similar in code cleaning in tryInverse
         if constexpr (std::is_floating_point_v<T>)
             if (hasNaN() || (fgm::abs(det) <= std::numeric_limits<T>::epsilon()))
                 return Matrix2D<R>(fallback);

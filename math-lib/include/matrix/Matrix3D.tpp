@@ -575,8 +575,6 @@ namespace fgm
         const Vector3D<R> row2 = _data[0].cross(_data[1]); // a X b
 
         // Since the cross product is already computed, it takes less operation compared to calling determinant.
-        // TODO: Investigate why a dot result of 0 is tripping the compiler both in division and FGM_ASSERT
-        // TODO: Error recreation set R det = _data[1].dot(row0);
         R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
         FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
 
@@ -598,7 +596,26 @@ namespace fgm
     constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::safeInverse(const Matrix3D& fallback) const noexcept requires
         SignedStrictArithmetic<T>
     {
-        return Matrix3D<Magnitude<T>>();
+        using R = Magnitude<T>;
+
+        const Vector3D<R> row0 = _data[1].cross(_data[2]); // b X c
+        const Vector3D<R> row1 = _data[2].cross(_data[0]); // c X a
+        const Vector3D<R> row2 = _data[0].cross(_data[1]); // a X b
+
+        // Since the cross product is already computed, it takes less operation compared to calling determinant.
+        R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
+
+        
+        if constexpr (std::is_floating_point_v<T>)
+            if (hasNaN() || (fgm::abs(det) <= std::numeric_limits<T>::epsilon()))
+                return Matrix3D<R>(fallback);
+        if constexpr (std::is_integral_v<T>)
+            if (det == 0)
+                return Matrix3D<R>(fallback);
+
+        R factor = R(1) / det;
+        return Matrix3D<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(), factor * row1.y(),
+                factor * row1.z(), factor * row2.x(), factor * row2.y(), factor * row2.z());
     }
 
 
