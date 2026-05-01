@@ -31,7 +31,7 @@ set(Matrix3x3TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeC
 list(TRANSFORM Matrix3x3TestFiles PREPEND ${Matrix3x3TestDir})
 
 set(Matrix4x4TestDir "src/math/matrix/matrix4x4/")
-set(Matrix4x4TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;")
+set(Matrix4x4TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeConversionTests.cpp;")
 list(TRANSFORM Matrix4x4TestFiles PREPEND ${Matrix4x4TestDir})
 
 set(MatrixTestDirectory "src/math/matrix/")
