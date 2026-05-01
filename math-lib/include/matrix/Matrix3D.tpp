@@ -627,6 +627,23 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::tryInverse(OperationStatus& status,
+        const Matrix3D& fallback) const noexcept requires SignedStrictArithmetic<T>
+    {
+        status = OperationStatus::DIVISIONBYZERO;
+        return Matrix3D<Magnitude<T>>();
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
+        const Matrix3D& fallback) noexcept requires SignedStrictArithmetic<T>
+    {
+        return matrix.tryInverse(status, fallback);
+    }
+
+
 
 
     /**************************************

@@ -905,71 +905,73 @@ namespace fgm
             requires SignedStrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Safely compute the inverse of this matrix and set @p status to the matrix inversion result.
-        // *        Calculate inverse:
-        // *        \f$
-        // *            \begin{bmatrix}
-        // *                 A_{00} & A_{01} \\
-        // *                 A_{10} & A_{11}
-        // *            \end{bmatrix}^{-1}
-        // *            =
-        // *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
-        // *            \begin{bmatrix}
-        // *                 A_{11} & -A_{01} \\
-        // *                 -A_{10} & A_{00}
-        // *            \end{bmatrix}
-        // *        \f$
-        // *
-        // * @note Promotes the result to a floating point result using @ref Magnitude.
-        // * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
-        // * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
-        // *
-        // * @param[out] status  The status flag to store the status of the current operation result.
-        // *                     For details on status codes see @ref OperationStatus.
-        // * @param[in] fallback The default matrix to return, when an invalid case is encountered.
-        // *
-        // * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
-        // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
-        // */
-        //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        // constexpr Matrix3D<Magnitude<T>> tryInverse(OperationStatus& status,
-        //                                            const Matrix3D& fallback = Matrix3D::eye()) const noexcept
-        //    requires SignedStrictArithmetic<T>;
+        /**
+         * @brief Safely compute the inverse of this matrix and set @p status to the matrix inversion result.
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{det(A)}
+         *            \begin{bmatrix}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+         *
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+         *
+         * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
+         */
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+         constexpr Matrix3D<Magnitude<T>> tryInverse(OperationStatus& status,
+                                                    const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+            requires SignedStrictArithmetic<T>;
 
 
-        ///**
-        // * @brief Safely compute the inverse of a matrix and set @p status to the matrix inversion result.
-        // *        Calculate inverse:
-        // *        \f$
-        // *            \begin{bmatrix}
-        // *                 A_{00} & A_{01} \\
-        // *                 A_{10} & A_{11}
-        // *            \end{bmatrix}^{-1}
-        // *            =
-        // *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
-        // *            \begin{bmatrix}
-        // *                 A_{11} & -A_{01} \\
-        // *                 -A_{10} & A_{00}
-        // *            \end{bmatrix}
-        // *        \f$
-        // *
-        // * @note Promotes the result to a floating point result using @ref Magnitude.
-        // * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
-        // * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
-        // *
-        // * @param[in] matrix   The matrix to invert.
-        // * @param[out] status  The status flag to store the status of the current operation result.
-        // *                     For details on status codes see @ref OperationStatus.
-        // * @param[in] fallback The default matrix to return, when an invalid case is encountered.
-        // *
-        // * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
-        // *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
-        // */
-        //[[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        // static constexpr Matrix3D<Magnitude<T>> tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
-        //                                                     const Matrix3D& fallback = Matrix3D::eye()) noexcept
-        //    requires SignedStrictArithmetic<T>;
+        /**
+         * @brief Safely compute the inverse of a matrix and set @p status to the matrix inversion result.
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} \\
+         *                 A_{10} & A_{11}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{det(A)}
+         *            \begin{bmatrix}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+         *
+         * @param[in] matrix   The matrix to invert.
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+         *
+         * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
+         */
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+         static constexpr Matrix3D<Magnitude<T>> tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
+                                                             const Matrix3D& fallback = Matrix3D::eye()) noexcept
+            requires SignedStrictArithmetic<T>;
 
 
         ///**
