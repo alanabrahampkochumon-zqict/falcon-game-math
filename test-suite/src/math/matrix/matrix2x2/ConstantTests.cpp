@@ -42,7 +42,7 @@ namespace
     static_assert(fgm::mat2d::eye<int>(1, 1) == 1);
 
 
-    // Verify identity matrix static factory
+    // Verify identity (functional variant)
     static_assert(fgm::Matrix2D<int>::eye()(0, 0) == 1);
     static_assert(fgm::Matrix2D<int>::eye()(0, 1) == 0);
     static_assert(fgm::Matrix2D<int>::eye()(1, 0) == 0);
@@ -56,7 +56,7 @@ namespace
     static_assert(fgm::mat2d::zero<int>(1, 1) == 0);
 
 
-    // Verify zero matrix
+    // Verify zero matrix (functional variant)
     static_assert(fgm::Matrix2D<int>::zero()(0, 0) == 0);
     static_assert(fgm::Matrix2D<int>::zero()(0, 1) == 0);
     static_assert(fgm::Matrix2D<int>::zero()(1, 0) == 0);

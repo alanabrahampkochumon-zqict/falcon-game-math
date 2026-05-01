@@ -54,7 +54,7 @@ namespace
     static_assert(fgm::mat4d::eye<int>(3, 3) == 1);
 
 
-    // Verify identity matrix static factory
+    // Verify identity matrix (functional variant)
     static_assert(fgm::Matrix4D<int>::eye()(0, 0) == 1);
     static_assert(fgm::Matrix4D<int>::eye()(0, 1) == 0);
     static_assert(fgm::Matrix4D<int>::eye()(0, 2) == 0);
@@ -91,7 +91,7 @@ namespace
     static_assert(fgm::mat4d::zero<int>(3, 3) == 0);
 
 
-    // Verify zero matrix
+    // Verify zero matrix (functional variant)
     static_assert(fgm::Matrix4D<int>::zero()(0, 0) == 0);
     static_assert(fgm::Matrix4D<int>::zero()(0, 1) == 0);
     static_assert(fgm::Matrix4D<int>::zero()(0, 2) == 0);

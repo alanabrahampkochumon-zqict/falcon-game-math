@@ -118,11 +118,48 @@ namespace fgm
 
 
 
+
     /***************************************
      *                                     *
      *             EQUALITY                *
      *                                     *
      ***************************************/
+
+
+
+
+    /**************************************
+     *                                    *
+     *             UTILITIES              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr bool Matrix4D<T>::hasInf() const noexcept
+    {
+        return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix4D<T>::hasInf(const Matrix4D& mat) noexcept
+    {
+        return mat.hasInf();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix4D<T>::hasNaN() const noexcept
+    {
+        return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix4D<T>::hasNaN(const Matrix4D& mat) noexcept
+    {
+        return mat.hasNaN();
+    }
 
 
     //   template <StrictArithmetic T>
