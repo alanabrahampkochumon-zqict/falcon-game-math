@@ -631,8 +631,41 @@ namespace fgm
     constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::tryInverse(OperationStatus& status,
         const Matrix3D& fallback) const noexcept requires SignedStrictArithmetic<T>
     {
-        status = OperationStatus::DIVISIONBYZERO;
-        return Matrix3D<Magnitude<T>>();
+        using R = Magnitude<T>;
+
+        const Vector3D<R> row0 = _data[1].cross(_data[2]); // b X c
+        const Vector3D<R> row1 = _data[2].cross(_data[0]); // c X a
+        const Vector3D<R> row2 = _data[0].cross(_data[1]); // a X b
+
+        // Since the cross product is already computed, it takes less operation compared to calling determinant.
+        R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
+
+        if constexpr (std::is_floating_point_v<T>)
+        {
+            if (hasNaN())
+            {
+                status = OperationStatus::NANOPERAND;
+                return Matrix3D<R>(fallback);
+            }
+            if (fgm::abs(det) <= std::numeric_limits<T>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Matrix3D<R>(fallback);
+            }
+        }
+
+        if constexpr (std::is_integral_v<T>)
+            if (det == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Matrix3D<R>(fallback);
+            }
+
+
+        status = OperationStatus::SUCCESS;
+        R factor = R(1) / det;
+        return Matrix3D<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(), factor * row1.y(),
+                factor * row1.z(), factor * row2.x(), factor * row2.y(), factor * row2.z());
     }
 
 
