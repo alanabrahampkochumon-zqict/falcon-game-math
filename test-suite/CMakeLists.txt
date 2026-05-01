@@ -18,7 +18,7 @@ list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDir})
 set(Vector2DTestDir "src/math/vectors/vector2d/")
 set(Vector2DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;SwizzlingTests.cpp;")
 list(TRANSFORM Vector2DTestFiles PREPEND ${Vector2DTestDir})
-
+ 
 
 
 # Matrix Test Sources
@@ -31,7 +31,7 @@ set(Matrix3x3TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeC
 list(TRANSFORM Matrix3x3TestFiles PREPEND ${Matrix3x3TestDir})
 
 set(Matrix4x4TestDir "src/math/matrix/matrix4x4/")
-set(Matrix4x4TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeConversionTests.cpp;ConstantTests.cpp;UtilityTests.cpp;")
+set(Matrix4x4TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeConversionTests.cpp;ConstantTests.cpp;UtilityTests.cpp;EqualityTests.cpp;")
 list(TRANSFORM Matrix4x4TestFiles PREPEND ${Matrix4x4TestDir})
 
 set(MatrixTestDirectory "src/math/matrix/")
