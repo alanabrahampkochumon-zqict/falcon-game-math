@@ -232,6 +232,7 @@
              *   @defgroup T_FGM_Mat4x4_Utils Matrix Utilities
              * @}
              */
+
         /** @} */ // End of MatrixTests
 
         /**

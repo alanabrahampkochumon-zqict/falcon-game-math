@@ -95,7 +95,7 @@ TEST(Matrix3DAccess, AccessibleAsColumnVectors)
 
 
 /**
- * @addtogroup T_FGM_Mat2x2_Mutation
+ * @addtogroup T_FGM_Mat3x3_Mutation
  * @{
  */
 
