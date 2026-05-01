@@ -1178,17 +1178,39 @@ namespace fgm
     };
 
 
-
     /**
-     * @addtogroup FGM_Mat3x3_Arithmetic
+     * @addtogroup FGM_Ma3x3_Alias
      * @{
      */
+
+    /*************************************
+     *                                   *
+     *             ALIASES               *
+     *                                   *
+     *************************************/
+
+    using bMat3 = Matrix3D<bool>;                ///< `bool` matrix
+    using iMat3 = Matrix3D<int>;                 ///< `int` matrix
+    using uMat3 = Matrix3D<unsigned int>;        ///< `unsigned int` matrix
+    using mat3 = Matrix3D<float>;                ///< `float` matrix
+    using lMat3 = Matrix3D<long long>;           ///< `long long` matrix
+    using dMat3 = Matrix3D<double>;              ///< `double` matrix
+    using ulMat3 = Matrix3D<unsigned long long>; ///< `unsigned long long` matrix
+
+    /** @} */
+
+
 
     /**************************************
      *                                    *
      *        NON-MEMBER FUNCTIONS        *
      *                                    *
      **************************************/
+
+    /**
+     * @addtogroup FGM_Mat3x3_Arithmetic
+     * @{
+     */
 
     /**
      * @brief Scale the matrix by a scalar value.

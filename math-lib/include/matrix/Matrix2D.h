@@ -1174,16 +1174,16 @@ namespace fgm
 
 
 
-    /**
-     * @addtogroup FGM_Mat2x2_Arithmetic
-     * @{
-     */
-
     /**************************************
      *                                    *
      *        NON-MEMBER FUNCTIONS        *
      *                                    *
      **************************************/
+
+    /**
+     * @addtogroup FGM_Mat2x2_Arithmetic
+     * @{
+     */
 
     /**
      * @brief Scale the matrix by a scalar value.
