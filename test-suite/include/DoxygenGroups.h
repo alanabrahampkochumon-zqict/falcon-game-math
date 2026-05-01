@@ -174,6 +174,64 @@
              * @}
              */
 
+            /**
+             * @defgroup FGM_Mat3x3_Tests 3x3 Matrix Test Suite
+             * @brief Verification of 3x3 square matrix operations.
+             * @ingroup MatrixTests
+             * @{
+             *   @defgroup T_FGM_Mat3x3_Access Component Access
+             *   @defgroup T_FGM_Mat3x3_Mutation Component Mutation
+             *   @defgroup T_FGM_Mat3x3_Alias Spatial Aliasing
+             *   @defgroup T_FGM_Mat3x3_Const Matrix Constants
+             *   @defgroup T_FGM_Mat3x3_Addition Addition
+             *   @defgroup T_FGM_Mat3x3_Subtraction Subtraction
+             *   @defgroup T_FGM_Mat3x3_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat3x3_Division Scalar Division
+             *   @defgroup T_FGM_Mat3x3_Transpose Matrix Transpose
+             *   @defgroup T_FGM_Mat3x3_Inverse Matrix Inverse
+             *   @defgroup T_FGM_Mat3x3_Constant Matrix Constants
+             *   @defgroup T_FGM_Mat3x3_Equality Equality
+             *   @defgroup T_FGM_Mat3x3_Inequality  Inequality
+             *   @defgroup T_FGM_Mat3x3_Init Initialization
+             *   @defgroup T_FGM_Mat3x3_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Mat3x3_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Mat3x3_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat3x3_Det Determinants
+             *   @defgroup T_FGM_Mat3x3_Trace Trace
+             *   @defgroup T_FGM_Mat3x3_Transforms Transformation Factories
+             *   @defgroup T_FGM_Mat3x3_Utils Matrix Utilities
+             * @}
+             */
+
+
+            /**
+             * @defgroup FGM_Mat4x4_Tests 4x4 Matrix Test Suite
+             * @brief Verification of 4x4 square matrix operations.
+             * @ingroup MatrixTests
+             * @{
+             *   @defgroup T_FGM_Mat4x4_Access Component Access
+             *   @defgroup T_FGM_Mat4x4_Mutation Component Mutation
+             *   @defgroup T_FGM_Mat4x4_Alias Spatial Aliasing
+             *   @defgroup T_FGM_Mat4x4_Const Matrix Constants
+             *   @defgroup T_FGM_Mat4x4_Addition Addition
+             *   @defgroup T_FGM_Mat4x4_Subtraction Subtraction
+             *   @defgroup T_FGM_Mat4x4_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat4x4_Division Scalar Division
+             *   @defgroup T_FGM_Mat4x4_Transpose Matrix Transpose
+             *   @defgroup T_FGM_Mat4x4_Inverse Matrix Inverse
+             *   @defgroup T_FGM_Mat4x4_Constant Matrix Constants
+             *   @defgroup T_FGM_Mat4x4_Equality Equality
+             *   @defgroup T_FGM_Mat4x4_Inequality  Inequality
+             *   @defgroup T_FGM_Mat4x4_Init Initialization
+             *   @defgroup T_FGM_Mat4x4_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Mat4x4_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Mat4x4_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat4x4_Det Determinants
+             *   @defgroup T_FGM_Mat4x4_Trace Trace
+             *   @defgroup T_FGM_Mat4x4_Transforms Transformation Factories
+             *   @defgroup T_FGM_Mat4x4_Utils Matrix Utilities
+             * @}
+             */
         /** @} */ // End of MatrixTests
 
         /**
