@@ -513,9 +513,12 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        R det = determinant();
+        T det = determinant();
 
-        FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
+        if constexpr(std::is_floating_point_v<T>)
+            FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
+        else
+            FGM_ASSERT_MSG(fgm::abs(det) != T(0), messages::assertion::MAT_DET_DIV_BY_ZERO);
 
         R factor = R(1) / det;
 

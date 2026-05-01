@@ -518,7 +518,6 @@ namespace fgm
         return mat.tryDiv(scalar, status, fallback);
     }
 
-
     template <Arithmetic T>
     constexpr T Matrix3D<T>::determinant() const noexcept
         requires SignedStrictArithmetic<T>

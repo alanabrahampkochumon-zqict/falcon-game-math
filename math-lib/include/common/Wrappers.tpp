@@ -49,9 +49,9 @@ namespace fgm
         else
         {
             if constexpr (std::is_floating_point_v<T>)
-                return std::fabs(num);
+                return static_cast<T>(std::fabs(num));
             else
-                return std::abs(num);
+                return static_cast<T>(std::abs(num));
         }
     }
 

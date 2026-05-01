@@ -66,7 +66,7 @@ inline void logAssertion(const char* condition, const char* message, const char*
         do                                                                                                             \
         {                                                                                                              \
             (condition) ? void(0)                                                                                      \
-                        : (std::is_constant_evaluated() ? throw message                                                \
+                        : (std::is_constant_evaluated() ? static_cast<void>(0)                                         \
                                                         : logAssertion(#condition, message, __FILE__, __LINE__),       \
                            FGM_DEBUG_BREAK());                                                                         \
                                                                                                                        \
@@ -90,10 +90,10 @@ inline void logAssertion(const char* condition, const char* message, const char*
     #define FGM_ASSERT(condition)                                                                                      \
         do                                                                                                             \
         {                                                                                                              \
-            (condition)                                                                                                \
-                ? void(0)                                                                                              \
-                : (std::is_constant_evaluated() ? throw message : logAssertion(#condition, "", __FILE__, __LINE__),    \
-                   FGM_DEBUG_BREAK());                                                                                 \
+            (condition) ? void(0)                                                                                      \
+                        : (std::is_constant_evaluated() ? static_cast<void>(0)                                         \
+                                                        : logAssertion(#condition, "", __FILE__, __LINE__),            \
+                           FGM_DEBUG_BREAK());                                                                         \
                                                                                                                        \
         } while (false)
 #else
