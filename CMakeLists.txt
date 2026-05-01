@@ -7,11 +7,16 @@ enable_testing()
 add_library(StrictWarnings INTERFACE)
 add_library(ProjectSanitizers INTERFACE)
 
+set(DevToolsDir "Dev Tools")
+
+option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Turn on solution folders
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+
 # Clang Formatter
 find_program(CLANG_FORMATTER NAMES clang-format)
-find_program(CLANG_TIDY_EXE NAMES clang-tidy)
-
-set(DevToolsDir "Dev Tools")
 
 if(CLANG_FORMATTER)
     file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h *.cxx *.hxx *.hpp *.cc *.hh *.tpp *.inl)
@@ -26,6 +31,8 @@ else()
     message(WARNING "clang-format not found")
 endif()
 
+# Clang Tidy
+find_program(CLANG_TIDY_EXE NAMES clang-tidy)
 if(CLANG_TIDY_EXE)
     # Create a custom target that you manually trigger
     add_custom_target(
@@ -39,12 +46,6 @@ if(CLANG_TIDY_EXE)
 else()
     message(WARNING "clang-tidy not found")
 endif()
-
-option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-
-option(ENABLE_STRICT "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
-option(ASAN "Enable ASan" OFF) # Option to enable ASAN
 
 # Doxygen
 find_package(Doxygen)
@@ -63,9 +64,9 @@ else()
 endif()
 
 
-# Turn on solution folders
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+option(ENABLE_STRICT "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
+option(ASAN "Enable ASan" OFF) # Option to enable ASAN
 
 # Enables Strict Warnings and Debug-only ASan
 if(ENABLE_STRICT)
@@ -83,7 +84,6 @@ if(ENABLE_STRICT)
     endif()
 endif()
 
-
 # Enables Address Sanitizer for all the projects globally.
 if(ASAN)
     message(STATUS "Turning on Address Sanitizer for Debug Builds")
@@ -96,18 +96,22 @@ if(ASAN)
     endif()
 endif()
 
+
 # Multi-processor compilation
 if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     message(STATUS "Enabling Multiprocessor compilation on MSVC")
     add_compile_options("/MP")
 endif()
 
+
 include(dependencies.cmake)
+
 if(TARGET gtest)
     target_link_libraries(gtest PRIVATE ProjectSanitizers)
     target_link_libraries(gmock PRIVATE ProjectSanitizers)
     target_link_libraries(gtest_main PRIVATE ProjectSanitizers)
 endif()
+
 
 include(simdcheck.cmake)
 
