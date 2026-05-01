@@ -15,7 +15,7 @@
 
 /**************************************
  *                                    *
- *              SETUP                 *
+ *               SETUP                *
  *                                    *
  **************************************/
 
@@ -53,7 +53,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DInverseTestSuite, SingularMatrix2DInverse,
 /** @brief Test fixture for @ref fgm::Matrix2D inverse with NaN vectors. */
 class NaNMatrix2DInverse: public ::testing::TestWithParam<fgm::Matrix2D<float>>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, NaNMatrix2DInverse,
+INSTANTIATE_TEST_SUITE_P(Matrix2DInverseTestSuite, NaNMatrix2DInverse,
                          ::testing::Values(fgm::Matrix2D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
                                            fgm::Matrix2D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
                                            fgm::Matrix2D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),

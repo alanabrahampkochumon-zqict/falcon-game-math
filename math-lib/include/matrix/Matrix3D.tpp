@@ -677,6 +677,20 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    constexpr T Matrix3D<T>::trace() const noexcept requires StrictArithmetic<T>
+    {
+        return T(0);
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Matrix3D<T>::trace(const Matrix3D& mat) noexcept requires StrictArithmetic<T>
+    {
+        return mat.trace();
+    }
+
+
 
 
     /**************************************
