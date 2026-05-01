@@ -174,6 +174,39 @@ namespace fgm
         /** @} */
 
 
+
+        /**
+         * @addtogroup T_FGM_Mat4x4_Constant
+         * @{
+         */
+
+        /**************************************
+         *                                    *
+         *             CONSTANTS              *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief A 4D matrix with ones on the main diagonal and zeros elsewhere.
+         *
+         * @note Only available for @ref StrictArithmetic types.
+         *
+         * @return A 4 identity matrix.
+         */
+        [[nodiscard]] static constexpr Matrix4D eye() noexcept;
+
+
+        /**
+         * @brief A 4D matrix with all zero elements.
+         *
+         * @note Only available for @ref StrictArithmetic types.
+         *
+         * @return A 4D zero matrix.
+         */
+        [[nodiscard]] static constexpr Matrix4D zero() noexcept;
+
+        /** @} */
+
         ///*************************************
         // *                                   *
         // *            ACCESSORS              *
