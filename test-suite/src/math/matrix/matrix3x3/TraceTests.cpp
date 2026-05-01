@@ -42,8 +42,8 @@ TYPED_TEST_SUITE(Matrix3DTrace, SupportedArithmeticTypes);
 namespace
 {
     constexpr fgm::Matrix3D MAT(3, 2, 5, 7, 5, 12, 8, 11, 12);
-    //static_assert(MAT.trace() == 20);                    // Member function
-    //static_assert(fgm::Matrix3D<int>::trace(MAT) == 20); // Static function
+    static_assert(MAT.trace() == 20);                    // Member function
+    static_assert(fgm::Matrix3D<int>::trace(MAT) == 20); // Static function
 
 } // namespace
 
