@@ -13,6 +13,7 @@
 
 #include "Matrix3D.h"
 #include "Matrix3D.h"
+#include "Matrix3D.h"
 #include "common/Messages.h"
 #include "common/PreprocessorDefinitions.h"
 
@@ -597,7 +598,7 @@ namespace fgm
     constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::safeInverse(const Matrix3D& fallback) const noexcept requires
         SignedStrictArithmetic<T>
     {
-        return fallback;
+        return Matrix3D<Magnitude<T>>();
     }
 
 
