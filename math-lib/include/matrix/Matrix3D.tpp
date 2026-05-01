@@ -593,6 +593,24 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::safeInverse(const Matrix3D& fallback) const noexcept requires
+        SignedStrictArithmetic<T>
+    {
+        return fallback;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::safeInverseOf(const Matrix3D& matrix,
+        const Matrix3D& fallback) noexcept requires SignedStrictArithmetic<T>
+    {
+        return matrix.safeInverse(fallback);
+    }
+
+
+
+
     /**************************************
      *                                    *
      *             UTILITIES              *
