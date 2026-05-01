@@ -82,34 +82,34 @@ INSTANTIATE_TEST_SUITE_P(Matrix3DInverseTestSuite, NaNMatrix3DInverse,
  *                                    *
  **************************************/
 
-/** @brief Verify that matrix inverse is available at compile time. */
+/** @brief Verify that matrix inverse functions are available at compile time. */
 namespace
 {
     constexpr fgm::Matrix3D MAT(1.0f, 2.0f, 3.0f, 0.0f, 1.0f, 4.0f, 5.0f, 6.0f, 0.0f);
 
     // Verify matrix inverse (member function)
     constexpr fgm::Matrix3D INV_MAT = MAT.inverse();
-    // static_assert(INV_MAT(0, 0) == -24.0f);
-    // static_assert(INV_MAT(0, 1) == 18.0f);
-    // static_assert(INV_MAT(0, 2) == 5.0f);
-    // static_assert(INV_MAT(1, 0) == 20.0f);
-    // static_assert(INV_MAT(1, 1) == -15.0f);
-    // static_assert(INV_MAT(1, 2) == -4.0f);
-    // static_assert(INV_MAT(2, 0) == -5.0f);
-    // static_assert(INV_MAT(2, 1) == 4.0f);
-    // static_assert(INV_MAT(2, 2) == 1.0f);
+    static_assert(INV_MAT(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT(1, 0) - 20.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT(1, 1) - -15.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT(1, 2) - -4.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT(2, 0) - -5.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT(2, 1) - 4.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
 
     // Verify matrix inverse (static function)
     constexpr fgm::Matrix3D INV_MAT_S = fgm::Matrix3D<float>::inverse(MAT);
-    // static_assert(INV_MAT_S(0, 0) == -24.0f);
-    // static_assert(INV_MAT_S(0, 1) == 18.0f);
-    // static_assert(INV_MAT_S(0, 2) == 5.0f);
-    // static_assert(INV_MAT_S(1, 0) == 20.0f);
-    // static_assert(INV_MAT_S(1, 1) == -15.0f);
-    // static_assert(INV_MAT_S(1, 2) == -4.0f);
-    // static_assert(INV_MAT_S(2, 0) == -5.0f);
-    // static_assert(INV_MAT_S(2, 1) == 4.0f);
-    // static_assert(INV_MAT_S(2, 2) == 1.0f);
+    static_assert(INV_MAT_S(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT_S(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT_S(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT_S(1, 0) - 20.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT_S(1, 1) - -15.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT_S(1, 2) - -4.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT_S(2, 0) - -5.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT_S(2, 1) - 4.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(INV_MAT_S(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
 } // namespace
 
 
