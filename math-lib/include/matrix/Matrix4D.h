@@ -203,6 +203,43 @@ namespace fgm
     };
 
 
+
+    /**
+     * @addtogroup T_FGM_Mat4x4_Constant
+     * @{
+     */
+
+    /**************************************
+     *                                    *
+     *             CONSTANTS              *
+     *                                    *
+     **************************************/
+
+    namespace mat4d
+    {
+        /**
+         * @brief A 4D matrix with ones on the main diagonal and zeros elsewhere.
+         *
+         * @note Only available for @ref StrictArithmetic types.
+         */
+        template <StrictArithmetic T>
+        inline constexpr Matrix4D<T> eye(T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0),
+                                         T(0), T(0), T(1));
+
+
+        /**
+         * @brief A 4D matrix with all zero elements.
+         *
+         * @note Only available for @ref StrictArithmetic types.
+         */
+        template <StrictArithmetic T>
+        inline constexpr Matrix4D<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0),
+                                         T(0), T(0), T(0));
+
+    } // namespace mat3d
+
+    /** @} */
+
 } // namespace fgm
 
 #include "Matrix4D.tpp"

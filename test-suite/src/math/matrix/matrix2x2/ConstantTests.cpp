@@ -43,10 +43,10 @@ namespace
 
 
     // Verify identity matrix static factory
-    //static_assert(fgm::Matrix2D<int>::eye()(0, 0) == 1);
-    //static_assert(fgm::Matrix2D<int>::eye()(0, 1) == 0);
-    //static_assert(fgm::Matrix2D<int>::eye()(1, 0) == 0);
-    //static_assert(fgm::Matrix2D<int>::eye()(1, 1) == 1);
+    static_assert(fgm::Matrix2D<int>::eye()(0, 0) == 1);
+    static_assert(fgm::Matrix2D<int>::eye()(0, 1) == 0);
+    static_assert(fgm::Matrix2D<int>::eye()(1, 0) == 0);
+    static_assert(fgm::Matrix2D<int>::eye()(1, 1) == 1);
 
 
     // Verify zero matrix
@@ -57,10 +57,10 @@ namespace
 
 
     // Verify zero matrix
-    //static_assert(fgm::Matrix2D<int>::zero()(0, 0) == 0);
-    //static_assert(fgm::Matrix2D<int>::zero()(0, 1) == 0);
-    //static_assert(fgm::Matrix2D<int>::zero()(1, 0) == 0);
-    //static_assert(fgm::Matrix2D<int>::zero()(1, 1) == 0);
+    static_assert(fgm::Matrix2D<int>::zero()(0, 0) == 0);
+    static_assert(fgm::Matrix2D<int>::zero()(0, 1) == 0);
+    static_assert(fgm::Matrix2D<int>::zero()(1, 0) == 0);
+    static_assert(fgm::Matrix2D<int>::zero()(1, 1) == 0);
 
 }
 

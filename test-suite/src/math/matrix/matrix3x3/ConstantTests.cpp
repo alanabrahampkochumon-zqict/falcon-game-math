@@ -48,10 +48,15 @@ namespace
 
 
     // Verify identity matrix static factory
-    //static_assert(fgm::Matrix3D<int>::eye()(0, 0) == 1);
-    //static_assert(fgm::Matrix3D<int>::eye()(0, 1) == 0);
-    //static_assert(fgm::Matrix3D<int>::eye()(1, 0) == 0);
-    //static_assert(fgm::Matrix3D<int>::eye()(1, 1) == 1);
+    static_assert(fgm::Matrix3D<int>::eye()(0, 0) == 1);
+    static_assert(fgm::Matrix3D<int>::eye()(0, 1) == 0);
+    static_assert(fgm::Matrix3D<int>::eye()(0, 2) == 0);
+    static_assert(fgm::Matrix3D<int>::eye()(1, 0) == 0);
+    static_assert(fgm::Matrix3D<int>::eye()(1, 1) == 1);
+    static_assert(fgm::Matrix3D<int>::eye()(1, 2) == 0);
+    static_assert(fgm::Matrix3D<int>::eye()(2, 0) == 0);
+    static_assert(fgm::Matrix3D<int>::eye()(2, 1) == 0);
+    static_assert(fgm::Matrix3D<int>::eye()(2, 2) == 1);
 
 
     // Verify zero matrix
@@ -67,10 +72,15 @@ namespace
 
 
     // Verify zero matrix
-    //static_assert(fgm::Matrix3D<int>::zero()(0, 0) == 0);
-    //static_assert(fgm::Matrix3D<int>::zero()(0, 1) == 0);
-    //static_assert(fgm::Matrix3D<int>::zero()(1, 0) == 0);
-    //static_assert(fgm::Matrix3D<int>::zero()(1, 1) == 0);
+    static_assert(fgm::Matrix3D<int>::zero()(0, 0) == 0);
+    static_assert(fgm::Matrix3D<int>::zero()(0, 1) == 0);
+    static_assert(fgm::Matrix3D<int>::zero()(0, 2) == 0);
+    static_assert(fgm::Matrix3D<int>::zero()(1, 0) == 0);
+    static_assert(fgm::Matrix3D<int>::zero()(1, 1) == 0);
+    static_assert(fgm::Matrix3D<int>::zero()(1, 2) == 0);
+    static_assert(fgm::Matrix3D<int>::zero()(2, 0) == 0);
+    static_assert(fgm::Matrix3D<int>::zero()(2, 1) == 0);
+    static_assert(fgm::Matrix3D<int>::zero()(2, 2) == 0);
 
 }
 
