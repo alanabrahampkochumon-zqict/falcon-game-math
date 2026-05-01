@@ -28,6 +28,9 @@
 
 #include <cstddef>
 
+
+// TODO: Add Matrix3D Transformation factory, projections.
+
 namespace fgm
 {
     template <Arithmetic T>
@@ -1093,85 +1096,7 @@ namespace fgm
 
         /** @} */
 
-        // template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>> // Added 'typename' and ', int'
-        // Matrix3D(const Matrix3D<S>& other)
-        //{
-        //	columns[0] = Vector3D<T>(other[0]);
-        //	columns[1] = Vector3D<T>(other[1]);
-        //	columns[2] = Vector3D<T>(other[2]);
-        // }
 
-
-        //    Vector3D<T>& operator[](size_t index);
-        //    const Vector3D<T>& operator[](size_t index) const;
-
-        //    T& operator()(size_t row, size_t col);
-        //    const T& operator()(size_t row, size_t col) const;
-
-
-        //    // Math Operators
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    auto operator+(const Matrix3D<S>& other) const -> Matrix3D<std::common_type_t<T, S>>;
-
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    Matrix3D& operator+=(const Matrix3D<S>& other);
-
-
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    auto operator-(const Matrix3D<S>& other) const -> Matrix3D<std::common_type_t<T, S>>;
-
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    Matrix3D& operator-=(const Matrix3D<S>& other);
-
-
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    auto operator*(const S& scalar) const -> Matrix3D<std::common_type_t<T, S>>;
-
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    Matrix3D& operator*=(const S& scalar);
-
-
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    auto operator*(const Vector3D<S>& vec) const -> Vector3D<std::common_type_t<T, S>>;
-
-
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    auto operator*(const Matrix3D<S>& other) const -> Matrix3D<std::common_type_t<T, S>>;
-
-        //    /**
-        //     * Multiplies a matrix by a matrix with *= operator.
-        //     * NOTE: Not recommended for game engine, since it involves object copying.
-        //     * RECOMMENDED: Use Mat * Mat
-        //     * @tparam S Type of the other Matrix
-        //     * @param other The matrix to be multiplied with.
-        //     * @return Matrix on which *= is called, but with new values
-        //     */
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    Matrix3D& operator*=(const Matrix3D<S>& other);
-
-
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    auto operator/(const S& scalar) const -> Matrix3D<std::common_type_t<T, S>>;
-
-        //    template <typename S, typename = std::enable_if_t<std::is_arithmetic_v<S>>>
-        //    Matrix3D& operator/=(const S& scalar);
-
-        //    // Determinants
-        //    // Calculates the determinant for the current Matrix3D.
-        //    T determinant() const;
-
-        //    // Static wrapper for Matrix 3D determinants.
-        //    static T determinant(const Matrix3D& matrix);
-
-        //    // Transpose
-        //    Matrix3D transpose() const;
-
-        //    static Matrix3D transpose(const Matrix3D& matrix);
-
-        //    // Matrix Inverse
-        //    Matrix3D inverse() const;
-
-        //    static Matrix3D inverse(const Matrix3D& matrix);
 
     private:
         Vector3D<T> _data[columns];
