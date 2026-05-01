@@ -868,7 +868,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-         constexpr Matrix3D<Magnitude<T>> safeInverse(const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        constexpr Matrix3D<Magnitude<T>> safeInverse(const Matrix3D& fallback = Matrix3D::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -900,7 +900,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-         static constexpr Matrix3D<Magnitude<T>> safeInverseOf(const Matrix3D& matrix,
+        static constexpr Matrix3D<Magnitude<T>> safeInverseOf(const Matrix3D& matrix,
                                                               const Matrix3D& fallback = Matrix3D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
@@ -934,7 +934,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-         constexpr Matrix3D<Magnitude<T>> tryInverse(OperationStatus& status,
+        constexpr Matrix3D<Magnitude<T>> tryInverse(OperationStatus& status,
                                                     const Matrix3D& fallback = Matrix3D::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
@@ -969,7 +969,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-         static constexpr Matrix3D<Magnitude<T>> tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
+        static constexpr Matrix3D<Magnitude<T>> tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
                                                              const Matrix3D& fallback = Matrix3D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
@@ -1072,7 +1072,7 @@ namespace fgm
          *
          * @return A reference to the output stream @p os.
          */
-        constexpr friend std::ostream& operator<<(std::ostream& os, const Matrix2D& matrix)
+        constexpr friend std::ostream& operator<<(std::ostream& os, const Matrix3D& matrix)
         {
             const std::streamsize oldPrecision = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
