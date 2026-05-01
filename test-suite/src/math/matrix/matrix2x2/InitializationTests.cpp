@@ -65,6 +65,14 @@ namespace
     static_assert(MAT2(0, 1) == 2);
     static_assert(MAT2(1, 0) == 3);
     static_assert(MAT2(1, 1) == 4);
+
+
+    // Verify that the matrix can be initialized at compile time using diagonals.
+    constexpr fgm::Matrix2D MAT3(3, 4);
+    static_assert(MAT3(0, 0) == 3);
+    static_assert(MAT3(0, 1) == 0);
+    static_assert(MAT3(1, 0) == 0);
+    static_assert(MAT3(1, 1) == 4);
     
 }
 
