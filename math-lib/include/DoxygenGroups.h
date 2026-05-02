@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 18, 2026
  *
- * @brief Definitions for doxygen groups used across fgm math library.
+ * @brief Doxygen group for organizing Falcon Math library into modular units.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
