@@ -326,7 +326,7 @@ namespace fgm
 #ifdef _MSC_VER
             if (std::is_constant_evaluated())
                 if (hasNaN() || rhs.hasNaN())
-                    return true;
+                    return false;
 #endif
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
             return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
