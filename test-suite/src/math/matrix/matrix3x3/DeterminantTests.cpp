@@ -29,8 +29,8 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { { T(3), T(4), T(2) }, { T(1), T(1), T(1) }, { T(2), T(5), T(6) } };
-        _expectedDeterminant = static_cast<T>(47);
+        _matrix = { { T(3), T(4), T(2) }, { T(1), T(1), T(1) }, { T(2), T(1), T(2) } };
+        _expectedDeterminant = static_cast<T>(1);
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix3D determinant, parameterized by @ref SupportedSignedArithmeticTypes. */
