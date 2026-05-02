@@ -319,11 +319,21 @@ namespace fgm
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] == rhs[0] && _data[1] == rhs[1] && _data[2] == rhs[2] && _data[3] == rhs[3];
         else
+        {
+            // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+            // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+            // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+#ifdef _MSC_VER
+            if (std::is_constant_evaluated())
+                if (hasNaN() || rhs.hasNaN())
+                    return true;
+#endif
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
             return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
                 (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon) &&
                 (_data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon) &&
                 (_data[3] == rhs[3] || fgm::abs(_data[3] - rhs[3]) <= epsilon);
+        }
     }
 
     template <Arithmetic T>
