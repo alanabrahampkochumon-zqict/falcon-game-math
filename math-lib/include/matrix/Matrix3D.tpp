@@ -386,7 +386,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
-        return Matrix3D<R>((*this) * rhs[0], (*this) * rhs[1], (*this) * rhs[2]);
+        return Matrix3D<R>(*this * rhs[0], *this * rhs[1], *this * rhs[2]);
     }
 
 
@@ -395,7 +395,7 @@ namespace fgm
     constexpr Matrix3D<T>& Matrix3D<T>::operator*=(const Matrix3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
-        const auto mat = (*this) * rhs;
+        const auto mat = *this * rhs;
         _data[0] = mat[0];
         _data[1] = mat[1];
         _data[2] = mat[2];
@@ -458,7 +458,7 @@ namespace fgm
             if (scalar == 0)
                 return Matrix3D<Magnitude<R>>(fallback);
 
-        return (*this) / scalar;
+        return *this / scalar;
     }
 
 
@@ -505,7 +505,7 @@ namespace fgm
 
 
         status = OperationStatus::SUCCESS;
-        return (*this) / scalar;
+        return *this / scalar;
     }
 
 
@@ -603,7 +603,7 @@ namespace fgm
 
         
         if constexpr (std::is_floating_point_v<T>)
-            if (hasNaN() || (fgm::abs(det) <= std::numeric_limits<T>::epsilon()))
+            if (hasNaN() || fgm::abs(det) <= std::numeric_limits<T>::epsilon())
                 return Matrix3D<R>(fallback);
         if constexpr (std::is_integral_v<T>)
             if (det == 0)

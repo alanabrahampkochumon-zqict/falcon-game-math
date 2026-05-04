@@ -180,6 +180,13 @@ namespace fgm
     { return anyNeq(rhs); }
 
 
+
+    /**************************************
+     *                                    *
+     *        ARITHMETIC OPERATORS        *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr PromotedMatrix4D<T, U> Matrix4D<T>::operator+(const Matrix4D<U>& rhs) const noexcept

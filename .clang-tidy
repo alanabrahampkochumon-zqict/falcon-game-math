@@ -38,7 +38,7 @@ CheckOptions:
     - { key: readability-identifier-naming.GlobalVariableCase, value: camelBack }
     - { key: readability-identifier-naming.GlobalVariablePrefix, value: "g_" }
 
-    # - { key: readability-identifier-naming.ConstexprVariableCase, value: UPPER_CASE }
+    - { key: readability-identifier-naming.ConstexprVariableCase, value: camelBack }
     - { key: readability-identifier-naming.GlobalConstexprVariableCase, value: UPPER_CASE }
     - { key: readability-identifier-naming.LocalConstexprVariableCase, value: camelBack }
 
@@ -46,6 +46,7 @@ CheckOptions:
     - { key: readability-identifier-naming.GlobalConstantCase, value: UPPER_CASE }
     - { key: readability-identifier-naming.ClassConstantCase, value: UPPER_CASE }
     - { key: readability-identifier-naming.EnumConstantCase, value: UPPER_CASE }
+    - { key: readability-identifier-naming.ConstantParameterCase, value: camelBack }
     - { key: readability-identifier-naming.MacroDefinitionCase, value: UPPER_CASE }
     - { key: readability-identifier-naming.LocalConstantCase, value: camelBack }
 

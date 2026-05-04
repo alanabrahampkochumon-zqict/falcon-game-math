@@ -341,7 +341,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        return Matrix2D<R>((*this) * rhs[0], (*this) * rhs[1]);
+        return Matrix2D<R>(*this * rhs[0], *this * rhs[1]);
     }
 
 
@@ -350,7 +350,7 @@ namespace fgm
     constexpr Matrix2D<T>& Matrix2D<T>::operator*=(const Matrix2D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
-        const auto mat = (*this) * rhs;
+        const auto mat = *this * rhs;
         _data[0] = mat[0];
         _data[1] = mat[1];
         return *this;
@@ -406,14 +406,14 @@ namespace fgm
             if (scalar == 0)
                 return Matrix2D<Magnitude<R>>(fallback);
 
-        return (*this) / scalar;
+        return *this / scalar;
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const Matrix2D& mat, const S scalar,
-                                                               const Matrix2D<T>& fallback) noexcept
+                                                               const Matrix2D& fallback) noexcept
         requires StrictArithmetic<T>
     {
         return mat.safeDiv(scalar, fallback);
@@ -423,7 +423,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                              const Matrix2D<T>& fallback) const noexcept
+                                                              const Matrix2D& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -451,7 +451,7 @@ namespace fgm
 
 
         status = OperationStatus::SUCCESS;
-        return (*this) / scalar;
+        return *this / scalar;
     }
 
 
@@ -483,7 +483,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T Matrix2D<T>::determinant(const Matrix2D<T>& mat) noexcept
+    constexpr T Matrix2D<T>::determinant(const Matrix2D& mat) noexcept
         requires SignedStrictArithmetic<T>
     {
 
@@ -544,7 +544,7 @@ namespace fgm
         // TODO: Update to use directly compute inverse to reduce operation
         // TODO: Do similar in code cleaning in tryInverse
         if constexpr (std::is_floating_point_v<T>)
-            if (hasNaN() || (fgm::abs(det) <= std::numeric_limits<T>::epsilon()))
+            if (hasNaN() || fgm::abs(det) <= std::numeric_limits<T>::epsilon())
                 return Matrix2D<R>(fallback);
         if constexpr (std::is_integral_v<T>)
             if (det == 0)
