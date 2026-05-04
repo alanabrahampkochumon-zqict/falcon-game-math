@@ -852,8 +852,9 @@ namespace fgm
          *        Calculate inverse:
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
@@ -883,8 +884,9 @@ namespace fgm
          *        Calculate inverse:
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                A_{00} & A_{01} & A_{02} \\
+         *                A_{10} & A_{11} & A_{12} \\
+         *                A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
@@ -916,8 +918,9 @@ namespace fgm
          *        Calculate inverse:
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                A_{00} & A_{01} & A_{02} \\
+         *                A_{10} & A_{11} & A_{12} \\
+         *                A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
@@ -950,8 +953,9 @@ namespace fgm
          *        Calculate inverse:
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                A_{00} & A_{01} & A_{02} \\
+         *                A_{10} & A_{11} & A_{12} \\
+         *                A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
