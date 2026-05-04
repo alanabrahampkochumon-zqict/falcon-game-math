@@ -26,7 +26,8 @@
 
 #include "vector/Vector2D.h"
 
-#include <cstddef>
+#include <array>
+// #include <cstddef>
 #include <type_traits>
 
 // TODO: Rotate around a point
@@ -52,7 +53,7 @@ namespace fgm
 
         /** @} */
 
-        
+
 
         /**
          * @addtogroup FGM_Mat2x2_Init
@@ -216,7 +217,7 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool allEq(const Matrix2D<U>& rhs,
-                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                           double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
                                                : Config::FLOAT_EPSILON) const noexcept;
 
@@ -240,8 +241,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr static bool allEq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
-                                                  double epsilon = (std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>)
+                                                  double epsilon = std::is_same_v<T, double> ||
+                                                          std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
                                                       : Config::FLOAT_EPSILON) noexcept;
 
@@ -264,7 +265,7 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool anyNeq(const Matrix2D<U>& rhs,
-                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
                                                 : Config::FLOAT_EPSILON) const noexcept;
 
@@ -288,8 +289,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr static bool anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
-                                                   double epsilon = (std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>)
+                                                   double epsilon = std::is_same_v<T, double> ||
+                                                           std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
                                                        : Config::FLOAT_EPSILON) noexcept;
 
@@ -676,8 +677,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedFloatMatrix2D<T, S> tryDiv(
-            const Matrix2D& mat, S scalar, OperationStatus& status,
-            const Matrix2D& fallback = Matrix2D::eye()) noexcept
+            const Matrix2D& mat, S scalar, OperationStatus& status, const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -691,7 +691,7 @@ namespace fgm
 
         /**
          * @brief Compute the determinant (scaling factor) of this matrix.
-         *        Calculate determinant: 
+         *        Calculate determinant:
          *        \f$
          *            \text{det(A)} = A_{00} \cdot A_{11} - A_{01} \cdot A_{10}
          *        \f$
@@ -723,13 +723,13 @@ namespace fgm
 
         /**
          * @brief Transpose this matrix by swapping its rows and columns.
-         *        Compute transpose: 
-         *        \f$ 
+         *        Compute transpose:
+         *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} \\
          *                 A_{10} & A_{11}
          *            \end{bmatrix} ^ \top
-         *            = 
+         *            =
          *            \begin{bmatrix}
          *                 A_{00} & A_{10} \\
          *                 A_{01} & A_{11}
@@ -1030,7 +1030,7 @@ namespace fgm
 
         /**
          * @brief Write the matrix to an output stream in **row-major** order.
-         *        Format the matrix as 
+         *        Format the matrix as
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{10} \\
@@ -1131,7 +1131,7 @@ namespace fgm
 
         /**
          * @brief Construct a reflection 2D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
-         * 
+         *
          * @note To construction a reflection matrix around origin, set all axis reflection to true.
          *
          * @param[in] reflectX A flag to whether reflect in the x-direction.
@@ -1146,7 +1146,7 @@ namespace fgm
 
 
     private:
-        Vector2D<T> _data[columns];
+        std::array<Vector2D<T>, columns> _data;
     };
 
 

@@ -24,10 +24,11 @@
  */
 
 
-#include "common/MathTraits.h"
 #include "common/Config.h"
+#include "common/MathTraits.h"
 #include "vector/Vector3D.h"
 
+#include <array>
 #include <cstddef>
 
 
@@ -1101,7 +1102,7 @@ namespace fgm
 
 
     private:
-        Vector3D<T> _data[columns];
+        std::array<Vector3D<T>, columns> _data;
     };
 
 

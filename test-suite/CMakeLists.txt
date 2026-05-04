@@ -18,7 +18,6 @@ list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDir})
 set(Vector2DTestDir "src/math/vectors/vector2d/")
 set(Vector2DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;SwizzlingTests.cpp;")
 list(TRANSFORM Vector2DTestFiles PREPEND ${Vector2DTestDir})
- 
 
 
 # Matrix Test Sources
@@ -31,11 +30,11 @@ set(Matrix3x3TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeC
 list(TRANSFORM Matrix3x3TestFiles PREPEND ${Matrix3x3TestDir})
 
 set(Matrix4x4TestDir "src/math/matrix/matrix4x4/")
-set(Matrix4x4TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeConversionTests.cpp;ConstantTests.cpp;UtilityTests.cpp;EqualityTests.cpp;")
+set(Matrix4x4TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeConversionTests.cpp;ConstantTests.cpp;UtilityTests.cpp;EqualityTests.cpp;AdditionTests.cpp;")
 list(TRANSFORM Matrix4x4TestFiles PREPEND ${Matrix4x4TestDir})
 
 set(MatrixTestDirectory "src/math/matrix/")
-set(MatrixTestFiles Matrix2DTests.cpp Matrix3DTests.cpp Matrix4DTests.cpp )
+set(MatrixTestFiles Matrix2DTests.cpp Matrix3DTests.cpp Matrix4DTests.cpp)
 list(TRANSFORM MatrixTestFiles PREPEND ${MatrixTestDirectory})
 
 set(MathCommonDir "src/math/common/")
@@ -51,8 +50,8 @@ set(SimdTestFiles "RegisterTypeTests.cpp;AdditionTests.cpp;InitializationTests.c
 list(TRANSFORM SimdTestFiles PREPEND ${SimdTestDirectory})
 
 target_sources(
-    TestSuite
-    PRIVATE
+        TestSuite
+        PRIVATE
         ${Vector2DTestFiles}
         ${Vector3DTestFiles}
         ${Vector4DTestFiles}
@@ -62,11 +61,11 @@ target_sources(
         # ${MatrixTestFiles}
         ${SimdTestFiles}
         ${MathCommonTestFiles}
-    
-    PRIVATE
-    FILE_SET HEADERS
-    BASE_DIRS ${HeaderDirectory}
-    FILES
+
+        PRIVATE
+        FILE_SET HEADERS
+        BASE_DIRS ${HeaderDirectory}
+        FILES
         ${SetupFiles}
         ${Utilities}
 )
@@ -74,28 +73,28 @@ target_sources(
 target_compile_options(TestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
 
 target_precompile_headers(
-    TestSuite
-    PRIVATE
-    <gtest/gtest.h>
-    <iostream>
-    <limits>
-    <concepts>
-    <cstddef>
-    <type_traits>
+        TestSuite
+        PRIVATE
+        <gtest/gtest.h>
+        <iostream>
+        <limits>
+        <concepts>
+        <cstddef>
+        <type_traits>
 )
 
 target_link_libraries(
-    TestSuite
-    PRIVATE
-    MathLib
-    FalconSIMD
-    GTest::gtest_main # googletest
+        TestSuite
+        PRIVATE
+        MathLib
+        FalconSIMD
+        GTest::gtest_main # googletest
 )
 
 target_include_directories(
-    TestSuite
-    PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+        TestSuite
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 
@@ -103,26 +102,26 @@ include(GoogleTest)
 gtest_discover_tests(TestSuite DISCOVERY_MODE PRE_TEST)
 
 source_group(
-    TREE
-    "${CMAKE_CURRENT_SOURCE_DIR}/${IncludeDir}"
-    PREFIX "Header Files"
-    FILES
-    ${SetupFiles}
-    ${Utilities}
+        TREE
+        "${CMAKE_CURRENT_SOURCE_DIR}/${IncludeDir}"
+        PREFIX "Header Files"
+        FILES
+        ${SetupFiles}
+        ${Utilities}
 )
 
-source_group (
-    TREE
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/"
-    PREFIX "Source Files"
-    FILES
-    ${Vector2DTestFiles}
-    ${Vector3DTestFiles}
-    ${Vector4DTestFiles}
-    ${Matrix2x2TestFiles}
-    ${Matrix3x3TestFiles}
-    ${Matrix4x4TestFiles}
-    ${MatrixTestFiles}
-    ${SimdTestFiles}
-    ${MathCommonTestFiles}
+source_group(
+        TREE
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/"
+        PREFIX "Source Files"
+        FILES
+        ${Vector2DTestFiles}
+        ${Vector3DTestFiles}
+        ${Vector4DTestFiles}
+        ${Matrix2x2TestFiles}
+        ${Matrix3x3TestFiles}
+        ${Matrix4x4TestFiles}
+        ${MatrixTestFiles}
+        ${SimdTestFiles}
+        ${MathCommonTestFiles}
 )

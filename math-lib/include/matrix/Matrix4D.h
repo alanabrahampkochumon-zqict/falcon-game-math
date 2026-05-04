@@ -27,6 +27,7 @@
 #include "common/MathTraits.h"
 #include "vector/Vector4D.h"
 
+#include <array>
 #include <cstddef>
 
 
@@ -654,7 +655,8 @@ namespace fgm
         //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
         //  * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
         //  *       operand contains NaN.
-        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
+        //  mathematical
         //  *       invalidity (Division by Zero) when reporting status.
         //  *
         //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -682,7 +684,8 @@ namespace fgm
         //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
         //  * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
         //  *       operand contains NaN.
-        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
+        //  mathematical
         //  *       invalidity (Division by Zero) when reporting status.
         //  *
         //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -699,8 +702,8 @@ namespace fgm
         //  */
         // template <StrictArithmetic S>
         // [[nodiscard]] static constexpr PromotedFloatMatrix4D<T, S> tryDiv(
-        //     const Matrix4D& mat, S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye()) noexcept
-        //     requires StrictArithmetic<T>;
+        //     const Matrix4D& mat, S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye())
+        //     noexcept requires StrictArithmetic<T>;
 
         /** @} */
 
@@ -783,7 +786,7 @@ namespace fgm
         /** @} */
 
     private:
-        Vector4D<T> _data[columns];
+        std::array<Vector4D<T>, columns> _data;
     };
 
 
