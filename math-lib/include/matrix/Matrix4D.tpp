@@ -192,7 +192,8 @@ namespace fgm
     constexpr PromotedMatrix4D<T, U> Matrix4D<T>::operator+(const Matrix4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return *this;
+        using R = PromotedValue_t<T, U>;
+        return Matrix4D<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + rhs[2], _data[3] + rhs[3]);
     }
 
     template <Arithmetic T>
@@ -200,6 +201,10 @@ namespace fgm
     Matrix4D<T>& Matrix4D<T>::operator+=(const Matrix4D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
+        _data[0] += rhs[0];
+        _data[1] += rhs[1];
+        _data[2] += rhs[2];
+        _data[3] += rhs[3];
         return *this;
     }
 

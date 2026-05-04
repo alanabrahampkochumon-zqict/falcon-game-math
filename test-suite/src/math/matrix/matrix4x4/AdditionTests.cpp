@@ -18,7 +18,7 @@
  **************************************/
 
 template <typename T>
-class Matrix4DAddition: public ::testing::Test
+class Matrix4DAddition: public testing::Test
 {
 protected:
     fgm::Matrix4D<T> _matA;
@@ -62,26 +62,26 @@ TYPED_TEST_SUITE(Matrix4DAddition, SupportedArithmeticTypes);
 /** @brief Verify that matrix addition operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4D MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-    constexpr fgm::Matrix4D MAT2(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-    constexpr fgm::Matrix4D BINARY_SUM = MAT1 + MAT2;
+    constexpr fgm::Matrix4D matA(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+    constexpr fgm::Matrix4D matB(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
+    constexpr fgm::Matrix4D binarySum = matA + matB;
 
-    // static_assert(BINARY_SUM(0, 0) == 6);
-    // static_assert(BINARY_SUM(0, 1) == 8);
-    // static_assert(BINARY_SUM(0, 2) == 10);
-    // static_assert(BINARY_SUM(0, 3) == 12);
-    // static_assert(BINARY_SUM(1, 0) == 14);
-    // static_assert(BINARY_SUM(1, 1) == 16);
-    // static_assert(BINARY_SUM(1, 2) == 18);
-    // static_assert(BINARY_SUM(1, 3) == 20);
-    // static_assert(BINARY_SUM(2, 0) == 22);
-    // static_assert(BINARY_SUM(2, 1) == 24);
-    // static_assert(BINARY_SUM(2, 2) == 26);
-    // static_assert(BINARY_SUM(2, 3) == 28);
-    // static_assert(BINARY_SUM(3, 0) == 30);
-    // static_assert(BINARY_SUM(3, 1) == 32);
-    // static_assert(BINARY_SUM(3, 2) == 34);
-    // static_assert(BINARY_SUM(3, 3) == 36);
+    static_assert(binarySum(0, 0) == 6);
+    static_assert(binarySum(0, 1) == 8);
+    static_assert(binarySum(0, 2) == 10);
+    static_assert(binarySum(0, 3) == 12);
+    static_assert(binarySum(1, 0) == 14);
+    static_assert(binarySum(1, 1) == 16);
+    static_assert(binarySum(1, 2) == 18);
+    static_assert(binarySum(1, 3) == 20);
+    static_assert(binarySum(2, 0) == 22);
+    static_assert(binarySum(2, 1) == 24);
+    static_assert(binarySum(2, 2) == 26);
+    static_assert(binarySum(2, 3) == 28);
+    static_assert(binarySum(3, 0) == 30);
+    static_assert(binarySum(3, 1) == 32);
+    static_assert(binarySum(3, 2) == 34);
+    static_assert(binarySum(3, 3) == 36);
 
 } // namespace
 
@@ -116,9 +116,9 @@ TEST(Matrix4DAddition, MixedTypeAdditionPromotesType)
     constexpr fgm::Matrix4D mat2{ fgm::Vector4D{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vector4D{ 3.0, -8.0, 12.0, 11.0 },
                                   fgm::Vector4D{ 3.25, 5.1, 0.0, 0.25 }, fgm::Vector4D{ 12.0, 13.0, 14.0, 15.0 } };
 
-    // [[maybe_unused]] constexpr fgm::Matrix4D sum = mat1 + mat2;
+    [[maybe_unused]] constexpr fgm::Matrix4D sum = mat1 + mat2;
 
-    // static_assert(std::is_same_v<decltype(sum)::value_type, double>);
+    static_assert(std::is_same_v<decltype(sum)::value_type, double>);
 }
 
 
@@ -149,7 +149,7 @@ TEST(Matrix4DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
                                                    fgm::Vector4D{ 3.25, 5.1, 0.0, 0.25 },
                                                    fgm::Vector4D{ 12.0, 13.0, 14.0, 15.0 } };
 
-    mat1 += mat2;
+    (void)(mat1 += mat2);
 
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);
 }
