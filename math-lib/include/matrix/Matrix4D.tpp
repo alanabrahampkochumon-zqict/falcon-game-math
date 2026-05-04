@@ -1,5 +1,15 @@
 #pragma once
-#include "Matrix4D.h"
+/**
+ * @file Matrix4D.tpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: February 15, 2026
+ *
+ * @brief @ref Matrix3D template implementation.
+ * @details This file contains the definitions of the template members declared in Matrix3D.h
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
 
 namespace fgm
 {
@@ -70,30 +80,22 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Vector4D<T>& Matrix4D<T>::operator[](std::size_t col) noexcept
-    {
-        return _data[col];
-    }
+    { return _data[col]; }
 
 
     template <Arithmetic T>
     constexpr const Vector4D<T>& Matrix4D<T>::operator[](std::size_t col) const noexcept
-    {
-        return _data[col];
-    }
+    { return _data[col]; }
 
 
     template <Arithmetic T>
     constexpr T& Matrix4D<T>::operator()(std::size_t row, std::size_t col) noexcept
-    {
-        return _data[col][row];
-    }
+    { return _data[col][row]; }
 
 
     template <Arithmetic T>
     constexpr const T& Matrix4D<T>::operator()(std::size_t row, std::size_t col) const noexcept
-    {
-        return _data[col][row];
-    }
+    { return _data[col][row]; }
 
 
 
@@ -105,16 +107,12 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::eye() noexcept
-    {
-        return Matrix4D(T(1), T(1), T(1), T(1));
-    }
+    { return Matrix4D(T(1), T(1), T(1), T(1)); }
 
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::zero() noexcept
-    {
-        return Matrix4D(T(0), T(0), T(0), T(0));
-    }
+    { return Matrix4D(T(0), T(0), T(0), T(0)); }
 
 
 
@@ -144,9 +142,7 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Matrix4D<T>::allEq(const Matrix4D& lhs, const Matrix4D<U>& rhs, double epsilon) noexcept
-    {
-        return lhs.allEq(rhs, epsilon);
-    }
+    { return lhs.allEq(rhs, epsilon); }
 
 
     template <Arithmetic T>
@@ -169,26 +165,36 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Matrix4D<T>::anyNeq(const Matrix4D& lhs, const Matrix4D<U>& rhs, double epsilon) noexcept
-    {
-        return lhs.anyNeq(rhs, epsilon);
-    }
+    { return lhs.anyNeq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Matrix4D<T>::operator==(const Matrix4D<U>& rhs) const noexcept
-    {
-        return allEq(rhs);
-    }
+    { return allEq(rhs); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Matrix4D<T>::operator!=(const Matrix4D<U>& rhs) const noexcept
+    { return anyNeq(rhs); }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedMatrix4D<T, U> Matrix4D<T>::operator+(const Matrix4D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
     {
-        return anyNeq(rhs);
+        return *this;
     }
 
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    Matrix4D<T>& Matrix4D<T>::operator+=(const Matrix4D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        return *this;
+    }
 
 
     /**************************************
@@ -199,30 +205,22 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasInf() const noexcept
-    {
-        return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf();
-    }
+    { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf(); }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasInf(const Matrix4D& mat) noexcept
-    {
-        return mat.hasInf();
-    }
+    { return mat.hasInf(); }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasNaN() const noexcept
-    {
-        return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN();
-    }
+    { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN(); }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasNaN(const Matrix4D& mat) noexcept
-    {
-        return mat.hasNaN();
-    }
+    { return mat.hasNaN(); }
 
 
     //   template <StrictArithmetic T>

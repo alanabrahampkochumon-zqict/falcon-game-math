@@ -343,6 +343,369 @@ namespace fgm
 
         /** @} */
 
+
+
+        /**
+         * @addtogroup FGM_Mat4x4_Arithmetic
+         * @{
+         */
+
+        /**
+         * @brief Add two matrices element-wise.
+         *        Compute the sum of each element pair and returns a new matrix.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to add.
+         *
+         * @return A new @ref Matrix4D containing the element-wise sum.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator+(const Matrix4D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Add another matrix to this matrix element-wise.
+         *        Perform an in-place addition of @p rhs to the current instance.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to add.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic U>
+        Matrix4D& operator+=(const Matrix4D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        // /**
+        //  * @brief Subtract two matrices element-wise.
+        //  *        Compute the difference between each element pair and returns a new matrix.
+        //  *
+        //  * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  *
+        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] rhs The matrix to subtract.
+        //  *
+        //  * @return A new @ref Matrix4D containing the element-wise difference.
+        //  */
+        // template <StrictArithmetic U>
+        // [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator-(const Matrix4D<U>& rhs) const noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Subtract another matrix from this matrix element-wise.
+        //  *        Perform an in-place substraction of @p rhs from the current instance.
+        //  *
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  *
+        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] rhs The matrix to subtract.
+        //  *
+        //  * @return A reference to this matrix (*this).
+        //  */
+        // template <StrictArithmetic U>
+        // constexpr Matrix4D& operator-=(const Matrix4D<U>& rhs) noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Scale the matrix by a scalar value.
+        //  *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+        //  *
+        //  * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  *
+        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] scalar The value to scale by.
+        //  *
+        //  * @return A new @ref Matrix4D scaled by @p scalar.
+        //  */
+        // template <StrictArithmetic S>
+        // [[nodiscard]] constexpr PromotedMatrix4D<T, S> operator*(S scalar) const noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Scale this matrix in-place by a scalar value.
+        //  *        Perform an in-place multiplication of each element by @p scalar.
+        //  *
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  *
+        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] scalar The value to scale by.
+        //  *
+        //  * @return A reference to this matrix (*this).
+        //  */
+        // template <StrictArithmetic S>
+        // constexpr Matrix4D& operator*=(S scalar) noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Transform the **column vector** by this matrix.
+        //  *        Perform the linear transformation:
+        //  *        \f$
+        //  *            \begin{bmatrix}
+        //  *                 A_{00} & A_{01} & A_{02} \\
+        //  *                 A_{10} & A_{11} & A_{12} \\
+        //  *                 A_{20} & A_{21} & A_{22}
+        //  *            \end{bmatrix}
+        //  *            \cdot
+        //  *            \begin{bmatrix}
+        //  *                  x \\ y \\ z
+        //  *            \end{bmatrix}
+        //  *            =
+        //  *            \begin{bmatrix}
+        //  *                  x' \\ y' \\ z'
+        //  *            \end{bmatrix}
+        //  *        \f$
+        //  *
+        //  * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  *
+        //  * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] vec The column vector to transform.
+        //  *
+        //  * @return A new @ref Vector3D with applied linear transformations.
+        //  */
+        // template <StrictArithmetic U>
+        // [[nodiscard]] constexpr PromotedVector3D<T, U> operator*(const Vector3D<U>& vec) const noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Compose this matrix with another to form a new matrix.
+        //  *        Compute the matrix product:
+        //  *        \f$
+        //  *            \begin{bmatrix}
+        //  *                 A_{00} & A_{01} & A_{02} \\
+        //  *                 A_{10} & A_{11} & A_{12} \\
+        //  *                 A_{20} & A_{21} & A_{22}
+        //  *            \end{bmatrix}
+        //  *            \cdot
+        //  *            \begin{bmatrix}
+        //  *                  B_{00} & B_{01} & B_{02} \\
+        //  *                  B_{10} & B_{11} & B_{12} \\
+        //  *                  B_{20} & B_{21} & B_{22}
+        //  *            \end{bmatrix}
+        //  *            =
+        //  *            \begin{bmatrix}
+        //  *                  C_{00} & C_{01} & C_{02} \\
+        //  *                  C_{10} & C_{11} & B_{12} \\
+        //  *                  C_{20} & C_{21} & C_{22}
+        //  *            \end{bmatrix}
+        //  *        \f$
+        //  *
+        //  * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  *
+        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] rhs The matrix to multiply.
+        //  *
+        //  * @return A new @ref Matrix4D containing the composition of linear transformations.
+        //  */
+        // template <StrictArithmetic U>
+        // [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator*(const Matrix4D<U>& rhs) const noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Compose this matrix with another matrix in-place.
+        //  *        Compute the matrix product:
+        //  *        \f$
+        //  *            \begin{bmatrix}
+        //  *                 A_{00} & A_{01} & A_{02} \\
+        //  *                 A_{10} & A_{11} & A_{12} \\
+        //  *                 A_{20} & A_{21} & A_{22}
+        //  *            \end{bmatrix}
+        //  *            \cdot
+        //  *            \begin{bmatrix}
+        //  *                  B_{00} & B_{01} & B_{02} \\
+        //  *                  B_{10} & B_{11} & B_{12} \\
+        //  *                  B_{20} & B_{21} & B_{22}
+        //  *            \end{bmatrix}
+        //  *            =
+        //  *            \begin{bmatrix}
+        //  *                  C_{00} & C_{01} & C_{02} \\
+        //  *                  C_{10} & C_{11} & B_{12} \\
+        //  *                  C_{20} & C_{21} & C_{22}
+        //  *            \end{bmatrix}
+        //  *        \f$
+        //  *
+        //  * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  *
+        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] rhs The matrix to multiply.
+        //  *
+        //  * @return A reference to this matrix (*this).
+        //  */
+        // template <StrictArithmetic U>
+        // constexpr Matrix4D& operator*=(const Matrix4D<U>& rhs) noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Inverse-scale the matrix by a scalar value.
+        //  *        Divide each element of the matrix by @p scalar and returns a new matrix.
+        //  *
+        //  * @note Promotes the result to a floating point result using @ref Magnitude.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  *
+        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] scalar The value to scale by.
+        //  *
+        //  * @return A new @ref Matrix4D inverse scaled by @p scalar.
+        //  */
+        // template <StrictArithmetic S>
+        // [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> operator/(const S& scalar) const noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Inverse-scale this matrix by a scalar value.
+        //  *        Perform an in-place division of each element by @p scalar.
+        //  *
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  *
+        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] scalar The value to scale by.
+        //  *
+        //  * @return A reference to this matrix (*this).
+        //  */
+        // template <StrictArithmetic S>
+        // constexpr Matrix4D& operator/=(const S& scalar) noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Safely divide each element of this matrix by a scalar value.
+        //  *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
+        //  *
+        //  * @note Promotes the result to a floating point result using @ref Magnitude.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+        //  *       operand contains NaN.
+        //  *
+        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] scalar   The value to divide the matrix elements by.
+        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+        //  *                     element.
+        //  *
+        //  * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
+        //  *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
+        //  */
+        // template <StrictArithmetic S>
+        // [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> safeDiv(
+        //     S scalar, const Matrix4D& fallback = Matrix4D::eye()) const noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Safely divide each element of a matrix by a scalar value.
+        //  *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
+        //  *
+        //  * @note Promotes the result to a floating point result using @ref Magnitude.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+        //  *       operand contains NaN.
+        //  *
+        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] mat      The matrix to divide.
+        //  * @param[in] scalar   The value to divide the matrix elements by.
+        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+        //  *                     element.
+        //  *
+        //  * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
+        //  *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
+        //  */
+        // template <StrictArithmetic S>
+        // [[nodiscard]] constexpr static PromotedFloatMatrix4D<T, S> safeDiv(
+        //     const Matrix4D& mat, S scalar, const Matrix4D& fallback = Matrix4D::eye()) noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Safely divide this matrix by a scalar value and set @p status to the division operation result.
+        //  *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
+        //  *
+        //  * @note Promotes the result to a floating point result using @ref Magnitude.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+        //  *       operand contains NaN.
+        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+        //  *       invalidity (Division by Zero) when reporting status.
+        //  *
+        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] scalar   The value to divide the matrix elements by.
+        //  * @param[out] status  The status flag to store the status of the current operation result.
+        //  *                     For details on status codes see @ref OperationStatus.
+        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+        //  *                     element.
+        //  *
+        //  * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
+        //  *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+        //  */
+        // template <StrictArithmetic S>
+        // [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> tryDiv(
+        //     S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye()) const noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Safely divide a matrix by a scalar value and set @p status to the division operation result.
+        //  *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
+        //  *
+        //  * @note Promotes the result to a floating point result using @ref Magnitude.
+        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+        //  * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+        //  *       operand contains NaN.
+        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+        //  *       invalidity (Division by Zero) when reporting status.
+        //  *
+        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+        //  *
+        //  * @param[in] mat      The matrix to divide.
+        //  * @param[in] scalar   The value to divide the matrix elements by.
+        //  * @param[out] status  The status flag to store the status of the current operation result.
+        //  *                     For details on status codes see @ref OperationStatus.
+        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+        //  *                     element.
+        //  *
+        //  * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
+        //  *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+        //  */
+        // template <StrictArithmetic S>
+        // [[nodiscard]] static constexpr PromotedFloatMatrix4D<T, S> tryDiv(
+        //     const Matrix4D& mat, S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye()) noexcept
+        //     requires StrictArithmetic<T>;
+
+        /** @} */
+
+
+
         ///*************************************
         // *                                   *
         // *            ACCESSORS              *

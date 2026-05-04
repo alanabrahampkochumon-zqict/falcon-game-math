@@ -27,13 +27,5 @@ target_include_directories(
     "$<INSTALL_INTERFACE:include>"
 )
 
-# add_custom_target(
-#     SIMD
-#     ALL
-#     SOURCES
-#     ${HeaderFiles}
-#     ${TemplateFiles}
-# )
-
 source_group("Header Files" ${HeaderFiles})
 source_group("Template Files" ${TemplateFiles})

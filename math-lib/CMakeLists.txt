@@ -64,7 +64,6 @@ target_include_directories(
 
 )
 
-# TODO: Group General and common files into a "Header Files" directory.
 source_group("Header Files" FILES ${GeneralFiles})
 source_group("Header Files\\vector" FILES ${VectorHeaderFiles})
 source_group("Header Files\\common" FILES ${CommonHeaderFiles})
