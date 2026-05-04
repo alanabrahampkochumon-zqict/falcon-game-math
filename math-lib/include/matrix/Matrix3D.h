@@ -567,7 +567,7 @@ namespace fgm
          * @return A new @ref Matrix3D inverse scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> operator/(const S& scalar) const noexcept
+        [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> operator/(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -584,7 +584,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic S>
-        constexpr Matrix3D& operator/=(const S& scalar) noexcept
+        constexpr Matrix3D& operator/=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
