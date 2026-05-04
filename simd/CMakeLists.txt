@@ -1,4 +1,3 @@
-add_library(FalconSIMD INTERFACE)
 
 set(IncludeDirectory "Include/")
 set(HeaderFiles "SIMD.h;SIMDUtils.h;DoxygenGroups.h")
@@ -7,6 +6,8 @@ list(TRANSFORM HeaderFiles PREPEND ${IncludeDirectory})
 set(TemplateFiles "SIMD.tpp")
 list(TRANSFORM TemplateFiles PREPEND ${IncludeDirectory})
 
+
+add_library(FalconSIMD INTERFACE ${HeaderFiles} ${TemplateFiles})
 
 target_sources(
     FalconSIMD
@@ -26,13 +27,13 @@ target_include_directories(
     "$<INSTALL_INTERFACE:include>"
 )
 
-add_custom_target(
-    SIMD
-    ALL
-    SOURCES
-    ${HeaderFiles}
-    ${TemplateFiles}
-)
+# add_custom_target(
+#     SIMD
+#     ALL
+#     SOURCES
+#     ${HeaderFiles}
+#     ${TemplateFiles}
+# )
 
 source_group("Header Files" ${HeaderFiles})
 source_group("Template Files" ${TemplateFiles})

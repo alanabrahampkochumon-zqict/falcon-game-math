@@ -1,13 +1,4 @@
-add_library(MathLib INTERFACE)
-
-set_property(TARGET MathLib PROPERTY CXX_STANDARD 20)
-set_property(TARGET MathLib PROPERTY CXX_STANDARD_REQUIRED ON)
-
-# NOTE: If this flag is not enabled, then NAN less than and less than or equal comparison will not work properly.
-target_compile_options(MathLib INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
-
 set(IncludeDirectory "include/")
-
 
 set(GeneralFiles "SimdTraits.h;DoxygenGroups.h")
 list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
@@ -31,6 +22,23 @@ list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
 
 set(MatrixTemplateDefinitionFiles Matrix2D.tpp Matrix3D.tpp Matrix4D.tpp)
 list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDirectory})
+
+# To view this target as a Interface Library, we need to pass all the target files.
+add_library(MathLib INTERFACE 
+        ${VectorHeaderFiles}
+        ${VectorTemplateDefinitionFiles}
+        ${MatrixHeaderFiles}
+        ${MatrixTemplateDefinitionFiles}
+        ${GeneralFiles}
+        ${CommonHeaderFiles}
+        ${CommonTemplateFiles}
+)
+
+set_property(TARGET MathLib PROPERTY CXX_STANDARD 20)
+set_property(TARGET MathLib PROPERTY CXX_STANDARD_REQUIRED ON)
+
+# NOTE: If this flag is not enabled, then NAN less than and less than or equal comparison will not work properly.
+target_compile_options(MathLib INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
 
 
 target_sources(MathLib
@@ -56,19 +64,8 @@ target_include_directories(
 
 )
 
-add_custom_target(
-    Math
-    ALL
-    SOURCES
-    ${VectorHeaderFiles}
-    ${VectorTemplateDefinitionFiles}
-    ${MatrixHeaderFiles}
-    ${MatrixTemplateDefinitionFiles}
-    ${GeneralFiles}
-    ${CommonHeaderFiles}
-    ${CommonTemplateFiles}
-)
 # TODO: Group General and common files into a "Header Files" directory.
+source_group("Header Files" FILES ${GeneralFiles})
 source_group("Header Files\\vector" FILES ${VectorHeaderFiles})
 source_group("Header Files\\common" FILES ${CommonHeaderFiles})
 source_group("Header Files\\matrix" FILES ${MatrixHeaderFiles})
