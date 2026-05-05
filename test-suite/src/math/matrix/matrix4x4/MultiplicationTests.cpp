@@ -49,31 +49,33 @@ protected:
 TYPED_TEST_SUITE(Matrix4DScalarMultiplication, SupportedArithmeticTypes);
 
 
-// template <typename T>
-// class Matrix4DVectorMultiplication: public ::testing::Test
-// {
-// protected:
-//     fgm::Matrix4D<T> _mat;
-//     fgm::Vector4D<T> _vec;
-//     fgm::Vector4D<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
-//         _expectedIntegralRowVector;
-//
-//     void SetUp() override
-//     {
-//         _mat = { fgm::Vector4D{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338) },
-//                  fgm::Vector4D{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321) },
-//                  fgm::Vector4D{ T(2.238929123125), T(11.238924194839), T(9.2389291239898) } };
-//         _vec = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128) };
-//         _expectedFloatingColVector = { T(33.88727193442948), T(54.59119292006805), T(24.550731838459015) };
-//         _expectedIntegralColVector = { T(31), T(49), T(20) };
-//         _expectedFloatingRowVector = { T(57.753956108666344), T(27.839918694037294), T(51.239531632191486) };
-//         _expectedIntegralRowVector = { T(54), T(25), T(46) };
-//     }
-// };
-// /** @brief Test fixture for @ref fgm::Matrix4D vector multiplication, parameterized by @ref SupportedArithmeticTypes.
-// */ TYPED_TEST_SUITE(Matrix4DVectorMultiplication, SupportedArithmeticTypes);
-//
-//
+template <typename T>
+class Matrix4DVectorMultiplication: public ::testing::Test
+{
+protected:
+    fgm::Matrix4D<T> _mat;
+    fgm::Vector4D<T> _vec;
+    fgm::Vector4D<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
+        _expectedIntegralRowVector;
+
+    void SetUp() override
+    {
+        _mat = { fgm::Vector4D{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338), T(1.2384912349) },
+                 fgm::Vector4D{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321), T(3.2983192312) },
+                 fgm::Vector4D{ T(2.238929123125), T(11.238924194839), T(9.2389291239898), T(8.2813941329) },
+                 fgm::Vector4D{ T(7.32129123125), T(8.2314213412), T(2.2323329898), T(3.12343151324) }
+        };
+        _vec = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128), T(4.18293482134), T(0) };
+        _expectedFloatingColVector = { T(33.88727193442948), T(54.59119292006805), T(24.550731838459015) };
+        _expectedIntegralColVector = { T(31), T(49), T(20), T(0) };
+        _expectedFloatingRowVector = { T(57.753956108666344), T(27.839918694037294), T(51.239531632191486), T(0) };
+        _expectedIntegralRowVector = { T(54), T(25), T(46), T(0) };
+    }
+};
+/** @brief Test fixture for @ref fgm::Matrix4D vector multiplication, parameterized by @ref SupportedArithmeticTypes.
+*/ TYPED_TEST_SUITE(Matrix4DVectorMultiplication, SupportedArithmeticTypes);
+
+
 // template <typename T>
 // class Matrix4DVectorFractionalMultiplication: public ::testing::Test
 // {
