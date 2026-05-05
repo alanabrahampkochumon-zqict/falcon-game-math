@@ -236,21 +236,29 @@ namespace fgm
     template <StrictArithmetic S>
     constexpr PromotedMatrix4D<T, S> Matrix4D<T>::operator*(S scalar) const noexcept
         requires StrictArithmetic<T>
-    { return *this; }
+    {
+        using R = PromotedValue_t<T, S>;
+        return Matrix4D<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2], scalar * _data[3]);
+    }
 
 
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedMatrix4D<T, S> operator*(S scalar, const Matrix4D<T>& mat) noexcept
-    {
-        return mat;
-    }
+    { return mat * scalar; }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr Matrix4D<T>& Matrix4D<T>::operator*=(S scalar) noexcept
         requires StrictArithmetic<T>
-    { return *this; }
+    {
+        using R = PromotedValue_t<T, S>;
+        _data[0] = static_cast<Vector4D<R>>(_data[0]) * static_cast<R>(scalar);
+        _data[1] = static_cast<Vector4D<R>>(_data[1]) * static_cast<R>(scalar);
+        _data[2] = static_cast<Vector4D<R>>(_data[2]) * static_cast<R>(scalar);
+        _data[3] = static_cast<Vector4D<R>>(_data[3]) * static_cast<R>(scalar);
+        return *this;
+    }
 
 
 

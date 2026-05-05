@@ -32,15 +32,15 @@ protected:
                  { T(9.912384), T(1.2399132), T(5.383912), T(12.19381) } };
         _scalar = T(2.123456789123456);
         _expectedFloatingMat = {
-            { T(14.864197523864192), T(11.761827154954823), T(11.679012340179007), T(21.048519101198718) },
-            { T(16.987654312987647), T(4.060865467717243), T(23.88888887763888), T(2.632902102463789) },
-            { T(2.630840523205501), T(0.28238641468183), T(2.828444443112443), T(11.432504488443243) },
-            { T(11.220114708178821), T(19.138503694690797), T(8.138997527031295), T(25.893028629781487) }
+            { T(14.864197523864192), T(16.987654312987647), T(2.630840523205501), T(11.220114708178821) },
+            { T(11.761827154954823), T(4.060865467717243), T(0.28238641468183), T(19.138503694690797) },
+            { T(11.679012340179007), T(23.88888887763888), T(2.828444443112443), T(8.138997527031295) },
+            { T(21.048519101198718), T(2.632902102463789), T(11.432504488443243), T(25.893028629781487) }
         };
-        _expectedIntegralMat = { { T(14), T(11), T(11), T(21) },
-                                 { T(16), T(4), T(23), T(2) },
-                                 { T(2), T(0), T(2), T(11) },
-                                 { T(11), T(19), T(8), T(25) }
+        _expectedIntegralMat = { { T(14), T(16), T(2), T(10) },
+                                 { T(10), T(2), T(0), T(18) },
+                                 { T(10), T(22), T(2), T(6) },
+                                 { T(18), T(2), T(10), T(24) }
 
         };
     }
@@ -70,8 +70,8 @@ TYPED_TEST_SUITE(Matrix4DScalarMultiplication, SupportedArithmeticTypes);
 //         _expectedIntegralRowVector = { T(54), T(25), T(46) };
 //     }
 // };
-// /** @brief Test fixture for @ref fgm::Matrix4D vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
-// TYPED_TEST_SUITE(Matrix4DVectorMultiplication, SupportedArithmeticTypes);
+// /** @brief Test fixture for @ref fgm::Matrix4D vector multiplication, parameterized by @ref SupportedArithmeticTypes.
+// */ TYPED_TEST_SUITE(Matrix4DVectorMultiplication, SupportedArithmeticTypes);
 //
 //
 // template <typename T>
@@ -91,7 +91,8 @@ TYPED_TEST_SUITE(Matrix4DScalarMultiplication, SupportedArithmeticTypes);
 //         _vec = fgm::Vector4D{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341) };
 //
 //         _expectedColVector = fgm::Vector4D{ T(-0.07652999600877063), T(0.08239631520624698), T(0.8088432317718919) };
-//         _expectedRowVector = fgm::Vector4D{ T(0.2358808028522597), T(0.0027566750622143033), T(-0.11238372794829783) };
+//         _expectedRowVector = fgm::Vector4D{ T(0.2358808028522597), T(0.0027566750622143033), T(-0.11238372794829783)
+//         };
 //     }
 // };
 // /**
@@ -118,7 +119,8 @@ TYPED_TEST_SUITE(Matrix4DScalarMultiplication, SupportedArithmeticTypes);
 //
 //         _expectedFloatingMat = { fgm::Vector4D{ T(59.81499110074553), T(50.25262787869462), T(23.066325405048886) },
 //                                  fgm::Vector4D{ T(95.51443223309786), T(81.75128018451636), T(29.872810121743093) },
-//                                  fgm::Vector4D{ T(112.54098028826937), T(96.47820080937791), T(41.267951710315614) } };
+//                                  fgm::Vector4D{ T(112.54098028826937), T(96.47820080937791), T(41.267951710315614) }
+//                                  };
 //
 //         _expectedIntegralMat = { fgm::Vector4D{ T(55), T(46), T(18) }, fgm::Vector4D{ T(89), T(76), T(24) },
 //                                  fgm::Vector4D{ T(105), T(90), T(35) } };
@@ -179,43 +181,43 @@ namespace
     constexpr fgm::Vector4D vec4D(1, 2, 3, 4);
 
     // Verify matrix * scalar multiplication
-    // constexpr fgm::Matrix4D binaryProduct1 = matA * 2;
-    // static_assert(binaryProduct1(0, 0) == 2);
-    // static_assert(binaryProduct1(0, 1) == 4);
-    // static_assert(binaryProduct1(0, 2) == 6);
-    // static_assert(binaryProduct1(0, 3) == 8);
-    // static_assert(binaryProduct1(1, 0) == 10);
-    // static_assert(binaryProduct1(1, 1) == 12);
-    // static_assert(binaryProduct1(1, 2) == 14);
-    // static_assert(binaryProduct1(1, 3) == 16);
-    // static_assert(binaryProduct1(2, 0) == 18);
-    // static_assert(binaryProduct1(2, 1) == 20);
-    // static_assert(binaryProduct1(2, 2) == 22);
-    // static_assert(binaryProduct1(2, 3) == 24);
-    // static_assert(binaryProduct1(3, 0) == 26);
-    // static_assert(binaryProduct1(3, 1) == 28);
-    // static_assert(binaryProduct1(3, 2) == 30);
-    // static_assert(binaryProduct1(3, 3) == 32);
-    //
-    //
-    // // Verify scalar * matrix multiplication
-    // constexpr fgm::Matrix4D binaryProduct2 = 2 * matA;
-    // static_assert(binaryProduct2(0, 0) == 2);
-    // static_assert(binaryProduct2(0, 1) == 4);
-    // static_assert(binaryProduct2(0, 2) == 6);
-    // static_assert(binaryProduct2(0, 3) == 8);
-    // static_assert(binaryProduct2(1, 0) == 10);
-    // static_assert(binaryProduct2(1, 1) == 12);
-    // static_assert(binaryProduct2(1, 2) == 14);
-    // static_assert(binaryProduct2(1, 3) == 16);
-    // static_assert(binaryProduct2(2, 0) == 18);
-    // static_assert(binaryProduct2(2, 1) == 20);
-    // static_assert(binaryProduct2(2, 2) == 22);
-    // static_assert(binaryProduct2(2, 3) == 24);
-    // static_assert(binaryProduct2(3, 0) == 26);
-    // static_assert(binaryProduct2(3, 1) == 28);
-    // static_assert(binaryProduct2(3, 2) == 30);
-    // static_assert(binaryProduct2(3, 3) == 32);
+    constexpr fgm::Matrix4D binaryProduct1 = matA * 2;
+    static_assert(binaryProduct1(0, 0) == 2);
+    static_assert(binaryProduct1(0, 1) == 4);
+    static_assert(binaryProduct1(0, 2) == 6);
+    static_assert(binaryProduct1(0, 3) == 8);
+    static_assert(binaryProduct1(1, 0) == 10);
+    static_assert(binaryProduct1(1, 1) == 12);
+    static_assert(binaryProduct1(1, 2) == 14);
+    static_assert(binaryProduct1(1, 3) == 16);
+    static_assert(binaryProduct1(2, 0) == 18);
+    static_assert(binaryProduct1(2, 1) == 20);
+    static_assert(binaryProduct1(2, 2) == 22);
+    static_assert(binaryProduct1(2, 3) == 24);
+    static_assert(binaryProduct1(3, 0) == 26);
+    static_assert(binaryProduct1(3, 1) == 28);
+    static_assert(binaryProduct1(3, 2) == 30);
+    static_assert(binaryProduct1(3, 3) == 32);
+
+
+    // Verify scalar * matrix multiplication
+    constexpr fgm::Matrix4D binaryProduct2 = 2 * matA;
+    static_assert(binaryProduct2(0, 0) == 2);
+    static_assert(binaryProduct2(0, 1) == 4);
+    static_assert(binaryProduct2(0, 2) == 6);
+    static_assert(binaryProduct2(0, 3) == 8);
+    static_assert(binaryProduct2(1, 0) == 10);
+    static_assert(binaryProduct2(1, 1) == 12);
+    static_assert(binaryProduct2(1, 2) == 14);
+    static_assert(binaryProduct2(1, 3) == 16);
+    static_assert(binaryProduct2(2, 0) == 18);
+    static_assert(binaryProduct2(2, 1) == 20);
+    static_assert(binaryProduct2(2, 2) == 22);
+    static_assert(binaryProduct2(2, 3) == 24);
+    static_assert(binaryProduct2(3, 0) == 26);
+    static_assert(binaryProduct2(3, 1) == 28);
+    static_assert(binaryProduct2(3, 2) == 30);
+    static_assert(binaryProduct2(3, 3) == 32);
 
     // Verify matrix * vector multiplication
     // constexpr fgm::Vector4D colVectorProduct = matA * vec4D;
