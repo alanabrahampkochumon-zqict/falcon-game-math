@@ -131,6 +131,8 @@ namespace fgm
     template <Arithmetic T>
     struct Vector3D;
 
+    template <Arithmetic T>
+    struct Vector4D;
 
     template <Arithmetic T>
     struct Matrix2D;
@@ -154,6 +156,11 @@ namespace fgm
         requires Arithmetic<PromotedValue_t<T, U>>
     using PromotedVector3D = Vector3D<PromotedValue_t<T, U>>;
 
+
+    /** @brief Alias for @ref Vector4D with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedVector4D = Vector4D<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Matrix2D with promoted value type. */
