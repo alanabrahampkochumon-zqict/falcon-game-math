@@ -328,7 +328,7 @@ namespace fgm
 
 
         /**
-         * @copybrief anyNeq(const Vector3D<U>&, double) const noexcept
+         * @copybrief anyNeq(const Vector4D<U>&, double) const noexcept
          *
          * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
          *       during static evaluation.
@@ -482,10 +482,10 @@ namespace fgm
         //  *
         //  * @param[in] vec The column vector to transform.
         //  *
-        //  * @return A new @ref Vector3D with applied linear transformations.
+        //  * @return A new @ref Vector4D with applied linear transformations.
         //  */
         // template <StrictArithmetic U>
-        // [[nodiscard]] constexpr PromotedVector3D<T, U> operator*(const Vector3D<U>& vec) const noexcept
+        // [[nodiscard]] constexpr PromotedVector4D<T, U> operator*(const Vector4D<U>& vec) const noexcept
         //     requires StrictArithmetic<T>;
         //
         //
@@ -789,6 +789,106 @@ namespace fgm
         std::array<Vector4D<T>, columns> _data;
     };
 
+
+
+    /**************************************
+     *                                    *
+     *        NON-MEMBER FUNCTIONS        *
+     *                                    *
+     **************************************/
+
+    /**
+     * @addtogroup FGM_Mat4x4_Arithmetic
+     * @{
+     */
+
+    /**
+     * @brief Scale the matrix by a scalar value.
+     *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] mat    The matrix to scale.
+     *
+     * @return A new @ref Matrix4D scaled by @p scalar.
+     */
+    template <StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] constexpr PromotedMatrix4D<T, S> operator*(S scalar, const Matrix4D<T>& mat) noexcept;
+
+
+    // /**
+    //  * @brief Transform the **row vector** by a matrix.
+    //  *        Perform the linear transformation:
+    //  *        \f$
+    //  *            \begin{bmatrix}
+    //  *                x & y & z
+    //  *            \end{bmatrix}
+    //  *            \cdot
+    //  *            \begin{bmatrix}
+    //  *                A_{00} & A_{01} & A_{02} \\
+    //  *                A_{10} & A_{11} & A_{12} \\
+    //  *                A_{20} & A_{21} & A_{22}
+    //  *            \end{bmatrix}
+    //  *            =
+    //  *            \begin{bmatrix}
+    //  *                x' & y' & z'
+    //  *            \end{bmatrix}
+    //  *        \f$
+    //  *
+    //  * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+    //  *
+    //  * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
+    //  * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
+    //  *
+    //  * @param[in] vec The row vector to transformed.
+    //  * @param[in] mat The transformation matrix.
+    //  *
+    //  * @return The passed-in @p vec with the transformations applied.
+    //  */
+    // template <StrictArithmetic T, StrictArithmetic U>
+    // static constexpr PromotedVector4D<T, U> operator*(const Vector4D<T>& vec, const Matrix4D<U>& mat) noexcept;
+    //
+    //
+    // /**
+    //  * @brief Transform this **row vector** by a matrix.
+    //  *        Perform the linear transformation:
+    //  *        \f$
+    //  *            \begin{bmatrix}
+    //  *                x & y & z
+    //  *            \end{bmatrix}
+    //  *            \cdot
+    //  *            \begin{bmatrix}
+    //  *                A_{00} & A_{01} & A_{02} \\
+    //  *                A_{10} & A_{11} & A_{12} \\
+    //  *                A_{20} & A_{21} & A_{22}
+    //  *            \end{bmatrix}
+    //  *            =
+    //  *            \begin{bmatrix}
+    //  *                x' & y' & z'
+    //  *            \end{bmatrix}
+    //  *        \f$
+    //  *
+    //  * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+    //  *
+    //  * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
+    //  * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
+    //  *
+    //  * @param[in] vec The row vector to transformed.
+    //  * @param[in] mat The transformation matrix.
+    //  *
+    //  * @return The passed-in @p vec with the transformations applied.
+    //  */
+    // template <StrictArithmetic T, StrictArithmetic U>
+    // static constexpr Vector4D<T>& operator*=(Vector4D<T>& vec, const Matrix4D<U>& mat) noexcept;
+
+    /** @} */
+    
 
 
     /**

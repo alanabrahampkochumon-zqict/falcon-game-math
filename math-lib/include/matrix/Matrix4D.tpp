@@ -236,8 +236,13 @@ namespace fgm
     template <StrictArithmetic S>
     constexpr PromotedMatrix4D<T, S> Matrix4D<T>::operator*(S scalar) const noexcept
         requires StrictArithmetic<T>
+    { return *this; }
+
+
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr PromotedMatrix4D<T, S> operator*(S scalar, const Matrix4D<T>& mat) noexcept
     {
-        return *this;
+        return mat;
     }
 
 
@@ -245,9 +250,8 @@ namespace fgm
     template <StrictArithmetic S>
     constexpr Matrix4D<T>& Matrix4D<T>::operator*=(S scalar) noexcept
         requires StrictArithmetic<T>
-    {
-        return *this;
-    }
+    { return *this; }
+
 
 
     /**************************************
@@ -274,7 +278,6 @@ namespace fgm
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasNaN(const Matrix4D& mat) noexcept
     { return mat.hasNaN(); }
-
 
     //   template <StrictArithmetic T>
     //   Matrix4D<T>::Matrix4D()
