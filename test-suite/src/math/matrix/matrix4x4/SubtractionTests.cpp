@@ -63,26 +63,26 @@ TYPED_TEST_SUITE(Matrix4DSubtraction, SupportedArithmeticTypes);
 /** @brief Verify that matrix subtraction operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4D MAT1{ 8, 2, 12, 4, 15, -11, 23, -55, 12, 10, 11, 19, 20, 22, 15, 16 };
-    constexpr fgm::Matrix4D MAT2{ 80, -5, 15, 3, 1, -13, 0, 55, 38, 33, -12, 10, 59, 11, 15, -16 };
-    constexpr fgm::Matrix4D BINARY_DIFF = MAT1 - MAT2;
+    constexpr fgm::Matrix4D matA{ 8, 2, 12, 4, 15, -11, 23, -55, 12, 10, 11, 19, 20, 22, 15, 16 };
+    constexpr fgm::Matrix4D matB{ 80, -5, 15, 3, 1, -13, 0, 55, 38, 33, -12, 10, 59, 11, 15, -16 };
+    constexpr fgm::Matrix4D binaryDiff = matA - matB;
 
-    static_assert(BINARY_DIFF(0, 0) == -72);
-    static_assert(BINARY_DIFF(0, 1) == 7);
-    static_assert(BINARY_DIFF(0, 2) == -3);
-    static_assert(BINARY_DIFF(0, 3) == 1);
-    static_assert(BINARY_DIFF(1, 0) == 14);
-    static_assert(BINARY_DIFF(1, 1) == 2);
-    static_assert(BINARY_DIFF(1, 2) == 23);
-    static_assert(BINARY_DIFF(1, 3) == -110);
-    static_assert(BINARY_DIFF(2, 0) == -26);
-    static_assert(BINARY_DIFF(2, 1) == -23);
-    static_assert(BINARY_DIFF(2, 2) == 23);
-    static_assert(BINARY_DIFF(2, 3) == 9);
-    static_assert(BINARY_DIFF(3, 0) == -39);
-    static_assert(BINARY_DIFF(3, 1) == 11);
-    static_assert(BINARY_DIFF(3, 2) == 0);
-    static_assert(BINARY_DIFF(3, 3) == 32);
+    static_assert(binaryDiff(0, 0) == -72);
+    static_assert(binaryDiff(0, 1) == 7);
+    static_assert(binaryDiff(0, 2) == -3);
+    static_assert(binaryDiff(0, 3) == 1);
+    static_assert(binaryDiff(1, 0) == 14);
+    static_assert(binaryDiff(1, 1) == 2);
+    static_assert(binaryDiff(1, 2) == 23);
+    static_assert(binaryDiff(1, 3) == -110);
+    static_assert(binaryDiff(2, 0) == -26);
+    static_assert(binaryDiff(2, 1) == -23);
+    static_assert(binaryDiff(2, 2) == 23);
+    static_assert(binaryDiff(2, 3) == 9);
+    static_assert(binaryDiff(3, 0) == -39);
+    static_assert(binaryDiff(3, 1) == 11);
+    static_assert(binaryDiff(3, 2) == 0);
+    static_assert(binaryDiff(3, 3) == 32);
 
 } // namespace
 

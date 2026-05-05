@@ -420,42 +420,42 @@ namespace fgm
         constexpr Matrix4D& operator-=(const Matrix4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
-        //
-        // /**
-        //  * @brief Scale the matrix by a scalar value.
-        //  *        Multiply each element of the matrix by @p scalar and returns a new matrix.
-        //  *
-        //  * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A new @ref Matrix4D scaled by @p scalar.
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] constexpr PromotedMatrix4D<T, S> operator*(S scalar) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Scale this matrix in-place by a scalar value.
-        //  *        Perform an in-place multiplication of each element by @p scalar.
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A reference to this matrix (*this).
-        //  */
-        // template <StrictArithmetic S>
-        // constexpr Matrix4D& operator*=(S scalar) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
+
+        /**
+         * @brief Scale the matrix by a scalar value.
+         *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Matrix4D scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMatrix4D<T, S> operator*(S scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Scale this matrix in-place by a scalar value.
+         *        Perform an in-place multiplication of each element by @p scalar.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Matrix4D& operator*=(S scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
         // /**
         //  * @brief Transform the **column vector** by this matrix.
         //  *        Perform the linear transformation:
