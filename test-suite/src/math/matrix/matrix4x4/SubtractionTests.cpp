@@ -39,8 +39,8 @@ protected:
                   { T(17), T(22), T(6), T(23) },
                   { T(16), T(14), T(32), T(35) } };
 
-        _expectedDifference = { { T(19), T(18), T(16), T(9) },
-                                { T(9), T(14), T(21), T(4) },
+        _expectedDifference = { { T(19), T(18), T(16), T(22) },
+                                { T(9), T(14), T(21), T(15) },
                                 { T(11), T(7), T(24), T(8) },
                                 { T(16), T(19), T(2), T(0) } };
     }
@@ -67,22 +67,22 @@ namespace
     constexpr fgm::Matrix4D MAT2{ 80, -5, 15, 3, 1, -13, 0, 55, 38, 33, -12, 10, 59, 11, 15, -16 };
     constexpr fgm::Matrix4D BINARY_DIFF = MAT1 - MAT2;
 
-    // static_assert(BINARY_DIFF(0, 0) == -72);
-    // static_assert(BINARY_DIFF(0, 1) == 7);
-    // static_assert(BINARY_DIFF(0, 2) == -3);
-    // static_assert(BINARY_DIFF(0, 3) == 1);
-    // static_assert(BINARY_DIFF(1, 0) == 14);
-    // static_assert(BINARY_DIFF(1, 1) == 2);
-    // static_assert(BINARY_DIFF(1, 2) == 23);
-    // static_assert(BINARY_DIFF(1, 3) == -110);
-    // static_assert(BINARY_DIFF(2, 0) == -26);
-    // static_assert(BINARY_DIFF(2, 1) == -23);
-    // static_assert(BINARY_DIFF(2, 2) == 23);
-    // static_assert(BINARY_DIFF(2, 3) == 9);
-    // static_assert(BINARY_DIFF(3, 0) == -39);
-    // static_assert(BINARY_DIFF(3, 1) == 11);
-    // static_assert(BINARY_DIFF(3, 2) == 0);
-    // static_assert(BINARY_DIFF(3, 3) == 32);
+    static_assert(BINARY_DIFF(0, 0) == -72);
+    static_assert(BINARY_DIFF(0, 1) == 7);
+    static_assert(BINARY_DIFF(0, 2) == -3);
+    static_assert(BINARY_DIFF(0, 3) == 1);
+    static_assert(BINARY_DIFF(1, 0) == 14);
+    static_assert(BINARY_DIFF(1, 1) == 2);
+    static_assert(BINARY_DIFF(1, 2) == 23);
+    static_assert(BINARY_DIFF(1, 3) == -110);
+    static_assert(BINARY_DIFF(2, 0) == -26);
+    static_assert(BINARY_DIFF(2, 1) == -23);
+    static_assert(BINARY_DIFF(2, 2) == 23);
+    static_assert(BINARY_DIFF(2, 3) == 9);
+    static_assert(BINARY_DIFF(3, 0) == -39);
+    static_assert(BINARY_DIFF(3, 1) == 11);
+    static_assert(BINARY_DIFF(3, 2) == 0);
+    static_assert(BINARY_DIFF(3, 3) == 32);
 
 } // namespace
 
@@ -116,9 +116,9 @@ TEST(Matrix4DSubtraction, MixedTypeSubtractionPromotesType)
     constexpr fgm::Matrix4D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0, 4.0, -11.0, 21.0,
                                  11.0);
 
-    // [[maybe_unused]] constexpr fgm::Matrix4D difference = mat1 - mat2;
+    [[maybe_unused]] constexpr fgm::Matrix4D difference = mat1 - mat2;
 
-    // static_assert(std::is_same_v<decltype(difference)::value_type, double>);
+    static_assert(std::is_same_v<decltype(difference)::value_type, double>);
 }
 
 
@@ -142,10 +142,10 @@ TEST(Matrix4DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
     fgm::Matrix4D mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f,
                                  44.0f, 316.0f, 55.0f);
-    constexpr fgm::Matrix4D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0, 4.0, -11.0, 21.0,
+    [[maybe_unused]] constexpr fgm::Matrix4D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0, 4.0, -11.0, 21.0,
                                  11.0);
 
-    mat1 -= mat2;
+    (void)(mat1 -= mat2); // Static cast to void is need to prevent compiler warning that not using mat2
 
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);
 }
