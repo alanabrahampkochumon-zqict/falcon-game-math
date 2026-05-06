@@ -405,6 +405,27 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedMatrix4D<T, U> Matrix4D<T>::operator*(const Matrix4D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, U>;
+        return Matrix4D<R>(*this * rhs[0], *this * rhs[1], *this * rhs[2], *this * rhs[3]);
+    }
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr Matrix4D<T>& Matrix4D<T>::operator*=(const Matrix4D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        const auto mat = *this * rhs;
+        _data[0] = mat[0];
+        _data[1] = mat[1];
+        _data[2] = mat[2];
+        _data[3] = mat[3];
+        return *this;
+    }
 
 
     /**************************************

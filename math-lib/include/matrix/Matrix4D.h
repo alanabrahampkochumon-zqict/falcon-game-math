@@ -489,81 +489,87 @@ namespace fgm
         [[nodiscard]] constexpr PromotedVector4D<T, U> operator*(const Vector4D<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
-        //
-        // /**
-        //  * @brief Compose this matrix with another to form a new matrix.
-        //  *        Compute the matrix product:
-        //  *        \f$
-        //  *            \begin{bmatrix}
-        //  *                 A_{00} & A_{01} & A_{02} \\
-        //  *                 A_{10} & A_{11} & A_{12} \\
-        //  *                 A_{20} & A_{21} & A_{22}
-        //  *            \end{bmatrix}
-        //  *            \cdot
-        //  *            \begin{bmatrix}
-        //  *                  B_{00} & B_{01} & B_{02} \\
-        //  *                  B_{10} & B_{11} & B_{12} \\
-        //  *                  B_{20} & B_{21} & B_{22}
-        //  *            \end{bmatrix}
-        //  *            =
-        //  *            \begin{bmatrix}
-        //  *                  C_{00} & C_{01} & C_{02} \\
-        //  *                  C_{10} & C_{11} & B_{12} \\
-        //  *                  C_{20} & C_{21} & C_{22}
-        //  *            \end{bmatrix}
-        //  *        \f$
-        //  *
-        //  * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] rhs The matrix to multiply.
-        //  *
-        //  * @return A new @ref Matrix4D containing the composition of linear transformations.
-        //  */
-        // template <StrictArithmetic U>
-        // [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator*(const Matrix4D<U>& rhs) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compose this matrix with another matrix in-place.
-        //  *        Compute the matrix product:
-        //  *        \f$
-        //  *            \begin{bmatrix}
-        //  *                 A_{00} & A_{01} & A_{02} \\
-        //  *                 A_{10} & A_{11} & A_{12} \\
-        //  *                 A_{20} & A_{21} & A_{22}
-        //  *            \end{bmatrix}
-        //  *            \cdot
-        //  *            \begin{bmatrix}
-        //  *                  B_{00} & B_{01} & B_{02} \\
-        //  *                  B_{10} & B_{11} & B_{12} \\
-        //  *                  B_{20} & B_{21} & B_{22}
-        //  *            \end{bmatrix}
-        //  *            =
-        //  *            \begin{bmatrix}
-        //  *                  C_{00} & C_{01} & C_{02} \\
-        //  *                  C_{10} & C_{11} & B_{12} \\
-        //  *                  C_{20} & C_{21} & C_{22}
-        //  *            \end{bmatrix}
-        //  *        \f$
-        //  *
-        //  * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] rhs The matrix to multiply.
-        //  *
-        //  * @return A reference to this matrix (*this).
-        //  */
-        // template <StrictArithmetic U>
-        // constexpr Matrix4D& operator*=(const Matrix4D<U>& rhs) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
+
+        /**
+         * @brief Compose this matrix with another to form a new matrix.
+         *        Compute the matrix product:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
+         *            \end{bmatrix}
+         *            \cdot
+         *            \begin{bmatrix}
+         *                 B_{00} & B_{01} & B_{02} & B_{03} \\
+         *                 B_{10} & B_{11} & B_{12} & B_{13} \\
+         *                 B_{20} & B_{21} & B_{22} & B_{23} \\
+         *                 B_{30} & B_{31} & B_{32} & B_{33}
+         *            \end{bmatrix}
+         *            =
+         *            \begin{bmatrix}
+         *                 C_{00} & C_{01} & C_{02} & C_{03} \\
+         *                 C_{10} & C_{11} & C_{12} & C_{13} \\
+         *                 C_{20} & C_{21} & C_{22} & C_{23} \\
+         *                 C_{30} & C_{31} & C_{32} & C_{33}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to multiply.
+         *
+         * @return A new @ref Matrix4D containing the composition of linear transformations.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator*(const Matrix4D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compose this matrix with another matrix in-place.
+         *        Compute the matrix product:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
+         *            \end{bmatrix}
+         *            \cdot
+         *            \begin{bmatrix}
+         *                 B_{00} & B_{01} & B_{02} & B_{03} \\
+         *                 B_{10} & B_{11} & B_{12} & B_{13} \\
+         *                 B_{20} & B_{21} & B_{22} & B_{23} \\
+         *                 B_{30} & B_{31} & B_{32} & B_{33}
+         *            \end{bmatrix}
+         *            =
+         *            \begin{bmatrix}
+         *                 C_{00} & C_{01} & C_{02} & C_{03} \\
+         *                 C_{10} & C_{11} & C_{12} & C_{13} \\
+         *                 C_{20} & C_{21} & C_{22} & C_{23} \\
+         *                 C_{30} & C_{31} & C_{32} & C_{33}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to multiply.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic U>
+        constexpr Matrix4D& operator*=(const Matrix4D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
         // /**
         //  * @brief Inverse-scale the matrix by a scalar value.
         //  *        Divide each element of the matrix by @p scalar and returns a new matrix.
