@@ -352,7 +352,57 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
     constexpr Vector4D<T>& operator*=(Vector4D<T>& vec, const Matrix4D<U>& mat) noexcept
-    { return vec; }
+    {
+        using R = PromotedValue_t<T, U>;
+#if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
+        // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
+        if constexpr (std::is_floating_point_v<R>)
+            if (!std::is_constant_evaluated())
+            {
+                R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
+                               std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 0)),
+                                        std::fma(static_cast<R>(vec[2]), static_cast<R>(mat(2, 0)),
+                                                 static_cast<R>(vec[3]) * static_cast<R>(mat(3, 0)))));
+                R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
+                               std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 1)),
+                                        std::fma(static_cast<R>(vec[2]), static_cast<R>(mat(2, 1)),
+                                                 static_cast<R>(vec[3]) * static_cast<R>(mat(3, 1)))));
+                R z = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 2)),
+                               std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 2)),
+                                        std::fma(static_cast<R>(vec[2]), static_cast<R>(mat(2, 2)),
+                                                 static_cast<R>(vec[3]) * static_cast<R>(mat(3, 2)))));
+                R w = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 3)),
+                               std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 3)),
+                                        std::fma(static_cast<R>(vec[2]), static_cast<R>(mat(2, 3)),
+                                                 static_cast<R>(vec[3]) * static_cast<R>(mat(3, 3)))));
+
+                vec.x() = static_cast<T>(x);
+                vec.y() = static_cast<T>(y);
+                vec.z() = static_cast<T>(z);
+                vec.w() = static_cast<T>(w);
+
+                return vec;
+            }
+#endif
+        R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 0)) + static_cast<R>(vec[3]) * static_cast<R>(mat(3, 0));
+
+        R y = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 1)) + static_cast<R>(vec[3]) * static_cast<R>(mat(3, 1));
+
+        R z = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 2)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 2)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 2)) + static_cast<R>(vec[3]) * static_cast<R>(mat(3, 2));
+
+        R w = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 3)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 3)) +
+            static_cast<R>(vec[2]) * static_cast<R>(mat(2, 3)) + static_cast<R>(vec[3]) * static_cast<R>(mat(3, 3));
+
+        vec.x() = static_cast<T>(x);
+        vec.y() = static_cast<T>(y);
+        vec.z() = static_cast<T>(z);
+        vec.w() = static_cast<T>(w);
+
+        return vec;
+    }
 
 
 

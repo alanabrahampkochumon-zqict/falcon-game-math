@@ -65,9 +65,11 @@ protected:
                  fgm::Vector4D{ T(2.238929123125), T(11.238924194839), T(9.2389291239898), T(8.2813941329) },
                  fgm::Vector4D{ T(7.32129123125), T(8.2314213412), T(2.2323329898), T(3.12343151324) } };
         _vec = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128), T(4.18293482134) };
-        _expectedFloatingColVector = { T(64.5117559627963), T(89.02269187729473), T(33.888435234319466), T(36.19857986352777) };
+        _expectedFloatingColVector = { T(64.5117559627963), T(89.02269187729473), T(33.888435234319466),
+                                       T(36.19857986352777) };
         _expectedIntegralColVector = { T(59), T(81), T(28), T(31) };
-        _expectedFloatingRowVector = { T(62.93448422105393), T(41.636573058119154), T(85.88006351993967), T(57.07194293730016) };
+        _expectedFloatingRowVector = { T(62.93448422105393), T(41.636573058119154), T(85.88006351993967),
+                                       T(57.07194293730016) };
         _expectedIntegralRowVector = { T(58), T(37), T(78), T(52) };
     }
 };
@@ -92,9 +94,9 @@ protected:
         _vec = fgm::Vector4D{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341), T(-0.9382938123) };
 
         _expectedColVector =
-            fgm::Vector4D{ T(0.152013362841589), T(0.001594606404517), T(-0.113165224639696), T(1.012276423171081) };
-        _expectedRowVector =
             fgm::Vector4D{ T(-0.623471066313721), T(-0.516417000150393), T(0.809116633699507), T(0.073055804425393) };
+        _expectedRowVector =
+            fgm::Vector4D{ T(0.152013362841589), T(0.001594606404517), T(-0.113165224639696), T(1.012276423171081) };
     }
 };
 /**
@@ -551,9 +553,10 @@ TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNo
  */
 TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    constexpr fgm::Matrix4D mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5 };
+    constexpr fgm::Matrix4D mat{ 2.5, 3.5,  0.5,  1.5,   12.0, 3.25, 5.0,   11.5,
+                                 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5 };
     fgm::Vector4D vec{ 10, 20, 30, 40 };
-    constexpr fgm::Vector4D expected{ 170, 795, 1300, 1502 };
+    constexpr fgm::Vector4D expected{ 1015, 1340, 1015, 1232 };
 
     vec *= mat;
 
