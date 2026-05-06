@@ -63,47 +63,47 @@ protected:
         _mat = { fgm::Vector4D{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338), T(1.2384912349) },
                  fgm::Vector4D{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321), T(3.2983192312) },
                  fgm::Vector4D{ T(2.238929123125), T(11.238924194839), T(9.2389291239898), T(8.2813941329) },
-                 fgm::Vector4D{ T(7.32129123125), T(8.2314213412), T(2.2323329898), T(3.12343151324) }
-        };
-        _vec = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128), T(4.18293482134), T(0) };
-        _expectedFloatingColVector = { T(33.88727193442948), T(54.59119292006805), T(24.550731838459015) };
-        _expectedIntegralColVector = { T(31), T(49), T(20), T(0) };
-        _expectedFloatingRowVector = { T(57.753956108666344), T(27.839918694037294), T(51.239531632191486), T(0) };
-        _expectedIntegralRowVector = { T(54), T(25), T(46), T(0) };
+                 fgm::Vector4D{ T(7.32129123125), T(8.2314213412), T(2.2323329898), T(3.12343151324) } };
+        _vec = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128), T(4.18293482134) };
+        _expectedFloatingColVector = { T(64.5117559627963), T(89.02269187729473), T(33.888435234319466), T(36.19857986352777) };
+        _expectedIntegralColVector = { T(59), T(81), T(28), T(31) };
+        _expectedFloatingRowVector = { T(62.93448422105393), T(41.636573058119154), T(85.88006351993967), T(57.07194293730016) };
+        _expectedIntegralRowVector = { T(58), T(37), T(78), T(52) };
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix4D vector multiplication, parameterized by @ref SupportedArithmeticTypes.
-*/ TYPED_TEST_SUITE(Matrix4DVectorMultiplication, SupportedArithmeticTypes);
+ */
+TYPED_TEST_SUITE(Matrix4DVectorMultiplication, SupportedArithmeticTypes);
 
 
-// template <typename T>
-// class Matrix4DVectorFractionalMultiplication: public ::testing::Test
-// {
-// protected:
-//     fgm::Matrix4D<T> _mat;
-//     fgm::Vector4D<T> _vec, _expectedColVector, _expectedRowVector;
-//
-//     void SetUp() override
-//     {
-//         _mat = {
-//             fgm::Vector4D{ T(0.1234568989329), T(0.1234214891234), T(0.12348923829) },
-//             fgm::Vector4D{ T(-0.123489823149), T(-0.123489757623), T(0.89281239432) },
-//             fgm::Vector4D{ T(-0.38291023892), T(0.29381938232), T(-0.0038291382) },
-//         };
-//         _vec = fgm::Vector4D{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341) };
-//
-//         _expectedColVector = fgm::Vector4D{ T(-0.07652999600877063), T(0.08239631520624698), T(0.8088432317718919) };
-//         _expectedRowVector = fgm::Vector4D{ T(0.2358808028522597), T(0.0027566750622143033), T(-0.11238372794829783)
-//         };
-//     }
-// };
-// /**
-//  * @brief Test fixture for @ref fgm::Matrix4D vector multiplication with small fractions,
-//  *        parameterized by @ref SupportedFloatingPointTypes.
-//  */
-// TYPED_TEST_SUITE(Matrix4DVectorFractionalMultiplication, SupportedFloatingPointTypes);
-//
-//
+template <typename T>
+class Matrix4DVectorFractionalMultiplication: public ::testing::Test
+{
+protected:
+    fgm::Matrix4D<T> _mat;
+    fgm::Vector4D<T> _vec, _expectedColVector, _expectedRowVector;
+
+    void SetUp() override
+    {
+        _mat = { { T(0.1234568989329), T(0.1234214891234), T(0.12348923829), T(0.0893829192) },
+                 { T(-0.123489823149), T(-0.123489757623), T(0.89281239432), T(0.00123849123) },
+                 { T(-0.38291023892), T(0.29381938232), T(-0.0038291382), T(0.000832891234231) },
+                 { T(0.58291023892), T(0.6381938232), T(-0.000291382), T(0.008391234231) } };
+        _vec = fgm::Vector4D{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341), T(-0.9382938123) };
+
+        _expectedColVector =
+            fgm::Vector4D{ T(0.152013362841589), T(0.001594606404517), T(-0.113165224639696), T(1.012276423171081) };
+        _expectedRowVector =
+            fgm::Vector4D{ T(-0.623471066313721), T(-0.516417000150393), T(0.809116633699507), T(0.073055804425393) };
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Matrix4D vector multiplication with small fractions,
+ *        parameterized by @ref SupportedFloatingPointTypes.
+ */
+TYPED_TEST_SUITE(Matrix4DVectorFractionalMultiplication, SupportedFloatingPointTypes);
+
+
 // template <typename T>
 // class Matrix4DMultiplication: public ::testing::Test
 // {
@@ -222,18 +222,20 @@ namespace
     static_assert(binaryProduct2(3, 3) == 32);
 
     // Verify matrix * vector multiplication
-    // constexpr fgm::Vector4D colVectorProduct = matA * vec4D;
-    // static_assert(colVectorProduct[0] == 14);
-    // static_assert(colVectorProduct[1] == 32);
-    // static_assert(colVectorProduct[2] == 50);
+    constexpr fgm::Vector4D colVectorProduct = matA * vec4D;
+    // static_assert(colVectorProduct[0] == 30);
+    // static_assert(colVectorProduct[1] == 70);
+    // static_assert(colVectorProduct[2] == 110);
+    // static_assert(colVectorProduct[3] == 150);
     //
     // // Verify vector * matrix multiplication
     // constexpr fgm::Vector4D rowVectorProduct = vec4D * matA;
-    // static_assert(rowVectorProduct[0] == 30);
-    // static_assert(rowVectorProduct[1] == 36);
-    // static_assert(rowVectorProduct[2] == 42);
-    //
-    // // Verify matrix * matrix multiplication
+    // static_assert(rowVectorProduct[0] == 90);
+    // static_assert(rowVectorProduct[1] == 100);
+    // static_assert(rowVectorProduct[2] == 110);
+    // static_assert(rowVectorProduct[3] == 120);
+
+    // Verify matrix * matrix multiplication
     // constexpr fgm::Matrix4D matProduct = matA * matB;
     // static_assert(matProduct(0, 0) == 57);
     // static_assert(matProduct(0, 1) == 65);
@@ -389,177 +391,177 @@ TEST(Matrix4DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  *    VECTOR MULTIPLICATION TESTS     *
  *                                    *
  **************************************/
-//
-// /**
-//  * @brief Verify that the binary vector multiplication operation perform linear transformation
-//  *        and returns a new column vector.
-//  */
-// TYPED_TEST(Matrix4DVectorMultiplication, MatrixTimesVectorReturnsATransformedVector)
-// {
-//     const auto transformedVector = this->_mat * this->_vec;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//         EXPECT_VEC_EQ(this->_expectedFloatingColVector, transformedVector);
-//     else
-//         EXPECT_VEC_EQ(this->_expectedIntegralColVector, transformedVector);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary vector multiplication operation with fractional values perform linear transformation
-//  *        and returns a new column vector.
-//  */
-// TYPED_TEST(Matrix4DVectorFractionalMultiplication, MatrixTimesVectorReturnsATransformedVectorWithPrecision)
-// {
-//     const auto transformedVector = this->_mat * this->_vec;
-//     EXPECT_VEC_EQ(this->_expectedColVector, transformedVector);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary vector multiplication operation(mat * vec) with identity matrix
-//  *        and returns the original column vector.
-//  */
-// TEST(Matrix4DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
-// {
-//     constexpr fgm::Matrix4D<float> iMatrix;
-//     constexpr fgm::vec3 vec{ 2.0f, 1.0f, 2.5 };
-//
-//     constexpr fgm::vec3 transformedVector = iMatrix * vec;
-//
-//     EXPECT_VEC_EQ(vec, transformedVector);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary vector multiplication operation perform automatic type promotion
-//  *        to the wider numeric type.
-//  */
-// TEST(Matrix4DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
-// {
-//     constexpr fgm::Matrix4D mat{ 1.0, 2.0, 3.0 };
-//     constexpr fgm::iVec3 vec{ 2, 1, 3 };
-//
-//     [[maybe_unused]] constexpr auto transformedVector = mat * vec;
-//     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary vector multiplication operation perform linear transformation
-//  *        and returns a new row vector.
-//  */
-// TYPED_TEST(Matrix4DVectorMultiplication, VectorTimesMatrixReturnsATransformedVector)
-// {
-//     const auto transformedVector = this->_vec * this->_mat;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//         EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
-//     else
-//         EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary vector multiplication operation with fractional values perform linear transformation
-//  *        and returns a new row vector.
-//  */
-// TYPED_TEST(Matrix4DVectorFractionalMultiplication, VectorTimesMatrixReturnsATransformedVectorWithPrecision)
-// {
-//     const auto transformedVector = this->_vec * this->_mat;
-//     EXPECT_VEC_EQ(this->_expectedRowVector, transformedVector);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary vector multiplication operation with identity matrix
-//  *        and returns the original row vector.
-//  */
-// TEST(Matrix4DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
-// {
-//     constexpr fgm::Matrix4D<float> iMatrix;
-//     constexpr fgm::vec3 vec{ 2.0f, 1.0f, 3.0f };
-//
-//     constexpr fgm::vec3 transformedVector = vec * iMatrix;
-//
-//     EXPECT_VEC_EQ(vec, transformedVector);
-// }
-//
-//
-//
-// /**
-//  * @brief Verify that the binary vector multiplication operation perform automatic type promotion
-//  *        to the wider numeric type.
-//  */
-// TEST(Matrix4DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationPromotesType)
-// {
-//     constexpr fgm::Matrix4D mat{ 1.0, 2.0, 3.0 };
-//     constexpr fgm::iVec3 vec{ 2, 1, 3 };
-//
-//     [[maybe_unused]] constexpr auto transformedVector = vec * mat;
-//     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound vector multiplication operation perform linear transformation
-//  *        and mutates the vector in-place.
-//  */
-// TYPED_TEST(Matrix4DVectorMultiplication, VectorTimesEqualMatrixReturnsATransformedVector)
-// {
-//     auto transformedVector = this->_vec;
-//     transformedVector *= this->_mat;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//         EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
-//     else
-//         EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound vector multiplication operation with identity matrix
-//  *        does not mutate the row vector components.
-//  */
-// TEST(Matrix4DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
-// {
-//     constexpr fgm::Matrix4D<float> iMatrix;
-//     fgm::vec3 vec{ 2.0f, 1.0f, 3.0f };
-//
-//     vec *= iMatrix;
-//
-//     EXPECT_VEC_CONTAINS(vec, 2.0f, 1.0f, 3.0f);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound vector multiplication operation maintains the destination type and
-//  *        perform an implicit cast.
-//  */
-// TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
-// {
-//     constexpr fgm::Matrix4D<double> iMatrix;
-//     [[maybe_unused]] fgm::iVec3 vec{ 2, 1, 5 };
-//
-//     (void) (vec *= iMatrix);
-//     static_assert(std::is_same_v<decltype(vec)::value_type, int>);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound multiplication operator (vector) for mixed type
-//  *        ensure minimal precision loss.
-//  */
-// TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
-// {
-//     constexpr fgm::Matrix4D mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0 };
-//     fgm::Vector4D vec{ 10, 20, 30 };
-//     constexpr fgm::Vector4D expected{ 205, 620, 220 };
-//
-//     vec *= mat;
-//
-//     EXPECT_VEC_EQ(expected, vec);
-// }
-//
-//
-//
+
+/**
+ * @brief Verify that the binary vector multiplication operation perform linear transformation
+ *        and returns a new column vector.
+ */
+TYPED_TEST(Matrix4DVectorMultiplication, MatrixTimesVectorReturnsATransformedVector)
+{
+    const auto transformedVector = this->_mat * this->_vec;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_VEC_EQ(this->_expectedFloatingColVector, transformedVector);
+    else
+        EXPECT_VEC_EQ(this->_expectedIntegralColVector, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation with fractional values perform linear transformation
+ *        and returns a new column vector.
+ */
+TYPED_TEST(Matrix4DVectorFractionalMultiplication, MatrixTimesVectorReturnsATransformedVectorWithPrecision)
+{
+    const auto transformedVector = this->_mat * this->_vec;
+    EXPECT_VEC_EQ(this->_expectedColVector, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation(mat * vec) with identity matrix
+ *        and returns the original column vector.
+ */
+TEST(Matrix4DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
+{
+    constexpr fgm::Matrix4D<float> iMatrix;
+    constexpr fgm::vec4 vec{ 2.0f, 1.0f, 2.5f, 12.5f };
+
+    constexpr fgm::vec4 transformedVector = iMatrix * vec;
+
+    EXPECT_VEC_EQ(vec, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation perform automatic type promotion
+ *        to the wider numeric type.
+ */
+TEST(Matrix4DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
+{
+    constexpr fgm::Matrix4D mat{ 1.0, 2.0, 3.0, 4.0 };
+    constexpr fgm::iVec4 vec{ 2, 1, 3, 4 };
+
+    [[maybe_unused]] constexpr auto transformedVector = mat * vec;
+    static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
+}
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation perform linear transformation
+ *        and returns a new row vector.
+ */
+TYPED_TEST(Matrix4DVectorMultiplication, VectorTimesMatrixReturnsATransformedVector)
+{
+    const auto transformedVector = this->_vec * this->_mat;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
+    else
+        EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation with fractional values perform linear transformation
+ *        and returns a new row vector.
+ */
+TYPED_TEST(Matrix4DVectorFractionalMultiplication, VectorTimesMatrixReturnsATransformedVectorWithPrecision)
+{
+    const auto transformedVector = this->_vec * this->_mat;
+    EXPECT_VEC_EQ(this->_expectedRowVector, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation with identity matrix
+ *        and returns the original row vector.
+ */
+TEST(Matrix4DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
+{
+    constexpr fgm::Matrix4D<float> iMatrix;
+    constexpr fgm::vec4 vec{ 2.0f, 1.0f, 2.5f, 12.5f };
+
+    constexpr fgm::vec4 transformedVector = vec * iMatrix;
+
+    EXPECT_VEC_EQ(vec, transformedVector);
+}
+
+
+
+/**
+ * @brief Verify that the binary vector multiplication operation perform automatic type promotion
+ *        to the wider numeric type.
+ */
+TEST(Matrix4DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationPromotesType)
+{
+    constexpr fgm::Matrix4D mat{ 1.0, 2.0, 3.0, 4.0 };
+    constexpr fgm::iVec4 vec{ 2, 1, 3, 4 };
+
+    [[maybe_unused]] constexpr auto transformedVector = vec * mat;
+    static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
+}
+
+
+/**
+ * @brief Verify that the compound vector multiplication operation perform linear transformation
+ *        and mutates the vector in-place.
+ */
+TYPED_TEST(Matrix4DVectorMultiplication, VectorTimesEqualMatrixReturnsATransformedVector)
+{
+    auto transformedVector = this->_vec;
+    transformedVector *= this->_mat;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+        EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
+    else
+        EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
+}
+
+
+/**
+ * @brief Verify that the compound vector multiplication operation with identity matrix
+ *        does not mutate the row vector components.
+ */
+TEST(Matrix4DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
+{
+    constexpr fgm::Matrix4D<float> iMatrix;
+    fgm::vec4 vec{ 2.0f, 1.0f, 3.0f, 12.0f };
+
+    vec *= iMatrix;
+
+    EXPECT_VEC_CONTAINS(vec, 2.0f, 1.0f, 3.0f, 12.0f);
+}
+
+
+/**
+ * @brief Verify that the compound vector multiplication operation maintains the destination type and
+ *        perform an implicit cast.
+ */
+TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
+{
+    constexpr fgm::Matrix4D<double> iMatrix;
+    [[maybe_unused]] fgm::iVec4 vec{ 2, 1, 5, 4 };
+
+    (void) (vec *= iMatrix);
+    static_assert(std::is_same_v<decltype(vec)::value_type, int>);
+}
+
+
+/**
+ * @brief Verify that the compound multiplication operator (vector) for mixed type
+ *        ensure minimal precision loss.
+ */
+TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+{
+    constexpr fgm::Matrix4D mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5 };
+    fgm::Vector4D vec{ 10, 20, 30, 40 };
+    constexpr fgm::Vector4D expected{ 170, 795, 1300, 1502 };
+
+    vec *= mat;
+
+    EXPECT_VEC_EQ(expected, vec);
+}
+
+
+
 // /**************************************
 //  *                                    *
 //  *    MATRIX MULTIPLICATION TESTS     *
