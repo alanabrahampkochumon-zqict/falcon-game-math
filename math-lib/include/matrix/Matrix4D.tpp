@@ -433,7 +433,18 @@ namespace fgm
     constexpr PromotedFloatMatrix4D<T, S> Matrix4D<T>::operator/(const S& scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        return *this;
+        using R = Magnitude<PromotedValue_t<T, S>>;
+        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+
+        R factor = R(1) / static_cast<R>(scalar);
+        return Matrix4D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
+                           static_cast<R>(_data[2][0]) * factor, static_cast<R>(_data[3][0]) * factor,
+                           static_cast<R>(_data[0][1]) * factor, static_cast<R>(_data[1][1]) * factor,
+                           static_cast<R>(_data[2][1]) * factor, static_cast<R>(_data[3][1]) * factor,
+                           static_cast<R>(_data[0][2]) * factor, static_cast<R>(_data[1][2]) * factor,
+                           static_cast<R>(_data[2][2]) * factor, static_cast<R>(_data[3][2]) * factor,
+                           static_cast<R>(_data[0][3]) * factor, static_cast<R>(_data[1][3]) * factor,
+                           static_cast<R>(_data[2][3]) * factor, static_cast<R>(_data[3][3]) * factor);
     }
 
 
@@ -442,6 +453,29 @@ namespace fgm
     constexpr Matrix4D<T>& Matrix4D<T>::operator/=(const S& scalar) noexcept
         requires StrictArithmetic<T>
     {
+        using R = Magnitude<PromotedValue_t<T, S>>;
+
+        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+
+        R factor = R(1) / static_cast<R>(scalar);
+
+        _data[0][0] = static_cast<T>(static_cast<R>(_data[0][0]) * factor);
+        _data[1][0] = static_cast<T>(static_cast<R>(_data[1][0]) * factor);
+        _data[2][0] = static_cast<T>(static_cast<R>(_data[2][0]) * factor);
+        _data[3][0] = static_cast<T>(static_cast<R>(_data[3][0]) * factor);
+        _data[0][1] = static_cast<T>(static_cast<R>(_data[0][1]) * factor);
+        _data[1][1] = static_cast<T>(static_cast<R>(_data[1][1]) * factor);
+        _data[2][1] = static_cast<T>(static_cast<R>(_data[2][1]) * factor);
+        _data[3][1] = static_cast<T>(static_cast<R>(_data[3][1]) * factor);
+        _data[0][2] = static_cast<T>(static_cast<R>(_data[0][2]) * factor);
+        _data[1][2] = static_cast<T>(static_cast<R>(_data[1][2]) * factor);
+        _data[2][2] = static_cast<T>(static_cast<R>(_data[2][2]) * factor);
+        _data[3][2] = static_cast<T>(static_cast<R>(_data[3][2]) * factor);
+        _data[0][3] = static_cast<T>(static_cast<R>(_data[0][3]) * factor);
+        _data[1][3] = static_cast<T>(static_cast<R>(_data[1][3]) * factor);
+        _data[2][3] = static_cast<T>(static_cast<R>(_data[2][3]) * factor);
+        _data[3][3] = static_cast<T>(static_cast<R>(_data[3][3]) * factor);
+
         return *this;
     }
 

@@ -59,16 +59,16 @@ protected:
 TYPED_TEST_SUITE(Matrix4DDivision, SupportedArithmeticTypes);
 
 
-/** @brief Test fixture for @ref fgm::Matrix4D division with NaN vectors. */
-class NaNMatrix4DDivision: public ::testing::TestWithParam<fgm::Matrix4D<float>>
-{};
-INSTANTIATE_TEST_SUITE_P(Matrix4DDivisionTestSuite, NaNMatrix4DDivision,
-                         ::testing::Values(fgm::Matrix4D<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
-                                           fgm::Matrix4D<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
-                                           fgm::Matrix4D<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
-                                           fgm::Matrix4D<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
-                                           fgm::Matrix4D<float>{ fgm ::constants::NaN, fgm::constants::NaN,
-                                                                 fgm ::constants::NaN, fgm ::constants::NaN }));
+// /** @brief Test fixture for @ref fgm::Matrix4D division with NaN vectors. */
+// class NaNMatrix4DDivision: public ::testing::TestWithParam<fgm::Matrix4D<float>>
+// {};
+// INSTANTIATE_TEST_SUITE_P(Matrix4DDivisionTestSuite, NaNMatrix4DDivision,
+//                          ::testing::Values(fgm::Matrix4D<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
+//                                            fgm::Matrix4D<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
+//                                            fgm::Matrix4D<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
+//                                            fgm::Matrix4D<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
+//                                            fgm::Matrix4D<float>{ fgm ::constants::NaN, fgm::constants::NaN,
+//                                                                  fgm ::constants::NaN, fgm ::constants::NaN }));
 
 
 
@@ -164,23 +164,23 @@ namespace
  */
 TYPED_TEST(Matrix4DDivision, ReturnsInverseScaledMatrix)
 {
-    // const fgm::Matrix4D inverseScaledMat = this->_matrix / this->_scalar;
-    //
-    // EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
+    const fgm::Matrix4D inverseScaledMat = this->_matrix / this->_scalar;
+
+    EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
 }
 
 
 /** @brief Verify that the binary division operator always return a floating-point matrix. */
 TYPED_TEST(Matrix4DDivision, AlwaysReturnFloatingPointMatrix)
 {
-    // [[maybe_unused]] const fgm::Matrix4D inverseScaledMat = this->_matrix / this->_scalar;
-    // static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
+    [[maybe_unused]] const fgm::Matrix4D inverseScaledMat = this->_matrix / this->_scalar;
+    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
 }
 
 
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix4DDivision, ByZeroTriggersAssertInDebugMode)
-// { EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), ""); }
+{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), ""); }
 
 
 /**
