@@ -32,7 +32,7 @@ protected:
                     { T(9), T(10), T(11), T(12) },
                     { T(13), T(14), T(15), T(16) } };
         _expectedTranspose = { { T(1), T(5), T(9), T(13) },
-                               { T(2), T(7), T(10), T(14) },
+                               { T(2), T(6), T(10), T(14) },
                                { T(3), T(7), T(11), T(15) },
                                { T(4), T(8), T(12), T(16) } };
     }
@@ -60,48 +60,48 @@ namespace
 
     // Verify matrix transpose (member function)
     constexpr fgm::Matrix4D TRANSPOSE_MAT = MAT.transpose();
-    // static_assert(TRANSPOSE_MAT(0, 0) == 1);
-    // static_assert(TRANSPOSE_MAT(0, 1) == 5);
-    // static_assert(TRANSPOSE_MAT(0, 2) == 9);
-    // static_assert(TRANSPOSE_MAT(0, 3) == 13);
-    //
-    // static_assert(TRANSPOSE_MAT(1, 0) == 2);
-    // static_assert(TRANSPOSE_MAT(1, 1) == 6);
-    // static_assert(TRANSPOSE_MAT(1, 2) == 10);
-    // static_assert(TRANSPOSE_MAT(1, 3) == 14);
-    //
-    // static_assert(TRANSPOSE_MAT(2, 0) == 3);
-    // static_assert(TRANSPOSE_MAT(2, 1) == 7);
-    // static_assert(TRANSPOSE_MAT(2, 2) == 11);
-    // static_assert(TRANSPOSE_MAT(2, 3) == 15);
-    //
-    // static_assert(TRANSPOSE_MAT(3, 0) == 4);
-    // static_assert(TRANSPOSE_MAT(3, 1) == 8);
-    // static_assert(TRANSPOSE_MAT(3, 2) == 12);
-    // static_assert(TRANSPOSE_MAT(3, 3) == 16);
-    //
-    //
-    // // Verify matrix transpose (static function)
-    // constexpr fgm::Matrix4D TRANSPOSE_MAT_S = fgm::Matrix4D<int>::transpose(MAT);
-    // static_assert(TRANSPOSE_MAT_S(0, 0) == 1);
-    // static_assert(TRANSPOSE_MAT_S(0, 1) == 5);
-    // static_assert(TRANSPOSE_MAT_S(0, 2) == 9);
-    // static_assert(TRANSPOSE_MAT_S(0, 3) == 13);
-    //
-    // static_assert(TRANSPOSE_MAT_S(1, 0) == 2);
-    // static_assert(TRANSPOSE_MAT_S(1, 1) == 6);
-    // static_assert(TRANSPOSE_MAT_S(1, 2) == 10);
-    // static_assert(TRANSPOSE_MAT_S(1, 3) == 14);
-    //
-    // static_assert(TRANSPOSE_MAT_S(2, 0) == 3);
-    // static_assert(TRANSPOSE_MAT_S(2, 1) == 7);
-    // static_assert(TRANSPOSE_MAT_S(2, 2) == 11);
-    // static_assert(TRANSPOSE_MAT_S(2, 3) == 15);
-    //
-    // static_assert(TRANSPOSE_MAT_S(3, 0) == 4);
-    // static_assert(TRANSPOSE_MAT_S(3, 1) == 8);
-    // static_assert(TRANSPOSE_MAT_S(3, 2) == 12);
-    // static_assert(TRANSPOSE_MAT_S(3, 3) == 16);
+    static_assert(TRANSPOSE_MAT(0, 0) == 1);
+    static_assert(TRANSPOSE_MAT(0, 1) == 5);
+    static_assert(TRANSPOSE_MAT(0, 2) == 9);
+    static_assert(TRANSPOSE_MAT(0, 3) == 13);
+
+    static_assert(TRANSPOSE_MAT(1, 0) == 2);
+    static_assert(TRANSPOSE_MAT(1, 1) == 6);
+    static_assert(TRANSPOSE_MAT(1, 2) == 10);
+    static_assert(TRANSPOSE_MAT(1, 3) == 14);
+
+    static_assert(TRANSPOSE_MAT(2, 0) == 3);
+    static_assert(TRANSPOSE_MAT(2, 1) == 7);
+    static_assert(TRANSPOSE_MAT(2, 2) == 11);
+    static_assert(TRANSPOSE_MAT(2, 3) == 15);
+
+    static_assert(TRANSPOSE_MAT(3, 0) == 4);
+    static_assert(TRANSPOSE_MAT(3, 1) == 8);
+    static_assert(TRANSPOSE_MAT(3, 2) == 12);
+    static_assert(TRANSPOSE_MAT(3, 3) == 16);
+
+
+    // Verify matrix transpose (static function)
+    constexpr fgm::Matrix4D TRANSPOSE_MAT_S = fgm::Matrix4D<int>::transpose(MAT);
+    static_assert(TRANSPOSE_MAT_S(0, 0) == 1);
+    static_assert(TRANSPOSE_MAT_S(0, 1) == 5);
+    static_assert(TRANSPOSE_MAT_S(0, 2) == 9);
+    static_assert(TRANSPOSE_MAT_S(0, 3) == 13);
+
+    static_assert(TRANSPOSE_MAT_S(1, 0) == 2);
+    static_assert(TRANSPOSE_MAT_S(1, 1) == 6);
+    static_assert(TRANSPOSE_MAT_S(1, 2) == 10);
+    static_assert(TRANSPOSE_MAT_S(1, 3) == 14);
+
+    static_assert(TRANSPOSE_MAT_S(2, 0) == 3);
+    static_assert(TRANSPOSE_MAT_S(2, 1) == 7);
+    static_assert(TRANSPOSE_MAT_S(2, 2) == 11);
+    static_assert(TRANSPOSE_MAT_S(2, 3) == 15);
+
+    static_assert(TRANSPOSE_MAT_S(3, 0) == 4);
+    static_assert(TRANSPOSE_MAT_S(3, 1) == 8);
+    static_assert(TRANSPOSE_MAT_S(3, 2) == 12);
+    static_assert(TRANSPOSE_MAT_S(3, 3) == 16);
 
 } // namespace
 

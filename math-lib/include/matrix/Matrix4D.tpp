@@ -553,7 +553,14 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::transpose() const noexcept
-    { return *this; }
+    { /**
+       * @note Although the code doesn't seem to transpose, since we are storing in column major order
+       *       _data[row][col] actually gives _data[col][row]
+       */
+        return Matrix4D(_data[0][0], _data[0][1], _data[0][2], _data[0][3], _data[1][0], _data[1][1], _data[1][2],
+                        _data[1][3], _data[2][0], _data[2][1], _data[2][2], _data[2][3], _data[3][0], _data[3][1],
+                        _data[3][2], _data[3][3]);
+    }
 
 
     template <Arithmetic T>
