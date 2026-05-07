@@ -551,6 +551,13 @@ namespace fgm
     { return mat.tryDiv(scalar, status, fallback); }
 
 
+
+    /**************************************
+     *                                    *
+     *           MATRIX ALGEBRA           *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::transpose() const noexcept
     { /**

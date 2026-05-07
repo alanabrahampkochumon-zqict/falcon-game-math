@@ -494,6 +494,14 @@ namespace fgm
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
+
+
+    /**************************************
+     *                                    *
+     *           MATRIX ALGEBRA           *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     constexpr T Matrix3D<T>::determinant() const noexcept
         requires SignedStrictArithmetic<T>
