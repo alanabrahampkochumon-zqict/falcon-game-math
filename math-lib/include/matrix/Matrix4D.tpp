@@ -575,6 +575,18 @@ namespace fgm
     { return mat.transpose(); }
 
 
+    template <Arithmetic T>
+    constexpr T Matrix4D<T>::trace() const noexcept
+        requires StrictArithmetic<T>
+    { return T(0); }
+
+
+    template <Arithmetic T>
+    constexpr T Matrix4D<T>::trace(const Matrix4D& mat) noexcept
+        requires StrictArithmetic<T>
+    { return mat.trace(); }
+
+
     /**************************************
      *                                    *
      *             UTILITIES              *

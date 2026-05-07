@@ -1006,26 +1006,26 @@ namespace fgm
         // static constexpr Matrix4D<Magnitude<T>> tryInverseOf(const Matrix4D& matrix, OperationStatus& status,
         //                                                      const Matrix4D& fallback = Matrix4D::eye()) noexcept
         //     requires SignedStrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the sum of diagonal entries of this matrix.
-        //  *
-        //  * @return The sum of entries along the main diagonal of this matrix.
-        //  */
-        // [[nodiscard]] constexpr T trace() const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the sum of diagonal entries of a matrix.
-        //  *
-        //  * @param mat The matrix whose trace is to be computed.
-        //  *
-        //  * @return The sum of entries along the main diagonal of the given matrix.
-        //  */
-        // [[nodiscard]] static constexpr T trace(const Matrix4D& mat) noexcept
-        //     requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the sum of diagonal entries of this matrix.
+         *
+         * @return The sum of entries along the main diagonal of this matrix.
+         */
+        [[nodiscard]] constexpr T trace() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the sum of diagonal entries of a matrix.
+         *
+         * @param mat The matrix whose trace is to be computed.
+         *
+         * @return The sum of entries along the main diagonal of the given matrix.
+         */
+        [[nodiscard]] static constexpr T trace(const Matrix4D& mat) noexcept
+            requires StrictArithmetic<T>;
 
         /** @} */
 
