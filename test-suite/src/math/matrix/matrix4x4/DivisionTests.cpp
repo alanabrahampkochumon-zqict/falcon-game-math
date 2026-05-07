@@ -59,18 +59,16 @@ protected:
 TYPED_TEST_SUITE(Matrix4DDivision, SupportedArithmeticTypes);
 
 
-// /** @brief Test fixture for @ref fgm::Matrix4D division with NaN vectors. */
-// class NaNMatrix4DDivision: public ::testing::TestWithParam<fgm::Matrix4D<float>>
-// {};
-// INSTANTIATE_TEST_SUITE_P(Matrix4DDivisionTestSuite, NaNMatrix4DDivision,
-//                          ::testing::Values(fgm::Matrix4D<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
-//                                            fgm::Matrix4D<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
-//                                            fgm::Matrix4D<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
-//                                            fgm::Matrix4D<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
-//                                            fgm::Matrix4D<float>{ fgm ::constants::NaN, fgm::constants::NaN,
-//                                                                  fgm ::constants::NaN, fgm ::constants::NaN }));
-
-
+/** @brief Test fixture for @ref fgm::Matrix4D division with NaN vectors. */
+class NaNMatrix4DDivision: public ::testing::TestWithParam<fgm::Matrix4D<float>>
+{};
+INSTANTIATE_TEST_SUITE_P(Matrix4DDivisionTestSuite, NaNMatrix4DDivision,
+                         ::testing::Values(fgm::Matrix4D<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
+                                           fgm::Matrix4D<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
+                                           fgm::Matrix4D<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
+                                           fgm::Matrix4D<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
+                                           fgm::Matrix4D<float>{ fgm ::constants::NaN, fgm::constants::NaN,
+                                                                 fgm ::constants::NaN, fgm ::constants::NaN }));
 
 /**
  * @addtogroup T_FGM_Mat4x4_Division
@@ -206,151 +204,151 @@ TYPED_TEST(Matrix4DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
  *         SAFE DIVISION TESTS        *
  *                                    *
  **************************************/
-//
-// /**
-//  * @brief Verify that dividing a matrix using @ref fgm::Matrix4D::safeDiv perform an element-wise divide
-//  *        and returns a new matrix instance.
-//  */
-// TYPED_TEST(Matrix4DDivision, SafeDivide_ReturnsInverseScaledMatrix)
-// {
-//     const fgm::Matrix4D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
-//
-//     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a matrix using @ref fgm::Matrix4D::safeDiv always
-//  *        return a floating-point matrix.
-//  */
-// TYPED_TEST(Matrix4DDivision, SafeDivide_AlwaysReturnFloatingPointMatrix)
-// {
-//     [[maybe_unused]] const fgm::Matrix4D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
-//     static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4D::safeDiv
-//  *        returns identity matrix by default.
-//  */
-// TYPED_TEST(Matrix4DDivision, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
-// {
-//     const fgm::Matrix4D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0));
-//     EXPECT_MAT_IDENTITY(inverseScaledMat);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4D::safeDiv
-//  *        returns passed-in fallback.
-//  */
-// TYPED_TEST(Matrix4DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
-// {
-//     const fgm::Matrix4D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::mat3d::zero<TypeParam>);
-//     EXPECT_MAT_ZERO(inverseScaledMat);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4D::safeDiv
-//  *        returns identity matrix by default.
-//  */
-// TEST_P(NaNMatrix4DDivision, SafeDivide_ReturnsIdentityMatrixByDefault)
-// {
-//     const fgm::Matrix4D inverseScaledMat = GetParam().safeDiv(2.5);
-//     EXPECT_MAT_IDENTITY(inverseScaledMat);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4D::safeDiv
-//  *        returns passed-in fallback.
-//  */
-// TEST_P(NaNMatrix4DDivision, SafeDivide_ReturnsPassedInFallback)
-// {
-//     const fgm::Matrix4D inverseScaledMat = GetParam().safeDiv(2.5, fgm::mat3d::zero<ParamType::value_type>);
-//     EXPECT_MAT_ZERO(inverseScaledMat);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix4D::safeDiv
-//  *        perform an element-wise divide and returns a new matrix instance.
-//  */
-// TYPED_TEST(Matrix4DDivision, SafeDivide_StaticWrapper_ReturnsInverseScaledMatrix)
-// {
-//     const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
-//
-//     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix4D::safeDiv always
-//  *        return a floating-point matrix.
-//  */
-// TYPED_TEST(Matrix4DDivision, SafeDivide_StaticWrapper_AlwaysReturnFloatingPointMatrix)
-// {
-//     [[maybe_unused]] const fgm::Matrix4D inverseScaledMat =
-//         fgm::Matrix4D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
-//     static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4D::safeDiv
-//  *        returns identity matrix by default.
-//  */
-// TYPED_TEST(Matrix4DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsIdentityMatrixByDefault)
-// {
-//     const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<TypeParam>::safeDiv(this->_matrix, TypeParam(0));
-//     EXPECT_MAT_IDENTITY(inverseScaledMat);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4D::safeDiv
-//  *        returns passed-in fallback.
-//  */
-// TYPED_TEST(Matrix4DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsPassedInFallback)
-// {
-//     const fgm::Matrix4D inverseScaledMat =
-//         fgm::Matrix4D<TypeParam>::safeDiv(this->_matrix, TypeParam(0), fgm::mat3d::zero<TypeParam>);
-//     EXPECT_MAT_ZERO(inverseScaledMat);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4D::safeDiv
-//  *        returns identity matrix by default.
-//  */
-// TEST_P(NaNMatrix4DDivision, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefault)
-// {
-//     using T = ParamType::value_type;
-//     const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<T>::safeDiv(GetParam(), 2.5);
-//     EXPECT_MAT_IDENTITY(inverseScaledMat);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4D::safeDiv
-//  *        returns passed-in fallback.
-//  */
-// TEST_P(NaNMatrix4DDivision, SafeDivide_StaticWrapper_ReturnsPassedInFallback)
-// {
-//     using T = ParamType::value_type;
-//     const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<T>::safeDiv(GetParam(), 2.5, fgm::mat3d::zero<T>);
-//     EXPECT_MAT_ZERO(inverseScaledMat);
-// }
-//
-//
-// /**************************************
-//  *                                    *
-//  *         TRY DIVISION TESTS         *
-//  *                                    *
-//  **************************************/
-//
+
+/**
+ * @brief Verify that dividing a matrix using @ref fgm::Matrix4D::safeDiv perform an element-wise divide
+ *        and returns a new matrix instance.
+ */
+TYPED_TEST(Matrix4DDivision, SafeDivide_ReturnsInverseScaledMatrix)
+{
+    const fgm::Matrix4D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
+
+    EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix using @ref fgm::Matrix4D::safeDiv always
+ *        return a floating-point matrix.
+ */
+TYPED_TEST(Matrix4DDivision, SafeDivide_AlwaysReturnFloatingPointMatrix)
+{
+    [[maybe_unused]] const fgm::Matrix4D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
+    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4D::safeDiv
+ *        returns identity matrix by default.
+ */
+TYPED_TEST(Matrix4DDivision, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
+{
+    const fgm::Matrix4D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0));
+    EXPECT_MAT_IDENTITY(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4D::safeDiv
+ *        returns passed-in fallback.
+ */
+TYPED_TEST(Matrix4DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
+{
+    const fgm::Matrix4D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::mat4d::zero<TypeParam>);
+    EXPECT_MAT_ZERO(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4D::safeDiv
+ *        returns identity matrix by default.
+ */
+TEST_P(NaNMatrix4DDivision, SafeDivide_ReturnsIdentityMatrixByDefault)
+{
+    const fgm::Matrix4D inverseScaledMat = GetParam().safeDiv(2.5);
+    EXPECT_MAT_IDENTITY(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4D::safeDiv
+ *        returns passed-in fallback.
+ */
+TEST_P(NaNMatrix4DDivision, SafeDivide_ReturnsPassedInFallback)
+{
+    const fgm::Matrix4D inverseScaledMat = GetParam().safeDiv(2.5, fgm::mat4d::zero<ParamType::value_type>);
+    EXPECT_MAT_ZERO(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix4D::safeDiv
+ *        perform an element-wise divide and returns a new matrix instance.
+ */
+TYPED_TEST(Matrix4DDivision, SafeDivide_StaticWrapper_ReturnsInverseScaledMatrix)
+{
+    const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
+
+    EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix4D::safeDiv always
+ *        return a floating-point matrix.
+ */
+TYPED_TEST(Matrix4DDivision, SafeDivide_StaticWrapper_AlwaysReturnFloatingPointMatrix)
+{
+    [[maybe_unused]] const fgm::Matrix4D inverseScaledMat =
+        fgm::Matrix4D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
+    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4D::safeDiv
+ *        returns identity matrix by default.
+ */
+TYPED_TEST(Matrix4DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsIdentityMatrixByDefault)
+{
+    const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<TypeParam>::safeDiv(this->_matrix, TypeParam(0));
+    EXPECT_MAT_IDENTITY(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4D::safeDiv
+ *        returns passed-in fallback.
+ */
+TYPED_TEST(Matrix4DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsPassedInFallback)
+{
+    const fgm::Matrix4D inverseScaledMat =
+        fgm::Matrix4D<TypeParam>::safeDiv(this->_matrix, TypeParam(0), fgm::mat4d::zero<TypeParam>);
+    EXPECT_MAT_ZERO(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4D::safeDiv
+ *        returns identity matrix by default.
+ */
+TEST_P(NaNMatrix4DDivision, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefault)
+{
+    using T = ParamType::value_type;
+    const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<T>::safeDiv(GetParam(), 2.5);
+    EXPECT_MAT_IDENTITY(inverseScaledMat);
+}
+
+
+/**
+ * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4D::safeDiv
+ *        returns passed-in fallback.
+ */
+TEST_P(NaNMatrix4DDivision, SafeDivide_StaticWrapper_ReturnsPassedInFallback)
+{
+    using T = ParamType::value_type;
+    const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<T>::safeDiv(GetParam(), 2.5, fgm::mat4d::zero<T>);
+    EXPECT_MAT_ZERO(inverseScaledMat);
+}
+
+
+/**************************************
+ *                                    *
+ *         TRY DIVISION TESTS         *
+ *                                    *
+ **************************************/
+
 // /**
 //  * @brief Verify that dividing a matrix using @ref fgm::Matrix4D::tryDiv perform an element-wise divide
 //  *        returns a new matrix instance and set flag to @ref OperationStatus::SUCCESS.
@@ -399,7 +397,7 @@ TYPED_TEST(Matrix4DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
 // TYPED_TEST(Matrix4DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
 // {
 //     fgm::OperationStatus flag;
-//     const fgm::Matrix4D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag, fgm::mat3d::zero<TypeParam>);
+//     const fgm::Matrix4D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag, fgm::mat4d::zero<TypeParam>);
 //
 //     EXPECT_MAT_ZERO(inverseScaledMat);
 //     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
@@ -426,7 +424,7 @@ TYPED_TEST(Matrix4DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
 // TEST_P(NaNMatrix4DDivision, TryDivide_ReturnsPassedInFallback)
 // {
 //     fgm::OperationStatus flag;
-//     const fgm::Matrix4D inverseScaledMat = GetParam().tryDiv(2.5, flag, fgm::mat3d::zero<ParamType::value_type>);
+//     const fgm::Matrix4D inverseScaledMat = GetParam().tryDiv(2.5, flag, fgm::mat4d::zero<ParamType::value_type>);
 //     EXPECT_MAT_ZERO(inverseScaledMat);
 //     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 // }
@@ -440,7 +438,7 @@ TYPED_TEST(Matrix4DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
 // {
 //     fgm::OperationStatus flag;
 //     [[maybe_unused]] const fgm::Matrix4D inverseScaledMat =
-//         GetParam().tryDiv(0, flag, fgm::mat3d::zero<ParamType::value_type>);
+//         GetParam().tryDiv(0, flag, fgm::mat4d::zero<ParamType::value_type>);
 //     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 // }
 //
@@ -495,7 +493,7 @@ TYPED_TEST(Matrix4DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
 // {
 //     fgm::OperationStatus flag;
 //     const fgm::Matrix4D inverseScaledMat =
-//         fgm::Matrix4D<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag, fgm::mat3d::zero<TypeParam>);
+//         fgm::Matrix4D<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag, fgm::mat4d::zero<TypeParam>);
 //     EXPECT_MAT_ZERO(inverseScaledMat);
 //     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 // }
@@ -539,7 +537,7 @@ TYPED_TEST(Matrix4DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
 //     fgm::OperationStatus flag;
 //     using T = ParamType::value_type;
 //     const fgm::Matrix4D inverseScaledMat =
-//         fgm::Matrix4D<T>::tryDiv(GetParam(), 2.5, flag, fgm::mat3d::zero<ParamType::value_type>);
+//         fgm::Matrix4D<T>::tryDiv(GetParam(), 2.5, flag, fgm::mat4d::zero<ParamType::value_type>);
 //     EXPECT_MAT_ZERO(inverseScaledMat);
 //     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 // }
