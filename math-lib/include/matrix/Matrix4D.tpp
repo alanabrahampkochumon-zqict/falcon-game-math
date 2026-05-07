@@ -503,9 +503,52 @@ namespace fgm
     constexpr PromotedFloatMatrix4D<T, S> Matrix4D<T>::safeDiv(const Matrix4D& mat, S scalar,
                                                                const Matrix4D& fallback) noexcept
         requires StrictArithmetic<T>
+    { return mat.safeDiv(scalar, fallback); }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix4D<T, S> Matrix4D<T>::tryDiv(S scalar, OperationStatus& status,
+                                                              const Matrix4D& fallback) const noexcept
+        requires StrictArithmetic<T>
     {
-        return mat.safeDiv(scalar, fallback);
+        using R = std::common_type_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            // TODO: Check || vs | with benchmarks
+            // Theoretically the slowest method since NaN checks are performed before division by zero
+            if (hasNaN() | fgm::isnan(scalar))
+            {
+                status = OperationStatus::NANOPERAND;
+                return Matrix4D<R>(fallback);
+            }
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Matrix4D<R>(fallback);
+            }
+        }
+
+        if constexpr (std::is_integral_v<R>)
+            if (scalar == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Matrix4D<Magnitude<R>>(fallback);
+            }
+
+
+        status = OperationStatus::SUCCESS;
+        return *this / scalar;
     }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix4D<T, S> Matrix4D<T>::tryDiv(const Matrix4D& mat, S scalar, OperationStatus& status,
+                                                              const Matrix4D& fallback) noexcept
+        requires StrictArithmetic<T>
+    { return mat.tryDiv(scalar, status, fallback); }
 
 
     /**************************************

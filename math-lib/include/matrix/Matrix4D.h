@@ -654,63 +654,63 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Safely divide this matrix by a scalar value and set @p status to the division operation result.
-        //  *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
-        //  *
-        //  * @note Promotes the result to a floating point result using @ref Magnitude.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-        //  *       operand contains NaN.
-        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
-        //  mathematical
-        //  *       invalidity (Division by Zero) when reporting status.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar   The value to divide the matrix elements by.
-        //  * @param[out] status  The status flag to store the status of the current operation result.
-        //  *                     For details on status codes see @ref OperationStatus.
-        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
-        //  *                     element.
-        //  *
-        //  * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
-        //  *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> tryDiv(
-        //     S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye()) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Safely divide a matrix by a scalar value and set @p status to the division operation result.
-        //  *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
-        //  *
-        //  * @note Promotes the result to a floating point result using @ref Magnitude.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-        //  *       operand contains NaN.
-        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
-        //  mathematical
-        //  *       invalidity (Division by Zero) when reporting status.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] mat      The matrix to divide.
-        //  * @param[in] scalar   The value to divide the matrix elements by.
-        //  * @param[out] status  The status flag to store the status of the current operation result.
-        //  *                     For details on status codes see @ref OperationStatus.
-        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
-        //  *                     element.
-        //  *
-        //  * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
-        //  *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] static constexpr PromotedFloatMatrix4D<T, S> tryDiv(
-        //     const Matrix4D& mat, S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye())
-        //     noexcept requires StrictArithmetic<T>;
+        /**
+         * @brief Safely divide this matrix by a scalar value and set @p status to the division operation result.
+         *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
+         mathematical
+         *       invalidity (Division by Zero) when reporting status.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+         *                     element.
+         *
+         * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> tryDiv(
+            S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye()) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely divide a matrix by a scalar value and set @p status to the division operation result.
+         *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
+         mathematical
+         *       invalidity (Division by Zero) when reporting status.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] mat      The matrix to divide.
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
+         *                     element.
+         *
+         * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] static constexpr PromotedFloatMatrix4D<T, S> tryDiv(
+            const Matrix4D& mat, S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye())
+            noexcept requires StrictArithmetic<T>;
 
         /** @} */
 
