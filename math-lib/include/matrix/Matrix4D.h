@@ -1141,13 +1141,13 @@ namespace fgm
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
-            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0]
+            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << " "
                << matrix._data[3][0] << "|\n";
-            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1]
+            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << " "
                << matrix._data[3][1] << "|\n";
-            os << "|" << matrix._data[0][2] << " " << matrix._data[1][2] << " " << matrix._data[2][2]
+            os << "|" << matrix._data[0][2] << " " << matrix._data[1][2] << " " << matrix._data[2][2] << " "
                << matrix._data[3][2] << "|\n";
-            os << "|" << matrix._data[0][3] << " " << matrix._data[1][3] << " " << matrix._data[2][3]
+            os << "|" << matrix._data[0][3] << " " << matrix._data[1][3] << " " << matrix._data[2][3] << " "
                << matrix._data[3][3] << "|\n";
 
             os.precision(oldPrecision);

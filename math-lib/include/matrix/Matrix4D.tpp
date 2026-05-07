@@ -587,6 +587,7 @@ namespace fgm
     { return mat.trace(); }
 
 
+
     /**************************************
      *                                    *
      *             UTILITIES              *
