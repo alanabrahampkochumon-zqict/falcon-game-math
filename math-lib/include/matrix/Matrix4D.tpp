@@ -480,6 +480,34 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix4D<T, S> Matrix4D<T>::safeDiv(S scalar, const Matrix4D& fallback) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
+                return Matrix4D<R>(fallback);
+        if constexpr (std::is_integral_v<R>)
+            if (scalar == 0)
+                return Matrix4D<Magnitude<R>>(fallback);
+
+        return *this / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix4D<T, S> Matrix4D<T>::safeDiv(const Matrix4D& mat, S scalar,
+                                                               const Matrix4D& fallback) noexcept
+        requires StrictArithmetic<T>
+    {
+        return mat.safeDiv(scalar, fallback);
+    }
+
+
     /**************************************
      *                                    *
      *             UTILITIES              *
