@@ -570,41 +570,41 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Inverse-scale the matrix by a scalar value.
-        //  *        Divide each element of the matrix by @p scalar and returns a new matrix.
-        //  *
-        //  * @note Promotes the result to a floating point result using @ref Magnitude.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A new @ref Matrix4D inverse scaled by @p scalar.
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> operator/(const S& scalar) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Inverse-scale this matrix by a scalar value.
-        //  *        Perform an in-place division of each element by @p scalar.
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A reference to this matrix (*this).
-        //  */
-        // template <StrictArithmetic S>
-        // constexpr Matrix4D& operator/=(const S& scalar) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
+        /**
+         * @brief Inverse-scale the matrix by a scalar value.
+         *        Divide each element of the matrix by @p scalar and returns a new matrix.
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Matrix4D inverse scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> operator/(const S& scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Inverse-scale this matrix by a scalar value.
+         *        Perform an in-place division of each element by @p scalar.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Matrix4D& operator/=(const S& scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
         // /**
         //  * @brief Safely divide each element of this matrix by a scalar value.
         //  *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.

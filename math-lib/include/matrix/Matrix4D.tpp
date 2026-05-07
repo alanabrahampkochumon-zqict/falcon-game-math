@@ -428,6 +428,24 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedFloatMatrix4D<T, S> Matrix4D<T>::operator/(const S& scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Matrix4D<T>& Matrix4D<T>::operator/=(const S& scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        return *this;
+    }
+
+
     /**************************************
      *                                    *
      *             UTILITIES              *
