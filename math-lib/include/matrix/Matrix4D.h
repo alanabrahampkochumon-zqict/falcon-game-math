@@ -1030,31 +1030,6 @@ namespace fgm
         /** @} */
 
 
-        ///*************************************
-        // *                                   *
-        // *            ACCESSORS              *
-        // *                                   *
-        // *************************************/
-
-        // Vector4D<T>& operator[](std::size_t index);
-        // const Vector4D<T>& operator[](std::size_t index) const;
-
-        // T& operator()(std::size_t row, std::size_t col);
-        // const T& operator()(std::size_t row, std::size_t col) const;
-
-
-        ///*************************************
-        // *                                   *
-        // *      ARITHMETIC OPERATORS         *
-        // *                                   *
-        // *************************************/
-        // template <StrictArithmetic U>
-        // auto operator+(const Matrix4D<U>& other) const -> Matrix4D<std::common_type_t<T, U>>;
-
-        // template <StrictArithmetic U>
-        // Matrix4D& operator+=(const Matrix4D<U>& other);
-
-
 
         /**
          * @addtogroup FGM_Mat4x4_Utils
