@@ -578,7 +578,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr T Matrix4D<T>::trace() const noexcept
         requires StrictArithmetic<T>
-    { return T(0); }
+    { return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3]; }
 
 
     template <Arithmetic T>
