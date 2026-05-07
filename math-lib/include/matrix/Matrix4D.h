@@ -1106,6 +1106,60 @@ namespace fgm
 
         /** @} */
 
+
+
+        /**
+         * @addtogroup FGM_Mat3x3_Log
+         * @{
+         */
+
+        /**
+         * @brief Write the matrix to an output stream in **row-major** order.
+         *        Format the matrix as
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} & A_{20} & A_{30} \\
+         *                 A_{01} & A_{11} & A_{21} & A_{31} \\
+         *                 A_{02} & A_{12} & A_{22} & A_{32} \\
+         *                 A_{03} & A_{13} & A_{23} & A_{33}
+         *            \end{bmatrix}
+         *        \f$ string representation for debugging or logging.
+         *
+         * @tparam T Numeric type of the matrix.
+         *
+         * @param os     The output stream to write to.
+         * @param matrix The matrix to be streamed.
+         *
+         * @return A reference to the output stream @p os.
+         */
+        constexpr friend std::ostream& operator<<(std::ostream& os, const Matrix4D& matrix)
+        {
+            const std::streamsize oldPrecision = os.precision();
+            const std::ios_base::fmtflags oldFlags = os.flags();
+
+            auto precision = Config::useFullPrecision
+                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+                : Config::LOG_PRECISION;
+            os << std::setprecision(precision) << std::fixed;
+            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0]
+               << matrix._data[3][0] << "|\n";
+            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1]
+               << matrix._data[3][1] << "|\n";
+            os << "|" << matrix._data[0][2] << " " << matrix._data[1][2] << " " << matrix._data[2][2]
+               << matrix._data[3][2] << "|\n";
+            os << "|" << matrix._data[0][3] << " " << matrix._data[1][3] << " " << matrix._data[2][3]
+               << matrix._data[3][3] << "|\n";
+
+            os.precision(oldPrecision);
+            os.flags(oldFlags);
+
+            return os;
+        }
+
+        /** @} */
+
+
+
     private:
         std::array<Vector4D<T>, columns> _data;
     };
