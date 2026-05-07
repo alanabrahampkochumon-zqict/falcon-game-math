@@ -1141,6 +1141,29 @@ namespace fgm
 
 
 
+    /**
+     * @addtogroup FGM_Ma4x4_Alias
+     * @{
+     */
+
+    /*************************************
+     *                                   *
+     *             ALIASES               *
+     *                                   *
+     *************************************/
+
+    using bMat4 = Matrix4D<bool>;                ///< `bool` matrix
+    using iMat4 = Matrix4D<int>;                 ///< `int` matrix
+    using uMat4 = Matrix4D<unsigned int>;        ///< `unsigned int` matrix
+    using mat4 = Matrix4D<float>;                ///< `float` matrix
+    using lMat4 = Matrix4D<long long>;           ///< `long long` matrix
+    using dMat4 = Matrix4D<double>;              ///< `double` matrix
+    using ulMat4 = Matrix4D<unsigned long long>; ///< `unsigned long long` matrix
+
+    /** @} */
+
+
+
     /**************************************
      *                                    *
      *        NON-MEMBER FUNCTIONS        *
