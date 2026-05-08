@@ -721,44 +721,44 @@ namespace fgm
          * @{
          */
 
-        // /**
-        //  * @brief Compute the determinant (scaling factor) of this matrix.
-        //  *        Calculate determinant:
-        //  *        \f$
-        //  *            \begin{align*}
-        //  *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
-        //  *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
-        //  *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
-        //  *            \end{align*}
-        //  *        \f$
-        //  *
-        //  * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
-        //  *
-        //  * @return A non-zero scalar if the matrix is non-singular, else zero.
-        //  */
-        // [[nodiscard]] constexpr T determinant() const noexcept
-        //     requires SignedStrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the determinant (scaling factor) of a matrix.
-        //  *        Calculate determinant:
-        //  *        \f$
-        //  *            \begin{align*}
-        //  *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
-        //  *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
-        //  *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
-        //  *            \end{align*}
-        //  *        \f$
-        //  *
-        //  * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
-        //  *
-        //  * @param mat The matrix to compute the determinant of.
-        //  *
-        //  * @return A non-zero scalar if the matrix is non-singular, else zero.
-        //  */
-        // static constexpr T determinant(const Matrix4D& mat) noexcept
-        //     requires SignedStrictArithmetic<T>;
+        /**
+         * @brief Compute the determinant (scaling factor) of this matrix.
+         *        Calculate determinant:
+         *        \f$
+         *            \begin{align*}
+         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
+         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
+         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
+         *            \end{align*}
+         *        \f$
+         *
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         */
+        [[nodiscard]] constexpr T determinant() const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the determinant (scaling factor) of a matrix.
+         *        Calculate determinant:
+         *        \f$
+         *            \begin{align*}
+         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
+         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
+         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
+         *            \end{align*}
+         *        \f$
+         *
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         *
+         * @param mat The matrix to compute the determinant of.
+         *
+         * @return A non-zero scalar if the matrix is non-singular, else zero.
+         */
+        static constexpr T determinant(const Matrix4D& mat) noexcept
+            requires SignedStrictArithmetic<T>;
 
 
         /**

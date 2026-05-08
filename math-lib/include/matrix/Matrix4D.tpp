@@ -559,6 +559,22 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
+    constexpr T Matrix4D<T>::determinant() const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        return T(0);
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Matrix4D<T>::determinant(const Matrix4D& mat) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        return mat.determinant();
+    }
+
+
+    template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::transpose() const noexcept
     { /**
        * @note Although the code doesn't seem to transpose, since we are storing in column major order

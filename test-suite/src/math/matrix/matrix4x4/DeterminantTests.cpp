@@ -45,20 +45,19 @@ class SingularMatrix4DDeterminant: public ::testing::TestWithParam<fgm::Matrix4D
 {};
 INSTANTIATE_TEST_SUITE_P(
     Matrix4DDeterminantTestSuite, SingularMatrix4DDeterminant,
-    ::testing::Values(fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f },
-                                     fgm::Vector4D{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vector4D { 2.5f, 6.1f, 31.6f, 2.0f} }
-                                     // ,
-                      // fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 1.0f, 5.0f }, fgm::Vector4D{ 2.0f, 2.0f, 3.0f },
-                      //                fgm::Vector4D{ 3.0f, 3.0f, 9.0f } },
-                      // fgm::Matrix4D{ fgm::Vector4D{ 0.0f, 0.0f, 0.0f }, fgm::Vector4D{ 1.0f, 2.0f, 3.0f },
-                      //                fgm::Vector4D{ 1.0f, 8.0f, 9.0f } },
-                      // fgm::Matrix4D{ fgm::Vector4D{ 0.0f, 5.0f, 1.0f }, fgm::Vector4D{ 0.0f, 2.0f, 3.0f },
-                      //                fgm::Vector4D{ 0.0f, 8.0f, 9.0f } },
-                      // fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f }, fgm::Vector4D{ 2.0f, 4.0f, 6.0f },
-                      //                fgm::Vector4D{ 7.0f, 8.0f, 9.0f } },
-                      // fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 2.0f, 1.0f }, fgm::Vector4D{ 2.0f, 4.0f, 3.0f },
-                                     // fgm::Vector4D{ 3.0f, 6.0f, 9.0f } }
-));
+    ::testing::Values(
+        fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f },
+                       fgm::Vector4D{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vector4D{ 1.0f, 85.0f, 19.0f, 12.0f } },
+        fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4D{ 2.0f, 2.0f, 3.0f, 4.0f },
+                       fgm::Vector4D{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4D{ 4.0f, 4.0f, 31.6f, 2.0f } },
+        fgm::Matrix4D{ fgm::Vector4D{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vector4D{ 2.0f, 2.0f, 3.0f, 4.0f },
+                       fgm::Vector4D{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4D{ 4.0f, 4.0f, 31.6f, 2.0f } },
+        fgm::Matrix4D{ fgm::Vector4D{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4D{ 0.0f, 2.0f, 3.0f, 4.0f },
+                       fgm::Vector4D{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4D{ 0.0f, 4.0f, 31.6f, 2.0f } },
+        fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 2.0f, 4.0f, 6.0f, 8.0f },
+                       fgm::Vector4D{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4D{ 4.0f, 4.0f, 31.6f, 2.0f } },
+        fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 2.0f, 4.0f, 5.0f, 10.0f },
+                       fgm::Vector4D{ 3.0f, 6.0f, 9.0f, 12.0f }, fgm::Vector4D{ 4.0f, 8.0f, 31.6f, 2.0f } }));
 
 
 
@@ -76,7 +75,8 @@ INSTANTIATE_TEST_SUITE_P(
 /** @brief Verify that matrix determinant operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4D MAT{ fgm::Vector4D{ 1, 2, 3, 4 }, fgm::Vector4D{ 1, 2, 1, 3 }, fgm::Vector4D{ 2, 3, 4, 12 }, fgm::Vector4D{ 2, 1, 3, 2 } };
+    constexpr fgm::Matrix4D MAT{ fgm::Vector4D{ 1, 2, 3, 4 }, fgm::Vector4D{ 1, 2, 1, 3 }, fgm::Vector4D{ 2, 3, 4, 12 },
+                                 fgm::Vector4D{ 2, 1, 3, 2 } };
 
     // Verify determinant (member function)
     // static_assert(MAT.determinant() == 39);
