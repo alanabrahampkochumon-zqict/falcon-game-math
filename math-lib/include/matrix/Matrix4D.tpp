@@ -420,10 +420,10 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
-        _data[0] = mat[0];
-        _data[1] = mat[1];
-        _data[2] = mat[2];
-        _data[3] = mat[3];
+        _data[0]       = mat[0];
+        _data[1]       = mat[1];
+        _data[2]       = mat[2];
+        _data[3]       = mat[3];
         return *this;
     }
 
@@ -562,16 +562,30 @@ namespace fgm
     constexpr T Matrix4D<T>::determinant() const noexcept
         requires SignedStrictArithmetic<T>
     {
-        return T(0);
+        // TODO: Replace with fgm::swizzle after factor implementation
+        auto a = _data[0].template swizzle<axis::X, axis::Y, axis::Z>();
+        auto b = _data[1].template swizzle<axis::X, axis::Y, axis::Z>();
+        auto c = _data[2].template swizzle<axis::X, axis::Y, axis::Z>();
+        auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
+
+        auto x = _data[0][3];
+        auto y = _data[1][3];
+        auto z = _data[2][3];
+        auto w = _data[3][3];
+
+        auto s = a.cross(b);
+        auto t = c.cross(d);
+        auto u = y * a - x * b;
+        auto v = w * c - z * d;
+
+        return s * v + t * u;
     }
 
 
     template <Arithmetic T>
     constexpr T Matrix4D<T>::determinant(const Matrix4D& mat) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return mat.determinant();
-    }
+    { return mat.determinant(); }
 
 
     template <Arithmetic T>

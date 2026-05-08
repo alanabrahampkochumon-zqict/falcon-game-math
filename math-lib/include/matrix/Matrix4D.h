@@ -747,7 +747,7 @@ namespace fgm
          *            \begin{align*}
          *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
          *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
-         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
+         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{11})
          *            \end{align*}
          *        \f$
          *
