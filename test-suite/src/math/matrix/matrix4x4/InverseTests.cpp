@@ -29,10 +29,14 @@ protected:
 
     void SetUp() override
     {
-        // _matrix = { { T(3), T(1), T(8) }, { T(3), T(9), T(3) }, { T(5), T(6), T(1) } };
-        // _expectedInverse = { { Mag(0.038961038961039), Mag(-0.203463203463203), Mag(0.298701298701299) },
-        //                      { Mag(-0.051948051948052), Mag(0.16017316017316), Mag(-0.064935064935065) },
-        //                      { Mag(0.116883116883117), Mag(0.056277056277056), Mag(-0.103896103896104) } };
+        _matrix          = { { T(3), T(1), T(8), T(4) },
+                             { T(3), T(7), T(4), T(2) },
+                             { T(6), T(1), T(2), T(1) },
+                             { T(3), T(1), T(6), T(2) } };
+        _expectedInverse = { { Mag(-0.037878787878788), Mag(-0.022727272727273), Mag(0.196969696969697), Mag(0.0) },
+                             { Mag(-0.068181818181818), Mag(0.159090909090909), Mag(-0.045454545454545), Mag(0.0) },
+                             { Mag(-0.204545454545455), Mag(-0.022727272727273), Mag(-0.136363636363636), Mag(0.5) },
+                             { Mag(0.704545454545455), Mag(0.022727272727273), Mag(0.136363636363636), Mag(-1.0) } };
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix4D inverse, parameterized @ref SupportedSignedArithmeticTypes */
@@ -72,7 +76,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix4DInverseTestSuite, NaNMatrix4DInverse,
 
 
 /**
- * @addtogroup T_FGM_Mat3x3_Inverse
+ * @addtogroup T_FGM_Mat4x4_Inverse
  * @{
  */
 
@@ -86,7 +90,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix4DInverseTestSuite, NaNMatrix4DInverse,
 namespace
 {
     // constexpr fgm::Matrix4D MAT(1.0f, 2.0f, 3.0f, 0.0f, 1.0f, 4.0f, 5.0f, 6.0f, 0.0f);
-    //
+    // TODO: Add back
     // // Verify matrix inverse (member function)
     // constexpr fgm::Matrix4D INV_MAT = MAT.inverse();
     // static_assert(INV_MAT(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
@@ -149,36 +153,36 @@ namespace
  * @brief Verify that inverting a matrix using @ref fgm::Matrix4D::inverse exchanges row and
  *        column elements and returns a new matrix.
  */
+// TODO: Add back
 // TYPED_TEST(Matrix4DInverse, ExchangesRowsAndColumnElements)
-// {
-//     EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse());
-// }
-//
-//
-// /** @brief Verify that inverse of matrix times itself is an identity matrix. */
-// TYPED_TEST(Matrix4DInverse, InverseTimesMatrixReturnsIdentityMatrix)
-// {
-//     const auto invMatrix = this->_matrix.inverse();
-//     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
-// }
-//
-//
-// /**
-//  * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4D::inverse exchanges row and
-//  *        column elements and returns a new matrix.
-//  */
+// { EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse()); }
+
+
+/** @brief Verify that inverse of matrix times itself is an identity matrix. */
+TYPED_TEST(Matrix4DInverse, InverseTimesMatrixReturnsIdentityMatrix)
+{
+    // TODO: Add back
+    // const auto invMatrix = this->_matrix.inverse();
+    // EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
+}
+
+
+/**
+ * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4D::inverse exchanges row and
+ *        column elements and returns a new matrix.
+ */
+// TODO: Add back
 // TYPED_TEST(Matrix4DInverse, StaticWrapper_ExchangesRowsAndColumnElements)
-// {
-//     EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::inverse(this->_matrix));
-// }
-//
-//
-// /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
-// TYPED_TEST(Matrix4DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
-// {
-//     const auto invMatrix = fgm::Matrix4D<TypeParam>::inverse(this->_matrix);
-//     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
-// }
+// { EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::inverse(this->_matrix)); }
+
+
+/** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
+TYPED_TEST(Matrix4DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
+{
+// TODO: Add back
+    // const auto invMatrix = fgm::Matrix4D<TypeParam>::inverse(this->_matrix);
+    // EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
+}
 
 
 
