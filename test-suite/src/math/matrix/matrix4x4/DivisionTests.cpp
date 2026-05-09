@@ -88,60 +88,60 @@ namespace
 
     // Matrix scalar division
     constexpr fgm::Matrix4D DIV_RESULT_1 = MAT / 2;
-    // static_assert(DIV_RESULT_1(0, 0) == 1);
-    // static_assert(DIV_RESULT_1(0, 1) == 2);
-    // static_assert(DIV_RESULT_1(0, 2) == 3);
-    // static_assert(DIV_RESULT_1(0, 3) == 4);
-    // static_assert(DIV_RESULT_1(1, 0) == 5);
-    // static_assert(DIV_RESULT_1(1, 1) == 6);
-    // static_assert(DIV_RESULT_1(1, 2) == 7);
-    // static_assert(DIV_RESULT_1(1, 3) == 8);
-    // static_assert(DIV_RESULT_1(2, 0) == 9);
-    // static_assert(DIV_RESULT_1(2, 1) == 10);
-    // static_assert(DIV_RESULT_1(2, 2) == 11);
-    // static_assert(DIV_RESULT_1(2, 3) == 12);
-    // static_assert(DIV_RESULT_1(3, 0) == 13);
-    // static_assert(DIV_RESULT_1(3, 1) == 14);
-    // static_assert(DIV_RESULT_1(3, 2) == 15);
-    // static_assert(DIV_RESULT_1(3, 3) == 16);
-    //
-    //
-    // // Matrix Safe Division
-    // constexpr fgm::Matrix4D DIV_RESULT_2 = MAT.safeDiv(2);
-    // static_assert(DIV_RESULT_2(0, 0) == 1);
-    // static_assert(DIV_RESULT_2(0, 1) == 2);
-    // static_assert(DIV_RESULT_2(0, 2) == 3);
-    // static_assert(DIV_RESULT_2(0, 3) == 4);
-    // static_assert(DIV_RESULT_2(1, 0) == 5);
-    // static_assert(DIV_RESULT_2(1, 1) == 6);
-    // static_assert(DIV_RESULT_2(1, 2) == 7);
-    // static_assert(DIV_RESULT_2(1, 3) == 8);
-    // static_assert(DIV_RESULT_2(2, 0) == 9);
-    // static_assert(DIV_RESULT_2(2, 1) == 10);
-    // static_assert(DIV_RESULT_2(2, 2) == 11);
-    // static_assert(DIV_RESULT_2(2, 3) == 12);
-    // static_assert(DIV_RESULT_2(3, 0) == 13);
-    // static_assert(DIV_RESULT_2(3, 1) == 14);
-    // static_assert(DIV_RESULT_2(3, 2) == 15);
-    // static_assert(DIV_RESULT_2(3, 3) == 16);
-    //
-    // constexpr fgm::Matrix4D DIV_RESULT_3 = fgm::Matrix4D<int>::safeDiv(MAT, 2);
-    // static_assert(DIV_RESULT_3(0, 0) == 1);
-    // static_assert(DIV_RESULT_3(0, 1) == 2);
-    // static_assert(DIV_RESULT_3(0, 2) == 3);
-    // static_assert(DIV_RESULT_3(0, 3) == 4);
-    // static_assert(DIV_RESULT_3(1, 0) == 5);
-    // static_assert(DIV_RESULT_3(1, 1) == 6);
-    // static_assert(DIV_RESULT_3(1, 2) == 7);
-    // static_assert(DIV_RESULT_3(1, 3) == 8);
-    // static_assert(DIV_RESULT_3(2, 0) == 9);
-    // static_assert(DIV_RESULT_3(2, 1) == 10);
-    // static_assert(DIV_RESULT_3(2, 2) == 11);
-    // static_assert(DIV_RESULT_3(2, 3) == 12);
-    // static_assert(DIV_RESULT_3(3, 0) == 13);
-    // static_assert(DIV_RESULT_3(3, 1) == 14);
-    // static_assert(DIV_RESULT_3(3, 2) == 15);
-    // static_assert(DIV_RESULT_3(3, 3) == 16);
+    static_assert(DIV_RESULT_1(0, 0) == 1);
+    static_assert(DIV_RESULT_1(0, 1) == 2);
+    static_assert(DIV_RESULT_1(0, 2) == 3);
+    static_assert(DIV_RESULT_1(0, 3) == 4);
+    static_assert(DIV_RESULT_1(1, 0) == 5);
+    static_assert(DIV_RESULT_1(1, 1) == 6);
+    static_assert(DIV_RESULT_1(1, 2) == 7);
+    static_assert(DIV_RESULT_1(1, 3) == 8);
+    static_assert(DIV_RESULT_1(2, 0) == 9);
+    static_assert(DIV_RESULT_1(2, 1) == 10);
+    static_assert(DIV_RESULT_1(2, 2) == 11);
+    static_assert(DIV_RESULT_1(2, 3) == 12);
+    static_assert(DIV_RESULT_1(3, 0) == 13);
+    static_assert(DIV_RESULT_1(3, 1) == 14);
+    static_assert(DIV_RESULT_1(3, 2) == 15);
+    static_assert(DIV_RESULT_1(3, 3) == 16);
+
+
+    // Matrix Safe Division
+    constexpr fgm::Matrix4D DIV_RESULT_2 = MAT.safeDiv(2);
+    static_assert(DIV_RESULT_2(0, 0) == 1);
+    static_assert(DIV_RESULT_2(0, 1) == 2);
+    static_assert(DIV_RESULT_2(0, 2) == 3);
+    static_assert(DIV_RESULT_2(0, 3) == 4);
+    static_assert(DIV_RESULT_2(1, 0) == 5);
+    static_assert(DIV_RESULT_2(1, 1) == 6);
+    static_assert(DIV_RESULT_2(1, 2) == 7);
+    static_assert(DIV_RESULT_2(1, 3) == 8);
+    static_assert(DIV_RESULT_2(2, 0) == 9);
+    static_assert(DIV_RESULT_2(2, 1) == 10);
+    static_assert(DIV_RESULT_2(2, 2) == 11);
+    static_assert(DIV_RESULT_2(2, 3) == 12);
+    static_assert(DIV_RESULT_2(3, 0) == 13);
+    static_assert(DIV_RESULT_2(3, 1) == 14);
+    static_assert(DIV_RESULT_2(3, 2) == 15);
+    static_assert(DIV_RESULT_2(3, 3) == 16);
+
+    constexpr fgm::Matrix4D DIV_RESULT_3 = fgm::Matrix4D<int>::safeDiv(MAT, 2);
+    static_assert(DIV_RESULT_3(0, 0) == 1);
+    static_assert(DIV_RESULT_3(0, 1) == 2);
+    static_assert(DIV_RESULT_3(0, 2) == 3);
+    static_assert(DIV_RESULT_3(0, 3) == 4);
+    static_assert(DIV_RESULT_3(1, 0) == 5);
+    static_assert(DIV_RESULT_3(1, 1) == 6);
+    static_assert(DIV_RESULT_3(1, 2) == 7);
+    static_assert(DIV_RESULT_3(1, 3) == 8);
+    static_assert(DIV_RESULT_3(2, 0) == 9);
+    static_assert(DIV_RESULT_3(2, 1) == 10);
+    static_assert(DIV_RESULT_3(2, 2) == 11);
+    static_assert(DIV_RESULT_3(2, 3) == 12);
+    static_assert(DIV_RESULT_3(3, 0) == 13);
+    static_assert(DIV_RESULT_3(3, 1) == 14);
+    static_assert(DIV_RESULT_3(3, 2) == 15);
+    static_assert(DIV_RESULT_3(3, 3) == 16);
 
 
     // Matrix Try Division
