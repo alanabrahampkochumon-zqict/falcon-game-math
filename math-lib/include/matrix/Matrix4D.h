@@ -46,7 +46,7 @@ namespace fgm
         using value_type = T; ///< The numeric type of the vector components.
 
         static constexpr std::size_t columns = 4; ///< Matrix column count.
-        static constexpr std::size_t rows = 4;    ///< Matrix row count.
+        static constexpr std::size_t rows    = 4; ///< Matrix row count.
 
         /** @} */
 
@@ -724,11 +724,28 @@ namespace fgm
         /**
          * @brief Compute the determinant (scaling factor) of this matrix.
          *        Calculate determinant:
-         *        \f$
+        *        \f$
          *            \begin{align*}
-         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
-         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
-         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
+         *                 \text{det(A)} &= A_{00} \begin{bmatrix}
+         *                                              A_{11} & A_{12} & A_{13} \\
+         *                                              A_{21} & A_{22} & A_{23} \\
+         *                                              A_{31} & A_{32} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &- A_{01} \begin{bmatrix}
+         *                                              A_{10} & A_{12} & A_{13} \\
+         *                                              A_{20} & A_{22} & A_{23} \\
+         *                                              A_{30} & A_{32} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &+ A_{02} \begin{bmatrix}
+         *                                              A_{10} & A_{11} & A_{13} \\
+         *                                              A_{20} & A_{21} & A_{23} \\
+         *                                              A_{30} & A_{31} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &- A_{03} \begin{bmatrix}
+         *                                             A_{10} & A_{11} & A_{12} \\
+         *                                             A_{20} & A_{21} & A_{22} \\
+         *                                             A_{30} & A_{31} & A_{32}
+         *                                         \end{bmatrix}
          *            \end{align*}
          *        \f$
          *
@@ -745,9 +762,26 @@ namespace fgm
          *        Calculate determinant:
          *        \f$
          *            \begin{align*}
-         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
-         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
-         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{11})
+         *                 \text{det(A)} &= A_{00} \begin{bmatrix}
+         *                                              A_{11} & A_{12} & A_{13} \\
+         *                                              A_{21} & A_{22} & A_{23} \\
+         *                                              A_{31} & A_{32} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &- A_{01} \begin{bmatrix}
+         *                                              A_{10} & A_{12} & A_{13} \\
+         *                                              A_{20} & A_{22} & A_{23} \\
+         *                                              A_{30} & A_{32} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &+ A_{02} \begin{bmatrix}
+         *                                              A_{10} & A_{11} & A_{13} \\
+         *                                              A_{20} & A_{21} & A_{23} \\
+         *                                              A_{30} & A_{31} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &- A_{03} \begin{bmatrix}
+         *                                             A_{10} & A_{11} & A_{12} \\
+         *                                             A_{20} & A_{21} & A_{22} \\
+         *                                             A_{30} & A_{31} & A_{32}
+         *                                         \end{bmatrix}
          *            \end{align*}
          *        \f$
          *
@@ -1109,7 +1143,7 @@ namespace fgm
          */
         constexpr friend std::ostream& operator<<(std::ostream& os, const Matrix4D& matrix)
         {
-            const std::streamsize oldPrecision = os.precision();
+            const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
             auto precision = Config::useFullPrecision
@@ -1152,12 +1186,12 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bMat4 = Matrix4D<bool>;                ///< `bool` matrix
-    using iMat4 = Matrix4D<int>;                 ///< `int` matrix
-    using uMat4 = Matrix4D<unsigned int>;        ///< `unsigned int` matrix
-    using mat4 = Matrix4D<float>;                ///< `float` matrix
-    using lMat4 = Matrix4D<long long>;           ///< `long long` matrix
-    using dMat4 = Matrix4D<double>;              ///< `double` matrix
+    using bMat4  = Matrix4D<bool>;               ///< `bool` matrix
+    using iMat4  = Matrix4D<int>;                ///< `int` matrix
+    using uMat4  = Matrix4D<unsigned int>;       ///< `unsigned int` matrix
+    using mat4   = Matrix4D<float>;              ///< `float` matrix
+    using lMat4  = Matrix4D<long long>;          ///< `long long` matrix
+    using dMat4  = Matrix4D<double>;             ///< `double` matrix
     using ulMat4 = Matrix4D<unsigned long long>; ///< `unsigned long long` matrix
 
     /** @} */
