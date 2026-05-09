@@ -578,7 +578,7 @@ namespace fgm
         auto u = y * a - x * b;
         auto v = w * c - z * d;
 
-        return s * v + t * u;
+        return s.dot(v) + t.dot(u);
     }
 
 
@@ -603,6 +603,22 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::transpose(const Matrix4D& mat) noexcept
     { return mat.transpose(); }
+
+
+    template <Arithmetic T>
+    constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::inverse() const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::inverse(const Matrix4D& matrix) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        return matrix.inverse();
+    }
 
 
     template <Arithmetic T>

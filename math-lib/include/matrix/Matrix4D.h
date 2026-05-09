@@ -847,64 +847,64 @@ namespace fgm
         constexpr static Matrix4D transpose(const Matrix4D& mat) noexcept;
 
 
-        // /**
-        //  * @brief Compute the inverse of this matrix.
-        //  *        Calculate inverse:
-        //  *        \f$
-        //  *            \begin{bmatrix}
-        //  *                 A_{00} & A_{01} & A_{02} \\
-        //  *                 A_{10} & A_{11} & A_{12} \\
-        //  *                 A_{20} & A_{21} & A_{22}
-        //  *            \end{bmatrix}^{-1}
-        //  *            =
-        //  *            \frac{1}{det(A)}
-        //  *            \begin{bmatrix}
-        //  *                 b  \times c \\
-        //  *                 c  \times a \\
-        //  *                 a  \times b
-        //  *            \end{bmatrix}
-        //  *        \f$
-        //  *
-        //  * @note Promotes the result to a floating point result using @ref Magnitude.
-        //  * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
-        //  *
-        //  * @return A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$.
-        //  */
-        // [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        // constexpr Matrix4D<Magnitude<T>> inverse() const noexcept
-        //     requires SignedStrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the inverse of a matrix.
-        //  *        Calculate inverse:
-        //  *        \f$
-        //  *            \begin{bmatrix}
-        //  *                 A_{00} & A_{01} & A_{02} \\
-        //  *                 A_{10} & A_{11} & A_{12} \\
-        //  *                 A_{20} & A_{21} & A_{22}
-        //  *            \end{bmatrix}^{-1}
-        //  *            =
-        //  *            \frac{1}{det(A)}
-        //  *            \begin{bmatrix}
-        //  *                 b  \times c \\
-        //  *                 c  \times a \\
-        //  *                 a  \times b
-        //  *            \end{bmatrix}
-        //  *        \f$
-        //  *
-        //  * @note Promotes the result to a floating point result using @ref Magnitude.
-        //  * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
-        //  *
-        //  * @param[in] matrix The matrix to invert.
-        //  *
-        //  * @return A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$.
-        //  */
-        // [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        // constexpr static Matrix4D<Magnitude<T>> inverse(const Matrix4D& matrix) noexcept
-        //     requires SignedStrictArithmetic<T>;
-        //
-        //
+        /**
+         * @brief Compute the inverse of this matrix.
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{det(A)}
+         *            \begin{bmatrix}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$.
+         */
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        constexpr Matrix4D<Magnitude<T>> inverse() const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the inverse of a matrix.
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{det(A)}
+         *            \begin{bmatrix}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         *
+         * @param[in] matrix The matrix to invert.
+         *
+         * @return A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$.
+         */
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        constexpr static Matrix4D<Magnitude<T>> inverse(const Matrix4D& matrix) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
         // /**
         //  * @brief Safely compute the inverse of this matrix.
         //  *        Calculate inverse:
