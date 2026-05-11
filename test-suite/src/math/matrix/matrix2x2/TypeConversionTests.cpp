@@ -51,9 +51,9 @@ namespace
  */
 TEST(Matrix2DConversionConstructor, PromotesType)
 {
-    constexpr fgm::Matrix2D mat1(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Matrix2D mat1(1.0f, 2.0f, 3.0f, 4.0f);
 
-    [[maybe_unused]] constexpr fgm::Matrix2D<double> mat2(mat1);
+    [[maybe_unused]] const fgm::Matrix2D<double> mat2(mat1);
 
     static_assert(std::is_same_v<decltype(mat2)::value_type, double>);
 }
@@ -63,7 +63,7 @@ TEST(Matrix2DConversionConstructor, PromotesType)
 TEST(Matrix2DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float matrix
-    constexpr fgm::Matrix2D mat1(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Matrix2D mat1(1.0f, 2.0f, 3.0f, 4.0f);
 
     // When converted to a double matrix
     fgm::Matrix2D<double> mat2(mat1);
@@ -83,9 +83,9 @@ TEST(Matrix2DConversionConstructor, ReturnsNewInstance)
  */
 TEST(Matrix2DConversionConstructor, DemotesType)
 {
-    constexpr fgm::Matrix2D mat1(1.0, 2.0, 3.0, 4.0);
+    const fgm::Matrix2D mat1(1.0, 2.0, 3.0, 4.0);
 
-    [[maybe_unused]] constexpr fgm::Matrix2D<float> mat2(mat1);
+    [[maybe_unused]] const fgm::Matrix2D<float> mat2(mat1);
 
     static_assert(std::is_same_v<decltype(mat2)::value_type, float>);
 }

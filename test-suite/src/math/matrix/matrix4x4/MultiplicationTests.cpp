@@ -689,5 +689,4 @@ TEST(Matrix4DMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinim
     EXPECT_MAT_EQ(expectedMatrix, matA);
 }
 
-
 /** @} */

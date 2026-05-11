@@ -22,9 +22,11 @@ if (CLANG_FORMATTER)
     file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h *.cxx *.hxx *.hpp *.cc *.hh *.tpp *.inl)
 
     add_custom_target(format
-            COMMAND ${CLANG_FORMATTER} -i -style=file ${ALL_SOURCE_FILES}
+            # Use VERBATIM and quote the command for Windows compatibility
+            COMMAND "${CLANG_FORMATTER}" -i -style=file ${ALL_SOURCE_FILES}
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
             COMMENT "Formatting source files..."
+            VERBATIM
     )
     set_target_properties(format PROPERTIES FOLDER ${DevToolsDir})
 else ()
@@ -90,8 +92,8 @@ if (ENABLE_STRICT)
                 /clang:-Wno-padded;
                 /clang:-Wno-reserved-macro-identifier;
                 /clang:-Wno-unused-macros;
-                /clang:-Wno-newline-eof;               # Suppresses "no newline at end of file"
-                /clang:-Wno-documentation;             # Suppresses "@tparam" attachment errors
+                /clang:-Wno-newline-eof;              
+                /clang:-Wno-documentation;            
                 /clang:-Wno-unique-object-duplication;
                 /clang:-Wno-unique-object-duplication;
                 /clang:-Wno-reserved-macro-identifier;

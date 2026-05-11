@@ -88,10 +88,10 @@ TYPED_TEST(Matrix2DSubtraction, MinusOperator_ReturnsDifference)
  */
 TEST(Matrix2DSubtraction, MixedTypeSubtractionPromotesType)
 {
-    constexpr fgm::Matrix2D mat1(3.0f, -1.0f, 4.0f, -23.0f);
-    constexpr fgm::Matrix2D mat2(9.0, 10.0, 3.0, 4.0);
+    const fgm::Matrix2D mat1(3.0f, -1.0f, 4.0f, -23.0f);
+    const fgm::Matrix2D mat2(9.0, 10.0, 3.0, 4.0);
 
-    [[maybe_unused]] constexpr fgm::Matrix2D difference = mat1 - mat2;
+    [[maybe_unused]] const fgm::Matrix2D difference = mat1 - mat2;
 
     static_assert(std::is_same_v<decltype(difference)::value_type, double>);
 }
@@ -116,7 +116,7 @@ TYPED_TEST(Matrix2DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
 TEST(Matrix2DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
     fgm::Matrix2D mat1(3.0f, -1.0f, 4.0f, -23.0f);
-    constexpr fgm::Matrix2D mat2(9.0, 10.0, 3.0, 4.0);
+    const fgm::Matrix2D mat2(9.0, 10.0, 3.0, 4.0);
 
     mat1 -= mat2;
 
