@@ -1,5 +1,4 @@
 #pragma once
-#include "Matrix4D.h"
 /**
  * @file Matrix4D.tpp
  * @author Alan Abraham P Kochumon
@@ -706,6 +705,23 @@ namespace fgm
                                                                 const Matrix4D& fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.safeInverse(fallback); }
+
+
+    template <Arithmetic T>
+    constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::tryInverse(OperationStatus& status,
+                                                             const Matrix4D& fallback) const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        status = OperationStatus::SUCCESS;
+        return fallback;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::tryInverseOf(const Matrix4D& matrix, OperationStatus& status,
+                                                               const Matrix4D& fallback) noexcept
+        requires SignedStrictArithmetic<T>
+    { return matrix.tryInverse(status, fallback); }
 
 
     template <Arithmetic T>
