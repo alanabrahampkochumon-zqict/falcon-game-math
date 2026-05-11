@@ -90,7 +90,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix4DInverseTestSuite, NaNMatrix4DInverse,
 namespace
 {
     // constexpr fgm::Matrix4D MAT(1.0f, 2.0f, 3.0f, 0.0f, 1.0f, 4.0f, 5.0f, 6.0f, 0.0f);
-    // TODO: Add back
+    // //TODO: Add back
     // // Verify matrix inverse (member function)
     // constexpr fgm::Matrix4D INV_MAT = MAT.inverse();
     // static_assert(INV_MAT(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
@@ -114,7 +114,7 @@ namespace
     // static_assert(INV_MAT_S(2, 0) - -5.0f <= fgm::Config::FLOAT_EPSILON);
     // static_assert(INV_MAT_S(2, 1) - 4.0f <= fgm::Config::FLOAT_EPSILON);
     // static_assert(INV_MAT_S(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
-    //
+
     //
     // // Verify matrix safeInverse (member function)
     // constexpr fgm::Matrix4D SAFE_INV_MAT = MAT.safeInverse();
@@ -153,35 +153,32 @@ namespace
  * @brief Verify that inverting a matrix using @ref fgm::Matrix4D::inverse exchanges row and
  *        column elements and returns a new matrix.
  */
-// TODO: Add back
-// TYPED_TEST(Matrix4DInverse, ExchangesRowsAndColumnElements)
-// { EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse()); }
+TYPED_TEST(Matrix4DInverse, ExchangesRowsAndColumnElements)
+{
+    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse());
+}
 
 
 /** @brief Verify that inverse of matrix times itself is an identity matrix. */
 TYPED_TEST(Matrix4DInverse, InverseTimesMatrixReturnsIdentityMatrix)
 {
-    // TODO: Add back
-    // const auto invMatrix = this->_matrix.inverse();
-    // EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
+    const auto invMatrix = this->_matrix.inverse();
+    EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
-
 
 /**
  * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4D::inverse exchanges row and
  *        column elements and returns a new matrix.
  */
-// TODO: Add back
-// TYPED_TEST(Matrix4DInverse, StaticWrapper_ExchangesRowsAndColumnElements)
-// { EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::inverse(this->_matrix)); }
+TYPED_TEST(Matrix4DInverse, StaticWrapper_ExchangesRowsAndColumnElements)
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::inverse(this->_matrix)); }
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
 TYPED_TEST(Matrix4DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
 {
-// TODO: Add back
-    // const auto invMatrix = fgm::Matrix4D<TypeParam>::inverse(this->_matrix);
-    // EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
+    const auto invMatrix = fgm::Matrix4D<TypeParam>::inverse(this->_matrix);
+    EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
 

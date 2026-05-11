@@ -1,4 +1,5 @@
 #pragma once
+#include "Matrix4D.h"
 /**
  * @file Matrix4D.tpp
  * @author Alan Abraham P Kochumon
@@ -590,10 +591,11 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::transpose() const noexcept
-    { /**
-       * @note Although the code doesn't seem to transpose, since we are storing in column major order
-       *       _data[row][col] actually gives _data[col][row]
-       */
+    {
+        /**
+         * @note Although the code doesn't seem to transpose, since we are storing in column major order
+         *       _data[row][col] actually gives _data[col][row]
+         */
         return Matrix4D(_data[0][0], _data[0][1], _data[0][2], _data[0][3], _data[1][0], _data[1][1], _data[1][2],
                         _data[1][3], _data[2][0], _data[2][1], _data[2][2], _data[2][3], _data[3][0], _data[3][1],
                         _data[3][2], _data[3][3]);
@@ -609,16 +611,47 @@ namespace fgm
     constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::inverse() const noexcept
         requires SignedStrictArithmetic<T>
     {
-        return *this;
+        using R = Magnitude<T>;
+
+        auto a = _data[0].template swizzle<axis::X, axis::Y, axis::Z>();
+        auto b = _data[1].template swizzle<axis::X, axis::Y, axis::Z>();
+        auto c = _data[2].template swizzle<axis::X, axis::Y, axis::Z>();
+        auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
+
+        auto x = _data[0][3];
+        auto y = _data[1][3];
+        auto z = _data[2][3];
+        auto w = _data[3][3];
+
+        Vector3D<R> s = a.cross(b);
+        Vector3D<R> t = c.cross(d);
+        Vector3D<R> u = y * a - x * b;
+        Vector3D<R> v = w * c - z * d;
+
+        auto det = s.dot(v) + t.dot(u);
+        FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
+
+        auto invDet = R(1) / det;
+
+        s *= invDet;
+        t *= invDet;
+        u *= invDet;
+        v *= invDet;
+
+        auto row0 = b.cross(v) + t * y;
+        auto row1 = v.cross(a) - t * x;
+        auto row2 = d.cross(u) + s * w;
+        auto row3 = u.cross(c) - s * z;
+
+        return Matrix4D<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t), row2.x(),
+                           row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
     }
 
 
     template <Arithmetic T>
     constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::inverse(const Matrix4D& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return matrix.inverse();
-    }
+    { return matrix.inverse(); }
 
 
     template <Arithmetic T>

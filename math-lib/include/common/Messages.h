@@ -30,6 +30,7 @@ namespace fgm::messages
         /** @brief Assertion message thrown when a matrix division by zero occurs. */
         inline constexpr auto MAT_DIV_BY_ZERO = "[Matrix]: Division by zero";
         inline constexpr auto MAT_DET_DIV_BY_ZERO = "[Matrix Determinant]: Division by zero.";
+        inline constexpr auto MAT_INV_ZERO_DETERMINANT = "[Matrix Inverse]: Zero Determinant.";
 
     } // namespace assertion
 
