@@ -165,10 +165,10 @@ TYPED_TEST(Vector2DAddition, PlusEqualsOperator_ReturnsSameVectorWithSum)
  */
 TEST(Vector2DAddition, MixedTypeAdditionPromotesType)
 {
-    constexpr fgm::Vector2D vec1(3.0f, -1.0f);
-    constexpr fgm::Vector2D vec2(9.0, 10.0);
+    const fgm::Vector2D vec1(3.0f, -1.0f);
+    const fgm::Vector2D vec2(9.0, 10.0);
 
-    [[maybe_unused]] constexpr fgm::Vector2D result = vec1 + vec2;
+    [[maybe_unused]] const fgm::Vector2D result = vec1 + vec2;
 
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
@@ -181,7 +181,7 @@ TEST(Vector2DAddition, MixedTypeAdditionPromotesType)
 TEST(Vector2DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
 {
     fgm::Vector2D vec1(3.0f, -1.0f);
-    constexpr fgm::Vector2D vec2(9.0, 10.0);
+    const fgm::Vector2D vec2(9.0, 10.0);
 
     vec1 += vec2;
 
@@ -233,10 +233,10 @@ TYPED_TEST(Vector2DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
  */
 TEST(Vector2DSubtraction, MixedTypeSubtractionPromotesType)
 {
-    constexpr fgm::Vector2D vec1(3.0f, -1.0f);
-    constexpr fgm::Vector2D vec2(9.0, 10.0);
+    const fgm::Vector2D vec1(3.0f, -1.0f);
+    const fgm::Vector2D vec2(9.0, 10.0);
 
-    [[maybe_unused]] constexpr fgm::Vector2D result = vec1 - vec2;
+    [[maybe_unused]] const fgm::Vector2D result = vec1 - vec2;
 
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
@@ -249,7 +249,7 @@ TEST(Vector2DSubtraction, MixedTypeSubtractionPromotesType)
 TEST(Vector2DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
     fgm::Vector2D vec1(3.0f, -1.0f);
-    constexpr fgm::Vector2D vec2(9.0, 10.0);
+    const fgm::Vector2D vec2(9.0, 10.0);
 
     vec1 -= vec2;
 
@@ -274,9 +274,9 @@ TEST(Vector2DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 /** @test Verify that scalar multiplication by zero returns a zero vector. */
 TEST(Vector2DScalarMultiplication, MultiplicationByZeroReturnsZeroVector)
 {
-    constexpr fgm::Vector2D vec(3.0f, 6.0f);
+    const fgm::Vector2D vec(3.0f, 6.0f);
 
-    constexpr fgm::Vector2D result = vec * 0;
+    const fgm::Vector2D result = vec * 0;
 
     EXPECT_VEC_ZERO(result);
 }
@@ -285,9 +285,9 @@ TEST(Vector2DScalarMultiplication, MultiplicationByZeroReturnsZeroVector)
 /** @test Verify that scalar multiplication by one returns original vector. */
 TEST(Vector2DScalarMultiplication, MultiplicationByOneReturnsOriginalVector)
 {
-    constexpr fgm::Vector2D vec(3.0f, 6.0f);
+    const fgm::Vector2D vec(3.0f, 6.0f);
 
-    constexpr fgm::Vector2D result = vec * 1;
+    const fgm::Vector2D result = vec * 1;
 
     EXPECT_VEC_EQ(vec, result);
 }
@@ -344,7 +344,7 @@ TYPED_TEST(Vector2DScalarMultiplication, VectorTimesEqualScalarIsTheSameVectorSc
  */
 TYPED_TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
 {
-    constexpr double scalar = 2.123456789123456;
+    const double scalar = 2.123456789123456;
 
     [[maybe_unused]] const fgm::Vector2D result = this->_vec * scalar;
 
@@ -359,7 +359,7 @@ TYPED_TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
 TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
     fgm::Vector2D vec(3.0f, -1.0f);
-    constexpr double scalar = 5.0;
+    const double scalar = 5.0;
     vec *= scalar;
 
     static_assert(std::is_same_v<decltype(vec)::value_type, float>);
@@ -373,8 +373,8 @@ TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
 TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
     fgm::Vector2D vec(3, -1);
-    constexpr double scalar = 2.5;
-    constexpr fgm::Vector2D expected(7, -2);
+    const double scalar = 2.5;
+    const fgm::Vector2D expected(7, -2);
 
     vec *= scalar;
 
@@ -402,7 +402,7 @@ TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  */
 TEST(Vector2DScalarDivision, FloatVectorDivisionByZeroReturnsInfinityVector)
 {
-    constexpr fgm::Vector2D vec(1.0f, 3.0f);
+    const fgm::Vector2D vec(1.0f, 3.0f);
     EXPECT_VEC_INF(vec / 0);
 }
 
@@ -413,7 +413,7 @@ TEST(Vector2DScalarDivision, FloatVectorDivisionByZeroReturnsInfinityVector)
  */
 TEST(Vector2DScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
 {
-    constexpr fgm::Vector2D vec(1.0, 3.0);
+    const fgm::Vector2D vec(1.0, 3.0);
     EXPECT_VEC_INF(vec / 0);
 }
 
@@ -457,10 +457,10 @@ TYPED_TEST(Vector2DScalarDivision, ScalarDivisionAssignment_ReturnsSameVectorInv
  */
 TEST(Vector2DScalarDivision, MixedType_ScalarDivision_PromotesType)
 {
-    constexpr fgm::Vector2D vec(15.0, -5.0);
-    constexpr double scalar = 5.0;
+    const fgm::Vector2D vec(15.0, -5.0);
+    const double scalar = 5.0;
 
-    [[maybe_unused]] constexpr fgm::Vector2D result = vec / scalar;
+    [[maybe_unused]] const fgm::Vector2D result = vec / scalar;
 
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
@@ -473,7 +473,7 @@ TEST(Vector2DScalarDivision, MixedType_ScalarDivision_PromotesType)
 TEST(Vector2DScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
 {
     fgm::Vector2D vec(15.0f, -5.0f);
-    constexpr double scalar = 5.0;
+    const double scalar = 5.0;
 
     vec /= scalar;
 
@@ -485,8 +485,8 @@ TEST(Vector2DScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteTy
 TEST(Vector2DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWithMinimalPrecisionLoss)
 {
     fgm::Vector2D vec(10, -30);
-    constexpr double scalar = 2.5;
-    constexpr fgm::Vector2D expected(4, -12);
+    const double scalar = 2.5;
+    const fgm::Vector2D expected(4, -12);
 
     vec /= scalar;
 
@@ -551,7 +551,7 @@ TYPED_TEST(Vector2DScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScale
  */
 TEST(Vector2DScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroVector)
 {
-    constexpr fgm::Vector2D vec(1, 3);
+    const fgm::Vector2D vec(1, 3);
     EXPECT_VEC_ZERO(fgm::Vector2D<int>::safeDiv(vec, 0));
 }
 
@@ -811,16 +811,16 @@ TYPED_TEST(Vector2DInversion, InvertsTheSignOfEachComponents)
 /** @test Verify that @ref fgm::Vector2D unary minus operator inverts each component of an infinity vector. */
 TEST(Vector2DInversion, InvertsSignOfInfinity)
 {
-    constexpr fgm::Vector2D infVec = {
+    const fgm::Vector2D infVec = {
         fgm::constants::INFINITY_F,
         -fgm::constants::INFINITY_F,
     };
-    constexpr fgm::Vector2D expected = {
+    const fgm::Vector2D expected = {
         -fgm::constants::INFINITY_F,
         fgm::constants::INFINITY_F,
     };
 
-    constexpr fgm::Vector2D<float> inverted = -infVec;
+    const fgm::Vector2D<float> inverted = -infVec;
 
     EXPECT_VEC_EQ(expected, inverted);
 }
@@ -829,12 +829,12 @@ TEST(Vector2DInversion, InvertsSignOfInfinity)
 /** @test Verify that @ref fgm::Vector2D unary minus follows IEEE 754 rules for NaN. */
 TEST(Vector2DInversion, NoOpOnNaNVectors)
 {
-    constexpr fgm::Vector2D nanVec = {
+    const fgm::Vector2D nanVec = {
         fgm::constants::NaN,
         fgm::constants::NaN,
     };
 
-    constexpr fgm::Vector2D<float> inverted = -nanVec;
+    const fgm::Vector2D<float> inverted = -nanVec;
 
     EXPECT_TRUE(std::isnan(inverted.x()));
     EXPECT_TRUE(std::isnan(inverted.y()));

@@ -15,8 +15,8 @@
 #include <common/Constants.h>
 
 
-constexpr auto NAN_F = fgm::constants::NaN;
-constexpr auto INF = fgm::constants::INFINITY_F;
+const auto NAN_F = fgm::constants::NaN;
+const auto INF = fgm::constants::INFINITY_F;
 
 
 
@@ -96,10 +96,10 @@ TYPED_TEST(Vector2DEquality, StaticWrapper_Equality_DifferentVectorsReturnsFalse
 /** @test Verify that @ref fgm::Vector2D::allEq follows IEEE 754 for NaN comparisons. */
 TEST(Vector2DEquality, NanEqualityReturnsFalse)
 {
-    constexpr fgm::Vector2D vecA = { NAN_F, NAN_F };
-    constexpr fgm::Vector2D vecB = { 1.0, -5.88874789 };
+    const fgm::Vector2D vecA = { NAN_F, NAN_F };
+    const fgm::Vector2D vecB = { 1.0, -5.88874789 };
 
-    constexpr bool equality = vecA.allEq(vecB);
+    const bool equality = vecA.allEq(vecB);
     EXPECT_FALSE(equality) << "NaN vector shouldn't equal anything!";
 }
 
@@ -107,10 +107,10 @@ TEST(Vector2DEquality, NanEqualityReturnsFalse)
 /** @test Verify that @ref fgm::Vector2D::allEq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector2DEquality, InfinityEquality_IdenticalVectorsReturnsTrue)
 {
-    constexpr fgm::Vector2D vecA = { INF, -INF };
-    constexpr fgm::Vector2D vecB = { INF, -INF };
+    const fgm::Vector2D vecA = { INF, -INF };
+    const fgm::Vector2D vecB = { INF, -INF };
 
-    constexpr bool equality = vecA.allEq(vecB);
+    const bool equality = vecA.allEq(vecB);
 
     EXPECT_TRUE(equality);
 }
@@ -119,8 +119,8 @@ TEST(Vector2DEquality, InfinityEquality_IdenticalVectorsReturnsTrue)
 /** @test Verify that @ref fgm::Vector2D::allEq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector2DEquality, InfinityEquality_DifferentVectorsReturnsFalse)
 {
-    constexpr fgm::Vector2D vecA = { INF, INF };
-    constexpr fgm::Vector2D vecB = { INF, -INF };
+    const fgm::Vector2D vecA = { INF, INF };
+    const fgm::Vector2D vecB = { INF, -INF };
 
     const bool equality = vecA.allEq(vecB);
 
@@ -140,10 +140,10 @@ TYPED_TEST(Vector2DEquality, EqualityOperator_IdenticalVectorsReturnsTrue)
 /** @test Verify that @ref fgm::Vector2D::allEq works for different vector types with identical components. */
 TYPED_TEST(Vector2DEquality, MixedType_Equality_IdenticalVectorsReturnsTrue)
 {
-    constexpr fgm::Vector2D vecA(1, 2);
-    constexpr fgm::Vector2D vecB(1.0, 2.0);
+    const fgm::Vector2D vecA(1, 2);
+    const fgm::Vector2D vecB(1.0, 2.0);
 
-    constexpr bool equality = vecA.allEq(vecB);
+    const bool equality = vecA.allEq(vecB);
 
     EXPECT_TRUE(equality);
 }
@@ -152,8 +152,8 @@ TYPED_TEST(Vector2DEquality, MixedType_Equality_IdenticalVectorsReturnsTrue)
 /** @test Verify that @ref fgm::Vector2D::allEq works for different vector types with different components. */
 TYPED_TEST(Vector2DEquality, MixedType_Equality_DifferentVectorsReturnsFalse)
 {
-    constexpr fgm::Vector2D vecA(5, 6);
-    constexpr fgm::Vector2D vecB(1.0, 2.0);
+    const fgm::Vector2D vecA(5, 6);
+    const fgm::Vector2D vecB(1.0, 2.0);
 
     const bool equality = vecA.allEq(vecB);
 
@@ -173,10 +173,10 @@ TYPED_TEST(Vector2DEquality, EqualityOperator_DifferentVectorsReturnsFalse)
 /** @test Verify that the equality operator works for bool vector with identical components. */
 TEST(Vector2DEquality, EqualityOperator_IdenticalBooleanVectorsReturnsTrue)
 {
-    constexpr fgm::Vector2D vecA(true, false);
-    constexpr fgm::Vector2D vecB(true, false);
+    const fgm::Vector2D vecA(true, false);
+    const fgm::Vector2D vecB(true, false);
 
-    constexpr bool equality = vecA == vecB;
+    const bool equality = vecA == vecB;
 
     EXPECT_TRUE(equality);
 }
@@ -185,10 +185,10 @@ TEST(Vector2DEquality, EqualityOperator_IdenticalBooleanVectorsReturnsTrue)
 /** @test Verify that the equality operator works for bool vector with different components. */
 TEST(Vector2DEquality, EqualityOperator_DifferentBooleanVectorsReturnsFalse)
 {
-    constexpr fgm::Vector2D vecA(true, false);
-    constexpr fgm::Vector2D vecB(true, true);
+    const fgm::Vector2D vecA(true, false);
+    const fgm::Vector2D vecB(true, true);
 
-    constexpr bool equality = vecA == vecB;
+    const bool equality = vecA == vecB;
 
     EXPECT_FALSE(equality);
 }
@@ -205,9 +205,9 @@ TYPED_TEST(Vector2DEquality, EqualityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::eq returns @ref fgm::Vector2D<bool> mask for different vectors. */
 TEST(Vector2DEquality, MixedType_EqualityReturnsCorrectBooleanMask)
 {
-    constexpr fgm::Vector2D vecA = { 1, 2 };
-    constexpr fgm::Vector2D vecB = { 1.0, 4.0 };
-    constexpr fgm::Vector2D expectedMask = { true, false };
+    const fgm::Vector2D vecA = { 1, 2 };
+    const fgm::Vector2D vecB = { 1.0, 4.0 };
+    const fgm::Vector2D expectedMask = { true, false };
 
     const fgm::Vector2D<bool> mask = vecA.eq(vecB);
 
@@ -218,9 +218,9 @@ TEST(Vector2DEquality, MixedType_EqualityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::eq follows IEEE 754 for NaN comparisons. */
 TEST(Vector2DEquality, NanEqualityReturnsFalseBooleanMask)
 {
-    constexpr fgm::Vector2D vecA = { NAN_F, NAN_F };
-    constexpr fgm::Vector2D vecB = { 1.0, -5.88874789 };
-    constexpr fgm::Vector2D expectedMask = { false, false };
+    const fgm::Vector2D vecA = { NAN_F, NAN_F };
+    const fgm::Vector2D vecB = { 1.0, -5.88874789 };
+    const fgm::Vector2D expectedMask = { false, false };
 
     const fgm::Vector2D mask = vecA.eq(vecB);
 
@@ -231,9 +231,9 @@ TEST(Vector2DEquality, NanEqualityReturnsFalseBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::eq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector2DEquality, InfinityEqualityReturnsCorrectBooleanMask)
 {
-    constexpr fgm::Vector2D vecA = { INF, -INF };
-    constexpr fgm::Vector2D<double> vecB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D };
-    constexpr fgm::Vector2D expectedMask = { true, false };
+    const fgm::Vector2D vecA = { INF, -INF };
+    const fgm::Vector2D<double> vecB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D };
+    const fgm::Vector2D expectedMask = { true, false };
 
     const fgm::Vector2D mask = vecA.eq(vecB);
 
@@ -307,8 +307,8 @@ TYPED_TEST(Vector2DEquality, StaticWrapper_Inequality_DifferentVectorsReturnsTru
 /** @test Verify that @ref fgm::Vector2D::anyNeq follows IEEE 754 for NaN comparisons. */
 TEST(Vector2DEquality, NanInequalityReturnsTrue)
 {
-    constexpr fgm::Vector2D vecA = { NAN_F, NAN_F };
-    constexpr fgm::Vector2D vecB = { 1.0, -5.88874789 };
+    const fgm::Vector2D vecA = { NAN_F, NAN_F };
+    const fgm::Vector2D vecB = { 1.0, -5.88874789 };
 
     const bool equality = vecA.anyNeq(vecB);
 
@@ -319,10 +319,10 @@ TEST(Vector2DEquality, NanInequalityReturnsTrue)
 /** @test Verify that @ref fgm::Vector2D::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector2DEquality, InfinityInequality_IdenticalVectorsReturnsFalse)
 {
-    constexpr fgm::Vector2D vecA = { INF, -INF };
-    constexpr fgm::Vector2D vecB = { INF, -INF };
+    const fgm::Vector2D vecA = { INF, -INF };
+    const fgm::Vector2D vecB = { INF, -INF };
 
-    constexpr bool equality = vecA.anyNeq(vecB);
+    const bool equality = vecA.anyNeq(vecB);
 
     EXPECT_FALSE(equality);
 }
@@ -331,8 +331,8 @@ TEST(Vector2DEquality, InfinityInequality_IdenticalVectorsReturnsFalse)
 /** @test Verify that @ref fgm::Vector2D::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector2DEquality, InfinityInequality_DifferentVectorsReturnsTrue)
 {
-    constexpr fgm::Vector2D vecA = { INF, INF };
-    constexpr fgm::Vector2D vecB = { INF, -INF };
+    const fgm::Vector2D vecA = { INF, INF };
+    const fgm::Vector2D vecB = { INF, -INF };
 
     const bool equality = vecA.anyNeq(vecB);
 
@@ -343,10 +343,10 @@ TEST(Vector2DEquality, InfinityInequality_DifferentVectorsReturnsTrue)
 /** @test Verify that @ref fgm::Vector2D::anyNeq works for different vector types with identical components. */
 TYPED_TEST(Vector2DEquality, MixedType_Inequality_IdenticalVectorsReturnsFalse)
 {
-    constexpr fgm::Vector2D vecA(1, 2);
-    constexpr fgm::Vector2D vecB(1.0, 2.0);
+    const fgm::Vector2D vecA(1, 2);
+    const fgm::Vector2D vecB(1.0, 2.0);
 
-    constexpr bool equality = vecA.anyNeq(vecB);
+    const bool equality = vecA.anyNeq(vecB);
 
     EXPECT_FALSE(equality);
 }
@@ -355,8 +355,8 @@ TYPED_TEST(Vector2DEquality, MixedType_Inequality_IdenticalVectorsReturnsFalse)
 /** @test Verify that @ref fgm::Vector2D::anyNeq works for different vector types with different components. */
 TYPED_TEST(Vector2DEquality, MixedType_Inequality_DifferentVectorsReturnsTrue)
 {
-    constexpr fgm::Vector2D vecA(5, 6);
-    constexpr fgm::Vector2D vecB(1.0, 2.0);
+    const fgm::Vector2D vecA(5, 6);
+    const fgm::Vector2D vecB(1.0, 2.0);
 
     const bool equality = vecA.anyNeq(vecB);
 
@@ -385,10 +385,10 @@ TYPED_TEST(Vector2DEquality, InEqualityOperator_DifferentVectorsReturnsTrue)
 /** @test Verify that the inequality operator works for @ref fgm::Vector2D<bool> with identical components. */
 TEST(Vector2DEquality, InequalityOperator_IdenticalBooleanVectorsReturnsFalse)
 {
-    constexpr fgm::Vector2D vecA(true, false);
-    constexpr fgm::Vector2D vecB(true, false);
+    const fgm::Vector2D vecA(true, false);
+    const fgm::Vector2D vecB(true, false);
 
-    constexpr bool equality = vecA != vecB;
+    const bool equality = vecA != vecB;
 
     EXPECT_FALSE(equality);
 }
@@ -397,10 +397,10 @@ TEST(Vector2DEquality, InequalityOperator_IdenticalBooleanVectorsReturnsFalse)
 /** @test Verify that the inequality operator works for @ref fgm::Vector2D<bool> with different components. */
 TEST(Vector2DEquality, InequalityOperator_DifferentBooleanVectorsReturnsTrue)
 {
-    constexpr fgm::Vector2D vecA(true, false);
-    constexpr fgm::Vector2D vecB(true, true);
+    const fgm::Vector2D vecA(true, false);
+    const fgm::Vector2D vecB(true, true);
 
-    constexpr bool equality = vecA != vecB;
+    const bool equality = vecA != vecB;
 
     EXPECT_TRUE(equality);
 }
@@ -418,9 +418,9 @@ TYPED_TEST(Vector2DEquality, InequalityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::neq returns @ref fgm::Vector2D<bool> mask for different vectors. */
 TEST(Vector2DEquality, MixedType_InequalityReturnsCorrectBooleanMask)
 {
-    constexpr fgm::Vector2D vecA = { 1, 2 };
-    constexpr fgm::Vector2D vecB = { 1.0, 4.0};
-    constexpr fgm::Vector2D expectedMask = { false, true };
+    const fgm::Vector2D vecA = { 1, 2 };
+    const fgm::Vector2D vecB = { 1.0, 4.0};
+    const fgm::Vector2D expectedMask = { false, true };
 
     const fgm::Vector2D<bool> mask = vecA.neq(vecB);
 
@@ -431,9 +431,9 @@ TEST(Vector2DEquality, MixedType_InequalityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::neq follows IEEE 754 for NaN comparisons. */
 TEST(Vector2DEquality, NanInequalityReturnsTrueBooleanMask)
 {
-    constexpr fgm::Vector2D vecA = { NAN_F, NAN_F };
-    constexpr fgm::Vector2D vecB = { 1.0, -5.88874789 };
-    constexpr fgm::Vector2D expectedMask = { true, true };
+    const fgm::Vector2D vecA = { NAN_F, NAN_F };
+    const fgm::Vector2D vecB = { 1.0, -5.88874789 };
+    const fgm::Vector2D expectedMask = { true, true };
 
     const fgm::Vector2D mask = vecA.neq(vecB);
 
@@ -444,9 +444,9 @@ TEST(Vector2DEquality, NanInequalityReturnsTrueBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::neq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector2DEquality, InfinityInequalityReturnsCorrectBooleanMask)
 {
-    constexpr fgm::Vector2D vecA = { INF, -INF };
-    constexpr fgm::Vector2D vecB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D };
-    constexpr fgm::Vector2D expectedMask = { false, true };
+    const fgm::Vector2D vecA = { INF, -INF };
+    const fgm::Vector2D vecB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D };
+    const fgm::Vector2D expectedMask = { false, true };
 
     const fgm::Vector2D mask = vecA.neq(vecB);
 

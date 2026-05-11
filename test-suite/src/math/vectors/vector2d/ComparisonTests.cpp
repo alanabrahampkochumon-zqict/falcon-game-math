@@ -104,11 +104,11 @@ TYPED_TEST(Vector2DComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWit
  */
 TEST(Vector2DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector2D vec(1.2, 4.5);
-    constexpr fgm::Vector2D infVec(INF, -INF);
-    constexpr fgm::Vector2D expected(false, true);
+    const fgm::Vector2D vec(1.2, 4.5);
+    const fgm::Vector2D infVec(INF, -INF);
+    const fgm::Vector2D expected(false, true);
 
-    constexpr fgm::Vector2D<bool> mask = vec.gt(infVec);
+    const fgm::Vector2D<bool> mask = vec.gt(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -120,11 +120,11 @@ TEST(Vector2DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorr
  */
 TEST(Vector2DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector2D vec(1.2f, 4.5f);
-    constexpr fgm::Vector2D infVec(NAN_F, NAN_F);
-    constexpr fgm::Vector2D expected(false, false);
+    const fgm::Vector2D vec(1.2f, 4.5f);
+    const fgm::Vector2D infVec(NAN_F, NAN_F);
+    const fgm::Vector2D expected(false, false);
 
-    constexpr fgm::Vector2D<bool> mask = vec.gt(infVec);
+    const fgm::Vector2D<bool> mask = vec.gt(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -137,12 +137,12 @@ TEST(Vector2DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectVa
 TEST(Vector2DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    constexpr fgm::Vector2D vecA(1.2, 7.5);
-    constexpr fgm::Vector2D vecB(5, 7);
-    constexpr fgm::Vector2D expected(false, true);
+    const fgm::Vector2D vecA(1.2, 7.5);
+    const fgm::Vector2D vecB(5, 7);
+    const fgm::Vector2D expected(false, true);
 
     // When compared with greater than or equal
-    constexpr fgm::Vector2D<bool> mask = vecA.gt(vecB);
+    const fgm::Vector2D<bool> mask = vecA.gt(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
@@ -206,11 +206,11 @@ TYPED_TEST(Vector2DComparison,
  */
 TEST(Vector2DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector2D vec(1.2f, 6.8f);
-    constexpr fgm::Vector2D infVec(INF, -INF);
-    constexpr fgm::Vector2D expected(false, true);
+    const fgm::Vector2D vec(1.2f, 6.8f);
+    const fgm::Vector2D infVec(INF, -INF);
+    const fgm::Vector2D expected(false, true);
 
-    constexpr fgm::Vector2D<bool> mask = vec.gte(infVec);
+    const fgm::Vector2D<bool> mask = vec.gte(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -222,11 +222,11 @@ TEST(Vector2DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorW
  */
 TEST(Vector2DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector2D vec(1.2, 6.8);
-    constexpr fgm::Vector2D infVec(NAN_F, -5.9f);
-    constexpr fgm::Vector2D expected(false, true);
+    const fgm::Vector2D vec(1.2, 6.8);
+    const fgm::Vector2D infVec(NAN_F, -5.9f);
+    const fgm::Vector2D expected(false, true);
 
-    constexpr fgm::Vector2D<bool> mask = vec.gte(infVec);
+    const fgm::Vector2D<bool> mask = vec.gte(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -239,12 +239,12 @@ TEST(Vector2DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
 TEST(Vector2DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    constexpr fgm::Vector2D vecA(1.2, 7.5);
-    constexpr fgm::Vector2D vecB(5, 7);
-    constexpr fgm::Vector2D expected(false, true);
+    const fgm::Vector2D vecA(1.2, 7.5);
+    const fgm::Vector2D vecB(5, 7);
+    const fgm::Vector2D expected(false, true);
 
     // When compared with greater or equal than
-    constexpr fgm::Vector2D<bool> mask = vecA.gte(vecB);
+    const fgm::Vector2D<bool> mask = vecA.gte(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
@@ -307,11 +307,11 @@ TYPED_TEST(Vector2DComparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithEl
  */
 TEST(Vector2DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector2D vec(1.2, 6.8);
-    constexpr fgm::Vector2D infVec(INF, -INF);
-    constexpr fgm::Vector2D expected(true, false);
+    const fgm::Vector2D vec(1.2, 6.8);
+    const fgm::Vector2D infVec(INF, -INF);
+    const fgm::Vector2D expected(true, false);
 
-    constexpr fgm::Vector2D<bool> mask = vec.lt(infVec);
+    const fgm::Vector2D<bool> mask = vec.lt(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -323,9 +323,9 @@ TEST(Vector2DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrect
  */
 TEST(Vector2DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector2D vec(1.2f, 6.8f);
-    constexpr fgm::Vector2D nanVec(NAN_F, -5.9f);
-    constexpr fgm::Vector2D expected(false, false);
+    const fgm::Vector2D vec(1.2f, 6.8f);
+    const fgm::Vector2D nanVec(NAN_F, -5.9f);
+    const fgm::Vector2D expected(false, false);
 
 #if defined(_MSC_VER) && !defined(__clang__)
     // MSVC constant evaluator incorrectly returns true for NAN_F comparisons.
@@ -335,7 +335,7 @@ TEST(Vector2DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValue
     // Resharper restore all
 #else
     // Clang and GCC follow IEEE 754 strictly at compile-time.
-    constexpr fgm::Vector2D<bool> mask = vec.lt(nanVec);
+    const fgm::Vector2D<bool> mask = vec.lt(nanVec);
 #endif
 
     EXPECT_VEC_EQ(expected, mask);
@@ -349,12 +349,12 @@ TEST(Vector2DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValue
 TEST(Vector2DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    constexpr fgm::Vector2D vecA(1.2, 7.5);
-    constexpr fgm::Vector2D vecB(5, 7);
-    constexpr fgm::Vector2D expected(true, false);
+    const fgm::Vector2D vecA(1.2, 7.5);
+    const fgm::Vector2D vecB(5, 7);
+    const fgm::Vector2D expected(true, false);
 
     // When compared with less than or equal
-    constexpr fgm::Vector2D<bool> mask = vecA.lt(vecB);
+    const fgm::Vector2D<bool> mask = vecA.lt(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
@@ -417,11 +417,11 @@ TYPED_TEST(Vector2DComparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVecto
  */
 TEST(Vector2DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector2D vec(1.2, 6.8);
-    constexpr fgm::Vector2D infVec(INF, -INF);
-    constexpr fgm::Vector2D expected(true, false);
+    const fgm::Vector2D vec(1.2, 6.8);
+    const fgm::Vector2D infVec(INF, -INF);
+    const fgm::Vector2D expected(true, false);
 
-    constexpr fgm::Vector2D<bool> mask = vec.lte(infVec);
+    const fgm::Vector2D<bool> mask = vec.lte(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -433,9 +433,9 @@ TEST(Vector2DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWith
  */
 TEST(Vector2DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector2D vec(1.2f, 6.8f);
-    constexpr fgm::Vector2D nanVec(NAN_F, -5.9f);
-    constexpr fgm::Vector2D expected(false, false);
+    const fgm::Vector2D vec(1.2f, 6.8f);
+    const fgm::Vector2D nanVec(NAN_F, -5.9f);
+    const fgm::Vector2D expected(false, false);
 
 #if defined(_MSC_VER) && !defined(__clang__)
     // MSVC constant evaluator incorrectly returns true for NAN_F comparisons.
@@ -445,7 +445,7 @@ TEST(Vector2DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
     // Resharper restore all
 #else
     // Clang and GCC follow IEEE 754 strictly at compile-time.
-    constexpr fgm::Vector2D<bool> mask = vec.lte(nanVec);
+    const fgm::Vector2D<bool> mask = vec.lte(nanVec);
 #endif
 
     EXPECT_VEC_EQ(expected, mask);
@@ -459,12 +459,12 @@ TEST(Vector2DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
 TEST(Vector2DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    constexpr fgm::Vector2D vecA(1.2, 7.5);
-    constexpr fgm::Vector2D vecB(5, 7);
-    constexpr fgm::Vector2D expected(true, false);
+    const fgm::Vector2D vecA(1.2, 7.5);
+    const fgm::Vector2D vecB(5, 7);
+    const fgm::Vector2D expected(true, false);
 
     // When compared with less than or equal
-    constexpr fgm::Vector2D<bool> mask = vecA.lte(vecB);
+    const fgm::Vector2D<bool> mask = vecA.lte(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);

@@ -143,8 +143,8 @@ TYPED_TEST(Vector2DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZe
 TEST(Vector2DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
 {
     // Given two opposite vectors
-    constexpr fgm::Vector2D vecA(-1.0, 0.0);
-    constexpr fgm::Vector2D vecB(1.0, 0.0);
+    const fgm::Vector2D vecA(-1.0, 0.0);
+    const fgm::Vector2D vecB(1.0, 0.0);
 
     // When dot with each other
     const double dotProduct = vecA.dot(vecB);
@@ -161,8 +161,8 @@ TEST(Vector2DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
 TEST(Vector2DDotProduct, MixedTypeDotProductPromotesType)
 {
     // Given two vectors of different type
-    constexpr fgm::Vector2D vecA(7, 13);
-    constexpr fgm::Vector2D vecB(1.123456789, 2.123456789);
+    const fgm::Vector2D vecA(7, 13);
+    const fgm::Vector2D vecB(1.123456789, 2.123456789);
 
     // When dot with each other
     const auto dotProduct = vecA.dot(vecB);
@@ -184,9 +184,9 @@ TEST(Vector2DDotProduct, MixedTypeDotProductPromotesType)
 /** @brief Verify that the cross product of vector with self is a zero-vector. */
 TEST(Vector2DCrossProduct, VectorCrossItselfReturnsZeroVector)
 {
-    constexpr fgm::Vector2D vec(2.0f, 1.0f);
+    const fgm::Vector2D vec(2.0f, 1.0f);
 
-    constexpr float crossProduct = vec.cross(vec);
+    const float crossProduct = vec.cross(vec);
 
     EXPECT_FLOAT_EQ(0.0f, crossProduct);
 }
@@ -225,10 +225,10 @@ TYPED_TEST(Vector2DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsRetur
 /** @brief Verify that the cross product between two differently typed vectors promote type. */
 TEST(Vector2DCrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
 {
-    constexpr fgm::Vector2D vecA(2.0f, 3.0f);
-    constexpr fgm::Vector2D vecB(5.0, 6.0);
+    const fgm::Vector2D vecA(2.0f, 3.0f);
+    const fgm::Vector2D vecB(5.0, 6.0);
 
-    [[maybe_unused]] constexpr auto crossProduct = vecA.cross(vecB);
+    [[maybe_unused]] const auto crossProduct = vecA.cross(vecB);
     static_assert(std::is_same_v<decltype(crossProduct), const double>);
 }
 

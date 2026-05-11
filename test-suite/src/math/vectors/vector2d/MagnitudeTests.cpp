@@ -65,7 +65,7 @@ TYPED_TEST_SUITE(Vector2DUncleanMagnitude, SupportedArithmeticTypes);
 /** @test Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vector2DMagnitude, ZeroVectorReturnsZero)
 {
-    constexpr fgm::Vector2D vec(0.0f, 0.0f);
+    const fgm::Vector2D vec(0.0f, 0.0f);
 
     EXPECT_FLOAT_EQ(0.0f, vec.mag());
 }
@@ -74,7 +74,7 @@ TEST(Vector2DMagnitude, ZeroVectorReturnsZero)
 /** @test Verify that taking the magnitude of a one vector returns non-unit scalar. */
 TEST(Vector2DMagnitude, OneComponentVectorReturnsNonUnitScalar)
 {
-    constexpr fgm::Vector2D vec(1.0f, 1.0f);
+    const fgm::Vector2D vec(1.0f, 1.0f);
 
     EXPECT_NE(1.0f, vec.mag());
 }

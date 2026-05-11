@@ -34,7 +34,7 @@ TYPED_TEST_SUITE(Vector2DInitialization, SupportedTypes);
 /** @test Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector2DInitialization, EmptyConstructorInitializesZeroVector)
 {
-    constexpr fgm::Vector2D<TypeParam> vec;
+    const fgm::Vector2D<TypeParam> vec;
 
     EXPECT_VEC_ZERO(vec);
 }
@@ -43,10 +43,10 @@ TYPED_TEST(Vector2DInitialization, EmptyConstructorInitializesZeroVector)
 /** @test Verify that the parameterized constructor correctly assigns components from the provided arguments. */
 TYPED_TEST(Vector2DInitialization, ConstructorParametersInitializesVector)
 {
-    constexpr TypeParam a = static_cast<TypeParam>(3);
-    constexpr TypeParam b = static_cast<TypeParam>(1);
+    const TypeParam a = static_cast<TypeParam>(3);
+    const TypeParam b = static_cast<TypeParam>(1);
 
-    constexpr fgm::Vector2D<TypeParam> vec(a, b);
+    const fgm::Vector2D<TypeParam> vec(a, b);
 
     EXPECT_VEC_CONTAINS(vec, a, b);
 }

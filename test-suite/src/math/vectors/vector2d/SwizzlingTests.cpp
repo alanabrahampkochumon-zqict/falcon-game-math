@@ -97,10 +97,10 @@ namespace
 /** @brief Verify that swizzling returns shuffled vector across different numeric. */
 TYPED_TEST(Vector2DSwizzlingTest, SwizzlingWorksAcrossDifferentTypes)
 {
-    constexpr fgm::Vector2D vector(TypeParam(1), TypeParam(2));
-    constexpr fgm::Vector2D expectedSwizzling(TypeParam(2), TypeParam(1));
+    const fgm::Vector2D vector(TypeParam(1), TypeParam(2));
+    const fgm::Vector2D expectedSwizzling(TypeParam(2), TypeParam(1));
 
-    constexpr auto swizzledVector = vector.template swizzle<Y, X>();
+    const auto swizzledVector = vector.template swizzle<Y, X>();
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }
@@ -109,10 +109,10 @@ TYPED_TEST(Vector2DSwizzlingTest, SwizzlingWorksAcrossDifferentTypes)
 /** @brief Verify that swizzling returns shuffled vector for boolean vector. */
 TEST(Vector2DSwizzlingTest, SwizzlingWorksForBooleanVector)
 {
-    constexpr fgm::Vector2D vector(true, false);
-    constexpr fgm::Vector2D expectedSwizzling(false, true);
+    const fgm::Vector2D vector(true, false);
+    const fgm::Vector2D expectedSwizzling(false, true);
 
-    constexpr auto swizzledVector = vector.swizzle<Y, X>();
+    const auto swizzledVector = vector.swizzle<Y, X>();
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }
@@ -187,10 +187,10 @@ namespace
  */
 TYPED_TEST(Vector2DSwizzlingTest, StaticWrapper_SwizzlingWorksAcrossDifferentTypes)
 {
-    constexpr fgm::Vector2D vector(TypeParam(1), TypeParam(2));
-    constexpr fgm::Vector2D expectedSwizzling(TypeParam(2), TypeParam(1));
+    const fgm::Vector2D vector(TypeParam(1), TypeParam(2));
+    const fgm::Vector2D expectedSwizzling(TypeParam(2), TypeParam(1));
 
-    constexpr auto swizzledVector = fgm::Vector2D<TypeParam>::template swizzle<Y, X>(vector);
+    const auto swizzledVector = fgm::Vector2D<TypeParam>::template swizzle<Y, X>(vector);
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }
@@ -202,10 +202,10 @@ TYPED_TEST(Vector2DSwizzlingTest, StaticWrapper_SwizzlingWorksAcrossDifferentTyp
  */
 TEST(Vector2DSwizzlingTest, StaticWrapper_SwizzlingWorksForBooleanVector)
 {
-    constexpr fgm::Vector2D vector(true, false);
-    constexpr fgm::Vector2D expectedSwizzling(false, true);
+    const fgm::Vector2D vector(true, false);
+    const fgm::Vector2D expectedSwizzling(false, true);
 
-    constexpr auto swizzledVector = fgm::Vector2D<bool>::template swizzle<Y, X>(vector);
+    const auto swizzledVector = fgm::Vector2D<bool>::template swizzle<Y, X>(vector);
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }

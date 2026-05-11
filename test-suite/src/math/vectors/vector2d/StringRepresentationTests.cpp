@@ -46,7 +46,7 @@ class Vector2DStringRepresentationTests: public ::testing::Test
 /** @test Verify that the string representation matches the expected format for integral types. */
 TEST_F(Vector2DStringRepresentationTests, IntegralRepresentation)
 {
-    constexpr fgm::Vector2D vec(1, 2);
+    const fgm::Vector2D vec(1, 2);
     std::stringstream ss;
 
     ss << vec;
@@ -61,7 +61,7 @@ TEST_F(Vector2DStringRepresentationTests, IntegralRepresentation)
  */
 TEST_F(Vector2DStringRepresentationTests, FloatRepresentation)
 {
-    constexpr fgm::Vector2D vec(1.2345f, 2.0f);
+    const fgm::Vector2D vec(1.2345f, 2.0f);
     std::stringstream ss;
 
     ss << vec;
@@ -76,7 +76,7 @@ TEST_F(Vector2DStringRepresentationTests, FloatRepresentation)
  */
 TEST_F(Vector2DStringRepresentationTests, DoubleRepresentation)
 {
-    constexpr fgm::Vector2D vec(1.2345789777, 2.65831);
+    const fgm::Vector2D vec(1.2345789777, 2.65831);
     std::stringstream ss;
 
     ss << vec;

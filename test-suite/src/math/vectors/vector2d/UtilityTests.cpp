@@ -74,7 +74,7 @@ INSTANTIATE_TEST_SUITE_P(
 /** @test Verify that @ref std::Vector2D::hasInf returns False for integral types. */
 TYPED_TEST(Vector2DIntegralUtility, HasInf_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vector2D(value, value).hasInf());
 }
 
@@ -93,7 +93,7 @@ TEST_P(Vector2DInfChecker, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 /** @test Verify that the static variant of @ref std::Vector2D::hasInf returns False for integral types. */
 TYPED_TEST(Vector2DIntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vector2D<TypeParam>::hasInf(fgm::Vector2D(value, value)));
 }
 
@@ -125,7 +125,7 @@ INSTANTIATE_TEST_SUITE_P(
 /** @test Verify that @ref std::Vector2D::hasNaN returns False for integral types. */
 TYPED_TEST(Vector2DIntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vector2D(value, value).hasNaN());
 }
 
@@ -144,7 +144,7 @@ TEST_P(Vector2DNaNChecker, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 /** @test Verify that the static variant of @ref std::Vector2D::hasNaN returns False for integral types. */
 TYPED_TEST(Vector2DIntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vector2D<TypeParam>::hasNaN(fgm::Vector2D(value, value)));
 }
 

@@ -23,9 +23,9 @@
  */
 TEST(Vector2DConversionConstructor, PromotesType)
 {
-    constexpr fgm::Vector2D vec1(3.0f, 1.0f);
+    const fgm::Vector2D vec1(3.0f, 1.0f);
 
-    [[maybe_unused]] constexpr fgm::Vector2D<double> vec2(vec1);
+    [[maybe_unused]] const fgm::Vector2D<double> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, double>);
 }
@@ -35,7 +35,7 @@ TEST(Vector2DConversionConstructor, PromotesType)
 TEST(Vector2DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float vector
-    constexpr fgm::Vector2D vec1(3.0f, 1.0f);
+    const fgm::Vector2D vec1(3.0f, 1.0f);
 
     // When converted to a double vector
     fgm::Vector2D<double> vec2(vec1);
@@ -55,9 +55,9 @@ TEST(Vector2DConversionConstructor, ReturnsNewInstance)
  */
 TEST(Vector2DConversionConstructor, DemotesType)
 {
-    constexpr fgm::Vector2D vec1(3.0, 1.0);
+    const fgm::Vector2D vec1(3.0, 1.0);
 
-    [[maybe_unused]] constexpr fgm::Vector2D<float> vec2(vec1);
+    [[maybe_unused]] const fgm::Vector2D<float> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, float>);
 }

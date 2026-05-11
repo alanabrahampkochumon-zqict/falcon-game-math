@@ -33,7 +33,7 @@ TYPED_TEST_SUITE(Vector2DConstants, SupportedArithmeticTypes);
 /** @test Verify that @ref fgm::vec2d::one returns a 2D vector with unit components. */
 TYPED_TEST(Vector2DConstants, One_ReturnsVectorWithUnitComponents)
 {
-    constexpr TypeParam one = TypeParam(1);
+    const TypeParam one = TypeParam(1);
     EXPECT_VEC_CONTAINS(fgm::vec2d::one<TypeParam>, one, one);
 }
 
@@ -48,7 +48,7 @@ TYPED_TEST(Vector2DConstants, Zero_ReturnsVectorWithZeroComponents)
 /** @test Verify that @ref fgm::vec2d::inf<float> returns a 2D vector with infinity components. */
 TEST(Vector2DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 {
-    constexpr auto inf = fgm::vec2d::inf<float>;
+    const auto inf = fgm::vec2d::inf<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
     EXPECT_VEC2_POS_INF(inf)
 }
@@ -57,7 +57,7 @@ TEST(Vector2DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 /** @test Verify that @ref fgm::vec2d::inf<double> returns a 2D vector with infinity components. */
 TEST(Vector2DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 {
-    constexpr auto inf = fgm::vec2d::inf<double>;
+    const auto inf = fgm::vec2d::inf<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
     EXPECT_VEC2_POS_INF(inf)
 }
@@ -66,7 +66,7 @@ TEST(Vector2DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 /** @test Verify that @ref fgm::vec2d::infN<float> returns a 2D vector with negative infinity components. */
 TEST(Vector2DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
-    constexpr auto inf = fgm::vec2d::infN<float>;
+    const auto inf = fgm::vec2d::infN<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
     EXPECT_VEC2_NEG_INF(inf)
 }
@@ -75,7 +75,7 @@ TEST(Vector2DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityC
 /** @test Verify that @ref fgm::vec2d::infN<double> returns a 2D vector with negative infinity components. */
 TEST(Vector2DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
-    constexpr auto inf = fgm::vec2d::infN<double>;
+    const auto inf = fgm::vec2d::infN<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
     EXPECT_VEC2_NEG_INF(inf)
 }
@@ -84,7 +84,7 @@ TEST(Vector2DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 /** @test Verify that @ref fgm::vec2d::infN<float> returns a 2D vector with NaN components. */
 TEST(Vector2DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
-    constexpr auto nan = fgm::vec2d::nan<float>;
+    const auto nan = fgm::vec2d::nan<float>;
     EXPECT_TRUE(std::isnan(nan.x()));
     EXPECT_TRUE(std::isnan(nan.y()));
 }
@@ -93,7 +93,7 @@ TEST(Vector2DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 /** @test Verify that @ref fgm::vec2d::infN<double> returns a 2D vector with NaN components. */
 TEST(Vector2DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
-    constexpr auto nan = fgm::vec2d::nan<double>;
+    const auto nan = fgm::vec2d::nan<double>;
     EXPECT_TRUE(std::isnan(nan.x()));
     EXPECT_TRUE(std::isnan(nan.y()));
 }
@@ -102,7 +102,7 @@ TEST(Vector2DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 /** @test Verify that @ref fgm::vec2d::x returns a unit vector aligned with x-axis. */
 TYPED_TEST(Vector2DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 {
-    constexpr auto x = fgm::vec2d::x<TypeParam>;
+    const auto x = fgm::vec2d::x<TypeParam>;
     EXPECT_VEC_CONTAINS(x, this->_one, this->_zero);
 }
 
@@ -110,7 +110,7 @@ TYPED_TEST(Vector2DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 /** @test Verify that @ref fgm::vec2d::y returns a unit vector aligned with y-axis. */
 TYPED_TEST(Vector2DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 {
-    constexpr auto y = fgm::vec2d::y<TypeParam>;
+    const auto y = fgm::vec2d::y<TypeParam>;
     EXPECT_VEC_CONTAINS(y, this->_zero, this->_one);
 }
 
