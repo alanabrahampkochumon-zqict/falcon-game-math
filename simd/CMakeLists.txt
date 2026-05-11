@@ -3,7 +3,7 @@ add_library(FalconSIMD INTERFACE)
 
 set(IncludeDirectory "include/")
 
-set(DocsDir "docs/")
+set(DocsDir "include/")
 set(DocFiles "DoxygenGroups.h")
 list(TRANSFORM DocFiles PREPEND ${DocsDir})
 
