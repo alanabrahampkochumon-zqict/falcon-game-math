@@ -34,7 +34,7 @@ TYPED_TEST_SUITE(Vector3DInitialization, SupportedTypes);
 /** @test Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector3DInitialization, EmptyConstructorInitializesZeroVector)
 {
-    constexpr fgm::Vector3D<TypeParam> vec;
+    const fgm::Vector3D<TypeParam> vec;
 
     EXPECT_VEC_ZERO(vec);
 }
@@ -43,11 +43,11 @@ TYPED_TEST(Vector3DInitialization, EmptyConstructorInitializesZeroVector)
 /** @test Verify that the parameterized constructor correctly assigns components from the provided arguments. */
 TYPED_TEST(Vector3DInitialization, ConstructorParametersInitializesVector)
 {
-    constexpr TypeParam a = static_cast<TypeParam>(3);
-    constexpr TypeParam b = static_cast<TypeParam>(1);
-    constexpr TypeParam c = static_cast<TypeParam>(6);
+    const TypeParam a = static_cast<TypeParam>(3);
+    const TypeParam b = static_cast<TypeParam>(1);
+    const TypeParam c = static_cast<TypeParam>(6);
 
-    constexpr fgm::Vector3D<TypeParam> vec(a, b, c);
+    const fgm::Vector3D<TypeParam> vec(a, b, c);
 
     EXPECT_VEC_CONTAINS(vec, a, b, c);
 }
@@ -59,12 +59,12 @@ TYPED_TEST(Vector3DInitialization, ConstructorParametersInitializesVector)
  */
 TYPED_TEST(Vector3DInitialization, 2DVectorAndScalarCanInitializeA3DVector)
 {
-    constexpr TypeParam a = static_cast<TypeParam>(3);
-    constexpr TypeParam b = static_cast<TypeParam>(1);
-    constexpr fgm::Vector2D<TypeParam> vec1(a, b);
-    constexpr TypeParam scalar = static_cast<TypeParam>(6);
+    const TypeParam a = static_cast<TypeParam>(3);
+    const TypeParam b = static_cast<TypeParam>(1);
+    const fgm::Vector2D<TypeParam> vec1(a, b);
+    const TypeParam scalar = static_cast<TypeParam>(6);
 
-    constexpr fgm::Vector3D<TypeParam> vec(vec1, scalar);
+    const fgm::Vector3D<TypeParam> vec(vec1, scalar);
 
     EXPECT_VEC_CONTAINS(vec, a, b, scalar);
 }
@@ -76,12 +76,12 @@ TYPED_TEST(Vector3DInitialization, 2DVectorAndScalarCanInitializeA3DVector)
  */
 TYPED_TEST(Vector3DInitialization, ScalarAnd2DVectorCanInitializeA3DVector)
 {
-    constexpr TypeParam scalar = static_cast<TypeParam>(3);
-    constexpr TypeParam a = static_cast<TypeParam>(1);
-    constexpr TypeParam b = static_cast<TypeParam>(6);
-    constexpr fgm::Vector2D<TypeParam> vec1(a, b);
+    const TypeParam scalar = static_cast<TypeParam>(3);
+    const TypeParam a = static_cast<TypeParam>(1);
+    const TypeParam b = static_cast<TypeParam>(6);
+    const fgm::Vector2D<TypeParam> vec1(a, b);
 
-    constexpr fgm::Vector3D<TypeParam> vec(scalar, vec1);
+    const fgm::Vector3D<TypeParam> vec(scalar, vec1);
 
     EXPECT_VEC_CONTAINS(vec, scalar, a, b);
 }

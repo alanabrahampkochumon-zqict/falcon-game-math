@@ -167,10 +167,10 @@ TYPED_TEST(Vector3DAddition, PlusEqualsOperator_ReturnsSameVectorWithSum)
  */
 TEST(Vector3DAddition, MixedTypeAdditionPromotesType)
 {
-    constexpr fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D vec2(9.0, -5.0, 10.0);
+    const fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
+    const fgm::Vector3D vec2(9.0, -5.0, 10.0);
 
-    [[maybe_unused]] constexpr fgm::Vector3D result = vec1 + vec2;
+    [[maybe_unused]] const fgm::Vector3D result = vec1 + vec2;
 
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
@@ -183,7 +183,7 @@ TEST(Vector3DAddition, MixedTypeAdditionPromotesType)
 TEST(Vector3DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
 {
     fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D vec2(9.0, -5.0, 10.0);
+    const fgm::Vector3D vec2(9.0, -5.0, 10.0);
 
     vec1 += vec2;
 
@@ -235,10 +235,10 @@ TYPED_TEST(Vector3DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
  */
 TEST(Vector3DSubtraction, MixedTypeSubtractionPromotesType)
 {
-    constexpr fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D vec2(9.0, -5.0, 10.0);
+    const fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
+    const fgm::Vector3D vec2(9.0, -5.0, 10.0);
 
-    [[maybe_unused]] constexpr fgm::Vector3D result = vec1 - vec2;
+    [[maybe_unused]] const fgm::Vector3D result = vec1 - vec2;
 
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
@@ -251,7 +251,7 @@ TEST(Vector3DSubtraction, MixedTypeSubtractionPromotesType)
 TEST(Vector3DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
     fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D vec2(9.0, -5.0, 10.0);
+    const fgm::Vector3D vec2(9.0, -5.0, 10.0);
 
     vec1 -= vec2;
 
@@ -276,9 +276,9 @@ TEST(Vector3DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 /** @test Verify that scalar multiplication by zero returns a zero vector. */
 TEST(Vector3DScalarMultiplication, MultiplicationByZeroReturnsZeroVector)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
-    constexpr fgm::Vector3D result = vec * 0;
+    const fgm::Vector3D result = vec * 0;
 
     EXPECT_VEC_ZERO(result);
 }
@@ -287,9 +287,9 @@ TEST(Vector3DScalarMultiplication, MultiplicationByZeroReturnsZeroVector)
 /** @test Verify that scalar multiplication by one returns original vector. */
 TEST(Vector3DScalarMultiplication, MultiplicationByOneReturnsOriginalVector)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
-    constexpr fgm::Vector3D result = vec * 1;
+    const fgm::Vector3D result = vec * 1;
 
     EXPECT_VEC_EQ(vec, result);
 }
@@ -346,7 +346,7 @@ TYPED_TEST(Vector3DScalarMultiplication, VectorTimesEqualScalarIsTheSameVectorSc
  */
 TYPED_TEST(Vector3DScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
 {
-    constexpr double scalar = 2.123456789123456;
+    const double scalar = 2.123456789123456;
 
     [[maybe_unused]] const fgm::Vector3D result = this->_vec * scalar;
 
@@ -361,7 +361,7 @@ TYPED_TEST(Vector3DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
 TEST(Vector3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
     fgm::Vector3D vec(3.0f, 0.0f, -1.0f);
-    constexpr double scalar = 5.0;
+    const double scalar = 5.0;
     vec *= scalar;
 
     static_assert(std::is_same_v<decltype(vec)::value_type, float>);
@@ -375,8 +375,8 @@ TEST(Vector3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
 TEST(Vector3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
     fgm::Vector3D vec(3, 0, -1);
-    constexpr double scalar = 2.5;
-    constexpr fgm::Vector3D expected(7, 0, -2);
+    const double scalar = 2.5;
+    const fgm::Vector3D expected(7, 0, -2);
 
     vec *= scalar;
 
@@ -404,7 +404,7 @@ TEST(Vector3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  */
 TEST(Vector3DScalarDivision, FloatVectorDivisionByZeroReturnsInfinityVector)
 {
-    constexpr fgm::Vector3D vec(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D vec(1.0f, 2.0f, 3.0f);
     EXPECT_VEC_INF(vec / 0);
 }
 
@@ -415,7 +415,7 @@ TEST(Vector3DScalarDivision, FloatVectorDivisionByZeroReturnsInfinityVector)
  */
 TEST(Vector3DScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
 {
-    constexpr fgm::Vector3D vec(1.0, 2.0, 3.0);
+    const fgm::Vector3D vec(1.0, 2.0, 3.0);
     EXPECT_VEC_INF(vec / 0);
 }
 
@@ -459,10 +459,10 @@ TYPED_TEST(Vector3DScalarDivision, ScalarDivisionAssignment_ReturnsSameVectorInv
  */
 TEST(Vector3DScalarDivision, MixedType_ScalarDivision_PromotesType)
 {
-    constexpr fgm::Vector3D vec(15.0, 0.0, -5.0);
-    constexpr double scalar = 5.0;
+    const fgm::Vector3D vec(15.0, 0.0, -5.0);
+    const double scalar = 5.0;
 
-    [[maybe_unused]] constexpr fgm::Vector3D result = vec / scalar;
+    [[maybe_unused]] const fgm::Vector3D result = vec / scalar;
 
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
@@ -475,7 +475,7 @@ TEST(Vector3DScalarDivision, MixedType_ScalarDivision_PromotesType)
 TEST(Vector3DScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
 {
     fgm::Vector3D vec(15.0f, 0.0f, -5.0f);
-    constexpr double scalar = 5.0;
+    const double scalar = 5.0;
 
     vec /= scalar;
 
@@ -487,8 +487,8 @@ TEST(Vector3DScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteTy
 TEST(Vector3DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWithMinimalPrecisionLoss)
 {
     fgm::Vector3D vec(10, 25, -30);
-    constexpr double scalar = 2.5;
-    constexpr fgm::Vector3D expected(4, 10, -12);
+    const double scalar = 2.5;
+    const fgm::Vector3D expected(4, 10, -12);
 
     vec /= scalar;
 
@@ -553,7 +553,7 @@ TYPED_TEST(Vector3DScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScale
  */
 TEST(Vector3DScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroVector)
 {
-    constexpr fgm::Vector3D vec(1, 2, 3);
+    const fgm::Vector3D vec(1, 2, 3);
     EXPECT_VEC_ZERO(fgm::Vector3D<int>::safeDiv(vec, 0));
 }
 
@@ -813,18 +813,18 @@ TYPED_TEST(Vector3DInversion, InvertsTheSignOfEachComponents)
 /** @test Verify that @ref fgm::Vector3D unary minus operator inverts each component of an infinity vector. */
 TEST(Vector3DInversion, InvertsSignOfInfinity)
 {
-    constexpr fgm::Vector3D infVec = {
+    const fgm::Vector3D infVec = {
         fgm::constants::INFINITY_F,
         -fgm::constants::INFINITY_F,
         fgm::constants::INFINITY_F,
     };
-    constexpr fgm::Vector3D expected = {
+    const fgm::Vector3D expected = {
         -fgm::constants::INFINITY_F,
         fgm::constants::INFINITY_F,
         -fgm::constants::INFINITY_F,
     };
 
-    constexpr fgm::Vector3D<float> inverted = -infVec;
+    const fgm::Vector3D<float> inverted = -infVec;
 
     EXPECT_VEC_EQ(expected, inverted);
 }
@@ -833,13 +833,13 @@ TEST(Vector3DInversion, InvertsSignOfInfinity)
 /** @test Verify that @ref fgm::Vector3D unary minus follows IEEE 754 rules for NaN. */
 TEST(Vector3DInversion, NoOpOnNaNVectors)
 {
-    constexpr fgm::Vector3D nanVec = {
+    const fgm::Vector3D nanVec = {
         fgm::constants::NaN,
         fgm::constants::NaN,
         fgm::constants::NaN,
     };
 
-    constexpr fgm::Vector3D<float> inverted = -nanVec;
+    const fgm::Vector3D<float> inverted = -nanVec;
 
     EXPECT_TRUE(std::isnan(inverted.x()));
     EXPECT_TRUE(std::isnan(inverted.y()));

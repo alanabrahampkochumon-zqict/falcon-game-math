@@ -27,7 +27,7 @@
 /** @test Verify that the components are accessible via named spatial aliases (x, y, z). */
 TEST(Vector3DAccess, AccessibleAsXYZW)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.x());
     EXPECT_FLOAT_EQ(1.0f, vec.y());
@@ -38,7 +38,7 @@ TEST(Vector3DAccess, AccessibleAsXYZW)
 /** @test Verify that the components are accessible via named spatial aliases (s, t, p). */
 TEST(Vector3DAccess, AccessibleAsSTPQ)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.s());
     EXPECT_FLOAT_EQ(1.0f, vec.t());
@@ -49,7 +49,7 @@ TEST(Vector3DAccess, AccessibleAsSTPQ)
 /** @test Verify that the components are accessible via named spatial aliases (r, g, b). */
 TEST(Vector3DAccess, AccessibleAsRGBA)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.r());
     EXPECT_FLOAT_EQ(1.0f, vec.g());
@@ -60,7 +60,7 @@ TEST(Vector3DAccess, AccessibleAsRGBA)
 /** @test Verify that the components are accessible via subscript indexing for reads. */
 TEST(Vector3DAccess, AccessibleAsArray)
 {
-    constexpr fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);

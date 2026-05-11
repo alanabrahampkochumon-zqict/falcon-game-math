@@ -33,7 +33,7 @@ TYPED_TEST_SUITE(Vector3DConstants, SupportedArithmeticTypes);
 /** @test Verify that @ref fgm::vec3d::one returns a 3D vector with unit components. */
 TYPED_TEST(Vector3DConstants, One_ReturnsVectorWithUnitComponents)
 {
-    constexpr TypeParam one = TypeParam(1);
+    const TypeParam one = TypeParam(1);
     EXPECT_VEC_CONTAINS(fgm::vec3d::one<TypeParam>, one, one, one);
 }
 
@@ -48,7 +48,7 @@ TYPED_TEST(Vector3DConstants, Zero_ReturnsVectorWithZeroComponents)
 /** @test Verify that @ref fgm::vec3d::inf<float> returns a 3D vector with infinity components. */
 TEST(Vector3DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 {
-    constexpr auto inf = fgm::vec3d::inf<float>;
+    const auto inf = fgm::vec3d::inf<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
     EXPECT_VEC3_POS_INF(inf)
 }
@@ -57,7 +57,7 @@ TEST(Vector3DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 /** @test Verify that @ref fgm::vec3d::inf<double> returns a 3D vector with infinity components. */
 TEST(Vector3DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 {
-    constexpr auto inf = fgm::vec3d::inf<double>;
+    const auto inf = fgm::vec3d::inf<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
     EXPECT_VEC3_POS_INF(inf)
 }
@@ -66,7 +66,7 @@ TEST(Vector3DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 /** @test Verify that @ref fgm::vec3d::infN<float> returns a 3D vector with negative infinity components. */
 TEST(Vector3DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
-    constexpr auto inf = fgm::vec3d::infN<float>;
+    const auto inf = fgm::vec3d::infN<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
     EXPECT_VEC3_NEG_INF(inf)
 }
@@ -75,7 +75,7 @@ TEST(Vector3DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityC
 /** @test Verify that @ref fgm::vec3d::infN<double> returns a 3D vector with negative infinity components. */
 TEST(Vector3DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
-    constexpr auto inf = fgm::vec3d::infN<double>;
+    const auto inf = fgm::vec3d::infN<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
     EXPECT_VEC3_NEG_INF(inf)
 }
@@ -84,7 +84,7 @@ TEST(Vector3DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 /** @test Verify that @ref fgm::vec3d::infN<float> returns a 3D vector with NaN components. */
 TEST(Vector3DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
-    constexpr auto nan = fgm::vec3d::nan<float>;
+    const auto nan = fgm::vec3d::nan<float>;
     EXPECT_TRUE(std::isnan(nan.x()));
     EXPECT_TRUE(std::isnan(nan.y()));
     EXPECT_TRUE(std::isnan(nan.z()));
@@ -94,7 +94,7 @@ TEST(Vector3DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 /** @test Verify that @ref fgm::vec3d::infN<double> returns a 3D vector with NaN components. */
 TEST(Vector3DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
-    constexpr auto nan = fgm::vec3d::nan<double>;
+    const auto nan = fgm::vec3d::nan<double>;
     EXPECT_TRUE(std::isnan(nan.x()));
     EXPECT_TRUE(std::isnan(nan.y()));
     EXPECT_TRUE(std::isnan(nan.z()));
@@ -104,7 +104,7 @@ TEST(Vector3DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 /** @test Verify that @ref fgm::vec3d::x returns a unit vector aligned with x-axis. */
 TYPED_TEST(Vector3DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 {
-    constexpr auto x = fgm::vec3d::x<TypeParam>;
+    const auto x = fgm::vec3d::x<TypeParam>;
     EXPECT_VEC_CONTAINS(x, this->_one, this->_zero, this->_zero);
 }
 
@@ -112,7 +112,7 @@ TYPED_TEST(Vector3DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 /** @test Verify that @ref fgm::vec3d::y returns a unit vector aligned with y-axis. */
 TYPED_TEST(Vector3DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 {
-    constexpr auto y = fgm::vec3d::y<TypeParam>;
+    const auto y = fgm::vec3d::y<TypeParam>;
     EXPECT_VEC_CONTAINS(y, this->_zero, this->_one, this->_zero);
 }
 
@@ -120,7 +120,7 @@ TYPED_TEST(Vector3DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 /** @test Verify that @ref fgm::vec3d::z returns a unit vector aligned with z-axis. */
 TYPED_TEST(Vector3DConstants, Z_ReturnsUnitVectorWithOnlyZComponent)
 {
-    constexpr auto z = fgm::vec3d::z<TypeParam>;
+    const auto z = fgm::vec3d::z<TypeParam>;
     EXPECT_VEC_CONTAINS(z, this->_zero, this->_zero, this->_one);
 }
 

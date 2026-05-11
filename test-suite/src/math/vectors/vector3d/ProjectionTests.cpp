@@ -79,9 +79,9 @@ TYPED_TEST(Vector3DProjection, OrthogonalVectorsReturnsZeroVector)
 TEST(Vector3DProjection, ProjectionOntoXAxisReturnsVectorWithOnlyXComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(10.0f, 20.0f, 30.0f);
-    constexpr fgm::Vector3D xAxis(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedProjection(10.0f, 0.0f, 0.0f);
+    const fgm::Vector3D a(10.0f, 20.0f, 30.0f);
+    const fgm::Vector3D xAxis(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedProjection(10.0f, 0.0f, 0.0f);
 
     // When projected onto x-axis
     const fgm::Vector3D actualProjection = a.project(xAxis);
@@ -98,9 +98,9 @@ TEST(Vector3DProjection, ProjectionOntoXAxisReturnsVectorWithOnlyXComponent)
 TEST(Vector3DProjection, ProjectionOntoYAxisReturnsVectorWithOnlyYComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(10.0f, 20.0f, 30.0f);
-    constexpr fgm::Vector3D yAxis(0.0f, 1.0f, 0.0f);
-    constexpr fgm::Vector3D expectedProjection(0.0f, 20.0f, 0.0f);
+    const fgm::Vector3D a(10.0f, 20.0f, 30.0f);
+    const fgm::Vector3D yAxis(0.0f, 1.0f, 0.0f);
+    const fgm::Vector3D expectedProjection(0.0f, 20.0f, 0.0f);
 
     // When projected onto y-axis
     const fgm::Vector3D actualProjection = a.project(yAxis);
@@ -117,9 +117,9 @@ TEST(Vector3DProjection, ProjectionOntoYAxisReturnsVectorWithOnlyYComponent)
 TEST(Vector3DProjection, ProjectionOntoZAxisReturnsVectorWithOnlyZComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(10.0f, 20.0f, 30.0f);
-    constexpr fgm::Vector3D zAxis(0.0f, 0.0f, 1.0f);
-    constexpr fgm::Vector3D expectedProjection(0.0f, 0.0f, 30.0f);
+    const fgm::Vector3D a(10.0f, 20.0f, 30.0f);
+    const fgm::Vector3D zAxis(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3D expectedProjection(0.0f, 0.0f, 30.0f);
 
     // When projected onto z-axis
     const fgm::Vector3D actualProjection = a.project(zAxis);
@@ -160,9 +160,9 @@ TYPED_TEST(Vector3DProjection, StaticWrapper_NonOrthogonalProjectionReturnsNonZe
 TEST(Vector3DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
     const fgm::Vector3D actualProjection = a.project(b, true);
@@ -179,9 +179,9 @@ TEST(Vector3DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 TEST(Vector3DProjection, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector3D a(4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
+    const fgm::Vector3D a(4.0f, 4.0f, 4.0f);
+    const fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
+    const fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
 
     // When projected
     const fgm::Vector3D<float> actualProjection = a.project(negativeZAxis);
@@ -198,9 +198,9 @@ TEST(Vector3DProjection, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVe
 TEST(Vector3DProjection, MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D onto(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D onto(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
 
     // When projected onto another
     const fgm::Vector3D actualProjection = vec.project(onto);
@@ -256,9 +256,9 @@ TYPED_TEST(Vector3DProjection, SafeProject_NonOrthogonalProjectionReturnsNonZero
 TEST(Vector3DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
     const fgm::Vector3D actualProjection = a.safeProject(b, true);
@@ -275,9 +275,9 @@ TEST(Vector3DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZer
 TEST(Vector3DProjection, SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector3D a(4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
+    const fgm::Vector3D a(4.0f, 4.0f, 4.0f);
+    const fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
+    const fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
 
     // When projected
     const fgm::Vector3D<float> actualProjection = a.safeProject(negativeZAxis);
@@ -294,9 +294,9 @@ TEST(Vector3DProjection, SafeProject_OntoVectorInOppositeDirectionReturnsVectorI
 TEST(Vector3DProjection, SafeProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D onto(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D onto(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
 
     // When projected onto another
     const fgm::Vector3D actualProjection = vec.safeProject(onto);
@@ -314,7 +314,7 @@ TEST(Vector3DProjection, SafeProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector3DProjection, SafeProject_OntoZeroReturnsZeroVector)
 {
-    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
+    const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
 
     const fgm::Vector3D actualProjection = this->_vec.safeProject(zeroVec);
 
@@ -340,9 +340,9 @@ TYPED_TEST(Vector3DProjection, StaticWrapper_SafeProject_NonOrthogonalProjection
 TEST(Vector3DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
     const fgm::Vector3D actualProjection = fgm::Vector3D<float>::safeProject(a, b, true);
@@ -359,9 +359,9 @@ TEST(Vector3DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVecto
 TEST(Vector3DProjection, StaticWrapper_SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector3D a(4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
+    const fgm::Vector3D a(4.0f, 4.0f, 4.0f);
+    const fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
+    const fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
 
     // When projected
     const fgm::Vector3D<float> actualProjection = fgm::Vector3D<float>::safeProject(a, negativeZAxis);
@@ -378,9 +378,9 @@ TEST(Vector3DProjection, StaticWrapper_SafeProject_OntoVectorInOppositeDirection
 TEST(Vector3DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D onto(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D onto(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
 
     // When projected onto another
     const fgm::Vector3D actualProjection = fgm::Vector3D<float>::safeProject(vec, onto);
@@ -398,7 +398,7 @@ TEST(Vector3DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTy
  */
 TYPED_TEST(Vector3DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
 {
-    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
+    const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
 
     const fgm::Vector3D actualProjection = fgm::Vector3D<float>::safeProject(this->_vec, zeroVec);
 
@@ -503,9 +503,9 @@ TYPED_TEST(Vector3DProjection, TryProject_NonOrthogonalProjectionReturnsNonZeroV
 TEST(Vector3DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
     fgm::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
@@ -526,9 +526,9 @@ TEST(Vector3DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZero
 TEST(Vector3DProjection, TryProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector3D a(4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
+    const fgm::Vector3D a(4.0f, 4.0f, 4.0f);
+    const fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
+    const fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
     fgm::OperationStatus flag;
 
     // When projected
@@ -549,9 +549,9 @@ TEST(Vector3DProjection, TryProject_OntoVectorInOppositeDirectionReturnsVectorIn
 TEST(Vector3DProjection, TryProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D onto(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D onto(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
     fgm::OperationStatus flag;
 
     // When projected onto another
@@ -572,7 +572,7 @@ TEST(Vector3DProjection, TryProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector3DProjection, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
+    const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
 
@@ -605,9 +605,9 @@ TYPED_TEST(Vector3DProjection, StaticWrapper_TryProject_NonOrthogonalProjectionR
 TEST(Vector3DProjection, StaticWrapper_TryProject_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedProjection(1.0f, 0.0f, 0.0f);
     fgm::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
@@ -629,9 +629,9 @@ TEST(Vector3DProjection,
      StaticWrapper_TryProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector3D a(4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
+    const fgm::Vector3D a(4.0f, 4.0f, 4.0f);
+    const fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
+    const fgm::Vector3D expectedProjection(0.0f, 0.0f, 4.0f);
     fgm::OperationStatus flag;
 
     // When projected
@@ -652,9 +652,9 @@ TEST(Vector3DProjection,
 TEST(Vector3DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTypeAndSetsCorrectFlag)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D onto(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D onto(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
     fgm::OperationStatus flag;
 
     // When projected onto another
@@ -675,7 +675,7 @@ TEST(Vector3DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTyp
  */
 TYPED_TEST(Vector3DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
+    const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
     const fgm::Vector3D actualProjection = fgm::Vector3D<float>::tryProject(this->_vec, zeroVec, flag);

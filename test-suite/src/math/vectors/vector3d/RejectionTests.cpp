@@ -72,9 +72,9 @@ TYPED_TEST(Vector3DRejection, ParallelVectorsReturnsZeroVector)
 TEST(Vector3DRejection, RejectionFromXAxisReturnsVectorWithZeroXComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(10.0f, 20.0f, 30.0f);
-    constexpr fgm::Vector3D xAxis(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedRejection(0.0f, 20.0f, 30.0f);
+    const fgm::Vector3D a(10.0f, 20.0f, 30.0f);
+    const fgm::Vector3D xAxis(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedRejection(0.0f, 20.0f, 30.0f);
 
     // When rejected from x-axis
     const fgm::Vector3D actualRejection = a.reject(xAxis);
@@ -91,9 +91,9 @@ TEST(Vector3DRejection, RejectionFromXAxisReturnsVectorWithZeroXComponent)
 TEST(Vector3DRejection, RejectionFromYAxisReturnsVectorWithZeroYComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(10.0f, 20.0f, 30.0f);
-    constexpr fgm::Vector3D yAxis(0.0f, 1.0f, 0.0f);
-    constexpr fgm::Vector3D expectedRejection(10.0f, 0.0f, 30.0f);
+    const fgm::Vector3D a(10.0f, 20.0f, 30.0f);
+    const fgm::Vector3D yAxis(0.0f, 1.0f, 0.0f);
+    const fgm::Vector3D expectedRejection(10.0f, 0.0f, 30.0f);
 
     // When rejected from y-axis
     const fgm::Vector3D actualRejection = a.reject(yAxis);
@@ -110,9 +110,9 @@ TEST(Vector3DRejection, RejectionFromYAxisReturnsVectorWithZeroYComponent)
 TEST(Vector3DRejection, RejectionFromZAxisReturnsVectorWithZeroZComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(10.0f, 20.0f, 30.0f);
-    constexpr fgm::Vector3D zAxis(0.0f, 0.0f, 1.0f);
-    constexpr fgm::Vector3D expectedRejection(10.0f, 20.0f, 0.0f);
+    const fgm::Vector3D a(10.0f, 20.0f, 30.0f);
+    const fgm::Vector3D zAxis(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3D expectedRejection(10.0f, 20.0f, 0.0f);
 
     // When rejected from z-axis
     const fgm::Vector3D actualRejection = a.reject(zAxis);
@@ -126,8 +126,8 @@ TEST(Vector3DRejection, RejectionFromZAxisReturnsVectorWithZeroZComponent)
 TEST(Vector3DRejection, OrthogonalRejectionReturnsOriginalVector)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 0.0f);
-    constexpr fgm::Vector3D b(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 0.0f);
+    const fgm::Vector3D b(0.0f, 0.0f, 1.0f);
 
     // When rejected on to an orthogonal vector
     const fgm::Vector3D actualRejection = a.reject(b);
@@ -168,9 +168,9 @@ TYPED_TEST(Vector3DRejection, StaticWrapper_NonOrthogonalRejectionReturnsNonZero
 TEST(Vector3DRejection, RejectionFromNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
 
     // When rejected from another
     const fgm::Vector3D actualRejection = a.reject(b, true);
@@ -187,9 +187,9 @@ TEST(Vector3DRejection, RejectionFromNormalizedVectorReturnsNonZeroVector)
 TEST(Vector3DRejection, RejectionFromVectorInOppositeDirectionReturnsVectorWithPerpendicularComponents)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
-    constexpr fgm::Vector3D expectedRejection(4.0f, 4.0f, 0.0f);
+    const fgm::Vector3D a(4.0f, 4.0f, 4.0f);
+    const fgm::Vector3D negativeZAxis(0.0f, 0.0f, -1.0f);
+    const fgm::Vector3D expectedRejection(4.0f, 4.0f, 0.0f);
 
     // When rejected from a vector in opposite direction
     const fgm::Vector3D actualRejection = a.reject(negativeZAxis);
@@ -206,9 +206,9 @@ TEST(Vector3DRejection, RejectionFromVectorInOppositeDirectionReturnsVectorWithP
 TEST(Vector3DRejection, MixedTypeRejectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D from(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D from(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
 
     // When reject from another
     const fgm::Vector3D actualRejection = vec.reject(from);
@@ -264,8 +264,8 @@ TYPED_TEST(Vector3DRejection, SafeReject_ParallelVectorsReturnsZeroVector)
 TEST(Vector3DRejection, SafeReject_OrthogonalRejectionReturnsOriginalVector)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 0.0f);
-    constexpr fgm::Vector3D b(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 0.0f);
+    const fgm::Vector3D b(0.0f, 0.0f, 1.0f);
 
     // When rejected from an orthogonal vector
     const fgm::Vector3D actualRejection = a.safeReject(b);
@@ -294,9 +294,9 @@ TYPED_TEST(Vector3DRejection, SafeReject_NonOrthogonalRejectionReturnsNonZeroVec
 TEST(Vector3DRejection, SafeReject_FromNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
 
     // When rejected from another
     const fgm::Vector3D actualRejection = a.safeReject(b, true);
@@ -313,9 +313,9 @@ TEST(Vector3DRejection, SafeReject_FromNormalizedVectorReturnsNonZeroVector)
 TEST(Vector3DRejection, SafeReject_MixedTypeRejectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D from(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D from(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
 
     // When rejected from another
     const fgm::Vector3D actualRejection = vec.safeReject(from);
@@ -333,7 +333,7 @@ TEST(Vector3DRejection, SafeReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector3DRejection, SafeReject_FromZeroVectorReturnsSameVector)
 {
-    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
+    const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
 
     const fgm::Vector3D actualRejection = this->_vec.safeReject(zeroVec);
 
@@ -359,8 +359,8 @@ TYPED_TEST(Vector3DRejection, StaticWrapper_SafeReject_ParallelVectorsReturnsZer
  */
 TEST(Vector3DRejection, StaticWrapper_SafeReject_OrthogonalRejectionReturnsOriginalVector)
 {
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 0.0f);
-    constexpr fgm::Vector3D b(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 0.0f);
+    const fgm::Vector3D b(0.0f, 0.0f, 1.0f);
 
     const fgm::Vector3D actualRejection = fgm::Vector3D<float>::safeReject(a, b);
 
@@ -388,9 +388,9 @@ TYPED_TEST(Vector3DRejection, StaticWrapper_SafeReject_NonOrthogonalRejectionRet
 TEST(Vector3DRejection, StaticWrapper_SafeReject_FromNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
 
     // When rejected from another
     const fgm::Vector3D actualRejection = fgm::Vector3D<float>::safeReject(a, b, true);
@@ -407,9 +407,9 @@ TEST(Vector3DRejection, StaticWrapper_SafeReject_FromNormalizedVectorReturnsNonZ
 TEST(Vector3DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D from(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D from(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
 
     // When rejected from another
     const fgm::Vector3D actualRejection = fgm::Vector3D<float>::safeReject(vec, from);
@@ -427,7 +427,7 @@ TEST(Vector3DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector3DRejection, StaticWrapper_SafeReject_FromZeroVectorReturnsSameVector)
 {
-    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
+    const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
 
     const fgm::Vector3D actualRejection = fgm::Vector3D<TypeParam>::safeReject(this->_vec, zeroVec);
 
@@ -533,8 +533,8 @@ TYPED_TEST(Vector3DRejection, TryReject_ParallelVectorsReturnsZeroVectorAndSetsC
 TEST(Vector3DRejection, TryReject_OrthogonalRejectionReturnsOriginalVectorAndSetsCorrectStatusFlag)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 0.0f);
-    constexpr fgm::Vector3D b(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 0.0f);
+    const fgm::Vector3D b(0.0f, 0.0f, 1.0f);
     fgm::OperationStatus flag;
 
     // When rejected from an orthogonal vector
@@ -568,9 +568,9 @@ TYPED_TEST(Vector3DRejection, TryReject_NonOrthogonalRejectionReturnsNonZeroVect
 TEST(Vector3DRejection, TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
     fgm::OperationStatus flag;
 
 
@@ -591,9 +591,9 @@ TEST(Vector3DRejection, TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSet
 TEST(Vector3DRejection, TryReject_MixedTypeRejectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D from(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D from(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
     fgm::OperationStatus flag;
 
     // When rejected from another
@@ -613,7 +613,7 @@ TEST(Vector3DRejection, TryReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector3DRejection, TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
-    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
+    const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
     const fgm::Vector3D actualRejection = this->_vec.tryReject(zeroVec, flag);
@@ -645,8 +645,8 @@ TYPED_TEST(Vector3DRejection, StaticWrapper_TryReject_ParallelVectorsReturnsZero
  */
 TEST(Vector3DRejection, StaticWrapper_TryReject_OrthogonalRejectionReturnsOriginalVectorAndSetsCorrectStatusFlag)
 {
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 0.0f);
-    constexpr fgm::Vector3D b(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 0.0f);
+    const fgm::Vector3D b(0.0f, 0.0f, 1.0f);
     fgm::OperationStatus flag;
 
     const fgm::Vector3D actualRejection = fgm::Vector3D<float>::tryReject(a, b, flag);
@@ -681,9 +681,9 @@ TYPED_TEST(Vector3DRejection,
 TEST(Vector3DRejection, StaticWrapper_TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector3D a(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D b(1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
+    const fgm::Vector3D a(1.0f, 2.0f, 3.0f);
+    const fgm::Vector3D b(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3D expectedRejection(0.0f, 2.0f, 3.0f);
     fgm::OperationStatus flag;
 
     // When rejected from another
@@ -704,9 +704,9 @@ TEST(Vector3DRejection, StaticWrapper_TryReject_FromNormalizedVectorReturnsNonZe
 TEST(Vector3DRejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector3D vec(7, 13, 29);
-    constexpr fgm::Vector3D from(2.0, 4.0, 4.0);
-    constexpr fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
+    const fgm::Vector3D vec(7, 13, 29);
+    const fgm::Vector3D from(2.0, 4.0, 4.0);
+    const fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
     fgm::OperationStatus flag;
 
     // When rejected from another
@@ -727,7 +727,7 @@ TEST(Vector3DRejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector3DRejection, StaticWrapper_TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
-    constexpr fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
+    const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
     const fgm::Vector3D actualRejection = fgm::Vector3D<TypeParam>::tryReject(this->_vec, zeroVec, flag);

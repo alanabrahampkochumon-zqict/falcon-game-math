@@ -104,11 +104,11 @@ TYPED_TEST(Vector3DComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWit
  */
 TEST(Vector3DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector3D vec(1.2, 4.5, 6.8);
-    constexpr fgm::Vector3D infVec(INF, INF, -INF);
-    constexpr fgm::Vector3D expected(false, false, true);
+    const fgm::Vector3D vec(1.2, 4.5, 6.8);
+    const fgm::Vector3D infVec(INF, INF, -INF);
+    const fgm::Vector3D expected(false, false, true);
 
-    constexpr fgm::Vector3D<bool> mask = vec.gt(infVec);
+    const fgm::Vector3D<bool> mask = vec.gt(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -120,11 +120,11 @@ TEST(Vector3DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorr
  */
 TEST(Vector3DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector3D vec(1.2f, 4.5f, 6.8f);
-    constexpr fgm::Vector3D infVec(NAN_F, NAN_F, -5.9f);
-    constexpr fgm::Vector3D expected(false, false, true);
+    const fgm::Vector3D vec(1.2f, 4.5f, 6.8f);
+    const fgm::Vector3D infVec(NAN_F, NAN_F, -5.9f);
+    const fgm::Vector3D expected(false, false, true);
 
-    constexpr fgm::Vector3D<bool> mask = vec.gt(infVec);
+    const fgm::Vector3D<bool> mask = vec.gt(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -137,12 +137,12 @@ TEST(Vector3DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectVa
 TEST(Vector3DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    constexpr fgm::Vector3D vecA(1.2, 4.5, 7.5);
-    constexpr fgm::Vector3D vecB(5, 6, 7);
-    constexpr fgm::Vector3D expected(false, false, true);
+    const fgm::Vector3D vecA(1.2, 4.5, 7.5);
+    const fgm::Vector3D vecB(5, 6, 7);
+    const fgm::Vector3D expected(false, false, true);
 
     // When compared with greater than or equal
-    constexpr fgm::Vector3D<bool> mask = vecA.gt(vecB);
+    const fgm::Vector3D<bool> mask = vecA.gt(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
@@ -206,11 +206,11 @@ TYPED_TEST(Vector3DComparison,
  */
 TEST(Vector3DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector3D vec(1.2f, 4.5f, 6.8f);
-    constexpr fgm::Vector3D infVec(INF, INF, -INF);
-    constexpr fgm::Vector3D expected(false, false, true);
+    const fgm::Vector3D vec(1.2f, 4.5f, 6.8f);
+    const fgm::Vector3D infVec(INF, INF, -INF);
+    const fgm::Vector3D expected(false, false, true);
 
-    constexpr fgm::Vector3D<bool> mask = vec.gte(infVec);
+    const fgm::Vector3D<bool> mask = vec.gte(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -222,11 +222,11 @@ TEST(Vector3DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorW
  */
 TEST(Vector3DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector3D vec(1.2, 4.5, 6.8);
-    constexpr fgm::Vector3D infVec(NAN_F, NAN_F, -5.9f);
-    constexpr fgm::Vector3D expected(false, false, true);
+    const fgm::Vector3D vec(1.2, 4.5, 6.8);
+    const fgm::Vector3D infVec(NAN_F, NAN_F, -5.9f);
+    const fgm::Vector3D expected(false, false, true);
 
-    constexpr fgm::Vector3D<bool> mask = vec.gte(infVec);
+    const fgm::Vector3D<bool> mask = vec.gte(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -239,12 +239,12 @@ TEST(Vector3DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
 TEST(Vector3DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    constexpr fgm::Vector3D vecA(1.2, 4.5, 7.5);
-    constexpr fgm::Vector3D vecB(5, 6, 7);
-    constexpr fgm::Vector3D expected(false, false, true);
+    const fgm::Vector3D vecA(1.2, 4.5, 7.5);
+    const fgm::Vector3D vecB(5, 6, 7);
+    const fgm::Vector3D expected(false, false, true);
 
     // When compared with greater or equal than
-    constexpr fgm::Vector3D<bool> mask = vecA.gte(vecB);
+    const fgm::Vector3D<bool> mask = vecA.gte(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
@@ -307,11 +307,11 @@ TYPED_TEST(Vector3DComparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithEl
  */
 TEST(Vector3DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector3D vec(1.2, 4.5, 6.8);
-    constexpr fgm::Vector3D infVec(INF, INF, -INF);
-    constexpr fgm::Vector3D expected(true, true, false);
+    const fgm::Vector3D vec(1.2, 4.5, 6.8);
+    const fgm::Vector3D infVec(INF, INF, -INF);
+    const fgm::Vector3D expected(true, true, false);
 
-    constexpr fgm::Vector3D<bool> mask = vec.lt(infVec);
+    const fgm::Vector3D<bool> mask = vec.lt(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -323,9 +323,9 @@ TEST(Vector3DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrect
  */
 TEST(Vector3DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector3D vec(1.2f, 4.5f, 6.8f);
-    constexpr fgm::Vector3D nanVec(NAN_F, NAN_F, -5.9f);
-    constexpr fgm::Vector3D expected(false, false, false);
+    const fgm::Vector3D vec(1.2f, 4.5f, 6.8f);
+    const fgm::Vector3D nanVec(NAN_F, NAN_F, -5.9f);
+    const fgm::Vector3D expected(false, false, false);
 
 #if defined(_MSC_VER) && !defined(__clang__)
     // MSVC constant evaluator incorrectly returns true for NAN_F comparisons.
@@ -335,7 +335,7 @@ TEST(Vector3DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValue
     // Resharper restore all
 #else
     // Clang and GCC follow IEEE 754 strictly at compile-time.
-    constexpr fgm::Vector3D<bool> mask = vec.lt(nanVec);
+    const fgm::Vector3D<bool> mask = vec.lt(nanVec);
 #endif
 
     EXPECT_VEC_EQ(expected, mask);
@@ -349,12 +349,12 @@ TEST(Vector3DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValue
 TEST(Vector3DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    constexpr fgm::Vector3D vecA(1.2, 4.5, 7.5);
-    constexpr fgm::Vector3D vecB(5, 6, 7);
-    constexpr fgm::Vector3D expected(true, true, false);
+    const fgm::Vector3D vecA(1.2, 4.5, 7.5);
+    const fgm::Vector3D vecB(5, 6, 7);
+    const fgm::Vector3D expected(true, true, false);
 
     // When compared with less than or equal
-    constexpr fgm::Vector3D<bool> mask = vecA.lt(vecB);
+    const fgm::Vector3D<bool> mask = vecA.lt(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
@@ -417,11 +417,11 @@ TYPED_TEST(Vector3DComparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVecto
  */
 TEST(Vector3DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector3D vec(1.2, 4.5, 6.8);
-    constexpr fgm::Vector3D infVec(INF, INF, -INF);
-    constexpr fgm::Vector3D expected(true, true, false);
+    const fgm::Vector3D vec(1.2, 4.5, 6.8);
+    const fgm::Vector3D infVec(INF, INF, -INF);
+    const fgm::Vector3D expected(true, true, false);
 
-    constexpr fgm::Vector3D<bool> mask = vec.lte(infVec);
+    const fgm::Vector3D<bool> mask = vec.lte(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -433,9 +433,9 @@ TEST(Vector3DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWith
  */
 TEST(Vector3DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
-    constexpr fgm::Vector3D vec(1.2f, 4.5f, 6.8f);
-    constexpr fgm::Vector3D nanVec(NAN_F, NAN_F, -5.9f);
-    constexpr fgm::Vector3D expected(false, false, false);
+    const fgm::Vector3D vec(1.2f, 4.5f, 6.8f);
+    const fgm::Vector3D nanVec(NAN_F, NAN_F, -5.9f);
+    const fgm::Vector3D expected(false, false, false);
 
 #if defined(_MSC_VER) && !defined(__clang__)
     // MSVC constant evaluator incorrectly returns true for NAN_F comparisons.
@@ -445,7 +445,7 @@ TEST(Vector3DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
     // Resharper restore all
 #else
     // Clang and GCC follow IEEE 754 strictly at compile-time.
-    constexpr fgm::Vector3D<bool> mask = vec.lte(nanVec);
+    const fgm::Vector3D<bool> mask = vec.lte(nanVec);
 #endif
 
     EXPECT_VEC_EQ(expected, mask);
@@ -459,12 +459,12 @@ TEST(Vector3DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
 TEST(Vector3DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    constexpr fgm::Vector3D vecA(1.2, 4.5, 7.5);
-    constexpr fgm::Vector3D vecB(5, 6, 7);
-    constexpr fgm::Vector3D expected(true, true, false);
+    const fgm::Vector3D vecA(1.2, 4.5, 7.5);
+    const fgm::Vector3D vecB(5, 6, 7);
+    const fgm::Vector3D expected(true, true, false);
 
     // When compared with less than or equal
-    constexpr fgm::Vector3D<bool> mask = vecA.lte(vecB);
+    const fgm::Vector3D<bool> mask = vecA.lte(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
