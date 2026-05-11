@@ -8,7 +8,8 @@
  *
  * @par Configuration
  *      Define FORCE_SSE to turn on SSE, even if hardware supports newer instructions
- *      Similar options include FORCE_AVX512, FORCE_AVX2, FORCE_SSE, and FORCE_SCALAR which will completely turn off SIMD.
+ *      Similar options include FORCE_AVX512, FORCE_AVX2, FORCE_SSE, and FORCE_SCALAR which will completely turn off
+ * SIMD.
  *      @note Even if flags are specified, it will only default to the max that the CPU architecture supports
  *
  * @par Compiler note (Static Dispatch)
@@ -25,7 +26,6 @@
 
 #include <concepts>
 #include <cstddef>
-#include <immintrin.h>
 
 
 /**
@@ -95,6 +95,16 @@
 /** @} */
 
 
+#ifdef FALCON_SIMD_SUPPORTED
+    #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
+        // Intel/AMD Silicon
+        #include <immintrin.h>
+    #elif defined(__aarch64__) || defined(_M_ARM64) || defined(__arm__) || defined(_M_ARM)
+        // Apple Silicon / ARM Architecture
+        #include <arm_neon.h>
+        #define FALCON_NEON_SUPPORTED
+    #endif
+#endif
 
 /**
  * @addtogroup S_SIMD_RegisterType
@@ -118,8 +128,9 @@ namespace falcon::simd
     template <typename T, std::size_t RegWidth>
     struct RegisterMap;
 
+#ifdef FALCON_SSE_SUPPORTED
 
-    /** 
+    /**
      * @brief Template specialization of @ref RegisterMap for 128-bit (16 byte) aligned `float`.
      *        Maps `float` to the SSE single precision floating point register `__m128`.
      */
@@ -154,7 +165,9 @@ namespace falcon::simd
         using type = __m128i;
     };
 
+#endif
 
+#if defined(FALCON_AVX2_SUPPORTED) || defined(FALCON_AVX_SUPPORTED)
     /**
      * @brief Template specialization of @ref RegisterMap for 256-bit (32 byte) aligned `float`.
      *        Maps `float` to the AVX single precision floating point register `__m256`.
@@ -177,7 +190,7 @@ namespace falcon::simd
     };
 
 
-    /** 
+    /**
      *  @brief Template specialization of @ref RegisterMap for 256-bit (32-byte) aligned integrals.
      *         Maps standard integral types (`char`, `short`, `int`, `long long`, and unsigned variants)
      *         to the AVX2 integer register `__m256i`.
@@ -189,8 +202,10 @@ namespace falcon::simd
     {
         using type = __m256i;
     };
+#endif
 
 
+#ifdef FALCON_AVX512_SUPPORTED
     /**
      * @brief Template specialization of @ref RegisterMap for 512-bit (64 byte) aligned `float`.
      *        Maps `float` to the AVX512 single precision floating point register `__m512`.
@@ -225,13 +240,11 @@ namespace falcon::simd
     {
         using type = __m512i;
     };
-
+#endif
     /** @} */
 
     // #if defined(MAX_ALIGNMENT) && MAX_ALIGNMENT > 0
     //     constexpr PackingParams packingParams = calculatePackedSize(TotalBytes, MAX_ALIGNMENT);
     // #endif
-
-
 
 } // namespace falcon::simd

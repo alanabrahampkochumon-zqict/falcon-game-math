@@ -26,9 +26,9 @@ namespace fgm
     /** @brief Operation status flags used for flagging exceptions and unexpected behavior. */
     enum class OperationStatus : uint8_t
     {
-        SUCCESS = 0,    //< Flag indicating operation success.
-        DIVISIONBYZERO, //< Flag indicating that division by zero has occured.
-        NANOPERAND      //< Flag indicating that one or more operands are NaN.
+        SUCCESS = 0,    ///< Flag indicating operation success.
+        DIVISIONBYZERO, ///< Flag indicating that division by zero has occured.
+        NANOPERAND      ///< Flag indicating that one or more operands are NaN.
     };
 
 
