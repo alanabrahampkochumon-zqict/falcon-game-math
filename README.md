@@ -1,3 +1,4 @@
+[![Unit Tests](https://github.com/alanabrahampkochumon-zqict/falcon-game-math/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/alanabrahampkochumon-zqict/falcon-game-math/actions/workflows/unit-tests.yml)
 # Falcon Game Math
 
 High performance math library written in modern C++.
