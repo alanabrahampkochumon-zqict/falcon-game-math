@@ -17,7 +17,7 @@
 
 
 constexpr auto NAN_F = fgm::constants::NaN;
-constexpr auto INF = fgm::constants::INFINITY_F;
+constexpr auto INF   = fgm::constants::INFINITY_F;
 
 
 
@@ -38,11 +38,11 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589) };
-        _vecB = { T(5.1234568789), T(1.123458319), T(8.123412593891), T(123.123489172589) };
-        _expectedGT = { false, true, false, false };
+        _vecA        = { T(1.1234568789), T(2.123458319), T(5.123412593891), T(123.123489172589) };
+        _vecB        = { T(5.1234568789), T(1.123458319), T(8.123412593891), T(123.123489172589) };
+        _expectedGT  = { false, true, false, false };
         _expectedGTE = { false, true, false, true };
-        _expectedLT = { true, false, true, false };
+        _expectedLT  = { true, false, true, false };
         _expectedLTE = { true, false, true, true };
     }
 };
@@ -453,7 +453,7 @@ TEST(Vector4DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison 
+ * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector4DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)

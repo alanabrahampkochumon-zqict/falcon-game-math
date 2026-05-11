@@ -24,14 +24,14 @@ protected:
 
     void SetUp() override
     {
-        _elements = { T(1), T(2), T(3), T(4), T(5), T(6), T(7), T(8), T(9) };
+        _elements         = { T(1), T(2), T(3), T(4), T(5), T(6), T(7), T(8), T(9) };
         _diagonalElements = { T(2), T(0), T(0), T(0), T(3), T(0), T(0), T(0), T(5) };
-        _col0 = { T(1), T(4), T(7) };
-        _col1 = { T(2), T(5), T(8) };
-        _col2 = { T(3), T(6), T(9) };
-        _diagonal0 = T(2);
-        _diagonal1 = T(3);
-        _diagonal2 = T(5);
+        _col0             = { T(1), T(4), T(7) };
+        _col1             = { T(2), T(5), T(8) };
+        _col2             = { T(3), T(6), T(9) };
+        _diagonal0        = T(2);
+        _diagonal1        = T(3);
+        _diagonal2        = T(5);
     }
 };
 /** Test fixture for @ref fgm::Matrix3D initialization, parameterized by @ref SupportedTypes. */

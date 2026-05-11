@@ -67,7 +67,7 @@ namespace
         static_assert(MAT.hasNaN() == false);
 
         // Static functions
-         static_assert(fgm::Matrix4D<float>::hasNaN(MAT) == false);
+        static_assert(fgm::Matrix4D<float>::hasNaN(MAT) == false);
     } // namespace
 
 
@@ -75,7 +75,7 @@ namespace
     namespace
     {
         // Member functions
-         static_assert(INF_MAT.hasInf() == true);
+        static_assert(INF_MAT.hasInf() == true);
         static_assert(MAT.hasInf() == false);
 
         // Static functions
@@ -108,8 +108,7 @@ INSTANTIATE_TEST_SUITE_P(
                       Matrix4DUtilityParams{ fgm::Matrix4D(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
                       Matrix4DUtilityParams{ fgm::Matrix4D(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
                       Matrix4DUtilityParams{ fgm::Matrix4D(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                           fgm::constants::INFINITY_F,
-                                                           fgm::constants::INFINITY_F),
+                                                           fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
                                              true },
                       Matrix4DUtilityParams{ fgm::Matrix4D(1.0f, 1.0f, 1.0f, 1.0f), false }));
 

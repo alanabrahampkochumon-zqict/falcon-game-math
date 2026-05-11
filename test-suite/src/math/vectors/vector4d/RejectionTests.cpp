@@ -24,9 +24,9 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(1), T(2), T(3), T(4) };
-        _parallelVec = { T(2), T(4), T(6), T(8) };
-        _fromVec = { T(0), T(2), T(0), T(0) };
+        _vec               = { T(1), T(2), T(3), T(4) };
+        _parallelVec       = { T(2), T(4), T(6), T(8) };
+        _fromVec           = { T(0), T(2), T(0), T(0) };
         _expectedRejection = { T(1), T(0), T(3), T(4) };
     }
 };
@@ -480,7 +480,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPoint
  */
 TEST_P(Vector4DRejectionNaNTests, SafeReject_NaNVectorReturnsZeroVector)
 {
-    const auto& nanVec = GetParam();
+    const auto& nanVec  = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
 
     EXPECT_VEC_ZERO(nanVec.safeReject(ontoVec));
@@ -493,7 +493,7 @@ TEST_P(Vector4DRejectionNaNTests, SafeReject_NaNVectorReturnsZeroVector)
  */
 TEST_P(Vector4DRejectionNaNTests, SafeReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec = fgm::vec4d::one<float>;
+    const auto& oneVec     = fgm::vec4d::one<float>;
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(oneVec.safeReject(ontoNaNVec));
@@ -506,7 +506,7 @@ TEST_P(Vector4DRejectionNaNTests, SafeReject_OntoNaNVectorReturnsZeroVectorAndSe
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_SafeReject_NaNVectorReturnsZeroVector)
 {
-    const auto& nanVec = GetParam();
+    const auto& nanVec  = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
 
     EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeReject(nanVec, ontoVec));
@@ -519,7 +519,7 @@ TEST_P(Vector4DRejectionNaNTests, StaticWrapper_SafeReject_NaNVectorReturnsZeroV
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_SafeReject_OntoNaNVectorReturnsZeroVector)
 {
-    const auto& oneVec = fgm::vec4d::one<float>;
+    const auto& oneVec     = fgm::vec4d::one<float>;
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeReject(oneVec, ontoNaNVec));
@@ -786,7 +786,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointV
  */
 TEST_P(Vector4DRejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& nanVec = GetParam();
+    const auto& nanVec  = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
     fgm::OperationStatus flag;
 
@@ -801,7 +801,7 @@ TEST_P(Vector4DRejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCor
  */
 TEST_P(Vector4DRejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec = fgm::vec4d::one<float>;
+    const auto& oneVec     = fgm::vec4d::one<float>;
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 
@@ -816,7 +816,7 @@ TEST_P(Vector4DRejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSet
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& nanVec = GetParam();
+    const auto& nanVec  = GetParam();
     const auto& ontoVec = fgm::vec4d::one<float>;
     fgm::OperationStatus flag;
 
@@ -831,7 +831,7 @@ TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVe
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec = fgm::vec4d::one<float>;
+    const auto& oneVec     = fgm::vec4d::one<float>;
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 

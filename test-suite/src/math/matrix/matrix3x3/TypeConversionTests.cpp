@@ -25,7 +25,7 @@
  **************************************/
 
 /** @brief Verify that the matrix can be type promoted and demoted at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Matrix3D MAT(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
@@ -36,7 +36,7 @@ namespace
     // Verify that the matrix can be type demoted at compile time.
     constexpr fgm::Matrix3D<int> MATI(MAT);
     static_assert(std::is_same_v<decltype(MATI)::value_type, int>);
-}
+} // namespace
 
 
 

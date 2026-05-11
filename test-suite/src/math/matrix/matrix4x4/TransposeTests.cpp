@@ -27,10 +27,10 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { { T(1), T(2), T(3), T(4) },
-                    { T(5), T(6), T(7), T(8) },
-                    { T(9), T(10), T(11), T(12) },
-                    { T(13), T(14), T(15), T(16) } };
+        _matrix            = { { T(1), T(2), T(3), T(4) },
+                               { T(5), T(6), T(7), T(8) },
+                               { T(9), T(10), T(11), T(12) },
+                               { T(13), T(14), T(15), T(16) } };
         _expectedTranspose = { { T(1), T(5), T(9), T(13) },
                                { T(2), T(6), T(10), T(14) },
                                { T(3), T(7), T(11), T(15) },
@@ -116,7 +116,9 @@ namespace
 
 /** @brief Verify that transposing a matrix exchanges row and column elements and returns a new matrix. */
 TYPED_TEST(Matrix4DTranspose, ExchangesRowsAndColumnElements)
-{ EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose()); }
+{
+    EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose());
+}
 
 
 /**
@@ -124,6 +126,8 @@ TYPED_TEST(Matrix4DTranspose, ExchangesRowsAndColumnElements)
  *        column elements and returns a new matrix.
  */
 TYPED_TEST(Matrix4DTranspose, StaticWrapper_ExchangesRowsAndColumnElements)
-{ EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix4D<TypeParam>::transpose(this->_matrix)); }
+{
+    EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix4D<TypeParam>::transpose(this->_matrix));
+}
 
 /** @} */

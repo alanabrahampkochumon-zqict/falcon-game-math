@@ -17,7 +17,7 @@
 
 
 constexpr auto NAN_F = fgm::constants::NaN;
-constexpr auto INF = fgm::constants::INFINITY_F;
+constexpr auto INF   = fgm::constants::INFINITY_F;
 
 
 
@@ -38,11 +38,11 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(1.1234568789), T(2.123458319), T(5.123412593891)};
-        _vecB = { T(5.1234568789), T(1.123458319), T(8.123412593891)};
-        _expectedGT = { false, true, false };
+        _vecA        = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
+        _vecB        = { T(5.1234568789), T(1.123458319), T(8.123412593891) };
+        _expectedGT  = { false, true, false };
         _expectedGTE = { false, true, false };
-        _expectedLT = { true, false, true };
+        _expectedLT  = { true, false, true };
         _expectedLTE = { true, false, true };
     }
 };
@@ -453,7 +453,7 @@ TEST(Vector3DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison 
+ * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector3DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)

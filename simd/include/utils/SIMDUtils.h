@@ -10,9 +10,9 @@
  */
 
 
+#include <algorithm>
 #include <bit>
 #include <cstddef>
-#include <algorithm>
 
 namespace falcon::simd
 {
@@ -38,11 +38,13 @@ namespace falcon::simd
     constexpr PackingParams calculatePackedSize(const std::size_t totalByteSize, const std::size_t maxAlignAs)
     {
         if (totalByteSize < 16)
+        {
             return PackingParams{ 16, 16 - totalByteSize, 16, 1 };
+        }
 
-        const std::size_t packedSize = std::bit_ceil(totalByteSize);
+        const std::size_t packedSize           = std::bit_ceil(totalByteSize);
         const std::size_t optimalRegisterWidth = std::min(packedSize, maxAlignAs);
-        const std::size_t numRegisters = packedSize / optimalRegisterWidth;
+        const std::size_t numRegisters         = packedSize / optimalRegisterWidth;
 
         return PackingParams{ packedSize, packedSize - totalByteSize, optimalRegisterWidth, numRegisters };
     }

@@ -29,7 +29,7 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { { T(3), T(4), T(2) }, { T(1), T(1), T(1) }, { T(2), T(1), T(2) } };
+        _matrix              = { { T(3), T(4), T(2) }, { T(1), T(1), T(1) }, { T(2), T(1), T(2) } };
         _expectedDeterminant = static_cast<T>(1);
     }
 };

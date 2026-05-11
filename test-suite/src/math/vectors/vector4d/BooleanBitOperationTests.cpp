@@ -31,11 +31,11 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { true, false, true, false };
-        _vecB = { true, true, false, false };
+        _vecA                      = { true, false, true, false };
+        _vecB                      = { true, true, false, false };
         _expectedConjunctionVector = { true, false, false, false };
-        _expectedDisjunctionVec = { true, true, true, false };
-        _expectedInvertedVec = { false, true, false, true };
+        _expectedDisjunctionVec    = { true, true, true, false };
+        _expectedInvertedVec       = { false, true, false, true };
     }
 };
 
@@ -82,7 +82,7 @@ TEST_F(BooleanVector4DBitOperationTests, BitwiseOR_PerformComponentwiseDisjuncti
 
 
 /**
- * @test Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place 
+ * @test Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
 TEST_F(BooleanVector4DBitOperationTests, CompoundBitwiseOR_PerformInPlaceDisjunction)

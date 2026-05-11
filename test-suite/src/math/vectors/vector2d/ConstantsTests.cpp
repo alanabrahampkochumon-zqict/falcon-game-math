@@ -17,7 +17,7 @@ template <typename T>
 class Vector2DConstants: public ::testing::Test
 {
 protected:
-    T _one = T(1);
+    T _one  = T(1);
     T _zero = T(0);
 };
 /** @brief Test fixture for @ref fgm::Vector2D constants, parameterized by @ref SupportedArithmeticTypes. */
@@ -39,10 +39,7 @@ TYPED_TEST(Vector2DConstants, One_ReturnsVectorWithUnitComponents)
 
 
 /** @test Verify that @ref fgm::vec2d::zero returns a 2D vector with zero components. */
-TYPED_TEST(Vector2DConstants, Zero_ReturnsVectorWithZeroComponents)
-{
-    EXPECT_VEC_ZERO(fgm::vec2d::zero<TypeParam>);
-}
+TYPED_TEST(Vector2DConstants, Zero_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::vec2d::zero<TypeParam>); }
 
 
 /** @test Verify that @ref fgm::vec2d::inf<float> returns a 2D vector with infinity components. */

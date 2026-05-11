@@ -736,7 +736,8 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector3D<T>& operator&=(const Vector3D& rhs) noexcept requires std::is_same_v<T, bool>;
+        constexpr Vector3D<T>& operator&=(const Vector3D& rhs) noexcept
+            requires std::is_same_v<T, bool>;
 
 
         /**
@@ -1665,7 +1666,7 @@ namespace fgm
          */
         constexpr friend std::ostream& operator<<(std::ostream& os, const Vector3D& vector)
         {
-            const std::streamsize oldPrecision = os.precision();
+            const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
             auto precision = Config::useFullPrecision
@@ -1733,12 +1734,12 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bVec3 = Vector3D<bool>;                ///< `bool` vector
-    using iVec3 = Vector3D<int>;                 ///< `int` vector
-    using uVec3 = Vector3D<unsigned int>;        ///< `unsigned int` vector
-    using vec3 = Vector3D<float>;                ///< `float` vector
-    using lVec3 = Vector3D<long long>;           ///< `long long` vector
-    using dVec3 = Vector3D<double>;              ///< `double` vector
+    using bVec3  = Vector3D<bool>;               ///< `bool` vector
+    using iVec3  = Vector3D<int>;                ///< `int` vector
+    using uVec3  = Vector3D<unsigned int>;       ///< `unsigned int` vector
+    using vec3   = Vector3D<float>;              ///< `float` vector
+    using lVec3  = Vector3D<long long>;          ///< `long long` vector
+    using dVec3  = Vector3D<double>;             ///< `double` vector
     using ulVec3 = Vector3D<unsigned long long>; ///< `unsigned long long` vector
 
     /** @} */

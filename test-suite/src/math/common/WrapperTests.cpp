@@ -23,7 +23,7 @@ protected:
 
     void SetUp() override
     {
-        _value = T(-5.2891283123432);
+        _value            = T(-5.2891283123432);
         _expectedAbsValue = T(5.2891283123432);
     }
 };

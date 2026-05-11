@@ -35,7 +35,7 @@ class OperationStatusMappingTests: public ::testing::TestWithParam<OperationStat
 TEST_P(OperationStatusMappingTests, ReturnsCorrectMessage)
 {
     const auto& [status, expectedMessage] = GetParam();
-    const auto message = fgm::getStatusMessage(status);
+    const auto message                    = fgm::getStatusMessage(status);
     EXPECT_EQ(expectedMessage, message);
 }
 

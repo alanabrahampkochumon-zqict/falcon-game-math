@@ -11,9 +11,9 @@
 
 #define FORCE_SCALAR
 
+#include "CommonSetup.h"
 #include "utils/MatrixUtils.h"
 #include "utils/VectorUtils.h"
-#include "CommonSetup.h"
 
 #include <common/MathTraits.h>
 #include <matrix/Matrix2D.h>

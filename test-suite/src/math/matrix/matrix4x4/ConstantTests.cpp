@@ -33,7 +33,7 @@ TYPED_TEST_SUITE(Matrix4DConstants, SupportedArithmeticTypes);
  **************************************/
 
 /** @brief Verify that @ref fgm::Matrix4D constants are available at compile time. */
-namespace 
+namespace
 {
     // Verify identity matrix
     static_assert(fgm::mat4d::eye<int>(0, 0) == 1);
@@ -109,7 +109,7 @@ namespace
     static_assert(fgm::Matrix4D<int>::zero()(3, 2) == 0);
     static_assert(fgm::Matrix4D<int>::zero()(3, 3) == 0);
 
-}
+} // namespace
 
 
 
@@ -124,7 +124,10 @@ TYPED_TEST(Matrix4DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(f
 
 
 /** @brief Verify that @ref fgm::Matrix4D::eye static factory returns an identity matrix. */
-TYPED_TEST(Matrix4DConstants, StaticFactory_Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Matrix4D<TypeParam>::eye()); }
+TYPED_TEST(Matrix4DConstants, StaticFactory_Eye_ReturnsIdentityMatrix)
+{
+    EXPECT_MAT_IDENTITY(fgm::Matrix4D<TypeParam>::eye());
+}
 
 
 /** @brief Verify that @ref fgm::mat4d::zero returns a zero matrix. */

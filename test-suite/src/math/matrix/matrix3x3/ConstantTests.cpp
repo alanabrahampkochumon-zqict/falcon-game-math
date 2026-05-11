@@ -33,7 +33,7 @@ TYPED_TEST_SUITE(Matrix3DConstants, SupportedArithmeticTypes);
  **************************************/
 
 /** @brief Verify that @ref fgm::Matrix3D constants are available at compile time. */
-namespace 
+namespace
 {
     // Verify identity matrix
     static_assert(fgm::mat3d::eye<int>(0, 0) == 1);
@@ -82,7 +82,7 @@ namespace
     static_assert(fgm::Matrix3D<int>::zero()(2, 1) == 0);
     static_assert(fgm::Matrix3D<int>::zero()(2, 2) == 0);
 
-}
+} // namespace
 
 
 
@@ -97,7 +97,10 @@ TYPED_TEST(Matrix3DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(f
 
 
 /** @brief Verify that @ref fgm::Matrix3D::eye static factory returns an identity matrix. */
-TYPED_TEST(Matrix3DConstants, StaticFactory_Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Matrix3D<TypeParam>::eye()); }
+TYPED_TEST(Matrix3DConstants, StaticFactory_Eye_ReturnsIdentityMatrix)
+{
+    EXPECT_MAT_IDENTITY(fgm::Matrix3D<TypeParam>::eye());
+}
 
 
 /** @brief Verify that @ref fgm::mat3d::zero returns a zero matrix. */

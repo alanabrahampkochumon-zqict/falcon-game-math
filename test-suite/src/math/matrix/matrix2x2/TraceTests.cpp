@@ -4,7 +4,7 @@
  * @date Created on: April 17, 2026
  *
  * @brief Verify @ref fgm::Matrix2D trace operation logic.
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -22,7 +22,8 @@ protected:
 
     void SetUp() override
     {
-        _mat = { fgm::Vector2D{ T(5.1234523151234), T(1.2521412341253) }, fgm::Vector2D{ T(8.1234983217498234), T(3.12348219341342) } };
+        _mat         = { fgm::Vector2D{ T(5.1234523151234), T(1.2521412341253) },
+                         fgm::Vector2D{ T(8.1234983217498234), T(3.12348219341342) } };
         _expectedSum = T(8.24693450853682);
     }
 };
@@ -37,17 +38,16 @@ TYPED_TEST_SUITE(Matrix2DTrace, SupportedArithmeticTypes);
  */
 
 /** @brief Verify that the matrix trace operation is available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Matrix2D MAT(3, 2, 5, 7);
-    static_assert(MAT.trace() == 10); // Member function
+    static_assert(MAT.trace() == 10);                    // Member function
     static_assert(fgm::Matrix2D<int>::trace(MAT) == 10); // Static function
-}
+} // namespace
 
 
 /** @brief Verify that trace of a 2D matrix returns the sum of diagonal elements. */
-TYPED_TEST(Matrix2DTrace, ReturnsSumOfDiagonalElements)
-{ EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
+TYPED_TEST(Matrix2DTrace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
 
 
 /** @brief Verify that trace of a 2D matrix using static variant returns the sum of diagonal elements. */

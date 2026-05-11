@@ -35,10 +35,10 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(2), T(3), T(4) };
-        _vecB = { T(6), T(7), T(8) };
-        _vecAOrthogonal = { T(3), T(0), T(4) };
-        _vecBOrthogonal = { T(0), T(5), T(0) };
+        _vecA               = { T(2), T(3), T(4) };
+        _vecB               = { T(6), T(7), T(8) };
+        _vecAOrthogonal     = { T(3), T(0), T(4) };
+        _vecBOrthogonal     = { T(0), T(5), T(0) };
         _expectedDotProduct = static_cast<T>(65);
 
         _expectedADotA = static_cast<T>(29);
@@ -58,8 +58,8 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(2), T(3), T(4) };
-        _vecB = { T(5), T(6), T(7) };
+        _vecA                 = { T(2), T(3), T(4) };
+        _vecB                 = { T(5), T(6), T(7) };
         _expectedCrossProduct = { T(-3), T(6), T(-3) };
     }
 };
@@ -86,11 +86,17 @@ TYPED_TEST(Vector3DDotProduct, SelfDotProductReturnsSquareMagnitude)
     const TypeParam dotProduct = this->_vecA.dot(this->_vecA);
 
     if constexpr (std::is_same_v<TypeParam, double>)
+    {
         EXPECT_DOUBLE_EQ(this->_expectedADotA, dotProduct);
+    }
     else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_FLOAT_EQ(this->_expectedADotA, dotProduct);
+    }
     else
+    {
         EXPECT_EQ(this->_expectedADotA, dotProduct);
+    }
 }
 
 
@@ -100,11 +106,17 @@ TYPED_TEST(Vector3DDotProduct, OrthogonalDotProductReturnZero)
     const TypeParam dotProduct = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
 
     if constexpr (std::is_same_v<TypeParam, double>)
+    {
         EXPECT_DOUBLE_EQ(0.0, dotProduct);
+    }
     else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_FLOAT_EQ(0.0f, dotProduct);
+    }
     else
+    {
         EXPECT_EQ(0, dotProduct);
+    }
 }
 
 
@@ -114,11 +126,17 @@ TYPED_TEST(Vector3DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
     const TypeParam dotProduct = this->_vecA.dot(this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
+    {
         EXPECT_DOUBLE_EQ(this->_expectedDotProduct, dotProduct);
+    }
     else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_FLOAT_EQ(this->_expectedDotProduct, dotProduct);
+    }
     else
+    {
         EXPECT_EQ(this->_expectedDotProduct, dotProduct);
+    }
 }
 
 
@@ -128,11 +146,17 @@ TYPED_TEST(Vector3DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZe
     const TypeParam dotProduct = fgm::Vector3D<TypeParam>::dot(this->_vecA, this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
+    {
         EXPECT_DOUBLE_EQ(this->_expectedDotProduct, dotProduct);
+    }
     else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_FLOAT_EQ(this->_expectedDotProduct, dotProduct);
+    }
     else
+    {
         EXPECT_EQ(this->_expectedDotProduct, dotProduct);
+    }
 }
 
 
@@ -338,7 +362,7 @@ TYPED_TEST(Vector3DCrossProduct, IsAntiCommutative)
  */
 TYPED_TEST(Vector3DCrossProduct, BetweenParallelVectorIsCommutatives)
 {
-    const fgm::Vector3D vecB = TypeParam(2) * this->_vecA;
+    const fgm::Vector3D vecB    = TypeParam(2) * this->_vecA;
     fgm::Vector3D crossProduct1 = fgm::Vector3D<float>::cross(this->_vecA, vecB);
     fgm::Vector3D crossProduct2 = fgm::Vector3D<float>::cross(vecB, this->_vecA);
 

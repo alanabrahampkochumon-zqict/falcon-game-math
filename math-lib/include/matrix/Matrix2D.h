@@ -48,7 +48,7 @@ namespace fgm
         using value_type = T; ///< The numeric type of the vector components.
 
         static constexpr std::size_t columns = 2; ///< Matrix column count.
-        static constexpr std::size_t rows = 2;    ///< Matrix row count.
+        static constexpr std::size_t rows    = 2; ///< Matrix row count.
 
 
         /** @} */
@@ -1047,7 +1047,7 @@ namespace fgm
          */
         constexpr friend std::ostream& operator<<(std::ostream& os, const Matrix2D& matrix)
         {
-            const std::streamsize oldPrecision = os.precision();
+            const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
             auto precision = Config::useFullPrecision
@@ -1162,12 +1162,12 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bMat2 = Matrix2D<bool>;                ///< `bool` matrix
-    using iMat2 = Matrix2D<int>;                 ///< `int` matrix
-    using uMat2 = Matrix2D<unsigned int>;        ///< `unsigned int` matrix
-    using mat2 = Matrix2D<float>;                ///< `float` matrix
-    using lMat2 = Matrix2D<long long>;           ///< `long long` matrix
-    using dMat2 = Matrix2D<double>;              ///< `double` matrix
+    using bMat2  = Matrix2D<bool>;               ///< `bool` matrix
+    using iMat2  = Matrix2D<int>;                ///< `int` matrix
+    using uMat2  = Matrix2D<unsigned int>;       ///< `unsigned int` matrix
+    using mat2   = Matrix2D<float>;              ///< `float` matrix
+    using lMat2  = Matrix2D<long long>;          ///< `long long` matrix
+    using dMat2  = Matrix2D<double>;             ///< `double` matrix
     using ulMat2 = Matrix2D<unsigned long long>; ///< `unsigned long long` matrix
 
     /** @} */

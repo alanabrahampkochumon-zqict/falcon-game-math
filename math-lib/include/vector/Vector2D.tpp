@@ -170,9 +170,13 @@ namespace fgm
         static_assert(swizzleDimension > 0 && swizzleDimension <= dimension &&
                       "Swizzle must return a scalar, or a 2D vector.");
         if constexpr (swizzleDimension == 2)
+        {
             return Vector2D(_data[Indices]...);
+        }
         else
+        {
             return T(_data[Indices]...);
+        }
     }
 
 
@@ -196,7 +200,9 @@ namespace fgm
     {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+        {
             return _data[0] == rhs[0] && _data[1] == rhs[1];
+        }
         else
         /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
         {
@@ -205,8 +211,12 @@ namespace fgm
             // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
             if (std::is_constant_evaluated())
+            {
                 if (hasNaN() || rhs.hasNaN())
+                {
                     return false;
+                }
+            }
 #endif
             return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
                 (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
@@ -226,11 +236,15 @@ namespace fgm
     constexpr bool Vector2D<T>::anyNeq(const Vector2D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+        {
             return _data[0] != rhs[0] || _data[1] != rhs[1];
+        }
         else
+        {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
             return (_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon)) ||
                 (_data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon));
+        }
     }
 
 
@@ -262,11 +276,15 @@ namespace fgm
     constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+        {
             return Vector2D(_data[0] == rhs[0], _data[1] == rhs[1]);
+        }
         else
+        {
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
             return Vector2D((_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon),
                             (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon));
+        }
     }
 
 
@@ -283,11 +301,15 @@ namespace fgm
     constexpr Vector2D<bool> Vector2D<T>::neq(const Vector2D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+        {
             return Vector2D(_data[0] != rhs[0], _data[1] != rhs[1]);
+        }
         else
+        {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
             return Vector2D<bool>((_data[0] != rhs[0]) && !(fgm::abs(_data[0] - rhs[0]) <= epsilon),
                                   (_data[1] != rhs[1]) && !(fgm::abs(_data[1] - rhs[1]) <= epsilon));
+        }
     }
 
 
@@ -612,11 +634,20 @@ namespace fgm
         using R = std::common_type_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
-            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)) | static_cast<int>(fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+        {
+            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)) |
+                static_cast<int>(fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+            {
                 return fgm::vec2d::zero<R>;
+            }
+        }
         if constexpr (std::is_integral_v<R>)
+        {
             if (scalar == 0)
+            {
                 return fgm::vec2d::zero<R>;
+            }
+        }
 
         return (*this) / scalar;
     }
@@ -655,11 +686,13 @@ namespace fgm
         }
 
         if constexpr (std::is_integral_v<R>)
+        {
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return fgm::vec2d::zero<R>;
             }
+        }
 
 
         status = OperationStatus::SUCCESS;
@@ -693,10 +726,14 @@ namespace fgm
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
         using R = std::common_type_t<T, U>;
         if constexpr (std::is_floating_point_v<R>)
+        {
             return std::fma(static_cast<R>(_data[0]), static_cast<R>(rhs[0]),
                             std::fma(static_cast<R>(_data[1]), static_cast<R>(rhs[1]), T(0)));
+        }
         else
+        {
             return _data[0] * rhs[0] + _data[1] * rhs[1];
+        }
 #else
         return _data[0] * rhs[0] + _data[1] * rhs[1];
 #endif
@@ -791,12 +828,16 @@ namespace fgm
     constexpr Vector2D<Magnitude<T>> Vector2D<T>::safeNormalize() const noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<T>;
+        using R     = Magnitude<T>;
         R magnitude = mag();
         if (fgm::isnan(magnitude))
+        {
             return fgm::vec2d::zero<R>;
+        }
         if (magnitude <= Config::EPSILON_SQUARE<R>)
+        {
             return fgm::vec2d::zero<R>;
+        }
 
         return *this / magnitude;
     }
@@ -814,7 +855,7 @@ namespace fgm
     constexpr Vector2D<Magnitude<T>> Vector2D<T>::tryNormalize(OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<T>;
+        using R     = Magnitude<T>;
         R magnitude = mag();
         if (fgm::isnan(magnitude))
         {
@@ -855,7 +896,9 @@ namespace fgm
     {
         using R = std::common_type_t<T, U>;
         if (ontoNormalized)
+        {
             return this->dot(onto) * onto; // a.dot(b) * b
+        }
 
         /** @note Static cast ensures integral type dots don't lose much precision */
         return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
@@ -879,19 +922,25 @@ namespace fgm
         -> Vector2D<Magnitude<std::common_type_t<T, U>>>
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R       = std::common_type_t<T, U>;
         using MagType = Magnitude<R>;
         if (ontoNormalized)
+        {
             return this->dot(onto) * onto;
+        }
 
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
         if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(ontoSquared)))
+        {
             return fgm::vec2d::zero<MagType>;
+        }
 
         if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
+        {
             return fgm::vec2d::zero<MagType>;
+        }
 
         return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
     }
@@ -915,7 +964,7 @@ namespace fgm
         -> Vector2D<Magnitude<std::common_type_t<T, U>>>
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R       = std::common_type_t<T, U>;
         using MagType = Magnitude<R>;
 
         if (ontoNormalized)
@@ -991,7 +1040,9 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
+        {
             return fgm::vec2d::zero<std::common_type_t<T, U>>;
+        }
 
         return *this - safeProject(from, fromNormalized);
     }
@@ -1047,9 +1098,13 @@ namespace fgm
     constexpr bool Vector2D<T>::hasInf() const noexcept
     {
         if constexpr (std::is_floating_point_v<T>)
+        {
             return fgm::isinf(_data[0]) | fgm::isinf(_data[1]);
+        }
         else
+        {
             return false;
+        }
     }
 
 
@@ -1064,9 +1119,13 @@ namespace fgm
     constexpr bool Vector2D<T>::hasNaN() const noexcept
     {
         if constexpr (std::is_floating_point_v<T>)
+        {
             return fgm::isnan(_data[0]) | fgm::isnan(_data[1]);
+        }
         else
+        {
             return false;
+        }
     }
 
 
@@ -1079,5 +1138,5 @@ namespace fgm
 } // namespace fgm
 
 #if defined(__clang__)
-#pragma clang diagnostic pop
+    #pragma clang diagnostic pop
 #endif

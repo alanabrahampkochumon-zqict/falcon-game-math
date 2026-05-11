@@ -30,7 +30,7 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(14), T(27) };
+        _vec             = { T(14), T(27) };
         _expectedUnitVec = { static_cast<R>(0.46031716445500037), static_cast<R>(0.8877545314489294) };
     }
 };
@@ -44,10 +44,7 @@ class Vector2DZeroNormalization: public ::testing::Test
 protected:
     fgm::Vector2D<T> _vec;
 
-    void SetUp() override
-    {
-        _vec = { T(0), T(0) };
-    }
+    void SetUp() override { _vec = { T(0), T(0) }; }
 };
 /**
  * @brief Test fixture for @ref fgm::Vector2D zero-vector normalization, parameterized by
@@ -61,7 +58,7 @@ class Vector2DNormalizationNaNTests: public ::testing::TestWithParam<fgm::Vector
 {};
 INSTANTIATE_TEST_SUITE_P(Vector2DNormalizationNaNTestSuite, Vector2DNormalizationNaNTests,
                          ::testing::Values(fgm::Vector2D<float>(fgm::constants::NaN, 1.0f),
-                                           fgm::Vector2D<float>(1.0f, fgm::constants::NaN), 
+                                           fgm::Vector2D<float>(1.0f, fgm::constants::NaN),
                                            fgm::Vector2D<float>(fgm ::constants::NaN, fgm::constants::NaN)));
 
 

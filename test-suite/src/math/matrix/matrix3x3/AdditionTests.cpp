@@ -93,8 +93,10 @@ TYPED_TEST(Matrix3DAddition, PlusOperator_ReturnsMatrixSum)
  */
 TEST(Matrix3DAddition, MixedTypeAdditionPromotesType)
 {
-    const fgm::Matrix3D mat1{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ -3.0f, -4.0f, 10.0f }, fgm::Vector3D{4.5f, 3.25f, 3.16f} };
-    const fgm::Matrix3D mat2{ fgm::Vector3D{ 10.0, 2.0, -1.0 }, fgm::Vector3D{ 3.0, -8.0, 12.0 }, fgm::Vector3D {3.25, 5.1, 0.0} };
+    const fgm::Matrix3D mat1{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ -3.0f, -4.0f, 10.0f },
+                              fgm::Vector3D{ 4.5f, 3.25f, 3.16f } };
+    const fgm::Matrix3D mat2{ fgm::Vector3D{ 10.0, 2.0, -1.0 }, fgm::Vector3D{ 3.0, -8.0, 12.0 },
+                              fgm::Vector3D{ 3.25, 5.1, 0.0 } };
     [[maybe_unused]] const fgm::Matrix3D sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
@@ -120,7 +122,7 @@ TYPED_TEST(Matrix3DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 TEST(Matrix3DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
 {
     fgm::Matrix3D mat1{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ -3.0f, -4.0f, 10.0f },
-                                  fgm::Vector3D{ 4.5f, 3.25f, 3.16f } };
+                        fgm::Vector3D{ 4.5f, 3.25f, 3.16f } };
     constexpr fgm::Matrix3D mat2{ fgm::Vector3D{ 10.0, 2.0, -1.0 }, fgm::Vector3D{ 3.0, -8.0, 12.0 },
                                   fgm::Vector3D{ 3.25, 5.1, 0.0 } };
 

@@ -30,9 +30,9 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(4), T(9), T(0) };
-        _perpendicularVec = { T(0), T(0), T(11) };
-        _ontoVec = { T(0), T(2), T(0) };
+        _vec                = { T(4), T(9), T(0) };
+        _perpendicularVec   = { T(0), T(0), T(11) };
+        _ontoVec            = { T(0), T(2), T(0) };
         _expectedProjection = { T(0), T(9), T(0) };
     }
 };
@@ -431,7 +431,7 @@ TYPED_TEST(Vector3DProjection, StaticWrapper_SafeProject_AlwaysReturnFloatingPoi
  */
 TEST_P(Vector3DProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& nanVec = GetParam();
+    const auto& nanVec  = GetParam();
     const auto& ontoVec = fgm::vec3d::one<float>;
 
     EXPECT_VEC_ZERO(nanVec.safeProject(ontoVec));
@@ -444,7 +444,7 @@ TEST_P(Vector3DProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSets
  */
 TEST_P(Vector3DProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec = fgm::vec3d::one<float>;
+    const auto& oneVec     = fgm::vec3d::one<float>;
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(oneVec.safeProject(ontoNaNVec));
@@ -457,7 +457,7 @@ TEST_P(Vector3DProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAnd
  */
 TEST_P(Vector3DProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& nanVec = GetParam();
+    const auto& nanVec  = GetParam();
     const auto& ontoVec = fgm::vec3d::one<float>;
 
     EXPECT_VEC_ZERO(fgm::Vector3D<float>::safeProject(nanVec, ontoVec));
@@ -470,7 +470,7 @@ TEST_P(Vector3DProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZer
  */
 TEST_P(Vector3DProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec = fgm::vec3d::one<float>;
+    const auto& oneVec     = fgm::vec3d::one<float>;
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(fgm::Vector3D<float>::safeProject(oneVec, ontoNaNVec));
@@ -713,7 +713,7 @@ TYPED_TEST(Vector3DProjection, StaticWrapper_TryProject_AlwaysReturnFloatingPoin
  */
 TEST_P(Vector3DProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& nanVec = GetParam();
+    const auto& nanVec  = GetParam();
     const auto& ontoVec = fgm::vec3d::one<float>;
     fgm::OperationStatus flag;
 
@@ -728,7 +728,7 @@ TEST_P(Vector3DProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsC
  */
 TEST_P(Vector3DProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec = fgm::vec3d::one<float>;
+    const auto& oneVec     = fgm::vec3d::one<float>;
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 
@@ -743,7 +743,7 @@ TEST_P(Vector3DProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndS
  */
 TEST_P(Vector3DProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& nanVec = GetParam();
+    const auto& nanVec  = GetParam();
     const auto& ontoVec = fgm::vec3d::one<float>;
     fgm::OperationStatus flag;
 
@@ -758,7 +758,7 @@ TEST_P(Vector3DProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZero
  */
 TEST_P(Vector3DProjectionNaNTests, StaticWrapper_TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec = fgm::vec3d::one<float>;
+    const auto& oneVec     = fgm::vec3d::one<float>;
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
     EXPECT_VEC_ZERO(fgm::Vector3D<float>::tryProject(oneVec, ontoNaNVec, flag));

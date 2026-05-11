@@ -343,9 +343,10 @@ namespace fgm
 
         /**
          * @brief Constructs a new vector by rearranging, duplicating, or isolating components of the current vector.
-         * 
+         *
          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
-         *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime overhead.
+         *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime
+         * overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
          *                 @see @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
@@ -1680,7 +1681,7 @@ namespace fgm
          */
         constexpr friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
         {
-            const std::streamsize oldPrecision = os.precision();
+            const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
             auto precision = Config::useFullPrecision
@@ -1749,12 +1750,12 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bVec4 = Vector4D<bool>;                ///< `bool` vector
-    using iVec4 = Vector4D<int>;                 ///< `int` vector
-    using uVec4 = Vector4D<unsigned int>;        ///< `unsigned int` vector
-    using vec4 = Vector4D<float>;                ///< `float` vector
-    using lVec4 = Vector4D<long long>;           ///< `long long` vector
-    using dVec4 = Vector4D<double>;              ///< `double` vector
+    using bVec4  = Vector4D<bool>;               ///< `bool` vector
+    using iVec4  = Vector4D<int>;                ///< `int` vector
+    using uVec4  = Vector4D<unsigned int>;       ///< `unsigned int` vector
+    using vec4   = Vector4D<float>;              ///< `float` vector
+    using lVec4  = Vector4D<long long>;          ///< `long long` vector
+    using dVec4  = Vector4D<double>;             ///< `double` vector
     using ulVec4 = Vector4D<unsigned long long>; ///< `unsigned long long` vector
 
     /** @} */

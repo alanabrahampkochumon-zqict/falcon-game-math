@@ -27,7 +27,7 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { fgm::Vector2D{ T(1), T(2) }, fgm::Vector2D{ T(3), T(4) } };
+        _matrix            = { fgm::Vector2D{ T(1), T(2) }, fgm::Vector2D{ T(3), T(4) } };
         _expectedTranspose = { fgm::Vector2D{ T(1), T(3) }, fgm::Vector2D{ T(2), T(4) } };
     }
 };
@@ -48,7 +48,7 @@ TYPED_TEST_SUITE(Matrix2DTranspose, SupportedTypes);
  **************************************/
 
 /** @brief Verify that matrix transpose is available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Matrix2D MAT(1, 2, 3, 4);
 
@@ -65,7 +65,7 @@ namespace
     static_assert(TRANSPOSE_MAT_S(0, 1) == 3);
     static_assert(TRANSPOSE_MAT_S(1, 0) == 2);
     static_assert(TRANSPOSE_MAT_S(1, 1) == 4);
-}
+} // namespace
 
 
 

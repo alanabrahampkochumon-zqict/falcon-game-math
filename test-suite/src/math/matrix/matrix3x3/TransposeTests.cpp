@@ -27,7 +27,7 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { { T(1), T(2), T(3) }, { T(4), T(5), T(6) }, { T(7), T(8), T(9) } };
+        _matrix            = { { T(1), T(2), T(3) }, { T(4), T(5), T(6) }, { T(7), T(8), T(9) } };
         _expectedTranspose = { { T(1), T(4), T(7) }, { T(2), T(5), T(8) }, { T(3), T(6), T(9) } };
     }
 };
@@ -48,7 +48,7 @@ TYPED_TEST_SUITE(Matrix3DTranspose, SupportedTypes);
  **************************************/
 
 /** @brief Verify that matrix transpose is available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Matrix3D MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
@@ -80,7 +80,7 @@ namespace
     static_assert(TRANSPOSE_MAT_S(2, 0) == 3);
     static_assert(TRANSPOSE_MAT_S(2, 1) == 6);
     static_assert(TRANSPOSE_MAT_S(2, 2) == 9);
-}
+} // namespace
 
 
 

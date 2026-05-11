@@ -10,9 +10,9 @@
  */
 
 
-#include <cstdint>
-
 #include "common/Messages.h"
+
+#include <cstdint>
 
 
 namespace fgm

@@ -113,13 +113,12 @@ TEST_P(Vector2DNaNChecker, ReturnTrueIfAnyComponentIsNaN)
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasNaN());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Vector2DNaNCheckerTestSuite, Vector2DNaNChecker,
-    ::testing::Values(Vector2DUtilityParams{ fgm::Vector2D(fgm::constants::NaN, 1.0f), true },
-                      Vector2DUtilityParams{ fgm::Vector2D(1.0f, fgm::constants::NaN), true },
-                      Vector2DUtilityParams{
-                          fgm::Vector2D(fgm::constants::NaN, fgm::constants::NaN), true },
-                      Vector2DUtilityParams{ fgm::Vector2D(1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(Vector2DNaNCheckerTestSuite, Vector2DNaNChecker,
+                         ::testing::Values(Vector2DUtilityParams{ fgm::Vector2D(fgm::constants::NaN, 1.0f), true },
+                                           Vector2DUtilityParams{ fgm::Vector2D(1.0f, fgm::constants::NaN), true },
+                                           Vector2DUtilityParams{
+                                               fgm::Vector2D(fgm::constants::NaN, fgm::constants::NaN), true },
+                                           Vector2DUtilityParams{ fgm::Vector2D(1.0f, 1.0f), false }));
 
 
 /** @test Verify that @ref std::Vector2D::hasNaN returns False for integral types. */

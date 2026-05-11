@@ -19,16 +19,26 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 find_program(CLANG_FORMATTER NAMES clang-format)
 
 if (CLANG_FORMATTER)
-    file(GLOB_RECURSE ALL_SOURCE_FILES ${CMAKE_SOURCE_DIR}/*.cpp ${CMAKE_SOURCE_DIR}/*.h ${CMAKE_SOURCE_DIR}/*.cxx ${CMAKE_SOURCE_DIR}/*.hxx ${CMAKE_SOURCE_DIR}/*.hpp ${CMAKE_SOURCE_DIR}/*.cc ${CMAKE_SOURCE_DIR}/*.hh ${CMAKE_SOURCE_DIR}/*.tpp ${CMAKE_SOURCE_DIR}/*.inl)
-
-    add_custom_target(format
-            # Use VERBATIM and quote the command for Windows compatibility
-            COMMAND "${CLANG_FORMATTER}" -i -style=file ${ALL_SOURCE_FILES}
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-            COMMENT "Formatting source files..."
-            VERBATIM
+    file(GLOB_RECURSE ALL_SOURCE_FILES 
+        "${CMAKE_SOURCE_DIR}/simd/*.cpp" "${CMAKE_SOURCE_DIR}/simd/*.h" "${CMAKE_SOURCE_DIR}/simd/*.tpp" "${CMAKE_SOURCE_DIR}/simd/*.inl"
+        "${CMAKE_SOURCE_DIR}/math-lib/*.cpp" "${CMAKE_SOURCE_DIR}/math-lib/*.h" "${CMAKE_SOURCE_DIR}/math-lib/*.tpp" "${CMAKE_SOURCE_DIR}/math-lib/*.inl"
+        "${CMAKE_SOURCE_DIR}/test-suite/*.cpp" "${CMAKE_SOURCE_DIR}/test-suite/*.h" "${CMAKE_SOURCE_DIR}/test-suite/*.tpp" "${CMAKE_SOURCE_DIR}/test-suite/*.inl"
     )
-    set_target_properties(format PROPERTIES FOLDER ${DevToolsDir})
+    message("SOURCE FILES:")
+    message(${ALL_SOURCE_FILES})
+    # Only add the target if files were actually found to avoid the stdin error
+    if (ALL_SOURCE_FILES)
+        add_custom_target(format
+                COMMAND "${CLANG_FORMATTER}" -i -style=file ${ALL_SOURCE_FILES}
+                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+                COMMENT "Formatting source files..."
+                VERBATIM
+        )
+        set_target_properties(format PROPERTIES FOLDER ${DevToolsDir})
+    else()
+        message(STATUS "No source files found for formatting.")
+    endif()
+
 else ()
     message(WARNING "clang-format not found")
 endif ()
@@ -91,7 +101,7 @@ if (ENABLE_STRICT)
                 /clang:-Wno-covered-switch-default;
                 /clang:-Wno-reserved-macro-identifier;
                 /clang:-Wno-unused-macros;
-                /clang:-Wno-newline-eof;              
+#                /clang:-Wno-newline-eof;
                 /clang:-Wno-documentation;            
                 /clang:-Wno-unique-object-duplication;
                 /clang:-Wno-extra-semi;

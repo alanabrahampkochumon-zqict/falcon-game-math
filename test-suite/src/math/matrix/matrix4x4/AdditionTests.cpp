@@ -27,14 +27,14 @@ protected:
 
     void SetUp() override
     {
-        _matA = { { T(1), T(2), T(3), T(4) },
-                  { T(5), T(6), T(7), T(8) },
-                  { T(9), T(10), T(11), T(12) },
-                  { T(13), T(14), T(15), T(16) } };
-        _matB = { { T(10), T(20), T(30), T(40) },
-                  { T(50), T(60), T(70), T(80) },
-                  { T(90), T(100), T(110), T(100) },
-                  { T(12), T(13), T(14), T(14) } };
+        _matA        = { { T(1), T(2), T(3), T(4) },
+                         { T(5), T(6), T(7), T(8) },
+                         { T(9), T(10), T(11), T(12) },
+                         { T(13), T(14), T(15), T(16) } };
+        _matB        = { { T(10), T(20), T(30), T(40) },
+                         { T(50), T(60), T(70), T(80) },
+                         { T(90), T(100), T(110), T(100) },
+                         { T(12), T(13), T(14), T(14) } };
         _expectedSum = {
             { T(11), T(22), T(33), T(44) },
             { T(55), T(66), T(77), T(88) },
@@ -149,7 +149,7 @@ TEST(Matrix4DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
                                                    fgm::Vector4D{ 3.25, 5.1, 0.0, 0.25 },
                                                    fgm::Vector4D{ 12.0, 13.0, 14.0, 15.0 } };
 
-    (void)(mat1 += mat2);
+    (void) (mat1 += mat2);
 
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);
 }

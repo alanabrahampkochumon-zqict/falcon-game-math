@@ -47,7 +47,7 @@ namespace fgm
         using value_type = T; ///< The numeric type of the vector components.
 
         static constexpr std::size_t columns = 3; ///< Matrix column count.
-        static constexpr std::size_t rows = 3;    ///< Matrix row count.
+        static constexpr std::size_t rows    = 3; ///< Matrix row count.
 
         /** @} */
 
@@ -1084,7 +1084,7 @@ namespace fgm
          */
         constexpr friend std::ostream& operator<<(std::ostream& os, const Matrix3D& matrix)
         {
-            const std::streamsize oldPrecision = os.precision();
+            const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
             auto precision = Config::useFullPrecision
@@ -1121,12 +1121,12 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bMat3 = Matrix3D<bool>;                ///< `bool` matrix
-    using iMat3 = Matrix3D<int>;                 ///< `int` matrix
-    using uMat3 = Matrix3D<unsigned int>;        ///< `unsigned int` matrix
-    using mat3 = Matrix3D<float>;                ///< `float` matrix
-    using lMat3 = Matrix3D<long long>;           ///< `long long` matrix
-    using dMat3 = Matrix3D<double>;              ///< `double` matrix
+    using bMat3  = Matrix3D<bool>;               ///< `bool` matrix
+    using iMat3  = Matrix3D<int>;                ///< `int` matrix
+    using uMat3  = Matrix3D<unsigned int>;       ///< `unsigned int` matrix
+    using mat3   = Matrix3D<float>;              ///< `float` matrix
+    using lMat3  = Matrix3D<long long>;          ///< `long long` matrix
+    using dMat3  = Matrix3D<double>;             ///< `double` matrix
     using ulMat3 = Matrix3D<unsigned long long>; ///< `unsigned long long` matrix
 
     /** @} */

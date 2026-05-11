@@ -4,7 +4,7 @@
  * @date Created on: April 09, 2026
  *
  * @brief Verify @ref fgm::Matrix2D addition logic.
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -27,8 +27,8 @@ protected:
 
     void SetUp() override
     {
-        _matA = { fgm::Vector2D<T>(1, 2), fgm::Vector2D<T>(3, 4) };
-        _matB = { fgm::Vector2D<T>(5, 6), fgm::Vector2D<T>(7, 8) };
+        _matA        = { fgm::Vector2D<T>(1, 2), fgm::Vector2D<T>(3, 4) };
+        _matB        = { fgm::Vector2D<T>(5, 6), fgm::Vector2D<T>(7, 8) };
         _expectedSum = { fgm::Vector2D<T>(6, 8), fgm::Vector2D<T>(10, 12) };
     }
 };
@@ -49,7 +49,7 @@ TYPED_TEST_SUITE(Matrix2DAddition, SupportedArithmeticTypes);
  **************************************/
 
 /** @brief Verify that matrix addition operations are available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Matrix2D MAT1(1, 2, 3, 4);
     constexpr fgm::Matrix2D MAT2(5, 6, 7, 8);
@@ -60,7 +60,7 @@ namespace
     static_assert(BINARY_SUM(1, 0) == 10);
     static_assert(BINARY_SUM(1, 1) == 12);
 
-}
+} // namespace
 
 
 /**************************************
@@ -99,12 +99,12 @@ TEST(Matrix2DAddition, MixedTypeAdditionPromotesType)
  * @test Verify that the compound addition assignment operator perform a component-wise addition and
  *       mutates the matrix in-place.
  */
- TYPED_TEST(Matrix2DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
+TYPED_TEST(Matrix2DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 {
-     this->_matA += this->_matB;
+    this->_matA += this->_matB;
 
-     EXPECT_MAT_EQ(this->_expectedSum, this->_matA);
- }
+    EXPECT_MAT_EQ(this->_expectedSum, this->_matA);
+}
 
 
 /**

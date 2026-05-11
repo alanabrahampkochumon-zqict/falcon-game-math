@@ -77,7 +77,7 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector2D(const Vector2D<U>& other) noexcept;
-        
+
         /** @} */
 
 
@@ -1607,7 +1607,7 @@ namespace fgm
          */
         constexpr friend std::ostream& operator<<(std::ostream& os, const Vector2D& vector)
         {
-            const std::streamsize oldPrecision = os.precision();
+            const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
             auto precision = Config::useFullPrecision
@@ -1675,12 +1675,12 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bVec2 = Vector2D<bool>;                ///< `bool` vector
-    using iVec2 = Vector2D<int>;                 ///< `int` vector
-    using uVec2 = Vector2D<unsigned int>;        ///< `unsigned int` vector
-    using vec2 = Vector2D<float>;                ///< `float` vector
-    using lVec2 = Vector2D<long long>;           ///< `long long` vector
-    using dVec2 = Vector2D<double>;              ///< `double` vector
+    using bVec2  = Vector2D<bool>;               ///< `bool` vector
+    using iVec2  = Vector2D<int>;                ///< `int` vector
+    using uVec2  = Vector2D<unsigned int>;       ///< `unsigned int` vector
+    using vec2   = Vector2D<float>;              ///< `float` vector
+    using lVec2  = Vector2D<long long>;          ///< `long long` vector
+    using dVec2  = Vector2D<double>;             ///< `double` vector
     using ulVec2 = Vector2D<unsigned long long>; ///< `unsigned long long` vector
 
     /** @} */

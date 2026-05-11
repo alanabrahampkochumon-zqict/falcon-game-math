@@ -68,8 +68,8 @@ INSTANTIATE_TEST_SUITE_P(
                       Vector3DUtilityParams{ fgm::Vector3D(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
                       Vector3DUtilityParams{ fgm::Vector3D(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
                       Vector3DUtilityParams{ fgm::Vector3D(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                         fgm::constants::INFINITY_F),
-                                           true },
+                                                           fgm::constants::INFINITY_F),
+                                             true },
                       Vector3DUtilityParams{ fgm::Vector3D(1.0f, 1.0f, 1.0f), false }));
 
 
@@ -120,9 +120,8 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Values(Vector3DUtilityParams{ fgm::Vector3D(fgm::constants::NaN, 1.0f, 1.0f), true },
                       Vector3DUtilityParams{ fgm::Vector3D(1.0f, fgm::constants::NaN, 1.0f), true },
                       Vector3DUtilityParams{ fgm::Vector3D(1.0f, 1.0f, fgm::constants::NaN), true },
-                      Vector3DUtilityParams{ fgm::Vector3D(fgm::constants::NaN, fgm::constants::NaN,
-                                                         fgm::constants::NaN),
-                                           true },
+                      Vector3DUtilityParams{
+                          fgm::Vector3D(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN), true },
                       Vector3DUtilityParams{ fgm::Vector3D(1.0f, 1.0f, 1.0f), false }));
 
 

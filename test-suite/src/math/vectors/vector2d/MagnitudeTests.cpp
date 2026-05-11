@@ -28,7 +28,7 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(3), T(4)};
+        _vec               = { T(3), T(4) };
         _expectedMagnitude = fgm::Magnitude<T>(5);
     }
 };
@@ -45,7 +45,7 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(1), T(2) };
+        _vec               = { T(1), T(2) };
         _expectedMagnitude = fgm::Magnitude<T>(2.2360679774997898);
     }
 };

@@ -17,7 +17,7 @@ template <typename T>
 class Vector4DConstantTests: public ::testing::Test
 {
 protected:
-    T _one = T(1);
+    T _one  = T(1);
     T _zero = T(0);
 };
 /** @brief Test fixture for @ref fgm::vec4d constants, parameterized by @ref SupportedArithmeticTypes. */

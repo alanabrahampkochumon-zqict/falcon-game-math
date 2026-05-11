@@ -5,7 +5,7 @@
  * @date Created on: April 20, 2026
  *
  * @brief Define all common test setup including types, headers includes, etc.
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -25,7 +25,7 @@ using SupportedArithmeticTypes =
 using SupportedSignedArithmeticTypes = ::testing::Types<int8_t, int16_t, int32_t, int64_t, float, double>;
 using SupportedIntegralTypes =
     ::testing::Types<int8_t, int16_t, int32_t, int64_t, uint8_t, uint16_t, uint32_t, uint64_t>;
-using SupportedFloatingPointTypes = ::testing::Types<float, double>;
+using SupportedFloatingPointTypes         = ::testing::Types<float, double>;
 using SupportedArithmeticFloatingTypePair = ::testing::Types<
     std::pair<float, int8_t>, std::pair<float, int16_t>, std::pair<float, int32_t>, std::pair<float, int64_t>,
     std::pair<float, uint8_t>, std::pair<float, uint16_t>, std::pair<float, uint32_t>, std::pair<float, uint64_t>,

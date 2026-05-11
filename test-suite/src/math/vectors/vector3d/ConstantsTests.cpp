@@ -17,7 +17,7 @@ template <typename T>
 class Vector3DConstants: public ::testing::Test
 {
 protected:
-    T _one = T(1);
+    T _one  = T(1);
     T _zero = T(0);
 };
 /** @brief Test fixture for @ref fgm::Vector3D constants, parameterized by @ref SupportedArithmeticTypes. */
@@ -39,10 +39,7 @@ TYPED_TEST(Vector3DConstants, One_ReturnsVectorWithUnitComponents)
 
 
 /** @test Verify that @ref fgm::vec3d::zero returns a 3D vector with zero components. */
-TYPED_TEST(Vector3DConstants, Zero_ReturnsVectorWithZeroComponents)
-{
-    EXPECT_VEC_ZERO(fgm::vec3d::zero<TypeParam>);
-}
+TYPED_TEST(Vector3DConstants, Zero_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::vec3d::zero<TypeParam>); }
 
 
 /** @test Verify that @ref fgm::vec3d::inf<float> returns a 3D vector with infinity components. */

@@ -24,20 +24,18 @@ protected:
 
     void SetUp() override
     {
-        _elements = { T(1), T(2),  T(3),  T(4),  T(5),  T(6),  T(7),  T(8),
-                      T(9), T(10), T(11), T(12), T(13), T(14), T(15), T(16) };
-        _diagonalElements = { T(2), T(0), T(0), T(0),
-                              T(0), T(3), T(0), T(0),
-                              T(0), T(0), T(5), T(0), 
-                              T(0), T(0), T(0), T(11) };
-        _col0 = { T(1), T(5), T(9), T(13) };
-        _col1 = { T(2), T(6), T(10), T(14) };
-        _col2 = { T(3), T(7), T(11), T(15) };
-        _col3 = { T(4), T(8), T(12), T(16) };
-        _diagonal0 = T(2);
-        _diagonal1 = T(3);
-        _diagonal2 = T(5);
-        _diagonal3 = T(11);
+        _elements         = { T(1), T(2),  T(3),  T(4),  T(5),  T(6),  T(7),  T(8),
+                              T(9), T(10), T(11), T(12), T(13), T(14), T(15), T(16) };
+        _diagonalElements = { T(2), T(0), T(0), T(0), T(0), T(3), T(0), T(0),
+                              T(0), T(0), T(5), T(0), T(0), T(0), T(0), T(11) };
+        _col0             = { T(1), T(5), T(9), T(13) };
+        _col1             = { T(2), T(6), T(10), T(14) };
+        _col2             = { T(3), T(7), T(11), T(15) };
+        _col3             = { T(4), T(8), T(12), T(16) };
+        _diagonal0        = T(2);
+        _diagonal1        = T(3);
+        _diagonal2        = T(5);
+        _diagonal3        = T(11);
     }
 };
 /** Test fixture for @ref fgm::Matrix4D initialization, parameterized by @ref SupportedTypes. */

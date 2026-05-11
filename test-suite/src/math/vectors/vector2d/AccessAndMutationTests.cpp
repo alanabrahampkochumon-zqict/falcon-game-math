@@ -28,7 +28,7 @@
 TEST(Vector2DAccess, AccessibleAsXYZW)
 {
     static const fgm::Vector2D vec(3.0f, 1.0f);
-    
+
     EXPECT_FLOAT_EQ(3.0f, vec.x());
     EXPECT_FLOAT_EQ(1.0f, vec.y());
 }

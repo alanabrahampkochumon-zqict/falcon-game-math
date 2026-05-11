@@ -16,7 +16,7 @@
 
 
 const auto NAN_F = fgm::constants::NaN;
-const auto INF = fgm::constants::INFINITY_F;
+const auto INF   = fgm::constants::INFINITY_F;
 
 
 
@@ -33,10 +33,10 @@ protected:
 
     void SetUp() override
     {
-        _eqVecA = { T(1.1234568789), T(2.123458319) };
-        _eqVecB = { T(1.1234568789), T(2.123458319) };
-        _dissimilarVec = { T(7.1234568789), T(2.123458319) };
-        _equalityMask = { false, true };
+        _eqVecA         = { T(1.1234568789), T(2.123458319) };
+        _eqVecB         = { T(1.1234568789), T(2.123458319) };
+        _dissimilarVec  = { T(7.1234568789), T(2.123458319) };
+        _equalityMask   = { false, true };
         _inequalityMask = { true, false };
     }
 };
@@ -205,8 +205,8 @@ TYPED_TEST(Vector2DEquality, EqualityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::eq returns @ref fgm::Vector2D<bool> mask for different vectors. */
 TEST(Vector2DEquality, MixedType_EqualityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector2D vecA = { 1, 2 };
-    const fgm::Vector2D vecB = { 1.0, 4.0 };
+    const fgm::Vector2D vecA         = { 1, 2 };
+    const fgm::Vector2D vecB         = { 1.0, 4.0 };
     const fgm::Vector2D expectedMask = { true, false };
 
     const fgm::Vector2D<bool> mask = vecA.eq(vecB);
@@ -218,8 +218,8 @@ TEST(Vector2DEquality, MixedType_EqualityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::eq follows IEEE 754 for NaN comparisons. */
 TEST(Vector2DEquality, NanEqualityReturnsFalseBooleanMask)
 {
-    const fgm::Vector2D vecA = { NAN_F, NAN_F };
-    const fgm::Vector2D vecB = { 1.0, -5.88874789 };
+    const fgm::Vector2D vecA         = { NAN_F, NAN_F };
+    const fgm::Vector2D vecB         = { 1.0, -5.88874789 };
     const fgm::Vector2D expectedMask = { false, false };
 
     const fgm::Vector2D mask = vecA.eq(vecB);
@@ -231,7 +231,7 @@ TEST(Vector2DEquality, NanEqualityReturnsFalseBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::eq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector2DEquality, InfinityEqualityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector2D vecA = { INF, -INF };
+    const fgm::Vector2D vecA         = { INF, -INF };
     const fgm::Vector2D<double> vecB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D };
     const fgm::Vector2D expectedMask = { true, false };
 
@@ -418,8 +418,8 @@ TYPED_TEST(Vector2DEquality, InequalityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::neq returns @ref fgm::Vector2D<bool> mask for different vectors. */
 TEST(Vector2DEquality, MixedType_InequalityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector2D vecA = { 1, 2 };
-    const fgm::Vector2D vecB = { 1.0, 4.0};
+    const fgm::Vector2D vecA         = { 1, 2 };
+    const fgm::Vector2D vecB         = { 1.0, 4.0 };
     const fgm::Vector2D expectedMask = { false, true };
 
     const fgm::Vector2D<bool> mask = vecA.neq(vecB);
@@ -431,8 +431,8 @@ TEST(Vector2DEquality, MixedType_InequalityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::neq follows IEEE 754 for NaN comparisons. */
 TEST(Vector2DEquality, NanInequalityReturnsTrueBooleanMask)
 {
-    const fgm::Vector2D vecA = { NAN_F, NAN_F };
-    const fgm::Vector2D vecB = { 1.0, -5.88874789 };
+    const fgm::Vector2D vecA         = { NAN_F, NAN_F };
+    const fgm::Vector2D vecB         = { 1.0, -5.88874789 };
     const fgm::Vector2D expectedMask = { true, true };
 
     const fgm::Vector2D mask = vecA.neq(vecB);
@@ -444,8 +444,8 @@ TEST(Vector2DEquality, NanInequalityReturnsTrueBooleanMask)
 /** @test Verify that @ref fgm::Vector2D::neq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector2DEquality, InfinityInequalityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector2D vecA = { INF, -INF };
-    const fgm::Vector2D vecB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D };
+    const fgm::Vector2D vecA         = { INF, -INF };
+    const fgm::Vector2D vecB         = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D };
     const fgm::Vector2D expectedMask = { false, true };
 
     const fgm::Vector2D mask = vecA.neq(vecB);

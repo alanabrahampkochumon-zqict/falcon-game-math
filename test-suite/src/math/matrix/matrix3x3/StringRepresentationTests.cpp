@@ -71,7 +71,7 @@ TEST_F(Matrix3DStringRepresentationTests, FloatRepresentation)
 TEST_F(Matrix3DStringRepresentationTests, DoubleRepresentation)
 {
     const fgm::Matrix3D mat(1.2345789777, 2.65831, 2.0, 4.0, 3.2345789777, 1.2345789777, 12.0, -6.2345789777,
-                                0.2345789777);
+                            0.2345789777);
     std::stringstream ss;
 
     ss << mat;

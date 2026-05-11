@@ -81,7 +81,8 @@ namespace
 /** @brief Verify that the matrix elements are accessible via subscript indexing for reads. */
 TEST(Matrix4DAccess, AccessibleAsElements)
 {
-    constexpr fgm::Matrix4D mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f);
+    constexpr fgm::Matrix4D mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
+                                15.0f, 16.0f);
 
     EXPECT_FLOAT_EQ(1.0f, mat(0, 0));
     EXPECT_FLOAT_EQ(2.0f, mat(0, 1));

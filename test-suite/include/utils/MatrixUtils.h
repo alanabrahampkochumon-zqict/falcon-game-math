@@ -53,13 +53,23 @@ namespace testutils
                       "Matrices must of the same dimension, e.g: 3x3 and 3x3");
 
         for (std::size_t i = 0; i < T::rows; ++i)
+        {
             for (std::size_t j = 0; j < T::columns; ++j)
+            {
                 if constexpr (std::is_same_v<ValueType, double>)
+                {
                     EXPECT_NEAR(expected(i, j), static_cast<ValueType>(actual(i, j)), fgm::Config::DOUBLE_EPSILON);
+                }
                 else if constexpr (std::is_same_v<ValueType, float>)
+                {
                     EXPECT_NEAR(expected(i, j), static_cast<ValueType>(actual(i, j)), fgm::Config::FLOAT_EPSILON);
+                }
                 else
+                {
                     EXPECT_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
+                }
+            }
+        }
     }
 
 
@@ -84,15 +94,25 @@ namespace testutils
                "Size of data elements must match the matrix dimension, e.g: 9 to 3x3");
 
         for (std::size_t i = 0; i < U::rows; ++i)
+        {
             for (std::size_t j = 0; j < U::columns; ++j)
+            {
                 if constexpr (std::is_same_v<T, double>)
+                {
                     EXPECT_NEAR(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)),
                                 fgm::Config::DOUBLE_EPSILON);
+                }
                 else if constexpr (std::is_same_v<T, float>)
+                {
                     EXPECT_NEAR(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)),
                                 fgm::Config::FLOAT_EPSILON);
+                }
                 else
+                {
                     EXPECT_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
+                }
+            }
+        }
     }
 
 
@@ -119,8 +139,12 @@ namespace testutils
                       "Matrices must of the same dimension, e.g: 3x3 and 3x3");
 
         for (std::size_t i = 0; i < T::rows; ++i)
+        {
             for (std::size_t j = 0; j < T::columns; ++j)
+            {
                 EXPECT_NEAR(expected(i, j), static_cast<ValueType>(actual(i, j)), tolerance);
+            }
+        }
     }
 
 
@@ -142,13 +166,23 @@ namespace testutils
         EXPECT_EQ(T::rows, T::columns) << "Identity matrices must be square(e.g: 3x3)\n";
 
         for (std::size_t i = 0; i < T::rows; ++i)
+        {
             for (std::size_t j = 0; j < T::columns; ++j)
+            {
                 if constexpr (std::is_same_v<ValueType, double>)
+                {
                     EXPECT_NEAR(i == j, actual(i, j), fgm::Config::DOUBLE_EPSILON);
+                }
                 else if constexpr (std::is_same_v<ValueType, float>)
+                {
                     EXPECT_NEAR(i == j, actual(i, j), fgm::Config::FLOAT_EPSILON);
+                }
                 else
+                {
                     EXPECT_EQ(i == j, actual(i, j));
+                }
+            }
+        }
     }
 
 
@@ -169,13 +203,23 @@ namespace testutils
         using ValueType = T::value_type;
 
         for (std::size_t i = 0; i < T::rows; ++i)
+        {
             for (std::size_t j = 0; j < T::columns; ++j)
+            {
                 if constexpr (std::is_same_v<ValueType, double>)
+                {
                     EXPECT_NEAR(0.0, actual(i, j), fgm::Config::DOUBLE_EPSILON);
+                }
                 else if constexpr (std::is_same_v<ValueType, float>)
+                {
                     EXPECT_NEAR(0.0f, actual(i, j), fgm::Config::FLOAT_EPSILON);
+                }
                 else
+                {
                     EXPECT_EQ(ValueType(0), actual(i, j));
+                }
+            }
+        }
     }
 
 
@@ -194,8 +238,12 @@ namespace testutils
     void EXPECT_MAT_INF(const T& actual)
     {
         for (std::size_t i = 0; i < T::rows; ++i)
+        {
             for (std::size_t j = 0; j < T::columns; ++j)
+            {
                 EXPECT_TRUE(std::isinf(actual(i, j)));
+            }
+        }
     }
 
     /** @} */
@@ -206,7 +254,7 @@ namespace testutils
 namespace testutils::Matrix3D
 {
 
-    static unsigned int SIZE = 9;
+    static unsigned int SIZE     = 9;
     static unsigned int ROW_SIZE = 3;
 
     template <typename T, typename U, typename = std::enable_if_t<std::is_arithmetic_v<T>>,
@@ -239,7 +287,9 @@ namespace testutils::Matrix3D
     {
         if (std::is_same_v<T, double> &&
             tolerance == 1e-5) // Hacky trick for only upgrading if user hasn't changed from default tolerance.
+        {
             tolerance = 1e-11;
+        }
 
         for (unsigned int i = 0; i < SIZE; i++)
         {
@@ -303,7 +353,7 @@ namespace testutils::Matrix3D
 namespace testutils::Matrix2D
 {
 
-    static unsigned int SIZE = 4;
+    static unsigned int SIZE     = 4;
     static unsigned int ROW_SIZE = 2;
 
     template <typename T, typename U, typename = std::enable_if_t<std::is_arithmetic_v<T>>,

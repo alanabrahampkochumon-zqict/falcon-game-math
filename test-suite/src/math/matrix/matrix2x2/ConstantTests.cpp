@@ -33,7 +33,7 @@ TYPED_TEST_SUITE(Matrix2DConstants, SupportedArithmeticTypes);
  **************************************/
 
 /** @brief Verify that @ref fgm::Matrix2D constants are available at compile time. */
-namespace 
+namespace
 {
     // Verify identity matrix
     static_assert(fgm::mat2d::eye<int>(0, 0) == 1);
@@ -62,7 +62,7 @@ namespace
     static_assert(fgm::Matrix2D<int>::zero()(1, 0) == 0);
     static_assert(fgm::Matrix2D<int>::zero()(1, 1) == 0);
 
-}
+} // namespace
 
 
 
@@ -77,7 +77,10 @@ TYPED_TEST(Matrix2DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(f
 
 
 /** @brief Verify that @ref fgm::Matrix2D::eye static factory returns an identity matrix. */
-TYPED_TEST(Matrix2DConstants, StaticFactory_Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Matrix2D<TypeParam>::eye()); }
+TYPED_TEST(Matrix2DConstants, StaticFactory_Eye_ReturnsIdentityMatrix)
+{
+    EXPECT_MAT_IDENTITY(fgm::Matrix2D<TypeParam>::eye());
+}
 
 
 /** @brief Verify that @ref fgm::mat2d::zero returns a zero matrix. */

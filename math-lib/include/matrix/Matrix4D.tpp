@@ -86,22 +86,30 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Vector4D<T>& Matrix4D<T>::operator[](std::size_t col) noexcept
-    { return _data[col]; }
+    {
+        return _data[col];
+    }
 
 
     template <Arithmetic T>
     constexpr const Vector4D<T>& Matrix4D<T>::operator[](std::size_t col) const noexcept
-    { return _data[col]; }
+    {
+        return _data[col];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Matrix4D<T>::operator()(std::size_t row, std::size_t col) noexcept
-    { return _data[col][row]; }
+    {
+        return _data[col][row];
+    }
 
 
     template <Arithmetic T>
     constexpr const T& Matrix4D<T>::operator()(std::size_t row, std::size_t col) const noexcept
-    { return _data[col][row]; }
+    {
+        return _data[col][row];
+    }
 
 
 
@@ -113,12 +121,16 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::eye() noexcept
-    { return Matrix4D(T(1), T(1), T(1), T(1)); }
+    {
+        return Matrix4D(T(1), T(1), T(1), T(1));
+    }
 
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::zero() noexcept
-    { return Matrix4D(T(0), T(0), T(0), T(0)); }
+    {
+        return Matrix4D(T(0), T(0), T(0), T(0));
+    }
 
 
 
@@ -137,8 +149,12 @@ namespace fgm
         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
         if (std::is_constant_evaluated())
+        {
             if (hasNaN() || rhs.hasNaN())
+            {
                 return false;
+            }
+        }
 #endif
         return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon) && _data[2].allEq(rhs[2], epsilon) &&
             _data[3].allEq(rhs[3], epsilon);
@@ -148,7 +164,9 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Matrix4D<T>::allEq(const Matrix4D& lhs, const Matrix4D<U>& rhs, double epsilon) noexcept
-    { return lhs.allEq(rhs, epsilon); }
+    {
+        return lhs.allEq(rhs, epsilon);
+    }
 
 
     template <Arithmetic T>
@@ -160,8 +178,12 @@ namespace fgm
         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
         if (std::is_constant_evaluated())
+        {
             if (hasNaN() || rhs.hasNaN())
+            {
                 return true;
+            }
+        }
 #endif
         return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon) ||
             _data[2].anyNeq(rhs[2], epsilon) || _data[3].anyNeq(rhs[3], epsilon);
@@ -171,19 +193,25 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Matrix4D<T>::anyNeq(const Matrix4D& lhs, const Matrix4D<U>& rhs, double epsilon) noexcept
-    { return lhs.anyNeq(rhs, epsilon); }
+    {
+        return lhs.anyNeq(rhs, epsilon);
+    }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Matrix4D<T>::operator==(const Matrix4D<U>& rhs) const noexcept
-    { return allEq(rhs); }
+    {
+        return allEq(rhs);
+    }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Matrix4D<T>::operator!=(const Matrix4D<U>& rhs) const noexcept
-    { return anyNeq(rhs); }
+    {
+        return anyNeq(rhs);
+    }
 
 
 
@@ -250,7 +278,9 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedMatrix4D<T, S> operator*(S scalar, const Matrix4D<T>& mat) noexcept
-    { return mat * scalar; }
+    {
+        return mat * scalar;
+    }
 
 
     template <Arithmetic T>
@@ -275,7 +305,9 @@ namespace fgm
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
+        {
             if (!std::is_constant_evaluated())
+            {
                 return Vector4D<R>(
                     std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
                              std::fma(static_cast<R>(_data[1][0]), static_cast<R>(vec[1]),
@@ -293,6 +325,8 @@ namespace fgm
                              std::fma(static_cast<R>(_data[1][3]), static_cast<R>(vec[1]),
                                       std::fma(static_cast<R>(_data[2][3]), static_cast<R>(vec[2]),
                                                static_cast<R>(_data[3][3]) * static_cast<R>(vec[3]))))); // w
+            }
+        }
 #endif
         R x = static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) +
             static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]) +
@@ -321,7 +355,9 @@ namespace fgm
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
+        {
             if (!std::is_constant_evaluated())
+            {
                 return Vector4D<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
                                             std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 0)),
                                                      std::fma(static_cast<R>(vec[2]), static_cast<R>(mat(2, 0)),
@@ -338,6 +374,8 @@ namespace fgm
                                             std::fma(static_cast<R>(vec[1]), static_cast<R>(mat(1, 3)),
                                                      std::fma(static_cast<R>(vec[2]), static_cast<R>(mat(2, 3)),
                                                               static_cast<R>(vec[3]) * static_cast<R>(mat(3, 3))))));
+            }
+        }
 
 #endif
         R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)) +
@@ -363,6 +401,7 @@ namespace fgm
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
+        {
             if (!std::is_constant_evaluated())
             {
                 R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
@@ -389,6 +428,7 @@ namespace fgm
 
                 return vec;
             }
+        }
 #endif
         R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)) +
             static_cast<R>(vec[2]) * static_cast<R>(mat(2, 0)) + static_cast<R>(vec[3]) * static_cast<R>(mat(3, 0));
@@ -494,11 +534,19 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
+        {
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
+            {
                 return Matrix4D<R>(fallback);
+            }
+        }
         if constexpr (std::is_integral_v<R>)
+        {
             if (scalar == 0)
+            {
                 return Matrix4D<Magnitude<R>>(fallback);
+            }
+        }
 
         return *this / scalar;
     }
@@ -509,7 +557,9 @@ namespace fgm
     constexpr PromotedFloatMatrix4D<T, S> Matrix4D<T>::safeDiv(const Matrix4D& mat, S scalar,
                                                                const Matrix4D& fallback) noexcept
         requires StrictArithmetic<T>
-    { return mat.safeDiv(scalar, fallback); }
+    {
+        return mat.safeDiv(scalar, fallback);
+    }
 
 
     template <Arithmetic T>
@@ -537,11 +587,13 @@ namespace fgm
         }
 
         if constexpr (std::is_integral_v<R>)
+        {
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return Matrix4D<Magnitude<R>>(fallback);
             }
+        }
 
 
         status = OperationStatus::SUCCESS;
@@ -554,7 +606,9 @@ namespace fgm
     constexpr PromotedFloatMatrix4D<T, S> Matrix4D<T>::tryDiv(const Matrix4D& mat, S scalar, OperationStatus& status,
                                                               const Matrix4D& fallback) noexcept
         requires StrictArithmetic<T>
-    { return mat.tryDiv(scalar, status, fallback); }
+    {
+        return mat.tryDiv(scalar, status, fallback);
+    }
 
 
 
@@ -591,7 +645,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr T Matrix4D<T>::determinant(const Matrix4D& mat) noexcept
         requires SignedStrictArithmetic<T>
-    { return mat.determinant(); }
+    {
+        return mat.determinant();
+    }
 
 
     template <Arithmetic T>
@@ -609,7 +665,9 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::transpose(const Matrix4D& mat) noexcept
-    { return mat.transpose(); }
+    {
+        return mat.transpose();
+    }
 
 
     template <Arithmetic T>
@@ -656,7 +714,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::inverse(const Matrix4D& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.inverse(); }
+    {
+        return matrix.inverse();
+    }
 
 
     template <Arithmetic T>
@@ -683,11 +743,19 @@ namespace fgm
         auto det = s.dot(v) + t.dot(u);
 
         if constexpr (std::is_floating_point_v<T>)
+        {
             if (hasNaN() || fgm::abs(det) <= std::numeric_limits<T>::epsilon())
+            {
                 return Matrix4D<R>(fallback);
+            }
+        }
         if constexpr (std::is_integral_v<T>)
+        {
             if (det == 0)
+            {
                 return Matrix4D<R>(fallback);
+            }
+        }
 
         auto invDet = R(1) / det;
 
@@ -710,7 +778,9 @@ namespace fgm
     constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::safeInverseOf(const Matrix4D& matrix,
                                                                 const Matrix4D& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.safeInverse(fallback); }
+    {
+        return matrix.safeInverse(fallback);
+    }
 
 
     template <Arithmetic T>
@@ -773,19 +843,25 @@ namespace fgm
     constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::tryInverseOf(const Matrix4D& matrix, OperationStatus& status,
                                                                const Matrix4D& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.tryInverse(status, fallback); }
+    {
+        return matrix.tryInverse(status, fallback);
+    }
 
 
     template <Arithmetic T>
     constexpr T Matrix4D<T>::trace() const noexcept
         requires StrictArithmetic<T>
-    { return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3]; }
+    {
+        return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3];
+    }
 
 
     template <Arithmetic T>
     constexpr T Matrix4D<T>::trace(const Matrix4D& mat) noexcept
         requires StrictArithmetic<T>
-    { return mat.trace(); }
+    {
+        return mat.trace();
+    }
 
 
 
@@ -797,26 +873,34 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasInf() const noexcept
-    { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf(); }
+    {
+        return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf();
+    }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasInf(const Matrix4D& mat) noexcept
-    { return mat.hasInf(); }
+    {
+        return mat.hasInf();
+    }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasNaN() const noexcept
-    { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN(); }
+    {
+        return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN();
+    }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasNaN(const Matrix4D& mat) noexcept
-    { return mat.hasNaN(); }
+    {
+        return mat.hasNaN();
+    }
 
 } // namespace fgm
 
 
 #if defined(__clang__)
-#pragma clang diagnostic pop
+    #pragma clang diagnostic pop
 #endif

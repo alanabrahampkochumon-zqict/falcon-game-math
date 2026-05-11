@@ -29,10 +29,10 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { { T(1), T(2), T(3), T(4) },
-                    { T(1), T(2), T(1), T(3) },
-                    { T(2), T(3), T(4), T(12) },
-                    { T(2), T(1), T(3), T(2) } };
+        _matrix              = { { T(1), T(2), T(3), T(4) },
+                                 { T(1), T(2), T(1), T(3) },
+                                 { T(2), T(3), T(4), T(12) },
+                                 { T(2), T(1), T(3), T(2) } };
         _expectedDeterminant = T(39);
     }
 };
@@ -97,7 +97,9 @@ namespace
 
 /** @brief Verify that computing the determinant of a non-singular matrix returns a non-zero value. */
 TYPED_TEST(Matrix4DDeterminant, ReturnsNonZeroScalar)
-{ EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant()); }
+{
+    EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant());
+}
 
 
 /** @brief Verify that computing the determinant of a singular matrix returns zero. */
@@ -113,7 +115,9 @@ TEST_P(SingularMatrix4DDeterminant, SingularMatrixReturnsZero)
  *        @ref fgm::Matrix4D::determinant returns a non-zero value.
  */
 TYPED_TEST(Matrix4DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
-{ EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix4D<TypeParam>::determinant(this->_matrix)); }
+{
+    EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix4D<TypeParam>::determinant(this->_matrix));
+}
 
 
 /**

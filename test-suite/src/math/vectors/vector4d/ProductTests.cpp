@@ -35,10 +35,10 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(2), T(3), T(4), T(5) };
-        _vecB = { T(6), T(7), T(8), T(9) };
-        _vecAOrthogonal = { T(3), T(0), T(4), T(0) };
-        _vecBOrthogonal = { T(0), T(5), T(0), T(6) };
+        _vecA               = { T(2), T(3), T(4), T(5) };
+        _vecB               = { T(6), T(7), T(8), T(9) };
+        _vecAOrthogonal     = { T(3), T(0), T(4), T(0) };
+        _vecBOrthogonal     = { T(0), T(5), T(0), T(6) };
         _expectedDotProduct = static_cast<T>(110);
 
         _expectedADotA = static_cast<T>(54);
@@ -61,11 +61,17 @@ TYPED_TEST(Vector4DDotProduct, SelfDotProductReturnsSquareMagnitude)
     const TypeParam dotProduct = this->_vecA.dot(this->_vecA);
 
     if constexpr (std::is_same_v<TypeParam, double>)
+    {
         EXPECT_DOUBLE_EQ(this->_expectedADotA, dotProduct);
+    }
     else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_FLOAT_EQ(this->_expectedADotA, dotProduct);
+    }
     else
+    {
         EXPECT_EQ(this->_expectedADotA, dotProduct);
+    }
 }
 
 
@@ -75,11 +81,17 @@ TYPED_TEST(Vector4DDotProduct, OrthogonalDotProductReturnZero)
     const TypeParam dotProduct = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
 
     if constexpr (std::is_same_v<TypeParam, double>)
+    {
         EXPECT_DOUBLE_EQ(0.0, dotProduct);
+    }
     else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_FLOAT_EQ(0.0f, dotProduct);
+    }
     else
+    {
         EXPECT_EQ(0, dotProduct);
+    }
 }
 
 
@@ -89,11 +101,17 @@ TYPED_TEST(Vector4DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
     const TypeParam dotProduct = this->_vecA.dot(this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
+    {
         EXPECT_DOUBLE_EQ(this->_expectedDotProduct, dotProduct);
+    }
     else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_FLOAT_EQ(this->_expectedDotProduct, dotProduct);
+    }
     else
+    {
         EXPECT_EQ(this->_expectedDotProduct, dotProduct);
+    }
 }
 
 
@@ -103,11 +121,17 @@ TYPED_TEST(Vector4DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZe
     const TypeParam dotProduct = fgm::Vector4D<TypeParam>::dot(this->_vecA, this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
+    {
         EXPECT_DOUBLE_EQ(this->_expectedDotProduct, dotProduct);
+    }
     else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_FLOAT_EQ(this->_expectedDotProduct, dotProduct);
+    }
     else
+    {
         EXPECT_EQ(this->_expectedDotProduct, dotProduct);
+    }
 }
 
 
@@ -129,7 +153,7 @@ TEST(Vector4DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
 }
 
 
-/** 
+/**
  * @test Verify that the dot product of a vector with another vector of different type
  *        returns a type promoted vector.
  */

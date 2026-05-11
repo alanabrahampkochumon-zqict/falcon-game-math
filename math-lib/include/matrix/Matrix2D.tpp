@@ -134,8 +134,12 @@ namespace fgm
         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
         if (std::is_constant_evaluated())
+        {
             if (hasNaN() || rhs.hasNaN())
+            {
                 return false;
+            }
+        }
 #endif
         return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon);
     }
@@ -158,8 +162,12 @@ namespace fgm
         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
         if (std::is_constant_evaluated())
+        {
             if (hasNaN() || rhs.hasNaN())
+            {
                 return true;
+            }
+        }
 #endif
         return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon);
     }
@@ -274,11 +282,15 @@ namespace fgm
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
+        {
             if (!std::is_constant_evaluated())
+            {
                 return Vector2D<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
                                             static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
                                    std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
                                             static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
+            }
+        }
 #endif
 
         R x =
@@ -297,11 +309,15 @@ namespace fgm
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
+        {
             if (!std::is_constant_evaluated())
+            {
                 return Vector2D<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
                                             static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0))),
                                    std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
                                             static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1))));
+            }
+        }
 
 #endif
         R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0));
@@ -318,6 +334,7 @@ namespace fgm
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
+        {
             if (!std::is_constant_evaluated())
             {
                 R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
@@ -330,6 +347,7 @@ namespace fgm
 
                 return vec;
             }
+        }
 #endif
         R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0));
         R y = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1));
@@ -357,8 +375,8 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
-        _data[0] = mat[0];
-        _data[1] = mat[1];
+        _data[0]       = mat[0];
+        _data[1]       = mat[1];
         return *this;
     }
 
@@ -385,7 +403,7 @@ namespace fgm
     {
         using R = Magnitude<std::common_type_t<T, S>>;
 
-        
+
         FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
 
         R factor = R(1) / static_cast<R>(scalar);
@@ -406,11 +424,19 @@ namespace fgm
         using R = std::common_type_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
+        {
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
+            {
                 return Matrix2D<R>(fallback);
+            }
+        }
         if constexpr (std::is_integral_v<R>)
+        {
             if (scalar == 0)
+            {
                 return Matrix2D<Magnitude<R>>(fallback);
+            }
+        }
 
         return *this / scalar;
     }
@@ -435,7 +461,7 @@ namespace fgm
         using R = std::common_type_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
-        {   // TODO: Check || vs | with benchmarks
+        { // TODO: Check || vs | with benchmarks
             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
             {
                 status = OperationStatus::NANOPERAND;
@@ -449,11 +475,13 @@ namespace fgm
         }
 
         if constexpr (std::is_integral_v<R>)
+        {
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return Matrix2D<Magnitude<R>>(fallback);
             }
+        }
 
 
         status = OperationStatus::SUCCESS;
@@ -520,10 +548,14 @@ namespace fgm
 
         T det = determinant();
 
-        if constexpr(std::is_floating_point_v<T>)
+        if constexpr (std::is_floating_point_v<T>)
+        {
             FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
+        }
         else
+        {
             FGM_ASSERT_MSG(fgm::abs(det) != T(0), messages::assertion::MAT_DET_DIV_BY_ZERO);
+        }
 
         R factor = R(1) / det;
 
@@ -550,11 +582,19 @@ namespace fgm
         // TODO: Update to use directly compute inverse to reduce operation
         // TODO: Do similar in code cleaning in tryInverse
         if constexpr (std::is_floating_point_v<T>)
+        {
             if (hasNaN() || fgm::abs(det) <= std::numeric_limits<T>::epsilon())
+            {
                 return Matrix2D<R>(fallback);
+            }
+        }
         if constexpr (std::is_integral_v<T>)
+        {
             if (det == 0)
+            {
                 return Matrix2D<R>(fallback);
+            }
+        }
 
         return inverse();
     }
@@ -593,11 +633,13 @@ namespace fgm
         }
 
         if constexpr (std::is_integral_v<T>)
+        {
             if (det == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return Matrix2D<R>(fallback);
             }
+        }
 
 
         status = OperationStatus::SUCCESS;
@@ -679,8 +721,8 @@ namespace fgm
         requires SignedStrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        R cos = std::cos(angle);
-        R sine = std::sin(angle);
+        R cos   = std::cos(angle);
+        R sine  = std::sin(angle);
 #ifdef FGM_LEFT_HANDED
         return Matrix2D(cos, sine, -sine, cos);
 #else
@@ -716,5 +758,5 @@ namespace fgm
 
 
 #if defined(__clang__)
-#pragma clang diagnostic pop
+    #pragma clang diagnostic pop
 #endif

@@ -24,16 +24,10 @@
 class Vector3DStringRepresentationTests: public ::testing::Test
 {
     /** @brief Switch to use full precision for testing. */
-    void SetUp() override
-    {
-        fgm::Config::useFullPrecision = true;
-    }
+    void SetUp() override { fgm::Config::useFullPrecision = true; }
 
     /** @brief Switch back to normal log precision. */
-    void TearDown() override
-    {
-        fgm::Config::useFullPrecision = false;
-    }
+    void TearDown() override { fgm::Config::useFullPrecision = false; }
 };
 
 

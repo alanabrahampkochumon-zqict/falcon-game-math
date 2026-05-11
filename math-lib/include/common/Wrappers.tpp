@@ -31,7 +31,9 @@ namespace fgm
             return std::isnan(num);
         }
         else
+        {
             return false;
+        }
     }
 
 
@@ -42,11 +44,11 @@ namespace fgm
         {
             if constexpr (std::is_floating_point_v<T>)
             {
-// In MSVC, taking abs with NaN returns wrong results, so an explicit check is required.
-//#ifdef _MSC_VER
-//                if (fgm::isnan(num))
-//                    return num;
-//#endif
+                // In MSVC, taking abs with NaN returns wrong results, so an explicit check is required.
+                // #ifdef _MSC_VER
+                //                if (fgm::isnan(num))
+                //                    return num;
+                // #endif
                 if constexpr (sizeof(T) == 4)
                 {
                     auto bits = std::bit_cast<std::uint32_t>(num);
@@ -58,17 +60,25 @@ namespace fgm
                     return std::bit_cast<T>(bits & 0x7FFFFFFFFFFFFFFFull);
                 }
                 else
+                {
                     return num < T(0) ? -num : num;
+                }
             }
             else
+            {
                 return num < T(0) ? -num : num;
+            }
         }
         else
         {
             if constexpr (std::is_floating_point_v<T>)
+            {
                 return static_cast<T>(std::fabs(num));
+            }
             else
+            {
                 return static_cast<T>(std::abs(num));
+            }
         }
     }
 
@@ -78,7 +88,9 @@ namespace fgm
         if (std::is_constant_evaluated())
         {
             if (std::numeric_limits<T>::has_infinity)
+            {
                 return std::numeric_limits<T>::infinity() == num || -std::numeric_limits<T>::infinity() == num;
+            }
             return false;
         }
         return std::isinf(num);

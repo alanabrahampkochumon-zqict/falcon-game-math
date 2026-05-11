@@ -67,7 +67,7 @@ namespace
         static_assert(MAT.hasNaN() == false);
 
         // Static functions
-         static_assert(fgm::Matrix3D<float>::hasNaN(MAT) == false);
+        static_assert(fgm::Matrix3D<float>::hasNaN(MAT) == false);
     } // namespace
 
 
@@ -75,7 +75,7 @@ namespace
     namespace
     {
         // Member functions
-         static_assert(INF_MAT.hasInf() == true);
+        static_assert(INF_MAT.hasInf() == true);
         static_assert(MAT.hasInf() == false);
 
         // Static functions

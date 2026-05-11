@@ -77,8 +77,8 @@ TYPED_TEST(Vector3DInitialization, 2DVectorAndScalarCanInitializeA3DVector)
 TYPED_TEST(Vector3DInitialization, ScalarAnd2DVectorCanInitializeA3DVector)
 {
     const TypeParam scalar = static_cast<TypeParam>(3);
-    const TypeParam a = static_cast<TypeParam>(1);
-    const TypeParam b = static_cast<TypeParam>(6);
+    const TypeParam a      = static_cast<TypeParam>(1);
+    const TypeParam b      = static_cast<TypeParam>(6);
     const fgm::Vector2D<TypeParam> vec1(a, b);
 
     const fgm::Vector3D<TypeParam> vec(scalar, vec1);

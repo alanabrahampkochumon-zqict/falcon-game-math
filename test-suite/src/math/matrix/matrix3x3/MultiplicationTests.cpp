@@ -26,9 +26,9 @@ protected:
 
     void SetUp() override
     {
-        _mat = { fgm::Vector3D{ T(7), T(13), T(3) }, fgm::Vector3D{ T(5), T(4), T(7) },
-                 fgm::Vector3D{ T(5.5), T(11.25), T(25.3) } };
-        _scalar = T(2.123456789123456);
+        _mat                 = { fgm::Vector3D{ T(7), T(13), T(3) }, fgm::Vector3D{ T(5), T(4), T(7) },
+                                 fgm::Vector3D{ T(5.5), T(11.25), T(25.3) } };
+        _scalar              = T(2.123456789123456);
         _expectedFloatingMat = { fgm::Vector3D{ T(14.864197523864192), T(27.604938258604928), T(6.370370367370368) },
                                  fgm::Vector3D{ T(10.61728394561728), T(8.493827156493824), T(14.864197523864192) },
                                  fgm::Vector3D{ T(11.679012340179007), T(23.88888887763888), T(53.72345676482344) } };
@@ -51,10 +51,10 @@ protected:
 
     void SetUp() override
     {
-        _mat = { fgm::Vector3D{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338) },
-                 fgm::Vector3D{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321) },
-                 fgm::Vector3D{ T(2.238929123125), T(11.238924194839), T(9.2389291239898) } };
-        _vec = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128) };
+        _mat                       = { fgm::Vector3D{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338) },
+                                       fgm::Vector3D{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321) },
+                                       fgm::Vector3D{ T(2.238929123125), T(11.238924194839), T(9.2389291239898) } };
+        _vec                       = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128) };
         _expectedFloatingColVector = { T(33.88727193442948), T(54.59119292006805), T(24.550731838459015) };
         _expectedIntegralColVector = { T(31), T(49), T(20) };
         _expectedFloatingRowVector = { T(57.753956108666344), T(27.839918694037294), T(51.239531632191486) };
@@ -249,9 +249,9 @@ TEST(Matrix3DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 /** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix3DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
-    const fgm::Matrix3D mat = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
+    const fgm::Matrix3D mat      = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
     const fgm::Matrix3D expected = { -2.0f, 4.0f, -6.0f, 8.0f, -10.0f, -12.0f, -14.0f, -16.0f, 18.0f };
-    const float scalar = -2.0f;
+    const float scalar           = -2.0f;
 
     const fgm::Matrix3D product = mat * scalar;
 
@@ -268,9 +268,13 @@ TYPED_TEST(Matrix3DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
     const fgm::Matrix3D product = this->_mat * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, product);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, product);
+    }
 }
 
 
@@ -283,9 +287,13 @@ TYPED_TEST(Matrix3DScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
     const fgm::Matrix3D product = this->_scalar * this->_mat;
 
     if (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, product);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, product);
+    }
 }
 
 
@@ -298,9 +306,13 @@ TYPED_TEST(Matrix3DScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixSc
     this->_mat *= this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, this->_mat);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, this->_mat);
+    }
 }
 
 
@@ -324,7 +336,7 @@ TYPED_TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
  */
 TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
-    fgm::Matrix3D mat = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
+    fgm::Matrix3D mat   = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
     const double scalar = 5.0;
     mat *= scalar;
 
@@ -338,7 +350,7 @@ TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
  */
 TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    fgm::Matrix3D mat = { 1, -2, 3, -4, 5, 6, 7, 8, -9 };
+    fgm::Matrix3D mat   = { 1, -2, 3, -4, 5, 6, 7, 8, -9 };
     const double scalar = 2.5;
     const fgm::Matrix3D expected{ 2, -5, 7, -10, 12, 15, 17, 20, -22 };
 
@@ -363,9 +375,13 @@ TYPED_TEST(Matrix3DVectorMultiplication, MatrixTimesVectorReturnsATransformedVec
 {
     const auto transformedVector = this->_mat * this->_vec;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_VEC_EQ(this->_expectedFloatingColVector, transformedVector);
+    }
     else
+    {
         EXPECT_VEC_EQ(this->_expectedIntegralColVector, transformedVector);
+    }
 }
 
 
@@ -417,9 +433,13 @@ TYPED_TEST(Matrix3DVectorMultiplication, VectorTimesMatrixReturnsATransformedVec
 {
     const auto transformedVector = this->_vec * this->_mat;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
+    }
     else
+    {
         EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
+    }
 }
 
 
@@ -473,9 +493,13 @@ TYPED_TEST(Matrix3DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
     auto transformedVector = this->_vec;
     transformedVector *= this->_mat;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
+    }
     else
+    {
         EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
+    }
 }
 
 
@@ -536,9 +560,13 @@ TYPED_TEST(Matrix3DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
 {
     const auto transformedVector = this->_matA * this->_matB;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
+    }
 }
 
 
@@ -585,9 +613,13 @@ TYPED_TEST(Matrix3DMultiplication, CompoundMultiplicationOperationPerformInPlace
     auto transformedVector = this->_matA;
     transformedVector *= this->_matB;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
+    }
 }
 
 

@@ -30,7 +30,7 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(14), T(27), T(83) };
+        _vec             = { T(14), T(27), T(83) };
         _expectedUnitVec = { static_cast<R>(0.1583767155508236), static_cast<R>(0.30544080856230266),
                              static_cast<R>(0.9389476707655972) };
     }
@@ -45,10 +45,7 @@ class Vector3DZeroNormalization: public ::testing::Test
 protected:
     fgm::Vector3D<T> _vec;
 
-    void SetUp() override
-    {
-        _vec = { T(0), T(0), T(0) };
-    }
+    void SetUp() override { _vec = { T(0), T(0), T(0) }; }
 };
 /**
  * @brief Test fixture for @ref fgm::Vector3D zero-vector normalization, parameterized by

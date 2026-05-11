@@ -30,10 +30,10 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { fgm::Vector2D<T>{ 7, 3 }, fgm::Vector2D<T>{ 1, 6 } };
-        _scalar = T(3);
-        _expectedMatrix = { fgm::Vector2D{ fgm::Magnitude<T>(2.333333333333333), fgm::Magnitude<T>(1) },
-                            fgm::Vector2D{ fgm::Magnitude<T>(0.3333333333333333), fgm::Magnitude<T>(2) } };
+        _matrix              = { fgm::Vector2D<T>{ 7, 3 }, fgm::Vector2D<T>{ 1, 6 } };
+        _scalar              = T(3);
+        _expectedMatrix      = { fgm::Vector2D{ fgm::Magnitude<T>(2.333333333333333), fgm::Magnitude<T>(1) },
+                                 fgm::Vector2D{ fgm::Magnitude<T>(0.3333333333333333), fgm::Magnitude<T>(2) } };
         _expectedTypedMatrix = { fgm::Vector2D{ T(2.333333333333333), T(1) },
                                  fgm::Vector2D{ T(0.3333333333333333), T(2) } };
     }
@@ -277,7 +277,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsPasse
  */
 TEST_P(NaNMatrix2DDivision, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefault)
 {
-    using T = ParamType::value_type;
+    using T                              = ParamType::value_type;
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::safeDiv(GetParam(), 2.5);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 }
@@ -289,7 +289,7 @@ TEST_P(NaNMatrix2DDivision, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefa
  */
 TEST_P(NaNMatrix2DDivision, SafeDivide_StaticWrapper_ReturnsPassedInFallback)
 {
-    using T = ParamType::value_type;
+    using T                              = ParamType::value_type;
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::safeDiv(GetParam(), 2.5, fgm::mat2d::zero<T>);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
@@ -458,7 +458,7 @@ TYPED_TEST(Matrix2DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsPassed
 TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
-    using T = ParamType::value_type;
+    using T                              = ParamType::value_type;
     const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::tryDiv(GetParam(), 2.5, flag);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 
@@ -473,7 +473,7 @@ TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefau
 TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
-    using T = ParamType::value_type;
+    using T                                               = ParamType::value_type;
     [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::tryDiv(GetParam(), T(0), flag);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }

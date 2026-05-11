@@ -26,10 +26,10 @@ namespace fgm::messages::assertion
 namespace fgm::messages
 {
     namespace assertion
-    {              
+    {
         /** @brief Assertion message thrown when a matrix division by zero occurs. */
-        inline constexpr auto MAT_DIV_BY_ZERO = "[Matrix]: Division by zero";
-        inline constexpr auto MAT_DET_DIV_BY_ZERO = "[Matrix Determinant]: Division by zero.";
+        inline constexpr auto MAT_DIV_BY_ZERO          = "[Matrix]: Division by zero";
+        inline constexpr auto MAT_DET_DIV_BY_ZERO      = "[Matrix Determinant]: Division by zero.";
         inline constexpr auto MAT_INV_ZERO_DETERMINANT = "[Matrix Inverse]: Zero Determinant.";
 
     } // namespace assertion
@@ -38,9 +38,9 @@ namespace fgm::messages
     /** @brief Message mapping for @ref OperationStatus status code. */
     namespace opstatus
     {
-        inline constexpr std::string_view OPERATION_SUCCESS = "Operation success!";
-        inline constexpr std::string_view OPERATION_DIV_BY_ZERO = "Failure: Division by Zero";
-        inline constexpr std::string_view OPERATION_NAN_OPERAND = "Failure: NaN operand encountered";
+        inline constexpr std::string_view OPERATION_SUCCESS         = "Operation success!";
+        inline constexpr std::string_view OPERATION_DIV_BY_ZERO     = "Failure: Division by Zero";
+        inline constexpr std::string_view OPERATION_NAN_OPERAND     = "Failure: NaN operand encountered";
         inline constexpr std::string_view OPERATION_UNKNOWN_FAILURE = "Failure: Unknown error";
 
     } // namespace opstatus

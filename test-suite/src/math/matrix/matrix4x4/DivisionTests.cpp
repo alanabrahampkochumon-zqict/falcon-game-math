@@ -178,7 +178,9 @@ TYPED_TEST(Matrix4DDivision, AlwaysReturnFloatingPointMatrix)
 
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix4DDivision, ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), ""); }
+{
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), "");
+}
 
 
 /**
@@ -196,7 +198,9 @@ TYPED_TEST(Matrix4DDivision, CompoundDivision_InverseScalesMatrixInPlace)
 
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix4DDivision, CompoundDivision_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(this->_matrix /= 0, ""); }
+{
+    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "");
+}
 
 
 /**************************************
@@ -325,7 +329,7 @@ TYPED_TEST(Matrix4DDivision, SafeDivide_StaticWrapper_DivisionByZeroReturnsPasse
  */
 TEST_P(NaNMatrix4DDivision, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefault)
 {
-    using T = ParamType::value_type;
+    using T                              = ParamType::value_type;
     const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<T>::safeDiv(GetParam(), 2.5);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 }
@@ -337,7 +341,7 @@ TEST_P(NaNMatrix4DDivision, SafeDivide_StaticWrapper_ReturnsIdentityMatrixByDefa
  */
 TEST_P(NaNMatrix4DDivision, SafeDivide_StaticWrapper_ReturnsPassedInFallback)
 {
-    using T = ParamType::value_type;
+    using T                              = ParamType::value_type;
     const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<T>::safeDiv(GetParam(), 2.5, fgm::mat4d::zero<T>);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
@@ -506,7 +510,7 @@ TYPED_TEST(Matrix4DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsPassed
 TEST_P(NaNMatrix4DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
-    using T = ParamType::value_type;
+    using T                              = ParamType::value_type;
     const fgm::Matrix4D inverseScaledMat = fgm::Matrix4D<T>::tryDiv(GetParam(), 2.5, flag);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 

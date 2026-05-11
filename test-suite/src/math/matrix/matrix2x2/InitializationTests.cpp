@@ -24,12 +24,12 @@ protected:
 
     void SetUp() override
     {
-        _elements = { T(1), T(2), T(3), T(4) };
+        _elements         = { T(1), T(2), T(3), T(4) };
         _diagonalElements = { T(2), T(0), T(0), T(3) };
-        _col0 = { T(1), T(3) };
-        _col1 = { T(2), T(4) };
-        _diagonal0 = T(2);
-        _diagonal1 = T(3);
+        _col0             = { T(1), T(3) };
+        _col1             = { T(2), T(4) };
+        _diagonal0        = T(2);
+        _diagonal1        = T(3);
     }
 };
 /** Test fixture for @ref fgm::Matrix2D initialization, parameterized by @ref SupportedTypes. */
@@ -49,7 +49,7 @@ TYPED_TEST_SUITE(Matrix2DInitialization, SupportedTypes);
  **************************************/
 
 /** @brief Verify that the matrix can be initialized at compile time. */
-namespace 
+namespace
 {
     // Verify that the matrix can be initialized at compile time using scalar values.
     constexpr fgm::Matrix2D MAT1(1, 2, 3, 4);
@@ -73,8 +73,8 @@ namespace
     static_assert(MAT3(0, 1) == 0);
     static_assert(MAT3(1, 0) == 0);
     static_assert(MAT3(1, 1) == 4);
-    
-}
+
+} // namespace
 
 
 

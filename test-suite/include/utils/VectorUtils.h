@@ -52,12 +52,20 @@ namespace testutils
         constexpr std::size_t elementCount = T::dimension;
 
         for (std::size_t i = 0; i < elementCount; ++i)
+        {
             if constexpr (std::is_same_v<ValueType, double>)
+            {
                 EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::Config::DOUBLE_EPSILON);
+            }
             else if constexpr (std::is_floating_point_v<ValueType>)
+            {
                 EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::Config::FLOAT_EPSILON);
+            }
             else
+            {
                 EXPECT_EQ(expected[i], static_cast<ValueType>(actual[i]));
+            }
+        }
     }
 
 
@@ -185,18 +193,26 @@ namespace testutils
     template <fgm::Vector T>
     void EXPECT_VEC_ONE(const T& vector)
     {
-        using ValueType = T::value_type;
+        using ValueType    = T::value_type;
         ValueType expected = ValueType(1);
 
         constexpr std::size_t elementCount = T::dimension;
 
         for (std::size_t i = 0; i < elementCount; ++i)
+        {
             if constexpr (std::is_same_v<ValueType, float>)
+            {
                 EXPECT_FLOAT_EQ(expected, static_cast<ValueType>(vector[i]));
+            }
             else if constexpr (std::is_same_v<ValueType, double>)
+            {
                 EXPECT_DOUBLE_EQ(expected, static_cast<ValueType>(vector[i]));
+            }
             else
+            {
                 EXPECT_EQ(expected, static_cast<ValueType>(vector[i]));
+            }
+        }
     }
 
 
@@ -218,12 +234,20 @@ namespace testutils
         constexpr std::size_t elementCount = T::dimension;
 
         for (std::size_t i = 0; i < elementCount; ++i)
+        {
             if constexpr (std::is_same_v<ValueType, float>)
+            {
                 EXPECT_FLOAT_EQ(0.0f, static_cast<ValueType>(vector[i]));
+            }
             else if constexpr (std::is_same_v<ValueType, double>)
+            {
                 EXPECT_DOUBLE_EQ(0.0, static_cast<ValueType>(vector[i]));
+            }
             else
+            {
                 EXPECT_EQ(ValueType(0), static_cast<ValueType>(vector[i]));
+            }
+        }
     }
 
 
@@ -244,7 +268,9 @@ namespace testutils
         if (std::is_floating_point_v<T>)
         {
             for (std::size_t i = 0; i < elementCount; ++i)
+            {
                 EXPECT_TRUE(std::isinf(vector[i]));
+            }
         }
     }
 
@@ -264,11 +290,17 @@ namespace testutils
     void EXPECT_MAG_EQ(T expected, T actual)
     {
         if constexpr (std::is_same_v<T, float>)
+        {
             EXPECT_FLOAT_EQ(expected, actual);
+        }
         else if constexpr (std::is_floating_point_v<T>)
+        {
             EXPECT_DOUBLE_EQ(expected, actual);
+        }
         else
+        {
             EXPECT_EQ(expected, actual);
+        }
     }
 
 

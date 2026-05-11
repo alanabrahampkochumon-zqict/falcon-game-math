@@ -26,8 +26,8 @@ protected:
 
     void SetUp() override
     {
-        _mat = { fgm::Vector2D{ T(7), T(13) }, fgm::Vector2D{ T(5), T(4) } };
-        _scalar = T(2.123456789123456);
+        _mat                 = { fgm::Vector2D{ T(7), T(13) }, fgm::Vector2D{ T(5), T(4) } };
+        _scalar              = T(2.123456789123456);
         _expectedFloatingMat = { fgm::Vector2D{ T(14.864197523864192), T(27.604938258604928) },
                                  fgm::Vector2D{ T(10.61728394561728), T(8.493827156493824) } };
         _expectedIntegralMat = { fgm::Vector2D{ T(14), T(26) }, fgm::Vector2D{ T(10), T(8) } };
@@ -48,9 +48,9 @@ protected:
 
     void SetUp() override
     {
-        _mat = { fgm::Vector2D{ T(7.12345678912345), T(13.12345678912345) },
-                 fgm::Vector2D{ T(5.12345678912345), T(4.12345678912345) } };
-        _vec = { T(2.123456789123456), T(3.123456832912) };
+        _mat                       = { fgm::Vector2D{ T(7.12345678912345), T(13.12345678912345) },
+                                       fgm::Vector2D{ T(5.12345678912345), T(4.12345678912345) } };
+        _vec                       = { T(2.123456789123456), T(3.123456832912) };
         _expectedFloatingColVector = { T(31.129248797008778), T(40.74653269883751) };
         _expectedIntegralColVector = { T(29), T(38) };
         _expectedFloatingRowVector = { T(56.116903460304776), T(23.75887838584987) };
@@ -71,7 +71,7 @@ protected:
     void SetUp() override
     {
         _mat = { fgm::Vector2D{ T(0.1234568989329), T(0.1234214891234) },
-                  fgm::Vector2D{ T(-0.123489823149), T(-0.123489757623) } };
+                 fgm::Vector2D{ T(-0.123489823149), T(-0.123489757623) } };
         _vec = fgm::Vector2D{ T(0.8923764912287), T(0.78352829112384) };
 
         _expectedColVector = fgm::Vector2D{ T(0.013412264184596345), T(0.013380716644514457) };
@@ -214,9 +214,9 @@ TEST(Matrix2DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 /** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix2DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
-    const fgm::Matrix2D mat = { 1.0f, -2.0f, -4.0f, 5.0f };
+    const fgm::Matrix2D mat      = { 1.0f, -2.0f, -4.0f, 5.0f };
     const fgm::Matrix2D expected = { -2.0f, 4.0f, 8.0f, -10.0f };
-    const float scalar = -2.0f;
+    const float scalar           = -2.0f;
 
     const fgm::Matrix2D<float> product = mat * scalar;
 
@@ -233,9 +233,13 @@ TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
     const fgm::Matrix2D product = this->_mat * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, product);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, product);
+    }
 }
 
 
@@ -248,9 +252,13 @@ TYPED_TEST(Matrix2DScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
     const fgm::Matrix2D product = this->_scalar * this->_mat;
 
     if (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, product);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, product);
+    }
 }
 
 
@@ -263,9 +271,13 @@ TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixSc
     this->_mat *= this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, this->_mat);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, this->_mat);
+    }
 }
 
 
@@ -328,9 +340,13 @@ TYPED_TEST(Matrix2DVectorMultiplication, MatrixTimesVectorReturnsATransformedVec
 {
     const auto transformedVector = this->_mat * this->_vec;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_VEC_EQ(this->_expectedFloatingColVector, transformedVector);
+    }
     else
+    {
         EXPECT_VEC_EQ(this->_expectedIntegralColVector, transformedVector);
+    }
 }
 
 
@@ -341,7 +357,7 @@ TYPED_TEST(Matrix2DVectorMultiplication, MatrixTimesVectorReturnsATransformedVec
 TYPED_TEST(Matrix2DVectorFractionalMultiplication, MatrixTimesVectorReturnsATransformedVectorWithPrecision)
 {
     const auto transformedVector = this->_mat * this->_vec;
-        EXPECT_VEC_EQ(this->_expectedColVector, transformedVector);
+    EXPECT_VEC_EQ(this->_expectedColVector, transformedVector);
 }
 
 
@@ -382,9 +398,13 @@ TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesMatrixReturnsATransformedVec
 {
     const auto transformedVector = this->_vec * this->_mat;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
+    }
     else
+    {
         EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
+    }
 }
 
 
@@ -438,9 +458,13 @@ TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
     auto transformedVector = this->_vec;
     transformedVector *= this->_mat;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_VEC_EQ(this->_expectedFloatingRowVector, transformedVector);
+    }
     else
+    {
         EXPECT_VEC_EQ(this->_expectedIntegralRowVector, transformedVector);
+    }
 }
 
 
@@ -468,7 +492,7 @@ TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNo
     const fgm::Matrix2D<double> iMatrix;
     [[maybe_unused]] fgm::iVec2 vec(2, 1);
 
-    (void)(vec *= iMatrix);
+    (void) (vec *= iMatrix);
     static_assert(std::is_same_v<decltype(vec)::value_type, int>);
 }
 
@@ -501,9 +525,13 @@ TYPED_TEST(Matrix2DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
 {
     const auto transformedVector = this->_matA * this->_matB;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
+    }
 }
 
 
@@ -550,9 +578,13 @@ TYPED_TEST(Matrix2DMultiplication, CompoundMultiplicationOperationPerformInPlace
     auto transformedVector = this->_matA;
     transformedVector *= this->_matB;
     if constexpr (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+    }
     else
+    {
         EXPECT_MAT_EQ(this->_expectedIntegralMat, transformedVector);
+    }
 }
 
 

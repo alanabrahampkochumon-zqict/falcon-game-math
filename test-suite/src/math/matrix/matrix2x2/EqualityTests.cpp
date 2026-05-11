@@ -17,7 +17,7 @@
 
 
 constexpr auto NAN_F = fgm::constants::NaN;
-constexpr auto INF = fgm::constants::INFINITY_F;
+constexpr auto INF   = fgm::constants::INFINITY_F;
 
 
 template <typename T>
@@ -31,13 +31,13 @@ protected:
 
     void SetUp() override
     {
-        _eqMatA = { { T(1.1234568789), T(2.123458319) }, { T(3.1234568789), T(4.123458319) } };
-        _eqMatB = { { T(1.1234568789), T(2.123458319) }, { T(3.1234568789), T(4.123458319) } };
+        _eqMatA        = { { T(1.1234568789), T(2.123458319) }, { T(3.1234568789), T(4.123458319) } };
+        _eqMatB        = { { T(1.1234568789), T(2.123458319) }, { T(3.1234568789), T(4.123458319) } };
         _dissimilarMat = { { T(1.1234568789), T(4.5238852912) }, { T(3.1234568789), T(6.123458319) } };
     }
 };
-/** 
- * @brief Test fixture for @ref fgm::Matrix2D equality and inequality checks, parameterized by 
+/**
+ * @brief Test fixture for @ref fgm::Matrix2D equality and inequality checks, parameterized by
  *        @ref SupportedArithmeticTypes.
  */
 TYPED_TEST_SUITE(Matrix2DEquality, SupportedArithmeticTypes);

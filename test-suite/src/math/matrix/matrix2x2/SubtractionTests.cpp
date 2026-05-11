@@ -4,7 +4,7 @@
  * @date Created on: April 09, 2026
  *
  * @brief Verify @ref fgm::Matrix2D subtraction logic.
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -29,8 +29,8 @@ protected:
 
     void SetUp() override
     {
-        _matA = { fgm::Vector2D<T>(5, 6), fgm::Vector2D<T>(7, 8) };
-        _matB = { fgm::Vector2D<T>(1, 2), fgm::Vector2D<T>(3, 4) };
+        _matA               = { fgm::Vector2D<T>(5, 6), fgm::Vector2D<T>(7, 8) };
+        _matB               = { fgm::Vector2D<T>(1, 2), fgm::Vector2D<T>(3, 4) };
         _expectedDifference = { fgm::Vector2D<T>(4, 4), fgm::Vector2D<T>(4, 4) };
     }
 };

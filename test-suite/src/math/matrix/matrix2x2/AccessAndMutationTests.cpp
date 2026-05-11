@@ -25,7 +25,7 @@
  **************************************/
 
 /** @brief Verify that matrix accessors are available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Matrix2D MAT(1, 2, 3, 4);
     constexpr fgm::Vector2D VEC0(1, 3);
@@ -42,7 +42,7 @@ namespace
     static_assert(MAT[0].y() == VEC0[1]);
     static_assert(MAT[1].x() == VEC1[0]);
     static_assert(MAT[1].y() == VEC1[1]);
-}
+} // namespace
 
 
 
@@ -108,8 +108,8 @@ TEST(Matrix2DAccess, ElementsCanBeMutatedUsingIndex)
 /** @brief Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Matrix2DAccess, ColumnsCanBeMutatedUsingIndex)
 {
-    const fgm::Vector2D col0 = {1.0f, 3.0f};
-    const fgm::Vector2D col1 = {2.0f, 4.0f};
+    const fgm::Vector2D col0 = { 1.0f, 3.0f };
+    const fgm::Vector2D col1 = { 2.0f, 4.0f };
     fgm::Matrix2D<float> mat;
 
     mat[0] = col0;

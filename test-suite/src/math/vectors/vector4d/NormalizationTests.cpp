@@ -30,7 +30,7 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(14), T(27), T(83), T(52) };
+        _vec             = { T(14), T(27), T(83), T(52) };
         _expectedUnitVec = { static_cast<R>(0.13650905255670645), static_cast<R>(0.2632674585022196),
                              static_cast<R>(0.8093036687290455), static_cast<R>(0.5070336237820525) };
     }
@@ -45,13 +45,10 @@ class Vector4DZeroNormalization: public ::testing::Test
 protected:
     fgm::Vector4D<T> _vec;
 
-    void SetUp() override
-    {
-        _vec = { T(0), T(0), T(0), T(0) };
-    }
+    void SetUp() override { _vec = { T(0), T(0), T(0), T(0) }; }
 };
-/** 
- * @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by 
+/**
+ * @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by
  * @ref SupportedArithmeticTypes.
  */
 TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);

@@ -29,8 +29,8 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(3), T(1) };
-        _vecB = { T(-8), T(5) };
+        _vecA        = { T(3), T(1) };
+        _vecB        = { T(-8), T(5) };
         _expectedSum = { T(-5), T(6) };
     }
 };
@@ -48,8 +48,8 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(95), T(11) };
-        _vecB = { T(-8), T(5) };
+        _vecA               = { T(95), T(11) };
+        _vecB               = { T(-8), T(5) };
         _expectedDifference = { T(103), T(6) };
     }
 };
@@ -68,8 +68,8 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(7), T(13) };
-        _scalar = T(2.123456789123456);
+        _vec                 = { T(7), T(13) };
+        _scalar              = T(2.123456789123456);
         _expectedFloatingVec = { T(14.864197523864192), T(27.604938258604928) };
         _expectedIntegralVec = { T(14), T(26) };
     }
@@ -88,8 +88,8 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(17), T(31) };
-        _scalar = T(13);
+        _vec               = { T(17), T(31) };
+        _scalar            = T(13);
         _expectedScaledVec = { T(1.30769230769230769231), T(2.38461538461538461538) };
     }
 };
@@ -106,7 +106,7 @@ protected:
 
     void SetUp() override
     {
-        _vec = { T(-8), T(0) };
+        _vec                 = { T(-8), T(0) };
         _expectedInvertedVec = { T(8), T(0) };
     }
 };
@@ -302,9 +302,13 @@ TYPED_TEST(Vector2DScalarMultiplication, VectorTimesScalarReturnsScaledVector)
     const fgm::Vector2D result = this->_vec * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_VEC_EQ(this->_expectedFloatingVec, result);
+    }
     else
+    {
         EXPECT_VEC_EQ(this->_expectedIntegralVec, result);
+    }
 }
 
 
@@ -317,9 +321,13 @@ TYPED_TEST(Vector2DScalarMultiplication, ScalarTimesAVectorReturnsScaledVector)
     const fgm::Vector2D result = this->_scalar * this->_vec;
 
     if (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_VEC_EQ(this->_expectedFloatingVec, result);
+    }
     else
+    {
         EXPECT_VEC_EQ(this->_expectedIntegralVec, result);
+    }
 }
 
 
@@ -332,9 +340,13 @@ TYPED_TEST(Vector2DScalarMultiplication, VectorTimesEqualScalarIsTheSameVectorSc
     this->_vec *= this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
+    {
         EXPECT_VEC_EQ(this->_expectedFloatingVec, this->_vec);
+    }
     else
+    {
         EXPECT_VEC_EQ(this->_expectedIntegralVec, this->_vec);
+    }
 }
 
 

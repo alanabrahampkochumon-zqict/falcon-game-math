@@ -140,12 +140,12 @@ TYPED_TEST(Matrix4DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
  */
 TEST(Matrix4DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
-    fgm::Matrix4D mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f,
-                                 44.0f, 316.0f, 55.0f);
-    [[maybe_unused]] constexpr fgm::Matrix4D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0, 4.0, -11.0, 21.0,
-                                 11.0);
+    fgm::Matrix4D mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f, 44.0f,
+                       316.0f, 55.0f);
+    [[maybe_unused]] constexpr fgm::Matrix4D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0,
+                                                  4.0, -11.0, 21.0, 11.0);
 
-    (void)(mat1 -= mat2); // Static cast to void is need to prevent compiler warning that not using mat2
+    (void) (mat1 -= mat2); // Static cast to void is need to prevent compiler warning that not using mat2
 
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);
 }

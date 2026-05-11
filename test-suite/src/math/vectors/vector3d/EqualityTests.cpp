@@ -16,7 +16,7 @@
 
 
 constexpr auto NAN_F = fgm::constants::NaN;
-constexpr auto INF = fgm::constants::INFINITY_F;
+constexpr auto INF   = fgm::constants::INFINITY_F;
 
 
 
@@ -33,10 +33,10 @@ protected:
 
     void SetUp() override
     {
-        _eqVecA = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
-        _eqVecB = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
-        _dissimilarVec = { T(7.1234568789), T(2.123458319), T(24.00) };
-        _equalityMask = { false, true, false };
+        _eqVecA         = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
+        _eqVecB         = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
+        _dissimilarVec  = { T(7.1234568789), T(2.123458319), T(24.00) };
+        _equalityMask   = { false, true, false };
         _inequalityMask = { true, false, true };
     }
 };
@@ -109,7 +109,7 @@ TEST(Vector3DEquality, NanEqualityReturnsFalse)
 TEST(Vector3DEquality, InfinityEquality_IdenticalVectorsReturnsTrue)
 {
     const fgm::Vector3D vecA = { INF, -INF, INF };
-    const fgm::Vector3D vecB = { INF, -INF, INF};
+    const fgm::Vector3D vecB = { INF, -INF, INF };
 
     const bool equality = vecA.allEq(vecB);
 
@@ -206,8 +206,8 @@ TYPED_TEST(Vector3DEquality, EqualityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector3D::eq returns @ref fgm::Vector3D<bool> mask for different vectors. */
 TEST(Vector3DEquality, MixedType_EqualityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector3D vecA = { 1, 2, 3};
-    const fgm::Vector3D vecB = { 1.0, 4.0, 0.0 };
+    const fgm::Vector3D vecA         = { 1, 2, 3 };
+    const fgm::Vector3D vecB         = { 1.0, 4.0, 0.0 };
     const fgm::Vector3D expectedMask = { true, false, false };
 
     const fgm::Vector3D<bool> mask = vecA.eq(vecB);
@@ -219,8 +219,8 @@ TEST(Vector3DEquality, MixedType_EqualityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector3D::eq follows IEEE 754 for NaN comparisons. */
 TEST(Vector3DEquality, NanEqualityReturnsFalseBooleanMask)
 {
-    const fgm::Vector3D vecA = { NAN_F, NAN_F, NAN_F };
-    const fgm::Vector3D vecB = { 1.0, -5.88874789, fgm::constants::INFINITY_D};
+    const fgm::Vector3D vecA         = { NAN_F, NAN_F, NAN_F };
+    const fgm::Vector3D vecB         = { 1.0, -5.88874789, fgm::constants::INFINITY_D };
     const fgm::Vector3D expectedMask = { false, false, false };
 
     const fgm::Vector3D mask = vecA.eq(vecB);
@@ -232,7 +232,7 @@ TEST(Vector3DEquality, NanEqualityReturnsFalseBooleanMask)
 /** @test Verify that @ref fgm::Vector3D::eq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector3DEquality, InfinityEqualityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector3D vecA = { INF, -INF, INF };
+    const fgm::Vector3D vecA         = { INF, -INF, INF };
     const fgm::Vector3D<double> vecB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D, 10e11 };
     const fgm::Vector3D expectedMask = { true, false, false };
 
@@ -308,8 +308,12 @@ TYPED_TEST(Vector3DEquality, StaticWrapper_Inequality_DifferentVectorsReturnsTru
 /** @test Verify that @ref fgm::Vector3D::anyNeq follows IEEE 754 for NaN comparisons. */
 TEST(Vector3DEquality, NanInequalityReturnsTrue)
 {
-    const fgm::Vector3D vecA = { NAN_F, NAN_F, NAN_F };
-    const fgm::Vector3D<double> vecB = { 1.0, -5.88874789, fgm::constants::INFINITY_D, };
+    const fgm::Vector3D vecA         = { NAN_F, NAN_F, NAN_F };
+    const fgm::Vector3D<double> vecB = {
+        1.0,
+        -5.88874789,
+        fgm::constants::INFINITY_D,
+    };
 
     const bool equality = vecA.anyNeq(vecB);
 
@@ -419,8 +423,8 @@ TYPED_TEST(Vector3DEquality, InequalityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector3D::neq returns @ref fgm::Vector3D<bool> mask for different vectors. */
 TEST(Vector3DEquality, MixedType_InequalityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector3D vecA = { 1, 2, 3 };
-    const fgm::Vector3D vecB = { 1.0, 4.0, 0.0 };
+    const fgm::Vector3D vecA         = { 1, 2, 3 };
+    const fgm::Vector3D vecB         = { 1.0, 4.0, 0.0 };
     const fgm::Vector3D expectedMask = { false, true, true };
 
     const fgm::Vector3D<bool> mask = vecA.neq(vecB);
@@ -432,7 +436,7 @@ TEST(Vector3DEquality, MixedType_InequalityReturnsCorrectBooleanMask)
 /** @test Verify that @ref fgm::Vector3D::neq follows IEEE 754 for NaN comparisons. */
 TEST(Vector3DEquality, NanInequalityReturnsTrueBooleanMask)
 {
-    const fgm::Vector3D vecA = { NAN_F, NAN_F, NAN_F };
+    const fgm::Vector3D vecA         = { NAN_F, NAN_F, NAN_F };
     const fgm::Vector3D<double> vecB = { 1.0, -5.88874789, fgm::constants::INFINITY_D };
     const fgm::Vector3D expectedMask = { true, true, true };
 
@@ -445,8 +449,8 @@ TEST(Vector3DEquality, NanInequalityReturnsTrueBooleanMask)
 /** @test Verify that @ref fgm::Vector3D::neq follows IEEE 754 for INFINITY comparisons. */
 TEST(Vector3DEquality, InfinityInequalityReturnsCorrectBooleanMask)
 {
-    const fgm::Vector3D vecA = { INF, -INF, INF };
-    const fgm::Vector3D vecB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D, 10e11 };
+    const fgm::Vector3D vecA         = { INF, -INF, INF };
+    const fgm::Vector3D vecB         = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D, 10e11 };
     const fgm::Vector3D expectedMask = { false, true, true };
 
     const fgm::Vector3D mask = vecA.neq(vecB);

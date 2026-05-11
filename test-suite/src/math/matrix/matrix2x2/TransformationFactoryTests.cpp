@@ -17,7 +17,7 @@ template <typename T>
 class Matrix2DRotation: public ::testing::Test
 {
 protected:
-    using FP_T = T::first_type;   // FP_T -> Floating-point Type
+    using FP_T  = T::first_type;  // FP_T -> Floating-point Type
     using COM_T = T::second_type; // COM_T -> Common Type
 
     FP_T _angle;
@@ -51,7 +51,7 @@ protected:
     void SetUp() override
     {
         _expectedMat = { fgm::Vector2D{ T(5.3821839321), T(0) }, fgm::Vector2D{ T(0), T(5.3821839321) } };
-        _scale = T(5.3821839321);
+        _scale       = T(5.3821839321);
     }
 };
 /**
@@ -71,8 +71,8 @@ protected:
     void SetUp() override
     {
         _expectedMat = { fgm::Vector2D{ T(5.3821839321), T(0) }, fgm::Vector2D{ T(0), T(8.1234921348) } };
-        _scaleX = T(5.3821839321);
-        _scaleY = T(8.1234921348);
+        _scaleX      = T(5.3821839321);
+        _scaleY      = T(8.1234921348);
     }
 };
 /**

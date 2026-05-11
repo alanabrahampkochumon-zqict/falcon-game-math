@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Vector2D<bool> comparison operator (>, >=, <, <=) and 
+ * @brief Verify @ref fgm::Vector2D<bool> comparison operator (>, >=, <, <=) and
  *        their functional counterpart's (gt, gte, lt, lte) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -17,7 +17,7 @@
 
 
 constexpr auto NAN_F = fgm::constants::NaN;
-constexpr auto INF = fgm::constants::INFINITY_F;
+constexpr auto INF   = fgm::constants::INFINITY_F;
 
 
 
@@ -38,11 +38,11 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(1.1234568789), T(2.123458319)};
-        _vecB = { T(5.1234568789), T(1.123458319)};
-        _expectedGT = { false, true };
+        _vecA        = { T(1.1234568789), T(2.123458319) };
+        _vecB        = { T(5.1234568789), T(1.123458319) };
+        _expectedGT  = { false, true };
         _expectedGTE = { false, true };
-        _expectedLT = { true, false };
+        _expectedLT  = { true, false };
         _expectedLTE = { true, false };
     }
 };
@@ -453,7 +453,7 @@ TEST(Vector2DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison 
+ * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector2DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)

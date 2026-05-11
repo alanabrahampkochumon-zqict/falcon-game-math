@@ -1,5 +1,5 @@
-#include <utils/SIMDUtils.h>
 #include <gtest/gtest.h>
+#include <utils/SIMDUtils.h>
 
 struct TestPackingParams
 {
@@ -23,8 +23,8 @@ class PackedSizeCalculatorTests: public ::testing::TestWithParam<TestPackingPara
 TEST_P(PackedSizeCalculatorTests, CalculatesCorrectSize)
 {
     // Given an arbitrary data type size and total byte size
-    const auto [totalByteSize, alignAs, expectedByteSize, expectedPadding, expectedPackedRegisterWidth, expectedRegisterCount] =
-        GetParam();
+    const auto [totalByteSize, alignAs, expectedByteSize, expectedPadding, expectedPackedRegisterWidth,
+                expectedRegisterCount] = GetParam();
 
     // When packed size is calculated
     const auto [alignedByteSize, padding, packedRegisterWidth, registerCount] =
@@ -72,5 +72,4 @@ INSTANTIATE_TEST_SUITE_P(
         TestPackingParams{ 80, 64, 128, 48, 64, 2 }, TestPackingParams{ 128, 64, 128, 0, 64, 2 },
         TestPackingParams{ 192, 64, 256, 64, 64, 4 }, TestPackingParams{ 256, 64, 256, 0, 64, 4 },
         TestPackingParams{ 512, 64, 512, 0, 64, 8 }, TestPackingParams{ 777, 64, 1024, 247, 64, 16 },
-        TestPackingParams{ 1024, 64, 1024, 0, 64, 16 }
-        ));
+        TestPackingParams{ 1024, 64, 1024, 0, 64, 16 }));

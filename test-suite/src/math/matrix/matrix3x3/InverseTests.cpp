@@ -149,8 +149,7 @@ namespace
  * @brief Verify that inverting a matrix using @ref fgm::Matrix3D::inverse returns a new matrix that when multiplied
  *        with the original matrix returns an identity matrix.
  */
-TYPED_TEST(Matrix3DInverse, ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse()); }
+TYPED_TEST(Matrix3DInverse, ReturnsInverseMatrix) { EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse()); }
 
 
 /** @brief Verify that inverse of matrix times itself is an identity matrix. */
@@ -166,7 +165,9 @@ TYPED_TEST(Matrix3DInverse, InverseTimesMatrixReturnsIdentityMatrix)
  *        when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix3DInverse, StaticWrapper_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::inverse(this->_matrix)); }
+{
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::inverse(this->_matrix));
+}
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
@@ -200,7 +201,9 @@ TEST_P(SingularMatrix3DInverse, Inverse_FailsAssertionInDebugMode)
  *        with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix3DInverse, SafeInverse_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse()); }
+{
+    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
+}
 
 
 /**
@@ -263,7 +266,9 @@ TEST_P(NaNMatrix3DInverse, SafeInverse_ReturnsPassedInFallback)
  *        that when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix3DInverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::safeInverseOf(this->_matrix)); }
+{
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::safeInverseOf(this->_matrix));
+}
 
 
 /**
