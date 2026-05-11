@@ -182,7 +182,7 @@ namespace
  * @brief Verify that inverting a matrix using @ref fgm::Matrix4D::inverse returns a new matrix that when multiplied
  *        with the original matrix returns an identity matrix.
  */
-TYPED_TEST(Matrix4DInverse, ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix4DInverse, ReturnsInverseMatrix)
 { EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse()); }
 
 
@@ -197,7 +197,7 @@ TYPED_TEST(Matrix4DInverse, InverseTimesMatrixReturnsIdentityMatrix)
  * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4D::inverse returns a new matrix that
  *        when multiplied with the original matrix returns an identity matrix.
  */
-TYPED_TEST(Matrix4DInverse, StaticWrapper_ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix4DInverse, StaticWrapper_ReturnsInverseMatrix)
 { EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::inverse(this->_matrix)); }
 
 
@@ -231,7 +231,7 @@ TEST_P(SingularMatrix4DInverse, Inverse_FailsAssertionInDebugMode)
  * @brief Verify that inverting a matrix using @ref fgm::Matrix4D::safeInverse exchanges row and
  *        column elements and returns a new matrix.
  */
-TYPED_TEST(Matrix4DInverse, SafeInverse_ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix4DInverse, SafeInverse_ReturnsInverseMatrix)
 {
     EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
 }
@@ -296,7 +296,7 @@ TEST_P(NaNMatrix4DInverse, SafeInverse_ReturnsPassedInFallback)
  * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4D::safeInverse exchanges row and
  *        column elements and returns a new matrix.
  */
- TYPED_TEST(Matrix4DInverse, StaticWrapper_SafeInverse_ExchangesRowsAndColumnElements)
+ TYPED_TEST(Matrix4DInverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
 {
     EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::safeInverseOf(this->_matrix));
 }
@@ -367,11 +367,11 @@ TEST_P(NaNMatrix4DInverse, SafeInverse_ReturnsPassedInFallback)
  * @brief Verify that inverting a matrix using @ref fgm::Matrix4D::tryInverse exchanges row and column elements and
  *        returns a new matrix and sets status flag to @ref OperationStatus::SUCCESS.
  */
- TYPED_TEST(Matrix4DInverse, TryInverse_ExchangesRowsAndColumnElements)
+ TYPED_TEST(Matrix4DInverse, TryInverse_ReturnsInverseMatrix)
 {
-    // fgm::OperationStatus flag;
-    // EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.tryInverse(flag));
-    // EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    fgm::OperationStatus flag;
+    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.tryInverse(flag));
+    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
 
 
@@ -444,7 +444,7 @@ TEST_P(NaNMatrix4DInverse, SafeInverse_ReturnsPassedInFallback)
  * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4D::tryInverse exchanges row and
  *        column elements and returns a new matrix and sets status flag to @ref OperationStatus::SUCCESS.
  */
- TYPED_TEST(Matrix4DInverse, StaticWrapper_TryInverse_ExchangesRowsAndColumnElements)
+ TYPED_TEST(Matrix4DInverse, StaticWrapper_TryInverse_ReturnsInverseMatrix)
 {
     fgm::OperationStatus flag;
     EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::tryInverseOf(this->_matrix, flag));
