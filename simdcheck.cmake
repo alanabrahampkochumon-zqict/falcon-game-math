@@ -54,7 +54,20 @@ include(CheckCXXSourceRuns)
 include(CheckCXXCompilerFlag)
 
 function(AddSIMDCompilerFlag Target)
-    message(CHECK_START "Running SIMD checks for ${CPU_NAME}")
+    string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" SYSTEM_ARCH)
+
+    # Arm
+    if(SYSTEM_ARCH MATCHES "arm|aarch64")
+        message(STATUS "Detected ARM Architecture. Enabling NEON...")
+        return()
+    endif ()
+
+    if(NOT SYSTEM_ARCH MATCHES "x86_64|amd64|i386|i686")
+        message(WARNING "Unknown Architecture: ${SYSTEM_ARCH}. Disabling SIMD.")
+        return()
+    endif()
+
+    message(CHECK_START "Running x86 SIMD checks for ${CPU_NAME}")
 
     set(ProgramNames "SIMD_AVX512_PROG;SIMD_AVX2_PROG;SIMD_AVX_PROG;SIMD_SSE_PROG")
     set(Architectures "AVX-512;AVX2;AVX;SSE")
