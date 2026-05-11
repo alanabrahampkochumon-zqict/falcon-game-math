@@ -16,6 +16,13 @@
 #include <type_traits>
 
 
+#if defined(__clang__)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wbitwise-instead-of-logical"
+#elif defined(__GNUC__)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wbitwise-instead-of-logical"
+#endif
 
 namespace fgm
 {
@@ -1192,3 +1199,9 @@ namespace fgm
     }
 
 } // namespace fgm
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif

@@ -11,6 +11,15 @@
  */
 
 
+
+#if defined(__clang__)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wbitwise-instead-of-logical"
+#elif defined(__GNUC__)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wbitwise-instead-of-logical"
+#endif
+
 namespace fgm
 {
     /*************************************
@@ -518,7 +527,7 @@ namespace fgm
         {
             // TODO: Check || vs | with benchmarks
             // Theoretically the slowest method since NaN checks are performed before division by zero
-            if (hasNaN() | fgm::isnan(scalar))
+            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
             {
                 status = OperationStatus::NANOPERAND;
                 return Matrix4D<R>(fallback);
@@ -809,3 +818,10 @@ namespace fgm
     { return mat.hasNaN(); }
 
 } // namespace fgm
+
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif

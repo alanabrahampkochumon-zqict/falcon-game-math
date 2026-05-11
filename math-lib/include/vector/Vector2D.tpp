@@ -18,6 +18,16 @@
 #include <iostream> // TODO: REMOVE
 #include <type_traits>
 
+
+#if defined(__clang__)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wbitwise-instead-of-logical"
+#elif defined(__GNUC__)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wbitwise-instead-of-logical"
+#endif
+
+
 namespace fgm
 {
 
@@ -606,7 +616,7 @@ namespace fgm
         using R = std::common_type_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
-            if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)) | static_cast<int>(fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
                 return fgm::vec2d::zero<R>;
         if constexpr (std::is_integral_v<R>)
             if (scalar == 0)
@@ -636,7 +646,7 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (hasNaN() | fgm::isnan(scalar))
+            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
             {
                 status = OperationStatus::NANOPERAND;
                 return fgm::vec2d::zero<R>;
@@ -881,7 +891,7 @@ namespace fgm
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
-        if (hasNaN() | fgm::isnan(ontoSquared))
+        if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(ontoSquared)))
             return fgm::vec2d::zero<MagType>;
 
         if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
@@ -921,7 +931,7 @@ namespace fgm
         /** @note Static cast ensures integral type dots don't lose too much precision. */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
-        if (hasNaN() | fgm::isnan(ontoSquared))
+        if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(ontoSquared)))
         {
             status = OperationStatus::NANOPERAND;
             return fgm::vec2d::zero<MagType>;
@@ -1071,3 +1081,9 @@ namespace fgm
     }
 
 } // namespace fgm
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
