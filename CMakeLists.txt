@@ -19,7 +19,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 find_program(CLANG_FORMATTER NAMES clang-format)
 
 if (CLANG_FORMATTER)
-    file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h *.cxx *.hxx *.hpp *.cc *.hh *.tpp *.inl)
+    file(GLOB_RECURSE ALL_SOURCE_FILES ${CMAKE_SOURCE_DIR}/*.cpp ${CMAKE_SOURCE_DIR}/*.h ${CMAKE_SOURCE_DIR}/*.cxx ${CMAKE_SOURCE_DIR}/*.hxx ${CMAKE_SOURCE_DIR}/*.hpp ${CMAKE_SOURCE_DIR}/*.cc ${CMAKE_SOURCE_DIR}/*.hh ${CMAKE_SOURCE_DIR}/*.tpp ${CMAKE_SOURCE_DIR}/*.inl)
 
     add_custom_target(format
             # Use VERBATIM and quote the command for Windows compatibility

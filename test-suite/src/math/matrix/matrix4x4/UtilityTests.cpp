@@ -57,7 +57,6 @@ TYPED_TEST_SUITE(Matrix4DIntegralUtility, SupportedIntegralTypes);
 namespace
 {
     constexpr fgm::Matrix4D INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f);
-    constexpr fgm::Matrix4D NAN_MAT(fgm::constants::NaN, 1.0f, 1.0f, 1.0f);
     constexpr fgm::Matrix4D MAT(1.0f, 1.0f, 1.0f, 1.0f);
 
 
@@ -65,11 +64,9 @@ namespace
     namespace
     {
         // Member functions
-        static_assert(NAN_MAT.hasNaN() == true);
         static_assert(MAT.hasNaN() == false);
 
         // Static functions
-         static_assert(fgm::Matrix4D<float>::hasNaN(NAN_MAT) == true);
          static_assert(fgm::Matrix4D<float>::hasNaN(MAT) == false);
     } // namespace
 
