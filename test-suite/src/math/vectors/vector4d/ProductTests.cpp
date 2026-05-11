@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verifies @ref fgm::Vector4D dot product logic.
+ * @brief Verify @ref fgm::Vector4D dot product logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

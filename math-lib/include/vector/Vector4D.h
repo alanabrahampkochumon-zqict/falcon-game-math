@@ -31,7 +31,6 @@
 #include <cstddef>
 #include <iomanip>
 #include <ostream>
-#include <variant>
 
 
 
@@ -47,9 +46,9 @@ namespace fgm
          * @{
          */
 
-        using value_type = T;
+        using value_type = T; ///< The numeric type of the vector components.
 
-        static constexpr std::size_t dimension = 4; ///< Vector Dimension
+        static constexpr std::size_t dimension = 4; ///< The number of components of the vector.
 
         /** @} */
 
@@ -59,12 +58,6 @@ namespace fgm
          * @addtogroup FGM_Vec4_Init
          * @{
          */
-
-        /*************************************
-         *                                   *
-         *            INITIALIZERS           *
-         *                                   *
-         *************************************/
 
         /** @brief Initialize @ref Vector4D with zeros. */
         [[nodiscard]] constexpr Vector4D() noexcept;
@@ -118,13 +111,14 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector4D(const Vector4D<U>& other) noexcept;
 
+        /** @} */
 
-        /*************************************
-         *                                   *
-         *            ACCESSORS              *
-         *                                   *
-         *************************************/
 
+
+        /**
+         * @addtogroup FGM_Vec3_Access
+         * @{
+         */
 
         /**************************************
          *                                    *
@@ -336,7 +330,7 @@ namespace fgm
          *
          * @return A copy of the vector component.
          */
-        constexpr T operator[](std::size_t idx) const noexcept;
+        constexpr const T& operator[](std::size_t idx) const noexcept;
 
         /** @} */
 
@@ -392,12 +386,6 @@ namespace fgm
          * @{
          */
 
-        /***************************************
-         *                                     *
-         *             EQUALITY                *
-         *                                     *
-         ***************************************/
-
         /**
          * @brief Compare all components of this vector for equality with another vector.
          *        Perform a component-wise comparison and returns true only if every element pair
@@ -443,8 +431,8 @@ namespace fgm
 
         /**
          * @brief Compare components for inequality across two vectors.
-         *        Perform a component-wise comparison and returns true if any of the pair satisfies inequality condition
-         *        within the given @p epsilon.
+         *        Perform a component-wise comparison and returns true if any corresponding elements differ by more
+         *        than @p epsilon.
          *
          * @note To obtain a component-wise boolean mask, use @ref neq.
          *
@@ -454,17 +442,17 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return True if any of the components are not equivalent within the default epsilon.
+         * @return True if any of the components are not equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr bool allNeq(const Vector4D<U>& rhs,
+        [[nodiscard]] constexpr bool anyNeq(const Vector4D<U>& rhs,
                                             double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
                                                 ? Config::DOUBLE_EPSILON
                                                 : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
-         * @copybrief allNeq(const Vector4D<U>&, double) const
+         * @copybrief anyNeq(const Vector4D<U>&, double) const
          *
          * @note To obtain a component-wise boolean mask, use @ref neq.
          *
@@ -475,10 +463,10 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return True if any of the components are not equivalent within the default epsilon.
+         * @return True if any of the components are not equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr static bool allNeq(const Vector4D& lhs, const Vector4D<U>& rhs,
+        [[nodiscard]] constexpr static bool anyNeq(const Vector4D& lhs, const Vector4D<U>& rhs,
                                                    double epsilon = (std::is_same_v<T, double> ||
                                                                      std::is_same_v<U, double>)
                                                        ? Config::DOUBLE_EPSILON
@@ -501,7 +489,7 @@ namespace fgm
 
 
         /**
-         * @copybrief allNeq(const Vector4D<U>&, double) const
+         * @copybrief anyNeq(const Vector4D<U>&, double) const
          *
          * @note To obtain a component-wise boolean mask, use @ref eq.
          *
@@ -561,7 +549,7 @@ namespace fgm
          * @brief Perform component-wise inequality check.
          *        Compare each component pair and returns a boolean mask.
          *
-         * @note To obtain a single scalar result, use @ref allNeq or @ref operator!=.
+         * @note To obtain a single scalar result, use @ref anyNeq or @ref operator!=.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
          *
@@ -606,12 +594,6 @@ namespace fgm
          * @addtogroup FGM_Vec4_Comparison
          * @{
          */
-
-        /***************************************
-         *                                     *
-         *            COMPARISONS              *
-         *                                     *
-         ***************************************/
 
         /**
          * @brief Perform component-wise greater-than comparison.
@@ -788,12 +770,6 @@ namespace fgm
          * @{
          */
 
-        /***************************************
-         *                                     *
-         *      BOOLEAN BITWISE OPERATORS      *
-         *                                     *
-         ***************************************/
-
         /**
          * @brief Perform component-wise logical AND.
          *        Compute the conjunction of each component pair.
@@ -869,12 +845,6 @@ namespace fgm
          * @addtogroup FGM_Vec4_Arithmetic
          * @{
          */
-
-        /*************************************
-         *                                   *
-         *      ARITHMETIC OPERATORS         *
-         *                                   *
-         *************************************/
 
         /**
          * @brief Add two vectors component-wise.
@@ -1648,7 +1618,7 @@ namespace fgm
         /**
          * @brief Check if any component of this vector is an IEEE 754 infinity.
          *
-         * @note Always returns false for integral types.
+         * @note Always return false for integral types.
          *
          * @return True if at least one component is positive or negative infinity.
          */
@@ -1658,7 +1628,7 @@ namespace fgm
         /**
          * @brief Check if any component of a vector is an IEEE 754 infinity.
          *
-         * @note Always returns false for integral types.
+         * @note Always return false for integral types.
          *
          * @param vec The vector to evaluate for indefinite components.
          *
@@ -1670,7 +1640,7 @@ namespace fgm
         /**
          * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
          *
-         * @note Always returns false for integral types.
+         * @note Always return false for integral types.
          *
          * @return True if at least one component is NaN.
          */
@@ -1680,7 +1650,7 @@ namespace fgm
         /**
          * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
          *
-         * @note Always returns false for integral types.
+         * @note Always return false for integral types.
          *
          * @param vec The vector to evaluate for indefinite components.
          *
@@ -1801,6 +1771,7 @@ namespace fgm
      *            CONSTANTS              *
      *                                   *
      *************************************/
+
     namespace vec4d
     {
 

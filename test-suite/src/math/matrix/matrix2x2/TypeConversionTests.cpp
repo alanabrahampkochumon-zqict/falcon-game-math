@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verifies @ref fgm::Matrix2D conversion constructor logic.
+ * @brief Verify @ref fgm::Matrix2D conversion constructor logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -17,6 +17,34 @@
  * @addtogroup T_FGM_Mat2x2_Type_Conv
  * @{
  */
+
+/**************************************
+ *                                    *
+ *           STATIC TESTS             *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that the matrix can be type promoted and demoted at compile time. */
+namespace 
+{
+    constexpr fgm::Matrix2D MAT(1.0f, 2.0f, 3.0f, 4.0f);
+
+    // Verify that the matrix can be type promoted at compile time.
+    constexpr fgm::Matrix2D<double> MAT_D(MAT);
+    static_assert(std::is_same_v<decltype(MAT_D)::value_type, double>);
+
+    // Verify that the matrix can be type demoted at compile time.
+    constexpr fgm::Matrix2D<int> MATI(MAT);
+    static_assert(std::is_same_v<decltype(MATI)::value_type, int>);
+}
+
+
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
 
 /**
  * @test Verify that the conversion constructor correctly promotes components from float to double.

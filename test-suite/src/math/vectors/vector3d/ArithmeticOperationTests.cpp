@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 02, 2026
  *
- * @brief Verifies @ref fgm::Vector3D arithmetic operator(+, -, *, /) logic.
+ * @brief Verify @ref fgm::Vector3D arithmetic operator(+, -, *, /) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -114,7 +114,7 @@ protected:
 TYPED_TEST_SUITE(Vector3DInversion, SupportedSignedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector3D division with NaN vectors. */
+/** @brief Test fixture for @ref fgm::Vector3D division with NaN vectors. */
 class Vector3DDivisionNaNTests: public ::testing::TestWithParam<fgm::Vector3D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Vector3DDivisionTestSuite, Vector3DDivisionNaNTests,

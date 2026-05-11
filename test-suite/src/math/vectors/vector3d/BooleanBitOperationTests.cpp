@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 02, 2026
  *
- * @brief Verifies @ref fgm::Vector3D bitwise operator(&, |, !) logic.
+ * @brief Verify @ref fgm::Vector3D bitwise operator(&, |, !) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

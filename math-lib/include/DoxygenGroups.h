@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 18, 2026
  *
- * @brief Doxygen group for categorizing all mathematical functions and structures.
+ * @brief Doxygen group for organizing Falcon Math library into modular units.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -37,7 +37,8 @@
              * @ingroup FGM_Vectors
              * @{
              *   @defgroup FGM_Vec2_Members Class Members
-             *   @defgroup FGM_Vec2_Init Accessors and Initializers
+             *   @defgroup FGM_Vec2_Init Constructors
+             *   @defgroup FGM_Vec2_Access Accessors
              *   @defgroup FGM_Vec2_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Vec2_Bitwise Boolean Bitwise Operations
              *   @defgroup FGM_Vec2_Equality Equality
@@ -59,7 +60,8 @@
              * @ingroup FGM_Vectors
              * @{
              *   @defgroup FGM_Vec3_Members Class Members
-             *   @defgroup FGM_Vec3_Init Accessors and Initializers
+             *   @defgroup FGM_Vec3_Init Constructors
+             *   @defgroup FGM_Vec3_Access Accessors
              *   @defgroup FGM_Vec3_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Vec3_Bitwise Boolean Bitwise Operations
              *   @defgroup FGM_Vec3_Equality Equality
@@ -81,7 +83,8 @@
              * @ingroup FGM_Vectors
              * @{
              *   @defgroup FGM_Vec4_Members Class Members
-             *   @defgroup FGM_Vec4_Init Accessors and Initializers
+             *   @defgroup FGM_Vec4_Init Constructors
+             *   @defgroup FGM_Vec4_Access Accessors
              *   @defgroup FGM_Vec4_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Vec4_Bitwise Boolean Bitwise Operations
              *   @defgroup FGM_Vec4_Equality Equality
@@ -112,18 +115,56 @@
              * @ingroup FGM_Matrices
              * @{
              *   @defgroup FGM_Mat2x2_Members Class Members
-             *   @defgroup FGM_Mat2x2_Init Accessors and Initializers
+             *   @defgroup FGM_Mat2x2_Init Constructors
+             *   @defgroup FGM_Mat2x2_Access Accessors
              *   @defgroup FGM_Mat2x2_Arithmetic Arithmetic Operations
-             *   @defgroup FGM_Mat2x2_Bitwise Boolean Bitwise Operations
+             *   @defgroup FGM_Mat2x2_Algebra Matrix Algebra
              *   @defgroup FGM_Mat2x2_Equality Equality
-             *   @defgroup FGM_Mat2x2_Comparison Comparisons
              *   @defgroup FGM_Mat2x2_Product Geometric Products
-             *   @defgroup FGM_Mat2x2_Mag Scalar Magnitude and Normalization
-             *   @defgroup FGM_Mat2x2_Proj Vector Projection and Rejection
-             *   @defgroup FGM_Mat2x2_Alias Spatial Alias
              *   @defgroup FGM_Mat2x2_Log String Representation
-             *   @defgroup FGM_Mat2x2_Const Vector Constants
-             *   @defgroup FGM_Mat2x2_Utils Vector Utilities
+             *   @defgroup FGM_Mat2x2_Const Matrix Constants
+             *   @defgroup FGM_Mat2x2_Utils Matrix Utilities
+             *   @defgroup FGM_Mat2x2_Transforms Matrix Transformation Factories
+             * @}
+             */
+
+            
+            /**
+             * @defgroup FGM_Mat3x3 3x3 Square Matrix
+             * @brief 3x3 Square Matrix.
+             * @ingroup FGM_Matrices
+             * @{
+             *   @defgroup FGM_Mat3x3_Members Class Members
+             *   @defgroup FGM_Mat3x3_Init Constructors
+             *   @defgroup FGM_Mat3x3_Access Accessors
+             *   @defgroup FGM_Mat3x3_Arithmetic Arithmetic Operations
+             *   @defgroup FGM_Mat3x3_Algebra Matrix Algebra
+             *   @defgroup FGM_Mat3x3_Equality Equality
+             *   @defgroup FGM_Mat3x3_Product Geometric Products
+             *   @defgroup FGM_Mat3x3_Log String Representation
+             *   @defgroup FGM_Mat3x3_Const Matrix Constants
+             *   @defgroup FGM_Mat3x3_Utils Matrix Utilities
+             *   @defgroup FGM_Mat3x3_Transforms Matrix Transformation Factories
+             * @}
+             */
+
+            
+            /**
+             * @defgroup FGM_Mat4x4 4x4 Square Matrix
+             * @brief 4x4 Square Matrix.
+             * @ingroup FGM_Matrices
+             * @{
+             *   @defgroup FGM_Mat4x4_Members Class Members
+             *   @defgroup FGM_Mat4x4_Init Constructors
+             *   @defgroup FGM_Mat4x4_Access Accessors
+             *   @defgroup FGM_Mat4x4_Arithmetic Arithmetic Operations
+             *   @defgroup FGM_Mat4x4_Algebra Matrix Algebra
+             *   @defgroup FGM_Mat4x4_Equality Equality
+             *   @defgroup FGM_Mat4x4_Product Geometric Products
+             *   @defgroup FGM_Mat4x4_Log String Representation
+             *   @defgroup FGM_Mat4x4_Const Matrix Constants
+             *   @defgroup FGM_Mat4x4_Utils Matrix Utilities
+             *   @defgroup FGM_Mat4x4_Transforms Matrix Transformation Factories
              * @}
              */
         
@@ -135,9 +176,6 @@
      * @defgroup FGM_Concepts Concepts
      * @brief Fundamental mathematical constraints.
      * @ingroup FGM_Math
-     * @{
-     *   @defgroup FGM_Concepts Math Concepts
-     * @}
      */
     
     /**
@@ -155,6 +193,24 @@
     /**
      * @defgroup FGM_Math_Common Library Utilities
      * @brief Common utilities used by FGM.
+     * @ingroup FGM_Math
+     */
+
+    /**
+     * @defgroup FGM_Wrappers Wrapper Functions
+     * @brief Wrapper for `std` functions to enable compile time evaluation in pre-C++23/26.
+     * @ingroup FGM_Math
+     */
+
+    /**
+     * @defgroup FGM_Macro Preprocessor Macros
+     * @brief Preprocessor macro for assertions and compiler intrinsic debug breaks.
+     * @ingroup FGM_Math
+     */
+
+    /**
+     * @defgroup FGM_Messages Messages
+     * @brief Central repository for all library string resources.
      * @ingroup FGM_Math
      */
 

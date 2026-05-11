@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 30, 2026
  *
- * @brief Verifies @ref fgm::Vector4D utility functions.
+ * @brief Verify @ref fgm::Vector4D utility functions.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -62,7 +62,7 @@ TEST_P(Vector4DInfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
     EXPECT_EQ(expected, vec.hasInf());
 }
 INSTANTIATE_TEST_SUITE_P(
-    Vector4DNaNCheckerTestSuite, Vector4DInfCheckerTests,
+    Vector4DInfCheckerTestSuite, Vector4DInfCheckerTests,
     ::testing::Values(Vector4DUtilityParams{ fgm::Vector4D(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
                       Vector4DUtilityParams{ fgm::Vector4D(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
                       Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 06, 2026
  *
- * @brief Verifies @ref fgm::Vector2D swizzling logic.
+ * @brief Verify @ref fgm::Vector2D swizzling logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

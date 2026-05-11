@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verifies @ref fgm::Vector2D arithmetic operator(+, -, *, /) logic.
+ * @brief Verify @ref fgm::Vector2D arithmetic operator(+, -, *, /) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -34,7 +34,7 @@ protected:
         _expectedSum = { T(-5), T(6) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector2D addition, parameterized by SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Vector2D addition, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DAddition, SupportedArithmeticTypes);
 
 
@@ -53,7 +53,7 @@ protected:
         _expectedDifference = { T(103), T(6) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector2D subtraction, parameterized by SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Vector2D subtraction, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DSubtraction, SupportedArithmeticTypes);
 
 
@@ -74,7 +74,7 @@ protected:
         _expectedIntegralVec = { T(14), T(26) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector2D scalar multiplication, parameterized by SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Vector2D scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DScalarMultiplication, SupportedArithmeticTypes);
 
 
@@ -114,7 +114,7 @@ protected:
 TYPED_TEST_SUITE(Vector2DInversion, SupportedSignedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector2D division with NaN vectors. */
+/** @brief Test fixture for @ref fgm::Vector2D division with NaN vectors. */
 class Vector2DDivisionNaNTests: public ::testing::TestWithParam<fgm::Vector2D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Vector2DDivisionTestSuite, Vector2DDivisionNaNTests,

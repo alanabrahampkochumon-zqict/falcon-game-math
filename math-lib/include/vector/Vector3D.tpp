@@ -210,7 +210,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::operator[](const std::size_t idx) const noexcept
+    constexpr const T& Vector3D<T>::operator[](const std::size_t idx) const noexcept
     {
         return _data[idx];
     }
@@ -256,10 +256,20 @@ namespace fgm
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] == rhs[0] && _data[1] == rhs[1] && _data[2] == rhs[2];
         else
+        {
+            // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+            // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+            // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+#ifdef _MSC_VER
+            if (std::is_constant_evaluated())
+                if (hasNaN() || rhs.hasNaN())
+                    return false;
+#endif
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return (_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon) &&
-                (_data[1] == rhs[1] || std::abs(_data[1] - rhs[1]) <= epsilon) &&
-                (_data[2] == rhs[2] || std::abs(_data[2] - rhs[2]) <= epsilon);
+            return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
+                (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon) &&
+                (_data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon);
+        }
     }
 
     template <Arithmetic T>
@@ -272,24 +282,24 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::allNeq(const Vector3D<U>& rhs, const double epsilon) const noexcept
+    constexpr bool Vector3D<T>::anyNeq(const Vector3D<U>& rhs, const double epsilon) const noexcept
     {
 
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
             return _data[0] != rhs[0] || _data[1] != rhs[1] || _data[2] != rhs[2];
         else
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return (_data[0] != rhs[0] && !(std::abs(_data[0] - rhs[0]) <= epsilon)) ||
-                (_data[1] != rhs[1] && !(std::abs(_data[1] - rhs[1]) <= epsilon)) ||
-                (_data[2] != rhs[2] && !(std::abs(_data[2] - rhs[2]) <= epsilon));
+            return (_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon)) ||
+                (_data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon)) ||
+                (_data[2] != rhs[2] && !(fgm::abs(_data[2] - rhs[2]) <= epsilon));
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr bool Vector3D<T>::allNeq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
+    constexpr bool Vector3D<T>::anyNeq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
     {
-        return lhs.allNeq(rhs, epsilon);
+        return lhs.anyNeq(rhs, epsilon);
     }
 
 
@@ -304,7 +314,7 @@ namespace fgm
     template <Arithmetic U>
     constexpr bool Vector3D<T>::operator!=(const Vector3D<U>& rhs) const noexcept
     {
-        return this->allNeq(rhs);
+        return this->anyNeq(rhs);
     }
 
 
@@ -316,9 +326,9 @@ namespace fgm
             return Vector3D(_data[0] == rhs[0], _data[1] == rhs[1], _data[2] == rhs[2]);
         else
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return Vector3D((_data[0] == rhs[0] || std::abs(_data[0] - rhs[0]) <= epsilon),
-                            (_data[1] == rhs[1] || std::abs(_data[1] - rhs[1]) <= epsilon),
-                            (_data[2] == rhs[2] || std::abs(_data[2] - rhs[2]) <= epsilon));
+            return Vector3D((_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon),
+                            (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon),
+                            (_data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon));
     }
 
 
@@ -338,9 +348,9 @@ namespace fgm
             return Vector3D(_data[0] != rhs[0], _data[1] != rhs[1], _data[2] != rhs[2]);
         else
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return Vector3D<bool>((_data[0] != rhs[0]) && !(std::abs(_data[0] - rhs[0]) <= epsilon),
-                                  (_data[1] != rhs[1]) && !(std::abs(_data[1] - rhs[1]) <= epsilon),
-                                  (_data[2] != rhs[2]) && !(std::abs(_data[2] - rhs[2]) <= epsilon));
+            return Vector3D<bool>((_data[0] != rhs[0]) && !(fgm::abs(_data[0] - rhs[0]) <= epsilon),
+                                  (_data[1] != rhs[1]) && !(fgm::abs(_data[1] - rhs[1]) <= epsilon),
+                                  (_data[2] != rhs[2]) && !(fgm::abs(_data[2] - rhs[2]) <= epsilon));
     }
 
 
@@ -670,7 +680,7 @@ namespace fgm
         using R = std::common_type_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
-            if (hasNaN() | std::isnan(scalar) | (std::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+            if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
                 return fgm::vec3d::zero<R>;
         if constexpr (std::is_integral_v<R>)
             if (scalar == 0)
@@ -700,12 +710,12 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (hasNaN() | std::isnan(scalar))
+            if (hasNaN() | fgm::isnan(scalar))
             {
                 status = OperationStatus::NANOPERAND;
                 return fgm::vec3d::zero<R>;
             }
-            if (std::abs(scalar) <= std::numeric_limits<S>::epsilon())
+            if (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return fgm::vec3d::zero<R>;
@@ -748,14 +758,18 @@ namespace fgm
     constexpr auto Vector3D<T>::dot(const Vector3D<U>& rhs) const noexcept -> std::common_type_t<T, U>
         requires StrictArithmetic<T>
     {
+#define FP_FAST_FMA
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
         using R = std::common_type_t<T, U>;
         if constexpr (std::is_floating_point_v<R>)
-            return std::fma(static_cast<R>(_data[0]), static_cast<R>(rhs[0]),
-                            std::fma(static_cast<R>(_data[1]), static_cast<R>(rhs[1]),
-                                     std::fma(static_cast<R>(_data[2]), static_cast<R>(rhs[2]), T(0))));
-        else
-            return _data[0] * rhs[0] + _data[1] * rhs[1] + _data[2] * rhs[2];
+        {
+            if (!std::is_constant_evaluated())
+                return std::fma(static_cast<R>(_data[0]), static_cast<R>(rhs[0]),
+                                std::fma(static_cast<R>(_data[1]), static_cast<R>(rhs[1]),
+                                         std::fma(static_cast<R>(_data[2]), static_cast<R>(rhs[2]), T(0))));
+
+        }
+        return _data[0] * rhs[0] + _data[1] * rhs[1] + _data[2] * rhs[2];
 #else
         return _data[0] * rhs[0] + _data[1] * rhs[1] + _data[2] * rhs[2];
 #endif
@@ -857,7 +871,7 @@ namespace fgm
     {
         using R = Magnitude<T>;
         R magnitude = mag();
-        if (std::isnan(magnitude))
+        if (fgm::isnan(magnitude))
             return fgm::vec3d::zero<R>;
         if (magnitude <= Config::EPSILON_SQUARE<R>)
             return fgm::vec3d::zero<R>;
@@ -880,7 +894,7 @@ namespace fgm
     {
         using R = Magnitude<T>;
         R magnitude = mag();
-        if (std::isnan(magnitude))
+        if (fgm::isnan(magnitude))
         {
             status = OperationStatus::NANOPERAND;
             return fgm::vec3d::zero<R>;
@@ -952,7 +966,7 @@ namespace fgm
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
-        if (hasNaN() | std::isnan(ontoSquared))
+        if (hasNaN() | fgm::isnan(ontoSquared))
             return fgm::vec3d::zero<MagType>;
 
         if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
@@ -992,7 +1006,7 @@ namespace fgm
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
-        if (hasNaN() | std::isnan(ontoSquared))
+        if (hasNaN() | fgm::isnan(ontoSquared))
         {
             status = OperationStatus::NANOPERAND;
             return fgm::vec3d::zero<MagType>;
@@ -1112,7 +1126,7 @@ namespace fgm
     constexpr bool Vector3D<T>::hasInf() const noexcept
     {
         if constexpr (std::is_floating_point_v<T>)
-            return std::isinf(_data[0]) | std::isinf(_data[1]) | std::isinf(_data[2]);
+            return fgm::isinf(_data[0]) | fgm::isinf(_data[1]) | fgm::isinf(_data[2]);
         else
             return false;
     }
@@ -1129,7 +1143,7 @@ namespace fgm
     constexpr bool Vector3D<T>::hasNaN() const noexcept
     {
         if constexpr (std::is_floating_point_v<T>)
-            return std::isnan(_data[0]) | std::isnan(_data[1]) | std::isnan(_data[2]);
+            return fgm::isnan(_data[0]) | fgm::isnan(_data[1]) | fgm::isnan(_data[2]);
         else
             return false;
     }

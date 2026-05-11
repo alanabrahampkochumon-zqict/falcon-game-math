@@ -10,31 +10,44 @@
  */
 
 
+#include <concepts>
 #include <limits>
+#include <numbers>
 
 
 /**
  * @addtogroup FGM_Math_Constants
  * @{
  */
-
 namespace fgm::constants
 {
 
     /** @brief Positive infinity for single-precision floats. */
-    static constexpr float INFINITY_F = std::numeric_limits<float>::infinity();
+    inline constexpr float INFINITY_F = std::numeric_limits<float>::infinity();
 
     /** @brief Positive infinity for double-precision floats. */
-    static constexpr double INFINITY_D = std::numeric_limits<double>::infinity();
+    inline constexpr double INFINITY_D = std::numeric_limits<double>::infinity();
 
     /** @brief Quiet Not-a-Number for single-precision floats. */
-    static constexpr float NaN = std::numeric_limits<float>::quiet_NaN();
+    inline constexpr float NaN = std::numeric_limits<float>::quiet_NaN();
 
     /** @brief Quiet Not-a-Number for double-precision floats. */
-    static constexpr double NaN_D = std::numeric_limits<double>::quiet_NaN();
+    inline constexpr double NaN_D = std::numeric_limits<double>::quiet_NaN();
 
     /** @brief The maximum possible swizzling dimension allowable for @ref fgm::Vector. */
-    inline constexpr std::size_t MAX_VECTOR_SWIZZLE_DIMENSION = 4;
+    inline constexpr std::size_t MAX_VECTOR_SWIZZLE_DIMENSION = 4; // TODO: Remove
+
+    /** @brief Standard value for PI. */
+    template <std::floating_point T>
+    inline constexpr T PI = std::numbers::pi_v<T>;
+
+    /** @brief Standard value for inverse of PI (1/PI). */
+    template <std::floating_point T>
+    inline constexpr T INV_PI = std::numbers::inv_pi_v<T>;
+
+    /** @brief Standard value for TAU (2.PI). */
+    template <std::floating_point T>
+    inline constexpr T TAU = std::numbers::pi_v<T> * T(2);
 
 } // namespace fgm::constants
 

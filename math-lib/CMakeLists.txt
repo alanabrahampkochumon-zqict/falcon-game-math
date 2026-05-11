@@ -1,32 +1,13 @@
-add_library(MathLib INTERFACE)
-
-set_property(TARGET MathLib PROPERTY CXX_STANDARD 20)
-set_property(TARGET MathLib PROPERTY CXX_STANDARD_REQUIRED ON)
-
-# target_compile_options(MathLib INTERFACE # TODO: Change to the compile target
-#     $<$<CXX_COMPILER_ID:MSVC>:/W4;/wd4201;/wd26495;/wd26439>
-#     $<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wpedantic;-Wno-gnu-anonymous-struct;-Werror;>
-#     $<$<CXX_COMPILER_ID:Clang>:-Wall;-Wextra;-Wpedantic;-Wno-gnu-anonymous-struct;-Werror;>
-# )
-
-# target_compile_options(MathLib INTERFACE
-#     $<$<CXX_COMPILER_ID:MSVC>:/arch:AVX2>
-#     $<$<CXX_COMPILER_ID:GNU>:-mavx2>
-#     $<$<CXX_COMPILER_ID:Clang>:-mavx2>
-# )
-
-# NOTE: If this flag is not enabled, then NAN less than and less than or equal comparison will not work properly.
-target_compile_options(MathLib INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
-
 set(IncludeDirectory "include/")
-
 
 set(GeneralFiles "SimdTraits.h;DoxygenGroups.h")
 list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
 
 set(CommonDirectory "${IncludeDirectory}common/")
-set(CommonFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h")
-list(TRANSFORM CommonFiles PREPEND ${CommonDirectory})
+set(CommonHeaderFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h;Wrappers.h;PreprocessorDefinitions.h;Messages.h;")
+list(TRANSFORM CommonHeaderFiles PREPEND ${CommonDirectory})
+set(CommonTemplateFiles "Wrappers.tpp;")
+list(TRANSFORM CommonTemplateFiles PREPEND ${CommonDirectory})
 
 set(VectorDirectory "${IncludeDirectory}vector/")
 set(VectorHeaderFiles Vector3D.h Vector2D.h Vector4D.h)
@@ -42,6 +23,23 @@ list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
 set(MatrixTemplateDefinitionFiles Matrix2D.tpp Matrix3D.tpp Matrix4D.tpp)
 list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDirectory})
 
+# To view this target as a Interface Library, we need to pass all the target files.
+add_library(MathLib INTERFACE 
+        ${VectorHeaderFiles}
+        ${VectorTemplateDefinitionFiles}
+        ${MatrixHeaderFiles}
+        ${MatrixTemplateDefinitionFiles}
+        ${GeneralFiles}
+        ${CommonHeaderFiles}
+        ${CommonTemplateFiles}
+)
+
+set_property(TARGET MathLib PROPERTY CXX_STANDARD 20)
+set_property(TARGET MathLib PROPERTY CXX_STANDARD_REQUIRED ON)
+
+# NOTE: If this flag is not enabled, then NAN less than and less than or equal comparison will not work properly.
+target_compile_options(MathLib INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
+
 
 target_sources(MathLib
     INTERFACE
@@ -53,7 +51,8 @@ target_sources(MathLib
         ${MatrixHeaderFiles}
         ${MatrixTemplateDefinitionFiles}
         ${GeneralFiles}
-        ${CommonFiles}
+        ${CommonHeaderFiles}
+        ${CommonTemplateFiles}
 )
 
 
@@ -65,20 +64,10 @@ target_include_directories(
 
 )
 
-add_custom_target(
-    Math
-    ALL
-    SOURCES
-    ${VectorHeaderFiles}
-    ${VectorTemplateDefinitionFiles}
-    ${MatrixHeaderFiles}
-    ${MatrixTemplateDefinitionFiles}
-    ${GeneralFiles}
-    ${CommonFiles}
-)
-
+source_group("Header Files" FILES ${GeneralFiles})
 source_group("Header Files\\vector" FILES ${VectorHeaderFiles})
-source_group("Header Files\\common" FILES ${CommonFiles})
+source_group("Header Files\\common" FILES ${CommonHeaderFiles})
 source_group("Header Files\\matrix" FILES ${MatrixHeaderFiles})
 source_group("Template Files\\vector" FILES ${VectorTemplateDefinitionFiles})
 source_group("Template Files\\matrix" FILES ${MatrixTemplateDefinitionFiles})
+source_group("Template Files\\common" FILES ${CommonTemplateFiles})

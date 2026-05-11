@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verifies @ref fgm::Matrix2D initialization.
+ * @brief Verify @ref fgm::Matrix2D initialization.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -13,7 +13,6 @@
 
 
 
-/** Test fixture for @ref fgm::Matrix2D, parameterized by @ref SupportedTypes. */
 template <typename T>
 class Matrix2DInitialization: public ::testing::Test
 {
@@ -33,13 +32,57 @@ protected:
         _diagonal1 = T(3);
     }
 };
+/** Test fixture for @ref fgm::Matrix2D initialization, parameterized by @ref SupportedTypes. */
 TYPED_TEST_SUITE(Matrix2DInitialization, SupportedTypes);
+
 
 
 /**
  * @addtogroup T_FGM_Mat2x2_Init
  * @{
  */
+
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that the matrix can be initialized at compile time. */
+namespace 
+{
+    // Verify that the matrix can be initialized at compile time using scalar values.
+    constexpr fgm::Matrix2D MAT1(1, 2, 3, 4);
+    static_assert(MAT1(0, 0) == 1);
+    static_assert(MAT1(0, 1) == 2);
+    static_assert(MAT1(1, 0) == 3);
+    static_assert(MAT1(1, 1) == 4);
+
+
+    // Verify that the matrix can be initialized at compile time using column vectors.
+    constexpr fgm::Matrix2D MAT2(fgm::Vector2D(1, 3), fgm::Vector2D(2, 4));
+    static_assert(MAT2(0, 0) == 1);
+    static_assert(MAT2(0, 1) == 2);
+    static_assert(MAT2(1, 0) == 3);
+    static_assert(MAT2(1, 1) == 4);
+
+
+    // Verify that the matrix can be initialized at compile time using diagonals.
+    constexpr fgm::Matrix2D MAT3(3, 4);
+    static_assert(MAT3(0, 0) == 3);
+    static_assert(MAT3(0, 1) == 0);
+    static_assert(MAT3(1, 0) == 0);
+    static_assert(MAT3(1, 1) == 4);
+    
+}
+
+
+
+/**************************************
+ *                                    *
+ *            RUNTIME TESTS           *
+ *                                    *
+ **************************************/
 
 /** @brief Verify that the default constructor initializes an identity matrix. */
 TYPED_TEST(Matrix2DInitialization, EmptyConstructorReturnsIdentityMatrix)

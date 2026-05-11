@@ -14,7 +14,7 @@
 #include <cstddef>
 #include <type_traits>
 
-
+// TODO: Separate into files for concepts and traits.
 namespace fgm
 {
 
@@ -32,6 +32,7 @@ namespace fgm
     /** @brief Validates that a type is a standard numeric primitive (integral or floating-point). */
     template <typename T>
     concept Arithmetic = std::integral<T> || std::floating_point<T>;
+
 
     /**
      * @brief Validates that a type is a signed numeric primitive (integral or floating-point) suitable for linear
@@ -59,6 +60,17 @@ namespace fgm
     template <typename T>
     concept WeakArithmetic = std::is_arithmetic_v<std::decay_t<T>>;
 
+
+
+    /**************************************
+     *                                    *
+     *            TYPE TRAITS             *
+     *                                    *
+     **************************************/
+
+    /** @brief Centralized value promotion logic for all math types. */
+    template <Arithmetic T, Arithmetic U>
+    using PromotedValue_t = std::common_type_t<T, U>;
 
 
 
@@ -103,6 +115,84 @@ namespace fgm
     template <typename T>
         requires Arithmetic<T>
     using Magnitude = std::conditional_t<std::is_same_v<T, float>, float, double>;
+
+
+
+    /**************************************
+     *                                    *
+     *       PROMOTED TYPE ALIAS          *
+     *                                    *
+     **************************************/
+
+    // Forward declarations
+    template <Arithmetic T>
+    struct Vector2D;
+
+    template <Arithmetic T>
+    struct Vector3D;
+
+    template <Arithmetic T>
+    struct Vector4D;
+
+    template <Arithmetic T>
+    struct Matrix2D;
+
+    template <Arithmetic T>
+    struct Matrix3D;
+
+    template <Arithmetic T>
+    struct Matrix4D;
+
+
+
+    /** @brief Alias for @ref Vector2D with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedVector2D = Vector2D<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Vector3D with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedVector3D = Vector3D<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Vector4D with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedVector4D = Vector4D<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Matrix2D with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix2D = Matrix2D<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Matrix2D with a `value_type` of @ref Magnitude of the wider type. */
+    template <Arithmetic T, Arithmetic U>
+    using PromotedFloatMatrix2D = Matrix2D<Magnitude<std::common_type_t<T, U>>>;
+
+
+    /** @brief Alias for @ref Matrix3D with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix3D = Matrix3D<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Matrix3D with a `value_type` of @ref Magnitude of the wider type. */
+    template <Arithmetic T, Arithmetic U>
+    using PromotedFloatMatrix3D = Matrix3D<Magnitude<std::common_type_t<T, U>>>;
+
+    /** @brief Alias for @ref Matrix4D with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix4D = Matrix4D<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Matrix4D with a `value_type` of @ref Magnitude of the wider type. */
+    template <Arithmetic T, Arithmetic U>
+    using PromotedFloatMatrix4D = Matrix4D<Magnitude<std::common_type_t<T, U>>>;
 
     /** @} */
 

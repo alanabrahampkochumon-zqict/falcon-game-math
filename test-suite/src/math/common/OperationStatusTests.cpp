@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 30, 2026
  *
- * @brief Verifies @ref fgm::OperationStatus code to message mapping.
+ * @brief Verify @ref fgm::OperationStatus code to message mapping.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -36,7 +36,7 @@ TEST_P(OperationStatusMappingTests, ReturnsCorrectMessage)
 {
     const auto& [status, expectedMessage] = GetParam();
     const auto message = fgm::getStatusMessage(status);
-    EXPECT_STREQ(expectedMessage, message);
+    EXPECT_EQ(expectedMessage, message);
 }
 
 

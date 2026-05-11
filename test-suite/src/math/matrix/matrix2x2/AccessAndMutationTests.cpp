@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verifies @ref fgm::Matrix2D accessors and mutators.
+ * @brief Verify @ref fgm::Matrix2D accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -17,6 +17,34 @@
  * @addtogroup T_FGM_Mat2x2_Access
  * @{
  */
+
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that matrix accessors are available at compile time. */
+namespace 
+{
+    constexpr fgm::Matrix2D MAT(1, 2, 3, 4);
+    constexpr fgm::Vector2D VEC0(1, 3);
+    constexpr fgm::Vector2D VEC1(2, 4);
+
+    // Verify that matrix elements are accessible as (row, column) during compile time.
+    static_assert(MAT(0, 0) == 1);
+    static_assert(MAT(0, 1) == 2);
+    static_assert(MAT(1, 0) == 3);
+    static_assert(MAT(1, 1) == 4);
+
+    // Verify that matrix columns are accessible as 2D-vectors during compile time.
+    static_assert(MAT[0].x() == VEC0[0]);
+    static_assert(MAT[0].y() == VEC0[1]);
+    static_assert(MAT[1].x() == VEC1[0]);
+    static_assert(MAT[1].y() == VEC1[1]);
+}
+
+
 
 /**************************************
  *                                    *
@@ -80,14 +108,14 @@ TEST(Matrix2DAccess, ElementsCanBeMutatedUsingIndex)
 /** @brief Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Matrix2DAccess, ColumnsCanBeMutatedUsingIndex)
 {
-    constexpr fgm::Vector2D col1 = {1.0f, 3.0f};
-    constexpr fgm::Vector2D col2 = {2.0f, 4.0f};
+    constexpr fgm::Vector2D col0 = {1.0f, 3.0f};
+    constexpr fgm::Vector2D col1 = {2.0f, 4.0f};
     fgm::Matrix2D<float> mat;
 
-    mat[0] = col1;
-    mat[1] = col2;
+    mat[0] = col0;
+    mat[1] = col1;
 
-    EXPECT_VEC_EQ(col1, mat[0]);
-    EXPECT_VEC_EQ(col2, mat[1]);
+    EXPECT_VEC_EQ(col0, mat[0]);
+    EXPECT_VEC_EQ(col1, mat[1]);
 }
 /** @} */

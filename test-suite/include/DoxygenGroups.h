@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 18, 2026
  *
- * @brief Doxygen groups for categorizing tests across different math and SIMD operations.
+ * @brief Doxygen groups for organizing fgm's test harness.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -153,23 +153,83 @@
              *   @defgroup T_FGM_Mat2x2_Access Component Access
              *   @defgroup T_FGM_Mat2x2_Mutation Component Mutation
              *   @defgroup T_FGM_Mat2x2_Alias Spatial Aliasing
-             *   @defgroup T_FGM_Mat2x2_Const Vector Constants
+             *   @defgroup T_FGM_Mat2x2_Const Matrix Constants
              *   @defgroup T_FGM_Mat2x2_Addition Addition
              *   @defgroup T_FGM_Mat2x2_Subtraction Subtraction
              *   @defgroup T_FGM_Mat2x2_Multiplication Scalar Multiplication
              *   @defgroup T_FGM_Mat2x2_Division Scalar Division
-             *   @defgroup T_FGM_Mat2x2_Bool_Bit Boolean Bitwise Operation
-             *   @defgroup T_FGM_Mat2x2_GT_Comp Greater Than Comparison
-             *   @defgroup T_FGM_Mat2x2_GTE_Comp Greater Than or Equal Comparison
-             *   @defgroup T_FGM_Mat2x2_LT_Comp Less Than Comparison
-             *   @defgroup T_FGM_Mat2x2_LTE_Comp Less Than or Equal Comparison
-             *   @defgroup T_FGM_Mat2x2_Equality Component-wise and Masked Equality
-             *   @defgroup T_FGM_Mat2x2_Inequality Component-wise and Masked Inequality
+             *   @defgroup T_FGM_Mat2x2_Transpose Matrix Transpose
+             *   @defgroup T_FGM_Mat2x2_Inverse Matrix Inverse
+             *   @defgroup T_FGM_Mat2x2_Constant Matrix Constants
+             *   @defgroup T_FGM_Mat2x2_Equality Equality
+             *   @defgroup T_FGM_Mat2x2_Inequality  Inequality
              *   @defgroup T_FGM_Mat2x2_Init Initialization
              *   @defgroup T_FGM_Mat2x2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x2_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Mat2x2_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat2x2_Det Determinants
+             *   @defgroup T_FGM_Mat2x2_Trace Trace
+             *   @defgroup T_FGM_Mat2x2_Transforms Transformation Factories
              *   @defgroup T_FGM_Mat2x2_Utils Matrix Utilities
+             * @}
+             */
+
+            /**
+             * @defgroup FGM_Mat3x3_Tests 3x3 Matrix Test Suite
+             * @brief Verification of 3x3 square matrix operations.
+             * @ingroup MatrixTests
+             * @{
+             *   @defgroup T_FGM_Mat3x3_Access Component Access
+             *   @defgroup T_FGM_Mat3x3_Mutation Component Mutation
+             *   @defgroup T_FGM_Mat3x3_Alias Spatial Aliasing
+             *   @defgroup T_FGM_Mat3x3_Const Matrix Constants
+             *   @defgroup T_FGM_Mat3x3_Addition Addition
+             *   @defgroup T_FGM_Mat3x3_Subtraction Subtraction
+             *   @defgroup T_FGM_Mat3x3_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat3x3_Division Scalar Division
+             *   @defgroup T_FGM_Mat3x3_Transpose Matrix Transpose
+             *   @defgroup T_FGM_Mat3x3_Inverse Matrix Inverse
+             *   @defgroup T_FGM_Mat3x3_Constant Matrix Constants
+             *   @defgroup T_FGM_Mat3x3_Equality Equality
+             *   @defgroup T_FGM_Mat3x3_Inequality  Inequality
+             *   @defgroup T_FGM_Mat3x3_Init Initialization
+             *   @defgroup T_FGM_Mat3x3_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Mat3x3_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Mat3x3_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat3x3_Det Determinants
+             *   @defgroup T_FGM_Mat3x3_Trace Trace
+             *   @defgroup T_FGM_Mat3x3_Transforms Transformation Factories
+             *   @defgroup T_FGM_Mat3x3_Utils Matrix Utilities
+             * @}
+             */
+
+
+            /**
+             * @defgroup FGM_Mat4x4_Tests 4x4 Matrix Test Suite
+             * @brief Verification of 4x4 square matrix operations.
+             * @ingroup MatrixTests
+             * @{
+             *   @defgroup T_FGM_Mat4x4_Access Component Access
+             *   @defgroup T_FGM_Mat4x4_Mutation Component Mutation
+             *   @defgroup T_FGM_Mat4x4_Alias Spatial Aliasing
+             *   @defgroup T_FGM_Mat4x4_Const Matrix Constants
+             *   @defgroup T_FGM_Mat4x4_Addition Addition
+             *   @defgroup T_FGM_Mat4x4_Subtraction Subtraction
+             *   @defgroup T_FGM_Mat4x4_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat4x4_Division Scalar Division
+             *   @defgroup T_FGM_Mat4x4_Transpose Matrix Transpose
+             *   @defgroup T_FGM_Mat4x4_Inverse Matrix Inverse
+             *   @defgroup T_FGM_Mat4x4_Constant Matrix Constants
+             *   @defgroup T_FGM_Mat4x4_Equality Equality
+             *   @defgroup T_FGM_Mat4x4_Inequality  Inequality
+             *   @defgroup T_FGM_Mat4x4_Init Initialization
+             *   @defgroup T_FGM_Mat4x4_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Mat4x4_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Mat4x4_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat4x4_Det Determinants
+             *   @defgroup T_FGM_Mat4x4_Trace Trace
+             *   @defgroup T_FGM_Mat4x4_Transforms Transformation Factories
+             *   @defgroup T_FGM_Mat4x4_Utils Matrix Utilities
              * @}
              */
 
@@ -177,26 +237,15 @@
 
         /**
          * @defgroup FGM_Common_Tests Common 
-         * @brief Verifies general function operations exposed by FGM library.
+         * @brief Verify general function operations exposed by FGM library.
          * @ingroup MathTests
          * @{
          *   @defgroup T_Op_Status Operation Status
+         *   @defgroup T_Wrappers Wrapper Utilities
          * @}
          */
 
     /** @} */ // End of MathTests
-
-
-    /**
-     * @defgroup FGM_SIMD_Tests SIMD
-     * @brief Test suite for SIMD operations and functions.
-     * @ingroup FGMTestSuite
-     * @{
-     *   @defgroup T_Reg_Type Register Type
-     *   @defgroup T_Packing_Calc Byte Packing Calculation
-     * @}
-     */
-
 
     /**
      * @defgroup T_Utils Test Utilities
