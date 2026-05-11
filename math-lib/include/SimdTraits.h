@@ -1,4 +1,6 @@
 #pragma once
+
+
 #include <cstddef>
 
 namespace math
@@ -30,14 +32,14 @@ namespace math
     struct SimdTraits<float, 4>
     {
         static constexpr std::size_t alignment = 16; // 16 bit aligned
-        using reg_type = __m128;
+        using reg_type                         = __m128;
     };
 
     template <>
     struct SimdTraits<int, 4>
     {
         static constexpr std::size_t alignment = 16; // 16 bit aligned
-        using reg_type = __m128i;
+        using reg_type                         = __m128i;
     };
 
     template <>
@@ -45,10 +47,10 @@ namespace math
     {
         #ifdef AVX_SUPPORTED
         static constexpr std::size_t alignment = 32; // 32 bit aligned
-        using reg_type = __m256d;
+        using reg_type                         = __m256d;
         #else
         static constexpr std::size_t alignment = 16; // 16 bit aligned
-        using reg_type = __m128d;
+        using reg_type                         = __m128d;
         #endif
     };
 
@@ -57,10 +59,10 @@ namespace math
     {
         #ifdef AVX_SUPPORTED
         static constexpr std::size_t alignment = 32; // 32 bit aligned
-        using reg_type = __m256i;
+        using reg_type                         = __m256i;
         #else
         static constexpr std::size_t alignment = 16; // 16 bit aligned
-        using reg_type = __m128i;
+        using reg_type                         = __m128i;
         #endif
     };
     #endif

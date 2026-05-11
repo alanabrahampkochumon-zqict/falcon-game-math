@@ -2,10 +2,19 @@
     "version": 3,
     "configurePresets": [
         {
-            "name": "base-windows",
+            "name": "base-strict",
             "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "ENABLE_STRICT": "ON",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "windows-base",
+            "hidden": true,
+            "inherits": "base-strict",
             "architecture": {
                 "value": "x64",
                 "strategy": "external"
@@ -14,15 +23,12 @@
                 "microsoft.com/VisualStudioSettings/CMake/1.0": {
                     "hostOS": ["Windows"]
                 }
-            },
-            "cacheVariables": {
-                "ENABLE_STRICT": "ON"
             }
         },
         {
             "name": "MSVC-Debug",
             "displayName": "MSVC Debug",
-            "inherits": "base-windows",
+            "inherits": "windows-base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_CXX_COMPILER": "cl",
@@ -32,7 +38,7 @@
         {
             "name": "MSVC-Release",
             "displayName": "MSVC Release",
-            "inherits": "base-windows",
+            "inherits": "windows-base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_CXX_COMPILER": "cl",
@@ -42,7 +48,7 @@
         {
             "name": "Clang-Debug",
             "displayName": "Clang Debug",
-            "inherits": "base-windows",
+            "inherits": "windows-base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_CXX_COMPILER": "clang-cl",
@@ -52,11 +58,29 @@
         {
             "name": "Clang-Release",
             "displayName": "Clang Release",
-            "inherits": "base-windows",
+            "inherits": "windows-base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_CXX_COMPILER": "clang-cl",
                 "CMAKE_C_COMPILER": "clang-cl"
+            }
+        },
+        {
+            "name": "macos-debug",
+            "displayName": "macOS AppleClang Debug",
+            "inherits": "base-strict",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_OSX_ARCHITECTURES": "arm64"
+            }
+        },
+        {
+            "name": "macos-release",
+            "displayName": "macOS AppleClang Release",
+            "inherits": "base-strict",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_OSX_ARCHITECTURES": "arm64"
             }
         }
     ]

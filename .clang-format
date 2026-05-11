@@ -25,6 +25,7 @@ IncludeBlocks: Regroup
 IndentCaseLabels: true
 IndentPPDirectives: BeforeHash
 IndentWidth: 4
+InsertBraces: true
 Language: Cpp
 MaxEmptyLinesToKeep: 4
 NamespaceIndentation: All

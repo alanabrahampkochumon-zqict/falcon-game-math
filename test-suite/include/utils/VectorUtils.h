@@ -242,8 +242,10 @@ namespace testutils
     {
         constexpr std::size_t elementCount = T::dimension;
         if (std::is_floating_point_v<T>)
+        {
             for (std::size_t i = 0; i < elementCount; ++i)
                 EXPECT_TRUE(std::isinf(vector[i]));
+        }
     }
 
 
