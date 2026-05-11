@@ -120,7 +120,7 @@ INSTANTIATE_TEST_SUITE_P(
 /** @brief Verify that @ref std::Matrix4D::hasInf returns `false` for integral types. */
 TYPED_TEST(Matrix4DIntegralUtility, HasInf_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Matrix4D(value, value, value, value).hasInf());
 }
 
@@ -139,7 +139,7 @@ TEST_P(Matrix4DInfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 /** @brief Verify that the static variant of @ref std::Matrix4D::hasInf returns `false` for integral types. */
 TYPED_TEST(Matrix4DIntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Matrix4D<TypeParam>::hasInf(fgm::Matrix4D(value, value, value, value)));
 }
 
@@ -175,7 +175,7 @@ INSTANTIATE_TEST_SUITE_P(
 /** @brief Verify that @ref std::Matrix4D::hasNaN returns `false` for integral types. */
 TYPED_TEST(Matrix4DIntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Matrix4D(value, value, value, value).hasNaN());
 }
 
@@ -194,7 +194,7 @@ TEST_P(Matrix4DNaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 /** @brief Verify that the static variant of @ref std::Matrix4D::hasNaN returns `false` for integral types. */
 TYPED_TEST(Matrix4DIntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Matrix4D<TypeParam>::hasNaN(fgm::Matrix4D(value, value, value, value)));
 }
 
