@@ -655,6 +655,23 @@ namespace fgm
 
 
     template <Arithmetic T>
+    constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::safeInverse(const Matrix4D& fallback) const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        return fallback;
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::safeInverseOf(const Matrix4D& matrix,
+                                                                const Matrix4D& fallback) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        matrix.safeInverse(fallback);
+    }
+
+
+    template <Arithmetic T>
     constexpr T Matrix4D<T>::trace() const noexcept
         requires StrictArithmetic<T>
     { return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3]; }

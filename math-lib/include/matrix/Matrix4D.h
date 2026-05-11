@@ -865,9 +865,9 @@ namespace fgm
          *                     C_{02} & C_{12} & C_{22} & C_{32} \\
          *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
-         *
+         *            \\
          *            \begin{text}
-         *                where [\text{adj}(A)]_{ij} = C_{ji} = (-1)^{i+j} \det(M_{ji})
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
          *            \end{text}
          *        \f$
          *
@@ -885,7 +885,7 @@ namespace fgm
          * @brief Compute the inverse of a matrix.
          *        Calculate inverse:
          *        \f$
-        *            \begin{bmatrix}
+         *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} & A_{03} \\
          *                 A_{10} & A_{11} & A_{12} & A_{13} \\
          *                 A_{20} & A_{21} & A_{22} & A_{23} \\
@@ -899,9 +899,9 @@ namespace fgm
          *                     C_{02} & C_{12} & C_{22} & C_{32} \\
          *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
-         *
+         *            \\
          *            \begin{text}
-         *                where [\text{adj}(A)]_{ij} = C_{ji} = (-1)^{i+j} \det(M_{ji})
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
          *            \end{text}
          *        \f$
          *
@@ -917,72 +917,84 @@ namespace fgm
             requires SignedStrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Safely compute the inverse of this matrix.
-        //  *        Calculate inverse:
-        //  *        \f$
-        //  *            \begin{bmatrix}
-        //  *                 A_{00} & A_{01} & A_{02} \\
-        //  *                 A_{10} & A_{11} & A_{12} \\
-        //  *                 A_{20} & A_{21} & A_{22}
-        //  *            \end{bmatrix}^{-1}
-        //  *            =
-        //  *            \frac{1}{det(A)}
-        //  *            \begin{bmatrix}
-        //  *                 b  \times c \\
-        //  *                 c  \times a \\
-        //  *                 a  \times b
-        //  *            \end{bmatrix}
-        //  *        \f$
-        //  *
-        //  * @note Promotes the result to a floating point result using @ref Magnitude.
-        //  * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
-        //  * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
-        //  *
-        //  * @param[in] fallback The default matrix to return, when an invalid case is encountered.
-        //  *
-        //  * @return  A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$ or
-        //  *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
-        //  */
-        // [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        // constexpr Matrix4D<Magnitude<T>> safeInverse(const Matrix4D& fallback = Matrix4D::eye()) const noexcept
-        //     requires SignedStrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Safely compute the inverse of a matrix.
-        //  *        Calculate inverse:
-        //  *        \f$
-        //  *            \begin{bmatrix}
-        //  *                A_{00} & A_{01} & A_{02} \\
-        //  *                A_{10} & A_{11} & A_{12} \\
-        //  *                A_{20} & A_{21} & A_{22}
-        //  *            \end{bmatrix}^{-1}
-        //  *            =
-        //  *            \frac{1}{det(A)}
-        //  *            \begin{bmatrix}
-        //  *                 b  \times c \\
-        //  *                 c  \times a \\
-        //  *                 a  \times b
-        //  *            \end{bmatrix}
-        //  *        \f$
-        //  *
-        //  * @note Promotes the result to a floating point result using @ref Magnitude.
-        //  * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
-        //  * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
-        //  *
-        //  * @param[in] matrix   The matrix to invert.
-        //  * @param[in] fallback The default matrix to return, when an invalid case is encountered.
-        //  *
-        //  * @return  A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$ or
-        //  *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
-        //  */
-        // [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        // static constexpr Matrix4D<Magnitude<T>> safeInverseOf(const Matrix4D& matrix,
-        //                                                       const Matrix4D& fallback = Matrix4D::eye()) noexcept
-        //     requires SignedStrictArithmetic<T>;
-        //
-        //
+        /**
+         * @brief Safely compute the inverse of this matrix.
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{det(A)}
+         *            \begin{bmatrix}
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
+         *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
+         *        \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+         *
+         * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+         *
+         * @return  A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$ or
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
+         */
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        constexpr Matrix4D<Magnitude<T>> safeInverse(const Matrix4D& fallback = Matrix4D::eye()) const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute the inverse of a matrix.
+         *        Calculate inverse:
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{det(A)}
+         *            \begin{bmatrix}
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
+         *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
+         *        \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
+         *
+         * @param[in] matrix   The matrix to invert.
+         * @param[in] fallback The default matrix to return, when an invalid case is encountered.
+         *
+         * @return  A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$ or
+         *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
+         */
+        [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
+        static constexpr Matrix4D<Magnitude<T>> safeInverseOf(const Matrix4D& matrix,
+                                                              const Matrix4D& fallback = Matrix4D::eye()) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
         // /**
         //  * @brief Safely compute the inverse of this matrix and set @p status to the matrix inversion result.
         //  *        Calculate inverse:
