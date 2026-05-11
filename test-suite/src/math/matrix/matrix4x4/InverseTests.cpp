@@ -226,7 +226,7 @@ TEST_P(SingularMatrix4DInverse, Inverse_FailsAssertionInDebugMode)
 // /**
 //  * @brief Verify that inverse of matrix (using @ref fgm::Matrix4D::safeInverse) times itself
 //  *        is an identity matrix.
-// /*/
+// */
 // TYPED_TEST(Matrix4DInverse, SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
 // {
 //     const auto invMatrix = this->_matrix.safeInverse();

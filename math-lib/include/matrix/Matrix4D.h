@@ -724,7 +724,7 @@ namespace fgm
         /**
          * @brief Compute the determinant (scaling factor) of this matrix.
          *        Calculate determinant:
-        *        \f$
+         *        \f$
          *            \begin{align*}
          *                 \text{det(A)} &= A_{00} \begin{bmatrix}
          *                                              A_{11} & A_{12} & A_{13} \\
@@ -852,17 +852,23 @@ namespace fgm
          *        Calculate inverse:
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 b  \times c \\
-         *                 c  \times a \\
-         *                 a  \times b
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
+         *
+         *            \begin{text}
+         *                where [\text{adj}(A)]_{ij} = C_{ji} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
          *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
@@ -879,18 +885,24 @@ namespace fgm
          * @brief Compute the inverse of a matrix.
          *        Calculate inverse:
          *        \f$
-         *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+        *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 b  \times c \\
-         *                 c  \times a \\
-         *                 a  \times b
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
+         *
+         *            \begin{text}
+         *                where [\text{adj}(A)]_{ij} = C_{ji} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
          *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
