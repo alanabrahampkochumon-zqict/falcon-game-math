@@ -31,6 +31,8 @@ TYPED_TEST_SUITE(RegisterMapTest, SupportedSIMDIntegralTypes);
  * @{
  */
 
+#ifdef FALCON_X86_SUPPORTED
+
 /** @brief Verify that the `float` @ref falcon::simd::RegisterMap maps to correct SIMD register. */
 TEST(RegisterMapTest, FloatMapsToCorrectSIMDIntrinsics)
 {
@@ -71,5 +73,7 @@ TYPED_TEST(RegisterMapTest, IntegralsMapToCorrectSIMDIntrinsics)
     // Double with alignment of 64 correctly maps to __m512
     ::testing::StaticAssertTypeEq<typename falcon::simd::RegisterMap<TypeParam, 64>::type, __m512i>();
 }
+
+#endif
 
 /** @} */

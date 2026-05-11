@@ -98,6 +98,7 @@
 #ifdef FALCON_SIMD_SUPPORTED
     #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
         // Intel/AMD Silicon
+        #define FALCON_X86_SUPPORTED
         #include <immintrin.h>
     #elif defined(__aarch64__) || defined(_M_ARM64) || defined(__arm__) || defined(_M_ARM)
         // Apple Silicon / ARM Architecture
@@ -128,7 +129,7 @@ namespace falcon::simd
     template <typename T, std::size_t RegWidth>
     struct RegisterMap;
 
-
+#ifdef FALCON_X86_SUPPORTED
     /**
      * @brief Template specialization of @ref RegisterMap for 128-bit (16 byte) aligned `float`.
      *        Maps `float` to the SSE single precision floating point register `__m128`.
@@ -235,6 +236,8 @@ namespace falcon::simd
     {
         using type = __m512i;
     };
+
+#endif
 
     /** @} */
 
