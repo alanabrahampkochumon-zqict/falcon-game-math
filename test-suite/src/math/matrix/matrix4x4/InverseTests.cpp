@@ -150,13 +150,11 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that inverting a matrix using @ref fgm::Matrix4D::inverse exchanges row and
- *        column elements and returns a new matrix.
+ * @brief Verify that inverting a matrix using @ref fgm::Matrix4D::inverse returns a new matrix that when multiplied
+ *        with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix4DInverse, ExchangesRowsAndColumnElements)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse());
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse()); }
 
 
 /** @brief Verify that inverse of matrix times itself is an identity matrix. */
@@ -167,8 +165,8 @@ TYPED_TEST(Matrix4DInverse, InverseTimesMatrixReturnsIdentityMatrix)
 }
 
 /**
- * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4D::inverse exchanges row and
- *        column elements and returns a new matrix.
+ * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4D::inverse returns a new matrix that
+ *        when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix4DInverse, StaticWrapper_ExchangesRowsAndColumnElements)
 { EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::inverse(this->_matrix)); }

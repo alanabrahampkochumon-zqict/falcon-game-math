@@ -29,7 +29,7 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { fgm::Vector2D{ T(5), T(4) }, fgm::Vector2D{ T(2), T(3) } };
+        _matrix          = { fgm::Vector2D{ T(5), T(4) }, fgm::Vector2D{ T(2), T(3) } };
         _expectedInverse = { fgm::Vector2D{ Mag(0.42857142857142855), Mag(-0.5714285714285714) },
                              fgm::Vector2D{ Mag(-0.2857142857142857), Mag(0.7142857142857143) } };
     }
@@ -75,23 +75,23 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DInverseTestSuite, NaNMatrix2DInverse,
  **************************************/
 
 /** @brief Verify that matrix inverse is available at compile time. */
- namespace
+namespace
 {
-     constexpr fgm::Matrix2D MAT(1.0f, 2.0f, 3.0f, 4.0f);
-     // Verify matrix inverse (member function)
-     constexpr fgm::Matrix2D INV_MAT = MAT.inverse();
-     static_assert(INV_MAT(0, 0) == -2.0f);
-     static_assert(INV_MAT(0, 1) == 1.0f);
-     static_assert(INV_MAT(1, 0) == 1.5f);
-     static_assert(INV_MAT(1, 1) == -0.5f);
+    constexpr fgm::Matrix2D MAT(1.0f, 2.0f, 3.0f, 4.0f);
+    // Verify matrix inverse (member function)
+    constexpr fgm::Matrix2D INV_MAT = MAT.inverse();
+    static_assert(INV_MAT(0, 0) == -2.0f);
+    static_assert(INV_MAT(0, 1) == 1.0f);
+    static_assert(INV_MAT(1, 0) == 1.5f);
+    static_assert(INV_MAT(1, 1) == -0.5f);
 
-     // Verify matrix inverse (static function)
-     constexpr fgm::Matrix2D INV_MAT_S = fgm::Matrix2D<float>::inverse(MAT);
-     static_assert(INV_MAT_S(0, 0) == -2.0f);
-     static_assert(INV_MAT_S(0, 1) == 1.0f);
-     static_assert(INV_MAT_S(1, 0) == 1.5f);
-     static_assert(INV_MAT_S(1, 1) == -0.5f);
- } // namespace
+    // Verify matrix inverse (static function)
+    constexpr fgm::Matrix2D INV_MAT_S = fgm::Matrix2D<float>::inverse(MAT);
+    static_assert(INV_MAT_S(0, 0) == -2.0f);
+    static_assert(INV_MAT_S(0, 1) == 1.0f);
+    static_assert(INV_MAT_S(1, 0) == 1.5f);
+    static_assert(INV_MAT_S(1, 1) == -0.5f);
+} // namespace
 
 
 
@@ -102,13 +102,11 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DInverseTestSuite, NaNMatrix2DInverse,
  **************************************/
 
 /**
- * @brief Verify that inverting a matrix using @ref fgm::Matrix2D::inverse exchanges row and
- *        column elements and returns a new matrix.
+ * @brief Verify that inverting a matrix using @ref fgm::Matrix2D::inverse returns a new matrix that when multiplied
+ *        with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix2DInverse, ExchangesRowsAndColumnElements)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse());
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse()); }
 
 
 /** @brief Verify that inverse of matrix times itself is an identity matrix. */
@@ -120,13 +118,11 @@ TYPED_TEST(Matrix2DInverse, InverseTimesMatrixReturnsIdentityMatrix)
 
 
 /**
- * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix2D::inverse exchanges row and
- *        column elements and returns a new matrix.
+ * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix2D::inverse returns a new matrix that
+ *        when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix2DInverse, StaticWrapper_ExchangesRowsAndColumnElements)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2D<TypeParam>::inverse(this->_matrix));
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2D<TypeParam>::inverse(this->_matrix)); }
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
@@ -144,13 +140,11 @@ TYPED_TEST(Matrix2DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatri
  **************************************/
 
 /**
- * @brief Verify that inverting a matrix using @ref fgm::Matrix2D::safeInverse exchanges row and
- *        column elements and returns a new matrix.
+ * @brief Verify that inverting a matrix using @ref fgm::Matrix2D::safeInverse returns a new matrix that when multiplied
+ *        with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix2DInverse, SafeInverse_ExchangesRowsAndColumnElements)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse()); }
 
 
 /** @brief Verify that inverse of matrix (using @ref fgm::Matrix2D::safeInverse) times itself is an identity matrix. */
@@ -206,13 +200,11 @@ TEST_P(NaNMatrix2DInverse, SafeInverse_ReturnsPassedInFallback)
 
 
 /**
- * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix2D::safeInverse exchanges row and
- *        column elements and returns a new matrix.
+ * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix2D::safeInverse returns a new matrix
+ *        that when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix2DInverse, StaticWrapper_SafeInverse_ExchangesRowsAndColumnElements)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2D<TypeParam>::safeInverseOf(this->_matrix));
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2D<TypeParam>::safeInverseOf(this->_matrix)); }
 
 
 /**
@@ -228,7 +220,7 @@ TYPED_TEST(Matrix2DInverse, StaticWrapper_SafeInverse_InverseTimesMatrixReturnsI
 
 /**
  * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix2D::safeInverseOf
- *         returns identity matrix by default.
+ *        returns identity matrix by default.
  */
 TEST_P(SingularMatrix2DInverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixByDefault)
 {
@@ -239,7 +231,7 @@ TEST_P(SingularMatrix2DInverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixB
 
 /**
  * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix2D::safeInverseOf
- *         returns passed-in fallback.
+ *        returns passed-in fallback.
  */
 TEST_P(SingularMatrix2DInverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
 {
@@ -277,8 +269,9 @@ TEST_P(NaNMatrix2DInverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
  **************************************/
 
 /**
- * @brief Verify that inverting a matrix using @ref fgm::Matrix2D::tryInverse exchanges row and column elements and
- *        returns a new matrix and sets status flag to @ref OperationStatus::SUCCESS.
+ * @brief Verify that inverting a matrix using @ref fgm::Matrix2D::tryInverse returns a new matrix
+ *        that when multiplied with the original matrix returns an identity matrix and sets status flag to
+ *        @ref OperationStatus::SUCCESS.
  */
 TYPED_TEST(Matrix2DInverse, TryInverse_ExchangesRowsAndColumnElements)
 {
@@ -354,8 +347,9 @@ TEST_P(NaNMatrix2DInverse, TryInverse_ReturnsPassedInFallback)
 
 
 /**
- * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix2D::tryInverse exchanges row and
- *        column elements and returns a new matrix and sets status flag to @ref OperationStatus::SUCCESS.
+ * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix2D::tryInverse returns a new matrix
+ *        that when multiplied with the original matrix returns an identity matrix and sets status flag to
+ *        @ref OperationStatus::SUCCESS.
  */
 TYPED_TEST(Matrix2DInverse, StaticWrapper_TryInverse_ExchangesRowsAndColumnElements)
 {
@@ -380,7 +374,7 @@ TYPED_TEST(Matrix2DInverse, StaticWrapper_TryInverse_InverseTimesMatrixReturnsId
 
 /**
  * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix2D::tryInverseOf
- *         returns identity matrix by default and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
+ *        returns identity matrix by default and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(SingularMatrix2DInverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefault)
 {
@@ -393,7 +387,7 @@ TEST_P(SingularMatrix2DInverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixBy
 
 /**
  * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix2D::tryInverseOf
- *         returns passed-in fallback and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
+ *        returns passed-in fallback and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(SingularMatrix2DInverse, StaticWrapper_TryInverse_ReturnsPassedInFallback)
 {
