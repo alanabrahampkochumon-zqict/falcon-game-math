@@ -128,7 +128,6 @@ namespace falcon::simd
     template <typename T, std::size_t RegWidth>
     struct RegisterMap;
 
-#ifdef FALCON_SSE_SUPPORTED
 
     /**
      * @brief Template specialization of @ref RegisterMap for 128-bit (16 byte) aligned `float`.
@@ -165,9 +164,7 @@ namespace falcon::simd
         using type = __m128i;
     };
 
-#endif
 
-#if defined(FALCON_AVX2_SUPPORTED) || defined(FALCON_AVX_SUPPORTED)
     /**
      * @brief Template specialization of @ref RegisterMap for 256-bit (32 byte) aligned `float`.
      *        Maps `float` to the AVX single precision floating point register `__m256`.
@@ -202,10 +199,8 @@ namespace falcon::simd
     {
         using type = __m256i;
     };
-#endif
 
 
-#ifdef FALCON_AVX512_SUPPORTED
     /**
      * @brief Template specialization of @ref RegisterMap for 512-bit (64 byte) aligned `float`.
      *        Maps `float` to the AVX512 single precision floating point register `__m512`.
@@ -240,7 +235,7 @@ namespace falcon::simd
     {
         using type = __m512i;
     };
-#endif
+
     /** @} */
 
     // #if defined(MAX_ALIGNMENT) && MAX_ALIGNMENT > 0

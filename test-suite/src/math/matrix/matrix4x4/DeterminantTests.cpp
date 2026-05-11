@@ -79,10 +79,10 @@ namespace
                                  fgm::Vector4D{ 2, 1, 3, 2 } };
 
     // Verify determinant (member function)
-    // static_assert(MAT.determinant() == 39);
+    static_assert(MAT.determinant() == 39);
 
     // Verify determinant (static function)
-    // static_assert(fgm::Matrix4D<int>::determinant(MAT) == 39);
+    static_assert(fgm::Matrix4D<int>::determinant(MAT) == 39);
 
 } // namespace
 

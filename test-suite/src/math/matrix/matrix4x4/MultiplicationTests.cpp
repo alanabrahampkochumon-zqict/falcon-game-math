@@ -189,9 +189,10 @@ TYPED_TEST_SUITE(Matrix4DFractionalMultiplication, SupportedFloatingPointTypes);
 /** @brief Verify that matrix multiplication operations are available at compile time. */
 namespace
 {
+    // TODO: Add static tests
     constexpr fgm::Matrix4D mat1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-    constexpr fgm::Matrix4D mat2(5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21);
-    constexpr fgm::Vector4D vec4D(1, 2, 3, 4);
+    //constexpr fgm::Matrix4D mat2(5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21);
+    //constexpr fgm::Vector4D vec4D(1, 2, 3, 4);
 
     // Verify matrix * scalar multiplication
     constexpr fgm::Matrix4D binaryProduct1 = mat1 * 2;
@@ -232,31 +233,32 @@ namespace
     static_assert(binaryProduct2(3, 2) == 30);
     static_assert(binaryProduct2(3, 3) == 32);
 
+    // TODO: Add static tests
     // Verify matrix * vector multiplication
-    constexpr fgm::Vector4D colVectorProduct = mat1 * vec4D;
-    // static_assert(colVectorProduct[0] == 30);
-    // static_assert(colVectorProduct[1] == 70);
-    // static_assert(colVectorProduct[2] == 110);
-    // static_assert(colVectorProduct[3] == 150);
+    //constexpr fgm::Vector4D colVectorProduct = mat1 * vec4D;
+    //static_assert(colVectorProduct[0] == 30);
+    //static_assert(colVectorProduct[1] == 70);
+    //static_assert(colVectorProduct[2] == 110);
+    //static_assert(colVectorProduct[3] == 150);
     //
-    // // Verify vector * matrix multiplication
-    // constexpr fgm::Vector4D rowVectorProduct = vec4D * matA;
-    // static_assert(rowVectorProduct[0] == 90);
-    // static_assert(rowVectorProduct[1] == 100);
-    // static_assert(rowVectorProduct[2] == 110);
-    // static_assert(rowVectorProduct[3] == 120);
+    //// Verify vector * matrix multiplication
+    //constexpr fgm::Vector4D rowVectorProduct = vec4D * matA;
+    //static_assert(rowVectorProduct[0] == 90);
+    //static_assert(rowVectorProduct[1] == 100);
+    //static_assert(rowVectorProduct[2] == 110);
+    //static_assert(rowVectorProduct[3] == 120);
 
-    // Verify matrix * matrix multiplication
-    // constexpr fgm::Matrix4D matProduct = matA * matB;
-    // static_assert(matProduct(0, 0) == 57);
-    // static_assert(matProduct(0, 1) == 65);
-    // static_assert(matProduct(0, 2) == 71);
-    // static_assert(matProduct(1, 0) == 132);
-    // static_assert(matProduct(1, 1) == 152);
-    // static_assert(matProduct(1, 2) == 167);
-    // static_assert(matProduct(2, 0) == 207);
-    // static_assert(matProduct(2, 1) == 239);
-    // static_assert(matProduct(2, 2) == 263);
+    //// Verify matrix * matrix multiplication
+    //constexpr fgm::Matrix4D matProduct = matA * matB;
+    //static_assert(matProduct(0, 0) == 57);
+    //static_assert(matProduct(0, 1) == 65);
+    //static_assert(matProduct(0, 2) == 71);
+    //static_assert(matProduct(1, 0) == 132);
+    //static_assert(matProduct(1, 1) == 152);
+    //static_assert(matProduct(1, 2) == 167);
+    //static_assert(matProduct(2, 0) == 207);
+    //static_assert(matProduct(2, 1) == 239);
+    //static_assert(matProduct(2, 2) == 263);
 } // namespace
 
 

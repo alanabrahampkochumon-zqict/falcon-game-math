@@ -84,6 +84,7 @@ target_link_libraries(
         PRIVATE
         MathLib
         FalconSIMD
+        GTest::gtest
         GTest::gtest_main # googletest
 )
 

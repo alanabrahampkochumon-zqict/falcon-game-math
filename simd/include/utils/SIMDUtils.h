@@ -12,7 +12,7 @@
 
 #include <bit>
 #include <cstddef>
-
+#include <algorithm>
 
 namespace falcon::simd
 {

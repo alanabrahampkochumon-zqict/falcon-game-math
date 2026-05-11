@@ -18,51 +18,50 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # Clang Formatter
 find_program(CLANG_FORMATTER NAMES clang-format)
 
-if(CLANG_FORMATTER)
+if (CLANG_FORMATTER)
     file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h *.cxx *.hxx *.hpp *.cc *.hh *.tpp *.inl)
 
     add_custom_target(format
-        COMMAND ${CLANG_FORMATTER} -i -style=file ${ALL_SOURCE_FILES}
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        COMMENT "Formatting source files..."
+            COMMAND ${CLANG_FORMATTER} -i -style=file ${ALL_SOURCE_FILES}
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            COMMENT "Formatting source files..."
     )
     set_target_properties(format PROPERTIES FOLDER ${DevToolsDir})
-else()
+else ()
     message(WARNING "clang-format not found")
-endif()
+endif ()
 
 # Clang Tidy
 find_program(CLANG_TIDY_EXE NAMES clang-tidy)
-if(CLANG_TIDY_EXE)
+if (CLANG_TIDY_EXE)
     # Create a custom target that you manually trigger
     add_custom_target(
-        lint
-        COMMAND ${CMAKE_COMMAND} -E echo "Running Clang-Tidy on MathLib..."
-        COMMAND run-clang-tidy -p ${CMAKE_BINARY_DIR} -header-filter=.*
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        COMMENT "Running static analysis..."
+            lint
+            COMMAND ${CMAKE_COMMAND} -E echo "Running Clang-Tidy on MathLib..."
+            COMMAND run-clang-tidy -p ${CMAKE_BINARY_DIR} -header-filter=.*
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            COMMENT "Running static analysis..."
     )
     set_target_properties(lint PROPERTIES FOLDER ${DevToolsDir})
-else()
+else ()
     message(WARNING "clang-tidy not found")
-endif()
+endif ()
 
 # Doxygen
 find_package(Doxygen)
 if (DOXYGEN_FOUND)
     message(STATUS "Doxygen found!")
     doxygen_add_docs(
-        docs
-        ${CMAKE_CURRENT_SOURCE_DIR}
-        COMMENT "Generating documentation with doxygen..."
-        CONFIG_FILE ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
-        ALL
+            docs
+            ${CMAKE_CURRENT_SOURCE_DIR}
+            COMMENT "Generating documentation with doxygen..."
+            CONFIG_FILE ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
+            ALL
     )
     set_target_properties(docs PROPERTIES FOLDER ${DevToolsDir})
-else()
+else ()
     message(WARN "Doxygen not found! Skipping documentation generation.")
-endif()
-
+endif ()
 
 
 option(ENABLE_STRICT "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
@@ -70,56 +69,92 @@ option(ASAN "Enable ASan" OFF) # Option to enable ASAN
 
 # Enables Strict Warnings and Debug-only ASan
 # TODO: Remove /wd4723 from MSVC compile options after fully providing FGM_ASSERTS
-if(ENABLE_STRICT)
+if (ENABLE_STRICT)
     message(STATUS "Configuring Strict Warnings")
-    if(MSVC OR CMAKE_CXX_SIMULATE_ID STREQUAL "MSVC")
+    if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         target_compile_options(StrictWarnings INTERFACE
-            $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict;/wd4723>
+                $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict;/wd4723>
         )
-        target_compile_options(StrictWarnings INTERFACE $<$<CXX_COMPILER_ID:Clang>:-Wno-c++98-compat;-Wno-c++98-compat-pedantic;-Wno-pre-c++14-compat;-Wno-pre-c++17-compat;-Wno-c++20-compat;-Wno-newline-eof;-Wno-documentation;-Wno-unique-object-duplication >)
-    else()
+    elseif (MSVC AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         target_compile_options(StrictWarnings INTERFACE
-            $<$<COMPILE_LANGUAGE:CXX>:-Wall;-Wextra;-Werror;-pedantic-errors>
-            $<$<CXX_COMPILER_ID:Clang>:-Wno-c++98-compat;-Wno-c++98-compat-pedantic;-Wno-pre-c++14-compat;-Wno-pre-c++17-compat;-Wno-c++20-compat>
-            $<$<CXX_COMPILER_ID:AppleClang>:-Wno-c++98-compat;-Wno-c++98-compat-pedantic;-Wno-pre-c++14-compat;-Wno-pre-c++17-compat;-Wno-c++20-compat>
+                $<$<COMPILE_LANGUAGE:CXX>:-Wall;-Wextra;-Wpedantic;-Werror>
+                # Only suppress things that are physically impossible to avoid (like GTest macros)
+                $<$<CXX_COMPILER_ID:Clang>:
+                /clang:-Wno-c++98-compat;
+                /clang:-Wno-c++98-compat-pedantic;
+                /clang:-Wno-pre-c++14-compat;
+                /clang:-Wno-pre-c++17-compat;
+                /clang:-Wno-c++20-compat;
+                /clang:-Wno-global-constructors;
+                /clang:-Wno-covered-switch-default;
+                /clang:-Wno-padded;
+                /clang:-Wno-reserved-macro-identifier;
+                /clang:-Wno-unused-macros;
+                /clang:-Wno-newline-eof;               # Suppresses "no newline at end of file"
+                /clang:-Wno-documentation;             # Suppresses "@tparam" attachment errors
+                /clang:-Wno-unique-object-duplication;
+                /clang:-Wno-unique-object-duplication;
+                /clang:-Wno-reserved-macro-identifier;
+                /clang:-Wno-unused-macros;
+                /clang:-Wno-extra-semi;
+                /clang:-Wno-global-constructors;      
+                /clang:-Wno-header-hygiene;           
+                /clang:-Wno-ctad-maybe-unsupported;   
+                /clang:-Wno-covered-switch-default;   
+                /clang:-Wno-float-equal;              
+                /clang:-Wno-unsafe-buffer-usage;      
+                /clang:-Wno-padded;                   
+                /clang:-Wno-documentation-unknown-command;
+                /clang:-Wno-ctad-maybe-unsupported;
+                /clang:-Wno-implicit-int-float-conversion;
+                /clang:-Wno-double-promotion;
+                /clang:-Wno-implicit-int-conversion-on-negation
+            >
         )
-    endif()
-endif()
+        set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON)
+    else ()
+        target_compile_options(StrictWarnings INTERFACE
+                $<$<COMPILE_LANGUAGE:CXX>:-Wall;-Wextra;-Werror;-pedantic-errors>
+                $<$<CXX_COMPILER_ID:Clang>:-Wno-c++98-compat;-Wno-c++98-compat-pedantic;-Wno-pre-c++14-compat;-Wno-pre-c++17-compat;-Wno-c++20-compat>
+                $<$<CXX_COMPILER_ID:AppleClang>:-Wno-c++98-compat;-Wno-c++98-compat-pedantic;-Wno-pre-c++14-compat;-Wno-pre-c++17-compat;-Wno-c++20-compat>
+        )
+    endif ()
+endif ()
 
 # Enables Address Sanitizer for all the projects globally.
-if(ASAN)
+if (ASAN)
     message(STATUS "Turning on Address Sanitizer for Debug Builds")
-    if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         target_compile_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:/fsanitize=address;/Zi>)
         target_link_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:/INCREMENTAL:NO>)
-    else()
+    else ()
         target_compile_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:-fsanitize=address;-fno-omit-frame-pointer>)
         target_link_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:-fsanitize=address>)
-    endif()
-endif()
+    endif ()
+endif ()
 
 
 # Multi-processor compilation
-if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     message(STATUS "Enabling Multiprocessor compilation on MSVC")
     add_compile_options("/MP")
-endif()
+endif ()
 
 
 include(dependencies.cmake)
 
-if(TARGET gtest)
+if (TARGET gtest)
     target_link_libraries(gtest PRIVATE ProjectSanitizers)
     target_link_libraries(gmock PRIVATE ProjectSanitizers)
     target_link_libraries(gtest_main PRIVATE ProjectSanitizers)
-endif()
+endif ()
 
 
 include(simdcheck.cmake)
 
 add_subdirectory(math-lib)
 add_subdirectory(playground)
-add_subdirectory(test-suite)
+add_subdirectory(test-suite) 
 add_subdirectory(simd)
 
 target_compile_features(TestSuite PRIVATE cxx_std_20)

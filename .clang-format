@@ -19,6 +19,8 @@ BraceWrapping:
     SplitEmptyNamespace: false
 BreakBeforeTernaryOperators: true
 CompactNamespaces: false
+InsertNewlineAtEOF: true
+KeepEmptyLinesAtEOF: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 Cpp11BracedListStyle: false
 IncludeBlocks: Regroup
