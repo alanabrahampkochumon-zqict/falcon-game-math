@@ -104,7 +104,7 @@ namespace
 /** @brief Verify that the default constructor initializes an identity matrix. */
 TYPED_TEST(Matrix3DInitialization, EmptyConstructorReturnsIdentityMatrix)
 {
-    constexpr fgm::Matrix3D<TypeParam> matrix;
+    const fgm::Matrix3D<TypeParam> matrix;
 
     EXPECT_MAT_IDENTITY(matrix);
 }

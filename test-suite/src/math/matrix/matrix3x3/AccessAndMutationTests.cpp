@@ -136,9 +136,9 @@ TEST(Matrix3DAccess, ElementsCanBeMutatedUsingIndex)
 /** @brief Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Matrix3DAccess, ColumnsCanBeMutatedUsingIndex)
 {
-    constexpr fgm::Vector3D col0 = { 1.0f, 4.0f, 7.0f };
-    constexpr fgm::Vector3D col1 = { 2.0f, 5.0f, 8.0f };
-    constexpr fgm::Vector3D col2 = { 3.0f, 6.0f, 9.0f };
+    const fgm::Vector3D col0 = { 1.0f, 4.0f, 7.0f };
+    const fgm::Vector3D col1 = { 2.0f, 5.0f, 8.0f };
+    const fgm::Vector3D col2 = { 3.0f, 6.0f, 9.0f };
     fgm::Matrix3D<float> mat;
 
     mat[0] = col0;

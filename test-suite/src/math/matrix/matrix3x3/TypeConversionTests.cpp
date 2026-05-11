@@ -51,9 +51,9 @@ namespace
  */
 TEST(Matrix3DConversionConstructor, PromotesType)
 {
-    constexpr fgm::Matrix3D mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
+    const fgm::Matrix3D mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
-    [[maybe_unused]] constexpr fgm::Matrix3D<double> mat2(mat1);
+    [[maybe_unused]] const fgm::Matrix3D<double> mat2(mat1);
 
     static_assert(std::is_same_v<decltype(mat2)::value_type, double>);
 }
@@ -63,7 +63,7 @@ TEST(Matrix3DConversionConstructor, PromotesType)
 TEST(Matrix3DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float matrix
-    constexpr fgm::Matrix3D mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
+    const fgm::Matrix3D mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
     // When converted to a double matrix
     fgm::Matrix3D<double> mat2(mat1);
@@ -83,9 +83,9 @@ TEST(Matrix3DConversionConstructor, ReturnsNewInstance)
  */
 TEST(Matrix3DConversionConstructor, DemotesType)
 {
-    constexpr fgm::Matrix3D mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
+    const fgm::Matrix3D mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
 
-    [[maybe_unused]] constexpr fgm::Matrix3D<float> mat2(mat1);
+    [[maybe_unused]] const fgm::Matrix3D<float> mat2(mat1);
 
     static_assert(std::is_same_v<decltype(mat2)::value_type, float>);
 }

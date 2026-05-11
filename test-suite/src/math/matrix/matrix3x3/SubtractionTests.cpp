@@ -93,10 +93,10 @@ TYPED_TEST(Matrix3DSubtraction, MinusOperator_ReturnsDifference)
  */
 TEST(Matrix3DSubtraction, MixedTypeSubtractionPromotesType)
 {
-    constexpr fgm::Matrix3D mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f);
-    constexpr fgm::Matrix3D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);
+    const fgm::Matrix3D mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f);
+    const fgm::Matrix3D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);
 
-    [[maybe_unused]] constexpr fgm::Matrix3D difference = mat1 - mat2;
+    [[maybe_unused]] const fgm::Matrix3D difference = mat1 - mat2;
 
     static_assert(std::is_same_v<decltype(difference)::value_type, double>);
 }
@@ -121,7 +121,7 @@ TYPED_TEST(Matrix3DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
 TEST(Matrix3DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
     fgm::Matrix3D mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f);
-    constexpr fgm::Matrix3D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);
+    const fgm::Matrix3D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);
 
     mat1 -= mat2;
 

@@ -141,10 +141,10 @@ TYPED_TEST(Matrix3DEquality, StaticWrapper_Equality_DifferentMatricesReturnFalse
 /** @test Verify that @ref fgm::Matrix3D::allEq follows IEEE 754 for NaN comparisons. */
 TEST(Matrix3DEquality, NanEqualityReturnsFalse)
 {
-    constexpr fgm::Matrix3D matA(NAN_F, NAN_F, NAN_F);
-    constexpr fgm::Matrix3D matB(1.0f, -5.88874789f, 0.888749f);
+    const fgm::Matrix3D matA(NAN_F, NAN_F, NAN_F);
+    const fgm::Matrix3D matB(1.0f, -5.88874789f, 0.888749f);
 
-    constexpr bool equality = matA.allEq(matB);
+    const bool equality = matA.allEq(matB);
 
     EXPECT_FALSE(equality);
 }
@@ -153,10 +153,10 @@ TEST(Matrix3DEquality, NanEqualityReturnsFalse)
 /** @test Verify that @ref fgm::Matrix3D::allEq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix3DEquality, InfinityEquality_IdenticalMatricesReturnTrue)
 {
-    constexpr fgm::Matrix3D matA(INF, -INF, INF);
-    constexpr fgm::Matrix3D matB(INF, -INF, INF);
+    const fgm::Matrix3D matA(INF, -INF, INF);
+    const fgm::Matrix3D matB(INF, -INF, INF);
 
-    constexpr bool equality = matA.allEq(matB);
+    const bool equality = matA.allEq(matB);
 
     EXPECT_TRUE(equality);
 }
@@ -165,8 +165,8 @@ TEST(Matrix3DEquality, InfinityEquality_IdenticalMatricesReturnTrue)
 /** @test Verify that @ref fgm::Matrix3D::allEq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix3DEquality, InfinityEquality_DifferentMatricesReturnFalse)
 {
-    constexpr fgm::Matrix3D matA(INF, -INF, INF);
-    constexpr fgm::Matrix3D matB(-INF, -INF, INF);
+    const fgm::Matrix3D matA(INF, -INF, INF);
+    const fgm::Matrix3D matB(-INF, -INF, INF);
 
     const bool equality = matA.allEq(matB);
 
@@ -176,10 +176,10 @@ TEST(Matrix3DEquality, InfinityEquality_DifferentMatricesReturnFalse)
 /** @test Verify that @ref fgm::Matrix3D::allEq works for different vector types with identical components. */
 TYPED_TEST(Matrix3DEquality, MixedType_Equality_IdenticalMatricesReturnTrue)
 {
-    constexpr fgm::Matrix3D matA(1, 2, 3);
-    constexpr fgm::Matrix3D matB(1.0, 2.0, 3.0);
+    const fgm::Matrix3D matA(1, 2, 3);
+    const fgm::Matrix3D matB(1.0, 2.0, 3.0);
 
-    constexpr bool equality = matA.allEq(matB);
+    const bool equality = matA.allEq(matB);
 
     EXPECT_TRUE(equality);
 }
@@ -188,8 +188,8 @@ TYPED_TEST(Matrix3DEquality, MixedType_Equality_IdenticalMatricesReturnTrue)
 /** @test Verify that @ref fgm::Matrix3D::allEq works for different vector types with different components. */
 TYPED_TEST(Matrix3DEquality, MixedType_Equality_DifferentMatricesReturnFalse)
 {
-    constexpr fgm::Matrix3D matA(5, 6, 7);
-    constexpr fgm::Matrix3D matB(1.0, 2.0, 3.0);
+    const fgm::Matrix3D matA(5, 6, 7);
+    const fgm::Matrix3D matB(1.0, 2.0, 3.0);
 
     const bool equality = matA.allEq(matB);
 
@@ -220,10 +220,10 @@ TYPED_TEST(Matrix3DEquality, EqualityOperator_DifferentMatricesReturnFalse)
 /** @test Verify that the equality operator works for bool matrix with identical components. */
 TEST(Matrix3DEquality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
 {
-    constexpr fgm::Matrix3D matA(true, false, true);
-    constexpr fgm::Matrix3D matB(true, false, true);
+    const fgm::Matrix3D matA(true, false, true);
+    const fgm::Matrix3D matB(true, false, true);
 
-    constexpr bool equality = matA == matB;
+    const bool equality = matA == matB;
 
     EXPECT_TRUE(equality);
 }
@@ -232,10 +232,10 @@ TEST(Matrix3DEquality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
 /** @test Verify that the equality operator works for bool matrix with different components. */
 TEST(Matrix3DEquality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
 {
-    constexpr fgm::Matrix3D matA(true, false, false);
-    constexpr fgm::Matrix3D matB(true, true, false);
+    const fgm::Matrix3D matA(true, false, false);
+    const fgm::Matrix3D matB(true, true, false);
 
-    constexpr bool equality = matA == matB;
+    const bool equality = matA == matB;
 
     EXPECT_FALSE(equality);
 }
@@ -320,10 +320,10 @@ TYPED_TEST(Matrix3DEquality, StaticWrapper_Inequality_DifferentMatricesReturnTru
 /** @test Verify that @ref fgm::Matrix3D::anyNeq follows IEEE 754 for NaN comparisons. */
 TEST(Matrix3DEquality, NanInequalityReturnsTrue)
 {
-    constexpr fgm::Matrix3D matA(NAN_F, NAN_F, NAN_F);
-    constexpr fgm::Matrix3D matB(1.0f, INF, -INF);
+    const fgm::Matrix3D matA(NAN_F, NAN_F, NAN_F);
+    const fgm::Matrix3D matB(1.0f, INF, -INF);
 
-    constexpr bool inequality = matA.anyNeq(matB);
+    const bool inequality = matA.anyNeq(matB);
 
     EXPECT_TRUE(inequality);
 }
@@ -332,10 +332,10 @@ TEST(Matrix3DEquality, NanInequalityReturnsTrue)
 /** @test Verify that @ref fgm::Matrix3D::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix3DEquality, InfinityInequality_IdenticalMatricesReturnFalse)
 {
-    constexpr fgm::Matrix3D matA(INF, -INF, INF);
-    constexpr fgm::Matrix3D matB(INF, -INF, INF);
+    const fgm::Matrix3D matA(INF, -INF, INF);
+    const fgm::Matrix3D matB(INF, -INF, INF);
 
-    constexpr bool inequality = matA.anyNeq(matB);
+    const bool inequality = matA.anyNeq(matB);
 
     EXPECT_FALSE(inequality);
 }
@@ -344,8 +344,8 @@ TEST(Matrix3DEquality, InfinityInequality_IdenticalMatricesReturnFalse)
 /** @test Verify that @ref fgm::Matrix3D::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix3DEquality, InfinityInequality_DifferentMatricesReturnTrue)
 {
-    constexpr fgm::Matrix3D matA(-INF, INF, INF);
-    constexpr fgm::Matrix3D matB(INF, INF, -INF);
+    const fgm::Matrix3D matA(-INF, INF, INF);
+    const fgm::Matrix3D matB(INF, INF, -INF);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -356,10 +356,10 @@ TEST(Matrix3DEquality, InfinityInequality_DifferentMatricesReturnTrue)
 /** @test Verify that @ref fgm::Matrix3D::anyNeq works for different vector types with identical components. */
 TYPED_TEST(Matrix3DEquality, MixedType_Inequality_IdenticalMatricesReturnFalse)
 {
-    constexpr fgm::Matrix3D matA(1, 2, 3);
-    constexpr fgm::Matrix3D matB(1.0, 2.0, 3.0);
+    const fgm::Matrix3D matA(1, 2, 3);
+    const fgm::Matrix3D matB(1.0, 2.0, 3.0);
 
-    constexpr bool inequality = matA.anyNeq(matB);
+    const bool inequality = matA.anyNeq(matB);
 
     EXPECT_FALSE(inequality);
 }
@@ -368,8 +368,8 @@ TYPED_TEST(Matrix3DEquality, MixedType_Inequality_IdenticalMatricesReturnFalse)
 /** @test Verify that @ref fgm::Matrix3D::anyNeq works for different vector types with different components. */
 TYPED_TEST(Matrix3DEquality, MixedType_Inequality_DifferentMatricesReturnTrue)
 {
-    constexpr fgm::Matrix3D matA(5, 6, 7);
-    constexpr fgm::Matrix3D matB(1.0, 2.0, 7.0);
+    const fgm::Matrix3D matA(5, 6, 7);
+    const fgm::Matrix3D matB(1.0, 2.0, 7.0);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -398,10 +398,10 @@ TYPED_TEST(Matrix3DEquality, InEqualityOperator_DifferentMatricesReturnTrue)
 /** @test Verify that the inequality operator works for @ref fgm::Matrix3D<bool> with identical components. */
 TEST(Matrix3DEquality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 {
-    constexpr fgm::Matrix3D matA(true, false, true);
-    constexpr fgm::Matrix3D matB(true, false, true);
+    const fgm::Matrix3D matA(true, false, true);
+    const fgm::Matrix3D matB(true, false, true);
 
-    constexpr bool inequality = matA != matB;
+    const bool inequality = matA != matB;
 
     EXPECT_FALSE(inequality);
 }
@@ -410,10 +410,10 @@ TEST(Matrix3DEquality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 /** @test Verify that the inequality operator works for @ref fgm::Matrix3D<bool> with different components. */
 TEST(Matrix3DEquality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
 {
-    constexpr fgm::Matrix3D matA(true, false, true);
-    constexpr fgm::Matrix3D matB(true, true, false);
+    const fgm::Matrix3D matA(true, false, true);
+    const fgm::Matrix3D matB(true, true, false);
 
-    constexpr bool inequality = matA != matB;
+    const bool inequality = matA != matB;
 
     EXPECT_TRUE(inequality);
 }
