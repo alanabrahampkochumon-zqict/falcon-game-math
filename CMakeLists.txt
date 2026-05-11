@@ -69,11 +69,12 @@ option(ENABLE_STRICT "Enable Strict Warnings" OFF) # Option to enable compiler s
 option(ASAN "Enable ASan" OFF) # Option to enable ASAN
 
 # Enables Strict Warnings and Debug-only ASan
+# TODO: Remove /wd4723 from MSVC compile options after fully providing FGM_ASSERTS
 if(ENABLE_STRICT)
     message(STATUS "Configuring Strict Warnings")
     if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         target_compile_options(StrictWarnings INTERFACE
-            $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict>
+            $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict;/wd4723>
         )
     else()
         target_compile_options(StrictWarnings INTERFACE
