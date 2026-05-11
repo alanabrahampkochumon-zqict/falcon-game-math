@@ -27,7 +27,7 @@
 /** @test Verify that the components are accessible via named spatial aliases (x, y, z, w). */
 TEST(Vector4DAccess, AccessibleAsXYZW)
 {
-    constexpr fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.x());
     EXPECT_FLOAT_EQ(1.0f, vec.y());
@@ -39,7 +39,7 @@ TEST(Vector4DAccess, AccessibleAsXYZW)
 /** @test Verify that the components are accessible via named spatial aliases (s, t, p, q). */
 TEST(Vector4DAccess, AccessibleAsSTPQ)
 {
-    constexpr fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.s());
     EXPECT_FLOAT_EQ(1.0f, vec.t());
@@ -51,7 +51,7 @@ TEST(Vector4DAccess, AccessibleAsSTPQ)
 /** @test Verify that the components are accessible via named spatial aliases (r, g, b, a). */
 TEST(Vector4DAccess, AccessibleAsRGBA)
 {
-    constexpr fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.r());
     EXPECT_FLOAT_EQ(1.0f, vec.g());
@@ -63,7 +63,7 @@ TEST(Vector4DAccess, AccessibleAsRGBA)
 /** @test Verify that the components are accessible via subscript indexing for reads. */
 TEST(Vector4DAccess, AccessibleAsArray)
 {
-    constexpr fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);

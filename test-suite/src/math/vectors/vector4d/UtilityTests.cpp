@@ -77,7 +77,7 @@ INSTANTIATE_TEST_SUITE_P(
 /** @test Verify that @ref std::Vector4D::hasInf returns False for integral types. */
 TYPED_TEST(Vector4DIntegralUtilityTests, HasInf_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vector4D(value, value, value, value).hasInf());
 }
 
@@ -96,7 +96,7 @@ TEST_P(Vector4DInfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity
 /** @test Verify that the static variant of @ref std::Vector4D::hasInf returns False for integral types. */
 TYPED_TEST(Vector4DIntegralUtilityTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vector4D<TypeParam>::hasInf(fgm::Vector4D(value, value, value, value)));
 }
 
@@ -132,7 +132,7 @@ INSTANTIATE_TEST_SUITE_P(
 /** @test Verify that @ref std::Vector4D::hasNaN returns False for integral types. */
 TYPED_TEST(Vector4DIntegralUtilityTests, HasNaN_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vector4D(value, value, value, value).hasNaN());
 }
 
@@ -151,7 +151,7 @@ TEST_P(Vector4DNaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 /** @test Verify that the static variant of @ref std::Vector4D::hasNaN returns False for integral types. */
 TYPED_TEST(Vector4DIntegralUtilityTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
-    constexpr auto value = TypeParam(1);
+    const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vector4D<TypeParam>::hasNaN(fgm::Vector4D(value, value, value, value)));
 }
 

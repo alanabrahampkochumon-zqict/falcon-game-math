@@ -80,9 +80,9 @@ TYPED_TEST(Vector4DProjection, OrthogonalVectorsReturnsZeroVector)
 TEST(Vector4DProjection, ProjectionOntoXAxisReturnsVectorWithOnlyXComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector4D a(10.0f, 20.0f, 30.0f, 40.0f);
-    constexpr fgm::Vector4D xAxis(1.0f, 0.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(10.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D a(10.0f, 20.0f, 30.0f, 40.0f);
+    const fgm::Vector4D xAxis(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(10.0f, 0.0f, 0.0f, 0.0f);
 
     // When projected onto x-axis
     const fgm::Vector4D actualProjection = a.project(xAxis);
@@ -99,9 +99,9 @@ TEST(Vector4DProjection, ProjectionOntoXAxisReturnsVectorWithOnlyXComponent)
 TEST(Vector4DProjection, ProjectionOntoYAxisReturnsVectorWithOnlyYComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector4D a(10.0f, 20.0f, 30.0f, 40.0f);
-    constexpr fgm::Vector4D yAxis(0.0f, 1.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(0.0f, 20.0f, 0.0f, 0.0f);
+    const fgm::Vector4D a(10.0f, 20.0f, 30.0f, 40.0f);
+    const fgm::Vector4D yAxis(0.0f, 1.0f, 0.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(0.0f, 20.0f, 0.0f, 0.0f);
 
     // When projected onto y-axis
     const fgm::Vector4D actualProjection = a.project(yAxis);
@@ -118,9 +118,9 @@ TEST(Vector4DProjection, ProjectionOntoYAxisReturnsVectorWithOnlyYComponent)
 TEST(Vector4DProjection, ProjectionOntoZAxisReturnsVectorWithOnlyZComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector4D a(10.0f, 20.0f, 30.0f, 40.0f);
-    constexpr fgm::Vector4D zAxis(0.0f, 0.0f, 1.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 30.0f, 0.0f);
+    const fgm::Vector4D a(10.0f, 20.0f, 30.0f, 40.0f);
+    const fgm::Vector4D zAxis(0.0f, 0.0f, 1.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(0.0f, 0.0f, 30.0f, 0.0f);
 
     // When projected onto z-axis
     const fgm::Vector4D actualProjection = a.project(zAxis);
@@ -137,9 +137,9 @@ TEST(Vector4DProjection, ProjectionOntoZAxisReturnsVectorWithOnlyZComponent)
 TEST(Vector4DProjection, ProjectionOntoWAxisReturnsVectorWithOnlyWComponent)
 {
     // Given an arbitrary vector
-    constexpr fgm::Vector4D a(10.0f, 20.0f, 30.0f, 40.0f);
-    constexpr fgm::Vector4D wAxis(0.0f, 0.0f, 0.0f, 1.0f);
-    constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 0.0f, 40.0f);
+    const fgm::Vector4D a(10.0f, 20.0f, 30.0f, 40.0f);
+    const fgm::Vector4D wAxis(0.0f, 0.0f, 0.0f, 1.0f);
+    const fgm::Vector4D expectedProjection(0.0f, 0.0f, 0.0f, 40.0f);
 
     // When projected onto w-axis
     const fgm::Vector4D actualProjection = a.project(wAxis);
@@ -180,9 +180,9 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_NonOrthogonalProjectionReturnsNonZe
 TEST(Vector4DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
-    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
     const fgm::Vector4D actualProjection = a.project(b, true);
@@ -199,9 +199,9 @@ TEST(Vector4DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 TEST(Vector4DProjection, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
+    const fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
+    const fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
 
     // When projected
     const fgm::Vector4D<float> actualProjection = a.project(negativeZAxis);
@@ -218,9 +218,9 @@ TEST(Vector4DProjection, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVe
 TEST(Vector4DProjection, MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector4D vec(7, 13, 29, 41);
-    constexpr fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
-    constexpr fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
+    const fgm::Vector4D vec(7, 13, 29, 41);
+    const fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
+    const fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
 
     // When projected onto another
     const fgm::Vector4D actualProjection = vec.project(onto);
@@ -276,9 +276,9 @@ TYPED_TEST(Vector4DProjection, SafeProject_NonOrthogonalProjectionReturnsNonZero
 TEST(Vector4DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
-    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
     const fgm::Vector4D actualProjection = a.safeProject(b, true);
@@ -295,9 +295,9 @@ TEST(Vector4DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZer
 TEST(Vector4DProjection, SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
+    const fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
+    const fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
 
     // When projected
     const fgm::Vector4D<float> actualProjection = a.safeProject(negativeZAxis);
@@ -314,9 +314,9 @@ TEST(Vector4DProjection, SafeProject_OntoVectorInOppositeDirectionReturnsVectorI
 TEST(Vector4DProjection, SafeProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector4D vec(7, 13, 29, 41);
-    constexpr fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
-    constexpr fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
+    const fgm::Vector4D vec(7, 13, 29, 41);
+    const fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
+    const fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
 
     // When projected onto another
     const fgm::Vector4D actualProjection = vec.safeProject(onto);
@@ -334,7 +334,7 @@ TEST(Vector4DProjection, SafeProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector4DProjection, SafeProject_OntoZeroReturnsZeroVector)
 {
-    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
+    const fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
 
     const fgm::Vector4D actualProjection = this->_vec.safeProject(zeroVec);
 
@@ -360,9 +360,9 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_NonOrthogonalProjection
 TEST(Vector4DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
-    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
     const fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProject(a, b, true);
@@ -379,9 +379,9 @@ TEST(Vector4DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVecto
 TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
+    const fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
+    const fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
 
     // When projected
     const fgm::Vector4D<float> actualProjection = fgm::Vector4D<float>::safeProject(a, negativeZAxis);
@@ -398,9 +398,9 @@ TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoVectorInOppositeDirection
 TEST(Vector4DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector4D vec(7, 13, 29, 41);
-    constexpr fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
-    constexpr fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
+    const fgm::Vector4D vec(7, 13, 29, 41);
+    const fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
+    const fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
 
     // When projected onto another
     const fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProject(vec, onto);
@@ -418,7 +418,7 @@ TEST(Vector4DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTy
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
 {
-    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
+    const fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
 
     const fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProject(this->_vec, zeroVec);
 
@@ -523,9 +523,9 @@ TYPED_TEST(Vector4DProjection, TryProject_NonOrthogonalProjectionReturnsNonZeroV
 TEST(Vector4DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
-    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
     fgm::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
@@ -546,9 +546,9 @@ TEST(Vector4DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZero
 TEST(Vector4DProjection, TryProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
+    const fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
+    const fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
     fgm::OperationStatus flag;
 
     // When projected
@@ -569,9 +569,9 @@ TEST(Vector4DProjection, TryProject_OntoVectorInOppositeDirectionReturnsVectorIn
 TEST(Vector4DProjection, TryProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector4D vec(7, 13, 29, 41);
-    constexpr fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
-    constexpr fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
+    const fgm::Vector4D vec(7, 13, 29, 41);
+    const fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
+    const fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
     fgm::OperationStatus flag;
 
     // When projected onto another
@@ -592,7 +592,7 @@ TEST(Vector4DProjection, TryProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector4DProjection, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
+    const fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
 
@@ -625,9 +625,9 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_NonOrthogonalProjectionR
 TEST(Vector4DProjection, StaticWrapper_TryProject_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    constexpr fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
-    constexpr fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
     fgm::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
@@ -649,9 +649,9 @@ TEST(Vector4DProjection,
      StaticWrapper_TryProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    constexpr fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
-    constexpr fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
-    constexpr fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
+    const fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
+    const fgm::Vector4D negativeZAxis(0.0f, 0.0f, -1.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(0.0f, 0.0f, 4.0f, 0.0f);
     fgm::OperationStatus flag;
 
     // When projected
@@ -672,9 +672,9 @@ TEST(Vector4DProjection,
 TEST(Vector4DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTypeAndSetsCorrectFlag)
 {
     // Given two arbitrary vectors
-    constexpr fgm::Vector4D vec(7, 13, 29, 41);
-    constexpr fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
-    constexpr fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
+    const fgm::Vector4D vec(7, 13, 29, 41);
+    const fgm::Vector4D onto(2.0, 4.0, 4.0, 2.0);
+    const fgm::Vector4D expectedProjection(13.2, 26.4, 26.4, 13.2);
     fgm::OperationStatus flag;
 
     // When projected onto another
@@ -695,7 +695,7 @@ TEST(Vector4DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTyp
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    constexpr fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
+    const fgm::Vector4D zeroVec = fgm::vec4d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
     const fgm::Vector4D actualProjection = fgm::Vector4D<float>::tryProject(this->_vec, zeroVec, flag);

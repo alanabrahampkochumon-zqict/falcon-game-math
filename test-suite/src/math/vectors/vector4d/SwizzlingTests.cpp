@@ -213,10 +213,10 @@ namespace
 /** @brief Verify that swizzling returns shuffled vector across different numeric. */
 TYPED_TEST(Vector4DSwizzlingTest, SwizzlingWorksAcrossDifferentTypes)
 {
-    constexpr fgm::Vector4D vector(TypeParam(1), TypeParam(2), TypeParam(3), TypeParam(4));
-    constexpr fgm::Vector4D expectedSwizzling(TypeParam(4), TypeParam(3), TypeParam(2), TypeParam(1));
+    const fgm::Vector4D vector(TypeParam(1), TypeParam(2), TypeParam(3), TypeParam(4));
+    const fgm::Vector4D expectedSwizzling(TypeParam(4), TypeParam(3), TypeParam(2), TypeParam(1));
 
-    constexpr auto swizzledVector = vector.template swizzle<W, Z, Y, X>();
+    const auto swizzledVector = vector.template swizzle<W, Z, Y, X>();
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }
@@ -225,10 +225,10 @@ TYPED_TEST(Vector4DSwizzlingTest, SwizzlingWorksAcrossDifferentTypes)
 /** @brief Verify that swizzling returns shuffled vector for boolean vector. */
 TEST(Vector4DSwizzlingTest, SwizzlingWorksForBooleanVector)
 {
-    constexpr fgm::Vector4D vector(true, true, false, false);
-    constexpr fgm::Vector4D expectedSwizzling(false, false, true, true);
+    const fgm::Vector4D vector(true, true, false, false);
+    const fgm::Vector4D expectedSwizzling(false, false, true, true);
 
-    constexpr auto swizzledVector = vector.swizzle<W, Z, Y, X>();
+    const auto swizzledVector = vector.swizzle<W, Z, Y, X>();
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }
@@ -417,10 +417,10 @@ namespace
 /** @brief Verify that the static variant of swizzling returns shuffled vector across different numeric. */
 TYPED_TEST(Vector4DSwizzlingTest, StaticVariant_SwizzlingWorksAcrossDifferentTypes)
 {
-    constexpr fgm::Vector4D vector(TypeParam(1), TypeParam(2), TypeParam(3), TypeParam(4));
-    constexpr fgm::Vector4D expectedSwizzling(TypeParam(4), TypeParam(3), TypeParam(2), TypeParam(1));
+    const fgm::Vector4D vector(TypeParam(1), TypeParam(2), TypeParam(3), TypeParam(4));
+    const fgm::Vector4D expectedSwizzling(TypeParam(4), TypeParam(3), TypeParam(2), TypeParam(1));
 
-    constexpr auto swizzledVector = fgm::Vector4D<TypeParam>::template swizzle<W, Z, Y, X>(vector);
+    const auto swizzledVector = fgm::Vector4D<TypeParam>::template swizzle<W, Z, Y, X>(vector);
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }
@@ -429,10 +429,10 @@ TYPED_TEST(Vector4DSwizzlingTest, StaticVariant_SwizzlingWorksAcrossDifferentTyp
 /** @brief Verify that the static variant of swizzling returns shuffled vector for boolean vector. */
 TEST(Vector4DSwizzlingTest, StaticVariant_SwizzlingWorksForBooleanVector)
 {
-    constexpr fgm::Vector4D vector(true, true, false, false);
-    constexpr fgm::Vector4D expectedSwizzling(false, false, true, true);
+    const fgm::Vector4D vector(true, true, false, false);
+    const fgm::Vector4D expectedSwizzling(false, false, true, true);
 
-    constexpr auto swizzledVector = fgm::Vector4D<bool>::swizzle<W, Z, Y, X>(vector);
+    const auto swizzledVector = fgm::Vector4D<bool>::swizzle<W, Z, Y, X>(vector);
 
     EXPECT_VEC_EQ(expectedSwizzling, swizzledVector);
 }

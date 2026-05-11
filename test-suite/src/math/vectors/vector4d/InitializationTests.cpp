@@ -36,7 +36,7 @@ TYPED_TEST_SUITE(Vector4DInitialization, SupportedTypes);
 /** @test Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
 {
-    constexpr fgm::Vector4D<TypeParam> vec;
+    const fgm::Vector4D<TypeParam> vec;
 
     EXPECT_VEC_ZERO(vec);
 }
@@ -45,12 +45,12 @@ TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
 /** @test Verify that the parameterized constructor correctly assigns components from the provided arguments. */
 TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue)
 {
-    constexpr TypeParam a = static_cast<TypeParam>(3);
-    constexpr TypeParam b = static_cast<TypeParam>(1);
-    constexpr TypeParam c = static_cast<TypeParam>(6);
-    constexpr TypeParam d = static_cast<TypeParam>(4);
+    const TypeParam a = static_cast<TypeParam>(3);
+    const TypeParam b = static_cast<TypeParam>(1);
+    const TypeParam c = static_cast<TypeParam>(6);
+    const TypeParam d = static_cast<TypeParam>(4);
 
-    constexpr fgm::Vector4D<TypeParam> vec(a, b, c, d);
+    const fgm::Vector4D<TypeParam> vec(a, b, c, d);
 
     EXPECT_VEC_CONTAINS(vec, a, b, c, d);
 }
@@ -62,14 +62,14 @@ TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue
  */
 TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
 {
-    constexpr TypeParam a = static_cast<TypeParam>(3);
-    constexpr TypeParam b = static_cast<TypeParam>(1);
-    constexpr TypeParam c = static_cast<TypeParam>(6);
-    constexpr TypeParam d = static_cast<TypeParam>(4);
-    constexpr fgm::Vector2D<TypeParam> vec1(a, b);
-    constexpr fgm::Vector2D<TypeParam> vec2(c, d);
+    const TypeParam a = static_cast<TypeParam>(3);
+    const TypeParam b = static_cast<TypeParam>(1);
+    const TypeParam c = static_cast<TypeParam>(6);
+    const TypeParam d = static_cast<TypeParam>(4);
+    const fgm::Vector2D<TypeParam> vec1(a, b);
+    const fgm::Vector2D<TypeParam> vec2(c, d);
 
-    constexpr fgm::Vector4D<TypeParam> vec(vec1, vec2);
+    const fgm::Vector4D<TypeParam> vec(vec1, vec2);
 
     EXPECT_VEC_CONTAINS(vec, a, b, c, d);
 }
@@ -81,13 +81,13 @@ TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
  */
 TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
 {
-    constexpr TypeParam a = static_cast<TypeParam>(3);
-    constexpr TypeParam b = static_cast<TypeParam>(1);
-    constexpr TypeParam c = static_cast<TypeParam>(6);
-    constexpr fgm::Vector3D vec1(a, b, c);
-    constexpr TypeParam scalar = static_cast<TypeParam>(4);
+    const TypeParam a = static_cast<TypeParam>(3);
+    const TypeParam b = static_cast<TypeParam>(1);
+    const TypeParam c = static_cast<TypeParam>(6);
+    const fgm::Vector3D vec1(a, b, c);
+    const TypeParam scalar = static_cast<TypeParam>(4);
 
-    constexpr fgm::Vector4D vec(vec1, scalar);
+    const fgm::Vector4D vec(vec1, scalar);
 
     EXPECT_VEC_CONTAINS(vec, a, b, c, scalar);
 }
@@ -99,13 +99,13 @@ TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
  */
 TYPED_TEST(Vector4DInitialization, ScalarAnd3DVectorCanInitializeA4DVector)
 {
-    constexpr TypeParam a = static_cast<TypeParam>(3);
-    constexpr TypeParam b = static_cast<TypeParam>(1);
-    constexpr TypeParam c = static_cast<TypeParam>(6);
-    constexpr fgm::Vector3D vec1(a, b, c);
-    constexpr TypeParam scalar = static_cast<TypeParam>(4);
+    const TypeParam a = static_cast<TypeParam>(3);
+    const TypeParam b = static_cast<TypeParam>(1);
+    const TypeParam c = static_cast<TypeParam>(6);
+    const fgm::Vector3D vec1(a, b, c);
+    const TypeParam scalar = static_cast<TypeParam>(4);
 
-    constexpr fgm::Vector4D vec(scalar, vec1);
+    const fgm::Vector4D vec(scalar, vec1);
 
     EXPECT_VEC_CONTAINS(vec, scalar, a, b, c);
 }

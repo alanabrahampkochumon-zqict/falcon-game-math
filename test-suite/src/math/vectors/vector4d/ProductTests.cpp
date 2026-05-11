@@ -118,8 +118,8 @@ TYPED_TEST(Vector4DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZe
 TEST(Vector4DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
 {
     // Given two opposite vectors
-    constexpr fgm::Vector4D vecA(-1.0, 0.0, 0.0, 0.0);
-    constexpr fgm::Vector4D vecB(1.0, 0.0, 0.0, 0.0);
+    const fgm::Vector4D vecA(-1.0, 0.0, 0.0, 0.0);
+    const fgm::Vector4D vecB(1.0, 0.0, 0.0, 0.0);
 
     // When dot with each other
     const double dotProduct = vecA.dot(vecB);
@@ -136,8 +136,8 @@ TEST(Vector4DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
 TEST(Vector4DDotProduct, MixedTypeDotProductPromotesType)
 {
     // Given two vectors of different type
-    constexpr fgm::Vector4D vecA(7, 13, 29, 41);
-    constexpr fgm::Vector4D vecB(1.123456789, 2.123456789, 3.123456789, 4.123456789);
+    const fgm::Vector4D vecA(7, 13, 29, 41);
+    const fgm::Vector4D vecB(1.123456789, 2.123456789, 3.123456789, 4.123456789);
 
     // When dot with each other
     const auto dotProduct = vecA.dot(vecB);
