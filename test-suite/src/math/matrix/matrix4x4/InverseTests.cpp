@@ -131,29 +131,43 @@ namespace
     static_assert(invMatS(3, 3) - 1.0f <= fgm::Config::FLOAT_EPSILON);
 
     // TODO: Add back
-    // // Verify matrix safeInverse (member function)
-    // constexpr fgm::Matrix4D SAFE_INV_MAT = MAT.safeInverse();
-    // static_assert(SAFE_INV_MAT(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT(1, 0) - 20.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT(1, 1) - -15.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT(1, 2) - -4.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT(2, 0) - -5.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT(2, 1) - 4.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
-    //
-    // // Verify matrix safeInverse (static function)
-    // constexpr fgm::Matrix4D SAFE_INV_MAT_S = fgm::Matrix4D<float>::safeInverseOf(MAT);
-    // static_assert(SAFE_INV_MAT_S(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT_S(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT_S(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT_S(1, 0) - 20.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT_S(1, 1) - -15.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT_S(1, 2) - -4.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT_S(2, 0) - -5.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT_S(2, 1) - 4.0f <= fgm::Config::FLOAT_EPSILON);
-    // static_assert(SAFE_INV_MAT_S(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
+    // Verify matrix safeInverse (member function)
+    constexpr fgm::Matrix4D safeInvMat = mat.safeInverse();
+    static_assert(safeInvMat(0, 0) - -9.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(0, 1) - 7.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(0, 2) - 6.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(0, 3) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(1, 0) - -6.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(1, 1) - 3.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(1, 2) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(1, 3) - 0.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(2, 0) - 0.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(2, 1) - -1.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(2, 2) - -1.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(2, 3) - -1.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(3, 0) - -2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(3, 1) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(3, 2) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMat(3, 3) - 1.0f <= fgm::Config::FLOAT_EPSILON);
+
+    // Verify matrix safeInverse (static function)
+    constexpr fgm::Matrix4D safeInvMatS = fgm::Matrix4D<float>::safeInverseOf(mat);
+    static_assert(safeInvMatS(0, 0) - -9.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(0, 1) - 7.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(0, 2) - 6.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(0, 3) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(1, 0) - -6.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(1, 1) - 3.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(1, 2) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(1, 3) - 0.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(2, 0) - 0.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(2, 1) - -1.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(2, 2) - -1.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(2, 3) - -1.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(3, 0) - -2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(3, 1) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(3, 2) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    static_assert(safeInvMatS(3, 3) - 1.0f <= fgm::Config::FLOAT_EPSILON);
 } // namespace
 
 
@@ -219,7 +233,7 @@ TEST_P(SingularMatrix4DInverse, Inverse_FailsAssertionInDebugMode)
  */
 TYPED_TEST(Matrix4DInverse, SafeInverse_ExchangesRowsAndColumnElements)
 {
-    // EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
+    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
 }
 
 
