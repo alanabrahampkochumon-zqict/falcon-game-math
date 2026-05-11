@@ -765,7 +765,6 @@ namespace fgm
     constexpr auto Vector3D<T>::dot(const Vector3D<U>& rhs) const noexcept -> std::common_type_t<T, U>
         requires StrictArithmetic<T>
     {
-#define FP_FAST_FMA
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
         using R = std::common_type_t<T, U>;
         if constexpr (std::is_floating_point_v<R>)
