@@ -176,6 +176,17 @@ TYPED_TEST(Matrix3DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatri
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
+/**
+ * @brief Verify that inverting a singular matrix using @ref fgm::Matrix3D::inverse
+ *        fails assertion in debug mode.
+ */
+TEST_P(SingularMatrix3DInverse, Inverse_FailsAssertionInDebugMode)
+{
+    const auto& matrix = GetParam();
+    // Static cast is placed to suppress the no-discard warning
+    EXPECT_DEBUG_DEATH(static_cast<void>(matrix.inverse()), "");
+}
+
 
 
 /**************************************
