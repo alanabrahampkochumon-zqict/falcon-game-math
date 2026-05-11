@@ -33,9 +33,6 @@ set(Matrix4x4TestDir "src/math/matrix/matrix4x4/")
 set(Matrix4x4TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeConversionTests.cpp;ConstantTests.cpp;UtilityTests.cpp;EqualityTests.cpp;AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DivisionTests.cpp;TransposeTests.cpp;DeterminantTests.cpp;TraceTests.cpp;InverseTests.cpp;StringRepresentationTests.cpp;AliasTests.cpp;")
 list(TRANSFORM Matrix4x4TestFiles PREPEND ${Matrix4x4TestDir})
 
-set(MatrixTestDirectory "src/math/matrix/")
-set(MatrixTestFiles Matrix2DTests.cpp Matrix3DTests.cpp Matrix4DTests.cpp)
-list(TRANSFORM MatrixTestFiles PREPEND ${MatrixTestDirectory})
 
 set(MathCommonDir "src/math/common/")
 set(MathCommonTestFiles "OperationStatusTests.cpp;WrapperTests.cpp;")
@@ -58,7 +55,6 @@ target_sources(
         ${Matrix2x2TestFiles}
         ${Matrix3x3TestFiles}
         ${Matrix4x4TestFiles}
-        # ${MatrixTestFiles}
         ${SimdTestFiles}
         ${MathCommonTestFiles}
 
@@ -121,7 +117,6 @@ source_group(
         ${Matrix2x2TestFiles}
         ${Matrix3x3TestFiles}
         ${Matrix4x4TestFiles}
-        ${MatrixTestFiles}
         ${SimdTestFiles}
         ${MathCommonTestFiles}
 )
