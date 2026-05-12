@@ -1170,8 +1170,6 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$ string representation for debugging or logging.
          *
-         * @tparam T Numeric type of the matrix.
-         *
          * @param os     The output stream to write to.
          * @param matrix The matrix to be streamed.
          *

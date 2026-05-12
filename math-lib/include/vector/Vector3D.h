@@ -1657,8 +1657,6 @@ namespace fgm
          * @brief Write the vector to an output stream.
          *        Format the vector as <x, y, z> string representation for debugging or logging.
          *
-         * @tparam T Numeric type of the vector.
-         *
          * @param os     The output stream to write to.
          * @param vector The vector to be streamed.
          *
@@ -1829,7 +1827,7 @@ namespace fgm
 
     /** @brief Template deduction guide for Vector3D. */
     template <Arithmetic T, Arithmetic... Args>
-    Vector3D(T, Args...)-> Vector3D<T>;
+    Vector3D(T, Args...) -> Vector3D<T>;
 
     /** @} */
 

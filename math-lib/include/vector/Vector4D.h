@@ -1672,8 +1672,6 @@ namespace fgm
          * @brief Write the vector to an output stream.
          *        Format the vector as <x, y, z, w> string representation for debugging or logging.
          *
-         * @tparam T Numeric type of the vector.
-         *
          * @param os     The output stream to write to.
          * @param vector The vector to be streamed.
          *
