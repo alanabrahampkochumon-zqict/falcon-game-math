@@ -33,6 +33,7 @@ if (CLANG_FORMATTER)
                 COMMENT "Formatting source files..."
                 VERBATIM
         )
+    set_target_properties(format PROPERTIES FOLDER ${DevToolsDir})
     else ()
         message(STATUS "No source files found for formatting.")
     endif ()
@@ -159,7 +160,7 @@ target_compile_features(MathLib INTERFACE cxx_std_20)
 target_compile_features(Playground PRIVATE cxx_std_20)
 target_compile_features(BenchmarkSuite PRIVATE cxx_std_20)
 
-# For faster CI/CD unit-tests on push are only run essential types rather than the full type permutation.
+# For faster CI/CD unit-tests on push are only run with essential types rather than the full type permutation.
 option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
 if (NONCOMPREHENSIVE)
     target_compile_definitions(TestSuite PRIVATE NONCOMPREHENSIVE)
