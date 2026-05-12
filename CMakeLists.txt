@@ -23,6 +23,7 @@ if (CLANG_FORMATTER)
             "${CMAKE_SOURCE_DIR}/simd/*.cpp" "${CMAKE_SOURCE_DIR}/simd/*.h" "${CMAKE_SOURCE_DIR}/simd/*.tpp" "${CMAKE_SOURCE_DIR}/simd/*.inl"
             "${CMAKE_SOURCE_DIR}/math-lib/*.cpp" "${CMAKE_SOURCE_DIR}/math-lib/*.h" "${CMAKE_SOURCE_DIR}/math-lib/*.tpp" "${CMAKE_SOURCE_DIR}/math-lib/*.inl"
             "${CMAKE_SOURCE_DIR}/test-suite/*.cpp" "${CMAKE_SOURCE_DIR}/test-suite/*.h" "${CMAKE_SOURCE_DIR}/test-suite/*.tpp" "${CMAKE_SOURCE_DIR}/test-suite/*.inl"
+            "${CMAKE_SOURCE_DIR}/benchmark-suite/*.cpp" "${CMAKE_SOURCE_DIR}/benchmark-suite/*.h" "${CMAKE_SOURCE_DIR}/benchmark-suite/*.tpp" "${CMAKE_SOURCE_DIR}/benchmark-suite/*.inl"
     )
     # Only add the target if files were actually found to avoid the stdin error
     if (ALL_SOURCE_FILES)
@@ -150,11 +151,13 @@ add_subdirectory(math-lib)
 add_subdirectory(playground)
 add_subdirectory(test-suite)
 add_subdirectory(simd)
+add_subdirectory(benchmark-suite)
 
 target_compile_features(TestSuite PRIVATE cxx_std_20)
 target_compile_features(FalconSIMD INTERFACE cxx_std_20)
 target_compile_features(MathLib INTERFACE cxx_std_20)
 target_compile_features(Playground PRIVATE cxx_std_20)
+target_compile_features(BenchmarkSuite PRIVATE cxx_std_20)
 
 # For faster CI/CD unit-tests on push are only run essential types rather than the full type permutation.
 option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
@@ -167,6 +170,7 @@ target_link_libraries(TestSuite PRIVATE StrictWarnings ProjectSanitizers)
 target_link_libraries(FalconSIMD INTERFACE StrictWarnings ProjectSanitizers)
 target_link_libraries(MathLib INTERFACE StrictWarnings ProjectSanitizers)
 target_link_libraries(Playground PRIVATE StrictWarnings ProjectSanitizers)
+target_link_libraries(BenchmarkSuite PRIVATE StrictWarnings ProjectSanitizers)
 
 AddSIMDCompilerFlag(TestSuite)
 

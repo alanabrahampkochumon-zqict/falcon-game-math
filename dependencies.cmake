@@ -3,29 +3,39 @@ include(FetchContent)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE) # Statically link Gtest
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable benchmark testing" FORCE)
+set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "Disable benchmark install" FORCE)
 
 # Google Test
 FetchContent_Declare(
-    googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG 52eb8108c5bdec04579160ae17225d66034bd723 # release-1.17.0
-    # SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/vendors/googletest"
-    SYSTEM
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG 52eb8108c5bdec04579160ae17225d66034bd723 # release-1.17.0
+        SYSTEM
+)
+
+FetchContent_Declare(
+        googlebenchmark
+        GIT_REPOSITORY https://github.com/google/benchmark.git
+        GIT_TAG v1.9.5
+        SYSTEM
 )
 
 FetchContent_MakeAvailable(googletest)
+FetchContent_MakeAvailable(googlebenchmark)
 
 # Group google_test projects into a "Gtest" folder
 set_target_properties(
-    gtest gtest_main gmock gmock_main
-    PROPERTIES FOLDER "Google Test"
+        gtest gtest_main gmock gmock_main
+        PROPERTIES FOLDER "Google Test"
 )
+set_target_properties(benchmark benchmark_main PROPERTIES FOLDER "Google Benchmark")
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE) # Statically link Gtest
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 
-if(MSVC)
+if (MSVC)
     target_compile_options(gtest PRIVATE /WX- /W0)
     target_compile_options(gtest_main PRIVATE /WX- /W0)
-endif()
+endif ()
