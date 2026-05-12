@@ -14,7 +14,7 @@
 
 
 template <typename T>
-class Matrix4DScalarMultiplication: public ::testing::Test
+class Matrix4DScalarMultiplication: public testing::Test
 {
 protected:
     fgm::Matrix4D<T> _mat;
@@ -50,7 +50,7 @@ TYPED_TEST_SUITE(Matrix4DScalarMultiplication, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Matrix4DVectorMultiplication: public ::testing::Test
+class Matrix4DVectorMultiplication: public testing::Test
 {
 protected:
     fgm::Matrix4D<T> _mat;
@@ -79,7 +79,7 @@ TYPED_TEST_SUITE(Matrix4DVectorMultiplication, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Matrix4DVectorFractionalMultiplication: public ::testing::Test
+class Matrix4DVectorFractionalMultiplication: public testing::Test
 {
 protected:
     fgm::Matrix4D<T> _mat;
@@ -107,7 +107,7 @@ TYPED_TEST_SUITE(Matrix4DVectorFractionalMultiplication, SupportedFloatingPointT
 
 
 template <typename T>
-class Matrix4DMultiplication: public ::testing::Test
+class Matrix4DMultiplication: public testing::Test
 {
 protected:
     fgm::Matrix4D<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
@@ -145,7 +145,7 @@ TYPED_TEST_SUITE(Matrix4DMultiplication, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Matrix4DFractionalMultiplication: public ::testing::Test
+class Matrix4DFractionalMultiplication: public testing::Test
 {
 protected:
     fgm::Matrix4D<T> _matA, _matB, _expectedMat;
@@ -191,8 +191,8 @@ namespace
 {
     // TODO: Add static tests
     constexpr fgm::Matrix4D mat1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-    // constexpr fgm::Matrix4D mat2(5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21);
-    // constexpr fgm::Vector4D vec4D(1, 2, 3, 4);
+    constexpr fgm::Matrix4D mat2(5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21);
+    constexpr fgm::Vector4D vec4D(1, 2, 3, 4);
 
     // Verify matrix * scalar multiplication
     constexpr fgm::Matrix4D binaryProduct1 = mat1 * 2;
@@ -235,30 +235,37 @@ namespace
 
     // TODO: Add static tests
     // Verify matrix * vector multiplication
-    // constexpr fgm::Vector4D colVectorProduct = mat1 * vec4D;
-    // static_assert(colVectorProduct[0] == 30);
-    // static_assert(colVectorProduct[1] == 70);
-    // static_assert(colVectorProduct[2] == 110);
-    // static_assert(colVectorProduct[3] == 150);
-    //
-    //// Verify vector * matrix multiplication
-    // constexpr fgm::Vector4D rowVectorProduct = vec4D * matA;
-    // static_assert(rowVectorProduct[0] == 90);
-    // static_assert(rowVectorProduct[1] == 100);
-    // static_assert(rowVectorProduct[2] == 110);
-    // static_assert(rowVectorProduct[3] == 120);
+    constexpr fgm::Vector4D colVectorProduct = mat1 * vec4D;
+    static_assert(colVectorProduct[0] == 30);
+    static_assert(colVectorProduct[1] == 70);
+    static_assert(colVectorProduct[2] == 110);
+    static_assert(colVectorProduct[3] == 150);
 
-    //// Verify matrix * matrix multiplication
-    // constexpr fgm::Matrix4D matProduct = matA * matB;
-    // static_assert(matProduct(0, 0) == 57);
-    // static_assert(matProduct(0, 1) == 65);
-    // static_assert(matProduct(0, 2) == 71);
-    // static_assert(matProduct(1, 0) == 132);
-    // static_assert(matProduct(1, 1) == 152);
-    // static_assert(matProduct(1, 2) == 167);
-    // static_assert(matProduct(2, 0) == 207);
-    // static_assert(matProduct(2, 1) == 239);
-    // static_assert(matProduct(2, 2) == 263);
+    // Verify vector * matrix multiplication
+    constexpr fgm::Vector4D rowVectorProduct = vec4D * mat1;
+    static_assert(rowVectorProduct[0] == 90);
+    static_assert(rowVectorProduct[1] == 100);
+    static_assert(rowVectorProduct[2] == 110);
+    static_assert(rowVectorProduct[3] == 120);
+
+    // Verify matrix * matrix multiplication
+    constexpr fgm::Matrix4D matProduct = mat1 * mat2;
+    static_assert(matProduct(0, 0) == 139);
+    static_assert(matProduct(0, 1) == 149);
+    static_assert(matProduct(0, 2) == 159);
+    static_assert(matProduct(0, 3) == 169);
+    static_assert(matProduct(1, 0) == 327);
+    static_assert(matProduct(1, 1) == 353);
+    static_assert(matProduct(1, 2) == 379);
+    static_assert(matProduct(1, 3) == 405);
+    static_assert(matProduct(2, 0) == 515);
+    static_assert(matProduct(2, 1) == 557);
+    static_assert(matProduct(2, 2) == 599);
+    static_assert(matProduct(2, 3) == 641);
+    static_assert(matProduct(3, 0) == 703);
+    static_assert(matProduct(3, 1) == 761);
+    static_assert(matProduct(3, 2) == 819);
+    static_assert(matProduct(3, 3) == 877);
 } // namespace
 
 

@@ -66,7 +66,7 @@ target_sources(
         ${Utilities}
 )
 
-target_compile_options(TestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
+target_compile_options(TestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
 target_precompile_headers(
         TestSuite
