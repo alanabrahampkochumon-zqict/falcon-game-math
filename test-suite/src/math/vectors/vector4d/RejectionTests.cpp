@@ -34,7 +34,7 @@ protected:
 TYPED_TEST_SUITE(Vector4DRejection, SupportedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector4D rejection with NaN vectors. */
+/** @brief Test fixture for @ref fgm::Vector4D rejection with NaN vectors. */
 class Vector4DRejectionNaNTests: public ::testing::TestWithParam<fgm::Vector4D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Vector4RejectionTestSuite, Vector4DRejectionNaNTests,

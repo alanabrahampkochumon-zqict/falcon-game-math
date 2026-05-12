@@ -40,7 +40,7 @@ protected:
 TYPED_TEST_SUITE(Vector2DProjection, SupportedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector2D projection with NaN vectors. */
+/** @brief Test fixture for @ref fgm::Vector2D projection with NaN vectors. */
 class Vector2DProjectionNaNTests: public ::testing::TestWithParam<fgm::Vector2D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Vector2DProjectionTestSuite, Vector2DProjectionNaNTests,

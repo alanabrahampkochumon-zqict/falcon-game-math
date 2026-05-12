@@ -54,7 +54,7 @@ protected:
 TYPED_TEST_SUITE(Vector3DZeroNormalization, SupportedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector3D normalization with NaN vectors. */
+/** @brief Test fixture for @ref fgm::Vector3D normalization with NaN vectors. */
 class Vector3DNormalizationNaNTests: public ::testing::TestWithParam<fgm::Vector3D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Vector3DNormalizationNaNTestSuite, Vector3DNormalizationNaNTests,

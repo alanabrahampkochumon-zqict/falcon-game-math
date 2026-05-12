@@ -40,7 +40,7 @@ protected:
 TYPED_TEST_SUITE(Vector3DProjection, SupportedArithmeticTypes);
 
 
-/** @brief Test fixture for @fgm::Vector3D projection with NaN vectors. */
+/** @brief Test fixture for @ref fgm::Vector3D projection with NaN vectors. */
 class Vector3DProjectionNaNTests: public ::testing::TestWithParam<fgm::Vector3D<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Vector3DProjectionTestSuite, Vector3DProjectionNaNTests,

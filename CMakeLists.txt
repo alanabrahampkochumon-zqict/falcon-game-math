@@ -103,8 +103,7 @@ if (ENABLE_STRICT)
                 /clang:-Wno-header-hygiene;
                 /clang:-Wno-float-equal;
                 /clang:-Wno-unsafe-buffer-usage;
-                /clang:-Wno-padded;                   
-                /clang:-Wno-documentation-unknown-command;
+                /clang:-Wno-padded;
                 /clang:-Wno-implicit-int-float-conversion;
                 /clang:-Wno-double-promotion;
                 /clang:-Wno-implicit-int-conversion-on-negation
