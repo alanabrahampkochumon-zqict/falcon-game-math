@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Nightly Unit Tests (Comprehensive)
 
 on:
   schedule:

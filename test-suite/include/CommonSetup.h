@@ -15,7 +15,6 @@
 #include <limits>
 #include <utility>
 #include <vector>
-#define NONCOMPREHENSIVE
 
 #ifdef NONCOMPREHENSIVE
 
@@ -26,9 +25,8 @@ using SupportedIntegralTypes         = ::testing::Types<int32_t, int64_t, uint8_
 using SupportedFloatingPointTypes    = ::testing::Types<float, double>;
 using SupportedArithmeticFloatingTypePair =
     ::testing::Types<std::pair<float, int32_t>, std::pair<float, int64_t>, std::pair<float, uint8_t>,
-                     std::pair<float, double>, std::pair<double, int32_t>,
-                     std::pair<double, int64_t>, std::pair<double, uint8_t>,
-                     std::pair<double, float>>;
+                     std::pair<float, double>, std::pair<double, int32_t>, std::pair<double, int64_t>,
+                     std::pair<double, uint8_t>, std::pair<double, float>>;
 using SupportedSignedArithmeticFloatingTypePair =
     ::testing::Types<std::pair<float, int32_t>, std::pair<float, int64_t>, std::pair<float, float>,
                      std::pair<double, int8_t>, std::pair<double, float>>;
