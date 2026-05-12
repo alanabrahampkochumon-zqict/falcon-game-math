@@ -43,7 +43,7 @@ protected:
         _expectedTypedMatrix = { { T(2.428571428571428), T(1.857142857142857), T(2.142857142857143) },
                                  { T(1.571428571428571), T(2.285714285714286), T(5.0) },
                                  { T(3.857142857142857), T(6.285714285714286), T(8.0) } };
-    };
+    }
 };
 /** Test fixture for @ref fgm::Matrix3D division, parameterized by @ref SupportedArithmeticTypes */
 TYPED_TEST_SUITE(Matrix3DDivision, SupportedArithmeticTypes);

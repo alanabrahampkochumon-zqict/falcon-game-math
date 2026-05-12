@@ -53,7 +53,7 @@ protected:
             { T(3.857142857142857), T(6.285714285714286), T(8.0), T(3.285714285714286) },
             { T(0.714285714285714), T(0.857142857142857), T(1.571428571428571), T(4.428571428571429) },
         };
-    };
+    }
 };
 /** Test fixture for @ref fgm::Matrix4D division, parameterized by @ref SupportedArithmeticTypes */
 TYPED_TEST_SUITE(Matrix4DDivision, SupportedArithmeticTypes);

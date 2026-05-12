@@ -86,26 +86,26 @@ if (ENABLE_STRICT)
     elseif (MSVC AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         target_compile_options(StrictWarnings INTERFACE
                 $<$<COMPILE_LANGUAGE:CXX>:-Wall;-Wextra;-Wpedantic;-Werror>
-                # Only suppress things that are physically impossible to avoid (like GTest macros)
                 $<$<CXX_COMPILER_ID:Clang>:
+                # Backwards compatibility warning suppression
                 /clang:-Wno-c++98-compat;
                 /clang:-Wno-c++98-compat-pedantic;
                 /clang:-Wno-pre-c++14-compat;
                 /clang:-Wno-pre-c++17-compat;
                 /clang:-Wno-c++20-compat;
+
                 /clang:-Wno-global-constructors;
                 /clang:-Wno-covered-switch-default;
                 /clang:-Wno-reserved-macro-identifier;
                 /clang:-Wno-unused-macros;
                 /clang:-Wno-documentation;            
                 /clang:-Wno-unique-object-duplication;
-                /clang:-Wno-extra-semi;
+                # /clang:-Wno-extra-semi;
                 /clang:-Wno-header-hygiene;
                 /clang:-Wno-float-equal;
                 /clang:-Wno-unsafe-buffer-usage;
                 /clang:-Wno-padded;                   
                 /clang:-Wno-documentation-unknown-command;
-                # /clang:-Wno-ctad-maybe-unsupported;
                 /clang:-Wno-implicit-int-float-conversion;
                 /clang:-Wno-double-promotion;
                 /clang:-Wno-implicit-int-conversion-on-negation
