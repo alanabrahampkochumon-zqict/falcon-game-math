@@ -1849,6 +1849,11 @@ namespace fgm
 
     } // namespace vec4d
 
+
+    /** @brief Template deduction guide for Vector4D. */
+    template <Arithmetic T, Arithmetic... Args>
+    Vector4D(T, Args...) -> Vector4D<T>;
+
     /** @} */
 
 

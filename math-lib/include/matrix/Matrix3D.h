@@ -1264,6 +1264,11 @@ namespace fgm
         inline constexpr Matrix3D<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0));
     } // namespace mat3d
 
+
+    /** @brief Template deduction guide for Matrix3D. */
+    template <Arithmetic T, Arithmetic... Args>
+    Matrix3D(T, Args...) -> Matrix3D<T>;
+
     /** @} */
 
 }; // namespace fgm

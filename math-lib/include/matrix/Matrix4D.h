@@ -1370,6 +1370,11 @@ namespace fgm
 
     } // namespace mat4d
 
+
+    /** @brief Template deduction guide for Matrix4D. */
+    template <Arithmetic T, Arithmetic... Args>
+    Matrix4D(T, Args...) -> Matrix4D<T>;
+
     /** @} */
 
 } // namespace fgm

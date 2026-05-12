@@ -1303,6 +1303,11 @@ namespace fgm
         inline constexpr Matrix2D<T> zero(T(0), T(0), T(0), T(0));
     } // namespace mat2d
 
+
+    /** @brief Template deduction guide for Matrix2D. */
+    template <Arithmetic T, Arithmetic... Args>
+    Matrix2D(T, Args...) -> Matrix2D<T>;
+
     /** @} */
 
 

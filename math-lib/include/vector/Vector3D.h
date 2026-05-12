@@ -1826,6 +1826,11 @@ namespace fgm
 
     } // namespace vec3d
 
+
+    /** @brief Template deduction guide for Vector3D. */
+    template <Arithmetic T, Arithmetic... Args>
+    Vector3D(T, Args...)-> Vector3D<T>;
+
     /** @} */
 
 } // namespace fgm

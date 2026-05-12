@@ -1761,6 +1761,11 @@ namespace fgm
 
     } // namespace vec2d
 
+
+    /* @brief Template deduction guide for Vector2D */
+    template <Arithmetic T>
+    Vector2D(T, T)-> Vector2D<T>;
+
     /** @} */
 
 
