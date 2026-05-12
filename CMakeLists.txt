@@ -19,10 +19,10 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 find_program(CLANG_FORMATTER NAMES clang-format)
 
 if (CLANG_FORMATTER)
-    file(GLOB_RECURSE ALL_SOURCE_FILES 
-        "${CMAKE_SOURCE_DIR}/simd/*.cpp" "${CMAKE_SOURCE_DIR}/simd/*.h" "${CMAKE_SOURCE_DIR}/simd/*.tpp" "${CMAKE_SOURCE_DIR}/simd/*.inl"
-        "${CMAKE_SOURCE_DIR}/math-lib/*.cpp" "${CMAKE_SOURCE_DIR}/math-lib/*.h" "${CMAKE_SOURCE_DIR}/math-lib/*.tpp" "${CMAKE_SOURCE_DIR}/math-lib/*.inl"
-        "${CMAKE_SOURCE_DIR}/test-suite/*.cpp" "${CMAKE_SOURCE_DIR}/test-suite/*.h" "${CMAKE_SOURCE_DIR}/test-suite/*.tpp" "${CMAKE_SOURCE_DIR}/test-suite/*.inl"
+    file(GLOB_RECURSE ALL_SOURCE_FILES
+            "${CMAKE_SOURCE_DIR}/simd/*.cpp" "${CMAKE_SOURCE_DIR}/simd/*.h" "${CMAKE_SOURCE_DIR}/simd/*.tpp" "${CMAKE_SOURCE_DIR}/simd/*.inl"
+            "${CMAKE_SOURCE_DIR}/math-lib/*.cpp" "${CMAKE_SOURCE_DIR}/math-lib/*.h" "${CMAKE_SOURCE_DIR}/math-lib/*.tpp" "${CMAKE_SOURCE_DIR}/math-lib/*.inl"
+            "${CMAKE_SOURCE_DIR}/test-suite/*.cpp" "${CMAKE_SOURCE_DIR}/test-suite/*.h" "${CMAKE_SOURCE_DIR}/test-suite/*.tpp" "${CMAKE_SOURCE_DIR}/test-suite/*.inl"
     )
     # Only add the target if files were actually found to avoid the stdin error
     if (ALL_SOURCE_FILES)
@@ -32,9 +32,9 @@ if (CLANG_FORMATTER)
                 COMMENT "Formatting source files..."
                 VERBATIM
         )
-    else()
+    else ()
         message(STATUS "No source files found for formatting.")
-    endif()
+    endif ()
 
 else ()
     message(WARNING "clang-format not found")
@@ -94,11 +94,11 @@ if (ENABLE_STRICT)
                 /clang:-Wno-pre-c++17-compat;
                 /clang:-Wno-c++20-compat;
 
-                /clang:-Wno-global-constructors;
+                /clang:-Wno-global-constructors; # Gtest
                 /clang:-Wno-covered-switch-default;
-                /clang:-Wno-reserved-macro-identifier;
-                /clang:-Wno-unused-macros;
-                /clang:-Wno-documentation;            
+                # /clang:-Wno-reserved-macro-identifier;
+                # /clang:-Wno-unused-macros;
+                /clang:-Wno-documentation;
                 /clang:-Wno-unique-object-duplication;
                 /clang:-Wno-header-hygiene;
                 /clang:-Wno-float-equal;
@@ -107,7 +107,7 @@ if (ENABLE_STRICT)
                 /clang:-Wno-implicit-int-float-conversion;
                 /clang:-Wno-double-promotion;
                 /clang:-Wno-implicit-int-conversion-on-negation
-            >
+                >
         )
         set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON)
     else ()
@@ -152,7 +152,7 @@ include(simdcheck.cmake)
 
 add_subdirectory(math-lib)
 add_subdirectory(playground)
-add_subdirectory(test-suite) 
+add_subdirectory(test-suite)
 add_subdirectory(simd)
 
 target_compile_features(TestSuite PRIVATE cxx_std_20)
@@ -162,7 +162,7 @@ target_compile_features(Playground PRIVATE cxx_std_20)
 
 # For faster CI/CD unit-tests on push are only run essential types rather than the full type permutation.
 option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
-if(NONCOMPREHENSIVE)
+if (NONCOMPREHENSIVE)
     target_compile_definitions(TestSuite PRIVATE NONCOMPREHENSIVE)
 endif ()
 
