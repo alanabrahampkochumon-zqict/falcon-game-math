@@ -100,7 +100,6 @@ if (ENABLE_STRICT)
                 /clang:-Wno-unused-macros;
                 /clang:-Wno-documentation;            
                 /clang:-Wno-unique-object-duplication;
-                # /clang:-Wno-extra-semi;
                 /clang:-Wno-header-hygiene;
                 /clang:-Wno-float-equal;
                 /clang:-Wno-unsafe-buffer-usage;

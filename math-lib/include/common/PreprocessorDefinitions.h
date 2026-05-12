@@ -33,6 +33,19 @@
 #endif
 
 /**
+ * @brief API directive for handle DLL exports.
+ */
+#ifdef _WIN32
+    #define FGM_API __declspec(dllimport)
+#else
+    #if __GNUC__ >= 4 || defined(__clang__)
+        #define FGM_API __attribute__((visibility("default")))
+    #else
+        #define FGM_API
+    #endif
+#endif
+
+/**
  * @brief Log the assertion message and status to console.
  *
  * @param condition The condition that triggered the assertion.
