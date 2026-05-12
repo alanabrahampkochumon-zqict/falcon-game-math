@@ -24,8 +24,6 @@ if (CLANG_FORMATTER)
         "${CMAKE_SOURCE_DIR}/math-lib/*.cpp" "${CMAKE_SOURCE_DIR}/math-lib/*.h" "${CMAKE_SOURCE_DIR}/math-lib/*.tpp" "${CMAKE_SOURCE_DIR}/math-lib/*.inl"
         "${CMAKE_SOURCE_DIR}/test-suite/*.cpp" "${CMAKE_SOURCE_DIR}/test-suite/*.h" "${CMAKE_SOURCE_DIR}/test-suite/*.tpp" "${CMAKE_SOURCE_DIR}/test-suite/*.inl"
     )
-    message("SOURCE FILES:")
-    message(${ALL_SOURCE_FILES})
     # Only add the target if files were actually found to avoid the stdin error
     if (ALL_SOURCE_FILES)
         add_custom_target(format
@@ -34,7 +32,6 @@ if (CLANG_FORMATTER)
                 COMMENT "Formatting source files..."
                 VERBATIM
         )
-        set_target_properties(format PROPERTIES FOLDER ${DevToolsDir})
     else()
         message(STATUS "No source files found for formatting.")
     endif()
@@ -74,7 +71,6 @@ if (DOXYGEN_FOUND)
 else ()
     message(WARN "Doxygen not found! Skipping documentation generation.")
 endif ()
-
 
 option(ENABLE_STRICT "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
 option(ASAN "Enable ASan" OFF) # Option to enable ASAN
@@ -166,6 +162,12 @@ target_compile_features(TestSuite PRIVATE cxx_std_20)
 target_compile_features(FalconSIMD INTERFACE cxx_std_20)
 target_compile_features(MathLib INTERFACE cxx_std_20)
 target_compile_features(Playground PRIVATE cxx_std_20)
+
+# For faster CI/CD unit-tests on push are only run essential types rather than the full type permutation.
+option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
+if(NONCOMPREHENSIVE)
+    target_compile_definitions(TestSuite PRIVATE NONCOMPREHENSIVE)
+endif ()
 
 
 target_link_libraries(TestSuite PRIVATE StrictWarnings ProjectSanitizers)

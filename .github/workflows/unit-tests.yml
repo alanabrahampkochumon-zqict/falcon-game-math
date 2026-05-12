@@ -79,6 +79,7 @@ jobs:
           -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -D ENABLE_STRICT=ON
+          -D NONCOMPREHENSIVE=ON
           -S ${{ github.workspace }}
 
       - name: Build
