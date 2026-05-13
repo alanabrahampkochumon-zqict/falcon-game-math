@@ -248,8 +248,8 @@ TYPED_TEST(Vector2DProjection, SafeProject_NonOrthogonalProjectionReturnsNonZero
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector2D::safeProject with the
- *       @p ontoNormalized flag enabled returns a non-zero vector.
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector2D::safeProjectNorm
+ *       returns a non-zero vector.
  */
 TEST(Vector2DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
@@ -259,7 +259,7 @@ TEST(Vector2DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZer
     const fgm::Vector2D expectedProjection(1.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vector2D actualProjection = a.safeProject(b, true);
+    const fgm::Vector2D actualProjection = a.safeProjectNorm(b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -333,7 +333,7 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_SafeProject_NonOrthogonalProjection
 
 /**
  * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
- *       @ref fgm::Vector2D::safeProject with the @p ontoNormalized flag enabled returns a non-zero vector.
+ *       @ref fgm::Vector2D::safeProjectNorm returns a non-zero vector.
  */
 TEST(Vector2DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
@@ -343,7 +343,7 @@ TEST(Vector2DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVecto
     const fgm::Vector2D expectedProjection(1.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::safeProject(a, b, true);
+    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::safeProjectNorm(a, b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);

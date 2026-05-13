@@ -912,21 +912,16 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::safeProject(const Vector2D<U>& onto, const bool ontoNormalized) const noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeProject(const Vector2D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
         using R       = std::common_type_t<T, U>;
         using MagType = Magnitude<R>;
-        if (ontoNormalized)
-        {
-            return this->dot(onto) * onto;
-        }
 
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
-        if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(ontoSquared)))
+        if (hasNaN() | fgm::isnan(ontoSquared))
         {
             return fgm::vec2d::zero<MagType>;
         }
@@ -942,12 +937,38 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::safeProject(const Vector2D& vec, const Vector2D<U>& onto,
-                                            const bool ontoNormalized) noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeProjectNorm(const Vector2D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        return vec.safeProject(onto, ontoNormalized);
+        using R       = std::common_type_t<T, U>;
+        using MagType = Magnitude<R>;
+
+        if (hasNaN() || onto.hasNaN())
+        {
+            return fgm::vec2d::zero<MagType>;
+        }
+
+        return this->dot(onto) * onto;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeProject(const Vector2D& vec,
+                                                                   const Vector2D<U>& onto) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.safeProject(onto);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeProjectNorm(const Vector2D& vec,
+                                                                       const Vector2D<U>& onto) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.safeProjectNorm(onto);
     }
 
 
@@ -1044,8 +1065,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::safeReject(const Vector2D<U>& from, const bool fromNormalized) const noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeReject(const Vector2D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1053,18 +1073,40 @@ namespace fgm
             return fgm::vec2d::zero<std::common_type_t<T, U>>;
         }
 
-        return *this - safeProject(from, fromNormalized);
+        return *this - safeProject(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::safeReject(const Vector2D& vec, const Vector2D<U>& from,
-                                           const bool fromNormalized) noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeRejectNorm(const Vector2D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
-        return vec.safeReject(from, fromNormalized);
+        if (hasNaN() || from.hasNaN())
+        {
+            return fgm::vec2d::zero<std::common_type_t<T, U>>;
+        }
+
+        return *this - safeProjectNorm(from);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeReject(const Vector2D& vec, const Vector2D<U>& from) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.safeReject(from);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeRejectNorm(const Vector2D& vec,
+                                                                      const Vector2D<U>& from) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.safeRejectNorm(from);
     }
 
 

@@ -200,7 +200,7 @@ TEST(Vector2DRejection, MixedTypeRejectionPromotesType)
 
 
 /**
- * @test Verify that rejecting from an orthogonal unit vector using @ref fgm::Vector2D::rejectNorm
+ * @test Verify that rejecting from an orthogonal unit vector using static variant of @ref fgm::Vector2D::rejectNorm
  *       returns a non-zero vector with perpendicular component.
  */
 TEST(Vector2DRejection, StaticWrapper_RejectionFromNormalizedVectorReturnsNonZeroVector)
@@ -286,8 +286,8 @@ TYPED_TEST(Vector2DRejection, SafeReject_NonOrthogonalRejectionReturnsNonZeroVec
 
 
 /**
- * @test Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector2D::safeReject with the
- *       @p fromNormalized flag enabled returns a non-zero vector with perpendicular component.
+ * @test Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector2D::safeRejectNorm
+ *       returns a non-zero vector with perpendicular component.
  */
 TEST(Vector2DRejection, SafeReject_FromNormalizedVectorReturnsNonZeroVector)
 {
@@ -297,7 +297,26 @@ TEST(Vector2DRejection, SafeReject_FromNormalizedVectorReturnsNonZeroVector)
     const fgm::Vector2D expectedRejection(0.0f, 2.0f);
 
     // When rejected from another
-    const fgm::Vector2D actualRejection = a.safeReject(b, true);
+    const fgm::Vector2D actualRejection = a.safeRejectNorm(b);
+
+    // Then, the resultant vector has components perpendicular to the `from` vector.
+    EXPECT_VEC_EQ(expectedRejection, actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting from an orthogonal unit vector using static variant of 
+ *       @ref fgm::Vector2D::safeRejectNorm returns a non-zero vector with perpendicular component.
+ */
+TEST(Vector2DRejection, StaticWrapper_SafeReject_FromNormalizedVectorReturnsNonZeroVector)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector2D a(1.0f, 2.0f);
+    const fgm::Vector2D b(1.0f, 0.0f);
+    const fgm::Vector2D expectedRejection(0.0f, 2.0f);
+
+    // When rejected from another
+    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::rejectNorm(a, b);
 
     // Then, the resultant vector has components perpendicular to the `from` vector.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -375,26 +394,6 @@ TYPED_TEST(Vector2DRejection, StaticWrapper_SafeReject_NonOrthogonalRejectionRet
     const fgm::Vector2D actualRejection = fgm::Vector2D<TypeParam>::safeReject(this->_vec, this->_fromVec);
 
     EXPECT_VEC_EQ(this->_expectedRejection, actualRejection);
-}
-
-
-/**
- * @test Verify that safely rejecting from an orthogonal unit vector using static variant of
- *       @ref fgm::Vector2D::safeReject with the @p fromNormalized flag enabled returns a non-zero vector with
- *       perpendicular component.
- */
-TEST(Vector2DRejection, StaticWrapper_SafeReject_FromNormalizedVectorReturnsNonZeroVector)
-{
-    // Given an arbitrary vector and a normalized vector
-    const fgm::Vector2D a(1.0f, 2.0f);
-    const fgm::Vector2D b(1.0f, 0.0f);
-    const fgm::Vector2D expectedRejection(0.0f, 2.0f);
-
-    // When rejected from another
-    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::safeReject(a, b, true);
-
-    // Then, the resultant vector has components perpendicular to the `from` vector.
-    EXPECT_VEC_EQ(expectedRejection, actualRejection);
 }
 
 
