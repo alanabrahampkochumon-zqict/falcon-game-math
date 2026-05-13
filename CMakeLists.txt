@@ -105,6 +105,8 @@ if (ENABLE_STRICT)
                 /clang:-Wno-implicit-int-float-conversion;
                 /clang:-Wno-double-promotion;
                 /clang:-Wno-implicit-int-conversion-on-negation
+                /clang:-Wno-reserved-macro-identifier; # Required by cl-clang on CLion due to macro conflicts
+                /clang:-Wno-unused-macros; # Required by cl-clang on CLion due to macro conflicts
                 >
         )
         set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON)
