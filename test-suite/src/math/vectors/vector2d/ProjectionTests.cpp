@@ -133,8 +133,8 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_NonOrthogonalProjectionReturnsNonZe
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector2D::project with the
- *       @p ontoNormalized flag enabled returns a non-zero vector.
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector2D::projectNorm
+ *       returns a non-zero vector.
  */
 TEST(Vector2DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
@@ -144,7 +144,7 @@ TEST(Vector2DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
     const fgm::Vector2D expectedProjection(1.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vector2D actualProjection = a.project(b, true);
+    const fgm::Vector2D actualProjection = a.projectNorm(b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -187,6 +187,25 @@ TEST(Vector2DProjection, MixedTypeProjectionPromotesType)
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
     // and is the projection
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
+}
+
+
+/**
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector2D::projectNorm
+ *       returns a non-zero vector.
+ */
+TEST(Vector2DProjection, StaticWrapper_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector2D a(1.0f, 2.0f);
+    const fgm::Vector2D b(1.0f, 0.0f);
+    const fgm::Vector2D expectedProjection(1.0f, 0.0f);
+
+    // When the vector is projected onto the normalized vector
+    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::projectNorm(a, b);
+
+    // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
 

@@ -97,6 +97,7 @@ if (ENABLE_STRICT)
 
                 /clang:-Wno-global-constructors; # Gtest
                 /clang:-Wno-covered-switch-default;
+                /clang:-Wno-switch-default; # Gtest
                 /clang:-Wno-unique-object-duplication;
                 /clang:-Wno-header-hygiene;
                 /clang:-Wno-float-equal;

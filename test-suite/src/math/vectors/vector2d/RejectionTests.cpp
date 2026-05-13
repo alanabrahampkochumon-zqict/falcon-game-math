@@ -141,8 +141,8 @@ TYPED_TEST(Vector2DRejection, StaticWrapper_NonOrthogonalRejectionReturnsNonZero
 
 
 /**
- * @test Verify that rejecting from an orthogonal unit vector using @ref fgm::Vector2D::reject with the
- *       @p fromNormalized flag enabled returns a non-zero vector with perpendicular component.
+ * @test Verify that rejecting from an orthogonal unit vector using @ref fgm::Vector2D::rejectNorm
+ *       returns a non-zero vector with perpendicular component.
  */
 TEST(Vector2DRejection, RejectionFromNormalizedVectorReturnsNonZeroVector)
 {
@@ -152,7 +152,7 @@ TEST(Vector2DRejection, RejectionFromNormalizedVectorReturnsNonZeroVector)
     const fgm::Vector2D expectedRejection(0.0f, 2.0f);
 
     // When rejected from another
-    const fgm::Vector2D actualRejection = a.reject(b, true);
+    const fgm::Vector2D actualRejection = a.rejectNorm(b);
 
     // Then, the resultant vector has components perpendicular to the `from` vector.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
@@ -195,6 +195,25 @@ TEST(Vector2DRejection, MixedTypeRejectionPromotesType)
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
     // and is the rejection
+    EXPECT_VEC_EQ(expectedRejection, actualRejection);
+}
+
+
+/**
+ * @test Verify that rejecting from an orthogonal unit vector using @ref fgm::Vector2D::rejectNorm
+ *       returns a non-zero vector with perpendicular component.
+ */
+TEST(Vector2DRejection, StaticWrapper_RejectionFromNormalizedVectorReturnsNonZeroVector)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector2D a(1.0f, 2.0f);
+    const fgm::Vector2D b(1.0f, 0.0f);
+    const fgm::Vector2D expectedRejection(0.0f, 2.0f);
+
+    // When rejected from another
+    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::rejectNorm(a, b);
+
+    // Then, the resultant vector has components perpendicular to the `from` vector.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
 }
 

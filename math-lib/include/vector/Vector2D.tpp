@@ -11,7 +11,6 @@
  */
 
 
-
 #include "common/Wrappers.h"
 
 #include <type_traits>
@@ -25,7 +24,6 @@
 
 namespace fgm
 {
-
     /*************************************
      *                                   *
      *            INITIALIZERS           *
@@ -197,7 +195,6 @@ namespace fgm
     template <Arithmetic U>
     constexpr bool Vector2D<T>::allEq(const Vector2D<U>& rhs, const double epsilon) const noexcept
     {
-
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
         {
             return _data[0] == rhs[0] && _data[1] == rhs[1];
@@ -205,9 +202,9 @@ namespace fgm
         else
         /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
         {
-            // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
-            // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
-            // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+// MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+// To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+// if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
             if (std::is_constant_evaluated())
             {
@@ -319,8 +316,6 @@ namespace fgm
     {
         return lhs.neq(rhs, epsilon);
     }
-
-
 
 
     /***************************************
@@ -443,8 +438,6 @@ namespace fgm
 #endif
 
 
-
-
     /***************************************
      *                                     *
      *      BOOLEAN BITWISE OPERATORS      *
@@ -491,8 +484,6 @@ namespace fgm
     {
         return Vector2D(!_data[0], !_data[1]);
     }
-
-
 
 
     /*************************************
@@ -709,8 +700,6 @@ namespace fgm
     }
 
 
-
-
     /*************************************
      *                                   *
      *        VECTOR DOT PRODUCT         *
@@ -748,8 +737,6 @@ namespace fgm
     }
 
 
-
-
     /*************************************
      *                                   *
      *       VECTOR CROSS PRODUCT        *
@@ -771,8 +758,6 @@ namespace fgm
     {
         return lhs.cross(rhs);
     }
-
-
 
 
     /*************************************
@@ -880,7 +865,6 @@ namespace fgm
     }
 
 
-
     /*************************************
      *                                   *
      *        VECTOR PROJECTION          *
@@ -889,15 +873,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::project(const Vector2D<U>& onto, const bool ontoNormalized) const noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::project(const Vector2D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        if (ontoNormalized)
-        {
-            return this->dot(onto) * onto; // a.dot(b) * b
-        }
 
         /** @note Static cast ensures integral type dots don't lose much precision */
         return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
@@ -906,12 +885,28 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::project(const Vector2D& vec, const Vector2D<U>& onto,
-                                        const bool ontoNormalized) noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::projectNorm(const Vector2D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        return vec.project(onto, ontoNormalized);
+        return this->dot(onto) * onto; // a.dot(b) * b
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::project(const Vector2D& vec, const Vector2D<U>& onto) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.project(onto);
+    }
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::projectNorm(const Vector2D& vec,
+                                                                   const Vector2D<U>& onto) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.projectNorm(onto);
     }
 
 
@@ -1004,7 +999,6 @@ namespace fgm
 
 
 
-
     /*************************************
      *                                   *
      *         VECTOR REJECTION          *
@@ -1013,22 +1007,38 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::reject(const Vector2D<U>& from, const bool fromNormalized) const noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::reject(const Vector2D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
-        return *this - this->project(from, fromNormalized);
+        return *this - this->project(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::reject(const Vector2D& vector, const Vector2D<U>& from,
-                                       const bool fromNormalized) noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::rejectNorm(const Vector2D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
-        return vector.reject(from, fromNormalized);
+        return *this - this->projectNorm(from);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::reject(const Vector2D& vector, const Vector2D<U>& from) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.reject(from);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::rejectNorm(const Vector2D& vector,
+                                                                  const Vector2D<U>& from) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.rejectNorm(from);
     }
 
 
@@ -1085,8 +1095,6 @@ namespace fgm
     }
 
 
-
-
     /**************************************
      *                                    *
      *             UTILITIES              *
@@ -1133,7 +1141,6 @@ namespace fgm
     {
         return vec.hasNaN();
     }
-
 } // namespace fgm
 
 #if defined(__clang__)

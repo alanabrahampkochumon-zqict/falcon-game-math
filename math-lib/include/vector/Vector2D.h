@@ -29,13 +29,11 @@
 #include <type_traits>
 
 
-
 namespace fgm
 {
     template <Arithmetic T>
     struct Vector2D
     {
-
         /**
          * @addtogroup FGM_Vec2_Members
          * @{
@@ -46,8 +44,6 @@ namespace fgm
         static constexpr std::size_t dimension = 2; ///< The number of components of the vector.
 
         /** @} */
-
-
 
 
         /**
@@ -79,7 +75,6 @@ namespace fgm
         [[nodiscard]] constexpr Vector2D(const Vector2D<U>& other) noexcept;
 
         /** @} */
-
 
 
         /**
@@ -218,7 +213,6 @@ namespace fgm
         /** @} */
 
 
-
         /**
          * @addtogroup FGM_Vec3_Swizzle
          * @{
@@ -262,7 +256,6 @@ namespace fgm
         static constexpr auto swizzle(const Vector2D& vec) noexcept;
 
         /** @} */
-
 
 
         /**
@@ -473,7 +466,6 @@ namespace fgm
         /** @} */
 
 
-
         /**
          * @addtogroup FGM_Vec2_Comparison
          * @{
@@ -648,8 +640,6 @@ namespace fgm
         /** @} */
 
 
-
-
         /**
          * @addtogroup FGM_Vec2_Bitwise
          * @{
@@ -723,7 +713,6 @@ namespace fgm
             requires std::is_same_v<T, bool>;
 
         /** @} */
-
 
 
         /**
@@ -986,7 +975,6 @@ namespace fgm
         /** @} */
 
 
-
         /**
          * @addtogroup FGM_Vec2_Product
          * @{
@@ -1034,7 +1022,6 @@ namespace fgm
         [[nodiscard]] constexpr static auto dot(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
             -> std::common_type_t<T, U>
             requires StrictArithmetic<T>;
-
 
 
         /*************************************
@@ -1231,7 +1218,6 @@ namespace fgm
         /** @} */
 
 
-
         /**
          * @addtogroup FGM_Vec2_Proj
          * @{
@@ -1250,17 +1236,36 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] onto           The vector to project onto.
-         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector2D.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto project(const Vector2D<U>& onto, bool ontoNormalized = false) const noexcept
-            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> project(const Vector2D<U>& onto) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Project this vector onto another **unit** vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p onto is normalized. If not, use @ref project.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] onto           The vector to project onto.
+         *
+         * @return The projected @ref Vector2D.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> projectNorm(const Vector2D<U>& onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1271,19 +1276,40 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec            The vector to project.
          * @param[in] onto           The vector to project onto.
-         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector2D.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto project(const Vector2D& vec, const Vector2D<U>& onto,
-                                                    bool ontoNormalized = false) noexcept
-            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> project(const Vector2D& vec,
+                                                                           const Vector2D<U>& onto) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Project a vector onto another **unit** vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p onto is normalized. If not, use @ref project.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to project.
+         * @param[in] onto           The vector to project onto.
+         *
+         * @return The projected @ref Vector2D.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> projectNorm(const Vector2D& vec,
+                                                                               const Vector2D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1384,7 +1410,6 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-
         /*************************************
          *                                   *
          *         VECTOR REJECTION          *
@@ -1398,17 +1423,36 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] from           The vector to reject from.
-         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector2D component.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto reject(const Vector2D<U>& from, bool fromNormalized = false) const noexcept
-            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> reject(const Vector2D<U>& from) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the vector rejection of this vector from **unit** another.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p from is normalized. If not, use @ref reject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] from           The vector to reject from.
+         *
+         * @return The perpendicular @ref Vector2D component.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> rejectNorm(const Vector2D<U>& from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1419,19 +1463,40 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vector         The vector to be rejected.
          * @param[in] from           The vector to reject from.
-         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector2D component.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto reject(const Vector2D& vector, const Vector2D<U>& from,
-                                                   bool fromNormalized = false) noexcept
-            -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> reject(const Vector2D& vector,
+                                                                          const Vector2D<U>& from) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the vector rejection of a vector from another **unit** vector.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p from is normalized. If not, use @ref reject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vector         The vector to be rejected.
+         * @param[in] from           The vector to reject from.
+         *
+         * @return The perpendicular @ref Vector2D component.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> rejectNorm(const Vector2D& vector,
+                                                                          const Vector2D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1536,7 +1601,6 @@ namespace fgm
         /** @} */
 
 
-
         /**
          * @addtogroup FGM_Vec2_Utils
          * @{
@@ -1588,7 +1652,6 @@ namespace fgm
         /** @} */
 
 
-
         /**
          * @addtogroup FGM_Vec2_Log
          * @{
@@ -1627,7 +1690,6 @@ namespace fgm
     };
 
 
-
     /*************************************
      *                                   *
      *       NON-MEMBER FUNCTIONS        *
@@ -1661,7 +1723,6 @@ namespace fgm
     /** @} */
 
 
-
     /**
      * @addtogroup FGM_Vec2_Alias
      * @{
@@ -1684,7 +1745,6 @@ namespace fgm
     /** @} */
 
 
-
     /**
      * @addtogroup FGM_Vec2_Const
      * @{
@@ -1698,7 +1758,6 @@ namespace fgm
 
     namespace vec2d
     {
-
         /**
          * @brief A 2D vector with all components set to one (1, 1).
          *
@@ -1755,8 +1814,6 @@ namespace fgm
         /** @brief A 2D unit vector aligned with the positive Y-axis (0, 1). */
         template <StrictArithmetic T>
         inline constexpr Vector2D<T> y = Vector2D<T>(T(0), T(1));
-
-
     } // namespace vec2d
 
 
@@ -1765,8 +1822,6 @@ namespace fgm
     Vector2D(T, T) -> Vector2D<T>;
 
     /** @} */
-
-
 } // namespace fgm
 
 
