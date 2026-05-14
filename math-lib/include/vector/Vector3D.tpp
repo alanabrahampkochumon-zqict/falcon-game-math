@@ -1213,7 +1213,7 @@ namespace fgm
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeReject(const Vector3D& vec, const Vector3D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.safeProject(from);
+        return vec.safeReject(from);
     }
 
 
@@ -1223,7 +1223,7 @@ namespace fgm
                                                                       const Vector3D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.safeProjectNorm(from);
+        return vec.safeRejectNorm(from);
     }
 
 
