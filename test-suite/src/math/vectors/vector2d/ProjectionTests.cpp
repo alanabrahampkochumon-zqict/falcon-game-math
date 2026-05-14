@@ -192,8 +192,8 @@ TEST(Vector2DProjection, MixedTypeProjectionPromotesType)
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector2D::projectNorm
- *       returns a non-zero vector.
+ * @test Verify that projecting onto a non-orthogonal unit vector using static variant of 
+ *       @ref fgm::Vector2D::projectNorm returns a non-zero vector.
  */
 TEST(Vector2DProjection, StaticWrapper_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
@@ -401,6 +401,7 @@ TEST(Vector2DProjection, StaticWrapper_SafeProjectNorm_NaNVectorReturnsNonZeroVe
     EXPECT_VEC_ZERO(actualProjection);
 }
 
+
 /**
  * @test Verify that projecting onto a NaN vector using static variant of
  *       @ref fgm::Vector2D::safeProjectNorm returns a zero vector.
@@ -605,6 +606,7 @@ TEST(Vector2DProjection, TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrect
     // And sets the flag to NANOPERAND
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
+
 
 /**
  * @test Verify that projecting a vector onto a NaN vector using @ref fgm::Vector2D::tryProjectNorm

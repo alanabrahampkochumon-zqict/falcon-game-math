@@ -669,6 +669,7 @@ TEST(Vector2DRejection, TryRejectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectSt
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
+
 /**
  * @test Verify that safely rejecting from an NaN vector using @ref fgm::Vector2D::tryRejectNorm
  *       returns a zero vector and sets flag to @ref fgm::OperationStatus::NANOPERAND.
@@ -821,6 +822,7 @@ TEST(Vector2DRejection, StaticWrapper_TryRejectNorm_NaNVectorReturnsZeroVectorAn
     EXPECT_VEC_ZERO(actualRejection);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
+
 
 /**
  * @test Verify that safely rejecting from an NaN vector using static variant of @ref fgm::Vector2D::tryRejectNorm

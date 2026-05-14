@@ -174,8 +174,8 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_NonOrthogonalProjectionReturnsNonZe
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::project with the
- *       @p ontoNormalized flag enabled returns a non-zero vector.
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::projectNorm
+ *       returns a non-zero vector.
  */
 TEST(Vector4DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
@@ -185,7 +185,7 @@ TEST(Vector4DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
     const fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vector4D actualProjection = a.project(b, true);
+    const fgm::Vector4D actualProjection = a.projectNorm(b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -232,6 +232,26 @@ TEST(Vector4DProjection, MixedTypeProjectionPromotesType)
 }
 
 
+/**
+ * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
+ *       @ref fgm::Vector4D::projectNorm returns a non-zero vector.
+ */
+TEST(Vector4DProjection, StaticWrapper_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    const fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
+
+    // When the vector is projected onto the normalized vector
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::projectNorm(a, b);
+
+    // Then, the resultant vector has components that is parallel to the projected vector
+    EXPECT_VEC_EQ(expectedProjection, actualProjection);
+}
+
+
+
 /** @test Verify that projection using @ref fgm::Vector4D::project always return floating-point vector. */
 TYPED_TEST(Vector4DProjection, Project_AlwaysReturnFloatingPointVector)
 {
@@ -270,10 +290,10 @@ TYPED_TEST(Vector4DProjection, SafeProject_NonOrthogonalProjectionReturnsNonZero
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProject with the
- *       @p ontoNormalized flag enabled returns a non-zero vector.
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
+ *       returns a non-zero vector.
  */
-TEST(Vector4DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
+TEST(Vector4DProjection, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
     const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
@@ -281,10 +301,45 @@ TEST(Vector4DProjection, SafeProject_ProjectionOntoNormalizedVectorReturnsNonZer
     const fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vector4D actualProjection = a.safeProject(b, true);
+    const fgm::Vector4D actualProjection = a.safeProjectNorm(b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
+}
+
+
+/**
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
+ *       returns a zero vector.
+ */
+TEST(Vector4DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
+{
+    // Given a NaN vector and a normalized vector
+    const fgm::Vector4D a(1.0f, fgm::constants::NaN, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+
+    // When the vector is projected onto the normalized vector
+    const fgm::Vector4D actualProjection = a.safeProjectNorm(b);
+
+    // Then, the resultant vector is a zero vector
+    EXPECT_VEC_ZERO(actualProjection);
+}
+
+/**
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
+ *       returns a zero vector.
+ */
+TEST(Vector4DProjection, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, fgm::constants::NaN, 0.0f, 0.0f);
+
+    // When the vector is projected onto the normalized vector
+    const fgm::Vector4D actualProjection = a.safeProjectNorm(b);
+
+    // Then, the resultant vector is a zero vector
+    EXPECT_VEC_ZERO(actualProjection);
 }
 
 
@@ -355,7 +410,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_NonOrthogonalProjection
 
 /**
  * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
- *       @ref fgm::Vector4D::safeProject with the @p ontoNormalized flag enabled returns a non-zero vector.
+ *       @ref fgm::Vector4D::safeProjectNorm returns a non-zero vector.
  */
 TEST(Vector4DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
@@ -365,10 +420,46 @@ TEST(Vector4DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVecto
     const fgm::Vector4D expectedProjection(1.0f, 0.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProject(a, b, true);
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProjectNorm(a, b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
+}
+
+
+/**
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
+ *       @ref fgm::Vector4D::safeProjectNorm returns a zero vector.
+ */
+TEST(Vector4DProjection, StaticWrapper_SafeProjectNorm_NaNVectorReturnsNonZeroVector)
+{
+    // Given a NaN vector
+    const fgm::Vector4D a(1.0f, fgm::constants::NaN, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+
+    // When the vector is projected onto the normalized vector
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProjectNorm(a, b);
+
+    // Then, the resultant vector is a zero vector
+    EXPECT_VEC_ZERO(actualProjection);
+}
+
+
+/**
+ * @test Verify that projecting onto a NaN vector using static variant of
+ *       @ref fgm::Vector4D::safeProjectNorm returns a zero vector.
+ */
+TEST(Vector4DProjection, StaticWrapper_SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
+{
+    // Given an arbitrary vector
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, fgm::constants::NaN, 0.0f, 0.0f);
+
+    // When the vector is from a NaN vector
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::safeProjectNorm(a, b);
+
+    // Then, the resultant vector is a zero vector
+    EXPECT_VEC_ZERO(actualProjection);
 }
 
 
@@ -515,12 +606,13 @@ TYPED_TEST(Vector4DProjection, TryProject_NonOrthogonalProjectionReturnsNonZeroV
     EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
+
+
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::tryProject with the
- *       @p ontoNormalized flag enabled returns a non-zero vector and
- *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::tryProjectNorm
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST(Vector4DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
+TEST(Vector4DProjection, TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
     const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
@@ -529,7 +621,7 @@ TEST(Vector4DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZero
     fgm::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vector4D actualProjection = a.tryProject(b, flag, true);
+    const fgm::Vector4D actualProjection = a.tryProjectNorm(b, flag);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -539,11 +631,53 @@ TEST(Vector4DProjection, TryProject_ProjectionOntoNormalizedVectorReturnsNonZero
 
 
 /**
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::tryProjectNorm
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector4DProjection, TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector4D a(fgm::constants::NaN, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+    // When the vector is projected onto the normalized vector
+    const fgm::Vector4D actualProjection = a.tryProjectNorm(b, flag);
+
+    // Then, the resultant vector is a zero vector.
+    EXPECT_VEC_ZERO(actualProjection);
+    // And sets the flag to NANOPERAND
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
+ * @test Verify that projecting a vector onto a NaN vector using @ref fgm::Vector4D::tryProjectNorm
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector4DProjection, TryProjectNorm_VectorProjectedOntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, fgm::constants::NaN, 0.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+    // When the vector is projected onto the normalized vector
+    const fgm::Vector4D actualProjection = a.tryProjectNorm(b, flag);
+
+    // Then, the resultant vector is a zero vector.
+    EXPECT_VEC_ZERO(actualProjection);
+    // And sets the flag to NANOPERAND
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+
+/**
  * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using @ref fgm::Vector4D::tryProject returns a non-zero vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TEST(Vector4DProjection, TryProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
+TEST(Vector4DProjection, TryProjectNorm_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
     const fgm::Vector4D a(4.0f, 4.0f, 4.0f, 4.0f);
@@ -622,7 +756,8 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_NonOrthogonalProjectionR
  *       @ref fgm::Vector4D::tryProject with the @p ontoNormalized flag enabled returns a non-zero vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TEST(Vector4DProjection, StaticWrapper_TryProject_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
+TEST(Vector4DProjection,
+     StaticWrapper_TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
     const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
@@ -631,13 +766,56 @@ TEST(Vector4DProjection, StaticWrapper_TryProject_ProjectionOntoNormalizedVector
     fgm::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::tryProject(a, b, flag, true);
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::tryProjectNorm(a, b, flag);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
+
+
+/**
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
+ *       @ref fgm::Vector4D::tryProjectNorm returns a zero vector and sets the flag to
+ *       @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector4DProjection, StaticWrapper_TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    // Given an arbitrary vector and a NaN vector
+    const fgm::Vector4D a(fgm::constants::NaN, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, 0.0f, 0.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+    // When the vector is projected onto the NaN vector
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::tryProjectNorm(a, b, flag);
+
+    // Then, the resultant vector is a zero vector.
+    EXPECT_VEC_ZERO(actualProjection);
+    // And sets the flag to NANOPERAND
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+/**
+ * @test Verify that projecting a vector onto a NaN vector using static variant of @ref fgm::Vector4D::tryProjectNorm
+ *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector4DProjection, StaticWrapper_TryProjectNorm_VectorProjectedOntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+{
+    // Given an arbitrary vector and a NaN vector
+    const fgm::Vector4D a(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Vector4D b(1.0f, fgm::constants::NaN, 0.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+    // When the vector is projected onto the NaN vector
+    const fgm::Vector4D actualProjection = fgm::Vector4D<float>::tryProjectNorm(a, b, flag);
+
+    // Then, the resultant vector is a zero vector.
+    EXPECT_VEC_ZERO(actualProjection);
+    // And sets the flag to NANOPERAND
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
 
 
 /**

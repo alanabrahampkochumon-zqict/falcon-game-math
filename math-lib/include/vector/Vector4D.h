@@ -1312,7 +1312,7 @@ namespace fgm
          * @{
          */
 
-        /*************************************
+         /*************************************
          *                                   *
          *        VECTOR PROJECTION          *
          *                                   *
@@ -1325,17 +1325,36 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] onto           The vector to project onto.
-         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto project(const Vector4D<U>& onto, bool ontoNormalized = false) const noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> project(const Vector4D<U>& onto) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Project this vector onto another **unit** vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p onto is normalized. If not, use @ref project.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] onto           The vector to project onto.
+         *
+         * @return The projected @ref Vector4D.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> projectNorm(const Vector4D<U>& onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1346,19 +1365,40 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec            The vector to project.
          * @param[in] onto           The vector to project onto.
-         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector4D.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto project(const Vector4D& vec, const Vector4D<U>& onto,
-                                                    bool ontoNormalized = false) noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> project(const Vector4D& vec,
+                                                                           const Vector4D<U>& onto) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Project a vector onto another **unit** vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p onto is normalized. If not, use @ref project.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to project.
+         * @param[in] onto           The vector to project onto.
+         *
+         * @return The projected @ref Vector4D.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> projectNorm(const Vector4D& vec,
+                                                                               const Vector4D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1369,18 +1409,38 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] onto           The vector to project onto.
-         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto safeProject(const Vector4D<U>& onto, bool ontoNormalized = false) const noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> safeProject(const Vector4D<U>& onto) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project this vector onto another **unit** vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] onto           The vector to project onto.
+         *
+         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> safeProjectNorm(const Vector4D<U>& onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1391,20 +1451,42 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec            The vector to project.
          * @param[in] onto           The vector to project onto.
-         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto safeProject(const Vector4D& vec, const Vector4D<U>& onto,
-                                                        bool ontoNormalized = false) noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> safeProject(const Vector4D& vec,
+                                                                               const Vector4D<U>& onto) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project a vector onto another **unit** vector.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to project.
+         * @param[in] onto           The vector to project onto.
+         *
+         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> safeProjectNorm(const Vector4D& vec,
+                                                                                   const Vector4D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1415,21 +1497,45 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] onto           The vector to project onto.
          * @param[out] status        The status flag to store the status of the current operation result.
          *                           For details on status codes see @ref OperationStatus.
-         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto tryProject(const Vector4D<U>& onto, OperationStatus& status,
-                                                bool ontoNormalized = false) const noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> tryProject(const Vector4D<U>& onto,
+                                                                       OperationStatus& status) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project this vector onto another **unit** vector and set @p status to the projection operation
+         *        result.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] onto           The vector to project onto.
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         *
+         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
+         *         vector has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> tryProjectNorm(const Vector4D<U>& onto,
+                                                                           OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1440,6 +1546,7 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -1447,16 +1554,43 @@ namespace fgm
          * @param[in] onto           The vector to project onto.
          * @param[out] status        The status flag to store the status of the current operation result.
          *                           For details on status codes see @ref OperationStatus.
-         * @param[in] ontoNormalized Optimization flag. Set to `true` if @p onto is already a unit vector.
          *
          * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto tryProject(const Vector4D& vec, const Vector4D<U>& onto,
-                                                       OperationStatus& status, bool ontoNormalized = false) noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> tryProject(const Vector4D& vec,
+                                                                              const Vector4D<U>& onto,
+                                                                              OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely project a vector onto another **unit** vector and set @p status to the projection operation
+         *        result.
+         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
+         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to project.
+         * @param[in] onto           The vector to project onto.
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         *
+         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
+         *         vector has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> tryProjectNorm(const Vector4D& vec,
+                                                                                  const Vector4D<U>& onto,
+                                                                                  OperationStatus& status) noexcept
+            requires StrictArithmetic<T>;
+
 
 
         /*************************************
@@ -1472,17 +1606,36 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] from           The vector to reject from.
-         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto reject(const Vector4D<U>& from, bool fromNormalized = false) const noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> reject(const Vector4D<U>& from) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the vector rejection of this vector from **unit** another.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p from is normalized. If not, use @ref reject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] from           The vector to reject from.
+         *
+         * @return The perpendicular @ref Vector4D component.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> rejectNorm(const Vector4D<U>& from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1493,19 +1646,40 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vector         The vector to be rejected.
          * @param[in] from           The vector to reject from.
-         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto reject(const Vector4D& vector, const Vector4D<U>& from,
-                                                   bool fromNormalized = false) noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> reject(const Vector4D& vector,
+                                                                          const Vector4D<U>& from) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the vector rejection of a vector from another **unit** vector.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p from is normalized. If not, use @ref reject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vector         The vector to be rejected.
+         * @param[in] from           The vector to reject from.
+         *
+         * @return The perpendicular @ref Vector4D component.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> rejectNorm(const Vector4D& vector,
+                                                                              const Vector4D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1516,18 +1690,38 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] from           The vector to reject from.
-         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto safeReject(const Vector4D<U>& from, bool fromNormalized = false) const noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> safeReject(const Vector4D<U>& from) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute rejection of this vector from another **unit** vector.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] from           The vector to reject from.
+         *
+         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> safeRejectNorm(const Vector4D<U>& from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1538,20 +1732,42 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec            The vector to reject.
          * @param[in] from           The vector to reject from.
-         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto safeReject(const Vector4D& vec, const Vector4D<U>& from,
-                                                       bool fromNormalized = false) noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> safeReject(const Vector4D& vec,
+                                                                              const Vector4D<U>& from) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute rejection of a vector from another **unit** vector.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to reject.
+         * @param[in] from           The vector to reject from.
+         *
+         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> safeRejectNorm(const Vector4D& vec,
+                                                                                  const Vector4D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1563,21 +1779,47 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] from           The vector to reject from
          * @param[out] status        The status flag to store the status of the current operation result.
          *                           For details on status codes see @ref OperationStatus.
-         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto tryReject(const Vector4D<U>& from, OperationStatus& status,
-                                               bool fromNormalized = false) const noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> tryReject(const Vector4D<U>& from,
+                                                                      OperationStatus& status) const noexcept
+            requires StrictArithmetic<T>;
+
+
+
+
+        /**
+         * @brief Safely compute rejection of this vector from another vector and
+         *        set @p status to the result of rejection operation.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] from           The vector to reject from
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         *
+         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> tryRejectNorm(const Vector4D<U>& from,
+                                                                          OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1589,6 +1831,7 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -1596,15 +1839,41 @@ namespace fgm
          * @param[in] from           The vector to reject from.
          * @param[out] status        The status flag to store the status of the current operation result.
          *                           For details on status codes see @ref OperationStatus.
-         * @param[in] fromNormalized Optimization flag. Set to `true` if @p from is already a unit vector.
          *
          * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto tryReject(const Vector4D& vec, const Vector4D<U>& from,
-                                                      OperationStatus& status, bool fromNormalized = false) noexcept
-            -> Vector4D<Magnitude<std::common_type_t<T, U>>>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> tryReject(const Vector4D& vec,
+                                                                             const Vector4D<U>& from,
+                                                                             OperationStatus& status) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Safely compute rejection of a vector from another **unit** vector and
+         *        set @p status to the result of rejection operation.
+         *        Compute the component of the vector perpendicular to @p onto:
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec            The vector to reject.
+         * @param[in] from           The vector to reject from.
+         * @param[out] status        The status flag to store the status of the current operation result.
+         *                           For details on status codes see @ref OperationStatus.
+         *
+         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector4D<T, U> tryRejectNorm(const Vector4D& vec,
+                                                                                 const Vector4D<U>& from,
+                                                                                 OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
