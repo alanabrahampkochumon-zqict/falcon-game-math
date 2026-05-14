@@ -289,7 +289,7 @@ TYPED_TEST(Vector2DRejection, SafeReject_NonOrthogonalRejectionReturnsNonZeroVec
  * @test Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector2D::safeRejectNorm
  *       returns a non-zero vector with perpendicular component.
  */
-TEST(Vector2DRejection, SafeReject_FromNormalizedVectorReturnsNonZeroVector)
+TEST(Vector2DRejection, SafeRejectNorm_FromNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
     const fgm::Vector2D a(1.0f, 2.0f);
@@ -303,12 +303,46 @@ TEST(Vector2DRejection, SafeReject_FromNormalizedVectorReturnsNonZeroVector)
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
 }
 
+/**
+ * @test Verify that safely rejecting a NaN vector from a non-orthogonal unit vector using
+ *       @ref fgm::Vector2D::safeRejectNorm returns a zero vector.
+ */
+TEST(Vector2DRejection, SafeRejectNorm_NaNVectorReturnsNonZeroVector)
+{
+    // Given a NaN vector
+    const fgm::Vector2D a(1.0f, fgm::constants::NaN);
+    const fgm::Vector2D b(1.0f, 0.0f);
+
+    // When the vector is rejected onto the normalized vector
+    const fgm::Vector2D actualRejection = a.safeRejectNorm(b);
+
+    // Then, the resultant vector is a zero vector
+    EXPECT_VEC_ZERO(actualRejection);
+}
+
 
 /**
- * @test Verify that safely rejecting from an orthogonal unit vector using static variant of 
+ * @test Verify that safely rejecting from a NaN vector using @ref fgm::Vector2D::safeRejectNorm returns a zero vector.
+ */
+TEST(Vector2DRejection, SafeRejectNorm_FromNaNVectorReturnsNonZeroVector)
+{
+    // Given an arbitrary vector
+    const fgm::Vector2D a(1.0f, 2.0f);
+    const fgm::Vector2D b(1.0f, fgm::constants::NaN);
+
+    // When the vector is rejected from a NaN vector
+    const fgm::Vector2D actualRejection = a.safeRejectNorm(b);
+
+    // Then, the resultant vector is a zero vector
+    EXPECT_VEC_ZERO(actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting from an orthogonal unit vector using static variant of
  *       @ref fgm::Vector2D::safeRejectNorm returns a non-zero vector with perpendicular component.
  */
-TEST(Vector2DRejection, StaticWrapper_SafeReject_FromNormalizedVectorReturnsNonZeroVector)
+TEST(Vector2DRejection, StaticWrapper_SafeRejectNorm_FromNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
     const fgm::Vector2D a(1.0f, 2.0f);
@@ -316,10 +350,46 @@ TEST(Vector2DRejection, StaticWrapper_SafeReject_FromNormalizedVectorReturnsNonZ
     const fgm::Vector2D expectedRejection(0.0f, 2.0f);
 
     // When rejected from another
-    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::rejectNorm(a, b);
+    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::safeRejectNorm(a, b);
 
     // Then, the resultant vector has components perpendicular to the `from` vector.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting a NaN vector from a non-orthogonal unit vector using static variant of
+ *       @ref fgm::Vector2D::safeRejectNorm returns a zero vector.
+ */
+TEST(Vector2DRejection, StaticWrapper_SafeRejectNorm_NaNVectorReturnsNonZeroVector)
+{
+    // Given a NaN vector
+    const fgm::Vector2D a(1.0f, fgm::constants::NaN);
+    const fgm::Vector2D b(1.0f, 0.0f);
+
+    // When the vector is rejected onto the normalized vector
+    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::safeRejectNorm(a, b);
+
+    // Then, the resultant vector is a zero vector
+    EXPECT_VEC_ZERO(actualRejection);
+}
+
+
+/**
+ * @test Verify that safely rejecting from a NaN vector using static variant of
+ *       @ref fgm::Vector2D::safeRejectNorm returns a zero vector.
+ */
+TEST(Vector2DRejection, StaticWrapper_SafeRejectNorm_FromNaNVectorReturnsNonZeroVector)
+{
+    // Given an arbitrary vector
+    const fgm::Vector2D a(1.0f, 2.0f);
+    const fgm::Vector2D b(1.0f, fgm::constants::NaN);
+
+    // When the vector is rejected from a NaN vector
+    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::safeRejectNorm(a, b);
+
+    // Then, the resultant vector is a zero vector
+    EXPECT_VEC_ZERO(actualRejection);
 }
 
 
@@ -545,7 +615,7 @@ TEST(Vector2DRejection, TryReject_OrthogonalRejectionReturnsOriginalVectorAndSet
 
 /**
  * @test Verify that safely rejecting from a non-orthogonal vector using @ref fgm::Vector2D::tryReject
- *       returns a non-zero vector with perpendicular component sets flag to @ref fgm::OperationStatus::SUCCESS.
+ *       returns a non-zero vector with perpendicular and component sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vector2DRejection, TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
 {
@@ -558,11 +628,10 @@ TYPED_TEST(Vector2DRejection, TryReject_NonOrthogonalRejectionReturnsNonZeroVect
 
 
 /**
- * @test Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector2D::tryReject with the
- *       @p fromNormalized flag enabled returns a non-zero vector with perpendicular component
- *       sets flag to @ref fgm::OperationStatus::SUCCESS.
+ * @test Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector2D::tryRejectNorm
+ *       returns a non-zero vector and with perpendicular component sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TEST(Vector2DRejection, TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+TEST(Vector2DRejection, TryRejectNorm_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
 {
     // Given an arbitrary vector and a normalized vector
     const fgm::Vector2D a(1.0f, 2.0f);
@@ -572,11 +641,52 @@ TEST(Vector2DRejection, TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSet
 
 
     // When rejected from another
-    const fgm::Vector2D actualRejection = a.tryReject(b, flag, true);
+    const fgm::Vector2D actualRejection = a.tryRejectNorm(b, flag);
 
     // Then, the resultant vector has components perpendicular to the `from` vector.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+
+/**
+ * @test Verify that safely rejecting NaN vector from an orthogonal unit vector using @ref fgm::Vector2D::tryRejectNorm
+ *       returns a zero vector and sets flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector2DRejection, TryRejectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectStatusFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector2D a(1.0f, fgm::constants::NaN);
+    const fgm::Vector2D b(1.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+
+    // When rejected from another
+    const fgm::Vector2D actualRejection = a.tryRejectNorm(b, flag);
+
+    // Then, the resultant vector has components perpendicular to the `from` vector.
+    EXPECT_VEC_ZERO(actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+/**
+ * @test Verify that safely rejecting from an NaN vector using @ref fgm::Vector2D::tryRejectNorm
+ *       returns a zero vector and sets flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector2DRejection, TryRejectNorm_FromNaNVectorReturnsZeroVectorAndSetsCorrectStatusFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector2D a(1.0f, 2.0f);
+    const fgm::Vector2D b(1.0f, fgm::constants::NaN);
+    fgm::OperationStatus flag;
+
+
+    // When rejected from another
+    const fgm::Vector2D actualRejection = a.tryRejectNorm(b, flag);
+
+    // Then, the resultant vector has components perpendicular to the `from` vector.
+    EXPECT_VEC_ZERO(actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
 
@@ -672,10 +782,10 @@ TYPED_TEST(Vector2DRejection,
 
 /**
  * @test Verify that safely rejecting from an orthogonal unit vector using static variant of
- *       @ref fgm::Vector2D::tryReject with the @p fromNormalized flag enabled returns a non-zero vector with
- *       perpendicular component and sets flag to @ref fgm::OperationStatus::SUCCESS.
+ *       @ref fgm::Vector2D::tryRejectNorm returns a non-zero vector and with perpendicular component sets flag to
+ *       @ref fgm::OperationStatus::SUCCESS.
  */
-TEST(Vector2DRejection, StaticWrapper_TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+TEST(Vector2DRejection, StaticWrapper_TryRejectNorm_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
 {
     // Given an arbitrary vector and a normalized vector
     const fgm::Vector2D a(1.0f, 2.0f);
@@ -683,13 +793,53 @@ TEST(Vector2DRejection, StaticWrapper_TryReject_FromNormalizedVectorReturnsNonZe
     const fgm::Vector2D expectedRejection(0.0f, 2.0f);
     fgm::OperationStatus flag;
 
+
     // When rejected from another
-    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::tryReject(a, b, flag, true);
+    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::tryRejectNorm(a, b, flag);
 
     // Then, the resultant vector has components perpendicular to the `from` vector.
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
-    // Flag is set to SUCCESS
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+}
+
+/**
+ * @test Verify that safely rejecting NaN vector from an orthogonal unit vector using static variant of
+ *       @ref fgm::Vector2D::tryRejectNorm returns a zero vector and sets flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector2DRejection, StaticWrapper_TryRejectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectStatusFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector2D a(1.0f, fgm::constants::NaN);
+    const fgm::Vector2D b(1.0f, 0.0f);
+    fgm::OperationStatus flag;
+
+
+    // When rejected from another
+    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::tryRejectNorm(a, b, flag);
+
+    // Then, the resultant vector has components perpendicular to the `from` vector.
+    EXPECT_VEC_ZERO(actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+}
+
+/**
+ * @test Verify that safely rejecting from an NaN vector using static variant of @ref fgm::Vector2D::tryRejectNorm
+ *       returns a zero vector and sets flag to @ref fgm::OperationStatus::NANOPERAND.
+ */
+TEST(Vector2DRejection, StaticWrapper_TryRejectNorm_FromNaNVectorReturnsZeroVectorAndSetsCorrectStatusFlag)
+{
+    // Given an arbitrary vector and a normalized vector
+    const fgm::Vector2D a(1.0f, 2.0f);
+    const fgm::Vector2D b(1.0f, fgm::constants::NaN);
+    fgm::OperationStatus flag;
+
+
+    // When rejected from another
+    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::tryRejectNorm(a, b, flag);
+
+    // Then, the resultant vector has components perpendicular to the `from` vector.
+    EXPECT_VEC_ZERO(actualRejection);
+    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
 

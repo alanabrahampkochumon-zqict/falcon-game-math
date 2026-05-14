@@ -970,44 +970,50 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::project(const Vector3D<U>& onto, const bool ontoNormalized) const noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::project(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        if (ontoNormalized)
-        {
-            return this->dot(onto) * onto; // a.dot(b) * b
-        }
 
         /** @note Static cast ensures integral type dots don't lose much precision */
         return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
     }
 
-
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::project(const Vector3D& vec, const Vector3D<U>& onto,
-                                        const bool ontoNormalized) noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::projectNorm(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        return vec.project(onto, ontoNormalized);
+        return this->dot(onto) * onto; // a.dot(b) * b
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::safeProject(const Vector3D<U>& onto, const bool ontoNormalized) const noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::project(const Vector3D& vec, const Vector3D<U>& onto) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.project(onto);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::projectNorm(const Vector3D& vec,
+                                                                   const Vector3D<U>& onto) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.projectNorm(onto);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProject(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
         using R       = std::common_type_t<T, U>;
         using MagType = Magnitude<R>;
-        if (ontoNormalized)
-        {
-            return this->dot(onto) * onto;
-        }
 
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
@@ -1025,33 +1031,51 @@ namespace fgm
         return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
     }
 
-
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::safeProject(const Vector3D& vec, const Vector3D<U>& onto,
-                                            const bool ontoNormalized) noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
-        requires StrictArithmetic<T>
-    {
-        return vec.safeProject(onto, ontoNormalized);
-    }
-
-
-    template <Arithmetic T>
-    template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::tryProject(const Vector3D<U>& onto, OperationStatus& status,
-                                           const bool ontoNormalized) const noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
         using R       = std::common_type_t<T, U>;
         using MagType = Magnitude<R>;
 
-        if (ontoNormalized)
+        if (hasNaN() || onto.hasNaN())
         {
-            status = OperationStatus::SUCCESS;
-            return this->dot(onto) * onto;
+            return fgm::vec3d::zero<MagType>;
         }
+        return this->dot(onto) * onto;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProject(const Vector3D& vec,
+                                                                   const Vector3D<U>& onto) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.safeProject(onto);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D& vec,
+                                                                       const Vector3D<U>& onto) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.safeProjectNorm(onto);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryProject(const Vector3D<U>& onto,
+                                                                  OperationStatus& status) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R       = std::common_type_t<T, U>;
+        using MagType = Magnitude<R>;
+
 
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
@@ -1075,14 +1099,41 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::tryProject(const Vector3D& vec, const Vector3D<U>& onto, OperationStatus& status,
-                                           const bool ontoNormalized) noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryProjectNorm(const Vector3D<U>& onto,
+                                                                      OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        return vec.tryProject(onto, status, ontoNormalized);
+        using R       = std::common_type_t<T, U>;
+        using MagType = Magnitude<R>;
+
+        if (hasNaN() | onto.hasNaN())
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec3d::zero<MagType>;
+        }
+        status = OperationStatus::SUCCESS;
+        return this->dot(onto) * onto;
     }
 
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryProject(const Vector3D& vec, const Vector3D<U>& onto,
+                                                                  OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.tryProject(onto, status);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryProjectNorm(const Vector3D& vec, const Vector3D<U>& onto,
+                                                                      OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.tryProjectNorm(onto, status);
+    }
 
 
 
@@ -1094,29 +1145,44 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::reject(const Vector3D<U>& from, const bool fromNormalized) const noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::reject(const Vector3D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
-        return *this - this->project(from, fromNormalized);
+        return *this - this->project(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::reject(const Vector3D& vector, const Vector3D<U>& from,
-                                       const bool fromNormalized) noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::rejectNorm(const Vector3D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
-        return vector.reject(from, fromNormalized);
+        return *this - this->projectNorm(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::safeReject(const Vector3D<U>& from, const bool fromNormalized) const noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::reject(const Vector3D& vector, const Vector3D<U>& from) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.reject(from);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::rejectNorm(const Vector3D& vector,
+                                                                  const Vector3D<U>& from) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.rejectNorm(from);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeReject(const Vector3D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1124,26 +1190,47 @@ namespace fgm
             return fgm::vec3d::zero<std::common_type_t<T, U>>;
         }
 
-        return *this - safeProject(from, fromNormalized);
+        return *this - safeProject(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::safeReject(const Vector3D& vec, const Vector3D<U>& from,
-                                           const bool fromNormalized) noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeRejectNorm(const Vector3D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
-        return vec.safeReject(from, fromNormalized);
+        if (hasNaN() || from.hasNaN())
+        {
+            return fgm::vec3d::zero<std::common_type_t<T, U>>;
+        }
+
+        return *this - safeProjectNorm(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::tryReject(const Vector3D<U>& from, OperationStatus& status,
-                                          bool fromNormalized) const noexcept
-        -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeReject(const Vector3D& vec, const Vector3D<U>& from) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.safeProject(from);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeRejectNorm(const Vector3D& vec,
+                                                                      const Vector3D<U>& from) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.safeProjectNorm(from);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryReject(const Vector3D<U>& from,
+                                                                 OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1152,19 +1239,44 @@ namespace fgm
             return fgm::vec3d::zero<std::common_type_t<T, U>>;
         }
 
-        return *this - this->tryProject(from, status, fromNormalized);
+        return *this - this->tryProject(from, status);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::tryReject(const Vector3D& vec, const Vector3D<U>& from, OperationStatus& status,
-                                          bool fromNormalized) noexcept -> Vector3D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryRejectNorm(const Vector3D<U>& from,
+                                                                     OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        return vec.tryReject(from, status, fromNormalized);
+        if (hasNaN() || from.hasNaN())
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec3d::zero<std::common_type_t<T, U>>;
+        }
+
+        return *this - this->tryProjectNorm(from, status);
     }
 
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryReject(const Vector3D& vec, const Vector3D<U>& from,
+                                                                 OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.tryReject(from, status);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryRejectNorm(const Vector3D& vec, const Vector3D<U>& from,
+                                                                     OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.tryRejectNorm(from, status);
+    }
 
 
 

@@ -974,19 +974,12 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::tryProject(const Vector2D<U>& onto, OperationStatus& status,
-                                           const bool ontoNormalized) const noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryProject(const Vector2D<U>& onto,
+                                                                  OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R       = std::common_type_t<T, U>;
         using MagType = Magnitude<R>;
-
-        if (ontoNormalized)
-        {
-            status = OperationStatus::SUCCESS;
-            return this->dot(onto) * onto;
-        }
 
         /** @note Static cast ensures integral type dots don't lose too much precision. */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
@@ -1010,12 +1003,42 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::tryProject(const Vector2D& vec, const Vector2D<U>& onto, OperationStatus& status,
-                                           const bool ontoNormalized) noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryProjectNorm(const Vector2D<U>& onto,
+                                                                      OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        return vec.tryProject(onto, status, ontoNormalized);
+
+        using R       = std::common_type_t<T, U>;
+        using MagType = Magnitude<R>;
+
+        if (hasNaN() || onto.hasNaN())
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec2d::zero<MagType>;
+        }
+
+        status = OperationStatus::SUCCESS;
+        return this->dot(onto) * onto;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryProject(const Vector2D& vec, const Vector2D<U>& onto,
+                                                                  OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.tryProject(onto, status);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryProjectNorm(const Vector2D& vec, const Vector2D<U>& onto,
+                                                                      OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.tryProjectNorm(onto, status);
     }
 
 
@@ -1112,9 +1135,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::tryReject(const Vector2D<U>& from, OperationStatus& status,
-                                          bool fromNormalized) const noexcept
-        -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryReject(const Vector2D<U>& from,
+                                                                 OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1123,17 +1145,44 @@ namespace fgm
             return fgm::vec2d::zero<std::common_type_t<T, U>>;
         }
 
-        return *this - this->tryProject(from, status, fromNormalized);
+        return *this - this->tryProject(from, status);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::tryReject(const Vector2D& vec, const Vector2D<U>& from, OperationStatus& status,
-                                          bool fromNormalized) noexcept -> Vector2D<Magnitude<std::common_type_t<T, U>>>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryRejectNorm(const Vector2D<U>& from,
+                                                                     OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        return vec.tryReject(from, status, fromNormalized);
+        if (hasNaN() || from.hasNaN())
+        {
+            status = OperationStatus::NANOPERAND;
+            return fgm::vec2d::zero<std::common_type_t<T, U>>;
+        }
+
+        return *this - this->tryProjectNorm(from, status);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryReject(const Vector2D& vec, const Vector2D<U>& from,
+                                                                 OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vec.tryReject(from, status);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryRejectNorm(const Vector2D& vec, const Vector2D<U>& from,
+                                                                     OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    {
+
+        return vec.tryRejectNorm(from, status);
     }
 
 

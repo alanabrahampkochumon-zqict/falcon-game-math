@@ -16,7 +16,8 @@
 
 
 // TODO: Separate into files for concepts and traits.
-namespace fgm {
+namespace fgm
+{
     /**
      * @addtogroup FGM_Concepts
      * @{
@@ -29,7 +30,7 @@ namespace fgm {
      **************************************/
 
     /** @brief Validates that a type is a standard numeric primitive (integral or floating-point). */
-    template<typename T>
+    template <typename T>
     concept Arithmetic = std::integral<T> || std::floating_point<T>;
 
 
@@ -39,7 +40,7 @@ namespace fgm {
      *
      * @note Excludes `bool` type to ensure logical inversions remain separate from algebraic inversions.
      */
-    template<typename T>
+    template <typename T>
     concept SignedStrictArithmetic = (std::signed_integral<T> || std::floating_point<T>) && !std::is_same_v<T, bool>;
 
 
@@ -48,7 +49,7 @@ namespace fgm {
      *
      * @note Prevents logical types from participating in arithmetic operations like addition or division.
      */
-    template<typename T>
+    template <typename T>
     concept StrictArithmetic = Arithmetic<T> && !std::is_same_v<T, bool>;
 
 
@@ -56,8 +57,8 @@ namespace fgm {
      * @brief Detects arithmetic capability after stripping cv-qualifiers and references.
      * @details Uses @ref `std::decay_t` to ensure const T& or T&& types are evaluated by their underlying primitive.
      */
-    template<typename T>
-    concept WeakArithmetic = std::is_arithmetic_v<std::decay_t<T> >;
+    template <typename T>
+    concept WeakArithmetic = std::is_arithmetic_v<std::decay_t<T>>;
 
 
     /**************************************
@@ -67,7 +68,7 @@ namespace fgm {
      **************************************/
 
     /** @brief Centralized value promotion logic for all math types. */
-    template<Arithmetic T, Arithmetic U>
+    template <Arithmetic T, Arithmetic U>
     using PromotedValue_t = std::common_type_t<T, U>;
 
 
@@ -82,11 +83,10 @@ namespace fgm {
      * @details Requires a value_type alias, a static dimension constant, and subscript [] access. The underlying type
      *          must satisfy @ref Arithmetic.
      */
-    template<typename T>
-    concept Vector = requires(T v, std::size_t i)
-    {
+    template <typename T>
+    concept Vector = requires(T v, std::size_t i) {
         typename T::value_type;
-        { T::dimension } -> std::same_as<const std::size_t &>;
+        { T::dimension } -> std::same_as<const std::size_t&>;
         { v[i] } -> std::convertible_to<typename T::value_type>;
     } && Arithmetic<typename T::value_type>;
 
@@ -96,12 +96,11 @@ namespace fgm {
      * @details Enforces a two-dimensional interface including rows and columns constants, as well as both (r, c) and
      *          [c] access patterns.
      */
-    template<typename T>
-    concept Matrix = requires(T matrix, std::size_t r, std::size_t c)
-    {
+    template <typename T>
+    concept Matrix = requires(T matrix, std::size_t r, std::size_t c) {
         typename T::value_type;
-        { T::rows } -> std::same_as<const std::size_t &>;
-        { T::columns } -> std::same_as<const std::size_t &>;
+        { T::rows } -> std::same_as<const std::size_t&>;
+        { T::columns } -> std::same_as<const std::size_t&>;
         { matrix(r, c) } -> std::convertible_to<typename T::value_type>;
         { matrix[c] };
     } && Arithmetic<typename T::value_type>;
@@ -111,7 +110,7 @@ namespace fgm {
      * @brief Determines the optimal high-precision type for length calculations.
      * @note Automatically promotes integral types to double to prevent precision loss during square root operations.
      */
-    template<typename T>
+    template <typename T>
         requires Arithmetic<T>
     using Magnitude = std::conditional_t<std::is_same_v<T, float>, float, double>;
 
@@ -123,79 +122,85 @@ namespace fgm {
      **************************************/
 
     // Forward declarations
-    template<Arithmetic T>
+    template <Arithmetic T>
     struct Vector2D;
 
-    template<Arithmetic T>
+    template <Arithmetic T>
     struct Vector3D;
 
-    template<Arithmetic T>
+    template <Arithmetic T>
     struct Vector4D;
 
-    template<Arithmetic T>
+    template <Arithmetic T>
     struct Matrix2D;
 
-    template<Arithmetic T>
+    template <Arithmetic T>
     struct Matrix3D;
 
-    template<Arithmetic T>
+    template <Arithmetic T>
     struct Matrix4D;
 
 
     /** @brief Alias for @ref Vector2D with promoted value type. */
-    template<Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromotedValue_t<T, U> >
-    using PromotedVector2D = Vector2D<PromotedValue_t<T, U> >;
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedVector2D = Vector2D<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Vector2D with a `value_type` of @ref Magnitude of the wider type. */
-    template<Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromotedValue_t<T, U> >
-    using PromotedFloatVector2D = Vector2D<Magnitude<PromotedValue_t<T, U> > >;
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedFloatVector2D = Vector2D<Magnitude<PromotedValue_t<T, U>>>;
 
 
     /** @brief Alias for @ref Vector3D with promoted value type. */
-    template<Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromotedValue_t<T, U> >
-    using PromotedVector3D = Vector3D<PromotedValue_t<T, U> >;
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedVector3D = Vector3D<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Vector3D with a `value_type` of @ref Magnitude of the wider type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedFloatVector3D = Vector3D<Magnitude<PromotedValue_t<T, U>>>;
 
 
     /** @brief Alias for @ref Vector4D with promoted value type. */
-    template<Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromotedValue_t<T, U> >
-    using PromotedVector4D = Vector4D<PromotedValue_t<T, U> >;
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedVector4D = Vector4D<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Matrix2D with promoted value type. */
-    template<Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromotedValue_t<T, U> >
-    using PromotedMatrix2D = Matrix2D<PromotedValue_t<T, U> >;
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix2D = Matrix2D<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Matrix2D with a `value_type` of @ref Magnitude of the wider type. */
-    template<Arithmetic T, Arithmetic U>
-    using PromotedFloatMatrix2D = Matrix2D<Magnitude<std::common_type_t<T, U> > >;
+    template <Arithmetic T, Arithmetic U>
+    using PromotedFloatMatrix2D = Matrix2D<Magnitude<std::common_type_t<T, U>>>;
 
 
     /** @brief Alias for @ref Matrix3D with promoted value type. */
-    template<Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromotedValue_t<T, U> >
-    using PromotedMatrix3D = Matrix3D<PromotedValue_t<T, U> >;
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix3D = Matrix3D<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Matrix3D with a `value_type` of @ref Magnitude of the wider type. */
-    template<Arithmetic T, Arithmetic U>
-    using PromotedFloatMatrix3D = Matrix3D<Magnitude<std::common_type_t<T, U> > >;
+    template <Arithmetic T, Arithmetic U>
+    using PromotedFloatMatrix3D = Matrix3D<Magnitude<std::common_type_t<T, U>>>;
 
     /** @brief Alias for @ref Matrix4D with promoted value type. */
-    template<Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromotedValue_t<T, U> >
-    using PromotedMatrix4D = Matrix4D<PromotedValue_t<T, U> >;
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix4D = Matrix4D<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Matrix4D with a `value_type` of @ref Magnitude of the wider type. */
-    template<Arithmetic T, Arithmetic U>
-    using PromotedFloatMatrix4D = Matrix4D<Magnitude<std::common_type_t<T, U> > >;
+    template <Arithmetic T, Arithmetic U>
+    using PromotedFloatMatrix4D = Matrix4D<Magnitude<std::common_type_t<T, U>>>;
 
     /** @} */
 } // namespace fgm
