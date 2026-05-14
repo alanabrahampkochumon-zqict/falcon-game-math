@@ -18,8 +18,34 @@
  * @{
  */
 
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that vector conversion constructor is available during compile time. */
+namespace
+{
+    const fgm::Vector2D vecF(3.0f, 1.0f);
+    const fgm::Vector2D<double> vecD(vecF);
+    static_assert(std::is_same_v<decltype(vecD)::value_type, double>);
+
+    const fgm::Vector2D<float> vecF2(vecD);
+    static_assert(std::is_same_v<decltype(vecF2)::value_type, float>);
+
+} // namespace
+
+
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
+
 /**
- * @test Verify that the conversion constructor correctly promotes components from float to double.
+ * @brief Verify that the conversion constructor promotes value type of vector components from float to double.
  */
 TEST(Vector2DConversionConstructor, PromotesType)
 {
@@ -31,7 +57,7 @@ TEST(Vector2DConversionConstructor, PromotesType)
 }
 
 
-/** @test Verify that the conversion constructor ensures deep-copy value semantics. */
+/** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
 TEST(Vector2DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float vector
@@ -51,7 +77,7 @@ TEST(Vector2DConversionConstructor, ReturnsNewInstance)
 
 
 /**
- * @test Verify that the conversion constructor correctly demotes components from double to float.
+ * @brief Verify that the conversion constructor correctly demotes value type of vector components from double to float.
  */
 TEST(Vector2DConversionConstructor, DemotesType)
 {

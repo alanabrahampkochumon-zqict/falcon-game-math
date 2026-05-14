@@ -27,8 +27,6 @@ TYPED_TEST_SUITE(Vector2DInitialization, SupportedTypes);
 
 
 
-
-
 /**
  * @addtogroup T_FGM_Vec2_Init
  * @{
@@ -51,7 +49,6 @@ namespace
 
     static_assert(vec2.x() == 0);
     static_assert(vec2.y() == 0);
-
 
 } // namespace
 
@@ -82,3 +79,5 @@ TYPED_TEST(Vector2DInitialization, ConstructorParametersInitializesVector)
 
     EXPECT_VEC_CONTAINS(vec, a, b);
 }
+
+/** @} */
