@@ -108,6 +108,7 @@ namespace fgm
     template <Arithmetic T, Arithmetic U>
     using PromotedFloatMatrix3D = Matrix3D<Magnitude<std::common_type_t<T, U>>>;
 
+
     /** @brief Alias for @ref Matrix4D with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
