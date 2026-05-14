@@ -27,6 +27,7 @@
 #include "common/Constants.h"
 #include "common/MathTraits.h"
 #include "common/OperationStatus.h"
+#include "common/Types.h"
 
 #include <cstddef>
 #include <iomanip>
@@ -1312,7 +1313,7 @@ namespace fgm
          * @{
          */
 
-         /*************************************
+        /*************************************
          *                                   *
          *        VECTOR PROJECTION          *
          *                                   *

@@ -177,6 +177,12 @@
      * @brief Fundamental mathematical constraints.
      * @ingroup FGM_Math
      */
+
+    /**
+     * @defgroup FGM_Types Type Alias
+     * @brief Extended Type Alias.
+     * @ingroup FGM_Math
+     */
     
     /**
      * @defgroup FGM_Math_Config Library Configuration

@@ -26,6 +26,7 @@
 
 #include "common/Config.h"
 #include "common/MathTraits.h"
+#include "common/Types.h"
 #include "vector/Vector3D.h"
 
 #include <array>

@@ -25,6 +25,7 @@
 
 
 #include "common/MathTraits.h"
+#include "common/Types.h"
 #include "vector/Vector4D.h"
 
 #include <array>

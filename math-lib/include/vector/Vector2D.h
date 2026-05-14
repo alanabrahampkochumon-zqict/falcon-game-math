@@ -24,6 +24,7 @@
 #include "common/Constants.h"
 #include "common/MathTraits.h"
 #include "common/OperationStatus.h"
+#include "common/Types.h"
 
 #include <iomanip>
 #include <type_traits>
