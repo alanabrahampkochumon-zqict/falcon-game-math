@@ -171,6 +171,12 @@ namespace fgm
     using PromotedVector4D = Vector4D<PromotedValue_t<T, U>>;
 
 
+    /** @brief Alias for @ref Vector4D with a `value_type` of @ref Magnitude of the wider type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedFloatVector4D = Vector4D<Magnitude<PromotedValue_t<T, U>>>;
+
+
     /** @brief Alias for @ref Matrix2D with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
