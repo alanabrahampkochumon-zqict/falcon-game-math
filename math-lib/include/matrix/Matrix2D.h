@@ -24,12 +24,11 @@
  */
 
 
-#include "vector/Vector2D.h"
 #include "common/Types.h"
+#include "vector/Vector2D.h"
 
 #include <array>
 // #include <cstddef>
-#include <type_traits>
 #include <type_traits>
 
 // TODO: Rotate around a point

@@ -30,11 +30,9 @@
 #include <type_traits>
 
 
-namespace fgm
-{
-    template <Arithmetic T>
-    struct Vector2D
-    {
+namespace fgm {
+    template<Arithmetic T>
+    struct Vector2D {
         /**
          * @addtogroup FGM_Vec2_Members
          * @{
@@ -72,8 +70,8 @@ namespace fgm
          *
          * @param[in] other The source vector to be converted.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr Vector2D(const Vector2D<U>& other) noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr Vector2D(const Vector2D<U> &other) noexcept;
 
         /** @} */
 
@@ -100,7 +98,7 @@ namespace fgm
          * @brief Access the element at the first location (read-write access).
          * @return A reference to the first element of the vector.
          */
-        [[nodiscard]] constexpr T& x() noexcept;
+        [[nodiscard]] constexpr T &x() noexcept;
 
 
         /**
@@ -114,7 +112,7 @@ namespace fgm
          * @brief Access the element at the last location (read-write access).
          * @return A reference to the last element of the vector.
          */
-        [[nodiscard]] constexpr T& y() noexcept;
+        [[nodiscard]] constexpr T &y() noexcept;
 
 
         /**************************************
@@ -134,7 +132,7 @@ namespace fgm
          * @brief Access the element at the first location (read-write access).
          * @return A reference to the first element of the vector.
          */
-        [[nodiscard]] constexpr T& s() noexcept;
+        [[nodiscard]] constexpr T &s() noexcept;
 
 
         /**
@@ -148,7 +146,7 @@ namespace fgm
          * @brief Access the element at the last location (read-write access).
          * @return A reference to the last element of the vector.
          */
-        [[nodiscard]] constexpr T& t() noexcept;
+        [[nodiscard]] constexpr T &t() noexcept;
 
 
         /**************************************
@@ -168,7 +166,7 @@ namespace fgm
          * @brief Access the element at the first location (read-write access).
          * @return A reference to the first element of the vector.
          */
-        [[nodiscard]] constexpr T& r() noexcept;
+        [[nodiscard]] constexpr T &r() noexcept;
 
 
         /**
@@ -182,7 +180,7 @@ namespace fgm
          * @brief Access the element at the last location (read-write access).
          * @return A reference to the last element of the vector.
          */
-        [[nodiscard]] constexpr T& g() noexcept;
+        [[nodiscard]] constexpr T &g() noexcept;
 
 
         /**************************************
@@ -199,7 +197,7 @@ namespace fgm
          *
          * @return A reference to the vector component.
          */
-        constexpr T& operator[](std::size_t idx) noexcept;
+        constexpr T &operator[](std::size_t idx) noexcept;
 
 
         /**
@@ -209,13 +207,13 @@ namespace fgm
          *
          * @return A copy of the vector component.
          */
-        constexpr const T& operator[](std::size_t idx) const noexcept;
+        constexpr const T &operator[](std::size_t idx) const noexcept;
 
         /** @} */
 
 
         /**
-         * @addtogroup FGM_Vec3_Swizzle
+         * @addtogroup FGM_Vec2_Swizzle
          * @{
          */
 
@@ -227,12 +225,12 @@ namespace fgm
          *       overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
-         *                 @see @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
          *
          * @return A new vector containing the requested components or the component if @p Indices is 1.
          *         The dimension of the returned vector perfectly matches the number of indices provided.
          */
-        template <std::size_t... Indices>
+        template<std::size_t... Indices>
         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
         constexpr auto swizzle() const noexcept;
 
@@ -245,16 +243,16 @@ namespace fgm
          *       overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
-         *                 @see @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
          *
          * @param vec The vector to shuffle, rearrange or isolate components.
          *
          * @return A new vector containing the requested components or the component if @p Indices is 1.
          *         The dimension of the returned vector perfectly matches the number of indices provided.
          */
-        template <std::size_t... Indices>
+        template<std::size_t... Indices>
         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
-        static constexpr auto swizzle(const Vector2D& vec) noexcept;
+        static constexpr auto swizzle(const Vector2D &vec) noexcept;
 
         /** @} */
 
@@ -265,7 +263,7 @@ namespace fgm
          */
 
         /**
-         * @brief Compare all components of this vector for equality with another vector.
+         * @brief Compare all components of this vector with @p rhs vector for equality.
          *        Perform a component-wise comparison and returns true only if every element pair
          *        satisfies the equality condition within the given @p epsilon.
          *
@@ -279,15 +277,17 @@ namespace fgm
          *
          * @return True if all components are equivalent within @p epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr bool allEq(const Vector2D<U>& rhs,
-                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                               ? Config::DOUBLE_EPSILON
-                                               : Config::FLOAT_EPSILON) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr bool allEq(const Vector2D<U> &rhs,
+                                           double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
+                                                                ? Config::DOUBLE_EPSILON
+                                                                : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
-         * @copybrief allEq(const Vector2D<U>&, double) const
+         * @brief Compare all components of @p lhs vector with @p rhs vector for equality.
+         *        Perform a component-wise comparison and returns `true` only if every element pair
+         *        satisfies the equality condition within the given @p epsilon.
          *
          * @note To obtain a component-wise boolean mask, use @ref eq.
          *
@@ -297,19 +297,19 @@ namespace fgm
          * @param[in] rhs     The vector to compare against.
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-         * @return True if all components are equivalent within @p epsilon.
+         * @return `true` if all components are equivalent within @p epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr static bool allEq(const Vector2D& lhs, const Vector2D<U>& rhs,
-                                                  double epsilon = (std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>)
-                                                      ? Config::DOUBLE_EPSILON
-                                                      : Config::FLOAT_EPSILON) noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr static bool allEq(const Vector2D &lhs, const Vector2D<U> &rhs,
+                                                  double epsilon = std::is_same_v<T, double> ||
+                                                                   std::is_same_v<U, double>
+                                                                       ? Config::DOUBLE_EPSILON
+                                                                       : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
-         * @brief Compare components for inequality across two vectors.
-         *        Perform a component-wise comparison and returns true if any corresponding elements differ by more
+         * @brief Compare all components of this vector with @p rhs vector for inequality.
+         *        Perform a component-wise comparison and returns `true` if any corresponding elements differ by more
          *        than @p epsilon.
          *
          * @note To obtain a component-wise boolean mask, use @ref neq.
@@ -320,17 +320,19 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return True if any of the components are not equivalent within @p epsilon.
+         * @return `true` if any of the components are not equivalent within @p epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr bool anyNeq(const Vector2D<U>& rhs,
-                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                                ? Config::DOUBLE_EPSILON
-                                                : Config::FLOAT_EPSILON) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr bool anyNeq(const Vector2D<U> &rhs,
+                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
+                                                                 ? Config::DOUBLE_EPSILON
+                                                                 : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
-         * @copybrief anyNeq(const Vector2D<U>&, double) const
+         * @brief Compare all components of @p lhs vector with @p rhs vector for inequality.
+         *        Perform a component-wise comparison and returns `true` if any corresponding elements differ by more
+         *        than @p epsilon.
          *
          * @note To obtain a component-wise boolean mask, use @ref neq.
          *
@@ -341,14 +343,14 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return True if any of the components are not equivalent within @p epsilon.
+         * @return `true` if any of the components are not equivalent within @p epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr static bool anyNeq(const Vector2D& lhs, const Vector2D<U>& rhs,
-                                                   double epsilon = (std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>)
-                                                       ? Config::DOUBLE_EPSILON
-                                                       : Config::FLOAT_EPSILON) noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr static bool anyNeq(const Vector2D &lhs, const Vector2D<U> &rhs,
+                                                   double epsilon = std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>
+                                                                        ? Config::DOUBLE_EPSILON
+                                                                        : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -362,8 +364,8 @@ namespace fgm
          *
          * @return True if all components are equivalent within the default epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr bool operator==(const Vector2D<U>& rhs) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr bool operator==(const Vector2D<U> &rhs) const noexcept;
 
 
         /**
@@ -377,12 +379,12 @@ namespace fgm
          *
          * @return True if any of the components are not equivalent within the default epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr bool operator!=(const Vector2D<U>& rhs) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr bool operator!=(const Vector2D<U> &rhs) const noexcept;
 
 
         /**
-         * @brief Perform component-wise equality check.
+         * @brief Perform component-wise equality check between this vector and @p rhs vector.
          *        Compare each component pair and returns a boolean mask.
          *
          * @note To obtain a single scalar result, use @ref allEq or @ref operator==.
@@ -395,16 +397,17 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> eq(const Vector2D<U>& rhs,
-                                                  double epsilon = (std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>)
-                                                      ? Config::DOUBLE_EPSILON
-                                                      : Config::FLOAT_EPSILON) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> eq(const Vector2D<U> &rhs,
+                                                  double epsilon = std::is_same_v<T, double> ||
+                                                                   std::is_same_v<U, double>
+                                                                       ? Config::DOUBLE_EPSILON
+                                                                       : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
-         * @copybrief eq(const Vector2D<U>&, double) const
+         * @brief Perform component-wise equality check between @p lhs and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
          *
@@ -415,16 +418,16 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> eq(const Vector2D& lhs, const Vector2D<U>& rhs,
-                                                         double epsilon = (std::is_same_v<T, double> ||
-                                                                           std::is_same_v<U, double>)
-                                                             ? Config::DOUBLE_EPSILON
-                                                             : Config::FLOAT_EPSILON) noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> eq(const Vector2D &lhs, const Vector2D<U> &rhs,
+                                                         double epsilon = std::is_same_v<T, double> ||
+                                                                          std::is_same_v<U, double>
+                                                                              ? Config::DOUBLE_EPSILON
+                                                                              : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
-         * @brief Perform component-wise inequality check.
+         * @brief Perform component-wise inequality check between this vector and @p rhs vector.
          *        Compare each component pair and returns a boolean mask.
          *
          * @note To obtain a single scalar result, use @ref anyNeq or @ref operator!=.
@@ -437,16 +440,17 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> neq(const Vector2D<U>& rhs,
-                                                   double epsilon = (std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>)
-                                                       ? Config::DOUBLE_EPSILON
-                                                       : Config::FLOAT_EPSILON) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> neq(const Vector2D<U> &rhs,
+                                                   double epsilon = std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>
+                                                                        ? Config::DOUBLE_EPSILON
+                                                                        : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
-         * @copybrief neq(const Vector2D<U>&, double) const
+         * @brief Perform component-wise inequality check between @p lhs vector and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
          *
@@ -457,12 +461,12 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> neq(const Vector2D& lhs, const Vector2D<U>& rhs,
-                                                          double epsilon = (std::is_same_v<T, double> ||
-                                                                            std::is_same_v<U, double>)
-                                                              ? Config::DOUBLE_EPSILON
-                                                              : Config::FLOAT_EPSILON) noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> neq(const Vector2D &lhs, const Vector2D<U> &rhs,
+                                                          double epsilon = std::is_same_v<T, double> ||
+                                                                           std::is_same_v<U, double>
+                                                                               ? Config::DOUBLE_EPSILON
+                                                                               : Config::FLOAT_EPSILON) noexcept;
 
         /** @} */
 
@@ -473,7 +477,7 @@ namespace fgm
          */
 
         /**
-         * @brief Perform component-wise greater-than comparison.
+         * @brief Perform component-wise greater-than comparison between this vector and @p rhs vector.
          *        Compare each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -482,13 +486,14 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> gt(const Vector2D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> gt(const Vector2D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @copybrief gt(const Vector2D<U>&) const
+         * @brief Perform component-wise greater-than comparison between @p lhs vector and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -497,13 +502,13 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> gt(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> gt(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Perform component-wise greater-than-or-equal comparison.
+         * @brief Perform component-wise greater-than-or-equal comparison between this vector and @p rhs vector.
          *        Compare each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -512,13 +517,14 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> gte(const Vector2D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> gte(const Vector2D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @copybrief gte(const Vector2D<U>&) const
+         * @brief Perform component-wise greater-than-or-equal comparison between @p lhs vector and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -527,13 +533,13 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> gte(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> gte(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Perform component-wise less-than comparison.
+         * @brief Perform component-wise less-than comparison between this vector and @p rhs vector.
          *        Compare each component pair and returns a boolean mask.
          *
          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
@@ -545,13 +551,14 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> lt(const Vector2D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> lt(const Vector2D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @copybrief lt(const Vector2D<U>&) const
+         * @brief Perform component-wise less-than comparison between @p lhs vector and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
          *
          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
          *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
@@ -563,13 +570,13 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> lt(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> lt(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Perform component-wise less-than-or-equal comparison.
+         * @brief Perform component-wise less-than-or-equal comparison between this vector and @p rhs vector.
          *        Compares each component pair and returns a boolean mask.
          *
          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
@@ -581,13 +588,14 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> lte(const Vector2D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> lte(const Vector2D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @copybrief lte(const Vector2D<U>&) const
+         * @brief Perform component-wise less-than-or-equal comparison between @p lhs vector and @p rhs vector.
+         *        Compares each component pair and returns a boolean mask.
          *
          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to compiler-level
          *       constant folding bugs. Runtime execution remains IEEE 754 compliant under /fp:strict
@@ -599,44 +607,44 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> lte(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static Vector2D<bool> lte(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
-#ifdef ENABLE_FGM_SHADER_OPERATORS
+        #ifdef ENABLE_FGM_SHADER_OPERATORS
 
         /**
          * @copydoc gt(const Vector2D<U>&) const
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> operator>(const Vector2D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> operator>(const Vector2D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @copydoc gte(const Vector2D<U>&) const
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> operator>=(const Vector2D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> operator>=(const Vector2D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @copydoc lt(const Vector2D<U>&) const
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> operator<(const Vector2D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> operator<(const Vector2D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @copydoc lte(const Vector2D<U>&) const
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr Vector2D<bool> operator<=(const Vector2D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr Vector2D<bool> operator<=(const Vector2D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
-#endif
+        #endif
 
         /** @} */
 
@@ -647,8 +655,8 @@ namespace fgm
          */
 
         /**
-         * @brief Perform component-wise logical AND.
-         *        Compute the conjunction of each component pair.
+         * @brief Perform component-wise logical AND between this vector and @p rhs vector.
+         *        Compute the conjunction between each component pair.
          *
          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
          *
@@ -656,13 +664,13 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of component-wise AND.
          */
-        [[nodiscard]] constexpr Vector2D operator&(const Vector2D& rhs) const noexcept
+        [[nodiscard]] constexpr Vector2D operator&(const Vector2D &rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
         /**
-         * @brief Perform component-wise logical AND.
-         *        Compute the conjunction of each component pair in-place and update the calling vector.
+         * @brief Perform an in-place component-wise logical AND between this vector and @p rhs vector.
+         *        Compute the conjunction between each component pair in-place and update the calling vector.
          *
          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
          *
@@ -670,13 +678,13 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector2D& operator&=(const Vector2D& rhs) noexcept
+        constexpr Vector2D &operator&=(const Vector2D &rhs) noexcept
             requires std::is_same_v<T, bool>;
 
 
         /**
-         * @brief Perform component-wise logical OR.
-         *        Compute the disjunction of each component pair.
+         * @brief Perform component-wise logical OR between this vector and @p rhs vector.
+         *        Compute the disjunction between each component pair.
          *
          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
          *
@@ -684,13 +692,13 @@ namespace fgm
          *
          * @return A @ref Vector2D<bool> mask containing the results of component-wise OR.
          */
-        [[nodiscard]] constexpr Vector2D operator|(const Vector2D& rhs) const noexcept
+        [[nodiscard]] constexpr Vector2D operator|(const Vector2D &rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
         /**
-         * @brief Perform component-wise logical OR.
-         *        Compute the disjunction of each component pair in-place and update the calling vector.
+         * @brief Perform an in-place component-wise logical OR between this vector and @p rhs vector.
+         *        Compute the disjunction between each component pair in-place and update the calling vector.
          *
          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
          *
@@ -698,12 +706,12 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector2D& operator|=(const Vector2D& rhs) noexcept
+        constexpr Vector2D &operator|=(const Vector2D &rhs) noexcept
             requires std::is_same_v<T, bool>;
 
 
         /**
-         * @brief Perform component-wise logical NOT.
+         * @brief Apply a component-wise logical NOT on this vector.
          *        Invert each boolean component and returns a new @ref Vector2D<bool>.
          *
          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
@@ -722,8 +730,7 @@ namespace fgm
          */
 
         /**
-         * @brief Add two vectors component-wise.
-         *        Compute the sum of each component pair and returns a new vector.
+         * @brief Compute the component-wise sum of this vector with @p rhs vector and return a new vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -734,15 +741,13 @@ namespace fgm
          *
          * @return A new @ref Vector2D containing the component-wise sum.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto operator+(const Vector2D<U>& rhs) const noexcept
-            -> Vector2D<std::common_type_t<T, U>>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr auto operator+(const Vector2D<U> &rhs) const noexcept
+            -> Vector2D<std::common_type_t<T, U> > requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Add another vector to this vector component-wise.
-         *        Perform an in-place addition of @p rhs to the current instance.
+         * @brief Compute the component-wise sum of this vector with @p rhs vector in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
@@ -752,14 +757,13 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        template <StrictArithmetic U>
-        constexpr Vector2D& operator+=(const Vector2D<U>& rhs) noexcept
+        template<StrictArithmetic U>
+        constexpr Vector2D &operator+=(const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Subtract two vectors component-wise.
-         *        Compute the difference between each component pair and returns a new vector.
+         * @brief Compute the component-wise difference between this vector and @p rhs vector and return a new vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -770,15 +774,13 @@ namespace fgm
          *
          * @return A new @ref Vector2D containing the component-wise difference.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto operator-(const Vector2D<U>& rhs) const noexcept
-            -> Vector2D<std::common_type_t<T, U>>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr auto operator-(const Vector2D<U> &rhs) const noexcept
+            -> Vector2D<std::common_type_t<T, U> > requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Subtract another vector from this vector component-wise.
-         *        Perform an in-place substraction of @p rhs from the current instance.
+         * @brief Compute the component-wise difference between this vector and @p rhs vector in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
@@ -788,13 +790,13 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        template <StrictArithmetic U>
-        constexpr Vector2D& operator-=(const Vector2D<U>& rhs) noexcept
+        template<StrictArithmetic U>
+        constexpr Vector2D &operator-=(const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Perform a component-wise inversion.
+         * @brief Apply a component-wise inversion to this vector.
          *        Invert the sign of each component and returns a new @ref Vector2D<T>.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -806,8 +808,7 @@ namespace fgm
 
 
         /**
-         * @brief Scale the vector by a scalar value.
-         *        Multiply each component of the vector by @p scalar and returns a new vector.
+         * @brief Compute the component-wise product between this vector and @p scalar and return a new vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -818,14 +819,13 @@ namespace fgm
          *
          * @return A new @ref Vector2D scaled by @p scalar.
          */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr auto operator*(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic S>
+        [[nodiscard]] constexpr auto operator*(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S> > requires
+            StrictArithmetic<T>;
 
 
         /**
-         * @brief Scale this vector in-place by a scalar value.
-         *        Perform an in-place multiplication of each component by @p scalar.
+         * @brief Compute the component-wise product between this vector and @p scalar in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
@@ -835,14 +835,13 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        template <StrictArithmetic S>
-        constexpr Vector2D& operator*=(S scalar) noexcept
+        template<StrictArithmetic S>
+        constexpr Vector2D &operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Divide the vector by a scalar value.
-         *        Divide each component of the vector by @p scalar and returns a new vector.
+         * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -854,14 +853,13 @@ namespace fgm
          *
          * @return A new @ref Vector2D scaled by @p scalar.
          */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr auto operator/(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic S>
+        [[nodiscard]] constexpr auto operator/(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S> > requires
+            StrictArithmetic<T>;
 
 
         /**
-         * @brief Divide this vector in-place by a scalar value.
-         *        Perform an in-place division of each component by @p scalar.
+         * @brief Compute the component-wise division of this vector by @p scalar in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @warning Does not check for division by zero. @p scalar should be non-zero.
@@ -872,40 +870,38 @@ namespace fgm
          *
          * @return A reference to this vector (*this).
          */
-        template <StrictArithmetic S>
-        constexpr Vector2D& operator/=(S scalar) noexcept
+        template<StrictArithmetic S>
+        constexpr Vector2D &operator/=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely divide each component of this vector by a scalar value.
-         *        Divide each component of the vector by @p scalar and returns the newly computed vector.
+         * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
+         *        If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
+         *        returns a zero vector.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
          * @param[in] scalar The value to divide the vector components by.
          *
          * @return A new @ref Vector2D resulting from the division or a zero-vector if the @p scalar is below the
-         *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
+         *         epsilon threshold or if either of the vectors contains NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr auto safeDiv(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic S>
+        [[nodiscard]] constexpr auto safeDiv(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S> > requires
+            StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely divide each component of a vector by a scalar value.
-         *        Divide each component of the vector by @p scalar and returns the newly computed vector.
+        * @brief Compute the component-wise division of @p vec by @p scalar and return a new vector.
+         *        If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
+         *        returns a zero vector.
          *
          * @note Promote the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
@@ -913,22 +909,20 @@ namespace fgm
          * @param[in] scalar The value to divide the vector components by.
          *
          * @return A new @ref Vector2D resulting from the division or a zero-vector if the @p scalar is below the
-         *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
+         *         epsilon threshold or if either of the vectors contains NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr static auto safeDiv(const Vector2D& vec, S scalar) noexcept
-            -> Vector2D<std::common_type_t<T, S>>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic S>
+        [[nodiscard]] constexpr static auto safeDiv(const Vector2D &vec, S scalar) noexcept
+            -> Vector2D<std::common_type_t<T, S> > requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely divide this vector by a scalar value and set @p status to the division operation result.
-         *        Divides each component of the vector by @p scalar and returns the newly computed vector.
+         * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
+         *        If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
+         *        returns a zero vector and updates @p status to reflect the result of the operation.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
          *
@@ -941,20 +935,18 @@ namespace fgm
          * @return A new @ref Vector2D resulting from the division or a zero-vector if the @p scalar is below the
          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic S>
-        [[nodiscard]] constexpr auto tryDiv(S scalar, OperationStatus& status) const noexcept
-            -> Vector2D<std::common_type_t<T, S>>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic S>
+        [[nodiscard]] constexpr auto tryDiv(S scalar, OperationStatus &status) const noexcept
+            -> Vector2D<std::common_type_t<T, S> > requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely divide a vector by a scalar value and set @p status to the division operation result.
-         *        Divides each component of the vector by @p scalar and returns the newly computed vector.
+         * @brief Compute the component-wise division of @p vec by @p scalar and return a new vector.
+         *        If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
+         *        returns a zero vector and updates @p status to reflect the result of the operation.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
          *
@@ -968,10 +960,9 @@ namespace fgm
          * @return A new @ref Vector2D resulting from the division or a zero-vector if the @p scalar is below the
          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic S>
-        [[nodiscard]] static constexpr auto tryDiv(const Vector2D& vec, S scalar, OperationStatus& status) noexcept
-            -> Vector2D<std::common_type_t<T, S>>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic S>
+        [[nodiscard]] static constexpr auto tryDiv(const Vector2D &vec, S scalar, OperationStatus &status) noexcept
+            -> Vector2D<std::common_type_t<T, S> > requires StrictArithmetic<T>;
 
         /** @} */
 
@@ -1000,9 +991,9 @@ namespace fgm
          *
          * @return The scalar dot product of the two vectors.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto dot(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr auto dot(const Vector2D<U> &rhs) const noexcept -> std::common_type_t<T, U> requires
+            StrictArithmetic<T>;
 
 
         /**
@@ -1019,10 +1010,9 @@ namespace fgm
          *
          * @return The scalar dot product of @p lhs and @p rhs.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static auto dot(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
-            -> std::common_type_t<T, U>
-            requires StrictArithmetic<T>;
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static auto dot(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
+            -> std::common_type_t<T, U> requires StrictArithmetic<T>;
 
 
         /*************************************
@@ -1044,8 +1034,8 @@ namespace fgm
          *
          * @return The pseudo-cross cross product of the two vectors.
          */
-        template <Arithmetic U>
-        constexpr auto cross(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>;
+        template<Arithmetic U>
+        constexpr auto cross(const Vector2D<U> &rhs) const noexcept -> std::common_type_t<T, U>;
 
 
         /**
@@ -1062,8 +1052,8 @@ namespace fgm
          *
          * @return The pseudo-cross product of the two vectors.
          */
-        template <Arithmetic U>
-        constexpr static auto cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept -> std::common_type_t<T, U>;
+        template<Arithmetic U>
+        constexpr static auto cross(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept -> std::common_type_t<T, U>;
 
         /** @} */
 
@@ -1103,7 +1093,7 @@ namespace fgm
          *
          * @return The scalar magnitude of @p vec.
          */
-        [[nodiscard]] constexpr static Magnitude<T> mag(const Vector2D& vec) noexcept
+        [[nodiscard]] constexpr static Magnitude<T> mag(const Vector2D &vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1125,7 +1115,7 @@ namespace fgm
          *
          * @return A new @ref Vector2D with a magnitude of 1.0.
          */
-        [[nodiscard]] constexpr Vector2D<Magnitude<T>> normalize() const noexcept
+        [[nodiscard]] constexpr Vector2D<Magnitude<T> > normalize() const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1141,7 +1131,7 @@ namespace fgm
          *
          * @return A new @ref Vector2D with a magnitude of 1.0.
          */
-        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> normalize(const Vector2D& vec) noexcept
+        [[nodiscard]] constexpr static Vector2D<Magnitude<T> > normalize(const Vector2D &vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1156,7 +1146,7 @@ namespace fgm
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr Vector2D<Magnitude<T>> safeNormalize() const noexcept
+        [[nodiscard]] constexpr Vector2D<Magnitude<T> > safeNormalize() const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1173,7 +1163,7 @@ namespace fgm
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> safeNormalize(const Vector2D& vec) noexcept
+        [[nodiscard]] constexpr static Vector2D<Magnitude<T> > safeNormalize(const Vector2D &vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1192,7 +1182,7 @@ namespace fgm
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr Vector2D<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
+        [[nodiscard]] constexpr Vector2D<Magnitude<T> > tryNormalize(OperationStatus &status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1212,8 +1202,8 @@ namespace fgm
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> tryNormalize(const Vector2D& vec,
-                                                                           OperationStatus& status) noexcept
+        [[nodiscard]] constexpr static Vector2D<Magnitude<T> > tryNormalize(const Vector2D &vec,
+                                                                            OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1245,8 +1235,8 @@ namespace fgm
          *
          * @return The projected @ref Vector2D.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> project(const Vector2D<U>& onto) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> project(const Vector2D<U> &onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1265,8 +1255,8 @@ namespace fgm
          *
          * @return The projected @ref Vector2D.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> projectNorm(const Vector2D<U>& onto) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> projectNorm(const Vector2D<U> &onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1286,9 +1276,9 @@ namespace fgm
          *
          * @return The projected @ref Vector2D.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> project(const Vector2D& vec,
-                                                                           const Vector2D<U>& onto) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> project(const Vector2D &vec,
+                                                                           const Vector2D<U> &onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1308,9 +1298,9 @@ namespace fgm
          *
          * @return The projected @ref Vector2D.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> projectNorm(const Vector2D& vec,
-                                                                               const Vector2D<U>& onto) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> projectNorm(const Vector2D &vec,
+                                                                               const Vector2D<U> &onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1330,8 +1320,8 @@ namespace fgm
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeProject(const Vector2D<U>& onto) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeProject(const Vector2D<U> &onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1351,8 +1341,8 @@ namespace fgm
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeProjectNorm(const Vector2D<U>& onto) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeProjectNorm(const Vector2D<U> &onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1373,9 +1363,9 @@ namespace fgm
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeProject(const Vector2D& vec,
-                                                                               const Vector2D<U>& onto) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeProject(const Vector2D &vec,
+                                                                               const Vector2D<U> &onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1396,9 +1386,9 @@ namespace fgm
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeProjectNorm(const Vector2D& vec,
-                                                                                   const Vector2D<U>& onto) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeProjectNorm(const Vector2D &vec,
+            const Vector2D<U> &onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1420,9 +1410,9 @@ namespace fgm
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryProject(const Vector2D<U>& onto,
-                                                                       OperationStatus& status) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryProject(const Vector2D<U> &onto,
+                                                                       OperationStatus &status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1445,9 +1435,9 @@ namespace fgm
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryProjectNorm(const Vector2D<U>& onto,
-                                                                           OperationStatus& status) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryProjectNorm(const Vector2D<U> &onto,
+                                                                           OperationStatus &status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1470,10 +1460,10 @@ namespace fgm
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryProject(const Vector2D& vec,
-                                                                              const Vector2D<U>& onto,
-                                                                              OperationStatus& status) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryProject(const Vector2D &vec,
+                                                                              const Vector2D<U> &onto,
+                                                                              OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1497,12 +1487,11 @@ namespace fgm
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryProjectNorm(const Vector2D& vec,
-                                                                                  const Vector2D<U>& onto,
-                                                                                  OperationStatus& status) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryProjectNorm(const Vector2D &vec,
+            const Vector2D<U> &onto,
+            OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
-
 
 
         /*************************************
@@ -1526,8 +1515,8 @@ namespace fgm
          *
          * @return The perpendicular @ref Vector2D component.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> reject(const Vector2D<U>& from) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> reject(const Vector2D<U> &from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1546,8 +1535,8 @@ namespace fgm
          *
          * @return The perpendicular @ref Vector2D component.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> rejectNorm(const Vector2D<U>& from) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> rejectNorm(const Vector2D<U> &from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1567,9 +1556,9 @@ namespace fgm
          *
          * @return The perpendicular @ref Vector2D component.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> reject(const Vector2D& vector,
-                                                                          const Vector2D<U>& from) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> reject(const Vector2D &vector,
+                                                                          const Vector2D<U> &from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1589,9 +1578,9 @@ namespace fgm
          *
          * @return The perpendicular @ref Vector2D component.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> rejectNorm(const Vector2D& vector,
-                                                                              const Vector2D<U>& from) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> rejectNorm(const Vector2D &vector,
+                                                                              const Vector2D<U> &from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1611,8 +1600,8 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeReject(const Vector2D<U>& from) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeReject(const Vector2D<U> &from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1632,8 +1621,8 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeRejectNorm(const Vector2D<U>& from) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeRejectNorm(const Vector2D<U> &from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1654,9 +1643,9 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeReject(const Vector2D& vec,
-                                                                              const Vector2D<U>& from) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeReject(const Vector2D &vec,
+                                                                              const Vector2D<U> &from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1677,9 +1666,9 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeRejectNorm(const Vector2D& vec,
-                                                                                  const Vector2D<U>& from) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeRejectNorm(const Vector2D &vec,
+            const Vector2D<U> &from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1702,12 +1691,10 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryReject(const Vector2D<U>& from,
-                                                                      OperationStatus& status) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryReject(const Vector2D<U> &from,
+                                                                      OperationStatus &status) const noexcept
             requires StrictArithmetic<T>;
-
-
 
 
         /**
@@ -1729,9 +1716,9 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryRejectNorm(const Vector2D<U>& from,
-                                                                          OperationStatus& status) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryRejectNorm(const Vector2D<U> &from,
+                                                                          OperationStatus &status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1755,10 +1742,10 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryReject(const Vector2D& vec,
-                                                                             const Vector2D<U>& from,
-                                                                             OperationStatus& status) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryReject(const Vector2D &vec,
+                                                                             const Vector2D<U> &from,
+                                                                             OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1782,10 +1769,10 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryRejectNorm(const Vector2D& vec,
-                                                                                 const Vector2D<U>& from,
-                                                                                 OperationStatus& status) noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryRejectNorm(const Vector2D &vec,
+            const Vector2D<U> &from,
+            OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1815,7 +1802,7 @@ namespace fgm
          *
          * @return True if at least one component is positive or negative infinity.
          */
-        [[nodiscard]] constexpr static bool hasInf(const Vector2D& vec) noexcept;
+        [[nodiscard]] constexpr static bool hasInf(const Vector2D &vec) noexcept;
 
 
         /**
@@ -1837,7 +1824,7 @@ namespace fgm
          *
          * @return True if at least one component is NaN.
          */
-        [[nodiscard]] constexpr static bool hasNaN(const Vector2D& vec) noexcept;
+        [[nodiscard]] constexpr static bool hasNaN(const Vector2D &vec) noexcept;
 
         /** @} */
 
@@ -1856,14 +1843,15 @@ namespace fgm
          *
          * @return A reference to the output stream @p os.
          */
-        constexpr friend std::ostream& operator<<(std::ostream& os, const Vector2D& vector)
-        {
-            const std::streamsize oldPrecision     = os.precision();
+        constexpr friend std::ostream &operator<<(std::ostream &os, const Vector2D &vector) {
+            const std::streamsize oldPrecision = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
             auto precision = Config::useFullPrecision
-                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
-                : Config::LOG_PRECISION;
+                                 ? std::is_same_v<T, double>
+                                       ? Config::DOUBLE_PRECISION
+                                       : Config::FLOAT_PRECISION
+                                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
             os << "<" << vector[0] << ", " << vector[1] << ">\n";
 
@@ -1905,10 +1893,9 @@ namespace fgm
      *
      * @return A new @ref Vector2D scaled by @p scalar.
      */
-    template <StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr auto operator*(S scalar, const Vector2D<T>& vector) noexcept
-        -> Vector2D<std::common_type_t<T, S>>
-        requires StrictArithmetic<T>;
+    template<StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] constexpr auto operator*(S scalar, const Vector2D<T> &vector) noexcept
+        -> Vector2D<std::common_type_t<T, S> > requires StrictArithmetic<T>;
 
     /** @} */
 
@@ -1924,12 +1911,12 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bVec2  = Vector2D<bool>;               ///< `bool` vector
-    using iVec2  = Vector2D<int>;                ///< `int` vector
-    using uVec2  = Vector2D<unsigned int>;       ///< `unsigned int` vector
-    using vec2   = Vector2D<float>;              ///< `float` vector
-    using lVec2  = Vector2D<long long>;          ///< `long long` vector
-    using dVec2  = Vector2D<double>;             ///< `double` vector
+    using bVec2 = Vector2D<bool>; ///< `bool` vector
+    using iVec2 = Vector2D<int>; ///< `int` vector
+    using uVec2 = Vector2D<unsigned int>; ///< `unsigned int` vector
+    using vec2 = Vector2D<float>; ///< `float` vector
+    using lVec2 = Vector2D<long long>; ///< `long long` vector
+    using dVec2 = Vector2D<double>; ///< `double` vector
     using ulVec2 = Vector2D<unsigned long long>; ///< `unsigned long long` vector
 
     /** @} */
@@ -1946,14 +1933,13 @@ namespace fgm
      *                                   *
      *************************************/
 
-    namespace vec2d
-    {
+    namespace vec2d {
         /**
          * @brief A 2D vector with all components set to one (1, 1).
          *
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
-        template <StrictArithmetic T>
+        template<StrictArithmetic T>
         inline constexpr Vector2D<T> one = Vector2D<T>(T(1), T(1));
 
 
@@ -1962,7 +1948,7 @@ namespace fgm
          *
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
-        template <StrictArithmetic T>
+        template<StrictArithmetic T>
         inline constexpr Vector2D<T> zero = Vector2D<T>(T(0), T(0)); ///< 2D-Vector with all zero-components.
 
 
@@ -1971,7 +1957,7 @@ namespace fgm
          *
          * @note Only available for `std::floating_point` types.
          */
-        template <StrictArithmetic T>
+        template<StrictArithmetic T>
             requires std::floating_point<T>
         inline constexpr Vector2D<T> inf = Vector2D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D));
 
@@ -1981,7 +1967,7 @@ namespace fgm
          *
          * @note Only available for `std::floating_point` types.
          */
-        template <StrictArithmetic T>
+        template<StrictArithmetic T>
             requires std::floating_point<T>
         inline constexpr Vector2D<T> infN = Vector2D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D));
 
@@ -1991,24 +1977,24 @@ namespace fgm
          *
          * @note Only available for `std::floating_point` types.
          */
-        template <StrictArithmetic T>
+        template<StrictArithmetic T>
             requires std::floating_point<T>
         inline constexpr Vector2D<T> nan = Vector2D<T>(T(constants::NaN_D), T(constants::NaN_D));
 
 
         /** @brief A 2D unit vector aligned with the positive X-axis (1, 0). */
-        template <StrictArithmetic T>
+        template<StrictArithmetic T>
         inline constexpr Vector2D<T> x = Vector2D<T>(T(1), T(0));
 
 
         /** @brief A 2D unit vector aligned with the positive Y-axis (0, 1). */
-        template <StrictArithmetic T>
+        template<StrictArithmetic T>
         inline constexpr Vector2D<T> y = Vector2D<T>(T(0), T(1));
     } // namespace vec2d
 
 
     /** @brief Template deduction guide for Vector2D */
-    template <Arithmetic T>
+    template<Arithmetic T>
     Vector2D(T, T) -> Vector2D<T>;
 
     /** @} */

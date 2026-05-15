@@ -192,7 +192,7 @@ TEST(Vector2DProjection, MixedTypeProjectionPromotesType)
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using static variant of 
+ * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vector2D::projectNorm returns a non-zero vector.
  */
 TEST(Vector2DProjection, StaticWrapper_ProjectionOntoNormalizedVectorReturnsNonZeroVector)

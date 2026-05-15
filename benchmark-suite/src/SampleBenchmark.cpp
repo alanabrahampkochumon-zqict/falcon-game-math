@@ -1,8 +1,7 @@
 #include <benchmark/benchmark.h>
 
-auto sum = [](int a, int b)->int
-{
-        return a + b;
+auto sum = [](int a, int b) -> int {
+    return a + b;
 };
 
 static void BM_Sum(benchmark::State& state)

@@ -29,9 +29,9 @@
 
 namespace fgm
 {
-    
+
     // Forward declarations
-    
+
     template <Arithmetic T>
     struct Vector2D;
 
@@ -118,6 +118,6 @@ namespace fgm
     /** @brief Alias for @ref Matrix4D with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
     using PromotedFloatMatrix4D = Matrix4D<Magnitude<std::common_type_t<T, U>>>;
-}
+} // namespace fgm
 
 /** @} */
