@@ -27,11 +27,11 @@
 /** @brief Verify that vector conversion constructor is available during compile time. */
 namespace
 {
-    const fgm::Vector2D vecF(3.0f, 1.0f);
-    const fgm::Vector2D<double> vecD(vecF);
+    constexpr fgm::Vector2D vecF(3.0f, 1.0f);
+    constexpr fgm::Vector2D<double> vecD(vecF);
     static_assert(std::is_same_v<decltype(vecD)::value_type, double>);
 
-    const fgm::Vector2D<float> vecF2(vecD);
+    [[maybe_unused]] constexpr fgm::Vector2D<float> vecF2(vecD);
     static_assert(std::is_same_v<decltype(vecF2)::value_type, float>);
 
 } // namespace
