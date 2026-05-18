@@ -979,8 +979,8 @@ namespace fgm {
          *************************************/
 
         /**
-         * @brief Calculate the dot product of this vector with another vector.
-         *        Compute the scalar product: \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
+         * @brief Compute the dot product with another vector.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -996,9 +996,9 @@ namespace fgm {
             StrictArithmetic<T>;
 
 
-        /**
-         * @brief Calculate the dot product of a vector with another vector.
-         *        Compute the scalar product: \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
+        /**s
+         * @brief Compute the dot product of two vectors.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1022,8 +1022,8 @@ namespace fgm {
          *************************************/
 
         /**
-         * @brief Calculate the pseudo-cross product of this vector with another vector.
-         *        Compute the vector product: \f$ \mathbf{a}\times\mathbf{b} = (x_1\cdot y_2 - x_2\cdot y_1) \f$.
+         * @brief Compute the 2D pseudo-cross product with another vector.
+         *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1039,8 +1039,8 @@ namespace fgm {
 
 
         /**
-         * @brief Calculate the pseudo-cross of a vector with another vector.
-         *        Compute the vector product: \f$ \mathbf{a}\times\mathbf{b} = (x_1\cdot y_2 - x_2\cdot y_1) \f$.
+         * @brief Compute the 2D pseudo-cross product of two vectors.
+         *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1070,8 +1070,8 @@ namespace fgm {
          *************************************/
 
         /**
-         * @brief Calculate the magnitude (length) of this vector.
-         *        Compute the Euclidean norm: \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
+         * @brief Compute the magnitude (length) of this vector.
+         *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
          *
          * @note To avoid precision loss, integral types are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1083,8 +1083,8 @@ namespace fgm {
 
 
         /**
-         * @brief Calculate the magnitude (length) of a vector.
-         *        Compute the Euclidean norm: \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
+         * @brief Compute the magnitude (length) of the given vector.
+         *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
          *
          * @note To avoid precision loss, integral types are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1104,9 +1104,8 @@ namespace fgm {
          *************************************/
 
         /**
-         * @brief Calculate the normalized (unit) form of this vector.
-         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
-         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         * @brief Compute the normalized (unit) form of this vector.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1120,9 +1119,8 @@ namespace fgm {
 
 
         /**
-         * @brief Calculate the normalized (unit) form of the vector.
-         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
-         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         * @brief Compute the normalized (unit) form of the given vector.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1131,14 +1129,15 @@ namespace fgm {
          *
          * @return A new @ref Vector2D with a magnitude of 1.0.
          */
-        [[nodiscard]] constexpr static Vector2D<Magnitude<T> > normalize(const Vector2D &vec) noexcept
+        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> normalize(const Vector2D &vec) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely calculate the normalized (unit) form of this vector.
-         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
-         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         * @brief Compute the normalized (unit) form of this vector.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        If this vector contains NaN components, or resolves to a zero-length vector,
+         *        returns a zero vector and updates @p status to reflect the result of the operation.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1146,7 +1145,7 @@ namespace fgm {
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr Vector2D<Magnitude<T> > safeNormalize() const noexcept
+        [[nodiscard]] constexpr Vector2D<Magnitude<T>> safeNormalize() const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1163,7 +1162,7 @@ namespace fgm {
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr static Vector2D<Magnitude<T> > safeNormalize(const Vector2D &vec) noexcept
+        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> safeNormalize(const Vector2D &vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1182,7 +1181,7 @@ namespace fgm {
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr Vector2D<Magnitude<T> > tryNormalize(OperationStatus &status) const noexcept
+        [[nodiscard]] constexpr Vector2D<Magnitude<T>> tryNormalize(OperationStatus &status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1202,7 +1201,7 @@ namespace fgm {
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr static Vector2D<Magnitude<T> > tryNormalize(const Vector2D &vec,
+        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> tryNormalize(const Vector2D &vec,
                                                                             OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
 
