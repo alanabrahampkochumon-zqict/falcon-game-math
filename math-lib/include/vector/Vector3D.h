@@ -291,7 +291,7 @@ namespace fgm
          * overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
-         *                 @see @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
          *
          * @return A new vector containing the requested components or the component if @p Indices is 1.
          *         The dimension of the returned vector perfectly matches the number of indices provided.
@@ -309,7 +309,7 @@ namespace fgm
          *       overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
-         *                 @see @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
          *
          * @param vec The vector to shuffle, rearrange or isolate components.
          *
@@ -346,7 +346,7 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool allEq(const Vector3D<U>& rhs,
-                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                           double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
                                                : Config::FLOAT_EPSILON) const noexcept;
 
@@ -368,8 +368,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] static constexpr bool allEq(const Vector3D& lhs, const Vector3D<U>& rhs,
-                                                  double epsilon = (std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>)
+                                                  double epsilon = std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
                                                       : Config::FLOAT_EPSILON) noexcept;
 
@@ -391,7 +391,7 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool anyNeq(const Vector3D<U>& rhs,
-                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
                                                 : Config::FLOAT_EPSILON) const noexcept;
 
@@ -414,8 +414,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] static constexpr bool anyNeq(const Vector3D& lhs, const Vector3D<U>& rhs,
-                                                   double epsilon = (std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>)
+                                                   double epsilon = std::is_same_v<T, double> ||
+                                                                     std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
                                                        : Config::FLOAT_EPSILON) noexcept;
 
@@ -466,8 +466,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector3D<bool> eq(const Vector3D<U>& rhs,
-                                                  double epsilon = (std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>)
+                                                  double epsilon = std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
                                                       : Config::FLOAT_EPSILON) const noexcept;
 
@@ -487,8 +487,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] static constexpr Vector3D<bool> eq(const Vector3D& lhs, const Vector3D<U>& rhs,
-                                                         double epsilon = (std::is_same_v<T, double> ||
-                                                                           std::is_same_v<U, double>)
+                                                         double epsilon = std::is_same_v<T, double> ||
+                                                                           std::is_same_v<U, double>
                                                              ? Config::DOUBLE_EPSILON
                                                              : Config::FLOAT_EPSILON) noexcept;
 
@@ -509,8 +509,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector3D<bool> neq(const Vector3D<U>& rhs,
-                                                   double epsilon = (std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>)
+                                                   double epsilon = std::is_same_v<T, double> ||
+                                                                     std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
                                                        : Config::FLOAT_EPSILON) const noexcept;
 
@@ -530,8 +530,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] static constexpr Vector3D<bool> neq(const Vector3D& lhs, const Vector3D<U>& rhs,
-                                                          double epsilon = (std::is_same_v<T, double> ||
-                                                                            std::is_same_v<U, double>)
+                                                          double epsilon = std::is_same_v<T, double> ||
+                                                                            std::is_same_v<U, double>
                                                               ? Config::DOUBLE_EPSILON
                                                               : Config::FLOAT_EPSILON) noexcept;
 
@@ -1632,7 +1632,7 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector3D component.
          */
@@ -1651,7 +1651,7 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector3D component.
          */
@@ -1670,8 +1670,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vector         The vector to be rejected.
-         * @param[in] from           The vector to reject from.
+         * @param[in] vector The vector to be rejected.
+         * @param[in] from   The vector to reject from.
          *
          * @return The perpendicular @ref Vector3D component.
          */
@@ -1691,8 +1691,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vector         The vector to be rejected.
-         * @param[in] from           The vector to reject from.
+         * @param[in] vector The vector to be rejected.
+         * @param[in] from   The vector to reject from.
          *
          * @return The perpendicular @ref Vector3D component.
          */
@@ -1714,7 +1714,7 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1735,7 +1735,7 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1757,8 +1757,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to reject.
-         * @param[in] from           The vector to reject from.
+         * @param[in] vec  The vector to reject.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1780,8 +1780,8 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to reject.
-         * @param[in] from           The vector to reject from.
+         * @param[in] vec  The vector to reject.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1804,9 +1804,9 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] from    The vector to reject from
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1831,9 +1831,9 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] from    The vector to reject from
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1857,10 +1857,10 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to reject.
-         * @param[in] from           The vector to reject from.
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] vec     The vector to reject.
+         * @param[in] from    The vector to reject from.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1883,10 +1883,10 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to reject.
-         * @param[in] from           The vector to reject from.
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] vec     The vector to reject.
+         * @param[in] from    The vector to reject from.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
