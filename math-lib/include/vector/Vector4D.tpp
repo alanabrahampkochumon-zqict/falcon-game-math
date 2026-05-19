@@ -76,12 +76,17 @@ namespace fgm
 
 
 
-
     /*************************************
      *                                   *
      *            ACCESSORS              *
      *                                   *
      *************************************/
+
+    /**************************************
+     *                                    *
+     *        SPATIAL COORDINATES         *
+     *                                    *
+     **************************************/
 
     template <Arithmetic T>
     constexpr T Vector4D<T>::x() const noexcept
@@ -139,6 +144,13 @@ namespace fgm
     }
 
 
+
+    /**************************************
+     *                                    *
+     *           STP COORDINATES          *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     constexpr T Vector4D<T>::s() const noexcept
     {
@@ -194,6 +206,13 @@ namespace fgm
         return _data[3];
     }
 
+
+
+    /**************************************
+     *                                    *
+     *         COLOR COORDINATES          *
+     *                                    *
+     **************************************/
 
     template <Arithmetic T>
     constexpr T Vector4D<T>::r() const noexcept
@@ -251,6 +270,13 @@ namespace fgm
     }
 
 
+
+    /**************************************
+     *                                    *
+     *              INDEXING              *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     constexpr T& Vector4D<T>::operator[](const std::size_t idx) noexcept
     {
@@ -263,6 +289,13 @@ namespace fgm
         return _data[idx];
     }
 
+
+
+    /**************************************
+     *                                    *
+     *             SWIZZLING              *
+     *                                    *
+     **************************************/
 
     template <Arithmetic T>
     template <std::size_t... Indices>
@@ -299,6 +332,7 @@ namespace fgm
     {
         return vec.swizzle<Indices...>();
     }
+
 
 
     /***************************************
@@ -374,6 +408,12 @@ namespace fgm
     }
 
 
+    /**************************************
+     *                                    *
+     *         EQUALITY OPERATORS         *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     template <Arithmetic U>
     constexpr bool Vector4D<T>::operator==(const Vector4D<U>& rhs) const noexcept
@@ -442,7 +482,6 @@ namespace fgm
     {
         return lhs.neq(rhs, epsilon);
     }
-
 
 
 
@@ -527,6 +566,13 @@ namespace fgm
     }
 
 
+
+    /***************************************
+     *                                     *
+     *        COMPARISON OPERATORS         *
+     *                                     *
+     ***************************************/
+
 #ifdef ENABLE_FGM_SHADER_OPERATORS
 
     template <Arithmetic T>
@@ -565,7 +611,6 @@ namespace fgm
     }
 
 #endif
-
 
 
 
@@ -617,10 +662,15 @@ namespace fgm
 
 
 
-
     /*************************************
      *                                   *
      *      ARITHMETIC OPERATORS         *
+     *                                   *
+     *************************************/
+
+    /*************************************
+     *                                   *
+     *            ADDITION               *
      *                                   *
      *************************************/
 
@@ -646,6 +696,12 @@ namespace fgm
         return *this;
     }
 
+
+    /*************************************
+     *                                   *
+     *           SUBTRACTION             *
+     *                                   *
+     *************************************/
 
     template <Arithmetic T>
     template <StrictArithmetic U>
@@ -678,6 +734,12 @@ namespace fgm
     }
 
 
+    /*************************************
+     *                                   *
+     *         MULTIPLICATION            *
+     *                                   *
+     *************************************/
+
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr auto Vector4D<T>::operator*(const S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
@@ -709,6 +771,12 @@ namespace fgm
         return *this;
     }
 
+
+    /*************************************
+     *                                   *
+     *            DIVISION               *
+     *                                   *
+     *************************************/
 
     template <Arithmetic T>
     template <StrictArithmetic S>
