@@ -300,7 +300,7 @@ namespace fgm {
          * @return `true` if all components are equivalent within @p epsilon.
          */
         template<Arithmetic U>
-        [[nodiscard]] constexpr static bool allEq(const Vector2D &lhs, const Vector2D<U> &rhs,
+        [[nodiscard]] static constexpr bool allEq(const Vector2D &lhs, const Vector2D<U> &rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                                    std::is_same_v<U, double>
                                                                        ? Config::DOUBLE_EPSILON
@@ -346,7 +346,7 @@ namespace fgm {
          * @return `true` if any of the components are not equivalent within @p epsilon.
          */
         template<Arithmetic U>
-        [[nodiscard]] constexpr static bool anyNeq(const Vector2D &lhs, const Vector2D<U> &rhs,
+        [[nodiscard]] static constexpr bool anyNeq(const Vector2D &lhs, const Vector2D<U> &rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                                     std::is_same_v<U, double>
                                                                         ? Config::DOUBLE_EPSILON
@@ -419,7 +419,7 @@ namespace fgm {
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
         template<Arithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> eq(const Vector2D &lhs, const Vector2D<U> &rhs,
+        [[nodiscard]] static constexpr Vector2D<bool> eq(const Vector2D &lhs, const Vector2D<U> &rhs,
                                                          double epsilon = std::is_same_v<T, double> ||
                                                                           std::is_same_v<U, double>
                                                                               ? Config::DOUBLE_EPSILON
@@ -462,7 +462,7 @@ namespace fgm {
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
         template<Arithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> neq(const Vector2D &lhs, const Vector2D<U> &rhs,
+        [[nodiscard]] static constexpr Vector2D<bool> neq(const Vector2D &lhs, const Vector2D<U> &rhs,
                                                           double epsilon = std::is_same_v<T, double> ||
                                                                            std::is_same_v<U, double>
                                                                                ? Config::DOUBLE_EPSILON
@@ -503,7 +503,7 @@ namespace fgm {
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> gt(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
+        [[nodiscard]] static constexpr Vector2D<bool> gt(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -534,7 +534,7 @@ namespace fgm {
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> gte(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
+        [[nodiscard]] static constexpr Vector2D<bool> gte(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -571,7 +571,7 @@ namespace fgm {
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> lt(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
+        [[nodiscard]] static constexpr Vector2D<bool> lt(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -608,7 +608,7 @@ namespace fgm {
          * @return A @ref Vector2D<bool> mask containing the results of each component comparison.
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static Vector2D<bool> lte(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
+        [[nodiscard]] static constexpr Vector2D<bool> lte(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -912,7 +912,7 @@ namespace fgm {
          *         epsilon threshold or if either of the vectors contains NaN(Not-a-Number) component(s).
          */
         template<StrictArithmetic S>
-        [[nodiscard]] constexpr static auto safeDiv(const Vector2D &vec, S scalar) noexcept
+        [[nodiscard]] static constexpr auto safeDiv(const Vector2D &vec, S scalar) noexcept
             -> Vector2D<std::common_type_t<T, S> > requires StrictArithmetic<T>;
 
 
@@ -980,7 +980,7 @@ namespace fgm {
 
         /**
          * @brief Compute the dot product with another vector.
-         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -998,7 +998,7 @@ namespace fgm {
 
         /**s
          * @brief Compute the dot product of two vectors.
-         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1011,7 +1011,7 @@ namespace fgm {
          * @return The scalar dot product of @p lhs and @p rhs.
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static auto dot(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
+        [[nodiscard]] static constexpr auto dot(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept
             -> std::common_type_t<T, U> requires StrictArithmetic<T>;
 
 
@@ -1034,7 +1034,7 @@ namespace fgm {
          *
          * @return The pseudo-cross cross product of the two vectors.
          */
-        template<Arithmetic U>
+        template<StrictArithmetic U>
         constexpr auto cross(const Vector2D<U> &rhs) const noexcept -> std::common_type_t<T, U>;
 
 
@@ -1047,13 +1047,13 @@ namespace fgm {
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] lhs The vector to compute the cross product with.
-         * @param[in] rhs The vector to compute the cross product with.
+         * @param[in] lhs The first vector to compute the cross product with.
+         * @param[in] rhs The second vector to compute the cross product with.
          *
          * @return The pseudo-cross product of the two vectors.
          */
-        template<Arithmetic U>
-        constexpr static auto cross(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept -> std::common_type_t<T, U>;
+        template<StrictArithmetic U>
+        static constexpr auto cross(const Vector2D &lhs, const Vector2D<U> &rhs) noexcept -> std::common_type_t<T, U>;
 
         /** @} */
 
@@ -1093,7 +1093,7 @@ namespace fgm {
          *
          * @return The scalar magnitude of @p vec.
          */
-        [[nodiscard]] constexpr static Magnitude<T> mag(const Vector2D &vec) noexcept
+        [[nodiscard]] static constexpr Magnitude<T> mag(const Vector2D &vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1129,31 +1129,32 @@ namespace fgm {
          *
          * @return A new @ref Vector2D with a magnitude of 1.0.
          */
-        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> normalize(const Vector2D &vec) noexcept
+        [[nodiscard]] static constexpr Vector2D<Magnitude<T> > normalize(const Vector2D &vec) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the normalized (unit) form of this vector.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
-         *        If this vector contains NaN components, or resolves to a zero-length vector,
-         *        returns a zero vector and updates @p status to reflect the result of the operation.
          *
+         * @note This is a safe operation. If the vector's magnitude falls below the internal
+         *       epsilon, or if it contains NaN components, division by zero is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         * @return A @ref Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr Vector2D<Magnitude<T>> safeNormalize() const noexcept
+        [[nodiscard]] constexpr Vector2D<Magnitude<T> > safeNormalize() const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely calculate the normalized (unit) form of the vector.
-         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
-         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         * @brief Compute the normalized (unit) form of the given vector.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
+         * @note This is a safe operation. If the vector's magnitude falls below the internal
+         *       epsilon, or if it contains NaN components, division by zero is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
@@ -1162,16 +1163,17 @@ namespace fgm {
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> safeNormalize(const Vector2D &vec) noexcept
+        [[nodiscard]] static constexpr Vector2D<Magnitude<T> > safeNormalize(const Vector2D &vec) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely calculate the normalized (unit) form of this vector and
+         * @brief Compute the normalized (unit) form of this vector and
          *        set @p status to the normalization operation result.
-         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
-         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
+         * @note This is a safe operation. If the vector's magnitude falls below the internal
+         *       epsilon, or if it contains NaN components, division by zero is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
@@ -1181,16 +1183,17 @@ namespace fgm {
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr Vector2D<Magnitude<T>> tryNormalize(OperationStatus &status) const noexcept
+        [[nodiscard]] constexpr Vector2D<Magnitude<T> > tryNormalize(OperationStatus &status) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely calculate the normalized (unit) form of the vector and
+         * @brief Compute the normalized (unit) form of the given vector and
          *        set @p status to the normalization operation result.
-         *        Compute the unit vector in the same direction: \f$ \mathbf{\hat{v}} =
-         *        \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
          *
+         * @note This is a safe operation. If the vector's magnitude falls below the internal
+         *       epsilon, or if it contains NaN components, division by zero is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
@@ -1201,7 +1204,7 @@ namespace fgm {
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr static Vector2D<Magnitude<T>> tryNormalize(const Vector2D &vec,
+        [[nodiscard]] static constexpr Vector2D<Magnitude<T> > tryNormalize(const Vector2D &vec,
                                                                             OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
 
@@ -1220,9 +1223,11 @@ namespace fgm {
          *************************************/
 
         /**
-         * @brief Project this vector onto another vector.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project this vector onto the @p onto vector.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1230,7 +1235,7 @@ namespace fgm {
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] onto           The vector to project onto.
+         * @param[in] onto The vector to project onto.
          *
          * @return The projected @ref Vector2D.
          */
@@ -1240,9 +1245,11 @@ namespace fgm {
 
 
         /**
-         * @brief Project this vector onto another **unit** vector.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project this vector onto the **unit** @p onto vector.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1250,7 +1257,7 @@ namespace fgm {
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] onto           The vector to project onto.
+         * @param[in] onto The vector to project onto.
          *
          * @return The projected @ref Vector2D.
          */
@@ -1260,9 +1267,11 @@ namespace fgm {
 
 
         /**
-         * @brief Project a vector onto another vector.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project the @p vec vector onto the @p onto vector.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1270,21 +1279,23 @@ namespace fgm {
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to project.
-         * @param[in] onto           The vector to project onto.
+         * @param[in] vec  The vector to project.
+         * @param[in] onto The vector to project onto.
          *
          * @return The projected @ref Vector2D.
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> project(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> project(const Vector2D &vec,
                                                                            const Vector2D<U> &onto) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Project a vector onto another **unit** vector.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project the @p vec vector onto the **unit** @p onto vector.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1292,29 +1303,33 @@ namespace fgm {
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to project.
-         * @param[in] onto           The vector to project onto.
+         * @param[in] vec  The vector to project.
+         * @param[in] onto The vector to project onto.
          *
          * @return The projected @ref Vector2D.
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> projectNorm(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> projectNorm(const Vector2D &vec,
                                                                                const Vector2D<U> &onto) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely project this vector onto another vector.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project this vector onto the @p onto vector.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
+         * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] onto           The vector to project onto.
+         * @param[in] onto The vector to project onto.
          *
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1325,10 +1340,13 @@ namespace fgm {
 
 
         /**
-         * @brief Safely project this vector onto another **unit** vector.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project this vector onto the **unit** @p onto vector.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
+         * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
@@ -1346,65 +1364,77 @@ namespace fgm {
 
 
         /**
-         * @brief Safely project a vector onto another vector.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project the @p vec vector onto the @p onto vector.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
+         * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to project.
-         * @param[in] onto           The vector to project onto.
+         * @param[in] vec  The vector to project.
+         * @param[in] onto The vector to project onto.
          *
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeProject(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> safeProject(const Vector2D &vec,
                                                                                const Vector2D<U> &onto) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely project a vector onto another **unit** vector.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project the @p vec vector onto the **unit** @p onto vector.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
+         * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to project.
-         * @param[in] onto           The vector to project onto.
+         * @param[in] vec  The vector to project.
+         * @param[in] onto The vector to project onto.
          *
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeProjectNorm(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> safeProjectNorm(const Vector2D &vec,
             const Vector2D<U> &onto) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely project this vector onto another vector and set @p status to the projection operation result.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project this vector onto the @p onto vector and set @p status to the
+         *        projection operation result.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
+         * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] onto           The vector to project onto.
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] onto    The vector to project onto.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
@@ -1416,20 +1446,23 @@ namespace fgm {
 
 
         /**
-         * @brief Safely project this vector onto another **unit** vector and set @p status to the projection operation
-         *        result.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project this vector onto the **unit** @p onto vector and set @p status to the
+         *        projection operation result.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
+         * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] onto           The vector to project onto.
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] onto    The vector to project onto.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
@@ -1441,53 +1474,59 @@ namespace fgm {
 
 
         /**
-         * @brief Safely project a vector onto another vector and set @p status to the projection operation result.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project the @p vec vector onto the @p onto vector and set @p status to the
+         *        projection operation result.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, projection is bypassed.
          * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to project.
-         * @param[in] onto           The vector to project onto.
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] vec     The vector to project.
+         * @param[in] onto    The vector to project onto.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryProject(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> tryProject(const Vector2D &vec,
                                                                               const Vector2D<U> &onto,
                                                                               OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely project a vector onto another **unit** vector and set @p status to the projection operation
-         *        result.
-         *        Compute the orthogonal projection: \f$ \text{proj}_{\mathbf{b}} \mathbf{a} = \frac{\mathbf{a} \cdot
-         *        \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b} \f$.
+         * @brief Project the @p vec vector onto the **unit** @p onto vector and set @p status to the
+         *        projection operation result.
+         *        \f$
+         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
+         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
+         *        \f$.
          *
+         * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to project.
-         * @param[in] onto           The vector to project onto.
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] vec     The vector to project.
+         * @param[in] onto    The vector to project onto.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The projected @ref Vector2D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryProjectNorm(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> tryProjectNorm(const Vector2D &vec,
             const Vector2D<U> &onto,
             OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
@@ -1500,8 +1539,7 @@ namespace fgm {
          *************************************/
 
         /**
-         * @brief Compute the vector rejection of this vector from another.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject this vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
          * @note To maintain precision, result components are promoted to their
@@ -1510,7 +1548,7 @@ namespace fgm {
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector2D component.
          */
@@ -1520,8 +1558,7 @@ namespace fgm {
 
 
         /**
-         * @brief Compute the vector rejection of this vector from **unit** another.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject this vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
          * @note To maintain precision, result components are promoted to their
@@ -1530,7 +1567,7 @@ namespace fgm {
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector2D component.
          */
@@ -1540,8 +1577,7 @@ namespace fgm {
 
 
         /**
-         * @brief Compute the vector rejection of a vector from another.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject the @p vec vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
          * @note To maintain precision, result components are promoted to their
@@ -1550,20 +1586,19 @@ namespace fgm {
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vector         The vector to be rejected.
-         * @param[in] from           The vector to reject from.
+         * @param[in] vec  The vector to be rejected.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector2D component.
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> reject(const Vector2D &vector,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> reject(const Vector2D &vec,
                                                                           const Vector2D<U> &from) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Compute the vector rejection of a vector from another **unit** vector.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject the @p vec vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
          * @note To maintain precision, result components are promoted to their
@@ -1572,29 +1607,30 @@ namespace fgm {
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vector         The vector to be rejected.
-         * @param[in] from           The vector to reject from.
+         * @param[in] vector The vector to be rejected.
+         * @param[in] from   The vector to reject from.
          *
          * @return The perpendicular @ref Vector2D component.
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> rejectNorm(const Vector2D &vector,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> rejectNorm(const Vector2D &vector,
                                                                               const Vector2D<U> &from) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely compute rejection of this vector from another vector.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject this vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
+         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1605,17 +1641,17 @@ namespace fgm {
 
 
         /**
-         * @brief Safely compute rejection of this vector from another **unit** vector.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject this vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
+         * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1626,66 +1662,67 @@ namespace fgm {
 
 
         /**
-         * @brief Safely compute rejection of a vector from another vector.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject the @p vec vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
+         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to reject.
-         * @param[in] from           The vector to reject from.
+         * @param[in] vec  The vector to reject.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeReject(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> safeReject(const Vector2D &vec,
                                                                               const Vector2D<U> &from) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely compute rejection of a vector from another **unit** vector.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject the @p vec vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
+         * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to reject.
-         * @param[in] from           The vector to reject from.
+         * @param[in] vec  The vector to reject.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> safeRejectNorm(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> safeRejectNorm(const Vector2D &vec,
             const Vector2D<U> &from) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely compute rejection of this vector from another vector and
-         *        set @p status to the result of rejection operation.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject this vector from the @p from vector and set @p status to the result of rejection operation.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
+         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] from    The vector to reject from
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1697,20 +1734,20 @@ namespace fgm {
 
 
         /**
-         * @brief Safely compute rejection of this vector from another vector and
-         *        set @p status to the result of rejection operation.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject this vector from the **unit** @p from vector and set @p status to the result of
+         *        rejection operation.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
+         * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] from           The vector to reject from
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] from    The vector to reject from
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
@@ -1722,54 +1759,54 @@ namespace fgm {
 
 
         /**
-         * @brief Safely compute rejection of a vector from another vector and
-         *        set @p status to the result of rejection operation.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject the @p vec vector from the @p from vector and set @p status to the result of
+         *        rejection operation.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
+         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to reject.
-         * @param[in] from           The vector to reject from.
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] vec     The vector to reject.
+         * @param[in] from    The vector to reject from.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryReject(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> tryReject(const Vector2D &vec,
                                                                              const Vector2D<U> &from,
                                                                              OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Safely compute rejection of a vector from another **unit** vector and
-         *        set @p status to the result of rejection operation.
-         *        Compute the component of the vector perpendicular to @p onto:
+         * @brief Reject the @p vec vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
          *
+         * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vec            The vector to reject.
-         * @param[in] from           The vector to reject from.
-         * @param[out] status        The status flag to store the status of the current operation result.
-         *                           For details on status codes see @ref OperationStatus.
+         * @param[in] vec     The vector to reject.
+         * @param[in] from    The vector to reject from.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
          *
          * @return The perpendicular @ref Vector2D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template<StrictArithmetic U>
-        [[nodiscard]] constexpr static PromotedFloatVector2D<T, U> tryRejectNorm(const Vector2D &vec,
+        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> tryRejectNorm(const Vector2D &vec,
             const Vector2D<U> &from,
             OperationStatus &status) noexcept
             requires StrictArithmetic<T>;
@@ -1801,7 +1838,7 @@ namespace fgm {
          *
          * @return True if at least one component is positive or negative infinity.
          */
-        [[nodiscard]] constexpr static bool hasInf(const Vector2D &vec) noexcept;
+        [[nodiscard]] static constexpr bool hasInf(const Vector2D &vec) noexcept;
 
 
         /**
@@ -1823,7 +1860,7 @@ namespace fgm {
          *
          * @return True if at least one component is NaN.
          */
-        [[nodiscard]] constexpr static bool hasNaN(const Vector2D &vec) noexcept;
+        [[nodiscard]] static constexpr bool hasNaN(const Vector2D &vec) noexcept;
 
         /** @} */
 
@@ -1842,7 +1879,7 @@ namespace fgm {
          *
          * @return A reference to the output stream @p os.
          */
-        constexpr friend std::ostream &operator<<(std::ostream &os, const Vector2D &vector) {
+        friend std::ostream &operator<<(std::ostream &os, const Vector2D &vector) {
             const std::streamsize oldPrecision = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
@@ -1989,6 +2026,7 @@ namespace fgm {
         /** @brief A 2D unit vector aligned with the positive Y-axis (0, 1). */
         template<StrictArithmetic T>
         inline constexpr Vector2D<T> y = Vector2D<T>(T(0), T(1));
+        
     } // namespace vec2d
 
 

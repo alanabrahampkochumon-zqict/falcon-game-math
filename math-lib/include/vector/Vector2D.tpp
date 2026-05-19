@@ -744,7 +744,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <Arithmetic U>
+    template <StrictArithmetic U>
     constexpr auto Vector2D<T>::cross(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>
     {
         using R = std::common_type_t<T, U>;
@@ -753,7 +753,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    template <Arithmetic U>
+    template <StrictArithmetic U>
     constexpr auto Vector2D<T>::cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept -> std::common_type_t<T, U>
     {
         return lhs.cross(rhs);
@@ -1069,10 +1069,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::reject(const Vector2D& vector, const Vector2D<U>& from) noexcept
+    constexpr PromotedFloatVector2D<T, U> Vector2D<T>::reject(const Vector2D& vec, const Vector2D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
-        return vector.reject(from);
+        return vec.reject(from);
     }
 
 
