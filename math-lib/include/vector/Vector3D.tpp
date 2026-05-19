@@ -832,7 +832,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <Arithmetic U>
+    template <StrictArithmetic U>
     constexpr auto Vector3D<T>::cross(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>>
     {
         using R = std::common_type_t<T, U>;
@@ -842,7 +842,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    template <Arithmetic U>
+    template <StrictArithmetic U>
     constexpr auto Vector3D<T>::cross(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
         -> Vector3D<std::common_type_t<T, U>>
     {

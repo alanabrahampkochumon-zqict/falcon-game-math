@@ -218,7 +218,7 @@ namespace fgm {
          */
 
         /**
-         * @brief Constructs a new vector by rearranging, duplicating, or isolating components of the current vector.
+         * @brief Construct a new vector by rearranging, duplicating, or isolating components of the current vector.
          *
          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
          *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime
@@ -236,7 +236,7 @@ namespace fgm {
 
 
         /**
-         * @brief Constructs a new vector by rearranging, duplicating, or isolating components of the given vector.
+         * @brief Construct a new vector by rearranging, duplicating, or isolating components of the given vector.
          *
          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
          *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime
@@ -877,9 +877,9 @@ namespace fgm {
 
         /**
          * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
-         *        If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
-         *        returns a zero vector.
-         *
+         *        
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
+         *       returns a zero vector.
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          *
@@ -896,10 +896,10 @@ namespace fgm {
 
 
         /**
-        * @brief Compute the component-wise division of @p vec by @p scalar and return a new vector.
-         *        If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
-         *        returns a zero vector.
-         *
+         * @brief Compute the component-wise division of @p vec by @p scalar and return a new vector.
+         * 
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
+         *       returns a zero vector.
          * @note Promote the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          *
@@ -917,10 +917,11 @@ namespace fgm {
 
 
         /**
-         * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
-         *        If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
-         *        returns a zero vector and updates @p status to reflect the result of the operation.
+         * @brief Compute the component-wise division of this vector by @p scalar, return a new vector,
+         *        and updates @p status to reflect the result of the operation.
          *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
+         *       returns a zero vector.
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
@@ -941,11 +942,12 @@ namespace fgm {
 
 
         /**
-         * @brief Compute the component-wise division of @p vec by @p scalar and return a new vector.
-         *        If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
-         *        returns a zero vector and updates @p status to reflect the result of the operation.
+         * @brief Compute the component-wise division of @p vec by @p scalar, return a new vector,
+         *        and updates @p status to reflect the result of the operation.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
+         *       returns a zero vector.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
@@ -980,7 +982,7 @@ namespace fgm {
 
         /**
          * @brief Compute the dot product with another vector.
-         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -996,9 +998,9 @@ namespace fgm {
             StrictArithmetic<T>;
 
 
-        /**s
+        /**
          * @brief Compute the dot product of two vectors.
-         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1023,7 +1025,7 @@ namespace fgm {
 
         /**
          * @brief Compute the 2D pseudo-cross product with another vector.
-         *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$.
+         *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1040,7 +1042,7 @@ namespace fgm {
 
         /**
          * @brief Compute the 2D pseudo-cross product of two vectors.
-         *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$.
+         *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1071,7 +1073,7 @@ namespace fgm {
 
         /**
          * @brief Compute the magnitude (length) of this vector.
-         *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
+         *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1084,7 +1086,7 @@ namespace fgm {
 
         /**
          * @brief Compute the magnitude (length) of the given vector.
-         *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$.
+         *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1105,7 +1107,7 @@ namespace fgm {
 
         /**
          * @brief Compute the normalized (unit) form of this vector.
-         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1120,7 +1122,7 @@ namespace fgm {
 
         /**
          * @brief Compute the normalized (unit) form of the given vector.
-         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1135,7 +1137,7 @@ namespace fgm {
 
         /**
          * @brief Compute the normalized (unit) form of this vector.
-         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note This is a safe operation. If the vector's magnitude falls below the internal
          *       epsilon, or if it contains NaN components, division by zero is bypassed.
@@ -1151,7 +1153,7 @@ namespace fgm {
 
         /**
          * @brief Compute the normalized (unit) form of the given vector.
-         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note This is a safe operation. If the vector's magnitude falls below the internal
          *       epsilon, or if it contains NaN components, division by zero is bypassed.
@@ -1170,7 +1172,7 @@ namespace fgm {
         /**
          * @brief Compute the normalized (unit) form of this vector and
          *        set @p status to the normalization operation result.
-         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note This is a safe operation. If the vector's magnitude falls below the internal
          *       epsilon, or if it contains NaN components, division by zero is bypassed.
@@ -1190,7 +1192,7 @@ namespace fgm {
         /**
          * @brief Compute the normalized (unit) form of the given vector and
          *        set @p status to the normalization operation result.
-         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note This is a safe operation. If the vector's magnitude falls below the internal
          *       epsilon, or if it contains NaN components, division by zero is bypassed.
@@ -1227,7 +1229,7 @@ namespace fgm {
          *        \f$
          *          \text{proj}_{\mathbf{b}} \mathbf{a} =
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *        \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1247,9 +1249,8 @@ namespace fgm {
         /**
          * @brief Project this vector onto the **unit** @p onto vector.
          *        \f$
-         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
-         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
+         *        \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1271,7 +1272,7 @@ namespace fgm {
          *        \f$
          *          \text{proj}_{\mathbf{b}} \mathbf{a} =
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *        \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1293,9 +1294,8 @@ namespace fgm {
         /**
          * @brief Project the @p vec vector onto the **unit** @p onto vector.
          *        \f$
-         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
-         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
+         *        \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1319,7 +1319,7 @@ namespace fgm {
          *        \f$
          *          \text{proj}_{\mathbf{b}} \mathbf{a} =
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *        \f$
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
@@ -1342,9 +1342,8 @@ namespace fgm {
         /**
          * @brief Project this vector onto the **unit** @p onto vector.
          *        \f$
-         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
-         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
+         *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
@@ -1368,7 +1367,7 @@ namespace fgm {
          *        \f$
          *          \text{proj}_{\mathbf{b}} \mathbf{a} =
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *        \f$
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
@@ -1393,9 +1392,8 @@ namespace fgm {
         /**
          * @brief Project the @p vec vector onto the **unit** @p onto vector.
          *        \f$
-         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
-         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
+         *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
@@ -1422,7 +1420,7 @@ namespace fgm {
          *        \f$
          *          \text{proj}_{\mathbf{b}} \mathbf{a} =
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *        \f$
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
@@ -1449,9 +1447,8 @@ namespace fgm {
          * @brief Project this vector onto the **unit** @p onto vector and set @p status to the
          *        projection operation result.
          *        \f$
-         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
-         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
+         *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
@@ -1479,7 +1476,7 @@ namespace fgm {
          *        \f$
          *          \text{proj}_{\mathbf{b}} \mathbf{a} =
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *        \f$
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
@@ -1506,11 +1503,12 @@ namespace fgm {
          * @brief Project the @p vec vector onto the **unit** @p onto vector and set @p status to the
          *        projection operation result.
          *        \f$
-         *          \text{proj}_{\mathbf{b}} \mathbf{a} =
-         *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
-         *        \f$.
+         *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
+         *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
+         * @note To maintain precision, result components are promoted to their corresponding floating-point 
+         *       representation via @ref Magnitude.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
@@ -1540,7 +1538,7 @@ namespace fgm {
 
         /**
          * @brief Reject this vector from the @p from vector.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1559,7 +1557,7 @@ namespace fgm {
 
         /**
          * @brief Reject this vector from the **unit** @p from vector.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1578,7 +1576,7 @@ namespace fgm {
 
         /**
          * @brief Reject the @p vec vector from the @p from vector.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1599,7 +1597,7 @@ namespace fgm {
 
         /**
          * @brief Reject the @p vec vector from the **unit** @p from vector.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
@@ -1620,7 +1618,7 @@ namespace fgm {
 
         /**
          * @brief Reject this vector from the @p from vector.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
@@ -1642,7 +1640,7 @@ namespace fgm {
 
         /**
          * @brief Reject this vector from the **unit** @p from vector.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
@@ -1663,7 +1661,7 @@ namespace fgm {
 
         /**
          * @brief Reject the @p vec vector from the @p from vector.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
@@ -1687,7 +1685,7 @@ namespace fgm {
 
         /**
          * @brief Reject the @p vec vector from the **unit** @p from vector.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
@@ -1710,7 +1708,7 @@ namespace fgm {
 
         /**
          * @brief Reject this vector from the @p from vector and set @p status to the result of rejection operation.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
@@ -1736,7 +1734,7 @@ namespace fgm {
         /**
          * @brief Reject this vector from the **unit** @p from vector and set @p status to the result of
          *        rejection operation.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
@@ -1761,7 +1759,7 @@ namespace fgm {
         /**
          * @brief Reject the @p vec vector from the @p from vector and set @p status to the result of
          *        rejection operation.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
@@ -1788,7 +1786,7 @@ namespace fgm {
 
         /**
          * @brief Reject the @p vec vector from the **unit** @p from vector.
-         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
