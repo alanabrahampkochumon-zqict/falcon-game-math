@@ -31,53 +31,37 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector4D<T>::Vector4D() noexcept
-    {
-        _data[0] = T(0);
-        _data[1] = T(0);
-        _data[2] = T(0);
-        _data[3] = T(0);
-    }
+    constexpr Vector4D<T>::Vector4D() noexcept: _data{ T(0), T(0), T(0), T(0) }
+    {}
 
 
     template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(const T v1, const T v2, const T v3, const T v4) noexcept
-    {
-        _data[0] = v1;
-        _data[1] = v2;
-        _data[2] = v3;
-        _data[3] = v4;
-    }
+        : _data{ T(v1), T(v2), T(v3), T(v4) }
+    {}
 
 
     template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(const Vector2D<T>& vec1, const Vector2D<T>& vec2) noexcept
-    {
-        _data[0] = vec1[0];
-        _data[1] = vec1[1];
-        _data[2] = vec2[0];
-        _data[3] = vec2[1];
-    }
+        : _data{ T(vec1[0]), T(vec1[1]), T(vec2[0]), T(vec2[1]) }
+    {}
 
 
     template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(const Vector3D<T>& vec, const T v) noexcept
-    {
-        _data[0] = vec[0];
-        _data[1] = vec[1];
-        _data[2] = vec[2];
-        _data[3] = v;
-    }
+        : _data{ T(vec[0]), T(vec[1]), T(vec[2]), T(v) }
+    {}
 
 
     template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(const T v, const Vector3D<T>& vec) noexcept
-    {
-        _data[0] = v;
-        _data[1] = vec[0];
-        _data[2] = vec[1];
-        _data[3] = vec[2];
-    }
+        : _data{
+              T(v),
+              T(vec[0]),
+              T(vec[1]),
+              T(vec[2]),
+          }
+    {}
 
 
     template <Arithmetic T>

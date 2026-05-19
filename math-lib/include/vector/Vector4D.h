@@ -32,6 +32,7 @@
 #include <cstddef>
 #include <iomanip>
 #include <ostream>
+#include <array>
 
 
 
@@ -2003,7 +2004,7 @@ namespace fgm
         /** @} */
 
     private:
-        T _data[dimension];
+        std::array<T, dimension> _data;
     };
 
 
