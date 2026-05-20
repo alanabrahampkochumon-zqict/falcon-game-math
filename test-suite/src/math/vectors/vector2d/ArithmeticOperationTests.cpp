@@ -146,12 +146,16 @@ namespace
     constexpr fgm::Vector2D vecB(3, 5);
     constexpr auto sumVec = vecA + vecB;
     constexpr auto diffVec = vecB - vecA;
+    constexpr auto scaledVec = vecA * 2;
 
     static_assert(sumVec.x() == 4);
     static_assert(sumVec.y() == 7);
 
     static_assert(diffVec.x() == 2);
     static_assert(diffVec.y() == 3);
+
+    static_assert(scaledVec.x() == 2);
+    static_assert(scaledVec.y() == 4);
 } // namespace
 
 

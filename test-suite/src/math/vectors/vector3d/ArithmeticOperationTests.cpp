@@ -136,6 +136,7 @@ namespace {
     constexpr fgm::Vector3D vecB(4, 3, 1);
     constexpr auto sumVec = vecA + vecB;
     constexpr auto diffVec = vecB - vecA;
+    constexpr auto scaledVec = vecA * 2;
 
     static_assert(sumVec.x() == 5);
     static_assert(sumVec.y() == 5);
@@ -144,6 +145,10 @@ namespace {
     static_assert(diffVec.x() == 3);
     static_assert(diffVec.y() == 1);
     static_assert(diffVec.z() == -2);
+
+    static_assert(scaledVec.x() == 2);
+    static_assert(scaledVec.y() == 4);
+    static_assert(scaledVec.z() == 6);
 } // namespace
 
 
