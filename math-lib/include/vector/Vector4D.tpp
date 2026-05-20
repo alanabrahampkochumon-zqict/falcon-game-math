@@ -288,7 +288,7 @@ namespace fgm {
 
     /***************************************
      *                                     *
-     *             EQUALITY                *
+     *         EQUALITY (ABSOLUTE)         *
      *                                     *
      ***************************************/
 
@@ -363,6 +363,12 @@ namespace fgm {
         return this->anyNeq(rhs);
     }
 
+
+    /***************************************
+     *                                     *
+     *           EQUALITY (MASK)           *
+     *                                     *
+     ***************************************/
 
     template<Arithmetic T>
     template<Arithmetic U>
@@ -636,7 +642,7 @@ namespace fgm {
 
     /*************************************
      *                                   *
-     *         MULTIPLICATION            *
+     *           MULTIPLICATION          *
      *                                   *
      *************************************/
 
@@ -670,7 +676,7 @@ namespace fgm {
 
     /*************************************
      *                                   *
-     *            DIVISION               *
+     *             DIVISION              *
      *                                   *
      *************************************/
 
@@ -1230,6 +1236,7 @@ namespace fgm {
         return vec.hasNaN();
     }
 } // namespace fgm
+
 
 #if defined(__clang__)
 #pragma clang diagnostic pop

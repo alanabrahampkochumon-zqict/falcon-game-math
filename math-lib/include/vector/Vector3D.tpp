@@ -16,6 +16,7 @@
 #pragma clang diagnostic ignored "-Wbitwise-instead-of-logical"
 #endif
 
+
 namespace fgm {
     /*************************************
      *                                   *
@@ -52,7 +53,13 @@ namespace fgm {
      *                                   *
      *            ACCESSORS              *
      *                                   *
-     *************************************/
+    *************************************/
+
+    /**************************************
+     *                                    *
+     *        SPATIAL COORDINATES         *
+     *                                    *
+     **************************************/
 
     template<Arithmetic T>
     constexpr T Vector3D<T>::x() const noexcept {
@@ -90,6 +97,12 @@ namespace fgm {
     }
 
 
+    /**************************************
+     *                                    *
+     *           STP COORDINATES          *
+     *                                    *
+     **************************************/
+
     template<Arithmetic T>
     constexpr T Vector3D<T>::s() const noexcept {
         return _data[0];
@@ -125,6 +138,12 @@ namespace fgm {
         return _data[2];
     }
 
+
+    /**************************************
+     *                                    *
+     *         COLOR COORDINATES          *
+     *                                    *
+     **************************************/
 
     template<Arithmetic T>
     constexpr T Vector3D<T>::r() const noexcept {
@@ -162,6 +181,12 @@ namespace fgm {
     }
 
 
+    /**************************************
+     *                                    *
+     *              INDEXING              *
+     *                                    *
+     **************************************/
+
     template<Arithmetic T>
     constexpr T &Vector3D<T>::operator[](const std::size_t idx) noexcept {
         return _data[idx];
@@ -173,6 +198,13 @@ namespace fgm {
         return _data[idx];
     }
 
+
+
+    /**************************************
+     *                                    *
+     *             SWIZZLING              *
+     *                                    *
+     **************************************/
 
     template<Arithmetic T>
     template<std::size_t... Indices>
@@ -199,9 +231,10 @@ namespace fgm {
     }
 
 
+
     /***************************************
      *                                     *
-     *             EQUALITY                *
+     *         EQUALITY (ABSOLUTE)         *
      *                                     *
      ***************************************/
 
@@ -256,6 +289,12 @@ namespace fgm {
     }
 
 
+    /**************************************
+     *                                    *
+     *         EQUALITY OPERATORS         *
+     *                                    *
+     **************************************/
+
     template<Arithmetic T>
     template<Arithmetic U>
     constexpr bool Vector3D<T>::operator==(const Vector3D<U> &rhs) const noexcept {
@@ -268,6 +307,12 @@ namespace fgm {
         return this->anyNeq(rhs);
     }
 
+
+    /***************************************
+     *                                     *
+     *           EQUALITY (MASK)           *
+     *                                     *
+     ***************************************/
 
     template<Arithmetic T>
     template<Arithmetic U>
@@ -386,6 +431,12 @@ namespace fgm {
     }
 
 
+    /***************************************
+     *                                     *
+     *        COMPARISON OPERATORS         *
+     *                                     *
+     ***************************************/
+
     #ifdef ENABLE_FGM_SHADER_OPERATORS
 
     template<Arithmetic T>
@@ -465,9 +516,16 @@ namespace fgm {
     }
 
 
+
     /*************************************
      *                                   *
      *      ARITHMETIC OPERATORS         *
+     *                                   *
+    *************************************/
+
+    /*************************************
+     *                                   *
+     *            ADDITION               *
      *                                   *
      *************************************/
 
@@ -490,6 +548,12 @@ namespace fgm {
         return *this;
     }
 
+
+    /*************************************
+     *                                   *
+     *           SUBTRACTION             *
+     *                                   *
+     *************************************/
 
     template<Arithmetic T>
     template<StrictArithmetic U>
@@ -518,6 +582,12 @@ namespace fgm {
     }
 
 
+    /*************************************
+     *                                   *
+     *           MULTIPLICATION          *
+     *                                   *
+     *************************************/
+
     template<Arithmetic T>
     template<StrictArithmetic S>
     constexpr auto Vector3D<T>::operator*(const S scalar) const noexcept -> Vector3D<std::common_type_t<T, S> > requires
@@ -544,6 +614,12 @@ namespace fgm {
         return *this;
     }
 
+
+    /*************************************
+     *                                   *
+     *             DIVISION              *
+     *                                   *
+     *************************************/
 
     template<Arithmetic T>
     template<StrictArithmetic S>
@@ -1119,6 +1195,7 @@ namespace fgm {
         return vec.hasNaN();
     }
 } // namespace fgm
+
 
 #if defined(__clang__)
 #pragma clang diagnostic pop

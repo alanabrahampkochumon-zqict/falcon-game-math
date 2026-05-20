@@ -375,6 +375,7 @@ namespace fgm {
     #endif
 
 
+
     /***************************************
      *                                     *
      *      BOOLEAN BITWISE OPERATORS      *
@@ -654,6 +655,7 @@ namespace fgm {
     }
 
 
+
     /*************************************
      *                                   *
      *         VECTOR MAGNITUDE          *
@@ -676,6 +678,7 @@ namespace fgm {
         requires StrictArithmetic<T> {
         return vec.mag();
     }
+
 
 
     /*************************************
@@ -745,6 +748,7 @@ namespace fgm {
         requires StrictArithmetic<T> {
         return vec.tryNormalize(status);
     }
+
 
 
     /*************************************
@@ -905,6 +909,7 @@ namespace fgm {
     }
 
 
+
     /*************************************
      *                                   *
      *         VECTOR REJECTION          *
@@ -1031,6 +1036,7 @@ namespace fgm {
     }
 
 
+
     /**************************************
      *                                    *
      *             UTILITIES              *
@@ -1067,6 +1073,7 @@ namespace fgm {
     constexpr bool Vector2D<T>::hasNaN(const Vector2D &vec) noexcept {
         return vec.hasNaN();
     }
+
 } // namespace fgm
 
 #if defined(__clang__)
