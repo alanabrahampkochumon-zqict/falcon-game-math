@@ -143,11 +143,15 @@ INSTANTIATE_TEST_SUITE_P(Vector2DDivisionTestSuite, Vector2DDivisionNaNTests,
 namespace
 {
     constexpr fgm::Vector2D vecA(1, 2);
-    constexpr fgm::Vector2D vecB(3, 4);
+    constexpr fgm::Vector2D vecB(3, 5);
     constexpr auto sumVec = vecA + vecB;
+    constexpr auto diffVec = vecB - vecA;
 
     static_assert(sumVec.x() == 4);
-    static_assert(sumVec.y() == 6);
+    static_assert(sumVec.y() == 7);
+
+    static_assert(diffVec.x() == 2);
+    static_assert(diffVec.y() == 3);
 } // namespace
 
 
@@ -253,7 +257,7 @@ TYPED_TEST(Vector2DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
  * @test Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Vector2DSubtraction, MixedTypeSubtractionPromotesType)
+TEST(Vector2DSubtraction, MinusOperator_MixedTypePromotesType)
 {
     const fgm::Vector2D vec1(3.0f, -1.0f);
     const fgm::Vector2D vec2(9.0, 10.0);
@@ -268,7 +272,7 @@ TEST(Vector2DSubtraction, MixedTypeSubtractionPromotesType)
  * @test Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Vector2DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+TEST(Vector2DSubtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
     fgm::Vector2D vec1(3.0f, -1.0f);
     const fgm::Vector2D vec2(9.0, 10.0);

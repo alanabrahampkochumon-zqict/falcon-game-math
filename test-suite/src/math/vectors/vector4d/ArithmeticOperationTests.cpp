@@ -144,13 +144,19 @@ INSTANTIATE_TEST_SUITE_P(Vector4DDivisionTestSuite, Vector4DDivisionNaNTests,
 namespace
 {
     constexpr fgm::Vector4D vecA(1, 2, 3, 4);
-    constexpr fgm::Vector4D vecB(5, 6, 7, 8);
+    constexpr fgm::Vector4D vecB(5, 12, 5, 3);
     constexpr auto sumVec = vecA + vecB;
+    constexpr auto diffVec = vecB - vecA;
 
     static_assert(sumVec.x() == 6);
-    static_assert(sumVec.y() == 8);
-    static_assert(sumVec.z() == 10);
-    static_assert(sumVec.w() == 12);
+    static_assert(sumVec.y() == 14);
+    static_assert(sumVec.z() == 8);
+    static_assert(sumVec.w() == 7);
+
+    static_assert(diffVec.x() == 4);
+    static_assert(diffVec.y() == 10);
+    static_assert(diffVec.z() == 2);
+    static_assert(diffVec.w() == -1);
 } // namespace
 
 
@@ -256,7 +262,7 @@ TYPED_TEST(Vector4DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
  * @test Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Vector4DSubtraction, MixedTypeSubtractionPromotesType)
+TEST(Vector4DSubtraction, MinusOperator_MixedTypePromotesType)
 {
     const fgm::Vector4D vec1(3.0f, 0.0f, -1.0f, 2.0f);
     const fgm::Vector4D vec2(9.0, -5.0, 10.0, 3.0);
@@ -271,7 +277,7 @@ TEST(Vector4DSubtraction, MixedTypeSubtractionPromotesType)
  * @test Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Vector4DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+TEST(Vector4DSubtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
     fgm::Vector4D vec1(3.0f, 0.0f, -1.0f, 2.0f);
     const fgm::Vector4D vec2(9.0, -5.0, 10.0, 3.0);
