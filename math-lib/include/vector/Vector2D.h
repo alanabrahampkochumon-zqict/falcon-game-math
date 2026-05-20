@@ -28,6 +28,7 @@
 
 #include <iomanip>
 #include <type_traits>
+#include <array>
 
 
 namespace fgm {
@@ -1898,7 +1899,7 @@ namespace fgm {
         /** @} */
 
     private:
-        T _data[dimension];
+        std::array<T, dimension> _data;
     };
 
 
@@ -2024,7 +2025,6 @@ namespace fgm {
         /** @brief A 2D unit vector aligned with the positive Y-axis (0, 1). */
         template<StrictArithmetic T>
         inline constexpr Vector2D<T> y = Vector2D<T>(T(0), T(1));
-        
     } // namespace vec2d
 
 
