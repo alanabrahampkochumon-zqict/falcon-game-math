@@ -16,7 +16,29 @@
 /**
  * @addtogroup T_FGM_Vec4_Access
  * @{
- */
+*/
+
+
+/** @brief Verify that vector accessors are available at compile time. */
+namespace {
+    constexpr fgm::Vector4D vector(1, 2, 3, 4);
+
+    static_assert(vector.x() == 1);
+    static_assert(vector.y() == 2);
+    static_assert(vector.z() == 3);
+    static_assert(vector.w() == 4);
+
+    static_assert(vector.r() == 1);
+    static_assert(vector.g() == 2);
+    static_assert(vector.b() == 3);
+    static_assert(vector.a() == 4);
+
+    static_assert(vector.s() == 1);
+    static_assert(vector.t() == 2);
+    static_assert(vector.p() == 3);
+    static_assert(vector.q() == 4);
+}
+
 
 /**************************************
  *                                    *

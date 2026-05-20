@@ -18,6 +18,24 @@
  * @{
  */
 
+/** @brief Verify that vector accessors are available at compile time. */
+namespace {
+    constexpr fgm::Vector3D vector(1, 2, 3);
+
+    static_assert(vector.x() == 1);
+    static_assert(vector.y() == 2);
+    static_assert(vector.z() == 3);
+
+    static_assert(vector.r() == 1);
+    static_assert(vector.g() == 2);
+    static_assert(vector.b() == 3);
+
+    static_assert(vector.s() == 1);
+    static_assert(vector.t() == 2);
+    static_assert(vector.p() == 3);
+}
+
+
 /**************************************
  *                                    *
  *            ACCESS TESTS            *

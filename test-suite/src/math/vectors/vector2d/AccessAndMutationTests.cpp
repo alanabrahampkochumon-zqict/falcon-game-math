@@ -18,6 +18,20 @@
  * @{
  */
 
+/** @brief Verify that vector accessors are available at compile time. */
+namespace {
+    constexpr fgm::Vector2D vector(1, 2);
+
+    static_assert(vector.x() == 1);
+    static_assert(vector.y() == 2);
+
+    static_assert(vector.r() == 1);
+    static_assert(vector.g() == 2);
+
+    static_assert(vector.s() == 1);
+    static_assert(vector.t() == 2);
+}
+
 /**************************************
  *                                    *
  *            ACCESS TESTS            *
