@@ -923,9 +923,9 @@ namespace fgm {
          * @brief Compute the component-wise division of @p vec by @p scalar, return a new vector,
          *        and updates @p status to reflect the result of the operation.
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
+         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.

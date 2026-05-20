@@ -266,9 +266,9 @@ namespace fgm
     }
 
     template <StrictArithmetic T, StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> operator*(const S scalar, const Matrix2D<T>& mat) noexcept
+    constexpr PromotedMatrix2D<T, S> operator*(const S scalar, const Matrix2D<T>& matrix) noexcept
     {
-        return mat * scalar;
+        return matrix * scalar;
     }
 
 
@@ -302,7 +302,7 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
+    constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept
     {
         using R = std::common_type_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -311,23 +311,23 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vector2D<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
-                                            static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0))),
-                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
-                                            static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1))));
+                return Vector2D<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
+                                            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0))),
+                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
+                                            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1))));
             }
         }
 
 #endif
-        R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0));
-        R y = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1));
+        R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0));
+        R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1));
 
         return Vector2D<R>(x, y);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2D<U>& mat) noexcept
+    constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept
     {
         using R = std::common_type_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -336,10 +336,10 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 0)),
-                               static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0)));
-                R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(mat(0, 1)),
-                               static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1)));
+                R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
+                               static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0)));
+                R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
+                               static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1)));
 
                 vec.x() = static_cast<T>(x);
                 vec.y() = static_cast<T>(y);
@@ -348,8 +348,8 @@ namespace fgm
             }
         }
 #endif
-        R x = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 0));
-        R y = static_cast<R>(vec[0]) * static_cast<R>(mat(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(mat(1, 1));
+        R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0));
+        R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1));
 
         vec.x() = static_cast<T>(x);
         vec.y() = static_cast<T>(y);
@@ -516,11 +516,11 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T Matrix2D<T>::determinant(const Matrix2D& mat) noexcept
+    constexpr T Matrix2D<T>::determinant(const Matrix2D& matrix) noexcept
         requires SignedStrictArithmetic<T>
     {
 
-        return mat.determinant();
+        return matrix.determinant();
     }
 
 
@@ -533,9 +533,9 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::transpose(const Matrix2D& mat) noexcept
+    constexpr Matrix2D<T> Matrix2D<T>::transpose(const Matrix2D& matrix) noexcept
     {
-        return mat.transpose();
+        return matrix.transpose();
     }
 
 
@@ -664,10 +664,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T Matrix2D<T>::trace(const Matrix2D& mat) noexcept
+    constexpr T Matrix2D<T>::trace(const Matrix2D& matrix) noexcept
         requires StrictArithmetic<T>
     {
-        return mat.trace();
+        return matrix.trace();
     }
 
 
@@ -686,9 +686,9 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr bool Matrix2D<T>::hasInf(const Matrix2D& mat) noexcept
+    constexpr bool Matrix2D<T>::hasInf(const Matrix2D& matrix) noexcept
     {
-        return mat.hasInf();
+        return matrix.hasInf();
     }
 
 
@@ -700,9 +700,9 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr bool Matrix2D<T>::hasNaN(const Matrix2D& mat) noexcept
+    constexpr bool Matrix2D<T>::hasNaN(const Matrix2D& matrix) noexcept
     {
-        return mat.hasNaN();
+        return matrix.hasNaN();
     }
 
 

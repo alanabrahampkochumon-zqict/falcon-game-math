@@ -43,7 +43,7 @@ namespace fgm {
          * @{
          */
 
-        using value_type = T; ///< The numeric type of the vector components.
+        using value_type = T; ///< The numeric type of the matrix elements.
 
         static constexpr std::size_t columns = 3; ///< Matrix column count.
         static constexpr std::size_t rows = 3; ///< Matrix row count.
@@ -117,8 +117,7 @@ namespace fgm {
          */
 
         /**
-         * @brief Access the column vector at the specified location.
-         *        Provide read-write access to the element.
+         * @brief Access the column vector at the specified location (read-write access).
          *
          * @param[in] col The column index of the matrix.
          *
@@ -138,8 +137,7 @@ namespace fgm {
 
 
         /**
-         * @brief Access the element at the specified row, column index.
-         *        Provide read-write access to the element.
+         * @brief Access the element at the specified row, column index (read-write access).
          *
          * @param[in] row The row index of the matrix entry.
          * @param[in] col The column index of the matrix entry.
@@ -313,7 +311,7 @@ namespace fgm {
 
 
         /**
-         * @copybrief anyNeq(const Vector3D<U>&, double) const noexcept
+         * @copybrief anyNeq(const Matrix3D<U>&, double) const noexcept
          *
          * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
          *       during static evaluation.
@@ -336,8 +334,7 @@ namespace fgm {
          */
 
         /**
-         * @brief Add two matrices element-wise.
-         *        Compute the sum of each element pair and returns a new matrix.
+         * @brief Compute the element-wise sum of this matrix with @p rhs matrix and return a new matrix.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -354,8 +351,7 @@ namespace fgm {
 
 
         /**
-         * @brief Add another matrix to this matrix element-wise.
-         *        Perform an in-place addition of @p rhs to the current instance.
+         * @brief Compute the element-wise sum of this matrix with @p rhs matrix in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
@@ -371,8 +367,7 @@ namespace fgm {
 
 
         /**
-         * @brief Subtract two matrices element-wise.
-         *        Compute the difference between each element pair and returns a new matrix.
+         * @brief Compute the element-wise difference between this matrix and @p rhs matrix and return a new matrix.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -389,8 +384,7 @@ namespace fgm {
 
 
         /**
-         * @brief Subtract another matrix from this matrix element-wise.
-         *        Perform an in-place substraction of @p rhs from the current instance.
+         * @brief Compute the element-wise difference between this matrix and @p rhs matrix in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
@@ -406,8 +400,7 @@ namespace fgm {
 
 
         /**
-         * @brief Scale the matrix by a scalar value.
-         *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+         * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
          *
          * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -424,8 +417,7 @@ namespace fgm {
 
 
         /**
-         * @brief Scale this matrix in-place by a scalar value.
-         *        Perform an in-place multiplication of each element by @p scalar.
+         * @brief Compute the element-wise product between this matrix and @p scalar in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
@@ -441,8 +433,7 @@ namespace fgm {
 
 
         /**
-         * @brief Transform the **column vector** by this matrix.
-         *        Perform the linear transformation:
+         * @brief Transform the @p vec **column vector** by this matrix.
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} \\
@@ -474,8 +465,7 @@ namespace fgm {
 
 
         /**
-         * @brief Compose this matrix with another to form a new matrix.
-         *        Compute the matrix product:
+         * @brief Compose this matrix with @p rhs matrix to form a new matrix.
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} \\
@@ -511,8 +501,7 @@ namespace fgm {
 
 
         /**
-         * @brief Compose this matrix with another matrix in-place.
-         *        Compute the matrix product:
+         * @brief Compose this matrix with @p rhs matrix in-place.
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} \\
@@ -548,8 +537,7 @@ namespace fgm {
 
 
         /**
-         * @brief Inverse-scale the matrix by a scalar value.
-         *        Divide each element of the matrix by @p scalar and returns a new matrix.
+         * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -566,8 +554,7 @@ namespace fgm {
 
 
         /**
-         * @brief Inverse-scale this matrix by a scalar value.
-         *        Perform an in-place division of each element by @p scalar.
+         * @brief Compute the element-wise division of this matrix by @p scalar in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
@@ -583,9 +570,10 @@ namespace fgm {
 
 
         /**
-         * @brief Safely divide each element of this matrix by a scalar value.
-         *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
-         *
+         * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
+         *        
+         * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
@@ -607,9 +595,10 @@ namespace fgm {
 
 
         /**
-         * @brief Safely divide each element of a matrix by a scalar value.
-         *        Divide each element of the matrix by @p scalar and returns the newly computed matrix.
+         * @brief Compute the element-wise division of @p mat by @p scalar and return a new matrix.
          *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
@@ -632,9 +621,11 @@ namespace fgm {
 
 
         /**
-         * @brief Safely divide this matrix by a scalar value and set @p status to the division operation result.
-         *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
+         * @brief Compute the element-wise division of this matrix by @p scalar, return a new matrix,
+         *        and updates @p status to reflect the result of the operation.
          *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
+         *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
@@ -660,9 +651,11 @@ namespace fgm {
 
 
         /**
-         * @brief Safely divide a matrix by a scalar value and set @p status to the division operation result.
-         *        Divides each element of the matrix by @p scalar and returns the newly computed matrix.
+         * @brief Compute the element-wise division of @p vec by @p scalar, return a new matrix,
+         *        and updates @p status to reflect the result of the operation.
          *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
@@ -697,7 +690,6 @@ namespace fgm {
 
         /**
          * @brief Compute the determinant (scaling factor) of this matrix.
-         *        Calculate determinant:
          *        \f$
          *            \begin{align*}
          *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
@@ -715,8 +707,7 @@ namespace fgm {
 
 
         /**
-         * @brief Compute the determinant (scaling factor) of a matrix.
-         *        Calculate determinant:
+         * @brief Compute the determinant (scaling factor) of @p matrix.
          *        \f$
          *            \begin{align*}
          *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
@@ -727,17 +718,16 @@ namespace fgm {
          *
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          *
-         * @param mat The matrix to compute the determinant of.
+         * @param matrix The matrix to compute the determinant of.
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
          */
-        static constexpr T determinant(const Matrix3D &mat) noexcept
+        static constexpr T determinant(const Matrix3D &matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
         /**
          * @brief Transpose this matrix by swapping its rows and columns.
-         *        Compute transpose:
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} \\
@@ -759,8 +749,7 @@ namespace fgm {
 
 
         /**
-         * @brief Transpose a matrix by swapping its rows and columns.
-         *        Compute transpose:
+         * @brief Transpose @p matrix by swapping its rows and columns.
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} \\
@@ -775,17 +764,16 @@ namespace fgm {
          *            \end{bmatrix}
          *        \f$
          *
-         * @param mat The matrix to transpose.
+         * @param matrix The matrix to transpose.
          *
          * @return A new @ref Matrix3D with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr static Matrix3D transpose(const Matrix3D &mat) noexcept;
+        constexpr static Matrix3D transpose(const Matrix3D &matrix) noexcept;
 
 
         /**
          * @brief Compute the inverse of this matrix.
-         *        Calculate inverse:
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} \\
@@ -813,7 +801,6 @@ namespace fgm {
 
         /**
          * @brief Compute the inverse of a matrix.
-         *        Calculate inverse:
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} \\
@@ -842,8 +829,7 @@ namespace fgm {
 
 
         /**
-         * @brief Safely compute the inverse of this matrix.
-         *        Calculate inverse:
+         * @brief Compute the inverse of this matrix.
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} \\
@@ -859,6 +845,8 @@ namespace fgm {
          *            \end{bmatrix}
          *        \f$
          *
+         * @note If the determinant is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
@@ -874,8 +862,7 @@ namespace fgm {
 
 
         /**
-         * @brief Safely compute the inverse of a matrix.
-         *        Calculate inverse:
+         * @brief Compute the inverse of @p matrix.
          *        \f$
          *            \begin{bmatrix}
          *                A_{00} & A_{01} & A_{02} \\
@@ -891,6 +878,8 @@ namespace fgm {
          *            \end{bmatrix}
          *        \f$
          *
+         * @note If the determinant is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
@@ -908,8 +897,7 @@ namespace fgm {
 
 
         /**
-         * @brief Safely compute the inverse of this matrix and set @p status to the matrix inversion result.
-         *        Calculate inverse:
+         * @brief Compute the inverse of this matrix and set @p status to the matrix inversion result.
          *        \f$
          *            \begin{bmatrix}
          *                A_{00} & A_{01} & A_{02} \\
@@ -925,6 +913,8 @@ namespace fgm {
          *            \end{bmatrix}
          *        \f$
          *
+         * @note If the determinant is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
@@ -943,8 +933,7 @@ namespace fgm {
 
 
         /**
-         * @brief Safely compute the inverse of a matrix and set @p status to the matrix inversion result.
-         *        Calculate inverse:
+         * @brief Compute the inverse of @p matrix and set @p status to the matrix inversion result.
          *        \f$
          *            \begin{bmatrix}
          *                A_{00} & A_{01} & A_{02} \\
@@ -960,6 +949,8 @@ namespace fgm {
          *            \end{bmatrix}
          *        \f$
          *
+         * @note If the determinant is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          * @note Returns @p fallback if attempting to invert a singular matrix or a matrix with NaN entries.
@@ -988,13 +979,13 @@ namespace fgm {
 
 
         /**
-         * @brief Compute the sum of diagonal entries of a matrix.
+         * @brief Compute the sum of diagonal entries of @p matrix.
          *
-         * @param mat The matrix whose trace is to be computed.
+         * @param matrix The matrix whose trace is to be computed.
          *
          * @return The sum of entries along the main diagonal of the given matrix.
          */
-        [[nodiscard]] static constexpr T trace(const Matrix3D &mat) noexcept
+        [[nodiscard]] static constexpr T trace(const Matrix3D &matrix) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1016,15 +1007,15 @@ namespace fgm {
 
 
         /**
-         * @brief Check if any element of a matrix is an IEEE 754 infinity.
+         * @brief Check if any element of @p matrix is an IEEE 754 infinity.
          *
          * @note Always returns false for integral types.
          *
-         * @param mat The matrix to evaluate for indefinite elements.
+         * @param matrix The matrix to evaluate for indefinite elements.
          *
          * @return True if at least one element is positive or negative infinity.
          */
-        [[nodiscard]] constexpr static bool hasInf(const Matrix3D &mat) noexcept;
+        [[nodiscard]] constexpr static bool hasInf(const Matrix3D& matrix) noexcept;
 
 
         /**
@@ -1038,15 +1029,15 @@ namespace fgm {
 
 
         /**
-         * @brief Check if any element of this matrix is an IEEE NaN(Not-a-Number).
+         * @brief Check if any element of @p matrix is an IEEE NaN(Not-a-Number).
          *
          * @note Always return false for integral types.
          *
-         * @param mat The matrix to evaluate for indefinite elements.
+         * @param matrix The matrix to evaluate for indefinite elements.
          *
          * @return True if at least one element is NaN.
          */
-        [[nodiscard]] constexpr static bool hasNaN(const Matrix3D &mat) noexcept;
+        [[nodiscard]] constexpr static bool hasNaN(const Matrix3D &matrix) noexcept;
 
         /** @} */
 
@@ -1072,7 +1063,7 @@ namespace fgm {
          *
          * @return A reference to the output stream @p os.
          */
-        constexpr friend std::ostream &operator<<(std::ostream &os, const Matrix3D &matrix) {
+        friend std::ostream &operator<<(std::ostream &os, const Matrix3D &matrix) {
             const std::streamsize oldPrecision = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
@@ -1122,6 +1113,7 @@ namespace fgm {
     /** @} */
 
 
+
     /**************************************
      *                                    *
      *        NON-MEMBER FUNCTIONS        *
@@ -1134,8 +1126,7 @@ namespace fgm {
      */
 
     /**
-     * @brief Scale the matrix by a scalar value.
-     *        Multiply each element of the matrix by @p scalar and returns a new matrix.
+     * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
      *
      * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1143,16 +1134,49 @@ namespace fgm {
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
      *
      * @param[in] scalar The value to scale by.
-     * @param[in] mat    The matrix to scale.
+     * @param[in] matrix The matrix to scale.
      *
      * @return A new @ref Matrix3D scaled by @p scalar.
      */
     template<StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar, const Matrix3D<T> &mat) noexcept;
+    [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar, const Matrix3D<T> &matrix) noexcept;
 
 
     /**
-     * @brief Transform the **row vector** by a matrix.
+     * @brief Transform the @p vec **row vector** by @p matrix.
+     *        \f$
+     *            \begin{bmatrix}
+     *                x & y & z
+     *            \end{bmatrix}
+     *            \cdot
+     *            \begin{bmatrix}
+     *                A_{00} & A_{01} & A_{02} \\
+     *                A_{10} & A_{11} & A_{12} \\
+     *                A_{20} & A_{21} & A_{22}
+     *            \end{bmatrix}
+     *            =
+     *            \begin{bmatrix}
+     *                x' & y' & z'
+     *            \end{bmatrix}
+     *        \f$
+     *
+     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
+     * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] vec    The row vector to transform.
+     * @param[in] matrix The transformation matrix.
+     *
+     * @return The passed-in @p vec with the transformations applied.
+     */
+    template<StrictArithmetic T, StrictArithmetic U>
+    static constexpr PromotedVector3D<T, U> operator*(const Vector3D<T> &vec, const Matrix3D<U> &matrix) noexcept;
+
+
+    /**
+     * @brief Transform the @p vec **row vector** by @p matrix.
      *        Perform the linear transformation:
      *        \f$
      *            \begin{bmatrix}
@@ -1176,47 +1200,13 @@ namespace fgm {
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
      * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
      *
-     * @param[in] vec The row vector to transformed.
-     * @param[in] mat The transformation matrix.
+     * @param[in] vec The row vector to transform.
+     * @param[in] matrix The transformation matrix.
      *
      * @return The passed-in @p vec with the transformations applied.
      */
     template<StrictArithmetic T, StrictArithmetic U>
-    static constexpr PromotedVector3D<T, U> operator*(const Vector3D<T> &vec, const Matrix3D<U> &mat) noexcept;
-
-
-    /**
-     * @brief Transform this **row vector** by a matrix.
-     *        Perform the linear transformation:
-     *        \f$
-     *            \begin{bmatrix}
-     *                x & y & z
-     *            \end{bmatrix}
-     *            \cdot
-     *            \begin{bmatrix}
-     *                A_{00} & A_{01} & A_{02} \\
-     *                A_{10} & A_{11} & A_{12} \\
-     *                A_{20} & A_{21} & A_{22}
-     *            \end{bmatrix}
-     *            =
-     *            \begin{bmatrix}
-     *                x' & y' & z'
-     *            \end{bmatrix}
-     *        \f$
-     *
-     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
-     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-     *
-     * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
-     * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
-     *
-     * @param[in] vec The row vector to transformed.
-     * @param[in] mat The transformation matrix.
-     *
-     * @return The passed-in @p vec with the transformations applied.
-     */
-    template<StrictArithmetic T, StrictArithmetic U>
-    static constexpr Vector3D<T> &operator*=(Vector3D<T> &vec, const Matrix3D<U> &mat) noexcept;
+    static constexpr Vector3D<T> &operator*=(Vector3D<T> &vec, const Matrix3D<U> &matrix) noexcept;
 
     /** @} */
 
