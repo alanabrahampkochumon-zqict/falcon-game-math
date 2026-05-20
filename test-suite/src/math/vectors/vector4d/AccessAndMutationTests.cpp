@@ -18,6 +18,11 @@
  * @{
  */
 
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
 
 /** @brief Verify that vector accessors are available at compile time. */
 namespace

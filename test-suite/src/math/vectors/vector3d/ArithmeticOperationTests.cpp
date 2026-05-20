@@ -133,6 +133,25 @@ INSTANTIATE_TEST_SUITE_P(Vector3DDivisionTestSuite, Vector3DDivisionNaNTests,
 
 /**************************************
  *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that vector addition operation is available at compile time. */
+namespace
+{
+    constexpr fgm::Vector3D vecA(1, 2, 3);
+    constexpr fgm::Vector3D vecB(4, 5, 6);
+    constexpr auto sumVec = vecA + vecB;
+
+    static_assert(sumVec.x() == 5);
+    static_assert(sumVec.y() == 7);
+    static_assert(sumVec.z() == 9);
+} // namespace
+
+
+/**************************************
+ *                                    *
  *           ADDITION TESTS           *
  *                                    *
  **************************************/
@@ -165,7 +184,7 @@ TYPED_TEST(Vector3DAddition, PlusEqualsOperator_ReturnsSameVectorWithSum)
  * @test Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Vector3DAddition, MixedTypeAdditionPromotesType)
+TEST(Vector3DAddition, PlusOperator_MixedTypePromotesType)
 {
     const fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
     const fgm::Vector3D vec2(9.0, -5.0, 10.0);
@@ -180,7 +199,7 @@ TEST(Vector3DAddition, MixedTypeAdditionPromotesType)
  * @test Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Vector3DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
+TEST(Vector3DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
     fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
     const fgm::Vector3D vec2(9.0, -5.0, 10.0);

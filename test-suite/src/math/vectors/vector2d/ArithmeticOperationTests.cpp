@@ -12,7 +12,6 @@
 #include "Vector2DTestSetup.h"
 
 
-
 /**************************************
  *                                    *
  *               SETUP                *
@@ -34,6 +33,7 @@ protected:
         _expectedSum = { T(-5), T(6) };
     }
 };
+
 /** @brief Test fixture for @ref fgm::Vector2D addition, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DAddition, SupportedArithmeticTypes);
 
@@ -53,6 +53,7 @@ protected:
         _expectedDifference = { T(103), T(6) };
     }
 };
+
 /** @brief Test fixture for @ref fgm::Vector2D subtraction, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DSubtraction, SupportedArithmeticTypes);
 
@@ -74,6 +75,7 @@ protected:
         _expectedIntegralVec = { T(14), T(26) };
     }
 };
+
 /** @brief Test fixture for @ref fgm::Vector2D scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DScalarMultiplication, SupportedArithmeticTypes);
 
@@ -93,6 +95,7 @@ protected:
         _expectedScaledVec = { T(1.30769230769230769231), T(2.38461538461538461538) };
     }
 };
+
 /** @brief Test fixture for @ref fgm::Vector2D division, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DScalarDivision, SupportedArithmeticTypes);
 
@@ -110,6 +113,7 @@ protected:
         _expectedInvertedVec = { T(8), T(0) };
     }
 };
+
 /** @brief Test fixture for @ref fgm::Vector2D inversion, parameterized by @ref SupportedSignedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DInversion, SupportedSignedArithmeticTypes);
 
@@ -117,17 +121,36 @@ TYPED_TEST_SUITE(Vector2DInversion, SupportedSignedArithmeticTypes);
 /** @brief Test fixture for @ref fgm::Vector2D division with NaN vectors. */
 class Vector2DDivisionNaNTests: public ::testing::TestWithParam<fgm::Vector2D<float>>
 {};
+
 INSTANTIATE_TEST_SUITE_P(Vector2DDivisionTestSuite, Vector2DDivisionNaNTests,
                          ::testing::Values(fgm::Vector2D<float>(fgm::constants::NaN, 3.0f),
                                            fgm::Vector2D<float>(3.0f, fgm::constants::NaN),
                                            fgm::Vector2D<float>(fgm ::constants::NaN, fgm::constants::NaN)));
 
 
-
 /**
  * @addtogroup T_FGM_Vec2_Addition
  * @{
  */
+
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that vector addition operation is available at compile time. */
+namespace
+{
+    constexpr fgm::Vector2D vecA(1, 2);
+    constexpr fgm::Vector2D vecB(3, 4);
+    constexpr auto sumVec = vecA + vecB;
+
+    static_assert(sumVec.x() == 4);
+    static_assert(sumVec.y() == 6);
+} // namespace
+
+
 
 /**************************************
  *                                    *
@@ -163,7 +186,7 @@ TYPED_TEST(Vector2DAddition, PlusEqualsOperator_ReturnsSameVectorWithSum)
  * @test Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Vector2DAddition, MixedTypeAdditionPromotesType)
+TEST(Vector2DAddition, PlusOperator_MixedTypePromotesType)
 {
     const fgm::Vector2D vec1(3.0f, -1.0f);
     const fgm::Vector2D vec2(9.0, 10.0);
@@ -178,7 +201,7 @@ TEST(Vector2DAddition, MixedTypeAdditionPromotesType)
  * @test Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Vector2DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
+TEST(Vector2DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
     fgm::Vector2D vec1(3.0f, -1.0f);
     const fgm::Vector2D vec2(9.0, 10.0);
@@ -189,7 +212,6 @@ TEST(Vector2DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
 }
 
 /** @} */
-
 
 
 /**
@@ -257,7 +279,6 @@ TEST(Vector2DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 }
 
 /** @} */
-
 
 
 /**
@@ -394,7 +415,6 @@ TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
 }
 
 /** @} */
-
 
 
 /**
@@ -801,7 +821,6 @@ TEST_P(Vector2DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNCompon
 }
 
 /** @} */
-
 
 
 /**
