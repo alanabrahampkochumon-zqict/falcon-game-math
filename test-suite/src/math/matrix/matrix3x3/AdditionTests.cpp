@@ -76,7 +76,7 @@ namespace
  **************************************/
 
 /**
- * @test Verify that the binary addition operator perform a component-wise addition and
+ * @brief Verify that the binary addition operator perform a component-wise addition and
  *       returns a new matrix instance.
  */
 TYPED_TEST(Matrix3DAddition, PlusOperator_ReturnsMatrixSum)
@@ -88,10 +88,10 @@ TYPED_TEST(Matrix3DAddition, PlusOperator_ReturnsMatrixSum)
 
 
 /**
- * @test Verify that the binary addition operator perform automatic type promotion
+ * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Matrix3DAddition, MixedTypeAdditionPromotesType)
+TEST(Matrix3DAddition, PlusOperator_MixedTypePromotesType)
 {
     const fgm::Matrix3D mat1{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ -3.0f, -4.0f, 10.0f },
                               fgm::Vector3D{ 4.5f, 3.25f, 3.16f } };
@@ -104,7 +104,7 @@ TEST(Matrix3DAddition, MixedTypeAdditionPromotesType)
 
 
 /**
- * @test Verify that the compound addition assignment operator perform a component-wise addition and
+ * @brief Verify that the compound addition assignment operator perform a component-wise addition and
  *       mutates the matrix in-place.
  */
 TYPED_TEST(Matrix3DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
@@ -116,10 +116,10 @@ TYPED_TEST(Matrix3DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 
 
 /**
- * @test Verify that the compound addition assignment operator maintains the destination type and
+ * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix3DAddition, MixedTypeAdditionAssignmentDoesNotPromoteType)
+TEST(Matrix3DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
     fgm::Matrix3D mat1{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ -3.0f, -4.0f, 10.0f },
                         fgm::Vector3D{ 4.5f, 3.25f, 3.16f } };

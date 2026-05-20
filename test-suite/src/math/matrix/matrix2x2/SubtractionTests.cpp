@@ -71,7 +71,7 @@ namespace
  **************************************/
 
 /**
- * @test Verify that the binary subtraction operator perform an element-wise subtraction and
+ * @brief Verify that the binary subtraction operator perform an element-wise subtraction and
  *       returns a new matrix instance.
  */
 TYPED_TEST(Matrix2DSubtraction, MinusOperator_ReturnsDifference)
@@ -83,7 +83,7 @@ TYPED_TEST(Matrix2DSubtraction, MinusOperator_ReturnsDifference)
 
 
 /**
- * @test Verify that the binary subtraction operator perform automatic type promotion
+ * @brief Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
 TEST(Matrix2DSubtraction, MixedTypeSubtractionPromotesType)
@@ -98,7 +98,7 @@ TEST(Matrix2DSubtraction, MixedTypeSubtractionPromotesType)
 
 
 /**
- * @test Verify that the compound subtraction assignment operator perform an element-wise subtraction
+ * @brief Verify that the compound subtraction assignment operator perform an element-wise subtraction
  *       and mutates the matrix in-place.
  */
 TYPED_TEST(Matrix2DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
@@ -110,7 +110,7 @@ TYPED_TEST(Matrix2DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
 
 
 /**
- * @test Verify that the compound subtraction assignment operator maintains the destination type and
+ * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
 TEST(Matrix2DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)

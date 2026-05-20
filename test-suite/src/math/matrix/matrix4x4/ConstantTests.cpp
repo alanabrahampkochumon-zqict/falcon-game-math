@@ -124,7 +124,7 @@ TYPED_TEST(Matrix4DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(f
 
 
 /** @brief Verify that @ref fgm::Matrix4D::eye static factory returns an identity matrix. */
-TYPED_TEST(Matrix4DConstants, StaticFactory_Eye_ReturnsIdentityMatrix)
+TYPED_TEST(Matrix4DConstants, StaticWrapper_Eye_ReturnsIdentityMatrix)
 {
     EXPECT_MAT_IDENTITY(fgm::Matrix4D<TypeParam>::eye());
 }
@@ -135,7 +135,7 @@ TYPED_TEST(Matrix4DConstants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat
 
 
 /** @brief Verify that @ref fgm::Matrix4D::zero static factory returns a zero matrix. */
-TYPED_TEST(Matrix4DConstants, StaticFactory_Zero_ReturnsZeroMatrix)
+TYPED_TEST(Matrix4DConstants, StaticWrapper_Zero_ReturnsZeroMatrix)
 {
     EXPECT_MAT_ZERO(fgm::Matrix4D<TypeParam>::zero());
 }

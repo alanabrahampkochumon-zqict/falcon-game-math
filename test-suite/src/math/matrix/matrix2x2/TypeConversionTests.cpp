@@ -47,7 +47,7 @@ namespace
  **************************************/
 
 /**
- * @test Verify that the conversion constructor correctly promotes components from float to double.
+ * @brief Verify that the conversion constructor correctly promotes components from float to double.
  */
 TEST(Matrix2DConversionConstructor, PromotesType)
 {
@@ -59,7 +59,7 @@ TEST(Matrix2DConversionConstructor, PromotesType)
 }
 
 
-/** @test Verify that the conversion constructor ensures deep-copy value semantics. */
+/** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
 TEST(Matrix2DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float matrix
@@ -79,7 +79,7 @@ TEST(Matrix2DConversionConstructor, ReturnsNewInstance)
 
 
 /**
- * @test Verify that the conversion constructor correctly demotes components from double to float.
+ * @brief Verify that the conversion constructor correctly demotes components from double to float.
  */
 TEST(Matrix2DConversionConstructor, DemotesType)
 {

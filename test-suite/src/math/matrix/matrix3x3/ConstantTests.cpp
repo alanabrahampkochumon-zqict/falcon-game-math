@@ -97,7 +97,7 @@ TYPED_TEST(Matrix3DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(f
 
 
 /** @brief Verify that @ref fgm::Matrix3D::eye static factory returns an identity matrix. */
-TYPED_TEST(Matrix3DConstants, StaticFactory_Eye_ReturnsIdentityMatrix)
+TYPED_TEST(Matrix3DConstants, StaticWrapper_Eye_ReturnsIdentityMatrix)
 {
     EXPECT_MAT_IDENTITY(fgm::Matrix3D<TypeParam>::eye());
 }
@@ -108,7 +108,7 @@ TYPED_TEST(Matrix3DConstants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat
 
 
 /** @brief Verify that @ref fgm::Matrix3D::zero static factory returns a zero matrix. */
-TYPED_TEST(Matrix3DConstants, StaticFactory_Zero_ReturnsZeroMatrix)
+TYPED_TEST(Matrix3DConstants, StaticWrapper_Zero_ReturnsZeroMatrix)
 {
     EXPECT_MAT_ZERO(fgm::Matrix3D<TypeParam>::zero());
 }

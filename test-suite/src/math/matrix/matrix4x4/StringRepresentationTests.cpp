@@ -37,7 +37,7 @@ class Matrix4DStringRepresentationTests: public ::testing::Test
  * @{
  */
 
-/** @test Verify that the string representation matches the expected format for integral types. */
+/** @brief Verify that the string representation matches the expected format for integral types. */
 TEST_F(Matrix4DStringRepresentationTests, IntegralRepresentation)
 {
     constexpr fgm::Matrix4D mat(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
@@ -50,7 +50,7 @@ TEST_F(Matrix4DStringRepresentationTests, IntegralRepresentation)
 
 
 /**
- * @test Verify that the string representation matches the expected format for single-precision
+ * @brief Verify that the string representation matches the expected format for single-precision
  *       floating-point types.
  */
 TEST_F(Matrix4DStringRepresentationTests, FloatRepresentation)
@@ -68,7 +68,7 @@ TEST_F(Matrix4DStringRepresentationTests, FloatRepresentation)
 
 
 /**
- * @test Verify that the string representation matches the expected format for double-precision
+ * @brief Verify that the string representation matches the expected format for double-precision
  *       floating-point types.
  */
 TEST_F(Matrix4DStringRepresentationTests, DoubleRepresentation)
