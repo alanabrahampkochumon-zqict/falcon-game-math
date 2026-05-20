@@ -16,11 +16,12 @@
 /**
  * @addtogroup T_FGM_Vec4_Access
  * @{
-*/
+ */
 
 
 /** @brief Verify that vector accessors are available at compile time. */
-namespace {
+namespace
+{
     constexpr fgm::Vector4D vector(1, 2, 3, 4);
 
     static_assert(vector.x() == 1);
@@ -37,7 +38,7 @@ namespace {
     static_assert(vector.t() == 2);
     static_assert(vector.p() == 3);
     static_assert(vector.q() == 4);
-}
+} // namespace
 
 
 /**************************************
@@ -46,7 +47,7 @@ namespace {
  *                                    *
  **************************************/
 
-/** @test Verify that the components are accessible via named spatial aliases (x, y, z, w). */
+/** @brief Verify that the components are accessible via named spatial aliases (x, y, z, w). */
 TEST(Vector4DAccess, AccessibleAsXYZW)
 {
     const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
@@ -58,7 +59,7 @@ TEST(Vector4DAccess, AccessibleAsXYZW)
 }
 
 
-/** @test Verify that the components are accessible via named spatial aliases (s, t, p, q). */
+/** @brief Verify that the components are accessible via named spatial aliases (s, t, p, q). */
 TEST(Vector4DAccess, AccessibleAsSTPQ)
 {
     const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
@@ -70,7 +71,7 @@ TEST(Vector4DAccess, AccessibleAsSTPQ)
 }
 
 
-/** @test Verify that the components are accessible via named spatial aliases (r, g, b, a). */
+/** @brief Verify that the components are accessible via named spatial aliases (r, g, b, a). */
 TEST(Vector4DAccess, AccessibleAsRGBA)
 {
     const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
@@ -82,7 +83,7 @@ TEST(Vector4DAccess, AccessibleAsRGBA)
 }
 
 
-/** @test Verify that the components are accessible via subscript indexing for reads. */
+/** @brief Verify that the components are accessible via subscript indexing for reads. */
 TEST(Vector4DAccess, AccessibleAsArray)
 {
     const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
@@ -108,7 +109,7 @@ TEST(Vector4DAccess, AccessibleAsArray)
  *                                    *
  **************************************/
 
-/** @test Verify that the components can be mutated via named spatial aliases (x, y, z, w). */
+/** @brief Verify that the components can be mutated via named spatial aliases (x, y, z, w). */
 TEST(Vector4DMutation, ElementsCanBeMutatedUsingXYZW)
 {
     fgm::Vector4D<float> vec;
@@ -125,7 +126,7 @@ TEST(Vector4DMutation, ElementsCanBeMutatedUsingXYZW)
 }
 
 
-/** @test Verify that the components can be mutated via named spatial aliases (s, t, p, q). */
+/** @brief Verify that the components can be mutated via named spatial aliases (s, t, p, q). */
 TEST(Vector4DMutation, ElementsCanBeMutatedUsingSTPQ)
 {
     fgm::Vector4D<float> vec;
@@ -142,7 +143,7 @@ TEST(Vector4DMutation, ElementsCanBeMutatedUsingSTPQ)
 }
 
 
-/** @test Verify that the components can be mutated via named spatial aliases (r, g, b, a). */
+/** @brief Verify that the components can be mutated via named spatial aliases (r, g, b, a). */
 TEST(Vector4DMutation, ElementsCanBeMutatedUsingRGBA)
 {
     fgm::Vector4D<float> vec;
@@ -159,7 +160,7 @@ TEST(Vector4DMutation, ElementsCanBeMutatedUsingRGBA)
 }
 
 
-/** @test Verify that the components are accessible via subscript indexing for writing. */
+/** @brief Verify that the components are accessible via subscript indexing for writing. */
 TEST(Vector4DMutation, ElementsCanBeMutatedUsingIndex)
 {
     fgm::Vector4D<float> vec;

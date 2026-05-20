@@ -239,7 +239,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr static bool allEq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
+        [[nodiscard]] static constexpr bool allEq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                           std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
@@ -287,7 +287,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr static bool anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
+        [[nodiscard]] static constexpr bool anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                            std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
@@ -609,7 +609,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr static PromotedFloatMatrix2D<T, S> safeDiv(
+        [[nodiscard]] static constexpr PromotedFloatMatrix2D<T, S> safeDiv(
             const Matrix2D& mat, S scalar, const Matrix2D& fallback = Matrix2D::eye()) noexcept
             requires StrictArithmetic<T>;
 
@@ -752,7 +752,7 @@ namespace fgm
          * @return A new @ref Matrix2D with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr static Matrix2D transpose(const Matrix2D& matrix) noexcept;
+        static constexpr Matrix2D transpose(const Matrix2D& matrix) noexcept;
 
 
         /**
@@ -803,7 +803,7 @@ namespace fgm
          * @return A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr static Matrix2D<Magnitude<T>> inverse(const Matrix2D& matrix) noexcept
+        static constexpr Matrix2D<Magnitude<T>> inverse(const Matrix2D& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -986,7 +986,7 @@ namespace fgm
          *
          * @return True if at least one element is positive or negative infinity.
          */
-        [[nodiscard]] constexpr static bool hasInf(const Matrix2D& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasInf(const Matrix2D& matrix) noexcept;
 
 
         /**
@@ -1008,7 +1008,7 @@ namespace fgm
          *
          * @return True if at least one element is NaN.
          */
-        [[nodiscard]] constexpr static bool hasNaN(const Matrix2D& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasNaN(const Matrix2D& matrix) noexcept;
 
         /** @} */
 

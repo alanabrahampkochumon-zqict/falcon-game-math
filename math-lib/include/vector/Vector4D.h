@@ -29,10 +29,10 @@
 #include "common/OperationStatus.h"
 #include "common/Types.h"
 
+#include <array>
 #include <cstddef>
 #include <iomanip>
 #include <ostream>
-#include <array>
 
 
 
@@ -408,7 +408,7 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] static constexpr bool allEq(const Vector4D& lhs, const Vector4D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>
+                                                          std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
                                                       : Config::FLOAT_EPSILON) noexcept;
 
@@ -454,7 +454,7 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] static constexpr bool anyNeq(const Vector4D& lhs, const Vector4D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>
+                                                           std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
                                                        : Config::FLOAT_EPSILON) noexcept;
 
@@ -506,7 +506,7 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector4D<bool> eq(const Vector4D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>
+                                                          std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
                                                       : Config::FLOAT_EPSILON) const noexcept;
 
@@ -527,7 +527,7 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] static constexpr Vector4D<bool> eq(const Vector4D& lhs, const Vector4D<U>& rhs,
                                                          double epsilon = std::is_same_v<T, double> ||
-                                                                           std::is_same_v<U, double>
+                                                                 std::is_same_v<U, double>
                                                              ? Config::DOUBLE_EPSILON
                                                              : Config::FLOAT_EPSILON) noexcept;
 
@@ -549,7 +549,7 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] constexpr Vector4D<bool> neq(const Vector4D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>
+                                                           std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
                                                        : Config::FLOAT_EPSILON) const noexcept;
 
@@ -570,7 +570,7 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] static constexpr Vector4D<bool> neq(const Vector4D& lhs, const Vector4D<U>& rhs,
                                                           double epsilon = std::is_same_v<T, double> ||
-                                                                            std::is_same_v<U, double>
+                                                                  std::is_same_v<U, double>
                                                               ? Config::DOUBLE_EPSILON
                                                               : Config::FLOAT_EPSILON) noexcept;
 

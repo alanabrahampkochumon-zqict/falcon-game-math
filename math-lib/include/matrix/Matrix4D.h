@@ -255,9 +255,9 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr static bool allEq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
+        [[nodiscard]] static constexpr bool allEq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>
+                                                          std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
                                                       : Config::FLOAT_EPSILON) noexcept;
 
@@ -303,9 +303,9 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr static bool anyNeq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
+        [[nodiscard]] static constexpr bool anyNeq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>
+                                                           std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
                                                        : Config::FLOAT_EPSILON) noexcept;
 
@@ -620,7 +620,7 @@ namespace fgm
 
         /**
          * @brief Compute the element-wise division of @p mat by @p scalar and return a new matrix.
-         * 
+         *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
@@ -639,7 +639,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr static PromotedFloatMatrix4D<T, S> safeDiv(
+        [[nodiscard]] static constexpr PromotedFloatMatrix4D<T, S> safeDiv(
             const Matrix4D& mat, S scalar, const Matrix4D& fallback = Matrix4D::eye()) noexcept
             requires StrictArithmetic<T>;
 
@@ -834,7 +834,7 @@ namespace fgm
          * @return A new @ref Matrix4D with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr static Matrix4D transpose(const Matrix4D& matrix) noexcept;
+        static constexpr Matrix4D transpose(const Matrix4D& matrix) noexcept;
 
 
         /**
@@ -901,7 +901,7 @@ namespace fgm
          * @return A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr static Matrix4D<Magnitude<T>> inverse(const Matrix4D& matrix) noexcept
+        static constexpr Matrix4D<Magnitude<T>> inverse(const Matrix4D& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1116,7 +1116,7 @@ namespace fgm
          *
          * @return True if at least one element is positive or negative infinity.
          */
-        [[nodiscard]] constexpr static bool hasInf(const Matrix4D& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasInf(const Matrix4D& matrix) noexcept;
 
 
         /**
@@ -1138,7 +1138,7 @@ namespace fgm
          *
          * @return True if at least one element is NaN.
          */
-        [[nodiscard]] constexpr static bool hasNaN(const Matrix4D& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasNaN(const Matrix4D& matrix) noexcept;
 
         /** @} */
 

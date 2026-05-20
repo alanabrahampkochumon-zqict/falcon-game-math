@@ -19,7 +19,8 @@
  */
 
 /** @brief Verify that vector accessors are available at compile time. */
-namespace {
+namespace
+{
     constexpr fgm::Vector3D vector(1, 2, 3);
 
     static_assert(vector.x() == 1);
@@ -33,7 +34,7 @@ namespace {
     static_assert(vector.s() == 1);
     static_assert(vector.t() == 2);
     static_assert(vector.p() == 3);
-}
+} // namespace
 
 
 /**************************************
@@ -42,7 +43,7 @@ namespace {
  *                                    *
  **************************************/
 
-/** @test Verify that the components are accessible via named spatial aliases (x, y, z). */
+/** @brief Verify that the components are accessible via named spatial aliases (x, y, z). */
 TEST(Vector3DAccess, AccessibleAsXYZW)
 {
     const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -53,7 +54,7 @@ TEST(Vector3DAccess, AccessibleAsXYZW)
 }
 
 
-/** @test Verify that the components are accessible via named spatial aliases (s, t, p). */
+/** @brief Verify that the components are accessible via named spatial aliases (s, t, p). */
 TEST(Vector3DAccess, AccessibleAsSTPQ)
 {
     const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -64,7 +65,7 @@ TEST(Vector3DAccess, AccessibleAsSTPQ)
 }
 
 
-/** @test Verify that the components are accessible via named spatial aliases (r, g, b). */
+/** @brief Verify that the components are accessible via named spatial aliases (r, g, b). */
 TEST(Vector3DAccess, AccessibleAsRGBA)
 {
     const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -75,7 +76,7 @@ TEST(Vector3DAccess, AccessibleAsRGBA)
 }
 
 
-/** @test Verify that the components are accessible via subscript indexing for reads. */
+/** @brief Verify that the components are accessible via subscript indexing for reads. */
 TEST(Vector3DAccess, AccessibleAsArray)
 {
     const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
@@ -100,7 +101,7 @@ TEST(Vector3DAccess, AccessibleAsArray)
  *                                    *
  **************************************/
 
-/** @test Verify that the components can be mutated via named spatial aliases (x, y, z). */
+/** @brief Verify that the components can be mutated via named spatial aliases (x, y, z). */
 TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZW)
 {
     fgm::Vector3D<float> vec;
@@ -115,7 +116,7 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZW)
 }
 
 
-/** @test Verify that the components can be mutated via named spatial aliases (s, t, p). */
+/** @brief Verify that the components can be mutated via named spatial aliases (s, t, p). */
 TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTPQ)
 {
     fgm::Vector3D<float> vec;
@@ -130,7 +131,7 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTPQ)
 }
 
 
-/** @test Verify that the components can be mutated via named spatial aliases (r, g, b). */
+/** @brief Verify that the components can be mutated via named spatial aliases (r, g, b). */
 TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGBA)
 {
     fgm::Vector3D<float> vec;
@@ -145,7 +146,7 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGBA)
 }
 
 
-/** @test Verify that the components are accessible via subscript indexing for writing. */
+/** @brief Verify that the components are accessible via subscript indexing for writing. */
 TEST(Vector3DMutation, ElementsCanBeMutatedUsingIndex)
 {
     fgm::Vector3D<float> vec;

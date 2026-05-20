@@ -378,17 +378,25 @@ namespace fgm
         }
 
 #endif
-        R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0)) +
-            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 0)) + static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0));
+        R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) +
+            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0)) +
+            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 0)) +
+            static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0));
 
-        R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1)) +
-            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 1)) + static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1));
+        R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
+            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1)) +
+            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 1)) +
+            static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1));
 
-        R z = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 2)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 2)) +
-            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 2)) + static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2));
+        R z = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 2)) +
+            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 2)) +
+            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 2)) +
+            static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2));
 
-        R w = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 3)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 3)) +
-            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 3)) + static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3));
+        R w = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 3)) +
+            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 3)) +
+            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 3)) +
+            static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3));
 
         return Vector4D<R>(x, y, z, w);
     }
@@ -430,17 +438,25 @@ namespace fgm
             }
         }
 #endif
-        R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0)) +
-            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 0)) + static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0));
+        R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) +
+            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0)) +
+            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 0)) +
+            static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0));
 
-        R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1)) +
-            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 1)) + static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1));
+        R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
+            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1)) +
+            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 1)) +
+            static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1));
 
-        R z = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 2)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 2)) +
-            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 2)) + static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2));
+        R z = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 2)) +
+            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 2)) +
+            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 2)) +
+            static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2));
 
-        R w = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 3)) + static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 3)) +
-            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 3)) + static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3));
+        R w = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 3)) +
+            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 3)) +
+            static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 3)) +
+            static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3));
 
         vec.x() = static_cast<T>(x);
         vec.y() = static_cast<T>(y);
