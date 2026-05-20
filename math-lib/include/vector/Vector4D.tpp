@@ -826,7 +826,7 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (hasNaN() | fgm::isnan(scalar) | fgm::abs(scalar) <= std::numeric_limits<S>::epsilon())
+            if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
             {
                 return fgm::vec4d::zero<R>;
             }

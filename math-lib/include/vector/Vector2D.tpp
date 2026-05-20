@@ -698,7 +698,7 @@ namespace fgm
         if constexpr (std::is_floating_point_v<R>)
         {
             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)) |
-                static_cast<int>(fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+                (static_cast<int>(fgm::abs(scalar) <= std::numeric_limits<S>::epsilon())))
             {
                 return fgm::vec2d::zero<R>;
             }
