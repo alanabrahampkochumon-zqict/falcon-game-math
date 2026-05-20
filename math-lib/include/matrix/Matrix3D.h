@@ -35,11 +35,9 @@
 
 // TODO: Add Matrix3D Transformation factory, projections.
 
-namespace fgm
-{
-    template <Arithmetic T>
-    struct Matrix3D
-    {
+namespace fgm {
+    template<Arithmetic T>
+    struct Matrix3D {
         /**
          * @addtogroup FGM_Mat3x3_Members
          * @{
@@ -48,10 +46,9 @@ namespace fgm
         using value_type = T; ///< The numeric type of the vector components.
 
         static constexpr std::size_t columns = 3; ///< Matrix column count.
-        static constexpr std::size_t rows    = 3; ///< Matrix row count.
+        static constexpr std::size_t rows = 3; ///< Matrix row count.
 
         /** @} */
-
 
 
         /**
@@ -86,8 +83,8 @@ namespace fgm
          * @param[in] col1 The 3D-vector to use as the second column entry.
          * @param[in] col2 The 3D-vector to use as the third column entry.
          */
-        [[nodiscard]] constexpr Matrix3D(const Vector3D<T>& col0, const Vector3D<T>& col1,
-                                         const Vector3D<T>& col2) noexcept;
+        [[nodiscard]] constexpr Matrix3D(const Vector3D<T> &col0, const Vector3D<T> &col1,
+                                         const Vector3D<T> &col2) noexcept;
 
 
         /**
@@ -108,11 +105,10 @@ namespace fgm
          *
          * @param[in] other The source matrix to be converted.
          */
-        template <Arithmetic U>
-        [[nodiscard]] explicit constexpr Matrix3D(const Matrix3D<U>& other) noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] explicit constexpr Matrix3D(const Matrix3D<U> &other) noexcept;
 
         /** @} */
-
 
 
         /**
@@ -128,7 +124,7 @@ namespace fgm
          *
          * @return A reference to the column vector.
          */
-        [[nodiscard]] constexpr Vector3D<T>& operator[](std::size_t col) noexcept;
+        [[nodiscard]] constexpr Vector3D<T> &operator[](std::size_t col) noexcept;
 
 
         /**
@@ -138,7 +134,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const Vector3D<T>& operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const Vector3D<T> &operator[](std::size_t col) const noexcept;
 
 
         /**
@@ -150,7 +146,7 @@ namespace fgm
          *
          * @return A reference to the element at row, col.
          */
-        [[nodiscard]] constexpr T& operator()(std::size_t row, std::size_t col) noexcept;
+        [[nodiscard]] constexpr T &operator()(std::size_t row, std::size_t col) noexcept;
 
 
         /**
@@ -161,10 +157,9 @@ namespace fgm
          *
          * @return A const reference to the element at row, col.
          */
-        [[nodiscard]] constexpr const T& operator()(std::size_t row, std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const T &operator()(std::size_t row, std::size_t col) const noexcept;
 
         /** @} */
-
 
 
         /**
@@ -200,7 +195,6 @@ namespace fgm
         /** @} */
 
 
-
         /**
          * @addtogroup FGM_Mat3x3_Equality
          * @{
@@ -222,11 +216,11 @@ namespace fgm
          *
          * @return True if all elements are equivalent within @p epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr bool allEq(const Matrix3D<U>& rhs,
-                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                               ? Config::DOUBLE_EPSILON
-                                               : Config::FLOAT_EPSILON) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr bool allEq(const Matrix3D<U> &rhs,
+                                           double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
+                                                                ? Config::DOUBLE_EPSILON
+                                                                : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -246,12 +240,12 @@ namespace fgm
          *
          * @return True if all elements are equivalent within @p epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr static bool allEq(const Matrix3D& lhs, const Matrix3D<U>& rhs,
-                                                  double epsilon = (std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>)
-                                                      ? Config::DOUBLE_EPSILON
-                                                      : Config::FLOAT_EPSILON) noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr static bool allEq(const Matrix3D &lhs, const Matrix3D<U> &rhs,
+                                                  double epsilon = std::is_same_v<T, double> ||
+                                                                   std::is_same_v<U, double>
+                                                                       ? Config::DOUBLE_EPSILON
+                                                                       : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -270,11 +264,11 @@ namespace fgm
          *
          * @return True if all elements are equivalent within @p epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr bool anyNeq(const Matrix3D<U>& rhs,
-                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
-                                                ? Config::DOUBLE_EPSILON
-                                                : Config::FLOAT_EPSILON) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr bool anyNeq(const Matrix3D<U> &rhs,
+                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
+                                                                 ? Config::DOUBLE_EPSILON
+                                                                 : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -294,12 +288,12 @@ namespace fgm
          *
          * @return True if all elements are equivalent within @p epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr static bool anyNeq(const Matrix3D& lhs, const Matrix3D<U>& rhs,
-                                                   double epsilon = (std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>)
-                                                       ? Config::DOUBLE_EPSILON
-                                                       : Config::FLOAT_EPSILON) noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr static bool anyNeq(const Matrix3D &lhs, const Matrix3D<U> &rhs,
+                                                   double epsilon = std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>
+                                                                        ? Config::DOUBLE_EPSILON
+                                                                        : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -314,8 +308,8 @@ namespace fgm
          *
          * @return True if all elements are equivalent within the default epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr bool operator==(const Matrix3D<U>& rhs) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr bool operator==(const Matrix3D<U> &rhs) const noexcept;
 
 
         /**
@@ -330,11 +324,10 @@ namespace fgm
          *
          * @return True if any of the elements are not equivalent within the default epsilon.
          */
-        template <Arithmetic U>
-        [[nodiscard]] constexpr bool operator!=(const Matrix3D<U>& rhs) const noexcept;
+        template<Arithmetic U>
+        [[nodiscard]] constexpr bool operator!=(const Matrix3D<U> &rhs) const noexcept;
 
         /** @} */
-
 
 
         /**
@@ -355,8 +348,8 @@ namespace fgm
          *
          * @return A new @ref Matrix3D containing the element-wise sum.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator+(const Matrix3D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator+(const Matrix3D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -372,8 +365,8 @@ namespace fgm
          *
          * @return A reference to this matrix (*this).
          */
-        template <StrictArithmetic U>
-        Matrix3D& operator+=(const Matrix3D<U>& rhs) noexcept
+        template<StrictArithmetic U>
+        Matrix3D &operator+=(const Matrix3D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -390,8 +383,8 @@ namespace fgm
          *
          * @return A new @ref Matrix3D containing the element-wise difference.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator-(const Matrix3D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator-(const Matrix3D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -407,8 +400,8 @@ namespace fgm
          *
          * @return A reference to this matrix (*this).
          */
-        template <StrictArithmetic U>
-        constexpr Matrix3D& operator-=(const Matrix3D<U>& rhs) noexcept
+        template<StrictArithmetic U>
+        constexpr Matrix3D &operator-=(const Matrix3D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -425,7 +418,7 @@ namespace fgm
          *
          * @return A new @ref Matrix3D scaled by @p scalar.
          */
-        template <StrictArithmetic S>
+        template<StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
@@ -442,8 +435,8 @@ namespace fgm
          *
          * @return A reference to this matrix (*this).
          */
-        template <StrictArithmetic S>
-        constexpr Matrix3D& operator*=(S scalar) noexcept
+        template<StrictArithmetic S>
+        constexpr Matrix3D &operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -475,8 +468,8 @@ namespace fgm
          *
          * @return A new @ref Vector3D with applied linear transformations.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedVector3D<T, U> operator*(const Vector3D<U>& vec) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedVector3D<T, U> operator*(const Vector3D<U> &vec) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -512,8 +505,8 @@ namespace fgm
          *
          * @return A new @ref Matrix3D containing the composition of linear transformations.
          */
-        template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator*(const Matrix3D<U>& rhs) const noexcept
+        template<StrictArithmetic U>
+        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator*(const Matrix3D<U> &rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -549,8 +542,8 @@ namespace fgm
          *
          * @return A reference to this matrix (*this).
          */
-        template <StrictArithmetic U>
-        constexpr Matrix3D& operator*=(const Matrix3D<U>& rhs) noexcept
+        template<StrictArithmetic U>
+        constexpr Matrix3D &operator*=(const Matrix3D<U> &rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -567,7 +560,7 @@ namespace fgm
          *
          * @return A new @ref Matrix3D inverse scaled by @p scalar.
          */
-        template <StrictArithmetic S>
+        template<StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> operator/(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
@@ -584,8 +577,8 @@ namespace fgm
          *
          * @return A reference to this matrix (*this).
          */
-        template <StrictArithmetic S>
-        constexpr Matrix3D& operator/=(S scalar) noexcept
+        template<StrictArithmetic S>
+        constexpr Matrix3D &operator/=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -607,9 +600,9 @@ namespace fgm
          * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
-        template <StrictArithmetic S>
+        template<StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> safeDiv(
-            S scalar, const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+            S scalar, const Matrix3D &fallback = Matrix3D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -632,9 +625,9 @@ namespace fgm
          * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
-        template <StrictArithmetic S>
+        template<StrictArithmetic S>
         [[nodiscard]] constexpr static PromotedFloatMatrix3D<T, S> safeDiv(
-            const Matrix3D& mat, S scalar, const Matrix3D& fallback = Matrix3D::eye()) noexcept
+            const Matrix3D &mat, S scalar, const Matrix3D &fallback = Matrix3D::eye()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -660,9 +653,9 @@ namespace fgm
          * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
-        template <StrictArithmetic S>
+        template<StrictArithmetic S>
         [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> tryDiv(
-            S scalar, OperationStatus& status, const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+            S scalar, OperationStatus &status, const Matrix3D &fallback = Matrix3D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -689,9 +682,9 @@ namespace fgm
          * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
-        template <StrictArithmetic S>
+        template<StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedFloatMatrix3D<T, S> tryDiv(
-            const Matrix3D& mat, S scalar, OperationStatus& status, const Matrix3D& fallback = Matrix3D::eye()) noexcept
+            const Matrix3D &mat, S scalar, OperationStatus &status, const Matrix3D &fallback = Matrix3D::eye()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -738,7 +731,7 @@ namespace fgm
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
          */
-        static constexpr T determinant(const Matrix3D& mat) noexcept
+        static constexpr T determinant(const Matrix3D &mat) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -787,7 +780,7 @@ namespace fgm
          * @return A new @ref Matrix3D with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr static Matrix3D transpose(const Matrix3D& mat) noexcept;
+        constexpr static Matrix3D transpose(const Matrix3D &mat) noexcept;
 
 
         /**
@@ -814,7 +807,7 @@ namespace fgm
          * @return A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix3D<Magnitude<T>> inverse() const noexcept
+        constexpr Matrix3D<Magnitude<T> > inverse() const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -844,7 +837,7 @@ namespace fgm
          * @return A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr static Matrix3D<Magnitude<T>> inverse(const Matrix3D& matrix) noexcept
+        constexpr static Matrix3D<Magnitude<T> > inverse(const Matrix3D &matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -876,7 +869,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix3D<Magnitude<T>> safeInverse(const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        constexpr Matrix3D<Magnitude<T> > safeInverse(const Matrix3D &fallback = Matrix3D::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -909,8 +902,8 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix3D<Magnitude<T>> safeInverseOf(const Matrix3D& matrix,
-                                                              const Matrix3D& fallback = Matrix3D::eye()) noexcept
+        static constexpr Matrix3D<Magnitude<T> > safeInverseOf(const Matrix3D &matrix,
+                                                               const Matrix3D &fallback = Matrix3D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -944,8 +937,8 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix3D<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                    const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        constexpr Matrix3D<Magnitude<T> > tryInverse(OperationStatus &status,
+                                                     const Matrix3D &fallback = Matrix3D::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -980,8 +973,8 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix3D<Magnitude<T>> tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
-                                                             const Matrix3D& fallback = Matrix3D::eye()) noexcept
+        static constexpr Matrix3D<Magnitude<T> > tryInverseOf(const Matrix3D &matrix, OperationStatus &status,
+                                                              const Matrix3D &fallback = Matrix3D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1001,11 +994,10 @@ namespace fgm
          *
          * @return The sum of entries along the main diagonal of the given matrix.
          */
-        [[nodiscard]] static constexpr T trace(const Matrix3D& mat) noexcept
+        [[nodiscard]] static constexpr T trace(const Matrix3D &mat) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
-
 
 
         /**
@@ -1032,7 +1024,7 @@ namespace fgm
          *
          * @return True if at least one element is positive or negative infinity.
          */
-        [[nodiscard]] constexpr static bool hasInf(const Matrix3D& mat) noexcept;
+        [[nodiscard]] constexpr static bool hasInf(const Matrix3D &mat) noexcept;
 
 
         /**
@@ -1054,10 +1046,9 @@ namespace fgm
          *
          * @return True if at least one element is NaN.
          */
-        [[nodiscard]] constexpr static bool hasNaN(const Matrix3D& mat) noexcept;
+        [[nodiscard]] constexpr static bool hasNaN(const Matrix3D &mat) noexcept;
 
         /** @} */
-
 
 
         /**
@@ -1081,14 +1072,15 @@ namespace fgm
          *
          * @return A reference to the output stream @p os.
          */
-        constexpr friend std::ostream& operator<<(std::ostream& os, const Matrix3D& matrix)
-        {
-            const std::streamsize oldPrecision     = os.precision();
+        constexpr friend std::ostream &operator<<(std::ostream &os, const Matrix3D &matrix) {
+            const std::streamsize oldPrecision = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
 
             auto precision = Config::useFullPrecision
-                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
-                : Config::LOG_PRECISION;
+                                 ? std::is_same_v<T, double>
+                                       ? Config::DOUBLE_PRECISION
+                                       : Config::FLOAT_PRECISION
+                                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
             os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << "|\n";
             os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << "|\n";
@@ -1101,7 +1093,6 @@ namespace fgm
         }
 
         /** @} */
-
 
 
     private:
@@ -1120,16 +1111,15 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bMat3  = Matrix3D<bool>;               ///< `bool` matrix
-    using iMat3  = Matrix3D<int>;                ///< `int` matrix
-    using uMat3  = Matrix3D<unsigned int>;       ///< `unsigned int` matrix
-    using mat3   = Matrix3D<float>;              ///< `float` matrix
-    using lMat3  = Matrix3D<long long>;          ///< `long long` matrix
-    using dMat3  = Matrix3D<double>;             ///< `double` matrix
+    using bMat3 = Matrix3D<bool>; ///< `bool` matrix
+    using iMat3 = Matrix3D<int>; ///< `int` matrix
+    using uMat3 = Matrix3D<unsigned int>; ///< `unsigned int` matrix
+    using mat3 = Matrix3D<float>; ///< `float` matrix
+    using lMat3 = Matrix3D<long long>; ///< `long long` matrix
+    using dMat3 = Matrix3D<double>; ///< `double` matrix
     using ulMat3 = Matrix3D<unsigned long long>; ///< `unsigned long long` matrix
 
     /** @} */
-
 
 
     /**************************************
@@ -1157,8 +1147,8 @@ namespace fgm
      *
      * @return A new @ref Matrix3D scaled by @p scalar.
      */
-    template <StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar, const Matrix3D<T>& mat) noexcept;
+    template<StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar, const Matrix3D<T> &mat) noexcept;
 
 
     /**
@@ -1191,8 +1181,8 @@ namespace fgm
      *
      * @return The passed-in @p vec with the transformations applied.
      */
-    template <StrictArithmetic T, StrictArithmetic U>
-    static constexpr PromotedVector3D<T, U> operator*(const Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept;
+    template<StrictArithmetic T, StrictArithmetic U>
+    static constexpr PromotedVector3D<T, U> operator*(const Vector3D<T> &vec, const Matrix3D<U> &mat) noexcept;
 
 
     /**
@@ -1225,11 +1215,10 @@ namespace fgm
      *
      * @return The passed-in @p vec with the transformations applied.
      */
-    template <StrictArithmetic T, StrictArithmetic U>
-    static constexpr Vector3D<T>& operator*=(Vector3D<T>& vec, const Matrix3D<U>& mat) noexcept;
+    template<StrictArithmetic T, StrictArithmetic U>
+    static constexpr Vector3D<T> &operator*=(Vector3D<T> &vec, const Matrix3D<U> &mat) noexcept;
 
     /** @} */
-
 
 
     /**
@@ -1243,14 +1232,13 @@ namespace fgm
      *                                    *
      **************************************/
 
-    namespace mat3d
-    {
+    namespace mat3d {
         /**
          * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
          *
          * @note Only available for @ref StrictArithmetic types.
          */
-        template <StrictArithmetic T>
+        template<StrictArithmetic T>
         inline constexpr Matrix3D<T> eye(T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1));
 
 
@@ -1259,18 +1247,17 @@ namespace fgm
          *
          * @note Only available for @ref StrictArithmetic types.
          */
-        template <StrictArithmetic T>
+        template<StrictArithmetic T>
         inline constexpr Matrix3D<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0));
     } // namespace mat3d
 
 
     /** @brief Template deduction guide for Matrix3D. */
-    template <Arithmetic T, Arithmetic... Args>
+    template<Arithmetic T, Arithmetic... Args>
     Matrix3D(T, Args...) -> Matrix3D<T>;
 
     /** @} */
-
-}; // namespace fgm
+} // namespace fgm
 
 
 #include "Matrix3D.tpp"

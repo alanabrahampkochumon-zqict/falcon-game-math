@@ -234,7 +234,7 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool allEq(const Matrix4D<U>& rhs,
-                                           double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                           double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
                                                : Config::FLOAT_EPSILON) const noexcept;
 
@@ -258,8 +258,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr static bool allEq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
-                                                  double epsilon = (std::is_same_v<T, double> ||
-                                                                    std::is_same_v<U, double>)
+                                                  double epsilon = std::is_same_v<T, double> ||
+                                                                    std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
                                                       : Config::FLOAT_EPSILON) noexcept;
 
@@ -282,7 +282,7 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr bool anyNeq(const Matrix4D<U>& rhs,
-                                            double epsilon = (std::is_same_v<T, double> || std::is_same_v<U, double>)
+                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
                                                 : Config::FLOAT_EPSILON) const noexcept;
 
@@ -306,8 +306,8 @@ namespace fgm
          */
         template <Arithmetic U>
         [[nodiscard]] constexpr static bool anyNeq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
-                                                   double epsilon = (std::is_same_v<T, double> ||
-                                                                     std::is_same_v<U, double>)
+                                                   double epsilon = std::is_same_v<T, double> ||
+                                                                     std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
                                                        : Config::FLOAT_EPSILON) noexcept;
 
