@@ -23,6 +23,7 @@
 
 
 namespace fgm {
+
     /*************************************
      *                                   *
      *            INITIALIZERS           *
@@ -51,6 +52,12 @@ namespace fgm {
      *                                   *
      *************************************/
 
+    /**************************************
+     *                                    *
+     *        SPATIAL COORDINATES         *
+     *                                    *
+     **************************************/
+
     template<Arithmetic T>
     constexpr T Vector2D<T>::x() const noexcept {
         return _data[0];
@@ -74,6 +81,12 @@ namespace fgm {
         return _data[1];
     }
 
+
+    /**************************************
+     *                                    *
+     *           STP COORDINATES          *
+     *                                    *
+     **************************************/
 
     template<Arithmetic T>
     constexpr T Vector2D<T>::s() const noexcept {
@@ -99,6 +112,12 @@ namespace fgm {
     }
 
 
+    /**************************************
+     *                                    *
+     *         COLOR COORDINATES          *
+     *                                    *
+     **************************************/
+
     template<Arithmetic T>
     constexpr T Vector2D<T>::r() const noexcept {
         return _data[0];
@@ -122,6 +141,13 @@ namespace fgm {
         return _data[1];
     }
 
+
+    /**************************************
+     *                                    *
+     *              INDEXING              *
+     *                                    *
+     **************************************/
+
     template<Arithmetic T>
     constexpr T &Vector2D<T>::operator[](const std::size_t idx) noexcept {
         return _data[idx];
@@ -132,6 +158,13 @@ namespace fgm {
     constexpr const T &Vector2D<T>::operator[](const std::size_t idx) const noexcept {
         return _data[idx];
     }
+
+
+    /**************************************
+     *                                    *
+     *             SWIZZLING              *
+     *                                    *
+     **************************************/
 
     template<Arithmetic T>
     template<std::size_t... Indices>
@@ -156,9 +189,10 @@ namespace fgm {
     }
 
 
+
     /***************************************
      *                                     *
-     *             EQUALITY                *
+     *         EQUALITY (ABSOLUTE)         *
      *                                     *
      ***************************************/
 
@@ -212,6 +246,12 @@ namespace fgm {
     }
 
 
+    /**************************************
+     *                                    *
+     *         EQUALITY OPERATORS         *
+     *                                    *
+     **************************************/
+
     template<Arithmetic T>
     template<Arithmetic U>
     constexpr bool Vector2D<T>::operator==(const Vector2D<U> &rhs) const noexcept {
@@ -223,6 +263,13 @@ namespace fgm {
     constexpr bool Vector2D<T>::operator!=(const Vector2D<U> &rhs) const noexcept {
         return this->anyNeq(rhs);
     }
+
+
+    /***************************************
+     *                                     *
+     *           EQUALITY (MASK)           *
+     *                                     *
+     ***************************************/
 
     // TODO: Add MSVC NaN check tests + add new implementation as required.
     template<Arithmetic T>
@@ -339,6 +386,12 @@ namespace fgm {
     }
 
 
+    /***************************************
+     *                                     *
+     *        COMPARISON OPERATORS         *
+     *                                     *
+     ***************************************/
+
     #ifdef ENABLE_FGM_SHADER_OPERATORS
 
     template<Arithmetic T>
@@ -423,6 +476,12 @@ namespace fgm {
      *                                   *
      *      ARITHMETIC OPERATORS         *
      *                                   *
+    *************************************/
+
+    /*************************************
+     *                                   *
+     *            ADDITION               *
+     *                                   *
      *************************************/
 
     template<Arithmetic T>
@@ -443,6 +502,12 @@ namespace fgm {
         return *this;
     }
 
+
+    /*************************************
+     *                                   *
+     *           SUBTRACTION             *
+     *                                   *
+     *************************************/
 
     template<Arithmetic T>
     template<StrictArithmetic U>
@@ -469,6 +534,12 @@ namespace fgm {
         return Vector2D(-_data[0], -_data[1]);
     }
 
+
+    /*************************************
+     *                                   *
+     *           MULTIPLICATION          *
+     *                                   *
+     *************************************/
 
     template<Arithmetic T>
     template<StrictArithmetic S>
@@ -497,6 +568,12 @@ namespace fgm {
         return *this;
     }
 
+
+    /*************************************
+     *                                   *
+     *             DIVISION              *
+     *                                   *
+     *************************************/
 
     template<Arithmetic T>
     template<StrictArithmetic S>

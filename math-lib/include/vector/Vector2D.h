@@ -82,12 +82,6 @@ namespace fgm {
          * @{
          */
 
-        /**************************************
-         *                                    *
-         *        SPATIAL COORDINATES         *
-         *                                    *
-         **************************************/
-
         /**
          * @brief Access the element at the first location (read-only).
          * @return A copy of the first vector element.
@@ -115,12 +109,6 @@ namespace fgm {
          */
         [[nodiscard]] constexpr T &y() noexcept;
 
-
-        /**************************************
-         *                                    *
-         *           STP COORDINATES          *
-         *                                    *
-         **************************************/
 
         /**
          * @brief Access the element at the first location (read-only).
@@ -150,12 +138,6 @@ namespace fgm {
         [[nodiscard]] constexpr T &t() noexcept;
 
 
-        /**************************************
-         *                                    *
-         *         COLOR COORDINATES          *
-         *                                    *
-         **************************************/
-
         /**
          * @brief Access the element at the first location (read-only).
          * @return A copy of the first vector element.
@@ -184,11 +166,6 @@ namespace fgm {
         [[nodiscard]] constexpr T &g() noexcept;
 
 
-        /**************************************
-         *                                    *
-         *              INDEXING              *
-         *                                    *
-         **************************************/
 
         /**
          * @brief Access the element at the specified location (read-only).
@@ -975,12 +952,6 @@ namespace fgm {
          * @{
          */
 
-        /*************************************
-         *                                   *
-         *        VECTOR DOT PRODUCT         *
-         *                                   *
-         *************************************/
-
         /**
          * @brief Compute the dot product with another vector.
          *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$
@@ -1018,11 +989,6 @@ namespace fgm {
             -> std::common_type_t<T, U> requires StrictArithmetic<T>;
 
 
-        /*************************************
-         *                                   *
-         *       VECTOR CROSS PRODUCT        *
-         *                                   *
-         *************************************/
 
         /**
          * @brief Compute the 2D pseudo-cross product with another vector.
@@ -1066,12 +1032,6 @@ namespace fgm {
          * @{
          */
 
-        /*************************************
-         *                                   *
-         *         VECTOR MAGNITUDE          *
-         *                                   *
-         *************************************/
-
         /**
          * @brief Compute the magnitude (length) of this vector.
          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
@@ -1100,11 +1060,6 @@ namespace fgm {
             requires StrictArithmetic<T>;
 
 
-        /*************************************
-         *                                   *
-         *       VECTOR NORMALIZATION        *
-         *                                   *
-         *************************************/
 
         /**
          * @brief Compute the normalized (unit) form of this vector.
@@ -1218,12 +1173,6 @@ namespace fgm {
          * @addtogroup FGM_Vec2_Proj
          * @{
          */
-
-        /*************************************
-         *                                   *
-         *        VECTOR PROJECTION          *
-         *                                   *
-         *************************************/
 
         /**
          * @brief Project this vector onto the @p onto vector.
@@ -1531,11 +1480,6 @@ namespace fgm {
             requires StrictArithmetic<T>;
 
 
-        /*************************************
-         *                                   *
-         *         VECTOR REJECTION          *
-         *                                   *
-         *************************************/
 
         /**
          * @brief Reject this vector from the @p from vector.
