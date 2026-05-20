@@ -232,8 +232,8 @@ namespace fgm {
             return Vector2D(_data[0] == rhs[0], _data[1] == rhs[1]);
         } else {
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return Vector2D((_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon),
-                            (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon));
+            return Vector2D(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
+                            _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
         }
     }
 
@@ -253,8 +253,8 @@ namespace fgm {
             return Vector2D(_data[0] != rhs[0], _data[1] != rhs[1]);
         } else {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return Vector2D<bool>((_data[0] != rhs[0]) && !(fgm::abs(_data[0] - rhs[0]) <= epsilon),
-                                  (_data[1] != rhs[1]) && !(fgm::abs(_data[1] - rhs[1]) <= epsilon));
+            return Vector2D<bool>(_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon),
+                                  _data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon));
         }
     }
 
@@ -391,7 +391,7 @@ namespace fgm {
     template<Arithmetic T>
     constexpr Vector2D<T> &Vector2D<T>::operator&=(const Vector2D &rhs) noexcept
         requires std::is_same_v<T, bool> {
-        (*this) = (*this) & rhs;
+        *this = *this & rhs;
         return *this;
     }
 
@@ -406,7 +406,7 @@ namespace fgm {
     template<Arithmetic T>
     constexpr Vector2D<T> &Vector2D<T>::operator|=(const Vector2D &rhs) noexcept
         requires std::is_same_v<T, bool> {
-        (*this) = (*this) & rhs;
+        *this = *this & rhs;
         return *this;
     }
 
@@ -550,7 +550,7 @@ namespace fgm {
             }
         }
 
-        return (*this) / scalar;
+        return *this / scalar;
     }
 
 
@@ -588,7 +588,7 @@ namespace fgm {
 
 
         status = OperationStatus::SUCCESS;
-        return (*this) / scalar;
+        return *this / scalar;
     }
 
 
@@ -687,7 +687,7 @@ namespace fgm {
     template<Arithmetic T>
     constexpr Vector2D<Magnitude<T> > Vector2D<T>::normalize() const noexcept
         requires StrictArithmetic<T> {
-        return (*this) / mag();
+        return *this / mag();
     }
 
 
