@@ -54,6 +54,19 @@ TYPED_TEST_SUITE(Vector4DDotProduct, SupportedArithmeticTypes);
  * @{
  */
 
+/** @brief Verify that vector geometric product operations are available at compile time. */
+namespace
+{
+    constexpr fgm::Vector4D vec1(1, 2, 3, 4);
+    constexpr fgm::Vector4D vec2(4, 5, 6, 2);
+    constexpr auto dotProductA = vec1.dot(vec2);
+    constexpr auto dotProductB = fgm::Vector4D<int>::dot(vec1, vec2);
+    static_assert(dotProductA == 40);
+    static_assert(dotProductB == 40);
+
+} // namespace
+
+
 /** @brief Verify that the dot product of a vector with itself returns its squared magnitude. */
 TYPED_TEST(Vector4DDotProduct, SelfDotProductReturnsSquareMagnitude)
 {

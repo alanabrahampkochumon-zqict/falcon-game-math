@@ -72,6 +72,15 @@ INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNormalizatio
  * @{
  */
 
+/** @brief Verify that vector normalization operations are available at compile time. */
+namespace
+{
+    // TODO: Add static tests after making sqrt constexpr
+    //constexpr fgm::Vector4D vec(14, 27, 83, 52);
+    // constexpr auto norm = vec.normalize();
+} // namespace
+
+
 /**************************************
  *                                    *
  *        NORMALIZATION TESTS         *

@@ -73,6 +73,29 @@ TYPED_TEST_SUITE(Vector3DCrossProduct, SupportedArithmeticTypes);
  * @{
  */
 
+/** @brief Verify that vector geometric product operations are available at compile time. */
+namespace
+{
+    constexpr fgm::Vector3D vec1(1, 2, 3);
+    constexpr fgm::Vector3D vec2(4, 5, 6);
+    constexpr auto dotProductA = vec1.dot(vec2);
+    constexpr auto dotProductB= fgm::Vector3D<int>::dot(vec1, vec2);
+    static_assert(dotProductA == 32);
+    static_assert(dotProductB == 32);
+
+    constexpr auto crossProductA = vec1.cross(vec2);
+    constexpr auto crossProductB= fgm::Vector3D<int>::cross(vec1, vec2);
+    static_assert(crossProductA.x() == -3);
+    static_assert(crossProductA.y() == 6);
+    static_assert(crossProductA.z() == -3);
+
+    static_assert(crossProductB.x() == -3);
+    static_assert(crossProductB.y() == 6);
+    static_assert(crossProductB.z() == -3);
+
+} // namespace
+
+
 /**************************************
  *                                    *
  *         DOT PRODUCT TESTS          *

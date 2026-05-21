@@ -62,6 +62,19 @@ TYPED_TEST_SUITE(Vector4DUncleanMagnitude, SupportedArithmeticTypes);
  * @{
  */
 
+/** @brief Verify that vector magnitude operation is available at compile time. */
+namespace
+{
+    // TODO: Add static test after making sqrt constexpr
+    // constexpr fgm::Vector4D vec(1, 2, 3, 4);
+    // constexpr auto magA = vec.mag();
+    // constexpr auto magB = fgm::Vector2D<int>::mag(vec);
+
+    // static_assert(magA - 5.477225575051661 <= 1e-5);
+    // static_assert(magB - 5.477225575051661 <= 1e-5);
+} // namespace
+
+
 /** @brief Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vector4DMagnitude, ZeroVectorReturnsZero)
 {
