@@ -31,6 +31,46 @@ TYPED_TEST_SUITE(Vector3DInitialization, SupportedTypes);
  * @addtogroup T_FGM_Vec3_Init
  * @{
  */
+
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that vector can be instantiated during compile time. */
+namespace
+{
+    constexpr fgm::Vector3D vecA(1, 2, 3);
+    constexpr fgm::Vector3D vecB({ 1, 2 }, 3);
+    constexpr fgm::Vector3D vecC(1, { 2, 3});
+    constexpr fgm::Vector3D<int> vecD;
+
+    static_assert(vecA.x() == 1);
+    static_assert(vecA.y() == 2);
+    static_assert(vecA.z() == 3);
+
+    static_assert(vecB.x() == 1);
+    static_assert(vecB.y() == 2);
+    static_assert(vecB.z() == 3);
+    
+    static_assert(vecC.x() == 1);
+    static_assert(vecC.y() == 2);
+    static_assert(vecC.z() == 3);
+
+    static_assert(vecD.x() == 0);
+    static_assert(vecD.y() == 0);
+    static_assert(vecD.z() == 0);
+
+} // namespace
+
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
+
 /** @brief Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector3DInitialization, EmptyConstructorInitializesZeroVector)
 {

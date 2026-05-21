@@ -33,6 +33,55 @@ TYPED_TEST_SUITE(Vector4DInitialization, SupportedTypes);
  * @{
  */
 
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that vector can be instantiated during compile time. */
+namespace
+{
+    constexpr fgm::Vector4D vecA(1, 2, 3, 4);
+    constexpr fgm::Vector4D<int> vecB({ 1, 2 }, {3, 4});
+    constexpr fgm::Vector4D vecC(1, { 2, 3, 4 });
+    constexpr fgm::Vector4D vecD( { 1, 2, 3 }, 4);
+    constexpr fgm::Vector4D<int> vecE;
+
+    static_assert(vecA.x() == 1);
+    static_assert(vecA.y() == 2);
+    static_assert(vecA.z() == 3);
+    static_assert(vecA.w() == 4);
+
+    static_assert(vecB.x() == 1);
+    static_assert(vecB.y() == 2);
+    static_assert(vecB.z() == 3);
+    static_assert(vecB.w() == 4);
+
+    static_assert(vecC.x() == 1);
+    static_assert(vecC.y() == 2);
+    static_assert(vecC.z() == 3);
+    static_assert(vecC.w() == 4);
+
+    static_assert(vecD.x() == 1);
+    static_assert(vecD.y() == 2);
+    static_assert(vecD.z() == 3);
+    static_assert(vecD.w() == 4);
+
+    static_assert(vecE.x() == 0);
+    static_assert(vecE.y() == 0);
+    static_assert(vecE.z() == 0);
+    static_assert(vecE.z() == 0);
+
+} // namespace
+
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
+
 /** @brief Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
 {

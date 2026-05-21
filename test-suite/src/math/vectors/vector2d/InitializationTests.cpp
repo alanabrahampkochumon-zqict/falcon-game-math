@@ -41,17 +41,16 @@ TYPED_TEST_SUITE(Vector2DInitialization, SupportedTypes);
 /** @brief Verify that vector can be instantiated during compile time. */
 namespace
 {
-    constexpr fgm::Vector2D vec1(1, 2);
-    constexpr fgm::Vector2D<int> vec2;
+    constexpr fgm::Vector2D vecA(1, 2);
+    constexpr fgm::Vector2D<int> vecB;
 
-    static_assert(vec1.x() == 1);
-    static_assert(vec1.y() == 2);
+    static_assert(vecA.x() == 1);
+    static_assert(vecA.y() == 2);
 
-    static_assert(vec2.x() == 0);
-    static_assert(vec2.y() == 0);
+    static_assert(vecB.x() == 0);
+    static_assert(vecB.y() == 0);
 
 } // namespace
-
 
 
 /**************************************
