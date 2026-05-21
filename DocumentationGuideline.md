@@ -76,7 +76,7 @@
 
 ### Test Body Commenting
 
-- **Documentation**- Use `@test` to write a brief description of what the test are supposed to verify.
+- **Documentation**- Use `@brief` to write a brief description of what the test are supposed to verify.
 - **Language** - Keep language simple, preferably under 1 sentence.
 - **Constraints** - Don't use `@ref` unless testing more than 1 instance of the same procedure. For example, `normalize` vs `safeNormalize` vs `tryNormalize`.
 - **Structure:** Optionally use **Given / When / Then** blocks to separate setup, action, and assertion.

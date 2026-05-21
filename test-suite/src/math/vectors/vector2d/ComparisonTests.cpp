@@ -56,6 +56,26 @@ TYPED_TEST_SUITE(Vector2DComparison, SupportedArithmeticTypes);
  * @{
  */
 
+/** @brief Verify that vector greater than operation is available at compile time. */
+namespace
+{
+    constexpr fgm::Vector2D vec1(1, 2);
+    constexpr fgm::Vector2D vec2(1, 3);
+    constexpr auto gtVec = vec1 > vec2;
+    constexpr auto gtVecMask1 = vec1.gt(vec2);
+    constexpr auto gtVecMask2 = fgm::Vector2D<int>::gt(vec1, vec2);
+
+    static_assert(gtVec.x() == false);
+    static_assert(gtVec.y() == false);
+
+    static_assert(gtVecMask1.x() == false);
+    static_assert(gtVecMask1.y() == false);
+
+    static_assert(gtVecMask2.x() == false);
+    static_assert(gtVecMask2.y() == false);
+
+} // namespace
+
 /**************************************
  *                                    *
  *         GREATER THAN TESTS         *
@@ -63,7 +83,7 @@ TYPED_TEST_SUITE(Vector2DComparison, SupportedArithmeticTypes);
  **************************************/
 
 /**
- * @test Verify that the greater-than (gt) function perform a component-wise comparison and
+ * @brief Verify that the greater-than (gt) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
@@ -75,7 +95,7 @@ TYPED_TEST(Vector2DComparison, GreaterThan_ReturnsBooleanVectorWithElementsGreat
 
 
 /**
- * @test Verify that the greater-than operator perform a component-wise comparison and
+ * @brief Verify that the greater-than operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
@@ -87,7 +107,7 @@ TYPED_TEST(Vector2DComparison, GreaterThanOperator_ReturnsBooleanVectorWithEleme
 
 
 /**
- * @test Verify that the static variant of greater-than (gt) function performs a component-wise comparison and
+ * @brief Verify that the static variant of greater-than (gt) function performs a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
@@ -99,7 +119,7 @@ TYPED_TEST(Vector2DComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWit
 
 
 /**
- * @test Verify that the greater-than (gt) function perform a component-wise comparison
+ * @brief Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vector2DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
@@ -115,7 +135,7 @@ TEST(Vector2DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorr
 
 
 /**
- * @test Verify that the greater-than (gt) function perform a component-wise comparison
+ * @brief Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vector2DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
@@ -131,7 +151,7 @@ TEST(Vector2DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectVa
 
 
 /**
- * @test Verify that the greater-than (gt) function perform a component-wise comparison
+ * @brief Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector2DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
@@ -163,8 +183,26 @@ TEST(Vector2DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectVa
  *                                    *
  **************************************/
 
+/** @brief Verify that vector greater than or equals operation is available at compile time. */
+namespace
+{
+    constexpr auto gteVec      = vec1 >= vec2;
+    constexpr auto gteVecMask1 = vec1.gte(vec2);
+    constexpr auto gteVecMask2 = fgm::Vector2D<int>::gte(vec1, vec2);
+
+    static_assert(gteVec.x() == true);
+    static_assert(gteVec.y() == false);
+
+    static_assert(gteVecMask1.x() == true);
+    static_assert(gteVecMask1.y() == false);
+
+    static_assert(gteVecMask2.x() == true);
+    static_assert(gteVecMask2.y() == false);
+
+} // namespace
+
 /**
- * @test Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
+ * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, GreaterThanOrEqual_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
@@ -176,7 +214,7 @@ TYPED_TEST(Vector2DComparison, GreaterThanOrEqual_ReturnsBooleanVectorWithElemen
 
 
 /**
- * @test Verify that the greater-than-or-equal operator performs a component-wise comparison and
+ * @brief Verify that the greater-than-or-equal operator performs a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
@@ -188,7 +226,7 @@ TYPED_TEST(Vector2DComparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWi
 
 
 /**
- * @test Verify that the static variant of greater-than-or-equal (gte) function perform a component-wise
+ * @brief Verify that the static variant of greater-than-or-equal (gte) function perform a component-wise
  *       comparison and returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison,
@@ -201,7 +239,7 @@ TYPED_TEST(Vector2DComparison,
 
 
 /**
- * @test Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
+ * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vector2DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -217,7 +255,7 @@ TEST(Vector2DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorW
 
 
 /**
- * @test Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
+ * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vector2DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -233,7 +271,7 @@ TEST(Vector2DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
 
 
 /**
- * @test Verify that the greater-than-or-equal (gte) function performs a component-wise comparison
+ * @brief Verify that the greater-than-or-equal (gte) function performs a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector2DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -265,8 +303,28 @@ TEST(Vector2DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
  *                                    *
  **************************************/
 
+/** @brief Verify that vector less than operation is available at compile time. */
+
+namespace
+{
+    constexpr auto ltVec      = vec1 < vec2;
+    constexpr auto ltVecMask1 = vec1.lt(vec2);
+    constexpr auto ltVecMask2 = fgm::Vector2D<int>::lt(vec1, vec2);
+
+    static_assert(ltVec.x() == false);
+    static_assert(ltVec.y() == true);
+
+    static_assert(ltVecMask1.x() == false);
+    static_assert(ltVecMask1.y() == true);
+
+    static_assert(ltVecMask2.x() == false);
+    static_assert(ltVecMask2.y() == true);
+
+} // namespace
+
+
 /**
- * @test Verify that the less-than (lt) function perform a component-wise comparison and
+ * @brief Verify that the less-than (lt) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, LessThan_ReturnsBooleanVectorWithElementsLessThanAsTrue)
@@ -278,7 +336,7 @@ TYPED_TEST(Vector2DComparison, LessThan_ReturnsBooleanVectorWithElementsLessThan
 
 
 /**
- * @test Verify that the less-than operator perform a component-wise comparison and
+ * @brief Verify that the less-than operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
@@ -290,7 +348,7 @@ TYPED_TEST(Vector2DComparison, LessThanOperator_ReturnsBooleanVectorWithElements
 
 
 /**
- * @test Verify that the static variant of less-than (lt) function perform a component-wise comparison and
+ * @brief Verify that the static variant of less-than (lt) function perform a component-wise comparison and
  *		 returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithElementsLessThanAsTrue)
@@ -302,7 +360,7 @@ TYPED_TEST(Vector2DComparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithEl
 
 
 /**
- * @test Verify that the less-than (lt) function perform a component-wise comparison
+ * @brief Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vector2DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
@@ -318,7 +376,7 @@ TEST(Vector2DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrect
 
 
 /**
- * @test Verify that the less-than (lt) function perform a component-wise comparison
+ * @brief Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vector2DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
@@ -343,7 +401,7 @@ TEST(Vector2DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValue
 
 
 /**
- * @test Verify that the less-than (lt) function perform a component-wise comparison
+ * @brief Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector2DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValues)
@@ -375,8 +433,27 @@ TEST(Vector2DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValue
  *                                    *
  **************************************/
 
+/** @brief Verify that vector less than or equals operation is available at compile time. */
+
+namespace
+{
+    constexpr auto lteVec      = vec1 <= vec2;
+    constexpr auto lteVecMask1 = vec1.lte(vec2);
+    constexpr auto lteVecMask2 = fgm::Vector2D<int>::lte(vec1, vec2);
+
+    static_assert(lteVec.x() == true);
+    static_assert(lteVec.y() == true);
+
+    static_assert(lteVecMask1.x() == true);
+    static_assert(lteVecMask1.y() == true);
+
+    static_assert(lteVecMask2.x() == true);
+    static_assert(lteVecMask2.y() == true);
+
+} // namespace
+
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison and
+ * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, LessThanOrEqual_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
@@ -388,7 +465,7 @@ TYPED_TEST(Vector2DComparison, LessThanOrEqual_ReturnsBooleanVectorWithElementsL
 
 
 /**
- * @test Verify that the less-than-or-equal operator perform a component-wise comparison and
+ * @brief Verify that the less-than-or-equal operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
@@ -400,7 +477,7 @@ TYPED_TEST(Vector2DComparison, LessThanOrEqualOperator_ReturnsBooleanVectorWithE
 
 
 /**
- * @test Verify that the static variant of less-than-or-equal (lte) function perform a component-wise comparison and
+ * @brief Verify that the static variant of less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector2DComparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
@@ -412,7 +489,7 @@ TYPED_TEST(Vector2DComparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVecto
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
+ * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vector2DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -428,7 +505,7 @@ TEST(Vector2DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWith
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
+ * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vector2DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -453,7 +530,7 @@ TEST(Vector2DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
+ * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector2DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)

@@ -79,7 +79,7 @@ TYPED_TEST_SUITE(Vector2DCrossProduct, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
-/** @test Verify that the dot product of a vector with itself returns its squared magnitude. */
+/** @brief Verify that the dot product of a vector with itself returns its squared magnitude. */
 TYPED_TEST(Vector2DDotProduct, SelfDotProductReturnsSquareMagnitude)
 {
 
@@ -100,7 +100,7 @@ TYPED_TEST(Vector2DDotProduct, SelfDotProductReturnsSquareMagnitude)
 }
 
 
-/** @test Verify that the dot product of a vector with an orthogonal vector returns zero. */
+/** @brief Verify that the dot product of a vector with an orthogonal vector returns zero. */
 TYPED_TEST(Vector2DDotProduct, OrthogonalDotProductReturnZero)
 {
     const TypeParam dotProduct = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
@@ -120,7 +120,7 @@ TYPED_TEST(Vector2DDotProduct, OrthogonalDotProductReturnZero)
 }
 
 
-/** @test Verify that the dot product of a vector with a non-orthogonal vector returns a non-zero scalar. */
+/** @brief Verify that the dot product of a vector with a non-orthogonal vector returns a non-zero scalar. */
 TYPED_TEST(Vector2DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 {
     const TypeParam dotProduct = this->_vecA.dot(this->_vecB);
@@ -140,7 +140,7 @@ TYPED_TEST(Vector2DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 }
 
 
-/** @test Verify that the static variant of @ref fgm::Vector2D::dot returns a non-zero scalar. */
+/** @brief Verify that the static variant of @ref fgm::Vector2D::dot returns a non-zero scalar. */
 TYPED_TEST(Vector2DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
 {
     const TypeParam dotProduct = fgm::Vector2D<TypeParam>::dot(this->_vecA, this->_vecB);
@@ -161,7 +161,7 @@ TYPED_TEST(Vector2DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZe
 
 
 /**
- * @test Verify that the dot product of a vector with another vector in opposite direction
+ * @brief Verify that the dot product of a vector with another vector in opposite direction
  *        returns a negative scalar.
  */
 TEST(Vector2DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
@@ -179,7 +179,7 @@ TEST(Vector2DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
 
 
 /**
- * @test Verify that the dot product of a vector with another vector of different type
+ * @brief Verify that the dot product of a vector with another vector of different type
  *        returns a type promoted vector.
  */
 TEST(Vector2DDotProduct, MixedTypeDotProductPromotesType)

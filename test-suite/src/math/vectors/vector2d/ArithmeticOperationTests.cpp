@@ -192,7 +192,7 @@ TYPED_TEST(Vector2DAddition, PlusOperator_ReturnsVectorSum)
 
     EXPECT_VEC_EQ(this->_expectedSum, result);
 }
-
+ 
 
 /**
  * @brief Verify that the compound addition assignment operator perform a component-wise addition and

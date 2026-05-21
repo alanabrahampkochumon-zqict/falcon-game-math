@@ -52,7 +52,7 @@ namespace
     constexpr fgm::Vector2D vec1(true, false);
     constexpr fgm::Vector2D vec2(false, false);
     constexpr auto andVec = vec1 & vec2;
-    constexpr auto orVec = vec1 | vec2;
+    constexpr auto orVec  = vec1 | vec2;
     constexpr auto notVec = !vec1;
 
     static_assert(andVec.x() == false);
@@ -64,7 +64,7 @@ namespace
     static_assert(notVec.x() == false);
     static_assert(notVec.y() == true);
 
-}
+} // namespace
 
 
 /**

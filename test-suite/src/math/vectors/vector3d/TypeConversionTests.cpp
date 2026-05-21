@@ -19,7 +19,7 @@
  */
 
 /**
- * @test Verify that the conversion constructor correctly promotes components from float to double.
+ * @brief Verify that the conversion constructor correctly promotes components from float to double.
  */
 TEST(Vector3DConversionConstructor, PromotesType)
 {
@@ -31,7 +31,7 @@ TEST(Vector3DConversionConstructor, PromotesType)
 }
 
 
-/** @test Verify that the conversion constructor ensures deep-copy value semantics. */
+/** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
 TEST(Vector3DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float vector
@@ -51,7 +51,7 @@ TEST(Vector3DConversionConstructor, ReturnsNewInstance)
 
 
 /**
- * @test Verify that the conversion constructor correctly demotes components from double to float.
+ * @brief Verify that the conversion constructor correctly demotes components from double to float.
  */
 TEST(Vector3DConversionConstructor, DemotesType)
 {

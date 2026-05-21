@@ -64,7 +64,7 @@ INSTANTIATE_TEST_SUITE_P(Vector4DProjectionTestSuite, Vector4DProjectionNaNTests
  *                                    *
  **************************************/
 
-/** @test Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::project returns a zero vector. */
+/** @brief Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::project returns a zero vector. */
 TYPED_TEST(Vector4DProjection, OrthogonalVectorsReturnsZeroVector)
 {
     const fgm::Vector4D actualProjection = this->_perpendicularVec.project(this->_ontoVec);
@@ -74,7 +74,7 @@ TYPED_TEST(Vector4DProjection, OrthogonalVectorsReturnsZeroVector)
 
 
 /**
- * @test Verify that projecting onto a vector parallel to x-axis using @ref fgm::Vector4D::project
+ * @brief Verify that projecting onto a vector parallel to x-axis using @ref fgm::Vector4D::project
  *       returns a vector containing only an x-component.
  */
 TEST(Vector4DProjection, ProjectionOntoXAxisReturnsVectorWithOnlyXComponent)
@@ -93,7 +93,7 @@ TEST(Vector4DProjection, ProjectionOntoXAxisReturnsVectorWithOnlyXComponent)
 
 
 /**
- * @test Verify that projecting onto a vector parallel to y-axis using @ref fgm::Vector4D::project
+ * @brief Verify that projecting onto a vector parallel to y-axis using @ref fgm::Vector4D::project
  *       returns a vector containing only a y-component.
  */
 TEST(Vector4DProjection, ProjectionOntoYAxisReturnsVectorWithOnlyYComponent)
@@ -112,7 +112,7 @@ TEST(Vector4DProjection, ProjectionOntoYAxisReturnsVectorWithOnlyYComponent)
 
 
 /**
- * @test Verify that projecting onto a vector parallel to z-axis using @ref fgm::Vector4D::project
+ * @brief Verify that projecting onto a vector parallel to z-axis using @ref fgm::Vector4D::project
  *       returns a vector containing only a z-component.
  */
 TEST(Vector4DProjection, ProjectionOntoZAxisReturnsVectorWithOnlyZComponent)
@@ -131,7 +131,7 @@ TEST(Vector4DProjection, ProjectionOntoZAxisReturnsVectorWithOnlyZComponent)
 
 
 /**
- * @test Verify that projecting onto a vector parallel to w-axis using @ref fgm::Vector4D::project
+ * @brief Verify that projecting onto a vector parallel to w-axis using @ref fgm::Vector4D::project
  *       returns a vector containing only a w-component.
  */
 TEST(Vector4DProjection, ProjectionOntoWAxisReturnsVectorWithOnlyWComponent)
@@ -150,7 +150,7 @@ TEST(Vector4DProjection, ProjectionOntoWAxisReturnsVectorWithOnlyWComponent)
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector using @ref fgm::Vector4D::project
+ * @brief Verify that projecting onto a non-orthogonal vector using @ref fgm::Vector4D::project
  *       returns a non-zero vector.
  */
 TYPED_TEST(Vector4DProjection, NonOrthogonalProjectionReturnsNonZeroVector)
@@ -162,7 +162,7 @@ TYPED_TEST(Vector4DProjection, NonOrthogonalProjectionReturnsNonZeroVector)
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vector4D::project
+ * @brief Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vector4D::project
  *       returns a non-zero vector.
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_NonOrthogonalProjectionReturnsNonZeroVector)
@@ -174,7 +174,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_NonOrthogonalProjectionReturnsNonZe
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::projectNorm
+ * @brief Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::projectNorm
  *       returns a non-zero vector.
  */
 TEST(Vector4DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
@@ -193,7 +193,7 @@ TEST(Vector4DProjection, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using @ref fgm::Vector4D::project returns a non-zero vector.
  */
 TEST(Vector4DProjection, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVectorInSameDirection)
@@ -212,7 +212,7 @@ TEST(Vector4DProjection, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVe
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using @ref fgm::Vector4D::project returns a type-promoted vector.
  */
 TEST(Vector4DProjection, MixedTypeProjectionPromotesType)
@@ -233,7 +233,7 @@ TEST(Vector4DProjection, MixedTypeProjectionPromotesType)
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
+ * @brief Verify that projecting onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::projectNorm returns a non-zero vector.
  */
 TEST(Vector4DProjection, StaticWrapper_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
@@ -252,7 +252,7 @@ TEST(Vector4DProjection, StaticWrapper_ProjectionOntoNormalizedVectorReturnsNonZ
 
 
 
-/** @test Verify that projection using @ref fgm::Vector4D::project always return floating-point vector. */
+/** @brief Verify that projection using @ref fgm::Vector4D::project always return floating-point vector. */
 TYPED_TEST(Vector4DProjection, Project_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vector4D projection = this->_vec.project(this->_ontoVec);
@@ -261,7 +261,7 @@ TYPED_TEST(Vector4DProjection, Project_AlwaysReturnFloatingPointVector)
 
 
 /**
- * @test Verify that projection using static variant of @ref fgm::Vector4D::project
+ * @brief Verify that projection using static variant of @ref fgm::Vector4D::project
  *       always return floating-point vector.
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVector)
@@ -278,7 +278,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVe
  **************************************/
 
 /**
- * @test Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::safeProject
+ * @brief Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::safeProject
  *       returns a zero vector.
  */
 TYPED_TEST(Vector4DProjection, SafeProject_NonOrthogonalProjectionReturnsNonZeroVector)
@@ -290,7 +290,7 @@ TYPED_TEST(Vector4DProjection, SafeProject_NonOrthogonalProjectionReturnsNonZero
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
+ * @brief Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
  *       returns a non-zero vector.
  */
 TEST(Vector4DProjection, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
@@ -309,7 +309,7 @@ TEST(Vector4DProjection, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNo
 
 
 /**
- * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
  *       returns a zero vector.
  */
 TEST(Vector4DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
@@ -326,7 +326,7 @@ TEST(Vector4DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 }
 
 /**
- * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
  *       returns a zero vector.
  */
 TEST(Vector4DProjection, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
@@ -344,7 +344,7 @@ TEST(Vector4DProjection, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using @ref fgm::Vector4D::safeProject returns a non-zero vector.
  */
 TEST(Vector4DProjection, SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
@@ -363,7 +363,7 @@ TEST(Vector4DProjection, SafeProject_OntoVectorInOppositeDirectionReturnsVectorI
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using @ref fgm::Vector4D::safeProject returns a type-promoted vector.
  */
 TEST(Vector4DProjection, SafeProject_MixedTypeProjectionPromotesType)
@@ -384,7 +384,7 @@ TEST(Vector4DProjection, SafeProject_MixedTypeProjectionPromotesType)
 
 
 /**
- * @test Verify that projecting onto a zero length vector using @ref fgm::Vector4D::safeProject
+ * @brief Verify that projecting onto a zero length vector using @ref fgm::Vector4D::safeProject
  *       returns a zero vector.
  */
 TYPED_TEST(Vector4DProjection, SafeProject_OntoZeroReturnsZeroVector)
@@ -397,7 +397,7 @@ TYPED_TEST(Vector4DProjection, SafeProject_OntoZeroReturnsZeroVector)
 }
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vector4D::safeProject
+ * @brief Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vector4D::safeProject
  *       returns a non-zero vector.
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_NonOrthogonalProjectionReturnsNonZeroVector)
@@ -409,7 +409,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_NonOrthogonalProjection
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
+ * @brief Verify that projecting onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::safeProjectNorm returns a non-zero vector.
  */
 TEST(Vector4DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
@@ -428,7 +428,7 @@ TEST(Vector4DProjection, StaticWrapper_SafeProject_ProjectionOntoNormalizedVecto
 
 
 /**
- * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector4DProjection, StaticWrapper_SafeProjectNorm_NaNVectorReturnsNonZeroVector)
@@ -446,7 +446,7 @@ TEST(Vector4DProjection, StaticWrapper_SafeProjectNorm_NaNVectorReturnsNonZeroVe
 
 
 /**
- * @test Verify that projecting onto a NaN vector using static variant of
+ * @brief Verify that projecting onto a NaN vector using static variant of
  *       @ref fgm::Vector4D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector4DProjection, StaticWrapper_SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
@@ -464,7 +464,7 @@ TEST(Vector4DProjection, StaticWrapper_SafeProjectNorm_OntoNaNVectorReturnsNonZe
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using static variant of @ref fgm::Vector4D::safeProject returns a non-zero vector.
  */
 TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
@@ -483,7 +483,7 @@ TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoVectorInOppositeDirection
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using static variant of @ref fgm::Vector4D::safeProject returns a type-promoted vector.
  */
 TEST(Vector4DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesType)
@@ -504,7 +504,7 @@ TEST(Vector4DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTy
 
 
 /**
- * @test Verify that projecting onto a zero length vector using static variant of @ref fgm::Vector4D::safeProject
+ * @brief Verify that projecting onto a zero length vector using static variant of @ref fgm::Vector4D::safeProject
  *       returns a type-promoted vector.
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
@@ -517,7 +517,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZe
 }
 
 
-/** @test Verify that projection using @ref fgm::Vector4D::safeProject always return floating-point vector. */
+/** @brief Verify that projection using @ref fgm::Vector4D::safeProject always return floating-point vector. */
 TYPED_TEST(Vector4DProjection, SafeProject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vector4D projection = this->_vec.safeProject(this->_ontoVec);
@@ -526,7 +526,7 @@ TYPED_TEST(Vector4DProjection, SafeProject_AlwaysReturnFloatingPointVector)
 
 
 /**
- * @test Verify that projection using static variant of @ref fgm::Vector4D::safeProject
+ * @brief Verify that projection using static variant of @ref fgm::Vector4D::safeProject
  *       always return floating-point vector.
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_AlwaysReturnFloatingPointVector)
@@ -537,7 +537,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_SafeProject_AlwaysReturnFloatingPoi
 
 
 /**
- * @test Verify that projection of NaN vector using @ref fgm::Vector4D::safeProject
+ * @brief Verify that projection of NaN vector using @ref fgm::Vector4D::safeProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -550,7 +550,7 @@ TEST_P(Vector4DProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSets
 
 
 /**
- * @test Verify that projection onto NaN vector using @ref fgm::Vector4D::safeProject
+ * @brief Verify that projection onto NaN vector using @ref fgm::Vector4D::safeProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -563,7 +563,7 @@ TEST_P(Vector4DProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAnd
 
 
 /**
- * @test Verify that projection of NaN vector using static variant of @ref fgm::Vector4D::safeProject
+ * @brief Verify that projection of NaN vector using static variant of @ref fgm::Vector4D::safeProject
  *       returns zero vector.
  */
 TEST_P(Vector4DProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -576,7 +576,7 @@ TEST_P(Vector4DProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZer
 
 
 /**
- * @test Verify that projection onto NaN vector using static variant of @ref fgm::Vector4D::safeProject
+ * @brief Verify that projection onto NaN vector using static variant of @ref fgm::Vector4D::safeProject
  *       returns zero vector.
  */
 TEST_P(Vector4DProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -595,7 +595,7 @@ TEST_P(Vector4DProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturn
  **************************************/
 
 /**
- * @test Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::tryProject
+ * @brief Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::tryProject
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vector4DProjection, TryProject_NonOrthogonalProjectionReturnsNonZeroVectorAndSetsCorrectFlag)
@@ -609,7 +609,7 @@ TYPED_TEST(Vector4DProjection, TryProject_NonOrthogonalProjectionReturnsNonZeroV
 
 
 /**
- * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::tryProjectNorm
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::tryProjectNorm
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector4DProjection, TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
@@ -631,7 +631,7 @@ TEST(Vector4DProjection, TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNon
 
 
 /**
- * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::tryProjectNorm
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::tryProjectNorm
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector4DProjection, TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -652,7 +652,7 @@ TEST(Vector4DProjection, TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrect
 
 
 /**
- * @test Verify that projecting a vector onto a NaN vector using @ref fgm::Vector4D::tryProjectNorm
+ * @brief Verify that projecting a vector onto a NaN vector using @ref fgm::Vector4D::tryProjectNorm
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector4DProjection, TryProjectNorm_VectorProjectedOntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -673,7 +673,7 @@ TEST(Vector4DProjection, TryProjectNorm_VectorProjectedOntoNaNVectorReturnsZeroV
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using @ref fgm::Vector4D::tryProject returns a non-zero vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -696,7 +696,7 @@ TEST(Vector4DProjection, TryProjectNorm_OntoVectorInOppositeDirectionReturnsVect
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using @ref fgm::Vector4D::tryProject returns a type-promoted vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -721,7 +721,7 @@ TEST(Vector4DProjection, TryProject_MixedTypeProjectionPromotesType)
 
 
 /**
- * @test Verify that projecting onto a zero length vector using @ref fgm::Vector4D::tryProject
+ * @brief Verify that projecting onto a zero length vector using @ref fgm::Vector4D::tryProject
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vector4DProjection, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
@@ -738,7 +738,7 @@ TYPED_TEST(Vector4DProjection, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrec
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vector4D::tryProject
+ * @brief Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vector4D::tryProject
  *       returns a non-zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_NonOrthogonalProjectionReturnsNonZeroVectorAndSetsCorrectFlag)
@@ -752,7 +752,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_NonOrthogonalProjectionR
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
+ * @brief Verify that projecting onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::tryProject with the @p ontoNormalized flag enabled returns a non-zero vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -776,7 +776,7 @@ TEST(Vector4DProjection,
 
 
 /**
- * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::tryProjectNorm returns a zero vector and sets the flag to
  *       @ref fgm::OperationStatus::NANOPERAND.
  */
@@ -797,7 +797,7 @@ TEST(Vector4DProjection, StaticWrapper_TryProjectNorm_NaNVectorReturnsZeroVector
 }
 
 /**
- * @test Verify that projecting a vector onto a NaN vector using static variant of @ref fgm::Vector4D::tryProjectNorm
+ * @brief Verify that projecting a vector onto a NaN vector using static variant of @ref fgm::Vector4D::tryProjectNorm
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector4DProjection, StaticWrapper_TryProjectNorm_VectorProjectedOntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -819,7 +819,7 @@ TEST(Vector4DProjection, StaticWrapper_TryProjectNorm_VectorProjectedOntoNaNVect
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using static variant of @ref fgm::Vector4D::tryProject returns a non-zero vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -843,7 +843,7 @@ TEST(Vector4DProjection,
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using static variant of @ref fgm::Vector4D::tryProject returns a type-promoted vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -868,7 +868,7 @@ TEST(Vector4DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTyp
 
 
 /**
- * @test Verify that projecting onto a zero length vector using static variant of @ref fgm::Vector4D::tryProject
+ * @brief Verify that projecting onto a zero length vector using static variant of @ref fgm::Vector4D::tryProject
  *       returns a type-promoted vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -883,7 +883,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZer
 }
 
 
-/** @test Verify that projection using @ref fgm::Vector4D::tryProject always return floating-point vector. */
+/** @brief Verify that projection using @ref fgm::Vector4D::tryProject always return floating-point vector. */
 TYPED_TEST(Vector4DProjection, TryProject_AlwaysReturnFloatingPointVectorAndSetsCorrectFlag)
 {
     [[maybe_unused]] fgm::OperationStatus flag;
@@ -893,7 +893,7 @@ TYPED_TEST(Vector4DProjection, TryProject_AlwaysReturnFloatingPointVectorAndSets
 
 
 /**
- * @test Verify that projection using static variant of @ref fgm::Vector4D::tryProject
+ * @brief Verify that projection using static variant of @ref fgm::Vector4D::tryProject
  *       always return floating-point vector.
  */
 TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_AlwaysReturnFloatingPointVector)
@@ -906,7 +906,7 @@ TYPED_TEST(Vector4DProjection, StaticWrapper_TryProject_AlwaysReturnFloatingPoin
 
 
 /**
- * @test Verify that projection of NaN vector using @ref fgm::Vector4D::tryProject
+ * @brief Verify that projection of NaN vector using @ref fgm::Vector4D::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -921,7 +921,7 @@ TEST_P(Vector4DProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsC
 
 
 /**
- * @test Verify that projection onto NaN vector using @ref fgm::Vector4D::tryProject
+ * @brief Verify that projection onto NaN vector using @ref fgm::Vector4D::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -936,7 +936,7 @@ TEST_P(Vector4DProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndS
 
 
 /**
- * @test Verify that projection of NaN vector using static variant of @ref fgm::Vector4D::tryProject
+ * @brief Verify that projection of NaN vector using static variant of @ref fgm::Vector4D::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -951,7 +951,7 @@ TEST_P(Vector4DProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZero
 
 
 /**
- * @test Verify that projection onto NaN vector using static variant of @ref fgm::Vector4D::tryProject
+ * @brief Verify that projection onto NaN vector using static variant of @ref fgm::Vector4D::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DProjectionNaNTests, StaticWrapper_TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)

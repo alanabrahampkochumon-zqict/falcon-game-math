@@ -30,7 +30,7 @@ TYPED_TEST_SUITE(Vector2DConstants, SupportedArithmeticTypes);
  * @{
  */
 
-/** @test Verify that @ref fgm::vec2d::one returns a 2D vector with unit components. */
+/** @brief Verify that @ref fgm::vec2d::one returns a 2D vector with unit components. */
 TYPED_TEST(Vector2DConstants, One_ReturnsVectorWithUnitComponents)
 {
     const TypeParam one = TypeParam(1);
@@ -38,11 +38,11 @@ TYPED_TEST(Vector2DConstants, One_ReturnsVectorWithUnitComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec2d::zero returns a 2D vector with zero components. */
+/** @brief Verify that @ref fgm::vec2d::zero returns a 2D vector with zero components. */
 TYPED_TEST(Vector2DConstants, Zero_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::vec2d::zero<TypeParam>); }
 
 
-/** @test Verify that @ref fgm::vec2d::inf<float> returns a 2D vector with infinity components. */
+/** @brief Verify that @ref fgm::vec2d::inf<float> returns a 2D vector with infinity components. */
 TEST(Vector2DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec2d::inf<float>;
@@ -51,7 +51,7 @@ TEST(Vector2DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec2d::inf<double> returns a 2D vector with infinity components. */
+/** @brief Verify that @ref fgm::vec2d::inf<double> returns a 2D vector with infinity components. */
 TEST(Vector2DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec2d::inf<double>;
@@ -60,7 +60,7 @@ TEST(Vector2DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec2d::infN<float> returns a 2D vector with negative infinity components. */
+/** @brief Verify that @ref fgm::vec2d::infN<float> returns a 2D vector with negative infinity components. */
 TEST(Vector2DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec2d::infN<float>;
@@ -69,7 +69,7 @@ TEST(Vector2DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityC
 }
 
 
-/** @test Verify that @ref fgm::vec2d::infN<double> returns a 2D vector with negative infinity components. */
+/** @brief Verify that @ref fgm::vec2d::infN<double> returns a 2D vector with negative infinity components. */
 TEST(Vector2DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec2d::infN<double>;
@@ -78,7 +78,7 @@ TEST(Vector2DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 }
 
 
-/** @test Verify that @ref fgm::vec2d::infN<float> returns a 2D vector with NaN components. */
+/** @brief Verify that @ref fgm::vec2d::infN<float> returns a 2D vector with NaN components. */
 TEST(Vector2DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
     const auto nan = fgm::vec2d::nan<float>;
@@ -87,7 +87,7 @@ TEST(Vector2DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec2d::infN<double> returns a 2D vector with NaN components. */
+/** @brief Verify that @ref fgm::vec2d::infN<double> returns a 2D vector with NaN components. */
 TEST(Vector2DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
     const auto nan = fgm::vec2d::nan<double>;
@@ -96,7 +96,7 @@ TEST(Vector2DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec2d::x returns a unit vector aligned with x-axis. */
+/** @brief Verify that @ref fgm::vec2d::x returns a unit vector aligned with x-axis. */
 TYPED_TEST(Vector2DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 {
     const auto x = fgm::vec2d::x<TypeParam>;
@@ -104,7 +104,7 @@ TYPED_TEST(Vector2DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 }
 
 
-/** @test Verify that @ref fgm::vec2d::y returns a unit vector aligned with y-axis. */
+/** @brief Verify that @ref fgm::vec2d::y returns a unit vector aligned with y-axis. */
 TYPED_TEST(Vector2DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 {
     const auto y = fgm::vec2d::y<TypeParam>;

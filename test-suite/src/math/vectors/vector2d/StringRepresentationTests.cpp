@@ -37,7 +37,7 @@ class Vector2DStringRepresentationTests: public ::testing::Test
  * @{
  */
 
-/** @test Verify that the string representation matches the expected format for integral types. */
+/** @brief Verify that the string representation matches the expected format for integral types. */
 TEST_F(Vector2DStringRepresentationTests, IntegralRepresentation)
 {
     const fgm::Vector2D vec(1, 2);
@@ -50,7 +50,7 @@ TEST_F(Vector2DStringRepresentationTests, IntegralRepresentation)
 
 
 /**
- * @test Verify that the string representation matches the expected format for single-precision
+ * @brief Verify that the string representation matches the expected format for single-precision
  *       floating-point types.
  */
 TEST_F(Vector2DStringRepresentationTests, FloatRepresentation)
@@ -65,7 +65,7 @@ TEST_F(Vector2DStringRepresentationTests, FloatRepresentation)
 
 
 /**
- * @test Verify that the string representation matches the expected format for double-precision
+ * @brief Verify that the string representation matches the expected format for double-precision
  *       floating-point types.
  */
 TEST_F(Vector2DStringRepresentationTests, DoubleRepresentation)

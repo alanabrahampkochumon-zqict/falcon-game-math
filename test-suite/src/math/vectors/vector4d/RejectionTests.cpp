@@ -58,7 +58,7 @@ INSTANTIATE_TEST_SUITE_P(Vector4RejectionTestSuite, Vector4DRejectionNaNTests,
  *                                    *
  **************************************/
 
-/** @test Verify that rejecting from a parallel vector using @ref fgm::Vector4D::reject returns a zero vector. */
+/** @brief Verify that rejecting from a parallel vector using @ref fgm::Vector4D::reject returns a zero vector. */
 TYPED_TEST(Vector4DRejection, ParallelVectorsReturnsZeroVector)
 {
     const fgm::Vector4D actualRejection = this->_vec.reject(this->_parallelVec);
@@ -67,7 +67,7 @@ TYPED_TEST(Vector4DRejection, ParallelVectorsReturnsZeroVector)
 
 
 /**
- * @test Verify that rejecting from a vector parallel to x-axis using @ref fgm::Vector4D::reject
+ * @brief Verify that rejecting from a vector parallel to x-axis using @ref fgm::Vector4D::reject
  *       returns a vector with a zero x-component.
  */
 TEST(Vector4DRejection, RejectionFromXAxisReturnsVectorWithZeroXComponent)
@@ -86,7 +86,7 @@ TEST(Vector4DRejection, RejectionFromXAxisReturnsVectorWithZeroXComponent)
 
 
 /**
- * @test Verify that rejecting from a vector parallel to y-axis using @ref fgm::Vector4D::reject
+ * @brief Verify that rejecting from a vector parallel to y-axis using @ref fgm::Vector4D::reject
  *       returns a vector with a zero y-component.
  */
 TEST(Vector4DRejection, RejectionFromYAxisReturnsVectorWithZeroYComponent)
@@ -105,7 +105,7 @@ TEST(Vector4DRejection, RejectionFromYAxisReturnsVectorWithZeroYComponent)
 
 
 /**
- * @test Verify that rejecting from a vector parallel to z-axis using @ref fgm::Vector4D::reject
+ * @brief Verify that rejecting from a vector parallel to z-axis using @ref fgm::Vector4D::reject
  *       returns a vector with a zero z-component.
  */
 TEST(Vector4DRejection, RejectionFromZAxisReturnsVectorWithZeroZComponent)
@@ -124,7 +124,7 @@ TEST(Vector4DRejection, RejectionFromZAxisReturnsVectorWithZeroZComponent)
 
 
 /**
- * @test Verify that rejecting from a vector parallel to w-axis using @ref fgm::Vector4D::reject
+ * @brief Verify that rejecting from a vector parallel to w-axis using @ref fgm::Vector4D::reject
  *       returns a vector with a zero w-component.
  */
 TEST(Vector4DRejection, RejectionFromWAxisReturnsVectorWithZeroWComponent)
@@ -142,7 +142,7 @@ TEST(Vector4DRejection, RejectionFromWAxisReturnsVectorWithZeroWComponent)
 }
 
 
-/** @test Verify that rejecting an orthogonal using @ref fgm::Vector4D::reject returns the original vector. */
+/** @brief Verify that rejecting an orthogonal using @ref fgm::Vector4D::reject returns the original vector. */
 TEST(Vector4DRejection, OrthogonalRejectionReturnsOriginalVector)
 {
     // Given an arbitrary vector
@@ -158,7 +158,7 @@ TEST(Vector4DRejection, OrthogonalRejectionReturnsOriginalVector)
 
 
 /**
- * @test Verify that rejecting from a non-orthogonal vector using @ref fgm::Vector4D::reject
+ * @brief Verify that rejecting from a non-orthogonal vector using @ref fgm::Vector4D::reject
  *       returns a non-zero vector with perpendicular component.
  */
 TYPED_TEST(Vector4DRejection, NonOrthogonalRejectionReturnsNonZeroVector)
@@ -170,7 +170,7 @@ TYPED_TEST(Vector4DRejection, NonOrthogonalRejectionReturnsNonZeroVector)
 
 
 /**
- * @test Verify that rejecting from a non-orthogonal vector using static variant of @ref fgm::Vector4D::reject
+ * @brief Verify that rejecting from a non-orthogonal vector using static variant of @ref fgm::Vector4D::reject
  *       returns a non-zero vector with perpendicular component.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_NonOrthogonalRejectionReturnsNonZeroVector)
@@ -182,7 +182,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_NonOrthogonalRejectionReturnsNonZero
 
 
 /**
- * @test Verify that rejecting from an orthogonal unit vector using @ref fgm::Vector4D::rejectNorm
+ * @brief Verify that rejecting from an orthogonal unit vector using @ref fgm::Vector4D::rejectNorm
  *       returns a non-zero vector with perpendicular component.
  */
 TEST(Vector4DRejection, RejectionFromNormalizedVectorReturnsNonZeroVector)
@@ -201,7 +201,7 @@ TEST(Vector4DRejection, RejectionFromNormalizedVectorReturnsNonZeroVector)
 
 
 /**
- * @test Verify that rejecting from an orthogonal vector pointing in the opposite direction
+ * @brief Verify that rejecting from an orthogonal vector pointing in the opposite direction
  *       using @ref fgm::Vector4D::reject returns a non-zero vector with perpendicular components.
  */
 TEST(Vector4DRejection, RejectionFromVectorInOppositeDirectionReturnsVectorWithPerpendicularComponents)
@@ -220,7 +220,7 @@ TEST(Vector4DRejection, RejectionFromVectorInOppositeDirectionReturnsVectorWithP
 
 
 /**
- * @test Verify that rejecting a vector from another vector of different numeric type using @ref fgm::Vector4D::reject
+ * @brief Verify that rejecting a vector from another vector of different numeric type using @ref fgm::Vector4D::reject
  *       returns a type-promoted vector.
  */
 TEST(Vector4DRejection, MixedTypeRejectionPromotesType)
@@ -241,7 +241,7 @@ TEST(Vector4DRejection, MixedTypeRejectionPromotesType)
 
 
 /**
- * @test Verify that rejecting from an orthogonal unit vector using @ref fgm::Vector4D::rejectNorm
+ * @brief Verify that rejecting from an orthogonal unit vector using @ref fgm::Vector4D::rejectNorm
  *       returns a non-zero vector with perpendicular component.
  */
 TEST(Vector4DRejection, StaticWrapper_RejectionFromNormalizedVectorReturnsNonZeroVector)
@@ -259,7 +259,7 @@ TEST(Vector4DRejection, StaticWrapper_RejectionFromNormalizedVectorReturnsNonZer
 }
 
 
-/** @test Verify that rejection using @ref fgm::Vector4D::reject always return floating-point vector. */
+/** @brief Verify that rejection using @ref fgm::Vector4D::reject always return floating-point vector. */
 TYPED_TEST(Vector4DRejection, Reject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vector4D rejection = this->_vec.reject(this->_fromVec);
@@ -268,7 +268,7 @@ TYPED_TEST(Vector4DRejection, Reject_AlwaysReturnFloatingPointVector)
 
 
 /**
- * @test Verify that rejection using static variant of @ref fgm::Vector4D::reject
+ * @brief Verify that rejection using static variant of @ref fgm::Vector4D::reject
  *       always return floating-point vector.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_Reject_AlwaysReturnFloatingPointVector)
@@ -285,7 +285,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_Reject_AlwaysReturnFloatingPointVect
  **************************************/
 
 /**
- * @test Verify that safely rejecting from a parallel vector using @ref fgm::Vector4D::safeReject
+ * @brief Verify that safely rejecting from a parallel vector using @ref fgm::Vector4D::safeReject
  *       returns a zero vector.
  */
 TYPED_TEST(Vector4DRejection, SafeReject_ParallelVectorsReturnsZeroVector)
@@ -297,7 +297,7 @@ TYPED_TEST(Vector4DRejection, SafeReject_ParallelVectorsReturnsZeroVector)
 
 
 /**
- * @test Verify that safely rejecting from orthogonal using @ref fgm::Vector4D::safeReject
+ * @brief Verify that safely rejecting from orthogonal using @ref fgm::Vector4D::safeReject
  *       returns the original vector.
  */
 TEST(Vector4DRejection, SafeReject_OrthogonalRejectionReturnsOriginalVector)
@@ -315,7 +315,7 @@ TEST(Vector4DRejection, SafeReject_OrthogonalRejectionReturnsOriginalVector)
 
 
 /**
- * @test Verify that safely rejecting from a non-orthogonal vector using @ref fgm::Vector4D::safeReject
+ * @brief Verify that safely rejecting from a non-orthogonal vector using @ref fgm::Vector4D::safeReject
  *       returns a non-zero vector with perpendicular component.
  */
 TYPED_TEST(Vector4DRejection, SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
@@ -327,7 +327,7 @@ TYPED_TEST(Vector4DRejection, SafeReject_NonOrthogonalRejectionReturnsNonZeroVec
 
 
 /**
- * @test Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector4D::safeRejectNorm
+ * @brief Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector4D::safeRejectNorm
  *       returns a non-zero vector with perpendicular component.
  */
 TEST(Vector4DRejection, SafeRejectNorm_FromNormalizedVectorReturnsNonZeroVector)
@@ -346,7 +346,7 @@ TEST(Vector4DRejection, SafeRejectNorm_FromNormalizedVectorReturnsNonZeroVector)
 
 
 /**
- * @test Verify that safely rejecting a NaN vector from a non-orthogonal unit vector using
+ * @brief Verify that safely rejecting a NaN vector from a non-orthogonal unit vector using
  *       @ref fgm::Vector4D::safeRejectNorm returns a zero vector.
  */
 TEST(Vector4DRejection, SafeRejectNorm_NaNVectorReturnsNonZeroVector)
@@ -364,7 +364,7 @@ TEST(Vector4DRejection, SafeRejectNorm_NaNVectorReturnsNonZeroVector)
 
 
 /**
- * @test Verify that safely rejecting from a NaN vector using @ref fgm::Vector4D::safeRejectNorm returns a zero vector.
+ * @brief Verify that safely rejecting from a NaN vector using @ref fgm::Vector4D::safeRejectNorm returns a zero vector.
  */
 TEST(Vector4DRejection, SafeRejectNorm_FromNaNVectorReturnsNonZeroVector)
 {
@@ -381,7 +381,7 @@ TEST(Vector4DRejection, SafeRejectNorm_FromNaNVectorReturnsNonZeroVector)
 
 
 /**
- * @test Verify that safely rejecting a vector from another vector of different numeric
+ * @brief Verify that safely rejecting a vector from another vector of different numeric
  *       type using @ref fgm::Vector4D::safeReject returns a type-promoted vector.
  */
 TEST(Vector4DRejection, SafeReject_MixedTypeRejectionPromotesType)
@@ -402,7 +402,7 @@ TEST(Vector4DRejection, SafeReject_MixedTypeRejectionPromotesType)
 
 
 /**
- * @test Verify that safely rejecting from a zero vector using @ref fgm::Vector4D::safeReject
+ * @brief Verify that safely rejecting from a zero vector using @ref fgm::Vector4D::safeReject
  *       returns the same vector.
  */
 TYPED_TEST(Vector4DRejection, SafeReject_FromZeroVectorReturnsSameVector)
@@ -416,7 +416,7 @@ TYPED_TEST(Vector4DRejection, SafeReject_FromZeroVectorReturnsSameVector)
 
 
 /**
- * @test Verify that safely rejecting from a parallel vector using static variant of @ref fgm::Vector4D::safeReject
+ * @brief Verify that safely rejecting from a parallel vector using static variant of @ref fgm::Vector4D::safeReject
  *       returns a zero vector.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_ParallelVectorsReturnsZeroVector)
@@ -428,7 +428,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_ParallelVectorsReturnsZer
 
 
 /**
- * @test Verify that safely rejecting a vector from an orthogonal vector using
+ * @brief Verify that safely rejecting a vector from an orthogonal vector using
  *       static variant of @ref fgm::Vector4D::safeReject returns the original vector.
  */
 TEST(Vector4DRejection, StaticWrapper_SafeReject_OrthogonalRejectionReturnsOriginalVector)
@@ -443,7 +443,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeReject_OrthogonalRejectionReturnsOrigi
 
 
 /**
- * @test Verify that safely rejecting from a non-orthogonal vector using static variant of
+ * @brief Verify that safely rejecting from a non-orthogonal vector using static variant of
  *       @ref fgm::Vector4D::safeReject returns a non-zero vector with perpendicular component.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
@@ -455,7 +455,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_NonOrthogonalRejectionRet
 
 
 /**
- * @test Verify that safely rejecting from an orthogonal unit vector using static variant of
+ * @brief Verify that safely rejecting from an orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::safeRejectNorm returns a non-zero vector with perpendicular component.
  */
 TEST(Vector4DRejection, StaticWrapper_SafeRejectNorm_FromNormalizedVectorReturnsNonZeroVector)
@@ -474,7 +474,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeRejectNorm_FromNormalizedVectorReturns
 
 
 /**
- * @test Verify that safely rejecting a NaN vector from a non-orthogonal unit vector using static variant of
+ * @brief Verify that safely rejecting a NaN vector from a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::safeRejectNorm returns a zero vector.
  */
 TEST(Vector4DRejection, StaticWrapper_SafeRejectNorm_NaNVectorReturnsNonZeroVector)
@@ -492,7 +492,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeRejectNorm_NaNVectorReturnsNonZeroVect
 
 
 /**
- * @test Verify that safely rejecting from a NaN vector using static variant of
+ * @brief Verify that safely rejecting from a NaN vector using static variant of
  *       @ref fgm::Vector4D::safeRejectNorm returns a zero vector.
  */
 TEST(Vector4DRejection, StaticWrapper_SafeRejectNorm_FromNaNVectorReturnsNonZeroVector)
@@ -511,7 +511,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeRejectNorm_FromNaNVectorReturnsNonZero
 
 
 /**
- * @test Verify that safely rejecting a vector from another vector of different numeric type
+ * @brief Verify that safely rejecting a vector from another vector of different numeric type
  *       using static variant of @ref fgm::Vector4D::safeReject returns a type-promoted vector.
  */
 TEST(Vector4DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
@@ -532,7 +532,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
 
 
 /**
- * @test Verify that safely rejecting from a zero length vector using static variant of @ref fgm::Vector4D::safeReject
+ * @brief Verify that safely rejecting from a zero length vector using static variant of @ref fgm::Vector4D::safeReject
  *       returns the same vector.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_FromZeroVectorReturnsSameVector)
@@ -545,7 +545,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_FromZeroVectorReturnsSame
 }
 
 
-/** @test Verify that rejection using @ref fgm::Vector4D::safeReject always return floating-point vector. */
+/** @brief Verify that rejection using @ref fgm::Vector4D::safeReject always return floating-point vector. */
 TYPED_TEST(Vector4DRejection, SafeReject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vector4D rejection = this->_vec.safeReject(this->_fromVec);
@@ -554,7 +554,7 @@ TYPED_TEST(Vector4DRejection, SafeReject_AlwaysReturnFloatingPointVector)
 
 
 /**
- * @test Verify that rejection using static variant of @ref fgm::Vector4D::safeReject
+ * @brief Verify that rejection using static variant of @ref fgm::Vector4D::safeReject
  *       always return floating-point vector.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPointVector)
@@ -565,7 +565,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPoint
 
 
 /**
- * @test Verify that the rejection of NaN vector using @ref fgm::Vector4D::safeReject
+ * @brief Verify that the rejection of NaN vector using @ref fgm::Vector4D::safeReject
  *       returns zero vector.
  */
 TEST_P(Vector4DRejectionNaNTests, SafeReject_NaNVectorReturnsZeroVector)
@@ -578,7 +578,7 @@ TEST_P(Vector4DRejectionNaNTests, SafeReject_NaNVectorReturnsZeroVector)
 
 
 /**
- * @test Verify that rejecting onto NaN vector using @ref fgm::Vector4D::safeReject
+ * @brief Verify that rejecting onto NaN vector using @ref fgm::Vector4D::safeReject
  *       returns zero vector.
  */
 TEST_P(Vector4DRejectionNaNTests, SafeReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -591,7 +591,7 @@ TEST_P(Vector4DRejectionNaNTests, SafeReject_OntoNaNVectorReturnsZeroVectorAndSe
 
 
 /**
- * @test Verify that the rejection of NaN vector using static variant of @ref fgm::Vector4D::safeReject
+ * @brief Verify that the rejection of NaN vector using static variant of @ref fgm::Vector4D::safeReject
  *       returns zero vector.
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_SafeReject_NaNVectorReturnsZeroVector)
@@ -604,7 +604,7 @@ TEST_P(Vector4DRejectionNaNTests, StaticWrapper_SafeReject_NaNVectorReturnsZeroV
 
 
 /**
- * @test Verify that rejecting onto a NaN vector using static variant of @ref fgm::Vector4D::safeReject
+ * @brief Verify that rejecting onto a NaN vector using static variant of @ref fgm::Vector4D::safeReject
  *       returns zero vector.
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_SafeReject_OntoNaNVectorReturnsZeroVector)
@@ -623,7 +623,7 @@ TEST_P(Vector4DRejectionNaNTests, StaticWrapper_SafeReject_OntoNaNVectorReturnsZ
  **************************************/
 
 /**
- * @test Verify that safely rejecting from a parallel vector using @ref fgm::Vector4D::tryReject
+ * @brief Verify that safely rejecting from a parallel vector using @ref fgm::Vector4D::tryReject
  *       returns a zero vector  and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vector4DRejection, TryReject_ParallelVectorsReturnsZeroVectorAndSetsCorrectStatusFlag)
@@ -637,7 +637,7 @@ TYPED_TEST(Vector4DRejection, TryReject_ParallelVectorsReturnsZeroVectorAndSetsC
 
 
 /**
- * @test Verify that safely rejecting from orthogonal using @ref fgm::Vector4D::tryReject
+ * @brief Verify that safely rejecting from orthogonal using @ref fgm::Vector4D::tryReject
  *       returns the original vector and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TEST(Vector4DRejection, TryReject_OrthogonalRejectionReturnsOriginalVectorAndSetsCorrectStatusFlag)
@@ -657,7 +657,7 @@ TEST(Vector4DRejection, TryReject_OrthogonalRejectionReturnsOriginalVectorAndSet
 
 
 /**
- * @test Verify that safely rejecting from a non-orthogonal vector using @ref fgm::Vector4D::tryReject
+ * @brief Verify that safely rejecting from a non-orthogonal vector using @ref fgm::Vector4D::tryReject
  *       returns a non-zero vector with perpendicular component sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vector4DRejection, TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
@@ -671,7 +671,7 @@ TYPED_TEST(Vector4DRejection, TryReject_NonOrthogonalRejectionReturnsNonZeroVect
 
 
 /**
- * @test Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector4D::tryRejectNorm
+ * @brief Verify that safely rejecting from an orthogonal unit vector using @ref fgm::Vector4D::tryRejectNorm
  *       returns a non-zero vector and with perpendicular component sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TEST(Vector4DRejection, TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
@@ -694,7 +694,7 @@ TEST(Vector4DRejection, TryReject_FromNormalizedVectorReturnsNonZeroVectorAndSet
 
 
 /**
- * @test Verify that safely rejecting NaN vector from an orthogonal unit vector using @ref fgm::Vector4D::tryRejectNorm
+ * @brief Verify that safely rejecting NaN vector from an orthogonal unit vector using @ref fgm::Vector4D::tryRejectNorm
  *       returns a zero vector and sets flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector4DRejection, TryRejectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectStatusFlag)
@@ -715,7 +715,7 @@ TEST(Vector4DRejection, TryRejectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectSt
 
 
 /**
- * @test Verify that safely rejecting from an NaN vector using @ref fgm::Vector4D::tryRejectNorm
+ * @brief Verify that safely rejecting from an NaN vector using @ref fgm::Vector4D::tryRejectNorm
  *       returns a zero vector and sets flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector4DRejection, TryRejectNorm_FromNaNVectorReturnsZeroVectorAndSetsCorrectStatusFlag)
@@ -737,7 +737,7 @@ TEST(Vector4DRejection, TryRejectNorm_FromNaNVectorReturnsZeroVectorAndSetsCorre
 
 
 /**
- * @test Verify that safely rejecting a vector from another vector of different numeric
+ * @brief Verify that safely rejecting a vector from another vector of different numeric
  *       type using @ref fgm::Vector4D::tryReject returns a type-promoted vector
  *       sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -761,7 +761,7 @@ TEST(Vector4DRejection, TryReject_MixedTypeRejectionPromotesType)
 
 
 /**
- * @test Verify that safely rejecting from a zero vector using @ref fgm::Vector4D::tryReject
+ * @brief Verify that safely rejecting from a zero vector using @ref fgm::Vector4D::tryReject
  *       returns the same vector and sets flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vector4DRejection, TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
@@ -777,7 +777,7 @@ TYPED_TEST(Vector4DRejection, TryReject_FromZeroVectorReturnsSameVectorAndSetsCo
 
 
 /**
- * @test Verify that safely rejecting from a parallel vector using static variant of @ref fgm::Vector4D::tryReject
+ * @brief Verify that safely rejecting from a parallel vector using static variant of @ref fgm::Vector4D::tryReject
  *       returns a zero vector and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_ParallelVectorsReturnsZeroVectorAndSetsCorrectStatusFlag)
@@ -792,7 +792,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_ParallelVectorsReturnsZero
 
 
 /**
- * @test Verify that safely rejecting a vector from an orthogonal vector using
+ * @brief Verify that safely rejecting a vector from an orthogonal vector using
  *       static variant of @ref fgm::Vector4D::tryReject returns the original vector
  *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -810,7 +810,7 @@ TEST(Vector4DRejection, StaticWrapper_TryReject_OrthogonalRejectionReturnsOrigin
 
 
 /**
- * @test Verify that safely rejecting from a non-orthogonal vector using static variant of
+ * @brief Verify that safely rejecting from a non-orthogonal vector using static variant of
  *       @ref fgm::Vector4D::tryReject returns a non-zero vector with perpendicular component
  *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -827,7 +827,7 @@ TYPED_TEST(Vector4DRejection,
 
 
 /**
- * @test Verify that safely rejecting from an orthogonal unit vector using static variant of
+ * @brief Verify that safely rejecting from an orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::tryRejectNorm returns a non-zero vector and with perpendicular component sets flag to
  *       @ref fgm::OperationStatus::SUCCESS.
  */
@@ -851,7 +851,7 @@ TEST(Vector4DRejection, StaticWrapper_TryReject_FromNormalizedVectorReturnsNonZe
 
 
 /**
- * @test Verify that safely rejecting NaN vector from an orthogonal unit vector using static variant of
+ * @brief Verify that safely rejecting NaN vector from an orthogonal unit vector using static variant of
  *       @ref fgm::Vector4D::tryRejectNorm returns a zero vector and sets flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector4DRejection, StaticWrapper_TryRejectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectStatusFlag)
@@ -872,7 +872,7 @@ TEST(Vector4DRejection, StaticWrapper_TryRejectNorm_NaNVectorReturnsZeroVectorAn
 
 
 /**
- * @test Verify that safely rejecting from an NaN vector using static variant of @ref fgm::Vector4D::tryRejectNorm
+ * @brief Verify that safely rejecting from an NaN vector using static variant of @ref fgm::Vector4D::tryRejectNorm
  *       returns a zero vector and sets flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector4DRejection, StaticWrapper_TryRejectNorm_FromNaNVectorReturnsZeroVectorAndSetsCorrectStatusFlag)
@@ -894,7 +894,7 @@ TEST(Vector4DRejection, StaticWrapper_TryRejectNorm_FromNaNVectorReturnsZeroVect
 
 
 /**
- * @test Verify that safely rejecting a vector from another vector of different numeric type
+ * @brief Verify that safely rejecting a vector from another vector of different numeric type
  *       using static variant of @ref fgm::Vector4D::tryReject returns a type-promoted vector
  *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -919,7 +919,7 @@ TEST(Vector4DRejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
 
 
 /**
- * @test Verify that safely rejecting from a zero length vector using static variant of @ref fgm::Vector4D::tryReject
+ * @brief Verify that safely rejecting from a zero length vector using static variant of @ref fgm::Vector4D::tryReject
  *       returns the same vector and sets flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
@@ -934,7 +934,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_FromZeroVectorReturnsSameV
 }
 
 
-/** @test Verify that rejection using @ref fgm::Vector4D::tryReject always return floating-point vector. */
+/** @brief Verify that rejection using @ref fgm::Vector4D::tryReject always return floating-point vector. */
 TYPED_TEST(Vector4DRejection, TryRejectAlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] fgm::OperationStatus status;
@@ -944,7 +944,7 @@ TYPED_TEST(Vector4DRejection, TryRejectAlwaysReturnFloatingPointVector)
 
 
 /**
- * @test Verify that rejection using static variant of @ref fgm::Vector4D::tryReject
+ * @brief Verify that rejection using static variant of @ref fgm::Vector4D::tryReject
  *       always return floating-point vector.
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointVector)
@@ -958,7 +958,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointV
 
 
 /**
- * @test Verify that the rejection of NaN vector using @ref fgm::Vector4D::tryReject
+ * @brief Verify that the rejection of NaN vector using @ref fgm::Vector4D::tryReject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DRejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -973,7 +973,7 @@ TEST_P(Vector4DRejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCor
 
 
 /**
- * @test Verify that the rejection onto NaN vector using @ref fgm::Vector4D::tryReject
+ * @brief Verify that the rejection onto NaN vector using @ref fgm::Vector4D::tryReject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DRejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -988,7 +988,7 @@ TEST_P(Vector4DRejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSet
 
 
 /**
- * @test Verify that the rejection of NaN vector using static variant of @ref fgm::Vector4D::tryReject
+ * @brief Verify that the rejection of NaN vector using static variant of @ref fgm::Vector4D::tryReject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -1003,7 +1003,7 @@ TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVe
 
 
 /**
- * @test Verify that the rejection onto NaN vector using static variant of @ref fgm::Vector4D::tryReject
+ * @brief Verify that the rejection onto NaN vector using static variant of @ref fgm::Vector4D::tryReject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vector4DRejectionNaNTests, StaticWrapper_TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)

@@ -30,7 +30,7 @@ TYPED_TEST_SUITE(Vector3DConstants, SupportedArithmeticTypes);
  * @{
  */
 
-/** @test Verify that @ref fgm::vec3d::one returns a 3D vector with unit components. */
+/** @brief Verify that @ref fgm::vec3d::one returns a 3D vector with unit components. */
 TYPED_TEST(Vector3DConstants, One_ReturnsVectorWithUnitComponents)
 {
     const TypeParam one = TypeParam(1);
@@ -38,11 +38,11 @@ TYPED_TEST(Vector3DConstants, One_ReturnsVectorWithUnitComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec3d::zero returns a 3D vector with zero components. */
+/** @brief Verify that @ref fgm::vec3d::zero returns a 3D vector with zero components. */
 TYPED_TEST(Vector3DConstants, Zero_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::vec3d::zero<TypeParam>); }
 
 
-/** @test Verify that @ref fgm::vec3d::inf<float> returns a 3D vector with infinity components. */
+/** @brief Verify that @ref fgm::vec3d::inf<float> returns a 3D vector with infinity components. */
 TEST(Vector3DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec3d::inf<float>;
@@ -51,7 +51,7 @@ TEST(Vector3DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec3d::inf<double> returns a 3D vector with infinity components. */
+/** @brief Verify that @ref fgm::vec3d::inf<double> returns a 3D vector with infinity components. */
 TEST(Vector3DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec3d::inf<double>;
@@ -60,7 +60,7 @@ TEST(Vector3DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec3d::infN<float> returns a 3D vector with negative infinity components. */
+/** @brief Verify that @ref fgm::vec3d::infN<float> returns a 3D vector with negative infinity components. */
 TEST(Vector3DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec3d::infN<float>;
@@ -69,7 +69,7 @@ TEST(Vector3DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityC
 }
 
 
-/** @test Verify that @ref fgm::vec3d::infN<double> returns a 3D vector with negative infinity components. */
+/** @brief Verify that @ref fgm::vec3d::infN<double> returns a 3D vector with negative infinity components. */
 TEST(Vector3DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec3d::infN<double>;
@@ -78,7 +78,7 @@ TEST(Vector3DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 }
 
 
-/** @test Verify that @ref fgm::vec3d::infN<float> returns a 3D vector with NaN components. */
+/** @brief Verify that @ref fgm::vec3d::infN<float> returns a 3D vector with NaN components. */
 TEST(Vector3DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
     const auto nan = fgm::vec3d::nan<float>;
@@ -88,7 +88,7 @@ TEST(Vector3DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec3d::infN<double> returns a 3D vector with NaN components. */
+/** @brief Verify that @ref fgm::vec3d::infN<double> returns a 3D vector with NaN components. */
 TEST(Vector3DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
     const auto nan = fgm::vec3d::nan<double>;
@@ -98,7 +98,7 @@ TEST(Vector3DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 }
 
 
-/** @test Verify that @ref fgm::vec3d::x returns a unit vector aligned with x-axis. */
+/** @brief Verify that @ref fgm::vec3d::x returns a unit vector aligned with x-axis. */
 TYPED_TEST(Vector3DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 {
     const auto x = fgm::vec3d::x<TypeParam>;
@@ -106,7 +106,7 @@ TYPED_TEST(Vector3DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 }
 
 
-/** @test Verify that @ref fgm::vec3d::y returns a unit vector aligned with y-axis. */
+/** @brief Verify that @ref fgm::vec3d::y returns a unit vector aligned with y-axis. */
 TYPED_TEST(Vector3DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 {
     const auto y = fgm::vec3d::y<TypeParam>;
@@ -114,7 +114,7 @@ TYPED_TEST(Vector3DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 }
 
 
-/** @test Verify that @ref fgm::vec3d::z returns a unit vector aligned with z-axis. */
+/** @brief Verify that @ref fgm::vec3d::z returns a unit vector aligned with z-axis. */
 TYPED_TEST(Vector3DConstants, Z_ReturnsUnitVectorWithOnlyZComponent)
 {
     const auto z = fgm::vec3d::z<TypeParam>;

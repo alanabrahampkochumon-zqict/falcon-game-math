@@ -54,7 +54,7 @@ TYPED_TEST_SUITE(Vector2DIntegralUtility, SupportedIntegralTypes);
  **************************************/
 
 /**
- * @test Verify that @ref std::Vector2D::hasInf returns True if any of components are IEE754 infinity
+ * @brief Verify that @ref std::Vector2D::hasInf returns True if any of components are IEE754 infinity
  *       and False otherwise.
  */
 TEST_P(Vector2DInfChecker, ReturnTrueIfAnyComponentIsInfinity)
@@ -71,7 +71,7 @@ INSTANTIATE_TEST_SUITE_P(
                       Vector2DUtilityParams{ fgm::Vector2D(1.0f, 1.0f), false }));
 
 
-/** @test Verify that @ref std::Vector2D::hasInf returns False for integral types. */
+/** @brief Verify that @ref std::Vector2D::hasInf returns False for integral types. */
 TYPED_TEST(Vector2DIntegralUtility, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -80,7 +80,7 @@ TYPED_TEST(Vector2DIntegralUtility, HasInf_ReturnsFalseForIntegrals)
 
 
 /**
- * @test Verify that the static variant of @ref std::Vector2D::hasInf returns True if any of components are IEE754
+ * @brief Verify that the static variant of @ref std::Vector2D::hasInf returns True if any of components are IEE754
  *       infinity and False otherwise.
  */
 TEST_P(Vector2DInfChecker, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
@@ -90,7 +90,7 @@ TEST_P(Vector2DInfChecker, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 }
 
 
-/** @test Verify that the static variant of @ref std::Vector2D::hasInf returns False for integral types. */
+/** @brief Verify that the static variant of @ref std::Vector2D::hasInf returns False for integral types. */
 TYPED_TEST(Vector2DIntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -105,7 +105,7 @@ TYPED_TEST(Vector2DIntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegral
  **************************************/
 
 /**
- * @test Verify that @ref std::Vector2D::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
+ * @brief Verify that @ref std::Vector2D::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
  *       and False otherwise.
  */
 TEST_P(Vector2DNaNChecker, ReturnTrueIfAnyComponentIsNaN)
@@ -121,7 +121,7 @@ INSTANTIATE_TEST_SUITE_P(Vector2DNaNCheckerTestSuite, Vector2DNaNChecker,
                                            Vector2DUtilityParams{ fgm::Vector2D(1.0f, 1.0f), false }));
 
 
-/** @test Verify that @ref std::Vector2D::hasNaN returns False for integral types. */
+/** @brief Verify that @ref std::Vector2D::hasNaN returns False for integral types. */
 TYPED_TEST(Vector2DIntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -130,7 +130,7 @@ TYPED_TEST(Vector2DIntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 
 
 /**
- * @test Verify that the static variant of @ref std::Vector2D::hasNaN returns True if any of components are IEE754
+ * @brief Verify that the static variant of @ref std::Vector2D::hasNaN returns True if any of components are IEE754
  *       NaN(Not-a-Number) and False otherwise.
  */
 TEST_P(Vector2DNaNChecker, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
@@ -140,7 +140,7 @@ TEST_P(Vector2DNaNChecker, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 }
 
 
-/** @test Verify that the static variant of @ref std::Vector2D::hasNaN returns False for integral types. */
+/** @brief Verify that the static variant of @ref std::Vector2D::hasNaN returns False for integral types. */
 TYPED_TEST(Vector2DIntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);

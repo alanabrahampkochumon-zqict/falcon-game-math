@@ -60,7 +60,7 @@ namespace
  *                                    *
  **************************************/
 
-/** @test Verify that the default constructor initializes all components to zero. */
+/** @brief Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector2DInitialization, EmptyConstructorInitializesZeroVector)
 {
     const fgm::Vector2D<TypeParam> vec;
@@ -69,7 +69,7 @@ TYPED_TEST(Vector2DInitialization, EmptyConstructorInitializesZeroVector)
 }
 
 
-/** @test Verify that the parameterized constructor correctly assigns components from the provided arguments. */
+/** @brief Verify that the parameterized constructor correctly assigns components from the provided arguments. */
 TYPED_TEST(Vector2DInitialization, ConstructorParametersInitializesVector)
 {
     const TypeParam a = static_cast<TypeParam>(3);

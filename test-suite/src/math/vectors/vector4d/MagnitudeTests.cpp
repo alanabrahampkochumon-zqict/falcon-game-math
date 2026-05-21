@@ -62,7 +62,7 @@ TYPED_TEST_SUITE(Vector4DUncleanMagnitude, SupportedArithmeticTypes);
  * @{
  */
 
-/** @test Verify that taking the magnitude of a zero vector returns exactly zero. */
+/** @brief Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vector4DMagnitude, ZeroVectorReturnsZero)
 {
     const fgm::Vector4D vec(0.0f, 0.0f, 0.0f, 0.0f);
@@ -71,7 +71,7 @@ TEST(Vector4DMagnitude, ZeroVectorReturnsZero)
 }
 
 
-/** @test Verify that taking the magnitude of a one vector returns non-unit scalar. */
+/** @brief Verify that taking the magnitude of a one vector returns non-unit scalar. */
 TEST(Vector4DMagnitude, OneComponentVectorReturnsNonUnitScalar)
 {
     const fgm::Vector4D vec(1.0f, 1.0f, 1.0f, 1.0f);
@@ -80,7 +80,7 @@ TEST(Vector4DMagnitude, OneComponentVectorReturnsNonUnitScalar)
 }
 
 
-/** @test Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
 TYPED_TEST(Vector4DMagnitude, NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = this->_vec.mag();
@@ -90,7 +90,7 @@ TYPED_TEST(Vector4DMagnitude, NonUnitVectorReturnsCorrectMagnitude)
 }
 
 
-/** @test Verify that taking the magnitude always returns a floating-point scalar. */
+/** @brief Verify that taking the magnitude always returns a floating-point scalar. */
 TYPED_TEST(Vector4DMagnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] const auto magnitude = this->_vec.mag();
@@ -99,7 +99,7 @@ TYPED_TEST(Vector4DMagnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 
 
 /**
- * @test Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vector4D::mag
+ * @brief Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vector4D::mag
  *       returns non-unit scalar.
  */
 TYPED_TEST(Vector4DMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
@@ -110,7 +110,7 @@ TYPED_TEST(Vector4DMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude
 }
 
 
-/** @test Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
+/** @brief Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
 TYPED_TEST(Vector4DUncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
     const auto magnitude = this->_vec.mag();
@@ -120,7 +120,7 @@ TYPED_TEST(Vector4DUncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMin
 
 
 /**
- * @test Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vector4D::mag
+ * @brief Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vector4D::mag
  *       ensure minimal precision loss.
  */
 TYPED_TEST(Vector4DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)

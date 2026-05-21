@@ -62,7 +62,7 @@ TYPED_TEST_SUITE(Vector2DUncleanMagnitude, SupportedArithmeticTypes);
  * @{
  */
 
-/** @test Verify that taking the magnitude of a zero vector returns exactly zero. */
+/** @brief Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vector2DMagnitude, ZeroVectorReturnsZero)
 {
     const fgm::Vector2D vec(0.0f, 0.0f);
@@ -71,7 +71,7 @@ TEST(Vector2DMagnitude, ZeroVectorReturnsZero)
 }
 
 
-/** @test Verify that taking the magnitude of a one vector returns non-unit scalar. */
+/** @brief Verify that taking the magnitude of a one vector returns non-unit scalar. */
 TEST(Vector2DMagnitude, OneComponentVectorReturnsNonUnitScalar)
 {
     const fgm::Vector2D vec(1.0f, 1.0f);
@@ -80,7 +80,7 @@ TEST(Vector2DMagnitude, OneComponentVectorReturnsNonUnitScalar)
 }
 
 
-/** @test Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
 TYPED_TEST(Vector2DMagnitude, NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = this->_vec.mag();
@@ -89,7 +89,7 @@ TYPED_TEST(Vector2DMagnitude, NonUnitVectorReturnsCorrectMagnitude)
 }
 
 
-/** @test Verify that taking the magnitude always returns a floating-point scalar. */
+/** @brief Verify that taking the magnitude always returns a floating-point scalar. */
 TYPED_TEST(Vector2DMagnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] const auto magnitude = this->_vec.mag();
@@ -98,7 +98,7 @@ TYPED_TEST(Vector2DMagnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 
 
 /**
- * @test Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vector2D::mag
+ * @brief Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vector2D::mag
  *       returns non-unit scalar.
  */
 TYPED_TEST(Vector2DMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
@@ -109,7 +109,7 @@ TYPED_TEST(Vector2DMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude
 }
 
 
-/** @test Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
+/** @brief Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
 TYPED_TEST(Vector2DUncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
     const auto magnitude = this->_vec.mag();
@@ -119,7 +119,7 @@ TYPED_TEST(Vector2DUncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMin
 
 
 /**
- * @test Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vector2D::mag
+ * @brief Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vector2D::mag
  *       ensure minimal precision loss.
  */
 TYPED_TEST(Vector2DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)

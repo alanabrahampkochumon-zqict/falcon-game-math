@@ -33,7 +33,7 @@ TYPED_TEST_SUITE(Vector4DInitialization, SupportedTypes);
  * @{
  */
 
-/** @test Verify that the default constructor initializes all components to zero. */
+/** @brief Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
 {
     const fgm::Vector4D<TypeParam> vec;
@@ -42,7 +42,7 @@ TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
 }
 
 
-/** @test Verify that the parameterized constructor correctly assigns components from the provided arguments. */
+/** @brief Verify that the parameterized constructor correctly assigns components from the provided arguments. */
 TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue)
 {
     const TypeParam a = static_cast<TypeParam>(3);
@@ -57,7 +57,7 @@ TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue
 
 
 /**
- * @test Verify that the parameterized constructor correctly composes a 4D vector from
+ * @brief Verify that the parameterized constructor correctly composes a 4D vector from
  *       two @ref fgm::Vector2D instances.
  */
 TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
@@ -76,7 +76,7 @@ TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
 
 
 /**
- * @test Verify that the parameterized constructor correctly composes a 4D vector from a
+ * @brief Verify that the parameterized constructor correctly composes a 4D vector from a
  *       @ref fgm::Vector3D instance and a scalar.
  */
 TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
@@ -94,7 +94,7 @@ TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
 
 
 /**
- * @test Verify that the parameterized constructor correctly composes a 4D vector from a scalar and
+ * @brief Verify that the parameterized constructor correctly composes a 4D vector from a scalar and
  *        a @ref fgm::Vector3D instance.
  */
 TYPED_TEST(Vector4DInitialization, ScalarAnd3DVectorCanInitializeA4DVector)

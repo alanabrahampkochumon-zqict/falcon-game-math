@@ -53,7 +53,7 @@ TYPED_TEST_SUITE(Vector4DIntegralUtilityTests, SupportedIntegralTypes);
  **************************************/
 
 /**
- * @test Verify that @ref std::Vector4D::hasInf returns True if any of components are IEE754 infinity
+ * @brief Verify that @ref std::Vector4D::hasInf returns True if any of components are IEE754 infinity
  *       and False otherwise.
  */
 TEST_P(Vector4DInfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
@@ -74,7 +74,7 @@ INSTANTIATE_TEST_SUITE_P(
                       Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
-/** @test Verify that @ref std::Vector4D::hasInf returns False for integral types. */
+/** @brief Verify that @ref std::Vector4D::hasInf returns False for integral types. */
 TYPED_TEST(Vector4DIntegralUtilityTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -83,7 +83,7 @@ TYPED_TEST(Vector4DIntegralUtilityTests, HasInf_ReturnsFalseForIntegrals)
 
 
 /**
- * @test Verify that the static variant of @ref std::Vector4D::hasInf returns True if any of components are IEE754
+ * @brief Verify that the static variant of @ref std::Vector4D::hasInf returns True if any of components are IEE754
  *       infinity and False otherwise.
  */
 TEST_P(Vector4DInfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
@@ -93,7 +93,7 @@ TEST_P(Vector4DInfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity
 }
 
 
-/** @test Verify that the static variant of @ref std::Vector4D::hasInf returns False for integral types. */
+/** @brief Verify that the static variant of @ref std::Vector4D::hasInf returns False for integral types. */
 TYPED_TEST(Vector4DIntegralUtilityTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -108,7 +108,7 @@ TYPED_TEST(Vector4DIntegralUtilityTests, StaticWrapper_HasInf_ReturnsFalseForInt
  **************************************/
 
 /**
- * @test Verify that @ref std::Vector4D::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
+ * @brief Verify that @ref std::Vector4D::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
  *       and False otherwise.
  */
 TEST_P(Vector4DNaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
@@ -129,7 +129,7 @@ INSTANTIATE_TEST_SUITE_P(
                       Vector4DUtilityParams{ fgm::Vector4D(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
-/** @test Verify that @ref std::Vector4D::hasNaN returns False for integral types. */
+/** @brief Verify that @ref std::Vector4D::hasNaN returns False for integral types. */
 TYPED_TEST(Vector4DIntegralUtilityTests, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -138,7 +138,7 @@ TYPED_TEST(Vector4DIntegralUtilityTests, HasNaN_ReturnsFalseForIntegrals)
 
 
 /**
- * @test Verify that the static variant of @ref std::Vector4D::hasNaN returns True if any of components are IEE754
+ * @brief Verify that the static variant of @ref std::Vector4D::hasNaN returns True if any of components are IEE754
  *       NaN(Not-a-Number) and False otherwise.
  */
 TEST_P(Vector4DNaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
@@ -148,7 +148,7 @@ TEST_P(Vector4DNaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 }
 
 
-/** @test Verify that the static variant of @ref std::Vector4D::hasNaN returns False for integral types. */
+/** @brief Verify that the static variant of @ref std::Vector4D::hasNaN returns False for integral types. */
 TYPED_TEST(Vector4DIntegralUtilityTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);

@@ -63,7 +63,7 @@ TYPED_TEST_SUITE(Vector4DComparison, SupportedArithmeticTypes);
  **************************************/
 
 /**
- * @test Verify that the greater-than (gt) function perform a component-wise comparison and
+ * @brief Verify that the greater-than (gt) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
@@ -75,7 +75,7 @@ TYPED_TEST(Vector4DComparison, GreaterThan_ReturnsBooleanVectorWithElementsGreat
 
 
 /**
- * @test Verify that the greater-than operator perform a component-wise comparison and
+ * @brief Verify that the greater-than operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
@@ -87,7 +87,7 @@ TYPED_TEST(Vector4DComparison, GreaterThanOperator_ReturnsBooleanVectorWithEleme
 
 
 /**
- * @test Verify that the static variant of greater-than (gt) function performs a component-wise comparison and
+ * @brief Verify that the static variant of greater-than (gt) function performs a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
@@ -99,7 +99,7 @@ TYPED_TEST(Vector4DComparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWit
 
 
 /**
- * @test Verify that the greater-than (gt) function perform a component-wise comparison
+ * @brief Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vector4DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
@@ -115,7 +115,7 @@ TEST(Vector4DComparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorr
 
 
 /**
- * @test Verify that the greater-than (gt) function perform a component-wise comparison
+ * @brief Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vector4DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
@@ -131,7 +131,7 @@ TEST(Vector4DComparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectVa
 
 
 /**
- * @test Verify that the greater-than (gt) function perform a component-wise comparison
+ * @brief Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector4DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
@@ -164,7 +164,7 @@ TEST(Vector4DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectVa
  **************************************/
 
 /**
- * @test Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
+ * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, GreaterThanOrEqual_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
@@ -176,7 +176,7 @@ TYPED_TEST(Vector4DComparison, GreaterThanOrEqual_ReturnsBooleanVectorWithElemen
 
 
 /**
- * @test Verify that the greater-than-or-equal operator performs a component-wise comparison and
+ * @brief Verify that the greater-than-or-equal operator performs a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
@@ -188,7 +188,7 @@ TYPED_TEST(Vector4DComparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWi
 
 
 /**
- * @test Verify that the static variant of greater-than-or-equal (gte) function perform a component-wise
+ * @brief Verify that the static variant of greater-than-or-equal (gte) function perform a component-wise
  *       comparison and returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison,
@@ -201,7 +201,7 @@ TYPED_TEST(Vector4DComparison,
 
 
 /**
- * @test Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
+ * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vector4DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -217,7 +217,7 @@ TEST(Vector4DComparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorW
 
 
 /**
- * @test Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
+ * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vector4DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -233,7 +233,7 @@ TEST(Vector4DComparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
 
 
 /**
- * @test Verify that the greater-than-or-equal (gte) function performs a component-wise comparison
+ * @brief Verify that the greater-than-or-equal (gte) function performs a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector4DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -266,7 +266,7 @@ TEST(Vector4DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
  **************************************/
 
 /**
- * @test Verify that the less-than (lt) function perform a component-wise comparison and
+ * @brief Verify that the less-than (lt) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, LessThan_ReturnsBooleanVectorWithElementsLessThanAsTrue)
@@ -278,7 +278,7 @@ TYPED_TEST(Vector4DComparison, LessThan_ReturnsBooleanVectorWithElementsLessThan
 
 
 /**
- * @test Verify that the less-than operator perform a component-wise comparison and
+ * @brief Verify that the less-than operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
@@ -290,7 +290,7 @@ TYPED_TEST(Vector4DComparison, LessThanOperator_ReturnsBooleanVectorWithElements
 
 
 /**
- * @test Verify that the static variant of less-than (lt) function perform a component-wise comparison and
+ * @brief Verify that the static variant of less-than (lt) function perform a component-wise comparison and
  *		 returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithElementsLessThanAsTrue)
@@ -302,7 +302,7 @@ TYPED_TEST(Vector4DComparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithEl
 
 
 /**
- * @test Verify that the less-than (lt) function perform a component-wise comparison
+ * @brief Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vector4DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
@@ -318,7 +318,7 @@ TEST(Vector4DComparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrect
 
 
 /**
- * @test Verify that the less-than (lt) function perform a component-wise comparison
+ * @brief Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vector4DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
@@ -343,7 +343,7 @@ TEST(Vector4DComparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValue
 
 
 /**
- * @test Verify that the less-than (lt) function perform a component-wise comparison
+ * @brief Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector4DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValues)
@@ -376,7 +376,7 @@ TEST(Vector4DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValue
  **************************************/
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison and
+ * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, LessThanOrEqual_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
@@ -388,7 +388,7 @@ TYPED_TEST(Vector4DComparison, LessThanOrEqual_ReturnsBooleanVectorWithElementsL
 
 
 /**
- * @test Verify that the less-than-or-equal operator perform a component-wise comparison and
+ * @brief Verify that the less-than-or-equal operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
@@ -400,7 +400,7 @@ TYPED_TEST(Vector4DComparison, LessThanOrEqualOperator_ReturnsBooleanVectorWithE
 
 
 /**
- * @test Verify that the static variant of less-than-or-equal (lte) function perform a component-wise comparison and
+ * @brief Verify that the static variant of less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vector4DComparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
@@ -412,7 +412,7 @@ TYPED_TEST(Vector4DComparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVecto
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
+ * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vector4DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -428,7 +428,7 @@ TEST(Vector4DComparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWith
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
+ * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vector4DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
@@ -453,7 +453,7 @@ TEST(Vector4DComparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorre
 
 
 /**
- * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
+ * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vector4DComparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
