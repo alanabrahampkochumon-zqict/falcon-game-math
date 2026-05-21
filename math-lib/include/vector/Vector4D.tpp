@@ -322,9 +322,9 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::size_t... Indices>
-    constexpr auto Vector4D<T>::swizzle(const Vector4D& vec) noexcept
+    constexpr auto Vector4D<T>::swizzle(const Vector4D& vector) noexcept
     {
-        return vec.swizzle<Indices...>();
+        return vector.swizzle<Indices...>();
     }
 
 
@@ -961,10 +961,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Magnitude<T> Vector4D<T>::mag(const Vector4D& vec) noexcept
+    constexpr Magnitude<T> Vector4D<T>::mag(const Vector4D& vector) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.mag();
+        return vector.mag();
     }
 
 
@@ -983,10 +983,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<Magnitude<T>> Vector4D<T>::normalize(const Vector4D& vec) noexcept
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::normalize(const Vector4D& vector) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.normalize();
+        return vector.normalize();
     }
 
 
@@ -1010,10 +1010,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<Magnitude<T>> Vector4D<T>::safeNormalize(const Vector4D& vec) noexcept
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::safeNormalize(const Vector4D& vector) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.safeNormalize();
+        return vector.safeNormalize();
     }
 
 
@@ -1040,10 +1040,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(const Vector4D& vec, OperationStatus& status) noexcept
+    constexpr Vector4D<Magnitude<T>> Vector4D<T>::tryNormalize(const Vector4D& vector, OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.tryNormalize(status);
+        return vector.tryNormalize(status);
     }
 
 

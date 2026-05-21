@@ -25,11 +25,13 @@ class Vector2DMagnitude: public ::testing::Test
 protected:
     fgm::Vector2D<T> _vec;
     fgm::Magnitude<T> _expectedMagnitude;
+    T _expectedMagnitudeSquare;
 
     void SetUp() override
     {
-        _vec               = { T(3), T(4) };
-        _expectedMagnitude = fgm::Magnitude<T>(5);
+        _vec                     = { T(3), T(4) };
+        _expectedMagnitude       = fgm::Magnitude<T>(5);
+        _expectedMagnitudeSquare = T(25);
     }
 };
 /** @brief Test fixture for @ref fgm::Vector2D magnitude, parameterized by @ref SupportedArithmeticTypes. */
@@ -63,16 +65,26 @@ TYPED_TEST_SUITE(Vector2DUncleanMagnitude, SupportedArithmeticTypes);
  */
 
 /** @brief Verify that vector magnitude operation is available at compile time. */
-namespace 
+namespace
 {
     // TODO: Add static test after making sqrt constexpr
-    //constexpr fgm::Vector2D vec(1, 2);
-    //constexpr auto magA = vec.mag();
-    //constexpr auto magB = fgm::Vector2D<int>::mag(vec);
+    constexpr fgm::Vector2D vecM(1, 2);
+    constexpr auto magSqA = vecM.magSq();
+    constexpr auto magSqB = fgm::Vector2D<int>::magSq(vecM);
+    // constexpr auto magA = vec.mag();
+    // constexpr auto magB = fgm::Vector2D<int>::mag(vec);
 
-    //static_assert(magA - 2.2360679774997898 <= 1e-5);
-    //static_assert(magB - 2.2360679774997898 <= 1e-5);
-}
+    static_assert(magSqA - 5.0 <= 1e-5);
+    static_assert(magSqB - 5.0 <= 1e-5);
+} // namespace
+
+
+/**************************************
+ *                                    *
+ *           MAGNITUDE TESTS          *
+ *                                    *
+ **************************************/
+
 
 /** @brief Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vector2DMagnitude, ZeroVectorReturnsZero)
@@ -140,5 +152,29 @@ TYPED_TEST(Vector2DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMa
 
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
+
+
+/**************************************
+ *                                    *
+ *       MAGNITUDE SQUARE TESTS       *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+TYPED_TEST(Vector2DMagnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
+{
+    const auto magnitude = this->_vec.magSq();
+
+    EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
+}
+
+
+/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+TYPED_TEST(Vector2DMagnitude, StaticWrapper_MagnitudeSquare_ReturnsSquaredMagnitude)
+{
+    const auto magnitude = fgm::Vector2D<TypeParam>::magSq(this->_vec);
+    EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
+}
+
 
 /** @} */

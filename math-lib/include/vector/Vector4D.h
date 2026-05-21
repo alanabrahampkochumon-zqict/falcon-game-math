@@ -323,7 +323,7 @@ namespace fgm
          */
 
         /**
-         * @brief Construct a new vector by rearranging, duplicating, or isolating components of the current vector.
+         * @brief Construct a new vector by rearranging, duplicating, or isolating components of this vector.
          *
          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
          *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime
@@ -341,7 +341,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a new vector by rearranging, duplicating, or isolating components of the given vector.
+         * @brief Construct a new vector by rearranging, duplicating, or isolating components of @p vector.
          *
          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
          *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime
@@ -350,14 +350,14 @@ namespace fgm
          * @tparam Indices The component indices used to construct the new vector.
          *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
          *
-         * @param vec The vector to shuffle, rearrange or isolate components.
+         * @param vector The vector to shuffle, rearrange or isolate components.
          *
          * @return A new vector containing the requested components or the component if @p Indices is 1.
          *         The dimension of the returned vector perfectly matches the number of indices provided.
          */
         template <std::size_t... Indices>
         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
-        static constexpr auto swizzle(const Vector4D& vec) noexcept;
+        static constexpr auto swizzle(const Vector4D& vector) noexcept;
 
         /** @} */
 
@@ -1153,17 +1153,17 @@ namespace fgm
 
 
         /**
-         * @brief Compute the magnitude (length) of the given vector.
+         * @brief Compute the magnitude (length) of @p vector.
          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @param[in] vec The vector to compute the magnitude of.
+         * @param[in] vector The vector to compute the magnitude of.
          *
          * @return The scalar magnitude of @p vec.
          */
-        [[nodiscard]] static constexpr Magnitude<T> mag(const Vector4D& vec) noexcept
+        [[nodiscard]] static constexpr Magnitude<T> mag(const Vector4D& vector) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1183,17 +1183,17 @@ namespace fgm
 
 
         /**
-         * @brief Compute the normalized (unit) form of the given vector.
+         * @brief Compute the normalized (unit) form of @p vector.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @param[in] vec The vector to normalize.
+         * @param[in] vector The vector to normalize.
          *
          * @return A new @ref Vector4D with a magnitude of 1.0.
          */
-        [[nodiscard]] static constexpr Vector4D<Magnitude<T>> normalize(const Vector4D& vec) noexcept
+        [[nodiscard]] static constexpr Vector4D<Magnitude<T>> normalize(const Vector4D& vector) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1214,7 +1214,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the normalized (unit) form of the given vector.
+         * @brief Compute the normalized (unit) form of @p vector.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note This is a safe operation. If the vector's magnitude falls below the internal
@@ -1222,12 +1222,12 @@ namespace fgm
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @param[in] vec The vector to be normalized.
+         * @param[in] vector The vector to be normalized.
          *
          * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] static constexpr Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vec) noexcept
+        [[nodiscard]] static constexpr Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vector) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1252,7 +1252,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the normalized (unit) form of the given vector and
+         * @brief Compute the normalized (unit) form of the @p vector and
          *        set @p status to the normalization operation result.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
@@ -1261,14 +1261,14 @@ namespace fgm
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @param[in] vec     The vector to be normalized.
+         * @param[in] vector     The vector to be normalized.
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
          * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] static constexpr Vector4D<Magnitude<T>> tryNormalize(const Vector4D& vec,
+        [[nodiscard]] static constexpr Vector4D<Magnitude<T>> tryNormalize(const Vector4D& vector,
                                                                            OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 

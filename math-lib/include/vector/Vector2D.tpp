@@ -206,9 +206,9 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::size_t... Indices>
-    constexpr auto Vector2D<T>::swizzle(const Vector2D& vec) noexcept
+    constexpr auto Vector2D<T>::swizzle(const Vector2D& vector) noexcept
     {
-        return vec.swizzle<Indices...>();
+        return vector.swizzle<Indices...>();
     }
 
 
@@ -852,12 +852,28 @@ namespace fgm
     }
 
     template <Arithmetic T>
-    constexpr Magnitude<T> Vector2D<T>::mag(const Vector2D& vec) noexcept
+    constexpr Magnitude<T> Vector2D<T>::mag(const Vector2D& vector) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.mag();
+        return vector.mag();
     }
 
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::magSq() const noexcept
+        requires StrictArithmetic<T>
+    {
+        //return _data[0] * _data[0] + _data[1] * _data[1];
+        return this->dot(*this);
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::magSq(const Vector2D& vector) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.magSq();
+    }
 
 
     /*************************************
@@ -875,10 +891,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector2D<Magnitude<T>> Vector2D<T>::normalize(const Vector2D& vec) noexcept
+    constexpr Vector2D<Magnitude<T>> Vector2D<T>::normalize(const Vector2D& vector) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.normalize();
+        return vector.normalize();
     }
 
 
@@ -902,10 +918,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector2D<Magnitude<T>> Vector2D<T>::safeNormalize(const Vector2D& vec) noexcept
+    constexpr Vector2D<Magnitude<T>> Vector2D<T>::safeNormalize(const Vector2D& vector) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.safeNormalize();
+        return vector.safeNormalize();
     }
 
 
@@ -932,10 +948,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector2D<Magnitude<T>> Vector2D<T>::tryNormalize(const Vector2D& vec, OperationStatus& status) noexcept
+    constexpr Vector2D<Magnitude<T>> Vector2D<T>::tryNormalize(const Vector2D& vector, OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
-        return vec.tryNormalize(status);
+        return vector.tryNormalize(status);
     }
 
 
