@@ -51,6 +51,65 @@ TYPED_TEST_SUITE(Vector3DEquality, SupportedArithmeticTypes);
  * @{
  */
 
+/** @brief Verify that vector equality operations are available are at compile time. */
+namespace
+{
+    constexpr fgm::Vector3D vec1(1, 2, 4);
+    constexpr fgm::Vector3D vec2(3, 2, 1);
+    constexpr fgm::Vector3D vec3(1, 2, 4);
+
+    // Equality tests
+    constexpr auto allEqVec1 = vec1.allEq(vec2);
+    static_assert(allEqVec1 == false);
+
+    constexpr auto allEqVec2 = vec1.allEq(vec3);
+    static_assert(allEqVec2 == true);
+
+    constexpr auto allEqVec3 = fgm::Vector3D<int>::allEq(vec1, vec2);
+    static_assert(allEqVec3 == false);
+
+    constexpr auto allEqVec4 = fgm::Vector3D<int>::allEq(vec1, vec3);
+    static_assert(allEqVec4 == true);
+
+    constexpr auto allEqVec5 = vec1 == vec2;
+    static_assert(allEqVec5 == false);
+
+    constexpr auto allEqVec6 = vec1 == vec3;
+    static_assert(allEqVec6 == true);
+
+    constexpr auto maskEqVec = vec1.eq(vec2);
+    static_assert(maskEqVec.x() == false);
+    static_assert(maskEqVec.y() == true);
+    static_assert(maskEqVec.z() == false);
+
+
+    // Inequality tests
+    constexpr auto allNeqVec1 = vec1.anyNeq(vec2);
+    static_assert(allNeqVec1 == true);
+
+    constexpr auto allNeqVec2 = vec1.anyNeq(vec3);
+    static_assert(allNeqVec2 == false);
+
+    constexpr auto allNeqVec3 = fgm::Vector3D<int>::anyNeq(vec1, vec2);
+    static_assert(allNeqVec3 == true);
+
+    constexpr auto allNeqVec4 = fgm::Vector3D<int>::anyNeq(vec1, vec3);
+    static_assert(allNeqVec4 == false);
+
+    constexpr auto allNeqVec5 = vec1 != vec2;
+    static_assert(allNeqVec5 == true);
+
+    constexpr auto allNeqVec6 = vec1 != vec3;
+    static_assert(allNeqVec6 == false);
+
+    constexpr auto maskNeqVec = vec1.neq(vec2);
+    static_assert(maskNeqVec.x() == true);
+    static_assert(maskNeqVec.y() == false);
+    static_assert(maskNeqVec.z() == true);
+
+} // namespace
+
+
 /**************************************
  *                                    *
  *           EQUALITY TESTS           *
