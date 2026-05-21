@@ -19,7 +19,7 @@
  **************************************/
 
 template<typename T>
-class Vector3DAddition : public ::testing::Test {
+class Vector3DAddition : public testing::Test {
 protected:
     fgm::Vector3D<T> _vecA;
     fgm::Vector3D<T> _vecB;
@@ -37,7 +37,7 @@ TYPED_TEST_SUITE(Vector3DAddition, SupportedArithmeticTypes);
 
 
 template<typename T>
-class Vector3DSubtraction : public ::testing::Test {
+class Vector3DSubtraction : public testing::Test {
 protected:
     fgm::Vector3D<T> _vecA;
     fgm::Vector3D<T> _vecB;
@@ -55,7 +55,7 @@ TYPED_TEST_SUITE(Vector3DSubtraction, SupportedArithmeticTypes);
 
 
 template<typename T>
-class Vector3DScalarMultiplication : public ::testing::Test {
+class Vector3DScalarMultiplication : public testing::Test {
 protected:
     fgm::Vector3D<T> _vec;
     T _scalar;
@@ -75,7 +75,7 @@ TYPED_TEST_SUITE(Vector3DScalarMultiplication, SupportedArithmeticTypes);
 
 
 template<typename T>
-class Vector3DScalarDivision : public ::testing::Test {
+class Vector3DScalarDivision : public testing::Test {
 protected:
     fgm::Vector3D<T> _vec;
     T _scalar;
@@ -93,7 +93,7 @@ TYPED_TEST_SUITE(Vector3DScalarDivision, SupportedArithmeticTypes);
 
 
 template<typename T>
-class Vector3DInversion : public ::testing::Test {
+class Vector3DInversion : public testing::Test {
 protected:
     fgm::Vector3D<T> _vec;
     fgm::Vector3D<T> _expectedInvertedVec;
@@ -109,7 +109,7 @@ TYPED_TEST_SUITE(Vector3DInversion, SupportedSignedArithmeticTypes);
 
 
 /** @brief Test fixture for @ref fgm::Vector3D division with NaN vectors. */
-class Vector3DDivisionNaNTests : public ::testing::TestWithParam<fgm::Vector3D<float> > {};
+class Vector3DDivisionNaNTests : public testing::TestWithParam<fgm::Vector3D<float> > {};
 
 INSTANTIATE_TEST_SUITE_P(Vector3DDivisionTestSuite, Vector3DDivisionNaNTests,
                          ::testing::Values(fgm::Vector3D<float>(fgm::constants::NaN, 3.0f, 3.0f),
@@ -140,6 +140,7 @@ namespace {
     constexpr auto divVec1 = vecB / 2;
     constexpr auto divVec2 = vecB.safeDiv(2);
     constexpr auto divVec3 = fgm::Vector3D<int>::safeDiv(vecB, 2);
+    constexpr auto invVec = -vecA;
 
     static_assert(sumVec.x() == 5);
     static_assert(sumVec.y() == 5);
@@ -164,6 +165,10 @@ namespace {
     static_assert(divVec3.x() == 2);
     static_assert(divVec3.y() == 1);
     static_assert(divVec3.z() == 0);
+
+    static_assert(invVec.x() == -1);
+    static_assert(invVec.y() == -2);
+    static_assert(invVec.z() == -3);
 } // namespace
 
 
@@ -215,9 +220,9 @@ TEST(Vector3DAddition, PlusOperator_MixedTypePromotesType) {
  */
 TEST(Vector3DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType) {
     fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
-    const fgm::Vector3D vec2(9.0, -5.0, 10.0);
+    [[maybe_unused]] const fgm::Vector3D vec2(9.0, -5.0, 10.0);
 
-    vec1 += vec2;
+    static_cast<void>(vec1 += vec2);
 
     static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
 }
@@ -278,9 +283,9 @@ TEST(Vector3DSubtraction, MinusOperator_MixedTypePromotesType) {
  */
 TEST(Vector3DSubtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType) {
     fgm::Vector3D vec1(3.0f, 0.0f, -1.0f);
-    const fgm::Vector3D vec2(9.0, -5.0, 10.0);
+    [[maybe_unused]] const fgm::Vector3D vec2(9.0, -5.0, 10.0);
 
-    vec1 -= vec2;
+    static_cast<void>(vec1 -= vec2);
 
     static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
 }
