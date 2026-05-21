@@ -190,6 +190,31 @@ TEST(Vector4DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectVa
  *                                    *
  **************************************/
 
+/** @brief Verify that vector greater than or equals operation is available at compile time. */
+namespace
+{
+    constexpr auto gteVec      = vec1 >= vec2;
+    constexpr auto gteVecMask1 = vec1.gte(vec2);
+    constexpr auto gteVecMask2 = fgm::Vector4D<int>::gte(vec1, vec2);
+
+    static_assert(gteVec.x() == true);
+    static_assert(gteVec.y() == false);
+    static_assert(gteVec.z() == true);
+    static_assert(gteVec.w() == false);
+
+    static_assert(gteVecMask1.x() == true);
+    static_assert(gteVecMask1.y() == false);
+    static_assert(gteVecMask1.z() == true);
+    static_assert(gteVecMask1.w() == false);
+
+    static_assert(gteVecMask2.x() == true);
+    static_assert(gteVecMask2.y() == false);
+    static_assert(gteVecMask2.z() == true);
+    static_assert(gteVecMask2.w() == false);
+
+} // namespace
+
+
 /**
  * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
@@ -291,6 +316,31 @@ TEST(Vector4DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
  *          LESS THAN TESTS           *
  *                                    *
  **************************************/
+
+/** @brief Verify that vector less than operation is available at compile time. */
+namespace
+{
+    constexpr auto ltVec      = vec1 < vec2;
+    constexpr auto ltVecMask1 = vec1.lt(vec2);
+    constexpr auto ltVecMask2 = fgm::Vector4D<int>::lt(vec1, vec2);
+
+    static_assert(ltVec.x() == false);
+    static_assert(ltVec.y() == true);
+    static_assert(ltVec.z() == false);
+    static_assert(ltVec.w() == true);
+
+    static_assert(ltVecMask1.x() == false);
+    static_assert(ltVecMask1.y() == true);
+    static_assert(ltVecMask1.z() == false);
+    static_assert(ltVecMask1.w() == true);
+
+    static_assert(ltVecMask2.x() == false);
+    static_assert(ltVecMask2.y() == true);
+    static_assert(ltVecMask2.z() == false);
+    static_assert(ltVecMask2.w() == true);
+
+} // namespace
+
 
 /**
  * @brief Verify that the less-than (lt) function perform a component-wise comparison and
@@ -401,6 +451,31 @@ TEST(Vector4DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValue
  *      LESS THAN OR EQUALS TESTS     *
  *                                    *
  **************************************/
+
+/** @brief Verify that vector less than or equals operation is available at compile time. */
+namespace
+{
+    constexpr auto lteVec      = vec1 <= vec2;
+    constexpr auto lteVecMask1 = vec1.lte(vec2);
+    constexpr auto lteVecMask2 = fgm::Vector4D<int>::lte(vec1, vec2);
+
+    static_assert(lteVec.x() == true);
+    static_assert(lteVec.y() == true);
+    static_assert(lteVec.z() == false);
+    static_assert(lteVec.w() == true);
+
+    static_assert(lteVecMask1.x() == true);
+    static_assert(lteVecMask1.y() == true);
+    static_assert(lteVecMask1.z() == false);
+    static_assert(lteVecMask1.w() == true);
+
+    static_assert(lteVecMask2.x() == true);
+    static_assert(lteVecMask2.x() == true);
+    static_assert(lteVecMask2.z() == false);
+    static_assert(lteVecMask2.w() == true);
+
+} // namespace
+
 
 /**
  * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison and

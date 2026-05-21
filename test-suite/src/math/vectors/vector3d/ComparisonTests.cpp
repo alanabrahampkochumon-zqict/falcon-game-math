@@ -56,6 +56,12 @@ TYPED_TEST_SUITE(Vector3DComparison, SupportedArithmeticTypes);
  * @{
  */
 
+/**************************************
+ *                                    *
+ *         GREATER THAN TESTS         *
+ *                                    *
+ **************************************/
+
 /** @brief Verify that vector greater than operation is available at compile time. */
 namespace
 {
@@ -79,12 +85,6 @@ namespace
 
 } // namespace
 
-
-/**************************************
- *                                    *
- *         GREATER THAN TESTS         *
- *                                    *
- **************************************/
 
 /**
  * @brief Verify that the greater-than (gt) function perform a component-wise comparison and
@@ -208,6 +208,7 @@ namespace
 
 } // namespace
 
+
 /**
  * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
@@ -330,6 +331,7 @@ namespace
     static_assert(ltVecMask2.z() == false);
 
 } // namespace
+
 
 /**
  * @brief Verify that the less-than (lt) function perform a component-wise comparison and
@@ -461,6 +463,7 @@ namespace
     static_assert(lteVecMask2.z() == false);
 
 } // namespace
+
 
 /**
  * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison and
