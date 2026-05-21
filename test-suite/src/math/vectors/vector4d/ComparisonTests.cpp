@@ -62,6 +62,33 @@ TYPED_TEST_SUITE(Vector4DComparison, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
+/** @brief Verify that vector greater than operation is available at compile time. */
+namespace
+{
+    constexpr fgm::Vector4D vec1(1, 2, 5, 2);
+    constexpr fgm::Vector4D vec2(1, 3, 4, 4);
+    constexpr auto gtVec      = vec1 > vec2;
+    constexpr auto gtVecMask1 = vec1.gt(vec2);
+    constexpr auto gtVecMask2 = fgm::Vector4D<int>::gt(vec1, vec2);
+
+    static_assert(gtVec.x() == false);
+    static_assert(gtVec.y() == false);
+    static_assert(gtVec.z() == true);
+    static_assert(gtVec.w() == false);
+
+    static_assert(gtVecMask1.x() == false);
+    static_assert(gtVecMask1.y() == false);
+    static_assert(gtVecMask1.z() == true);
+    static_assert(gtVecMask1.w() == false);
+
+    static_assert(gtVecMask2.x() == false);
+    static_assert(gtVecMask2.y() == false);
+    static_assert(gtVecMask2.z() == true);
+    static_assert(gtVecMask2.w() == false);
+
+} // namespace
+
+
 /**
  * @brief Verify that the greater-than (gt) function perform a component-wise comparison and
  *       returns the correct boolean mask.

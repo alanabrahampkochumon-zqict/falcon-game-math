@@ -56,6 +56,30 @@ TYPED_TEST_SUITE(Vector3DComparison, SupportedArithmeticTypes);
  * @{
  */
 
+/** @brief Verify that vector greater than operation is available at compile time. */
+namespace
+{
+    constexpr fgm::Vector3D vec1(1, 2, 5);
+    constexpr fgm::Vector3D vec2(1, 3, 4);
+    constexpr auto gtVec      = vec1 > vec2;
+    constexpr auto gtVecMask1 = vec1.gt(vec2);
+    constexpr auto gtVecMask2 = fgm::Vector3D<int>::gt(vec1, vec2);
+
+    static_assert(gtVec.x() == false);
+    static_assert(gtVec.y() == false);
+    static_assert(gtVec.z() == true);
+
+    static_assert(gtVecMask1.x() == false);
+    static_assert(gtVecMask1.y() == false);
+    static_assert(gtVecMask1.z() == true);
+
+    static_assert(gtVecMask2.x() == false);
+    static_assert(gtVecMask2.y() == false);
+    static_assert(gtVecMask2.z() == true);
+
+} // namespace
+
+
 /**************************************
  *                                    *
  *         GREATER THAN TESTS         *
@@ -163,6 +187,27 @@ TEST(Vector3DComparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectVa
  *                                    *
  **************************************/
 
+/** @brief Verify that vector greater than or equals operation is available at compile time. */
+namespace
+{
+    constexpr auto gteVec      = vec1 >= vec2;
+    constexpr auto gteVecMask1 = vec1.gte(vec2);
+    constexpr auto gteVecMask2 = fgm::Vector3D<int>::gte(vec1, vec2);
+
+    static_assert(gteVec.x() == true);
+    static_assert(gteVec.y() == false);
+    static_assert(gteVec.z() == true);
+
+    static_assert(gteVecMask1.x() == true);
+    static_assert(gteVecMask1.y() == false);
+    static_assert(gteVecMask1.z() == true);
+
+    static_assert(gteVecMask2.x() == true);
+    static_assert(gteVecMask2.y() == false);
+    static_assert(gteVecMask2.z() == true);
+
+} // namespace
+
 /**
  * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
@@ -264,6 +309,27 @@ TEST(Vector3DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
  *          LESS THAN TESTS           *
  *                                    *
  **************************************/
+
+/** @brief Verify that vector less than operation is available at compile time. */
+namespace
+{
+    constexpr auto ltVec      = vec1 < vec2;
+    constexpr auto ltVecMask1 = vec1.lt(vec2);
+    constexpr auto ltVecMask2 = fgm::Vector3D<int>::lt(vec1, vec2);
+
+    static_assert(ltVec.x() == false);
+    static_assert(ltVec.y() == true);
+    static_assert(ltVec.z() == false);
+
+    static_assert(ltVecMask1.x() == false);
+    static_assert(ltVecMask1.y() == true);
+    static_assert(ltVecMask1.z() == false);
+
+    static_assert(ltVecMask2.x() == false);
+    static_assert(ltVecMask2.y() == true);
+    static_assert(ltVecMask2.z() == false);
+
+} // namespace
 
 /**
  * @brief Verify that the less-than (lt) function perform a component-wise comparison and
@@ -374,6 +440,27 @@ TEST(Vector3DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValue
  *      LESS THAN OR EQUALS TESTS     *
  *                                    *
  **************************************/
+
+/** @brief Verify that vector less than or equals operation is available at compile time. */
+namespace
+{
+    constexpr auto lteVec      = vec1 <= vec2;
+    constexpr auto lteVecMask1 = vec1.lte(vec2);
+    constexpr auto lteVecMask2 = fgm::Vector3D<int>::lte(vec1, vec2);
+
+    static_assert(lteVec.x() == true);
+    static_assert(lteVec.y() == true);
+    static_assert(lteVec.z() == false);
+
+    static_assert(lteVecMask1.x() == true);
+    static_assert(lteVecMask1.y() == true);
+    static_assert(lteVecMask1.z() == false);
+
+    static_assert(lteVecMask2.x() == true);
+    static_assert(lteVecMask2.x() == true);
+    static_assert(lteVecMask2.z() == false);
+
+} // namespace
 
 /**
  * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison and

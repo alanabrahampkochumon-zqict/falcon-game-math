@@ -304,7 +304,6 @@ TEST(Vector2DComparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCo
  **************************************/
 
 /** @brief Verify that vector less than operation is available at compile time. */
-
 namespace
 {
     constexpr auto ltVec      = vec1 < vec2;
@@ -434,7 +433,6 @@ TEST(Vector2DComparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValue
  **************************************/
 
 /** @brief Verify that vector less than or equals operation is available at compile time. */
-
 namespace
 {
     constexpr auto lteVec      = vec1 <= vec2;
