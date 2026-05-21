@@ -46,8 +46,29 @@ protected:
  * @{
  */
 
+/** @brief Verify that vector boolean bitwise operations are available at compile time. */
+namespace
+{
+    constexpr fgm::Vector2D vec1(true, false);
+    constexpr fgm::Vector2D vec2(false, false);
+    constexpr auto andVec = vec1 & vec2;
+    constexpr auto orVec = vec1 | vec2;
+    constexpr auto notVec = !vec1;
+
+    static_assert(andVec.x() == false);
+    static_assert(andVec.y() == false);
+
+    static_assert(orVec.x() == true);
+    static_assert(orVec.y() == false);
+
+    static_assert(notVec.x() == false);
+    static_assert(notVec.y() == true);
+
+}
+
+
 /**
- * @test Verify that the bitwise AND operator perform a component-wise logical conjunction and
+ * @brief Verify that the bitwise AND operator perform a component-wise logical conjunction and
  *       returns the correct boolean mask.
  */
 TEST_F(BooleanVector2DBitOperations, BitwiseAND_PerformComponentwiseConjunction)
@@ -58,7 +79,7 @@ TEST_F(BooleanVector2DBitOperations, BitwiseAND_PerformComponentwiseConjunction)
 }
 
 /**
- * @test Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
+ * @brief Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
 TEST_F(BooleanVector2DBitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
@@ -70,7 +91,7 @@ TEST_F(BooleanVector2DBitOperations, CompoundBitwiseAND_PerformInPlaceConjunctio
 
 
 /**
- * @test Verify that the bitwise OR operator performs a component-wise logical disjunction and
+ * @brief Verify that the bitwise OR operator performs a component-wise logical disjunction and
  *       returns the correct boolean mask.
  */
 TEST_F(BooleanVector2DBitOperations, BitwiseOR_PerformComponentwiseDisjunction)
@@ -82,7 +103,7 @@ TEST_F(BooleanVector2DBitOperations, BitwiseOR_PerformComponentwiseDisjunction)
 
 
 /**
- * @test Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place
+ * @brief Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
 TEST_F(BooleanVector2DBitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
@@ -94,7 +115,7 @@ TEST_F(BooleanVector2DBitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction
 
 
 /**
- * @test Verify that the bitwise NOT operator performs a component-wise logical inversion and
+ * @brief Verify that the bitwise NOT operator performs a component-wise logical inversion and
  *       returns the correct boolean mask.
  */
 TEST_F(BooleanVector2DBitOperations, BitwiseNOT_PerformComponentwiseInversion)

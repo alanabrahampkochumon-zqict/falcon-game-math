@@ -139,7 +139,7 @@ INSTANTIATE_TEST_SUITE_P(Vector2DDivisionTestSuite, Vector2DDivisionNaNTests,
  *                                    *
  **************************************/
 
-/** @brief Verify that vector addition operation is available at compile time. */
+/** @brief Verify that vector arithmetic operations are available at compile time. */
 namespace
 {
     constexpr fgm::Vector2D vecA(1, 2);
@@ -183,7 +183,7 @@ namespace
  **************************************/
 
 /**
- * @test Verify that the binary addition operator perform a component-wise addition and
+ * @brief Verify that the binary addition operator perform a component-wise addition and
  *       returns a new vector instance.
  */
 TYPED_TEST(Vector2DAddition, PlusOperator_ReturnsVectorSum)
@@ -195,7 +195,7 @@ TYPED_TEST(Vector2DAddition, PlusOperator_ReturnsVectorSum)
 
 
 /**
- * @test Verify that the compound addition assignment operator perform a component-wise addition and
+ * @brief Verify that the compound addition assignment operator perform a component-wise addition and
  *       mutates the vector in-place.
  */
 TYPED_TEST(Vector2DAddition, PlusEqualsOperator_ReturnsSameVectorWithSum)
@@ -207,7 +207,7 @@ TYPED_TEST(Vector2DAddition, PlusEqualsOperator_ReturnsSameVectorWithSum)
 
 
 /**
- * @test Verify that the binary addition operator perform automatic type promotion
+ * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
 TEST(Vector2DAddition, PlusOperator_MixedTypePromotesType)
@@ -222,7 +222,7 @@ TEST(Vector2DAddition, PlusOperator_MixedTypePromotesType)
 
 
 /**
- * @test Verify that the compound addition assignment operator maintains the destination type and
+ * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
 TEST(Vector2DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
@@ -250,7 +250,7 @@ TEST(Vector2DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
  **************************************/
 
 /**
- * @test Verify that the binary subtraction operator perform a component-wise subtraction and
+ * @brief Verify that the binary subtraction operator perform a component-wise subtraction and
  *       returns a new vector instance.
  */
 TYPED_TEST(Vector2DSubtraction, MinusOperator_ReturnsDifference)
@@ -262,7 +262,7 @@ TYPED_TEST(Vector2DSubtraction, MinusOperator_ReturnsDifference)
 
 
 /**
- * @test Verify that the compound subtraction assignment operator perform a component-wise subtraction
+ * @brief Verify that the compound subtraction assignment operator perform a component-wise subtraction
  *       and mutates the vector in-place.
  */
 TYPED_TEST(Vector2DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
@@ -274,7 +274,7 @@ TYPED_TEST(Vector2DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
 
 
 /**
- * @test Verify that the binary subtraction operator perform automatic type promotion
+ * @brief Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
 TEST(Vector2DSubtraction, MinusOperator_MixedTypePromotesType)
@@ -289,7 +289,7 @@ TEST(Vector2DSubtraction, MinusOperator_MixedTypePromotesType)
 
 
 /**
- * @test Verify that the compound subtraction assignment operator maintains the destination type and
+ * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
 TEST(Vector2DSubtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
@@ -316,7 +316,7 @@ TEST(Vector2DSubtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
  *                                    *
  **************************************/
 
-/** @test Verify that scalar multiplication by zero returns a zero vector. */
+/** @brief Verify that scalar multiplication by zero returns a zero vector. */
 TEST(Vector2DScalarMultiplication, MultiplicationByZeroReturnsZeroVector)
 {
     const fgm::Vector2D vec(3.0f, 6.0f);
@@ -327,7 +327,7 @@ TEST(Vector2DScalarMultiplication, MultiplicationByZeroReturnsZeroVector)
 }
 
 
-/** @test Verify that scalar multiplication by one returns original vector. */
+/** @brief Verify that scalar multiplication by one returns original vector. */
 TEST(Vector2DScalarMultiplication, MultiplicationByOneReturnsOriginalVector)
 {
     const fgm::Vector2D vec(3.0f, 6.0f);
@@ -339,7 +339,7 @@ TEST(Vector2DScalarMultiplication, MultiplicationByOneReturnsOriginalVector)
 
 
 /**
- * @test Verify that the binary multiplication operator (vector * scalar) perform a component-wise (Hadamard) product
+ * @brief Verify that the binary multiplication operator (vector * scalar) perform a component-wise (Hadamard) product
  *       and returns a new vector instance.
  */
 TYPED_TEST(Vector2DScalarMultiplication, VectorTimesScalarReturnsScaledVector)
@@ -358,7 +358,7 @@ TYPED_TEST(Vector2DScalarMultiplication, VectorTimesScalarReturnsScaledVector)
 
 
 /**
- * @test Verify that the binary multiplication operator (scalar * vector) perform a component-wise (Hadamard) product
+ * @brief Verify that the binary multiplication operator (scalar * vector) perform a component-wise (Hadamard) product
  *       and returns a new vector instance.
  */
 TYPED_TEST(Vector2DScalarMultiplication, ScalarTimesAVectorReturnsScaledVector)
@@ -377,7 +377,7 @@ TYPED_TEST(Vector2DScalarMultiplication, ScalarTimesAVectorReturnsScaledVector)
 
 
 /**
- * @test Verify that the compound multiplication assignment operator performs a component-wise (Hadamard) product
+ * @brief Verify that the compound multiplication assignment operator performs a component-wise (Hadamard) product
  *       and mutates the vector in-place.
  */
 TYPED_TEST(Vector2DScalarMultiplication, VectorTimesEqualScalarIsTheSameVectorScaled)
@@ -396,7 +396,7 @@ TYPED_TEST(Vector2DScalarMultiplication, VectorTimesEqualScalarIsTheSameVectorSc
 
 
 /**
- * @test Verify that the binary multiplication operator perform automatic type promotion
+ * @brief Verify that the binary multiplication operator perform automatic type promotion
  *       to the wider numeric type.
  */
 TYPED_TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
@@ -410,7 +410,7 @@ TYPED_TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
 
 
 /**
- * @test Verify that the compound multiplication assignment operator maintains the destination type and
+ * @brief Verify that the compound multiplication assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
 TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
@@ -424,7 +424,7 @@ TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
 
 
 /**
- * @test Verify that the compound multiplication operator for mixed types
+ * @brief Verify that the compound multiplication operator for mixed types
  *       ensure minimal precision loss.
  */
 TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
@@ -453,7 +453,7 @@ TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  **************************************/
 
 /**
- * @test Verify that dividing a float vector by zero returns an
+ * @brief Verify that dividing a float vector by zero returns an
  *       infinity vector of float type.
  */
 TEST(Vector2DScalarDivision, FloatVectorDivisionByZeroReturnsInfinityVector)
@@ -464,7 +464,7 @@ TEST(Vector2DScalarDivision, FloatVectorDivisionByZeroReturnsInfinityVector)
 
 
 /**
- * @test Verify that dividing a double vector by zero returns an
+ * @brief Verify that dividing a double vector by zero returns an
  *       infinity vector of double type.
  */
 TEST(Vector2DScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
@@ -474,7 +474,7 @@ TEST(Vector2DScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
 }
 
 
-/** @test Verify that dividing a vector by one returns the original vector. */
+/** @brief Verify that dividing a vector by one returns the original vector. */
 TYPED_TEST(Vector2DScalarDivision, DivisionByOneReturnsOriginalVector)
 {
     const fgm::Vector2D result = this->_vec / 1;
@@ -484,7 +484,7 @@ TYPED_TEST(Vector2DScalarDivision, DivisionByOneReturnsOriginalVector)
 
 
 /**
- * @test Verify that the binary division operator (vector / scalar) perform a component-wise divide and
+ * @brief Verify that the binary division operator (vector / scalar) perform a component-wise divide and
  *       returns a vector instance.
  */
 TYPED_TEST(Vector2DScalarDivision, ScalarDivision_ReturnsInverseScaledVector)
@@ -496,7 +496,7 @@ TYPED_TEST(Vector2DScalarDivision, ScalarDivision_ReturnsInverseScaledVector)
 
 
 /**
- * @test Verify that the compound division assignment operator perform a component-wise divide and
+ * @brief Verify that the compound division assignment operator perform a component-wise divide and
  *       mutates the vector in-place.
  */
 TYPED_TEST(Vector2DScalarDivision, ScalarDivisionAssignment_ReturnsSameVectorInverseScaled)
@@ -508,7 +508,7 @@ TYPED_TEST(Vector2DScalarDivision, ScalarDivisionAssignment_ReturnsSameVectorInv
 
 
 /**
- * @test Verify that the binary division operator perform automatic type promotion
+ * @brief Verify that the binary division operator perform automatic type promotion
  *       to the wider numeric type.
  */
 TEST(Vector2DScalarDivision, MixedType_ScalarDivision_PromotesType)
@@ -523,7 +523,7 @@ TEST(Vector2DScalarDivision, MixedType_ScalarDivision_PromotesType)
 
 
 /**
- * @test Verify that the compound division assignment operator maintains the destination type and
+ * @brief Verify that the compound division assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
 TEST(Vector2DScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
@@ -537,7 +537,7 @@ TEST(Vector2DScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteTy
 }
 
 
-/** @test Verify that the compound division operator for mixed types ensures minimal precision loss. */
+/** @brief Verify that the compound division operator for mixed types ensures minimal precision loss. */
 TEST(Vector2DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWithMinimalPrecisionLoss)
 {
     fgm::Vector2D vec(10, -30);
@@ -557,7 +557,7 @@ TEST(Vector2DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWit
  **************************************/
 
 /**
- * @test Verify that dividing a vector using @ref fgm::Vector2D::safeDiv perform a component-wise divide and
+ * @brief Verify that dividing a vector using @ref fgm::Vector2D::safeDiv perform a component-wise divide and
  *       returns a new vector instance.
  */
 TYPED_TEST(Vector2DScalarDivision, SafeDivide_ReturnsAInverseScaledVector)
@@ -569,7 +569,7 @@ TYPED_TEST(Vector2DScalarDivision, SafeDivide_ReturnsAInverseScaledVector)
 
 
 /**
- * @test Verify that dividing a vector by integral zero using @ref fgm::Vector2D::safeDiv
+ * @brief Verify that dividing a vector by integral zero using @ref fgm::Vector2D::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TYPED_TEST(Vector2DScalarDivision, SafeDivideByIntegralZero_ReturnsZeroVector)
@@ -580,7 +580,7 @@ TYPED_TEST(Vector2DScalarDivision, SafeDivideByIntegralZero_ReturnsZeroVector)
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using @ref fgm::Vector2D::safeDiv
+ * @brief Verify that dividing a vector by floating point zero using @ref fgm::Vector2D::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TYPED_TEST(Vector2DScalarDivision, SafeDivideByFloatZero_ReturnsZeroVector)
@@ -591,7 +591,7 @@ TYPED_TEST(Vector2DScalarDivision, SafeDivideByFloatZero_ReturnsZeroVector)
 
 
 /**
- * @test Verify that dividing a vector using static variant of @ref fgm::Vector2D::safeDiv
+ * @brief Verify that dividing a vector using static variant of @ref fgm::Vector2D::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TYPED_TEST(Vector2DScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScaledVector)
@@ -602,7 +602,7 @@ TYPED_TEST(Vector2DScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScale
 
 
 /**
- * @test Verify that dividing a vector by integral zero using static variant of @ref fgm::Vector2D::safeDiv
+ * @brief Verify that dividing a vector by integral zero using static variant of @ref fgm::Vector2D::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TEST(Vector2DScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroVector)
@@ -613,7 +613,7 @@ TEST(Vector2DScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZero
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using static variant @ref fgm::Vector2D::safeDiv
+ * @brief Verify that dividing a vector by floating point zero using static variant @ref fgm::Vector2D::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TYPED_TEST(Vector2DScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZeroVector)
@@ -624,7 +624,7 @@ TYPED_TEST(Vector2DScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZe
 
 
 /**
- * @test Verify that dividing a vector by NaN using @ref fgm::Vector2D::safeDiv
+ * @brief Verify that dividing a vector by NaN using @ref fgm::Vector2D::safeDiv
  *       returns a zero vector.
  */
 TYPED_TEST(Vector2DScalarDivision, SafeDivideByNaN_ReturnsZeroVector)
@@ -636,7 +636,7 @@ TYPED_TEST(Vector2DScalarDivision, SafeDivideByNaN_ReturnsZeroVector)
 
 
 /**
- * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vector2D::safeDiv
+ * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vector2D::safeDiv
  *       returns a zero vector.
  */
 TYPED_TEST(Vector2DScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroVector)
@@ -654,7 +654,7 @@ TYPED_TEST(Vector2DScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroVect
  **************************************/
 
 /**
- * @test Verify that dividing a vector using @ref fgm::Vector2D::tryDiv perform a component-wise divide and
+ * @brief Verify that dividing a vector using @ref fgm::Vector2D::tryDiv perform a component-wise divide and
  *       returns a new vector instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vector2DScalarDivision, TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
@@ -668,7 +668,7 @@ TYPED_TEST(Vector2DScalarDivision, TryDivide_ReturnsAInverseScaledVectorAndSetsC
 
 
 /**
- * @test Verify that dividing a vector by integral zero using @ref fgm::Vector2D::tryDiv returns zero vector and
+ * @brief Verify that dividing a vector by integral zero using @ref fgm::Vector2D::tryDiv returns zero vector and
  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vector2DScalarDivision, TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -682,7 +682,7 @@ TYPED_TEST(Vector2DScalarDivision, TryDivideByIntegralZero_ReturnsZeroVectorAndS
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using @ref fgm::Vector2D::tryDiv returns zero vector and
+ * @brief Verify that dividing a vector by floating point zero using @ref fgm::Vector2D::tryDiv returns zero vector and
  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vector2DScalarDivision, TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -696,7 +696,7 @@ TYPED_TEST(Vector2DScalarDivision, TryDivideByFloatZero_ReturnsZeroVectorAndSets
 
 
 /**
- * @test Verify that dividing a NaN vector by zero using @ref fgm::Vector2D::tryDiv
+ * @brief Verify that dividing a NaN vector by zero using @ref fgm::Vector2D::tryDiv
  *       @ref fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector2DScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
@@ -708,7 +708,7 @@ TEST(Vector2DScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrece
 
 
 /**
- * @test Verify that dividing a vector by NaN using @ref fgm::Vector2D::tryDiv returns a zero vector and
+ * @brief Verify that dividing a vector by NaN using @ref fgm::Vector2D::tryDiv returns a zero vector and
  *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vector2DScalarDivision, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -722,7 +722,7 @@ TYPED_TEST(Vector2DScalarDivision, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrec
 
 
 /**
- * @test Verify that dividing a vector using static variant of @ref fgm::Vector2D::tryDiv
+ * @brief Verify that dividing a vector using static variant of @ref fgm::Vector2D::tryDiv
  *       perform a component-wise divide and returns a new vector instance and
  *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -737,7 +737,7 @@ TYPED_TEST(Vector2DScalarDivision, StaticWrapper_TryDivide_ReturnsAInverseScaled
 
 
 /**
- * @test Verify that dividing a vector by integral zero using static variant of @ref fgm::Vector2D::tryDiv
+ * @brief Verify that dividing a vector by integral zero using static variant of @ref fgm::Vector2D::tryDiv
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vector2DScalarDivision, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -751,7 +751,7 @@ TYPED_TEST(Vector2DScalarDivision, StaticWrapper_TryDivideByIntegralZero_Returns
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vector2D::tryDiv
+ * @brief Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vector2D::tryDiv
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vector2DScalarDivision, StaticWrapper_TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -765,7 +765,7 @@ TYPED_TEST(Vector2DScalarDivision, StaticWrapper_TryDivideByFloatZero_ReturnsZer
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vector2D::tryDiv
+ * @brief Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vector2D::tryDiv
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vector2DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -779,7 +779,7 @@ TEST(Vector2DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorA
 
 
 /**
- * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vector2D::tryDiv returns zero vector and
+ * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vector2D::tryDiv returns zero vector and
  *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vector2DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -799,7 +799,7 @@ TYPED_TEST(Vector2DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVecto
  **************************************/
 
 /**
- * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector2D::safeDiv
+ * @brief Verify that dividing a nan vector by a scalar using @ref fgm::Vector2D::safeDiv
  *       returns vector with NaN-components as zero.
  */
 TEST_P(Vector2DDivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
@@ -809,7 +809,7 @@ TEST_P(Vector2DDivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 }
 
 /**
- * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector2D::safeDiv
+ * @brief Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector2D::safeDiv
  *       returns zero vector.
  */
 TEST_P(Vector2DDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
@@ -820,7 +820,7 @@ TEST_P(Vector2DDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNCompo
 
 
 /**
- * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vector2D::tryDiv
+ * @brief Verify that dividing a nan vector by a scalar using @ref fgm::Vector2D::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
 TEST_P(Vector2DDivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
@@ -833,7 +833,7 @@ TEST_P(Vector2DDivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 
 
 /**
- * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector2D::tryDiv
+ * @brief Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vector2D::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
 TEST_P(Vector2DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
@@ -853,7 +853,7 @@ TEST_P(Vector2DDivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNCompon
  */
 
 /**
- * @test Verify that  @ref fgm::Vector2D unary minus operator inverts each component and
+ * @brief Verify that  @ref fgm::Vector2D unary minus operator inverts each component and
  * returns a new vector.
  */
 TYPED_TEST(Vector2DInversion, InvertsTheSignOfEachComponents)
@@ -863,7 +863,7 @@ TYPED_TEST(Vector2DInversion, InvertsTheSignOfEachComponents)
 }
 
 
-/** @test Verify that @ref fgm::Vector2D unary minus operator inverts each component of an infinity vector. */
+/** @brief Verify that @ref fgm::Vector2D unary minus operator inverts each component of an infinity vector. */
 TEST(Vector2DInversion, InvertsSignOfInfinity)
 {
     const fgm::Vector2D infVec = {
@@ -881,7 +881,7 @@ TEST(Vector2DInversion, InvertsSignOfInfinity)
 }
 
 
-/** @test Verify that @ref fgm::Vector2D unary minus follows IEEE 754 rules for NaN. */
+/** @brief Verify that @ref fgm::Vector2D unary minus follows IEEE 754 rules for NaN. */
 TEST(Vector2DInversion, NoOpOnNaNVectors)
 {
     const fgm::Vector2D nanVec = {

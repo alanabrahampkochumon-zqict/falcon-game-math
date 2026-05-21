@@ -140,7 +140,7 @@ INSTANTIATE_TEST_SUITE_P(Vector4DDivisionTestSuite, Vector4DDivisionNaNTests,
  *                                    *
  **************************************/
 
-/** @brief Verify that vector addition operation is available at compile time. */
+/** @brief Verify that vector arithmetic operations are available at compile time. */
 namespace
 {
     constexpr fgm::Vector4D vecA(1, 2, 3, 4);
