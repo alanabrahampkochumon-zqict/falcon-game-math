@@ -147,6 +147,9 @@ namespace
     constexpr auto sumVec = vecA + vecB;
     constexpr auto diffVec = vecB - vecA;
     constexpr auto scaledVec = vecA * 2;
+    constexpr auto divVec1 = vecB / 2;
+    constexpr auto divVec2 = vecB.safeDiv(2);
+    constexpr auto divVec3 = fgm::Vector2D<int>::safeDiv(vecB, 2);
 
     static_assert(sumVec.x() == 4);
     static_assert(sumVec.y() == 7);
@@ -156,6 +159,15 @@ namespace
 
     static_assert(scaledVec.x() == 2);
     static_assert(scaledVec.y() == 4);
+
+    static_assert(divVec1.x() == 1);
+    static_assert(divVec1.y() == 2);
+
+    static_assert(divVec2.x() == 1);
+    static_assert(divVec2.y() == 2);
+
+    static_assert(divVec3.x() == 1);
+    static_assert(divVec3.y() == 2);
 } // namespace
 
 
