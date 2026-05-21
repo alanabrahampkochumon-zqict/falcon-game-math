@@ -14,7 +14,7 @@
 
 
 template <typename T>
-class Vector3DConstants: public ::testing::Test
+class Vector3DConstants: public testing::Test
 {
 protected:
     T _one  = T(1);
@@ -29,6 +29,29 @@ TYPED_TEST_SUITE(Vector3DConstants, SupportedArithmeticTypes);
  * @addtogroup T_FGM_Vec3_Const
  * @{
  */
+
+/** @brief Verify that @ref fgm::Vector3D constants are available at compile time. */
+namespace
+{
+    static_assert(fgm::vec3d::one<int>.x() == 1);
+    static_assert(fgm::vec3d::one<int>.y() == 1);
+    static_assert(fgm::vec3d::one<int>.z() == 1);
+
+    static_assert(fgm::vec3d::zero<int>.x() == 0);
+    static_assert(fgm::vec3d::zero<int>.y() == 0);
+    static_assert(fgm::vec3d::zero<int>.z() == 0);
+
+    static_assert(fgm::isinf(fgm::vec3d::inf<float>.x()));
+    static_assert(fgm::isinf(fgm::vec3d::inf<float>.y()));
+    static_assert(fgm::isinf(fgm::vec3d::inf<float>.z()));
+
+
+    static_assert(fgm::isnan(fgm::vec3d::nan<float>.x()));
+    static_assert(fgm::isnan(fgm::vec3d::nan<float>.y()));
+    static_assert(fgm::isnan(fgm::vec3d::nan<float>.z()));
+
+} // namespace
+
 
 /** @brief Verify that @ref fgm::vec3d::one returns a 3D vector with unit components. */
 TYPED_TEST(Vector3DConstants, One_ReturnsVectorWithUnitComponents)

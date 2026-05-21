@@ -14,7 +14,7 @@
 
 
 template <typename T>
-class Vector2DConstants: public ::testing::Test
+class Vector2DConstants: public testing::Test
 {
 protected:
     T _one  = T(1);
@@ -29,6 +29,25 @@ TYPED_TEST_SUITE(Vector2DConstants, SupportedArithmeticTypes);
  * @addtogroup T_FGM_Vec2_Const
  * @{
  */
+
+/** @brief Verify that @ref fgm::Vector2D constants are available at compile time. */
+namespace
+{
+    static_assert(fgm::vec2d::one<int>.x() == 1);
+    static_assert(fgm::vec2d::one<int>.y() == 1);
+
+    static_assert(fgm::vec2d::zero<int>.x() == 0);
+    static_assert(fgm::vec2d::zero<int>.y() == 0);
+
+    static_assert(fgm::isinf(fgm::vec2d::inf<float>.x()));
+    static_assert(fgm::isinf(fgm::vec2d::inf<float>.y()));
+
+
+    static_assert(fgm::isnan(fgm::vec2d::nan<float>.x()));
+    static_assert(fgm::isnan(fgm::vec2d::nan<float>.y()));
+
+} // namespace
+
 
 /** @brief Verify that @ref fgm::vec2d::one returns a 2D vector with unit components. */
 TYPED_TEST(Vector2DConstants, One_ReturnsVectorWithUnitComponents)

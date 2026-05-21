@@ -14,7 +14,7 @@
 
 
 template <typename T>
-class Vector4DConstantTests: public ::testing::Test
+class Vector4DConstantTests: public testing::Test
 {
 protected:
     T _one  = T(1);
@@ -29,6 +29,33 @@ TYPED_TEST_SUITE(Vector4DConstantTests, SupportedArithmeticTypes);
  * @addtogroup T_FGM_Vec4_Const
  * @{
  */
+
+/** @brief Verify that @ref fgm::Vector2D constants are available at compile time. */
+namespace
+{
+    static_assert(fgm::vec4d::one<int>.x() == 1);
+    static_assert(fgm::vec4d::one<int>.y() == 1);
+    static_assert(fgm::vec4d::one<int>.z() == 1);
+    static_assert(fgm::vec4d::one<int>.w() == 1);
+
+    static_assert(fgm::vec4d::zero<int>.x() == 0);
+    static_assert(fgm::vec4d::zero<int>.y() == 0);
+    static_assert(fgm::vec4d::zero<int>.z() == 0);
+    static_assert(fgm::vec4d::zero<int>.w() == 0);
+
+    static_assert(fgm::isinf(fgm::vec4d::inf<float>.x()));
+    static_assert(fgm::isinf(fgm::vec4d::inf<float>.y()));
+    static_assert(fgm::isinf(fgm::vec4d::inf<float>.z()));
+    static_assert(fgm::isinf(fgm::vec4d::inf<float>.w()));
+
+
+    static_assert(fgm::isnan(fgm::vec4d::nan<float>.x()));
+    static_assert(fgm::isnan(fgm::vec4d::nan<float>.y()));
+    static_assert(fgm::isnan(fgm::vec4d::nan<float>.z()));
+    static_assert(fgm::isnan(fgm::vec4d::nan<float>.w()));
+
+} // namespace
+
 
 /** @brief Verify that @ref fgm::vec4d::one returns a 4D vector with unit components. */
 TYPED_TEST(Vector4DConstantTests, One_ReturnsVectorWithUnitComponents)
