@@ -52,6 +52,63 @@ INSTANTIATE_TEST_SUITE_P(Vector4RejectionTestSuite, Vector4DRejectionNaNTests,
  * @{
  */
 
+
+/** @brief Verify that vector rejection is available at compile time. */
+namespace
+{
+    constexpr fgm::Vector4D vecA(1, 2, 3, 4);
+    constexpr fgm::Vector4D vecB(1, 0, 0, 0);
+    constexpr auto rej1 = vecA.reject(vecB);
+    static_assert(rej1.x() == 0);
+    static_assert(rej1.y() == 2);
+    static_assert(rej1.z() == 3);
+    static_assert(rej1.w() == 4);
+
+    constexpr auto rej2 = vecA.rejectNorm(vecB);
+    static_assert(rej2.x() == 0);
+    static_assert(rej2.y() == 2);
+    static_assert(rej2.z() == 3);
+    static_assert(rej2.w() == 4);
+
+    constexpr auto rej3 = fgm::Vector4D<int>::reject(vecA, vecB);
+    static_assert(rej3.x() == 0);
+    static_assert(rej3.y() == 2);
+    static_assert(rej3.z() == 3);
+    static_assert(rej3.w() == 4);
+
+    constexpr auto rej4 = fgm::Vector4D<int>::rejectNorm(vecA, vecB);
+    static_assert(rej4.x() == 0);
+    static_assert(rej4.y() == 2);
+    static_assert(rej4.z() == 3);
+    static_assert(rej4.w() == 4);
+
+    constexpr auto rej5 = vecA.safeReject(vecB);
+    static_assert(rej5.x() == 0);
+    static_assert(rej5.y() == 2);
+    static_assert(rej5.z() == 3);
+    static_assert(rej5.w() == 4);
+
+    constexpr auto rej6 = vecA.safeRejectNorm(vecB);
+    static_assert(rej6.x() == 0);
+    static_assert(rej6.y() == 2);
+    static_assert(rej6.z() == 3);
+    static_assert(rej6.w() == 4);
+
+    constexpr auto rej7 = fgm::Vector4D<int>::safeReject(vecA, vecB);
+    static_assert(rej7.x() == 0);
+    static_assert(rej7.y() == 2);
+    static_assert(rej7.z() == 3);
+    static_assert(rej7.w() == 4);
+
+    constexpr auto rej8 = fgm::Vector4D<int>::safeRejectNorm(vecA, vecB);
+    static_assert(rej8.x() == 0);
+    static_assert(rej8.y() == 2);
+    static_assert(rej8.z() == 3);
+    static_assert(rej8.w() == 4);
+
+} // namespace
+
+
 /**************************************
  *                                    *
  *          REJECTION TESTS           *

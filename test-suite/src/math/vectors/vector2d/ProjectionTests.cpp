@@ -55,6 +55,44 @@ INSTANTIATE_TEST_SUITE_P(Vector2DProjectionTestSuite, Vector2DProjectionNaNTests
  * @{
  */
 
+/** @brief Verify that vector projection is available at compile time. */
+namespace 
+{
+    constexpr fgm::Vector2D vecA(1, 2);
+    constexpr fgm::Vector2D vecB(1, 0);
+    constexpr auto proj1 = vecA.project(vecB);
+    static_assert(proj1.x() == 1);
+    static_assert(proj1.y() == 0);
+
+    constexpr auto proj2 = vecA.projectNorm(vecB);
+    static_assert(proj2.x() == 1);
+    static_assert(proj2.y() == 0);
+
+    constexpr auto proj3 = fgm::Vector2D<int>::project(vecA, vecB);
+    static_assert(proj3.x() == 1);
+    static_assert(proj3.y() == 0);
+
+    constexpr auto proj4 = fgm::Vector2D<int>::projectNorm(vecA, vecB);
+    static_assert(proj4.x() == 1);
+    static_assert(proj4.y() == 0);
+
+    constexpr auto proj5 = vecA.safeProject(vecB);
+    static_assert(proj5.x() == 1);
+    static_assert(proj5.y() == 0);
+
+    constexpr auto proj6 = vecA.safeProjectNorm(vecB);
+    static_assert(proj6.x() == 1);
+    static_assert(proj6.y() == 0);
+
+    constexpr auto proj7 = fgm::Vector2D<int>::safeProject(vecA, vecB);
+    static_assert(proj7.x() == 1);
+    static_assert(proj7.y() == 0);
+
+    constexpr auto proj8 = fgm::Vector2D<int>::safeProjectNorm(vecA, vecB);
+    static_assert(proj8.x() == 1);
+    static_assert(proj8.y() == 0);
+}
+
 /**************************************
  *                                    *
  *          PROJECTION TESTS          *

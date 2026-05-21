@@ -64,6 +64,62 @@ INSTANTIATE_TEST_SUITE_P(Vector4DProjectionTestSuite, Vector4DProjectionNaNTests
  *                                    *
  **************************************/
 
+/** @brief Verify that vector projection is available at compile time. */
+namespace
+{
+    constexpr fgm::Vector4D vecA(1, 2, 3, 4);
+    constexpr fgm::Vector4D vecB(1, 0, 0, 0);
+    constexpr auto proj1 = vecA.project(vecB);
+    static_assert(proj1.x() == 1);
+    static_assert(proj1.y() == 0);
+    static_assert(proj1.z() == 0);
+    static_assert(proj1.w() == 0);
+
+    constexpr auto proj2 = vecA.projectNorm(vecB);
+    static_assert(proj2.x() == 1);
+    static_assert(proj2.y() == 0);
+    static_assert(proj2.z() == 0);
+    static_assert(proj2.w() == 0);
+
+    constexpr auto proj3 = fgm::Vector4D<int>::project(vecA, vecB);
+    static_assert(proj3.x() == 1);
+    static_assert(proj3.y() == 0);
+    static_assert(proj3.z() == 0);
+    static_assert(proj3.w() == 0);
+
+    constexpr auto proj4 = fgm::Vector4D<int>::projectNorm(vecA, vecB);
+    static_assert(proj4.x() == 1);
+    static_assert(proj4.y() == 0);
+    static_assert(proj4.z() == 0);
+    static_assert(proj4.w() == 0);
+
+    constexpr auto proj5 = vecA.safeProject(vecB);
+    static_assert(proj5.x() == 1);
+    static_assert(proj5.y() == 0);
+    static_assert(proj5.z() == 0);
+    static_assert(proj5.w() == 0);
+
+    constexpr auto proj6 = vecA.safeProjectNorm(vecB);
+    static_assert(proj6.x() == 1);
+    static_assert(proj6.y() == 0);
+    static_assert(proj6.z() == 0);
+    static_assert(proj6.w() == 0);
+
+    constexpr auto proj7 = fgm::Vector4D<int>::safeProject(vecA, vecB);
+    static_assert(proj7.x() == 1);
+    static_assert(proj7.y() == 0);
+    static_assert(proj7.z() == 0);
+    static_assert(proj7.w() == 0);
+
+    constexpr auto proj8 = fgm::Vector4D<int>::safeProjectNorm(vecA, vecB);
+    static_assert(proj8.x() == 1);
+    static_assert(proj8.y() == 0);
+    static_assert(proj8.z() == 0);
+    static_assert(proj8.w() == 0);
+
+} // namespace
+
+
 /** @brief Verify that projecting onto an orthogonal vector using @ref fgm::Vector4D::project returns a zero vector. */
 TYPED_TEST(Vector4DProjection, OrthogonalVectorsReturnsZeroVector)
 {
