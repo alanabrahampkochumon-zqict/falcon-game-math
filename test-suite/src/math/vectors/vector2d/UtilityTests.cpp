@@ -47,6 +47,31 @@ TYPED_TEST_SUITE(Vector2DIntegralUtility, SupportedIntegralTypes);
  * @{
  */
 
+/** @brief Verify that vector utilities are available at compile time. */
+namespace 
+{
+    constexpr fgm::Vector2D normVec(1, 2);
+    constexpr fgm::Vector2D infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
+    constexpr fgm::Vector2D nanVec(fgm::constants::NaN, fgm::constants::NaN);
+
+    static_assert(normVec.hasInf() == false);
+    static_assert(infVec.hasInf() == true);
+    static_assert(nanVec.hasInf() == false);
+
+    static_assert(fgm::Vector2D<float>::hasInf(normVec) == false);
+    static_assert(fgm::Vector2D<float>::hasInf(infVec) == true);
+    static_assert(fgm::Vector2D<float>::hasInf(nanVec) == false);
+
+    static_assert(normVec.hasNaN() == false);
+    static_assert(infVec.hasNaN() == false);
+    static_assert(nanVec.hasNaN() == true);
+
+    static_assert(fgm::Vector2D<float>::hasNaN(normVec) == false);
+    static_assert(fgm::Vector2D<float>::hasNaN(infVec) == false);
+    static_assert(fgm::Vector2D<float>::hasNaN(nanVec) == true);
+
+}
+
 /**************************************
  *                                    *
  *      INFINITY CHECKER TESTS        *

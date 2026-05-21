@@ -18,6 +18,33 @@
  * @{
  */
 
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that vector conversion constructor is available during compile time. */
+namespace
+{
+    constexpr fgm::Vector4D vecF(3.0f, 1.0f, 4.0f, 5.0f);
+    constexpr fgm::Vector4D<double> vecD(vecF);
+    static_assert(std::is_same_v<decltype(vecD)::value_type, double>);
+
+    [[maybe_unused]] constexpr fgm::Vector4D<float> vecF2(vecD);
+    static_assert(std::is_same_v<decltype(vecF2)::value_type, float>);
+
+} // namespace
+
+
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
+
+
 /**
  * @brief Verify that the conversion constructor correctly promotes components from float to double.
  */

@@ -17,6 +17,7 @@
  *                SETUP               *
  *                                    *
  **************************************/
+
 template <typename T>
     requires std::floating_point<T>
 struct Vector4DUtilityParams
@@ -45,6 +46,33 @@ TYPED_TEST_SUITE(Vector4DIntegralUtilityTests, SupportedIntegralTypes);
  * @addtogroup T_FGM_Vec4_Utils
  * @{
  */
+
+/** @brief Verify that vector utilities are available at compile time. */
+namespace
+{
+    constexpr fgm::Vector4D normVec(1, 2, 3, 4);
+    constexpr fgm::Vector4D infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                                   fgm::constants::INFINITY_F);
+    constexpr fgm::Vector4D nanVec(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN);
+
+    static_assert(normVec.hasInf() == false);
+    static_assert(infVec.hasInf() == true);
+    static_assert(nanVec.hasInf() == false);
+
+    static_assert(fgm::Vector4D<float>::hasInf(normVec) == false);
+    static_assert(fgm::Vector4D<float>::hasInf(infVec) == true);
+    static_assert(fgm::Vector4D<float>::hasInf(nanVec) == false);
+
+    static_assert(normVec.hasNaN() == false);
+    static_assert(infVec.hasNaN() == false);
+    static_assert(nanVec.hasNaN() == true);
+
+    static_assert(fgm::Vector4D<float>::hasNaN(normVec) == false);
+    static_assert(fgm::Vector4D<float>::hasNaN(infVec) == false);
+    static_assert(fgm::Vector4D<float>::hasNaN(nanVec) == true);
+
+} // namespace
+
 
 /**************************************
  *                                    *

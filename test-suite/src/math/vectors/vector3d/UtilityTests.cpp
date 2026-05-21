@@ -47,6 +47,32 @@ TYPED_TEST_SUITE(Vector3DIntegralUtility, SupportedIntegralTypes);
  * @{
  */
 
+/** @brief Verify that vector utilities are available at compile time. */
+namespace
+{
+    constexpr fgm::Vector3D normVec(1, 2, 3);
+    constexpr fgm::Vector3D infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
+    constexpr fgm::Vector3D nanVec(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN);
+
+    static_assert(normVec.hasInf() == false);
+    static_assert(infVec.hasInf() == true);
+    static_assert(nanVec.hasInf() == false);
+
+    static_assert(fgm::Vector3D<float>::hasInf(normVec) == false);
+    static_assert(fgm::Vector3D<float>::hasInf(infVec) == true);
+    static_assert(fgm::Vector3D<float>::hasInf(nanVec) == false);
+
+    static_assert(normVec.hasNaN() == false);
+    static_assert(infVec.hasNaN() == false);
+    static_assert(nanVec.hasNaN() == true);
+
+    static_assert(fgm::Vector3D<float>::hasNaN(normVec) == false);
+    static_assert(fgm::Vector3D<float>::hasNaN(infVec) == false);
+    static_assert(fgm::Vector3D<float>::hasNaN(nanVec) == true);
+
+} // namespace
+
+
 /**************************************
  *                                    *
  *      INFINITY CHECKER TESTS        *
