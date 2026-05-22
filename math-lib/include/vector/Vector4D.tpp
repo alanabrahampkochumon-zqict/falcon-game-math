@@ -548,7 +548,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::lte(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<std::common_type_t<T, U>>;
+        using R = Magnitude<PromotedValue_t<T, U>>;
         return Vector4D<bool>(
             static_cast<R>(_data[0]) <= static_cast<R>(rhs[0]), static_cast<R>(_data[1]) <= static_cast<R>(rhs[1]),
             static_cast<R>(_data[2]) <= static_cast<R>(rhs[2]), static_cast<R>(_data[3]) <= static_cast<R>(rhs[3]));
@@ -671,10 +671,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector4D<T>::operator+(const Vector4D<U>& rhs) const noexcept -> Vector4D<std::common_type_t<T, U>>
+    constexpr PromotedVector4D<T, U> Vector4D<T>::operator+(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         return Vector4D<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + rhs[2], _data[3] + rhs[3]);
     }
 
@@ -700,10 +700,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector4D<T>::operator-(const Vector4D<U>& rhs) const noexcept -> Vector4D<std::common_type_t<T, U>>
+    constexpr PromotedVector4D<T, U> Vector4D<T>::operator-(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         return Vector4D<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2], _data[3] - rhs[3]);
     }
 
@@ -743,16 +743,16 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::operator*(const S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
+    constexpr PromotedVector4D<T, S> Vector4D<T>::operator*(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
         return Vector4D<R>(_data[0] * scalar, _data[1] * scalar, _data[2] * scalar, _data[3] * scalar);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic S>
-    constexpr auto operator*(const S scalar, const Vector4D<T>& vector) noexcept -> Vector4D<std::common_type_t<T, S>>
+    constexpr PromotedVector4D<T, S> operator*(const S scalar, const Vector4D<T>& vector) noexcept
         requires StrictArithmetic<T>
     {
         return vector * scalar;
@@ -780,10 +780,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::operator/(const S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
+    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::operator/(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
             R factor = R(1) / static_cast<R>(scalar);
@@ -803,7 +803,7 @@ namespace fgm
     constexpr Vector4D<T>& Vector4D<T>::operator/=(const S scalar) noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
             R factor = R(1) / static_cast<R>(scalar);
@@ -827,10 +827,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::safeDiv(const S scalar) const noexcept -> Vector4D<std::common_type_t<T, S>>
+    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::safeDiv(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
         {
@@ -853,8 +853,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::safeDiv(const Vector4D& vec, const S scalar) noexcept
-        -> Vector4D<std::common_type_t<T, S>>
+    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::safeDiv(const Vector4D& vec, const S scalar) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeDiv(scalar);
@@ -863,11 +862,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
-        -> Vector4D<std::common_type_t<T, S>>
+    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
         {
@@ -900,8 +898,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector4D<T>::tryDiv(const Vector4D& vec, S scalar, OperationStatus& status) noexcept
-        -> Vector4D<std::common_type_t<T, S>>
+    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::tryDiv(const Vector4D& vec, S scalar,
+                                                              OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
         return vec.tryDiv(scalar, status);
@@ -916,11 +914,11 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector4D<T>::dot(const Vector4D<U>& rhs) const noexcept -> std::common_type_t<T, U>
+    constexpr PromotedValue_t<T, U> Vector4D<T>::dot(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         if constexpr (std::is_floating_point_v<R>)
         {
             return std::fma(static_cast<R>(_data[0]), static_cast<R>(rhs[0]),
@@ -940,7 +938,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector4D<T>::dot(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept -> std::common_type_t<T, U>
+    constexpr PromotedValue_t<T, U> Vector4D<T>::dot(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         return lhs.dot(rhs);
@@ -1114,7 +1112,7 @@ namespace fgm
     constexpr PromotedFloatVector4D<T, U> Vector4D<T>::project(const Vector4D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         /** @note Static cast ensures integral type dots don't lose much precision */
         return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
     }
@@ -1122,7 +1120,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::projectNorm(const Vector4D<U>& onto) const noexcept
+    constexpr PromotedVector4D<T, U> Vector4D<T>::projectNorm(const Vector4D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
         return this->dot(onto) * onto; // a.dot(b) * b
@@ -1140,7 +1138,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::projectNorm(const Vector4D& vec,
+    constexpr PromotedVector4D<T, U> Vector4D<T>::projectNorm(const Vector4D& vec,
                                                                    const Vector4D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
@@ -1153,7 +1151,7 @@ namespace fgm
     constexpr PromotedFloatVector4D<T, U> Vector4D<T>::safeProject(const Vector4D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = std::common_type_t<T, U>;
+        using R       = PromotedValue_t<T, U>;
         using MagType = Magnitude<R>;
 
         /** @note Static cast ensures integral type dots don't lose much precision */
@@ -1175,10 +1173,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::safeProjectNorm(const Vector4D<U>& onto) const noexcept
+    constexpr PromotedVector4D<T, U> Vector4D<T>::safeProjectNorm(const Vector4D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = std::common_type_t<T, U>;
+        using R       = PromotedValue_t<T, U>;
         using MagType = Magnitude<R>;
 
         if (hasNaN() || onto.hasNaN())
@@ -1201,7 +1199,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::safeProjectNorm(const Vector4D& vec,
+    constexpr PromotedVector4D<T, U> Vector4D<T>::safeProjectNorm(const Vector4D& vec,
                                                                        const Vector4D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
@@ -1215,7 +1213,7 @@ namespace fgm
                                                                   OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = std::common_type_t<T, U>;
+        using R       = PromotedValue_t<T, U>;
         using MagType = Magnitude<R>;
 
         /** @note Static cast ensures integral type dots don't lose much precision */
@@ -1240,11 +1238,11 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::tryProjectNorm(const Vector4D<U>& onto,
+    constexpr PromotedVector4D<T, U> Vector4D<T>::tryProjectNorm(const Vector4D<U>& onto,
                                                                       OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = std::common_type_t<T, U>;
+        using R       = PromotedValue_t<T, U>;
         using MagType = Magnitude<R>;
 
         if (hasNaN() || onto.hasNaN())
@@ -1270,7 +1268,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::tryProjectNorm(const Vector4D& vec, const Vector4D<U>& onto,
+    constexpr PromotedVector4D<T, U> Vector4D<T>::tryProjectNorm(const Vector4D& vec, const Vector4D<U>& onto,
                                                                       OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
@@ -1295,7 +1293,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::rejectNorm(const Vector4D<U>& from) const noexcept
+    constexpr PromotedVector4D<T, U> Vector4D<T>::rejectNorm(const Vector4D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
         return *this - this->projectNorm(from);
@@ -1313,7 +1311,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::rejectNorm(const Vector4D& vector,
+    constexpr PromotedVector4D<T, U> Vector4D<T>::rejectNorm(const Vector4D& vector,
                                                                   const Vector4D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
@@ -1328,7 +1326,7 @@ namespace fgm
     {
         if (hasNaN() || from.hasNaN())
         {
-            return fgm::vec4d::zero<std::common_type_t<T, U>>;
+            return fgm::vec4d::zero<PromotedValue_t<T, U>>;
         }
 
         return *this - safeProject(from);
@@ -1337,12 +1335,12 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::safeRejectNorm(const Vector4D<U>& from) const noexcept
+    constexpr PromotedVector4D<T, U> Vector4D<T>::safeRejectNorm(const Vector4D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
         {
-            return fgm::vec4d::zero<std::common_type_t<T, U>>;
+            return fgm::vec4d::zero<PromotedValue_t<T, U>>;
         }
 
         return *this - safeProjectNorm(from);
@@ -1360,7 +1358,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::safeRejectNorm(const Vector4D& vec,
+    constexpr PromotedVector4D<T, U> Vector4D<T>::safeRejectNorm(const Vector4D& vec,
                                                                       const Vector4D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
@@ -1377,7 +1375,7 @@ namespace fgm
         if (hasNaN() || from.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::vec4d::zero<std::common_type_t<T, U>>;
+            return fgm::vec4d::zero<PromotedValue_t<T, U>>;
         }
 
         return *this - this->tryProject(from, status);
@@ -1386,14 +1384,14 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::tryRejectNorm(const Vector4D<U>& from,
+    constexpr PromotedVector4D<T, U> Vector4D<T>::tryRejectNorm(const Vector4D<U>& from,
                                                                      OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::vec4d::zero<std::common_type_t<T, U>>;
+            return fgm::vec4d::zero<PromotedValue_t<T, U>>;
         }
 
         return *this - this->tryProjectNorm(from, status);
@@ -1412,7 +1410,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector4D<T, U> Vector4D<T>::tryRejectNorm(const Vector4D& vec, const Vector4D<U>& from,
+    constexpr PromotedVector4D<T, U> Vector4D<T>::tryRejectNorm(const Vector4D& vec, const Vector4D<U>& from,
                                                                      OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
