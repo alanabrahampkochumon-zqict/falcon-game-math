@@ -51,7 +51,7 @@ TYPED_TEST_SUITE(Vector2DChebyshevNorm, SupportedArithmeticTypes);
  * @{
  */
 
-/** @brief Verify that pNorm (Manhattan and Chebyshev) operations are available at compile time. */
+/** @brief Verify that pNorm (Manhattan and Chebyshev length) operations are available at compile time. */
 namespace
 {
     constexpr fgm::Vector2D vector(1, -2);
