@@ -1188,6 +1188,28 @@ namespace fgm
         [[nodiscard]] static constexpr T magSq(const Vector4D& vector) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Compute the Manhattan length (L1 Norm) of this vector.
+         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| + |z| + |w| \f$
+         *
+         * @return The Manhattan length.
+         */
+        [[nodiscard]] constexpr T manhattanNorm() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan length (L1 Norm) of @p vector.
+         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| + |z| + |w| \f$
+         *
+         * @param[in] vector The vector to compute the taxicab norm of.
+         *
+         * @return The Manhattan length.
+         */
+        [[nodiscard]] static constexpr T manhattanNorm(const Vector4D& vector) noexcept
+            requires StrictArithmetic<T>;
+
         /** @} */
 
 
