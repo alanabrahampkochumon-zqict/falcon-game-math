@@ -337,7 +337,7 @@ namespace fgm
         /**
          * @brief Compute the element-wise sum of this matrix with @p rhs matrix and return a new matrix.
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
@@ -370,7 +370,7 @@ namespace fgm
         /**
          * @brief Compute the element-wise difference between this matrix and @p rhs matrix and return a new matrix.
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
@@ -403,7 +403,7 @@ namespace fgm
         /**
          * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -450,7 +450,7 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
@@ -483,9 +483,10 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
+         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to multiply.
@@ -516,7 +517,7 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
@@ -533,7 +534,7 @@ namespace fgm
         /**
          * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
          *
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -568,7 +569,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -593,7 +594,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -620,7 +621,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -650,7 +651,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -1177,7 +1178,7 @@ namespace fgm
     /**
      * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
      *
-     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -1208,7 +1209,7 @@ namespace fgm
      *            \end{bmatrix}
      *        \f$
      *
-     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Promotes the result to the wider type using @ref PromotedVector2D<T, U>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
@@ -1241,7 +1242,6 @@ namespace fgm
      *            \end{bmatrix}
      *        \f$
      *
-     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
