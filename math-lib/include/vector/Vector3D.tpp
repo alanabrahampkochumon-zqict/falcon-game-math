@@ -954,6 +954,22 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    constexpr T Vector3D<T>::chebyshevNorm() const noexcept
+        requires StrictArithmetic<T>
+    {
+        return std::max(std::max(fgm::abs(_data[0]), fgm::abs(_data[1])), fgm::abs(_data[2]));
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector3D<T>::chebyshevNorm(const Vector3D& vector) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.chebyshevNorm();
+    }
+
+
     /*************************************
      *                                   *
      *       VECTOR NORMALIZATION        *

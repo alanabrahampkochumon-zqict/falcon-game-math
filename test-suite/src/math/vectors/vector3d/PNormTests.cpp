@@ -62,8 +62,8 @@ namespace
     static_assert(fgm::Vector3D<int>::manhattanNorm(vector) == 7);
 
     // L∞ Norm (Chebyshev Norm)
-    //static_assert(vector.chebyshevNorm() == 2);
-    //static_assert(fgm::Vector3D<int>::chebyshevNorm(vector) == 2);
+    static_assert(vector.chebyshevNorm() == 4);
+    static_assert(fgm::Vector3D<int>::chebyshevNorm(vector) == 4);
 
 } // namespace
 
@@ -103,23 +103,23 @@ TYPED_TEST(Vector3DManhattanNorm, StaticWrapper_ReturnsSumOfAbsoluteValueOfCompo
  **************************************/
 
 /** @brief Verify that taking the chebyshev norm of a non-unit vector returns non-unit scalar. */
-//TYPED_TEST(Vector3DChebyshevNorm, ReturnsLongestAbsoluteComponent)
-//{
-//    const auto magnitude = this->_vec.chebyshevNorm();
-//
-//    EXPECT_MAG_EQ(this->_norm, magnitude);
-//}
-//
-//
-///**
-// * @brief Verify that taking the chebyshev norm of a non-unit vector using static variant of
-// *        @ref fgm::Vector3D::chebyshevNorm returns non-unit scalar.
-// */
-//TYPED_TEST(Vector3DChebyshevNorm, StaticWrapper_ReturnsLongestAbsoluteComponent)
-//{
-//    const auto magnitude = fgm::Vector3D<TypeParam>::chebyshevNorm(this->_vec);
-//
-//    EXPECT_MAG_EQ(this->_norm, magnitude);
-//}
+TYPED_TEST(Vector3DChebyshevNorm, ReturnsLongestAbsoluteComponent)
+{
+    const auto magnitude = this->_vec.chebyshevNorm();
+
+    EXPECT_MAG_EQ(this->_norm, magnitude);
+}
+
+
+/**
+ * @brief Verify that taking the chebyshev norm of a non-unit vector using static variant of
+ *        @ref fgm::Vector3D::chebyshevNorm returns non-unit scalar.
+ */
+TYPED_TEST(Vector3DChebyshevNorm, StaticWrapper_ReturnsLongestAbsoluteComponent)
+{
+    const auto magnitude = fgm::Vector3D<TypeParam>::chebyshevNorm(this->_vec);
+
+    EXPECT_MAG_EQ(this->_norm, magnitude);
+}
 
 /** @} */
