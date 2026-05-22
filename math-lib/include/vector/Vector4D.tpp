@@ -968,6 +968,22 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::magSq() const noexcept
+        requires StrictArithmetic<T>
+    {
+        return this->dot(*this);
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::magSq(const Vector4D& vector) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.magSq();
+    }
+
+
     /*************************************
      *                                   *
      *       VECTOR NORMALIZATION        *

@@ -25,11 +25,13 @@ class Vector4DMagnitude: public ::testing::Test
 protected:
     fgm::Vector4D<T> _vec;
     fgm::Magnitude<T> _expectedMagnitude;
+    T _expectedMagnitudeSquare;
 
     void SetUp() override
     {
         _vec               = { T(1), T(2), T(2), T(4) };
-        _expectedMagnitude = fgm::Magnitude<T>(5);
+        _expectedMagnitude       = fgm::Magnitude<T>(5);
+        _expectedMagnitudeSquare = T(25);
     }
 };
 /** @brief Test fixture for @ref fgm::Vector4D magnitude, parameterized by SupportedArithmeticTypes. */
@@ -72,6 +74,13 @@ namespace
 
     // static_assert(magA - 5.477225575051661 <= 1e-5);
     // static_assert(magB - 5.477225575051661 <= 1e-5);
+
+    constexpr fgm::Vector4D vecM(1, 2, 3, 4);
+    constexpr auto magSqA = vecM.magSq();
+    constexpr auto magSqB = fgm::Vector4D<int>::magSq(vecM);
+
+    static_assert(magSqA == 30);
+    static_assert(magSqB == 30);
 } // namespace
 
 
@@ -141,6 +150,33 @@ TYPED_TEST(Vector4DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMa
     const auto magnitude = fgm::Vector4D<TypeParam>::mag(this->_vec);
 
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
+}
+
+
+/**************************************
+ *                                    *
+ *       MAGNITUDE SQUARE TESTS       *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+TYPED_TEST(Vector4DMagnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
+{
+    const auto magnitude = this->_vec.magSq();
+
+    EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
+}
+
+
+/**
+ * @brief Verify that taking the magnitude square of a non-unit vector using static variant of
+ *        @ref fgm::Vector4D::mag returns non-unit scalar.
+ */
+TYPED_TEST(Vector4DMagnitude, StaticWrapper_MagnitudeSquare_ReturnsSquaredMagnitude)
+{
+    const auto magnitude = fgm::Vector4D<TypeParam>::magSq(this->_vec);
+
+    EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 
 /** @} */

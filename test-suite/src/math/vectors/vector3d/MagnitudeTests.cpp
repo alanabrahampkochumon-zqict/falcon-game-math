@@ -78,8 +78,8 @@ namespace
     constexpr auto magSqA = vecM.magSq();
     constexpr auto magSqB = fgm::Vector3D<int>::magSq(vecM);
 
-    static_assert(magSqA - 14.0 <= 1e-5);
-    static_assert(magSqB - 14.0 <= 1e-5);
+    static_assert(magSqA == 14.0);
+    static_assert(magSqB == 14.0);
 
 } // namespace
 
@@ -162,14 +162,19 @@ TYPED_TEST(Vector3DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMa
 TYPED_TEST(Vector3DMagnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
 {
     const auto magnitude = this->_vec.magSq();
+
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 
 
-/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+/**
+ * @brief Verify that taking the magnitude square of a non-unit vector using static variant of
+ *        @ref fgm::Vector3D::mag returns non-unit scalar.
+ */
 TYPED_TEST(Vector3DMagnitude, StaticWrapper_MagnitudeSquare_ReturnsSquaredMagnitude)
 {
     const auto magnitude = fgm::Vector3D<TypeParam>::magSq(this->_vec);
+
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 

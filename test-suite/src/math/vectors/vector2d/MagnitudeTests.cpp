@@ -75,8 +75,8 @@ namespace
     constexpr auto magSqA = vecM.magSq();
     constexpr auto magSqB = fgm::Vector2D<int>::magSq(vecM);
 
-    static_assert(magSqA - 5.0 <= 1e-5);
-    static_assert(magSqB - 5.0 <= 1e-5);
+    static_assert(magSqA == 5.0);
+    static_assert(magSqB == 5.0);
 } // namespace
 
 
@@ -124,7 +124,7 @@ TYPED_TEST(Vector2DMagnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 
 /**
  * @brief Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vector2D::mag
- *       returns non-unit scalar.
+ *        returns non-unit scalar.
  */
 TYPED_TEST(Vector2DMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
 {
@@ -161,7 +161,7 @@ TYPED_TEST(Vector2DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMa
  *                                    *
  **************************************/
 
-/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+/** @brief Verify that taking the magnitude square of a non-unit vector returns non-unit scalar. */
 TYPED_TEST(Vector2DMagnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
 {
     const auto magnitude = this->_vec.magSq();
@@ -170,10 +170,14 @@ TYPED_TEST(Vector2DMagnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
 }
 
 
-/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+/**
+ * @brief Verify that taking the magnitude square of a non-unit vector using static variant of
+ *        @ref fgm::Vector2D::mag returns non-unit scalar.
+ */
 TYPED_TEST(Vector2DMagnitude, StaticWrapper_MagnitudeSquare_ReturnsSquaredMagnitude)
 {
     const auto magnitude = fgm::Vector2D<TypeParam>::magSq(this->_vec);
+
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 

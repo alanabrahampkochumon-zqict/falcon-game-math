@@ -1168,6 +1168,28 @@ namespace fgm
 
 
         /**
+         * @brief Compute the magnitude square (Euclidean Norm) of this vector.
+         *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
+         *
+         * @return The scalar magnitude of the vector.
+         */
+        [[nodiscard]] constexpr T magSq() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the magnitude square (Euclidean Norm) of @p vector.
+         *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
+         *
+         * @param[in] vector The vector to compute the magnitude of.
+         *
+         * @return The scalar magnitude of @p vec.
+         */
+        [[nodiscard]] static constexpr T magSq(const Vector4D& vector) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
          * @brief Compute the normalized (unit) form of this vector.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
@@ -1180,6 +1202,7 @@ namespace fgm
          */
         [[nodiscard]] constexpr Vector4D<Magnitude<T>> normalize() const noexcept
             requires StrictArithmetic<T>;
+
 
 
         /**
