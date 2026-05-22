@@ -216,7 +216,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a new vector by rearranging, duplicating, or isolating components of @p vector.
+         * @brief Construct a new vector by rearranging, duplicating, or isolating components of @p vec.
          *
          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
          *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime
@@ -225,14 +225,14 @@ namespace fgm
          * @tparam Indices The component indices used to construct the new vector.
          *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
          *
-         * @param vector The vector to shuffle, rearrange or isolate components.
+         * @param vec The vector to shuffle, rearrange or isolate components.
          *
          * @return A new vector containing the requested components or the component if @p Indices is 1.
          *         The dimension of the returned vector perfectly matches the number of indices provided.
          */
         template <std::size_t... Indices>
         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
-        static constexpr auto swizzle(const Vector2D& vector) noexcept;
+        static constexpr auto swizzle(const Vector2D& vec) noexcept;
 
         /** @} */
 
@@ -1049,17 +1049,17 @@ namespace fgm
 
 
         /**
-         * @brief Compute the magnitude (Euclidean Norm) of @p vector.
+         * @brief Compute the magnitude (Euclidean Norm) of @p vec.
          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @param[in] vector The vector to compute the magnitude of.
+         * @param[in] vec The vector to compute the magnitude of.
          *
          * @return The scalar magnitude of @p vec.
          */
-        [[nodiscard]] static constexpr Magnitude<T> mag(const Vector2D& vector) noexcept
+        [[nodiscard]] static constexpr Magnitude<T> mag(const Vector2D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1074,14 +1074,14 @@ namespace fgm
 
 
         /**
-         * @brief Compute the magnitude square (Euclidean Norm) of @p vector.
+         * @brief Compute the magnitude square (Euclidean Norm) of @p vec.
          *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
          *
-         * @param[in] vector The vector to compute the magnitude of.
+         * @param[in] vec The vector to compute the magnitude of.
          *
          * @return The scalar magnitude of @p vec.
          */
-        [[nodiscard]] static constexpr T magSq(const Vector2D& vector) noexcept
+        [[nodiscard]] static constexpr T magSq(const Vector2D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1096,14 +1096,14 @@ namespace fgm
 
 
         /**
-         * @brief Compute the Manhattan length (L1 Norm) of @p vector.
+         * @brief Compute the Manhattan length (L1 Norm) of @p vec.
          *        \f$ \|\mathbf{v}\|_1 = |x| + |y| \f$
          *
-         * @param[in] vector The vector to compute the taxicab norm of.
+         * @param[in] vec The vector to compute the taxicab norm of.
          *
          * @return The Manhattan length.
          */
-        [[nodiscard]] static constexpr T manhattanNorm(const Vector2D& vector) noexcept
+        [[nodiscard]] static constexpr T manhattanNorm(const Vector2D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1118,14 +1118,14 @@ namespace fgm
 
 
         /**
-         * @brief Compute the Chebyshev length (L∞ Norm) of @p vector.
+         * @brief Compute the Chebyshev length (L∞ Norm) of @p vec.
          *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|) \f$
          *
-         * @param[in] vector The vector to compute the taxicab norm of.
+         * @param[in] vec The vector to compute the taxicab norm of.
          *
          * @return The Chebyshev length.
          */
-        [[nodiscard]] static constexpr T chebyshevNorm(const Vector2D& vector) noexcept
+        [[nodiscard]] static constexpr T chebyshevNorm(const Vector2D& vec) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1153,17 +1153,17 @@ namespace fgm
 
 
         /**
-         * @brief Compute the normalized (unit) form of @p vector.
+         * @brief Compute the normalized (unit) form of @p vec.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @param[in] vector The vector to normalize.
+         * @param[in] vec The vector to normalize.
          *
          * @return A new @ref Vector2D with a magnitude of 1.0.
          */
-        [[nodiscard]] static constexpr Vector2D<Magnitude<T>> normalize(const Vector2D& vector) noexcept
+        [[nodiscard]] static constexpr Vector2D<Magnitude<T>> normalize(const Vector2D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1184,7 +1184,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the normalized (unit) form of @p vector.
+         * @brief Compute the normalized (unit) form of @p vec.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note This is a safe operation. If the vector's magnitude falls below the internal
@@ -1192,12 +1192,12 @@ namespace fgm
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @param[in] vector The vector to be normalized.
+         * @param[in] vec The vector to be normalized.
          *
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] static constexpr Vector2D<Magnitude<T>> safeNormalize(const Vector2D& vector) noexcept
+        [[nodiscard]] static constexpr Vector2D<Magnitude<T>> safeNormalize(const Vector2D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1222,7 +1222,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the normalized (unit) form of @p vector and
+         * @brief Compute the normalized (unit) form of @p vec and
          *        set @p status to the normalization operation result.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
@@ -1231,14 +1231,14 @@ namespace fgm
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @param[in] vector     The vector to be normalized.
+         * @param[in] vec     The vector to be normalized.
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
          * @return A @ref fgm::Vector2D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] static constexpr Vector2D<Magnitude<T>> tryNormalize(const Vector2D& vector,
+        [[nodiscard]] static constexpr Vector2D<Magnitude<T>> tryNormalize(const Vector2D& vec,
                                                                            OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 

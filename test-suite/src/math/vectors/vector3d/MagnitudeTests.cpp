@@ -29,9 +29,9 @@ protected:
 
     void SetUp() override
     {
-        _vec               = { T(3), T(4), T(12) };
-        _expectedMagnitude = fgm::Magnitude<T>(13);
-        _expectedMagnitudeSquare = T(169);
+        _vec               = { T(9), T(6), T(2) };
+        _expectedMagnitude = fgm::Magnitude<T>(11);
+        _expectedMagnitudeSquare = T(121);
     }
 };
 /** @brief Test fixture for @ref fgm::Vector3D magnitude, parameterized by @ref SupportedArithmeticTypes. */

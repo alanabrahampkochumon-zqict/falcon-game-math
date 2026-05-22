@@ -263,9 +263,9 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::size_t... Indices>
-    constexpr auto Vector3D<T>::swizzle(const Vector3D& vector) noexcept
+    constexpr auto Vector3D<T>::swizzle(const Vector3D& vec) noexcept
     {
-        return vector.swizzle<Indices...>();
+        return vec.swizzle<Indices...>();
     }
 
 
@@ -925,10 +925,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Magnitude<T> Vector3D<T>::mag(const Vector3D& vector) noexcept
+    constexpr Magnitude<T> Vector3D<T>::mag(const Vector3D& vec) noexcept
         requires StrictArithmetic<T>
     {
-        return vector.mag();
+        return vec.mag();
     }
 
 
@@ -957,10 +957,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::manhattanNorm(const Vector3D& vector) noexcept
+    constexpr T Vector3D<T>::manhattanNorm(const Vector3D& vec) noexcept
         requires StrictArithmetic<T>
     {
-        return vector.manhattanNorm();
+        return vec.manhattanNorm();
     }
 
 
@@ -973,10 +973,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T Vector3D<T>::chebyshevNorm(const Vector3D& vector) noexcept
+    constexpr T Vector3D<T>::chebyshevNorm(const Vector3D& vec) noexcept
         requires StrictArithmetic<T>
     {
-        return vector.chebyshevNorm();
+        return vec.chebyshevNorm();
     }
 
 
@@ -995,10 +995,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector3D<Magnitude<T>> Vector3D<T>::normalize(const Vector3D& vector) noexcept
+    constexpr Vector3D<Magnitude<T>> Vector3D<T>::normalize(const Vector3D& vec) noexcept
         requires StrictArithmetic<T>
     {
-        return vector.normalize();
+        return vec.normalize();
     }
 
 
@@ -1022,10 +1022,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector3D<Magnitude<T>> Vector3D<T>::safeNormalize(const Vector3D& vector) noexcept
+    constexpr Vector3D<Magnitude<T>> Vector3D<T>::safeNormalize(const Vector3D& vec) noexcept
         requires StrictArithmetic<T>
     {
-        return vector.safeNormalize();
+        return vec.safeNormalize();
     }
 
 
@@ -1052,10 +1052,10 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vector3D<Magnitude<T>> Vector3D<T>::tryNormalize(const Vector3D& vector, OperationStatus& status) noexcept
+    constexpr Vector3D<Magnitude<T>> Vector3D<T>::tryNormalize(const Vector3D& vec, OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
-        return vector.tryNormalize(status);
+        return vec.tryNormalize(status);
     }
 
 
