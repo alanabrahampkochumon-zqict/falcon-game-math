@@ -32,7 +32,7 @@ namespace fgm
      *
      * @return Return the absolute value of @p value.
      */
-    template <SignedStrictArithmetic T>
+    template <StrictArithmetic T>
     [[nodiscard]] constexpr T abs(T num) noexcept;
 
 

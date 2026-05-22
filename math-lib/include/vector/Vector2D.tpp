@@ -863,7 +863,7 @@ namespace fgm
     constexpr T Vector2D<T>::magSq() const noexcept
         requires StrictArithmetic<T>
     {
-        //return _data[0] * _data[0] + _data[1] * _data[1];
+        // return _data[0] * _data[0] + _data[1] * _data[1];
         return this->dot(*this);
     }
 
@@ -873,6 +873,29 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         return vector.magSq();
+    }
+
+
+
+    /**************************************
+     *                                    *
+     *           MANHATTAN NORM           *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::manhattanNorm() const noexcept
+        requires StrictArithmetic<T>
+    {
+        return fgm::abs(_data[0]) + fgm::abs(_data[1]); 
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::manhattanNorm(const Vector2D& vector) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.manhattanNorm();
     }
 
 

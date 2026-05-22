@@ -12,3 +12,8 @@
 - Add assert to div, normalize
 - Update / to return Vector\*\*<Magnitude<T>>
 - Add MSVC compiler check in equality to separate NaN evaluation during compile time
+
+## Utils
+- Manhattan Distance(vector)
+- Euclidean Distance(vector)
+- Chebyshev Distance(vector)
