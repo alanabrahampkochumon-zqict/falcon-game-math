@@ -1091,7 +1091,7 @@ namespace fgm
 
 
         /**
-         * @brief Computes the Manhattan length (L1 Norm) of this vector.
+         * @brief Compute the Manhattan length (L1 Norm) of this vector.
          *        \f$ \|\mathbf{v}\|_1 = |x| + |y| \f$
          *
          * @return The Manhattan length.
@@ -1101,14 +1101,36 @@ namespace fgm
 
 
         /**
-         * @brief Computes the Manhattan length (L1 Norm) of @p vector.
+         * @brief Compute the Manhattan length (L1 Norm) of @p vector.
          *        \f$ \|\mathbf{v}\|_1 = |x| + |y| \f$
          *
          * @param[in] vector The vector to compute the taxicab norm of.
          *
-         * @return The block length of the vector.
+         * @return The Manhattan length.
          */
         [[nodiscard]] static constexpr T manhattanNorm(const Vector2D& vector) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev length (L∞ Norm) of this vector.
+         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|) \f$
+         *
+         * @return The Chebyshev length.
+         */
+        [[nodiscard]] constexpr T chebyshevNorm() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev length (L∞ Norm) of @p vector.
+         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|) \f$
+         *
+         * @param[in] vector The vector to compute the taxicab norm of.
+         *
+         * @return The Chebyshev length.
+         */
+        [[nodiscard]] static constexpr T chebyshevNorm(const Vector2D& vector) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

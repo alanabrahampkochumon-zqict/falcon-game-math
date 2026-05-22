@@ -16,7 +16,7 @@
 
 
 template <typename T>
-class AbsTest: public ::testing::Test
+class AbsTestUnsigned: public ::testing::Test
 {
 protected:
     T _value, _expectedAbsValue;
@@ -28,7 +28,24 @@ protected:
     }
 };
 /** @brief Test fixture for @ref fgm::abs, parameterized by @ref SupportSignedTypes. */
-TYPED_TEST_SUITE(AbsTest, SupportedSignedArithmeticTypes);
+TYPED_TEST_SUITE(AbsTestUnsigned, SupportedSignedArithmeticTypes);
+
+
+template <typename T>
+class AbsTest: public ::testing::Test
+{
+protected:
+    T _value, _expectedAbsValue;
+
+    void SetUp() override
+    {
+        _value            = T(5.2891283123432);
+        _expectedAbsValue = T(5.2891283123432);
+    }
+};
+/** @brief Test fixture for @ref fgm::abs, parameterized by @ref SupportSignedTypes. */
+TYPED_TEST_SUITE(AbsTest, SupportedArithmeticTypes);
+
 
 
 /**
@@ -47,6 +64,7 @@ namespace
     namespace
     {
         static_assert(fgm::abs(-3.53) == 3.53);
+        static_assert(fgm::abs(static_cast<unsigned int>(12)) == 12);
         static_assert(fgm::abs(static_cast<char>(-3.5312893)) == 3);
         static_assert(fgm::abs(-0.0000000000053) == 0.0000000000053);
         static_assert(fgm::abs(-3) == 3);
@@ -83,8 +101,20 @@ namespace
  **************************************/
 
 /** @brief Verify that taking absolute value using @ref fgm::abs returns the absolute value. */
-TYPED_TEST(AbsTest, ReturnsAbsoluteValue) { testutils::EXPECT_MAG_EQ(this->_expectedAbsValue, fgm::abs(this->_value)); }
+TYPED_TEST(AbsTestUnsigned, ReturnsAbsoluteValue)
+{
+    testutils::EXPECT_MAG_EQ(this->_expectedAbsValue, fgm::abs(this->_value));
+}
 
+
+/**
+ * @brief Verify that taking absolute value of both signed and unsigned numbers
+ *        using @ref fgm::abs returns the absolute value.
+ */
+TYPED_TEST(AbsTest, ReturnsAbsoluteValue)
+{
+    testutils::EXPECT_MAG_EQ(this->_expectedAbsValue, fgm::abs(this->_value));
+}
 
 
 /**************************************

@@ -13,6 +13,7 @@
 
 #include "common/Wrappers.h"
 
+#include <algorithm>
 #include <type_traits>
 
 
@@ -887,7 +888,7 @@ namespace fgm
     constexpr T Vector2D<T>::manhattanNorm() const noexcept
         requires StrictArithmetic<T>
     {
-        return fgm::abs(_data[0]) + fgm::abs(_data[1]); 
+        return fgm::abs(_data[0]) + fgm::abs(_data[1]);
     }
 
 
@@ -896,6 +897,22 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         return vector.manhattanNorm();
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::chebyshevNorm() const noexcept
+        requires StrictArithmetic<T>
+    {
+        return std::max(fgm::abs(_data[0]), fgm::abs(_data[1]));
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector2D<T>::chebyshevNorm(const Vector2D& vector) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.chebyshevNorm();
     }
 
 
