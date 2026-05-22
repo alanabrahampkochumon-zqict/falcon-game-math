@@ -25,11 +25,13 @@ class Vector3DMagnitude: public ::testing::Test
 protected:
     fgm::Vector3D<T> _vec;
     fgm::Magnitude<T> _expectedMagnitude;
+    T _expectedMagnitudeSquare;
 
     void SetUp() override
     {
         _vec               = { T(3), T(4), T(12) };
         _expectedMagnitude = fgm::Magnitude<T>(13);
+        _expectedMagnitudeSquare = T(169);
     }
 };
 /** @brief Test fixture for @ref fgm::Vector3D magnitude, parameterized by @ref SupportedArithmeticTypes. */
@@ -69,9 +71,16 @@ namespace
     // constexpr fgm::Vector3D vec(1, 2, 3);
     // constexpr auto magA = vec.mag();
     // constexpr auto magB = fgm::Vector2D<int>::mag(vec);
-
     // static_assert(magA - 3.7416573867739413 <= 1e-5);
     // static_assert(magB - 3.7416573867739413 <= 1e-5);
+
+    constexpr fgm::Vector3D vecM(1, 2, 3);
+    constexpr auto magSqA = vecM.magSq();
+    constexpr auto magSqB = fgm::Vector3D<int>::magSq(vecM);
+
+    static_assert(magSqA - 14.0 <= 1e-5);
+    static_assert(magSqB - 14.0 <= 1e-5);
+
 } // namespace
 
 
@@ -140,6 +149,28 @@ TYPED_TEST(Vector3DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMa
     const auto magnitude = fgm::Vector3D<TypeParam>::mag(this->_vec);
 
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
+}
+
+
+/**************************************
+ *                                    *
+ *       MAGNITUDE SQUARE TESTS       *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+TYPED_TEST(Vector3DMagnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
+{
+    const auto magnitude = this->_vec.magSq();
+    EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
+}
+
+
+/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+TYPED_TEST(Vector3DMagnitude, StaticWrapper_MagnitudeSquare_ReturnsSquaredMagnitude)
+{
+    const auto magnitude = fgm::Vector3D<TypeParam>::magSq(this->_vec);
+    EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 
 /** @} */

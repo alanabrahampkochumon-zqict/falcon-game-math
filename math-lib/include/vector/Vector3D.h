@@ -1110,7 +1110,7 @@ namespace fgm
          */
 
         /**
-         * @brief Compute the magnitude (length) of this vector.
+         * @brief Compute the magnitude (Euclidean Norm) of this vector.
          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their
@@ -1123,7 +1123,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the magnitude (length) of @p vector.
+         * @brief Compute the magnitude (Euclidean Norm) of @p vector.
          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their
@@ -1134,6 +1134,28 @@ namespace fgm
          * @return The scalar magnitude of @p vec.
          */
         [[nodiscard]] static constexpr Magnitude<T> mag(const Vector3D& vector) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the magnitude square (Euclidean Norm) of this vector.
+         *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
+         *
+         * @return The scalar magnitude of the vector.
+         */
+                [[nodiscard]] constexpr T magSq() const noexcept
+                    requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the magnitude square (Euclidean Norm) of this vector.
+         *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
+         *
+         * @param[in] vector The vector to compute the magnitude of.
+         *
+         * @return The scalar magnitude of @p vec.
+         */
+        [[nodiscard]] static constexpr T magSq(const Vector3D& vector) noexcept
             requires StrictArithmetic<T>;
 
 

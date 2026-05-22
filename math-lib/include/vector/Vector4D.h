@@ -1140,7 +1140,7 @@ namespace fgm
          */
 
         /**
-         * @brief Compute the magnitude (length) of this vector.
+         * @brief Compute the magnitude (Euclidean Norm) of this vector.
          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their
@@ -1153,7 +1153,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the magnitude (length) of @p vector.
+         * @brief Compute the magnitude (Euclidean Norm) of @p vector.
          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their

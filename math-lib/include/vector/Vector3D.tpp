@@ -913,11 +913,26 @@ namespace fgm
         return sqrt(tX * tX + tY * tY + tZ * tZ);
     }
 
+
     template <Arithmetic T>
     constexpr Magnitude<T> Vector3D<T>::mag(const Vector3D& vector) noexcept
         requires StrictArithmetic<T>
     {
         return vector.mag();
+    }
+
+
+    template<Arithmetic T>
+    constexpr T Vector3D<T>::magSq() const noexcept requires StrictArithmetic<T>
+    {
+        return this->dot(*this);
+    }
+
+
+    template<Arithmetic T>
+    constexpr T Vector3D<T>::magSq(const Vector3D &vector) noexcept requires StrictArithmetic<T>
+    {
+        return vector.magSq();
     }
 
 
