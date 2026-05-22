@@ -1210,6 +1210,28 @@ namespace fgm
         [[nodiscard]] static constexpr T manhattanNorm(const Vector4D& vector) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Compute the Chebyshev length (L∞ Norm) of this vector.
+         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|, |z|, |w|) \f$
+         *
+         * @return The Chebyshev length.
+         */
+        [[nodiscard]] constexpr T chebyshevNorm() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev length (L∞ Norm) of @p vector.
+         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|, |z|, |w|) \f$
+         *
+         * @param[in] vector The vector to compute the taxicab norm of.
+         *
+         * @return The Chebyshev length.
+         */
+        [[nodiscard]] static constexpr T chebyshevNorm(const Vector4D& vector) noexcept
+            requires StrictArithmetic<T>;
+
         /** @} */
 
 

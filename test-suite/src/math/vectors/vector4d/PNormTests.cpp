@@ -60,9 +60,9 @@ namespace
     static_assert(vector.manhattanNorm() == 10);
     static_assert(fgm::Vector4D<int>::manhattanNorm(vector) == 10);
 
-    //// L∞ Norm (Chebyshev Norm)
-    //static_assert(vector.chebyshevNorm() == 4);
-    //static_assert(fgm::Vector4D<int>::chebyshevNorm(vector) == 4);
+    // L∞ Norm (Chebyshev Norm)
+    static_assert(vector.chebyshevNorm() == 4);
+    static_assert(fgm::Vector4D<int>::chebyshevNorm(vector) == 4);
 
 } // namespace
 
@@ -101,24 +101,24 @@ TYPED_TEST(Vector4DManhattanNorm, StaticWrapper_ReturnsSumOfAbsoluteValueOfCompo
  *                                    *
  **************************************/
 
-///** @brief Verify that taking the chebyshev norm of a non-unit vector returns non-unit scalar. */
-//TYPED_TEST(Vector4DChebyshevNorm, ReturnsLongestAbsoluteComponent)
-//{
-//    const auto magnitude = this->_vec.chebyshevNorm();
-//
-//    EXPECT_MAG_EQ(this->_norm, magnitude);
-//}
-//
-//
-///**
-// * @brief Verify that taking the chebyshev norm of a non-unit vector using static variant of
-// *        @ref fgm::Vector4D::chebyshevNorm returns non-unit scalar.
-// */
-//TYPED_TEST(Vector4DChebyshevNorm, StaticWrapper_ReturnsLongestAbsoluteComponent)
-//{
-//    const auto magnitude = fgm::Vector4D<TypeParam>::chebyshevNorm(this->_vec);
-//
-//    EXPECT_MAG_EQ(this->_norm, magnitude);
-//}
+/** @brief Verify that taking the chebyshev norm of a non-unit vector returns non-unit scalar. */
+TYPED_TEST(Vector4DChebyshevNorm, ReturnsLongestAbsoluteComponent)
+{
+    const auto magnitude = this->_vec.chebyshevNorm();
+
+    EXPECT_MAG_EQ(this->_norm, magnitude);
+}
+
+
+/**
+ * @brief Verify that taking the chebyshev norm of a non-unit vector using static variant of
+ *        @ref fgm::Vector4D::chebyshevNorm returns non-unit scalar.
+ */
+TYPED_TEST(Vector4DChebyshevNorm, StaticWrapper_ReturnsLongestAbsoluteComponent)
+{
+    const auto magnitude = fgm::Vector4D<TypeParam>::chebyshevNorm(this->_vec);
+
+    EXPECT_MAG_EQ(this->_norm, magnitude);
+}
 
 /** @} */

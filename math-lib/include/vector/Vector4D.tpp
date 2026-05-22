@@ -11,6 +11,8 @@
  */
 
 
+
+#include <algorithm>
 #include <cassert>
 #include <cmath>
 #include <type_traits>
@@ -999,6 +1001,21 @@ namespace fgm
         return vector.manhattanNorm();
     }
 
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::chebyshevNorm() const noexcept
+        requires StrictArithmetic<T>
+    {
+        return std::max({ fgm::abs(_data[0]), fgm::abs(_data[1]), fgm::abs(_data[2]), fgm::abs(_data[3]) });
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector4D<T>::chebyshevNorm(const Vector4D& vector) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.chebyshevNorm();
+    }
 
 
     /*************************************

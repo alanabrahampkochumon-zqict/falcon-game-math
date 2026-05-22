@@ -11,6 +11,10 @@
  */
 
 
+#include <algorithm>
+
+
+
 #if defined(__clang__)
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Wbitwise-instead-of-logical"
@@ -958,7 +962,7 @@ namespace fgm
     constexpr T Vector3D<T>::chebyshevNorm() const noexcept
         requires StrictArithmetic<T>
     {
-        return std::max(std::max(fgm::abs(_data[0]), fgm::abs(_data[1])), fgm::abs(_data[2]));
+        return std::max({ fgm::abs(_data[0]), fgm::abs(_data[1]), fgm::abs(_data[2]) });
     }
 
 
