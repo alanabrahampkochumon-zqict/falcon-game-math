@@ -22,7 +22,7 @@ protected:
     void SetUp() override
     {
         _vec  = { T(1), T(2) };
-        _norm = 3;
+        _norm = T(3);
     }
 };
 /** @brief Test fixture for @ref fgm::Vector2D manhattan norm, parameterized by @ref SupportedArithmeticTypes. */
@@ -39,7 +39,7 @@ protected:
     void SetUp() override
     {
         _vec  = { T(1), T(2) };
-        _norm = 2;
+        _norm = T(2);
     }
 };
 /** @brief Test fixture for @ref fgm::Vector2D chebyshev norm, parameterized by @ref SupportedArithmeticTypes. */

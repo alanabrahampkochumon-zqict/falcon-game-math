@@ -922,17 +922,35 @@ namespace fgm
     }
 
 
-    template<Arithmetic T>
-    constexpr T Vector3D<T>::magSq() const noexcept requires StrictArithmetic<T>
+    template <Arithmetic T>
+    constexpr T Vector3D<T>::magSq() const noexcept
+        requires StrictArithmetic<T>
     {
         return this->dot(*this);
     }
 
 
-    template<Arithmetic T>
-    constexpr T Vector3D<T>::magSq(const Vector3D &vector) noexcept requires StrictArithmetic<T>
+    template <Arithmetic T>
+    constexpr T Vector3D<T>::magSq(const Vector3D& vector) noexcept
+        requires StrictArithmetic<T>
     {
         return vector.magSq();
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector3D<T>::manhattanNorm() const noexcept
+        requires StrictArithmetic<T>
+    {
+        return fgm::abs(_data[0]) + fgm::abs(_data[1]) + fgm::abs(_data[2]);
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vector3D<T>::manhattanNorm(const Vector3D& vector) noexcept
+        requires StrictArithmetic<T>
+    {
+        return vector.manhattanNorm();
     }
 
 

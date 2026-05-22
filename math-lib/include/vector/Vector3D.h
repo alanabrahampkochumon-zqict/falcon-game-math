@@ -1143,8 +1143,8 @@ namespace fgm
          *
          * @return The scalar magnitude of the vector.
          */
-                [[nodiscard]] constexpr T magSq() const noexcept
-                    requires StrictArithmetic<T>;
+        [[nodiscard]] constexpr T magSq() const noexcept
+            requires StrictArithmetic<T>;
 
 
         /**
@@ -1156,6 +1156,28 @@ namespace fgm
          * @return The scalar magnitude of @p vec.
          */
         [[nodiscard]] static constexpr T magSq(const Vector3D& vector) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan length (L1 Norm) of this vector.
+         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| + |z| \f$
+         *
+         * @return The Manhattan length.
+         */
+        [[nodiscard]] constexpr T manhattanNorm() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan length (L1 Norm) of @p vector.
+         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| + |z| \f$
+         *
+         * @param[in] vector The vector to compute the taxicab norm of.
+         *
+         * @return The Manhattan length.
+         */
+        [[nodiscard]] static constexpr T manhattanNorm(const Vector3D& vector) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
