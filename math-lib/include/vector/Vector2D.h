@@ -1257,8 +1257,7 @@ namespace fgm
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
          *        \f$
          *
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1278,8 +1277,7 @@ namespace fgm
          *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
          *        \f$
          *
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref project.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1289,7 +1287,7 @@ namespace fgm
          * @return The projected @ref Vector2D.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> projectNorm(const Vector2D<U>& onto) const noexcept
+        [[nodiscard]] constexpr PromotedVector2D<T, U> projectNorm(const Vector2D<U>& onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1300,8 +1298,7 @@ namespace fgm
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
          *        \f$
          *
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1323,8 +1320,7 @@ namespace fgm
          *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
          *        \f$
          *
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref project.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1335,7 +1331,7 @@ namespace fgm
          * @return The projected @ref Vector2D.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> projectNorm(const Vector2D& vec,
+        [[nodiscard]] static constexpr PromotedVector2D<T, U> projectNorm(const Vector2D& vec,
                                                                                const Vector2D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
@@ -1349,8 +1345,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1372,8 +1367,7 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1384,7 +1378,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeProjectNorm(const Vector2D<U>& onto) const noexcept
+        [[nodiscard]] constexpr PromotedVector2D<T, U> safeProjectNorm(const Vector2D<U>& onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1397,8 +1391,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1422,8 +1415,7 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1435,7 +1427,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> safeProjectNorm(const Vector2D& vec,
+        [[nodiscard]] static constexpr PromotedVector2D<T, U> safeProjectNorm(const Vector2D& vec,
                                                                                    const Vector2D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
@@ -1450,8 +1442,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1477,8 +1468,7 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1491,7 +1481,7 @@ namespace fgm
          *         vector has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryProjectNorm(const Vector2D<U>& onto,
+        [[nodiscard]] constexpr PromotedVector2D<T, U> tryProjectNorm(const Vector2D<U>& onto,
                                                                            OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
@@ -1506,6 +1496,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1533,8 +1524,7 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note To maintain precision, result components are promoted to their corresponding floating-point
-         *       representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
@@ -1550,7 +1540,7 @@ namespace fgm
          *         vector has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> tryProjectNorm(const Vector2D& vec,
+        [[nodiscard]] static constexpr PromotedVector2D<T, U> tryProjectNorm(const Vector2D& vec,
                                                                                   const Vector2D<U>& onto,
                                                                                   OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
@@ -1561,8 +1551,7 @@ namespace fgm
          * @brief Reject this vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1580,8 +1569,7 @@ namespace fgm
          * @brief Reject this vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref reject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1591,7 +1579,7 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> rejectNorm(const Vector2D<U>& from) const noexcept
+        [[nodiscard]] constexpr PromotedVector2D<T, U> rejectNorm(const Vector2D<U>& from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1599,8 +1587,7 @@ namespace fgm
          * @brief Reject the @p vec vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1620,8 +1607,7 @@ namespace fgm
          * @brief Reject the @p vec vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref reject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1632,7 +1618,7 @@ namespace fgm
          * @return The perpendicular @ref Vector2D component.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> rejectNorm(const Vector2D& vector,
+        [[nodiscard]] static constexpr PromotedVector2D<T, U> rejectNorm(const Vector2D& vector,
                                                                               const Vector2D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
@@ -1643,8 +1629,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1664,8 +1649,7 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1676,7 +1660,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> safeRejectNorm(const Vector2D<U>& from) const noexcept
+        [[nodiscard]] constexpr PromotedVector2D<T, U> safeRejectNorm(const Vector2D<U>& from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1686,8 +1670,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1709,8 +1692,7 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1722,7 +1704,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> safeRejectNorm(const Vector2D& vec,
+        [[nodiscard]] static constexpr PromotedVector2D<T, U> safeRejectNorm(const Vector2D& vec,
                                                                                   const Vector2D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
@@ -1733,8 +1715,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1758,8 +1739,7 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1772,7 +1752,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr PromotedFloatVector2D<T, U> tryRejectNorm(const Vector2D<U>& from,
+        [[nodiscard]] constexpr PromotedVector2D<T, U> tryRejectNorm(const Vector2D<U>& from,
                                                                           OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
@@ -1784,8 +1764,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1810,8 +1789,7 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         *       corresponding floating-point representation via @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1825,7 +1803,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
-        [[nodiscard]] static constexpr PromotedFloatVector2D<T, U> tryRejectNorm(const Vector2D& vec,
+        [[nodiscard]] static constexpr PromotedVector2D<T, U> tryRejectNorm(const Vector2D& vec,
                                                                                  const Vector2D<U>& from,
                                                                                  OperationStatus& status) noexcept
             requires StrictArithmetic<T>;

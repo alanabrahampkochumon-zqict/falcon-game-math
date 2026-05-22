@@ -874,7 +874,7 @@ namespace fgm
         /**
          * @brief Compute the component-wise difference between this vector and @p rhs vector and return a new vector.
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -919,7 +919,7 @@ namespace fgm
         /**
          * @brief Compute the component-wise product between this vector and @p scalar and return a new vector.
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -952,7 +952,7 @@ namespace fgm
         /**
          * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @warning Does not check for division by zero. @p scalar should be non-zero.
          *
@@ -989,7 +989,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -1011,7 +1011,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -1035,7 +1035,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
@@ -1060,7 +1060,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
@@ -1093,7 +1093,7 @@ namespace fgm
          * @brief Compute the dot product with another vector.
          *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1111,7 +1111,7 @@ namespace fgm
          * @brief Compute the dot product of two vectors.
          *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1358,7 +1358,7 @@ namespace fgm
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1378,7 +1378,7 @@ namespace fgm
          *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref project.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1399,7 +1399,7 @@ namespace fgm
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1421,7 +1421,7 @@ namespace fgm
          *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref project.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1446,7 +1446,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1468,7 +1468,7 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1492,7 +1492,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1516,7 +1516,7 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1543,7 +1543,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1569,7 +1569,7 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1598,7 +1598,7 @@ namespace fgm
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1627,7 +1627,7 @@ namespace fgm
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1652,7 +1652,7 @@ namespace fgm
          * @brief Reject this vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1670,7 +1670,7 @@ namespace fgm
          * @brief Reject this vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref reject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1688,7 +1688,7 @@ namespace fgm
          * @brief Reject the @p vec vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1708,7 +1708,7 @@ namespace fgm
          * @brief Reject the @p vec vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref reject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1730,7 +1730,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1750,7 +1750,7 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1771,7 +1771,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1793,7 +1793,7 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1815,7 +1815,7 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1842,7 +1842,7 @@ namespace fgm
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1867,7 +1867,7 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1892,7 +1892,7 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
