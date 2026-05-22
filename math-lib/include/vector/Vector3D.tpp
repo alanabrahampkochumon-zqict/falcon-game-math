@@ -657,6 +657,12 @@ namespace fgm
     }
 
 
+    /**************************************
+     *                                    *
+     *         INVERT OPERATION           *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     constexpr Vector3D<T> Vector3D<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>

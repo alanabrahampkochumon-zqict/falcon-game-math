@@ -712,7 +712,7 @@ namespace fgm
         /**
          * @brief Compute the component-wise sum of this vector with @p rhs vector and return a new vector.
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -722,8 +722,7 @@ namespace fgm
          * @return A new @ref Vector2D containing the component-wise sum.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto operator+(const Vector2D<U>& rhs) const noexcept
-            -> Vector2D<std::common_type_t<T, U>>
+        [[nodiscard]] constexpr PromotedVector2D<T, U> operator+(const Vector2D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -746,7 +745,7 @@ namespace fgm
         /**
          * @brief Compute the component-wise difference between this vector and @p rhs vector and return a new vector.
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -756,8 +755,7 @@ namespace fgm
          * @return A new @ref Vector2D containing the component-wise difference.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto operator-(const Vector2D<U>& rhs) const noexcept
-            -> Vector2D<std::common_type_t<T, U>>
+        [[nodiscard]] constexpr PromotedVector2D<T, U> operator-(const Vector2D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -792,7 +790,7 @@ namespace fgm
         /**
          * @brief Compute the component-wise product between this vector and @p scalar and return a new vector.
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -802,7 +800,7 @@ namespace fgm
          * @return A new @ref Vector2D scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr auto operator*(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr PromotedVector2D<T, S> operator*(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -825,7 +823,7 @@ namespace fgm
         /**
          * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @warning Does not check for division by zero. @p scalar should be non-zero.
          *
@@ -836,7 +834,7 @@ namespace fgm
          * @return A new @ref Vector2D scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr auto operator/(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr PromotedVector2D<T, S> operator/(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -862,7 +860,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
@@ -873,7 +871,7 @@ namespace fgm
          *         epsilon threshold or if either of the vectors contains NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr auto safeDiv(S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr PromotedVector2D<T, S> safeDiv(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -882,7 +880,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promote the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
@@ -894,8 +892,7 @@ namespace fgm
          *         epsilon threshold or if either of the vectors contains NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr auto safeDiv(const Vector2D& vec, S scalar) noexcept
-            -> Vector2D<std::common_type_t<T, S>>
+        [[nodiscard]] static constexpr PromotedVector2D<T, S> safeDiv(const Vector2D& vec, S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -905,7 +902,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
@@ -920,8 +917,7 @@ namespace fgm
          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr auto tryDiv(S scalar, OperationStatus& status) const noexcept
-            -> Vector2D<std::common_type_t<T, S>>
+        [[nodiscard]] constexpr PromotedVector2D<T, S> tryDiv(S scalar, OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -931,7 +927,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
@@ -947,8 +943,8 @@ namespace fgm
          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr auto tryDiv(const Vector2D& vec, S scalar, OperationStatus& status) noexcept
-            -> Vector2D<std::common_type_t<T, S>>
+        [[nodiscard]] static constexpr PromotedVector2D<T, S> tryDiv(const Vector2D& vec, S scalar,
+                                                                     OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -963,7 +959,7 @@ namespace fgm
          * @brief Compute the dot product with another vector.
          *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -973,7 +969,7 @@ namespace fgm
          * @return The scalar dot product of the two vectors.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] constexpr auto dot(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>
+        [[nodiscard]] constexpr PromotedValue_t<T, U> dot(const Vector2D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -981,7 +977,7 @@ namespace fgm
          * @brief Compute the dot product of two vectors.
          *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -992,8 +988,7 @@ namespace fgm
          * @return The scalar dot product of @p lhs and @p rhs.
          */
         template <StrictArithmetic U>
-        [[nodiscard]] static constexpr auto dot(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
-            -> std::common_type_t<T, U>
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> dot(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1002,7 +997,7 @@ namespace fgm
          * @brief Compute the 2D pseudo-cross product with another vector.
          *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1012,14 +1007,14 @@ namespace fgm
          * @return The pseudo-cross cross product of the two vectors.
          */
         template <StrictArithmetic U>
-        constexpr auto cross(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>;
+        constexpr PromotedValue_t<T, U> cross(const Vector2D<U>& rhs) const noexcept;
 
 
         /**
          * @brief Compute the 2D pseudo-cross product of two vectors.
          *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$
          *
-         * @note Promotes the result to the `std::common_type_t` of `T` and `U`.
+         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1030,7 +1025,7 @@ namespace fgm
          * @return The pseudo-cross product of the two vectors.
          */
         template <StrictArithmetic U>
-        static constexpr auto cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept -> std::common_type_t<T, U>;
+        static constexpr PromotedValue_t<T, U> cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept;
 
         /** @} */
 
@@ -1942,7 +1937,7 @@ namespace fgm
      * @brief Scale the vector by a scalar value.
      *        Multiply @p scalar by each component of the vector and returns a new vector.
      *
-     * @note Promotes the result to the `std::common_type_t` of `T` and `S`.
+     * @note Promotes the result to the wider type using @ref PromotedVector2D<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -1953,8 +1948,7 @@ namespace fgm
      * @return A new @ref Vector2D scaled by @p scalar.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr auto operator*(S scalar, const Vector2D<T>& vector) noexcept
-        -> Vector2D<std::common_type_t<T, S>>
+    [[nodiscard]] constexpr PromotedVector2D<T, S> operator*(S scalar, const Vector2D<T>& vector) noexcept
         requires StrictArithmetic<T>;
 
     /** @} */

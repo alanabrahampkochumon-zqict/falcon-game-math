@@ -549,7 +549,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::operator+(const Vector2D<U>& rhs) const noexcept -> Vector2D<std::common_type_t<T, U>>
+    constexpr PromotedVector2D<T, U> Vector2D<T>::operator+(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -576,7 +576,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::operator-(const Vector2D<U>& rhs) const noexcept -> Vector2D<std::common_type_t<T, U>>
+    constexpr PromotedVector2D<T, U> Vector2D<T>::operator-(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -595,6 +595,12 @@ namespace fgm
     }
 
 
+    /**************************************
+     *                                    *
+     *         INVERT OPERATION           *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     constexpr Vector2D<T> Vector2D<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
@@ -611,7 +617,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector2D<T>::operator*(const S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+    constexpr PromotedVector2D<T, S> Vector2D<T>::operator*(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -621,7 +627,7 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic S>
-    constexpr auto operator*(const S scalar, const Vector2D<T>& vector) noexcept -> Vector2D<std::common_type_t<T, S>>
+    constexpr PromotedVector2D<T, S> operator*(const S scalar, const Vector2D<T>& vector) noexcept
         requires StrictArithmetic<T>
     {
         return vector * scalar;
@@ -648,7 +654,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector2D<T>::operator/(const S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+    constexpr PromotedVector2D<T, S> Vector2D<T>::operator/(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -691,7 +697,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector2D<T>::safeDiv(const S scalar) const noexcept -> Vector2D<std::common_type_t<T, S>>
+    constexpr PromotedVector2D<T, S> Vector2D<T>::safeDiv(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -718,8 +724,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector2D<T>::safeDiv(const Vector2D& vec, const S scalar) noexcept
-        -> Vector2D<std::common_type_t<T, S>>
+    constexpr PromotedVector2D<T, S> Vector2D<T>::safeDiv(const Vector2D& vec, const S scalar) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeDiv(scalar);
@@ -728,8 +733,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector2D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
-        -> Vector2D<std::common_type_t<T, S>>
+    constexpr PromotedVector2D<T, S> Vector2D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, S>;
@@ -765,8 +769,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector2D<T>::tryDiv(const Vector2D& vec, S scalar, OperationStatus& status) noexcept
-        -> Vector2D<std::common_type_t<T, S>>
+    constexpr PromotedVector2D<T, S> Vector2D<T>::tryDiv(const Vector2D& vec, S scalar,
+                                                         OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
         return vec.tryDiv(scalar, status);
@@ -781,7 +785,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::dot(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>
+    constexpr PromotedValue_t<T, U> Vector2D<T>::dot(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
@@ -803,7 +807,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::dot(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept -> std::common_type_t<T, U>
+    constexpr PromotedValue_t<T, U> Vector2D<T>::dot(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         return lhs.dot(rhs);
@@ -818,7 +822,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::cross(const Vector2D<U>& rhs) const noexcept -> std::common_type_t<T, U>
+    constexpr PromotedValue_t<T, U> Vector2D<T>::cross(const Vector2D<U>& rhs) const noexcept
     {
         using R = std::common_type_t<T, U>;
         return R(_data[0] * rhs[1] - _data[1] * rhs[0]);
@@ -827,7 +831,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector2D<T>::cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept -> std::common_type_t<T, U>
+    constexpr PromotedValue_t<T, U> Vector2D<T>::cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
     {
         return lhs.cross(rhs);
     }

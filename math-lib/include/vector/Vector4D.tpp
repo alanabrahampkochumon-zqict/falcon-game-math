@@ -721,6 +721,12 @@ namespace fgm
     }
 
 
+    /**************************************
+     *                                    *
+     *         INVERT OPERATION           *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     constexpr Vector4D<T> Vector4D<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
