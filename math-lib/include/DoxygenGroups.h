@@ -44,7 +44,8 @@
              *   @defgroup FGM_Vec2_Equality Equality
              *   @defgroup FGM_Vec2_Comparison Comparisons
              *   @defgroup FGM_Vec2_Product Geometric Products
-             *   @defgroup FGM_Vec2_Mag Scalar Magnitude and Normalization
+             *   @defgroup FGM_Vec2_Mag Vector Magnitude and Norms
+             *   @defgroup FGM_Vec2_Normalize Vector Normalization
              *   @defgroup FGM_Vec2_Proj Vector Projection and Rejection
              *   @defgroup FGM_Vec2_Alias Spatial Alias
              *   @defgroup FGM_Vec2_Log String Representation
@@ -67,7 +68,8 @@
              *   @defgroup FGM_Vec3_Equality Equality
              *   @defgroup FGM_Vec3_Comparison Comparisons
              *   @defgroup FGM_Vec3_Product Geometric Products
-             *   @defgroup FGM_Vec3_Mag Scalar Magnitude and Normalization
+             *   @defgroup FGM_Vec3_Mag Vector Magnitude and Norms
+             *   @defgroup FGM_Vec3_Normalize Vector Normalization
              *   @defgroup FGM_Vec3_Proj Vector Projection and Rejection
              *   @defgroup FGM_Vec3_Alias Spatial Alias
              *   @defgroup FGM_Vec3_Log String Representation
@@ -90,7 +92,8 @@
              *   @defgroup FGM_Vec4_Equality Equality
              *   @defgroup FGM_Vec4_Comparison Comparisons
              *   @defgroup FGM_Vec4_Product Geometric Products
-             *   @defgroup FGM_Vec4_Mag Scalar Magnitude and Normalization
+             *   @defgroup FGM_Vec4_Mag Vector Magnitude and Norms
+             *   @defgroup FGM_Vec4_Normalize Vector Normalization
              *   @defgroup FGM_Vec4_Proj Vector Projection and Rejection
              *   @defgroup FGM_Vec4_Alias Spatial Alias
              *   @defgroup FGM_Vec4_Log String Representation

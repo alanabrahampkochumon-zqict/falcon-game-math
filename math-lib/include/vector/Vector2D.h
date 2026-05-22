@@ -1089,7 +1089,14 @@ namespace fgm
         [[nodiscard]] static constexpr T magSq(const Vector2D& vector) noexcept
             requires StrictArithmetic<T>;
 
+        /** @} */
 
+
+
+        /**
+         * @addtogroup FGM_Vec2_Normalize
+         * @{
+         */
 
         /**
          * @brief Compute the normalized (unit) form of this vector.
