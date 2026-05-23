@@ -25,29 +25,17 @@ class Matrix4DDivision: public ::testing::Test
 protected:
     fgm::Matrix4D<T> _matrix;
     T _scalar;
-    fgm::Matrix4D<fgm::Magnitude<T>> _expectedMatrix;
-    fgm::Matrix4D<T> _expectedTypedMatrix;
+    fgm::Matrix4D<T> _expectedMatrix;
+
 
     void SetUp() override
     {
-        _matrix = { { T(17), T(13), T(15), T(12) },
-                    { T(11), T(16), T(35), T(101) },
-                    { T(27), T(44), T(56), T(23) },
-                    { T(5), T(6), T(11), T(31) } };
-        _scalar = T(7);
-        // Used by / tests
+        _matrix         = { { T(17), T(13), T(15), T(12) },
+                            { T(11), T(16), T(35), T(101) },
+                            { T(27), T(44), T(56), T(23) },
+                            { T(5), T(6), T(11), T(31) } };
+        _scalar         = T(7);
         _expectedMatrix = {
-            { fgm::Magnitude<T>(2.428571428571428), fgm::Magnitude<T>(1.857142857142857),
-              fgm::Magnitude<T>(2.142857142857143), fgm::Magnitude<T>(1.714285714285714) },
-            { fgm::Magnitude<T>(1.571428571428571), fgm::Magnitude<T>(2.285714285714286), fgm::Magnitude<T>(5.0),
-              fgm::Magnitude<T>(14.428571428571429) },
-            { fgm::Magnitude<T>(3.857142857142857), fgm::Magnitude<T>(6.285714285714286), fgm::Magnitude<T>(8.0),
-              fgm::Magnitude<T>(3.285714285714286) },
-            { fgm::Magnitude<T>(0.714285714285714), fgm::Magnitude<T>(0.857142857142857),
-              fgm::Magnitude<T>(1.571428571428571), fgm::Magnitude<T>(4.428571428571429) },
-        };
-        // Used by /= tests
-        _expectedTypedMatrix = {
             { T(2.428571428571428), T(1.857142857142857), T(2.142857142857143), T(1.714285714285714) },
             { T(1.571428571428571), T(2.285714285714286), T(5.0), T(14.428571428571429) },
             { T(3.857142857142857), T(6.285714285714286), T(8.0), T(3.285714285714286) },
@@ -184,14 +172,14 @@ TYPED_TEST(Matrix4DDivision, DivideEqualsOperator_InverseScalesMatrixInPlace)
     fgm::Matrix4D matrix = this->_matrix;
     matrix /= this->_scalar;
 
-    EXPECT_MAT_EQ(this->_expectedTypedMatrix, matrix);
+    EXPECT_MAT_EQ(this->_expectedMatrix, matrix);
 }
 
 
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix4DDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
 {
-    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix /= 0), "");
 }
 
 

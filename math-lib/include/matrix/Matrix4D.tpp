@@ -498,13 +498,16 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
-            FGM_ASSERT_MSG(scalar == R(0), messages::assertion::MAT_DIV_BY_ZERO);
+
+            if (!std::is_constant_evaluated())
+                FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
             return Matrix4D<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor, _data[3] * factor);
         }
         else
         {
-            FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            if (!std::is_constant_evaluated())
+                FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
             R tScalar = static_cast<R>(scalar);
             return Matrix4D<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar, _data[3] / tScalar);
         }
@@ -611,7 +614,6 @@ namespace fgm
                 return Matrix4D<R>(fallback);
             }
         }
-
 
         status = OperationStatus::SUCCESS;
         return *this / scalar;

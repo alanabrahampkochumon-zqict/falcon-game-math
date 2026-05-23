@@ -25,17 +25,13 @@ class Matrix2DDivision: public ::testing::Test
 protected:
     fgm::Matrix2D<T> _matrix;
     T _scalar;
-    fgm::Matrix2D<fgm::Magnitude<T>> _expectedMatrix;
-    fgm::Matrix2D<T> _expectedTypedMatrix;
+    fgm::Matrix2D<T> _expectedMatrix;
 
     void SetUp() override
     {
-        _matrix              = { fgm::Vector2D<T>{ 7, 3 }, fgm::Vector2D<T>{ 1, 6 } };
-        _scalar              = T(3);
-        _expectedMatrix      = { fgm::Vector2D{ fgm::Magnitude<T>(2.333333333333333), fgm::Magnitude<T>(1) },
-                                 fgm::Vector2D{ fgm::Magnitude<T>(0.3333333333333333), fgm::Magnitude<T>(2) } };
-        _expectedTypedMatrix = { fgm::Vector2D{ T(2.333333333333333), T(1) },
-                                 fgm::Vector2D{ T(0.3333333333333333), T(2) } };
+        _matrix         = { fgm::Vector2D<T>{ 7, 3 }, fgm::Vector2D<T>{ 1, 6 } };
+        _scalar         = T(3);
+        _expectedMatrix = { fgm::Vector2D{ T(2.333333333333333), T(1) }, fgm::Vector2D{ T(0.3333333333333333), T(2) } };
     }
 };
 /** Test fixture for @ref fgm::Matrix2D division, parameterized by @ref SupportedArithmeticTypes */
@@ -132,7 +128,7 @@ TYPED_TEST(Matrix2DDivision, DivideEqualsOperator_InverseScalesMatrixInPlace)
     fgm::Matrix2D matrix = this->_matrix;
     matrix /= this->_scalar;
 
-    EXPECT_MAT_EQ(this->_expectedTypedMatrix, matrix);
+    EXPECT_MAT_EQ(this->_expectedMatrix, matrix);
 }
 
 

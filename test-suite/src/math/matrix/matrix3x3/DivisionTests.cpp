@@ -25,24 +25,15 @@ class Matrix3DDivision: public ::testing::Test
 protected:
     fgm::Matrix3D<T> _matrix;
     T _scalar;
-    fgm::Matrix3D<fgm::Magnitude<T>> _expectedMatrix;
-    fgm::Matrix3D<T> _expectedTypedMatrix;
+    fgm::Matrix3D<T> _expectedMatrix;
 
     void SetUp() override
     {
         _matrix = { fgm::Vector3D<T>{ 17, 13, 15 }, fgm::Vector3D<T>{ 11, 16, 35 }, fgm::Vector3D<T>{ 27, 44, 56 } };
         _scalar = T(7);
-        // Used by / tests
-        _expectedMatrix = {
-            { fgm::Magnitude<T>(2.428571428571428), fgm::Magnitude<T>(1.857142857142857),
-              fgm::Magnitude<T>(2.142857142857143) },
-            { fgm::Magnitude<T>(1.571428571428571), fgm::Magnitude<T>(2.285714285714286), fgm::Magnitude<T>(5.0) },
-            { fgm::Magnitude<T>(3.857142857142857), fgm::Magnitude<T>(6.285714285714286), fgm::Magnitude<T>(8.0) }
-        };
-        // Used by /= tests
-        _expectedTypedMatrix = { { T(2.428571428571428), T(1.857142857142857), T(2.142857142857143) },
-                                 { T(1.571428571428571), T(2.285714285714286), T(5.0) },
-                                 { T(3.857142857142857), T(6.285714285714286), T(8.0) } };
+        _expectedMatrix = { { T(2.428571428571428), T(1.857142857142857), T(2.142857142857143) },
+                            { T(1.571428571428571), T(2.285714285714286), T(5.0) },
+                            { T(3.857142857142857), T(6.285714285714286), T(8.0) } };
     }
 };
 /** Test fixture for @ref fgm::Matrix3D division, parameterized by @ref SupportedArithmeticTypes */
@@ -154,7 +145,7 @@ TYPED_TEST(Matrix3DDivision, DivideEqualsOperator_InverseScalesMatrixInPlace)
     fgm::Matrix3D matrix = this->_matrix;
     matrix /= this->_scalar;
 
-    EXPECT_MAT_EQ(this->_expectedTypedMatrix, matrix);
+    EXPECT_MAT_EQ(this->_expectedMatrix, matrix);
 }
 
 
