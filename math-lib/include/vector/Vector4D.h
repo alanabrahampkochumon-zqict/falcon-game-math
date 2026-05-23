@@ -952,7 +952,7 @@ namespace fgm
         /**
          * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @warning Does not check for division by zero. @p scalar should be non-zero.
          *
@@ -963,7 +963,7 @@ namespace fgm
          * @return A new @ref Vector4D scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatVector4D<T, S> operator/(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedVector4D<T, S> operator/(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -989,7 +989,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -1002,7 +1002,7 @@ namespace fgm
          *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatVector4D<T, S> safeDiv(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedVector4D<T, S> safeDiv(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1011,7 +1011,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -1025,7 +1025,7 @@ namespace fgm
          *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedFloatVector4D<T, S> safeDiv(const Vector4D& vec, S scalar) noexcept
+        [[nodiscard]] static constexpr PromotedVector4D<T, S> safeDiv(const Vector4D& vec, S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1035,7 +1035,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
@@ -1050,7 +1050,7 @@ namespace fgm
          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatVector4D<T, S> tryDiv(S scalar, OperationStatus& status) const noexcept
+        [[nodiscard]] constexpr PromotedVector4D<T, S> tryDiv(S scalar, OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1060,7 +1060,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
@@ -1076,7 +1076,7 @@ namespace fgm
          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedFloatVector4D<T, S> tryDiv(const Vector4D& vec, S scalar,
+        [[nodiscard]] static constexpr PromotedVector4D<T, S> tryDiv(const Vector4D& vec, S scalar,
                                                                           OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 

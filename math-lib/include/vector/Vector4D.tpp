@@ -780,7 +780,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::operator/(const S scalar) const noexcept
+    constexpr PromotedVector4D<T, S> Vector4D<T>::operator/(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -827,7 +827,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::safeDiv(const S scalar) const noexcept
+    constexpr PromotedVector4D<T, S> Vector4D<T>::safeDiv(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -853,7 +853,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::safeDiv(const Vector4D& vec, const S scalar) noexcept
+    constexpr PromotedVector4D<T, S> Vector4D<T>::safeDiv(const Vector4D& vec, const S scalar) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeDiv(scalar);
@@ -862,7 +862,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
+    constexpr PromotedVector4D<T, S> Vector4D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -898,7 +898,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatVector4D<T, S> Vector4D<T>::tryDiv(const Vector4D& vec, S scalar,
+    constexpr PromotedVector4D<T, S> Vector4D<T>::tryDiv(const Vector4D& vec, S scalar,
                                                               OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {

@@ -540,7 +540,7 @@ namespace fgm
         /**
          * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
          *
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -550,7 +550,7 @@ namespace fgm
          * @return A new @ref Matrix3D inverse scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> operator/(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator/(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -575,7 +575,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -590,7 +590,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> safeDiv(
+        [[nodiscard]] constexpr PromotedMatrix3D<T, S> safeDiv(
             S scalar, const Matrix3D& fallback = Matrix3D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
@@ -600,7 +600,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -616,7 +616,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedFloatMatrix3D<T, S> safeDiv(
+        [[nodiscard]] static constexpr PromotedMatrix3D<T, S> safeDiv(
             const Matrix3D& mat, S scalar, const Matrix3D& fallback = Matrix3D::eye()) noexcept
             requires StrictArithmetic<T>;
 
@@ -627,7 +627,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -646,7 +646,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix3D<T, S> tryDiv(
+        [[nodiscard]] constexpr PromotedMatrix3D<T, S> tryDiv(
             S scalar, OperationStatus& status, const Matrix3D& fallback = Matrix3D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
@@ -657,7 +657,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -677,7 +677,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedFloatMatrix3D<T, S> tryDiv(
+        [[nodiscard]] static constexpr PromotedMatrix3D<T, S> tryDiv(
             const Matrix3D& mat, S scalar, OperationStatus& status, const Matrix3D& fallback = Matrix3D::eye()) noexcept
             requires StrictArithmetic<T>;
 

@@ -208,7 +208,7 @@ namespace fgm
     constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator+(const Matrix2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         return Matrix2D<R>(_data[0] + rhs[0], _data[1] + rhs[1]);
     }
 
@@ -229,7 +229,7 @@ namespace fgm
     constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator-(const Matrix2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         return Matrix2D<R>(_data[0] - rhs[0], _data[1] - rhs[1]);
     }
 
@@ -250,7 +250,7 @@ namespace fgm
     constexpr PromotedMatrix2D<T, S> Matrix2D<T>::operator*(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
         return Matrix2D<R>(scalar * _data[0], scalar * _data[1]);
     }
 
@@ -277,7 +277,7 @@ namespace fgm
     constexpr PromotedVector2D<T, U> Matrix2D<T>::operator*(const Vector2D<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
@@ -304,7 +304,7 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic U>
     constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
@@ -331,7 +331,7 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic U>
     constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
         if constexpr (std::is_floating_point_v<R>)
@@ -367,7 +367,7 @@ namespace fgm
     constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator*(const Matrix2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         return Matrix2D<R>(*this * rhs[0], *this * rhs[1]);
     }
 
@@ -386,15 +386,22 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::operator/(const S& scalar) const noexcept
+    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::operator/(const S& scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<std::common_type_t<T, S>>;
-        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
-
-        R factor = R(1) / static_cast<R>(scalar);
-        return Matrix2D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
-                           static_cast<R>(_data[0][1]) * factor, static_cast<R>(_data[1][1]) * factor);
+        using R = PromotedValue_t<T, S>;
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            FGM_ASSERT_MSG(scalar == R(0), messages::assertion::MAT_DIV_BY_ZERO);
+            R factor = R(1) / static_cast<R>(scalar);
+            return Matrix2D<R>(_data[0] * factor, _data[1] * factor);
+        }
+        else
+        {
+            FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            R tScalar = static_cast<R>(scalar);
+            return Matrix2D<R>(_data[0] / tScalar, _data[1] / tScalar);
+        }
     }
 
 
@@ -404,7 +411,7 @@ namespace fgm
     constexpr Matrix2D<T>& Matrix2D<T>::operator/=(const S& scalar) noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<std::common_type_t<T, S>>;
+        using R = Magnitude<PromotedValue_t<T, S>>;
 
 
         FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
@@ -421,10 +428,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const S scalar, const Matrix2D& fallback) const noexcept
+    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::safeDiv(const S scalar, const Matrix2D& fallback) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
         {
@@ -437,7 +444,7 @@ namespace fgm
         {
             if (scalar == 0)
             {
-                return Matrix2D<Magnitude<R>>(fallback);
+                return Matrix2D<R>(fallback);
             }
         }
 
@@ -447,8 +454,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::safeDiv(const Matrix2D& mat, const S scalar,
-                                                               const Matrix2D& fallback) noexcept
+    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::safeDiv(const Matrix2D& mat, const S scalar,
+                                                          const Matrix2D& fallback) noexcept
         requires StrictArithmetic<T>
     {
         return mat.safeDiv(scalar, fallback);
@@ -457,11 +464,11 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                              const Matrix2D& fallback) const noexcept
+    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::tryDiv(const S scalar, OperationStatus& status,
+                                                         const Matrix2D& fallback) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
         { // TODO: Check || vs | with benchmarks
@@ -482,7 +489,7 @@ namespace fgm
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Matrix2D<Magnitude<R>>(fallback);
+                return Matrix2D<R>(fallback);
             }
         }
 
@@ -494,9 +501,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix2D<T, S> Matrix2D<T>::tryDiv(const Matrix2D& mat, const S scalar,
-                                                              OperationStatus& status,
-                                                              const Matrix2D& fallback) noexcept
+    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::tryDiv(const Matrix2D& mat, const S scalar, OperationStatus& status,
+                                                         const Matrix2D& fallback) noexcept
         requires StrictArithmetic<T>
     {
         return mat.tryDiv(scalar, status, fallback);
@@ -723,7 +729,7 @@ namespace fgm
     constexpr Matrix2D<T> Matrix2D<T>::makeRotation(const U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         R cos   = std::cos(angle);
         R sine  = std::sin(angle);
 #ifdef FGM_LEFT_HANDED

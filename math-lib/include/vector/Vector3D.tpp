@@ -484,7 +484,7 @@ namespace fgm
     constexpr Vector3D<bool> Vector3D<T>::lte(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<std::common_type_t<T, U>>;
+        using R = Magnitude<PromotedValue_t<T, U>>;
         return Vector3D<bool>(static_cast<R>(_data[0]) <= static_cast<R>(rhs[0]),
                               static_cast<R>(_data[1]) <= static_cast<R>(rhs[1]),
                               static_cast<R>(_data[2]) <= static_cast<R>(rhs[2]));
@@ -609,10 +609,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::operator+(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::operator+(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         return Vector3D<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + rhs[2]);
     }
 
@@ -637,10 +637,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::operator-(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::operator-(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         return Vector3D<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2]);
     }
 
@@ -679,16 +679,16 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector3D<T>::operator*(const S scalar) const noexcept -> Vector3D<std::common_type_t<T, S>>
+    constexpr PromotedVector3D<T, S> Vector3D<T>::operator*(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
         return Vector3D<R>(_data[0] * scalar, _data[1] * scalar, _data[2] * scalar);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic S>
-    constexpr auto operator*(const S scalar, const Vector3D<T>& vector) noexcept -> Vector3D<std::common_type_t<T, S>>
+    constexpr auto operator*(const S scalar, const Vector3D<T>& vector) noexcept -> Vector3D<PromotedValue_t<T, S>>
         requires StrictArithmetic<T>
     {
         return vector * scalar;
@@ -715,10 +715,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector3D<T>::operator/(const S scalar) const noexcept -> Vector3D<std::common_type_t<T, S>>
+    constexpr PromotedVector3D<T, S> Vector3D<T>::operator/(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
             R factor = R(1) / static_cast<R>(scalar);
@@ -738,7 +738,7 @@ namespace fgm
     constexpr Vector3D<T>& Vector3D<T>::operator/=(const S scalar) noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
             R factor = R(1) / static_cast<R>(scalar);
@@ -760,10 +760,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector3D<T>::safeDiv(const S scalar) const noexcept -> Vector3D<std::common_type_t<T, S>>
+    constexpr PromotedVector3D<T, S> Vector3D<T>::safeDiv(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
         {
@@ -786,8 +786,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector3D<T>::safeDiv(const Vector3D& vec, const S scalar) noexcept
-        -> Vector3D<std::common_type_t<T, S>>
+    constexpr PromotedVector3D<T, S> Vector3D<T>::safeDiv(const Vector3D& vec, const S scalar) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeDiv(scalar);
@@ -796,11 +795,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector3D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
-        -> Vector3D<std::common_type_t<T, S>>
+    constexpr PromotedVector3D<T, S> Vector3D<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
         {
@@ -833,8 +831,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr auto Vector3D<T>::tryDiv(const Vector3D& vec, S scalar, OperationStatus& status) noexcept
-        -> Vector3D<std::common_type_t<T, S>>
+    constexpr PromotedVector3D<T, S> Vector3D<T>::tryDiv(const Vector3D& vec, S scalar,
+                                                         OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
         return vec.tryDiv(scalar, status);
@@ -849,11 +847,11 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::dot(const Vector3D<U>& rhs) const noexcept -> std::common_type_t<T, U>
+    constexpr auto Vector3D<T>::dot(const Vector3D<U>& rhs) const noexcept -> PromotedValue_t<T, U>
         requires StrictArithmetic<T>
     {
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         if constexpr (std::is_floating_point_v<R>)
         {
             if (!std::is_constant_evaluated())
@@ -872,7 +870,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::dot(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept -> std::common_type_t<T, U>
+    constexpr auto Vector3D<T>::dot(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept -> PromotedValue_t<T, U>
         requires StrictArithmetic<T>
     {
         return lhs.dot(rhs);
@@ -887,9 +885,10 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::cross(const Vector3D<U>& rhs) const noexcept -> Vector3D<std::common_type_t<T, U>>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::cross(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
         return Vector3D<R>(_data[1] * rhs[2] - _data[2] * rhs[1], _data[2] * rhs[0] - _data[0] * rhs[2],
                            _data[0] * rhs[1] - _data[1] * rhs[0]);
     }
@@ -897,8 +896,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr auto Vector3D<T>::cross(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
-        -> Vector3D<std::common_type_t<T, U>>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::cross(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+    requires StrictArithmetic<T>
     {
         return lhs.cross(rhs);
     }
@@ -1070,7 +1069,7 @@ namespace fgm
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::project(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, U>;
+        using R = PromotedValue_t<T, U>;
 
         /** @note Static cast ensures integral type dots don't lose much precision */
         return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
@@ -1109,7 +1108,7 @@ namespace fgm
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProject(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = std::common_type_t<T, U>;
+        using R       = PromotedValue_t<T, U>;
         using MagType = Magnitude<R>;
 
         /** @note Static cast ensures integral type dots don't lose much precision */
@@ -1133,7 +1132,7 @@ namespace fgm
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = std::common_type_t<T, U>;
+        using R       = PromotedValue_t<T, U>;
         using MagType = Magnitude<R>;
 
         if (hasNaN() || onto.hasNaN())
@@ -1170,7 +1169,7 @@ namespace fgm
                                                                   OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = std::common_type_t<T, U>;
+        using R       = PromotedValue_t<T, U>;
         using MagType = Magnitude<R>;
 
 
@@ -1200,7 +1199,7 @@ namespace fgm
                                                                       OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = std::common_type_t<T, U>;
+        using R       = PromotedValue_t<T, U>;
         using MagType = Magnitude<R>;
 
         if (hasNaN() | onto.hasNaN())
@@ -1283,7 +1282,7 @@ namespace fgm
     {
         if (hasNaN() || from.hasNaN())
         {
-            return fgm::vec3d::zero<std::common_type_t<T, U>>;
+            return fgm::vec3d::zero<PromotedValue_t<T, U>>;
         }
 
         return *this - safeProject(from);
@@ -1297,7 +1296,7 @@ namespace fgm
     {
         if (hasNaN() || from.hasNaN())
         {
-            return fgm::vec3d::zero<std::common_type_t<T, U>>;
+            return fgm::vec3d::zero<PromotedValue_t<T, U>>;
         }
 
         return *this - safeProjectNorm(from);
@@ -1332,7 +1331,7 @@ namespace fgm
         if (hasNaN() || from.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::vec3d::zero<std::common_type_t<T, U>>;
+            return fgm::vec3d::zero<PromotedValue_t<T, U>>;
         }
 
         return *this - this->tryProject(from, status);
@@ -1348,7 +1347,7 @@ namespace fgm
         if (hasNaN() || from.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::vec3d::zero<std::common_type_t<T, U>>;
+            return fgm::vec3d::zero<PromotedValue_t<T, U>>;
         }
 
         return *this - this->tryProjectNorm(from, status);

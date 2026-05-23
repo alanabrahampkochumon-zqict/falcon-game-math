@@ -138,14 +138,6 @@ TYPED_TEST(Matrix3DDivision, DivideOperator_ReturnsInverseScaledMatrix)
 }
 
 
-/** @brief Verify that the binary division operator always return a floating-point matrix. */
-TYPED_TEST(Matrix3DDivision, DivideOperator_AlwaysReturnFloatingPointMatrix)
-{
-    [[maybe_unused]] const fgm::Matrix3D inverseScaledMat = this->_matrix / this->_scalar;
-    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
-}
-
-
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix3DDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
 {
@@ -188,17 +180,6 @@ TYPED_TEST(Matrix3DDivision, SafeDivide_ReturnsInverseScaledMatrix)
     const fgm::Matrix3D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
 
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
-}
-
-
-/**
- * @brief Verify that dividing a matrix using @ref fgm::Matrix3D::safeDiv always
- *        return a floating-point matrix.
- */
-TYPED_TEST(Matrix3DDivision, SafeDivide_AlwaysReturnFloatingPointMatrix)
-{
-    [[maybe_unused]] const fgm::Matrix3D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
-    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
 }
 
 
@@ -255,18 +236,6 @@ TYPED_TEST(Matrix3DDivision, StaticWrapper_SafeDivide_ReturnsInverseScaledMatrix
     const fgm::Matrix3D inverseScaledMat = fgm::Matrix3D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
 
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
-}
-
-
-/**
- * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix3D::safeDiv always
- *        return a floating-point matrix.
- */
-TYPED_TEST(Matrix3DDivision, StaticWrapper_SafeDivide_AlwaysReturnFloatingPointMatrix)
-{
-    [[maybe_unused]] const fgm::Matrix3D inverseScaledMat =
-        fgm::Matrix3D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
-    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
 }
 
 
@@ -333,19 +302,6 @@ TYPED_TEST(Matrix3DDivision, TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectF
     const fgm::Matrix3D inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
 
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-}
-
-
-/**
- * @brief Verify that dividing a matrix using @ref fgm::Matrix3D::tryDiv always
- *        return a floating-point matrix and set flag to @ref OperationStatus::SUCCESS.
- */
-TYPED_TEST(Matrix3DDivision, TryDivide_AlwaysReturnFloatingPointMatrixAndSetsCorrectFlag)
-{
-    fgm::OperationStatus flag;
-    [[maybe_unused]] const fgm::Matrix3D inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
-    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
 
@@ -431,19 +387,6 @@ TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_ReturnsInverseScaledMatrixA
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
 
-
-/**
- * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix3D::tryDiv always
- *        return a floating-point matrix and set flag to @ref OperationStatus::SUCCESS.
- */
-TYPED_TEST(Matrix3DDivision, StaticWrapper_TryDivide_AlwaysReturnFloatingPointMatrixAndSetsCorrectFlag)
-{
-    fgm::OperationStatus flag;
-    [[maybe_unused]] const fgm::Matrix3D inverseScaledMat =
-        fgm::Matrix3D<TypeParam>::tryDiv(this->_matrix, this->_scalar, flag);
-    static_assert(std::is_floating_point_v<typename decltype(inverseScaledMat)::value_type>);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-}
 
 
 /**

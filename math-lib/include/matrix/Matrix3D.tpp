@@ -431,18 +431,22 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::operator/(const S scalar) const noexcept
+    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::operator/(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<PromotedValue_t<T, S>>;
-        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
-
-        R factor = R(1) / static_cast<R>(scalar);
-        return Matrix3D<R>(static_cast<R>(_data[0][0]) * factor, static_cast<R>(_data[1][0]) * factor,
-                           static_cast<R>(_data[2][0]) * factor, static_cast<R>(_data[0][1]) * factor,
-                           static_cast<R>(_data[1][1]) * factor, static_cast<R>(_data[2][1]) * factor,
-                           static_cast<R>(_data[0][2]) * factor, static_cast<R>(_data[1][2]) * factor,
-                           static_cast<R>(_data[2][2]) * factor);
+        using R = PromotedValue_t<T, S>;
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            FGM_ASSERT_MSG(scalar == R(0), messages::assertion::MAT_DIV_BY_ZERO);
+            R factor = R(1) / static_cast<R>(scalar);
+            return Matrix3D<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor);
+        }
+        else
+        {
+            FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            R tScalar = static_cast<R>(scalar);
+            return Matrix3D<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar);
+        }
     }
 
 
@@ -472,7 +476,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::safeDiv(const S scalar, const Matrix3D& fallback) const noexcept
+    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::safeDiv(const S scalar, const Matrix3D& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -488,7 +492,7 @@ namespace fgm
         {
             if (scalar == 0)
             {
-                return Matrix3D<Magnitude<R>>(fallback);
+                return Matrix3D<R>(fallback);
             }
         }
 
@@ -498,7 +502,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::safeDiv(const Matrix3D& mat, const S scalar,
+    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::safeDiv(const Matrix3D& mat, const S scalar,
                                                                const Matrix3D& fallback) noexcept
         requires StrictArithmetic<T>
     {
@@ -508,11 +512,11 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::tryDiv(const S scalar, OperationStatus& status,
+    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::tryDiv(const S scalar, OperationStatus& status,
                                                               const Matrix3D& fallback) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = std::common_type_t<T, S>;
+        using R = PromotedValue_t<T, S>;
 
         if constexpr (std::is_floating_point_v<R>)
         {
@@ -535,7 +539,7 @@ namespace fgm
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Matrix3D<Magnitude<R>>(fallback);
+                return Matrix3D<R>(fallback);
             }
         }
 
@@ -547,7 +551,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedFloatMatrix3D<T, S> Matrix3D<T>::tryDiv(const Matrix3D& mat, const S scalar,
+    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::tryDiv(const Matrix3D& mat, const S scalar,
                                                               OperationStatus& status,
                                                               const Matrix3D& fallback) noexcept
         requires StrictArithmetic<T>

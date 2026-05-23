@@ -562,7 +562,7 @@ namespace fgm
         /**
          * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] scalar The value to scale by.
@@ -570,7 +570,7 @@ namespace fgm
          * @return A new @ref Matrix4D inverse scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> operator/(const S& scalar) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4D<T, S> operator/(const S& scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -595,7 +595,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -610,7 +610,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> safeDiv(
+        [[nodiscard]] constexpr PromotedMatrix4D<T, S> safeDiv(
             S scalar, const Matrix4D& fallback = Matrix4D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
@@ -620,7 +620,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -636,7 +636,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedFloatMatrix4D<T, S> safeDiv(
+        [[nodiscard]] static constexpr PromotedMatrix4D<T, S> safeDiv(
             const Matrix4D& mat, S scalar, const Matrix4D& fallback = Matrix4D::eye()) noexcept
             requires StrictArithmetic<T>;
 
@@ -647,7 +647,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -667,7 +667,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedFloatMatrix4D<T, S> tryDiv(
+        [[nodiscard]] constexpr PromotedMatrix4D<T, S> tryDiv(
             S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
@@ -699,7 +699,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedFloatMatrix4D<T, S> tryDiv(
+        [[nodiscard]] static constexpr PromotedMatrix4D<T, S> tryDiv(
             const Matrix4D& mat, S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye()) noexcept
             requires StrictArithmetic<T>;
 
