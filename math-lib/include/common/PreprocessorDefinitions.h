@@ -14,7 +14,6 @@
 #include <type_traits>
 
 
-
 /**
  * @addtogroup FGM_Macro
  * @{
@@ -44,6 +43,20 @@
         #define FGM_API
     #endif
 #endif
+
+
+
+namespace fgm::internal
+{
+    /**
+     * @brief An internal function used for triggering compile time error with assertions.
+     *        Since all the functions are marked as noexcept, throwing inside `std::is_constant_evaluated`
+     *        will not work. So by calling a non constexpr function inside a constexpr function, it will trigger
+     *        a no-compile error.
+     */
+    inline void compile_time_error_trap() {}
+} // namespace fgm::internal
+
 
 /**
  * @brief Log the assertion message and status to console.
@@ -78,11 +91,19 @@ inline void logAssertion(const char* condition, const char* message, const char*
     #define FGM_ASSERT_MSG(condition, message)                                                                         \
         do                                                                                                             \
         {                                                                                                              \
-            (condition) ? void(0)                                                                                      \
-                        : (std::is_constant_evaluated() ? static_cast<void>(0)                                         \
-                                                        : logAssertion(#condition, message, __FILE__, __LINE__),       \
-                           FGM_DEBUG_BREAK());                                                                         \
-                                                                                                                       \
+            if (std::is_constant_evaluated())                                                                          \
+            {                                                                                                          \
+                if (!(condition))                                                                                      \
+                    fgm::internal::compile_time_error_trap();                                                          \
+            }                                                                                                          \
+            else                                                                                                       \
+            {                                                                                                          \
+                if (!(condition))                                                                                      \
+                {                                                                                                      \
+                    logAssertion(#condition, message, __FILE__, __LINE__);                                             \
+                    FGM_DEBUG_BREAK();                                                                                 \
+                }                                                                                                      \
+            }                                                                                                          \
         } while (false)
 #else
     #define FGM_ASSERT_MSG(condition, message) ((void) 0)
@@ -103,11 +124,19 @@ inline void logAssertion(const char* condition, const char* message, const char*
     #define FGM_ASSERT(condition)                                                                                      \
         do                                                                                                             \
         {                                                                                                              \
-            (condition) ? void(0)                                                                                      \
-                        : (std::is_constant_evaluated() ? static_cast<void>(0)                                         \
-                                                        : logAssertion(#condition, "", __FILE__, __LINE__),            \
-                           FGM_DEBUG_BREAK());                                                                         \
-                                                                                                                       \
+            if (std::is_constant_evaluated())                                                                          \
+            {                                                                                                          \
+                if (!(condition))                                                                                      \
+                    fgm::internal::compile_time_error_trap();                                                          \
+            }                                                                                                          \
+            else                                                                                                       \
+            {                                                                                                          \
+                if (!(condition))                                                                                      \
+                {                                                                                                      \
+                    logAssertion(#condition, "", __FILE__, __LINE__);                                                  \
+                    FGM_DEBUG_BREAK();                                                                                 \
+                }                                                                                                      \
+            }                                                                                                          \
         } while (false)
 #else
     #define FGM_ASSERT(condition) ((void) 0)

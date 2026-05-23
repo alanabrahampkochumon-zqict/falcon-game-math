@@ -437,15 +437,13 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (!std::is_constant_evaluated())
-                FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
             return Matrix3D<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor);
         }
         else
         {
-            if (!std::is_constant_evaluated())
-                FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
+            FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
             R tScalar = static_cast<R>(scalar);
             return Matrix3D<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar);
         }
