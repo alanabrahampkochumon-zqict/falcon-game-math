@@ -260,5 +260,11 @@
      * @}
      */
 
+
+    /**
+     * @defgroup T_Math_Traits Math Trait Static Tests
+     * @brief Static tests verifying concepts and type alias.
+     */
+
 /** @} */ // End of FGMTestSuite
 // clang-format on

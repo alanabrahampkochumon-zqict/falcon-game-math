@@ -15,6 +15,11 @@
 #include <vector>
 
 
+/**
+ * @addtogroup T_Math_Traits
+ * @{
+ */
+
 namespace
 {
     /** @brief Verify that @ref fgm::Arithmetic concept constraints integrals and floating point types. */
@@ -98,11 +103,11 @@ namespace
         static_assert(fgm::WeakArithmetic<int16_t> == true);
         static_assert(fgm::WeakArithmetic<int32_t> == true);
         static_assert(fgm::WeakArithmetic<int64_t> == true);
-                           
+
         static_assert(fgm::WeakArithmetic<float> == true);
         static_assert(fgm::WeakArithmetic<double> == true);
         static_assert(fgm::WeakArithmetic<bool> == true);
-                           
+
         static_assert(fgm::WeakArithmetic<std::vector<int>> == false);
         static_assert(fgm::WeakArithmetic<std::array<int, 5>> == false);
 
@@ -183,6 +188,9 @@ namespace
         static_assert(fgm::StrictSignedness<uint16_t, int64_t> == false);
         static_assert(fgm::StrictSignedness<uint32_t, int64_t> == false);
         static_assert(fgm::StrictSignedness<uint64_t, int64_t> == false);
+
     } // namespace
 
 } // namespace
+
+/** @} */

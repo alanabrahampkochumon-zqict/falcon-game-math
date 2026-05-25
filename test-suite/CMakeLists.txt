@@ -35,7 +35,7 @@ list(TRANSFORM Matrix4x4TestFiles PREPEND ${Matrix4x4TestDir})
 
 
 set(MathCommonDir "src/math/common/")
-set(MathCommonTestFiles "OperationStatusTests.cpp;WrapperTests.cpp;")
+set(MathCommonTestFiles "OperationStatusTests.cpp;WrapperTests.cpp;MathTraitTests.cpp;")
 list(TRANSFORM MathCommonTestFiles PREPEND ${MathCommonDir})
 
 set(UtilityDirectory "include/utils/")
