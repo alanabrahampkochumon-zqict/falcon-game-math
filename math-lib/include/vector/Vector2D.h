@@ -825,7 +825,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedVector2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         * @warning Does not check for division by zero. @p scalar should be non-zero.
+         * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
@@ -842,7 +842,7 @@ namespace fgm
          * @brief Compute the component-wise division of this vector by @p scalar in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         * @warning Does not check for division by zero. @p scalar should be non-zero.
+         * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *

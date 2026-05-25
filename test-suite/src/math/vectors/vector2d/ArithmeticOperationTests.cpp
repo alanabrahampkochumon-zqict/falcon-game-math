@@ -144,13 +144,13 @@ namespace
 {
     constexpr fgm::Vector2D vecA(1, 2);
     constexpr fgm::Vector2D vecB(3, 5);
-    constexpr auto sumVec = vecA + vecB;
-    constexpr auto diffVec = vecB - vecA;
+    constexpr auto sumVec    = vecA + vecB;
+    constexpr auto diffVec   = vecB - vecA;
     constexpr auto scaledVec = vecA * 2;
-    constexpr auto divVec1 = vecB / 2;
-    constexpr auto divVec2 = vecB.safeDiv(2);
-    constexpr auto divVec3 = fgm::Vector2D<int>::safeDiv(vecB, 2);
-    constexpr auto invVec = -vecA;
+    constexpr auto divVec1   = vecB / 2;
+    constexpr auto divVec2   = vecB.safeDiv(2);
+    constexpr auto divVec3   = fgm::Vector2D<int>::safeDiv(vecB, 2);
+    constexpr auto invVec    = -vecA;
 
     static_assert(sumVec.x() == 4);
     static_assert(sumVec.y() == 7);
@@ -192,7 +192,7 @@ TYPED_TEST(Vector2DAddition, PlusOperator_ReturnsVectorSum)
 
     EXPECT_VEC_EQ(this->_expectedSum, result);
 }
- 
+
 
 /**
  * @brief Verify that the compound addition assignment operator perform a component-wise addition and
@@ -550,6 +550,31 @@ TEST(Vector2DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWit
 }
 
 
+#ifdef ENABLE_DEBUG_TESTS
+
+/**
+ * @brief Verify that the binary division assignment operator when dividing a vector by zero,
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DScalarDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
+{
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), "");
+}
+
+
+/**
+ * @brief Verify that the compound division assignment operator when dividing a vector by zero,
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
+{
+    [[maybe_unused]] fgm::Vector2D newVec = this->_vec;
+    EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= 0), "");
+}
+#endif
+
+
+
 /**************************************
  *                                    *
  *        SAFE DIVISION TESTS         *
@@ -779,8 +804,8 @@ TEST(Vector2DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorA
 
 
 /**
- * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vector2D::tryDiv returns zero vector and
- *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vector2D::tryDiv returns zero vector
+ * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vector2DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {

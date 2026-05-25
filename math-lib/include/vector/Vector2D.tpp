@@ -11,8 +11,8 @@
  */
 
 
-#include "common/Wrappers.h"
 #include "common/Messages.h"
+#include "common/Wrappers.h"
 
 #include <algorithm>
 #include <type_traits>
@@ -663,12 +663,14 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+
             R factor = R(1) / static_cast<R>(scalar);
             return Vector2D<R>(_data[0] * factor, _data[1] * factor);
         }
         else
         {
-            assert(scalar != 0 && "Integral division by zero");
+            FGM_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             R tScalar = static_cast<R>(scalar);
             return Vector2D<R>(_data[0] / tScalar, _data[1] / tScalar);
         }
@@ -683,6 +685,8 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+
             R factor = R(1) / static_cast<R>(scalar);
 
             _data[0] = static_cast<T>(factor * _data[0]);
@@ -690,6 +694,7 @@ namespace fgm
         }
         else
         {
+            FGM_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             _data[0] /= static_cast<T>(scalar);
             _data[1] /= static_cast<T>(scalar);
         }
@@ -1040,8 +1045,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedVector2D<T, U> Vector2D<T>::projectNorm(const Vector2D& vec,
-                                                                   const Vector2D<U>& onto) noexcept
+    constexpr PromotedVector2D<T, U> Vector2D<T>::projectNorm(const Vector2D& vec, const Vector2D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
         return vec.projectNorm(onto);
@@ -1102,8 +1106,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedVector2D<T, U> Vector2D<T>::safeProjectNorm(const Vector2D& vec,
-                                                                       const Vector2D<U>& onto) noexcept
+    constexpr PromotedVector2D<T, U> Vector2D<T>::safeProjectNorm(const Vector2D& vec, const Vector2D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeProjectNorm(onto);
@@ -1142,7 +1145,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::tryProjectNorm(const Vector2D<U>& onto,
-                                                                      OperationStatus& status) const noexcept
+                                                                 OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R       = PromotedValue_t<T, U>;
@@ -1172,7 +1175,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::tryProjectNorm(const Vector2D& vec, const Vector2D<U>& onto,
-                                                                      OperationStatus& status) noexcept
+                                                                 OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
         return vec.tryProjectNorm(onto, status);
@@ -1215,8 +1218,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedVector2D<T, U> Vector2D<T>::rejectNorm(const Vector2D& vector,
-                                                                  const Vector2D<U>& from) noexcept
+    constexpr PromotedVector2D<T, U> Vector2D<T>::rejectNorm(const Vector2D& vector, const Vector2D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
         return vector.rejectNorm(from);
@@ -1262,8 +1264,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedVector2D<T, U> Vector2D<T>::safeRejectNorm(const Vector2D& vec,
-                                                                      const Vector2D<U>& from) noexcept
+    constexpr PromotedVector2D<T, U> Vector2D<T>::safeRejectNorm(const Vector2D& vec, const Vector2D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeRejectNorm(from);
@@ -1289,7 +1290,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::tryRejectNorm(const Vector2D<U>& from,
-                                                                     OperationStatus& status) const noexcept
+                                                                OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1315,7 +1316,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::tryRejectNorm(const Vector2D& vec, const Vector2D<U>& from,
-                                                                     OperationStatus& status) noexcept
+                                                                OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
         return vec.tryRejectNorm(from, status);
