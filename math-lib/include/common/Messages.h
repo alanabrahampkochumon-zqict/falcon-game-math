@@ -31,6 +31,8 @@ namespace fgm::messages
         inline constexpr auto MAT_DIV_BY_ZERO          = "[Matrix]: Division by zero";
         inline constexpr auto MAT_DET_DIV_BY_ZERO      = "[Matrix Determinant]: Division by zero.";
         inline constexpr auto MAT_INV_ZERO_DETERMINANT = "[Matrix Inverse]: Zero Determinant.";
+        inline constexpr auto MAT_OUT_OF_BOUNDS_ACCESS = "[Matrix]: Out of bounds.";
+        inline constexpr auto VEC_OUT_OF_BOUNDS_ACCESS = "[Vector]: Out of bounds.";
 
     } // namespace assertion
 

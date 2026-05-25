@@ -12,6 +12,7 @@
 
 
 #include "common/Wrappers.h"
+#include "common/Messages.h"
 
 #include <algorithm>
 #include <type_traits>
@@ -168,6 +169,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr T& Vector2D<T>::operator[](const std::size_t idx) noexcept
     {
+        FGM_ASSERT_MSG(idx >= 0 && idx < dimension, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 
@@ -175,6 +177,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr const T& Vector2D<T>::operator[](const std::size_t idx) const noexcept
     {
+        FGM_ASSERT_MSG(idx >= 0 && idx < dimension, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 

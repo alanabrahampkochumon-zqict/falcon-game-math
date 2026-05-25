@@ -11,7 +11,11 @@
 
 #include "Vector2DTestSetup.h"
 
-
+#ifdef ENABLE_DEBUG_TESTS
+class Vector2DIndexing: public testing::TestWithParam<std::size_t>
+{};
+INSTANTIATE_TEST_SUITE_P(Vector2DTests, Vector2DIndexing, testing::Values(-1, -2, 3, 4, 100));
+#endif
 
 /**
  * @addtogroup T_FGM_Vec2_Access
@@ -38,6 +42,7 @@ namespace
     static_assert(vector.s() == 1);
     static_assert(vector.t() == 2);
 } // namespace
+
 
 /**************************************
  *                                    *
@@ -83,6 +88,17 @@ TEST(Vector2DAccess, AccessibleAsArray)
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+/** @brief Verify that @ref fgm::Vector2D out-of-bounds access triggers assert in debug mode. */
+TEST_P(Vector2DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+{
+    const fgm::Vector2D vec(1, 2);
+    const auto index = GetParam();
+    EXPECT_DEBUG_DEATH(vec[index], "");
+}
+#endif
 
 /** @} */
 
@@ -149,5 +165,16 @@ TEST(Vector2DMutation, ElementsCanBeMutatedUsingIndex)
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+/** @brief Verify that @ref fgm::Vector2D out-of-bounds mutation triggers assert in debug mode. */
+TEST_P(Vector2DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+{
+    fgm::Vector2D vec(1, 2);
+    const auto index = GetParam();
+    EXPECT_DEBUG_DEATH(vec[index] = 2, "");
+}
+#endif
 
 /** @} */
