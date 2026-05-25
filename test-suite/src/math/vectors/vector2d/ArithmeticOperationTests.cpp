@@ -452,6 +452,7 @@ TEST(Vector2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  *                                    *
  **************************************/
 
+#ifndef ENABLE_DEBUG_TESTS
 /**
  * @brief Verify that dividing a float vector by zero returns an
  *       infinity vector of float type.
@@ -472,6 +473,7 @@ TEST(Vector2DScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
     const fgm::Vector2D vec(1.0, 3.0);
     EXPECT_VEC_INF(vec / 0);
 }
+#endif
 
 
 /** @brief Verify that dividing a vector by one returns the original vector. */
