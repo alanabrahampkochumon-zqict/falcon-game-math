@@ -1143,8 +1143,7 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
-         *
-         * @warning Does not check for zero-length vectors. @ref mag() must be non-zero.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @return A new @ref Vector2D with a magnitude of 1.0.
          */
@@ -1158,6 +1157,7 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @param[in] vec The vector to normalize.
          *
@@ -1332,7 +1332,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
         [[nodiscard]] static constexpr PromotedVector2D<T, U> projectNorm(const Vector2D& vec,
-                                                                               const Vector2D<U>& onto) noexcept
+                                                                          const Vector2D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1428,7 +1428,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
         [[nodiscard]] static constexpr PromotedVector2D<T, U> safeProjectNorm(const Vector2D& vec,
-                                                                                   const Vector2D<U>& onto) noexcept
+                                                                              const Vector2D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1482,7 +1482,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr PromotedVector2D<T, U> tryProjectNorm(const Vector2D<U>& onto,
-                                                                           OperationStatus& status) const noexcept
+                                                                      OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1541,8 +1541,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
         [[nodiscard]] static constexpr PromotedVector2D<T, U> tryProjectNorm(const Vector2D& vec,
-                                                                                  const Vector2D<U>& onto,
-                                                                                  OperationStatus& status) noexcept
+                                                                             const Vector2D<U>& onto,
+                                                                             OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1619,7 +1619,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
         [[nodiscard]] static constexpr PromotedVector2D<T, U> rejectNorm(const Vector2D& vector,
-                                                                              const Vector2D<U>& from) noexcept
+                                                                         const Vector2D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1705,7 +1705,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
         [[nodiscard]] static constexpr PromotedVector2D<T, U> safeRejectNorm(const Vector2D& vec,
-                                                                                  const Vector2D<U>& from) noexcept
+                                                                             const Vector2D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1753,7 +1753,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
         [[nodiscard]] constexpr PromotedVector2D<T, U> tryRejectNorm(const Vector2D<U>& from,
-                                                                          OperationStatus& status) const noexcept
+                                                                     OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1804,8 +1804,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
         [[nodiscard]] static constexpr PromotedVector2D<T, U> tryRejectNorm(const Vector2D& vec,
-                                                                                 const Vector2D<U>& from,
-                                                                                 OperationStatus& status) noexcept
+                                                                            const Vector2D<U>& from,
+                                                                            OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

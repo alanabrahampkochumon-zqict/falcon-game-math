@@ -35,6 +35,8 @@ namespace fgm::messages
 
         inline constexpr auto VEC_DIV_BY_ZERO           = "[Vector]: Division by zero";
         inline constexpr auto VEC_NORMALIZE_DIV_BY_ZERO = "[Vector Normalization]: Division by zero.";
+        inline constexpr auto VEC_PROJECT_DIV_BY_ZERO   = "[Vector Projection]: Division by zero.";
+        inline constexpr auto VEC_REJECT_DIV_BY_ZERO    = "[Vector Rejection]: Division by zero.";
         inline constexpr auto VEC_OUT_OF_BOUNDS_ACCESS  = "[Vector]: Out of bounds.";
 
     } // namespace assertion

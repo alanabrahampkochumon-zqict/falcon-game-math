@@ -56,7 +56,7 @@ INSTANTIATE_TEST_SUITE_P(Vector2DProjectionTestSuite, Vector2DProjectionNaNTests
  */
 
 /** @brief Verify that vector projection is available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Vector2D vecA(1, 2);
     constexpr fgm::Vector2D vecB(1, 0);
@@ -91,7 +91,7 @@ namespace
     constexpr auto proj8 = fgm::Vector2D<int>::safeProjectNorm(vecA, vecB);
     static_assert(proj8.x() == 1);
     static_assert(proj8.y() == 0);
-}
+} // namespace
 
 /**************************************
  *                                    *
@@ -267,6 +267,30 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVe
 }
 
 
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that projecting a vector onto zero vector triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DProjection, ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector2D zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.project(zeroVec)), "");
+}
+
+
+/**
+ * @brief Verify that projecting a vector onto zero vector using static variant of @ref fgm::Vector2D::project
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DProjection, StaticWrapper_ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector2D zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector2D<float>::project(this->_vec, zeroVec)), "");
+}
+
+#endif
+
+
 /**************************************
  *                                    *
  *        SAFE PROJECTION TESTS       *
@@ -304,8 +328,8 @@ TEST(Vector2DProjection, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNo
 }
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector2D::safeProjectNorm
- *       returns a zero vector.
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * fgm::Vector2D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector2DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 {
@@ -321,8 +345,8 @@ TEST(Vector2DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 }
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector2D::safeProjectNorm
- *       returns a zero vector.
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * fgm::Vector2D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector2DProjection, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
 {
