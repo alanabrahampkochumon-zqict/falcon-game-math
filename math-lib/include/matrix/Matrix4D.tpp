@@ -131,7 +131,8 @@ namespace fgm {
      ***************************************/
 
     template<Arithmetic T>
-    template<Arithmetic U>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::allEq(const Matrix4D<U> &rhs, double epsilon) const noexcept {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
@@ -149,14 +150,16 @@ namespace fgm {
 
 
     template<Arithmetic T>
-    template<Arithmetic U>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::allEq(const Matrix4D &lhs, const Matrix4D<U> &rhs, double epsilon) noexcept {
         return lhs.allEq(rhs, epsilon);
     }
 
 
     template<Arithmetic T>
-    template<Arithmetic U>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::anyNeq(const Matrix4D<U> &rhs, double epsilon) const noexcept {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
@@ -174,21 +177,24 @@ namespace fgm {
 
 
     template<Arithmetic T>
-    template<Arithmetic U>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::anyNeq(const Matrix4D &lhs, const Matrix4D<U> &rhs, double epsilon) noexcept {
         return lhs.anyNeq(rhs, epsilon);
     }
 
 
     template<Arithmetic T>
-    template<Arithmetic U>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::operator==(const Matrix4D<U> &rhs) const noexcept {
         return allEq(rhs);
     }
 
 
     template<Arithmetic T>
-    template<Arithmetic U>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::operator!=(const Matrix4D<U> &rhs) const noexcept {
         return anyNeq(rhs);
     }
@@ -201,7 +207,8 @@ namespace fgm {
      **************************************/
 
     template<Arithmetic T>
-    template<StrictArithmetic U>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedMatrix4D<T, U> Matrix4D<T>::operator+(const Matrix4D<U> &rhs) const noexcept
         requires StrictArithmetic<T> {
         using R = PromotedValue_t<T, U>;
@@ -209,7 +216,8 @@ namespace fgm {
     }
 
     template<Arithmetic T>
-    template<StrictArithmetic U>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     Matrix4D<T> &Matrix4D<T>::operator+=(const Matrix4D<U> &rhs) noexcept
         requires StrictArithmetic<T> {
         _data[0] += rhs[0];
@@ -221,7 +229,8 @@ namespace fgm {
 
 
     template<Arithmetic T>
-    template<StrictArithmetic U>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedMatrix4D<T, U> Matrix4D<T>::operator-(const Matrix4D<U> &rhs) const noexcept
         requires StrictArithmetic<T> {
         using R = PromotedValue_t<T, U>;
@@ -230,7 +239,8 @@ namespace fgm {
 
 
     template<Arithmetic T>
-    template<StrictArithmetic U>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Matrix4D<T> &Matrix4D<T>::operator-=(const Matrix4D<U> &rhs) noexcept
         requires StrictArithmetic<T> {
         _data[0] -= rhs[0];
@@ -269,7 +279,8 @@ namespace fgm {
 
 
     template<Arithmetic T>
-    template<StrictArithmetic U>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector4D<T, U> Matrix4D<T>::operator*(const Vector4D<U> &vec) const noexcept
         requires StrictArithmetic<T> {
         using R = PromotedValue_t<T, U>;
@@ -435,15 +446,18 @@ namespace fgm {
 
 
     template<Arithmetic T>
-    template<StrictArithmetic U>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedMatrix4D<T, U> Matrix4D<T>::operator*(const Matrix4D<U> &rhs) const noexcept
         requires StrictArithmetic<T> {
         using R = PromotedValue_t<T, U>;
         return Matrix4D<R>(*this * rhs[0], *this * rhs[1], *this * rhs[2], *this * rhs[3]);
     }
 
+
     template<Arithmetic T>
-    template<StrictArithmetic U>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Matrix4D<T> &Matrix4D<T>::operator*=(const Matrix4D<U> &rhs) noexcept
         requires StrictArithmetic<T> {
         const auto mat = *this * rhs;
