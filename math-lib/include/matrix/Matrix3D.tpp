@@ -133,6 +133,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::allEq(const Matrix3D<U>& rhs, const double epsilon) const noexcept
     {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
@@ -153,6 +154,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::allEq(const Matrix3D& lhs, const Matrix3D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.allEq(rhs, epsilon);
@@ -160,6 +162,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::anyNeq(const Matrix3D<U>& rhs, const double epsilon) const noexcept
     {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
@@ -180,6 +183,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::anyNeq(const Matrix3D& lhs, const Matrix3D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.anyNeq(rhs, epsilon);
@@ -188,6 +192,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::operator==(const Matrix3D<U>& rhs) const noexcept
     {
         return allEq(rhs);
@@ -196,6 +201,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::operator!=(const Matrix3D<U>& rhs) const noexcept
     {
         return anyNeq(rhs);
@@ -211,6 +217,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator+(const Matrix3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -221,6 +228,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     Matrix3D<T>& Matrix3D<T>::operator+=(const Matrix3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -233,6 +241,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator-(const Matrix3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -243,6 +252,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Matrix3D<T>& Matrix3D<T>::operator-=(const Matrix3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -284,6 +294,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector3D<T, U> Matrix3D<T>::operator*(const Vector3D<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
@@ -408,6 +419,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator*(const Matrix3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -418,6 +430,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Matrix3D<T>& Matrix3D<T>::operator*=(const Matrix3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {

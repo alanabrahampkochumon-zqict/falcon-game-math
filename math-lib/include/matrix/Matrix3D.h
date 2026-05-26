@@ -217,6 +217,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool allEq(const Matrix3D<U>& rhs,
                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
@@ -241,6 +242,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr bool allEq(const Matrix3D& lhs, const Matrix3D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                           std::is_same_v<U, double>
@@ -265,6 +267,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool anyNeq(const Matrix3D<U>& rhs,
                                             double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
@@ -289,6 +292,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr bool anyNeq(const Matrix3D& lhs, const Matrix3D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                            std::is_same_v<U, double>
@@ -309,6 +313,7 @@ namespace fgm
          * @return True if all elements are equivalent within the default epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool operator==(const Matrix3D<U>& rhs) const noexcept;
 
 
@@ -325,6 +330,7 @@ namespace fgm
          * @return True if any of the elements are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool operator!=(const Matrix3D<U>& rhs) const noexcept;
 
         /** @} */
@@ -348,6 +354,7 @@ namespace fgm
          * @return A new @ref Matrix3D containing the element-wise sum.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator+(const Matrix3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -364,6 +371,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         Matrix3D& operator+=(const Matrix3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
@@ -381,6 +389,7 @@ namespace fgm
          * @return A new @ref Matrix3D containing the element-wise difference.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator-(const Matrix3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -397,12 +406,13 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr Matrix3D& operator-=(const Matrix3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Compute the element-wise product between this matrix and @p scalar and 
+         * @brief Compute the element-wise product between this matrix and @p scalar and
          *
          * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -462,6 +472,7 @@ namespace fgm
          * @return A new @ref Vector3D with applied linear transformations.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVector3D<T, U> operator*(const Vector3D<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
@@ -498,6 +509,7 @@ namespace fgm
          * @return A new @ref Matrix3D containing the composition of linear transformations.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator*(const Matrix3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -533,6 +545,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr Matrix3D& operator*=(const Matrix3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
@@ -646,8 +659,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, S> tryDiv(
-            S scalar, OperationStatus& status, const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3D<T, S> tryDiv(S scalar, OperationStatus& status,
+                                                              const Matrix3D& fallback = Matrix3D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
