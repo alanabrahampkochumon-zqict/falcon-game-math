@@ -103,6 +103,7 @@ namespace fgm
          * @param[in] other The source matrix to be converted.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] explicit constexpr Matrix2D(const Matrix2D<U>& other) noexcept;
 
         /** @} */
@@ -215,6 +216,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool allEq(const Matrix2D<U>& rhs,
                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
@@ -239,6 +241,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr bool allEq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                           std::is_same_v<U, double>
@@ -263,6 +266,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool anyNeq(const Matrix2D<U>& rhs,
                                             double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
@@ -287,6 +291,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr bool anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                            std::is_same_v<U, double>
@@ -307,6 +312,7 @@ namespace fgm
          * @return True if all elements are equivalent within the default epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool operator==(const Matrix2D<U>& rhs) const noexcept;
 
 
@@ -323,6 +329,7 @@ namespace fgm
          * @return True if any of the elements are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool operator!=(const Matrix2D<U>& rhs) const noexcept;
 
         /** @} */
@@ -347,6 +354,7 @@ namespace fgm
          * @return A new @ref Matrix2D containing the element-wise sum.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator+(const Matrix2D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -363,6 +371,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         Matrix2D& operator+=(const Matrix2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
@@ -380,6 +389,7 @@ namespace fgm
          * @return A new @ref Matrix2D containing the element-wise difference.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator-(const Matrix2D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -396,6 +406,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr Matrix2D& operator-=(const Matrix2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
@@ -460,6 +471,7 @@ namespace fgm
          * @return A new @ref Vector2D with applied linear transformations.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
@@ -494,6 +506,7 @@ namespace fgm
          * @return A new @ref Matrix2D containing the composition of linear transformations.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator*(const Matrix2D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -527,6 +540,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr Matrix2D& operator*=(const Matrix2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
@@ -640,8 +654,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, S> tryDiv(
-            S scalar, OperationStatus& status, const Matrix2D& fallback = Matrix2D::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix2D<T, S> tryDiv(S scalar, OperationStatus& status,
+                                                              const Matrix2D& fallback = Matrix2D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1178,7 +1192,7 @@ namespace fgm
     /**
      * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
      *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -1221,6 +1235,7 @@ namespace fgm
      * @return The passed-in @p vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
     static constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept;
 
 
@@ -1253,6 +1268,7 @@ namespace fgm
      * @return The passed-in @p vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
     static constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept;
 
     /** @} */
