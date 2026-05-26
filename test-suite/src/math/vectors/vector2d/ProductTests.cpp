@@ -63,8 +63,8 @@ protected:
         _expectedCrossProduct = T(12);
     }
 };
-/** @brief Test fixture for @ref fgm::Vector2D cross product, parameterized by @ref SupportedArithmeticTypes */
-TYPED_TEST_SUITE(Vector2DCrossProduct, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector2D cross product, parameterized by @ref SupportedSignedArithmeticTypes */
+TYPED_TEST_SUITE(Vector2DCrossProduct, SupportedSignedArithmeticTypes);
 
 
 
