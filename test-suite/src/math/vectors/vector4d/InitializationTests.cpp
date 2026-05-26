@@ -43,9 +43,9 @@ TYPED_TEST_SUITE(Vector4DInitialization, SupportedTypes);
 namespace
 {
     constexpr fgm::Vector4D vecA(1, 2, 3, 4);
-    constexpr fgm::Vector4D<int> vecB({ 1, 2 }, {3, 4});
+    constexpr fgm::Vector4D<int> vecB({ 1, 2 }, { 3, 4 });
     constexpr fgm::Vector4D vecC(1, { 2, 3, 4 });
-    constexpr fgm::Vector4D vecD( { 1, 2, 3 }, 4);
+    constexpr fgm::Vector4D vecD({ 1, 2, 3 }, 4);
     constexpr fgm::Vector4D<int> vecE;
 
     static_assert(vecA.x() == 1);

@@ -1438,7 +1438,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3D<T, U> projectNorm(const Vector3D& vec,
-                                                                               const Vector3D<U>& onto) noexcept
+                                                                          const Vector3D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1542,7 +1542,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3D<T, U> safeProjectNorm(const Vector3D& vec,
-                                                                                   const Vector3D<U>& onto) noexcept
+                                                                              const Vector3D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1600,7 +1600,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVector3D<T, U> tryProjectNorm(const Vector3D<U>& onto,
-                                                                           OperationStatus& status) const noexcept
+                                                                      OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1661,8 +1661,8 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3D<T, U> tryProjectNorm(const Vector3D& vec,
-                                                                                  const Vector3D<U>& onto,
-                                                                                  OperationStatus& status) noexcept
+                                                                             const Vector3D<U>& onto,
+                                                                             OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1747,7 +1747,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3D<T, U> rejectNorm(const Vector3D& vector,
-                                                                              const Vector3D<U>& from) noexcept
+                                                                         const Vector3D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1841,7 +1841,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3D<T, U> safeRejectNorm(const Vector3D& vec,
-                                                                                  const Vector3D<U>& from) noexcept
+                                                                             const Vector3D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1893,7 +1893,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVector3D<T, U> tryRejectNorm(const Vector3D<U>& from,
-                                                                          OperationStatus& status) const noexcept
+                                                                     OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1948,8 +1948,8 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3D<T, U> tryRejectNorm(const Vector3D& vec,
-                                                                                 const Vector3D<U>& from,
-                                                                                 OperationStatus& status) noexcept
+                                                                            const Vector3D<U>& from,
+                                                                            OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

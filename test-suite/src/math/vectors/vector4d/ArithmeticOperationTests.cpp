@@ -145,13 +145,13 @@ namespace
 {
     constexpr fgm::Vector4D vecA(1, 2, 3, 4);
     constexpr fgm::Vector4D vecB(5, 12, 5, 3);
-    constexpr auto sumVec = vecA + vecB;
-    constexpr auto diffVec = vecB - vecA;
+    constexpr auto sumVec    = vecA + vecB;
+    constexpr auto diffVec   = vecB - vecA;
     constexpr auto scaledVec = vecA * 2;
-    constexpr auto divVec1 = vecB / 2;
-    constexpr auto divVec2 = vecB.safeDiv(2);
-    constexpr auto divVec3 = fgm::Vector4D<int>::safeDiv(vecB, 2);
-    constexpr auto invVec = -vecA;
+    constexpr auto divVec1   = vecB / 2;
+    constexpr auto divVec2   = vecB.safeDiv(2);
+    constexpr auto divVec3   = fgm::Vector4D<int>::safeDiv(vecB, 2);
+    constexpr auto invVec    = -vecA;
 
     static_assert(sumVec.x() == 6);
     static_assert(sumVec.y() == 14);
@@ -796,8 +796,8 @@ TEST(Vector4DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorA
 
 
 /**
- * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vector4D::tryDiv returns zero vector and
- *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vector4D::tryDiv returns zero vector
+ * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {

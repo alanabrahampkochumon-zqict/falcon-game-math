@@ -516,7 +516,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix3D<T, S> Matrix3D<T>::safeDiv(const Matrix3D& mat, const S scalar,
-                                                               const Matrix3D& fallback) noexcept
+                                                          const Matrix3D& fallback) noexcept
         requires StrictArithmetic<T>
     {
         return mat.safeDiv(scalar, fallback);
@@ -526,7 +526,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix3D<T, S> Matrix3D<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                              const Matrix3D& fallback) const noexcept
+                                                         const Matrix3D& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -564,9 +564,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::tryDiv(const Matrix3D& mat, const S scalar,
-                                                              OperationStatus& status,
-                                                              const Matrix3D& fallback) noexcept
+    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::tryDiv(const Matrix3D& mat, const S scalar, OperationStatus& status,
+                                                         const Matrix3D& fallback) noexcept
         requires StrictArithmetic<T>
     {
         return mat.tryDiv(scalar, status, fallback);

@@ -34,9 +34,9 @@ namespace fgm
 
 
     /** @brief Validate that two types are either signed or unsigned but not a combination of both. */
-    template<typename T, typename U>
+    template <typename T, typename U>
     concept StrictSignedness = std::is_signed_v<T> == std::is_signed_v<U>;
-    
+
 
     /**
      * @brief Validates that a type is a signed numeric primitive (integral or floating-point) suitable for linear

@@ -75,7 +75,7 @@ INSTANTIATE_TEST_SUITE_P(Vector3DNormalizationNaNTestSuite, Vector3DNormalizatio
 namespace
 {
     // TODO: Add static tests after making sqrt constexpr
-    //constexpr fgm::Vector3D vec(14, 27, 83);
+    // constexpr fgm::Vector3D vec(14, 27, 83);
     // constexpr auto norm = vec.normalize();
 } // namespace
 

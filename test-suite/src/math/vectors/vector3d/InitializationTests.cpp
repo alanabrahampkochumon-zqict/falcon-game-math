@@ -43,7 +43,7 @@ namespace
 {
     constexpr fgm::Vector3D vecA(1, 2, 3);
     constexpr fgm::Vector3D vecB({ 1, 2 }, 3);
-    constexpr fgm::Vector3D vecC(1, { 2, 3});
+    constexpr fgm::Vector3D vecC(1, { 2, 3 });
     constexpr fgm::Vector3D<int> vecD;
 
     static_assert(vecA.x() == 1);
@@ -53,7 +53,7 @@ namespace
     static_assert(vecB.x() == 1);
     static_assert(vecB.y() == 2);
     static_assert(vecB.z() == 3);
-    
+
     static_assert(vecC.x() == 1);
     static_assert(vecC.y() == 2);
     static_assert(vecC.z() == 3);

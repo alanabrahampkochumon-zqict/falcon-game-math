@@ -387,8 +387,8 @@ namespace fgm
         {
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
             return Vector3D<bool>(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
-                            _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon,
-                            _data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon);
+                                  _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon,
+                                  _data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon);
         }
     }
 
@@ -749,11 +749,13 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
             return Vector3D<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor);
         }
         else
         {
+            FGM_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             assert(scalar != 0 && "Integral division by zero");
             R tScalar = static_cast<R>(scalar);
             return Vector3D<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar);
@@ -769,6 +771,7 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
 
             _data[0] = static_cast<T>(factor * _data[0]);
@@ -777,6 +780,7 @@ namespace fgm
         }
         else
         {
+            FGM_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             _data[0] /= static_cast<T>(scalar);
             _data[1] /= static_cast<T>(scalar);
             _data[2] /= static_cast<T>(scalar);
@@ -1129,8 +1133,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector3D<T, U> Vector3D<T>::projectNorm(const Vector3D& vec,
-                                                                   const Vector3D<U>& onto) noexcept
+    constexpr PromotedVector3D<T, U> Vector3D<T>::projectNorm(const Vector3D& vec, const Vector3D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
         return vec.projectNorm(onto);
@@ -1168,7 +1171,7 @@ namespace fgm
     constexpr PromotedVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = PromotedValue_t<T, U>;
+        using R = PromotedValue_t<T, U>;
 
         if (hasNaN() || onto.hasNaN())
         {
@@ -1192,8 +1195,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D& vec,
-                                                                       const Vector3D<U>& onto) noexcept
+    constexpr PromotedVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D& vec, const Vector3D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeProjectNorm(onto);
@@ -1235,7 +1237,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::tryProjectNorm(const Vector3D<U>& onto,
-                                                                      OperationStatus& status) const noexcept
+                                                                 OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R       = PromotedValue_t<T, U>;
@@ -1266,7 +1268,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::tryProjectNorm(const Vector3D& vec, const Vector3D<U>& onto,
-                                                                      OperationStatus& status) noexcept
+                                                                 OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
         return vec.tryProjectNorm(onto, status);
@@ -1312,8 +1314,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector3D<T, U> Vector3D<T>::rejectNorm(const Vector3D& vector,
-                                                                  const Vector3D<U>& from) noexcept
+    constexpr PromotedVector3D<T, U> Vector3D<T>::rejectNorm(const Vector3D& vector, const Vector3D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
         return vector.rejectNorm(from);
@@ -1363,8 +1364,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector3D<T, U> Vector3D<T>::safeRejectNorm(const Vector3D& vec,
-                                                                      const Vector3D<U>& from) noexcept
+    constexpr PromotedVector3D<T, U> Vector3D<T>::safeRejectNorm(const Vector3D& vec, const Vector3D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeRejectNorm(from);
@@ -1392,7 +1392,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::tryRejectNorm(const Vector3D<U>& from,
-                                                                     OperationStatus& status) const noexcept
+                                                                OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1420,7 +1420,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::tryRejectNorm(const Vector3D& vec, const Vector3D<U>& from,
-                                                                     OperationStatus& status) noexcept
+                                                                OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
         return vec.tryRejectNorm(from, status);

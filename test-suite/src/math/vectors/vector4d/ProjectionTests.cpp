@@ -365,8 +365,8 @@ TEST(Vector4DProjection, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNo
 
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
- *       returns a zero vector.
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * fgm::Vector4D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector4DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 {
@@ -382,8 +382,8 @@ TEST(Vector4DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 }
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector4D::safeProjectNorm
- *       returns a zero vector.
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * fgm::Vector4D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector4DProjection, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
 {
