@@ -460,6 +460,7 @@ TEST(Vector3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  *                                    *
  **************************************/
 
+#ifndef ENABLE_DEBUG_TESTS
 /**
  * @brief Verify that dividing a float vector by zero returns an
  *       infinity vector of float type.
@@ -480,7 +481,7 @@ TEST(Vector3DScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
     const fgm::Vector3D vec(1.0, 2.0, 3.0);
     EXPECT_VEC_INF(vec / 0);
 }
-
+#endif
 
 /** @brief Verify that dividing a vector by one returns the original vector. */
 TYPED_TEST(Vector3DScalarDivision, DivisionByOneReturnsOriginalVector)
@@ -556,6 +557,31 @@ TEST(Vector3DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWit
 
     EXPECT_VEC_EQ(expected, vec);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+
+/**
+ * @brief Verify that the binary division assignment operator when dividing a vector by zero,
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector3DScalarDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
+{
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), "");
+}
+
+
+/**
+ * @brief Verify that the compound division assignment operator when dividing a vector by zero,
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector3DScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
+{
+    [[maybe_unused]] fgm::Vector3D newVec = this->_vec;
+    EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= 0), "");
+}
+#endif
+
 
 
 /**************************************

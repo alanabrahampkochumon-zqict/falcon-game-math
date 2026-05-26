@@ -769,7 +769,7 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
+            if (hasNaN() | fgm::isnan(scalar))
             {
                 status = OperationStatus::NANOPERAND;
                 return fgm::vec2d::zero<R>;
