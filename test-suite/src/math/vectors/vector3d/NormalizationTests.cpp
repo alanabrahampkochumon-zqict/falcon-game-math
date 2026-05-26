@@ -180,7 +180,7 @@ TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorRetur
  */
 TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
 {
-    EXPECT_VEC_ZERO(fgm::Vector3D<double>::safeNormalize(fgm::vec3d::zero<TypeParam>));
+    EXPECT_VEC_ZERO(fgm::Vector3D<TypeParam>::safeNormalize(fgm::vec3d::zero<TypeParam>));
 }
 
 

@@ -301,7 +301,7 @@ TYPED_TEST(Vector3DRejection, Reject_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector3DRejection, StaticWrapper_Reject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector3D rejection = fgm::Vector3D<float>::reject(this->_vec, this->_fromVec);
+    [[maybe_unused]] const fgm::Vector3D rejection = fgm::Vector3D<TypeParam>::reject(this->_vec, this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
@@ -587,7 +587,7 @@ TYPED_TEST(Vector3DRejection, SafeReject_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector3DRejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector3D rejection = fgm::Vector3D<float>::safeReject(this->_vec, this->_fromVec);
+    [[maybe_unused]] const fgm::Vector3D rejection = fgm::Vector3D<TypeParam>::safeReject(this->_vec, this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
@@ -974,7 +974,7 @@ TYPED_TEST(Vector3DRejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointV
 {
     [[maybe_unused]] fgm::OperationStatus status;
     [[maybe_unused]] const fgm::Vector3D rejection =
-        fgm::Vector3D<float>::tryReject(this->_vec, this->_fromVec, status);
+        fgm::Vector3D<TypeParam>::tryReject(this->_vec, this->_fromVec, status);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 

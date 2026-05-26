@@ -371,8 +371,8 @@ TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsRetur
  */
 TYPED_TEST(Vector3DCrossProduct, IsAntiCommutative)
 {
-    fgm::Vector3D crossProduct1 = fgm::Vector3D<float>::cross(this->_vecA, this->_vecB);
-    fgm::Vector3D crossProduct2 = fgm::Vector3D<float>::cross(this->_vecB, this->_vecA);
+    fgm::Vector3D crossProduct1 = fgm::Vector3D<TypeParam>::cross(this->_vecA, this->_vecB);
+    fgm::Vector3D crossProduct2 = fgm::Vector3D<TypeParam>::cross(this->_vecB, this->_vecA);
 
     EXPECT_VEC_EQ(crossProduct1, -1.0f * crossProduct2);
 }
@@ -386,8 +386,8 @@ TYPED_TEST(Vector3DCrossProduct, IsAntiCommutative)
 TYPED_TEST(Vector3DCrossProduct, BetweenParallelVectorIsCommutatives)
 {
     const fgm::Vector3D vecB    = TypeParam(2) * this->_vecA;
-    fgm::Vector3D crossProduct1 = fgm::Vector3D<float>::cross(this->_vecA, vecB);
-    fgm::Vector3D crossProduct2 = fgm::Vector3D<float>::cross(vecB, this->_vecA);
+    fgm::Vector3D crossProduct1 = fgm::Vector3D<TypeParam>::cross(this->_vecA, vecB);
+    fgm::Vector3D crossProduct2 = fgm::Vector3D<TypeParam>::cross(vecB, this->_vecA);
 
     EXPECT_VEC_EQ(crossProduct1, crossProduct2);
 }

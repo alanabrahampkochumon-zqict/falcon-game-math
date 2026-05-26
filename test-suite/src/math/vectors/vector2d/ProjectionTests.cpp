@@ -273,7 +273,7 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVe
  */
 TYPED_TEST(Vector2DProjection, ProjectionOntoZeroVectorTriggersAssertionInCallback)
 {
-    const fgm::Vector2D zeroVec(0, 0);
+    const fgm::Vector2D<TypeParam> zeroVec(0, 0);
     EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.project(zeroVec)), "");
 }
 
@@ -284,8 +284,8 @@ TYPED_TEST(Vector2DProjection, ProjectionOntoZeroVectorTriggersAssertionInCallba
  */
 TYPED_TEST(Vector2DProjection, StaticWrapper_ProjectionOntoZeroVectorTriggersAssertionInCallback)
 {
-    const fgm::Vector2D zeroVec(0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector2D<float>::project(this->_vec, zeroVec)), "");
+    const fgm::Vector2D<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector2D<TypeParam>::project(this->_vec, zeroVec)), "");
 }
 
 #endif
