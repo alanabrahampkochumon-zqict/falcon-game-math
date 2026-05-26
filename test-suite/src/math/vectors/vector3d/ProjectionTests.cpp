@@ -298,6 +298,31 @@ TYPED_TEST(Vector3DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVe
 }
 
 
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that projecting a vector onto zero vector triggers assert in debug mode.
+ */
+TYPED_TEST(Vector3DProjection, ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector3D<TypeParam> zeroVec(0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.project(zeroVec)), "");
+}
+
+
+/**
+ * @brief Verify that projecting a vector onto zero vector using static variant of @ref fgm::Vector3D::project
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector3DProjection, StaticWrapper_ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector3D<TypeParam> zeroVec(0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector3D<TypeParam>::project(this->_vec, zeroVec)), "");
+}
+
+#endif
+
+
+
 /**************************************
  *                                    *
  *        SAFE PROJECTION TESTS       *

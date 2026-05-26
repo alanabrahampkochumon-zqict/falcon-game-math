@@ -1023,7 +1023,10 @@ namespace fgm
     constexpr Vector3D<Magnitude<T>> Vector3D<T>::normalize() const noexcept
         requires StrictArithmetic<T>
     {
-        return *this / mag();
+        const auto magnitude = mag();
+        FGM_ASSERT_MSG(magnitude >= fgm::Config::EPSILON<decltype(magnitude)>,
+                       fgm::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
+        return *this / magnitude;
     }
 
 
@@ -1107,7 +1110,12 @@ namespace fgm
         using R = PromotedValue_t<T, U>;
 
         /** @note Static cast ensures integral type dots don't lose much precision */
-        return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
+        const auto b2 = static_cast<Magnitude<R>>(onto.dot(onto));
+
+        FGM_ASSERT_MSG(b2 >= fgm::Config::EPSILON_SQUARE<Magnitude<R>>,
+                       fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
+
+        return this->dot(onto) / b2 * onto; // a.dot(b) / b.dot(b) * b
     }
 
     template <Arithmetic T>
