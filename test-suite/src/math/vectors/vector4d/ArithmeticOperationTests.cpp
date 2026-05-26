@@ -802,7 +802,7 @@ TEST(Vector4DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorA
 TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const auto result = fgm::Vector4D<double>::tryDiv(this->_vec, fgm::constants::NaN, flag);
+    const auto result = fgm::Vector4D<TypeParam>::tryDiv(this->_vec, fgm::constants::NaN, flag);
 
     EXPECT_VEC_ZERO(result);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);

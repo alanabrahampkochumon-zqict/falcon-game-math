@@ -111,7 +111,7 @@ namespace fgm
          * @param[in] other The source vector to be converted.
          */
         template <Arithmetic U>
-        [[nodiscard]] constexpr Vector4D(const Vector4D<U>& other) noexcept;
+        [[nodiscard]] explicit constexpr Vector4D(const Vector4D<U>& other) noexcept;
 
         /** @} */
 

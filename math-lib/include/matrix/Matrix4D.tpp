@@ -447,10 +447,10 @@ namespace fgm {
     constexpr Matrix4D<T> &Matrix4D<T>::operator*=(const Matrix4D<U> &rhs) noexcept
         requires StrictArithmetic<T> {
         const auto mat = *this * rhs;
-        _data[0] = mat[0];
-        _data[1] = mat[1];
-        _data[2] = mat[2];
-        _data[3] = mat[3];
+        _data[0] = static_cast<Vector4D<T>>(mat[0]);
+        _data[1] = static_cast<Vector4D<T>>(mat[1]);
+        _data[2] = static_cast<Vector4D<T>>(mat[2]);
+        _data[3] = static_cast<Vector4D<T>>(mat[3]);
         return *this;
     }
 

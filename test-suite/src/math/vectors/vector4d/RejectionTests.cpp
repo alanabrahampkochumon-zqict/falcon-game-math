@@ -330,7 +330,7 @@ TYPED_TEST(Vector4DRejection, Reject_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_Reject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector4D rejection = fgm::Vector4D<float>::reject(this->_vec, this->_fromVec);
+    [[maybe_unused]] const fgm::Vector4D rejection = fgm::Vector4D<TypeParam>::reject(this->_vec, this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
@@ -579,7 +579,7 @@ TEST(Vector4DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
     const fgm::Vector4D expectedRejection(-6.2, -13.4, 2.6, 27.8);
 
     // When rejected from another
-    const fgm::Vector4D actualRejection = fgm::Vector4D<float>::safeReject(vec, from);
+    const fgm::Vector4D actualRejection = fgm::Vector4D<int>::safeReject(vec, from);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
@@ -616,7 +616,7 @@ TYPED_TEST(Vector4DRejection, SafeReject_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector4DRejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector4D rejection = fgm::Vector4D<float>::safeReject(this->_vec, this->_fromVec);
+    [[maybe_unused]] const fgm::Vector4D rejection = fgm::Vector4D<TypeParam>::safeReject(this->_vec, this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
@@ -964,7 +964,7 @@ TEST(Vector4DRejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
     fgm::OperationStatus flag;
 
     // When rejected from another
-    const fgm::Vector4D actualRejection = fgm::Vector4D<float>::tryReject(vec, from, flag);
+    const fgm::Vector4D actualRejection = fgm::Vector4D<int>::tryReject(vec, from, flag);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
@@ -1008,7 +1008,7 @@ TYPED_TEST(Vector4DRejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointV
 {
     [[maybe_unused]] fgm::OperationStatus status;
     [[maybe_unused]] const fgm::Vector4D rejection =
-        fgm::Vector4D<float>::tryReject(this->_vec, this->_fromVec, status);
+        fgm::Vector4D<TypeParam>::tryReject(this->_vec, this->_fromVec, status);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 

@@ -50,7 +50,7 @@ TYPED_TEST_SUITE(Vector4DIntegralUtilityTests, SupportedIntegralTypes);
 /** @brief Verify that vector utilities are available at compile time. */
 namespace
 {
-    constexpr fgm::Vector4D normVec(1, 2, 3, 4);
+    constexpr fgm::Vector4D normVec(1.0f, 2.0f, 3.0f, 4.0f);
     constexpr fgm::Vector4D infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                    fgm::constants::INFINITY_F);
     constexpr fgm::Vector4D nanVec(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN);

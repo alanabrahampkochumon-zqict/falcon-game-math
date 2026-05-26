@@ -434,12 +434,12 @@ namespace fgm
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
         {
-            return Vector4D(_data[0] == rhs[0], _data[1] == rhs[1], _data[2] == rhs[2], _data[3] == rhs[3]);
+            return Vector4D<bool>(_data[0] == rhs[0], _data[1] == rhs[1], _data[2] == rhs[2], _data[3] == rhs[3]);
         }
         else
         {
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return Vector4D(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
+            return Vector4D<bool>(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
                             _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon,
                             _data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon,
                             _data[3] == rhs[3] || fgm::abs(_data[3] - rhs[3]) <= epsilon);
@@ -461,7 +461,7 @@ namespace fgm
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
         {
-            return Vector4D(_data[0] != rhs[0], _data[1] != rhs[1], _data[2] != rhs[2], _data[3] != rhs[3]);
+            return Vector4D<bool>(_data[0] != rhs[0], _data[1] != rhs[1], _data[2] != rhs[2], _data[3] != rhs[3]);
         }
         else
         {
@@ -494,7 +494,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::gt(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector4D(_data[0] > rhs[0], _data[1] > rhs[1], _data[2] > rhs[2], _data[3] > rhs[3]);
+        return Vector4D<bool>(_data[0] > rhs[0], _data[1] > rhs[1], _data[2] > rhs[2], _data[3] > rhs[3]);
     }
 
 
@@ -512,7 +512,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::gte(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector4D(_data[0] >= rhs[0], _data[1] >= rhs[1], _data[2] >= rhs[2], _data[3] >= rhs[3]);
+        return Vector4D<bool>(_data[0] >= rhs[0], _data[1] >= rhs[1], _data[2] >= rhs[2], _data[3] >= rhs[3]);
     }
 
 
@@ -530,7 +530,7 @@ namespace fgm
     constexpr Vector4D<bool> Vector4D<T>::lt(const Vector4D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector4D(_data[0] < rhs[0], _data[1] < rhs[1], _data[2] < rhs[2], _data[3] < rhs[3]);
+        return Vector4D<bool>(_data[0] < rhs[0], _data[1] < rhs[1], _data[2] < rhs[2], _data[3] < rhs[3]);
     }
 
 
@@ -1177,11 +1177,10 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R       = PromotedValue_t<T, U>;
-        using MagType = Magnitude<R>;
 
         if (hasNaN() || onto.hasNaN())
         {
-            return fgm::vec4d::zero<MagType>;
+            return fgm::vec4d::zero<R>;
         }
         return this->dot(onto) * onto;
     }
@@ -1243,12 +1242,11 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R       = PromotedValue_t<T, U>;
-        using MagType = Magnitude<R>;
 
         if (hasNaN() || onto.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::vec4d::zero<MagType>;
+            return fgm::vec4d::zero<R>;
         }
 
         status = OperationStatus::SUCCESS;
@@ -1326,7 +1324,7 @@ namespace fgm
     {
         if (hasNaN() || from.hasNaN())
         {
-            return fgm::vec4d::zero<PromotedValue_t<T, U>>;
+            return fgm::vec4d::zero<Magnitude<PromotedValue_t<T, U>>>;
         }
 
         return *this - safeProject(from);
@@ -1375,7 +1373,7 @@ namespace fgm
         if (hasNaN() || from.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::vec4d::zero<PromotedValue_t<T, U>>;
+            return fgm::vec4d::zero<Magnitude<PromotedValue_t<T, U>>>;
         }
 
         return *this - this->tryProject(from, status);
