@@ -200,7 +200,7 @@ TYPED_TEST(Vector2DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorRetur
  */
 TYPED_TEST(Vector2DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
 {
-    EXPECT_VEC_ZERO(fgm::Vector2D<double>::safeNormalize(fgm::vec2d::zero<TypeParam>));
+    EXPECT_VEC_ZERO(fgm::Vector2D<TypeParam>::safeNormalize(fgm::vec2d::zero<TypeParam>));
 }
 
 

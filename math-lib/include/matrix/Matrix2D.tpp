@@ -378,8 +378,8 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
-        _data[0]       = mat[0];
-        _data[1]       = mat[1];
+        _data[0]       = static_cast<Vector2D<T>>(mat[0]);
+        _data[1]       = static_cast<Vector2D<T>>(mat[1]);
         return *this;
     }
 
@@ -392,15 +392,13 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (!std::is_constant_evaluated())
-                FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
             return Matrix2D<R>(_data[0] * factor, _data[1] * factor);
         }
         else
         {
-            if (!std::is_constant_evaluated())
-                FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
+            FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
             R tScalar = static_cast<R>(scalar);
             return Matrix2D<R>(_data[0] / tScalar, _data[1] / tScalar);
         }

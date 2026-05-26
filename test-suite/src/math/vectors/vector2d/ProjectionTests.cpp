@@ -513,7 +513,7 @@ TEST(Vector2DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTy
     const fgm::Vector2D expectedProjection(6.6, 13.2);
 
     // When projected onto another
-    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::safeProject(vec, onto);
+    const fgm::Vector2D actualProjection = fgm::Vector2D<int>::safeProject(vec, onto);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
@@ -872,7 +872,7 @@ TEST(Vector2DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTyp
     fgm::OperationStatus flag;
 
     // When projected onto another
-    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::tryProject(vec, onto, flag);
+    const fgm::Vector2D actualProjection = fgm::Vector2D<int>::tryProject(vec, onto, flag);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);

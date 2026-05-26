@@ -643,10 +643,10 @@ namespace fgm {
         auto z = _data[2][3];
         auto w = _data[3][3];
 
-        Vector3D<R> s = a.cross(b);
-        Vector3D<R> t = c.cross(d);
-        Vector3D<R> u = y * a - x * b;
-        Vector3D<R> v = w * c - z * d;
+        auto s = a.cross(b);
+        auto t = c.cross(d);
+        auto u = y * a - x * b;
+        auto v = w * c - z * d;
 
         auto det = s.dot(v) + t.dot(u);
         FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
@@ -690,10 +690,10 @@ namespace fgm {
         auto z = _data[2][3];
         auto w = _data[3][3];
 
-        Vector3D<R> s = a.cross(b);
-        Vector3D<R> t = c.cross(d);
-        Vector3D<R> u = y * a - x * b;
-        Vector3D<R> v = w * c - z * d;
+        auto s = a.cross(b);
+        auto t = c.cross(d);
+        auto u = y * a - x * b;
+        auto v = w * c - z * d;
 
         auto det = s.dot(v) + t.dot(u);
 
@@ -749,10 +749,10 @@ namespace fgm {
         auto z = _data[2][3];
         auto w = _data[3][3];
 
-        Vector3D<R> s = a.cross(b);
-        Vector3D<R> t = c.cross(d);
-        Vector3D<R> u = y * a - x * b;
-        Vector3D<R> v = w * c - z * d;
+        auto s = a.cross(b);
+        auto t = c.cross(d);
+        auto u = y * a - x * b;
+        auto v = w * c - z * d;
 
         auto det = s.dot(v) + t.dot(u);
 

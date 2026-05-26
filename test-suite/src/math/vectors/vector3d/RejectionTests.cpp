@@ -550,7 +550,7 @@ TEST(Vector3DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
     const fgm::Vector3D expectedRejection(-3.11111111111111, -7.22222222222222, 8.77777777777777);
 
     // When rejected from another
-    const fgm::Vector3D actualRejection = fgm::Vector3D<float>::safeReject(vec, from);
+    const fgm::Vector3D actualRejection = fgm::Vector3D<int>::safeReject(vec, from);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
@@ -930,7 +930,7 @@ TEST(Vector3DRejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
     fgm::OperationStatus flag;
 
     // When rejected from another
-    const fgm::Vector3D actualRejection = fgm::Vector3D<float>::tryReject(vec, from, flag);
+    const fgm::Vector3D actualRejection = fgm::Vector3D<int>::tryReject(vec, from, flag);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);

@@ -72,7 +72,7 @@ namespace fgm {
          * @param[in] other The source vector to be converted.
          */
         template<Arithmetic U>
-        [[nodiscard]] constexpr Vector2D(const Vector2D<U> &other) noexcept;
+        [[nodiscard]] explicit constexpr Vector2D(const Vector2D<U> &other) noexcept;
 
         /** @} */
 

@@ -518,7 +518,7 @@ TEST(Vector2DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
     const fgm::Vector2D expectedRejection(0.4, -0.2);
 
     // When rejected from another
-    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::safeReject(vec, from);
+    const fgm::Vector2D actualRejection = fgm::Vector2D<int>::safeReject(vec, from);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
@@ -898,7 +898,7 @@ TEST(Vector2DRejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
     fgm::OperationStatus flag;
 
     // When rejected from another
-    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::tryReject(vec, from, flag);
+    const fgm::Vector2D actualRejection = fgm::Vector2D<int>::tryReject(vec, from, flag);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);

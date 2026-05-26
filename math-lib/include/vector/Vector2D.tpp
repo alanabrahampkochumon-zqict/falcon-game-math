@@ -285,10 +285,10 @@ namespace fgm {
         requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D<U> &rhs, const double epsilon) const noexcept {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>) {
-            return Vector2D(_data[0] == rhs[0], _data[1] == rhs[1]);
+            return Vector2D<bool>(_data[0] == rhs[0], _data[1] == rhs[1]);
         } else {
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return Vector2D(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
+            return Vector2D<bool>(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
                             _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
         }
     }
@@ -308,7 +308,7 @@ namespace fgm {
         requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::neq(const Vector2D<U> &rhs, const double epsilon) const noexcept {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>) {
-            return Vector2D(_data[0] != rhs[0], _data[1] != rhs[1]);
+            return Vector2D<bool>(_data[0] != rhs[0], _data[1] != rhs[1]);
         } else {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
             return Vector2D<bool>(_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon),
@@ -337,7 +337,7 @@ namespace fgm {
         requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::gt(const Vector2D<U> &rhs) const noexcept
         requires StrictArithmetic<T> {
-        return Vector2D(_data[0] > rhs[0], _data[1] > rhs[1]);
+        return Vector2D<bool>(_data[0] > rhs[0], _data[1] > rhs[1]);
     }
 
 
@@ -355,7 +355,7 @@ namespace fgm {
         requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::gte(const Vector2D<U> &rhs) const noexcept
         requires StrictArithmetic<T> {
-        return Vector2D(_data[0] >= rhs[0], _data[1] >= rhs[1]);
+        return Vector2D<bool>(_data[0] >= rhs[0], _data[1] >= rhs[1]);
     }
 
 
@@ -373,7 +373,7 @@ namespace fgm {
         requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::lt(const Vector2D<U> &rhs) const noexcept
         requires StrictArithmetic<T> {
-        return Vector2D(_data[0] < rhs[0], _data[1] < rhs[1]);
+        return Vector2D<bool>(_data[0] < rhs[0], _data[1] < rhs[1]);
     }
 
 
@@ -996,10 +996,9 @@ namespace fgm {
     constexpr PromotedVector2D<T, U> Vector2D<T>::safeProjectNorm(const Vector2D<U> &onto) const noexcept
         requires StrictArithmetic<T> {
         using R = PromotedValue_t<T, U>;
-        using MagType = Magnitude<R>;
 
         if (hasNaN() || onto.hasNaN()) {
-            return fgm::vec2d::zero<MagType>;
+            return fgm::vec2d::zero<R>;
         }
 
         return this->dot(onto) * onto;
@@ -1139,7 +1138,7 @@ namespace fgm {
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeReject(const Vector2D<U> &from) const noexcept
         requires StrictArithmetic<T> {
         if (hasNaN() || from.hasNaN()) {
-            return fgm::vec2d::zero<PromotedValue_t<T, U> >;
+            return fgm::vec2d::zero<Magnitude<PromotedValue_t<T, U>>>;
         }
 
         return static_cast<PromotedFloatVector2D<T, U>>(*this) - safeProject(from);
@@ -1185,7 +1184,7 @@ namespace fgm {
         requires StrictArithmetic<T> {
         if (hasNaN() || from.hasNaN()) {
             status = OperationStatus::NANOPERAND;
-            return fgm::vec2d::zero<PromotedValue_t<T, U> >;
+            return fgm::vec2d::zero<Magnitude<PromotedValue_t<T, U>>>;
         }
 
         return static_cast<PromotedFloatVector2D<T, U>>(*this) - this->tryProject(from, status);
