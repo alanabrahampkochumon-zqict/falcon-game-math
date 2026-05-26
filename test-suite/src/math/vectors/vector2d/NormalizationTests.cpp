@@ -114,6 +114,7 @@ TYPED_TEST(Vector2DNormalization, NormalizedVectorIsAlwaysTypedPromotedToFloatin
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
 
+
 #ifdef ENABLE_DEBUG_TESTS
 /**
  * @brief Verify that normalizing a vector with zero magnitude triggers assert in debug mode.
