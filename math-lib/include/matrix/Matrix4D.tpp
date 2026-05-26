@@ -633,9 +633,9 @@ namespace fgm {
         requires SignedStrictArithmetic<T> {
         using R = Magnitude<T>;
 
-        auto a = _data[0].template swizzle<axis::X, axis::Y, axis::Z>();
-        auto b = _data[1].template swizzle<axis::X, axis::Y, axis::Z>();
-        auto c = _data[2].template swizzle<axis::X, axis::Y, axis::Z>();
+        auto a = static_cast<Vector3D<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto b = static_cast<Vector3D<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto c = static_cast<Vector3D<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
 
         auto x = _data[0][3];
@@ -643,7 +643,7 @@ namespace fgm {
         auto z = _data[2][3];
         auto w = _data[3][3];
 
-        auto s = a.cross(b);
+        auto s = static_cast<Vector3D<R>>(a.cross(b));
         auto t = c.cross(d);
         auto u = y * a - x * b;
         auto v = w * c - z * d;
@@ -680,9 +680,9 @@ namespace fgm {
         requires SignedStrictArithmetic<T> {
         using R = Magnitude<T>;
 
-        auto a = _data[0].template swizzle<axis::X, axis::Y, axis::Z>();
-        auto b = _data[1].template swizzle<axis::X, axis::Y, axis::Z>();
-        auto c = _data[2].template swizzle<axis::X, axis::Y, axis::Z>();
+        auto a = static_cast<Vector3D<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto b = static_cast<Vector3D<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto c = static_cast<Vector3D<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
 
         auto x = _data[0][3];
@@ -690,7 +690,7 @@ namespace fgm {
         auto z = _data[2][3];
         auto w = _data[3][3];
 
-        auto s = a.cross(b);
+        auto s = static_cast<Vector3D<R>>(a.cross(b));
         auto t = c.cross(d);
         auto u = y * a - x * b;
         auto v = w * c - z * d;
@@ -739,9 +739,9 @@ namespace fgm {
         requires SignedStrictArithmetic<T> {
         using R = Magnitude<T>;
 
-        auto a = _data[0].template swizzle<axis::X, axis::Y, axis::Z>();
-        auto b = _data[1].template swizzle<axis::X, axis::Y, axis::Z>();
-        auto c = _data[2].template swizzle<axis::X, axis::Y, axis::Z>();
+        auto a = static_cast<Vector3D<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto b = static_cast<Vector3D<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto c = static_cast<Vector3D<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
 
         auto x = _data[0][3];
@@ -749,7 +749,7 @@ namespace fgm {
         auto z = _data[2][3];
         auto w = _data[3][3];
 
-        auto s = a.cross(b);
+        auto s = static_cast<Vector3D<R>>(a.cross(b));
         auto t = c.cross(d);
         auto u = y * a - x * b;
         auto v = w * c - z * d;
