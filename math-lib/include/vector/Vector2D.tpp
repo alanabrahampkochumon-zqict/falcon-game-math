@@ -595,7 +595,6 @@ namespace fgm {
     template<StrictArithmetic S>
     constexpr Vector2D<T> &Vector2D<T>::operator*=(const S scalar) noexcept
         requires StrictArithmetic<T> {
-        // TODO: Update for type promotion.
         _data[0] = static_cast<T>(scalar * _data[0]);
         _data[1] = static_cast<T>(scalar * _data[1]);
         return *this;
