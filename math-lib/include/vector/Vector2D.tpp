@@ -225,6 +225,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector2D<T>::allEq(const Vector2D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
@@ -253,6 +254,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector2D<T>::allEq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.allEq(rhs, epsilon);
@@ -261,6 +263,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector2D<T>::anyNeq(const Vector2D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
@@ -278,6 +281,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector2D<T>::anyNeq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.anyNeq(rhs, epsilon);
@@ -292,6 +296,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector2D<T>::operator==(const Vector2D<U>& rhs) const noexcept
     {
         return this->allEq(rhs);
@@ -299,6 +304,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector2D<T>::operator!=(const Vector2D<U>& rhs) const noexcept
     {
         return this->anyNeq(rhs);
@@ -314,6 +320,7 @@ namespace fgm
     // TODO: Add MSVC NaN check tests + add new implementation as required.
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
@@ -331,6 +338,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::eq(const Vector2D& lhs, const Vector2D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.eq(rhs, epsilon);
@@ -339,6 +347,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::neq(const Vector2D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
@@ -356,6 +365,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::neq(const Vector2D& lhs, const Vector2D<U>& rhs,
                                               const double epsilon) noexcept
     {
@@ -371,6 +381,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::gt(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -380,6 +391,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::gt(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -389,6 +401,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::gte(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -398,6 +411,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::gte(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -407,6 +421,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::lt(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -416,6 +431,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::lt(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -425,6 +441,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::lte(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -436,6 +453,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::lte(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -453,6 +471,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::operator>(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -462,6 +481,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::operator>=(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -471,6 +491,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::operator<(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -480,6 +501,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<bool> Vector2D<T>::operator<=(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -552,6 +574,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::operator+(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -562,6 +585,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<T>& Vector2D<T>::operator+=(const Vector2D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -579,6 +603,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::operator-(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -589,6 +614,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector2D<T>& Vector2D<T>::operator-=(const Vector2D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -793,6 +819,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector2D<T>::dot(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -815,6 +842,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector2D<T>::dot(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -830,6 +858,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector2D<T>::cross(const Vector2D<U>& rhs) const noexcept
     {
         using R = PromotedValue_t<T, U>;
@@ -839,6 +868,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector2D<T>::cross(const Vector2D& lhs, const Vector2D<U>& rhs) noexcept
     {
         return lhs.cross(rhs);
@@ -1019,6 +1049,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::project(const Vector2D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
@@ -1035,6 +1066,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::projectNorm(const Vector2D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
@@ -1044,6 +1076,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::project(const Vector2D& vec, const Vector2D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
@@ -1052,6 +1085,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::projectNorm(const Vector2D& vec, const Vector2D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
@@ -1061,6 +1095,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeProject(const Vector2D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
@@ -1086,6 +1121,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::safeProjectNorm(const Vector2D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
@@ -1103,6 +1139,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeProject(const Vector2D& vec,
                                                                    const Vector2D<U>& onto) noexcept
         requires StrictArithmetic<T>
@@ -1113,6 +1150,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::safeProjectNorm(const Vector2D& vec, const Vector2D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
@@ -1122,6 +1160,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryProject(const Vector2D<U>& onto,
                                                                   OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
@@ -1151,6 +1190,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::tryProjectNorm(const Vector2D<U>& onto,
                                                                  OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
@@ -1171,6 +1211,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryProject(const Vector2D& vec, const Vector2D<U>& onto,
                                                                   OperationStatus& status) noexcept
         requires StrictArithmetic<T>
@@ -1181,6 +1222,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::tryProjectNorm(const Vector2D& vec, const Vector2D<U>& onto,
                                                                  OperationStatus& status) noexcept
         requires StrictArithmetic<T>
@@ -1198,15 +1240,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::reject(const Vector2D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
-        return *this - this->project(from);
+        return static_cast<PromotedFloatVector2D<T, U>>(*this) - this->project(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::rejectNorm(const Vector2D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
@@ -1216,6 +1260,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::reject(const Vector2D& vec, const Vector2D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
@@ -1225,6 +1270,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::rejectNorm(const Vector2D& vector, const Vector2D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
@@ -1234,6 +1280,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeReject(const Vector2D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
@@ -1242,12 +1289,13 @@ namespace fgm
             return fgm::vec2d::zero<PromotedValue_t<T, U>>;
         }
 
-        return *this - safeProject(from);
+        return static_cast<PromotedFloatVector2D<T,U>>(*this) - safeProject(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::safeRejectNorm(const Vector2D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
@@ -1262,6 +1310,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::safeReject(const Vector2D& vec, const Vector2D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
@@ -1271,6 +1320,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::safeRejectNorm(const Vector2D& vec, const Vector2D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
@@ -1280,6 +1330,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryReject(const Vector2D<U>& from,
                                                                  OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
@@ -1290,12 +1341,13 @@ namespace fgm
             return fgm::vec2d::zero<PromotedValue_t<T, U>>;
         }
 
-        return *this - this->tryProject(from, status);
+        return static_cast<PromotedFloatVector2D<T, U>>(*this) - this->tryProject(from, status);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::tryRejectNorm(const Vector2D<U>& from,
                                                                 OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
@@ -1312,6 +1364,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector2D<T, U> Vector2D<T>::tryReject(const Vector2D& vec, const Vector2D<U>& from,
                                                                  OperationStatus& status) noexcept
         requires StrictArithmetic<T>
@@ -1322,6 +1375,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector2D<T, U> Vector2D<T>::tryRejectNorm(const Vector2D& vec, const Vector2D<U>& from,
                                                                 OperationStatus& status) noexcept
         requires StrictArithmetic<T>

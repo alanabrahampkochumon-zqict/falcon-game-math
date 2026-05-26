@@ -1,5 +1,5 @@
 /**
- * @file MathTraits.cpp
+ * @file MathTraitTests.cpp
  * @author Alan Abraham P Kochumon
  * @date Created on: May 25, 2026
  *
@@ -141,7 +141,6 @@ namespace
         static_assert(fgm::StrictSignedness<uint16_t, double> == false);
         static_assert(fgm::StrictSignedness<uint32_t, double> == false);
         static_assert(fgm::StrictSignedness<uint64_t, double> == false);
-
 
         // Signed types
         static_assert(fgm::StrictSignedness<int8_t, int8_t> == true);

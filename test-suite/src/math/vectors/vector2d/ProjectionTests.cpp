@@ -262,7 +262,7 @@ TYPED_TEST(Vector2DProjection, Project_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector2DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector2D projection = fgm::Vector2D<float>::project(this->_vec, this->_ontoVec);
+    [[maybe_unused]] const fgm::Vector2D projection = fgm::Vector2D<TypeParam>::project(this->_vec, this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
@@ -530,7 +530,7 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZe
 {
     const fgm::Vector2D zeroVec = fgm::vec2d::zero<TypeParam>;
 
-    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::safeProject(this->_vec, zeroVec);
+    const fgm::Vector2D actualProjection = fgm::Vector2D<TypeParam>::safeProject(this->_vec, zeroVec);
 
     EXPECT_VEC_ZERO(actualProjection);
 }
@@ -550,7 +550,7 @@ TYPED_TEST(Vector2DProjection, SafeProject_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector2DProjection, StaticWrapper_SafeProject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector2D projection = fgm::Vector2D<float>::safeProject(this->_vec, this->_ontoVec);
+    [[maybe_unused]] const fgm::Vector2D projection = fgm::Vector2D<TypeParam>::safeProject(this->_vec, this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
@@ -892,7 +892,7 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZer
     const fgm::Vector2D zeroVec = fgm::vec2d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
-    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::tryProject(this->_vec, zeroVec, flag);
+    const fgm::Vector2D actualProjection = fgm::Vector2D<TypeParam>::tryProject(this->_vec, zeroVec, flag);
 
     EXPECT_VEC_ZERO(actualProjection);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
@@ -916,7 +916,7 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_TryProject_AlwaysReturnFloatingPoin
 {
     [[maybe_unused]] fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Vector2D projection =
-        fgm::Vector2D<float>::tryProject(this->_vec, this->_ontoVec, flag);
+        fgm::Vector2D<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
