@@ -44,7 +44,7 @@ protected:
         _expectedADotA = static_cast<T>(29);
     }
 };
-/** @brief Test fixture for @ref fgm::Vector3D dot product, parameterized by @ref SupportedArithmeticTypes */
+/** @brief Test fixture for @ref fgm::Vector3D dot product, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector3DDotProduct, SupportedArithmeticTypes);
 
 
@@ -63,8 +63,8 @@ protected:
         _expectedCrossProduct = { T(-3), T(6), T(-3) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector3D cross product, parameterized by @ref SupportedArithmeticTypes */
-TYPED_TEST_SUITE(Vector3DCrossProduct, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector3D cross product, parameterized by @ref SupportedSignedArithmeticTypes. */
+TYPED_TEST_SUITE(Vector3DCrossProduct, SupportedSignedArithmeticTypes);
 
 
 

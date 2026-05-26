@@ -912,10 +912,9 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <StrictArithmetic U>
-        requires StrictSignedness<T, U>
+    template <SignedStrictArithmetic U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::cross(const Vector3D<U>& rhs) const noexcept
-        requires StrictArithmetic<T>
+        requires SignedStrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
         return Vector3D<R>(_data[1] * rhs[2] - _data[2] * rhs[1], _data[2] * rhs[0] - _data[0] * rhs[2],
@@ -924,10 +923,9 @@ namespace fgm
 
 
     template <Arithmetic T>
-    template <StrictArithmetic U>
-        requires StrictSignedness<T, U>
+    template <SignedStrictArithmetic U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::cross(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
-        requires StrictArithmetic<T>
+        requires SignedStrictArithmetic<T>
     {
         return lhs.cross(rhs);
     }

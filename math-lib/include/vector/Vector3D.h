@@ -1091,18 +1091,17 @@ namespace fgm
          *       \f$
          *
          * @note Promotes the result to the wider type using @ref PromotedVector3D<T, U>.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
          *
-         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref SignedStrictArithmetic.
          *
          * @param[in] rhs The vector to compute the cross product with.
          *
          * @return The vector cross product of the two vectors.
          */
-        template <StrictArithmetic U>
-            requires StrictSignedness<T, U>
+        template <SignedStrictArithmetic U>
         constexpr PromotedVector3D<T, U> cross(const Vector3D<U>& rhs) const noexcept
-            requires StrictArithmetic<T>;
+            requires SignedStrictArithmetic<T>;
 
 
         /**
@@ -1113,19 +1112,18 @@ namespace fgm
          *       \f$
          *
          * @note Promotes the result to the wider type using @ref PromotedVector3D<T, U>.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
          *
-         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref SignedStrictArithmetic.
          *
          * @param[in] lhs The vector to compute the cross product with.
          * @param[in] rhs The vector to compute the cross product with.
          *
          * @return The vector cross product of the two vectors.
          */
-        template <StrictArithmetic U>
-            requires StrictSignedness<T, U>
+        template <SignedStrictArithmetic U>
         static constexpr PromotedVector3D<T, U> cross(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
-            requires StrictArithmetic<T>;
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
 
