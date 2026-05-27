@@ -21,8 +21,16 @@ FetchContent_Declare(
         SYSTEM
 )
 
+FetchContent_Declare(
+        sdl3
+        GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+        GIT_TAG d9d5536704d585616d4db3c8ba3c4ff6fc2757e1
+        SYSTEM
+)
+
 FetchContent_MakeAvailable(googletest)
 FetchContent_MakeAvailable(googlebenchmark)
+FetchContent_MakeAvailable(sdl3)
 
 # Group google_test projects into a "Gtest" folder
 set_target_properties(
