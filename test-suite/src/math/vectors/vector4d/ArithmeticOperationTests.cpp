@@ -145,13 +145,13 @@ namespace
 {
     constexpr fgm::Vector4D vecA(1, 2, 3, 4);
     constexpr fgm::Vector4D vecB(5, 12, 5, 3);
-    constexpr auto sumVec = vecA + vecB;
-    constexpr auto diffVec = vecB - vecA;
+    constexpr auto sumVec    = vecA + vecB;
+    constexpr auto diffVec   = vecB - vecA;
     constexpr auto scaledVec = vecA * 2;
-    constexpr auto divVec1 = vecB / 2;
-    constexpr auto divVec2 = vecB.safeDiv(2);
-    constexpr auto divVec3 = fgm::Vector4D<int>::safeDiv(vecB, 2);
-    constexpr auto invVec = -vecA;
+    constexpr auto divVec1   = vecB / 2;
+    constexpr auto divVec2   = vecB.safeDiv(2);
+    constexpr auto divVec3   = fgm::Vector4D<int>::safeDiv(vecB, 2);
+    constexpr auto invVec    = -vecA;
 
     static_assert(sumVec.x() == 6);
     static_assert(sumVec.y() == 14);
@@ -469,6 +469,8 @@ TEST(Vector4DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  *                                    *
  **************************************/
 
+#ifndef ENABLE_DEBUG_TESTS
+
 /**
  * @brief Verify that dividing a float vector by zero returns an
  *       infinity vector of float type.
@@ -489,6 +491,8 @@ TEST(Vector4DScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
     const fgm::Vector4D vec(1.0, 2.0, 3.0, 4.0);
     EXPECT_VEC_INF(vec / 0);
 }
+
+#endif
 
 
 /** @brief Verify that dividing a vector by one returns the original vector. */
@@ -565,6 +569,31 @@ TEST(Vector4DScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWit
 
     EXPECT_VEC_EQ(expected, vec);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+
+/**
+ * @brief Verify that the binary division assignment operator when dividing a vector by zero,
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector4DScalarDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
+{
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), "");
+}
+
+
+/**
+ * @brief Verify that the compound division assignment operator when dividing a vector by zero,
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector4DScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
+{
+    [[maybe_unused]] fgm::Vector4D newVec = this->_vec;
+    EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= 0), "");
+}
+#endif
+
 
 
 /**************************************
@@ -796,13 +825,13 @@ TEST(Vector4DScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorA
 
 
 /**
- * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vector4D::tryDiv returns zero vector and
- *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vector4D::tryDiv returns zero vector
+ * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vector4DScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const auto result = fgm::Vector4D<double>::tryDiv(this->_vec, fgm::constants::NaN, flag);
+    const auto result = fgm::Vector4D<TypeParam>::tryDiv(this->_vec, fgm::constants::NaN, flag);
 
     EXPECT_VEC_ZERO(result);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);

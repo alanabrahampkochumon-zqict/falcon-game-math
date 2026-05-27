@@ -12,7 +12,6 @@
 #include "MatrixTestSetup.h"
 
 
-
 template <typename T>
 class Matrix3DScalarMultiplication: public ::testing::Test
 {
@@ -21,7 +20,6 @@ protected:
     T _scalar;
     fgm::Matrix3D<T> _expectedFloatingMat;
     fgm::Matrix3D<T> _expectedIntegralMat;
-
 
 
     void SetUp() override
@@ -36,6 +34,7 @@ protected:
                                  fgm::Vector3D{ T(10), T(22), T(50) } };
     }
 };
+
 /** @brief Test fixture for @ref fgm::Matrix3D scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Matrix3DScalarMultiplication, SupportedArithmeticTypes);
 
@@ -61,6 +60,7 @@ protected:
         _expectedIntegralRowVector = { T(54), T(25), T(46) };
     }
 };
+
 /** @brief Test fixture for @ref fgm::Matrix3D vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Matrix3DVectorMultiplication, SupportedArithmeticTypes);
 
@@ -85,6 +85,7 @@ protected:
         _expectedRowVector = fgm::Vector3D{ T(0.2358808028522597), T(0.0027566750622143033), T(-0.11238372794829783) };
     }
 };
+
 /**
  * @brief Test fixture for @ref fgm::Matrix3D vector multiplication with small fractions,
  *        parameterized by @ref SupportedFloatingPointTypes.
@@ -115,6 +116,7 @@ protected:
                                  fgm::Vector3D{ T(105), T(90), T(35) } };
     }
 };
+
 /** @brief Test fixture for @ref fgm::Matrix3D matrix multiplication, parameterized by @ref SupportedArithmeticTypes.
 /*/
 TYPED_TEST_SUITE(Matrix3DMultiplication, SupportedArithmeticTypes);
@@ -135,17 +137,17 @@ protected:
                   fgm::Vector3D{ T(0.0123412348958), T(-0.0231423489589), T(0.3829123948324) },
                   fgm::Vector3D{ T(-0.539282348958), T(0.00033423489589), T(-0.8239123948324) } };
 
-        _expectedMat = { fgm::Vector3D{ 0.014059119128298, 0.041399312244975, 0.365409472263106 },
-                         fgm::Vector3D{ 0.009110033561366, 0.209199928556498, -0.354383247645329 },
-                         fgm::Vector3D{ -0.076793880652601, -0.50730904817435, 0.56187467155827 } };
+        _expectedMat = { fgm::Vector3D{ T(0.014059119128298), T(0.041399312244975), T(0.365409472263106) },
+                         fgm::Vector3D{ T(0.009110033561366), T(0.209199928556498), T(-0.354383247645329) },
+                         fgm::Vector3D{ T(-0.076793880652601), T(-0.50730904817435), T(0.56187467155827) } };
     }
 };
+
 /**
  * @brief Test fixture for @ref fgm::Matrix3D matrix multiplication with fractional values(<1),
  *        parameterized by @ref SupportedFloatingPointTypes.
  */
 TYPED_TEST_SUITE(Matrix3DFractionalMultiplication, SupportedFloatingPointTypes);
-
 
 
 /**
@@ -215,7 +217,6 @@ namespace
     static_assert(MAT_PRODUCT(2, 1) == 239);
     static_assert(MAT_PRODUCT(2, 2) == 263);
 } // namespace
-
 
 
 /**************************************
@@ -360,7 +361,6 @@ TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
 }
 
 
-
 /**************************************
  *                                    *
  *    VECTOR MULTIPLICATION TESTS     *
@@ -469,7 +469,6 @@ TEST(Matrix3DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVecto
 }
 
 
-
 /**
  * @brief Verify that the binary vector multiplication operation perform automatic type promotion
  *        to the wider numeric type.
@@ -546,7 +545,6 @@ TEST(Matrix3DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsure
 
     EXPECT_VEC_EQ(expected, vec);
 }
-
 
 
 /**************************************

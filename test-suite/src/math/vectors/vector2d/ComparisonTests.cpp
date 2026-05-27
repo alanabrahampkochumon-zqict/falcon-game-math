@@ -67,7 +67,7 @@ namespace
 {
     constexpr fgm::Vector2D vec1(1, 2);
     constexpr fgm::Vector2D vec2(1, 3);
-    constexpr auto gtVec = vec1 > vec2;
+    constexpr auto gtVec      = vec1 > vec2;
     constexpr auto gtVecMask1 = vec1.gt(vec2);
     constexpr auto gtVecMask2 = fgm::Vector2D<int>::gt(vec1, vec2);
 

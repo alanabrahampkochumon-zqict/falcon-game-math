@@ -44,7 +44,7 @@ protected:
         _expectedADotA = static_cast<T>(29);
     }
 };
-/** @brief Test fixture for @ref fgm::Vector3D dot product, parameterized by @ref SupportedArithmeticTypes */
+/** @brief Test fixture for @ref fgm::Vector3D dot product, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector3DDotProduct, SupportedArithmeticTypes);
 
 
@@ -63,8 +63,8 @@ protected:
         _expectedCrossProduct = { T(-3), T(6), T(-3) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector3D cross product, parameterized by @ref SupportedArithmeticTypes */
-TYPED_TEST_SUITE(Vector3DCrossProduct, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector3D cross product, parameterized by @ref SupportedSignedArithmeticTypes. */
+TYPED_TEST_SUITE(Vector3DCrossProduct, SupportedSignedArithmeticTypes);
 
 
 
@@ -79,12 +79,12 @@ namespace
     constexpr fgm::Vector3D vec1(1, 2, 3);
     constexpr fgm::Vector3D vec2(4, 5, 6);
     constexpr auto dotProductA = vec1.dot(vec2);
-    constexpr auto dotProductB= fgm::Vector3D<int>::dot(vec1, vec2);
+    constexpr auto dotProductB = fgm::Vector3D<int>::dot(vec1, vec2);
     static_assert(dotProductA == 32);
     static_assert(dotProductB == 32);
 
     constexpr auto crossProductA = vec1.cross(vec2);
-    constexpr auto crossProductB= fgm::Vector3D<int>::cross(vec1, vec2);
+    constexpr auto crossProductB = fgm::Vector3D<int>::cross(vec1, vec2);
     static_assert(crossProductA.x() == -3);
     static_assert(crossProductA.y() == 6);
     static_assert(crossProductA.z() == -3);
@@ -371,8 +371,8 @@ TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsRetur
  */
 TYPED_TEST(Vector3DCrossProduct, IsAntiCommutative)
 {
-    fgm::Vector3D crossProduct1 = fgm::Vector3D<float>::cross(this->_vecA, this->_vecB);
-    fgm::Vector3D crossProduct2 = fgm::Vector3D<float>::cross(this->_vecB, this->_vecA);
+    fgm::Vector3D crossProduct1 = fgm::Vector3D<TypeParam>::cross(this->_vecA, this->_vecB);
+    fgm::Vector3D crossProduct2 = fgm::Vector3D<TypeParam>::cross(this->_vecB, this->_vecA);
 
     EXPECT_VEC_EQ(crossProduct1, -1.0f * crossProduct2);
 }
@@ -386,8 +386,8 @@ TYPED_TEST(Vector3DCrossProduct, IsAntiCommutative)
 TYPED_TEST(Vector3DCrossProduct, BetweenParallelVectorIsCommutatives)
 {
     const fgm::Vector3D vecB    = TypeParam(2) * this->_vecA;
-    fgm::Vector3D crossProduct1 = fgm::Vector3D<float>::cross(this->_vecA, vecB);
-    fgm::Vector3D crossProduct2 = fgm::Vector3D<float>::cross(vecB, this->_vecA);
+    fgm::Vector3D crossProduct1 = fgm::Vector3D<TypeParam>::cross(this->_vecA, vecB);
+    fgm::Vector3D crossProduct2 = fgm::Vector3D<TypeParam>::cross(vecB, this->_vecA);
 
     EXPECT_VEC_EQ(crossProduct1, crossProduct2);
 }

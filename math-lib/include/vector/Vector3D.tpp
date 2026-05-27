@@ -219,6 +219,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr T& Vector3D<T>::operator[](const std::size_t idx) noexcept
     {
+        FGM_ASSERT_MSG(idx >= 0 && idx < dimension, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 
@@ -226,6 +227,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr const T& Vector3D<T>::operator[](const std::size_t idx) const noexcept
     {
+        FGM_ASSERT_MSG(idx >= 0 && idx < dimension, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 
@@ -278,6 +280,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector3D<T>::allEq(const Vector3D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
@@ -307,6 +310,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector3D<T>::allEq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.allEq(rhs, epsilon);
@@ -315,6 +319,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector3D<T>::anyNeq(const Vector3D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
@@ -333,6 +338,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector3D<T>::anyNeq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.anyNeq(rhs, epsilon);
@@ -347,6 +353,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector3D<T>::operator==(const Vector3D<U>& rhs) const noexcept
     {
         return this->allEq(rhs);
@@ -354,6 +361,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Vector3D<T>::operator!=(const Vector3D<U>& rhs) const noexcept
     {
         return this->anyNeq(rhs);
@@ -368,24 +376,26 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::eq(const Vector3D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
         {
-            return Vector3D(_data[0] == rhs[0], _data[1] == rhs[1], _data[2] == rhs[2]);
+            return Vector3D<bool>(_data[0] == rhs[0], _data[1] == rhs[1], _data[2] == rhs[2]);
         }
         else
         {
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return Vector3D(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
-                            _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon,
-                            _data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon);
+            return Vector3D<bool>(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
+                                  _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon,
+                                  _data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon);
         }
     }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::eq(const Vector3D& lhs, const Vector3D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.eq(rhs, epsilon);
@@ -394,11 +404,12 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::neq(const Vector3D<U>& rhs, const double epsilon) const noexcept
     {
         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
         {
-            return Vector3D(_data[0] != rhs[0], _data[1] != rhs[1], _data[2] != rhs[2]);
+            return Vector3D<bool>(_data[0] != rhs[0], _data[1] != rhs[1], _data[2] != rhs[2]);
         }
         else
         {
@@ -412,6 +423,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::neq(const Vector3D& lhs, const Vector3D<U>& rhs,
                                               const double epsilon) noexcept
     {
@@ -427,15 +439,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::gt(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector3D(_data[0] > rhs[0], _data[1] > rhs[1], _data[2] > rhs[2]);
+        return Vector3D<bool>(_data[0] > rhs[0], _data[1] > rhs[1], _data[2] > rhs[2]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::gt(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -445,15 +459,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::gte(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector3D(_data[0] >= rhs[0], _data[1] >= rhs[1], _data[2] >= rhs[2]);
+        return Vector3D<bool>(_data[0] >= rhs[0], _data[1] >= rhs[1], _data[2] >= rhs[2]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::gte(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -463,15 +479,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::lt(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vector3D(_data[0] < rhs[0], _data[1] < rhs[1], _data[2] < rhs[2]);
+        return Vector3D<bool>(_data[0] < rhs[0], _data[1] < rhs[1], _data[2] < rhs[2]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::lt(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -481,6 +499,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::lte(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -493,6 +512,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::lte(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -510,6 +530,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::operator>(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -519,6 +540,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::operator>=(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -528,6 +550,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::operator<(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -537,6 +560,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<bool> Vector3D<T>::operator<=(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -609,6 +633,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::operator+(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -619,6 +644,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<T>& Vector3D<T>::operator+=(const Vector3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -637,6 +663,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::operator-(const Vector3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -647,6 +674,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Vector3D<T>& Vector3D<T>::operator-=(const Vector3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -721,11 +749,13 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
             return Vector3D<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor);
         }
         else
         {
+            FGM_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             assert(scalar != 0 && "Integral division by zero");
             R tScalar = static_cast<R>(scalar);
             return Vector3D<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar);
@@ -741,6 +771,7 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
 
             _data[0] = static_cast<T>(factor * _data[0]);
@@ -749,6 +780,7 @@ namespace fgm
         }
         else
         {
+            FGM_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
             _data[0] /= static_cast<T>(scalar);
             _data[1] /= static_cast<T>(scalar);
             _data[2] /= static_cast<T>(scalar);
@@ -847,6 +879,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr auto Vector3D<T>::dot(const Vector3D<U>& rhs) const noexcept -> PromotedValue_t<T, U>
         requires StrictArithmetic<T>
     {
@@ -870,6 +903,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr auto Vector3D<T>::dot(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept -> PromotedValue_t<T, U>
         requires StrictArithmetic<T>
     {
@@ -884,9 +918,9 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    template <StrictArithmetic U>
+    template <SignedStrictArithmetic U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::cross(const Vector3D<U>& rhs) const noexcept
-        requires StrictArithmetic<T>
+        requires SignedStrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
         return Vector3D<R>(_data[1] * rhs[2] - _data[2] * rhs[1], _data[2] * rhs[0] - _data[0] * rhs[2],
@@ -895,9 +929,9 @@ namespace fgm
 
 
     template <Arithmetic T>
-    template <StrictArithmetic U>
+    template <SignedStrictArithmetic U>
     constexpr PromotedVector3D<T, U> Vector3D<T>::cross(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
-    requires StrictArithmetic<T>
+        requires SignedStrictArithmetic<T>
     {
         return lhs.cross(rhs);
     }
@@ -989,7 +1023,10 @@ namespace fgm
     constexpr Vector3D<Magnitude<T>> Vector3D<T>::normalize() const noexcept
         requires StrictArithmetic<T>
     {
-        return *this / mag();
+        const auto magnitude = mag();
+        FGM_ASSERT_MSG(magnitude >= fgm::Config::EPSILON<decltype(magnitude)>,
+                       fgm::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
+        return *this / magnitude;
     }
 
 
@@ -1066,18 +1103,25 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::project(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
 
         /** @note Static cast ensures integral type dots don't lose much precision */
-        return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
+        const auto b2 = static_cast<Magnitude<R>>(onto.dot(onto));
+
+        FGM_ASSERT_MSG(b2 >= fgm::Config::EPSILON_SQUARE<Magnitude<R>>,
+                       fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
+
+        return this->dot(onto) / b2 * onto; // a.dot(b) / b.dot(b) * b
     }
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::projectNorm(const Vector3D<U>& onto) const noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::projectNorm(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
         return this->dot(onto) * onto; // a.dot(b) * b
@@ -1086,6 +1130,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::project(const Vector3D& vec, const Vector3D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
@@ -1095,8 +1140,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::projectNorm(const Vector3D& vec,
-                                                                   const Vector3D<U>& onto) noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::projectNorm(const Vector3D& vec, const Vector3D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
         return vec.projectNorm(onto);
@@ -1105,6 +1150,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProject(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
@@ -1129,15 +1175,15 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D<U>& onto) const noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D<U>& onto) const noexcept
         requires StrictArithmetic<T>
     {
-        using R       = PromotedValue_t<T, U>;
-        using MagType = Magnitude<R>;
+        using R = PromotedValue_t<T, U>;
 
         if (hasNaN() || onto.hasNaN())
         {
-            return fgm::vec3d::zero<MagType>;
+            return fgm::vec3d::zero<R>;
         }
         return this->dot(onto) * onto;
     }
@@ -1145,6 +1191,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProject(const Vector3D& vec,
                                                                    const Vector3D<U>& onto) noexcept
         requires StrictArithmetic<T>
@@ -1155,8 +1202,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D& vec,
-                                                                       const Vector3D<U>& onto) noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::safeProjectNorm(const Vector3D& vec, const Vector3D<U>& onto) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeProjectNorm(onto);
@@ -1165,6 +1212,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryProject(const Vector3D<U>& onto,
                                                                   OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
@@ -1195,8 +1243,9 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryProjectNorm(const Vector3D<U>& onto,
-                                                                      OperationStatus& status) const noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::tryProjectNorm(const Vector3D<U>& onto,
+                                                                 OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R       = PromotedValue_t<T, U>;
@@ -1214,6 +1263,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryProject(const Vector3D& vec, const Vector3D<U>& onto,
                                                                   OperationStatus& status) noexcept
         requires StrictArithmetic<T>
@@ -1224,8 +1274,9 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryProjectNorm(const Vector3D& vec, const Vector3D<U>& onto,
-                                                                      OperationStatus& status) noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::tryProjectNorm(const Vector3D& vec, const Vector3D<U>& onto,
+                                                                 OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
         return vec.tryProjectNorm(onto, status);
@@ -1240,16 +1291,18 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::reject(const Vector3D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
-        return *this - this->project(from);
+        return static_cast<PromotedFloatVector3D<T, U>>(*this) - this->project(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::rejectNorm(const Vector3D<U>& from) const noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::rejectNorm(const Vector3D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
         return *this - this->projectNorm(from);
@@ -1258,6 +1311,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::reject(const Vector3D& vector, const Vector3D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
@@ -1267,8 +1321,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::rejectNorm(const Vector3D& vector,
-                                                                  const Vector3D<U>& from) noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::rejectNorm(const Vector3D& vector, const Vector3D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
         return vector.rejectNorm(from);
@@ -1277,21 +1331,23 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeReject(const Vector3D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
         {
-            return fgm::vec3d::zero<PromotedValue_t<T, U>>;
+            return fgm::vec3d::zero<Magnitude<PromotedValue_t<T, U>>>;
         }
 
-        return *this - safeProject(from);
+        return static_cast<PromotedFloatVector3D<T, U>>(*this) - safeProject(from);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeRejectNorm(const Vector3D<U>& from) const noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::safeRejectNorm(const Vector3D<U>& from) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1305,6 +1361,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeReject(const Vector3D& vec, const Vector3D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
@@ -1314,8 +1371,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::safeRejectNorm(const Vector3D& vec,
-                                                                      const Vector3D<U>& from) noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::safeRejectNorm(const Vector3D& vec, const Vector3D<U>& from) noexcept
         requires StrictArithmetic<T>
     {
         return vec.safeRejectNorm(from);
@@ -1324,6 +1381,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryReject(const Vector3D<U>& from,
                                                                  OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
@@ -1331,17 +1389,18 @@ namespace fgm
         if (hasNaN() || from.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::vec3d::zero<PromotedValue_t<T, U>>;
+            return fgm::vec3d::zero<Magnitude<PromotedValue_t<T, U>>>;
         }
 
-        return *this - this->tryProject(from, status);
+        return static_cast<PromotedFloatVector3D<T, U>>(*this) - this->tryProject(from, status);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryRejectNorm(const Vector3D<U>& from,
-                                                                     OperationStatus& status) const noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::tryRejectNorm(const Vector3D<U>& from,
+                                                                OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1356,6 +1415,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryReject(const Vector3D& vec, const Vector3D<U>& from,
                                                                  OperationStatus& status) noexcept
         requires StrictArithmetic<T>
@@ -1366,8 +1426,9 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
-    constexpr PromotedFloatVector3D<T, U> Vector3D<T>::tryRejectNorm(const Vector3D& vec, const Vector3D<U>& from,
-                                                                     OperationStatus& status) noexcept
+        requires StrictSignedness<T, U>
+    constexpr PromotedVector3D<T, U> Vector3D<T>::tryRejectNorm(const Vector3D& vec, const Vector3D<U>& from,
+                                                                OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     {
         return vec.tryRejectNorm(from, status);

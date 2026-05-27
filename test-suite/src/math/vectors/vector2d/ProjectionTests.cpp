@@ -56,7 +56,7 @@ INSTANTIATE_TEST_SUITE_P(Vector2DProjectionTestSuite, Vector2DProjectionNaNTests
  */
 
 /** @brief Verify that vector projection is available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Vector2D vecA(1, 2);
     constexpr fgm::Vector2D vecB(1, 0);
@@ -91,7 +91,7 @@ namespace
     constexpr auto proj8 = fgm::Vector2D<int>::safeProjectNorm(vecA, vecB);
     static_assert(proj8.x() == 1);
     static_assert(proj8.y() == 0);
-}
+} // namespace
 
 /**************************************
  *                                    *
@@ -262,9 +262,33 @@ TYPED_TEST(Vector2DProjection, Project_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector2DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector2D projection = fgm::Vector2D<float>::project(this->_vec, this->_ontoVec);
+    [[maybe_unused]] const fgm::Vector2D projection = fgm::Vector2D<TypeParam>::project(this->_vec, this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that projecting a vector onto zero vector triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DProjection, ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector2D<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.project(zeroVec)), "");
+}
+
+
+/**
+ * @brief Verify that projecting a vector onto zero vector using static variant of @ref fgm::Vector2D::project
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DProjection, StaticWrapper_ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector2D<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector2D<TypeParam>::project(this->_vec, zeroVec)), "");
+}
+
+#endif
 
 
 /**************************************
@@ -304,8 +328,8 @@ TEST(Vector2DProjection, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNo
 }
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector2D::safeProjectNorm
- *       returns a zero vector.
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * fgm::Vector2D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector2DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 {
@@ -321,8 +345,8 @@ TEST(Vector2DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 }
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector2D::safeProjectNorm
- *       returns a zero vector.
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * fgm::Vector2D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector2DProjection, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
 {
@@ -489,7 +513,7 @@ TEST(Vector2DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTy
     const fgm::Vector2D expectedProjection(6.6, 13.2);
 
     // When projected onto another
-    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::safeProject(vec, onto);
+    const fgm::Vector2D actualProjection = fgm::Vector2D<int>::safeProject(vec, onto);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
@@ -506,7 +530,7 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZe
 {
     const fgm::Vector2D zeroVec = fgm::vec2d::zero<TypeParam>;
 
-    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::safeProject(this->_vec, zeroVec);
+    const fgm::Vector2D actualProjection = fgm::Vector2D<TypeParam>::safeProject(this->_vec, zeroVec);
 
     EXPECT_VEC_ZERO(actualProjection);
 }
@@ -526,7 +550,7 @@ TYPED_TEST(Vector2DProjection, SafeProject_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector2DProjection, StaticWrapper_SafeProject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector2D projection = fgm::Vector2D<float>::safeProject(this->_vec, this->_ontoVec);
+    [[maybe_unused]] const fgm::Vector2D projection = fgm::Vector2D<TypeParam>::safeProject(this->_vec, this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
@@ -848,7 +872,7 @@ TEST(Vector2DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTyp
     fgm::OperationStatus flag;
 
     // When projected onto another
-    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::tryProject(vec, onto, flag);
+    const fgm::Vector2D actualProjection = fgm::Vector2D<int>::tryProject(vec, onto, flag);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
@@ -868,7 +892,7 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZer
     const fgm::Vector2D zeroVec = fgm::vec2d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
-    const fgm::Vector2D actualProjection = fgm::Vector2D<float>::tryProject(this->_vec, zeroVec, flag);
+    const fgm::Vector2D actualProjection = fgm::Vector2D<TypeParam>::tryProject(this->_vec, zeroVec, flag);
 
     EXPECT_VEC_ZERO(actualProjection);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
@@ -892,7 +916,7 @@ TYPED_TEST(Vector2DProjection, StaticWrapper_TryProject_AlwaysReturnFloatingPoin
 {
     [[maybe_unused]] fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Vector2D projection =
-        fgm::Vector2D<float>::tryProject(this->_vec, this->_ontoVec, flag);
+        fgm::Vector2D<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 

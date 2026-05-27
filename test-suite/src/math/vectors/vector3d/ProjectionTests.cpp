@@ -293,9 +293,34 @@ TYPED_TEST(Vector3DProjection, Project_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector3DProjection, StaticWrapper_Project_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector3D projection = fgm::Vector3D<float>::project(this->_vec, this->_ontoVec);
+    [[maybe_unused]] const fgm::Vector3D projection = fgm::Vector3D<TypeParam>::project(this->_vec, this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that projecting a vector onto zero vector triggers assert in debug mode.
+ */
+TYPED_TEST(Vector3DProjection, ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector3D<TypeParam> zeroVec(0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.project(zeroVec)), "");
+}
+
+
+/**
+ * @brief Verify that projecting a vector onto zero vector using static variant of @ref fgm::Vector3D::project
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector3DProjection, StaticWrapper_ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector3D<TypeParam> zeroVec(0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector3D<TypeParam>::project(this->_vec, zeroVec)), "");
+}
+
+#endif
+
 
 
 /**************************************
@@ -336,8 +361,8 @@ TEST(Vector3DProjection, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNo
 
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector3D::safeProjectNorm
- *       returns a zero vector.
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * fgm::Vector3D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector3DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 {
@@ -354,8 +379,8 @@ TEST(Vector3DProjection, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vector3D::safeProjectNorm
- *       returns a zero vector.
+ * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * fgm::Vector3D::safeProjectNorm returns a zero vector.
  */
 TEST(Vector3DProjection, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
 {
@@ -522,7 +547,7 @@ TEST(Vector3DProjection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTy
     const fgm::Vector3D expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
 
     // When projected onto another
-    const fgm::Vector3D actualProjection = fgm::Vector3D<float>::safeProject(vec, onto);
+    const fgm::Vector3D actualProjection = fgm::Vector3D<int>::safeProject(vec, onto);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
@@ -539,7 +564,7 @@ TYPED_TEST(Vector3DProjection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZe
 {
     const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
 
-    const fgm::Vector3D actualProjection = fgm::Vector3D<float>::safeProject(this->_vec, zeroVec);
+    const fgm::Vector3D actualProjection = fgm::Vector3D<TypeParam>::safeProject(this->_vec, zeroVec);
 
     EXPECT_VEC_ZERO(actualProjection);
 }
@@ -559,7 +584,7 @@ TYPED_TEST(Vector3DProjection, SafeProject_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector3DProjection, StaticWrapper_SafeProject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector3D projection = fgm::Vector3D<float>::safeProject(this->_vec, this->_ontoVec);
+    [[maybe_unused]] const fgm::Vector3D projection = fgm::Vector3D<TypeParam>::safeProject(this->_vec, this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
@@ -880,7 +905,7 @@ TEST(Vector3DProjection, StaticWrapper_TryProject_MixedTypeProjectionPromotesTyp
     fgm::OperationStatus flag;
 
     // When projected onto another
-    const fgm::Vector3D actualProjection = fgm::Vector3D<float>::tryProject(vec, onto, flag);
+    const fgm::Vector3D actualProjection = fgm::Vector3D<int>::tryProject(vec, onto, flag);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
@@ -900,7 +925,7 @@ TYPED_TEST(Vector3DProjection, StaticWrapper_TryProject_OntoZeroVectorReturnsZer
     const fgm::Vector3D zeroVec = fgm::vec3d::zero<TypeParam>;
     fgm::OperationStatus flag;
 
-    const fgm::Vector3D actualProjection = fgm::Vector3D<float>::tryProject(this->_vec, zeroVec, flag);
+    const fgm::Vector3D actualProjection = fgm::Vector3D<TypeParam>::tryProject(this->_vec, zeroVec, flag);
 
     EXPECT_VEC_ZERO(actualProjection);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
@@ -924,7 +949,7 @@ TYPED_TEST(Vector3DProjection, StaticWrapper_TryProject_AlwaysReturnFloatingPoin
 {
     [[maybe_unused]] fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Vector3D projection =
-        fgm::Vector3D<float>::tryProject(this->_vec, this->_ontoVec, flag);
+        fgm::Vector3D<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 

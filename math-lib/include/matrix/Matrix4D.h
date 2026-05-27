@@ -231,6 +231,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool allEq(const Matrix4D<U>& rhs,
                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
@@ -255,6 +256,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr bool allEq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                           std::is_same_v<U, double>
@@ -279,6 +281,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool anyNeq(const Matrix4D<U>& rhs,
                                             double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
@@ -303,6 +306,7 @@ namespace fgm
          * @return True if all elements are equivalent within @p epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr bool anyNeq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                            std::is_same_v<U, double>
@@ -323,6 +327,7 @@ namespace fgm
          * @return True if all elements are equivalent within the default epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool operator==(const Matrix4D<U>& rhs) const noexcept;
 
 
@@ -339,6 +344,7 @@ namespace fgm
          * @return True if any of the elements are not equivalent within the default epsilon.
          */
         template <Arithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool operator!=(const Matrix4D<U>& rhs) const noexcept;
 
         /** @} */
@@ -363,6 +369,7 @@ namespace fgm
          * @return A new @ref Matrix4D containing the element-wise sum.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator+(const Matrix4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -379,6 +386,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         Matrix4D& operator+=(const Matrix4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
@@ -396,6 +404,7 @@ namespace fgm
          * @return A new @ref Matrix4D containing the element-wise difference.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator-(const Matrix4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -412,6 +421,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr Matrix4D& operator-=(const Matrix4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
@@ -478,6 +488,7 @@ namespace fgm
          * @return A new @ref Vector4D with applied linear transformations.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVector4D<T, U> operator*(const Vector4D<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
@@ -517,6 +528,7 @@ namespace fgm
          * @return A new @ref Matrix4D containing the composition of linear transformations.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator*(const Matrix4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -555,6 +567,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr Matrix4D& operator*=(const Matrix4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
@@ -667,8 +680,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix4D<T, S> tryDiv(
-            S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4D<T, S> tryDiv(S scalar, OperationStatus& status,
+                                                              const Matrix4D& fallback = Matrix4D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1234,7 +1247,7 @@ namespace fgm
     /**
      * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
      *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.

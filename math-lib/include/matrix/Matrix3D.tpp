@@ -133,6 +133,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::allEq(const Matrix3D<U>& rhs, const double epsilon) const noexcept
     {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
@@ -153,6 +154,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::allEq(const Matrix3D& lhs, const Matrix3D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.allEq(rhs, epsilon);
@@ -160,6 +162,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::anyNeq(const Matrix3D<U>& rhs, const double epsilon) const noexcept
     {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
@@ -180,6 +183,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::anyNeq(const Matrix3D& lhs, const Matrix3D<U>& rhs, const double epsilon) noexcept
     {
         return lhs.anyNeq(rhs, epsilon);
@@ -188,6 +192,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::operator==(const Matrix3D<U>& rhs) const noexcept
     {
         return allEq(rhs);
@@ -196,6 +201,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
+        requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::operator!=(const Matrix3D<U>& rhs) const noexcept
     {
         return anyNeq(rhs);
@@ -211,6 +217,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator+(const Matrix3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -221,6 +228,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     Matrix3D<T>& Matrix3D<T>::operator+=(const Matrix3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -233,6 +241,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator-(const Matrix3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -243,6 +252,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Matrix3D<T>& Matrix3D<T>::operator-=(const Matrix3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -284,6 +294,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedVector3D<T, U> Matrix3D<T>::operator*(const Vector3D<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
@@ -408,6 +419,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr PromotedMatrix3D<T, U> Matrix3D<T>::operator*(const Matrix3D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -418,13 +430,14 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     constexpr Matrix3D<T>& Matrix3D<T>::operator*=(const Matrix3D<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
-        _data[0]       = mat[0];
-        _data[1]       = mat[1];
-        _data[2]       = mat[2];
+        _data[0]       = static_cast<Vector3D<T>>(mat[0]);
+        _data[1]       = static_cast<Vector3D<T>>(mat[1]);
+        _data[2]       = static_cast<Vector3D<T>>(mat[2]);
         return *this;
     }
 
@@ -503,7 +516,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix3D<T, S> Matrix3D<T>::safeDiv(const Matrix3D& mat, const S scalar,
-                                                               const Matrix3D& fallback) noexcept
+                                                          const Matrix3D& fallback) noexcept
         requires StrictArithmetic<T>
     {
         return mat.safeDiv(scalar, fallback);
@@ -513,7 +526,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix3D<T, S> Matrix3D<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                              const Matrix3D& fallback) const noexcept
+                                                         const Matrix3D& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -551,9 +564,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::tryDiv(const Matrix3D& mat, const S scalar,
-                                                              OperationStatus& status,
-                                                              const Matrix3D& fallback) noexcept
+    constexpr PromotedMatrix3D<T, S> Matrix3D<T>::tryDiv(const Matrix3D& mat, const S scalar, OperationStatus& status,
+                                                         const Matrix3D& fallback) noexcept
         requires StrictArithmetic<T>
     {
         return mat.tryDiv(scalar, status, fallback);
@@ -615,9 +627,9 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        const Vector3D<R> row0 = _data[1].cross(_data[2]); // b X c
-        const Vector3D<R> row1 = _data[2].cross(_data[0]); // c X a
-        const Vector3D<R> row2 = _data[0].cross(_data[1]); // a X b
+        const auto row0 = static_cast<Vector3D<R>>(_data[1].cross(_data[2])); // b X c
+        const auto row1 = static_cast<Vector3D<R>>(_data[2].cross(_data[0])); // c X a
+        const auto row2 = static_cast<Vector3D<R>>(_data[0].cross(_data[1])); // a X b
 
         // Since the cross product is already computed, it takes less operation compared to calling determinant.
         R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
@@ -644,9 +656,9 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        const Vector3D<R> row0 = _data[1].cross(_data[2]); // b X c
-        const Vector3D<R> row1 = _data[2].cross(_data[0]); // c X a
-        const Vector3D<R> row2 = _data[0].cross(_data[1]); // a X b
+        const auto row0 = static_cast<Vector3D<R>>(_data[1].cross(_data[2])); // b X c
+        const auto row1 = static_cast<Vector3D<R>>(_data[2].cross(_data[0])); // c X a
+        const auto row2 = static_cast<Vector3D<R>>(_data[0].cross(_data[1])); // a X b
 
         // Since the cross product is already computed, it takes less operation compared to calling determinant.
         R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
@@ -690,9 +702,9 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        const Vector3D<R> row0 = _data[1].cross(_data[2]); // b X c
-        const Vector3D<R> row1 = _data[2].cross(_data[0]); // c X a
-        const Vector3D<R> row2 = _data[0].cross(_data[1]); // a X b
+        const auto row0 = static_cast<Vector3D<R>>(_data[1].cross(_data[2])); // b X c
+        const auto row1 = static_cast<Vector3D<R>>(_data[2].cross(_data[0])); // c X a
+        const auto row2 = static_cast<Vector3D<R>>(_data[0].cross(_data[1])); // a X b
 
         // Since the cross product is already computed, it takes less operation compared to calling determinant.
         R det = _data[0].dot(row0); // a.(b X c) Scalar triple product

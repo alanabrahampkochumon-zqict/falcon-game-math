@@ -13,6 +13,14 @@
 
 
 
+#ifdef ENABLE_DEBUG_TESTS
+class Vector3DIndexing: public testing::TestWithParam<std::size_t>
+{};
+INSTANTIATE_TEST_SUITE_P(Vector2DTests, Vector3DIndexing, testing::Values(4, 5, 100));
+#endif
+
+
+
 /**
  * @addtogroup T_FGM_Vec3_Access
  * @{
@@ -92,6 +100,17 @@ TEST(Vector3DAccess, AccessibleAsArray)
     EXPECT_FLOAT_EQ(6.0f, vec[2]);
 }
 
+
+#ifdef ENABLE_DEBUG_TESTS
+/** @brief Verify that @ref fgm::Vector3D out-of-bounds access triggers assert in debug mode. */
+TEST_P(Vector3DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+{
+    const fgm::Vector3D vec(1, 2, 3);
+    const auto index = GetParam();
+    EXPECT_DEBUG_DEATH(vec[index], "");
+}
+#endif
+
 /** @} */
 
 
@@ -165,5 +184,15 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingIndex)
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
     EXPECT_FLOAT_EQ(6.0f, vec[2]);
 }
+
+#ifdef ENABLE_DEBUG_TESTS
+/** @brief Verify that @ref fgm::Vector3D out-of-bounds mutation triggers assert in debug mode. */
+TEST_P(Vector3DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+{
+    fgm::Vector3D vec(1, 2, 3);
+    const auto index = GetParam();
+    EXPECT_DEBUG_DEATH(vec[index] = 2, "");
+}
+#endif
 
 /** @} */

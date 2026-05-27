@@ -75,7 +75,7 @@ INSTANTIATE_TEST_SUITE_P(Vector3DNormalizationNaNTestSuite, Vector3DNormalizatio
 namespace
 {
     // TODO: Add static tests after making sqrt constexpr
-    //constexpr fgm::Vector3D vec(14, 27, 83);
+    // constexpr fgm::Vector3D vec(14, 27, 83);
     // constexpr auto norm = vec.normalize();
 } // namespace
 
@@ -116,6 +116,31 @@ TYPED_TEST(Vector3DNormalization, NormalizedVectorIsAlwaysTypedPromotedToFloatin
     [[maybe_unused]] const auto normalized = this->_vec.normalize();
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that normalizing a vector with zero magnitude triggers assert in debug mode.
+ */
+TYPED_TEST(Vector3DNormalization, ZeroMagnitudeTriggersAssertInDebugMode)
+{
+    const fgm::Vector3D<TypeParam> zVec(0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(zVec.normalize()), "");
+}
+
+
+/**
+ * @brief Verify that normalizing a vector with zero magnitude using static variant of fgm::Vector4D::normalize triggers
+ *        assert in debug mode.
+ */
+TYPED_TEST(Vector3DNormalization, StaticWrapper_ZeroMagnitudeTriggersAssertInDebugMode)
+{
+    const fgm::Vector3D<TypeParam> zVec(0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector3D<TypeParam>::normalize(zVec)), "");
+}
+
+#endif
+
 
 
 /**************************************
@@ -180,7 +205,7 @@ TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorRetur
  */
 TYPED_TEST(Vector3DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
 {
-    EXPECT_VEC_ZERO(fgm::Vector3D<double>::safeNormalize(fgm::vec3d::zero<TypeParam>));
+    EXPECT_VEC_ZERO(fgm::Vector3D<TypeParam>::safeNormalize(fgm::vec3d::zero<TypeParam>));
 }
 
 

@@ -271,9 +271,33 @@ TYPED_TEST(Vector2DRejection, Reject_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector2DRejection, StaticWrapper_Reject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector2D rejection = fgm::Vector2D<float>::reject(this->_vec, this->_fromVec);
+    [[maybe_unused]] const fgm::Vector2D rejection = fgm::Vector2D<TypeParam>::reject(this->_vec, this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
+
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that rejecting a vector from a zero vector triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DRejection, FromZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector2D<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.reject(zeroVec)), "");
+}
+
+
+/**
+ * @brief Verify that rejecting a vector from a zero vector using static variant of @ref fgm::Vector2D::project
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DRejection, StaticWrapper_FromZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector2D<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector2D<TypeParam>::reject(this->_vec, zeroVec)), "");
+}
+
+#endif
+
 
 
 /**************************************
@@ -518,7 +542,7 @@ TEST(Vector2DRejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
     const fgm::Vector2D expectedRejection(0.4, -0.2);
 
     // When rejected from another
-    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::safeReject(vec, from);
+    const fgm::Vector2D actualRejection = fgm::Vector2D<int>::safeReject(vec, from);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
@@ -555,7 +579,7 @@ TYPED_TEST(Vector2DRejection, SafeReject_AlwaysReturnFloatingPointVector)
  */
 TYPED_TEST(Vector2DRejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vector2D rejection = fgm::Vector2D<float>::safeReject(this->_vec, this->_fromVec);
+    [[maybe_unused]] const fgm::Vector2D rejection = fgm::Vector2D<TypeParam>::safeReject(this->_vec, this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
@@ -898,7 +922,7 @@ TEST(Vector2DRejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
     fgm::OperationStatus flag;
 
     // When rejected from another
-    const fgm::Vector2D actualRejection = fgm::Vector2D<float>::tryReject(vec, from, flag);
+    const fgm::Vector2D actualRejection = fgm::Vector2D<int>::tryReject(vec, from, flag);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
@@ -942,7 +966,7 @@ TYPED_TEST(Vector2DRejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointV
 {
     [[maybe_unused]] fgm::OperationStatus status;
     [[maybe_unused]] const fgm::Vector2D rejection =
-        fgm::Vector2D<float>::tryReject(this->_vec, this->_fromVec, status);
+        fgm::Vector2D<TypeParam>::tryReject(this->_vec, this->_fromVec, status);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 

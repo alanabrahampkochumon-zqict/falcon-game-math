@@ -48,9 +48,9 @@ TYPED_TEST_SUITE(Vector2DIntegralUtility, SupportedIntegralTypes);
  */
 
 /** @brief Verify that vector utilities are available at compile time. */
-namespace 
+namespace
 {
-    constexpr fgm::Vector2D normVec(1, 2);
+    constexpr fgm::Vector2D normVec(1.0f, 2.0f);
     constexpr fgm::Vector2D infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
     constexpr fgm::Vector2D nanVec(fgm::constants::NaN, fgm::constants::NaN);
 
@@ -70,7 +70,7 @@ namespace
     static_assert(fgm::Vector2D<float>::hasNaN(infVec) == false);
     static_assert(fgm::Vector2D<float>::hasNaN(nanVec) == true);
 
-}
+} // namespace
 
 /**************************************
  *                                    *

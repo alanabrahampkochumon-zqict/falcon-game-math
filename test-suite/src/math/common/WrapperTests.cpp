@@ -111,10 +111,7 @@ TYPED_TEST(AbsTestUnsigned, ReturnsAbsoluteValue)
  * @brief Verify that taking absolute value of both signed and unsigned numbers
  *        using @ref fgm::abs returns the absolute value.
  */
-TYPED_TEST(AbsTest, ReturnsAbsoluteValue)
-{
-    testutils::EXPECT_MAG_EQ(this->_expectedAbsValue, fgm::abs(this->_value));
-}
+TYPED_TEST(AbsTest, ReturnsAbsoluteValue) { testutils::EXPECT_MAG_EQ(this->_expectedAbsValue, fgm::abs(this->_value)); }
 
 
 /**************************************

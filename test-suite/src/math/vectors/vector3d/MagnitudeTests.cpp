@@ -29,8 +29,8 @@ protected:
 
     void SetUp() override
     {
-        _vec               = { T(9), T(6), T(2) };
-        _expectedMagnitude = fgm::Magnitude<T>(11);
+        _vec                     = { T(9), T(6), T(2) };
+        _expectedMagnitude       = fgm::Magnitude<T>(11);
         _expectedMagnitudeSquare = T(121);
     }
 };

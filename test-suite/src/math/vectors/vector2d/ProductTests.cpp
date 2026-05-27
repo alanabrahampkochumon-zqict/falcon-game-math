@@ -63,8 +63,8 @@ protected:
         _expectedCrossProduct = T(12);
     }
 };
-/** @brief Test fixture for @ref fgm::Vector2D cross product, parameterized by @ref SupportedArithmeticTypes */
-TYPED_TEST_SUITE(Vector2DCrossProduct, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector2D cross product, parameterized by @ref SupportedSignedArithmeticTypes */
+TYPED_TEST_SUITE(Vector2DCrossProduct, SupportedSignedArithmeticTypes);
 
 
 
@@ -80,7 +80,7 @@ TYPED_TEST_SUITE(Vector2DCrossProduct, SupportedArithmeticTypes);
  **************************************/
 
 /** @brief Verify that vector geometric product operations are available at compile time. */
-namespace 
+namespace
 {
     constexpr fgm::Vector2D vec1(1, 2);
     constexpr fgm::Vector2D vec2(3, 4);
@@ -88,13 +88,13 @@ namespace
     constexpr auto dotProductB = fgm::Vector2D<int>::dot(vec1, vec2);
     static_assert(dotProductA == 11);
     static_assert(dotProductB == 11);
-    
+
     constexpr auto crossProductA = vec1.cross(vec2);
     constexpr auto crossProductB = fgm::Vector2D<int>::cross(vec1, vec2);
     static_assert(crossProductA == -2);
     static_assert(crossProductB == -2);
 
-}
+} // namespace
 
 
 /**************************************

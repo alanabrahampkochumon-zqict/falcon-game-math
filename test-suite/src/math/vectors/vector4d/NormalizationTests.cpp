@@ -12,7 +12,6 @@
 #include "Vector4DTestSetup.h"
 
 
-
 /**************************************
  *                                    *
  *               SETUP                *
@@ -24,6 +23,7 @@ class Vector4DNormalization: public ::testing::Test
 {
     using R = fgm::Magnitude<T>;
 
+
 protected:
     fgm::Vector4D<T> _vec;
     fgm::Vector4D<R> _expectedUnitVec;
@@ -31,10 +31,11 @@ protected:
     void SetUp() override
     {
         _vec             = { T(14), T(27), T(83), T(52) };
-        _expectedUnitVec = { static_cast<R>(0.13650905255670645), static_cast<R>(0.2632674585022196),
-                             static_cast<R>(0.8093036687290455), static_cast<R>(0.5070336237820525) };
+        _expectedUnitVec = { R(0.13650905255670645), R(0.2632674585022196), R(0.8093036687290455),
+                             R(0.5070336237820525) };
     }
 };
+
 /** @brief Test fixture for @ref fgm::Vector4D normalization, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector4DNormalization, SupportedArithmeticTypes);
 
@@ -47,6 +48,7 @@ protected:
 
     void SetUp() override { _vec = { T(0), T(0), T(0), T(0) }; }
 };
+
 /**
  * @brief Test fixture for @ref fgm::Vector4D zero-vector normalization, parameterized by
  * @ref SupportedArithmeticTypes.
@@ -57,6 +59,7 @@ TYPED_TEST_SUITE(Vector4DZeroNormalization, SupportedArithmeticTypes);
 /** @brief Test fixture for @ref fgm::Vector4D normalization with NaN vectors. */
 class Vector4DNormalizationNaNTests: public ::testing::TestWithParam<fgm::Vector4D<float>>
 {};
+
 INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNormalizationNaNTests,
                          ::testing::Values(fgm::Vector4D<float>(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
                                            fgm::Vector4D<float>(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
@@ -64,7 +67,6 @@ INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNormalizatio
                                            fgm::Vector4D<float>(1.0f, 1.0f, 1.0f, fgm::constants::NaN),
                                            fgm::Vector4D<float>(fgm ::constants::NaN, fgm::constants::NaN,
                                                                 fgm ::constants::NaN, fgm ::constants::NaN)));
-
 
 
 /**
@@ -76,7 +78,7 @@ INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNormalizatio
 namespace
 {
     // TODO: Add static tests after making sqrt constexpr
-    //constexpr fgm::Vector4D vec(14, 27, 83, 52);
+    // constexpr fgm::Vector4D vec(14, 27, 83, 52);
     // constexpr auto norm = vec.normalize();
 } // namespace
 
@@ -117,6 +119,32 @@ TYPED_TEST(Vector4DNormalization, NormalizedVectorIsAlwaysTypedPromotedToFloatin
     [[maybe_unused]] const auto normalized = this->_vec.normalize();
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+
+/**
+ * @brief Verify that normalizing a vector with zero magnitude triggers assert in debug mode.
+ */
+TYPED_TEST(Vector4DNormalization, ZeroMagnitudeTriggersAssertInDebugMode)
+{
+    const fgm::Vector4D<TypeParam> zVec(0, 0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(zVec.normalize()), "");
+}
+
+
+/**
+ * @brief Verify that normalizing a vector with zero magnitude using static variant of fgm::Vector4D::normalize triggers
+ *        assert in debug mode.
+ */
+TYPED_TEST(Vector4DNormalization, StaticWrapper_ZeroMagnitudeTriggersAssertInDebugMode)
+{
+    const fgm::Vector4D<TypeParam> zVec(0, 0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector4D<TypeParam>::normalize(zVec)), "");
+}
+
+#endif
+
 
 
 /**************************************
@@ -181,7 +209,7 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorRetur
  */
 TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
 {
-    EXPECT_VEC_ZERO(fgm::Vector4D<double>::safeNormalize(fgm::vec4d::zero<TypeParam>));
+    EXPECT_VEC_ZERO(fgm::Vector4D<TypeParam>::safeNormalize(fgm::vec4d::zero<TypeParam>));
 }
 
 
