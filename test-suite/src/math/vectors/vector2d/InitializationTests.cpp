@@ -42,7 +42,7 @@ TYPED_TEST_SUITE(Vector2DInitialization, SupportedTypes);
 namespace
 {
     constexpr fgm::Vector2D vecA(1, 2);
-    constexpr fgm::Vector2D<int> vecB;
+    constexpr fgm::Vector2D<int> vecB{};
 
     static_assert(vecA.x() == 1);
     static_assert(vecA.y() == 2);
@@ -62,7 +62,7 @@ namespace
 /** @brief Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector2DInitialization, EmptyConstructorInitializesZeroVector)
 {
-    const fgm::Vector2D<TypeParam> vec;
+    const fgm::Vector2D<TypeParam> vec{};
 
     EXPECT_VEC_ZERO(vec);
 }

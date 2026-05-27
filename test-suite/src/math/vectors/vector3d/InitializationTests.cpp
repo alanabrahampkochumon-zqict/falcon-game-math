@@ -44,7 +44,7 @@ namespace
     constexpr fgm::Vector3D vecA(1, 2, 3);
     constexpr fgm::Vector3D vecB({ 1, 2 }, 3);
     constexpr fgm::Vector3D vecC(1, { 2, 3 });
-    constexpr fgm::Vector3D<int> vecD;
+    constexpr fgm::Vector3D<int> vecD{};
 
     static_assert(vecA.x() == 1);
     static_assert(vecA.y() == 2);
@@ -74,7 +74,7 @@ namespace
 /** @brief Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector3DInitialization, EmptyConstructorInitializesZeroVector)
 {
-    const fgm::Vector3D<TypeParam> vec;
+    const fgm::Vector3D<TypeParam> vec{};
 
     EXPECT_VEC_ZERO(vec);
 }

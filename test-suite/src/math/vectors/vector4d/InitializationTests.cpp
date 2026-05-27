@@ -46,7 +46,7 @@ namespace
     constexpr fgm::Vector4D<int> vecB({ 1, 2 }, { 3, 4 });
     constexpr fgm::Vector4D vecC(1, { 2, 3, 4 });
     constexpr fgm::Vector4D vecD({ 1, 2, 3 }, 4);
-    constexpr fgm::Vector4D<int> vecE;
+    constexpr fgm::Vector4D<int> vecE{};
 
     static_assert(vecA.x() == 1);
     static_assert(vecA.y() == 2);
@@ -85,7 +85,7 @@ namespace
 /** @brief Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
 {
-    const fgm::Vector4D<TypeParam> vec;
+    const fgm::Vector4D<TypeParam> vec{};
 
     EXPECT_VEC_ZERO(vec);
 }
