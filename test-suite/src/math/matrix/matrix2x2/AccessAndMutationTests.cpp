@@ -111,7 +111,6 @@ TEST_P(Matrix2DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 
 #endif
 
-
 /** @} */
 
 

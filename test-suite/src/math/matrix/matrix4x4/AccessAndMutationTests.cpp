@@ -13,6 +13,22 @@
 
 
 
+#ifdef ENABLE_DEBUG_TESTS
+    #include <utility>
+
+class Matrix4DIndexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
+{};
+INSTANTIATE_TEST_SUITE_P(Matrix4DTests, Matrix4DIndexing,
+                         testing::Values(std::make_pair(5, 5), std::make_pair(4, 5), std::make_pair(5, 4),
+                                         std::make_pair(100, 100)));
+
+class Matrix4DColumnIndexing: public testing::TestWithParam<std::size_t>
+{};
+INSTANTIATE_TEST_SUITE_P(Matrix4DTests, Matrix4DColumnIndexing, testing::Values(5, 6, 100));
+#endif
+
+
+
 /**
  * @addtogroup T_FGM_Mat4x4_Access
  * @{
@@ -115,6 +131,27 @@ TEST(Matrix4DAccess, AccessibleAsColumnVectors)
     EXPECT_VEC_EQ(fgm::Vector4D(4.0f, 8.0f, 12.0f, 16.0f), mat[3]);
 }
 
+
+#ifdef ENABLE_DEBUG_TESTS
+
+/** @brief Verify that @ref fgm::Matrix4D out-of-bounds column access triggers assert in debug mode. */
+TEST_P(Matrix4DColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+{
+    const fgm::Matrix4D mat(1, 2, 3, 4);
+    const auto col = GetParam();
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
+}
+
+/** @brief Verify that @ref fgm::Matrix4D out-of-bounds row, column access triggers assert in debug mode. */
+TEST_P(Matrix4DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+{
+    const fgm::Matrix4D mat(1, 2, 3, 4);
+    const auto [row, col] = GetParam();
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col)), "");
+}
+
+#endif
+
 /** @} */
 
 
@@ -191,4 +228,27 @@ TEST(Matrix4DAccess, ColumnsCanBeMutatedUsingIndex)
     EXPECT_VEC_EQ(col2, mat[2]);
     EXPECT_VEC_EQ(col3, mat[3]);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+
+/** @brief Verify that @ref fgm::Matrix4D out-of-bounds column mutation triggers assert in debug mode. */
+TEST_P(Matrix4DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+{
+    [[maybe_unused]] fgm::Matrix4D mat(1, 2, 3, 4);
+    const auto col = GetParam();
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::vec4d::zero<int>), "");
+}
+
+
+/** @brief Verify that @ref fgm::Matrix4D out-of-bounds row, column mutation triggers assert in debug mode. */
+TEST_P(Matrix4DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+{
+    [[maybe_unused]] fgm::Matrix4D mat(1, 2, 3, 4);
+    const auto [row, col] = GetParam();
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col) = 5), "");
+}
+
+#endif
+
 /** @} */

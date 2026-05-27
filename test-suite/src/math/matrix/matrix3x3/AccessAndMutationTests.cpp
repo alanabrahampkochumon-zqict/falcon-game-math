@@ -210,5 +210,4 @@ TEST_P(Matrix3DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 
 #endif
 
-
 /** @} */

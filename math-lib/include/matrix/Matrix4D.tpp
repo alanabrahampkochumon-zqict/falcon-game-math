@@ -85,6 +85,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr Vector4D<T>& Matrix4D<T>::operator[](std::size_t col) noexcept
     {
+        FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
@@ -92,6 +93,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr const Vector4D<T>& Matrix4D<T>::operator[](std::size_t col) const noexcept
     {
+        FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
@@ -99,6 +101,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr T& Matrix4D<T>::operator()(std::size_t row, std::size_t col) noexcept
     {
+        FGM_ASSERT_MSG(col < columns || row < rows, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
@@ -106,6 +109,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr const T& Matrix4D<T>::operator()(std::size_t row, std::size_t col) const noexcept
     {
+        FGM_ASSERT_MSG(col < columns || row < rows, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
