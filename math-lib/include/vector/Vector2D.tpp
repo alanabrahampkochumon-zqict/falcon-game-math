@@ -33,11 +33,6 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector2D<T>::Vector2D() noexcept: _data{ T(0), T(0) }
-    {}
-
-
-    template <Arithmetic T>
     constexpr Vector2D<T>::Vector2D(T v1, T v2) noexcept: _data{ v1, v2 }
     {}
 

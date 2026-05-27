@@ -53,8 +53,16 @@ namespace fgm
          * @{
          */
 
-        /** @brief Initialize @ref Vector2D with zeros. */
-        [[nodiscard]] constexpr Vector2D() noexcept;
+        /**
+         * @brief Initialize an uninitialized @ref Vector2D instance.
+         *
+         * @warning The components are left uninitialized (containing garbage data)
+         *          to maximize SIMD optimization and maintain triviality.
+         *
+         * @note Use value-initialization (`{}`) or the static helper
+         *       @ref fgm::vec3d::zero<T> to guarantee a zeroed vector.
+         */
+        Vector2D() = default;
 
 
         /**

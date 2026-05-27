@@ -19,15 +19,15 @@
 #include <vector/Vector4D.h>
 
 
-// static_assert(std::is_trivial_v<fgm::Matrix2D<float>>);
-// static_assert(std::is_trivially_default_constructible_v<fgm::Matrix2D<float>>);
-// static_assert(std::is_trivially_copy_constructible_v<fgm::Matrix2D<float>>);
-// static_assert(std::is_trivially_copy_assignable_v<fgm::Matrix2D<float>>);
-// static_assert(std::is_trivially_copyable_v<fgm::Matrix2D<float>>);
-// static_assert(std::is_trivially_move_constructible_v<fgm::Matrix2D<float>>);
-// static_assert(std::is_trivially_move_assignable_v<fgm::Matrix2D<float>>);
-// static_assert(std::is_trivially_destructible_v<fgm::Matrix2D<float>>)
+/**
+ * @addtogroup T_FGM_Trivial
+ * @{
+ */
 
-std::is_trivially_default_constructible<fgm::Matrix2D<float>>;
-std::is_trivially_copyable<fgm::Matrix2D<float>>;
-// ASSERT_TRIVIAL_TYPE(fgm::Matrix2D<float>);
+
+/** @brief Verify that @ref fgm Vectors are trivial types. */
+ASSERT_TRIVIAL_TYPE(fgm::Vector2D<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Vector3D<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Vector4D<float>);
+
+/** @} */

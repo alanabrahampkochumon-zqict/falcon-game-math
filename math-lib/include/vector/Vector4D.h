@@ -61,8 +61,16 @@ namespace fgm
          * @{
          */
 
-        /** @brief Initialize @ref Vector4D with zeros. */
-        [[nodiscard]] constexpr Vector4D() noexcept;
+        /**
+         * @brief Initialize an uninitialized @ref Vector4D instance.
+         *
+         * @warning The components are left uninitialized (containing garbage data)
+         *          to maximize SIMD optimization and maintain triviality.
+         *
+         * @note Use value-initialization (`{}`) or the static helper
+         *       @ref fgm::vec4d::zero<T> to guarantee a zeroed vector.
+         */
+        Vector4D() = default;
 
 
         /**

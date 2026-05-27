@@ -31,11 +31,6 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector3D<T>::Vector3D() noexcept: _data{ T(0), T(0), T(0) }
-    {}
-
-
-    template <Arithmetic T>
     constexpr Vector3D<T>::Vector3D(T v1, T v2, T v3) noexcept: _data{ v1, v2, v3 }
     {}
 

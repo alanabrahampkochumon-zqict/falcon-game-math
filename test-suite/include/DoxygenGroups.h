@@ -269,5 +269,11 @@
      * @brief Static tests verifying concepts and type alias.
      */
 
+
+    /**
+     * @defgroup T_FGM_Trivial Class/Struct Triviality Tests
+     * @brief Static tests verifying trivial behavior of classes and structs.
+     */
+
 /** @} */ // End of FGMTestSuite
 // clang-format on

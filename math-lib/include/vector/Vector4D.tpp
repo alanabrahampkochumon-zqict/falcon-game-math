@@ -32,11 +32,6 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector4D<T>::Vector4D() noexcept: _data{ T(0), T(0), T(0), T(0) }
-    {}
-
-
-    template <Arithmetic T>
     constexpr Vector4D<T>::Vector4D(const T v1, const T v2, const T v3, const T v4) noexcept
         : _data{ T(v1), T(v2), T(v3), T(v4) }
     {}
