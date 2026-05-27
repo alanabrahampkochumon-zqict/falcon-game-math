@@ -27,12 +27,6 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Matrix3D<T>::Matrix3D() noexcept
-        : _data{ Vector3D{ T(1), T(0), T(0) }, Vector3D{ T(0), T(1), T(0) }, Vector3D{ T(0), T(0), T(1) } }
-    {}
-
-
-    template <Arithmetic T>
     constexpr Matrix3D<T>::Matrix3D(const T m00, const T m01, const T m02, const T m10, const T m11, const T m12,
                                     const T m20, const T m21, const T m22) noexcept
         : _data{ Vector3D{ T(m00), T(m10), T(m20) }, Vector3D{ T(m01), T(m11), T(m21) },

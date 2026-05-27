@@ -58,8 +58,16 @@ namespace fgm
          * @{
          */
 
-        /** @brief Initialize a 4x4 identity matrix. */
-        [[nodiscard]] constexpr Matrix4D() noexcept;
+        /**
+         * @brief Initialize an uninitialized @ref Matrix4D instance.
+         *
+         * @warning The components are left uninitialized (containing garbage data)
+         *          to maximize SIMD optimization and maintain triviality.
+         *
+         * @note Use value-initialization (`{}`) or the static helper
+         *       @ref fgm::mat4d::zero<T> to guarantee a zeroed matrix.
+         */
+        Matrix4D() = default;
 
 
         /**

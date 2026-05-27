@@ -24,10 +24,15 @@
  * @{
  */
 
-
 /** @brief Verify that @ref fgm Vectors are trivial types. */
 ASSERT_TRIVIAL_TYPE(fgm::Vector2D<float>);
 ASSERT_TRIVIAL_TYPE(fgm::Vector3D<float>);
 ASSERT_TRIVIAL_TYPE(fgm::Vector4D<float>);
+
+
+/** @brief Verify that @ref fgm Matrices are trivial types. */
+ASSERT_TRIVIAL_TYPE(fgm::Matrix2D<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Matrix3D<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Matrix4D<float>);
 
 /** @} */

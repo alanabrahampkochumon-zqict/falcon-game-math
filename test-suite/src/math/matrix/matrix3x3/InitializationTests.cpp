@@ -91,6 +91,18 @@ namespace
     static_assert(MAT3(2, 1) == 0);
     static_assert(MAT3(2, 2) == 5);
 
+    // Verify that the matrix can be initialized at compile time using value initialization.
+    constexpr fgm::Matrix3D<int> MAT4{};
+    static_assert(MAT4(0, 0) == 0);
+    static_assert(MAT4(0, 1) == 0);
+    static_assert(MAT4(0, 2) == 0);
+    static_assert(MAT4(1, 0) == 0);
+    static_assert(MAT4(1, 1) == 0);
+    static_assert(MAT4(1, 2) == 0);
+    static_assert(MAT4(2, 0) == 0);
+    static_assert(MAT4(2, 1) == 0);
+    static_assert(MAT4(2, 2) == 0);
+
 } // namespace
 
 
@@ -104,9 +116,9 @@ namespace
 /** @brief Verify that the default constructor initializes an identity matrix. */
 TYPED_TEST(Matrix3DInitialization, EmptyConstructorReturnsIdentityMatrix)
 {
-    const fgm::Matrix3D<TypeParam> matrix;
+    const fgm::Matrix3D<TypeParam> matrix{};
 
-    EXPECT_MAT_IDENTITY(matrix);
+    EXPECT_MAT_ZERO(matrix);
 }
 
 

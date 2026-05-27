@@ -61,8 +61,16 @@ namespace fgm
          * @{
          */
 
-        /** @brief Initialize a 2x2 identity matrix. */
-        [[nodiscard]] constexpr Matrix2D() noexcept;
+        /**
+         * @brief Initialize an uninitialized @ref Matrix2D instance.
+         *
+         * @warning The components are left uninitialized (containing garbage data)
+         *          to maximize SIMD optimization and maintain triviality.
+         *
+         * @note Use value-initialization (`{}`) or the static helper
+         *       @ref fgm::mat2d::zero<T> to guarantee a zeroed matrix.
+         */
+        Matrix2D() = default;
 
 
         /**

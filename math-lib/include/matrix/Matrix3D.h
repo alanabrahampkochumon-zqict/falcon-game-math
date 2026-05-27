@@ -58,8 +58,16 @@ namespace fgm
          * @{
          */
 
-        /** @brief Initialize a 3x3 identity matrix. */
-        [[nodiscard]] constexpr Matrix3D() noexcept;
+        /**
+         * @brief Initialize an uninitialized @ref Matrix3D instance.
+         *
+         * @warning The components are left uninitialized (containing garbage data)
+         *          to maximize SIMD optimization and maintain triviality.
+         *
+         * @note Use value-initialization (`{}`) or the static helper
+         *       @ref fgm::mat3d::zero<T> to guarantee a zeroed matrix.
+         */
+        Matrix3D() = default;
 
 
         /**

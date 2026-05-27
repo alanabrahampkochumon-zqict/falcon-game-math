@@ -25,13 +25,6 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Matrix4D<T>::Matrix4D() noexcept
-        : _data{ Vector4D{ T(1), T(0), T(0), T(0) }, Vector4D{ T(0), T(1), T(0), T(0) },
-                 Vector4D{ T(0), T(0), T(1), T(0) }, Vector4D{ T(0), T(0), T(0), T(1) } }
-    {}
-
-
-    template <Arithmetic T>
     constexpr Matrix4D<T>::Matrix4D(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22, T m23,
                                     T m30, T m31, T m32, T m33) noexcept
         : _data{ Vector4D{ T(m00), T(m10), T(m20), T(m30) }, Vector4D{ T(m01), T(m11), T(m21), T(m31) },

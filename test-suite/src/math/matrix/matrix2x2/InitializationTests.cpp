@@ -74,6 +74,13 @@ namespace
     static_assert(MAT3(1, 0) == 0);
     static_assert(MAT3(1, 1) == 4);
 
+    // Verify that the matrix can be initialized at compile time using value initialization.
+    constexpr fgm::Matrix2D<int> MAT4{};
+    static_assert(MAT4(0, 0) == 0);
+    static_assert(MAT4(0, 1) == 0);
+    static_assert(MAT4(1, 0) == 0);
+    static_assert(MAT4(1, 1) == 0);
+
 } // namespace
 
 
@@ -87,9 +94,9 @@ namespace
 /** @brief Verify that the default constructor initializes an identity matrix. */
 TYPED_TEST(Matrix2DInitialization, EmptyConstructorReturnsIdentityMatrix)
 {
-    const fgm::Matrix2D<TypeParam> matrix;
+    const fgm::Matrix2D<TypeParam> matrix{};
 
-    EXPECT_MAT_IDENTITY(matrix);
+    EXPECT_MAT_ZERO(matrix);
 }
 
 
