@@ -172,6 +172,8 @@ namespace fgm
          * @brief Access the element at the specified location (read-only).
          *        Provide read-write access to the element.
          *
+         * @note Performs bounds checking in **DEBUG MODE**.
+         *
          * @param[in] idx The index of the vector component.
          *
          * @return A reference to the vector component.
@@ -181,6 +183,8 @@ namespace fgm
 
         /**
          * @brief Access the element at the specified location (read-only).
+         *
+         * @note Performs bounds checking in **DEBUG MODE**.
          *
          * @param[in] idx The index of the vector component.
          *
@@ -1286,6 +1290,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -1329,6 +1334,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -1591,6 +1597,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -1629,6 +1636,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *

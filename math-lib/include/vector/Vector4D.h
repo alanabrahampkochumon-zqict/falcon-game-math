@@ -297,6 +297,8 @@ namespace fgm
          * @brief Access the element at the specified location (read-only).
          *        Provide read-write access to the element.
          *
+         * @note Performs bounds checking in **DEBUG MODE**.
+         *
          * @param[in] idx The index of the vector component.
          *
          * @return A reference to the vector component.
@@ -306,6 +308,8 @@ namespace fgm
 
         /**
          * @brief Access the element at the specified location (read-only).
+         *
+         * @note Performs bounds checking in **DEBUG MODE**.
          *
          * @param[in] idx The index of the vector component.
          *
@@ -980,7 +984,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         * @warning Does not check for division by zero. @p scalar should be non-zero.
+         * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
@@ -997,7 +1001,7 @@ namespace fgm
          * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         * @warning Does not check for division by zero. @p scalar should be non-zero.
+         * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
@@ -1270,8 +1274,7 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
-         *
-         * @warning Does not check for zero-length vectors. @ref mag() must be non-zero.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @return A new @ref Vector4D with a magnitude of 1.0.
          */
@@ -1286,6 +1289,7 @@ namespace fgm
          *
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @param[in] vec The vector to normalize.
          *
@@ -1388,6 +1392,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -1431,6 +1436,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -1694,6 +1700,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
@@ -1732,6 +1739,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
