@@ -882,6 +882,7 @@ namespace fgm
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Performs assertion for division by zero (singular matrix) in **Debug mode**.
          *
          * @return A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$.
          */
@@ -915,6 +916,7 @@ namespace fgm
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Performs assertion for division by zero (singular matrix) in **Debug mode**.
          *
          * @param[in] matrix The matrix to invert.
          *

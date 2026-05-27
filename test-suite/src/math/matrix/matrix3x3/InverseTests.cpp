@@ -177,6 +177,7 @@ TYPED_TEST(Matrix3DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatri
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
+
 #ifdef ENABLE_DEBUG_TESTS
 
 /**
