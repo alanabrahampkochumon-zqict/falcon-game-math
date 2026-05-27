@@ -54,6 +54,7 @@
              *   @defgroup T_FGM_Vec2_Init Initialization
              *   @defgroup T_FGM_Vec2_Magnitude Scalar Length(Magnitude)
              *   @defgroup T_FGM_Vec2_Norm P-Norm (Length)
+             *   @defgroup T_FGM_Vec2_Dist Vector Distance
              *   @defgroup T_FGM_Vec2_Normalize Vector Normalization
              *   @defgroup T_FGM_Vec2_Product Dot and Cross Product
              *   @defgroup T_FGM_Vec2_Proj Vector Projection
@@ -90,6 +91,7 @@
              *   @defgroup T_FGM_Vec3_Init Initialization
              *   @defgroup T_FGM_Vec3_Magnitude Scalar Length(Magnitude)
              *   @defgroup T_FGM_Vec3_Norm P-Norm (Length)
+             *   @defgroup T_FGM_Vec3_Dist Vector Distance
              *   @defgroup T_FGM_Vec3_Normalize Vector Normalization
              *   @defgroup T_FGM_Vec3_Product Dot and Cross Product
              *   @defgroup T_FGM_Vec3_Proj Vector Projection
@@ -126,6 +128,7 @@
              *   @defgroup T_FGM_Vec4_Init Initialization
              *   @defgroup T_FGM_Vec4_Magnitude Scalar Length(Magnitude)
              *   @defgroup T_FGM_Vec4_Norm P-Norm (Length)
+             *   @defgroup T_FGM_Vec4_Dist Vector Distance
              *   @defgroup T_FGM_Vec4_Normalize Vector Normalization
              *   @defgroup T_FGM_Vec4_Product Dot Product
              *   @defgroup T_FGM_Vec4_Proj Vector Projection
