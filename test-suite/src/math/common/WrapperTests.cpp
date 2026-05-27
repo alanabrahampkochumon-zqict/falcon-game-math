@@ -102,9 +102,7 @@ namespace
 
 /** @brief Verify that taking absolute value using @ref fgm::abs returns the absolute value. */
 TYPED_TEST(AbsTestUnsigned, ReturnsAbsoluteValue)
-{
-    testutils::EXPECT_MAG_EQ(this->_expectedAbsValue, fgm::abs(this->_value));
-}
+{ testutils::EXPECT_MAG_EQ(this->_expectedAbsValue, fgm::abs(this->_value)); }
 
 
 /**

@@ -78,9 +78,7 @@ TYPED_TEST(Matrix2DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(f
 
 /** @brief Verify that @ref fgm::Matrix2D::eye static factory returns an identity matrix. */
 TYPED_TEST(Matrix2DConstants, StaticWrapper_Eye_ReturnsIdentityMatrix)
-{
-    EXPECT_MAT_IDENTITY(fgm::Matrix2D<TypeParam>::eye());
-}
+{ EXPECT_MAT_IDENTITY(fgm::Matrix2D<TypeParam>::eye()); }
 
 
 /** @brief Verify that @ref fgm::mat2d::zero returns a zero matrix. */
@@ -89,8 +87,6 @@ TYPED_TEST(Matrix2DConstants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat
 
 /** @brief Verify that @ref fgm::Matrix2D::zero static factory returns a zero matrix. */
 TYPED_TEST(Matrix2DConstants, StaticWrapper_Zero_ReturnsZeroMatrix)
-{
-    EXPECT_MAT_ZERO(fgm::Matrix2D<TypeParam>::zero());
-}
+{ EXPECT_MAT_ZERO(fgm::Matrix2D<TypeParam>::zero()); }
 
 /** @} */

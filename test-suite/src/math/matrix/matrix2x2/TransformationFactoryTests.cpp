@@ -217,9 +217,7 @@ namespace
 
 /** @brief Verify that rotation transformation factory returns a rotation matrix. */
 TYPED_TEST(Matrix2DRotation, ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<typename TypeParam::first_type>::makeRotation(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<typename TypeParam::first_type>::makeRotation(this->_angle)); }
 
 
 
@@ -231,16 +229,12 @@ TYPED_TEST(Matrix2DRotation, ReturnsRotationMatrix)
 
 /** @brief Verify that uniform scale transformation factory returns a scale matrix. */
 TYPED_TEST(Matrix2DUniformScale, ReturnsScaleMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeScale(this->_scale));
-}
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeScale(this->_scale)); }
 
 
 /** @brief Verify that non-uniform scale transformation factory returns a non-uniform scale matrix. */
 TYPED_TEST(Matrix2DNonUniformScale, ReturnsScaleMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeScale(this->_scaleX, this->_scaleY));
-}
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeScale(this->_scaleX, this->_scaleY)); }
 
 
 
@@ -255,29 +249,21 @@ TYPED_TEST(Matrix2DNonUniformScale, ReturnsScaleMatrix)
  *        returns a reflection matrix.
  */
 TYPED_TEST(Matrix2DNoReflection, ReturnsReflectionMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(false, false));
-}
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(false, false)); }
 
 
 /** @brief Verify that reflection transformation factory for x-axis returns a reflection matrix. */
 TYPED_TEST(Matrix2DXAxisReflection, ReturnsReflectionMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(true, false));
-}
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(true, false)); }
 
 
 /** @brief Verify that reflection transformation factory for y-axis returns a reflection matrix. */
 TYPED_TEST(Matrix2DYAxisReflection, ReturnsReflectionMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(false, true));
-}
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(false, true)); }
 
 
 /** @brief Verify that reflection transformation factory for y-axis returns a reflection matrix. */
 TYPED_TEST(Matrix2DOriginReflection, ReturnsReflectionMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(true, true));
-}
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(true, true)); }
 
 /** @} */

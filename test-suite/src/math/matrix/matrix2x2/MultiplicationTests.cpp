@@ -549,7 +549,7 @@ TYPED_TEST(Matrix2DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithP
  */
 TEST(Matrix2DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix2D<float> iMatrix  = fgm::mat2d::eye<float>;
+    const fgm::Matrix2D<float> iMatrix = fgm::mat2d::eye<float>;
     const fgm::Matrix2D mat(1.0f, 2.0f, 3.0f, 4.0f);
 
     const fgm::Matrix2D matrixProduct = iMatrix * mat;

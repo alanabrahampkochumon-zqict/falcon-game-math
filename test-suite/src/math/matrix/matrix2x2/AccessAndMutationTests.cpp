@@ -18,12 +18,12 @@
 class Matrix2DIndexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
 {};
 INSTANTIATE_TEST_SUITE_P(Matrix2DTests, Matrix2DIndexing,
-                         testing::Values(std::make_pair(3, 3), std::make_pair(2, 3), std::make_pair(3, 2), std::make_pair(100, 100)));
+                         testing::Values(std::make_pair(3, 3), std::make_pair(2, 3), std::make_pair(3, 2),
+                                         std::make_pair(100, 100)));
 
 class Matrix2DColumnIndexing: public testing::TestWithParam<std::size_t>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix2DTests, Matrix2DColumnIndexing,
-                         testing::Values(3, 4, 100));
+INSTANTIATE_TEST_SUITE_P(Matrix2DTests, Matrix2DColumnIndexing, testing::Values(3, 4, 100));
 #endif
 
 

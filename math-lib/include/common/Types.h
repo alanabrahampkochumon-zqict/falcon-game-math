@@ -16,7 +16,7 @@
 
 
 /**
- * @addtogroup GROUP_ID
+ * @addtogroup FGM_Types
  * @{
  */
 

@@ -57,8 +57,6 @@ TYPED_TEST(Matrix4DTrace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_e
 
 /** @brief Verify that trace of a 2D matrix using static variant returns the sum of diagonal elements. */
 TYPED_TEST(Matrix4DTrace, StaticWrapper_ReturnsSumOfDiagonalElements)
-{
-    EXPECT_MAG_EQ(this->_expectedSum, fgm::Matrix4D<TypeParam>::trace(this->_mat));
-}
+{ EXPECT_MAG_EQ(this->_expectedSum, fgm::Matrix4D<TypeParam>::trace(this->_mat)); }
 
 /** @} */

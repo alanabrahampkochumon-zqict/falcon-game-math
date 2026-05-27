@@ -13,15 +13,10 @@
 #include <string_view>
 
 
-
 /**
  * @addtogroup FGM_Messages
  * @{
  */
-
-namespace fgm::messages::assertion
-{} // namespace fgm::messages::assertion
-
 
 namespace fgm::messages
 {

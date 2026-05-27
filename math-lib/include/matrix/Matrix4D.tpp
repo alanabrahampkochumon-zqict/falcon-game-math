@@ -115,16 +115,12 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::eye() noexcept
-    {
-        return Matrix4D(T(1), T(1), T(1), T(1));
-    }
+    { return Matrix4D(T(1), T(1), T(1), T(1)); }
 
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::zero() noexcept
-    {
-        return Matrix4D(T(0), T(0), T(0), T(0));
-    }
+    { return Matrix4D(T(0), T(0), T(0), T(0)); }
 
 
     /***************************************
@@ -159,9 +155,7 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::allEq(const Matrix4D& lhs, const Matrix4D<U>& rhs, double epsilon) noexcept
-    {
-        return lhs.allEq(rhs, epsilon);
-    }
+    { return lhs.allEq(rhs, epsilon); }
 
 
     template <Arithmetic T>
@@ -190,27 +184,21 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::anyNeq(const Matrix4D& lhs, const Matrix4D<U>& rhs, double epsilon) noexcept
-    {
-        return lhs.anyNeq(rhs, epsilon);
-    }
+    { return lhs.anyNeq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::operator==(const Matrix4D<U>& rhs) const noexcept
-    {
-        return allEq(rhs);
-    }
+    { return allEq(rhs); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix4D<T>::operator!=(const Matrix4D<U>& rhs) const noexcept
-    {
-        return anyNeq(rhs);
-    }
+    { return anyNeq(rhs); }
 
 
     /**************************************
@@ -280,9 +268,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedMatrix4D<T, S> operator*(S scalar, const Matrix4D<T>& matrix) noexcept
-    {
-        return matrix * scalar;
-    }
+    { return matrix * scalar; }
 
 
     template <Arithmetic T>
@@ -580,9 +566,7 @@ namespace fgm
     constexpr PromotedMatrix4D<T, S> Matrix4D<T>::safeDiv(const Matrix4D& mat, S scalar,
                                                           const Matrix4D& fallback) noexcept
         requires StrictArithmetic<T>
-    {
-        return mat.safeDiv(scalar, fallback);
-    }
+    { return mat.safeDiv(scalar, fallback); }
 
 
     template <Arithmetic T>
@@ -628,9 +612,7 @@ namespace fgm
     constexpr PromotedMatrix4D<T, S> Matrix4D<T>::tryDiv(const Matrix4D& mat, S scalar, OperationStatus& status,
                                                          const Matrix4D& fallback) noexcept
         requires StrictArithmetic<T>
-    {
-        return mat.tryDiv(scalar, status, fallback);
-    }
+    { return mat.tryDiv(scalar, status, fallback); }
 
 
     /**************************************
@@ -666,9 +648,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr T Matrix4D<T>::determinant(const Matrix4D& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return matrix.determinant();
-    }
+    { return matrix.determinant(); }
 
 
     template <Arithmetic T>
@@ -686,9 +666,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4D<T> Matrix4D<T>::transpose(const Matrix4D& matrix) noexcept
-    {
-        return matrix.transpose();
-    }
+    { return matrix.transpose(); }
 
 
     template <Arithmetic T>
@@ -735,9 +713,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::inverse(const Matrix4D& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return matrix.inverse();
-    }
+    { return matrix.inverse(); }
 
 
     template <Arithmetic T>
@@ -799,9 +775,7 @@ namespace fgm
     constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::safeInverseOf(const Matrix4D& matrix,
                                                                 const Matrix4D& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return matrix.safeInverse(fallback);
-    }
+    { return matrix.safeInverse(fallback); }
 
 
     template <Arithmetic T>
@@ -864,25 +838,19 @@ namespace fgm
     constexpr Matrix4D<Magnitude<T>> Matrix4D<T>::tryInverseOf(const Matrix4D& matrix, OperationStatus& status,
                                                                const Matrix4D& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return matrix.tryInverse(status, fallback);
-    }
+    { return matrix.tryInverse(status, fallback); }
 
 
     template <Arithmetic T>
     constexpr T Matrix4D<T>::trace() const noexcept
         requires StrictArithmetic<T>
-    {
-        return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3];
-    }
+    { return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3]; }
 
 
     template <Arithmetic T>
     constexpr T Matrix4D<T>::trace(const Matrix4D& matrix) noexcept
         requires StrictArithmetic<T>
-    {
-        return matrix.trace();
-    }
+    { return matrix.trace(); }
 
 
     /**************************************
@@ -893,30 +861,22 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasInf() const noexcept
-    {
-        return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf();
-    }
+    { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf(); }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasInf(const Matrix4D& matrix) noexcept
-    {
-        return matrix.hasInf();
-    }
+    { return matrix.hasInf(); }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasNaN() const noexcept
-    {
-        return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN();
-    }
+    { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN(); }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4D<T>::hasNaN(const Matrix4D& matrix) noexcept
-    {
-        return matrix.hasNaN();
-    }
+    { return matrix.hasNaN(); }
 } // namespace fgm
 
 

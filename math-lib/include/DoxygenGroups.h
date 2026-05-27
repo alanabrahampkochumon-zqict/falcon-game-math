@@ -226,6 +226,13 @@
      * @ingroup FGM_Math
      */
 
+
+    /**
+     * @defgroup FGM_Types Type Aliases
+     * @brief Aliases for FGM math types.
+     * @ingroup FGM_Math
+     */
+
 /** @} */ // End of FGM_Math
 
 // clang-format on

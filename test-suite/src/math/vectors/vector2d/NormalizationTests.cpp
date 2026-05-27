@@ -158,9 +158,7 @@ TYPED_TEST(Vector2DNormalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
  *       returns a zero-vector.
  */
 TYPED_TEST(Vector2DNormalization, SafeNormalize_ZeroVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::vec2d::zero<TypeParam>.safeNormalize());
-}
+{ EXPECT_VEC_ZERO(fgm::vec2d::zero<TypeParam>.safeNormalize()); }
 
 
 /**
@@ -168,9 +166,7 @@ TYPED_TEST(Vector2DNormalization, SafeNormalize_ZeroVectorReturnsZeroVector)
  *       returns a zero-vector.
  */
 TEST(Vector2DNormalization, SafeNormalize_NaNVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::vec2d::nan<float>.safeNormalize());
-}
+{ EXPECT_VEC_ZERO(fgm::vec2d::nan<float>.safeNormalize()); }
 
 
 /**
@@ -200,9 +196,7 @@ TYPED_TEST(Vector2DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorRetur
  *       @ref fgm::Vector2D::safeNormalize returns a zero-vector.
  */
 TYPED_TEST(Vector2DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::Vector2D<TypeParam>::safeNormalize(fgm::vec2d::zero<TypeParam>));
-}
+{ EXPECT_VEC_ZERO(fgm::Vector2D<TypeParam>::safeNormalize(fgm::vec2d::zero<TypeParam>)); }
 
 
 /**
@@ -210,9 +204,7 @@ TYPED_TEST(Vector2DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZ
  *       returns a zero-vector.
  */
 TEST(Vector2DNormalization, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::Vector2D<float>::safeNormalize(fgm::vec2d::nan<float>));
-}
+{ EXPECT_VEC_ZERO(fgm::Vector2D<float>::safeNormalize(fgm::vec2d::nan<float>)); }
 
 
 /**

@@ -459,7 +459,7 @@ TYPED_TEST(Matrix4DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
  */
 TEST(Matrix4DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
-    const fgm::Matrix4D<float> iMatrix  = fgm::mat4d::eye<float>;
+    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
     const fgm::vec4 vec{ 2.0f, 1.0f, 2.5f, 12.5f };
 
     const fgm::vec4 transformedVector = iMatrix * vec;

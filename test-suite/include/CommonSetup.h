@@ -58,5 +58,3 @@ using SupportedSignedArithmeticFloatingTypePair =
                      std::pair<double, int16_t>, std::pair<double, int32_t>, std::pair<double, int64_t>,
                      std::pair<double, double>, std::pair<double, float>>;
 #endif
-
-

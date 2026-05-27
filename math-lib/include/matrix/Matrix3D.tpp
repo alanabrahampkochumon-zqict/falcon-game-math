@@ -110,16 +110,12 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix3D<T> Matrix3D<T>::eye() noexcept
-    {
-        return Matrix3D(T(1), T(1), T(1));
-    }
+    { return Matrix3D(T(1), T(1), T(1)); }
 
 
     template <Arithmetic T>
     constexpr Matrix3D<T> Matrix3D<T>::zero() noexcept
-    {
-        return Matrix3D(T(0), T(0), T(0));
-    }
+    { return Matrix3D(T(0), T(0), T(0)); }
 
 
 
@@ -154,9 +150,7 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::allEq(const Matrix3D& lhs, const Matrix3D<U>& rhs, const double epsilon) noexcept
-    {
-        return lhs.allEq(rhs, epsilon);
-    }
+    { return lhs.allEq(rhs, epsilon); }
 
     template <Arithmetic T>
     template <Arithmetic U>
@@ -183,27 +177,21 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::anyNeq(const Matrix3D& lhs, const Matrix3D<U>& rhs, const double epsilon) noexcept
-    {
-        return lhs.anyNeq(rhs, epsilon);
-    }
+    { return lhs.anyNeq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::operator==(const Matrix3D<U>& rhs) const noexcept
-    {
-        return allEq(rhs);
-    }
+    { return allEq(rhs); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix3D<T>::operator!=(const Matrix3D<U>& rhs) const noexcept
-    {
-        return anyNeq(rhs);
-    }
+    { return anyNeq(rhs); }
 
 
 
@@ -285,9 +273,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedMatrix3D<T, S> operator*(const S scalar, const Matrix3D<T>& matrix) noexcept
-    {
-        return matrix * scalar;
-    }
+    { return matrix * scalar; }
 
 
     template <Arithmetic T>
@@ -516,9 +502,7 @@ namespace fgm
     constexpr PromotedMatrix3D<T, S> Matrix3D<T>::safeDiv(const Matrix3D& mat, const S scalar,
                                                           const Matrix3D& fallback) noexcept
         requires StrictArithmetic<T>
-    {
-        return mat.safeDiv(scalar, fallback);
-    }
+    { return mat.safeDiv(scalar, fallback); }
 
 
     template <Arithmetic T>
@@ -565,9 +549,7 @@ namespace fgm
     constexpr PromotedMatrix3D<T, S> Matrix3D<T>::tryDiv(const Matrix3D& mat, const S scalar, OperationStatus& status,
                                                          const Matrix3D& fallback) noexcept
         requires StrictArithmetic<T>
-    {
-        return mat.tryDiv(scalar, status, fallback);
-    }
+    { return mat.tryDiv(scalar, status, fallback); }
 
 
 
@@ -595,9 +577,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr T Matrix3D<T>::determinant(const Matrix3D& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return matrix.determinant();
-    }
+    { return matrix.determinant(); }
 
 
     template <Arithmetic T>
@@ -614,9 +594,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix3D<T> Matrix3D<T>::transpose(const Matrix3D& matrix) noexcept
-    {
-        return matrix.transpose();
-    }
+    { return matrix.transpose(); }
 
 
     template <Arithmetic T>
@@ -643,9 +621,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::inverse(const Matrix3D& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return matrix.inverse();
-    }
+    { return matrix.inverse(); }
 
 
     template <Arithmetic T>
@@ -688,9 +664,7 @@ namespace fgm
     constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::safeInverseOf(const Matrix3D& matrix,
                                                                 const Matrix3D& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return matrix.safeInverse(fallback);
-    }
+    { return matrix.safeInverse(fallback); }
 
 
     template <Arithmetic T>
@@ -743,25 +717,19 @@ namespace fgm
     constexpr Matrix3D<Magnitude<T>> Matrix3D<T>::tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
                                                                const Matrix3D& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return matrix.tryInverse(status, fallback);
-    }
+    { return matrix.tryInverse(status, fallback); }
 
 
     template <Arithmetic T>
     constexpr T Matrix3D<T>::trace() const noexcept
         requires StrictArithmetic<T>
-    {
-        return _data[0][0] + _data[1][1] + _data[2][2];
-    }
+    { return _data[0][0] + _data[1][1] + _data[2][2]; }
 
 
     template <Arithmetic T>
     constexpr T Matrix3D<T>::trace(const Matrix3D& matrix) noexcept
         requires StrictArithmetic<T>
-    {
-        return matrix.trace();
-    }
+    { return matrix.trace(); }
 
 
 
@@ -774,30 +742,22 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr bool Matrix3D<T>::hasInf() const noexcept
-    {
-        return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf();
-    }
+    { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf(); }
 
 
     template <Arithmetic T>
     constexpr bool Matrix3D<T>::hasInf(const Matrix3D& matrix) noexcept
-    {
-        return matrix.hasInf();
-    }
+    { return matrix.hasInf(); }
 
 
     template <Arithmetic T>
     constexpr bool Matrix3D<T>::hasNaN() const noexcept
-    {
-        return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN();
-    }
+    { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN(); }
 
 
     template <Arithmetic T>
     constexpr bool Matrix3D<T>::hasNaN(const Matrix3D& matrix) noexcept
-    {
-        return matrix.hasNaN();
-    }
+    { return matrix.hasNaN(); }
 
 } // namespace fgm
 

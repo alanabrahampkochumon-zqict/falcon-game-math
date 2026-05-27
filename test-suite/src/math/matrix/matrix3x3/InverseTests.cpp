@@ -165,9 +165,7 @@ TYPED_TEST(Matrix3DInverse, InverseTimesMatrixReturnsIdentityMatrix)
  *        when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix3DInverse, StaticWrapper_ReturnsInverseMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::inverse(this->_matrix));
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::inverse(this->_matrix)); }
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
@@ -217,9 +215,7 @@ TEST_P(SingularMatrix3DInverse, StaticWrapper_TriggersAssertionInDebugMode)
  *        with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix3DInverse, SafeInverse_ReturnsInverseMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse()); }
 
 
 /**
@@ -282,9 +278,7 @@ TEST_P(NaNMatrix3DInverse, SafeInverse_ReturnsPassedInFallback)
  *        that when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix3DInverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::safeInverseOf(this->_matrix));
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::safeInverseOf(this->_matrix)); }
 
 
 /**

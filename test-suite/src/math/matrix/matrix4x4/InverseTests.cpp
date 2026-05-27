@@ -197,9 +197,7 @@ TYPED_TEST(Matrix4DInverse, InverseTimesMatrixReturnsIdentityMatrix)
  *        when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix4DInverse, StaticWrapper_ReturnsInverseMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::inverse(this->_matrix));
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::inverse(this->_matrix)); }
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
@@ -250,9 +248,7 @@ TEST_P(SingularMatrix4DInverse, StaticWrapper_TriggersAssertionInDebugMode)
  *        column elements and returns a new matrix.
  */
 TYPED_TEST(Matrix4DInverse, SafeInverse_ReturnsInverseMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse()); }
 
 
 /**
@@ -315,9 +311,7 @@ TEST_P(NaNMatrix4DInverse, SafeInverse_ReturnsPassedInFallback)
  *        column elements and returns a new matrix.
  */
 TYPED_TEST(Matrix4DInverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::safeInverseOf(this->_matrix));
-}
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4D<TypeParam>::safeInverseOf(this->_matrix)); }
 
 
 /**

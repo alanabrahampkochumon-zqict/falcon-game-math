@@ -67,9 +67,7 @@ TYPED_TEST(Vector4DConstantTests, One_ReturnsVectorWithUnitComponents)
 
 /** @brief Verify that @ref fgm::vec4d::zero returns a 4D vector with zero components. */
 TYPED_TEST(Vector4DConstantTests, Zero_ReturnsVectorWithZeroComponents)
-{
-    EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>);
-}
+{ EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>); }
 
 
 /** @brief Verify that @ref fgm::vec4d::inf<float> returns a 4D vector with infinity components. */

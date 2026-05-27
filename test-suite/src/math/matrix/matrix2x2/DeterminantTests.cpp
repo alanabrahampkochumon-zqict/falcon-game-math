@@ -84,9 +84,7 @@ namespace
 
 /** @brief Verify that computing the determinant of a non-singular matrix returns a non-zero value. */
 TYPED_TEST(Matrix2DDeterminant, ReturnsNonZeroScalar)
-{
-    EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant());
-}
+{ EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant()); }
 
 
 /** @brief Verify that computing the determinant of a singular matrix returns zero. */
@@ -102,9 +100,7 @@ TEST_P(SingularMatrix2DDeterminant, SingularMatrixReturnsZero)
  *        @ref fgm::Matrix2D::determinant returns a non-zero value.
  */
 TYPED_TEST(Matrix2DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
-{
-    EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix2D<TypeParam>::determinant(this->_matrix));
-}
+{ EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix2D<TypeParam>::determinant(this->_matrix)); }
 
 
 /**

@@ -166,9 +166,7 @@ TYPED_TEST(Vector4DNormalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
  *       returns a zero-vector.
  */
 TYPED_TEST(Vector4DNormalization, SafeNormalize_ZeroVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>.safeNormalize());
-}
+{ EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>.safeNormalize()); }
 
 
 /**
@@ -176,9 +174,7 @@ TYPED_TEST(Vector4DNormalization, SafeNormalize_ZeroVectorReturnsZeroVector)
  *       returns a zero-vector.
  */
 TEST(Vector4DNormalization, SafeNormalize_NaNVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::vec4d::nan<float>.safeNormalize());
-}
+{ EXPECT_VEC_ZERO(fgm::vec4d::nan<float>.safeNormalize()); }
 
 
 /**
@@ -208,9 +204,7 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_NonZeroVectorRetur
  *       @ref fgm::Vector4D::safeNormalize returns a zero-vector.
  */
 TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::Vector4D<TypeParam>::safeNormalize(fgm::vec4d::zero<TypeParam>));
-}
+{ EXPECT_VEC_ZERO(fgm::Vector4D<TypeParam>::safeNormalize(fgm::vec4d::zero<TypeParam>)); }
 
 
 /**
@@ -218,9 +212,7 @@ TYPED_TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZ
  *       returns a zero-vector.
  */
 TEST(Vector4DNormalization, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeNormalize(fgm::vec4d::nan<float>));
-}
+{ EXPECT_VEC_ZERO(fgm::Vector4D<float>::safeNormalize(fgm::vec4d::nan<float>)); }
 
 
 /**
