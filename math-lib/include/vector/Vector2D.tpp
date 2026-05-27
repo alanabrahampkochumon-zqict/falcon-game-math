@@ -717,6 +717,7 @@ namespace fgm
         else
         {
             FGM_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+
             _data[0] /= static_cast<T>(scalar);
             _data[1] /= static_cast<T>(scalar);
         }
