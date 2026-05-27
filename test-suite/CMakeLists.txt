@@ -35,11 +35,11 @@ list(TRANSFORM Matrix4x4TestFiles PREPEND ${Matrix4x4TestDir})
 
 
 set(MathCommonDir "src/math/common/")
-set(MathCommonTestFiles "OperationStatusTests.cpp;WrapperTests.cpp;MathTraitTests.cpp;")
+set(MathCommonTestFiles "OperationStatusTests.cpp;WrapperTests.cpp;MathTraitTests.cpp;TrivialTypeTests.cpp;")
 list(TRANSFORM MathCommonTestFiles PREPEND ${MathCommonDir})
 
 set(UtilityDirectory "include/utils/")
-set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h")
+set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
 list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
 
 set(SimdTestDirectory "src/simd/")
