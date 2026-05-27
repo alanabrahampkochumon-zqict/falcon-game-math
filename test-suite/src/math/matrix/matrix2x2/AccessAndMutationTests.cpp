@@ -93,7 +93,7 @@ TEST(Matrix2DAccess, AccessibleAsColumnVectors)
 
 #ifdef ENABLE_DEBUG_TESTS
 
-/** @brief Verify that @ref fgm::Matrix out-of-bounds column access triggers assert in debug mode. */
+/** @brief Verify that @ref fgm::Matrix2D out-of-bounds column access triggers assert in debug mode. */
 TEST_P(Matrix2DColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const fgm::Matrix2D mat(1, 2);
@@ -101,7 +101,7 @@ TEST_P(Matrix2DColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
 }
 
-/** @brief Verify that @ref fgm::Matrix out-of-bounds row, column access triggers assert in debug mode. */
+/** @brief Verify that @ref fgm::Matrix2D out-of-bounds row, column access triggers assert in debug mode. */
 TEST_P(Matrix2DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const fgm::Matrix2D mat(1, 2);
@@ -161,7 +161,7 @@ TEST(Matrix2DAccess, ColumnsCanBeMutatedUsingIndex)
 
 #ifdef ENABLE_DEBUG_TESTS
 
-/** @brief Verify that @ref fgm::Matrix out-of-bounds column mutation triggers assert in debug mode. */
+/** @brief Verify that @ref fgm::Matrix2D out-of-bounds column mutation triggers assert in debug mode. */
 TEST_P(Matrix2DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix2D mat(1, 2);
@@ -169,7 +169,8 @@ TEST_P(Matrix2DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::vec2d::zero<int>), "");
 }
 
-/** @brief Verify that @ref fgm::Matrix out-of-bounds row, column mutation triggers assert in debug mode. */
+
+/** @brief Verify that @ref fgm::Matrix2D out-of-bounds row, column mutation triggers assert in debug mode. */
 TEST_P(Matrix2DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix2D mat(1, 2);
