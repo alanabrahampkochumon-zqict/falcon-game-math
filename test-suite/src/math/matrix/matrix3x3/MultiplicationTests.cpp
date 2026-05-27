@@ -402,7 +402,7 @@ TYPED_TEST(Matrix3DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
  */
 TEST(Matrix3DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
-    const fgm::Matrix3D<float> iMatrix;
+    const fgm::Matrix3D<float> iMatrix  = fgm::mat3d::eye<float>;
     const fgm::vec3 vec{ 2.0f, 1.0f, 2.5 };
 
     const fgm::vec3 transformedVector = iMatrix * vec;
@@ -460,7 +460,7 @@ TYPED_TEST(Matrix3DVectorFractionalMultiplication, VectorTimesMatrixReturnsATran
  */
 TEST(Matrix3DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix3D<float> iMatrix;
+    const fgm::Matrix3D<float> iMatrix  = fgm::mat3d::eye<float>;
     const fgm::vec3 vec{ 2.0f, 1.0f, 3.0f };
 
     const fgm::vec3 transformedVector = vec * iMatrix;
@@ -508,7 +508,7 @@ TYPED_TEST(Matrix3DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
  */
 TEST(Matrix3DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix3D<float> iMatrix;
+    const fgm::Matrix3D<float> iMatrix  = fgm::mat3d::eye<float>;
     fgm::vec3 vec{ 2.0f, 1.0f, 3.0f };
 
     vec *= iMatrix;
@@ -523,7 +523,7 @@ TEST(Matrix3DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
  */
 TEST(Matrix3DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix3D<double> iMatrix;
+    const fgm::Matrix3D<double> iMatrix  = fgm::mat3d::eye<double>;
     [[maybe_unused]] fgm::iVec3 vec{ 2, 1, 5 };
 
     (void) (vec *= iMatrix);
@@ -582,7 +582,7 @@ TYPED_TEST(Matrix3DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithP
  */
 TEST(Matrix3DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix3D<float> iMatrix;
+    const fgm::Matrix3D<float> iMatrix  = fgm::mat3d::eye<float>;
     const fgm::Matrix3D mat{ 1.0f, 2.0f, 3.0f };
 
     const fgm::Matrix3D matrixProduct = iMatrix * mat;
@@ -627,7 +627,7 @@ TYPED_TEST(Matrix3DMultiplication, CompoundMultiplicationOperationPerformInPlace
  */
 TEST(Matrix3DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix3D<float> iMatrix;
+    const fgm::Matrix3D<float> iMatrix  = fgm::mat3d::eye<float>;
     fgm::Matrix3D mat{ 1.0f, 2.0f, 3.0f };
 
     mat *= iMatrix;
@@ -641,7 +641,7 @@ TEST(Matrix3DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
  */
 TEST(Matrix3DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix3D<double> iMatrix;
+    const fgm::Matrix3D<double> iMatrix  = fgm::mat3d::eye<double>;
     fgm::Matrix3D mat{ 1, 2, 3 };
 
     mat *= iMatrix;

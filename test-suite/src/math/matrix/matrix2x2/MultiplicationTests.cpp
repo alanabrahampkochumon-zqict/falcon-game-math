@@ -367,7 +367,7 @@ TYPED_TEST(Matrix2DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
  */
 TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
-    const fgm::Matrix2D<float> iMatrix;
+    const fgm::Matrix2D<float> iMatrix = fgm::mat2d::eye<float>;
     const fgm::vec2 vec(2.0f, 1.0f);
 
     const fgm::vec2 transformedVector = iMatrix * vec;
@@ -425,7 +425,7 @@ TYPED_TEST(Matrix2DVectorFractionalMultiplication, VectorTimesMatrixReturnsATran
  */
 TEST(Matrix2DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix2D<float> iMatrix;
+    const fgm::Matrix2D<float> iMatrix = fgm::mat2d::eye<float>;
     const fgm::vec2 vec(2.0f, 1.0f);
 
     const fgm::vec2 transformedVector = vec * iMatrix;
@@ -474,7 +474,7 @@ TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
  */
 TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix2D<float> iMatrix;
+    const auto iMatrix = fgm::mat2d::eye<float>;
     fgm::vec2 vec(2.0f, 1.0f);
 
     vec *= iMatrix;
@@ -489,7 +489,7 @@ TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
  */
 TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix2D<double> iMatrix;
+    const fgm::Matrix2D<double> iMatrix = fgm::mat2d::eye<double>;
     [[maybe_unused]] fgm::iVec2 vec(2, 1);
 
     (void) (vec *= iMatrix);
@@ -549,7 +549,7 @@ TYPED_TEST(Matrix2DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithP
  */
 TEST(Matrix2DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix2D<float> iMatrix;
+    const fgm::Matrix2D<float> iMatrix  = fgm::mat2d::eye<float>;
     const fgm::Matrix2D mat(1.0f, 2.0f, 3.0f, 4.0f);
 
     const fgm::Matrix2D matrixProduct = iMatrix * mat;
@@ -594,7 +594,7 @@ TYPED_TEST(Matrix2DMultiplication, CompoundMultiplicationOperationPerformInPlace
  */
 TEST(Matrix2DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix2D<float> iMatrix;
+    const fgm::Matrix2D<float> iMatrix = fgm::mat2d::eye<float>;
     fgm::Matrix2D mat(1.0f, 2.0f, 3.0f, 4.0f);
 
     mat *= iMatrix;
@@ -608,7 +608,7 @@ TEST(Matrix2DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
  */
 TEST(Matrix2DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix2D<double> iMatrix;
+    const fgm::Matrix2D<double> iMatrix = fgm::mat2d::eye<double>;
     fgm::Matrix2D mat(1, 2, 3, 4);
 
     mat *= iMatrix;

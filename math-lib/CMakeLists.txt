@@ -9,7 +9,7 @@ list(TRANSFORM CommonHeaderFiles PREPEND ${CommonDirectory})
 set(CommonTemplateFiles "Wrappers.tpp;")
 list(TRANSFORM CommonTemplateFiles PREPEND ${CommonDirectory})
 
-set(VectorDirectory "${IncludeDirectory}vector/")
+set(VectorDirectory "${IncludeDirectory}vectors/")
 set(VectorHeaderFiles Vector3D.h Vector2D.h Vector4D.h)
 list(TRANSFORM VectorHeaderFiles PREPEND ${VectorDirectory})
 
@@ -65,7 +65,7 @@ target_include_directories(
 )
 
 source_group("Header Files" FILES ${GeneralFiles})
-source_group("Header Files\\vector" FILES ${VectorHeaderFiles})
+source_group("Header Files\\vectors" FILES ${VectorHeaderFiles})
 source_group("Header Files\\common" FILES ${CommonHeaderFiles})
 source_group("Header Files\\matrix" FILES ${MatrixHeaderFiles})
 source_group("Template Files\\vector" FILES ${VectorTemplateDefinitionFiles})

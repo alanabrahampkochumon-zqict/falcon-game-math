@@ -459,7 +459,7 @@ TYPED_TEST(Matrix4DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
  */
 TEST(Matrix4DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
-    const fgm::Matrix4D<float> iMatrix;
+    const fgm::Matrix4D<float> iMatrix  = fgm::mat4d::eye<float>;
     const fgm::vec4 vec{ 2.0f, 1.0f, 2.5f, 12.5f };
 
     const fgm::vec4 transformedVector = iMatrix * vec;
@@ -517,7 +517,7 @@ TYPED_TEST(Matrix4DVectorFractionalMultiplication, VectorTimesMatrixReturnsATran
  */
 TEST(Matrix4DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix4D<float> iMatrix;
+    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
     const fgm::vec4 vec{ 2.0f, 1.0f, 2.5f, 12.5f };
 
     const fgm::vec4 transformedVector = vec * iMatrix;
@@ -566,7 +566,7 @@ TYPED_TEST(Matrix4DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
  */
 TEST(Matrix4DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix4D<float> iMatrix;
+    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
     fgm::vec4 vec{ 2.0f, 1.0f, 3.0f, 12.0f };
 
     vec *= iMatrix;
@@ -581,7 +581,7 @@ TEST(Matrix4DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
  */
 TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix4D<double> iMatrix;
+    const fgm::Matrix4D<double> iMatrix = fgm::mat4d::eye<double>;
     [[maybe_unused]] fgm::iVec4 vec{ 2, 1, 5, 4 };
 
     (void) (vec *= iMatrix);
@@ -643,7 +643,7 @@ TYPED_TEST(Matrix4DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithP
  */
 TEST(Matrix4DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix4D<float> iMatrix;
+    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
     const fgm::Matrix4D mat{ 1.0f, 2.0f, 3.0f, 4.0f };
 
     const fgm::Matrix4D matrixProduct = iMatrix * mat;
@@ -688,7 +688,7 @@ TYPED_TEST(Matrix4DMultiplication, CompoundMultiplicationOperationPerformInPlace
  */
 TEST(Matrix4DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix4D<float> iMatrix;
+    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
     fgm::Matrix4D mat{ 1.0f, 2.0f, 3.0f, 4.0f };
 
     mat *= iMatrix;
@@ -704,7 +704,7 @@ TEST(Matrix4DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
  */
 TEST(Matrix4DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix4D<double> iMatrix;
+    const fgm::Matrix4D<double> iMatrix = fgm::mat4d::eye<double>;
     fgm::Matrix4D mat{ 1, 2, 3, 4 };
 
     mat *= iMatrix;

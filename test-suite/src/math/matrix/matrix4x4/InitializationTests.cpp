@@ -151,7 +151,7 @@ TYPED_TEST(Matrix4DInitialization, EmptyConstructorReturnsIdentityMatrix)
 {
     constexpr fgm::Matrix4D<TypeParam> matrix{};
 
-    EXPECT_MAT_IDENTITY(matrix);
+    EXPECT_MAT_ZERO(matrix);
 }
 
 

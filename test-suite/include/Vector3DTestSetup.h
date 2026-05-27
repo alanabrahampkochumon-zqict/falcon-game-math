@@ -16,7 +16,7 @@
 #include "utils/VectorUtils.h"
 
 #include <common/MathTraits.h>
-#include <vector/Vector3D.h>
+#include <vectors/Vector3D.h>
 
 
 using namespace testutils;

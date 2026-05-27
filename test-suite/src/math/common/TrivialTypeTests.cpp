@@ -14,9 +14,9 @@
 #include <matrix/Matrix2D.h>
 #include <matrix/Matrix3D.h>
 #include <matrix/Matrix4D.h>
-#include <vector/Vector2D.h>
-#include <vector/Vector3D.h>
-#include <vector/Vector4D.h>
+#include <vectors/Vector2D.h>
+#include <vectors/Vector3D.h>
+#include <vectors/Vector4D.h>
 
 
 /**

@@ -17,9 +17,9 @@
 #include <common/MathTraits.h>
 #include <gtest/gtest.h>
 #include <type_traits>
-#include <vector/Vector2D.h>
-#include <vector/Vector3D.h>
-#include <vector/Vector4D.h>
+#include <vectors/Vector2D.h>
+#include <vectors/Vector3D.h>
+#include <vectors/Vector4D.h>
 
 namespace testutils
 {

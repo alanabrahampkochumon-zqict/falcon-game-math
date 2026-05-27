@@ -17,7 +17,7 @@
 
 #include <common/MathTraits.h>
 #include <gtest/gtest.h>
-#include <vector/Vector3D.h>
+#include <vectors/Vector3D.h>
 
 
 
