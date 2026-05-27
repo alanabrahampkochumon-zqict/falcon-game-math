@@ -1154,7 +1154,11 @@ namespace fgm
     {
         using R = PromotedValue_t<T, U>;
         /** @note Static cast ensures integral type dots don't lose much precision */
-        return this->dot(onto) / static_cast<Magnitude<R>>(onto.dot(onto)) * onto; // a.dot(b) / b.dot(b) * b
+        const auto b2 = static_cast<Magnitude<R>>(onto.dot(onto));
+        FGM_ASSERT_MSG(b2 >= fgm::Config::EPSILON_SQUARE<Magnitude<R>>,
+                       fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
+
+        return this->dot(onto) / b2 * onto; // a.dot(b) / b.dot(b) * b
     }
 
 
