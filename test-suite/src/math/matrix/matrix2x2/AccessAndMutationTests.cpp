@@ -12,6 +12,22 @@
 #include "MatrixTestSetup.h"
 
 
+#ifdef ENABLE_DEBUG_TESTS
+    #include <utility>
+
+class Matrix2DIndexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
+{};
+INSTANTIATE_TEST_SUITE_P(Matrix2DTests, Matrix2DIndexing,
+                         testing::Values(std::make_pair(3, 3), std::make_pair(2, 3), std::make_pair(3, 2), std::make_pair(100, 100)));
+
+class Matrix2DColumnIndexing: public testing::TestWithParam<std::size_t>
+{};
+INSTANTIATE_TEST_SUITE_P(Matrix2DTests, Matrix2DColumnIndexing,
+                         testing::Values(3, 4, 100));
+#endif
+
+
+
 
 /**
  * @addtogroup T_FGM_Mat2x2_Access
@@ -42,6 +58,7 @@ namespace
     static_assert(MAT[0].y() == VEC0[1]);
     static_assert(MAT[1].x() == VEC1[0]);
     static_assert(MAT[1].y() == VEC1[1]);
+
 } // namespace
 
 
@@ -72,6 +89,28 @@ TEST(Matrix2DAccess, AccessibleAsColumnVectors)
     EXPECT_VEC_EQ(fgm::Vector2D(1.0f, 3.0f), mat[0]);
     EXPECT_VEC_EQ(fgm::Vector2D(2.0f, 4.0f), mat[1]);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+
+/** @brief Verify that @ref fgm::Matrix out-of-bounds column access triggers assert in debug mode. */
+TEST_P(Matrix2DColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+{
+    const fgm::Matrix2D mat(1, 2);
+    const auto col = GetParam();
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
+}
+
+/** @brief Verify that @ref fgm::Matrix out-of-bounds row, column access triggers assert in debug mode. */
+TEST_P(Matrix2DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+{
+    const fgm::Matrix2D mat(1, 2);
+    const auto [row, col] = GetParam();
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col)), "");
+}
+
+#endif
+
 
 /** @} */
 
@@ -118,4 +157,26 @@ TEST(Matrix2DAccess, ColumnsCanBeMutatedUsingIndex)
     EXPECT_VEC_EQ(col0, mat[0]);
     EXPECT_VEC_EQ(col1, mat[1]);
 }
+
+
+#ifdef ENABLE_DEBUG_TESTS
+
+/** @brief Verify that @ref fgm::Matrix out-of-bounds column mutation triggers assert in debug mode. */
+TEST_P(Matrix2DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+{
+    [[maybe_unused]] fgm::Matrix2D mat(1, 2);
+    const auto col = GetParam();
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::vec2d::zero<int>), "");
+}
+
+/** @brief Verify that @ref fgm::Matrix out-of-bounds row, column mutation triggers assert in debug mode. */
+TEST_P(Matrix2DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+{
+    [[maybe_unused]] fgm::Matrix2D mat(1, 2);
+    const auto [row, col] = GetParam();
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col) = 5), "");
+}
+
+#endif
+
 /** @} */

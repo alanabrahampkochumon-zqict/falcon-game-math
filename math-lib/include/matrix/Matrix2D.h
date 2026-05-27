@@ -118,6 +118,8 @@ namespace fgm
         /**
          * @brief Access the column vector at the specified location (read-write access).
          *
+         * @note Performs bounds checking in **DEBUG MODE**.
+         *
          * @param[in] col The column index of the matrix.
          *
          * @return A reference to the column vector.
@@ -127,6 +129,8 @@ namespace fgm
 
         /**
          * @brief Access the column vector at the specified location (read-only).
+         *
+         * @note Performs bounds checking in **DEBUG MODE**.
          *
          * @param[in] col The column index of the matrix.
          *
@@ -138,6 +142,8 @@ namespace fgm
         /**
          * @brief Access the element at the specified row, column index (read-write access).
          *
+         * @note Performs bounds checking in **DEBUG MODE**.
+         *
          * @param[in] row The row index of the matrix entry.
          * @param[in] col The column index of the matrix entry.
          *
@@ -148,6 +154,8 @@ namespace fgm
 
         /**
          * @brief Access the element at the specified row, column index (read-only).
+         *
+         * @note Performs bounds checking in **DEBUG MODE**.
          *
          * @param[in] row The row index of the matrix entry.
          * @param[in] col The column index of the matrix entry.
