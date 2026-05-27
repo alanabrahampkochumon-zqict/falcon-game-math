@@ -277,12 +277,14 @@ namespace fgm
     template <Arithmetic T>
     constexpr T& Vector4D<T>::operator[](const std::size_t idx) noexcept
     {
+        FGM_ASSERT_MSG(idx >= 0 && idx < dimension, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 
     template <Arithmetic T>
     constexpr const T& Vector4D<T>::operator[](const std::size_t idx) const noexcept
     {
+        FGM_ASSERT_MSG(idx >= 0 && idx < dimension, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 

@@ -11,11 +11,14 @@
 
 #include "Vector3DTestSetup.h"
 
+
+
 #ifdef ENABLE_DEBUG_TESTS
 class Vector3DIndexing: public testing::TestWithParam<std::size_t>
 {};
 INSTANTIATE_TEST_SUITE_P(Vector2DTests, Vector3DIndexing, testing::Values(4, 5, 100));
 #endif
+
 
 
 /**
