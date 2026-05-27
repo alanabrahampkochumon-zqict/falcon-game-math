@@ -275,6 +275,30 @@ TYPED_TEST(Vector2DRejection, StaticWrapper_Reject_AlwaysReturnFloatingPointVect
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that rejecting a vector from a zero vector triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DRejection, FromZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector2D<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.reject(zeroVec)), "");
+}
+
+
+/**
+ * @brief Verify that rejecting a vector from a zero vector using static variant of @ref fgm::Vector2D::project
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector2DRejection, StaticWrapper_FromZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector2D<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector2D<TypeParam>::reject(this->_vec, zeroVec)), "");
+}
+
+#endif
+
+
 
 /**************************************
  *                                    *

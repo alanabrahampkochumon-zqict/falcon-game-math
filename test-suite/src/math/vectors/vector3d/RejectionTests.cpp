@@ -306,6 +306,32 @@ TYPED_TEST(Vector3DRejection, StaticWrapper_Reject_AlwaysReturnFloatingPointVect
 }
 
 
+#ifdef ENABLE_DEBUG_TESTS
+
+/**
+ * @brief Verify that rejecting a vector from a zero vector triggers assert in debug mode.
+ */
+TYPED_TEST(Vector3DRejection, FromZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector3D<TypeParam> zeroVec(0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.reject(zeroVec)), "");
+}
+
+
+/**
+ * @brief Verify that rejecting a vector from a zero vector using static variant of @ref fgm::Vector3D::reject
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vector3DRejection, StaticWrapper_FromZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vector3D<TypeParam> zeroVec(0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector3D<TypeParam>::reject(this->_vec, zeroVec)), "");
+}
+
+#endif
+
+
+
 /**************************************
  *                                    *
  *       SAFE REJECTION TESTS         *
