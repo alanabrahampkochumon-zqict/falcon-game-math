@@ -1068,7 +1068,10 @@ namespace fgm
     constexpr Vector4D<Magnitude<T>> Vector4D<T>::normalize() const noexcept
         requires StrictArithmetic<T>
     {
-        return *this / mag();
+        const auto magnitude = mag();
+        FGM_ASSERT_MSG(magnitude >= fgm::Config::EPSILON<decltype(magnitude)>,
+                       fgm::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
+        return *this / magnitude;
     }
 
 

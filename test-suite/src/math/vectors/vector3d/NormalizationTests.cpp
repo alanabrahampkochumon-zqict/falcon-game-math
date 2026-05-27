@@ -130,7 +130,7 @@ TYPED_TEST(Vector3DNormalization, ZeroMagnitudeTriggersAssertInDebugMode)
 
 
 /**
- * @brief Verify that normalizing a vector with zero magnitude using static variant of fgm::Vector2D::normalize triggers
+ * @brief Verify that normalizing a vector with zero magnitude using static variant of fgm::Vector4D::normalize triggers
  *        assert in debug mode.
  */
 TYPED_TEST(Vector3DNormalization, StaticWrapper_ZeroMagnitudeTriggersAssertInDebugMode)

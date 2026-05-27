@@ -121,6 +121,32 @@ TYPED_TEST(Vector4DNormalization, NormalizedVectorIsAlwaysTypedPromotedToFloatin
 }
 
 
+#ifdef ENABLE_DEBUG_TESTS
+
+/**
+ * @brief Verify that normalizing a vector with zero magnitude triggers assert in debug mode.
+ */
+TYPED_TEST(Vector4DNormalization, ZeroMagnitudeTriggersAssertInDebugMode)
+{
+    const fgm::Vector4D<TypeParam> zVec(0, 0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(zVec.normalize()), "");
+}
+
+
+/**
+ * @brief Verify that normalizing a vector with zero magnitude using static variant of fgm::Vector4D::normalize triggers
+ *        assert in debug mode.
+ */
+TYPED_TEST(Vector4DNormalization, StaticWrapper_ZeroMagnitudeTriggersAssertInDebugMode)
+{
+    const fgm::Vector4D<TypeParam> zVec(0, 0, 0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vector4D<TypeParam>::normalize(zVec)), "");
+}
+
+#endif
+
+
+
 /**************************************
  *                                    *
  *     SAFE NORMALIZATION TESTS       *
