@@ -558,6 +558,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
@@ -574,6 +575,7 @@ namespace fgm
          * @brief Compute the element-wise division of this matrix by @p scalar in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
@@ -795,6 +797,7 @@ namespace fgm
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Performs assertion for division by zero (singular matrix) in **Debug mode**.
          *
          * @return A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$.
          */
@@ -820,6 +823,7 @@ namespace fgm
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Performs assertion for division by zero (singular matrix) in **Debug mode**.
          *
          * @param[in] matrix The matrix to invert.
          *

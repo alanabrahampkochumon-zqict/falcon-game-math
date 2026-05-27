@@ -756,7 +756,6 @@ namespace fgm
         else
         {
             FGM_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
-            assert(scalar != 0 && "Integral division by zero");
             R tScalar = static_cast<R>(scalar);
             return Vector3D<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar);
         }
