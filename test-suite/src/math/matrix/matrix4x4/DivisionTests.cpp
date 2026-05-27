@@ -156,7 +156,7 @@ TYPED_TEST(Matrix4DDivision, DivideOperator_ReturnsInverseScaledMatrix)
 }
 
 
-#ifndef NDEBUG
+#ifdef ENABLE_DEBUG_TESTS
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix4DDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
 {
@@ -178,12 +178,14 @@ TYPED_TEST(Matrix4DDivision, DivideEqualsOperator_InverseScalesMatrixInPlace)
 }
 
 
-#ifndef NDEBUG
+#ifdef ENABLE_DEBUG_TESTS
+
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Matrix4DDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
 {
     EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix /= 0), "");
 }
+
 #endif
 
 

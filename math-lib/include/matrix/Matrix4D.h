@@ -585,6 +585,7 @@ namespace fgm
          *
          * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @param[in] scalar The value to scale by.
          *
@@ -599,6 +600,7 @@ namespace fgm
          * @brief Compute the element-wise division of this matrix by @p scalar in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
