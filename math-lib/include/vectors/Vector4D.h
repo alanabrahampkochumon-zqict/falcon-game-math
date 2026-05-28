@@ -1356,46 +1356,46 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Compute the Manhattan (L1) distance between this vector and the @p rhs vector.
-        //  *        \f$ d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2| \f$
-        //  *
-        //  * @note Mathematically, distance is a metric between points, not directional vectors.
-        //  *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //  *
-        //  * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] rhs The target position vector.
-        //  *
-        //  * @return The Manhattan (Taxicab) distance.
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] constexpr PromotedValue_t<T, U> manhattanDist(const Vector4D<U>& rhs) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the Manhattan (L1) distance between two vectors.
-        //  *        \f$ d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2| \f$
-        //  *
-        //  * @note Mathematically, distance is a metric between points, not directional vectors.
-        //  *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //  *
-        //  * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] lhs The first position vector.
-        //  * @param[in] rhs The second position vector.
-        //  *
-        //  * @return The Manhattan(Taxicab) distance.
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] static constexpr PromotedValue_t<T, U> manhattanDist(const Vector4D<U>& lhs,
-        //                                                                    const Vector4D<U>& rhs) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
+        /**
+         * @brief Compute the Manhattan (L1) distance between this vector and the @p rhs vector.
+         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2| + |w1 - w_2| \f$
+        w
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The target position vector.
+         *
+         * @return The Manhattan (Taxicab) distance.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedValue_t<T, U> manhattanDist(const Vector4D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan (L1) distance between two vectors.
+         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2| + |w1 - w_2| \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first position vector.
+         * @param[in] rhs The second position vector.
+         *
+         * @return The Manhattan(Taxicab) distance.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> manhattanDist(const Vector4D<U>& lhs,
+                                                                           const Vector4D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
         // /**
         //  * @brief Compute the Chebyshev (L∞) distance between this vector and the @p rhs vector.
         //  *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|, |z_2 - z_1|)} \f$

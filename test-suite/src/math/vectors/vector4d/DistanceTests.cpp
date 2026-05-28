@@ -89,10 +89,10 @@ namespace
     static_assert(vectorA.distSq(vectorB) == 16);
     static_assert(fgm::Vector4D<int>::distSq(vectorA, vectorB) == 16);
 
-    // // Manhattan Distance
-    // static_assert(vectorA.manhattanDist(vectorB) == 11);
-    // static_assert(fgm::Vector4D<int>::manhattanDist(vectorA, vectorB) == 11);
-    //
+    // Manhattan Distance
+    static_assert(vectorA.manhattanDist(vectorB) == 8);
+    static_assert(fgm::Vector4D<int>::manhattanDist(vectorA, vectorB) == 8);
+
     // // Chebyshev Distance Square
     // static_assert(vectorA.chebyshevDist(vectorB) == 6);
     // static_assert(fgm::Vector4D<int>::chebyshevDist(vectorA, vectorB) == 6);

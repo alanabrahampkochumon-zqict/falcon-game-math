@@ -1006,20 +1006,23 @@ namespace fgm
      *                                    *
      **************************************/
 
-    // template <Arithmetic T>
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // constexpr PromotedValue_t<T, U> Vector4D<T>::manhattanDist(const Vector4D<U>& rhs) const noexcept
-    //     requires StrictArithmetic<T>
-    // { return utils::diffAbs(_data[0], rhs[0]) + utils::diffAbs(_data[1], rhs[1]) + utils::diffAbs(_data[2], rhs[2]); }
-    //
-    //
-    // template <Arithmetic T>
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // constexpr PromotedValue_t<T, U> Vector4D<T>::manhattanDist(const Vector4D<U>& lhs, const Vector4D<U>& rhs) noexcept
-    //     requires StrictArithmetic<T>
-    // { return lhs.manhattanDist(rhs); }
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedValue_t<T, U> Vector4D<T>::manhattanDist(const Vector4D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return utils::diffAbs(_data[0], rhs[0]) + utils::diffAbs(_data[1], rhs[1]) + utils::diffAbs(_data[2], rhs[2]) +
+            utils::diffAbs(_data[3], rhs[3]);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedValue_t<T, U> Vector4D<T>::manhattanDist(const Vector4D<U>& lhs, const Vector4D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.manhattanDist(rhs); }
 
 
 
@@ -1043,7 +1046,8 @@ namespace fgm
     // template <Arithmetic T>
     // template <StrictArithmetic U>
     //     requires StrictSignedness<T, U>
-    // constexpr PromotedValue_t<T, U> Vector4D<T>::chebyshevDist(const Vector4D<U>& lhs, const Vector4D<U>& rhs) noexcept
+    // constexpr PromotedValue_t<T, U> Vector4D<T>::chebyshevDist(const Vector4D<U>& lhs, const Vector4D<U>& rhs)
+    // noexcept
     //     requires StrictArithmetic<T>
     // { return lhs.chebyshevDist(rhs); }
 
