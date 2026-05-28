@@ -4,7 +4,7 @@ set(GeneralFiles "SimdTraits.h;DoxygenGroups.h")
 list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
 
 set(CommonDirectory "${IncludeDirectory}common/")
-set(CommonHeaderFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h;Wrappers.h;PreprocessorDefinitions.h;Messages.h;Types.h")
+set(CommonHeaderFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h;Wrappers.h;PreprocessorDefinitions.h;Messages.h;Types.h;Utils.h;Utils.tpp;")
 list(TRANSFORM CommonHeaderFiles PREPEND ${CommonDirectory})
 set(CommonTemplateFiles "Wrappers.tpp;")
 list(TRANSFORM CommonTemplateFiles PREPEND ${CommonDirectory})
@@ -24,7 +24,7 @@ set(MatrixTemplateDefinitionFiles Matrix2D.tpp Matrix3D.tpp Matrix4D.tpp)
 list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDirectory})
 
 # To view this target as a Interface Library, we need to pass all the target files.
-add_library(MathLib INTERFACE 
+add_library(MathLib INTERFACE
         ${VectorHeaderFiles}
         ${VectorTemplateDefinitionFiles}
         ${MatrixHeaderFiles}
@@ -42,10 +42,10 @@ target_compile_options(MathLib INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
 
 
 target_sources(MathLib
-    INTERFACE
-    FILE_SET HEADERS
-    BASE_DIRS ${IncludeDirectory}
-    FILES
+        INTERFACE
+        FILE_SET HEADERS
+        BASE_DIRS ${IncludeDirectory}
+        FILES
         ${VectorHeaderFiles}
         ${VectorTemplateDefinitionFiles}
         ${MatrixHeaderFiles}
@@ -57,10 +57,10 @@ target_sources(MathLib
 
 
 target_include_directories(
-    MathLib
-    INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
+        MathLib
+        INTERFACE
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+        "$<INSTALL_INTERFACE:include>"
 
 )
 

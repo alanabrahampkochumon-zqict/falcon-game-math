@@ -275,5 +275,10 @@
      * @brief Static tests verifying trivial behavior of classes and structs.
      */
 
+    /**
+     * @defgroup T_FGM_Utils Utility Tests
+     * @brief Validates logic of all fgm utility functions.
+     */
+
 /** @} */ // End of FGMTestSuite
 // clang-format on

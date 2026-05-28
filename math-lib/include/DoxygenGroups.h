@@ -233,6 +233,12 @@
      * @ingroup FGM_Math
      */
 
+    /**
+     * @defgroup FGM_Utils Utility functions
+     * @brief Helper utilities for FGM.
+     * @ingroup FGM_Math
+     */
+
 /** @} */ // End of FGM_Math
 
 // clang-format on
