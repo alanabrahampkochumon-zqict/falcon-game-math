@@ -1243,7 +1243,7 @@ namespace fgm
 
 
          /**
-         * @addtogroup FGM_Vec2_Dist
+         * @addtogroup FGM_Vec3_Dist
          * @{
          */
 

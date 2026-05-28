@@ -903,6 +903,7 @@ namespace fgm
     { return vec.chebyshevNorm(); }
 
 
+
     /**************************************
      *                                    *
      *         VECTOR DISTANCE            *

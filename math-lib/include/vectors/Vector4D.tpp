@@ -939,6 +939,116 @@ namespace fgm
     { return vec.chebyshevNorm(); }
 
 
+
+    /**************************************
+     *                                    *
+     *         VECTOR DISTANCE            *
+     *                                    *
+     **************************************/
+
+    /**************************************
+     *                                    *
+     *             EUCLIDEAN              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr Magnitude<PromotedValue_t<T, U>> Vector4D<T>::dist(const Vector4D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R       = Magnitude<PromotedValue_t<T, U>>;
+        const auto dx = utils::diffAbs(_data[0], rhs[0]);
+        const auto dy = utils::diffAbs(_data[1], rhs[1]);
+        const auto dz = utils::diffAbs(_data[2], rhs[2]);
+        const auto dw = utils::diffAbs(_data[3], rhs[3]);
+        return static_cast<R>(std::sqrt(dx * dx + dy * dy + dz * dz + dw * dw));
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr Magnitude<PromotedValue_t<T, U>> Vector4D<T>::dist(const Vector4D<U>& lhs,
+                                                                 const Vector4D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.dist(rhs); }
+
+    //
+    // template <Arithmetic T>
+    // template <StrictArithmetic U>
+    //     requires StrictSignedness<T, U>
+    // constexpr PromotedValue_t<T, U> Vector4D<T>::distSq(const Vector4D<U>& rhs) const noexcept
+    //     requires StrictArithmetic<T>
+    // {
+    //     const auto dx = utils::diffAbs(_data[0], rhs[0]);
+    //     const auto dy = utils::diffAbs(_data[1], rhs[1]);
+    //     const auto dz = utils::diffAbs(_data[2], rhs[2]);
+        // const auto dw = utils::diffAbs(_data[3], rhs[3]);
+    //
+    //     return dx * dx + dy * dy + dz * dz + dw * dw;
+    // }
+    //
+    //
+    // template <Arithmetic T>
+    // template <StrictArithmetic U>
+    //     requires StrictSignedness<T, U>
+    // constexpr PromotedValue_t<T, U> Vector4D<T>::distSq(const Vector4D<U>& lhs, const Vector4D<U>& rhs) noexcept
+    //     requires StrictArithmetic<T>
+    // { return lhs.distSq(rhs); }
+
+
+
+    /**************************************
+     *                                    *
+     *             MANHATTAN              *
+     *                                    *
+     **************************************/
+
+    // template <Arithmetic T>
+    // template <StrictArithmetic U>
+    //     requires StrictSignedness<T, U>
+    // constexpr PromotedValue_t<T, U> Vector4D<T>::manhattanDist(const Vector4D<U>& rhs) const noexcept
+    //     requires StrictArithmetic<T>
+    // { return utils::diffAbs(_data[0], rhs[0]) + utils::diffAbs(_data[1], rhs[1]) + utils::diffAbs(_data[2], rhs[2]); }
+    //
+    //
+    // template <Arithmetic T>
+    // template <StrictArithmetic U>
+    //     requires StrictSignedness<T, U>
+    // constexpr PromotedValue_t<T, U> Vector4D<T>::manhattanDist(const Vector4D<U>& lhs, const Vector4D<U>& rhs) noexcept
+    //     requires StrictArithmetic<T>
+    // { return lhs.manhattanDist(rhs); }
+
+
+
+    /**************************************
+     *                                    *
+     *             CHEBYSHEV              *
+     *                                    *
+     **************************************/
+
+    // template <Arithmetic T>
+    // template <StrictArithmetic U>
+    //     requires StrictSignedness<T, U>
+    // constexpr PromotedValue_t<T, U> Vector4D<T>::chebyshevDist(const Vector4D<U>& rhs) const noexcept
+    //     requires StrictArithmetic<T>
+    // {
+    //     return std::max(utils::diffAbs(_data[0], rhs[0]),
+    //                     std::max(utils::diffAbs(_data[1], rhs[1]), utils::diffAbs(_data[2], rhs[2])));
+    // }
+    //
+    //
+    // template <Arithmetic T>
+    // template <StrictArithmetic U>
+    //     requires StrictSignedness<T, U>
+    // constexpr PromotedValue_t<T, U> Vector4D<T>::chebyshevDist(const Vector4D<U>& lhs, const Vector4D<U>& rhs) noexcept
+    //     requires StrictArithmetic<T>
+    // { return lhs.chebyshevDist(rhs); }
+
+
+
     /*************************************
      *                                   *
      *       VECTOR NORMALIZATION        *
