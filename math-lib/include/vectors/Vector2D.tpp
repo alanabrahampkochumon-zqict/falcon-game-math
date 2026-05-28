@@ -913,9 +913,9 @@ namespace fgm
     constexpr PromotedValue_t<T, U> Vector2D<T>::manhattanDist(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = PromotedValue_t<T, U>;
+        // using R = PromotedValue_t<T, U>;
 
-        return R(0);
+        return PromotedValue_t<T, U>(rhs.x());
         // return fgm::abs(_data[0] - rhs[0]) + fgm::abs(_data[1] - rhs[1]);
     }
 

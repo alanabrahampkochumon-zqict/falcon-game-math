@@ -32,8 +32,8 @@ TYPED_TEST_SUITE(FGMDiffAbs, SupportedArithmeticTypes);
 /** @brief Verify that @ref fgm::utils::diffAbs is available at compile time. */
 namespace
 {
-    // static_assert(fgm::utils::diffAbs(1000, 100) == 900);
-    // static_assert(fgm::utils::diffAbs(100, 1000) == 900);
+    static_assert(fgm::utils::diffAbs(1000, 100) == 900);
+    static_assert(fgm::utils::diffAbs(100, 1000) == 900);
 }
 
 
@@ -43,9 +43,9 @@ namespace
  */
 TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenAGreaterThanB)
 {
-    const auto a      = TypeParam(516);
-    const auto b      = TypeParam(200);
-    const auto result = TypeParam(316);
+    const auto a      = TypeParam(12);
+    const auto b      = TypeParam(7);
+    const auto result = TypeParam(5);
     testutils::EXPECT_MAG_EQ(result, fgm::utils::diffAbs(a, b));
 }
 
@@ -56,9 +56,9 @@ TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenAGreaterThanB)
  */
 TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenBGreaterThanA)
 {
-    const auto a      = TypeParam(200);
-    const auto b      = TypeParam(516);
-    const auto result = TypeParam(316);
+    const auto a      = TypeParam(7);
+    const auto b      = TypeParam(12);
+    const auto result = TypeParam(5);
     testutils::EXPECT_MAG_EQ(result, fgm::utils::diffAbs(a, b));
 }
 
@@ -69,8 +69,8 @@ TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenBGreaterThanA)
  */
 TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenAEqualsB)
 {
-    const auto a      = TypeParam(316);
-    const auto b      = TypeParam(316);
+    const auto a      = TypeParam(12);
+    const auto b      = TypeParam(12);
     const auto result = TypeParam(0);
     testutils::EXPECT_MAG_EQ(result, fgm::utils::diffAbs(a, b));
 }
