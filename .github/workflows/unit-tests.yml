@@ -80,6 +80,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -D ENABLE_STRICT=ON
           -D NONCOMPREHENSIVE=ON
+          -DSDL_UNIX_CONSOLE_BUILD=ON
           -S ${{ github.workspace }}
 
       - name: Build
