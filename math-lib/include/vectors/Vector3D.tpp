@@ -938,28 +938,29 @@ namespace fgm
     { return lhs.dist(rhs); }
 
 
-    // template <Arithmetic T>
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // constexpr PromotedValue_t<T, U> Vector2D<T>::distSq(const Vector2D<U>& rhs) const noexcept
-    //     requires StrictArithmetic<T>
-    // {
-    //     const auto dx = utils::diffAbs(_data[0], rhs[0]);
-    //     const auto dy = utils::diffAbs(_data[1], rhs[1]);
-    //
-    //     return dx * dx + dy * dy;
-    // }
-    //
-    //
-    // template <Arithmetic T>
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // constexpr PromotedValue_t<T, U> Vector2D<T>::distSq(const Vector2D<U>& lhs, const Vector2D<U>& rhs) noexcept
-    //     requires StrictArithmetic<T>
-    // { return lhs.distSq(rhs); }
-    //
-    //
-    //
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedValue_t<T, U> Vector3D<T>::distSq(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        const auto dx = utils::diffAbs(_data[0], rhs[0]);
+        const auto dy = utils::diffAbs(_data[1], rhs[1]);
+        const auto dz = utils::diffAbs(_data[2], rhs[2]);
+
+        return dx * dx + dy * dy + dz * dz;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedValue_t<T, U> Vector3D<T>::distSq(const Vector3D<U>& lhs, const Vector3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.distSq(rhs); }
+
+
+
     // /**************************************
     //  *                                    *
     //  *             MANHATTAN              *

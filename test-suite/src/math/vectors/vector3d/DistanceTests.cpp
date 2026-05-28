@@ -78,17 +78,17 @@ TYPED_TEST_SUITE(Vector3DDistanceSigned, SupportedSignedArithmeticTypes);
 namespace
 {
     // TODO: Add back after creating fgm::sqrt
-    // constexpr fgm::Vector3D vectorA(2, 3);
-    // constexpr fgm::Vector3D vectorB(5, 7);
+    constexpr fgm::Vector3D vectorA(1, 2, 3);
+    constexpr fgm::Vector3D vectorB(3, 8, 6);
 
     // Euclidean Distance
-    // static_assert(vectorA.dist(vectorB) == 5);
-    // static_assert(fgm::Vector3D<int>::dist(vectorA, vectorB) == 5);
+    // static_assert(vectorA.dist(vectorB) == 7);
+    // static_assert(fgm::Vector3D<int>::dist(vectorA, vectorB) == 7);
 
     // Euclidean Distance Square
-    //  static_assert(vectorA.distSq(vectorB) == 25);
-    //  static_assert(fgm::Vector3D<int>::distSq(vectorA, vectorB) == 25);
-    //
+     static_assert(vectorA.distSq(vectorB) == 49);
+     static_assert(fgm::Vector3D<int>::distSq(vectorA, vectorB) == 49);
+
     // // Manhattan Distance
     // static_assert(vectorA.manhattanDist(vectorB) == 7);
     // static_assert(fgm::Vector3D<int>::manhattanDist(vectorA, vectorB) == 7);
@@ -207,61 +207,61 @@ TYPED_TEST(Vector3DDistance, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
  *    EUCLIDEAN DISTANCE (SQUARED)    *
  *                                    *
  **************************************/
-//
-// /** @brief Verify that the @ref fgm::Vector3D::distSq function returns the Euclidean distance (squared). */
-// TYPED_TEST(Vector3DDistance, DistSq_ReturnsSquaredEuclideanDistance)
-// { EXPECT_MAG_EQ(this->_distSq, this->_vecA.distSq(this->_vecB)); }
-//
-//
-// /** @brief Verify that the @ref fgm::Vector3D::distSq function returns zero for the same vector. */
-// TYPED_TEST(Vector3DDistance, DistSq_BetweenSameVectorReturnsZero)
-// {
-//     constexpr auto zero = TypeParam(0);
-//     const auto distance = this->_vecA.distSq(this->_vecA);
-//     EXPECT_MAG_EQ(zero, distance);
-// }
-//
-//
-// /** @brief Verify that the @ref fgm::Vector3D::distSq function handles negative coordinates. */
-// TYPED_TEST(Vector3DDistanceSigned, DistSq_HandlesNegativeNumbers)
-// {
-//     const auto distance = this->_vecA.distSq(this->_vecB);
-//     EXPECT_MAG_EQ(this->_distSq, distance);
-// }
-//
-//
-// /**
-//  * @brief Verify that the static variant of  @ref fgm::Vector3D::distSq function
-//  *        returns the Euclidean distance (squared).
-//  */
-// TYPED_TEST(Vector3DDistance, StaticWrapper_DistSq_ReturnsSquaredEuclideanDistance)
-// { EXPECT_MAG_EQ(this->_distSq, fgm::Vector3D<TypeParam>::distSq(this->_vecA, this->_vecB)); }
-//
-//
-// /** @brief Verify that the @ref fgm::Vector3D::distSq function returns zero for the same vector. */
-// TYPED_TEST(Vector3DDistance, StaticWrapper_DistSq_BetweenSameVectorReturnsZero)
-// {
-//     constexpr auto zero = TypeParam(0);
-//     const auto distance = fgm::Vector3D<TypeParam>::distSq(this->_vecA, this->_vecA);
-//     EXPECT_MAG_EQ(zero, distance);
-// }
-//
-//
-// /** @brief Verify that the static variant of @ref fgm::Vector3D::distSq function handles negative coordinates. */
-// TYPED_TEST(Vector3DDistanceSigned, StaticWrapper_DistSq_HandlesNegativeNumbers)
-// {
-//     const auto distance = fgm::Vector3D<TypeParam>::distSq(this->_vecA, this->_vecB);
-//     EXPECT_MAG_EQ(this->_distSq, distance);
-// }
-//
-//
-// /**************************************
-//  *                                    *
-//  *        MANHATTAN DISTANCE          *
-//  *                                    *
-//  **************************************/
-//
-//
+
+/** @brief Verify that the @ref fgm::Vector3D::distSq function returns the Euclidean distance (squared). */
+TYPED_TEST(Vector3DDistance, DistSq_ReturnsSquaredEuclideanDistance)
+{ EXPECT_MAG_EQ(this->_distSq, this->_vecA.distSq(this->_vecB)); }
+
+
+/** @brief Verify that the @ref fgm::Vector3D::distSq function returns zero for the same vector. */
+TYPED_TEST(Vector3DDistance, DistSq_BetweenSameVectorReturnsZero)
+{
+    constexpr auto zero = TypeParam(0);
+    const auto distance = this->_vecA.distSq(this->_vecA);
+    EXPECT_MAG_EQ(zero, distance);
+}
+
+
+/** @brief Verify that the @ref fgm::Vector3D::distSq function handles negative coordinates. */
+TYPED_TEST(Vector3DDistanceSigned, DistSq_HandlesNegativeNumbers)
+{
+    const auto distance = this->_vecA.distSq(this->_vecB);
+    EXPECT_MAG_EQ(this->_distSq, distance);
+}
+
+
+/**
+ * @brief Verify that the static variant of  @ref fgm::Vector3D::distSq function
+ *        returns the Euclidean distance (squared).
+ */
+TYPED_TEST(Vector3DDistance, StaticWrapper_DistSq_ReturnsSquaredEuclideanDistance)
+{ EXPECT_MAG_EQ(this->_distSq, fgm::Vector3D<TypeParam>::distSq(this->_vecA, this->_vecB)); }
+
+
+/** @brief Verify that the @ref fgm::Vector3D::distSq function returns zero for the same vector. */
+TYPED_TEST(Vector3DDistance, StaticWrapper_DistSq_BetweenSameVectorReturnsZero)
+{
+    constexpr auto zero = TypeParam(0);
+    const auto distance = fgm::Vector3D<TypeParam>::distSq(this->_vecA, this->_vecA);
+    EXPECT_MAG_EQ(zero, distance);
+}
+
+
+/** @brief Verify that the static variant of @ref fgm::Vector3D::distSq function handles negative coordinates. */
+TYPED_TEST(Vector3DDistanceSigned, StaticWrapper_DistSq_HandlesNegativeNumbers)
+{
+    const auto distance = fgm::Vector3D<TypeParam>::distSq(this->_vecA, this->_vecB);
+    EXPECT_MAG_EQ(this->_distSq, distance);
+}
+
+
+/**************************************
+ *                                    *
+ *        MANHATTAN DISTANCE          *
+ *                                    *
+ **************************************/
+
+
 // /** @brief Verify that the @ref fgm::Vector3D::manhattanDist function returns the Manhattan. */
 // TYPED_TEST(Vector3DDistance, ManhattanDist_ReturnsManhattanDistance)
 // { EXPECT_MAG_EQ(this->_distManhattan, this->_vecA.manhattanDist(this->_vecB)); }
