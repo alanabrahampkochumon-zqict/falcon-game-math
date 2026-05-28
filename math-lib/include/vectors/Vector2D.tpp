@@ -914,6 +914,13 @@ namespace fgm
     { return lhs.distSq(rhs); }
 
 
+
+    /**************************************
+     *                                    *
+     *             MANHATTAN              *
+     *                                    *
+     **************************************/
+
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
@@ -929,6 +936,13 @@ namespace fgm
         requires StrictArithmetic<T>
     { return lhs.manhattanDist(rhs); }
 
+
+
+    /**************************************
+     *                                    *
+     *             CHEBYSHEV              *
+     *                                    *
+     **************************************/
 
     template <Arithmetic T>
     template <StrictArithmetic U>

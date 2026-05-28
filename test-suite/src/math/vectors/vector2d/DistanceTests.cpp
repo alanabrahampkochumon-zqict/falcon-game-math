@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 28, 2026
  *
- * @brief Verify @ref fgm::Vector distance (L1, L2, L3) calculation logic.
+ * @brief Verify @ref fgm::Vector3D distance (L1, L2, L3) calculation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -204,10 +204,9 @@ TYPED_TEST(Vector2DDistance, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
 
 /**************************************
  *                                    *
- *        EUCLIDEAN DISTANCE          *
+ *    EUCLIDEAN DISTANCE (SQUARED)    *
  *                                    *
  **************************************/
-
 
 /** @brief Verify that the @ref fgm::Vector2D::distSq function returns the Euclidean distance (squared). */
 TYPED_TEST(Vector2DDistance, DistSq_ReturnsSquaredEuclideanDistance)
