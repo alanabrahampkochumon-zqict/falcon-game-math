@@ -990,26 +990,24 @@ namespace fgm
      *                                    *
      **************************************/
 
-    // template <Arithmetic T>
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // constexpr PromotedValue_t<T, U> Vector2D<T>::chebyshevDist(const Vector2D<U>& rhs) const noexcept
-    //     requires StrictArithmetic<T>
-    // {
-    //     return std::max(utils::diffAbs(_data[0], rhs[0]), utils::diffAbs(_data[1], rhs[1]));
-    // }
-    //
-    //
-    // template <Arithmetic T>
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // constexpr PromotedValue_t<T, U> Vector2D<T>::chebyshevDist(const Vector2D<U>& lhs, const Vector2D<U>& rhs)
-    // noexcept
-    //     requires StrictArithmetic<T>
-    // {
-    //     return lhs.chebyshevDist(rhs);
-    // }
-    //
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedValue_t<T, U> Vector3D<T>::chebyshevDist(const Vector3D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return std::max(utils::diffAbs(_data[0], rhs[0]),
+                        std::max(utils::diffAbs(_data[1], rhs[1]), utils::diffAbs(_data[2], rhs[2])));
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedValue_t<T, U> Vector3D<T>::chebyshevDist(const Vector3D<U>& lhs, const Vector3D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.chebyshevDist(rhs); }
+
 
 
     /*************************************
