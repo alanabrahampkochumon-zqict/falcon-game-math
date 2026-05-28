@@ -1318,7 +1318,7 @@ namespace fgm
 
         /**
          * @brief Compute the squared Euclidean (L2) distance between this vector and the @p rhs vector.
-         *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 \f$
+         *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 + (w_2 - w_1)^2 \f$
          *
          * @note Mathematically, distance is a metric between points, not directional vectors.
          *       This operation treats both vectors as position vectors (coordinates in affine space).
@@ -1329,33 +1329,33 @@ namespace fgm
          *
          * @return The squared Euclidean distance.
          */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] constexpr PromotedValue_t<T, U> distSq(const Vector4D<U>& rhs) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the squared Euclidean (L2) distance between two vectors.
-        //  *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 \f$
-        //  *
-        //  * @note Mathematically, distance is a metric between points, not directional vectors.
-        //  *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //  *
-        //  * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] lhs The first position vector.
-        //  * @param[in] rhs The second position vector.
-        //  *
-        //  * @return The squared Euclidean distance.
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] static constexpr PromotedValue_t<T, U> distSq(const Vector4D<U>& lhs,
-        //                                                             const Vector4D<U>& rhs) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedValue_t<T, U> distSq(const Vector4D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the squared Euclidean (L2) distance between two vectors.
+         *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 + (w_2 - w_1)^2 \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first position vector.
+         * @param[in] rhs The second position vector.
+         *
+         * @return The squared Euclidean distance.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> distSq(const Vector4D<U>& lhs,
+                                                                    const Vector4D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
         // /**
         //  * @brief Compute the Manhattan (L1) distance between this vector and the @p rhs vector.
         //  *        \f$ d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2| \f$
