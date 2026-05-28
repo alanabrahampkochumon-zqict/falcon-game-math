@@ -126,7 +126,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Access
+         * @addtogroup FGM_Vec4_Access
          * @{
          */
 
@@ -1271,7 +1271,7 @@ namespace fgm
 
 
 
-         /**
+        /**
          * @addtogroup FGM_Vec4_Dist
          * @{
          */
@@ -1396,51 +1396,51 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Compute the Chebyshev (L∞) distance between this vector and the @p rhs vector.
-        //  *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|, |z_2 - z_1|)} \f$
-        //  *
-        //  * @note Mathematically, distance is a metric between points, not directional vectors.
-        //  *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //  *
-        //  * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] rhs The target position vector.
-        //  *
-        //  * @return The Chebyshev distance.
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] constexpr PromotedValue_t<T, U> chebyshevDist(const Vector4D<U>& rhs) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the Chebyshev (L∞) distance between two vectors.
-        //  *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|, |z_2 - z_1|)} \f$
-        //  *
-        //  * @note Mathematically, distance is a metric between points, not directional vectors.
-        //  *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //  *
-        //  * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] lhs The first position vector.
-        //  * @param[in] rhs The second position vector.
-        //  *
-        //  * @return The Chebyshev distance.
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] static constexpr PromotedValue_t<T, U> chebyshevDist(const Vector4D<U>& lhs,
-        //                                                                    const Vector4D<U>& rhs) noexcept
-        //     requires StrictArithmetic<T>;
+        /**
+         * @brief Compute the Chebyshev (L∞) distance between this vector and the @p rhs vector.
+         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|, |z_2 - z_1|, |w_2 - w_1|)} \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The target position vector.
+         *
+         * @return The Chebyshev distance.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedValue_t<T, U> chebyshevDist(const Vector4D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev (L∞) distance between two vectors.
+         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|, |z_2 - z_1|, |w_2 - w_1|)} \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first position vector.
+         * @param[in] rhs The second position vector.
+         *
+         * @return The Chebyshev distance.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> chebyshevDist(const Vector4D<U>& lhs,
+                                                                           const Vector4D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
 
         /** @} */
 
 
 
         /**
-         * @addtogroup FGM_Vec3_Normalize
+         * @addtogroup FGM_Vec4_Normalize
          * @{
          */
 
