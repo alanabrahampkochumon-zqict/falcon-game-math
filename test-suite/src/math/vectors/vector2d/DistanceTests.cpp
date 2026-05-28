@@ -78,11 +78,24 @@ TYPED_TEST_SUITE(Vector2DDistanceSigned, SupportedSignedArithmeticTypes);
 namespace
 {
     // TODO: Add back after creating fgm::sqrt
-    // constexpr fgm::Vector2D vectorA(2, 3);
-    // constexpr fgm::Vector2D vectorB(5, 7);
+    constexpr fgm::Vector2D vectorA(2, 3);
+    constexpr fgm::Vector2D vectorB(5, 7);
 
+    // Euclidean Distance
     // static_assert(vectorA.dist(vectorB) == 5);
     // static_assert(fgm::Vector2D<int>::dist(vectorA, vectorB) == 5);
+
+    // Euclidean Distance Square
+     static_assert(vectorA.distSq(vectorB) == 25);
+     static_assert(fgm::Vector2D<int>::distSq(vectorA, vectorB) == 25);
+
+    // Manhattan Distance
+    static_assert(vectorA.manhattanDist(vectorB) == 7);
+    static_assert(fgm::Vector2D<int>::manhattanDist(vectorA, vectorB) == 7);
+
+    // Chebyshev Distance Square
+    static_assert(vectorA.chebyshevDist(vectorB) == 4);
+    static_assert(fgm::Vector2D<int>::chebyshevDist(vectorA, vectorB) == 4);
 
 } // namespace
 
