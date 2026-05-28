@@ -28,8 +28,8 @@ protected:
 
     void SetUp() override
     {
-        _vecA = { T(2), T(3) };
-        _vecB = { T(5), T(7) };
+        _vecA = { T(2), T(7) };
+        _vecB = { T(5), T(3) };
 
         _dist          = fgm::Magnitude<T>(5);
         _distSq        = T(25);
@@ -256,7 +256,7 @@ TYPED_TEST(Vector2DDistance, ManhattanDist_ReturnsManhattanDistance)
 
 
 /** @brief Verify that the @ref fgm::Vector2D::manhattanDist function returns zero for the same vector. */
-TYPED_TEST(Vector2DDistance, ManhattanSq_BetweenSameVectorReturnsZero)
+TYPED_TEST(Vector2DDistance, ManhattanDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
     const auto distance = this->_vecA.manhattanDist(this->_vecA);
@@ -265,7 +265,7 @@ TYPED_TEST(Vector2DDistance, ManhattanSq_BetweenSameVectorReturnsZero)
 
 
 /** @brief Verify that the @ref fgm::Vector2D::manhattanDist function handles negative coordinates. */
-TYPED_TEST(Vector2DDistanceSigned, ManhattanSq_HandlesNegativeNumbers)
+TYPED_TEST(Vector2DDistanceSigned, ManhattanDist_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.manhattanDist(this->_vecB);
     EXPECT_MAG_EQ(this->_distManhattan, distance);

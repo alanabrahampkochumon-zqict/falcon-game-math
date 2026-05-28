@@ -12,6 +12,7 @@
 
 
 #include "common/Messages.h"
+#include "common/Utils.h"
 #include "common/Wrappers.h"
 
 #include <algorithm>
@@ -877,8 +878,9 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = Magnitude<PromotedValue_t<T, U>>;
-        return static_cast<R>(
-            std::sqrt((rhs[0] - _data[0]) * (rhs[0] - _data[0]) + (rhs[1] - _data[1]) * (rhs[1] - _data[1])));
+        const auto a2 = utils::diffAbs(rhs[0], _data[0]) * utils::diffAbs(rhs[0], _data[0]);
+        const auto b2 = utils::diffAbs(rhs[1], _data[1]) * utils::diffAbs(rhs[1], _data[1]);
+        return static_cast<R>(std::sqrt(a2 + b2));
     }
 
 
@@ -896,7 +898,12 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector2D<T>::distSq(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
-    { return (rhs[0] - _data[0]) * (rhs[0] - _data[0]) + (rhs[1] - _data[1]) * (rhs[1] - _data[1]); }
+    {
+        using R = PromotedValue_t<T, U>;
+        const auto a2 = static_cast<R>(utils::diffAbs(rhs[0], _data[0]) * utils::diffAbs(rhs[0], _data[0]));
+        const auto b2 = static_cast<R>(utils::diffAbs(rhs[1], _data[1]) * utils::diffAbs(rhs[1], _data[1]));
+        return a2 + b2;
+    }
 
 
     template <Arithmetic T>
