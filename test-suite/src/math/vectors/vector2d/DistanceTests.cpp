@@ -13,6 +13,8 @@
 #include "CommonSetup.h"
 #include "Vector2DTestSetup.h"
 
+#include <numbers>
+
 
 
 template <typename T>
@@ -37,6 +39,33 @@ protected:
 };
 /** @brief Test fixture for @ref fgm::Vector2D distance calculations, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Vector2DDistance, SupportedArithmeticTypes);
+
+
+template <typename T>
+class Vector2DDistanceSigned: public testing::Test
+{
+protected:
+    fgm::Vector2D<T> _vecA, _vecB;
+    fgm::Magnitude<T> _dist;
+    T _distSq, _distManhattan, _distChebyshev;
+
+
+    void SetUp() override
+    {
+        _vecA = { T(1), T(2) };
+        _vecB = { T(-2), T(3) };
+
+        _dist          = fgm::Magnitude<T>(3.1622776601683795);
+        _distSq        = 48;
+        _distManhattan = 4;
+        _distChebyshev = 3;
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Vector2D distance calculations,
+ *        parameterized by @ref SupportedSignedArithmeticTypes.
+ */
+TYPED_TEST_SUITE(Vector2DDistanceSigned, SupportedSignedArithmeticTypes);
 
 
 
@@ -66,13 +95,41 @@ namespace
  **************************************/
 
 /** @brief Verify that the @ref fgm::Vector2D::dist function returns the Euclidean distance. */
-TYPED_TEST(Vector2DDistance, Dist_ReturnsEuclideanDistance) { EXPECT_EQ(this->_vecA.dist(this->_vecB), this->_dist); }
-
-
-/** @brief Verify that the static variant of  @ref fgm::Vector2D::dist function returns the Euclidean distance. */
-TYPED_TEST(Vector2DDistance, StaticWrapper_Dist_ReturnsEuclideanDistance)
+TYPED_TEST(Vector2DDistance, Dist_ReturnsEuclideanDistance)
 {
-    EXPECT_EQ(fgm::Vector2D<TypeParam>::dist(this->_vecA, this->_vecB), this->_dist);
+    EXPECT_MAG_EQ(this->_dist, this->_vecA.dist(this->_vecB));
+}
+
+
+/** @brief Verify that the @ref fgm::Vector2D::dist function maintains precision for irrational numbers. */
+TYPED_TEST(Vector2DDistance, Dist_IrrationalDistanceMaintainsPrecision)
+{
+    using T = TypeParam;
+    const fgm::Vector2D v1{ T(0), T(0) };
+    const fgm::Vector2D v2{ T(1), T(1) };
+
+    using P                         = fgm::Magnitude<T>;
+    constexpr auto expectedDistance = P(std::numbers::sqrt2);
+
+    const auto distance = v1.dist(v2);
+    EXPECT_MAG_EQ(expectedDistance, distance);
+}
+
+
+/** @brief Verify that the @ref fgm::Vector2D::dist function returns zero for the same vector. */
+TYPED_TEST(Vector2DDistance, Dist_BetweenSameVectorReturnsZero)
+{
+    constexpr auto zero = fgm::Magnitude<TypeParam>(0);
+    const auto distance = this->_vecA.dist(this->_vecA);
+    EXPECT_MAG_EQ(zero, distance);
+}
+
+
+/** @brief Verify that the @ref fgm::Vector2D::dist function handles negative coordinates. */
+TYPED_TEST(Vector2DDistanceSigned, Dist_HandlesNegativeNumbers)
+{
+    const auto distance = this->_vecA.dist(this->_vecB);
+    EXPECT_MAG_EQ(this->_dist, distance);
 }
 
 
@@ -81,6 +138,49 @@ TYPED_TEST(Vector2DDistance, Dist_AlwaysReturnFloatingPointValue)
 {
     [[maybe_unused]] const auto distance = this->_vecA.dist(this->_vecB);
     static_assert(std::is_floating_point_v<decltype(distance)>);
+}
+
+
+/** @brief Verify that the static variant of  @ref fgm::Vector2D::dist function returns the Euclidean distance. */
+TYPED_TEST(Vector2DDistance, StaticWrapper_Dist_ReturnsEuclideanDistance)
+{
+    EXPECT_MAG_EQ(this->_dist, fgm::Vector2D<TypeParam>::dist(this->_vecA, this->_vecB));
+}
+
+
+/**
+ * @brief Verify that the static variant of @ref fgm::Vector2D::dist function maintains precision
+ *        for irrational numbers.
+ */
+TYPED_TEST(Vector2DDistance, StaticWrapper_Dist_IrrationalDistanceMaintainsPrecision)
+{
+    using T = TypeParam;
+    const fgm::Vector2D v1{ T(0), T(0) };
+    const fgm::Vector2D v2{ T(1), T(1) };
+
+    using P                         = fgm::Magnitude<T>;
+    constexpr auto expectedDistance = P(std::numbers::sqrt2);
+
+    const auto distance = fgm::Vector2D<T>::dist(v1, v2);
+
+    EXPECT_MAG_EQ(expectedDistance, distance);
+}
+
+
+/** @brief Verify that the @ref fgm::Vector2D::dist function returns zero for the same vector. */
+TYPED_TEST(Vector2DDistance, StaticWrapper_Dist_BetweenSameVectorReturnsZero)
+{
+    constexpr auto zero = fgm::Magnitude<TypeParam>(0);
+    const auto distance = fgm::Vector2D<TypeParam>::dist(this->_vecA, this->_vecA);
+    EXPECT_MAG_EQ(zero, distance);
+}
+
+
+/** @brief Verify that the static variant of @ref fgm::Vector2D::dist function handles negative coordinates. */
+TYPED_TEST(Vector2DDistanceSigned, StaticWrapper_Dist_HandlesNegativeNumbers)
+{
+    const auto distance = fgm::Vector2D<TypeParam>::dist(this->_vecA, this->_vecB);
+    EXPECT_MAG_EQ(this->_dist, distance);
 }
 
 
