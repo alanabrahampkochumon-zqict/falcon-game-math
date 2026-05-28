@@ -1,10 +1,14 @@
 add_executable(Playground)
 target_compile_features(Playground PRIVATE cxx_std_20)
 
+set(SourceDir "src/")
+set(SourceFiles "main.cpp;")
+list(TRANSFORM SourceFiles PREPEND ${SourceDir})
+
 target_sources(
         Playground
         PRIVATE
-        main.cpp
+        ${SourceDir}
 )
 
 target_link_libraries(
