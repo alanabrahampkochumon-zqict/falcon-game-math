@@ -877,10 +877,10 @@ namespace fgm
     constexpr Magnitude<PromotedValue_t<T, U>> Vector2D<T>::dist(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<PromotedValue_t<T, U>>;
-        const auto a2 = utils::diffAbs(rhs[0], _data[0]) * utils::diffAbs(rhs[0], _data[0]);
-        const auto b2 = utils::diffAbs(rhs[1], _data[1]) * utils::diffAbs(rhs[1], _data[1]);
-        return static_cast<R>(std::sqrt(a2 + b2));
+        using R       = Magnitude<PromotedValue_t<T, U>>;
+        const auto dx = utils::diffAbs(_data[0], rhs[0]);
+        const auto dy = utils::diffAbs(_data[1], rhs[1]);
+        return static_cast<R>(std::sqrt(dx * dx + dy * dy));
     }
 
 
@@ -899,10 +899,10 @@ namespace fgm
     constexpr PromotedValue_t<T, U> Vector2D<T>::distSq(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using R = PromotedValue_t<T, U>;
-        const auto a2 = static_cast<R>(utils::diffAbs(rhs[0], _data[0]) * utils::diffAbs(rhs[0], _data[0]));
-        const auto b2 = static_cast<R>(utils::diffAbs(rhs[1], _data[1]) * utils::diffAbs(rhs[1], _data[1]));
-        return a2 + b2;
+        const auto dx = utils::diffAbs(_data[0], rhs[0]);
+        const auto dy = utils::diffAbs(_data[1], rhs[1]);
+
+        return dx * dx + dy * dy;
     }
 
 
@@ -919,10 +919,7 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector2D<T>::manhattanDist(const Vector2D<U>& rhs) const noexcept
         requires StrictArithmetic<T>
-    {
-        // using R = PromotedValue_t<T, U>;
-        return utils::diffAbs(_data[0], rhs[0]) + utils::diffAbs(_data[1], rhs[1]);
-    }
+    { return utils::diffAbs(_data[0], rhs[0]) + utils::diffAbs(_data[1], rhs[1]); }
 
 
     template <Arithmetic T>
