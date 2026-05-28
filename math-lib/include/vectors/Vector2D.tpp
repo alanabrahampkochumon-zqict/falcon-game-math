@@ -921,9 +921,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         // using R = PromotedValue_t<T, U>;
-
-        return PromotedValue_t<T, U>(rhs.x());
-        // return fgm::abs(_data[0] - rhs[0]) + fgm::abs(_data[1] - rhs[1]);
+        return utils::diffAbs(_data[0], rhs[0]) + utils::diffAbs(_data[1], rhs[1]);
     }
 
 
