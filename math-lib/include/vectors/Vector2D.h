@@ -1227,7 +1227,7 @@ namespace fgm
          *
          * @param[in] rhs The target position vector.
          *
-         * @return The Euclidean distance promoted as the promoted floating-point type.
+         * @return The squared Euclidean distance.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
@@ -1247,11 +1247,51 @@ namespace fgm
          * @param[in] lhs The first position vector.
          * @param[in] rhs The second position vector.
          *
-         * @return The Euclidean distance as the promoted floating-point type.
+         * @return The squared Euclidean distance.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedValue_t<T, U> distSq(const Vector2D<U>& lhs,
+                                                                  const Vector2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan (L1) distance between this vector and the @p rhs vector.
+         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The target position vector.
+         *
+         * @return The Manhattan (Taxicab) distance.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedValue_t<T, U> manhattanDist(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan (L1) distance between two vectors.
+         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first position vector.
+         * @param[in] rhs The second position vector.
+         *
+         * @return The Manhattan(Taxicab) distance.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> manhattanDist(const Vector2D<U>& lhs,
                                                                   const Vector2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 

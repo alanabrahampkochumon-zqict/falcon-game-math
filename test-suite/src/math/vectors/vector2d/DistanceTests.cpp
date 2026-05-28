@@ -31,10 +31,10 @@ protected:
         _vecA = { T(2), T(3) };
         _vecB = { T(5), T(7) };
 
-        _dist          = 5;
-        _distSq        = 25;
-        _distManhattan = 7;
-        _distChebyshev = 4;
+        _dist          = fgm::Magnitude<T>(5);
+        _distSq        = T(25);
+        _distManhattan = T(7);
+        _distChebyshev = T(4);
     }
 };
 /** @brief Test fixture for @ref fgm::Vector2D distance calculations, parameterized by @ref SupportedArithmeticTypes. */
@@ -56,9 +56,9 @@ protected:
         _vecB = { T(-2), T(3) };
 
         _dist          = fgm::Magnitude<T>(3.1622776601683795);
-        _distSq        = 10;
-        _distManhattan = 4;
-        _distChebyshev = 3;
+        _distSq        = T(10);
+        _distManhattan = T(4);
+        _distChebyshev = T(3);
     }
 };
 /**
@@ -90,7 +90,7 @@ namespace
 
 /**************************************
  *                                    *
- *           L2 DISTANCE              *
+ *        EUCLIDEAN DISTANCE          *
  *                                    *
  **************************************/
 
@@ -187,9 +187,11 @@ TYPED_TEST(Vector2DDistance, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
     static_assert(std::is_floating_point_v<decltype(distance)>);
 }
 
+
+
 /**************************************
  *                                    *
- *        L2 SQUARED DISTANCE         *
+ *        EUCLIDEAN DISTANCE          *
  *                                    *
  **************************************/
 
@@ -240,5 +242,58 @@ TYPED_TEST(Vector2DDistanceSigned, StaticWrapper_DistSq_HandlesNegativeNumbers)
     EXPECT_MAG_EQ(this->_distSq, distance);
 }
 
+
+/**************************************
+ *                                    *
+ *        MANHATTAN DISTANCE          *
+ *                                    *
+ **************************************/
+
+
+/** @brief Verify that the @ref fgm::Vector2D::manhattanDist function returns the Manhattan. */
+TYPED_TEST(Vector2DDistance, ManhattanDist_ReturnsManhattanDistance)
+{ EXPECT_MAG_EQ(this->_distManhattan, this->_vecA.manhattanDist(this->_vecB)); }
+
+
+/** @brief Verify that the @ref fgm::Vector2D::manhattanDist function returns zero for the same vector. */
+TYPED_TEST(Vector2DDistance, ManhattanSq_BetweenSameVectorReturnsZero)
+{
+    constexpr auto zero = TypeParam(0);
+    const auto distance = this->_vecA.manhattanDist(this->_vecA);
+    EXPECT_MAG_EQ(zero, distance);
+}
+
+
+/** @brief Verify that the @ref fgm::Vector2D::manhattanDist function handles negative coordinates. */
+TYPED_TEST(Vector2DDistanceSigned, ManhattanSq_HandlesNegativeNumbers)
+{
+    const auto distance = this->_vecA.manhattanDist(this->_vecB);
+    EXPECT_MAG_EQ(this->_distManhattan, distance);
+}
+
+
+/**
+ * @brief Verify that the static variant of  @ref fgm::Vector2D::manhattanDist function
+ *        returns the Euclidean distance (squared).
+ */
+TYPED_TEST(Vector2DDistance, StaticWrapper_ManhattanDist_ReturnsManhattanDistance)
+{ EXPECT_MAG_EQ(this->_distManhattan, fgm::Vector2D<TypeParam>::manhattanDist(this->_vecA, this->_vecB)); }
+
+
+/** @brief Verify that the @ref fgm::Vector2D::manhattanDist function returns zero for the same vector. */
+TYPED_TEST(Vector2DDistance, StaticWrapper_ManhattanDist_BetweenSameVectorReturnsZero)
+{
+    constexpr auto zero = TypeParam(0);
+    const auto distance = fgm::Vector2D<TypeParam>::manhattanDist(this->_vecA, this->_vecA);
+    EXPECT_MAG_EQ(zero, distance);
+}
+
+
+/** @brief Verify that the static variant of @ref fgm::Vector2D::manhattanDist function handles negative coordinates. */
+TYPED_TEST(Vector2DDistanceSigned, StaticWrapper_ManhattanDist_HandlesNegativeNumbers)
+{
+    const auto distance = fgm::Vector2D<TypeParam>::manhattanDist(this->_vecA, this->_vecB);
+    EXPECT_MAG_EQ(this->_distManhattan, distance);
+}
 
 /** @} */

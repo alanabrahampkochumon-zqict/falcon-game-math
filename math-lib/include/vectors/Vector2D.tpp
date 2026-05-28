@@ -907,6 +907,27 @@ namespace fgm
     { return lhs.distSq(rhs); }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedValue_t<T, U> Vector2D<T>::manhattanDist(const Vector2D<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, U>;
+
+        return R(0);
+        // return fgm::abs(_data[0] - rhs[0]) + fgm::abs(_data[1] - rhs[1]);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedValue_t<T, U> Vector2D<T>::manhattanDist(const Vector2D<U>& lhs, const Vector2D<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.manhattanDist(rhs); }
+
+
 
     /*************************************
      *                                   *
