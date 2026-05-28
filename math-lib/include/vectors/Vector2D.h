@@ -1212,7 +1212,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr Magnitude<PromotedValue_t<T, U>> dist(const Vector2D<U>& lhs,
-                                                                  const Vector2D<U>& rhs) noexcept
+                                                                             const Vector2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1252,7 +1252,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedValue_t<T, U> distSq(const Vector2D<U>& lhs,
-                                                                  const Vector2D<U>& rhs) noexcept
+                                                                    const Vector2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1292,7 +1292,47 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedValue_t<T, U> manhattanDist(const Vector2D<U>& lhs,
-                                                                  const Vector2D<U>& rhs) noexcept
+                                                                           const Vector2D<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev (L∞) distance between this vector and the @p rhs vector.
+         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|)} \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The target position vector.
+         *
+         * @return The Chebyshev distance.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedValue_t<T, U> chebyshevDist(const Vector2D<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev (L∞) distance between two vectors.
+         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|)} \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first position vector.
+         * @param[in] rhs The second position vector.
+         *
+         * @return The Chebyshev distance.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> chebyshevDist(const Vector2D<U>& lhs,
+                                                                           const Vector2D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

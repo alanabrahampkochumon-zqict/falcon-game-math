@@ -274,7 +274,7 @@ TYPED_TEST(Vector2DDistanceSigned, ManhattanDist_HandlesNegativeNumbers)
 
 /**
  * @brief Verify that the static variant of  @ref fgm::Vector2D::manhattanDist function
- *        returns the Euclidean distance (squared).
+ *        returns the Manhattan distance.
  */
 TYPED_TEST(Vector2DDistance, StaticWrapper_ManhattanDist_ReturnsManhattanDistance)
 { EXPECT_MAG_EQ(this->_distManhattan, fgm::Vector2D<TypeParam>::manhattanDist(this->_vecA, this->_vecB)); }
@@ -294,6 +294,60 @@ TYPED_TEST(Vector2DDistanceSigned, StaticWrapper_ManhattanDist_HandlesNegativeNu
 {
     const auto distance = fgm::Vector2D<TypeParam>::manhattanDist(this->_vecA, this->_vecB);
     EXPECT_MAG_EQ(this->_distManhattan, distance);
+}
+
+
+/**************************************
+ *                                    *
+ *        CHEBYSHEV DISTANCE          *
+ *                                    *
+ **************************************/
+
+
+/** @brief Verify that the @ref fgm::Vector2D::chebyshevDist function returns the Chebyshev distance. */
+TYPED_TEST(Vector2DDistance, ChebyshevDist_ReturnsChebyshevDistance)
+{ EXPECT_MAG_EQ(this->_distChebyshev, this->_vecA.chebyshevDist(this->_vecB)); }
+
+
+/** @brief Verify that the @ref fgm::Vector2D::chebyshevDist function returns zero for the same vector. */
+TYPED_TEST(Vector2DDistance, ChebyshevDist_BetweenSameVectorReturnsZero)
+{
+    constexpr auto zero = TypeParam(0);
+    const auto distance = this->_vecA.chebyshevDist(this->_vecA);
+    EXPECT_MAG_EQ(zero, distance);
+}
+
+
+/** @brief Verify that the @ref fgm::Vector2D::chebyshevDist function handles negative coordinates. */
+TYPED_TEST(Vector2DDistanceSigned, ChebyshevDist_HandlesNegativeNumbers)
+{
+    const auto distance = this->_vecA.chebyshevDist(this->_vecB);
+    EXPECT_MAG_EQ(this->_distChebyshev, distance);
+}
+
+
+/**
+ * @brief Verify that the static variant of  @ref fgm::Vector2D::chebyshevDist function
+ *        returns the Chebyshev distance.
+ */
+TYPED_TEST(Vector2DDistance, StaticWrapper_Chebyshev_ReturnsChebyshevDistance)
+{ EXPECT_MAG_EQ(this->_distChebyshev, fgm::Vector2D<TypeParam>::chebyshevDist(this->_vecA, this->_vecB)); }
+
+
+/** @brief Verify that the @ref fgm::Vector2D::chebyshevDist function returns zero for the same vector. */
+TYPED_TEST(Vector2DDistance, StaticWrapper_Chebyshev_BetweenSameVectorReturnsZero)
+{
+    constexpr auto zero = TypeParam(0);
+    const auto distance = fgm::Vector2D<TypeParam>::chebyshevDist(this->_vecA, this->_vecA);
+    EXPECT_MAG_EQ(zero, distance);
+}
+
+
+/** @brief Verify that the static variant of @ref fgm::Vector2D::chebyshevDist function handles negative coordinates. */
+TYPED_TEST(Vector2DDistanceSigned, StaticWrapper_Chebyshev_HandlesNegativeNumbers)
+{
+    const auto distance = fgm::Vector2D<TypeParam>::chebyshevDist(this->_vecA, this->_vecB);
+    EXPECT_MAG_EQ(this->_distChebyshev, distance);
 }
 
 /** @} */
