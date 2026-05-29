@@ -97,10 +97,10 @@ int main()
         //      |    \ \/    |
         //      |     \/     |
         //      --------(maxX, maxY)
-        auto minX = static_cast<int>(std::min(verts[0].x(), std::min(verts[1].x(), verts[2].x())));
-        auto minY = static_cast<int>(std::min(verts[0].y(), std::min(verts[1].y(), verts[2].y())));
-        auto maxX = static_cast<int>(std::max(verts[0].x(), std::max(verts[1].x(), verts[2].x())));
-        auto maxY = static_cast<int>(std::max(verts[0].y(), std::max(verts[1].y(), verts[2].y())));
+        auto minX = static_cast<std::size_t>(std::min(verts[0].x(), std::min(verts[1].x(), verts[2].x())));
+        auto minY = static_cast<std::size_t>(std::min(verts[0].y(), std::min(verts[1].y(), verts[2].y())));
+        auto maxX = static_cast<std::size_t>(std::max(verts[0].x(), std::max(verts[1].x(), verts[2].x())));
+        auto maxY = static_cast<std::size_t>(std::max(verts[0].y(), std::max(verts[1].y(), verts[2].y())));
 
 
         for (std::size_t i = minX; i < maxX; ++i)
