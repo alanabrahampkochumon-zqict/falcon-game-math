@@ -8,7 +8,7 @@ list(TRANSFORM SourceFiles PREPEND ${SourceDir})
 target_sources(
         Playground
         PRIVATE
-        ${SourceDir}
+        ${SourceFiles}
 )
 
 target_link_libraries(
