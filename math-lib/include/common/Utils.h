@@ -1,5 +1,4 @@
 #pragma once
-#include "MathTraits.h"
 /**
  * @file Utils.h
  * @author Alan Abraham P Kochumon
@@ -12,6 +11,7 @@
 
 
 #include "common/MathTraits.h"
+#include "common/Config.h"
 
 namespace fgm::utils
 {
@@ -43,6 +43,22 @@ namespace fgm::utils
     template <Arithmetic T, Arithmetic U>
     constexpr PromotedValue_t<T, U> diffAbs(T lhs, U rhs) noexcept;
 
+
+    /**
+     * @brief Compute the square root of a number.
+     * TODO: Move to Wrappers.h
+     * @note Wrapper around the `std::sqrt` function with Newton-Raphson approximation for compile time evaluation.
+     *
+     * @tparam T Numeric type of the number. Must satisfy @ref StrictArithmetic.
+     *
+     * @param num     The number to take the square root of.
+     * @param epsilon The precision required for the square-root.
+     *                Default to fgm EPSILON.
+     *
+     * @return The square root of a number promoted to the near floating point type.
+     */
+    //template <Arithmetic T>
+    //constexpr Magnitude<T> sqrt(T num, double epsilon = Config::EPSILON<Magnitude<T>>) noexcept;
 
     /** @} */
 
