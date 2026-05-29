@@ -4,13 +4,42 @@
  * @date Created on: May 29, 2026
  *
  * @brief Demo application main entry point.
- * 
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
 #include <SDL3/SDL.h>
 #include <vectors/Vector2D.h>
+
+
+void pollEvents(bool& runningState)
+{
+    // Event Queue
+    SDL_Event event;
+
+    // Event Loop
+    while (runningState)
+    {
+        while (SDL_PollEvent(&event))
+        {
+            switch (event.type)
+            {
+                case SDL_EVENT_MOUSE_MOTION:
+                    SDL_Log("We got a motion event.");
+                    SDL_Log("Current mouse position is: (%f, %f)", event.motion.x, event.motion.y);
+                    break;
+                case SDL_EVENT_QUIT:
+                    runningState = false;
+                    SDL_Log("Exiting application");
+                    break;
+                default:
+                    SDL_Log("Unhandled Event!");
+                    break;
+            }
+        }
+    }
+}
 
 
 int main()
@@ -27,21 +56,13 @@ int main()
     }
 
     // Create the SDL Windows
-    //SDL_Window* window = SDL_CreateWindow("Engine", 800, 600, 0);
+    // SDL_Window* window = SDL_CreateWindow("Engine", 800, 600, 0);
     SDL_CreateWindow("DEMO: FGM Software Rasterizer", 800, 600, 0);
-    
 
-    // Event Queue
-    SDL_Event event;
+    bool runningState = true;
 
-    // Event Loop
-    while (true)
-    {
-        while (SDL_PollEvent(&event))
-        {
-            
-        }
-    }
+    pollEvents(runningState);
+
 
     // Shutdown all the initialized subsystems
     SDL_Quit();
