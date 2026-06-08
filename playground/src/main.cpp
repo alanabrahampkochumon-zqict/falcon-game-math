@@ -40,49 +40,25 @@ static SDL_AppResult pollEvents(bool &runningState) {
     return SDL_APP_CONTINUE;
 }
 
+template<typename T>
+static bool insideTriangle(const std::array<fgm::Vector2D<T>, 3> &verts, const fgm::Vector2D<T> &point) {
+    // Edges
+    const auto e1 = verts[1] - verts[0];
+    const auto v1p = point - verts[1];
+    const auto e2 = verts[2] - verts[1];
+    const auto v2p = point - verts[2];
+    const auto e3 = verts[0] - verts[2];
+    const auto v0p = point -  verts[0];
 
-constexpr std::array vertices = {fgm::vec2{10.0f, 2.0f}, fgm::vec2{20.0f, 28.0f}, fgm::vec2{3.0f, 21.0f}};
+    // Return true if all point is bounded by all the three edges
+    return e1.cross(v1p) >= T(0) && e2.cross(v2p) >= T(0) && e3.cross(v0p) >= T(0);
+}
 
 
-// static void putPixel(SDL_Surface *surface, int x, int y, uint8_t r, uint8_t g, uint8_t b) {
-//     // Packed the colors into a single value
-//     // uint32_t packedColor = SDL_MapRGBA(surface->format, nullptr, r, g, b, a);
-//     // SDL_Palette* palette = SDL_GetSurfacePalette(surface);
-//     uint32_t packedColor = SDL_MapSurfaceRGB(surface, r, g, b);
-//     auto bytesPerPixel = SDL_BYTESPERPIXEL(surface->format);
-//
-//     // Cast row pointer to pixels to uint8_t
-//     auto *pixelAddress = static_cast<uint8_t *>(surface->pixels)
-//                                + (y * surface->pitch)
-//                                + (x * bytesPerPixel);
-//
-//     switch (bytesPerPixel) {
-//         case 1:
-//             *pixelAddress = static_cast<uint8_t>(packedColor);
-//             break;
-//         case 2:
-//             *reinterpret_cast<uint16_t*>(pixelAddress) = static_cast<uint16_t>(packedColor);
-//             break;
-//         case 3:
-//             // 24-bit surfaces store RGB separately depending on system byte order
-//             #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-//                 pixelAddress[0] = (packedColor >> 16) & 0xFF;
-//                 pixelAddress[1] = (packedColor >> 8) & 0xFF;
-//                 pixelAddress[2] = packedColor & 0xFF;
-//             #else
-//                 pixelAddress[0] = packedColor & 0xFF;
-//                 pixelAddress[1] = (packedColor >> 8) & 0xFF;
-//                 pixelAddress[2] = (packedColor >> 16) & 0xFF;
-//             #endif
-//             break;
-//         case 4:
-//             *reinterpret_cast<uint32_t*>(pixelAddress) = packedColor;
-//             break;
-//     }
-// }
+constexpr std::array VERTICES = {fgm::vec2{10.0f, 2.0f}, fgm::vec2{20.0f, 28.0f}, fgm::vec2{3.0f, 21.0f}};
 
 int main() {
-    // Setup the metadata for identifying the application
+    // Set up the metadata for identifying the application
     SDL_SetAppMetadata("DEMO: FGM Software Rasterizer", "1.0.0", "com.fgm.demo.rasterizer");
 
 
@@ -109,25 +85,27 @@ int main() {
     while (runningState) {
         // Calculate the bounding box of the triangle
         // (minX, minY)--------
-        //      |____________|
-        //      |\ \ \ \ \ \/|
-        //      | \ \ \ \ \/ |
-        //      |  \ \ \ \/  |
-        //      |   \ \ \/   |
-        //      |    \ \/    |
-        //      |     \/     |
-        //      --------(maxX, maxY)
-        const auto minX = static_cast<int>(std::min({vertices[0].x(), vertices[1].x(), vertices[2].x()}));
-        const auto minY = static_cast<int>(std::min({vertices[0].y(), vertices[1].y(), vertices[2].y()}));
-        const auto maxX = static_cast<int>(std::max({vertices[0].x(), vertices[1].x(), vertices[2].x()}));
-        const auto maxY = static_cast<int>(std::max({vertices[0].y(), vertices[1].y(), vertices[2].y()}));
+        //       |____________|
+        //       |\ \ \ \ \ \/|
+        //       | \ \ \ \ \/ |
+        //       |  \ \ \ \/  |
+        //       |   \ \ \/   |
+        //       |    \ \/    |
+        //       |     \/     |
+        //       --------(maxX, maxY)
+        const auto minX = static_cast<int>(std::min({VERTICES[0].x(), VERTICES[1].x(), VERTICES[2].x()}));
+        const auto minY = static_cast<int>(std::min({VERTICES[0].y(), VERTICES[1].y(), VERTICES[2].y()}));
+        const auto maxX = static_cast<int>(std::max({VERTICES[0].x(), VERTICES[1].x(), VERTICES[2].x()}));
+        const auto maxY = static_cast<int>(std::max({VERTICES[0].y(), VERTICES[1].y(), VERTICES[2].y()}));
 
         SDL_Log("(minX, minY): (%d, %d)\n(maxX, maxY): (%d, %d)", minX, minY, maxX, maxY);
         for (int i = minX; i < maxX; ++i) {
             for (int j = minY; j < maxY; ++j) {
                 // putPixel(surface, i, j, 0xF0, 0x0F, 0xFF);
                 // TODO: Replace with a faster function since this is slower
-                SDL_WriteSurfacePixel(surface, i, j, 0xf0, 0x0f, 0xff, 0xff);
+                const auto currentPoint = fgm::vec2(i, j);
+                if (insideTriangle(VERTICES, currentPoint))
+                    SDL_WriteSurfacePixel(surface, i, j, 0xf0, 0x0f, 0xff, 0xff);
             }
         }
         // Updates the SDL surface by copying it to the screen
