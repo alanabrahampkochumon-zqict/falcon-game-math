@@ -12,6 +12,7 @@
 #include <SDL3/SDL.h>
 #include <algorithm>
 #include <array>
+#include <bit>
 #include <iostream>
 #include <vectors/Vector2D.h>
 
@@ -56,8 +57,8 @@ public:
             SDL_Log("Couldn't initialize a SDL surface: %s", SDL_GetError());
         }
 
-        const auto bufferSize =static_cast<std::size_t>(_surface->w * _surface->h * _colorChannels);
-        _buffer = new uint8_t[bufferSize];
+        const auto bufferSize = static_cast<std::size_t>(_surface->w * _surface->h * _colorChannels);
+        _buffer               = new uint8_t[bufferSize];
         memset(_buffer, 0, bufferSize);
     }
 
@@ -90,18 +91,28 @@ public:
                 if (insideTriangle(v0, v1, v2, currentPoint))
                 {
                     // SDL_WriteSurfacePixel(_surface, i, j, r, g, b, a); // NOTE: Left out for benchmarking
-                    const auto bufferOffset = _colorChannels * (j * _surface->w + j); // 4 -> r, g, b, a
-                    _buffer[bufferOffset + 0] = r;
-                    _buffer[bufferOffset + 1] = g;
-                    _buffer[bufferOffset + 2] = b;
-                    _buffer[bufferOffset + 3] = a;
-
+                    const auto bufferOffset = _colorChannels * (j * _surface->w + i); // 4 -> r, g, b, a
+                    if constexpr (std::endian::native == std::endian::little)
+                    {
+                        _buffer[bufferOffset + 0] = b;
+                        _buffer[bufferOffset + 1] = g;
+                        _buffer[bufferOffset + 2] = r;
+                        _buffer[bufferOffset + 3] = a;
+                    }
+                    else if constexpr (std::endian::native == std::endian::big)
+                    {
+                        _buffer[bufferOffset + 0] = r;
+                        _buffer[bufferOffset + 1] = g;
+                        _buffer[bufferOffset + 2] = b;
+                        _buffer[bufferOffset + 3] = a;
+                    }
                 }
             }
         }
 
         // TODO: Separate out
-        SDL_Surface* srcSurface = SDL_CreateSurfaceFrom(_surface->w, _surface->h, _surface->format, _buffer, _surface->w * _colorChannels);
+        SDL_Surface* srcSurface =
+            SDL_CreateSurfaceFrom(_surface->w, _surface->h, _surface->format, _buffer, _surface->w * _colorChannels);
 
         SDL_BlitSurface(srcSurface, nullptr, _surface, nullptr);
     }
