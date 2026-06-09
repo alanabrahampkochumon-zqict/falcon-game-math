@@ -52,7 +52,7 @@ public:
     }
 
     template<typename T>
-    void renderTriangle(const fgm::Vector2D<T> &v0, const fgm::Vector2D<T> &v1, const fgm::Vector2D<T> &v2) {
+    void renderTriangle(const fgm::Vector2D<T> &v0, const fgm::Vector2D<T> &v1, const fgm::Vector2D<T> &v2, const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a) {
         // Calculate the bounding box of the triangle
         // (minX, minY)--------
         //       |____________|
@@ -74,7 +74,7 @@ public:
                 // TODO: Replace with a faster function since this is slower
                 const auto currentPoint = fgm::vec2(i, j);
                 if (insideTriangle(v0, v1, v2, currentPoint))
-                    SDL_WriteSurfacePixel(_surface, i, j, 0xf0, 0x0f, 0xff, 0xff);
+                    SDL_WriteSurfacePixel(_surface, i, j, r, g, b, a);
             }
         }
     }
@@ -101,7 +101,11 @@ private:
     SDL_Surface *_surface;
 };
 
-constexpr std::array VERTICES = {fgm::vec2{10.0f, 2.0f}, fgm::vec2{20.0f, 28.0f}, fgm::vec2{3.0f, 21.0f}};
+// Note: Vertices are in screen space
+// 0 to width, 0 to height
+constexpr std::array VERTICES = {
+    fgm::vec2{10.0f, 2.0f}, fgm::vec2{240.0f, 300.0f}, fgm::vec2{10.0f, 580.0f}, fgm::vec2{700.0f, 550.0f}
+};
 
 int main() {
     // Set up the metadata for identifying the application
@@ -114,9 +118,8 @@ int main() {
         return SDL_APP_FAILURE;
     }
 
-    // Create the SDL Windows
-    // SDL_Window* window = SDL_CreateWindow("Engine", 800, 600, 0);
-    SDL_Window *window = SDL_CreateWindow("DEMO: FGM Software Rasterizer", 128, 128, 0);
+    // Create the SDL Window
+    SDL_Window *window = SDL_CreateWindow("DEMO: FGM Software Rasterizer", 800, 600, 0);
 
 
     // Initialize the state
@@ -125,13 +128,8 @@ int main() {
     bool runningState = true;
 
     while (runningState) {
-        renderer.renderTriangle(VERTICES[0], VERTICES[1], VERTICES[2]);
-
-        // for (int i = minX; i < maxX; ++i) {
-        //     for (int j = minY; j < maxY; ++j) {
-        //         putPixel(surface, i, j, 0xFF, 0xFF, 0xFF);
-        //     }
-        // }
+        renderer.renderTriangle(VERTICES[0], VERTICES[1], VERTICES[2], 0xbc, 0x10, 0x20, 0xff);
+        renderer.renderTriangle(VERTICES[1], VERTICES[3], VERTICES[2], 0x12, 0xcc, 0x20, 0xff);
 
         // Updates the SDL surface by copying it to the screen
         SDL_UpdateWindowSurface(window);
