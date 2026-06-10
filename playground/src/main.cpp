@@ -57,9 +57,9 @@ public:
             SDL_Log("Couldn't initialize a SDL surface: %s", SDL_GetError());
         }
 
-        const auto bufferSize = static_cast<std::size_t>(_surface->w * _surface->h * _colorChannels);
-        _buffer               = new uint8_t[bufferSize];
-        memset(_buffer, 0, bufferSize);
+        _bufferSize = static_cast<std::size_t>(_surface->w * _surface->h * _colorChannels);
+        _buffer               = new uint8_t[_bufferSize];
+        memset(_buffer, 0, _bufferSize);
     }
 
     template <typename T>
@@ -80,6 +80,7 @@ public:
         const auto minY = static_cast<int>(std::min({ v0.y(), v1.y(), v2.y() }));
         const auto maxX = static_cast<int>(std::max({ v0.x(), v1.x(), v2.x() }));
         const auto maxY = static_cast<int>(std::max({ v0.y(), v1.y(), v2.y() }));
+
 
 
 
@@ -119,6 +120,11 @@ public:
             SDL_CreateSurfaceFrom(_surface->w, _surface->h, _surface->format, _buffer, _surface->w * _colorChannels);
         // SDL_ClearSurface(_surface, 0x00, 0x00, 0x00, 0x00);
         SDL_BlitSurface(srcSurface, nullptr, _surface, nullptr);
+    }
+
+    void clearBuffer()
+    {
+        memset(_buffer, 0, _bufferSize);
     }
 
 
@@ -161,7 +167,7 @@ private:
     SDL_Window* _window;
     SDL_Surface* _surface;
     uint8_t* _buffer;
-    // std::size_t _buffer
+    std::size_t _bufferSize;
     constexpr static int _colorChannels = 4;
 };
 
@@ -194,6 +200,7 @@ int main()
 
     while (runningState)
     {
+        renderer.clearBuffer();
         renderer.renderTriangle(VERTICES[0], VERTICES[1], VERTICES[2], 0xbc, 0x10, 0x20, 0xff);
         renderer.renderTriangle(VERTICES[1], VERTICES[3], VERTICES[2], 0x12, 0xcc, 0x20, 0xff);
 
