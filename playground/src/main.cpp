@@ -81,6 +81,10 @@ public:
         const auto maxX = static_cast<int>(std::max({ v0.x(), v1.x(), v2.x() }));
         const auto maxY = static_cast<int>(std::max({ v0.y(), v1.y(), v2.y() }));
 
+
+
+
+
         for (int i = minX; i < maxX; ++i)
         {
             for (int j = minY; j < maxY; ++j)
@@ -113,12 +117,25 @@ public:
         // TODO: Separate out
         SDL_Surface* srcSurface =
             SDL_CreateSurfaceFrom(_surface->w, _surface->h, _surface->format, _buffer, _surface->w * _colorChannels);
-
+        // SDL_ClearSurface(_surface, 0x00, 0x00, 0x00, 0x00);
         SDL_BlitSurface(srcSurface, nullptr, _surface, nullptr);
     }
 
 
 private:
+    template <typename T>
+    static bool isTopLeft(const fgm::Vector2D<T>& v0, const fgm::Vector2D<T>& v1)
+    {
+        // Since we are using clockwise winding order, we need to subtract v1 from v0 to get
+        // the corresponding edge
+        const auto edge = v1 - v0;
+        // y > 0 -> Left edge
+        // y == 0 -> flat line
+        // x > 0 -> top edge(not bottom)
+        // TODO: Adjust code for fp numbers
+        return edge.y() > T(0) || (edge.y() == 0 && edge.x() > T(0));
+    }
+
     template <typename T>
     static bool insideTriangle(const fgm::Vector2D<T>& v0, const fgm::Vector2D<T>& v1, const fgm::Vector2D<T>& v2,
                                const fgm::Vector2D<T>& point)
@@ -131,14 +148,20 @@ private:
         const auto e3  = v0 - v2;
         const auto v0p = point - v0;
 
+        // TODO: Separate out the function to duplicate calculation
+        const auto isTopLeftE1 = isTopLeft(v0, v1);
+        const auto isTopLeftE2 = isTopLeft(v1, v2);
+        const auto isTopLeftE3 = isTopLeft(v2, v0);
+
         // Return true if all point is bounded by all the three edges
-        return e1.cross(v1p) >= T(0) && e2.cross(v2p) >= T(0) && e3.cross(v0p) >= T(0);
+        return e1.cross(v1p) - static_cast<int>(isTopLeftE1) >= T(0) && e2.cross(v2p) - static_cast<int>(isTopLeftE2) >= T(0) && e3.cross(v0p) - static_cast<int>(isTopLeftE3) >= T(0);
     }
 
     // Member variables
     SDL_Window* _window;
     SDL_Surface* _surface;
     uint8_t* _buffer;
+    // std::size_t _buffer
     constexpr static int _colorChannels = 4;
 };
 
@@ -161,7 +184,7 @@ int main()
     }
 
     // Create the SDL Window
-    SDL_Window* window = SDL_CreateWindow("DEMO: FGM Software Rasterizer", 800, 600, 0);
+    SDL_Window* window = SDL_CreateWindow("DEMO: FGM Software Rasterizer", 800, 600, SDL_WINDOW_RESIZABLE);
 
 
     // Initialize the state
