@@ -47,7 +47,8 @@ static SDL_AppResult pollEvents(bool& runningState)
 
 // class Triangle
 // {
-//     Triangle(const std::size_t index0, const std::size_t index1, const std::size_t index2): indices{ index0, index1, index2 }
+//     Triangle(const std::size_t index0, const std::size_t index1, const std::size_t index2): indices{ index0, index1,
+//     index2 }
 //     {
 //         calculateArea();
 //     }
@@ -130,6 +131,38 @@ public:
                 }
             }
         }
+
+
+        // TODO: Separate out
+        SDL_Surface* srcSurface =
+            SDL_CreateSurfaceFrom(_surface->w, _surface->h, _surface->format, _buffer, _surface->w * _colorChannels);
+        // SDL_ClearSurface(_surface, 0x00, 0x00, 0x00, 0x00);
+        SDL_BlitSurface(srcSurface, nullptr, _surface, nullptr);
+    }
+
+    void renderLine(int ax, int ay, int bx, int by, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+    {
+        for (float t = 0.0f; t <= 1.0f; t += 0.002f)
+        {
+            auto x            = static_cast<int>(std::round(ax + t * (bx - ax)));
+            auto y            = static_cast<int>(std::round(ay + t * (by - ay)));
+            auto bufferOffset = _colorChannels * (_surface->w * y + x);
+            if constexpr (std::endian::native == std::endian::little)
+            {
+                _buffer[bufferOffset + 0] = b;
+                _buffer[bufferOffset + 1] = g;
+                _buffer[bufferOffset + 2] = r;
+                _buffer[bufferOffset + 3] = a;
+            }
+            else if constexpr (std::endian::native == std::endian::big)
+            {
+                _buffer[bufferOffset + 0] = r;
+                _buffer[bufferOffset + 1] = g;
+                _buffer[bufferOffset + 2] = b;
+                _buffer[bufferOffset + 3] = a;
+            }
+        }
+
 
         // TODO: Separate out
         SDL_Surface* srcSurface =
@@ -218,6 +251,9 @@ int main()
         renderer.clearBuffer();
         renderer.renderTriangle(VERTICES[0], VERTICES[1], VERTICES[2], 0xbc, 0x10, 0x20, 0xff);
         renderer.renderTriangle(VERTICES[1], VERTICES[3], VERTICES[2], 0x12, 0xcc, 0x20, 0xff);
+        renderer.renderLine(300, 200, 500, 500, 0x12, 0xcc, 0x20, 0xff);
+        renderer.renderLine(300, 200, 500, 200, 0xf3, 0xcc, 0x20, 0xff);
+        renderer.renderLine(500, 100, 500, 500, 0x33, 0x3c, 0xf0, 0xff);
 
         // Updates the SDL surface by copying it to the screen
         SDL_UpdateWindowSurface(window);
