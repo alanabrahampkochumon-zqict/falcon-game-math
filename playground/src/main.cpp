@@ -45,6 +45,24 @@ static SDL_AppResult pollEvents(bool& runningState)
 }
 
 
+// class Triangle
+// {
+//     Triangle(const std::size_t index0, const std::size_t index1, const std::size_t index2): indices{ index0, index1, index2 }
+//     {
+//         calculateArea();
+//     }
+//
+//     void calculateArea()
+//     {
+//         // Private
+//         // Calculate area and cache it for future use
+//     }
+//
+//     // std::array<std::size_t, 3> indices;
+//     // std::size_t _area;
+// };
+
+
 class SoftwareRenderer
 {
 public:
@@ -58,7 +76,7 @@ public:
         }
 
         _bufferSize = static_cast<std::size_t>(_surface->w * _surface->h * _colorChannels);
-        _buffer               = new uint8_t[_bufferSize];
+        _buffer     = new uint8_t[_bufferSize];
         memset(_buffer, 0, _bufferSize);
     }
 
@@ -80,8 +98,6 @@ public:
         const auto minY = static_cast<int>(std::min({ v0.y(), v1.y(), v2.y() }));
         const auto maxX = static_cast<int>(std::max({ v0.x(), v1.x(), v2.x() }));
         const auto maxY = static_cast<int>(std::max({ v0.y(), v1.y(), v2.y() }));
-
-
 
 
 
@@ -122,10 +138,7 @@ public:
         SDL_BlitSurface(srcSurface, nullptr, _surface, nullptr);
     }
 
-    void clearBuffer()
-    {
-        memset(_buffer, 0, _bufferSize);
-    }
+    void clearBuffer() { memset(_buffer, 0, _bufferSize); }
 
 
 private:
@@ -160,7 +173,9 @@ private:
         const auto isTopLeftE3 = isTopLeft(v2, v0);
 
         // Return true if all point is bounded by all the three edges
-        return e1.cross(v1p) - static_cast<int>(isTopLeftE1) >= T(0) && e2.cross(v2p) - static_cast<int>(isTopLeftE2) >= T(0) && e3.cross(v0p) - static_cast<int>(isTopLeftE3) >= T(0);
+        return e1.cross(v1p) - static_cast<int>(isTopLeftE1) >= T(0) &&
+            e2.cross(v2p) - static_cast<int>(isTopLeftE2) >= T(0) &&
+            e3.cross(v0p) - static_cast<int>(isTopLeftE3) >= T(0);
     }
 
     // Member variables
