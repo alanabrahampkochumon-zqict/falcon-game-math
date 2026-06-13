@@ -5,11 +5,27 @@ set(SourceDir "src/")
 set(SourceFiles "main.cpp;")
 list(TRANSFORM SourceFiles PREPEND ${SourceDir})
 
+set(HeaderDir "include/")
+set(HeaderFiles "Application.h")
+list(TRANSFORM HeaderFiles PREPEND ${HeaderDir})
+
 target_sources(
         Playground
         PRIVATE
         ${SourceFiles}
+
+        PUBLIC
+        FILE_SET HEADERS
+        BASE_DIRS ${HeaderDir}
+        FILES ${HeaderFiles}
 )
+
+target_include_directories(
+        Playground
+        PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+)
+
 
 target_link_libraries(
         Playground

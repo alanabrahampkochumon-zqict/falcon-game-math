@@ -9,6 +9,8 @@
  */
 
 
+#include "../include/Application.h"
+
 #include <SDL3/SDL.h>
 #include <algorithm>
 #include <array>
@@ -226,6 +228,9 @@ constexpr std::array VERTICES = { fgm::vec2{ 10.0f, 2.0f }, fgm::vec2{ 240.0f, 3
 
 int main()
 {
+    demo::Application application("FGM Software Rasterizer", "1.0.0", "com.fgm.rasterizer");
+    application.run();
+
     // Set up the metadata for identifying the application
     SDL_SetAppMetadata("DEMO: FGM Software Rasterizer", "1.0.0", "com.fgm.demo.rasterizer");
 
@@ -244,7 +249,8 @@ int main()
     // Initialize the state
     SoftwareRenderer renderer(window);
 
-    bool runningState = true;
+    // FIXME: Update to true to see the running application
+    bool runningState = false;
 
     while (runningState)
     {
