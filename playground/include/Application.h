@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file Application.cpp.h
+ * @file Application.h
  * @author Alan Abraham P Kochumon
  * @date Created on: June 13, 2026
  *
@@ -18,12 +18,11 @@ namespace demo
     class Application
     {
         // FIXME: Remove maybe_unused
-        [maybe_unused] SDL_Window* _window;
-        [maybe_unused] bool _isRunning;
+        [[maybe_unused]] SDL_Window* _window{ nullptr };
+        [[maybe_unused]] bool _isRunning{ false };
 
     public:
         Application(const std::string& appname, const std::string& version, const std::string& identifier)
-            : _window(nullptr)
         {
             SDL_SetAppMetadata(appname.c_str(), version.c_str(), identifier.c_str());
 
@@ -56,6 +55,7 @@ namespace demo
 
         void run()
         {
+            _isRunning = true;
             while (_isRunning)
             {
                 pollEvent();
