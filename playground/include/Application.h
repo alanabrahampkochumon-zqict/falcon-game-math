@@ -17,8 +17,9 @@ namespace demo
 {
     class Application
     {
-        SDL_Window* _window;
-        bool _isRunning;
+        // FIXME: Remove maybe_unused
+        [maybe_unused] SDL_Window* _window;
+        [maybe_unused] bool _isRunning;
 
     public:
         Application(const std::string& appname, const std::string& version, const std::string& identifier)
