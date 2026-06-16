@@ -28,6 +28,9 @@ namespace demo
     template <typename T>
     using Vec2 = fgm::Vector2D<T>;
 
+    constexpr auto EPSILON = 1e-5;
+
+
     class Renderer
     {
     public:
@@ -63,6 +66,20 @@ namespace demo
         }
 
 
+        bool isTopLeftEdge(const Vec3<float>& v0, const Vec3<float>& v1)
+        {
+            const auto edge = v1 - v0;
+
+            // Top Left if edge's x coordinate is positive (negative is bottom edge due to clockwise convention used)
+            // and if y coordinate is 0
+            const auto isTopEdge = edge.x() >= EPSILON && std::abs(edge.y()) < EPSILON;
+            // Left Edge if y coordinate is >=0
+            const auto isLeftEdge = edge.y() >= 1e-5;
+
+            return isTopEdge && isLeftEdge;
+        }
+
+
         template <typename T>
         void renderTriangle(const Vec3<T>& v0, const Vec3<T>& v1, const Vec3<T>& v2, const uint8_t r = 0xff,
                             const uint8_t g = 0xff, const uint8_t b = 0xff, const uint8_t a = 0xff)
@@ -77,6 +94,10 @@ namespace demo
             const auto vert2D1 = v1.template swizzle<fgm::axis::X, fgm::axis::Y>();
             const auto vert2D2 = v2.template swizzle<fgm::axis::X, fgm::axis::Y>();
 
+            const auto isTopLeft0 = isTopLeftEdge(v0, v1);
+            const auto isTopLeft1 = isTopLeftEdge(v1, v2);
+            const auto isTopLeft2 = isTopLeftEdge(v2, v0);
+
             for (auto i = x0; i <= x1; ++i)
             {
                 for (auto j = y0; j < y1; ++j)
@@ -86,8 +107,10 @@ namespace demo
 
                     const auto point = fgm::Vector2D<float>(i, j);
 
-                    const bool insideTriangle = edgeCross(vert2D0, vert2D1, point) >= 0.0f &&
-                        edgeCross(vert2D1, vert2D2, point) >= 0.0f && edgeCross(vert2D2, vert2D0, point) >= 0.0f;
+                    const bool eC0            = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
+                    const bool eC1            = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
+                    const bool eC2            = edgeCross(vert2D2, vert2D0, point) - (isTopLeft2 * EPSILON) >= EPSILON;
+                    const bool insideTriangle = eC0 && eC1 && eC2;
 
                     if (insideTriangle)
                     {

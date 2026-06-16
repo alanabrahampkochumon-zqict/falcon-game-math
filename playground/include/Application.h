@@ -14,7 +14,9 @@
 #include "Renderer.h"
 
 #include <SDL3/SDL.h>
+#include <chrono>
 #include <string>
+#include <thread>
 
 namespace demo
 {
@@ -80,6 +82,8 @@ namespace demo
                 SDL_BlitSurface(imageSurface, nullptr, renderingSurface, nullptr);
                 SDL_UpdateWindowSurface(_window);
                 pollEvent();
+                // FIXME: Remove thread sleep
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
         }
     };
