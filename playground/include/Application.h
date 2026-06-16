@@ -12,9 +12,11 @@
 
 #include "Mesh.h"
 #include "Renderer.h"
+#include "parsers/ObjectParser.h"
 
 #include <SDL3/SDL.h>
 #include <chrono>
+#include <filesystem>
 #include <string>
 #include <thread>
 
@@ -63,10 +65,10 @@ namespace demo
 
         void run()
         {
-            Mesh mesh;
-            mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
-                              fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
-            mesh.indices  = { 0, 1, 2, 1, 3, 2 };
+            auto modelPath = std::filesystem::path("models") / "utah_teapot.obj";
+            ObjectParser parser;
+            auto mesh = parser.parse(modelPath.string());
+            printf("Model Path: %s\n", modelPath.string().c_str());
 
             _isRunning = true;
 

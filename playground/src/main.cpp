@@ -9,13 +9,12 @@
  */
 
 
-#include "../include/Application.h"
+#include "Application.h"
 
 #include <SDL3/SDL.h>
 #include <algorithm>
 #include <array>
 #include <bit>
-#include <iostream>
 #include <vectors/Vector2D.h>
 
 static SDL_AppResult pollEvents(bool& runningState)

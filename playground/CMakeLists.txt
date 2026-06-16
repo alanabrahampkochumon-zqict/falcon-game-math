@@ -6,8 +6,12 @@ set(SourceFiles "main.cpp;")
 list(TRANSFORM SourceFiles PREPEND ${SourceDir})
 
 set(HeaderDir "include/")
-set(HeaderFiles "Application.h")
+set(HeaderFiles "Application.h;Mesh.h;Renderer.h")
 list(TRANSFORM HeaderFiles PREPEND ${HeaderDir})
+
+set(ParserDir "${HeaderDir}parsers/")
+set(ParserFiles "ObjectParser.h")
+list(TRANSFORM ParserFiles PREPEND ${ParserDir})
 
 target_sources(
         Playground
@@ -17,7 +21,7 @@ target_sources(
         PUBLIC
         FILE_SET HEADERS
         BASE_DIRS ${HeaderDir}
-        FILES ${HeaderFiles}
+        FILES ${HeaderFiles} ${ParserFiles}
 )
 
 target_include_directories(
@@ -32,4 +36,14 @@ target_link_libraries(
         PRIVATE
         MathLib
         SDL3::SDL3
+)
+
+# Copy models directory to the build directory
+add_custom_command(
+        TARGET Playground
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/models"
+        "$<TARGET_FILE_DIR:Playground>/models"
+        COMMENT "Copying models to build directory"
 )
