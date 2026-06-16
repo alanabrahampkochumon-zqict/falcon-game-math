@@ -20,6 +20,7 @@ namespace demo
     {
     public:
         std::vector<fgm::Vector3D<float>> vertices{};
+        // std::vector<fgm::Vector3D<int>> colors{};
         std::vector<int> indices{};
     };
 } // namespace demo

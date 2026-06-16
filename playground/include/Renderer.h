@@ -12,8 +12,10 @@
 
 #include "Mesh.h"
 
+#include <bit>
 #include <cstdint>
 #include <cstdio>
+#include <cstdlib>
 #include <utility>
 #include <vectors/Vector2D.h>
 #include <vectors/Vector3D.h>
@@ -62,7 +64,8 @@ namespace demo
 
 
         template <typename T>
-        void renderTriangle(const Vec3<T>& v0, const Vec3<T>& v1, const Vec3<T>& v2)
+        void renderTriangle(const Vec3<T>& v0, const Vec3<T>& v1, const Vec3<T>& v2, const uint8_t r = 0xff,
+                            const uint8_t g = 0xff, const uint8_t b = 0xff, const uint8_t a = 0xff)
         {
             // Compute the bounding box
             const auto x0 = static_cast<std::size_t>(std::min({ v0.x(), v1.x(), v2.x() }));
@@ -88,10 +91,26 @@ namespace demo
 
                     if (insideTriangle)
                     {
-                        frameBuffer[offset]     = 0xff;
-                        frameBuffer[offset + 1] = 0xff;
-                        frameBuffer[offset + 2] = 0xff;
-                        frameBuffer[offset + 2] = 0xff;
+                        if constexpr (std::endian::native == std::endian::big)
+                        {
+                            // RGBA
+                            frameBuffer[offset]     = r;
+                            frameBuffer[offset + 1] = g;
+                            frameBuffer[offset + 2] = b;
+                            frameBuffer[offset + 2] = a;
+                        }
+                        else if constexpr (std::endian::native == std::endian::little)
+                        {
+                            // BRGA
+                            frameBuffer[offset]     = b;
+                            frameBuffer[offset + 1] = r;
+                            frameBuffer[offset + 2] = g;
+                            frameBuffer[offset + 2] = a;
+                        }
+                        else
+                        {
+                            printf("Unknown endianness");
+                        }
                     }
                 }
             }
@@ -107,7 +126,12 @@ namespace demo
                     const auto i0 = static_cast<std::size_t>(*it);
                     const auto i1 = static_cast<std::size_t>(*(it + 1));
                     const auto i2 = static_cast<std::size_t>(*(it + 2));
-                    renderTriangle(mesh.vertices[i0], mesh.vertices[i1], mesh.vertices[i2]);
+                    // FIXME: Test code
+                    const auto r    = static_cast<uint8_t>(std::rand() % 255);
+                    const auto g    = static_cast<uint8_t>(std::rand() % 255);
+                    const auto b    = static_cast<uint8_t>(std::rand() % 255);
+                    const uint8_t a = 255;
+                    renderTriangle(mesh.vertices[i0], mesh.vertices[i1], mesh.vertices[i2], r, g, b, a);
                 }
             }
             else
