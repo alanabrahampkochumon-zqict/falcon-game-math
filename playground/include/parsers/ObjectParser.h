@@ -11,8 +11,12 @@
 
 #include "Mesh.h"
 
+#include <charconv>
 #include <fstream>
+#include <iostream>
+#include <ranges>
 #include <string>
+#include <string_view>
 
 
 namespace demo
@@ -35,13 +39,51 @@ namespace demo
                 std::printf("Error opening file! Returning a default mesh.");
             }
 
+            // TODO: Start with object parsing
             std::string line;
-            std::getline(modelStream, line);
-            printf("First line %s\n", line.c_str());
+            while (std::getline(modelStream, line))
+            {
+                if (line.starts_with("vt"))
+                {
+                    // TODO: Texture coordinates
+                }
+                else if (line.starts_with("vn"))
+                {
+                    // TODO: Vertex normals
+                }
+                else if (line.starts_with("v"))
+                {
+                    // Vertex
+                    auto vertexIterator = std::views::split(line, ' ') | std::views::drop(1);
+                    Vec3<float> vertexData;
+                    std::size_t index = 0;
+                    for (const auto token : vertexIterator)
+                    {
+                        float vertex;
+                        const auto [ptr, ec] = std::from_chars(token.data(), token.data() + token.size(), vertex);
+                        if (ec != std::errc())
+                        {
+                            printf("There was an error while parsing the vertex data.");
+                        }
+                        vertexData[index++] = vertex;
+                    }
+                    mesh.vertices.push_back(vertexData);
+                }
+                else if (line.starts_with("f"))
+                {
+                    // Faces
+                    // Vertex/Texture/Normal
+                    // printf("Faces %s\n", line.c_str());
+                    // Only takes the face index for now
+                    auto vertexIterator = std::views::split(line, ' ') | std::views::drop(1);
+                    // for (auto vertexIndex:)
+                    auto faceIterator = std::views::split(vertexIterator.data(), '\\');
+                }
+            }
 
 
-            mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
-                              fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
+            // mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
+            //                   fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
             mesh.indices  = { 0, 1, 2, 1, 3, 2 };
 
             return mesh;

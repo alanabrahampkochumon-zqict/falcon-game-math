@@ -68,7 +68,6 @@ namespace demo
             auto modelPath = std::filesystem::path("models") / "utah_teapot.obj";
             ObjectParser parser;
             auto mesh = parser.parse(modelPath.string());
-            printf("Model Path: %s\n", modelPath.string().c_str());
 
             _isRunning = true;
 
