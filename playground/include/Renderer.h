@@ -145,7 +145,7 @@ namespace demo
                 {
                     const auto offset = static_cast<size_t>(colorChannels) * (j * static_cast<std::size_t>(width) + i);
 
-                    const auto point = fgm::Vector2D<float>(i, j);
+                    const auto point = fgm::Vector2D(static_cast<float>(i), static_cast<float>(j));
 
                     const bool eC0            = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
                     const bool eC1            = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
