@@ -16,6 +16,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include <utility>
 #include <vectors/Vector2D.h>
 #include <vectors/Vector3D.h>
@@ -48,7 +49,23 @@ namespace demo
               _colorChannels(colorChannels)
         { clearScreen(); }
 
-        void clearScreen() { memset(frameBuffer, clearColor, static_cast<size_t>(_width * _height * _colorChannels)); }
+
+        /**
+         * @brief Update the renderer's clear color.
+         * @note Must call @ref clearScreen to clear the buffer.
+         *
+         * @warning The endianness of the clear color is not managed and the user must specify the clear color bit
+         *          following the order of endianness of target CPU.
+         *
+         * @param color The new clear color.
+         */
+        void setClearColor(const int color) { clearColor = color; }
+
+        /**
+         * @brief Clear the FrameBuffer with @ref clearColor.
+         */
+        void clearScreen() const
+        { std::memset(frameBuffer, clearColor, static_cast<size_t>(_width * _height * _colorChannels)); }
 
         ~Renderer()
         {

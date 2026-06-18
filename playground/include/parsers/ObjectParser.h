@@ -31,8 +31,10 @@ namespace demo
          */
         Mesh parse(const std::string& filename)
         {
+
             Mesh mesh;
             std::ifstream modelStream(filename);
+
 
             if (!modelStream.is_open())
             {
@@ -75,16 +77,26 @@ namespace demo
                     // Vertex/Texture/Normal
                     // printf("Faces %s\n", line.c_str());
                     // Only takes the face index for now
-                    auto vertexIterator = std::views::split(line, ' ') | std::views::drop(1);
+                    auto data = line | std::views::split(' ') | std::views::transform([](auto&& subrange) {
+                                    return std::string(subrange.begin(), subrange.end()) | std::views::split('/') |
+                                        std::views::take(1) | std::views::transform([](auto&& sub) {
+                                               return std::string(sub.begin(), sub.end());
+                                           });
+                                });
+                    for (const auto d : data)
+                    {
+                    }
+                    // auto vertexIterator = std::views::split(line, ' ') | std::views::drop(1);
+                    // vertexIterator.size();
                     // for (auto vertexIndex:)
-                    auto faceIterator = std::views::split(vertexIterator.data(), '\\');
+                    // auto faceIterator = std::views::split(vertexIterator.data(), '\\');
                 }
             }
 
 
             // mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
             //                   fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
-            mesh.indices  = { 0, 1, 2, 1, 3, 2 };
+            mesh.indices = { 0, 1, 2, 1, 3, 2 };
 
             return mesh;
         }
