@@ -1,5 +1,5 @@
 /**
- * @file OperationCodeTests.cpp
+ * @file OperationStatusTests.cpp
  * @author Alan Abraham P Kochumon
  * @date Created on: March 30, 2026
  *
@@ -9,7 +9,7 @@
  */
 
 
-#include <common/OperationStatus.h>
+#include <fgm/common/OperationStatus.h>
 #include <gtest/gtest.h>
 
 

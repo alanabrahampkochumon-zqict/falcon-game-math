@@ -1,12 +1,12 @@
 #pragma once
 /**
- * @file Matrix3D.h
+ * @file Matrix4D.h
  * @author Alan Abraham P Kochumon
  * @date Created on: February 15, 2026
  *
- * @brief Templated 3x3 Matrix supporting integral, floating-point, and boolean types.
+ * @brief Templated 4x4 Matrix supporting integral, floating-point, and boolean types.
  *
- * @details Provide high-performance 3x3 matrix implementation with SIMD acceleration
+ * @details Provide high-performance 4x4 matrix implementation with SIMD acceleration
  *          and support for element-wise operations.
  *
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
@@ -24,77 +24,87 @@
  */
 
 
-#include "common/Config.h"
-#include "common/MathTraits.h"
-#include "common/Types.h"
-#include "vectors/Vector3D.h"
+#include "fgm/common/MathTraits.h"
+#include "fgm/common/Types.h"
+#include "fgm/vectors/Vector4D.h"
 
 #include <array>
 #include <cstddef>
 
 
-// TODO: Add Matrix3D Transformation factory, projections.
 
 namespace fgm
 {
+
     template <Arithmetic T>
-    struct Matrix3D
+    struct Matrix4D
     {
         /**
-         * @addtogroup FGM_Mat3x3_Members
+         * @addtogroup FGM_Mat4x4_Members
          * @{
          */
 
         using value_type = T; ///< The numeric type of the matrix elements.
 
-        static constexpr std::size_t columns = 3; ///< Matrix column count.
-        static constexpr std::size_t rows    = 3; ///< Matrix row count.
+        static constexpr std::size_t columns = 4; ///< Matrix column count.
+        static constexpr std::size_t rows    = 4; ///< Matrix row count.
 
         /** @} */
 
 
+
         /**
-         * @addtogroup FGM_Mat3x3_Init
+         * @addtogroup FGM_Mat4x4_Init
          * @{
          */
 
         /**
-         * @brief Initialize an uninitialized @ref Matrix3D instance.
+         * @brief Initialize an uninitialized @ref Matrix4D instance.
          *
          * @warning The components are left uninitialized (containing garbage data)
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::mat3d::zero<T> to guarantee a zeroed matrix.
+         *       @ref fgm::mat4d::zero<T> to guarantee a zeroed matrix.
          */
-        Matrix3D() = default;
+        Matrix4D() = default;
 
 
         /**
-         * @brief Initialize a 3x3 matrix from the passed-in scalar elements.
+         * @brief Initialize a 4x4 matrix from the passed-in scalar elements.
          *
          * @param[in] m00 The element to insert into row one, column one.
          * @param[in] m01 The element to insert into row one, column two.
          * @param[in] m02 The element to insert into row one, column three.
+         * @param[in] m03 The element to insert into row one, column four.
          * @param[in] m10 The element to insert into row two, column one.
          * @param[in] m11 The element to insert into row two, column two.
          * @param[in] m12 The element to insert into row two, column three.
+         * @param[in] m13 The element to insert into row two, column four.
          * @param[in] m20 The element to insert into row three, column one.
          * @param[in] m21 The element to insert into row three, column two.
          * @param[in] m22 The element to insert into row three, column three.
+         * @param[in] m23 The element to insert into row three, column four.
+         * @param[in] m30 The element to insert into row four, column one.
+         * @param[in] m31 The element to insert into row four, column two.
+         * @param[in] m32 The element to insert into row four, column three.
+         * @param[in] m33 The element to insert into row four, column four.
+         *
          */
-        [[nodiscard]] constexpr Matrix3D(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22) noexcept;
+        [[nodiscard]] constexpr Matrix4D(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22,
+                                         T m23, T m30, T m31, T m32, T m33) noexcept;
 
 
         /**
-         * @brief Initialize a 3x3 matrix from the passed-in vectors as columns.
+         * @brief Initialize a 4x4 matrix from the passed-in vectors as columns.
          *
-         * @param[in] col0 The 3D-vector to use as the first column entry.
-         * @param[in] col1 The 3D-vector to use as the second column entry.
-         * @param[in] col2 The 3D-vector to use as the third column entry.
+         * @param[in] col0 The 4D-vector to use as the first column entry.
+         * @param[in] col1 The 4D-vector to use as the second column entry.
+         * @param[in] col2 The 4D-vector to use as the third column entry.
+         * @param[in] col3 The 4D-vector to use as the fourth column entry.
          */
-        [[nodiscard]] constexpr Matrix3D(const Vector3D<T>& col0, const Vector3D<T>& col1,
-                                         const Vector3D<T>& col2) noexcept;
+        [[nodiscard]] constexpr Matrix4D(const Vector4D<T>& col0, const Vector4D<T>& col1, const Vector4D<T>& col2,
+                                         const Vector4D<T>& col3) noexcept;
 
 
         /**
@@ -104,25 +114,27 @@ namespace fgm
          * @param[in] d0 The first diagonal entry of the matrix (m00).
          * @param[in] d1 The second diagonal entry of the matrix (m11).
          * @param[in] d2 The third diagonal entry of the matrix (m22).
+         * @param[in] d3 The third diagonal entry of the matrix (m33).
          */
-        [[nodiscard]] constexpr Matrix3D(T d0, T d1, T d2) noexcept;
+        [[nodiscard]] constexpr Matrix4D(T d0, T d1, T d2, T d3) noexcept;
 
 
         /**
-         * @brief Initialize @ref Matrix3D from another @ref Matrix3D of a different type.
+         * @brief Initialize @ref Matrix4D from another @ref Matrix4D of a different type.
          *
          * @tparam U Numeric type of the source matrix.
          *
          * @param[in] other The source matrix to be converted.
          */
         template <Arithmetic U>
-        [[nodiscard]] explicit constexpr Matrix3D(const Matrix3D<U>& other) noexcept;
+        [[nodiscard]] explicit constexpr Matrix4D(const Matrix4D<U>& other) noexcept;
 
         /** @} */
 
 
+
         /**
-         * @addtogroup FGM_Mat3x3_Access
+         * @addtogroup FGM_Mat4x4_Access
          * @{
          */
 
@@ -135,7 +147,7 @@ namespace fgm
          *
          * @return A reference to the column vector.
          */
-        [[nodiscard]] constexpr Vector3D<T>& operator[](std::size_t col) noexcept;
+        [[nodiscard]] constexpr Vector4D<T>& operator[](std::size_t col) noexcept;
 
 
         /**
@@ -147,7 +159,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const Vector3D<T>& operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const Vector4D<T>& operator[](std::size_t col) const noexcept;
 
 
         /**
@@ -178,8 +190,9 @@ namespace fgm
         /** @} */
 
 
+
         /**
-         * @addtogroup T_FGM_Mat3x3_Constant
+         * @addtogroup T_FGM_Mat4x4_Constant
          * @{
          */
 
@@ -190,29 +203,30 @@ namespace fgm
          **************************************/
 
         /**
-         * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
+         * @brief A 4D matrix with ones on the main diagonal and zeros elsewhere.
          *
          * @note Only available for @ref StrictArithmetic types.
          *
-         * @return A 3D identity matrix.
+         * @return A 4 identity matrix.
          */
-        [[nodiscard]] static constexpr Matrix3D eye() noexcept;
+        [[nodiscard]] static constexpr Matrix4D eye() noexcept;
 
 
         /**
-         * @brief A 3D matrix with all zero elements.
+         * @brief A 4D matrix with all zero elements.
          *
          * @note Only available for @ref StrictArithmetic types.
          *
-         * @return A 3D zero matrix.
+         * @return A 4D zero matrix.
          */
-        [[nodiscard]] static constexpr Matrix3D zero() noexcept;
+        [[nodiscard]] static constexpr Matrix4D zero() noexcept;
 
         /** @} */
 
 
+
         /**
-         * @addtogroup FGM_Mat3x3_Equality
+         * @addtogroup FGM_Mat4x4_Equality
          * @{
          */
 
@@ -234,7 +248,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool allEq(const Matrix3D<U>& rhs,
+        [[nodiscard]] constexpr bool allEq(const Matrix4D<U>& rhs,
                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
                                                : Config::FLOAT_EPSILON) const noexcept;
@@ -259,7 +273,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr bool allEq(const Matrix3D& lhs, const Matrix3D<U>& rhs,
+        [[nodiscard]] static constexpr bool allEq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                           std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
@@ -284,7 +298,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool anyNeq(const Matrix3D<U>& rhs,
+        [[nodiscard]] constexpr bool anyNeq(const Matrix4D<U>& rhs,
                                             double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
                                                 : Config::FLOAT_EPSILON) const noexcept;
@@ -309,7 +323,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr bool anyNeq(const Matrix3D& lhs, const Matrix3D<U>& rhs,
+        [[nodiscard]] static constexpr bool anyNeq(const Matrix4D& lhs, const Matrix4D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                            std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
@@ -317,7 +331,7 @@ namespace fgm
 
 
         /**
-         * @copybrief allEq(const Matrix3D<U>&, double) const noexcept
+         * @copybrief allEq(const Matrix4D<U>&, double) const noexcept
          *
          * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
          *       during static evaluation.
@@ -330,11 +344,11 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool operator==(const Matrix3D<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator==(const Matrix4D<U>& rhs) const noexcept;
 
 
         /**
-         * @copybrief anyNeq(const Matrix3D<U>&, double) const noexcept
+         * @copybrief anyNeq(const Matrix4D<U>&, double) const noexcept
          *
          * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
          *       during static evaluation.
@@ -347,31 +361,32 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool operator!=(const Matrix3D<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator!=(const Matrix4D<U>& rhs) const noexcept;
 
         /** @} */
 
 
+
         /**
-         * @addtogroup FGM_Mat3x3_Arithmetic
+         * @addtogroup FGM_Mat4x4_Arithmetic
          * @{
          */
 
         /**
          * @brief Compute the element-wise sum of this matrix with @p rhs matrix and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to add.
          *
-         * @return A new @ref Matrix3D containing the element-wise sum.
+         * @return A new @ref Matrix4D containing the element-wise sum.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator+(const Matrix3D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator+(const Matrix4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -388,25 +403,25 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        Matrix3D& operator+=(const Matrix3D<U>& rhs) noexcept
+        Matrix4D& operator+=(const Matrix4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the element-wise difference between this matrix and @p rhs matrix and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to subtract.
          *
-         * @return A new @ref Matrix3D containing the element-wise difference.
+         * @return A new @ref Matrix4D containing the element-wise difference.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator-(const Matrix3D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator-(const Matrix4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -423,24 +438,24 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        constexpr Matrix3D& operator-=(const Matrix3D<U>& rhs) noexcept
+        constexpr Matrix4D& operator-=(const Matrix4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Compute the element-wise product between this matrix and @p scalar and
+         * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] scalar The value to scale by.
          *
-         * @return A new @ref Matrix3D scaled by @p scalar.
+         * @return A new @ref Matrix4D scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4D<T, S> operator*(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -456,7 +471,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic S>
-        constexpr Matrix3D& operator*=(S scalar) noexcept
+        constexpr Matrix4D& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -464,32 +479,33 @@ namespace fgm
          * @brief Transform the @p vec **column vector** by this matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}
          *            \cdot
          *            \begin{bmatrix}
-         *                  x \\ y \\ z
+         *                  x \\ y \\ z \\ w
          *            \end{bmatrix}
          *            =
          *            \begin{bmatrix}
-         *                  x' \\ y' \\ z'
+         *                  x' \\ y' \\ z' \\ w'
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec The column vector to transform.
          *
-         * @return A new @ref Vector3D with applied linear transformations.
+         * @return A new @ref Vector4D with applied linear transformations.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector3D<T, U> operator*(const Vector3D<U>& vec) const noexcept
+        [[nodiscard]] constexpr PromotedVector4D<T, U> operator*(const Vector4D<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -497,36 +513,39 @@ namespace fgm
          * @brief Compose this matrix with @p rhs matrix to form a new matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}
          *            \cdot
          *            \begin{bmatrix}
-         *                  B_{00} & B_{01} & B_{02} \\
-         *                  B_{10} & B_{11} & B_{12} \\
-         *                  B_{20} & B_{21} & B_{22}
+         *                 B_{00} & B_{01} & B_{02} & B_{03} \\
+         *                 B_{10} & B_{11} & B_{12} & B_{13} \\
+         *                 B_{20} & B_{21} & B_{22} & B_{23} \\
+         *                 B_{30} & B_{31} & B_{32} & B_{33}
          *            \end{bmatrix}
          *            =
          *            \begin{bmatrix}
-         *                  C_{00} & C_{01} & C_{02} \\
-         *                  C_{10} & C_{11} & B_{12} \\
-         *                  C_{20} & C_{21} & C_{22}
+         *                 C_{00} & C_{01} & C_{02} & C_{03} \\
+         *                 C_{10} & C_{11} & C_{12} & C_{13} \\
+         *                 C_{20} & C_{21} & C_{22} & C_{23} \\
+         *                 C_{30} & C_{31} & C_{32} & C_{33}
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to multiply.
          *
-         * @return A new @ref Matrix3D containing the composition of linear transformations.
+         * @return A new @ref Matrix4D containing the composition of linear transformations.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, U> operator*(const Matrix3D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4D<T, U> operator*(const Matrix4D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -534,21 +553,24 @@ namespace fgm
          * @brief Compose this matrix with @p rhs matrix in-place.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}
          *            \cdot
          *            \begin{bmatrix}
-         *                  B_{00} & B_{01} & B_{02} \\
-         *                  B_{10} & B_{11} & B_{12} \\
-         *                  B_{20} & B_{21} & B_{22}
+         *                 B_{00} & B_{01} & B_{02} & B_{03} \\
+         *                 B_{10} & B_{11} & B_{12} & B_{13} \\
+         *                 B_{20} & B_{21} & B_{22} & B_{23} \\
+         *                 B_{30} & B_{31} & B_{32} & B_{33}
          *            \end{bmatrix}
          *            =
          *            \begin{bmatrix}
-         *                  C_{00} & C_{01} & C_{02} \\
-         *                  C_{10} & C_{11} & B_{12} \\
-         *                  C_{20} & C_{21} & C_{22}
+         *                 C_{00} & C_{01} & C_{02} & C_{03} \\
+         *                 C_{10} & C_{11} & C_{12} & C_{13} \\
+         *                 C_{20} & C_{21} & C_{22} & C_{23} \\
+         *                 C_{30} & C_{31} & C_{32} & C_{33}
          *            \end{bmatrix}
          *        \f$
          *
@@ -562,25 +584,23 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        constexpr Matrix3D& operator*=(const Matrix3D<U>& rhs) noexcept
+        constexpr Matrix4D& operator*=(const Matrix4D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         * @note Performs assertion for division by zero in **Debug mode**.
-         *
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @param[in] scalar The value to scale by.
          *
-         * @return A new @ref Matrix3D inverse scaled by @p scalar.
+         * @return A new @ref Matrix4D inverse scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator/(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4D<T, S> operator/(const S& scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -597,7 +617,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic S>
-        constexpr Matrix3D& operator/=(S scalar) noexcept
+        constexpr Matrix4D& operator/=(const S& scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -606,7 +626,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -617,12 +637,12 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, S> safeDiv(
-            S scalar, const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4D<T, S> safeDiv(
+            S scalar, const Matrix4D& fallback = Matrix4D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -631,7 +651,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -643,12 +663,12 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix3D<T, S> safeDiv(
-            const Matrix3D& mat, S scalar, const Matrix3D& fallback = Matrix3D::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix4D<T, S> safeDiv(
+            const Matrix4D& mat, S scalar, const Matrix4D& fallback = Matrix4D::eye()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -658,11 +678,12 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
-         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
+         mathematical
          *       invalidity (Division by Zero) when reporting status.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -673,12 +694,12 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix3D<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                              const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4D<T, S> tryDiv(S scalar, OperationStatus& status,
+                                                              const Matrix4D& fallback = Matrix4D::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -688,11 +709,12 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix4D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
-         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
+         mathematical
          *       invalidity (Division by Zero) when reporting status.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -704,19 +726,20 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix3D resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Matrix4D resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix3D<T, S> tryDiv(
-            const Matrix3D& mat, S scalar, OperationStatus& status, const Matrix3D& fallback = Matrix3D::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix4D<T, S> tryDiv(
+            const Matrix4D& mat, S scalar, OperationStatus& status, const Matrix4D& fallback = Matrix4D::eye()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
 
 
+
         /**
-         * @addtogroup FGM_Mat3x3_Algebra
+         * @addtogroup FGM_Mat4x4_Algebra
          * @{
          */
 
@@ -724,9 +747,26 @@ namespace fgm
          * @brief Compute the determinant (scaling factor) of this matrix.
          *        \f$
          *            \begin{align*}
-         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
-         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
-         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{11})
+         *                 \text{det(A)} &= A_{00} \begin{bmatrix}
+         *                                              A_{11} & A_{12} & A_{13} \\
+         *                                              A_{21} & A_{22} & A_{23} \\
+         *                                              A_{31} & A_{32} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &- A_{01} \begin{bmatrix}
+         *                                              A_{10} & A_{12} & A_{13} \\
+         *                                              A_{20} & A_{22} & A_{23} \\
+         *                                              A_{30} & A_{32} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &+ A_{02} \begin{bmatrix}
+         *                                              A_{10} & A_{11} & A_{13} \\
+         *                                              A_{20} & A_{21} & A_{23} \\
+         *                                              A_{30} & A_{31} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &- A_{03} \begin{bmatrix}
+         *                                             A_{10} & A_{11} & A_{12} \\
+         *                                             A_{20} & A_{21} & A_{22} \\
+         *                                             A_{30} & A_{31} & A_{32}
+         *                                         \end{bmatrix}
          *            \end{align*}
          *        \f$
          *
@@ -742,9 +782,26 @@ namespace fgm
          * @brief Compute the determinant (scaling factor) of @p matrix.
          *        \f$
          *            \begin{align*}
-         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
-         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
-         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
+         *                 \text{det(A)} &= A_{00} \begin{bmatrix}
+         *                                              A_{11} & A_{12} & A_{13} \\
+         *                                              A_{21} & A_{22} & A_{23} \\
+         *                                              A_{31} & A_{32} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &- A_{01} \begin{bmatrix}
+         *                                              A_{10} & A_{12} & A_{13} \\
+         *                                              A_{20} & A_{22} & A_{23} \\
+         *                                              A_{30} & A_{32} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &+ A_{02} \begin{bmatrix}
+         *                                              A_{10} & A_{11} & A_{13} \\
+         *                                              A_{20} & A_{21} & A_{23} \\
+         *                                              A_{30} & A_{31} & A_{33}
+         *                                         \end{bmatrix} \\
+         *                               &- A_{03} \begin{bmatrix}
+         *                                             A_{10} & A_{11} & A_{12} \\
+         *                                             A_{20} & A_{21} & A_{22} \\
+         *                                             A_{30} & A_{31} & A_{32}
+         *                                         \end{bmatrix}
          *            \end{align*}
          *        \f$
          *
@@ -754,7 +811,7 @@ namespace fgm
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
          */
-        static constexpr T determinant(const Matrix3D& matrix) noexcept
+        static constexpr T determinant(const Matrix4D& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -762,73 +819,83 @@ namespace fgm
          * @brief Transpose this matrix by swapping its rows and columns.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix} ^ \top
          *            =
          *            \begin{bmatrix}
-         *                 A_{00} & A_{10} & A_{20} \\
-         *                 A_{01} & A_{11} & A_{21} \\
-         *                 A_{02} & A_{12} & A_{22}
+         *                 A_{00} & A_{10} & A_{20} & A_{30} \\
+         *                 A_{01} & A_{11} & A_{21} & A_{31} \\
+         *                 A_{02} & A_{12} & A_{22} & A_{32} \\
+         *                 A_{03} & A_{13} & A_{23} & A_{33}
          *            \end{bmatrix}
          *        \f$
          *
-         * @return A new @ref Matrix3D with its elements flipped along the diagonal.
+         * @return A new @ref Matrix4D with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix3D transpose() const noexcept;
+        constexpr Matrix4D transpose() const noexcept;
 
 
         /**
          * @brief Transpose @p matrix by swapping its rows and columns.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix} ^ \top
          *            =
          *            \begin{bmatrix}
-         *                 A_{00} & A_{10} & A_{20} \\
-         *                 A_{01} & A_{11} & A_{21} \\
-         *                 A_{02} & A_{12} & A_{22}
+         *                 A_{00} & A_{10} & A_{20} & A_{30} \\
+         *                 A_{01} & A_{11} & A_{21} & A_{31} \\
+         *                 A_{02} & A_{12} & A_{22} & A_{32} \\
+         *                 A_{03} & A_{13} & A_{23} & A_{33}
          *            \end{bmatrix}
          *        \f$
          *
          * @param matrix The matrix to transpose.
          *
-         * @return A new @ref Matrix3D with its elements flipped along the diagonal.
+         * @return A new @ref Matrix4D with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix3D transpose(const Matrix3D& matrix) noexcept;
+        static constexpr Matrix4D transpose(const Matrix4D& matrix) noexcept;
 
 
         /**
          * @brief Compute the inverse of this matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 b  \times c \\
-         *                 c  \times a \\
-         *                 a  \times b
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
          *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          * @note Performs assertion for division by zero (singular matrix) in **Debug mode**.
          *
-         * @return A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$.
+         * @return A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix3D<Magnitude<T>> inverse() const noexcept
+        constexpr Matrix4D<Magnitude<T>> inverse() const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -836,17 +903,23 @@ namespace fgm
          * @brief Compute the inverse of a matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 b  \times c \\
-         *                 c  \times a \\
-         *                 a  \times b
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
          *        \f$
          *
          * @note Promotes the result to a floating point result using @ref Magnitude.
@@ -855,10 +928,10 @@ namespace fgm
          *
          * @param[in] matrix The matrix to invert.
          *
-         * @return A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$.
+         * @return A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix3D<Magnitude<T>> inverse(const Matrix3D& matrix) noexcept
+        static constexpr Matrix4D<Magnitude<T>> inverse(const Matrix4D& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -866,19 +939,24 @@ namespace fgm
          * @brief Compute the inverse of this matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} & A_{02} \\
-         *                 A_{10} & A_{11} & A_{12} \\
-         *                 A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 b  \times c \\
-         *                 c  \times a \\
-         *                 a  \times b
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
          *        \f$
-         *
          * @note If the determinant is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
@@ -887,11 +965,11 @@ namespace fgm
          *
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix3D<Magnitude<T>> safeInverse(const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        constexpr Matrix4D<Magnitude<T>> safeInverse(const Matrix4D& fallback = Matrix4D::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -899,17 +977,23 @@ namespace fgm
          * @brief Compute the inverse of @p matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                A_{00} & A_{01} & A_{02} \\
-         *                A_{10} & A_{11} & A_{12} \\
-         *                A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 b  \times c \\
-         *                 c  \times a \\
-         *                 a  \times b
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
          *        \f$
          *
          * @note If the determinant is zero (or below the epsilon threshold) or this matrix contains NaN elements,
@@ -921,12 +1005,12 @@ namespace fgm
          * @param[in] matrix   The matrix to invert.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix3D<Magnitude<T>> safeInverseOf(const Matrix3D& matrix,
-                                                              const Matrix3D& fallback = Matrix3D::eye()) noexcept
+        static constexpr Matrix4D<Magnitude<T>> safeInverseOf(const Matrix4D& matrix,
+                                                              const Matrix4D& fallback = Matrix4D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -934,17 +1018,23 @@ namespace fgm
          * @brief Compute the inverse of this matrix and set @p status to the matrix inversion result.
          *        \f$
          *            \begin{bmatrix}
-         *                A_{00} & A_{01} & A_{02} \\
-         *                A_{10} & A_{11} & A_{12} \\
-         *                A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 b  \times c \\
-         *                 c  \times a \\
-         *                 a  \times b
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
          *        \f$
          *
          * @note If the determinant is zero (or below the epsilon threshold) or this matrix contains NaN elements,
@@ -957,30 +1047,36 @@ namespace fgm
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix3D<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                    const Matrix3D& fallback = Matrix3D::eye()) const noexcept
+        constexpr Matrix4D<Magnitude<T>> tryInverse(OperationStatus& status,
+                                                    const Matrix4D& fallback = Matrix4D::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
         /**
-         * @brief Compute the inverse of @p matrix and set @p status to the matrix inversion result.
+         * @brief Safely compute the inverse of @p matrix and set @p status to the matrix inversion result.
          *        \f$
          *            \begin{bmatrix}
-         *                A_{00} & A_{01} & A_{02} \\
-         *                A_{10} & A_{11} & A_{12} \\
-         *                A_{20} & A_{21} & A_{22}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 b  \times c \\
-         *                 c  \times a \\
-         *                 a  \times b
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
          *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
          *        \f$
          *
          * @note If the determinant is zero (or below the epsilon threshold) or this matrix contains NaN elements,
@@ -994,12 +1090,12 @@ namespace fgm
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix3D such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Matrix4D such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix3D<Magnitude<T>> tryInverseOf(const Matrix3D& matrix, OperationStatus& status,
-                                                             const Matrix3D& fallback = Matrix3D::eye()) noexcept
+        static constexpr Matrix4D<Magnitude<T>> tryInverseOf(const Matrix4D& matrix, OperationStatus& status,
+                                                             const Matrix4D& fallback = Matrix4D::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1019,14 +1115,15 @@ namespace fgm
          *
          * @return The sum of entries along the main diagonal of the given matrix.
          */
-        [[nodiscard]] static constexpr T trace(const Matrix3D& matrix) noexcept
+        [[nodiscard]] static constexpr T trace(const Matrix4D& matrix) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
 
 
+
         /**
-         * @addtogroup FGM_Mat3x3_Utils
+         * @addtogroup FGM_Mat4x4_Utils
          * @{
          */
 
@@ -1049,7 +1146,7 @@ namespace fgm
          *
          * @return True if at least one element is positive or negative infinity.
          */
-        [[nodiscard]] static constexpr bool hasInf(const Matrix3D& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasInf(const Matrix4D& matrix) noexcept;
 
 
         /**
@@ -1071,9 +1168,10 @@ namespace fgm
          *
          * @return True if at least one element is NaN.
          */
-        [[nodiscard]] static constexpr bool hasNaN(const Matrix3D& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasNaN(const Matrix4D& matrix) noexcept;
 
         /** @} */
+
 
 
         /**
@@ -1086,9 +1184,10 @@ namespace fgm
          *        Format the matrix as
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{10} & A_{20} \\
-         *                 A_{01} & A_{11} & A_{21} \\
-         *                 A_{02} & A_{12} & A_{22}
+         *                 A_{00} & A_{10} & A_{20} & A_{30} \\
+         *                 A_{01} & A_{11} & A_{21} & A_{31} \\
+         *                 A_{02} & A_{12} & A_{22} & A_{32} \\
+         *                 A_{03} & A_{13} & A_{23} & A_{33}
          *            \end{bmatrix}
          *        \f$ string representation for debugging or logging.
          *
@@ -1097,7 +1196,7 @@ namespace fgm
          *
          * @return A reference to the output stream @p os.
          */
-        friend std::ostream& operator<<(std::ostream& os, const Matrix3D& matrix)
+        friend std::ostream& operator<<(std::ostream& os, const Matrix4D& matrix)
         {
             const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
@@ -1106,9 +1205,14 @@ namespace fgm
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
-            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << "|\n";
-            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << "|\n";
-            os << "|" << matrix._data[0][2] << " " << matrix._data[1][2] << " " << matrix._data[2][2] << "|\n";
+            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << " "
+               << matrix._data[3][0] << "|\n";
+            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << " "
+               << matrix._data[3][1] << "|\n";
+            os << "|" << matrix._data[0][2] << " " << matrix._data[1][2] << " " << matrix._data[2][2] << " "
+               << matrix._data[3][2] << "|\n";
+            os << "|" << matrix._data[0][3] << " " << matrix._data[1][3] << " " << matrix._data[2][3] << " "
+               << matrix._data[3][3] << "|\n";
 
             os.precision(oldPrecision);
             os.flags(oldFlags);
@@ -1119,13 +1223,15 @@ namespace fgm
         /** @} */
 
 
+
     private:
-        std::array<Vector3D<T>, columns> _data;
+        std::array<Vector4D<T>, columns> _data;
     };
 
 
+
     /**
-     * @addtogroup FGM_Ma3x3_Alias
+     * @addtogroup FGM_Ma4x4_Alias
      * @{
      */
 
@@ -1135,13 +1241,13 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bMat3  = Matrix3D<bool>;               ///< `bool` matrix
-    using iMat3  = Matrix3D<int>;                ///< `int` matrix
-    using uMat3  = Matrix3D<unsigned int>;       ///< `unsigned int` matrix
-    using mat3   = Matrix3D<float>;              ///< `float` matrix
-    using lMat3  = Matrix3D<long long>;          ///< `long long` matrix
-    using dMat3  = Matrix3D<double>;             ///< `double` matrix
-    using ulMat3 = Matrix3D<unsigned long long>; ///< `unsigned long long` matrix
+    using bMat4  = Matrix4D<bool>;               ///< `bool` matrix
+    using iMat4  = Matrix4D<int>;                ///< `int` matrix
+    using uMat4  = Matrix4D<unsigned int>;       ///< `unsigned int` matrix
+    using mat4   = Matrix4D<float>;              ///< `float` matrix
+    using lMat4  = Matrix4D<long long>;          ///< `long long` matrix
+    using dMat4  = Matrix4D<double>;             ///< `double` matrix
+    using ulMat4 = Matrix4D<unsigned long long>; ///< `unsigned long long` matrix
 
     /** @} */
 
@@ -1154,14 +1260,14 @@ namespace fgm
      **************************************/
 
     /**
-     * @addtogroup FGM_Mat3x3_Arithmetic
+     * @addtogroup FGM_Mat4x4_Arithmetic
      * @{
      */
 
     /**
      * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
      *
-     * @note Promotes the result to the wider type using @ref PromotedMatrix3D<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedMatrix4D<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -1169,31 +1275,34 @@ namespace fgm
      * @param[in] scalar The value to scale by.
      * @param[in] matrix The matrix to scale.
      *
-     * @return A new @ref Matrix3D scaled by @p scalar.
+     * @return A new @ref Matrix4D scaled by @p scalar.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr PromotedMatrix3D<T, S> operator*(S scalar, const Matrix3D<T>& matrix) noexcept;
+    [[nodiscard]] constexpr PromotedMatrix4D<T, S> operator*(S scalar, const Matrix4D<T>& matrix) noexcept;
 
 
     /**
      * @brief Transform the @p vec **row vector** by @p matrix.
      *        \f$
      *            \begin{bmatrix}
-     *                x & y & z
+     *                x & y & z & w
      *            \end{bmatrix}
      *            \cdot
      *            \begin{bmatrix}
-     *                A_{00} & A_{01} & A_{02} \\
-     *                A_{10} & A_{11} & A_{12} \\
-     *                A_{20} & A_{21} & A_{22}
+     *                A_{00} & A_{01} & A_{02} & A_{03} \\
+     *                A_{10} & A_{11} & A_{12} & A_{13} \\
+     *                A_{20} & A_{21} & A_{22} & A_{23} \\
+     *                A_{30} & A_{31} & A_{32} & A_{33}
      *            \end{bmatrix}
      *            =
      *            \begin{bmatrix}
-     *                x' & y' & z'
+     *                x' & y' & z' & w'
      *            \end{bmatrix}
      *        \f$
      *
-     * @note Promotes the result to the wider type using @ref PromotedVector3D<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
      * @tparam S Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
      *
@@ -1203,25 +1312,25 @@ namespace fgm
      * @return The passed-in @p vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    static constexpr PromotedVector3D<T, S> operator*(const Vector3D<T>& vec, const Matrix3D<S>& matrix) noexcept;
+    static constexpr PromotedVector4D<T, S> operator*(const Vector4D<T>& vec, const Matrix4D<S>& matrix) noexcept;
 
 
     /**
      * @brief Transform the @p vec **row vector** by @p matrix.
-     *        Perform the linear transformation:
      *        \f$
      *            \begin{bmatrix}
-     *                x & y & z
+     *                x & y & z & w
      *            \end{bmatrix}
      *            \cdot
      *            \begin{bmatrix}
-     *                A_{00} & A_{01} & A_{02} \\
-     *                A_{10} & A_{11} & A_{12} \\
-     *                A_{20} & A_{21} & A_{22}
+     *                A_{00} & A_{01} & A_{02} & A_{03} \\
+     *                A_{10} & A_{11} & A_{12} & A_{13} \\
+     *                A_{20} & A_{21} & A_{22} & A_{23} \\
+     *                A_{30} & A_{31} & A_{32} & A_{33}
      *            \end{bmatrix}
      *            =
      *            \begin{bmatrix}
-     *                x' & y' & z'
+     *                x' & y' & z' & w'
      *            \end{bmatrix}
      *        \f$
      *
@@ -1230,19 +1339,20 @@ namespace fgm
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
      * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
      *
-     * @param[in] vec The row vector to transform.
+     * @param[in] vec    The row vector to transform.
      * @param[in] matrix The transformation matrix.
      *
      * @return The passed-in @p vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
-    static constexpr Vector3D<T>& operator*=(Vector3D<T>& vec, const Matrix3D<U>& matrix) noexcept;
+    static constexpr Vector4D<T>& operator*=(Vector4D<T>& vec, const Matrix4D<U>& matrix) noexcept;
 
     /** @} */
 
 
+
     /**
-     * @addtogroup T_FGM_Mat3x3_Constant
+     * @addtogroup T_FGM_Mat4x4_Constant
      * @{
      */
 
@@ -1252,33 +1362,36 @@ namespace fgm
      *                                    *
      **************************************/
 
-    namespace mat3d
+    namespace mat4d
     {
         /**
-         * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
+         * @brief A 4D matrix with ones on the main diagonal and zeros elsewhere.
          *
          * @note Only available for @ref StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Matrix3D<T> eye(T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1));
+        inline constexpr Matrix4D<T> eye(T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0),
+                                         T(0), T(0), T(1));
 
 
         /**
-         * @brief A 3D matrix with all zero elements.
+         * @brief A 4D matrix with all zero elements.
          *
          * @note Only available for @ref StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Matrix3D<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0));
-    } // namespace mat3d
+        inline constexpr Matrix4D<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0),
+                                          T(0), T(0), T(0));
+
+    } // namespace mat4d
 
 
-    /** @brief Template deduction guide for Matrix3D. */
+    /** @brief Template deduction guide for Matrix4D. */
     template <Arithmetic T, Arithmetic... Args>
-    Matrix3D(T, Args...) -> Matrix3D<T>;
+    Matrix4D(T, Args...) -> Matrix4D<T>;
 
     /** @} */
+
 } // namespace fgm
 
-
-#include "Matrix3D.tpp"
+#include "Matrix4D.tpp"

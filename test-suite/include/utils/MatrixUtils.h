@@ -15,10 +15,10 @@
 
 #include <cassert>
 #include <cmath>
-#include <common/MathTraits.h>
+#include <fgm/common/MathTraits.h>
 #include <gtest/gtest.h>
-#include <matrix/Matrix2D.h>
-#include <matrix/Matrix3D.h>
+#include <fgm/matrices/Matrix2D.h>
+#include <fgm/matrices/Matrix3D.h>
 #include <vector>
 
 

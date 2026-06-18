@@ -11,7 +11,7 @@
 
 
 #include <vector>
-#include <vectors/Vector3D.h>
+#include <fgm/vectors/Vector3D.h>
 
 
 namespace demo

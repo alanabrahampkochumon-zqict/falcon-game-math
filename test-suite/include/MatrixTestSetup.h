@@ -15,10 +15,10 @@
 #include "utils/MatrixUtils.h"
 #include "utils/VectorUtils.h"
 
-#include <common/MathTraits.h>
-#include <matrix/Matrix2D.h>
-#include <matrix/Matrix3D.h>
-#include <matrix/Matrix4D.h>
+#include <fgm/common/MathTraits.h>
+#include <fgm/matrices/Matrix2D.h>
+#include <fgm/matrices/Matrix3D.h>
+#include <fgm/matrices/Matrix4D.h>
 
 
 

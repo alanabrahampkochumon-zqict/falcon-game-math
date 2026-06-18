@@ -16,7 +16,7 @@
 #include "CommonSetup.h"
 #include "utils/VectorUtils.h"
 
-#include <vectors/Vector4D.h>
+#include <fgm/vectors/Vector4D.h>
 
 
 using namespace testutils;

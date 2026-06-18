@@ -19,8 +19,8 @@
 #include <cstring>
 #include <iostream>
 #include <utility>
-#include <vectors/Vector2D.h>
-#include <vectors/Vector3D.h>
+#include <fgm/vectors/Vector2D.h>
+#include <fgm/vectors/Vector3D.h>
 
 namespace demo
 {

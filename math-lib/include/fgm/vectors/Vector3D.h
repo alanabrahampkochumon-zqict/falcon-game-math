@@ -1,132 +1,113 @@
 #pragma once
 /**
- * @file Vector4D.h
+ * @file Vector3D.h
  * @author Alan Abraham P Kochumon
- * @date Created on: January 26, 2026
+ * @date Created on: January 19, 2026
  *
- * @brief Templated 4D Vector supporting integral, floating-point, and boolean types.
+ * @brief Templated 3D Vector supporting integral, floating-point, and boolean types.
  *
- * @details Provide high-performance 4D vector implementation with SIMD acceleration
+ * @details Provide high-performance 3D vector implementation with SIMD acceleration
  *          and support for component-wise operations.
  *
- * @tparam T Type of @ref Vector4D components. Must satisfy @ref Arithmetic.
- *
- * @note Arithmetic operations are restricted to numeric types via @ref StrictArithmetic.
+ * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
  *
  * @par Configuration
- * - Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (`,`, `<`, etc.).
- *   Even if disabled, functional comparisons like @ref gt remain available.
- * - Define `FORCE_SCALAR` to disable SIMD optimizations (enabled by default on supported hardware).
+ * Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
+ * Even if disabled, functional comparisons like `greaterThan()` remain available.
+ * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+
 #include "Vector2D.h"
-#include "Vector3D.h"
-#include "common/Config.h"
-#include "common/Constants.h"
-#include "common/MathTraits.h"
-#include "common/OperationStatus.h"
-#include "common/Types.h"
+#include "fgm/common/Config.h"
+#include "fgm/common/Constants.h"
+#include "fgm/common/OperationStatus.h"
+#include "fgm/common/Types.h"
 
 #include <array>
-#include <cstddef>
 #include <iomanip>
-#include <ostream>
-
+#include <type_traits>
 
 
 namespace fgm
 {
-
     template <Arithmetic T>
-    struct Vector4D
+    struct Vector3D
     {
-
         /**
-         * @addtogroup FGM_Vec4_Members
+         * @addtogroup FGM_Vec3_Members
          * @{
          */
 
         using value_type = T; ///< The numeric type of the vector components.
 
-        static constexpr std::size_t dimension = 4; ///< The number of components of the vector.
+        static constexpr std::size_t dimension = 3; ///< The number of components of the vector.
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Init
+         * @addtogroup FGM_Vec3_Init
          * @{
          */
 
         /**
-         * @brief Initialize an uninitialized @ref Vector4D instance.
+         * @brief Initialize an uninitialized @ref Vector3D instance.
          *
          * @warning The components are left uninitialized (containing garbage data)
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::vec4d::zero<T> to guarantee a zeroed vector.
+         *       @ref fgm::vec3d::zero<T> to guarantee a zeroed vector.
          */
-        Vector4D() = default;
+        Vector3D() = default;
 
 
         /**
-         * @brief Initialize @ref Vector4D with passed in values.
+         * @brief Initialize @ref Vector3D with passed in values.
          *
-         * @param[in] v1 The first entry of @ref Vector4D.
-         * @param[in] v2 The second entry of @ref Vector4D.
-         * @param[in] v3 The third entry of @ref Vector4D.
-         * @param[in] v4 The fourth entry of @ref Vector4D.
+         * @param[in] v1 The first entry of @ref Vector3D.
+         * @param[in] v2 The second entry of @ref Vector3D.
+         * @param[in] v3 The third entry of @ref Vector3D.
          */
-        [[nodiscard]] constexpr Vector4D(T v1, T v2, T v3, T v4) noexcept;
+        [[nodiscard]] constexpr Vector3D(T v1, T v2, T v3) noexcept;
 
 
         /**
-         * @brief Initialize @ref Vector4D with 2 @ref Vector2D.
+         * @brief Initialize @ref Vector3D with 1 @ref Vector2D and 1 @ref T value.
          *
-         * @param[in] vec1 The first two entries of @ref Vector4D.
-         * @param[in] vec2 The last two entries of @ref Vector4D.
+         * @param[in] vec The first two entries of @ref Vector3D.
+         * @param[in] v   The last entry of @ref Vector3D.
          */
-        [[nodiscard]] constexpr Vector4D(const Vector2D<T>& vec1, const Vector2D<T>& vec2) noexcept;
+        [[nodiscard]] constexpr Vector3D(Vector2D<T> vec, T v) noexcept;
 
 
         /**
-         * @brief Initialize @ref Vector4D with 1 @ref Vector3D and 1 @ref T value.
+         * @brief Initialize @ref Vector3D with 1 @ref T value and 1 @ref Vector2D.
          *
-         * @param[in] vec The first three entries of @ref Vector4D.
-         * @param[in] v   The last entry of @ref Vector4D.
+         * @param[in] v   The first entry of @ref Vector3D.
+         * @param[in] vec The last two entries of @ref Vector3D.
          */
-        [[nodiscard]] constexpr Vector4D(const Vector3D<T>& vec, T v) noexcept;
+        [[nodiscard]] constexpr Vector3D(T v, Vector2D<T> vec) noexcept;
 
 
         /**
-         * @brief Initialize @ref Vector4D with 1 T value and 1 @ref Vector3D.
-         *
-         * @param[in] vec The first three entries of @ref Vector4D.
-         * @param[in] v   The last entry of @ref Vector4D.
-         */
-        [[nodiscard]] constexpr Vector4D(T v, const Vector3D<T>& vec) noexcept;
-
-
-        /**
-         * @brief Initialize @ref Vector4D from another @ref Vector4D of a different type.
+         * @brief Initialize @ref Vector3D from another @ref Vector3D of a different type.
          *
          * @tparam U Numeric type of the source vector.
          *
          * @param[in] other The source vector to be converted.
          */
         template <Arithmetic U>
-        [[nodiscard]] explicit constexpr Vector4D(const Vector4D<U>& other) noexcept;
+        [[nodiscard]] explicit constexpr Vector3D(const Vector3D<U>& other) noexcept;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Access
+         * @addtogroup FGM_Vec3_Access
          * @{
          */
 
@@ -173,21 +154,6 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the fourth location (read-only).
-         * @return A copy of the fourth vector element.
-         */
-        [[nodiscard]] constexpr T w() const noexcept;
-
-
-        /**
-         * @brief Access the element at the fourth location (read-write access).
-         * @return A reference to the fourth element of the vector.
-         */
-        [[nodiscard]] constexpr T& w() noexcept;
-
-
-
-        /**
          * @brief Access the element at the first location (read-only).
          * @return A copy of the first vector element.
          */
@@ -227,20 +193,6 @@ namespace fgm
          * @return A reference to the third element of the vector.
          */
         [[nodiscard]] constexpr T& p() noexcept;
-
-
-        /**
-         * @brief Access the element at the fourth location (read-only).
-         * @return A copy of the fourth vector element.
-         */
-        [[nodiscard]] constexpr T q() const noexcept;
-
-
-        /**
-         * @brief Access the element at the fourth location (read-write access).
-         * @return A reference to the fourth element of the vector.
-         */
-        [[nodiscard]] constexpr T& q() noexcept;
 
 
 
@@ -286,20 +238,6 @@ namespace fgm
         [[nodiscard]] constexpr T& b() noexcept;
 
 
-        /**
-         * @brief Access the element at the fourth location (read-only).
-         * @return A copy of the fourth vector element.
-         */
-        [[nodiscard]] constexpr T a() const noexcept;
-
-
-        /**
-         * @brief Access the element at the fourth location (read-write access).
-         * @return A reference to the fourth element of the vector.
-         */
-        [[nodiscard]] constexpr T& a() noexcept;
-
-
 
         /**
          * @brief Access the element at the specified location (read-only).
@@ -328,9 +266,8 @@ namespace fgm
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Swizzle
+         * @addtogroup FGM_Vec3_Swizzle
          * @{
          */
 
@@ -357,7 +294,7 @@ namespace fgm
          *
          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
          *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime
-         * overhead.
+         *       overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
          *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
@@ -369,14 +306,13 @@ namespace fgm
          */
         template <std::size_t... Indices>
         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
-        static constexpr auto swizzle(const Vector4D& vec) noexcept;
+        static constexpr auto swizzle(const Vector3D& vec) noexcept;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Equality
+         * @addtogroup FGM_Vec3_Equality
          * @{
          */
 
@@ -397,7 +333,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool allEq(const Vector4D<U>& rhs,
+        [[nodiscard]] constexpr bool allEq(const Vector3D<U>& rhs,
                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
                                                : Config::FLOAT_EPSILON) const noexcept;
@@ -420,7 +356,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr bool allEq(const Vector4D& lhs, const Vector4D<U>& rhs,
+        [[nodiscard]] static constexpr bool allEq(const Vector3D& lhs, const Vector3D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                           std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
@@ -444,7 +380,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool anyNeq(const Vector4D<U>& rhs,
+        [[nodiscard]] constexpr bool anyNeq(const Vector3D<U>& rhs,
                                             double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
                                                 : Config::FLOAT_EPSILON) const noexcept;
@@ -468,7 +404,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr bool anyNeq(const Vector4D& lhs, const Vector4D<U>& rhs,
+        [[nodiscard]] static constexpr bool anyNeq(const Vector3D& lhs, const Vector3D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                            std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
@@ -476,7 +412,7 @@ namespace fgm
 
 
         /**
-         * @copybrief allEq(const Vector4D<U>&, double) const
+         * @copybrief allEq(const Vector3D<U>&, double) const
          *
          * @note To obtain a component-wise boolean mask, use @ref eq.
          *
@@ -488,11 +424,11 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool operator==(const Vector4D<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator==(const Vector3D<U>& rhs) const noexcept;
 
 
         /**
-         * @copybrief anyNeq(const Vector4D<U>&, double) const
+         * @copybrief anyNeq(const Vector3D<U>&, double) const
          *
          * @note To obtain a component-wise boolean mask, use @ref eq.
          *
@@ -504,7 +440,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool operator!=(const Vector4D<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator!=(const Vector3D<U>& rhs) const noexcept;
 
 
         /**
@@ -519,11 +455,11 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> eq(const Vector4D<U>& rhs,
+        [[nodiscard]] constexpr Vector3D<bool> eq(const Vector3D<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                           std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
@@ -541,11 +477,11 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr Vector4D<bool> eq(const Vector4D& lhs, const Vector4D<U>& rhs,
+        [[nodiscard]] static constexpr Vector3D<bool> eq(const Vector3D& lhs, const Vector3D<U>& rhs,
                                                          double epsilon = std::is_same_v<T, double> ||
                                                                  std::is_same_v<U, double>
                                                              ? Config::DOUBLE_EPSILON
@@ -564,11 +500,11 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> neq(const Vector4D<U>& rhs,
+        [[nodiscard]] constexpr Vector3D<bool> neq(const Vector3D<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                            std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
@@ -586,11 +522,11 @@ namespace fgm
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr Vector4D<bool> neq(const Vector4D& lhs, const Vector4D<U>& rhs,
+        [[nodiscard]] static constexpr Vector3D<bool> neq(const Vector3D& lhs, const Vector3D<U>& rhs,
                                                           double epsilon = std::is_same_v<T, double> ||
                                                                   std::is_same_v<U, double>
                                                               ? Config::DOUBLE_EPSILON
@@ -599,9 +535,8 @@ namespace fgm
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Comparison
+         * @addtogroup FGM_Vec3_Comparison
          * @{
          */
 
@@ -613,11 +548,11 @@ namespace fgm
          *
          * @param[in] rhs The vector to compare against.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> gt(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<bool> gt(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -630,11 +565,11 @@ namespace fgm
          * @param[in]  lhs The vector to compare.
          * @param[in]  rhs The vector to compare against.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr Vector4D<bool> gt(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] static constexpr Vector3D<bool> gt(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -646,11 +581,11 @@ namespace fgm
          *
          * @param[in] rhs The vector to compare against.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> gte(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<bool> gte(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -663,11 +598,11 @@ namespace fgm
          * @param[in]  lhs The vector to compare.
          * @param[in]  rhs The vector to compare against.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr Vector4D<bool> gte(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] static constexpr Vector3D<bool> gte(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -682,11 +617,11 @@ namespace fgm
          *
          * @param[in] rhs The vector to compare against.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> lt(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<bool> lt(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -702,11 +637,11 @@ namespace fgm
          * @param[in]  lhs The vector to compare.
          * @param[in]  rhs The vector to compare against.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr Vector4D<bool> lt(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] static constexpr Vector3D<bool> lt(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -721,11 +656,11 @@ namespace fgm
          *
          * @param[in] rhs The vector to compare against.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> lte(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<bool> lte(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -741,58 +676,57 @@ namespace fgm
          * @param[in]  lhs The vector to compare.
          * @param[in]  rhs The vector to compare against.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of each component comparison.
+         * @return A @ref Vector3D<bool> mask containing the results of each component comparison.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr Vector4D<bool> lte(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] static constexpr Vector3D<bool> lte(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
 #ifdef ENABLE_FGM_SHADER_OPERATORS
 
         /**
-         * @copydoc gt(const Vector4D<U>&) const
+         * @copydoc gt(const Vector3D<U>&) const
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> operator>(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<bool> operator>(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @copydoc gte(const Vector4D<U>&) const
+         * @copydoc gte(const Vector3D<U>&) const
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> operator>=(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<bool> operator>=(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @copydoc lt(const Vector4D<U>&) const
+         * @copydoc lt(const Vector3D<U>&) const
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> operator<(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<bool> operator<(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @copydoc lte(const Vector4D<U>&) const
+         * @copydoc lte(const Vector3D<U>&) const
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Vector4D<bool> operator<=(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D<bool> operator<=(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 #endif
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Bitwise
+         * @addtogroup FGM_Vec3_Bitwise
          * @{
          */
 
@@ -800,13 +734,13 @@ namespace fgm
          * @brief Perform component-wise logical AND between this vector and @p rhs vector.
          *        Compute the conjunction between each component pair.
          *
-         * @note Only available for @ref bVec4 and vectors with `bool` value_type.
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
          *
          * @param[in] rhs The vector to combine with.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of component-wise AND.
+         * @return A @ref Vector3D<bool> mask containing the results of component-wise AND.
          */
-        [[nodiscard]] constexpr Vector4D operator&(const Vector4D& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D operator&(const Vector3D& rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -814,13 +748,13 @@ namespace fgm
          * @brief Perform an in-place component-wise logical AND between this vector and @p rhs vector.
          *        Compute the conjunction between each component pair in-place and update the calling vector.
          *
-         * @note Only available for @ref bVec4 and vectors with `bool` value_type.
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
          *
          * @param[in] rhs The vector to combine with.
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector4D& operator&=(const Vector4D& rhs) noexcept
+        constexpr Vector3D& operator&=(const Vector3D& rhs) noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -828,13 +762,13 @@ namespace fgm
          * @brief Perform component-wise logical OR between this vector and @p rhs vector.
          *        Compute the disjunction between each component pair.
          *
-         * @note Only available for @ref bVec4 and vectors with `bool` value_type.
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
          *
          * @param[in] rhs The vector to combine with.
          *
-         * @return A @ref Vector4D<bool> mask containing the results of component-wise OR.
+         * @return A @ref Vector3D<bool> mask containing the results of component-wise OR.
          */
-        [[nodiscard]] constexpr Vector4D operator|(const Vector4D& rhs) const noexcept
+        [[nodiscard]] constexpr Vector3D operator|(const Vector3D& rhs) const noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -842,13 +776,13 @@ namespace fgm
          * @brief Perform an in-place component-wise logical OR between this vector and @p rhs vector.
          *        Compute the disjunction between each component pair in-place and update the calling vector.
          *
-         * @note Only available for @ref bVec4 and vectors with `bool` value_type.
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
          *
          * @param[in] rhs The vector to combine with.
          *
          * @return A reference to this vector (*this).
          */
-        constexpr Vector4D& operator|=(const Vector4D& rhs) noexcept
+        constexpr Vector3D& operator|=(const Vector3D& rhs) noexcept
             requires std::is_same_v<T, bool>;
 
 
@@ -856,37 +790,36 @@ namespace fgm
          * @brief Apply a component-wise logical NOT on this vector.
          *        Invert each boolean component and returns a new @ref Vector3D<bool>.
          *
-         * @note Only available for @ref bVec4 and vectors with `bool` value_type.
+         * @note Only available for @ref bVec3 and vectors with `bool` value_type.
          *
-         * @return A @ref Vector4D<bool> with inverted values.
+         * @return A @ref Vector3D<bool> with inverted values.
          */
-        [[nodiscard]] constexpr Vector4D operator!() const noexcept
+        [[nodiscard]] constexpr Vector3D operator!() const noexcept
             requires std::is_same_v<T, bool>;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Arithmetic
+         * @addtogroup FGM_Vec3_Arithmetic
          * @{
          */
 
         /**
          * @brief Compute the component-wise sum of this vector with @p rhs vector and return a new vector.
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The vector to add.
          *
-         * @return A new @ref Vector4D containing the component-wise sum.
+         * @return A new @ref Vector3D containing the component-wise sum.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4D<T, U> operator+(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, U> operator+(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -903,25 +836,25 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        constexpr Vector4D& operator+=(const Vector4D<U>& rhs) noexcept
+        constexpr Vector3D& operator+=(const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the component-wise difference between this vector and @p rhs vector and return a new vector.
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The vector to subtract.
          *
-         * @return A new @ref Vector4D containing the component-wise difference.
+         * @return A new @ref Vector3D containing the component-wise difference.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4D<T, U> operator-(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, U> operator-(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -938,36 +871,36 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        constexpr Vector4D& operator-=(const Vector4D<U>& rhs) noexcept
+        constexpr Vector3D& operator-=(const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Apply a component-wise inversion to this vector.
-         *        Invert the sign of each component and returns a new @ref Vector4D<T>.
+         *        Invert the sign of each component and returns a new @ref Vector3D<T>.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
-         * @return A new @ref fgm::Vector4D with inverted components.
+         * @return A new @ref fgm::Vector3D with inverted components.
          */
-        [[nodiscard]] constexpr Vector4D operator-() const noexcept
+        [[nodiscard]] constexpr Vector3D operator-() const noexcept
             requires SignedStrictArithmetic<T>;
 
 
         /**
          * @brief Compute the component-wise product between this vector and @p scalar and return a new vector.
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] scalar The value to scale by.
          *
-         * @return A new @ref Vector4D scaled by @p scalar.
+         * @return A new @ref Vector3D scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedVector4D<T, S> operator*(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, S> operator*(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -983,14 +916,14 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic S>
-        constexpr Vector4D& operator*=(S scalar) noexcept
+        constexpr Vector3D& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Performs assertion for division by zero in **Debug mode**.
          *
@@ -998,15 +931,15 @@ namespace fgm
          *
          * @param[in] scalar The value to scale by.
          *
-         * @return A new @ref Vector4D scaled by @p scalar.
+         * @return A new @ref Vector3D scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedVector4D<T, S> operator/(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, S> operator/(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
+         * @brief Compute the component-wise division of this vector by @p scalar in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Performs assertion for division by zero in **Debug mode**.
@@ -1018,7 +951,7 @@ namespace fgm
          * @return A reference to this vector (*this).
          */
         template <StrictArithmetic S>
-        constexpr Vector4D& operator/=(S scalar) noexcept
+        constexpr Vector3D& operator/=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1027,20 +960,18 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
          * @param[in] scalar The value to divide the vector components by.
          *
-         * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
+         * @return A new @ref Vector3D resulting from the division or a zero-vector if the @p scalar is below the
          *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedVector4D<T, S> safeDiv(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, S> safeDiv(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1049,21 +980,19 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-         * @note Returns a zero-vector if attempting to divide by zero (or below the epsilon threshold), or if any
-         *       operand contains NaN.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
          *
          * @param[in] vec The vector to divide.
          * @param[in] scalar The value to divide the vector components by.
          *
-         * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
+         * @return A new @ref Vector3D resulting from the division or a zero-vector if the @p scalar is below the
          *         epsilon threshold or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedVector4D<T, S> safeDiv(const Vector4D& vec, S scalar) noexcept
+        [[nodiscard]] static constexpr PromotedVector3D<T, S> safeDiv(const Vector3D& vec, S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1073,7 +1002,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
@@ -1084,11 +1013,11 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
+         * @return A new @ref Vector3D resulting from the division or a zero-vector if the @p scalar is below the
          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedVector4D<T, S> tryDiv(S scalar, OperationStatus& status) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, S> tryDiv(S scalar, OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1098,7 +1027,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, S>.
          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
@@ -1110,26 +1039,25 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A new @ref Vector4D resulting from the division or a zero-vector if the @p scalar is below the
+         * @return A new @ref Vector3D resulting from the division or a zero-vector if the @p scalar is below the
          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedVector4D<T, S> tryDiv(const Vector4D& vec, S scalar,
+        [[nodiscard]] static constexpr PromotedVector3D<T, S> tryDiv(const Vector3D& vec, S scalar,
                                                                      OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Product
+         * @addtogroup FGM_Vec3_Product
          * @{
          */
 
         /**
          * @brief Compute the dot product with another vector.
-         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{3} a_i b_i \f$
          *
          * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1142,13 +1070,13 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedValue_t<T, U> dot(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedValue_t<T, U> dot(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the dot product of two vectors.
-         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{3} a_i b_i \f$
          *
          * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -1162,15 +1090,58 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedValue_t<T, U> dot(const Vector4D& lhs, const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> dot(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
-
-        /** @} */
 
 
 
         /**
-         * @addtogroup FGM_Vec4_Mag
+         * @brief Compute the cross product with another vector.
+         *       \f$
+         *           \mathbf{a}\times\mathbf{b} =
+         *           \begin{bmatrix} a_y b_z - a_z b_y \\ a_z b_x - a_x b_z \\ a_x b_y - a_y b_x \end {bmatrix}
+         *       \f$
+         *
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, U>.
+         * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref SignedStrictArithmetic.
+         *
+         * @param[in] rhs The vector to compute the cross product with.
+         *
+         * @return The vector cross product of the two vectors.
+         */
+        template <SignedStrictArithmetic U>
+        constexpr PromotedVector3D<T, U> cross(const Vector3D<U>& rhs) const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the cross product of two vectors.
+         *       \f$
+         *           \mathbf{a}\times\mathbf{b} =
+         *           \begin{bmatrix} a_y b_z - a_z b_y \\ a_z b_x - a_x b_z \\ a_x b_y - a_y b_x \end {bmatrix}
+         *       \f$
+         *
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, U>.
+         * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref SignedStrictArithmetic.
+         *
+         * @param[in] lhs The vector to compute the cross product with.
+         * @param[in] rhs The vector to compute the cross product with.
+         *
+         * @return The vector cross product of the two vectors.
+         */
+        template <SignedStrictArithmetic U>
+        static constexpr PromotedVector3D<T, U> cross(const Vector3D& lhs, const Vector3D<U>& rhs) noexcept
+            requires SignedStrictArithmetic<T>;
+
+        /** @} */
+
+
+        /**
+         * @addtogroup FGM_Vec3_Mag
          * @{
          */
 
@@ -1198,7 +1169,7 @@ namespace fgm
          *
          * @return The scalar magnitude of @p vec.
          */
-        [[nodiscard]] static constexpr Magnitude<T> mag(const Vector4D& vec) noexcept
+        [[nodiscard]] static constexpr Magnitude<T> mag(const Vector3D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1213,20 +1184,20 @@ namespace fgm
 
 
         /**
-         * @brief Compute the magnitude square (Euclidean Norm) of @p vec.
+         * @brief Compute the magnitude square (Euclidean Norm) of this vector.
          *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
          *
-         * @param[in] vec The vector to compute the magnitude of.
+         * @param[in] vector The vector to compute the magnitude of.
          *
          * @return The scalar magnitude of @p vec.
          */
-        [[nodiscard]] static constexpr T magSq(const Vector4D& vec) noexcept
+        [[nodiscard]] static constexpr T magSq(const Vector3D& vector) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the Manhattan length (L1 Norm) of this vector.
-         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| + |z| + |w| \f$
+         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| + |z| \f$
          *
          * @return The Manhattan length.
          */
@@ -1236,19 +1207,19 @@ namespace fgm
 
         /**
          * @brief Compute the Manhattan length (L1 Norm) of @p vec.
-         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| + |z| + |w| \f$
+         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| + |z| \f$
          *
          * @param[in] vec The vector to compute the taxicab norm of.
          *
          * @return The Manhattan length.
          */
-        [[nodiscard]] static constexpr T manhattanNorm(const Vector4D& vec) noexcept
+        [[nodiscard]] static constexpr T manhattanNorm(const Vector3D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the Chebyshev length (L∞ Norm) of this vector.
-         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|, |z|, |w|) \f$
+         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|, |z|) \f$
          *
          * @return The Chebyshev length.
          */
@@ -1258,27 +1229,27 @@ namespace fgm
 
         /**
          * @brief Compute the Chebyshev length (L∞ Norm) of @p vec.
-         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|, |z|, |w|) \f$
+         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|, |z|) \f$
          *
          * @param[in] vec The vector to compute the taxicab norm of.
          *
          * @return The Chebyshev length.
          */
-        [[nodiscard]] static constexpr T chebyshevNorm(const Vector4D& vec) noexcept
+        [[nodiscard]] static constexpr T chebyshevNorm(const Vector3D& vec) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
 
 
 
-        /**
-         * @addtogroup FGM_Vec4_Dist
+         /**
+         * @addtogroup FGM_Vec3_Dist
          * @{
          */
 
         /**
          * @brief Compute the Euclidean (L2) distance between this vector and the @p rhs vector.
-         *        \f$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 + (w_2 - w_1)^2} \f$
+         *        \f$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2} \f$
          *
          * @note Mathematically, distance is a metric between points, not directional vectors.
          *       This operation treats both vectors as position vectors (coordinates in affine space).
@@ -1291,13 +1262,13 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr Magnitude<PromotedValue_t<T, U>> dist(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr Magnitude<PromotedValue_t<T, U>> dist(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the Euclidean (L2) distance between two vectors.
-         *        \f$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 + (w_2 - w_1)^2} \f$
+         *        \f$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2} \f$
          *
          * @note Mathematically, distance is a metric between points, not directional vectors.
          *       This operation treats both vectors as position vectors (coordinates in affine space).
@@ -1311,14 +1282,14 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr Magnitude<PromotedValue_t<T, U>> dist(const Vector4D<U>& lhs,
-                                                                             const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] static constexpr Magnitude<PromotedValue_t<T, U>> dist(const Vector3D<U>& lhs,
+                                                                             const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the squared Euclidean (L2) distance between this vector and the @p rhs vector.
-         *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 + (w_2 - w_1)^2 \f$
+         *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 \f$
          *
          * @note Mathematically, distance is a metric between points, not directional vectors.
          *       This operation treats both vectors as position vectors (coordinates in affine space).
@@ -1331,13 +1302,13 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedValue_t<T, U> distSq(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedValue_t<T, U> distSq(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the squared Euclidean (L2) distance between two vectors.
-         *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 + (w_2 - w_1)^2 \f$
+         *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2 \f$
          *
          * @note Mathematically, distance is a metric between points, not directional vectors.
          *       This operation treats both vectors as position vectors (coordinates in affine space).
@@ -1351,15 +1322,15 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedValue_t<T, U> distSq(const Vector4D<U>& lhs,
-                                                                    const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> distSq(const Vector3D<U>& lhs,
+                                                                    const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the Manhattan (L1) distance between this vector and the @p rhs vector.
-         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2| + |w1 - w_2| \f$
-        w
+         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2| \f$
+         *
          * @note Mathematically, distance is a metric between points, not directional vectors.
          *       This operation treats both vectors as position vectors (coordinates in affine space).
          *
@@ -1371,13 +1342,13 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedValue_t<T, U> manhattanDist(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedValue_t<T, U> manhattanDist(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the Manhattan (L1) distance between two vectors.
-         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2| + |w1 - w_2| \f$
+         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| + |z_1 - z_2| \f$
          *
          * @note Mathematically, distance is a metric between points, not directional vectors.
          *       This operation treats both vectors as position vectors (coordinates in affine space).
@@ -1391,14 +1362,14 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedValue_t<T, U> manhattanDist(const Vector4D<U>& lhs,
-                                                                           const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> manhattanDist(const Vector3D<U>& lhs,
+                                                                           const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the Chebyshev (L∞) distance between this vector and the @p rhs vector.
-         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|, |z_2 - z_1|, |w_2 - w_1|)} \f$
+         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|, |z_2 - z_1|)} \f$
          *
          * @note Mathematically, distance is a metric between points, not directional vectors.
          *       This operation treats both vectors as position vectors (coordinates in affine space).
@@ -1411,13 +1382,13 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedValue_t<T, U> chebyshevDist(const Vector4D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedValue_t<T, U> chebyshevDist(const Vector3D<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the Chebyshev (L∞) distance between two vectors.
-         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|, |z_2 - z_1|, |w_2 - w_1|)} \f$
+         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|, |z_2 - z_1|)} \f$
          *
          * @note Mathematically, distance is a metric between points, not directional vectors.
          *       This operation treats both vectors as position vectors (coordinates in affine space).
@@ -1431,8 +1402,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedValue_t<T, U> chebyshevDist(const Vector4D<U>& lhs,
-                                                                           const Vector4D<U>& rhs) noexcept
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> chebyshevDist(const Vector3D<U>& lhs,
+                                                                           const Vector3D<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1440,7 +1411,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Normalize
+         * @addtogroup FGM_Vec3_Normalize
          * @{
          */
 
@@ -1452,15 +1423,14 @@ namespace fgm
          *       corresponding floating-point representation via @ref Magnitude.
          * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
-         * @return A new @ref Vector4D with a magnitude of 1.0.
+         * @return A new @ref Vector3D with a magnitude of 1.0.
          */
-        [[nodiscard]] constexpr Vector4D<Magnitude<T>> normalize() const noexcept
+        [[nodiscard]] constexpr Vector3D<Magnitude<T>> normalize() const noexcept
             requires StrictArithmetic<T>;
 
 
-
         /**
-         * @brief Compute the normalized (unit) form of @p vec
+         * @brief Compute the normalized (unit) form of @p vec.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note To maintain precision, result components are promoted to their
@@ -1469,9 +1439,9 @@ namespace fgm
          *
          * @param[in] vec The vector to normalize.
          *
-         * @return A new @ref Vector4D with a magnitude of 1.0.
+         * @return A new @ref Vector3D with a magnitude of 1.0.
          */
-        [[nodiscard]] static constexpr Vector4D<Magnitude<T>> normalize(const Vector4D& vec) noexcept
+        [[nodiscard]] static constexpr Vector3D<Magnitude<T>> normalize(const Vector3D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1484,10 +1454,10 @@ namespace fgm
          * @note To maintain precision, result components are promoted to their
          *       corresponding floating-point representation via @ref Magnitude.
          *
-         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         * @return A @ref fgm::Vector3D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr Vector4D<Magnitude<T>> safeNormalize() const noexcept
+        [[nodiscard]] constexpr Vector3D<Magnitude<T>> safeNormalize() const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1502,10 +1472,10 @@ namespace fgm
          *
          * @param[in] vec The vector to be normalized.
          *
-         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         * @return A @ref fgm::Vector3D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] static constexpr Vector4D<Magnitude<T>> safeNormalize(const Vector4D& vec) noexcept
+        [[nodiscard]] static constexpr Vector3D<Magnitude<T>> safeNormalize(const Vector3D& vec) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1522,15 +1492,15 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         * @return A @ref fgm::Vector3D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] constexpr Vector4D<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
+        [[nodiscard]] constexpr Vector3D<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Compute the normalized (unit) form of the @p vec and
+         * @brief Compute the normalized (unit) form of @p vec and
          *        set @p status to the normalization operation result.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
@@ -1543,19 +1513,18 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A @ref fgm::Vector4D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         * @return A @ref fgm::Vector3D with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
-        [[nodiscard]] static constexpr Vector4D<Magnitude<T>> tryNormalize(const Vector4D& vec,
+        [[nodiscard]] static constexpr Vector3D<Magnitude<T>> tryNormalize(const Vector3D& vec,
                                                                            OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Proj
+         * @addtogroup FGM_Vec3_Proj
          * @{
          */
 
@@ -1566,19 +1535,20 @@ namespace fgm
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] onto The vector to project onto.
+         * @param[in] onto           The vector to project onto.
          *
-         * @return The projected @ref Vector4D.
+         * @return The projected @ref Vector3D.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> project(const Vector4D<U>& onto) const noexcept
+        [[nodiscard]] constexpr PromotedFloatVector3D<T, U> project(const Vector3D<U>& onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1588,18 +1558,19 @@ namespace fgm
          *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref project.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] onto The vector to project onto.
          *
-         * @return The projected @ref Vector4D.
+         * @return The projected @ref Vector3D.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4D<T, U> projectNorm(const Vector4D<U>& onto) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, U> projectNorm(const Vector3D<U>& onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1610,7 +1581,8 @@ namespace fgm
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p onto is normalized, use @ref projectNorm as it is a faster implementation for unit vectors.
          * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
@@ -1619,12 +1591,12 @@ namespace fgm
          * @param[in] vec  The vector to project.
          * @param[in] onto The vector to project onto.
          *
-         * @return The projected @ref Vector4D.
+         * @return The projected @ref Vector3D.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector4D<T, U> project(const Vector4D& vec,
-                                                                           const Vector4D<U>& onto) noexcept
+        [[nodiscard]] static constexpr PromotedFloatVector3D<T, U> project(const Vector3D& vec,
+                                                                           const Vector3D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1634,7 +1606,8 @@ namespace fgm
          *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref project.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1642,12 +1615,12 @@ namespace fgm
          * @param[in] vec  The vector to project.
          * @param[in] onto The vector to project onto.
          *
-         * @return The projected @ref Vector4D.
+         * @return The projected @ref Vector3D.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector4D<T, U> projectNorm(const Vector4D& vec,
-                                                                          const Vector4D<U>& onto) noexcept
+        [[nodiscard]] static constexpr PromotedVector3D<T, U> projectNorm(const Vector3D& vec,
+                                                                          const Vector3D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1660,19 +1633,20 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] onto The vector to project onto.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
+         * @return The projected @ref Vector3D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> safeProject(const Vector4D<U>& onto) const noexcept
+        [[nodiscard]] constexpr PromotedFloatVector3D<T, U> safeProject(const Vector3D<U>& onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1683,19 +1657,20 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] onto The vector to project onto.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
+         * @return The projected @ref Vector3D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4D<T, U> safeProjectNorm(const Vector4D<U>& onto) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, U> safeProjectNorm(const Vector3D<U>& onto) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1708,7 +1683,8 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p onto is normalized, use @ref safeProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1716,13 +1692,13 @@ namespace fgm
          * @param[in] vec  The vector to project.
          * @param[in] onto The vector to project onto.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
+         * @return The projected @ref Vector3D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector4D<T, U> safeProject(const Vector4D& vec,
-                                                                               const Vector4D<U>& onto) noexcept
+        [[nodiscard]] static constexpr PromotedFloatVector3D<T, U> safeProject(const Vector3D& vec,
+                                                                               const Vector3D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1733,7 +1709,8 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref safeProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1741,13 +1718,13 @@ namespace fgm
          * @param[in] vec  The vector to project.
          * @param[in] onto The vector to project onto.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector
+         * @return The projected @ref Vector3D or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector4D<T, U> safeProjectNorm(const Vector4D& vec,
-                                                                              const Vector4D<U>& onto) noexcept
+        [[nodiscard]] static constexpr PromotedVector3D<T, U> safeProjectNorm(const Vector3D& vec,
+                                                                              const Vector3D<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1761,7 +1738,8 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1770,12 +1748,12 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
+         * @return The projected @ref Vector3D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> tryProject(const Vector4D<U>& onto,
+        [[nodiscard]] constexpr PromotedFloatVector3D<T, U> tryProject(const Vector3D<U>& onto,
                                                                        OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
@@ -1788,7 +1766,8 @@ namespace fgm
          *        \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1797,12 +1776,12 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
+         * @return The projected @ref Vector3D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4D<T, U> tryProjectNorm(const Vector4D<U>& onto,
+        [[nodiscard]] constexpr PromotedVector3D<T, U> tryProjectNorm(const Vector3D<U>& onto,
                                                                       OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
@@ -1817,8 +1796,8 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p onto vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, projection is bypassed.
-         * @note To maintain precision, result components are promoted to their
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their corresponding floating-point
+         *       representation via @ref Magnitude.
          * @note If @p onto is normalized, use @ref tryProjectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1828,13 +1807,13 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
+         * @return The projected @ref Vector3D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector4D<T, U> tryProject(const Vector4D& vec,
-                                                                              const Vector4D<U>& onto,
+        [[nodiscard]] static constexpr PromotedFloatVector3D<T, U> tryProject(const Vector3D& vec,
+                                                                              const Vector3D<U>& onto,
                                                                               OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
@@ -1848,7 +1827,7 @@ namespace fgm
          *
          * @note This is a safe operation. If either vector contains NaN components, projection is bypassed.
          * @note To maintain precision, result components are promoted to their
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p onto is normalized. If not, use @ref tryProject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1858,13 +1837,13 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return The projected @ref Vector4D or a zero-vector if projected onto a zero-length vector or if either
+         * @return The projected @ref Vector3D or a zero-vector if projected onto a zero-length vector or if either
          *         vector has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector4D<T, U> tryProjectNorm(const Vector4D& vec,
-                                                                             const Vector4D<U>& onto,
+        [[nodiscard]] static constexpr PromotedVector3D<T, U> tryProjectNorm(const Vector3D& vec,
+                                                                             const Vector3D<U>& onto,
                                                                              OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
@@ -1874,7 +1853,8 @@ namespace fgm
          * @brief Reject this vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
@@ -1882,11 +1862,11 @@ namespace fgm
          *
          * @param[in] from The vector to reject from.
          *
-         * @return The perpendicular @ref Vector4D component.
+         * @return The perpendicular @ref Vector3D component.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> reject(const Vector4D<U>& from) const noexcept
+        [[nodiscard]] constexpr PromotedFloatVector3D<T, U> reject(const Vector3D<U>& from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1894,18 +1874,19 @@ namespace fgm
          * @brief Reject this vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref reject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] from The vector to reject from.
          *
-         * @return The perpendicular @ref Vector4D component.
+         * @return The perpendicular @ref Vector3D component.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4D<T, U> rejectNorm(const Vector4D<U>& from) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, U> rejectNorm(const Vector3D<U>& from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1913,7 +1894,8 @@ namespace fgm
          * @brief Reject the @p vec vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
          * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
          *
@@ -1922,12 +1904,12 @@ namespace fgm
          * @param[in] vector The vector to be rejected.
          * @param[in] from   The vector to reject from.
          *
-         * @return The perpendicular @ref Vector4D component.
+         * @return The perpendicular @ref Vector3D component.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector4D<T, U> reject(const Vector4D& vector,
-                                                                          const Vector4D<U>& from) noexcept
+        [[nodiscard]] static constexpr PromotedFloatVector3D<T, U> reject(const Vector3D& vector,
+                                                                          const Vector3D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1935,7 +1917,8 @@ namespace fgm
          * @brief Reject the @p vec vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref reject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -1943,12 +1926,12 @@ namespace fgm
          * @param[in] vector The vector to be rejected.
          * @param[in] from   The vector to reject from.
          *
-         * @return The perpendicular @ref Vector4D component.
+         * @return The perpendicular @ref Vector3D component.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector4D<T, U> rejectNorm(const Vector4D& vector,
-                                                                         const Vector4D<U>& from) noexcept
+        [[nodiscard]] static constexpr PromotedVector3D<T, U> rejectNorm(const Vector3D& vector,
+                                                                         const Vector3D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1958,19 +1941,20 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] from The vector to reject from.
          *
-         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> safeReject(const Vector4D<U>& from) const noexcept
+        [[nodiscard]] constexpr PromotedFloatVector3D<T, U> safeReject(const Vector3D<U>& from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1979,19 +1963,20 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] from The vector to reject from.
          *
-         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4D<T, U> safeRejectNorm(const Vector4D<U>& from) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, U> safeRejectNorm(const Vector3D<U>& from) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2001,7 +1986,8 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -2009,13 +1995,13 @@ namespace fgm
          * @param[in] vec  The vector to reject.
          * @param[in] from The vector to reject from.
          *
-         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector4D<T, U> safeReject(const Vector4D& vec,
-                                                                              const Vector4D<U>& from) noexcept
+        [[nodiscard]] static constexpr PromotedFloatVector3D<T, U> safeReject(const Vector3D& vec,
+                                                                              const Vector3D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2024,7 +2010,8 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -2032,13 +2019,13 @@ namespace fgm
          * @param[in] vec  The vector to reject.
          * @param[in] from The vector to reject from.
          *
-         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector4D<T, U> safeRejectNorm(const Vector4D& vec,
-                                                                             const Vector4D<U>& from) noexcept
+        [[nodiscard]] static constexpr PromotedVector3D<T, U> safeRejectNorm(const Vector3D& vec,
+                                                                             const Vector3D<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2046,8 +2033,10 @@ namespace fgm
          * @brief Reject this vector from the @p from vector and set @p status to the result of rejection operation.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
-         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, rejection is bypassed.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -2056,16 +2045,14 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedFloatVector4D<T, U> tryReject(const Vector4D<U>& from,
+        [[nodiscard]] constexpr PromotedFloatVector3D<T, U> tryReject(const Vector3D<U>& from,
                                                                       OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
-
-
 
 
         /**
@@ -2075,7 +2062,7 @@ namespace fgm
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
          * @note To maintain precision, result components are promoted to their
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -2084,12 +2071,12 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4D<T, U> tryRejectNorm(const Vector4D<U>& from,
+        [[nodiscard]] constexpr PromotedVector3D<T, U> tryRejectNorm(const Vector3D<U>& from,
                                                                      OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
@@ -2101,7 +2088,8 @@ namespace fgm
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -2111,13 +2099,13 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector4D<T, U> tryReject(const Vector4D& vec,
-                                                                             const Vector4D<U>& from,
+        [[nodiscard]] static constexpr PromotedFloatVector3D<T, U> tryReject(const Vector3D& vec,
+                                                                             const Vector3D<U>& from,
                                                                              OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
@@ -2127,7 +2115,8 @@ namespace fgm
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note To maintain precision, result components are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
@@ -2137,22 +2126,21 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return The perpendicular @ref Vector4D component or a zero-vector if projected onto a zero-length vector
+         * @return The perpendicular @ref Vector3D component or a zero-vector if projected onto a zero-length vector
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector4D<T, U> tryRejectNorm(const Vector4D& vec,
-                                                                            const Vector4D<U>& from,
+        [[nodiscard]] static constexpr PromotedVector3D<T, U> tryRejectNorm(const Vector3D& vec,
+                                                                            const Vector3D<U>& from,
                                                                             OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Utils
+         * @addtogroup FGM_Vec3_Utils
          * @{
          */
 
@@ -2175,7 +2163,7 @@ namespace fgm
          *
          * @return True if at least one component is positive or negative infinity.
          */
-        [[nodiscard]] static constexpr bool hasInf(const Vector4D& vec) noexcept;
+        [[nodiscard]] static constexpr bool hasInf(const Vector3D& vec) noexcept;
 
 
         /**
@@ -2197,27 +2185,26 @@ namespace fgm
          *
          * @return True if at least one component is NaN.
          */
-        [[nodiscard]] static constexpr bool hasNaN(const Vector4D& vec) noexcept;
+        [[nodiscard]] static constexpr bool hasNaN(const Vector3D& vec) noexcept;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Vec4_Log
+         * @addtogroup FGM_Vec3_Log
          * @{
          */
 
         /**
          * @brief Write the vector to an output stream.
-         *        Format the vector as <x, y, z, w> string representation for debugging or logging.
+         *        Format the vector as <x, y, z> string representation for debugging or logging.
          *
          * @param os     The output stream to write to.
          * @param vector The vector to be streamed.
          *
          * @return A reference to the output stream @p os.
          */
-        friend std::ostream& operator<<(std::ostream& os, const Vector4D& vector)
+        friend std::ostream& operator<<(std::ostream& os, const Vector3D& vector)
         {
             const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
@@ -2226,8 +2213,7 @@ namespace fgm
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
-            os << "<" << vector._data[0] << ", " << vector._data[1] << ", " << vector._data[2] << ", "
-               << vector._data[3] << ">\n";
+            os << "<" << vector[0] << ", " << vector[1] << ", " << vector[2] << ">\n";
 
             os.precision(oldPrecision);
             os.flags(oldFlags);
@@ -2242,7 +2228,6 @@ namespace fgm
     };
 
 
-
     /*************************************
      *                                   *
      *       NON-MEMBER FUNCTIONS        *
@@ -2250,7 +2235,7 @@ namespace fgm
      *************************************/
 
     /**
-     * @addtogroup FGM_Vec4_Arithmetic
+     * @addtogroup FGM_Vec3_Arithmetic
      * @{
      */
 
@@ -2258,7 +2243,7 @@ namespace fgm
      * @brief Scale the vector by a scalar value.
      *        Multiply @p scalar by each component of the vector and returns a new vector.
      *
-     * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedVector3D<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -2266,18 +2251,17 @@ namespace fgm
      * @param[in] scalar The value to scale by.
      * @param[in] vector The vector to scale[RHS].
      *
-     * @return A new @ref Vector4D scaled by @p scalar.
+     * @return A new @ref Vector3D scaled by @p scalar.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr PromotedVector4D<T, S> operator*(S scalar, const Vector4D<T>& vector) noexcept
+    [[nodiscard]] constexpr PromotedVector3D<T, S> operator*(S scalar, const Vector3D<T>& vector) noexcept
         requires StrictArithmetic<T>;
 
     /** @} */
 
 
-
     /**
-     * @addtogroup FGM_Vec4_Alias
+     * @addtogroup FGM_Vec3_Alias
      * @{
      */
 
@@ -2287,20 +2271,19 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bVec4  = Vector4D<bool>;               ///< `bool` vector
-    using iVec4  = Vector4D<int>;                ///< `int` vector
-    using uVec4  = Vector4D<unsigned int>;       ///< `unsigned int` vector
-    using vec4   = Vector4D<float>;              ///< `float` vector
-    using lVec4  = Vector4D<long long>;          ///< `long long` vector
-    using dVec4  = Vector4D<double>;             ///< `double` vector
-    using ulVec4 = Vector4D<unsigned long long>; ///< `unsigned long long` vector
+    using bVec3  = Vector3D<bool>;               ///< `bool` vector
+    using iVec3  = Vector3D<int>;                ///< `int` vector
+    using uVec3  = Vector3D<unsigned int>;       ///< `unsigned int` vector
+    using vec3   = Vector3D<float>;              ///< `float` vector
+    using lVec3  = Vector3D<long long>;          ///< `long long` vector
+    using dVec3  = Vector3D<double>;             ///< `double` vector
+    using ulVec3 = Vector3D<unsigned long long>; ///< `unsigned long long` vector
 
     /** @} */
 
 
-
     /**
-     * @addtogroup FGM_Vec4_Const
+     * @addtogroup FGM_Vec3_Const
      * @{
      */
 
@@ -2310,100 +2293,86 @@ namespace fgm
      *                                   *
      *************************************/
 
-    namespace vec4d
+    namespace vec3d
     {
-
         /**
-         * @brief A 4D vector with all components set to one (1, 1, 1, 1).
+         * @brief A 3D vector with all components set to one (1, 1, 1).
          *
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> one = Vector4D<T>(T(1), T(1), T(1), T(1));
+        inline constexpr Vector3D<T> one = Vector3D<T>(T(1), T(1), T(1));
 
 
         /**
-         * @brief A 4D vector with all components set to zero (0, 0, 0, 0).
+         * @brief A 3D vector with all components set to zero (0, 0, 0).
          *
          * @note Only available for @ref fgm::StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> zero =
-            Vector4D<T>(T(0), T(0), T(0), T(0)); ///< 4D-Vector with all zero-components.
+        inline constexpr Vector3D<T> zero = Vector3D<T>(T(0), T(0), T(0)); ///< 3D-Vector with all zero-components.
 
 
         /**
-         * @brief A 4D vector with all components set to positive infinity.
+         * @brief A 3D vector with all components set to positive infinity.
          *
          * @note Only available for `std::floating_point` types.
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector4D<T> inf = Vector4D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D),
-                                                       T(constants::INFINITY_D), T(constants::INFINITY_D));
+        inline constexpr Vector3D<T> inf =
+            Vector3D<T>(T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D));
 
 
         /**
-         * @brief A 4D vector with all components set to negative infinity.
+         * @brief A 3D vector with all components set to negative infinity.
          *
          * @note Only available for `std::floating_point` types.
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector4D<T> infN = Vector4D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D),
-                                                        T(-constants::INFINITY_D), T(-constants::INFINITY_D));
+        inline constexpr Vector3D<T> infN =
+            Vector3D<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D));
 
 
         /**
-         * @brief A 4D vector with all components set to Not-A-Number (NaN).
+         * @brief A 3D vector with all components set to Not-A-Number (NaN).
          *
          * @note Only available for `std::floating_point` types.
          */
         template <StrictArithmetic T>
             requires std::floating_point<T>
-        inline constexpr Vector4D<T> nan =
-            Vector4D<T>(T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D));
+        inline constexpr Vector3D<T> nan = Vector3D<T>(T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D));
 
 
-        /** @brief A 4D unit vector aligned with the positive X-axis (1, 0, 0, 0). */
+        /** @brief A 3D unit vector aligned with the positive X-axis (1, 0, 0). */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> x = Vector4D<T>(T(1), T(0), T(0), T(0));
+        inline constexpr Vector3D<T> x = Vector3D<T>(T(1), T(0), T(0));
 
 
-        /** @brief A 4D unit vector aligned with the positive Y-axis (0, 1, 0, 0). */
+        /** @brief A 3D unit vector aligned with the positive Y-axis (0, 1, 0). */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> y = Vector4D<T>(T(0), T(1), T(0), T(0));
+        inline constexpr Vector3D<T> y = Vector3D<T>(T(0), T(1), T(0));
 
 
-        /** @brief A 4D unit vector aligned with the positive Z-axis (0, 0, 1, 0). */
+        /** @brief A 3D unit vector aligned with the positive Z-axis (0, 0, 1). */
         template <StrictArithmetic T>
-        inline constexpr Vector4D<T> z = Vector4D<T>(T(0), T(0), T(1), T(0));
-
-        /** @brief A 4D unit vector aligned with the positive W-axis (0, 0, 0, 1). */
-        template <StrictArithmetic T>
-        inline constexpr Vector4D<T> w = Vector4D<T>(T(0), T(0), T(0), T(1));
+        inline constexpr Vector3D<T> z = Vector3D<T>(T(0), T(0), T(1));
+    } // namespace vec3d
 
 
-    } // namespace vec4d
-
-
-    /** @brief Template deduction guide for Vector4D. */
+    /** @brief Template deduction guide for Vector3D. */
     template <Arithmetic T>
-    Vector4D(T, T, T, T) -> Vector4D<T>;
+    Vector3D(T, T, T) -> Vector3D<T>;
 
     template <Arithmetic T>
-    Vector4D(Vector2D<T>, Vector2D<T>) -> Vector4D<T>;
+    Vector3D(Vector2D<T>, T) -> Vector3D<T>;
 
     template <Arithmetic T>
-    Vector4D(Vector3D<T>, T) -> Vector4D<T>;
-
-    template <Arithmetic T>
-    Vector4D(T, Vector3D<T>) -> Vector4D<T>;
+    Vector3D(T, Vector2D<T>) -> Vector3D<T>;
 
     /** @} */
 
-
 } // namespace fgm
 
-
-#include "Vector4D.tpp"
+#include "Vector3D.tpp"

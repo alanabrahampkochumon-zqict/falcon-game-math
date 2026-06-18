@@ -12,7 +12,7 @@
 #include "CommonSetup.h"
 #include "utils/VectorUtils.h"
 
-#include <common/Wrappers.h>
+#include <fgm/common/Wrappers.h>
 
 
 template <typename T>

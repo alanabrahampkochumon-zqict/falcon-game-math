@@ -3,20 +3,20 @@ set(IncludeDirectory "include/")
 set(GeneralFiles "SimdTraits.h;DoxygenGroups.h")
 list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
 
-set(CommonDirectory "${IncludeDirectory}common/")
+set(CommonDirectory "${IncludeDirectory}fgm/common/")
 set(CommonHeaderFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h;Wrappers.h;PreprocessorDefinitions.h;Messages.h;Types.h;Utils.h;Utils.tpp;")
 list(TRANSFORM CommonHeaderFiles PREPEND ${CommonDirectory})
 set(CommonTemplateFiles "Wrappers.tpp;")
 list(TRANSFORM CommonTemplateFiles PREPEND ${CommonDirectory})
 
-set(VectorDirectory "${IncludeDirectory}vectors/")
+set(VectorDirectory "${IncludeDirectory}fgm/vectors/")
 set(VectorHeaderFiles Vector3D.h Vector2D.h Vector4D.h)
 list(TRANSFORM VectorHeaderFiles PREPEND ${VectorDirectory})
 
 set(VectorTemplateDefinitionFiles Vector2D.tpp Vector3D.tpp Vector4D.tpp)
 list(TRANSFORM VectorTemplateDefinitionFiles PREPEND ${VectorDirectory})
 
-set(MatrixDirectory "${IncludeDirectory}matrix/")
+set(MatrixDirectory "${IncludeDirectory}fgm/matrices/")
 set(MatrixHeaderFiles Matrix2D.h Matrix3D.h Matrix4D.h)
 list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
 

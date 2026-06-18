@@ -12,7 +12,7 @@
 
 #include "Vector2DTestSetup.h"
 
-#include <common/Constants.h>
+#include <fgm/common/Constants.h>
 
 
 const auto NAN_F = fgm::constants::NaN;

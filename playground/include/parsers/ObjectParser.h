@@ -93,10 +93,6 @@ namespace demo
                         std::cout << "Index: ";
                         for (auto c : d)
                         {
-                            for (auto a: c)
-                            {
-                                
-                            }
                             std::cout << std::string(c.begin(), c.end());
                         }
                         std::cout << '\n';

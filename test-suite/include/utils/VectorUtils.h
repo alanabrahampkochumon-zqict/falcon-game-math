@@ -14,12 +14,12 @@
 
 
 #include <cmath>
-#include <common/MathTraits.h>
+#include <fgm/common/MathTraits.h>
 #include <gtest/gtest.h>
 #include <type_traits>
-#include <vectors/Vector2D.h>
-#include <vectors/Vector3D.h>
-#include <vectors/Vector4D.h>
+#include <fgm/vectors/Vector2D.h>
+#include <fgm/vectors/Vector3D.h>
+#include <fgm/vectors/Vector4D.h>
 
 namespace testutils
 {

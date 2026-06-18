@@ -10,7 +10,7 @@
 
 
 #include <array>
-#include <common/MathTraits.h>
+#include <fgm/common/MathTraits.h>
 #include <cstdint>
 #include <vector>
 

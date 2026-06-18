@@ -15,9 +15,9 @@
 #include "CommonSetup.h"
 #include "utils/VectorUtils.h"
 
-#include <common/MathTraits.h>
+#include <fgm/common/MathTraits.h>
 #include <gtest/gtest.h>
-#include <vectors/Vector3D.h>
+#include <fgm/vectors/Vector3D.h>
 
 
 

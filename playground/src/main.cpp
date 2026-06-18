@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <array>
 #include <bit>
-#include <vectors/Vector2D.h>
+#include <fgm/vectors/Vector2D.h>
 
 static SDL_AppResult pollEvents(bool& runningState)
 {

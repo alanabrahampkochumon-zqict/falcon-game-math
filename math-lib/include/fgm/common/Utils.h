@@ -10,8 +10,8 @@
  */
 
 
-#include "common/MathTraits.h"
-#include "common/Config.h"
+#include "MathTraits.h"
+#include "Config.h"
 
 namespace fgm::utils
 {
@@ -65,4 +65,4 @@ namespace fgm::utils
 } // namespace fgm::utils
 
 
-#include "common/Utils.tpp"
+#include "Utils.tpp"

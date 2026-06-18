@@ -24,8 +24,8 @@
  */
 
 
-#include "common/Types.h"
-#include "vectors/Vector2D.h"
+#include "fgm/common/Types.h"
+#include "fgm/vectors/Vector2D.h"
 
 #include <array>
 // #include <cstddef>

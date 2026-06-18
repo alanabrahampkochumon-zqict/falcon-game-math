@@ -12,7 +12,7 @@
 
 #include "Vector3DTestSetup.h"
 
-#include <common/Constants.h>
+#include <fgm/common/Constants.h>
 
 
 constexpr auto NAN_F = fgm::constants::NaN;

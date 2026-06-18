@@ -11,9 +11,9 @@
  */
 
 
-#include "common/Messages.h"
-#include "common/Utils.h"
-#include "common/Wrappers.h"
+#include "fgm/common/Messages.h"
+#include "fgm/common/Utils.h"
+#include "fgm/common/Wrappers.h"
 
 #include <algorithm>
 #include <cmath>
