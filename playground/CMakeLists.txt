@@ -42,8 +42,12 @@ target_link_libraries(
 add_custom_command(
         TARGET Playground
         POST_BUILD
+        # Create the directory
+        COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:Playground>/models"
+        # Copy files into the target directory
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_CURRENT_SOURCE_DIR}/models"
         "$<TARGET_FILE_DIR:Playground>/models"
+
         COMMENT "Copying models to build directory"
 )
