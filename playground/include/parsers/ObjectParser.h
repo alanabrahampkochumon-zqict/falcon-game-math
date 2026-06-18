@@ -18,6 +18,8 @@
 #include <string>
 #include <string_view>
 
+#include <fast_float/fast_float.h>
+
 
 namespace demo
 {
@@ -62,7 +64,7 @@ namespace demo
                     for (const auto token : vertexIterator)
                     {
                         float vertex;
-                        const auto [ptr, ec] = std::from_chars(token.data(), token.data() + token.size(), vertex);
+                        const auto [ptr, ec] = fast_float::from_chars(token.data(), token.data() + token.size(), vertex);
                         if (ec != std::errc())
                         {
                             printf("There was an error while parsing the vertex data.");

@@ -36,6 +36,7 @@ target_link_libraries(
         PRIVATE
         MathLib
         SDL3::SDL3
+        fast_float
 )
 
 # Copy models directory to the build directory

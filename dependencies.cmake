@@ -28,9 +28,17 @@ FetchContent_Declare(
         SYSTEM
 )
 
+FetchContent_Declare(
+        fast_float
+        GIT_REPOSITORY https://github.com/fastfloat/fast_float.git
+        GIT_TAG v8.2.10
+        SYSTEM
+)
+
 FetchContent_MakeAvailable(googletest)
 FetchContent_MakeAvailable(googlebenchmark)
 FetchContent_MakeAvailable(sdl3)
+FetchContent_MakeAvailable(fast_float)
 
 # Group google_test projects into a "Gtest" folder
 set_target_properties(
