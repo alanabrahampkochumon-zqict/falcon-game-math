@@ -99,7 +99,7 @@ StyleCopReport.xml
 *_h.h
 *.ilk
 *.meta
-*.obj
+# *.obj -> Commented out to include .obj(Waveform objects)
 *.idb
 *.iobj
 *.pch
