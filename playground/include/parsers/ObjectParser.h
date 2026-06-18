@@ -77,15 +77,34 @@ namespace demo
                     // Vertex/Texture/Normal
                     // printf("Faces %s\n", line.c_str());
                     // Only takes the face index for now
-                    auto data = line | std::views::split(' ') | std::views::transform([](auto&& subrange) {
-                                    return std::string(subrange.begin(), subrange.end()) | std::views::split('/') |
-                                        std::views::take(1) | std::views::transform([](auto&& sub) {
-                                               return std::string(sub.begin(), sub.end());
-                                           });
-                                });
-                    for (const auto d : data)
+                    auto d1 =
+                        line | std::views::split(' ') | std::views::transform([](auto&& packedIndex) {
+                            return std::string_view(packedIndex.begin(), packedIndex.end()) | std::views::split('/');
+                        });
+
+                    // auto data = line | std::views::split(' ') | std::views::transform([](auto&& subrange) {
+                    //                 return std::string(subrange.begin(), subrange.end()) | std::views::split('/') |
+                    //                     std::views::take(1) | std::views::transform([](auto&& sub) {
+                    //                            return std::string(sub.begin(), sub.end());
+                    //                        });
+                    //             });
+                    for (auto d : d1)
                     {
+                        std::cout << "Index: ";
+                        for (auto c : d)
+                        {
+                            for (auto a: c)
+                            {
+                                
+                            }
+                            std::cout << std::string(c.begin(), c.end());
+                        }
+                        std::cout << '\n';
                     }
+                    // for (const auto d : data)
+                    // {
+                    //
+                    // }
                     // auto vertexIterator = std::views::split(line, ' ') | std::views::drop(1);
                     // vertexIterator.size();
                     // for (auto vertexIndex:)
@@ -93,10 +112,10 @@ namespace demo
                 }
             }
 
-
-            // mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
-            //                   fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
-            mesh.indices = { 0, 1, 2, 1, 3, 2 };
+            // TODO: Remove
+            mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
+                              fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
+            mesh.indices  = { 0, 1, 2, 1, 3, 2 };
 
             return mesh;
         }

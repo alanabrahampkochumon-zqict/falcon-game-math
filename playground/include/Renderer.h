@@ -17,6 +17,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
 #include <utility>
 #include <vectors/Vector2D.h>
 #include <vectors/Vector3D.h>
@@ -37,16 +38,21 @@ namespace demo
     public:
         uint8_t* frameBuffer;
         uint8_t* depthBuffer;
-        int _width, _height, _colorChannels;
+        int width, height, colorChannels;
         int clearColor = 0x000000;
 
-
-        Renderer(const int width, const int height, const int colorChannels)
-            : frameBuffer(new uint8_t[static_cast<std::size_t>(width * height * colorChannels)]),
-              depthBuffer(new uint8_t[static_cast<std::size_t>(width * height * colorChannels)]),
-              _width(width),
-              _height(height),
-              _colorChannels(colorChannels)
+        /**
+         * @brief Construct a renderer with the given size.
+         * @param w The width of the render.
+         * @param h The height of the render.
+         * @param numColorChannels The number of color channels the renderer support. Eg: 4 -> RGBA
+         */
+        Renderer(const int w, const int h, const int numColorChannels)
+            : frameBuffer(new uint8_t[static_cast<std::size_t>(w * h * numColorChannels)]),
+              depthBuffer(new uint8_t[static_cast<std::size_t>(w * h * numColorChannels)]),
+              width(w),
+              height(h),
+              colorChannels(numColorChannels)
         { clearScreen(); }
 
 
@@ -54,8 +60,8 @@ namespace demo
          * @brief Update the renderer's clear color.
          * @note Must call @ref clearScreen to clear the buffer.
          *
-         * @warning The endianness of the clear color is not managed and the user must specify the clear color bit
-         *          following the order of endianness of target CPU.
+         * @warning The endianness of the clear color is not managed and the user must specify the clear color bits
+         *          following the endianness of target CPU.
          *
          * @param color The new clear color.
          */
@@ -65,7 +71,7 @@ namespace demo
          * @brief Clear the FrameBuffer with @ref clearColor.
          */
         void clearScreen() const
-        { std::memset(frameBuffer, clearColor, static_cast<size_t>(_width * _height * _colorChannels)); }
+        { std::memset(frameBuffer, clearColor, static_cast<size_t>(width * height * colorChannels)); }
 
         ~Renderer()
         {
@@ -73,6 +79,17 @@ namespace demo
             delete[] depthBuffer;
         }
 
+        /**
+         * @brief Compute the edge cross of 2 vertices and a point.
+         *
+         * @tparam T The numeric type of vertices.
+         *
+         * @param vert0 The first vertex.
+         * @param vert1 The second vertex.
+         * @param point The point.
+         * @return A positive number if the point is above the edge formed by @p vert0 and @p vert1,
+         *         negative number if the poit is below the edge and 0 if the point is on the edge.
+         */
         template <typename T>
         T edgeCross(const Vec2<T>& vert0, const Vec2<T>& vert1, const Vec2<T>& point)
         {
@@ -83,6 +100,12 @@ namespace demo
         }
 
 
+        /**
+         * @brief Compute if the edge formed by @p v0 and @p v1 is a left or top edge.
+         * @param v0 The first vertex of the edge.
+         * @param v1 The second vertex of the edge.
+         * @return `true` if the edge is a top or left edge else `false`.
+         */
         bool isTopLeftEdge(const Vec3<float>& v0, const Vec3<float>& v1)
         {
             const auto edge = v1 - v0;
@@ -97,6 +120,7 @@ namespace demo
         }
 
 
+        // TODO: Add docs
         template <typename T>
         void renderTriangle(const Vec3<T>& v0, const Vec3<T>& v1, const Vec3<T>& v2, const uint8_t r = 0xff,
                             const uint8_t g = 0xff, const uint8_t b = 0xff, const uint8_t a = 0xff)
@@ -119,8 +143,7 @@ namespace demo
             {
                 for (auto j = y0; j < y1; ++j)
                 {
-                    const auto offset =
-                        static_cast<size_t>(_colorChannels) * (j * static_cast<std::size_t>(_width) + i);
+                    const auto offset = static_cast<size_t>(colorChannels) * (j * static_cast<std::size_t>(width) + i);
 
                     const auto point = fgm::Vector2D<float>(i, j);
 
@@ -149,7 +172,7 @@ namespace demo
                         }
                         else
                         {
-                            printf("Unknown endianness");
+                            std::cout << "Unknown endianness\n";
                         }
                     }
                 }
@@ -157,6 +180,14 @@ namespace demo
         }
 
 
+        /**
+         * @brief Renders a mesh to the current @p frameBuffer.
+         *
+         * @note Blitting is not performed by the renderer, the user will need to blit the framebuffer
+         *       to the target surface.
+         *
+         * @param mesh The mesh to render.
+         */
         void render(const Mesh& mesh)
         {
             if (mesh.indices.size() % 3 == 0)

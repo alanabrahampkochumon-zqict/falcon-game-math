@@ -79,7 +79,7 @@ namespace demo
 
                 SDL_Surface* imageSurface =
                     SDL_CreateSurfaceFrom(_width, _height, renderingSurface->format, _renderer.frameBuffer,
-                                          _renderer._width * _renderer._colorChannels);
+                                          _renderer.width * _renderer.colorChannels);
                 SDL_BlitSurface(imageSurface, nullptr, renderingSurface, nullptr);
                 SDL_UpdateWindowSurface(_window);
                 pollEvent();
