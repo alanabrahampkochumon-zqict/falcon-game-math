@@ -23,7 +23,7 @@ list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
 set(MatrixTemplateDefinitionFiles Matrix2D.tpp Matrix3D.tpp Matrix4D.tpp)
 list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDirectory})
 
-set(HeaderAliasFiles "vec")
+set(HeaderAliasFiles "Vec;Mat")
 list(TRANSFORM HeaderAliasFiles PREPEND "${IncludeDirectory}/fgm/")
 
 
