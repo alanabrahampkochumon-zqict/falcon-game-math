@@ -114,22 +114,13 @@ namespace demo
                             // std::cout << std::string_view(idx.begin(), idx.end()) << " ";
                         }
                     }
-                    std::cout << "Triangulating indices" << "\n";
                     // TODO: Support concave shapes triangulation
                     for (std::size_t i = 2; i < temp.size(); ++i)
                     {
-                        auto vec = Vec3(temp[0], temp[i-1], temp[i]);
+                        // Note: -1 is subtracted since obj file uses 1-based indexing
+                        auto vec = Vec3(temp[0] - 1, temp[i-1] - 1, temp[i] - 1);
                         mesh.indices.push_back(vec);
                     }
-                    std::cout << "Completed Triangulation\n";
-                    // for (const auto d : data)
-                    // {
-                    //
-                    // }
-                    // auto vertexIterator = std::views::split(line, ' ') | std::views::drop(1);
-                    // vertexIterator.size();
-                    // for (auto vertexIndex:)
-                    // auto faceIterator = std::views::split(vertexIterator.data(), '\\');
                 }
 
                 std::cout << '\n';

@@ -14,12 +14,13 @@
 
 #include <bit>
 #include <cstdint>
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <fgm/vectors/Vector2D.h>
-#include <fgm/vectors/Vector3D.h>
+#include <fgm/Mat>
+#include <fgm/Vec>
 #include <iostream>
+#include <vector>
+#include <map>
 #include <utility>
 
 namespace demo
@@ -40,6 +41,12 @@ namespace demo
         uint8_t* depthBuffer;
         int width, height, colorChannels;
         int clearColor = 0x000000;
+
+        fgm::Mat3<float> screenSpaceMat{
+            { },
+            {},
+            {},
+        };
 
         /**
          * @brief Construct a renderer with the given size.
@@ -106,7 +113,7 @@ namespace demo
          * @param v1 The second vertex of the edge.
          * @return `true` if the edge is a top or left edge else `false`.
          */
-        bool isTopLeftEdge(const Vec3<float>& v0, const Vec3<float>& v1)
+        bool isTopLeftEdge(const Vec2<float>& v0, const Vec2<float>& v1)
         {
             const auto edge = v1 - v0;
 
@@ -119,10 +126,16 @@ namespace demo
             return isTopEdge && isLeftEdge;
         }
 
+        template <typename T>
+        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec) const
+        {
+            return Vec2{ vec.x() * width, vec.y() * height};
+        }
+
 
         // TODO: Add docs
         template <typename T>
-        void renderTriangle(const Vec3<T>& v0, const Vec3<T>& v1, const Vec3<T>& v2, const uint8_t r = 0xff,
+        void renderTriangle(const Vec2<T>& v0, const Vec2<T>& v1, const Vec2<T>& v2, const uint8_t r = 0xff,
                             const uint8_t g = 0xff, const uint8_t b = 0xff, const uint8_t a = 0xff)
         {
             // Compute the bounding box
@@ -190,6 +203,13 @@ namespace demo
          */
         void render(const Mesh& mesh)
         {
+            std::vector<Vec2<float>> vertices;
+
+            std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()), [this](const Vec3<float> vertex) {
+                return toScreenSpace(vertex);
+            });
+
+
             for (const auto& index : mesh.indices)
             {
                 const auto i0 = static_cast<std::size_t>(index.x());
@@ -200,7 +220,7 @@ namespace demo
                 const auto g    = static_cast<uint8_t>(std::rand() % 255);
                 const auto b    = static_cast<uint8_t>(std::rand() % 255);
                 const uint8_t a = 255;
-                renderTriangle(mesh.vertices[i0], mesh.vertices[i1], mesh.vertices[i2], r, g, b, a);
+                renderTriangle(vertices[i0], vertices[i1], vertices[i2], r, g, b, a);
             }
         }
     };
