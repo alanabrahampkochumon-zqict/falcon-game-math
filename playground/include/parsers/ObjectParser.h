@@ -40,10 +40,11 @@ namespace demo
 
             if (!modelStream.is_open())
             {
-                std::printf("Error opening file! Returning a default mesh.");
+                std::cout << "Error opening file! Returning a default mesh.\n";
             }
 
             // TODO: Start with object parsing
+            std::cout << "Parsing Mesh: " << filename << "...\n";
             std::string line;
             while (std::getline(modelStream, line))
             {
@@ -66,9 +67,12 @@ namespace demo
                         float vertex;
                         const auto [ptr, ec] =
                             fast_float::from_chars(token.data(), token.data() + token.size(), vertex);
+                        // Update the mesh's current min and max value
+                        mesh.minVertexValue = std::min(mesh.minVertexValue, vertex);
+                        mesh.maxVertexValue = std::max(mesh.maxVertexValue, vertex);
                         if (ec != std::errc())
                         {
-                            printf("There was an error while parsing the vertex data.");
+                            std::cout << "There was an error while parsing the vertex data.\n";
                         }
                         vertexData[index++] = vertex;
                     }
@@ -122,8 +126,6 @@ namespace demo
                         mesh.indices.push_back(vec);
                     }
                 }
-
-                std::cout << '\n';
             }
 
             // TODO: Remove
@@ -131,6 +133,7 @@ namespace demo
             //                   fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
             // mesh.indices  = { 0, 1, 2, 1, 3, 2 };
 
+            std::cout << "Mesh Parsed: " << filename << '\n';
             return mesh;
         }
     };

@@ -10,8 +10,8 @@
  */
 
 
-#include <vector>
 #include <fgm/Vec>
+#include <vector>
 
 
 namespace demo
@@ -22,5 +22,6 @@ namespace demo
         std::vector<fgm::vec3> vertices{};
         // std::vector<fgm::Vector3D<int>> colors{};
         std::vector<fgm::iVec3> indices{};
+        float minVertexValue{ fgm::constants::INFINITY_F }, maxVertexValue{ -fgm::constants::INFINITY_F };
     };
 } // namespace demo

@@ -42,12 +42,6 @@ namespace demo
         int width, height, colorChannels;
         int clearColor = 0x000000;
 
-        fgm::Mat3<float> screenSpaceMat{
-            { },
-            {},
-            {},
-        };
-
         /**
          * @brief Construct a renderer with the given size.
          * @param w The width of the render.
@@ -126,10 +120,14 @@ namespace demo
             return isTopEdge && isLeftEdge;
         }
 
+        // minValue-> Lowest vertex value
+        // maxValue -> Highest vertex value
+        // TODO: Remove [[maybe_unused]]
         template <typename T>
-        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec) const
+        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec, [[maybe_unused]] float minValue, [[maybe_unused]] float maxValue) const
         {
-            return Vec2{ vec.x() * width, vec.y() * height};
+            // TODO: Start from here
+            return Vec2{ static_cast<T>((vec.x() - minValue) * width / 2 / maxValue), static_cast<T>((vec.y() - minValue) * height / 2 / maxValue)};
         }
 
 
@@ -205,8 +203,8 @@ namespace demo
         {
             std::vector<Vec2<float>> vertices;
 
-            std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()), [this](const Vec3<float> vertex) {
-                return toScreenSpace(vertex);
+            std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()), [this, mesh](const Vec3<float> vertex) {
+                return toScreenSpace(vertex, mesh.minVertexValue, mesh.maxVertexValue);
             });
 
 
