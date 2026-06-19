@@ -251,6 +251,12 @@
          * @}
          */
 
+        /**
+        * @defgroup T_FGM_Header_Alias Header Alias
+        * @brief Verify FGM Header Alias point to correct structs and functions.
+        * @ingroup MathTests
+        */
+
     /** @} */ // End of MathTests
 
     /**

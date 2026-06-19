@@ -185,6 +185,12 @@
      */
 
     /**
+     * @defgroup FGM_Header_Alias Header Alias
+     * @brief Header Alias for FGM Mathematical structures for easier include and access.
+     * @ingroup FGM_Math
+     */
+
+    /**
      * @defgroup FGM_Types Type Alias
      * @brief Extended Type Alias.
      * @ingroup FGM_Math

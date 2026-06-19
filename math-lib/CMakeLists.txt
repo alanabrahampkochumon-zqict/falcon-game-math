@@ -23,6 +23,10 @@ list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
 set(MatrixTemplateDefinitionFiles Matrix2D.tpp Matrix3D.tpp Matrix4D.tpp)
 list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDirectory})
 
+set(HeaderAliasFiles "vec")
+list(TRANSFORM HeaderAliasFiles PREPEND "${IncludeDirectory}/fgm/")
+
+
 # To view this target as a Interface Library, we need to pass all the target files.
 add_library(MathLib INTERFACE
         ${VectorHeaderFiles}
@@ -32,6 +36,7 @@ add_library(MathLib INTERFACE
         ${GeneralFiles}
         ${CommonHeaderFiles}
         ${CommonTemplateFiles}
+        ${HeaderAliasFiles}
 )
 
 set_property(TARGET MathLib PROPERTY CXX_STANDARD 20)
@@ -53,6 +58,7 @@ target_sources(MathLib
         ${GeneralFiles}
         ${CommonHeaderFiles}
         ${CommonTemplateFiles}
+        ${HeaderAliasFiles}
 )
 
 
@@ -64,7 +70,7 @@ target_include_directories(
 
 )
 
-source_group("Header Files" FILES ${GeneralFiles})
+source_group("Header Files" FILES ${GeneralFiles} ${HeaderAliasFiles})
 source_group("Header Files\\vectors" FILES ${VectorHeaderFiles})
 source_group("Header Files\\common" FILES ${CommonHeaderFiles})
 source_group("Header Files\\matrix" FILES ${MatrixHeaderFiles})

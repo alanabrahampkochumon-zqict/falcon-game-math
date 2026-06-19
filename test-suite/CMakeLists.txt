@@ -46,6 +46,9 @@ set(SimdTestDirectory "src/simd/")
 set(SimdTestFiles "RegisterTypeTests.cpp;AdditionTests.cpp;InitializationTests.cpp;SimdUtilsTests.cpp;")
 list(TRANSFORM SimdTestFiles PREPEND ${SimdTestDirectory})
 
+set(GenericTestFiles "HeaderAliasTests.cpp")
+list(TRANSFORM GenericTestFiles PREPEND "src/math/")
+
 target_sources(
         TestSuite
         PRIVATE
@@ -57,6 +60,7 @@ target_sources(
         ${Matrix4x4TestFiles}
         ${SimdTestFiles}
         ${MathCommonTestFiles}
+        ${GenericTestFiles}
 
         PRIVATE
         FILE_SET HEADERS
@@ -120,4 +124,5 @@ source_group(
         ${Matrix4x4TestFiles}
         ${SimdTestFiles}
         ${MathCommonTestFiles}
+        ${GenericTestFiles}
 )

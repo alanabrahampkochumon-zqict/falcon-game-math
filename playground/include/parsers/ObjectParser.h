@@ -12,14 +12,15 @@
 #include "Mesh.h"
 
 #include <charconv>
+#include <fast_float/fast_float.h>
 #include <fstream>
 #include <iostream>
 #include <ranges>
 #include <string>
+#include <iterator>
 #include <string_view>
 
-#include <fast_float/fast_float.h>
-
+#include <fgm/vec>
 
 namespace demo
 {
@@ -64,7 +65,8 @@ namespace demo
                     for (const auto token : vertexIterator)
                     {
                         float vertex;
-                        const auto [ptr, ec] = fast_float::from_chars(token.data(), token.data() + token.size(), vertex);
+                        const auto [ptr, ec] =
+                            fast_float::from_chars(token.data(), token.data() + token.size(), vertex);
                         if (ec != std::errc())
                         {
                             printf("There was an error while parsing the vertex data.");
@@ -79,10 +81,10 @@ namespace demo
                     // Vertex/Texture/Normal
                     // printf("Faces %s\n", line.c_str());
                     // Only takes the face index for now
-                    auto d1 =
-                        line | std::views::split(' ') | std::views::transform([](auto&& packedIndex) {
-                            return std::string_view(packedIndex.begin(), packedIndex.end()) | std::views::split('/');
-                        });
+                    auto d1 = line | std::views::split(' ') | std::views::drop(1);
+                    // | std::views::transform([](auto&& packedIndex) {
+                    //         return std::string_view(packedIndex.begin(), packedIndex.end()) | std::views::split('/');
+                    //     });
 
                     // auto data = line | std::views::split(' ') | std::views::transform([](auto&& subrange) {
                     //                 return std::string(subrange.begin(), subrange.end()) | std::views::split('/') |
@@ -90,14 +92,22 @@ namespace demo
                     //                            return std::string(sub.begin(), sub.end());
                     //                        });
                     //             });
+
+                    const std::ptrdiff_t indices = std::distance(d1.begin(), d1.end());
+                    // Face index with less than 2 vertices cannot exist
+                    if (indices < 3)
+                        continue;
+                    std::vector<int> temp;
+                    temp.resize(indices);
                     for (auto d : d1)
                     {
-                        std::cout << "Index: ";
-                        for (auto c : d)
+                        std::cout << "Dat: ";
+                        auto firstIndexIt =
+                            std::string_view(d.begin(), d.end()) | std::views::split('/') | std::views::take(1);
+                        for (auto idx : firstIndexIt)
                         {
-                            std::cout << std::string(c.begin(), c.end());
+                            std::cout << std::string_view(idx.begin(), idx.end()) << " ";
                         }
-                        std::cout << '\n';
                     }
                     // for (const auto d : data)
                     // {
@@ -108,6 +118,8 @@ namespace demo
                     // for (auto vertexIndex:)
                     // auto faceIterator = std::views::split(vertexIterator.data(), '\\');
                 }
+
+                std::cout << '\n';
             }
 
             // TODO: Remove
