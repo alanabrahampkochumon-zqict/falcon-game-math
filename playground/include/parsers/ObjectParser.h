@@ -15,12 +15,11 @@
 #include <fast_float/fast_float.h>
 #include <fstream>
 #include <iostream>
+#include <iterator>
 #include <ranges>
 #include <string>
-#include <iterator>
 #include <string_view>
 
-#include <fgm/Vec>
 
 namespace demo
 {
@@ -96,19 +95,33 @@ namespace demo
                     const std::ptrdiff_t indices = std::distance(d1.begin(), d1.end());
                     // Face index with less than 2 vertices cannot exist
                     if (indices < 3)
+                    {
                         continue;
+                    }
+                    // TODO: Figure out a way to reduce this temporary heap allocations
                     std::vector<int> temp;
                     // temp.resize(indices);
                     for (auto d : d1)
                     {
-                        std::cout << "Dat: ";
+                        // Note: Only taking the face indices for now
                         auto firstIndexIt =
                             std::string_view(d.begin(), d.end()) | std::views::split('/') | std::views::take(1);
                         for (auto idx : firstIndexIt)
                         {
-                            std::cout << std::string_view(idx.begin(), idx.end()) << " ";
+                            int data;
+                            std::from_chars(idx.data(), idx.data() + idx.size(), data);
+                            temp.push_back(data);
+                            // std::cout << std::string_view(idx.begin(), idx.end()) << " ";
                         }
                     }
+                    std::cout << "Triangulating indices" << "\n";
+                    // TODO: Support concave shapes triangulation
+                    for (std::size_t i = 2; i < temp.size(); ++i)
+                    {
+                        auto vec = Vec3(temp[0], temp[i-1], temp[i]);
+                        mesh.indices.push_back(vec);
+                    }
+                    std::cout << "Completed Triangulation\n";
                     // for (const auto d : data)
                     // {
                     //
@@ -123,9 +136,9 @@ namespace demo
             }
 
             // TODO: Remove
-            mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
-                              fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
-            mesh.indices  = { 0, 1, 2, 1, 3, 2 };
+            // mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
+            //                   fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
+            // mesh.indices  = { 0, 1, 2, 1, 3, 2 };
 
             return mesh;
         }

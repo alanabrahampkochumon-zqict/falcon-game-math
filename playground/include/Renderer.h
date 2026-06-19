@@ -17,10 +17,10 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <iostream>
-#include <utility>
 #include <fgm/vectors/Vector2D.h>
 #include <fgm/vectors/Vector3D.h>
+#include <iostream>
+#include <utility>
 
 namespace demo
 {
@@ -190,24 +190,17 @@ namespace demo
          */
         void render(const Mesh& mesh)
         {
-            if (mesh.indices.size() % 3 == 0)
+            for (const auto& index : mesh.indices)
             {
-                for (auto it = mesh.indices.begin(); it != mesh.indices.end(); it += 3)
-                {
-                    const auto i0 = static_cast<std::size_t>(*it);
-                    const auto i1 = static_cast<std::size_t>(*(it + 1));
-                    const auto i2 = static_cast<std::size_t>(*(it + 2));
-                    // FIXME: Test code
-                    const auto r    = static_cast<uint8_t>(std::rand() % 255);
-                    const auto g    = static_cast<uint8_t>(std::rand() % 255);
-                    const auto b    = static_cast<uint8_t>(std::rand() % 255);
-                    const uint8_t a = 255;
-                    renderTriangle(mesh.vertices[i0], mesh.vertices[i1], mesh.vertices[i2], r, g, b, a);
-                }
-            }
-            else
-            {
-                std::printf("[Renderer]: Only triangulated meshes are supported.//WIP//");
+                const auto i0 = static_cast<std::size_t>(index.x());
+                const auto i1 = static_cast<std::size_t>(index.y());
+                const auto i2 = static_cast<std::size_t>(index.z());
+                // FIXME: Test code
+                const auto r    = static_cast<uint8_t>(std::rand() % 255);
+                const auto g    = static_cast<uint8_t>(std::rand() % 255);
+                const auto b    = static_cast<uint8_t>(std::rand() % 255);
+                const uint8_t a = 255;
+                renderTriangle(mesh.vertices[i0], mesh.vertices[i1], mesh.vertices[i2], r, g, b, a);
             }
         }
     };

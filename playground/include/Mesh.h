@@ -11,7 +11,7 @@
 
 
 #include <vector>
-#include <fgm/vectors/Vector3D.h>
+#include <fgm/Vec>
 
 
 namespace demo
@@ -19,8 +19,8 @@ namespace demo
     class Mesh
     {
     public:
-        std::vector<fgm::Vector3D<float>> vertices{};
+        std::vector<fgm::vec3> vertices{};
         // std::vector<fgm::Vector3D<int>> colors{};
-        std::vector<int> indices{};
+        std::vector<fgm::iVec3> indices{};
     };
 } // namespace demo

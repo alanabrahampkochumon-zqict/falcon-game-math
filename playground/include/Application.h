@@ -65,11 +65,15 @@ namespace demo
 
         void run()
         {
-            auto modelPath = std::filesystem::path("models") / "utah_teapot.obj";
-            ObjectParser parser;
-            auto mesh = parser.parse(modelPath.string());
+            // auto modelPath = std::filesystem::path("models") / "utah_teapot.obj";
+            // ObjectParser parser;
+            // auto mesh = parser.parse(modelPath.string());
+            Mesh mesh;
 
-            _isRunning = true;
+            mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
+                              fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
+            mesh.indices  = { fgm::iVec3{ 0, 1, 2 }, fgm::iVec3{ 1, 3, 2 } };
+            _isRunning    = true;
 
             SDL_Surface* renderingSurface = SDL_GetWindowSurface(_window);
             while (_isRunning)
