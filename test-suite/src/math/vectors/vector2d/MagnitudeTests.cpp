@@ -68,8 +68,8 @@ TYPED_TEST_SUITE(Vector2DUncleanMagnitude, SupportedArithmeticTypes);
 namespace
 {
     // TODO: Add static test after making sqrt constexpr
-    // constexpr auto magA = vec.mag();
-    // constexpr auto magB = fgm::Vector2D<int>::mag(vec);
+    // constexpr auto magA = Vec.mag();
+    // constexpr auto magB = fgm::Vector2D<int>::mag(Vec);
 
     constexpr fgm::Vector2D vecM(1, 2);
     constexpr auto magSqA = vecM.magSq();

@@ -72,8 +72,8 @@ INSTANTIATE_TEST_SUITE_P(Vector2DNormalizationNaNTestSuite, Vector2DNormalizatio
 namespace
 {
     // TODO: Add static tests after making sqrt constexpr
-    // constexpr fgm::Vector2D vec(14, 27);
-    // constexpr auto norm = vec.normalize();
+    // constexpr fgm::Vector2D Vec(14, 27);
+    // constexpr auto norm = Vec.normalize();
 }
 
 

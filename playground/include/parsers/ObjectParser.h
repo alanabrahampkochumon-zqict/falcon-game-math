@@ -20,7 +20,7 @@
 #include <iterator>
 #include <string_view>
 
-#include <fgm/vec>
+#include <fgm/Vec>
 
 namespace demo
 {
@@ -98,7 +98,7 @@ namespace demo
                     if (indices < 3)
                         continue;
                     std::vector<int> temp;
-                    temp.resize(indices);
+                    // temp.resize(indices);
                     for (auto d : d1)
                     {
                         std::cout << "Dat: ";

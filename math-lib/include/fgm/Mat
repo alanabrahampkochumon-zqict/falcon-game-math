@@ -1,17 +1,17 @@
 #pragma once
 /**
- * @file Vec
+ * @file Mat
  * @author Alan Abraham P Kochumon
  * @date Created on: June 19, 2026
  *
- * @brief Alias for @ref fgm::Vector(s).
+ * @brief Alias for @ref fgm::Matrix.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include "vectors/Vector2D.h"
-#include "vectors/Vector3D.h"
-#include "vectors/Vector4D.h"
+#include "matrices/Matrix2D.h"
+#include "matrices/Matrix3D.h"
+#include "matrices/Matrix4D.h"
 
 namespace fgm
 {
@@ -22,13 +22,13 @@ namespace fgm
      */
 
     template<typename T>
-    using Vec2 = fgm::Vector2D<T>;
+    using Mat2 = fgm::Matrix2D<T>;
 
     template<typename T>
-    using Vec3 = fgm::Vector3D<T>;
+    using Mat3 = fgm::Matrix3D<T>;
 
     template<typename T>
-    using Vec4 = fgm::Vector4D<T>;
+    using Mat4 = fgm::Matrix4D<T>;
 
     /** @} */
 }

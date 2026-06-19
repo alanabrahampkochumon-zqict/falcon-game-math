@@ -42,14 +42,14 @@
 // template <>
 // void SimdSetZero<AVX2Backend>(float* out)
 //{
-//     __m256 vec = _mm256_setzero_ps();
-//     _mm256_storeu_ps(out, vec); // storeu = unaligned store (safe for testing)
+//     __m256 Vec = _mm256_setzero_ps();
+//     _mm256_storeu_ps(out, Vec); // storeu = unaligned store (safe for testing)
 // }
 // template <>
 // void SimdBroadcast<AVX2Backend>(float* out, float val)
 //{
-//     __m256 vec = _mm256_set1_ps(val);
-//     _mm256_storeu_ps(out, vec);
+//     __m256 Vec = _mm256_set1_ps(val);
+//     _mm256_storeu_ps(out, Vec);
 // }
 //
 //// 3. The Test Fixture

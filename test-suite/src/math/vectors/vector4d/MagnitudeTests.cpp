@@ -68,9 +68,9 @@ TYPED_TEST_SUITE(Vector4DUncleanMagnitude, SupportedArithmeticTypes);
 namespace
 {
     // TODO: Add static test after making sqrt constexpr
-    // constexpr fgm::Vector4D vec(1, 2, 3, 4);
-    // constexpr auto magA = vec.mag();
-    // constexpr auto magB = fgm::Vector2D<int>::mag(vec);
+    // constexpr fgm::Vector4D Vec(1, 2, 3, 4);
+    // constexpr auto magA = Vec.mag();
+    // constexpr auto magB = fgm::Vector2D<int>::mag(Vec);
 
     // static_assert(magA - 5.477225575051661 <= 1e-5);
     // static_assert(magB - 5.477225575051661 <= 1e-5);

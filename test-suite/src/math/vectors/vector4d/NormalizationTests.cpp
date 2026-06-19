@@ -78,8 +78,8 @@ INSTANTIATE_TEST_SUITE_P(Vector4DNormalizationNaNTestSuite, Vector4DNormalizatio
 namespace
 {
     // TODO: Add static tests after making sqrt constexpr
-    // constexpr fgm::Vector4D vec(14, 27, 83, 52);
-    // constexpr auto norm = vec.normalize();
+    // constexpr fgm::Vector4D Vec(14, 27, 83, 52);
+    // constexpr auto norm = Vec.normalize();
 } // namespace
 
 

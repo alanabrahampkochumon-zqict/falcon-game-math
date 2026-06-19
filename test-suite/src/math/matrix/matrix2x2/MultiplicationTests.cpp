@@ -362,7 +362,7 @@ TYPED_TEST(Matrix2DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
 
 
 /**
- * @brief Verify that the binary vector multiplication operation(mat * vec) with identity matrix
+ * @brief Verify that the binary vector multiplication operation(mat * Vec) with identity matrix
  *        and returns the original column vector.
  */
 TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)

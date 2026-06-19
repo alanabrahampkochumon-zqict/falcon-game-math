@@ -476,7 +476,7 @@ namespace fgm
 
 
         /**
-         * @brief Transform the @p vec **column vector** by this matrix.
+         * @brief Transform the @p Vec **column vector** by this matrix.
          *        \f$
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} & A_{03} \\
@@ -704,7 +704,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the element-wise division of @p vec by @p scalar, return a new matrix,
+         * @brief Compute the element-wise division of @p Vec by @p scalar, return a new matrix,
          *        and updates @p status to reflect the result of the operation.
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
@@ -1282,7 +1282,7 @@ namespace fgm
 
 
     /**
-     * @brief Transform the @p vec **row vector** by @p matrix.
+     * @brief Transform the @p Vec **row vector** by @p matrix.
      *        \f$
      *            \begin{bmatrix}
      *                x & y & z & w
@@ -1309,14 +1309,14 @@ namespace fgm
      * @param[in] vec    The row vector to transform.
      * @param[in] matrix The transformation matrix.
      *
-     * @return The passed-in @p vec with the transformations applied.
+     * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic S>
     static constexpr PromotedVector4D<T, S> operator*(const Vector4D<T>& vec, const Matrix4D<S>& matrix) noexcept;
 
 
     /**
-     * @brief Transform the @p vec **row vector** by @p matrix.
+     * @brief Transform the @p Vec **row vector** by @p matrix.
      *        \f$
      *            \begin{bmatrix}
      *                x & y & z & w
@@ -1342,7 +1342,7 @@ namespace fgm
      * @param[in] vec    The row vector to transform.
      * @param[in] matrix The transformation matrix.
      *
-     * @return The passed-in @p vec with the transformations applied.
+     * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
     static constexpr Vector4D<T>& operator*=(Vector4D<T>& vec, const Matrix4D<U>& matrix) noexcept;

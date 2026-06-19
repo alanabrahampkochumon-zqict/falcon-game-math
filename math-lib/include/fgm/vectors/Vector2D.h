@@ -227,7 +227,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a new vector by rearranging, duplicating, or isolating components of @p vec.
+         * @brief Construct a new vector by rearranging, duplicating, or isolating components of @p Vec.
          *
          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
          *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero runtime
@@ -913,7 +913,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the component-wise division of @p vec by @p scalar and return a new vector.
+         * @brief Compute the component-wise division of @p Vec by @p scalar and return a new vector.
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
@@ -959,7 +959,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the component-wise division of @p vec by @p scalar, return a new vector,
+         * @brief Compute the component-wise division of @p Vec by @p scalar, return a new vector,
          *        and updates @p status to reflect the result of the operation.
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
@@ -1089,7 +1089,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the magnitude (Euclidean Norm) of @p vec.
+         * @brief Compute the magnitude (Euclidean Norm) of @p Vec.
          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their
@@ -1097,7 +1097,7 @@ namespace fgm
          *
          * @param[in] vec The vector to compute the magnitude of.
          *
-         * @return The scalar magnitude of @p vec.
+         * @return The scalar magnitude of @p Vec.
          */
         [[nodiscard]] static constexpr Magnitude<T> mag(const Vector2D& vec) noexcept
             requires StrictArithmetic<T>;
@@ -1114,12 +1114,12 @@ namespace fgm
 
 
         /**
-         * @brief Compute the magnitude square (Euclidean Norm) of @p vec.
+         * @brief Compute the magnitude square (Euclidean Norm) of @p Vec.
          *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
          *
          * @param[in] vec The vector to compute the magnitude of.
          *
-         * @return The scalar magnitude of @p vec.
+         * @return The scalar magnitude of @p Vec.
          */
         [[nodiscard]] static constexpr T magSq(const Vector2D& vec) noexcept
             requires StrictArithmetic<T>;
@@ -1136,7 +1136,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the Manhattan length (L1 Norm) of @p vec.
+         * @brief Compute the Manhattan length (L1 Norm) of @p Vec.
          *        \f$ \|\mathbf{v}\|_1 = |x| + |y| \f$
          *
          * @param[in] vec The vector to compute the taxicab norm of.
@@ -1158,7 +1158,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the Chebyshev length (L∞ Norm) of @p vec.
+         * @brief Compute the Chebyshev length (L∞ Norm) of @p Vec.
          *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|) \f$
          *
          * @param[in] vec The vector to compute the taxicab norm of.
@@ -1359,7 +1359,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the normalized (unit) form of @p vec.
+         * @brief Compute the normalized (unit) form of @p Vec.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note To maintain precision, result components are promoted to their
@@ -1391,7 +1391,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the normalized (unit) form of @p vec.
+         * @brief Compute the normalized (unit) form of @p Vec.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
          * @note This is a safe operation. If the vector's magnitude falls below the internal
@@ -1429,7 +1429,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the normalized (unit) form of @p vec and
+         * @brief Compute the normalized (unit) form of @p Vec and
          *        set @p status to the normalization operation result.
          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
          *
@@ -1502,7 +1502,7 @@ namespace fgm
 
 
         /**
-         * @brief Project the @p vec vector onto the @p onto vector.
+         * @brief Project the @p Vec vector onto the @p onto vector.
          *        \f$
          *          \text{proj}_{\mathbf{b}} \mathbf{a} =
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
@@ -1527,7 +1527,7 @@ namespace fgm
 
 
         /**
-         * @brief Project the @p vec vector onto the **unit** @p onto vector.
+         * @brief Project the @p Vec vector onto the **unit** @p onto vector.
          *        \f$
          *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
          *        \f$
@@ -1598,7 +1598,7 @@ namespace fgm
 
 
         /**
-         * @brief Project the @p vec vector onto the @p onto vector.
+         * @brief Project the @p Vec vector onto the @p onto vector.
          *        \f$
          *          \text{proj}_{\mathbf{b}} \mathbf{a} =
          *          \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{b}\|^2} \mathbf{b}
@@ -1625,7 +1625,7 @@ namespace fgm
 
 
         /**
-         * @brief Project the @p vec vector onto the **unit** @p onto vector.
+         * @brief Project the @p Vec vector onto the **unit** @p onto vector.
          *        \f$
          *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
          *        \f$
@@ -1706,7 +1706,7 @@ namespace fgm
 
 
         /**
-         * @brief Project the @p vec vector onto the @p onto vector and set @p status to the
+         * @brief Project the @p Vec vector onto the @p onto vector and set @p status to the
          *        projection operation result.
          *        \f$
          *          \text{proj}_{\mathbf{b}} \mathbf{a} =
@@ -1737,7 +1737,7 @@ namespace fgm
 
 
         /**
-         * @brief Project the @p vec vector onto the **unit** @p onto vector and set @p status to the
+         * @brief Project the @p Vec vector onto the **unit** @p onto vector and set @p status to the
          *        projection operation result.
          *        \f$
          *            \text{proj}_{\mathbf{b}} \mathbf{a} = (\mathbf{a} \cdot \mathbf{b}) \mathbf{\hat{b}}
@@ -1807,7 +1807,7 @@ namespace fgm
 
 
         /**
-         * @brief Reject the @p vec vector from the @p from vector.
+         * @brief Reject the @p Vec vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note Promotes the result to the wider type using @ref PromotedFloatVector4D<T, U>.
@@ -1828,7 +1828,7 @@ namespace fgm
 
 
         /**
-         * @brief Reject the @p vec vector from the **unit** @p from vector.
+         * @brief Reject the @p Vec vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
@@ -1892,7 +1892,7 @@ namespace fgm
 
 
         /**
-         * @brief Reject the @p vec vector from the @p from vector.
+         * @brief Reject the @p Vec vector from the @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
@@ -1916,7 +1916,7 @@ namespace fgm
 
 
         /**
-         * @brief Reject the @p vec vector from the **unit** @p from vector.
+         * @brief Reject the @p Vec vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
@@ -1989,7 +1989,7 @@ namespace fgm
 
 
         /**
-         * @brief Reject the @p vec vector from the @p from vector and set @p status to the result of
+         * @brief Reject the @p Vec vector from the @p from vector and set @p status to the result of
          *        rejection operation.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
@@ -2017,7 +2017,7 @@ namespace fgm
 
 
         /**
-         * @brief Reject the @p vec vector from the **unit** @p from vector.
+         * @brief Reject the @p Vec vector from the **unit** @p from vector.
          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
          *
          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
@@ -2064,7 +2064,7 @@ namespace fgm
          *
          * @note Always return false for integral types.
          *
-         * @param vec The vector to evaluate for indefinite components.
+         * @param[in] vec The vector to evaluate for indefinite components.
          *
          * @return True if at least one component is positive or negative infinity.
          */
@@ -2086,7 +2086,7 @@ namespace fgm
          *
          * @note Always return false for integral types.
          *
-         * @param vec The vector to evaluate for indefinite components.
+         * @param[in] vec The vector to evaluate for indefinite components.
          *
          * @return True if at least one component is NaN.
          */
