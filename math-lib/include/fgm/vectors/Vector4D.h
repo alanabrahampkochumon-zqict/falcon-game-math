@@ -2388,16 +2388,20 @@ namespace fgm
 
 
     /** @brief Template deduction guide for Vector4D. */
-    template <Arithmetic T>
+    template <typename T>
+        requires Arithmetic<T>
     Vector4D(T, T, T, T) -> Vector4D<T>;
 
-    template <Arithmetic T>
+    template <typename T>
+        requires Arithmetic<T>
     Vector4D(Vector2D<T>, Vector2D<T>) -> Vector4D<T>;
 
-    template <Arithmetic T>
+    template <typename T>
+        requires Arithmetic<T>
     Vector4D(Vector3D<T>, T) -> Vector4D<T>;
 
-    template <Arithmetic T>
+    template <typename T>
+        requires Arithmetic<T>
     Vector4D(T, Vector3D<T>) -> Vector4D<T>;
 
     /** @} */

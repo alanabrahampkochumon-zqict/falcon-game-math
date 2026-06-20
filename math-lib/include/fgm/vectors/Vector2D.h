@@ -2260,7 +2260,8 @@ namespace fgm
 
 
     /** @brief Template deduction guide for Vector2D */
-    template <Arithmetic T>
+    template <typename T>
+        requires Arithmetic<T>
     Vector2D(T, T) -> Vector2D<T>;
 
     /** @} */

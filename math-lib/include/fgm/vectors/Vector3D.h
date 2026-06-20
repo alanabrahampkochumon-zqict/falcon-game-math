@@ -2362,13 +2362,16 @@ namespace fgm
 
 
     /** @brief Template deduction guide for Vector3D. */
-    template <Arithmetic T>
+    template <typename T>
+        requires Arithmetic<T>
     Vector3D(T, T, T) -> Vector3D<T>;
 
-    template <Arithmetic T>
+    template <typename T>
+        requires Arithmetic<T>
     Vector3D(Vector2D<T>, T) -> Vector3D<T>;
 
-    template <Arithmetic T>
+    template <typename T>
+        requires Arithmetic<T>
     Vector3D(T, Vector2D<T>) -> Vector3D<T>;
 
     /** @} */
