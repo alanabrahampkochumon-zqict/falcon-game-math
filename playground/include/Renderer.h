@@ -31,7 +31,7 @@ namespace demo
     template <typename T>
     using Vec2 = fgm::Vector2D<T>;
 
-    constexpr auto EPSILON = 1e-5;
+    constexpr auto EPSILON = 1e-6;
 
 
     class Renderer
@@ -55,6 +55,38 @@ namespace demo
               height(h),
               colorChannels(numColorChannels)
         { clearScreen(); }
+
+        void renderLine(float ax, float ay, float bx, float by, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+        {
+            for (float t = 0.0f; t <= 1.0f; t += 0.002f)
+            {
+                auto x            = static_cast<int>(std::round(ax + t * (bx - ax)));
+                auto y            = static_cast<int>(std::round(ay + t * (by - ay)));
+                auto bufferOffset = colorChannels * (width * y + x);
+                if constexpr (std::endian::native == std::endian::little)
+                {
+                    frameBuffer[bufferOffset + 0] = b;
+                    frameBuffer[bufferOffset + 1] = g;
+                    frameBuffer[bufferOffset + 2] = r;
+                    frameBuffer[bufferOffset + 3] = a;
+                }
+                else if constexpr (std::endian::native == std::endian::big)
+                {
+                    frameBuffer[bufferOffset + 0] = r;
+                    frameBuffer[bufferOffset + 1] = g;
+                    frameBuffer[bufferOffset + 2] = b;
+                    frameBuffer[bufferOffset + 3] = a;
+                }
+            }
+        }
+
+        template<typename T>
+        void renderTriangleWireframe(const Vec2<T>& v0, const Vec2<T>& v1, const Vec2<T>& v2)
+        {
+            renderLine(v0.x(), v0.y(), v1.x(), v1.y(), 0xff, 0xff, 0xff, 0xff);
+            renderLine(v1.x(), v1.y(), v2.x(), v2.y(), 0xff, 0xff, 0xff, 0xff);
+            renderLine(v2.x(), v2.y(), v0.x(), v0.y(), 0xff, 0xff, 0xff, 0xff);
+        }
 
 
         /**
@@ -124,10 +156,12 @@ namespace demo
         // maxValue -> Highest vertex value
         // TODO: Remove [[maybe_unused]]
         template <typename T>
-        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec, [[maybe_unused]] float minValue, [[maybe_unused]] float maxValue) const
+        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec, float minValue, float maxValue) const
         {
-            // TODO: Start from here
-            return Vec2{ static_cast<T>((vec.x() - minValue) * width / 2 / maxValue), static_cast<T>((vec.y() - minValue) * height / 2 / maxValue)};
+            // TODO: Remove
+            const auto factorX = 4;
+            const auto factorY = 3;
+            return Vec2{ static_cast<T>((vec.x() - minValue) * width / factorX / maxValue), static_cast<T>((vec.y() - minValue) * height / factorY / maxValue)};
         }
 
 
@@ -146,9 +180,10 @@ namespace demo
             const auto vert2D1 = v1.template swizzle<fgm::axis::X, fgm::axis::Y>();
             const auto vert2D2 = v2.template swizzle<fgm::axis::X, fgm::axis::Y>();
 
-            const auto isTopLeft0 = isTopLeftEdge(v0, v1);
-            const auto isTopLeft1 = isTopLeftEdge(v1, v2);
-            const auto isTopLeft2 = isTopLeftEdge(v2, v0);
+            // TODO: Remove maybe unused
+            [[maybe_unused]] const auto isTopLeft0 = isTopLeftEdge(v0, v1);
+            [[maybe_unused]] const auto isTopLeft1 = isTopLeftEdge(v1, v2);
+            [[maybe_unused]] const auto isTopLeft2 = isTopLeftEdge(v2, v0);
 
             for (auto i = x0; i <= x1; ++i)
             {
@@ -157,6 +192,10 @@ namespace demo
                     const auto offset = static_cast<size_t>(colorChannels) * (j * static_cast<std::size_t>(width) + i);
 
                     const auto point = fgm::Vector2D(static_cast<float>(i), static_cast<float>(j));
+
+                    // const bool eC0            = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
+                    // const bool eC1            = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
+                    // const bool eC2            = edgeCross(vert2D2, vert2D0, point) - (isTopLeft2 * EPSILON) >= EPSILON;
 
                     const bool eC0            = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
                     const bool eC1            = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
@@ -214,11 +253,12 @@ namespace demo
                 const auto i1 = static_cast<std::size_t>(index.y());
                 const auto i2 = static_cast<std::size_t>(index.z());
                 // FIXME: Test code
-                const auto r    = static_cast<uint8_t>(std::rand() % 255);
-                const auto g    = static_cast<uint8_t>(std::rand() % 255);
-                const auto b    = static_cast<uint8_t>(std::rand() % 255);
-                const uint8_t a = 255;
-                renderTriangle(vertices[i0], vertices[i1], vertices[i2], r, g, b, a);
+                // const auto r    = static_cast<uint8_t>(std::rand() % 255);
+                // const auto g    = static_cast<uint8_t>(std::rand() % 255);
+                // const auto b    = static_cast<uint8_t>(std::rand() % 255);
+                // const uint8_t a = 255;
+                // renderTriangle(vertices[i0], vertices[i1], vertices[i2], r, g, b, a);
+                renderTriangleWireframe(vertices[i0], vertices[i1], vertices[i2]);
             }
         }
     };

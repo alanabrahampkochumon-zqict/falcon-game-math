@@ -26,7 +26,7 @@ namespace demo
     {
         SDL_Window* _window{ nullptr };
         bool _isRunning{ false };
-        int _width = 1280, _height = 720, _colorChannels = 4; // TODO: Update to use ctd.
+        int _width{ 1280 }, _height{ 720 }, _colorChannels{ 4 }; // TODO: Update to use ctd.
         Renderer _renderer;
 
 
@@ -66,6 +66,8 @@ namespace demo
         void run()
         {
             auto modelPath = std::filesystem::path("models") / "utah_teapot.obj";
+            // auto modelPath = std::filesystem::path("models") / "suzanne.obj";
+            // auto modelPath = std::filesystem::path("models") / "Cube.obj";
             ObjectParser parser;
             auto mesh = parser.parse(modelPath.string());
             // Mesh mesh;
@@ -77,7 +79,7 @@ namespace demo
             // mesh.indices  = { fgm::iVec3{ 0, 1, 2 }, fgm::iVec3{ 1, 3, 2 } };
             // mesh.minVertexValue = 0.0f;
             // mesh.maxVertexValue = 1.0f;
-            _isRunning    = true;
+            _isRunning = true;
 
             SDL_Surface* renderingSurface = SDL_GetWindowSurface(_window);
             while (_isRunning)

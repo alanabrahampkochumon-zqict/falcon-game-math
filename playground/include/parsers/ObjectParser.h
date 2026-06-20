@@ -15,7 +15,6 @@
 #include <fast_float/fast_float.h>
 #include <fstream>
 #include <iostream>
-#include <iterator>
 #include <ranges>
 #include <string>
 #include <string_view>
@@ -80,28 +79,10 @@ namespace demo
                 }
                 else if (line.starts_with("f"))
                 {
-                    // Faces
                     // Vertex/Texture/Normal
-                    // printf("Faces %s\n", line.c_str());
                     // Only takes the face index for now
                     auto d1 = line | std::views::split(' ') | std::views::drop(1);
-                    // | std::views::transform([](auto&& packedIndex) {
-                    //         return std::string_view(packedIndex.begin(), packedIndex.end()) | std::views::split('/');
-                    //     });
 
-                    // auto data = line | std::views::split(' ') | std::views::transform([](auto&& subrange) {
-                    //                 return std::string(subrange.begin(), subrange.end()) | std::views::split('/') |
-                    //                     std::views::take(1) | std::views::transform([](auto&& sub) {
-                    //                            return std::string(sub.begin(), sub.end());
-                    //                        });
-                    //             });
-
-                    const std::ptrdiff_t indices = std::distance(d1.begin(), d1.end());
-                    // Face index with less than 2 vertices cannot exist
-                    if (indices < 3)
-                    {
-                        continue;
-                    }
                     // TODO: Figure out a way to reduce this temporary heap allocations
                     std::vector<int> temp;
                     // temp.resize(indices);
