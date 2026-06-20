@@ -65,7 +65,7 @@ namespace demo
                     std::size_t index = 0;
                     for (const auto token : vertexIterator)
                     {
-                        float vertex;
+                        float vertex{};
                         const auto [ptr, ec] =
                             fast_float::from_chars(token.data(), token.data() + token.size(), vertex);
                         // Update the mesh's current min and max value
@@ -95,7 +95,7 @@ namespace demo
                             std::string_view(d.begin(), d.end()) | std::views::split('/') | std::views::take(1);
                         for (auto idx : firstIndexIt)
                         {
-                            int data;
+                            int data{}; // Fix: maybe uninitialized
                             std::from_chars(idx.data(), idx.data() + idx.size(), data);
                             temp.push_back(data);
                             // std::cout << std::string_view(idx.begin(), idx.end()) << " ";
