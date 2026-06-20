@@ -24,14 +24,7 @@
 #include <vector>
 
 namespace demo
-{
-    template <typename T>
-    using Vec3 = fgm::Vector3D<T>;
-
-    template <typename T>
-    using Vec2 = fgm::Vector2D<T>;
-
-    constexpr auto EPSILON = 1e-6;
+{    constexpr auto EPSILON = 1e-6;
 
 
     class Renderer
@@ -81,7 +74,7 @@ namespace demo
         }
 
         template <typename T>
-        void renderTriangleWireframe(const Vec2<T>& v0, const Vec2<T>& v1, const Vec2<T>& v2)
+        void renderTriangleWireframe(const fgm::Vec2<T>& v0, const fgm::Vec2<T>& v1, const fgm::Vec2<T>& v2)
         {
             renderLine(v0.x(), v0.y(), v1.x(), v1.y(), 0xff, 0xff, 0xff, 0xff);
             renderLine(v1.x(), v1.y(), v2.x(), v2.y(), 0xff, 0xff, 0xff, 0xff);
@@ -124,7 +117,7 @@ namespace demo
          *         negative number if the poit is below the edge and 0 if the point is on the edge.
          */
         template <typename T>
-        T edgeCross(const Vec2<T>& vert0, const Vec2<T>& vert1, const Vec2<T>& point)
+        T edgeCross(const fgm::Vec2<T>& vert0, const fgm::Vec2<T>& vert1, const fgm::Vec2<T>& point)
         {
             // We are assuming that the edges start from vert0
             const auto edge0 = vert1 - vert0;
@@ -139,7 +132,7 @@ namespace demo
          * @param v1 The second vertex of the edge.
          * @return `true` if the edge is a top or left edge else `false`.
          */
-        bool isTopLeftEdge(const Vec2<float>& v0, const Vec2<float>& v1)
+        bool isTopLeftEdge(const fgm::Vec2<float>& v0, const fgm::Vec2<float>& v1)
         {
             const auto edge = v1 - v0;
             // Top Left if edge's x coordinate is positive (negative is bottom edge due to clockwise convention used)
@@ -159,14 +152,14 @@ namespace demo
             // TODO: Remove
             const auto factorX = 2;
             const auto factorY = 2;
-            return Vec2{ static_cast<T>((vec.x() - minValue) * width / factorX / maxValue),
+            return fgm::Vec2{ static_cast<T>((vec.x() - minValue) * width / factorX / maxValue),
                          static_cast<T>((vec.y() - minValue) * height / factorY / maxValue) };
         }
 
 
         // TODO: Add docs
         template <typename T>
-        void renderTriangle(const Vec2<T>& v0, const Vec2<T>& v1, const Vec2<T>& v2, const uint8_t r = 0xff,
+        void renderTriangle(const fgm::Vec2<T>& v0, const fgm::Vec2<T>& v1, const fgm::Vec2<T>& v2, const uint8_t r = 0xff,
                             const uint8_t g = 0xff, const uint8_t b = 0xff, const uint8_t a = 0xff)
         {
 
@@ -243,10 +236,10 @@ namespace demo
          */
         void render(const Mesh& mesh)
         {
-            std::vector<Vec2<float>> vertices;
+            std::vector<fgm::Vec2<float>> vertices;
 
             std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()),
-                           [this, mesh](const Vec3<float> vertex) {
+                           [this, mesh](const fgm::Vec3<float> vertex) {
                                return toScreenSpace(vertex, mesh.minVertexValue, mesh.maxVertexValue);
                            });
 

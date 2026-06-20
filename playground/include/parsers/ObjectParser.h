@@ -61,7 +61,7 @@ namespace demo
                 {
                     // Vertex
                     auto vertexIterator = std::views::split(line, ' ') | std::views::drop(1);
-                    Vec3<float> vertexData;
+                    fgm::Vec3<float> vertexData;
                     std::size_t index = 0;
                     for (const auto token : vertexIterator)
                     {
@@ -105,7 +105,7 @@ namespace demo
                     for (std::size_t i = 2; i < temp.size(); ++i)
                     {
                         // Note: -1 is subtracted since obj file uses 1-based indexing
-                        auto vec = Vec3(temp[0] - 1, temp[i-1] - 1, temp[i] - 1);
+                        auto vec = fgm::Vec3(temp[0] - 1, temp[i-1] - 1, temp[i] - 1);
                         mesh.indices.push_back(vec);
 
                         // TODO: Remove after testing
