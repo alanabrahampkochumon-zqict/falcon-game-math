@@ -21,13 +21,13 @@ namespace fgm
      * @{
      */
 
-    template<typename T>
+    template<fgm::Arithmetic T>
     using Mat2 = fgm::Matrix2D<T>;
 
-    template<typename T>
+    template<fgm::Arithmetic T>
     using Mat3 = fgm::Matrix3D<T>;
 
-    template<typename T>
+    template<fgm::Arithmetic T>
     using Mat4 = fgm::Matrix4D<T>;
 
     /** @} */

@@ -12,14 +12,13 @@
 #include "Mesh.h"
 
 #include <charconv>
+#include <cstdlib>
 #include <fast_float/fast_float.h>
 #include <fstream>
 #include <iostream>
 #include <ranges>
 #include <string>
 #include <string_view>
-
-#include <cstdlib>
 
 
 namespace demo
@@ -105,15 +104,16 @@ namespace demo
                     for (std::size_t i = 2; i < temp.size(); ++i)
                     {
                         // Note: -1 is subtracted since obj file uses 1-based indexing
-                        auto vec = fgm::Vec3(temp[0] - 1, temp[i-1] - 1, temp[i] - 1);
+                        // Clang on Linux throws class template deduction failed error without typename passed-in
+                        auto vec = fgm::Vec3<int>(temp[0] - 1, temp[i - 1] - 1, temp[i] - 1);
                         mesh.indices.push_back(vec);
 
                         // TODO: Remove after testing
                         // Create random color per face
-                        const auto r = static_cast<uint8_t>(std::rand() % 255);
-                        const auto g = static_cast<uint8_t>(std::rand() % 255);
-                        const auto b = static_cast<uint8_t>(std::rand() % 255);
-                        const auto colorVec = fgm::Vec3{r, g, b};
+                        const auto r        = static_cast<uint8_t>(std::rand() % 255);
+                        const auto g        = static_cast<uint8_t>(std::rand() % 255);
+                        const auto b        = static_cast<uint8_t>(std::rand() % 255);
+                        const auto colorVec = fgm::Vec3<uint8_t>{ r, g, b };
                         mesh.colors.push_back(colorVec);
                     }
                 }

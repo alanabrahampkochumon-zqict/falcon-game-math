@@ -24,7 +24,8 @@
 #include <vector>
 
 namespace demo
-{    constexpr auto EPSILON = 1e-6;
+{
+    constexpr auto EPSILON = 1e-6;
 
 
     class Renderer
@@ -152,15 +153,16 @@ namespace demo
             // TODO: Remove
             const auto factorX = 2;
             const auto factorY = 2;
-            return fgm::Vec2{ static_cast<T>((vec.x() - minValue) * width / factorX / maxValue),
-                         static_cast<T>((vec.y() - minValue) * height / factorY / maxValue) };
+            return fgm::Vec2<T>{ static_cast<T>((vec.x() - minValue) * width / factorX / maxValue),
+                                 static_cast<T>((vec.y() - minValue) * height / factorY / maxValue) };
         }
 
 
         // TODO: Add docs
         template <typename T>
-        void renderTriangle(const fgm::Vec2<T>& v0, const fgm::Vec2<T>& v1, const fgm::Vec2<T>& v2, const uint8_t r = 0xff,
-                            const uint8_t g = 0xff, const uint8_t b = 0xff, const uint8_t a = 0xff)
+        void renderTriangle(const fgm::Vec2<T>& v0, const fgm::Vec2<T>& v1, const fgm::Vec2<T>& v2,
+                            const uint8_t r = 0xff, const uint8_t g = 0xff, const uint8_t b = 0xff,
+                            const uint8_t a = 0xff)
         {
 
             // Calculate the bounding box of the triangle

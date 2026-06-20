@@ -12,6 +12,7 @@
 #include "vectors/Vector2D.h"
 #include "vectors/Vector3D.h"
 #include "vectors/Vector4D.h"
+#include "common/MathTraits.h"
 
 namespace fgm
 {
@@ -21,13 +22,13 @@ namespace fgm
      * @{
      */
 
-    template<typename T>
+    template<fgm::Arithmetic T>
     using Vec2 = fgm::Vector2D<T>;
 
-    template<typename T>
+    template<fgm::Arithmetic T>
     using Vec3 = fgm::Vector3D<T>;
 
-    template<typename T>
+    template<fgm::Arithmetic T>
     using Vec4 = fgm::Vector4D<T>;
 
     /** @} */
