@@ -19,9 +19,9 @@
 #include <fgm/Mat>
 #include <fgm/Vec>
 #include <iostream>
-#include <vector>
 #include <map>
 #include <utility>
+#include <vector>
 
 namespace demo
 {
@@ -80,7 +80,7 @@ namespace demo
             }
         }
 
-        template<typename T>
+        template <typename T>
         void renderTriangleWireframe(const Vec2<T>& v0, const Vec2<T>& v1, const Vec2<T>& v2)
         {
             renderLine(v0.x(), v0.y(), v1.x(), v1.y(), 0xff, 0xff, 0xff, 0xff);
@@ -161,7 +161,8 @@ namespace demo
             // TODO: Remove
             const auto factorX = 2;
             const auto factorY = 2;
-            return Vec2{ static_cast<T>((vec.x() - minValue) * width / factorX / maxValue), static_cast<T>((vec.y() - minValue) * height / factorY / maxValue)};
+            return Vec2{ static_cast<T>((vec.x() - minValue) * width / factorX / maxValue),
+                         static_cast<T>((vec.y() - minValue) * height / factorY / maxValue) };
         }
 
 
@@ -176,68 +177,50 @@ namespace demo
             const auto x1 = static_cast<std::size_t>(std::max({ v0.x(), v1.x(), v2.x() }));
             const auto y1 = static_cast<std::size_t>(std::max({ v0.y(), v1.y(), v2.y() }));
 
+
             const auto vert2D0 = v0.template swizzle<fgm::axis::X, fgm::axis::Y>();
             const auto vert2D1 = v1.template swizzle<fgm::axis::X, fgm::axis::Y>();
             const auto vert2D2 = v2.template swizzle<fgm::axis::X, fgm::axis::Y>();
 
+
             // TODO: Remove maybe unused
-            [[maybe_unused]] const auto isTopLeft0 = isTopLeftEdge(v0, v1);
-            [[maybe_unused]] const auto isTopLeft1 = isTopLeftEdge(v1, v2);
-            [[maybe_unused]] const auto isTopLeft2 = isTopLeftEdge(v2, v0);
+            const auto isTopLeft0 = isTopLeftEdge(v0, v1);
+            const auto isTopLeft1 = isTopLeftEdge(v1, v2);
+            const auto isTopLeft2 = isTopLeftEdge(v2, v0);
 
-            for (auto i = x0; i <= x1; ++i)
+            // Looping in reverse order for better cache locality
+            for (auto y = y0; y <= y1; ++y)
             {
-                for (auto j = y0; j < y1; ++j)
+                for (auto x = x0; x <= x1; ++x)
                 {
-                    const auto offset = static_cast<size_t>(colorChannels) * (j * static_cast<std::size_t>(width) + i);
+                    const auto offset =
+                        static_cast<std::size_t>(colorChannels) * (y * static_cast<std::size_t>(width) + x);
+                    const auto point = fgm::Vector2D(static_cast<float>(x), static_cast<float>(y));
 
-                    const auto point = fgm::Vector2D(static_cast<float>(i), static_cast<float>(j));
 
-                    // const bool eC0            = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
-                    // const bool eC1            = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
-                    // const bool eC2            = edgeCross(vert2D2, vert2D0, point) - (isTopLeft2 * EPSILON) >= EPSILON;
+                    const bool eC0 = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
+                    const bool eC1 = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
+                    const bool eC2 = edgeCross(vert2D2, vert2D0, point) - (isTopLeft2 * EPSILON) >= EPSILON;
 
-                    const bool eC0            = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
-                    const bool eC1            = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
-                    const bool eC2            = edgeCross(vert2D2, vert2D0, point) - (isTopLeft2 * EPSILON) >= EPSILON;
-                    [[maybe_unused]] const bool insideTriangle = eC0 && eC1 && eC2;
-
-                    if constexpr (std::endian::native == std::endian::big)
+                    if (eC0 && eC1 && eC2)
                     {
-                        // RGBA
-                        frameBuffer[offset]     = r;
-                        frameBuffer[offset + 1] = g;
-                        frameBuffer[offset + 2] = b;
-                        frameBuffer[offset + 3] = a;
+                        if constexpr (std::endian::native == std::endian::big)
+                        {
+                            // RGBA
+                            frameBuffer[offset]     = r;
+                            frameBuffer[offset + 1] = g;
+                            frameBuffer[offset + 2] = b;
+                            frameBuffer[offset + 3] = a;
+                        }
+                        else if constexpr (std::endian::native == std::endian::little)
+                        {
+                            // BRGA
+                            frameBuffer[offset]     = b;
+                            frameBuffer[offset + 1] = g;
+                            frameBuffer[offset + 2] = r;
+                            frameBuffer[offset + 3] = a;
+                        }
                     }
-                    else if constexpr (std::endian::native == std::endian::little)
-                    {
-                        // ARGB
-                        // BG
-                        frameBuffer[offset]     = b;
-                        frameBuffer[offset + 1] = g;
-                        frameBuffer[offset + 2] = r;
-                        frameBuffer[offset + 3] = a;
-                    }
-                    // if (insideTriangle)
-                    // {
-                    //     if constexpr (std::endian::native == std::endian::big)
-                    //     {
-                    //         // RGBA
-                    //         frameBuffer[offset]     = r;
-                    //         frameBuffer[offset + 1] = g;
-                    //         frameBuffer[offset + 2] = b;
-                    //         frameBuffer[offset + 3] = a;
-                    //     }
-                    //     else if constexpr (std::endian::native == std::endian::little)
-                    //     {
-                    //         // BRGA
-                    //         frameBuffer[offset]     = b;
-                    //         frameBuffer[offset + 1] = g;
-                    //         frameBuffer[offset + 2] = r;
-                    //         frameBuffer[offset + 3] = a;
-                    //     }
-                    // }
                 }
             }
         }
@@ -255,21 +238,21 @@ namespace demo
         {
             std::vector<Vec2<float>> vertices;
 
-            std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()), [this, mesh](const Vec3<float> vertex) {
-                return toScreenSpace(vertex, mesh.minVertexValue, mesh.maxVertexValue);
-            });
+            std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()),
+                           [this, mesh](const Vec3<float> vertex) {
+                               return toScreenSpace(vertex, mesh.minVertexValue, mesh.maxVertexValue);
+                           });
 
-            [[maybe_unused]]std::size_t i = 0;
+            [[maybe_unused]] std::size_t i = 0;
             for (const auto& index : mesh.indices)
             {
                 const auto i0 = static_cast<std::size_t>(index.x());
                 const auto i1 = static_cast<std::size_t>(index.y());
                 const auto i2 = static_cast<std::size_t>(index.z());
                 // FIXME: Test code
-                const auto faceColor = mesh.colors[i];
-                renderTriangle(vertices[i0], vertices[i1], vertices[i2], faceColor.r(), faceColor.g(), faceColor.b(), 0xff);
-                // renderTriangle(vertices[i0], vertices[i1], vertices[i2], 0xff, 0xff, 0xff, 0xff);
-                ++i;
+                const auto faceColor = mesh.colors[i++];
+                renderTriangle(vertices[i0], vertices[i1], vertices[i2], faceColor.r(), faceColor.g(), faceColor.b(),
+                               0xff);
                 // renderTriangleWireframe(vertices[i0], vertices[i1], vertices[i2]);
             }
         }

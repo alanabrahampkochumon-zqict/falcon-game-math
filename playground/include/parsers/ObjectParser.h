@@ -118,10 +118,6 @@ namespace demo
                 }
             }
 
-            // TODO: Remove
-            // mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
-            //                   fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
-            // mesh.indices  = { 0, 1, 2, 1, 3, 2 };
 
             std::cout << "Mesh Parsed: " << filename << '\n';
             return mesh;
