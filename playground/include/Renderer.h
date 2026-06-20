@@ -142,7 +142,6 @@ namespace demo
         bool isTopLeftEdge(const Vec2<float>& v0, const Vec2<float>& v1)
         {
             const auto edge = v1 - v0;
-
             // Top Left if edge's x coordinate is positive (negative is bottom edge due to clockwise convention used)
             // and if y coordinate is 0
             const auto isTopEdge = edge.x() >= EPSILON && std::abs(edge.y()) < EPSILON;
@@ -154,7 +153,6 @@ namespace demo
 
         // minValue-> Lowest vertex value
         // maxValue -> Highest vertex value
-        // TODO: Remove [[maybe_unused]]
         template <typename T>
         fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec, float minValue, float maxValue) const
         {
@@ -171,19 +169,28 @@ namespace demo
         void renderTriangle(const Vec2<T>& v0, const Vec2<T>& v1, const Vec2<T>& v2, const uint8_t r = 0xff,
                             const uint8_t g = 0xff, const uint8_t b = 0xff, const uint8_t a = 0xff)
         {
-            // Compute the bounding box
+
+            // Calculate the bounding box of the triangle
+            // (minX, minY)--------
+            //       |____________|
+            //       |\ \ \ \ \ \/|
+            //       | \ \ \ \ \/ |
+            //       |  \ \ \ \/  |
+            //       |   \ \ \/   |
+            //       |    \ \/    |
+            //       |     \/     |
+            //       --------(maxX, maxY)
             const auto x0 = static_cast<std::size_t>(std::min({ v0.x(), v1.x(), v2.x() }));
             const auto y0 = static_cast<std::size_t>(std::min({ v0.y(), v1.y(), v2.y() }));
             const auto x1 = static_cast<std::size_t>(std::max({ v0.x(), v1.x(), v2.x() }));
             const auto y1 = static_cast<std::size_t>(std::max({ v0.y(), v1.y(), v2.y() }));
 
-
+            // Get the 2D vertices
             const auto vert2D0 = v0.template swizzle<fgm::axis::X, fgm::axis::Y>();
             const auto vert2D1 = v1.template swizzle<fgm::axis::X, fgm::axis::Y>();
             const auto vert2D2 = v2.template swizzle<fgm::axis::X, fgm::axis::Y>();
 
-
-            // TODO: Remove maybe unused
+            // Compute top left for each edge (vertex pair)
             const auto isTopLeft0 = isTopLeftEdge(v0, v1);
             const auto isTopLeft1 = isTopLeftEdge(v1, v2);
             const auto isTopLeft2 = isTopLeftEdge(v2, v0);
