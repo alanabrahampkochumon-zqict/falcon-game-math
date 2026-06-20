@@ -159,8 +159,8 @@ namespace demo
         fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec, float minValue, float maxValue) const
         {
             // TODO: Remove
-            const auto factorX = 4;
-            const auto factorY = 3;
+            const auto factorX = 2;
+            const auto factorY = 2;
             return Vec2{ static_cast<T>((vec.x() - minValue) * width / factorX / maxValue), static_cast<T>((vec.y() - minValue) * height / factorY / maxValue)};
         }
 
@@ -200,31 +200,44 @@ namespace demo
                     const bool eC0            = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
                     const bool eC1            = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
                     const bool eC2            = edgeCross(vert2D2, vert2D0, point) - (isTopLeft2 * EPSILON) >= EPSILON;
-                    const bool insideTriangle = eC0 && eC1 && eC2;
+                    [[maybe_unused]] const bool insideTriangle = eC0 && eC1 && eC2;
 
-                    if (insideTriangle)
+                    if constexpr (std::endian::native == std::endian::big)
                     {
-                        if constexpr (std::endian::native == std::endian::big)
-                        {
-                            // RGBA
-                            frameBuffer[offset]     = r;
-                            frameBuffer[offset + 1] = g;
-                            frameBuffer[offset + 2] = b;
-                            frameBuffer[offset + 2] = a;
-                        }
-                        else if constexpr (std::endian::native == std::endian::little)
-                        {
-                            // BRGA
-                            frameBuffer[offset]     = b;
-                            frameBuffer[offset + 1] = r;
-                            frameBuffer[offset + 2] = g;
-                            frameBuffer[offset + 2] = a;
-                        }
-                        else
-                        {
-                            std::cout << "Unknown endianness\n";
-                        }
+                        // RGBA
+                        frameBuffer[offset]     = r;
+                        frameBuffer[offset + 1] = g;
+                        frameBuffer[offset + 2] = b;
+                        frameBuffer[offset + 3] = a;
                     }
+                    else if constexpr (std::endian::native == std::endian::little)
+                    {
+                        // ARGB
+                        // BG
+                        frameBuffer[offset]     = b;
+                        frameBuffer[offset + 1] = g;
+                        frameBuffer[offset + 2] = r;
+                        frameBuffer[offset + 3] = a;
+                    }
+                    // if (insideTriangle)
+                    // {
+                    //     if constexpr (std::endian::native == std::endian::big)
+                    //     {
+                    //         // RGBA
+                    //         frameBuffer[offset]     = r;
+                    //         frameBuffer[offset + 1] = g;
+                    //         frameBuffer[offset + 2] = b;
+                    //         frameBuffer[offset + 3] = a;
+                    //     }
+                    //     else if constexpr (std::endian::native == std::endian::little)
+                    //     {
+                    //         // BRGA
+                    //         frameBuffer[offset]     = b;
+                    //         frameBuffer[offset + 1] = g;
+                    //         frameBuffer[offset + 2] = r;
+                    //         frameBuffer[offset + 3] = a;
+                    //     }
+                    // }
                 }
             }
         }
@@ -246,19 +259,18 @@ namespace demo
                 return toScreenSpace(vertex, mesh.minVertexValue, mesh.maxVertexValue);
             });
 
-
+            [[maybe_unused]]std::size_t i = 0;
             for (const auto& index : mesh.indices)
             {
                 const auto i0 = static_cast<std::size_t>(index.x());
                 const auto i1 = static_cast<std::size_t>(index.y());
                 const auto i2 = static_cast<std::size_t>(index.z());
                 // FIXME: Test code
-                // const auto r    = static_cast<uint8_t>(std::rand() % 255);
-                // const auto g    = static_cast<uint8_t>(std::rand() % 255);
-                // const auto b    = static_cast<uint8_t>(std::rand() % 255);
-                // const uint8_t a = 255;
-                // renderTriangle(vertices[i0], vertices[i1], vertices[i2], r, g, b, a);
-                renderTriangleWireframe(vertices[i0], vertices[i1], vertices[i2]);
+                const auto faceColor = mesh.colors[i];
+                renderTriangle(vertices[i0], vertices[i1], vertices[i2], faceColor.r(), faceColor.g(), faceColor.b(), 0xff);
+                // renderTriangle(vertices[i0], vertices[i1], vertices[i2], 0xff, 0xff, 0xff, 0xff);
+                ++i;
+                // renderTriangleWireframe(vertices[i0], vertices[i1], vertices[i2]);
             }
         }
     };

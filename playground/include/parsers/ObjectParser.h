@@ -19,6 +19,8 @@
 #include <string>
 #include <string_view>
 
+#include <cstdlib>
+
 
 namespace demo
 {
@@ -105,6 +107,13 @@ namespace demo
                         // Note: -1 is subtracted since obj file uses 1-based indexing
                         auto vec = Vec3(temp[0] - 1, temp[i-1] - 1, temp[i] - 1);
                         mesh.indices.push_back(vec);
+                        // TODO: Remove after testing
+                        // Create random color per face
+                        const auto r = static_cast<uint8_t>(std::rand() % 255);
+                        const auto g = static_cast<uint8_t>(std::rand() % 255);
+                        const auto b = static_cast<uint8_t>(std::rand() % 255);
+                        const auto colorVec = fgm::Vec3{r, g, b};
+                        mesh.colors.push_back(colorVec);
                     }
                 }
             }
