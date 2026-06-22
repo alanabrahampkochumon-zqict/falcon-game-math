@@ -2272,6 +2272,7 @@ namespace fgm
      *************************************/
 
     using Vec3B   = Vector3D<bool>;               ///< `bool` vector
+    using Vec3UB  = Vector3D<uint8_t>;            ///< 8-bit unsigned int vector
     using Vec3I   = Vector3D<int>;                ///< `int` vector
     using Vec3U   = Vector3D<unsigned int>;       ///< `unsigned int` vector
     using Vec3F   = Vector3D<float>;              ///< `float` vector

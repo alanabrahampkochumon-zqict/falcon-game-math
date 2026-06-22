@@ -31,6 +31,7 @@
 
 #include <array>
 #include <cstddef>
+#include <cstdint>
 #include <iomanip>
 #include <ostream>
 
@@ -2288,6 +2289,7 @@ namespace fgm
      *************************************/
 
     using Vec4B  = Vector4D<bool>;               ///< `bool` vector
+    using Vec4UB = Vector4D<uint8_t>;            ///< 8-bit unsigned int vector
     using Vec4I  = Vector4D<int>;                ///< `int` vector
     using Vec4U  = Vector4D<unsigned int>;       ///< `unsigned int` vector
     using Vec4F  = Vector4D<float>;              ///< `float` vector

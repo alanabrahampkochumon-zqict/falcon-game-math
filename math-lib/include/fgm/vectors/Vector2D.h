@@ -2177,6 +2177,7 @@ namespace fgm
      *************************************/
 
     using Vec2B   = Vector2D<bool>;               ///< `bool` vector
+    using Vec2UB  = Vector2D<uint8_t>;            ///< 8-bit unsigned int vector
     using Vec2I   = Vector2D<int>;                ///< `int` vector
     using Vec2U   = Vector2D<unsigned int>;       ///< `unsigned int` vector
     using Vec2F   = Vector2D<float>;              ///< `float` vector
