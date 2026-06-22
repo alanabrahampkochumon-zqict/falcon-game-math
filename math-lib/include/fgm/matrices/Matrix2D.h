@@ -1186,13 +1186,13 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bMat2  = Matrix2D<bool>;               ///< `bool` matrix
-    using iMat2  = Matrix2D<int>;                ///< `int` matrix
-    using uMat2  = Matrix2D<unsigned int>;       ///< `unsigned int` matrix
-    using mat2   = Matrix2D<float>;              ///< `float` matrix
-    using lMat2  = Matrix2D<long long>;          ///< `long long` matrix
-    using dMat2  = Matrix2D<double>;             ///< `double` matrix
-    using ulMat2 = Matrix2D<unsigned long long>; ///< `unsigned long long` matrix
+    using Mat2B   = Matrix2D<bool>;               ///< `bool` matrix
+    using Mat2I   = Matrix2D<int>;                ///< `int` matrix
+    using Mat2U   = Matrix2D<unsigned int>;       ///< `unsigned int` matrix
+    using Mat2F   = Matrix2D<float>;              ///< `float` matrix
+    using Mat2LL  = Matrix2D<long long>;          ///< `long long` matrix
+    using Mat2D   = Matrix2D<double>;             ///< `double` matrix
+    using Mat2ULL = Matrix2D<unsigned long long>; ///< `unsigned long long` matrix
 
     /** @} */
 

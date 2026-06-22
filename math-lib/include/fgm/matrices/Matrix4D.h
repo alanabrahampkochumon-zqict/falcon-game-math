@@ -1241,13 +1241,13 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bMat4  = Matrix4D<bool>;               ///< `bool` matrix
-    using iMat4  = Matrix4D<int>;                ///< `int` matrix
-    using uMat4  = Matrix4D<unsigned int>;       ///< `unsigned int` matrix
-    using mat4   = Matrix4D<float>;              ///< `float` matrix
-    using lMat4  = Matrix4D<long long>;          ///< `long long` matrix
-    using dMat4  = Matrix4D<double>;             ///< `double` matrix
-    using ulMat4 = Matrix4D<unsigned long long>; ///< `unsigned long long` matrix
+    using Mat4B   = Matrix4D<bool>;               ///< `bool` matrix
+    using Mat4I   = Matrix4D<int>;                ///< `int` matrix
+    using Mat4U   = Matrix4D<unsigned int>;       ///< `unsigned int` matrix
+    using Mat4F   = Matrix4D<float>;              ///< `float` matrix
+    using Mat4LL  = Matrix4D<long long>;          ///< `long long` matrix
+    using Mat4D   = Matrix4D<double>;             ///< `double` matrix
+    using Mat4ULL = Matrix4D<unsigned long long>; ///< `unsigned long long` matrix
 
     /** @} */
 
