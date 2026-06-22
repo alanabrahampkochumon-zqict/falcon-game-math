@@ -9,7 +9,7 @@
  * @par Configuration
  *      Define FORCE_SSE to turn on SSE, even if hardware supports newer instructions
  *      Similar options include FORCE_AVX512, FORCE_AVX2, FORCE_SSE, and FORCE_SCALAR which will completely turn off
- * SIMD.
+ *      SIMD.
  *      @note Even if flags are specified, it will only default to the max that the CPU architecture supports
  *
  * @par Compiler note (Static Dispatch)

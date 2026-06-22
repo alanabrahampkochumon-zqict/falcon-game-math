@@ -153,11 +153,13 @@ include(simdcheck.cmake)
 
 add_subdirectory(math-lib)
 add_subdirectory(playground)
-add_subdirectory(test-suite)
+add_subdirectory(math-test)
 add_subdirectory(simd)
+add_subdirectory(simd-test)
 add_subdirectory(benchmark-suite)
 
-target_compile_features(TestSuite PRIVATE cxx_std_20)
+target_compile_features(MathTestSuite PRIVATE cxx_std_20)
+target_compile_features(SIMDTestSuite PRIVATE cxx_std_20)
 target_compile_features(FalconSIMD INTERFACE cxx_std_20)
 target_compile_features(MathLib INTERFACE cxx_std_20)
 target_compile_features(Playground PRIVATE cxx_std_20)
@@ -166,16 +168,19 @@ target_compile_features(BenchmarkSuite PRIVATE cxx_std_20)
 # For faster CI/CD unit-tests on push are only run with essential types rather than the full type permutation.
 option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
 if (NONCOMPREHENSIVE)
-    target_compile_definitions(TestSuite PRIVATE NONCOMPREHENSIVE)
+    target_compile_definitions(MathTestSuite PRIVATE NONCOMPREHENSIVE)
+    target_compile_definitions(SIMDTestSuite PRIVATE NONCOMPREHENSIVE)
 endif ()
 
 
-target_link_libraries(TestSuite PRIVATE StrictWarnings ProjectSanitizers)
+target_link_libraries(MathTestSuite PRIVATE StrictWarnings ProjectSanitizers)
+target_link_libraries(SIMDTestSuite PRIVATE StrictWarnings ProjectSanitizers)
 target_link_libraries(FalconSIMD INTERFACE StrictWarnings ProjectSanitizers)
 target_link_libraries(MathLib INTERFACE StrictWarnings ProjectSanitizers)
 target_link_libraries(Playground PRIVATE StrictWarnings ProjectSanitizers)
 target_link_libraries(BenchmarkSuite PRIVATE StrictWarnings ProjectSanitizers)
 
-AddSIMDCompilerFlag(TestSuite)
+AddSIMDCompilerFlag(MathTestSuite)
+#AddSIMDCompilerFlag(SIMDTestSuite) TODO: Add if only required
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Playground)
