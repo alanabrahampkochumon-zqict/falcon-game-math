@@ -105,7 +105,7 @@ namespace demo
                     {
                         // Note: -1 is subtracted since obj file uses 1-based indexing
                         // Clang on Linux throws class template deduction failed error without typename passed-in
-                        auto vec = fgm::Vec3<int>(temp[0] - 1, temp[i - 1] - 1, temp[i] - 1);
+                        auto vec = fgm::Vec3I(temp[0] - 1, temp[i - 1] - 1, temp[i] - 1);
                         mesh.indices.push_back(vec);
 
                         // TODO: Remove after testing
@@ -113,7 +113,7 @@ namespace demo
                         const auto r        = static_cast<uint8_t>(std::rand() % 255);
                         const auto g        = static_cast<uint8_t>(std::rand() % 255);
                         const auto b        = static_cast<uint8_t>(std::rand() % 255);
-                        const auto colorVec = fgm::Vec3<uint8_t>{ r, g, b };
+                        const auto colorVec = fgm::Vec3UB{ r, g, b };
                         mesh.colors.push_back(colorVec);
                     }
                 }

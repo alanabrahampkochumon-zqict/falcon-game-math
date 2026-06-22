@@ -28,6 +28,11 @@ namespace demo
     constexpr auto EPSILON = 1e-6;
 
 
+    struct BarycentricCoordinates
+    {
+        float alpha, beta, gamma;
+    };
+
     class Renderer
     {
     public:
@@ -124,6 +129,21 @@ namespace demo
             const auto edge0 = vert1 - vert0;
             const auto edge1 = point - vert0;
             return edge0.cross(edge1);
+        }
+
+
+        BarycentricCoordinates computeBaryCentricCoordinates(const fgm::Vec2F& v0, const fgm::Vec2F& v1,
+                                                             const fgm::Vec2F& v2, const fgm::Vec2F& point)
+        {
+            // Division by two is omitted since that is common in smaller triangles area too
+            const auto triArea   = (v1 - v0).cross(v2 - v1);
+            const auto alphaArea = (v2 - v1).cross(point - v1);
+            const auto betaArea  = (v0 - v2).cross(point - v2);
+            const auto gammaArea = (v1 - v0).cross(point - v0);
+
+            return BarycentricCoordinates{ .alpha = alphaArea / triArea,
+                                           .beta  = betaArea / triArea,
+                                           .gamma = gammaArea / triArea };
         }
 
 
