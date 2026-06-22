@@ -27,7 +27,7 @@ TYPED_TEST_SUITE(RegisterMapTest, SupportedSIMDIntegralTypes);
 
 
 /**
- * @addtogroup T_Reg_Type
+ * @addtogroup T_SIMD_Reg
  * @{
  */
 

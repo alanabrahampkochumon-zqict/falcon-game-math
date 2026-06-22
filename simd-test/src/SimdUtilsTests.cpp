@@ -16,6 +16,12 @@ class PackedSizeCalculatorTests: public ::testing::TestWithParam<TestPackingPara
 
 
 
+
+/**
+ * @addtogroup T_SIMD_Utils
+ * @{
+ */
+
 /**
  * @brief Verify that the packed size parameter returns the correct aligned byte size, padding, register width
  *        and count.
@@ -73,3 +79,5 @@ INSTANTIATE_TEST_SUITE_P(
         TestPackingParams{ 192, 64, 256, 64, 64, 4 }, TestPackingParams{ 256, 64, 256, 0, 64, 4 },
         TestPackingParams{ 512, 64, 512, 0, 64, 8 }, TestPackingParams{ 777, 64, 1024, 247, 64, 16 },
         TestPackingParams{ 1024, 64, 1024, 0, 64, 16 }));
+
+/** @} */
