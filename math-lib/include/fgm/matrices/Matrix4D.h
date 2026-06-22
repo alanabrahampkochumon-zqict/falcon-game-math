@@ -29,7 +29,7 @@
 #include "fgm/vectors/Vector4D.h"
 
 #include <array>
-#include <cstddef>
+#include <cstdint>
 
 
 
@@ -1241,13 +1241,14 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using Mat4B   = Matrix4D<bool>;               ///< `bool` matrix
-    using Mat4I   = Matrix4D<int>;                ///< `int` matrix
-    using Mat4U   = Matrix4D<unsigned int>;       ///< `unsigned int` matrix
-    using Mat4F   = Matrix4D<float>;              ///< `float` matrix
-    using Mat4LL  = Matrix4D<long long>;          ///< `long long` matrix
-    using Mat4D   = Matrix4D<double>;             ///< `double` matrix
-    using Mat4ULL = Matrix4D<unsigned long long>; ///< `unsigned long long` matrix
+    using Mat4B   = Matrix4D<int8_t>;   ///< Signed Byte (8-bit) matrix
+    using Mat4UB  = Matrix4D<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
+    using Mat4I   = Matrix4D<int32_t>;  ///< Signed Int (32-bit) matrix
+    using Mat4U   = Matrix4D<uint32_t>; ///< Unsigned Int (32-bit) matrix
+    using Mat4F   = Matrix4D<float>;    ///< Single Precision Floating Point (32-bit) matrix
+    using Mat4LL  = Matrix4D<int64_t>;  ///< Signed Long Long (64-bit) matrix
+    using Mat4D   = Matrix4D<double>;   ///< Double Precision Floating Point (64-bit) matrix
+    using Mat4ULL = Matrix4D<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
 
     /** @} */
 

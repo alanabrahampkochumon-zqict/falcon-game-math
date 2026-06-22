@@ -30,7 +30,7 @@
 #include "fgm/vectors/Vector3D.h"
 
 #include <array>
-#include <cstddef>
+#include <cstdint>
 
 
 // TODO: Add Matrix3D Transformation factory, projections.
@@ -1135,13 +1135,14 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using Mat3B   = Matrix3D<bool>;               ///< `bool` matrix
-    using Mat3I   = Matrix3D<int>;                ///< `int` matrix
-    using Mat3U   = Matrix3D<unsigned int>;       ///< `unsigned int` matrix
-    using Mat3F   = Matrix3D<float>;              ///< `float` matrix
-    using Mat3L   = Matrix3D<long long>;          ///< `long long` matrix
-    using Mat3D   = Matrix3D<double>;             ///< `double` matrix
-    using Mat3ULL = Matrix3D<unsigned long long>; ///< `unsigned long long` matrix
+    using Mat3B   = Matrix3D<int8_t>;   ///< Signed Byte (8-bit) matrix
+    using Mat3UB  = Matrix3D<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
+    using Mat3I   = Matrix3D<int32_t>;  ///< Signed Int (32-bit) matrix
+    using Mat3U   = Matrix3D<uint32_t>; ///< Unsigned Int (32-bit) matrix
+    using Mat3F   = Matrix3D<float>;    ///< Single Precision Floating Point (32-bit) matrix
+    using Mat3LL  = Matrix3D<int64_t>;  ///< Signed Long Long (64-bit) matrix
+    using Mat3D   = Matrix3D<double>;   ///< Double Precision Floating Point (64-bit) matrix
+    using Mat3ULL = Matrix3D<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
 
     /** @} */
 

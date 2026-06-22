@@ -28,7 +28,7 @@
 #include "fgm/vectors/Vector2D.h"
 
 #include <array>
-// #include <cstddef>
+#include <cstdint>
 #include <type_traits>
 
 // TODO: Rotate around a point
@@ -1186,13 +1186,14 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using Mat2B   = Matrix2D<bool>;               ///< `bool` matrix
-    using Mat2I   = Matrix2D<int>;                ///< `int` matrix
-    using Mat2U   = Matrix2D<unsigned int>;       ///< `unsigned int` matrix
-    using Mat2F   = Matrix2D<float>;              ///< `float` matrix
-    using Mat2LL  = Matrix2D<long long>;          ///< `long long` matrix
-    using Mat2D   = Matrix2D<double>;             ///< `double` matrix
-    using Mat2ULL = Matrix2D<unsigned long long>; ///< `unsigned long long` matrix
+    using Mat2B   = Matrix2D<int8_t>;   ///< Signed Byte (8-bit) matrix
+    using Mat2UB  = Matrix2D<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
+    using Mat2I   = Matrix2D<int32_t>;  ///< Signed Int (32-bit) matrix
+    using Mat2U   = Matrix2D<uint32_t>; ///< Unsigned Int (32-bit) matrix
+    using Mat2F   = Matrix2D<float>;    ///< Single Precision Floating Point (32-bit) matrix
+    using Mat2LL  = Matrix2D<int64_t>;  ///< Signed Long Long (64-bit) matrix
+    using Mat2D   = Matrix2D<double>;   ///< Double Precision Floating Point (64-bit) matrix
+    using Mat2ULL = Matrix2D<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
 
     /** @} */
 
