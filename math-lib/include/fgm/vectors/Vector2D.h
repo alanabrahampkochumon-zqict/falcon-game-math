@@ -2176,14 +2176,14 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using Vec2B   = Vector2D<bool>;               ///< `bool` vector
-    using Vec2UB  = Vector2D<uint8_t>;            ///< 8-bit unsigned int vector
-    using Vec2I   = Vector2D<int>;                ///< `int` vector
-    using Vec2U   = Vector2D<unsigned int>;       ///< `unsigned int` vector
-    using Vec2F   = Vector2D<float>;              ///< `float` vector
-    using Vec2LL  = Vector2D<long long>;          ///< `long long` vector
-    using Vec2D   = Vector2D<double>;             ///< `double` vector
-    using Vec2ULL = Vector2D<unsigned long long>; ///< `unsigned long long` vector
+    using Vec2B   = Vector2D<int8_t>;   ///< Signed Byte (8-bit) vector
+    using Vec2UB  = Vector2D<uint8_t>;  ///< Unsigned Byte (8-bit) vector
+    using Vec2I   = Vector2D<int32_t>;  ///< Signed Int (32-bit) vector
+    using Vec2U   = Vector2D<uint32_t>; ///< Unsigned Int (32-bit) vector
+    using Vec2F   = Vector2D<float>;    ///< Single Precision Floating Point (32-bit) vector
+    using Vec2LL  = Vector2D<int64_t>;  ///< Signed Long Long (64-bit) vector
+    using Vec2D   = Vector2D<double>;   ///< Double Precision Floating Point (64-bit) vector
+    using Vec2ULL = Vector2D<uint64_t>; ///< Unsigned Long Long (64-bit) vector
 
     /** @} */
 

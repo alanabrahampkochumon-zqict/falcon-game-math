@@ -27,6 +27,7 @@
 #include "fgm/common/Types.h"
 
 #include <array>
+#include <cstdint>
 #include <iomanip>
 #include <type_traits>
 
@@ -2271,14 +2272,14 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using Vec3B   = Vector3D<bool>;               ///< `bool` vector
-    using Vec3UB  = Vector3D<uint8_t>;            ///< 8-bit unsigned int vector
-    using Vec3I   = Vector3D<int>;                ///< `int` vector
-    using Vec3U   = Vector3D<unsigned int>;       ///< `unsigned int` vector
-    using Vec3F   = Vector3D<float>;              ///< `float` vector
-    using Vec3LL  = Vector3D<long long>;          ///< `long long` vector
-    using Vec3D   = Vector3D<double>;             ///< `double` vector
-    using Vec3ULL = Vector3D<unsigned long long>; ///< `unsigned long long` vector
+    using Vec3B   = Vector3D<int8_t>;   ///< Signed Byte (8-bit) vector
+    using Vec3UB  = Vector3D<uint8_t>;  ///< Unsigned Byte (8-bit) vector
+    using Vec3I   = Vector3D<int32_t>;  ///< Signed Int (32-bit) vector
+    using Vec3U   = Vector3D<uint32_t>; ///< Unsigned Int (32-bit) vector
+    using Vec3F   = Vector3D<float>;    ///< Single Precision Floating Point (32-bit) vector
+    using Vec3LL  = Vector3D<int64_t>;  ///< Signed Long Long (64-bit) vector
+    using Vec3D   = Vector3D<double>;   ///< Double Precision Floating Point (64-bit) vector
+    using Vec3ULL = Vector3D<uint64_t>; ///< Unsigned Long Long (64-bit) vector
 
     /** @} */
 

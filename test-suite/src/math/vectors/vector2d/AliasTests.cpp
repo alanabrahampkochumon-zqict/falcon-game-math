@@ -11,45 +11,53 @@
 
 #include "Vector2DTestSetup.h"
 
+#include <cstdint>
+
+
 
 /**
  * @addtogroup T_FGM_Vec2_Alias
  * @{
  */
 
-/** @brief Verify that fgm::*Vec2 and fgm::vec4 are alias wrappers for integral and floating-point 2D vector. */
+/** @brief Verify that fgm::Vec2[] are alias wrappers for integral and floating-point 2D vector. */
 namespace
 {
-    static_assert(std::is_same_v<fgm::Vec2B::value_type, bool> && "bVec2 must contain boolean elements");
-    static_assert(std::is_same_v<fgm::Vec2B, fgm::Vector2D<bool>> && "bVec2 must be an alias of Vector2D<bool>");
+    static_assert(std::is_same_v<fgm::Vec2B::value_type, int8_t> && "Vec2B must contain int8_t elements");
+    static_assert(std::is_same_v<fgm::Vec2B, fgm::Vector2D<int8_t>> && "Vec2B must be an alias of Vector2D<int8_t>");
 
 
-    static_assert(std::is_same_v<fgm::Vec2I::value_type, int> && "iVec2 must contain int elements");
-    static_assert(std::is_same_v<fgm::Vec2I, fgm::Vector2D<int>> && "iVec2 must be an alias of Vector2D<int>");
+    static_assert(std::is_same_v<fgm::Vec2UB::value_type, uint8_t> && "Vec2UB must contain uint8_t elements");
+    static_assert(std::is_same_v<fgm::Vec2UB, fgm::Vector2D<uint8_t>> &&
+                  "Vec2UB must be an alias of Vector2D<uint8_t>");
 
 
-    static_assert(std::is_same_v<fgm::Vec2U::value_type, unsigned int> && "uVec2 must contain unsigned int elements");
-    static_assert(std::is_same_v<fgm::Vec2U, fgm::Vector2D<unsigned int>> &&
-                  "uVec2 must be an alias of Vector2D<unsigned int>");
+    static_assert(std::is_same_v<fgm::Vec2I::value_type, int32_t> && "Vec2I must contain int32_t elements");
+    static_assert(std::is_same_v<fgm::Vec2I, fgm::Vector2D<int32_t>> && "Vec2I must be an alias of Vector2D<int32_t>");
 
 
-    static_assert(std::is_same_v<fgm::Vec2F::value_type, float> && "vec2 must contain float elements");
-    static_assert(std::is_same_v<fgm::Vec2F, fgm::Vector2D<float>> && "vec2 must be an alias of Vector2D<float>");
+    static_assert(std::is_same_v<fgm::Vec2U::value_type, uint32_t> && "Vec2U must contain uint32_t elements");
+    static_assert(std::is_same_v<fgm::Vec2U, fgm::Vector2D<uint32_t>> &&
+                  "Vec2U must be an alias of Vector2D<uint32_t>");
 
 
-    static_assert(std::is_same_v<fgm::Vec2LL::value_type, long long> && "lVec2 must contain long long elements");
-    static_assert(std::is_same_v<fgm::Vec2LL, fgm::Vector2D<long long>> &&
-                  "lVec2 must be an alias of Vector2D<long long>");
+    static_assert(std::is_same_v<fgm::Vec2F::value_type, float> &&
+                  "Vec2F must contain single precision floating point elements");
+    static_assert(std::is_same_v<fgm::Vec2F, fgm::Vector2D<float>> && "Vec2F must be an alias of Vector2D<float>");
 
 
-    static_assert(std::is_same_v<fgm::Vec2D::value_type, double> && "dVec2 must contain double elements");
-    static_assert(std::is_same_v<fgm::Vec2D, fgm::Vector2D<double>> && "dVec2 must be an alias of Vector2D<double>");
+    static_assert(std::is_same_v<fgm::Vec2LL::value_type, int64_t> && "Vec2LL must contain int64_t elements");
+    static_assert(std::is_same_v<fgm::Vec2LL, fgm::Vector2D<int64_t>> && "Vec2LL must be an alias of Vector2D<int64_t>");
 
 
-    static_assert(std::is_same_v<fgm::Vec2ULL::value_type, unsigned long long> &&
-                  "ulVec2 must contain unsigned long long elements");
-    static_assert(std::is_same_v<fgm::Vec2ULL, fgm::Vector2D<unsigned long long>> &&
-                  "ulVec2 must be an alias of Vector2D<unsigned long long>");
+    static_assert(std::is_same_v<fgm::Vec2D::value_type, double> &&
+                  "Vec2D must contain double precision floating point elements");
+    static_assert(std::is_same_v<fgm::Vec2D, fgm::Vector2D<double>> && "Vec2D must be an alias of Vector2D<double>");
+
+
+    static_assert(std::is_same_v<fgm::Vec2ULL::value_type, uint64_t> && "Vec2ULL must contain uint64_t elements");
+    static_assert(std::is_same_v<fgm::Vec2ULL, fgm::Vector2D<uint64_t>> &&
+                  "Vec2ULL must be an alias of Vector2D<uint64_t>");
 } // namespace
 
 /** @} */
