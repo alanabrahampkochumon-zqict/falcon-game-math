@@ -2287,13 +2287,13 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bVec4  = Vector4D<bool>;               ///< `bool` vector
-    using iVec4  = Vector4D<int>;                ///< `int` vector
-    using uVec4  = Vector4D<unsigned int>;       ///< `unsigned int` vector
-    using vec4   = Vector4D<float>;              ///< `float` vector
-    using lVec4  = Vector4D<long long>;          ///< `long long` vector
-    using dVec4  = Vector4D<double>;             ///< `double` vector
-    using ulVec4 = Vector4D<unsigned long long>; ///< `unsigned long long` vector
+    using Vec4B  = Vector4D<bool>;               ///< `bool` vector
+    using Vec4I  = Vector4D<int>;                ///< `int` vector
+    using Vec4U  = Vector4D<unsigned int>;       ///< `unsigned int` vector
+    using Vec4F  = Vector4D<float>;              ///< `float` vector
+    using Vec4LL = Vector4D<long long>;          ///< `long long` vector
+    using Vec4D  = Vector4D<double>;             ///< `double` vector
+    using Vec4UL = Vector4D<unsigned long long>; ///< `unsigned long long` vector
 
     /** @} */
 

@@ -2176,13 +2176,13 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bVec2  = Vector2D<bool>;               ///< `bool` vector
-    using iVec2  = Vector2D<int>;                ///< `int` vector
-    using uVec2  = Vector2D<unsigned int>;       ///< `unsigned int` vector
-    using vec2   = Vector2D<float>;              ///< `float` vector
-    using lVec2  = Vector2D<long long>;          ///< `long long` vector
-    using dVec2  = Vector2D<double>;             ///< `double` vector
-    using ulVec2 = Vector2D<unsigned long long>; ///< `unsigned long long` vector
+    using Vec2B   = Vector2D<bool>;               ///< `bool` vector
+    using Vec2I   = Vector2D<int>;                ///< `int` vector
+    using Vec2U   = Vector2D<unsigned int>;       ///< `unsigned int` vector
+    using Vec2F   = Vector2D<float>;              ///< `float` vector
+    using Vec2LL  = Vector2D<long long>;          ///< `long long` vector
+    using Vec2D   = Vector2D<double>;             ///< `double` vector
+    using Vec2ULL = Vector2D<unsigned long long>; ///< `unsigned long long` vector
 
     /** @} */
 

@@ -1242,7 +1242,7 @@ namespace fgm
 
 
 
-         /**
+        /**
          * @addtogroup FGM_Vec3_Dist
          * @{
          */
@@ -2271,13 +2271,13 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using bVec3  = Vector3D<bool>;               ///< `bool` vector
-    using iVec3  = Vector3D<int>;                ///< `int` vector
-    using uVec3  = Vector3D<unsigned int>;       ///< `unsigned int` vector
-    using vec3   = Vector3D<float>;              ///< `float` vector
-    using lVec3  = Vector3D<long long>;          ///< `long long` vector
-    using dVec3  = Vector3D<double>;             ///< `double` vector
-    using ulVec3 = Vector3D<unsigned long long>; ///< `unsigned long long` vector
+    using Vec3B   = Vector3D<bool>;               ///< `bool` vector
+    using Vec3I   = Vector3D<int>;                ///< `int` vector
+    using Vec3U   = Vector3D<unsigned int>;       ///< `unsigned int` vector
+    using Vec3F   = Vector3D<float>;              ///< `float` vector
+    using Vec3LL  = Vector3D<long long>;          ///< `long long` vector
+    using Vec3D   = Vector3D<double>;             ///< `double` vector
+    using Vec3ULL = Vector3D<unsigned long long>; ///< `unsigned long long` vector
 
     /** @} */
 

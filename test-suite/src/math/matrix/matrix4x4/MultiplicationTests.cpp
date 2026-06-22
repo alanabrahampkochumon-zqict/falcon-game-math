@@ -460,9 +460,9 @@ TYPED_TEST(Matrix4DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
 TEST(Matrix4DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
     const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
-    const fgm::vec4 vec{ 2.0f, 1.0f, 2.5f, 12.5f };
+    const fgm::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
 
-    const fgm::vec4 transformedVector = iMatrix * vec;
+    const fgm::Vec4F transformedVector = iMatrix * vec;
 
     EXPECT_VEC_EQ(vec, transformedVector);
 }
@@ -475,7 +475,7 @@ TEST(Matrix4DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
 TEST(Matrix4DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
     const fgm::Matrix4D mat{ 1.0, 2.0, 3.0, 4.0 };
-    const fgm::iVec4 vec{ 2, 1, 3, 4 };
+    const fgm::Vec4I vec{ 2, 1, 3, 4 };
 
     [[maybe_unused]] const auto transformedVector = mat * vec;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -518,9 +518,9 @@ TYPED_TEST(Matrix4DVectorFractionalMultiplication, VectorTimesMatrixReturnsATran
 TEST(Matrix4DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
 {
     const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
-    const fgm::vec4 vec{ 2.0f, 1.0f, 2.5f, 12.5f };
+    const fgm::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
 
-    const fgm::vec4 transformedVector = vec * iMatrix;
+    const fgm::Vec4F transformedVector = vec * iMatrix;
 
     EXPECT_VEC_EQ(vec, transformedVector);
 }
@@ -534,7 +534,7 @@ TEST(Matrix4DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVecto
 TEST(Matrix4DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationPromotesType)
 {
     const fgm::Matrix4D mat{ 1.0, 2.0, 3.0, 4.0 };
-    const fgm::iVec4 vec{ 2, 1, 3, 4 };
+    const fgm::Vec4I vec{ 2, 1, 3, 4 };
 
     [[maybe_unused]] const auto transformedVector = vec * mat;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -567,7 +567,7 @@ TYPED_TEST(Matrix4DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
 TEST(Matrix4DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
 {
     const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
-    fgm::vec4 vec{ 2.0f, 1.0f, 3.0f, 12.0f };
+    fgm::Vec4F vec{ 2.0f, 1.0f, 3.0f, 12.0f };
 
     vec *= iMatrix;
 
@@ -582,7 +582,7 @@ TEST(Matrix4DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
 TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
     const fgm::Matrix4D<double> iMatrix = fgm::mat4d::eye<double>;
-    [[maybe_unused]] fgm::iVec4 vec{ 2, 1, 5, 4 };
+    [[maybe_unused]] fgm::Vec4I vec{ 2, 1, 5, 4 };
 
     (void) (vec *= iMatrix);
     static_assert(std::is_same_v<decltype(vec)::value_type, int>);

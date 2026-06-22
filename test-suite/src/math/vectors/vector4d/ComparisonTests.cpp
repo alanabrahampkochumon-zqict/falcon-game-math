@@ -33,7 +33,7 @@ class Vector4DComparison: public ::testing::Test
 protected:
     fgm::Vector4D<T> _vecA;
     fgm::Vector4D<T> _vecB;
-    fgm::bVec4 _expectedGT, _expectedGTE, _expectedLT,
+    fgm::Vec4B _expectedGT, _expectedGTE, _expectedLT,
         _expectedLTE; // GT-> Greater Than, GTE-> Greater Than or Equal, LT -> Less than, LTE -> Less than or equal
 
     void SetUp() override

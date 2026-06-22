@@ -368,9 +368,9 @@ TYPED_TEST(Matrix2DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
 TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
     const fgm::Matrix2D<float> iMatrix = fgm::mat2d::eye<float>;
-    const fgm::vec2 vec(2.0f, 1.0f);
+    const fgm::Vec2F vec(2.0f, 1.0f);
 
-    const fgm::vec2 transformedVector = iMatrix * vec;
+    const fgm::Vec2F transformedVector = iMatrix * vec;
 
     EXPECT_VEC_EQ(vec, transformedVector);
 }
@@ -383,7 +383,7 @@ TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
 TEST(Matrix2DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
     const fgm::Matrix2D mat(1.0, 2.0);
-    const fgm::iVec2 vec(2, 1);
+    const fgm::Vec2I vec(2, 1);
 
     [[maybe_unused]] const auto transformedVector = mat * vec;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -426,9 +426,9 @@ TYPED_TEST(Matrix2DVectorFractionalMultiplication, VectorTimesMatrixReturnsATran
 TEST(Matrix2DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
 {
     const fgm::Matrix2D<float> iMatrix = fgm::mat2d::eye<float>;
-    const fgm::vec2 vec(2.0f, 1.0f);
+    const fgm::Vec2F vec(2.0f, 1.0f);
 
-    const fgm::vec2 transformedVector = vec * iMatrix;
+    const fgm::Vec2F transformedVector = vec * iMatrix;
 
     EXPECT_VEC_EQ(vec, transformedVector);
 }
@@ -442,7 +442,7 @@ TEST(Matrix2DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVecto
 TEST(Matrix2DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationPromotesType)
 {
     const fgm::Matrix2D mat(1.0, 2.0);
-    const fgm::iVec2 vec(2, 1);
+    const fgm::Vec2I vec(2, 1);
 
     [[maybe_unused]] const auto transformedVector = vec * mat;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -475,7 +475,7 @@ TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
 TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
 {
     const auto iMatrix = fgm::mat2d::eye<float>;
-    fgm::vec2 vec(2.0f, 1.0f);
+    fgm::Vec2F vec(2.0f, 1.0f);
 
     vec *= iMatrix;
 
@@ -490,7 +490,7 @@ TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
 TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
     const fgm::Matrix2D<double> iMatrix = fgm::mat2d::eye<double>;
-    [[maybe_unused]] fgm::iVec2 vec(2, 1);
+    [[maybe_unused]] fgm::Vec2I vec(2, 1);
 
     (void) (vec *= iMatrix);
     static_assert(std::is_same_v<decltype(vec)::value_type, int>);

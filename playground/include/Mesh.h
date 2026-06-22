@@ -19,9 +19,9 @@ namespace demo
     class Mesh
     {
     public:
-        std::vector<fgm::vec3> vertices{};
+        std::vector<fgm::Vec3F> vertices{};
         // std::vector<fgm::Vector3D<int>> colors{};
-        std::vector<fgm::iVec3> indices{};
+        std::vector<fgm::Vec3I> indices{};
         std::vector<fgm::Vec3<uint8_t>> colors{};
         float minVertexValue{ fgm::constants::INFINITY_F }, maxVertexValue{ -fgm::constants::INFINITY_F };
     };
