@@ -168,13 +168,17 @@ namespace demo
         // minValue-> Lowest vertex value
         // maxValue -> Highest vertex value
         template <typename T>
-        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec, float minValue, float maxValue) const
+        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec, const fgm::Vec3F& minValueVec,
+                                   const fgm::Vec3F& maxValueVec) const
         {
             // TODO: Remove
             const auto factorX = 2;
             const auto factorY = 2;
-            return fgm::Vec2<T>{ static_cast<T>((vec.x() - minValue) * width / factorX / maxValue),
-                                 static_cast<T>((vec.y() - minValue) * height / factorY / maxValue) };
+            // TODO: Separate screen space to NDC(-1 to 1)
+            return fgm::Vec2<T>{
+                width - static_cast<T>((vec.x() - minValueVec.x()) * width / factorX / (maxValueVec.x() - minValueVec.x())),
+                height - static_cast<T>((vec.y() - minValueVec.y()) * height / factorY / (maxValueVec.y() - minValueVec.y()))
+            };
         }
 
 
@@ -272,8 +276,10 @@ namespace demo
                 const auto i1 = static_cast<std::size_t>(index.y());
                 const auto i2 = static_cast<std::size_t>(index.z());
                 // FIXME: Test code
-                const auto faceColor = mesh.colors[i++];
-                renderTriangle(vertices[i0], vertices[i1], vertices[i2], faceColor.r(), faceColor.g(), faceColor.b(),
+                // const auto faceColor = mesh.colors[i++];
+                // renderTriangle(vertices[i0], vertices[i1], vertices[i2], faceColor.r(), faceColor.g(), faceColor.b(),
+                //                0xff);
+                renderTriangle(vertices[i0], vertices[i1], vertices[i2], 0xff, 0xff, 0xff,
                                0xff);
                 // renderTriangleWireframe(vertices[i0], vertices[i1], vertices[i2]);
             }

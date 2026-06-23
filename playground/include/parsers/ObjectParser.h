@@ -68,8 +68,8 @@ namespace demo
                         const auto [ptr, ec] =
                             fast_float::from_chars(token.data(), token.data() + token.size(), vertex);
                         // Update the mesh's current min and max value
-                        mesh.minVertexValue = std::min(mesh.minVertexValue, vertex);
-                        mesh.maxVertexValue = std::max(mesh.maxVertexValue, vertex);
+                        mesh.minVertexValue[index] = std::min(mesh.minVertexValue[index], vertex);
+                        mesh.maxVertexValue[index] = std::max(mesh.maxVertexValue[index], vertex);
                         if (ec != std::errc())
                         {
                             std::cout << "There was an error while parsing the vertex data.\n";

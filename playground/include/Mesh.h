@@ -23,6 +23,7 @@ namespace demo
         // std::vector<fgm::Vector3D<int>> colors{};
         std::vector<fgm::Vec3I> indices{};
         std::vector<fgm::Vec3<uint8_t>> colors{};
-        float minVertexValue{ fgm::constants::INFINITY_F }, maxVertexValue{ -fgm::constants::INFINITY_F };
+        fgm::Vec3F minVertexValue{ fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F },
+            maxVertexValue{ -fgm::constants::INFINITY_F, -fgm::constants::INFINITY_F, -fgm::constants::INFINITY_F };
     };
 } // namespace demo
