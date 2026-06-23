@@ -172,12 +172,10 @@ namespace demo
                                    const fgm::Vec3F& maxValueVec) const
         {
             // TODO: Remove
-            const auto factorX = 2;
-            const auto factorY = 2;
             // TODO: Separate screen space to NDC(-1 to 1)
             return fgm::Vec2<T>{
-                width - static_cast<T>((vec.x() - minValueVec.x()) * width / factorX / (maxValueVec.x() - minValueVec.x())),
-                height - static_cast<T>((vec.y() - minValueVec.y()) * height / factorY / (maxValueVec.y() - minValueVec.y()))
+                width - static_cast<T>((vec.x() - minValueVec.x()) * width / (maxValueVec.x() - minValueVec.x())),
+                height - static_cast<T>((vec.y() - minValueVec.y()) * height / (maxValueVec.y() - minValueVec.y()))
             };
         }
 
@@ -214,6 +212,11 @@ namespace demo
             const auto isTopLeft1 = isTopLeftEdge(v1, v2);
             const auto isTopLeft2 = isTopLeftEdge(v2, v0);
 
+            const auto bias0 = isTopLeft0 * EPSILON;
+            const auto bias1 = isTopLeft1 * EPSILON;
+            const auto bias2 = isTopLeft2 * EPSILON;
+
+
             // Looping in reverse order for better cache locality
             for (auto y = y0; y <= y1; ++y)
             {
@@ -224,9 +227,14 @@ namespace demo
                     const auto point = fgm::Vector2D(static_cast<float>(x), static_cast<float>(y));
 
 
-                    const bool eC0 = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
-                    const bool eC1 = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
-                    const bool eC2 = edgeCross(vert2D2, vert2D0, point) - (isTopLeft2 * EPSILON) >= EPSILON;
+                    // const bool eC0 = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
+                    // const bool eC1 = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
+                    // const bool eC2 = edgeCross(vert2D2, vert2D0, point) - (isTopLeft2 * EPSILON) >= EPSILON;
+
+                    // A comparison of anything other than 0.0f, like 1e-5 or 1e-10 will cause visual glitches
+                    const bool eC0 = edgeCross(vert2D0, vert2D1, point) - bias0 >= 0.0f;
+                    const bool eC1 = edgeCross(vert2D1, vert2D2, point) - bias1 >= 0.0f;
+                    const bool eC2 = edgeCross(vert2D2, vert2D0, point) - bias2 >= 0.0f;
 
                     if (eC0 && eC1 && eC2)
                     {
@@ -276,11 +284,10 @@ namespace demo
                 const auto i1 = static_cast<std::size_t>(index.y());
                 const auto i2 = static_cast<std::size_t>(index.z());
                 // FIXME: Test code
-                // const auto faceColor = mesh.colors[i++];
-                // renderTriangle(vertices[i0], vertices[i1], vertices[i2], faceColor.r(), faceColor.g(), faceColor.b(),
-                //                0xff);
-                renderTriangle(vertices[i0], vertices[i1], vertices[i2], 0xff, 0xff, 0xff,
+                const auto faceColor = mesh.colors[i++];
+                renderTriangle(vertices[i0], vertices[i1], vertices[i2], faceColor.r(), faceColor.g(), faceColor.b(),
                                0xff);
+                // renderTriangle(vertices[i0], vertices[i1], vertices[i2], 0xff, 0xff, 0xff, 0xff);
                 // renderTriangleWireframe(vertices[i0], vertices[i1], vertices[i2]);
             }
         }
