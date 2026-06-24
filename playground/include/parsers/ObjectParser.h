@@ -43,7 +43,6 @@ namespace demo
                 std::cout << "Error opening file! Returning a default mesh.\n";
             }
 
-            // TODO: Start with object parsing
             std::cout << "Parsing Mesh: " << filename << "...\n";
             std::string line;
             while (std::getline(modelStream, line))

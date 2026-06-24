@@ -70,15 +70,7 @@ namespace demo
             // auto modelPath = std::filesystem::path("models") / "Cube.obj";
             ObjectParser parser;
             auto mesh = parser.parse(modelPath.string());
-            // Mesh mesh;
 
-            // mesh.vertices = { fgm::vec3{ 10.0f, 2.0f, 1.0f }, fgm::vec3{ 240.0f, 300.0f, 1.0f },
-            //                   fgm::vec3{ 10.0f, 580.0f, 1.0f }, fgm::vec3{ 700.0f, 550.0f, 1.0f } };
-            // mesh.vertices = { fgm::vec3{ 0.0078125f, 0.0027778f, 1.0f }, fgm::vec3{ 0.1875f, 0.41667f, 1.0f },
-            //                   fgm::vec3{ 0.0078125f, 0.80555f, 1.0f }, fgm::vec3{ 0.546875f, 0.763888f, 1.0f } };
-            // mesh.indices  = { fgm::iVec3{ 0, 1, 2 }, fgm::iVec3{ 1, 3, 2 } };
-            // mesh.minVertexValue = 0.0f;
-            // mesh.maxVertexValue = 1.0f;
             _isRunning = true;
 
             SDL_Surface* renderingSurface = SDL_GetWindowSurface(_window);
@@ -93,8 +85,6 @@ namespace demo
                 SDL_BlitSurface(imageSurface, nullptr, renderingSurface, nullptr);
                 SDL_UpdateWindowSurface(_window);
                 pollEvent();
-                // FIXME: Remove thread sleep
-                // std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
         }
     };
