@@ -49,7 +49,7 @@ namespace demo
          */
         Renderer(const int w, const int h, const int numColorChannels)
             : frameBuffer(new uint8_t[static_cast<std::size_t>(w * h * numColorChannels)]),
-              depthBuffer(new uint8_t[static_cast<std::size_t>(w * h * numColorChannels)]),
+              depthBuffer(new uint8_t[static_cast<std::size_t>(w * h)]),
               width(w),
               height(h),
               colorChannels(numColorChannels)
@@ -146,6 +146,19 @@ namespace demo
                                            .gamma = gammaArea / triArea };
         }
 
+        BarycentricCoordinates computeBaryCentricCoordinates(const fgm::Vec2F& v0, const fgm::Vec2F& v1,
+                                                             const fgm::Vec2F& v2, const fgm::Vec2F& point,
+                                                             const float triArea)
+        {
+            const auto alphaArea = 0.5f * (v2 - v1).cross(point - v1);
+            const auto betaArea  = 0.5f * (v0 - v2).cross(point - v2);
+            const auto gammaArea = 0.5f * (v1 - v0).cross(point - v0);
+
+            return BarycentricCoordinates{ .alpha = alphaArea / triArea,
+                                           .beta  = betaArea / triArea,
+                                           .gamma = gammaArea / triArea };
+        }
+
 
         /**
          * @brief Compute if the edge formed by @p v0 and @p v1 is a left or top edge.
@@ -168,24 +181,34 @@ namespace demo
         // minValue-> Lowest vertex value
         // maxValue -> Highest vertex value
         template <typename T>
-        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec, const fgm::Vec3F& minValueVec,
-                                   const fgm::Vec3F& maxValueVec) const
+        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec) const
         {
-            // TODO: Remove
-            // TODO: Separate screen space to NDC(-1 to 1)
             return fgm::Vec2<T>{
-                width - static_cast<T>((vec.x() - minValueVec.x()) * width / (maxValueVec.x() - minValueVec.x())),
-                height - static_cast<T>((vec.y() - minValueVec.y()) * height / (maxValueVec.y() - minValueVec.y()))
+                width - vec.x() * width,
+                height - vec.y() * height,
             };
+        }
+
+
+        template <typename T>
+        static fgm::Vec3<T> toNDC(const fgm::Vec3<T>& vec, const fgm::Vec3F& minValueVec, const fgm::Vec3F& maxValueVec)
+        {
+            return fgm::Vec3<T>{ static_cast<T>((vec.x() - minValueVec.x()) / (maxValueVec.x() - minValueVec.x())),
+                                 static_cast<T>((vec.y() - minValueVec.y()) / (maxValueVec.y() - minValueVec.y())),
+                                 static_cast<T>((vec.z() - minValueVec.z()) / (maxValueVec.z() - minValueVec.z())) };
         }
 
 
         // TODO: Add docs
         template <typename T>
-        void renderTriangle(const fgm::Vec2<T>& v0, const fgm::Vec2<T>& v1, const fgm::Vec2<T>& v2,
+        void renderTriangle(const fgm::Vec3<T>& v0, const fgm::Vec3<T>& v1, const fgm::Vec3<T>& v2,
                             const uint8_t r = 0xff, const uint8_t g = 0xff, const uint8_t b = 0xff,
                             const uint8_t a = 0xff)
         {
+
+            const auto projV0 = toScreenSpace(v0);
+            const auto projV1 = toScreenSpace(v1);
+            const auto projV2 = toScreenSpace(v2);
 
             // Calculate the bounding box of the triangle
             // (minX, minY)--------
@@ -197,22 +220,25 @@ namespace demo
             //       |    \ \/    |
             //       |     \/     |
             //       --------(maxX, maxY)
-            const auto x0 = static_cast<std::size_t>(std::min({ v0.x(), v1.x(), v2.x() }));
-            const auto y0 = static_cast<std::size_t>(std::min({ v0.y(), v1.y(), v2.y() }));
-            const auto x1 = static_cast<std::size_t>(std::max({ v0.x(), v1.x(), v2.x() }));
-            const auto y1 = static_cast<std::size_t>(std::max({ v0.y(), v1.y(), v2.y() }));
+            const auto x0 = static_cast<std::size_t>(std::min({ projV0.x(), projV1.x(), projV2.x() }));
+            const auto y0 = static_cast<std::size_t>(std::min({ projV0.y(), projV1.y(), projV2.y() }));
+            const auto x1 = static_cast<std::size_t>(std::max({ projV0.x(), projV1.x(), projV2.x() }));
+            const auto y1 = static_cast<std::size_t>(std::max({ projV0.y(), projV1.y(), projV2.y() }));
 
 
-            const auto triArea   = (v1 - v0).cross(v2 - v1);
+
+            const auto triArea = (projV1 - projV0).cross(projV2 - projV1);
 
             // Backface culling
             if (triArea < 0) // Triangle is inverted or less than 1 px
+            {
                 return;
+            }
 
             // Compute top left for each edge (vertex pair)
-            const auto isTopLeft0 = isTopLeftEdge(v0, v1);
-            const auto isTopLeft1 = isTopLeftEdge(v1, v2);
-            const auto isTopLeft2 = isTopLeftEdge(v2, v0);
+            const auto isTopLeft0 = isTopLeftEdge(projV0, projV1);
+            const auto isTopLeft1 = isTopLeftEdge(projV1, projV2);
+            const auto isTopLeft2 = isTopLeftEdge(projV2, projV0);
 
             const auto bias0 = isTopLeft0 * EPSILON;
             const auto bias1 = isTopLeft1 * EPSILON;
@@ -224,34 +250,40 @@ namespace demo
             {
                 for (auto x = x0; x <= x1; ++x)
                 {
-                    const auto offset =
-                        static_cast<std::size_t>(colorChannels) * (y * static_cast<std::size_t>(width) + x);
-                    const auto point = fgm::Vector2D(static_cast<float>(x), static_cast<float>(y));
+                    const auto offset      = y * static_cast<std::size_t>(width) + x;
+                    const auto colorOffset = static_cast<std::size_t>(colorChannels) * offset;
+                    const auto point       = fgm::Vector2D(static_cast<float>(x), static_cast<float>(y));
+
+                    const auto [alpha, beta, gamma] =
+                        computeBaryCentricCoordinates(projV0, projV1, projV2, point, triArea);
 
 
                     // A comparison of anything other than 0.0f, like 1e-5 or 1e-10 will cause visual glitches
-                    const bool eC0 = edgeCross(v0, v1, point) - bias0 >= 0.0f;
-                    const bool eC1 = edgeCross(v1, v2, point) - bias1 >= 0.0f;
-                    const bool eC2 = edgeCross(v2, v0, point) - bias2 >= 0.0f;
+                    const bool eC0 = edgeCross(projV0, projV1, point) - bias0 >= 0.0f;
+                    const bool eC1 = edgeCross(projV1, projV2, point) - bias1 >= 0.0f;
+                    const bool eC2 = edgeCross(projV2, projV0, point) - bias2 >= 0.0f;
 
                     if (eC0 && eC1 && eC2)
                     {
                         if constexpr (std::endian::native == std::endian::big)
                         {
-                            // RGBA
-                            frameBuffer[offset]     = r;
-                            frameBuffer[offset + 1] = g;
-                            frameBuffer[offset + 2] = b;
-                            frameBuffer[offset + 3] = a;
+                            // ARGB
+                            frameBuffer[colorOffset]     = r;
+                            frameBuffer[colorOffset + 1] = g;
+                            frameBuffer[colorOffset + 2] = b;
+                            frameBuffer[colorOffset + 3] = a;
                         }
                         else if constexpr (std::endian::native == std::endian::little)
                         {
-                            // BRGA
-                            frameBuffer[offset]     = b;
-                            frameBuffer[offset + 1] = g;
-                            frameBuffer[offset + 2] = r;
-                            frameBuffer[offset + 3] = a;
+                            // BGRA
+                            frameBuffer[colorOffset]     = b;
+                            frameBuffer[colorOffset + 1] = g;
+                            frameBuffer[colorOffset + 2] = r;
+                            frameBuffer[colorOffset + 3] = a;
                         }
+
+                        // Populate the depth buffer
+                        depthBuffer[offset] = static_cast<uint8_t>(alpha * v0.z() + beta * v0.z() + gamma * v0.z());
                     }
                 }
             }
@@ -268,12 +300,17 @@ namespace demo
          */
         void render(const Mesh& mesh)
         {
-            std::vector<fgm::Vec2<float>> vertices;
+            std::vector<fgm::Vec3<float>> vertices;
 
             std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()),
-                           [this, mesh](const fgm::Vec3<float> vertex) {
-                               return toScreenSpace(vertex, mesh.minVertexValue, mesh.maxVertexValue);
+                           [mesh](const fgm::Vec3<float> vertex) {
+                               return toNDC(vertex, mesh.minVertexValue, mesh.maxVertexValue);
                            });
+
+            // std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()),
+            //                [this, mesh](const fgm::Vec3<float> vertex) {
+            //                    return toScreenSpace(vertex, mesh.minVertexValue, mesh.maxVertexValue);
+            //                });
 
             [[maybe_unused]] std::size_t i = 0;
             for (const auto& index : mesh.indices)

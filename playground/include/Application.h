@@ -73,6 +73,9 @@ namespace demo
 
             _isRunning = true;
 
+            // const auto bufferSize = static_cast<std::size_t>(_width * _height * 4);
+            // uint8_t* buffer = new uint8_t[bufferSize];
+
             SDL_Surface* renderingSurface = SDL_GetWindowSurface(_window);
             while (_isRunning)
             {
@@ -82,6 +85,33 @@ namespace demo
                 SDL_Surface* imageSurface =
                     SDL_CreateSurfaceFrom(_width, _height, renderingSurface->format, _renderer.frameBuffer,
                                           _renderer.width * _renderer.colorChannels);
+
+                // TODO: Remove test buffercode for depth buffer
+                // for (std::size_t i = 0; i < bufferSize; i+= 4)
+                // {
+                //     const auto depth = _renderer.depthBuffer[i/4];
+                //
+                //     if constexpr (std::endian::native == std::endian::big)
+                //     {
+                //         // RGBA
+                //         buffer[i] = depth;
+                //         buffer[i + 1] = depth;
+                //         buffer[i + 2] = depth;
+                //         buffer[i + 2] = 255u;
+                //     }
+                //     else if constexpr (std::endian::native == std::endian::little)
+                //     {
+                //         // BRGA
+                //         buffer[i] = depth;
+                //         buffer[i + 1] = depth;
+                //         buffer[i + 2] = depth;
+                //         buffer[i + 2] = 0xff;
+                //     }
+                // }
+                //
+                // SDL_Surface* imageSurface =
+                //     SDL_CreateSurfaceFrom(_width, _height, renderingSurface->format, buffer,
+                //                           _renderer.width * _renderer.colorChannels);
                 SDL_BlitSurface(imageSurface, nullptr, renderingSurface, nullptr);
                 SDL_UpdateWindowSurface(_window);
                 pollEvent();

@@ -85,7 +85,6 @@ namespace demo
 
                     // TODO: Figure out a way to reduce this temporary heap allocations
                     std::vector<int> temp;
-                    // temp.resize(indices);
                     for (auto d : d1)
                     {
                         // Note: Only taking the face indices for now
