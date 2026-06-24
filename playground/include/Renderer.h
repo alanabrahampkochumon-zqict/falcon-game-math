@@ -33,6 +33,11 @@ namespace demo
         float alpha, beta, gamma;
     };
 
+    struct BoundingBox
+    {
+        std::size_t top, left, right, bottom;
+    };
+
     class Renderer
     {
     public:
@@ -223,6 +228,16 @@ namespace demo
                                  static_cast<T>((vec.z() - minValueVec.z()) / (maxValueVec.z() - minValueVec.z())) };
         }
 
+        inline BoundingBox computeBoundingBox(const fgm::Vec2F& v0, const fgm::Vec2F& v1, const fgm::Vec2F& v2)
+        {
+            return BoundingBox{
+                .top    = static_cast<std::size_t>(std::min({ v0.y(), v1.y(), v2.y() })),
+                .left   = static_cast<std::size_t>(std::min({ v0.x(), v1.x(), v2.x() })),
+                .right  = static_cast<std::size_t>(std::max({ v0.x(), v1.x(), v2.x() })),
+                .bottom = static_cast<std::size_t>(std::max({ v0.y(), v1.y(), v2.y() })),
+            };
+        }
+
 
         // TODO: Add docs
         template <typename T>
@@ -245,10 +260,11 @@ namespace demo
             //       |    \ \/    |
             //       |     \/     |
             //       --------(maxX, maxY)
-            const auto x0 = static_cast<std::size_t>(std::min({ projV0.x(), projV1.x(), projV2.x() }));
-            const auto y0 = static_cast<std::size_t>(std::min({ projV0.y(), projV1.y(), projV2.y() }));
-            const auto x1 = static_cast<std::size_t>(std::max({ projV0.x(), projV1.x(), projV2.x() }));
-            const auto y1 = static_cast<std::size_t>(std::max({ projV0.y(), projV1.y(), projV2.y() }));
+            const auto bb = computeBoundingBox(projV0, projV1, projV2);
+            // const auto x0 = static_cast<std::size_t>(std::min({ projV0.x(), projV1.x(), projV2.x() }));
+            // const auto y0 = static_cast<std::size_t>(std::min({ projV0.y(), projV1.y(), projV2.y() }));
+            // const auto x1 = static_cast<std::size_t>(std::max({ projV0.x(), projV1.x(), projV2.x() }));
+            // const auto y1 = static_cast<std::size_t>(std::max({ projV0.y(), projV1.y(), projV2.y() }));
 
 
 
@@ -271,9 +287,9 @@ namespace demo
 
 
             // Looping in reverse order for better cache locality
-            for (auto y = y0; y <= y1; ++y)
+            for (auto y = bb.top; y <= bb.bottom; ++y)
             {
-                for (auto x = x0; x <= x1; ++x)
+                for (auto x = bb.left; x <= bb.right; ++x)
                 {
                     const auto offset      = y * static_cast<std::size_t>(width) + x;
                     const auto colorOffset = static_cast<std::size_t>(colorChannels) * offset;
