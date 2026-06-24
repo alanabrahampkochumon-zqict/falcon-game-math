@@ -209,11 +209,6 @@ namespace demo
             if (triArea < 0) // Triangle is inverted or less than 1 px
                 return;
 
-            // Get the 2D vertices
-            const auto vert2D0 = v0.template swizzle<fgm::axis::X, fgm::axis::Y>();
-            const auto vert2D1 = v1.template swizzle<fgm::axis::X, fgm::axis::Y>();
-            const auto vert2D2 = v2.template swizzle<fgm::axis::X, fgm::axis::Y>();
-
             // Compute top left for each edge (vertex pair)
             const auto isTopLeft0 = isTopLeftEdge(v0, v1);
             const auto isTopLeft1 = isTopLeftEdge(v1, v2);
@@ -234,14 +229,10 @@ namespace demo
                     const auto point = fgm::Vector2D(static_cast<float>(x), static_cast<float>(y));
 
 
-                    // const bool eC0 = edgeCross(vert2D0, vert2D1, point) - (isTopLeft0 * EPSILON) >= EPSILON;
-                    // const bool eC1 = edgeCross(vert2D1, vert2D2, point) - (isTopLeft1 * EPSILON) >= EPSILON;
-                    // const bool eC2 = edgeCross(vert2D2, vert2D0, point) - (isTopLeft2 * EPSILON) >= EPSILON;
-
                     // A comparison of anything other than 0.0f, like 1e-5 or 1e-10 will cause visual glitches
-                    const bool eC0 = edgeCross(vert2D0, vert2D1, point) - bias0 >= 0.0f;
-                    const bool eC1 = edgeCross(vert2D1, vert2D2, point) - bias1 >= 0.0f;
-                    const bool eC2 = edgeCross(vert2D2, vert2D0, point) - bias2 >= 0.0f;
+                    const bool eC0 = edgeCross(v0, v1, point) - bias0 >= 0.0f;
+                    const bool eC1 = edgeCross(v1, v2, point) - bias1 >= 0.0f;
+                    const bool eC2 = edgeCross(v2, v0, point) - bias2 >= 0.0f;
 
                     if (eC0 && eC1 && eC2)
                     {
