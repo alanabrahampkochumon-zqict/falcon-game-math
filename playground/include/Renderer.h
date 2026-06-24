@@ -202,6 +202,13 @@ namespace demo
             const auto x1 = static_cast<std::size_t>(std::max({ v0.x(), v1.x(), v2.x() }));
             const auto y1 = static_cast<std::size_t>(std::max({ v0.y(), v1.y(), v2.y() }));
 
+
+            const auto triArea   = (v1 - v0).cross(v2 - v1);
+
+            // Backface culling
+            if (triArea < 0) // Triangle is inverted or less than 1 px
+                return;
+
             // Get the 2D vertices
             const auto vert2D0 = v0.template swizzle<fgm::axis::X, fgm::axis::Y>();
             const auto vert2D1 = v1.template swizzle<fgm::axis::X, fgm::axis::Y>();
