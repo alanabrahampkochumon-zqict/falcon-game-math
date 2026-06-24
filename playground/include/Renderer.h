@@ -182,6 +182,27 @@ namespace demo
             return isTopEdge && isLeftEdge;
         }
 
+        // bufferOffset must be a multiple of 4 since we need to put 4 channels per bufferOffset
+        inline void putPixel(std::size_t bufferOffset, uint8_t r, uint8_t g, uint8_t b, uint8_t a = 0xff)
+        {
+            if constexpr (std::endian::native == std::endian::big)
+            {
+                // ARGB
+                frameBuffer[bufferOffset]     = r;
+                frameBuffer[bufferOffset + 1] = g;
+                frameBuffer[bufferOffset + 2] = b;
+                frameBuffer[bufferOffset + 3] = a;
+            }
+            else if constexpr (std::endian::native == std::endian::little)
+            {
+                // BGRA
+                frameBuffer[bufferOffset]     = b;
+                frameBuffer[bufferOffset + 1] = g;
+                frameBuffer[bufferOffset + 2] = r;
+                frameBuffer[bufferOffset + 3] = a;
+            }
+        }
+
         // minValue-> Lowest vertex value
         // maxValue -> Highest vertex value
         template <typename T>
@@ -271,33 +292,15 @@ namespace demo
                     // Edge cross && Depth buffer-based culling
                     if (eC0 && eC1 && eC2 && currentPixelDepth > depthBuffer[offset])
                     {
+                        // Color Rendering
+                        putPixel(colorOffset, r, g, b, a);
 
-                        if constexpr (std::endian::native == std::endian::big)
-                        {
-                            // ARGB
-                            frameBuffer[colorOffset]     = r;
-                            frameBuffer[colorOffset + 1] = g;
-                            frameBuffer[colorOffset + 2] = b;
-                            frameBuffer[colorOffset + 3] = a;
-                        }
-                        else if constexpr (std::endian::native == std::endian::little)
-                        {
-                            // BGRA
-                            frameBuffer[colorOffset]     = b;
-                            frameBuffer[colorOffset + 1] = g;
-                            frameBuffer[colorOffset + 2] = r;
-                            frameBuffer[colorOffset + 3] = a;
+                        // Update depth buffer
+                        depthBuffer[offset] = currentPixelDepth;
 
-                            // TODO: Remove
-                            // // Populate the depth buffer
-                            depthBuffer[offset] = currentPixelDepth;
-                            // const auto color = static_cast<uint8_t>(currentPixelDepth * 255);
-                            // frameBuffer[colorOffset]     = color;
-                            // frameBuffer[colorOffset + 1] = color;
-                            // frameBuffer[colorOffset + 2] = color;
-                            // frameBuffer[colorOffset + 3] = color;
-                        }
-
+                        // Depth buffer rendering
+                        const auto depthColor = static_cast<uint8_t>(depthBuffer[offset] * 255);
+                        putPixel(colorOffset, depthColor, depthColor, depthColor);
                     }
                 }
             }
