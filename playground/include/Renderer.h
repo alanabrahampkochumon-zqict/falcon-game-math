@@ -259,11 +259,7 @@ namespace demo
                     const auto point       = fgm::Vector2D(static_cast<float>(x), static_cast<float>(y));
 
                     const auto [alpha, beta, gamma] =
-                        computeBaryCentricCoordinates(projV0, projV1, projV2, point);
-
-
-                    // const auto [alpha, beta, gamma] =
-                    //     computeBaryCentricCoordinates(projV0, projV1, projV2, point, triArea);
+                        computeBaryCentricCoordinates(projV0, projV1, projV2, point, triArea);
 
                     const auto currentPixelDepth = alpha * v0.z() + beta * v1.z() + gamma * v2.z();
 
