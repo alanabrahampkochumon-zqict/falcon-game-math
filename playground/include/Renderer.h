@@ -37,7 +37,7 @@ namespace demo
     {
     public:
         uint8_t* frameBuffer;
-        uint8_t* depthBuffer;
+        float* depthBuffer;
         int width, height, colorChannels;
         int clearColor = 0x000000;
 
@@ -49,7 +49,7 @@ namespace demo
          */
         Renderer(const int w, const int h, const int numColorChannels)
             : frameBuffer(new uint8_t[static_cast<std::size_t>(w * h * numColorChannels)]),
-              depthBuffer(new uint8_t[static_cast<std::size_t>(w * h)]),
+              depthBuffer(new float[static_cast<std::size_t>(w * h)]),
               width(w),
               height(h),
               colorChannels(numColorChannels)
@@ -103,7 +103,11 @@ namespace demo
          * @brief Clear the FrameBuffer with @ref clearColor.
          */
         void clearScreen() const
-        { std::memset(frameBuffer, clearColor, static_cast<size_t>(width * height * colorChannels)); }
+        {
+            std::memset(frameBuffer, clearColor, static_cast<size_t>(width * height * colorChannels));
+            // Clear the depth buffer
+            std::memset(depthBuffer, 0, static_cast<std::size_t>(width * height * 4));
+        }
 
         ~Renderer()
         {
@@ -230,7 +234,7 @@ namespace demo
             const auto triArea = (projV1 - projV0).cross(projV2 - projV1) * 0.5f;
 
             // Backface culling
-            if (triArea < 0) // Triangle is inverted or less than 1 px
+            if (triArea < 0.0f) // Triangle is inverted or less than 1 px
             {
                 return;
             }
@@ -255,16 +259,23 @@ namespace demo
                     const auto point       = fgm::Vector2D(static_cast<float>(x), static_cast<float>(y));
 
                     const auto [alpha, beta, gamma] =
-                        computeBaryCentricCoordinates(projV0, projV1, projV2, point, triArea);
+                        computeBaryCentricCoordinates(projV0, projV1, projV2, point);
 
+
+                    // const auto [alpha, beta, gamma] =
+                    //     computeBaryCentricCoordinates(projV0, projV1, projV2, point, triArea);
+
+                    const auto currentPixelDepth = alpha * v0.z() + beta * v1.z() + gamma * v2.z();
 
                     // A comparison of anything other than 0.0f, like 1e-5 or 1e-10 will cause visual glitches
                     const bool eC0 = edgeCross(projV0, projV1, point) - bias0 >= 0.0f;
                     const bool eC1 = edgeCross(projV1, projV2, point) - bias1 >= 0.0f;
                     const bool eC2 = edgeCross(projV2, projV0, point) - bias2 >= 0.0f;
 
-                    if (eC0 && eC1 && eC2)
+                    // Edge cross && Depth buffer-based culling
+                    if (eC0 && eC1 && eC2 && currentPixelDepth > depthBuffer[offset])
                     {
+
                         if constexpr (std::endian::native == std::endian::big)
                         {
                             // ARGB
@@ -282,15 +293,15 @@ namespace demo
                             frameBuffer[colorOffset + 3] = a;
 
                             // TODO: Remove
-                            const auto color = static_cast<uint8_t>((alpha * v0.z() + beta * v1.z() + gamma * v2.z()) * 255);
-                            frameBuffer[colorOffset]     = color;
-                            frameBuffer[colorOffset + 1] = color;
-                            frameBuffer[colorOffset + 2] = color;
-                            frameBuffer[colorOffset + 3] = color;
+                            // // Populate the depth buffer
+                            depthBuffer[offset] = currentPixelDepth;
+                            // const auto color = static_cast<uint8_t>(currentPixelDepth * 255);
+                            // frameBuffer[colorOffset]     = color;
+                            // frameBuffer[colorOffset + 1] = color;
+                            // frameBuffer[colorOffset + 2] = color;
+                            // frameBuffer[colorOffset + 3] = color;
                         }
 
-                        // Populate the depth buffer
-                        depthBuffer[offset] = static_cast<uint8_t>((alpha * v0.z() + beta * v1.z() + gamma * v2.z()) * 255);
                     }
                 }
             }
