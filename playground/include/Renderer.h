@@ -227,7 +227,7 @@ namespace demo
 
 
 
-            const auto triArea = (projV1 - projV0).cross(projV2 - projV1);
+            const auto triArea = (projV1 - projV0).cross(projV2 - projV1) * 0.5f;
 
             // Backface culling
             if (triArea < 0) // Triangle is inverted or less than 1 px
@@ -280,10 +280,17 @@ namespace demo
                             frameBuffer[colorOffset + 1] = g;
                             frameBuffer[colorOffset + 2] = r;
                             frameBuffer[colorOffset + 3] = a;
+
+                            // TODO: Remove
+                            const auto color = static_cast<uint8_t>((alpha * v0.z() + beta * v1.z() + gamma * v2.z()) * 255);
+                            frameBuffer[colorOffset]     = color;
+                            frameBuffer[colorOffset + 1] = color;
+                            frameBuffer[colorOffset + 2] = color;
+                            frameBuffer[colorOffset + 3] = color;
                         }
 
                         // Populate the depth buffer
-                        depthBuffer[offset] = static_cast<uint8_t>(alpha * v0.z() + beta * v0.z() + gamma * v0.z());
+                        depthBuffer[offset] = static_cast<uint8_t>((alpha * v0.z() + beta * v1.z() + gamma * v2.z()) * 255);
                     }
                 }
             }
