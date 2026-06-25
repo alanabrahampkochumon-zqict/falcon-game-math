@@ -165,7 +165,7 @@ namespace
     {
 #if __cplusplus >= 202603L
         // Rotation matrix for 180° or 2π radians
-        constexpr auto ROTATION_MAT = fgm::Matrix2<int>::rotate(fgm::constants::PI<float>);
+        constexpr auto ROTATION_MAT = fgm::Matrix2<int>::makeRotation(fgm::constants::PI<float>);
         static_assert(ROTATION_MAT(0, 0) == 0);
         static_assert(ROTATION_MAT(0, 1) == -1);
         static_assert(ROTATION_MAT(1, 0) == 1);
@@ -179,14 +179,14 @@ namespace
     namespace
     {
         // Uniform scale
-        constexpr auto U_SCALE_MAT = fgm::Matrix2<int>::scale(2);
+        constexpr auto U_SCALE_MAT = fgm::Matrix2<int>::makeScale(2);
         static_assert(U_SCALE_MAT(0, 0) == 2);
         static_assert(U_SCALE_MAT(0, 1) == 0);
         static_assert(U_SCALE_MAT(1, 0) == 0);
         static_assert(U_SCALE_MAT(1, 1) == 2);
 
         // Non-uniform scale
-        constexpr auto SCALE_MAT = fgm::Matrix2<int>::scale(2, 3);
+        constexpr auto SCALE_MAT = fgm::Matrix2<int>::makeScale(2, 3);
         static_assert(SCALE_MAT(0, 0) == 2);
         static_assert(SCALE_MAT(0, 1) == 0);
         static_assert(SCALE_MAT(1, 0) == 0);
@@ -198,7 +198,7 @@ namespace
     namespace
     {
         // Reflection through origin
-        constexpr auto REFLECTION_MAT = fgm::Matrix2<int>::reflect(true, true);
+        constexpr auto REFLECTION_MAT = fgm::Matrix2<int>::makeReflection(true, true);
         static_assert(REFLECTION_MAT(0, 0) == -1);
         static_assert(REFLECTION_MAT(0, 1) == 0);
         static_assert(REFLECTION_MAT(1, 0) == 0);
@@ -217,7 +217,7 @@ namespace
 
 /** @brief Verify that rotation transformation factory returns a rotation matrix. */
 TYPED_TEST(Matrix2Rotation, ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<typename TypeParam::first_type>::rotate(this->_angle)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<typename TypeParam::first_type>::makeRotation(this->_angle)); }
 
 
 
@@ -229,12 +229,12 @@ TYPED_TEST(Matrix2Rotation, ReturnsRotationMatrix)
 
 /** @brief Verify that uniform scale transformation factory returns a scale matrix. */
 TYPED_TEST(Matrix2UniformScale, ReturnsScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::scale(this->_scale)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeScale(this->_scale)); }
 
 
 /** @brief Verify that non-uniform scale transformation factory returns a non-uniform scale matrix. */
 TYPED_TEST(Matrix2NonUniformScale, ReturnsScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::scale(this->_scaleX, this->_scaleY)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeScale(this->_scaleX, this->_scaleY)); }
 
 
 
@@ -249,21 +249,21 @@ TYPED_TEST(Matrix2NonUniformScale, ReturnsScaleMatrix)
  *        returns a reflection matrix.
  */
 TYPED_TEST(Matrix2NoReflection, ReturnsReflectionMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::reflect(false, false)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeReflection(false, false)); }
 
 
 /** @brief Verify that reflection transformation factory for x-axis returns a reflection matrix. */
 TYPED_TEST(Matrix2XAxisReflection, ReturnsReflectionMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::reflect(true, false)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeReflection(true, false)); }
 
 
 /** @brief Verify that reflection transformation factory for y-axis returns a reflection matrix. */
 TYPED_TEST(Matrix2YAxisReflection, ReturnsReflectionMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::reflect(false, true)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeReflection(false, true)); }
 
 
 /** @brief Verify that reflection transformation factory for y-axis returns a reflection matrix. */
 TYPED_TEST(Matrix2OriginReflection, ReturnsReflectionMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::reflect(true, true)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeReflection(true, true)); }
 
 /** @} */

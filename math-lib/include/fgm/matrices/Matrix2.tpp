@@ -698,34 +698,34 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr Matrix2<T> Matrix2<T>::rotate(const U angle) noexcept
+    constexpr Matrix2<T> Matrix2<T>::makeRotation(const U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
-        R cos   = std::cos(angle);
+        R cosine   = std::cos(angle);
         R sine  = std::sin(angle);
 #ifdef FGM_LEFT_HANDED
-        return Matrix2(cos, sine, -sine, cos);
+        return Matrix2(cosine, sine, -sine, cosine);
 #else
-        return Matrix2(cos, -sine, sine, cos);
+        return Matrix2(cosine, -sine, sine, cosine);
 #endif
     }
 
 
     template <Arithmetic T>
-    constexpr Matrix2<T> Matrix2<T>::scale(const T scale) noexcept
+    constexpr Matrix2<T> Matrix2<T>::makeScale(const T scale) noexcept
         requires StrictArithmetic<T>
     { return Matrix2(scale, T(0), T(0), scale); }
 
 
     template <Arithmetic T>
-    constexpr Matrix2<T> Matrix2<T>::scale(const T scaleX, const T scaleY) noexcept
+    constexpr Matrix2<T> Matrix2<T>::makeScale(const T scaleX, const T scaleY) noexcept
         requires StrictArithmetic<T>
     { return Matrix2(scaleX, T(0), T(0), scaleY); }
 
 
     template <Arithmetic T>
-    constexpr Matrix2<T> Matrix2<T>::reflect(const bool reflectX, const bool reflectY) noexcept
+    constexpr Matrix2<T> Matrix2<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
         requires StrictArithmetic<T>
     { return Matrix2(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1)); }
 

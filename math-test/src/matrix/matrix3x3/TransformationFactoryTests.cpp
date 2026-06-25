@@ -13,32 +13,38 @@
 
 
 
-// template <typename T>
-// class Matrix3Rotation: public ::testing::Test
-// {
-// protected:
-//     using FP_T  = T::first_type;  // FP_T -> Floating-point Type
-//     using COM_T = T::second_type; // COM_T -> Common Type
-//
-//     FP_T _angle;
-//     fgm::Matrix3<COM_T> _expectedMat;
-//
-//
-//     void SetUp() override
-//     {
-//         _angle = fgm::constants::PI<FP_T> / FP_T(2.0);
-// #ifdef FMG_LEFT_HANDED
-//         _expectedMat = { fgm::Vector3{ COM_T(0), COM_T(-1) }, fgm::Vector3 { COM_T(1), COM_T(0) } };
-// #else
-//         _expectedMat = { fgm::Vector3{ COM_T(0), COM_T(1) }, fgm::Vector3{ COM_T(-1), COM_T(0) } };
-// #endif
-//     }
-// };
-// /**
-//  * @brief Test fixture for @ref fgm::Matrix3 rotation factory, parameterized
-//  *        @ref SupportedSignedArithmeticFloatingTypePair
-//  */
-// TYPED_TEST_SUITE(Matrix3Rotation, SupportedSignedArithmeticFloatingTypePair);
+template <typename T>
+class Matrix3Rotation: public testing::Test
+{
+protected:
+    using FP_T  = T::first_type;  // FP_T -> Floating-point Type
+    using COM_T = T::second_type; // COM_T -> Common Type
+
+    FP_T _angle;
+    fgm::Matrix3<COM_T> _expectedMat;
+
+
+    void SetUp() override
+    {
+        _angle = fgm::constants::PI<FP_T> / FP_T(2.0);
+#ifdef FMG_LEFT_HANDED
+        _expectedMat = { fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) }, fgm::Vector3{ COM_T(0), COM_T(0), COM_T(-1) },
+                         fgm::Vector3 {
+                             COM_T(0),
+                             COM_T(1),
+                             COM_T(0)
+                         } };
+#else
+        _expectedMat = { fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) }, fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) },
+                         fgm::Vector3{ COM_T(0), COM_T(-1), COM_T(0) } };
+#endif
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Matrix3 rotation factory, parameterized
+ *        @ref SupportedSignedArithmeticFloatingTypePair
+ */
+TYPED_TEST_SUITE(Matrix3Rotation, SupportedSignedArithmeticFloatingTypePair);
 
 
 template <typename T>
@@ -166,14 +172,19 @@ namespace
      */
     namespace
     {
-        // #if __cplusplus >= 202603L
-        //         // Rotation matrix for 180° or 2π radians
-        //         constexpr auto ROTATION_MAT = fgm::Matrix3<int>::rotate(fgm::constants::PI<float>);
-        //         static_assert(ROTATION_MAT(0, 0) == 0);
-        //         static_assert(ROTATION_MAT(0, 1) == -1);
-        //         static_assert(ROTATION_MAT(1, 0) == 1);
-        //         static_assert(ROTATION_MAT(1, 1) == 0);
-        // #endif
+#if __cplusplus >= 202603L // TODO: Unverified
+        // Rotation matrix for 180° or 2π radians
+        constexpr auto ROTATION_MAT = fgm::Matrix3<int>::rotate(fgm::constants::PI<float>);
+        static_assert(ROTATION_MAT(0, 0) == 1);
+        static_assert(ROTATION_MAT(0, 1) == 0);
+        static_assert(ROTATION_MAT(0, 2) == 0);
+        static_assert(ROTATION_MAT(1, 0) == 0);
+        static_assert(ROTATION_MAT(1, 1) == -1);
+        static_assert(ROTATION_MAT(1, 2) == 0);
+        static_assert(ROTATION_MAT(2, 0) == 0);
+        static_assert(ROTATION_MAT(2, 1) == 0);
+        static_assert(ROTATION_MAT(2, 2) == -1);
+#endif
 
     } // namespace
 
@@ -182,7 +193,7 @@ namespace
     namespace
     {
         // Uniform scale
-        constexpr auto U_SCALE_MAT = fgm::Matrix3<int>::scale(2);
+        constexpr auto U_SCALE_MAT = fgm::Matrix3<int>::makeScale(2);
         static_assert(U_SCALE_MAT(0, 0) == 2);
         static_assert(U_SCALE_MAT(0, 1) == 0);
         static_assert(U_SCALE_MAT(0, 2) == 0);
@@ -194,11 +205,16 @@ namespace
         static_assert(U_SCALE_MAT(2, 2) == 2);
 
         // Non-uniform scale
-        // constexpr auto SCALE_MAT = fgm::Matrix3<int>::scale(2, 3);
-        // static_assert(SCALE_MAT(0, 0) == 2);
-        // static_assert(SCALE_MAT(0, 1) == 0);
-        // static_assert(SCALE_MAT(1, 0) == 0);
-        // static_assert(SCALE_MAT(1, 1) == 3);
+        constexpr auto SCALE_MAT = fgm::Matrix3<int>::makeScale(2, 3, 4);
+        static_assert(SCALE_MAT(0, 0) == 2);
+        static_assert(SCALE_MAT(0, 1) == 0);
+        static_assert(SCALE_MAT(0, 2) == 0);
+        static_assert(SCALE_MAT(1, 0) == 0);
+        static_assert(SCALE_MAT(1, 1) == 3);
+        static_assert(SCALE_MAT(1, 2) == 0);
+        static_assert(SCALE_MAT(2, 0) == 0);
+        static_assert(SCALE_MAT(2, 1) == 0);
+        static_assert(SCALE_MAT(2, 2) == 4);
     } // namespace
 
 
@@ -224,8 +240,8 @@ namespace
  **************************************/
 
 /** @brief Verify that rotation transformation factory returns a rotation matrix. */
-// TYPED_TEST(Matrix3Rotation, ReturnsRotationMatrix)
-// { EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<typename TypeParam::first_type>::rotate(this->_angle)); }
+TYPED_TEST(Matrix3Rotation, ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
 
 
 
@@ -237,12 +253,12 @@ namespace
 
 /** @brief Verify that uniform scale transformation factory returns a scale matrix. */
 TYPED_TEST(Matrix3UniformScale, ReturnsScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::scale(this->_scale)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::makeScale(this->_scale)); }
 
 
 /** @brief Verify that non-uniform scale transformation factory returns a non-uniform scale matrix. */
 TYPED_TEST(Matrix3NonUniformScale, ReturnsScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::scale(this->_scaleX, this->_scaleY, this->_scaleZ)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::makeScale(this->_scaleX, this->_scaleY, this->_scaleZ)); }
 
 
 //
