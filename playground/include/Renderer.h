@@ -313,8 +313,8 @@ namespace demo
                         depthBuffer[offset] = currentPixelDepth;
 
                         // Depth buffer rendering
-                        const auto depthColor = static_cast<uint8_t>(depthBuffer[offset] * 255);
-                        putPixel(colorOffset, depthColor, depthColor, depthColor);
+                        // const auto depthColor = static_cast<uint8_t>(depthBuffer[offset] * 255);
+                        // putPixel(colorOffset, depthColor, depthColor, depthColor);
                     }
                 }
             }
@@ -338,6 +338,18 @@ namespace demo
             return vec;
         }
 
+        fgm::Vec3F project(const fgm::Vec3F& vertex, const float focalLength)
+        {
+            fgm::Vec3F vec{};
+            const auto factor = focalLength / vertex.z();
+
+            vec.x() = vertex.x() * factor;
+            vec.y() = vertex.y() * factor;
+            vec.z() = vertex.z();
+
+            return vec;
+        }
+
 
         /**
          * @brief Renders a mesh to the current @p frameBuffer.
@@ -347,19 +359,24 @@ namespace demo
          *
          * @param mesh The mesh to render.
          */
-        void render(const Mesh& mesh, const float deg)
+        void render(const Mesh& mesh, [[maybe_unused]] const float deg)
         {
-            std::vector<fgm::Vec3<float>> vertices;
+            std::vector<fgm::Vec3<float>> vertices{mesh.vertices.size()};
+            // const auto focalLength = 3.0f;
 
-            std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()),
+
+            std::ranges::transform(mesh.vertices, std::inserter(vertices, vertices.begin()),
                            [mesh, this, deg](const fgm::Vec3<float> vertex) {
                                const auto vec = rotateY(vertex, deg);
                                return toNDC(vec, mesh.minVertexValue, mesh.maxVertexValue);
                            });
 
-            // std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()),
+            // std::ranges::transform(mesh.vertices, std::inserter(vertices, vertices.begin()),
             //                [this, mesh](const fgm::Vec3<float> vertex) {
-            //                    return toScreenSpace(vertex, mesh.minVertexValue, mesh.maxVertexValue);
+            //                    const auto vec = project(vertex, 3.0f);
+            //                    const auto proj = toNDC(vec, mesh.minVertexValue, mesh.maxVertexValue);
+            //                    // const auto vec = rotateY(vertex, deg);
+            //                    return proj;
             //                });
 
             [[maybe_unused]] std::size_t i = 0;

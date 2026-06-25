@@ -58,15 +58,16 @@ namespace demo
                         _isRunning = false;
                         break;
                     default:
-                        SDL_Log("[EVENT]: Unhandled"); // TODO: Remove
+                        break;
+                        // SDL_Log("[EVENT]: Unhandled"); // TODO: Remove
                 }
             }
         }
 
         void run()
         {
-            auto modelPath = std::filesystem::path("models") / "utah_teapot.obj";
-            // auto modelPath = std::filesystem::path("models") / "suzanne.obj";
+            // auto modelPath = std::filesystem::path("models") / "utah_teapot.obj";
+            auto modelPath = std::filesystem::path("models") / "suzanne.obj";
             // auto modelPath = std::filesystem::path("models") / "Cube.obj";
             ObjectParser parser;
             auto mesh = parser.parse(modelPath.string());
