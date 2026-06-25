@@ -1160,6 +1160,42 @@ namespace fgm
 
 
         /**
+         * @brief Construct a 3D rotation matrix in the y-axis for a given angle.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & 0 & sin(\theta) \\
+         *                     0           & 0 &           1 \\
+         *                    -sin(\theta) & 0 & cos(\theta)
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+        *                \begin{bmatrix}
+         *                    cos(\theta) & 0 & -sin(\theta) \\
+         *                    0           & 0 &            1 \\
+         *                    sin(\theta) & 0 &  cos(\theta)
+         *                \end{bmatrix}
+         *            \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle The rotation angle in radians.
+         *
+         * @return A new @ref Matrix3 representing the linear rotation around y-axis.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Matrix3 makeRotationY(U angle) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
          * @brief Construct a uniform scale 3D matrix.
          *
          * @param[in] scale The scale factor.

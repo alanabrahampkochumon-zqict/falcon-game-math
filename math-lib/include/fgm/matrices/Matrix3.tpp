@@ -768,13 +768,29 @@ namespace fgm
     constexpr Matrix3<T> Matrix3<T>::makeRotationX(U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
-        using R = PromotedValue_t<T, U>;
-        R cosine   = std::cos(angle);
-        R sine  = std::sin(angle);
+        using R  = PromotedValue_t<T, U>;
+        R cosine = std::cos(angle);
+        R sine   = std::sin(angle);
 #ifdef FGM_LEFT_HANDED
         return Matrix3{ T(1), T(0), T(0), T(0), cosine, sine, T(0), -sine, cosine };
 #else
         return Matrix3{ T(1), T(0), T(0), T(0), cosine, -sine, T(0), sine, cosine };
+#endif
+    }
+
+
+    template <Arithmetic T>
+    template <std::floating_point U>
+    constexpr Matrix3<T> Matrix3<T>::makeRotationY(U angle) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        using R  = PromotedValue_t<T, U>;
+        R cosine = std::cos(angle);
+        R sine   = std::sin(angle);
+#ifdef FGM_LEFT_HANDED
+        return Matrix3{ cosine, T(0), -sine, T(0), T(1), T(0), sine, T(0), cosine };
+#else
+        return Matrix3{ cosine, T(0), sine, T(0), T(1), T(0), -sine, T(0), cosine };
 #endif
     }
 
