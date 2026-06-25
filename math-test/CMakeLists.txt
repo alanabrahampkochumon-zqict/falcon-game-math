@@ -26,7 +26,7 @@ set(Matrix2x2TestFiles "InitializationTests.cpp;TypeConversionTests.cpp;AccessAn
 list(TRANSFORM Matrix2x2TestFiles PREPEND ${Matrix2x2TestDir})
 
 set(Matrix3x3TestDir "src/matrix/matrix3x3/")
-set(Matrix3x3TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeConversionTests.cpp;ConstantTests.cpp;UtilityTests.cpp;EqualityTests.cpp;AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DivisionTests.cpp;DeterminantTests.cpp;TransposeTests.cpp;InverseTests.cpp;TraceTests.cpp;StringRepresentationTests.cpp;AliasTests.cpp;")
+set(Matrix3x3TestFiles "InitializationTests.cpp;AccessAndMutationTests.cpp;TypeConversionTests.cpp;ConstantTests.cpp;UtilityTests.cpp;EqualityTests.cpp;AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DivisionTests.cpp;DeterminantTests.cpp;TransposeTests.cpp;InverseTests.cpp;TraceTests.cpp;StringRepresentationTests.cpp;AliasTests.cpp;TransformationFactoryTests.cpp;")
 list(TRANSFORM Matrix3x3TestFiles PREPEND ${Matrix3x3TestDir})
 
 set(Matrix4x4TestDir "src/matrix/matrix4x4/")

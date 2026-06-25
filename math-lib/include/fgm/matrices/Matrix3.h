@@ -1118,6 +1118,83 @@ namespace fgm
 
         /** @} */
 
+        /**
+         * @addtogroup FGM_Mat3x3_Transforms
+         * @{
+         */
+
+        // /**
+        //  * @brief Construct a 3D rotation matrix for a given angle.
+        //  *
+        //  * @details The layout of the returned matrix adapts to the library's active coordinate system:
+        //  *          - **Right-Handed (Default):**
+        //  *            \f$
+        //  *                \begin{bmatrix}
+        //  *                    cos(\theta) & -sin(\theta) \\
+        //  *                    sin(\theta) & cos(\theta)
+        //  *                \end{bmatrix}
+        //  *            \f$
+        //  *          - **Left-Handed (FGM_LEFT_HANDED):**
+        //  *            \f$
+        //  *                \begin{bmatrix}
+        //  *                    cos(\theta) & sin(\theta) \\
+        //  *                    -sin(\theta) & cos(\theta)
+        //  *                \end{bmatrix}
+        //  *            \f$
+        //  *
+        //  * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+        //  *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+        //  *       for integral types.
+        //  *
+        //  * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+        //  *
+        //  * @param[in] angle The rotation angle in radians.
+        //  *
+        //  * @return A new @ref Matrix3 representing the linear rotation.
+        //  */
+        // template <std::floating_point U>
+        // [[nodiscard]] static constexpr Matrix3 rotate(U angle) noexcept
+        //     requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a uniform scale 3D matrix.
+         *
+         * @param[in] scale The scale factor.
+         *
+         * @return A new @ref Matrix3 representing the uniform scale.
+         */
+        [[nodiscard]] static constexpr Matrix3 scale(T scale) noexcept
+            requires StrictArithmetic<T>;
+
+
+        // /**
+        //  * @brief Construct a non-uniform scale 3D matrix.
+        //  *
+        //  * @param[in] scaleX The scale factor in the x-direction.
+        //  * @param[in] scaleY The scale factor in the y-direction.
+        //  *
+        //  * @return A new @ref Matrix3 representing the uniform scale.
+        //  */
+        // [[nodiscard]] static constexpr Matrix3 scale(T scaleX, T scaleY) noexcept
+        //     requires StrictArithmetic<T>;
+
+
+        // /**
+        //  * @brief Construct a reflection 3D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
+        //  *
+        //  * @note To construction a reflection matrix around origin, set all axis reflection to true.
+        //  *
+        //  * @param[in] reflectX A flag to whether reflect in the x-direction.
+        //  * @param[in] reflectY A flag to whether reflect in the y-direction.
+        //  *
+        //  * @return A new @ref Matrix3 representing the axis-aligned reflection.
+        //  */
+        // [[nodiscard]] static constexpr Matrix3 reflect(bool reflectX, bool reflectY) noexcept
+        //     requires StrictArithmetic<T>;
+
+        /** @} */
+
 
     private:
         std::array<Vector3<T>, columns> _data;

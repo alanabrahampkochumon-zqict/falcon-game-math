@@ -28,7 +28,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix3<T>::Matrix3(const T m00, const T m01, const T m02, const T m10, const T m11, const T m12,
-                                    const T m20, const T m21, const T m22) noexcept
+                                  const T m20, const T m21, const T m22) noexcept
         : _data{ Vector3{ T(m00), T(m10), T(m20) }, Vector3{ T(m01), T(m11), T(m21) },
                  Vector3{ T(m02), T(m12), T(m22) } }
     {}
@@ -290,14 +290,14 @@ namespace fgm
             if (!std::is_constant_evaluated())
             {
                 return Vector3<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
-                                            std::fma(static_cast<R>(_data[1][0]), static_cast<R>(vec[1]),
-                                                     static_cast<R>(_data[2][0]) * static_cast<R>(vec[2]))),
-                                   std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
-                                            std::fma(static_cast<R>(_data[1][1]), static_cast<R>(vec[1]),
-                                                     static_cast<R>(_data[2][1]) * static_cast<R>(vec[2]))),
-                                   std::fma(static_cast<R>(_data[0][2]), static_cast<R>(vec[0]),
-                                            std::fma(static_cast<R>(_data[1][2]), static_cast<R>(vec[1]),
-                                                     static_cast<R>(_data[2][2]) * static_cast<R>(vec[2]))));
+                                           std::fma(static_cast<R>(_data[1][0]), static_cast<R>(vec[1]),
+                                                    static_cast<R>(_data[2][0]) * static_cast<R>(vec[2]))),
+                                  std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
+                                           std::fma(static_cast<R>(_data[1][1]), static_cast<R>(vec[1]),
+                                                    static_cast<R>(_data[2][1]) * static_cast<R>(vec[2]))),
+                                  std::fma(static_cast<R>(_data[0][2]), static_cast<R>(vec[0]),
+                                           std::fma(static_cast<R>(_data[1][2]), static_cast<R>(vec[1]),
+                                                    static_cast<R>(_data[2][2]) * static_cast<R>(vec[2]))));
             }
         }
 #endif
@@ -325,14 +325,14 @@ namespace fgm
             if (!std::is_constant_evaluated())
             {
                 return Vector3<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)), // x
-                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
-                                                     static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 0)))),
-                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)), // y
-                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 1)),
-                                                     static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 1)))),
-                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 2)), // z
-                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 2)),
-                                                     static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 2)))));
+                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
+                                                    static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 0)))),
+                                  std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)), // y
+                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 1)),
+                                                    static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 1)))),
+                                  std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 2)), // z
+                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 2)),
+                                                    static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 2)))));
             }
         }
 
@@ -500,7 +500,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix3<T, S> Matrix3<T>::safeDiv(const Matrix3& mat, const S scalar,
-                                                          const Matrix3& fallback) noexcept
+                                                        const Matrix3& fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
@@ -508,7 +508,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix3<T, S> Matrix3<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                         const Matrix3& fallback) const noexcept
+                                                       const Matrix3& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -547,7 +547,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix3<T, S> Matrix3<T>::tryDiv(const Matrix3& mat, const S scalar, OperationStatus& status,
-                                                         const Matrix3& fallback) noexcept
+                                                       const Matrix3& fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
@@ -588,7 +588,7 @@ namespace fgm
          *       _data[row][col] actually gives _data[col][row]
          */
         return Matrix3(_data[0][0], _data[0][1], _data[0][2], _data[1][0], _data[1][1], _data[1][2], _data[2][0],
-                        _data[2][1], _data[2][2]);
+                       _data[2][1], _data[2][2]);
     }
 
 
@@ -612,9 +612,8 @@ namespace fgm
         FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
 
         R factor = R(1) / det;
-        return Matrix3<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(),
-                           factor * row1.y(), factor * row1.z(), factor * row2.x(), factor * row2.y(),
-                           factor * row2.z());
+        return Matrix3<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(), factor * row1.y(),
+                          factor * row1.z(), factor * row2.x(), factor * row2.y(), factor * row2.z());
     }
 
 
@@ -654,22 +653,20 @@ namespace fgm
         }
 
         R factor = R(1) / det;
-        return Matrix3<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(),
-                           factor * row1.y(), factor * row1.z(), factor * row2.x(), factor * row2.y(),
-                           factor * row2.z());
+        return Matrix3<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(), factor * row1.y(),
+                          factor * row1.z(), factor * row2.x(), factor * row2.y(), factor * row2.z());
     }
 
 
     template <Arithmetic T>
-    constexpr Matrix3<Magnitude<T>> Matrix3<T>::safeInverseOf(const Matrix3& matrix,
-                                                                const Matrix3& fallback) noexcept
+    constexpr Matrix3<Magnitude<T>> Matrix3<T>::safeInverseOf(const Matrix3& matrix, const Matrix3& fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.safeInverse(fallback); }
 
 
     template <Arithmetic T>
     constexpr Matrix3<Magnitude<T>> Matrix3<T>::tryInverse(OperationStatus& status,
-                                                             const Matrix3& fallback) const noexcept
+                                                           const Matrix3& fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -707,15 +704,14 @@ namespace fgm
 
         status   = OperationStatus::SUCCESS;
         R factor = R(1) / det;
-        return Matrix3<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(),
-                           factor * row1.y(), factor * row1.z(), factor * row2.x(), factor * row2.y(),
-                           factor * row2.z());
+        return Matrix3<R>(factor * row0.x(), factor * row0.y(), factor * row0.z(), factor * row1.x(), factor * row1.y(),
+                          factor * row1.z(), factor * row2.x(), factor * row2.y(), factor * row2.z());
     }
 
 
     template <Arithmetic T>
     constexpr Matrix3<Magnitude<T>> Matrix3<T>::tryInverseOf(const Matrix3& matrix, OperationStatus& status,
-                                                               const Matrix3& fallback) noexcept
+                                                             const Matrix3& fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.tryInverse(status, fallback); }
 
@@ -758,6 +754,19 @@ namespace fgm
     template <Arithmetic T>
     constexpr bool Matrix3<T>::hasNaN(const Matrix3& matrix) noexcept
     { return matrix.hasNaN(); }
+
+
+
+    /**************************************
+     *                                    *
+     *       TRANSFORMATION FACTORIES     *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr Matrix3<T> Matrix3<T>::scale(T scale) noexcept
+        requires StrictArithmetic<T>
+    { return Matrix3{ scale, T(0), T(0), T(0), scale, T(0), T(0), T(0), scale }; }
 
 } // namespace fgm
 
