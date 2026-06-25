@@ -10,17 +10,17 @@ set(CommonTemplateFiles "Wrappers.tpp;")
 list(TRANSFORM CommonTemplateFiles PREPEND ${CommonDirectory})
 
 set(VectorDirectory "${IncludeDirectory}fgm/vectors/")
-set(VectorHeaderFiles Vector3D.h Vector2D.h Vector4D.h)
+set(VectorHeaderFiles Vector3.h Vector2.h Vector4.h)
 list(TRANSFORM VectorHeaderFiles PREPEND ${VectorDirectory})
 
-set(VectorTemplateDefinitionFiles Vector2D.tpp Vector3D.tpp Vector4D.tpp)
+set(VectorTemplateDefinitionFiles Vector2.tpp Vector3.tpp Vector4.tpp)
 list(TRANSFORM VectorTemplateDefinitionFiles PREPEND ${VectorDirectory})
 
 set(MatrixDirectory "${IncludeDirectory}fgm/matrices/")
-set(MatrixHeaderFiles Matrix2D.h Matrix3D.h Matrix4D.h)
+set(MatrixHeaderFiles Matrix2.h Matrix3.h Matrix4.h)
 list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
 
-set(MatrixTemplateDefinitionFiles Matrix2D.tpp Matrix3D.tpp Matrix4D.tpp)
+set(MatrixTemplateDefinitionFiles Matrix2.tpp Matrix3.tpp Matrix4.tpp)
 list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDirectory})
 
 set(HeaderAliasFiles "Vec;Mat")

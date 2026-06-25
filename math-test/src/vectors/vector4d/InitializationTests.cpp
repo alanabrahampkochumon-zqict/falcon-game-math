@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verify @ref fgm::Vector4D initialization logic.
+ * @brief Verify @ref fgm::Vector4 initialization logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector4DTestSetup.h"
+#include "Vector4TestSetup.h"
 
 
 
@@ -20,10 +20,10 @@
  **************************************/
 
 template <typename T>
-class Vector4DInitialization: public ::testing::Test
+class Vector4Initialization: public ::testing::Test
 {};
-/** @brief Test fixture for @ref fgm::Vector4D initialization, parameterized by @ref SupportedTypes */
-TYPED_TEST_SUITE(Vector4DInitialization, SupportedTypes);
+/** @brief Test fixture for @ref fgm::Vector4 initialization, parameterized by @ref SupportedTypes */
+TYPED_TEST_SUITE(Vector4Initialization, SupportedTypes);
 
 
 
@@ -42,11 +42,11 @@ TYPED_TEST_SUITE(Vector4DInitialization, SupportedTypes);
 /** @brief Verify that vector can be instantiated during compile time. */
 namespace
 {
-    constexpr fgm::Vector4D vecA(1, 2, 3, 4);
-    constexpr fgm::Vector4D<int> vecB({ 1, 2 }, { 3, 4 });
-    constexpr fgm::Vector4D vecC(1, { 2, 3, 4 });
-    constexpr fgm::Vector4D vecD({ 1, 2, 3 }, 4);
-    constexpr fgm::Vector4D<int> vecE{};
+    constexpr fgm::Vector4 vecA(1, 2, 3, 4);
+    constexpr fgm::Vector4<int> vecB({ 1, 2 }, { 3, 4 });
+    constexpr fgm::Vector4 vecC(1, { 2, 3, 4 });
+    constexpr fgm::Vector4 vecD({ 1, 2, 3 }, 4);
+    constexpr fgm::Vector4<int> vecE{};
 
     static_assert(vecA.x() == 1);
     static_assert(vecA.y() == 2);
@@ -83,23 +83,23 @@ namespace
  **************************************/
 
 /** @brief Verify that the default constructor initializes all components to zero. */
-TYPED_TEST(Vector4DInitialization, EmptyConstructorInitializesZeroVector)
+TYPED_TEST(Vector4Initialization, EmptyConstructorInitializesZeroVector)
 {
-    const fgm::Vector4D<TypeParam> vec{};
+    const fgm::Vector4<TypeParam> vec{};
 
     EXPECT_VEC_ZERO(vec);
 }
 
 
 /** @brief Verify that the parameterized constructor correctly assigns components from the provided arguments. */
-TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue)
+TYPED_TEST(Vector4Initialization, ConstructorInitializesVectorsWithCorrectValue)
 {
     const TypeParam a = static_cast<TypeParam>(3);
     const TypeParam b = static_cast<TypeParam>(1);
     const TypeParam c = static_cast<TypeParam>(6);
     const TypeParam d = static_cast<TypeParam>(4);
 
-    const fgm::Vector4D<TypeParam> vec(a, b, c, d);
+    const fgm::Vector4<TypeParam> vec(a, b, c, d);
 
     EXPECT_VEC_CONTAINS(vec, a, b, c, d);
 }
@@ -107,18 +107,18 @@ TYPED_TEST(Vector4DInitialization, ConstructorInitializesVectorsWithCorrectValue
 
 /**
  * @brief Verify that the parameterized constructor correctly composes a 4D vector from
- *       two @ref fgm::Vector2D instances.
+ *       two @ref fgm::Vector2 instances.
  */
-TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
+TYPED_TEST(Vector4Initialization, Two2DVectorsCanInitializeA4DVector)
 {
     const TypeParam a = static_cast<TypeParam>(3);
     const TypeParam b = static_cast<TypeParam>(1);
     const TypeParam c = static_cast<TypeParam>(6);
     const TypeParam d = static_cast<TypeParam>(4);
-    const fgm::Vector2D<TypeParam> vec1(a, b);
-    const fgm::Vector2D<TypeParam> vec2(c, d);
+    const fgm::Vector2<TypeParam> vec1(a, b);
+    const fgm::Vector2<TypeParam> vec2(c, d);
 
-    const fgm::Vector4D<TypeParam> vec(vec1, vec2);
+    const fgm::Vector4<TypeParam> vec(vec1, vec2);
 
     EXPECT_VEC_CONTAINS(vec, a, b, c, d);
 }
@@ -126,17 +126,17 @@ TYPED_TEST(Vector4DInitialization, Two2DVectorsCanInitializeA4DVector)
 
 /**
  * @brief Verify that the parameterized constructor correctly composes a 4D vector from a
- *       @ref fgm::Vector3D instance and a scalar.
+ *       @ref fgm::Vector3 instance and a scalar.
  */
-TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
+TYPED_TEST(Vector4Initialization, 3DVectorAndScalarCanInitializeA4DVector)
 {
     const TypeParam a = static_cast<TypeParam>(3);
     const TypeParam b = static_cast<TypeParam>(1);
     const TypeParam c = static_cast<TypeParam>(6);
-    const fgm::Vector3D vec1(a, b, c);
+    const fgm::Vector3 vec1(a, b, c);
     const TypeParam scalar = static_cast<TypeParam>(4);
 
-    const fgm::Vector4D vec(vec1, scalar);
+    const fgm::Vector4 vec(vec1, scalar);
 
     EXPECT_VEC_CONTAINS(vec, a, b, c, scalar);
 }
@@ -144,17 +144,17 @@ TYPED_TEST(Vector4DInitialization, 3DVectorAndScalarCanInitializeA4DVector)
 
 /**
  * @brief Verify that the parameterized constructor correctly composes a 4D vector from a scalar and
- *        a @ref fgm::Vector3D instance.
+ *        a @ref fgm::Vector3 instance.
  */
-TYPED_TEST(Vector4DInitialization, ScalarAnd3DVectorCanInitializeA4DVector)
+TYPED_TEST(Vector4Initialization, ScalarAnd3DVectorCanInitializeA4DVector)
 {
     const TypeParam a = static_cast<TypeParam>(3);
     const TypeParam b = static_cast<TypeParam>(1);
     const TypeParam c = static_cast<TypeParam>(6);
-    const fgm::Vector3D vec1(a, b, c);
+    const fgm::Vector3 vec1(a, b, c);
     const TypeParam scalar = static_cast<TypeParam>(4);
 
-    const fgm::Vector4D vec(scalar, vec1);
+    const fgm::Vector4 vec(scalar, vec1);
 
     EXPECT_VEC_CONTAINS(vec, scalar, a, b, c);
 }

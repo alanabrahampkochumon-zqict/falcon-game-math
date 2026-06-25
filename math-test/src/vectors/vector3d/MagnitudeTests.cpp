@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 03, 2026
  *
- * @brief Verify @ref fgm::Vector3D magnitude logic.
+ * @brief Verify @ref fgm::Vector3 magnitude logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector3DTestSetup.h"
+#include "Vector3TestSetup.h"
 
 
 
@@ -20,10 +20,10 @@
  **************************************/
 
 template <typename T>
-class Vector3DMagnitude: public ::testing::Test
+class Vector3Magnitude: public ::testing::Test
 {
 protected:
-    fgm::Vector3D<T> _vec;
+    fgm::Vector3<T> _vec;
     fgm::Magnitude<T> _expectedMagnitude;
     T _expectedMagnitudeSquare;
 
@@ -34,15 +34,15 @@ protected:
         _expectedMagnitudeSquare = T(121);
     }
 };
-/** @brief Test fixture for @ref fgm::Vector3D magnitude, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vector3DMagnitude, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector3 magnitude, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Vector3Magnitude, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Vector3DUncleanMagnitude: public ::testing::Test
+class Vector3UncleanMagnitude: public ::testing::Test
 {
 protected:
-    fgm::Vector3D<T> _vec;
+    fgm::Vector3<T> _vec;
     fgm::Magnitude<T> _expectedMagnitude;
 
     void SetUp() override
@@ -52,10 +52,10 @@ protected:
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Vector3D magnitude, parameterized by @ref SupportedArithmeticTypes,
+ * @brief Test fixture for @ref fgm::Vector3 magnitude, parameterized by @ref SupportedArithmeticTypes,
  *        for testing high-precision magnitude.
  */
-TYPED_TEST_SUITE(Vector3DUncleanMagnitude, SupportedArithmeticTypes);
+TYPED_TEST_SUITE(Vector3UncleanMagnitude, SupportedArithmeticTypes);
 
 
 
@@ -68,15 +68,15 @@ TYPED_TEST_SUITE(Vector3DUncleanMagnitude, SupportedArithmeticTypes);
 namespace
 {
     // TODO: Add static test after making sqrt constexpr
-    // constexpr fgm::Vector3D Vec(1, 2, 3);
+    // constexpr fgm::Vector3 Vec(1, 2, 3);
     // constexpr auto magA = Vec.mag();
-    // constexpr auto magB = fgm::Vector2D<int>::mag(Vec);
+    // constexpr auto magB = fgm::Vector2<int>::mag(Vec);
     // static_assert(magA - 3.7416573867739413 <= 1e-5);
     // static_assert(magB - 3.7416573867739413 <= 1e-5);
 
-    constexpr fgm::Vector3D vecM(1, 2, 3);
+    constexpr fgm::Vector3 vecM(1, 2, 3);
     constexpr auto magSqA = vecM.magSq();
-    constexpr auto magSqB = fgm::Vector3D<int>::magSq(vecM);
+    constexpr auto magSqB = fgm::Vector3<int>::magSq(vecM);
 
     static_assert(magSqA == 14.0);
     static_assert(magSqB == 14.0);
@@ -85,25 +85,25 @@ namespace
 
 
 /** @brief Verify that taking the magnitude of a zero vector returns exactly zero. */
-TEST(Vector3DMagnitude, ZeroVectorReturnsZero)
+TEST(Vector3Magnitude, ZeroVectorReturnsZero)
 {
-    const fgm::Vector3D vec(0.0f, 0.0f, 0.0f);
+    const fgm::Vector3 vec(0.0f, 0.0f, 0.0f);
 
     EXPECT_FLOAT_EQ(0.0f, vec.mag());
 }
 
 
 /** @brief Verify that taking the magnitude of a one vector returns non-unit scalar. */
-TEST(Vector3DMagnitude, OneComponentVectorReturnsNonUnitScalar)
+TEST(Vector3Magnitude, OneComponentVectorReturnsNonUnitScalar)
 {
-    const fgm::Vector3D vec(1.0f, 1.0f, 1.0f);
+    const fgm::Vector3 vec(1.0f, 1.0f, 1.0f);
 
     EXPECT_NE(1.0f, vec.mag());
 }
 
 
 /** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vector3DMagnitude, NonUnitVectorReturnsCorrectMagnitude)
+TYPED_TEST(Vector3Magnitude, NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = this->_vec.mag();
 
@@ -112,7 +112,7 @@ TYPED_TEST(Vector3DMagnitude, NonUnitVectorReturnsCorrectMagnitude)
 
 
 /** @brief Verify that taking the magnitude always returns a floating-point scalar. */
-TYPED_TEST(Vector3DMagnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
+TYPED_TEST(Vector3Magnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] const auto magnitude = this->_vec.mag();
     static_assert(std::is_floating_point_v<decltype(magnitude)>);
@@ -120,19 +120,19 @@ TYPED_TEST(Vector3DMagnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 
 
 /**
- * @brief Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vector3D::mag
+ * @brief Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vector3::mag
  *       returns non-unit scalar.
  */
-TYPED_TEST(Vector3DMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
+TYPED_TEST(Vector3Magnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
 {
-    const auto magnitude = fgm::Vector3D<TypeParam>::mag(this->_vec);
+    const auto magnitude = fgm::Vector3<TypeParam>::mag(this->_vec);
 
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
 
 /** @brief Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
-TYPED_TEST(Vector3DUncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
+TYPED_TEST(Vector3UncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
     const auto magnitude = this->_vec.mag();
 
@@ -141,12 +141,12 @@ TYPED_TEST(Vector3DUncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMin
 
 
 /**
- * @brief Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vector3D::mag
+ * @brief Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vector3::mag
  *       ensure minimal precision loss.
  */
-TYPED_TEST(Vector3DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
+TYPED_TEST(Vector3UncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
-    const auto magnitude = fgm::Vector3D<TypeParam>::mag(this->_vec);
+    const auto magnitude = fgm::Vector3<TypeParam>::mag(this->_vec);
 
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
@@ -159,7 +159,7 @@ TYPED_TEST(Vector3DUncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMa
  **************************************/
 
 /** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vector3DMagnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
+TYPED_TEST(Vector3Magnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
 {
     const auto magnitude = this->_vec.magSq();
 
@@ -169,11 +169,11 @@ TYPED_TEST(Vector3DMagnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
 
 /**
  * @brief Verify that taking the magnitude square of a non-unit vector using static variant of
- *        @ref fgm::Vector3D::mag returns non-unit scalar.
+ *        @ref fgm::Vector3::mag returns non-unit scalar.
  */
-TYPED_TEST(Vector3DMagnitude, StaticWrapper_MagnitudeSquare_ReturnsSquaredMagnitude)
+TYPED_TEST(Vector3Magnitude, StaticWrapper_MagnitudeSquare_ReturnsSquaredMagnitude)
 {
-    const auto magnitude = fgm::Vector3D<TypeParam>::magSq(this->_vec);
+    const auto magnitude = fgm::Vector3<TypeParam>::magSq(this->_vec);
 
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }

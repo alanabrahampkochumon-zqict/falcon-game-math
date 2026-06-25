@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Matrix2D accessors and mutators.
+ * @brief Verify @ref fgm::Matrix2 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -15,15 +15,15 @@
 #ifdef ENABLE_DEBUG_TESTS
     #include <utility>
 
-class Matrix2DIndexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
+class Matrix2Indexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix2DTests, Matrix2DIndexing,
+INSTANTIATE_TEST_SUITE_P(Matrix2Tests, Matrix2Indexing,
                          testing::Values(std::make_pair(3, 3), std::make_pair(2, 3), std::make_pair(3, 2),
                                          std::make_pair(100, 100)));
 
-class Matrix2DColumnIndexing: public testing::TestWithParam<std::size_t>
+class Matrix2ColumnIndexing: public testing::TestWithParam<std::size_t>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix2DTests, Matrix2DColumnIndexing, testing::Values(3, 4, 100));
+INSTANTIATE_TEST_SUITE_P(Matrix2Tests, Matrix2ColumnIndexing, testing::Values(3, 4, 100));
 #endif
 
 
@@ -44,8 +44,8 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DTests, Matrix2DColumnIndexing, testing::Values(
 namespace
 {
     constexpr fgm::Matrix2 MAT(1, 2, 3, 4);
-    constexpr fgm::Vector2D VEC0(1, 3);
-    constexpr fgm::Vector2D VEC1(2, 4);
+    constexpr fgm::Vector2 VEC0(1, 3);
+    constexpr fgm::Vector2 VEC1(2, 4);
 
     // Verify that matrix elements are accessible as (row, column) during compile time.
     static_assert(MAT(0, 0) == 1);
@@ -70,7 +70,7 @@ namespace
  **************************************/
 
 /** @brief Verify that the matrix elements are accessible via subscript indexing for reads. */
-TEST(Matrix2DAccess, AccessibleAsElements)
+TEST(Matrix2Access, AccessibleAsElements)
 {
     constexpr fgm::Matrix2 mat(1.0f, 2.0f, 3.0f, 4.0f);
 
@@ -82,27 +82,27 @@ TEST(Matrix2DAccess, AccessibleAsElements)
 
 
 /** @brief Verify that the matrix columns are accessible as vectors for reads. */
-TEST(Matrix2DAccess, AccessibleAsColumnVectors)
+TEST(Matrix2Access, AccessibleAsColumnVectors)
 {
     constexpr fgm::Matrix2 mat(1.0f, 2.0f, 3.0f, 4.0f);
 
-    EXPECT_VEC_EQ(fgm::Vector2D(1.0f, 3.0f), mat[0]);
-    EXPECT_VEC_EQ(fgm::Vector2D(2.0f, 4.0f), mat[1]);
+    EXPECT_VEC_EQ(fgm::Vector2(1.0f, 3.0f), mat[0]);
+    EXPECT_VEC_EQ(fgm::Vector2(2.0f, 4.0f), mat[1]);
 }
 
 
 #ifdef ENABLE_DEBUG_TESTS
 
-/** @brief Verify that @ref fgm::Matrix2D out-of-bounds column access triggers assert in debug mode. */
-TEST_P(Matrix2DColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Matrix2 out-of-bounds column access triggers assert in debug mode. */
+TEST_P(Matrix2ColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const fgm::Matrix2 mat(1, 2);
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
 }
 
-/** @brief Verify that @ref fgm::Matrix2D out-of-bounds row, column access triggers assert in debug mode. */
-TEST_P(Matrix2DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Matrix2 out-of-bounds row, column access triggers assert in debug mode. */
+TEST_P(Matrix2Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const fgm::Matrix2 mat(1, 2);
     const auto [row, col] = GetParam();
@@ -127,7 +127,7 @@ TEST_P(Matrix2DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
  **************************************/
 
 /** @brief Verify that the matrix elements are accessible via subscript indexing for writes. */
-TEST(Matrix2DAccess, ElementsCanBeMutatedUsingIndex)
+TEST(Matrix2Access, ElementsCanBeMutatedUsingIndex)
 {
     fgm::Matrix2<float> mat;
 
@@ -144,10 +144,10 @@ TEST(Matrix2DAccess, ElementsCanBeMutatedUsingIndex)
 
 
 /** @brief Verify that the matrix columns are accessible as vectors for writes. */
-TEST(Matrix2DAccess, ColumnsCanBeMutatedUsingIndex)
+TEST(Matrix2Access, ColumnsCanBeMutatedUsingIndex)
 {
-    const fgm::Vector2D col0 = { 1.0f, 3.0f };
-    const fgm::Vector2D col1 = { 2.0f, 4.0f };
+    const fgm::Vector2 col0 = { 1.0f, 3.0f };
+    const fgm::Vector2 col1 = { 2.0f, 4.0f };
     fgm::Matrix2<float> mat;
 
     mat[0] = col0;
@@ -160,8 +160,8 @@ TEST(Matrix2DAccess, ColumnsCanBeMutatedUsingIndex)
 
 #ifdef ENABLE_DEBUG_TESTS
 
-/** @brief Verify that @ref fgm::Matrix2D out-of-bounds column mutation triggers assert in debug mode. */
-TEST_P(Matrix2DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Matrix2 out-of-bounds column mutation triggers assert in debug mode. */
+TEST_P(Matrix2ColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix2 mat(1, 2);
     const auto col = GetParam();
@@ -169,8 +169,8 @@ TEST_P(Matrix2DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix2D out-of-bounds row, column mutation triggers assert in debug mode. */
-TEST_P(Matrix2DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Matrix2 out-of-bounds row, column mutation triggers assert in debug mode. */
+TEST_P(Matrix2Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix2 mat(1, 2);
     const auto [row, col] = GetParam();

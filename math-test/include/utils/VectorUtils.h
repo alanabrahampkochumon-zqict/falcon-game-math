@@ -5,8 +5,8 @@
  * @date Created on: February 16, 2026
  *
  * @brief Diagnostic and validation utilities for Vector types.
- *        Provides specialized testing helpers and assertion wrappers for @ref Vector2D,
- *        @ref Vector3D, and @ref Vector4D to ensure numerical stability and
+ *        Provides specialized testing helpers and assertion wrappers for @ref Vector2,
+ *        @ref Vector3, and @ref Vector4 to ensure numerical stability and
  *        geometric correctness across the fgm library.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -17,9 +17,9 @@
 #include <fgm/common/MathTraits.h>
 #include <gtest/gtest.h>
 #include <type_traits>
-#include <fgm/vectors/Vector2D.h>
-#include <fgm/vectors/Vector3D.h>
-#include <fgm/vectors/Vector4D.h>
+#include <fgm/vectors/Vector2.h>
+#include <fgm/vectors/Vector3.h>
+#include <fgm/vectors/Vector4.h>
 
 namespace testutils
 {
@@ -70,7 +70,7 @@ namespace testutils
 
 
     /**
-     * @brief Performs a strict component-wise validation of a @ref fgm::Vector2D against discrete scalar values.
+     * @brief Performs a strict component-wise validation of a @ref fgm::Vector2 against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
      *
@@ -82,7 +82,7 @@ namespace testutils
      *       internal state does not match the provided scalars.
      */
     template <fgm::Arithmetic T>
-    void EXPECT_VEC_CONTAINS(const fgm::Vector2D<T>& vector, T x, T y)
+    void EXPECT_VEC_CONTAINS(const fgm::Vector2<T>& vector, T x, T y)
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -103,7 +103,7 @@ namespace testutils
 
 
     /**
-     * @brief Performs a strict component-wise validation of a @ref fgm::Vector3D against discrete scalar values.
+     * @brief Performs a strict component-wise validation of a @ref fgm::Vector3 against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
      *
@@ -116,7 +116,7 @@ namespace testutils
      *       internal state does not match the provided scalars.
      */
     template <fgm::Arithmetic T>
-    void EXPECT_VEC_CONTAINS(const fgm::Vector3D<T>& vector, T x, T y, T z)
+    void EXPECT_VEC_CONTAINS(const fgm::Vector3<T>& vector, T x, T y, T z)
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -140,7 +140,7 @@ namespace testutils
 
 
     /**
-     * @brief Performs a strict component-wise validation of a @ref fgm::Vector4D against discrete scalar values.
+     * @brief Performs a strict component-wise validation of a @ref fgm::Vector4 against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
      *
@@ -154,7 +154,7 @@ namespace testutils
      *       internal state does not match the provided scalars.
      */
     template <fgm::Arithmetic T>
-    void EXPECT_VEC_CONTAINS(const fgm::Vector4D<T>& vector, T x, T y, T z, T w)
+    void EXPECT_VEC_CONTAINS(const fgm::Vector4<T>& vector, T x, T y, T z, T w)
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -307,7 +307,7 @@ namespace testutils
 
     // clang-format off
     /**
-     * @brief Validates that a @ref fgm::Vector4D components are positive `INFINITY`.
+     * @brief Validates that a @ref fgm::Vector4 components are positive `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -319,7 +319,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::Vector4D components are negative `INFINITY`.
+     * @brief Validates that a @ref fgm::Vector4 components are negative `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -331,7 +331,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::Vector3D components are positive `INFINITY`.
+     * @brief Validates that a @ref fgm::Vector3 components are positive `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -342,7 +342,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::Vector3D components are negative `INFINITY`.
+     * @brief Validates that a @ref fgm::Vector3 components are negative `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -353,7 +353,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::Vector2D components are positive `INFINITY`.
+     * @brief Validates that a @ref fgm::Vector2 components are positive `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -363,7 +363,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::Vector2D components are negative `INFINITY`.
+     * @brief Validates that a @ref fgm::Vector2 components are negative `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */

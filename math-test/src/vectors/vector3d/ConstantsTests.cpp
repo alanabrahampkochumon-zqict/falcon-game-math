@@ -3,25 +3,25 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 02, 2026
  *
- * @brief Verify @ref fgm::Vector3D constants (@ref fgm::Vector3D::one, @ref fgm::Vector3D::zero, etc).
+ * @brief Verify @ref fgm::Vector3 constants (@ref fgm::Vector3::one, @ref fgm::Vector3::zero, etc).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector3DTestSetup.h"
+#include "Vector3TestSetup.h"
 
 
 
 template <typename T>
-class Vector3DConstants: public testing::Test
+class Vector3Constants: public testing::Test
 {
 protected:
     T _one  = T(1);
     T _zero = T(0);
 };
-/** @brief Test fixture for @ref fgm::Vector3D constants, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vector3DConstants, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector3 constants, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Vector3Constants, SupportedArithmeticTypes);
 
 
 
@@ -30,7 +30,7 @@ TYPED_TEST_SUITE(Vector3DConstants, SupportedArithmeticTypes);
  * @{
  */
 
-/** @brief Verify that @ref fgm::Vector3D constants are available at compile time. */
+/** @brief Verify that @ref fgm::Vector3 constants are available at compile time. */
 namespace
 {
     static_assert(fgm::vec3d::one<int>.x() == 1);
@@ -54,7 +54,7 @@ namespace
 
 
 /** @brief Verify that @ref fgm::vec3d::one returns a 3D vector with unit components. */
-TYPED_TEST(Vector3DConstants, One_ReturnsVectorWithUnitComponents)
+TYPED_TEST(Vector3Constants, One_ReturnsVectorWithUnitComponents)
 {
     const TypeParam one = TypeParam(1);
     EXPECT_VEC_CONTAINS(fgm::vec3d::one<TypeParam>, one, one, one);
@@ -62,11 +62,11 @@ TYPED_TEST(Vector3DConstants, One_ReturnsVectorWithUnitComponents)
 
 
 /** @brief Verify that @ref fgm::vec3d::zero returns a 3D vector with zero components. */
-TYPED_TEST(Vector3DConstants, Zero_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::vec3d::zero<TypeParam>); }
+TYPED_TEST(Vector3Constants, Zero_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::vec3d::zero<TypeParam>); }
 
 
 /** @brief Verify that @ref fgm::vec3d::inf<float> returns a 3D vector with infinity components. */
-TEST(Vector3DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
+TEST(Vector3Constants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec3d::inf<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -75,7 +75,7 @@ TEST(Vector3DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::vec3d::inf<double> returns a 3D vector with infinity components. */
-TEST(Vector3DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
+TEST(Vector3Constants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec3d::inf<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
@@ -84,7 +84,7 @@ TEST(Vector3DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::vec3d::infN<float> returns a 3D vector with negative infinity components. */
-TEST(Vector3DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
+TEST(Vector3Constants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec3d::infN<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -93,7 +93,7 @@ TEST(Vector3DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityC
 
 
 /** @brief Verify that @ref fgm::vec3d::infN<double> returns a 3D vector with negative infinity components. */
-TEST(Vector3DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
+TEST(Vector3Constants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec3d::infN<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
@@ -102,7 +102,7 @@ TEST(Vector3DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 
 
 /** @brief Verify that @ref fgm::vec3d::infN<float> returns a 3D vector with NaN components. */
-TEST(Vector3DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
+TEST(Vector3Constants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
     const auto nan = fgm::vec3d::nan<float>;
     EXPECT_TRUE(std::isnan(nan.x()));
@@ -112,7 +112,7 @@ TEST(Vector3DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 
 
 /** @brief Verify that @ref fgm::vec3d::infN<double> returns a 3D vector with NaN components. */
-TEST(Vector3DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
+TEST(Vector3Constants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
     const auto nan = fgm::vec3d::nan<double>;
     EXPECT_TRUE(std::isnan(nan.x()));
@@ -122,7 +122,7 @@ TEST(Vector3DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 
 
 /** @brief Verify that @ref fgm::vec3d::x returns a unit vector aligned with x-axis. */
-TYPED_TEST(Vector3DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
+TYPED_TEST(Vector3Constants, X_ReturnsUnitVectorWithOnlyXComponent)
 {
     const auto x = fgm::vec3d::x<TypeParam>;
     EXPECT_VEC_CONTAINS(x, this->_one, this->_zero, this->_zero);
@@ -130,7 +130,7 @@ TYPED_TEST(Vector3DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 
 
 /** @brief Verify that @ref fgm::vec3d::y returns a unit vector aligned with y-axis. */
-TYPED_TEST(Vector3DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
+TYPED_TEST(Vector3Constants, Y_ReturnsUnitVectorWithOnlyYComponent)
 {
     const auto y = fgm::vec3d::y<TypeParam>;
     EXPECT_VEC_CONTAINS(y, this->_zero, this->_one, this->_zero);
@@ -138,7 +138,7 @@ TYPED_TEST(Vector3DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
 
 
 /** @brief Verify that @ref fgm::vec3d::z returns a unit vector aligned with z-axis. */
-TYPED_TEST(Vector3DConstants, Z_ReturnsUnitVectorWithOnlyZComponent)
+TYPED_TEST(Vector3Constants, Z_ReturnsUnitVectorWithOnlyZComponent)
 {
     const auto z = fgm::vec3d::z<TypeParam>;
     EXPECT_VEC_CONTAINS(z, this->_zero, this->_zero, this->_one);

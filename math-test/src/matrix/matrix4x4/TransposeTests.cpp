@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 07, 2026
  *
- * @brief Verify @ref fgm::Matrix4D transpose logic.
+ * @brief Verify @ref fgm::Matrix4 transpose logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,7 +20,7 @@
  **************************************/
 
 template <typename T>
-class Matrix4DTranspose: public ::testing::Test
+class Matrix4Transpose: public ::testing::Test
 {
 protected:
     fgm::Matrix4<T> _matrix, _expectedTranspose;
@@ -37,8 +37,8 @@ protected:
                                { T(4), T(8), T(12), T(16) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix4D transpose, parameterized @ref SupportedTypes */
-TYPED_TEST_SUITE(Matrix4DTranspose, SupportedTypes);
+/** @brief Test fixture for @ref fgm::Matrix4 transpose, parameterized @ref SupportedTypes */
+TYPED_TEST_SUITE(Matrix4Transpose, SupportedTypes);
 
 
 
@@ -115,15 +115,15 @@ namespace
 
 
 /** @brief Verify that transposing a matrix exchanges row and column elements and returns a new matrix. */
-TYPED_TEST(Matrix4DTranspose, ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix4Transpose, ExchangesRowsAndColumnElements)
 { EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose()); }
 
 
 /**
- * @brief Verify that transposing a matrix using static variant of @ref fgm::Matrix4D::transpose exchanges row and
+ * @brief Verify that transposing a matrix using static variant of @ref fgm::Matrix4::transpose exchanges row and
  *        column elements and returns a new matrix.
  */
-TYPED_TEST(Matrix4DTranspose, StaticWrapper_ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix4Transpose, StaticWrapper_ExchangesRowsAndColumnElements)
 { EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix4<TypeParam>::transpose(this->_matrix)); }
 
 /** @} */

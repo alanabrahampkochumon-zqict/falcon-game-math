@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verify @ref fgm::Vector4D conversion constructor logic.
+ * @brief Verify @ref fgm::Vector4 conversion constructor logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector4DTestSetup.h"
+#include "Vector4TestSetup.h"
 
 
 
@@ -27,11 +27,11 @@
 /** @brief Verify that vector conversion constructor is available during compile time. */
 namespace
 {
-    constexpr fgm::Vector4D vecF(3.0f, 1.0f, 4.0f, 5.0f);
-    constexpr fgm::Vector4D<double> vecD(vecF);
+    constexpr fgm::Vector4 vecF(3.0f, 1.0f, 4.0f, 5.0f);
+    constexpr fgm::Vector4<double> vecD(vecF);
     static_assert(std::is_same_v<decltype(vecD)::value_type, double>);
 
-    [[maybe_unused]] constexpr fgm::Vector4D<float> vecF2(vecD);
+    [[maybe_unused]] constexpr fgm::Vector4<float> vecF2(vecD);
     static_assert(std::is_same_v<decltype(vecF2)::value_type, float>);
 
 } // namespace
@@ -48,24 +48,24 @@ namespace
 /**
  * @brief Verify that the conversion constructor correctly promotes components from float to double.
  */
-TEST(Vector4DConversionConstructor, PromotesType)
+TEST(Vector4ConversionConstructor, PromotesType)
 {
-    const fgm::Vector4D vec1(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4 vec1(3.0f, 1.0f, 6.0f, 2.0f);
 
-    [[maybe_unused]] const fgm::Vector4D<double> vec2(vec1);
+    [[maybe_unused]] const fgm::Vector4<double> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, double>);
 }
 
 
 /** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
-TEST(Vector4DConversionConstructor, ReturnsNewInstance)
+TEST(Vector4ConversionConstructor, ReturnsNewInstance)
 {
     // Given a float vector
-    const fgm::Vector4D vec1(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4 vec1(3.0f, 1.0f, 6.0f, 2.0f);
 
     // When converted to a double vector
-    fgm::Vector4D<double> vec2(vec1);
+    fgm::Vector4<double> vec2(vec1);
     // And one of its value mutated
     vec2.x() = 5;
 
@@ -80,11 +80,11 @@ TEST(Vector4DConversionConstructor, ReturnsNewInstance)
 /**
  * @brief Verify that the conversion constructor correctly demotes components from double to float.
  */
-TEST(Vector4DConversionConstructor, DemotesType)
+TEST(Vector4ConversionConstructor, DemotesType)
 {
-    const fgm::Vector4D vec1(3.0, 1.0, 6.0, 2.0);
+    const fgm::Vector4 vec1(3.0, 1.0, 6.0, 2.0);
 
-    [[maybe_unused]] const fgm::Vector4D<float> vec2(vec1);
+    [[maybe_unused]] const fgm::Vector4<float> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, float>);
 }

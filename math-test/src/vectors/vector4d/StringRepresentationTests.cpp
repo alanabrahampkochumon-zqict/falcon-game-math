@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 16, 2026
  *
- * @brief Verify @ref fgm::Vector4D string representation.
+ * @brief Verify @ref fgm::Vector4 string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector4DTestSetup.h"
+#include "Vector4TestSetup.h"
 
 #include <sstream>
 
@@ -21,7 +21,7 @@
  *                                    *
  **************************************/
 
-class Vector4DStringRepresentationTests: public ::testing::Test
+class Vector4StringRepresentationTests: public ::testing::Test
 {
     /** @brief Switch to use full precision for testing. */
     void SetUp() override { fgm::Config::useFullPrecision = true; }
@@ -38,9 +38,9 @@ class Vector4DStringRepresentationTests: public ::testing::Test
  */
 
 /** @brief Verify that the string representation matches the expected format for integral types. */
-TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)
+TEST_F(Vector4StringRepresentationTests, IntegralRepresentation)
 {
-    const fgm::Vector4D vec(1, 2, 3, 4);
+    const fgm::Vector4 vec(1, 2, 3, 4);
     std::stringstream ss;
 
     ss << vec;
@@ -53,9 +53,9 @@ TEST_F(Vector4DStringRepresentationTests, IntegralRepresentation)
  * @brief Verify that the string representation matches the expected format for single-precision
  *       floating-point types.
  */
-TEST_F(Vector4DStringRepresentationTests, FloatRepresentation)
+TEST_F(Vector4StringRepresentationTests, FloatRepresentation)
 {
-    const fgm::Vector4D vec(1.2345f, 2.0f, 3.56789f, 4.2f);
+    const fgm::Vector4 vec(1.2345f, 2.0f, 3.56789f, 4.2f);
     std::stringstream ss;
 
     ss << vec;
@@ -68,9 +68,9 @@ TEST_F(Vector4DStringRepresentationTests, FloatRepresentation)
  * @brief Verify that the string representation matches the expected format for double-precision
  *       floating-point types.
  */
-TEST_F(Vector4DStringRepresentationTests, DoubleRepresentation)
+TEST_F(Vector4StringRepresentationTests, DoubleRepresentation)
 {
-    const fgm::Vector4D vec(1.2345789777, 2.65831, 3.161285, 4.0);
+    const fgm::Vector4 vec(1.2345789777, 2.65831, 3.161285, 4.0);
     std::stringstream ss;
 
     ss << vec;

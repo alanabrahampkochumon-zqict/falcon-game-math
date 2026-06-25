@@ -288,7 +288,7 @@ namespace demo
                 {
                     const auto offset      = y * static_cast<std::size_t>(width) + x;
                     const auto colorOffset = static_cast<std::size_t>(colorChannels) * offset;
-                    const auto point       = fgm::Vector2D(static_cast<float>(x), static_cast<float>(y));
+                    const auto point       = fgm::Vector2(static_cast<float>(x), static_cast<float>(y));
 
                     if (offset > static_cast<std::size_t>(width * height))
                         continue;

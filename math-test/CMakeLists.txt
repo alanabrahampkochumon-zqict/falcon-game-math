@@ -3,21 +3,21 @@ add_executable(MathTestSuite)
 target_compile_features(MathTestSuite PRIVATE cxx_std_20)
 
 set(IncludeDir "include/")
-set(SetupFiles "Vector2DTestSetup.h;Vector3DTestSetup.h;Vector4DTestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;CommonSetup.h;")
+set(SetupFiles "Vector2TestSetup.h;Vector3TestSetup.h;Vector4TestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;CommonSetup.h;")
 list(TRANSFORM SetupFiles PREPEND ${IncludeDir})
 
 # Vector Test Sources
-set(Vector4DTestDir "src/vectors/vector4d/")
-set(Vector4DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;SwizzlingTests.cpp;PNormTests.cpp;DistanceTests.cpp;")
-list(TRANSFORM Vector4DTestFiles PREPEND ${Vector4DTestDir})
+set(Vector4TestDir "src/vectors/vector4d/")
+set(Vector4TestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;SwizzlingTests.cpp;PNormTests.cpp;DistanceTests.cpp;")
+list(TRANSFORM Vector4TestFiles PREPEND ${Vector4TestDir})
 
-set(Vector3DTestDir "src/vectors/vector3d/")
-set(Vector3DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;SwizzlingTests.cpp;PNormTests.cpp;DistanceTests.cpp;")
-list(TRANSFORM Vector3DTestFiles PREPEND ${Vector3DTestDir})
+set(Vector3TestDir "src/vectors/vector3d/")
+set(Vector3TestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;SwizzlingTests.cpp;PNormTests.cpp;DistanceTests.cpp;")
+list(TRANSFORM Vector3TestFiles PREPEND ${Vector3TestDir})
 
-set(Vector2DTestDir "src/vectors/vector2d/")
-set(Vector2DTestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;SwizzlingTests.cpp;PNormTests.cpp;DistanceTests.cpp;")
-list(TRANSFORM Vector2DTestFiles PREPEND ${Vector2DTestDir})
+set(Vector2TestDir "src/vectors/vector2d/")
+set(Vector2TestFiles "AccessAndMutationTests.cpp;ArithmeticOperationTests.cpp;BooleanBitOperationTests.cpp;ComparisonTests.cpp;ConstantsTests.cpp;InitializationTests.cpp;TypeConversionTests.cpp;AliasTests.cpp;EqualityTests.cpp;ProductTests.cpp;MagnitudeTests.cpp;ProjectionTests.cpp;NormalizationTests.cpp;RejectionTests.cpp;StringRepresentationTests.cpp;UtilityTests.cpp;SwizzlingTests.cpp;PNormTests.cpp;DistanceTests.cpp;")
+list(TRANSFORM Vector2TestFiles PREPEND ${Vector2TestDir})
 
 
 # Matrix Test Sources
@@ -48,9 +48,9 @@ list(TRANSFORM GenericTestFiles PREPEND "src/")
 target_sources(
         MathTestSuite
         PRIVATE
-        ${Vector2DTestFiles}
-        ${Vector3DTestFiles}
-        ${Vector4DTestFiles}
+        ${Vector2TestFiles}
+        ${Vector3TestFiles}
+        ${Vector4TestFiles}
         ${Matrix2x2TestFiles}
         ${Matrix3x3TestFiles}
         ${Matrix4x4TestFiles}
@@ -111,9 +111,9 @@ source_group(
         "${CMAKE_CURRENT_SOURCE_DIR}/src/"
         PREFIX "Source Files"
         FILES
-        ${Vector2DTestFiles}
-        ${Vector3DTestFiles}
-        ${Vector4DTestFiles}
+        ${Vector2TestFiles}
+        ${Vector3TestFiles}
+        ${Vector4TestFiles}
         ${Matrix2x2TestFiles}
         ${Matrix3x3TestFiles}
         ${Matrix4x4TestFiles}

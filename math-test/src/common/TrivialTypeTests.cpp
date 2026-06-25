@@ -14,9 +14,9 @@
 #include <fgm/matrices/Matrix2.h>
 #include <fgm/matrices/Matrix3.h>
 #include <fgm/matrices/Matrix4.h>
-#include <fgm/vectors/Vector2D.h>
-#include <fgm/vectors/Vector3D.h>
-#include <fgm/vectors/Vector4D.h>
+#include <fgm/vectors/Vector2.h>
+#include <fgm/vectors/Vector3.h>
+#include <fgm/vectors/Vector4.h>
 
 
 /**
@@ -25,9 +25,9 @@
  */
 
 /** @brief Verify that @ref fgm Vectors are trivial types. */
-ASSERT_TRIVIAL_TYPE(fgm::Vector2D<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Vector3D<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Vector4D<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Vector2<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Vector3<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Vector4<float>);
 
 
 /** @brief Verify that @ref fgm Matrices are trivial types. */

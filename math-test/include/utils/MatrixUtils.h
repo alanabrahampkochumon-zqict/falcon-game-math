@@ -5,8 +5,8 @@
  * @date Created on: February 16, 2026
  *
  * @brief Diagnostic and validation utilities for Matrix types.
- *        Provides specialized testing helpers and assertion wrappers for @ref fgm::Matrix2D,
- *        @ref fgm::Matrix3D, and @ref fgm::Matrix4D to ensure numerical stability and
+ *        Provides specialized testing helpers and assertion wrappers for @ref fgm::Matrix2,
+ *        @ref fgm::Matrix3, and @ref fgm::Matrix4 to ensure numerical stability and
  *        geometric correctness across the fgm library.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -251,7 +251,7 @@ namespace testutils
 } // namespace testutils
 
 // TODO: Deprecated Remove after refactor
-namespace testutils::Matrix3D
+namespace testutils::Matrix3
 {
 
     static unsigned int SIZE     = 9;
@@ -348,9 +348,9 @@ namespace testutils::Matrix3D
             EXPECT_TRUE(std::isinf(actual(i / ROW_SIZE, i % ROW_SIZE)));
         }
     }
-} // namespace testutils::Matrix3D
+} // namespace testutils::Matrix3
 
-namespace testutils::Matrix2D
+namespace testutils::Matrix2
 {
 
     static unsigned int SIZE     = 4;
@@ -431,4 +431,4 @@ namespace testutils::Matrix2D
             EXPECT_TRUE(std::isinf(actual(i / ROW_SIZE, i % ROW_SIZE)));
         }
     }
-} // namespace testutils::Matrix2D
+} // namespace testutils::Matrix2

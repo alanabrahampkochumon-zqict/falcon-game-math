@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 22, 2026
  *
- * @brief Verify @ref fgm::Matrix3D initialization.
+ * @brief Verify @ref fgm::Matrix3 initialization.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,12 +14,12 @@
 
 
 template <typename T>
-class Matrix3DInitialization: public ::testing::Test
+class Matrix3Initialization: public ::testing::Test
 {
 protected:
     std::vector<T> _elements;
     std::vector<T> _diagonalElements;
-    fgm::Vector3D<T> _col0, _col1, _col2;
+    fgm::Vector3<T> _col0, _col1, _col2;
     T _diagonal0, _diagonal1, _diagonal2;
 
     void SetUp() override
@@ -34,8 +34,8 @@ protected:
         _diagonal2        = T(5);
     }
 };
-/** Test fixture for @ref fgm::Matrix3D initialization, parameterized by @ref SupportedTypes. */
-TYPED_TEST_SUITE(Matrix3DInitialization, SupportedTypes);
+/** Test fixture for @ref fgm::Matrix3 initialization, parameterized by @ref SupportedTypes. */
+TYPED_TEST_SUITE(Matrix3Initialization, SupportedTypes);
 
 
 
@@ -67,7 +67,7 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Matrix3 MAT2(fgm::Vector3D(1, 4, 7), fgm::Vector3D(2, 5, 8), fgm::Vector3D(3, 6, 9));
+    constexpr fgm::Matrix3 MAT2(fgm::Vector3(1, 4, 7), fgm::Vector3(2, 5, 8), fgm::Vector3(3, 6, 9));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
     static_assert(MAT2(0, 2) == 3);
@@ -114,7 +114,7 @@ namespace
  **************************************/
 
 /** @brief Verify that the default constructor initializes an identity matrix. */
-TYPED_TEST(Matrix3DInitialization, EmptyConstructorReturnsIdentityMatrix)
+TYPED_TEST(Matrix3Initialization, EmptyConstructorReturnsIdentityMatrix)
 {
     const fgm::Matrix3<TypeParam> matrix{};
 
@@ -123,7 +123,7 @@ TYPED_TEST(Matrix3DInitialization, EmptyConstructorReturnsIdentityMatrix)
 
 
 /** @brief Verify that the parameterized constructor can initialize matrix with elements. */
-TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesMatrixWithElements)
+TYPED_TEST(Matrix3Initialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
     const fgm::Matrix3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
                                           this->_elements[3], this->_elements[4], this->_elements[5],
@@ -133,7 +133,7 @@ TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesMatrixWith
 
 
 /** @brief Verify that the parameterized constructor can initialize matrix with vectors. */
-TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesMatrixWithVectors)
+TYPED_TEST(Matrix3Initialization, ParameterizedConstructorInitializesMatrixWithVectors)
 {
     const fgm::Matrix3<TypeParam> matrix(this->_col0, this->_col1, this->_col2);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
@@ -141,7 +141,7 @@ TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesMatrixWith
 
 
 /** @brief Verify that the parameterized constructor can initialize a diagonal matrix. */
-TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesDiagonalMatrix)
+TYPED_TEST(Matrix3Initialization, ParameterizedConstructorInitializesDiagonalMatrix)
 {
     const fgm::Matrix3<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2);
     EXPECT_MAT_CONTAINS(this->_diagonalElements, matrix);
@@ -149,7 +149,7 @@ TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesDiagonalMa
 
 
 /** @brief Verify that a matrix can be initialized with implicit braced initialization. */
-TYPED_TEST(Matrix3DInitialization, CanBeConstructedWithBracedInitialization)
+TYPED_TEST(Matrix3Initialization, CanBeConstructedWithBracedInitialization)
 {
     const fgm::Matrix3<TypeParam> matrix = { { TypeParam(1), TypeParam(4), TypeParam(7) },
                                               { TypeParam(2), TypeParam(5), TypeParam(8) },

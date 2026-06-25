@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Vector2D conversion constructor logic.
+ * @brief Verify @ref fgm::Vector2 conversion constructor logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector2DTestSetup.h"
+#include "Vector2TestSetup.h"
 
 
 
@@ -27,11 +27,11 @@
 /** @brief Verify that vector conversion constructor is available during compile time. */
 namespace
 {
-    constexpr fgm::Vector2D vecF(3.0f, 1.0f);
-    constexpr fgm::Vector2D<double> vecD(vecF);
+    constexpr fgm::Vector2 vecF(3.0f, 1.0f);
+    constexpr fgm::Vector2<double> vecD(vecF);
     static_assert(std::is_same_v<decltype(vecD)::value_type, double>);
 
-    [[maybe_unused]] constexpr fgm::Vector2D<float> vecF2(vecD);
+    [[maybe_unused]] constexpr fgm::Vector2<float> vecF2(vecD);
     static_assert(std::is_same_v<decltype(vecF2)::value_type, float>);
 
 } // namespace
@@ -47,24 +47,24 @@ namespace
 /**
  * @brief Verify that the conversion constructor promotes value type of vector components from float to double.
  */
-TEST(Vector2DConversionConstructor, PromotesType)
+TEST(Vector2ConversionConstructor, PromotesType)
 {
-    const fgm::Vector2D vec1(3.0f, 1.0f);
+    const fgm::Vector2 vec1(3.0f, 1.0f);
 
-    [[maybe_unused]] const fgm::Vector2D<double> vec2(vec1);
+    [[maybe_unused]] const fgm::Vector2<double> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, double>);
 }
 
 
 /** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
-TEST(Vector2DConversionConstructor, ReturnsNewInstance)
+TEST(Vector2ConversionConstructor, ReturnsNewInstance)
 {
     // Given a float vector
-    const fgm::Vector2D vec1(3.0f, 1.0f);
+    const fgm::Vector2 vec1(3.0f, 1.0f);
 
     // When converted to a double vector
-    fgm::Vector2D<double> vec2(vec1);
+    fgm::Vector2<double> vec2(vec1);
     // And one of its value mutated
     vec2.x() = 5;
 
@@ -79,11 +79,11 @@ TEST(Vector2DConversionConstructor, ReturnsNewInstance)
 /**
  * @brief Verify that the conversion constructor correctly demotes value type of vector components from double to float.
  */
-TEST(Vector2DConversionConstructor, DemotesType)
+TEST(Vector2ConversionConstructor, DemotesType)
 {
-    const fgm::Vector2D vec1(3.0, 1.0);
+    const fgm::Vector2 vec1(3.0, 1.0);
 
-    [[maybe_unused]] const fgm::Vector2D<float> vec2(vec1);
+    [[maybe_unused]] const fgm::Vector2<float> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, float>);
 }

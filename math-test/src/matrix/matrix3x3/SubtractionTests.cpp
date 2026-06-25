@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 24, 2026
  *
- * @brief Verify @ref fgm::Matrix3D subtraction logic.
+ * @brief Verify @ref fgm::Matrix3 subtraction logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,7 +20,7 @@
  **************************************/
 
 template <typename T>
-class Matrix3DSubtraction: public ::testing::Test
+class Matrix3Subtraction: public ::testing::Test
 {
 protected:
     fgm::Matrix3<T> _matA;
@@ -29,13 +29,13 @@ protected:
 
     void SetUp() override
     {
-        _matA = { fgm::Vector3D<T>{ 5, 6, 9 }, fgm::Vector3D<T>{ 13, 8, 5 }, fgm::Vector3D<T>{ 5, 4, 10 } };
-        _matB = { fgm::Vector3D<T>{ 3, 1, 6 }, fgm::Vector3D<T>{ 8, 1, 5 }, fgm::Vector3D<T>{ 2, 3, 1 } };
-        _expectedDifference = { fgm::Vector3D<T>{ 2, 5, 3 }, fgm::Vector3D<T>{ 5, 7, 0 }, fgm::Vector3D<T>{ 3, 1, 9 } };
+        _matA = { fgm::Vector3<T>{ 5, 6, 9 }, fgm::Vector3<T>{ 13, 8, 5 }, fgm::Vector3<T>{ 5, 4, 10 } };
+        _matB = { fgm::Vector3<T>{ 3, 1, 6 }, fgm::Vector3<T>{ 8, 1, 5 }, fgm::Vector3<T>{ 2, 3, 1 } };
+        _expectedDifference = { fgm::Vector3<T>{ 2, 5, 3 }, fgm::Vector3<T>{ 5, 7, 0 }, fgm::Vector3<T>{ 3, 1, 9 } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix3D subtraction, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix3DSubtraction, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix3 subtraction, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix3Subtraction, SupportedArithmeticTypes);
 
 
 /**
@@ -79,7 +79,7 @@ namespace
  * @brief Verify that the binary subtraction operator perform an element-wise subtraction and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Matrix3DSubtraction, MinusOperator_ReturnsDifference)
+TYPED_TEST(Matrix3Subtraction, MinusOperator_ReturnsDifference)
 {
     const fgm::Matrix3 difference = this->_matA - this->_matB;
 
@@ -91,7 +91,7 @@ TYPED_TEST(Matrix3DSubtraction, MinusOperator_ReturnsDifference)
  * @brief Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Matrix3DSubtraction, MixedTypeSubtractionPromotesType)
+TEST(Matrix3Subtraction, MixedTypeSubtractionPromotesType)
 {
     const fgm::Matrix3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f);
     const fgm::Matrix3 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);
@@ -106,7 +106,7 @@ TEST(Matrix3DSubtraction, MixedTypeSubtractionPromotesType)
  * @brief Verify that the compound subtraction assignment operator perform an element-wise subtraction
  *       and mutates the matrix in-place.
  */
-TYPED_TEST(Matrix3DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
+TYPED_TEST(Matrix3Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
 {
     this->_matA -= this->_matB;
 
@@ -118,7 +118,7 @@ TYPED_TEST(Matrix3DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix3DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+TEST(Matrix3Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
     fgm::Matrix3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f);
     const fgm::Matrix3 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 14, 2026
  *
- * @brief Verify @ref fgm::Matrix2D string representation.
+ * @brief Verify @ref fgm::Matrix2 string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -21,7 +21,7 @@
  *                                    *
  **************************************/
 
-class Matrix2DStringRepresentationTests: public ::testing::Test
+class Matrix2StringRepresentationTests: public ::testing::Test
 {
     /** @brief Switch to use full precision for testing. */
     void SetUp() override { fgm::Config::useFullPrecision = true; }
@@ -38,7 +38,7 @@ class Matrix2DStringRepresentationTests: public ::testing::Test
  */
 
 /** @brief Verify that the string representation matches the expected format for integral types. */
-TEST_F(Matrix2DStringRepresentationTests, IntegralRepresentation)
+TEST_F(Matrix2StringRepresentationTests, IntegralRepresentation)
 {
     const fgm::Matrix2 mat(1, 2, 3, 4);
     std::stringstream ss;
@@ -53,7 +53,7 @@ TEST_F(Matrix2DStringRepresentationTests, IntegralRepresentation)
  * @brief Verify that the string representation matches the expected format for single-precision
  *       floating-point types.
  */
-TEST_F(Matrix2DStringRepresentationTests, FloatRepresentation)
+TEST_F(Matrix2StringRepresentationTests, FloatRepresentation)
 {
     const fgm::Matrix2 mat(1.2345f, 2.0f, 4.53823f, 3.323f);
     std::stringstream ss;
@@ -68,7 +68,7 @@ TEST_F(Matrix2DStringRepresentationTests, FloatRepresentation)
  * @brief Verify that the string representation matches the expected format for double-precision
  *       floating-point types.
  */
-TEST_F(Matrix2DStringRepresentationTests, DoubleRepresentation)
+TEST_F(Matrix2StringRepresentationTests, DoubleRepresentation)
 {
     const fgm::Matrix2 mat(1.2345789777, 2.65831, 2.0, 4.0);
     std::stringstream ss;

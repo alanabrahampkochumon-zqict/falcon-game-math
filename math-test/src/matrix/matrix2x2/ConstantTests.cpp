@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 15, 2026
  *
- * @brief Verify @ref fgm::Matrix2D constants (@ref fgm::Matrix2D::eye, @ref fgm::Matrix2D::zero).
+ * @brief Verify @ref fgm::Matrix2 constants (@ref fgm::Matrix2::eye, @ref fgm::Matrix2::zero).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,10 +14,10 @@
 
 
 template <typename T>
-class Matrix2DConstants: public ::testing::Test
+class Matrix2Constants: public ::testing::Test
 {};
-/** @brief Test fixture for @ref fgm::Matrix2D constants, parameterized @ref SupportedArithmeticTypes.*/
-TYPED_TEST_SUITE(Matrix2DConstants, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix2 constants, parameterized @ref SupportedArithmeticTypes.*/
+TYPED_TEST_SUITE(Matrix2Constants, SupportedArithmeticTypes);
 
 
 
@@ -32,7 +32,7 @@ TYPED_TEST_SUITE(Matrix2DConstants, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
-/** @brief Verify that @ref fgm::Matrix2D constants are available at compile time. */
+/** @brief Verify that @ref fgm::Matrix2 constants are available at compile time. */
 namespace
 {
     // Verify identity matrix
@@ -73,20 +73,20 @@ namespace
  **************************************/
 
 /** @brief Verify that @ref fgm::mat2d::eye returns an identity matrix. */
-TYPED_TEST(Matrix2DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::mat2d::eye<TypeParam>); }
+TYPED_TEST(Matrix2Constants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::mat2d::eye<TypeParam>); }
 
 
-/** @brief Verify that @ref fgm::Matrix2D::eye static factory returns an identity matrix. */
-TYPED_TEST(Matrix2DConstants, StaticWrapper_Eye_ReturnsIdentityMatrix)
+/** @brief Verify that @ref fgm::Matrix2::eye static factory returns an identity matrix. */
+TYPED_TEST(Matrix2Constants, StaticWrapper_Eye_ReturnsIdentityMatrix)
 { EXPECT_MAT_IDENTITY(fgm::Matrix2<TypeParam>::eye()); }
 
 
 /** @brief Verify that @ref fgm::mat2d::zero returns a zero matrix. */
-TYPED_TEST(Matrix2DConstants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat2d::zero<TypeParam>); }
+TYPED_TEST(Matrix2Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat2d::zero<TypeParam>); }
 
 
-/** @brief Verify that @ref fgm::Matrix2D::zero static factory returns a zero matrix. */
-TYPED_TEST(Matrix2DConstants, StaticWrapper_Zero_ReturnsZeroMatrix)
+/** @brief Verify that @ref fgm::Matrix2::zero static factory returns a zero matrix. */
+TYPED_TEST(Matrix2Constants, StaticWrapper_Zero_ReturnsZeroMatrix)
 { EXPECT_MAT_ZERO(fgm::Matrix2<TypeParam>::zero()); }
 
 /** @} */

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 14, 2026
  *
- * @brief Verify @ref fgm::Matrix2D transpose logic.
+ * @brief Verify @ref fgm::Matrix2 transpose logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,19 +20,19 @@
  **************************************/
 
 template <typename T>
-class Matrix2DTranspose: public ::testing::Test
+class Matrix2Transpose: public ::testing::Test
 {
 protected:
     fgm::Matrix2<T> _matrix, _expectedTranspose;
 
     void SetUp() override
     {
-        _matrix            = { fgm::Vector2D{ T(1), T(2) }, fgm::Vector2D{ T(3), T(4) } };
-        _expectedTranspose = { fgm::Vector2D{ T(1), T(3) }, fgm::Vector2D{ T(2), T(4) } };
+        _matrix            = { fgm::Vector2{ T(1), T(2) }, fgm::Vector2{ T(3), T(4) } };
+        _expectedTranspose = { fgm::Vector2{ T(1), T(3) }, fgm::Vector2{ T(2), T(4) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D transpose, parameterized @ref SupportedTypes */
-TYPED_TEST_SUITE(Matrix2DTranspose, SupportedTypes);
+/** @brief Test fixture for @ref fgm::Matrix2 transpose, parameterized @ref SupportedTypes */
+TYPED_TEST_SUITE(Matrix2Transpose, SupportedTypes);
 
 
 
@@ -77,15 +77,15 @@ namespace
 
 
 /** @brief Verify that transposing a matrix exchanges row and column elements and returns a new matrix. */
-TYPED_TEST(Matrix2DTranspose, ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix2Transpose, ExchangesRowsAndColumnElements)
 { EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose()); }
 
 
 /**
- * @brief Verify that transposing a matrix using static variant of @ref fgm::Matrix2D::transpose exchanges row and
+ * @brief Verify that transposing a matrix using static variant of @ref fgm::Matrix2::transpose exchanges row and
  *        column elements and returns a new matrix.
  */
-TYPED_TEST(Matrix2DTranspose, StaticWrapper_ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix2Transpose, StaticWrapper_ExchangesRowsAndColumnElements)
 { EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix2<TypeParam>::transpose(this->_matrix)); }
 
 /** @} */

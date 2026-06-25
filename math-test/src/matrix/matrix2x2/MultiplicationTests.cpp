@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 10, 2026
  *
- * @brief Verify @ref fgm::Matrix2D multiplication logic.
+ * @brief Verify @ref fgm::Matrix2 multiplication logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,7 +14,7 @@
 
 
 template <typename T>
-class Matrix2DScalarMultiplication: public ::testing::Test
+class Matrix2ScalarMultiplication: public ::testing::Test
 {
 protected:
     fgm::Matrix2<T> _mat;
@@ -26,30 +26,30 @@ protected:
 
     void SetUp() override
     {
-        _mat                 = { fgm::Vector2D{ T(7), T(13) }, fgm::Vector2D{ T(5), T(4) } };
+        _mat                 = { fgm::Vector2{ T(7), T(13) }, fgm::Vector2{ T(5), T(4) } };
         _scalar              = T(2.123456789123456);
-        _expectedFloatingMat = { fgm::Vector2D{ T(14.864197523864192), T(27.604938258604928) },
-                                 fgm::Vector2D{ T(10.61728394561728), T(8.493827156493824) } };
-        _expectedIntegralMat = { fgm::Vector2D{ T(14), T(26) }, fgm::Vector2D{ T(10), T(8) } };
+        _expectedFloatingMat = { fgm::Vector2{ T(14.864197523864192), T(27.604938258604928) },
+                                 fgm::Vector2{ T(10.61728394561728), T(8.493827156493824) } };
+        _expectedIntegralMat = { fgm::Vector2{ T(14), T(26) }, fgm::Vector2{ T(10), T(8) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix2DScalarMultiplication, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix2 scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix2ScalarMultiplication, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Matrix2DVectorMultiplication: public ::testing::Test
+class Matrix2VectorMultiplication: public ::testing::Test
 {
 protected:
     fgm::Matrix2<T> _mat;
-    fgm::Vector2D<T> _vec;
-    fgm::Vector2D<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
+    fgm::Vector2<T> _vec;
+    fgm::Vector2<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
         _expectedIntegralRowVector;
 
     void SetUp() override
     {
-        _mat                       = { fgm::Vector2D{ T(7.12345678912345), T(13.12345678912345) },
-                                       fgm::Vector2D{ T(5.12345678912345), T(4.12345678912345) } };
+        _mat                       = { fgm::Vector2{ T(7.12345678912345), T(13.12345678912345) },
+                                       fgm::Vector2{ T(5.12345678912345), T(4.12345678912345) } };
         _vec                       = { T(2.123456789123456), T(3.123456832912) };
         _expectedFloatingColVector = { T(31.129248797008778), T(40.74653269883751) };
         _expectedIntegralColVector = { T(29), T(38) };
@@ -57,76 +57,76 @@ protected:
         _expectedIntegralRowVector = { T(53), T(22) };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix2DVectorMultiplication, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix2 vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix2VectorMultiplication, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Matrix2DVectorFractionalMultiplication: public ::testing::Test
+class Matrix2VectorFractionalMultiplication: public ::testing::Test
 {
 protected:
     fgm::Matrix2<T> _mat;
-    fgm::Vector2D<T> _vec, _expectedColVector, _expectedRowVector;
+    fgm::Vector2<T> _vec, _expectedColVector, _expectedRowVector;
 
     void SetUp() override
     {
-        _mat = { fgm::Vector2D{ T(0.1234568989329), T(0.1234214891234) },
-                 fgm::Vector2D{ T(-0.123489823149), T(-0.123489757623) } };
-        _vec = fgm::Vector2D{ T(0.8923764912287), T(0.78352829112384) };
+        _mat = { fgm::Vector2{ T(0.1234568989329), T(0.1234214891234) },
+                 fgm::Vector2{ T(-0.123489823149), T(-0.123489757623) } };
+        _vec = fgm::Vector2{ T(0.8923764912287), T(0.78352829112384) };
 
-        _expectedColVector = fgm::Vector2D{ T(0.013412264184596345), T(0.013380716644514457) };
-        _expectedRowVector = fgm::Vector2D{ T(0.20687426274853477), T(-0.20695713384580372) };
+        _expectedColVector = fgm::Vector2{ T(0.013412264184596345), T(0.013380716644514457) };
+        _expectedRowVector = fgm::Vector2{ T(0.20687426274853477), T(-0.20695713384580372) };
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Matrix2D vector multiplication with small fractions,
+ * @brief Test fixture for @ref fgm::Matrix2 vector multiplication with small fractions,
  *        parameterized by @ref SupportedFloatingPointTypes.
  */
-TYPED_TEST_SUITE(Matrix2DVectorFractionalMultiplication, SupportedFloatingPointTypes);
+TYPED_TEST_SUITE(Matrix2VectorFractionalMultiplication, SupportedFloatingPointTypes);
 
 
 template <typename T>
-class Matrix2DMultiplication: public ::testing::Test
+class Matrix2Multiplication: public ::testing::Test
 {
 protected:
     fgm::Matrix2<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
 
     void SetUp() override
     {
-        _matA = { fgm::Vector2D{ T(7.12345678912345), T(13.12345678912345) },
-                  fgm::Vector2D{ T(5.12345678912345), T(4.12345678912345) } };
-        _matB = { fgm::Vector2D{ T(3.12345678912345), T(10.12345678912345) },
-                  fgm::Vector2D{ T(8.12345678912345), T(3.12345678912345) } };
+        _matA = { fgm::Vector2{ T(7.12345678912345), T(13.12345678912345) },
+                  fgm::Vector2{ T(5.12345678912345), T(4.12345678912345) } };
+        _matB = { fgm::Vector2{ T(3.12345678912345), T(10.12345678912345) },
+                  fgm::Vector2{ T(8.12345678912345), T(3.12345678912345) } };
 
-        _expectedFloatingMat = { fgm::Vector2D{ T(74.11690288564759), T(82.73418683126485) },
-                                 fgm::Vector2D{ T(73.8699893074007), T(119.48727325301795) } };
-        _expectedIntegralMat = { fgm::Vector2D{ T(71), T(79) }, fgm::Vector2D{ T(71), T(116) } };
+        _expectedFloatingMat = { fgm::Vector2{ T(74.11690288564759), T(82.73418683126485) },
+                                 fgm::Vector2{ T(73.8699893074007), T(119.48727325301795) } };
+        _expectedIntegralMat = { fgm::Vector2{ T(71), T(79) }, fgm::Vector2{ T(71), T(116) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D matrix multiplication, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix2DMultiplication, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix2 matrix multiplication, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix2Multiplication, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Matrix2DFractionalMultiplication: public ::testing::Test
+class Matrix2FractionalMultiplication: public ::testing::Test
 {
 protected:
     fgm::Matrix2<T> _matA, _matB, _expectedMat;
 
     void SetUp() override
     {
-        _matA = { fgm::Vector2D{ T(0.1234568989329), T(0.1234214891234) },
-                  fgm::Vector2D{ T(-0.123489823149), T(-0.123489757623) } };
-        _matB = { fgm::Vector2D{ T(0.8923764912287), T(0.78352829112384) },
-                  fgm::Vector2D{ T(0.0123412348958), T(-0.0231423489589) } };
+        _matA = { fgm::Vector2{ T(0.1234568989329), T(0.1234214891234) },
+                  fgm::Vector2{ T(-0.123489823149), T(-0.123489757623) } };
+        _matB = { fgm::Vector2{ T(0.8923764912287), T(0.78352829112384) },
+                  fgm::Vector2{ T(0.0123412348958), T(-0.0231423489589) } };
 
-        _expectedMat = { fgm::Vector2D{ T(0.013412264184596345), T(0.013380716644514457) },
-                         fgm::Vector2D{ T(0.004381455169424965), T(0.004381016652222751) } };
+        _expectedMat = { fgm::Vector2{ T(0.013412264184596345), T(0.013380716644514457) },
+                         fgm::Vector2{ T(0.004381455169424965), T(0.004381016652222751) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D matrix multiplication with fractional values(<1), parameterized by @ref
+/** @brief Test fixture for @ref fgm::Matrix2 matrix multiplication with fractional values(<1), parameterized by @ref
  * SupportedFloatingPointTypes. */
-TYPED_TEST_SUITE(Matrix2DFractionalMultiplication, SupportedFloatingPointTypes);
+TYPED_TEST_SUITE(Matrix2FractionalMultiplication, SupportedFloatingPointTypes);
 
 
 
@@ -146,7 +146,7 @@ namespace
 {
     constexpr fgm::Matrix2 MAT1(1, 2, 3, 4);
     constexpr fgm::Matrix2 MAT2(5, 6, 7, 8);
-    constexpr fgm::Vector2D VEC(1, 2);
+    constexpr fgm::Vector2 VEC(1, 2);
 
     // Verify matrix * scalar multiplication
     constexpr fgm::Matrix2 BINARY_PRODUCT_1 = MAT1 * 2;
@@ -164,12 +164,12 @@ namespace
     static_assert(BINARY_PRODUCT_2(1, 1) == 8);
 
     // Verify matrix * vector multiplication
-    constexpr fgm::Vector2D COL_VECTOR_PRODUCT = MAT1 * VEC;
+    constexpr fgm::Vector2 COL_VECTOR_PRODUCT = MAT1 * VEC;
     static_assert(COL_VECTOR_PRODUCT[0] == 5);
     static_assert(COL_VECTOR_PRODUCT[1] == 11);
 
     // Verify vector * matrix multiplication
-    constexpr fgm::Vector2D ROW_VEC_PRODUCT = VEC * MAT1;
+    constexpr fgm::Vector2 ROW_VEC_PRODUCT = VEC * MAT1;
     static_assert(ROW_VEC_PRODUCT[0] == 7);
     static_assert(ROW_VEC_PRODUCT[1] == 10);
 
@@ -190,7 +190,7 @@ namespace
  **************************************/
 
 /** @brief Verify that scalar multiplication by zero returns a zero matrix. */
-TEST(Matrix2DScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
+TEST(Matrix2ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 {
     const fgm::Matrix2 mat(3.0f, 4.0f, 5.0f, 6.0f);
 
@@ -201,7 +201,7 @@ TEST(Matrix2DScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 
 
 /** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Matrix2DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
+TEST(Matrix2ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 {
     const fgm::Matrix2 mat(3.0f, 4.0f, 5.0f, 6.0f);
 
@@ -212,7 +212,7 @@ TEST(Matrix2DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 
 
 /** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Matrix2DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
+TEST(Matrix2ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
     const fgm::Matrix2 mat      = { 1.0f, -2.0f, -4.0f, 5.0f };
     const fgm::Matrix2 expected = { -2.0f, 4.0f, 8.0f, -10.0f };
@@ -228,7 +228,7 @@ TEST(Matrix2DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
  * @brief Verify that the binary multiplication operator (matrix * scalar) perform an element-wise product
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
+TYPED_TEST(Matrix2ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
 {
     const fgm::Matrix2 product = this->_mat * this->_scalar;
 
@@ -247,7 +247,7 @@ TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
  * @brief Verify that the binary multiplication operator (scalar * matrix) perform an element-wise product
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Matrix2DScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
+TYPED_TEST(Matrix2ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 {
     const fgm::Matrix2 product = this->_scalar * this->_mat;
 
@@ -266,7 +266,7 @@ TYPED_TEST(Matrix2DScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
  * @brief Verify that the compound multiplication assignment operator (scalar) performs an element-wise product
  *        and mutates the matrix in-place.
  */
-TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScaled)
+TYPED_TEST(Matrix2ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScaled)
 {
     this->_mat *= this->_scalar;
 
@@ -285,7 +285,7 @@ TYPED_TEST(Matrix2DScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixSc
  * @brief Verify that the binary multiplication operator (scalar) perform automatic type promotion
  *        to the wider numeric type.
  */
-TYPED_TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
+TYPED_TEST(Matrix2ScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
 {
     const double scalar = 2.123456789123456;
 
@@ -299,7 +299,7 @@ TYPED_TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
  * @brief Verify that the compound multiplication assignment operator (scalar) maintains the destination type and
  *        perform an implicit cast.
  */
-TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
+TEST(Matrix2ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
     fgm::Matrix2 mat(3.0f, -1.0f, -12.0f, 14.0f);
     const double scalar = 5.0;
@@ -313,7 +313,7 @@ TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
  * @brief Verify that the compound multiplication operator (scalar) for mixed type
  *        ensure minimal precision loss.
  */
-TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+TEST(Matrix2ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
     fgm::Matrix2 mat(3, -1, 10, 5);
     const double scalar = 2.5;
@@ -336,7 +336,7 @@ TEST(Matrix2DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsure
  * @brief Verify that the binary vector multiplication operation perform linear transformation
  *        and returns a new column vector.
  */
-TYPED_TEST(Matrix2DVectorMultiplication, MatrixTimesVectorReturnsATransformedVector)
+TYPED_TEST(Matrix2VectorMultiplication, MatrixTimesVectorReturnsATransformedVector)
 {
     const auto transformedVector = this->_mat * this->_vec;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -354,7 +354,7 @@ TYPED_TEST(Matrix2DVectorMultiplication, MatrixTimesVectorReturnsATransformedVec
  * @brief Verify that the binary vector multiplication operation with fractional values perform linear transformation
  *        and returns a new column vector.
  */
-TYPED_TEST(Matrix2DVectorFractionalMultiplication, MatrixTimesVectorReturnsATransformedVectorWithPrecision)
+TYPED_TEST(Matrix2VectorFractionalMultiplication, MatrixTimesVectorReturnsATransformedVectorWithPrecision)
 {
     const auto transformedVector = this->_mat * this->_vec;
     EXPECT_VEC_EQ(this->_expectedColVector, transformedVector);
@@ -365,7 +365,7 @@ TYPED_TEST(Matrix2DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
  * @brief Verify that the binary vector multiplication operation(mat * Vec) with identity matrix
  *        and returns the original column vector.
  */
-TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
+TEST(Matrix2VectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
     const fgm::Matrix2<float> iMatrix = fgm::mat2d::eye<float>;
     const fgm::Vec2F vec(2.0f, 1.0f);
@@ -380,7 +380,7 @@ TEST(Matrix2DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
  * @brief Verify that the binary vector multiplication operation perform automatic type promotion
  *        to the wider numeric type.
  */
-TEST(Matrix2DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
+TEST(Matrix2VectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
     const fgm::Matrix2 mat(1.0, 2.0);
     const fgm::Vec2I vec(2, 1);
@@ -394,7 +394,7 @@ TEST(Matrix2DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationProm
  * @brief Verify that the binary vector multiplication operation perform linear transformation
  *        and returns a new row vector.
  */
-TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesMatrixReturnsATransformedVector)
+TYPED_TEST(Matrix2VectorMultiplication, VectorTimesMatrixReturnsATransformedVector)
 {
     const auto transformedVector = this->_vec * this->_mat;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -412,7 +412,7 @@ TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesMatrixReturnsATransformedVec
  * @brief Verify that the binary vector multiplication operation with fractional values perform linear transformation
  *        and returns a new row vector.
  */
-TYPED_TEST(Matrix2DVectorFractionalMultiplication, VectorTimesMatrixReturnsATransformedVectorWithPrecision)
+TYPED_TEST(Matrix2VectorFractionalMultiplication, VectorTimesMatrixReturnsATransformedVectorWithPrecision)
 {
     const auto transformedVector = this->_vec * this->_mat;
     EXPECT_VEC_EQ(this->_expectedRowVector, transformedVector);
@@ -423,7 +423,7 @@ TYPED_TEST(Matrix2DVectorFractionalMultiplication, VectorTimesMatrixReturnsATran
  * @brief Verify that the binary vector multiplication operation with identity matrix
  *        and returns the original row vector.
  */
-TEST(Matrix2DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
+TEST(Matrix2VectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
 {
     const fgm::Matrix2<float> iMatrix = fgm::mat2d::eye<float>;
     const fgm::Vec2F vec(2.0f, 1.0f);
@@ -439,7 +439,7 @@ TEST(Matrix2DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVecto
  * @brief Verify that the binary vector multiplication operation perform automatic type promotion
  *        to the wider numeric type.
  */
-TEST(Matrix2DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationPromotesType)
+TEST(Matrix2VectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationPromotesType)
 {
     const fgm::Matrix2 mat(1.0, 2.0);
     const fgm::Vec2I vec(2, 1);
@@ -453,7 +453,7 @@ TEST(Matrix2DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationProm
  * @brief Verify that the compound vector multiplication operation perform linear transformation
  *        and mutates the vector in-place.
  */
-TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesEqualMatrixReturnsATransformedVector)
+TYPED_TEST(Matrix2VectorMultiplication, VectorTimesEqualMatrixReturnsATransformedVector)
 {
     auto transformedVector = this->_vec;
     transformedVector *= this->_mat;
@@ -472,7 +472,7 @@ TYPED_TEST(Matrix2DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
  * @brief Verify that the compound vector multiplication operation with identity matrix
  *        does not mutate the row vector components.
  */
-TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
+TEST(Matrix2VectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
 {
     const auto iMatrix = fgm::mat2d::eye<float>;
     fgm::Vec2F vec(2.0f, 1.0f);
@@ -487,7 +487,7 @@ TEST(Matrix2DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
  * @brief Verify that the compound vector multiplication operation maintains the destination type and
  *        perform an implicit cast.
  */
-TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
+TEST(Matrix2VectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
     const fgm::Matrix2<double> iMatrix = fgm::mat2d::eye<double>;
     [[maybe_unused]] fgm::Vec2I vec(2, 1);
@@ -501,11 +501,11 @@ TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNo
  * @brief Verify that the compound multiplication operator (vector) for mixed type
  *        ensure minimal precision loss.
  */
-TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+TEST(Matrix2VectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
     const fgm::Matrix2 mat(2.5, 3.5, 0.5, 1.5);
-    fgm::Vector2D vec(10, 20);
-    const fgm::Vector2D expected(35, 65);
+    fgm::Vector2 vec(10, 20);
+    const fgm::Vector2 expected(35, 65);
 
     vec *= mat;
 
@@ -521,7 +521,7 @@ TEST(Matrix2DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsure
  **************************************/
 
 /** @brief Verify that the binary vector multiplication operation return matrix product. */
-TYPED_TEST(Matrix2DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
+TYPED_TEST(Matrix2Multiplication, MatrixTimesMatrixReturnsAMatrixProduct)
 {
     const auto transformedVector = this->_matA * this->_matB;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -536,7 +536,7 @@ TYPED_TEST(Matrix2DMultiplication, MatrixTimesMatrixReturnsAMatrixProduct)
 
 
 /** @brief Verify that the binary vector multiplication operation return matrix product for denormals. */
-TYPED_TEST(Matrix2DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithPrecision)
+TYPED_TEST(Matrix2FractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithPrecision)
 {
     const auto transformedVector = this->_matA * this->_matB;
     EXPECT_MAT_EQ(this->_expectedMat, transformedVector);
@@ -547,7 +547,7 @@ TYPED_TEST(Matrix2DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithP
  * @brief Verify that binary matrix multiplication with identity matrix
  *        returns original matrix.
  */
-TEST(Matrix2DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
+TEST(Matrix2Multiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
 {
     const fgm::Matrix2<float> iMatrix = fgm::mat2d::eye<float>;
     const fgm::Matrix2 mat(1.0f, 2.0f, 3.0f, 4.0f);
@@ -562,7 +562,7 @@ TEST(Matrix2DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
  * @brief Verify that the binary matrix multiplication operation perform automatic type promotion
  *        to the wider numeric type.
  */
-TEST(Matrix2DMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
+TEST(Matrix2Multiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
     const fgm::Matrix2 matA(1.0, 2.0);
     const fgm::Matrix2 matB(2, 1);
@@ -573,7 +573,7 @@ TEST(Matrix2DMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesTy
 
 
 /** @brief Verify that the compound vector multiplication operation perform an in-place matrix multiplication. */
-TYPED_TEST(Matrix2DMultiplication, CompoundMultiplicationOperationPerformInPlaceMatrixMultiplication)
+TYPED_TEST(Matrix2Multiplication, CompoundMultiplicationOperationPerformInPlaceMatrixMultiplication)
 {
     auto transformedVector = this->_matA;
     transformedVector *= this->_matB;
@@ -592,7 +592,7 @@ TYPED_TEST(Matrix2DMultiplication, CompoundMultiplicationOperationPerformInPlace
  * @brief Verify that components matrix multiplication with identity matrix
  *        does not mutate the calling matrix.
  */
-TEST(Matrix2DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
+TEST(Matrix2Multiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
 {
     const fgm::Matrix2<float> iMatrix = fgm::mat2d::eye<float>;
     fgm::Matrix2 mat(1.0f, 2.0f, 3.0f, 4.0f);
@@ -606,7 +606,7 @@ TEST(Matrix2DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
  * @brief Verify that the compound matrix multiplication operation maintains the destination type and
  *        perform an implicit cast.
  */
-TEST(Matrix2DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
+TEST(Matrix2Multiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
     const fgm::Matrix2<double> iMatrix = fgm::mat2d::eye<double>;
     fgm::Matrix2 mat(1, 2, 3, 4);
@@ -620,7 +620,7 @@ TEST(Matrix2DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromo
  * @brief Verify that the compound multiplication operator (matrix) for mixed type
  *        ensure minimal precision loss.
  */
-TEST(Matrix2DMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+TEST(Matrix2Multiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
     const fgm::Matrix2 matA(2.5, 3.5, 0.5, 1.5);
     fgm::Matrix2 matB(5, 10, 15, 20);

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 07, 2026
  *
- * @brief Verify @ref fgm::Matrix4D division logic.
+ * @brief Verify @ref fgm::Matrix4 division logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,7 +20,7 @@
  **************************************/
 
 template <typename T>
-class Matrix4DDivision: public ::testing::Test
+class Matrix4Division: public ::testing::Test
 {
 protected:
     fgm::Matrix4<T> _matrix;
@@ -43,14 +43,14 @@ protected:
         };
     }
 };
-/** Test fixture for @ref fgm::Matrix4D division, parameterized by @ref SupportedArithmeticTypes */
-TYPED_TEST_SUITE(Matrix4DDivision, SupportedArithmeticTypes);
+/** Test fixture for @ref fgm::Matrix4 division, parameterized by @ref SupportedArithmeticTypes */
+TYPED_TEST_SUITE(Matrix4Division, SupportedArithmeticTypes);
 
 
-/** @brief Test fixture for @ref fgm::Matrix4D division with NaN vectors. */
-class NaNMatrix4DDivision: public ::testing::TestWithParam<fgm::Matrix4<float>>
+/** @brief Test fixture for @ref fgm::Matrix4 division with NaN vectors. */
+class NaNMatrix4Division: public ::testing::TestWithParam<fgm::Matrix4<float>>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix4DDivisionTestSuite, NaNMatrix4DDivision,
+INSTANTIATE_TEST_SUITE_P(Matrix4DivisionTestSuite, NaNMatrix4Division,
                          ::testing::Values(fgm::Matrix4<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
                                            fgm::Matrix4<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
                                            fgm::Matrix4<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
@@ -148,7 +148,7 @@ namespace
  * @brief Verify that the binary division operator perform an element-wise divide
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Matrix4DDivision, DivideOperator_ReturnsInverseScaledMatrix)
+TYPED_TEST(Matrix4Division, DivideOperator_ReturnsInverseScaledMatrix)
 {
     const fgm::Matrix4 inverseScaledMat = this->_matrix / this->_scalar;
 
@@ -158,7 +158,7 @@ TYPED_TEST(Matrix4DDivision, DivideOperator_ReturnsInverseScaledMatrix)
 
 #ifdef ENABLE_DEBUG_TESTS
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
-TYPED_TEST(Matrix4DDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
+TYPED_TEST(Matrix4Division, DivideOperator_ByZeroTriggersAssertInDebugMode)
 { EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), ""); }
 #endif
 
@@ -167,7 +167,7 @@ TYPED_TEST(Matrix4DDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that the compound division operator perform an element-wise divide
  *        and mutates the matrix in-place.
  */
-TYPED_TEST(Matrix4DDivision, DivideEqualsOperator_InverseScalesMatrixInPlace)
+TYPED_TEST(Matrix4Division, DivideEqualsOperator_InverseScalesMatrixInPlace)
 {
     fgm::Matrix4 matrix = this->_matrix;
     matrix /= this->_scalar;
@@ -179,7 +179,7 @@ TYPED_TEST(Matrix4DDivision, DivideEqualsOperator_InverseScalesMatrixInPlace)
 #ifdef ENABLE_DEBUG_TESTS
 
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
-TYPED_TEST(Matrix4DDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
+TYPED_TEST(Matrix4Division, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
 { EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix /= 0), ""); }
 
 #endif
@@ -192,10 +192,10 @@ TYPED_TEST(Matrix4DDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMod
  **************************************/
 
 /**
- * @brief Verify that dividing a matrix using @ref fgm::Matrix4D::safeDiv perform an element-wise divide
+ * @brief Verify that dividing a matrix using @ref fgm::Matrix4::safeDiv perform an element-wise divide
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Matrix4DDivision, SafeDivide_ReturnsInverseScaledMatrix)
+TYPED_TEST(Matrix4Division, SafeDivide_ReturnsInverseScaledMatrix)
 {
     const fgm::Matrix4 inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
 
@@ -204,10 +204,10 @@ TYPED_TEST(Matrix4DDivision, SafeDivide_ReturnsInverseScaledMatrix)
 
 
 /**
- * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4D::safeDiv
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4::safeDiv
  *        returns identity matrix by default.
  */
-TYPED_TEST(Matrix4DDivision, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
+TYPED_TEST(Matrix4Division, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
 {
     const fgm::Matrix4 inverseScaledMat = this->_matrix.safeDiv(TypeParam(0));
     EXPECT_MAT_IDENTITY(inverseScaledMat);
@@ -215,10 +215,10 @@ TYPED_TEST(Matrix4DDivision, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDef
 
 
 /**
- * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4D::safeDiv
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4::safeDiv
  *        returns passed-in fallback.
  */
-TYPED_TEST(Matrix4DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
+TYPED_TEST(Matrix4Division, SafeDivide_DivisionByZeroReturnsPassedInFallback)
 {
     const fgm::Matrix4 inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::mat4d::zero<TypeParam>);
     EXPECT_MAT_ZERO(inverseScaledMat);
@@ -226,10 +226,10 @@ TYPED_TEST(Matrix4DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
 
 
 /**
- * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4D::safeDiv
+ * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4::safeDiv
  *        returns identity matrix by default.
  */
-TEST_P(NaNMatrix4DDivision, SafeDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix4Division, SafeDivide_ReturnsIdentityMatrixByDefault)
 {
     const fgm::Matrix4 inverseScaledMat = GetParam().safeDiv(2.5);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
@@ -237,10 +237,10 @@ TEST_P(NaNMatrix4DDivision, SafeDivide_ReturnsIdentityMatrixByDefault)
 
 
 /**
- * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4D::safeDiv
+ * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4::safeDiv
  *        returns passed-in fallback.
  */
-TEST_P(NaNMatrix4DDivision, SafeDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix4Division, SafeDivide_ReturnsPassedInFallback)
 {
     const fgm::Matrix4 inverseScaledMat = GetParam().safeDiv(2.5, fgm::mat4d::zero<ParamType::value_type>);
     EXPECT_MAT_ZERO(inverseScaledMat);
@@ -248,10 +248,10 @@ TEST_P(NaNMatrix4DDivision, SafeDivide_ReturnsPassedInFallback)
 
 
 /**
- * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix4D::safeDiv
+ * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix4::safeDiv
  *        perform an element-wise divide and returns a new matrix instance.
  */
-TYPED_TEST(Matrix4DDivision, StaticWrapper_SafeDivide_ReturnsInverseScaledMatrix)
+TYPED_TEST(Matrix4Division, StaticWrapper_SafeDivide_ReturnsInverseScaledMatrix)
 {
     const fgm::Matrix4 inverseScaledMat = fgm::Matrix4<TypeParam>::safeDiv(this->_matrix, this->_scalar);
 
@@ -260,10 +260,10 @@ TYPED_TEST(Matrix4DDivision, StaticWrapper_SafeDivide_ReturnsInverseScaledMatrix
 
 
 /**
- * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4D::safeDiv
+ * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4::safeDiv
  *        returns identity matrix by default.
  */
-TYPED_TEST(Matrix4DDivision, StaticWrapper_SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
+TYPED_TEST(Matrix4Division, StaticWrapper_SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
 {
     const fgm::Matrix4 inverseScaledMat = fgm::Matrix4<TypeParam>::safeDiv(this->_matrix, TypeParam(0));
     EXPECT_MAT_IDENTITY(inverseScaledMat);
@@ -271,10 +271,10 @@ TYPED_TEST(Matrix4DDivision, StaticWrapper_SafeDivide_DivisionByZeroReturnsIdent
 
 
 /**
- * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4D::safeDiv
+ * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4::safeDiv
  *        returns passed-in fallback.
  */
-TYPED_TEST(Matrix4DDivision, StaticWrapper_SafeDivide_DivisionByZeroReturnsPassedInFallback)
+TYPED_TEST(Matrix4Division, StaticWrapper_SafeDivide_DivisionByZeroReturnsPassedInFallback)
 {
     const fgm::Matrix4 inverseScaledMat =
         fgm::Matrix4<TypeParam>::safeDiv(this->_matrix, TypeParam(0), fgm::mat4d::zero<TypeParam>);
@@ -283,10 +283,10 @@ TYPED_TEST(Matrix4DDivision, StaticWrapper_SafeDivide_DivisionByZeroReturnsPasse
 
 
 /**
- * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4D::safeDiv
+ * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4::safeDiv
  *        returns identity matrix by default.
  */
-TEST_P(NaNMatrix4DDivision, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix4Division, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefault)
 {
     using T                              = ParamType::value_type;
     const fgm::Matrix4 inverseScaledMat = fgm::Matrix4<T>::safeDiv(GetParam(), 2.5);
@@ -295,10 +295,10 @@ TEST_P(NaNMatrix4DDivision, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefa
 
 
 /**
- * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4D::safeDiv
+ * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4::safeDiv
  *        returns passed-in fallback.
  */
-TEST_P(NaNMatrix4DDivision, StaticWrapper_SafeDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix4Division, StaticWrapper_SafeDivide_ReturnsPassedInFallback)
 {
     using T                              = ParamType::value_type;
     const fgm::Matrix4 inverseScaledMat = fgm::Matrix4<T>::safeDiv(GetParam(), 2.5, fgm::mat4d::zero<T>);
@@ -313,10 +313,10 @@ TEST_P(NaNMatrix4DDivision, StaticWrapper_SafeDivide_ReturnsPassedInFallback)
  **************************************/
 
 /**
- * @brief Verify that dividing a matrix using @ref fgm::Matrix4D::tryDiv perform an element-wise divide
+ * @brief Verify that dividing a matrix using @ref fgm::Matrix4::tryDiv perform an element-wise divide
  *        returns a new matrix instance and set flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix4DDivision, TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
+TYPED_TEST(Matrix4Division, TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix4 inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
@@ -327,10 +327,10 @@ TYPED_TEST(Matrix4DDivision, TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectF
 
 
 /**
- * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4D::tryDiv
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4::tryDiv
  *        returns identity matrix by default and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Matrix4DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
+TYPED_TEST(Matrix4Division, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix4 inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag);
@@ -341,10 +341,10 @@ TYPED_TEST(Matrix4DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefa
 
 
 /**
- * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4D::tryDiv returns passed-in fallback
+ * @brief Verify that dividing a matrix by zero using @ref fgm::Matrix4::tryDiv returns passed-in fallback
  *        and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Matrix4DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
+TYPED_TEST(Matrix4Division, TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix4 inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag, fgm::mat4d::zero<TypeParam>);
@@ -355,10 +355,10 @@ TYPED_TEST(Matrix4DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndS
 
 
 /**
- * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4D::tryDiv returns identity matrix
+ * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4::tryDiv returns identity matrix
  *        by default and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4DDivision, TryDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix4Division, TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix4 inverseScaledMat = GetParam().tryDiv(2.5, flag);
@@ -368,10 +368,10 @@ TEST_P(NaNMatrix4DDivision, TryDivide_ReturnsIdentityMatrixByDefault)
 
 
 /**
- * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4D::tryDiv
+ * @brief Verify that dividing a NaN matrix using @ref fgm::Matrix4::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4DDivision, TryDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix4Division, TryDivide_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix4 inverseScaledMat = GetParam().tryDiv(2.5, flag, fgm::mat4d::zero<ParamType::value_type>);
@@ -381,10 +381,10 @@ TEST_P(NaNMatrix4DDivision, TryDivide_ReturnsPassedInFallback)
 
 
 /**
- * @brief Verify that dividing a NaN matrix by zero using @ref fgm::Matrix4D::tryDiv
+ * @brief Verify that dividing a NaN matrix by zero using @ref fgm::Matrix4::tryDiv
  *        returns set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4DDivision, TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
+TEST_P(NaNMatrix4Division, TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Matrix4 inverseScaledMat =
@@ -394,11 +394,11 @@ TEST_P(NaNMatrix4DDivision, TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 
 
 /**
- * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix4D::tryDiv
+ * @brief Verify that dividing a matrix using the static variant of @ref fgm::Matrix4::tryDiv
  *        perform an element-wise divide, returns a new matrix instance
  *        and set flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix4DDivision, StaticWrapper_TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
+TYPED_TEST(Matrix4Division, StaticWrapper_TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix4 inverseScaledMat = fgm::Matrix4<TypeParam>::tryDiv(this->_matrix, this->_scalar, flag);
@@ -409,10 +409,10 @@ TYPED_TEST(Matrix4DDivision, StaticWrapper_TryDivide_ReturnsInverseScaledMatrixA
 
 
 /**
- * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4D::tryDiv
+ * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4::tryDiv
  *        returns identity matrix by default and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Matrix4DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
+TYPED_TEST(Matrix4Division, StaticWrapper_TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix4 inverseScaledMat = fgm::Matrix4<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag);
@@ -422,10 +422,10 @@ TYPED_TEST(Matrix4DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsIdenti
 
 
 /**
- * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4D::tryDiv
+ * @brief Verify that dividing a matrix by zero using the static variant of @ref fgm::Matrix4::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Matrix4DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
+TYPED_TEST(Matrix4Division, StaticWrapper_TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Matrix4 inverseScaledMat =
@@ -436,10 +436,10 @@ TYPED_TEST(Matrix4DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsPassed
 
 
 /**
- * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4D::tryDiv
+ * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4::tryDiv
  *        returns identity matrix by default and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMatrix4Division, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     using T                              = ParamType::value_type;
@@ -451,10 +451,10 @@ TEST_P(NaNMatrix4DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefau
 
 
 /**
- * @brief Verify that dividing a NaN matrix by zero using the static variant of @ref fgm::Matrix4D::tryDiv
+ * @brief Verify that dividing a NaN matrix by zero using the static variant of @ref fgm::Matrix4::tryDiv
  *        set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4DDivision, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
+TEST_P(NaNMatrix4Division, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
     using T = ParamType::value_type;
@@ -465,10 +465,10 @@ TEST_P(NaNMatrix4DDivision, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOve
 
 
 /**
- * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4D::tryDiv
+ * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Matrix4::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4DDivision, StaticWrapper_TryDivide_ReturnsPassedInFallback)
+TEST_P(NaNMatrix4Division, StaticWrapper_TryDivide_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     using T = ParamType::value_type;

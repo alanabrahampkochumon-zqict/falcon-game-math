@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 23, 2026
  *
- * @brief Verify @ref fgm::Matrix3D constants (@ref fgm::Matrix3D::eye, @ref fgm::Matrix3D::zero).
+ * @brief Verify @ref fgm::Matrix3 constants (@ref fgm::Matrix3::eye, @ref fgm::Matrix3::zero).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,10 +14,10 @@
 
 
 template <typename T>
-class Matrix3DConstants: public ::testing::Test
+class Matrix3Constants: public ::testing::Test
 {};
-/** @brief Test fixture for @ref fgm::Matrix3D constants, parameterized @ref SupportedArithmeticTypes.*/
-TYPED_TEST_SUITE(Matrix3DConstants, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix3 constants, parameterized @ref SupportedArithmeticTypes.*/
+TYPED_TEST_SUITE(Matrix3Constants, SupportedArithmeticTypes);
 
 
 
@@ -32,7 +32,7 @@ TYPED_TEST_SUITE(Matrix3DConstants, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
-/** @brief Verify that @ref fgm::Matrix3D constants are available at compile time. */
+/** @brief Verify that @ref fgm::Matrix3 constants are available at compile time. */
 namespace
 {
     // Verify identity matrix
@@ -93,20 +93,20 @@ namespace
  **************************************/
 
 /** @brief Verify that @ref fgm::mat3d::eye returns an identity matrix. */
-TYPED_TEST(Matrix3DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::mat3d::eye<TypeParam>); }
+TYPED_TEST(Matrix3Constants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::mat3d::eye<TypeParam>); }
 
 
-/** @brief Verify that @ref fgm::Matrix3D::eye static factory returns an identity matrix. */
-TYPED_TEST(Matrix3DConstants, StaticWrapper_Eye_ReturnsIdentityMatrix)
+/** @brief Verify that @ref fgm::Matrix3::eye static factory returns an identity matrix. */
+TYPED_TEST(Matrix3Constants, StaticWrapper_Eye_ReturnsIdentityMatrix)
 { EXPECT_MAT_IDENTITY(fgm::Matrix3<TypeParam>::eye()); }
 
 
 /** @brief Verify that @ref fgm::mat3d::zero returns a zero matrix. */
-TYPED_TEST(Matrix3DConstants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat3d::zero<TypeParam>); }
+TYPED_TEST(Matrix3Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat3d::zero<TypeParam>); }
 
 
-/** @brief Verify that @ref fgm::Matrix3D::zero static factory returns a zero matrix. */
-TYPED_TEST(Matrix3DConstants, StaticWrapper_Zero_ReturnsZeroMatrix)
+/** @brief Verify that @ref fgm::Matrix3::zero static factory returns a zero matrix. */
+TYPED_TEST(Matrix3Constants, StaticWrapper_Zero_ReturnsZeroMatrix)
 { EXPECT_MAT_ZERO(fgm::Matrix3<TypeParam>::zero()); }
 
 /** @} */

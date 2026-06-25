@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 09, 2026
  *
- * @brief Verify @ref fgm::Matrix2D addition logic.
+ * @brief Verify @ref fgm::Matrix2 addition logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -18,7 +18,7 @@
  **************************************/
 
 template <typename T>
-class Matrix2DAddition: public ::testing::Test
+class Matrix2Addition: public ::testing::Test
 {
 protected:
     fgm::Matrix2<T> _matA;
@@ -27,13 +27,13 @@ protected:
 
     void SetUp() override
     {
-        _matA        = { fgm::Vector2D<T>(1, 2), fgm::Vector2D<T>(3, 4) };
-        _matB        = { fgm::Vector2D<T>(5, 6), fgm::Vector2D<T>(7, 8) };
-        _expectedSum = { fgm::Vector2D<T>(6, 8), fgm::Vector2D<T>(10, 12) };
+        _matA        = { fgm::Vector2<T>(1, 2), fgm::Vector2<T>(3, 4) };
+        _matB        = { fgm::Vector2<T>(5, 6), fgm::Vector2<T>(7, 8) };
+        _expectedSum = { fgm::Vector2<T>(6, 8), fgm::Vector2<T>(10, 12) };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2D addition, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix2DAddition, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix2 addition, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix2Addition, SupportedArithmeticTypes);
 
 
 
@@ -73,7 +73,7 @@ namespace
  * @brief Verify that the binary addition operator perform a component-wise addition and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Matrix2DAddition, PlusOperator_ReturnsMatrixSum)
+TYPED_TEST(Matrix2Addition, PlusOperator_ReturnsMatrixSum)
 {
     const fgm::Matrix2 sum = this->_matA + this->_matB;
 
@@ -85,10 +85,10 @@ TYPED_TEST(Matrix2DAddition, PlusOperator_ReturnsMatrixSum)
  * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Matrix2DAddition, MixedTypeAdditionPromotesType)
+TEST(Matrix2Addition, MixedTypeAdditionPromotesType)
 {
-    const fgm::Matrix2 mat1{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ -3.0f, -4.0f } };
-    const fgm::Matrix2 mat2{ fgm::Vector2D{ 10.0, 2.0 }, fgm::Vector2D{ 3.0, 8.0 } };
+    const fgm::Matrix2 mat1{ fgm::Vector2{ 1.0f, 2.0f }, fgm::Vector2{ -3.0f, -4.0f } };
+    const fgm::Matrix2 mat2{ fgm::Vector2{ 10.0, 2.0 }, fgm::Vector2{ 3.0, 8.0 } };
     [[maybe_unused]] const fgm::Matrix2 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
@@ -99,7 +99,7 @@ TEST(Matrix2DAddition, MixedTypeAdditionPromotesType)
  * @brief Verify that the compound addition assignment operator perform a component-wise addition and
  *       mutates the matrix in-place.
  */
-TYPED_TEST(Matrix2DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
+TYPED_TEST(Matrix2Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 {
     this->_matA += this->_matB;
 
@@ -111,10 +111,10 @@ TYPED_TEST(Matrix2DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix2DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Matrix2Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    fgm::Matrix2 mat1{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ -3.0f, -4.0f } };
-    const fgm::Matrix2 mat2{ fgm::Vector2D{ 10.0, 2.0 }, fgm::Vector2D{ 3.0, 8.0 } };
+    fgm::Matrix2 mat1{ fgm::Vector2{ 1.0f, 2.0f }, fgm::Vector2{ -3.0f, -4.0f } };
+    const fgm::Matrix2 mat2{ fgm::Vector2{ 10.0, 2.0 }, fgm::Vector2{ 3.0, 8.0 } };
 
     mat1 += mat2;
 

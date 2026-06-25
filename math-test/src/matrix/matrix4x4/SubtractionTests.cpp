@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 05, 2026
  *
- * @brief Verify @ref fgm::Matrix4D subtraction logic.
+ * @brief Verify @ref fgm::Matrix4 subtraction logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,7 +20,7 @@
  **************************************/
 
 template <typename T>
-class Matrix4DSubtraction: public ::testing::Test
+class Matrix4Subtraction: public ::testing::Test
 {
 protected:
     fgm::Matrix4<T> _matA;
@@ -45,8 +45,8 @@ protected:
                                 { T(16), T(19), T(2), T(0) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix4D subtraction, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix4DSubtraction, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix4 subtraction, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix4Subtraction, SupportedArithmeticTypes);
 
 
 /**
@@ -97,7 +97,7 @@ namespace
  * @brief Verify that the binary subtraction operator perform an element-wise subtraction and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Matrix4DSubtraction, MinusOperator_ReturnsDifference)
+TYPED_TEST(Matrix4Subtraction, MinusOperator_ReturnsDifference)
 {
     const fgm::Matrix4 difference = this->_matA - this->_matB;
 
@@ -109,7 +109,7 @@ TYPED_TEST(Matrix4DSubtraction, MinusOperator_ReturnsDifference)
  * @brief Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Matrix4DSubtraction, MixedTypeSubtractionPromotesType)
+TEST(Matrix4Subtraction, MixedTypeSubtractionPromotesType)
 {
     constexpr fgm::Matrix4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f,
                                  44.0f, 316.0f, 55.0f);
@@ -126,7 +126,7 @@ TEST(Matrix4DSubtraction, MixedTypeSubtractionPromotesType)
  * @brief Verify that the compound subtraction assignment operator perform an element-wise subtraction
  *       and mutates the matrix in-place.
  */
-TYPED_TEST(Matrix4DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
+TYPED_TEST(Matrix4Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
 {
     this->_matA -= this->_matB;
 
@@ -138,7 +138,7 @@ TYPED_TEST(Matrix4DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix4DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+TEST(Matrix4Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
     fgm::Matrix4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f, 44.0f,
                        316.0f, 55.0f);

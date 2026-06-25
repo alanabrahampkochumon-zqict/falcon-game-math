@@ -9,9 +9,9 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include "vectors/Vector2D.h"
-#include "vectors/Vector3D.h"
-#include "vectors/Vector4D.h"
+#include "vectors/Vector2.h"
+#include "vectors/Vector3.h"
+#include "vectors/Vector4.h"
 #include "common/MathTraits.h"
 
 namespace fgm
@@ -23,13 +23,13 @@ namespace fgm
      */
 
     template<fgm::Arithmetic T>
-    using Vec2 = fgm::Vector2D<T>;
+    using Vec2 = fgm::Vector2<T>;
 
     template<fgm::Arithmetic T>
-    using Vec3 = fgm::Vector3D<T>;
+    using Vec3 = fgm::Vector3<T>;
 
     template<fgm::Arithmetic T>
-    using Vec4 = fgm::Vector4D<T>;
+    using Vec4 = fgm::Vector4<T>;
 
     /** @} */
 }

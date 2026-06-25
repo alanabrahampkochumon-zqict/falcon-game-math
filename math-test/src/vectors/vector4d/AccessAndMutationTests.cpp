@@ -3,20 +3,20 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verify @ref fgm::Vector4D accessors and mutators.
+ * @brief Verify @ref fgm::Vector4 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector4DTestSetup.h"
+#include "Vector4TestSetup.h"
 
 
 
 #ifdef ENABLE_DEBUG_TESTS
-class Vector4DIndexing: public testing::TestWithParam<std::size_t>
+class Vector4Indexing: public testing::TestWithParam<std::size_t>
 {};
-INSTANTIATE_TEST_SUITE_P(Vector3DTests, Vector4DIndexing, testing::Values(4, 5, 100));
+INSTANTIATE_TEST_SUITE_P(Vector3Tests, Vector4Indexing, testing::Values(4, 5, 100));
 #endif
 
 
@@ -35,7 +35,7 @@ INSTANTIATE_TEST_SUITE_P(Vector3DTests, Vector4DIndexing, testing::Values(4, 5, 
 /** @brief Verify that vector accessors are available at compile time. */
 namespace
 {
-    constexpr fgm::Vector4D vector(1, 2, 3, 4);
+    constexpr fgm::Vector4 vector(1, 2, 3, 4);
 
     static_assert(vector.x() == 1);
     static_assert(vector.y() == 2);
@@ -61,9 +61,9 @@ namespace
  **************************************/
 
 /** @brief Verify that the components are accessible via named spatial aliases (x, y, z, w). */
-TEST(Vector4DAccess, AccessibleAsXYZW)
+TEST(Vector4Access, AccessibleAsXYZW)
 {
-    const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.x());
     EXPECT_FLOAT_EQ(1.0f, vec.y());
@@ -73,9 +73,9 @@ TEST(Vector4DAccess, AccessibleAsXYZW)
 
 
 /** @brief Verify that the components are accessible via named spatial aliases (s, t, p, q). */
-TEST(Vector4DAccess, AccessibleAsSTPQ)
+TEST(Vector4Access, AccessibleAsSTPQ)
 {
-    const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.s());
     EXPECT_FLOAT_EQ(1.0f, vec.t());
@@ -85,9 +85,9 @@ TEST(Vector4DAccess, AccessibleAsSTPQ)
 
 
 /** @brief Verify that the components are accessible via named spatial aliases (r, g, b, a). */
-TEST(Vector4DAccess, AccessibleAsRGBA)
+TEST(Vector4Access, AccessibleAsRGBA)
 {
-    const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.r());
     EXPECT_FLOAT_EQ(1.0f, vec.g());
@@ -97,9 +97,9 @@ TEST(Vector4DAccess, AccessibleAsRGBA)
 
 
 /** @brief Verify that the components are accessible via subscript indexing for reads. */
-TEST(Vector4DAccess, AccessibleAsArray)
+TEST(Vector4Access, AccessibleAsArray)
 {
-    const fgm::Vector4D vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const fgm::Vector4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
@@ -109,10 +109,10 @@ TEST(Vector4DAccess, AccessibleAsArray)
 
 
 #ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vector4D out-of-bounds access triggers assert in debug mode. */
-TEST_P(Vector4DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Vector4 out-of-bounds access triggers assert in debug mode. */
+TEST_P(Vector4Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
-    const fgm::Vector4D vec(1, 2, 3, 4);
+    const fgm::Vector4 vec(1, 2, 3, 4);
     const auto index = GetParam();
     EXPECT_DEBUG_DEATH(vec[index], "");
 }
@@ -134,9 +134,9 @@ TEST_P(Vector4DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
  **************************************/
 
 /** @brief Verify that the components can be mutated via named spatial aliases (x, y, z, w). */
-TEST(Vector4DMutation, ElementsCanBeMutatedUsingXYZW)
+TEST(Vector4Mutation, ElementsCanBeMutatedUsingXYZW)
 {
-    fgm::Vector4D<float> vec;
+    fgm::Vector4<float> vec;
 
     vec.x() = 3.0f;
     vec.y() = 1.0f;
@@ -151,9 +151,9 @@ TEST(Vector4DMutation, ElementsCanBeMutatedUsingXYZW)
 
 
 /** @brief Verify that the components can be mutated via named spatial aliases (s, t, p, q). */
-TEST(Vector4DMutation, ElementsCanBeMutatedUsingSTPQ)
+TEST(Vector4Mutation, ElementsCanBeMutatedUsingSTPQ)
 {
-    fgm::Vector4D<float> vec;
+    fgm::Vector4<float> vec;
 
     vec.s() = 3.0f;
     vec.t() = 1.0f;
@@ -168,9 +168,9 @@ TEST(Vector4DMutation, ElementsCanBeMutatedUsingSTPQ)
 
 
 /** @brief Verify that the components can be mutated via named spatial aliases (r, g, b, a). */
-TEST(Vector4DMutation, ElementsCanBeMutatedUsingRGBA)
+TEST(Vector4Mutation, ElementsCanBeMutatedUsingRGBA)
 {
-    fgm::Vector4D<float> vec;
+    fgm::Vector4<float> vec;
 
     vec.r() = 3.0f;
     vec.g() = 1.0f;
@@ -185,9 +185,9 @@ TEST(Vector4DMutation, ElementsCanBeMutatedUsingRGBA)
 
 
 /** @brief Verify that the components are accessible via subscript indexing for writing. */
-TEST(Vector4DMutation, ElementsCanBeMutatedUsingIndex)
+TEST(Vector4Mutation, ElementsCanBeMutatedUsingIndex)
 {
-    fgm::Vector4D<float> vec;
+    fgm::Vector4<float> vec;
 
     vec[0] = 3.0f;
     vec[1] = 1.0f;
@@ -201,10 +201,10 @@ TEST(Vector4DMutation, ElementsCanBeMutatedUsingIndex)
 }
 
 #ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vector4D out-of-bounds mutation triggers assert in debug mode. */
-TEST_P(Vector4DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Vector4 out-of-bounds mutation triggers assert in debug mode. */
+TEST_P(Vector4Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
-    fgm::Vector4D vec(1, 2, 3, 4);
+    fgm::Vector4 vec(1, 2, 3, 4);
     const auto index = GetParam();
     EXPECT_DEBUG_DEATH(vec[index] = 2, "");
 }

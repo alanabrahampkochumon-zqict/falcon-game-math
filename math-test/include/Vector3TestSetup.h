@@ -1,10 +1,10 @@
 #pragma once
 /**
- * @file Vector3DTestSetup.h
+ * @file Vector3TestSetup.h
  * @author Alan Abraham P Kochumon
- * @date Created on: April 03, 2026
+ * @date Created on: March 07, 2026
  *
- * @brief Define test setups common to all @ref Vector3D tests.
+ * @brief Define test setups common to all @ref Vector3 tests.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -16,9 +16,7 @@
 #include "utils/VectorUtils.h"
 
 #include <fgm/common/MathTraits.h>
-#include <gtest/gtest.h>
-#include <fgm/vectors/Vector3D.h>
-
+#include <fgm/vectors/Vector3.h>
 
 
 using namespace testutils;

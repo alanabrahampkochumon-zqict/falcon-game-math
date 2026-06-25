@@ -3,20 +3,20 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 22, 2026
  *
- * @brief Verify the @ref fgm::Vector3D p-Norm length logic.
+ * @brief Verify the @ref fgm::Vector3 p-Norm length logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include "Vector3DTestSetup.h"
+#include "Vector3TestSetup.h"
 
 
 
 template <typename T>
-class Vector3DManhattanNorm: public testing::Test
+class Vector3ManhattanNorm: public testing::Test
 {
 protected:
-    fgm::Vector3D<T> _vec;
+    fgm::Vector3<T> _vec;
     T _norm;
 
     void SetUp() override
@@ -25,15 +25,15 @@ protected:
         _norm = T(7);
     }
 };
-/** @brief Test fixture for @ref fgm::Vector3D manhattan norm, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vector3DManhattanNorm, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector3 manhattan norm, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Vector3ManhattanNorm, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Vector3DChebyshevNorm: public testing::Test
+class Vector3ChebyshevNorm: public testing::Test
 {
 protected:
-    fgm::Vector3D<T> _vec;
+    fgm::Vector3<T> _vec;
     T _norm;
 
     void SetUp() override
@@ -42,8 +42,8 @@ protected:
         _norm = T(4);
     }
 };
-/** @brief Test fixture for @ref fgm::Vector3D chebyshev norm, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vector3DChebyshevNorm, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector3 chebyshev norm, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Vector3ChebyshevNorm, SupportedArithmeticTypes);
 
 
 
@@ -55,15 +55,15 @@ TYPED_TEST_SUITE(Vector3DChebyshevNorm, SupportedArithmeticTypes);
 /** @brief Verify that pNorm (Manhattan and Chebyshev length) operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Vector3D vector(1, -2, 4);
+    constexpr fgm::Vector3 vector(1, -2, 4);
 
     // L1 Norm (Manhattan Norm)
     static_assert(vector.manhattanNorm() == 7);
-    static_assert(fgm::Vector3D<int>::manhattanNorm(vector) == 7);
+    static_assert(fgm::Vector3<int>::manhattanNorm(vector) == 7);
 
     // L∞ Norm (Chebyshev Norm)
     static_assert(vector.chebyshevNorm() == 4);
-    static_assert(fgm::Vector3D<int>::chebyshevNorm(vector) == 4);
+    static_assert(fgm::Vector3<int>::chebyshevNorm(vector) == 4);
 
 } // namespace
 
@@ -75,7 +75,7 @@ namespace
  **************************************/
 
 /** @brief Verify that taking the manhattan norm of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vector3DManhattanNorm, ReturnsSumOfAbsoluteValueOfComponents)
+TYPED_TEST(Vector3ManhattanNorm, ReturnsSumOfAbsoluteValueOfComponents)
 {
     const auto magnitude = this->_vec.manhattanNorm();
 
@@ -85,11 +85,11 @@ TYPED_TEST(Vector3DManhattanNorm, ReturnsSumOfAbsoluteValueOfComponents)
 
 /**
  * @brief Verify that taking the manhattan norm of a non-unit vector using static variant of
- *        @ref fgm::Vector3D::manhattanNorm returns non-unit scalar.
+ *        @ref fgm::Vector3::manhattanNorm returns non-unit scalar.
  */
-TYPED_TEST(Vector3DManhattanNorm, StaticWrapper_ReturnsSumOfAbsoluteValueOfComponents)
+TYPED_TEST(Vector3ManhattanNorm, StaticWrapper_ReturnsSumOfAbsoluteValueOfComponents)
 {
-    const auto magnitude = fgm::Vector3D<TypeParam>::manhattanNorm(this->_vec);
+    const auto magnitude = fgm::Vector3<TypeParam>::manhattanNorm(this->_vec);
 
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
@@ -103,7 +103,7 @@ TYPED_TEST(Vector3DManhattanNorm, StaticWrapper_ReturnsSumOfAbsoluteValueOfCompo
  **************************************/
 
 /** @brief Verify that taking the chebyshev norm of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vector3DChebyshevNorm, ReturnsLongestAbsoluteComponent)
+TYPED_TEST(Vector3ChebyshevNorm, ReturnsLongestAbsoluteComponent)
 {
     const auto magnitude = this->_vec.chebyshevNorm();
 
@@ -113,11 +113,11 @@ TYPED_TEST(Vector3DChebyshevNorm, ReturnsLongestAbsoluteComponent)
 
 /**
  * @brief Verify that taking the chebyshev norm of a non-unit vector using static variant of
- *        @ref fgm::Vector3D::chebyshevNorm returns non-unit scalar.
+ *        @ref fgm::Vector3::chebyshevNorm returns non-unit scalar.
  */
-TYPED_TEST(Vector3DChebyshevNorm, StaticWrapper_ReturnsLongestAbsoluteComponent)
+TYPED_TEST(Vector3ChebyshevNorm, StaticWrapper_ReturnsLongestAbsoluteComponent)
 {
-    const auto magnitude = fgm::Vector3D<TypeParam>::chebyshevNorm(this->_vec);
+    const auto magnitude = fgm::Vector3<TypeParam>::chebyshevNorm(this->_vec);
 
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }

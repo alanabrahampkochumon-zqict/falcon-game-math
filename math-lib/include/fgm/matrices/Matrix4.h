@@ -26,7 +26,7 @@
 
 #include "fgm/common/MathTraits.h"
 #include "fgm/common/Types.h"
-#include "fgm/vectors/Vector4D.h"
+#include "fgm/vectors/Vector4.h"
 
 #include <array>
 #include <cstdint>
@@ -103,8 +103,8 @@ namespace fgm
          * @param[in] col2 The 4D-vector to use as the third column entry.
          * @param[in] col3 The 4D-vector to use as the fourth column entry.
          */
-        [[nodiscard]] constexpr Matrix4(const Vector4D<T>& col0, const Vector4D<T>& col1, const Vector4D<T>& col2,
-                                         const Vector4D<T>& col3) noexcept;
+        [[nodiscard]] constexpr Matrix4(const Vector4<T>& col0, const Vector4<T>& col1, const Vector4<T>& col2,
+                                         const Vector4<T>& col3) noexcept;
 
 
         /**
@@ -147,7 +147,7 @@ namespace fgm
          *
          * @return A reference to the column vector.
          */
-        [[nodiscard]] constexpr Vector4D<T>& operator[](std::size_t col) noexcept;
+        [[nodiscard]] constexpr Vector4<T>& operator[](std::size_t col) noexcept;
 
 
         /**
@@ -159,7 +159,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const Vector4D<T>& operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const Vector4<T>& operator[](std::size_t col) const noexcept;
 
 
         /**
@@ -494,18 +494,18 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedVector4<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec The column vector to transform.
          *
-         * @return A new @ref Vector4D with applied linear transformations.
+         * @return A new @ref Vector4 with applied linear transformations.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4D<T, U> operator*(const Vector4D<U>& vec) const noexcept
+        [[nodiscard]] constexpr PromotedVector4<T, U> operator*(const Vector4<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1225,7 +1225,7 @@ namespace fgm
 
 
     private:
-        std::array<Vector4D<T>, columns> _data;
+        std::array<Vector4<T>, columns> _data;
     };
 
 
@@ -1301,7 +1301,7 @@ namespace fgm
      *            \end{bmatrix}
      *        \f$
      *
-     * @note Promotes the result to the wider type using @ref PromotedVector4D<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedVector4<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
@@ -1313,7 +1313,7 @@ namespace fgm
      * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    static constexpr PromotedVector4D<T, S> operator*(const Vector4D<T>& vec, const Matrix4<S>& matrix) noexcept;
+    static constexpr PromotedVector4<T, S> operator*(const Vector4<T>& vec, const Matrix4<S>& matrix) noexcept;
 
 
     /**
@@ -1346,7 +1346,7 @@ namespace fgm
      * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
-    static constexpr Vector4D<T>& operator*=(Vector4D<T>& vec, const Matrix4<U>& matrix) noexcept;
+    static constexpr Vector4<T>& operator*=(Vector4<T>& vec, const Matrix4<U>& matrix) noexcept;
 
     /** @} */
 

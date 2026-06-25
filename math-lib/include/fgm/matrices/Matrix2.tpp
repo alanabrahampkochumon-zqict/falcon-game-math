@@ -35,17 +35,17 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix2<T>::Matrix2(const T m00, const T m01, const T m10, const T m11) noexcept
-        : _data{ Vector2D<T>(m00, m10), Vector2D<T>(m01, m11) }
+        : _data{ Vector2<T>(m00, m10), Vector2<T>(m01, m11) }
     {}
 
 
     template <Arithmetic T>
-    constexpr Matrix2<T>::Matrix2(const Vector2D<T>& col0, const Vector2D<T>& col1) noexcept: _data{ col0, col1 }
+    constexpr Matrix2<T>::Matrix2(const Vector2<T>& col0, const Vector2<T>& col1) noexcept: _data{ col0, col1 }
     {}
 
 
     template <Arithmetic T>
-    constexpr Matrix2<T>::Matrix2(const T d0, const T d1) noexcept: _data{ Vector2D<T>(d0, 0), Vector2D<T>(0, d1) }
+    constexpr Matrix2<T>::Matrix2(const T d0, const T d1) noexcept: _data{ Vector2<T>(d0, 0), Vector2<T>(0, d1) }
     {}
 
 
@@ -69,14 +69,14 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector2D<T>& Matrix2<T>::operator[](const std::size_t col) noexcept
+    constexpr Vector2<T>& Matrix2<T>::operator[](const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
     template <Arithmetic T>
-    constexpr const Vector2D<T>& Matrix2<T>::operator[](const std::size_t col) const noexcept
+    constexpr const Vector2<T>& Matrix2<T>::operator[](const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -271,7 +271,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector2D<T, U> Matrix2<T>::operator*(const Vector2D<U>& vec) const noexcept
+    constexpr PromotedVector2<T, U> Matrix2<T>::operator*(const Vector2<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -281,7 +281,7 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vector2D<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
+                return Vector2<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
                                             static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
                                    std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
                                             static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
@@ -294,13 +294,13 @@ namespace fgm
         R y =
             static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
 
-        return Vector2D<R>(x, y);
+        return Vector2<R>(x, y);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2<U>& matrix) noexcept
+    constexpr PromotedVector2<T, U> operator*(const Vector2<T>& vec, const Matrix2<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -309,7 +309,7 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vector2D<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
+                return Vector2<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
                                             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0))),
                                    std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
                                             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1))));
@@ -322,13 +322,13 @@ namespace fgm
         R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1));
 
-        return Vector2D<R>(x, y);
+        return Vector2<R>(x, y);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2<U>& matrix) noexcept
+    constexpr Vector2<T>& operator*=(Vector2<T>& vec, const Matrix2<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -379,8 +379,8 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
-        _data[0]       = static_cast<Vector2D<T>>(mat[0]);
-        _data[1]       = static_cast<Vector2D<T>>(mat[1]);
+        _data[0]       = static_cast<Vector2<T>>(mat[0]);
+        _data[1]       = static_cast<Vector2<T>>(mat[1]);
         return *this;
     }
 

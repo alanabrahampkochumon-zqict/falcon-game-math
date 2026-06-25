@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 07, 2026
  *
- * @brief Verify @ref fgm::Matrix4D string representation.
+ * @brief Verify @ref fgm::Matrix4 string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -21,7 +21,7 @@
  *                                    *
  **************************************/
 
-class Matrix4DStringRepresentationTests: public ::testing::Test
+class Matrix4StringRepresentationTests: public ::testing::Test
 {
     /** @brief Switch to use full precision for testing. */
     void SetUp() override { fgm::Config::useFullPrecision = true; }
@@ -38,7 +38,7 @@ class Matrix4DStringRepresentationTests: public ::testing::Test
  */
 
 /** @brief Verify that the string representation matches the expected format for integral types. */
-TEST_F(Matrix4DStringRepresentationTests, IntegralRepresentation)
+TEST_F(Matrix4StringRepresentationTests, IntegralRepresentation)
 {
     constexpr fgm::Matrix4 mat(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
     std::stringstream ss;
@@ -53,7 +53,7 @@ TEST_F(Matrix4DStringRepresentationTests, IntegralRepresentation)
  * @brief Verify that the string representation matches the expected format for single-precision
  *       floating-point types.
  */
-TEST_F(Matrix4DStringRepresentationTests, FloatRepresentation)
+TEST_F(Matrix4StringRepresentationTests, FloatRepresentation)
 {
     constexpr fgm::Matrix4 mat(1.2345f, 2.0f, 4.53823f, 3.323f, 3.5832f, 5.8392f, 9.9238f, -12.0532f, 3.2312f, 12.0f,
                                 13.5f, 14.4f, 23.5f, 44.44f, 3.160f, 9.32f);
@@ -71,7 +71,7 @@ TEST_F(Matrix4DStringRepresentationTests, FloatRepresentation)
  * @brief Verify that the string representation matches the expected format for double-precision
  *       floating-point types.
  */
-TEST_F(Matrix4DStringRepresentationTests, DoubleRepresentation)
+TEST_F(Matrix4StringRepresentationTests, DoubleRepresentation)
 {
     constexpr fgm::Matrix4 mat(1.2345789777, 2.65831, 2.0, 4.0, 3.2345789777, 1.2345789777, 12.0, -6.2345789777,
                                 0.2345789777, 5.9123849123, 12.123948213, 5.1912384, 2.19234812, 1.129348923, 1.213921,

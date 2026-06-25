@@ -3,25 +3,25 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Vector2D constants (@ref fgm::Vector2D::one, @ref fgm::Vector2D::zero, etc).
+ * @brief Verify @ref fgm::Vector2 constants (@ref fgm::Vector2::one, @ref fgm::Vector2::zero, etc).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector2DTestSetup.h"
+#include "Vector2TestSetup.h"
 
 
 
 template <typename T>
-class Vector2DConstants: public testing::Test
+class Vector2Constants: public testing::Test
 {
 protected:
     T _one  = T(1);
     T _zero = T(0);
 };
-/** @brief Test fixture for @ref fgm::Vector2D constants, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vector2DConstants, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector2 constants, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Vector2Constants, SupportedArithmeticTypes);
 
 
 
@@ -30,7 +30,7 @@ TYPED_TEST_SUITE(Vector2DConstants, SupportedArithmeticTypes);
  * @{
  */
 
-/** @brief Verify that @ref fgm::Vector2D constants are available at compile time. */
+/** @brief Verify that @ref fgm::Vector2 constants are available at compile time. */
 namespace
 {
     static_assert(fgm::vec2d::one<int>.x() == 1);
@@ -50,7 +50,7 @@ namespace
 
 
 /** @brief Verify that @ref fgm::vec2d::one returns a 2D vector with unit components. */
-TYPED_TEST(Vector2DConstants, One_ReturnsVectorWithUnitComponents)
+TYPED_TEST(Vector2Constants, One_ReturnsVectorWithUnitComponents)
 {
     const TypeParam one = TypeParam(1);
     EXPECT_VEC_CONTAINS(fgm::vec2d::one<TypeParam>, one, one);
@@ -58,11 +58,11 @@ TYPED_TEST(Vector2DConstants, One_ReturnsVectorWithUnitComponents)
 
 
 /** @brief Verify that @ref fgm::vec2d::zero returns a 2D vector with zero components. */
-TYPED_TEST(Vector2DConstants, Zero_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::vec2d::zero<TypeParam>); }
+TYPED_TEST(Vector2Constants, Zero_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::vec2d::zero<TypeParam>); }
 
 
 /** @brief Verify that @ref fgm::vec2d::inf<float> returns a 2D vector with infinity components. */
-TEST(Vector2DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
+TEST(Vector2Constants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec2d::inf<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -71,7 +71,7 @@ TEST(Vector2DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::vec2d::inf<double> returns a 2D vector with infinity components. */
-TEST(Vector2DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
+TEST(Vector2Constants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec2d::inf<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
@@ -80,7 +80,7 @@ TEST(Vector2DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::vec2d::infN<float> returns a 2D vector with negative infinity components. */
-TEST(Vector2DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
+TEST(Vector2Constants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec2d::infN<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -89,7 +89,7 @@ TEST(Vector2DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityC
 
 
 /** @brief Verify that @ref fgm::vec2d::infN<double> returns a 2D vector with negative infinity components. */
-TEST(Vector2DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
+TEST(Vector2Constants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec2d::infN<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
@@ -98,7 +98,7 @@ TEST(Vector2DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 
 
 /** @brief Verify that @ref fgm::vec2d::infN<float> returns a 2D vector with NaN components. */
-TEST(Vector2DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
+TEST(Vector2Constants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
     const auto nan = fgm::vec2d::nan<float>;
     EXPECT_TRUE(std::isnan(nan.x()));
@@ -107,7 +107,7 @@ TEST(Vector2DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 
 
 /** @brief Verify that @ref fgm::vec2d::infN<double> returns a 2D vector with NaN components. */
-TEST(Vector2DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
+TEST(Vector2Constants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
     const auto nan = fgm::vec2d::nan<double>;
     EXPECT_TRUE(std::isnan(nan.x()));
@@ -116,7 +116,7 @@ TEST(Vector2DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 
 
 /** @brief Verify that @ref fgm::vec2d::x returns a unit vector aligned with x-axis. */
-TYPED_TEST(Vector2DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
+TYPED_TEST(Vector2Constants, X_ReturnsUnitVectorWithOnlyXComponent)
 {
     const auto x = fgm::vec2d::x<TypeParam>;
     EXPECT_VEC_CONTAINS(x, this->_one, this->_zero);
@@ -124,7 +124,7 @@ TYPED_TEST(Vector2DConstants, X_ReturnsUnitVectorWithOnlyXComponent)
 
 
 /** @brief Verify that @ref fgm::vec2d::y returns a unit vector aligned with y-axis. */
-TYPED_TEST(Vector2DConstants, Y_ReturnsUnitVectorWithOnlyYComponent)
+TYPED_TEST(Vector2Constants, Y_ReturnsUnitVectorWithOnlyYComponent)
 {
     const auto y = fgm::vec2d::y<TypeParam>;
     EXPECT_VEC_CONTAINS(y, this->_zero, this->_one);

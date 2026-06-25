@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 01, 2026
  *
- * @brief Verify @ref fgm::Matrix4D initialization.
+ * @brief Verify @ref fgm::Matrix4 initialization.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,12 +14,12 @@
 
 
 template <typename T>
-class Matrix4DInitialization: public ::testing::Test
+class Matrix4Initialization: public ::testing::Test
 {
 protected:
     std::vector<T> _elements;
     std::vector<T> _diagonalElements;
-    fgm::Vector4D<T> _col0, _col1, _col2, _col3;
+    fgm::Vector4<T> _col0, _col1, _col2, _col3;
     T _diagonal0, _diagonal1, _diagonal2, _diagonal3;
 
     void SetUp() override
@@ -38,8 +38,8 @@ protected:
         _diagonal3        = T(11);
     }
 };
-/** Test fixture for @ref fgm::Matrix4D initialization, parameterized by @ref SupportedTypes. */
-TYPED_TEST_SUITE(Matrix4DInitialization, SupportedTypes);
+/** Test fixture for @ref fgm::Matrix4 initialization, parameterized by @ref SupportedTypes. */
+TYPED_TEST_SUITE(Matrix4Initialization, SupportedTypes);
 
 
 
@@ -78,8 +78,8 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Matrix4 MAT2(fgm::Vector4D(1, 5, 9, 13), fgm::Vector4D(2, 6, 10, 14), fgm::Vector4D(3, 7, 11, 15),
-                                 fgm::Vector4D(4, 8, 12, 16));
+    constexpr fgm::Matrix4 MAT2(fgm::Vector4(1, 5, 9, 13), fgm::Vector4(2, 6, 10, 14), fgm::Vector4(3, 7, 11, 15),
+                                 fgm::Vector4(4, 8, 12, 16));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
     static_assert(MAT2(0, 2) == 3);
@@ -147,7 +147,7 @@ namespace
  **************************************/
 
 /** @brief Verify that the default constructor initializes an identity matrix. */
-TYPED_TEST(Matrix4DInitialization, EmptyConstructorReturnsIdentityMatrix)
+TYPED_TEST(Matrix4Initialization, EmptyConstructorReturnsIdentityMatrix)
 {
     constexpr fgm::Matrix4<TypeParam> matrix{};
 
@@ -156,7 +156,7 @@ TYPED_TEST(Matrix4DInitialization, EmptyConstructorReturnsIdentityMatrix)
 
 
 /** @brief Verify that the parameterized constructor can initialize matrix with elements. */
-TYPED_TEST(Matrix4DInitialization, ParameterizedConstructorInitializesMatrixWithElements)
+TYPED_TEST(Matrix4Initialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
     const fgm::Matrix4<TypeParam> matrix(
         this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3], this->_elements[4],
@@ -168,7 +168,7 @@ TYPED_TEST(Matrix4DInitialization, ParameterizedConstructorInitializesMatrixWith
 
 
 /** @brief Verify that the parameterized constructor can initialize matrix with vectors. */
-TYPED_TEST(Matrix4DInitialization, ParameterizedConstructorInitializesMatrixWithVectors)
+TYPED_TEST(Matrix4Initialization, ParameterizedConstructorInitializesMatrixWithVectors)
 {
     const fgm::Matrix4<TypeParam> matrix(this->_col0, this->_col1, this->_col2, this->_col3);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
@@ -176,7 +176,7 @@ TYPED_TEST(Matrix4DInitialization, ParameterizedConstructorInitializesMatrixWith
 
 
 /** @brief Verify that the parameterized constructor can initialize a diagonal matrix. */
-TYPED_TEST(Matrix4DInitialization, ParameterizedConstructorInitializesDiagonalMatrix)
+TYPED_TEST(Matrix4Initialization, ParameterizedConstructorInitializesDiagonalMatrix)
 {
     const fgm::Matrix4<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2, this->_diagonal3);
     EXPECT_MAT_CONTAINS(this->_diagonalElements, matrix);
@@ -184,7 +184,7 @@ TYPED_TEST(Matrix4DInitialization, ParameterizedConstructorInitializesDiagonalMa
 
 
 /** @brief Verify that a matrix can be initialized with implicit braced initialization. */
-TYPED_TEST(Matrix4DInitialization, CanBeConstructedWithBracedInitialization)
+TYPED_TEST(Matrix4Initialization, CanBeConstructedWithBracedInitialization)
 {
     const fgm::Matrix4<TypeParam> matrix = { { TypeParam(1), TypeParam(5), TypeParam(9), TypeParam(13) },
                                               { TypeParam(2), TypeParam(6), TypeParam(10), TypeParam(14) },

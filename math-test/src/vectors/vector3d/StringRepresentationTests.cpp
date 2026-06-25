@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 03, 2026
  *
- * @brief Verify @ref fgm::Vector3D string representation.
+ * @brief Verify @ref fgm::Vector3 string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector3DTestSetup.h"
+#include "Vector3TestSetup.h"
 
 #include <sstream>
 
@@ -21,7 +21,7 @@
  *                                    *
  **************************************/
 
-class Vector3DStringRepresentationTests: public ::testing::Test
+class Vector3StringRepresentationTests: public ::testing::Test
 {
     /** @brief Switch to use full precision for testing. */
     void SetUp() override { fgm::Config::useFullPrecision = true; }
@@ -38,9 +38,9 @@ class Vector3DStringRepresentationTests: public ::testing::Test
  */
 
 /** @brief Verify that the string representation matches the expected format for integral types. */
-TEST_F(Vector3DStringRepresentationTests, IntegralRepresentation)
+TEST_F(Vector3StringRepresentationTests, IntegralRepresentation)
 {
-    const fgm::Vector3D vec(1, 2, 3);
+    const fgm::Vector3 vec(1, 2, 3);
     std::stringstream ss;
 
     ss << vec;
@@ -53,9 +53,9 @@ TEST_F(Vector3DStringRepresentationTests, IntegralRepresentation)
  * @brief Verify that the string representation matches the expected format for single-precision
  *       floating-point types.
  */
-TEST_F(Vector3DStringRepresentationTests, FloatRepresentation)
+TEST_F(Vector3StringRepresentationTests, FloatRepresentation)
 {
-    const fgm::Vector3D vec(1.2345f, 2.0f, 3.56789f);
+    const fgm::Vector3 vec(1.2345f, 2.0f, 3.56789f);
     std::stringstream ss;
 
     ss << vec;
@@ -68,9 +68,9 @@ TEST_F(Vector3DStringRepresentationTests, FloatRepresentation)
  * @brief Verify that the string representation matches the expected format for double-precision
  *       floating-point types.
  */
-TEST_F(Vector3DStringRepresentationTests, DoubleRepresentation)
+TEST_F(Vector3StringRepresentationTests, DoubleRepresentation)
 {
-    const fgm::Vector3D vec(1.2345789777, 2.65831, 3.161285);
+    const fgm::Vector3 vec(1.2345789777, 2.65831, 3.161285);
     std::stringstream ss;
 
     ss << vec;

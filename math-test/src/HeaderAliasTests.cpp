@@ -24,15 +24,15 @@ namespace
     /**
      * @brief Verify that Vec header alias is the full vector struct.
      */
-    static_assert(std::is_same_v<fgm::Vec2<int>, fgm::Vector2D<int>>);
-    static_assert(std::is_same_v<fgm::Vec2<float>, fgm::Vector2D<float>>);
+    static_assert(std::is_same_v<fgm::Vec2<int>, fgm::Vector2<int>>);
+    static_assert(std::is_same_v<fgm::Vec2<float>, fgm::Vector2<float>>);
 
 
-    static_assert(std::is_same_v<fgm::Vec3<int>, fgm::Vector3D<int>>);
-    static_assert(std::is_same_v<fgm::Vec3<float>, fgm::Vector3D<float>>);
+    static_assert(std::is_same_v<fgm::Vec3<int>, fgm::Vector3<int>>);
+    static_assert(std::is_same_v<fgm::Vec3<float>, fgm::Vector3<float>>);
 
-    static_assert(std::is_same_v<fgm::Vec4<int>, fgm::Vector4D<int>>);
-    static_assert(std::is_same_v<fgm::Vec4<float>, fgm::Vector4D<float>>);
+    static_assert(std::is_same_v<fgm::Vec4<int>, fgm::Vector4<int>>);
+    static_assert(std::is_same_v<fgm::Vec4<float>, fgm::Vector4<float>>);
 
 
     /**

@@ -3,20 +3,20 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 10, 2026
  *
- * @brief Verify @ref fgm::Vector3D accessors and mutators.
+ * @brief Verify @ref fgm::Vector3 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector3DTestSetup.h"
+#include "Vector3TestSetup.h"
 
 
 
 #ifdef ENABLE_DEBUG_TESTS
-class Vector3DIndexing: public testing::TestWithParam<std::size_t>
+class Vector3Indexing: public testing::TestWithParam<std::size_t>
 {};
-INSTANTIATE_TEST_SUITE_P(Vector2DTests, Vector3DIndexing, testing::Values(4, 5, 100));
+INSTANTIATE_TEST_SUITE_P(Vector2Tests, Vector3Indexing, testing::Values(4, 5, 100));
 #endif
 
 
@@ -35,7 +35,7 @@ INSTANTIATE_TEST_SUITE_P(Vector2DTests, Vector3DIndexing, testing::Values(4, 5, 
 /** @brief Verify that vector accessors are available at compile time. */
 namespace
 {
-    constexpr fgm::Vector3D vector(1, 2, 3);
+    constexpr fgm::Vector3 vector(1, 2, 3);
 
     static_assert(vector.x() == 1);
     static_assert(vector.y() == 2);
@@ -58,9 +58,9 @@ namespace
  **************************************/
 
 /** @brief Verify that the components are accessible via named spatial aliases (x, y, z). */
-TEST(Vector3DAccess, AccessibleAsXYZW)
+TEST(Vector3Access, AccessibleAsXYZW)
 {
-    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3 vec(3.0f, 1.0f, 6.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.x());
     EXPECT_FLOAT_EQ(1.0f, vec.y());
@@ -69,9 +69,9 @@ TEST(Vector3DAccess, AccessibleAsXYZW)
 
 
 /** @brief Verify that the components are accessible via named spatial aliases (s, t, p). */
-TEST(Vector3DAccess, AccessibleAsSTPQ)
+TEST(Vector3Access, AccessibleAsSTPQ)
 {
-    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3 vec(3.0f, 1.0f, 6.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.s());
     EXPECT_FLOAT_EQ(1.0f, vec.t());
@@ -80,9 +80,9 @@ TEST(Vector3DAccess, AccessibleAsSTPQ)
 
 
 /** @brief Verify that the components are accessible via named spatial aliases (r, g, b). */
-TEST(Vector3DAccess, AccessibleAsRGBA)
+TEST(Vector3Access, AccessibleAsRGBA)
 {
-    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3 vec(3.0f, 1.0f, 6.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.r());
     EXPECT_FLOAT_EQ(1.0f, vec.g());
@@ -91,9 +91,9 @@ TEST(Vector3DAccess, AccessibleAsRGBA)
 
 
 /** @brief Verify that the components are accessible via subscript indexing for reads. */
-TEST(Vector3DAccess, AccessibleAsArray)
+TEST(Vector3Access, AccessibleAsArray)
 {
-    const fgm::Vector3D vec(3.0f, 1.0f, 6.0f);
+    const fgm::Vector3 vec(3.0f, 1.0f, 6.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
@@ -102,10 +102,10 @@ TEST(Vector3DAccess, AccessibleAsArray)
 
 
 #ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vector3D out-of-bounds access triggers assert in debug mode. */
-TEST_P(Vector3DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Vector3 out-of-bounds access triggers assert in debug mode. */
+TEST_P(Vector3Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
-    const fgm::Vector3D vec(1, 2, 3);
+    const fgm::Vector3 vec(1, 2, 3);
     const auto index = GetParam();
     EXPECT_DEBUG_DEATH(vec[index], "");
 }
@@ -127,9 +127,9 @@ TEST_P(Vector3DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
  **************************************/
 
 /** @brief Verify that the components can be mutated via named spatial aliases (x, y, z). */
-TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZW)
+TEST(Vector3Mutation, ElementsCanBeMutatedUsingXYZW)
 {
-    fgm::Vector3D<float> vec;
+    fgm::Vector3<float> vec;
 
     vec.x() = 3.0f;
     vec.y() = 1.0f;
@@ -142,9 +142,9 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingXYZW)
 
 
 /** @brief Verify that the components can be mutated via named spatial aliases (s, t, p). */
-TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTPQ)
+TEST(Vector3Mutation, ElementsCanBeMutatedUsingSTPQ)
 {
-    fgm::Vector3D<float> vec;
+    fgm::Vector3<float> vec;
 
     vec.s() = 3.0f;
     vec.t() = 1.0f;
@@ -157,9 +157,9 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingSTPQ)
 
 
 /** @brief Verify that the components can be mutated via named spatial aliases (r, g, b). */
-TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGBA)
+TEST(Vector3Mutation, ElementsCanBeMutatedUsingRGBA)
 {
-    fgm::Vector3D<float> vec;
+    fgm::Vector3<float> vec;
 
     vec.r() = 3.0f;
     vec.g() = 1.0f;
@@ -172,9 +172,9 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingRGBA)
 
 
 /** @brief Verify that the components are accessible via subscript indexing for writing. */
-TEST(Vector3DMutation, ElementsCanBeMutatedUsingIndex)
+TEST(Vector3Mutation, ElementsCanBeMutatedUsingIndex)
 {
-    fgm::Vector3D<float> vec;
+    fgm::Vector3<float> vec;
 
     vec[0] = 3.0f;
     vec[1] = 1.0f;
@@ -186,10 +186,10 @@ TEST(Vector3DMutation, ElementsCanBeMutatedUsingIndex)
 }
 
 #ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vector3D out-of-bounds mutation triggers assert in debug mode. */
-TEST_P(Vector3DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Vector3 out-of-bounds mutation triggers assert in debug mode. */
+TEST_P(Vector3Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
-    fgm::Vector3D vec(1, 2, 3);
+    fgm::Vector3 vec(1, 2, 3);
     const auto index = GetParam();
     EXPECT_DEBUG_DEATH(vec[index] = 2, "");
 }

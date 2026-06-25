@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Vector2D string representation.
+ * @brief Verify @ref fgm::Vector2 string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector2DTestSetup.h"
+#include "Vector2TestSetup.h"
 
 #include <sstream>
 
@@ -21,7 +21,7 @@
  *                                    *
  **************************************/
 
-class Vector2DStringRepresentationTests: public ::testing::Test
+class Vector2StringRepresentationTests: public ::testing::Test
 {
     /** @brief Switch to use full precision for testing. */
     void SetUp() override { fgm::Config::useFullPrecision = true; }
@@ -38,9 +38,9 @@ class Vector2DStringRepresentationTests: public ::testing::Test
  */
 
 /** @brief Verify that the string representation matches the expected format for integral types. */
-TEST_F(Vector2DStringRepresentationTests, IntegralRepresentation)
+TEST_F(Vector2StringRepresentationTests, IntegralRepresentation)
 {
-    const fgm::Vector2D vec(1, 2);
+    const fgm::Vector2 vec(1, 2);
     std::stringstream ss;
 
     ss << vec;
@@ -53,9 +53,9 @@ TEST_F(Vector2DStringRepresentationTests, IntegralRepresentation)
  * @brief Verify that the string representation matches the expected format for single-precision
  *       floating-point types.
  */
-TEST_F(Vector2DStringRepresentationTests, FloatRepresentation)
+TEST_F(Vector2StringRepresentationTests, FloatRepresentation)
 {
-    const fgm::Vector2D vec(1.2345f, 2.0f);
+    const fgm::Vector2 vec(1.2345f, 2.0f);
     std::stringstream ss;
 
     ss << vec;
@@ -68,9 +68,9 @@ TEST_F(Vector2DStringRepresentationTests, FloatRepresentation)
  * @brief Verify that the string representation matches the expected format for double-precision
  *       floating-point types.
  */
-TEST_F(Vector2DStringRepresentationTests, DoubleRepresentation)
+TEST_F(Vector2StringRepresentationTests, DoubleRepresentation)
 {
-    const fgm::Vector2D vec(1.2345789777, 2.65831);
+    const fgm::Vector2 vec(1.2345789777, 2.65831);
     std::stringstream ss;
 
     ss << vec;

@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 02, 2026
  *
- * @brief Verify @ref fgm::Vector3D dot and cross product logic.
+ * @brief Verify @ref fgm::Vector3 dot and cross product logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector3DTestSetup.h"
+#include "Vector3TestSetup.h"
 
 
 
@@ -20,14 +20,14 @@
  **************************************/
 
 template <typename T>
-class Vector3DDotProduct: public ::testing::Test
+class Vector3DotProduct: public ::testing::Test
 {
 protected:
-    fgm::Vector3D<T> _vecA;
-    fgm::Vector3D<T> _vecB;
+    fgm::Vector3<T> _vecA;
+    fgm::Vector3<T> _vecB;
 
-    fgm::Vector3D<T> _vecAOrthogonal;
-    fgm::Vector3D<T> _vecBOrthogonal;
+    fgm::Vector3<T> _vecAOrthogonal;
+    fgm::Vector3<T> _vecBOrthogonal;
 
     T _expectedDotProduct;
 
@@ -44,17 +44,17 @@ protected:
         _expectedADotA = static_cast<T>(29);
     }
 };
-/** @brief Test fixture for @ref fgm::Vector3D dot product, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vector3DDotProduct, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector3 dot product, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Vector3DotProduct, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Vector3DCrossProduct: public ::testing::Test
+class Vector3CrossProduct: public ::testing::Test
 {
 protected:
-    fgm::Vector3D<T> _vecA;
-    fgm::Vector3D<T> _vecB;
-    fgm::Vector3D<T> _expectedCrossProduct;
+    fgm::Vector3<T> _vecA;
+    fgm::Vector3<T> _vecB;
+    fgm::Vector3<T> _expectedCrossProduct;
 
     void SetUp() override
     {
@@ -63,8 +63,8 @@ protected:
         _expectedCrossProduct = { T(-3), T(6), T(-3) };
     }
 };
-/** @brief Test fixture for @ref fgm::Vector3D cross product, parameterized by @ref SupportedSignedArithmeticTypes. */
-TYPED_TEST_SUITE(Vector3DCrossProduct, SupportedSignedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Vector3 cross product, parameterized by @ref SupportedSignedArithmeticTypes. */
+TYPED_TEST_SUITE(Vector3CrossProduct, SupportedSignedArithmeticTypes);
 
 
 
@@ -76,15 +76,15 @@ TYPED_TEST_SUITE(Vector3DCrossProduct, SupportedSignedArithmeticTypes);
 /** @brief Verify that vector geometric product operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Vector3D vec1(1, 2, 3);
-    constexpr fgm::Vector3D vec2(4, 5, 6);
+    constexpr fgm::Vector3 vec1(1, 2, 3);
+    constexpr fgm::Vector3 vec2(4, 5, 6);
     constexpr auto dotProductA = vec1.dot(vec2);
-    constexpr auto dotProductB = fgm::Vector3D<int>::dot(vec1, vec2);
+    constexpr auto dotProductB = fgm::Vector3<int>::dot(vec1, vec2);
     static_assert(dotProductA == 32);
     static_assert(dotProductB == 32);
 
     constexpr auto crossProductA = vec1.cross(vec2);
-    constexpr auto crossProductB = fgm::Vector3D<int>::cross(vec1, vec2);
+    constexpr auto crossProductB = fgm::Vector3<int>::cross(vec1, vec2);
     static_assert(crossProductA.x() == -3);
     static_assert(crossProductA.y() == 6);
     static_assert(crossProductA.z() == -3);
@@ -103,7 +103,7 @@ namespace
  **************************************/
 
 /** @brief Verify that the dot product of a vector with itself returns its squared magnitude. */
-TYPED_TEST(Vector3DDotProduct, SelfDotProductReturnsSquareMagnitude)
+TYPED_TEST(Vector3DotProduct, SelfDotProductReturnsSquareMagnitude)
 {
 
     const TypeParam dotProduct = this->_vecA.dot(this->_vecA);
@@ -124,7 +124,7 @@ TYPED_TEST(Vector3DDotProduct, SelfDotProductReturnsSquareMagnitude)
 
 
 /** @brief Verify that the dot product of a vector with an orthogonal vector returns zero. */
-TYPED_TEST(Vector3DDotProduct, OrthogonalDotProductReturnZero)
+TYPED_TEST(Vector3DotProduct, OrthogonalDotProductReturnZero)
 {
     const TypeParam dotProduct = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
 
@@ -144,7 +144,7 @@ TYPED_TEST(Vector3DDotProduct, OrthogonalDotProductReturnZero)
 
 
 /** @brief Verify that the dot product of a vector with a non-orthogonal vector returns a non-zero scalar. */
-TYPED_TEST(Vector3DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
+TYPED_TEST(Vector3DotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 {
     const TypeParam dotProduct = this->_vecA.dot(this->_vecB);
 
@@ -163,10 +163,10 @@ TYPED_TEST(Vector3DDotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Vector3D::dot returns a non-zero scalar. */
-TYPED_TEST(Vector3DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
+/** @brief Verify that the static variant of @ref fgm::Vector3::dot returns a non-zero scalar. */
+TYPED_TEST(Vector3DotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
 {
-    const TypeParam dotProduct = fgm::Vector3D<TypeParam>::dot(this->_vecA, this->_vecB);
+    const TypeParam dotProduct = fgm::Vector3<TypeParam>::dot(this->_vecA, this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
     {
@@ -187,11 +187,11 @@ TYPED_TEST(Vector3DDotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZe
  * @brief Verify that the dot product of a vector with another vector in opposite direction
  *        returns a negative scalar.
  */
-TEST(Vector3DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
+TEST(Vector3DotProduct, AntiParallelDotProductReturnsNegativeScalar)
 {
     // Given two opposite vectors
-    const fgm::Vector3D vecA(-1.0, 0.0, 0.0);
-    const fgm::Vector3D vecB(1.0, 0.0, 0.0);
+    const fgm::Vector3 vecA(-1.0, 0.0, 0.0);
+    const fgm::Vector3 vecB(1.0, 0.0, 0.0);
 
     // When dot with each other
     const double dotProduct = vecA.dot(vecB);
@@ -205,11 +205,11 @@ TEST(Vector3DDotProduct, AntiParallelDotProductReturnsNegativeScalar)
  * @brief Verify that the dot product of a vector with another vector of different type
  *        returns a type promoted vector.
  */
-TEST(Vector3DDotProduct, MixedTypeDotProductPromotesType)
+TEST(Vector3DotProduct, MixedTypeDotProductPromotesType)
 {
     // Given two vectors of different type
-    const fgm::Vector3D vecA(7, 13, 29);
-    const fgm::Vector3D vecB(1.123456789, 2.123456789, 3.123456789);
+    const fgm::Vector3 vecA(7, 13, 29);
+    const fgm::Vector3 vecB(1.123456789, 2.123456789, 3.123456789);
 
     // When dot with each other
     const auto dotProduct = vecA.dot(vecB);
@@ -232,13 +232,13 @@ TEST(Vector3DDotProduct, MixedTypeDotProductPromotesType)
  * @brief Verify that the cross product of vector aligned with x-axis and a vector aligned with y-axis
  *        returns a vector aligned with the z-axis.
  */
-TEST(Vector3DCrossProduct, BetweenAxisAlignedXAndYVectorsReturnsZ)
+TEST(Vector3CrossProduct, BetweenAxisAlignedXAndYVectorsReturnsZ)
 {
-    const fgm::Vector3D xAxis(1.0f, 0.0f, 0.0f);
-    const fgm::Vector3D yAxis(0.0f, 1.0f, 0.0f);
-    const fgm::Vector3D expectedCrossProduct(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3 xAxis(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3 yAxis(0.0f, 1.0f, 0.0f);
+    const fgm::Vector3 expectedCrossProduct(0.0f, 0.0f, 1.0f);
 
-    const fgm::Vector3D crossProduct = xAxis.cross(yAxis);
+    const fgm::Vector3 crossProduct = xAxis.cross(yAxis);
 
     EXPECT_VEC_EQ(expectedCrossProduct, crossProduct);
 }
@@ -248,13 +248,13 @@ TEST(Vector3DCrossProduct, BetweenAxisAlignedXAndYVectorsReturnsZ)
  * @brief Verify that the cross product of vector aligned with y-axis and a vector aligned with x-axis
  *        returns a vector aligned with the negative z-axis.
  */
-TEST(Vector3DCrossProduct, BetweenAxisAlignedYAndZVectorsReturnsNegativeZ)
+TEST(Vector3CrossProduct, BetweenAxisAlignedYAndZVectorsReturnsNegativeZ)
 {
-    const fgm::Vector3D yAxis(0.0f, 1.0f, 0.0f);
-    const fgm::Vector3D xAxis(1.0f, 0.0f, 0.0f);
-    const fgm::Vector3D expectedCrossProduct(0.0f, 0.0f, -1.0f);
+    const fgm::Vector3 yAxis(0.0f, 1.0f, 0.0f);
+    const fgm::Vector3 xAxis(1.0f, 0.0f, 0.0f);
+    const fgm::Vector3 expectedCrossProduct(0.0f, 0.0f, -1.0f);
 
-    const fgm::Vector3D crossProduct = yAxis.cross(xAxis);
+    const fgm::Vector3 crossProduct = yAxis.cross(xAxis);
 
     EXPECT_VEC_EQ(expectedCrossProduct, crossProduct);
 }
@@ -264,15 +264,15 @@ TEST(Vector3DCrossProduct, BetweenAxisAlignedYAndZVectorsReturnsNegativeZ)
  * @brief Verify that the cross product of vector aligned with z-axis and a vector aligned with y-axis
  *        returns a vector aligned with the negative x-axis.
  */
-TEST(Vector3DCrossProduct, BetweenAxisAlignedZAndYVectorsReturnsNegativeX)
+TEST(Vector3CrossProduct, BetweenAxisAlignedZAndYVectorsReturnsNegativeX)
 {
     // Arrange
-    const fgm::Vector3D zAxis(0.0f, 0.0f, 1.0f);
-    const fgm::Vector3D yAxis(0.0f, 1.0f, 0.0f);
-    const fgm::Vector3D expectedCrossProduct(-1.0f, 0.0f, 0.0f);
+    const fgm::Vector3 zAxis(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3 yAxis(0.0f, 1.0f, 0.0f);
+    const fgm::Vector3 expectedCrossProduct(-1.0f, 0.0f, 0.0f);
 
     // Act
-    const fgm::Vector3D crossProduct = zAxis.cross(yAxis);
+    const fgm::Vector3 crossProduct = zAxis.cross(yAxis);
 
     // Assert
     EXPECT_VEC_EQ(expectedCrossProduct, crossProduct);
@@ -280,20 +280,20 @@ TEST(Vector3DCrossProduct, BetweenAxisAlignedZAndYVectorsReturnsNegativeX)
 
 
 /** @brief Verify that the cross product of vector with self is a zero-vector. */
-TEST(Vector3DCrossProduct, VectorCrossItselfReturnsZeroVector)
+TEST(Vector3CrossProduct, VectorCrossItselfReturnsZeroVector)
 {
-    const fgm::Vector3D vec(0.0f, 0.0f, 1.0f);
+    const fgm::Vector3 vec(0.0f, 0.0f, 1.0f);
 
-    const fgm::Vector3D crossProduct = vec.cross(vec);
+    const fgm::Vector3 crossProduct = vec.cross(vec);
 
     EXPECT_VEC_ZERO(crossProduct);
 }
 
 
 /** @brief Verify that the cross product of vector with a non-parallel vector returns a new vector. */
-TYPED_TEST(Vector3DCrossProduct, BetweenTwoNonParallelVectorsReturnsNewProduct)
+TYPED_TEST(Vector3CrossProduct, BetweenTwoNonParallelVectorsReturnsNewProduct)
 {
-    const fgm::Vector3D crossProduct = this->_vecA.cross(this->_vecB);
+    const fgm::Vector3 crossProduct = this->_vecA.cross(this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedCrossProduct, crossProduct);
 }
@@ -303,9 +303,9 @@ TYPED_TEST(Vector3DCrossProduct, BetweenTwoNonParallelVectorsReturnsNewProduct)
  * @brief Verify that the cross product of vector with a non-parallel vector
  *        returns a new vector perpendicular to both.
  */
-TYPED_TEST(Vector3DCrossProduct, BetweenTwoNonParallelVectorsReturnAVectorPerpendicularToBoth)
+TYPED_TEST(Vector3CrossProduct, BetweenTwoNonParallelVectorsReturnAVectorPerpendicularToBoth)
 {
-    const fgm::Vector3D crossProduct = this->_vecA.cross(this->_vecB);
+    const fgm::Vector3 crossProduct = this->_vecA.cross(this->_vecB);
 
     // Orientation Check: Dot must be zero
     if constexpr (std::is_same_v<TypeParam, double>)
@@ -328,11 +328,11 @@ TYPED_TEST(Vector3DCrossProduct, BetweenTwoNonParallelVectorsReturnAVectorPerpen
 
 /**
  * @brief Verify that the cross product of vector with a non-parallel vector using static variant of
- *        @ref fgm::Vector3D::cross returns a new vector.
+ *        @ref fgm::Vector3::cross returns a new vector.
  */
-TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnsNewProduct)
+TYPED_TEST(Vector3CrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnsNewProduct)
 {
-    const fgm::Vector3D crossProduct = fgm::Vector3D<TypeParam>::cross(this->_vecA, this->_vecB);
+    const fgm::Vector3 crossProduct = fgm::Vector3<TypeParam>::cross(this->_vecA, this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedCrossProduct, crossProduct);
 }
@@ -340,11 +340,11 @@ TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsRetur
 
 /**
  * @brief Verify that the cross product of vector with a non-parallel vector using static variant of
- *        @ref fgm::Vector3D::cross returns a new vector perpendicular to both.
+ *        @ref fgm::Vector3::cross returns a new vector perpendicular to both.
  */
-TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnAVectorPerpendicularToBoth)
+TYPED_TEST(Vector3CrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnAVectorPerpendicularToBoth)
 {
-    const fgm::Vector3D crossProduct = fgm::Vector3D<TypeParam>::cross(this->_vecA, this->_vecB);
+    const fgm::Vector3 crossProduct = fgm::Vector3<TypeParam>::cross(this->_vecA, this->_vecB);
 
     // Orientation Check: Dot must be zero
     if constexpr (std::is_same_v<TypeParam, double>)
@@ -369,10 +369,10 @@ TYPED_TEST(Vector3DCrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsRetur
  * @brief Verify that the cross product between non-parallel vectors is anti-commutative.
  *        Anti-Commutativity: \f$ \mathbf{a}\times\mathbf{b} = -(\mathbf{b}\times\mathbf{a}) \f$
  */
-TYPED_TEST(Vector3DCrossProduct, IsAntiCommutative)
+TYPED_TEST(Vector3CrossProduct, IsAntiCommutative)
 {
-    fgm::Vector3D crossProduct1 = fgm::Vector3D<TypeParam>::cross(this->_vecA, this->_vecB);
-    fgm::Vector3D crossProduct2 = fgm::Vector3D<TypeParam>::cross(this->_vecB, this->_vecA);
+    fgm::Vector3 crossProduct1 = fgm::Vector3<TypeParam>::cross(this->_vecA, this->_vecB);
+    fgm::Vector3 crossProduct2 = fgm::Vector3<TypeParam>::cross(this->_vecB, this->_vecA);
 
     EXPECT_VEC_EQ(crossProduct1, -1.0f * crossProduct2);
 }
@@ -383,23 +383,23 @@ TYPED_TEST(Vector3DCrossProduct, IsAntiCommutative)
  *        Commutativity: \f$ \mathbf{a}\times\mathbf{b} = \mathbf{b}\times\mathbf{a} \f$,
  *        **given a and b are scalar multiples of each other**.
  */
-TYPED_TEST(Vector3DCrossProduct, BetweenParallelVectorIsCommutatives)
+TYPED_TEST(Vector3CrossProduct, BetweenParallelVectorIsCommutatives)
 {
-    const fgm::Vector3D vecB    = TypeParam(2) * this->_vecA;
-    fgm::Vector3D crossProduct1 = fgm::Vector3D<TypeParam>::cross(this->_vecA, vecB);
-    fgm::Vector3D crossProduct2 = fgm::Vector3D<TypeParam>::cross(vecB, this->_vecA);
+    const fgm::Vector3 vecB    = TypeParam(2) * this->_vecA;
+    fgm::Vector3 crossProduct1 = fgm::Vector3<TypeParam>::cross(this->_vecA, vecB);
+    fgm::Vector3 crossProduct2 = fgm::Vector3<TypeParam>::cross(vecB, this->_vecA);
 
     EXPECT_VEC_EQ(crossProduct1, crossProduct2);
 }
 
 
 /** @brief Verify that the cross product between two differently typed vectors promote type. */
-TEST(Vector3DCrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vector3CrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
 {
-    const fgm::Vector3D vecA(2.0f, 3.0f, 4.0f);
-    const fgm::Vector3D vecB(5.0, 6.0, 7.0);
+    const fgm::Vector3 vecA(2.0f, 3.0f, 4.0f);
+    const fgm::Vector3 vecB(5.0, 6.0, 7.0);
 
-    [[maybe_unused]] const fgm::Vector3D crossProduct = vecA.cross(vecB);
+    [[maybe_unused]] const fgm::Vector3 crossProduct = vecA.cross(vecB);
 
     static_assert(std::is_same_v<typename decltype(crossProduct)::value_type, double>);
 }

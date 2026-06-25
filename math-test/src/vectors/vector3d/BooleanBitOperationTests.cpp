@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 02, 2026
  *
- * @brief Verify @ref fgm::Vector3D bitwise operator(&, |, !) logic.
+ * @brief Verify @ref fgm::Vector3 bitwise operator(&, |, !) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector3DTestSetup.h"
+#include "Vector3TestSetup.h"
 
 
 
@@ -19,15 +19,15 @@
  *                                    *
  **************************************/
 
-/** @brief Test fixture for @ref Vector3D<bool> bitwise operations */
-class BooleanVector3DBitOperations: public ::testing::Test
+/** @brief Test fixture for @ref Vector3<bool> bitwise operations */
+class BooleanVector3BitOperations: public ::testing::Test
 {
 protected:
-    fgm::Vector3D<bool> _vecA;
-    fgm::Vector3D<bool> _vecB;
-    fgm::Vector3D<bool> _expectedConjunctionVector;
-    fgm::Vector3D<bool> _expectedDisjunctionVec;
-    fgm::Vector3D<bool> _expectedInvertedVec;
+    fgm::Vector3<bool> _vecA;
+    fgm::Vector3<bool> _vecB;
+    fgm::Vector3<bool> _expectedConjunctionVector;
+    fgm::Vector3<bool> _expectedDisjunctionVec;
+    fgm::Vector3<bool> _expectedInvertedVec;
 
     void SetUp() override
     {
@@ -49,8 +49,8 @@ protected:
 /** @brief Verify that vector boolean bitwise operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Vector3D vec1(true, false, true);
-    constexpr fgm::Vector3D vec2(false, false, true);
+    constexpr fgm::Vector3 vec1(true, false, true);
+    constexpr fgm::Vector3 vec2(false, false, true);
     constexpr auto andVec = vec1 & vec2;
     constexpr auto orVec  = vec1 | vec2;
     constexpr auto notVec = !vec1;
@@ -74,7 +74,7 @@ namespace
  * @brief Verify that the bitwise AND operator perform a component-wise logical conjunction and
  *       returns the correct boolean mask.
  */
-TEST_F(BooleanVector3DBitOperations, BitwiseAND_PerformComponentwiseConjunction)
+TEST_F(BooleanVector3BitOperations, BitwiseAND_PerformComponentwiseConjunction)
 {
     const auto mask = this->_vecA & this->_vecB;
 
@@ -85,7 +85,7 @@ TEST_F(BooleanVector3DBitOperations, BitwiseAND_PerformComponentwiseConjunction)
  * @brief Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
-TEST_F(BooleanVector3DBitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
+TEST_F(BooleanVector3BitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
 {
     this->_vecA &= this->_vecB;
 
@@ -97,7 +97,7 @@ TEST_F(BooleanVector3DBitOperations, CompoundBitwiseAND_PerformInPlaceConjunctio
  * @brief Verify that the bitwise OR operator performs a component-wise logical disjunction and
  *       returns the correct boolean mask.
  */
-TEST_F(BooleanVector3DBitOperations, BitwiseOR_PerformComponentwiseDisjunction)
+TEST_F(BooleanVector3BitOperations, BitwiseOR_PerformComponentwiseDisjunction)
 {
     const auto mask = this->_vecA | this->_vecB;
 
@@ -109,7 +109,7 @@ TEST_F(BooleanVector3DBitOperations, BitwiseOR_PerformComponentwiseDisjunction)
  * @brief Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
-TEST_F(BooleanVector3DBitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
+TEST_F(BooleanVector3BitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
 {
     this->_vecA |= this->_vecB;
 
@@ -121,7 +121,7 @@ TEST_F(BooleanVector3DBitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction
  * @brief Verify that the bitwise NOT operator performs a component-wise logical inversion and
  *       returns the correct boolean mask.
  */
-TEST_F(BooleanVector3DBitOperations, BitwiseNOT_PerformComponentwiseInversion)
+TEST_F(BooleanVector3BitOperations, BitwiseNOT_PerformComponentwiseInversion)
 {
     const auto mask = !this->_vecA;
 

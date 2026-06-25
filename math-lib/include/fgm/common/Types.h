@@ -33,13 +33,13 @@ namespace fgm
     // Forward declarations
 
     template <Arithmetic T>
-    struct Vector2D;
+    struct Vector2;
 
     template <Arithmetic T>
-    struct Vector3D;
+    struct Vector3;
 
     template <Arithmetic T>
-    struct Vector4D;
+    struct Vector4;
 
     template <Arithmetic T>
     struct Matrix2;
@@ -51,40 +51,40 @@ namespace fgm
     struct Matrix4;
 
 
-    /** @brief Alias for @ref Vector2D with promoted value type. */
+    /** @brief Alias for @ref Vector2 with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedVector2D = Vector2D<PromotedValue_t<T, U>>;
+    using PromotedVector2 = Vector2<PromotedValue_t<T, U>>;
 
 
-    /** @brief Alias for @ref Vector2D with a `value_type` of @ref Magnitude of the wider type. */
+    /** @brief Alias for @ref Vector2 with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedFloatVector2D = Vector2D<Magnitude<PromotedValue_t<T, U>>>;
+    using PromotedFloatVector2 = Vector2<Magnitude<PromotedValue_t<T, U>>>;
 
 
-    /** @brief Alias for @ref Vector3D with promoted value type. */
+    /** @brief Alias for @ref Vector3 with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedVector3D = Vector3D<PromotedValue_t<T, U>>;
+    using PromotedVector3 = Vector3<PromotedValue_t<T, U>>;
 
 
-    /** @brief Alias for @ref Vector3D with a `value_type` of @ref Magnitude of the wider type. */
+    /** @brief Alias for @ref Vector3 with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedFloatVector3D = Vector3D<Magnitude<PromotedValue_t<T, U>>>;
+    using PromotedFloatVector3 = Vector3<Magnitude<PromotedValue_t<T, U>>>;
 
 
-    /** @brief Alias for @ref Vector4D with promoted value type. */
+    /** @brief Alias for @ref Vector4 with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedVector4D = Vector4D<PromotedValue_t<T, U>>;
+    using PromotedVector4 = Vector4<PromotedValue_t<T, U>>;
 
 
-    /** @brief Alias for @ref Vector4D with a `value_type` of @ref Magnitude of the wider type. */
+    /** @brief Alias for @ref Vector4 with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedFloatVector4D = Vector4D<Magnitude<PromotedValue_t<T, U>>>;
+    using PromotedFloatVector4 = Vector4<Magnitude<PromotedValue_t<T, U>>>;
 
 
     /** @brief Alias for @ref Matrix2 with promoted value type. */

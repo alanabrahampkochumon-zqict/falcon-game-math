@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 01, 2026
  *
- * @brief Verify @ref fgm::Matrix4D equality operator (==, !=) and their functional counterpart's
+ * @brief Verify @ref fgm::Matrix4 equality operator (==, !=) and their functional counterpart's
  *        (eq, neq, allEq, anyNeq) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -21,7 +21,7 @@ constexpr auto INF   = fgm::constants::INFINITY_F;
 
 
 template <typename T>
-class Matrix4DEquality: public ::testing::Test
+class Matrix4Equality: public ::testing::Test
 {
 protected:
     fgm::Matrix4<T> _eqMatA;
@@ -46,10 +46,10 @@ protected:
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Matrix4D equality and inequality checks, parameterized by
+ * @brief Test fixture for @ref fgm::Matrix4 equality and inequality checks, parameterized by
  *        @ref SupportedArithmeticTypes.
  */
-TYPED_TEST_SUITE(Matrix4DEquality, SupportedArithmeticTypes);
+TYPED_TEST_SUITE(Matrix4Equality, SupportedArithmeticTypes);
 
 
 
@@ -102,8 +102,8 @@ namespace
  *                                    *
  **************************************/
 
-/** @brief Verify that @ref fgm::Matrix4D::allEq returns  `true`  for identical matrices. */
-TYPED_TEST(Matrix4DEquality, Equality_IdenticalMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Matrix4::allEq returns  `true`  for identical matrices. */
+TYPED_TEST(Matrix4Equality, Equality_IdenticalMatricesReturnTrue)
 {
     const bool equality = this->_eqMatA.allEq(this->_eqMatB);
 
@@ -111,8 +111,8 @@ TYPED_TEST(Matrix4DEquality, Equality_IdenticalMatricesReturnTrue)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::allEq returns `false` if any component differ. */
-TYPED_TEST(Matrix4DEquality, Equality_DifferentMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Matrix4::allEq returns `false` if any component differ. */
+TYPED_TEST(Matrix4Equality, Equality_DifferentMatricesReturnFalse)
 {
     const bool equality = this->_eqMatA.allEq(this->_dissimilarMat);
 
@@ -120,8 +120,8 @@ TYPED_TEST(Matrix4DEquality, Equality_DifferentMatricesReturnFalse)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Matrix4D::allEq for identical matrices. */
-TYPED_TEST(Matrix4DEquality, StaticWrapper_Equality_IdenticalMatricesReturnTrue)
+/** @brief Verify that the static variant of @ref fgm::Matrix4::allEq for identical matrices. */
+TYPED_TEST(Matrix4Equality, StaticWrapper_Equality_IdenticalMatricesReturnTrue)
 {
     const bool equality = fgm::Matrix4<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
 
@@ -129,8 +129,8 @@ TYPED_TEST(Matrix4DEquality, StaticWrapper_Equality_IdenticalMatricesReturnTrue)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Matrix4D::allEq for different matrices. */
-TYPED_TEST(Matrix4DEquality, StaticWrapper_Equality_DifferentMatricesReturnFalse)
+/** @brief Verify that the static variant of @ref fgm::Matrix4::allEq for different matrices. */
+TYPED_TEST(Matrix4Equality, StaticWrapper_Equality_DifferentMatricesReturnFalse)
 {
     const bool equality = fgm::Matrix4<TypeParam>::allEq(this->_eqMatA, this->_dissimilarMat);
 
@@ -138,8 +138,8 @@ TYPED_TEST(Matrix4DEquality, StaticWrapper_Equality_DifferentMatricesReturnFalse
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::allEq follows IEEE 754 for NaN comparisons. */
-TEST(Matrix4DEquality, NanEqualityReturnsFalse)
+/** @brief Verify that @ref fgm::Matrix4::allEq follows IEEE 754 for NaN comparisons. */
+TEST(Matrix4Equality, NanEqualityReturnsFalse)
 {
     const fgm::Matrix4 matA(NAN_F, NAN_F, NAN_F, NAN_F);
     const fgm::Matrix4 matB(1.0f, -5.88874789f, 0.888749f, 0.38239f);
@@ -150,8 +150,8 @@ TEST(Matrix4DEquality, NanEqualityReturnsFalse)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::allEq follows IEEE 754 for INFINITY comparisons. */
-TEST(Matrix4DEquality, InfinityEquality_IdenticalMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Matrix4::allEq follows IEEE 754 for INFINITY comparisons. */
+TEST(Matrix4Equality, InfinityEquality_IdenticalMatricesReturnTrue)
 {
     const fgm::Matrix4 matA(INF, -INF, INF, -INF);
     const fgm::Matrix4 matB(INF, -INF, INF, -INF);
@@ -162,8 +162,8 @@ TEST(Matrix4DEquality, InfinityEquality_IdenticalMatricesReturnTrue)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::allEq follows IEEE 754 for INFINITY comparisons. */
-TEST(Matrix4DEquality, InfinityEquality_DifferentMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Matrix4::allEq follows IEEE 754 for INFINITY comparisons. */
+TEST(Matrix4Equality, InfinityEquality_DifferentMatricesReturnFalse)
 {
     const fgm::Matrix4 matA(INF, -INF, INF, INF);
     const fgm::Matrix4 matB(-INF, -INF, INF, -INF);
@@ -173,8 +173,8 @@ TEST(Matrix4DEquality, InfinityEquality_DifferentMatricesReturnFalse)
     EXPECT_FALSE(equality);
 }
 
-/** @brief Verify that @ref fgm::Matrix4D::allEq works for different vector types with identical components. */
-TYPED_TEST(Matrix4DEquality, MixedType_Equality_IdenticalMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Matrix4::allEq works for different vector types with identical components. */
+TYPED_TEST(Matrix4Equality, MixedType_Equality_IdenticalMatricesReturnTrue)
 {
     const fgm::Matrix4 matA(1, 2, 3, 4);
     const fgm::Matrix4 matB(1.0, 2.0, 3.0, 4.0);
@@ -185,8 +185,8 @@ TYPED_TEST(Matrix4DEquality, MixedType_Equality_IdenticalMatricesReturnTrue)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::allEq works for different vector types with different components. */
-TYPED_TEST(Matrix4DEquality, MixedType_Equality_DifferentMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Matrix4::allEq works for different vector types with different components. */
+TYPED_TEST(Matrix4Equality, MixedType_Equality_DifferentMatricesReturnFalse)
 {
     const fgm::Matrix4 matA(5, 6, 7, 1);
     const fgm::Matrix4 matB(1.0, 2.0, 3.0, 1.0);
@@ -199,7 +199,7 @@ TYPED_TEST(Matrix4DEquality, MixedType_Equality_DifferentMatricesReturnFalse)
 
 
 /** @brief Verify that the equality operator returns `true` for identical matrices. */
-TYPED_TEST(Matrix4DEquality, EqualityOperator_IdenticalMatricesReturnTrue)
+TYPED_TEST(Matrix4Equality, EqualityOperator_IdenticalMatricesReturnTrue)
 {
     const bool equality = this->_eqMatA == this->_eqMatB;
 
@@ -209,7 +209,7 @@ TYPED_TEST(Matrix4DEquality, EqualityOperator_IdenticalMatricesReturnTrue)
 
 
 /** @brief Verify that the equality operator returns `false` if any component differ. */
-TYPED_TEST(Matrix4DEquality, EqualityOperator_DifferentMatricesReturnFalse)
+TYPED_TEST(Matrix4Equality, EqualityOperator_DifferentMatricesReturnFalse)
 {
     const bool equality = this->_eqMatA == this->_dissimilarMat;
 
@@ -218,7 +218,7 @@ TYPED_TEST(Matrix4DEquality, EqualityOperator_DifferentMatricesReturnFalse)
 
 
 /** @brief Verify that the equality operator works for bool matrix with identical components. */
-TEST(Matrix4DEquality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
+TEST(Matrix4Equality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
 {
     const fgm::Matrix4 matA(true, false, true, false);
     const fgm::Matrix4 matB(true, false, true, false);
@@ -230,7 +230,7 @@ TEST(Matrix4DEquality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
 
 
 /** @brief Verify that the equality operator works for bool matrix with different components. */
-TEST(Matrix4DEquality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
+TEST(Matrix4Equality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
 {
     const fgm::Matrix4 matA(true, false, false, true);
     const fgm::Matrix4 matB(true, true, false, false);
@@ -279,8 +279,8 @@ namespace
  *                                    *
  **************************************/
 
-/** @brief Verify that @ref fgm::Matrix4D::anyNeq returns `false` for identical matrices. */
-TYPED_TEST(Matrix4DEquality, Inequality_IdenticalMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Matrix4::anyNeq returns `false` for identical matrices. */
+TYPED_TEST(Matrix4Equality, Inequality_IdenticalMatricesReturnFalse)
 {
     const bool inequality = this->_eqMatA.anyNeq(this->_eqMatB);
 
@@ -288,8 +288,8 @@ TYPED_TEST(Matrix4DEquality, Inequality_IdenticalMatricesReturnFalse)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::anyNeq returns `true` if any component differ. */
-TYPED_TEST(Matrix4DEquality, Inequality_DifferentMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Matrix4::anyNeq returns `true` if any component differ. */
+TYPED_TEST(Matrix4Equality, Inequality_DifferentMatricesReturnTrue)
 {
     const bool inequality = this->_eqMatA.anyNeq(this->_dissimilarMat);
 
@@ -297,8 +297,8 @@ TYPED_TEST(Matrix4DEquality, Inequality_DifferentMatricesReturnTrue)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Matrix4D::anyNeq for identical matrices. */
-TYPED_TEST(Matrix4DEquality, StaticWrapper_Inequality_IdenticalMatricesReturnFalse)
+/** @brief Verify that the static variant of @ref fgm::Matrix4::anyNeq for identical matrices. */
+TYPED_TEST(Matrix4Equality, StaticWrapper_Inequality_IdenticalMatricesReturnFalse)
 {
     const bool inequality = fgm::Matrix4<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
 
@@ -306,8 +306,8 @@ TYPED_TEST(Matrix4DEquality, StaticWrapper_Inequality_IdenticalMatricesReturnFal
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Matrix4D::anyNeq for different matrices. */
-TYPED_TEST(Matrix4DEquality, StaticWrapper_Inequality_DifferentMatricesReturnTrue)
+/** @brief Verify that the static variant of @ref fgm::Matrix4::anyNeq for different matrices. */
+TYPED_TEST(Matrix4Equality, StaticWrapper_Inequality_DifferentMatricesReturnTrue)
 {
     const bool inequality = fgm::Matrix4<TypeParam>::anyNeq(this->_eqMatA, this->_dissimilarMat);
 
@@ -315,8 +315,8 @@ TYPED_TEST(Matrix4DEquality, StaticWrapper_Inequality_DifferentMatricesReturnTru
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::anyNeq follows IEEE 754 for NaN comparisons. */
-TEST(Matrix4DEquality, NanInequalityReturnsTrue)
+/** @brief Verify that @ref fgm::Matrix4::anyNeq follows IEEE 754 for NaN comparisons. */
+TEST(Matrix4Equality, NanInequalityReturnsTrue)
 {
     const fgm::Matrix4 matA(NAN_F, NAN_F, NAN_F, NAN_F);
     const fgm::Matrix4 matB(1.0f, INF, -INF, NAN_F);
@@ -327,8 +327,8 @@ TEST(Matrix4DEquality, NanInequalityReturnsTrue)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::anyNeq follows IEEE 754 for INFINITY comparisons. */
-TEST(Matrix4DEquality, InfinityInequality_IdenticalMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Matrix4::anyNeq follows IEEE 754 for INFINITY comparisons. */
+TEST(Matrix4Equality, InfinityInequality_IdenticalMatricesReturnFalse)
 {
     const fgm::Matrix4 matA(INF, -INF, INF, -INF);
     const fgm::Matrix4 matB(INF, -INF, INF, -INF);
@@ -339,8 +339,8 @@ TEST(Matrix4DEquality, InfinityInequality_IdenticalMatricesReturnFalse)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::anyNeq follows IEEE 754 for INFINITY comparisons. */
-TEST(Matrix4DEquality, InfinityInequality_DifferentMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Matrix4::anyNeq follows IEEE 754 for INFINITY comparisons. */
+TEST(Matrix4Equality, InfinityInequality_DifferentMatricesReturnTrue)
 {
     const fgm::Matrix4 matA(-INF, INF, INF, INF);
     const fgm::Matrix4 matB(INF, INF, -INF, INF);
@@ -351,8 +351,8 @@ TEST(Matrix4DEquality, InfinityInequality_DifferentMatricesReturnTrue)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::anyNeq works for different vector types with identical components. */
-TYPED_TEST(Matrix4DEquality, MixedType_Inequality_IdenticalMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Matrix4::anyNeq works for different vector types with identical components. */
+TYPED_TEST(Matrix4Equality, MixedType_Inequality_IdenticalMatricesReturnFalse)
 {
     const fgm::Matrix4 matA(1, 2, 3, 4);
     const fgm::Matrix4 matB(1.0, 2.0, 3.0, 4.0);
@@ -363,8 +363,8 @@ TYPED_TEST(Matrix4DEquality, MixedType_Inequality_IdenticalMatricesReturnFalse)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::anyNeq works for different vector types with different components. */
-TYPED_TEST(Matrix4DEquality, MixedType_Inequality_DifferentMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Matrix4::anyNeq works for different vector types with different components. */
+TYPED_TEST(Matrix4Equality, MixedType_Inequality_DifferentMatricesReturnTrue)
 {
     const fgm::Matrix4 matA(5, 6, 7, 8);
     const fgm::Matrix4 matB(1.0, 2.0, 7.0, 8.0);
@@ -376,7 +376,7 @@ TYPED_TEST(Matrix4DEquality, MixedType_Inequality_DifferentMatricesReturnTrue)
 
 
 /** @brief Verify that the operator returns `false` for identical matrices. */
-TYPED_TEST(Matrix4DEquality, InEqualityOperator_IdenticalMatricesReturnFalse)
+TYPED_TEST(Matrix4Equality, InEqualityOperator_IdenticalMatricesReturnFalse)
 {
     const bool inequality = this->_eqMatA != this->_eqMatB;
 
@@ -385,7 +385,7 @@ TYPED_TEST(Matrix4DEquality, InEqualityOperator_IdenticalMatricesReturnFalse)
 
 
 /** @brief Verify that the inequality operator returns `true` for different matrices. */
-TYPED_TEST(Matrix4DEquality, InEqualityOperator_DifferentMatricesReturnTrue)
+TYPED_TEST(Matrix4Equality, InEqualityOperator_DifferentMatricesReturnTrue)
 {
     const bool inequality = this->_eqMatA != this->_dissimilarMat;
 
@@ -393,8 +393,8 @@ TYPED_TEST(Matrix4DEquality, InEqualityOperator_DifferentMatricesReturnTrue)
 }
 
 
-/** @brief Verify that the inequality operator works for @ref fgm::Matrix4D<bool> with identical components. */
-TEST(Matrix4DEquality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
+/** @brief Verify that the inequality operator works for @ref fgm::Matrix4<bool> with identical components. */
+TEST(Matrix4Equality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 {
     const fgm::Matrix4 matA(true, false, true, false);
     const fgm::Matrix4 matB(true, false, true, false);
@@ -405,8 +405,8 @@ TEST(Matrix4DEquality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 }
 
 
-/** @brief Verify that the inequality operator works for @ref fgm::Matrix4D<bool> with different components. */
-TEST(Matrix4DEquality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
+/** @brief Verify that the inequality operator works for @ref fgm::Matrix4<bool> with different components. */
+TEST(Matrix4Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
 {
     const fgm::Matrix4 matA(true, false, true, false);
     const fgm::Matrix4 matB(true, true, false, false);

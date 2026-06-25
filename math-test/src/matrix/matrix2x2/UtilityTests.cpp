@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 14, 2026
  *
- * @brief Verify @ref fgm::Matrix2D utility functions.
+ * @brief Verify @ref fgm::Matrix2 utility functions.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -21,25 +21,25 @@
 
 template <typename T>
     requires std::floating_point<T>
-struct Matrix2DUtilityParams
+struct Matrix2UtilityParams
 {
     fgm::Matrix2<T> mat;
     bool expected;
 };
-/** @brief Test fixture for @ref fgm::Matrix2D infinity checker, parameterized by @ref VectorUtilityParams */
-class Matrix2DInfChecker: public ::testing::TestWithParam<Matrix2DUtilityParams<float>>
+/** @brief Test fixture for @ref fgm::Matrix2 infinity checker, parameterized by @ref VectorUtilityParams */
+class Matrix2InfChecker: public ::testing::TestWithParam<Matrix2UtilityParams<float>>
 {};
 
-/** @brief Test fixture for @ref fgm::Matrix2D NaN checker, parameterized by @ref VectorUtilityParams */
-class Matrix2DNaNChecker: public ::testing::TestWithParam<Matrix2DUtilityParams<float>>
+/** @brief Test fixture for @ref fgm::Matrix2 NaN checker, parameterized by @ref VectorUtilityParams */
+class Matrix2NaNChecker: public ::testing::TestWithParam<Matrix2UtilityParams<float>>
 {};
 
 
 template <typename T>
-class Matrix2DIntegralUtility: public ::testing::Test
+class Matrix2IntegralUtility: public ::testing::Test
 {};
-/** @brief Test fixture for @ref fgm::Matrix2D utilities, parameterized by @ref SupportedIntegralTypes */
-TYPED_TEST_SUITE(Matrix2DIntegralUtility, SupportedIntegralTypes);
+/** @brief Test fixture for @ref fgm::Matrix2 utilities, parameterized by @ref SupportedIntegralTypes */
+TYPED_TEST_SUITE(Matrix2IntegralUtility, SupportedIntegralTypes);
 
 
 
@@ -93,28 +93,28 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that @ref std::Matrix2D::hasInf returns  `true` if any of elements are IEE754 infinity
+ * @brief Verify that @ref std::Matrix2::hasInf returns  `true` if any of elements are IEE754 infinity
  *        and `false` otherwise.
  */
-TEST_P(Matrix2DInfChecker, ReturnTrueIfAnyElementIsInfinity)
+TEST_P(Matrix2InfChecker, ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasInf());
 }
 INSTANTIATE_TEST_SUITE_P(
-    Matrix2DInfCheckerTestSuite, Matrix2DInfChecker,
-    ::testing::Values(Matrix2DUtilityParams{ fgm::Matrix2(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+    Matrix2InfCheckerTestSuite, Matrix2InfChecker,
+    ::testing::Values(Matrix2UtilityParams{ fgm::Matrix2(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
+                      Matrix2UtilityParams{ fgm::Matrix2(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
+                      Matrix2UtilityParams{ fgm::Matrix2(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
+                      Matrix2UtilityParams{ fgm::Matrix2(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
+                      Matrix2UtilityParams{ fgm::Matrix2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                                            fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
                                              true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(1.0f, 1.0f, 1.0f, 1.0f), false }));
+                      Matrix2UtilityParams{ fgm::Matrix2(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
-/** @brief Verify that @ref std::Matrix2D::hasInf returns `false` for integral types. */
-TYPED_TEST(Matrix2DIntegralUtility, HasInf_ReturnsFalseForIntegrals)
+/** @brief Verify that @ref std::Matrix2::hasInf returns `false` for integral types. */
+TYPED_TEST(Matrix2IntegralUtility, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Matrix2(value, value).hasInf());
@@ -122,18 +122,18 @@ TYPED_TEST(Matrix2DIntegralUtility, HasInf_ReturnsFalseForIntegrals)
 
 
 /**
- * @brief Verify that the static variant of @ref std::Matrix2D::hasInf returns  `true` if any of elements are IEE754
+ * @brief Verify that the static variant of @ref std::Matrix2::hasInf returns  `true` if any of elements are IEE754
  *        infinity and `false` otherwise.
  */
-TEST_P(Matrix2DInfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
+TEST_P(Matrix2InfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, fgm::Matrix2<float>::hasInf(mat));
 }
 
 
-/** @brief Verify that the static variant of @ref std::Matrix2D::hasInf returns `false` for integral types. */
-TYPED_TEST(Matrix2DIntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
+/** @brief Verify that the static variant of @ref std::Matrix2::hasInf returns `false` for integral types. */
+TYPED_TEST(Matrix2IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Matrix2<TypeParam>::hasInf(fgm::Matrix2(value, value)));
@@ -147,28 +147,28 @@ TYPED_TEST(Matrix2DIntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegral
  **************************************/
 
 /**
- * @brief Verify that @ref std::Matrix2D::hasNaN returns  `true` if any of elements are IEE754 NaN(Not-a-Number)
+ * @brief Verify that @ref std::Matrix2::hasNaN returns  `true` if any of elements are IEE754 NaN(Not-a-Number)
  *       and `false` otherwise.
  */
-TEST_P(Matrix2DNaNChecker, ReturnTrueIfAnyElementIsNaN)
+TEST_P(Matrix2NaNChecker, ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasNaN());
 }
 INSTANTIATE_TEST_SUITE_P(
-    Matrix2DNaNCheckerTestSuite, Matrix2DNaNChecker,
-    ::testing::Values(Matrix2DUtilityParams{ fgm::Matrix2(fgm::constants::NaN, 1.0f), true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(fgm::constants::NaN, fgm::constants::NaN,
+    Matrix2NaNCheckerTestSuite, Matrix2NaNChecker,
+    ::testing::Values(Matrix2UtilityParams{ fgm::Matrix2(fgm::constants::NaN, 1.0f), true },
+                      Matrix2UtilityParams{ fgm::Matrix2(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
+                      Matrix2UtilityParams{ fgm::Matrix2(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+                      Matrix2UtilityParams{ fgm::Matrix2(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
+                      Matrix2UtilityParams{ fgm::Matrix2(fgm::constants::NaN, fgm::constants::NaN,
                                                            fgm::constants::NaN, fgm::constants::NaN),
                                              true },
-                      Matrix2DUtilityParams{ fgm::Matrix2(1.0f, 1.0f, 1.0f, 1.0f), false }));
+                      Matrix2UtilityParams{ fgm::Matrix2(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
-/** @brief Verify that @ref std::Matrix2D::hasNaN returns `false` for integral types. */
-TYPED_TEST(Matrix2DIntegralUtility, HasNaN_ReturnsFalseForIntegrals)
+/** @brief Verify that @ref std::Matrix2::hasNaN returns `false` for integral types. */
+TYPED_TEST(Matrix2IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Matrix2(value, value).hasNaN());
@@ -176,18 +176,18 @@ TYPED_TEST(Matrix2DIntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 
 
 /**
- * @brief Verify that the static variant of @ref std::Matrix2D::hasNaN returns  `true` if any of elements are IEE754
+ * @brief Verify that the static variant of @ref std::Matrix2::hasNaN returns  `true` if any of elements are IEE754
  *        NaN(Not-a-Number) and `false` otherwise.
  */
-TEST_P(Matrix2DNaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
+TEST_P(Matrix2NaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, fgm::Matrix2<float>::hasNaN(mat));
 }
 
 
-/** @brief Verify that the static variant of @ref std::Matrix2D::hasNaN returns `false` for integral types. */
-TYPED_TEST(Matrix2DIntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
+/** @brief Verify that the static variant of @ref std::Matrix2::hasNaN returns `false` for integral types. */
+TYPED_TEST(Matrix2IntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Matrix2<TypeParam>::hasNaN(fgm::Matrix2(value, value)));

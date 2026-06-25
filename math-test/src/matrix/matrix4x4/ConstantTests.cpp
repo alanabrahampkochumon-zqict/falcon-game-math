@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 01S, 2026
  *
- * @brief Verify @ref fgm::Matrix4D constants (@ref fgm::Matrix4D::eye, @ref fgm::Matrix4D::zero).
+ * @brief Verify @ref fgm::Matrix4 constants (@ref fgm::Matrix4::eye, @ref fgm::Matrix4::zero).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,10 +14,10 @@
 
 
 template <typename T>
-class Matrix4DConstants: public ::testing::Test
+class Matrix4Constants: public ::testing::Test
 {};
-/** @brief Test fixture for @ref fgm::Matrix4D constants, parameterized @ref SupportedArithmeticTypes.*/
-TYPED_TEST_SUITE(Matrix4DConstants, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix4 constants, parameterized @ref SupportedArithmeticTypes.*/
+TYPED_TEST_SUITE(Matrix4Constants, SupportedArithmeticTypes);
 
 
 
@@ -32,7 +32,7 @@ TYPED_TEST_SUITE(Matrix4DConstants, SupportedArithmeticTypes);
  *                                    *
  **************************************/
 
-/** @brief Verify that @ref fgm::Matrix4D constants are available at compile time. */
+/** @brief Verify that @ref fgm::Matrix4 constants are available at compile time. */
 namespace
 {
     // Verify identity matrix
@@ -120,20 +120,20 @@ namespace
  **************************************/
 
 /** @brief Verify that @ref fgm::mat4d::eye returns an identity matrix. */
-TYPED_TEST(Matrix4DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::mat4d::eye<TypeParam>); }
+TYPED_TEST(Matrix4Constants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::mat4d::eye<TypeParam>); }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::eye static factory returns an identity matrix. */
-TYPED_TEST(Matrix4DConstants, StaticWrapper_Eye_ReturnsIdentityMatrix)
+/** @brief Verify that @ref fgm::Matrix4::eye static factory returns an identity matrix. */
+TYPED_TEST(Matrix4Constants, StaticWrapper_Eye_ReturnsIdentityMatrix)
 { EXPECT_MAT_IDENTITY(fgm::Matrix4<TypeParam>::eye()); }
 
 
 /** @brief Verify that @ref fgm::mat4d::zero returns a zero matrix. */
-TYPED_TEST(Matrix4DConstants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat4d::zero<TypeParam>); }
+TYPED_TEST(Matrix4Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat4d::zero<TypeParam>); }
 
 
-/** @brief Verify that @ref fgm::Matrix4D::zero static factory returns a zero matrix. */
-TYPED_TEST(Matrix4DConstants, StaticWrapper_Zero_ReturnsZeroMatrix)
+/** @brief Verify that @ref fgm::Matrix4::zero static factory returns a zero matrix. */
+TYPED_TEST(Matrix4Constants, StaticWrapper_Zero_ReturnsZeroMatrix)
 { EXPECT_MAT_ZERO(fgm::Matrix4<TypeParam>::zero()); }
 
 /** @} */

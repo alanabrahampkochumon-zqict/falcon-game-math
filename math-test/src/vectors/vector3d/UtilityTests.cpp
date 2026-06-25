@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 02, 2026
  *
- * @brief Verify @ref fgm::Vector3D utility functions.
+ * @brief Verify @ref fgm::Vector3 utility functions.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include <Vector3DTestSetup.h>
+#include <Vector3TestSetup.h>
 
 
 /**************************************
@@ -20,25 +20,25 @@
 
 template <typename T>
     requires std::floating_point<T>
-struct Vector3DUtilityParams
+struct Vector3UtilityParams
 {
-    fgm::Vector3D<T> vec;
+    fgm::Vector3<T> vec;
     bool expected;
 };
-/** @brief Test fixture for @ref fgm::Vector3D infinity checker, parameterized by @ref VectorUtilityParams */
-class Vector3DInfChecker: public ::testing::TestWithParam<Vector3DUtilityParams<float>>
+/** @brief Test fixture for @ref fgm::Vector3 infinity checker, parameterized by @ref VectorUtilityParams */
+class Vector3InfChecker: public ::testing::TestWithParam<Vector3UtilityParams<float>>
 {};
 
-/** @brief Test fixture for @ref fgm::Vector3D NaN checker, parameterized by @ref VectorUtilityParams */
-class Vector3DNaNChecker: public ::testing::TestWithParam<Vector3DUtilityParams<float>>
+/** @brief Test fixture for @ref fgm::Vector3 NaN checker, parameterized by @ref VectorUtilityParams */
+class Vector3NaNChecker: public ::testing::TestWithParam<Vector3UtilityParams<float>>
 {};
 
 
-/** @brief Test fixture for @ref fgm::Vector3D utilities, parameterized by @ref SupportedIntegralTypes */
+/** @brief Test fixture for @ref fgm::Vector3 utilities, parameterized by @ref SupportedIntegralTypes */
 template <typename T>
-class Vector3DIntegralUtility: public ::testing::Test
+class Vector3IntegralUtility: public ::testing::Test
 {};
-TYPED_TEST_SUITE(Vector3DIntegralUtility, SupportedIntegralTypes);
+TYPED_TEST_SUITE(Vector3IntegralUtility, SupportedIntegralTypes);
 
 
 
@@ -50,25 +50,25 @@ TYPED_TEST_SUITE(Vector3DIntegralUtility, SupportedIntegralTypes);
 /** @brief Verify that vector utilities are available at compile time. */
 namespace
 {
-    constexpr fgm::Vector3D normVec(1.0f, 2.0f, 3.0f);
-    constexpr fgm::Vector3D infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
-    constexpr fgm::Vector3D nanVec(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN);
+    constexpr fgm::Vector3 normVec(1.0f, 2.0f, 3.0f);
+    constexpr fgm::Vector3 infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
+    constexpr fgm::Vector3 nanVec(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN);
 
     static_assert(normVec.hasInf() == false);
     static_assert(infVec.hasInf() == true);
     static_assert(nanVec.hasInf() == false);
 
-    static_assert(fgm::Vector3D<float>::hasInf(normVec) == false);
-    static_assert(fgm::Vector3D<float>::hasInf(infVec) == true);
-    static_assert(fgm::Vector3D<float>::hasInf(nanVec) == false);
+    static_assert(fgm::Vector3<float>::hasInf(normVec) == false);
+    static_assert(fgm::Vector3<float>::hasInf(infVec) == true);
+    static_assert(fgm::Vector3<float>::hasInf(nanVec) == false);
 
     static_assert(normVec.hasNaN() == false);
     static_assert(infVec.hasNaN() == false);
     static_assert(nanVec.hasNaN() == true);
 
-    static_assert(fgm::Vector3D<float>::hasNaN(normVec) == false);
-    static_assert(fgm::Vector3D<float>::hasNaN(infVec) == false);
-    static_assert(fgm::Vector3D<float>::hasNaN(nanVec) == true);
+    static_assert(fgm::Vector3<float>::hasNaN(normVec) == false);
+    static_assert(fgm::Vector3<float>::hasNaN(infVec) == false);
+    static_assert(fgm::Vector3<float>::hasNaN(nanVec) == true);
 
 } // namespace
 
@@ -80,49 +80,49 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that @ref std::Vector3D::hasInf returns True if any of components are IEE754 infinity
+ * @brief Verify that @ref std::Vector3::hasInf returns True if any of components are IEE754 infinity
  *       and False otherwise.
  */
-TEST_P(Vector3DInfChecker, ReturnTrueIfAnyComponentIsInfinity)
+TEST_P(Vector3InfChecker, ReturnTrueIfAnyComponentIsInfinity)
 {
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasInf());
 }
 INSTANTIATE_TEST_SUITE_P(
-    Vector3DInfCheckerTestSuite, Vector3DInfChecker,
-    ::testing::Values(Vector3DUtilityParams{ fgm::Vector3D(fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-                      Vector3DUtilityParams{ fgm::Vector3D(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                      Vector3DUtilityParams{ fgm::Vector3D(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-                      Vector3DUtilityParams{ fgm::Vector3D(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+    Vector3InfCheckerTestSuite, Vector3InfChecker,
+    ::testing::Values(Vector3UtilityParams{ fgm::Vector3(fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
+                      Vector3UtilityParams{ fgm::Vector3(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
+                      Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
+                      Vector3UtilityParams{ fgm::Vector3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                                            fgm::constants::INFINITY_F),
                                              true },
-                      Vector3DUtilityParams{ fgm::Vector3D(1.0f, 1.0f, 1.0f), false }));
+                      Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, 1.0f), false }));
 
 
-/** @brief Verify that @ref std::Vector3D::hasInf returns False for integral types. */
-TYPED_TEST(Vector3DIntegralUtility, HasInf_ReturnsFalseForIntegrals)
+/** @brief Verify that @ref std::Vector3::hasInf returns False for integral types. */
+TYPED_TEST(Vector3IntegralUtility, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vector3D(value, value, value).hasInf());
+    EXPECT_FALSE(fgm::Vector3(value, value, value).hasInf());
 }
 
 
 /**
- * @brief Verify that the static variant of @ref std::Vector3D::hasInf returns True if any of components are IEE754
+ * @brief Verify that the static variant of @ref std::Vector3::hasInf returns True if any of components are IEE754
  *       infinity and False otherwise.
  */
-TEST_P(Vector3DInfChecker, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
+TEST_P(Vector3InfChecker, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 {
     const auto& [vec, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Vector3D<float>::hasInf(vec));
+    EXPECT_EQ(expected, fgm::Vector3<float>::hasInf(vec));
 }
 
 
-/** @brief Verify that the static variant of @ref std::Vector3D::hasInf returns False for integral types. */
-TYPED_TEST(Vector3DIntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
+/** @brief Verify that the static variant of @ref std::Vector3::hasInf returns False for integral types. */
+TYPED_TEST(Vector3IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vector3D<TypeParam>::hasInf(fgm::Vector3D(value, value, value)));
+    EXPECT_FALSE(fgm::Vector3<TypeParam>::hasInf(fgm::Vector3(value, value, value)));
 }
 
 
@@ -133,48 +133,48 @@ TYPED_TEST(Vector3DIntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegral
  **************************************/
 
 /**
- * @brief Verify that @ref std::Vector3D::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
+ * @brief Verify that @ref std::Vector3::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
  *       and False otherwise.
  */
-TEST_P(Vector3DNaNChecker, ReturnTrueIfAnyComponentIsNaN)
+TEST_P(Vector3NaNChecker, ReturnTrueIfAnyComponentIsNaN)
 {
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasNaN());
 }
 INSTANTIATE_TEST_SUITE_P(
-    Vector3DNaNCheckerTestSuite, Vector3DNaNChecker,
-    ::testing::Values(Vector3DUtilityParams{ fgm::Vector3D(fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Vector3DUtilityParams{ fgm::Vector3D(1.0f, fgm::constants::NaN, 1.0f), true },
-                      Vector3DUtilityParams{ fgm::Vector3D(1.0f, 1.0f, fgm::constants::NaN), true },
-                      Vector3DUtilityParams{
-                          fgm::Vector3D(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN), true },
-                      Vector3DUtilityParams{ fgm::Vector3D(1.0f, 1.0f, 1.0f), false }));
+    Vector3NaNCheckerTestSuite, Vector3NaNChecker,
+    ::testing::Values(Vector3UtilityParams{ fgm::Vector3(fgm::constants::NaN, 1.0f, 1.0f), true },
+                      Vector3UtilityParams{ fgm::Vector3(1.0f, fgm::constants::NaN, 1.0f), true },
+                      Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, fgm::constants::NaN), true },
+                      Vector3UtilityParams{
+                          fgm::Vector3(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN), true },
+                      Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, 1.0f), false }));
 
 
-/** @brief Verify that @ref std::Vector3D::hasNaN returns False for integral types. */
-TYPED_TEST(Vector3DIntegralUtility, HasNaN_ReturnsFalseForIntegrals)
+/** @brief Verify that @ref std::Vector3::hasNaN returns False for integral types. */
+TYPED_TEST(Vector3IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vector3D(value, value, value).hasNaN());
+    EXPECT_FALSE(fgm::Vector3(value, value, value).hasNaN());
 }
 
 
 /**
- * @brief Verify that the static variant of @ref std::Vector3D::hasNaN returns True if any of components are IEE754
+ * @brief Verify that the static variant of @ref std::Vector3::hasNaN returns True if any of components are IEE754
  *       NaN(Not-a-Number) and False otherwise.
  */
-TEST_P(Vector3DNaNChecker, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
+TEST_P(Vector3NaNChecker, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 {
     const auto& [vec, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Vector3D<float>::hasNaN(vec));
+    EXPECT_EQ(expected, fgm::Vector3<float>::hasNaN(vec));
 }
 
 
-/** @brief Verify that the static variant of @ref std::Vector3D::hasNaN returns False for integral types. */
-TYPED_TEST(Vector3DIntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
+/** @brief Verify that the static variant of @ref std::Vector3::hasNaN returns False for integral types. */
+TYPED_TEST(Vector3IntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vector3D<TypeParam>::hasNaN(fgm::Vector3D(value, value, value)));
+    EXPECT_FALSE(fgm::Vector3<TypeParam>::hasNaN(fgm::Vector3(value, value, value)));
 }
 
 /** @} */

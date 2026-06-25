@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 28, 2026
  *
- * @brief Verify @ref fgm::Matrix3D transpose logic.
+ * @brief Verify @ref fgm::Matrix3 transpose logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,7 +20,7 @@
  **************************************/
 
 template <typename T>
-class Matrix3DTranspose: public ::testing::Test
+class Matrix3Transpose: public ::testing::Test
 {
 protected:
     fgm::Matrix3<T> _matrix, _expectedTranspose;
@@ -31,8 +31,8 @@ protected:
         _expectedTranspose = { { T(1), T(4), T(7) }, { T(2), T(5), T(8) }, { T(3), T(6), T(9) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix3D transpose, parameterized @ref SupportedTypes */
-TYPED_TEST_SUITE(Matrix3DTranspose, SupportedTypes);
+/** @brief Test fixture for @ref fgm::Matrix3 transpose, parameterized @ref SupportedTypes */
+TYPED_TEST_SUITE(Matrix3Transpose, SupportedTypes);
 
 
 
@@ -92,15 +92,15 @@ namespace
 
 
 /** @brief Verify that transposing a matrix exchanges row and column elements and returns a new matrix. */
-TYPED_TEST(Matrix3DTranspose, ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix3Transpose, ExchangesRowsAndColumnElements)
 { EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose()); }
 
 
 /**
- * @brief Verify that transposing a matrix using static variant of @ref fgm::Matrix3D::transpose exchanges row and
+ * @brief Verify that transposing a matrix using static variant of @ref fgm::Matrix3::transpose exchanges row and
  *        column elements and returns a new matrix.
  */
-TYPED_TEST(Matrix3DTranspose, StaticWrapper_ExchangesRowsAndColumnElements)
+TYPED_TEST(Matrix3Transpose, StaticWrapper_ExchangesRowsAndColumnElements)
 { EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix3<TypeParam>::transpose(this->_matrix)); }
 
 /** @} */

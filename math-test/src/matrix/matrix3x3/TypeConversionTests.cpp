@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Matrix3D conversion constructor logic.
+ * @brief Verify @ref fgm::Matrix3 conversion constructor logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -49,7 +49,7 @@ namespace
 /**
  * @brief Verify that the conversion constructor correctly promotes components from float to double.
  */
-TEST(Matrix3DConversionConstructor, PromotesType)
+TEST(Matrix3ConversionConstructor, PromotesType)
 {
     const fgm::Matrix3 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
@@ -60,7 +60,7 @@ TEST(Matrix3DConversionConstructor, PromotesType)
 
 
 /** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
-TEST(Matrix3DConversionConstructor, ReturnsNewInstance)
+TEST(Matrix3ConversionConstructor, ReturnsNewInstance)
 {
     // Given a float matrix
     const fgm::Matrix3 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
@@ -81,7 +81,7 @@ TEST(Matrix3DConversionConstructor, ReturnsNewInstance)
 /**
  * @brief Verify that the conversion constructor correctly demotes components from double to float.
  */
-TEST(Matrix3DConversionConstructor, DemotesType)
+TEST(Matrix3ConversionConstructor, DemotesType)
 {
     const fgm::Matrix3 mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
 

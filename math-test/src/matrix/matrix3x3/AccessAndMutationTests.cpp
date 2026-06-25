@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Matrix3D accessors and mutators.
+ * @brief Verify @ref fgm::Matrix3 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -16,15 +16,15 @@
 #ifdef ENABLE_DEBUG_TESTS
     #include <utility>
 
-class Matrix3DIndexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
+class Matrix3Indexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix3DTests, Matrix3DIndexing,
+INSTANTIATE_TEST_SUITE_P(Matrix3Tests, Matrix3Indexing,
                          testing::Values(std::make_pair(4, 4), std::make_pair(3, 4), std::make_pair(4, 3),
                                          std::make_pair(100, 100)));
 
-class Matrix3DColumnIndexing: public testing::TestWithParam<std::size_t>
+class Matrix3ColumnIndexing: public testing::TestWithParam<std::size_t>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix3DTests, Matrix3DColumnIndexing, testing::Values(4, 5, 100));
+INSTANTIATE_TEST_SUITE_P(Matrix3Tests, Matrix3ColumnIndexing, testing::Values(4, 5, 100));
 #endif
 
 
@@ -44,9 +44,9 @@ INSTANTIATE_TEST_SUITE_P(Matrix3DTests, Matrix3DColumnIndexing, testing::Values(
 namespace
 {
     constexpr fgm::Matrix3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
-    constexpr fgm::Vector3D VEC0(1, 4, 7);
-    constexpr fgm::Vector3D VEC1(2, 5, 8);
-    constexpr fgm::Vector3D VEC2(3, 6, 9);
+    constexpr fgm::Vector3 VEC0(1, 4, 7);
+    constexpr fgm::Vector3 VEC1(2, 5, 8);
+    constexpr fgm::Vector3 VEC2(3, 6, 9);
 
     // Verify that matrix elements are accessible as (row, column) during compile time.
     static_assert(MAT(0, 0) == 1);
@@ -80,7 +80,7 @@ namespace
  **************************************/
 
 /** @brief Verify that the matrix elements are accessible via subscript indexing for reads. */
-TEST(Matrix3DAccess, AccessibleAsElements)
+TEST(Matrix3Access, AccessibleAsElements)
 {
     constexpr fgm::Matrix3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
@@ -97,28 +97,28 @@ TEST(Matrix3DAccess, AccessibleAsElements)
 
 
 /** @brief Verify that the matrix columns are accessible as vectors for reads. */
-TEST(Matrix3DAccess, AccessibleAsColumnVectors)
+TEST(Matrix3Access, AccessibleAsColumnVectors)
 {
     constexpr fgm::Matrix3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
-    EXPECT_VEC_EQ(fgm::Vector3D(1.0f, 4.0f, 7.0f), mat[0]);
-    EXPECT_VEC_EQ(fgm::Vector3D(2.0f, 5.0f, 8.0f), mat[1]);
-    EXPECT_VEC_EQ(fgm::Vector3D(3.0f, 6.0f, 9.0f), mat[2]);
+    EXPECT_VEC_EQ(fgm::Vector3(1.0f, 4.0f, 7.0f), mat[0]);
+    EXPECT_VEC_EQ(fgm::Vector3(2.0f, 5.0f, 8.0f), mat[1]);
+    EXPECT_VEC_EQ(fgm::Vector3(3.0f, 6.0f, 9.0f), mat[2]);
 }
 
 
 #ifdef ENABLE_DEBUG_TESTS
 
-/** @brief Verify that @ref fgm::Matrix3D out-of-bounds column access triggers assert in debug mode. */
-TEST_P(Matrix3DColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Matrix3 out-of-bounds column access triggers assert in debug mode. */
+TEST_P(Matrix3ColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const fgm::Matrix3 mat(1, 2, 3);
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
 }
 
-/** @brief Verify that @ref fgm::Matrix3D out-of-bounds row, column access triggers assert in debug mode. */
-TEST_P(Matrix3DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Matrix3 out-of-bounds row, column access triggers assert in debug mode. */
+TEST_P(Matrix3Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const fgm::Matrix3 mat(1, 2, 3);
     const auto [row, col] = GetParam();
@@ -144,7 +144,7 @@ TEST_P(Matrix3DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
  **************************************/
 
 /** @brief Verify that the matrix elements are accessible via subscript indexing for writes. */
-TEST(Matrix3DAccess, ElementsCanBeMutatedUsingIndex)
+TEST(Matrix3Access, ElementsCanBeMutatedUsingIndex)
 {
     fgm::Matrix3<float> mat;
 
@@ -172,11 +172,11 @@ TEST(Matrix3DAccess, ElementsCanBeMutatedUsingIndex)
 
 
 /** @brief Verify that the matrix columns are accessible as vectors for writes. */
-TEST(Matrix3DAccess, ColumnsCanBeMutatedUsingIndex)
+TEST(Matrix3Access, ColumnsCanBeMutatedUsingIndex)
 {
-    const fgm::Vector3D col0 = { 1.0f, 4.0f, 7.0f };
-    const fgm::Vector3D col1 = { 2.0f, 5.0f, 8.0f };
-    const fgm::Vector3D col2 = { 3.0f, 6.0f, 9.0f };
+    const fgm::Vector3 col0 = { 1.0f, 4.0f, 7.0f };
+    const fgm::Vector3 col1 = { 2.0f, 5.0f, 8.0f };
+    const fgm::Vector3 col2 = { 3.0f, 6.0f, 9.0f };
     fgm::Matrix3<float> mat;
 
     mat[0] = col0;
@@ -191,8 +191,8 @@ TEST(Matrix3DAccess, ColumnsCanBeMutatedUsingIndex)
 
 #ifdef ENABLE_DEBUG_TESTS
 
-/** @brief Verify that @ref fgm::Matrix3D out-of-bounds column mutation triggers assert in debug mode. */
-TEST_P(Matrix3DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Matrix3 out-of-bounds column mutation triggers assert in debug mode. */
+TEST_P(Matrix3ColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix3 mat(1, 2, 3);
     const auto col = GetParam();
@@ -200,8 +200,8 @@ TEST_P(Matrix3DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix3D out-of-bounds row, column mutation triggers assert in debug mode. */
-TEST_P(Matrix3DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+/** @brief Verify that @ref fgm::Matrix3 out-of-bounds row, column mutation triggers assert in debug mode. */
+TEST_P(Matrix3Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix3 mat(1, 2, 3);
     const auto [row, col] = GetParam();

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 07, 2026
  *
- * @brief Verify @ref fgm::Matrix4D trace operation logic.
+ * @brief Verify @ref fgm::Matrix4 trace operation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,7 +14,7 @@
 
 
 template <typename T>
-class Matrix4DTrace: public ::testing::Test
+class Matrix4Trace: public ::testing::Test
 {
 protected:
     fgm::Matrix4<T> _mat;
@@ -31,8 +31,8 @@ protected:
         _expectedSum = T(20.63514801571382);
     }
 };
-/** @brief Test fixtures for @ref fgm::Matrix4D trace operation, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix4DTrace, SupportedArithmeticTypes);
+/** @brief Test fixtures for @ref fgm::Matrix4 trace operation, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix4Trace, SupportedArithmeticTypes);
 
 
 
@@ -52,11 +52,11 @@ namespace
 
 
 /** @brief Verify that trace of a 2D matrix returns the sum of diagonal elements. */
-TYPED_TEST(Matrix4DTrace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
+TYPED_TEST(Matrix4Trace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
 
 
 /** @brief Verify that trace of a 2D matrix using static variant returns the sum of diagonal elements. */
-TYPED_TEST(Matrix4DTrace, StaticWrapper_ReturnsSumOfDiagonalElements)
+TYPED_TEST(Matrix4Trace, StaticWrapper_ReturnsSumOfDiagonalElements)
 { EXPECT_MAG_EQ(this->_expectedSum, fgm::Matrix4<TypeParam>::trace(this->_mat)); }
 
 /** @} */

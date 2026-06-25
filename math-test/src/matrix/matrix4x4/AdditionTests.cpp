@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 04, 2026
  *
- * @brief Verify @ref fgm::Matrix4D addition logic.
+ * @brief Verify @ref fgm::Matrix4 addition logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -18,7 +18,7 @@
  **************************************/
 
 template <typename T>
-class Matrix4DAddition: public testing::Test
+class Matrix4Addition: public testing::Test
 {
 protected:
     fgm::Matrix4<T> _matA;
@@ -43,8 +43,8 @@ protected:
         };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix4D addition, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix4DAddition, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Matrix4 addition, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix4Addition, SupportedArithmeticTypes);
 
 
 
@@ -96,7 +96,7 @@ namespace
  * @brief Verify that the binary addition operator perform a component-wise addition and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Matrix4DAddition, PlusOperator_ReturnsMatrixSum)
+TYPED_TEST(Matrix4Addition, PlusOperator_ReturnsMatrixSum)
 {
     const fgm::Matrix4 sum = this->_matA + this->_matB;
 
@@ -108,13 +108,13 @@ TYPED_TEST(Matrix4DAddition, PlusOperator_ReturnsMatrixSum)
  * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Matrix4DAddition, PlusOperator_MixedTypePromotesType)
+TEST(Matrix4Addition, PlusOperator_MixedTypePromotesType)
 {
-    constexpr fgm::Matrix4 mat1{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vector4D{ -3.0f, -4.0f, 10.0f, -11.0f },
-                                  fgm::Vector4D{ 4.5f, 3.25f, 3.16f, -22.0f },
-                                  fgm::Vector4D{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    constexpr fgm::Matrix4 mat2{ fgm::Vector4D{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vector4D{ 3.0, -8.0, 12.0, 11.0 },
-                                  fgm::Vector4D{ 3.25, 5.1, 0.0, 0.25 }, fgm::Vector4D{ 12.0, 13.0, 14.0, 15.0 } };
+    constexpr fgm::Matrix4 mat1{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vector4{ -3.0f, -4.0f, 10.0f, -11.0f },
+                                  fgm::Vector4{ 4.5f, 3.25f, 3.16f, -22.0f },
+                                  fgm::Vector4{ 15.0f, 32.0f, 101.0f, 12.5f } };
+    constexpr fgm::Matrix4 mat2{ fgm::Vector4{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vector4{ 3.0, -8.0, 12.0, 11.0 },
+                                  fgm::Vector4{ 3.25, 5.1, 0.0, 0.25 }, fgm::Vector4{ 12.0, 13.0, 14.0, 15.0 } };
 
     [[maybe_unused]] constexpr fgm::Matrix4 sum = mat1 + mat2;
 
@@ -126,7 +126,7 @@ TEST(Matrix4DAddition, PlusOperator_MixedTypePromotesType)
  * @brief Verify that the compound addition assignment operator perform a component-wise addition and
  *       mutates the matrix in-place.
  */
-TYPED_TEST(Matrix4DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
+TYPED_TEST(Matrix4Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 {
     this->_matA += this->_matB;
 
@@ -138,16 +138,16 @@ TYPED_TEST(Matrix4DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix4DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Matrix4Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    [[maybe_unused]] fgm::Matrix4 mat1{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 7.5f },
-                                         fgm::Vector4D{ -3.0f, -4.0f, 10.0f, -11.0f },
-                                         fgm::Vector4D{ 4.5f, 3.25f, 3.16f, -22.0f },
-                                         fgm::Vector4D{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    [[maybe_unused]] constexpr fgm::Matrix4 mat2{ fgm::Vector4D{ 11.0, 10.0, 2.0, -1.0 },
-                                                   fgm::Vector4D{ 3.0, -8.0, 12.0, 11.0 },
-                                                   fgm::Vector4D{ 3.25, 5.1, 0.0, 0.25 },
-                                                   fgm::Vector4D{ 12.0, 13.0, 14.0, 15.0 } };
+    [[maybe_unused]] fgm::Matrix4 mat1{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 7.5f },
+                                         fgm::Vector4{ -3.0f, -4.0f, 10.0f, -11.0f },
+                                         fgm::Vector4{ 4.5f, 3.25f, 3.16f, -22.0f },
+                                         fgm::Vector4{ 15.0f, 32.0f, 101.0f, 12.5f } };
+    [[maybe_unused]] constexpr fgm::Matrix4 mat2{ fgm::Vector4{ 11.0, 10.0, 2.0, -1.0 },
+                                                   fgm::Vector4{ 3.0, -8.0, 12.0, 11.0 },
+                                                   fgm::Vector4{ 3.25, 5.1, 0.0, 0.25 },
+                                                   fgm::Vector4{ 12.0, 13.0, 14.0, 15.0 } };
 
     (void) (mat1 += mat2);
 

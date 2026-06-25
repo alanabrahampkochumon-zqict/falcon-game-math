@@ -3,25 +3,25 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 24, 2026
  *
- * @brief Verify @ref fgm::Vector4D constants (@ref fgm::Vector4D::one, @ref fgm::Vector4D::zero, etc).
+ * @brief Verify @ref fgm::Vector4 constants (@ref fgm::Vector4::one, @ref fgm::Vector4::zero, etc).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vector4DTestSetup.h"
+#include "Vector4TestSetup.h"
 
 
 
 template <typename T>
-class Vector4DConstantTests: public testing::Test
+class Vector4ConstantTests: public testing::Test
 {
 protected:
     T _one  = T(1);
     T _zero = T(0);
 };
 /** @brief Test fixture for @ref fgm::vec4d constants, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vector4DConstantTests, SupportedArithmeticTypes);
+TYPED_TEST_SUITE(Vector4ConstantTests, SupportedArithmeticTypes);
 
 
 
@@ -30,7 +30,7 @@ TYPED_TEST_SUITE(Vector4DConstantTests, SupportedArithmeticTypes);
  * @{
  */
 
-/** @brief Verify that @ref fgm::Vector2D constants are available at compile time. */
+/** @brief Verify that @ref fgm::Vector2 constants are available at compile time. */
 namespace
 {
     static_assert(fgm::vec4d::one<int>.x() == 1);
@@ -58,7 +58,7 @@ namespace
 
 
 /** @brief Verify that @ref fgm::vec4d::one returns a 4D vector with unit components. */
-TYPED_TEST(Vector4DConstantTests, One_ReturnsVectorWithUnitComponents)
+TYPED_TEST(Vector4ConstantTests, One_ReturnsVectorWithUnitComponents)
 {
     const TypeParam one = TypeParam(1);
     EXPECT_VEC_CONTAINS(fgm::vec4d::one<TypeParam>, one, one, one, one);
@@ -66,12 +66,12 @@ TYPED_TEST(Vector4DConstantTests, One_ReturnsVectorWithUnitComponents)
 
 
 /** @brief Verify that @ref fgm::vec4d::zero returns a 4D vector with zero components. */
-TYPED_TEST(Vector4DConstantTests, Zero_ReturnsVectorWithZeroComponents)
+TYPED_TEST(Vector4ConstantTests, Zero_ReturnsVectorWithZeroComponents)
 { EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>); }
 
 
 /** @brief Verify that @ref fgm::vec4d::inf<float> returns a 4D vector with infinity components. */
-TEST(Vector4DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
+TEST(Vector4Constants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec4d::inf<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -80,7 +80,7 @@ TEST(Vector4DConstants, FloatInf_ReturnsFloatVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::vec4d::inf<double> returns a 4D vector with infinity components. */
-TEST(Vector4DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
+TEST(Vector4Constants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 {
     const auto inf = fgm::vec4d::inf<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
@@ -89,7 +89,7 @@ TEST(Vector4DConstants, DoubleInf_ReturnsDoubleVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::vec4d::infN<float> returns a 4D vector with negative infinity components. */
-TEST(Vector4DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
+TEST(Vector4Constants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec4d::infN<float>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -98,7 +98,7 @@ TEST(Vector4DConstants, NegativeFloatInf_ReturnsFloatVectorWithNegativeInfinityC
 
 
 /** @brief Verify that @ref fgm::vec4d::infN<double> returns a 4D vector with negative infinity components. */
-TEST(Vector4DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
+TEST(Vector4Constants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::vec4d::infN<double>;
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
@@ -107,7 +107,7 @@ TEST(Vector4DConstants, NegativeDoubleInf_ReturnsDoubleVectorWithNegativeInfinit
 
 
 /** @brief Verify that @ref fgm::vec4d::infN<float> returns a 4D vector with NaN components. */
-TEST(Vector4DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
+TEST(Vector4Constants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 {
     const auto nan = fgm::vec4d::nan<float>;
     EXPECT_TRUE(std::isnan(nan.x()));
@@ -118,7 +118,7 @@ TEST(Vector4DConstants, NaNFloatInf_ReturnsFloatVectorWithNaNComponents)
 
 
 /** @brief Verify that @ref fgm::vec4d::infN<double> returns a 4D vector with NaN components. */
-TEST(Vector4DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
+TEST(Vector4Constants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 {
     const auto nan = fgm::vec4d::nan<double>;
     EXPECT_TRUE(std::isnan(nan.x()));
@@ -129,7 +129,7 @@ TEST(Vector4DConstants, NaNDoubleInf_ReturnsDoubleVectorWithNaNComponents)
 
 
 /** @brief Verify that @ref fgm::vec4d::x returns a unit vector aligned with x-axis. */
-TYPED_TEST(Vector4DConstantTests, X_ReturnsUnitVectorWithOnlyXComponent)
+TYPED_TEST(Vector4ConstantTests, X_ReturnsUnitVectorWithOnlyXComponent)
 {
     const auto x = fgm::vec4d::x<TypeParam>;
     EXPECT_VEC_CONTAINS(x, this->_one, this->_zero, this->_zero, this->_zero);
@@ -137,7 +137,7 @@ TYPED_TEST(Vector4DConstantTests, X_ReturnsUnitVectorWithOnlyXComponent)
 
 
 /** @brief Verify that @ref fgm::vec4d::y returns a unit vector aligned with y-axis. */
-TYPED_TEST(Vector4DConstantTests, Y_ReturnsUnitVectorWithOnlyYComponent)
+TYPED_TEST(Vector4ConstantTests, Y_ReturnsUnitVectorWithOnlyYComponent)
 {
     const auto y = fgm::vec4d::y<TypeParam>;
     EXPECT_VEC_CONTAINS(y, this->_zero, this->_one, this->_zero, this->_zero);
@@ -145,7 +145,7 @@ TYPED_TEST(Vector4DConstantTests, Y_ReturnsUnitVectorWithOnlyYComponent)
 
 
 /** @brief Verify that @ref fgm::vec4d::z returns a unit vector aligned with z-axis. */
-TYPED_TEST(Vector4DConstantTests, Z_ReturnsUnitVectorWithOnlyZComponent)
+TYPED_TEST(Vector4ConstantTests, Z_ReturnsUnitVectorWithOnlyZComponent)
 {
     const auto z = fgm::vec4d::z<TypeParam>;
     EXPECT_VEC_CONTAINS(z, this->_zero, this->_zero, this->_one, this->_zero);
@@ -153,7 +153,7 @@ TYPED_TEST(Vector4DConstantTests, Z_ReturnsUnitVectorWithOnlyZComponent)
 
 
 /** @brief Verify that @ref fgm::vec4d::w returns a unit vector aligned with w-axis. */
-TYPED_TEST(Vector4DConstantTests, W_ReturnsUnitVectorWithOnlyWComponent)
+TYPED_TEST(Vector4ConstantTests, W_ReturnsUnitVectorWithOnlyWComponent)
 {
     const auto w = fgm::vec4d::w<TypeParam>;
     EXPECT_VEC_CONTAINS(w, this->_zero, this->_zero, this->_zero, this->_one);
