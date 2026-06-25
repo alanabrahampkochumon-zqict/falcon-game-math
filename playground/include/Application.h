@@ -75,10 +75,11 @@ namespace demo
 
 
             SDL_Surface* renderingSurface = SDL_GetWindowSurface(_window);
+            float rotationAngle = 0.0f;
             while (_isRunning)
             {
                 _renderer.clearScreen();
-                _renderer.render(mesh);
+                _renderer.render(mesh, rotationAngle);
 
                 SDL_Surface* imageSurface =
                     SDL_CreateSurfaceFrom(_width, _height, renderingSurface->format, _renderer.frameBuffer,
@@ -87,6 +88,8 @@ namespace demo
                 SDL_BlitSurface(imageSurface, nullptr, renderingSurface, nullptr);
                 SDL_UpdateWindowSurface(_window);
                 pollEvent();
+
+                rotationAngle += 0.1f;
             }
         }
     };

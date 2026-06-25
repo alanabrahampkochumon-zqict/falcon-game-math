@@ -245,7 +245,6 @@ namespace demo
                             const uint8_t r = 0xff, const uint8_t g = 0xff, const uint8_t b = 0xff,
                             const uint8_t a = 0xff)
         {
-
             const auto projV0 = toScreenSpace(v0);
             const auto projV1 = toScreenSpace(v1);
             const auto projV2 = toScreenSpace(v2);
@@ -261,10 +260,6 @@ namespace demo
             //       |     \/     |
             //       --------(maxX, maxY)
             const auto bb = computeBoundingBox(projV0, projV1, projV2);
-            // const auto x0 = static_cast<std::size_t>(std::min({ projV0.x(), projV1.x(), projV2.x() }));
-            // const auto y0 = static_cast<std::size_t>(std::min({ projV0.y(), projV1.y(), projV2.y() }));
-            // const auto x1 = static_cast<std::size_t>(std::max({ projV0.x(), projV1.x(), projV2.x() }));
-            // const auto y1 = static_cast<std::size_t>(std::max({ projV0.y(), projV1.y(), projV2.y() }));
 
 
 
@@ -295,6 +290,9 @@ namespace demo
                     const auto colorOffset = static_cast<std::size_t>(colorChannels) * offset;
                     const auto point       = fgm::Vector2D(static_cast<float>(x), static_cast<float>(y));
 
+                    if (offset > static_cast<std::size_t>(width * height))
+                        continue;
+
                     const auto [alpha, beta, gamma] =
                         computeBaryCentricCoordinates(projV0, projV1, projV2, point, triArea);
 
@@ -322,6 +320,24 @@ namespace demo
             }
         }
 
+        // Degree in Radians
+        // TODO: Move to library
+        fgm::Vec3F rotateY(const fgm::Vec3F& vertex, const float deg)
+        {
+            const auto s = std::sin(deg);
+            const auto c = std::cos(deg);
+            fgm::Vec3F vec{};
+
+            // [cos, 0, -sin]
+            // [0, 1, 0]
+            // [sin, 0, cos]
+            vec.x() =  c * vertex.x() - s * vertex.z();
+            vec.y() =  vertex.y();
+            vec.z() = s * vertex.x() + c * vertex.z();
+
+            return vec;
+        }
+
 
         /**
          * @brief Renders a mesh to the current @p frameBuffer.
@@ -331,13 +347,14 @@ namespace demo
          *
          * @param mesh The mesh to render.
          */
-        void render(const Mesh& mesh)
+        void render(const Mesh& mesh, const float deg)
         {
             std::vector<fgm::Vec3<float>> vertices;
 
             std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()),
-                           [mesh](const fgm::Vec3<float> vertex) {
-                               return toNDC(vertex, mesh.minVertexValue, mesh.maxVertexValue);
+                           [mesh, this, deg](const fgm::Vec3<float> vertex) {
+                               const auto vec = rotateY(vertex, deg);
+                               return toNDC(vec, mesh.minVertexValue, mesh.maxVertexValue);
                            });
 
             // std::transform(mesh.vertices.cbegin(), mesh.vertices.cend(), std::inserter(vertices, vertices.begin()),
