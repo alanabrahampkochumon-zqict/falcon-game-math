@@ -1126,7 +1126,7 @@ namespace fgm
          * @return A new @ref Matrix2 representing the linear rotation.
          */
         template <std::floating_point U>
-        [[nodiscard]] static constexpr Matrix2 makeRotation(U angle) noexcept
+        [[nodiscard]] static constexpr Matrix2 rotate(U angle) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1137,7 +1137,7 @@ namespace fgm
          *
          * @return A new @ref Matrix2 representing the uniform scale.
          */
-        [[nodiscard]] static constexpr Matrix2 makeScale(T scale) noexcept
+        [[nodiscard]] static constexpr Matrix2 scale(T scale) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1149,7 +1149,7 @@ namespace fgm
          *
          * @return A new @ref Matrix2 representing the uniform scale.
          */
-        [[nodiscard]] static constexpr Matrix2 makeScale(T scaleX, T scaleY) noexcept
+        [[nodiscard]] static constexpr Matrix2 scale(T scaleX, T scaleY) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1163,7 +1163,7 @@ namespace fgm
          *
          * @return A new @ref Matrix2 representing the axis-aligned reflection.
          */
-        [[nodiscard]] static constexpr Matrix2 makeReflection(bool reflectX, bool reflectY) noexcept
+        [[nodiscard]] static constexpr Matrix2 reflect(bool reflectX, bool reflectY) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

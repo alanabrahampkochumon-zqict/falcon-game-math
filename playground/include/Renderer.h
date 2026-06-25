@@ -372,7 +372,6 @@ namespace demo
             std::vector<fgm::Vec3<float>> vertices{mesh.vertices.size()};
             // const auto focalLength = 3.0f;
 
-
             std::ranges::transform(mesh.vertices, std::inserter(vertices, vertices.begin()),
                            [mesh, this, deg](const fgm::Vec3<float> vertex) {
                                 return perVertex(vertex, mesh.minVertexValue, mesh.maxVertexValue, deg);
