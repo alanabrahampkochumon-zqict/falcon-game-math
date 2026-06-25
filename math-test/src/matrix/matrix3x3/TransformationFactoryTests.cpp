@@ -62,27 +62,29 @@ protected:
 TYPED_TEST_SUITE(Matrix3UniformScale, SupportedArithmeticTypes);
 
 
-// template <typename T>
-// class Matrix3NonUniformScale: public ::testing::Test
-// {
-// protected:
-//     fgm::Matrix3<T> _expectedMat;
-//     T _scaleX, _scaleY;
-//
-//     void SetUp() override
-//     {
-//         _expectedMat = { fgm::Vector3{ T(5.3821839321), T(0) }, fgm::Vector3{ T(0), T(8.1234921348) } };
-//         _scaleX      = T(5.3821839321);
-//         _scaleY      = T(8.1234921348);
-//     }
-// };
-// /**
-//  * @brief Test fixture for @ref fgm::Matrix3 non-uniform scale factory, parameterized
-//  *        @ref SupportedArithmeticTypes
-//  */
-// TYPED_TEST_SUITE(Matrix3NonUniformScale, SupportedArithmeticTypes);
-//
-//
+template <typename T>
+class Matrix3NonUniformScale: public ::testing::Test
+{
+protected:
+    fgm::Matrix3<T> _expectedMat;
+    T _scaleX, _scaleY, _scaleZ;
+
+    void SetUp() override
+    {
+        _expectedMat = { fgm::Vector3{ T(5.3821839321), T(0), T(0) }, fgm::Vector3{ T(0), T(8.1234921348), T(0) },
+                         fgm::Vector3{ T(0), T(0), T(0.12348921340) } };
+        _scaleX      = T(5.3821839321);
+        _scaleY      = T(8.1234921348);
+        _scaleZ      = T(0.12348921340);
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Matrix3 non-uniform scale factory, parameterized
+ *        @ref SupportedArithmeticTypes
+ */
+TYPED_TEST_SUITE(Matrix3NonUniformScale, SupportedArithmeticTypes);
+
+
 // template <typename T>
 // class Matrix3NoReflection: public ::testing::Test
 // {
@@ -210,7 +212,7 @@ namespace
     //     static_assert(REFLECTION_MAT(1, 0) == 0);
     //     static_assert(REFLECTION_MAT(1, 1) == -1);
 
-// } // namespace
+    // } // namespace
 } // namespace
 
 
@@ -239,8 +241,8 @@ TYPED_TEST(Matrix3UniformScale, ReturnsScaleMatrix)
 
 
 /** @brief Verify that non-uniform scale transformation factory returns a non-uniform scale matrix. */
-// TYPED_TEST(Matrix3NonUniformScale, ReturnsScaleMatrix)
-// { EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::scale(this->_scaleX, this->_scaleY)); }
+TYPED_TEST(Matrix3NonUniformScale, ReturnsScaleMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::scale(this->_scaleX, this->_scaleY, this->_scaleZ)); }
 
 
 //

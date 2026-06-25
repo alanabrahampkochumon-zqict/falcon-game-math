@@ -1147,7 +1147,7 @@ namespace fgm
          * @param[in] scaleX The scale factor in the x-direction.
          * @param[in] scaleY The scale factor in the y-direction.
          *
-         * @return A new @ref Matrix2 representing the uniform scale.
+         * @return A new @ref Matrix2 representing the non-uniform scale.
          */
         [[nodiscard]] static constexpr Matrix2 scale(T scaleX, T scaleY) noexcept
             requires StrictArithmetic<T>;

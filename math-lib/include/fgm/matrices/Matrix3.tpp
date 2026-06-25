@@ -768,6 +768,12 @@ namespace fgm
         requires StrictArithmetic<T>
     { return Matrix3{ scale, T(0), T(0), T(0), scale, T(0), T(0), T(0), scale }; }
 
+
+    template <Arithmetic T>
+    constexpr Matrix3<T> Matrix3<T>::scale(T scaleX, T scaleY, T scaleZ) noexcept
+        requires StrictArithmetic<T>
+    { return Matrix3{ scaleX, T(0), T(0), T(0), scaleY, T(0), T(0), T(0), scaleZ }; }
+
 } // namespace fgm
 
 

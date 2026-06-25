@@ -1168,16 +1168,17 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Construct a non-uniform scale 3D matrix.
-        //  *
-        //  * @param[in] scaleX The scale factor in the x-direction.
-        //  * @param[in] scaleY The scale factor in the y-direction.
-        //  *
-        //  * @return A new @ref Matrix3 representing the uniform scale.
-        //  */
-        // [[nodiscard]] static constexpr Matrix3 scale(T scaleX, T scaleY) noexcept
-        //     requires StrictArithmetic<T>;
+        /**
+         * @brief Construct a non-uniform scale 3D matrix.
+         *
+         * @param[in] scaleX The scale factor in the x-direction.
+         * @param[in] scaleY The scale factor in the y-direction.
+         * @param[in] scaleZ The scale factor in the z-direction.
+         *
+         * @return A new @ref Matrix3 representing the non-uniform scale.
+         */
+        [[nodiscard]] static constexpr Matrix3 scale(T scaleX, T scaleY, T scaleZ) noexcept
+            requires StrictArithmetic<T>;
 
 
         // /**
