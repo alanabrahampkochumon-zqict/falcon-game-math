@@ -350,6 +350,14 @@ namespace demo
             return vec;
         }
 
+        // Vertex Shader
+        inline fgm::Vec3F perVertex(const fgm::Vec3F& vertex, const fgm::Vec3F& minVertexValues,
+                                    const fgm::Vec3F& maxVertexValues, const float rotationDeg)
+        {
+            const auto vec = rotateY(vertex, rotationDeg);
+            return toNDC(vec, minVertexValues, maxVertexValues);
+        }
+
 
         /**
          * @brief Renders a mesh to the current @p frameBuffer.
@@ -367,8 +375,7 @@ namespace demo
 
             std::ranges::transform(mesh.vertices, std::inserter(vertices, vertices.begin()),
                            [mesh, this, deg](const fgm::Vec3<float> vertex) {
-                               const auto vec = rotateY(vertex, deg);
-                               return toNDC(vec, mesh.minVertexValue, mesh.maxVertexValue);
+                                return perVertex(vertex, mesh.minVertexValue, mesh.maxVertexValue, deg);
                            });
 
             // std::ranges::transform(mesh.vertices, std::inserter(vertices, vertices.begin()),
@@ -393,5 +400,7 @@ namespace demo
                 // renderTriangleWireframe(vertices[i0], vertices[i1], vertices[i2]);
             }
         }
+
+
     };
 } // namespace demo
