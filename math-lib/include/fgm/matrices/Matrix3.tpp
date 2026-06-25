@@ -804,11 +804,11 @@ namespace fgm
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
 
-        #ifdef FGM_LEFT_HANDED
+#ifdef FGM_LEFT_HANDED
         return Matrix3{ cosine, sine, T(0), -sine, cosine, T(0), T(0), T(0), T(1) };
-        #else
+#else
         return Matrix3{ cosine, -sine, T(0), sine, cosine, T(0), T(0), T(0), T(1) };
-        #endif
+#endif
     }
 
 

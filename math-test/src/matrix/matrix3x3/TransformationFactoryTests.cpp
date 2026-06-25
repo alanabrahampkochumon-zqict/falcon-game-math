@@ -36,14 +36,14 @@ protected:
                          } };
         _expectedMatY = { fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) }, fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) },
             fgm::Vector3{ COM_T(-1), COM_T(0), COM_T(0) } };
-        _expectedMatZ = { fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) }, fgm::Vector3{ COM_T(-1), COM_T(0), COM_T(0) },
+        _expectedMatZ = { fgm::Vector3{ COM_T(0), COM_T(-1), COM_T(0) }, fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) },
                          fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) } };
 #else
         _expectedMatX = { fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) }, fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) },
             fgm::Vector3{ COM_T(0), COM_T(-1), COM_T(0) } };
         _expectedMatY = { fgm::Vector3{ COM_T(0), COM_T(0), COM_T(-1) }, fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) },
             fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) } };
-        _expectedMatZ = { fgm::Vector3{ COM_T(0), COM_T(-1), COM_T(0) }, fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) },
+        _expectedMatZ = { fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) }, fgm::Vector3{ COM_T(-1), COM_T(0), COM_T(0) },
                          fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) } };
 
 #endif
