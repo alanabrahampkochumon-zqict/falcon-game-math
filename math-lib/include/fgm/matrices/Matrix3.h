@@ -94,7 +94,7 @@ namespace fgm
          * @param[in] col2 The 3D-vector to use as the third column entry.
          */
         [[nodiscard]] constexpr Matrix3(const Vector3<T>& col0, const Vector3<T>& col1,
-                                         const Vector3<T>& col2) noexcept;
+                                        const Vector3<T>& col2) noexcept;
 
 
         /**
@@ -621,8 +621,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix3<T, S> safeDiv(
-            S scalar, const Matrix3& fallback = Matrix3::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3<T, S> safeDiv(S scalar,
+                                                              const Matrix3& fallback = Matrix3::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -647,8 +647,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix3<T, S> safeDiv(
-            const Matrix3& mat, S scalar, const Matrix3& fallback = Matrix3::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix3<T, S> safeDiv(const Matrix3& mat, S scalar,
+                                                                     const Matrix3& fallback = Matrix3::eye()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -678,7 +678,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMatrix3<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                              const Matrix3& fallback = Matrix3::eye()) const noexcept
+                                                             const Matrix3& fallback = Matrix3::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -708,8 +708,9 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix3<T, S> tryDiv(
-            const Matrix3& mat, S scalar, OperationStatus& status, const Matrix3& fallback = Matrix3::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix3<T, S> tryDiv(const Matrix3& mat, S scalar,
+                                                                    OperationStatus& status,
+                                                                    const Matrix3& fallback = Matrix3::eye()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -926,7 +927,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix3<Magnitude<T>> safeInverseOf(const Matrix3& matrix,
-                                                              const Matrix3& fallback = Matrix3::eye()) noexcept
+                                                             const Matrix3& fallback = Matrix3::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -962,7 +963,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Matrix3<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                    const Matrix3& fallback = Matrix3::eye()) const noexcept
+                                                   const Matrix3& fallback = Matrix3::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -999,7 +1000,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix3<Magnitude<T>> tryInverseOf(const Matrix3& matrix, OperationStatus& status,
-                                                             const Matrix3& fallback = Matrix3::eye()) noexcept
+                                                            const Matrix3& fallback = Matrix3::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1130,15 +1131,15 @@ namespace fgm
          *          - **Right-Handed (Default):**
          *            \f$
          *                \begin{bmatrix}
-         *                    0 &            0 &            1 \\
+         *                    1 &            0 &            0 \\
          *                    0 &  cos(\theta) & -sin(\theta) \\
          *                    0 &  sin(\theta) &  cos(\theta)
          *                \end{bmatrix}
          *            \f$
          *          - **Left-Handed (FGM_LEFT_HANDED):**
          *            \f$
-        *                \begin{bmatrix}
-         *                    0 &            0 &           1 \\
+         *                \begin{bmatrix}
+         *                    1 &            0 &           0 \\
          *                    0 &  cos(\theta) & sin(\theta) \\
          *                    0 & -sin(\theta) & cos(\theta)
          *                \end{bmatrix}
@@ -1167,15 +1168,15 @@ namespace fgm
          *            \f$
          *                \begin{bmatrix}
          *                     cos(\theta) & 0 & sin(\theta) \\
-         *                     0           & 0 &           1 \\
+         *                     0           & 1 &           0 \\
          *                    -sin(\theta) & 0 & cos(\theta)
          *                \end{bmatrix}
          *            \f$
          *          - **Left-Handed (FGM_LEFT_HANDED):**
          *            \f$
-        *                \begin{bmatrix}
+         *                \begin{bmatrix}
          *                    cos(\theta) & 0 & -sin(\theta) \\
-         *                    0           & 0 &            1 \\
+         *                    0           & 1 &           0 \\
          *                    sin(\theta) & 0 &  cos(\theta)
          *                \end{bmatrix}
          *            \f$
@@ -1194,6 +1195,41 @@ namespace fgm
         [[nodiscard]] static constexpr Matrix3 makeRotationY(U angle) noexcept
             requires SignedStrictArithmetic<T>;
 
+
+        /**
+         * @brief Construct a 3D rotation matrix in the y-axis for a given angle.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & -sin(\theta) & 0 \\
+         *                     sin(\theta) &  cos(\theta) & 0 \\
+         *                               0 &            0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & sin(\theta) & 0 \\
+         *                    -sin(\theta) & cos(\theta) & 0 \\
+         *                               0 &            0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle The rotation angle in radians.
+         *
+         * @return A new @ref Matrix3 representing the linear rotation around z-axis.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Matrix3 makeRotationZ(U angle) noexcept
+            requires SignedStrictArithmetic<T>;
 
         /**
          * @brief Construct a uniform scale 3D matrix.

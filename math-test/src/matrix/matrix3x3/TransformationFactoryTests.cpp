@@ -21,7 +21,7 @@ protected:
     using COM_T = T::second_type; // COM_T -> Common Type
 
     FP_T _angle;
-    fgm::Matrix3<COM_T> _expectedMatX, _expectedMatY;
+    fgm::Matrix3<COM_T> _expectedMatX, _expectedMatY, _expectedMatZ;
 
 
     void SetUp() override
@@ -35,12 +35,16 @@ protected:
                              COM_T(0)
                          } };
         _expectedMatY = { fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) }, fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) },
-                         fgm::Vector3{ COM_T(-1), COM_T(0), COM_T(0) } };
+            fgm::Vector3{ COM_T(-1), COM_T(0), COM_T(0) } };
+        _expectedMatZ = { fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) }, fgm::Vector3{ COM_T(-1), COM_T(0), COM_T(0) },
+                         fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) } };
 #else
         _expectedMatX = { fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) }, fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) },
             fgm::Vector3{ COM_T(0), COM_T(-1), COM_T(0) } };
         _expectedMatY = { fgm::Vector3{ COM_T(0), COM_T(0), COM_T(-1) }, fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) },
-                         fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) } };
+            fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) } };
+        _expectedMatZ = { fgm::Vector3{ COM_T(0), COM_T(-1), COM_T(0) }, fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) },
+                         fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) } };
 
 #endif
     }
@@ -252,6 +256,11 @@ TYPED_TEST(Matrix3Rotation, X_ReturnsRotationMatrix)
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Matrix3Rotation, Y_ReturnsRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatY, fgm::Matrix3<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
+
+
+/** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
+TYPED_TEST(Matrix3Rotation, Z_ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Matrix3<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
 
 
 /**************************************

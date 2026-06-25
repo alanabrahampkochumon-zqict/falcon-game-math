@@ -796,6 +796,23 @@ namespace fgm
 
 
     template <Arithmetic T>
+    template <std::floating_point U>
+    constexpr Matrix3<T> Matrix3<T>::makeRotationZ(U angle) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        using R  = PromotedValue_t<T, U>;
+        R cosine = std::cos(angle);
+        R sine   = std::sin(angle);
+
+        #ifdef FGM_LEFT_HANDED
+        return Matrix3{ cosine, sine, T(0), -sine, cosine, T(0), T(0), T(0), T(1) };
+        #else
+        return Matrix3{ cosine, -sine, T(0), sine, cosine, T(0), T(0), T(0), T(1) };
+        #endif
+    }
+
+
+    template <Arithmetic T>
     constexpr Matrix3<T> Matrix3<T>::makeScale(T scale) noexcept
         requires StrictArithmetic<T>
     { return Matrix3{ scale, T(0), T(0), T(0), scale, T(0), T(0), T(0), scale }; }
