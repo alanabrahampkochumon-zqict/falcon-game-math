@@ -16,9 +16,9 @@
 #include "utils/VectorUtils.h"
 
 #include <fgm/common/MathTraits.h>
-#include <fgm/matrices/Matrix2D.h>
-#include <fgm/matrices/Matrix3D.h>
-#include <fgm/matrices/Matrix4D.h>
+#include <fgm/matrices/Matrix2.h>
+#include <fgm/matrices/Matrix3.h>
+#include <fgm/matrices/Matrix4.h>
 
 
 

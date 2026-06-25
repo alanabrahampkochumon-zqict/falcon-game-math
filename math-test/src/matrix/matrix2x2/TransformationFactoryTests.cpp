@@ -21,7 +21,7 @@ protected:
     using COM_T = T::second_type; // COM_T -> Common Type
 
     FP_T _angle;
-    fgm::Matrix2D<COM_T> _expectedMat;
+    fgm::Matrix2<COM_T> _expectedMat;
 
 
     void SetUp() override
@@ -45,7 +45,7 @@ template <typename T>
 class Matrix2DUniformScale: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _expectedMat;
+    fgm::Matrix2<T> _expectedMat;
     T _scale;
 
     void SetUp() override
@@ -65,7 +65,7 @@ template <typename T>
 class Matrix2DNonUniformScale: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _expectedMat;
+    fgm::Matrix2<T> _expectedMat;
     T _scaleX, _scaleY;
 
     void SetUp() override
@@ -86,7 +86,7 @@ template <typename T>
 class Matrix2DNoReflection: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _expectedMat;
+    fgm::Matrix2<T> _expectedMat;
 
     void SetUp() override { _expectedMat = { fgm::Vector2D{ T(1), T(0) }, fgm::Vector2D{ T(0), T(1) } }; }
 };
@@ -101,7 +101,7 @@ template <typename T>
 class Matrix2DXAxisReflection: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _expectedMat;
+    fgm::Matrix2<T> _expectedMat;
 
     void SetUp() override { _expectedMat = { fgm::Vector2D{ T(-1), T(0) }, fgm::Vector2D{ T(0), T(1) } }; }
 };
@@ -116,7 +116,7 @@ template <typename T>
 class Matrix2DYAxisReflection: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _expectedMat;
+    fgm::Matrix2<T> _expectedMat;
 
     void SetUp() override { _expectedMat = { fgm::Vector2D{ T(1), T(0) }, fgm::Vector2D{ T(0), T(-1) } }; }
 };
@@ -131,7 +131,7 @@ template <typename T>
 class Matrix2DOriginReflection: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _expectedMat;
+    fgm::Matrix2<T> _expectedMat;
 
     void SetUp() override { _expectedMat = { fgm::Vector2D{ T(-1), T(0) }, fgm::Vector2D{ T(0), T(-1) } }; }
 };
@@ -165,7 +165,7 @@ namespace
     {
 #if __cplusplus >= 202603L
         // Rotation matrix for 180° or 2π radians
-        constexpr auto ROTATION_MAT = fgm::Matrix2D<int>::makeRotation(fgm::constants::PI<float>);
+        constexpr auto ROTATION_MAT = fgm::Matrix2<int>::makeRotation(fgm::constants::PI<float>);
         static_assert(ROTATION_MAT(0, 0) == 0);
         static_assert(ROTATION_MAT(0, 1) == -1);
         static_assert(ROTATION_MAT(1, 0) == 1);
@@ -179,14 +179,14 @@ namespace
     namespace
     {
         // Uniform scale
-        constexpr auto U_SCALE_MAT = fgm::Matrix2D<int>::makeScale(2);
+        constexpr auto U_SCALE_MAT = fgm::Matrix2<int>::makeScale(2);
         static_assert(U_SCALE_MAT(0, 0) == 2);
         static_assert(U_SCALE_MAT(0, 1) == 0);
         static_assert(U_SCALE_MAT(1, 0) == 0);
         static_assert(U_SCALE_MAT(1, 1) == 2);
 
         // Non-uniform scale
-        constexpr auto SCALE_MAT = fgm::Matrix2D<int>::makeScale(2, 3);
+        constexpr auto SCALE_MAT = fgm::Matrix2<int>::makeScale(2, 3);
         static_assert(SCALE_MAT(0, 0) == 2);
         static_assert(SCALE_MAT(0, 1) == 0);
         static_assert(SCALE_MAT(1, 0) == 0);
@@ -198,7 +198,7 @@ namespace
     namespace
     {
         // Reflection through origin
-        constexpr auto REFLECTION_MAT = fgm::Matrix2D<int>::makeReflection(true, true);
+        constexpr auto REFLECTION_MAT = fgm::Matrix2<int>::makeReflection(true, true);
         static_assert(REFLECTION_MAT(0, 0) == -1);
         static_assert(REFLECTION_MAT(0, 1) == 0);
         static_assert(REFLECTION_MAT(1, 0) == 0);
@@ -217,7 +217,7 @@ namespace
 
 /** @brief Verify that rotation transformation factory returns a rotation matrix. */
 TYPED_TEST(Matrix2DRotation, ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<typename TypeParam::first_type>::makeRotation(this->_angle)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<typename TypeParam::first_type>::makeRotation(this->_angle)); }
 
 
 
@@ -229,12 +229,12 @@ TYPED_TEST(Matrix2DRotation, ReturnsRotationMatrix)
 
 /** @brief Verify that uniform scale transformation factory returns a scale matrix. */
 TYPED_TEST(Matrix2DUniformScale, ReturnsScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeScale(this->_scale)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeScale(this->_scale)); }
 
 
 /** @brief Verify that non-uniform scale transformation factory returns a non-uniform scale matrix. */
 TYPED_TEST(Matrix2DNonUniformScale, ReturnsScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeScale(this->_scaleX, this->_scaleY)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeScale(this->_scaleX, this->_scaleY)); }
 
 
 
@@ -249,21 +249,21 @@ TYPED_TEST(Matrix2DNonUniformScale, ReturnsScaleMatrix)
  *        returns a reflection matrix.
  */
 TYPED_TEST(Matrix2DNoReflection, ReturnsReflectionMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(false, false)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeReflection(false, false)); }
 
 
 /** @brief Verify that reflection transformation factory for x-axis returns a reflection matrix. */
 TYPED_TEST(Matrix2DXAxisReflection, ReturnsReflectionMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(true, false)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeReflection(true, false)); }
 
 
 /** @brief Verify that reflection transformation factory for y-axis returns a reflection matrix. */
 TYPED_TEST(Matrix2DYAxisReflection, ReturnsReflectionMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(false, true)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeReflection(false, true)); }
 
 
 /** @brief Verify that reflection transformation factory for y-axis returns a reflection matrix. */
 TYPED_TEST(Matrix2DOriginReflection, ReturnsReflectionMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2D<TypeParam>::makeReflection(true, true)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeReflection(true, true)); }
 
 /** @} */

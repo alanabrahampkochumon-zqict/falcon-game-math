@@ -40,7 +40,7 @@ class Matrix3DStringRepresentationTests: public ::testing::Test
 /** @brief Verify that the string representation matches the expected format for integral types. */
 TEST_F(Matrix3DStringRepresentationTests, IntegralRepresentation)
 {
-    const fgm::Matrix3D mat(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    const fgm::Matrix3 mat(1, 2, 3, 4, 5, 6, 7, 8, 9);
     std::stringstream ss;
 
     ss << mat;
@@ -55,7 +55,7 @@ TEST_F(Matrix3DStringRepresentationTests, IntegralRepresentation)
  */
 TEST_F(Matrix3DStringRepresentationTests, FloatRepresentation)
 {
-    const fgm::Matrix3D mat(1.2345f, 2.0f, 4.53823f, 3.323f, 3.5832f, 5.8392f, 9.9238f, -12.0532f, 3.2312f);
+    const fgm::Matrix3 mat(1.2345f, 2.0f, 4.53823f, 3.323f, 3.5832f, 5.8392f, 9.9238f, -12.0532f, 3.2312f);
     std::stringstream ss;
 
     ss << mat;
@@ -70,7 +70,7 @@ TEST_F(Matrix3DStringRepresentationTests, FloatRepresentation)
  */
 TEST_F(Matrix3DStringRepresentationTests, DoubleRepresentation)
 {
-    const fgm::Matrix3D mat(1.2345789777, 2.65831, 2.0, 4.0, 3.2345789777, 1.2345789777, 12.0, -6.2345789777,
+    const fgm::Matrix3 mat(1.2345789777, 2.65831, 2.0, 4.0, 3.2345789777, 1.2345789777, 12.0, -6.2345789777,
                             0.2345789777);
     std::stringstream ss;
 

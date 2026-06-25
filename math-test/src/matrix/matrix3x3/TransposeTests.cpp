@@ -23,7 +23,7 @@ template <typename T>
 class Matrix3DTranspose: public ::testing::Test
 {
 protected:
-    fgm::Matrix3D<T> _matrix, _expectedTranspose;
+    fgm::Matrix3<T> _matrix, _expectedTranspose;
 
     void SetUp() override
     {
@@ -50,10 +50,10 @@ TYPED_TEST_SUITE(Matrix3DTranspose, SupportedTypes);
 /** @brief Verify that matrix transpose is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix3D MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    constexpr fgm::Matrix3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     // Verify matrix transpose (member function)
-    constexpr fgm::Matrix3D TRANSPOSE_MAT = MAT.transpose();
+    constexpr fgm::Matrix3 TRANSPOSE_MAT = MAT.transpose();
     static_assert(TRANSPOSE_MAT(0, 0) == 1);
     static_assert(TRANSPOSE_MAT(0, 1) == 4);
     static_assert(TRANSPOSE_MAT(0, 2) == 7);
@@ -68,7 +68,7 @@ namespace
 
 
     // Verify matrix transpose (static function)
-    constexpr fgm::Matrix3D TRANSPOSE_MAT_S = fgm::Matrix3D<int>::transpose(MAT);
+    constexpr fgm::Matrix3 TRANSPOSE_MAT_S = fgm::Matrix3<int>::transpose(MAT);
     static_assert(TRANSPOSE_MAT_S(0, 0) == 1);
     static_assert(TRANSPOSE_MAT_S(0, 1) == 4);
     static_assert(TRANSPOSE_MAT_S(0, 2) == 7);
@@ -101,6 +101,6 @@ TYPED_TEST(Matrix3DTranspose, ExchangesRowsAndColumnElements)
  *        column elements and returns a new matrix.
  */
 TYPED_TEST(Matrix3DTranspose, StaticWrapper_ExchangesRowsAndColumnElements)
-{ EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix3D<TypeParam>::transpose(this->_matrix)); }
+{ EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix3<TypeParam>::transpose(this->_matrix)); }
 
 /** @} */

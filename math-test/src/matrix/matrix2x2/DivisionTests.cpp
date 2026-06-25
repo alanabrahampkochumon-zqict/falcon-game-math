@@ -23,9 +23,9 @@ template <typename T>
 class Matrix2DDivision: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _matrix;
+    fgm::Matrix2<T> _matrix;
     T _scalar;
-    fgm::Matrix2D<T> _expectedMatrix;
+    fgm::Matrix2<T> _expectedMatrix;
 
     void SetUp() override
     {
@@ -39,14 +39,14 @@ TYPED_TEST_SUITE(Matrix2DDivision, SupportedArithmeticTypes);
 
 
 /** @brief Test fixture for @ref fgm::Matrix2D division with NaN vectors. */
-class NaNMatrix2DDivision: public ::testing::TestWithParam<fgm::Matrix2D<float>>
+class NaNMatrix2DDivision: public ::testing::TestWithParam<fgm::Matrix2<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, NaNMatrix2DDivision,
-                         ::testing::Values(fgm::Matrix2D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
-                                           fgm::Matrix2D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
-                                           fgm::Matrix2D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
-                                           fgm::Matrix2D<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
-                                           fgm::Matrix2D<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                         ::testing::Values(fgm::Matrix2<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
+                                           fgm::Matrix2<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
+                                           fgm::Matrix2<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
+                                           fgm::Matrix2<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
+                                           fgm::Matrix2<float>(fgm ::constants::NaN, fgm::constants::NaN,
                                                                 fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
@@ -65,23 +65,23 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DDivisionTestSuite, NaNMatrix2DDivision,
 /** @brief Verify that matrix division operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix2D MAT(2, 4, 6, 8);
+    constexpr fgm::Matrix2 MAT(2, 4, 6, 8);
 
     // Matrix scalar division
-    constexpr fgm::Matrix2D DIV_RESULT_1 = MAT / 2;
+    constexpr fgm::Matrix2 DIV_RESULT_1 = MAT / 2;
     static_assert(DIV_RESULT_1(0, 0) == 1);
     static_assert(DIV_RESULT_1(0, 1) == 2);
     static_assert(DIV_RESULT_1(1, 0) == 3);
     static_assert(DIV_RESULT_1(1, 1) == 4);
 
     // Matrix safe division
-    constexpr fgm::Matrix2D DIV_RESULT_2 = MAT.safeDiv(2);
+    constexpr fgm::Matrix2 DIV_RESULT_2 = MAT.safeDiv(2);
     static_assert(DIV_RESULT_2(0, 0) == 1);
     static_assert(DIV_RESULT_2(0, 1) == 2);
     static_assert(DIV_RESULT_2(1, 0) == 3);
     static_assert(DIV_RESULT_2(1, 1) == 4);
 
-    constexpr fgm::Matrix2D DIV_RESULT_3 = fgm::Matrix2D<int>::safeDiv(MAT, 2);
+    constexpr fgm::Matrix2 DIV_RESULT_3 = fgm::Matrix2<int>::safeDiv(MAT, 2);
     static_assert(DIV_RESULT_3(0, 0) == 1);
     static_assert(DIV_RESULT_3(0, 1) == 2);
     static_assert(DIV_RESULT_3(1, 0) == 3);
@@ -106,7 +106,7 @@ namespace
  */
 TYPED_TEST(Matrix2DDivision, DivideOperator_ReturnsInverseScaledMatrix)
 {
-    const fgm::Matrix2D inverseScaledMat = this->_matrix / this->_scalar;
+    const fgm::Matrix2 inverseScaledMat = this->_matrix / this->_scalar;
 
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
 }
@@ -127,7 +127,7 @@ TYPED_TEST(Matrix2DDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
  */
 TYPED_TEST(Matrix2DDivision, DivideEqualsOperator_InverseScalesMatrixInPlace)
 {
-    fgm::Matrix2D matrix = this->_matrix;
+    fgm::Matrix2 matrix = this->_matrix;
     matrix /= this->_scalar;
 
     EXPECT_MAT_EQ(this->_expectedMatrix, matrix);
@@ -155,7 +155,7 @@ TYPED_TEST(Matrix2DDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMod
  */
 TYPED_TEST(Matrix2DDivision, SafeDivide_ReturnsInverseScaledMatrix)
 {
-    const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
+    const fgm::Matrix2 inverseScaledMat = this->_matrix.safeDiv(this->_scalar);
 
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
 }
@@ -167,7 +167,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivide_ReturnsInverseScaledMatrix)
  */
 TYPED_TEST(Matrix2DDivision, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
 {
-    const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0));
+    const fgm::Matrix2 inverseScaledMat = this->_matrix.safeDiv(TypeParam(0));
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 }
 
@@ -178,7 +178,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivide_DivisionByZeroReturnsIdentityMatrixByDef
  */
 TYPED_TEST(Matrix2DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
 {
-    const fgm::Matrix2D inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::mat2d::zero<TypeParam>);
+    const fgm::Matrix2 inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::mat2d::zero<TypeParam>);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
@@ -189,7 +189,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivide_DivisionByZeroReturnsPassedInFallback)
  */
 TEST_P(NaNMatrix2DDivision, SafeDivide_ReturnsIdentityMatrixByDefault)
 {
-    const fgm::Matrix2D inverseScaledMat = GetParam().safeDiv(2.5);
+    const fgm::Matrix2 inverseScaledMat = GetParam().safeDiv(2.5);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 }
 
@@ -200,7 +200,7 @@ TEST_P(NaNMatrix2DDivision, SafeDivide_ReturnsIdentityMatrixByDefault)
  */
 TEST_P(NaNMatrix2DDivision, SafeDivide_ReturnsPassedInFallback)
 {
-    const fgm::Matrix2D inverseScaledMat = GetParam().safeDiv(2.5, fgm::mat2d::zero<ParamType::value_type>);
+    const fgm::Matrix2 inverseScaledMat = GetParam().safeDiv(2.5, fgm::mat2d::zero<ParamType::value_type>);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
@@ -211,7 +211,7 @@ TEST_P(NaNMatrix2DDivision, SafeDivide_ReturnsPassedInFallback)
  */
 TYPED_TEST(Matrix2DDivision, SafeDivide_StaticWrapper_ReturnsInverseScaledMatrix)
 {
-    const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::safeDiv(this->_matrix, this->_scalar);
+    const fgm::Matrix2 inverseScaledMat = fgm::Matrix2<TypeParam>::safeDiv(this->_matrix, this->_scalar);
 
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
 }
@@ -223,7 +223,7 @@ TYPED_TEST(Matrix2DDivision, SafeDivide_StaticWrapper_ReturnsInverseScaledMatrix
  */
 TYPED_TEST(Matrix2DDivision, StaticWrapper_SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
 {
-    const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::safeDiv(this->_matrix, TypeParam(0));
+    const fgm::Matrix2 inverseScaledMat = fgm::Matrix2<TypeParam>::safeDiv(this->_matrix, TypeParam(0));
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 }
 
@@ -234,8 +234,8 @@ TYPED_TEST(Matrix2DDivision, StaticWrapper_SafeDivide_DivisionByZeroReturnsIdent
  */
 TYPED_TEST(Matrix2DDivision, StaticWrapper_SafeDivide_DivisionByZeroReturnsPassedInFallback)
 {
-    const fgm::Matrix2D inverseScaledMat =
-        fgm::Matrix2D<TypeParam>::safeDiv(this->_matrix, TypeParam(0), fgm::mat2d::zero<TypeParam>);
+    const fgm::Matrix2 inverseScaledMat =
+        fgm::Matrix2<TypeParam>::safeDiv(this->_matrix, TypeParam(0), fgm::mat2d::zero<TypeParam>);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
@@ -247,7 +247,7 @@ TYPED_TEST(Matrix2DDivision, StaticWrapper_SafeDivide_DivisionByZeroReturnsPasse
 TEST_P(NaNMatrix2DDivision, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefault)
 {
     using T                              = ParamType::value_type;
-    const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::safeDiv(GetParam(), 2.5);
+    const fgm::Matrix2 inverseScaledMat = fgm::Matrix2<T>::safeDiv(GetParam(), 2.5);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 }
 
@@ -259,7 +259,7 @@ TEST_P(NaNMatrix2DDivision, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefa
 TEST_P(NaNMatrix2DDivision, StaticWrapper_SafeDivide_ReturnsPassedInFallback)
 {
     using T                              = ParamType::value_type;
-    const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::safeDiv(GetParam(), 2.5, fgm::mat2d::zero<T>);
+    const fgm::Matrix2 inverseScaledMat = fgm::Matrix2<T>::safeDiv(GetParam(), 2.5, fgm::mat2d::zero<T>);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
@@ -277,7 +277,7 @@ TEST_P(NaNMatrix2DDivision, StaticWrapper_SafeDivide_ReturnsPassedInFallback)
 TYPED_TEST(Matrix2DDivision, TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
+    const fgm::Matrix2 inverseScaledMat = this->_matrix.tryDiv(this->_scalar, flag);
 
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
@@ -291,7 +291,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectF
 TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag);
+    const fgm::Matrix2 inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag);
 
     EXPECT_MAT_IDENTITY(inverseScaledMat);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
@@ -305,7 +305,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsIdentityMatrixByDefa
 TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const fgm::Matrix2D inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag, fgm::mat2d::zero<TypeParam>);
+    const fgm::Matrix2 inverseScaledMat = this->_matrix.tryDiv(TypeParam(0), flag, fgm::mat2d::zero<TypeParam>);
 
     EXPECT_MAT_ZERO(inverseScaledMat);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
@@ -319,7 +319,7 @@ TYPED_TEST(Matrix2DDivision, TryDivide_DivisionByZeroReturnsPassedInFallbackAndS
 TEST_P(NaNMatrix2DDivision, TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
-    const fgm::Matrix2D inverseScaledMat = GetParam().tryDiv(2.5, flag);
+    const fgm::Matrix2 inverseScaledMat = GetParam().tryDiv(2.5, flag);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
@@ -332,7 +332,7 @@ TEST_P(NaNMatrix2DDivision, TryDivide_ReturnsIdentityMatrixByDefault)
 TEST_P(NaNMatrix2DDivision, TryDivide_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const fgm::Matrix2D inverseScaledMat = GetParam().tryDiv(2.5, flag, fgm::mat2d::zero<ParamType::value_type>);
+    const fgm::Matrix2 inverseScaledMat = GetParam().tryDiv(2.5, flag, fgm::mat2d::zero<ParamType::value_type>);
     EXPECT_MAT_ZERO(inverseScaledMat);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
@@ -345,7 +345,7 @@ TEST_P(NaNMatrix2DDivision, TryDivide_ReturnsPassedInFallback)
 TEST_P(NaNMatrix2DDivision, TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
-    [[maybe_unused]] const fgm::Matrix2D inverseScaledMat =
+    [[maybe_unused]] const fgm::Matrix2 inverseScaledMat =
         GetParam().tryDiv(0, flag, fgm::mat2d::zero<ParamType::value_type>);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
@@ -359,7 +359,7 @@ TEST_P(NaNMatrix2DDivision, TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 TYPED_TEST(Matrix2DDivision, StaticWrapper_TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, this->_scalar, flag);
+    const fgm::Matrix2 inverseScaledMat = fgm::Matrix2<TypeParam>::tryDiv(this->_matrix, this->_scalar, flag);
 
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
@@ -373,7 +373,7 @@ TYPED_TEST(Matrix2DDivision, StaticWrapper_TryDivide_ReturnsInverseScaledMatrixA
 TYPED_TEST(Matrix2DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag);
+    const fgm::Matrix2 inverseScaledMat = fgm::Matrix2<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
@@ -386,8 +386,8 @@ TYPED_TEST(Matrix2DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsIdenti
 TYPED_TEST(Matrix2DDivision, StaticWrapper_TryDivide_DivisionByZeroReturnsPassedInFallbackAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const fgm::Matrix2D inverseScaledMat =
-        fgm::Matrix2D<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag, fgm::mat2d::zero<TypeParam>);
+    const fgm::Matrix2 inverseScaledMat =
+        fgm::Matrix2<TypeParam>::tryDiv(this->_matrix, TypeParam(0), flag, fgm::mat2d::zero<TypeParam>);
     EXPECT_MAT_ZERO(inverseScaledMat);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
@@ -401,7 +401,7 @@ TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefau
 {
     fgm::OperationStatus flag;
     using T                              = ParamType::value_type;
-    const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::tryDiv(GetParam(), 2.5, flag);
+    const fgm::Matrix2 inverseScaledMat = fgm::Matrix2<T>::tryDiv(GetParam(), 2.5, flag);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
@@ -416,7 +416,7 @@ TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOve
 {
     fgm::OperationStatus flag;
     using T                                               = ParamType::value_type;
-    [[maybe_unused]] const fgm::Matrix2D inverseScaledMat = fgm::Matrix2D<T>::tryDiv(GetParam(), T(0), flag);
+    [[maybe_unused]] const fgm::Matrix2 inverseScaledMat = fgm::Matrix2<T>::tryDiv(GetParam(), T(0), flag);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -429,8 +429,8 @@ TEST_P(NaNMatrix2DDivision, StaticWrapper_TryDivide_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     using T = ParamType::value_type;
-    const fgm::Matrix2D inverseScaledMat =
-        fgm::Matrix2D<T>::tryDiv(GetParam(), 2.5, flag, fgm::mat2d::zero<ParamType::value_type>);
+    const fgm::Matrix2 inverseScaledMat =
+        fgm::Matrix2<T>::tryDiv(GetParam(), 2.5, flag, fgm::mat2d::zero<ParamType::value_type>);
     EXPECT_MAT_ZERO(inverseScaledMat);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }

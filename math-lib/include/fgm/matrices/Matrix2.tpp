@@ -1,11 +1,11 @@
 #pragma once
 /**
- * @file Matrix2D.tpp
+ * @file Matrix2.tpp
  * @author Alan Abraham P Kochumon
  * @date Created on: January 30, 2026
  *
- * @brief @ref Matrix2D template implementation.
- * @details This file contains the definitions of the template members declared in Matrix2D.h
+ * @brief @ref Matrix2 template implementation.
+ * @details This file contains the definitions of the template members declared in Matrix2.h
  *
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -34,25 +34,25 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Matrix2D<T>::Matrix2D(const T m00, const T m01, const T m10, const T m11) noexcept
+    constexpr Matrix2<T>::Matrix2(const T m00, const T m01, const T m10, const T m11) noexcept
         : _data{ Vector2D<T>(m00, m10), Vector2D<T>(m01, m11) }
     {}
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T>::Matrix2D(const Vector2D<T>& col0, const Vector2D<T>& col1) noexcept: _data{ col0, col1 }
+    constexpr Matrix2<T>::Matrix2(const Vector2D<T>& col0, const Vector2D<T>& col1) noexcept: _data{ col0, col1 }
     {}
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T>::Matrix2D(const T d0, const T d1) noexcept: _data{ Vector2D<T>(d0, 0), Vector2D<T>(0, d1) }
+    constexpr Matrix2<T>::Matrix2(const T d0, const T d1) noexcept: _data{ Vector2D<T>(d0, 0), Vector2D<T>(0, d1) }
     {}
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Matrix2D<T>::Matrix2D(const Matrix2D<U>& other) noexcept
+    constexpr Matrix2<T>::Matrix2(const Matrix2<U>& other) noexcept
     {
         (*this)(0, 0) = static_cast<T>(other(0, 0));
         (*this)(0, 1) = static_cast<T>(other(0, 1));
@@ -69,28 +69,28 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector2D<T>& Matrix2D<T>::operator[](const std::size_t col) noexcept
+    constexpr Vector2D<T>& Matrix2<T>::operator[](const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
     template <Arithmetic T>
-    constexpr const Vector2D<T>& Matrix2D<T>::operator[](const std::size_t col) const noexcept
+    constexpr const Vector2D<T>& Matrix2<T>::operator[](const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
     template <Arithmetic T>
-    constexpr T& Matrix2D<T>::operator()(const std::size_t row, const std::size_t col) noexcept
+    constexpr T& Matrix2<T>::operator()(const std::size_t row, const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < columns || row < rows, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
     template <Arithmetic T>
-    constexpr const T& Matrix2D<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
+    constexpr const T& Matrix2<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < columns || row < rows, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
@@ -105,12 +105,12 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::eye() noexcept
-    { return Matrix2D(T(1), T(1)); }
+    constexpr Matrix2<T> Matrix2<T>::eye() noexcept
+    { return Matrix2(T(1), T(1)); }
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::zero() noexcept
-    { return Matrix2D(T(0), T(0)); }
+    constexpr Matrix2<T> Matrix2<T>::zero() noexcept
+    { return Matrix2(T(0), T(0)); }
 
 
 
@@ -123,7 +123,7 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2D<T>::allEq(const Matrix2D<U>& rhs, const double epsilon) const noexcept
+    constexpr bool Matrix2<T>::allEq(const Matrix2<U>& rhs, const double epsilon) const noexcept
     {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
@@ -144,14 +144,14 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2D<T>::allEq(const Matrix2D& lhs, const Matrix2D<U>& rhs, const double epsilon) noexcept
+    constexpr bool Matrix2<T>::allEq(const Matrix2& lhs, const Matrix2<U>& rhs, const double epsilon) noexcept
     { return lhs.allEq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2D<T>::anyNeq(const Matrix2D<U>& rhs, const double epsilon) const noexcept
+    constexpr bool Matrix2<T>::anyNeq(const Matrix2<U>& rhs, const double epsilon) const noexcept
     {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
@@ -172,21 +172,21 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2D<T>::anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs, const double epsilon) noexcept
+    constexpr bool Matrix2<T>::anyNeq(const Matrix2& lhs, const Matrix2<U>& rhs, const double epsilon) noexcept
     { return lhs.anyNeq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2D<T>::operator==(const Matrix2D<U>& rhs) const noexcept
+    constexpr bool Matrix2<T>::operator==(const Matrix2<U>& rhs) const noexcept
     { return allEq(rhs); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2D<T>::operator!=(const Matrix2D<U>& rhs) const noexcept
+    constexpr bool Matrix2<T>::operator!=(const Matrix2<U>& rhs) const noexcept
     { return anyNeq(rhs); }
 
 
@@ -200,18 +200,18 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator+(const Matrix2D<U>& rhs) const noexcept
+    constexpr PromotedMatrix2<T, U> Matrix2<T>::operator+(const Matrix2<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
-        return Matrix2D<R>(_data[0] + rhs[0], _data[1] + rhs[1]);
+        return Matrix2<R>(_data[0] + rhs[0], _data[1] + rhs[1]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    Matrix2D<T>& Matrix2D<T>::operator+=(const Matrix2D<U>& rhs) noexcept
+    Matrix2<T>& Matrix2<T>::operator+=(const Matrix2<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] += rhs[0];
@@ -223,18 +223,18 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator-(const Matrix2D<U>& rhs) const noexcept
+    constexpr PromotedMatrix2<T, U> Matrix2<T>::operator-(const Matrix2<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
-        return Matrix2D<R>(_data[0] - rhs[0], _data[1] - rhs[1]);
+        return Matrix2<R>(_data[0] - rhs[0], _data[1] - rhs[1]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Matrix2D<T>& Matrix2D<T>::operator-=(const Matrix2D<U>& rhs) noexcept
+    constexpr Matrix2<T>& Matrix2<T>::operator-=(const Matrix2<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] -= rhs[0];
@@ -245,17 +245,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::operator*(const S scalar) const noexcept
+    constexpr PromotedMatrix2<T, S> Matrix2<T>::operator*(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
-        return Matrix2D<R>(scalar * _data[0], scalar * _data[1]);
+        return Matrix2<R>(scalar * _data[0], scalar * _data[1]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Matrix2D<T>& Matrix2D<T>::operator*=(const S scalar) noexcept
+    constexpr Matrix2<T>& Matrix2<T>::operator*=(const S scalar) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] *= scalar;
@@ -264,14 +264,14 @@ namespace fgm
     }
 
     template <StrictArithmetic T, StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> operator*(const S scalar, const Matrix2D<T>& matrix) noexcept
+    constexpr PromotedMatrix2<T, S> operator*(const S scalar, const Matrix2<T>& matrix) noexcept
     { return matrix * scalar; }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector2D<T, U> Matrix2D<T>::operator*(const Vector2D<U>& vec) const noexcept
+    constexpr PromotedVector2D<T, U> Matrix2<T>::operator*(const Vector2D<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -300,7 +300,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept
+    constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -328,7 +328,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept
+    constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -364,18 +364,18 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMatrix2D<T, U> Matrix2D<T>::operator*(const Matrix2D<U>& rhs) const noexcept
+    constexpr PromotedMatrix2<T, U> Matrix2<T>::operator*(const Matrix2<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
-        return Matrix2D<R>(*this * rhs[0], *this * rhs[1]);
+        return Matrix2<R>(*this * rhs[0], *this * rhs[1]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Matrix2D<T>& Matrix2D<T>::operator*=(const Matrix2D<U>& rhs) noexcept
+    constexpr Matrix2<T>& Matrix2<T>::operator*=(const Matrix2<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
@@ -387,7 +387,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::operator/(const S& scalar) const noexcept
+    constexpr PromotedMatrix2<T, S> Matrix2<T>::operator/(const S& scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -395,13 +395,13 @@ namespace fgm
         {
             FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
-            return Matrix2D<R>(_data[0] * factor, _data[1] * factor);
+            return Matrix2<R>(_data[0] * factor, _data[1] * factor);
         }
         else
         {
             FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
             R tScalar = static_cast<R>(scalar);
-            return Matrix2D<R>(_data[0] / tScalar, _data[1] / tScalar);
+            return Matrix2<R>(_data[0] / tScalar, _data[1] / tScalar);
         }
     }
 
@@ -409,7 +409,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Matrix2D<T>& Matrix2D<T>::operator/=(const S& scalar) noexcept
+    constexpr Matrix2<T>& Matrix2<T>::operator/=(const S& scalar) noexcept
         requires StrictArithmetic<T>
     {
         using R = Magnitude<PromotedValue_t<T, S>>;
@@ -429,7 +429,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::safeDiv(const S scalar, const Matrix2D& fallback) const noexcept
+    constexpr PromotedMatrix2<T, S> Matrix2<T>::safeDiv(const S scalar, const Matrix2& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -438,14 +438,14 @@ namespace fgm
         {
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
             {
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
         }
         if constexpr (std::is_integral_v<R>)
         {
             if (scalar == 0)
             {
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
         }
 
@@ -455,16 +455,16 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::safeDiv(const Matrix2D& mat, const S scalar,
-                                                          const Matrix2D& fallback) noexcept
+    constexpr PromotedMatrix2<T, S> Matrix2<T>::safeDiv(const Matrix2& mat, const S scalar,
+                                                          const Matrix2& fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                         const Matrix2D& fallback) const noexcept
+    constexpr PromotedMatrix2<T, S> Matrix2<T>::tryDiv(const S scalar, OperationStatus& status,
+                                                         const Matrix2& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -474,12 +474,12 @@ namespace fgm
             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
             {
                 status = OperationStatus::NANOPERAND;
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
         }
 
@@ -488,7 +488,7 @@ namespace fgm
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
         }
 
@@ -500,8 +500,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix2D<T, S> Matrix2D<T>::tryDiv(const Matrix2D& mat, const S scalar, OperationStatus& status,
-                                                         const Matrix2D& fallback) noexcept
+    constexpr PromotedMatrix2<T, S> Matrix2<T>::tryDiv(const Matrix2& mat, const S scalar, OperationStatus& status,
+                                                         const Matrix2& fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
@@ -515,32 +515,32 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    constexpr T Matrix2D<T>::determinant() const noexcept
+    constexpr T Matrix2<T>::determinant() const noexcept
         requires SignedStrictArithmetic<T>
     { return _data[0][0] * _data[1][1] - _data[0][1] * _data[1][0]; }
 
 
     template <Arithmetic T>
-    constexpr T Matrix2D<T>::determinant(const Matrix2D& matrix) noexcept
+    constexpr T Matrix2<T>::determinant(const Matrix2& matrix) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.determinant(); }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::transpose() const noexcept
+    constexpr Matrix2<T> Matrix2<T>::transpose() const noexcept
     {
         // NOTE: _data is a column major vector so _data[0][1] gives element at first row and zeroth column.
-        return Matrix2D(_data[0][0], _data[0][1], _data[1][0], _data[1][1]);
+        return Matrix2(_data[0][0], _data[0][1], _data[1][0], _data[1][1]);
     }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::transpose(const Matrix2D& matrix) noexcept
+    constexpr Matrix2<T> Matrix2<T>::transpose(const Matrix2& matrix) noexcept
     { return matrix.transpose(); }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::inverse() const noexcept
+    constexpr Matrix2<Magnitude<T>> Matrix2<T>::inverse() const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -558,19 +558,19 @@ namespace fgm
 
         R factor = R(1) / det;
 
-        return Matrix2D<R>(static_cast<R>(_data[1][1]) * factor, static_cast<R>(-_data[1][0]) * factor,
+        return Matrix2<R>(static_cast<R>(_data[1][1]) * factor, static_cast<R>(-_data[1][0]) * factor,
                            static_cast<R>(-_data[0][1]) * factor, static_cast<R>(_data[0][0]) * factor);
     }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::inverse(const Matrix2D& matrix) noexcept
+    constexpr Matrix2<Magnitude<T>> Matrix2<T>::inverse(const Matrix2& matrix) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.inverse(); }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverse(const Matrix2D& fallback) const noexcept
+    constexpr Matrix2<Magnitude<T>> Matrix2<T>::safeInverse(const Matrix2& fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -582,14 +582,14 @@ namespace fgm
         {
             if (hasNaN() || fgm::abs(det) <= std::numeric_limits<T>::epsilon())
             {
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
         }
         if constexpr (std::is_integral_v<T>)
         {
             if (det == 0)
             {
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
         }
 
@@ -598,15 +598,15 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::safeInverseOf(const Matrix2D& matrix,
-                                                                const Matrix2D& fallback) noexcept
+    constexpr Matrix2<Magnitude<T>> Matrix2<T>::safeInverseOf(const Matrix2& matrix,
+                                                                const Matrix2& fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.safeInverse(fallback); }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::tryInverse(OperationStatus& status,
-                                                             const Matrix2D& fallback) const noexcept
+    constexpr Matrix2<Magnitude<T>> Matrix2<T>::tryInverse(OperationStatus& status,
+                                                             const Matrix2& fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -618,12 +618,12 @@ namespace fgm
             if (hasNaN())
             {
                 status = OperationStatus::NANOPERAND;
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
             if (fgm::abs(det) <= std::numeric_limits<T>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
         }
 
@@ -632,7 +632,7 @@ namespace fgm
             if (det == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Matrix2D<R>(fallback);
+                return Matrix2<R>(fallback);
             }
         }
 
@@ -643,20 +643,20 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<Magnitude<T>> Matrix2D<T>::tryInverseOf(const Matrix2D& matrix, OperationStatus& status,
-                                                               const Matrix2D& fallback) noexcept
+    constexpr Matrix2<Magnitude<T>> Matrix2<T>::tryInverseOf(const Matrix2& matrix, OperationStatus& status,
+                                                               const Matrix2& fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.tryInverse(status, fallback); }
 
 
     template <Arithmetic T>
-    constexpr T Matrix2D<T>::trace() const noexcept
+    constexpr T Matrix2<T>::trace() const noexcept
         requires StrictArithmetic<T>
     { return _data[0][0] + _data[1][1]; }
 
 
     template <Arithmetic T>
-    constexpr T Matrix2D<T>::trace(const Matrix2D& matrix) noexcept
+    constexpr T Matrix2<T>::trace(const Matrix2& matrix) noexcept
         requires StrictArithmetic<T>
     { return matrix.trace(); }
 
@@ -669,22 +669,22 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    constexpr bool Matrix2D<T>::hasInf() const noexcept
+    constexpr bool Matrix2<T>::hasInf() const noexcept
     { return _data[0].hasInf() || _data[1].hasInf(); }
 
 
     template <Arithmetic T>
-    constexpr bool Matrix2D<T>::hasInf(const Matrix2D& matrix) noexcept
+    constexpr bool Matrix2<T>::hasInf(const Matrix2& matrix) noexcept
     { return matrix.hasInf(); }
 
 
     template <Arithmetic T>
-    constexpr bool Matrix2D<T>::hasNaN() const noexcept
+    constexpr bool Matrix2<T>::hasNaN() const noexcept
     { return _data[0].hasNaN() || _data[1].hasNaN(); }
 
 
     template <Arithmetic T>
-    constexpr bool Matrix2D<T>::hasNaN(const Matrix2D& matrix) noexcept
+    constexpr bool Matrix2<T>::hasNaN(const Matrix2& matrix) noexcept
     { return matrix.hasNaN(); }
 
 
@@ -698,36 +698,36 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr Matrix2D<T> Matrix2D<T>::makeRotation(const U angle) noexcept
+    constexpr Matrix2<T> Matrix2<T>::makeRotation(const U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
         R cos   = std::cos(angle);
         R sine  = std::sin(angle);
 #ifdef FGM_LEFT_HANDED
-        return Matrix2D(cos, sine, -sine, cos);
+        return Matrix2(cos, sine, -sine, cos);
 #else
-        return Matrix2D(cos, -sine, sine, cos);
+        return Matrix2(cos, -sine, sine, cos);
 #endif
     }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::makeScale(const T scale) noexcept
+    constexpr Matrix2<T> Matrix2<T>::makeScale(const T scale) noexcept
         requires StrictArithmetic<T>
-    { return Matrix2D(scale, T(0), T(0), scale); }
+    { return Matrix2(scale, T(0), T(0), scale); }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::makeScale(const T scaleX, const T scaleY) noexcept
+    constexpr Matrix2<T> Matrix2<T>::makeScale(const T scaleX, const T scaleY) noexcept
         requires StrictArithmetic<T>
-    { return Matrix2D(scaleX, T(0), T(0), scaleY); }
+    { return Matrix2(scaleX, T(0), T(0), scaleY); }
 
 
     template <Arithmetic T>
-    constexpr Matrix2D<T> Matrix2D<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
+    constexpr Matrix2<T> Matrix2<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
         requires StrictArithmetic<T>
-    { return Matrix2D(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1)); }
+    { return Matrix2(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1)); }
 
 } // namespace fgm
 

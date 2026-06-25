@@ -23,9 +23,9 @@ template <typename T>
 class Matrix4DSubtraction: public ::testing::Test
 {
 protected:
-    fgm::Matrix4D<T> _matA;
-    fgm::Matrix4D<T> _matB;
-    fgm::Matrix4D<T> _expectedDifference;
+    fgm::Matrix4<T> _matA;
+    fgm::Matrix4<T> _matB;
+    fgm::Matrix4<T> _expectedDifference;
 
     void SetUp() override
     {
@@ -63,9 +63,9 @@ TYPED_TEST_SUITE(Matrix4DSubtraction, SupportedArithmeticTypes);
 /** @brief Verify that matrix subtraction operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4D matA{ 8, 2, 12, 4, 15, -11, 23, -55, 12, 10, 11, 19, 20, 22, 15, 16 };
-    constexpr fgm::Matrix4D matB{ 80, -5, 15, 3, 1, -13, 0, 55, 38, 33, -12, 10, 59, 11, 15, -16 };
-    constexpr fgm::Matrix4D binaryDiff = matA - matB;
+    constexpr fgm::Matrix4 matA{ 8, 2, 12, 4, 15, -11, 23, -55, 12, 10, 11, 19, 20, 22, 15, 16 };
+    constexpr fgm::Matrix4 matB{ 80, -5, 15, 3, 1, -13, 0, 55, 38, 33, -12, 10, 59, 11, 15, -16 };
+    constexpr fgm::Matrix4 binaryDiff = matA - matB;
 
     static_assert(binaryDiff(0, 0) == -72);
     static_assert(binaryDiff(0, 1) == 7);
@@ -99,7 +99,7 @@ namespace
  */
 TYPED_TEST(Matrix4DSubtraction, MinusOperator_ReturnsDifference)
 {
-    const fgm::Matrix4D difference = this->_matA - this->_matB;
+    const fgm::Matrix4 difference = this->_matA - this->_matB;
 
     EXPECT_MAT_EQ(this->_expectedDifference, difference);
 }
@@ -111,12 +111,12 @@ TYPED_TEST(Matrix4DSubtraction, MinusOperator_ReturnsDifference)
  */
 TEST(Matrix4DSubtraction, MixedTypeSubtractionPromotesType)
 {
-    constexpr fgm::Matrix4D mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f,
+    constexpr fgm::Matrix4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f,
                                  44.0f, 316.0f, 55.0f);
-    constexpr fgm::Matrix4D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0, 4.0, -11.0, 21.0,
+    constexpr fgm::Matrix4 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0, 4.0, -11.0, 21.0,
                                  11.0);
 
-    [[maybe_unused]] constexpr fgm::Matrix4D difference = mat1 - mat2;
+    [[maybe_unused]] constexpr fgm::Matrix4 difference = mat1 - mat2;
 
     static_assert(std::is_same_v<decltype(difference)::value_type, double>);
 }
@@ -140,9 +140,9 @@ TYPED_TEST(Matrix4DSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffere
  */
 TEST(Matrix4DSubtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
-    fgm::Matrix4D mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f, 44.0f,
+    fgm::Matrix4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f, 44.0f,
                        316.0f, 55.0f);
-    [[maybe_unused]] constexpr fgm::Matrix4D mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0,
+    [[maybe_unused]] constexpr fgm::Matrix4 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0,
                                                   4.0, -11.0, 21.0, 11.0);
 
     (void) (mat1 -= mat2); // Static cast to void is need to prevent compiler warning that not using mat2

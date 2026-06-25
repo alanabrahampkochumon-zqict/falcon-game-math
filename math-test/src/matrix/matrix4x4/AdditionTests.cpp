@@ -21,9 +21,9 @@ template <typename T>
 class Matrix4DAddition: public testing::Test
 {
 protected:
-    fgm::Matrix4D<T> _matA;
-    fgm::Matrix4D<T> _matB;
-    fgm::Matrix4D<T> _expectedSum;
+    fgm::Matrix4<T> _matA;
+    fgm::Matrix4<T> _matB;
+    fgm::Matrix4<T> _expectedSum;
 
     void SetUp() override
     {
@@ -62,9 +62,9 @@ TYPED_TEST_SUITE(Matrix4DAddition, SupportedArithmeticTypes);
 /** @brief Verify that matrix addition operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4D matA(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-    constexpr fgm::Matrix4D matB(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-    constexpr fgm::Matrix4D binarySum = matA + matB;
+    constexpr fgm::Matrix4 matA(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+    constexpr fgm::Matrix4 matB(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
+    constexpr fgm::Matrix4 binarySum = matA + matB;
 
     static_assert(binarySum(0, 0) == 6);
     static_assert(binarySum(0, 1) == 8);
@@ -98,7 +98,7 @@ namespace
  */
 TYPED_TEST(Matrix4DAddition, PlusOperator_ReturnsMatrixSum)
 {
-    const fgm::Matrix4D sum = this->_matA + this->_matB;
+    const fgm::Matrix4 sum = this->_matA + this->_matB;
 
     EXPECT_MAT_EQ(this->_expectedSum, sum);
 }
@@ -110,13 +110,13 @@ TYPED_TEST(Matrix4DAddition, PlusOperator_ReturnsMatrixSum)
  */
 TEST(Matrix4DAddition, PlusOperator_MixedTypePromotesType)
 {
-    constexpr fgm::Matrix4D mat1{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vector4D{ -3.0f, -4.0f, 10.0f, -11.0f },
+    constexpr fgm::Matrix4 mat1{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vector4D{ -3.0f, -4.0f, 10.0f, -11.0f },
                                   fgm::Vector4D{ 4.5f, 3.25f, 3.16f, -22.0f },
                                   fgm::Vector4D{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    constexpr fgm::Matrix4D mat2{ fgm::Vector4D{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vector4D{ 3.0, -8.0, 12.0, 11.0 },
+    constexpr fgm::Matrix4 mat2{ fgm::Vector4D{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vector4D{ 3.0, -8.0, 12.0, 11.0 },
                                   fgm::Vector4D{ 3.25, 5.1, 0.0, 0.25 }, fgm::Vector4D{ 12.0, 13.0, 14.0, 15.0 } };
 
-    [[maybe_unused]] constexpr fgm::Matrix4D sum = mat1 + mat2;
+    [[maybe_unused]] constexpr fgm::Matrix4 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
 }
@@ -140,11 +140,11 @@ TYPED_TEST(Matrix4DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  */
 TEST(Matrix4DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    [[maybe_unused]] fgm::Matrix4D mat1{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 7.5f },
+    [[maybe_unused]] fgm::Matrix4 mat1{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 7.5f },
                                          fgm::Vector4D{ -3.0f, -4.0f, 10.0f, -11.0f },
                                          fgm::Vector4D{ 4.5f, 3.25f, 3.16f, -22.0f },
                                          fgm::Vector4D{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    [[maybe_unused]] constexpr fgm::Matrix4D mat2{ fgm::Vector4D{ 11.0, 10.0, 2.0, -1.0 },
+    [[maybe_unused]] constexpr fgm::Matrix4 mat2{ fgm::Vector4D{ 11.0, 10.0, 2.0, -1.0 },
                                                    fgm::Vector4D{ 3.0, -8.0, 12.0, 11.0 },
                                                    fgm::Vector4D{ 3.25, 5.1, 0.0, 0.25 },
                                                    fgm::Vector4D{ 12.0, 13.0, 14.0, 15.0 } };

@@ -24,8 +24,8 @@ class Matrix3DInverse: public ::testing::Test
 {
 protected:
     using Mag = fgm::Magnitude<T>;
-    fgm::Matrix3D<T> _matrix;
-    fgm::Matrix3D<Mag> _expectedInverse;
+    fgm::Matrix3<T> _matrix;
+    fgm::Matrix3<Mag> _expectedInverse;
 
     void SetUp() override
     {
@@ -40,33 +40,33 @@ TYPED_TEST_SUITE(Matrix3DInverse, SupportedSignedArithmeticTypes);
 
 
 /** @brief Test fixture for calculating @ref fgm::Matrix3D inverse with singular matrices */
-class SingularMatrix3DInverse: public ::testing::TestWithParam<fgm::Matrix3D<float>>
+class SingularMatrix3DInverse: public ::testing::TestWithParam<fgm::Matrix3<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(
     Matrix3DInverseTestSuite, SingularMatrix3DInverse,
-    ::testing::Values(fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ 1.0f, 2.0f, 3.0f },
+    ::testing::Values(fgm::Matrix3{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ 1.0f, 2.0f, 3.0f },
                                      fgm::Vector3D{ 7.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 1.0f, 5.0f }, fgm::Vector3D{ 2.0f, 2.0f, 3.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 1.0f, 1.0f, 5.0f }, fgm::Vector3D{ 2.0f, 2.0f, 3.0f },
                                      fgm::Vector3D{ 3.0f, 3.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 0.0f, 0.0f, 0.0f }, fgm::Vector3D{ 1.0f, 2.0f, 3.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 0.0f, 0.0f, 0.0f }, fgm::Vector3D{ 1.0f, 2.0f, 3.0f },
                                      fgm::Vector3D{ 1.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 0.0f, 5.0f, 1.0f }, fgm::Vector3D{ 0.0f, 2.0f, 3.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 0.0f, 5.0f, 1.0f }, fgm::Vector3D{ 0.0f, 2.0f, 3.0f },
                                      fgm::Vector3D{ 0.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ 2.0f, 4.0f, 6.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ 2.0f, 4.0f, 6.0f },
                                      fgm::Vector3D{ 7.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 2.0f, 1.0f }, fgm::Vector3D{ 2.0f, 4.0f, 3.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 1.0f, 2.0f, 1.0f }, fgm::Vector3D{ 2.0f, 4.0f, 3.0f },
                                      fgm::Vector3D{ 3.0f, 6.0f, 9.0f } }));
 
 
 
 /** @brief Test fixture for @ref fgm::Matrix3D inverse with NaN vectors. */
-class NaNMatrix3DInverse: public ::testing::TestWithParam<fgm::Matrix3D<float>>
+class NaNMatrix3DInverse: public ::testing::TestWithParam<fgm::Matrix3<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Matrix3DInverseTestSuite, NaNMatrix3DInverse,
-                         ::testing::Values(fgm::Matrix3D<float>(fgm::constants::NaN, 3.0f, 3.0f),
-                                           fgm::Matrix3D<float>(3.0f, fgm::constants::NaN, 3.0f),
-                                           fgm::Matrix3D<float>(3.0f, 3.0f, fgm::constants::NaN),
-                                           fgm::Matrix3D<float>(fgm::constants::NaN, fgm::constants::NaN,
+                         ::testing::Values(fgm::Matrix3<float>(fgm::constants::NaN, 3.0f, 3.0f),
+                                           fgm::Matrix3<float>(3.0f, fgm::constants::NaN, 3.0f),
+                                           fgm::Matrix3<float>(3.0f, 3.0f, fgm::constants::NaN),
+                                           fgm::Matrix3<float>(fgm::constants::NaN, fgm::constants::NaN,
                                                                 fgm::constants::NaN)));
 
 
@@ -85,10 +85,10 @@ INSTANTIATE_TEST_SUITE_P(Matrix3DInverseTestSuite, NaNMatrix3DInverse,
 /** @brief Verify that matrix inverse functions are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix3D MAT(1.0f, 2.0f, 3.0f, 0.0f, 1.0f, 4.0f, 5.0f, 6.0f, 0.0f);
+    constexpr fgm::Matrix3 MAT(1.0f, 2.0f, 3.0f, 0.0f, 1.0f, 4.0f, 5.0f, 6.0f, 0.0f);
 
     // Verify matrix inverse (member function)
-    constexpr fgm::Matrix3D INV_MAT = MAT.inverse();
+    constexpr fgm::Matrix3 INV_MAT = MAT.inverse();
     static_assert(INV_MAT(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(INV_MAT(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(INV_MAT(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
@@ -100,7 +100,7 @@ namespace
     static_assert(INV_MAT(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
 
     // Verify matrix inverse (static function)
-    constexpr fgm::Matrix3D INV_MAT_S = fgm::Matrix3D<float>::inverse(MAT);
+    constexpr fgm::Matrix3 INV_MAT_S = fgm::Matrix3<float>::inverse(MAT);
     static_assert(INV_MAT_S(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(INV_MAT_S(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(INV_MAT_S(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
@@ -113,7 +113,7 @@ namespace
 
 
     // Verify matrix safeInverse (member function)
-    constexpr fgm::Matrix3D SAFE_INV_MAT = MAT.safeInverse();
+    constexpr fgm::Matrix3 SAFE_INV_MAT = MAT.safeInverse();
     static_assert(SAFE_INV_MAT(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(SAFE_INV_MAT(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(SAFE_INV_MAT(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
@@ -125,7 +125,7 @@ namespace
     static_assert(SAFE_INV_MAT(2, 2) - 1.0f <= fgm::Config::FLOAT_EPSILON);
 
     // Verify matrix safeInverse (static function)
-    constexpr fgm::Matrix3D SAFE_INV_MAT_S = fgm::Matrix3D<float>::safeInverseOf(MAT);
+    constexpr fgm::Matrix3 SAFE_INV_MAT_S = fgm::Matrix3<float>::safeInverseOf(MAT);
     static_assert(SAFE_INV_MAT_S(0, 0) - -24.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(SAFE_INV_MAT_S(0, 1) - 18.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(SAFE_INV_MAT_S(0, 2) - 5.0f <= fgm::Config::FLOAT_EPSILON);
@@ -165,13 +165,13 @@ TYPED_TEST(Matrix3DInverse, InverseTimesMatrixReturnsIdentityMatrix)
  *        when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix3DInverse, StaticWrapper_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::inverse(this->_matrix)); }
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3<TypeParam>::inverse(this->_matrix)); }
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
 TYPED_TEST(Matrix3DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
 {
-    const auto invMatrix = fgm::Matrix3D<TypeParam>::inverse(this->_matrix);
+    const auto invMatrix = fgm::Matrix3<TypeParam>::inverse(this->_matrix);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
@@ -197,7 +197,7 @@ TEST_P(SingularMatrix3DInverse, StaticWrapper_TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     // Static cast is placed to suppress the no-discard warning
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Matrix3D<float>::inverse(matrix)), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Matrix3<float>::inverse(matrix)), "");
 }
 
 #endif
@@ -278,7 +278,7 @@ TEST_P(NaNMatrix3DInverse, SafeInverse_ReturnsPassedInFallback)
  *        that when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix3DInverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::safeInverseOf(this->_matrix)); }
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3<TypeParam>::safeInverseOf(this->_matrix)); }
 
 
 /**
@@ -287,7 +287,7 @@ TYPED_TEST(Matrix3DInverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
  */
 TYPED_TEST(Matrix3DInverse, StaticWrapper_SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
 {
-    const auto invMatrix = fgm::Matrix3D<TypeParam>::safeInverseOf(this->_matrix);
+    const auto invMatrix = fgm::Matrix3<TypeParam>::safeInverseOf(this->_matrix);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
@@ -428,7 +428,7 @@ TEST_P(NaNMatrix3DInverse, TryInverse_ReturnsPassedInFallback)
 TYPED_TEST(Matrix3DInverse, StaticWrapper_TryInverse_ReturnsInverseMatrix)
 {
     fgm::OperationStatus flag;
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3D<TypeParam>::tryInverseOf(this->_matrix, flag));
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix3<TypeParam>::tryInverseOf(this->_matrix, flag));
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
 
@@ -440,7 +440,7 @@ TYPED_TEST(Matrix3DInverse, StaticWrapper_TryInverse_ReturnsInverseMatrix)
 TYPED_TEST(Matrix3DInverse, StaticWrapper_TryInverse_InverseTimesMatrixReturnsIdentityMatrix)
 {
     fgm::OperationStatus flag;
-    const auto invMatrix = fgm::Matrix3D<TypeParam>::tryInverseOf(this->_matrix, flag);
+    const auto invMatrix = fgm::Matrix3<TypeParam>::tryInverseOf(this->_matrix, flag);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }

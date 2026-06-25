@@ -52,7 +52,7 @@ TYPED_TEST_SUITE(Matrix2DInitialization, SupportedTypes);
 namespace
 {
     // Verify that the matrix can be initialized at compile time using scalar values.
-    constexpr fgm::Matrix2D MAT1(1, 2, 3, 4);
+    constexpr fgm::Matrix2 MAT1(1, 2, 3, 4);
     static_assert(MAT1(0, 0) == 1);
     static_assert(MAT1(0, 1) == 2);
     static_assert(MAT1(1, 0) == 3);
@@ -60,7 +60,7 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Matrix2D MAT2(fgm::Vector2D(1, 3), fgm::Vector2D(2, 4));
+    constexpr fgm::Matrix2 MAT2(fgm::Vector2D(1, 3), fgm::Vector2D(2, 4));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
     static_assert(MAT2(1, 0) == 3);
@@ -68,14 +68,14 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using diagonals.
-    constexpr fgm::Matrix2D MAT3(3, 4);
+    constexpr fgm::Matrix2 MAT3(3, 4);
     static_assert(MAT3(0, 0) == 3);
     static_assert(MAT3(0, 1) == 0);
     static_assert(MAT3(1, 0) == 0);
     static_assert(MAT3(1, 1) == 4);
 
     // Verify that the matrix can be initialized at compile time using value initialization.
-    constexpr fgm::Matrix2D<int> MAT4{};
+    constexpr fgm::Matrix2<int> MAT4{};
     static_assert(MAT4(0, 0) == 0);
     static_assert(MAT4(0, 1) == 0);
     static_assert(MAT4(1, 0) == 0);
@@ -94,7 +94,7 @@ namespace
 /** @brief Verify that the default constructor initializes an identity matrix. */
 TYPED_TEST(Matrix2DInitialization, EmptyConstructorReturnsIdentityMatrix)
 {
-    const fgm::Matrix2D<TypeParam> matrix{};
+    const fgm::Matrix2<TypeParam> matrix{};
 
     EXPECT_MAT_ZERO(matrix);
 }
@@ -103,7 +103,7 @@ TYPED_TEST(Matrix2DInitialization, EmptyConstructorReturnsIdentityMatrix)
 /** @brief Verify that the parameterized constructor can initialize matrix with elements. */
 TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
-    const fgm::Matrix2D<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
+    const fgm::Matrix2<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
                                           this->_elements[3]);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
@@ -112,7 +112,7 @@ TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesMatrixWith
 /** @brief Verify that the parameterized constructor can initialize matrix with vectors. */
 TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesMatrixWithVectors)
 {
-    const fgm::Matrix2D<TypeParam> matrix(this->_col0, this->_col1);
+    const fgm::Matrix2<TypeParam> matrix(this->_col0, this->_col1);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
@@ -120,7 +120,7 @@ TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesMatrixWith
 /** @brief Verify that the parameterized constructor can initialize a diagonal matrix. */
 TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesDiagonalMatrix)
 {
-    const fgm::Matrix2D<TypeParam> matrix(this->_diagonal0, this->_diagonal1);
+    const fgm::Matrix2<TypeParam> matrix(this->_diagonal0, this->_diagonal1);
     EXPECT_MAT_CONTAINS(this->_diagonalElements, matrix);
 }
 
@@ -128,7 +128,7 @@ TYPED_TEST(Matrix2DInitialization, ParameterizedConstructorInitializesDiagonalMa
 /** @brief Verify that a matrix can be initialized with implicit braced initialization. */
 TYPED_TEST(Matrix2DInitialization, CanBeConstructedWithBracedInitialization)
 {
-    const fgm::Matrix2D<TypeParam> matrix = { { TypeParam(1), TypeParam(3) }, { TypeParam(2), TypeParam(4) } };
+    const fgm::Matrix2<TypeParam> matrix = { { TypeParam(1), TypeParam(3) }, { TypeParam(2), TypeParam(4) } };
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 

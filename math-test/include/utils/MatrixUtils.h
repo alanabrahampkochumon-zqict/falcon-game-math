@@ -16,9 +16,9 @@
 #include <cassert>
 #include <cmath>
 #include <fgm/common/MathTraits.h>
+#include <fgm/matrices/Matrix2.h>
+#include <fgm/matrices/Matrix3.h>
 #include <gtest/gtest.h>
-#include <fgm/matrices/Matrix2D.h>
-#include <fgm/matrices/Matrix3D.h>
 #include <vector>
 
 
@@ -259,7 +259,7 @@ namespace testutils::Matrix3D
 
     template <typename T, typename U, typename = std::enable_if_t<std::is_arithmetic_v<T>>,
               typename = std::enable_if_t<std::is_arithmetic_v<U>>>
-    void EXPECT_MAT_EQ(fgm::Matrix3D<T> expected, fgm::Matrix3D<U> actual)
+    void EXPECT_MAT_EQ(fgm::Matrix3<T> expected, fgm::Matrix3<U> actual)
     {
         for (unsigned int i = 0; i < SIZE; i++)
         {
@@ -283,7 +283,7 @@ namespace testutils::Matrix3D
 
     template <typename T, typename U, typename = std::enable_if_t<std::is_floating_point_v<T>>,
               typename = std::enable_if_t<std::is_floating_point_v<U>>>
-    void EXPECT_MAT_NEAR(fgm::Matrix3D<T> expected, fgm::Matrix3D<U> actual, double tolerance = 1e-5)
+    void EXPECT_MAT_NEAR(fgm::Matrix3<T> expected, fgm::Matrix3<U> actual, double tolerance = 1e-5)
     {
         if (std::is_same_v<T, double> &&
             tolerance == 1e-5) // Hacky trick for only upgrading if user hasn't changed from default tolerance.
@@ -298,7 +298,7 @@ namespace testutils::Matrix3D
     }
 
     template <typename T, typename = std::enable_if_t<std::is_arithmetic_v<T>>>
-    void EXPECT_MAT_IDENTITY(fgm::Matrix3D<T> actual)
+    void EXPECT_MAT_IDENTITY(fgm::Matrix3<T> actual)
     {
         for (unsigned int i = 0; i < SIZE; i++)
         {
@@ -319,7 +319,7 @@ namespace testutils::Matrix3D
     }
 
     template <typename T, typename = std::enable_if_t<std::is_arithmetic_v<T>>>
-    void EXPECT_MAT_ZERO(fgm::Matrix3D<T> actual)
+    void EXPECT_MAT_ZERO(fgm::Matrix3<T> actual)
     {
 
         for (unsigned int i = 0; i < SIZE; i++)
@@ -340,7 +340,7 @@ namespace testutils::Matrix3D
     }
 
     template <typename T, typename = std::enable_if_t<std::is_arithmetic_v<T>>>
-    void EXPECT_MAT_INF(fgm::Matrix3D<T> actual)
+    void EXPECT_MAT_INF(fgm::Matrix3<T> actual)
     {
 
         for (unsigned int i = 0; i < SIZE; i++)
@@ -358,7 +358,7 @@ namespace testutils::Matrix2D
 
     template <typename T, typename U, typename = std::enable_if_t<std::is_arithmetic_v<T>>,
               typename = std::enable_if_t<std::is_arithmetic_v<U>>>
-    void EXPECT_MAT_EQ(fgm::Matrix2D<T> expected, fgm::Matrix2D<U> actual)
+    void EXPECT_MAT_EQ(fgm::Matrix2<T> expected, fgm::Matrix2<U> actual)
     {
 
         for (unsigned int i = 0; i < SIZE; i++)
@@ -381,7 +381,7 @@ namespace testutils::Matrix2D
     }
 
     template <typename T, typename = std::enable_if_t<std::is_arithmetic_v<T>>>
-    void EXPECT_MAT_IDENTITY(fgm::Matrix2D<T> actual)
+    void EXPECT_MAT_IDENTITY(fgm::Matrix2<T> actual)
     {
         for (unsigned int i = 0; i < SIZE; i++)
         {
@@ -402,7 +402,7 @@ namespace testutils::Matrix2D
     }
 
     template <typename T, typename = std::enable_if_t<std::is_arithmetic_v<T>>>
-    void EXPECT_MAT_ZERO(fgm::Matrix2D<T> actual)
+    void EXPECT_MAT_ZERO(fgm::Matrix2<T> actual)
     {
 
         for (unsigned int i = 0; i < SIZE; i++)
@@ -423,7 +423,7 @@ namespace testutils::Matrix2D
     }
 
     template <typename T, typename = std::enable_if_t<std::is_arithmetic_v<T>>>
-    void EXPECT_MAT_INF(fgm::Matrix2D<T> actual)
+    void EXPECT_MAT_INF(fgm::Matrix2<T> actual)
     {
 
         for (unsigned int i = 0; i < SIZE; i++)

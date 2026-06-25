@@ -43,10 +43,10 @@ namespace
 
 
     // Verify identity (functional variant)
-    static_assert(fgm::Matrix2D<int>::eye()(0, 0) == 1);
-    static_assert(fgm::Matrix2D<int>::eye()(0, 1) == 0);
-    static_assert(fgm::Matrix2D<int>::eye()(1, 0) == 0);
-    static_assert(fgm::Matrix2D<int>::eye()(1, 1) == 1);
+    static_assert(fgm::Matrix2<int>::eye()(0, 0) == 1);
+    static_assert(fgm::Matrix2<int>::eye()(0, 1) == 0);
+    static_assert(fgm::Matrix2<int>::eye()(1, 0) == 0);
+    static_assert(fgm::Matrix2<int>::eye()(1, 1) == 1);
 
 
     // Verify zero matrix
@@ -57,10 +57,10 @@ namespace
 
 
     // Verify zero matrix (functional variant)
-    static_assert(fgm::Matrix2D<int>::zero()(0, 0) == 0);
-    static_assert(fgm::Matrix2D<int>::zero()(0, 1) == 0);
-    static_assert(fgm::Matrix2D<int>::zero()(1, 0) == 0);
-    static_assert(fgm::Matrix2D<int>::zero()(1, 1) == 0);
+    static_assert(fgm::Matrix2<int>::zero()(0, 0) == 0);
+    static_assert(fgm::Matrix2<int>::zero()(0, 1) == 0);
+    static_assert(fgm::Matrix2<int>::zero()(1, 0) == 0);
+    static_assert(fgm::Matrix2<int>::zero()(1, 1) == 0);
 
 } // namespace
 
@@ -78,7 +78,7 @@ TYPED_TEST(Matrix2DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(f
 
 /** @brief Verify that @ref fgm::Matrix2D::eye static factory returns an identity matrix. */
 TYPED_TEST(Matrix2DConstants, StaticWrapper_Eye_ReturnsIdentityMatrix)
-{ EXPECT_MAT_IDENTITY(fgm::Matrix2D<TypeParam>::eye()); }
+{ EXPECT_MAT_IDENTITY(fgm::Matrix2<TypeParam>::eye()); }
 
 
 /** @brief Verify that @ref fgm::mat2d::zero returns a zero matrix. */
@@ -87,6 +87,6 @@ TYPED_TEST(Matrix2DConstants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat
 
 /** @brief Verify that @ref fgm::Matrix2D::zero static factory returns a zero matrix. */
 TYPED_TEST(Matrix2DConstants, StaticWrapper_Zero_ReturnsZeroMatrix)
-{ EXPECT_MAT_ZERO(fgm::Matrix2D<TypeParam>::zero()); }
+{ EXPECT_MAT_ZERO(fgm::Matrix2<TypeParam>::zero()); }
 
 /** @} */

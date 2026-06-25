@@ -43,7 +43,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix4DTests, Matrix4DColumnIndexing, testing::Values(
 /** @brief Verify that matrix accessors are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4D MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+    constexpr fgm::Matrix4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
     constexpr fgm::Vector4D VEC0(1, 5, 9, 13);
     constexpr fgm::Vector4D VEC1(2, 6, 10, 14);
     constexpr fgm::Vector4D VEC2(3, 7, 11, 15);
@@ -97,7 +97,7 @@ namespace
 /** @brief Verify that the matrix elements are accessible via subscript indexing for reads. */
 TEST(Matrix4DAccess, AccessibleAsElements)
 {
-    constexpr fgm::Matrix4D mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
+    constexpr fgm::Matrix4 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
                                 15.0f, 16.0f);
 
     EXPECT_FLOAT_EQ(1.0f, mat(0, 0));
@@ -122,7 +122,7 @@ TEST(Matrix4DAccess, AccessibleAsElements)
 /** @brief Verify that the matrix columns are accessible as vectors for reads. */
 TEST(Matrix4DAccess, AccessibleAsColumnVectors)
 {
-    constexpr fgm::Matrix4D mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
+    constexpr fgm::Matrix4 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
                                 15.0f, 16.0f);
 
     EXPECT_VEC_EQ(fgm::Vector4D(1.0f, 5.0f, 9.0f, 13.0f), mat[0]);
@@ -137,7 +137,7 @@ TEST(Matrix4DAccess, AccessibleAsColumnVectors)
 /** @brief Verify that @ref fgm::Matrix4D out-of-bounds column access triggers assert in debug mode. */
 TEST_P(Matrix4DColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
-    const fgm::Matrix4D mat(1, 2, 3, 4);
+    const fgm::Matrix4 mat(1, 2, 3, 4);
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
 }
@@ -145,7 +145,7 @@ TEST_P(Matrix4DColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 /** @brief Verify that @ref fgm::Matrix4D out-of-bounds row, column access triggers assert in debug mode. */
 TEST_P(Matrix4DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 {
-    const fgm::Matrix4D mat(1, 2, 3, 4);
+    const fgm::Matrix4 mat(1, 2, 3, 4);
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col)), "");
 }
@@ -170,7 +170,7 @@ TEST_P(Matrix4DIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 /** @brief Verify that the matrix elements are accessible via subscript indexing for writes. */
 TEST(Matrix4DAccess, ElementsCanBeMutatedUsingIndex)
 {
-    fgm::Matrix4D<float> mat;
+    fgm::Matrix4<float> mat;
 
     mat(0, 0) = 1.0f;
     mat(0, 1) = 2.0f;
@@ -216,7 +216,7 @@ TEST(Matrix4DAccess, ColumnsCanBeMutatedUsingIndex)
     constexpr fgm::Vector4D col1 = { 2.0f, 6.0f, 10.0f, 14.0f };
     constexpr fgm::Vector4D col2 = { 3.0f, 7.0f, 11.0f, 15.0f };
     constexpr fgm::Vector4D col3 = { 4.0f, 8.0f, 12.0f, 16.0f };
-    fgm::Matrix4D<float> mat;
+    fgm::Matrix4<float> mat;
 
     mat[0] = col0;
     mat[1] = col1;
@@ -235,7 +235,7 @@ TEST(Matrix4DAccess, ColumnsCanBeMutatedUsingIndex)
 /** @brief Verify that @ref fgm::Matrix4D out-of-bounds column mutation triggers assert in debug mode. */
 TEST_P(Matrix4DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
-    [[maybe_unused]] fgm::Matrix4D mat(1, 2, 3, 4);
+    [[maybe_unused]] fgm::Matrix4 mat(1, 2, 3, 4);
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::vec4d::zero<int>), "");
 }
@@ -244,7 +244,7 @@ TEST_P(Matrix4DColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 /** @brief Verify that @ref fgm::Matrix4D out-of-bounds row, column mutation triggers assert in debug mode. */
 TEST_P(Matrix4DIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
-    [[maybe_unused]] fgm::Matrix4D mat(1, 2, 3, 4);
+    [[maybe_unused]] fgm::Matrix4 mat(1, 2, 3, 4);
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col) = 5), "");
 }

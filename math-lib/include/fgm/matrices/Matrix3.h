@@ -1,12 +1,12 @@
 #pragma once
 /**
- * @file Matrix2D.h
+ * @file Matrix3.h
  * @author Alan Abraham P Kochumon
- * @date Created on: January 30, 2026
+ * @date Created on: February 15, 2026
  *
- * @brief Templated 2x2 Matrix supporting integral, floating-point, and boolean types.
+ * @brief Templated 3x3 Matrix supporting integral, floating-point, and boolean types.
  *
- * @details Provide high-performance 2x2 matrix implementation with SIMD acceleration
+ * @details Provide high-performance 3x3 matrix implementation with SIMD acceleration
  *          and support for element-wise operations.
  *
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
@@ -24,73 +24,77 @@
  */
 
 
+#include "fgm/common/Config.h"
+#include "fgm/common/MathTraits.h"
 #include "fgm/common/Types.h"
-#include "fgm/vectors/Vector2D.h"
+#include "fgm/vectors/Vector3D.h"
 
 #include <array>
 #include <cstdint>
-#include <type_traits>
 
-// TODO: Rotate around a point
-// TODO: Reflect around line
-// TODO: Add makeShear
+
+// TODO: Add Matrix3 Transformation factory, projections.
 
 namespace fgm
 {
     template <Arithmetic T>
-    struct Matrix2D
+    struct Matrix3
     {
-
         /**
-         * @addtogroup FGM_Mat2x2_Members
+         * @addtogroup FGM_Mat3x3_Members
          * @{
          */
 
         using value_type = T; ///< The numeric type of the matrix elements.
 
-        static constexpr std::size_t columns = 2; ///< Matrix column count.
-        static constexpr std::size_t rows    = 2; ///< Matrix row count.
-
+        static constexpr std::size_t columns = 3; ///< Matrix column count.
+        static constexpr std::size_t rows    = 3; ///< Matrix row count.
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Mat2x2_Init
+         * @addtogroup FGM_Mat3x3_Init
          * @{
          */
 
         /**
-         * @brief Initialize an uninitialized @ref Matrix2D instance.
+         * @brief Initialize an uninitialized @ref Matrix3 instance.
          *
          * @warning The components are left uninitialized (containing garbage data)
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::mat2d::zero<T> to guarantee a zeroed matrix.
+         *       @ref fgm::mat3d::zero<T> to guarantee a zeroed matrix.
          */
-        Matrix2D() = default;
+        Matrix3() = default;
 
 
         /**
-         * @brief Initialize a 2x2 matrix from the passed-in scalar elements.
+         * @brief Initialize a 3x3 matrix from the passed-in scalar elements.
          *
          * @param[in] m00 The element to insert into row one, column one.
          * @param[in] m01 The element to insert into row one, column two.
+         * @param[in] m02 The element to insert into row one, column three.
          * @param[in] m10 The element to insert into row two, column one.
          * @param[in] m11 The element to insert into row two, column two.
+         * @param[in] m12 The element to insert into row two, column three.
+         * @param[in] m20 The element to insert into row three, column one.
+         * @param[in] m21 The element to insert into row three, column two.
+         * @param[in] m22 The element to insert into row three, column three.
          */
-        [[nodiscard]] constexpr Matrix2D(T m00, T m01, T m10, T m11) noexcept;
+        [[nodiscard]] constexpr Matrix3(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22) noexcept;
 
 
         /**
-         * @brief Initialize a 2x2 matrix from the passed-in vectors as columns.
+         * @brief Initialize a 3x3 matrix from the passed-in vectors as columns.
          *
-         * @param[in] col0 The 2D-vector to use as the first column entry.
-         * @param[in] col1 The 2D-vector to use as the second column entry.
+         * @param[in] col0 The 3D-vector to use as the first column entry.
+         * @param[in] col1 The 3D-vector to use as the second column entry.
+         * @param[in] col2 The 3D-vector to use as the third column entry.
          */
-        [[nodiscard]] constexpr Matrix2D(const Vector2D<T>& col0, const Vector2D<T>& col1) noexcept;
+        [[nodiscard]] constexpr Matrix3(const Vector3D<T>& col0, const Vector3D<T>& col1,
+                                         const Vector3D<T>& col2) noexcept;
 
 
         /**
@@ -99,23 +103,22 @@ namespace fgm
          *
          * @param[in] d0 The first diagonal entry of the matrix (m00).
          * @param[in] d1 The second diagonal entry of the matrix (m11).
+         * @param[in] d2 The third diagonal entry of the matrix (m22).
          */
-        [[nodiscard]] constexpr Matrix2D(T d0, T d1) noexcept;
+        [[nodiscard]] constexpr Matrix3(T d0, T d1, T d2) noexcept;
 
 
         /**
-         * @brief Initialize @ref Matrix2D from another @ref Matrix2D of a different type.
+         * @brief Initialize @ref Matrix3 from another @ref Matrix3 of a different type.
          *
          * @tparam U Numeric type of the source matrix.
          *
          * @param[in] other The source matrix to be converted.
          */
         template <Arithmetic U>
-            requires StrictSignedness<T, U>
-        [[nodiscard]] explicit constexpr Matrix2D(const Matrix2D<U>& other) noexcept;
+        [[nodiscard]] explicit constexpr Matrix3(const Matrix3<U>& other) noexcept;
 
         /** @} */
-
 
 
         /**
@@ -132,7 +135,7 @@ namespace fgm
          *
          * @return A reference to the column vector.
          */
-        [[nodiscard]] constexpr Vector2D<T>& operator[](std::size_t col) noexcept;
+        [[nodiscard]] constexpr Vector3D<T>& operator[](std::size_t col) noexcept;
 
 
         /**
@@ -144,7 +147,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const Vector2D<T>& operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const Vector3D<T>& operator[](std::size_t col) const noexcept;
 
 
         /**
@@ -175,9 +178,8 @@ namespace fgm
         /** @} */
 
 
-
         /**
-         * @addtogroup T_FGM_Mat2x2_Constant
+         * @addtogroup T_FGM_Mat3x3_Constant
          * @{
          */
 
@@ -188,30 +190,29 @@ namespace fgm
          **************************************/
 
         /**
-         * @brief A 2D matrix with ones on the main diagonal and zeros elsewhere.
+         * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
          *
          * @note Only available for @ref StrictArithmetic types.
          *
-         * @return A 2D identity matrix.
+         * @return A 3D identity matrix.
          */
-        [[nodiscard]] static constexpr Matrix2D eye() noexcept;
+        [[nodiscard]] static constexpr Matrix3 eye() noexcept;
 
 
         /**
-         * @brief A 2D matrix with all zero elements.
+         * @brief A 3D matrix with all zero elements.
          *
          * @note Only available for @ref StrictArithmetic types.
          *
-         * @return A 2D zero matrix.
+         * @return A 3D zero matrix.
          */
-        [[nodiscard]] static constexpr Matrix2D zero() noexcept;
+        [[nodiscard]] static constexpr Matrix3 zero() noexcept;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Mat2x2_Equality
+         * @addtogroup FGM_Mat3x3_Equality
          * @{
          */
 
@@ -233,7 +234,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool allEq(const Matrix2D<U>& rhs,
+        [[nodiscard]] constexpr bool allEq(const Matrix3<U>& rhs,
                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
                                                : Config::FLOAT_EPSILON) const noexcept;
@@ -258,7 +259,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr bool allEq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
+        [[nodiscard]] static constexpr bool allEq(const Matrix3& lhs, const Matrix3<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                           std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
@@ -283,7 +284,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool anyNeq(const Matrix2D<U>& rhs,
+        [[nodiscard]] constexpr bool anyNeq(const Matrix3<U>& rhs,
                                             double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
                                                 : Config::FLOAT_EPSILON) const noexcept;
@@ -308,7 +309,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr bool anyNeq(const Matrix2D& lhs, const Matrix2D<U>& rhs,
+        [[nodiscard]] static constexpr bool anyNeq(const Matrix3& lhs, const Matrix3<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                            std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
@@ -316,7 +317,7 @@ namespace fgm
 
 
         /**
-         * @copybrief allEq(const Matrix2D<U>&, double) const noexcept
+         * @copybrief allEq(const Matrix3<U>&, double) const noexcept
          *
          * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
          *       during static evaluation.
@@ -329,11 +330,11 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool operator==(const Matrix2D<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator==(const Matrix3<U>& rhs) const noexcept;
 
 
         /**
-         * @copybrief anyNeq(const Matrix2D<U>&, double) const noexcept
+         * @copybrief anyNeq(const Matrix3<U>&, double) const noexcept
          *
          * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
          *       during static evaluation.
@@ -346,32 +347,31 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool operator!=(const Matrix2D<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator!=(const Matrix3<U>& rhs) const noexcept;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Mat2x2_Arithmetic
+         * @addtogroup FGM_Mat3x3_Arithmetic
          * @{
          */
 
         /**
          * @brief Compute the element-wise sum of this matrix with @p rhs matrix and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to add.
          *
-         * @return A new @ref Matrix2D containing the element-wise sum.
+         * @return A new @ref Matrix3 containing the element-wise sum.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator+(const Matrix2D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3<T, U> operator+(const Matrix3<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -388,25 +388,25 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        Matrix2D& operator+=(const Matrix2D<U>& rhs) noexcept
+        Matrix3& operator+=(const Matrix3<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the element-wise difference between this matrix and @p rhs matrix and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to subtract.
          *
-         * @return A new @ref Matrix2D containing the element-wise difference.
+         * @return A new @ref Matrix3 containing the element-wise difference.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator-(const Matrix2D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3<T, U> operator-(const Matrix3<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -423,24 +423,24 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        constexpr Matrix2D& operator-=(const Matrix2D<U>& rhs) noexcept
+        constexpr Matrix3& operator-=(const Matrix3<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
-         * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
+         * @brief Compute the element-wise product between this matrix and @p scalar and
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] scalar The value to scale by.
          *
-         * @return A new @ref Matrix2D scaled by @p scalar.
+         * @return A new @ref Matrix3 scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, S> operator*(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3<T, S> operator*(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -456,7 +456,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic S>
-        constexpr Matrix2D& operator*=(S scalar) noexcept
+        constexpr Matrix3& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -464,31 +464,32 @@ namespace fgm
          * @brief Transform the @p Vec **column vector** by this matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}
          *            \cdot
          *            \begin{bmatrix}
-         *                  x \\ y
+         *                  x \\ y \\ z
          *            \end{bmatrix}
          *            =
          *            \begin{bmatrix}
-         *                  x' \\ y'
+         *                  x' \\ y' \\ z'
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector2D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedVector3D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec The column vector to transform.
          *
-         * @return A new @ref Vector2D with applied linear transformations.
+         * @return A new @ref Vector3D with applied linear transformations.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector2D<T, U> operator*(const Vector2D<U>& vec) const noexcept
+        [[nodiscard]] constexpr PromotedVector3D<T, U> operator*(const Vector3D<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -496,34 +497,36 @@ namespace fgm
          * @brief Compose this matrix with @p rhs matrix to form a new matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}
          *            \cdot
          *            \begin{bmatrix}
-         *                  B_{00} & B_{01} \\
-         *                  B_{10} & B_{11}
+         *                  B_{00} & B_{01} & B_{02} \\
+         *                  B_{10} & B_{11} & B_{12} \\
+         *                  B_{20} & B_{21} & B_{22}
          *            \end{bmatrix}
          *            =
          *            \begin{bmatrix}
-         *                  C_{00} & C_{01} \\
-         *                  C_{10} & C_{11}
+         *                  C_{00} & C_{01} & C_{02} \\
+         *                  C_{10} & C_{11} & B_{12} \\
+         *                  C_{20} & C_{21} & C_{22}
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to multiply.
          *
-         * @return A new @ref Matrix2D containing the composition of linear transformations.
+         * @return A new @ref Matrix3 containing the composition of linear transformations.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, U> operator*(const Matrix2D<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3<T, U> operator*(const Matrix3<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -531,22 +534,24 @@ namespace fgm
          * @brief Compose this matrix with @p rhs matrix in-place.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}
          *            \cdot
          *            \begin{bmatrix}
-         *                  B_{00} & B_{01} \\
-         *                  B_{10} & B_{11}
+         *                  B_{00} & B_{01} & B_{02} \\
+         *                  B_{10} & B_{11} & B_{12} \\
+         *                  B_{20} & B_{21} & B_{22}
          *            \end{bmatrix}
          *            =
          *            \begin{bmatrix}
-         *                  C_{00} & C_{01} \\
-         *                  C_{10} & C_{11}
+         *                  C_{00} & C_{01} & C_{02} \\
+         *                  C_{10} & C_{11} & B_{12} \\
+         *                  C_{20} & C_{21} & C_{22}
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
@@ -557,14 +562,14 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        constexpr Matrix2D& operator*=(const Matrix2D<U>& rhs) noexcept
+        constexpr Matrix3& operator*=(const Matrix3<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Performs assertion for division by zero in **Debug mode**.
          *
@@ -572,10 +577,10 @@ namespace fgm
          *
          * @param[in] scalar The value to scale by.
          *
-         * @return A new @ref Matrix2D inverse scaled by @p scalar.
+         * @return A new @ref Matrix3 inverse scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, S> operator/(const S& scalar) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3<T, S> operator/(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -592,7 +597,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic S>
-        constexpr Matrix2D& operator/=(const S& scalar) noexcept
+        constexpr Matrix3& operator/=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -601,7 +606,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -612,12 +617,12 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix2D resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Matrix3 resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, S> safeDiv(
-            S scalar, const Matrix2D& fallback = Matrix2D::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3<T, S> safeDiv(
+            S scalar, const Matrix3& fallback = Matrix3::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -626,7 +631,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -638,12 +643,12 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix2D resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Matrix3 resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix2D<T, S> safeDiv(
-            const Matrix2D& mat, S scalar, const Matrix2D& fallback = Matrix2D::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix3<T, S> safeDiv(
+            const Matrix3& mat, S scalar, const Matrix3& fallback = Matrix3::eye()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -653,7 +658,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -668,12 +673,12 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix2D resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Matrix3 resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix2D<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                              const Matrix2D& fallback = Matrix2D::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix3<T, S> tryDiv(S scalar, OperationStatus& status,
+                                                              const Matrix3& fallback = Matrix3::eye()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -683,7 +688,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -699,27 +704,30 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix2D resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Matrix3 resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix2D<T, S> tryDiv(
-            const Matrix2D& mat, S scalar, OperationStatus& status, const Matrix2D& fallback = Matrix2D::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix3<T, S> tryDiv(
+            const Matrix3& mat, S scalar, OperationStatus& status, const Matrix3& fallback = Matrix3::eye()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Mat2x2_Algebra
+         * @addtogroup FGM_Mat3x3_Algebra
          * @{
          */
 
         /**
          * @brief Compute the determinant (scaling factor) of this matrix.
          *        \f$
-         *            \text{det(A)} = A_{00} \cdot A_{11} - A_{01} \cdot A_{10}
+         *            \begin{align*}
+         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
+         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
+         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{11})
+         *            \end{align*}
          *        \f$
          *
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
@@ -733,7 +741,11 @@ namespace fgm
         /**
          * @brief Compute the determinant (scaling factor) of @p matrix.
          *        \f$
-         *            \text{det(A)} = A_{00} \cdot A_{11} - A_{01} \cdot A_{10}
+         *            \begin{align*}
+         *                \text{det(A)} &= A_{00} \cdot (A_{11} \cdot A_{22} - A_{21} \cdot A_{12}) \\
+         *                              &- A_{01} \cdot (A_{10} \cdot A_{22} - A_{20} \cdot A_{12}) \\
+         *                              &+ A_{02} \cdot (A_{10} \cdot A_{21} - A_{20} \cdot A_{12})
+         *            \end{align*}
          *        \f$
          *
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
@@ -742,7 +754,7 @@ namespace fgm
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
          */
-        static constexpr T determinant(const Matrix2D& matrix) noexcept
+        static constexpr T determinant(const Matrix3& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -750,56 +762,62 @@ namespace fgm
          * @brief Transpose this matrix by swapping its rows and columns.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
          *            \end{bmatrix} ^ \top
          *            =
          *            \begin{bmatrix}
-         *                 A_{00} & A_{10} \\
-         *                 A_{01} & A_{11}
+         *                 A_{00} & A_{10} & A_{20} \\
+         *                 A_{01} & A_{11} & A_{21} \\
+         *                 A_{02} & A_{12} & A_{22}
          *            \end{bmatrix}
          *        \f$
          *
-         * @return A new @ref Matrix2D with its elements flipped along the diagonal.
+         * @return A new @ref Matrix3 with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix2D transpose() const noexcept;
+        constexpr Matrix3 transpose() const noexcept;
 
 
         /**
          * @brief Transpose @p matrix by swapping its rows and columns.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
          *            \end{bmatrix} ^ \top
          *            =
          *            \begin{bmatrix}
-         *                 A_{00} & A_{10} \\
-         *                 A_{01} & A_{11}
+         *                 A_{00} & A_{10} & A_{20} \\
+         *                 A_{01} & A_{11} & A_{21} \\
+         *                 A_{02} & A_{12} & A_{22}
          *            \end{bmatrix}
          *        \f$
          *
          * @param matrix The matrix to transpose.
          *
-         * @return A new @ref Matrix2D with its elements flipped along the diagonal.
+         * @return A new @ref Matrix3 with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix2D transpose(const Matrix2D& matrix) noexcept;
+        static constexpr Matrix3 transpose(const Matrix3& matrix) noexcept;
 
 
         /**
          * @brief Compute the inverse of this matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 A_{11} & -A_{01} \\
-         *                 -A_{10} & A_{00}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
          *            \end{bmatrix}
          *        \f$
          *
@@ -807,10 +825,10 @@ namespace fgm
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          * @note Performs assertion for division by zero (singular matrix) in **Debug mode**.
          *
-         * @return A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$.
+         * @return A new @ref Matrix3 such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix2D<Magnitude<T>> inverse() const noexcept
+        constexpr Matrix3<Magnitude<T>> inverse() const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -818,14 +836,16 @@ namespace fgm
          * @brief Compute the inverse of a matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
          *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 A_{11} & -A_{01} \\
-         *                 -A_{10} & A_{00}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
          *            \end{bmatrix}
          *        \f$
          *
@@ -835,10 +855,10 @@ namespace fgm
          *
          * @param[in] matrix The matrix to invert.
          *
-         * @return A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$.
+         * @return A new @ref Matrix3 such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix2D<Magnitude<T>> inverse(const Matrix2D& matrix) noexcept
+        static constexpr Matrix3<Magnitude<T>> inverse(const Matrix3& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -846,16 +866,19 @@ namespace fgm
          * @brief Compute the inverse of this matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                 A_{00} & A_{01} & A_{02} \\
+         *                 A_{10} & A_{11} & A_{12} \\
+         *                 A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
-         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 A_{11} & -A_{01} \\
-         *                 -A_{10} & A_{00}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
          *            \end{bmatrix}
          *        \f$
+         *
          * @note If the determinant is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
          * @note Promotes the result to a floating point result using @ref Magnitude.
@@ -864,26 +887,28 @@ namespace fgm
          *
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Matrix3 such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix2D<Magnitude<T>> safeInverse(const Matrix2D& fallback = Matrix2D::eye()) const noexcept
+        constexpr Matrix3<Magnitude<T>> safeInverse(const Matrix3& fallback = Matrix3::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
         /**
-         * @brief Compute the inverse @p matrix.
+         * @brief Compute the inverse of @p matrix.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                A_{00} & A_{01} & A_{02} \\
+         *                A_{10} & A_{11} & A_{12} \\
+         *                A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
-         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 A_{11} & -A_{01} \\
-         *                 -A_{10} & A_{00}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
          *            \end{bmatrix}
          *        \f$
          *
@@ -896,12 +921,12 @@ namespace fgm
          * @param[in] matrix   The matrix to invert.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Matrix3 such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix2D<Magnitude<T>> safeInverseOf(const Matrix2D& matrix,
-                                                              const Matrix2D& fallback = Matrix2D::eye()) noexcept
+        static constexpr Matrix3<Magnitude<T>> safeInverseOf(const Matrix3& matrix,
+                                                              const Matrix3& fallback = Matrix3::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -909,14 +934,16 @@ namespace fgm
          * @brief Compute the inverse of this matrix and set @p status to the matrix inversion result.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                A_{00} & A_{01} & A_{02} \\
+         *                A_{10} & A_{11} & A_{12} \\
+         *                A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
-         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 A_{11} & -A_{01} \\
-         *                 -A_{10} & A_{00}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
          *            \end{bmatrix}
          *        \f$
          *
@@ -930,12 +957,12 @@ namespace fgm
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Matrix3 such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix2D<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                    const Matrix2D& fallback = Matrix2D::eye()) const noexcept
+        constexpr Matrix3<Magnitude<T>> tryInverse(OperationStatus& status,
+                                                    const Matrix3& fallback = Matrix3::eye()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -943,14 +970,16 @@ namespace fgm
          * @brief Compute the inverse of @p matrix and set @p status to the matrix inversion result.
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{01} \\
-         *                 A_{10} & A_{11}
+         *                A_{00} & A_{01} & A_{02} \\
+         *                A_{10} & A_{11} & A_{12} \\
+         *                A_{20} & A_{21} & A_{22}
          *            \end{bmatrix}^{-1}
          *            =
-         *            \frac{1}{A_{00}A_{11} - A_{01}A_{10}}
+         *            \frac{1}{det(A)}
          *            \begin{bmatrix}
-         *                 A_{11} & -A_{01} \\
-         *                 -A_{10} & A_{00}
+         *                 b  \times c \\
+         *                 c  \times a \\
+         *                 a  \times b
          *            \end{bmatrix}
          *        \f$
          *
@@ -965,12 +994,12 @@ namespace fgm
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix2D such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Matrix3 such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix2D<Magnitude<T>> tryInverseOf(const Matrix2D& matrix, OperationStatus& status,
-                                                             const Matrix2D& fallback = Matrix2D::eye()) noexcept
+        static constexpr Matrix3<Magnitude<T>> tryInverseOf(const Matrix3& matrix, OperationStatus& status,
+                                                             const Matrix3& fallback = Matrix3::eye()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -990,15 +1019,14 @@ namespace fgm
          *
          * @return The sum of entries along the main diagonal of the given matrix.
          */
-        [[nodiscard]] static constexpr T trace(const Matrix2D& matrix) noexcept
+        [[nodiscard]] static constexpr T trace(const Matrix3& matrix) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Mat2x2_Utils
+         * @addtogroup FGM_Mat3x3_Utils
          * @{
          */
 
@@ -1021,7 +1049,7 @@ namespace fgm
          *
          * @return True if at least one element is positive or negative infinity.
          */
-        [[nodiscard]] static constexpr bool hasInf(const Matrix2D& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasInf(const Matrix3& matrix) noexcept;
 
 
         /**
@@ -1043,14 +1071,13 @@ namespace fgm
          *
          * @return True if at least one element is NaN.
          */
-        [[nodiscard]] static constexpr bool hasNaN(const Matrix2D& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasNaN(const Matrix3& matrix) noexcept;
 
         /** @} */
 
 
-
         /**
-         * @addtogroup FGM_Mat2x2_Log
+         * @addtogroup FGM_Mat3x3_Log
          * @{
          */
 
@@ -1059,8 +1086,9 @@ namespace fgm
          *        Format the matrix as
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{10} \\
-         *                 A_{01} & A_{11}
+         *                 A_{00} & A_{10} & A_{20} \\
+         *                 A_{01} & A_{11} & A_{21} \\
+         *                 A_{02} & A_{12} & A_{22}
          *            \end{bmatrix}
          *        \f$ string representation for debugging or logging.
          *
@@ -1069,7 +1097,7 @@ namespace fgm
          *
          * @return A reference to the output stream @p os.
          */
-        friend std::ostream& operator<<(std::ostream& os, const Matrix2D& matrix)
+        friend std::ostream& operator<<(std::ostream& os, const Matrix3& matrix)
         {
             const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
@@ -1078,8 +1106,9 @@ namespace fgm
                 ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
                 : Config::LOG_PRECISION;
             os << std::setprecision(precision) << std::fixed;
-            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << "|\n";
-            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << "|\n";
+            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << "|\n";
+            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << "|\n";
+            os << "|" << matrix._data[0][2] << " " << matrix._data[1][2] << " " << matrix._data[2][2] << "|\n";
 
             os.precision(oldPrecision);
             os.flags(oldFlags);
@@ -1090,93 +1119,13 @@ namespace fgm
         /** @} */
 
 
-
-        /**
-         * @addtogroup FGM_Mat2x2_Transforms
-         * @{
-         */
-
-        /**
-         * @brief Construct a 2D rotation matrix for a given angle.
-         *
-         * @details The layout of the returned matrix adapts to the library's active coordinate system:
-         *          - **Right-Handed (Default):**
-         *            \f$
-         *                \begin{bmatrix}
-         *                    cos(\theta) & -sin(\theta) \\
-         *                    sin(\theta) & cos(\theta)
-         *                \end{bmatrix}
-         *            \f$
-         *          - **Left-Handed (FGM_LEFT_HANDED):**
-         *            \f$
-         *                \begin{bmatrix}
-         *                    cos(\theta) & sin(\theta) \\
-         *                    -sin(\theta) & cos(\theta)
-         *                \end{bmatrix}
-         *            \f$
-         *
-         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
-         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
-         *       for integral types.
-         *
-         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
-         *
-         * @param[in] angle The rotation angle in radians.
-         *
-         * @return A new @ref Matrix2D representing the linear rotation.
-         */
-        template <std::floating_point U>
-        [[nodiscard]] static constexpr Matrix2D makeRotation(U angle) noexcept
-            requires SignedStrictArithmetic<T>;
-
-
-        /**
-         * @brief Construct a uniform scale 2D matrix.
-         *
-         * @param[in] scale The scale factor.
-         *
-         * @return A new @ref Matrix2D representing the uniform scale.
-         */
-        [[nodiscard]] static constexpr Matrix2D makeScale(T scale) noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @brief Construct a non-uniform scale 2D matrix.
-         *
-         * @param[in] scaleX The scale factor in the x-direction.
-         * @param[in] scaleY The scale factor in the y-direction.
-         *
-         * @return A new @ref Matrix2D representing the uniform scale.
-         */
-        [[nodiscard]] static constexpr Matrix2D makeScale(T scaleX, T scaleY) noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @brief Construct a reflection 2D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
-         *
-         * @note To construction a reflection matrix around origin, set all axis reflection to true.
-         *
-         * @param[in] reflectX A flag to whether reflect in the x-direction.
-         * @param[in] reflectY A flag to whether reflect in the y-direction.
-         *
-         * @return A new @ref Matrix2D representing the axis-aligned reflection.
-         */
-        [[nodiscard]] static constexpr Matrix2D makeReflection(bool reflectX, bool reflectY) noexcept
-            requires StrictArithmetic<T>;
-
-        /** @} */
-
-
     private:
-        std::array<Vector2D<T>, columns> _data;
+        std::array<Vector3D<T>, columns> _data;
     };
 
 
-
     /**
-     * @addtogroup FGM_Mat2x2_Alias
+     * @addtogroup FGM_Ma3x3_Alias
      * @{
      */
 
@@ -1186,14 +1135,14 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using Mat2B   = Matrix2D<int8_t>;   ///< Signed Byte (8-bit) matrix
-    using Mat2UB  = Matrix2D<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
-    using Mat2I   = Matrix2D<int32_t>;  ///< Signed Int (32-bit) matrix
-    using Mat2U   = Matrix2D<uint32_t>; ///< Unsigned Int (32-bit) matrix
-    using Mat2F   = Matrix2D<float>;    ///< Single Precision Floating Point (32-bit) matrix
-    using Mat2LL  = Matrix2D<int64_t>;  ///< Signed Long Long (64-bit) matrix
-    using Mat2D   = Matrix2D<double>;   ///< Double Precision Floating Point (64-bit) matrix
-    using Mat2ULL = Matrix2D<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
+    using Mat3B   = Matrix3<int8_t>;   ///< Signed Byte (8-bit) matrix
+    using Mat3UB  = Matrix3<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
+    using Mat3I   = Matrix3<int32_t>;  ///< Signed Int (32-bit) matrix
+    using Mat3U   = Matrix3<uint32_t>; ///< Unsigned Int (32-bit) matrix
+    using Mat3F   = Matrix3<float>;    ///< Single Precision Floating Point (32-bit) matrix
+    using Mat3LL  = Matrix3<int64_t>;  ///< Signed Long Long (64-bit) matrix
+    using Mat3D   = Matrix3<double>;   ///< Double Precision Floating Point (64-bit) matrix
+    using Mat3ULL = Matrix3<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
 
     /** @} */
 
@@ -1206,14 +1155,14 @@ namespace fgm
      **************************************/
 
     /**
-     * @addtogroup FGM_Mat2x2_Arithmetic
+     * @addtogroup FGM_Mat3x3_Arithmetic
      * @{
      */
 
     /**
      * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
      *
-     * @note Promotes the result to the wider type using @ref PromotedMatrix2D<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedMatrix3<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -1221,43 +1170,41 @@ namespace fgm
      * @param[in] scalar The value to scale by.
      * @param[in] matrix The matrix to scale.
      *
-     * @return A new @ref Matrix2D scaled by @p scalar.
+     * @return A new @ref Matrix3 scaled by @p scalar.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr PromotedMatrix2D<T, S> operator*(S scalar, const Matrix2D<T>& matrix) noexcept;
+    [[nodiscard]] constexpr PromotedMatrix3<T, S> operator*(S scalar, const Matrix3<T>& matrix) noexcept;
 
 
     /**
      * @brief Transform the @p Vec **row vector** by @p matrix.
      *        \f$
      *            \begin{bmatrix}
-     *                x & y
+     *                x & y & z
      *            \end{bmatrix}
      *            \cdot
      *            \begin{bmatrix}
-     *                A_{00} & A_{01} \\
-     *                A_{10} & A_{11}
+     *                A_{00} & A_{01} & A_{02} \\
+     *                A_{10} & A_{11} & A_{12} \\
+     *                A_{20} & A_{21} & A_{22}
      *            \end{bmatrix}
      *            =
      *            \begin{bmatrix}
-     *                x' & y'
+     *                x' & y' & z'
      *            \end{bmatrix}
      *        \f$
      *
-     * @note Promotes the result to the wider type using @ref PromotedVector2D<T, U>.
-     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-     *
+     * @note Promotes the result to the wider type using @ref PromotedVector3D<T, S>.
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
-     * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
+     * @tparam S Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
      *
      * @param[in] vec    The row vector to transform.
      * @param[in] matrix The transformation matrix.
      *
      * @return The passed-in @p Vec with the transformations applied.
      */
-    template <StrictArithmetic T, StrictArithmetic U>
-        requires StrictSignedness<T, U>
-    static constexpr PromotedVector2D<T, U> operator*(const Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept;
+    template <StrictArithmetic T, StrictArithmetic S>
+    static constexpr PromotedVector3D<T, S> operator*(const Vector3D<T>& vec, const Matrix3<S>& matrix) noexcept;
 
 
     /**
@@ -1265,16 +1212,17 @@ namespace fgm
      *        Perform the linear transformation:
      *        \f$
      *            \begin{bmatrix}
-     *                x & y
+     *                x & y & z
      *            \end{bmatrix}
      *            \cdot
      *            \begin{bmatrix}
-     *                A_{00} & A_{01} \\
-     *                A_{10} & A_{11}
+     *                A_{00} & A_{01} & A_{02} \\
+     *                A_{10} & A_{11} & A_{12} \\
+     *                A_{20} & A_{21} & A_{22}
      *            \end{bmatrix}
      *            =
      *            \begin{bmatrix}
-     *                x' & y'
+     *                x' & y' & z'
      *            \end{bmatrix}
      *        \f$
      *
@@ -1283,21 +1231,19 @@ namespace fgm
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
      * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
      *
-     * @param[in] vec    The row vector to transform.
+     * @param[in] vec The row vector to transform.
      * @param[in] matrix The transformation matrix.
      *
      * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
-        requires StrictSignedness<T, U>
-    static constexpr Vector2D<T>& operator*=(Vector2D<T>& vec, const Matrix2D<U>& matrix) noexcept;
+    static constexpr Vector3D<T>& operator*=(Vector3D<T>& vec, const Matrix3<U>& matrix) noexcept;
 
     /** @} */
 
 
-
     /**
-     * @addtogroup T_FGM_Mat2x2_Constant
+     * @addtogroup T_FGM_Mat3x3_Constant
      * @{
      */
 
@@ -1307,35 +1253,33 @@ namespace fgm
      *                                    *
      **************************************/
 
-    namespace mat2d
+    namespace mat3d
     {
         /**
-         * @brief A 2D matrix with ones on the main diagonal and zeros elsewhere.
+         * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
          *
          * @note Only available for @ref StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Matrix2D<T> eye(T(1), T(0), T(0), T(1));
+        inline constexpr Matrix3<T> eye(T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1));
 
 
         /**
-         * @brief A 2D matrix with all zero elements.
+         * @brief A 3D matrix with all zero elements.
          *
          * @note Only available for @ref StrictArithmetic types.
          */
         template <StrictArithmetic T>
-        inline constexpr Matrix2D<T> zero(T(0), T(0), T(0), T(0));
-    } // namespace mat2d
+        inline constexpr Matrix3<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0));
+    } // namespace mat3d
 
 
-    /** @brief Template deduction guide for Matrix2D. */
+    /** @brief Template deduction guide for Matrix3. */
     template <Arithmetic T, Arithmetic... Args>
-    Matrix2D(T, Args...) -> Matrix2D<T>;
+    Matrix3(T, Args...) -> Matrix3<T>;
 
     /** @} */
-
-
 } // namespace fgm
 
 
-#include "Matrix2D.tpp"
+#include "Matrix3.tpp"

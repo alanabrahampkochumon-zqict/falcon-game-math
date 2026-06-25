@@ -24,7 +24,7 @@ template <typename T>
 class Matrix3DDeterminant: public ::testing::Test
 {
 protected:
-    fgm::Matrix3D<T> _matrix;
+    fgm::Matrix3<T> _matrix;
     T _expectedDeterminant;
 
     void SetUp() override
@@ -38,21 +38,21 @@ TYPED_TEST_SUITE(Matrix3DDeterminant, SupportedSignedArithmeticTypes);
 
 
 /** @brief Test fixture for calculating @ref fgm::Matrix3D determinant with singular matrices */
-class SingularMatrix3DDeterminant: public ::testing::TestWithParam<fgm::Matrix3D<float>>
+class SingularMatrix3DDeterminant: public ::testing::TestWithParam<fgm::Matrix3<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(
     Matrix3DDeterminantTestSuite, SingularMatrix3DDeterminant,
-    ::testing::Values(fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ 1.0f, 2.0f, 3.0f },
+    ::testing::Values(fgm::Matrix3{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ 1.0f, 2.0f, 3.0f },
                                      fgm::Vector3D{ 7.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 1.0f, 5.0f }, fgm::Vector3D{ 2.0f, 2.0f, 3.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 1.0f, 1.0f, 5.0f }, fgm::Vector3D{ 2.0f, 2.0f, 3.0f },
                                      fgm::Vector3D{ 3.0f, 3.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 0.0f, 0.0f, 0.0f }, fgm::Vector3D{ 1.0f, 2.0f, 3.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 0.0f, 0.0f, 0.0f }, fgm::Vector3D{ 1.0f, 2.0f, 3.0f },
                                      fgm::Vector3D{ 1.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 0.0f, 5.0f, 1.0f }, fgm::Vector3D{ 0.0f, 2.0f, 3.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 0.0f, 5.0f, 1.0f }, fgm::Vector3D{ 0.0f, 2.0f, 3.0f },
                                      fgm::Vector3D{ 0.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ 2.0f, 4.0f, 6.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 1.0f, 2.0f, 3.0f }, fgm::Vector3D{ 2.0f, 4.0f, 6.0f },
                                      fgm::Vector3D{ 7.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3D{ fgm::Vector3D{ 1.0f, 2.0f, 1.0f }, fgm::Vector3D{ 2.0f, 4.0f, 3.0f },
+                      fgm::Matrix3{ fgm::Vector3D{ 1.0f, 2.0f, 1.0f }, fgm::Vector3D{ 2.0f, 4.0f, 3.0f },
                                      fgm::Vector3D{ 3.0f, 6.0f, 9.0f } }));
 
 
@@ -71,13 +71,13 @@ INSTANTIATE_TEST_SUITE_P(
 /** @brief Verify that matrix determinant operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix3D MAT{ fgm::Vector3D{ 1, 2, 5 }, fgm::Vector3D{ 5, 1, 7 }, fgm::Vector3D{ 8, 9, 10 } };
+    constexpr fgm::Matrix3 MAT{ fgm::Vector3D{ 1, 2, 5 }, fgm::Vector3D{ 5, 1, 7 }, fgm::Vector3D{ 8, 9, 10 } };
 
     // Verify determinant (member function)
     static_assert(MAT.determinant() == 144);
 
     // Verify determinant (static function)
-    static_assert(fgm::Matrix3D<int>::determinant(MAT) == 144);
+    static_assert(fgm::Matrix3<int>::determinant(MAT) == 144);
 
 } // namespace
 
@@ -108,7 +108,7 @@ TEST_P(SingularMatrix3DDeterminant, SingularMatrixReturnsZero)
  *        @ref fgm::Matrix3D::determinant returns a non-zero value.
  */
 TYPED_TEST(Matrix3DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
-{ EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix3D<TypeParam>::determinant(this->_matrix)); }
+{ EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix3<TypeParam>::determinant(this->_matrix)); }
 
 
 /**
@@ -118,7 +118,7 @@ TYPED_TEST(Matrix3DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
 TEST_P(SingularMatrix3DDeterminant, StaticWrapper_SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();
-    EXPECT_MAG_EQ(0.0f, fgm::Matrix3D<float>::determinant(matrix));
+    EXPECT_MAG_EQ(0.0f, fgm::Matrix3<float>::determinant(matrix));
 }
 
 /** @} */

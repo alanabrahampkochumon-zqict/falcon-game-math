@@ -55,22 +55,22 @@ namespace
 
 
     // Verify identity matrix (functional variant)
-    static_assert(fgm::Matrix4D<int>::eye()(0, 0) == 1);
-    static_assert(fgm::Matrix4D<int>::eye()(0, 1) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(0, 2) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(0, 3) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(1, 0) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(1, 1) == 1);
-    static_assert(fgm::Matrix4D<int>::eye()(1, 2) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(1, 3) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(2, 0) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(2, 1) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(2, 2) == 1);
-    static_assert(fgm::Matrix4D<int>::eye()(2, 3) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(3, 0) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(3, 1) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(3, 2) == 0);
-    static_assert(fgm::Matrix4D<int>::eye()(3, 3) == 1);
+    static_assert(fgm::Matrix4<int>::eye()(0, 0) == 1);
+    static_assert(fgm::Matrix4<int>::eye()(0, 1) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(0, 2) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(0, 3) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(1, 0) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(1, 1) == 1);
+    static_assert(fgm::Matrix4<int>::eye()(1, 2) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(1, 3) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(2, 0) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(2, 1) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(2, 2) == 1);
+    static_assert(fgm::Matrix4<int>::eye()(2, 3) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(3, 0) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(3, 1) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(3, 2) == 0);
+    static_assert(fgm::Matrix4<int>::eye()(3, 3) == 1);
 
     // Verify zero matrix
     static_assert(fgm::mat4d::zero<int>(0, 0) == 0);
@@ -92,22 +92,22 @@ namespace
 
 
     // Verify zero matrix (functional variant)
-    static_assert(fgm::Matrix4D<int>::zero()(0, 0) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(0, 1) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(0, 2) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(0, 3) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(1, 0) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(1, 1) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(1, 2) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(1, 3) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(2, 0) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(2, 1) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(2, 2) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(2, 3) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(3, 0) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(3, 1) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(3, 2) == 0);
-    static_assert(fgm::Matrix4D<int>::zero()(3, 3) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(0, 0) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(0, 1) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(0, 2) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(0, 3) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(1, 0) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(1, 1) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(1, 2) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(1, 3) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(2, 0) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(2, 1) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(2, 2) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(2, 3) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(3, 0) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(3, 1) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(3, 2) == 0);
+    static_assert(fgm::Matrix4<int>::zero()(3, 3) == 0);
 
 } // namespace
 
@@ -125,7 +125,7 @@ TYPED_TEST(Matrix4DConstants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(f
 
 /** @brief Verify that @ref fgm::Matrix4D::eye static factory returns an identity matrix. */
 TYPED_TEST(Matrix4DConstants, StaticWrapper_Eye_ReturnsIdentityMatrix)
-{ EXPECT_MAT_IDENTITY(fgm::Matrix4D<TypeParam>::eye()); }
+{ EXPECT_MAT_IDENTITY(fgm::Matrix4<TypeParam>::eye()); }
 
 
 /** @brief Verify that @ref fgm::mat4d::zero returns a zero matrix. */
@@ -134,6 +134,6 @@ TYPED_TEST(Matrix4DConstants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::mat
 
 /** @brief Verify that @ref fgm::Matrix4D::zero static factory returns a zero matrix. */
 TYPED_TEST(Matrix4DConstants, StaticWrapper_Zero_ReturnsZeroMatrix)
-{ EXPECT_MAT_ZERO(fgm::Matrix4D<TypeParam>::zero()); }
+{ EXPECT_MAT_ZERO(fgm::Matrix4<TypeParam>::zero()); }
 
 /** @} */

@@ -21,9 +21,9 @@ template <typename T>
 class Matrix2DAddition: public ::testing::Test
 {
 protected:
-    fgm::Matrix2D<T> _matA;
-    fgm::Matrix2D<T> _matB;
-    fgm::Matrix2D<T> _expectedSum;
+    fgm::Matrix2<T> _matA;
+    fgm::Matrix2<T> _matB;
+    fgm::Matrix2<T> _expectedSum;
 
     void SetUp() override
     {
@@ -51,9 +51,9 @@ TYPED_TEST_SUITE(Matrix2DAddition, SupportedArithmeticTypes);
 /** @brief Verify that matrix addition operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix2D MAT1(1, 2, 3, 4);
-    constexpr fgm::Matrix2D MAT2(5, 6, 7, 8);
-    constexpr fgm::Matrix2D BINARY_SUM = MAT1 + MAT2;
+    constexpr fgm::Matrix2 MAT1(1, 2, 3, 4);
+    constexpr fgm::Matrix2 MAT2(5, 6, 7, 8);
+    constexpr fgm::Matrix2 BINARY_SUM = MAT1 + MAT2;
 
     static_assert(BINARY_SUM(0, 0) == 6);
     static_assert(BINARY_SUM(0, 1) == 8);
@@ -75,7 +75,7 @@ namespace
  */
 TYPED_TEST(Matrix2DAddition, PlusOperator_ReturnsMatrixSum)
 {
-    const fgm::Matrix2D sum = this->_matA + this->_matB;
+    const fgm::Matrix2 sum = this->_matA + this->_matB;
 
     EXPECT_MAT_EQ(this->_expectedSum, sum);
 }
@@ -87,9 +87,9 @@ TYPED_TEST(Matrix2DAddition, PlusOperator_ReturnsMatrixSum)
  */
 TEST(Matrix2DAddition, MixedTypeAdditionPromotesType)
 {
-    const fgm::Matrix2D mat1{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ -3.0f, -4.0f } };
-    const fgm::Matrix2D mat2{ fgm::Vector2D{ 10.0, 2.0 }, fgm::Vector2D{ 3.0, 8.0 } };
-    [[maybe_unused]] const fgm::Matrix2D sum = mat1 + mat2;
+    const fgm::Matrix2 mat1{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ -3.0f, -4.0f } };
+    const fgm::Matrix2 mat2{ fgm::Vector2D{ 10.0, 2.0 }, fgm::Vector2D{ 3.0, 8.0 } };
+    [[maybe_unused]] const fgm::Matrix2 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
 }
@@ -113,8 +113,8 @@ TYPED_TEST(Matrix2DAddition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  */
 TEST(Matrix2DAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    fgm::Matrix2D mat1{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ -3.0f, -4.0f } };
-    const fgm::Matrix2D mat2{ fgm::Vector2D{ 10.0, 2.0 }, fgm::Vector2D{ 3.0, 8.0 } };
+    fgm::Matrix2 mat1{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ -3.0f, -4.0f } };
+    const fgm::Matrix2 mat2{ fgm::Vector2D{ 10.0, 2.0 }, fgm::Vector2D{ 3.0, 8.0 } };
 
     mat1 += mat2;
 

@@ -27,14 +27,14 @@
 /** @brief Verify that the matrix can be type promoted and demoted at compile time. */
 namespace
 {
-    constexpr fgm::Matrix3D MAT(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
+    constexpr fgm::Matrix3 MAT(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
     // Verify that the matrix can be type promoted at compile time.
-    constexpr fgm::Matrix3D<double> MAT_D(MAT);
+    constexpr fgm::Matrix3<double> MAT_D(MAT);
     static_assert(std::is_same_v<decltype(MAT_D)::value_type, double>);
 
     // Verify that the matrix can be type demoted at compile time.
-    constexpr fgm::Matrix3D<int> MATI(MAT);
+    constexpr fgm::Matrix3<int> MATI(MAT);
     static_assert(std::is_same_v<decltype(MATI)::value_type, int>);
 } // namespace
 
@@ -51,9 +51,9 @@ namespace
  */
 TEST(Matrix3DConversionConstructor, PromotesType)
 {
-    const fgm::Matrix3D mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
+    const fgm::Matrix3 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
-    [[maybe_unused]] const fgm::Matrix3D<double> mat2(mat1);
+    [[maybe_unused]] const fgm::Matrix3<double> mat2(mat1);
 
     static_assert(std::is_same_v<decltype(mat2)::value_type, double>);
 }
@@ -63,10 +63,10 @@ TEST(Matrix3DConversionConstructor, PromotesType)
 TEST(Matrix3DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float matrix
-    const fgm::Matrix3D mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
+    const fgm::Matrix3 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
     // When converted to a double matrix
-    fgm::Matrix3D<double> mat2(mat1);
+    fgm::Matrix3<double> mat2(mat1);
     // And one of its value mutated
     mat2(0, 0) = 5;
 
@@ -83,9 +83,9 @@ TEST(Matrix3DConversionConstructor, ReturnsNewInstance)
  */
 TEST(Matrix3DConversionConstructor, DemotesType)
 {
-    const fgm::Matrix3D mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
+    const fgm::Matrix3 mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
 
-    [[maybe_unused]] const fgm::Matrix3D<float> mat2(mat1);
+    [[maybe_unused]] const fgm::Matrix3<float> mat2(mat1);
 
     static_assert(std::is_same_v<decltype(mat2)::value_type, float>);
 }

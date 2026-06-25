@@ -17,10 +17,10 @@ template <typename T>
 class Matrix4DScalarMultiplication: public testing::Test
 {
 protected:
-    fgm::Matrix4D<T> _mat;
+    fgm::Matrix4<T> _mat;
     T _scalar;
-    fgm::Matrix4D<T> _expectedFloatingMat;
-    fgm::Matrix4D<T> _expectedIntegralMat;
+    fgm::Matrix4<T> _expectedFloatingMat;
+    fgm::Matrix4<T> _expectedIntegralMat;
 
 
 
@@ -53,7 +53,7 @@ template <typename T>
 class Matrix4DVectorMultiplication: public testing::Test
 {
 protected:
-    fgm::Matrix4D<T> _mat;
+    fgm::Matrix4<T> _mat;
     fgm::Vector4D<T> _vec;
     fgm::Vector4D<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
         _expectedIntegralRowVector;
@@ -82,7 +82,7 @@ template <typename T>
 class Matrix4DVectorFractionalMultiplication: public testing::Test
 {
 protected:
-    fgm::Matrix4D<T> _mat;
+    fgm::Matrix4<T> _mat;
     fgm::Vector4D<T> _vec, _expectedColVector, _expectedRowVector;
 
     void SetUp() override
@@ -110,7 +110,7 @@ template <typename T>
 class Matrix4DMultiplication: public testing::Test
 {
 protected:
-    fgm::Matrix4D<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
+    fgm::Matrix4<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
 
     void SetUp() override
     {
@@ -148,7 +148,7 @@ template <typename T>
 class Matrix4DFractionalMultiplication: public testing::Test
 {
 protected:
-    fgm::Matrix4D<T> _matA, _matB, _expectedMat;
+    fgm::Matrix4<T> _matA, _matB, _expectedMat;
 
     void SetUp() override
     {
@@ -190,12 +190,12 @@ TYPED_TEST_SUITE(Matrix4DFractionalMultiplication, SupportedFloatingPointTypes);
 namespace
 {
     // TODO: Add static tests
-    constexpr fgm::Matrix4D mat1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-    constexpr fgm::Matrix4D mat2(5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21);
+    constexpr fgm::Matrix4 mat1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+    constexpr fgm::Matrix4 mat2(5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21);
     constexpr fgm::Vector4D vec4D(1, 2, 3, 4);
 
     // Verify matrix * scalar multiplication
-    constexpr fgm::Matrix4D binaryProduct1 = mat1 * 2;
+    constexpr fgm::Matrix4 binaryProduct1 = mat1 * 2;
     static_assert(binaryProduct1(0, 0) == 2);
     static_assert(binaryProduct1(0, 1) == 4);
     static_assert(binaryProduct1(0, 2) == 6);
@@ -215,7 +215,7 @@ namespace
 
 
     // Verify scalar * matrix multiplication
-    constexpr fgm::Matrix4D binaryProduct2 = 2 * mat1;
+    constexpr fgm::Matrix4 binaryProduct2 = 2 * mat1;
     static_assert(binaryProduct2(0, 0) == 2);
     static_assert(binaryProduct2(0, 1) == 4);
     static_assert(binaryProduct2(0, 2) == 6);
@@ -249,7 +249,7 @@ namespace
     static_assert(rowVectorProduct[3] == 120);
 
     // Verify matrix * matrix multiplication
-    constexpr fgm::Matrix4D matProduct = mat1 * mat2;
+    constexpr fgm::Matrix4 matProduct = mat1 * mat2;
     static_assert(matProduct(0, 0) == 139);
     static_assert(matProduct(0, 1) == 149);
     static_assert(matProduct(0, 2) == 159);
@@ -279,10 +279,10 @@ namespace
 /** @brief Verify that scalar multiplication by zero returns a zero matrix. */
 TEST(Matrix4DScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 {
-    const fgm::Matrix4D mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
+    const fgm::Matrix4 mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
                              11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
 
-    const fgm::Matrix4D product = mat * 0;
+    const fgm::Matrix4 product = mat * 0;
 
     EXPECT_MAT_ZERO(product);
 }
@@ -291,10 +291,10 @@ TEST(Matrix4DScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 /** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix4DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 {
-    const fgm::Matrix4D mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
+    const fgm::Matrix4 mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
                              11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
 
-    const fgm::Matrix4D product = mat * 1;
+    const fgm::Matrix4 product = mat * 1;
 
     EXPECT_MAT_EQ(mat, product);
 }
@@ -303,13 +303,13 @@ TEST(Matrix4DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 /** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix4DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
-    const fgm::Matrix4D mat      = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
+    const fgm::Matrix4 mat      = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
                                      -9.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
-    const fgm::Matrix4D expected = { -2.0f, 4.0f,   -6.0f,  8.0f,   -10.0f, -12.0f, -14.0f, -16.0f,
+    const fgm::Matrix4 expected = { -2.0f, 4.0f,   -6.0f,  8.0f,   -10.0f, -12.0f, -14.0f, -16.0f,
                                      18.0f, -24.0f, -26.0f, -28.0f, -30.0f, -32.0f, -34.0f, -36.0f };
     const float scalar           = -2.0f;
 
-    const fgm::Matrix4D product = mat * scalar;
+    const fgm::Matrix4 product = mat * scalar;
 
     EXPECT_MAT_EQ(expected, product);
 }
@@ -321,7 +321,7 @@ TEST(Matrix4DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
  */
 TYPED_TEST(Matrix4DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
 {
-    const fgm::Matrix4D product = this->_mat * this->_scalar;
+    const fgm::Matrix4 product = this->_mat * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -340,7 +340,7 @@ TYPED_TEST(Matrix4DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
  */
 TYPED_TEST(Matrix4DScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 {
-    const fgm::Matrix4D product = this->_scalar * this->_mat;
+    const fgm::Matrix4 product = this->_scalar * this->_mat;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -380,7 +380,7 @@ TYPED_TEST(Matrix4DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
 {
     const double scalar = 2.123456789123456;
 
-    [[maybe_unused]] const fgm::Matrix4D product = this->_mat * scalar;
+    [[maybe_unused]] const fgm::Matrix4 product = this->_mat * scalar;
 
     static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
 }
@@ -392,7 +392,7 @@ TYPED_TEST(Matrix4DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
  */
 TEST(Matrix4DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
-    fgm::Matrix4D mat   = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
+    fgm::Matrix4 mat   = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
                             -9.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
     const double scalar = 5.0;
     mat *= scalar;
@@ -407,9 +407,9 @@ TEST(Matrix4DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
  */
 TEST(Matrix4DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    fgm::Matrix4D mat   = { 1, -2, 3, -4, 5, 6, 7, 8, -9, 10, 12, 13, 14, 16, 18, 20 };
+    fgm::Matrix4 mat   = { 1, -2, 3, -4, 5, 6, 7, 8, -9, 10, 12, 13, 14, 16, 18, 20 };
     const double scalar = 2.5;
-    const fgm::Matrix4D expected{ 2, -5, 7, -10, 12, 15, 17, 20, -22, 25, 30, 32, 35, 40, 45, 50 };
+    const fgm::Matrix4 expected{ 2, -5, 7, -10, 12, 15, 17, 20, -22, 25, 30, 32, 35, 40, 45, 50 };
 
     mat *= scalar;
 
@@ -459,7 +459,7 @@ TYPED_TEST(Matrix4DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
  */
 TEST(Matrix4DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
-    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
+    const fgm::Matrix4<float> iMatrix = fgm::mat4d::eye<float>;
     const fgm::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
 
     const fgm::Vec4F transformedVector = iMatrix * vec;
@@ -474,7 +474,7 @@ TEST(Matrix4DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
  */
 TEST(Matrix4DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
-    const fgm::Matrix4D mat{ 1.0, 2.0, 3.0, 4.0 };
+    const fgm::Matrix4 mat{ 1.0, 2.0, 3.0, 4.0 };
     const fgm::Vec4I vec{ 2, 1, 3, 4 };
 
     [[maybe_unused]] const auto transformedVector = mat * vec;
@@ -517,7 +517,7 @@ TYPED_TEST(Matrix4DVectorFractionalMultiplication, VectorTimesMatrixReturnsATran
  */
 TEST(Matrix4DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
+    const fgm::Matrix4<float> iMatrix = fgm::mat4d::eye<float>;
     const fgm::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
 
     const fgm::Vec4F transformedVector = vec * iMatrix;
@@ -533,7 +533,7 @@ TEST(Matrix4DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVecto
  */
 TEST(Matrix4DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationPromotesType)
 {
-    const fgm::Matrix4D mat{ 1.0, 2.0, 3.0, 4.0 };
+    const fgm::Matrix4 mat{ 1.0, 2.0, 3.0, 4.0 };
     const fgm::Vec4I vec{ 2, 1, 3, 4 };
 
     [[maybe_unused]] const auto transformedVector = vec * mat;
@@ -566,7 +566,7 @@ TYPED_TEST(Matrix4DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
  */
 TEST(Matrix4DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
+    const fgm::Matrix4<float> iMatrix = fgm::mat4d::eye<float>;
     fgm::Vec4F vec{ 2.0f, 1.0f, 3.0f, 12.0f };
 
     vec *= iMatrix;
@@ -581,7 +581,7 @@ TEST(Matrix4DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
  */
 TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix4D<double> iMatrix = fgm::mat4d::eye<double>;
+    const fgm::Matrix4<double> iMatrix = fgm::mat4d::eye<double>;
     [[maybe_unused]] fgm::Vec4I vec{ 2, 1, 5, 4 };
 
     (void) (vec *= iMatrix);
@@ -595,7 +595,7 @@ TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNo
  */
 TEST(Matrix4DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    const fgm::Matrix4D mat{
+    const fgm::Matrix4 mat{
         2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5
     };
     fgm::Vector4D vec{ 10, 20, 30, 40 };
@@ -643,10 +643,10 @@ TYPED_TEST(Matrix4DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithP
  */
 TEST(Matrix4DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
-    const fgm::Matrix4D mat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    const fgm::Matrix4<float> iMatrix = fgm::mat4d::eye<float>;
+    const fgm::Matrix4 mat{ 1.0f, 2.0f, 3.0f, 4.0f };
 
-    const fgm::Matrix4D matrixProduct = iMatrix * mat;
+    const fgm::Matrix4 matrixProduct = iMatrix * mat;
 
     EXPECT_MAT_EQ(mat, matrixProduct);
 }
@@ -658,8 +658,8 @@ TEST(Matrix4DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
  */
 TEST(Matrix4DMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
-    const fgm::Matrix4D matA{ 1.0, 2.0, 3.0, 4.0 };
-    const fgm::Matrix4D matB{ 2, 1, 3, 4 };
+    const fgm::Matrix4 matA{ 1.0, 2.0, 3.0, 4.0 };
+    const fgm::Matrix4 matB{ 2, 1, 3, 4 };
 
     [[maybe_unused]] const auto transformedVector = matA * matB;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -688,8 +688,8 @@ TYPED_TEST(Matrix4DMultiplication, CompoundMultiplicationOperationPerformInPlace
  */
 TEST(Matrix4DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix4D<float> iMatrix = fgm::mat4d::eye<float>;
-    fgm::Matrix4D mat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    const fgm::Matrix4<float> iMatrix = fgm::mat4d::eye<float>;
+    fgm::Matrix4 mat{ 1.0f, 2.0f, 3.0f, 4.0f };
 
     mat *= iMatrix;
     EXPECT_MAT_CONTAINS(
@@ -704,8 +704,8 @@ TEST(Matrix4DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
  */
 TEST(Matrix4DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix4D<double> iMatrix = fgm::mat4d::eye<double>;
-    fgm::Matrix4D mat{ 1, 2, 3, 4 };
+    const fgm::Matrix4<double> iMatrix = fgm::mat4d::eye<double>;
+    fgm::Matrix4 mat{ 1, 2, 3, 4 };
 
     mat *= iMatrix;
     static_assert(std::is_same_v<decltype(mat)::value_type, int>);
@@ -718,9 +718,9 @@ TEST(Matrix4DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromo
  */
 TEST(Matrix4DMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    fgm::Matrix4D matA{ 2.5, 3.5, 0.5, 1.5, 2.5, -12.5, 5.45, 23.25, 85.5, 12.5, 0.5, 1.75, 15.5, 13.5, 14.5, 16.5 };
-    const fgm::Matrix4D matB{ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80 };
-    const fgm::Matrix4D expectedMatrix{
+    fgm::Matrix4 matA{ 2.5, 3.5, 0.5, 1.5, 2.5, -12.5, 5.45, 23.25, 85.5, 12.5, 0.5, 1.75, 15.5, 13.5, 14.5, 16.5 };
+    const fgm::Matrix4 matB{ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80 };
+    const fgm::Matrix4 expectedMatrix{
         220, 260, 300, 340, 1456, 1550, 1643, 1737, 876, 1377, 1878, 2380, 2140, 2440, 2740, 3040,
     };
 

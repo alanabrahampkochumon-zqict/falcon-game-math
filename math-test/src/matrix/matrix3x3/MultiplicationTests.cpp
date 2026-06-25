@@ -16,10 +16,10 @@ template <typename T>
 class Matrix3DScalarMultiplication: public ::testing::Test
 {
 protected:
-    fgm::Matrix3D<T> _mat;
+    fgm::Matrix3<T> _mat;
     T _scalar;
-    fgm::Matrix3D<T> _expectedFloatingMat;
-    fgm::Matrix3D<T> _expectedIntegralMat;
+    fgm::Matrix3<T> _expectedFloatingMat;
+    fgm::Matrix3<T> _expectedIntegralMat;
 
 
     void SetUp() override
@@ -43,7 +43,7 @@ template <typename T>
 class Matrix3DVectorMultiplication: public ::testing::Test
 {
 protected:
-    fgm::Matrix3D<T> _mat;
+    fgm::Matrix3<T> _mat;
     fgm::Vector3D<T> _vec;
     fgm::Vector3D<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
         _expectedIntegralRowVector;
@@ -69,7 +69,7 @@ template <typename T>
 class Matrix3DVectorFractionalMultiplication: public ::testing::Test
 {
 protected:
-    fgm::Matrix3D<T> _mat;
+    fgm::Matrix3<T> _mat;
     fgm::Vector3D<T> _vec, _expectedColVector, _expectedRowVector;
 
     void SetUp() override
@@ -97,7 +97,7 @@ template <typename T>
 class Matrix3DMultiplication: public ::testing::Test
 {
 protected:
-    fgm::Matrix3D<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
+    fgm::Matrix3<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
 
     void SetUp() override
     {
@@ -126,7 +126,7 @@ template <typename T>
 class Matrix3DFractionalMultiplication: public ::testing::Test
 {
 protected:
-    fgm::Matrix3D<T> _matA, _matB, _expectedMat;
+    fgm::Matrix3<T> _matA, _matB, _expectedMat;
 
     void SetUp() override
     {
@@ -164,12 +164,12 @@ TYPED_TEST_SUITE(Matrix3DFractionalMultiplication, SupportedFloatingPointTypes);
 /** @brief Verify that matrix multiplication operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix3D MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9);
-    constexpr fgm::Matrix3D MAT2(5, 6, 7, 8, 10, 11, 12, 13, 14);
+    constexpr fgm::Matrix3 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    constexpr fgm::Matrix3 MAT2(5, 6, 7, 8, 10, 11, 12, 13, 14);
     constexpr fgm::Vector3D VEC(1, 2, 3);
 
     // Verify matrix * scalar multiplication
-    constexpr fgm::Matrix3D BINARY_PRODUCT_1 = MAT1 * 2;
+    constexpr fgm::Matrix3 BINARY_PRODUCT_1 = MAT1 * 2;
     static_assert(BINARY_PRODUCT_1(0, 0) == 2);
     static_assert(BINARY_PRODUCT_1(0, 1) == 4);
     static_assert(BINARY_PRODUCT_1(0, 2) == 6);
@@ -182,7 +182,7 @@ namespace
 
 
     // Verify scalar * matrix multiplication
-    constexpr fgm::Matrix3D BINARY_PRODUCT_2 = 2 * MAT1;
+    constexpr fgm::Matrix3 BINARY_PRODUCT_2 = 2 * MAT1;
     static_assert(BINARY_PRODUCT_2(0, 0) == 2);
     static_assert(BINARY_PRODUCT_2(0, 1) == 4);
     static_assert(BINARY_PRODUCT_2(0, 2) == 6);
@@ -206,7 +206,7 @@ namespace
     static_assert(ROW_VEC_PRODUCT[2] == 42);
 
     // Verify matrix * matrix multiplication
-    constexpr fgm::Matrix3D MAT_PRODUCT = MAT1 * MAT2;
+    constexpr fgm::Matrix3 MAT_PRODUCT = MAT1 * MAT2;
     static_assert(MAT_PRODUCT(0, 0) == 57);
     static_assert(MAT_PRODUCT(0, 1) == 65);
     static_assert(MAT_PRODUCT(0, 2) == 71);
@@ -228,9 +228,9 @@ namespace
 /** @brief Verify that scalar multiplication by zero returns a zero matrix. */
 TEST(Matrix3DScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 {
-    const fgm::Matrix3D mat{ 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f };
+    const fgm::Matrix3 mat{ 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f };
 
-    const fgm::Matrix3D product = mat * 0;
+    const fgm::Matrix3 product = mat * 0;
 
     EXPECT_MAT_ZERO(product);
 }
@@ -239,9 +239,9 @@ TEST(Matrix3DScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 /** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix3DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 {
-    const fgm::Matrix3D mat{ 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f };
+    const fgm::Matrix3 mat{ 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f };
 
-    const fgm::Matrix3D product = mat * 1;
+    const fgm::Matrix3 product = mat * 1;
 
     EXPECT_MAT_EQ(mat, product);
 }
@@ -250,11 +250,11 @@ TEST(Matrix3DScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 /** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix3DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
-    const fgm::Matrix3D mat      = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
-    const fgm::Matrix3D expected = { -2.0f, 4.0f, -6.0f, 8.0f, -10.0f, -12.0f, -14.0f, -16.0f, 18.0f };
+    const fgm::Matrix3 mat      = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
+    const fgm::Matrix3 expected = { -2.0f, 4.0f, -6.0f, 8.0f, -10.0f, -12.0f, -14.0f, -16.0f, 18.0f };
     const float scalar           = -2.0f;
 
-    const fgm::Matrix3D product = mat * scalar;
+    const fgm::Matrix3 product = mat * scalar;
 
     EXPECT_MAT_EQ(expected, product);
 }
@@ -266,7 +266,7 @@ TEST(Matrix3DScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
  */
 TYPED_TEST(Matrix3DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
 {
-    const fgm::Matrix3D product = this->_mat * this->_scalar;
+    const fgm::Matrix3 product = this->_mat * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -285,7 +285,7 @@ TYPED_TEST(Matrix3DScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
  */
 TYPED_TEST(Matrix3DScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 {
-    const fgm::Matrix3D product = this->_scalar * this->_mat;
+    const fgm::Matrix3 product = this->_scalar * this->_mat;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -325,7 +325,7 @@ TYPED_TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
 {
     const double scalar = 2.123456789123456;
 
-    [[maybe_unused]] const fgm::Matrix3D product = this->_mat * scalar;
+    [[maybe_unused]] const fgm::Matrix3 product = this->_mat * scalar;
 
     static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
 }
@@ -337,7 +337,7 @@ TYPED_TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationPromotesTy
  */
 TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
-    fgm::Matrix3D mat   = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
+    fgm::Matrix3 mat   = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
     const double scalar = 5.0;
     mat *= scalar;
 
@@ -351,9 +351,9 @@ TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNo
  */
 TEST(Matrix3DScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    fgm::Matrix3D mat   = { 1, -2, 3, -4, 5, 6, 7, 8, -9 };
+    fgm::Matrix3 mat   = { 1, -2, 3, -4, 5, 6, 7, 8, -9 };
     const double scalar = 2.5;
-    const fgm::Matrix3D expected{ 2, -5, 7, -10, 12, 15, 17, 20, -22 };
+    const fgm::Matrix3 expected{ 2, -5, 7, -10, 12, 15, 17, 20, -22 };
 
     mat *= scalar;
 
@@ -402,7 +402,7 @@ TYPED_TEST(Matrix3DVectorFractionalMultiplication, MatrixTimesVectorReturnsATran
  */
 TEST(Matrix3DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVector)
 {
-    const fgm::Matrix3D<float> iMatrix = fgm::mat3d::eye<float>;
+    const fgm::Matrix3<float> iMatrix = fgm::mat3d::eye<float>;
     const fgm::Vec3F vec{ 2.0f, 1.0f, 2.5 };
 
     const fgm::Vec3F transformedVector = iMatrix * vec;
@@ -417,7 +417,7 @@ TEST(Matrix3DVectorMultiplication, IdentityMatrixTimesVectorReturnsOriginalVecto
  */
 TEST(Matrix3DVectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
-    const fgm::Matrix3D mat{ 1.0, 2.0, 3.0 };
+    const fgm::Matrix3 mat{ 1.0, 2.0, 3.0 };
     const fgm::Vec3I vec{ 2, 1, 3 };
 
     [[maybe_unused]] const auto transformedVector = mat * vec;
@@ -460,7 +460,7 @@ TYPED_TEST(Matrix3DVectorFractionalMultiplication, VectorTimesMatrixReturnsATran
  */
 TEST(Matrix3DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix3D<float> iMatrix = fgm::mat3d::eye<float>;
+    const fgm::Matrix3<float> iMatrix = fgm::mat3d::eye<float>;
     const fgm::Vec3F vec{ 2.0f, 1.0f, 3.0f };
 
     const fgm::Vec3F transformedVector = vec * iMatrix;
@@ -475,7 +475,7 @@ TEST(Matrix3DVectorMultiplication, VectorTimesIdentityMatrixReturnsOriginalVecto
  */
 TEST(Matrix3DVectorMultiplication, VecTimesMat_MixedTypeScalarMultiplicationPromotesType)
 {
-    const fgm::Matrix3D mat{ 1.0, 2.0, 3.0 };
+    const fgm::Matrix3 mat{ 1.0, 2.0, 3.0 };
     const fgm::Vec3I vec{ 2, 1, 3 };
 
     [[maybe_unused]] const auto transformedVector = vec * mat;
@@ -508,7 +508,7 @@ TYPED_TEST(Matrix3DVectorMultiplication, VectorTimesEqualMatrixReturnsATransform
  */
 TEST(Matrix3DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginalVector)
 {
-    const fgm::Matrix3D<float> iMatrix = fgm::mat3d::eye<float>;
+    const fgm::Matrix3<float> iMatrix = fgm::mat3d::eye<float>;
     fgm::Vec3F vec{ 2.0f, 1.0f, 3.0f };
 
     vec *= iMatrix;
@@ -523,7 +523,7 @@ TEST(Matrix3DVectorMultiplication, VectorTimesEqualIdentityMatrixReturnsOriginal
  */
 TEST(Matrix3DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix3D<double> iMatrix = fgm::mat3d::eye<double>;
+    const fgm::Matrix3<double> iMatrix = fgm::mat3d::eye<double>;
     [[maybe_unused]] fgm::Vec3I vec{ 2, 1, 5 };
 
     (void) (vec *= iMatrix);
@@ -537,7 +537,7 @@ TEST(Matrix3DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNo
  */
 TEST(Matrix3DVectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    const fgm::Matrix3D mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0 };
+    const fgm::Matrix3 mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0 };
     fgm::Vector3D vec{ 10, 20, 30 };
     const fgm::Vector3D expected{ 205, 620, 220 };
 
@@ -582,10 +582,10 @@ TYPED_TEST(Matrix3DFractionalMultiplication, MatrixTimesMatrixReturnsMatrixWithP
  */
 TEST(Matrix3DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix3D<float> iMatrix = fgm::mat3d::eye<float>;
-    const fgm::Matrix3D mat{ 1.0f, 2.0f, 3.0f };
+    const fgm::Matrix3<float> iMatrix = fgm::mat3d::eye<float>;
+    const fgm::Matrix3 mat{ 1.0f, 2.0f, 3.0f };
 
-    const fgm::Matrix3D matrixProduct = iMatrix * mat;
+    const fgm::Matrix3 matrixProduct = iMatrix * mat;
 
     EXPECT_MAT_EQ(mat, matrixProduct);
 }
@@ -597,8 +597,8 @@ TEST(Matrix3DMultiplication, MultipliedByIdentityMatrixReturnsOriginalMatrix)
  */
 TEST(Matrix3DMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
-    const fgm::Matrix3D matA{ 1.0, 2.0, 3.0 };
-    const fgm::Matrix3D matB{ 2, 1, 3 };
+    const fgm::Matrix3 matA{ 1.0, 2.0, 3.0 };
+    const fgm::Matrix3 matB{ 2, 1, 3 };
 
     [[maybe_unused]] const auto transformedVector = matA * matB;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -627,8 +627,8 @@ TYPED_TEST(Matrix3DMultiplication, CompoundMultiplicationOperationPerformInPlace
  */
 TEST(Matrix3DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
 {
-    const fgm::Matrix3D<float> iMatrix = fgm::mat3d::eye<float>;
-    fgm::Matrix3D mat{ 1.0f, 2.0f, 3.0f };
+    const fgm::Matrix3<float> iMatrix = fgm::mat3d::eye<float>;
+    fgm::Matrix3 mat{ 1.0f, 2.0f, 3.0f };
 
     mat *= iMatrix;
     EXPECT_MAT_CONTAINS(std::vector{ 1.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 0.0f, 3.0f }, mat);
@@ -641,8 +641,8 @@ TEST(Matrix3DMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
  */
 TEST(Matrix3DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
 {
-    const fgm::Matrix3D<double> iMatrix = fgm::mat3d::eye<double>;
-    fgm::Matrix3D mat{ 1, 2, 3 };
+    const fgm::Matrix3<double> iMatrix = fgm::mat3d::eye<double>;
+    fgm::Matrix3 mat{ 1, 2, 3 };
 
     mat *= iMatrix;
     static_assert(std::is_same_v<decltype(mat)::value_type, int>);
@@ -655,9 +655,9 @@ TEST(Matrix3DMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromo
  */
 TEST(Matrix3DMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    const fgm::Matrix3D matA{ 2.5, 3.5, 0.5, 1.5, 2.5, -12.5, 5.45, 23.25, 85.5 };
-    fgm::Matrix3D matB{ 5, 10, 15, 20, 25, 30, 35, 40, 45 };
-    const fgm::Matrix3D expectedMatrix{ 109, 391, 1160, 251, 830, 2262, 392, 1268, 3365 };
+    const fgm::Matrix3 matA{ 2.5, 3.5, 0.5, 1.5, 2.5, -12.5, 5.45, 23.25, 85.5 };
+    fgm::Matrix3 matB{ 5, 10, 15, 20, 25, 30, 35, 40, 45 };
+    const fgm::Matrix3 expectedMatrix{ 109, 391, 1160, 251, 830, 2262, 392, 1268, 3365 };
 
     matB *= matA;
 

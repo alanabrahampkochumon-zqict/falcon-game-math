@@ -24,8 +24,8 @@ class Matrix2DInverse: public ::testing::Test
 {
 protected:
     using Mag = fgm::Magnitude<T>;
-    fgm::Matrix2D<T> _matrix;
-    fgm::Matrix2D<Mag> _expectedInverse;
+    fgm::Matrix2<T> _matrix;
+    fgm::Matrix2<Mag> _expectedInverse;
 
     void SetUp() override
     {
@@ -39,26 +39,26 @@ TYPED_TEST_SUITE(Matrix2DInverse, SupportedSignedArithmeticTypes);
 
 
 /** @brief Test fixture for calculating @ref fgm::Matrix2D inverse with singular matrices */
-class SingularMatrix2DInverse: public ::testing::TestWithParam<fgm::Matrix2D<float>>
+class SingularMatrix2DInverse: public ::testing::TestWithParam<fgm::Matrix2<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Matrix2DInverseTestSuite, SingularMatrix2DInverse,
-                         ::testing::Values(fgm::Matrix2D{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ 1.0f, 2.0f } },
-                                           fgm::Matrix2D{ fgm::Vector2D{ 2.0f, 2.0f }, fgm::Vector2D{ 2.0f, 2.0f } },
-                                           fgm::Matrix2D{ fgm::Vector2D{ 3.0f, 2.0f }, fgm::Vector2D{ 6.0f, 4.0f } },
-                                           fgm::Matrix2D{ fgm::Vector2D{ 0.0f, 0.0f }, fgm::Vector2D{ 4.0f, 5.0f } },
-                                           fgm::Matrix2D{ fgm::Vector2D{ 0.0f, 3.0f }, fgm::Vector2D{ 0.0f, 5.0f } }));
+                         ::testing::Values(fgm::Matrix2{ fgm::Vector2D{ 1.0f, 2.0f }, fgm::Vector2D{ 1.0f, 2.0f } },
+                                           fgm::Matrix2{ fgm::Vector2D{ 2.0f, 2.0f }, fgm::Vector2D{ 2.0f, 2.0f } },
+                                           fgm::Matrix2{ fgm::Vector2D{ 3.0f, 2.0f }, fgm::Vector2D{ 6.0f, 4.0f } },
+                                           fgm::Matrix2{ fgm::Vector2D{ 0.0f, 0.0f }, fgm::Vector2D{ 4.0f, 5.0f } },
+                                           fgm::Matrix2{ fgm::Vector2D{ 0.0f, 3.0f }, fgm::Vector2D{ 0.0f, 5.0f } }));
 
 
 
 /** @brief Test fixture for @ref fgm::Matrix2D inverse with NaN vectors. */
-class NaNMatrix2DInverse: public ::testing::TestWithParam<fgm::Matrix2D<float>>
+class NaNMatrix2DInverse: public ::testing::TestWithParam<fgm::Matrix2<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Matrix2DInverseTestSuite, NaNMatrix2DInverse,
-                         ::testing::Values(fgm::Matrix2D<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
-                                           fgm::Matrix2D<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
-                                           fgm::Matrix2D<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
-                                           fgm::Matrix2D<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
-                                           fgm::Matrix2D<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                         ::testing::Values(fgm::Matrix2<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
+                                           fgm::Matrix2<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
+                                           fgm::Matrix2<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
+                                           fgm::Matrix2<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
+                                           fgm::Matrix2<float>(fgm ::constants::NaN, fgm::constants::NaN,
                                                                 fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
@@ -77,16 +77,16 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DInverseTestSuite, NaNMatrix2DInverse,
 /** @brief Verify that matrix inverse is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix2D MAT(1.0f, 2.0f, 3.0f, 4.0f);
+    constexpr fgm::Matrix2 MAT(1.0f, 2.0f, 3.0f, 4.0f);
     // Verify matrix inverse (member function)
-    constexpr fgm::Matrix2D INV_MAT = MAT.inverse();
+    constexpr fgm::Matrix2 INV_MAT = MAT.inverse();
     static_assert(INV_MAT(0, 0) == -2.0f);
     static_assert(INV_MAT(0, 1) == 1.0f);
     static_assert(INV_MAT(1, 0) == 1.5f);
     static_assert(INV_MAT(1, 1) == -0.5f);
 
     // Verify matrix inverse (static function)
-    constexpr fgm::Matrix2D INV_MAT_S = fgm::Matrix2D<float>::inverse(MAT);
+    constexpr fgm::Matrix2 INV_MAT_S = fgm::Matrix2<float>::inverse(MAT);
     static_assert(INV_MAT_S(0, 0) == -2.0f);
     static_assert(INV_MAT_S(0, 1) == 1.0f);
     static_assert(INV_MAT_S(1, 0) == 1.5f);
@@ -121,13 +121,13 @@ TYPED_TEST(Matrix2DInverse, InverseTimesMatrixReturnsIdentityMatrix)
  *        when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix2DInverse, StaticWrapper_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2D<TypeParam>::inverse(this->_matrix)); }
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2<TypeParam>::inverse(this->_matrix)); }
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
 TYPED_TEST(Matrix2DInverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
 {
-    const auto invMatrix = fgm::Matrix2D<TypeParam>::inverse(this->_matrix);
+    const auto invMatrix = fgm::Matrix2<TypeParam>::inverse(this->_matrix);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
@@ -153,7 +153,7 @@ TEST_P(SingularMatrix2DInverse, StaticWrapper_TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     // Static cast is placed to suppress the no-discard warning
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Matrix2D<float>::inverse(matrix)), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Matrix2<float>::inverse(matrix)), "");
 }
 
 #endif
@@ -230,7 +230,7 @@ TEST_P(NaNMatrix2DInverse, SafeInverse_ReturnsPassedInFallback)
  *        that when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix2DInverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2D<TypeParam>::safeInverseOf(this->_matrix)); }
+{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2<TypeParam>::safeInverseOf(this->_matrix)); }
 
 
 /**
@@ -239,7 +239,7 @@ TYPED_TEST(Matrix2DInverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
  */
 TYPED_TEST(Matrix2DInverse, StaticWrapper_SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
 {
-    const auto invMatrix = fgm::Matrix2D<TypeParam>::safeInverseOf(this->_matrix);
+    const auto invMatrix = fgm::Matrix2<TypeParam>::safeInverseOf(this->_matrix);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
@@ -380,7 +380,7 @@ TEST_P(NaNMatrix2DInverse, TryInverse_ReturnsPassedInFallback)
 TYPED_TEST(Matrix2DInverse, StaticWrapper_TryInverse_ReturnsInverseMatrix)
 {
     fgm::OperationStatus flag;
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2D<TypeParam>::tryInverseOf(this->_matrix, flag));
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2<TypeParam>::tryInverseOf(this->_matrix, flag));
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
 
@@ -392,7 +392,7 @@ TYPED_TEST(Matrix2DInverse, StaticWrapper_TryInverse_ReturnsInverseMatrix)
 TYPED_TEST(Matrix2DInverse, StaticWrapper_TryInverse_InverseTimesMatrixReturnsIdentityMatrix)
 {
     fgm::OperationStatus flag;
-    const auto invMatrix = fgm::Matrix2D<TypeParam>::tryInverseOf(this->_matrix, flag);
+    const auto invMatrix = fgm::Matrix2<TypeParam>::tryInverseOf(this->_matrix, flag);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }

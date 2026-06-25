@@ -27,14 +27,14 @@
 /** @brief Verify that the matrix can be type promoted and demoted at compile time. */
 namespace
 {
-    constexpr fgm::Matrix2D MAT(1.0f, 2.0f, 3.0f, 4.0f);
+    constexpr fgm::Matrix2 MAT(1.0f, 2.0f, 3.0f, 4.0f);
 
     // Verify that the matrix can be type promoted at compile time.
-    constexpr fgm::Matrix2D<double> MAT_D(MAT);
+    constexpr fgm::Matrix2<double> MAT_D(MAT);
     static_assert(std::is_same_v<decltype(MAT_D)::value_type, double>);
 
     // Verify that the matrix can be type demoted at compile time.
-    constexpr fgm::Matrix2D<int> MATI(MAT);
+    constexpr fgm::Matrix2<int> MATI(MAT);
     static_assert(std::is_same_v<decltype(MATI)::value_type, int>);
 } // namespace
 
@@ -51,9 +51,9 @@ namespace
  */
 TEST(Matrix2DConversionConstructor, PromotesType)
 {
-    const fgm::Matrix2D mat1(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Matrix2 mat1(1.0f, 2.0f, 3.0f, 4.0f);
 
-    [[maybe_unused]] const fgm::Matrix2D<double> mat2(mat1);
+    [[maybe_unused]] const fgm::Matrix2<double> mat2(mat1);
 
     static_assert(std::is_same_v<decltype(mat2)::value_type, double>);
 }
@@ -63,10 +63,10 @@ TEST(Matrix2DConversionConstructor, PromotesType)
 TEST(Matrix2DConversionConstructor, ReturnsNewInstance)
 {
     // Given a float matrix
-    const fgm::Matrix2D mat1(1.0f, 2.0f, 3.0f, 4.0f);
+    const fgm::Matrix2 mat1(1.0f, 2.0f, 3.0f, 4.0f);
 
     // When converted to a double matrix
-    fgm::Matrix2D<double> mat2(mat1);
+    fgm::Matrix2<double> mat2(mat1);
     // And one of its value mutated
     mat2(0, 0) = 5;
 
@@ -83,9 +83,9 @@ TEST(Matrix2DConversionConstructor, ReturnsNewInstance)
  */
 TEST(Matrix2DConversionConstructor, DemotesType)
 {
-    const fgm::Matrix2D mat1(1.0, 2.0, 3.0, 4.0);
+    const fgm::Matrix2 mat1(1.0, 2.0, 3.0, 4.0);
 
-    [[maybe_unused]] const fgm::Matrix2D<float> mat2(mat1);
+    [[maybe_unused]] const fgm::Matrix2<float> mat2(mat1);
 
     static_assert(std::is_same_v<decltype(mat2)::value_type, float>);
 }

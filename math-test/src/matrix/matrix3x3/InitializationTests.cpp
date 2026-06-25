@@ -54,7 +54,7 @@ TYPED_TEST_SUITE(Matrix3DInitialization, SupportedTypes);
 namespace
 {
     // Verify that the matrix can be initialized at compile time using scalar values.
-    constexpr fgm::Matrix3D MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    constexpr fgm::Matrix3 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9);
     static_assert(MAT1(0, 0) == 1);
     static_assert(MAT1(0, 1) == 2);
     static_assert(MAT1(0, 2) == 3);
@@ -67,7 +67,7 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Matrix3D MAT2(fgm::Vector3D(1, 4, 7), fgm::Vector3D(2, 5, 8), fgm::Vector3D(3, 6, 9));
+    constexpr fgm::Matrix3 MAT2(fgm::Vector3D(1, 4, 7), fgm::Vector3D(2, 5, 8), fgm::Vector3D(3, 6, 9));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
     static_assert(MAT2(0, 2) == 3);
@@ -80,7 +80,7 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using diagonals.
-    constexpr fgm::Matrix3D MAT3(3, 4, 5);
+    constexpr fgm::Matrix3 MAT3(3, 4, 5);
     static_assert(MAT3(0, 0) == 3);
     static_assert(MAT3(0, 1) == 0);
     static_assert(MAT3(0, 2) == 0);
@@ -92,7 +92,7 @@ namespace
     static_assert(MAT3(2, 2) == 5);
 
     // Verify that the matrix can be initialized at compile time using value initialization.
-    constexpr fgm::Matrix3D<int> MAT4{};
+    constexpr fgm::Matrix3<int> MAT4{};
     static_assert(MAT4(0, 0) == 0);
     static_assert(MAT4(0, 1) == 0);
     static_assert(MAT4(0, 2) == 0);
@@ -116,7 +116,7 @@ namespace
 /** @brief Verify that the default constructor initializes an identity matrix. */
 TYPED_TEST(Matrix3DInitialization, EmptyConstructorReturnsIdentityMatrix)
 {
-    const fgm::Matrix3D<TypeParam> matrix{};
+    const fgm::Matrix3<TypeParam> matrix{};
 
     EXPECT_MAT_ZERO(matrix);
 }
@@ -125,7 +125,7 @@ TYPED_TEST(Matrix3DInitialization, EmptyConstructorReturnsIdentityMatrix)
 /** @brief Verify that the parameterized constructor can initialize matrix with elements. */
 TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
-    const fgm::Matrix3D<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
+    const fgm::Matrix3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
                                           this->_elements[3], this->_elements[4], this->_elements[5],
                                           this->_elements[6], this->_elements[7], this->_elements[8]);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
@@ -135,7 +135,7 @@ TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesMatrixWith
 /** @brief Verify that the parameterized constructor can initialize matrix with vectors. */
 TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesMatrixWithVectors)
 {
-    const fgm::Matrix3D<TypeParam> matrix(this->_col0, this->_col1, this->_col2);
+    const fgm::Matrix3<TypeParam> matrix(this->_col0, this->_col1, this->_col2);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
@@ -143,7 +143,7 @@ TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesMatrixWith
 /** @brief Verify that the parameterized constructor can initialize a diagonal matrix. */
 TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesDiagonalMatrix)
 {
-    const fgm::Matrix3D<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2);
+    const fgm::Matrix3<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2);
     EXPECT_MAT_CONTAINS(this->_diagonalElements, matrix);
 }
 
@@ -151,7 +151,7 @@ TYPED_TEST(Matrix3DInitialization, ParameterizedConstructorInitializesDiagonalMa
 /** @brief Verify that a matrix can be initialized with implicit braced initialization. */
 TYPED_TEST(Matrix3DInitialization, CanBeConstructedWithBracedInitialization)
 {
-    const fgm::Matrix3D<TypeParam> matrix = { { TypeParam(1), TypeParam(4), TypeParam(7) },
+    const fgm::Matrix3<TypeParam> matrix = { { TypeParam(1), TypeParam(4), TypeParam(7) },
                                               { TypeParam(2), TypeParam(5), TypeParam(8) },
                                               { TypeParam(3), TypeParam(6), TypeParam(9) } };
     EXPECT_MAT_CONTAINS(this->_elements, matrix);

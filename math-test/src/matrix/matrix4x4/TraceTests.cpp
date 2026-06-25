@@ -17,7 +17,7 @@ template <typename T>
 class Matrix4DTrace: public ::testing::Test
 {
 protected:
-    fgm::Matrix4D<T> _mat;
+    fgm::Matrix4<T> _mat;
     T _expectedSum;
 
     void SetUp() override
@@ -44,9 +44,9 @@ TYPED_TEST_SUITE(Matrix4DTrace, SupportedArithmeticTypes);
 /** @brief Verify that the matrix trace operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4D MAT(3, 2, 5, 7, 5, 12, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19);
+    constexpr fgm::Matrix4 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19);
     static_assert(MAT.trace() == 48);                    // Member function
-    static_assert(fgm::Matrix4D<int>::trace(MAT) == 48); // Static function
+    static_assert(fgm::Matrix4<int>::trace(MAT) == 48); // Static function
 
 } // namespace
 
@@ -57,6 +57,6 @@ TYPED_TEST(Matrix4DTrace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_e
 
 /** @brief Verify that trace of a 2D matrix using static variant returns the sum of diagonal elements. */
 TYPED_TEST(Matrix4DTrace, StaticWrapper_ReturnsSumOfDiagonalElements)
-{ EXPECT_MAG_EQ(this->_expectedSum, fgm::Matrix4D<TypeParam>::trace(this->_mat)); }
+{ EXPECT_MAG_EQ(this->_expectedSum, fgm::Matrix4<TypeParam>::trace(this->_mat)); }
 
 /** @} */

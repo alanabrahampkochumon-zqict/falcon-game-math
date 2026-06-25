@@ -23,7 +23,7 @@ template <typename T>
     requires std::floating_point<T>
 struct Matrix3DUtilityParams
 {
-    fgm::Matrix3D<T> mat;
+    fgm::Matrix3<T> mat;
     bool expected;
 };
 /** @brief Test fixture for @ref fgm::Matrix3D infinity checker, parameterized by @ref VectorUtilityParams */
@@ -56,8 +56,8 @@ TYPED_TEST_SUITE(Matrix3DIntegralUtility, SupportedIntegralTypes);
 
 namespace
 {
-    constexpr fgm::Matrix3D INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f);
-    constexpr fgm::Matrix3D MAT(1.0f, 1.0f, 1.0f);
+    constexpr fgm::Matrix3 INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f);
+    constexpr fgm::Matrix3 MAT(1.0f, 1.0f, 1.0f);
 
 
     /** @brief Verify that the matrix hasNaN utility is available at compile time. */
@@ -67,7 +67,7 @@ namespace
         static_assert(MAT.hasNaN() == false);
 
         // Static functions
-        static_assert(fgm::Matrix3D<float>::hasNaN(MAT) == false);
+        static_assert(fgm::Matrix3<float>::hasNaN(MAT) == false);
     } // namespace
 
 
@@ -79,8 +79,8 @@ namespace
         static_assert(MAT.hasInf() == false);
 
         // Static functions
-        static_assert(fgm::Matrix3D<float>::hasInf(INF_MAT) == true);
-        static_assert(fgm::Matrix3D<float>::hasInf(MAT) == false);
+        static_assert(fgm::Matrix3<float>::hasInf(INF_MAT) == true);
+        static_assert(fgm::Matrix3<float>::hasInf(MAT) == false);
     } // namespace
 
 } // namespace
@@ -103,20 +103,20 @@ TEST_P(Matrix3DInfChecker, ReturnTrueIfAnyElementIsInfinity)
 }
 INSTANTIATE_TEST_SUITE_P(
     Matrix3DInfCheckerTestSuite, Matrix3DInfChecker,
-    ::testing::Values(Matrix3DUtilityParams{ fgm::Matrix3D(fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-                      Matrix3DUtilityParams{ fgm::Matrix3D(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                      Matrix3DUtilityParams{ fgm::Matrix3D(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-                      Matrix3DUtilityParams{ fgm::Matrix3D(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+    ::testing::Values(Matrix3DUtilityParams{ fgm::Matrix3(fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
+                      Matrix3DUtilityParams{ fgm::Matrix3(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
+                      Matrix3DUtilityParams{ fgm::Matrix3(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
+                      Matrix3DUtilityParams{ fgm::Matrix3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                                            fgm::constants::INFINITY_F),
                                              true },
-                      Matrix3DUtilityParams{ fgm::Matrix3D(1.0f, 1.0f, 1.0f), false }));
+                      Matrix3DUtilityParams{ fgm::Matrix3(1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Matrix3D::hasInf returns `false` for integral types. */
 TYPED_TEST(Matrix3DIntegralUtility, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Matrix3D(value, value, value).hasInf());
+    EXPECT_FALSE(fgm::Matrix3(value, value, value).hasInf());
 }
 
 
@@ -127,7 +127,7 @@ TYPED_TEST(Matrix3DIntegralUtility, HasInf_ReturnsFalseForIntegrals)
 TEST_P(Matrix3DInfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Matrix3D<float>::hasInf(mat));
+    EXPECT_EQ(expected, fgm::Matrix3<float>::hasInf(mat));
 }
 
 
@@ -135,7 +135,7 @@ TEST_P(Matrix3DInfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 TYPED_TEST(Matrix3DIntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Matrix3D<TypeParam>::hasInf(fgm::Matrix3D(value, value, value)));
+    EXPECT_FALSE(fgm::Matrix3<TypeParam>::hasInf(fgm::Matrix3(value, value, value)));
 }
 
 
@@ -157,19 +157,19 @@ TEST_P(Matrix3DNaNChecker, ReturnTrueIfAnyElementIsNaN)
 }
 INSTANTIATE_TEST_SUITE_P(
     Matrix3DNaNCheckerTestSuite, Matrix3DNaNChecker,
-    ::testing::Values(Matrix3DUtilityParams{ fgm::Matrix3D(fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Matrix3DUtilityParams{ fgm::Matrix3D(1.0f, fgm::constants::NaN, 1.0f), true },
-                      Matrix3DUtilityParams{ fgm::Matrix3D(1.0f, 1.0f, fgm::constants::NaN), true },
+    ::testing::Values(Matrix3DUtilityParams{ fgm::Matrix3(fgm::constants::NaN, 1.0f, 1.0f), true },
+                      Matrix3DUtilityParams{ fgm::Matrix3(1.0f, fgm::constants::NaN, 1.0f), true },
+                      Matrix3DUtilityParams{ fgm::Matrix3(1.0f, 1.0f, fgm::constants::NaN), true },
                       Matrix3DUtilityParams{
-                          fgm::Matrix3D(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN), true },
-                      Matrix3DUtilityParams{ fgm::Matrix3D(1.0f, 1.0f, 1.0f), false }));
+                          fgm::Matrix3(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN), true },
+                      Matrix3DUtilityParams{ fgm::Matrix3(1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Matrix3D::hasNaN returns `false` for integral types. */
 TYPED_TEST(Matrix3DIntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Matrix3D(value, value, value).hasNaN());
+    EXPECT_FALSE(fgm::Matrix3(value, value, value).hasNaN());
 }
 
 
@@ -180,7 +180,7 @@ TYPED_TEST(Matrix3DIntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 TEST_P(Matrix3DNaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Matrix3D<float>::hasNaN(mat));
+    EXPECT_EQ(expected, fgm::Matrix3<float>::hasNaN(mat));
 }
 
 
@@ -188,7 +188,7 @@ TEST_P(Matrix3DNaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 TYPED_TEST(Matrix3DIntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Matrix3D<TypeParam>::hasNaN(fgm::Matrix3D(value, value, value)));
+    EXPECT_FALSE(fgm::Matrix3<TypeParam>::hasNaN(fgm::Matrix3(value, value, value)));
 }
 
 /** @} */

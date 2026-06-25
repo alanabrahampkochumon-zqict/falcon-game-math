@@ -42,13 +42,13 @@ namespace fgm
     struct Vector4D;
 
     template <Arithmetic T>
-    struct Matrix2D;
+    struct Matrix2;
 
     template <Arithmetic T>
-    struct Matrix3D;
+    struct Matrix3;
 
     template <Arithmetic T>
-    struct Matrix4D;
+    struct Matrix4;
 
 
     /** @brief Alias for @ref Vector2D with promoted value type. */
@@ -87,37 +87,37 @@ namespace fgm
     using PromotedFloatVector4D = Vector4D<Magnitude<PromotedValue_t<T, U>>>;
 
 
-    /** @brief Alias for @ref Matrix2D with promoted value type. */
+    /** @brief Alias for @ref Matrix2 with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedMatrix2D = Matrix2D<PromotedValue_t<T, U>>;
+    using PromotedMatrix2 = Matrix2<PromotedValue_t<T, U>>;
 
 
-    /** @brief Alias for @ref Matrix2D with a `value_type` of @ref Magnitude of the wider type. */
+    /** @brief Alias for @ref Matrix2 with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
-    using PromotedFloatMatrix2D = Matrix2D<Magnitude<std::common_type_t<T, U>>>;
+    using PromotedFloatMatrix2 = Matrix2<Magnitude<std::common_type_t<T, U>>>;
 
 
-    /** @brief Alias for @ref Matrix3D with promoted value type. */
-    template <Arithmetic T, Arithmetic U>
-        requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedMatrix3D = Matrix3D<PromotedValue_t<T, U>>;
-
-
-    /** @brief Alias for @ref Matrix3D with a `value_type` of @ref Magnitude of the wider type. */
-    template <Arithmetic T, Arithmetic U>
-    using PromotedFloatMatrix3D = Matrix3D<Magnitude<std::common_type_t<T, U>>>;
-
-
-    /** @brief Alias for @ref Matrix4D with promoted value type. */
+    /** @brief Alias for @ref Matrix3 with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedMatrix4D = Matrix4D<PromotedValue_t<T, U>>;
+    using PromotedMatrix3 = Matrix3<PromotedValue_t<T, U>>;
 
 
-    /** @brief Alias for @ref Matrix4D with a `value_type` of @ref Magnitude of the wider type. */
+    /** @brief Alias for @ref Matrix3 with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
-    using PromotedFloatMatrix4D = Matrix4D<Magnitude<std::common_type_t<T, U>>>;
+    using PromotedFloatMatrix3 = Matrix3<Magnitude<std::common_type_t<T, U>>>;
+
+
+    /** @brief Alias for @ref Matrix4 with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix4 = Matrix4<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Matrix4 with a `value_type` of @ref Magnitude of the wider type. */
+    template <Arithmetic T, Arithmetic U>
+    using PromotedFloatMatrix4 = Matrix4<Magnitude<std::common_type_t<T, U>>>;
 } // namespace fgm
 
 /** @} */

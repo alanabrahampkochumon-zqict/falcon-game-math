@@ -24,7 +24,7 @@ template <typename T>
 class Matrix4DDeterminant: public ::testing::Test
 {
 protected:
-    fgm::Matrix4D<T> _matrix;
+    fgm::Matrix4<T> _matrix;
     T _expectedDeterminant;
 
     void SetUp() override
@@ -41,22 +41,22 @@ TYPED_TEST_SUITE(Matrix4DDeterminant, SupportedSignedArithmeticTypes);
 
 
 /** @brief Test fixture for calculating @ref fgm::Matrix4D determinant with singular matrices */
-class SingularMatrix4DDeterminant: public ::testing::TestWithParam<fgm::Matrix4D<float>>
+class SingularMatrix4DDeterminant: public ::testing::TestWithParam<fgm::Matrix4<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(
     Matrix4DDeterminantTestSuite, SingularMatrix4DDeterminant,
     ::testing::Values(
-        fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f },
+        fgm::Matrix4{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f },
                        fgm::Vector4D{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vector4D{ 1.0f, 85.0f, 19.0f, 12.0f } },
-        fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4D{ 2.0f, 2.0f, 3.0f, 4.0f },
+        fgm::Matrix4{ fgm::Vector4D{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4D{ 2.0f, 2.0f, 3.0f, 4.0f },
                        fgm::Vector4D{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4D{ 4.0f, 4.0f, 31.6f, 2.0f } },
-        fgm::Matrix4D{ fgm::Vector4D{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vector4D{ 2.0f, 2.0f, 3.0f, 4.0f },
+        fgm::Matrix4{ fgm::Vector4D{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vector4D{ 2.0f, 2.0f, 3.0f, 4.0f },
                        fgm::Vector4D{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4D{ 4.0f, 4.0f, 31.6f, 2.0f } },
-        fgm::Matrix4D{ fgm::Vector4D{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4D{ 0.0f, 2.0f, 3.0f, 4.0f },
+        fgm::Matrix4{ fgm::Vector4D{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4D{ 0.0f, 2.0f, 3.0f, 4.0f },
                        fgm::Vector4D{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4D{ 0.0f, 4.0f, 31.6f, 2.0f } },
-        fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 2.0f, 4.0f, 6.0f, 8.0f },
+        fgm::Matrix4{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 2.0f, 4.0f, 6.0f, 8.0f },
                        fgm::Vector4D{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4D{ 4.0f, 4.0f, 31.6f, 2.0f } },
-        fgm::Matrix4D{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 2.0f, 4.0f, 5.0f, 10.0f },
+        fgm::Matrix4{ fgm::Vector4D{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4D{ 2.0f, 4.0f, 5.0f, 10.0f },
                        fgm::Vector4D{ 3.0f, 6.0f, 9.0f, 12.0f }, fgm::Vector4D{ 4.0f, 8.0f, 31.6f, 2.0f } }));
 
 
@@ -75,14 +75,14 @@ INSTANTIATE_TEST_SUITE_P(
 /** @brief Verify that matrix determinant operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4D MAT{ fgm::Vector4D{ 1, 2, 3, 4 }, fgm::Vector4D{ 1, 2, 1, 3 }, fgm::Vector4D{ 2, 3, 4, 12 },
+    constexpr fgm::Matrix4 MAT{ fgm::Vector4D{ 1, 2, 3, 4 }, fgm::Vector4D{ 1, 2, 1, 3 }, fgm::Vector4D{ 2, 3, 4, 12 },
                                  fgm::Vector4D{ 2, 1, 3, 2 } };
 
     // Verify determinant (member function)
     static_assert(MAT.determinant() == 39);
 
     // Verify determinant (static function)
-    static_assert(fgm::Matrix4D<int>::determinant(MAT) == 39);
+    static_assert(fgm::Matrix4<int>::determinant(MAT) == 39);
 
 } // namespace
 
@@ -113,7 +113,7 @@ TEST_P(SingularMatrix4DDeterminant, SingularMatrixReturnsZero)
  *        @ref fgm::Matrix4D::determinant returns a non-zero value.
  */
 TYPED_TEST(Matrix4DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
-{ EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix4D<TypeParam>::determinant(this->_matrix)); }
+{ EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix4<TypeParam>::determinant(this->_matrix)); }
 
 
 /**
@@ -123,7 +123,7 @@ TYPED_TEST(Matrix4DDeterminant, StaticWrapper_ReturnsNonZeroScalar)
 TEST_P(SingularMatrix4DDeterminant, StaticWrapper_SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();
-    EXPECT_MAG_EQ(0.0f, fgm::Matrix4D<float>::determinant(matrix));
+    EXPECT_MAG_EQ(0.0f, fgm::Matrix4<float>::determinant(matrix));
 }
 
 /** @} */
