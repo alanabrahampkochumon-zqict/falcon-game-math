@@ -1,30 +1,35 @@
-set(IncludeDirectory "include/")
+# Directories
+set(IncludeDir "include/")
+set(LibraryDir "${IncludeDir}fgm/")
+set(CommonDir "${LibraryDir}common/")
+set(VectorDir "${LibraryDir}vectors/")
+set(MatrixDir "${LibraryDir}matrices/")
 
+
+# Files
 set(GeneralFiles "SimdTraits.h;DoxygenGroups.h")
-list(TRANSFORM GeneralFiles PREPEND ${IncludeDirectory})
+list(TRANSFORM GeneralFiles PREPEND ${IncludeDir})
 
-set(CommonDirectory "${IncludeDirectory}fgm/common/")
 set(CommonHeaderFiles "MathTraits.h;Config.h;Constants.h;OperationStatus.h;Wrappers.h;PreprocessorDefinitions.h;Messages.h;Types.h;Utils.h;Utils.tpp;")
-list(TRANSFORM CommonHeaderFiles PREPEND ${CommonDirectory})
-set(CommonTemplateFiles "Wrappers.tpp;")
-list(TRANSFORM CommonTemplateFiles PREPEND ${CommonDirectory})
+list(TRANSFORM CommonHeaderFiles PREPEND ${CommonDir})
 
-set(VectorDirectory "${IncludeDirectory}fgm/vectors/")
+set(CommonTemplateFiles "Wrappers.tpp;")
+list(TRANSFORM CommonTemplateFiles PREPEND ${CommonDir})
+
 set(VectorHeaderFiles Vector3.h Vector2.h Vector4.h)
-list(TRANSFORM VectorHeaderFiles PREPEND ${VectorDirectory})
+list(TRANSFORM VectorHeaderFiles PREPEND ${VectorDir})
 
 set(VectorTemplateDefinitionFiles Vector2.tpp Vector3.tpp Vector4.tpp)
-list(TRANSFORM VectorTemplateDefinitionFiles PREPEND ${VectorDirectory})
+list(TRANSFORM VectorTemplateDefinitionFiles PREPEND ${VectorDir})
 
-set(MatrixDirectory "${IncludeDirectory}fgm/matrices/")
 set(MatrixHeaderFiles Matrix2.h Matrix3.h Matrix4.h)
-list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDirectory})
+list(TRANSFORM MatrixHeaderFiles PREPEND ${MatrixDir})
 
 set(MatrixTemplateDefinitionFiles Matrix2.tpp Matrix3.tpp Matrix4.tpp)
-list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDirectory})
+list(TRANSFORM MatrixTemplateDefinitionFiles PREPEND ${MatrixDir})
 
 set(HeaderAliasFiles "Vec;Mat")
-list(TRANSFORM HeaderAliasFiles PREPEND "${IncludeDirectory}/fgm/")
+list(TRANSFORM HeaderAliasFiles PREPEND "${LibraryDir}")
 
 
 # To view this target as a Interface Library, we need to pass all the target files.
@@ -49,7 +54,7 @@ target_compile_options(MathLib INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
 target_sources(MathLib
         INTERFACE
         FILE_SET HEADERS
-        BASE_DIRS ${IncludeDirectory}
+        BASE_DIRS ${IncludeDir}
         FILES
         ${VectorHeaderFiles}
         ${VectorTemplateDefinitionFiles}
@@ -69,6 +74,7 @@ target_include_directories(
         "$<INSTALL_INTERFACE:include>"
 
 )
+
 
 source_group("Header Files" FILES ${GeneralFiles} ${HeaderAliasFiles})
 source_group("Header Files\\vectors" FILES ${VectorHeaderFiles})
