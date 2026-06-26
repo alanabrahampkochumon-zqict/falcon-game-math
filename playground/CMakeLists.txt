@@ -1,15 +1,18 @@
 add_executable(Playground)
 target_compile_features(Playground PRIVATE cxx_std_20)
 
+# Directories
 set(SourceDir "src/")
+set(HeaderDir "include/")
+set(ParserDir "${HeaderDir}parsers/")
+
+# Files
 set(SourceFiles "main.cpp;")
 list(TRANSFORM SourceFiles PREPEND ${SourceDir})
 
-set(HeaderDir "include/")
 set(HeaderFiles "Application.h;Mesh.h;Renderer.h")
 list(TRANSFORM HeaderFiles PREPEND ${HeaderDir})
 
-set(ParserDir "${HeaderDir}parsers/")
 set(ParserFiles "ObjectParser.h")
 list(TRANSFORM ParserFiles PREPEND ${ParserDir})
 

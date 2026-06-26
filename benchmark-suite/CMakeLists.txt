@@ -1,6 +1,7 @@
 add_executable(BenchmarkSuite)
 
 set(SrcDirectory "src/")
+
 set(SrcFiles "SampleBenchmark.cpp")
 list(TRANSFORM SrcFiles PREPEND ${SrcDirectory})
 

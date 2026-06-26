@@ -1,18 +1,22 @@
 add_executable(SIMDTestSuite)
-
 target_compile_features(SIMDTestSuite PRIVATE cxx_std_20)
 
+
+# Directories
 set(IncludeDir "include/")
+set(UtilityDir "${IncludeDir}utils/")
+set(SourceDir "src/")
+
+# Files
 set(SetupFiles "CommonSetup.h;SIMDTestSetup.h;DoxygenGroups.h")
 list(TRANSFORM SetupFiles PREPEND ${IncludeDir})
 
-set(UtilityDirectory "include/utils/")
 set(Utilities "FloatEquals.h;TypeUtils.h")
-list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
+list(TRANSFORM Utilities PREPEND ${UtilityDir})
 
-set(SimdTestDirectory "src/")
 set(SimdTestFiles "RegisterTypeTests.cpp;AdditionTests.cpp;InitializationTests.cpp;SimdUtilsTests.cpp;")
-list(TRANSFORM SimdTestFiles PREPEND ${SimdTestDirectory})
+list(TRANSFORM SimdTestFiles PREPEND ${SourceDir})
+
 
 target_sources(
         SIMDTestSuite
@@ -21,7 +25,7 @@ target_sources(
 
         PRIVATE
         FILE_SET HEADERS
-        BASE_DIRS ${HeaderDirectory}
+        BASE_DIRS ${HeaderDir}
         FILES
         ${SetupFiles}
         ${Utilities}

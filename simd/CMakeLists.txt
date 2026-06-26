@@ -1,24 +1,19 @@
 add_library(FalconSIMD INTERFACE)
 
+# Directories
+set(IncludeDir "include/")
+set(UtilityDir "${IncludeDir}utils/")
+set(SIMDDir "${IncludeDir}simd/")
 
-set(IncludeDirectory "include/")
-
-set(DocsDir "include/")
-set(DocFiles "DoxygenGroups.h")
-list(TRANSFORM DocFiles PREPEND ${DocsDir})
-
-set(UtilityDir "include/utils/")
+# Files
 set(UtilityFiles "SIMDUtils.h")
 list(TRANSFORM UtilityFiles PREPEND ${UtilityDir})
-
-set(SIMDDir "include/simd/")
 
 set(SIMDHeaderFiles "SIMD.h;SIMDMemory.h;")
 list(TRANSFORM SIMDHeaderFiles PREPEND ${SIMDDir})
 
 set(SIMDTemplateFiles "SIMD.tpp;SIMDMemory.tpp")
 list(TRANSFORM SIMDTemplateFiles PREPEND ${SIMDDir})
-
 
 
 target_compile_options(FalconSIMD INTERFACE # TODO: Change to the compile target
