@@ -165,7 +165,7 @@ TEST_P(Matrix2ColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix2 mat(1, 2);
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::vec2d::zero<int>), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vector2<int>::ZERO()), "");
 }
 
 

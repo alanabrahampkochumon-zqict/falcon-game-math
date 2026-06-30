@@ -60,7 +60,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::vec2d::zero<T> to guarantee a zeroed vector.
+         *       @ref fgm::Vector2<T>::ZERO() to guarantee a zeroed vector.
          */
         Vector2() = default;
 
@@ -397,10 +397,9 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr Vector2<bool> eq(const Vector2<U>& rhs,
-                                                  double epsilon = std::is_same_v<T, double> ||
-                                                          std::is_same_v<U, double>
-                                                      ? Config::DOUBLE_EPSILON
-                                                      : Config::FLOAT_EPSILON) const noexcept;
+                                                 double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
+                                                     ? Config::DOUBLE_EPSILON
+                                                     : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -419,10 +418,10 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr Vector2<bool> eq(const Vector2& lhs, const Vector2<U>& rhs,
-                                                         double epsilon = std::is_same_v<T, double> ||
-                                                                 std::is_same_v<U, double>
-                                                             ? Config::DOUBLE_EPSILON
-                                                             : Config::FLOAT_EPSILON) noexcept;
+                                                        double epsilon = std::is_same_v<T, double> ||
+                                                                std::is_same_v<U, double>
+                                                            ? Config::DOUBLE_EPSILON
+                                                            : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -442,10 +441,10 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr Vector2<bool> neq(const Vector2<U>& rhs,
-                                                   double epsilon = std::is_same_v<T, double> ||
-                                                           std::is_same_v<U, double>
-                                                       ? Config::DOUBLE_EPSILON
-                                                       : Config::FLOAT_EPSILON) const noexcept;
+                                                  double epsilon = std::is_same_v<T, double> ||
+                                                          std::is_same_v<U, double>
+                                                      ? Config::DOUBLE_EPSILON
+                                                      : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -464,10 +463,10 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr Vector2<bool> neq(const Vector2& lhs, const Vector2<U>& rhs,
-                                                          double epsilon = std::is_same_v<T, double> ||
-                                                                  std::is_same_v<U, double>
-                                                              ? Config::DOUBLE_EPSILON
-                                                              : Config::FLOAT_EPSILON) noexcept;
+                                                         double epsilon = std::is_same_v<T, double> ||
+                                                                 std::is_same_v<U, double>
+                                                             ? Config::DOUBLE_EPSILON
+                                                             : Config::FLOAT_EPSILON) noexcept;
 
         /** @} */
 
@@ -981,7 +980,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedVector2<T, S> tryDiv(const Vector2& vec, S scalar,
-                                                                     OperationStatus& status) noexcept
+                                                                    OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1446,7 +1445,7 @@ namespace fgm
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr Vector2<Magnitude<T>> tryNormalize(const Vector2& vec,
-                                                                           OperationStatus& status) noexcept
+                                                                          OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1522,7 +1521,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatVector2<T, U> project(const Vector2& vec,
-                                                                           const Vector2<U>& onto) noexcept
+                                                                          const Vector2<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1545,7 +1544,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector2<T, U> projectNorm(const Vector2& vec,
-                                                                          const Vector2<U>& onto) noexcept
+                                                                         const Vector2<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1620,7 +1619,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatVector2<T, U> safeProject(const Vector2& vec,
-                                                                               const Vector2<U>& onto) noexcept
+                                                                              const Vector2<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1645,7 +1644,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector2<T, U> safeProjectNorm(const Vector2& vec,
-                                                                              const Vector2<U>& onto) noexcept
+                                                                             const Vector2<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1674,7 +1673,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedFloatVector2<T, U> tryProject(const Vector2<U>& onto,
-                                                                       OperationStatus& status) const noexcept
+                                                                      OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1701,7 +1700,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVector2<T, U> tryProjectNorm(const Vector2<U>& onto,
-                                                                      OperationStatus& status) const noexcept
+                                                                     OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1730,9 +1729,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector2<T, U> tryProject(const Vector2& vec,
-                                                                              const Vector2<U>& onto,
-                                                                              OperationStatus& status) noexcept
+        [[nodiscard]] static constexpr PromotedFloatVector2<T, U> tryProject(const Vector2& vec, const Vector2<U>& onto,
+                                                                             OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1761,9 +1759,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector2<T, U> tryProjectNorm(const Vector2& vec,
-                                                                             const Vector2<U>& onto,
-                                                                             OperationStatus& status) noexcept
+        [[nodiscard]] static constexpr PromotedVector2<T, U> tryProjectNorm(const Vector2& vec, const Vector2<U>& onto,
+                                                                            OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1823,7 +1820,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatVector2<T, U> reject(const Vector2& vec,
-                                                                          const Vector2<U>& from) noexcept
+                                                                         const Vector2<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1844,7 +1841,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector2<T, U> rejectNorm(const Vector2& vector,
-                                                                         const Vector2<U>& from) noexcept
+                                                                        const Vector2<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1911,7 +1908,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatVector2<T, U> safeReject(const Vector2& vec,
-                                                                              const Vector2<U>& from) noexcept
+                                                                             const Vector2<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1934,7 +1931,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector2<T, U> safeRejectNorm(const Vector2& vec,
-                                                                             const Vector2<U>& from) noexcept
+                                                                            const Vector2<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1959,7 +1956,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedFloatVector2<T, U> tryReject(const Vector2<U>& from,
-                                                                      OperationStatus& status) const noexcept
+                                                                     OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1984,7 +1981,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVector2<T, U> tryRejectNorm(const Vector2<U>& from,
-                                                                     OperationStatus& status) const noexcept
+                                                                    OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2010,9 +2007,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector2<T, U> tryReject(const Vector2& vec,
-                                                                             const Vector2<U>& from,
-                                                                             OperationStatus& status) noexcept
+        [[nodiscard]] static constexpr PromotedFloatVector2<T, U> tryReject(const Vector2& vec, const Vector2<U>& from,
+                                                                            OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2036,9 +2032,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector2<T, U> tryRejectNorm(const Vector2& vec,
-                                                                            const Vector2<U>& from,
-                                                                            OperationStatus& status) noexcept
+        [[nodiscard]] static constexpr PromotedVector2<T, U> tryRejectNorm(const Vector2& vec, const Vector2<U>& from,
+                                                                           OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -2128,9 +2123,108 @@ namespace fgm
 
         /** @} */
 
+        /**
+         * @addtogroup FGM_Vec2_Const
+         * @{
+         */
+
+        /*************************************
+         *                                   *
+         *            CONSTANTS              *
+         *                                   *
+         *************************************/
+
+        /**
+         * @brief A 2D vector with all components set to one (1, 1).
+         */
+        static constexpr Vector2 ONE()
+            requires StrictArithmetic<T>
+        { return Vector2{ T(1), T(1) }; }
+
+
+        /**
+         * @brief A 2D vector with all components set to zero (0, 0).
+         */
+        static constexpr Vector2 ZERO()
+            requires StrictArithmetic<T>
+        { return Vector2{ T(0), T(0) }; }
+
+
+        /**
+         * @brief A 2D vector with all components set to positive infinity.
+         *
+         * @note Constraint to floating point types using `std::floating_point`.
+         */
+        static constexpr Vector2 INF()
+            requires std::floating_point<T>
+        { return Vector2{ T(constants::INFINITY_D), T(constants::INFINITY_D) }; }
+
+
+        /**
+         * @brief A 2D vector with all components set to negative infinity.
+         *
+         * @note Constraint to floating point types using `std::floating_point`.
+         */
+        static constexpr Vector2 INF_NEG()
+            requires std::floating_point<T>
+        { return Vector2{ T(-constants::INFINITY_D), T(-constants::INFINITY_D) }; }
+
+
+        /**
+         * @brief A 2D vector with all components set to Not-A-Number (NaN).
+         *
+         * @note Constraint to floating point types using `std::floating_point`.
+         */
+        static constexpr Vector2 QNAN()
+            requires std::floating_point<T>
+        { return Vector2{ T(constants::NaN_D), T(constants::NaN_D) }; }
+
+
+        /**
+         * @brief A 2D unit vector aligned with the positive X-axis (1, 0).
+         *
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector2 RIGHT()
+            requires std::is_signed_v<T>
+        { return Vector2{ T(1), T(0) }; }
+
+
+        /**
+         * @brief A 2D unit vector aligned with the negative X-axis (-1, 0).
+         *
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector2 LEFT()
+            requires std::is_signed_v<T>
+        { return Vector2{ T(-1), T(0) }; }
+
+
+        /**
+         * @brief A 2D unit vector aligned with the positive Y-axis (0, 1).
+         *
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector2 UP()
+            requires std::is_signed_v<T>
+        { return Vector2{ T(0), T(1) }; }
+
+
+        /**
+         * @brief A 2D unit vector aligned with the negative Y-axis (0, -1).
+         *
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector2 DOWN()
+            requires std::is_signed_v<T>
+        { return Vector2{ T(0), T(-1) }; }
+
+        /** @} */
+
     private:
         std::array<T, dimension> _data;
     };
+
 
 
     /*************************************
@@ -2188,84 +2282,11 @@ namespace fgm
     /** @} */
 
 
-    /**
-     * @addtogroup FGM_Vec2_Const
-     * @{
-     */
-
-    /*************************************
-     *                                   *
-     *            CONSTANTS              *
-     *                                   *
-     *************************************/
-
-    namespace vec2d
-    {
-        /**
-         * @brief A 2D vector with all components set to one (1, 1).
-         *
-         * @note Only available for @ref fgm::StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Vector2<T> one = Vector2<T>(T(1), T(1));
-
-
-        /**
-         * @brief A 2D vector with all components set to zero (0, 0).
-         *
-         * @note Only available for @ref fgm::StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Vector2<T> zero = Vector2<T>(T(0), T(0)); ///< 2D-Vector with all zero-components.
-
-
-        /**
-         * @brief A 2D vector with all components set to positive infinity.
-         *
-         * @note Only available for `std::floating_point` types.
-         */
-        template <StrictArithmetic T>
-            requires std::floating_point<T>
-        inline constexpr Vector2<T> inf = Vector2<T>(T(constants::INFINITY_D), T(constants::INFINITY_D));
-
-
-        /**
-         * @brief A 2D vector with all components set to negative infinity.
-         *
-         * @note Only available for `std::floating_point` types.
-         */
-        template <StrictArithmetic T>
-            requires std::floating_point<T>
-        inline constexpr Vector2<T> infN = Vector2<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D));
-
-
-        /**
-         * @brief A 2D vector with all components set to Not-A-Number (NaN).
-         *
-         * @note Only available for `std::floating_point` types.
-         */
-        template <StrictArithmetic T>
-            requires std::floating_point<T>
-        inline constexpr Vector2<T> nan = Vector2<T>(T(constants::NaN_D), T(constants::NaN_D));
-
-
-        /** @brief A 2D unit vector aligned with the positive X-axis (1, 0). */
-        template <StrictArithmetic T>
-        inline constexpr Vector2<T> x = Vector2<T>(T(1), T(0));
-
-
-        /** @brief A 2D unit vector aligned with the positive Y-axis (0, 1). */
-        template <StrictArithmetic T>
-        inline constexpr Vector2<T> y = Vector2<T>(T(0), T(1));
-    } // namespace vec2d
-
-
     /** @brief Template deduction guide for Vector2 */
     template <typename T>
         requires Arithmetic<T>
     Vector2(T, T) -> Vector2<T>;
 
-    /** @} */
 } // namespace fgm
 
 

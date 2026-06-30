@@ -483,7 +483,7 @@ TEST(Vector2Rejection, SafeReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector2Rejection, SafeReject_FromZeroVectorReturnsSameVector)
 {
-    const fgm::Vector2 zeroVec = fgm::vec2d::zero<TypeParam>;
+    const fgm::Vector2 zeroVec = fgm::Vector2<TypeParam>::ZERO();
 
     const fgm::Vector2 actualRejection = this->_vec.safeReject(zeroVec);
 
@@ -557,7 +557,7 @@ TEST(Vector2Rejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector2Rejection, StaticWrapper_SafeReject_FromZeroVectorReturnsSameVector)
 {
-    const fgm::Vector2 zeroVec = fgm::vec2d::zero<TypeParam>;
+    const fgm::Vector2 zeroVec = fgm::Vector2<TypeParam>::ZERO();
 
     const fgm::Vector2 actualRejection = fgm::Vector2<TypeParam>::safeReject(this->_vec, zeroVec);
 
@@ -591,7 +591,7 @@ TYPED_TEST(Vector2Rejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPointV
 TEST_P(Vector2RejectionNaNTests, SafeReject_NaNVectorReturnsZeroVector)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::vec2d::one<float>;
+    const auto& ontoVec = fgm::Vector2<float>::ONE();
 
     EXPECT_VEC_ZERO(nanVec.safeReject(ontoVec));
 }
@@ -603,7 +603,7 @@ TEST_P(Vector2RejectionNaNTests, SafeReject_NaNVectorReturnsZeroVector)
  */
 TEST_P(Vector2RejectionNaNTests, SafeReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::vec2d::one<float>;
+    const auto& oneVec     = fgm::Vector2<float>::ONE();
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(oneVec.safeReject(ontoNaNVec));
@@ -617,7 +617,7 @@ TEST_P(Vector2RejectionNaNTests, SafeReject_OntoNaNVectorReturnsZeroVectorAndSet
 TEST_P(Vector2RejectionNaNTests, StaticWrapper_SafeReject_NaNVectorReturnsZeroVector)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::vec2d::one<float>;
+    const auto& ontoVec = fgm::Vector2<float>::ONE();
 
     EXPECT_VEC_ZERO(fgm::Vector2<float>::safeReject(nanVec, ontoVec));
 }
@@ -629,7 +629,7 @@ TEST_P(Vector2RejectionNaNTests, StaticWrapper_SafeReject_NaNVectorReturnsZeroVe
  */
 TEST_P(Vector2RejectionNaNTests, StaticWrapper_SafeReject_OntoNaNVectorReturnsZeroVector)
 {
-    const auto& oneVec     = fgm::vec2d::one<float>;
+    const auto& oneVec     = fgm::Vector2<float>::ONE();
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(fgm::Vector2<float>::safeReject(oneVec, ontoNaNVec));
@@ -784,7 +784,7 @@ TEST(Vector2Rejection, TryReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector2Rejection, TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
-    const fgm::Vector2 zeroVec = fgm::vec2d::zero<TypeParam>;
+    const fgm::Vector2 zeroVec = fgm::Vector2<TypeParam>::ZERO();
     fgm::OperationStatus flag;
 
     const fgm::Vector2 actualRejection = this->_vec.tryReject(zeroVec, flag);
@@ -939,7 +939,7 @@ TEST(Vector2Rejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector2Rejection, StaticWrapper_TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
-    const fgm::Vector2 zeroVec = fgm::vec2d::zero<TypeParam>;
+    const fgm::Vector2 zeroVec = fgm::Vector2<TypeParam>::ZERO();
     fgm::OperationStatus flag;
 
     const fgm::Vector2 actualRejection = fgm::Vector2<TypeParam>::tryReject(this->_vec, zeroVec, flag);
@@ -979,7 +979,7 @@ TYPED_TEST(Vector2Rejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointVe
 TEST_P(Vector2RejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::vec2d::one<float>;
+    const auto& ontoVec = fgm::Vector2<float>::ONE();
     fgm::OperationStatus flag;
 
     EXPECT_VEC_ZERO(nanVec.tryReject(ontoVec, flag));
@@ -993,7 +993,7 @@ TEST_P(Vector2RejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorr
  */
 TEST_P(Vector2RejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::vec2d::one<float>;
+    const auto& oneVec     = fgm::Vector2<float>::ONE();
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 
@@ -1009,7 +1009,7 @@ TEST_P(Vector2RejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSets
 TEST_P(Vector2RejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::vec2d::one<float>;
+    const auto& ontoVec = fgm::Vector2<float>::ONE();
     fgm::OperationStatus flag;
 
     EXPECT_VEC_ZERO(fgm::Vector2<float>::tryReject(nanVec, ontoVec, flag));
@@ -1023,7 +1023,7 @@ TEST_P(Vector2RejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVec
  */
 TEST_P(Vector2RejectionNaNTests, StaticWrapper_TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::vec2d::one<float>;
+    const auto& oneVec     = fgm::Vector2<float>::ONE();
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 
