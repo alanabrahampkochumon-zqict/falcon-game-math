@@ -26,7 +26,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4<T>::Matrix4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22, T m23,
-                                    T m30, T m31, T m32, T m33) noexcept
+                                  T m30, T m31, T m32, T m33) noexcept
         : _data{ Vector4{ T(m00), T(m10), T(m20), T(m30) }, Vector4{ T(m01), T(m11), T(m21), T(m31) },
                  Vector4{ T(m02), T(m12), T(m22), T(m32) }, Vector4{ T(m03), T(m13), T(m23), T(m33) } }
     {}
@@ -34,7 +34,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4<T>::Matrix4(const Vector4<T>& col0, const Vector4<T>& col1, const Vector4<T>& col2,
-                                    const Vector4<T>& col3) noexcept
+                                  const Vector4<T>& col3) noexcept
         : _data{ col0, col1, col2, col3 }
     {}
 
@@ -139,7 +139,9 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix4<T>::allEq(const Matrix4& lhs, const Matrix4<U>& rhs, double epsilon) noexcept
-    { return lhs.allEq(rhs, epsilon); }
+    {
+        return lhs.allEq(rhs, epsilon);
+    }
 
 
     template <Arithmetic T>
@@ -168,21 +170,27 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix4<T>::anyNeq(const Matrix4& lhs, const Matrix4<U>& rhs, double epsilon) noexcept
-    { return lhs.anyNeq(rhs, epsilon); }
+    {
+        return lhs.anyNeq(rhs, epsilon);
+    }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix4<T>::operator==(const Matrix4<U>& rhs) const noexcept
-    { return allEq(rhs); }
+    {
+        return allEq(rhs);
+    }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix4<T>::operator!=(const Matrix4<U>& rhs) const noexcept
-    { return anyNeq(rhs); }
+    {
+        return anyNeq(rhs);
+    }
 
 
     /**************************************
@@ -252,7 +260,9 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedMatrix4<T, S> operator*(S scalar, const Matrix4<T>& matrix) noexcept
-    { return matrix * scalar; }
+    {
+        return matrix * scalar;
+    }
 
 
     template <Arithmetic T>
@@ -332,21 +342,21 @@ namespace fgm
             if (!std::is_constant_evaluated())
             {
                 return Vector4<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
-                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
-                                                     std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 0)),
-                                                              static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0))))),
-                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
-                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 1)),
-                                                     std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 1)),
-                                                              static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1))))),
-                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 2)),
-                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 2)),
-                                                     std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 2)),
-                                                              static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2))))),
-                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 3)),
-                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 3)),
-                                                     std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 3)),
-                                                              static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3))))));
+                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
+                                                    std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 0)),
+                                                             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0))))),
+                                  std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
+                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 1)),
+                                                    std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 1)),
+                                                             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1))))),
+                                  std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 2)),
+                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 2)),
+                                                    std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 2)),
+                                                             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2))))),
+                                  std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 3)),
+                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 3)),
+                                                    std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 3)),
+                                                             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3))))));
             }
         }
 
@@ -547,16 +557,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix4<T, S> Matrix4<T>::safeDiv(const Matrix4& mat, S scalar,
-                                                          const Matrix4& fallback) noexcept
+    constexpr PromotedMatrix4<T, S> Matrix4<T>::safeDiv(const Matrix4& mat, S scalar, const Matrix4& fallback) noexcept
         requires StrictArithmetic<T>
-    { return mat.safeDiv(scalar, fallback); }
+    {
+        return mat.safeDiv(scalar, fallback);
+    }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix4<T, S> Matrix4<T>::tryDiv(S scalar, OperationStatus& status,
-                                                         const Matrix4& fallback) const noexcept
+                                                       const Matrix4& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -594,9 +605,11 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix4<T, S> Matrix4<T>::tryDiv(const Matrix4& mat, S scalar, OperationStatus& status,
-                                                         const Matrix4& fallback) noexcept
+                                                       const Matrix4& fallback) noexcept
         requires StrictArithmetic<T>
-    { return mat.tryDiv(scalar, status, fallback); }
+    {
+        return mat.tryDiv(scalar, status, fallback);
+    }
 
 
     /**************************************
@@ -632,7 +645,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr T Matrix4<T>::determinant(const Matrix4& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.determinant(); }
+    {
+        return matrix.determinant();
+    }
 
 
     template <Arithmetic T>
@@ -643,14 +658,16 @@ namespace fgm
          *       _data[row][col] actually gives _data[col][row]
          */
         return Matrix4(_data[0][0], _data[0][1], _data[0][2], _data[0][3], _data[1][0], _data[1][1], _data[1][2],
-                        _data[1][3], _data[2][0], _data[2][1], _data[2][2], _data[2][3], _data[3][0], _data[3][1],
-                        _data[3][2], _data[3][3]);
+                       _data[1][3], _data[2][0], _data[2][1], _data[2][2], _data[2][3], _data[3][0], _data[3][1],
+                       _data[3][2], _data[3][3]);
     }
 
 
     template <Arithmetic T>
     constexpr Matrix4<T> Matrix4<T>::transpose(const Matrix4& matrix) noexcept
-    { return matrix.transpose(); }
+    {
+        return matrix.transpose();
+    }
 
 
     template <Arithmetic T>
@@ -690,14 +707,16 @@ namespace fgm
         auto row3 = u.cross(c) - s * z;
 
         return Matrix4<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t), row2.x(),
-                           row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
+                          row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
     }
 
 
     template <Arithmetic T>
     constexpr Matrix4<Magnitude<T>> Matrix4<T>::inverse(const Matrix4& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.inverse(); }
+    {
+        return matrix.inverse();
+    }
 
 
     template <Arithmetic T>
@@ -751,20 +770,21 @@ namespace fgm
         auto row3 = u.cross(c) - s * z;
 
         return Matrix4<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t), row2.x(),
-                           row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
+                          row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
     }
 
 
     template <Arithmetic T>
-    constexpr Matrix4<Magnitude<T>> Matrix4<T>::safeInverseOf(const Matrix4& matrix,
-                                                                const Matrix4& fallback) noexcept
+    constexpr Matrix4<Magnitude<T>> Matrix4<T>::safeInverseOf(const Matrix4& matrix, const Matrix4& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.safeInverse(fallback); }
+    {
+        return matrix.safeInverse(fallback);
+    }
 
 
     template <Arithmetic T>
     constexpr Matrix4<Magnitude<T>> Matrix4<T>::tryInverse(OperationStatus& status,
-                                                             const Matrix4& fallback) const noexcept
+                                                           const Matrix4& fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -814,27 +834,33 @@ namespace fgm
 
         status = OperationStatus::SUCCESS;
         return Matrix4<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t), row2.x(),
-                           row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
+                          row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
     }
 
 
     template <Arithmetic T>
     constexpr Matrix4<Magnitude<T>> Matrix4<T>::tryInverseOf(const Matrix4& matrix, OperationStatus& status,
-                                                               const Matrix4& fallback) noexcept
+                                                             const Matrix4& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.tryInverse(status, fallback); }
+    {
+        return matrix.tryInverse(status, fallback);
+    }
 
 
     template <Arithmetic T>
     constexpr T Matrix4<T>::trace() const noexcept
         requires StrictArithmetic<T>
-    { return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3]; }
+    {
+        return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3];
+    }
 
 
     template <Arithmetic T>
     constexpr T Matrix4<T>::trace(const Matrix4& matrix) noexcept
         requires StrictArithmetic<T>
-    { return matrix.trace(); }
+    {
+        return matrix.trace();
+    }
 
 
     /**************************************
@@ -845,22 +871,30 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr bool Matrix4<T>::hasInf() const noexcept
-    { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf(); }
+    {
+        return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf();
+    }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4<T>::hasInf(const Matrix4& matrix) noexcept
-    { return matrix.hasInf(); }
+    {
+        return matrix.hasInf();
+    }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4<T>::hasNaN() const noexcept
-    { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN(); }
+    {
+        return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN();
+    }
 
 
     template <Arithmetic T>
     constexpr bool Matrix4<T>::hasNaN(const Matrix4& matrix) noexcept
-    { return matrix.hasNaN(); }
+    {
+        return matrix.hasNaN();
+    }
 } // namespace fgm
 
 

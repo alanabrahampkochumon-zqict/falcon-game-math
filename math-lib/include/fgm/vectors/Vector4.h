@@ -2252,7 +2252,9 @@ namespace fgm
          */
         static constexpr Vector4 ONE()
             requires StrictArithmetic<T>
-        { return Vector4{ T(1), T(1), T(1), T(1) }; }
+        {
+            return Vector4{ T(1), T(1), T(1), T(1) };
+        }
 
 
         /**
@@ -2260,7 +2262,9 @@ namespace fgm
          */
         static constexpr Vector4 ZERO()
             requires StrictArithmetic<T>
-        { return Vector4{ T(0), T(0), T(0), T(0) }; }
+        {
+            return Vector4{ T(0), T(0), T(0), T(0) };
+        }
 
 
         /**
@@ -2296,7 +2300,9 @@ namespace fgm
          */
         static constexpr Vector4 QNAN()
             requires std::floating_point<T>
-        { return Vector4{ T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D) }; }
+        {
+            return Vector4{ T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D) };
+        }
 
 
         /**
@@ -2306,7 +2312,9 @@ namespace fgm
          */
         static constexpr Vector4 RIGHT()
             requires std::is_signed_v<T>
-        { return Vector4{ T(1), T(0), T(0), T(0) }; }
+        {
+            return Vector4{ T(1), T(0), T(0), T(0) };
+        }
 
 
         /**
@@ -2316,7 +2324,9 @@ namespace fgm
          */
         static constexpr Vector4 LEFT()
             requires std::is_signed_v<T>
-        { return Vector4{ T(-1), T(0), T(0), T(0) }; }
+        {
+            return Vector4{ T(-1), T(0), T(0), T(0) };
+        }
 
 
         /**
@@ -2326,7 +2336,9 @@ namespace fgm
          */
         static constexpr Vector4 UP()
             requires std::is_signed_v<T>
-        { return Vector4{ T(0), T(1), T(0), T(0) }; }
+        {
+            return Vector4{ T(0), T(1), T(0), T(0) };
+        }
 
 
         /**
@@ -2336,7 +2348,9 @@ namespace fgm
          */
         static constexpr Vector4 DOWN()
             requires std::is_signed_v<T>
-        { return Vector4{ T(0), T(-1), T(0), T(0) }; }
+        {
+            return Vector4{ T(0), T(-1), T(0), T(0) };
+        }
 
 
 #ifdef FGM_LEFT_HANDED
@@ -2348,7 +2362,9 @@ namespace fgm
          */
         static constexpr Vector3 FORWARD()
             requires std::is_signed_v<T>
-        { return Vector3{ T(0), T(0), T(1), T(0) }; }
+        {
+            return Vector3{ T(0), T(0), T(1), T(0) };
+        }
 
 
         /**
@@ -2359,7 +2375,9 @@ namespace fgm
          */
         static constexpr Vector3 BACKWARD()
             requires std::is_signed_v<T>
-        { return Vector3{ T(0), T(0), T(-1), T(0) }; }
+        {
+            return Vector3{ T(0), T(0), T(-1), T(0) };
+        }
 
 
 #else
@@ -2371,7 +2389,9 @@ namespace fgm
          */
         static constexpr Vector4 FORWARD()
             requires std::is_signed_v<T>
-        { return Vector4{ T(0), T(0), T(-1), T(0) }; }
+        {
+            return Vector4{ T(0), T(0), T(-1), T(0) };
+        }
 
 
         /**
@@ -2382,7 +2402,9 @@ namespace fgm
          */
         static constexpr Vector4 BACKWARD()
             requires std::is_signed_v<T>
-        { return Vector4{ T(0), T(0), T(1), T(0) }; }
+        {
+            return Vector4{ T(0), T(0), T(1), T(0) };
+        }
 
 #endif
 
@@ -2397,7 +2419,9 @@ namespace fgm
          */
         static constexpr Vector4 POINT(const T x = T(0), const T y = T(0), const T z = T(0))
             requires std::is_signed_v<T>
-        { return Vector4{ x, y, z, T(1) }; }
+        {
+            return Vector4{ x, y, z, T(1) };
+        }
 
 
         // NOLINTEND

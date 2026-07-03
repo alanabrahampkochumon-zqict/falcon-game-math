@@ -128,7 +128,9 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix2<T>::allEq(const Matrix2& lhs, const Matrix2<U>& rhs, const double epsilon) noexcept
-    { return lhs.allEq(rhs, epsilon); }
+    {
+        return lhs.allEq(rhs, epsilon);
+    }
 
 
     template <Arithmetic T>
@@ -156,21 +158,27 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix2<T>::anyNeq(const Matrix2& lhs, const Matrix2<U>& rhs, const double epsilon) noexcept
-    { return lhs.anyNeq(rhs, epsilon); }
+    {
+        return lhs.anyNeq(rhs, epsilon);
+    }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix2<T>::operator==(const Matrix2<U>& rhs) const noexcept
-    { return allEq(rhs); }
+    {
+        return allEq(rhs);
+    }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Matrix2<T>::operator!=(const Matrix2<U>& rhs) const noexcept
-    { return anyNeq(rhs); }
+    {
+        return anyNeq(rhs);
+    }
 
 
 
@@ -248,7 +256,9 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedMatrix2<T, S> operator*(const S scalar, const Matrix2<T>& matrix) noexcept
-    { return matrix * scalar; }
+    {
+        return matrix * scalar;
+    }
 
 
     template <Arithmetic T>
@@ -265,9 +275,9 @@ namespace fgm
             if (!std::is_constant_evaluated())
             {
                 return Vector2<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
-                                            static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
-                                   std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
-                                            static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
+                                           static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
+                                  std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
+                                           static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
             }
         }
 #endif
@@ -293,9 +303,9 @@ namespace fgm
             if (!std::is_constant_evaluated())
             {
                 return Vector2<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
-                                            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0))),
-                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
-                                            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1))));
+                                           static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0))),
+                                  std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
+                                           static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1))));
             }
         }
 
@@ -439,15 +449,17 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix2<T, S> Matrix2<T>::safeDiv(const Matrix2& mat, const S scalar,
-                                                          const Matrix2& fallback) noexcept
+                                                        const Matrix2& fallback) noexcept
         requires StrictArithmetic<T>
-    { return mat.safeDiv(scalar, fallback); }
+    {
+        return mat.safeDiv(scalar, fallback);
+    }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix2<T, S> Matrix2<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                         const Matrix2& fallback) const noexcept
+                                                       const Matrix2& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -484,9 +496,11 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMatrix2<T, S> Matrix2<T>::tryDiv(const Matrix2& mat, const S scalar, OperationStatus& status,
-                                                         const Matrix2& fallback) noexcept
+                                                       const Matrix2& fallback) noexcept
         requires StrictArithmetic<T>
-    { return mat.tryDiv(scalar, status, fallback); }
+    {
+        return mat.tryDiv(scalar, status, fallback);
+    }
 
 
 
@@ -500,13 +514,17 @@ namespace fgm
     template <Arithmetic T>
     constexpr T Matrix2<T>::determinant() const noexcept
         requires SignedStrictArithmetic<T>
-    { return _data[0][0] * _data[1][1] - _data[0][1] * _data[1][0]; }
+    {
+        return _data[0][0] * _data[1][1] - _data[0][1] * _data[1][0];
+    }
 
 
     template <Arithmetic T>
     constexpr T Matrix2<T>::determinant(const Matrix2& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.determinant(); }
+    {
+        return matrix.determinant();
+    }
 
 
     template <Arithmetic T>
@@ -519,7 +537,9 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix2<T> Matrix2<T>::transpose(const Matrix2& matrix) noexcept
-    { return matrix.transpose(); }
+    {
+        return matrix.transpose();
+    }
 
 
     template <Arithmetic T>
@@ -542,14 +562,16 @@ namespace fgm
         R factor = R(1) / det;
 
         return Matrix2<R>(static_cast<R>(_data[1][1]) * factor, static_cast<R>(-_data[1][0]) * factor,
-                           static_cast<R>(-_data[0][1]) * factor, static_cast<R>(_data[0][0]) * factor);
+                          static_cast<R>(-_data[0][1]) * factor, static_cast<R>(_data[0][0]) * factor);
     }
 
 
     template <Arithmetic T>
     constexpr Matrix2<Magnitude<T>> Matrix2<T>::inverse(const Matrix2& matrix) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.inverse(); }
+    {
+        return matrix.inverse();
+    }
 
 
     template <Arithmetic T>
@@ -581,15 +603,16 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Matrix2<Magnitude<T>> Matrix2<T>::safeInverseOf(const Matrix2& matrix,
-                                                                const Matrix2& fallback) noexcept
+    constexpr Matrix2<Magnitude<T>> Matrix2<T>::safeInverseOf(const Matrix2& matrix, const Matrix2& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.safeInverse(fallback); }
+    {
+        return matrix.safeInverse(fallback);
+    }
 
 
     template <Arithmetic T>
     constexpr Matrix2<Magnitude<T>> Matrix2<T>::tryInverse(OperationStatus& status,
-                                                             const Matrix2& fallback) const noexcept
+                                                           const Matrix2& fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -627,21 +650,27 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix2<Magnitude<T>> Matrix2<T>::tryInverseOf(const Matrix2& matrix, OperationStatus& status,
-                                                               const Matrix2& fallback) noexcept
+                                                             const Matrix2& fallback) noexcept
         requires SignedStrictArithmetic<T>
-    { return matrix.tryInverse(status, fallback); }
+    {
+        return matrix.tryInverse(status, fallback);
+    }
 
 
     template <Arithmetic T>
     constexpr T Matrix2<T>::trace() const noexcept
         requires StrictArithmetic<T>
-    { return _data[0][0] + _data[1][1]; }
+    {
+        return _data[0][0] + _data[1][1];
+    }
 
 
     template <Arithmetic T>
     constexpr T Matrix2<T>::trace(const Matrix2& matrix) noexcept
         requires StrictArithmetic<T>
-    { return matrix.trace(); }
+    {
+        return matrix.trace();
+    }
 
 
 
@@ -653,22 +682,30 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr bool Matrix2<T>::hasInf() const noexcept
-    { return _data[0].hasInf() || _data[1].hasInf(); }
+    {
+        return _data[0].hasInf() || _data[1].hasInf();
+    }
 
 
     template <Arithmetic T>
     constexpr bool Matrix2<T>::hasInf(const Matrix2& matrix) noexcept
-    { return matrix.hasInf(); }
+    {
+        return matrix.hasInf();
+    }
 
 
     template <Arithmetic T>
     constexpr bool Matrix2<T>::hasNaN() const noexcept
-    { return _data[0].hasNaN() || _data[1].hasNaN(); }
+    {
+        return _data[0].hasNaN() || _data[1].hasNaN();
+    }
 
 
     template <Arithmetic T>
     constexpr bool Matrix2<T>::hasNaN(const Matrix2& matrix) noexcept
-    { return matrix.hasNaN(); }
+    {
+        return matrix.hasNaN();
+    }
 
 
 
@@ -684,9 +721,9 @@ namespace fgm
     constexpr Matrix2<T> Matrix2<T>::makeRotation(const U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
-        using R = PromotedValue_t<T, U>;
-        R cosine   = std::cos(angle);
-        R sine  = std::sin(angle);
+        using R  = PromotedValue_t<T, U>;
+        R cosine = std::cos(angle);
+        R sine   = std::sin(angle);
 #ifdef FGM_LEFT_HANDED
         return Matrix2(cosine, sine, -sine, cosine);
 #else
@@ -698,19 +735,25 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix2<T> Matrix2<T>::makeScale(const T scale) noexcept
         requires StrictArithmetic<T>
-    { return Matrix2(scale, T(0), T(0), scale); }
+    {
+        return Matrix2(scale, T(0), T(0), scale);
+    }
 
 
     template <Arithmetic T>
     constexpr Matrix2<T> Matrix2<T>::makeScale(const T scaleX, const T scaleY) noexcept
         requires StrictArithmetic<T>
-    { return Matrix2(scaleX, T(0), T(0), scaleY); }
+    {
+        return Matrix2(scaleX, T(0), T(0), scaleY);
+    }
 
 
     template <Arithmetic T>
     constexpr Matrix2<T> Matrix2<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
         requires StrictArithmetic<T>
-    { return Matrix2(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1)); }
+    {
+        return Matrix2(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1));
+    }
 
 } // namespace fgm
 

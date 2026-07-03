@@ -2141,7 +2141,9 @@ namespace fgm
          */
         static constexpr Vector2 ONE()
             requires StrictArithmetic<T>
-        { return Vector2{ T(1), T(1) }; }
+        {
+            return Vector2{ T(1), T(1) };
+        }
 
 
         /**
@@ -2149,7 +2151,9 @@ namespace fgm
          */
         static constexpr Vector2 ZERO()
             requires StrictArithmetic<T>
-        { return Vector2{ T(0), T(0) }; }
+        {
+            return Vector2{ T(0), T(0) };
+        }
 
 
         /**
@@ -2159,7 +2163,9 @@ namespace fgm
          */
         static constexpr Vector2 INF()
             requires std::floating_point<T>
-        { return Vector2{ T(constants::INFINITY_D), T(constants::INFINITY_D) }; }
+        {
+            return Vector2{ T(constants::INFINITY_D), T(constants::INFINITY_D) };
+        }
 
 
         /**
@@ -2169,7 +2175,9 @@ namespace fgm
          */
         static constexpr Vector2 INF_NEG()
             requires std::floating_point<T>
-        { return Vector2{ T(-constants::INFINITY_D), T(-constants::INFINITY_D) }; }
+        {
+            return Vector2{ T(-constants::INFINITY_D), T(-constants::INFINITY_D) };
+        }
 
 
         /**
@@ -2179,7 +2187,9 @@ namespace fgm
          */
         static constexpr Vector2 QNAN()
             requires std::floating_point<T>
-        { return Vector2{ T(constants::NaN_D), T(constants::NaN_D) }; }
+        {
+            return Vector2{ T(constants::NaN_D), T(constants::NaN_D) };
+        }
 
 
         /**
@@ -2189,7 +2199,9 @@ namespace fgm
          */
         static constexpr Vector2 RIGHT()
             requires std::is_signed_v<T>
-        { return Vector2{ T(1), T(0) }; }
+        {
+            return Vector2{ T(1), T(0) };
+        }
 
 
         /**
@@ -2199,7 +2211,9 @@ namespace fgm
          */
         static constexpr Vector2 LEFT()
             requires std::is_signed_v<T>
-        { return Vector2{ T(-1), T(0) }; }
+        {
+            return Vector2{ T(-1), T(0) };
+        }
 
 
         /**
@@ -2209,7 +2223,9 @@ namespace fgm
          */
         static constexpr Vector2 UP()
             requires std::is_signed_v<T>
-        { return Vector2{ T(0), T(1) }; }
+        {
+            return Vector2{ T(0), T(1) };
+        }
 
 
         /**
@@ -2219,7 +2235,9 @@ namespace fgm
          */
         static constexpr Vector2 DOWN()
             requires std::is_signed_v<T>
-        { return Vector2{ T(0), T(-1) }; }
+        {
+            return Vector2{ T(0), T(-1) };
+        }
 
         // NOLINTEND
 

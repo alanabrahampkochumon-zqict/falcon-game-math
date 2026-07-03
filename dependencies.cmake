@@ -35,23 +35,37 @@ FetchContent_Declare(
         SYSTEM
 )
 
-FetchContent_MakeAvailable(googletest)
-FetchContent_MakeAvailable(googlebenchmark)
-FetchContent_MakeAvailable(sdl3)
-FetchContent_MakeAvailable(fast_float)
+# Test Harness Dependencies
+if (ENABLE_FGM_TEST)
+    FetchContent_MakeAvailable(googletest)
 
-# Group google_test projects into a "Gtest" folder
-set_target_properties(
-        gtest gtest_main gmock gmock_main
-        PROPERTIES FOLDER "Google Test"
-)
-set_target_properties(benchmark benchmark_main PROPERTIES FOLDER "Google Benchmark")
+    # Group google_test projects into a "Gtest" folder
+    set_target_properties(
+            gtest gtest_main gmock gmock_main
+            PROPERTIES FOLDER "Google Test"
+    )
 
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE) # Statically link Gtest
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
-
-if (MSVC)
-    target_compile_options(gtest PRIVATE /WX- /W0)
-    target_compile_options(gtest_main PRIVATE /WX- /W0)
+    if (MSVC)
+        target_compile_options(gtest PRIVATE /WX- /W0)
+        target_compile_options(gtest_main PRIVATE /WX- /W0)
+    endif ()
 endif ()
+
+# Benchmark Dependencies
+if (ENABLE_FGM_BENCHMARK)
+    FetchContent_MakeAvailable(googlebenchmark)
+
+    set_target_properties(benchmark benchmark_main PROPERTIES FOLDER "Google Benchmark")
+endif ()
+
+# Demo Dependencies
+if (ENABLE_FGM_DEMO)
+    FetchContent_MakeAvailable(sdl3)
+    FetchContent_MakeAvailable(fast_float)
+endif ()
+
+
+#set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE) # Statically link Gtest
+#set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+#set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+

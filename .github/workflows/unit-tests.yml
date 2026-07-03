@@ -79,6 +79,10 @@ jobs:
                   -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
                   -D ENABLE_STRICT=ON
                   -D NONCOMPREHENSIVE=ON
+                  -D ENABLE_FGM_TEST=ON
+                  -D ENABLE_FGM_BENCHMARK=ON
+                  -D ENABLE_FGM_DEMO=ON
+                  -D ENABLE_FGM_DOCS=ON
                   -DSDL_UNIX_CONSOLE_BUILD=ON
                   -S ${{ github.workspace }}
 

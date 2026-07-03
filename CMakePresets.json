@@ -8,7 +8,11 @@
             "binaryDir": "${sourceDir}/out/build/${presetName}",
             "cacheVariables": {
                 "ENABLE_STRICT": "ON",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "ENABLE_FGM_TEST": "ON",
+                "ENABLE_FGM_BENCHMARK": "ON",
+                "ENABLE_FGM_DEMO": "ON",
+                "ENABLE_FGM_DOCS": "ON"
             }
         },
         {

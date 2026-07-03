@@ -10,8 +10,8 @@
  */
 
 
-#include "MathTraits.h"
 #include "Config.h"
+#include "MathTraits.h"
 
 namespace fgm::utils
 {
@@ -57,8 +57,8 @@ namespace fgm::utils
      *
      * @return The square root of a number promoted to the near floating point type.
      */
-    //template <Arithmetic T>
-    //constexpr Magnitude<T> sqrt(T num, double epsilon = Config::EPSILON<Magnitude<T>>) noexcept;
+    // template <Arithmetic T>
+    // constexpr Magnitude<T> sqrt(T num, double epsilon = Config::EPSILON<Magnitude<T>>) noexcept;
 
     /** @} */
 

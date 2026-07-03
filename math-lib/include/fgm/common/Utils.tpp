@@ -25,13 +25,13 @@ namespace fgm::utils
     }
 
 
-    //template <Arithmetic T>
-    //constexpr Magnitude<T> sqrt(T num, double epsilon) noexcept
+    // template <Arithmetic T>
+    // constexpr Magnitude<T> sqrt(T num, double epsilon) noexcept
     //{
-    //    if (std::is_constant_evaluated())
-    //    {
-    //        // Compile time evaluation
-    //        using R = Magnitude<T>;
+    //     if (std::is_constant_evaluated())
+    //     {
+    //         // Compile time evaluation
+    //         using R = Magnitude<T>;
 
     //        const R fpNum = static_cast<R>(num);
     //        R guess    = fpNum / 2; // Initial guess num / 2.

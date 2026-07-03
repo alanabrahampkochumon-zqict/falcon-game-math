@@ -1157,7 +1157,9 @@ namespace fgm
          */
         static constexpr Matrix2 EYE()
             requires fgm::StrictArithmetic<T>
-        { return Matrix2{ T(1), T(0), T(0), T(1) }; }
+        {
+            return Matrix2{ T(1), T(0), T(0), T(1) };
+        }
 
 
         /**
@@ -1167,7 +1169,9 @@ namespace fgm
          */
         static constexpr Matrix2 ZERO()
             requires fgm::StrictArithmetic<T>
-        { return Matrix2{ T(0), T(0), T(0), T(0) }; }
+        {
+            return Matrix2{ T(0), T(0), T(0), T(0) };
+        }
 
 
         // NOLINTEND

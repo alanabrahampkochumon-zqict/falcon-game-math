@@ -85,42 +85,58 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr T Vector4<T>::x() const noexcept
-    { return _data[0]; }
+    {
+        return _data[0];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::x() noexcept
-    { return _data[0]; }
+    {
+        return _data[0];
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::y() const noexcept
-    { return _data[1]; }
+    {
+        return _data[1];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::y() noexcept
-    { return _data[1]; }
+    {
+        return _data[1];
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::z() const noexcept
-    { return _data[2]; }
+    {
+        return _data[2];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::z() noexcept
-    { return _data[2]; }
+    {
+        return _data[2];
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::w() const noexcept
-    { return _data[3]; }
+    {
+        return _data[3];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::w() noexcept
-    { return _data[3]; }
+    {
+        return _data[3];
+    }
 
 
     /**************************************
@@ -131,42 +147,58 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr T Vector4<T>::s() const noexcept
-    { return _data[0]; }
+    {
+        return _data[0];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::s() noexcept
-    { return _data[0]; }
+    {
+        return _data[0];
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::t() const noexcept
-    { return _data[1]; }
+    {
+        return _data[1];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::t() noexcept
-    { return _data[1]; }
+    {
+        return _data[1];
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::p() const noexcept
-    { return _data[2]; }
+    {
+        return _data[2];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::p() noexcept
-    { return _data[2]; }
+    {
+        return _data[2];
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::q() const noexcept
-    { return _data[3]; }
+    {
+        return _data[3];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::q() noexcept
-    { return _data[3]; }
+    {
+        return _data[3];
+    }
 
 
     /**************************************
@@ -177,42 +209,58 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr T Vector4<T>::r() const noexcept
-    { return _data[0]; }
+    {
+        return _data[0];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::r() noexcept
-    { return _data[0]; }
+    {
+        return _data[0];
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::g() const noexcept
-    { return _data[1]; }
+    {
+        return _data[1];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::g() noexcept
-    { return _data[1]; }
+    {
+        return _data[1];
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::b() const noexcept
-    { return _data[2]; }
+    {
+        return _data[2];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::b() noexcept
-    { return _data[2]; }
+    {
+        return _data[2];
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::a() const noexcept
-    { return _data[3]; }
+    {
+        return _data[3];
+    }
 
 
     template <Arithmetic T>
     constexpr T& Vector4<T>::a() noexcept
-    { return _data[3]; }
+    {
+        return _data[3];
+    }
 
 
     /**************************************
@@ -274,7 +322,9 @@ namespace fgm
     template <Arithmetic T>
     template <std::size_t... Indices>
     constexpr auto Vector4<T>::swizzle(const Vector4& vec) noexcept
-    { return vec.swizzle<Indices...>(); }
+    {
+        return vec.swizzle<Indices...>();
+    }
 
 
     /***************************************
@@ -318,7 +368,9 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Vector4<T>::allEq(const Vector4& lhs, const Vector4<U>& rhs, const double epsilon) noexcept
-    { return lhs.allEq(rhs, epsilon); }
+    {
+        return lhs.allEq(rhs, epsilon);
+    }
 
 
     template <Arithmetic T>
@@ -345,7 +397,9 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Vector4<T>::anyNeq(const Vector4& lhs, const Vector4<U>& rhs, const double epsilon) noexcept
-    { return lhs.anyNeq(rhs, epsilon); }
+    {
+        return lhs.anyNeq(rhs, epsilon);
+    }
 
 
     /**************************************
@@ -358,13 +412,17 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Vector4<T>::operator==(const Vector4<U>& rhs) const noexcept
-    { return this->allEq(rhs); }
+    {
+        return this->allEq(rhs);
+    }
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr bool Vector4<T>::operator!=(const Vector4<U>& rhs) const noexcept
-    { return this->anyNeq(rhs); }
+    {
+        return this->anyNeq(rhs);
+    }
 
 
     /***************************************
@@ -386,9 +444,9 @@ namespace fgm
         {
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
             return Vector4<bool>(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
-                                  _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon,
-                                  _data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon,
-                                  _data[3] == rhs[3] || fgm::abs(_data[3] - rhs[3]) <= epsilon);
+                                 _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon,
+                                 _data[2] == rhs[2] || fgm::abs(_data[2] - rhs[2]) <= epsilon,
+                                 _data[3] == rhs[3] || fgm::abs(_data[3] - rhs[3]) <= epsilon);
         }
     }
 
@@ -397,7 +455,9 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::eq(const Vector4& lhs, const Vector4<U>& rhs, const double epsilon) noexcept
-    { return lhs.eq(rhs, epsilon); }
+    {
+        return lhs.eq(rhs, epsilon);
+    }
 
 
     template <Arithmetic T>
@@ -413,9 +473,9 @@ namespace fgm
         {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
             return Vector4<bool>(_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon),
-                                  _data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon),
-                                  _data[2] != rhs[2] && !(fgm::abs(_data[2] - rhs[2]) <= epsilon),
-                                  _data[3] != rhs[3] && !(fgm::abs(_data[3] - rhs[3]) <= epsilon));
+                                 _data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon),
+                                 _data[2] != rhs[2] && !(fgm::abs(_data[2] - rhs[2]) <= epsilon),
+                                 _data[3] != rhs[3] && !(fgm::abs(_data[3] - rhs[3]) <= epsilon));
         }
     }
 
@@ -423,9 +483,10 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Vector4<bool> Vector4<T>::neq(const Vector4& lhs, const Vector4<U>& rhs,
-                                              const double epsilon) noexcept
-    { return lhs.neq(rhs, epsilon); }
+    constexpr Vector4<bool> Vector4<T>::neq(const Vector4& lhs, const Vector4<U>& rhs, const double epsilon) noexcept
+    {
+        return lhs.neq(rhs, epsilon);
+    }
 
 
     /***************************************
@@ -439,7 +500,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::gt(const Vector4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
-    { return Vector4<bool>(_data[0] > rhs[0], _data[1] > rhs[1], _data[2] > rhs[2], _data[3] > rhs[3]); }
+    {
+        return Vector4<bool>(_data[0] > rhs[0], _data[1] > rhs[1], _data[2] > rhs[2], _data[3] > rhs[3]);
+    }
 
 
     template <Arithmetic T>
@@ -447,7 +510,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::gt(const Vector4& lhs, const Vector4<U>& rhs) noexcept
         requires StrictArithmetic<T>
-    { return lhs.gt(rhs); }
+    {
+        return lhs.gt(rhs);
+    }
 
 
     template <Arithmetic T>
@@ -455,7 +520,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::gte(const Vector4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
-    { return Vector4<bool>(_data[0] >= rhs[0], _data[1] >= rhs[1], _data[2] >= rhs[2], _data[3] >= rhs[3]); }
+    {
+        return Vector4<bool>(_data[0] >= rhs[0], _data[1] >= rhs[1], _data[2] >= rhs[2], _data[3] >= rhs[3]);
+    }
 
 
     template <Arithmetic T>
@@ -463,7 +530,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::gte(const Vector4& lhs, const Vector4<U>& rhs) noexcept
         requires StrictArithmetic<T>
-    { return lhs.gte(rhs); }
+    {
+        return lhs.gte(rhs);
+    }
 
 
     template <Arithmetic T>
@@ -471,7 +540,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::lt(const Vector4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
-    { return Vector4<bool>(_data[0] < rhs[0], _data[1] < rhs[1], _data[2] < rhs[2], _data[3] < rhs[3]); }
+    {
+        return Vector4<bool>(_data[0] < rhs[0], _data[1] < rhs[1], _data[2] < rhs[2], _data[3] < rhs[3]);
+    }
 
 
     template <Arithmetic T>
@@ -479,7 +550,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::lt(const Vector4& lhs, const Vector4<U>& rhs) noexcept
         requires StrictArithmetic<T>
-    { return lhs.lt(rhs); }
+    {
+        return lhs.lt(rhs);
+    }
 
 
     template <Arithmetic T>
@@ -500,7 +573,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::lte(const Vector4& lhs, const Vector4<U>& rhs) noexcept
         requires StrictArithmetic<T>
-    { return lhs.lte(rhs); }
+    {
+        return lhs.lte(rhs);
+    }
 
 
     /***************************************
@@ -516,7 +591,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::operator>(const Vector4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
-    { return this->gt(rhs); }
+    {
+        return this->gt(rhs);
+    }
 
 
     template <Arithmetic T>
@@ -524,7 +601,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::operator>=(const Vector4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
-    { return this->gte(rhs); }
+    {
+        return this->gte(rhs);
+    }
 
 
     template <Arithmetic T>
@@ -532,7 +611,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::operator<(const Vector4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
-    { return this->lt(rhs); }
+    {
+        return this->lt(rhs);
+    }
 
 
     template <Arithmetic T>
@@ -540,7 +621,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr Vector4<bool> Vector4<T>::operator<=(const Vector4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
-    { return this->lte(rhs); }
+    {
+        return this->lte(rhs);
+    }
 
 #endif
 
@@ -554,7 +637,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr Vector4<T> Vector4<T>::operator&(const Vector4& rhs) const noexcept
         requires std::is_same_v<T, bool>
-    { return Vector4(_data[0] & rhs[0], _data[1] & rhs[1], _data[2] & rhs[2], _data[3] & rhs[3]); }
+    {
+        return Vector4(_data[0] & rhs[0], _data[1] & rhs[1], _data[2] & rhs[2], _data[3] & rhs[3]);
+    }
 
     template <Arithmetic T>
     constexpr Vector4<T>& Vector4<T>::operator&=(const Vector4& rhs) noexcept
@@ -568,7 +653,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr Vector4<T> Vector4<T>::operator|(const Vector4& rhs) const noexcept
         requires std::is_same_v<T, bool>
-    { return Vector4(_data[0] | rhs[0], _data[1] | rhs[1], _data[2] | rhs[2], _data[3] | rhs[3]); }
+    {
+        return Vector4(_data[0] | rhs[0], _data[1] | rhs[1], _data[2] | rhs[2], _data[3] | rhs[3]);
+    }
 
 
     template <Arithmetic T>
@@ -583,7 +670,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr Vector4<T> Vector4<T>::operator!() const noexcept
         requires std::is_same_v<T, bool>
-    { return Vector4(!_data[0], !_data[1], !_data[2], !_data[3]); }
+    {
+        return Vector4(!_data[0], !_data[1], !_data[2], !_data[3]);
+    }
 
 
     /*************************************
@@ -663,7 +752,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr Vector4<T> Vector4<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
-    { return Vector4(-_data[0], -_data[1], -_data[2], -_data[3]); }
+    {
+        return Vector4(-_data[0], -_data[1], -_data[2], -_data[3]);
+    }
 
 
     /*************************************
@@ -685,7 +776,9 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedVector4<T, S> operator*(const S scalar, const Vector4<T>& vector) noexcept
         requires StrictArithmetic<T>
-    { return vector * scalar; }
+    {
+        return vector * scalar;
+    }
 
 
     template <Arithmetic T>
@@ -790,7 +883,9 @@ namespace fgm
     template <StrictArithmetic S>
     constexpr PromotedVector4<T, S> Vector4<T>::safeDiv(const Vector4& vec, const S scalar) noexcept
         requires StrictArithmetic<T>
-    { return vec.safeDiv(scalar); }
+    {
+        return vec.safeDiv(scalar);
+    }
 
 
     template <Arithmetic T>
@@ -831,10 +926,11 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedVector4<T, S> Vector4<T>::tryDiv(const Vector4& vec, S scalar,
-                                                         OperationStatus& status) noexcept
+    constexpr PromotedVector4<T, S> Vector4<T>::tryDiv(const Vector4& vec, S scalar, OperationStatus& status) noexcept
         requires StrictArithmetic<T>
-    { return vec.tryDiv(scalar, status); }
+    {
+        return vec.tryDiv(scalar, status);
+    }
 
 
     /*************************************
@@ -873,7 +969,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector4<T>::dot(const Vector4& lhs, const Vector4<U>& rhs) noexcept
         requires StrictArithmetic<T>
-    { return lhs.dot(rhs); }
+    {
+        return lhs.dot(rhs);
+    }
 
 
     /*************************************
@@ -900,43 +998,57 @@ namespace fgm
     template <Arithmetic T>
     constexpr Magnitude<T> Vector4<T>::mag(const Vector4& vec) noexcept
         requires StrictArithmetic<T>
-    { return vec.mag(); }
+    {
+        return vec.mag();
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::magSq() const noexcept
         requires StrictArithmetic<T>
-    { return this->dot(*this); }
+    {
+        return this->dot(*this);
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::magSq(const Vector4& vec) noexcept
         requires StrictArithmetic<T>
-    { return vec.magSq(); }
+    {
+        return vec.magSq();
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::manhattanNorm() const noexcept
         requires StrictArithmetic<T>
-    { return fgm::abs(_data[0]) + fgm::abs(_data[1]) + fgm::abs(_data[2]) + fgm::abs(_data[3]); }
+    {
+        return fgm::abs(_data[0]) + fgm::abs(_data[1]) + fgm::abs(_data[2]) + fgm::abs(_data[3]);
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::manhattanNorm(const Vector4& vec) noexcept
         requires StrictArithmetic<T>
-    { return vec.manhattanNorm(); }
+    {
+        return vec.manhattanNorm();
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::chebyshevNorm() const noexcept
         requires StrictArithmetic<T>
-    { return std::max({ fgm::abs(_data[0]), fgm::abs(_data[1]), fgm::abs(_data[2]), fgm::abs(_data[3]) }); }
+    {
+        return std::max({ fgm::abs(_data[0]), fgm::abs(_data[1]), fgm::abs(_data[2]), fgm::abs(_data[3]) });
+    }
 
 
     template <Arithmetic T>
     constexpr T Vector4<T>::chebyshevNorm(const Vector4& vec) noexcept
         requires StrictArithmetic<T>
-    { return vec.chebyshevNorm(); }
+    {
+        return vec.chebyshevNorm();
+    }
 
 
 
@@ -970,10 +1082,11 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Magnitude<PromotedValue_t<T, U>> Vector4<T>::dist(const Vector4<U>& lhs,
-                                                                 const Vector4<U>& rhs) noexcept
+    constexpr Magnitude<PromotedValue_t<T, U>> Vector4<T>::dist(const Vector4<U>& lhs, const Vector4<U>& rhs) noexcept
         requires StrictArithmetic<T>
-    { return lhs.dist(rhs); }
+    {
+        return lhs.dist(rhs);
+    }
 
 
     template <Arithmetic T>
@@ -996,7 +1109,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector4<T>::distSq(const Vector4<U>& lhs, const Vector4<U>& rhs) noexcept
         requires StrictArithmetic<T>
-    { return lhs.distSq(rhs); }
+    {
+        return lhs.distSq(rhs);
+    }
 
 
 
@@ -1022,7 +1137,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector4<T>::manhattanDist(const Vector4<U>& lhs, const Vector4<U>& rhs) noexcept
         requires StrictArithmetic<T>
-    { return lhs.manhattanDist(rhs); }
+    {
+        return lhs.manhattanDist(rhs);
+    }
 
 
 
@@ -1048,7 +1165,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedValue_t<T, U> Vector4<T>::chebyshevDist(const Vector4<U>& lhs, const Vector4<U>& rhs) noexcept
         requires StrictArithmetic<T>
-    { return lhs.chebyshevDist(rhs); }
+    {
+        return lhs.chebyshevDist(rhs);
+    }
 
 
 
@@ -1072,7 +1191,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr Vector4<Magnitude<T>> Vector4<T>::normalize(const Vector4& vec) noexcept
         requires StrictArithmetic<T>
-    { return vec.normalize(); }
+    {
+        return vec.normalize();
+    }
 
 
     template <Arithmetic T>
@@ -1097,7 +1218,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr Vector4<Magnitude<T>> Vector4<T>::safeNormalize(const Vector4& vec) noexcept
         requires StrictArithmetic<T>
-    { return vec.safeNormalize(); }
+    {
+        return vec.safeNormalize();
+    }
 
 
     template <Arithmetic T>
@@ -1125,7 +1248,9 @@ namespace fgm
     template <Arithmetic T>
     constexpr Vector4<Magnitude<T>> Vector4<T>::tryNormalize(const Vector4& vec, OperationStatus& status) noexcept
         requires StrictArithmetic<T>
-    { return vec.tryNormalize(status); }
+    {
+        return vec.tryNormalize(status);
+    }
 
 
     /*************************************
@@ -1165,7 +1290,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedFloatVector4<T, U> Vector4<T>::project(const Vector4& vec, const Vector4<U>& onto) noexcept
         requires StrictArithmetic<T>
-    { return vec.project(onto); }
+    {
+        return vec.project(onto);
+    }
 
 
     template <Arithmetic T>
@@ -1173,7 +1300,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedVector4<T, U> Vector4<T>::projectNorm(const Vector4& vec, const Vector4<U>& onto) noexcept
         requires StrictArithmetic<T>
-    { return vec.projectNorm(onto); }
+    {
+        return vec.projectNorm(onto);
+    }
 
 
     template <Arithmetic T>
@@ -1221,10 +1350,11 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedFloatVector4<T, U> Vector4<T>::safeProject(const Vector4& vec,
-                                                                   const Vector4<U>& onto) noexcept
+    constexpr PromotedFloatVector4<T, U> Vector4<T>::safeProject(const Vector4& vec, const Vector4<U>& onto) noexcept
         requires StrictArithmetic<T>
-    { return vec.safeProject(onto); }
+    {
+        return vec.safeProject(onto);
+    }
 
 
     template <Arithmetic T>
@@ -1232,14 +1362,16 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedVector4<T, U> Vector4<T>::safeProjectNorm(const Vector4& vec, const Vector4<U>& onto) noexcept
         requires StrictArithmetic<T>
-    { return vec.safeProjectNorm(onto); }
+    {
+        return vec.safeProjectNorm(onto);
+    }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedFloatVector4<T, U> Vector4<T>::tryProject(const Vector4<U>& onto,
-                                                                  OperationStatus& status) const noexcept
+                                                                OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R       = PromotedValue_t<T, U>;
@@ -1269,7 +1401,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedVector4<T, U> Vector4<T>::tryProjectNorm(const Vector4<U>& onto,
-                                                                 OperationStatus& status) const noexcept
+                                                               OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -1289,18 +1421,22 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedFloatVector4<T, U> Vector4<T>::tryProject(const Vector4& vec, const Vector4<U>& onto,
-                                                                  OperationStatus& status) noexcept
+                                                                OperationStatus& status) noexcept
         requires StrictArithmetic<T>
-    { return vec.tryProject(onto, status); }
+    {
+        return vec.tryProject(onto, status);
+    }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedVector4<T, U> Vector4<T>::tryProjectNorm(const Vector4& vec, const Vector4<U>& onto,
-                                                                 OperationStatus& status) noexcept
+                                                               OperationStatus& status) noexcept
         requires StrictArithmetic<T>
-    { return vec.tryProjectNorm(onto, status); }
+    {
+        return vec.tryProjectNorm(onto, status);
+    }
 
 
     /*************************************
@@ -1314,7 +1450,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedFloatVector4<T, U> Vector4<T>::reject(const Vector4<U>& from) const noexcept
         requires StrictArithmetic<T>
-    { return static_cast<PromotedFloatVector4<T, U>>(*this) - this->project(from); }
+    {
+        return static_cast<PromotedFloatVector4<T, U>>(*this) - this->project(from);
+    }
 
 
     template <Arithmetic T>
@@ -1322,7 +1460,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedVector4<T, U> Vector4<T>::rejectNorm(const Vector4<U>& from) const noexcept
         requires StrictArithmetic<T>
-    { return *this - this->projectNorm(from); }
+    {
+        return *this - this->projectNorm(from);
+    }
 
 
     template <Arithmetic T>
@@ -1330,7 +1470,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedFloatVector4<T, U> Vector4<T>::reject(const Vector4& vector, const Vector4<U>& from) noexcept
         requires StrictArithmetic<T>
-    { return vector.reject(from); }
+    {
+        return vector.reject(from);
+    }
 
 
     template <Arithmetic T>
@@ -1338,7 +1480,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedVector4<T, U> Vector4<T>::rejectNorm(const Vector4& vector, const Vector4<U>& from) noexcept
         requires StrictArithmetic<T>
-    { return vector.rejectNorm(from); }
+    {
+        return vector.rejectNorm(from);
+    }
 
 
     template <Arithmetic T>
@@ -1376,7 +1520,9 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedFloatVector4<T, U> Vector4<T>::safeReject(const Vector4& vec, const Vector4<U>& from) noexcept
         requires StrictArithmetic<T>
-    { return vec.safeReject(from); }
+    {
+        return vec.safeReject(from);
+    }
 
 
     template <Arithmetic T>
@@ -1384,14 +1530,16 @@ namespace fgm
         requires StrictSignedness<T, U>
     constexpr PromotedVector4<T, U> Vector4<T>::safeRejectNorm(const Vector4& vec, const Vector4<U>& from) noexcept
         requires StrictArithmetic<T>
-    { return vec.safeRejectNorm(from); }
+    {
+        return vec.safeRejectNorm(from);
+    }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedFloatVector4<T, U> Vector4<T>::tryReject(const Vector4<U>& from,
-                                                                 OperationStatus& status) const noexcept
+                                                               OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1408,7 +1556,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedVector4<T, U> Vector4<T>::tryRejectNorm(const Vector4<U>& from,
-                                                                OperationStatus& status) const noexcept
+                                                              OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1425,18 +1573,22 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedFloatVector4<T, U> Vector4<T>::tryReject(const Vector4& vec, const Vector4<U>& from,
-                                                                 OperationStatus& status) noexcept
+                                                               OperationStatus& status) noexcept
         requires StrictArithmetic<T>
-    { return vec.tryReject(from, status); }
+    {
+        return vec.tryReject(from, status);
+    }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     constexpr PromotedVector4<T, U> Vector4<T>::tryRejectNorm(const Vector4& vec, const Vector4<U>& from,
-                                                                OperationStatus& status) noexcept
+                                                              OperationStatus& status) noexcept
         requires StrictArithmetic<T>
-    { return vec.tryRejectNorm(from, status); }
+    {
+        return vec.tryRejectNorm(from, status);
+    }
 
 
     /**************************************
@@ -1461,7 +1613,9 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr bool Vector4<T>::hasInf(const Vector4& vec) noexcept
-    { return vec.hasInf(); }
+    {
+        return vec.hasInf();
+    }
 
 
     template <Arithmetic T>
@@ -1480,7 +1634,9 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr bool Vector4<T>::hasNaN(const Vector4& vec) noexcept
-    { return vec.hasNaN(); }
+    {
+        return vec.hasNaN();
+    }
 } // namespace fgm
 
 

@@ -2237,7 +2237,9 @@ namespace fgm
          */
         static constexpr Vector3 ONE()
             requires StrictArithmetic<T>
-        { return Vector3{ T(1), T(1), T(1) }; }
+        {
+            return Vector3{ T(1), T(1), T(1) };
+        }
 
 
         /**
@@ -2245,7 +2247,9 @@ namespace fgm
          */
         static constexpr Vector3 ZERO()
             requires StrictArithmetic<T>
-        { return Vector3{ T(0), T(0), T(0) }; }
+        {
+            return Vector3{ T(0), T(0), T(0) };
+        }
 
 
         /**
@@ -2255,7 +2259,9 @@ namespace fgm
          */
         static constexpr Vector3 INF()
             requires std::floating_point<T>
-        { return Vector3{ T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D) }; }
+        {
+            return Vector3{ T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D) };
+        }
 
 
         /**
@@ -2265,7 +2271,9 @@ namespace fgm
          */
         static constexpr Vector3 INF_NEG()
             requires std::floating_point<T>
-        { return Vector3{ T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D) }; }
+        {
+            return Vector3{ T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D) };
+        }
 
 
         /**
@@ -2275,7 +2283,9 @@ namespace fgm
          */
         static constexpr Vector3 QNAN()
             requires std::floating_point<T>
-        { return Vector3{ T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D) }; }
+        {
+            return Vector3{ T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D) };
+        }
 
 
         /**
@@ -2285,7 +2295,9 @@ namespace fgm
          */
         static constexpr Vector3 RIGHT()
             requires std::is_signed_v<T>
-        { return Vector3{ T(1), T(0), T(0) }; }
+        {
+            return Vector3{ T(1), T(0), T(0) };
+        }
 
 
         /**
@@ -2295,7 +2307,9 @@ namespace fgm
          */
         static constexpr Vector3 LEFT()
             requires std::is_signed_v<T>
-        { return Vector3{ T(-1), T(0), T(0) }; }
+        {
+            return Vector3{ T(-1), T(0), T(0) };
+        }
 
 
         /**
@@ -2305,7 +2319,9 @@ namespace fgm
          */
         static constexpr Vector3 UP()
             requires std::is_signed_v<T>
-        { return Vector3{ T(0), T(1), T(0) }; }
+        {
+            return Vector3{ T(0), T(1), T(0) };
+        }
 
 
         /**
@@ -2315,7 +2331,9 @@ namespace fgm
          */
         static constexpr Vector3 DOWN()
             requires std::is_signed_v<T>
-        { return Vector3{ T(0), T(-1), T(0) }; }
+        {
+            return Vector3{ T(0), T(-1), T(0) };
+        }
 
 
 #ifdef FGM_LEFT_HANDED
@@ -2327,7 +2345,9 @@ namespace fgm
          */
         static constexpr Vector3 FORWARD()
             requires std::is_signed_v<T>
-        { return Vector3{ T(0), T(0), T(1) }; }
+        {
+            return Vector3{ T(0), T(0), T(1) };
+        }
 
 
         /**
@@ -2338,7 +2358,9 @@ namespace fgm
          */
         static constexpr Vector3 BACKWARD()
             requires std::is_signed_v<T>
-        { return Vector3{ T(0), T(0), T(-1) }; }
+        {
+            return Vector3{ T(0), T(0), T(-1) };
+        }
 #else
         /**
          * @brief A 3D unit vector aligned with the negative Z-axis (0, 0, -1).
@@ -2348,7 +2370,9 @@ namespace fgm
          */
         static constexpr Vector3 FORWARD()
             requires std::is_signed_v<T>
-        { return Vector3{ T(0), T(0), T(-1) }; }
+        {
+            return Vector3{ T(0), T(0), T(-1) };
+        }
 
 
         /**
@@ -2359,7 +2383,9 @@ namespace fgm
          */
         static constexpr Vector3 BACKWARD()
             requires std::is_signed_v<T>
-        { return Vector3{ T(0), T(0), T(1) }; }
+        {
+            return Vector3{ T(0), T(0), T(1) };
+        }
 
 #endif
 
@@ -2373,7 +2399,9 @@ namespace fgm
          */
         static constexpr Vector3 POINT(const T x = T(0), const T y = T(0))
             requires std::is_signed_v<T>
-        { return Vector3{ x, y, T(1) }; }
+        {
+            return Vector3{ x, y, T(1) };
+        }
 
 
         // NOLINTEND
