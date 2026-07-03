@@ -461,10 +461,9 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr Vector3<bool> eq(const Vector3<U>& rhs,
-                                                  double epsilon = std::is_same_v<T, double> ||
-                                                          std::is_same_v<U, double>
-                                                      ? Config::DOUBLE_EPSILON
-                                                      : Config::FLOAT_EPSILON) const noexcept;
+                                                 double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
+                                                     ? Config::DOUBLE_EPSILON
+                                                     : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -483,10 +482,10 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr Vector3<bool> eq(const Vector3& lhs, const Vector3<U>& rhs,
-                                                         double epsilon = std::is_same_v<T, double> ||
-                                                                 std::is_same_v<U, double>
-                                                             ? Config::DOUBLE_EPSILON
-                                                             : Config::FLOAT_EPSILON) noexcept;
+                                                        double epsilon = std::is_same_v<T, double> ||
+                                                                std::is_same_v<U, double>
+                                                            ? Config::DOUBLE_EPSILON
+                                                            : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -506,10 +505,10 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr Vector3<bool> neq(const Vector3<U>& rhs,
-                                                   double epsilon = std::is_same_v<T, double> ||
-                                                           std::is_same_v<U, double>
-                                                       ? Config::DOUBLE_EPSILON
-                                                       : Config::FLOAT_EPSILON) const noexcept;
+                                                  double epsilon = std::is_same_v<T, double> ||
+                                                          std::is_same_v<U, double>
+                                                      ? Config::DOUBLE_EPSILON
+                                                      : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -528,10 +527,10 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr Vector3<bool> neq(const Vector3& lhs, const Vector3<U>& rhs,
-                                                          double epsilon = std::is_same_v<T, double> ||
-                                                                  std::is_same_v<U, double>
-                                                              ? Config::DOUBLE_EPSILON
-                                                              : Config::FLOAT_EPSILON) noexcept;
+                                                         double epsilon = std::is_same_v<T, double> ||
+                                                                 std::is_same_v<U, double>
+                                                             ? Config::DOUBLE_EPSILON
+                                                             : Config::FLOAT_EPSILON) noexcept;
 
         /** @} */
 
@@ -1045,7 +1044,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedVector3<T, S> tryDiv(const Vector3& vec, S scalar,
-                                                                     OperationStatus& status) noexcept
+                                                                    OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1518,7 +1517,7 @@ namespace fgm
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr Vector3<Magnitude<T>> tryNormalize(const Vector3& vec,
-                                                                           OperationStatus& status) noexcept
+                                                                          OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1597,7 +1596,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatVector3<T, U> project(const Vector3& vec,
-                                                                           const Vector3<U>& onto) noexcept
+                                                                          const Vector3<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1621,7 +1620,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3<T, U> projectNorm(const Vector3& vec,
-                                                                          const Vector3<U>& onto) noexcept
+                                                                         const Vector3<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1699,7 +1698,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatVector3<T, U> safeProject(const Vector3& vec,
-                                                                               const Vector3<U>& onto) noexcept
+                                                                              const Vector3<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1725,7 +1724,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3<T, U> safeProjectNorm(const Vector3& vec,
-                                                                              const Vector3<U>& onto) noexcept
+                                                                             const Vector3<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1755,7 +1754,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedFloatVector3<T, U> tryProject(const Vector3<U>& onto,
-                                                                       OperationStatus& status) const noexcept
+                                                                      OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1783,7 +1782,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVector3<T, U> tryProjectNorm(const Vector3<U>& onto,
-                                                                      OperationStatus& status) const noexcept
+                                                                     OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1813,9 +1812,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector3<T, U> tryProject(const Vector3& vec,
-                                                                              const Vector3<U>& onto,
-                                                                              OperationStatus& status) noexcept
+        [[nodiscard]] static constexpr PromotedFloatVector3<T, U> tryProject(const Vector3& vec, const Vector3<U>& onto,
+                                                                             OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1843,9 +1841,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector3<T, U> tryProjectNorm(const Vector3& vec,
-                                                                             const Vector3<U>& onto,
-                                                                             OperationStatus& status) noexcept
+        [[nodiscard]] static constexpr PromotedVector3<T, U> tryProjectNorm(const Vector3& vec, const Vector3<U>& onto,
+                                                                            OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1910,7 +1907,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatVector3<T, U> reject(const Vector3& vector,
-                                                                          const Vector3<U>& from) noexcept
+                                                                         const Vector3<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1932,7 +1929,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3<T, U> rejectNorm(const Vector3& vector,
-                                                                         const Vector3<U>& from) noexcept
+                                                                        const Vector3<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2002,7 +1999,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatVector3<T, U> safeReject(const Vector3& vec,
-                                                                              const Vector3<U>& from) noexcept
+                                                                             const Vector3<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2026,7 +2023,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedVector3<T, U> safeRejectNorm(const Vector3& vec,
-                                                                             const Vector3<U>& from) noexcept
+                                                                            const Vector3<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2052,7 +2049,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedFloatVector3<T, U> tryReject(const Vector3<U>& from,
-                                                                      OperationStatus& status) const noexcept
+                                                                     OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2078,7 +2075,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVector3<T, U> tryRejectNorm(const Vector3<U>& from,
-                                                                     OperationStatus& status) const noexcept
+                                                                    OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2105,9 +2102,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatVector3<T, U> tryReject(const Vector3& vec,
-                                                                             const Vector3<U>& from,
-                                                                             OperationStatus& status) noexcept
+        [[nodiscard]] static constexpr PromotedFloatVector3<T, U> tryReject(const Vector3& vec, const Vector3<U>& from,
+                                                                            OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2132,9 +2128,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedVector3<T, U> tryRejectNorm(const Vector3& vec,
-                                                                            const Vector3<U>& from,
-                                                                            OperationStatus& status) noexcept
+        [[nodiscard]] static constexpr PromotedVector3<T, U> tryRejectNorm(const Vector3& vec, const Vector3<U>& from,
+                                                                           OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -2222,6 +2217,166 @@ namespace fgm
             return os;
         }
 
+        /** @} */
+
+        /**
+         * @addtogroup FGM_Vec2_Const
+         * @{
+         */
+
+        /*************************************
+         *                                   *
+         *            CONSTANTS              *
+         *                                   *
+         *************************************/
+
+        // NOLINTBEGIN
+
+        /**
+         * @brief A 3D vector with all components set to one (1, 1, 1).
+         */
+        static constexpr Vector3 ONE()
+            requires StrictArithmetic<T>
+        { return Vector3{ T(1), T(1), T(1) }; }
+
+
+        /**
+         * @brief A 3D vector with all components set to zero (0, 0, 0).
+         */
+        static constexpr Vector3 ZERO()
+            requires StrictArithmetic<T>
+        { return Vector3{ T(0), T(0), T(0) }; }
+
+
+        /**
+         * @brief A 3D vector with all components set to positive infinity.
+         *
+         * @note Constraint to floating point types using `std::floating_point`.
+         */
+        static constexpr Vector3 INF()
+            requires std::floating_point<T>
+        { return Vector3{ T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D) }; }
+
+
+        /**
+         * @brief A 3D vector with all components set to negative infinity.
+         *
+         * @note Constraint to floating point types using `std::floating_point`.
+         */
+        static constexpr Vector3 INF_NEG()
+            requires std::floating_point<T>
+        { return Vector3{ T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D) }; }
+
+
+        /**
+         * @brief A 3D vector with all components set to Not-A-Number (NaN).
+         *
+         * @note Constraint to floating point types using `std::floating_point`.
+         */
+        static constexpr Vector3 QNAN()
+            requires std::floating_point<T>
+        { return Vector3{ T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D) }; }
+
+
+        /**
+         * @brief A 3D unit vector aligned with the positive X-axis (1, 0, 0).
+         *
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector3 RIGHT()
+            requires std::is_signed_v<T>
+        { return Vector3{ T(1), T(0), T(0) }; }
+
+
+        /**
+         * @brief A 3D unit vector aligned with the negative X-axis (-1, 0, 0).
+         *
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector3 LEFT()
+            requires std::is_signed_v<T>
+        { return Vector3{ T(-1), T(0), T(0) }; }
+
+
+        /**
+         * @brief A 3D unit vector aligned with the positive Y-axis (0, 1, 0).
+         *
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector3 UP()
+            requires std::is_signed_v<T>
+        { return Vector3{ T(0), T(1), T(0) }; }
+
+
+        /**
+         * @brief A 3D unit vector aligned with the negative Y-axis (0, -1, 0).
+         *
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector3 DOWN()
+            requires std::is_signed_v<T>
+        { return Vector3{ T(0), T(-1), T(0) }; }
+
+
+#ifdef FGM_LEFT_HANDED
+        /**
+         * @brief A 3D unit vector aligned with the positive Z-axis (0, 0, 1).
+         *
+         * @note Left Handed Coordinate System.
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector3 FORWARD()
+            requires std::is_signed_v<T>
+        { return Vector3{ T(0), T(0), T(1) }; }
+
+
+        /**
+         * @brief A 3D unit vector aligned with the negative Z-axis (0, 0, -1).
+         *
+         * @note Left Handed Coordinate System.
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector3 BACKWARD()
+            requires std::is_signed_v<T>
+        { return Vector3{ T(0), T(0), T(-1) }; }
+#else
+        /**
+         * @brief A 3D unit vector aligned with the negative Z-axis (0, 0, -1).
+         *
+         * @note Right Handed Coordinate System.
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector3 FORWARD()
+            requires std::is_signed_v<T>
+        { return Vector3{ T(0), T(0), T(-1) }; }
+
+
+        /**
+         * @brief A 3D unit vector aligned with the positive Z-axis (0, 0, 1).
+         *
+         * @note Right Handed Coordinate System
+         * @note Constraint to signed types only.
+         */
+        static constexpr Vector3 BACKWARD()
+            requires std::is_signed_v<T>
+        { return Vector3{ T(0), T(0), T(1) }; }
+
+#endif
+
+        /**
+         * @brief Vector alias for a 2D-point representation.
+         *
+         * @note Last component is reserved for distinguishing a Point(1) and a Vector(0).
+         *
+         * @param[in] x The x-coordinate of the point. Default: 0
+         * @param[in] y The y-coordinate of the point. Default: 0
+         */
+        static constexpr Vector3 POINT(const T x = T(0), const T y = T(0))
+            requires std::is_signed_v<T>
+        { return Vector3{ x, y, T(1) }; }
+
+
+        // NOLINTEND
         /** @} */
 
     private:

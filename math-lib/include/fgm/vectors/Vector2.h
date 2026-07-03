@@ -2134,6 +2134,8 @@ namespace fgm
          *                                   *
          *************************************/
 
+        // NOLINTBEGIN
+
         /**
          * @brief A 2D vector with all components set to one (1, 1).
          */
@@ -2218,6 +2220,8 @@ namespace fgm
         static constexpr Vector2 DOWN()
             requires std::is_signed_v<T>
         { return Vector2{ T(0), T(-1) }; }
+
+        // NOLINTEND
 
         /** @} */
 
