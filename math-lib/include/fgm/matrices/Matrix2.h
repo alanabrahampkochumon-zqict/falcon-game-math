@@ -177,40 +177,6 @@ namespace fgm
 
 
         /**
-         * @addtogroup T_FGM_Mat2x2_Constant
-         * @{
-         */
-
-        /**************************************
-         *                                    *
-         *             CONSTANTS              *
-         *                                    *
-         **************************************/
-
-        /**
-         * @brief A 2D matrix with ones on the main diagonal and zeros elsewhere.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         *
-         * @return A 2D identity matrix.
-         */
-        [[nodiscard]] static constexpr Matrix2 eye() noexcept;
-
-
-        /**
-         * @brief A 2D matrix with all zero elements.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         *
-         * @return A 2D zero matrix.
-         */
-        [[nodiscard]] static constexpr Matrix2 zero() noexcept;
-
-        /** @} */
-
-
-
-        /**
          * @addtogroup FGM_Mat2x2_Equality
          * @{
          */
@@ -616,8 +582,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix2<T, S> safeDiv(
-            S scalar, const Matrix2& fallback = Matrix2::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix2<T, S> safeDiv(S scalar,
+                                                              const Matrix2& fallback = Matrix2::EYE()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -642,8 +608,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix2<T, S> safeDiv(
-            const Matrix2& mat, S scalar, const Matrix2& fallback = Matrix2::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix2<T, S> safeDiv(const Matrix2& mat, S scalar,
+                                                                     const Matrix2& fallback = Matrix2::EYE()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -673,7 +639,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMatrix2<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                              const Matrix2& fallback = Matrix2::eye()) const noexcept
+                                                             const Matrix2& fallback = Matrix2::EYE()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -703,8 +669,9 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix2<T, S> tryDiv(
-            const Matrix2& mat, S scalar, OperationStatus& status, const Matrix2& fallback = Matrix2::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix2<T, S> tryDiv(const Matrix2& mat, S scalar,
+                                                                    OperationStatus& status,
+                                                                    const Matrix2& fallback = Matrix2::EYE()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -868,7 +835,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix2<Magnitude<T>> safeInverse(const Matrix2& fallback = Matrix2::eye()) const noexcept
+        constexpr Matrix2<Magnitude<T>> safeInverse(const Matrix2& fallback = Matrix2::EYE()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -901,7 +868,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix2<Magnitude<T>> safeInverseOf(const Matrix2& matrix,
-                                                              const Matrix2& fallback = Matrix2::eye()) noexcept
+                                                             const Matrix2& fallback = Matrix2::EYE()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -935,7 +902,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Matrix2<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                    const Matrix2& fallback = Matrix2::eye()) const noexcept
+                                                   const Matrix2& fallback = Matrix2::EYE()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -970,7 +937,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix2<Magnitude<T>> tryInverseOf(const Matrix2& matrix, OperationStatus& status,
-                                                             const Matrix2& fallback = Matrix2::eye()) noexcept
+                                                            const Matrix2& fallback = Matrix2::EYE()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1169,6 +1136,40 @@ namespace fgm
         /** @} */
 
 
+
+        /**
+         * @addtogroup T_FGM_Mat2x2_Constant
+         * @{
+         */
+
+        /**************************************
+         *                                    *
+         *             CONSTANTS              *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief A 2D matrix with ones on the main diagonal and zeros elsewhere.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Matrix2 EYE()
+            requires fgm::StrictArithmetic<T>
+        { return Matrix2{ T(1), T(0), T(0), T(1) }; }
+
+
+        /**
+         * @brief A 2D matrix with all zero elements.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Matrix2 ZERO()
+            requires fgm::StrictArithmetic<T>
+        { return Matrix2{ T(0), T(0), T(0), T(0) }; }
+
+        /** @} */
+
+
     private:
         std::array<Vector2<T>, columns> _data;
     };
@@ -1296,43 +1297,10 @@ namespace fgm
 
 
 
-    /**
-     * @addtogroup T_FGM_Mat2x2_Constant
-     * @{
-     */
-
-    /**************************************
-     *                                    *
-     *             CONSTANTS              *
-     *                                    *
-     **************************************/
-
-    namespace mat2d
-    {
-        /**
-         * @brief A 2D matrix with ones on the main diagonal and zeros elsewhere.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Matrix2<T> eye(T(1), T(0), T(0), T(1));
-
-
-        /**
-         * @brief A 2D matrix with all zero elements.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Matrix2<T> zero(T(0), T(0), T(0), T(0));
-    } // namespace mat2d
-
-
     /** @brief Template deduction guide for Matrix2. */
     template <Arithmetic T, Arithmetic... Args>
     Matrix2(T, Args...) -> Matrix2<T>;
 
-    /** @} */
 
 
 } // namespace fgm

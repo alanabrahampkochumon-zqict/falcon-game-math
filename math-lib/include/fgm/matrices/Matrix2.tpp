@@ -97,23 +97,6 @@ namespace fgm
     }
 
 
-
-    /**************************************
-     *                                    *
-     *             CONSTANTS              *
-     *                                    *
-     **************************************/
-
-    template <Arithmetic T>
-    constexpr Matrix2<T> Matrix2<T>::eye() noexcept
-    { return Matrix2(T(1), T(1)); }
-
-    template <Arithmetic T>
-    constexpr Matrix2<T> Matrix2<T>::zero() noexcept
-    { return Matrix2(T(0), T(0)); }
-
-
-
     /***************************************
      *                                     *
      *             EQUALITY                *

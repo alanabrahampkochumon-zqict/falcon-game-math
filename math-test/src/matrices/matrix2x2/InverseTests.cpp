@@ -198,7 +198,7 @@ TEST_P(SingularMatrix2Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
  */
 TEST_P(SingularMatrix2Inverse, SafeInverse_ReturnsPassedInFallback)
 {
-    const auto& inverseMatrix = GetParam().safeInverse(fgm::mat2d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = GetParam().safeInverse(fgm::Matrix2<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
 }
 
@@ -220,7 +220,7 @@ TEST_P(NaNMatrix2Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
  */
 TEST_P(NaNMatrix2Inverse, SafeInverse_ReturnsPassedInFallback)
 {
-    const auto& inverseMatrix = GetParam().safeInverse(fgm::mat2d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = GetParam().safeInverse(fgm::Matrix2<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
 }
 
@@ -262,7 +262,7 @@ TEST_P(SingularMatrix2Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixBy
 TEST_P(SingularMatrix2Inverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
 {
     const auto& matrix = GetParam();
-    EXPECT_MAT_ZERO(ParamType::safeInverseOf(matrix, fgm::mat2d::zero<ParamType::value_type>));
+    EXPECT_MAT_ZERO(ParamType::safeInverseOf(matrix, fgm::Matrix2<ParamType::value_type>::ZERO()));
 }
 
 
@@ -283,7 +283,7 @@ TEST_P(NaNMatrix2Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixByDefau
  */
 TEST_P(NaNMatrix2Inverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
 {
-    const auto& inverseMatrix = ParamType::safeInverseOf(GetParam(), fgm::mat2d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = ParamType::safeInverseOf(GetParam(), fgm::Matrix2<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
 }
 
@@ -340,7 +340,7 @@ TEST_P(SingularMatrix2Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
 TEST_P(SingularMatrix2Inverse, TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::mat2d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::Matrix2<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
@@ -366,7 +366,7 @@ TEST_P(NaNMatrix2Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
 TEST_P(NaNMatrix2Inverse, TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::mat2d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::Matrix2<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
@@ -419,7 +419,7 @@ TEST_P(SingularMatrix2Inverse, StaticWrapper_TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     const auto& matrix = GetParam();
-    EXPECT_MAT_ZERO(ParamType::tryInverseOf(matrix, flag, fgm::mat2d::zero<ParamType::value_type>));
+    EXPECT_MAT_ZERO(ParamType::tryInverseOf(matrix, flag, fgm::Matrix2<ParamType::value_type>::ZERO()));
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 
@@ -444,7 +444,7 @@ TEST_P(NaNMatrix2Inverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefaul
 TEST_P(NaNMatrix2Inverse, StaticWrapper_TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const auto& inverseMatrix = ParamType::tryInverseOf(GetParam(), flag, fgm::mat2d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = ParamType::tryInverseOf(GetParam(), flag, fgm::Matrix2<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
