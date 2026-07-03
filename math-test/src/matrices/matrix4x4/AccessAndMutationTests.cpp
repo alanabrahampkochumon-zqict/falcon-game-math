@@ -237,7 +237,7 @@ TEST_P(Matrix4ColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix4 mat(1, 2, 3, 4);
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::vec4d::zero<int>), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vector4<int>::ZERO()), "");
 }
 
 

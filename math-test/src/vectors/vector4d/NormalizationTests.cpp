@@ -166,7 +166,7 @@ TYPED_TEST(Vector4Normalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
  *       returns a zero-vector.
  */
 TYPED_TEST(Vector4Normalization, SafeNormalize_ZeroVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>.safeNormalize()); }
+{ EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::ZERO().safeNormalize()); }
 
 
 /**
@@ -174,7 +174,7 @@ TYPED_TEST(Vector4Normalization, SafeNormalize_ZeroVectorReturnsZeroVector)
  *       returns a zero-vector.
  */
 TEST(Vector4Normalization, SafeNormalize_NaNVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::vec4d::nan<float>.safeNormalize()); }
+{ EXPECT_VEC_ZERO(fgm::Vector4<float>::QNAN().safeNormalize()); }
 
 
 /**
@@ -204,7 +204,7 @@ TYPED_TEST(Vector4Normalization, StaticWrapper_SafeNormalize_NonZeroVectorReturn
  *       @ref fgm::Vector4::safeNormalize returns a zero-vector.
  */
 TYPED_TEST(Vector4Normalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::safeNormalize(fgm::vec4d::zero<TypeParam>)); }
+{ EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::safeNormalize(fgm::Vector4<TypeParam>::ZERO())); }
 
 
 /**
@@ -212,7 +212,7 @@ TYPED_TEST(Vector4Normalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZe
  *       returns a zero-vector.
  */
 TEST(Vector4Normalization, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::Vector4<float>::safeNormalize(fgm::vec4d::nan<float>)); }
+{ EXPECT_VEC_ZERO(fgm::Vector4<float>::safeNormalize(fgm::Vector4<float>::QNAN())); }
 
 
 /**
@@ -253,7 +253,7 @@ TYPED_TEST(Vector4Normalization, TryNormalize_NonZeroVectorReturnsUnitVector)
 TYPED_TEST(Vector4Normalization, TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>.tryNormalize(flag));
+    EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::ZERO().tryNormalize(flag));
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 
@@ -265,7 +265,7 @@ TYPED_TEST(Vector4Normalization, TryNormalize_ZeroVectorReturnsZeroVectorAndSets
 TEST(Vector4Normalization, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::vec4d::nan<float>.tryNormalize(flag));
+    EXPECT_VEC_ZERO(fgm::Vector4<float>::QNAN().tryNormalize(flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -304,7 +304,7 @@ TYPED_TEST(Vector4Normalization, StaticWrapper_TryNormalize_NonZeroVectorReturns
 TYPED_TEST(Vector4Normalization, StaticWrapper_TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::vec4d::zero<TypeParam>.tryNormalize(flag));
+    EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::ZERO().tryNormalize(flag));
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 
@@ -316,7 +316,7 @@ TYPED_TEST(Vector4Normalization, StaticWrapper_TryNormalize_ZeroVectorReturnsZer
 TEST(Vector4Normalization, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::Vector4<float>::tryNormalize(fgm::vec4d::nan<float>, flag));
+    EXPECT_VEC_ZERO(fgm::Vector4<float>::tryNormalize(fgm::Vector4<float>::QNAN(), flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 

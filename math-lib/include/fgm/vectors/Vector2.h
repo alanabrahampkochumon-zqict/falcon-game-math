@@ -2155,7 +2155,7 @@ namespace fgm
         /**
          * @brief A 2D vector with all components set to positive infinity.
          *
-         * @note Constraint to floating point types using `std::floating_point`.
+         * @note Constrained to floating point types.
          */
         static constexpr Vector2 INF()
             requires std::floating_point<T>
@@ -2165,7 +2165,7 @@ namespace fgm
         /**
          * @brief A 2D vector with all components set to negative infinity.
          *
-         * @note Constraint to floating point types using `std::floating_point`.
+         * @note Constrained to floating point types.
          */
         static constexpr Vector2 INF_NEG()
             requires std::floating_point<T>
@@ -2175,7 +2175,7 @@ namespace fgm
         /**
          * @brief A 2D vector with all components set to Not-A-Number (NaN).
          *
-         * @note Constraint to floating point types using `std::floating_point`.
+         * @note Constrained to floating point types.
          */
         static constexpr Vector2 QNAN()
             requires std::floating_point<T>
@@ -2185,7 +2185,7 @@ namespace fgm
         /**
          * @brief A 2D unit vector aligned with the positive X-axis (1, 0).
          *
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector2 RIGHT()
             requires std::is_signed_v<T>
@@ -2195,7 +2195,7 @@ namespace fgm
         /**
          * @brief A 2D unit vector aligned with the negative X-axis (-1, 0).
          *
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector2 LEFT()
             requires std::is_signed_v<T>
@@ -2205,7 +2205,7 @@ namespace fgm
         /**
          * @brief A 2D unit vector aligned with the positive Y-axis (0, 1).
          *
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector2 UP()
             requires std::is_signed_v<T>
@@ -2215,7 +2215,7 @@ namespace fgm
         /**
          * @brief A 2D unit vector aligned with the negative Y-axis (0, -1).
          *
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector2 DOWN()
             requires std::is_signed_v<T>

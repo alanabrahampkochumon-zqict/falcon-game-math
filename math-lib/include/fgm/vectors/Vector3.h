@@ -61,7 +61,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::vec3d::zero<T> to guarantee a zeroed vector.
+         *       @ref fgm::Vector3<T>::ZERO() to guarantee a zeroed vector.
          */
         Vector3() = default;
 
@@ -2220,7 +2220,7 @@ namespace fgm
         /** @} */
 
         /**
-         * @addtogroup FGM_Vec2_Const
+         * @addtogroup FGM_Vec3_Const
          * @{
          */
 
@@ -2251,7 +2251,7 @@ namespace fgm
         /**
          * @brief A 3D vector with all components set to positive infinity.
          *
-         * @note Constraint to floating point types using `std::floating_point`.
+         * @note Constrained to floating point types.
          */
         static constexpr Vector3 INF()
             requires std::floating_point<T>
@@ -2261,7 +2261,7 @@ namespace fgm
         /**
          * @brief A 3D vector with all components set to negative infinity.
          *
-         * @note Constraint to floating point types using `std::floating_point`.
+         * @note Constrained to floating point types.
          */
         static constexpr Vector3 INF_NEG()
             requires std::floating_point<T>
@@ -2271,7 +2271,7 @@ namespace fgm
         /**
          * @brief A 3D vector with all components set to Not-A-Number (NaN).
          *
-         * @note Constraint to floating point types using `std::floating_point`.
+         * @note Constrained to floating point types.
          */
         static constexpr Vector3 QNAN()
             requires std::floating_point<T>
@@ -2281,7 +2281,7 @@ namespace fgm
         /**
          * @brief A 3D unit vector aligned with the positive X-axis (1, 0, 0).
          *
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector3 RIGHT()
             requires std::is_signed_v<T>
@@ -2291,7 +2291,7 @@ namespace fgm
         /**
          * @brief A 3D unit vector aligned with the negative X-axis (-1, 0, 0).
          *
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector3 LEFT()
             requires std::is_signed_v<T>
@@ -2301,7 +2301,7 @@ namespace fgm
         /**
          * @brief A 3D unit vector aligned with the positive Y-axis (0, 1, 0).
          *
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector3 UP()
             requires std::is_signed_v<T>
@@ -2311,7 +2311,7 @@ namespace fgm
         /**
          * @brief A 3D unit vector aligned with the negative Y-axis (0, -1, 0).
          *
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector3 DOWN()
             requires std::is_signed_v<T>
@@ -2323,7 +2323,7 @@ namespace fgm
          * @brief A 3D unit vector aligned with the positive Z-axis (0, 0, 1).
          *
          * @note Left Handed Coordinate System.
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector3 FORWARD()
             requires std::is_signed_v<T>
@@ -2334,7 +2334,7 @@ namespace fgm
          * @brief A 3D unit vector aligned with the negative Z-axis (0, 0, -1).
          *
          * @note Left Handed Coordinate System.
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector3 BACKWARD()
             requires std::is_signed_v<T>
@@ -2344,7 +2344,7 @@ namespace fgm
          * @brief A 3D unit vector aligned with the negative Z-axis (0, 0, -1).
          *
          * @note Right Handed Coordinate System.
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector3 FORWARD()
             requires std::is_signed_v<T>
@@ -2355,7 +2355,7 @@ namespace fgm
          * @brief A 3D unit vector aligned with the positive Z-axis (0, 0, 1).
          *
          * @note Right Handed Coordinate System
-         * @note Constraint to signed types only.
+         * @note Constrained to signed types.
          */
         static constexpr Vector3 BACKWARD()
             requires std::is_signed_v<T>
@@ -2364,7 +2364,7 @@ namespace fgm
 #endif
 
         /**
-         * @brief Vector alias for a 2D-point representation.
+         * @brief Alias for a 2D-point representation.
          *
          * @note Last component is reserved for distinguishing a Point(1) and a Vector(0).
          *
@@ -2438,7 +2438,7 @@ namespace fgm
 
     /** @} */
 
-    
+
 
     /** @brief Template deduction guide for Vector3. */
     template <typename T>
