@@ -68,7 +68,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::mat2d::zero<T> to guarantee a zeroed matrix.
+         *       @ref fgm::Matrix2<T>::ZERO() to guarantee a zeroed matrix.
          */
         Matrix2() = default;
 
@@ -1142,6 +1142,8 @@ namespace fgm
          * @{
          */
 
+        // NOLINTBEGIN
+
         /**************************************
          *                                    *
          *             CONSTANTS              *
@@ -1166,6 +1168,9 @@ namespace fgm
         static constexpr Matrix2 ZERO()
             requires fgm::StrictArithmetic<T>
         { return Matrix2{ T(0), T(0), T(0), T(0) }; }
+
+
+        // NOLINTEND
 
         /** @} */
 

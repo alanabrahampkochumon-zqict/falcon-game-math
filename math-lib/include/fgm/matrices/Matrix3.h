@@ -65,7 +65,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::mat3d::zero<T> to guarantee a zeroed matrix.
+         *       @ref fgm::Matrix3<T>::ZERO() to guarantee a zeroed matrix.
          */
         Matrix3() = default;
 
@@ -1271,6 +1271,42 @@ namespace fgm
         /** @} */
 
 
+        /**
+         * @addtogroup T_FGM_Mat3x3_Constant
+         * @{
+         */
+
+        // NOLINTBEGIN
+
+        /**************************************
+         *                                    *
+         *             CONSTANTS              *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Matrix3 EYE()
+            requires fgm::StrictArithmetic<T>
+        { return Matrix3{ T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1) }; }
+
+
+        /**
+         * @brief A 3D matrix with all zero elements.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Matrix3 ZERO()
+            requires fgm::StrictArithmetic<T>
+        { return Matrix3{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) }; }
+
+        // NOLINTEND
+
+        /** @} */
+
     private:
         std::array<Vector3<T>, columns> _data;
     };
@@ -1394,43 +1430,10 @@ namespace fgm
     /** @} */
 
 
-    /**
-     * @addtogroup T_FGM_Mat3x3_Constant
-     * @{
-     */
-
-    /**************************************
-     *                                    *
-     *             CONSTANTS              *
-     *                                    *
-     **************************************/
-
-    namespace mat3d
-    {
-        /**
-         * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Matrix3<T> eye(T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1));
-
-
-        /**
-         * @brief A 3D matrix with all zero elements.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Matrix3<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0));
-    } // namespace mat3d
-
-
     /** @brief Template deduction guide for Matrix3. */
     template <Arithmetic T, Arithmetic... Args>
     Matrix3(T, Args...) -> Matrix3<T>;
 
-    /** @} */
 } // namespace fgm
 
 
