@@ -48,19 +48,20 @@ class SingularMatrix4Inverse: public ::testing::TestWithParam<fgm::Matrix4<float
 {};
 INSTANTIATE_TEST_SUITE_P(
     Matrix4InverseTestSuite, SingularMatrix4Inverse,
-    ::testing::Values(
-        fgm::Matrix4{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f },
-                       fgm::Vector4{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vector4{ 1.0f, 85.0f, 19.0f, 12.0f } },
-        fgm::Matrix4{ fgm::Vector4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                       fgm::Vector4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-        fgm::Matrix4{ fgm::Vector4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vector4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                       fgm::Vector4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-        fgm::Matrix4{ fgm::Vector4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4{ 0.0f, 2.0f, 3.0f, 4.0f },
-                       fgm::Vector4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 0.0f, 4.0f, 31.6f, 2.0f } },
-        fgm::Matrix4{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4{ 2.0f, 4.0f, 6.0f, 8.0f },
-                       fgm::Vector4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-        fgm::Matrix4{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4{ 2.0f, 4.0f, 5.0f, 10.0f },
-                       fgm::Vector4{ 3.0f, 6.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
+    ::testing::Values(fgm::Matrix4{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f },
+                                    fgm::Vector4{ 7.0f, 8.0f, 9.0f, 12.0f },
+                                    fgm::Vector4{ 1.0f, 85.0f, 19.0f, 12.0f } },
+                      fgm::Matrix4{ fgm::Vector4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                                    fgm::Vector4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                      fgm::Matrix4{ fgm::Vector4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vector4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                                    fgm::Vector4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                      fgm::Matrix4{ fgm::Vector4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4{ 0.0f, 2.0f, 3.0f, 4.0f },
+                                    fgm::Vector4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 0.0f, 4.0f, 31.6f, 2.0f } },
+                      fgm::Matrix4{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4{ 2.0f, 4.0f, 6.0f, 8.0f },
+                                    fgm::Vector4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                      fgm::Matrix4{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4{ 2.0f, 4.0f, 5.0f, 10.0f },
+                                    fgm::Vector4{ 3.0f, 6.0f, 9.0f, 12.0f },
+                                    fgm::Vector4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
 
 
 /** @brief Test fixture for @ref fgm::Matrix4 inverse with NaN vectors. */
@@ -72,7 +73,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix4InverseTestSuite, NaNMatrix4Inverse,
                                            fgm::Matrix4<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
                                            fgm::Matrix4<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
                                            fgm::Matrix4<float>{ fgm ::constants::NaN, fgm::constants::NaN,
-                                                                 fgm ::constants::NaN, fgm ::constants::NaN }));
+                                                                fgm ::constants::NaN, fgm ::constants::NaN }));
 
 
 /**
@@ -90,7 +91,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix4InverseTestSuite, NaNMatrix4Inverse,
 namespace
 {
     constexpr fgm::Matrix4 mat(1.0f, -1.0f, 0.0f, -2.0f, 2.0f, -1.0f, -2.0f, -6.0f, 0.0f, -1.0f, 3.0f, 3.0f, -2.0f,
-                                2.0f, -2.0f, 3.0f);
+                               2.0f, -2.0f, 3.0f);
 
     //  Verify matrix inverse (member function)
     constexpr fgm::Matrix4 invMat = mat.inverse();
@@ -279,7 +280,7 @@ TEST_P(SingularMatrix4Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
  */
 TEST_P(SingularMatrix4Inverse, SafeInverse_ReturnsPassedInFallback)
 {
-    const auto& inverseMatrix = GetParam().safeInverse(fgm::mat4d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = GetParam().safeInverse(fgm::Matrix4<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
 }
 
@@ -301,7 +302,7 @@ TEST_P(NaNMatrix4Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
  */
 TEST_P(NaNMatrix4Inverse, SafeInverse_ReturnsPassedInFallback)
 {
-    const auto& inverseMatrix = GetParam().safeInverse(fgm::mat4d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = GetParam().safeInverse(fgm::Matrix4<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
 }
 
@@ -343,7 +344,7 @@ TEST_P(SingularMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixBy
 TEST_P(SingularMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
 {
     const auto& matrix = GetParam();
-    EXPECT_MAT_ZERO(ParamType::safeInverseOf(matrix, fgm::mat4d::zero<ParamType::value_type>));
+    EXPECT_MAT_ZERO(ParamType::safeInverseOf(matrix, fgm::Matrix4<ParamType::value_type>::ZERO()));
 }
 
 
@@ -364,7 +365,7 @@ TEST_P(NaNMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixByDefau
  */
 TEST_P(NaNMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
 {
-    const auto& inverseMatrix = ParamType::safeInverseOf(GetParam(), fgm::mat4d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = ParamType::safeInverseOf(GetParam(), fgm::Matrix4<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
 }
 
@@ -420,7 +421,7 @@ TEST_P(SingularMatrix4Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
 TEST_P(SingularMatrix4Inverse, TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::mat4d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::Matrix4<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
@@ -446,7 +447,7 @@ TEST_P(NaNMatrix4Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
 TEST_P(NaNMatrix4Inverse, TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::mat4d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::Matrix4<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
@@ -498,7 +499,7 @@ TEST_P(SingularMatrix4Inverse, StaticWrapper_TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     const auto& matrix = GetParam();
-    EXPECT_MAT_ZERO(ParamType::tryInverseOf(matrix, flag, fgm::mat4d::zero<ParamType::value_type>));
+    EXPECT_MAT_ZERO(ParamType::tryInverseOf(matrix, flag, fgm::Matrix4<ParamType::value_type>::ZERO()));
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 
@@ -516,6 +517,7 @@ TEST_P(NaNMatrix4Inverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefaul
 }
 
 
+
 /**
  * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Matrix4::tryInverse
  *        returns passed-in fallback and sets status flag to @ref OperationStatus::NANOPERAND.
@@ -523,7 +525,7 @@ TEST_P(NaNMatrix4Inverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefaul
 TEST_P(NaNMatrix4Inverse, StaticWrapper_TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const auto& inverseMatrix = ParamType::tryInverseOf(GetParam(), flag, fgm::mat4d::zero<ParamType::value_type>);
+    const auto& inverseMatrix = ParamType::tryInverseOf(GetParam(), flag, fgm::Matrix4<ParamType::value_type>::ZERO());
     EXPECT_MAT_ZERO(inverseMatrix);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }

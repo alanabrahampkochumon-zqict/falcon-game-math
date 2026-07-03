@@ -176,39 +176,7 @@ namespace fgm
         [[nodiscard]] constexpr const T& operator()(std::size_t row, std::size_t col) const noexcept;
 
         /** @} */
-
-
-        /**
-         * @addtogroup T_FGM_Mat3x3_Constant
-         * @{
-         */
-
-        /**************************************
-         *                                    *
-         *             CONSTANTS              *
-         *                                    *
-         **************************************/
-
-        /**
-         * @brief A 3D matrix with ones on the main diagonal and zeros elsewhere.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         *
-         * @return A 3D identity matrix.
-         */
-        [[nodiscard]] static constexpr Matrix3 eye() noexcept;
-
-
-        /**
-         * @brief A 3D matrix with all zero elements.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         *
-         * @return A 3D zero matrix.
-         */
-        [[nodiscard]] static constexpr Matrix3 zero() noexcept;
-
-        /** @} */
+        
 
 
         /**
@@ -622,7 +590,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMatrix3<T, S> safeDiv(S scalar,
-                                                              const Matrix3& fallback = Matrix3::eye()) const noexcept
+                                                              const Matrix3& fallback = Matrix3::EYE()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -648,7 +616,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMatrix3<T, S> safeDiv(const Matrix3& mat, S scalar,
-                                                                     const Matrix3& fallback = Matrix3::eye()) noexcept
+                                                                     const Matrix3& fallback = Matrix3::EYE()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -678,7 +646,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMatrix3<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                             const Matrix3& fallback = Matrix3::eye()) const noexcept
+                                                             const Matrix3& fallback = Matrix3::EYE()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -710,7 +678,7 @@ namespace fgm
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMatrix3<T, S> tryDiv(const Matrix3& mat, S scalar,
                                                                     OperationStatus& status,
-                                                                    const Matrix3& fallback = Matrix3::eye()) noexcept
+                                                                    const Matrix3& fallback = Matrix3::EYE()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -892,7 +860,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix3<Magnitude<T>> safeInverse(const Matrix3& fallback = Matrix3::eye()) const noexcept
+        constexpr Matrix3<Magnitude<T>> safeInverse(const Matrix3& fallback = Matrix3::EYE()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -927,7 +895,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix3<Magnitude<T>> safeInverseOf(const Matrix3& matrix,
-                                                             const Matrix3& fallback = Matrix3::eye()) noexcept
+                                                             const Matrix3& fallback = Matrix3::EYE()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -963,7 +931,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Matrix3<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                   const Matrix3& fallback = Matrix3::eye()) const noexcept
+                                                   const Matrix3& fallback = Matrix3::EYE()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1000,7 +968,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix3<Magnitude<T>> tryInverseOf(const Matrix3& matrix, OperationStatus& status,
-                                                            const Matrix3& fallback = Matrix3::eye()) noexcept
+                                                            const Matrix3& fallback = Matrix3::EYE()) noexcept
             requires SignedStrictArithmetic<T>;
 
 

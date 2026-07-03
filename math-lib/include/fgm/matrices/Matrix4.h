@@ -65,7 +65,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::mat4d::zero<T> to guarantee a zeroed matrix.
+         *       @ref fgm::Matrix4<T>::ZERO() to guarantee a zeroed matrix.
          */
         Matrix4() = default;
 
@@ -92,7 +92,7 @@ namespace fgm
          *
          */
         [[nodiscard]] constexpr Matrix4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22,
-                                         T m23, T m30, T m31, T m32, T m33) noexcept;
+                                        T m23, T m30, T m31, T m32, T m33) noexcept;
 
 
         /**
@@ -104,7 +104,7 @@ namespace fgm
          * @param[in] col3 The 4D-vector to use as the fourth column entry.
          */
         [[nodiscard]] constexpr Matrix4(const Vector4<T>& col0, const Vector4<T>& col1, const Vector4<T>& col2,
-                                         const Vector4<T>& col3) noexcept;
+                                        const Vector4<T>& col3) noexcept;
 
 
         /**
@@ -188,41 +188,6 @@ namespace fgm
         [[nodiscard]] constexpr const T& operator()(std::size_t row, std::size_t col) const noexcept;
 
         /** @} */
-
-
-
-        /**
-         * @addtogroup T_FGM_Mat4x4_Constant
-         * @{
-         */
-
-        /**************************************
-         *                                    *
-         *             CONSTANTS              *
-         *                                    *
-         **************************************/
-
-        /**
-         * @brief A 4D matrix with ones on the main diagonal and zeros elsewhere.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         *
-         * @return A 4 identity matrix.
-         */
-        [[nodiscard]] static constexpr Matrix4 eye() noexcept;
-
-
-        /**
-         * @brief A 4D matrix with all zero elements.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         *
-         * @return A 4D zero matrix.
-         */
-        [[nodiscard]] static constexpr Matrix4 zero() noexcept;
-
-        /** @} */
-
 
 
         /**
@@ -641,8 +606,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix4<T, S> safeDiv(
-            S scalar, const Matrix4& fallback = Matrix4::eye()) const noexcept
+        [[nodiscard]] constexpr PromotedMatrix4<T, S> safeDiv(S scalar,
+                                                              const Matrix4& fallback = Matrix4::EYE()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -667,8 +632,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix4<T, S> safeDiv(
-            const Matrix4& mat, S scalar, const Matrix4& fallback = Matrix4::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix4<T, S> safeDiv(const Matrix4& mat, S scalar,
+                                                                     const Matrix4& fallback = Matrix4::EYE()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -699,7 +664,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMatrix4<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                              const Matrix4& fallback = Matrix4::eye()) const noexcept
+                                                             const Matrix4& fallback = Matrix4::EYE()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -730,8 +695,9 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix4<T, S> tryDiv(
-            const Matrix4& mat, S scalar, OperationStatus& status, const Matrix4& fallback = Matrix4::eye()) noexcept
+        [[nodiscard]] static constexpr PromotedMatrix4<T, S> tryDiv(const Matrix4& mat, S scalar,
+                                                                    OperationStatus& status,
+                                                                    const Matrix4& fallback = Matrix4::EYE()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -969,7 +935,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix4<Magnitude<T>> safeInverse(const Matrix4& fallback = Matrix4::eye()) const noexcept
+        constexpr Matrix4<Magnitude<T>> safeInverse(const Matrix4& fallback = Matrix4::EYE()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1010,7 +976,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix4<Magnitude<T>> safeInverseOf(const Matrix4& matrix,
-                                                              const Matrix4& fallback = Matrix4::eye()) noexcept
+                                                             const Matrix4& fallback = Matrix4::EYE()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1052,7 +1018,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Matrix4<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                    const Matrix4& fallback = Matrix4::eye()) const noexcept
+                                                   const Matrix4& fallback = Matrix4::EYE()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1095,7 +1061,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix4<Magnitude<T>> tryInverseOf(const Matrix4& matrix, OperationStatus& status,
-                                                             const Matrix4& fallback = Matrix4::eye()) noexcept
+                                                            const Matrix4& fallback = Matrix4::EYE()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1222,7 +1188,47 @@ namespace fgm
 
         /** @} */
 
+        /**
+         * @addtogroup T_FGM_Mat4x4_Constant
+         * @{
+         */
 
+        // NOLINTBEGIN
+
+        /**************************************
+         *                                    *
+         *             CONSTANTS              *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief A 4D matrix with ones on the main diagonal and zeros elsewhere.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Matrix4 EYE()
+            requires fgm::StrictArithmetic<T>
+        {
+            return Matrix4{ T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0),
+                            T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1) };
+        }
+
+
+        /**
+         * @brief A 4D matrix with all zero elements.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Matrix4 ZERO()
+            requires fgm::StrictArithmetic<T>
+        {
+            return Matrix4{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0),
+                            T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) };
+        }
+
+        // NOLINTEND
+
+        /** @} */
 
     private:
         std::array<Vector4<T>, columns> _data;
@@ -1352,46 +1358,9 @@ namespace fgm
 
 
 
-    /**
-     * @addtogroup T_FGM_Mat4x4_Constant
-     * @{
-     */
-
-    /**************************************
-     *                                    *
-     *             CONSTANTS              *
-     *                                    *
-     **************************************/
-
-    namespace mat4d
-    {
-        /**
-         * @brief A 4D matrix with ones on the main diagonal and zeros elsewhere.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Matrix4<T> eye(T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0),
-                                         T(0), T(0), T(1));
-
-
-        /**
-         * @brief A 4D matrix with all zero elements.
-         *
-         * @note Only available for @ref StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Matrix4<T> zero(T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0),
-                                          T(0), T(0), T(0));
-
-    } // namespace mat4d
-
-
     /** @brief Template deduction guide for Matrix4. */
     template <Arithmetic T, Arithmetic... Args>
     Matrix4(T, Args...) -> Matrix4<T>;
-
-    /** @} */
 
 } // namespace fgm
 
