@@ -50,6 +50,18 @@ namespace
     static_assert(fgm::isnan(fgm::Vector2<float>::QNAN().x()));
     static_assert(fgm::isnan(fgm::Vector2<float>::QNAN().y()));
 
+    static_assert(fgm::Vector2<int>::LEFT().x() == -1);
+    static_assert(fgm::Vector2<int>::LEFT().y() == 0);
+
+    static_assert(fgm::Vector2<int>::RIGHT().x() == 1);
+    static_assert(fgm::Vector2<int>::RIGHT().y() == 0);
+
+    static_assert(fgm::Vector2<int>::UP().x() == 0);
+    static_assert(fgm::Vector2<int>::UP().y() == 1);
+
+    static_assert(fgm::Vector2<int>::DOWN().x() == 0);
+    static_assert(fgm::Vector2<int>::DOWN().y() == -1);
+
 } // namespace
 
 

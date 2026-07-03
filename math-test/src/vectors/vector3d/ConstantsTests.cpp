@@ -36,19 +36,71 @@ namespace
 {
     static_assert(fgm::Vector3<int>::ONE().x() == 1);
     static_assert(fgm::Vector3<int>::ONE().y() == 1);
+    static_assert(fgm::Vector3<int>::ONE().z() == 1);
 
     static_assert(fgm::Vector3<int>::ZERO().x() == 0);
     static_assert(fgm::Vector3<int>::ZERO().y() == 0);
+    static_assert(fgm::Vector3<int>::ZERO().z() == 0);
 
     static_assert(fgm::isinf(fgm::Vector3<float>::INF().x()));
     static_assert(fgm::isinf(fgm::Vector3<float>::INF().y()));
+    static_assert(fgm::isinf(fgm::Vector3<float>::INF().z()));
 
     static_assert(fgm::isinf(fgm::Vector3<float>::INF_NEG().x()));
     static_assert(fgm::isinf(fgm::Vector3<float>::INF_NEG().y()));
-
+    static_assert(fgm::isinf(fgm::Vector3<float>::INF_NEG().z()));
 
     static_assert(fgm::isnan(fgm::Vector3<float>::QNAN().x()));
     static_assert(fgm::isnan(fgm::Vector3<float>::QNAN().y()));
+    static_assert(fgm::isnan(fgm::Vector3<float>::QNAN().z()));
+
+    static_assert(fgm::Vector3<int>::LEFT().x() == -1);
+    static_assert(fgm::Vector3<int>::LEFT().y() == 0);
+    static_assert(fgm::Vector3<int>::LEFT().z() == 0);
+
+    static_assert(fgm::Vector3<int>::RIGHT().x() == 1);
+    static_assert(fgm::Vector3<int>::RIGHT().y() == 0);
+    static_assert(fgm::Vector3<int>::RIGHT().z() == 0);
+
+    static_assert(fgm::Vector3<int>::UP().x() == 0);
+    static_assert(fgm::Vector3<int>::UP().y() == 1);
+    static_assert(fgm::Vector3<int>::UP().z() == 0);
+
+    static_assert(fgm::Vector3<int>::DOWN().x() == 0);
+    static_assert(fgm::Vector3<int>::DOWN().y() == -1);
+    static_assert(fgm::Vector3<int>::DOWN().z() == 0);
+
+
+#ifdef FGM_LEFT_HANDED
+    static_assert(fgm::Vector3<int>::FORWARD().x() == 0);
+    static_assert(fgm::Vector3<int>::FORWARD().y() == 0);
+    static_assert(fgm::Vector3<int>::FORWARD().z() == 1);
+
+
+    static_assert(fgm::Vector3<int>::BACKWARD().x() == 0);
+    static_assert(fgm::Vector3<int>::BACKWARD().y() == 0);
+    static_assert(fgm::Vector3<int>::BACKWARD().z() == -1);
+#else
+
+    static_assert(fgm::Vector3<int>::FORWARD().x() == 0);
+    static_assert(fgm::Vector3<int>::FORWARD().y() == 0);
+    static_assert(fgm::Vector3<int>::FORWARD().z() == -1);
+
+
+    static_assert(fgm::Vector3<int>::BACKWARD().x() == 0);
+    static_assert(fgm::Vector3<int>::BACKWARD().y() == 0);
+    static_assert(fgm::Vector3<int>::BACKWARD().z() == 1);
+#endif
+
+    constexpr auto P1 = fgm::Vector3<int>::POINT();
+    static_assert(P1.x() == 0);
+    static_assert(P1.y() == 0);
+    static_assert(P1.z() == 1);
+
+    constexpr auto P2 = fgm::Vector3<int>::POINT(4, 5);
+    static_assert(P2.x() == 4);
+    static_assert(P2.y() == 5);
+    static_assert(P2.z() == 1);
 
 } // namespace
 

@@ -2438,85 +2438,7 @@ namespace fgm
 
     /** @} */
 
-
-    /**
-     * @addtogroup FGM_Vec3_Const
-     * @{
-     */
-
-    /*************************************
-     *                                   *
-     *            CONSTANTS              *
-     *                                   *
-     *************************************/
-
-    namespace vec3d
-    {
-        /**
-         * @brief A 3D vector with all components set to one (1, 1, 1).
-         *
-         * @note Only available for @ref fgm::StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Vector3<T> one = Vector3<T>(T(1), T(1), T(1));
-
-
-        /**
-         * @brief A 3D vector with all components set to zero (0, 0, 0).
-         *
-         * @note Only available for @ref fgm::StrictArithmetic types.
-         */
-        template <StrictArithmetic T>
-        inline constexpr Vector3<T> zero = Vector3<T>(T(0), T(0), T(0)); ///< 3D-Vector with all zero-components.
-
-
-        /**
-         * @brief A 3D vector with all components set to positive infinity.
-         *
-         * @note Only available for `std::floating_point` types.
-         */
-        template <StrictArithmetic T>
-            requires std::floating_point<T>
-        inline constexpr Vector3<T> inf =
-            Vector3<T>(T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D));
-
-
-        /**
-         * @brief A 3D vector with all components set to negative infinity.
-         *
-         * @note Only available for `std::floating_point` types.
-         */
-        template <StrictArithmetic T>
-            requires std::floating_point<T>
-        inline constexpr Vector3<T> infN =
-            Vector3<T>(T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D));
-
-
-        /**
-         * @brief A 3D vector with all components set to Not-A-Number (NaN).
-         *
-         * @note Only available for `std::floating_point` types.
-         */
-        template <StrictArithmetic T>
-            requires std::floating_point<T>
-        inline constexpr Vector3<T> nan = Vector3<T>(T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D));
-
-
-        /** @brief A 3D unit vector aligned with the positive X-axis (1, 0, 0). */
-        template <StrictArithmetic T>
-        inline constexpr Vector3<T> x = Vector3<T>(T(1), T(0), T(0));
-
-
-        /** @brief A 3D unit vector aligned with the positive Y-axis (0, 1, 0). */
-        template <StrictArithmetic T>
-        inline constexpr Vector3<T> y = Vector3<T>(T(0), T(1), T(0));
-
-
-        /** @brief A 3D unit vector aligned with the positive Z-axis (0, 0, 1). */
-        template <StrictArithmetic T>
-        inline constexpr Vector3<T> z = Vector3<T>(T(0), T(0), T(1));
-    } // namespace vec3d
-
+    
 
     /** @brief Template deduction guide for Vector3. */
     template <typename T>
@@ -2530,8 +2452,6 @@ namespace fgm
     template <typename T>
         requires Arithmetic<T>
     Vector3(T, Vector2<T>) -> Vector3<T>;
-
-    /** @} */
 
 } // namespace fgm
 
