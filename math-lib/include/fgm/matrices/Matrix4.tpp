@@ -922,6 +922,26 @@ namespace fgm
 #endif
     }
 
+
+    template <Arithmetic T>
+    constexpr Matrix4<T> Matrix4<T>::makeScale(T scale) noexcept
+        requires StrictArithmetic<T>
+    {
+        return Matrix4<T>{ scale, T(0), T(0),  T(0), T(0), scale, T(0), T(0),
+                           T(0),  T(0), scale, T(0), T(0), T(0),  T(0), T(1) };
+    }
+
+
+    template <Arithmetic T>
+    constexpr Matrix4<T> Matrix4<T>::makeScale(T scaleX, T scaleY, T scaleZ) noexcept
+        requires StrictArithmetic<T>
+    {
+
+        return Matrix4<T>{ scaleX, T(0), T(0),   T(0), T(0), scaleY, T(0), T(0),
+                           T(0),   T(0), scaleZ, T(0), T(0), T(0),   T(0), T(1) };
+    }
+    
+
 } // namespace fgm
 
 

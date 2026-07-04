@@ -1306,28 +1306,28 @@ namespace fgm
         [[nodiscard]] static constexpr Matrix4 makeRotationZ(U angle) noexcept
             requires SignedStrictArithmetic<T>;
 
-        // /**
-        //  * @brief Construct a uniform scale 3D matrix.
-        //  *
-        //  * @param[in] scale The scale factor.
-        //  *
-        //  * @return A new @ref Matrix4 representing the uniform scale.
-        //  */
-        // [[nodiscard]] static constexpr Matrix4 makeScale(T scale) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Construct a non-uniform scale 3D matrix.
-        //  *
-        //  * @param[in] scaleX The scale factor in the x-direction.
-        //  * @param[in] scaleY The scale factor in the y-direction.
-        //  * @param[in] scaleZ The scale factor in the z-direction.
-        //  *
-        //  * @return A new @ref Matrix4 representing the non-uniform scale.
-        //  */
-        // [[nodiscard]] static constexpr Matrix4 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
-        //     requires StrictArithmetic<T>;
+        /**
+         * @brief Construct an affine uniform scale 3D matrix.
+         *
+         * @param[in] scale The scale factor.
+         *
+         * @return A new @ref Matrix4 representing the uniform scale.
+         */
+        [[nodiscard]] static constexpr Matrix4 makeScale(T scale) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct an affine non-uniform scale 3D matrix.
+         *
+         * @param[in] scaleX The scale factor in the x-direction.
+         * @param[in] scaleY The scale factor in the y-direction.
+         * @param[in] scaleZ The scale factor in the z-direction.
+         *
+         * @return A new @ref Matrix4 representing the non-uniform scale.
+         */
+        [[nodiscard]] static constexpr Matrix4 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
+            requires StrictArithmetic<T>;
 
 
         // /**
