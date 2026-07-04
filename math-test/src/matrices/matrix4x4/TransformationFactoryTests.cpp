@@ -289,6 +289,33 @@ namespace
         static_assert(SCALE_MAT(3, 1) == 0);
         static_assert(SCALE_MAT(3, 2) == 0);
         static_assert(SCALE_MAT(3, 3) == 1);
+
+    } // namespace
+
+
+    /** @brief Verify that fgm::Matrix4::makeAffine is available at compile time. */
+    namespace
+    {
+        // Make Affine
+        constexpr fgm::Matrix3 LIN_TRANSFORM{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        constexpr fgm::Vector3 TRANSLATION3D{ 11, 12, 13 };
+        constexpr auto AFFINE4D = fgm::Matrix4<int>::makeAffine(LIN_TRANSFORM, TRANSLATION3D);
+        static_assert(AFFINE4D(0, 0) == 1);
+        static_assert(AFFINE4D(0, 1) == 2);
+        static_assert(AFFINE4D(0, 2) == 3);
+        static_assert(AFFINE4D(0, 3) == 11);
+        static_assert(AFFINE4D(1, 0) == 4);
+        static_assert(AFFINE4D(1, 1) == 5);
+        static_assert(AFFINE4D(1, 2) == 6);
+        static_assert(AFFINE4D(1, 3) == 12);
+        static_assert(AFFINE4D(2, 0) == 7);
+        static_assert(AFFINE4D(2, 1) == 8);
+        static_assert(AFFINE4D(2, 2) == 9);
+        static_assert(AFFINE4D(2, 3) == 13);
+        static_assert(AFFINE4D(3, 0) == 0);
+        static_assert(AFFINE4D(3, 1) == 0);
+        static_assert(AFFINE4D(3, 2) == 0);
+        static_assert(AFFINE4D(3, 3) == 1);
     } // namespace
 
 

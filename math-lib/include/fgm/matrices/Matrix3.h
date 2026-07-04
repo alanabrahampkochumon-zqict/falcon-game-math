@@ -1222,6 +1222,15 @@ namespace fgm
         [[nodiscard]] static constexpr Matrix3 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
             requires StrictArithmetic<T>;
 
+        /**
+         * @brief Construct a 3D affine transform matrix from a 2D linear transform matrix and a 2D translation vector.
+         * @param linearTransform The 2D linear transformation matrix.
+         * @param translation     The 2D translation vector.
+         * @return A 3D affine transform matrix.
+         */
+        [[nodiscard]] static constexpr Matrix3 makeAffine(const Matrix2<T>& linearTransform,
+                                                          const Vector2<T>& translation) noexcept;
+
 
         // /**
         //  * @brief Construct a reflection 3D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
@@ -1259,9 +1268,7 @@ namespace fgm
          */
         static constexpr Matrix3 EYE()
             requires fgm::StrictArithmetic<T>
-        {
-            return Matrix3{ T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1) };
-        }
+        { return Matrix3{ T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1) }; }
 
 
         /**
@@ -1271,9 +1278,7 @@ namespace fgm
          */
         static constexpr Matrix3 ZERO()
             requires fgm::StrictArithmetic<T>
-        {
-            return Matrix3{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) };
-        }
+        { return Matrix3{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) }; }
 
         // NOLINTEND
 

@@ -1334,7 +1334,7 @@ namespace fgm
         /**
          * @brief Construct a 4D affine transform matrix from a 3D linear transform matrix and a 3D translation vector.
          * @param linearTransform The 3D linear transformation matrix.
-         * @param translation     The 3D translation.
+         * @param translation     The 3D translation vector.
          * @return A 4D affine transform matrix.
          */
         [[nodiscard]] static constexpr Matrix4 makeAffine(const Matrix3<T>& linearTransform,
