@@ -183,9 +183,37 @@ TYPED_TEST_SUITE(Matrix4NonUniformScale, SupportedArithmeticTypes);
 // TYPED_TEST_SUITE(Matrix4OriginReflection, SupportedSignedArithmeticTypes);
 //
 
+template <typename T>
+class Matrix4Affine: public testing::Test
+{
+protected:
+    fgm::Matrix3<T> _linearTransform;
+    fgm::Vector3<T> _translation;
+    fgm::Matrix4<T> _expectedMat;
+
+    void SetUp() override
+    {
+        _linearTransform = { fgm::Vector3{ T(1.2341234), T(2.31419123), T(3.10234212) },
+                             fgm::Vector3{ T(15.123949182), T(0.93819231), T(3.10234212) },
+                             fgm::Vector3{ T(5.8329141), T(12.2319382), T(8.34232112) } };
+        _translation     = { T(1.2398412349), T(12.1234892134), T(35.012342380) };
+
+        _expectedMat = { fgm::Vector4{ T(1.2341234), T(2.31419123), T(3.10234212), T(0) },
+                         fgm::Vector4{ T(15.123949182), T(0.93819231), T(3.10234212), T(0) },
+                         fgm::Vector4{ T(5.8329141), T(12.2319382), T(8.34232112), T(0) },
+                         fgm::Vector4{ T(1.2398412349), T(12.1234892134), T(35.012342380), T(1) } };
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Matrix4 affine factory, parameterized
+ *        @ref SupportedArithmeticTypes
+ */
+TYPED_TEST_SUITE(Matrix4Affine, SupportedArithmeticTypes);
+
+
 
 /**
- * @addtogroup T_FGM_Mat3x3_Transforms
+ * @addtogroup T_FGM_Mat4x4_Transforms
  * @{
  */
 
@@ -314,6 +342,18 @@ TYPED_TEST(Matrix4UniformScale, ReturnsScaleMatrix)
 /** @brief Verify that non-uniform scale transformation factory returns a non-uniform scale matrix. */
 TYPED_TEST(Matrix4NonUniformScale, ReturnsScaleMatrix)
 { EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix4<TypeParam>::makeScale(this->_scaleX, this->_scaleY, this->_scaleZ)); }
+
+
+
+/**************************************
+ *                                    *
+ *            AFFINE TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that makeAffine returns a matrix with combined linear transform and translation vector. */
+TYPED_TEST(Matrix4Affine, ReturnsCombinedLinearTransformAndTranslation)
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix4<TypeParam>::makeAffine(this->_linearTransform, this->_translation)); }
 
 
 //

@@ -940,7 +940,30 @@ namespace fgm
         return Matrix4<T>{ scaleX, T(0), T(0),   T(0), T(0), scaleY, T(0), T(0),
                            T(0),   T(0), scaleZ, T(0), T(0), T(0),   T(0), T(1) };
     }
-    
+
+
+    template <Arithmetic T>
+    constexpr Matrix4<T> Matrix4<T>::makeAffine(const Matrix3<T>& linearTransform,
+                                                const Vector3<T>& translation) noexcept
+    {
+        return Matrix4<T>{ linearTransform(0, 0),
+                           linearTransform(0, 1),
+                           linearTransform(0, 2),
+                           translation.x(),
+                           linearTransform(1, 0),
+                           linearTransform(1, 1),
+                           linearTransform(1, 2),
+                           translation.y(),
+                           linearTransform(2, 0),
+                           linearTransform(2, 1),
+                           linearTransform(2, 2),
+                           translation.z(),
+                           T(0),
+                           T(0),
+                           T(0),
+                           T(1) };
+    }
+
 
 } // namespace fgm
 

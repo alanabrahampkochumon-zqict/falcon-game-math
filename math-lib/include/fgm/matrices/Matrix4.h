@@ -1306,6 +1306,7 @@ namespace fgm
         [[nodiscard]] static constexpr Matrix4 makeRotationZ(U angle) noexcept
             requires SignedStrictArithmetic<T>;
 
+
         /**
          * @brief Construct an affine uniform scale 3D matrix.
          *
@@ -1328,6 +1329,16 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Matrix4 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
             requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 4D affine transform matrix from a 3D linear transform matrix and a 3D translation vector.
+         * @param linearTransform The 3D linear transformation matrix.
+         * @param translation     The 3D translation.
+         * @return A 4D affine transform matrix.
+         */
+        [[nodiscard]] static constexpr Matrix4 makeAffine(const Matrix3<T>& linearTransform,
+                                                          const Vector3<T>& translation) noexcept;
 
 
         // /**
