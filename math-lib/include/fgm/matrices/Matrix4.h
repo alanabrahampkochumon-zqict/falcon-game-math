@@ -1189,6 +1189,163 @@ namespace fgm
         /** @} */
 
         /**
+         * @addtogroup FGM_Mat4x4_Transforms
+         * @{
+         */
+
+        /**
+         * @brief Construct a 3D affine rotation matrix in the x-axis for a given angle.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                    1 &            0 &            0 & 0 \\
+         *                    0 &  cos(\theta) & -sin(\theta) & 0 \\
+         *                    0 &  sin(\theta) &  cos(\theta) & 0 \\
+         *                    0 &            0 &            0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                    1 &            0 &           0 & 0 \\
+         *                    0 &  cos(\theta) & sin(\theta) & 0 \\
+         *                    0 & -sin(\theta) & cos(\theta) & 0 \\
+         *                    0 &            0 &           0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle The rotation angle in radians.
+         *
+         * @return A new @ref Matrix4 representing the linear rotation around x-axis.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Matrix4 makeRotationX(U angle) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct an affine 3D rotation matrix in the y-axis for a given angle.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & 0 & sin(\theta) & 0 \\
+         *                     0           & 1 &           0 & 0 \\
+         *                    -sin(\theta) & 0 & cos(\theta) & 0 \\
+         *                               0 & 0 &           0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                    cos(\theta) & 0 & -sin(\theta) & 0 \\
+         *                    0           & 1 &            0 & 0 \\
+         *                    sin(\theta) & 0 &  cos(\theta) & 0 \\
+         *                              0 & 0 &            0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle The rotation angle in radians.
+         *
+         * @return A new @ref Matrix4 representing the linear rotation around y-axis.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Matrix4 makeRotationY(U angle) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct an affine 3D rotation matrix in the z-axis for a given angle.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & -sin(\theta) & 0 & 0 \\
+         *                     sin(\theta) &  cos(\theta) & 0 & 0 \\
+         *                               0 &            0 & 1 & 0 \\
+         *                               0 &            0 & 0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & sin(\theta) & 0 & 0 \\
+         *                    -sin(\theta) & cos(\theta) & 0 & 0 \\
+         *                               0 &           0 & 1 & 0 \\
+         *                               0 &           0 & 0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle The rotation angle in radians.
+         *
+         * @return A new @ref Matrix4 representing the linear rotation around z-axis.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Matrix4 makeRotationZ(U angle) noexcept
+            requires SignedStrictArithmetic<T>;
+
+        // /**
+        //  * @brief Construct a uniform scale 3D matrix.
+        //  *
+        //  * @param[in] scale The scale factor.
+        //  *
+        //  * @return A new @ref Matrix4 representing the uniform scale.
+        //  */
+        // [[nodiscard]] static constexpr Matrix4 makeScale(T scale) noexcept
+        //     requires StrictArithmetic<T>;
+        //
+        //
+        // /**
+        //  * @brief Construct a non-uniform scale 3D matrix.
+        //  *
+        //  * @param[in] scaleX The scale factor in the x-direction.
+        //  * @param[in] scaleY The scale factor in the y-direction.
+        //  * @param[in] scaleZ The scale factor in the z-direction.
+        //  *
+        //  * @return A new @ref Matrix4 representing the non-uniform scale.
+        //  */
+        // [[nodiscard]] static constexpr Matrix4 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
+        //     requires StrictArithmetic<T>;
+
+
+        // /**
+        //  * @brief Construct a reflection 3D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
+        //  *
+        //  * @note To construction a reflection matrix around origin, set all axis reflection to true.
+        //  *
+        //  * @param[in] reflectX A flag to whether reflect in the x-direction.
+        //  * @param[in] reflectY A flag to whether reflect in the y-direction.
+        //  *
+        //  * @return A new @ref Matrix4 representing the axis-aligned reflection.
+        //  */
+        // [[nodiscard]] static constexpr Matrix4 reflect(bool reflectX, bool reflectY) noexcept
+        //     requires StrictArithmetic<T>;
+
+        /** @} */
+
+        /**
          * @addtogroup T_FGM_Mat4x4_Constant
          * @{
          */

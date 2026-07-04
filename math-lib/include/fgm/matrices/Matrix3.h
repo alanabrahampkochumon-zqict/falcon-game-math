@@ -1165,7 +1165,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 3D rotation matrix in the y-axis for a given angle.
+         * @brief Construct a 3D rotation matrix in the z-axis for a given angle.
          *
          * @details The layout of the returned matrix adapts to the library's active coordinate system:
          *          - **Right-Handed (Default):**
