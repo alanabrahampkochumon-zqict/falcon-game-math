@@ -2,8 +2,8 @@ add_executable(Playground)
 target_compile_features(Playground PRIVATE cxx_std_20)
 
 # Directories
-set(SourceDir "src/")
-set(HeaderDir "include/")
+set(SourceDir "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+set(HeaderDir "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 set(ParserDir "${HeaderDir}parsers/")
 
 # Files
@@ -50,7 +50,7 @@ add_custom_command(
         COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:Playground>/models"
         # Copy files into the target directory
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_CURRENT_SOURCE_DIR}/models"
+        "models"
         "$<TARGET_FILE_DIR:Playground>/models"
 
         COMMENT "Copying models to build directory"

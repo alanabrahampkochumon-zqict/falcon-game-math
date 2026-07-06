@@ -3,15 +3,15 @@ target_compile_features(MathTestSuite PRIVATE cxx_std_20)
 
 
 # Directories
-set(IncludeDir "include/")
-set(SourceDir "src/")
+set(IncludeDir "${CMAKE_CURRENT_SOURCE_DIR}/include/")
+set(SourceDir "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 
-set(VectorDir "${SourceDir}/vectors/")
+set(VectorDir "${SourceDir}vectors/")
 set(Vector2TestDir "${VectorDir}vector2d/")
 set(Vector3TestDir "${VectorDir}vector3d/")
 set(Vector4TestDir "${VectorDir}vector4d/")
 
-set(MatrixDir "${SourceDir}/matrices/")
+set(MatrixDir "${SourceDir}matrices/")
 set(Matrix2x2TestDir "${MatrixDir}matrix2x2/")
 set(Matrix3x3TestDir "${MatrixDir}matrix3x3/")
 set(Matrix4x4TestDir "${MatrixDir}matrix4x4/")
@@ -129,7 +129,7 @@ target_link_libraries(
 target_include_directories(
         MathTestSuite
         PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        include
 )
 
 
@@ -138,7 +138,7 @@ gtest_discover_tests(MathTestSuite DISCOVERY_MODE PRE_TEST)
 
 source_group(
         TREE
-        "${CMAKE_CURRENT_SOURCE_DIR}/${IncludeDir}"
+        "${IncludeDir}"
         PREFIX "Header Files"
         FILES
         ${SetupFiles}
@@ -147,7 +147,7 @@ source_group(
 
 source_group(
         TREE
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src"
         PREFIX "Source Files"
         FILES
         ${Vector2TestFiles}

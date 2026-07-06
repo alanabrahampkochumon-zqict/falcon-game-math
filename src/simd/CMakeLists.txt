@@ -1,7 +1,7 @@
 add_library(FalconSIMD INTERFACE)
 
 # Directories
-set(IncludeDir "include/")
+set(IncludeDir "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 set(UtilityDir "${IncludeDir}utils/")
 set(SIMDDir "${IncludeDir}simd/")
 

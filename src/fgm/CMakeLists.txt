@@ -1,5 +1,5 @@
 # Directories
-set(IncludeDir "include/")
+set(IncludeDir "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 set(LibraryDir "${IncludeDir}fgm/")
 set(CommonDir "${LibraryDir}common/")
 set(VectorDir "${LibraryDir}vectors/")

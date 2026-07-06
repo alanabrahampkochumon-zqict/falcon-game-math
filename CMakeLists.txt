@@ -15,9 +15,7 @@ option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # For faster CI/CD unit-tests on push are only run with essential types rather than the full type permutation.
 option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
 # Flags for keeping the library lightweight when a consumer imports it
-option(ENABLE_FGM_TEST "Enable FGM Unit Tests")
 option(ENABLE_FGM_BENCHMARK "Enables FGM Benchmark Suite")
-option(ENABLE_FGM_DEMO "Enables FGM Demo Application")
 option(ENABLE_FGM_DOCS "Enables FGM Documentation Generation")
 
 
@@ -152,62 +150,18 @@ endif ()
 
 
 include(dependencies.cmake)
-
-
-
 include(simdcheck.cmake)
 
-# Core Libraries
-add_subdirectory(math-lib)
-add_subdirectory(simd)
-
-target_compile_features(MathLib INTERFACE cxx_std_20)
-target_compile_features(FalconSIMD INTERFACE cxx_std_20)
+add_subdirectory(src)
+add_subdirectory(tests)
 
 target_link_libraries(FalconSIMD INTERFACE StrictWarnings ProjectSanitizers)
 target_link_libraries(MathLib INTERFACE StrictWarnings ProjectSanitizers)
 
 
-if (ENABLE_FGM_DEMO)
-    message("Demo application is enabled")
-    add_subdirectory(playground)
-    target_compile_features(Playground PRIVATE cxx_std_20)
-    target_link_libraries(Playground PRIVATE StrictWarnings ProjectSanitizers)
-endif ()
-
-if (ENABLE_FGM_TEST)
-    message("Test suite is enabled")
-
-    # Add Project Sanitizers to Gtest
-    if (TARGET gtest)
-        target_link_libraries(gtest PRIVATE ProjectSanitizers)
-        target_link_libraries(gmock PRIVATE ProjectSanitizers)
-        target_link_libraries(gtest_main PRIVATE ProjectSanitizers)
-    endif ()
-
-    add_subdirectory(math-test)
-    add_subdirectory(simd-test)
-    target_compile_features(MathTestSuite PRIVATE cxx_std_20)
-    target_compile_features(SIMDTestSuite PRIVATE cxx_std_20)
-    target_link_libraries(MathTestSuite PRIVATE StrictWarnings ProjectSanitizers)
-    target_link_libraries(SIMDTestSuite PRIVATE StrictWarnings ProjectSanitizers)
-
-    if (NONCOMPREHENSIVE)
-        target_compile_definitions(MathTestSuite PRIVATE NONCOMPREHENSIVE)
-        target_compile_definitions(SIMDTestSuite PRIVATE NONCOMPREHENSIVE)
-    endif ()
-
-    AddSIMDCompilerFlag(MathTestSuite)
-endif ()
-
-
 if (ENABLE_FGM_BENCHMARK)
     message("Benchmarks are enabled")
-    add_subdirectory(benchmark-suite)
+    add_subdirectory(benchmarks)
     target_compile_features(BenchmarkSuite PRIVATE cxx_std_20)
     target_link_libraries(BenchmarkSuite PRIVATE StrictWarnings ProjectSanitizers)
 endif ()
-
-
-
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Playground)
