@@ -93,7 +93,9 @@ namespace
 
 /** @brief Verify that transposing a matrix exchanges row and column elements and returns a new matrix. */
 TYPED_TEST(Matrix3Transpose, ExchangesRowsAndColumnElements)
-{ EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose()); }
+{
+    EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose());
+}
 
 
 /**
@@ -101,6 +103,8 @@ TYPED_TEST(Matrix3Transpose, ExchangesRowsAndColumnElements)
  *        column elements and returns a new matrix.
  */
 TYPED_TEST(Matrix3Transpose, StaticWrapper_ExchangesRowsAndColumnElements)
-{ EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix3<TypeParam>::transpose(this->_matrix)); }
+{
+    EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix3<TypeParam>::transpose(this->_matrix));
+}
 
 /** @} */

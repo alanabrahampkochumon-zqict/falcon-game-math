@@ -34,27 +34,27 @@ TYPED_TEST_SUITE(FGMDiffAbs, SupportedArithmeticTypes);
  *            STATIC TESTS            *
  *                                    *
  **************************************/
-namespace 
+namespace
 {
     /** @brief Verify that @ref fgm::utils::diffAbs is available at compile time. */
     namespace
     {
         static_assert(fgm::utils::diffAbs(1000, 100) == 900);
         static_assert(fgm::utils::diffAbs(100, 1000) == 900);
-    }
+    } // namespace
 
 
-    //namespace 
+    // namespace
     //{
-    //    static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //    static_assert(fgm::utils::sqrt(2.0) - 1.41421356237 <= fgm::Config::DOUBLE_EPSILON);
-    //    static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //    static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //    static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //    static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //    static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //}
-}
+    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    //     static_assert(fgm::utils::sqrt(2.0) - 1.41421356237 <= fgm::Config::DOUBLE_EPSILON);
+    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    // }
+} // namespace
 
 
 /**

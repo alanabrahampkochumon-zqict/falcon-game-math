@@ -94,8 +94,8 @@ INSTANTIATE_TEST_SUITE_P(
                       Vector3UtilityParams{ fgm::Vector3(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
                       Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
                       Vector3UtilityParams{ fgm::Vector3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                           fgm::constants::INFINITY_F),
-                                             true },
+                                                         fgm::constants::INFINITY_F),
+                                            true },
                       Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, 1.0f), false }));
 
 
@@ -141,14 +141,14 @@ TEST_P(Vector3NaNChecker, ReturnTrueIfAnyComponentIsNaN)
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasNaN());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Vector3NaNCheckerTestSuite, Vector3NaNChecker,
-    ::testing::Values(Vector3UtilityParams{ fgm::Vector3(fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Vector3UtilityParams{ fgm::Vector3(1.0f, fgm::constants::NaN, 1.0f), true },
-                      Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, fgm::constants::NaN), true },
-                      Vector3UtilityParams{
-                          fgm::Vector3(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN), true },
-                      Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(Vector3NaNCheckerTestSuite, Vector3NaNChecker,
+                         ::testing::Values(Vector3UtilityParams{ fgm::Vector3(fgm::constants::NaN, 1.0f, 1.0f), true },
+                                           Vector3UtilityParams{ fgm::Vector3(1.0f, fgm::constants::NaN, 1.0f), true },
+                                           Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, fgm::constants::NaN), true },
+                                           Vector3UtilityParams{ fgm::Vector3(fgm::constants::NaN, fgm::constants::NaN,
+                                                                              fgm::constants::NaN),
+                                                                 true },
+                                           Vector3UtilityParams{ fgm::Vector3(1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Vector3::hasNaN returns False for integral types. */

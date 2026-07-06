@@ -79,7 +79,7 @@ namespace
 
     // Verify that the matrix can be initialized at compile time using column vectors.
     constexpr fgm::Matrix4 MAT2(fgm::Vector4(1, 5, 9, 13), fgm::Vector4(2, 6, 10, 14), fgm::Vector4(3, 7, 11, 15),
-                                 fgm::Vector4(4, 8, 12, 16));
+                                fgm::Vector4(4, 8, 12, 16));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
     static_assert(MAT2(0, 2) == 3);
@@ -158,11 +158,11 @@ TYPED_TEST(Matrix4Initialization, EmptyConstructorReturnsIdentityMatrix)
 /** @brief Verify that the parameterized constructor can initialize matrix with elements. */
 TYPED_TEST(Matrix4Initialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
-    const fgm::Matrix4<TypeParam> matrix(
-        this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3], this->_elements[4],
-        this->_elements[5], this->_elements[6], this->_elements[7], this->_elements[8], this->_elements[9],
-        this->_elements[10], this->_elements[11], this->_elements[12], this->_elements[13], this->_elements[14],
-        this->_elements[15]);
+    const fgm::Matrix4<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
+                                         this->_elements[4], this->_elements[5], this->_elements[6], this->_elements[7],
+                                         this->_elements[8], this->_elements[9], this->_elements[10],
+                                         this->_elements[11], this->_elements[12], this->_elements[13],
+                                         this->_elements[14], this->_elements[15]);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
@@ -187,9 +187,9 @@ TYPED_TEST(Matrix4Initialization, ParameterizedConstructorInitializesDiagonalMat
 TYPED_TEST(Matrix4Initialization, CanBeConstructedWithBracedInitialization)
 {
     const fgm::Matrix4<TypeParam> matrix = { { TypeParam(1), TypeParam(5), TypeParam(9), TypeParam(13) },
-                                              { TypeParam(2), TypeParam(6), TypeParam(10), TypeParam(14) },
-                                              { TypeParam(3), TypeParam(7), TypeParam(11), TypeParam(15) },
-                                              { TypeParam(4), TypeParam(8), TypeParam(12), TypeParam(16) } };
+                                             { TypeParam(2), TypeParam(6), TypeParam(10), TypeParam(14) },
+                                             { TypeParam(3), TypeParam(7), TypeParam(11), TypeParam(15) },
+                                             { TypeParam(4), TypeParam(8), TypeParam(12), TypeParam(16) } };
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 

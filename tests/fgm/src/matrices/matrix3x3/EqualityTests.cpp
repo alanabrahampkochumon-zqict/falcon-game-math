@@ -68,9 +68,9 @@ namespace
     constexpr fgm::Matrix3 MAT2(1, 2, 3);
     constexpr fgm::Matrix3 MAT3(4, 2, 2);
     constexpr fgm::Matrix3 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                     -fgm::constants::INFINITY_F);
+                                    -fgm::constants::INFINITY_F);
     constexpr fgm::Matrix3 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                     -fgm::constants::INFINITY_F);
+                                    -fgm::constants::INFINITY_F);
 
 
     /** @brief Verify that matrix equality check is available at compile time. */

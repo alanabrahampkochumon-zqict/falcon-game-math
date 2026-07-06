@@ -302,17 +302,23 @@ namespace
 
 /** @brief Verify that rotation transformation factory for x returns a rotation matrix. */
 TYPED_TEST(Matrix3Rotation, X_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Matrix3<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatX, fgm::Matrix3<typename TypeParam::first_type>::makeRotationX(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Matrix3Rotation, Y_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Matrix3<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatY, fgm::Matrix3<typename TypeParam::first_type>::makeRotationY(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Matrix3Rotation, Z_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Matrix3<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Matrix3<typename TypeParam::first_type>::makeRotationZ(this->_angle));
+}
 
 
 /**************************************
@@ -323,12 +329,16 @@ TYPED_TEST(Matrix3Rotation, Z_ReturnsRotationMatrix)
 
 /** @brief Verify that uniform scale transformation factory returns a scale matrix. */
 TYPED_TEST(Matrix3UniformScale, ReturnsScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::makeScale(this->_scale)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::makeScale(this->_scale));
+}
 
 
 /** @brief Verify that non-uniform scale transformation factory returns a non-uniform scale matrix. */
 TYPED_TEST(Matrix3NonUniformScale, ReturnsScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::makeScale(this->_scaleX, this->_scaleY, this->_scaleZ)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::makeScale(this->_scaleX, this->_scaleY, this->_scaleZ));
+}
 
 
 
@@ -340,7 +350,9 @@ TYPED_TEST(Matrix3NonUniformScale, ReturnsScaleMatrix)
 
 /** @brief Verify that makeAffine returns a matrix with combined linear transform and translation vector. */
 TYPED_TEST(Matrix3Affine, ReturnsCombinedLinearTransformAndTranslation)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::makeAffine(this->_linearTransform, this->_translation)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix3<TypeParam>::makeAffine(this->_linearTransform, this->_translation));
+}
 
 
 

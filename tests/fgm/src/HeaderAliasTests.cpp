@@ -9,8 +9,8 @@
  */
 
 
-#include <fgm/Vec>
 #include <fgm/Mat>
+#include <fgm/Vec>
 #include <type_traits>
 
 

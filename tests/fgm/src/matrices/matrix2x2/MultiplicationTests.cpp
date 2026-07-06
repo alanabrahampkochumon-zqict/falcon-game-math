@@ -216,7 +216,7 @@ TEST(Matrix2ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
     const fgm::Matrix2 mat      = { 1.0f, -2.0f, -4.0f, 5.0f };
     const fgm::Matrix2 expected = { -2.0f, 4.0f, 8.0f, -10.0f };
-    const float scalar           = -2.0f;
+    const float scalar          = -2.0f;
 
     const fgm::Matrix2<float> product = mat * scalar;
 

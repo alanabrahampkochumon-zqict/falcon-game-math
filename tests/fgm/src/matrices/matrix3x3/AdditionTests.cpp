@@ -27,10 +27,9 @@ protected:
 
     void SetUp() override
     {
-        _matA = { fgm::Vector3<T>{ 1, 2, 3 }, fgm::Vector3<T>{ 4, 5, 6 }, fgm::Vector3<T>{ 7, 8, 9 } };
-        _matB = { fgm::Vector3<T>{ 10, 11, 12 }, fgm::Vector3<T>{ 13, 14, 15 }, fgm::Vector3<T>{ 16, 17, 18 } };
-        _expectedSum = { fgm::Vector3<T>{ 11, 13, 15 }, fgm::Vector3<T>{ 17, 19, 21 },
-                         fgm::Vector3<T>{ 23, 25, 27 } };
+        _matA        = { fgm::Vector3<T>{ 1, 2, 3 }, fgm::Vector3<T>{ 4, 5, 6 }, fgm::Vector3<T>{ 7, 8, 9 } };
+        _matB        = { fgm::Vector3<T>{ 10, 11, 12 }, fgm::Vector3<T>{ 13, 14, 15 }, fgm::Vector3<T>{ 16, 17, 18 } };
+        _expectedSum = { fgm::Vector3<T>{ 11, 13, 15 }, fgm::Vector3<T>{ 17, 19, 21 }, fgm::Vector3<T>{ 23, 25, 27 } };
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix3 addition, parameterized by @ref SupportedArithmeticTypes. */
@@ -94,9 +93,9 @@ TYPED_TEST(Matrix3Addition, PlusOperator_ReturnsMatrixSum)
 TEST(Matrix3Addition, PlusOperator_MixedTypePromotesType)
 {
     const fgm::Matrix3 mat1{ fgm::Vector3{ 1.0f, 2.0f, 3.0f }, fgm::Vector3{ -3.0f, -4.0f, 10.0f },
-                              fgm::Vector3{ 4.5f, 3.25f, 3.16f } };
+                             fgm::Vector3{ 4.5f, 3.25f, 3.16f } };
     const fgm::Matrix3 mat2{ fgm::Vector3{ 10.0, 2.0, -1.0 }, fgm::Vector3{ 3.0, -8.0, 12.0 },
-                              fgm::Vector3{ 3.25, 5.1, 0.0 } };
+                             fgm::Vector3{ 3.25, 5.1, 0.0 } };
     [[maybe_unused]] const fgm::Matrix3 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
@@ -122,9 +121,9 @@ TYPED_TEST(Matrix3Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 TEST(Matrix3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
     fgm::Matrix3 mat1{ fgm::Vector3{ 1.0f, 2.0f, 3.0f }, fgm::Vector3{ -3.0f, -4.0f, 10.0f },
-                        fgm::Vector3{ 4.5f, 3.25f, 3.16f } };
+                       fgm::Vector3{ 4.5f, 3.25f, 3.16f } };
     constexpr fgm::Matrix3 mat2{ fgm::Vector3{ 10.0, 2.0, -1.0 }, fgm::Vector3{ 3.0, -8.0, 12.0 },
-                                  fgm::Vector3{ 3.25, 5.1, 0.0 } };
+                                 fgm::Vector3{ 3.25, 5.1, 0.0 } };
 
     mat1 += mat2;
 

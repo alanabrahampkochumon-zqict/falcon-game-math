@@ -56,7 +56,7 @@ TEST_F(Matrix4StringRepresentationTests, IntegralRepresentation)
 TEST_F(Matrix4StringRepresentationTests, FloatRepresentation)
 {
     constexpr fgm::Matrix4 mat(1.2345f, 2.0f, 4.53823f, 3.323f, 3.5832f, 5.8392f, 9.9238f, -12.0532f, 3.2312f, 12.0f,
-                                13.5f, 14.4f, 23.5f, 44.44f, 3.160f, 9.32f);
+                               13.5f, 14.4f, 23.5f, 44.44f, 3.160f, 9.32f);
     std::stringstream ss;
 
     ss << mat;
@@ -74,8 +74,8 @@ TEST_F(Matrix4StringRepresentationTests, FloatRepresentation)
 TEST_F(Matrix4StringRepresentationTests, DoubleRepresentation)
 {
     constexpr fgm::Matrix4 mat(1.2345789777, 2.65831, 2.0, 4.0, 3.2345789777, 1.2345789777, 12.0, -6.2345789777,
-                                0.2345789777, 5.9123849123, 12.123948213, 5.1912384, 2.19234812, 1.129348923, 1.213921,
-                                5.382911932);
+                               0.2345789777, 5.9123849123, 12.123948213, 5.1912384, 2.19234812, 1.129348923, 1.213921,
+                               5.382911932);
     std::stringstream ss;
 
     ss << mat;

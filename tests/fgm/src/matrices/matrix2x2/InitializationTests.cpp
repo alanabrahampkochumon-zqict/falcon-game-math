@@ -104,7 +104,7 @@ TYPED_TEST(Matrix2Initialization, EmptyConstructorReturnsIdentityMatrix)
 TYPED_TEST(Matrix2Initialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
     const fgm::Matrix2<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
-                                          this->_elements[3]);
+                                         this->_elements[3]);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 

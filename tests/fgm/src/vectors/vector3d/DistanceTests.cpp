@@ -86,8 +86,8 @@ namespace
     // static_assert(fgm::Vector3<int>::dist(vectorA, vectorB) == 7);
 
     // Euclidean Distance Square
-     static_assert(vectorA.distSq(vectorB) == 49);
-     static_assert(fgm::Vector3<int>::distSq(vectorA, vectorB) == 49);
+    static_assert(vectorA.distSq(vectorB) == 49);
+    static_assert(fgm::Vector3<int>::distSq(vectorA, vectorB) == 49);
 
     // Manhattan Distance
     static_assert(vectorA.manhattanDist(vectorB) == 11);
@@ -109,7 +109,9 @@ namespace
 
 /** @brief Verify that the @ref fgm::Vector3::dist function returns the Euclidean distance. */
 TYPED_TEST(Vector3Distance, Dist_ReturnsEuclideanDistance)
-{ EXPECT_MAG_EQ(this->_dist, this->_vecA.dist(this->_vecB)); }
+{
+    EXPECT_MAG_EQ(this->_dist, this->_vecA.dist(this->_vecB));
+}
 
 
 /** @brief Verify that the @ref fgm::Vector3::dist function maintains precision for irrational numbers. */
@@ -154,7 +156,9 @@ TYPED_TEST(Vector3Distance, Dist_AlwaysReturnFloatingPointValue)
 
 /** @brief Verify that the static variant of  @ref fgm::Vector3::dist function returns the Euclidean distance. */
 TYPED_TEST(Vector3Distance, StaticWrapper_Dist_ReturnsEuclideanDistance)
-{ EXPECT_MAG_EQ(this->_dist, fgm::Vector3<TypeParam>::dist(this->_vecA, this->_vecB)); }
+{
+    EXPECT_MAG_EQ(this->_dist, fgm::Vector3<TypeParam>::dist(this->_vecA, this->_vecB));
+}
 
 
 /**
@@ -210,7 +214,9 @@ TYPED_TEST(Vector3Distance, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
 
 /** @brief Verify that the @ref fgm::Vector3::distSq function returns the Euclidean distance (squared). */
 TYPED_TEST(Vector3Distance, DistSq_ReturnsSquaredEuclideanDistance)
-{ EXPECT_MAG_EQ(this->_distSq, this->_vecA.distSq(this->_vecB)); }
+{
+    EXPECT_MAG_EQ(this->_distSq, this->_vecA.distSq(this->_vecB));
+}
 
 
 /** @brief Verify that the @ref fgm::Vector3::distSq function returns zero for the same vector. */
@@ -235,7 +241,9 @@ TYPED_TEST(Vector3DistanceSigned, DistSq_HandlesNegativeNumbers)
  *        returns the Euclidean distance (squared).
  */
 TYPED_TEST(Vector3Distance, StaticWrapper_DistSq_ReturnsSquaredEuclideanDistance)
-{ EXPECT_MAG_EQ(this->_distSq, fgm::Vector3<TypeParam>::distSq(this->_vecA, this->_vecB)); }
+{
+    EXPECT_MAG_EQ(this->_distSq, fgm::Vector3<TypeParam>::distSq(this->_vecA, this->_vecB));
+}
 
 
 /** @brief Verify that the @ref fgm::Vector3::distSq function returns zero for the same vector. */
@@ -263,7 +271,9 @@ TYPED_TEST(Vector3DistanceSigned, StaticWrapper_DistSq_HandlesNegativeNumbers)
 
 /** @brief Verify that the @ref fgm::Vector3::manhattanDist function returns the Manhattan. */
 TYPED_TEST(Vector3Distance, ManhattanDist_ReturnsManhattanDistance)
-{ EXPECT_MAG_EQ(this->_distManhattan, this->_vecA.manhattanDist(this->_vecB)); }
+{
+    EXPECT_MAG_EQ(this->_distManhattan, this->_vecA.manhattanDist(this->_vecB));
+}
 
 
 /** @brief Verify that the @ref fgm::Vector3::manhattanDist function returns zero for the same vector. */
@@ -288,7 +298,9 @@ TYPED_TEST(Vector3DistanceSigned, ManhattanDist_HandlesNegativeNumbers)
  *        returns the Manhattan distance.
  */
 TYPED_TEST(Vector3Distance, StaticWrapper_ManhattanDist_ReturnsManhattanDistance)
-{ EXPECT_MAG_EQ(this->_distManhattan, fgm::Vector3<TypeParam>::manhattanDist(this->_vecA, this->_vecB)); }
+{
+    EXPECT_MAG_EQ(this->_distManhattan, fgm::Vector3<TypeParam>::manhattanDist(this->_vecA, this->_vecB));
+}
 
 
 /** @brief Verify that the @ref fgm::Vector3::manhattanDist function returns zero for the same vector. */
@@ -317,7 +329,9 @@ TYPED_TEST(Vector3DistanceSigned, StaticWrapper_ManhattanDist_HandlesNegativeNum
 
 /** @brief Verify that the @ref fgm::Vector3::chebyshevDist function returns the Chebyshev distance. */
 TYPED_TEST(Vector3Distance, ChebyshevDist_ReturnsChebyshevDistance)
-{ EXPECT_MAG_EQ(this->_distChebyshev, this->_vecA.chebyshevDist(this->_vecB)); }
+{
+    EXPECT_MAG_EQ(this->_distChebyshev, this->_vecA.chebyshevDist(this->_vecB));
+}
 
 
 /** @brief Verify that the @ref fgm::Vector3::chebyshevDist function returns zero for the same vector. */
@@ -342,7 +356,9 @@ TYPED_TEST(Vector3DistanceSigned, ChebyshevDist_HandlesNegativeNumbers)
  *        returns the Chebyshev distance.
  */
 TYPED_TEST(Vector3Distance, StaticWrapper_Chebyshev_ReturnsChebyshevDistance)
-{ EXPECT_MAG_EQ(this->_distChebyshev, fgm::Vector3<TypeParam>::chebyshevDist(this->_vecA, this->_vecB)); }
+{
+    EXPECT_MAG_EQ(this->_distChebyshev, fgm::Vector3<TypeParam>::chebyshevDist(this->_vecA, this->_vecB));
+}
 
 
 /** @brief Verify that the @ref fgm::Vector3::chebyshevDist function returns zero for the same vector. */

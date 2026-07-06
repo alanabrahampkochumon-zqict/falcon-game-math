@@ -10,8 +10,8 @@
 
 
 #include <array>
-#include <fgm/common/MathTraits.h>
 #include <cstdint>
+#include <fgm/common/MathTraits.h>
 #include <vector>
 
 

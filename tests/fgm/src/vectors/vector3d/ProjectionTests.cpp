@@ -48,7 +48,7 @@ INSTANTIATE_TEST_SUITE_P(Vector3ProjectionTestSuite, Vector3ProjectionNaNTests,
                                            fgm::Vector3<float>(1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vector3<float>(1.0f, 1.0f, fgm::constants::NaN),
                                            fgm::Vector3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                fgm ::constants::NaN)));
+                                                               fgm ::constants::NaN)));
 
 
 

@@ -237,8 +237,7 @@ TYPED_TEST(Vector3Comparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWit
  * @brief Verify that the static variant of greater-than-or-equal (gte) function perform a component-wise
  *       comparison and returns the correct boolean mask.
  */
-TYPED_TEST(Vector3Comparison,
-           StaticWrapper_GreaterThanOrEqual_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+TYPED_TEST(Vector3Comparison, StaticWrapper_GreaterThanOrEqual_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
     const fgm::Vector3<bool> mask = fgm::Vector3<TypeParam>::gte(this->_vecA, this->_vecB);
 

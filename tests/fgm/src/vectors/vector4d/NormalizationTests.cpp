@@ -66,7 +66,7 @@ INSTANTIATE_TEST_SUITE_P(Vector4NormalizationNaNTestSuite, Vector4NormalizationN
                                            fgm::Vector4<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vector4<float>(1.0f, 1.0f, 1.0f, fgm::constants::NaN),
                                            fgm::Vector4<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
+                                                               fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
 /**
@@ -166,7 +166,9 @@ TYPED_TEST(Vector4Normalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
  *       returns a zero-vector.
  */
 TYPED_TEST(Vector4Normalization, SafeNormalize_ZeroVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::ZERO().safeNormalize()); }
+{
+    EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::ZERO().safeNormalize());
+}
 
 
 /**
@@ -174,7 +176,9 @@ TYPED_TEST(Vector4Normalization, SafeNormalize_ZeroVectorReturnsZeroVector)
  *       returns a zero-vector.
  */
 TEST(Vector4Normalization, SafeNormalize_NaNVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::Vector4<float>::QNAN().safeNormalize()); }
+{
+    EXPECT_VEC_ZERO(fgm::Vector4<float>::QNAN().safeNormalize());
+}
 
 
 /**
@@ -204,7 +208,9 @@ TYPED_TEST(Vector4Normalization, StaticWrapper_SafeNormalize_NonZeroVectorReturn
  *       @ref fgm::Vector4::safeNormalize returns a zero-vector.
  */
 TYPED_TEST(Vector4Normalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::safeNormalize(fgm::Vector4<TypeParam>::ZERO())); }
+{
+    EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::safeNormalize(fgm::Vector4<TypeParam>::ZERO()));
+}
 
 
 /**
@@ -212,7 +218,9 @@ TYPED_TEST(Vector4Normalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZe
  *       returns a zero-vector.
  */
 TEST(Vector4Normalization, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::Vector4<float>::safeNormalize(fgm::Vector4<float>::QNAN())); }
+{
+    EXPECT_VEC_ZERO(fgm::Vector4<float>::safeNormalize(fgm::Vector4<float>::QNAN()));
+}
 
 
 /**

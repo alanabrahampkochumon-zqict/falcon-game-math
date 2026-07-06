@@ -58,7 +58,9 @@ namespace demo
               width(w),
               height(h),
               colorChannels(numColorChannels)
-        { clearScreen(); }
+        {
+            clearScreen();
+        }
 
         void renderLine(float ax, float ay, float bx, float by, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
         {
@@ -291,7 +293,9 @@ namespace demo
                     const auto point       = fgm::Vector2(static_cast<float>(x), static_cast<float>(y));
 
                     if (offset > static_cast<std::size_t>(width * height))
+                    {
                         continue;
+                    }
 
                     const auto [alpha, beta, gamma] =
                         computeBaryCentricCoordinates(projV0, projV1, projV2, point, triArea);
@@ -331,8 +335,8 @@ namespace demo
             // [cos, 0, -sin]
             // [0, 1, 0]
             // [sin, 0, cos]
-            vec.x() =  c * vertex.x() - s * vertex.z();
-            vec.y() =  vertex.y();
+            vec.x() = c * vertex.x() - s * vertex.z();
+            vec.y() = vertex.y();
             vec.z() = s * vertex.x() + c * vertex.z();
 
             return vec;
@@ -369,13 +373,13 @@ namespace demo
          */
         void render(const Mesh& mesh, [[maybe_unused]] const float deg)
         {
-            std::vector<fgm::Vec3<float>> vertices{mesh.vertices.size()};
+            std::vector<fgm::Vec3<float>> vertices{ mesh.vertices.size() };
             // const auto focalLength = 3.0f;
 
             std::ranges::transform(mesh.vertices, std::inserter(vertices, vertices.begin()),
-                           [mesh, this, deg](const fgm::Vec3<float> vertex) {
-                                return perVertex(vertex, mesh.minVertexValue, mesh.maxVertexValue, deg);
-                           });
+                                   [mesh, this, deg](const fgm::Vec3<float> vertex) {
+                                       return perVertex(vertex, mesh.minVertexValue, mesh.maxVertexValue, deg);
+                                   });
 
             // std::ranges::transform(mesh.vertices, std::inserter(vertices, vertices.begin()),
             //                [this, mesh](const fgm::Vec3<float> vertex) {
@@ -399,7 +403,5 @@ namespace demo
                 // renderTriangleWireframe(vertices[i0], vertices[i1], vertices[i2]);
             }
         }
-
-
     };
 } // namespace demo

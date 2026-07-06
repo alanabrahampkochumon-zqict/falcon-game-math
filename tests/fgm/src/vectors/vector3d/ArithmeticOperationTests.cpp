@@ -127,7 +127,7 @@ INSTANTIATE_TEST_SUITE_P(Vector3DivisionTestSuite, Vector3DivisionNaNTests,
                                            fgm::Vector3<float>(3.0f, fgm::constants::NaN, 3.0f),
                                            fgm::Vector3<float>(3.0f, 3.0f, fgm::constants::NaN),
                                            fgm::Vector3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                fgm ::constants::NaN)));
+                                                               fgm ::constants::NaN)));
 
 
 /**
@@ -566,7 +566,9 @@ TEST(Vector3ScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWith
  *        triggers assert in debug mode.
  */
 TYPED_TEST(Vector3ScalarDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), ""); }
+{
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), "");
+}
 
 
 /**
@@ -930,4 +932,3 @@ TEST(Vector3Inversion, NoOpOnNaNVectors)
     EXPECT_TRUE(std::isnan(inverted.y()));
     EXPECT_TRUE(std::isnan(inverted.z()));
 }
-

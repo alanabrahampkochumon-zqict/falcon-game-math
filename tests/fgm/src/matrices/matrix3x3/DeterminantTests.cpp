@@ -43,17 +43,17 @@ class SingularMatrix3Determinant: public ::testing::TestWithParam<fgm::Matrix3<f
 INSTANTIATE_TEST_SUITE_P(
     Matrix3DeterminantTestSuite, SingularMatrix3Determinant,
     ::testing::Values(fgm::Matrix3{ fgm::Vector3{ 1.0f, 2.0f, 3.0f }, fgm::Vector3{ 1.0f, 2.0f, 3.0f },
-                                     fgm::Vector3{ 7.0f, 8.0f, 9.0f } },
+                                    fgm::Vector3{ 7.0f, 8.0f, 9.0f } },
                       fgm::Matrix3{ fgm::Vector3{ 1.0f, 1.0f, 5.0f }, fgm::Vector3{ 2.0f, 2.0f, 3.0f },
-                                     fgm::Vector3{ 3.0f, 3.0f, 9.0f } },
+                                    fgm::Vector3{ 3.0f, 3.0f, 9.0f } },
                       fgm::Matrix3{ fgm::Vector3{ 0.0f, 0.0f, 0.0f }, fgm::Vector3{ 1.0f, 2.0f, 3.0f },
-                                     fgm::Vector3{ 1.0f, 8.0f, 9.0f } },
+                                    fgm::Vector3{ 1.0f, 8.0f, 9.0f } },
                       fgm::Matrix3{ fgm::Vector3{ 0.0f, 5.0f, 1.0f }, fgm::Vector3{ 0.0f, 2.0f, 3.0f },
-                                     fgm::Vector3{ 0.0f, 8.0f, 9.0f } },
+                                    fgm::Vector3{ 0.0f, 8.0f, 9.0f } },
                       fgm::Matrix3{ fgm::Vector3{ 1.0f, 2.0f, 3.0f }, fgm::Vector3{ 2.0f, 4.0f, 6.0f },
-                                     fgm::Vector3{ 7.0f, 8.0f, 9.0f } },
+                                    fgm::Vector3{ 7.0f, 8.0f, 9.0f } },
                       fgm::Matrix3{ fgm::Vector3{ 1.0f, 2.0f, 1.0f }, fgm::Vector3{ 2.0f, 4.0f, 3.0f },
-                                     fgm::Vector3{ 3.0f, 6.0f, 9.0f } }));
+                                    fgm::Vector3{ 3.0f, 6.0f, 9.0f } }));
 
 
 
@@ -92,7 +92,9 @@ namespace
 
 /** @brief Verify that computing the determinant of a non-singular matrix returns a non-zero value. */
 TYPED_TEST(Matrix3Determinant, ReturnsNonZeroScalar)
-{ EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant()); }
+{
+    EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant());
+}
 
 
 /** @brief Verify that computing the determinant of a singular matrix returns zero. */
@@ -108,7 +110,9 @@ TEST_P(SingularMatrix3Determinant, SingularMatrixReturnsZero)
  *        @ref fgm::Matrix3::determinant returns a non-zero value.
  */
 TYPED_TEST(Matrix3Determinant, StaticWrapper_ReturnsNonZeroScalar)
-{ EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix3<TypeParam>::determinant(this->_matrix)); }
+{
+    EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix3<TypeParam>::determinant(this->_matrix));
+}
 
 
 /**

@@ -30,8 +30,7 @@ namespace
 
     /** Verify @ref fgm::Vec4UB has `uint8_t` value_type. */
     static_assert(std::is_same_v<fgm::Vec4UB::value_type, uint8_t> && "Vec4UB must contain uint8_t elements");
-    static_assert(std::is_same_v<fgm::Vec4UB, fgm::Vector4<uint8_t>> &&
-                  "Vec4UB must be an alias of Vector4<uint8_t>");
+    static_assert(std::is_same_v<fgm::Vec4UB, fgm::Vector4<uint8_t>> && "Vec4UB must be an alias of Vector4<uint8_t>");
 
 
     /** Verify @ref fgm::Vec4I has `int32_t` value_type. */
@@ -41,8 +40,7 @@ namespace
 
     /** Verify @ref fgm::Vec4U has `uint32_t` value_type. */
     static_assert(std::is_same_v<fgm::Vec4U::value_type, uint32_t> && "Vec4U must contain uint32_t elements");
-    static_assert(std::is_same_v<fgm::Vec4U, fgm::Vector4<uint32_t>> &&
-                  "Vec4U must be an alias of Vector4<uint32_t>");
+    static_assert(std::is_same_v<fgm::Vec4U, fgm::Vector4<uint32_t>> && "Vec4U must be an alias of Vector4<uint32_t>");
 
 
     /** Verify @ref fgm::Vec4F has `float` value_type. */
@@ -53,8 +51,7 @@ namespace
 
     /** Verify @ref fgm::Vec4LL has `int64t` value_type. */
     static_assert(std::is_same_v<fgm::Vec4LL::value_type, int64_t> && "Vec4LL must contain int64_t elements");
-    static_assert(std::is_same_v<fgm::Vec4LL, fgm::Vector4<int64_t>> &&
-                  "Vec4LL must be an alias of Vector4<int64_t>");
+    static_assert(std::is_same_v<fgm::Vec4LL, fgm::Vector4<int64_t>> && "Vec4LL must be an alias of Vector4<int64_t>");
 
 
     /** Verify @ref fgm::Vec4D has `double` value_type. */

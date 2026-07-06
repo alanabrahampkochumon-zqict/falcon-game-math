@@ -15,11 +15,11 @@
 
 #include <cmath>
 #include <fgm/common/MathTraits.h>
-#include <gtest/gtest.h>
-#include <type_traits>
 #include <fgm/vectors/Vector2.h>
 #include <fgm/vectors/Vector3.h>
 #include <fgm/vectors/Vector4.h>
+#include <gtest/gtest.h>
+#include <type_traits>
 
 namespace testutils
 {

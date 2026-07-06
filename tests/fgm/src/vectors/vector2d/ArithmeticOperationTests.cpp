@@ -559,7 +559,9 @@ TEST(Vector2ScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWith
  *        triggers assert in debug mode.
  */
 TYPED_TEST(Vector2ScalarDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), ""); }
+{
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), "");
+}
 
 
 /**

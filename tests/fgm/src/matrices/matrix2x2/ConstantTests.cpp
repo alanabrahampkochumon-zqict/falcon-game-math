@@ -40,7 +40,7 @@ namespace
     static_assert(fgm::Matrix2<int>::EYE()(0, 1) == 0);
     static_assert(fgm::Matrix2<int>::EYE()(1, 0) == 0);
     static_assert(fgm::Matrix2<int>::EYE()(1, 1) == 1);
-    
+
     // Verify zero matrix
     static_assert(fgm::Matrix2<int>::ZERO()(0, 0) == 0);
     static_assert(fgm::Matrix2<int>::ZERO()(0, 1) == 0);

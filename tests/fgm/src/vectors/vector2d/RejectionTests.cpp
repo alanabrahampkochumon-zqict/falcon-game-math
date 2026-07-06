@@ -832,8 +832,7 @@ TEST(Vector2Rejection, StaticWrapper_TryReject_OrthogonalRejectionReturnsOrigina
  *       @ref fgm::Vector2::tryReject returns a non-zero vector with perpendicular component
  *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vector2Rejection,
-           StaticWrapper_TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+TYPED_TEST(Vector2Rejection, StaticWrapper_TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
 {
     fgm::OperationStatus flag;
 

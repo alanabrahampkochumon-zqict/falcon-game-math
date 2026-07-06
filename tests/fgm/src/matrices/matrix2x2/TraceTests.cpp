@@ -41,7 +41,7 @@ TYPED_TEST_SUITE(Matrix2Trace, SupportedArithmeticTypes);
 namespace
 {
     constexpr fgm::Matrix2 MAT(3, 2, 5, 7);
-    static_assert(MAT.trace() == 10);                    // Member function
+    static_assert(MAT.trace() == 10);                   // Member function
     static_assert(fgm::Matrix2<int>::trace(MAT) == 10); // Static function
 } // namespace
 
@@ -52,6 +52,8 @@ TYPED_TEST(Matrix2Trace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_ex
 
 /** @brief Verify that trace of a 2D matrix using static variant returns the sum of diagonal elements. */
 TYPED_TEST(Matrix2Trace, StaticWrapper_ReturnsSumOfDiagonalElements)
-{ EXPECT_MAG_EQ(this->_expectedSum, fgm::Matrix2<TypeParam>::trace(this->_mat)); }
+{
+    EXPECT_MAG_EQ(this->_expectedSum, fgm::Matrix2<TypeParam>::trace(this->_mat));
+}
 
 /** @} */

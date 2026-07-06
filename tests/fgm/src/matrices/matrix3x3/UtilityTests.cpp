@@ -107,8 +107,8 @@ INSTANTIATE_TEST_SUITE_P(
                       Matrix3UtilityParams{ fgm::Matrix3(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
                       Matrix3UtilityParams{ fgm::Matrix3(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
                       Matrix3UtilityParams{ fgm::Matrix3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                           fgm::constants::INFINITY_F),
-                                             true },
+                                                         fgm::constants::INFINITY_F),
+                                            true },
                       Matrix3UtilityParams{ fgm::Matrix3(1.0f, 1.0f, 1.0f), false }));
 
 
@@ -155,14 +155,14 @@ TEST_P(Matrix3NaNChecker, ReturnTrueIfAnyElementIsNaN)
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasNaN());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Matrix3NaNCheckerTestSuite, Matrix3NaNChecker,
-    ::testing::Values(Matrix3UtilityParams{ fgm::Matrix3(fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Matrix3UtilityParams{ fgm::Matrix3(1.0f, fgm::constants::NaN, 1.0f), true },
-                      Matrix3UtilityParams{ fgm::Matrix3(1.0f, 1.0f, fgm::constants::NaN), true },
-                      Matrix3UtilityParams{
-                          fgm::Matrix3(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN), true },
-                      Matrix3UtilityParams{ fgm::Matrix3(1.0f, 1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(Matrix3NaNCheckerTestSuite, Matrix3NaNChecker,
+                         ::testing::Values(Matrix3UtilityParams{ fgm::Matrix3(fgm::constants::NaN, 1.0f, 1.0f), true },
+                                           Matrix3UtilityParams{ fgm::Matrix3(1.0f, fgm::constants::NaN, 1.0f), true },
+                                           Matrix3UtilityParams{ fgm::Matrix3(1.0f, 1.0f, fgm::constants::NaN), true },
+                                           Matrix3UtilityParams{ fgm::Matrix3(fgm::constants::NaN, fgm::constants::NaN,
+                                                                              fgm::constants::NaN),
+                                                                 true },
+                                           Matrix3UtilityParams{ fgm::Matrix3(1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Matrix3::hasNaN returns `false` for integral types. */

@@ -23,15 +23,14 @@
 /** @brief Verify that fgm::Mat4[] are alias wrappers for integral and floating-point 4D matrix. */
 namespace
 {
-/** Verify @ref fgm::Mat4B has `int8_t` value_type. */
+    /** Verify @ref fgm::Mat4B has `int8_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat4B::value_type, int8_t> && "Mat4B must contain int8_t elements");
     static_assert(std::is_same_v<fgm::Mat4B, fgm::Matrix4<int8_t>> && "Mat4B must be an alias of Matrix4<int8_t>");
 
 
     /** Verify @ref fgm::Mat4UB has `int8_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat4UB::value_type, uint8_t> && "Mat4UB must contain uint8_t elements");
-    static_assert(std::is_same_v<fgm::Mat4UB, fgm::Matrix4<uint8_t>> &&
-                  "Mat4UB must be an alias of Matrix4<uint8_t>");
+    static_assert(std::is_same_v<fgm::Mat4UB, fgm::Matrix4<uint8_t>> && "Mat4UB must be an alias of Matrix4<uint8_t>");
 
 
     /** Verify @ref fgm::Mat4I has `int32_t` value_type. */
@@ -41,8 +40,7 @@ namespace
 
     /** Verify @ref fgm::Mat4U has `uint32_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat4U::value_type, uint32_t> && "Mat4U must contain uint32_t elements");
-    static_assert(std::is_same_v<fgm::Mat4U, fgm::Matrix4<uint32_t>> &&
-                  "Mat4U must be an alias of Matrix4<uint32_t>");
+    static_assert(std::is_same_v<fgm::Mat4U, fgm::Matrix4<uint32_t>> && "Mat4U must be an alias of Matrix4<uint32_t>");
 
 
     /** Verify @ref fgm::Mat4F has `float` value_type. */
@@ -53,8 +51,7 @@ namespace
 
     /** Verify @ref fgm::Mat4LL has `int64_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat4LL::value_type, int64_t> && "Mat4LL must contain int64_t elements");
-    static_assert(std::is_same_v<fgm::Mat4LL, fgm::Matrix4<int64_t>> &&
-                  "Mat4LL must be an alias of Matrix4<int64_t>");
+    static_assert(std::is_same_v<fgm::Mat4LL, fgm::Matrix4<int64_t>> && "Mat4LL must be an alias of Matrix4<int64_t>");
 
 
     /** Verify @ref fgm::Mat4D has `double` value_type. */

@@ -42,7 +42,7 @@ INSTANTIATE_TEST_SUITE_P(Vector3RejectionTestSuite, Vector3RejectionNaNTests,
                                            fgm::Vector3<float>(1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vector3<float>(1.0f, 1.0f, fgm::constants::NaN),
                                            fgm::Vector3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                fgm ::constants::NaN)));
+                                                               fgm ::constants::NaN)));
 
 
 
@@ -866,8 +866,7 @@ TEST(Vector3Rejection, StaticWrapper_TryReject_OrthogonalRejectionReturnsOrigina
  *       @ref fgm::Vector3::tryReject returns a non-zero vector with perpendicular component
  *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vector3Rejection,
-           StaticWrapper_TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+TYPED_TEST(Vector3Rejection, StaticWrapper_TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
 {
     fgm::OperationStatus flag;
 

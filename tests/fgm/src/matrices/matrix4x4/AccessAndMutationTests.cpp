@@ -98,7 +98,7 @@ namespace
 TEST(Matrix4Access, AccessibleAsElements)
 {
     constexpr fgm::Matrix4 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
-                                15.0f, 16.0f);
+                               15.0f, 16.0f);
 
     EXPECT_FLOAT_EQ(1.0f, mat(0, 0));
     EXPECT_FLOAT_EQ(2.0f, mat(0, 1));
@@ -123,7 +123,7 @@ TEST(Matrix4Access, AccessibleAsElements)
 TEST(Matrix4Access, AccessibleAsColumnVectors)
 {
     constexpr fgm::Matrix4 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
-                                15.0f, 16.0f);
+                               15.0f, 16.0f);
 
     EXPECT_VEC_EQ(fgm::Vector4(1.0f, 5.0f, 9.0f, 13.0f), mat[0]);
     EXPECT_VEC_EQ(fgm::Vector4(2.0f, 6.0f, 10.0f, 14.0f), mat[1]);

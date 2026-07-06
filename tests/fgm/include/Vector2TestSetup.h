@@ -16,8 +16,8 @@
 #include "utils/VectorUtils.h"
 
 #include <fgm/common/MathTraits.h>
-#include <gtest/gtest.h>
 #include <fgm/vectors/Vector3.h>
+#include <gtest/gtest.h>
 
 
 

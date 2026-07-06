@@ -52,7 +52,7 @@ namespace
 {
     constexpr fgm::Vector4 normVec(1.0f, 2.0f, 3.0f, 4.0f);
     constexpr fgm::Vector4 infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                   fgm::constants::INFINITY_F);
+                                  fgm::constants::INFINITY_F);
     constexpr fgm::Vector4 nanVec(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN);
 
     static_assert(normVec.hasInf() == false);
@@ -97,8 +97,8 @@ INSTANTIATE_TEST_SUITE_P(
                       Vector4UtilityParams{ fgm::Vector4(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
                       Vector4UtilityParams{ fgm::Vector4(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
                       Vector4UtilityParams{ fgm::Vector4(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                           fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                                             true },
+                                                         fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+                                            true },
                       Vector4UtilityParams{ fgm::Vector4(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
@@ -151,9 +151,9 @@ INSTANTIATE_TEST_SUITE_P(
                       Vector4UtilityParams{ fgm::Vector4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
                       Vector4UtilityParams{ fgm::Vector4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
                       Vector4UtilityParams{ fgm::Vector4(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      Vector4UtilityParams{ fgm::Vector4(fgm::constants::NaN, fgm::constants::NaN,
-                                                           fgm::constants::NaN, fgm::constants::NaN),
-                                             true },
+                      Vector4UtilityParams{ fgm::Vector4(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
+                                                         fgm::constants::NaN),
+                                            true },
                       Vector4UtilityParams{ fgm::Vector4(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 

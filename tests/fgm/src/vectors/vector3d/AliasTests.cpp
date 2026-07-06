@@ -30,8 +30,7 @@ namespace
 
     /** Verify @ref fgm::Vec3UB has `uint8_t` value_type. */
     static_assert(std::is_same_v<fgm::Vec3UB::value_type, uint8_t> && "Vec3UB must contain uint8_t elements");
-    static_assert(std::is_same_v<fgm::Vec3UB, fgm::Vector3<uint8_t>> &&
-                  "Vec3UB must be an alias of Vector3<uint8_t>");
+    static_assert(std::is_same_v<fgm::Vec3UB, fgm::Vector3<uint8_t>> && "Vec3UB must be an alias of Vector3<uint8_t>");
 
 
     /** Verify @ref fgm::Vec3I has `int32_t` value_type. */
@@ -41,8 +40,7 @@ namespace
 
     /** Verify @ref fgm::Vec3U has `uint32_t` value_type. */
     static_assert(std::is_same_v<fgm::Vec3U::value_type, uint32_t> && "Vec3U must contain uint32_t elements");
-    static_assert(std::is_same_v<fgm::Vec3U, fgm::Vector3<uint32_t>> &&
-                  "Vec3U must be an alias of Vector3<uint32_t>");
+    static_assert(std::is_same_v<fgm::Vec3U, fgm::Vector3<uint32_t>> && "Vec3U must be an alias of Vector3<uint32_t>");
 
 
     /** Verify @ref fgm::Vec3F has `float` value_type. */

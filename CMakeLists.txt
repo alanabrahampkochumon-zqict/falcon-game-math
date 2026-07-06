@@ -25,10 +25,9 @@ find_program(CLANG_FORMATTER NAMES clang-format)
 
 if (CLANG_FORMATTER)
     file(GLOB_RECURSE ALL_SOURCE_FILES
-            "${CMAKE_SOURCE_DIR}/simd/*.cpp" "${CMAKE_SOURCE_DIR}/simd/*.h" "${CMAKE_SOURCE_DIR}/simd/*.tpp" "${CMAKE_SOURCE_DIR}/simd/*.inl"
-            "${CMAKE_SOURCE_DIR}/math-lib/*.cpp" "${CMAKE_SOURCE_DIR}/math-lib/*.h" "${CMAKE_SOURCE_DIR}/math-lib/*.tpp" "${CMAKE_SOURCE_DIR}/math-lib/*.inl"
-            "${CMAKE_SOURCE_DIR}/test-suite/*.cpp" "${CMAKE_SOURCE_DIR}/test-suite/*.h" "${CMAKE_SOURCE_DIR}/test-suite/*.tpp" "${CMAKE_SOURCE_DIR}/test-suite/*.inl"
-            "${CMAKE_SOURCE_DIR}/benchmark-suite/*.cpp" "${CMAKE_SOURCE_DIR}/benchmark-suite/*.h" "${CMAKE_SOURCE_DIR}/benchmark-suite/*.tpp" "${CMAKE_SOURCE_DIR}/benchmark-suite/*.inl"
+            "${CMAKE_SOURCE_DIR}/src/*.cpp" "${CMAKE_SOURCE_DIR}/src/*.h" "${CMAKE_SOURCE_DIR}/src/*.tpp" "${CMAKE_SOURCE_DIR}/src/*.inl"
+            "${CMAKE_SOURCE_DIR}/tests/*.cpp" "${CMAKE_SOURCE_DIR}/tests/*.h" "${CMAKE_SOURCE_DIR}/tests/*.tpp" "${CMAKE_SOURCE_DIR}/tests/*.inl"
+            "${CMAKE_SOURCE_DIR}/benchmarks/*.cpp" "${CMAKE_SOURCE_DIR}/benchmarks/*.h" "${CMAKE_SOURCE_DIR}/benchmarks/*.tpp" "${CMAKE_SOURCE_DIR}/benchmarks/*.inl"
     )
     # Only add the target if files were actually found to avoid the stdin error
     if (ALL_SOURCE_FILES)

@@ -30,8 +30,7 @@ namespace
 
     /** Verify @ref fgm::Mat3UB has `int8_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat3UB::value_type, uint8_t> && "Mat3UB must contain uint8_t elements");
-    static_assert(std::is_same_v<fgm::Mat3UB, fgm::Matrix3<uint8_t>> &&
-                  "Mat3UB must be an alias of Matrix3<uint8_t>");
+    static_assert(std::is_same_v<fgm::Mat3UB, fgm::Matrix3<uint8_t>> && "Mat3UB must be an alias of Matrix3<uint8_t>");
 
 
     /** Verify @ref fgm::Mat3I has `int32_t` value_type. */
@@ -41,8 +40,7 @@ namespace
 
     /** Verify @ref fgm::Mat3U has `uint32_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat3U::value_type, uint32_t> && "Mat3U must contain uint32_t elements");
-    static_assert(std::is_same_v<fgm::Mat3U, fgm::Matrix3<uint32_t>> &&
-                  "Mat3U must be an alias of Matrix3<uint32_t>");
+    static_assert(std::is_same_v<fgm::Mat3U, fgm::Matrix3<uint32_t>> && "Mat3U must be an alias of Matrix3<uint32_t>");
 
 
     /** Verify @ref fgm::Mat3F has `float` value_type. */
@@ -53,8 +51,7 @@ namespace
 
     /** Verify @ref fgm::Mat3LL has `int64_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat3LL::value_type, int64_t> && "Mat3LL must contain int64_t elements");
-    static_assert(std::is_same_v<fgm::Mat3LL, fgm::Matrix3<int64_t>> &&
-                  "Mat3LL must be an alias of Matrix3<int64_t>");
+    static_assert(std::is_same_v<fgm::Mat3LL, fgm::Matrix3<int64_t>> && "Mat3LL must be an alias of Matrix3<int64_t>");
 
 
     /** Verify @ref fgm::Mat3D has `double` value_type. */

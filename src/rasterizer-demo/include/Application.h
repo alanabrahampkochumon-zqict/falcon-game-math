@@ -76,7 +76,7 @@ namespace demo
 
 
             SDL_Surface* renderingSurface = SDL_GetWindowSurface(_window);
-            float rotationAngle = 0.0f;
+            float rotationAngle           = 0.0f;
             while (_isRunning)
             {
                 _renderer.clearScreen();

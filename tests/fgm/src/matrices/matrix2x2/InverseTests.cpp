@@ -59,7 +59,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix2InverseTestSuite, NaNMatrix2Inverse,
                                            fgm::Matrix2<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
                                            fgm::Matrix2<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
                                            fgm::Matrix2<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
+                                                               fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
 
@@ -121,7 +121,9 @@ TYPED_TEST(Matrix2Inverse, InverseTimesMatrixReturnsIdentityMatrix)
  *        when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix2Inverse, StaticWrapper_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2<TypeParam>::inverse(this->_matrix)); }
+{
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2<TypeParam>::inverse(this->_matrix));
+}
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
@@ -170,7 +172,9 @@ TEST_P(SingularMatrix2Inverse, StaticWrapper_TriggersAssertionInDebugMode)
  *        with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix2Inverse, SafeInverse_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse()); }
+{
+    EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
+}
 
 
 /** @brief Verify that inverse of matrix (using @ref fgm::Matrix2::safeInverse) times itself is an identity matrix. */
@@ -230,7 +234,9 @@ TEST_P(NaNMatrix2Inverse, SafeInverse_ReturnsPassedInFallback)
  *        that when multiplied with the original matrix returns an identity matrix.
  */
 TYPED_TEST(Matrix2Inverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2<TypeParam>::safeInverseOf(this->_matrix)); }
+{
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix2<TypeParam>::safeInverseOf(this->_matrix));
+}
 
 
 /**

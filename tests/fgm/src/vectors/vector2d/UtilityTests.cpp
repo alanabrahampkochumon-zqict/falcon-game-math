@@ -87,13 +87,13 @@ TEST_P(Vector2InfChecker, ReturnTrueIfAnyComponentIsInfinity)
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasInf());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Vector2InfCheckerTestSuite, Vector2InfChecker,
-    ::testing::Values(Vector2UtilityParams{ fgm::Vector2(fgm::constants::INFINITY_F, 1.0f), true },
-                      Vector2UtilityParams{ fgm::Vector2(1.0f, fgm::constants::INFINITY_F), true },
-                      Vector2UtilityParams{ fgm::Vector2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                                             true },
-                      Vector2UtilityParams{ fgm::Vector2(1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(Vector2InfCheckerTestSuite, Vector2InfChecker,
+                         ::testing::Values(Vector2UtilityParams{ fgm::Vector2(fgm::constants::INFINITY_F, 1.0f), true },
+                                           Vector2UtilityParams{ fgm::Vector2(1.0f, fgm::constants::INFINITY_F), true },
+                                           Vector2UtilityParams{
+                                               fgm::Vector2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+                                               true },
+                                           Vector2UtilityParams{ fgm::Vector2(1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Vector2::hasInf returns False for integral types. */
@@ -141,8 +141,8 @@ TEST_P(Vector2NaNChecker, ReturnTrueIfAnyComponentIsNaN)
 INSTANTIATE_TEST_SUITE_P(Vector2NaNCheckerTestSuite, Vector2NaNChecker,
                          ::testing::Values(Vector2UtilityParams{ fgm::Vector2(fgm::constants::NaN, 1.0f), true },
                                            Vector2UtilityParams{ fgm::Vector2(1.0f, fgm::constants::NaN), true },
-                                           Vector2UtilityParams{
-                                               fgm::Vector2(fgm::constants::NaN, fgm::constants::NaN), true },
+                                           Vector2UtilityParams{ fgm::Vector2(fgm::constants::NaN, fgm::constants::NaN),
+                                                                 true },
                                            Vector2UtilityParams{ fgm::Vector2(1.0f, 1.0f), false }));
 
 

@@ -252,7 +252,7 @@ TEST(Matrix3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
     const fgm::Matrix3 mat      = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
     const fgm::Matrix3 expected = { -2.0f, 4.0f, -6.0f, 8.0f, -10.0f, -12.0f, -14.0f, -16.0f, 18.0f };
-    const float scalar           = -2.0f;
+    const float scalar          = -2.0f;
 
     const fgm::Matrix3 product = mat * scalar;
 
@@ -337,7 +337,7 @@ TYPED_TEST(Matrix3ScalarMultiplication, MixedTypeScalarMultiplicationPromotesTyp
  */
 TEST(Matrix3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
-    fgm::Matrix3 mat   = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
+    fgm::Matrix3 mat    = { 1.0f, -2.0f, 3.0f, -4.0f, 5.0f, 6.0f, 7.0f, 8.0f, -9.0f };
     const double scalar = 5.0;
     mat *= scalar;
 
@@ -351,7 +351,7 @@ TEST(Matrix3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNot
  */
 TEST(Matrix3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    fgm::Matrix3 mat   = { 1, -2, 3, -4, 5, 6, 7, 8, -9 };
+    fgm::Matrix3 mat    = { 1, -2, 3, -4, 5, 6, 7, 8, -9 };
     const double scalar = 2.5;
     const fgm::Matrix3 expected{ 2, -5, 7, -10, 12, 15, 17, 20, -22 };
 
