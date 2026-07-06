@@ -12,8 +12,6 @@ set(DevToolsDir "Dev Tools")
 option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Custom Options
-# For faster CI/CD unit-tests on push are only run with essential types rather than the full type permutation.
-option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
 # Flags for keeping the library lightweight when a consumer imports it
 option(ENABLE_FGM_BENCHMARK "Enables FGM Benchmark Suite")
 option(ENABLE_FGM_DOCS "Enables FGM Documentation Generation")

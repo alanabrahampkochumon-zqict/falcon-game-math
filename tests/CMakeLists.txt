@@ -1,5 +1,8 @@
 option(ENABLE_FGM_TEST "Enable FGM Unit Tests")
 
+# For faster CI/CD unit-tests on push are only run with essential types rather than the full type permutation.
+option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
+
 if (ENABLE_FGM_TEST)
     message("Test suite is enabled")
 
