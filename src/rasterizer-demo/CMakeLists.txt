@@ -1,5 +1,5 @@
-add_executable(Playground)
-target_compile_features(Playground PRIVATE cxx_std_20)
+add_executable(RasterizerDemo)
+target_compile_features(RasterizerDemo PRIVATE cxx_std_20)
 
 # Directories
 set(SourceDir "${CMAKE_CURRENT_SOURCE_DIR}/src/")
@@ -17,7 +17,7 @@ set(ParserFiles "ObjectParser.h")
 list(TRANSFORM ParserFiles PREPEND ${ParserDir})
 
 target_sources(
-        Playground
+        RasterizerDemo
         PRIVATE
         ${SourceFiles}
 
@@ -28,14 +28,14 @@ target_sources(
 )
 
 target_include_directories(
-        Playground
+        RasterizerDemo
         PRIVATE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
 
 target_link_libraries(
-        Playground
+        RasterizerDemo
         PRIVATE
         MathLib
         SDL3::SDL3
@@ -44,14 +44,14 @@ target_link_libraries(
 
 # Copy models directory to the build directory
 add_custom_command(
-        TARGET Playground
+        TARGET RasterizerDemo
         POST_BUILD
         # Create the directory
-        COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:Playground>/models"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:RasterizerDemo>/models"
         # Copy files into the target directory
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "models"
-        "$<TARGET_FILE_DIR:Playground>/models"
+        "${CMAKE_CURRENT_SOURCE_DIR}/models"
+        "$<TARGET_FILE_DIR:RasterizerDemo>/models"
 
         COMMENT "Copying models to build directory"
 )
