@@ -149,8 +149,8 @@ if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif ()
 
 
-include(dependencies.cmake)
-include(simdcheck.cmake)
+include(cmake/dependencies.cmake)
+include(cmake/simdcheck.cmake)
 
 add_subdirectory(src)
 add_subdirectory(tests)

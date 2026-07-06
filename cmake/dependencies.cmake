@@ -1,3 +1,4 @@
+include_guard()
 include(FetchContent)
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE) # Statically link Gtest
