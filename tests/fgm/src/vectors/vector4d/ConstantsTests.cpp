@@ -232,7 +232,7 @@ TYPED_TEST(Vector4Constants, FORWARD_ReturnsUnitVectorWithOnlyPositiveZComponent
 TYPED_TEST(Vector4Constants, BACKWARD_ReturnsUnitVectorWithOnlyNegativeZComponent)
 {
     const auto vec = fgm::Vector4<TypeParam>::BACKWARD();
-    EXPECT_VEC_CONTAINS(vec, this->_zero, this->_zero, TypeParam(-this->_one, this->_zero));
+    EXPECT_VEC_CONTAINS(vec, this->_zero, this->_zero, TypeParam(-this->_one), this->_zero);
 }
 
 #else

@@ -60,6 +60,17 @@
             }
         },
         {
+            "name": "Clang-Debug-LHS",
+            "displayName": "Clang Debug (Left Handed)",
+            "inherits": "windows-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "clang-cl",
+                "CMAKE_C_COMPILER": "clang-cl",
+                "FGM_FORCE_LEFT_HANDED": "ON"
+            }
+        },
+        {
             "name": "Clang-Release",
             "displayName": "Clang Release",
             "inherits": "windows-base",

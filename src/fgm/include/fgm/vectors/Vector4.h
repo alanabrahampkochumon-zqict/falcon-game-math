@@ -2360,10 +2360,10 @@ namespace fgm
          * @note Left Handed Coordinate System.
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 FORWARD()
+        static constexpr Vector4 FORWARD()
             requires std::is_signed_v<T>
         {
-            return Vector3{ T(0), T(0), T(1), T(0) };
+            return Vector4{ T(0), T(0), T(1), T(0) };
         }
 
 
@@ -2373,10 +2373,10 @@ namespace fgm
          * @note Left Handed Coordinate System.
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 BACKWARD()
+        static constexpr Vector4 BACKWARD()
             requires std::is_signed_v<T>
         {
-            return Vector3{ T(0), T(0), T(-1), T(0) };
+            return Vector4{ T(0), T(0), T(-1), T(0) };
         }
 
 

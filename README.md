@@ -13,14 +13,15 @@ High performance math library written in modern C++. *Requires C++20 or above*
 
 ### General
 
-- ENABLE_FGM_DEMO Enables FGM Demo Application
-- ENABLE_FGM_DOCS Enables FGM Documentation Generation
+- ENABLE_FGM_DEMO: Enables FGM Demo Application
+- ENABLE_FGM_DOCS: Enables FGM Documentation Generation
+- FGM_FORCE_LEFT_HANDED: Switches Library to use Left Handed Coordinate System(Right-Handed by default)
 
 ### Testing and Benchmarks
 
-- ENABLE_FGM_BENCHMARK Enables FGM Benchmark Suite
+- ENABLE_FGM_BENCHMARK: Enables FGM Benchmark Suite
 - ENABLE_FGM_TEST: Enable FGM Unit Tests
-- NONCOMPREHENSIVE: Run Unit tests with essential type matrix only
+- NONCOMPREHENSIVE: Run unit tests with essential type matrix only
 
 ## How to run
 

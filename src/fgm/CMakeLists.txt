@@ -1,10 +1,12 @@
+# Library Options
+option(FGM_FORCE_LEFT_HANDED "Use Left-Handed Coordinate System in FGM")
+
 # Directories
 set(IncludeDir "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 set(LibraryDir "${IncludeDir}fgm/")
 set(CommonDir "${LibraryDir}common/")
 set(VectorDir "${LibraryDir}vectors/")
 set(MatrixDir "${LibraryDir}matrices/")
-
 
 # Files
 set(GeneralFiles "SimdTraits.h;DoxygenGroups.h")
@@ -43,6 +45,14 @@ add_library(MathLib INTERFACE
         ${CommonTemplateFiles}
         ${HeaderAliasFiles}
 )
+
+if(FGM_FORCE_LEFT_HANDED)
+    message(STATUS "FGM is using Left-Handed Coordinate System")
+    target_compile_definitions(MathLib INTERFACE FGM_LEFT_HANDED)
+else ()
+    message(STATUS "FGM is using Right-Handed Coordinate System")
+endif ()
+
 
 set_property(TARGET MathLib PROPERTY CXX_STANDARD 20)
 set_property(TARGET MathLib PROPERTY CXX_STANDARD_REQUIRED ON)

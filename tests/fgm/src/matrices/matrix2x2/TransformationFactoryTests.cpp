@@ -27,7 +27,7 @@ protected:
     void SetUp() override
     {
         _angle = fgm::constants::PI<FP_T> / FP_T(2.0);
-#ifdef FMG_LEFT_HANDED
+#ifdef FGM_LEFT_HANDED
         _expectedMat = { fgm::Vector2{ COM_T(0), COM_T(-1) }, fgm::Vector2 { COM_T(1), COM_T(0) } };
 #else
         _expectedMat = { fgm::Vector2{ COM_T(0), COM_T(1) }, fgm::Vector2{ COM_T(-1), COM_T(0) } };
