@@ -5,6 +5,7 @@ target_compile_features(MathTestSuite PRIVATE cxx_std_20)
 # Directories
 set(IncludeDir "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 set(SourceDir "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+set(TEST_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(VectorDir "${SourceDir}vectors/")
 set(Vector2TestDir "${VectorDir}vector2d/")
@@ -70,7 +71,7 @@ set(Matrix4x4TestFiles
         "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;"
         "AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DeterminantTests.cpp;DivisionTests.cpp;"
         "TransposeTests.cpp;InverseTests.cpp;ConstantTests.cpp;UtilityTests.cpp;AliasTests.cpp;StringRepresentationTests.cpp;"
-        "TraceTests.cpp;TransformationFactoryTests.cpp;"
+        "TraceTests.cpp;"
 )
 list(TRANSFORM Matrix4x4TestFiles PREPEND ${Matrix4x4TestDir})
 
@@ -83,6 +84,8 @@ list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
 set(GenericTestFiles "HeaderAliasTests.cpp")
 list(TRANSFORM GenericTestFiles PREPEND "${SourceDir}")
 
+# TODO: Refactor when Folder based CML
+add_subdirectory(src/matrices/matrix4x4/TransformationFactoryTests)
 
 target_sources(
         MathTestSuite
@@ -124,12 +127,14 @@ target_link_libraries(
         FalconSIMD
         GTest::gtest
         GTest::gtest_main # googletest
+        # Testing CML
+        TestMat4Transform
 )
 
 target_include_directories(
         MathTestSuite
         PRIVATE
-        include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 
