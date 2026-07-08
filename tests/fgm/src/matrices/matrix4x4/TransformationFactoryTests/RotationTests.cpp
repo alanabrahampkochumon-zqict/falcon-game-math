@@ -107,52 +107,102 @@ protected:
         _angle = fgm::constants::PI<T> / T(4.0);
 
 #ifdef FMG_LEFT_HANDED
-        _expectedMatX   = { fgm::Vector4{ COM_T(1), COM_T(0), COM_T(0), COM_T(0) },
-                            fgm::Vector4{ COM_T(0), COM_T(0), COM_T(-1), COM_T(0) },
-                            fgm::Vector4{ COM_T(0), COM_T(1), COM_T(0), COM_T(0) }, fgm::Vector4 {
-                              COM_T(0),
-                              COM_T(0),
-                              COM_T(0),
-                              COM_T(1)
+        _expectedMatX   = { fgm::Vector4{ T(1.00000000000000000), T(0.00000000000000000), T(0.00000000000000000),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4{ T(0.00000000000000000), T(0.70710678118654757), T(0.70710678118654757),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4{ T(0.00000000000000000), T(-0.70710678118654757), T(0.70710678118654757),
+                                        T(0.00000000000000000) },
+                            fgm::Vector4 {
+                              T(0.00000000000000000),
+                              T(0.00000000000000000),
+                              T(0.00000000000000000),
+                              T(1.00000000000000000)
                           } };
-        _expectedMatY   = { fgm::Vector4{ COM_T(0), COM_T(0), COM_T(1), COM_T(0) },
-                            fgm::Vector4{ COM_T(0), COM_T(1), COM_T(0), COM_T(0) },
-                            fgm::Vector4{ COM_T(-1), COM_T(0), COM_T(0), COM_T(0) }, fgm::Vector4 {
-                              COM_T(0),
-                              COM_T(0),
-                              COM_T(0),
-                              COM_T(1)
+        _expectedMatY   = { fgm::Vector4{ T(0.70710678118654757), T(0.00000000000000000), T(-0.70710678118654757),
+                                        T(0.00000000000000000) },
+                            fgm::Vector4{ T(0.00000000000000000), T(1.00000000000000000), T(0.00000000000000000),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4{ T(0.70710678118654757), T(0.00000000000000000), T(0.70710678118654757),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4 {
+                              T(0.00000000000000000),
+                              T(0.00000000000000000),
+                              T(0.00000000000000000),
+                              T(1.00000000000000000)
                           } };
-        _expectedMatZ   = { fgm::Vector4{ COM_T(0), COM_T(-1), COM_T(0), COM_T(0) },
-                            fgm::Vector4{ COM_T(1), COM_T(0), COM_T(0), COM_T(0) },
-                            fgm::Vector4{ COM_T(0), COM_T(0), COM_T(1), COM_T(0) }, fgm::Vector4 {
-                              COM_T(0),
-                              COM_T(0),
-                              COM_T(0),
-                              COM_T(1)
+        _expectedMatZ   = { fgm::Vector4{ T(0.70710678118654757), T(0.70710678118654757), T(0.00000000000000000),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4{ T(-0.70710678118654757), T(0.70710678118654757), T(0.00000000000000000),
+                                        T(0.00000000000000000) },
+                            fgm::Vector4{ T(0.00000000000000000), T(0.00000000000000000), T(1.00000000000000000),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4 {
+                              T(0.00000000000000000),
+                              T(0.00000000000000000),
+                              T(0.00000000000000000),
+                              T(1.00000000000000000)
                           } };
-        _expectedMatXYZ = { fgm::Vector4{ COM_T(0), COM_T(0), COM_T(-1), COM_T(0) },
-                            fgm::Vector4{ COM_T(0), COM_T(1), COM_T(0), COM_T(0) },
-                            fgm::Vector4{ COM_T(1), COM_T(0), COM_T(0), COM_T(0) }, fgm::Vector4 {
-                                COM_T(0),
-                                COM_T(0),
-                                COM_T(0),
-                                COM_T(1)
+        _expectedMatXYZ = { fgm::Vector4{ T(0.50000000000000011), T(0.50000000000000011), T(-0.70710678118654757),
+                                          T(0.00000000000000000) },
+                            fgm::Vector4{ T(-0.14644660940672627), T(0.85355339059327395), T(0.50000000000000011),
+                                          T(0.00000000000000000) },
+                            fgm::Vector4{ T(0.85355339059327395), T(-0.14644660940672627), T(0.50000000000000011),
+                                          T(0.00000000000000000) },
+                            fgm::Vector4 {
+                                T(0.00000000000000000),
+                                T(0.00000000000000000),
+                                T(0.00000000000000000),
+                                T(1.00000000000000000)
                             } };
+        ;
 #else
-        _expectedMatX = { fgm::Vector4{ T(1), T(0), T(0), T(0) }, fgm::Vector4{ T(0), T(0.707107), T(0.707107), T(0) },
-                          fgm::Vector4{ T(0), T(-0.707107), T(0.707107), T(0) },
-                          fgm::Vector4{ T(0), T(0), T(0), T(1) } };
-        _expectedMatY = { fgm::Vector4{ T(0.707107), T(0), T(-0.707107), T(0) }, fgm::Vector4{ T(0), T(1), T(0), T(0) },
-                          fgm::Vector4{ T(0.707107), T(0), T(0.707107), T(0) },
-                          fgm::Vector4{ T(0), T(0), T(0), T(1) } };
-        _expectedMatZ = { fgm::Vector4{ T(0.707107), T(0.707107), T(0), T(0) },
-                          fgm::Vector4{ T(-0.707107), T(0.707107), T(0), T(0) }, fgm::Vector4{ T(0), T(0), T(1), T(0) },
-                          fgm::Vector4{ T(0), T(0), T(0), T(1) } };
-        _expectedMatXYZ = { fgm::Vector4{ T(0.5), T(0.5), T(-0.707107), T(0) },
-                            fgm::Vector4{ T(-0.146447), T(0.853553), T(0.5), T(0) },
-                            fgm::Vector4{ T(0.853553), T(-0.146447), T(0.5), T(0) },
-                            fgm::Vector4{ T(0), T(0), T(0), T(1) } };
+
+        _expectedMatX = { fgm::Vector4{ T(1.00000000000000000), T(0.00000000000000000), T(0.00000000000000000),
+                                        T(0.00000000000000000) },
+
+                          fgm::Vector4{ T(0.00000000000000000), T(0.70710678118654757), T(0.70710678118654757),
+                                        T(0.00000000000000000) },
+
+                          fgm::Vector4{ T(0.00000000000000000), T(-0.70710678118654757), T(0.70710678118654757),
+                                        T(0.00000000000000000) },
+                          fgm::Vector4{ T(0.00000000000000000), T(0.00000000000000000), T(0.00000000000000000),
+                                        T(1.00000000000000000) } };
+
+        _expectedMatY   = { fgm::Vector4{ T(0.70710678118654757), T(0.00000000000000000), T(-0.70710678118654757),
+                                        T(0.00000000000000000) },
+                            fgm::Vector4{ T(0.00000000000000000), T(1.00000000000000000), T(0.00000000000000000),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4{ T(0.70710678118654757), T(0.00000000000000000), T(0.70710678118654757),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4{ T(0.00000000000000000), T(0.00000000000000000), T(0.00000000000000000),
+                                        T(1.00000000000000000) } };
+        _expectedMatZ   = { fgm::Vector4{ T(0.70710678118654757), T(0.70710678118654757), T(0.00000000000000000),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4{ T(-0.70710678118654757), T(0.70710678118654757), T(0.00000000000000000),
+                                        T(0.00000000000000000) },
+                            fgm::Vector4{ T(0.00000000000000000), T(0.00000000000000000), T(1.00000000000000000),
+                                        T(0.00000000000000000) },
+
+                            fgm::Vector4{ T(0.00000000000000000), T(0.00000000000000000), T(0.00000000000000000),
+                                        T(1.00000000000000000) } };
+        _expectedMatXYZ = { fgm::Vector4{ T(0.50000000000000011), T(0.50000000000000011), T(-0.70710678118654757),
+                                          T(0.00000000000000000) },
+                            fgm::Vector4{ T(-0.14644660940672627), T(0.85355339059327395), T(0.50000000000000011),
+                                          T(0.00000000000000000) },
+                            fgm::Vector4{ T(0.85355339059327395), T(-0.14644660940672627), T(0.50000000000000011),
+                                          T(0.00000000000000000) },
+                            fgm::Vector4{ T(0.00000000000000000), T(0.00000000000000000), T(0.00000000000000000),
+                                          T(1.00000000000000000) } };
 
 #endif
     }
@@ -172,34 +222,34 @@ TYPED_TEST_SUITE(Matrix4FloatRotation, SupportedFloatingPointTypes);
 
 /** @brief Verify that rotation transformation factory for x returns a rotation matrix. */
 TYPED_TEST(Matrix4Rotation, X_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatX, fgm::Matrix4<typename TypeParam::first_type>::makeRotationX(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Matrix4<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
 
 
-/** @brief Verify that rotation transformation factory for x returns a rotation matrix for non-integral rotations. */
+/** @brief Verify that rotation transformation factory for x returns a rotation matrix for non-integral rotation values.
+ */
 TYPED_TEST(Matrix4FloatRotation, X_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatX, fgm::Matrix4<TypeParam>::makeRotationX(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Matrix4<TypeParam>::makeRotationX(this->_angle)); }
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Matrix4Rotation, Y_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatY, fgm::Matrix4<typename TypeParam::first_type>::makeRotationY(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Matrix4<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
 
 
-/** @brief Verify that rotation transformation factory for y returns a rotation matrix for non-integral rotations. */
+/** @brief Verify that rotation transformation factory for y returns a rotation matrix for non-integral rotation values.
+ */
 TYPED_TEST(Matrix4FloatRotation, Y_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatY, fgm::Matrix4<TypeParam>::makeRotationY(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Matrix4<TypeParam>::makeRotationY(this->_angle)); }
+
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Matrix4Rotation, Z_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Matrix4<typename TypeParam::first_type>::makeRotationZ(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Matrix4<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
+
+
+/** @brief Verify that rotation transformation factory for z returns a rotation matrix for non-integral rotation values.
+ */
+TYPED_TEST(Matrix4FloatRotation, Z_ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Matrix4<TypeParam>::makeRotationZ(this->_angle)); }
+
 /** @} */
