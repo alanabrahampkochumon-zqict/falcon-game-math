@@ -2,28 +2,20 @@ add_executable(MathTestSuite)
 target_compile_features(MathTestSuite PRIVATE cxx_std_20)
 
 # Directories
-set(IncludeDir "${CMAKE_CURRENT_SOURCE_DIR}/include/")
-set(SourceDir "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 set(TEST_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-set(UtilityDirectory "${IncludeDir}utils/")
-set(MathCommonDir "${SourceDir}common/")
+set(UtilityDirectory "${INCLUDE_DIR}utils/")
 
 
 # Files
 set(SetupFiles "Vector2TestSetup.h;Vector3TestSetup.h;Vector4TestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;CommonSetup.h;")
-list(TRANSFORM SetupFiles PREPEND ${IncludeDir})
-
-set(MathCommonTestFiles "OperationStatusTests.cpp;WrapperTests.cpp;MathTraitTests.cpp;TrivialTypeTests.cpp;UtilsTests.cpp;")
-list(TRANSFORM MathCommonTestFiles PREPEND ${MathCommonDir})
+list(TRANSFORM SetupFiles PREPEND ${INCLUDE_DIR})
 
 set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
 list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
 
-set(GenericTestFiles "HeaderAliasTests.cpp")
-list(TRANSFORM GenericTestFiles PREPEND "${SourceDir}")
-
-# TODO: Refactor when Folder based CML
+add_subdirectory(common)
 add_subdirectory(vectors/vector2d)
 add_subdirectory(vectors/vector3d)
 add_subdirectory(vectors/vector4d)
@@ -34,8 +26,7 @@ add_subdirectory(matrices/matrix3x3)
 target_sources(
         MathTestSuite
         PRIVATE
-        ${MathCommonTestFiles}
-        ${GenericTestFiles}
+        HeaderAliasTests.cpp
 
         PRIVATE
         FILE_SET HEADERS
@@ -67,6 +58,7 @@ target_link_libraries(
         GTest::gtest_main # googletest
         # Testing CML
 
+        CommonTests
         Vector2Tests
         Vector3Tests
         Vector4Tests
@@ -90,7 +82,7 @@ gtest_discover_tests(MathTestSuite DISCOVERY_MODE PRE_TEST)
 
 source_group(
         TREE
-        "${IncludeDir}"
+        "${INCLUDE_DIR}"
         PREFIX "Header Files"
         FILES
         ${SetupFiles}
@@ -102,6 +94,5 @@ source_group(
         "${CMAKE_CURRENT_SOURCE_DIR}/src"
         PREFIX "Source Files"
         FILES
-        ${MathCommonTestFiles}
         ${GenericTestFiles}
 )
