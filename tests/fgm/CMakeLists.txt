@@ -59,13 +59,13 @@ set(Matrix2x2TestFiles
 )
 list(TRANSFORM Matrix2x2TestFiles PREPEND ${Matrix2x2TestDir})
 
-set(Matrix3x3TestFiles
-        "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;"
-        "AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DeterminantTests.cpp;DivisionTests.cpp;"
-        "TransposeTests.cpp;InverseTests.cpp;ConstantTests.cpp;UtilityTests.cpp;AliasTests.cpp;StringRepresentationTests.cpp;"
-        "TraceTests.cpp;TransformationFactoryTests.cpp;"
-)
-list(TRANSFORM Matrix3x3TestFiles PREPEND ${Matrix3x3TestDir})
+#set(Matrix3x3TestFiles
+#        "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;"
+#        "AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DeterminantTests.cpp;DivisionTests.cpp;"
+#        "TransposeTests.cpp;InverseTests.cpp;ConstantTests.cpp;UtilityTests.cpp;AliasTests.cpp;StringRepresentationTests.cpp;"
+#        "TraceTests.cpp;TransformationFactoryTests.cpp;"
+#)
+#list(TRANSFORM Matrix3x3TestFiles PREPEND ${Matrix3x3TestDir})
 
 #set(Matrix4x4TestFiles
 #        "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;"
@@ -86,6 +86,7 @@ list(TRANSFORM GenericTestFiles PREPEND "${SourceDir}")
 
 # TODO: Refactor when Folder based CML
 add_subdirectory(src/matrices/matrix4x4)
+add_subdirectory(src/matrices/matrix3x3)
 
 target_sources(
         MathTestSuite
@@ -94,8 +95,8 @@ target_sources(
         ${Vector3TestFiles}
         ${Vector4TestFiles}
         ${Matrix2x2TestFiles}
-        ${Matrix3x3TestFiles}
-        ${Matrix4x4TestFiles}
+#        ${Matrix3x3TestFiles}
+#        ${Matrix4x4TestFiles}
         ${MathCommonTestFiles}
         ${GenericTestFiles}
 
@@ -129,6 +130,7 @@ target_link_libraries(
         GTest::gtest_main # googletest
         # Testing CML
         Matrix4x4Tests
+        Matrix3x3Tests
 )
 
 target_include_directories(
@@ -159,7 +161,7 @@ source_group(
         ${Vector3TestFiles}
         ${Vector4TestFiles}
         ${Matrix2x2TestFiles}
-        ${Matrix3x3TestFiles}
+#        ${Matrix3x3TestFiles}
 #        ${Matrix4x4TestFiles}
         ${MathCommonTestFiles}
         ${GenericTestFiles}
