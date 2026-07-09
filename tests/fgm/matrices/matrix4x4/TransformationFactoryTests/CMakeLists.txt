@@ -3,12 +3,12 @@ add_library(Matrix4TransformTests OBJECT)
 target_sources(
         Matrix4TransformTests
         PRIVATE
-            AffineTests.cpp
-            ReflectionTests.cpp
-            RotationTests.cpp
-            ScaleTests.cpp
-            ShearTests.cpp
-            TranslationTests.cpp
+        AffineTests.cpp
+        ReflectionTests.cpp
+        RotationTests.cpp
+        ScaleTests.cpp
+        ShearTests.cpp
+        TranslationTests.cpp
 )
 
 target_include_directories(

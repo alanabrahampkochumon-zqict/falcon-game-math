@@ -60,9 +60,9 @@ set(GenericTestFiles "HeaderAliasTests.cpp")
 list(TRANSFORM GenericTestFiles PREPEND "${SourceDir}")
 
 # TODO: Refactor when Folder based CML
-add_subdirectory(src/matrices/matrix2x2)
-add_subdirectory(src/matrices/matrix4x4)
-add_subdirectory(src/matrices/matrix3x3)
+add_subdirectory(matrices/matrix2x2)
+add_subdirectory(matrices/matrix4x4)
+add_subdirectory(matrices/matrix3x3)
 
 target_sources(
         MathTestSuite
