@@ -77,6 +77,7 @@ protected:
                          fgm::Vector3{ T(0), T(0), T(5.3821839321) } };
         _scale       = T(5.3821839321);
     }
+
 };
 /**
  * @brief Test fixture for @ref fgm::Matrix3 uniform scale factory, parameterized

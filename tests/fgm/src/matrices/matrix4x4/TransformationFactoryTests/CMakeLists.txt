@@ -1,7 +1,7 @@
-add_library(TestMat4Transform OBJECT)
+add_library(Matrix4x4TransformTests OBJECT)
 
 target_sources(
-        TestMat4Transform
+        Matrix4x4TransformTests
         PRIVATE
             AffineTests.cpp
             ReflectionTests.cpp
@@ -12,14 +12,14 @@ target_sources(
 )
 
 target_include_directories(
-        TestMat4Transform
+        Matrix4x4TransformTests
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${TEST_ROOT_DIR}/include
 )
 
 target_link_libraries(
-        TestMat4Transform
+        Matrix4x4TransformTests
         PRIVATE
             MathLib
             GTest::gtest
