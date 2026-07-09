@@ -13,6 +13,8 @@
  */
 
 
+#include "FloatEquals.h"
+
 #include <cassert>
 #include <cmath>
 #include <fgm/common/MathTraits.h>
@@ -58,11 +60,11 @@ namespace testutils
             {
                 if constexpr (std::is_same_v<ValueType, double>)
                 {
-                    EXPECT_NEAR(expected(i, j), static_cast<ValueType>(actual(i, j)), fgm::Config::DOUBLE_EPSILON);
+                    COMPARE_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
                 }
                 else if constexpr (std::is_same_v<ValueType, float>)
                 {
-                    EXPECT_NEAR(expected(i, j), static_cast<ValueType>(actual(i, j)), fgm::Config::FLOAT_EPSILON);
+                    COMPARE_EQ(expected(i, j), static_cast<ValueType>(actual(i, j)));
                 }
                 else
                 {
@@ -99,13 +101,11 @@ namespace testutils
             {
                 if constexpr (std::is_same_v<T, double>)
                 {
-                    EXPECT_NEAR(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)),
-                                fgm::Config::DOUBLE_EPSILON);
+                    COMPARE_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
                 }
                 else if constexpr (std::is_same_v<T, float>)
                 {
-                    EXPECT_NEAR(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)),
-                                fgm::Config::FLOAT_EPSILON);
+                    COMPARE_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
                 }
                 else
                 {
@@ -171,15 +171,15 @@ namespace testutils
             {
                 if constexpr (std::is_same_v<ValueType, double>)
                 {
-                    EXPECT_NEAR(i == j, actual(i, j), fgm::Config::DOUBLE_EPSILON);
+                    COMPARE_EQ(static_cast<double>(i == j), actual(i, j));
                 }
                 else if constexpr (std::is_same_v<ValueType, float>)
                 {
-                    EXPECT_NEAR(i == j, actual(i, j), fgm::Config::FLOAT_EPSILON);
+                    COMPARE_EQ(static_cast<float>(i == j), actual(i, j));
                 }
                 else
                 {
-                    EXPECT_EQ(i == j, actual(i, j));
+                    EXPECT_EQ(static_cast<int>(i == j), actual(i, j));
                 }
             }
         }
@@ -208,11 +208,11 @@ namespace testutils
             {
                 if constexpr (std::is_same_v<ValueType, double>)
                 {
-                    EXPECT_NEAR(0.0, actual(i, j), fgm::Config::DOUBLE_EPSILON);
+                    COMPARE_EQ(0.0, actual(i, j));
                 }
                 else if constexpr (std::is_same_v<ValueType, float>)
                 {
-                    EXPECT_NEAR(0.0f, actual(i, j), fgm::Config::FLOAT_EPSILON);
+                    COMPARE_EQ(0.0f, actual(i, j));
                 }
                 else
                 {
@@ -265,13 +265,11 @@ namespace testutils::Matrix3
         {
             if constexpr (std::is_same_v<T, float>)
             {
-                EXPECT_FLOAT_EQ(expected(i / ROW_SIZE, i % ROW_SIZE),
-                                static_cast<T>(actual(i / ROW_SIZE, i % ROW_SIZE)));
+                COMPARE_EQ(expected(i / ROW_SIZE, i % ROW_SIZE), static_cast<T>(actual(i / ROW_SIZE, i % ROW_SIZE)));
             }
             else if (std::is_same_v<T, double>)
             {
-                EXPECT_DOUBLE_EQ(expected(i / ROW_SIZE, i % ROW_SIZE),
-                                 static_cast<T>(actual(i / ROW_SIZE, i % ROW_SIZE)));
+                COMPARE_EQ(expected(i / ROW_SIZE, i % ROW_SIZE), static_cast<T>(actual(i / ROW_SIZE, i % ROW_SIZE)));
             }
             else
             {
@@ -305,11 +303,11 @@ namespace testutils::Matrix3
             T currentValue = static_cast<T>(i / ROW_SIZE == i % ROW_SIZE);
             if constexpr (std::is_same_v<T, float>)
             {
-                EXPECT_FLOAT_EQ(currentValue, actual(i / ROW_SIZE, i % ROW_SIZE));
+                COMPARE_EQ(currentValue, actual(i / ROW_SIZE, i % ROW_SIZE));
             }
             else if (std::is_same_v<T, double>)
             {
-                EXPECT_DOUBLE_EQ(currentValue, actual(i / ROW_SIZE, i % ROW_SIZE));
+                COMPARE_EQ(currentValue, actual(i / ROW_SIZE, i % ROW_SIZE));
             }
             else
             {
@@ -326,11 +324,11 @@ namespace testutils::Matrix3
         {
             if constexpr (std::is_same_v<T, float>)
             {
-                EXPECT_FLOAT_EQ(T(0), actual(i / ROW_SIZE, i % ROW_SIZE));
+                COMPARE_EQ(T(0), actual(i / ROW_SIZE, i % ROW_SIZE));
             }
             else if (std::is_same_v<T, double>)
             {
-                EXPECT_DOUBLE_EQ(T(0), actual(i / ROW_SIZE, i % ROW_SIZE));
+                COMPARE_EQ(T(0), actual(i / ROW_SIZE, i % ROW_SIZE));
             }
             else
             {
@@ -365,13 +363,11 @@ namespace testutils::Matrix2
         {
             if constexpr (std::is_same_v<T, float>)
             {
-                EXPECT_FLOAT_EQ(expected(i / ROW_SIZE, i % ROW_SIZE),
-                                static_cast<T>(actual(i / ROW_SIZE, i % ROW_SIZE)));
+                COMPARE_EQ(expected(i / ROW_SIZE, i % ROW_SIZE), static_cast<T>(actual(i / ROW_SIZE, i % ROW_SIZE)));
             }
             else if (std::is_same_v<T, double>)
             {
-                EXPECT_DOUBLE_EQ(expected(i / ROW_SIZE, i % ROW_SIZE),
-                                 static_cast<T>(actual(i / ROW_SIZE, i % ROW_SIZE)));
+                COMPARE_EQ(expected(i / ROW_SIZE, i % ROW_SIZE), static_cast<T>(actual(i / ROW_SIZE, i % ROW_SIZE)));
             }
             else
             {
@@ -388,11 +384,11 @@ namespace testutils::Matrix2
             T currentValue = static_cast<T>(i / ROW_SIZE == i % ROW_SIZE);
             if constexpr (std::is_same_v<T, float>)
             {
-                EXPECT_FLOAT_EQ(currentValue, actual(i / ROW_SIZE, i % ROW_SIZE));
+                COMPARE_EQ(currentValue, actual(i / ROW_SIZE, i % ROW_SIZE));
             }
             else if (std::is_same_v<T, double>)
             {
-                EXPECT_DOUBLE_EQ(currentValue, actual(i / ROW_SIZE, i % ROW_SIZE));
+                COMPARE_EQ(currentValue, actual(i / ROW_SIZE, i % ROW_SIZE));
             }
             else
             {
@@ -409,11 +405,11 @@ namespace testutils::Matrix2
         {
             if constexpr (std::is_same_v<T, float>)
             {
-                EXPECT_FLOAT_EQ(T(0), actual(i / ROW_SIZE, i % ROW_SIZE));
+                COMPARE_EQ(T(0), actual(i / ROW_SIZE, i % ROW_SIZE));
             }
             else if (std::is_same_v<T, double>)
             {
-                EXPECT_DOUBLE_EQ(T(0), actual(i / ROW_SIZE, i % ROW_SIZE));
+                COMPARE_EQ(T(0), actual(i / ROW_SIZE, i % ROW_SIZE));
             }
             else
             {
