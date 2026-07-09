@@ -139,8 +139,9 @@ protected:
         };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix4 matrix multiplication, parameterized by @ref SupportedArithmeticTypes.
-/*/
+/*
+ * @brief Test fixture for @ref fgm::Matrix4 matrix multiplication, parameterized by @ref SupportedArithmeticTypes.
+ */
 TYPED_TEST_SUITE(Matrix4Multiplication, SupportedArithmeticTypes);
 
 

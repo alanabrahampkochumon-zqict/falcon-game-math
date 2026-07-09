@@ -1,23 +1,21 @@
-add_library(Matrix3TransformTests OBJECT)
+add_library(Matrix2TransformTests OBJECT)
 
 target_sources(
-        Matrix3TransformTests PRIVATE
-        AffineTests.cpp
+        Matrix2TransformTests PRIVATE
         ReflectionTests.cpp
         RotationTests.cpp
         ScaleTests.cpp
         ShearTests.cpp
-        TranslationTests.cpp
 )
 
 target_include_directories(
-        Matrix3TransformTests PRIVATE
+        Matrix2TransformTests PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${TEST_ROOT_DIR}/include
 )
 
 target_link_libraries(
-        Matrix3TransformTests PRIVATE
+        Matrix2TransformTests PRIVATE
         MathLib
         GTest::gtest
         GTest::gtest_main # googletest

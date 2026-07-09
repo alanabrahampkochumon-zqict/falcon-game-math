@@ -14,8 +14,6 @@ set(Vector4TestDir "${VectorDir}vector4d/")
 
 set(MatrixDir "${SourceDir}matrices/")
 set(Matrix2x2TestDir "${MatrixDir}matrix2x2/")
-set(Matrix3x3TestDir "${MatrixDir}matrix3x3/")
-set(Matrix4x4TestDir "${MatrixDir}matrix4x4/")
 
 set(UtilityDirectory "${IncludeDir}utils/")
 set(MathCommonDir "${SourceDir}common/")
@@ -50,30 +48,7 @@ set(Vector2TestFiles
 )
 list(TRANSFORM Vector2TestFiles PREPEND ${Vector2TestDir})
 
-# Matrix
-set(Matrix2x2TestFiles
-        "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;"
-        "AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DeterminantTests.cpp;DivisionTests.cpp;"
-        "TransposeTests.cpp;InverseTests.cpp;ConstantTests.cpp;UtilityTests.cpp;AliasTests.cpp;StringRepresentationTests.cpp;"
-        "TraceTests.cpp;TransformationFactoryTests.cpp;"
-)
-list(TRANSFORM Matrix2x2TestFiles PREPEND ${Matrix2x2TestDir})
 
-#set(Matrix3x3TestFiles
-#        "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;"
-#        "AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DeterminantTests.cpp;DivisionTests.cpp;"
-#        "TransposeTests.cpp;InverseTests.cpp;ConstantTests.cpp;UtilityTests.cpp;AliasTests.cpp;StringRepresentationTests.cpp;"
-#        "TraceTests.cpp;TransformationFactoryTests.cpp;"
-#)
-#list(TRANSFORM Matrix3x3TestFiles PREPEND ${Matrix3x3TestDir})
-
-#set(Matrix4x4TestFiles
-#        "InitializationTests.cpp;TypeConversionTests.cpp;AccessAndMutationTests.cpp;EqualityTests.cpp;"
-#        "AdditionTests.cpp;SubtractionTests.cpp;MultiplicationTests.cpp;DeterminantTests.cpp;DivisionTests.cpp;"
-#        "TransposeTests.cpp;InverseTests.cpp;ConstantTests.cpp;UtilityTests.cpp;AliasTests.cpp;StringRepresentationTests.cpp;"
-#        "TraceTests.cpp;"
-#)
-#list(TRANSFORM Matrix4x4TestFiles PREPEND ${Matrix4x4TestDir})
 
 set(MathCommonTestFiles "OperationStatusTests.cpp;WrapperTests.cpp;MathTraitTests.cpp;TrivialTypeTests.cpp;UtilsTests.cpp;")
 list(TRANSFORM MathCommonTestFiles PREPEND ${MathCommonDir})
@@ -85,6 +60,7 @@ set(GenericTestFiles "HeaderAliasTests.cpp")
 list(TRANSFORM GenericTestFiles PREPEND "${SourceDir}")
 
 # TODO: Refactor when Folder based CML
+add_subdirectory(src/matrices/matrix2x2)
 add_subdirectory(src/matrices/matrix4x4)
 add_subdirectory(src/matrices/matrix3x3)
 
@@ -94,9 +70,6 @@ target_sources(
         ${Vector2TestFiles}
         ${Vector3TestFiles}
         ${Vector4TestFiles}
-        ${Matrix2x2TestFiles}
-#        ${Matrix3x3TestFiles}
-#        ${Matrix4x4TestFiles}
         ${MathCommonTestFiles}
         ${GenericTestFiles}
 
@@ -129,8 +102,12 @@ target_link_libraries(
         GTest::gtest
         GTest::gtest_main # googletest
         # Testing CML
-        Matrix4x4Tests
-        Matrix3x3Tests
+        Matrix2Tests
+        Matrix2TransformTests
+        Matrix3Tests
+        Matrix3TransformTests
+        Matrix4Tests
+        Matrix4TransformTests
 )
 
 target_include_directories(
@@ -160,9 +137,6 @@ source_group(
         ${Vector2TestFiles}
         ${Vector3TestFiles}
         ${Vector4TestFiles}
-        ${Matrix2x2TestFiles}
-#        ${Matrix3x3TestFiles}
-#        ${Matrix4x4TestFiles}
         ${MathCommonTestFiles}
         ${GenericTestFiles}
 )
