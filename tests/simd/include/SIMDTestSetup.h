@@ -11,8 +11,8 @@
 
 
 #include <cstdint>
+#include <falcon_simd/SIMD.h>
 #include <gtest/gtest.h>
-#include <simd/SIMD.h>
 
 
 using SupportedSIMDTypes =

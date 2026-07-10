@@ -3,7 +3,10 @@ option(FGM_FORCE_LEFT_HANDED "Use Left-Handed Coordinate System in FGM")
 
 set(LIBRARY_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Falcon Game Math
+
+####################
+# Falcon Game Math #
+####################
 
 include(fgm/FGM.cmake)
 add_library(FGM INTERFACE ${FGM_HEADERS})
@@ -15,10 +18,8 @@ target_link_libraries(FGM INTERFACE StrictWarnings ProjectSanitizers)
 
 target_include_directories(FGM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
-
-source_group("CMake Files" FILES fgm/FGM.cmake fgm/common/Common.cmake fgm/matrices/Matrices.cmake fgm/vectors/Vectors.cmake)
+source_group("CMake Files/fgm/" FILES fgm/FGM.cmake fgm/common/Common.cmake fgm/matrices/Matrices.cmake fgm/vectors/Vectors.cmake)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${FGM_HEADERS})
-
 
 if (FGM_FORCE_LEFT_HANDED)
     message(STATUS "FGM is using Left-Handed Coordinate System")
@@ -28,7 +29,18 @@ else ()
 endif ()
 
 
-# Falcon SIMD
+###############
+# Falcon SIMD #
+###############
+
+include(falcon_simd/FalconSimd.cmake)
+add_library(FalconSIMD INTERFACE ${FALCON_SIMD_HEADERS})
+target_compile_features(FalconSIMD INTERFACE cxx_std_20)
+
+target_include_directories(FalconSIMD INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+
+source_group("CMake Files/falcon_simd/" FILES falcon_simd/FalconSimd.cmake falcon_simd/utils/Utils.cmake)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${FALCON_SIMD_HEADERS})
 
 #option(ENABLE_FGM_DEMO "Enables FGM Demo Application")
 #
