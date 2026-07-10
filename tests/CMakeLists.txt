@@ -14,7 +14,7 @@ add_subdirectory(falcon_simd)
 
 if (NONCOMPREHENSIVE)
     target_compile_definitions(FGMTestSuite PRIVATE NONCOMPREHENSIVE)
-    target_compile_definitions(SIMDTestSuite PRIVATE NONCOMPREHENSIVE)
+    target_compile_definitions(FalconSIMDTestSuite PRIVATE NONCOMPREHENSIVE)
 endif ()
 
 AddSIMDCompilerFlag(FGMTestSuite)
