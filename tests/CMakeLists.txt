@@ -10,11 +10,7 @@ if (TARGET gtest)
 endif ()
 
 add_subdirectory(fgm)
-add_subdirectory(simd)
-target_compile_features(FGMTestSuite PRIVATE cxx_std_20)
-target_compile_features(SIMDTestSuite PRIVATE cxx_std_20)
-target_link_libraries(FGMTestSuite PRIVATE StrictWarnings ProjectSanitizers)
-target_link_libraries(SIMDTestSuite PRIVATE StrictWarnings ProjectSanitizers)
+add_subdirectory(falcon_simd)
 
 if (NONCOMPREHENSIVE)
     target_compile_definitions(FGMTestSuite PRIVATE NONCOMPREHENSIVE)

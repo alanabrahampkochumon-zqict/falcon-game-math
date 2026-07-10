@@ -25,7 +25,7 @@ target_sources(
 
 target_include_directories(
         Vector2Tests PRIVATE
-        ${TEST_ROOT_DIR}/include
+        ${FGM_TEST_ROOT_DIR}/include
 )
 
 

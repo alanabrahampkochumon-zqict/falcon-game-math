@@ -22,7 +22,7 @@ target_sources(
 
 target_include_directories(
         Matrix3Tests PRIVATE
-        ${TEST_ROOT_DIR}/include
+        ${FGM_TEST_ROOT_DIR}/include
 )
 
 add_subdirectory(TransformationFactoryTests)

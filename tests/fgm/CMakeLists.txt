@@ -1,9 +1,11 @@
 add_executable(FGMTestSuite)
-target_compile_features(FGMTestSuite PRIVATE cxx_std_20)
+set_target_properties(FGMTestSuite PROPERTIES CXX_STANDARD 20)
+set_target_properties(FGMTestSuite PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FGMTestSuite PROPERTIES CXX_EXTENSIONS OFF)
 
 # Directories
 set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/")
-set(TEST_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(FGM_TEST_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(UtilityDirectory "${INCLUDE_DIR}utils/")
 
@@ -56,6 +58,8 @@ target_link_libraries(
         FalconSIMD
         GTest::gtest
         GTest::gtest_main # googletest
+        StrictWarnings
+        ProjectSanitizers
 
         # Objs
         CommonTests
@@ -107,4 +111,4 @@ set_target_properties(CommonTests
         Matrix3TransformTests
         Matrix4Tests
         Matrix4TransformTests
-        PROPERTIES FOLDER "Tests/FGM")
+        PROPERTIES FOLDER "Test Intermediates/FGM")

@@ -11,7 +11,7 @@ target_sources(
 
 target_include_directories(
         CommonTests PRIVATE
-        ${TEST_ROOT_DIR}/include
+        ${FGM_TEST_ROOT_DIR}/include
 )
 
 

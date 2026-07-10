@@ -13,7 +13,7 @@ target_sources(
 target_include_directories(
         Matrix3TransformTests PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${TEST_ROOT_DIR}/include
+        ${FGM_TEST_ROOT_DIR}/include
 )
 
 target_link_libraries(
