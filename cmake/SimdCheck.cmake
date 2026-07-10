@@ -1,4 +1,5 @@
 include_guard()
+
 cmake_host_system_information(
     RESULT CPU_NAME
     QUERY PROCESSOR_NAME

@@ -75,12 +75,12 @@ jobs:
           -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
           -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          -D ENABLE_STRICT=ON
+          -D FGM_STRICT_MODE=ON
           -D NONCOMPREHENSIVE=OFF
-          -D ENABLE_FGM_TEST=ON
-          -D ENABLE_FGM_BENCHMARK=ON
-          -D ENABLE_FGM_DEMO=ON
-          -D ENABLE_FGM_DOCS=ON
+          -D FGM_TESTS=ON
+          -D FGM_BENCHMARK=ON
+          -D FGM_DEMO_RASTERIZER=ON
+          -D FGM_DOCS=ON
           -DSDL_UNIX_CONSOLE_BUILD=ON
           -S ${{ github.workspace }}
 

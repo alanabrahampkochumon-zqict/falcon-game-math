@@ -1,4 +1,5 @@
 include_guard()
+
 include(FetchContent)
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE) # Statically link Gtest
@@ -37,7 +38,7 @@ FetchContent_Declare(
 )
 
 # Test Harness Dependencies
-if (ENABLE_FGM_TEST)
+if (FGM_TESTS)
     FetchContent_MakeAvailable(googletest)
     # Group google_test projects into a "Gtest" folder
     set_target_properties(
@@ -53,7 +54,7 @@ endif ()
 
 
 # Benchmark Dependencies
-if (ENABLE_FGM_BENCHMARK)
+if (FGM_BENCHMARK)
     FetchContent_MakeAvailable(googlebenchmark)
     set_target_properties(benchmark benchmark_main PROPERTIES FOLDER "Google Benchmark")
 endif ()
