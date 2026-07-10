@@ -97,4 +97,14 @@ source_group(
         ${GenericTestFiles}
 )
 
-#source_group("Tests/FGM" TARGE)
+set_target_properties(CommonTests
+        Vector2Tests
+        Vector3Tests
+        Vector4Tests
+        Matrix2Tests
+        Matrix2TransformTests
+        Matrix3Tests
+        Matrix3TransformTests
+        Matrix4Tests
+        Matrix4TransformTests
+        PROPERTIES FOLDER "Tests/FGM")

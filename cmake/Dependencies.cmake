@@ -8,6 +8,8 @@ set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable benchmark testing" FORCE)
 set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "Disable benchmark install" FORCE)
 
+set(VENDORS_DIR "Vendors")
+
 # Google Test
 FetchContent_Declare(
         googletest
@@ -43,7 +45,7 @@ if (FGM_TESTS)
     # Group google_test projects into a "Gtest" folder
     set_target_properties(
             gtest gtest_main gmock gmock_main
-            PROPERTIES FOLDER "Google Test"
+            PROPERTIES FOLDER "${VENDORS_DIR}/Google/GTest"
     )
 
     if (MSVC)
@@ -56,7 +58,7 @@ endif ()
 # Benchmark Dependencies
 if (FGM_BENCHMARK)
     FetchContent_MakeAvailable(googlebenchmark)
-    set_target_properties(benchmark benchmark_main PROPERTIES FOLDER "Google Benchmark")
+    set_target_properties(benchmark benchmark_main PROPERTIES FOLDER "${VENDORS_DIR}/Google/Benchmark")
 endif ()
 
 
@@ -64,5 +66,6 @@ endif ()
 if (FGM_DEMO_RASTERIZER)
     FetchContent_MakeAvailable(sdl3)
     FetchContent_MakeAvailable(fast_float)
+    set_target_properties(SDL3-static SDL3_test PROPERTIES FOLDER "${VENDORS_DIR}/SDL3")
 endif ()
 

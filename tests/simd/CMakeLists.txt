@@ -79,3 +79,6 @@ source_group(
         FILES
         ${SimdTestFiles}
 )
+
+# TODO: FOLDER
+#set_target_properties(AllocatorTests TelemetryTests PROPERTIES FOLDER "Tests/falcon_simd")
