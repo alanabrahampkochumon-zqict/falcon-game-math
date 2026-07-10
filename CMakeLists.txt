@@ -47,7 +47,7 @@ endif ()
 
 # Multi-processor compilation
 if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    message(STATUS "Enabling Multiprocessor compilation on MSVC")
+    message(STATUS "[FGM]: Enabling Multiprocessor compilation on MSVC")
     add_compile_options("/MP")
 endif ()
 
