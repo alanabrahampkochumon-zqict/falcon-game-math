@@ -32,11 +32,11 @@ protected:
     void SetUp() override
     {
         _angle = fgm::constants::PI<FP_T> / FP_T(2.0);
-        #ifdef FGM_LEFT_HANDED
+#ifdef FGM_LEFT_HANDED
         _expectedMat = { fgm::Vector2{ COM_T(0), COM_T(-1) }, fgm::Vector2 { COM_T(1), COM_T(0) } };
-        #else
+#else
         _expectedMat = { fgm::Vector2{ COM_T(0), COM_T(1) }, fgm::Vector2{ COM_T(-1), COM_T(0) } };
-        #endif
+#endif
     }
 };
 /**
@@ -46,101 +46,48 @@ protected:
 TYPED_TEST_SUITE(Matrix2Rotation, SupportedSignedArithmeticFloatingTypePair);
 
 
+template <typename T>
+class Matrix2FloatRotation: public testing::Test
+{
+protected:
+    T _angle;
+    fgm::Matrix2<T> _expectedMat;
 
-// template <typename T>
-// class Matrix2FloatRotation: public testing::Test
-// {
-// protected:
-//     T _angle;
-//     fgm::Matrix2<T> _expectedMatX, _expectedMatY, _expectedMatZ, _expectedMatXYZ;
-//
-//
-//     void SetUp() override
-//     {
-//         _angle = fgm::constants::PI<T> / T(4.0);
-//
-// #ifdef FGM_LEFT_HANDED
-//         _expectedMatX = { fgm::Vector4{ T(1.0), T(0.0), T(0.0), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(0.70710678118654757), T(-0.70710678118654757), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(0.70710678118654757), T(0.70710678118654757), T(0.0) }, fgm::Vector4 {
-//                               T(0.0),
-//                               T(0.0),
-//                               T(0.0),
-//                               T(1.0)
-//                           } };
-//
-//         _expectedMatY = { fgm::Vector4{ T(0.70710678118654757), T(0.0), T(0.70710678118654757), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(1.0), T(0.0), T(0.0) },
-//                           fgm::Vector4{ T(-0.70710678118654757), T(0.0), T(0.70710678118654757), T(0.0) },
-//                           fgm::Vector4 {
-//                               T(0.0),
-//                               T(0.0),
-//                               T(0.0),
-//                               T(1.0)
-//                           } };
-//
-//         _expectedMatZ = { fgm::Vector4{ T(0.70710678118654757), T(-0.70710678118654757), T(0.0), T(0.0) },
-//                           fgm::Vector4{ T(0.70710678118654757), T(0.70710678118654757), T(0.0), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(0.0), T(1.0), T(0.0) },
-//                           fgm::Vector4 {
-//                               T(0.0),
-//                               T(0.0),
-//                               T(0.0),
-//                               T(1.0)
-//                           } };
-//
-//         _expectedMatXYZ = { fgm::Vector4{ T(0.5), T(0.5), T(-0.70710678118654757), T(0.0) },
-//                             fgm::Vector4{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5), T(0.0) },
-//                             fgm::Vector4{ T(0.85355339059327395), T(-0.14644660940672627), T(0.5), T(0.0) },
-//                             fgm::Vector4 {
-//                                 T(0.0),
-//                                 T(0.0),
-//                                 T(0.0),
-//                                 T(1.0)
-//                             } };
-//
-// #else
-//
-//         _expectedMatX = { fgm::Vector4{ T(1.0), T(0.0), T(0.0), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(0.70710678118654757), T(0.70710678118654757), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(-0.70710678118654757), T(0.70710678118654757), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
-//
-//         _expectedMatY = { fgm::Vector4{ T(0.70710678118654757), T(0.0), T(-0.70710678118654757), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(1.0), T(0.0), T(0.0) },
-//                           fgm::Vector4{ T(0.70710678118654757), T(0.0), T(0.70710678118654757), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
-//
-//         _expectedMatZ = { fgm::Vector4{ T(0.70710678118654757), T(0.70710678118654757), T(0.0), T(0.0) },
-//                           fgm::Vector4{ T(-0.70710678118654757), T(0.70710678118654757), T(0.0), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(0.0), T(1.0), T(0.0) },
-//                           fgm::Vector4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
-//
-//         _expectedMatXYZ = { fgm::Vector4{ T(0.5), T(0.5), T(-0.70710678118654757), T(0.0) },
-//                             fgm::Vector4{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5), T(0.0) },
-//                             fgm::Vector4{ T(0.85355339059327395), T(-0.14644660940672627), T(0.5), T(0.0) },
-//                             fgm::Vector4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
-//
-// #endif
-//     }
-// };
-// /**
-//  * @brief Test fixture for @ref fgm::Matrix2 rotation factory, parameterized
-//  *        @ref SupportedFloatingPointTypes
-//  */
-// TYPED_TEST_SUITE(Matrix2FloatRotation, SupportedFloatingPointTypes);
+
+    void SetUp() override
+    {
+        _angle = fgm::constants::PI<T> / T(4.0);
+
+#ifdef FGM_LEFT_HANDED
+        _expectedMat = {
+            fgm::Vector2{ T(0.70710678118654757), T(-0.70710678118654757) },
+            fgm::Vector2{ T(0.70710678118654757), T(0.70710678118654757) },
+        };
+
+#else
+        _expectedMat = { fgm::Vector2{ T(0.70710678118654757), T(0.70710678118654757) },
+                         fgm::Vector2{ T(-0.70710678118654757), T(0.70710678118654757) } };
+
+#endif
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Matrix2 rotation factory, parameterized
+ *        @ref SupportedFloatingPointTypes
+ */
+TYPED_TEST_SUITE(Matrix2FloatRotation, SupportedFloatingPointTypes);
 
 namespace
 {
-    // TODO: Add static tests
-    #if __cplusplus >= 202603L
+// TODO: Add static tests
+#if __cplusplus >= 202603L
     // Rotation matrix for 180° or 2π radians
     constexpr auto ROTATION_MAT = fgm::Matrix2<int>::makeRotation(fgm::constants::PI<float>);
     static_assert(ROTATION_MAT(0, 0) == 0);
     static_assert(ROTATION_MAT(0, 1) == -1);
     static_assert(ROTATION_MAT(1, 0) == 1);
     static_assert(ROTATION_MAT(1, 1) == 0);
-    #endif
+#endif
 
 } // namespace
 
@@ -152,9 +99,12 @@ namespace
 
 /** @brief Verify that rotation transformation factory returns a rotation matrix. */
 TYPED_TEST(Matrix2Rotation, ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<typename TypeParam::first_type>::makeRotation(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<typename TypeParam::first_type>::makeRotation(this->_angle)); }
+
+
+/** @brief Verify that rotation transformation factory returns a rotation matrix with non-integral values. */
+TYPED_TEST(Matrix2FloatRotation, ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeRotation(this->_angle)); }
 
 
 /** @} */
