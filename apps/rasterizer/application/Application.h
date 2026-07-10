@@ -10,8 +10,8 @@
  */
 
 
-#include "Mesh.h"
-#include "Renderer.h"
+#include "application/Mesh.h"
+#include "application/Renderer.h"
 #include "parsers/ObjectParser.h"
 
 #include <SDL3/SDL.h>

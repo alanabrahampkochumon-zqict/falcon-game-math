@@ -11,11 +11,19 @@ set(DevToolsDir "Dev Tools")
 
 option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+include(cmake/dependencies.cmake)
+include(cmake/simdcheck.cmake)
+
 # Custom Options
 # Flags for keeping the library lightweight when a consumer imports it
 option(ENABLE_FGM_BENCHMARK "Enables FGM Benchmark Suite")
+option(FGM_DEMO_RASTERIZER "Enables FGM Demo Rasterizer Application")
 option(ENABLE_FGM_DOCS "Enables FGM Documentation Generation")
 
+
+if (FGM_DEMO_RASTERIZER)
+    add_subdirectory(apps/rasterizer)
+endif ()
 
 # Turn on solution folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -146,8 +154,6 @@ if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif ()
 
 
-include(cmake/dependencies.cmake)
-include(cmake/simdcheck.cmake)
 
 add_subdirectory(include)
 add_subdirectory(tests)

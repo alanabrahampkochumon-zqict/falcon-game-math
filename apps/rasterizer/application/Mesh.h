@@ -10,7 +10,7 @@
  */
 
 
-#include <../../fgm/Vec>
+#include <fgm/Vec>
 #include <vector>
 
 

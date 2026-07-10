@@ -12,7 +12,7 @@
 
 #include "Mesh.h"
 
-#include <../../fgm/Mat>
+#include <fgm/Mat>
 #include <bit>
 #include <cstdint>
 #include <cstdlib>

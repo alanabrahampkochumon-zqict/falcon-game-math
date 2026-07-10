@@ -9,8 +9,8 @@
  */
 
 
-#include "Application.h"
-// #include <>
+#include "application/Application.h"
+
 int main()
 {
     demo::Application application("FGM Software Rasterizer", "1.0.0", "com.fgm.rasterizer");

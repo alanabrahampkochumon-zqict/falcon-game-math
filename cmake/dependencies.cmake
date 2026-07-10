@@ -39,7 +39,6 @@ FetchContent_Declare(
 # Test Harness Dependencies
 if (ENABLE_FGM_TEST)
     FetchContent_MakeAvailable(googletest)
-
     # Group google_test projects into a "Gtest" folder
     set_target_properties(
             gtest gtest_main gmock gmock_main
@@ -52,21 +51,17 @@ if (ENABLE_FGM_TEST)
     endif ()
 endif ()
 
+
 # Benchmark Dependencies
 if (ENABLE_FGM_BENCHMARK)
     FetchContent_MakeAvailable(googlebenchmark)
-
     set_target_properties(benchmark benchmark_main PROPERTIES FOLDER "Google Benchmark")
 endif ()
 
-# Demo Dependencies
-if (ENABLE_FGM_DEMO)
+
+# Rasterizer Dependencies
+if (FGM_DEMO_RASTERIZER)
     FetchContent_MakeAvailable(sdl3)
     FetchContent_MakeAvailable(fast_float)
 endif ()
-
-
-#set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE) # Statically link Gtest
-#set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-#set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 
