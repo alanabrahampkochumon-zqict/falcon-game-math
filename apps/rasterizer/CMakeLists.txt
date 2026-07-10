@@ -2,8 +2,6 @@ add_executable(Rasterizer)
 set_target_properties(Rasterizer PROPERTIES CXX_STANDARD 20)
 set_target_properties(Rasterizer PROPERTIES CXX_STANDARD_REQUIRED ON)
 set_target_properties(Rasterizer PROPERTIES CXX_EXTENSIONS OFF)
-#target_compile_features(Rasterizer PRIVATE cxx_std_20)
-
 
 # TODO: When refactoring application, parsers etc. add subfolder cml and link to this
 target_sources(
