@@ -26,7 +26,6 @@ target_precompile_headers(
 target_link_libraries(
         FalconSIMDTestSuite
         PRIVATE
-        FGM
         FalconSIMD
         GTest::gtest
         GTest::gtest_main # googletest
