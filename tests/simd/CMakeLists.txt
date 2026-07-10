@@ -47,7 +47,7 @@ target_precompile_headers(
 target_link_libraries(
         SIMDTestSuite
         PRIVATE
-        MathLib
+        FGM
         FalconSIMD
         GTest::gtest
         GTest::gtest_main # googletest

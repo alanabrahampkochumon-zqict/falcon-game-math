@@ -37,7 +37,7 @@ target_include_directories(
 target_link_libraries(
         RasterizerDemo
         PRIVATE
-        MathLib
+        FGM
         SDL3::SDL3
         fast_float
 )

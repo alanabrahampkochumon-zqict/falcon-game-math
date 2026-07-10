@@ -17,7 +17,7 @@ target_include_directories(
 
 target_link_libraries(
         CommonTests PRIVATE
-        MathLib
+        FGM
         GTest::gtest
         GTest::gtest_main
 )

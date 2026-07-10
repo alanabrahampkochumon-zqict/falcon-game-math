@@ -16,7 +16,7 @@ target_include_directories(
 
 target_link_libraries(
         Matrix2TransformTests PRIVATE
-        MathLib
+        FGM
         GTest::gtest
         GTest::gtest_main # googletest
 )

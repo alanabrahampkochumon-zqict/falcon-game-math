@@ -31,7 +31,7 @@ target_include_directories(
 
 target_link_libraries(
         Vector4Tests PRIVATE
-        MathLib
+        FGM
         GTest::gtest
         GTest::gtest_main
 )

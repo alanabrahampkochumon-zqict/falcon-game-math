@@ -13,7 +13,6 @@
 
 #include "PreprocessorDefinitions.h"
 
-
 namespace fgm
 {
 

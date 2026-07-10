@@ -10,14 +10,12 @@
 
 
 #include "utils/TypeUtils.h"
-
 #include <fgm/matrices/Matrix2.h>
 #include <fgm/matrices/Matrix3.h>
 #include <fgm/matrices/Matrix4.h>
 #include <fgm/vectors/Vector2.h>
 #include <fgm/vectors/Vector3.h>
 #include <fgm/vectors/Vector4.h>
-
 
 /**
  * @addtogroup T_FGM_Trivial

@@ -52,7 +52,7 @@ if (CLANG_TIDY_EXE)
     # Create a custom target that you manually trigger
     add_custom_target(
             lint
-            COMMAND ${CMAKE_COMMAND} -E echo "Running Clang-Tidy on MathLib..."
+            COMMAND ${CMAKE_COMMAND} -E echo "Running Clang-Tidy on FGM..."
             COMMAND run-clang-tidy -p ${CMAKE_BINARY_DIR} -header-filter=.*
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
             COMMENT "Running static analysis..."
@@ -149,11 +149,10 @@ endif ()
 include(cmake/dependencies.cmake)
 include(cmake/simdcheck.cmake)
 
-add_subdirectory(src)
+add_subdirectory(include)
 add_subdirectory(tests)
 
-target_link_libraries(FalconSIMD INTERFACE StrictWarnings ProjectSanitizers)
-target_link_libraries(MathLib INTERFACE StrictWarnings ProjectSanitizers)
+#target_link_libraries(FalconSIMD INTERFACE StrictWarnings ProjectSanitizers) # TODO: Enable
 
 
 if (ENABLE_FGM_BENCHMARK)

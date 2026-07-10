@@ -13,7 +13,6 @@
 #include <fgm/Vec>
 #include <type_traits>
 
-
 /**
  * @addtogroup T_FGM_Header_Alias
  * @{

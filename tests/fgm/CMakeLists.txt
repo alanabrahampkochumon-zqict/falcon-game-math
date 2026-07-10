@@ -1,5 +1,5 @@
-add_executable(MathTestSuite)
-target_compile_features(MathTestSuite PRIVATE cxx_std_20)
+add_executable(FGMTestSuite)
+target_compile_features(FGMTestSuite PRIVATE cxx_std_20)
 
 # Directories
 set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/")
@@ -24,7 +24,7 @@ add_subdirectory(matrices/matrix4x4)
 add_subdirectory(matrices/matrix3x3)
 
 target_sources(
-        MathTestSuite
+        FGMTestSuite
         PRIVATE
         HeaderAliasTests.cpp
 
@@ -36,10 +36,10 @@ target_sources(
         ${Utilities}
 )
 
-target_compile_options(MathTestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
+target_compile_options(FGMTestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
 target_precompile_headers(
-        MathTestSuite
+        FGMTestSuite
         PRIVATE
         <gtest/gtest.h>
         <iostream>
@@ -50,14 +50,14 @@ target_precompile_headers(
 )
 
 target_link_libraries(
-        MathTestSuite
+        FGMTestSuite
         PRIVATE
-        MathLib
+        FGM
         FalconSIMD
         GTest::gtest
         GTest::gtest_main # googletest
-        # Testing CML
 
+        # Objs
         CommonTests
         Vector2Tests
         Vector3Tests
@@ -71,14 +71,14 @@ target_link_libraries(
 )
 
 target_include_directories(
-        MathTestSuite
+        FGMTestSuite
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 
 include(GoogleTest)
-gtest_discover_tests(MathTestSuite DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(FGMTestSuite DISCOVERY_MODE PRE_TEST)
 
 source_group(
         TREE
@@ -96,3 +96,5 @@ source_group(
         FILES
         ${GenericTestFiles}
 )
+
+#source_group("Tests/FGM" TARGE)

@@ -29,7 +29,7 @@ add_subdirectory(TransformationFactoryTests)
 
 target_link_libraries(
         Matrix3Tests PRIVATE
-        MathLib
+        FGM
         GTest::gtest
         GTest::gtest_main
 )
