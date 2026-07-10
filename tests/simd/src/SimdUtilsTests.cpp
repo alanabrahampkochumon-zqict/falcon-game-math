@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <utils/SIMDUtils.h>
+#include <falcon_simd/utils/SIMDUtils.h>
 
 struct TestPackingParams
 {
