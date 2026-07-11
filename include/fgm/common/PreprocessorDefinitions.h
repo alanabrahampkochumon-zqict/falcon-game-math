@@ -55,7 +55,8 @@ namespace fgm::internal
      *        will not work. So by calling a non constexpr function inside a constexpr function, it will trigger
      *        a no-compile error.
      */
-    inline void compile_time_error_trap() {}
+    inline void compileTimeErrorTrap() {}
+
 } // namespace fgm::internal
 
 
@@ -95,7 +96,7 @@ inline void logAssertion(const char* condition, const char* message, const char*
             if (std::is_constant_evaluated())                                                                          \
             {                                                                                                          \
                 if (!(condition))                                                                                      \
-                    fgm::internal::compile_time_error_trap();                                                          \
+                    fgm::internal::compileTimeErrorTrap();                                                             \
             }                                                                                                          \
             else                                                                                                       \
             {                                                                                                          \
@@ -128,7 +129,7 @@ inline void logAssertion(const char* condition, const char* message, const char*
             if (std::is_constant_evaluated())                                                                          \
             {                                                                                                          \
                 if (!(condition))                                                                                      \
-                    fgm::internal::compile_time_error_trap();                                                          \
+                    fgm::internal::compileTimeErrorTrap();                                                             \
             }                                                                                                          \
             else                                                                                                       \
             {                                                                                                          \
