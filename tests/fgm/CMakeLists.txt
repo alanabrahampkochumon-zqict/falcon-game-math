@@ -18,12 +18,12 @@ set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
 list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
 
 add_subdirectory(common)
-add_subdirectory(vectors/vector2d)
-add_subdirectory(vectors/vector3d)
-add_subdirectory(vectors/vector4d)
-add_subdirectory(matrices/matrix2x2)
-add_subdirectory(matrices/matrix4x4)
-add_subdirectory(matrices/matrix3x3)
+add_subdirectory(vectors/vector2)
+add_subdirectory(vectors/vector3)
+add_subdirectory(vectors/vector4)
+add_subdirectory(matrices/matrix2)
+add_subdirectory(matrices/matrix4)
+add_subdirectory(matrices/matrix3)
 
 target_sources(
         FGMTestSuite

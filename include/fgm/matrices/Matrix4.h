@@ -1308,6 +1308,35 @@ namespace fgm
 
 
         /**
+         * @brief Construct an affine 3D rotation matrix about the @p axis for a given angle.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):** Anticlockwise Rotation
+         *          - **Left-Handed (FGM_LEFT_HANDED):** Clockwise Rotation
+         *          - Uses Rodrigues' formula
+         *            \f$
+         *            \textbf{v}_{Rot} =
+         *                              \textbf{v} \cos{\theta} +
+         *                              \textbf{k}(\textbf{k}\cdot\textbf{v})(1-\cos{\theta}) +
+         *                              (\textbf{k} \times \textbf{v}) \sin{\theta}
+         *            \f$
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle The rotation angle in radians.
+         * @param[in] axis  The axis of rotation. Must be a unit vector.
+         *
+         * @return A new @ref Matrix4 representing the linear rotation around @p axis
+         *         promoted to the nearest floating point type.
+         *
+         * @relatedalso makeRotationNonNorm(U, const Vector3<T>&)
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr PromotedFloatMatrix4<T, U> makeRotation(U angle, const Vector3<T>& axis) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
          * @brief Construct an affine uniform scale 3D matrix.
          *
          * @param[in] scale The scale factor.
