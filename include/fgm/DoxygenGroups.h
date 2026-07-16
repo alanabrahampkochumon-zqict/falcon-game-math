@@ -232,13 +232,6 @@
      * @ingroup FGM_Math
      */
 
-
-    /**
-     * @defgroup FGM_Types Type Aliases
-     * @brief Aliases for FGM math types.
-     * @ingroup FGM_Math
-     */
-
     /**
      * @defgroup FGM_Utils Utility functions
      * @brief Helper utilities for FGM.

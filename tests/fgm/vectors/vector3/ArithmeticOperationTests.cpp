@@ -566,9 +566,7 @@ TEST(Vector3ScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWith
  *        triggers assert in debug mode.
  */
 TYPED_TEST(Vector3ScalarDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
-{
-    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), "");
-}
+{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), ""); }
 
 
 /**
@@ -932,3 +930,5 @@ TEST(Vector3Inversion, NoOpOnNaNVectors)
     EXPECT_TRUE(std::isnan(inverted.y()));
     EXPECT_TRUE(std::isnan(inverted.z()));
 }
+
+/** @} */
