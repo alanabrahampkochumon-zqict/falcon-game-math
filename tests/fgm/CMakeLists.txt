@@ -82,7 +82,7 @@ target_include_directories(
 
 
 include(GoogleTest)
-gtest_discover_tests(FGMTestSuite DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(FGMTestSuite DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 180)
 
 source_group(
         TREE
