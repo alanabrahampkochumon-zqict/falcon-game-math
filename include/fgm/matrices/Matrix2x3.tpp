@@ -1,0 +1,767 @@
+#pragma once
+/**
+ * @file Matrix2x3x3.tpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: July 17, 2026
+ *
+ * @brief @ref Matrix2x3x3 template implementation.
+ * @details This file contains the definitions of the template members declared in Matrix2x3x3.h
+ *
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
+
+#include "fgm/common/Wrappers.h"
+
+#include <type_traits>
+#include <valarray>
+
+
+#if defined(__clang__)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wbitwise-instead-of-logical"
+#endif
+
+namespace fgm
+{
+
+    /*************************************
+     *                                   *
+     *            INITIALIZERS           *
+     *                                   *
+     *************************************/
+
+    template <Arithmetic T>
+    constexpr Matrix2x3<T>::Matrix2x3(T m00, T m01, T m02, T m10, T m11, T m12) noexcept
+        : _data{ Vector2<T>(m00, m10), Vector2<T>(m01, m11), Vector2<T>(m02, m12) }
+    {}
+
+
+    template <Arithmetic T>
+    constexpr Matrix2x3<T>::Matrix2x3(const Vector2<T>& col0, const Vector2<T>& col1, const Vector2<T>& col2) noexcept
+        : _data{ col0, col1, col2 }
+    {}
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr Matrix2x3<T>::Matrix2x3(const Matrix2x3<U>& other) noexcept
+    {
+        (*this)(0, 0) = static_cast<T>(other(0, 0));
+        (*this)(0, 1) = static_cast<T>(other(0, 1));
+        (*this)(1, 0) = static_cast<T>(other(1, 0));
+        (*this)(1, 1) = static_cast<T>(other(1, 1));
+    }
+
+
+
+    /*************************************
+     *                                   *
+     *            ACCESSORS              *
+     *                                   *
+     *************************************/
+
+    template <Arithmetic T>
+    constexpr Vector2<T>& Matrix2x3<T>::operator[](const std::size_t col) noexcept
+    {
+        FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        return _data[col];
+    }
+
+    template <Arithmetic T>
+    constexpr const Vector2<T>& Matrix2x3<T>::operator[](const std::size_t col) const noexcept
+    {
+        FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        return _data[col];
+    }
+
+    template <Arithmetic T>
+    constexpr T& Matrix2x3<T>::operator()(const std::size_t row, const std::size_t col) noexcept
+    {
+        FGM_ASSERT_MSG(col < columns || row < rows, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        return _data[col][row];
+    }
+
+    template <Arithmetic T>
+    constexpr const T& Matrix2x3<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
+    {
+        FGM_ASSERT_MSG(col < columns || row < rows, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        return _data[col][row];
+    }
+
+
+    //     /***************************************
+    //      *                                     *
+    //      *             EQUALITY                *
+    //      *                                     *
+    //      ***************************************/
+    //
+    //     template <Arithmetic T>
+    //     template <Arithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr bool Matrix2x3<T>::allEq(const Matrix2x3<U>& rhs, const double epsilon) const noexcept
+    //     {
+    //         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+    //         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+    //         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+    // #ifdef _MSC_VER
+    //         if (std::is_constant_evaluated())
+    //         {
+    //             if (hasNaN() || rhs.hasNaN())
+    //             {
+    //                 return false;
+    //             }
+    //         }
+    // #endif
+    //         return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <Arithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr bool Matrix2x3<T>::allEq(const Matrix2x3& lhs, const Matrix2x3<U>& rhs, const double epsilon)
+    //     noexcept
+    //     {
+    //         return lhs.allEq(rhs, epsilon);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <Arithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr bool Matrix2x3<T>::anyNeq(const Matrix2x3<U>& rhs, const double epsilon) const noexcept
+    //     {
+    //         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+    //         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+    //         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+    // #ifdef _MSC_VER
+    //         if (std::is_constant_evaluated())
+    //         {
+    //             if (hasNaN() || rhs.hasNaN())
+    //             {
+    //                 return true;
+    //             }
+    //         }
+    // #endif
+    //         return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <Arithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr bool Matrix2x3<T>::anyNeq(const Matrix2x3& lhs, const Matrix2x3<U>& rhs, const double epsilon)
+    //     noexcept
+    //     {
+    //         return lhs.anyNeq(rhs, epsilon);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <Arithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr bool Matrix2x3<T>::operator==(const Matrix2x3<U>& rhs) const noexcept
+    //     {
+    //         return allEq(rhs);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <Arithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr bool Matrix2x3<T>::operator!=(const Matrix2x3<U>& rhs) const noexcept
+    //     {
+    //         return anyNeq(rhs);
+    //     }
+    //
+    //
+    //
+    //     /**************************************
+    //      *                                    *
+    //      *        ARITHMETIC OPERATORS        *
+    //      *                                    *
+    //      **************************************/
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr PromotedMatrix2x3<T, U> Matrix2x3<T>::operator+(const Matrix2x3<U>& rhs) const noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         using R = PromotedValue_t<T, U>;
+    //         return Matrix2x3<R>(_data[0] + rhs[0], _data[1] + rhs[1]);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     Matrix2x3<T>& Matrix2x3<T>::operator+=(const Matrix2x3<U>& rhs) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         _data[0] += rhs[0];
+    //         _data[1] += rhs[1];
+    //         return *this;
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr PromotedMatrix2x3<T, U> Matrix2x3<T>::operator-(const Matrix2x3<U>& rhs) const noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         using R = PromotedValue_t<T, U>;
+    //         return Matrix2x3<R>(_data[0] - rhs[0], _data[1] - rhs[1]);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr Matrix2x3<T>& Matrix2x3<T>::operator-=(const Matrix2x3<U>& rhs) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         _data[0] -= rhs[0];
+    //         _data[1] -= rhs[1];
+    //         return *this;
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic S>
+    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::operator*(const S scalar) const noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         using R = PromotedValue_t<T, S>;
+    //         return Matrix2x3<R>(scalar * _data[0], scalar * _data[1]);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic S>
+    //     constexpr Matrix2x3<T>& Matrix2x3<T>::operator*=(const S scalar) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         _data[0] *= scalar;
+    //         _data[1] *= scalar;
+    //         return *this;
+    //     }
+    //
+    //     template <StrictArithmetic T, StrictArithmetic S>
+    //     constexpr PromotedMatrix2x3<T, S> operator*(const S scalar, const Matrix2x3<T>& matrix) noexcept
+    //     {
+    //         return matrix * scalar;
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr PromotedVector2<T, U> Matrix2x3<T>::operator*(const Vector2<U>& vec) const noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         using R = PromotedValue_t<T, U>;
+    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
+    //         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
+    //         if constexpr (std::is_floating_point_v<R>)
+    //         {
+    //             if (!std::is_constant_evaluated())
+    //             {
+    //                 return Vector2<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
+    //                                            static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
+    //                                   std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
+    //                                            static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
+    //             }
+    //         }
+    // #endif
+    //
+    //         R x =
+    //             static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][0]) *
+    //             static_cast<R>(vec[1]);
+    //         R y =
+    //             static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][1]) *
+    //             static_cast<R>(vec[1]);
+    //
+    //         return Vector2<R>(x, y);
+    //     }
+    //
+    //
+    //     template <StrictArithmetic T, StrictArithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr PromotedVector2<T, U> operator*(const Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
+    //     {
+    //         using R = PromotedValue_t<T, U>;
+    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
+    //         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
+    //         if constexpr (std::is_floating_point_v<R>)
+    //         {
+    //             if (!std::is_constant_evaluated())
+    //             {
+    //                 return Vector2<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
+    //                                            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0))),
+    //                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
+    //                                            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1))));
+    //             }
+    //         }
+    //
+    // #endif
+    //         R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) +
+    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0));
+    //         R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
+    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1));
+    //
+    //         return Vector2<R>(x, y);
+    //     }
+    //
+    //
+    //     template <StrictArithmetic T, StrictArithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr Vector2<T>& operator*=(Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
+    //     {
+    //         using R = PromotedValue_t<T, U>;
+    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
+    //         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
+    //         if constexpr (std::is_floating_point_v<R>)
+    //         {
+    //             if (!std::is_constant_evaluated())
+    //             {
+    //                 R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
+    //                                static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0)));
+    //                 R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
+    //                                static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1)));
+    //
+    //                 vec.x() = static_cast<T>(x);
+    //                 vec.y() = static_cast<T>(y);
+    //
+    //                 return vec;
+    //             }
+    //         }
+    // #endif
+    //         R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) +
+    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0));
+    //         R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
+    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1));
+    //
+    //         vec.x() = static_cast<T>(x);
+    //         vec.y() = static_cast<T>(y);
+    //
+    //         return vec;
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr PromotedMatrix2x3<T, U> Matrix2x3<T>::operator*(const Matrix2x3<U>& rhs) const noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         using R = PromotedValue_t<T, U>;
+    //         return Matrix2x3<R>(*this * rhs[0], *this * rhs[1]);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic U>
+    //         requires StrictSignedness<T, U>
+    //     constexpr Matrix2x3<T>& Matrix2x3<T>::operator*=(const Matrix2x3<U>& rhs) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         const auto mat = *this * rhs;
+    //         _data[0]       = static_cast<Vector2<T>>(mat[0]);
+    //         _data[1]       = static_cast<Vector2<T>>(mat[1]);
+    //         return *this;
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic S>
+    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::operator/(const S& scalar) const noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         using R = PromotedValue_t<T, S>;
+    //         if constexpr (std::is_floating_point_v<R>)
+    //         {
+    //             FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+    //             R factor = R(1) / static_cast<R>(scalar);
+    //             return Matrix2x3<R>(_data[0] * factor, _data[1] * factor);
+    //         }
+    //         else
+    //         {
+    //             FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
+    //             R tScalar = static_cast<R>(scalar);
+    //             return Matrix2x3<R>(_data[0] / tScalar, _data[1] / tScalar);
+    //         }
+    //     }
+    //
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic S>
+    //     constexpr Matrix2x3<T>& Matrix2x3<T>::operator/=(const S& scalar) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         using R = Magnitude<PromotedValue_t<T, S>>;
+    //
+    //
+    //         FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+    //
+    //         R factor = R(1) / static_cast<R>(scalar);
+    //
+    //         _data[0][0] = static_cast<T>(static_cast<R>(_data[0][0]) * factor);
+    //         _data[1][0] = static_cast<T>(static_cast<R>(_data[1][0]) * factor);
+    //         _data[0][1] = static_cast<T>(static_cast<R>(_data[0][1]) * factor);
+    //         _data[1][1] = static_cast<T>(static_cast<R>(_data[1][1]) * factor);
+    //         return *this;
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic S>
+    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::safeDiv(const S scalar, const Matrix2x3& fallback) const
+    //     noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         using R = PromotedValue_t<T, S>;
+    //
+    //         if constexpr (std::is_floating_point_v<R>)
+    //         {
+    //             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
+    //             {
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //         }
+    //         if constexpr (std::is_integral_v<R>)
+    //         {
+    //             if (scalar == 0)
+    //             {
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //         }
+    //
+    //         return *this / scalar;
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic S>
+    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::safeDiv(const Matrix2x3& mat, const S scalar,
+    //                                                         const Matrix2x3& fallback) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         return mat.safeDiv(scalar, fallback);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic S>
+    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::tryDiv(const S scalar, OperationStatus& status,
+    //                                                        const Matrix2x3& fallback) const noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         using R = PromotedValue_t<T, S>;
+    //
+    //         if constexpr (std::is_floating_point_v<R>)
+    //         { // TODO: Check || vs | with benchmarks
+    //             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
+    //             {
+    //                 status = OperationStatus::NANOPERAND;
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
+    //             {
+    //                 status = OperationStatus::DIVISIONBYZERO;
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //         }
+    //
+    //         if constexpr (std::is_integral_v<R>)
+    //         {
+    //             if (scalar == 0)
+    //             {
+    //                 status = OperationStatus::DIVISIONBYZERO;
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //         }
+    //
+    //
+    //         status = OperationStatus::SUCCESS;
+    //         return *this / scalar;
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     template <StrictArithmetic S>
+    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::tryDiv(const Matrix2x3& mat, const S scalar, OperationStatus&
+    //     status,
+    //                                                        const Matrix2x3& fallback) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         return mat.tryDiv(scalar, status, fallback);
+    //     }
+    //
+    //
+    //
+    //
+    //     /**************************************
+    //      *                                    *
+    //      *           MATRIX ALGEBRA           *
+    //      *                                    *
+    //      **************************************/
+    //
+    //     template <Arithmetic T>
+    //     constexpr T Matrix2x3<T>::determinant() const noexcept
+    //         requires SignedStrictArithmetic<T>
+    //     {
+    //         return _data[0][0] * _data[1][1] - _data[0][1] * _data[1][0];
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr T Matrix2x3<T>::determinant(const Matrix2x3& matrix) noexcept
+    //         requires SignedStrictArithmetic<T>
+    //     {
+    //         return matrix.determinant();
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<T> Matrix2x3<T>::transpose() const noexcept
+    //     {
+    //         // NOTE: _data is a column major vector so _data[0][1] gives element at first row and zeroth column.
+    //         return Matrix2x3(_data[0][0], _data[0][1], _data[1][0], _data[1][1]);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<T> Matrix2x3<T>::transpose(const Matrix2x3& matrix) noexcept
+    //     {
+    //         return matrix.transpose();
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::inverse() const noexcept
+    //         requires SignedStrictArithmetic<T>
+    //     {
+    //         using R = Magnitude<T>;
+    //
+    //         T det = determinant();
+    //
+    //         if constexpr (std::is_floating_point_v<T>)
+    //         {
+    //             FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
+    //         }
+    //         else
+    //         {
+    //             FGM_ASSERT_MSG(fgm::abs(det) != T(0), messages::assertion::MAT_DET_DIV_BY_ZERO);
+    //         }
+    //
+    //         R factor = R(1) / det;
+    //
+    //         return Matrix2x3<R>(static_cast<R>(_data[1][1]) * factor, static_cast<R>(-_data[1][0]) * factor,
+    //                           static_cast<R>(-_data[0][1]) * factor, static_cast<R>(_data[0][0]) * factor);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::inverse(const Matrix2x3& matrix) noexcept
+    //         requires SignedStrictArithmetic<T>
+    //     {
+    //         return matrix.inverse();
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::safeInverse(const Matrix2x3& fallback) const noexcept
+    //         requires SignedStrictArithmetic<T>
+    //     {
+    //         using R = Magnitude<T>;
+    //
+    //         T det = determinant();
+    //         // TODO: Update to use directly compute inverse to reduce operation
+    //         // TODO: Do similar in code cleaning in tryInverse
+    //         if constexpr (std::is_floating_point_v<T>)
+    //         {
+    //             if (hasNaN() || fgm::abs(det) <= std::numeric_limits<T>::epsilon())
+    //             {
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //         }
+    //         if constexpr (std::is_integral_v<T>)
+    //         {
+    //             if (det == 0)
+    //             {
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //         }
+    //
+    //         return inverse();
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::safeInverseOf(const Matrix2x3& matrix, const Matrix2x3&
+    //     fallback) noexcept
+    //         requires SignedStrictArithmetic<T>
+    //     {
+    //         return matrix.safeInverse(fallback);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::tryInverse(OperationStatus& status,
+    //                                                            const Matrix2x3& fallback) const noexcept
+    //         requires SignedStrictArithmetic<T>
+    //     {
+    //         using R = Magnitude<T>;
+    //
+    //         T det = determinant();
+    //
+    //         if constexpr (std::is_floating_point_v<T>)
+    //         {
+    //             if (hasNaN())
+    //             {
+    //                 status = OperationStatus::NANOPERAND;
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //             if (fgm::abs(det) <= std::numeric_limits<T>::epsilon())
+    //             {
+    //                 status = OperationStatus::DIVISIONBYZERO;
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //         }
+    //
+    //         if constexpr (std::is_integral_v<T>)
+    //         {
+    //             if (det == 0)
+    //             {
+    //                 status = OperationStatus::DIVISIONBYZERO;
+    //                 return Matrix2x3<R>(fallback);
+    //             }
+    //         }
+    //
+    //
+    //         status = OperationStatus::SUCCESS;
+    //         return inverse();
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::tryInverseOf(const Matrix2x3& matrix, OperationStatus&
+    //     status,
+    //                                                              const Matrix2x3& fallback) noexcept
+    //         requires SignedStrictArithmetic<T>
+    //     {
+    //         return matrix.tryInverse(status, fallback);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr T Matrix2x3<T>::trace() const noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         return _data[0][0] + _data[1][1];
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr T Matrix2x3<T>::trace(const Matrix2x3& matrix) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         return matrix.trace();
+    //     }
+    //
+    //
+    //
+    //     /**************************************
+    //      *                                    *
+    //      *             UTILITIES              *
+    //      *                                    *
+    //      **************************************/
+    //
+    //     template <Arithmetic T>
+    //     constexpr bool Matrix2x3<T>::hasInf() const noexcept
+    //     {
+    //         return _data[0].hasInf() || _data[1].hasInf();
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr bool Matrix2x3<T>::hasInf(const Matrix2x3& matrix) noexcept
+    //     {
+    //         return matrix.hasInf();
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr bool Matrix2x3<T>::hasNaN() const noexcept
+    //     {
+    //         return _data[0].hasNaN() || _data[1].hasNaN();
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr bool Matrix2x3<T>::hasNaN(const Matrix2x3& matrix) noexcept
+    //     {
+    //         return matrix.hasNaN();
+    //     }
+    //
+    //
+    //
+    //
+    //     /**************************************
+    //      *                                    *
+    //      *       TRANSFORMATION FACTORIES     *
+    //      *                                    *
+    //      **************************************/
+    //
+    //     template <Arithmetic T>
+    //     template <std::floating_point U>
+    //     constexpr Matrix2x3<T> Matrix2x3<T>::makeRotation(const U angle) noexcept
+    //         requires SignedStrictArithmetic<T>
+    //     {
+    //         using R  = PromotedValue_t<T, U>;
+    //         R cosine = std::cos(angle);
+    //         R sine   = std::sin(angle);
+    // #ifdef FGM_LEFT_HANDED
+    //         return Matrix2x3(cosine, sine, -sine, cosine);
+    // #else
+    //         return Matrix2x3(cosine, -sine, sine, cosine);
+    // #endif
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<T> Matrix2x3<T>::makeScale(const T scale) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         return Matrix2x3(scale, T(0), T(0), scale);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<T> Matrix2x3<T>::makeScale(const T scaleX, const T scaleY) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         return Matrix2x3(scaleX, T(0), T(0), scaleY);
+    //     }
+    //
+    //
+    //     template <Arithmetic T>
+    //     constexpr Matrix2x3<T> Matrix2x3<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
+    //         requires StrictArithmetic<T>
+    //     {
+    //         return Matrix2x3(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1));
+    //     }
+
+} // namespace fgm
+
+
+#if defined(__clang__)
+    #pragma clang diagnostic pop
+#endif

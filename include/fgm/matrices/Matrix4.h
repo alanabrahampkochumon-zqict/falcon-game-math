@@ -1141,7 +1141,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat3x3_Log
+         * @addtogroup FGM_Mat4x4_Log
          * @{
          */
 

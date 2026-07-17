@@ -4,6 +4,8 @@ set(FGM_MAT_DIR "matrices/")
 set(FGM_MAT_HEADERS
         Matrix2.h
         Matrix2.tpp
+        Matrix2x3.h
+        Matrix2x3.tpp
         Matrix3.h
         Matrix3.tpp
         Matrix4.h

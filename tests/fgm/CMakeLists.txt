@@ -22,6 +22,7 @@ add_subdirectory(vectors/vector2)
 add_subdirectory(vectors/vector3)
 add_subdirectory(vectors/vector4)
 add_subdirectory(matrices/matrix2)
+add_subdirectory(matrices/matrix2x3)
 add_subdirectory(matrices/matrix4)
 add_subdirectory(matrices/matrix3)
 
@@ -67,6 +68,7 @@ target_link_libraries(
         Vector3Tests
         Vector4Tests
         Matrix2Tests
+        Matrix2x3Tests
         Matrix2TransformTests
         Matrix3Tests
         Matrix3TransformTests

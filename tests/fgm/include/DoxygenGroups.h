@@ -181,6 +181,30 @@
              */
 
             /**
+             * @defgroup FGM_Mat2x3_Tests 2x3 Matrix Test Suite
+             * @brief Verification of 2x3 matrix operations.
+             * @ingroup MatrixTests
+             * @{
+             *   @defgroup T_FGM_Mat2x3_Access Component Access
+             *   @defgroup T_FGM_Mat2x3_Mutation Component Mutation
+             *   @defgroup T_FGM_Mat2x3_Const Matrix Constants
+             *   @defgroup T_FGM_Mat2x3_Addition Addition
+             *   @defgroup T_FGM_Mat2x3_Subtraction Subtraction
+             *   @defgroup T_FGM_Mat2x3_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat2x3_Division Scalar Division
+             *   @defgroup T_FGM_Mat2x3_Transpose Matrix Transpose
+             *   @defgroup T_FGM_Mat2x3_Constant Matrix Constants
+             *   @defgroup T_FGM_Mat2x3_Equality Equality
+             *   @defgroup T_FGM_Mat2x3_Inequality  Inequality
+             *   @defgroup T_FGM_Mat2x3_Init Initialization
+             *   @defgroup T_FGM_Mat2x3_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Mat2x3_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Mat2x3_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat2x3_Utils Matrix Utilities
+             * @}
+             */
+
+            /**
              * @defgroup FGM_Mat3x3_Tests 3x3 Matrix Test Suite
              * @brief Verification of 3x3 square matrix operations.
              * @ingroup MatrixTests

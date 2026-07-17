@@ -17,6 +17,7 @@
 
 #include <fgm/common/MathTraits.h>
 #include <fgm/matrices/Matrix2.h>
+#include <fgm/matrices/Matrix2x3.h>
 #include <fgm/matrices/Matrix3.h>
 #include <fgm/matrices/Matrix4.h>
 
