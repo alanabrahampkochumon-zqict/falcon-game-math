@@ -187,6 +187,43 @@ namespace testutils
 
 
     /**
+     * @brief Validates that the provided matrix contains only '1' as element.
+     *
+     * @tparam T The type of the matrix.
+     *
+     * @param actual The matrix to verify as an identity matrix.
+     *
+     * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
+     *       if the matrix is not identity.
+     * @note Triggers an assertion failure if matrix dimensions are mismatched.
+     */
+    template <fgm::Matrix T>
+    void EXPECT_MAT_ONE(const T& actual)
+    {
+        using ValueType = T::value_type;
+
+        for (std::size_t i = 0; i < T::rows; ++i)
+        {
+            for (std::size_t j = 0; j < T::columns; ++j)
+            {
+                if constexpr (std::is_same_v<ValueType, double>)
+                {
+                    COMPARE_EQ(static_cast<double>(i == j), actual(i, j));
+                }
+                else if constexpr (std::is_same_v<ValueType, float>)
+                {
+                    COMPARE_EQ(static_cast<float>(i == j), actual(i, j));
+                }
+                else
+                {
+                    EXPECT_EQ(static_cast<int>(i == j), actual(i, j));
+                }
+            }
+        }
+    }
+
+
+    /**
      * @brief Validates that the provided matrix conforms to a zero matrix within a standard epsilon.
      *
      * @tparam T The type of the matrix.

@@ -16,10 +16,10 @@ template <typename T>
 class Matrix2x3ScalarMultiplication: public ::testing::Test
 {
 protected:
-    fgm::Matrix2x3<T> _mat;
+    fgm::Mat2x3<T> _mat;
     T _scalar;
-    fgm::Matrix2x3<T> _expectedFloatingMat;
-    fgm::Matrix2x3<T> _expectedIntegralMat;
+    fgm::Mat2x3<T> _expectedFloatingMat;
+    fgm::Mat2x3<T> _expectedIntegralMat;
 
 
 
@@ -53,10 +53,10 @@ TYPED_TEST_SUITE(Matrix2x3ScalarMultiplication, SupportedArithmeticTypes);
 /** @brief Verify that matrix multiplication operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix2x3 MAT1(1, 2, 3, 4, 5, 6);
+    constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
 
     // Verify matrix * scalar multiplication
-    constexpr fgm::Matrix2x3 BINARY_PRODUCT_1 = MAT1 * 2;
+    constexpr fgm::Mat2x3 BINARY_PRODUCT_1 = MAT1 * 2;
     static_assert(BINARY_PRODUCT_1(0, 0) == 2);
     static_assert(BINARY_PRODUCT_1(0, 1) == 4);
     static_assert(BINARY_PRODUCT_1(0, 2) == 6);
@@ -66,7 +66,7 @@ namespace
 
 
     // Verify scalar * matrix multiplication
-    constexpr fgm::Matrix2x3 BINARY_PRODUCT_2 = 2 * MAT1;
+    constexpr fgm::Mat2x3 BINARY_PRODUCT_2 = 2 * MAT1;
     static_assert(BINARY_PRODUCT_2(0, 0) == 2);
     static_assert(BINARY_PRODUCT_2(0, 1) == 4);
     static_assert(BINARY_PRODUCT_2(0, 2) == 6);
@@ -87,9 +87,9 @@ namespace
 /** @brief Verify that scalar multiplication by zero returns a zero matrix. */
 TEST(Matrix2x3ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 {
-    const fgm::Matrix2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
+    const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
-    const fgm::Matrix2x3 product = mat * 0;
+    const fgm::Mat2x3 product = mat * 0;
 
     EXPECT_MAT_ZERO(product);
 }
@@ -98,9 +98,9 @@ TEST(Matrix2x3ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 /** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix2x3ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 {
-    const fgm::Matrix2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
+    const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
-    const fgm::Matrix2x3 product = mat * 1;
+    const fgm::Mat2x3 product = mat * 1;
 
     EXPECT_MAT_EQ(mat, product);
 }
@@ -109,11 +109,11 @@ TEST(Matrix2x3ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 /** @brief Verify that scalar multiplication by one returns original matrix. */
 TEST(Matrix2x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
-    const fgm::Matrix2x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f };
-    const fgm::Matrix2x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f };
+    const fgm::Mat2x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f };
+    const fgm::Mat2x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f };
     const float scalar            = -2.0f;
 
-    const fgm::Matrix2x3<float> product = mat * scalar;
+    const fgm::Mat2x3<float> product = mat * scalar;
 
     EXPECT_MAT_EQ(expected, product);
 }
@@ -125,7 +125,7 @@ TEST(Matrix2x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
  */
 TYPED_TEST(Matrix2x3ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
 {
-    const fgm::Matrix2x3 product = this->_mat * this->_scalar;
+    const fgm::Mat2x3 product = this->_mat * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -144,7 +144,7 @@ TYPED_TEST(Matrix2x3ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
  */
 TYPED_TEST(Matrix2x3ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 {
-    const fgm::Matrix2x3 product = this->_scalar * this->_mat;
+    const fgm::Mat2x3 product = this->_scalar * this->_mat;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -184,7 +184,7 @@ TYPED_TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationPromotesT
 {
     const double scalar = 2.123456789123456;
 
-    [[maybe_unused]] const fgm::Matrix2x3 product = this->_mat * scalar;
+    [[maybe_unused]] const fgm::Mat2x3 product = this->_mat * scalar;
 
     static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
 }
@@ -196,7 +196,7 @@ TYPED_TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationPromotesT
  */
 TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
-    fgm::Matrix2x3 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f);
+    fgm::Mat2x3 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f);
     const double scalar = 5.0;
     mat *= scalar;
 
@@ -210,9 +210,9 @@ TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesN
  */
 TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    fgm::Matrix2x3 mat(3, -1, 10, 5, 50, 12);
+    fgm::Mat2x3 mat(3, -1, 10, 5, 50, 12);
     const double scalar = 2.5;
-    const fgm::Matrix2x3 expected(7, -2, 25, 12, 125, 30);
+    const fgm::Mat2x3 expected(7, -2, 25, 12, 125, 30);
 
     mat *= scalar;
 

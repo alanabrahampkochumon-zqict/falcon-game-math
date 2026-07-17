@@ -34,13 +34,13 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Matrix2x3<T>::Matrix2x3(T m00, T m01, T m02, T m10, T m11, T m12) noexcept
+    constexpr Mat2x3<T>::Mat2x3(T m00, T m01, T m02, T m10, T m11, T m12) noexcept
         : _data{ Vector2<T>(m00, m10), Vector2<T>(m01, m11), Vector2<T>(m02, m12) }
     {}
 
 
     template <Arithmetic T>
-    constexpr Matrix2x3<T>::Matrix2x3(const Vector2<T>& col0, const Vector2<T>& col1, const Vector2<T>& col2) noexcept
+    constexpr Mat2x3<T>::Mat2x3(const Vector2<T>& col0, const Vector2<T>& col1, const Vector2<T>& col2) noexcept
         : _data{ col0, col1, col2 }
     {}
 
@@ -48,7 +48,7 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Matrix2x3<T>::Matrix2x3(const Matrix2x3<U>& other) noexcept
+    constexpr Mat2x3<T>::Mat2x3(const Mat2x3<U>& other) noexcept
     {
         (*this)(0, 0) = static_cast<T>(other(0, 0));
         (*this)(0, 1) = static_cast<T>(other(0, 1));
@@ -65,28 +65,28 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector2<T>& Matrix2x3<T>::operator[](const std::size_t col) noexcept
+    constexpr Vector2<T>& Mat2x3<T>::operator[](const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
     template <Arithmetic T>
-    constexpr const Vector2<T>& Matrix2x3<T>::operator[](const std::size_t col) const noexcept
+    constexpr const Vector2<T>& Mat2x3<T>::operator[](const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < columns, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
     template <Arithmetic T>
-    constexpr T& Matrix2x3<T>::operator()(const std::size_t row, const std::size_t col) noexcept
+    constexpr T& Mat2x3<T>::operator()(const std::size_t row, const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < columns || row < rows, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
     template <Arithmetic T>
-    constexpr const T& Matrix2x3<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
+    constexpr const T& Mat2x3<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < columns || row < rows, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
@@ -102,7 +102,7 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2x3<T>::allEq(const Matrix2x3<U>& rhs, const double epsilon) const noexcept
+    constexpr bool Mat2x3<T>::allEq(const Mat2x3<U>& rhs, const double epsilon) const noexcept
     {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
@@ -123,14 +123,14 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2x3<T>::allEq(const Matrix2x3& lhs, const Matrix2x3<U>& rhs, const double epsilon) noexcept
+    constexpr bool Mat2x3<T>::allEq(const Mat2x3& lhs, const Mat2x3<U>& rhs, const double epsilon) noexcept
     { return lhs.allEq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2x3<T>::anyNeq(const Matrix2x3<U>& rhs, const double epsilon) const noexcept
+    constexpr bool Mat2x3<T>::anyNeq(const Mat2x3<U>& rhs, const double epsilon) const noexcept
     {
         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
@@ -151,21 +151,21 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2x3<T>::anyNeq(const Matrix2x3& lhs, const Matrix2x3<U>& rhs, const double epsilon) noexcept
+    constexpr bool Mat2x3<T>::anyNeq(const Mat2x3& lhs, const Mat2x3<U>& rhs, const double epsilon) noexcept
     { return lhs.anyNeq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2x3<T>::operator==(const Matrix2x3<U>& rhs) const noexcept
+    constexpr bool Mat2x3<T>::operator==(const Mat2x3<U>& rhs) const noexcept
     { return allEq(rhs); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Matrix2x3<T>::operator!=(const Matrix2x3<U>& rhs) const noexcept
+    constexpr bool Mat2x3<T>::operator!=(const Mat2x3<U>& rhs) const noexcept
     { return anyNeq(rhs); }
 
 
@@ -179,18 +179,18 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMatrix2x3<T, U> Matrix2x3<T>::operator+(const Matrix2x3<U>& rhs) const noexcept
+    constexpr PromotedMat2x3<T, U> Mat2x3<T>::operator+(const Mat2x3<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
-        return Matrix2x3<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + rhs[2]);
+        return Mat2x3<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + rhs[2]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    Matrix2x3<T>& Matrix2x3<T>::operator+=(const Matrix2x3<U>& rhs) noexcept
+    Mat2x3<T>& Mat2x3<T>::operator+=(const Mat2x3<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] += rhs[0];
@@ -203,18 +203,18 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMatrix2x3<T, U> Matrix2x3<T>::operator-(const Matrix2x3<U>& rhs) const noexcept
+    constexpr PromotedMat2x3<T, U> Mat2x3<T>::operator-(const Mat2x3<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
-        return Matrix2x3<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2]);
+        return Mat2x3<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Matrix2x3<T>& Matrix2x3<T>::operator-=(const Matrix2x3<U>& rhs) noexcept
+    constexpr Mat2x3<T>& Mat2x3<T>::operator-=(const Mat2x3<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] -= rhs[0];
@@ -226,17 +226,17 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::operator*(const S scalar) const noexcept
+    constexpr PromotedMat2x3<T, S> Mat2x3<T>::operator*(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
-        return Matrix2x3<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2]);
+        return Mat2x3<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2]);
     }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Matrix2x3<T>& Matrix2x3<T>::operator*=(const S scalar) noexcept
+    constexpr Mat2x3<T>& Mat2x3<T>::operator*=(const S scalar) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] *= scalar;
@@ -244,156 +244,134 @@ namespace fgm
         _data[2] *= scalar;
         return *this;
     }
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat2x3<T, S> Mat2x3<T>::operator/(S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            R factor = R(1) / static_cast<R>(scalar);
+            return Mat2x3<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor);
+        }
+        else
+        {
+            FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
+            R tScalar = static_cast<R>(scalar);
+            return Mat2x3<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar);
+        }
+    }
 
 
     template <StrictArithmetic T, StrictArithmetic S>
-    constexpr PromotedMatrix2x3<T, S> operator*(S scalar, const Matrix2x3<T>& matrix) noexcept
+    constexpr PromotedMat2x3<T, S> operator*(S scalar, const Mat2x3<T>& matrix) noexcept
         requires StrictArithmetic<T>
     { return matrix * scalar; }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Mat2x3<T>& Mat2x3<T>::operator/=(const S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = Magnitude<PromotedValue_t<T, S>>;
+
+        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+
+        R factor = R(1) / static_cast<R>(scalar);
+
+        _data[0][0] = static_cast<T>(static_cast<R>(_data[0][0]) * factor);
+        _data[1][0] = static_cast<T>(static_cast<R>(_data[1][0]) * factor);
+        _data[2][0] = static_cast<T>(static_cast<R>(_data[2][0]) * factor);
+        _data[0][1] = static_cast<T>(static_cast<R>(_data[0][1]) * factor);
+        _data[1][1] = static_cast<T>(static_cast<R>(_data[1][1]) * factor);
+        _data[2][1] = static_cast<T>(static_cast<R>(_data[2][1]) * factor);
+        return *this;
+    }
 
 
-    // template <Arithmetic T>
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // constexpr PromotedMatrix2<T, U> operator*(const Matrix3x2<U>& rhs) const noexcept
-    //     requires StrictArithmetic<T>
-    // {
-    //     using R = PromotedValue_t<T, U>;
-    //     return Matrix2x3<R>(*this * rhs[0], *this * rhs[1]);
-    // }
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat2x3<T, S> Mat2x3<T>::safeDiv(const S scalar, const Mat2x3& fallback) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
+            {
+                return Mat2x3<R>(fallback);
+            }
+        }
+        if constexpr (std::is_integral_v<R>)
+        {
+            if (scalar == 0)
+            {
+                return Mat2x3<R>(fallback);
+            }
+        }
+
+        return *this / scalar;
+    }
 
 
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::operator/(const S& scalar) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
-    //             R factor = R(1) / static_cast<R>(scalar);
-    //             return Matrix2x3<R>(_data[0] * factor, _data[1] * factor);
-    //         }
-    //         else
-    //         {
-    //             FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
-    //             R tScalar = static_cast<R>(scalar);
-    //             return Matrix2x3<R>(_data[0] / tScalar, _data[1] / tScalar);
-    //         }
-    //     }
-    //
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr Matrix2x3<T>& Matrix2x3<T>::operator/=(const S& scalar) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = Magnitude<PromotedValue_t<T, S>>;
-    //
-    //
-    //         FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
-    //
-    //         R factor = R(1) / static_cast<R>(scalar);
-    //
-    //         _data[0][0] = static_cast<T>(static_cast<R>(_data[0][0]) * factor);
-    //         _data[1][0] = static_cast<T>(static_cast<R>(_data[1][0]) * factor);
-    //         _data[0][1] = static_cast<T>(static_cast<R>(_data[0][1]) * factor);
-    //         _data[1][1] = static_cast<T>(static_cast<R>(_data[1][1]) * factor);
-    //         return *this;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::safeDiv(const S scalar, const Matrix2x3& fallback) const
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
-    //             {
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //         }
-    //         if constexpr (std::is_integral_v<R>)
-    //         {
-    //             if (scalar == 0)
-    //             {
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //         }
-    //
-    //         return *this / scalar;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::safeDiv(const Matrix2x3& mat, const S scalar,
-    //                                                         const Matrix2x3& fallback) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         return mat.safeDiv(scalar, fallback);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::tryDiv(const S scalar, OperationStatus& status,
-    //                                                        const Matrix2x3& fallback) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         { // TODO: Check || vs | with benchmarks
-    //             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
-    //             {
-    //                 status = OperationStatus::NANOPERAND;
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //         }
-    //
-    //         if constexpr (std::is_integral_v<R>)
-    //         {
-    //             if (scalar == 0)
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //         }
-    //
-    //
-    //         status = OperationStatus::SUCCESS;
-    //         return *this / scalar;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::tryDiv(const Matrix2x3& mat, const S scalar, OperationStatus&
-    //     status,
-    //                                                        const Matrix2x3& fallback) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         return mat.tryDiv(scalar, status, fallback);
-    //     }
-    //
-    //
-    //
-    //
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat2x3<T, S> Mat2x3<T>::safeDiv(const Mat2x3& mat, const S scalar,
+                                                      const Mat2x3& fallback) noexcept
+        requires StrictArithmetic<T>
+    { return mat.safeDiv(scalar, fallback); }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat2x3<T, S> Mat2x3<T>::tryDiv(const S scalar, OperationStatus& status,
+                                                     const Mat2x3& fallback) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        { // TODO: Check || vs | with benchmarks
+            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
+            {
+                status = OperationStatus::NANOPERAND;
+                return Mat2x3<R>(fallback);
+            }
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Mat2x3<R>(fallback);
+            }
+        }
+
+        if constexpr (std::is_integral_v<R>)
+        {
+            if (scalar == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Mat2x3<R>(fallback);
+            }
+        }
+
+
+        status = OperationStatus::SUCCESS;
+        return *this / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat2x3<T, S> Mat2x3<T>::tryDiv(const Mat2x3& mat, const S scalar, OperationStatus& status,
+                                                     const Mat2x3& fallback) noexcept
+        requires StrictArithmetic<T>
+    { return mat.tryDiv(scalar, status, fallback); }
+
+
+
     //     /**************************************
     //      *                                    *
     //      *           MATRIX ALGEBRA           *
@@ -572,22 +550,22 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    constexpr bool Matrix2x3<T>::hasInf() const noexcept
+    constexpr bool Mat2x3<T>::hasInf() const noexcept
     { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf(); }
 
 
     template <Arithmetic T>
-    constexpr bool Matrix2x3<T>::hasInf(const Matrix2x3& matrix) noexcept
+    constexpr bool Mat2x3<T>::hasInf(const Mat2x3& matrix) noexcept
     { return matrix.hasInf(); }
 
 
     template <Arithmetic T>
-    constexpr bool Matrix2x3<T>::hasNaN() const noexcept
+    constexpr bool Mat2x3<T>::hasNaN() const noexcept
     { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN(); }
 
 
     template <Arithmetic T>
-    constexpr bool Matrix2x3<T>::hasNaN(const Matrix2x3& matrix) noexcept
+    constexpr bool Mat2x3<T>::hasNaN(const Mat2x3& matrix) noexcept
     { return matrix.hasNaN(); }
 
     //

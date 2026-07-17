@@ -23,7 +23,7 @@ template <typename T>
     requires std::floating_point<T>
 struct Matrix2x3UtilityParams
 {
-    fgm::Matrix2x3<T> mat;
+    fgm::Mat2x3<T> mat;
     bool expected;
 };
 /** @brief Test fixture for @ref fgm::Matrix2x3 infinity checker, parameterized by @ref VectorUtilityParams */
@@ -56,8 +56,8 @@ TYPED_TEST_SUITE(Matrix2x3IntegralUtility, SupportedIntegralTypes);
 
 namespace
 {
-    constexpr fgm::Matrix2x3 INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
-    constexpr fgm::Matrix2x3 MAT(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+    constexpr fgm::Mat2x3 INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+    constexpr fgm::Mat2x3 MAT(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 
 
     /** @brief Verify that the matrix hasNaN utility is available at compile time. */
@@ -67,7 +67,7 @@ namespace
         static_assert(MAT.hasNaN() == false);
 
         // Static functions
-        static_assert(fgm::Matrix2x3<float>::hasNaN(MAT) == false);
+        static_assert(fgm::Mat2x3<float>::hasNaN(MAT) == false);
     } // namespace
 
 
@@ -79,8 +79,8 @@ namespace
         static_assert(MAT.hasInf() == false);
 
         // Static functions
-        static_assert(fgm::Matrix2x3<float>::hasInf(INF_MAT) == true);
-        static_assert(fgm::Matrix2x3<float>::hasInf(MAT) == false);
+        static_assert(fgm::Mat2x3<float>::hasInf(INF_MAT) == true);
+        static_assert(fgm::Mat2x3<float>::hasInf(MAT) == false);
     } // namespace
 
 } // namespace
@@ -104,24 +104,24 @@ TEST_P(Matrix2x3InfChecker, ReturnTrueIfAnyElementIsInfinity)
 INSTANTIATE_TEST_SUITE_P(
     Matrix2x3InfCheckerTestSuite, Matrix2x3InfChecker,
     ::testing::Values(
-        Matrix2x3UtilityParams{ fgm::Matrix2x3(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
-        Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-        Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-        Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-        Matrix2x3UtilityParams{ fgm::Matrix2x3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+        Matrix2x3UtilityParams{ fgm::Mat2x3(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
+        Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
+        Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
+        Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
+        Matrix2x3UtilityParams{ fgm::Mat2x3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                                fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                                fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
                                 true },
-        Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
+        Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std:: Matrix2x3::hasInf returns `false` for integral types. */
 TYPED_TEST(Matrix2x3IntegralUtility, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Matrix2x3(value, value, value, value, value, value).hasInf());
+    EXPECT_FALSE(fgm::Mat2x3(value, value, value, value, value, value).hasInf());
 }
 
 
@@ -132,7 +132,7 @@ TYPED_TEST(Matrix2x3IntegralUtility, HasInf_ReturnsFalseForIntegrals)
 TEST_P(Matrix2x3InfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Matrix2x3<float>::hasInf(mat));
+    EXPECT_EQ(expected, fgm::Mat2x3<float>::hasInf(mat));
 }
 
 
@@ -140,7 +140,7 @@ TEST_P(Matrix2x3InfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 TYPED_TEST(Matrix2x3IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Matrix2x3<TypeParam>::hasInf(fgm::Matrix2x3(value, value, value, value, value, value)));
+    EXPECT_FALSE(fgm::Mat2x3<TypeParam>::hasInf(fgm::Mat2x3(value, value, value, value, value, value)));
 }
 
 
@@ -161,24 +161,24 @@ TEST_P(Matrix2x3NaNChecker, ReturnTrueIfAnyElementIsNaN)
 }
 INSTANTIATE_TEST_SUITE_P(
     Matrix2x3NaNCheckerTestSuite, Matrix2x3NaNChecker,
-    ::testing::Values(Matrix2x3UtilityParams{ fgm::Matrix2x3(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-                      Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
-                      Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-                      Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                      Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      Matrix2x3UtilityParams{ fgm::Matrix2x3(fgm::constants::NaN, fgm::constants::NaN,
+    ::testing::Values(Matrix2x3UtilityParams{ fgm::Mat2x3(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+                      Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
+                      Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+                      Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
+                      Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+                      Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
+                      Matrix2x3UtilityParams{ fgm::Mat2x3(fgm::constants::NaN, fgm::constants::NaN,
                                                              fgm::constants::NaN, fgm::constants::NaN,
                                                              fgm::constants::NaN, fgm::constants::NaN),
                                               true },
-                      Matrix2x3UtilityParams{ fgm::Matrix2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
+                      Matrix2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std:: Matrix2x3::hasNaN returns `false` for integral types. */
 TYPED_TEST(Matrix2x3IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Matrix2x3(value, value, value, value, value, value).hasNaN());
+    EXPECT_FALSE(fgm::Mat2x3(value, value, value, value, value, value).hasNaN());
 }
 
 
@@ -189,7 +189,7 @@ TYPED_TEST(Matrix2x3IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 TEST_P(Matrix2x3NaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Matrix2x3<float>::hasNaN(mat));
+    EXPECT_EQ(expected, fgm::Mat2x3<float>::hasNaN(mat));
 }
 
 
@@ -197,7 +197,7 @@ TEST_P(Matrix2x3NaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 TYPED_TEST(Matrix2x3IntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Matrix2x3<TypeParam>::hasNaN(fgm::Matrix2x3(value, value, value, value, value, value)));
+    EXPECT_FALSE(fgm::Mat2x3<TypeParam>::hasNaN(fgm::Mat2x3(value, value, value, value, value, value)));
 }
 
 /** @} */

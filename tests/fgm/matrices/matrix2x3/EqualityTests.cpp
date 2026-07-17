@@ -24,9 +24,9 @@ template <typename T>
 class Matrix2x3Equality: public ::testing::Test
 {
 protected:
-    fgm::Matrix2x3<T> _eqMatA;
-    fgm::Matrix2x3<T> _eqMatB;
-    fgm::Matrix2x3<T> _dissimilarMat;
+    fgm::Mat2x3<T> _eqMatA;
+    fgm::Mat2x3<T> _eqMatB;
+    fgm::Mat2x3<T> _dissimilarMat;
 
 
     void SetUp() override
@@ -64,13 +64,13 @@ TYPED_TEST_SUITE(Matrix2x3Equality, SupportedArithmeticTypes);
 namespace
 {
 
-    constexpr fgm::Matrix2x3 MAT1(1, 2, 3, 4, 5, 6);
-    constexpr fgm::Matrix2x3 MAT2(1, 2, 3, 4, 5, 6);
-    constexpr fgm::Matrix2x3 MAT3(4, 2, 2, 4, 5, 6);
-    constexpr fgm::Matrix2x3 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+    constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
+    constexpr fgm::Mat2x3 MAT2(1, 2, 3, 4, 5, 6);
+    constexpr fgm::Mat2x3 MAT3(4, 2, 2, 4, 5, 6);
+    constexpr fgm::Mat2x3 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                       -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                       fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
-    constexpr fgm::Matrix2x3 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+    constexpr fgm::Mat2x3 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                       -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                       fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
 
@@ -85,9 +85,9 @@ namespace
 
 
         // Static functions
-        static_assert(fgm::Matrix2x3<int>::allEq(MAT1, MAT2) == true);
-        static_assert(fgm::Matrix2x3<int>::allEq(MAT1, MAT3) == false);
-        static_assert(fgm::Matrix2x3<float>::allEq(INF_MAT1, INF_MAT2) == true);
+        static_assert(fgm::Mat2x3<int>::allEq(MAT1, MAT2) == true);
+        static_assert(fgm::Mat2x3<int>::allEq(MAT1, MAT3) == false);
+        static_assert(fgm::Mat2x3<float>::allEq(INF_MAT1, INF_MAT2) == true);
 
     } // namespace
 
@@ -121,7 +121,7 @@ TYPED_TEST(Matrix2x3Equality, Equality_DifferentMatricesReturnFalse)
 /** @brief Verify that the static variant of fgm::Matrix2x3::allEq for identical matrices. */
 TYPED_TEST(Matrix2x3Equality, StaticWrapper_Equality_IdenticalMatricesReturnTrue)
 {
-    const bool equality = fgm::Matrix2x3<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
+    const bool equality = fgm::Mat2x3<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
 
     EXPECT_TRUE(equality);
 }
@@ -130,7 +130,7 @@ TYPED_TEST(Matrix2x3Equality, StaticWrapper_Equality_IdenticalMatricesReturnTrue
 /** @brief Verify that the static variant of fgm::Matrix2x3::allEq for different matrices. */
 TYPED_TEST(Matrix2x3Equality, StaticWrapper_Equality_DifferentMatricesReturnFalse)
 {
-    const bool equality = fgm::Matrix2x3<TypeParam>::allEq(this->_eqMatA, this->_dissimilarMat);
+    const bool equality = fgm::Mat2x3<TypeParam>::allEq(this->_eqMatA, this->_dissimilarMat);
 
     EXPECT_FALSE(equality);
 }
@@ -139,8 +139,8 @@ TYPED_TEST(Matrix2x3Equality, StaticWrapper_Equality_DifferentMatricesReturnFals
 /** @brief Verify that fgm::Matrix2x3::allEq follows IEEE 754 for NaN comparisons. */
 TEST(Matrix2x3Equality, NanEqualityReturnsFalse)
 {
-    const fgm::Matrix2x3 matA(NAN_F, NAN_F, NAN_F, NAN_F, NAN_F, 1.0f);
-    const fgm::Matrix2x3 matB(1.0f, -5.88874789f, 2.0f, 0.888749f, 0.5329f, 5.23193f);
+    const fgm::Mat2x3 matA(NAN_F, NAN_F, NAN_F, NAN_F, NAN_F, 1.0f);
+    const fgm::Mat2x3 matB(1.0f, -5.88874789f, 2.0f, 0.888749f, 0.5329f, 5.23193f);
 
     const bool equality = matA.allEq(matB);
 
@@ -151,8 +151,8 @@ TEST(Matrix2x3Equality, NanEqualityReturnsFalse)
 /** @brief Verify that fgm::Matrix2x3::allEq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix2x3Equality, InfinityEquality_IdenticalMatricesReturnTrue)
 {
-    const fgm::Matrix2x3 matA(INF, -INF, INF, -INF, -INF, INF);
-    const fgm::Matrix2x3 matB(INF, -INF, INF, -INF, -INF, INF);
+    const fgm::Mat2x3 matA(INF, -INF, INF, -INF, -INF, INF);
+    const fgm::Mat2x3 matB(INF, -INF, INF, -INF, -INF, INF);
 
     const bool equality = matA.allEq(matB);
 
@@ -163,8 +163,8 @@ TEST(Matrix2x3Equality, InfinityEquality_IdenticalMatricesReturnTrue)
 /** @brief Verify that fgm::Matrix2x3::allEq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix2x3Equality, InfinityEquality_DifferentMatricesReturnFalse)
 {
-    const fgm::Matrix2x3 matA(INF, -INF, INF, -INF, INF, INF);
-    const fgm::Matrix2x3 matB(-INF, -INF, INF, INF, INF, INF);
+    const fgm::Mat2x3 matA(INF, -INF, INF, -INF, INF, INF);
+    const fgm::Mat2x3 matB(-INF, -INF, INF, INF, INF, INF);
 
     const bool equality = matA.allEq(matB);
 
@@ -174,8 +174,8 @@ TEST(Matrix2x3Equality, InfinityEquality_DifferentMatricesReturnFalse)
 /** @brief Verify that fgm::Matrix2x3::allEq works for different vector types with identical components. */
 TYPED_TEST(Matrix2x3Equality, MixedType_Equality_IdenticalMatricesReturnTrue)
 {
-    const fgm::Matrix2x3 matA(1, 2, 3, 4, 5, 6);
-    const fgm::Matrix2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
+    const fgm::Mat2x3 matA(1, 2, 3, 4, 5, 6);
+    const fgm::Mat2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 
     const bool equality = matA.allEq(matB);
 
@@ -186,8 +186,8 @@ TYPED_TEST(Matrix2x3Equality, MixedType_Equality_IdenticalMatricesReturnTrue)
 /** @brief Verify that fgm::Matrix2x3::allEq works for different vector types with different components. */
 TYPED_TEST(Matrix2x3Equality, MixedType_Equality_DifferentMatricesReturnFalse)
 {
-    const fgm::Matrix2x3 matA(5, 6, 7, 8, 9, 10);
-    const fgm::Matrix2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
+    const fgm::Mat2x3 matA(5, 6, 7, 8, 9, 10);
+    const fgm::Mat2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 
     const bool equality = matA.allEq(matB);
 
@@ -218,8 +218,8 @@ TYPED_TEST(Matrix2x3Equality, EqualityOperator_DifferentMatricesReturnFalse)
 /** @brief Verify that the equality operator works for bool matrix with identical components. */
 TEST(Matrix2x3Equality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
 {
-    const fgm::Matrix2x3 matA(true, false, true, false, false, true);
-    const fgm::Matrix2x3 matB(true, false, true, false, false, true);
+    const fgm::Mat2x3 matA(true, false, true, false, false, true);
+    const fgm::Mat2x3 matB(true, false, true, false, false, true);
 
     const bool equality = matA == matB;
 
@@ -230,8 +230,8 @@ TEST(Matrix2x3Equality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
 /** @brief Verify that the equality operator works for bool matrix with different components. */
 TEST(Matrix2x3Equality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
 {
-    const fgm::Matrix2x3 matA(true, false, false, true, false, false);
-    const fgm::Matrix2x3 matB(true, true, false, true, true, false);
+    const fgm::Mat2x3 matA(true, false, false, true, false, false);
+    const fgm::Mat2x3 matB(true, true, false, true, true, false);
 
     const bool equality = matA == matB;
 
@@ -263,9 +263,9 @@ namespace
 
 
     // Static functions
-    static_assert(fgm::Matrix2x3<int>::anyNeq(MAT1, MAT2) == false);
-    static_assert(fgm::Matrix2x3<int>::anyNeq(MAT1, MAT3) == true);
-    static_assert(fgm::Matrix2x3<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
+    static_assert(fgm::Mat2x3<int>::anyNeq(MAT1, MAT2) == false);
+    static_assert(fgm::Mat2x3<int>::anyNeq(MAT1, MAT3) == true);
+    static_assert(fgm::Mat2x3<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
 
 } // namespace
 
@@ -298,7 +298,7 @@ TYPED_TEST(Matrix2x3Equality, Inequality_DifferentMatricesReturnTrue)
 /** @brief Verify that the static variant of fgm::Matrix2x3::anyNeq for identical matrices. */
 TYPED_TEST(Matrix2x3Equality, StaticWrapper_Inequality_IdenticalMatricesReturnFalse)
 {
-    const bool inequality = fgm::Matrix2x3<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
+    const bool inequality = fgm::Mat2x3<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
 
     EXPECT_FALSE(inequality);
 }
@@ -307,7 +307,7 @@ TYPED_TEST(Matrix2x3Equality, StaticWrapper_Inequality_IdenticalMatricesReturnFa
 /** @brief Verify that the static variant of fgm::Matrix2x3::anyNeq for different matrices. */
 TYPED_TEST(Matrix2x3Equality, StaticWrapper_Inequality_DifferentMatricesReturnTrue)
 {
-    const bool inequality = fgm::Matrix2x3<TypeParam>::anyNeq(this->_eqMatA, this->_dissimilarMat);
+    const bool inequality = fgm::Mat2x3<TypeParam>::anyNeq(this->_eqMatA, this->_dissimilarMat);
 
     EXPECT_TRUE(inequality);
 }
@@ -316,8 +316,8 @@ TYPED_TEST(Matrix2x3Equality, StaticWrapper_Inequality_DifferentMatricesReturnTr
 /** @brief Verify that fgm::Matrix2x3::anyNeq follows IEEE 754 for NaN comparisons. */
 TEST(Matrix2x3Equality, NanInequalityReturnsTrue)
 {
-    const fgm::Matrix2x3 matA(NAN_F, NAN_F, NAN_F, NAN_F, NAN_F, NAN_F);
-    const fgm::Matrix2x3 matB(1.0f, -5.88874789f, INF, -INF, INF, NAN_F);
+    const fgm::Mat2x3 matA(NAN_F, NAN_F, NAN_F, NAN_F, NAN_F, NAN_F);
+    const fgm::Mat2x3 matB(1.0f, -5.88874789f, INF, -INF, INF, NAN_F);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -328,8 +328,8 @@ TEST(Matrix2x3Equality, NanInequalityReturnsTrue)
 /** @brief Verify that fgm::Matrix2x3::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix2x3Equality, InfinityInequality_IdenticalMatricesReturnFalse)
 {
-    const fgm::Matrix2x3 matA(INF, -INF, INF, -INF, INF, INF);
-    const fgm::Matrix2x3 matB(INF, -INF, INF, -INF, INF, INF);
+    const fgm::Mat2x3 matA(INF, -INF, INF, -INF, INF, INF);
+    const fgm::Mat2x3 matB(INF, -INF, INF, -INF, INF, INF);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -340,8 +340,8 @@ TEST(Matrix2x3Equality, InfinityInequality_IdenticalMatricesReturnFalse)
 /** @brief Verify that fgm::Matrix2x3::anyNeq follows IEEE 754 for INFINITY comparisons. */
 TEST(Matrix2x3Equality, InfinityInequality_DifferentMatricesReturnTrue)
 {
-    const fgm::Matrix2x3 matA(-INF, INF, INF, -INF, INF, -INF);
-    const fgm::Matrix2x3 matB(INF, INF, -INF, -INF, INF, INF);
+    const fgm::Mat2x3 matA(-INF, INF, INF, -INF, INF, -INF);
+    const fgm::Mat2x3 matB(INF, INF, -INF, -INF, INF, INF);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -352,8 +352,8 @@ TEST(Matrix2x3Equality, InfinityInequality_DifferentMatricesReturnTrue)
 /** @brief Verify that fgm::Matrix2x3::anyNeq works for different vector types with identical components. */
 TYPED_TEST(Matrix2x3Equality, MixedType_Inequality_IdenticalMatricesReturnFalse)
 {
-    const fgm::Matrix2x3 matA(1, 2, 3, 4, 5, 6);
-    const fgm::Matrix2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
+    const fgm::Mat2x3 matA(1, 2, 3, 4, 5, 6);
+    const fgm::Mat2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -364,8 +364,8 @@ TYPED_TEST(Matrix2x3Equality, MixedType_Inequality_IdenticalMatricesReturnFalse)
 /** @brief Verify that fgm::Matrix2x3::anyNeq works for different vector types with different components. */
 TYPED_TEST(Matrix2x3Equality, MixedType_Inequality_DifferentMatricesReturnTrue)
 {
-    const fgm::Matrix2x3 matA(5, 6, 7, 8, 10, 11);
-    const fgm::Matrix2x3 matB(1.0, 2.0, 7.0, 8.0, 9.0, 10.0);
+    const fgm::Mat2x3 matA(5, 6, 7, 8, 10, 11);
+    const fgm::Mat2x3 matB(1.0, 2.0, 7.0, 8.0, 9.0, 10.0);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -394,8 +394,8 @@ TYPED_TEST(Matrix2x3Equality, InEqualityOperator_DifferentMatricesReturnTrue)
 /** @brief Verify that the inequality operator works for fgm::Matrix2x3<bool> with identical components. */
 TEST(Matrix2x3Equality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 {
-    const fgm::Matrix2x3 matA(true, false, false, true, false, false);
-    const fgm::Matrix2x3 matB(true, false, false, true, false, false);
+    const fgm::Mat2x3 matA(true, false, false, true, false, false);
+    const fgm::Mat2x3 matB(true, false, false, true, false, false);
 
     const bool inequality = matA != matB;
 
@@ -406,8 +406,8 @@ TEST(Matrix2x3Equality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 /** @brief Verify that the inequality operator works for fgm::Matrix2x3<bool> with different components. */
 TEST(Matrix2x3Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
 {
-    const fgm::Matrix2x3 matA(true, false, true, false, false, true);
-    const fgm::Matrix2x3 matB(true, true, false, true, false, true);
+    const fgm::Mat2x3 matA(true, false, true, false, false, true);
+    const fgm::Mat2x3 matB(true, true, false, true, false, true);
 
     const bool inequality = matA != matB;
 
