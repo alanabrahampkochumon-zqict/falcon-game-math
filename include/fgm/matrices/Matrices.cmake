@@ -10,5 +10,7 @@ set(FGM_MAT_HEADERS
         Matrix3.tpp
         Matrix4.h
         Matrix4.tpp
+#        MatMul.h
+#        MatMul.tpp
 )
 list(TRANSFORM FGM_MAT_HEADERS PREPEND ${FGM_MAT_DIR})

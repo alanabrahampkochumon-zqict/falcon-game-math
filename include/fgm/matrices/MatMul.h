@@ -16,7 +16,104 @@
 #include "Matrix2.h"
 #include "Matrix3.h"
 #include "Matrix4.h"
-///TODO: Not implemented or tested
+
+
+// TODO: Use transpose from here
+//     /**
+//      * @addtogroup FGM_Mat2x3_Algebra
+//      * @{
+//      */
+//
+//     /**
+//      * @brief Transpose this matrix by swapping its rows and columns.
+//      *        \f$
+//      *            \begin{bmatrix}
+//      *                 A_{00} & A_{01} \\
+//      *                 A_{10} & A_{11}
+//      *            \end{bmatrix} ^ \top
+//      *            =
+//      *            \begin{bmatrix}
+//      *                 A_{00} & A_{10} \\
+//      *                 A_{01} & A_{11}
+//      *            \end{bmatrix}
+//      *        \f$
+//      *
+//      * @return A new @ref Mat2x3 with its elements flipped along the diagonal.
+//      */
+//     [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+//     constexpr Mat2x3 transpose() const noexcept;
+//
+//
+//     /**
+//      * @brief Transpose @p matrix by swapping its rows and columns.
+//      *        \f$
+//      *            \begin{bmatrix}
+//      *                 A_{00} & A_{01} \\
+//      *                 A_{10} & A_{11}
+//      *            \end{bmatrix} ^ \top
+//      *            =
+//      *            \begin{bmatrix}
+//      *                 A_{00} & A_{10} \\
+//      *                 A_{01} & A_{11}
+//      *            \end{bmatrix}
+//      *        \f$
+//      *
+//      * @param matrix The matrix to transpose.
+//      *
+//      * @return A new @ref Mat2x3 with its elements flipped along the diagonal.
+//      */
+//     [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+//     static constexpr Mat2x3 transpose(const Mat2x3& matrix) noexcept;
+//
+//     /** @} */
+
+
+//
+//
+//
+//     /**
+//      * @addtogroup FGM_Mat2x3_Log
+//      * @{
+//      */
+//
+//     /**
+//      * @brief Write the matrix to an output stream in **row-major** order.
+//      *        Format the matrix as
+//      *        \f$
+//      *            \begin{bmatrix}
+//      *                 A_{00} & A_{10} \\
+//      *                 A_{01} & A_{11}
+//      *            \end{bmatrix}
+//      *        \f$ string representation for debugging or logging.
+//      *
+//      * @param os     The output stream to write to.
+//      * @param matrix The matrix to be streamed.
+//      *
+//      * @return A reference to the output stream @p os.
+//      */
+//     friend std::ostream& operator<<(std::ostream& os, const Mat2x3& matrix)
+//     {
+//         const std::streamsize oldPrecision     = os.precision();
+//         const std::ios_base::fmtflags oldFlags = os.flags();
+//
+//         auto precision = Config::useFullPrecision
+//             ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+//             : Config::LOG_PRECISION;
+//         os << std::setprecision(precision) << std::fixed;
+//         os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << "|\n";
+//         os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << "|\n";
+//
+//         os.precision(oldPrecision);
+//         os.flags(oldFlags);
+//
+//         return os;
+//     }
+//
+//     /** @} */
+//
+
+
+/// TODO: Not implemented or tested
 // TODO: Add Groups
 // TODO: Add Implementation
 // Implementations
