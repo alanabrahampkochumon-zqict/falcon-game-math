@@ -2,6 +2,7 @@ add_library(Matrix2x3Tests OBJECT)
 
 target_sources(
         Matrix2x3Tests PRIVATE
+        AccessAndMutationTests.cpp
         InitializationTests.cpp
 )
 
