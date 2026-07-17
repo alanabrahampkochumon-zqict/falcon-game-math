@@ -93,99 +93,99 @@ namespace fgm
     }
 
 
-    //     /***************************************
-    //      *                                     *
-    //      *             EQUALITY                *
-    //      *                                     *
-    //      ***************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Matrix2x3<T>::allEq(const Matrix2x3<U>& rhs, const double epsilon) const noexcept
-    //     {
-    //         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
-    //         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
-    //         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
-    // #ifdef _MSC_VER
-    //         if (std::is_constant_evaluated())
-    //         {
-    //             if (hasNaN() || rhs.hasNaN())
-    //             {
-    //                 return false;
-    //             }
-    //         }
-    // #endif
-    //         return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Matrix2x3<T>::allEq(const Matrix2x3& lhs, const Matrix2x3<U>& rhs, const double epsilon)
-    //     noexcept
-    //     {
-    //         return lhs.allEq(rhs, epsilon);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Matrix2x3<T>::anyNeq(const Matrix2x3<U>& rhs, const double epsilon) const noexcept
-    //     {
-    //         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
-    //         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
-    //         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
-    // #ifdef _MSC_VER
-    //         if (std::is_constant_evaluated())
-    //         {
-    //             if (hasNaN() || rhs.hasNaN())
-    //             {
-    //                 return true;
-    //             }
-    //         }
-    // #endif
-    //         return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Matrix2x3<T>::anyNeq(const Matrix2x3& lhs, const Matrix2x3<U>& rhs, const double epsilon)
-    //     noexcept
-    //     {
-    //         return lhs.anyNeq(rhs, epsilon);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Matrix2x3<T>::operator==(const Matrix2x3<U>& rhs) const noexcept
-    //     {
-    //         return allEq(rhs);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Matrix2x3<T>::operator!=(const Matrix2x3<U>& rhs) const noexcept
-    //     {
-    //         return anyNeq(rhs);
-    //     }
-    //
-    //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *        ARITHMETIC OPERATORS        *
-    //      *                                    *
-    //      **************************************/
-    //
+        /***************************************
+         *                                     *
+         *             EQUALITY                *
+         *                                     *
+         ***************************************/
+
+        template <Arithmetic T>
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr bool Matrix2x3<T>::allEq(const Matrix2x3<U>& rhs, const double epsilon) const noexcept
+        {
+            // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+            // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+            // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+    #ifdef _MSC_VER
+            if (std::is_constant_evaluated())
+            {
+                if (hasNaN() || rhs.hasNaN())
+                {
+                    return false;
+                }
+            }
+    #endif
+            return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon);
+        }
+
+
+        template <Arithmetic T>
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr bool Matrix2x3<T>::allEq(const Matrix2x3& lhs, const Matrix2x3<U>& rhs, const double epsilon)
+        noexcept
+        {
+            return lhs.allEq(rhs, epsilon);
+        }
+
+
+        template <Arithmetic T>
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr bool Matrix2x3<T>::anyNeq(const Matrix2x3<U>& rhs, const double epsilon) const noexcept
+        {
+            // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+            // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+            // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+    #ifdef _MSC_VER
+            if (std::is_constant_evaluated())
+            {
+                if (hasNaN() || rhs.hasNaN())
+                {
+                    return true;
+                }
+            }
+    #endif
+            return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon);
+        }
+
+
+        template <Arithmetic T>
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr bool Matrix2x3<T>::anyNeq(const Matrix2x3& lhs, const Matrix2x3<U>& rhs, const double epsilon)
+        noexcept
+        {
+            return lhs.anyNeq(rhs, epsilon);
+        }
+
+
+        template <Arithmetic T>
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr bool Matrix2x3<T>::operator==(const Matrix2x3<U>& rhs) const noexcept
+        {
+            return allEq(rhs);
+        }
+
+
+        template <Arithmetic T>
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr bool Matrix2x3<T>::operator!=(const Matrix2x3<U>& rhs) const noexcept
+        {
+            return anyNeq(rhs);
+        }
+
+
+
+        /**************************************
+         *                                    *
+         *        ARITHMETIC OPERATORS        *
+         *                                    *
+         **************************************/
+
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
@@ -675,42 +675,42 @@ namespace fgm
     //     {
     //         return matrix.trace();
     //     }
-    //
-    //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *             UTILITIES              *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Matrix2x3<T>::hasInf() const noexcept
-    //     {
-    //         return _data[0].hasInf() || _data[1].hasInf();
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Matrix2x3<T>::hasInf(const Matrix2x3& matrix) noexcept
-    //     {
-    //         return matrix.hasInf();
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Matrix2x3<T>::hasNaN() const noexcept
-    //     {
-    //         return _data[0].hasNaN() || _data[1].hasNaN();
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Matrix2x3<T>::hasNaN(const Matrix2x3& matrix) noexcept
-    //     {
-    //         return matrix.hasNaN();
-    //     }
-    //
+    
+
+
+    /**************************************
+     *                                    *
+     *             UTILITIES              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr bool Matrix2x3<T>::hasInf() const noexcept
+    {
+        return _data[0].hasInf() || _data[1].hasInf();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix2x3<T>::hasInf(const Matrix2x3& matrix) noexcept
+    {
+        return matrix.hasInf();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix2x3<T>::hasNaN() const noexcept
+    {
+        return _data[0].hasNaN() || _data[1].hasNaN();
+    }
+
+
+    template <Arithmetic T>
+    constexpr bool Matrix2x3<T>::hasNaN(const Matrix2x3& matrix) noexcept
+    {
+        return matrix.hasNaN();
+    }
+
     //
     //
     //
