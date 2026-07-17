@@ -45,6 +45,9 @@ namespace fgm
     struct Matrix2;
 
     template <Arithmetic T>
+    struct Matrix2x3;
+
+    template <Arithmetic T>
     struct Matrix3;
 
     template <Arithmetic T>
@@ -96,6 +99,16 @@ namespace fgm
     /** @brief Alias for @ref Matrix2 with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
     using PromotedFloatMatrix2 = Matrix2<Magnitude<std::common_type_t<T, U>>>;
+
+    /** @brief Alias for @ref Matrix2x3 with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMatrix2x3 = Matrix2x3<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Matrix2x3 with a `value_type` of @ref Magnitude of the wider type. */
+    template <Arithmetic T, Arithmetic U>
+    using PromotedFloatMatrix2x3 = Matrix2x3<Magnitude<std::common_type_t<T, U>>>;
 
 
     /** @brief Alias for @ref Matrix3 with promoted value type. */

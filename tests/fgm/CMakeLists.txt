@@ -11,7 +11,7 @@ set(UtilityDirectory "${INCLUDE_DIR}utils/")
 
 
 # Files
-set(SetupFiles "Vector2TestSetup.h;Vector3TestSetup.h;Vector4TestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;CommonSetup.h;")
+set(SetupFiles "Vector2TestSetup.h;Vector3TestSetup.h;Vector4TestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;Matrix2x3TestSetup.h;CommonSetup.h;")
 list(TRANSFORM SetupFiles PREPEND ${INCLUDE_DIR})
 
 set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
