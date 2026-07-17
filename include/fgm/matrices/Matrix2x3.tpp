@@ -224,152 +224,47 @@ namespace fgm
     }
 
 
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::operator*(const S scalar) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //         return Matrix2x3<R>(scalar * _data[0], scalar * _data[1]);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr Matrix2x3<T>& Matrix2x3<T>::operator*=(const S scalar) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         _data[0] *= scalar;
-    //         _data[1] *= scalar;
-    //         return *this;
-    //     }
-    //
-    //     template <StrictArithmetic T, StrictArithmetic S>
-    //     constexpr PromotedMatrix2x3<T, S> operator*(const S scalar, const Matrix2x3<T>& matrix) noexcept
-    //     {
-    //         return matrix * scalar;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr PromotedVector2<T, U> Matrix2x3<T>::operator*(const Vector2<U>& vec) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-    //         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (!std::is_constant_evaluated())
-    //             {
-    //                 return Vector2<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
-    //                                            static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
-    //                                   std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
-    //                                            static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
-    //             }
-    //         }
-    // #endif
-    //
-    //         R x =
-    //             static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][0]) *
-    //             static_cast<R>(vec[1]);
-    //         R y =
-    //             static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][1]) *
-    //             static_cast<R>(vec[1]);
-    //
-    //         return Vector2<R>(x, y);
-    //     }
-    //
-    //
-    //     template <StrictArithmetic T, StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr PromotedVector2<T, U> operator*(const Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-    //         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (!std::is_constant_evaluated())
-    //             {
-    //                 return Vector2<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
-    //                                            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0))),
-    //                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
-    //                                            static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1))));
-    //             }
-    //         }
-    //
-    // #endif
-    //         R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0));
-    //         R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1));
-    //
-    //         return Vector2<R>(x, y);
-    //     }
-    //
-    //
-    //     template <StrictArithmetic T, StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr Vector2<T>& operator*=(Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-    //         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (!std::is_constant_evaluated())
-    //             {
-    //                 R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
-    //                                static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0)));
-    //                 R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
-    //                                static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1)));
-    //
-    //                 vec.x() = static_cast<T>(x);
-    //                 vec.y() = static_cast<T>(y);
-    //
-    //                 return vec;
-    //             }
-    //         }
-    // #endif
-    //         R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0));
-    //         R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1));
-    //
-    //         vec.x() = static_cast<T>(x);
-    //         vec.y() = static_cast<T>(y);
-    //
-    //         return vec;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr PromotedMatrix2x3<T, U> Matrix2x3<T>::operator*(const Matrix2x3<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    //         return Matrix2x3<R>(*this * rhs[0], *this * rhs[1]);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr Matrix2x3<T>& Matrix2x3<T>::operator*=(const Matrix2x3<U>& rhs) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         const auto mat = *this * rhs;
-    //         _data[0]       = static_cast<Vector2<T>>(mat[0]);
-    //         _data[1]       = static_cast<Vector2<T>>(mat[1]);
-    //         return *this;
-    //     }
-    //
-    //
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::operator*(const S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+        return Matrix2x3<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2]);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Matrix2x3<T>& Matrix2x3<T>::operator*=(const S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] *= scalar;
+        _data[1] *= scalar;
+        _data[2] *= scalar;
+        return *this;
+    }
+
+
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr PromotedMatrix2x3<T, S> operator*(S scalar, const Matrix2x3<T>& matrix) noexcept
+        requires StrictArithmetic<T>
+    { return matrix * scalar; }
+
+
+
+
+    // template <Arithmetic T>
+    // template <StrictArithmetic U>
+    //     requires StrictSignedness<T, U>
+    // constexpr PromotedMatrix2<T, U> operator*(const Matrix3x2<U>& rhs) const noexcept
+    //     requires StrictArithmetic<T>
+    // {
+    //     using R = PromotedValue_t<T, U>;
+    //     return Matrix2x3<R>(*this * rhs[0], *this * rhs[1]);
+    // }
+
+
     //     template <Arithmetic T>
     //     template <StrictArithmetic S>
     //     constexpr PromotedMatrix2x3<T, S> Matrix2x3<T>::operator/(const S& scalar) const noexcept

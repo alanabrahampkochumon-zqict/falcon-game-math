@@ -388,140 +388,39 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        //     /**
-        //      * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
-        //      *
-        //      * @note Promotes the result to the wider type using @ref PromotedMatrix2x3<T, S>.
-        //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //      *
-        //      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //      *
-        //      * @param[in] scalar The value to scale by.
-        //      *
-        //      * @return A new @ref Matrix2x3 scaled by @p scalar.
-        //      */
-        //     template <StrictArithmetic S>
-        //     [[nodiscard]] constexpr PromotedMatrix2x3<T, S> operator*(S scalar) const noexcept
-        //         requires StrictArithmetic<T>;
-        //
-        //
-        //     /**
-        //      * @brief Compute the element-wise product between this matrix and @p scalar in-place.
-        //      *
-        //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //      *
-        //      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //      *
-        //      * @param[in] scalar The value to scale by.
-        //      *
-        //      * @return A reference to this matrix (*this).
-        //      */
-        //     template <StrictArithmetic S>
-        //     constexpr Matrix2x3& operator*=(S scalar) noexcept
-        //         requires StrictArithmetic<T>;
-        //
-        //
-        //     /**
-        //      * @brief Transform the @p Vec **column vector** by this matrix.
-        //      *        \f$
-        //      *            \begin{bmatrix}
-        //      *                 A_{00} & A_{01} \\
-        //      *                 A_{10} & A_{11}
-        //      *            \end{bmatrix}
-        //      *            \cdot
-        //      *            \begin{bmatrix}
-        //      *                  x \\ y
-        //      *            \end{bmatrix}
-        //      *            =
-        //      *            \begin{bmatrix}
-        //      *                  x' \\ y'
-        //      *            \end{bmatrix}
-        //      *        \f$
-        //      *
-        //      * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
-        //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //      *
-        //      * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
-        //      *
-        //      * @param[in] vec The column vector to transform.
-        //      *
-        //      * @return A new @ref Vector2 with applied linear transformations.
-        //      */
-        //     template <StrictArithmetic U>
-        //         requires StrictSignedness<T, U>
-        //     [[nodiscard]] constexpr PromotedVector2<T, U> operator*(const Vector2<U>& vec) const noexcept
-        //         requires StrictArithmetic<T>;
-        //
-        //
-        //     /**
-        //      * @brief Compose this matrix with @p rhs matrix to form a new matrix.
-        //      *        \f$
-        //      *            \begin{bmatrix}
-        //      *                 A_{00} & A_{01} \\
-        //      *                 A_{10} & A_{11}
-        //      *            \end{bmatrix}
-        //      *            \cdot
-        //      *            \begin{bmatrix}
-        //      *                  B_{00} & B_{01} \\
-        //      *                  B_{10} & B_{11}
-        //      *            \end{bmatrix}
-        //      *            =
-        //      *            \begin{bmatrix}
-        //      *                  C_{00} & C_{01} \\
-        //      *                  C_{10} & C_{11}
-        //      *            \end{bmatrix}
-        //      *        \f$
-        //      *
-        //      * @note Promotes the result to the wider type using @ref PromotedMatrix2x3<T, U>.
-        //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //      *
-        //      * @note Promotes the result to the wider type using @ref PromotedMatrix2x3<T, U>.
-        //      * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        //      *
-        //      * @param[in] rhs The matrix to multiply.
-        //      *
-        //      * @return A new @ref Matrix2x3 containing the composition of linear transformations.
-        //      */
-        //     template <StrictArithmetic U>
-        //         requires StrictSignedness<T, U>
-        //     [[nodiscard]] constexpr PromotedMatrix2x3<T, U> operator*(const Matrix2x3<U>& rhs) const noexcept
-        //         requires StrictArithmetic<T>;
-        //
-        //
-        //     /**
-        //      * @brief Compose this matrix with @p rhs matrix in-place.
-        //      *        \f$
-        //      *            \begin{bmatrix}
-        //      *                 A_{00} & A_{01} \\
-        //      *                 A_{10} & A_{11}
-        //      *            \end{bmatrix}
-        //      *            \cdot
-        //      *            \begin{bmatrix}
-        //      *                  B_{00} & B_{01} \\
-        //      *                  B_{10} & B_{11}
-        //      *            \end{bmatrix}
-        //      *            =
-        //      *            \begin{bmatrix}
-        //      *                  C_{00} & C_{01} \\
-        //      *                  C_{10} & C_{11}
-        //      *            \end{bmatrix}
-        //      *        \f$
-        //      *
-        //      * @note Promotes the result to the wider type using @ref PromotedMatrix2x3<T, U>.
-        //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //      *
-        //      * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        //      *
-        //      * @param[in] rhs The matrix to multiply.
-        //      *
-        //      * @return A reference to this matrix (*this).
-        //      */
-        //     template <StrictArithmetic U>
-        //         requires StrictSignedness<T, U>
-        //     constexpr Matrix2x3& operator*=(const Matrix2x3<U>& rhs) noexcept
-        //         requires StrictArithmetic<T>;
-        //
-        //
+        /**
+         * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMatrix2x3<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Matrix2x3 scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMatrix2x3<T, S> operator*(S scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise product between this matrix and @p scalar in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Matrix2x3& operator*=(S scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
         //     /**
         //      * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
         //      *
@@ -1223,104 +1122,23 @@ namespace fgm
     // using Mat2ULL = Matrix2x3<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
     //
     // /** @} */
-    //
-    //
-    //
-    // /**************************************
-    //  *                                    *
-    //  *        NON-MEMBER FUNCTIONS        *
-    //  *                                    *
-    //  **************************************/
-    //
-    // /**
-    //  * @addtogroup FGM_Mat2x3_Arithmetic
-    //  * @{
-    //  */
-    //
-    // /**
-    //  * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
-    //  *
-    //  * @note Promotes the result to the wider type using @ref PromotedMatrix2x3<T, S>.
-    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //  *
-    //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] scalar The value to scale by.
-    //  * @param[in] matrix The matrix to scale.
-    //  *
-    //  * @return A new @ref Matrix2x3 scaled by @p scalar.
-    //  */
-    // template <StrictArithmetic T, StrictArithmetic S>
-    // [[nodiscard]] constexpr PromotedMatrix2x3<T, S> operator*(S scalar, const Matrix2x3<T>& matrix) noexcept;
-    //
-    //
-    // /**
-    //  * @brief Transform the @p Vec **row vector** by @p matrix.
-    //  *        \f$
-    //  *            \begin{bmatrix}
-    //  *                x & y
-    //  *            \end{bmatrix}
-    //  *            \cdot
-    //  *            \begin{bmatrix}
-    //  *                A_{00} & A_{01} \\
-    //  *                A_{10} & A_{11}
-    //  *            \end{bmatrix}
-    //  *            =
-    //  *            \begin{bmatrix}
-    //  *                x' & y'
-    //  *            \end{bmatrix}
-    //  *        \f$
-    //  *
-    //  * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
-    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //  *
-    //  * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
-    //  * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] vec    The row vector to transform.
-    //  * @param[in] matrix The transformation matrix.
-    //  *
-    //  * @return The passed-in @p Vec with the transformations applied.
-    //  */
-    // template <StrictArithmetic T, StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // static constexpr PromotedVector2<T, U> operator*(const Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept;
-    //
-    //
-    // /**
-    //  * @brief Transform the @p Vec **row vector** by @p matrix.
-    //  *        Perform the linear transformation:
-    //  *        \f$
-    //  *            \begin{bmatrix}
-    //  *                x & y
-    //  *            \end{bmatrix}
-    //  *            \cdot
-    //  *            \begin{bmatrix}
-    //  *                A_{00} & A_{01} \\
-    //  *                A_{10} & A_{11}
-    //  *            \end{bmatrix}
-    //  *            =
-    //  *            \begin{bmatrix}
-    //  *                x' & y'
-    //  *            \end{bmatrix}
-    //  *        \f$
-    //  *
-    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //  *
-    //  * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
-    //  * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] vec    The row vector to transform.
-    //  * @param[in] matrix The transformation matrix.
-    //  *
-    //  * @return The passed-in @p Vec with the transformations applied.
-    //  */
-    // template <StrictArithmetic T, StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // static constexpr Vector2<T>& operator*=(Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept;
 
-    /** @} */
-
+    /**
+     * @brief Compute the element-wise product between @p scalar and @p matrix and return a new matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMatrix2x3<T, S>.
+     *
+     * @tparam T Numeric type of the matrix. Must satisfy @ref StrictArithmetic.
+     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] matrix The matrix to scale.
+     *
+     * @return A new @ref Matrix2x3 scaled by @p scalar.
+     */
+    template <StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] static constexpr PromotedMatrix2x3<T, S> operator*(S scalar, const Matrix2x3<T>& matrix) noexcept
+        requires StrictArithmetic<T>;
 
 
     /** @brief Template deduction guide for Matrix2x3. */

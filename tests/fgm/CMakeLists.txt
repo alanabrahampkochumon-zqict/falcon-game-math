@@ -25,6 +25,7 @@ add_subdirectory(matrices/matrix2)
 add_subdirectory(matrices/matrix2x3)
 add_subdirectory(matrices/matrix4)
 add_subdirectory(matrices/matrix3)
+add_subdirectory(matrices/matmul)
 
 target_sources(
         FGMTestSuite
@@ -74,6 +75,7 @@ target_link_libraries(
         Matrix3TransformTests
         Matrix4Tests
         Matrix4TransformTests
+        MatrixMultiplicationTests
 )
 
 target_include_directories(

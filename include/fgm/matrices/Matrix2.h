@@ -475,9 +475,7 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix2<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-         *
          * @note Promotes the result to the wider type using @ref PromotedMatrix2<T, U>.
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
