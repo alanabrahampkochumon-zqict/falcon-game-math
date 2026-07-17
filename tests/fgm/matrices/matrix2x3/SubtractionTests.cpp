@@ -1,0 +1,128 @@
+/**
+ * @file SubtractionTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: July 17, 2026
+ *
+ * @brief Verify @ref fgm::Matrix2x3 subtraction logic.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
+#include "Matrix2x3TestSetup.h"
+
+
+
+/**************************************
+ *                                    *
+ *               SETUP                *
+ *                                    *
+ **************************************/
+
+template <typename T>
+class Matrix2x3Subtraction: public ::testing::Test
+{
+protected:
+    fgm::Matrix2x3<T> _matA;
+    fgm::Matrix2x3<T> _matB;
+    fgm::Matrix2x3<T> _expectedDifference;
+
+    void SetUp() override
+    {
+        _matA               = { fgm::Vector2<T>(5, 6), fgm::Vector2<T>(7, 8), fgm::Vector2<T>(5, 12) };
+        _matB               = { fgm::Vector2<T>(1, 2), fgm::Vector2<T>(3, 4), fgm::Vector2<T>(5, 11) };
+        _expectedDifference = { fgm::Vector2<T>(4, 4), fgm::Vector2<T>(4, 4), fgm::Vector2<T>(0, 1) };
+    }
+};
+/** @brief Test fixture for @ref fgm::Matrix2x3 subtraction, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Matrix2x3Subtraction, SupportedArithmeticTypes);
+
+
+/**
+ * @addtogroup T_FGM_Mat2x2_Subtraction
+ * @{
+ */
+
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+/** @brief Verify that matrix subtraction operations are available at compile time. */
+namespace
+{
+    constexpr fgm::Matrix2x3 MAT1(8, 2, 12, 4, -5, 0);
+    constexpr fgm::Matrix2x3 MAT2(5, 6, 7, 8, -11, 5);
+    constexpr fgm::Matrix2x3 BINARY_DIFF = MAT1 - MAT2;
+
+    static_assert(BINARY_DIFF(0, 0) == 3);
+    static_assert(BINARY_DIFF(0, 1) == -4);
+    static_assert(BINARY_DIFF(0, 2) == 5);
+    static_assert(BINARY_DIFF(1, 0) == -4);
+    static_assert(BINARY_DIFF(1, 1) == 6);
+    static_assert(BINARY_DIFF(1, 2) == -5);
+
+} // namespace
+
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
+
+/**
+ * @brief Verify that the binary subtraction operator perform an element-wise subtraction and
+ *       returns a new matrix instance.
+ */
+TYPED_TEST(Matrix2x3Subtraction, MinusOperator_ReturnsDifference)
+{
+    const fgm::Matrix2x3 difference = this->_matA - this->_matB;
+
+    EXPECT_MAT_EQ(this->_expectedDifference, difference);
+}
+
+
+/**
+ * @brief Verify that the binary subtraction operator perform automatic type promotion
+ *       to the wider numeric type.
+ */
+TEST(Matrix2x3Subtraction, MixedTypeSubtractionPromotesType)
+{
+    const fgm::Matrix2x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
+    const fgm::Matrix2x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
+
+    [[maybe_unused]] const fgm::Matrix2x3 difference = mat1 - mat2;
+
+    static_assert(std::is_same_v<decltype(difference)::value_type, double>);
+}
+
+
+/**
+ * @brief Verify that the compound subtraction assignment operator perform an element-wise subtraction
+ *       and mutates the matrix in-place.
+ */
+TYPED_TEST(Matrix2x3Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
+{
+    this->_matA -= this->_matB;
+
+    EXPECT_MAT_EQ(this->_expectedDifference, this->_matA);
+}
+
+
+/**
+ * @brief Verify that the compound subtraction assignment operator maintains the destination type and
+ *       perform an implicit cast.
+ */
+TEST(Matrix2x3Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+{
+    fgm::Matrix2x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
+    [[maybe_unused]] const fgm::Matrix2x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
+
+    mat1 -= mat2;
+
+    static_assert(std::is_same_v<decltype(mat1)::value_type, float>);
+}
+
+/** @} */

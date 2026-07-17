@@ -6,6 +6,7 @@ target_sources(
         AdditionTests.cpp
         EqualityTests.cpp
         InitializationTests.cpp
+        SubtractionTests.cpp
         UtilityTests.cpp
 )
 
