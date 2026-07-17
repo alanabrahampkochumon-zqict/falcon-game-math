@@ -17,7 +17,6 @@
 #include "Matrix3.h"
 #include "Matrix4.h"
 
-
 // TODO: Use transpose from here
 //     /**
 //      * @addtogroup FGM_Mat2x3_Algebra
