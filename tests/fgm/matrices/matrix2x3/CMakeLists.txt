@@ -5,6 +5,7 @@ target_sources(
         AccessAndMutationTests.cpp
         EqualityTests.cpp
         InitializationTests.cpp
+        UtilityTests.cpp
 )
 
 target_include_directories(
