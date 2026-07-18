@@ -52,6 +52,63 @@ protected:
 TYPED_TEST_SUITE(Mat4Equality, SupportedArithmeticTypes);
 
 
+struct Mat4ElementParam
+{
+    fgm::Mat4<int> first, second;
+    bool expected;
+};
+
+
+class Mat4PerElementEquality: public ::testing::TestWithParam<Mat4ElementParam>
+{};
+/** @brief Fixture for verifying matrix equality by making only one element unequal at a time. */
+INSTANTIATE_TEST_SUITE_P(
+    Mat4Tests, Mat4PerElementEquality,
+    ::testing::Values(
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 1, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 1, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 1, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1 }, .expected = false }));
+
+
+class Mat4PerElementInequality: public ::testing::TestWithParam<Mat4ElementParam>
+{};
+/** @brief Fixture for verifying matrix inequality by making only one element unequal at a time. */
+INSTANTIATE_TEST_SUITE_P(
+    Mat4Tests, Mat4PerElementInequality,
+    ::testing::Values(
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = false },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 1, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 1, 9, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 1, 10, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 12, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 13, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 14, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1, 16 }, .expected = true },
+        Mat4ElementParam{ .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1 }, .expected = true }));
+
+
 
 /**
  * @addtogroup T_FGM_Mat4x4_Equality
@@ -240,6 +297,30 @@ TEST(Mat4Equality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
     EXPECT_FALSE(equality);
 }
 
+
+/** @brief Verify that fgm::Mat4::allEq works for any element being unequal. */
+TEST_P(Mat4PerElementEquality, AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat.allEq(secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat4::allEq works for any element being unequal. */
+TEST_P(Mat4PerElementEquality, StaticWrapper_AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Mat4<int>::allEq(firstMat, secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat4::allEq works for any element being unequal. */
+TEST_P(Mat4PerElementEquality, EqualityOperator_AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat == secondMat);
+}
+
 /** @} */
 
 
@@ -414,6 +495,30 @@ TEST(Mat4Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
     const bool inequality = matA != matB;
 
     EXPECT_TRUE(inequality);
+}
+
+
+/** @brief Verify that fgm::Mat4::anyNeq works for any element being unequal. */
+TEST_P(Mat4PerElementInequality, AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat.anyNeq(secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat4::anyNeq works for any element being unequal. */
+TEST_P(Mat4PerElementInequality, StaticWrapper_AnyNeq__VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Mat4<int>::anyNeq(firstMat, secondMat));
+}
+
+
+/** @brief Verify that operator!= works for any element being unequal. */
+TEST_P(Mat4PerElementInequality, InequalityOperator_AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat != secondMat);
 }
 
 /** @} */

@@ -43,6 +43,37 @@ protected:
 TYPED_TEST_SUITE(Mat2Equality, SupportedArithmeticTypes);
 
 
+struct Mat2ElementParam
+{
+    fgm::Mat2<int> first, second;
+    bool expected;
+};
+
+
+class Mat2PerElementEquality: public ::testing::TestWithParam<Mat2ElementParam>
+{};
+/** @brief Fixture for verifying matrix equality by making only one element unequal at a time. */
+INSTANTIATE_TEST_SUITE_P(
+    Mat2Tests, Mat2PerElementEquality,
+    ::testing::Values(Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 1, 2, 3, 4 }, .expected = true },
+                      Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 2, 2, 3, 4 }, .expected = false },
+                      Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 1, 1, 3, 4 }, .expected = false },
+                      Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 1, 2, 1, 4 }, .expected = false },
+                      Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 1, 2, 3, 1 }, .expected = false }));
+
+
+class Mat2PerElementInequality: public ::testing::TestWithParam<Mat2ElementParam>
+{};
+/** @brief Fixture for verifying matrix inequality by making only one element unequal at a time. */
+INSTANTIATE_TEST_SUITE_P(
+    Mat2Tests, Mat2PerElementInequality,
+    ::testing::Values(Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 1, 2, 3, 4 }, .expected = false },
+                      Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 2, 2, 3, 4 }, .expected = true },
+                      Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 1, 1, 3, 4 }, .expected = true },
+                      Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 1, 2, 1, 4 }, .expected = true },
+                      Mat2ElementParam{ .first = { 1, 2, 3, 4 }, .second = { 1, 2, 3, 1 }, .expected = true }));
+
+
 
 /**
  * @addtogroup T_FGM_Mat2x2_Equality
@@ -61,10 +92,10 @@ namespace
     constexpr fgm::Mat2 MAT1(1, 2, 3, 4);
     constexpr fgm::Mat2 MAT2(1, 2, 3, 4);
     constexpr fgm::Mat2 MAT3(4, 2, 2, 4);
-    constexpr fgm::Mat2 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                    -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
-    constexpr fgm::Mat2 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                    -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
+    constexpr fgm::Mat2 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, -fgm::constants::INFINITY_F,
+                                 fgm::constants::INFINITY_F);
+    constexpr fgm::Mat2 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, -fgm::constants::INFINITY_F,
+                                 fgm::constants::INFINITY_F);
 
 
     /** @brief Verify that matrix equality check is available at compile time. */
@@ -228,6 +259,30 @@ TEST(Mat2Equality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
     const bool equality = matA == matB;
 
     EXPECT_FALSE(equality);
+}
+
+
+/** @brief Verify that fgm::Mat2::allEq works for any element being unequal. */
+TEST_P(Mat2PerElementEquality, AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat.allEq(secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat2::allEq works for any element being unequal. */
+TEST_P(Mat2PerElementEquality, StaticWrapper_AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Mat2<int>::allEq(firstMat, secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat2::allEq works for any element being unequal. */
+TEST_P(Mat2PerElementEquality, EqualityOperator_AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat == secondMat);
 }
 
 /** @} */
@@ -404,6 +459,29 @@ TEST(Mat2Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
     const bool inequality = matA != matB;
 
     EXPECT_TRUE(inequality);
+}
+
+/** @brief Verify that fgm::Mat2::anyNeq works for any element being unequal. */
+TEST_P(Mat2PerElementInequality, AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat.anyNeq(secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat2::anyNeq works for any element being unequal. */
+TEST_P(Mat2PerElementInequality, StaticWrapper_AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Mat2<int>::anyNeq(firstMat, secondMat));
+}
+
+
+/** @brief Verify that operator!= works for any element being unequal. */
+TEST_P(Mat2PerElementInequality, InequalityOperator_AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat != secondMat);
 }
 
 /** @} */

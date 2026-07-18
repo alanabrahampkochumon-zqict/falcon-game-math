@@ -49,6 +49,69 @@ protected:
 TYPED_TEST_SUITE(Mat3Equality, SupportedArithmeticTypes);
 
 
+struct Mat3ElementParam
+{
+    fgm::Mat3<int> first, second;
+    bool expected;
+};
+
+
+class Mat3PerElementEquality: public ::testing::TestWithParam<Mat3ElementParam>
+{};
+/** @brief Fixture for verifying matrix equality by making only one element unequal at a time. */
+INSTANTIATE_TEST_SUITE_P(
+    Mat3Tests, Mat3PerElementEquality,
+    ::testing::Values(
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .expected = true },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 2, 2, 3, 4, 5, 6, 7, 8, 9 }, .expected = false },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 1, 3, 4, 5, 6, 7, 8, 9 }, .expected = false },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 1, 4, 5, 6, 7, 8, 9 }, .expected = false },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 1, 5, 6, 7, 8, 9 }, .expected = false },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 1, 6, 7, 8, 9 }, .expected = false },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 1, 7, 8, 9 }, .expected = false },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 1, 8, 9 }, .expected = false },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 7, 1, 9 }, .expected = false },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 1 }, .expected = false }));
+
+
+class Mat3PerElementInequality: public ::testing::TestWithParam<Mat3ElementParam>
+{};
+/** @brief Fixture for verifying matrix inequality by making only one element unequal at a time. */
+INSTANTIATE_TEST_SUITE_P(
+    Mat3Tests, Mat3PerElementInequality,
+    ::testing::Values(
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .expected = false },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 2, 2, 3, 4, 5, 6, 7, 8, 9 }, .expected = true },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 1, 3, 4, 5, 6, 7, 8, 9 }, .expected = true },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 1, 4, 5, 6, 7, 8, 9 }, .expected = true },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 1, 5, 6, 7, 8, 9 }, .expected = true },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 1, 6, 7, 8, 9 }, .expected = true },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 1, 7, 8, 9 }, .expected = true },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 1, 8, 9 }, .expected = true },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 7, 1, 9 }, .expected = true },
+        Mat3ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 1 }, .expected = true }));
+
+
 
 /**
  * @addtogroup T_FGM_Mat3x3_Equality
@@ -67,10 +130,8 @@ namespace
     constexpr fgm::Mat3 MAT1(1, 2, 3);
     constexpr fgm::Mat3 MAT2(1, 2, 3);
     constexpr fgm::Mat3 MAT3(4, 2, 2);
-    constexpr fgm::Mat3 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                    -fgm::constants::INFINITY_F);
-    constexpr fgm::Mat3 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                    -fgm::constants::INFINITY_F);
+    constexpr fgm::Mat3 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, -fgm::constants::INFINITY_F);
+    constexpr fgm::Mat3 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, -fgm::constants::INFINITY_F);
 
 
     /** @brief Verify that matrix equality check is available at compile time. */
@@ -235,6 +296,30 @@ TEST(Mat3Equality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
     const bool equality = matA == matB;
 
     EXPECT_FALSE(equality);
+}
+
+
+/** @brief Verify that fgm::Mat3::allEq works for any element being unequal. */
+TEST_P(Mat3PerElementEquality, AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat.allEq(secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat3::allEq works for any element being unequal. */
+TEST_P(Mat3PerElementEquality, StaticWrapper_AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Mat3<int>::allEq(firstMat, secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat3::allEq works for any element being unequal. */
+TEST_P(Mat3PerElementEquality, EqualityOperator_AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat == secondMat);
 }
 
 /** @} */
@@ -411,6 +496,30 @@ TEST(Mat3Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
     const bool inequality = matA != matB;
 
     EXPECT_TRUE(inequality);
+}
+
+
+/** @brief Verify that fgm::Mat3::anyNeq works for any element being unequal. */
+TEST_P(Mat3PerElementInequality, AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat.anyNeq(secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat3::anyNeq works for any element being unequal. */
+TEST_P(Mat3PerElementInequality, StaticWrapper_AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Mat3<int>::anyNeq(firstMat, secondMat));
+}
+
+
+/** @brief Verify that operator!= works for any element being unequal. */
+TEST_P(Mat3PerElementInequality, InequalityOperator_AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat != secondMat);
 }
 
 /** @} */

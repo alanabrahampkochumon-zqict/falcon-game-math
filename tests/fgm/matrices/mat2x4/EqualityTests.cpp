@@ -502,7 +502,6 @@ TEST(Mat2x4Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
 }
 
 
-
 /** @brief Verify that fgm::Mat2x4::anyNeq works for any element being unequal. */
 TEST_P(Mat2x4PerElementInequality, AnyNeq_VerifiesElementwiseInequality)
 {
@@ -525,6 +524,5 @@ TEST_P(Mat2x4PerElementInequality, InequalityOperator_AnyNeq_VerifiesElementwise
     const auto& [firstMat, secondMat, expected] = GetParam();
     EXPECT_EQ(expected, firstMat != secondMat);
 }
-
 
 /** @} */
