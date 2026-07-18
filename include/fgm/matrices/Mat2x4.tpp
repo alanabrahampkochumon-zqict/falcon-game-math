@@ -204,6 +204,60 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedMat2x4<T, U> Mat2x4<T>::operator-(const Mat2x4<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, U>;
+        return Mat2x4<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2], _data[3] - rhs[3]);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr Mat2x4<T>& Mat2x4<T>::operator-=(const Mat2x4<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] -= rhs[0];
+        _data[1] -= rhs[1];
+        _data[2] -= rhs[2];
+        _data[3] -= rhs[3];
+        return *this;
+    }
+
+    
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr PromotedMat2x4<T, S> operator*(S scalar, const Mat2x4<T>& matrix) noexcept
+        requires StrictArithmetic<T>
+    { return matrix * scalar; }
+    
+    
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat2x4<T, S> Mat2x4<T>::operator*(const S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+        return Mat2x4<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2], scalar * _data[3]);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Mat2x4<T>& Mat2x4<T>::operator*=(const S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] *= scalar;
+        _data[1] *= scalar;
+        _data[2] *= scalar;
+        _data[3] *= scalar;
+        return *this;
+    }
+
+
     /**************************************
      *                                    *
      *             UTILITIES              *

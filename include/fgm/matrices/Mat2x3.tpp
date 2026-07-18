@@ -235,6 +235,12 @@ namespace fgm
     }
 
 
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr PromotedMat2x3<T, S> operator*(S scalar, const Mat2x3<T>& matrix) noexcept
+        requires StrictArithmetic<T>
+    { return matrix * scalar; }
+
+
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr Mat2x3<T>& Mat2x3<T>::operator*=(const S scalar) noexcept
@@ -245,6 +251,8 @@ namespace fgm
         _data[2] *= scalar;
         return *this;
     }
+
+
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat2x3<T, S> Mat2x3<T>::operator/(S scalar) const noexcept
@@ -264,12 +272,6 @@ namespace fgm
             return Mat2x3<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar);
         }
     }
-
-
-    template <StrictArithmetic T, StrictArithmetic S>
-    constexpr PromotedMat2x3<T, S> operator*(S scalar, const Mat2x3<T>& matrix) noexcept
-        requires StrictArithmetic<T>
-    { return matrix * scalar; }
 
 
     template <Arithmetic T>
