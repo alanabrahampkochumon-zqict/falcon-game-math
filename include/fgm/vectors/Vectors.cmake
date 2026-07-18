@@ -8,5 +8,6 @@ set(FGM_VEC_HEADERS
         Vector3.tpp
         Vector4.h
         Vector4.tpp
+        Tensors.h
 )
 list(TRANSFORM FGM_VEC_HEADERS PREPEND ${FGM_VEC_DIR})

@@ -371,27 +371,12 @@ namespace fgm
     { return mat.tryDiv(scalar, status, fallback); }
 
 
+    /**************************************
+     *                                    *
+     *           MATRIX ALGEBRA           *
+     *                                    *
+     **************************************/
 
-    //     /**************************************
-    //      *                                    *
-    //      *           MATRIX ALGEBRA           *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     constexpr T Matrix2x3<T>::determinant() const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         return _data[0][0] * _data[1][1] - _data[0][1] * _data[1][0];
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr T Matrix2x3<T>::determinant(const Matrix2x3& matrix) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         return matrix.determinant();
-    //     }
     //
     //
     //     template <Arithmetic T>
@@ -408,139 +393,6 @@ namespace fgm
     //         return matrix.transpose();
     //     }
     //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::inverse() const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R = Magnitude<T>;
-    //
-    //         T det = determinant();
-    //
-    //         if constexpr (std::is_floating_point_v<T>)
-    //         {
-    //             FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_DET_DIV_BY_ZERO);
-    //         }
-    //         else
-    //         {
-    //             FGM_ASSERT_MSG(fgm::abs(det) != T(0), messages::assertion::MAT_DET_DIV_BY_ZERO);
-    //         }
-    //
-    //         R factor = R(1) / det;
-    //
-    //         return Matrix2x3<R>(static_cast<R>(_data[1][1]) * factor, static_cast<R>(-_data[1][0]) * factor,
-    //                           static_cast<R>(-_data[0][1]) * factor, static_cast<R>(_data[0][0]) * factor);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::inverse(const Matrix2x3& matrix) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         return matrix.inverse();
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::safeInverse(const Matrix2x3& fallback) const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R = Magnitude<T>;
-    //
-    //         T det = determinant();
-    //         // TODO: Update to use directly compute inverse to reduce operation
-    //         // TODO: Do similar in code cleaning in tryInverse
-    //         if constexpr (std::is_floating_point_v<T>)
-    //         {
-    //             if (hasNaN() || fgm::abs(det) <= std::numeric_limits<T>::epsilon())
-    //             {
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //         }
-    //         if constexpr (std::is_integral_v<T>)
-    //         {
-    //             if (det == 0)
-    //             {
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //         }
-    //
-    //         return inverse();
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::safeInverseOf(const Matrix2x3& matrix, const Matrix2x3&
-    //     fallback) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         return matrix.safeInverse(fallback);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::tryInverse(OperationStatus& status,
-    //                                                            const Matrix2x3& fallback) const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R = Magnitude<T>;
-    //
-    //         T det = determinant();
-    //
-    //         if constexpr (std::is_floating_point_v<T>)
-    //         {
-    //             if (hasNaN())
-    //             {
-    //                 status = OperationStatus::NANOPERAND;
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //             if (fgm::abs(det) <= std::numeric_limits<T>::epsilon())
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //         }
-    //
-    //         if constexpr (std::is_integral_v<T>)
-    //         {
-    //             if (det == 0)
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return Matrix2x3<R>(fallback);
-    //             }
-    //         }
-    //
-    //
-    //         status = OperationStatus::SUCCESS;
-    //         return inverse();
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Matrix2x3<Magnitude<T>> Matrix2x3<T>::tryInverseOf(const Matrix2x3& matrix, OperationStatus&
-    //     status,
-    //                                                              const Matrix2x3& fallback) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         return matrix.tryInverse(status, fallback);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr T Matrix2x3<T>::trace() const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         return _data[0][0] + _data[1][1];
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr T Matrix2x3<T>::trace(const Matrix2x3& matrix) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         return matrix.trace();
-    //     }
-
 
 
     /**************************************
@@ -568,53 +420,6 @@ namespace fgm
     constexpr bool Mat2x3<T>::hasNaN(const Mat2x3& matrix) noexcept
     { return matrix.hasNaN(); }
 
-    //
-    //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *       TRANSFORMATION FACTORIES     *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <std::floating_point U>
-    //     constexpr Matrix2x3<T> Matrix2x3<T>::makeRotation(const U angle) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R  = PromotedValue_t<T, U>;
-    //         R cosine = std::cos(angle);
-    //         R sine   = std::sin(angle);
-    // #ifdef FGM_LEFT_HANDED
-    //         return Matrix2x3(cosine, sine, -sine, cosine);
-    // #else
-    //         return Matrix2x3(cosine, -sine, sine, cosine);
-    // #endif
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Matrix2x3<T> Matrix2x3<T>::makeScale(const T scale) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         return Matrix2x3(scale, T(0), T(0), scale);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Matrix2x3<T> Matrix2x3<T>::makeScale(const T scaleX, const T scaleY) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         return Matrix2x3(scaleX, T(0), T(0), scaleY);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Matrix2x3<T> Matrix2x3<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         return Matrix2x3(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1));
-    //     }
 
 } // namespace fgm
 
