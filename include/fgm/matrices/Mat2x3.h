@@ -659,8 +659,8 @@ namespace fgm
          *        Format the matrix as
          *        \f$
          *            \begin{bmatrix}
-         *                 A_{00} & A_{10} & A{20} \\
-         *                 A_{01} & A_{11} & A{21}
+         *                 A_{00} & A_{10} & A_{20} \\
+         *                 A_{01} & A_{11} & A_{21}
          *            \end{bmatrix}
          *        \f$ string representation for debugging or logging.
          *

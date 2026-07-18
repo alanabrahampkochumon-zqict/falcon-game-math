@@ -645,53 +645,55 @@ namespace fgm
          */
         static constexpr Mat2x4 zero()
             requires fgm::StrictArithmetic<T>
-        { return Mat2x4{ T(0), T(0), T(0), T(0), T(0), T(0),T(0), T(0) }; }
+        { return Mat2x4{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) }; }
 
         /** @} */
 
 
-        //
-        //     /**
-        //      * @addtogroup FGM_Mat2x4_Log
-        //      * @{
-        //      */
-        //
-        //     /**
-        //      * @brief Write the matrix to an output stream in **row-major** order.
-        //      *        Format the matrix as
-        //      *        \f$
-        //      *            \begin{bmatrix}
-        //      *                 A_{00} & A_{10} & A{20} \\
-        //      *                 A_{01} & A_{11} & A{21}
-        //      *            \end{bmatrix}
-        //      *        \f$ string representation for debugging or logging.
-        //      *
-        //      * @param os     The output stream to write to.
-        //      * @param matrix The matrix to be streamed.
-        //      *
-        //      * @return A reference to the output stream @p os.
-        //      */
-        //     friend std::ostream& operator<<(std::ostream& os, const Mat2x4& matrix)
-        //     {
-        //         const std::streamsize oldPrecision     = os.precision();
-        //         const std::ios_base::fmtflags oldFlags = os.flags();
-        //
-        //         auto precision = Config::useFullPrecision
-        //             ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
-        //             : Config::LOG_PRECISION;
-        //         os << std::setprecision(precision) << std::fixed;
-        //         os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << "|\n";
-        //         os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << "|\n";
-        //
-        //         os.precision(oldPrecision);
-        //         os.flags(oldFlags);
-        //
-        //         return os;
-        //     }
-        //
-        //     /** @} */
-        //
-        //
+
+        /**
+         * @addtogroup FGM_Mat2x4_Log
+         * @{
+         */
+
+        /**
+         * @brief Write the matrix to an output stream in **row-major** order.
+         *        Format the matrix as
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} & A_{20} & A_{30} \\
+         *                 A_{01} & A_{11} & A_{21} & A_{31}
+         *            \end{bmatrix}
+         *        \f$ string representation for debugging or logging.
+         *
+         * @param os     The output stream to write to.
+         * @param matrix The matrix to be streamed.
+         *
+         * @return A reference to the output stream @p os.
+         */
+        friend std::ostream& operator<<(std::ostream& os, const Mat2x4& matrix)
+        {
+            const std::streamsize oldPrecision     = os.precision();
+            const std::ios_base::fmtflags oldFlags = os.flags();
+
+            auto precision = Config::useFullPrecision
+                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+                : Config::LOG_PRECISION;
+            os << std::setprecision(precision) << std::fixed;
+            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << " "
+               << matrix._data[3][0] << "|\n";
+            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << " "
+               << matrix._data[3][1] << "|\n";
+
+            os.precision(oldPrecision);
+            os.flags(oldFlags);
+
+            return os;
+        }
+
+        /** @} */
+
+
     private:
         std::array<Vec2<T>, COLUMNS> _data;
     };
