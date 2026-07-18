@@ -86,12 +86,11 @@ namespace fgm
         /**
          * @brief Initialize a 2x3 matrix from the passed-in vectors as columns.
          *
-         * @param[in] col0 The 2D-vector to use as the first column entry.
-         * @param[in] col1 The 2D-vector to use as the second column entry.
-         * @param[in] col2 The 2D-vector to use as the third column entry.
+         * @param[in] col0 The 2x3-vector to use as the first column entry.
+         * @param[in] col1 The 2x3-vector to use as the second column entry.
+         * @param[in] col2 The 2x3-vector to use as the third column entry.
          */
-        [[nodiscard]] constexpr Mat2x3(const Vector2<T>& col0, const Vector2<T>& col1,
-                                          const Vector2<T>& col2) noexcept;
+        [[nodiscard]] constexpr Mat2x3(const Vector2<T>& col0, const Vector2<T>& col1, const Vector2<T>& col2) noexcept;
 
 
 
@@ -476,8 +475,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMat2x3<T, S> safeDiv(
-            S scalar, const Mat2x3& fallback = Mat2x3::ZERO()) const noexcept
+        [[nodiscard]] constexpr PromotedMat2x3<T, S> safeDiv(S scalar,
+                                                             const Mat2x3& fallback = Mat2x3::ZERO()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -502,8 +501,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMat2x3<T, S> safeDiv(
-            const Mat2x3& mat, S scalar, const Mat2x3& fallback = Mat2x3::ZERO()) noexcept
+        [[nodiscard]] static constexpr PromotedMat2x3<T, S> safeDiv(const Mat2x3& mat, S scalar,
+                                                                    const Mat2x3& fallback = Mat2x3::ZERO()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -532,8 +531,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMat2x3<T, S> tryDiv(
-            S scalar, OperationStatus& status, const Mat2x3& fallback = Mat2x3::ZERO()) const noexcept
+        [[nodiscard]] constexpr PromotedMat2x3<T, S> tryDiv(S scalar, OperationStatus& status,
+                                                            const Mat2x3& fallback = Mat2x3::ZERO()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -563,14 +562,11 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMat2x3<T, S> tryDiv(
-            const Mat2x3& mat, S scalar, OperationStatus& status,
-            const Mat2x3& fallback = Mat2x3::ZERO()) noexcept
+        [[nodiscard]] static constexpr PromotedMat2x3<T, S> tryDiv(const Mat2x3& mat, S scalar, OperationStatus& status,
+                                                                   const Mat2x3& fallback = Mat2x3::ZERO()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
-
-
 
 
         /**
@@ -634,7 +630,7 @@ namespace fgm
          **************************************/
 
         /**
-         * @brief A 2D matrix with all elements being one.
+         * @brief A 2x3 matrix with all elements being one.
          *
          * @note Constrained to @ref StrictArithmetic types.
          */
@@ -644,7 +640,7 @@ namespace fgm
 
 
         /**
-         * @brief A 2D matrix with all elements being zero.
+         * @brief A 2x3 matrix with all elements being zero.
          *
          * @note Constrained to @ref StrictArithmetic types.
          */
@@ -655,9 +651,52 @@ namespace fgm
         /** @} */
 
 
+
+        /**
+         * @addtogroup FGM_Mat2x3_Log
+         * @{
+         */
+
+        /**
+         * @brief Write the matrix to an output stream in **row-major** order.
+         *        Format the matrix as
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} & A{20} \\
+         *                 A_{01} & A_{11} & A{21}
+         *            \end{bmatrix}
+         *        \f$ string representation for debugging or logging.
+         *
+         * @param os     The output stream to write to.
+         * @param matrix The matrix to be streamed.
+         *
+         * @return A reference to the output stream @p os.
+         */
+        friend std::ostream& operator<<(std::ostream& os, const Mat2x3& matrix)
+        {
+            const std::streamsize oldPrecision     = os.precision();
+            const std::ios_base::fmtflags oldFlags = os.flags();
+
+            auto precision = Config::useFullPrecision
+                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+                : Config::LOG_PRECISION;
+            os << std::setprecision(precision) << std::fixed;
+            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << "|\n";
+            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << "|\n";
+
+            os.precision(oldPrecision);
+            os.flags(oldFlags);
+
+            return os;
+        }
+
+        /** @} */
+
+
     private:
         std::array<Vector2<T>, columns> _data;
     };
+
 
     /**
      * @brief Compute the element-wise product between @p scalar and @p matrix and return a new matrix.
