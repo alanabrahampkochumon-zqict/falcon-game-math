@@ -15,4 +15,5 @@ target_link_libraries(
         GTest::gtest_main # googletest
         StrictWarnings
         ProjectSanitizers
+        NonComprehensiveTestMode
 )

@@ -20,4 +20,5 @@ target_link_libraries(
         FGM
         GTest::gtest
         GTest::gtest_main
+        NonComprehensiveTestMode
 )

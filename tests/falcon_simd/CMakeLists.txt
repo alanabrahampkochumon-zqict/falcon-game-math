@@ -33,6 +33,7 @@ target_link_libraries(
         ProjectSanitizers
 
         FalconSIMDUtilTests
+        NonComprehensiveTestMode
 )
 
 target_include_directories(

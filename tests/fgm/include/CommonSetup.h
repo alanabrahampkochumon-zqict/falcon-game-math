@@ -23,7 +23,6 @@
 
 
 #ifdef NONCOMPREHENSIVE
-
 using SupportedTypes                 = ::testing::Types<int32_t, int64_t, uint8_t, bool, float, double>;
 using SupportedArithmeticTypes       = ::testing::Types<int32_t, int64_t, uint8_t, float, double>;
 using SupportedSignedArithmeticTypes = ::testing::Types<int32_t, int64_t, float, double>;

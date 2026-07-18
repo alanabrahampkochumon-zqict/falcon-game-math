@@ -16,10 +16,12 @@ set(SetupFiles
         Vec3TestSetup.h
         Vec4TestSetup.h
         DoxygenGroups.h
-        MatrixTestSetup.h
+        Mat2TestSetup.h
         Mat2x3TestSetup.h
         Mat2x4TestSetup.h
+        Mat3TestSetup.h
         Mat3x2TestSetup.h
+        Mat4TestSetup.h
         CommonSetup.h
 )
 list(TRANSFORM SetupFiles PREPEND ${INCLUDE_DIR})
@@ -64,6 +66,7 @@ target_precompile_headers(
         <cstddef>
         <type_traits>
 )
+
 
 target_link_libraries(
         FGMTestSuite
@@ -119,6 +122,7 @@ source_group(
         ${GenericTestFiles}
 )
 
+
 set_target_properties(CommonTests
         Vec2Tests
         Vec3Tests
@@ -129,4 +133,5 @@ set_target_properties(CommonTests
         Mat3TransformTests
         Mat4Tests
         Mat4TransformTests
-        PROPERTIES FOLDER "Test Intermediates/FGM")
+        PROPERTIES FOLDER "Test Intermediates/FGM"
+)
