@@ -228,6 +228,31 @@
              * @}
              */
 
+
+            /**
+             * @defgroup FGM_Mat3x2_Tests 3x2 Matrix Test Suite
+             * @brief Verification of 3x2 matrix operations.
+             * @ingroup MatrixTests
+             * @{
+             *   @defgroup T_FGM_Mat3x2_Access Component Access
+             *   @defgroup T_FGM_Mat3x2_Mutation Component Mutation
+             *   @defgroup T_FGM_Mat3x2_Const Matrix Constants
+             *   @defgroup T_FGM_Mat3x2_Addition Addition
+             *   @defgroup T_FGM_Mat3x2_Subtraction Subtraction
+             *   @defgroup T_FGM_Mat3x2_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat3x2_Division Scalar Division
+             *   @defgroup T_FGM_Mat3x2_Transpose Matrix Transpose
+             *   @defgroup T_FGM_Mat3x2_Constant Matrix Constants
+             *   @defgroup T_FGM_Mat3x2_Equality Equality
+             *   @defgroup T_FGM_Mat3x2_Inequality Inequality
+             *   @defgroup T_FGM_Mat3x2_Init Initialization
+             *   @defgroup T_FGM_Mat3x2_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Mat3x2_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Mat3x2_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat3x2_Utils Matrix Utilities
+             * @}
+             */
+
             /**
              * @defgroup FGM_Mat3x3_Tests 3x3 Matrix Test Suite
              * @brief Verification of 3x3 square matrix operations.
