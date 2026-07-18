@@ -54,6 +54,64 @@ protected:
 TYPED_TEST_SUITE(Mat2x4Equality, SupportedArithmeticTypes);
 
 
+struct Mat2x4ElementParam
+{
+    fgm::Mat2x4<int> first, second;
+    bool expected;
+};
+
+
+class Mat2x4PerElementEquality: public ::testing::TestWithParam<Mat2x4ElementParam>
+{};
+/** @brief Fixture for verifying matrix equality by making only one element unequal at a time. */
+INSTANTIATE_TEST_SUITE_P(
+    Matrix2x4Tests, Mat2x4PerElementEquality,
+    ::testing::Values(
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8 }, .expected = true },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 2, 2, 3, 4, 5, 6, 7, 8 }, .expected = false },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 1, 3, 4, 5, 6, 7, 8 }, .expected = false },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 1, 4, 5, 6, 7, 8 }, .expected = false },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 1, 5, 6, 7, 8 }, .expected = false },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 1, 6, 7, 8 }, .expected = false },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 1, 7, 8 }, .expected = false },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 1, 8 }, .expected = false },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 7, 1 }, .expected = false }));
+
+
+class Mat2x4PerElementInequality: public ::testing::TestWithParam<Mat2x4ElementParam>
+{};
+/** @brief Fixture for verifying matrix inequality by making only one element unequal at a time. */
+INSTANTIATE_TEST_SUITE_P(
+    Matrix2x4Tests, Mat2x4PerElementInequality,
+    ::testing::Values(
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8 }, .expected = false },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 2, 2, 3, 4, 5, 6, 7, 8 }, .expected = true },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 1, 3, 4, 5, 6, 7, 8 }, .expected = true },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 1, 4, 5, 6, 7, 8 }, .expected = true },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 1, 5, 6, 7, 8 }, .expected = true },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 1, 6, 7, 8 }, .expected = true },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 1, 7, 8 }, .expected = true },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 1, 8 }, .expected = true },
+        Mat2x4ElementParam{
+            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 7, 1 }, .expected = true }));
+
 
 /**
  * @addtogroup T_FGM_Mat2x4_Equality
@@ -176,6 +234,7 @@ TEST(Mat2x4Equality, InfinityEquality_DifferentMatricesReturnFalse)
     EXPECT_FALSE(equality);
 }
 
+
 /** @brief Verify that fgm::Mat2x4::allEq works for different vector types with identical components. */
 TYPED_TEST(Mat2x4Equality, MixedType_Equality_IdenticalMatricesReturnTrue)
 {
@@ -186,19 +245,6 @@ TYPED_TEST(Mat2x4Equality, MixedType_Equality_IdenticalMatricesReturnTrue)
 
     EXPECT_TRUE(equality);
 }
-
-
-/** @brief Verify that fgm::Mat2x4::allEq works for different vector types with different components. */
-TYPED_TEST(Mat2x4Equality, MixedType_Equality_DifferentMatricesReturnFalse)
-{
-    const fgm::Mat2x4 matA(5, 6, 7, 8, 9, 10, 11, 12);
-    const fgm::Mat2x4 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 1.0, 5.0);
-
-    const bool equality = matA.allEq(matB);
-
-    EXPECT_FALSE(equality);
-}
-
 
 
 /** @brief Verify that the equality operator returns true for identical matrices. */
@@ -241,6 +287,42 @@ TEST(Mat2x4Equality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
     const bool equality = matA == matB;
 
     EXPECT_FALSE(equality);
+}
+
+
+/** @brief Verify that fgm::Mat2x4::allEq works for different vector types with different components. */
+TYPED_TEST(Mat2x4Equality, MixedType_Equality_DifferentMatricesReturnFalse)
+{
+    const fgm::Mat2x4 matA(5, 6, 7, 8, 9, 10, 11, 12);
+    const fgm::Mat2x4 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 1.0, 5.0);
+
+    const bool equality = matA.allEq(matB);
+
+    EXPECT_FALSE(equality);
+}
+
+
+/** @brief Verify that fgm::Mat2x4::allEq works for any element being unequal. */
+TEST_P(Mat2x4PerElementEquality, AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat.allEq(secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat2x4::allEq works for any element being unequal. */
+TEST_P(Mat2x4PerElementEquality, StaticWrapper_AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Mat2x4<int>::allEq(firstMat, secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat2x4::allEq works for any element being unequal. */
+TEST_P(Mat2x4PerElementEquality, EqualityOperator_AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat == secondMat);
 }
 
 /** @} */
@@ -418,5 +500,31 @@ TEST(Mat2x4Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
 
     EXPECT_TRUE(inequality);
 }
+
+
+
+/** @brief Verify that fgm::Mat2x4::anyNeq works for any element being unequal. */
+TEST_P(Mat2x4PerElementInequality, AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat.anyNeq(secondMat));
+}
+
+
+/** @brief Verify that static variant of fgm::Mat2x4::anyNeq works for any element being unequal. */
+TEST_P(Mat2x4PerElementInequality, StaticWrapper_AnyNeq__VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Mat2x4<int>::anyNeq(firstMat, secondMat));
+}
+
+
+/** @brief Verify that operator!= works for any element being unequal. */
+TEST_P(Mat2x4PerElementInequality, InequalityOperator_AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat != secondMat);
+}
+
 
 /** @} */
