@@ -89,7 +89,8 @@ namespace fgm
          * @param[in] col2 The 2x3 vector to use as the third column entry.
          * @param[in] col3 The 2x3 vector to use as the fourth column entry.
          */
-        [[nodiscard]] constexpr Mat2x4(const Vec2<T>& col0, const Vec2<T>& col1, const Vec2<T>& col2, const Vec2<T>& col3) noexcept;
+        [[nodiscard]] constexpr Mat2x4(const Vec2<T>& col0, const Vec2<T>& col1, const Vec2<T>& col2,
+                                       const Vec2<T>& col3) noexcept;
 
 
 
@@ -349,348 +350,348 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-    /**
-     * @brief Compute the element-wise difference between this matrix and @p rhs matrix
-     *        and return a new matrix.
-     *
-     * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, U>.
-     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-     *
-     * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-     *
-     * @param[in] rhs The matrix to subtract.
-     *
-     * @return A new @ref Mat2x4 containing the element-wise difference.
-     */
-    template <StrictArithmetic U>
-        requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedMat2x4<T, U> operator-(const Mat2x4<U>& rhs) const noexcept
-        requires StrictArithmetic<T>;
+        /**
+         * @brief Compute the element-wise difference between this matrix and @p rhs matrix
+         *        and return a new matrix.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to subtract.
+         *
+         * @return A new @ref Mat2x4 containing the element-wise difference.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedMat2x4<T, U> operator-(const Mat2x4<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
 
 
-    /**
-     * @brief Compute the element-wise difference between this matrix and @p rhs matrix in-place.
-     *
-     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-     *
-     * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-     *
-     * @param[in] rhs The matrix to subtract.
-     *
-     * @return A reference to this matrix (*this).
-     */
-    template <StrictArithmetic U>
-        requires StrictSignedness<T, U>
-    constexpr Mat2x4& operator-=(const Mat2x4<U>& rhs) noexcept
-        requires StrictArithmetic<T>;
+        /**
+         * @brief Compute the element-wise difference between this matrix and @p rhs matrix in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to subtract.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr Mat2x4& operator-=(const Mat2x4<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
 
 
-    /**
-     * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
-     *
-     * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
-     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-     *
-     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-     *
-     * @param[in] scalar The value to scale by.
-     *
-     * @return A new @ref Mat2x4 scaled by @p scalar.
-     */
-    template <StrictArithmetic S>
-    [[nodiscard]] constexpr PromotedMat2x4<T, S> operator*(S scalar) const noexcept
-        requires StrictArithmetic<T>;
+        /**
+         * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Mat2x4 scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMat2x4<T, S> operator*(S scalar) const noexcept
+            requires StrictArithmetic<T>;
 
 
-    /**
-     * @brief Compute the element-wise product between this matrix and @p scalar in-place.
-     *
-     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-     *
-     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-     *
-     * @param[in] scalar The value to scale by.
-     *
-     * @return A reference to this matrix (*this).
-     */
-    template <StrictArithmetic S>
-    constexpr Mat2x4& operator*=(S scalar) noexcept
-        requires StrictArithmetic<T>;
-    
-
-    //     /**
-    //      * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
-    //      *
-    //      * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
-    //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //      * @note Performs assertion for division by zero in **Debug mode**.
-    //      *
-    //      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //      *
-    //      * @param[in] scalar The value to scale by.
-    //      *
-    //      * @return A new @ref Mat2x4 inverse scaled by @p scalar.
-    //      */
-    //     template <StrictArithmetic S>
-    //     [[nodiscard]] constexpr PromotedMat2x4<T, S> operator/(S scalar) const noexcept
-    //         requires StrictArithmetic<T>;
-    //
-    //
-    //     /**
-    //      * @brief Compute the element-wise division of this matrix by @p scalar in-place.
-    //      *
-    //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //      * @note Performs assertion for division by zero in **Debug mode**.
-    //      *
-    //      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //      *
-    //      * @param[in] scalar The value to scale by.
-    //      *
-    //      * @return A reference to this matrix (*this).
-    //      */
-    //     template <StrictArithmetic S>
-    //     constexpr Mat2x4& operator/=(S scalar) noexcept
-    //         requires StrictArithmetic<T>;
-    //
-    //
-    //     /**
-    //      * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
-    //      *
-    //      * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
-    //      *       returns @p fallback.
-    //      * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
-    //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //      * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-    //      *       operand contains NaN.
-    //      *
-    //      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //      *
-    //      * @param[in] scalar   The value to divide the matrix elements by.
-    //      * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
-    //      *                     or a NaN element.
-    //      *
-    //      * @return A new @ref Mat2x4 resulting from the division or @p fallback if the @p scalar is below the
-    //      *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
-    //      */
-    //     template <StrictArithmetic S>
-    //     [[nodiscard]] constexpr PromotedMat2x4<T, S> safeDiv(S scalar,
-    //                                                          const Mat2x4& fallback = Mat2x4::zero()) const noexcept
-    //         requires StrictArithmetic<T>;
-    //
-    //
-    //     /**
-    //      * @brief Compute the element-wise division of @p mat by @p scalar and return a new matrix.
-    //      *
-    //      * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
-    //      *       returns @p fallback.
-    //      * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
-    //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //      * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-    //      *       operand contains NaN.
-    //      *
-    //      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //      *
-    //      * @param[in] mat      The matrix to divide.
-    //      * @param[in] scalar   The value to divide the matrix elements by.
-    //      * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
-    //      *                     or a NaN element.
-    //      *
-    //      * @return A new @ref Mat2x4 resulting from the division or @p fallback if the @p scalar is below the
-    //      *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
-    //      */
-    //     template <StrictArithmetic S>
-    //     [[nodiscard]] static constexpr PromotedMat2x4<T, S> safeDiv(const Mat2x4& mat, S scalar,
-    //                                                                 const Mat2x4& fallback = Mat2x4::zero()) noexcept
-    //         requires StrictArithmetic<T>;
-    //
-    //
-    //     /**
-    //      * @brief Compute the element-wise division of this matrix by @p scalar, return a new matrix,
-    //      *        and updates @p status to reflect the result of the operation.
-    //      *
-    //      * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
-    //      *       returns @p fallback.
-    //      * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
-    //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //      * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-    //      *       operand contains NaN.
-    //      * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
-    //      *       invalidity (Division by Zero) when reporting status.
-    //      *
-    //      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //      *
-    //      * @param[in] scalar   The value to divide the matrix elements by.
-    //      * @param[out] status  The status flag to store the status of the current operation result.
-    //      *                     For details on status codes see @ref OperationStatus.
-    //      * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
-    //      *                     or a NaN element.
-    //      *
-    //      * @return A new @ref Mat2x4 resulting from the division or @p fallback if the @p scalar is below the
-    //      *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
-    //      */
-    //     template <StrictArithmetic S>
-    //     [[nodiscard]] constexpr PromotedMat2x4<T, S> tryDiv(S scalar, OperationStatus& status,
-    //                                                         const Mat2x4& fallback = Mat2x4::zero()) const noexcept
-    //         requires StrictArithmetic<T>;
-    //
-    //
-    //     /**
-    //      * @brief Compute the element-wise division of @p Vec by @p scalar, return a new matrix,
-    //      *        and updates @p status to reflect the result of the operation.
-    //      *
-    //      * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
-    //      *       returns @p fallback.
-    //      * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
-    //      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //      * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-    //      *       operand contains NaN.
-    //      * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
-    //      *       invalidity (Division by Zero) when reporting status.
-    //      *
-    //      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //      *
-    //      * @param[in] mat      The matrix to divide.
-    //      * @param[in] scalar   The value to divide the matrix elements by.
-    //      * @param[out] status  The status flag to store the status of the current operation result.
-    //      *                     For details on status codes see @ref OperationStatus.
-    //      * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
-    //      *                     or a NaN element.
-    //      *
-    //      * @return A new @ref Mat2x4 resulting from the division or @p fallback if the @p scalar is below the
-    //      *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
-    //      */
-    //     template <StrictArithmetic S>
-    //     [[nodiscard]] static constexpr PromotedMat2x4<T, S> tryDiv(const Mat2x4& mat, S scalar, OperationStatus& status,
-    //                                                                const Mat2x4& fallback = Mat2x4::zero()) noexcept
-    //         requires StrictArithmetic<T>;
-    //
-    //     /** @} */
-    //
-
-    /**
-     * @addtogroup FGM_Mat2x4_Utils
-     * @{
-     */
-
-    /**
-     * @brief Check if any element of this matrix is an IEEE 754 infinity.
-     *
-     * @note Always returns false for integral types.
-     *
-     * @return True if at least one element is positive or negative infinity.
-     */
-    [[nodiscard]] constexpr bool hasInf() const noexcept;
+        /**
+         * @brief Compute the element-wise product between this matrix and @p scalar in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Mat2x4& operator*=(S scalar) noexcept
+            requires StrictArithmetic<T>;
 
 
-    /**
-     * @brief Check if any element of @p matrix is an IEEE 754 infinity.
-     *
-     * @note Always returns false for integral types.
-     *
-     * @param matrix The matrix to evaluate for indefinite elements.
-     *
-     * @return True if at least one element is positive or negative infinity.
-     */
-    [[nodiscard]] static constexpr bool hasInf(const Mat2x4& matrix) noexcept;
+        /**
+         * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Mat2x4 inverse scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMat2x4<T, S> operator/(S scalar) const noexcept
+            requires StrictArithmetic<T>;
 
 
-    /**
-     * @brief Check if any element of this matrix is an IEEE NaN(Not-a-Number).
-     *
-     * @note Always return false for integral types.
-     *
-     * @return True if at least one element is NaN.
-     */
-    [[nodiscard]] constexpr bool hasNaN() const noexcept;
+        /**
+         * @brief Compute the element-wise division of this matrix by @p scalar in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Mat2x4& operator/=(S scalar) noexcept
+            requires StrictArithmetic<T>;
 
 
-    /**
-     * @brief Check if any element of @p matrix is an IEEE NaN(Not-a-Number).
-     *
-     * @note Always return false for integral types.
-     *
-     * @param matrix The matrix to evaluate for indefinite elements.
-     *
-     * @return True if at least one element is NaN.
-     */
-    [[nodiscard]] static constexpr bool hasNaN(const Mat2x4& matrix) noexcept;
+        /**
+         * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
+         * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
+         *                     or a NaN element.
+         *
+         * @return A new @ref Mat2x4 resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMat2x4<T, S> safeDiv(S scalar,
+                                                             const Mat2x4& fallback = Mat2x4::zero()) const noexcept
+            requires StrictArithmetic<T>;
 
 
-    //     /**
-    //      * @addtogroup T_FGM_Mat2x4_Constant
-    //      * @{
-    //      */
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *             CONSTANTS              *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     /**
-    //      * @brief A 2x3 matrix with all elements being one.
-    //      *
-    //      * @note Constrained to @ref StrictArithmetic types.
-    //      */
-    //     static constexpr Mat2x4 one()
-    //         requires fgm::StrictArithmetic<T>
-    //     { return Mat2x4{ T(1), T(1), T(1), T(1), T(1), T(1) }; }
-    //
-    //
-    //     /**
-    //      * @brief A 2x3 matrix with all elements being zero.
-    //      *
-    //      * @note Constrained to @ref StrictArithmetic types.
-    //      */
-    //     static constexpr Mat2x4 zero()
-    //         requires fgm::StrictArithmetic<T>
-    //     { return Mat2x4{ T(0), T(0), T(0), T(0), T(0), T(0) }; }
-    //
-    //     /** @} */
-    //
-    //
-    //
-    //     /**
-    //      * @addtogroup FGM_Mat2x4_Log
-    //      * @{
-    //      */
-    //
-    //     /**
-    //      * @brief Write the matrix to an output stream in **row-major** order.
-    //      *        Format the matrix as
-    //      *        \f$
-    //      *            \begin{bmatrix}
-    //      *                 A_{00} & A_{10} & A{20} \\
-    //      *                 A_{01} & A_{11} & A{21}
-    //      *            \end{bmatrix}
-    //      *        \f$ string representation for debugging or logging.
-    //      *
-    //      * @param os     The output stream to write to.
-    //      * @param matrix The matrix to be streamed.
-    //      *
-    //      * @return A reference to the output stream @p os.
-    //      */
-    //     friend std::ostream& operator<<(std::ostream& os, const Mat2x4& matrix)
-    //     {
-    //         const std::streamsize oldPrecision     = os.precision();
-    //         const std::ios_base::fmtflags oldFlags = os.flags();
-    //
-    //         auto precision = Config::useFullPrecision
-    //             ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
-    //             : Config::LOG_PRECISION;
-    //         os << std::setprecision(precision) << std::fixed;
-    //         os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << "|\n";
-    //         os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << "|\n";
-    //
-    //         os.precision(oldPrecision);
-    //         os.flags(oldFlags);
-    //
-    //         return os;
-    //     }
-    //
-    //     /** @} */
-    //
-    //
+        /**
+         * @brief Compute the element-wise division of @p mat by @p scalar and return a new matrix.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
+         * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] mat      The matrix to divide.
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
+         *                     or a NaN element.
+         *
+         * @return A new @ref Mat2x4 resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] static constexpr PromotedMat2x4<T, S> safeDiv(const Mat2x4& mat, S scalar,
+                                                                    const Mat2x4& fallback = Mat2x4::zero()) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise division of this matrix by @p scalar, return a new matrix,
+         *        and updates @p status to reflect the result of the operation.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
+         *       returns @p fallback.
+         * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         *       invalidity (Division by Zero) when reporting status.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
+         *                     or a NaN element.
+         *
+         * @return A new @ref Mat2x4 resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMat2x4<T, S> tryDiv(S scalar, OperationStatus& status,
+                                                            const Mat2x4& fallback = Mat2x4::zero()) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise division of @p Vec by @p scalar, return a new matrix,
+         *        and updates @p status to reflect the result of the operation.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
+         * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         *       invalidity (Division by Zero) when reporting status.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] mat      The matrix to divide.
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
+         *                     or a NaN element.
+         *
+         * @return A new @ref Mat2x4 resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] static constexpr PromotedMat2x4<T, S> tryDiv(const Mat2x4& mat, S scalar, OperationStatus& status,
+                                                                   const Mat2x4& fallback = Mat2x4::zero()) noexcept
+            requires StrictArithmetic<T>;
+
+        /** @} */
+
+
+        /**
+         * @addtogroup FGM_Mat2x4_Utils
+         * @{
+         */
+
+        /**
+         * @brief Check if any element of this matrix is an IEEE 754 infinity.
+         *
+         * @note Always returns false for integral types.
+         *
+         * @return True if at least one element is positive or negative infinity.
+         */
+        [[nodiscard]] constexpr bool hasInf() const noexcept;
+
+
+        /**
+         * @brief Check if any element of @p matrix is an IEEE 754 infinity.
+         *
+         * @note Always returns false for integral types.
+         *
+         * @param matrix The matrix to evaluate for indefinite elements.
+         *
+         * @return True if at least one element is positive or negative infinity.
+         */
+        [[nodiscard]] static constexpr bool hasInf(const Mat2x4& matrix) noexcept;
+
+
+        /**
+         * @brief Check if any element of this matrix is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @return True if at least one element is NaN.
+         */
+        [[nodiscard]] constexpr bool hasNaN() const noexcept;
+
+
+        /**
+         * @brief Check if any element of @p matrix is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @param matrix The matrix to evaluate for indefinite elements.
+         *
+         * @return True if at least one element is NaN.
+         */
+        [[nodiscard]] static constexpr bool hasNaN(const Mat2x4& matrix) noexcept;
+
+
+        /**
+         * @addtogroup T_FGM_Mat2x4_Constant
+         * @{
+         */
+
+        /**************************************
+         *                                    *
+         *             CONSTANTS              *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief A 2x3 matrix with all elements being one.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Mat2x4 one()
+            requires fgm::StrictArithmetic<T>
+        { return Mat2x4{ T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1) }; }
+
+
+        /**
+         * @brief A 2x3 matrix with all elements being zero.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Mat2x4 zero()
+            requires fgm::StrictArithmetic<T>
+        { return Mat2x4{ T(0), T(0), T(0), T(0), T(0), T(0),T(0), T(0) }; }
+
+        /** @} */
+
+
+        //
+        //     /**
+        //      * @addtogroup FGM_Mat2x4_Log
+        //      * @{
+        //      */
+        //
+        //     /**
+        //      * @brief Write the matrix to an output stream in **row-major** order.
+        //      *        Format the matrix as
+        //      *        \f$
+        //      *            \begin{bmatrix}
+        //      *                 A_{00} & A_{10} & A{20} \\
+        //      *                 A_{01} & A_{11} & A{21}
+        //      *            \end{bmatrix}
+        //      *        \f$ string representation for debugging or logging.
+        //      *
+        //      * @param os     The output stream to write to.
+        //      * @param matrix The matrix to be streamed.
+        //      *
+        //      * @return A reference to the output stream @p os.
+        //      */
+        //     friend std::ostream& operator<<(std::ostream& os, const Mat2x4& matrix)
+        //     {
+        //         const std::streamsize oldPrecision     = os.precision();
+        //         const std::ios_base::fmtflags oldFlags = os.flags();
+        //
+        //         auto precision = Config::useFullPrecision
+        //             ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+        //             : Config::LOG_PRECISION;
+        //         os << std::setprecision(precision) << std::fixed;
+        //         os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << " " << matrix._data[2][0] << "|\n";
+        //         os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << " " << matrix._data[2][1] << "|\n";
+        //
+        //         os.precision(oldPrecision);
+        //         os.flags(oldFlags);
+        //
+        //         return os;
+        //     }
+        //
+        //     /** @} */
+        //
+        //
     private:
         std::array<Vec2<T>, COLUMNS> _data;
     };
