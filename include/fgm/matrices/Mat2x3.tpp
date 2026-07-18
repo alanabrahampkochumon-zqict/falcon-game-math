@@ -117,7 +117,7 @@ namespace fgm
             }
         }
 #endif
-        return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon) && _data[1].allEq(rhs[2], epsilon);
+        return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon) && _data[2].allEq(rhs[2], epsilon);
     }
 
 
