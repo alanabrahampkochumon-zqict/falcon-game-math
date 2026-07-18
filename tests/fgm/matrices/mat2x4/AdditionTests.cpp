@@ -32,7 +32,7 @@ protected:
         _expectedSum = { fgm::Vec2<T>(6, 8), fgm::Vec2<T>(10, 12), fgm::Vec2<T>(5, 9), fgm::Vec2<T>(4, 4) };
     }
 };
-/** @brief Test fixture for @ref fgm:: Mat2x4 addition, parameterized by @ref SupportedArithmeticTypes. */
+/** @brief Test fixture for @ref fgm::Mat2x4 addition, parameterized by @ref SupportedArithmeticTypes. */
 TYPED_TEST_SUITE(Mat2x4Addition, SupportedArithmeticTypes);
 
 

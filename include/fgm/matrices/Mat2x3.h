@@ -83,9 +83,9 @@ namespace fgm
         /**
          * @brief Initialize a 2x3 matrix from the passed-in vectors as columns.
          *
-         * @param[in] col0 The 2x3 vector to use as the first column entry.
-         * @param[in] col1 The 2x3 vector to use as the second column entry.
-         * @param[in] col2 The 2x3 vector to use as the third column entry.
+         * @param[in] col0 The 2D vector to use as the first column entry.
+         * @param[in] col1 The 2D vector to use as the second column entry.
+         * @param[in] col2 The 2D vector to use as the third column entry.
          */
         [[nodiscard]] constexpr Mat2x3(const Vec2<T>& col0, const Vec2<T>& col1, const Vec2<T>& col2) noexcept;
 

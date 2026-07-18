@@ -19,6 +19,7 @@ set(SetupFiles
         MatrixTestSetup.h
         Mat2x3TestSetup.h
         Mat2x4TestSetup.h
+        Mat3x2TestSetup.h
         CommonSetup.h
 )
 list(TRANSFORM SetupFiles PREPEND ${INCLUDE_DIR})
@@ -34,6 +35,7 @@ add_subdirectory(matrices/mat2)
 add_subdirectory(matrices/mat2x3)
 add_subdirectory(matrices/mat2x4)
 add_subdirectory(matrices/mat3)
+add_subdirectory(matrices/mat3x2)
 add_subdirectory(matrices/mat4)
 add_subdirectory(matrices/matmul)
 
@@ -83,6 +85,7 @@ target_link_libraries(
         Mat2x4Tests
         Mat2TransformTests
         Mat3Tests
+        Mat3x2Tests
         Mat3TransformTests
         Mat4Tests
         Mat4TransformTests
