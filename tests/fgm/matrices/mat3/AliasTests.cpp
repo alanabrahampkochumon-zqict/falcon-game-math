@@ -9,7 +9,7 @@
  */
 
 
-#include "MatrixTestSetup.h"
+#include "Mat3TestSetup.h"
 
 #include <cstdint>
 

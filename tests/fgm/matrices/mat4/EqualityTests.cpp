@@ -10,7 +10,7 @@
  */
 
 
-#include "MatrixTestSetup.h"
+#include "Mat4TestSetup.h"
 
 #include <fgm/common/Constants.h>
 

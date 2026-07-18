@@ -10,7 +10,7 @@
 
 
 
-#include "MatrixTestSetup.h"
+#include "Mat3TestSetup.h"
 
 /**
  * @addtogroup T_FGM_Mat3x3_Transforms

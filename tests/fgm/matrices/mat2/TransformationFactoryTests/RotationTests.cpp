@@ -9,7 +9,7 @@
  */
 
 
-#include "MatrixTestSetup.h"
+#include "Mat2TestSetup.h"
 
 
 

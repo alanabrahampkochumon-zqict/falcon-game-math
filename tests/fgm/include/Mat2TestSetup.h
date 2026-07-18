@@ -2,9 +2,9 @@
 /**
  * @file MatrixTestSetup.h
  * @author Alan Abraham P Kochumon
- * @date Created on: April 04, 2026
+ * @date Created on: July 18, 2026
  *
- * @brief Define test setups common to all Matrix tests.
+ * @brief Define test setups common to 2D square Matrix tests.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -17,8 +17,6 @@
 
 #include <fgm/common/MathTraits.h>
 #include <fgm/matrices/Mat2.h>
-#include <fgm/matrices/Mat3.h>
-#include <fgm/matrices/Mat4.h>
 
 
 

@@ -9,7 +9,7 @@
  */
 
 
-#include "MatrixTestSetup.h"
+#include "Mat3TestSetup.h"
 
 
 
@@ -36,7 +36,7 @@ TYPED_TEST_SUITE(Mat3Constants, SupportedArithmeticTypes);
 namespace
 {
     // Verify identity matrix
-    static_assert(fgm::Mat4<int>::identity()(0, 0) == 1);
+    static_assert(fgm::Mat3<int>::identity()(0, 0) == 1);
     static_assert(fgm::Mat3<int>::identity()(0, 1) == 0);
     static_assert(fgm::Mat3<int>::identity()(0, 2) == 0);
 
