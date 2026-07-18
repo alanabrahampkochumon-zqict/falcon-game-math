@@ -90,7 +90,7 @@ namespace fgm
     template <typename T>
     concept Vector = requires(T v, std::size_t i) {
         typename T::value_type;
-        { T::dimension } -> std::same_as<const std::size_t&>;
+        { T::DIMENSION } -> std::same_as<const std::size_t&>;
         { v[i] } -> std::convertible_to<typename T::value_type>;
     } && Arithmetic<typename T::value_type>;
 

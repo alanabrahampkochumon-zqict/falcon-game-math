@@ -43,7 +43,7 @@ namespace fgm
 
         using value_type = T; ///< The numeric type of the vector components.
 
-        static constexpr std::size_t dimension = 2; ///< The number of components of the vector.
+        static constexpr std::size_t DIMENSION = 2; ///< The number of components of the vector.
 
         /** @} */
 
@@ -60,7 +60,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Vector2<T>::zero() to guarantee a zeroed vector. 
+         *       @ref fgm::Vector2<T>::zero() to guarantee a zeroed vector.
          */
         Vector2() = default;
 
@@ -2244,7 +2244,7 @@ namespace fgm
         /** @} */
 
     private:
-        std::array<T, dimension> _data;
+        std::array<T, DIMENSION> _data;
     };
 
 

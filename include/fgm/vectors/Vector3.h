@@ -44,7 +44,7 @@ namespace fgm
 
         using value_type = T; ///< The numeric type of the vector components.
 
-        static constexpr std::size_t dimension = 3; ///< The number of components of the vector.
+        static constexpr std::size_t DIMENSION = 3; ///< The number of components of the vector.
 
         /** @} */
 
@@ -2408,7 +2408,7 @@ namespace fgm
         /** @} */
 
     private:
-        std::array<T, dimension> _data;
+        std::array<T, DIMENSION> _data;
     };
 
 

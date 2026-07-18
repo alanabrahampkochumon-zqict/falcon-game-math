@@ -272,14 +272,14 @@ namespace fgm
     template <Arithmetic T>
     constexpr T& Vector4<T>::operator[](const std::size_t idx) noexcept
     {
-        FGM_ASSERT_MSG(idx < dimension, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
+        FGM_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 
     template <Arithmetic T>
     constexpr const T& Vector4<T>::operator[](const std::size_t idx) const noexcept
     {
-        FGM_ASSERT_MSG(idx < dimension, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
+        FGM_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 
@@ -296,7 +296,7 @@ namespace fgm
     {
         constexpr std::size_t swizzleDimension = sizeof...(Indices);
 
-        static_assert(((Indices < dimension) && ...), "Index out of bounds!");
+        static_assert(((Indices < DIMENSION) && ...), "Index out of bounds!");
         static_assert(swizzleDimension > 0 && swizzleDimension <= constants::MAX_VECTOR_SWIZZLE_DIMENSION &&
                       "Swizzle must return a scalar, or a 2D, 3D, or 4D vector.");
 
@@ -864,14 +864,14 @@ namespace fgm
         {
             if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
             {
-                return fgm::Vector4<R>::zero();
+                return Vector4<R>::zero();
             }
         }
         if constexpr (std::is_integral_v<R>)
         {
             if (scalar == 0)
             {
-                return fgm::Vector4<R>::zero();
+                return Vector4<R>::zero();
             }
         }
 
@@ -900,12 +900,12 @@ namespace fgm
             if (hasNaN() | fgm::isnan(scalar))
             {
                 status = OperationStatus::NANOPERAND;
-                return fgm::Vector4<R>::zero();
+                return Vector4<R>::zero();
             }
             if (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return fgm::Vector4<R>::zero();
+                return Vector4<R>::zero();
             }
         }
 
@@ -914,7 +914,7 @@ namespace fgm
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return fgm::Vector4<R>::zero();
+                return Vector4<R>::zero();
             }
         }
 
@@ -1204,11 +1204,11 @@ namespace fgm
         R magnitude = mag();
         if (fgm::isnan(magnitude))
         {
-            return fgm::Vector4<R>::zero();
+            return Vector4<R>::zero();
         }
         if (magnitude <= Config::EPSILON_SQUARE<R>)
         {
-            return fgm::Vector4<R>::zero();
+            return Vector4<R>::zero();
         }
 
         return *this / magnitude;
@@ -1232,12 +1232,12 @@ namespace fgm
         if (fgm::isnan(magnitude))
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::Vector4<R>::zero();
+            return Vector4<R>::zero();
         }
         if (magnitude <= Config::EPSILON_SQUARE<R>)
         {
             status = OperationStatus::DIVISIONBYZERO;
-            return fgm::Vector4<R>::zero();
+            return Vector4<R>::zero();
         }
 
         status = OperationStatus::SUCCESS;
@@ -1319,12 +1319,12 @@ namespace fgm
 
         if (hasNaN() | fgm::isnan(ontoSquared))
         {
-            return fgm::Vector4<MagType>::zero();
+            return Vector4<MagType>::zero();
         }
 
         if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
         {
-            return fgm::Vector4<MagType>::zero();
+            return Vector4<MagType>::zero();
         }
 
         return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
@@ -1341,7 +1341,7 @@ namespace fgm
 
         if (hasNaN() || onto.hasNaN())
         {
-            return fgm::Vector4<R>::zero();
+            return Vector4<R>::zero();
         }
         return this->dot(onto) * onto;
     }
@@ -1383,13 +1383,13 @@ namespace fgm
         if (hasNaN() | fgm::isnan(ontoSquared))
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::Vector4<MagType>::zero();
+            return Vector4<MagType>::zero();
         }
 
         if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
         {
             status = OperationStatus::DIVISIONBYZERO;
-            return fgm::Vector4<MagType>::zero();
+            return Vector4<MagType>::zero();
         }
 
         status = OperationStatus::SUCCESS;
@@ -1409,7 +1409,7 @@ namespace fgm
         if (hasNaN() || onto.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::Vector4<R>::zero();
+            return Vector4<R>::zero();
         }
 
         status = OperationStatus::SUCCESS;
@@ -1493,7 +1493,7 @@ namespace fgm
     {
         if (hasNaN() || from.hasNaN())
         {
-            return fgm::Vector4<Magnitude<PromotedValue_t<T, U>>>::zero();
+            return Vector4<Magnitude<PromotedValue_t<T, U>>>::zero();
         }
 
         return static_cast<PromotedFloatVector4<T, U>>(*this) - safeProject(from);
@@ -1508,7 +1508,7 @@ namespace fgm
     {
         if (hasNaN() || from.hasNaN())
         {
-            return fgm::Vector4<PromotedValue_t<T, U>>::zero();
+            return Vector4<PromotedValue_t<T, U>>::zero();
         }
 
         return *this - safeProjectNorm(from);
@@ -1545,7 +1545,7 @@ namespace fgm
         if (hasNaN() || from.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::Vector4<Magnitude<PromotedValue_t<T, U>>>::zero();
+            return Vector4<Magnitude<PromotedValue_t<T, U>>>::zero();
         }
 
         return static_cast<PromotedFloatVector4<T, U>>(*this) - this->tryProject(from, status);
@@ -1562,7 +1562,7 @@ namespace fgm
         if (hasNaN() || from.hasNaN())
         {
             status = OperationStatus::NANOPERAND;
-            return fgm::Vector4<PromotedValue_t<T, U>>::zero();
+            return Vector4<PromotedValue_t<T, U>>::zero();
         }
 
         return *this - this->tryProjectNorm(from, status);
