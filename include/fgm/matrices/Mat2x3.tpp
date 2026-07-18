@@ -117,7 +117,7 @@ namespace fgm
             }
         }
 #endif
-        return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon);
+        return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon) && _data[1].allEq(rhs[2], epsilon);
     }
 
 
@@ -145,7 +145,7 @@ namespace fgm
             }
         }
 #endif
-        return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon);
+        return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon) || _data[2].anyNeq(rhs[2], epsilon);
     }
 
 
