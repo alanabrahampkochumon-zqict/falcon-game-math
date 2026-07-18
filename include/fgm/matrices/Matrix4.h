@@ -46,8 +46,8 @@ namespace fgm
 
         using value_type = T; ///< The numeric type of the matrix elements.
 
-        static constexpr std::size_t columns = 4; ///< Matrix column count.
-        static constexpr std::size_t rows    = 4; ///< Matrix row count.
+        static constexpr std::size_t COLUMNS = 4; ///< Matrix column count.
+        static constexpr std::size_t ROWS    = 4; ///< Matrix row count.
 
         /** @} */
 
@@ -65,7 +65,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Matrix4<T>::ZERO() to guarantee a zeroed matrix.
+         *       @ref fgm::Matrix4<T>::zero() to guarantee a zeroed matrix.
          */
         Matrix4() = default;
 
@@ -607,7 +607,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMatrix4<T, S> safeDiv(S scalar,
-                                                              const Matrix4& fallback = Matrix4::EYE()) const noexcept
+                                                              const Matrix4& fallback = Matrix4::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -633,7 +633,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMatrix4<T, S> safeDiv(const Matrix4& mat, S scalar,
-                                                                     const Matrix4& fallback = Matrix4::EYE()) noexcept
+                                                                     const Matrix4& fallback = Matrix4::identity()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -664,7 +664,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMatrix4<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                             const Matrix4& fallback = Matrix4::EYE()) const noexcept
+                                                             const Matrix4& fallback = Matrix4::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -697,7 +697,7 @@ namespace fgm
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMatrix4<T, S> tryDiv(const Matrix4& mat, S scalar,
                                                                     OperationStatus& status,
-                                                                    const Matrix4& fallback = Matrix4::EYE()) noexcept
+                                                                    const Matrix4& fallback = Matrix4::identity()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -935,7 +935,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix4<Magnitude<T>> safeInverse(const Matrix4& fallback = Matrix4::EYE()) const noexcept
+        constexpr Matrix4<Magnitude<T>> safeInverse(const Matrix4& fallback = Matrix4::identity()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -976,7 +976,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix4<Magnitude<T>> safeInverseOf(const Matrix4& matrix,
-                                                             const Matrix4& fallback = Matrix4::EYE()) noexcept
+                                                             const Matrix4& fallback = Matrix4::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1018,7 +1018,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Matrix4<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                   const Matrix4& fallback = Matrix4::EYE()) const noexcept
+                                                   const Matrix4& fallback = Matrix4::identity()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1061,7 +1061,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Matrix4<Magnitude<T>> tryInverseOf(const Matrix4& matrix, OperationStatus& status,
-                                                            const Matrix4& fallback = Matrix4::EYE()) noexcept
+                                                            const Matrix4& fallback = Matrix4::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1329,7 +1329,7 @@ namespace fgm
          * @return A new @ref Matrix4 representing the linear rotation around @p axis
          *         promoted to the nearest floating point type.
          *
-         * @relatedalso makeRotationNonNorm(U, const Vector3<T>&)
+         * @relatedalso makeRotationNonNorm(U, const Vector3<T>&) // TODO:
          */
         template <std::floating_point U>
         [[nodiscard]] static constexpr PromotedFloatMatrix4<T, U> makeRotation(U angle, const Vector3<T>& axis) noexcept
@@ -1434,7 +1434,7 @@ namespace fgm
          *
          * @note Constrained to @ref StrictArithmetic types.
          */
-        static constexpr Matrix4 EYE()
+        static constexpr Matrix4 identity()
             requires fgm::StrictArithmetic<T>
         {
             return Matrix4{ T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0),
@@ -1447,7 +1447,7 @@ namespace fgm
          *
          * @note Constrained to @ref StrictArithmetic types.
          */
-        static constexpr Matrix4 ZERO()
+        static constexpr Matrix4 zero()
             requires fgm::StrictArithmetic<T>
         {
             return Matrix4{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0),
@@ -1459,7 +1459,7 @@ namespace fgm
         /** @} */
 
     private:
-        std::array<Vector4<T>, columns> _data;
+        std::array<Vector4<T>, COLUMNS> _data;
     };
 
 

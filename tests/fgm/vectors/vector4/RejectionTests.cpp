@@ -489,7 +489,7 @@ TEST(Vector4Rejection, SafeReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector4Rejection, SafeReject_FromZeroVectorReturnsSameVector)
 {
-    const fgm::Vector4 zeroVec = fgm::Vector4<TypeParam>::ZERO();
+    const fgm::Vector4 zeroVec = fgm::Vector4<TypeParam>::zero();
 
     const fgm::Vector4 actualRejection = this->_vec.safeReject(zeroVec);
 
@@ -619,7 +619,7 @@ TEST(Vector4Rejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector4Rejection, StaticWrapper_SafeReject_FromZeroVectorReturnsSameVector)
 {
-    const fgm::Vector4 zeroVec = fgm::Vector4<TypeParam>::ZERO();
+    const fgm::Vector4 zeroVec = fgm::Vector4<TypeParam>::zero();
 
     const fgm::Vector4 actualRejection = fgm::Vector4<TypeParam>::safeReject(this->_vec, zeroVec);
 
@@ -653,7 +653,7 @@ TYPED_TEST(Vector4Rejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPointV
 TEST_P(Vector4RejectionNaNTests, SafeReject_NaNVectorReturnsZeroVector)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vector4<float>::ONE();
+    const auto& ontoVec = fgm::Vector4<float>::one();
 
     EXPECT_VEC_ZERO(nanVec.safeReject(ontoVec));
 }
@@ -665,7 +665,7 @@ TEST_P(Vector4RejectionNaNTests, SafeReject_NaNVectorReturnsZeroVector)
  */
 TEST_P(Vector4RejectionNaNTests, SafeReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vector4<float>::ONE();
+    const auto& oneVec     = fgm::Vector4<float>::one();
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(oneVec.safeReject(ontoNaNVec));
@@ -679,7 +679,7 @@ TEST_P(Vector4RejectionNaNTests, SafeReject_OntoNaNVectorReturnsZeroVectorAndSet
 TEST_P(Vector4RejectionNaNTests, StaticWrapper_SafeReject_NaNVectorReturnsZeroVector)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vector4<float>::ONE();
+    const auto& ontoVec = fgm::Vector4<float>::one();
 
     EXPECT_VEC_ZERO(fgm::Vector4<float>::safeReject(nanVec, ontoVec));
 }
@@ -691,7 +691,7 @@ TEST_P(Vector4RejectionNaNTests, StaticWrapper_SafeReject_NaNVectorReturnsZeroVe
  */
 TEST_P(Vector4RejectionNaNTests, StaticWrapper_SafeReject_OntoNaNVectorReturnsZeroVector)
 {
-    const auto& oneVec     = fgm::Vector4<float>::ONE();
+    const auto& oneVec     = fgm::Vector4<float>::one();
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(fgm::Vector4<float>::safeReject(oneVec, ontoNaNVec));
@@ -848,7 +848,7 @@ TEST(Vector4Rejection, TryReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector4Rejection, TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
-    const fgm::Vector4 zeroVec = fgm::Vector4<TypeParam>::ZERO();
+    const fgm::Vector4 zeroVec = fgm::Vector4<TypeParam>::zero();
     fgm::OperationStatus flag;
 
     const fgm::Vector4 actualRejection = this->_vec.tryReject(zeroVec, flag);
@@ -1005,7 +1005,7 @@ TEST(Vector4Rejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
  */
 TYPED_TEST(Vector4Rejection, StaticWrapper_TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
-    const fgm::Vector4 zeroVec = fgm::Vector4<TypeParam>::ZERO();
+    const fgm::Vector4 zeroVec = fgm::Vector4<TypeParam>::zero();
     fgm::OperationStatus flag;
 
     const fgm::Vector4 actualRejection = fgm::Vector4<TypeParam>::tryReject(this->_vec, zeroVec, flag);
@@ -1045,7 +1045,7 @@ TYPED_TEST(Vector4Rejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointVe
 TEST_P(Vector4RejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vector4<float>::ONE();
+    const auto& ontoVec = fgm::Vector4<float>::one();
     fgm::OperationStatus flag;
 
     EXPECT_VEC_ZERO(nanVec.tryReject(ontoVec, flag));
@@ -1059,7 +1059,7 @@ TEST_P(Vector4RejectionNaNTests, TryReject_NaNVectorReturnsZeroVectorAndSetsCorr
  */
 TEST_P(Vector4RejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vector4<float>::ONE();
+    const auto& oneVec     = fgm::Vector4<float>::one();
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 
@@ -1075,7 +1075,7 @@ TEST_P(Vector4RejectionNaNTests, TryReject_OntoNaNVectorReturnsZeroVectorAndSets
 TEST_P(Vector4RejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vector4<float>::ONE();
+    const auto& ontoVec = fgm::Vector4<float>::one();
     fgm::OperationStatus flag;
 
     EXPECT_VEC_ZERO(fgm::Vector4<float>::tryReject(nanVec, ontoVec, flag));
@@ -1089,7 +1089,7 @@ TEST_P(Vector4RejectionNaNTests, StaticWrapper_TryReject_NaNVectorReturnsZeroVec
  */
 TEST_P(Vector4RejectionNaNTests, StaticWrapper_TryReject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vector4<float>::ONE();
+    const auto& oneVec     = fgm::Vector4<float>::one();
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 

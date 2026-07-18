@@ -36,31 +36,31 @@ TYPED_TEST_SUITE(Matrix3Constants, SupportedArithmeticTypes);
 namespace
 {
     // Verify identity matrix
-    static_assert(fgm::Matrix4<int>::EYE()(0, 0) == 1);
-    static_assert(fgm::Matrix3<int>::EYE()(0, 1) == 0);
-    static_assert(fgm::Matrix3<int>::EYE()(0, 2) == 0);
+    static_assert(fgm::Matrix4<int>::identity()(0, 0) == 1);
+    static_assert(fgm::Matrix3<int>::identity()(0, 1) == 0);
+    static_assert(fgm::Matrix3<int>::identity()(0, 2) == 0);
 
-    static_assert(fgm::Matrix3<int>::EYE()(1, 0) == 0);
-    static_assert(fgm::Matrix3<int>::EYE()(1, 1) == 1);
-    static_assert(fgm::Matrix3<int>::EYE()(1, 2) == 0);
+    static_assert(fgm::Matrix3<int>::identity()(1, 0) == 0);
+    static_assert(fgm::Matrix3<int>::identity()(1, 1) == 1);
+    static_assert(fgm::Matrix3<int>::identity()(1, 2) == 0);
 
-    static_assert(fgm::Matrix3<int>::EYE()(2, 0) == 0);
-    static_assert(fgm::Matrix3<int>::EYE()(2, 1) == 0);
-    static_assert(fgm::Matrix3<int>::EYE()(2, 2) == 1);
+    static_assert(fgm::Matrix3<int>::identity()(2, 0) == 0);
+    static_assert(fgm::Matrix3<int>::identity()(2, 1) == 0);
+    static_assert(fgm::Matrix3<int>::identity()(2, 2) == 1);
 
 
     // Verify zero matrix
-    static_assert(fgm::Matrix3<int>::ZERO()(0, 0) == 0);
-    static_assert(fgm::Matrix3<int>::ZERO()(0, 1) == 0);
-    static_assert(fgm::Matrix3<int>::ZERO()(0, 2) == 0);
+    static_assert(fgm::Matrix3<int>::zero()(0, 0) == 0);
+    static_assert(fgm::Matrix3<int>::zero()(0, 1) == 0);
+    static_assert(fgm::Matrix3<int>::zero()(0, 2) == 0);
 
-    static_assert(fgm::Matrix3<int>::ZERO()(1, 0) == 0);
-    static_assert(fgm::Matrix3<int>::ZERO()(1, 1) == 0);
-    static_assert(fgm::Matrix3<int>::ZERO()(1, 2) == 0);
+    static_assert(fgm::Matrix3<int>::zero()(1, 0) == 0);
+    static_assert(fgm::Matrix3<int>::zero()(1, 1) == 0);
+    static_assert(fgm::Matrix3<int>::zero()(1, 2) == 0);
 
-    static_assert(fgm::Matrix3<int>::ZERO()(2, 0) == 0);
-    static_assert(fgm::Matrix3<int>::ZERO()(2, 1) == 0);
-    static_assert(fgm::Matrix3<int>::ZERO()(2, 2) == 0);
+    static_assert(fgm::Matrix3<int>::zero()(2, 0) == 0);
+    static_assert(fgm::Matrix3<int>::zero()(2, 1) == 0);
+    static_assert(fgm::Matrix3<int>::zero()(2, 2) == 0);
 } // namespace
 
 
@@ -72,10 +72,10 @@ namespace
  **************************************/
 
 /** @brief Verify that @ref fgm::Matrix3::EYE returns an identity matrix. */
-TYPED_TEST(Matrix3Constants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Matrix3<TypeParam>::EYE()); }
+TYPED_TEST(Matrix3Constants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Matrix3<TypeParam>::identity()); }
 
 
 /** @brief Verify that @ref fgm::Matrix3::ZERO returns a zero matrix. */
-TYPED_TEST(Matrix3Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Matrix3<TypeParam>::ZERO()); }
+TYPED_TEST(Matrix3Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Matrix3<TypeParam>::zero()); }
 
 /** @} */

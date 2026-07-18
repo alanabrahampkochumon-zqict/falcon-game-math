@@ -442,7 +442,7 @@ TEST(Vector3Projection, SafeProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector3Projection, SafeProject_OntoZeroReturnsZeroVector)
 {
-    const fgm::Vector3 zeroVec = fgm::Vector3<TypeParam>::ZERO();
+    const fgm::Vector3 zeroVec = fgm::Vector3<TypeParam>::zero();
 
     const fgm::Vector3 actualProjection = this->_vec.safeProject(zeroVec);
 
@@ -562,7 +562,7 @@ TEST(Vector3Projection, StaticWrapper_SafeProject_MixedTypeProjectionPromotesTyp
  */
 TYPED_TEST(Vector3Projection, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
 {
-    const fgm::Vector3 zeroVec = fgm::Vector3<TypeParam>::ZERO();
+    const fgm::Vector3 zeroVec = fgm::Vector3<TypeParam>::zero();
 
     const fgm::Vector3 actualProjection = fgm::Vector3<TypeParam>::safeProject(this->_vec, zeroVec);
 
@@ -596,7 +596,7 @@ TYPED_TEST(Vector3Projection, StaticWrapper_SafeProject_AlwaysReturnFloatingPoin
 TEST_P(Vector3ProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vector3<float>::ONE();
+    const auto& ontoVec = fgm::Vector3<float>::one();
 
     EXPECT_VEC_ZERO(nanVec.safeProject(ontoVec));
 }
@@ -608,7 +608,7 @@ TEST_P(Vector3ProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsC
  */
 TEST_P(Vector3ProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vector3<float>::ONE();
+    const auto& oneVec     = fgm::Vector3<float>::one();
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(oneVec.safeProject(ontoNaNVec));
@@ -622,7 +622,7 @@ TEST_P(Vector3ProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndS
 TEST_P(Vector3ProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vector3<float>::ONE();
+    const auto& ontoVec = fgm::Vector3<float>::one();
 
     EXPECT_VEC_ZERO(fgm::Vector3<float>::safeProject(nanVec, ontoVec));
 }
@@ -634,7 +634,7 @@ TEST_P(Vector3ProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZero
  */
 TEST_P(Vector3ProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vector3<float>::ONE();
+    const auto& oneVec     = fgm::Vector3<float>::one();
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(fgm::Vector3<float>::safeProject(oneVec, ontoNaNVec));
@@ -776,7 +776,7 @@ TEST(Vector3Projection, TryProject_MixedTypeProjectionPromotesType)
  */
 TYPED_TEST(Vector3Projection, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const fgm::Vector3 zeroVec = fgm::Vector3<TypeParam>::ZERO();
+    const fgm::Vector3 zeroVec = fgm::Vector3<TypeParam>::zero();
     fgm::OperationStatus flag;
 
 
@@ -922,7 +922,7 @@ TEST(Vector3Projection, StaticWrapper_TryProject_MixedTypeProjectionPromotesType
  */
 TYPED_TEST(Vector3Projection, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const fgm::Vector3 zeroVec = fgm::Vector3<TypeParam>::ZERO();
+    const fgm::Vector3 zeroVec = fgm::Vector3<TypeParam>::zero();
     fgm::OperationStatus flag;
 
     const fgm::Vector3 actualProjection = fgm::Vector3<TypeParam>::tryProject(this->_vec, zeroVec, flag);
@@ -961,7 +961,7 @@ TYPED_TEST(Vector3Projection, StaticWrapper_TryProject_AlwaysReturnFloatingPoint
 TEST_P(Vector3ProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vector3<float>::ONE();
+    const auto& ontoVec = fgm::Vector3<float>::one();
     fgm::OperationStatus flag;
 
     EXPECT_VEC_ZERO(nanVec.tryProject(ontoVec, flag));
@@ -975,7 +975,7 @@ TEST_P(Vector3ProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCo
  */
 TEST_P(Vector3ProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vector3<float>::ONE();
+    const auto& oneVec     = fgm::Vector3<float>::one();
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
 
@@ -991,7 +991,7 @@ TEST_P(Vector3ProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSe
 TEST_P(Vector3ProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vector3<float>::ONE();
+    const auto& ontoVec = fgm::Vector3<float>::one();
     fgm::OperationStatus flag;
 
     EXPECT_VEC_ZERO(fgm::Vector3<float>::tryProject(nanVec, ontoVec, flag));
@@ -1005,7 +1005,7 @@ TEST_P(Vector3ProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroV
  */
 TEST_P(Vector3ProjectionNaNTests, StaticWrapper_TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vector3<float>::ONE();
+    const auto& oneVec     = fgm::Vector3<float>::one();
     const auto& ontoNaNVec = GetParam();
     fgm::OperationStatus flag;
     EXPECT_VEC_ZERO(fgm::Vector3<float>::tryProject(oneVec, ontoNaNVec, flag));

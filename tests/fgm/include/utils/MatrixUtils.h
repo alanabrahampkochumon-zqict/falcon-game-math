@@ -51,12 +51,12 @@ namespace testutils
     {
         using ValueType = T::value_type;
 
-        static_assert(T::rows == U::rows && T::columns == U::columns,
+        static_assert(T::ROWS == U::ROWS && T::COLUMNS == U::COLUMNS,
                       "Matrices must of the same dimension, e.g: 3x3 and 3x3");
 
-        for (std::size_t i = 0; i < T::rows; ++i)
+        for (std::size_t i = 0; i < T::ROWS; ++i)
         {
-            for (std::size_t j = 0; j < T::columns; ++j)
+            for (std::size_t j = 0; j < T::COLUMNS; ++j)
             {
                 if constexpr (std::is_same_v<ValueType, double>)
                 {
@@ -92,24 +92,24 @@ namespace testutils
     template <fgm::Arithmetic T, fgm::Matrix U>
     void EXPECT_MAT_CONTAINS(const std::vector<T>& expectedElements, const U& actual)
     {
-        assert(expectedElements.size() == (U::rows * U::columns) &&
+        assert(expectedElements.size() == (U::ROWS * U::COLUMNS) &&
                "Size of data elements must match the matrix dimension, e.g: 9 to 3x3");
 
-        for (std::size_t i = 0; i < U::rows; ++i)
+        for (std::size_t i = 0; i < U::ROWS; ++i)
         {
-            for (std::size_t j = 0; j < U::columns; ++j)
+            for (std::size_t j = 0; j < U::COLUMNS; ++j)
             {
                 if constexpr (std::is_same_v<T, double>)
                 {
-                    COMPARE_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
+                    COMPARE_EQ(expectedElements[i * U::COLUMNS + j], static_cast<T>(actual(i, j)));
                 }
                 else if constexpr (std::is_same_v<T, float>)
                 {
-                    COMPARE_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
+                    COMPARE_EQ(expectedElements[i * U::COLUMNS + j], static_cast<T>(actual(i, j)));
                 }
                 else
                 {
-                    EXPECT_EQ(expectedElements[i * U::columns + j], static_cast<T>(actual(i, j)));
+                    EXPECT_EQ(expectedElements[i * U::COLUMNS + j], static_cast<T>(actual(i, j)));
                 }
             }
         }
@@ -135,12 +135,12 @@ namespace testutils
     {
 
         using ValueType = T::value_type;
-        static_assert(T::rows == U::rows && T::columns == U::columns,
+        static_assert(T::ROWS == U::ROWS && T::COLUMNS == U::COLUMNS,
                       "Matrices must of the same dimension, e.g: 3x3 and 3x3");
 
-        for (std::size_t i = 0; i < T::rows; ++i)
+        for (std::size_t i = 0; i < T::ROWS; ++i)
         {
-            for (std::size_t j = 0; j < T::columns; ++j)
+            for (std::size_t j = 0; j < T::COLUMNS; ++j)
             {
                 EXPECT_NEAR(expected(i, j), static_cast<ValueType>(actual(i, j)), tolerance);
             }
@@ -163,11 +163,11 @@ namespace testutils
     void EXPECT_MAT_IDENTITY(const T& actual)
     {
         using ValueType = T::value_type;
-        EXPECT_EQ(T::rows, T::columns) << "Identity matrices must be square(e.g: 3x3)\n";
+        EXPECT_EQ(T::ROWS, T::COLUMNS) << "Identity matrices must be square(e.g: 3x3)\n";
 
-        for (std::size_t i = 0; i < T::rows; ++i)
+        for (std::size_t i = 0; i < T::ROWS; ++i)
         {
-            for (std::size_t j = 0; j < T::columns; ++j)
+            for (std::size_t j = 0; j < T::COLUMNS; ++j)
             {
                 if constexpr (std::is_same_v<ValueType, double>)
                 {
@@ -202,9 +202,9 @@ namespace testutils
     {
         using ValueType = T::value_type;
 
-        for (std::size_t i = 0; i < T::rows; ++i)
+        for (std::size_t i = 0; i < T::ROWS; ++i)
         {
-            for (std::size_t j = 0; j < T::columns; ++j)
+            for (std::size_t j = 0; j < T::COLUMNS; ++j)
             {
                 if constexpr (std::is_same_v<ValueType, double>)
                 {
@@ -239,9 +239,9 @@ namespace testutils
     {
         using ValueType = T::value_type;
 
-        for (std::size_t i = 0; i < T::rows; ++i)
+        for (std::size_t i = 0; i < T::ROWS; ++i)
         {
-            for (std::size_t j = 0; j < T::columns; ++j)
+            for (std::size_t j = 0; j < T::COLUMNS; ++j)
             {
                 if constexpr (std::is_same_v<ValueType, double>)
                 {
@@ -274,9 +274,9 @@ namespace testutils
     template <fgm::Matrix T>
     void EXPECT_MAT_INF(const T& actual)
     {
-        for (std::size_t i = 0; i < T::rows; ++i)
+        for (std::size_t i = 0; i < T::ROWS; ++i)
         {
-            for (std::size_t j = 0; j < T::columns; ++j)
+            for (std::size_t j = 0; j < T::COLUMNS; ++j)
             {
                 EXPECT_TRUE(std::isinf(actual(i, j)));
             }

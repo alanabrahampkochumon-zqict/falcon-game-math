@@ -69,7 +69,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Vector4<T>::ZERO() to guarantee a zeroed vector.
+         *       @ref fgm::Vector4<T>::zero() to guarantee a zeroed vector.
          */
         Vector4() = default;
 
@@ -2245,12 +2245,10 @@ namespace fgm
          *                                   *
          *************************************/
 
-        // NOLINTBEGIN
-
         /**
          * @brief A 4D vector with all components set to one (1, 1, 1, 1).
          */
-        static constexpr Vector4 ONE()
+        static constexpr Vector4 one()
             requires StrictArithmetic<T>
         {
             return Vector4{ T(1), T(1), T(1), T(1) };
@@ -2260,7 +2258,7 @@ namespace fgm
         /**
          * @brief A 4D vector with all components set to zero (0, 0, 0, 0).
          */
-        static constexpr Vector4 ZERO()
+        static constexpr Vector4 zero()
             requires StrictArithmetic<T>
         {
             return Vector4{ T(0), T(0), T(0), T(0) };
@@ -2272,7 +2270,7 @@ namespace fgm
          *
          * @note Constrained to floating point types.
          */
-        static constexpr Vector4 INF()
+        static constexpr Vector4 inf()
             requires std::floating_point<T>
         {
             return Vector4{ T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D),
@@ -2285,7 +2283,7 @@ namespace fgm
          *
          * @note Constrained to floating point types.
          */
-        static constexpr Vector4 INF_NEG()
+        static constexpr Vector4 infNeg()
             requires std::floating_point<T>
         {
             return Vector4{ T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D),
@@ -2298,7 +2296,7 @@ namespace fgm
          *
          * @note Constrained to floating point types.
          */
-        static constexpr Vector4 QNAN()
+        static constexpr Vector4 qnan()
             requires std::floating_point<T>
         {
             return Vector4{ T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D) };
@@ -2310,7 +2308,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector4 RIGHT()
+        static constexpr Vector4 right()
             requires std::is_signed_v<T>
         {
             return Vector4{ T(1), T(0), T(0), T(0) };
@@ -2322,7 +2320,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector4 LEFT()
+        static constexpr Vector4 left()
             requires std::is_signed_v<T>
         {
             return Vector4{ T(-1), T(0), T(0), T(0) };
@@ -2334,7 +2332,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector4 UP()
+        static constexpr Vector4 up()
             requires std::is_signed_v<T>
         {
             return Vector4{ T(0), T(1), T(0), T(0) };
@@ -2346,7 +2344,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector4 DOWN()
+        static constexpr Vector4 down()
             requires std::is_signed_v<T>
         {
             return Vector4{ T(0), T(-1), T(0), T(0) };
@@ -2360,7 +2358,7 @@ namespace fgm
          * @note Left Handed Coordinate System.
          * @note Constrained to signed types.
          */
-        static constexpr Vector4 FORWARD()
+        static constexpr Vector4 forward()
             requires std::is_signed_v<T>
         {
             return Vector4{ T(0), T(0), T(1), T(0) };
@@ -2373,7 +2371,7 @@ namespace fgm
          * @note Left Handed Coordinate System.
          * @note Constrained to signed types.
          */
-        static constexpr Vector4 BACKWARD()
+        static constexpr Vector4 backward()
             requires std::is_signed_v<T>
         {
             return Vector4{ T(0), T(0), T(-1), T(0) };
@@ -2387,7 +2385,7 @@ namespace fgm
          * @note Right Handed Coordinate System.
          * @note Constrained to signed types.
          */
-        static constexpr Vector4 FORWARD()
+        static constexpr Vector4 forward()
             requires std::is_signed_v<T>
         {
             return Vector4{ T(0), T(0), T(-1), T(0) };
@@ -2400,7 +2398,7 @@ namespace fgm
          * @note Right Handed Coordinate System
          * @note Constrained to signed types.
          */
-        static constexpr Vector4 BACKWARD()
+        static constexpr Vector4 backward()
             requires std::is_signed_v<T>
         {
             return Vector4{ T(0), T(0), T(1), T(0) };
@@ -2408,6 +2406,8 @@ namespace fgm
 
 #endif
 
+
+        // TODO: Specialize
         /**
          * @brief Alias for a 3D-point representation.
          *
@@ -2417,14 +2417,12 @@ namespace fgm
          * @param[in] y The y-coordinate of the point. Default: 0
          * @param[in] z The z-coordinate of the point. Default: 0
          */
-        static constexpr Vector4 POINT(const T x = T(0), const T y = T(0), const T z = T(0))
+        static constexpr Vector4 point(const T x = T(0), const T y = T(0), const T z = T(0))
             requires std::is_signed_v<T>
         {
             return Vector4{ x, y, z, T(1) };
         }
 
-
-        // NOLINTEND
         /** @} */
 
     private:

@@ -36,16 +36,16 @@ TYPED_TEST_SUITE(Matrix2Constants, SupportedArithmeticTypes);
 namespace
 {
     // Verify identity matrix
-    static_assert(fgm::Matrix2<int>::EYE()(0, 0) == 1);
-    static_assert(fgm::Matrix2<int>::EYE()(0, 1) == 0);
-    static_assert(fgm::Matrix2<int>::EYE()(1, 0) == 0);
-    static_assert(fgm::Matrix2<int>::EYE()(1, 1) == 1);
+    static_assert(fgm::Matrix2<int>::identity()(0, 0) == 1);
+    static_assert(fgm::Matrix2<int>::identity()(0, 1) == 0);
+    static_assert(fgm::Matrix2<int>::identity()(1, 0) == 0);
+    static_assert(fgm::Matrix2<int>::identity()(1, 1) == 1);
 
     // Verify zero matrix
-    static_assert(fgm::Matrix2<int>::ZERO()(0, 0) == 0);
-    static_assert(fgm::Matrix2<int>::ZERO()(0, 1) == 0);
-    static_assert(fgm::Matrix2<int>::ZERO()(1, 0) == 0);
-    static_assert(fgm::Matrix2<int>::ZERO()(1, 1) == 0);
+    static_assert(fgm::Matrix2<int>::zero()(0, 0) == 0);
+    static_assert(fgm::Matrix2<int>::zero()(0, 1) == 0);
+    static_assert(fgm::Matrix2<int>::zero()(1, 0) == 0);
+    static_assert(fgm::Matrix2<int>::zero()(1, 1) == 0);
 
 } // namespace
 
@@ -58,10 +58,10 @@ namespace
  **************************************/
 
 /** @brief Verify that @ref fgm::Matrix2::EYE returns an identity matrix. */
-TYPED_TEST(Matrix2Constants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Matrix2<TypeParam>::EYE()); }
+TYPED_TEST(Matrix2Constants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Matrix2<TypeParam>::identity()); }
 
 
 /** @brief Verify that @ref fgm::Matrix2::ZERO returns a zero matrix. */
-TYPED_TEST(Matrix2Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Matrix2<TypeParam>::ZERO()); }
+TYPED_TEST(Matrix2Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Matrix2<TypeParam>::zero()); }
 
 /** @} */

@@ -34,84 +34,84 @@ TYPED_TEST_SUITE(Vector4Constants, SupportedSignedArithmeticTypes);
 /** @brief Verify that @ref fgm::Vector4 constants are available at compile time. */
 namespace
 {
-    static_assert(fgm::Vector4<int>::ONE().x() == 1);
-    static_assert(fgm::Vector4<int>::ONE().y() == 1);
-    static_assert(fgm::Vector4<int>::ONE().z() == 1);
-    static_assert(fgm::Vector4<int>::ONE().w() == 1);
+    static_assert(fgm::Vector4<int>::one().x() == 1);
+    static_assert(fgm::Vector4<int>::one().y() == 1);
+    static_assert(fgm::Vector4<int>::one().z() == 1);
+    static_assert(fgm::Vector4<int>::one().w() == 1);
 
-    static_assert(fgm::Vector4<int>::ZERO().x() == 0);
-    static_assert(fgm::Vector4<int>::ZERO().y() == 0);
-    static_assert(fgm::Vector4<int>::ZERO().z() == 0);
-    static_assert(fgm::Vector4<int>::ZERO().w() == 0);
+    static_assert(fgm::Vector4<int>::zero().x() == 0);
+    static_assert(fgm::Vector4<int>::zero().y() == 0);
+    static_assert(fgm::Vector4<int>::zero().z() == 0);
+    static_assert(fgm::Vector4<int>::zero().w() == 0);
 
-    static_assert(fgm::isinf(fgm::Vector4<float>::INF().x()));
-    static_assert(fgm::isinf(fgm::Vector4<float>::INF().y()));
-    static_assert(fgm::isinf(fgm::Vector4<float>::INF().z()));
-    static_assert(fgm::isinf(fgm::Vector4<float>::INF().w()));
+    static_assert(fgm::isinf(fgm::Vector4<float>::inf().x()));
+    static_assert(fgm::isinf(fgm::Vector4<float>::inf().y()));
+    static_assert(fgm::isinf(fgm::Vector4<float>::inf().z()));
+    static_assert(fgm::isinf(fgm::Vector4<float>::inf().w()));
 
-    static_assert(fgm::isinf(fgm::Vector4<float>::INF_NEG().x()));
-    static_assert(fgm::isinf(fgm::Vector4<float>::INF_NEG().y()));
-    static_assert(fgm::isinf(fgm::Vector4<float>::INF_NEG().z()));
-    static_assert(fgm::isinf(fgm::Vector4<float>::INF_NEG().w()));
+    static_assert(fgm::isinf(fgm::Vector4<float>::infNeg().x()));
+    static_assert(fgm::isinf(fgm::Vector4<float>::infNeg().y()));
+    static_assert(fgm::isinf(fgm::Vector4<float>::infNeg().z()));
+    static_assert(fgm::isinf(fgm::Vector4<float>::infNeg().w()));
 
-    static_assert(fgm::isnan(fgm::Vector4<float>::QNAN().x()));
-    static_assert(fgm::isnan(fgm::Vector4<float>::QNAN().y()));
-    static_assert(fgm::isnan(fgm::Vector4<float>::QNAN().z()));
-    static_assert(fgm::isnan(fgm::Vector4<float>::QNAN().w()));
+    static_assert(fgm::isnan(fgm::Vector4<float>::qnan().x()));
+    static_assert(fgm::isnan(fgm::Vector4<float>::qnan().y()));
+    static_assert(fgm::isnan(fgm::Vector4<float>::qnan().z()));
+    static_assert(fgm::isnan(fgm::Vector4<float>::qnan().w()));
 
-    static_assert(fgm::Vector4<int>::LEFT().x() == -1);
-    static_assert(fgm::Vector4<int>::LEFT().y() == 0);
-    static_assert(fgm::Vector4<int>::LEFT().z() == 0);
-    static_assert(fgm::Vector4<int>::LEFT().w() == 0);
+    static_assert(fgm::Vector4<int>::left().x() == -1);
+    static_assert(fgm::Vector4<int>::left().y() == 0);
+    static_assert(fgm::Vector4<int>::left().z() == 0);
+    static_assert(fgm::Vector4<int>::left().w() == 0);
 
-    static_assert(fgm::Vector4<int>::RIGHT().x() == 1);
-    static_assert(fgm::Vector4<int>::RIGHT().y() == 0);
-    static_assert(fgm::Vector4<int>::RIGHT().z() == 0);
-    static_assert(fgm::Vector4<int>::RIGHT().w() == 0);
+    static_assert(fgm::Vector4<int>::right().x() == 1);
+    static_assert(fgm::Vector4<int>::right().y() == 0);
+    static_assert(fgm::Vector4<int>::right().z() == 0);
+    static_assert(fgm::Vector4<int>::right().w() == 0);
 
-    static_assert(fgm::Vector4<int>::UP().x() == 0);
-    static_assert(fgm::Vector4<int>::UP().y() == 1);
-    static_assert(fgm::Vector4<int>::UP().z() == 0);
-    static_assert(fgm::Vector4<int>::UP().w() == 0);
+    static_assert(fgm::Vector4<int>::up().x() == 0);
+    static_assert(fgm::Vector4<int>::up().y() == 1);
+    static_assert(fgm::Vector4<int>::up().z() == 0);
+    static_assert(fgm::Vector4<int>::up().w() == 0);
 
-    static_assert(fgm::Vector4<int>::DOWN().x() == 0);
-    static_assert(fgm::Vector4<int>::DOWN().y() == -1);
-    static_assert(fgm::Vector4<int>::DOWN().z() == 0);
-    static_assert(fgm::Vector4<int>::DOWN().w() == 0);
+    static_assert(fgm::Vector4<int>::down().x() == 0);
+    static_assert(fgm::Vector4<int>::down().y() == -1);
+    static_assert(fgm::Vector4<int>::down().z() == 0);
+    static_assert(fgm::Vector4<int>::down().w() == 0);
 
 
 #ifdef FGM_LEFT_HANDED
-    static_assert(fgm::Vector4<int>::FORWARD().x() == 0);
-    static_assert(fgm::Vector4<int>::FORWARD().y() == 0);
-    static_assert(fgm::Vector4<int>::FORWARD().z() == 1);
-    static_assert(fgm::Vector4<int>::FORWARD().w() == 0);
+    static_assert(fgm::Vector4<int>::forward().x() == 0);
+    static_assert(fgm::Vector4<int>::forward().y() == 0);
+    static_assert(fgm::Vector4<int>::forward().z() == 1);
+    static_assert(fgm::Vector4<int>::forward().w() == 0);
 
 
-    static_assert(fgm::Vector4<int>::BACKWARD().x() == 0);
-    static_assert(fgm::Vector4<int>::BACKWARD().y() == 0);
-    static_assert(fgm::Vector4<int>::BACKWARD().z() == -1);
-    static_assert(fgm::Vector4<int>::BACKWARD().w() == 0);
+    static_assert(fgm::Vector4<int>::backward().x() == 0);
+    static_assert(fgm::Vector4<int>::backward().y() == 0);
+    static_assert(fgm::Vector4<int>::backward().z() == -1);
+    static_assert(fgm::Vector4<int>::backward().w() == 0);
 #else
 
-    static_assert(fgm::Vector4<int>::FORWARD().x() == 0);
-    static_assert(fgm::Vector4<int>::FORWARD().y() == 0);
-    static_assert(fgm::Vector4<int>::FORWARD().z() == -1);
-    static_assert(fgm::Vector4<int>::FORWARD().w() == 0);
+    static_assert(fgm::Vector4<int>::forward().x() == 0);
+    static_assert(fgm::Vector4<int>::forward().y() == 0);
+    static_assert(fgm::Vector4<int>::forward().z() == -1);
+    static_assert(fgm::Vector4<int>::forward().w() == 0);
 
 
-    static_assert(fgm::Vector4<int>::BACKWARD().x() == 0);
-    static_assert(fgm::Vector4<int>::BACKWARD().y() == 0);
-    static_assert(fgm::Vector4<int>::BACKWARD().z() == 1);
-    static_assert(fgm::Vector4<int>::BACKWARD().w() == 0);
+    static_assert(fgm::Vector4<int>::backward().x() == 0);
+    static_assert(fgm::Vector4<int>::backward().y() == 0);
+    static_assert(fgm::Vector4<int>::backward().z() == 1);
+    static_assert(fgm::Vector4<int>::backward().w() == 0);
 #endif
 
-    constexpr auto P1 = fgm::Vector4<int>::POINT();
+    constexpr auto P1 = fgm::Vector4<int>::point();
     static_assert(P1.x() == 0);
     static_assert(P1.y() == 0);
     static_assert(P1.z() == 0);
     static_assert(P1.w() == 1);
 
-    constexpr auto P2 = fgm::Vector4<int>::POINT(4, 5, 6);
+    constexpr auto P2 = fgm::Vector4<int>::point(4, 5, 6);
     static_assert(P2.x() == 4);
     static_assert(P2.y() == 5);
     static_assert(P2.z() == 6);
@@ -124,18 +124,18 @@ namespace
 TYPED_TEST(Vector4Constants, ONE_ReturnsVectorWithUnitComponents)
 {
     const auto one = TypeParam(1);
-    EXPECT_VEC_CONTAINS(fgm::Vector4<TypeParam>::ONE(), one, one, one, one);
+    EXPECT_VEC_CONTAINS(fgm::Vector4<TypeParam>::one(), one, one, one, one);
 }
 
 
 /** @brief Verify that @ref fgm::Vector4::ZERO returns a 4D vector with zero components. */
-TYPED_TEST(Vector4Constants, ZERO_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::ZERO()); }
+TYPED_TEST(Vector4Constants, ZERO_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::Vector4<TypeParam>::zero()); }
 
 
 /** @brief Verify that @ref fgm::Vector4<float>::INF returns a 4D vector with infinity components. */
 TEST(Vector4Constants, Float_INF_ReturnsFloatVectorWithInfinityComponents)
 {
-    const auto inf = fgm::Vector4<float>::INF();
+    const auto inf = fgm::Vector4<float>::inf();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
     EXPECT_VEC4_POS_INF(inf)
 }
@@ -144,7 +144,7 @@ TEST(Vector4Constants, Float_INF_ReturnsFloatVectorWithInfinityComponents)
 /** @brief Verify that @ref fgm::Vector4<double>::INF returns a 4D vector with infinity components. */
 TEST(Vector4Constants, Double_INF_ReturnsDoubleVectorWithInfinityComponents)
 {
-    const auto inf = fgm::Vector4<double>::INF();
+    const auto inf = fgm::Vector4<double>::inf();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
     EXPECT_VEC4_POS_INF(inf)
 }
@@ -153,7 +153,7 @@ TEST(Vector4Constants, Double_INF_ReturnsDoubleVectorWithInfinityComponents)
 /** @brief Verify that @ref fgm::Vector4<float>::INF_NEG returns a 4D vector with negative infinity components. */
 TEST(Vector4Constants, Float_INF_NEG_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
-    const auto inf = fgm::Vector4<float>::INF_NEG();
+    const auto inf = fgm::Vector4<float>::infNeg();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
     EXPECT_VEC4_NEG_INF(inf)
 }
@@ -162,7 +162,7 @@ TEST(Vector4Constants, Float_INF_NEG_ReturnsFloatVectorWithNegativeInfinityCompo
 /** @brief Verify that @ref fgm::Vector4<double>::INF_NEG returns a 4D vector with negative infinity components. */
 TEST(Vector4Constants, Double_INF_NEG_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
-    const auto inf = fgm::Vector4<double>::INF_NEG();
+    const auto inf = fgm::Vector4<double>::infNeg();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
     EXPECT_VEC4_NEG_INF(inf)
 }
@@ -171,7 +171,7 @@ TEST(Vector4Constants, Double_INF_NEG_ReturnsDoubleVectorWithNegativeInfinityCom
 /** @brief Verify that @ref fgm::Vector4<float>::QNAN returns a 4D vector with NaN components. */
 TEST(Vector4Constants, Float_QNAN_ReturnsFloatVectorWithNaNComponents)
 {
-    const auto nan = fgm::Vector4<float>::QNAN();
+    const auto nan = fgm::Vector4<float>::qnan();
     EXPECT_TRUE(std::isnan(nan.x()));
     EXPECT_TRUE(std::isnan(nan.y()));
 }
@@ -180,7 +180,7 @@ TEST(Vector4Constants, Float_QNAN_ReturnsFloatVectorWithNaNComponents)
 /** @brief Verify that @ref fgm::Vector4<double>::QNAN returns a 4D vector with NaN components. */
 TEST(Vector4Constants, Double_QNAN_ReturnsDoubleVectorWithNaNComponents)
 {
-    const auto nan = fgm::Vector4<double>::QNAN();
+    const auto nan = fgm::Vector4<double>::qnan();
     EXPECT_TRUE(std::isnan(nan.x()));
     EXPECT_TRUE(std::isnan(nan.y()));
 }
@@ -189,7 +189,7 @@ TEST(Vector4Constants, Double_QNAN_ReturnsDoubleVectorWithNaNComponents)
 /** @brief Verify that @ref fgm::Vector4::RIGHT returns a unit vector aligned with positive x-axis. */
 TYPED_TEST(Vector4Constants, RIGHT_ReturnsUnitVectorWithOnlyPositiveXComponent)
 {
-    const auto vec = fgm::Vector4<TypeParam>::RIGHT();
+    const auto vec = fgm::Vector4<TypeParam>::right();
     EXPECT_VEC_CONTAINS(vec, this->_one, this->_zero, this->_zero, this->_zero);
 }
 
@@ -197,7 +197,7 @@ TYPED_TEST(Vector4Constants, RIGHT_ReturnsUnitVectorWithOnlyPositiveXComponent)
 /** @brief Verify that @ref fgm::Vector4::LEFT returns a unit vector aligned with negative x-axis. */
 TYPED_TEST(Vector4Constants, LEFT_ReturnsUnitVectorWithOnlyNegativeXComponent)
 {
-    const auto vec = fgm::Vector4<TypeParam>::LEFT();
+    const auto vec = fgm::Vector4<TypeParam>::left();
     EXPECT_VEC_CONTAINS(vec, TypeParam(-this->_one), this->_zero, this->_zero, this->_zero);
 }
 
@@ -205,7 +205,7 @@ TYPED_TEST(Vector4Constants, LEFT_ReturnsUnitVectorWithOnlyNegativeXComponent)
 /** @brief Verify that @ref fgm::Vector4::UP returns a unit vector aligned with positive y-axis. */
 TYPED_TEST(Vector4Constants, UP_ReturnsUnitVectorWithOnlyPositiveYComponent)
 {
-    const auto vec = fgm::Vector4<TypeParam>::UP();
+    const auto vec = fgm::Vector4<TypeParam>::up();
     EXPECT_VEC_CONTAINS(vec, this->_zero, this->_one, this->_zero, this->_zero);
 }
 
@@ -213,7 +213,7 @@ TYPED_TEST(Vector4Constants, UP_ReturnsUnitVectorWithOnlyPositiveYComponent)
 /** @brief Verify that @ref fgm::Vector4::DOWN returns a unit vector aligned with negative y-axis. */
 TYPED_TEST(Vector4Constants, DOWN_ReturnsUnitVectorWithOnlyNegativeYComponent)
 {
-    const auto vec = fgm::Vector4<TypeParam>::DOWN();
+    const auto vec = fgm::Vector4<TypeParam>::down();
     EXPECT_VEC_CONTAINS(vec, this->_zero, TypeParam(-this->_one), this->_zero, this->_zero);
 }
 
@@ -223,7 +223,7 @@ TYPED_TEST(Vector4Constants, DOWN_ReturnsUnitVectorWithOnlyNegativeYComponent)
 /** @brief Verify that @ref fgm::Vector4::FORWARD returns a unit vector aligned with positive z-axis. */
 TYPED_TEST(Vector4Constants, FORWARD_ReturnsUnitVectorWithOnlyPositiveZComponent)
 {
-    const auto vec = fgm::Vector4<TypeParam>::FORWARD();
+    const auto vec = fgm::Vector4<TypeParam>::forward();
     EXPECT_VEC_CONTAINS(vec, this->_zero, this->_zero, this->_one, this->_zero);
 }
 
@@ -231,7 +231,7 @@ TYPED_TEST(Vector4Constants, FORWARD_ReturnsUnitVectorWithOnlyPositiveZComponent
 /** @brief Verify that @ref fgm::Vector4::BACKWARD returns a unit vector aligned with negative z-axis. */
 TYPED_TEST(Vector4Constants, BACKWARD_ReturnsUnitVectorWithOnlyNegativeZComponent)
 {
-    const auto vec = fgm::Vector4<TypeParam>::BACKWARD();
+    const auto vec = fgm::Vector4<TypeParam>::backward();
     EXPECT_VEC_CONTAINS(vec, this->_zero, this->_zero, TypeParam(-this->_one), this->_zero);
 }
 
@@ -240,7 +240,7 @@ TYPED_TEST(Vector4Constants, BACKWARD_ReturnsUnitVectorWithOnlyNegativeZComponen
 /** @brief Verify that @ref fgm::Vector4::FORWARD returns a unit vector aligned with negative z-axis. */
 TYPED_TEST(Vector4Constants, FORWARD_ReturnsUnitVectorWithOnlyPositiveZComponent)
 {
-    const auto vec = fgm::Vector4<TypeParam>::FORWARD();
+    const auto vec = fgm::Vector4<TypeParam>::forward();
     EXPECT_VEC_CONTAINS(vec, this->_zero, this->_zero, TypeParam(-this->_one), this->_zero);
 }
 
@@ -248,7 +248,7 @@ TYPED_TEST(Vector4Constants, FORWARD_ReturnsUnitVectorWithOnlyPositiveZComponent
 /** @brief Verify that @ref fgm::Vector4::BACKWARD returns a unit vector aligned with positive z-axis. */
 TYPED_TEST(Vector4Constants, BACKWARD_ReturnsUnitVectorWithOnlyNegativeZComponent)
 {
-    const auto vec = fgm::Vector4<TypeParam>::BACKWARD();
+    const auto vec = fgm::Vector4<TypeParam>::backward();
     EXPECT_VEC_CONTAINS(vec, this->_zero, this->_zero, this->_one, this->_zero);
 }
 
@@ -260,7 +260,7 @@ TYPED_TEST(Vector4Constants, BACKWARD_ReturnsUnitVectorWithOnlyNegativeZComponen
  */
 TYPED_TEST(Vector4Constants, POINT_ReturnsVectorWithUnitZComponent)
 {
-    const auto vec = fgm::Vector4<TypeParam>::POINT();
+    const auto vec = fgm::Vector4<TypeParam>::point();
     EXPECT_VEC_CONTAINS(vec, this->_zero, this->_zero, this->_zero, this->_one);
 }
 
@@ -273,7 +273,7 @@ TYPED_TEST(Vector4Constants, POINT_ReturnsVectorWithUnitZComponentAndPassedInXYZ
     const auto x   = TypeParam(5);
     const auto y   = TypeParam(8);
     const auto z   = TypeParam(12);
-    const auto vec = fgm::Vector4<TypeParam>::POINT(x, y, z);
+    const auto vec = fgm::Vector4<TypeParam>::point(x, y, z);
     EXPECT_VEC_CONTAINS(vec, x, y, z, this->_one);
 }
 

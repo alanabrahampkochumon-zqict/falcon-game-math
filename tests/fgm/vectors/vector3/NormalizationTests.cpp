@@ -163,7 +163,7 @@ TYPED_TEST(Vector3Normalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
  */
 TYPED_TEST(Vector3Normalization, SafeNormalize_ZeroVectorReturnsZeroVector)
 {
-    EXPECT_VEC_ZERO(fgm::Vector3<TypeParam>::ZERO().safeNormalize());
+    EXPECT_VEC_ZERO(fgm::Vector3<TypeParam>::zero().safeNormalize());
 }
 
 
@@ -173,7 +173,7 @@ TYPED_TEST(Vector3Normalization, SafeNormalize_ZeroVectorReturnsZeroVector)
  */
 TEST(Vector3Normalization, SafeNormalize_NaNVectorReturnsZeroVector)
 {
-    EXPECT_VEC_ZERO(fgm::Vector3<float>::QNAN().safeNormalize());
+    EXPECT_VEC_ZERO(fgm::Vector3<float>::qnan().safeNormalize());
 }
 
 
@@ -205,7 +205,7 @@ TYPED_TEST(Vector3Normalization, StaticWrapper_SafeNormalize_NonZeroVectorReturn
  */
 TYPED_TEST(Vector3Normalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
 {
-    EXPECT_VEC_ZERO(fgm::Vector3<TypeParam>::safeNormalize(fgm::Vector3<TypeParam>::ZERO()));
+    EXPECT_VEC_ZERO(fgm::Vector3<TypeParam>::safeNormalize(fgm::Vector3<TypeParam>::zero()));
 }
 
 
@@ -215,7 +215,7 @@ TYPED_TEST(Vector3Normalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZe
  */
 TEST(Vector3Normalization, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
 {
-    EXPECT_VEC_ZERO(fgm::Vector3<float>::safeNormalize(fgm::Vector3<float>::QNAN()));
+    EXPECT_VEC_ZERO(fgm::Vector3<float>::safeNormalize(fgm::Vector3<float>::qnan()));
 }
 
 
@@ -257,7 +257,7 @@ TYPED_TEST(Vector3Normalization, TryNormalize_NonZeroVectorReturnsUnitVector)
 TYPED_TEST(Vector3Normalization, TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::Vector3<TypeParam>::ZERO().tryNormalize(flag));
+    EXPECT_VEC_ZERO(fgm::Vector3<TypeParam>::zero().tryNormalize(flag));
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 
@@ -269,7 +269,7 @@ TYPED_TEST(Vector3Normalization, TryNormalize_ZeroVectorReturnsZeroVectorAndSets
 TEST(Vector3Normalization, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::Vector3<float>::QNAN().tryNormalize(flag));
+    EXPECT_VEC_ZERO(fgm::Vector3<float>::qnan().tryNormalize(flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -308,7 +308,7 @@ TYPED_TEST(Vector3Normalization, StaticWrapper_TryNormalize_NonZeroVectorReturns
 TYPED_TEST(Vector3Normalization, StaticWrapper_TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::Vector3<TypeParam>::ZERO().tryNormalize(flag));
+    EXPECT_VEC_ZERO(fgm::Vector3<TypeParam>::zero().tryNormalize(flag));
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 
@@ -320,7 +320,7 @@ TYPED_TEST(Vector3Normalization, StaticWrapper_TryNormalize_ZeroVectorReturnsZer
 TEST(Vector3Normalization, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::Vector3<float>::tryNormalize(fgm::Vector3<float>::QNAN(), flag));
+    EXPECT_VEC_ZERO(fgm::Vector3<float>::tryNormalize(fgm::Vector3<float>::qnan(), flag));
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 

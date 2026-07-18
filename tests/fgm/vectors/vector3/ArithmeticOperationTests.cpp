@@ -734,7 +734,7 @@ TYPED_TEST(Vector3ScalarDivision, TryDivideByFloatZero_ReturnsZeroVectorAndSetsC
 TEST(Vector3ScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
 {
     fgm::OperationStatus flag;
-    [[maybe_unused]] const auto result = fgm::Vector3<double>::QNAN().tryDiv(0, flag);
+    [[maybe_unused]] const auto result = fgm::Vector3<double>::qnan().tryDiv(0, flag);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
@@ -803,7 +803,7 @@ TYPED_TEST(Vector3ScalarDivision, StaticWrapper_TryDivideByFloatZero_ReturnsZero
 TEST(Vector3ScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
-    const auto result = fgm::Vector3<double>::tryDiv(fgm::Vector3<double>::QNAN(), 3, flag);
+    const auto result = fgm::Vector3<double>::tryDiv(fgm::Vector3<double>::qnan(), 3, flag);
 
     EXPECT_VEC_ZERO(result);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);

@@ -2235,7 +2235,7 @@ namespace fgm
         /**
          * @brief A 3D vector with all components set to one (1, 1, 1).
          */
-        static constexpr Vector3 ONE()
+        static constexpr Vector3 one()
             requires StrictArithmetic<T>
         {
             return Vector3{ T(1), T(1), T(1) };
@@ -2245,7 +2245,7 @@ namespace fgm
         /**
          * @brief A 3D vector with all components set to zero (0, 0, 0).
          */
-        static constexpr Vector3 ZERO()
+        static constexpr Vector3 zero()
             requires StrictArithmetic<T>
         {
             return Vector3{ T(0), T(0), T(0) };
@@ -2257,7 +2257,7 @@ namespace fgm
          *
          * @note Constrained to floating point types.
          */
-        static constexpr Vector3 INF()
+        static constexpr Vector3 inf()
             requires std::floating_point<T>
         {
             return Vector3{ T(constants::INFINITY_D), T(constants::INFINITY_D), T(constants::INFINITY_D) };
@@ -2269,7 +2269,7 @@ namespace fgm
          *
          * @note Constrained to floating point types.
          */
-        static constexpr Vector3 INF_NEG()
+        static constexpr Vector3 infNeg()
             requires std::floating_point<T>
         {
             return Vector3{ T(-constants::INFINITY_D), T(-constants::INFINITY_D), T(-constants::INFINITY_D) };
@@ -2281,7 +2281,7 @@ namespace fgm
          *
          * @note Constrained to floating point types.
          */
-        static constexpr Vector3 QNAN()
+        static constexpr Vector3 qnan()
             requires std::floating_point<T>
         {
             return Vector3{ T(constants::NaN_D), T(constants::NaN_D), T(constants::NaN_D) };
@@ -2293,7 +2293,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 RIGHT()
+        static constexpr Vector3 right()
             requires std::is_signed_v<T>
         {
             return Vector3{ T(1), T(0), T(0) };
@@ -2305,7 +2305,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 LEFT()
+        static constexpr Vector3 left()
             requires std::is_signed_v<T>
         {
             return Vector3{ T(-1), T(0), T(0) };
@@ -2317,7 +2317,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 UP()
+        static constexpr Vector3 up()
             requires std::is_signed_v<T>
         {
             return Vector3{ T(0), T(1), T(0) };
@@ -2329,7 +2329,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 DOWN()
+        static constexpr Vector3 down()
             requires std::is_signed_v<T>
         {
             return Vector3{ T(0), T(-1), T(0) };
@@ -2343,7 +2343,7 @@ namespace fgm
          * @note Left Handed Coordinate System.
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 FORWARD()
+        static constexpr Vector3 forward()
             requires std::is_signed_v<T>
         {
             return Vector3{ T(0), T(0), T(1) };
@@ -2356,7 +2356,7 @@ namespace fgm
          * @note Left Handed Coordinate System.
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 BACKWARD()
+        static constexpr Vector3 backward()
             requires std::is_signed_v<T>
         {
             return Vector3{ T(0), T(0), T(-1) };
@@ -2368,7 +2368,7 @@ namespace fgm
          * @note Right Handed Coordinate System.
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 FORWARD()
+        static constexpr Vector3 forward()
             requires std::is_signed_v<T>
         {
             return Vector3{ T(0), T(0), T(-1) };
@@ -2381,7 +2381,7 @@ namespace fgm
          * @note Right Handed Coordinate System
          * @note Constrained to signed types.
          */
-        static constexpr Vector3 BACKWARD()
+        static constexpr Vector3 backward()
             requires std::is_signed_v<T>
         {
             return Vector3{ T(0), T(0), T(1) };
@@ -2389,15 +2389,15 @@ namespace fgm
 
 #endif
 
+         //TODO: Specialize
         /**
          * @brief Alias for a 2D-point representation.
          *
          * @note Last component is reserved for distinguishing a Point(1) and a Vector(0).
-         *
          * @param[in] x The x-coordinate of the point. Default: 0
          * @param[in] y The y-coordinate of the point. Default: 0
          */
-        static constexpr Vector3 POINT(const T x = T(0), const T y = T(0))
+        static constexpr Vector3 point(const T x = T(0), const T y = T(0))
             requires std::is_signed_v<T>
         {
             return Vector3{ x, y, T(1) };

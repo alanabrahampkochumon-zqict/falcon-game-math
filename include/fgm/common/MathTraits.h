@@ -103,8 +103,8 @@ namespace fgm
     template <typename T>
     concept Matrix = requires(T matrix, std::size_t r, std::size_t c) {
         typename T::value_type;
-        { T::rows } -> std::same_as<const std::size_t&>;
-        { T::columns } -> std::same_as<const std::size_t&>;
+        { T::ROWS } -> std::same_as<const std::size_t&>;
+        { T::COLUMNS } -> std::same_as<const std::size_t&>;
         { matrix(r, c) } -> std::convertible_to<typename T::value_type>;
         { matrix[c] };
     } && Arithmetic<typename T::value_type>;

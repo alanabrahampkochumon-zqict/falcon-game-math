@@ -196,7 +196,7 @@ TEST_P(Matrix3ColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix3 mat(1, 2, 3);
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vector3<int>::ZERO()), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vector3<int>::zero()), "");
 }
 
 

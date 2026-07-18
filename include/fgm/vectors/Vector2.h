@@ -60,7 +60,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Vector2<T>::ZERO() to guarantee a zeroed vector.
+         *       @ref fgm::Vector2<T>::zero() to guarantee a zeroed vector. 
          */
         Vector2() = default;
 
@@ -2139,7 +2139,7 @@ namespace fgm
         /**
          * @brief A 2D vector with all components set to one (1, 1).
          */
-        static constexpr Vector2 ONE()
+        static constexpr Vector2 one()
             requires StrictArithmetic<T>
         {
             return Vector2{ T(1), T(1) };
@@ -2149,7 +2149,7 @@ namespace fgm
         /**
          * @brief A 2D vector with all components set to zero (0, 0).
          */
-        static constexpr Vector2 ZERO()
+        static constexpr Vector2 zero()
             requires StrictArithmetic<T>
         {
             return Vector2{ T(0), T(0) };
@@ -2161,7 +2161,7 @@ namespace fgm
          *
          * @note Constrained to floating point types.
          */
-        static constexpr Vector2 INF()
+        static constexpr Vector2 inf()
             requires std::floating_point<T>
         {
             return Vector2{ T(constants::INFINITY_D), T(constants::INFINITY_D) };
@@ -2173,7 +2173,7 @@ namespace fgm
          *
          * @note Constrained to floating point types.
          */
-        static constexpr Vector2 INF_NEG()
+        static constexpr Vector2 infNeg()
             requires std::floating_point<T>
         {
             return Vector2{ T(-constants::INFINITY_D), T(-constants::INFINITY_D) };
@@ -2185,7 +2185,7 @@ namespace fgm
          *
          * @note Constrained to floating point types.
          */
-        static constexpr Vector2 QNAN()
+        static constexpr Vector2 qnan()
             requires std::floating_point<T>
         {
             return Vector2{ T(constants::NaN_D), T(constants::NaN_D) };
@@ -2197,7 +2197,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector2 RIGHT()
+        static constexpr Vector2 right()
             requires std::is_signed_v<T>
         {
             return Vector2{ T(1), T(0) };
@@ -2209,7 +2209,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector2 LEFT()
+        static constexpr Vector2 left()
             requires std::is_signed_v<T>
         {
             return Vector2{ T(-1), T(0) };
@@ -2221,7 +2221,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector2 UP()
+        static constexpr Vector2 up()
             requires std::is_signed_v<T>
         {
             return Vector2{ T(0), T(1) };
@@ -2233,7 +2233,7 @@ namespace fgm
          *
          * @note Constrained to signed types.
          */
-        static constexpr Vector2 DOWN()
+        static constexpr Vector2 down()
             requires std::is_signed_v<T>
         {
             return Vector2{ T(0), T(-1) };

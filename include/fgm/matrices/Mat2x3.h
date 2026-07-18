@@ -13,8 +13,6 @@
  * @note Matrices utilize a strict column-major internal memory layout. To align with standard mathematical notations,
  *       scalar constructors accept elements in row-major reading order. Vector-based constructors and array-style
  *       access (operator[]) operate directly on columns.
- * @note FGM uses **Right-Handed** coordinate system by default. To use **Left-Handed** coordinate system define
- *       `FGM_LEFT_HANDED` preprocessor macro.
  *
  * @par Configuration
  *      Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
@@ -28,7 +26,6 @@
 #include "fgm/vectors/Vector2.h"
 
 #include <array>
-#include <cstdint>
 #include <type_traits>
 
 
@@ -45,8 +42,8 @@ namespace fgm
 
         using value_type = T; ///< The numeric type of the matrix elements.
 
-        static constexpr std::size_t columns = 3; ///< Matrix column count.
-        static constexpr std::size_t rows    = 2; ///< Matrix row count.
+        static constexpr std::size_t COLUMNS = 3; ///< Matrix column count.
+        static constexpr std::size_t ROWS    = 2; ///< Matrix row count.
 
 
         /** @} */
@@ -65,7 +62,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Mat2x3<T>::ZERO() to guarantee a zeroed matrix.
+         *       @ref fgm::Mat2x3<T>::zero() to guarantee a zeroed matrix.
          */
         Mat2x3() = default;
 
@@ -476,7 +473,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat2x3<T, S> safeDiv(S scalar,
-                                                             const Mat2x3& fallback = Mat2x3::ZERO()) const noexcept
+                                                             const Mat2x3& fallback = Mat2x3::zero()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -502,7 +499,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMat2x3<T, S> safeDiv(const Mat2x3& mat, S scalar,
-                                                                    const Mat2x3& fallback = Mat2x3::ZERO()) noexcept
+                                                                    const Mat2x3& fallback = Mat2x3::zero()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -532,7 +529,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat2x3<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                            const Mat2x3& fallback = Mat2x3::ZERO()) const noexcept
+                                                            const Mat2x3& fallback = Mat2x3::zero()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -563,7 +560,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMat2x3<T, S> tryDiv(const Mat2x3& mat, S scalar, OperationStatus& status,
-                                                                   const Mat2x3& fallback = Mat2x3::ZERO()) noexcept
+                                                                   const Mat2x3& fallback = Mat2x3::zero()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -634,7 +631,7 @@ namespace fgm
          *
          * @note Constrained to @ref StrictArithmetic types.
          */
-        static constexpr Mat2x3 ONE()
+        static constexpr Mat2x3 one()
             requires fgm::StrictArithmetic<T>
         { return Mat2x3{ T(1), T(1), T(1), T(1), T(1), T(1) }; }
 
@@ -644,7 +641,7 @@ namespace fgm
          *
          * @note Constrained to @ref StrictArithmetic types.
          */
-        static constexpr Mat2x3 ZERO()
+        static constexpr Mat2x3 zero()
             requires fgm::StrictArithmetic<T>
         { return Mat2x3{ T(0), T(0), T(0), T(0), T(0), T(0) }; }
 
@@ -694,7 +691,7 @@ namespace fgm
 
 
     private:
-        std::array<Vector2<T>, columns> _data;
+        std::array<Vector2<T>, COLUMNS> _data;
     };
 
 
