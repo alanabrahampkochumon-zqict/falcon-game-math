@@ -29,7 +29,7 @@ protected:
 
     void SetUp() override
     {
-        _matrix              = { fgm::Vector2<T>{ 4, 1 }, fgm::Vector2<T>{ 2, 5 } };
+        _matrix              = { fgm::Vec2<T>{ 4, 1 }, fgm::Vec2<T>{ 2, 5 } };
         _expectedDeterminant = 18;
     }
 };
@@ -41,11 +41,11 @@ TYPED_TEST_SUITE(Matrix2Determinant, SupportedSignedArithmeticTypes);
 class SingularMatrix2Determinant: public ::testing::TestWithParam<fgm::Matrix2<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Matrix2DeterminantTestSuite, SingularMatrix2Determinant,
-                         ::testing::Values(fgm::Matrix2{ fgm::Vector2{ 1.0f, 2.0f }, fgm::Vector2{ 1.0f, 2.0f } },
-                                           fgm::Matrix2{ fgm::Vector2{ 2.0f, 2.0f }, fgm::Vector2{ 2.0f, 2.0f } },
-                                           fgm::Matrix2{ fgm::Vector2{ 3.0f, 2.0f }, fgm::Vector2{ 6.0f, 4.0f } },
-                                           fgm::Matrix2{ fgm::Vector2{ 0.0f, 0.0f }, fgm::Vector2{ 4.0f, 5.0f } },
-                                           fgm::Matrix2{ fgm::Vector2{ 0.0f, 3.0f }, fgm::Vector2{ 0.0f, 5.0f } }));
+                         ::testing::Values(fgm::Matrix2{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ 1.0f, 2.0f } },
+                                           fgm::Matrix2{ fgm::Vec2{ 2.0f, 2.0f }, fgm::Vec2{ 2.0f, 2.0f } },
+                                           fgm::Matrix2{ fgm::Vec2{ 3.0f, 2.0f }, fgm::Vec2{ 6.0f, 4.0f } },
+                                           fgm::Matrix2{ fgm::Vec2{ 0.0f, 0.0f }, fgm::Vec2{ 4.0f, 5.0f } },
+                                           fgm::Matrix2{ fgm::Vec2{ 0.0f, 3.0f }, fgm::Vec2{ 0.0f, 5.0f } }));
 
 
 
@@ -63,7 +63,7 @@ INSTANTIATE_TEST_SUITE_P(Matrix2DeterminantTestSuite, SingularMatrix2Determinant
 /** @brief Verify that matrix determinant operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix2 MAT{ fgm::Vector2{ 4, 2 }, fgm::Vector2{ 3, 4 } };
+    constexpr fgm::Matrix2 MAT{ fgm::Vec2{ 4, 2 }, fgm::Vec2{ 3, 4 } };
 
     // Verify determinant (member function)
     static_assert(MAT.determinant() == 10);

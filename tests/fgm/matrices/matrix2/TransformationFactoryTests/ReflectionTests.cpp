@@ -24,7 +24,7 @@ class Matrix2NoReflection: public ::testing::Test
 protected:
     fgm::Matrix2<T> _expectedMat;
 
-    void SetUp() override { _expectedMat = { fgm::Vector2{ T(1), T(0) }, fgm::Vector2{ T(0), T(1) } }; }
+    void SetUp() override { _expectedMat = { fgm::Vec2{ T(1), T(0) }, fgm::Vec2{ T(0), T(1) } }; }
 };
 /**
  * @brief Test fixture for @ref fgm::Matrix2 reflection along x-axis, parameterized
@@ -39,7 +39,7 @@ class Matrix2XAxisReflection: public ::testing::Test
 protected:
     fgm::Matrix2<T> _expectedMat;
 
-    void SetUp() override { _expectedMat = { fgm::Vector2{ T(-1), T(0) }, fgm::Vector2{ T(0), T(1) } }; }
+    void SetUp() override { _expectedMat = { fgm::Vec2{ T(-1), T(0) }, fgm::Vec2{ T(0), T(1) } }; }
 };
 /**
  * @brief Test fixture for @ref fgm::Matrix2 reflection along x-axis, parameterized
@@ -54,7 +54,7 @@ class Matrix2YAxisReflection: public ::testing::Test
 protected:
     fgm::Matrix2<T> _expectedMat;
 
-    void SetUp() override { _expectedMat = { fgm::Vector2{ T(1), T(0) }, fgm::Vector2{ T(0), T(-1) } }; }
+    void SetUp() override { _expectedMat = { fgm::Vec2{ T(1), T(0) }, fgm::Vec2{ T(0), T(-1) } }; }
 };
 /**
  * @brief Test fixture for @ref fgm::Matrix2 reflection along y-axis, parameterized
@@ -69,7 +69,7 @@ class Matrix2OriginReflection: public ::testing::Test
 protected:
     fgm::Matrix2<T> _expectedMat;
 
-    void SetUp() override { _expectedMat = { fgm::Vector2{ T(-1), T(0) }, fgm::Vector2{ T(0), T(-1) } }; }
+    void SetUp() override { _expectedMat = { fgm::Vec2{ T(-1), T(0) }, fgm::Vec2{ T(0), T(-1) } }; }
 };
 /**
  * @brief Test fixture for @ref fgm::Matrix2 reflection along the origin(0, 0), parameterized

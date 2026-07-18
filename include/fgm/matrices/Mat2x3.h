@@ -23,7 +23,7 @@
 
 
 #include "fgm/common/Types.h"
-#include "fgm/vectors/Vector2.h"
+#include "fgm/vectors/Vec2.h"
 
 #include <array>
 #include <type_traits>
@@ -87,7 +87,7 @@ namespace fgm
          * @param[in] col1 The 2x3-vector to use as the second column entry.
          * @param[in] col2 The 2x3-vector to use as the third column entry.
          */
-        [[nodiscard]] constexpr Mat2x3(const Vector2<T>& col0, const Vector2<T>& col1, const Vector2<T>& col2) noexcept;
+        [[nodiscard]] constexpr Mat2x3(const Vec2<T>& col0, const Vec2<T>& col1, const Vec2<T>& col2) noexcept;
 
 
 
@@ -120,7 +120,7 @@ namespace fgm
          *
          * @return A reference to the column vector.
          */
-        [[nodiscard]] constexpr Vector2<T>& operator[](std::size_t col) noexcept;
+        [[nodiscard]] constexpr Vec2<T>& operator[](std::size_t col) noexcept;
 
 
         /**
@@ -132,7 +132,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const Vector2<T>& operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const Vec2<T>& operator[](std::size_t col) const noexcept;
 
 
         /**
@@ -691,7 +691,7 @@ namespace fgm
 
 
     private:
-        std::array<Vector2<T>, COLUMNS> _data;
+        std::array<Vec2<T>, COLUMNS> _data;
     };
 
 

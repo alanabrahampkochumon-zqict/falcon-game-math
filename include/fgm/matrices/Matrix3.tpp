@@ -29,20 +29,20 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix3<T>::Matrix3(const T m00, const T m01, const T m02, const T m10, const T m11, const T m12,
                                   const T m20, const T m21, const T m22) noexcept
-        : _data{ Vector3{ T(m00), T(m10), T(m20) }, Vector3{ T(m01), T(m11), T(m21) },
-                 Vector3{ T(m02), T(m12), T(m22) } }
+        : _data{ Vec3{ T(m00), T(m10), T(m20) }, Vec3{ T(m01), T(m11), T(m21) },
+                 Vec3{ T(m02), T(m12), T(m22) } }
     {}
 
 
     template <Arithmetic T>
-    constexpr Matrix3<T>::Matrix3(const Vector3<T>& col0, const Vector3<T>& col1, const Vector3<T>& col2) noexcept
+    constexpr Matrix3<T>::Matrix3(const Vec3<T>& col0, const Vec3<T>& col1, const Vec3<T>& col2) noexcept
         : _data{ col0, col1, col2 }
     {}
 
 
     template <Arithmetic T>
     constexpr Matrix3<T>::Matrix3(T d0, T d1, T d2) noexcept
-        : _data{ Vector3{ T(d0), T(0), T(0) }, Vector3{ T(0), T(d1), T(0) }, Vector3{ T(0), T(0), T(d2) } }
+        : _data{ Vec3{ T(d0), T(0), T(0) }, Vec3{ T(0), T(d1), T(0) }, Vec3{ T(0), T(0), T(d2) } }
     {}
 
 
@@ -70,7 +70,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector3<T>& Matrix3<T>::operator[](const std::size_t col) noexcept
+    constexpr Vec3<T>& Matrix3<T>::operator[](const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -78,7 +78,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr const Vector3<T>& Matrix3<T>::operator[](const std::size_t col) const noexcept
+    constexpr const Vec3<T>& Matrix3<T>::operator[](const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -261,7 +261,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector3<T, U> Matrix3<T>::operator*(const Vector3<U>& vec) const noexcept
+    constexpr PromotedVec3<T, U> Matrix3<T>::operator*(const Vec3<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -271,7 +271,7 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vector3<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
+                return Vec3<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
                                            std::fma(static_cast<R>(_data[1][0]), static_cast<R>(vec[1]),
                                                     static_cast<R>(_data[2][0]) * static_cast<R>(vec[2]))),
                                   std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
@@ -292,12 +292,12 @@ namespace fgm
         R z = static_cast<R>(_data[0][2]) * static_cast<R>(vec[0]) +
             static_cast<R>(_data[1][2]) * static_cast<R>(vec[1]) + static_cast<R>(_data[2][2]) * static_cast<R>(vec[2]);
 
-        return Vector3<R>(x, y, z);
+        return Vec3<R>(x, y, z);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    constexpr PromotedVector3<T, U> operator*(const Vector3<T>& vec, const Matrix3<U>& matrix) noexcept
+    constexpr PromotedVec3<T, U> operator*(const Vec3<T>& vec, const Matrix3<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -306,7 +306,7 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vector3<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)), // x
+                return Vec3<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)), // x
                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
                                                     static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 0)))),
                                   std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)), // y
@@ -331,12 +331,12 @@ namespace fgm
             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 2)) +
             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 2));
 
-        return Vector3<R>(x, y, z);
+        return Vec3<R>(x, y, z);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    constexpr Vector3<T>& operator*=(Vector3<T>& vec, const Matrix3<U>& matrix) noexcept
+    constexpr Vec3<T>& operator*=(Vec3<T>& vec, const Matrix3<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -401,9 +401,9 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
-        _data[0]       = static_cast<Vector3<T>>(mat[0]);
-        _data[1]       = static_cast<Vector3<T>>(mat[1]);
-        _data[2]       = static_cast<Vector3<T>>(mat[2]);
+        _data[0]       = static_cast<Vec3<T>>(mat[0]);
+        _data[1]       = static_cast<Vec3<T>>(mat[1]);
+        _data[2]       = static_cast<Vec3<T>>(mat[2]);
         return *this;
     }
 
@@ -585,9 +585,9 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        const auto row0 = static_cast<Vector3<R>>(_data[1].cross(_data[2])); // b X c
-        const auto row1 = static_cast<Vector3<R>>(_data[2].cross(_data[0])); // c X a
-        const auto row2 = static_cast<Vector3<R>>(_data[0].cross(_data[1])); // a X b
+        const auto row0 = static_cast<Vec3<R>>(_data[1].cross(_data[2])); // b X c
+        const auto row1 = static_cast<Vec3<R>>(_data[2].cross(_data[0])); // c X a
+        const auto row2 = static_cast<Vec3<R>>(_data[0].cross(_data[1])); // a X b
 
         // Since the cross product is already computed, it takes less operation compared to calling determinant.
         R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
@@ -611,9 +611,9 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        const auto row0 = static_cast<Vector3<R>>(_data[1].cross(_data[2])); // b X c
-        const auto row1 = static_cast<Vector3<R>>(_data[2].cross(_data[0])); // c X a
-        const auto row2 = static_cast<Vector3<R>>(_data[0].cross(_data[1])); // a X b
+        const auto row0 = static_cast<Vec3<R>>(_data[1].cross(_data[2])); // b X c
+        const auto row1 = static_cast<Vec3<R>>(_data[2].cross(_data[0])); // c X a
+        const auto row2 = static_cast<Vec3<R>>(_data[0].cross(_data[1])); // a X b
 
         // Since the cross product is already computed, it takes less operation compared to calling determinant.
         R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
@@ -653,9 +653,9 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        const auto row0 = static_cast<Vector3<R>>(_data[1].cross(_data[2])); // b X c
-        const auto row1 = static_cast<Vector3<R>>(_data[2].cross(_data[0])); // c X a
-        const auto row2 = static_cast<Vector3<R>>(_data[0].cross(_data[1])); // a X b
+        const auto row0 = static_cast<Vec3<R>>(_data[1].cross(_data[2])); // b X c
+        const auto row1 = static_cast<Vec3<R>>(_data[2].cross(_data[0])); // c X a
+        const auto row2 = static_cast<Vec3<R>>(_data[0].cross(_data[1])); // a X b
 
         // Since the cross product is already computed, it takes less operation compared to calling determinant.
         R det = _data[0].dot(row0); // a.(b X c) Scalar triple product
@@ -808,7 +808,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix3<T> Matrix3<T>::makeAffine(const Matrix2<T>& linearTransform,
-                                                const Vector2<T>& translation) noexcept
+                                                const Vec2<T>& translation) noexcept
     {
         return Matrix3<T>{ linearTransform(0, 0),
                            linearTransform(0, 1),

@@ -11,16 +11,16 @@ set(UtilityDirectory "${INCLUDE_DIR}utils/")
 
 
 # Files
-set(SetupFiles "Vector2TestSetup.h;Vector3TestSetup.h;Vector4TestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;Matrix2x3TestSetup.h;CommonSetup.h;")
+set(SetupFiles "Vec2TestSetup.h;Vec3TestSetup.h;Vec4TestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;Matrix2x3TestSetup.h;CommonSetup.h;")
 list(TRANSFORM SetupFiles PREPEND ${INCLUDE_DIR})
 
 set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
 list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
 
 add_subdirectory(common)
-add_subdirectory(vectors/vector2)
-add_subdirectory(vectors/vector3)
-add_subdirectory(vectors/vector4)
+add_subdirectory(vectors/vec2)
+add_subdirectory(vectors/vec3)
+add_subdirectory(vectors/vec4)
 add_subdirectory(matrices/matrix2)
 add_subdirectory(matrices/matrix2x3)
 add_subdirectory(matrices/matrix4)
@@ -65,9 +65,9 @@ target_link_libraries(
 
         # Objs
         CommonTests
-        Vector2Tests
-        Vector3Tests
-        Vector4Tests
+        Vec2Tests
+        Vec3Tests
+        Vec4Tests
         Matrix2Tests
         Matrix2x3Tests
         Matrix2TransformTests
@@ -106,9 +106,9 @@ source_group(
 )
 
 set_target_properties(CommonTests
-        Vector2Tests
-        Vector3Tests
-        Vector4Tests
+        Vec2Tests
+        Vec3Tests
+        Vec4Tests
         Matrix2Tests
         Matrix2TransformTests
         Matrix3Tests

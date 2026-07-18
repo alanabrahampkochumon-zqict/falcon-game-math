@@ -29,9 +29,9 @@ protected:
 
     void SetUp() override
     {
-        _matA               = { fgm::Vector3<T>{ 5, 6, 9 }, fgm::Vector3<T>{ 13, 8, 5 }, fgm::Vector3<T>{ 5, 4, 10 } };
-        _matB               = { fgm::Vector3<T>{ 3, 1, 6 }, fgm::Vector3<T>{ 8, 1, 5 }, fgm::Vector3<T>{ 2, 3, 1 } };
-        _expectedDifference = { fgm::Vector3<T>{ 2, 5, 3 }, fgm::Vector3<T>{ 5, 7, 0 }, fgm::Vector3<T>{ 3, 1, 9 } };
+        _matA               = { fgm::Vec3<T>{ 5, 6, 9 }, fgm::Vec3<T>{ 13, 8, 5 }, fgm::Vec3<T>{ 5, 4, 10 } };
+        _matB               = { fgm::Vec3<T>{ 3, 1, 6 }, fgm::Vec3<T>{ 8, 1, 5 }, fgm::Vec3<T>{ 2, 3, 1 } };
+        _expectedDifference = { fgm::Vec3<T>{ 2, 5, 3 }, fgm::Vec3<T>{ 5, 7, 0 }, fgm::Vec3<T>{ 3, 1, 9 } };
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix3 subtraction, parameterized by @ref SupportedArithmeticTypes. */

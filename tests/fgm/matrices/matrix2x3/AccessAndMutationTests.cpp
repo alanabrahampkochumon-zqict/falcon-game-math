@@ -44,9 +44,9 @@ INSTANTIATE_TEST_SUITE_P(Matrix2x3Tests, Matrix2x3ColumnIndexing, testing::Value
 namespace
 {
     constexpr fgm::Mat2x3 MAT(1, 2, 3, 4, 5, 6);
-    constexpr fgm::Vector2 VEC0(1, 4);
-    constexpr fgm::Vector2 VEC1(2, 5);
-    constexpr fgm::Vector2 VEC2(3, 6);
+    constexpr fgm::Vec2 VEC0(1, 4);
+    constexpr fgm::Vec2 VEC1(2, 5);
+    constexpr fgm::Vec2 VEC2(3, 6);
 
     // Verify that matrix elements are accessible as (row, column) during compile time.
     static_assert(MAT(0, 0) == 1);
@@ -93,9 +93,9 @@ TEST(Matrix2x3Access, AccessibleAsColumnVectors)
 {
     constexpr fgm::Mat2x3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);
 
-    EXPECT_VEC_EQ(fgm::Vector2(1.0f, 4.0f), mat[0]);
-    EXPECT_VEC_EQ(fgm::Vector2(2.0f, 5.0f), mat[1]);
-    EXPECT_VEC_EQ(fgm::Vector2(3.0f, 6.0f), mat[2]);
+    EXPECT_VEC_EQ(fgm::Vec2(1.0f, 4.0f), mat[0]);
+    EXPECT_VEC_EQ(fgm::Vec2(2.0f, 5.0f), mat[1]);
+    EXPECT_VEC_EQ(fgm::Vec2(3.0f, 6.0f), mat[2]);
 }
 
 
@@ -158,9 +158,9 @@ TEST(Matrix2x3Access, ElementsCanBeMutatedUsingIndex)
 /** @brief Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Matrix2x3Access, ColumnsCanBeMutatedUsingIndex)
 {
-    const fgm::Vector2 col0 = { 1.0f, 4.0f };
-    const fgm::Vector2 col1 = { 2.0f, 5.0f };
-    const fgm::Vector2 col2 = { 3.0f, 6.0f };
+    const fgm::Vec2 col0 = { 1.0f, 4.0f };
+    const fgm::Vec2 col1 = { 2.0f, 5.0f };
+    const fgm::Vec2 col2 = { 3.0f, 6.0f };
     fgm::Mat2x3<float> mat;
 
     mat[0] = col0;
@@ -180,7 +180,7 @@ TEST_P(Matrix2x3ColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vector2<int>::zero()), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec2<int>::zero()), "");
 }
 
 

@@ -1,0 +1,81 @@
+/**
+ * @file StringRepresentationTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: April 04, 2026
+ *
+ * @brief Verify @ref fgm::Vec2 string representation.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
+#include "Vec2TestSetup.h"
+
+#include <sstream>
+
+
+
+/**************************************
+ *                                    *
+ *                SETUP               *
+ *                                    *
+ **************************************/
+
+class Vec2StringRepresentationTests: public ::testing::Test
+{
+    /** @brief Switch to use full precision for testing. */
+    void SetUp() override { fgm::Config::useFullPrecision = true; }
+
+    /** @brief Switch back to normal log precision. */
+    void TearDown() override { fgm::Config::useFullPrecision = false; }
+};
+
+
+
+/**
+ * @addtogroup T_FGM_Vec2_String_Repr
+ * @{
+ */
+
+/** @brief Verify that the string representation matches the expected format for integral types. */
+TEST_F(Vec2StringRepresentationTests, IntegralRepresentation)
+{
+    const fgm::Vec2 vec(1, 2);
+    std::stringstream ss;
+
+    ss << vec;
+
+    EXPECT_EQ(ss.str(), "<1, 2>\n");
+}
+
+
+/**
+ * @brief Verify that the string representation matches the expected format for single-precision
+ *       floating-point types.
+ */
+TEST_F(Vec2StringRepresentationTests, FloatRepresentation)
+{
+    const fgm::Vec2 vec(1.2345f, 2.0f);
+    std::stringstream ss;
+
+    ss << vec;
+
+    EXPECT_EQ(ss.str(), "<1.23450, 2.00000>\n");
+}
+
+
+/**
+ * @brief Verify that the string representation matches the expected format for double-precision
+ *       floating-point types.
+ */
+TEST_F(Vec2StringRepresentationTests, DoubleRepresentation)
+{
+    const fgm::Vec2 vec(1.2345789777, 2.65831);
+    std::stringstream ss;
+
+    ss << vec;
+
+    EXPECT_EQ(ss.str(), "<1.234578977700000, 2.658310000000000>\n");
+}
+
+/** @} */

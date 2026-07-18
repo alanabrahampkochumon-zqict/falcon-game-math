@@ -48,20 +48,20 @@ class SingularMatrix4Inverse: public ::testing::TestWithParam<fgm::Matrix4<float
 {};
 INSTANTIATE_TEST_SUITE_P(
     Matrix4InverseTestSuite, SingularMatrix4Inverse,
-    ::testing::Values(fgm::Matrix4{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vector4{ 7.0f, 8.0f, 9.0f, 12.0f },
-                                    fgm::Vector4{ 1.0f, 85.0f, 19.0f, 12.0f } },
-                      fgm::Matrix4{ fgm::Vector4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vector4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vector4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vector4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vector4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vector4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vector4{ 0.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vector4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 0.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4{ 2.0f, 4.0f, 6.0f, 8.0f },
-                                    fgm::Vector4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vector4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vector4{ 2.0f, 4.0f, 5.0f, 10.0f },
-                                    fgm::Vector4{ 3.0f, 6.0f, 9.0f, 12.0f },
-                                    fgm::Vector4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
+    ::testing::Values(fgm::Matrix4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
+                                    fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f },
+                                    fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
+                      fgm::Matrix4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                                    fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                      fgm::Matrix4{ fgm::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                                    fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                      fgm::Matrix4{ fgm::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
+                                    fgm::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
+                      fgm::Matrix4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
+                                    fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                      fgm::Matrix4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
+                                    fgm::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f },
+                                    fgm::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
 
 
 /** @brief Test fixture for @ref fgm::Matrix4 inverse with NaN vectors. */

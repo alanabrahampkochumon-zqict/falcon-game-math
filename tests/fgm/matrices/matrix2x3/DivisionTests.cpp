@@ -29,10 +29,10 @@ protected:
 
     void SetUp() override
     {
-        _matrix         = { fgm::Vector2{ T(7), T(3) }, fgm::Vector2{ T(1), T(6) }, fgm::Vector2{ T(3), T(9) } };
+        _matrix         = { fgm::Vec2{ T(7), T(3) }, fgm::Vec2{ T(1), T(6) }, fgm::Vec2{ T(3), T(9) } };
         _scalar         = T(3);
-        _expectedMatrix = { fgm::Vector2{ T(2.333333333333333), T(1) }, fgm::Vector2{ T(0.3333333333333333), T(2) },
-                            fgm::Vector2{ T(1), T(3) } };
+        _expectedMatrix = { fgm::Vec2{ T(2.333333333333333), T(1) }, fgm::Vec2{ T(0.3333333333333333), T(2) },
+                            fgm::Vec2{ T(1), T(3) } };
     }
 };
 /** Test fixture for @ref fgm::Matrix2x3 division, parameterized by @ref SupportedArithmeticTypes */

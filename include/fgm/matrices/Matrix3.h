@@ -27,7 +27,7 @@
 #include "fgm/common/Config.h"
 #include "fgm/common/MathTraits.h"
 #include "fgm/common/Types.h"
-#include "fgm/vectors/Vector3.h"
+#include "fgm/vectors/Vec3.h"
 
 #include <array>
 #include <cstdint>
@@ -93,8 +93,8 @@ namespace fgm
          * @param[in] col1 The 3D-vector to use as the second column entry.
          * @param[in] col2 The 3D-vector to use as the third column entry.
          */
-        [[nodiscard]] constexpr Matrix3(const Vector3<T>& col0, const Vector3<T>& col1,
-                                        const Vector3<T>& col2) noexcept;
+        [[nodiscard]] constexpr Matrix3(const Vec3<T>& col0, const Vec3<T>& col1,
+                                        const Vec3<T>& col2) noexcept;
 
 
         /**
@@ -135,7 +135,7 @@ namespace fgm
          *
          * @return A reference to the column vector.
          */
-        [[nodiscard]] constexpr Vector3<T>& operator[](std::size_t col) noexcept;
+        [[nodiscard]] constexpr Vec3<T>& operator[](std::size_t col) noexcept;
 
 
         /**
@@ -147,7 +147,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const Vector3<T>& operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const Vec3<T>& operator[](std::size_t col) const noexcept;
 
 
         /**
@@ -446,18 +446,18 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector3<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedVec3<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec The column vector to transform.
          *
-         * @return A new @ref Vector3 with applied linear transformations.
+         * @return A new @ref Vec3 with applied linear transformations.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector3<T, U> operator*(const Vector3<U>& vec) const noexcept
+        [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const Vec3<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1229,7 +1229,7 @@ namespace fgm
          * @return A 3D affine transform matrix.
          */
         [[nodiscard]] static constexpr Matrix3 makeAffine(const Matrix2<T>& linearTransform,
-                                                          const Vector2<T>& translation) noexcept;
+                                                          const Vec2<T>& translation) noexcept;
 
 
         // /**
@@ -1289,7 +1289,7 @@ namespace fgm
         /** @} */
 
     private:
-        std::array<Vector3<T>, COLUMNS> _data;
+        std::array<Vec3<T>, COLUMNS> _data;
     };
 
 
@@ -1363,7 +1363,7 @@ namespace fgm
      *            \end{bmatrix}
      *        \f$
      *
-     * @note Promotes the result to the wider type using @ref PromotedVector3<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedVec3<T, S>.
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
      * @tparam S Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
      *
@@ -1373,7 +1373,7 @@ namespace fgm
      * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    static constexpr PromotedVector3<T, S> operator*(const Vector3<T>& vec, const Matrix3<S>& matrix) noexcept;
+    static constexpr PromotedVec3<T, S> operator*(const Vec3<T>& vec, const Matrix3<S>& matrix) noexcept;
 
 
     /**
@@ -1406,7 +1406,7 @@ namespace fgm
      * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
-    static constexpr Vector3<T>& operator*=(Vector3<T>& vec, const Matrix3<U>& matrix) noexcept;
+    static constexpr Vec3<T>& operator*=(Vec3<T>& vec, const Matrix3<U>& matrix) noexcept;
 
     /** @} */
 

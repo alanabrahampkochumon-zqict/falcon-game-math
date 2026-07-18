@@ -2,12 +2,12 @@ include_guard()
 
 set(FGM_VEC_DIR "vectors/")
 set(FGM_VEC_HEADERS
-        Vector2.h
-        Vector2.tpp
-        Vector3.h
-        Vector3.tpp
-        Vector4.h
-        Vector4.tpp
+        Vec2.h
+        Vec2.tpp
+        Vec3.h
+        Vec3.tpp
+        Vec4.h
+        Vec4.tpp
         Tensors.h
 )
 list(TRANSFORM FGM_VEC_HEADERS PREPEND ${FGM_VEC_DIR})

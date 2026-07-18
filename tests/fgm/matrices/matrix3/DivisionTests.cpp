@@ -29,7 +29,7 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { fgm::Vector3<T>{ 17, 13, 15 }, fgm::Vector3<T>{ 11, 16, 35 }, fgm::Vector3<T>{ 27, 44, 56 } };
+        _matrix = { fgm::Vec3<T>{ 17, 13, 15 }, fgm::Vec3<T>{ 11, 16, 35 }, fgm::Vec3<T>{ 27, 44, 56 } };
         _scalar = T(7);
         _expectedMatrix = { { T(2.428571428571428), T(1.857142857142857), T(2.142857142857143) },
                             { T(1.571428571428571), T(2.285714285714286), T(5.0) },

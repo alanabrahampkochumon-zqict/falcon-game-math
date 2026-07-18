@@ -22,7 +22,7 @@
 // protected:
 //     fgm::Matrix3<T> _expectedMat;
 //
-//     void SetUp() override { _expectedMat = { fgm::Vector4{ T(1), T(0) }, fgm::Vector4{ T(0), T(1) } }; }
+//     void SetUp() override { _expectedMat = { fgm::Vec4{ T(1), T(0) }, fgm::Vec4{ T(0), T(1) } }; }
 // };
 // /**
 //  * @brief Test fixture for @ref fgm::Matrix3 reflection along x-axis, parameterized
@@ -37,7 +37,7 @@
 // protected:
 //     fgm::Matrix3<T> _expectedMat;
 //
-//     void SetUp() override { _expectedMat = { fgm::Vector4{ T(-1), T(0) }, fgm::Vector4{ T(0), T(1) } }; }
+//     void SetUp() override { _expectedMat = { fgm::Vec4{ T(-1), T(0) }, fgm::Vec4{ T(0), T(1) } }; }
 // };
 // /**
 //  * @brief Test fixture for @ref fgm::Matrix3 reflection along x-axis, parameterized
@@ -52,7 +52,7 @@
 // protected:
 //     fgm::Matrix3<T> _expectedMat;
 //
-//     void SetUp() override { _expectedMat = { fgm::Vector4{ T(1), T(0) }, fgm::Vector4{ T(0), T(-1) } }; }
+//     void SetUp() override { _expectedMat = { fgm::Vec4{ T(1), T(0) }, fgm::Vec4{ T(0), T(-1) } }; }
 // };
 // /**
 //  * @brief Test fixture for @ref fgm::Matrix3 reflection along y-axis, parameterized
@@ -67,7 +67,7 @@
 // protected:
 //     fgm::Matrix3<T> _expectedMat;
 //
-//     void SetUp() override { _expectedMat = { fgm::Vector4{ T(-1), T(0) }, fgm::Vector4{ T(0), T(-1) } }; }
+//     void SetUp() override { _expectedMat = { fgm::Vec4{ T(-1), T(0) }, fgm::Vec4{ T(0), T(-1) } }; }
 // };
 // /**
 //  * @brief Test fixture for @ref fgm::Matrix3 reflection along the origin(0, 0), parameterized

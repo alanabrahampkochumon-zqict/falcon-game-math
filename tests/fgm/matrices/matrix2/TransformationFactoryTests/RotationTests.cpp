@@ -33,9 +33,9 @@ protected:
     {
         _angle = fgm::constants::PI<FP_T> / FP_T(2.0);
 #ifdef FGM_LEFT_HANDED
-        _expectedMat = { fgm::Vector2{ COM_T(0), COM_T(-1) }, fgm::Vector2 { COM_T(1), COM_T(0) } };
+        _expectedMat = { fgm::Vec2{ COM_T(0), COM_T(-1) }, fgm::Vec2 { COM_T(1), COM_T(0) } };
 #else
-        _expectedMat = { fgm::Vector2{ COM_T(0), COM_T(1) }, fgm::Vector2{ COM_T(-1), COM_T(0) } };
+        _expectedMat = { fgm::Vec2{ COM_T(0), COM_T(1) }, fgm::Vec2{ COM_T(-1), COM_T(0) } };
 #endif
     }
 };
@@ -60,13 +60,13 @@ protected:
 
 #ifdef FGM_LEFT_HANDED
         _expectedMat = {
-            fgm::Vector2{ T(0.70710678118654757), T(-0.70710678118654757) },
-            fgm::Vector2{ T(0.70710678118654757), T(0.70710678118654757) },
+            fgm::Vec2{ T(0.70710678118654757), T(-0.70710678118654757) },
+            fgm::Vec2{ T(0.70710678118654757), T(0.70710678118654757) },
         };
 
 #else
-        _expectedMat = { fgm::Vector2{ T(0.70710678118654757), T(0.70710678118654757) },
-                         fgm::Vector2{ T(-0.70710678118654757), T(0.70710678118654757) } };
+        _expectedMat = { fgm::Vec2{ T(0.70710678118654757), T(0.70710678118654757) },
+                         fgm::Vec2{ T(-0.70710678118654757), T(0.70710678118654757) } };
 
 #endif
     }

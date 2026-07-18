@@ -28,9 +28,9 @@ protected:
 
     void SetUp() override
     {
-        _expectedMat = { fgm::Vector4{ T(5.3821839321), T(0), T(0), T(0) },
-                         fgm::Vector4{ T(0), T(5.3821839321), T(0), T(0) },
-                         fgm::Vector4{ T(0), T(0), T(5.3821839321), T(0) }, fgm::Vector4{ T(0), T(0), T(0), T(1) } };
+        _expectedMat = { fgm::Vec4{ T(5.3821839321), T(0), T(0), T(0) },
+                         fgm::Vec4{ T(0), T(5.3821839321), T(0), T(0) },
+                         fgm::Vec4{ T(0), T(0), T(5.3821839321), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
         _scale       = T(5.3821839321);
     }
 };
@@ -50,9 +50,9 @@ protected:
 
     void SetUp() override
     {
-        _expectedMat = { fgm::Vector4{ T(5.3821839321), T(0), T(0), T(0) },
-                         fgm::Vector4{ T(0), T(8.1234921348), T(0), T(0) },
-                         fgm::Vector4{ T(0), T(0), T(0.12348921340), T(0) }, fgm::Vector4{ T(0), T(0), T(0), T(1) } };
+        _expectedMat = { fgm::Vec4{ T(5.3821839321), T(0), T(0), T(0) },
+                         fgm::Vec4{ T(0), T(8.1234921348), T(0), T(0) },
+                         fgm::Vec4{ T(0), T(0), T(0.12348921340), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
         _scaleX      = T(5.3821839321);
         _scaleY      = T(8.1234921348);
         _scaleZ      = T(0.12348921340);

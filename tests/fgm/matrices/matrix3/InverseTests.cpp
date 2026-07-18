@@ -44,18 +44,18 @@ class SingularMatrix3Inverse: public ::testing::TestWithParam<fgm::Matrix3<float
 {};
 INSTANTIATE_TEST_SUITE_P(
     Matrix3InverseTestSuite, SingularMatrix3Inverse,
-    ::testing::Values(fgm::Matrix3{ fgm::Vector3{ 1.0f, 2.0f, 3.0f }, fgm::Vector3{ 1.0f, 2.0f, 3.0f },
-                                    fgm::Vector3{ 7.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3{ fgm::Vector3{ 1.0f, 1.0f, 5.0f }, fgm::Vector3{ 2.0f, 2.0f, 3.0f },
-                                    fgm::Vector3{ 3.0f, 3.0f, 9.0f } },
-                      fgm::Matrix3{ fgm::Vector3{ 0.0f, 0.0f, 0.0f }, fgm::Vector3{ 1.0f, 2.0f, 3.0f },
-                                    fgm::Vector3{ 1.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3{ fgm::Vector3{ 0.0f, 5.0f, 1.0f }, fgm::Vector3{ 0.0f, 2.0f, 3.0f },
-                                    fgm::Vector3{ 0.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3{ fgm::Vector3{ 1.0f, 2.0f, 3.0f }, fgm::Vector3{ 2.0f, 4.0f, 6.0f },
-                                    fgm::Vector3{ 7.0f, 8.0f, 9.0f } },
-                      fgm::Matrix3{ fgm::Vector3{ 1.0f, 2.0f, 1.0f }, fgm::Vector3{ 2.0f, 4.0f, 3.0f },
-                                    fgm::Vector3{ 3.0f, 6.0f, 9.0f } }));
+    ::testing::Values(fgm::Matrix3{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 1.0f, 2.0f, 3.0f },
+                                    fgm::Vec3{ 7.0f, 8.0f, 9.0f } },
+                      fgm::Matrix3{ fgm::Vec3{ 1.0f, 1.0f, 5.0f }, fgm::Vec3{ 2.0f, 2.0f, 3.0f },
+                                    fgm::Vec3{ 3.0f, 3.0f, 9.0f } },
+                      fgm::Matrix3{ fgm::Vec3{ 0.0f, 0.0f, 0.0f }, fgm::Vec3{ 1.0f, 2.0f, 3.0f },
+                                    fgm::Vec3{ 1.0f, 8.0f, 9.0f } },
+                      fgm::Matrix3{ fgm::Vec3{ 0.0f, 5.0f, 1.0f }, fgm::Vec3{ 0.0f, 2.0f, 3.0f },
+                                    fgm::Vec3{ 0.0f, 8.0f, 9.0f } },
+                      fgm::Matrix3{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 2.0f, 4.0f, 6.0f },
+                                    fgm::Vec3{ 7.0f, 8.0f, 9.0f } },
+                      fgm::Matrix3{ fgm::Vec3{ 1.0f, 2.0f, 1.0f }, fgm::Vec3{ 2.0f, 4.0f, 3.0f },
+                                    fgm::Vec3{ 3.0f, 6.0f, 9.0f } }));
 
 
 

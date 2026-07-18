@@ -29,9 +29,9 @@ protected:
 
     void SetUp() override
     {
-        _matrix          = { fgm::Vector2{ T(5), T(4) }, fgm::Vector2{ T(2), T(3) } };
-        _expectedInverse = { fgm::Vector2{ Mag(0.42857142857142855), Mag(-0.5714285714285714) },
-                             fgm::Vector2{ Mag(-0.2857142857142857), Mag(0.7142857142857143) } };
+        _matrix          = { fgm::Vec2{ T(5), T(4) }, fgm::Vec2{ T(2), T(3) } };
+        _expectedInverse = { fgm::Vec2{ Mag(0.42857142857142855), Mag(-0.5714285714285714) },
+                             fgm::Vec2{ Mag(-0.2857142857142857), Mag(0.7142857142857143) } };
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix2 inverse, parameterized @ref SupportedSignedArithmeticTypes */
@@ -42,11 +42,11 @@ TYPED_TEST_SUITE(Matrix2Inverse, SupportedSignedArithmeticTypes);
 class SingularMatrix2Inverse: public ::testing::TestWithParam<fgm::Matrix2<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(Matrix2InverseTestSuite, SingularMatrix2Inverse,
-                         ::testing::Values(fgm::Matrix2{ fgm::Vector2{ 1.0f, 2.0f }, fgm::Vector2{ 1.0f, 2.0f } },
-                                           fgm::Matrix2{ fgm::Vector2{ 2.0f, 2.0f }, fgm::Vector2{ 2.0f, 2.0f } },
-                                           fgm::Matrix2{ fgm::Vector2{ 3.0f, 2.0f }, fgm::Vector2{ 6.0f, 4.0f } },
-                                           fgm::Matrix2{ fgm::Vector2{ 0.0f, 0.0f }, fgm::Vector2{ 4.0f, 5.0f } },
-                                           fgm::Matrix2{ fgm::Vector2{ 0.0f, 3.0f }, fgm::Vector2{ 0.0f, 5.0f } }));
+                         ::testing::Values(fgm::Matrix2{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ 1.0f, 2.0f } },
+                                           fgm::Matrix2{ fgm::Vec2{ 2.0f, 2.0f }, fgm::Vec2{ 2.0f, 2.0f } },
+                                           fgm::Matrix2{ fgm::Vec2{ 3.0f, 2.0f }, fgm::Vec2{ 6.0f, 4.0f } },
+                                           fgm::Matrix2{ fgm::Vec2{ 0.0f, 0.0f }, fgm::Vec2{ 4.0f, 5.0f } },
+                                           fgm::Matrix2{ fgm::Vec2{ 0.0f, 3.0f }, fgm::Vec2{ 0.0f, 5.0f } }));
 
 
 

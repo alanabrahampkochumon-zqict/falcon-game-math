@@ -54,16 +54,16 @@ class Matrix4VectorMultiplication: public testing::Test
 {
 protected:
     fgm::Matrix4<T> _mat;
-    fgm::Vector4<T> _vec;
-    fgm::Vector4<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
+    fgm::Vec4<T> _vec;
+    fgm::Vec4<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
         _expectedIntegralRowVector;
 
     void SetUp() override
     {
-        _mat = { fgm::Vector4{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338), T(1.2384912349) },
-                 fgm::Vector4{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321), T(3.2983192312) },
-                 fgm::Vector4{ T(2.238929123125), T(11.238924194839), T(9.2389291239898), T(8.2813941329) },
-                 fgm::Vector4{ T(7.32129123125), T(8.2314213412), T(2.2323329898), T(3.12343151324) } };
+        _mat = { fgm::Vec4{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338), T(1.2384912349) },
+                 fgm::Vec4{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321), T(3.2983192312) },
+                 fgm::Vec4{ T(2.238929123125), T(11.238924194839), T(9.2389291239898), T(8.2813941329) },
+                 fgm::Vec4{ T(7.32129123125), T(8.2314213412), T(2.2323329898), T(3.12343151324) } };
         _vec = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128), T(4.18293482134) };
         _expectedFloatingColVector = { T(64.5117559627963), T(89.02269187729473), T(33.888435234319466),
                                        T(36.19857986352777) };
@@ -83,7 +83,7 @@ class Matrix4VectorFractionalMultiplication: public testing::Test
 {
 protected:
     fgm::Matrix4<T> _mat;
-    fgm::Vector4<T> _vec, _expectedColVector, _expectedRowVector;
+    fgm::Vec4<T> _vec, _expectedColVector, _expectedRowVector;
 
     void SetUp() override
     {
@@ -91,12 +91,12 @@ protected:
                  { T(-0.123489823149), T(-0.123489757623), T(0.89281239432), T(0.00123849123) },
                  { T(-0.38291023892), T(0.29381938232), T(-0.0038291382), T(0.000832891234231) },
                  { T(0.58291023892), T(0.6381938232), T(-0.000291382), T(0.008391234231) } };
-        _vec = fgm::Vector4{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341), T(-0.9382938123) };
+        _vec = fgm::Vec4{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341), T(-0.9382938123) };
 
         _expectedColVector =
-            fgm::Vector4{ T(-0.623471066313721), T(-0.516417000150393), T(0.809116633699507), T(0.073055804425393) };
+            fgm::Vec4{ T(-0.623471066313721), T(-0.516417000150393), T(0.809116633699507), T(0.073055804425393) };
         _expectedRowVector =
-            fgm::Vector4{ T(0.152013362841589), T(0.001594606404517), T(-0.113165224639696), T(1.012276423171081) };
+            fgm::Vec4{ T(0.152013362841589), T(0.001594606404517), T(-0.113165224639696), T(1.012276423171081) };
     }
 };
 /**
@@ -193,7 +193,7 @@ namespace
     // TODO: Add static tests
     constexpr fgm::Matrix4 mat1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
     constexpr fgm::Matrix4 mat2(5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21);
-    constexpr fgm::Vector4 vec4D(1, 2, 3, 4);
+    constexpr fgm::Vec4 vec4D(1, 2, 3, 4);
 
     // Verify matrix * scalar multiplication
     constexpr fgm::Matrix4 binaryProduct1 = mat1 * 2;
@@ -236,14 +236,14 @@ namespace
 
     // TODO: Add static tests
     // Verify matrix * vector multiplication
-    constexpr fgm::Vector4 colVectorProduct = mat1 * vec4D;
+    constexpr fgm::Vec4 colVectorProduct = mat1 * vec4D;
     static_assert(colVectorProduct[0] == 30);
     static_assert(colVectorProduct[1] == 70);
     static_assert(colVectorProduct[2] == 110);
     static_assert(colVectorProduct[3] == 150);
 
     // Verify vector * matrix multiplication
-    constexpr fgm::Vector4 rowVectorProduct = vec4D * mat1;
+    constexpr fgm::Vec4 rowVectorProduct = vec4D * mat1;
     static_assert(rowVectorProduct[0] == 90);
     static_assert(rowVectorProduct[1] == 100);
     static_assert(rowVectorProduct[2] == 110);
@@ -599,8 +599,8 @@ TEST(Matrix4VectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsures
     const fgm::Matrix4 mat{
         2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5
     };
-    fgm::Vector4 vec{ 10, 20, 30, 40 };
-    const fgm::Vector4 expected{ 1015, 1340, 1015, 1232 };
+    fgm::Vec4 vec{ 10, 20, 30, 40 };
+    const fgm::Vec4 expected{ 1015, 1340, 1015, 1232 };
 
     vec *= mat;
 

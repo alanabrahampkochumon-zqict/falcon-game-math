@@ -34,31 +34,31 @@ protected:
     {
         _angle = fgm::constants::PI<FP_T> / FP_T(2.0);
 #ifdef FGM_LEFT_HANDED
-        _expectedMatX = { fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) }, fgm::Vector3{ COM_T(0), COM_T(0), COM_T(-1) },
-                          fgm::Vector3 {
+        _expectedMatX = { fgm::Vec3{ COM_T(1), COM_T(0), COM_T(0) }, fgm::Vec3{ COM_T(0), COM_T(0), COM_T(-1) },
+                          fgm::Vec3 {
                               COM_T(0),
                               COM_T(1),
                               COM_T(0)
                           } };
-        _expectedMatY = { fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) }, fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) },
-                          fgm::Vector3 {
+        _expectedMatY = { fgm::Vec3{ COM_T(0), COM_T(0), COM_T(1) }, fgm::Vec3{ COM_T(0), COM_T(1), COM_T(0) },
+                          fgm::Vec3 {
                               COM_T(-1),
                               COM_T(0),
                               COM_T(0)
                           } };
-        _expectedMatZ = { fgm::Vector3{ COM_T(0), COM_T(-1), COM_T(0) }, fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) },
-                          fgm::Vector3 {
+        _expectedMatZ = { fgm::Vec3{ COM_T(0), COM_T(-1), COM_T(0) }, fgm::Vec3{ COM_T(1), COM_T(0), COM_T(0) },
+                          fgm::Vec3 {
                               COM_T(0),
                               COM_T(0),
                               COM_T(1)
                           } };
 #else
-        _expectedMatX = { fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) }, fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) },
-                          fgm::Vector3{ COM_T(0), COM_T(-1), COM_T(0) } };
-        _expectedMatY = { fgm::Vector3{ COM_T(0), COM_T(0), COM_T(-1) }, fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) },
-                          fgm::Vector3{ COM_T(1), COM_T(0), COM_T(0) } };
-        _expectedMatZ = { fgm::Vector3{ COM_T(0), COM_T(1), COM_T(0) }, fgm::Vector3{ COM_T(-1), COM_T(0), COM_T(0) },
-                          fgm::Vector3{ COM_T(0), COM_T(0), COM_T(1) } };
+        _expectedMatX = { fgm::Vec3{ COM_T(1), COM_T(0), COM_T(0) }, fgm::Vec3{ COM_T(0), COM_T(0), COM_T(1) },
+                          fgm::Vec3{ COM_T(0), COM_T(-1), COM_T(0) } };
+        _expectedMatY = { fgm::Vec3{ COM_T(0), COM_T(0), COM_T(-1) }, fgm::Vec3{ COM_T(0), COM_T(1), COM_T(0) },
+                          fgm::Vec3{ COM_T(1), COM_T(0), COM_T(0) } };
+        _expectedMatZ = { fgm::Vec3{ COM_T(0), COM_T(1), COM_T(0) }, fgm::Vec3{ COM_T(-1), COM_T(0), COM_T(0) },
+                          fgm::Vec3{ COM_T(0), COM_T(0), COM_T(1) } };
 
 #endif
     }
@@ -84,29 +84,29 @@ protected:
         _angle = fgm::constants::PI<T> / T(4.0);
 
 #ifdef FGM_LEFT_HANDED
-        _expectedMatX = { fgm::Vector3{ T(1.0), T(0.0), T(0.0) },
-                          fgm::Vector3{ T(0.0), T(0.70710678118654757), T(-0.70710678118654757) }, fgm::Vector3 {
+        _expectedMatX = { fgm::Vec3{ T(1.0), T(0.0), T(0.0) },
+                          fgm::Vec3{ T(0.0), T(0.70710678118654757), T(-0.70710678118654757) }, fgm::Vec3 {
                               T(0.0),
                               T(0.70710678118654757),
                               T(0.70710678118654757)
                           } };
 
-        _expectedMatY = { fgm::Vector3{ T(0.70710678118654757), T(0.0), T(0.70710678118654757) },
-                          fgm::Vector3{ T(0.0), T(1.0), T(0.0) }, fgm::Vector3 {
+        _expectedMatY = { fgm::Vec3{ T(0.70710678118654757), T(0.0), T(0.70710678118654757) },
+                          fgm::Vec3{ T(0.0), T(1.0), T(0.0) }, fgm::Vec3 {
                               T(-0.70710678118654757),
                               T(0.0),
                               T(0.70710678118654757)
                           } };
 
-        _expectedMatZ = { fgm::Vector3{ T(0.70710678118654757), T(-0.70710678118654757), T(0.0) },
-                          fgm::Vector3{ T(0.70710678118654757), T(0.70710678118654757), T(0.0) }, fgm::Vector3 {
+        _expectedMatZ = { fgm::Vec3{ T(0.70710678118654757), T(-0.70710678118654757), T(0.0) },
+                          fgm::Vec3{ T(0.70710678118654757), T(0.70710678118654757), T(0.0) }, fgm::Vec3 {
                               T(0.0),
                               T(0.0),
                               T(1.0)
                           } };
 
-        _expectedMatXYZ = { fgm::Vector3{ T(0.5), T(0.5), T(-0.70710678118654757) },
-                            fgm::Vector3{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5) }, fgm::Vector3 {
+        _expectedMatXYZ = { fgm::Vec3{ T(0.5), T(0.5), T(-0.70710678118654757) },
+                            fgm::Vec3{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5) }, fgm::Vec3 {
                                 T(0.85355339059327395),
                                 T(-0.14644660940672627),
                                 T(0.5)
@@ -114,21 +114,21 @@ protected:
 
 #else
 
-        _expectedMatX = { fgm::Vector3{ T(1.0), T(0.0), T(0.0) },
-                          fgm::Vector3{ T(0.0), T(0.70710678118654757), T(0.70710678118654757) },
-                          fgm::Vector3{ T(0.0), T(-0.70710678118654757), T(0.70710678118654757) } };
+        _expectedMatX = { fgm::Vec3{ T(1.0), T(0.0), T(0.0) },
+                          fgm::Vec3{ T(0.0), T(0.70710678118654757), T(0.70710678118654757) },
+                          fgm::Vec3{ T(0.0), T(-0.70710678118654757), T(0.70710678118654757) } };
 
-        _expectedMatY = { fgm::Vector3{ T(0.70710678118654757), T(0.0), T(-0.70710678118654757) },
-                          fgm::Vector3{ T(0.0), T(1.0), T(0.0) },
-                          fgm::Vector3{ T(0.70710678118654757), T(0.0), T(0.70710678118654757) } };
+        _expectedMatY = { fgm::Vec3{ T(0.70710678118654757), T(0.0), T(-0.70710678118654757) },
+                          fgm::Vec3{ T(0.0), T(1.0), T(0.0) },
+                          fgm::Vec3{ T(0.70710678118654757), T(0.0), T(0.70710678118654757) } };
 
-        _expectedMatZ = { fgm::Vector3{ T(0.70710678118654757), T(0.70710678118654757), T(0.0) },
-                          fgm::Vector3{ T(-0.70710678118654757), T(0.70710678118654757), T(0.0) },
-                          fgm::Vector3{ T(0.0), T(0.0), T(1.0) } };
+        _expectedMatZ = { fgm::Vec3{ T(0.70710678118654757), T(0.70710678118654757), T(0.0) },
+                          fgm::Vec3{ T(-0.70710678118654757), T(0.70710678118654757), T(0.0) },
+                          fgm::Vec3{ T(0.0), T(0.0), T(1.0) } };
 
-        _expectedMatXYZ = { fgm::Vector3{ T(0.5), T(0.5), T(-0.70710678118654757) },
-                            fgm::Vector3{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5) },
-                            fgm::Vector3{ T(0.85355339059327395), T(-0.14644660940672627), T(0.5) } };
+        _expectedMatXYZ = { fgm::Vec3{ T(0.5), T(0.5), T(-0.70710678118654757) },
+                            fgm::Vec3{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5) },
+                            fgm::Vec3{ T(0.85355339059327395), T(-0.14644660940672627), T(0.5) } };
 
 #endif
     }

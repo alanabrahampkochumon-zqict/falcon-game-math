@@ -25,7 +25,7 @@
 
 
 #include "fgm/common/Types.h"
-#include "fgm/vectors/Vector2.h"
+#include "fgm/vectors/Vec2.h"
 
 #include <array>
 #include <cstdint>
@@ -88,7 +88,7 @@ namespace fgm
          * @param[in] col0 The 2D-vector to use as the first column entry.
          * @param[in] col1 The 2D-vector to use as the second column entry.
          */
-        [[nodiscard]] constexpr Matrix2(const Vector2<T>& col0, const Vector2<T>& col1) noexcept;
+        [[nodiscard]] constexpr Matrix2(const Vec2<T>& col0, const Vec2<T>& col1) noexcept;
 
 
         /**
@@ -130,7 +130,7 @@ namespace fgm
          *
          * @return A reference to the column vector.
          */
-        [[nodiscard]] constexpr Vector2<T>& operator[](std::size_t col) noexcept;
+        [[nodiscard]] constexpr Vec2<T>& operator[](std::size_t col) noexcept;
 
 
         /**
@@ -142,7 +142,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const Vector2<T>& operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const Vec2<T>& operator[](std::size_t col) const noexcept;
 
 
         /**
@@ -441,18 +441,18 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec The column vector to transform.
          *
-         * @return A new @ref Vector2 with applied linear transformations.
+         * @return A new @ref Vec2 with applied linear transformations.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector2<T, U> operator*(const Vector2<U>& vec) const noexcept
+        [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Vec2<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1176,7 +1176,7 @@ namespace fgm
 
 
     private:
-        std::array<Vector2<T>, COLUMNS> _data;
+        std::array<Vec2<T>, COLUMNS> _data;
     };
 
 
@@ -1250,7 +1250,7 @@ namespace fgm
      *            \end{bmatrix}
      *        \f$
      *
-     * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
+     * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
@@ -1263,7 +1263,7 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    static constexpr PromotedVector2<T, U> operator*(const Vector2<T>& vec, const Matrix2<U>& matrix) noexcept;
+    static constexpr PromotedVec2<T, U> operator*(const Vec2<T>& vec, const Matrix2<U>& matrix) noexcept;
 
 
     /**
@@ -1296,7 +1296,7 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    static constexpr Vector2<T>& operator*=(Vector2<T>& vec, const Matrix2<U>& matrix) noexcept;
+    static constexpr Vec2<T>& operator*=(Vec2<T>& vec, const Matrix2<U>& matrix) noexcept;
 
     /** @} */
 

@@ -11,7 +11,7 @@
 
 - **Consideration** - Use doxygen groups defined in the `DoxygenGroups.h` header of each project. If not defined, define it there.
 - **Prefixes** - Use `T_` to identify test groups (lowest level), and `B_` to to group benchmarks. Code groups can be written without prefixes.
-- **Subgroup** - Use subgroups for clarity like `Core/Mathematics/Vectors/Vector4/GeometricProducts`
+- **Subgroup** - Use subgroups for clarity like `Core/Mathematics/Vectors/Vec4/GeometricProducts`
 - **Formatting** - Group attributes of the same type together without line breaks. Use a single line break to separate different attribute types (e.g., separate @tparam block from @param block).
 
 ### Spacing
@@ -55,7 +55,7 @@
 
 - **Guideline:** Omit the type name (it's in the signature).
 - **Style:** Capitalize the first letter. Use "True if..." for booleans.
-- **Good:** `@return Magnitude of the @ref Vector3.`
+- **Good:** `@return Magnitude of the @ref Vec3.`
 - **Good:** `@return True if all components match exactly.`
 
 ## 3. Test Nomenclature (Google Test)
@@ -68,7 +68,7 @@
 
 ### Test Suite & Name
 
-- **Suite Name:** Single PascalCase word (e.g., `Vector4Addition`).
+- **Suite Name:** Single PascalCase word (e.g., `Vec4Addition`).
 - **Test Name:** Descriptive PascalCase. Use a single underscore to separate the "Target" from the "Condition".
 - **Prefixes:** - `StaticWrapper_`: For static versions of member functions.
     - `Operator_`: For operator overloads (e.g., `OperatorPlus_ReturnsCorrectSum`).
@@ -85,12 +85,12 @@
 
 ```c++
 /**
- * @file Vector4.h
+ * @file Vec4.h
  * @author Alan Abraham P Kochumon
  * @date Created on: January 26, 2026
  *
  * @brief Templated 4D Vector supporting integral, floating-point and boolean types.
- * @tparam T Type of Vector4 components. Must satisfy @ref Arithmetic concept.
+ * @tparam T Type of Vec4 components. Must satisfy @ref Arithmetic concept.
  *
  * @note Arithmetic operations are limited to numeric types via @ref StrictArithmetic concept.
  *

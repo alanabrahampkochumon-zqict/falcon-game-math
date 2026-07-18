@@ -24,14 +24,14 @@ protected:
 
     void SetUp() override
     {
-        _mat                 = { fgm::Vector3{ T(7), T(13), T(3) }, fgm::Vector3{ T(5), T(4), T(7) },
-                                 fgm::Vector3{ T(5.5), T(11.25), T(25.3) } };
+        _mat                 = { fgm::Vec3{ T(7), T(13), T(3) }, fgm::Vec3{ T(5), T(4), T(7) },
+                                 fgm::Vec3{ T(5.5), T(11.25), T(25.3) } };
         _scalar              = T(2.123456789123456);
-        _expectedFloatingMat = { fgm::Vector3{ T(14.864197523864192), T(27.604938258604928), T(6.370370367370368) },
-                                 fgm::Vector3{ T(10.61728394561728), T(8.493827156493824), T(14.864197523864192) },
-                                 fgm::Vector3{ T(11.679012340179007), T(23.88888887763888), T(53.72345676482344) } };
-        _expectedIntegralMat = { fgm::Vector3{ T(14), T(26), T(6) }, fgm::Vector3{ T(10), T(8), T(14) },
-                                 fgm::Vector3{ T(10), T(22), T(50) } };
+        _expectedFloatingMat = { fgm::Vec3{ T(14.864197523864192), T(27.604938258604928), T(6.370370367370368) },
+                                 fgm::Vec3{ T(10.61728394561728), T(8.493827156493824), T(14.864197523864192) },
+                                 fgm::Vec3{ T(11.679012340179007), T(23.88888887763888), T(53.72345676482344) } };
+        _expectedIntegralMat = { fgm::Vec3{ T(14), T(26), T(6) }, fgm::Vec3{ T(10), T(8), T(14) },
+                                 fgm::Vec3{ T(10), T(22), T(50) } };
     }
 };
 
@@ -44,15 +44,15 @@ class Matrix3VectorMultiplication: public ::testing::Test
 {
 protected:
     fgm::Matrix3<T> _mat;
-    fgm::Vector3<T> _vec;
-    fgm::Vector3<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
+    fgm::Vec3<T> _vec;
+    fgm::Vec3<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
         _expectedIntegralRowVector;
 
     void SetUp() override
     {
-        _mat                       = { fgm::Vector3{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338) },
-                                       fgm::Vector3{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321) },
-                                       fgm::Vector3{ T(2.238929123125), T(11.238924194839), T(9.2389291239898) } };
+        _mat                       = { fgm::Vec3{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338) },
+                                       fgm::Vec3{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321) },
+                                       fgm::Vec3{ T(2.238929123125), T(11.238924194839), T(9.2389291239898) } };
         _vec                       = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128) };
         _expectedFloatingColVector = { T(33.88727193442948), T(54.59119292006805), T(24.550731838459015) };
         _expectedIntegralColVector = { T(31), T(49), T(20) };
@@ -70,19 +70,19 @@ class Matrix3VectorFractionalMultiplication: public ::testing::Test
 {
 protected:
     fgm::Matrix3<T> _mat;
-    fgm::Vector3<T> _vec, _expectedColVector, _expectedRowVector;
+    fgm::Vec3<T> _vec, _expectedColVector, _expectedRowVector;
 
     void SetUp() override
     {
         _mat = {
-            fgm::Vector3{ T(0.1234568989329), T(0.1234214891234), T(0.12348923829) },
-            fgm::Vector3{ T(-0.123489823149), T(-0.123489757623), T(0.89281239432) },
-            fgm::Vector3{ T(-0.38291023892), T(0.29381938232), T(-0.0038291382) },
+            fgm::Vec3{ T(0.1234568989329), T(0.1234214891234), T(0.12348923829) },
+            fgm::Vec3{ T(-0.123489823149), T(-0.123489757623), T(0.89281239432) },
+            fgm::Vec3{ T(-0.38291023892), T(0.29381938232), T(-0.0038291382) },
         };
-        _vec = fgm::Vector3{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341) };
+        _vec = fgm::Vec3{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341) };
 
-        _expectedColVector = fgm::Vector3{ T(-0.07652999600877063), T(0.08239631520624698), T(0.8088432317718919) };
-        _expectedRowVector = fgm::Vector3{ T(0.2358808028522597), T(0.0027566750622143033), T(-0.11238372794829783) };
+        _expectedColVector = fgm::Vec3{ T(-0.07652999600877063), T(0.08239631520624698), T(0.8088432317718919) };
+        _expectedRowVector = fgm::Vec3{ T(0.2358808028522597), T(0.0027566750622143033), T(-0.11238372794829783) };
     }
 };
 
@@ -101,19 +101,19 @@ protected:
 
     void SetUp() override
     {
-        _matA = { fgm::Vector3{ T(7.12345678912345), T(6.12345678912345), T(1.2389123488213) },
-                  fgm::Vector3{ T(5.12345678912345), T(4.12345678912345), T(2.53283924821338) },
-                  fgm::Vector3{ T(9.32189342348), T(8.238192312343), T(5.12398423821223) } };
-        _matB = { fgm::Vector3{ T(3.12345678912345), T(5.12345678912345), T(1.213849123421) },
-                  fgm::Vector3{ T(8.12345678912345), T(3.12345678912345), T(2.3218934118233) },
-                  fgm::Vector3{ T(7.23912389492341), T(4.291238423419123), T(4.18234983241234) } };
+        _matA = { fgm::Vec3{ T(7.12345678912345), T(6.12345678912345), T(1.2389123488213) },
+                  fgm::Vec3{ T(5.12345678912345), T(4.12345678912345), T(2.53283924821338) },
+                  fgm::Vec3{ T(9.32189342348), T(8.238192312343), T(5.12398423821223) } };
+        _matB = { fgm::Vec3{ T(3.12345678912345), T(5.12345678912345), T(1.213849123421) },
+                  fgm::Vec3{ T(8.12345678912345), T(3.12345678912345), T(2.3218934118233) },
+                  fgm::Vec3{ T(7.23912389492341), T(4.291238423419123), T(4.18234983241234) } };
 
-        _expectedFloatingMat = { fgm::Vector3{ T(59.81499110074553), T(50.25262787869462), T(23.066325405048886) },
-                                 fgm::Vector3{ T(95.51443223309786), T(81.75128018451636), T(29.872810121743093) },
-                                 fgm::Vector3{ T(112.54098028826937), T(96.47820080937791), T(41.267951710315614) } };
+        _expectedFloatingMat = { fgm::Vec3{ T(59.81499110074553), T(50.25262787869462), T(23.066325405048886) },
+                                 fgm::Vec3{ T(95.51443223309786), T(81.75128018451636), T(29.872810121743093) },
+                                 fgm::Vec3{ T(112.54098028826937), T(96.47820080937791), T(41.267951710315614) } };
 
-        _expectedIntegralMat = { fgm::Vector3{ T(55), T(46), T(18) }, fgm::Vector3{ T(89), T(76), T(24) },
-                                 fgm::Vector3{ T(105), T(90), T(35) } };
+        _expectedIntegralMat = { fgm::Vec3{ T(55), T(46), T(18) }, fgm::Vec3{ T(89), T(76), T(24) },
+                                 fgm::Vec3{ T(105), T(90), T(35) } };
     }
 };
 
@@ -130,16 +130,16 @@ protected:
 
     void SetUp() override
     {
-        _matA = { fgm::Vector3{ T(0.1234568989329), T(0.1234214891234), T(0.382348912394) },
-                  fgm::Vector3{ T(-0.123489823149), T(-0.123489757623), T(0.093218349323) },
-                  fgm::Vector3{ T(0.0123489823149), T(0.53489757623), T(-0.93218349323) } };
-        _matB = { fgm::Vector3{ T(0.8923764912287), T(0.78352829112384), T(0.0523812349234) },
-                  fgm::Vector3{ T(0.0123412348958), T(-0.0231423489589), T(0.3829123948324) },
-                  fgm::Vector3{ T(-0.539282348958), T(0.00033423489589), T(-0.8239123948324) } };
+        _matA = { fgm::Vec3{ T(0.1234568989329), T(0.1234214891234), T(0.382348912394) },
+                  fgm::Vec3{ T(-0.123489823149), T(-0.123489757623), T(0.093218349323) },
+                  fgm::Vec3{ T(0.0123489823149), T(0.53489757623), T(-0.93218349323) } };
+        _matB = { fgm::Vec3{ T(0.8923764912287), T(0.78352829112384), T(0.0523812349234) },
+                  fgm::Vec3{ T(0.0123412348958), T(-0.0231423489589), T(0.3829123948324) },
+                  fgm::Vec3{ T(-0.539282348958), T(0.00033423489589), T(-0.8239123948324) } };
 
-        _expectedMat = { fgm::Vector3{ T(0.014059119128298), T(0.041399312244975), T(0.365409472263106) },
-                         fgm::Vector3{ T(0.009110033561366), T(0.209199928556498), T(-0.354383247645329) },
-                         fgm::Vector3{ T(-0.076793880652601), T(-0.50730904817435), T(0.56187467155827) } };
+        _expectedMat = { fgm::Vec3{ T(0.014059119128298), T(0.041399312244975), T(0.365409472263106) },
+                         fgm::Vec3{ T(0.009110033561366), T(0.209199928556498), T(-0.354383247645329) },
+                         fgm::Vec3{ T(-0.076793880652601), T(-0.50730904817435), T(0.56187467155827) } };
     }
 };
 
@@ -166,7 +166,7 @@ namespace
 {
     constexpr fgm::Matrix3 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9);
     constexpr fgm::Matrix3 MAT2(5, 6, 7, 8, 10, 11, 12, 13, 14);
-    constexpr fgm::Vector3 VEC(1, 2, 3);
+    constexpr fgm::Vec3 VEC(1, 2, 3);
 
     // Verify matrix * scalar multiplication
     constexpr fgm::Matrix3 BINARY_PRODUCT_1 = MAT1 * 2;
@@ -194,13 +194,13 @@ namespace
     static_assert(BINARY_PRODUCT_2(2, 2) == 18);
 
     // Verify matrix * vector multiplication
-    constexpr fgm::Vector3 COL_VECTOR_PRODUCT = MAT1 * VEC;
+    constexpr fgm::Vec3 COL_VECTOR_PRODUCT = MAT1 * VEC;
     static_assert(COL_VECTOR_PRODUCT[0] == 14);
     static_assert(COL_VECTOR_PRODUCT[1] == 32);
     static_assert(COL_VECTOR_PRODUCT[2] == 50);
 
     // Verify vector * matrix multiplication
-    constexpr fgm::Vector3 ROW_VEC_PRODUCT = VEC * MAT1;
+    constexpr fgm::Vec3 ROW_VEC_PRODUCT = VEC * MAT1;
     static_assert(ROW_VEC_PRODUCT[0] == 30);
     static_assert(ROW_VEC_PRODUCT[1] == 36);
     static_assert(ROW_VEC_PRODUCT[2] == 42);
@@ -538,8 +538,8 @@ TEST(Matrix3VectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNot
 TEST(Matrix3VectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
     const fgm::Matrix3 mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0 };
-    fgm::Vector3 vec{ 10, 20, 30 };
-    const fgm::Vector3 expected{ 205, 620, 220 };
+    fgm::Vec3 vec{ 10, 20, 30 };
+    const fgm::Vec3 expected{ 205, 620, 220 };
 
     vec *= mat;
 

@@ -27,8 +27,8 @@ protected:
 
     void SetUp() override
     {
-        _matrix            = { fgm::Vector2{ T(1), T(2) }, fgm::Vector2{ T(3), T(4) } };
-        _expectedTranspose = { fgm::Vector2{ T(1), T(3) }, fgm::Vector2{ T(2), T(4) } };
+        _matrix            = { fgm::Vec2{ T(1), T(2) }, fgm::Vec2{ T(3), T(4) } };
+        _expectedTranspose = { fgm::Vec2{ T(1), T(3) }, fgm::Vec2{ T(2), T(4) } };
     }
 };
 /** @brief Test fixture for @ref fgm::Matrix2 transpose, parameterized @ref SupportedTypes */

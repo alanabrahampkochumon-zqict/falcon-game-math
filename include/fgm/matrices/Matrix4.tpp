@@ -27,22 +27,22 @@ namespace fgm
     template <Arithmetic T>
     constexpr Matrix4<T>::Matrix4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22, T m23,
                                   T m30, T m31, T m32, T m33) noexcept
-        : _data{ Vector4{ T(m00), T(m10), T(m20), T(m30) }, Vector4{ T(m01), T(m11), T(m21), T(m31) },
-                 Vector4{ T(m02), T(m12), T(m22), T(m32) }, Vector4{ T(m03), T(m13), T(m23), T(m33) } }
+        : _data{ Vec4{ T(m00), T(m10), T(m20), T(m30) }, Vec4{ T(m01), T(m11), T(m21), T(m31) },
+                 Vec4{ T(m02), T(m12), T(m22), T(m32) }, Vec4{ T(m03), T(m13), T(m23), T(m33) } }
     {}
 
 
     template <Arithmetic T>
-    constexpr Matrix4<T>::Matrix4(const Vector4<T>& col0, const Vector4<T>& col1, const Vector4<T>& col2,
-                                  const Vector4<T>& col3) noexcept
+    constexpr Matrix4<T>::Matrix4(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2,
+                                  const Vec4<T>& col3) noexcept
         : _data{ col0, col1, col2, col3 }
     {}
 
 
     template <Arithmetic T>
     constexpr Matrix4<T>::Matrix4(T d0, T d1, T d2, T d3) noexcept
-        : _data{ Vector4{ T(d0), T(0), T(0), T(0) }, Vector4{ T(0), T(d1), T(0), T(0) },
-                 Vector4{ T(0), T(0), T(d2), T(0) }, Vector4{ T(0), T(0), T(0), T(d3) } }
+        : _data{ Vec4{ T(d0), T(0), T(0), T(0) }, Vec4{ T(0), T(d1), T(0), T(0) },
+                 Vec4{ T(0), T(0), T(d2), T(0) }, Vec4{ T(0), T(0), T(0), T(d3) } }
     {}
 
 
@@ -76,7 +76,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vector4<T>& Matrix4<T>::operator[](std::size_t col) noexcept
+    constexpr Vec4<T>& Matrix4<T>::operator[](std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -84,7 +84,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr const Vector4<T>& Matrix4<T>::operator[](std::size_t col) const noexcept
+    constexpr const Vec4<T>& Matrix4<T>::operator[](std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -271,7 +271,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVector4<T, U> Matrix4<T>::operator*(const Vector4<U>& vec) const noexcept
+    constexpr PromotedVec4<T, U> Matrix4<T>::operator*(const Vec4<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -281,7 +281,7 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vector4<R>(
+                return Vec4<R>(
                     std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
                              std::fma(static_cast<R>(_data[1][0]), static_cast<R>(vec[1]),
                                       std::fma(static_cast<R>(_data[2][0]), static_cast<R>(vec[2]),
@@ -317,12 +317,12 @@ namespace fgm
             static_cast<R>(_data[1][3]) * static_cast<R>(vec[1]) +
             static_cast<R>(_data[2][3]) * static_cast<R>(vec[2]) + static_cast<R>(_data[3][3]) * static_cast<R>(vec[3]);
 
-        return Vector4<R>(x, y, z, w);
+        return Vec4<R>(x, y, z, w);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    constexpr PromotedVector4<T, U> operator*(const Vector4<T>& vec, const Matrix4<U>& matrix) noexcept
+    constexpr PromotedVec4<T, U> operator*(const Vec4<T>& vec, const Matrix4<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -331,7 +331,7 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vector4<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
+                return Vec4<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
                                            std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
                                                     std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 0)),
                                                              static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0))))),
@@ -371,12 +371,12 @@ namespace fgm
             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 3)) +
             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3));
 
-        return Vector4<R>(x, y, z, w);
+        return Vec4<R>(x, y, z, w);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    constexpr Vector4<T>& operator*=(Vector4<T>& vec, const Matrix4<U>& matrix) noexcept
+    constexpr Vec4<T>& operator*=(Vec4<T>& vec, const Matrix4<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -458,10 +458,10 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
-        _data[0]       = static_cast<Vector4<T>>(mat[0]);
-        _data[1]       = static_cast<Vector4<T>>(mat[1]);
-        _data[2]       = static_cast<Vector4<T>>(mat[2]);
-        _data[3]       = static_cast<Vector4<T>>(mat[3]);
+        _data[0]       = static_cast<Vec4<T>>(mat[0]);
+        _data[1]       = static_cast<Vec4<T>>(mat[1]);
+        _data[2]       = static_cast<Vec4<T>>(mat[2]);
+        _data[3]       = static_cast<Vec4<T>>(mat[3]);
         return *this;
     }
 
@@ -658,9 +658,9 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        auto a = static_cast<Vector3<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
-        auto b = static_cast<Vector3<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
-        auto c = static_cast<Vector3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto a = static_cast<Vec3<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto b = static_cast<Vec3<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto c = static_cast<Vec3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
 
         auto x = _data[0][3];
@@ -668,7 +668,7 @@ namespace fgm
         auto z = _data[2][3];
         auto w = _data[3][3];
 
-        auto s = static_cast<Vector3<R>>(a.cross(b));
+        auto s = static_cast<Vec3<R>>(a.cross(b));
         auto t = c.cross(d);
         auto u = y * a - x * b;
         auto v = w * c - z * d;
@@ -705,9 +705,9 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        auto a = static_cast<Vector3<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
-        auto b = static_cast<Vector3<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
-        auto c = static_cast<Vector3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto a = static_cast<Vec3<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto b = static_cast<Vec3<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto c = static_cast<Vec3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
 
         auto x = _data[0][3];
@@ -715,7 +715,7 @@ namespace fgm
         auto z = _data[2][3];
         auto w = _data[3][3];
 
-        auto s = static_cast<Vector3<R>>(a.cross(b));
+        auto s = static_cast<Vec3<R>>(a.cross(b));
         auto t = c.cross(d);
         auto u = y * a - x * b;
         auto v = w * c - z * d;
@@ -767,9 +767,9 @@ namespace fgm
     {
         using R = Magnitude<T>;
 
-        auto a = static_cast<Vector3<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
-        auto b = static_cast<Vector3<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
-        auto c = static_cast<Vector3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto a = static_cast<Vec3<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto b = static_cast<Vec3<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
+        auto c = static_cast<Vec3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
 
         auto x = _data[0][3];
@@ -777,7 +777,7 @@ namespace fgm
         auto z = _data[2][3];
         auto w = _data[3][3];
 
-        auto s = static_cast<Vector3<R>>(a.cross(b));
+        auto s = static_cast<Vec3<R>>(a.cross(b));
         auto t = c.cross(d);
         auto u = y * a - x * b;
         auto v = w * c - z * d;
@@ -925,7 +925,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr PromotedFloatMatrix4<T, U> Matrix4<T>::makeRotation(U angle, const Vector3<T>& axis) noexcept
+    constexpr PromotedFloatMatrix4<T, U> Matrix4<T>::makeRotation(U angle, const Vec3<T>& axis) noexcept
         requires StrictArithmetic<T>
     {
         using S = Magnitude<std::common_type_t<T, U>>;
@@ -986,7 +986,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Matrix4<T> Matrix4<T>::makeAffine(const Matrix3<T>& linearTransform,
-                                                const Vector3<T>& translation) noexcept
+                                                const Vec3<T>& translation) noexcept
     {
         return Matrix4<T>{ linearTransform(0, 0),
                            linearTransform(0, 1),

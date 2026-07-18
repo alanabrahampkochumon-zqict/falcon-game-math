@@ -27,9 +27,9 @@ protected:
 
     void SetUp() override
     {
-        _matA        = { fgm::Vector2<T>(1, 2), fgm::Vector2<T>(3, 4), fgm::Vector2<T>(4, 6) };
-        _matB        = { fgm::Vector2<T>(5, 6), fgm::Vector2<T>(7, 8), fgm::Vector2<T>(1, 3) };
-        _expectedSum = { fgm::Vector2<T>(6, 8), fgm::Vector2<T>(10, 12), fgm::Vector2<T>(5, 9) };
+        _matA        = { fgm::Vec2<T>(1, 2), fgm::Vec2<T>(3, 4), fgm::Vec2<T>(4, 6) };
+        _matB        = { fgm::Vec2<T>(5, 6), fgm::Vec2<T>(7, 8), fgm::Vec2<T>(1, 3) };
+        _expectedSum = { fgm::Vec2<T>(6, 8), fgm::Vec2<T>(10, 12), fgm::Vec2<T>(5, 9) };
     }
 };
 /** @brief Test fixture for @ref fgm:: Matrix2x3 addition, parameterized by @ref SupportedArithmeticTypes. */
@@ -89,8 +89,8 @@ TYPED_TEST(Matrix2x3Addition, PlusOperator_ReturnsMatrixSum)
  */
 TEST(Matrix2x3Addition, MixedTypeAdditionPromotesType)
 {
-    const fgm::Mat2x3 mat1{ fgm::Vector2{ 1.0f, 2.0f }, fgm::Vector2{ -3.0f, -4.0f }, fgm::Vector2{ 5.0f, 12.0f } };
-    const fgm::Mat2x3 mat2{ fgm::Vector2{ 10.0, 2.0 }, fgm::Vector2{ 3.0, 8.0 }, fgm::Vector2{ -2.0, -12.0 } };
+    const fgm::Mat2x3 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f } };
+    const fgm::Mat2x3 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 } };
     [[maybe_unused]] const fgm::Mat2x3 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
@@ -115,8 +115,8 @@ TYPED_TEST(Matrix2x3Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  */
 TEST(Matrix2x3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    fgm::Mat2x3 mat1{ fgm::Vector2{ 1.0f, 2.0f }, fgm::Vector2{ -3.0f, -4.0f }, fgm::Vector2{ 5.0f, 12.0f } };
-    const fgm::Mat2x3 mat2{ fgm::Vector2{ 10.0, 2.0 }, fgm::Vector2{ 3.0, 8.0 }, fgm::Vector2{ -2.0, -12.0 } };
+    fgm::Mat2x3 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f } };
+    const fgm::Mat2x3 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 } };
 
     mat1 += mat2;
 

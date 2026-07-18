@@ -19,7 +19,7 @@ class Matrix2Initialization: public ::testing::Test
 protected:
     std::vector<T> _elements;
     std::vector<T> _diagonalElements;
-    fgm::Vector2<T> _col0, _col1;
+    fgm::Vec2<T> _col0, _col1;
     T _diagonal0, _diagonal1;
 
     void SetUp() override
@@ -60,7 +60,7 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Matrix2 MAT2(fgm::Vector2(1, 3), fgm::Vector2(2, 4));
+    constexpr fgm::Matrix2 MAT2(fgm::Vec2(1, 3), fgm::Vec2(2, 4));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
     static_assert(MAT2(1, 0) == 3);

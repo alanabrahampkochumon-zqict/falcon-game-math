@@ -22,18 +22,18 @@ class Matrix3Affine: public testing::Test
 {
 protected:
     fgm::Matrix2<T> _linearTransform;
-    fgm::Vector2<T> _translation;
+    fgm::Vec2<T> _translation;
     fgm::Matrix3<T> _expectedMat;
 
     void SetUp() override
     {
-        _linearTransform = { fgm::Vector2{ T(1.2341234), T(2.31419123) },
-                             fgm::Vector2{ T(15.123949182), T(0.93819231) } };
+        _linearTransform = { fgm::Vec2{ T(1.2341234), T(2.31419123) },
+                             fgm::Vec2{ T(15.123949182), T(0.93819231) } };
         _translation     = { T(1.2398412349), T(12.1234892134) };
 
-        _expectedMat = { fgm::Vector3{ T(1.2341234), T(2.31419123), T(0) },
-                         fgm::Vector3{ T(15.123949182), T(0.93819231), T(0) },
-                         fgm::Vector3{ T(1.2398412349), T(12.1234892134), T(1) } };
+        _expectedMat = { fgm::Vec3{ T(1.2341234), T(2.31419123), T(0) },
+                         fgm::Vec3{ T(15.123949182), T(0.93819231), T(0) },
+                         fgm::Vec3{ T(1.2398412349), T(12.1234892134), T(1) } };
     }
 };
 /**
@@ -48,7 +48,7 @@ namespace
 {
     // Make Affine
     constexpr fgm::Matrix2 LIN_TRANSFORM{ 1, 2, 3, 4 };
-    constexpr fgm::Vector2 TRANSLATION3D{ 11, 12 };
+    constexpr fgm::Vec2 TRANSLATION3D{ 11, 12 };
     constexpr auto AFFINE3D = fgm::Matrix3<int>::makeAffine(LIN_TRANSFORM, TRANSLATION3D);
     static_assert(AFFINE3D(0, 0) == 1);
     static_assert(AFFINE3D(0, 1) == 2);

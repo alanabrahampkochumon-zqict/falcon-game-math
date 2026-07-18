@@ -26,7 +26,7 @@
 
 #include "fgm/common/MathTraits.h"
 #include "fgm/common/Types.h"
-#include "fgm/vectors/Vector4.h"
+#include "fgm/vectors/Vec4.h"
 
 #include <array>
 #include <cstdint>
@@ -103,8 +103,8 @@ namespace fgm
          * @param[in] col2 The 4D-vector to use as the third column entry.
          * @param[in] col3 The 4D-vector to use as the fourth column entry.
          */
-        [[nodiscard]] constexpr Matrix4(const Vector4<T>& col0, const Vector4<T>& col1, const Vector4<T>& col2,
-                                        const Vector4<T>& col3) noexcept;
+        [[nodiscard]] constexpr Matrix4(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2,
+                                        const Vec4<T>& col3) noexcept;
 
 
         /**
@@ -147,7 +147,7 @@ namespace fgm
          *
          * @return A reference to the column vector.
          */
-        [[nodiscard]] constexpr Vector4<T>& operator[](std::size_t col) noexcept;
+        [[nodiscard]] constexpr Vec4<T>& operator[](std::size_t col) noexcept;
 
 
         /**
@@ -159,7 +159,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const Vector4<T>& operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const Vec4<T>& operator[](std::size_t col) const noexcept;
 
 
         /**
@@ -459,18 +459,18 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVector4<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedVec4<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] vec The column vector to transform.
          *
-         * @return A new @ref Vector4 with applied linear transformations.
+         * @return A new @ref Vec4 with applied linear transformations.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedVector4<T, U> operator*(const Vector4<U>& vec) const noexcept
+        [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Vec4<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1329,10 +1329,10 @@ namespace fgm
          * @return A new @ref Matrix4 representing the linear rotation around @p axis
          *         promoted to the nearest floating point type.
          *
-         * @relatedalso makeRotationNonNorm(U, const Vector3<T>&) // TODO:
+         * @relatedalso makeRotationNonNorm(U, const Vec3<T>&) // TODO:
          */
         template <std::floating_point U>
-        [[nodiscard]] static constexpr PromotedFloatMatrix4<T, U> makeRotation(U angle, const Vector3<T>& axis) noexcept
+        [[nodiscard]] static constexpr PromotedFloatMatrix4<T, U> makeRotation(U angle, const Vec3<T>& axis) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1360,10 +1360,10 @@ namespace fgm
         //  * @return A new @ref Matrix4 representing the linear rotation around @p axis
         //  *         promoted to the nearest floating point type.
         //  *
-        //  * @relatedalso makeRotation(U, const Vector3<T>&)
+        //  * @relatedalso makeRotation(U, const Vec3<T>&)
         //  */
         // template <std::floating_point U>
-        // [[nodiscard]] static constexpr PromotedFloatMatrix4<T, U> makeRotationNonNorm(U angle, const Vector3<T>& axis) noexcept
+        // [[nodiscard]] static constexpr PromotedFloatMatrix4<T, U> makeRotationNonNorm(U angle, const Vec3<T>& axis) noexcept
         //     requires StrictArithmetic<T>;
 
 
@@ -1398,7 +1398,7 @@ namespace fgm
          * @return A 4D affine transform matrix.
          */
         [[nodiscard]] static constexpr Matrix4 makeAffine(const Matrix3<T>& linearTransform,
-                                                          const Vector3<T>& translation) noexcept;
+                                                          const Vec3<T>& translation) noexcept;
 
 
         // /**
@@ -1459,7 +1459,7 @@ namespace fgm
         /** @} */
 
     private:
-        std::array<Vector4<T>, COLUMNS> _data;
+        std::array<Vec4<T>, COLUMNS> _data;
     };
 
 
@@ -1535,7 +1535,7 @@ namespace fgm
      *            \end{bmatrix}
      *        \f$
      *
-     * @note Promotes the result to the wider type using @ref PromotedVector4<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedVec4<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
@@ -1547,7 +1547,7 @@ namespace fgm
      * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    static constexpr PromotedVector4<T, S> operator*(const Vector4<T>& vec, const Matrix4<S>& matrix) noexcept;
+    static constexpr PromotedVec4<T, S> operator*(const Vec4<T>& vec, const Matrix4<S>& matrix) noexcept;
 
 
     /**
@@ -1580,7 +1580,7 @@ namespace fgm
      * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
-    static constexpr Vector4<T>& operator*=(Vector4<T>& vec, const Matrix4<U>& matrix) noexcept;
+    static constexpr Vec4<T>& operator*=(Vec4<T>& vec, const Matrix4<U>& matrix) noexcept;
 
     /** @} */
 

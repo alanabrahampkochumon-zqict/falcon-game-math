@@ -32,7 +32,7 @@
          */
 
             /**
-             * @defgroup FGM_Vector2_Tests Vector4 Test Suite
+             * @defgroup FGM_Vec2_Tests Vec4 Test Suite
              * @brief Verification of 2D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
@@ -69,7 +69,7 @@
 
 
             /**
-             * @defgroup FGM_Vector3_Tests Vector4 Test Suite
+             * @defgroup FGM_Vec3_Tests Vec4 Test Suite
              * @brief Verification of 3D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
@@ -106,7 +106,7 @@
 
 
             /**
-             * @defgroup FGM_Vector4_Tests Vector4 Test Suite
+             * @defgroup FGM_Vec4_Tests Vec4 Test Suite
              * @brief Verification of 4D Euclidean vector operations.
              * @ingroup VectorTests
              * @{

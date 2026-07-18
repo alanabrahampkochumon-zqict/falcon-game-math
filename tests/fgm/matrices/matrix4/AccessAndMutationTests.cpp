@@ -44,10 +44,10 @@ INSTANTIATE_TEST_SUITE_P(Matrix4Tests, Matrix4ColumnIndexing, testing::Values(5,
 namespace
 {
     constexpr fgm::Matrix4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-    constexpr fgm::Vector4 VEC0(1, 5, 9, 13);
-    constexpr fgm::Vector4 VEC1(2, 6, 10, 14);
-    constexpr fgm::Vector4 VEC2(3, 7, 11, 15);
-    constexpr fgm::Vector4 VEC3(4, 8, 12, 16);
+    constexpr fgm::Vec4 VEC0(1, 5, 9, 13);
+    constexpr fgm::Vec4 VEC1(2, 6, 10, 14);
+    constexpr fgm::Vec4 VEC2(3, 7, 11, 15);
+    constexpr fgm::Vec4 VEC3(4, 8, 12, 16);
 
     // Verify that matrix elements are accessible as (row, column) during compile time.
     static_assert(MAT(0, 0) == 1);
@@ -125,10 +125,10 @@ TEST(Matrix4Access, AccessibleAsColumnVectors)
     constexpr fgm::Matrix4 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
                                15.0f, 16.0f);
 
-    EXPECT_VEC_EQ(fgm::Vector4(1.0f, 5.0f, 9.0f, 13.0f), mat[0]);
-    EXPECT_VEC_EQ(fgm::Vector4(2.0f, 6.0f, 10.0f, 14.0f), mat[1]);
-    EXPECT_VEC_EQ(fgm::Vector4(3.0f, 7.0f, 11.0f, 15.0f), mat[2]);
-    EXPECT_VEC_EQ(fgm::Vector4(4.0f, 8.0f, 12.0f, 16.0f), mat[3]);
+    EXPECT_VEC_EQ(fgm::Vec4(1.0f, 5.0f, 9.0f, 13.0f), mat[0]);
+    EXPECT_VEC_EQ(fgm::Vec4(2.0f, 6.0f, 10.0f, 14.0f), mat[1]);
+    EXPECT_VEC_EQ(fgm::Vec4(3.0f, 7.0f, 11.0f, 15.0f), mat[2]);
+    EXPECT_VEC_EQ(fgm::Vec4(4.0f, 8.0f, 12.0f, 16.0f), mat[3]);
 }
 
 
@@ -212,10 +212,10 @@ TEST(Matrix4Access, ElementsCanBeMutatedUsingIndex)
 /** @brief Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Matrix4Access, ColumnsCanBeMutatedUsingIndex)
 {
-    constexpr fgm::Vector4 col0 = { 1.0f, 5.0f, 9.0f, 13.0f };
-    constexpr fgm::Vector4 col1 = { 2.0f, 6.0f, 10.0f, 14.0f };
-    constexpr fgm::Vector4 col2 = { 3.0f, 7.0f, 11.0f, 15.0f };
-    constexpr fgm::Vector4 col3 = { 4.0f, 8.0f, 12.0f, 16.0f };
+    constexpr fgm::Vec4 col0 = { 1.0f, 5.0f, 9.0f, 13.0f };
+    constexpr fgm::Vec4 col1 = { 2.0f, 6.0f, 10.0f, 14.0f };
+    constexpr fgm::Vec4 col2 = { 3.0f, 7.0f, 11.0f, 15.0f };
+    constexpr fgm::Vec4 col3 = { 4.0f, 8.0f, 12.0f, 16.0f };
     fgm::Matrix4<float> mat;
 
     mat[0] = col0;
@@ -237,7 +237,7 @@ TEST_P(Matrix4ColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Matrix4 mat(1, 2, 3, 4);
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vector4<int>::zero()), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec4<int>::zero()), "");
 }
 
 

@@ -70,12 +70,12 @@ TEST_F(Mat2x3StringRepresentationTests, FloatRepresentation)
  */
 TEST_F(Mat2x3StringRepresentationTests, DoubleRepresentation)
 {
-    const fgm::Mat2x3 mat(1.2345789777, 2.65831, 15.39281, 2.0, 4.0, 12.0);
+    const fgm::Mat2x3 mat(1.2345789777, 2.65831, 5.39281, 2.0, 4.0, 12.0);
     std::stringstream ss;
 
     ss << mat;
 
-    EXPECT_EQ(ss.str(), "|1.234578977700000 2.658310000000000 15.392810000000000|\n|2.000000000000000 4.000000000000000 12.000000000000000|\n");
+    EXPECT_EQ(ss.str(), "|1.234578977700000 2.658310000000000 5.392810000000000|\n|2.000000000000000 4.000000000000000 12.000000000000000|\n");
 }
 
 /** @} */

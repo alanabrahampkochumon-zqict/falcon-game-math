@@ -18,7 +18,7 @@ class Matrix2x3Initialization: public testing::Test
 {
 protected:
     std::vector<T> _elements;
-    fgm::Vector2<T> _col0, _col1, _col2;
+    fgm::Vec2<T> _col0, _col1, _col2;
 
     void SetUp() override
     {
@@ -58,7 +58,7 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Mat2x3 MAT2(fgm::Vector2(1, 4), fgm::Vector2(2, 5), fgm::Vector2(3, 6));
+    constexpr fgm::Mat2x3 MAT2(fgm::Vec2(1, 4), fgm::Vec2(2, 5), fgm::Vec2(3, 6));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
     static_assert(MAT2(0, 2) == 3);

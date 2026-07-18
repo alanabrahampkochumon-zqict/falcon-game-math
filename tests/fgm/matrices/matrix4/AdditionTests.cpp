@@ -110,11 +110,11 @@ TYPED_TEST(Matrix4Addition, PlusOperator_ReturnsMatrixSum)
  */
 TEST(Matrix4Addition, PlusOperator_MixedTypePromotesType)
 {
-    constexpr fgm::Matrix4 mat1{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vector4{ -3.0f, -4.0f, 10.0f, -11.0f },
-                                 fgm::Vector4{ 4.5f, 3.25f, 3.16f, -22.0f },
-                                 fgm::Vector4{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    constexpr fgm::Matrix4 mat2{ fgm::Vector4{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vector4{ 3.0, -8.0, 12.0, 11.0 },
-                                 fgm::Vector4{ 3.25, 5.1, 0.0, 0.25 }, fgm::Vector4{ 12.0, 13.0, 14.0, 15.0 } };
+    constexpr fgm::Matrix4 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
+                                 fgm::Vec4{ 4.5f, 3.25f, 3.16f, -22.0f },
+                                 fgm::Vec4{ 15.0f, 32.0f, 101.0f, 12.5f } };
+    constexpr fgm::Matrix4 mat2{ fgm::Vec4{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vec4{ 3.0, -8.0, 12.0, 11.0 },
+                                 fgm::Vec4{ 3.25, 5.1, 0.0, 0.25 }, fgm::Vec4{ 12.0, 13.0, 14.0, 15.0 } };
 
     [[maybe_unused]] constexpr fgm::Matrix4 sum = mat1 + mat2;
 
@@ -140,14 +140,14 @@ TYPED_TEST(Matrix4Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  */
 TEST(Matrix4Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    [[maybe_unused]] fgm::Matrix4 mat1{ fgm::Vector4{ 1.0f, 2.0f, 3.0f, 7.5f },
-                                        fgm::Vector4{ -3.0f, -4.0f, 10.0f, -11.0f },
-                                        fgm::Vector4{ 4.5f, 3.25f, 3.16f, -22.0f },
-                                        fgm::Vector4{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    [[maybe_unused]] constexpr fgm::Matrix4 mat2{ fgm::Vector4{ 11.0, 10.0, 2.0, -1.0 },
-                                                  fgm::Vector4{ 3.0, -8.0, 12.0, 11.0 },
-                                                  fgm::Vector4{ 3.25, 5.1, 0.0, 0.25 },
-                                                  fgm::Vector4{ 12.0, 13.0, 14.0, 15.0 } };
+    [[maybe_unused]] fgm::Matrix4 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f },
+                                        fgm::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
+                                        fgm::Vec4{ 4.5f, 3.25f, 3.16f, -22.0f },
+                                        fgm::Vec4{ 15.0f, 32.0f, 101.0f, 12.5f } };
+    [[maybe_unused]] constexpr fgm::Matrix4 mat2{ fgm::Vec4{ 11.0, 10.0, 2.0, -1.0 },
+                                                  fgm::Vec4{ 3.0, -8.0, 12.0, 11.0 },
+                                                  fgm::Vec4{ 3.25, 5.1, 0.0, 0.25 },
+                                                  fgm::Vec4{ 12.0, 13.0, 14.0, 15.0 } };
 
     (void) (mat1 += mat2);
 
