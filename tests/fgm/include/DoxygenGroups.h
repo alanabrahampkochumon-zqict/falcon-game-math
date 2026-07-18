@@ -195,12 +195,36 @@
              *   @defgroup T_FGM_Mat2x3_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x3_Constant Matrix Constants
              *   @defgroup T_FGM_Mat2x3_Equality Equality
-             *   @defgroup T_FGM_Mat2x3_Inequality  Inequality
+             *   @defgroup T_FGM_Mat2x3_Inequality Inequality
              *   @defgroup T_FGM_Mat2x3_Init Initialization
              *   @defgroup T_FGM_Mat2x3_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x3_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Mat2x3_Inversion Unary Inversion(-)
              *   @defgroup T_FGM_Mat2x3_Utils Matrix Utilities
+             * @}
+             */
+
+            /**
+             * @defgroup FGM_Mat2x4_Tests 2x4 Matrix Test Suite
+             * @brief Verification of 2x4 matrix operations.
+             * @ingroup MatrixTests
+             * @{
+             *   @defgroup T_FGM_Mat2x4_Access Component Access
+             *   @defgroup T_FGM_Mat2x4_Mutation Component Mutation
+             *   @defgroup T_FGM_Mat2x4_Const Matrix Constants
+             *   @defgroup T_FGM_Mat2x4_Addition Addition
+             *   @defgroup T_FGM_Mat2x4_Subtraction Subtraction
+             *   @defgroup T_FGM_Mat2x4_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat2x4_Division Scalar Division
+             *   @defgroup T_FGM_Mat2x4_Transpose Matrix Transpose
+             *   @defgroup T_FGM_Mat2x4_Constant Matrix Constants
+             *   @defgroup T_FGM_Mat2x4_Equality Equality
+             *   @defgroup T_FGM_Mat2x4_Inequality Inequality
+             *   @defgroup T_FGM_Mat2x4_Init Initialization
+             *   @defgroup T_FGM_Mat2x4_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Mat2x4_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Mat2x4_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat2x4_Utils Matrix Utilities
              * @}
              */
 
