@@ -10,6 +10,7 @@ target_sources(
         MultiplicationTests.cpp
         StringRepresentationTests.cpp
         SubtractionTests.cpp
+        TypeConversionTests.cpp
         UtilityTests.cpp
 )
 
