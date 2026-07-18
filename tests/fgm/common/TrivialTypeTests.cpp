@@ -11,12 +11,12 @@
 
 #include "utils/TypeUtils.h"
 
-#include <fgm/matrices/Matrix2.h>
-#include <fgm/matrices/Matrix3.h>
-#include <fgm/matrices/Matrix4.h>
-#include <fgm/vectors/Vec4.h>
+#include <fgm/matrices/Mat2.h>
+#include <fgm/matrices/Mat3.h>
+#include <fgm/matrices/Mat4.h>
 #include <fgm/vectors/Vec2.h>
 #include <fgm/vectors/Vec3.h>
+#include <fgm/vectors/Vec4.h>
 
 /**
  * @addtogroup T_FGM_Trivial
@@ -30,8 +30,8 @@ ASSERT_TRIVIAL_TYPE(fgm::Vec4<float>);
 
 
 /** @brief Verify that @ref fgm Matrices are trivial types. */
-ASSERT_TRIVIAL_TYPE(fgm::Matrix2<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Matrix3<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Matrix4<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Mat2<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Mat3<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Mat4<float>);
 
 /** @} */

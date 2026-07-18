@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 07, 2026
  *
- * @brief Verify @ref fgm::Matrix4 determinant logic.
+ * @brief Verify @ref fgm::Mat4 determinant logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -21,10 +21,10 @@
  **************************************/
 
 template <typename T>
-class Matrix4Determinant: public ::testing::Test
+class Mat4Determinant: public ::testing::Test
 {
 protected:
-    fgm::Matrix4<T> _matrix;
+    fgm::Mat4<T> _matrix;
     T _expectedDeterminant;
 
     void SetUp() override
@@ -36,27 +36,27 @@ protected:
         _expectedDeterminant = T(39);
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix4 determinant, parameterized by @ref SupportedSignedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix4Determinant, SupportedSignedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Mat4 determinant, parameterized by @ref SupportedSignedArithmeticTypes. */
+TYPED_TEST_SUITE(Mat4Determinant, SupportedSignedArithmeticTypes);
 
 
-/** @brief Test fixture for calculating @ref fgm::Matrix4 determinant with singular matrices */
-class SingularMatrix4Determinant: public ::testing::TestWithParam<fgm::Matrix4<float>>
+/** @brief Test fixture for calculating @ref fgm::Mat4 determinant with singular matrices */
+class SingularMat4Determinant: public ::testing::TestWithParam<fgm::Mat4<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(
-    Matrix4DeterminantTestSuite, SingularMatrix4Determinant,
-    ::testing::Values(fgm::Matrix4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
+    Mat4DeterminantTestSuite, SingularMat4Determinant,
+    ::testing::Values(fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
                                     fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f },
                                     fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                      fgm::Mat4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                      fgm::Mat4{ fgm::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
+                      fgm::Mat4{ fgm::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
                                     fgm::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
+                      fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
+                      fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
                                     fgm::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f },
                                     fgm::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
 
@@ -76,14 +76,14 @@ INSTANTIATE_TEST_SUITE_P(
 /** @brief Verify that matrix determinant operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4 MAT{ fgm::Vec4{ 1, 2, 3, 4 }, fgm::Vec4{ 1, 2, 1, 3 }, fgm::Vec4{ 2, 3, 4, 12 },
+    constexpr fgm::Mat4 MAT{ fgm::Vec4{ 1, 2, 3, 4 }, fgm::Vec4{ 1, 2, 1, 3 }, fgm::Vec4{ 2, 3, 4, 12 },
                                 fgm::Vec4{ 2, 1, 3, 2 } };
 
     // Verify determinant (member function)
     static_assert(MAT.determinant() == 39);
 
     // Verify determinant (static function)
-    static_assert(fgm::Matrix4<int>::determinant(MAT) == 39);
+    static_assert(fgm::Mat4<int>::determinant(MAT) == 39);
 
 } // namespace
 
@@ -97,14 +97,14 @@ namespace
 
 
 /** @brief Verify that computing the determinant of a non-singular matrix returns a non-zero value. */
-TYPED_TEST(Matrix4Determinant, ReturnsNonZeroScalar)
+TYPED_TEST(Mat4Determinant, ReturnsNonZeroScalar)
 {
     EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant());
 }
 
 
 /** @brief Verify that computing the determinant of a singular matrix returns zero. */
-TEST_P(SingularMatrix4Determinant, SingularMatrixReturnsZero)
+TEST_P(SingularMat4Determinant, SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();
     EXPECT_MAG_EQ(0.0f, matrix.determinant());
@@ -113,22 +113,22 @@ TEST_P(SingularMatrix4Determinant, SingularMatrixReturnsZero)
 
 /**
  * @brief Verify that computing the determinant of a non-singular matrix using static variant of
- *        @ref fgm::Matrix4::determinant returns a non-zero value.
+ *        @ref fgm::Mat4::determinant returns a non-zero value.
  */
-TYPED_TEST(Matrix4Determinant, StaticWrapper_ReturnsNonZeroScalar)
+TYPED_TEST(Mat4Determinant, StaticWrapper_ReturnsNonZeroScalar)
 {
-    EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Matrix4<TypeParam>::determinant(this->_matrix));
+    EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Mat4<TypeParam>::determinant(this->_matrix));
 }
 
 
 /**
  * @brief Verify that computing the determinant of a singular matrix using static variant of
- *        @ref fgm::Matrix4::determinant returns zero.
+ *        @ref fgm::Mat4::determinant returns zero.
  */
-TEST_P(SingularMatrix4Determinant, StaticWrapper_SingularMatrixReturnsZero)
+TEST_P(SingularMat4Determinant, StaticWrapper_SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();
-    EXPECT_MAG_EQ(0.0f, fgm::Matrix4<float>::determinant(matrix));
+    EXPECT_MAG_EQ(0.0f, fgm::Mat4<float>::determinant(matrix));
 }
 
 /** @} */

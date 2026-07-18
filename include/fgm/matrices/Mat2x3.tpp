@@ -4,8 +4,8 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 17, 2026
  *
- * @brief @ref Matrix2x3x3 template implementation.
- * @details This file contains the definitions of the template members declared in Matrix2x3x3.h
+ * @brief @ref Mat2x3 template implementation.
+ * @details This file contains the definitions of the template members declared in Mat2x3.h
  *
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -379,15 +379,15 @@ namespace fgm
     //
     //
     //     template <Arithmetic T>
-    //     constexpr Matrix2x3<T> Matrix2x3<T>::transpose() const noexcept
+    //     constexpr Mat2x3<T> Mat2x3<T>::transpose() const noexcept
     //     {
     //         // NOTE: _data is a column major vector so _data[0][1] gives element at first row and zeroth column.
-    //         return Matrix2x3(_data[0][0], _data[0][1], _data[1][0], _data[1][1]);
+    //         return Mat2x3(_data[0][0], _data[0][1], _data[1][0], _data[1][1]);
     //     }
     //
     //
     //     template <Arithmetic T>
-    //     constexpr Matrix2x3<T> Matrix2x3<T>::transpose(const Matrix2x3& matrix) noexcept
+    //     constexpr Mat2x3<T> Mat2x3<T>::transpose(const Mat2x3& matrix) noexcept
     //     {
     //         return matrix.transpose();
     //     }

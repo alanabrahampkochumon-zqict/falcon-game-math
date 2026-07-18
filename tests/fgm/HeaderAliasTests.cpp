@@ -37,15 +37,15 @@
 //     /**
 //      * @brief Verify that Mat header alias is the full matrix struct.
 //      */
-//     static_assert(std::is_same_v<fgm::Mat2<int>, fgm::Matrix2<int>>);
-//     static_assert(std::is_same_v<fgm::Mat2<float>, fgm::Matrix2<float>>);
+//     static_assert(std::is_same_v<fgm::Mat2<int>, fgm::Mat2<int>>);
+//     static_assert(std::is_same_v<fgm::Mat2<float>, fgm::Mat2<float>>);
 //
 //
-//     static_assert(std::is_same_v<fgm::Mat3<int>, fgm::Matrix3<int>>);
-//     static_assert(std::is_same_v<fgm::Mat3<float>, fgm::Matrix3<float>>);
+//     static_assert(std::is_same_v<fgm::Mat3<int>, fgm::Mat3<int>>);
+//     static_assert(std::is_same_v<fgm::Mat3<float>, fgm::Mat3<float>>);
 //
-//     static_assert(std::is_same_v<fgm::Mat4<int>, fgm::Matrix4<int>>);
-//     static_assert(std::is_same_v<fgm::Mat4<float>, fgm::Matrix4<float>>);
+//     static_assert(std::is_same_v<fgm::Mat4<int>, fgm::Mat4<int>>);
+//     static_assert(std::is_same_v<fgm::Mat4<float>, fgm::Mat4<float>>);
 //
 // } // namespace
 //

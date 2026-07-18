@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 17, 2026
  *
- * @brief Verify @ref fgm::Matrix2x3 subtraction logic.
+ * @brief Verify @ref fgm::Mat2x3 subtraction logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Matrix2x3TestSetup.h"
+#include "Mat2x3TestSetup.h"
 
 
 
@@ -20,7 +20,7 @@
  **************************************/
 
 template <typename T>
-class Matrix2x3Subtraction: public ::testing::Test
+class Mat2x3Subtraction: public ::testing::Test
 {
 protected:
     fgm::Mat2x3<T> _matA;
@@ -34,8 +34,8 @@ protected:
         _expectedDifference = { fgm::Vec2<T>(4, 4), fgm::Vec2<T>(4, 4), fgm::Vec2<T>(0, 1) };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2x3 subtraction, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix2x3Subtraction, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Mat2x3 subtraction, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Mat2x3Subtraction, SupportedArithmeticTypes);
 
 
 /**
@@ -76,7 +76,7 @@ namespace
  * @brief Verify that the binary subtraction operator perform an element-wise subtraction and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Matrix2x3Subtraction, MinusOperator_ReturnsDifference)
+TYPED_TEST(Mat2x3Subtraction, MinusOperator_ReturnsDifference)
 {
     const fgm::Mat2x3 difference = this->_matA - this->_matB;
 
@@ -88,7 +88,7 @@ TYPED_TEST(Matrix2x3Subtraction, MinusOperator_ReturnsDifference)
  * @brief Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Matrix2x3Subtraction, MixedTypeSubtractionPromotesType)
+TEST(Mat2x3Subtraction, MixedTypeSubtractionPromotesType)
 {
     const fgm::Mat2x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
     const fgm::Mat2x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
@@ -103,7 +103,7 @@ TEST(Matrix2x3Subtraction, MixedTypeSubtractionPromotesType)
  * @brief Verify that the compound subtraction assignment operator perform an element-wise subtraction
  *       and mutates the matrix in-place.
  */
-TYPED_TEST(Matrix2x3Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
+TYPED_TEST(Mat2x3Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
 {
     this->_matA -= this->_matB;
 
@@ -115,7 +115,7 @@ TYPED_TEST(Matrix2x3Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDiffer
  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix2x3Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+TEST(Mat2x3Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
     fgm::Mat2x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
     [[maybe_unused]] const fgm::Mat2x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);

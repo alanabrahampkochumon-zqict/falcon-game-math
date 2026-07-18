@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 09, 2026
  *
- * @brief Verify @ref fgm::Matrix4 inverse logic.
+ * @brief Verify @ref fgm::Mat4 inverse logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,12 +20,12 @@
  **************************************/
 
 template <typename T>
-class Matrix4Inverse: public ::testing::Test
+class Mat4Inverse: public ::testing::Test
 {
 protected:
     using Mag = fgm::Magnitude<T>;
-    fgm::Matrix4<T> _matrix;
-    fgm::Matrix4<Mag> _expectedInverse;
+    fgm::Mat4<T> _matrix;
+    fgm::Mat4<Mag> _expectedInverse;
 
     void SetUp() override
     {
@@ -39,40 +39,40 @@ protected:
                              { Mag(0.704545454545455), Mag(0.022727272727273), Mag(0.136363636363636), Mag(-1.0) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix4 inverse, parameterized @ref SupportedSignedArithmeticTypes */
-TYPED_TEST_SUITE(Matrix4Inverse, SupportedSignedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Mat4 inverse, parameterized @ref SupportedSignedArithmeticTypes */
+TYPED_TEST_SUITE(Mat4Inverse, SupportedSignedArithmeticTypes);
 
 
-/** @brief Test fixture for calculating @ref fgm::Matrix4 inverse with singular matrices */
-class SingularMatrix4Inverse: public ::testing::TestWithParam<fgm::Matrix4<float>>
+/** @brief Test fixture for calculating @ref fgm::Mat4 inverse with singular matrices */
+class SingularMat4Inverse: public ::testing::TestWithParam<fgm::Mat4<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(
-    Matrix4InverseTestSuite, SingularMatrix4Inverse,
-    ::testing::Values(fgm::Matrix4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
+    Mat4InverseTestSuite, SingularMat4Inverse,
+    ::testing::Values(fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
                                     fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f },
                                     fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                      fgm::Mat4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                      fgm::Mat4{ fgm::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
+                      fgm::Mat4{ fgm::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
                                     fgm::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
+                      fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                      fgm::Matrix4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
+                      fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
                                     fgm::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f },
                                     fgm::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
 
 
-/** @brief Test fixture for @ref fgm::Matrix4 inverse with NaN vectors. */
-class NaNMatrix4Inverse: public ::testing::TestWithParam<fgm::Matrix4<float>>
+/** @brief Test fixture for @ref fgm::Mat4 inverse with NaN vectors. */
+class NaNMat4Inverse: public ::testing::TestWithParam<fgm::Mat4<float>>
 {};
-INSTANTIATE_TEST_SUITE_P(Matrix4InverseTestSuite, NaNMatrix4Inverse,
-                         ::testing::Values(fgm::Matrix4<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
-                                           fgm::Matrix4<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
-                                           fgm::Matrix4<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
-                                           fgm::Matrix4<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
-                                           fgm::Matrix4<float>{ fgm ::constants::NaN, fgm::constants::NaN,
+INSTANTIATE_TEST_SUITE_P(Mat4InverseTestSuite, NaNMat4Inverse,
+                         ::testing::Values(fgm::Mat4<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
+                                           fgm::Mat4<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
+                                           fgm::Mat4<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
+                                           fgm::Mat4<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
+                                           fgm::Mat4<float>{ fgm ::constants::NaN, fgm::constants::NaN,
                                                                 fgm ::constants::NaN, fgm ::constants::NaN }));
 
 
@@ -90,11 +90,11 @@ INSTANTIATE_TEST_SUITE_P(Matrix4InverseTestSuite, NaNMatrix4Inverse,
 /** @brief Verify that matrix inverse functions are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4 mat(1.0f, -1.0f, 0.0f, -2.0f, 2.0f, -1.0f, -2.0f, -6.0f, 0.0f, -1.0f, 3.0f, 3.0f, -2.0f,
+    constexpr fgm::Mat4 mat(1.0f, -1.0f, 0.0f, -2.0f, 2.0f, -1.0f, -2.0f, -6.0f, 0.0f, -1.0f, 3.0f, 3.0f, -2.0f,
                                2.0f, -2.0f, 3.0f);
 
     //  Verify matrix inverse (member function)
-    constexpr fgm::Matrix4 invMat = mat.inverse();
+    constexpr fgm::Mat4 invMat = mat.inverse();
     static_assert(invMat(0, 0) - -9.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(invMat(0, 1) - 7.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(invMat(0, 2) - 6.0f <= fgm::Config::FLOAT_EPSILON);
@@ -113,7 +113,7 @@ namespace
     static_assert(invMat(3, 3) - 1.0f <= fgm::Config::FLOAT_EPSILON);
 
     // Verify matrix inverse (static function)
-    constexpr fgm::Matrix4 invMatS = fgm::Matrix4<float>::inverse(mat);
+    constexpr fgm::Mat4 invMatS = fgm::Mat4<float>::inverse(mat);
     static_assert(invMatS(0, 0) - -9.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(invMatS(0, 1) - 7.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(invMatS(0, 2) - 6.0f <= fgm::Config::FLOAT_EPSILON);
@@ -133,7 +133,7 @@ namespace
 
     // TODO: Add back
     // Verify matrix safeInverse (member function)
-    constexpr fgm::Matrix4 safeInvMat = mat.safeInverse();
+    constexpr fgm::Mat4 safeInvMat = mat.safeInverse();
     static_assert(safeInvMat(0, 0) - -9.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(safeInvMat(0, 1) - 7.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(safeInvMat(0, 2) - 6.0f <= fgm::Config::FLOAT_EPSILON);
@@ -152,7 +152,7 @@ namespace
     static_assert(safeInvMat(3, 3) - 1.0f <= fgm::Config::FLOAT_EPSILON);
 
     // Verify matrix safeInverse (static function)
-    constexpr fgm::Matrix4 safeInvMatS = fgm::Matrix4<float>::safeInverseOf(mat);
+    constexpr fgm::Mat4 safeInvMatS = fgm::Mat4<float>::safeInverseOf(mat);
     static_assert(safeInvMatS(0, 0) - -9.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(safeInvMatS(0, 1) - 7.0f <= fgm::Config::FLOAT_EPSILON);
     static_assert(safeInvMatS(0, 2) - 6.0f <= fgm::Config::FLOAT_EPSILON);
@@ -180,33 +180,33 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that inverting a matrix using @ref fgm::Matrix4::inverse returns a new matrix that when multiplied
+ * @brief Verify that inverting a matrix using @ref fgm::Mat4::inverse returns a new matrix that when multiplied
  *        with the original matrix returns an identity matrix.
  */
-TYPED_TEST(Matrix4Inverse, ReturnsInverseMatrix) { EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse()); }
+TYPED_TEST(Mat4Inverse, ReturnsInverseMatrix) { EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.inverse()); }
 
 
 /** @brief Verify that inverse of matrix times itself is an identity matrix. */
-TYPED_TEST(Matrix4Inverse, InverseTimesMatrixReturnsIdentityMatrix)
+TYPED_TEST(Mat4Inverse, InverseTimesMatrixReturnsIdentityMatrix)
 {
     const auto invMatrix = this->_matrix.inverse();
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
 /**
- * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4::inverse returns a new matrix that
+ * @brief Verify that inverting a matrix using static variant of @ref fgm::Mat4::inverse returns a new matrix that
  *        when multiplied with the original matrix returns an identity matrix.
  */
-TYPED_TEST(Matrix4Inverse, StaticWrapper_ReturnsInverseMatrix)
+TYPED_TEST(Mat4Inverse, StaticWrapper_ReturnsInverseMatrix)
 {
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4<TypeParam>::inverse(this->_matrix));
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Mat4<TypeParam>::inverse(this->_matrix));
 }
 
 
 /** @brief Verify that inverse of matrix (using the static variant) times itself is an identity matrix. */
-TYPED_TEST(Matrix4Inverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
+TYPED_TEST(Mat4Inverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
 {
-    const auto invMatrix = fgm::Matrix4<TypeParam>::inverse(this->_matrix);
+    const auto invMatrix = fgm::Mat4<TypeParam>::inverse(this->_matrix);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
@@ -214,10 +214,10 @@ TYPED_TEST(Matrix4Inverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix
 #ifdef ENABLE_DEBUG_TESTS
 
 /**
- * @brief Verify that inverting a singular matrix using @ref fgm::Matrix4::inverse
+ * @brief Verify that inverting a singular matrix using @ref fgm::Mat4::inverse
  *        triggers assertion in debug mode.
  */
-TEST_P(SingularMatrix4Inverse, TriggersAssertionInDebugMode)
+TEST_P(SingularMat4Inverse, TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     // Static cast is placed to suppress the no-discard warning
@@ -225,14 +225,14 @@ TEST_P(SingularMatrix4Inverse, TriggersAssertionInDebugMode)
 }
 
 /**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix4::inverse
+ * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::inverse
  *        triggers assertion in debug mode.
  */
-TEST_P(SingularMatrix4Inverse, StaticWrapper_TriggersAssertionInDebugMode)
+TEST_P(SingularMat4Inverse, StaticWrapper_TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     // Static cast is placed to suppress the no-discard warning
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Matrix4<float>::inverse(matrix)), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Mat4<float>::inverse(matrix)), "");
 }
 
 #endif
@@ -247,20 +247,20 @@ TEST_P(SingularMatrix4Inverse, StaticWrapper_TriggersAssertionInDebugMode)
  **************************************/
 
 /**
- * @brief Verify that inverting a matrix using @ref fgm::Matrix4::safeInverse exchanges row and
+ * @brief Verify that inverting a matrix using @ref fgm::Mat4::safeInverse exchanges row and
  *        column elements and returns a new matrix.
  */
-TYPED_TEST(Matrix4Inverse, SafeInverse_ReturnsInverseMatrix)
+TYPED_TEST(Mat4Inverse, SafeInverse_ReturnsInverseMatrix)
 {
     EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.safeInverse());
 }
 
 
 /**
- * @brief Verify that inverse of matrix (using @ref fgm::Matrix4::safeInverse) times itself
+ * @brief Verify that inverse of matrix (using @ref fgm::Mat4::safeInverse) times itself
  *        is an identity matrix.
  */
-TYPED_TEST(Matrix4Inverse, SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
+TYPED_TEST(Mat4Inverse, SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
 {
     const auto invMatrix = this->_matrix.safeInverse();
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
@@ -268,10 +268,10 @@ TYPED_TEST(Matrix4Inverse, SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
 
 
 /**
- * @brief Verify that inverting a singular matrix using @ref fgm::Matrix4::safeInverse
+ * @brief Verify that inverting a singular matrix using @ref fgm::Mat4::safeInverse
  *        returns identity matrix by default.
  */
-TEST_P(SingularMatrix4Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
+TEST_P(SingularMat4Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
 {
     const auto& matrix = GetParam();
     EXPECT_MAT_IDENTITY(matrix.safeInverse());
@@ -279,21 +279,21 @@ TEST_P(SingularMatrix4Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
 
 
 /**
- * @brief Verify that inverting a singular matrix using @ref fgm::Matrix4::safeInverse
+ * @brief Verify that inverting a singular matrix using @ref fgm::Mat4::safeInverse
  *        returns passed-in fallback.
  */
-TEST_P(SingularMatrix4Inverse, SafeInverse_ReturnsPassedInFallback)
+TEST_P(SingularMat4Inverse, SafeInverse_ReturnsPassedInFallback)
 {
-    const auto& inverseMatrix = GetParam().safeInverse(fgm::Matrix4<ParamType::value_type>::zero());
+    const auto& inverseMatrix = GetParam().safeInverse(fgm::Mat4<ParamType::value_type>::zero());
     EXPECT_MAT_ZERO(inverseMatrix);
 }
 
 
 /**
- * @brief Verify that inverting a NaN matrix using @ref fgm::Matrix4::safeInverse
+ * @brief Verify that inverting a NaN matrix using @ref fgm::Mat4::safeInverse
  *        returns identity matrix by default.
  */
-TEST_P(NaNMatrix4Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMat4Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
 {
     const auto& matrix = GetParam();
     EXPECT_MAT_IDENTITY(matrix.safeInverse());
@@ -301,42 +301,42 @@ TEST_P(NaNMatrix4Inverse, SafeInverse_ReturnsIdentityMatrixByDefault)
 
 
 /**
- * @brief Verify that inverting a NaN matrix using @ref fgm::Matrix4::safeInverse
+ * @brief Verify that inverting a NaN matrix using @ref fgm::Mat4::safeInverse
  *        returns passed-in fallback.
  */
-TEST_P(NaNMatrix4Inverse, SafeInverse_ReturnsPassedInFallback)
+TEST_P(NaNMat4Inverse, SafeInverse_ReturnsPassedInFallback)
 {
-    const auto& inverseMatrix = GetParam().safeInverse(fgm::Matrix4<ParamType::value_type>::zero());
+    const auto& inverseMatrix = GetParam().safeInverse(fgm::Mat4<ParamType::value_type>::zero());
     EXPECT_MAT_ZERO(inverseMatrix);
 }
 
 
 /**
- * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4::safeInverse exchanges row and
+ * @brief Verify that inverting a matrix using static variant of @ref fgm::Mat4::safeInverse exchanges row and
  *        column elements and returns a new matrix.
  */
-TYPED_TEST(Matrix4Inverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
+TYPED_TEST(Mat4Inverse, StaticWrapper_SafeInverse_ReturnsInverseMatrix)
 {
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4<TypeParam>::safeInverseOf(this->_matrix));
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Mat4<TypeParam>::safeInverseOf(this->_matrix));
 }
 
 
 /**
- * @brief Verify that inverse of matrix (using static variant of @ref fgm::Matrix4::safeInverse) times itself is an
+ * @brief Verify that inverse of matrix (using static variant of @ref fgm::Mat4::safeInverse) times itself is an
  *        identity matrix.
  */
-TYPED_TEST(Matrix4Inverse, StaticWrapper_SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
+TYPED_TEST(Mat4Inverse, StaticWrapper_SafeInverse_InverseTimesMatrixReturnsIdentityMatrix)
 {
-    const auto invMatrix = fgm::Matrix4<TypeParam>::safeInverseOf(this->_matrix);
+    const auto invMatrix = fgm::Mat4<TypeParam>::safeInverseOf(this->_matrix);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
 }
 
 
 /**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix4::safeInverseOf
+ * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::safeInverseOf
  *         returns identity matrix by default.
  */
-TEST_P(SingularMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixByDefault)
+TEST_P(SingularMat4Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixByDefault)
 {
     const auto& matrix = GetParam();
     EXPECT_MAT_IDENTITY(ParamType::safeInverseOf(matrix));
@@ -344,21 +344,21 @@ TEST_P(SingularMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixBy
 
 
 /**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix4::safeInverseOf
+ * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::safeInverseOf
  *         returns passed-in fallback.
  */
-TEST_P(SingularMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
+TEST_P(SingularMat4Inverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
 {
     const auto& matrix = GetParam();
-    EXPECT_MAT_ZERO(ParamType::safeInverseOf(matrix, fgm::Matrix4<ParamType::value_type>::zero()));
+    EXPECT_MAT_ZERO(ParamType::safeInverseOf(matrix, fgm::Mat4<ParamType::value_type>::zero()));
 }
 
 
 /**
- * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Matrix4::safeInverse
+ * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Mat4::safeInverse
  *        returns identity matrix by default.
  */
-TEST_P(NaNMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMat4Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixByDefault)
 {
     const auto& matrix = GetParam();
     EXPECT_MAT_IDENTITY(ParamType::safeInverseOf(matrix));
@@ -366,12 +366,12 @@ TEST_P(NaNMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsIdentityMatrixByDefau
 
 
 /**
- * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Matrix4::safeInverse
+ * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Mat4::safeInverse
  *        returns passed-in fallback.
  */
-TEST_P(NaNMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
+TEST_P(NaNMat4Inverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
 {
-    const auto& inverseMatrix = ParamType::safeInverseOf(GetParam(), fgm::Matrix4<ParamType::value_type>::zero());
+    const auto& inverseMatrix = ParamType::safeInverseOf(GetParam(), fgm::Mat4<ParamType::value_type>::zero());
     EXPECT_MAT_ZERO(inverseMatrix);
 }
 
@@ -383,10 +383,10 @@ TEST_P(NaNMatrix4Inverse, StaticWrapper_SafeInverse_ReturnsPassedInFallback)
  **************************************/
 
 /**
- * @brief Verify that inverting a matrix using @ref fgm::Matrix4::tryInverse exchanges row and column elements and
+ * @brief Verify that inverting a matrix using @ref fgm::Mat4::tryInverse exchanges row and column elements and
  *        returns a new matrix and sets status flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix4Inverse, TryInverse_ReturnsInverseMatrix)
+TYPED_TEST(Mat4Inverse, TryInverse_ReturnsInverseMatrix)
 {
     fgm::OperationStatus flag;
     EXPECT_MAT_EQ(this->_expectedInverse, this->_matrix.tryInverse(flag));
@@ -395,10 +395,10 @@ TYPED_TEST(Matrix4Inverse, TryInverse_ReturnsInverseMatrix)
 
 
 /**
- * @brief Verify that inverse of matrix (using @ref fgm::Matrix4::tryInverse) times itself is an identity matrix and
+ * @brief Verify that inverse of matrix (using @ref fgm::Mat4::tryInverse) times itself is an identity matrix and
  *        sets status flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix4Inverse, TryInverse_InverseTimesMatrixReturnsIdentityMatrix)
+TYPED_TEST(Mat4Inverse, TryInverse_InverseTimesMatrixReturnsIdentityMatrix)
 {
     fgm::OperationStatus flag;
     const auto invMatrix = this->_matrix.tryInverse(flag);
@@ -408,10 +408,10 @@ TYPED_TEST(Matrix4Inverse, TryInverse_InverseTimesMatrixReturnsIdentityMatrix)
 
 
 /**
- * @brief Verify that inverting a singular matrix using @ref fgm::Matrix4::tryInverse
+ * @brief Verify that inverting a singular matrix using @ref fgm::Mat4::tryInverse
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TEST_P(SingularMatrix4Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
+TEST_P(SingularMat4Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     const auto& matrix = GetParam();
@@ -421,23 +421,23 @@ TEST_P(SingularMatrix4Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
 
 
 /**
- * @brief Verify that inverting a singular matrix using @ref fgm::Matrix4::tryInverse
+ * @brief Verify that inverting a singular matrix using @ref fgm::Mat4::tryInverse
  *        returns passed-in fallback and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TEST_P(SingularMatrix4Inverse, TryInverse_ReturnsPassedInFallback)
+TEST_P(SingularMat4Inverse, TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::Matrix4<ParamType::value_type>::zero());
+    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::Mat4<ParamType::value_type>::zero());
     EXPECT_MAT_ZERO(inverseMatrix);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
 /**
- * @brief Verify that inverting a NaN matrix using @ref fgm::Matrix4::tryInverse
+ * @brief Verify that inverting a NaN matrix using @ref fgm::Mat4::tryInverse
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMat4Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     const auto& matrix = GetParam();
@@ -447,48 +447,48 @@ TEST_P(NaNMatrix4Inverse, TryInverse_ReturnsIdentityMatrixByDefault)
 
 
 /**
- * @brief Verify that inverting a NaN matrix using @ref fgm::Matrix4::tryInverse returns passed-in fallback
+ * @brief Verify that inverting a NaN matrix using @ref fgm::Mat4::tryInverse returns passed-in fallback
  *        and sets status flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4Inverse, TryInverse_ReturnsPassedInFallback)
+TEST_P(NaNMat4Inverse, TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::Matrix4<ParamType::value_type>::zero());
+    const auto& inverseMatrix = GetParam().tryInverse(flag, fgm::Mat4<ParamType::value_type>::zero());
     EXPECT_MAT_ZERO(inverseMatrix);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @brief Verify that inverting a matrix using static variant of @ref fgm::Matrix4::tryInverse exchanges row and
+ * @brief Verify that inverting a matrix using static variant of @ref fgm::Mat4::tryInverse exchanges row and
  *        column elements and returns a new matrix and sets status flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix4Inverse, StaticWrapper_TryInverse_ReturnsInverseMatrix)
+TYPED_TEST(Mat4Inverse, StaticWrapper_TryInverse_ReturnsInverseMatrix)
 {
     fgm::OperationStatus flag;
-    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Matrix4<TypeParam>::tryInverseOf(this->_matrix, flag));
+    EXPECT_MAT_EQ(this->_expectedInverse, fgm::Mat4<TypeParam>::tryInverseOf(this->_matrix, flag));
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
- * @brief Verify that inverse of matrix (using static variant of @ref fgm::Matrix4::tryInverse) times itself is an
+ * @brief Verify that inverse of matrix (using static variant of @ref fgm::Mat4::tryInverse) times itself is an
  *        identity matrix and sets status flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Matrix4Inverse, StaticWrapper_TryInverse_InverseTimesMatrixReturnsIdentityMatrix)
+TYPED_TEST(Mat4Inverse, StaticWrapper_TryInverse_InverseTimesMatrixReturnsIdentityMatrix)
 {
     fgm::OperationStatus flag;
-    const auto invMatrix = fgm::Matrix4<TypeParam>::tryInverseOf(this->_matrix, flag);
+    const auto invMatrix = fgm::Mat4<TypeParam>::tryInverseOf(this->_matrix, flag);
     EXPECT_MAT_IDENTITY(this->_matrix * invMatrix);
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix4::tryInverseOf
+ * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::tryInverseOf
  *         returns identity matrix by default and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TEST_P(SingularMatrix4Inverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefault)
+TEST_P(SingularMat4Inverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     const auto& matrix = GetParam();
@@ -498,23 +498,23 @@ TEST_P(SingularMatrix4Inverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByD
 
 
 /**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Matrix4::tryInverseOf
+ * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::tryInverseOf
  *         returns passed-in fallback and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
-TEST_P(SingularMatrix4Inverse, StaticWrapper_TryInverse_ReturnsPassedInFallback)
+TEST_P(SingularMat4Inverse, StaticWrapper_TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
     const auto& matrix = GetParam();
-    EXPECT_MAT_ZERO(ParamType::tryInverseOf(matrix, flag, fgm::Matrix4<ParamType::value_type>::zero()));
+    EXPECT_MAT_ZERO(ParamType::tryInverseOf(matrix, flag, fgm::Mat4<ParamType::value_type>::zero()));
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
 /**
- * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Matrix4::tryInverse
+ * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Mat4::tryInverse
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4Inverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefault)
+TEST_P(NaNMat4Inverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     const auto& matrix = GetParam();
@@ -525,13 +525,13 @@ TEST_P(NaNMatrix4Inverse, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefaul
 
 
 /**
- * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Matrix4::tryInverse
+ * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Mat4::tryInverse
  *        returns passed-in fallback and sets status flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMatrix4Inverse, StaticWrapper_TryInverse_ReturnsPassedInFallback)
+TEST_P(NaNMat4Inverse, StaticWrapper_TryInverse_ReturnsPassedInFallback)
 {
     fgm::OperationStatus flag;
-    const auto& inverseMatrix = ParamType::tryInverseOf(GetParam(), flag, fgm::Matrix4<ParamType::value_type>::zero());
+    const auto& inverseMatrix = ParamType::tryInverseOf(GetParam(), flag, fgm::Mat4<ParamType::value_type>::zero());
     EXPECT_MAT_ZERO(inverseMatrix);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }

@@ -11,7 +11,7 @@ set(UtilityDirectory "${INCLUDE_DIR}utils/")
 
 
 # Files
-set(SetupFiles "Vec2TestSetup.h;Vec3TestSetup.h;Vec4TestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;Matrix2x3TestSetup.h;CommonSetup.h;")
+set(SetupFiles "Vec2TestSetup.h;Vec3TestSetup.h;Vec4TestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;Mat2x3TestSetup.h;CommonSetup.h;")
 list(TRANSFORM SetupFiles PREPEND ${INCLUDE_DIR})
 
 set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
@@ -68,13 +68,13 @@ target_link_libraries(
         Vec2Tests
         Vec3Tests
         Vec4Tests
-        Matrix2Tests
-        Matrix2x3Tests
-        Matrix2TransformTests
-        Matrix3Tests
-        Matrix3TransformTests
-        Matrix4Tests
-        Matrix4TransformTests
+        Mat2Tests
+        Mat2x3Tests
+        Mat2TransformTests
+        Mat3Tests
+        Mat3TransformTests
+        Mat4Tests
+        Mat4TransformTests
         MatrixMultiplicationTests
 )
 
@@ -109,10 +109,10 @@ set_target_properties(CommonTests
         Vec2Tests
         Vec3Tests
         Vec4Tests
-        Matrix2Tests
-        Matrix2TransformTests
-        Matrix3Tests
-        Matrix3TransformTests
-        Matrix4Tests
-        Matrix4TransformTests
+        Mat2Tests
+        Mat2TransformTests
+        Mat3Tests
+        Mat3TransformTests
+        Mat4Tests
+        Mat4TransformTests
         PROPERTIES FOLDER "Test Intermediates/FGM")

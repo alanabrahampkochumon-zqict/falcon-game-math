@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 09, 2026
  *
- * @brief Verify @ref fgm::Matrix2 addition logic.
+ * @brief Verify @ref fgm::Mat2 addition logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -18,12 +18,12 @@
  **************************************/
 
 template <typename T>
-class Matrix2Addition: public ::testing::Test
+class Mat2Addition: public ::testing::Test
 {
 protected:
-    fgm::Matrix2<T> _matA;
-    fgm::Matrix2<T> _matB;
-    fgm::Matrix2<T> _expectedSum;
+    fgm::Mat2<T> _matA;
+    fgm::Mat2<T> _matB;
+    fgm::Mat2<T> _expectedSum;
 
     void SetUp() override
     {
@@ -32,8 +32,8 @@ protected:
         _expectedSum = { fgm::Vec2<T>(6, 8), fgm::Vec2<T>(10, 12) };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2 addition, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix2Addition, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Mat2 addition, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Mat2Addition, SupportedArithmeticTypes);
 
 
 
@@ -51,9 +51,9 @@ TYPED_TEST_SUITE(Matrix2Addition, SupportedArithmeticTypes);
 /** @brief Verify that matrix addition operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix2 MAT1(1, 2, 3, 4);
-    constexpr fgm::Matrix2 MAT2(5, 6, 7, 8);
-    constexpr fgm::Matrix2 BINARY_SUM = MAT1 + MAT2;
+    constexpr fgm::Mat2 MAT1(1, 2, 3, 4);
+    constexpr fgm::Mat2 MAT2(5, 6, 7, 8);
+    constexpr fgm::Mat2 BINARY_SUM = MAT1 + MAT2;
 
     static_assert(BINARY_SUM(0, 0) == 6);
     static_assert(BINARY_SUM(0, 1) == 8);
@@ -73,9 +73,9 @@ namespace
  * @brief Verify that the binary addition operator perform a component-wise addition and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Matrix2Addition, PlusOperator_ReturnsMatrixSum)
+TYPED_TEST(Mat2Addition, PlusOperator_ReturnsMatrixSum)
 {
-    const fgm::Matrix2 sum = this->_matA + this->_matB;
+    const fgm::Mat2 sum = this->_matA + this->_matB;
 
     EXPECT_MAT_EQ(this->_expectedSum, sum);
 }
@@ -85,11 +85,11 @@ TYPED_TEST(Matrix2Addition, PlusOperator_ReturnsMatrixSum)
  * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Matrix2Addition, MixedTypeAdditionPromotesType)
+TEST(Mat2Addition, MixedTypeAdditionPromotesType)
 {
-    const fgm::Matrix2 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f } };
-    const fgm::Matrix2 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 } };
-    [[maybe_unused]] const fgm::Matrix2 sum = mat1 + mat2;
+    const fgm::Mat2 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f } };
+    const fgm::Mat2 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 } };
+    [[maybe_unused]] const fgm::Mat2 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
 }
@@ -99,7 +99,7 @@ TEST(Matrix2Addition, MixedTypeAdditionPromotesType)
  * @brief Verify that the compound addition assignment operator perform a component-wise addition and
  *       mutates the matrix in-place.
  */
-TYPED_TEST(Matrix2Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
+TYPED_TEST(Mat2Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 {
     this->_matA += this->_matB;
 
@@ -111,10 +111,10 @@ TYPED_TEST(Matrix2Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix2Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Mat2Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    fgm::Matrix2 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f } };
-    const fgm::Matrix2 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 } };
+    fgm::Mat2 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f } };
+    const fgm::Mat2 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 } };
 
     mat1 += mat2;
 

@@ -3,18 +3,18 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 17, 2026
  *
- * @brief Verify @ref fgm::Matrix2x3 initialization.
+ * @brief Verify @ref fgm::Mat2x3 initialization.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Matrix2x3TestSetup.h"
+#include "Mat2x3TestSetup.h"
 
 
 
 template <typename T>
-class Matrix2x3Initialization: public testing::Test
+class Mat2x3Initialization: public testing::Test
 {
 protected:
     std::vector<T> _elements;
@@ -28,8 +28,8 @@ protected:
         _col2     = { T(3), T(6) };
     }
 };
-/** Test fixture for @ref fgm::Matrix2x3 initialization, parameterized by @ref SupportedTypes. */
-TYPED_TEST_SUITE(Matrix2x3Initialization, SupportedTypes);
+/** Test fixture for @ref fgm::Mat2x3 initialization, parameterized by @ref SupportedTypes. */
+TYPED_TEST_SUITE(Mat2x3Initialization, SupportedTypes);
 
 
 
@@ -88,7 +88,7 @@ namespace
  **************************************/
 
 /** @brief Verify that the default constructor initializes an identity matrix. */
-TYPED_TEST(Matrix2x3Initialization, EmptyConstructorReturnsIdentityMatrix)
+TYPED_TEST(Mat2x3Initialization, EmptyConstructorReturnsIdentityMatrix)
 {
     constexpr fgm::Mat2x3<TypeParam> matrix{};
 
@@ -97,7 +97,7 @@ TYPED_TEST(Matrix2x3Initialization, EmptyConstructorReturnsIdentityMatrix)
 
 
 /** @brief Verify that the parameterized constructor can initialize matrix with elements. */
-TYPED_TEST(Matrix2x3Initialization, ParameterizedConstructorInitializesMatrixWithElements)
+TYPED_TEST(Mat2x3Initialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
     const fgm::Mat2x3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
                                            this->_elements[3], this->_elements[4], this->_elements[5]);
@@ -106,7 +106,7 @@ TYPED_TEST(Matrix2x3Initialization, ParameterizedConstructorInitializesMatrixWit
 
 
 /** @brief Verify that the parameterized constructor can initialize matrix with vectors. */
-TYPED_TEST(Matrix2x3Initialization, ParameterizedConstructorInitializesMatrixWithVectors)
+TYPED_TEST(Mat2x3Initialization, ParameterizedConstructorInitializesMatrixWithVectors)
 {
     const fgm::Mat2x3<TypeParam> matrix(this->_col0, this->_col1, this->_col2);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
@@ -115,7 +115,7 @@ TYPED_TEST(Matrix2x3Initialization, ParameterizedConstructorInitializesMatrixWit
 
 
 /** @brief Verify that a matrix can be initialized with implicit braced initialization. */
-TYPED_TEST(Matrix2x3Initialization, CanBeConstructedWithBracedInitialization)
+TYPED_TEST(Mat2x3Initialization, CanBeConstructedWithBracedInitialization)
 {
     const fgm::Mat2x3<TypeParam> matrix = {
         { TypeParam(1), TypeParam(4) },

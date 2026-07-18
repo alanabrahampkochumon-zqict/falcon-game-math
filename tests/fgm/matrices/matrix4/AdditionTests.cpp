@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 04, 2026
  *
- * @brief Verify @ref fgm::Matrix4 addition logic.
+ * @brief Verify @ref fgm::Mat4 addition logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -18,12 +18,12 @@
  **************************************/
 
 template <typename T>
-class Matrix4Addition: public testing::Test
+class Mat4Addition: public testing::Test
 {
 protected:
-    fgm::Matrix4<T> _matA;
-    fgm::Matrix4<T> _matB;
-    fgm::Matrix4<T> _expectedSum;
+    fgm::Mat4<T> _matA;
+    fgm::Mat4<T> _matB;
+    fgm::Mat4<T> _expectedSum;
 
     void SetUp() override
     {
@@ -43,8 +43,8 @@ protected:
         };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix4 addition, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix4Addition, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Mat4 addition, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Mat4Addition, SupportedArithmeticTypes);
 
 
 
@@ -62,9 +62,9 @@ TYPED_TEST_SUITE(Matrix4Addition, SupportedArithmeticTypes);
 /** @brief Verify that matrix addition operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4 matA(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-    constexpr fgm::Matrix4 matB(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-    constexpr fgm::Matrix4 binarySum = matA + matB;
+    constexpr fgm::Mat4 matA(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+    constexpr fgm::Mat4 matB(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
+    constexpr fgm::Mat4 binarySum = matA + matB;
 
     static_assert(binarySum(0, 0) == 6);
     static_assert(binarySum(0, 1) == 8);
@@ -96,9 +96,9 @@ namespace
  * @brief Verify that the binary addition operator perform a component-wise addition and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Matrix4Addition, PlusOperator_ReturnsMatrixSum)
+TYPED_TEST(Mat4Addition, PlusOperator_ReturnsMatrixSum)
 {
-    const fgm::Matrix4 sum = this->_matA + this->_matB;
+    const fgm::Mat4 sum = this->_matA + this->_matB;
 
     EXPECT_MAT_EQ(this->_expectedSum, sum);
 }
@@ -108,15 +108,15 @@ TYPED_TEST(Matrix4Addition, PlusOperator_ReturnsMatrixSum)
  * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Matrix4Addition, PlusOperator_MixedTypePromotesType)
+TEST(Mat4Addition, PlusOperator_MixedTypePromotesType)
 {
-    constexpr fgm::Matrix4 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
+    constexpr fgm::Mat4 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
                                  fgm::Vec4{ 4.5f, 3.25f, 3.16f, -22.0f },
                                  fgm::Vec4{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    constexpr fgm::Matrix4 mat2{ fgm::Vec4{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vec4{ 3.0, -8.0, 12.0, 11.0 },
+    constexpr fgm::Mat4 mat2{ fgm::Vec4{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vec4{ 3.0, -8.0, 12.0, 11.0 },
                                  fgm::Vec4{ 3.25, 5.1, 0.0, 0.25 }, fgm::Vec4{ 12.0, 13.0, 14.0, 15.0 } };
 
-    [[maybe_unused]] constexpr fgm::Matrix4 sum = mat1 + mat2;
+    [[maybe_unused]] constexpr fgm::Mat4 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
 }
@@ -126,7 +126,7 @@ TEST(Matrix4Addition, PlusOperator_MixedTypePromotesType)
  * @brief Verify that the compound addition assignment operator perform a component-wise addition and
  *       mutates the matrix in-place.
  */
-TYPED_TEST(Matrix4Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
+TYPED_TEST(Mat4Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 {
     this->_matA += this->_matB;
 
@@ -138,13 +138,13 @@ TYPED_TEST(Matrix4Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix4Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Mat4Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    [[maybe_unused]] fgm::Matrix4 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f },
+    [[maybe_unused]] fgm::Mat4 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f },
                                         fgm::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
                                         fgm::Vec4{ 4.5f, 3.25f, 3.16f, -22.0f },
                                         fgm::Vec4{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    [[maybe_unused]] constexpr fgm::Matrix4 mat2{ fgm::Vec4{ 11.0, 10.0, 2.0, -1.0 },
+    [[maybe_unused]] constexpr fgm::Mat4 mat2{ fgm::Vec4{ 11.0, 10.0, 2.0, -1.0 },
                                                   fgm::Vec4{ 3.0, -8.0, 12.0, 11.0 },
                                                   fgm::Vec4{ 3.25, 5.1, 0.0, 0.25 },
                                                   fgm::Vec4{ 12.0, 13.0, 14.0, 15.0 } };

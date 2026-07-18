@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 07, 2026
  *
- * @brief Verify @ref fgm::Matrix4 transpose logic.
+ * @brief Verify @ref fgm::Mat4 transpose logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,10 +20,10 @@
  **************************************/
 
 template <typename T>
-class Matrix4Transpose: public ::testing::Test
+class Mat4Transpose: public ::testing::Test
 {
 protected:
-    fgm::Matrix4<T> _matrix, _expectedTranspose;
+    fgm::Mat4<T> _matrix, _expectedTranspose;
 
     void SetUp() override
     {
@@ -37,8 +37,8 @@ protected:
                                { T(4), T(8), T(12), T(16) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix4 transpose, parameterized @ref SupportedTypes */
-TYPED_TEST_SUITE(Matrix4Transpose, SupportedTypes);
+/** @brief Test fixture for @ref fgm::Mat4 transpose, parameterized @ref SupportedTypes */
+TYPED_TEST_SUITE(Mat4Transpose, SupportedTypes);
 
 
 
@@ -56,10 +56,10 @@ TYPED_TEST_SUITE(Matrix4Transpose, SupportedTypes);
 /** @brief Verify that matrix transpose is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+    constexpr fgm::Mat4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
     // Verify matrix transpose (member function)
-    constexpr fgm::Matrix4 TRANSPOSE_MAT = MAT.transpose();
+    constexpr fgm::Mat4 TRANSPOSE_MAT = MAT.transpose();
     static_assert(TRANSPOSE_MAT(0, 0) == 1);
     static_assert(TRANSPOSE_MAT(0, 1) == 5);
     static_assert(TRANSPOSE_MAT(0, 2) == 9);
@@ -82,7 +82,7 @@ namespace
 
 
     // Verify matrix transpose (static function)
-    constexpr fgm::Matrix4 TRANSPOSE_MAT_S = fgm::Matrix4<int>::transpose(MAT);
+    constexpr fgm::Mat4 TRANSPOSE_MAT_S = fgm::Mat4<int>::transpose(MAT);
     static_assert(TRANSPOSE_MAT_S(0, 0) == 1);
     static_assert(TRANSPOSE_MAT_S(0, 1) == 5);
     static_assert(TRANSPOSE_MAT_S(0, 2) == 9);
@@ -115,19 +115,19 @@ namespace
 
 
 /** @brief Verify that transposing a matrix exchanges row and column elements and returns a new matrix. */
-TYPED_TEST(Matrix4Transpose, ExchangesRowsAndColumnElements)
+TYPED_TEST(Mat4Transpose, ExchangesRowsAndColumnElements)
 {
     EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose());
 }
 
 
 /**
- * @brief Verify that transposing a matrix using static variant of @ref fgm::Matrix4::transpose exchanges row and
+ * @brief Verify that transposing a matrix using static variant of @ref fgm::Mat4::transpose exchanges row and
  *        column elements and returns a new matrix.
  */
-TYPED_TEST(Matrix4Transpose, StaticWrapper_ExchangesRowsAndColumnElements)
+TYPED_TEST(Mat4Transpose, StaticWrapper_ExchangesRowsAndColumnElements)
 {
-    EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Matrix4<TypeParam>::transpose(this->_matrix));
+    EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Mat4<TypeParam>::transpose(this->_matrix));
 }
 
 /** @} */

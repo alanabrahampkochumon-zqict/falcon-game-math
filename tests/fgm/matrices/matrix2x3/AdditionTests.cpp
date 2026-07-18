@@ -3,13 +3,13 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 17, 2026
  *
- * @brief Verify @ref fgm:: Matrix2x3 addition logic.
+ * @brief Verify @ref fgm:: Mat2x3 addition logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include <Matrix2x3TestSetup.h>
+#include <Mat2x3TestSetup.h>
 
 /**************************************
  *                                    *
@@ -18,7 +18,7 @@
  **************************************/
 
 template <typename T>
-class Matrix2x3Addition: public ::testing::Test
+class Mat2x3Addition: public ::testing::Test
 {
 protected:
     fgm::Mat2x3<T> _matA;
@@ -32,8 +32,8 @@ protected:
         _expectedSum = { fgm::Vec2<T>(6, 8), fgm::Vec2<T>(10, 12), fgm::Vec2<T>(5, 9) };
     }
 };
-/** @brief Test fixture for @ref fgm:: Matrix2x3 addition, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix2x3Addition, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm:: Mat2x3 addition, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Mat2x3Addition, SupportedArithmeticTypes);
 
 
 
@@ -75,7 +75,7 @@ namespace
  * @brief Verify that the binary addition operator perform a component-wise addition and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Matrix2x3Addition, PlusOperator_ReturnsMatrixSum)
+TYPED_TEST(Mat2x3Addition, PlusOperator_ReturnsMatrixSum)
 {
     const fgm::Mat2x3 sum = this->_matA + this->_matB;
 
@@ -87,7 +87,7 @@ TYPED_TEST(Matrix2x3Addition, PlusOperator_ReturnsMatrixSum)
  * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Matrix2x3Addition, MixedTypeAdditionPromotesType)
+TEST(Mat2x3Addition, MixedTypeAdditionPromotesType)
 {
     const fgm::Mat2x3 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f } };
     const fgm::Mat2x3 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 } };
@@ -101,7 +101,7 @@ TEST(Matrix2x3Addition, MixedTypeAdditionPromotesType)
  * @brief Verify that the compound addition assignment operator perform a component-wise addition and
  *       mutates the matrix in-place.
  */
-TYPED_TEST(Matrix2x3Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
+TYPED_TEST(Mat2x3Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 {
     this->_matA += this->_matB;
 
@@ -113,7 +113,7 @@ TYPED_TEST(Matrix2x3Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Matrix2x3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Mat2x3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
     fgm::Mat2x3 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f } };
     const fgm::Mat2x3 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 } };

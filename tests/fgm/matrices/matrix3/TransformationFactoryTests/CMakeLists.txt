@@ -1,7 +1,7 @@
-add_library(Matrix3TransformTests OBJECT)
+add_library(Mat3TransformTests OBJECT)
 
 target_sources(
-        Matrix3TransformTests PRIVATE
+        Mat3TransformTests PRIVATE
         AffineTests.cpp
         ReflectionTests.cpp
         RotationTests.cpp
@@ -11,13 +11,13 @@ target_sources(
 )
 
 target_include_directories(
-        Matrix3TransformTests PRIVATE
+        Mat3TransformTests PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${FGM_TEST_ROOT_DIR}/include
 )
 
 target_link_libraries(
-        Matrix3TransformTests PRIVATE
+        Mat3TransformTests PRIVATE
         FGM
         GTest::gtest
         GTest::gtest_main # googletest

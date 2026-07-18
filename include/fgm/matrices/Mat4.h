@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file Matrix4.h
+ * @file Mat4.h
  * @author Alan Abraham P Kochumon
  * @date Created on: February 15, 2026
  *
@@ -37,7 +37,7 @@ namespace fgm
 {
 
     template <Arithmetic T>
-    struct Matrix4
+    struct Mat4
     {
         /**
          * @addtogroup FGM_Mat4x4_Members
@@ -59,15 +59,15 @@ namespace fgm
          */
 
         /**
-         * @brief Initialize an uninitialized @ref Matrix4 instance.
+         * @brief Initialize an uninitialized @ref Mat4 instance.
          *
          * @warning The components are left uninitialized (containing garbage data)
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Matrix4<T>::zero() to guarantee a zeroed matrix.
+         *       @ref fgm::Mat4<T>::zero() to guarantee a zeroed matrix.
          */
-        Matrix4() = default;
+        Mat4() = default;
 
 
         /**
@@ -91,7 +91,7 @@ namespace fgm
          * @param[in] m33 The element to insert into row four, column four.
          *
          */
-        [[nodiscard]] constexpr Matrix4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22,
+        [[nodiscard]] constexpr Mat4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22,
                                         T m23, T m30, T m31, T m32, T m33) noexcept;
 
 
@@ -103,7 +103,7 @@ namespace fgm
          * @param[in] col2 The 4D-vector to use as the third column entry.
          * @param[in] col3 The 4D-vector to use as the fourth column entry.
          */
-        [[nodiscard]] constexpr Matrix4(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2,
+        [[nodiscard]] constexpr Mat4(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2,
                                         const Vec4<T>& col3) noexcept;
 
 
@@ -116,18 +116,18 @@ namespace fgm
          * @param[in] d2 The third diagonal entry of the matrix (m22).
          * @param[in] d3 The third diagonal entry of the matrix (m33).
          */
-        [[nodiscard]] constexpr Matrix4(T d0, T d1, T d2, T d3) noexcept;
+        [[nodiscard]] constexpr Mat4(T d0, T d1, T d2, T d3) noexcept;
 
 
         /**
-         * @brief Initialize @ref Matrix4 from another @ref Matrix4 of a different type.
+         * @brief Initialize @ref Mat4 from another @ref Mat4 of a different type.
          *
          * @tparam U Numeric type of the source matrix.
          *
          * @param[in] other The source matrix to be converted.
          */
         template <Arithmetic U>
-        [[nodiscard]] explicit constexpr Matrix4(const Matrix4<U>& other) noexcept;
+        [[nodiscard]] explicit constexpr Mat4(const Mat4<U>& other) noexcept;
 
         /** @} */
 
@@ -213,7 +213,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool allEq(const Matrix4<U>& rhs,
+        [[nodiscard]] constexpr bool allEq(const Mat4<U>& rhs,
                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                ? Config::DOUBLE_EPSILON
                                                : Config::FLOAT_EPSILON) const noexcept;
@@ -238,7 +238,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr bool allEq(const Matrix4& lhs, const Matrix4<U>& rhs,
+        [[nodiscard]] static constexpr bool allEq(const Mat4& lhs, const Mat4<U>& rhs,
                                                   double epsilon = std::is_same_v<T, double> ||
                                                           std::is_same_v<U, double>
                                                       ? Config::DOUBLE_EPSILON
@@ -263,7 +263,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool anyNeq(const Matrix4<U>& rhs,
+        [[nodiscard]] constexpr bool anyNeq(const Mat4<U>& rhs,
                                             double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
                                                 ? Config::DOUBLE_EPSILON
                                                 : Config::FLOAT_EPSILON) const noexcept;
@@ -288,7 +288,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr bool anyNeq(const Matrix4& lhs, const Matrix4<U>& rhs,
+        [[nodiscard]] static constexpr bool anyNeq(const Mat4& lhs, const Mat4<U>& rhs,
                                                    double epsilon = std::is_same_v<T, double> ||
                                                            std::is_same_v<U, double>
                                                        ? Config::DOUBLE_EPSILON
@@ -296,7 +296,7 @@ namespace fgm
 
 
         /**
-         * @copybrief allEq(const Matrix4<U>&, double) const noexcept
+         * @copybrief allEq(const Mat4<U>&, double) const noexcept
          *
          * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
          *       during static evaluation.
@@ -309,11 +309,11 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool operator==(const Matrix4<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator==(const Mat4<U>& rhs) const noexcept;
 
 
         /**
-         * @copybrief anyNeq(const Matrix4<U>&, double) const noexcept
+         * @copybrief anyNeq(const Mat4<U>&, double) const noexcept
          *
          * @note Implements an explicit constexpr MSVC workaround to ensure IEEE 754 NaN compliance
          *       during static evaluation.
@@ -326,7 +326,7 @@ namespace fgm
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool operator!=(const Matrix4<U>& rhs) const noexcept;
+        [[nodiscard]] constexpr bool operator!=(const Mat4<U>& rhs) const noexcept;
 
         /** @} */
 
@@ -340,18 +340,18 @@ namespace fgm
         /**
          * @brief Compute the element-wise sum of this matrix with @p rhs matrix and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix4<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to add.
          *
-         * @return A new @ref Matrix4 containing the element-wise sum.
+         * @return A new @ref Mat4 containing the element-wise sum.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMatrix4<T, U> operator+(const Matrix4<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMat4<T, U> operator+(const Mat4<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -368,25 +368,25 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        Matrix4& operator+=(const Matrix4<U>& rhs) noexcept
+        Mat4& operator+=(const Mat4<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the element-wise difference between this matrix and @p rhs matrix and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix4<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to subtract.
          *
-         * @return A new @ref Matrix4 containing the element-wise difference.
+         * @return A new @ref Mat4 containing the element-wise difference.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMatrix4<T, U> operator-(const Matrix4<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMat4<T, U> operator-(const Mat4<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -403,24 +403,24 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        constexpr Matrix4& operator-=(const Matrix4<U>& rhs) noexcept
+        constexpr Mat4& operator-=(const Mat4<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix4<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] scalar The value to scale by.
          *
-         * @return A new @ref Matrix4 scaled by @p scalar.
+         * @return A new @ref Mat4 scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix4<T, S> operator*(S scalar) const noexcept
+        [[nodiscard]] constexpr PromotedMat4<T, S> operator*(S scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -436,7 +436,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic S>
-        constexpr Matrix4& operator*=(S scalar) noexcept
+        constexpr Mat4& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -499,18 +499,18 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix4<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] rhs The matrix to multiply.
          *
-         * @return A new @ref Matrix4 containing the composition of linear transformations.
+         * @return A new @ref Mat4 containing the composition of linear transformations.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMatrix4<T, U> operator*(const Matrix4<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMat4<T, U> operator*(const Mat4<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -549,23 +549,23 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        constexpr Matrix4& operator*=(const Matrix4<U>& rhs) noexcept
+        constexpr Mat4& operator*=(const Mat4<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
         /**
          * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
          *
-         * @note Promotes the result to the wider type using @ref PromotedMatrix4<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, S>.
          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
          * @note Performs assertion for division by zero in **Debug mode**.
          *
          * @param[in] scalar The value to scale by.
          *
-         * @return A new @ref Matrix4 inverse scaled by @p scalar.
+         * @return A new @ref Mat4 inverse scaled by @p scalar.
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix4<T, S> operator/(const S& scalar) const noexcept
+        [[nodiscard]] constexpr PromotedMat4<T, S> operator/(const S& scalar) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -582,7 +582,7 @@ namespace fgm
          * @return A reference to this matrix (*this).
          */
         template <StrictArithmetic S>
-        constexpr Matrix4& operator/=(const S& scalar) noexcept
+        constexpr Mat4& operator/=(const S& scalar) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -591,7 +591,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix4<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -602,12 +602,12 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix4 resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Mat4 resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix4<T, S> safeDiv(S scalar,
-                                                              const Matrix4& fallback = Matrix4::identity()) const noexcept
+        [[nodiscard]] constexpr PromotedMat4<T, S> safeDiv(S scalar,
+                                                              const Mat4& fallback = Mat4::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -616,7 +616,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix4<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -628,12 +628,12 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix4 resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Mat4 resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix4<T, S> safeDiv(const Matrix4& mat, S scalar,
-                                                                     const Matrix4& fallback = Matrix4::identity()) noexcept
+        [[nodiscard]] static constexpr PromotedMat4<T, S> safeDiv(const Mat4& mat, S scalar,
+                                                                     const Mat4& fallback = Mat4::identity()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -643,7 +643,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedMatrix4<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -659,12 +659,12 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix4 resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Mat4 resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMatrix4<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                             const Matrix4& fallback = Matrix4::identity()) const noexcept
+        [[nodiscard]] constexpr PromotedMat4<T, S> tryDiv(S scalar, OperationStatus& status,
+                                                             const Mat4& fallback = Mat4::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -674,7 +674,7 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
          *       returns @p fallback.
-         * @note Promotes the result to the wider type using @ref PromotedFloatMatrix4<T, S>.
+         * @note Promotes the result to the wider type using @ref PromotedFloatMat4<T, S>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
          *       operand contains NaN.
@@ -691,13 +691,13 @@ namespace fgm
          * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar or a NaN
          *                     element.
          *
-         * @return A new @ref Matrix4 resulting from the division or @p fallback if the @p scalar is below the
+         * @return A new @ref Mat4 resulting from the division or @p fallback if the @p scalar is below the
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMatrix4<T, S> tryDiv(const Matrix4& mat, S scalar,
+        [[nodiscard]] static constexpr PromotedMat4<T, S> tryDiv(const Mat4& mat, S scalar,
                                                                     OperationStatus& status,
-                                                                    const Matrix4& fallback = Matrix4::identity()) noexcept
+                                                                    const Mat4& fallback = Mat4::identity()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -777,7 +777,7 @@ namespace fgm
          *
          * @return A non-zero scalar if the matrix is non-singular, else zero.
          */
-        static constexpr T determinant(const Matrix4& matrix) noexcept
+        static constexpr T determinant(const Mat4& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -799,10 +799,10 @@ namespace fgm
          *            \end{bmatrix}
          *        \f$
          *
-         * @return A new @ref Matrix4 with its elements flipped along the diagonal.
+         * @return A new @ref Mat4 with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix4 transpose() const noexcept;
+        constexpr Mat4 transpose() const noexcept;
 
 
         /**
@@ -825,10 +825,10 @@ namespace fgm
          *
          * @param matrix The matrix to transpose.
          *
-         * @return A new @ref Matrix4 with its elements flipped along the diagonal.
+         * @return A new @ref Mat4 with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix4 transpose(const Matrix4& matrix) noexcept;
+        static constexpr Mat4 transpose(const Mat4& matrix) noexcept;
 
 
         /**
@@ -858,10 +858,10 @@ namespace fgm
          * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
          * @note Performs assertion for division by zero (singular matrix) in **Debug mode**.
          *
-         * @return A new @ref Matrix4 such that \f$ A \cdot A^{-1} = I \f$.
+         * @return A new @ref Mat4 such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix4<Magnitude<T>> inverse() const noexcept
+        constexpr Mat4<Magnitude<T>> inverse() const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -894,10 +894,10 @@ namespace fgm
          *
          * @param[in] matrix The matrix to invert.
          *
-         * @return A new @ref Matrix4 such that \f$ A \cdot A^{-1} = I \f$.
+         * @return A new @ref Mat4 such that \f$ A \cdot A^{-1} = I \f$.
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix4<Magnitude<T>> inverse(const Matrix4& matrix) noexcept
+        static constexpr Mat4<Magnitude<T>> inverse(const Mat4& matrix) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -931,11 +931,11 @@ namespace fgm
          *
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix4 such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Mat4 such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix4<Magnitude<T>> safeInverse(const Matrix4& fallback = Matrix4::identity()) const noexcept
+        constexpr Mat4<Magnitude<T>> safeInverse(const Mat4& fallback = Mat4::identity()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -971,12 +971,12 @@ namespace fgm
          * @param[in] matrix   The matrix to invert.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix4 such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Mat4 such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix4<Magnitude<T>> safeInverseOf(const Matrix4& matrix,
-                                                             const Matrix4& fallback = Matrix4::identity()) noexcept
+        static constexpr Mat4<Magnitude<T>> safeInverseOf(const Mat4& matrix,
+                                                             const Mat4& fallback = Mat4::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1013,12 +1013,12 @@ namespace fgm
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix4 such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Mat4 such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Matrix4<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                   const Matrix4& fallback = Matrix4::identity()) const noexcept
+        constexpr Mat4<Magnitude<T>> tryInverse(OperationStatus& status,
+                                                   const Mat4& fallback = Mat4::identity()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1056,12 +1056,12 @@ namespace fgm
          *                     For details on status codes see @ref OperationStatus.
          * @param[in] fallback The default matrix to return, when an invalid case is encountered.
          *
-         * @return  A new @ref Matrix4 such that \f$ A \cdot A^{-1} = I \f$ or
+         * @return  A new @ref Mat4 such that \f$ A \cdot A^{-1} = I \f$ or
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Matrix4<Magnitude<T>> tryInverseOf(const Matrix4& matrix, OperationStatus& status,
-                                                            const Matrix4& fallback = Matrix4::identity()) noexcept
+        static constexpr Mat4<Magnitude<T>> tryInverseOf(const Mat4& matrix, OperationStatus& status,
+                                                            const Mat4& fallback = Mat4::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1081,7 +1081,7 @@ namespace fgm
          *
          * @return The sum of entries along the main diagonal of the given matrix.
          */
-        [[nodiscard]] static constexpr T trace(const Matrix4& matrix) noexcept
+        [[nodiscard]] static constexpr T trace(const Mat4& matrix) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1112,7 +1112,7 @@ namespace fgm
          *
          * @return True if at least one element is positive or negative infinity.
          */
-        [[nodiscard]] static constexpr bool hasInf(const Matrix4& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasInf(const Mat4& matrix) noexcept;
 
 
         /**
@@ -1134,7 +1134,7 @@ namespace fgm
          *
          * @return True if at least one element is NaN.
          */
-        [[nodiscard]] static constexpr bool hasNaN(const Matrix4& matrix) noexcept;
+        [[nodiscard]] static constexpr bool hasNaN(const Mat4& matrix) noexcept;
 
         /** @} */
 
@@ -1162,7 +1162,7 @@ namespace fgm
          *
          * @return A reference to the output stream @p os.
          */
-        friend std::ostream& operator<<(std::ostream& os, const Matrix4& matrix)
+        friend std::ostream& operator<<(std::ostream& os, const Mat4& matrix)
         {
             const std::streamsize oldPrecision     = os.precision();
             const std::ios_base::fmtflags oldFlags = os.flags();
@@ -1224,10 +1224,10 @@ namespace fgm
          *
          * @param[in] angle The rotation angle in radians.
          *
-         * @return A new @ref Matrix4 representing the linear rotation around x-axis.
+         * @return A new @ref Mat4 representing the linear rotation around x-axis.
          */
         template <std::floating_point U>
-        [[nodiscard]] static constexpr Matrix4 makeRotationX(U angle) noexcept
+        [[nodiscard]] static constexpr Mat4 makeRotationX(U angle) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1262,10 +1262,10 @@ namespace fgm
          *
          * @param[in] angle The rotation angle in radians.
          *
-         * @return A new @ref Matrix4 representing the linear rotation around y-axis.
+         * @return A new @ref Mat4 representing the linear rotation around y-axis.
          */
         template <std::floating_point U>
-        [[nodiscard]] static constexpr Matrix4 makeRotationY(U angle) noexcept
+        [[nodiscard]] static constexpr Mat4 makeRotationY(U angle) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1300,10 +1300,10 @@ namespace fgm
          *
          * @param[in] angle The rotation angle in radians.
          *
-         * @return A new @ref Matrix4 representing the linear rotation around z-axis.
+         * @return A new @ref Mat4 representing the linear rotation around z-axis.
          */
         template <std::floating_point U>
-        [[nodiscard]] static constexpr Matrix4 makeRotationZ(U angle) noexcept
+        [[nodiscard]] static constexpr Mat4 makeRotationZ(U angle) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1326,13 +1326,13 @@ namespace fgm
          * @param[in] angle The rotation angle in radians.
          * @param[in] axis  The axis of rotation. Must be a unit vector.
          *
-         * @return A new @ref Matrix4 representing the linear rotation around @p axis
+         * @return A new @ref Mat4 representing the linear rotation around @p axis
          *         promoted to the nearest floating point type.
          *
          * @relatedalso makeRotationNonNorm(U, const Vec3<T>&) // TODO:
          */
         template <std::floating_point U>
-        [[nodiscard]] static constexpr PromotedFloatMatrix4<T, U> makeRotation(U angle, const Vec3<T>& axis) noexcept
+        [[nodiscard]] static constexpr PromotedFloatMat4<T, U> makeRotation(U angle, const Vec3<T>& axis) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1357,13 +1357,13 @@ namespace fgm
         //  * @param[in] angle The rotation angle in radians.
         //  * @param[in] axis  The axis of rotation. Must be a unit vector.
         //  *
-        //  * @return A new @ref Matrix4 representing the linear rotation around @p axis
+        //  * @return A new @ref Mat4 representing the linear rotation around @p axis
         //  *         promoted to the nearest floating point type.
         //  *
         //  * @relatedalso makeRotation(U, const Vec3<T>&)
         //  */
         // template <std::floating_point U>
-        // [[nodiscard]] static constexpr PromotedFloatMatrix4<T, U> makeRotationNonNorm(U angle, const Vec3<T>& axis) noexcept
+        // [[nodiscard]] static constexpr PromotedFloatMat4<T, U> makeRotationNonNorm(U angle, const Vec3<T>& axis) noexcept
         //     requires StrictArithmetic<T>;
 
 
@@ -1372,9 +1372,9 @@ namespace fgm
          *
          * @param[in] scale The scale factor.
          *
-         * @return A new @ref Matrix4 representing the uniform scale.
+         * @return A new @ref Mat4 representing the uniform scale.
          */
-        [[nodiscard]] static constexpr Matrix4 makeScale(T scale) noexcept
+        [[nodiscard]] static constexpr Mat4 makeScale(T scale) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1385,9 +1385,9 @@ namespace fgm
          * @param[in] scaleY The scale factor in the y-direction.
          * @param[in] scaleZ The scale factor in the z-direction.
          *
-         * @return A new @ref Matrix4 representing the non-uniform scale.
+         * @return A new @ref Mat4 representing the non-uniform scale.
          */
-        [[nodiscard]] static constexpr Matrix4 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
+        [[nodiscard]] static constexpr Mat4 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1397,7 +1397,7 @@ namespace fgm
          * @param translation     The 3D translation vector.
          * @return A 4D affine transform matrix.
          */
-        [[nodiscard]] static constexpr Matrix4 makeAffine(const Matrix3<T>& linearTransform,
+        [[nodiscard]] static constexpr Mat4 makeAffine(const Mat3<T>& linearTransform,
                                                           const Vec3<T>& translation) noexcept;
 
 
@@ -1409,9 +1409,9 @@ namespace fgm
         //  * @param[in] reflectX A flag to whether reflect in the x-direction.
         //  * @param[in] reflectY A flag to whether reflect in the y-direction.
         //  *
-        //  * @return A new @ref Matrix4 representing the axis-aligned reflection.
+        //  * @return A new @ref Mat4 representing the axis-aligned reflection.
         //  */
-        // [[nodiscard]] static constexpr Matrix4 reflect(bool reflectX, bool reflectY) noexcept
+        // [[nodiscard]] static constexpr Mat4 reflect(bool reflectX, bool reflectY) noexcept
         //     requires StrictArithmetic<T>;
 
         /** @} */
@@ -1434,10 +1434,10 @@ namespace fgm
          *
          * @note Constrained to @ref StrictArithmetic types.
          */
-        static constexpr Matrix4 identity()
+        static constexpr Mat4 identity()
             requires fgm::StrictArithmetic<T>
         {
-            return Matrix4{ T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0),
+            return Mat4{ T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0),
                             T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1) };
         }
 
@@ -1447,10 +1447,10 @@ namespace fgm
          *
          * @note Constrained to @ref StrictArithmetic types.
          */
-        static constexpr Matrix4 zero()
+        static constexpr Mat4 zero()
             requires fgm::StrictArithmetic<T>
         {
-            return Matrix4{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0),
+            return Mat4{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0),
                             T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) };
         }
 
@@ -1475,14 +1475,14 @@ namespace fgm
      *                                   *
      *************************************/
 
-    using Mat4B   = Matrix4<int8_t>;   ///< Signed Byte (8-bit) matrix
-    using Mat4UB  = Matrix4<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
-    using Mat4I   = Matrix4<int32_t>;  ///< Signed Int (32-bit) matrix
-    using Mat4U   = Matrix4<uint32_t>; ///< Unsigned Int (32-bit) matrix
-    using Mat4F   = Matrix4<float>;    ///< Single Precision Floating Point (32-bit) matrix
-    using Mat4LL  = Matrix4<int64_t>;  ///< Signed Long Long (64-bit) matrix
-    using Mat4D   = Matrix4<double>;   ///< Double Precision Floating Point (64-bit) matrix
-    using Mat4ULL = Matrix4<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
+    using Mat4B   = Mat4<int8_t>;   ///< Signed Byte (8-bit) matrix
+    using Mat4UB  = Mat4<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
+    using Mat4I   = Mat4<int32_t>;  ///< Signed Int (32-bit) matrix
+    using Mat4U   = Mat4<uint32_t>; ///< Unsigned Int (32-bit) matrix
+    using Mat4F   = Mat4<float>;    ///< Single Precision Floating Point (32-bit) matrix
+    using Mat4LL  = Mat4<int64_t>;  ///< Signed Long Long (64-bit) matrix
+    using Mat4D   = Mat4<double>;   ///< Double Precision Floating Point (64-bit) matrix
+    using Mat4ULL = Mat4<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
 
     /** @} */
 
@@ -1502,7 +1502,7 @@ namespace fgm
     /**
      * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
      *
-     * @note Promotes the result to the wider type using @ref PromotedMatrix4<T, S>.
+     * @note Promotes the result to the wider type using @ref PromotedMat4<T, S>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
@@ -1510,10 +1510,10 @@ namespace fgm
      * @param[in] scalar The value to scale by.
      * @param[in] matrix The matrix to scale.
      *
-     * @return A new @ref Matrix4 scaled by @p scalar.
+     * @return A new @ref Mat4 scaled by @p scalar.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    [[nodiscard]] constexpr PromotedMatrix4<T, S> operator*(S scalar, const Matrix4<T>& matrix) noexcept;
+    [[nodiscard]] constexpr PromotedMat4<T, S> operator*(S scalar, const Mat4<T>& matrix) noexcept;
 
 
     /**
@@ -1547,7 +1547,7 @@ namespace fgm
      * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic S>
-    static constexpr PromotedVec4<T, S> operator*(const Vec4<T>& vec, const Matrix4<S>& matrix) noexcept;
+    static constexpr PromotedVec4<T, S> operator*(const Vec4<T>& vec, const Mat4<S>& matrix) noexcept;
 
 
     /**
@@ -1580,16 +1580,16 @@ namespace fgm
      * @return The passed-in @p Vec with the transformations applied.
      */
     template <StrictArithmetic T, StrictArithmetic U>
-    static constexpr Vec4<T>& operator*=(Vec4<T>& vec, const Matrix4<U>& matrix) noexcept;
+    static constexpr Vec4<T>& operator*=(Vec4<T>& vec, const Mat4<U>& matrix) noexcept;
 
     /** @} */
 
 
 
-    /** @brief Template deduction guide for Matrix4. */
+    /** @brief Template deduction guide for Mat4. */
     template <Arithmetic T, Arithmetic... Args>
-    Matrix4(T, Args...) -> Matrix4<T>;
+    Mat4(T, Args...) -> Mat4<T>;
 
 } // namespace fgm
 
-#include "Matrix4.tpp"
+#include "Mat4.tpp"

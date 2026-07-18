@@ -3,17 +3,17 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 17, 2026
  *
- * @brief Verify @ref fgm::Matrix2x3 scalar multiplication logic.
+ * @brief Verify @ref fgm::Mat2x3 scalar multiplication logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Matrix2x3TestSetup.h"
+#include "Mat2x3TestSetup.h"
 
 
 template <typename T>
-class Matrix2x3ScalarMultiplication: public ::testing::Test
+class Mat2x3ScalarMultiplication: public ::testing::Test
 {
 protected:
     fgm::Mat2x3<T> _mat;
@@ -34,9 +34,9 @@ protected:
                                  fgm::Vec2{ T(22), T(4) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Matrix2x3 scalar multiplication, parameterized by @ref SupportedArithmeticTypes.
+/** @brief Test fixture for @ref fgm::Mat2x3 scalar multiplication, parameterized by @ref SupportedArithmeticTypes.
  */
-TYPED_TEST_SUITE(Matrix2x3ScalarMultiplication, SupportedArithmeticTypes);
+TYPED_TEST_SUITE(Mat2x3ScalarMultiplication, SupportedArithmeticTypes);
 
 
 /**
@@ -85,7 +85,7 @@ namespace
  **************************************/
 
 /** @brief Verify that scalar multiplication by zero returns a zero matrix. */
-TEST(Matrix2x3ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
+TEST(Mat2x3ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 {
     const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
@@ -96,7 +96,7 @@ TEST(Matrix2x3ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 
 
 /** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Matrix2x3ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
+TEST(Mat2x3ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 {
     const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
@@ -107,7 +107,7 @@ TEST(Matrix2x3ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 
 
 /** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Matrix2x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
+TEST(Mat2x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
     const fgm::Mat2x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f };
     const fgm::Mat2x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f };
@@ -123,7 +123,7 @@ TEST(Matrix2x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
  * @brief Verify that the binary multiplication operator (matrix * scalar) perform an element-wise product
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Matrix2x3ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
+TYPED_TEST(Mat2x3ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
 {
     const fgm::Mat2x3 product = this->_mat * this->_scalar;
 
@@ -142,7 +142,7 @@ TYPED_TEST(Matrix2x3ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
  * @brief Verify that the binary multiplication operator (scalar * matrix) perform an element-wise product
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Matrix2x3ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
+TYPED_TEST(Mat2x3ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 {
     const fgm::Mat2x3 product = this->_scalar * this->_mat;
 
@@ -161,7 +161,7 @@ TYPED_TEST(Matrix2x3ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
  * @brief Verify that the compound multiplication assignment operator (scalar) performs an element-wise product
  *        and mutates the matrix in-place.
  */
-TYPED_TEST(Matrix2x3ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScaled)
+TYPED_TEST(Mat2x3ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScaled)
 {
     this->_mat *= this->_scalar;
 
@@ -180,7 +180,7 @@ TYPED_TEST(Matrix2x3ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixS
  * @brief Verify that the binary multiplication operator (scalar) perform automatic type promotion
  *        to the wider numeric type.
  */
-TYPED_TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
+TYPED_TEST(Mat2x3ScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
 {
     const double scalar = 2.123456789123456;
 
@@ -194,7 +194,7 @@ TYPED_TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationPromotesT
  * @brief Verify that the compound multiplication assignment operator (scalar) maintains the destination type and
  *        perform an implicit cast.
  */
-TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
+TEST(Mat2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
     fgm::Mat2x3 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f);
     const double scalar = 5.0;
@@ -208,7 +208,7 @@ TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesN
  * @brief Verify that the compound multiplication operator (scalar) for mixed type
  *        ensure minimal precision loss.
  */
-TEST(Matrix2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+TEST(Mat2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
     fgm::Mat2x3 mat(3, -1, 10, 5, 50, 12);
     const double scalar = 2.5;

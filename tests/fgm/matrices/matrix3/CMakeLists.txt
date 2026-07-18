@@ -1,7 +1,7 @@
-add_library(Matrix3Tests OBJECT)
+add_library(Mat3Tests OBJECT)
 
 target_sources(
-        Matrix3Tests PRIVATE
+        Mat3Tests PRIVATE
         AccessAndMutationTests.cpp
         AdditionTests.cpp
         AliasTests.cpp
@@ -21,14 +21,14 @@ target_sources(
 )
 
 target_include_directories(
-        Matrix3Tests PRIVATE
+        Mat3Tests PRIVATE
         ${FGM_TEST_ROOT_DIR}/include
 )
 
 add_subdirectory(TransformationFactoryTests)
 
 target_link_libraries(
-        Matrix3Tests PRIVATE
+        Mat3Tests PRIVATE
         FGM
         GTest::gtest
         GTest::gtest_main

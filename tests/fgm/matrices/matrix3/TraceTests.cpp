@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 05, 2026
  *
- * @brief Verify @ref fgm::Matrix3 trace operation logic.
+ * @brief Verify @ref fgm::Mat3 trace operation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,10 +14,10 @@
 
 
 template <typename T>
-class Matrix3Trace: public ::testing::Test
+class Mat3Trace: public ::testing::Test
 {
 protected:
-    fgm::Matrix3<T> _mat;
+    fgm::Mat3<T> _mat;
     T _expectedSum;
 
     void SetUp() override
@@ -28,8 +28,8 @@ protected:
         _expectedSum = T(15.49531580336582);
     }
 };
-/** @brief Test fixtures for @ref fgm::Matrix3 trace operation, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix3Trace, SupportedArithmeticTypes);
+/** @brief Test fixtures for @ref fgm::Mat3 trace operation, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Mat3Trace, SupportedArithmeticTypes);
 
 
 
@@ -41,21 +41,21 @@ TYPED_TEST_SUITE(Matrix3Trace, SupportedArithmeticTypes);
 /** @brief Verify that the matrix trace operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix3 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12);
+    constexpr fgm::Mat3 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12);
     static_assert(MAT.trace() == 20);                   // Member function
-    static_assert(fgm::Matrix3<int>::trace(MAT) == 20); // Static function
+    static_assert(fgm::Mat3<int>::trace(MAT) == 20); // Static function
 
 } // namespace
 
 
 /** @brief Verify that trace of a 2D matrix returns the sum of diagonal elements. */
-TYPED_TEST(Matrix3Trace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
+TYPED_TEST(Mat3Trace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
 
 
 /** @brief Verify that trace of a 2D matrix using static variant returns the sum of diagonal elements. */
-TYPED_TEST(Matrix3Trace, StaticWrapper_ReturnsSumOfDiagonalElements)
+TYPED_TEST(Mat3Trace, StaticWrapper_ReturnsSumOfDiagonalElements)
 {
-    EXPECT_MAG_EQ(this->_expectedSum, fgm::Matrix3<TypeParam>::trace(this->_mat));
+    EXPECT_MAG_EQ(this->_expectedSum, fgm::Mat3<TypeParam>::trace(this->_mat));
 }
 
 /** @} */

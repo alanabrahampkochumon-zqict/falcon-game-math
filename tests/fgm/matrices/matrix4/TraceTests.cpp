@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 07, 2026
  *
- * @brief Verify @ref fgm::Matrix4 trace operation logic.
+ * @brief Verify @ref fgm::Mat4 trace operation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,10 +14,10 @@
 
 
 template <typename T>
-class Matrix4Trace: public ::testing::Test
+class Mat4Trace: public ::testing::Test
 {
 protected:
-    fgm::Matrix4<T> _mat;
+    fgm::Mat4<T> _mat;
     T _expectedSum;
 
     void SetUp() override
@@ -31,8 +31,8 @@ protected:
         _expectedSum = T(20.63514801571382);
     }
 };
-/** @brief Test fixtures for @ref fgm::Matrix4 trace operation, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Matrix4Trace, SupportedArithmeticTypes);
+/** @brief Test fixtures for @ref fgm::Mat4 trace operation, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Mat4Trace, SupportedArithmeticTypes);
 
 
 
@@ -44,21 +44,21 @@ TYPED_TEST_SUITE(Matrix4Trace, SupportedArithmeticTypes);
 /** @brief Verify that the matrix trace operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Matrix4 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19);
+    constexpr fgm::Mat4 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19);
     static_assert(MAT.trace() == 48);                   // Member function
-    static_assert(fgm::Matrix4<int>::trace(MAT) == 48); // Static function
+    static_assert(fgm::Mat4<int>::trace(MAT) == 48); // Static function
 
 } // namespace
 
 
 /** @brief Verify that trace of a 2D matrix returns the sum of diagonal elements. */
-TYPED_TEST(Matrix4Trace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
+TYPED_TEST(Mat4Trace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
 
 
 /** @brief Verify that trace of a 2D matrix using static variant returns the sum of diagonal elements. */
-TYPED_TEST(Matrix4Trace, StaticWrapper_ReturnsSumOfDiagonalElements)
+TYPED_TEST(Mat4Trace, StaticWrapper_ReturnsSumOfDiagonalElements)
 {
-    EXPECT_MAG_EQ(this->_expectedSum, fgm::Matrix4<TypeParam>::trace(this->_mat));
+    EXPECT_MAG_EQ(this->_expectedSum, fgm::Mat4<TypeParam>::trace(this->_mat));
 }
 
 /** @} */

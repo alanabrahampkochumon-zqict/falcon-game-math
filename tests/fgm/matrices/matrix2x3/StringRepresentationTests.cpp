@@ -9,7 +9,7 @@
  */
 
 
-#include "Matrix2x3TestSetup.h"
+#include "Mat2x3TestSetup.h"
 
 #include <sstream>
 

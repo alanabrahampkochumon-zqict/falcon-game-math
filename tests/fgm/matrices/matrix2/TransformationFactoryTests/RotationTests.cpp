@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 08, 2026
  *
- * @brief Verify @ref fgm::Matrix2 rotation factory logic.
+ * @brief Verify @ref fgm::Mat2 rotation factory logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -19,14 +19,14 @@
  */
 
 template <typename T>
-class Matrix2Rotation: public ::testing::Test
+class Mat2Rotation: public ::testing::Test
 {
 protected:
     using FP_T  = T::first_type;  // FP_T -> Floating-point Type
     using COM_T = T::second_type; // COM_T -> Common Type
 
     FP_T _angle;
-    fgm::Matrix2<COM_T> _expectedMat;
+    fgm::Mat2<COM_T> _expectedMat;
 
 
     void SetUp() override
@@ -40,18 +40,18 @@ protected:
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Matrix2 rotation factory, parameterized
+ * @brief Test fixture for @ref fgm::Mat2 rotation factory, parameterized
  *        @ref SupportedSignedArithmeticFloatingTypePair
  */
-TYPED_TEST_SUITE(Matrix2Rotation, SupportedSignedArithmeticFloatingTypePair);
+TYPED_TEST_SUITE(Mat2Rotation, SupportedSignedArithmeticFloatingTypePair);
 
 
 template <typename T>
-class Matrix2FloatRotation: public testing::Test
+class Mat2FloatRotation: public testing::Test
 {
 protected:
     T _angle;
-    fgm::Matrix2<T> _expectedMat;
+    fgm::Mat2<T> _expectedMat;
 
 
     void SetUp() override
@@ -72,17 +72,17 @@ protected:
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Matrix2 rotation factory, parameterized
+ * @brief Test fixture for @ref fgm::Mat2 rotation factory, parameterized
  *        @ref SupportedFloatingPointTypes
  */
-TYPED_TEST_SUITE(Matrix2FloatRotation, SupportedFloatingPointTypes);
+TYPED_TEST_SUITE(Mat2FloatRotation, SupportedFloatingPointTypes);
 
 namespace
 {
 // TODO: Add static tests
 #if __cplusplus >= 202603L
     // Rotation matrix for 180° or 2π radians
-    constexpr auto ROTATION_MAT = fgm::Matrix2<int>::makeRotation(fgm::constants::PI<float>);
+    constexpr auto ROTATION_MAT = fgm::Mat2<int>::makeRotation(fgm::constants::PI<float>);
     static_assert(ROTATION_MAT(0, 0) == 0);
     static_assert(ROTATION_MAT(0, 1) == -1);
     static_assert(ROTATION_MAT(1, 0) == 1);
@@ -98,13 +98,13 @@ namespace
  **************************************/
 
 /** @brief Verify that rotation transformation factory returns a rotation matrix. */
-TYPED_TEST(Matrix2Rotation, ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<typename TypeParam::first_type>::makeRotation(this->_angle)); }
+TYPED_TEST(Mat2Rotation, ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<typename TypeParam::first_type>::makeRotation(this->_angle)); }
 
 
 /** @brief Verify that rotation transformation factory returns a rotation matrix with non-integral values. */
-TYPED_TEST(Matrix2FloatRotation, ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Matrix2<TypeParam>::makeRotation(this->_angle)); }
+TYPED_TEST(Mat2FloatRotation, ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<TypeParam>::makeRotation(this->_angle)); }
 
 
 /** @} */

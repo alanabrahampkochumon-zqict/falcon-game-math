@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 08, 2026
  *
- * @brief Verify @ref fgm::Matrix3 rotation factory logic.
+ * @brief Verify @ref fgm::Mat3 rotation factory logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,14 +20,14 @@
 
 
 template <typename T>
-class Matrix3Rotation: public testing::Test
+class Mat3Rotation: public testing::Test
 {
 protected:
     using FP_T  = T::first_type;  // FP_T -> Floating-point Type
     using COM_T = T::second_type; // COM_T -> Common Type
 
     FP_T _angle;
-    fgm::Matrix3<COM_T> _expectedMatX, _expectedMatY, _expectedMatZ;
+    fgm::Mat3<COM_T> _expectedMatX, _expectedMatY, _expectedMatZ;
 
 
     void SetUp() override
@@ -64,19 +64,19 @@ protected:
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Matrix3 rotation factory, parameterized
+ * @brief Test fixture for @ref fgm::Mat3 rotation factory, parameterized
  *        @ref SupportedSignedArithmeticFloatingTypePair
  */
-TYPED_TEST_SUITE(Matrix3Rotation, SupportedSignedArithmeticFloatingTypePair);
+TYPED_TEST_SUITE(Mat3Rotation, SupportedSignedArithmeticFloatingTypePair);
 
 
 
 template <typename T>
-class Matrix3FloatRotation: public testing::Test
+class Mat3FloatRotation: public testing::Test
 {
 protected:
     T _angle;
-    fgm::Matrix3<T> _expectedMatX, _expectedMatY, _expectedMatZ, _expectedMatXYZ;
+    fgm::Mat3<T> _expectedMatX, _expectedMatY, _expectedMatZ, _expectedMatXYZ;
 
 
     void SetUp() override
@@ -134,17 +134,17 @@ protected:
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Matrix3 rotation factory, parameterized
+ * @brief Test fixture for @ref fgm::Mat3 rotation factory, parameterized
  *        @ref SupportedFloatingPointTypes
  */
-TYPED_TEST_SUITE(Matrix3FloatRotation, SupportedFloatingPointTypes);
+TYPED_TEST_SUITE(Mat3FloatRotation, SupportedFloatingPointTypes);
 
 namespace
 {
 // TODO: Add static tests after making trig functions constexpr
 #if __cplusplus >= 202603L // TODO: Add static tests after making trig functions constexpr
     // Rotation matrix for 180° or 2π radians
-    constexpr auto ROTATION_MAT = fgm::Matrix3<int>::rotate(fgm::constants::PI<float>);
+    constexpr auto ROTATION_MAT = fgm::Mat3<int>::rotate(fgm::constants::PI<float>);
     static_assert(ROTATION_MAT(0, 0) == 1);
     static_assert(ROTATION_MAT(0, 1) == 0);
     static_assert(ROTATION_MAT(0, 2) == 0);
@@ -165,32 +165,32 @@ namespace
  **************************************/
 
 /** @brief Verify that rotation transformation factory for x returns a rotation matrix. */
-TYPED_TEST(Matrix3Rotation, X_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Matrix3<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
+TYPED_TEST(Mat3Rotation, X_ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat3<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
 
 
 /** @brief Verify that rotation transformation factory for x returns a rotation matrix for non-integral values. */
-TYPED_TEST(Matrix3FloatRotation, X_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Matrix3<TypeParam>::makeRotationX(this->_angle)); }
+TYPED_TEST(Mat3FloatRotation, X_ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat3<TypeParam>::makeRotationX(this->_angle)); }
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
-TYPED_TEST(Matrix3Rotation, Y_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Matrix3<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
+TYPED_TEST(Mat3Rotation, Y_ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat3<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix for non-integral values. */
-TYPED_TEST(Matrix3FloatRotation, Y_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Matrix3<TypeParam>::makeRotationY(this->_angle)); }
+TYPED_TEST(Mat3FloatRotation, Y_ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat3<TypeParam>::makeRotationY(this->_angle)); }
 
 
 /** @brief Verify that rotation transformation factory for z returns a rotation matrix. */
-TYPED_TEST(Matrix3Rotation, Z_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Matrix3<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
+TYPED_TEST(Mat3Rotation, Z_ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat3<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
 
 
 /** @brief Verify that rotation transformation factory for z returns a rotation matrix for non-integral values. */
-TYPED_TEST(Matrix3FloatRotation, Z_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Matrix3<TypeParam>::makeRotationZ(this->_angle)); }
+TYPED_TEST(Mat3FloatRotation, Z_ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat3<TypeParam>::makeRotationZ(this->_angle)); }
 
 /** @} */

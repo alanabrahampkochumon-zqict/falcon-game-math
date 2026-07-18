@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 01, 2026
  *
- * @brief Verify @ref fgm::Matrix4 initialization.
+ * @brief Verify @ref fgm::Mat4 initialization.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -14,7 +14,7 @@
 
 
 template <typename T>
-class Matrix4Initialization: public ::testing::Test
+class Mat4Initialization: public ::testing::Test
 {
 protected:
     std::vector<T> _elements;
@@ -38,8 +38,8 @@ protected:
         _diagonal3        = T(11);
     }
 };
-/** Test fixture for @ref fgm::Matrix4 initialization, parameterized by @ref SupportedTypes. */
-TYPED_TEST_SUITE(Matrix4Initialization, SupportedTypes);
+/** Test fixture for @ref fgm::Mat4 initialization, parameterized by @ref SupportedTypes. */
+TYPED_TEST_SUITE(Mat4Initialization, SupportedTypes);
 
 
 
@@ -58,7 +58,7 @@ TYPED_TEST_SUITE(Matrix4Initialization, SupportedTypes);
 namespace
 {
     // Verify that the matrix can be initialized at compile time using scalar values.
-    constexpr fgm::Matrix4 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+    constexpr fgm::Mat4 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
     static_assert(MAT1(0, 0) == 1);
     static_assert(MAT1(0, 1) == 2);
     static_assert(MAT1(0, 2) == 3);
@@ -78,7 +78,7 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Matrix4 MAT2(fgm::Vec4(1, 5, 9, 13), fgm::Vec4(2, 6, 10, 14), fgm::Vec4(3, 7, 11, 15),
+    constexpr fgm::Mat4 MAT2(fgm::Vec4(1, 5, 9, 13), fgm::Vec4(2, 6, 10, 14), fgm::Vec4(3, 7, 11, 15),
                                 fgm::Vec4(4, 8, 12, 16));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
@@ -98,7 +98,7 @@ namespace
     static_assert(MAT2(3, 3) == 16);
 
     // Verify that the matrix can be initialized at compile time using diagonals.
-    constexpr fgm::Matrix4 MAT3(3, 4, 5, 6);
+    constexpr fgm::Mat4 MAT3(3, 4, 5, 6);
     static_assert(MAT3(0, 0) == 3);
     static_assert(MAT3(0, 1) == 0);
     static_assert(MAT3(0, 2) == 0);
@@ -118,7 +118,7 @@ namespace
 
 
     // Verify that the matrix can be initialized at compile time using value initialization.
-    constexpr fgm::Matrix4<int> MAT4{};
+    constexpr fgm::Mat4<int> MAT4{};
     static_assert(MAT4(0, 0) == 0);
     static_assert(MAT4(0, 1) == 0);
     static_assert(MAT4(0, 2) == 0);
@@ -147,18 +147,18 @@ namespace
  **************************************/
 
 /** @brief Verify that the default constructor initializes an identity matrix. */
-TYPED_TEST(Matrix4Initialization, EmptyConstructorReturnsIdentityMatrix)
+TYPED_TEST(Mat4Initialization, EmptyConstructorReturnsIdentityMatrix)
 {
-    constexpr fgm::Matrix4<TypeParam> matrix{};
+    constexpr fgm::Mat4<TypeParam> matrix{};
 
     EXPECT_MAT_ZERO(matrix);
 }
 
 
 /** @brief Verify that the parameterized constructor can initialize matrix with elements. */
-TYPED_TEST(Matrix4Initialization, ParameterizedConstructorInitializesMatrixWithElements)
+TYPED_TEST(Mat4Initialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
-    const fgm::Matrix4<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
+    const fgm::Mat4<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
                                          this->_elements[4], this->_elements[5], this->_elements[6], this->_elements[7],
                                          this->_elements[8], this->_elements[9], this->_elements[10],
                                          this->_elements[11], this->_elements[12], this->_elements[13],
@@ -168,25 +168,25 @@ TYPED_TEST(Matrix4Initialization, ParameterizedConstructorInitializesMatrixWithE
 
 
 /** @brief Verify that the parameterized constructor can initialize matrix with vectors. */
-TYPED_TEST(Matrix4Initialization, ParameterizedConstructorInitializesMatrixWithVectors)
+TYPED_TEST(Mat4Initialization, ParameterizedConstructorInitializesMatrixWithVectors)
 {
-    const fgm::Matrix4<TypeParam> matrix(this->_col0, this->_col1, this->_col2, this->_col3);
+    const fgm::Mat4<TypeParam> matrix(this->_col0, this->_col1, this->_col2, this->_col3);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
 
 /** @brief Verify that the parameterized constructor can initialize a diagonal matrix. */
-TYPED_TEST(Matrix4Initialization, ParameterizedConstructorInitializesDiagonalMatrix)
+TYPED_TEST(Mat4Initialization, ParameterizedConstructorInitializesDiagonalMatrix)
 {
-    const fgm::Matrix4<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2, this->_diagonal3);
+    const fgm::Mat4<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2, this->_diagonal3);
     EXPECT_MAT_CONTAINS(this->_diagonalElements, matrix);
 }
 
 
 /** @brief Verify that a matrix can be initialized with implicit braced initialization. */
-TYPED_TEST(Matrix4Initialization, CanBeConstructedWithBracedInitialization)
+TYPED_TEST(Mat4Initialization, CanBeConstructedWithBracedInitialization)
 {
-    const fgm::Matrix4<TypeParam> matrix = { { TypeParam(1), TypeParam(5), TypeParam(9), TypeParam(13) },
+    const fgm::Mat4<TypeParam> matrix = { { TypeParam(1), TypeParam(5), TypeParam(9), TypeParam(13) },
                                              { TypeParam(2), TypeParam(6), TypeParam(10), TypeParam(14) },
                                              { TypeParam(3), TypeParam(7), TypeParam(11), TypeParam(15) },
                                              { TypeParam(4), TypeParam(8), TypeParam(12), TypeParam(16) } };

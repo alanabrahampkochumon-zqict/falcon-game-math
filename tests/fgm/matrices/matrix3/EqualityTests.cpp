@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Matrix3 equality operator (==, !=) and their functional counterpart's
+ * @brief Verify @ref fgm::Mat3 equality operator (==, !=) and their functional counterpart's
  *        (eq, neq, allEq, anyNeq) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -21,12 +21,12 @@ constexpr auto INF   = fgm::constants::INFINITY_F;
 
 
 template <typename T>
-class Matrix3Equality: public ::testing::Test
+class Mat3Equality: public ::testing::Test
 {
 protected:
-    fgm::Matrix3<T> _eqMatA;
-    fgm::Matrix3<T> _eqMatB;
-    fgm::Matrix3<T> _dissimilarMat;
+    fgm::Mat3<T> _eqMatA;
+    fgm::Mat3<T> _eqMatB;
+    fgm::Mat3<T> _dissimilarMat;
 
 
     void SetUp() override
@@ -43,10 +43,10 @@ protected:
     }
 };
 /**
- * @brief Test fixture for @ref fgm::Matrix3 equality and inequality checks, parameterized by
+ * @brief Test fixture for @ref fgm::Mat3 equality and inequality checks, parameterized by
  *        @ref SupportedArithmeticTypes.
  */
-TYPED_TEST_SUITE(Matrix3Equality, SupportedArithmeticTypes);
+TYPED_TEST_SUITE(Mat3Equality, SupportedArithmeticTypes);
 
 
 
@@ -64,12 +64,12 @@ TYPED_TEST_SUITE(Matrix3Equality, SupportedArithmeticTypes);
 namespace
 {
 
-    constexpr fgm::Matrix3 MAT1(1, 2, 3);
-    constexpr fgm::Matrix3 MAT2(1, 2, 3);
-    constexpr fgm::Matrix3 MAT3(4, 2, 2);
-    constexpr fgm::Matrix3 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+    constexpr fgm::Mat3 MAT1(1, 2, 3);
+    constexpr fgm::Mat3 MAT2(1, 2, 3);
+    constexpr fgm::Mat3 MAT3(4, 2, 2);
+    constexpr fgm::Mat3 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                     -fgm::constants::INFINITY_F);
-    constexpr fgm::Matrix3 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+    constexpr fgm::Mat3 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
                                     -fgm::constants::INFINITY_F);
 
 
@@ -83,9 +83,9 @@ namespace
 
 
         // Static functions
-        static_assert(fgm::Matrix3<int>::allEq(MAT1, MAT2) == true);
-        static_assert(fgm::Matrix3<int>::allEq(MAT1, MAT3) == false);
-        static_assert(fgm::Matrix3<float>::allEq(INF_MAT1, INF_MAT2) == true);
+        static_assert(fgm::Mat3<int>::allEq(MAT1, MAT2) == true);
+        static_assert(fgm::Mat3<int>::allEq(MAT1, MAT3) == false);
+        static_assert(fgm::Mat3<float>::allEq(INF_MAT1, INF_MAT2) == true);
 
     } // namespace
 
@@ -99,8 +99,8 @@ namespace
  *                                    *
  **************************************/
 
-/** @brief Verify that @ref fgm::Matrix3::allEq returns  `true`  for identical matrices. */
-TYPED_TEST(Matrix3Equality, Equality_IdenticalMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Mat3::allEq returns  `true`  for identical matrices. */
+TYPED_TEST(Mat3Equality, Equality_IdenticalMatricesReturnTrue)
 {
     const bool equality = this->_eqMatA.allEq(this->_eqMatB);
 
@@ -108,8 +108,8 @@ TYPED_TEST(Matrix3Equality, Equality_IdenticalMatricesReturnTrue)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix3::allEq returns `false` if any component differ. */
-TYPED_TEST(Matrix3Equality, Equality_DifferentMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Mat3::allEq returns `false` if any component differ. */
+TYPED_TEST(Mat3Equality, Equality_DifferentMatricesReturnFalse)
 {
     const bool equality = this->_eqMatA.allEq(this->_dissimilarMat);
 
@@ -117,29 +117,29 @@ TYPED_TEST(Matrix3Equality, Equality_DifferentMatricesReturnFalse)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Matrix3::allEq for identical matrices. */
-TYPED_TEST(Matrix3Equality, StaticWrapper_Equality_IdenticalMatricesReturnTrue)
+/** @brief Verify that the static variant of @ref fgm::Mat3::allEq for identical matrices. */
+TYPED_TEST(Mat3Equality, StaticWrapper_Equality_IdenticalMatricesReturnTrue)
 {
-    const bool equality = fgm::Matrix3<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
+    const bool equality = fgm::Mat3<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
 
     EXPECT_TRUE(equality);
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Matrix3::allEq for different matrices. */
-TYPED_TEST(Matrix3Equality, StaticWrapper_Equality_DifferentMatricesReturnFalse)
+/** @brief Verify that the static variant of @ref fgm::Mat3::allEq for different matrices. */
+TYPED_TEST(Mat3Equality, StaticWrapper_Equality_DifferentMatricesReturnFalse)
 {
-    const bool equality = fgm::Matrix3<TypeParam>::allEq(this->_eqMatA, this->_dissimilarMat);
+    const bool equality = fgm::Mat3<TypeParam>::allEq(this->_eqMatA, this->_dissimilarMat);
 
     EXPECT_FALSE(equality);
 }
 
 
-/** @brief Verify that @ref fgm::Matrix3::allEq follows IEEE 754 for NaN comparisons. */
-TEST(Matrix3Equality, NanEqualityReturnsFalse)
+/** @brief Verify that @ref fgm::Mat3::allEq follows IEEE 754 for NaN comparisons. */
+TEST(Mat3Equality, NanEqualityReturnsFalse)
 {
-    const fgm::Matrix3 matA(NAN_F, NAN_F, NAN_F);
-    const fgm::Matrix3 matB(1.0f, -5.88874789f, 0.888749f);
+    const fgm::Mat3 matA(NAN_F, NAN_F, NAN_F);
+    const fgm::Mat3 matB(1.0f, -5.88874789f, 0.888749f);
 
     const bool equality = matA.allEq(matB);
 
@@ -147,34 +147,11 @@ TEST(Matrix3Equality, NanEqualityReturnsFalse)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix3::allEq follows IEEE 754 for INFINITY comparisons. */
-TEST(Matrix3Equality, InfinityEquality_IdenticalMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Mat3::allEq follows IEEE 754 for INFINITY comparisons. */
+TEST(Mat3Equality, InfinityEquality_IdenticalMatricesReturnTrue)
 {
-    const fgm::Matrix3 matA(INF, -INF, INF);
-    const fgm::Matrix3 matB(INF, -INF, INF);
-
-    const bool equality = matA.allEq(matB);
-
-    EXPECT_TRUE(equality);
-}
-
-
-/** @brief Verify that @ref fgm::Matrix3::allEq follows IEEE 754 for INFINITY comparisons. */
-TEST(Matrix3Equality, InfinityEquality_DifferentMatricesReturnFalse)
-{
-    const fgm::Matrix3 matA(INF, -INF, INF);
-    const fgm::Matrix3 matB(-INF, -INF, INF);
-
-    const bool equality = matA.allEq(matB);
-
-    EXPECT_FALSE(equality);
-}
-
-/** @brief Verify that @ref fgm::Matrix3::allEq works for different vector types with identical components. */
-TYPED_TEST(Matrix3Equality, MixedType_Equality_IdenticalMatricesReturnTrue)
-{
-    const fgm::Matrix3 matA(1, 2, 3);
-    const fgm::Matrix3 matB(1.0, 2.0, 3.0);
+    const fgm::Mat3 matA(INF, -INF, INF);
+    const fgm::Mat3 matB(INF, -INF, INF);
 
     const bool equality = matA.allEq(matB);
 
@@ -182,11 +159,34 @@ TYPED_TEST(Matrix3Equality, MixedType_Equality_IdenticalMatricesReturnTrue)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix3::allEq works for different vector types with different components. */
-TYPED_TEST(Matrix3Equality, MixedType_Equality_DifferentMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Mat3::allEq follows IEEE 754 for INFINITY comparisons. */
+TEST(Mat3Equality, InfinityEquality_DifferentMatricesReturnFalse)
 {
-    const fgm::Matrix3 matA(5, 6, 7);
-    const fgm::Matrix3 matB(1.0, 2.0, 3.0);
+    const fgm::Mat3 matA(INF, -INF, INF);
+    const fgm::Mat3 matB(-INF, -INF, INF);
+
+    const bool equality = matA.allEq(matB);
+
+    EXPECT_FALSE(equality);
+}
+
+/** @brief Verify that @ref fgm::Mat3::allEq works for different vector types with identical components. */
+TYPED_TEST(Mat3Equality, MixedType_Equality_IdenticalMatricesReturnTrue)
+{
+    const fgm::Mat3 matA(1, 2, 3);
+    const fgm::Mat3 matB(1.0, 2.0, 3.0);
+
+    const bool equality = matA.allEq(matB);
+
+    EXPECT_TRUE(equality);
+}
+
+
+/** @brief Verify that @ref fgm::Mat3::allEq works for different vector types with different components. */
+TYPED_TEST(Mat3Equality, MixedType_Equality_DifferentMatricesReturnFalse)
+{
+    const fgm::Mat3 matA(5, 6, 7);
+    const fgm::Mat3 matB(1.0, 2.0, 3.0);
 
     const bool equality = matA.allEq(matB);
 
@@ -196,7 +196,7 @@ TYPED_TEST(Matrix3Equality, MixedType_Equality_DifferentMatricesReturnFalse)
 
 
 /** @brief Verify that the equality operator returns `true` for identical matrices. */
-TYPED_TEST(Matrix3Equality, EqualityOperator_IdenticalMatricesReturnTrue)
+TYPED_TEST(Mat3Equality, EqualityOperator_IdenticalMatricesReturnTrue)
 {
     const bool equality = this->_eqMatA == this->_eqMatB;
 
@@ -206,7 +206,7 @@ TYPED_TEST(Matrix3Equality, EqualityOperator_IdenticalMatricesReturnTrue)
 
 
 /** @brief Verify that the equality operator returns `false` if any component differ. */
-TYPED_TEST(Matrix3Equality, EqualityOperator_DifferentMatricesReturnFalse)
+TYPED_TEST(Mat3Equality, EqualityOperator_DifferentMatricesReturnFalse)
 {
     const bool equality = this->_eqMatA == this->_dissimilarMat;
 
@@ -215,10 +215,10 @@ TYPED_TEST(Matrix3Equality, EqualityOperator_DifferentMatricesReturnFalse)
 
 
 /** @brief Verify that the equality operator works for bool matrix with identical components. */
-TEST(Matrix3Equality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
+TEST(Mat3Equality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
 {
-    const fgm::Matrix3 matA(true, false, true);
-    const fgm::Matrix3 matB(true, false, true);
+    const fgm::Mat3 matA(true, false, true);
+    const fgm::Mat3 matB(true, false, true);
 
     const bool equality = matA == matB;
 
@@ -227,10 +227,10 @@ TEST(Matrix3Equality, EqualityOperator_IdenticalBooleanMatricesReturnTrue)
 
 
 /** @brief Verify that the equality operator works for bool matrix with different components. */
-TEST(Matrix3Equality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
+TEST(Mat3Equality, EqualityOperator_DifferentBooleanMatricesReturnFalse)
 {
-    const fgm::Matrix3 matA(true, false, false);
-    const fgm::Matrix3 matB(true, true, false);
+    const fgm::Mat3 matA(true, false, false);
+    const fgm::Mat3 matB(true, true, false);
 
     const bool equality = matA == matB;
 
@@ -262,9 +262,9 @@ namespace
 
 
     // Static functions
-    static_assert(fgm::Matrix3<int>::anyNeq(MAT1, MAT2) == false);
-    static_assert(fgm::Matrix3<int>::anyNeq(MAT1, MAT3) == true);
-    static_assert(fgm::Matrix3<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
+    static_assert(fgm::Mat3<int>::anyNeq(MAT1, MAT2) == false);
+    static_assert(fgm::Mat3<int>::anyNeq(MAT1, MAT3) == true);
+    static_assert(fgm::Mat3<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
 
 } // namespace
 
@@ -276,8 +276,8 @@ namespace
  *                                    *
  **************************************/
 
-/** @brief Verify that @ref fgm::Matrix3::anyNeq returns `false` for identical matrices. */
-TYPED_TEST(Matrix3Equality, Inequality_IdenticalMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Mat3::anyNeq returns `false` for identical matrices. */
+TYPED_TEST(Mat3Equality, Inequality_IdenticalMatricesReturnFalse)
 {
     const bool inequality = this->_eqMatA.anyNeq(this->_eqMatB);
 
@@ -285,8 +285,8 @@ TYPED_TEST(Matrix3Equality, Inequality_IdenticalMatricesReturnFalse)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix3::anyNeq returns `true` if any component differ. */
-TYPED_TEST(Matrix3Equality, Inequality_DifferentMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Mat3::anyNeq returns `true` if any component differ. */
+TYPED_TEST(Mat3Equality, Inequality_DifferentMatricesReturnTrue)
 {
     const bool inequality = this->_eqMatA.anyNeq(this->_dissimilarMat);
 
@@ -294,53 +294,29 @@ TYPED_TEST(Matrix3Equality, Inequality_DifferentMatricesReturnTrue)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Matrix3::anyNeq for identical matrices. */
-TYPED_TEST(Matrix3Equality, StaticWrapper_Inequality_IdenticalMatricesReturnFalse)
+/** @brief Verify that the static variant of @ref fgm::Mat3::anyNeq for identical matrices. */
+TYPED_TEST(Mat3Equality, StaticWrapper_Inequality_IdenticalMatricesReturnFalse)
 {
-    const bool inequality = fgm::Matrix3<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
+    const bool inequality = fgm::Mat3<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
 
     EXPECT_FALSE(inequality);
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Matrix3::anyNeq for different matrices. */
-TYPED_TEST(Matrix3Equality, StaticWrapper_Inequality_DifferentMatricesReturnTrue)
+/** @brief Verify that the static variant of @ref fgm::Mat3::anyNeq for different matrices. */
+TYPED_TEST(Mat3Equality, StaticWrapper_Inequality_DifferentMatricesReturnTrue)
 {
-    const bool inequality = fgm::Matrix3<TypeParam>::anyNeq(this->_eqMatA, this->_dissimilarMat);
+    const bool inequality = fgm::Mat3<TypeParam>::anyNeq(this->_eqMatA, this->_dissimilarMat);
 
     EXPECT_TRUE(inequality);
 }
 
 
-/** @brief Verify that @ref fgm::Matrix3::anyNeq follows IEEE 754 for NaN comparisons. */
-TEST(Matrix3Equality, NanInequalityReturnsTrue)
+/** @brief Verify that @ref fgm::Mat3::anyNeq follows IEEE 754 for NaN comparisons. */
+TEST(Mat3Equality, NanInequalityReturnsTrue)
 {
-    const fgm::Matrix3 matA(NAN_F, NAN_F, NAN_F);
-    const fgm::Matrix3 matB(1.0f, INF, -INF);
-
-    const bool inequality = matA.anyNeq(matB);
-
-    EXPECT_TRUE(inequality);
-}
-
-
-/** @brief Verify that @ref fgm::Matrix3::anyNeq follows IEEE 754 for INFINITY comparisons. */
-TEST(Matrix3Equality, InfinityInequality_IdenticalMatricesReturnFalse)
-{
-    const fgm::Matrix3 matA(INF, -INF, INF);
-    const fgm::Matrix3 matB(INF, -INF, INF);
-
-    const bool inequality = matA.anyNeq(matB);
-
-    EXPECT_FALSE(inequality);
-}
-
-
-/** @brief Verify that @ref fgm::Matrix3::anyNeq follows IEEE 754 for INFINITY comparisons. */
-TEST(Matrix3Equality, InfinityInequality_DifferentMatricesReturnTrue)
-{
-    const fgm::Matrix3 matA(-INF, INF, INF);
-    const fgm::Matrix3 matB(INF, INF, -INF);
+    const fgm::Mat3 matA(NAN_F, NAN_F, NAN_F);
+    const fgm::Mat3 matB(1.0f, INF, -INF);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -348,11 +324,11 @@ TEST(Matrix3Equality, InfinityInequality_DifferentMatricesReturnTrue)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix3::anyNeq works for different vector types with identical components. */
-TYPED_TEST(Matrix3Equality, MixedType_Inequality_IdenticalMatricesReturnFalse)
+/** @brief Verify that @ref fgm::Mat3::anyNeq follows IEEE 754 for INFINITY comparisons. */
+TEST(Mat3Equality, InfinityInequality_IdenticalMatricesReturnFalse)
 {
-    const fgm::Matrix3 matA(1, 2, 3);
-    const fgm::Matrix3 matB(1.0, 2.0, 3.0);
+    const fgm::Mat3 matA(INF, -INF, INF);
+    const fgm::Mat3 matB(INF, -INF, INF);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -360,11 +336,35 @@ TYPED_TEST(Matrix3Equality, MixedType_Inequality_IdenticalMatricesReturnFalse)
 }
 
 
-/** @brief Verify that @ref fgm::Matrix3::anyNeq works for different vector types with different components. */
-TYPED_TEST(Matrix3Equality, MixedType_Inequality_DifferentMatricesReturnTrue)
+/** @brief Verify that @ref fgm::Mat3::anyNeq follows IEEE 754 for INFINITY comparisons. */
+TEST(Mat3Equality, InfinityInequality_DifferentMatricesReturnTrue)
 {
-    const fgm::Matrix3 matA(5, 6, 7);
-    const fgm::Matrix3 matB(1.0, 2.0, 7.0);
+    const fgm::Mat3 matA(-INF, INF, INF);
+    const fgm::Mat3 matB(INF, INF, -INF);
+
+    const bool inequality = matA.anyNeq(matB);
+
+    EXPECT_TRUE(inequality);
+}
+
+
+/** @brief Verify that @ref fgm::Mat3::anyNeq works for different vector types with identical components. */
+TYPED_TEST(Mat3Equality, MixedType_Inequality_IdenticalMatricesReturnFalse)
+{
+    const fgm::Mat3 matA(1, 2, 3);
+    const fgm::Mat3 matB(1.0, 2.0, 3.0);
+
+    const bool inequality = matA.anyNeq(matB);
+
+    EXPECT_FALSE(inequality);
+}
+
+
+/** @brief Verify that @ref fgm::Mat3::anyNeq works for different vector types with different components. */
+TYPED_TEST(Mat3Equality, MixedType_Inequality_DifferentMatricesReturnTrue)
+{
+    const fgm::Mat3 matA(5, 6, 7);
+    const fgm::Mat3 matB(1.0, 2.0, 7.0);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -373,7 +373,7 @@ TYPED_TEST(Matrix3Equality, MixedType_Inequality_DifferentMatricesReturnTrue)
 
 
 /** @brief Verify that the operator returns `false` for identical matrices. */
-TYPED_TEST(Matrix3Equality, InEqualityOperator_IdenticalMatricesReturnFalse)
+TYPED_TEST(Mat3Equality, InEqualityOperator_IdenticalMatricesReturnFalse)
 {
     const bool inequality = this->_eqMatA != this->_eqMatB;
 
@@ -382,7 +382,7 @@ TYPED_TEST(Matrix3Equality, InEqualityOperator_IdenticalMatricesReturnFalse)
 
 
 /** @brief Verify that the inequality operator returns `true` for different matrices. */
-TYPED_TEST(Matrix3Equality, InEqualityOperator_DifferentMatricesReturnTrue)
+TYPED_TEST(Mat3Equality, InEqualityOperator_DifferentMatricesReturnTrue)
 {
     const bool inequality = this->_eqMatA != this->_dissimilarMat;
 
@@ -390,11 +390,11 @@ TYPED_TEST(Matrix3Equality, InEqualityOperator_DifferentMatricesReturnTrue)
 }
 
 
-/** @brief Verify that the inequality operator works for @ref fgm::Matrix3<bool> with identical components. */
-TEST(Matrix3Equality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
+/** @brief Verify that the inequality operator works for @ref fgm::Mat3<bool> with identical components. */
+TEST(Mat3Equality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 {
-    const fgm::Matrix3 matA(true, false, true);
-    const fgm::Matrix3 matB(true, false, true);
+    const fgm::Mat3 matA(true, false, true);
+    const fgm::Mat3 matB(true, false, true);
 
     const bool inequality = matA != matB;
 
@@ -402,11 +402,11 @@ TEST(Matrix3Equality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 }
 
 
-/** @brief Verify that the inequality operator works for @ref fgm::Matrix3<bool> with different components. */
-TEST(Matrix3Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
+/** @brief Verify that the inequality operator works for @ref fgm::Mat3<bool> with different components. */
+TEST(Mat3Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
 {
-    const fgm::Matrix3 matA(true, false, true);
-    const fgm::Matrix3 matB(true, true, false);
+    const fgm::Mat3 matA(true, false, true);
+    const fgm::Mat3 matB(true, true, false);
 
     const bool inequality = matA != matB;
 
