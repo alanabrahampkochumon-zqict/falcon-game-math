@@ -175,6 +175,37 @@ namespace fgm
 
     /**************************************
      *                                    *
+     *        ARITHMETIC OPERATORS        *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedMat2x4<T, U> Mat2x4<T>::operator+(const Mat2x4<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, U>;
+        return Mat2x4<R>(_data[0] + rhs[0], _data[1] + rhs[1], _data[2] + rhs[2], _data[3] + rhs[3]);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    Mat2x4<T>& Mat2x4<T>::operator+=(const Mat2x4<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] += rhs[0];
+        _data[1] += rhs[1];
+        _data[2] += rhs[2];
+        _data[3] += rhs[3];
+        return *this;
+    }
+
+
+    /**************************************
+     *                                    *
      *             UTILITIES              *
      *                                    *
      **************************************/

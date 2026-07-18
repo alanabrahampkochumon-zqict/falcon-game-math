@@ -48,6 +48,9 @@ namespace fgm
     struct Mat2x3;
 
     template <Arithmetic T>
+    struct Mat2x4;
+
+    template <Arithmetic T>
     struct Mat3;
 
     template <Arithmetic T>
@@ -109,6 +112,17 @@ namespace fgm
     /** @brief Alias for @ref Mat2x3 with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
     using PromotedFloatMat2x3 = Mat2x3<Magnitude<std::common_type_t<T, U>>>;
+
+
+    /** @brief Alias for @ref Mat2x4 with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedMat2x4 = Mat2x4<PromotedValue_t<T, U>>;
+
+
+    /** @brief Alias for @ref Mat2x4 with a `value_type` of @ref Magnitude of the wider type. */
+    template <Arithmetic T, Arithmetic U>
+    using PromotedFloatMat2x4 = Mat2x4<Magnitude<std::common_type_t<T, U>>>;
 
 
     /** @brief Alias for @ref Mat3 with promoted value type. */

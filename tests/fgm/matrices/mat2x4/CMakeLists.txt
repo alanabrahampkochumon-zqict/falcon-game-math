@@ -3,7 +3,7 @@ add_library(Mat2x4Tests OBJECT)
 target_sources(
         Mat2x4Tests PRIVATE
         AccessAndMutationTests.cpp
-        #        AdditionTests.cpp
+        AdditionTests.cpp
         #        DivisionTests.cpp
         EqualityTests.cpp
         InitializationTests.cpp
