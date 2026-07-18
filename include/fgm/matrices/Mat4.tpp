@@ -94,7 +94,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr T& Mat4<T>::operator()(std::size_t row, std::size_t col) noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS || row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
@@ -102,7 +102,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr const T& Mat4<T>::operator()(std::size_t row, std::size_t col) const noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS || row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 

@@ -51,8 +51,10 @@ namespace fgm
     {
         (*this)(0, 0) = static_cast<T>(other(0, 0));
         (*this)(0, 1) = static_cast<T>(other(0, 1));
+        (*this)(0, 2) = static_cast<T>(other(0, 2));
         (*this)(1, 0) = static_cast<T>(other(1, 0));
         (*this)(1, 1) = static_cast<T>(other(1, 1));
+        (*this)(1, 2) = static_cast<T>(other(1, 2));
     }
 
 
@@ -80,14 +82,14 @@ namespace fgm
     template <Arithmetic T>
     constexpr T& Mat2x3<T>::operator()(const std::size_t row, const std::size_t col) noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS || row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
     template <Arithmetic T>
     constexpr const T& Mat2x3<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS || row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 

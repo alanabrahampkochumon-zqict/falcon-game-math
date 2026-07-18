@@ -11,7 +11,16 @@ set(UtilityDirectory "${INCLUDE_DIR}utils/")
 
 
 # Files
-set(SetupFiles "Vec2TestSetup.h;Vec3TestSetup.h;Vec4TestSetup.h;DoxygenGroups.h;MatrixTestSetup.h;Mat2x3TestSetup.h;CommonSetup.h;")
+set(SetupFiles
+        Vec2TestSetup.h
+        Vec3TestSetup.h
+        Vec4TestSetup.h
+        DoxygenGroups.h
+        MatrixTestSetup.h
+        Mat2x3TestSetup.h
+        Mat2x4TestSetup.h
+        CommonSetup.h
+)
 list(TRANSFORM SetupFiles PREPEND ${INCLUDE_DIR})
 
 set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
@@ -23,6 +32,7 @@ add_subdirectory(vectors/vec3)
 add_subdirectory(vectors/vec4)
 add_subdirectory(matrices/matrix2)
 add_subdirectory(matrices/matrix2x3)
+add_subdirectory(matrices/mat2x4)
 add_subdirectory(matrices/matrix4)
 add_subdirectory(matrices/matrix3)
 add_subdirectory(matrices/matmul)
@@ -70,6 +80,7 @@ target_link_libraries(
         Vec4Tests
         Mat2Tests
         Mat2x3Tests
+        Mat2x4Tests
         Mat2TransformTests
         Mat3Tests
         Mat3TransformTests
