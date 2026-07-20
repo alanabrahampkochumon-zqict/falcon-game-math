@@ -317,46 +317,46 @@ namespace fgm
 
 
 
-        // /**
-        //  * @addtogroup FGM_Mat3x4_Arithmetic
-        //  * @{
-        //  */
-        //
-        // /**
-        //  * @brief Compute the element-wise sum of this matrix with @p rhs matrix and return a new matrix.
-        //  *
-        //  * @note Promotes the result to the wider type using @ref PromotedMat3x4<T, U>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] rhs The matrix to add.
-        //  *
-        //  * @return A new @ref Mat3x4 containing the element-wise sum.
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] constexpr PromotedMat3x4<T, U> operator+(const Mat3x4<U>& rhs) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the element-wise sum of this matrix with @p rhs matrix in-place.
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] rhs The matrix to add.
-        //  *
-        //  * @return A reference to this matrix (*this).
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // Mat3x4& operator+=(const Mat3x4<U>& rhs) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
+        /**
+         * @addtogroup FGM_Mat3x4_Arithmetic
+         * @{
+         */
+
+        /**
+         * @brief Compute the element-wise sum of this matrix with @p rhs matrix and return a new matrix.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat3x4<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to add.
+         *
+         * @return A new @ref Mat3x4 containing the element-wise sum.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedMat3x4<T, U> operator+(const Mat3x4<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise sum of this matrix with @p rhs matrix in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to add.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        Mat3x4& operator+=(const Mat3x4<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
         // /**
         //  * @brief Compute the element-wise difference between this matrix and @p rhs matrix
         //  *        and return a new matrix.
@@ -574,8 +574,8 @@ namespace fgm
         // status,
         //                                                            const Mat3x4& fallback = Mat3x4::zero()) noexcept
         //     requires StrictArithmetic<T>;
-        //
-        // /** @} */
+
+        /** @} */
 
 
         /**
