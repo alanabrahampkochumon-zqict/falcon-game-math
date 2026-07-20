@@ -774,9 +774,9 @@ namespace fgm
         }
         else
         {
-            _data[0] /= static_cast<T>(scalar);
-            _data[1] /= static_cast<T>(scalar);
-            _data[2] /= static_cast<T>(scalar);
+            _data[0] = static_cast<T>(_data[0] / static_cast<R>(scalar));
+            _data[1] = static_cast<T>(_data[1] / static_cast<R>(scalar));
+            _data[2] = static_cast<T>(_data[2] / static_cast<R>(scalar));
         }
 
         return *this;

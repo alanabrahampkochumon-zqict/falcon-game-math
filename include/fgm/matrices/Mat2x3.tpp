@@ -297,13 +297,13 @@ namespace fgm
         }
         else
         {
-            _data[0][0] /= static_cast<R>(scalar);
-            _data[1][0] /= static_cast<R>(scalar);
-            _data[2][0] /= static_cast<R>(scalar);
+            _data[0][0] = static_cast<T>(_data[0][0] / static_cast<R>(scalar));
+            _data[1][0] = static_cast<T>(_data[1][0] / static_cast<R>(scalar));
+            _data[2][0] = static_cast<T>(_data[2][0] / static_cast<R>(scalar));
 
-            _data[0][1] /= static_cast<R>(scalar);
-            _data[1][1] /= static_cast<R>(scalar);
-            _data[2][1] /= static_cast<R>(scalar);
+            _data[0][1] = static_cast<T>(_data[0][1] / static_cast<R>(scalar));
+            _data[1][1] = static_cast<T>(_data[1][1] / static_cast<R>(scalar));
+            _data[2][1] = static_cast<T>(_data[2][1] / static_cast<R>(scalar));
         }
         return *this;
     }
