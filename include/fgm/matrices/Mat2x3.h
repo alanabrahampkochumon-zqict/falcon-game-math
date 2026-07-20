@@ -715,6 +715,7 @@ namespace fgm
 
     /** @brief Template deduction guide for Mat2x3. */
     template <Arithmetic T, Arithmetic... Args>
+        requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 5)
     Mat2x3(T, Args...) -> Mat2x3<T>;
 
 

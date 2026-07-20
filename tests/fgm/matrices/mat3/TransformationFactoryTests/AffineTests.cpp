@@ -10,6 +10,7 @@
 
 
 
+#include "Mat2TestSetup.h"
 #include "Mat3TestSetup.h"
 
 /**

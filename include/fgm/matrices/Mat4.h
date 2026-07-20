@@ -91,8 +91,8 @@ namespace fgm
          * @param[in] m33 The element to insert into row four, column four.
          *
          */
-        [[nodiscard]] constexpr Mat4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22,
-                                        T m23, T m30, T m31, T m32, T m33) noexcept;
+        [[nodiscard]] constexpr Mat4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22, T m23,
+                                     T m30, T m31, T m32, T m33) noexcept;
 
 
         /**
@@ -104,7 +104,7 @@ namespace fgm
          * @param[in] col3 The 4D-vector to use as the fourth column entry.
          */
         [[nodiscard]] constexpr Mat4(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2,
-                                        const Vec4<T>& col3) noexcept;
+                                     const Vec4<T>& col3) noexcept;
 
 
         /**
@@ -607,7 +607,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat4<T, S> safeDiv(S scalar,
-                                                              const Mat4& fallback = Mat4::identity()) const noexcept
+                                                           const Mat4& fallback = Mat4::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -633,7 +633,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMat4<T, S> safeDiv(const Mat4& mat, S scalar,
-                                                                     const Mat4& fallback = Mat4::identity()) noexcept
+                                                                  const Mat4& fallback = Mat4::identity()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -664,7 +664,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat4<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                             const Mat4& fallback = Mat4::identity()) const noexcept
+                                                          const Mat4& fallback = Mat4::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -695,9 +695,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMat4<T, S> tryDiv(const Mat4& mat, S scalar,
-                                                                    OperationStatus& status,
-                                                                    const Mat4& fallback = Mat4::identity()) noexcept
+        [[nodiscard]] static constexpr PromotedMat4<T, S> tryDiv(const Mat4& mat, S scalar, OperationStatus& status,
+                                                                 const Mat4& fallback = Mat4::identity()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -976,7 +975,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Mat4<Magnitude<T>> safeInverseOf(const Mat4& matrix,
-                                                             const Mat4& fallback = Mat4::identity()) noexcept
+                                                          const Mat4& fallback = Mat4::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1018,7 +1017,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Mat4<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                   const Mat4& fallback = Mat4::identity()) const noexcept
+                                                const Mat4& fallback = Mat4::identity()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1061,7 +1060,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Mat4<Magnitude<T>> tryInverseOf(const Mat4& matrix, OperationStatus& status,
-                                                            const Mat4& fallback = Mat4::identity()) noexcept
+                                                         const Mat4& fallback = Mat4::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1363,7 +1362,8 @@ namespace fgm
         //  * @relatedalso makeRotation(U, const Vec3<T>&)
         //  */
         // template <std::floating_point U>
-        // [[nodiscard]] static constexpr PromotedFloatMat4<T, U> makeRotationNonNorm(U angle, const Vec3<T>& axis) noexcept
+        // [[nodiscard]] static constexpr PromotedFloatMat4<T, U> makeRotationNonNorm(U angle, const Vec3<T>& axis)
+        // noexcept
         //     requires StrictArithmetic<T>;
 
 
@@ -1398,7 +1398,7 @@ namespace fgm
          * @return A 4D affine transform matrix.
          */
         [[nodiscard]] static constexpr Mat4 makeAffine(const Mat3<T>& linearTransform,
-                                                          const Vec3<T>& translation) noexcept;
+                                                       const Vec3<T>& translation) noexcept;
 
 
         // /**
@@ -1437,8 +1437,9 @@ namespace fgm
         static constexpr Mat4 identity()
             requires fgm::StrictArithmetic<T>
         {
-            return Mat4{ T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0),
-                            T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1) };
+            return Mat4{
+                T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1)
+            };
         }
 
 
@@ -1450,8 +1451,9 @@ namespace fgm
         static constexpr Mat4 zero()
             requires fgm::StrictArithmetic<T>
         {
-            return Mat4{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0),
-                            T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) };
+            return Mat4{
+                T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0)
+            };
         }
 
         // NOLINTEND
@@ -1588,6 +1590,7 @@ namespace fgm
 
     /** @brief Template deduction guide for Mat4. */
     template <Arithmetic T, Arithmetic... Args>
+        requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 15)
     Mat4(T, Args...) -> Mat4<T>;
 
 } // namespace fgm

@@ -93,8 +93,7 @@ namespace fgm
          * @param[in] col1 The 3D-vector to use as the second column entry.
          * @param[in] col2 The 3D-vector to use as the third column entry.
          */
-        [[nodiscard]] constexpr Mat3(const Vec3<T>& col0, const Vec3<T>& col1,
-                                        const Vec3<T>& col2) noexcept;
+        [[nodiscard]] constexpr Mat3(const Vec3<T>& col0, const Vec3<T>& col1, const Vec3<T>& col2) noexcept;
 
 
         /**
@@ -590,7 +589,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat3<T, S> safeDiv(S scalar,
-                                                              const Mat3& fallback = Mat3::identity()) const noexcept
+                                                           const Mat3& fallback = Mat3::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -616,7 +615,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMat3<T, S> safeDiv(const Mat3& mat, S scalar,
-                                                                     const Mat3& fallback = Mat3::identity()) noexcept
+                                                                  const Mat3& fallback = Mat3::identity()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -646,7 +645,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat3<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                             const Mat3& fallback = Mat3::identity()) const noexcept
+                                                          const Mat3& fallback = Mat3::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -676,9 +675,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMat3<T, S> tryDiv(const Mat3& mat, S scalar,
-                                                                    OperationStatus& status,
-                                                                    const Mat3& fallback = Mat3::identity()) noexcept
+        [[nodiscard]] static constexpr PromotedMat3<T, S> tryDiv(const Mat3& mat, S scalar, OperationStatus& status,
+                                                                 const Mat3& fallback = Mat3::identity()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -895,7 +893,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Mat3<Magnitude<T>> safeInverseOf(const Mat3& matrix,
-                                                             const Mat3& fallback = Mat3::identity()) noexcept
+                                                          const Mat3& fallback = Mat3::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -931,7 +929,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Mat3<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                   const Mat3& fallback = Mat3::identity()) const noexcept
+                                                const Mat3& fallback = Mat3::identity()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -968,7 +966,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Mat3<Magnitude<T>> tryInverseOf(const Mat3& matrix, OperationStatus& status,
-                                                            const Mat3& fallback = Mat3::identity()) noexcept
+                                                         const Mat3& fallback = Mat3::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1229,7 +1227,7 @@ namespace fgm
          * @return A 3D affine transform matrix.
          */
         [[nodiscard]] static constexpr Mat3 makeAffine(const Mat2<T>& linearTransform,
-                                                          const Vec2<T>& translation) noexcept;
+                                                       const Vec2<T>& translation) noexcept;
 
 
         // /**
@@ -1268,9 +1266,7 @@ namespace fgm
          */
         static constexpr Mat3 identity()
             requires fgm::StrictArithmetic<T>
-        {
-            return Mat3{ T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1) };
-        }
+        { return Mat3{ T(1), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(1) }; }
 
 
         /**
@@ -1280,9 +1276,7 @@ namespace fgm
          */
         static constexpr Mat3 zero()
             requires fgm::StrictArithmetic<T>
-        {
-            return Mat3{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) };
-        }
+        { return Mat3{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) }; }
 
         // NOLINTEND
 
@@ -1413,6 +1407,7 @@ namespace fgm
 
     /** @brief Template deduction guide for Mat3. */
     template <Arithmetic T, Arithmetic... Args>
+        requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 8)
     Mat3(T, Args...) -> Mat3<T>;
 
 } // namespace fgm

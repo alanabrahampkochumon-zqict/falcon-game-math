@@ -579,7 +579,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat2<T, S> safeDiv(S scalar,
-                                                              const Mat2& fallback = Mat2::identity()) const noexcept
+                                                           const Mat2& fallback = Mat2::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -605,7 +605,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMat2<T, S> safeDiv(const Mat2& mat, S scalar,
-                                                                     const Mat2& fallback = Mat2::identity()) noexcept
+                                                                  const Mat2& fallback = Mat2::identity()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -635,7 +635,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat2<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                             const Mat2& fallback = Mat2::identity()) const noexcept
+                                                          const Mat2& fallback = Mat2::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -665,9 +665,8 @@ namespace fgm
          *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] static constexpr PromotedMat2<T, S> tryDiv(const Mat2& mat, S scalar,
-                                                                    OperationStatus& status,
-                                                                    const Mat2& fallback = Mat2::identity()) noexcept
+        [[nodiscard]] static constexpr PromotedMat2<T, S> tryDiv(const Mat2& mat, S scalar, OperationStatus& status,
+                                                                 const Mat2& fallback = Mat2::identity()) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -864,7 +863,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Mat2<Magnitude<T>> safeInverseOf(const Mat2& matrix,
-                                                             const Mat2& fallback = Mat2::identity()) noexcept
+                                                          const Mat2& fallback = Mat2::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -898,7 +897,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Mat2<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                   const Mat2& fallback = Mat2::identity()) const noexcept
+                                                const Mat2& fallback = Mat2::identity()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -933,7 +932,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Mat2<Magnitude<T>> tryInverseOf(const Mat2& matrix, OperationStatus& status,
-                                                            const Mat2& fallback = Mat2::identity()) noexcept
+                                                         const Mat2& fallback = Mat2::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1153,9 +1152,7 @@ namespace fgm
          */
         static constexpr Mat2 identity()
             requires fgm::StrictArithmetic<T>
-        {
-            return Mat2{ T(1), T(0), T(0), T(1) };
-        }
+        { return Mat2{ T(1), T(0), T(0), T(1) }; }
 
 
         /**
@@ -1165,9 +1162,7 @@ namespace fgm
          */
         static constexpr Mat2 zero()
             requires fgm::StrictArithmetic<T>
-        {
-            return Mat2{ T(0), T(0), T(0), T(0) };
-        }
+        { return Mat2{ T(0), T(0), T(0), T(0) }; }
 
 
         // NOLINTEND
@@ -1304,6 +1299,7 @@ namespace fgm
 
     /** @brief Template deduction guide for Mat2. */
     template <Arithmetic T, Arithmetic... Args>
+        requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 4)
     Mat2(T, Args...) -> Mat2<T>;
 
 

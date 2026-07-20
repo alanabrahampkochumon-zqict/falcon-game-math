@@ -719,6 +719,7 @@ namespace fgm
 
     /** @brief Template deduction guide for Mat2x4. */
     template <Arithmetic T, Arithmetic... Args>
+        requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 7)
     Mat2x4(T, Args...) -> Mat2x4<T>;
 
 
