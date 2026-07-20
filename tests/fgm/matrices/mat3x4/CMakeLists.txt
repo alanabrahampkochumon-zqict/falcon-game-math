@@ -5,7 +5,7 @@ target_sources(
         AccessAndMutationTests.cpp
         AdditionTests.cpp
         ConstantTests.cpp
-        # DivisionTests.cpp
+        DivisionTests.cpp
         EqualityTests.cpp
         InitializationTests.cpp
         MultiplicationTests.cpp
