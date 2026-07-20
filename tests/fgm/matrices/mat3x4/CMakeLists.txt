@@ -8,7 +8,7 @@ target_sources(
         # DivisionTests.cpp
         EqualityTests.cpp
         InitializationTests.cpp
-        #MultiplicationTests.cpp
+        MultiplicationTests.cpp
         StringRepresentationTests.cpp
         SubtractionTests.cpp
         TypeConversionTests.cpp

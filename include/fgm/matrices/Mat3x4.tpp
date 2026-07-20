@@ -240,33 +240,35 @@ namespace fgm
     }
 
 
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat3x4<T, S> Mat3x4<T>::operator*(const S scalar) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //         return Mat3x4<R>(scalar * _data[0], scalar * _data[1]);
-    //     }
-    //
-    //
-    //     template <StrictArithmetic T, StrictArithmetic S>
-    //     constexpr PromotedMat3x4<T, S> operator*(S scalar, const Mat3x4<T>& matrix) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return matrix * scalar; }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr Mat3x4<T>& Mat3x4<T>::operator*=(const S scalar) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         _data[0] *= scalar;
-    //         _data[1] *= scalar;
-    //         return *this;
-    //     }
-    //
-    //
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat3x4<T, S> Mat3x4<T>::operator*(const S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+        return Mat3x4<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2], scalar * _data[3]);
+    }
+
+
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr PromotedMat3x4<T, S> operator*(S scalar, const Mat3x4<T>& matrix) noexcept
+        requires StrictArithmetic<T>
+    { return matrix * scalar; }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Mat3x4<T>& Mat3x4<T>::operator*=(const S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] *= scalar;
+        _data[1] *= scalar;
+        _data[2] *= scalar;
+        _data[3] *= scalar;
+        return *this;
+    }
+
+
     //     template <Arithmetic T>
     //     template <StrictArithmetic S>
     //     constexpr PromotedMat3x4<T, S> Mat3x4<T>::operator/(S scalar) const noexcept
