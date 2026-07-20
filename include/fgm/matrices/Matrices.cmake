@@ -9,6 +9,7 @@ set(FGM_MAT_HEADERS
         Mat2x4.h
         Mat2x4.tpp
         Mat3x2.h
+        Mat3x2.tpp
         Mat3.tpp
         Mat3.h
         Mat3x4.h

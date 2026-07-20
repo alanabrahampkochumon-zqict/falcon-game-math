@@ -576,56 +576,58 @@ namespace fgm
         //     requires StrictArithmetic<T>;
         //
         // /** @} */
-        //
-        //
-        // /**
-        //  * @addtogroup FGM_Mat3x4_Utils
-        //  * @{
-        //  */
-        //
-        // /**
-        //  * @brief Check if any element of this matrix is an IEEE 754 infinity.
-        //  *
-        //  * @note Always returns false for integral types.
-        //  *
-        //  * @return True if at least one element is positive or negative infinity.
-        //  */
-        // [[nodiscard]] constexpr bool hasInf() const noexcept;
-        //
-        //
-        // /**
-        //  * @brief Check if any element of @p matrix is an IEEE 754 infinity.
-        //  *
-        //  * @note Always returns false for integral types.
-        //  *
-        //  * @param matrix The matrix to evaluate for indefinite elements.
-        //  *
-        //  * @return True if at least one element is positive or negative infinity.
-        //  */
-        // [[nodiscard]] static constexpr bool hasInf(const Mat3x4& matrix) noexcept;
-        //
-        //
-        // /**
-        //  * @brief Check if any element of this matrix is an IEEE NaN(Not-a-Number).
-        //  *
-        //  * @note Always return false for integral types.
-        //  *
-        //  * @return True if at least one element is NaN.
-        //  */
-        // [[nodiscard]] constexpr bool hasNaN() const noexcept;
-        //
-        //
-        // /**
-        //  * @brief Check if any element of @p matrix is an IEEE NaN(Not-a-Number).
-        //  *
-        //  * @note Always return false for integral types.
-        //  *
-        //  * @param matrix The matrix to evaluate for indefinite elements.
-        //  *
-        //  * @return True if at least one element is NaN.
-        //  */
-        // [[nodiscard]] static constexpr bool hasNaN(const Mat3x4& matrix) noexcept;
-        //
+
+
+        /**
+         * @addtogroup FGM_Mat3x4_Utils
+         * @{
+         */
+
+        /**
+         * @brief Check if any element of this matrix is an IEEE 754 infinity.
+         *
+         * @note Always returns false for integral types.
+         *
+         * @return True if at least one element is positive or negative infinity.
+         */
+        [[nodiscard]] constexpr bool hasInf() const noexcept;
+
+
+        /**
+         * @brief Check if any element of @p matrix is an IEEE 754 infinity.
+         *
+         * @note Always returns false for integral types.
+         *
+         * @param matrix The matrix to evaluate for indefinite elements.
+         *
+         * @return True if at least one element is positive or negative infinity.
+         */
+        [[nodiscard]] static constexpr bool hasInf(const Mat3x4& matrix) noexcept;
+
+
+        /**
+         * @brief Check if any element of this matrix is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @return True if at least one element is NaN.
+         */
+        [[nodiscard]] constexpr bool hasNaN() const noexcept;
+
+
+        /**
+         * @brief Check if any element of @p matrix is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @param matrix The matrix to evaluate for indefinite elements.
+         *
+         * @return True if at least one element is NaN.
+         */
+        [[nodiscard]] static constexpr bool hasNaN(const Mat3x4& matrix) noexcept;
+
+        /** @} */
+
 
         /**
          * @addtogroup T_FGM_Mat3x4_Constant

@@ -613,6 +613,8 @@ namespace fgm
          */
         [[nodiscard]] static constexpr bool hasNaN(const Mat3x2& matrix) noexcept;
 
+        /** @} */
+
 
         /**
          * @addtogroup T_FGM_Mat3x2_Constant
