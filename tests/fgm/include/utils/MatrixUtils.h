@@ -208,15 +208,15 @@ namespace testutils
             {
                 if constexpr (std::is_same_v<ValueType, double>)
                 {
-                    COMPARE_EQ(static_cast<double>(i == j), actual(i, j));
+                    COMPARE_EQ(1.0, actual(i, j));
                 }
                 else if constexpr (std::is_same_v<ValueType, float>)
                 {
-                    COMPARE_EQ(static_cast<float>(i == j), actual(i, j));
+                    COMPARE_EQ(1.0f, actual(i, j));
                 }
                 else
                 {
-                    EXPECT_EQ(static_cast<int>(i == j), actual(i, j));
+                    EXPECT_EQ(static_cast<ValueType>(1), actual(i, j));
                 }
             }
         }

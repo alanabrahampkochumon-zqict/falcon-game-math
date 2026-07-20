@@ -626,41 +626,41 @@ namespace fgm
         //  */
         // [[nodiscard]] static constexpr bool hasNaN(const Mat3x4& matrix) noexcept;
         //
-        //
-        // /**
-        //  * @addtogroup T_FGM_Mat3x4_Constant
-        //  * @{
-        //  */
-        //
-        // /**************************************
-        //  *                                    *
-        //  *             CONSTANTS              *
-        //  *                                    *
-        //  **************************************/
-        //
-        // /**
-        //  * @brief A 3x4 matrix with all elements being one.
-        //  *
-        //  * @note Constrained to @ref StrictArithmetic types.
-        //  */
-        // static constexpr Mat3x4 one()
-        //     requires fgm::StrictArithmetic<T>
-        // { return Mat3x4{ T(1), T(1), T(1), T(1), T(1), T(1) }; }
-        //
-        //
-        // /**
-        //  * @brief A 3x4 matrix with all elements being zero.
-        //  *
-        //  * @note Constrained to @ref StrictArithmetic types.
-        //  */
-        // static constexpr Mat3x4 zero()
-        //     requires fgm::StrictArithmetic<T>
-        // { return Mat3x4{ T(0), T(0), T(0), T(0), T(0), T(0) }; }
-        //
-        // /** @} */
-        //
-        //
-        //
+
+        /**
+         * @addtogroup T_FGM_Mat3x4_Constant
+         * @{
+         */
+
+        /**************************************
+         *                                    *
+         *             CONSTANTS              *
+         *                                    *
+         **************************************/
+
+        /**
+         * @brief A 3x4 matrix with all elements being one.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Mat3x4 one()
+            requires fgm::StrictArithmetic<T>
+        { return Mat3x4{ T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1) }; }
+
+
+        /**
+         * @brief A 3x4 matrix with all elements being zero.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Mat3x4 zero()
+            requires fgm::StrictArithmetic<T>
+        { return Mat3x4{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) }; }
+
+        /** @} */
+
+
+
         /**
          * @addtogroup FGM_Mat3x4_Log
          * @{
