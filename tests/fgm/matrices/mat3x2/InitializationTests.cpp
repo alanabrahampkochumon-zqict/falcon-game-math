@@ -18,7 +18,7 @@ class Mat3x2Initialization: public testing::Test
 {
 protected:
     std::vector<T> _elements;
-    fgm::Vec3<T> _col0, _col1, _col2;
+    fgm::Vec3<T> _col0, _col1;
 
     void SetUp() override
     {

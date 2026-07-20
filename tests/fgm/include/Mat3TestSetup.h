@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file MatrixTestSetup.h
+ * @file Mat3TestSetup.h
  * @author Alan Abraham P Kochumon
  * @date Created on: July 18, 2026
  *

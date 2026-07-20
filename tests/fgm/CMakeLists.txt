@@ -38,6 +38,7 @@ add_subdirectory(matrices/mat2x3)
 add_subdirectory(matrices/mat2x4)
 add_subdirectory(matrices/mat3)
 add_subdirectory(matrices/mat3x2)
+add_subdirectory(matrices/mat3x4)
 add_subdirectory(matrices/mat4)
 add_subdirectory(matrices/matmul)
 
@@ -84,12 +85,13 @@ target_link_libraries(
         Vec3Tests
         Vec4Tests
         Mat2Tests
+        Mat2TransformTests
         Mat2x3Tests
         Mat2x4Tests
-        Mat2TransformTests
         Mat3Tests
-        Mat3x2Tests
         Mat3TransformTests
+        Mat3x2Tests
+        Mat3x4Tests
         Mat4Tests
         Mat4TransformTests
         MatrixMultiplicationTests
