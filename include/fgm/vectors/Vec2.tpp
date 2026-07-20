@@ -702,10 +702,10 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
+
+        FGM_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
         if constexpr (std::is_floating_point_v<R>)
         {
-            FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
-
             R factor = R(1) / static_cast<R>(scalar);
 
             _data[0] = static_cast<T>(factor * _data[0]);
@@ -713,8 +713,6 @@ namespace fgm
         }
         else
         {
-            FGM_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
-
             _data[0] /= static_cast<T>(scalar);
             _data[1] /= static_cast<T>(scalar);
         }
