@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 01, 2026
  *
- * @brief Verify @ref fgm::Mat4 constants (@ref fgm::Mat4::EYE, @ref fgm::Mat4::ZERO).
+ * @brief Verify @ref fgm::Mat4 constants (@ref fgm::Mat4::identity, @ref fgm::Mat4::zero).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -88,11 +88,11 @@ namespace
  *                                    *
  **************************************/
 
-/** @brief Verify that @ref fgm::Mat4::EYE returns an identity matrix. */
-TYPED_TEST(Mat4Constants, Eye_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Mat4<TypeParam>::identity()); }
+/** @brief Verify that @ref fgm::Mat4::identity returns an identity matrix. */
+TYPED_TEST(Mat4Constants, Identity_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Mat4<TypeParam>::identity()); }
 
 
-/** @brief Verify that @ref fgm::Mat4::ZERO returns a zero matrix. */
+/** @brief Verify that @ref fgm::Mat4::zero returns a zero matrix. */
 TYPED_TEST(Mat4Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Mat4<TypeParam>::zero()); }
 
 /** @} */
