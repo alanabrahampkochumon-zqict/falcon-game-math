@@ -1,15 +1,15 @@
 /**
  * @file UtilityTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: July 18, 2026
+ * @date Created on: July 20, 2026
  *
- * @brief Verify @ref fgm::Mat3x2 utility functions.
+ * @brief Verify @ref fgm::Mat3x4 utility functions.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include <Mat3x2TestSetup.h>
+#include <Mat3x4TestSetup.h>
 
 
 
@@ -21,30 +21,30 @@
 
 template <typename T>
     requires std::floating_point<T>
-struct Mat3x2UtilityParams
+struct Mat3x4UtilityParams
 {
-    fgm::Mat3x2<T> mat;
+    fgm::Mat3x4<T> mat;
     bool expected;
 };
-/** @brief Test fixture for @ref fgm::Mat3x2 infinity checker, parameterized by @ref VectorUtilityParams */
-class Mat3x2InfChecker: public ::testing::TestWithParam<Mat3x2UtilityParams<float>>
+/** @brief Test fixture for @ref fgm::Mat3x4 infinity checker, parameterized by @ref VectorUtilityParams */
+class Mat3x4InfChecker: public ::testing::TestWithParam<Mat3x4UtilityParams<float>>
 {};
 
-/** @brief Test fixture for @ref fgm::Mat3x2 NaN checker, parameterized by @ref VectorUtilityParams */
-class Mat3x2NaNChecker: public ::testing::TestWithParam<Mat3x2UtilityParams<float>>
+/** @brief Test fixture for @ref fgm::Mat3x4 NaN checker, parameterized by @ref VectorUtilityParams */
+class Mat3x4NaNChecker: public ::testing::TestWithParam<Mat3x4UtilityParams<float>>
 {};
 
 
 template <typename T>
-class Mat3x2IntegralUtility: public ::testing::Test
+class Mat3x4IntegralUtility: public ::testing::Test
 {};
-/** @brief Test fixture for @ref fgm::Mat3x2 utilities, parameterized by @ref SupportedIntegralTypes */
-TYPED_TEST_SUITE(Mat3x2IntegralUtility, SupportedIntegralTypes);
+/** @brief Test fixture for @ref fgm::Mat3x4 utilities, parameterized by @ref SupportedIntegralTypes */
+TYPED_TEST_SUITE(Mat3x4IntegralUtility, SupportedIntegralTypes);
 
 
 
 /**
- * @addtogroup T_FGM_Mat3x2_Utils
+ * @addtogroup T_FGM_Mat3x4_Utils
  * @{
  */
 
@@ -56,8 +56,10 @@ TYPED_TEST_SUITE(Mat3x2IntegralUtility, SupportedIntegralTypes);
 
 namespace
 {
-    constexpr fgm::Mat3x2 INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
-    constexpr fgm::Mat3x2 MAT(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+    constexpr fgm::Mat3x4 INF_MAT(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                                  1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, -fgm::constants::INFINITY_F,
+                                  -fgm::constants::INFINITY_F);
+    constexpr fgm::Mat3x4 MAT(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 
 
     /** @brief Verify that the matrix hasNaN utility is available at compile time. */
@@ -67,7 +69,7 @@ namespace
         static_assert(MAT.hasNaN() == false);
 
         // Static functions
-        static_assert(fgm::Mat3x2<float>::hasNaN(MAT) == false);
+        static_assert(fgm::Mat3x4<float>::hasNaN(MAT) == false);
     } // namespace
 
 
@@ -79,8 +81,8 @@ namespace
         static_assert(MAT.hasInf() == false);
 
         // Static functions
-        static_assert(fgm::Mat3x2<float>::hasInf(INF_MAT) == true);
-        static_assert(fgm::Mat3x2<float>::hasInf(MAT) == false);
+        static_assert(fgm::Mat3x4<float>::hasInf(INF_MAT) == true);
+        static_assert(fgm::Mat3x4<float>::hasInf(MAT) == false);
     } // namespace
 
 } // namespace
@@ -93,54 +95,86 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that @ref std:: Mat3x2::hasInf returns  `true` if any of elements are IEE754 infinity
+ * @brief Verify that @ref std:: Mat3x4::hasInf returns  `true` if any of elements are IEE754 infinity
  *        and `false` otherwise.
  */
-TEST_P(Mat3x2InfChecker, ReturnTrueIfAnyElementIsInfinity)
+TEST_P(Mat3x4InfChecker, ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasInf());
 }
 INSTANTIATE_TEST_SUITE_P(
-    Mat3x2InfCheckerTestSuite, Mat3x2InfChecker,
+    Mat3x4InfCheckerTestSuite, Mat3x4InfChecker,
     ::testing::Values(
-        Mat3x2UtilityParams{ fgm::Mat3x2(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
-        Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-        Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-        Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-        Mat3x2UtilityParams{ fgm::Mat3x2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                               fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                               fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                                true },
-        Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F),
+            true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                        fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                        fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                        fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+            true },
+        Mat3x4UtilityParams{ fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+                             false }));
 
 
-/** @brief Verify that @ref std:: Mat3x2::hasInf returns `false` for integral types. */
-TYPED_TEST(Mat3x2IntegralUtility, HasInf_ReturnsFalseForIntegrals)
+/** @brief Verify that @ref std:: Mat3x4::hasInf returns `false` for integral types. */
+TYPED_TEST(Mat3x4IntegralUtility, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3x2(value, value, value, value, value, value).hasInf());
+    EXPECT_FALSE(
+        fgm::Mat3x4(value, value, value, value, value, value, value, value, value, value, value, value).hasInf());
 }
 
 
 /**
- * @brief Verify that the static variant of @ref std:: Mat3x2::hasInf returns  `true` if any of elements are IEE754
+ * @brief Verify that the static variant of @ref std:: Mat3x4::hasInf returns  `true` if any of elements are IEE754
  *        infinity and `false` otherwise.
  */
-TEST_P(Mat3x2InfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
+TEST_P(Mat3x4InfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Mat3x2<float>::hasInf(mat));
+    EXPECT_EQ(expected, fgm::Mat3x4<float>::hasInf(mat));
 }
 
 
-/** @brief Verify that the static variant of @ref std:: Mat3x2::hasInf returns `false` for integral types. */
-TYPED_TEST(Mat3x2IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
+/** @brief Verify that the static variant of @ref std:: Mat3x4::hasInf returns `false` for integral types. */
+TYPED_TEST(Mat3x4IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3x2<TypeParam>::hasInf(fgm::Mat3x2(value, value, value, value, value, value)));
+    EXPECT_FALSE(fgm::Mat3x4<TypeParam>::hasInf(
+        fgm::Mat3x4(value, value, value, value, value, value, value, value, value, value, value, value)));
 }
 
 
@@ -151,53 +185,80 @@ TYPED_TEST(Mat3x2IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
  **************************************/
 
 /**
- * @brief Verify that @ref std:: Mat3x2::hasNaN returns  `true` if any of elements are IEE754 NaN(Not-a-Number)
+ * @brief Verify that @ref std:: Mat3x4::hasNaN returns  `true` if any of elements are IEE754 NaN(Not-a-Number)
  *       and `false` otherwise.
  */
-TEST_P(Mat3x2NaNChecker, ReturnTrueIfAnyElementIsNaN)
+TEST_P(Mat3x4NaNChecker, ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasNaN());
 }
 INSTANTIATE_TEST_SUITE_P(
-    Mat3x2NaNCheckerTestSuite, Mat3x2NaNChecker,
-    ::testing::Values(Mat3x2UtilityParams{ fgm::Mat3x2(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-                      Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
-                      Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-                      Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                      Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      Mat3x2UtilityParams{ fgm::Mat3x2(fgm::constants::NaN, fgm::constants::NaN,
-                                                             fgm::constants::NaN, fgm::constants::NaN,
-                                                             fgm::constants::NaN, fgm::constants::NaN),
-                                              true },
-                      Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
+    Mat3x4NaNCheckerTestSuite, Mat3x4NaNChecker,
+    ::testing::Values(
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+        Mat3x4UtilityParams{
+            fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
+        Mat3x4UtilityParams{ fgm::Mat3x4(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
+                                         fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
+                                         fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
+                                         fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN),
+                             true },
+        Mat3x4UtilityParams{ fgm::Mat3x4(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+                             false }));
 
 
-/** @brief Verify that @ref std:: Mat3x2::hasNaN returns `false` for integral types. */
-TYPED_TEST(Mat3x2IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
+/** @brief Verify that @ref std:: Mat3x4::hasNaN returns `false` for integral types. */
+TYPED_TEST(Mat3x4IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3x2(value, value, value, value, value, value).hasNaN());
+    EXPECT_FALSE(
+        fgm::Mat3x4(value, value, value, value, value, value, value, value, value, value, value, value).hasNaN());
 }
 
 
 /**
- * @brief Verify that the static variant of @ref std:: Mat3x2::hasNaN returns  `true` if any of elements are IEE754
+ * @brief Verify that the static variant of @ref std:: Mat3x4::hasNaN returns  `true` if any of elements are IEE754
  *        NaN(Not-a-Number) and `false` otherwise.
  */
-TEST_P(Mat3x2NaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
+TEST_P(Mat3x4NaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Mat3x2<float>::hasNaN(mat));
+    EXPECT_EQ(expected, fgm::Mat3x4<float>::hasNaN(mat));
 }
 
 
-/** @brief Verify that the static variant of @ref std:: Mat3x2::hasNaN returns `false` for integral types. */
-TYPED_TEST(Mat3x2IntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
+/** @brief Verify that the static variant of @ref std:: Mat3x4::hasNaN returns `false` for integral types. */
+TYPED_TEST(Mat3x4IntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3x2<TypeParam>::hasNaN(fgm::Mat3x2(value, value, value, value, value, value)));
+    EXPECT_FALSE(fgm::Mat3x4<TypeParam>::hasNaN(
+        fgm::Mat3x4(value, value, value, value, value, value, value, value, value, value, value, value)));
 }
 
 /** @} */
