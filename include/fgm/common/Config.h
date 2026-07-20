@@ -12,6 +12,7 @@
 
 
 #include "PreprocessorDefinitions.h"
+#include "MathTraits.h"
 
 namespace fgm
 {
