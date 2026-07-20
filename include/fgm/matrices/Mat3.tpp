@@ -434,21 +434,41 @@ namespace fgm
     constexpr Mat3<T>& Mat3<T>::operator/=(const S scalar) noexcept
         requires StrictArithmetic<T>
     {
-        using R = Magnitude<PromotedValue_t<T, S>>;
 
-        FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+        using R = PromotedValue_t<T, S>;
 
-        R factor = R(1) / static_cast<R>(scalar);
+        FGM_ASSERT_MSG(fgm::abs(scalar) > Config::EPSILON<S>, messages::assertion::MAT_DIV_BY_ZERO);
 
-        _data[0][0] = static_cast<T>(static_cast<R>(_data[0][0]) * factor);
-        _data[1][0] = static_cast<T>(static_cast<R>(_data[1][0]) * factor);
-        _data[2][0] = static_cast<T>(static_cast<R>(_data[2][0]) * factor);
-        _data[0][1] = static_cast<T>(static_cast<R>(_data[0][1]) * factor);
-        _data[1][1] = static_cast<T>(static_cast<R>(_data[1][1]) * factor);
-        _data[2][1] = static_cast<T>(static_cast<R>(_data[2][1]) * factor);
-        _data[0][2] = static_cast<T>(static_cast<R>(_data[0][2]) * factor);
-        _data[1][2] = static_cast<T>(static_cast<R>(_data[1][2]) * factor);
-        _data[2][2] = static_cast<T>(static_cast<R>(_data[2][2]) * factor);
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            R factor = R(1) / static_cast<R>(scalar);
+
+            _data[0][0] = static_cast<R>(_data[0][0]) * factor;
+            _data[1][0] = static_cast<R>(_data[1][0]) * factor;
+            _data[2][0] = static_cast<R>(_data[2][0]) * factor;
+
+            _data[0][1] = static_cast<R>(_data[0][1]) * factor;
+            _data[1][1] = static_cast<R>(_data[1][1]) * factor;
+            _data[2][1] = static_cast<R>(_data[2][1]) * factor;
+
+            _data[0][2] = static_cast<R>(_data[0][2]) * factor;
+            _data[1][2] = static_cast<R>(_data[1][2]) * factor;
+            _data[2][2] = static_cast<R>(_data[2][2]) * factor;
+        }
+        else
+        {
+            _data[0][0] /= static_cast<R>(scalar);
+            _data[1][0] /= static_cast<R>(scalar);
+            _data[2][0] /= static_cast<R>(scalar);
+
+            _data[0][1] /= static_cast<R>(scalar);
+            _data[1][1] /= static_cast<R>(scalar);
+            _data[2][1] /= static_cast<R>(scalar);
+
+            _data[0][2] /= static_cast<R>(scalar);
+            _data[1][2] /= static_cast<R>(scalar);
+            _data[2][2] /= static_cast<R>(scalar);
+        }
         return *this;
     }
 
