@@ -104,84 +104,86 @@ namespace fgm
         return _data[col][row];
     }
 
-    //
-    //     /***************************************
-    //      *                                     *
-    //      *             EQUALITY                *
-    //      *                                     *
-    //      ***************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Mat3x4<T>::allEq(const Mat3x4<U>& rhs, const double epsilon) const noexcept
-    //     {
-    //         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
-    //         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
-    //         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
-    // #ifdef _MSC_VER
-    //         if (std::is_constant_evaluated())
-    //         {
-    //             if (hasNaN() || rhs.hasNaN())
-    //             {
-    //                 return false;
-    //             }
-    //         }
-    // #endif
-    //         return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Mat3x4<T>::allEq(const Mat3x4& lhs, const Mat3x4<U>& rhs, const double epsilon) noexcept
-    //     { return lhs.allEq(rhs, epsilon); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Mat3x4<T>::anyNeq(const Mat3x4<U>& rhs, const double epsilon) const noexcept
-    //     {
-    //         // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
-    //         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
-    //         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
-    // #ifdef _MSC_VER
-    //         if (std::is_constant_evaluated())
-    //         {
-    //             if (hasNaN() || rhs.hasNaN())
-    //             {
-    //                 return true;
-    //             }
-    //         }
-    // #endif
-    //         return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Mat3x4<T>::anyNeq(const Mat3x4& lhs, const Mat3x4<U>& rhs, const double epsilon) noexcept
-    //     { return lhs.anyNeq(rhs, epsilon); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Mat3x4<T>::operator==(const Mat3x4<U>& rhs) const noexcept
-    //     { return allEq(rhs); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr bool Mat3x4<T>::operator!=(const Mat3x4<U>& rhs) const noexcept
-    //     { return anyNeq(rhs); }
-    //
-    //
-    //
+
+    /***************************************
+     *                                     *
+     *             EQUALITY                *
+     *                                     *
+     ***************************************/
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr bool Mat3x4<T>::allEq(const Mat3x4<U>& rhs, const double epsilon) const noexcept
+    {
+        // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+        // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+        // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+#ifdef _MSC_VER
+        if (std::is_constant_evaluated())
+        {
+            if (hasNaN() || rhs.hasNaN())
+            {
+                return false;
+            }
+        }
+#endif
+        return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon) && _data[2].allEq(rhs[2], epsilon) &&
+            _data[3].allEq(rhs[3], epsilon);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr bool Mat3x4<T>::allEq(const Mat3x4& lhs, const Mat3x4<U>& rhs, const double epsilon) noexcept
+    { return lhs.allEq(rhs, epsilon); }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr bool Mat3x4<T>::anyNeq(const Mat3x4<U>& rhs, const double epsilon) const noexcept
+    {
+        // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+        // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+        // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+#ifdef _MSC_VER
+        if (std::is_constant_evaluated())
+        {
+            if (hasNaN() || rhs.hasNaN())
+            {
+                return true;
+            }
+        }
+#endif
+        return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon) ||
+            _data[2].anyNeq(rhs[2], epsilon) || _data[3].anyNeq(rhs[3], epsilon);
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr bool Mat3x4<T>::anyNeq(const Mat3x4& lhs, const Mat3x4<U>& rhs, const double epsilon) noexcept
+    { return lhs.anyNeq(rhs, epsilon); }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr bool Mat3x4<T>::operator==(const Mat3x4<U>& rhs) const noexcept
+    { return allEq(rhs); }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr bool Mat3x4<T>::operator!=(const Mat3x4<U>& rhs) const noexcept
+    { return anyNeq(rhs); }
+
+
+
     //     /**************************************
     //      *                                    *
     //      *        ARITHMETIC OPERATORS        *
