@@ -396,6 +396,12 @@ namespace fgm
     { return mat.tryDiv(scalar, status, fallback); }
 
 
+    template <Arithmetic T>
+    constexpr Mat4x2<T> Mat4x2<T>::operator-() const noexcept
+        requires SignedStrictArithmetic<T>
+    { return Mat4x2{ -_data[0], -_data[1] }; }
+
+
     /**************************************
      *                                    *
      *           MATRIX ALGEBRA           *

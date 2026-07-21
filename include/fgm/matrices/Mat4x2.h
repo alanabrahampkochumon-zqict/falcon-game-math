@@ -22,6 +22,7 @@
  */
 
 
+#include "Mat4x2.h"
 #include "fgm/common/Types.h"
 #include "fgm/vectors/Vec4.h"
 
@@ -563,7 +564,19 @@ namespace fgm
                                                                    Mat4x2 fallback = Mat4x2::zero()) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Negate each element of this matrix and return a new @ref Mat4x2<T>.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @return A new @ref fgm::Mat4x2 with inverted components.
+         */
+        [[nodiscard]] constexpr Mat4x2 operator-() const noexcept
+            requires SignedStrictArithmetic<T>;
+
         /** @} */
+
 
 
         /**
@@ -719,9 +732,10 @@ namespace fgm
         requires StrictArithmetic<T>;
 
 
+
     /** @brief Template deduction guide for Mat4x2. */
     template <Arithmetic T, Arithmetic... Args>
-        requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 5)
+        requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 7)
     Mat4x2(T, Args...) -> Mat4x2<T>;
 
 

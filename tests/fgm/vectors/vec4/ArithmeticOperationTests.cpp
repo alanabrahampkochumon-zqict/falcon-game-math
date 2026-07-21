@@ -100,7 +100,7 @@ TYPED_TEST_SUITE(Vec4ScalarDivision, SupportedArithmeticTypes);
 
 
 template <typename T>
-class Vec4Inversion: public testing::Test
+class Vec4Negation: public testing::Test
 {
 protected:
     fgm::Vec4<T> _vec;
@@ -113,7 +113,7 @@ protected:
     }
 };
 /** @brief Test fixture for @ref fgm::Vec4 inversion, parameterized by @ref SupportedSignedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec4Inversion, SupportedSignedArithmeticTypes);
+TYPED_TEST_SUITE(Vec4Negation, SupportedSignedArithmeticTypes);
 
 
 /** @brief Test fixture for @ref fgm::Vec4 division with NaN vectors. */
@@ -895,7 +895,7 @@ TEST_P(Vec4DivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponents
 
 
 /**
- * @addtogroup T_FGM_Vec4_Inversion
+ * @addtogroup T_FGM_Vec4_Negation
  * @{
  */
 
@@ -903,7 +903,7 @@ TEST_P(Vec4DivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponents
  * @brief Verify that  @ref fgm::Vec4 unary minus operator inverts each component and
  *       returns a new vector.
  */
-TYPED_TEST(Vec4Inversion, InvertsTheSignOfEachComponents)
+TYPED_TEST(Vec4Negation, InvertsTheSignOfEachComponents)
 {
     const fgm::Vec4 inverted = -this->_vec;
     EXPECT_VEC_EQ(this->_expectedInvertedVec, inverted);
@@ -911,7 +911,7 @@ TYPED_TEST(Vec4Inversion, InvertsTheSignOfEachComponents)
 
 
 /** @brief Verify that @ref fgm::Vec4 unary minus operator inverts each component of an infinity vector. */
-TEST(Vec4Inversion, InvertsSignOfInfinity)
+TEST(Vec4Negation, InvertsSignOfInfinity)
 {
     const fgm::Vec4 infVec = {
         fgm::constants::INFINITY_F,
@@ -933,7 +933,7 @@ TEST(Vec4Inversion, InvertsSignOfInfinity)
 
 
 /** @brief Verify that @ref fgm::Vec4 unary minus follows IEEE 754 rules for NaN. */
-TEST(Vec4Inversion, NoOpOnNaNVectors)
+TEST(Vec4Negation, NoOpOnNaNVectors)
 {
     const fgm::Vec4 nanVec = {
         fgm::constants::NaN,

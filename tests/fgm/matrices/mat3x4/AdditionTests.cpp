@@ -39,7 +39,7 @@ TYPED_TEST_SUITE(Mat3x4Addition, SupportedArithmeticTypes);
 
 
 /**
- * @addtogroup T_FGM_Mat2x2_Addition
+ * @addtogroup T_FGM_Mat3x4_Addition
  * @{
  */
 

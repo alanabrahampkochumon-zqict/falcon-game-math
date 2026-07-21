@@ -61,7 +61,7 @@
              *   @defgroup T_FGM_Vec2_Rej Vector Rejection
              *   @defgroup T_FGM_Vec2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Vec2_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Vec2_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Vec2_Negation Negation(-)
              *   @defgroup T_FGM_Vec2_Utils Vector Utilities
              *   @defgroup T_FGM_Vec2_Swizzle Vector Swizzling
              * @}
@@ -98,7 +98,7 @@
              *   @defgroup T_FGM_Vec3_Rej Vector Rejection
              *   @defgroup T_FGM_Vec3_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Vec3_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Vec3_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Vec3_Negation Negation(-)
              *   @defgroup T_FGM_Vec3_Utils Vector Utilities
              *   @defgroup T_FGM_Vec3_Swizzle Vector Swizzling
              * @}
@@ -135,7 +135,7 @@
              *   @defgroup T_FGM_Vec4_Rej Vector Rejection
              *   @defgroup T_FGM_Vec4_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Vec4_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Vec4_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Vec4_Negation Negation(-)
              *   @defgroup T_FGM_Vec4_Utils Vector Utilities
              *   @defgroup T_FGM_Vec4_Swizzle Vector Swizzling
              * @}
@@ -172,7 +172,7 @@
              *   @defgroup T_FGM_Mat2x2_Init Initialization
              *   @defgroup T_FGM_Mat2x2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x2_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Mat2x2_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat2x2_Negation Matrix Negation(-)
              *   @defgroup T_FGM_Mat2x2_Det Determinants
              *   @defgroup T_FGM_Mat2x2_Trace Trace
              *   @defgroup T_FGM_Mat2x2_Transforms Transformation Factories
@@ -199,7 +199,7 @@
              *   @defgroup T_FGM_Mat2x3_Init Initialization
              *   @defgroup T_FGM_Mat2x3_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x3_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Mat2x3_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat2x3_Negation Matrix Negation(-)
              *   @defgroup T_FGM_Mat2x3_Utils Matrix Utilities
              * @}
              */
@@ -223,7 +223,7 @@
              *   @defgroup T_FGM_Mat2x4_Init Initialization
              *   @defgroup T_FGM_Mat2x4_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x4_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Mat2x4_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat2x4_Negation Matrix Negation(-)
              *   @defgroup T_FGM_Mat2x4_Utils Matrix Utilities
              * @}
              */
@@ -248,7 +248,7 @@
              *   @defgroup T_FGM_Mat3x2_Init Initialization
              *   @defgroup T_FGM_Mat3x2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat3x2_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Mat3x2_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat3x2_Negation Matrix Negation(-)
              *   @defgroup T_FGM_Mat3x2_Utils Matrix Utilities
              * @}
              */
@@ -274,7 +274,7 @@
              *   @defgroup T_FGM_Mat3x3_Init Initialization
              *   @defgroup T_FGM_Mat3x3_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat3x3_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Mat3x3_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat3x3_Negation Matrix Negation(-)
              *   @defgroup T_FGM_Mat3x3_Det Determinants
              *   @defgroup T_FGM_Mat3x3_Trace Trace
              *   @defgroup T_FGM_Mat3x3_Transforms Transformation Factories
@@ -303,7 +303,7 @@
              *   @defgroup T_FGM_Mat3x4_Init Initialization
              *   @defgroup T_FGM_Mat3x4_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat3x4_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Mat3x4_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat3x4_Negation Matrix Negation(-)
              *   @defgroup T_FGM_Mat3x4_Det Determinants
              *   @defgroup T_FGM_Mat3x4_Trace Trace
              *   @defgroup T_FGM_Mat3x4_Utils Matrix Utilities
@@ -332,7 +332,7 @@
              *   @defgroup T_FGM_Mat4x2_Init Initialization
              *   @defgroup T_FGM_Mat4x2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat4x2_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Mat4x2_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat4x2_Negation Matrix Negation(-)
              *   @defgroup T_FGM_Mat4x2_Det Determinants
              *   @defgroup T_FGM_Mat4x2_Trace Trace
              *   @defgroup T_FGM_Mat4x2_Utils Matrix Utilities
@@ -361,7 +361,7 @@
              *   @defgroup T_FGM_Mat4x4_Init Initialization
              *   @defgroup T_FGM_Mat4x4_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat4x4_Type_Conv Conversion Constructor
-             *   @defgroup T_FGM_Mat4x4_Inversion Unary Inversion(-)
+             *   @defgroup T_FGM_Mat4x4_Negation Matrix Negation(-)
              *   @defgroup T_FGM_Mat4x4_Det Determinants
              *   @defgroup T_FGM_Mat4x4_Trace Trace
              *   @defgroup T_FGM_Mat4x4_Transforms Transformation Factories

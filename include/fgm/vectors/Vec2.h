@@ -812,10 +812,9 @@ namespace fgm
 
 
         /**
-         * @brief Apply a component-wise inversion to this vector.
-         *        Invert the sign of each component and returns a new @ref Vec2<T>.
+         * @brief Negate each component of this vector and return a new @ref Vec2<T>.
          *
-         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
          *
          * @return A new @ref fgm::Vec2 with inverted components.
          */
