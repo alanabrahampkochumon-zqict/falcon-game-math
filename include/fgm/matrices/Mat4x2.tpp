@@ -389,56 +389,55 @@ namespace fgm
     //         requires StrictArithmetic<T>
     //     { return mat.tryDiv(scalar, status, fallback); }
     //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *           MATRIX ALGEBRA           *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     //
-    //     //
-    //     //     template <Arithmetic T>
-    //     //     constexpr Mat4x2<T> Mat4x2<T>::transpose() const noexcept
-    //     //     {
-    //     //         // NOTE: _data is a column major vector so _data[0][1] gives element at first row and zeroth
-    //     column.
-    //     //         return Mat4x2(_data[0][0], _data[0][1], _data[1][0], _data[1][1]);
-    //     //     }
-    //     //
-    //     //
-    //     //     template <Arithmetic T>
-    //     //     constexpr Mat4x2<T> Mat4x2<T>::transpose(const Mat4x2& matrix) noexcept
-    //     //     {
-    //     //         return matrix.transpose();
-    //     //     }
-    //     //
-    //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *             UTILITIES              *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Mat4x2<T>::hasInf() const noexcept
-    //     { return _data[0].hasInf() || _data[1].hasInf(); }
+
+    /**************************************
+     *                                    *
+     *           MATRIX ALGEBRA           *
+     *                                    *
+     **************************************/
+
     //
     //
     //     template <Arithmetic T>
-    //     constexpr bool Mat4x2<T>::hasInf(const Mat4x2& matrix) noexcept
-    //     { return matrix.hasInf(); }
+    //     constexpr Mat4x2<T> Mat4x2<T>::transpose() const noexcept
+    //     {
+    //         // NOTE: _data is a column major vector so _data[0][1] gives element at first row and zeroth column.
+    //         return Mat4x2(_data[0][0], _data[0][1], _data[1][0], _data[1][1]);
+    //     }
     //
     //
     //     template <Arithmetic T>
-    //     constexpr bool Mat4x2<T>::hasNaN() const noexcept
-    //     { return _data[0].hasNaN() || _data[1].hasNaN(); }
+    //     constexpr Mat4x2<T> Mat4x2<T>::transpose(const Mat4x2& matrix) noexcept
+    //     {
+    //         return matrix.transpose();
+    //     }
     //
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Mat4x2<T>::hasNaN(const Mat4x2& matrix) noexcept
-    //     { return matrix.hasNaN(); }
+
+
+    /**************************************
+     *                                    *
+     *             UTILITIES              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr bool Mat4x2<T>::hasInf() const noexcept
+    { return _data[0].hasInf() || _data[1].hasInf(); }
+
+
+    template <Arithmetic T>
+    constexpr bool Mat4x2<T>::hasInf(const Mat4x2& matrix) noexcept
+    { return matrix.hasInf(); }
+
+
+    template <Arithmetic T>
+    constexpr bool Mat4x2<T>::hasNaN() const noexcept
+    { return _data[0].hasNaN() || _data[1].hasNaN(); }
+
+
+    template <Arithmetic T>
+    constexpr bool Mat4x2<T>::hasNaN(const Mat4x2& matrix) noexcept
+    { return matrix.hasNaN(); }
 
 
 } // namespace fgm
