@@ -436,136 +436,135 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Compute the element-wise division of this matrix by @p scalar in-place.
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  * @note Performs assertion for division by zero in **Debug mode**.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A reference to this matrix (*this).
-        //  */
-        // template <StrictArithmetic S>
-        // constexpr Mat4x2& operator/=(S scalar) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
-        //  *
-        //  * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
-        //  *       returns @p fallback.
-        //  * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-        //  *       operand contains NaN.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar   The value to divide the matrix elements by.
-        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
-        //  *                     or a NaN element.
-        //  *
-        //  * @return A new @ref Mat4x2 resulting from the division or @p fallback if the @p scalar is below the
-        //  *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] constexpr PromotedMat4x2<T, S> safeDiv(S scalar,
-        //                                                      const Mat4x2& fallback = Mat4x2::zero()) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the element-wise division of @p mat by @p scalar and return a new matrix.
-        //  *
-        //  * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
-        //  *       returns @p fallback.
-        //  * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-        //  *       operand contains NaN.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] mat      The matrix to divide.
-        //  * @param[in] scalar   The value to divide the matrix elements by.
-        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
-        //  *                     or a NaN element.
-        //  *
-        //  * @return A new @ref Mat4x2 resulting from the division or @p fallback if the @p scalar is below the
-        //  *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] static constexpr PromotedMat4x2<T, S> safeDiv(const Mat4x2& mat, S scalar,
-        //                                                             const Mat4x2& fallback = Mat4x2::zero()) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the element-wise division of this matrix by @p scalar, return a new matrix,
-        //  *        and updates @p status to reflect the result of the operation.
-        //  *
-        //  * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
-        //  *       returns @p fallback.
-        //  * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-        //  *       operand contains NaN.
-        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
-        //  *       invalidity (Division by Zero) when reporting status.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar   The value to divide the matrix elements by.
-        //  * @param[out] status  The status flag to store the status of the current operation result.
-        //  *                     For details on status codes see @ref OperationStatus.
-        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
-        //  *                     or a NaN element.
-        //  *
-        //  * @return A new @ref Mat4x2 resulting from the division or @p fallback if the @p scalar is below the
-        //  *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] constexpr PromotedMat4x2<T, S> tryDiv(S scalar, OperationStatus& status,
-        //                                                     const Mat4x2& fallback = Mat4x2::zero()) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the element-wise division of @p Vec by @p scalar, return a new matrix,
-        //  *        and updates @p status to reflect the result of the operation.
-        //  *
-        //  * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
-        //  *       returns @p fallback.
-        //  * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
-        //  *       operand contains NaN.
-        //  * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
-        //  *       invalidity (Division by Zero) when reporting status.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] mat      The matrix to divide.
-        //  * @param[in] scalar   The value to divide the matrix elements by.
-        //  * @param[out] status  The status flag to store the status of the current operation result.
-        //  *                     For details on status codes see @ref OperationStatus.
-        //  * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
-        //  *                     or a NaN element.
-        //  *
-        //  * @return A new @ref Mat4x2 resulting from the division or @p fallback if the @p scalar is below the
-        //  *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] static constexpr PromotedMat4x2<T, S> tryDiv(const Mat4x2& mat, S scalar, OperationStatus& status,
-        //                                                            const Mat4x2& fallback = Mat4x2::zero()) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        // /** @} */
-        //
+        /**
+         * @brief Compute the element-wise division of this matrix by @p scalar in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Mat4x2& operator/=(S scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
+         * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
+         *                     or a NaN element.
+         *
+         * @return A new @ref Mat4x2 resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMat4x2<T, S> safeDiv(S scalar, Mat4x2 fallback = Mat4x2::zero()) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise division of @p mat by @p scalar and return a new matrix.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
+         * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @p fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] mat      The matrix to divide.
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
+         *                     or a NaN element.
+         *
+         * @return A new @ref Mat4x2 resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] static constexpr PromotedMat4x2<T, S> safeDiv(const Mat4x2& mat, S scalar,
+                                                                    Mat4x2 fallback = Mat4x2::zero()) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise division of this matrix by @p scalar, return a new matrix,
+         *        and updates @p status to reflect the result of the operation.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN elements,
+         *       returns @p fallback.
+         * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         *       invalidity (Division by Zero) when reporting status.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
+         *                     or a NaN element.
+         *
+         * @return A new @ref Mat4x2 resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMat4x2<T, S> tryDiv(S scalar, OperationStatus& status,
+                                                            Mat4x2 fallback = Mat4x2::zero()) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise division of @p Vec by @p scalar, return a new matrix,
+         *        and updates @p status to reflect the result of the operation.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this matrix contains NaN elements,
+         *       returns @p fallback.
+         * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Returns @ref fallback if attempting to divide by zero (or below the epsilon threshold), or if any
+         *       operand contains NaN.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
+         *       invalidity (Division by Zero) when reporting status.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] mat      The matrix to divide.
+         * @param[in] scalar   The value to divide the matrix elements by.
+         * @param[out] status  The status flag to store the status of the current operation result.
+         *                     For details on status codes see @ref OperationStatus.
+         * @param[in] fallback The default matrix to return, when an invalid case is hit like a zero scalar
+         *                     or a NaN element.
+         *
+         * @return A new @ref Mat4x2 resulting from the division or @p fallback if the @p scalar is below the
+         *         epsilon threshold or if the matrix has NaN(Not-a-Number) element(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] static constexpr PromotedMat4x2<T, S> tryDiv(const Mat4x2& mat, S scalar, OperationStatus& status,
+                                                                   Mat4x2 fallback = Mat4x2::zero()) noexcept
+            requires StrictArithmetic<T>;
+
+        /** @} */
+
 
         /**
          * @addtogroup FGM_Mat4x2_Utils
@@ -636,7 +635,7 @@ namespace fgm
          */
         static constexpr Mat4x2 one()
             requires fgm::StrictArithmetic<T>
-        { return Mat4x2{ T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1)  }; }
+        { return Mat4x2{ T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1) }; }
 
 
         /**

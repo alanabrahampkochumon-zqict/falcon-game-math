@@ -251,144 +251,150 @@ namespace fgm
         return *this;
     }
 
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x2<T, S> Mat4x2<T>::operator/(S scalar) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
-    //             R factor = R(1) / static_cast<R>(scalar);
-    //             return Mat4x2<R>(_data[0] * factor, _data[1] * factor);
-    //         }
-    //         else
-    //         {
-    //             FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
-    //             R tScalar = static_cast<R>(scalar);
-    //             return Mat4x2<R>(_data[0] / tScalar, _data[1] / tScalar);
-    //         }
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr Mat4x2<T>& Mat4x2<T>::operator/=(const S scalar) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         FGM_ASSERT_MSG(fgm::abs(scalar) > Config::EPSILON<S>, messages::assertion::MAT_DIV_BY_ZERO);
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             R factor = R(1) / static_cast<R>(scalar);
-    //
-    //             _data[0][0] = static_cast<R>(_data[0][0]) * factor;
-    //             _data[1][0] = static_cast<R>(_data[1][0]) * factor;
-    //
-    //             _data[0][1] = static_cast<R>(_data[0][1]) * factor;
-    //             _data[1][1] = static_cast<R>(_data[1][1]) * factor;
-    //
-    //             _data[0][2] = static_cast<R>(_data[0][2]) * factor;
-    //             _data[1][2] = static_cast<R>(_data[1][2]) * factor;
-    //         }
-    //         else
-    //         {
-    //             _data[0][0] = static_cast<T>(_data[0][0] / static_cast<R>(scalar));
-    //             _data[1][0] = static_cast<T>(_data[1][0] / static_cast<R>(scalar));
-    //
-    //             _data[0][1] = static_cast<T>(_data[0][1] / static_cast<R>(scalar));
-    //             _data[1][1] = static_cast<T>(_data[1][1] / static_cast<R>(scalar));
-    //
-    //             _data[0][2] = static_cast<T>(_data[0][2] / static_cast<R>(scalar));
-    //             _data[1][2] = static_cast<T>(_data[1][2] / static_cast<R>(scalar));
-    //         }
-    //         return *this;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x2<T, S> Mat4x2<T>::safeDiv(const S scalar, const Mat4x2& fallback) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
-    //             {
-    //                 return Mat4x2<R>(fallback);
-    //             }
-    //         }
-    //         if constexpr (std::is_integral_v<R>)
-    //         {
-    //             if (scalar == 0)
-    //             {
-    //                 return Mat4x2<R>(fallback);
-    //             }
-    //         }
-    //
-    //         return *this / scalar;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x2<T, S> Mat4x2<T>::safeDiv(const Mat4x2& mat, const S scalar,
-    //                                                       const Mat4x2& fallback) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return mat.safeDiv(scalar, fallback); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x2<T, S> Mat4x2<T>::tryDiv(const S scalar, OperationStatus& status,
-    //                                                      const Mat4x2& fallback) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         { // TODO: Check || vs | with benchmarks
-    //             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
-    //             {
-    //                 status = OperationStatus::NANOPERAND;
-    //                 return Mat4x2<R>(fallback);
-    //             }
-    //             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return Mat4x2<R>(fallback);
-    //             }
-    //         }
-    //
-    //         if constexpr (std::is_integral_v<R>)
-    //         {
-    //             if (scalar == 0)
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return Mat4x2<R>(fallback);
-    //             }
-    //         }
-    //
-    //
-    //         status = OperationStatus::SUCCESS;
-    //         return *this / scalar;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x2<T, S> Mat4x2<T>::tryDiv(const Mat4x2& mat, const S scalar, OperationStatus& status,
-    //                                                      const Mat4x2& fallback) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return mat.tryDiv(scalar, status, fallback); }
-    //
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x2<T, S> Mat4x2<T>::operator/(S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            R factor = R(1) / static_cast<R>(scalar);
+            return Mat4x2<R>(_data[0] * factor, _data[1] * factor);
+        }
+        else
+        {
+            FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
+            R tScalar = static_cast<R>(scalar);
+            return Mat4x2<R>(_data[0] / tScalar, _data[1] / tScalar);
+        }
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Mat4x2<T>& Mat4x2<T>::operator/=(const S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+
+        using R = PromotedValue_t<T, S>;
+
+        FGM_ASSERT_MSG(fgm::abs(scalar) > Config::EPSILON<S>, messages::assertion::MAT_DIV_BY_ZERO);
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            R factor = R(1) / static_cast<R>(scalar);
+
+            _data[0][0] = static_cast<R>(_data[0][0]) * factor;
+            _data[1][0] = static_cast<R>(_data[1][0]) * factor;
+
+            _data[0][1] = static_cast<R>(_data[0][1]) * factor;
+            _data[1][1] = static_cast<R>(_data[1][1]) * factor;
+
+            _data[0][2] = static_cast<R>(_data[0][2]) * factor;
+            _data[1][2] = static_cast<R>(_data[1][2]) * factor;
+
+            _data[0][3] = static_cast<R>(_data[0][3]) * factor;
+            _data[1][3] = static_cast<R>(_data[1][3]) * factor;
+        }
+        else
+        {
+            _data[0][0] = static_cast<T>(_data[0][0] / static_cast<R>(scalar));
+            _data[1][0] = static_cast<T>(_data[1][0] / static_cast<R>(scalar));
+
+            _data[0][1] = static_cast<T>(_data[0][1] / static_cast<R>(scalar));
+            _data[1][1] = static_cast<T>(_data[1][1] / static_cast<R>(scalar));
+
+            _data[0][2] = static_cast<T>(_data[0][2] / static_cast<R>(scalar));
+            _data[1][2] = static_cast<T>(_data[1][2] / static_cast<R>(scalar));
+
+            _data[0][3] = static_cast<T>(_data[0][3] / static_cast<R>(scalar));
+            _data[1][3] = static_cast<T>(_data[1][3] / static_cast<R>(scalar));
+        }
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x2<T, S> Mat4x2<T>::safeDiv(const S scalar, Mat4x2 fallback) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
+            {
+                return static_cast<PromotedMat4x2<T, S>>(fallback);
+            }
+        }
+        if constexpr (std::is_integral_v<R>)
+        {
+            if (scalar == 0)
+            {
+                return static_cast<PromotedMat4x2<T, S>>(fallback);
+            }
+        }
+
+        return *this / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x2<T, S> Mat4x2<T>::safeDiv(const Mat4x2& mat, const S scalar,
+                                                      Mat4x2 fallback) noexcept
+        requires StrictArithmetic<T>
+    { return mat.safeDiv(scalar, fallback); }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x2<T, S> Mat4x2<T>::tryDiv(const S scalar, OperationStatus& status,
+                                                     Mat4x2 fallback) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        { // TODO: Check || vs | with benchmarks
+            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
+            {
+                status = OperationStatus::NANOPERAND;
+                return static_cast<PromotedMat4x2<T, S>>(fallback);
+            }
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return static_cast<PromotedMat4x2<T, S>>(fallback);
+            }
+        }
+
+        if constexpr (std::is_integral_v<R>)
+        {
+            if (scalar == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return static_cast<PromotedMat4x2<T, S>>(fallback);
+            }
+        }
+
+
+        status = OperationStatus::SUCCESS;
+        return *this / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x2<T, S> Mat4x2<T>::tryDiv(const Mat4x2& mat, const S scalar, OperationStatus& status,
+                                                     Mat4x2 fallback) noexcept
+        requires StrictArithmetic<T>
+    { return mat.tryDiv(scalar, status, fallback); }
+
 
     /**************************************
      *                                    *
