@@ -570,15 +570,15 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Negate each element of this matrix and return a new @ref Mat4x3<T>.
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @return A new @ref fgm::Mat4x3 with negated elements.
-        //  */
-        // [[nodiscard]] constexpr Mat4x3 operator-() const noexcept
-        //     requires SignedStrictArithmetic<T>;
+        /**
+         * @brief Negate each element of this matrix and return a new @ref Mat4x3<T>.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @return A new @ref fgm::Mat4x3 with negated elements.
+         */
+        [[nodiscard]] constexpr Mat4x3 operator-() const noexcept
+            requires SignedStrictArithmetic<T>; 
 
         /** @} */
 

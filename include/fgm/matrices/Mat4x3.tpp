@@ -365,8 +365,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(S scalar, OperationStatus& status, Mat4x3 fallback) const
-    noexcept
+    constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(S scalar, OperationStatus& status, Mat4x3 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -404,16 +403,16 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(const Mat4x3& mat, S scalar, OperationStatus& status,
-                                                 Mat4x3 fallback) noexcept
+                                                     Mat4x3 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
 
-    //
-    // template <Arithmetic T>
-    // constexpr Mat4x3<T> Mat4x3<T>::operator-() const noexcept
-    //     requires SignedStrictArithmetic<T>
-    // { return Mat4x3{ -_data[0], -_data[1], -_data[2], -_data[3] }; }
+
+    template <Arithmetic T>
+    constexpr Mat4x3<T> Mat4x3<T>::operator-() const noexcept
+        requires SignedStrictArithmetic<T>
+    { return Mat4x3{ -_data[0], -_data[1], -_data[2] }; }
 
 
 
