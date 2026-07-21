@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file Mat4x2TestSetup.h
+ * @file Mat4x3TestSetup.h
  * @author Alan Abraham P Kochumon
  * @date Created on: July 21, 2026
  *
@@ -15,7 +15,7 @@
 #include "utils/VectorUtils.h"
 
 #include <fgm/common/MathTraits.h>
-#include <fgm/matrices/Mat4x2.h>
+#include <fgm/matrices/Mat4x3.h>
 
 
 

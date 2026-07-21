@@ -254,6 +254,25 @@
 
 
             /**
+             * @defgroup FGM_Mat4x3 4x3 Matrix
+             * @brief 4x3 Matrix.
+             * @ingroup FGM_Matrices
+             * @{
+             *   @defgroup FGM_Mat4x3_Members Class Members
+             *   @defgroup FGM_Mat4x3_Init Constructors
+             *   @defgroup FGM_Mat4x3_Access Accessors
+             *   @defgroup FGM_Mat4x3_Arithmetic Arithmetic Operations
+             *   @defgroup FGM_Mat4x3_Algebra Matrix Algebra
+             *   @defgroup FGM_Mat4x3_Equality Equality
+             *   @defgroup FGM_Mat4x3_Product Geometric Products
+             *   @defgroup FGM_Mat4x3_Log String Representation
+             *   @defgroup FGM_Mat4x3_Const Matrix Constants
+             *   @defgroup FGM_Mat4x3_Utils Matrix Utilities
+             * @}
+             */
+
+
+            /**
              * @defgroup FGM_Mat4x4 4x4 Square Matrix
              * @brief 4x4 Square Matrix.
              * @ingroup FGM_Matrices
