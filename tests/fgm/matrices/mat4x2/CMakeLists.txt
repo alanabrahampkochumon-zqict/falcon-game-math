@@ -6,7 +6,7 @@ target_sources(
         # AdditionTests.cpp
         ConstantTests.cpp
         # DivisionTests.cpp
-        # EqualityTests.cpp
+        EqualityTests.cpp
         InitializationTests.cpp
         # MultiplicationTests.cpp
         # StringRepresentationTests.cpp
