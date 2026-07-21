@@ -134,6 +134,7 @@
              * @}
              */
 
+
             /**
              * @defgroup FGM_Mat2x3 2x3 Matrix
              * @brief 2x3 Matrix.
@@ -153,6 +154,7 @@
              * @}
              */
 
+
             /**
              * @defgroup FGM_Mat2x4 2x4 Matrix
              * @brief 2x4 Matrix.
@@ -171,6 +173,7 @@
              *   @defgroup FGM_Mat2x4_Transforms Matrix Transformation Factories
              * @}
              */
+
 
             /**
             * @defgroup FGM_Mat3x2 3x2 Matrix
@@ -211,6 +214,7 @@
              * @}
              */
 
+
             /**
             * @defgroup FGM_Mat3x4 3x4 Matrix
             * @brief 3x4 Matrix.
@@ -226,9 +230,27 @@
             *   @defgroup FGM_Mat3x4_Log String Representation
             *   @defgroup FGM_Mat3x4_Const Matrix Constants
             *   @defgroup FGM_Mat3x4_Utils Matrix Utilities
-            *   @defgroup FGM_Mat3x4_Transforms Matrix Transformation Factories
             * @}
             */
+
+
+            /**
+             * @defgroup FGM_Mat4x2 4x2 Matrix
+             * @brief 4x2 Matrix.
+             * @ingroup FGM_Matrices
+             * @{
+             *   @defgroup FGM_Mat4x2_Members Class Members
+             *   @defgroup FGM_Mat4x2_Init Constructors
+             *   @defgroup FGM_Mat4x2_Access Accessors
+             *   @defgroup FGM_Mat4x2_Arithmetic Arithmetic Operations
+             *   @defgroup FGM_Mat4x2_Algebra Matrix Algebra
+             *   @defgroup FGM_Mat4x2_Equality Equality
+             *   @defgroup FGM_Mat4x2_Product Geometric Products
+             *   @defgroup FGM_Mat4x2_Log String Representation
+             *   @defgroup FGM_Mat4x2_Const Matrix Constants
+             *   @defgroup FGM_Mat4x2_Utils Matrix Utilities
+             * @}
+             */
 
 
             /**

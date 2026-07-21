@@ -40,6 +40,7 @@ add_subdirectory(matrices/mat3)
 add_subdirectory(matrices/mat3x2)
 add_subdirectory(matrices/mat3x4)
 add_subdirectory(matrices/mat4)
+add_subdirectory(matrices/mat4x2)
 add_subdirectory(matrices/matmul)
 
 target_sources(
@@ -93,6 +94,7 @@ target_link_libraries(
         Mat3x2Tests
         Mat3x4Tests
         Mat4Tests
+        Mat4x2Tests
         Mat4TransformTests
         MatrixMultiplicationTests
 )

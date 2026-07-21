@@ -16,6 +16,8 @@ set(FGM_MAT_HEADERS
         Mat3x4.tpp
         Mat4.h
         Mat4.tpp
+        Mat4x2.h
+        Mat4x2.tpp
 #        MatMul.h
 #        MatMul.tpp
 )

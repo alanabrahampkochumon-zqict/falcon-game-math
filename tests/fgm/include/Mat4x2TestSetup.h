@@ -1,8 +1,8 @@
 #pragma once
 /**
- * @file Mat2x3TestSetup.h
+ * @file Mat3x2TestSetup.h
  * @author Alan Abraham P Kochumon
- * @date Created on: July 17, 2026
+ * @date Created on: July 21, 2026
  *
  * @brief Define test setups common to all Matrix tests.
  *
@@ -15,7 +15,7 @@
 #include "utils/VectorUtils.h"
 
 #include <fgm/common/MathTraits.h>
-#include <fgm/matrices/Mat2x3.h>
+#include <fgm/matrices/Mat4x2.h>
 
 
 
