@@ -6,11 +6,11 @@ target_sources(
         #        AdditionTests.cpp
         ConstantTests.cpp
         #        DivisionTests.cpp
-        #        EqualityTests.cpp
+        EqualityTests.cpp
         InitializationTests.cpp
         #        MultiplicationTests.cpp
         #        NegationTests.cpp
-                StringRepresentationTests.cpp
+        StringRepresentationTests.cpp
         #        SubtractionTests.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
