@@ -708,10 +708,34 @@ namespace fgm
 
         /** @} */
 
-
     private:
         std::array<Vec4<T>, COLUMNS> _data;
     };
+
+
+
+    /**
+     * @addtogroup FGM_Mat4x2_Alias
+     * @{
+     */
+
+    /*************************************
+     *                                   *
+     *             ALIASES               *
+     *                                   *
+     *************************************/
+
+    using Mat4x2B   = Mat4x2<int8_t>;   ///< Signed Byte (8-bit) matrix
+    using Mat4x2UB  = Mat4x2<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
+    using Mat4x2I   = Mat4x2<int32_t>;  ///< Signed Int (32-bit) matrix
+    using Mat4x2U   = Mat4x2<uint32_t>; ///< Unsigned Int (32-bit) matrix
+    using Mat4x2F   = Mat4x2<float>;    ///< Single Precision Floating Point (32-bit) matrix
+    using Mat4x2LL  = Mat4x2<int64_t>;  ///< Signed Long Long (64-bit) matrix
+    using Mat4x2D   = Mat4x2<double>;   ///< Double Precision Floating Point (64-bit) matrix
+    using Mat4x2ULL = Mat4x2<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
+
+    /** @} */
+
 
 
     /**

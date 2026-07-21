@@ -474,8 +474,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMat2x4<T, S> safeDiv(S scalar,
-                                                             Mat2x4 fallback = Mat2x4::zero()) const noexcept
+        [[nodiscard]] constexpr PromotedMat2x4<T, S> safeDiv(S scalar, Mat2x4 fallback = Mat2x4::zero()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -711,6 +710,29 @@ namespace fgm
     private:
         std::array<Vec2<T>, COLUMNS> _data;
     };
+
+    
+    /**
+     * @addtogroup FGM_Mat2x4_Alias
+     * @{
+     */
+
+    /*************************************
+     *                                   *
+     *             ALIASES               *
+     *                                   *
+     *************************************/
+
+    using Mat2x4B   = Mat2x4<int8_t>;   ///< Signed Byte (8-bit) matrix
+    using Mat2x4UB  = Mat2x4<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
+    using Mat2x4I   = Mat2x4<int32_t>;  ///< Signed Int (32-bit) matrix
+    using Mat2x4U   = Mat2x4<uint32_t>; ///< Unsigned Int (32-bit) matrix
+    using Mat2x4F   = Mat2x4<float>;    ///< Single Precision Floating Point (32-bit) matrix
+    using Mat2x4LL  = Mat2x4<int64_t>;  ///< Signed Long Long (64-bit) matrix
+    using Mat2x4D   = Mat2x4<double>;   ///< Double Precision Floating Point (64-bit) matrix
+    using Mat2x4ULL = Mat2x4<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
+
+    /** @} */
 
 
     /**

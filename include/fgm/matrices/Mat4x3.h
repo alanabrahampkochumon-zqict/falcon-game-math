@@ -578,7 +578,7 @@ namespace fgm
          * @return A new @ref fgm::Mat4x3 with negated elements.
          */
         [[nodiscard]] constexpr Mat4x3 operator-() const noexcept
-            requires SignedStrictArithmetic<T>; 
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
 
@@ -744,14 +744,14 @@ namespace fgm
      *                                   *
      *************************************/
 
-    // using Mat4x3B   = Mat4x3<int8_t>;   ///< Signed Byte (8-bit) matrix
-    // using Mat4x3UB  = Mat4x3<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
-    // using Mat4x3I   = Mat4x3<int32_t>;  ///< Signed Int (32-bit) matrix
-    // using Mat4x3U   = Mat4x3<uint32_t>; ///< Unsigned Int (32-bit) matrix
-    // using Mat4x3F   = Mat4x3<float>;    ///< Single Precision Floating Point (32-bit) matrix
-    // using Mat4x3LL  = Mat4x3<int64_t>;  ///< Signed Long Long (64-bit) matrix
-    // using Mat4x3D   = Mat4x3<double>;   ///< Double Precision Floating Point (64-bit) matrix
-    // using Mat4x3ULL = Mat4x3<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
+    using Mat4x3B   = Mat4x3<int8_t>;   ///< Signed Byte (8-bit) matrix
+    using Mat4x3UB  = Mat4x3<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
+    using Mat4x3I   = Mat4x3<int32_t>;  ///< Signed Int (32-bit) matrix
+    using Mat4x3U   = Mat4x3<uint32_t>; ///< Unsigned Int (32-bit) matrix
+    using Mat4x3F   = Mat4x3<float>;    ///< Single Precision Floating Point (32-bit) matrix
+    using Mat4x3LL  = Mat4x3<int64_t>;  ///< Signed Long Long (64-bit) matrix
+    using Mat4x3D   = Mat4x3<double>;   ///< Double Precision Floating Point (64-bit) matrix
+    using Mat4x3ULL = Mat4x3<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
 
     /** @} */
 
@@ -768,21 +768,21 @@ namespace fgm
      * @{
      */
 
-    // /**
-    //  * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
-    //  *
-    //  * @note Promotes the result to the wider type using @ref PromotedMat4x3<T, S>.
-    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //  *
-    //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] scalar The value to scale by.
-    //  * @param[in] matrix The matrix to scale.
-    //  *
-    //  * @return A new @ref Mat4x3 scaled by @p scalar.
-    //  */
-    // template <StrictArithmetic T, StrictArithmetic S>
-    // [[nodiscard]] constexpr PromotedMat4x3<T, S> operator*(S scalar, const Mat4x3<T>& matrix) noexcept;
+    /**
+     * @brief Compute the element-wise product between @p matrix and @p scalar and return a new matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat4x3<T, S>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] matrix The matrix to scale.
+     *
+     * @return A new @ref Mat4x3 scaled by @p scalar.
+     */
+    template <StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] constexpr PromotedMat4x3<T, S> operator*(S scalar, const Mat4x3<T>& matrix) noexcept;
 
     /** @} */
 

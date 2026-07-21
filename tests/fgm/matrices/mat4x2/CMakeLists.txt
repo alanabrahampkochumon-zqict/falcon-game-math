@@ -2,6 +2,7 @@ add_library(Mat4x2Tests OBJECT)
 
 target_sources(
         Mat4x2Tests PRIVATE
+        AliasTests.cpp
         AccessAndMutationTests.cpp
         AdditionTests.cpp
         ConstantTests.cpp

@@ -4,12 +4,13 @@ target_sources(
         Mat4x3Tests PRIVATE
         AccessAndMutationTests.cpp
         AdditionTests.cpp
+        AliasTests.cpp
         ConstantTests.cpp
         DivisionTests.cpp
         EqualityTests.cpp
         InitializationTests.cpp
         MultiplicationTests.cpp
-                NegationTests.cpp
+        NegationTests.cpp
         StringRepresentationTests.cpp
         SubtractionTests.cpp
         TypeConversionTests.cpp

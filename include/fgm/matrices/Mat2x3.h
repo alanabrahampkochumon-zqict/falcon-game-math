@@ -708,7 +708,31 @@ namespace fgm
         std::array<Vec2<T>, COLUMNS> _data;
     };
 
+    
+    /**
+     * @addtogroup FGM_Mat2x3_Alias
+     * @{
+     */
 
+    /*************************************
+     *                                   *
+     *             ALIASES               *
+     *                                   *
+     *************************************/
+
+    using Mat2x3B   = Mat2x3<int8_t>;   ///< Signed Byte (8-bit) matrix
+    using Mat2x3UB  = Mat2x3<uint8_t>;  ///< Unsigned Byte (8-bit) matrix
+    using Mat2x3I   = Mat2x3<int32_t>;  ///< Signed Int (32-bit) matrix
+    using Mat2x3U   = Mat2x3<uint32_t>; ///< Unsigned Int (32-bit) matrix
+    using Mat2x3F   = Mat2x3<float>;    ///< Single Precision Floating Point (32-bit) matrix
+    using Mat2x3LL  = Mat2x3<int64_t>;  ///< Signed Long Long (64-bit) matrix
+    using Mat2x3D   = Mat2x3<double>;   ///< Double Precision Floating Point (64-bit) matrix
+    using Mat2x3ULL = Mat2x3<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
+
+    /** @} */
+    
+    
+    
     /**
      * @brief Compute the element-wise product between @p scalar and @p matrix and return a new matrix.
      *
