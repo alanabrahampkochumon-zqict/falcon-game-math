@@ -22,7 +22,7 @@ TYPED_TEST_SUITE(Mat4x2Constants, SupportedArithmeticTypes);
 
 
 /**
- * @addtogroup T_FGM_Mat4x2x4_Constant
+ * @addtogroup T_FGM_Mat4x2_Constant
  * @{
  */
 
