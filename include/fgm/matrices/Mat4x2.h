@@ -349,93 +349,93 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Compute the element-wise difference between this matrix and @p rhs matrix
-        //  *        and return a new matrix.
-        //  *
-        //  * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, U>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] rhs The matrix to subtract.
-        //  *
-        //  * @return A new @ref Mat4x2 containing the element-wise difference.
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] constexpr PromotedMat4x2<T, U> operator-(const Mat4x2<U>& rhs) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the element-wise difference between this matrix and @p rhs matrix in-place.
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] rhs The matrix to subtract.
-        //  *
-        //  * @return A reference to this matrix (*this).
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // constexpr Mat4x2& operator-=(const Mat4x2<U>& rhs) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
-        //  *
-        //  * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A new @ref Mat4x2 scaled by @p scalar.
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] constexpr PromotedMat4x2<T, S> operator*(S scalar) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the element-wise product between this matrix and @p scalar in-place.
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A reference to this matrix (*this).
-        //  */
-        // template <StrictArithmetic S>
-        // constexpr Mat4x2& operator*=(S scalar) noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
-        // /**
-        //  * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
-        //  *
-        //  * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  * @note Performs assertion for division by zero in **Debug mode**.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A new @ref Mat4x2 inverse scaled by @p scalar.
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] constexpr PromotedMat4x2<T, S> operator/(S scalar) const noexcept
-        //     requires StrictArithmetic<T>;
-        //
-        //
+        /**
+         * @brief Compute the element-wise difference between this matrix and @p rhs matrix
+         *        and return a new matrix.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to subtract.
+         *
+         * @return A new @ref Mat4x2 containing the element-wise difference.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedMat4x2<T, U> operator-(const Mat4x2<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise difference between this matrix and @p rhs matrix in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to subtract.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr Mat4x2& operator-=(const Mat4x2<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Mat4x2 scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMat4x2<T, S> operator*(S scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise product between this matrix and @p scalar in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Mat4x2& operator*=(S scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Mat4x2 inverse scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMat4x2<T, S> operator/(S scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
         // /**
         //  * @brief Compute the element-wise division of this matrix by @p scalar in-place.
         //  *

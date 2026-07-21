@@ -1,15 +1,15 @@
 /**
  * @file SubtractionTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: July 18, 2026
+ * @date Created on: July 21, 2026
  *
- * @brief Verify @ref fgm::Mat3x2 subtraction logic.
+ * @brief Verify @ref fgm::Mat4x2 subtraction logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Mat3x2TestSetup.h"
+#include "Mat4x2TestSetup.h"
 
 
 
@@ -20,26 +20,26 @@
  **************************************/
 
 template <typename T>
-class Mat3x2Subtraction: public ::testing::Test
+class Mat4x2Subtraction: public ::testing::Test
 {
 protected:
-    fgm::Mat3x2<T> _matA;
-    fgm::Mat3x2<T> _matB;
-    fgm::Mat3x2<T> _expectedDifference;
+    fgm::Mat4x2<T> _matA;
+    fgm::Mat4x2<T> _matB;
+    fgm::Mat4x2<T> _expectedDifference;
 
     void SetUp() override
     {
-        _matA               = { fgm::Vec3<T>(5, 6, 5), fgm::Vec3<T>(7, 8, 12) };
-        _matB               = { fgm::Vec3<T>(1, 2, 5), fgm::Vec3<T>(3, 4, 11) };
-        _expectedDifference = { fgm::Vec3<T>(4, 4, 0), fgm::Vec3<T>(4, 4, 1) };
+        _matA               = { fgm::Vec4<T>(5, 6, 5, 7), fgm::Vec4<T>(7, 8, 12, 21) };
+        _matB               = { fgm::Vec4<T>(1, 2, 5, 5), fgm::Vec4<T>(3, 4, 11, 12) };
+        _expectedDifference = { fgm::Vec4<T>(4, 4, 0, 2), fgm::Vec4<T>(4, 4, 1, 9) };
     }
 };
-/** @brief Test fixture for @ref fgm::Mat3x2 subtraction, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat3x2Subtraction, SupportedArithmeticTypes);
+/** @brief Test fixture for @ref fgm::Mat4x2 subtraction, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Mat4x2Subtraction, SupportedArithmeticTypes);
 
 
 /**
- * @addtogroup T_FGM_Mat2x2_Subtraction
+ * @addtogroup T_FGM_Mat4x2_Subtraction
  * @{
  */
 
@@ -52,9 +52,9 @@ TYPED_TEST_SUITE(Mat3x2Subtraction, SupportedArithmeticTypes);
 /** @brief Verify that matrix subtraction operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Mat3x2 MAT1(8, 2, 12, 4, -5, 0);
-    constexpr fgm::Mat3x2 MAT2(5, 6, 7, 8, -11, 5);
-    constexpr fgm::Mat3x2 BINARY_DIFF = MAT1 - MAT2;
+    constexpr fgm::Mat4x2 MAT1(8, 2, 12, 4, -5, 0, -1, 0);
+    constexpr fgm::Mat4x2 MAT2(5, 6, 7, 8, -11, 5, 5, -32);
+    constexpr fgm::Mat4x2 BINARY_DIFF = MAT1 - MAT2;
 
     static_assert(BINARY_DIFF(0, 0) == 3);
     static_assert(BINARY_DIFF(0, 1) == -4);
@@ -62,6 +62,8 @@ namespace
     static_assert(BINARY_DIFF(1, 1) == -4);
     static_assert(BINARY_DIFF(2, 0) == 6);
     static_assert(BINARY_DIFF(2, 1) == -5);
+    static_assert(BINARY_DIFF(3, 0) == -6);
+    static_assert(BINARY_DIFF(3, 1) == 32);
 
 } // namespace
 
@@ -76,9 +78,9 @@ namespace
  * @brief Verify that the binary subtraction operator perform an element-wise subtraction and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Mat3x2Subtraction, MinusOperator_ReturnsDifference)
+TYPED_TEST(Mat4x2Subtraction, MinusOperator_ReturnsDifference)
 {
-    const fgm::Mat3x2 difference = this->_matA - this->_matB;
+    const fgm::Mat4x2 difference = this->_matA - this->_matB;
 
     EXPECT_MAT_EQ(this->_expectedDifference, difference);
 }
@@ -88,12 +90,12 @@ TYPED_TEST(Mat3x2Subtraction, MinusOperator_ReturnsDifference)
  * @brief Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Mat3x2Subtraction, MixedTypeSubtractionPromotesType)
+TEST(Mat4x2Subtraction, MixedTypeSubtractionPromotesType)
 {
-    const fgm::Mat3x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
-    const fgm::Mat3x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
+    const fgm::Mat4x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.5f, 2.0f);
+    const fgm::Mat4x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 1.0, 2.25);
 
-    [[maybe_unused]] const fgm::Mat3x2 difference = mat1 - mat2;
+    [[maybe_unused]] const fgm::Mat4x2 difference = mat1 - mat2;
 
     static_assert(std::is_same_v<decltype(difference)::value_type, double>);
 }
@@ -103,7 +105,7 @@ TEST(Mat3x2Subtraction, MixedTypeSubtractionPromotesType)
  * @brief Verify that the compound subtraction assignment operator perform an element-wise subtraction
  *       and mutates the matrix in-place.
  */
-TYPED_TEST(Mat3x2Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
+TYPED_TEST(Mat4x2Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
 {
     this->_matA -= this->_matB;
 
@@ -115,10 +117,10 @@ TYPED_TEST(Mat3x2Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifferenc
  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Mat3x2Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+TEST(Mat4x2Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
-    fgm::Mat3x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
-    [[maybe_unused]] const fgm::Mat3x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
+    fgm::Mat4x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.5f, 2.0f);
+    [[maybe_unused]] const fgm::Mat4x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 1.0, 2.25);
 
     mat1 -= mat2;
 
