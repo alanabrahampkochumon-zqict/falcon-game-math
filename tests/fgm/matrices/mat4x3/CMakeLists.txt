@@ -10,7 +10,7 @@ target_sources(
         InitializationTests.cpp
         #        MultiplicationTests.cpp
         #        NegationTests.cpp
-        #        StringRepresentationTests.cpp
+                StringRepresentationTests.cpp
         #        SubtractionTests.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
