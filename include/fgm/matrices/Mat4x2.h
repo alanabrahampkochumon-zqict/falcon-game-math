@@ -656,42 +656,44 @@ namespace fgm
          * @{
          */
 
-        // /**
-        //  * @brief Write the matrix to an output stream in **row-major** order.
-        //  *        Format the matrix as
-        //  *        \f$
-        //  *            \begin{bmatrix}
-        //  *                 A_{00} & A_{10} \\
-        //  *                 A_{01} & A_{11} \\
-        //  *                 A_{02} & A_{12}
-        //  *            \end{bmatrix}
-        //  *        \f$ string representation for debugging or logging.
-        //  *
-        //  * @param os     The output stream to write to.
-        //  * @param matrix The matrix to be streamed.
-        //  *
-        //  * @return A reference to the output stream @p os.
-        //  */
-        // friend std::ostream& operator<<(std::ostream& os, const Mat4x2& matrix)
-        // {
-        //     const std::streamsize oldPrecision     = os.precision();
-        //     const std::ios_base::fmtflags oldFlags = os.flags();
-        //
-        //     auto precision = Config::useFullPrecision
-        //         ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
-        //         : Config::LOG_PRECISION;
-        //     os << std::setprecision(precision) << std::fixed;
-        //     os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << "|\n";
-        //     os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << "|\n";
-        //     os << "|" << matrix._data[0][2] << " " << matrix._data[1][2] << "|\n";
-        //
-        //     os.precision(oldPrecision);
-        //     os.flags(oldFlags);
-        //
-        //     return os;
-        // }
-        //
-        // /** @} */
+        /**
+         * @brief Write the matrix to an output stream in **row-major** order.
+         *        Format the matrix as
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} \\
+         *                 A_{01} & A_{11} \\
+         *                 A_{02} & A_{12} \\
+         *                 A_{03} & A_{13}
+         *            \end{bmatrix}
+         *        \f$ string representation for debugging or logging.
+         *
+         * @param os     The output stream to write to.
+         * @param matrix The matrix to be streamed.
+         *
+         * @return A reference to the output stream @p os.
+         */
+        friend std::ostream& operator<<(std::ostream& os, const Mat4x2& matrix)
+        {
+            const std::streamsize oldPrecision     = os.precision();
+            const std::ios_base::fmtflags oldFlags = os.flags();
+
+            auto precision = Config::useFullPrecision
+                ? std::is_same_v<T, double> ? Config::DOUBLE_PRECISION : Config::FLOAT_PRECISION
+                : Config::LOG_PRECISION;
+            os << std::setprecision(precision) << std::fixed;
+            os << "|" << matrix._data[0][0] << " " << matrix._data[1][0] << "|\n";
+            os << "|" << matrix._data[0][1] << " " << matrix._data[1][1] << "|\n";
+            os << "|" << matrix._data[0][2] << " " << matrix._data[1][2] << "|\n";
+            os << "|" << matrix._data[0][3] << " " << matrix._data[1][3] << "|\n";
+
+            os.precision(oldPrecision);
+            os.flags(oldFlags);
+
+            return os;
+        }
+
+        /** @} */
 
 
     private:
@@ -699,28 +701,28 @@ namespace fgm
     };
 
 
-    // /**
-    //  * @brief Compute the element-wise product between @p scalar and @p matrix and return a new matrix.
-    //  *
-    //  * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
-    //  *
-    //  * @tparam T Numeric type of the matrix. Must satisfy @ref StrictArithmetic.
-    //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] scalar The value to scale by.
-    //  * @param[in] matrix The matrix to scale.
-    //  *
-    //  * @return A new @ref Mat4x2 scaled by @p scalar.
-    //  */
-    // template <StrictArithmetic T, StrictArithmetic S>
-    // [[nodiscard]] static constexpr PromotedMat4x2<T, S> operator*(S scalar, const Mat4x2<T>& matrix) noexcept
-    //     requires StrictArithmetic<T>;
-    //
-    //
-    // /** @brief Template deduction guide for Mat4x2. */
-    // template <Arithmetic T, Arithmetic... Args>
-    //     requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 5)
-    // Mat4x2(T, Args...) -> Mat4x2<T>;
+    /**
+     * @brief Compute the element-wise product between @p scalar and @p matrix and return a new matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, S>.
+     *
+     * @tparam T Numeric type of the matrix. Must satisfy @ref StrictArithmetic.
+     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] matrix The matrix to scale.
+     *
+     * @return A new @ref Mat4x2 scaled by @p scalar.
+     */
+    template <StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] static constexpr PromotedMat4x2<T, S> operator*(S scalar, const Mat4x2<T>& matrix) noexcept
+        requires StrictArithmetic<T>;
+
+
+    /** @brief Template deduction guide for Mat4x2. */
+    template <Arithmetic T, Arithmetic... Args>
+        requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 5)
+    Mat4x2(T, Args...) -> Mat4x2<T>;
 
 
 
