@@ -774,8 +774,7 @@ TYPED_TEST(Vec2Projection, StaticWrapper_TryProject_NonOrthogonalProjectionRetur
  *       @ref fgm::Vec2::tryProjectNorm returns a non-zero vector and sets the flag to
  *       @ref fgm::OperationStatus::SUCCESS.
  */
-TEST(Vec2Projection,
-     StaticWrapper_TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
+TEST(Vec2Projection, StaticWrapper_TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
     const fgm::Vec2 a(1.0f, 2.0f);
@@ -915,8 +914,7 @@ TYPED_TEST(Vec2Projection, TryProject_AlwaysReturnFloatingPointVectorAndSetsCorr
 TYPED_TEST(Vec2Projection, StaticWrapper_TryProject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] fgm::OperationStatus flag;
-    [[maybe_unused]] const fgm::Vec2 projection =
-        fgm::Vec2<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
+    [[maybe_unused]] const fgm::Vec2 projection = fgm::Vec2<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 

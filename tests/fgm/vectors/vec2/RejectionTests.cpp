@@ -964,8 +964,7 @@ TYPED_TEST(Vec2Rejection, TryRejectAlwaysReturnFloatingPointVector)
 TYPED_TEST(Vec2Rejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] fgm::OperationStatus status;
-    [[maybe_unused]] const fgm::Vec2 rejection =
-        fgm::Vec2<TypeParam>::tryReject(this->_vec, this->_fromVec, status);
+    [[maybe_unused]] const fgm::Vec2 rejection = fgm::Vec2<TypeParam>::tryReject(this->_vec, this->_fromVec, status);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 

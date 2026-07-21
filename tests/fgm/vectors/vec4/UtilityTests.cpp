@@ -52,7 +52,7 @@ namespace
 {
     constexpr fgm::Vec4 normVec(1.0f, 2.0f, 3.0f, 4.0f);
     constexpr fgm::Vec4 infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                  fgm::constants::INFINITY_F);
+                               fgm::constants::INFINITY_F);
     constexpr fgm::Vec4 nanVec(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN);
 
     static_assert(normVec.hasInf() == false);
@@ -97,8 +97,8 @@ INSTANTIATE_TEST_SUITE_P(
                       Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
                       Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
                       Vec4UtilityParams{ fgm::Vec4(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                         fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                                            true },
+                                                   fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+                                         true },
                       Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
@@ -144,17 +144,16 @@ TEST_P(Vec4NaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasNaN());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Vec4NaNCheckerTestSuite, Vec4NaNCheckerTests,
-    ::testing::Values(Vec4UtilityParams{ fgm::Vec4(fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-                      Vec4UtilityParams{ fgm::Vec4(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                      Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                      Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      Vec4UtilityParams{ fgm::Vec4(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
-                                                         fgm::constants::NaN),
-                                            true },
-                      Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(Vec4NaNCheckerTestSuite, Vec4NaNCheckerTests,
+                         ::testing::Values(Vec4UtilityParams{ fgm::Vec4(fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+                                           Vec4UtilityParams{ fgm::Vec4(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
+                                           Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+                                           Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+                                           Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
+                                           Vec4UtilityParams{ fgm::Vec4(fgm::constants::NaN, fgm::constants::NaN,
+                                                                        fgm::constants::NaN, fgm::constants::NaN),
+                                                              true },
+                                           Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Vec4::hasNaN returns False for integral types. */

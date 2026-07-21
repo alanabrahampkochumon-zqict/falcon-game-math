@@ -126,8 +126,8 @@ TYPED_TEST(Mat3Initialization, EmptyConstructorReturnsIdentityMatrix)
 TYPED_TEST(Mat3Initialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
     const fgm::Mat3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
-                                         this->_elements[4], this->_elements[5], this->_elements[6], this->_elements[7],
-                                         this->_elements[8]);
+                                      this->_elements[4], this->_elements[5], this->_elements[6], this->_elements[7],
+                                      this->_elements[8]);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
@@ -152,8 +152,8 @@ TYPED_TEST(Mat3Initialization, ParameterizedConstructorInitializesDiagonalMatrix
 TYPED_TEST(Mat3Initialization, CanBeConstructedWithBracedInitialization)
 {
     const fgm::Mat3<TypeParam> matrix = { { TypeParam(1), TypeParam(4), TypeParam(7) },
-                                             { TypeParam(2), TypeParam(5), TypeParam(8) },
-                                             { TypeParam(3), TypeParam(6), TypeParam(9) } };
+                                          { TypeParam(2), TypeParam(5), TypeParam(8) },
+                                          { TypeParam(3), TypeParam(6), TypeParam(9) } };
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 

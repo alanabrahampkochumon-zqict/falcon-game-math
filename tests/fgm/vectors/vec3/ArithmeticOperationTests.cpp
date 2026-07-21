@@ -127,7 +127,7 @@ INSTANTIATE_TEST_SUITE_P(Vec3DivisionTestSuite, Vec3DivisionNaNTests,
                                            fgm::Vec3<float>(3.0f, fgm::constants::NaN, 3.0f),
                                            fgm::Vec3<float>(3.0f, 3.0f, fgm::constants::NaN),
                                            fgm::Vec3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN)));
 
 
 /**
@@ -566,7 +566,9 @@ TEST(Vec3ScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWithMin
  *        triggers assert in debug mode.
  */
 TYPED_TEST(Vec3ScalarDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), ""); }
+{
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), "");
+}
 
 
 /**

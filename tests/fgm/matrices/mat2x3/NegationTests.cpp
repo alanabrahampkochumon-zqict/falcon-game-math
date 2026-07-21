@@ -26,7 +26,7 @@ protected:
     void SetUp() override
     {
         _matA        = { fgm::Vec2<T>(-1, 2), fgm::Vec2<T>(5, 6), fgm::Vec2<T>(0, 15) };
-        _expectedMat = { fgm::Vec2<T>(1, -2), fgm::Vec2<T>(-5, -6), fgm::Vec2<T>(0, -15)};
+        _expectedMat = { fgm::Vec2<T>(1, -2), fgm::Vec2<T>(-5, -6), fgm::Vec2<T>(0, -15) };
     }
 };
 /** @brief Test fixture for @ref fgm::Mat2x3 negation, parameterized by @ref SupportedSignedArithmeticTypes. */

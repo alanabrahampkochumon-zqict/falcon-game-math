@@ -216,7 +216,7 @@ TEST(Mat2ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
     const fgm::Mat2 mat      = { 1.0f, -2.0f, -4.0f, 5.0f };
     const fgm::Mat2 expected = { -2.0f, 4.0f, 8.0f, -10.0f };
-    const float scalar          = -2.0f;
+    const float scalar       = -2.0f;
 
     const fgm::Mat2<float> product = mat * scalar;
 

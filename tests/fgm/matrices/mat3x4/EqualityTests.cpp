@@ -471,7 +471,7 @@ TEST(Mat3x4Equality, InfinityInequality_IdenticalMatricesReturnFalse)
 TEST(Mat3x4Equality, InfinityInequality_DifferentMatricesReturnTrue)
 {
     const fgm::Mat3x4 matA(-INF, INF, INF, -INF, INF, -INF, -INF, INF, INF, -INF, INF, -INF);
-    const fgm::Mat3x4 matB(INF, INF, -INF, -INF, INF, INF,INF, INF, -INF, -INF, INF, INF);
+    const fgm::Mat3x4 matB(INF, INF, -INF, -INF, INF, INF, INF, INF, -INF, -INF, INF, INF);
 
     const bool inequality = matA.anyNeq(matB);
 

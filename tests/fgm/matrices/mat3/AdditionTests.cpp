@@ -93,9 +93,8 @@ TYPED_TEST(Mat3Addition, PlusOperator_ReturnsMatrixSum)
 TEST(Mat3Addition, PlusOperator_MixedTypePromotesType)
 {
     const fgm::Mat3 mat1{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ -3.0f, -4.0f, 10.0f },
-                             fgm::Vec3{ 4.5f, 3.25f, 3.16f } };
-    const fgm::Mat3 mat2{ fgm::Vec3{ 10.0, 2.0, -1.0 }, fgm::Vec3{ 3.0, -8.0, 12.0 },
-                             fgm::Vec3{ 3.25, 5.1, 0.0 } };
+                          fgm::Vec3{ 4.5f, 3.25f, 3.16f } };
+    const fgm::Mat3 mat2{ fgm::Vec3{ 10.0, 2.0, -1.0 }, fgm::Vec3{ 3.0, -8.0, 12.0 }, fgm::Vec3{ 3.25, 5.1, 0.0 } };
     [[maybe_unused]] const fgm::Mat3 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
@@ -120,10 +119,8 @@ TYPED_TEST(Mat3Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  */
 TEST(Mat3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    fgm::Mat3 mat1{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ -3.0f, -4.0f, 10.0f },
-                       fgm::Vec3{ 4.5f, 3.25f, 3.16f } };
-    constexpr fgm::Mat3 mat2{ fgm::Vec3{ 10.0, 2.0, -1.0 }, fgm::Vec3{ 3.0, -8.0, 12.0 },
-                                 fgm::Vec3{ 3.25, 5.1, 0.0 } };
+    fgm::Mat3 mat1{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ -3.0f, -4.0f, 10.0f }, fgm::Vec3{ 4.5f, 3.25f, 3.16f } };
+    constexpr fgm::Mat3 mat2{ fgm::Vec3{ 10.0, 2.0, -1.0 }, fgm::Vec3{ 3.0, -8.0, 12.0 }, fgm::Vec3{ 3.25, 5.1, 0.0 } };
 
     mat1 += mat2;
 

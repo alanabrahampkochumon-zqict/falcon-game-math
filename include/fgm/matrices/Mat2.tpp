@@ -423,7 +423,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat2<T, S> Mat2<T>::safeDiv(const S scalar, const Mat2& fallback) const noexcept
+    constexpr PromotedMat2<T, S> Mat2<T>::safeDiv(const S scalar, Mat2 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -432,14 +432,14 @@ namespace fgm
         {
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
             {
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
         }
         if constexpr (std::is_integral_v<R>)
         {
             if (scalar == 0)
             {
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
         }
 
@@ -449,7 +449,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat2<T, S> Mat2<T>::safeDiv(const Mat2& mat, const S scalar, const Mat2& fallback) noexcept
+    constexpr PromotedMat2<T, S> Mat2<T>::safeDiv(const Mat2& mat, const S scalar, Mat2 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
@@ -457,7 +457,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat2<T, S> Mat2<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                 const Mat2& fallback) const noexcept
+                                                 Mat2 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -467,12 +467,12 @@ namespace fgm
             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
             {
                 status = OperationStatus::NANOPERAND;
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
         }
 
@@ -481,7 +481,7 @@ namespace fgm
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
         }
 
@@ -494,7 +494,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat2<T, S> Mat2<T>::tryDiv(const Mat2& mat, const S scalar, OperationStatus& status,
-                                                 const Mat2& fallback) noexcept
+                                                 Mat2 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
@@ -569,7 +569,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat2<Magnitude<T>> Mat2<T>::safeInverse(const Mat2& fallback) const noexcept
+    constexpr Mat2<Magnitude<T>> Mat2<T>::safeInverse(Mat2 fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -581,14 +581,14 @@ namespace fgm
         {
             if (hasNaN() || fgm::abs(det) <= std::numeric_limits<T>::epsilon())
             {
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
         }
         if constexpr (std::is_integral_v<T>)
         {
             if (det == 0)
             {
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
         }
 
@@ -597,13 +597,13 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat2<Magnitude<T>> Mat2<T>::safeInverseOf(const Mat2& matrix, const Mat2& fallback) noexcept
+    constexpr Mat2<Magnitude<T>> Mat2<T>::safeInverseOf(const Mat2& matrix, Mat2 fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.safeInverse(fallback); }
 
 
     template <Arithmetic T>
-    constexpr Mat2<Magnitude<T>> Mat2<T>::tryInverse(OperationStatus& status, const Mat2& fallback) const noexcept
+    constexpr Mat2<Magnitude<T>> Mat2<T>::tryInverse(OperationStatus& status, Mat2 fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -615,12 +615,12 @@ namespace fgm
             if (hasNaN())
             {
                 status = OperationStatus::NANOPERAND;
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
             if (fgm::abs(det) <= std::numeric_limits<T>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
         }
 
@@ -629,7 +629,7 @@ namespace fgm
             if (det == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Mat2<R>(fallback);
+                return static_cast<Mat2<R>>(fallback);
             }
         }
 
@@ -641,7 +641,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr Mat2<Magnitude<T>> Mat2<T>::tryInverseOf(const Mat2& matrix, OperationStatus& status,
-                                                       const Mat2& fallback) noexcept
+                                                       Mat2 fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.tryInverse(status, fallback); }
 

@@ -99,8 +99,8 @@ TYPED_TEST(Mat2x3Initialization, EmptyConstructorReturnsIdentityMatrix)
 /** @brief Verify that the parameterized constructor can initialize matrix with elements. */
 TYPED_TEST(Mat2x3Initialization, ParameterizedConstructorInitializesMatrixWithElements)
 {
-    const fgm::Mat2x3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
-                                           this->_elements[3], this->_elements[4], this->_elements[5]);
+    const fgm::Mat2x3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
+                                        this->_elements[4], this->_elements[5]);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 

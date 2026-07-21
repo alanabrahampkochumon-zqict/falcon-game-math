@@ -62,7 +62,7 @@ INSTANTIATE_TEST_SUITE_P(Vec3NormalizationNaNTestSuite, Vec3NormalizationNaNTest
                                            fgm::Vec3<float>(1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vec3<float>(1.0f, 1.0f, fgm::constants::NaN),
                                            fgm::Vec3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN)));
 
 
 

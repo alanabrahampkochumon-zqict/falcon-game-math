@@ -92,25 +92,26 @@ class Mat2x4PerElementInequality: public ::testing::TestWithParam<Mat2x4ElementP
 /** @brief Fixture for verifying matrix inequality by making only one element unequal at a time. */
 INSTANTIATE_TEST_SUITE_P(
     Matrix2x4Tests, Mat2x4PerElementInequality,
-    ::testing::Values(
-        Mat2x4ElementParam{
-            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8 }, .expected = false },
-        Mat2x4ElementParam{
-            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 2, 2, 3, 4, 5, 6, 7, 8 }, .expected = true },
-        Mat2x4ElementParam{
-            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 1, 3, 4, 5, 6, 7, 8 }, .expected = true },
-        Mat2x4ElementParam{
-            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 1, 4, 5, 6, 7, 8 }, .expected = true },
-        Mat2x4ElementParam{
-            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 1, 5, 6, 7, 8 }, .expected = true },
-        Mat2x4ElementParam{
-            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 1, 6, 7, 8 }, .expected = true },
-        Mat2x4ElementParam{
-            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 1, 7, 8 }, .expected = true },
-        Mat2x4ElementParam{
-            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 1, 8 }, .expected = true },
-        Mat2x4ElementParam{
-            .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 7, 1 }, .expected = true }));
+    ::testing::Values(Mat2x4ElementParam{ .first    = { 1, 2, 3, 4, 5, 6, 7, 8 },
+                                          .second   = { 1, 2, 3, 4, 5, 6, 7, 8 },
+                                          .expected = false },
+                      Mat2x4ElementParam{
+                          .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 2, 2, 3, 4, 5, 6, 7, 8 }, .expected = true },
+                      Mat2x4ElementParam{
+                          .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 1, 3, 4, 5, 6, 7, 8 }, .expected = true },
+                      Mat2x4ElementParam{
+                          .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 1, 4, 5, 6, 7, 8 }, .expected = true },
+                      Mat2x4ElementParam{
+                          .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 1, 5, 6, 7, 8 }, .expected = true },
+                      Mat2x4ElementParam{
+                          .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 1, 6, 7, 8 }, .expected = true },
+                      Mat2x4ElementParam{
+                          .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 1, 7, 8 }, .expected = true },
+                      Mat2x4ElementParam{
+                          .first = { 1, 2, 3, 4, 5, 6, 7, 8 }, .second = { 1, 2, 3, 4, 5, 6, 1, 8 }, .expected = true },
+                      Mat2x4ElementParam{ .first    = { 1, 2, 3, 4, 5, 6, 7, 8 },
+                                          .second   = { 1, 2, 3, 4, 5, 6, 7, 1 },
+                                          .expected = true }));
 
 
 /**

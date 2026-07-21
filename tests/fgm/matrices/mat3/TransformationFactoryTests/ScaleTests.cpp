@@ -31,7 +31,6 @@ protected:
                          fgm::Vec3{ T(0), T(0), T(5.3821839321) } };
         _scale       = T(5.3821839321);
     }
-
 };
 /**
  * @brief Test fixture for @ref fgm::Mat3 uniform scale factory, parameterized

@@ -50,8 +50,8 @@ INSTANTIATE_TEST_SUITE_P(Mat2x3DivisionTestSuite, NaNMat2x3Division,
                                            fgm::Mat2x3<float>(3.0f, 3.0f, 3.0f, 3.0f, fgm::constants::NaN, 3.0f),
                                            fgm::Mat2x3<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, fgm::constants::NaN),
                                            fgm::Mat2x3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                 fgm ::constants::NaN, fgm ::constants::NaN,
-                                                                 fgm::constants::NaN, fgm::constants::NaN)));
+                                                              fgm ::constants::NaN, fgm ::constants::NaN,
+                                                              fgm::constants::NaN, fgm::constants::NaN)));
 
 
 
@@ -126,7 +126,9 @@ TYPED_TEST(Mat2x3Division, DivideOperator_ReturnsInverseScaledMatrix)
 
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Mat2x3Division, DivideOperator_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), ""); }
+{
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), "");
+}
 
 #endif
 
@@ -148,7 +150,9 @@ TYPED_TEST(Mat2x3Division, DivideEqualsOperator_InverseScalesMatrixInPlace)
 
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Mat2x3Division, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(this->_matrix /= 0, ""); }
+{
+    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "");
+}
 
 #endif
 
@@ -256,7 +260,7 @@ TYPED_TEST(Mat2x3Division, StaticWrapper_SafeDivide_DivisionByZeroReturnsPassedI
  */
 TEST_P(NaNMat2x3Division, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefault)
 {
-    using T                               = ParamType::value_type;
+    using T                            = ParamType::value_type;
     const fgm::Mat2x3 inverseScaledMat = fgm::Mat2x3<T>::safeDiv(GetParam(), 2.5);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
@@ -268,7 +272,7 @@ TEST_P(NaNMat2x3Division, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefaul
  */
 TEST_P(NaNMat2x3Division, StaticWrapper_SafeDivide_ReturnsPassedInFallback)
 {
-    using T                               = ParamType::value_type;
+    using T                            = ParamType::value_type;
     const fgm::Mat2x3 inverseScaledMat = fgm::Mat2x3<T>::safeDiv(GetParam(), 2.5, fgm::Mat2x3<T>::zero());
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
@@ -410,7 +414,7 @@ TYPED_TEST(Mat2x3Division, StaticWrapper_TryDivide_DivisionByZeroReturnsPassedIn
 TEST_P(NaNMat2x3Division, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
-    using T                               = ParamType::value_type;
+    using T                            = ParamType::value_type;
     const fgm::Mat2x3 inverseScaledMat = fgm::Mat2x3<T>::tryDiv(GetParam(), 2.5, flag);
     EXPECT_MAT_ZERO(inverseScaledMat);
 
@@ -425,7 +429,7 @@ TEST_P(NaNMat2x3Division, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault
 TEST_P(NaNMat2x3Division, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
-    using T                                                = ParamType::value_type;
+    using T                                             = ParamType::value_type;
     [[maybe_unused]] const fgm::Mat2x3 inverseScaledMat = fgm::Mat2x3<T>::tryDiv(GetParam(), T(0), flag);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }

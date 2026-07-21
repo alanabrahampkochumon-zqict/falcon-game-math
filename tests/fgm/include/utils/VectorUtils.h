@@ -15,9 +15,9 @@
 
 #include <cmath>
 #include <fgm/common/MathTraits.h>
-#include <fgm/vectors/Vec4.h>
 #include <fgm/vectors/Vec2.h>
 #include <fgm/vectors/Vec3.h>
+#include <fgm/vectors/Vec4.h>
 #include <gtest/gtest.h>
 #include <type_traits>
 

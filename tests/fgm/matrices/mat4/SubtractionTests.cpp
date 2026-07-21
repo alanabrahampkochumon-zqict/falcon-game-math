@@ -111,10 +111,10 @@ TYPED_TEST(Mat4Subtraction, MinusOperator_ReturnsDifference)
  */
 TEST(Mat4Subtraction, MixedTypeSubtractionPromotesType)
 {
-    constexpr fgm::Mat4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f,
-                                44.0f, 316.0f, 55.0f);
+    constexpr fgm::Mat4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f, 44.0f,
+                             316.0f, 55.0f);
     constexpr fgm::Mat4 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0, 4.0, -11.0, 21.0,
-                                11.0);
+                             11.0);
 
     [[maybe_unused]] constexpr fgm::Mat4 difference = mat1 - mat2;
 
@@ -140,10 +140,10 @@ TYPED_TEST(Mat4Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
  */
 TEST(Mat4Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
 {
-    fgm::Mat4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f, 44.0f,
-                      316.0f, 55.0f);
-    [[maybe_unused]] constexpr fgm::Mat4 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0,
-                                                 4.0, -11.0, 21.0, 11.0);
+    fgm::Mat4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f, 44.0f, 316.0f,
+                   55.0f);
+    [[maybe_unused]] constexpr fgm::Mat4 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0, 12.0, 316.0, 7.0, 4.0,
+                                              -11.0, 21.0, 11.0);
 
     (void) (mat1 -= mat2); // Static cast to void is need to prevent compiler warning that not using mat2
 

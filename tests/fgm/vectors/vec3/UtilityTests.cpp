@@ -88,15 +88,15 @@ TEST_P(Vec3InfChecker, ReturnTrueIfAnyComponentIsInfinity)
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasInf());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Vec3InfCheckerTestSuite, Vec3InfChecker,
-    ::testing::Values(Vec3UtilityParams{ fgm::Vec3(fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-                      Vec3UtilityParams{ fgm::Vec3(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                      Vec3UtilityParams{ fgm::Vec3(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-                      Vec3UtilityParams{ fgm::Vec3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                         fgm::constants::INFINITY_F),
-                                            true },
-                      Vec3UtilityParams{ fgm::Vec3(1.0f, 1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(Vec3InfCheckerTestSuite, Vec3InfChecker,
+                         ::testing::Values(Vec3UtilityParams{ fgm::Vec3(fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
+                                           Vec3UtilityParams{ fgm::Vec3(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
+                                           Vec3UtilityParams{ fgm::Vec3(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
+                                           Vec3UtilityParams{ fgm::Vec3(fgm::constants::INFINITY_F,
+                                                                        fgm::constants::INFINITY_F,
+                                                                        fgm::constants::INFINITY_F),
+                                                              true },
+                                           Vec3UtilityParams{ fgm::Vec3(1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Vec3::hasInf returns False for integral types. */
@@ -145,9 +145,9 @@ INSTANTIATE_TEST_SUITE_P(Vec3NaNCheckerTestSuite, Vec3NaNChecker,
                          ::testing::Values(Vec3UtilityParams{ fgm::Vec3(fgm::constants::NaN, 1.0f, 1.0f), true },
                                            Vec3UtilityParams{ fgm::Vec3(1.0f, fgm::constants::NaN, 1.0f), true },
                                            Vec3UtilityParams{ fgm::Vec3(1.0f, 1.0f, fgm::constants::NaN), true },
-                                           Vec3UtilityParams{ fgm::Vec3(fgm::constants::NaN, fgm::constants::NaN,
-                                                                              fgm::constants::NaN),
-                                                                 true },
+                                           Vec3UtilityParams{
+                                               fgm::Vec3(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN),
+                                               true },
                                            Vec3UtilityParams{ fgm::Vec3(1.0f, 1.0f, 1.0f), false }));
 
 

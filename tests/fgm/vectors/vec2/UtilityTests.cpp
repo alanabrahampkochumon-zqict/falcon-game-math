@@ -87,13 +87,12 @@ TEST_P(Vec2InfChecker, ReturnTrueIfAnyComponentIsInfinity)
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasInf());
 }
-INSTANTIATE_TEST_SUITE_P(Vec2InfCheckerTestSuite, Vec2InfChecker,
-                         ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, 1.0f), true },
-                                           Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::INFINITY_F), true },
-                                           Vec2UtilityParams{
-                                               fgm::Vec2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                                               true },
-                                           Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(
+    Vec2InfCheckerTestSuite, Vec2InfChecker,
+    ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, 1.0f), true },
+                      Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::INFINITY_F), true },
+                      Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F), true },
+                      Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Vec2::hasInf returns False for integral types. */
@@ -142,7 +141,7 @@ INSTANTIATE_TEST_SUITE_P(Vec2NaNCheckerTestSuite, Vec2NaNChecker,
                          ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::NaN, 1.0f), true },
                                            Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::NaN), true },
                                            Vec2UtilityParams{ fgm::Vec2(fgm::constants::NaN, fgm::constants::NaN),
-                                                                 true },
+                                                              true },
                                            Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
 
 

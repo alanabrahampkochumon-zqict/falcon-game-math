@@ -70,8 +70,7 @@ TEST_F(Mat3StringRepresentationTests, FloatRepresentation)
  */
 TEST_F(Mat3StringRepresentationTests, DoubleRepresentation)
 {
-    const fgm::Mat3 mat(1.2345789777, 2.65831, 2.0, 4.0, 3.2345789777, 1.2345789777, 12.0, -6.2345789777,
-                           0.2345789777);
+    const fgm::Mat3 mat(1.2345789777, 2.65831, 2.0, 4.0, 3.2345789777, 1.2345789777, 12.0, -6.2345789777, 0.2345789777);
     std::stringstream ss;
 
     ss << mat;

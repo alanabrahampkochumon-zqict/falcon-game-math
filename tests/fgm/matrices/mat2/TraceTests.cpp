@@ -41,7 +41,7 @@ TYPED_TEST_SUITE(Mat2Trace, SupportedArithmeticTypes);
 namespace
 {
     constexpr fgm::Mat2 MAT(3, 2, 5, 7);
-    static_assert(MAT.trace() == 10);                   // Member function
+    static_assert(MAT.trace() == 10);                // Member function
     static_assert(fgm::Mat2<int>::trace(MAT) == 10); // Static function
 } // namespace
 

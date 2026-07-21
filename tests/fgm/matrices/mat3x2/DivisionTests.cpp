@@ -126,7 +126,9 @@ TYPED_TEST(Mat3x2Division, DivideOperator_ReturnsInverseScaledMatrix)
 
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Mat3x2Division, DivideOperator_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), ""); }
+{
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), "");
+}
 
 #endif
 
@@ -148,7 +150,9 @@ TYPED_TEST(Mat3x2Division, DivideEqualsOperator_InverseScalesMatrixInPlace)
 
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Mat3x2Division, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(this->_matrix /= 0, ""); }
+{
+    EXPECT_DEBUG_DEATH(this->_matrix /= 0, "");
+}
 
 #endif
 

@@ -472,7 +472,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat3x2<T, S> safeDiv(S scalar,
-                                                             const Mat3x2& fallback = Mat3x2::zero()) const noexcept
+                                                             Mat3x2 fallback = Mat3x2::zero()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -498,7 +498,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMat3x2<T, S> safeDiv(const Mat3x2& mat, S scalar,
-                                                                    const Mat3x2& fallback = Mat3x2::zero()) noexcept
+                                                                    Mat3x2 fallback = Mat3x2::zero()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -528,7 +528,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat3x2<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                            const Mat3x2& fallback = Mat3x2::zero()) const noexcept
+                                                            Mat3x2 fallback = Mat3x2::zero()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -559,7 +559,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMat3x2<T, S> tryDiv(const Mat3x2& mat, S scalar, OperationStatus& status,
-                                                                   const Mat3x2& fallback = Mat3x2::zero()) noexcept
+                                                                   Mat3x2 fallback = Mat3x2::zero()) noexcept
             requires StrictArithmetic<T>;
 
 

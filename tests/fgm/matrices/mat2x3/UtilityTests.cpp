@@ -111,9 +111,9 @@ INSTANTIATE_TEST_SUITE_P(
         Mat2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
         Mat2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
         Mat2x3UtilityParams{ fgm::Mat2x3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                               fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                               fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                                true },
+                                         fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                                         fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+                             true },
         Mat2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
@@ -167,10 +167,9 @@ INSTANTIATE_TEST_SUITE_P(
                       Mat2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
                       Mat2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
                       Mat2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      Mat2x3UtilityParams{ fgm::Mat2x3(fgm::constants::NaN, fgm::constants::NaN,
-                                                             fgm::constants::NaN, fgm::constants::NaN,
-                                                             fgm::constants::NaN, fgm::constants::NaN),
-                                              true },
+                      Mat2x3UtilityParams{ fgm::Mat2x3(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
+                                                       fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN),
+                                           true },
                       Mat2x3UtilityParams{ fgm::Mat2x3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 

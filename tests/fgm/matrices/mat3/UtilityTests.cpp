@@ -101,15 +101,15 @@ TEST_P(Mat3InfChecker, ReturnTrueIfAnyElementIsInfinity)
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasInf());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Mat3InfCheckerTestSuite, Mat3InfChecker,
-    ::testing::Values(Mat3UtilityParams{ fgm::Mat3(fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-                      Mat3UtilityParams{ fgm::Mat3(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                      Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-                      Mat3UtilityParams{ fgm::Mat3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                         fgm::constants::INFINITY_F),
-                                            true },
-                      Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(Mat3InfCheckerTestSuite, Mat3InfChecker,
+                         ::testing::Values(Mat3UtilityParams{ fgm::Mat3(fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
+                                           Mat3UtilityParams{ fgm::Mat3(1.0f, fgm::constants::INFINITY_F, 1.0f), true },
+                                           Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, fgm::constants::INFINITY_F), true },
+                                           Mat3UtilityParams{ fgm::Mat3(fgm::constants::INFINITY_F,
+                                                                        fgm::constants::INFINITY_F,
+                                                                        fgm::constants::INFINITY_F),
+                                                              true },
+                                           Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Mat3::hasInf returns `false` for integral types. */
@@ -159,9 +159,9 @@ INSTANTIATE_TEST_SUITE_P(Mat3NaNCheckerTestSuite, Mat3NaNChecker,
                          ::testing::Values(Mat3UtilityParams{ fgm::Mat3(fgm::constants::NaN, 1.0f, 1.0f), true },
                                            Mat3UtilityParams{ fgm::Mat3(1.0f, fgm::constants::NaN, 1.0f), true },
                                            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, fgm::constants::NaN), true },
-                                           Mat3UtilityParams{ fgm::Mat3(fgm::constants::NaN, fgm::constants::NaN,
-                                                                              fgm::constants::NaN),
-                                                                 true },
+                                           Mat3UtilityParams{
+                                               fgm::Mat3(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN),
+                                               true },
                                            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f), false }));
 
 

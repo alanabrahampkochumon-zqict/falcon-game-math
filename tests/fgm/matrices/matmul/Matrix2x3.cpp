@@ -453,5 +453,3 @@ namespace
 //
 //     EXPECT_MAT_EQ(expectedMatrix, matB);
 // }
-
-

@@ -48,7 +48,7 @@ INSTANTIATE_TEST_SUITE_P(Vec3ProjectionTestSuite, Vec3ProjectionNaNTests,
                                            fgm::Vec3<float>(1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vec3<float>(1.0f, 1.0f, fgm::constants::NaN),
                                            fgm::Vec3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN)));
 
 
 
@@ -948,8 +948,7 @@ TYPED_TEST(Vec3Projection, TryProject_AlwaysReturnFloatingPointVectorAndSetsCorr
 TYPED_TEST(Vec3Projection, StaticWrapper_TryProject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] fgm::OperationStatus flag;
-    [[maybe_unused]] const fgm::Vec3 projection =
-        fgm::Vec3<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
+    [[maybe_unused]] const fgm::Vec3 projection = fgm::Vec3<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 

@@ -66,7 +66,7 @@ INSTANTIATE_TEST_SUITE_P(Vec4NormalizationNaNTestSuite, Vec4NormalizationNaNTest
                                            fgm::Vec4<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vec4<float>(1.0f, 1.0f, 1.0f, fgm::constants::NaN),
                                            fgm::Vec4<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN, fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
 /**

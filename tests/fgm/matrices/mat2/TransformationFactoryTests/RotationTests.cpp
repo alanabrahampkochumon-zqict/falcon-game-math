@@ -99,12 +99,16 @@ namespace
 
 /** @brief Verify that rotation transformation factory returns a rotation matrix. */
 TYPED_TEST(Mat2Rotation, ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<typename TypeParam::first_type>::makeRotation(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<typename TypeParam::first_type>::makeRotation(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory returns a rotation matrix with non-integral values. */
 TYPED_TEST(Mat2FloatRotation, ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<TypeParam>::makeRotation(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<TypeParam>::makeRotation(this->_angle));
+}
 
 
 /** @} */

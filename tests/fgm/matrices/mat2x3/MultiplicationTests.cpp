@@ -30,8 +30,7 @@ protected:
         _expectedFloatingMat = { fgm::Vec2{ T(14.864197523864192), T(27.604938258604928) },
                                  fgm::Vec2{ T(10.61728394561728), T(8.493827156493824) },
                                  fgm::Vec2{ T(23.358024680358014), T(4.246913578246912) } };
-        _expectedIntegralMat = { fgm::Vec2{ T(14), T(26) }, fgm::Vec2{ T(10), T(8) },
-                                 fgm::Vec2{ T(22), T(4) } };
+        _expectedIntegralMat = { fgm::Vec2{ T(14), T(26) }, fgm::Vec2{ T(10), T(8) }, fgm::Vec2{ T(22), T(4) } };
     }
 };
 /** @brief Test fixture for @ref fgm::Mat2x3 scalar multiplication, parameterized by @ref SupportedArithmeticTypes.
@@ -111,7 +110,7 @@ TEST(Mat2x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
     const fgm::Mat2x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f };
     const fgm::Mat2x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f };
-    const float scalar            = -2.0f;
+    const float scalar         = -2.0f;
 
     const fgm::Mat2x3<float> product = mat * scalar;
 

@@ -49,19 +49,17 @@ class SingularMat4Inverse: public ::testing::TestWithParam<fgm::Mat4<float>>
 INSTANTIATE_TEST_SUITE_P(
     Mat4InverseTestSuite, SingularMat4Inverse,
     ::testing::Values(fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f },
-                                    fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
+                                 fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
                       fgm::Mat4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                                 fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
                       fgm::Mat4{ fgm::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                                 fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
                       fgm::Mat4{ fgm::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
+                                 fgm::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
                       fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
-                                    fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                                 fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
                       fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
-                                    fgm::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f },
-                                    fgm::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
+                                 fgm::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
 
 
 /** @brief Test fixture for @ref fgm::Mat4 inverse with NaN vectors. */
@@ -73,7 +71,7 @@ INSTANTIATE_TEST_SUITE_P(Mat4InverseTestSuite, NaNMat4Inverse,
                                            fgm::Mat4<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
                                            fgm::Mat4<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
                                            fgm::Mat4<float>{ fgm ::constants::NaN, fgm::constants::NaN,
-                                                                fgm ::constants::NaN, fgm ::constants::NaN }));
+                                                             fgm ::constants::NaN, fgm ::constants::NaN }));
 
 
 /**
@@ -90,8 +88,8 @@ INSTANTIATE_TEST_SUITE_P(Mat4InverseTestSuite, NaNMat4Inverse,
 /** @brief Verify that matrix inverse functions are available at compile time. */
 namespace
 {
-    constexpr fgm::Mat4 mat(1.0f, -1.0f, 0.0f, -2.0f, 2.0f, -1.0f, -2.0f, -6.0f, 0.0f, -1.0f, 3.0f, 3.0f, -2.0f,
-                               2.0f, -2.0f, 3.0f);
+    constexpr fgm::Mat4 mat(1.0f, -1.0f, 0.0f, -2.0f, 2.0f, -1.0f, -2.0f, -6.0f, 0.0f, -1.0f, 3.0f, 3.0f, -2.0f, 2.0f,
+                            -2.0f, 3.0f);
 
     //  Verify matrix inverse (member function)
     constexpr fgm::Mat4 invMat = mat.inverse();

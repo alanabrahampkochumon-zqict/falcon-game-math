@@ -281,7 +281,7 @@ namespace
 TEST(Mat4ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 {
     const fgm::Mat4 mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
-                            11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
+                         11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
 
     const fgm::Mat4 product = mat * 0;
 
@@ -293,7 +293,7 @@ TEST(Mat4ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 TEST(Mat4ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 {
     const fgm::Mat4 mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
-                            11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
+                         11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
 
     const fgm::Mat4 product = mat * 1;
 
@@ -305,10 +305,10 @@ TEST(Mat4ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 TEST(Mat4ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
     const fgm::Mat4 mat      = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
-                                    -9.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
+                                 -9.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
     const fgm::Mat4 expected = { -2.0f, 4.0f,   -6.0f,  8.0f,   -10.0f, -12.0f, -14.0f, -16.0f,
-                                    18.0f, -24.0f, -26.0f, -28.0f, -30.0f, -32.0f, -34.0f, -36.0f };
-    const float scalar          = -2.0f;
+                                 18.0f, -24.0f, -26.0f, -28.0f, -30.0f, -32.0f, -34.0f, -36.0f };
+    const float scalar       = -2.0f;
 
     const fgm::Mat4 product = mat * scalar;
 
@@ -393,7 +393,7 @@ TYPED_TEST(Mat4ScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
  */
 TEST(Mat4ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
-    fgm::Mat4 mat    = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
+    fgm::Mat4 mat       = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
                             -9.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
     const double scalar = 5.0;
     mat *= scalar;
@@ -408,7 +408,7 @@ TEST(Mat4ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPro
  */
 TEST(Mat4ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    fgm::Mat4 mat    = { 1, -2, 3, -4, 5, 6, 7, 8, -9, 10, 12, 13, 14, 16, 18, 20 };
+    fgm::Mat4 mat       = { 1, -2, 3, -4, 5, 6, 7, 8, -9, 10, 12, 13, 14, 16, 18, 20 };
     const double scalar = 2.5;
     const fgm::Mat4 expected{ 2, -5, 7, -10, 12, 15, 17, 20, -22, 25, 30, 32, 35, 40, 45, 50 };
 
@@ -596,9 +596,7 @@ TEST(Mat4VectorMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPro
  */
 TEST(Mat4VectorMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    const fgm::Mat4 mat{
-        2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5
-    };
+    const fgm::Mat4 mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5 };
     fgm::Vec4 vec{ 10, 20, 30, 40 };
     const fgm::Vec4 expected{ 1015, 1340, 1015, 1232 };
 

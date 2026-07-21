@@ -108,10 +108,7 @@ namespace
  **************************************/
 
 /** @brief Verify that the @ref fgm::Vec2::dist function returns the Euclidean distance. */
-TYPED_TEST(Vec2Distance, Dist_ReturnsEuclideanDistance)
-{
-    EXPECT_MAG_EQ(this->_dist, this->_vecA.dist(this->_vecB));
-}
+TYPED_TEST(Vec2Distance, Dist_ReturnsEuclideanDistance) { EXPECT_MAG_EQ(this->_dist, this->_vecA.dist(this->_vecB)); }
 
 
 /** @brief Verify that the @ref fgm::Vec2::dist function maintains precision for irrational numbers. */

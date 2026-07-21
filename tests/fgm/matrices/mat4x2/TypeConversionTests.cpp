@@ -71,10 +71,10 @@ TEST(Mat4x2ConversionConstructor, ReturnsNewInstance)
     mat2(0, 0) = 5;
 
     // Then, the float matrix remains unchanged
-    EXPECT_MAT_CONTAINS(std::vector{ 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f}, mat1);
+    EXPECT_MAT_CONTAINS(std::vector{ 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f }, mat1);
 
     // And, the new matrix is of type double with the mutated value
-    EXPECT_MAT_CONTAINS(std::vector{ 5.0, 2.0, 3.0, 4.0, 5.0, 6.0 , 7.0, 8.0 }, mat2);
+    EXPECT_MAT_CONTAINS(std::vector{ 5.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 }, mat2);
 }
 
 

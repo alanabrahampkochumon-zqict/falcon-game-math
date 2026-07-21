@@ -47,7 +47,7 @@ INSTANTIATE_TEST_SUITE_P(Mat2DivisionTestSuite, NaNMat2Division,
                                            fgm::Mat2<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
                                            fgm::Mat2<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
                                            fgm::Mat2<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN, fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
 
@@ -250,7 +250,7 @@ TYPED_TEST(Mat2Division, StaticWrapper_SafeDivide_DivisionByZeroReturnsPassedInF
  */
 TEST_P(NaNMat2Division, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefault)
 {
-    using T                             = ParamType::value_type;
+    using T                          = ParamType::value_type;
     const fgm::Mat2 inverseScaledMat = fgm::Mat2<T>::safeDiv(GetParam(), 2.5);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 }
@@ -262,7 +262,7 @@ TEST_P(NaNMat2Division, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefault)
  */
 TEST_P(NaNMat2Division, StaticWrapper_SafeDivide_ReturnsPassedInFallback)
 {
-    using T                             = ParamType::value_type;
+    using T                          = ParamType::value_type;
     const fgm::Mat2 inverseScaledMat = fgm::Mat2<T>::safeDiv(GetParam(), 2.5, fgm::Mat2<T>::zero());
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
@@ -404,7 +404,7 @@ TYPED_TEST(Mat2Division, StaticWrapper_TryDivide_DivisionByZeroReturnsPassedInFa
 TEST_P(NaNMat2Division, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
-    using T                             = ParamType::value_type;
+    using T                          = ParamType::value_type;
     const fgm::Mat2 inverseScaledMat = fgm::Mat2<T>::tryDiv(GetParam(), 2.5, flag);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 
@@ -419,7 +419,7 @@ TEST_P(NaNMat2Division, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 TEST_P(NaNMat2Division, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
-    using T                                              = ParamType::value_type;
+    using T                                           = ParamType::value_type;
     [[maybe_unused]] const fgm::Mat2 inverseScaledMat = fgm::Mat2<T>::tryDiv(GetParam(), T(0), flag);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }

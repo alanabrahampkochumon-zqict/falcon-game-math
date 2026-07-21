@@ -125,7 +125,7 @@ INSTANTIATE_TEST_SUITE_P(Vec4DivisionTestSuite, Vec4DivisionNaNTests,
                                            fgm::Vec4<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
                                            fgm::Vec4<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
                                            fgm::Vec4<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN, fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
 

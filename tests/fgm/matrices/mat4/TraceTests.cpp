@@ -45,7 +45,7 @@ TYPED_TEST_SUITE(Mat4Trace, SupportedArithmeticTypes);
 namespace
 {
     constexpr fgm::Mat4 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19);
-    static_assert(MAT.trace() == 48);                   // Member function
+    static_assert(MAT.trace() == 48);                // Member function
     static_assert(fgm::Mat4<int>::trace(MAT) == 48); // Static function
 
 } // namespace

@@ -49,7 +49,7 @@ INSTANTIATE_TEST_SUITE_P(Vec4ProjectionTestSuite, Vec4ProjectionNaNTests,
                                            fgm::Vec4<float>(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vec4<float>(1.0f, 1.0f, 1.0f, fgm::constants::NaN),
                                            fgm::Vec4<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN, fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
 
@@ -838,8 +838,7 @@ TYPED_TEST(Vec4Projection, StaticWrapper_TryProject_NonOrthogonalProjectionRetur
  *       @ref fgm::Vec4::tryProject with the @p ontoNormalized flag enabled returns a non-zero vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TEST(Vec4Projection,
-     StaticWrapper_TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
+TEST(Vec4Projection, StaticWrapper_TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
     const fgm::Vec4 a(1.0f, 2.0f, 3.0f, 4.0f);
@@ -981,8 +980,7 @@ TYPED_TEST(Vec4Projection, TryProject_AlwaysReturnFloatingPointVectorAndSetsCorr
 TYPED_TEST(Vec4Projection, StaticWrapper_TryProject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] fgm::OperationStatus flag;
-    [[maybe_unused]] const fgm::Vec4 projection =
-        fgm::Vec4<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
+    [[maybe_unused]] const fgm::Vec4 projection = fgm::Vec4<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 

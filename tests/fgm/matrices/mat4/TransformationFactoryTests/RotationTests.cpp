@@ -106,7 +106,7 @@ protected:
     void SetUp() override
     {
         _angle = fgm::constants::PI<T> / T(4.0);
-        _axis  = fgm::Vec3 { T(0.26726124191242440), T(0.53452248382484879), T(0.80178372573727319) };
+        _axis  = fgm::Vec3{ T(0.26726124191242440), T(0.53452248382484879), T(0.80178372573727319) };
 
 #ifdef FGM_LEFT_HANDED
         _expectedMatX = { fgm::Vec4{ T(1.0), T(0.0), T(0.0), T(0.0) },
@@ -120,8 +120,7 @@ protected:
 
         _expectedMatY = { fgm::Vec4{ T(0.70710678118654757), T(0.0), T(0.70710678118654757), T(0.0) },
                           fgm::Vec4{ T(0.0), T(1.0), T(0.0), T(0.0) },
-                          fgm::Vec4{ T(-0.70710678118654757), T(0.0), T(0.70710678118654757), T(0.0) },
-                          fgm::Vec4 {
+                          fgm::Vec4{ T(-0.70710678118654757), T(0.0), T(0.70710678118654757), T(0.0) }, fgm::Vec4 {
                               T(0.0),
                               T(0.0),
                               T(0.0),
@@ -139,8 +138,7 @@ protected:
 
         _expectedMatXYZ = { fgm::Vec4{ T(0.5), T(0.5), T(-0.70710678118654757), T(0.0) },
                             fgm::Vec4{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5), T(0.0) },
-                            fgm::Vec4{ T(0.85355339059327395), T(-0.14644660940672627), T(0.5), T(0.0) },
-                            fgm::Vec4 {
+                            fgm::Vec4{ T(0.85355339059327395), T(-0.14644660940672627), T(0.5), T(0.0) }, fgm::Vec4 {
                                 T(0.0),
                                 T(0.0),
                                 T(0.0),
@@ -173,8 +171,7 @@ protected:
 
         _expectedMatZ = { fgm::Vec4{ T(0.70710678118654757), T(0.70710678118654757), T(0.0), T(0.0) },
                           fgm::Vec4{ T(-0.70710678118654757), T(0.70710678118654757), T(0.0), T(0.0) },
-                          fgm::Vec4{ T(0.0), T(0.0), T(1.0), T(0.0) },
-                          fgm::Vec4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
+                          fgm::Vec4{ T(0.0), T(0.0), T(1.0), T(0.0) }, fgm::Vec4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
 
         _expectedMatXYZ = { fgm::Vec4{ T(0.5), T(0.5), T(-0.70710678118654757), T(0.0) },
                             fgm::Vec4{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5), T(0.0) },
@@ -206,45 +203,59 @@ TYPED_TEST_SUITE(Mat4FloatRotation, SupportedFloatingPointTypes);
 
 /** @brief Verify that rotation transformation factory for x returns a rotation matrix. */
 TYPED_TEST(Mat4Rotation, X_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<typename TypeParam::first_type>::makeRotationX(this->_angle));
+}
 
 
 /**
  * @brief Verify that rotation transformation factory for x returns a rotation matrix for non-integral rotation values.
  */
 TYPED_TEST(Mat4FloatRotation, X_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<TypeParam>::makeRotationX(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<TypeParam>::makeRotationX(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Mat4Rotation, Y_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<typename TypeParam::first_type>::makeRotationY(this->_angle));
+}
 
 
 /**
  * @brief Verify that rotation transformation factory for y returns a rotation matrix for non-integral rotation values.
  */
 TYPED_TEST(Mat4FloatRotation, Y_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<TypeParam>::makeRotationY(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<TypeParam>::makeRotationY(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Mat4Rotation, Z_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<typename TypeParam::first_type>::makeRotationZ(this->_angle));
+}
 
 
 /**
  * @brief Verify that rotation transformation factory for z returns a rotation matrix for non-integral rotation values.
  */
 TYPED_TEST(Mat4FloatRotation, Z_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<TypeParam>::makeRotationZ(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<TypeParam>::makeRotationZ(this->_angle));
+}
 
 
 /**
  * @brief Verify that rotation transformation factory for an axis returns a rotation matrix.
  */
 TYPED_TEST(Mat4FloatRotation, AxisAligned_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedAxisRotation, fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis)); }
+{
+    EXPECT_MAT_EQ(this->_expectedAxisRotation, fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis));
+}
 
 
 /** @} */

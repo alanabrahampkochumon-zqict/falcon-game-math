@@ -311,7 +311,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat3x2<T, S> Mat3x2<T>::safeDiv(const S scalar, const Mat3x2& fallback) const noexcept
+    constexpr PromotedMat3x2<T, S> Mat3x2<T>::safeDiv(const S scalar, Mat3x2 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -320,14 +320,14 @@ namespace fgm
         {
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
             {
-                return Mat3x2<R>(fallback);
+                return static_cast<Mat3x2<R>>(fallback);
             }
         }
         if constexpr (std::is_integral_v<R>)
         {
             if (scalar == 0)
             {
-                return Mat3x2<R>(fallback);
+                return static_cast<Mat3x2<R>>(fallback);
             }
         }
 
@@ -338,7 +338,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat3x2<T, S> Mat3x2<T>::safeDiv(const Mat3x2& mat, const S scalar,
-                                                      const Mat3x2& fallback) noexcept
+                                                      Mat3x2 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
@@ -346,7 +346,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat3x2<T, S> Mat3x2<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                     const Mat3x2& fallback) const noexcept
+                                                     Mat3x2 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -356,12 +356,12 @@ namespace fgm
             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
             {
                 status = OperationStatus::NANOPERAND;
-                return Mat3x2<R>(fallback);
+                return static_cast<Mat3x2<R>>(fallback);
             }
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Mat3x2<R>(fallback);
+                return static_cast<Mat3x2<R>>(fallback);
             }
         }
 
@@ -370,7 +370,7 @@ namespace fgm
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Mat3x2<R>(fallback);
+                return static_cast<Mat3x2<R>>(fallback);
             }
         }
 
@@ -383,7 +383,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat3x2<T, S> Mat3x2<T>::tryDiv(const Mat3x2& mat, const S scalar, OperationStatus& status,
-                                                     const Mat3x2& fallback) noexcept
+                                                     Mat3x2 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 

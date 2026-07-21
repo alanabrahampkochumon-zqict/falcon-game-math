@@ -166,31 +166,43 @@ namespace
 
 /** @brief Verify that rotation transformation factory for x returns a rotation matrix. */
 TYPED_TEST(Mat3Rotation, X_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat3<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat3<typename TypeParam::first_type>::makeRotationX(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory for x returns a rotation matrix for non-integral values. */
 TYPED_TEST(Mat3FloatRotation, X_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat3<TypeParam>::makeRotationX(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat3<TypeParam>::makeRotationX(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Mat3Rotation, Y_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat3<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat3<typename TypeParam::first_type>::makeRotationY(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix for non-integral values. */
 TYPED_TEST(Mat3FloatRotation, Y_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat3<TypeParam>::makeRotationY(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat3<TypeParam>::makeRotationY(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory for z returns a rotation matrix. */
 TYPED_TEST(Mat3Rotation, Z_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat3<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat3<typename TypeParam::first_type>::makeRotationZ(this->_angle));
+}
 
 
 /** @brief Verify that rotation transformation factory for z returns a rotation matrix for non-integral values. */
 TYPED_TEST(Mat3FloatRotation, Z_ReturnsRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat3<TypeParam>::makeRotationZ(this->_angle)); }
+{
+    EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat3<TypeParam>::makeRotationZ(this->_angle));
+}
 
 /** @} */

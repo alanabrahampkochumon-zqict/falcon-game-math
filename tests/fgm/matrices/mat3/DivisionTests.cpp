@@ -29,8 +29,8 @@ protected:
 
     void SetUp() override
     {
-        _matrix = { fgm::Vec3<T>{ 17, 13, 15 }, fgm::Vec3<T>{ 11, 16, 35 }, fgm::Vec3<T>{ 27, 44, 56 } };
-        _scalar = T(7);
+        _matrix         = { fgm::Vec3<T>{ 17, 13, 15 }, fgm::Vec3<T>{ 11, 16, 35 }, fgm::Vec3<T>{ 27, 44, 56 } };
+        _scalar         = T(7);
         _expectedMatrix = { { T(2.428571428571428), T(1.857142857142857), T(2.142857142857143) },
                             { T(1.571428571428571), T(2.285714285714286), T(5.0) },
                             { T(3.857142857142857), T(6.285714285714286), T(8.0) } };
@@ -48,7 +48,7 @@ INSTANTIATE_TEST_SUITE_P(Mat3DivisionTestSuite, NaNMat3Division,
                                            fgm::Mat3<float>(3.0f, fgm::constants::NaN, 3.0f),
                                            fgm::Mat3<float>(3.0f, 3.0f, fgm::constants::NaN),
                                            fgm::Mat3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN)));
 
 
 
@@ -268,7 +268,7 @@ TYPED_TEST(Mat3Division, StaticWrapper_SafeDivide_DivisionByZeroReturnsPassedInF
  */
 TEST_P(NaNMat3Division, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefault)
 {
-    using T                             = ParamType::value_type;
+    using T                          = ParamType::value_type;
     const fgm::Mat3 inverseScaledMat = fgm::Mat3<T>::safeDiv(GetParam(), 2.5);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 }
@@ -280,7 +280,7 @@ TEST_P(NaNMat3Division, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefault)
  */
 TEST_P(NaNMat3Division, StaticWrapper_SafeDivide_ReturnsPassedInFallback)
 {
-    using T                             = ParamType::value_type;
+    using T                          = ParamType::value_type;
     const fgm::Mat3 inverseScaledMat = fgm::Mat3<T>::safeDiv(GetParam(), 2.5, fgm::Mat3<T>::zero());
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
@@ -423,7 +423,7 @@ TYPED_TEST(Mat3Division, StaticWrapper_TryDivide_DivisionByZeroReturnsPassedInFa
 TEST_P(NaNMat3Division, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
-    using T                             = ParamType::value_type;
+    using T                          = ParamType::value_type;
     const fgm::Mat3 inverseScaledMat = fgm::Mat3<T>::tryDiv(GetParam(), 2.5, flag);
     EXPECT_MAT_IDENTITY(inverseScaledMat);
 
@@ -438,7 +438,7 @@ TEST_P(NaNMat3Division, StaticWrapper_TryDivide_ReturnsIdentityMatrixByDefault)
 TEST_P(NaNMat3Division, StaticWrapper_TryDivide_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
-    using T                                              = ParamType::value_type;
+    using T                                           = ParamType::value_type;
     [[maybe_unused]] const fgm::Mat3 inverseScaledMat = fgm::Mat3<T>::tryDiv(GetParam(), static_cast<T>(0), flag);
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }

@@ -324,7 +324,7 @@ namespace fgm
     // TODO: Check if fallback should be pass by value since its copied inside
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat2x4<T, S> Mat2x4<T>::safeDiv(const S scalar, const Mat2x4& fallback) const noexcept
+    constexpr PromotedMat2x4<T, S> Mat2x4<T>::safeDiv(const S scalar, Mat2x4 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -333,14 +333,14 @@ namespace fgm
         {
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
             {
-                return Mat2x4<R>(fallback);
+                return static_cast<Mat2x4<R>>(fallback);
             }
         }
         if constexpr (std::is_integral_v<R>)
         {
             if (scalar == 0)
             {
-                return Mat2x4<R>(fallback);
+                return static_cast<Mat2x4<R>>(fallback);
             }
         }
 
@@ -351,7 +351,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat2x4<T, S> Mat2x4<T>::safeDiv(const Mat2x4& mat, const S scalar,
-                                                      const Mat2x4& fallback) noexcept
+                                                      Mat2x4 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
@@ -359,7 +359,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat2x4<T, S> Mat2x4<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                     const Mat2x4& fallback) const noexcept
+                                                     Mat2x4 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -369,12 +369,12 @@ namespace fgm
             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
             {
                 status = OperationStatus::NANOPERAND;
-                return Mat2x4<R>(fallback);
+                return static_cast<Mat2x4<R>>(fallback);
             }
             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Mat2x4<R>(fallback);
+                return static_cast<Mat2x4<R>>(fallback);
             }
         }
 
@@ -383,7 +383,7 @@ namespace fgm
             if (scalar == 0)
             {
                 status = OperationStatus::DIVISIONBYZERO;
-                return Mat2x4<R>(fallback);
+                return static_cast<Mat2x4<R>>(fallback);
             }
         }
 
@@ -396,7 +396,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat2x4<T, S> Mat2x4<T>::tryDiv(const Mat2x4& mat, const S scalar, OperationStatus& status,
-                                                     const Mat2x4& fallback) noexcept
+                                                     Mat2x4 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 

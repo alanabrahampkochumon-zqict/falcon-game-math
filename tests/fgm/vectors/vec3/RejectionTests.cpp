@@ -42,7 +42,7 @@ INSTANTIATE_TEST_SUITE_P(Vec3RejectionTestSuite, Vec3RejectionNaNTests,
                                            fgm::Vec3<float>(1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vec3<float>(1.0f, 1.0f, fgm::constants::NaN),
                                            fgm::Vec3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN)));
 
 
 
@@ -998,8 +998,7 @@ TYPED_TEST(Vec3Rejection, TryRejectAlwaysReturnFloatingPointVector)
 TYPED_TEST(Vec3Rejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] fgm::OperationStatus status;
-    [[maybe_unused]] const fgm::Vec3 rejection =
-        fgm::Vec3<TypeParam>::tryReject(this->_vec, this->_fromVec, status);
+    [[maybe_unused]] const fgm::Vec3 rejection = fgm::Vec3<TypeParam>::tryReject(this->_vec, this->_fromVec, status);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 

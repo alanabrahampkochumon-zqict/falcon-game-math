@@ -59,7 +59,7 @@ INSTANTIATE_TEST_SUITE_P(Mat2InverseTestSuite, NaNMat2Inverse,
                                            fgm::Mat2<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
                                            fgm::Mat2<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
                                            fgm::Mat2<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                               fgm ::constants::NaN, fgm ::constants::NaN)));
+                                                            fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
 

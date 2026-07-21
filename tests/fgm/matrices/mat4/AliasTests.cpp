@@ -62,8 +62,7 @@ namespace
 
     /** Verify @ref fgm::Mat4ULL has `uint64_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat4ULL::value_type, uint64_t> && "Mat4ULL must contain uint64_t elements");
-    static_assert(std::is_same_v<fgm::Mat4ULL, fgm::Mat4<uint64_t>> &&
-                  "Mat4ULL must be an alias of Mat4<uint64_t>");
+    static_assert(std::is_same_v<fgm::Mat4ULL, fgm::Mat4<uint64_t>> && "Mat4ULL must be an alias of Mat4<uint64_t>");
 
 } // namespace
 

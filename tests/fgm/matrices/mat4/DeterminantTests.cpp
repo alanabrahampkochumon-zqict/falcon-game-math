@@ -46,19 +46,17 @@ class SingularMat4Determinant: public ::testing::TestWithParam<fgm::Mat4<float>>
 INSTANTIATE_TEST_SUITE_P(
     Mat4DeterminantTestSuite, SingularMat4Determinant,
     ::testing::Values(fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f },
-                                    fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
+                                 fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
                       fgm::Mat4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                                 fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
                       fgm::Mat4{ fgm::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                                 fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
                       fgm::Mat4{ fgm::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
-                                    fgm::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
+                                 fgm::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
                       fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
-                                    fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                                 fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
                       fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
-                                    fgm::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f },
-                                    fgm::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
+                                 fgm::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
 
 
 
@@ -77,7 +75,7 @@ INSTANTIATE_TEST_SUITE_P(
 namespace
 {
     constexpr fgm::Mat4 MAT{ fgm::Vec4{ 1, 2, 3, 4 }, fgm::Vec4{ 1, 2, 1, 3 }, fgm::Vec4{ 2, 3, 4, 12 },
-                                fgm::Vec4{ 2, 1, 3, 2 } };
+                             fgm::Vec4{ 2, 1, 3, 2 } };
 
     // Verify determinant (member function)
     static_assert(MAT.determinant() == 39);

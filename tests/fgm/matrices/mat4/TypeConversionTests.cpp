@@ -28,7 +28,7 @@
 namespace
 {
     constexpr fgm::Mat4 MAT(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
-                               15.0f, 16.0f);
+                            15.0f, 16.0f);
 
     // Verify that the matrix can be type promoted at compile time.
     constexpr fgm::Mat4<double> MAT_D(MAT);
@@ -53,7 +53,7 @@ namespace
 TEST(Mat4ConversionConstructor, PromotesType)
 {
     constexpr fgm::Mat4 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
-                                15.0f, 16.0f);
+                             15.0f, 16.0f);
 
     [[maybe_unused]] constexpr fgm::Mat4<double> mat2(mat1);
 
@@ -66,7 +66,7 @@ TEST(Mat4ConversionConstructor, ReturnsNewInstance)
 {
     // Given a float matrix
     constexpr fgm::Mat4 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
-                                15.0f, 16.0f);
+                             15.0f, 16.0f);
 
     // When converted to a double matrix
     fgm::Mat4<double> mat2(mat1);

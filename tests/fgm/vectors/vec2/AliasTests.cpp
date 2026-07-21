@@ -62,8 +62,7 @@ namespace
 
     /** Verify @ref fgm::Vec2ULL has `uint64_t` value_type. */
     static_assert(std::is_same_v<fgm::Vec2ULL::value_type, uint64_t> && "Vec2ULL must contain uint64_t elements");
-    static_assert(std::is_same_v<fgm::Vec2ULL, fgm::Vec2<uint64_t>> &&
-                  "Vec2ULL must be an alias of Vec2<uint64_t>");
+    static_assert(std::is_same_v<fgm::Vec2ULL, fgm::Vec2<uint64_t>> && "Vec2ULL must be an alias of Vec2<uint64_t>");
 } // namespace
 
 /** @} */

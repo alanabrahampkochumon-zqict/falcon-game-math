@@ -108,8 +108,8 @@ INSTANTIATE_TEST_SUITE_P(
                       Mat4UtilityParams{ fgm::Mat4(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
                       Mat4UtilityParams{ fgm::Mat4(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
                       Mat4UtilityParams{ fgm::Mat4(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                         fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                                            true },
+                                                   fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+                                         true },
                       Mat4UtilityParams{ fgm::Mat4(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
@@ -156,16 +156,15 @@ TEST_P(Mat4NaNChecker, ReturnTrueIfAnyElementIsNaN)
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasNaN());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Mat4NaNCheckerTestSuite, Mat4NaNChecker,
-    ::testing::Values(Mat4UtilityParams{ fgm::Mat4(fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-                      Mat4UtilityParams{ fgm::Mat4(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Mat4UtilityParams{ fgm::Mat4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                      Mat4UtilityParams{ fgm::Mat4(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      Mat4UtilityParams{ fgm::Mat4(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
-                                                         fgm::constants::NaN),
-                                            true },
-                      Mat4UtilityParams{ fgm::Mat4(1.0f, 1.0f, 1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(Mat4NaNCheckerTestSuite, Mat4NaNChecker,
+                         ::testing::Values(Mat4UtilityParams{ fgm::Mat4(fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+                                           Mat4UtilityParams{ fgm::Mat4(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
+                                           Mat4UtilityParams{ fgm::Mat4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+                                           Mat4UtilityParams{ fgm::Mat4(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
+                                           Mat4UtilityParams{ fgm::Mat4(fgm::constants::NaN, fgm::constants::NaN,
+                                                                        fgm::constants::NaN, fgm::constants::NaN),
+                                                              true },
+                                           Mat4UtilityParams{ fgm::Mat4(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Mat4::hasNaN returns `false` for integral types. */

@@ -589,7 +589,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat3<T, S> safeDiv(S scalar,
-                                                           const Mat3& fallback = Mat3::identity()) const noexcept
+                                                           Mat3 fallback = Mat3::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -615,7 +615,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMat3<T, S> safeDiv(const Mat3& mat, S scalar,
-                                                                  const Mat3& fallback = Mat3::identity()) noexcept
+                                                                  Mat3 fallback = Mat3::identity()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -645,7 +645,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] constexpr PromotedMat3<T, S> tryDiv(S scalar, OperationStatus& status,
-                                                          const Mat3& fallback = Mat3::identity()) const noexcept
+                                                          Mat3 fallback = Mat3::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -676,7 +676,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedMat3<T, S> tryDiv(const Mat3& mat, S scalar, OperationStatus& status,
-                                                                 const Mat3& fallback = Mat3::identity()) noexcept
+                                                                 Mat3 fallback = Mat3::identity()) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -869,7 +869,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        constexpr Mat3<Magnitude<T>> safeInverse(const Mat3& fallback = Mat3::identity()) const noexcept
+        constexpr Mat3<Magnitude<T>> safeInverse(Mat3 fallback = Mat3::identity()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -904,7 +904,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Mat3<Magnitude<T>> safeInverseOf(const Mat3& matrix,
-                                                          const Mat3& fallback = Mat3::identity()) noexcept
+                                                          Mat3 fallback = Mat3::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -940,7 +940,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         constexpr Mat3<Magnitude<T>> tryInverse(OperationStatus& status,
-                                                const Mat3& fallback = Mat3::identity()) const noexcept
+                                                Mat3 fallback = Mat3::identity()) const noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -977,7 +977,7 @@ namespace fgm
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Mat3<Magnitude<T>> tryInverseOf(const Mat3& matrix, OperationStatus& status,
-                                                         const Mat3& fallback = Mat3::identity()) noexcept
+                                                         Mat3 fallback = Mat3::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 

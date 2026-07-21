@@ -28,8 +28,7 @@ protected:
 
     void SetUp() override
     {
-        _linearTransform = { fgm::Vec2{ T(1.2341234), T(2.31419123) },
-                             fgm::Vec2{ T(15.123949182), T(0.93819231) } };
+        _linearTransform = { fgm::Vec2{ T(1.2341234), T(2.31419123) }, fgm::Vec2{ T(15.123949182), T(0.93819231) } };
         _translation     = { T(1.2398412349), T(12.1234892134) };
 
         _expectedMat = { fgm::Vec3{ T(1.2341234), T(2.31419123), T(0) },

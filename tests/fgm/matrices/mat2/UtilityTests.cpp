@@ -108,8 +108,8 @@ INSTANTIATE_TEST_SUITE_P(
                       Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
                       Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
                       Mat2UtilityParams{ fgm::Mat2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                         fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                                            true },
+                                                   fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+                                         true },
                       Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
@@ -155,16 +155,15 @@ TEST_P(Mat2NaNChecker, ReturnTrueIfAnyElementIsNaN)
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasNaN());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Mat2NaNCheckerTestSuite, Mat2NaNChecker,
-    ::testing::Values(Mat2UtilityParams{ fgm::Mat2(fgm::constants::NaN, 1.0f), true },
-                      Mat2UtilityParams{ fgm::Mat2(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-                      Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                      Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                      Mat2UtilityParams{ fgm::Mat2(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
-                                                         fgm::constants::NaN),
-                                            true },
-                      Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, 1.0f, 1.0f), false }));
+INSTANTIATE_TEST_SUITE_P(Mat2NaNCheckerTestSuite, Mat2NaNChecker,
+                         ::testing::Values(Mat2UtilityParams{ fgm::Mat2(fgm::constants::NaN, 1.0f), true },
+                                           Mat2UtilityParams{ fgm::Mat2(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
+                                           Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+                                           Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
+                                           Mat2UtilityParams{ fgm::Mat2(fgm::constants::NaN, fgm::constants::NaN,
+                                                                        fgm::constants::NaN, fgm::constants::NaN),
+                                                              true },
+                                           Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Mat2::hasNaN returns `false` for integral types. */
