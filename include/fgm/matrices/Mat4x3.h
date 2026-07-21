@@ -390,37 +390,37 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
-        //  *
-        //  * @note Promotes the result to the wider type using @ref PromotedMat4x3<T, S>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A new @ref Mat4x3 scaled by @p scalar.
-        //  */
-        // template <StrictArithmetic S>
-        // [[nodiscard]] constexpr PromotedMat4x3<T, S> operator*(S scalar) const noexcept
-        //     requires StrictArithmetic<T>;
+        /**
+         * @brief Compute the element-wise product between this matrix and @p scalar and return a new matrix.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat4x3<T, S>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Mat4x3 scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr PromotedMat4x3<T, S> operator*(S scalar) const noexcept
+            requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Compute the element-wise product between this matrix and @p scalar in-place.
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] scalar The value to scale by.
-        //  *
-        //  * @return A reference to this matrix (*this).
-        //  */
-        // template <StrictArithmetic S>
-        // constexpr Mat4x3& operator*=(S scalar) noexcept
-        //     requires StrictArithmetic<T>;
+        /**
+         * @brief Compute the element-wise product between this matrix and @p scalar in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Mat4x3& operator*=(S scalar) noexcept
+            requires StrictArithmetic<T>;
 
 
 

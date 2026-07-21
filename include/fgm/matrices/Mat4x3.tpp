@@ -230,243 +230,34 @@ namespace fgm
     }
 
 
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x3<T, S> Mat4x3<T>::operator*(S scalar) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //         return Mat4x3<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2], scalar * _data[3]);
-    //     }
-    //
-    //
-    //     template <StrictArithmetic T, StrictArithmetic S>
-    //     constexpr PromotedMat4x3<T, S> operator*(S scalar, const Mat4x3<T>& matrix) noexcept
-    //     { return matrix * scalar; }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr Mat4x3<T>& Mat4x3<T>::operator*=(S scalar) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         _data[0] *= scalar;
-    //         _data[1] *= scalar;
-    //         _data[2] *= scalar;
-    //         _data[3] *= scalar;
-    //         return *this;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr PromotedVec4<T, U> Mat4x3<T>::operator*(const Vec4<U>& vec) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-    //         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (!std::is_constant_evaluated())
-    //             {
-    //                 return Vec4<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
-    //                                         std::fma(static_cast<R>(_data[1][0]), static_cast<R>(vec[1]),
-    //                                                  std::fma(static_cast<R>(_data[2][0]), static_cast<R>(vec[2]),
-    //                                                           static_cast<R>(_data[3][0]) *
-    //                                                           static_cast<R>(vec[3])))), // x
-    //                                std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
-    //                                         std::fma(static_cast<R>(_data[1][1]), static_cast<R>(vec[1]),
-    //                                                  std::fma(static_cast<R>(_data[2][1]), static_cast<R>(vec[2]),
-    //                                                           static_cast<R>(_data[3][1]) *
-    //                                                           static_cast<R>(vec[3])))), // y
-    //                                std::fma(static_cast<R>(_data[0][2]), static_cast<R>(vec[0]),
-    //                                         std::fma(static_cast<R>(_data[1][2]), static_cast<R>(vec[1]),
-    //                                                  std::fma(static_cast<R>(_data[2][2]), static_cast<R>(vec[2]),
-    //                                                           static_cast<R>(_data[3][2]) *
-    //                                                           static_cast<R>(vec[3])))), // z
-    //                                std::fma(static_cast<R>(_data[0][3]), static_cast<R>(vec[0]),
-    //                                         std::fma(static_cast<R>(_data[1][3]), static_cast<R>(vec[1]),
-    //                                                  std::fma(static_cast<R>(_data[2][3]), static_cast<R>(vec[2]),
-    //                                                           static_cast<R>(_data[3][3]) *
-    //                                                           static_cast<R>(vec[3]))))); // w
-    //             }
-    //         }
-    // #endif
-    //         R x = static_cast<R>(_data[0][0]) * static_cast<R>(vec[0]) +
-    //             static_cast<R>(_data[1][0]) * static_cast<R>(vec[1]) +
-    //             static_cast<R>(_data[2][0]) * static_cast<R>(vec[2]) + static_cast<R>(_data[3][0]) *
-    //             static_cast<R>(vec[3]);
-    //
-    //         R y = static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) +
-    //             static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]) +
-    //             static_cast<R>(_data[2][1]) * static_cast<R>(vec[2]) + static_cast<R>(_data[3][1]) *
-    //             static_cast<R>(vec[3]);
-    //
-    //         R z = static_cast<R>(_data[0][2]) * static_cast<R>(vec[0]) +
-    //             static_cast<R>(_data[1][2]) * static_cast<R>(vec[1]) +
-    //             static_cast<R>(_data[2][2]) * static_cast<R>(vec[2]) + static_cast<R>(_data[3][2]) *
-    //             static_cast<R>(vec[3]);
-    //
-    //         R w = static_cast<R>(_data[0][3]) * static_cast<R>(vec[0]) +
-    //             static_cast<R>(_data[1][3]) * static_cast<R>(vec[1]) +
-    //             static_cast<R>(_data[2][3]) * static_cast<R>(vec[2]) + static_cast<R>(_data[3][3]) *
-    //             static_cast<R>(vec[3]);
-    //
-    //         return Vec4<R>(x, y, z, w);
-    //     }
-    //
-    //
-    //     template <StrictArithmetic T, StrictArithmetic U>
-    //     constexpr PromotedVec4<T, U> operator*(const Vec4<T>& vec, const Mat4x3<U>& matrix) noexcept
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-    //         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (!std::is_constant_evaluated())
-    //             {
-    //                 return Vec4<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
-    //                                         std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
-    //                                                  std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 0)),
-    //                                                           static_cast<R>(vec[3]) * static_cast<R>(matrix(3,
-    //                                                           0))))),
-    //                                std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
-    //                                         std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 1)),
-    //                                                  std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 1)),
-    //                                                           static_cast<R>(vec[3]) * static_cast<R>(matrix(3,
-    //                                                           1))))),
-    //                                std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 2)),
-    //                                         std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 2)),
-    //                                                  std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 2)),
-    //                                                           static_cast<R>(vec[3]) * static_cast<R>(matrix(3,
-    //                                                           2))))),
-    //                                std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 3)),
-    //                                         std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 3)),
-    //                                                  std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 3)),
-    //                                                           static_cast<R>(vec[3]) * static_cast<R>(matrix(3,
-    //                                                           3))))));
-    //             }
-    //         }
-    //
-    // #endif
-    //         R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0)) +
-    //             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 0)) +
-    //             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0));
-    //
-    //         R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1)) +
-    //             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 1)) +
-    //             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1));
-    //
-    //         R z = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 2)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 2)) +
-    //             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 2)) +
-    //             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2));
-    //
-    //         R w = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 3)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 3)) +
-    //             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 3)) +
-    //             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3));
-    //
-    //         return Vec4<R>(x, y, z, w);
-    //     }
-    //
-    //
-    //     template <StrictArithmetic T, StrictArithmetic U>
-    //     constexpr Vec4<T>& operator*=(Vec4<T>& vec, const Mat4x3<U>& matrix) noexcept
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
-    //         // #error "FMA ACTIVE!" // For checking if FMA execution path is active.
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (!std::is_constant_evaluated())
-    //             {
-    //                 R x = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
-    //                                std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
-    //                                         std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 0)),
-    //                                                  static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0)))));
-    //                 R y = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
-    //                                std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 1)),
-    //                                         std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 1)),
-    //                                                  static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1)))));
-    //                 R z = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 2)),
-    //                                std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 2)),
-    //                                         std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 2)),
-    //                                                  static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2)))));
-    //                 R w = std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 3)),
-    //                                std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 3)),
-    //                                         std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 3)),
-    //                                                  static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3)))));
-    //
-    //                 vec.x() = static_cast<T>(x);
-    //                 vec.y() = static_cast<T>(y);
-    //                 vec.z() = static_cast<T>(z);
-    //                 vec.w() = static_cast<T>(w);
-    //
-    //                 return vec;
-    //             }
-    //         }
-    // #endif
-    //         R x = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 0)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0)) +
-    //             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 0)) +
-    //             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0));
-    //
-    //         R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1)) +
-    //             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 1)) +
-    //             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1));
-    //
-    //         R z = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 2)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 2)) +
-    //             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 2)) +
-    //             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2));
-    //
-    //         R w = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 3)) +
-    //             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 3)) +
-    //             static_cast<R>(vec[2]) * static_cast<R>(matrix(2, 3)) +
-    //             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3));
-    //
-    //         vec.x() = static_cast<T>(x);
-    //         vec.y() = static_cast<T>(y);
-    //         vec.z() = static_cast<T>(z);
-    //         vec.w() = static_cast<T>(w);
-    //
-    //         return vec;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr PromotedMat4x3<T, U> Mat4x3<T>::operator*(const Mat4x3<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    //         return Mat4x3<R>(*this * rhs[0], *this * rhs[1], *this * rhs[2], *this * rhs[3]);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     constexpr Mat4x3<T>& Mat4x3<T>::operator*=(const Mat4x3<U>& rhs) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         const auto mat = *this * rhs;
-    //         _data[0]       = static_cast<Vec4<T>>(mat[0]);
-    //         _data[1]       = static_cast<Vec4<T>>(mat[1]);
-    //         _data[2]       = static_cast<Vec4<T>>(mat[2]);
-    //         _data[3]       = static_cast<Vec4<T>>(mat[3]);
-    //         return *this;
-    //     }
-    //
-    //
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x3<T, S> Mat4x3<T>::operator*(S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+        return Mat4x3<R>(scalar * _data[0], scalar * _data[1], scalar * _data[2]);
+    }
+
+
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr PromotedMat4x3<T, S> operator*(S scalar, const Mat4x3<T>& matrix) noexcept
+    { return matrix * scalar; }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Mat4x3<T>& Mat4x3<T>::operator*=(S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] *= scalar;
+        _data[1] *= scalar;
+        _data[2] *= scalar;
+        return *this;
+    }
+
+
+
     //     template <Arithmetic T>
     //     template <StrictArithmetic S>
     //     constexpr PromotedMat4x3<T, S> Mat4x3<T>::operator/(const S& scalar) const noexcept
