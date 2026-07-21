@@ -629,24 +629,24 @@ namespace fgm
          *                                    *
          **************************************/
 
-        // /**
-        //  * @brief A 4x2 matrix with all elements being one.
-        //  *
-        //  * @note Constrained to @ref StrictArithmetic types.
-        //  */
-        // static constexpr Mat4x2 one()
-        //     requires fgm::StrictArithmetic<T>
-        // { return Mat4x2{ T(1), T(1), T(1), T(1), T(1), T(1) }; }
-        //
-        //
-        // /**
-        //  * @brief A 4x2 matrix with all elements being zero.
-        //  *
-        //  * @note Constrained to @ref StrictArithmetic types.
-        //  */
-        // static constexpr Mat4x2 zero()
-        //     requires fgm::StrictArithmetic<T>
-        // { return Mat4x2{ T(0), T(0), T(0), T(0), T(0), T(0) }; }
+        /**
+         * @brief A 4x2 matrix with all elements being one.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Mat4x2 one()
+            requires fgm::StrictArithmetic<T>
+        { return Mat4x2{ T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1)  }; }
+
+
+        /**
+         * @brief A 4x2 matrix with all elements being zero.
+         *
+         * @note Constrained to @ref StrictArithmetic types.
+         */
+        static constexpr Mat4x2 zero()
+            requires fgm::StrictArithmetic<T>
+        { return Mat4x2{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) }; }
 
         /** @} */
 

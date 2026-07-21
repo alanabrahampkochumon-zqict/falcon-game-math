@@ -4,6 +4,7 @@ target_sources(
         Mat2x3Tests PRIVATE
         AccessAndMutationTests.cpp
         AdditionTests.cpp
+        ConstantTests.cpp
         DivisionTests.cpp
         EqualityTests.cpp
         InitializationTests.cpp

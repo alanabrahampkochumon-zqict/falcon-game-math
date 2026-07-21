@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 20, 2026
  *
- * @brief Verify @ref fgm::Mat3x2 constants (@ref fgm::Mat3x2::EYE, @ref fgm::Mat3x2::ZERO).
+ * @brief Verify @ref fgm::Mat3x2 constants (@ref fgm::Mat3x2::one, @ref fgm::Mat3x2::zero).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -38,25 +38,25 @@ namespace
     // Verify one matrix
     static_assert(fgm::Mat3x2<int>::one()(0, 0) == 1);
     static_assert(fgm::Mat3x2<int>::one()(0, 1) == 1);
-    static_assert(fgm::Mat3x2<int>::one()(0, 1) == 1);
+
     static_assert(fgm::Mat3x2<int>::one()(1, 0) == 1);
     static_assert(fgm::Mat3x2<int>::one()(1, 1) == 1);
-    static_assert(fgm::Mat3x2<int>::one()(1, 1) == 1);
+
     static_assert(fgm::Mat3x2<int>::one()(2, 0) == 1);
     static_assert(fgm::Mat3x2<int>::one()(2, 1) == 1);
-    static_assert(fgm::Mat3x2<int>::one()(2, 1) == 1);
+
 
 
     // Verify zero matrix
     static_assert(fgm::Mat3x2<int>::zero()(0, 0) == 0);
     static_assert(fgm::Mat3x2<int>::zero()(0, 1) == 0);
-    static_assert(fgm::Mat3x2<int>::zero()(0, 1) == 0);
+
     static_assert(fgm::Mat3x2<int>::zero()(1, 0) == 0);
     static_assert(fgm::Mat3x2<int>::zero()(1, 1) == 0);
-    static_assert(fgm::Mat3x2<int>::zero()(1, 1) == 0);
+
     static_assert(fgm::Mat3x2<int>::zero()(2, 0) == 0);
     static_assert(fgm::Mat3x2<int>::zero()(2, 1) == 0);
-    static_assert(fgm::Mat3x2<int>::zero()(2, 1) == 0);
+
 } // namespace
 
 

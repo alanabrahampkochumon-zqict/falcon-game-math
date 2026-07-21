@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 20, 2026
  *
- * @brief Verify @ref fgm::Mat3x4 constants (@ref fgm::Mat3x4::EYE, @ref fgm::Mat3x4::ZERO).
+ * @brief Verify @ref fgm::Mat3x4 constants (@ref fgm::Mat3x4::one, @ref fgm::Mat3x4::zero).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
