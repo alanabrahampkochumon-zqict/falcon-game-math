@@ -206,30 +206,29 @@ namespace fgm
     }
 
 
-    // template <Arithmetic T>
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // constexpr PromotedMat4x3<T, U> Mat4x3<T>::operator-(const Mat4x3<U>& rhs) const noexcept
-    //     requires StrictArithmetic<T>
-    // {
-    //     using R = PromotedValue_t<T, U>;
-    //     return Mat4x3<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2], _data[3] - rhs[3]);
-    // }
-    //
-    //
-    // template <Arithmetic T>
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // constexpr Mat4x3<T>& Mat4x3<T>::operator-=(const Mat4x3<U>& rhs) noexcept
-    //     requires StrictArithmetic<T>
-    // {
-    //     _data[0] -= rhs[0];
-    //     _data[1] -= rhs[1];
-    //     _data[2] -= rhs[2];
-    //     _data[3] -= rhs[3];
-    //     return *this;
-    // }
-    //
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedMat4x3<T, U> Mat4x3<T>::operator-(const Mat4x3<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, U>;
+        return Mat4x3<R>(_data[0] - rhs[0], _data[1] - rhs[1], _data[2] - rhs[2]);
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr Mat4x3<T>& Mat4x3<T>::operator-=(const Mat4x3<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] -= rhs[0];
+        _data[1] -= rhs[1];
+        _data[2] -= rhs[2];
+        return *this;
+    }
+
 
     //     template <Arithmetic T>
     //     template <StrictArithmetic S>

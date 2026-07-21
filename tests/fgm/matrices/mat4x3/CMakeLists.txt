@@ -11,7 +11,7 @@ target_sources(
         #        MultiplicationTests.cpp
         #        NegationTests.cpp
         StringRepresentationTests.cpp
-        #        SubtractionTests.cpp
+        SubtractionTests.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
 )
