@@ -12,6 +12,7 @@ target_sources(
         InitializationTests.cpp
         InverseTests.cpp
         MultiplicationTests.cpp
+        NegationTests.cpp
         StringRepresentationTests.cpp
         SubtractionTests.cpp
         TraceTests.cpp

@@ -388,6 +388,12 @@ namespace fgm
     { return mat.tryDiv(scalar, status, fallback); }
 
 
+    template <Arithmetic T>
+    constexpr Mat2x3<T> Mat2x3<T>::operator-() const noexcept
+        requires SignedStrictArithmetic<T>
+    { return Mat2x3{ -_data[0], -_data[1], -_data[2] }; }
+
+
     /**************************************
      *                                    *
      *           MATRIX ALGEBRA           *

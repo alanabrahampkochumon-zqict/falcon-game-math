@@ -939,11 +939,11 @@ namespace fgm
 
 
         /**
-         * @brief Invert the sign of each component of this vector and return a new @ref Vec4<T>.
+         * @brief Negate each component of this vector and return a new @ref Vec4<T>.
          *
          * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref fgm::Vec4 with inverted components.
+         * @return A new @ref fgm::Vec4 with negated components.
          */
         [[nodiscard]] constexpr Vec4 operator-() const noexcept
             requires SignedStrictArithmetic<T>;

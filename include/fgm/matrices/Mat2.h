@@ -669,6 +669,17 @@ namespace fgm
                                                                  const Mat2& fallback = Mat2::identity()) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Negate each element of this matrix and return a new @ref Mat2<T>.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @return A new @ref fgm::Mat2 with negated elements.
+         */
+        [[nodiscard]] constexpr Mat2 operator-() const noexcept
+            requires SignedStrictArithmetic<T>;
+
         /** @} */
 
 

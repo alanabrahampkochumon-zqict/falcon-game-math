@@ -25,24 +25,23 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Mat4<T>::Mat4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22, T m23,
-                                  T m30, T m31, T m32, T m33) noexcept
+    constexpr Mat4<T>::Mat4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22, T m23, T m30,
+                            T m31, T m32, T m33) noexcept
         : _data{ Vec4{ T(m00), T(m10), T(m20), T(m30) }, Vec4{ T(m01), T(m11), T(m21), T(m31) },
                  Vec4{ T(m02), T(m12), T(m22), T(m32) }, Vec4{ T(m03), T(m13), T(m23), T(m33) } }
     {}
 
 
     template <Arithmetic T>
-    constexpr Mat4<T>::Mat4(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2,
-                                  const Vec4<T>& col3) noexcept
+    constexpr Mat4<T>::Mat4(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2, const Vec4<T>& col3) noexcept
         : _data{ col0, col1, col2, col3 }
     {}
 
 
     template <Arithmetic T>
     constexpr Mat4<T>::Mat4(T d0, T d1, T d2, T d3) noexcept
-        : _data{ Vec4{ T(d0), T(0), T(0), T(0) }, Vec4{ T(0), T(d1), T(0), T(0) },
-                 Vec4{ T(0), T(0), T(d2), T(0) }, Vec4{ T(0), T(0), T(0), T(d3) } }
+        : _data{ Vec4{ T(d0), T(0), T(0), T(0) }, Vec4{ T(0), T(d1), T(0), T(0) }, Vec4{ T(0), T(0), T(d2), T(0) },
+                 Vec4{ T(0), T(0), T(0), T(d3) } }
     {}
 
 
@@ -281,23 +280,22 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vec4<R>(
-                    std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
-                             std::fma(static_cast<R>(_data[1][0]), static_cast<R>(vec[1]),
-                                      std::fma(static_cast<R>(_data[2][0]), static_cast<R>(vec[2]),
-                                               static_cast<R>(_data[3][0]) * static_cast<R>(vec[3])))), // x
-                    std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
-                             std::fma(static_cast<R>(_data[1][1]), static_cast<R>(vec[1]),
-                                      std::fma(static_cast<R>(_data[2][1]), static_cast<R>(vec[2]),
-                                               static_cast<R>(_data[3][1]) * static_cast<R>(vec[3])))), // y
-                    std::fma(static_cast<R>(_data[0][2]), static_cast<R>(vec[0]),
-                             std::fma(static_cast<R>(_data[1][2]), static_cast<R>(vec[1]),
-                                      std::fma(static_cast<R>(_data[2][2]), static_cast<R>(vec[2]),
-                                               static_cast<R>(_data[3][2]) * static_cast<R>(vec[3])))), // z
-                    std::fma(static_cast<R>(_data[0][3]), static_cast<R>(vec[0]),
-                             std::fma(static_cast<R>(_data[1][3]), static_cast<R>(vec[1]),
-                                      std::fma(static_cast<R>(_data[2][3]), static_cast<R>(vec[2]),
-                                               static_cast<R>(_data[3][3]) * static_cast<R>(vec[3]))))); // w
+                return Vec4<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
+                                        std::fma(static_cast<R>(_data[1][0]), static_cast<R>(vec[1]),
+                                                 std::fma(static_cast<R>(_data[2][0]), static_cast<R>(vec[2]),
+                                                          static_cast<R>(_data[3][0]) * static_cast<R>(vec[3])))), // x
+                               std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
+                                        std::fma(static_cast<R>(_data[1][1]), static_cast<R>(vec[1]),
+                                                 std::fma(static_cast<R>(_data[2][1]), static_cast<R>(vec[2]),
+                                                          static_cast<R>(_data[3][1]) * static_cast<R>(vec[3])))), // y
+                               std::fma(static_cast<R>(_data[0][2]), static_cast<R>(vec[0]),
+                                        std::fma(static_cast<R>(_data[1][2]), static_cast<R>(vec[1]),
+                                                 std::fma(static_cast<R>(_data[2][2]), static_cast<R>(vec[2]),
+                                                          static_cast<R>(_data[3][2]) * static_cast<R>(vec[3])))), // z
+                               std::fma(static_cast<R>(_data[0][3]), static_cast<R>(vec[0]),
+                                        std::fma(static_cast<R>(_data[1][3]), static_cast<R>(vec[1]),
+                                                 std::fma(static_cast<R>(_data[2][3]), static_cast<R>(vec[2]),
+                                                          static_cast<R>(_data[3][3]) * static_cast<R>(vec[3]))))); // w
             }
         }
 #endif
@@ -332,21 +330,21 @@ namespace fgm
             if (!std::is_constant_evaluated())
             {
                 return Vec4<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
-                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
-                                                    std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 0)),
-                                                             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0))))),
-                                  std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
-                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 1)),
-                                                    std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 1)),
-                                                             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1))))),
-                                  std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 2)),
-                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 2)),
-                                                    std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 2)),
-                                                             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2))))),
-                                  std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 3)),
-                                           std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 3)),
-                                                    std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 3)),
-                                                             static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3))))));
+                                        std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 0)),
+                                                 std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 0)),
+                                                          static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 0))))),
+                               std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
+                                        std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 1)),
+                                                 std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 1)),
+                                                          static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 1))))),
+                               std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 2)),
+                                        std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 2)),
+                                                 std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 2)),
+                                                          static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 2))))),
+                               std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 3)),
+                                        std::fma(static_cast<R>(vec[1]), static_cast<R>(matrix(1, 3)),
+                                                 std::fma(static_cast<R>(vec[2]), static_cast<R>(matrix(2, 3)),
+                                                          static_cast<R>(vec[3]) * static_cast<R>(matrix(3, 3))))));
             }
         }
 
@@ -581,8 +579,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat4<T, S> Mat4<T>::tryDiv(S scalar, OperationStatus& status,
-                                                       const Mat4& fallback) const noexcept
+    constexpr PromotedMat4<T, S> Mat4<T>::tryDiv(S scalar, OperationStatus& status, const Mat4& fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -620,9 +617,16 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat4<T, S> Mat4<T>::tryDiv(const Mat4& mat, S scalar, OperationStatus& status,
-                                                       const Mat4& fallback) noexcept
+                                                 const Mat4& fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
+
+
+    template <Arithmetic T>
+    constexpr Mat4<T> Mat4<T>::operator-() const noexcept
+        requires SignedStrictArithmetic<T>
+    { return Mat4{ -_data[0], -_data[1], -_data[2], -_data[3] }; }
+
 
 
     /**************************************
@@ -669,8 +673,8 @@ namespace fgm
          *       _data[row][col] actually gives _data[col][row]
          */
         return Mat4(_data[0][0], _data[0][1], _data[0][2], _data[0][3], _data[1][0], _data[1][1], _data[1][2],
-                       _data[1][3], _data[2][0], _data[2][1], _data[2][2], _data[2][3], _data[3][0], _data[3][1],
-                       _data[3][2], _data[3][3]);
+                    _data[1][3], _data[2][0], _data[2][1], _data[2][2], _data[2][3], _data[3][0], _data[3][1],
+                    _data[3][2], _data[3][3]);
     }
 
 
@@ -716,7 +720,7 @@ namespace fgm
         auto row3 = u.cross(c) - s * z;
 
         return Mat4<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t), row2.x(),
-                          row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
+                       row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
     }
 
 
@@ -777,7 +781,7 @@ namespace fgm
         auto row3 = u.cross(c) - s * z;
 
         return Mat4<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t), row2.x(),
-                          row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
+                       row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
     }
 
 
@@ -788,8 +792,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat4<Magnitude<T>> Mat4<T>::tryInverse(OperationStatus& status,
-                                                           const Mat4& fallback) const noexcept
+    constexpr Mat4<Magnitude<T>> Mat4<T>::tryInverse(OperationStatus& status, const Mat4& fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -839,13 +842,13 @@ namespace fgm
 
         status = OperationStatus::SUCCESS;
         return Mat4<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t), row2.x(),
-                          row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
+                       row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
     }
 
 
     template <Arithmetic T>
     constexpr Mat4<Magnitude<T>> Mat4<T>::tryInverseOf(const Mat4& matrix, OperationStatus& status,
-                                                             const Mat4& fallback) noexcept
+                                                       const Mat4& fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.tryInverse(status, fallback); }
 
@@ -904,11 +907,13 @@ namespace fgm
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
 #ifdef FGM_LEFT_HANDED
-        return Mat4{ T(1), T(0),  T(0),   T(0), T(0), cosine, sine, T(0),
-                        T(0), -sine, cosine, T(0), T(0), T(0),   T(0), T(1) };
+        return Mat4{
+            T(1), T(0), T(0), T(0), T(0), cosine, sine, T(0), T(0), -sine, cosine, T(0), T(0), T(0), T(0), T(1)
+        };
 #else
-        return Mat4{ T(1), T(0), T(0),   T(0), T(0), cosine, -sine, T(0),
-                        T(0), sine, cosine, T(0), T(0), T(0),   T(0),  T(1) };
+        return Mat4{
+            T(1), T(0), T(0), T(0), T(0), cosine, -sine, T(0), T(0), sine, cosine, T(0), T(0), T(0), T(0), T(1)
+        };
 #endif
     }
 
@@ -922,11 +927,13 @@ namespace fgm
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
 #ifdef FGM_LEFT_HANDED
-        return Mat4{ cosine, T(0), -sine,  T(0), T(0), T(1), T(0), T(0),
-                        sine,   T(0), cosine, T(0), T(0), T(0), T(0), T(1) };
+        return Mat4{
+            cosine, T(0), -sine, T(0), T(0), T(1), T(0), T(0), sine, T(0), cosine, T(0), T(0), T(0), T(0), T(1)
+        };
 #else
-        return Mat4{ cosine, T(0), sine,   T(0), T(0), T(1), T(0), T(0),
-                        -sine,  T(0), cosine, T(0), T(0), T(0), T(0), T(1) };
+        return Mat4{
+            cosine, T(0), sine, T(0), T(0), T(1), T(0), T(0), -sine, T(0), cosine, T(0), T(0), T(0), T(0), T(1)
+        };
 #endif
     }
 
@@ -941,11 +948,13 @@ namespace fgm
         R sine   = std::sin(angle);
 
 #ifdef FGM_LEFT_HANDED
-        return Mat4{ cosine, sine, T(0), T(0), -sine, cosine, T(0), T(0),
-                        T(0),   T(0), T(1), T(0), T(0),  T(0),   T(0), T(1) };
+        return Mat4{
+            cosine, sine, T(0), T(0), -sine, cosine, T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1)
+        };
 #else
-        return Mat4{ cosine, -sine, T(0), T(0), sine, cosine, T(0), T(0),
-                        T(0),   T(0),  T(1), T(0), T(0), T(0),   T(0), T(1) };
+        return Mat4{
+            cosine, -sine, T(0), T(0), sine, cosine, T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1)
+        };
 #endif
     }
 
@@ -974,21 +983,21 @@ namespace fgm
         S ayaz = y * axis.z();
 
         return Mat4{ S(c + x * axis.x()),
-                        S(axay - s * axis.z()),
-                        S(axaz + s * axis.y()),
-                        S(0),
-                        S(axay + s * axis.z()),
-                        S(c + y * axis.y()),
-                        S(ayaz - s * axis.x()),
-                        S(0),
-                        S(axaz - s * axis.y()),
-                        S(ayaz + s * axis.x()),
-                        S(c + z * axis.z()),
-                        S(0),
-                        S(0),
-                        S(0),
-                        S(0),
-                        S(1) };
+                     S(axay - s * axis.z()),
+                     S(axaz + s * axis.y()),
+                     S(0),
+                     S(axay + s * axis.z()),
+                     S(c + y * axis.y()),
+                     S(ayaz - s * axis.x()),
+                     S(0),
+                     S(axaz - s * axis.y()),
+                     S(ayaz + s * axis.x()),
+                     S(c + z * axis.z()),
+                     S(0),
+                     S(0),
+                     S(0),
+                     S(0),
+                     S(1) };
     }
 
 
@@ -997,7 +1006,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         return Mat4<T>{ scale, T(0), T(0),  T(0), T(0), scale, T(0), T(0),
-                           T(0),  T(0), scale, T(0), T(0), T(0),  T(0), T(1) };
+                        T(0),  T(0), scale, T(0), T(0), T(0),  T(0), T(1) };
     }
 
 
@@ -1007,30 +1016,29 @@ namespace fgm
     {
 
         return Mat4<T>{ scaleX, T(0), T(0),   T(0), T(0), scaleY, T(0), T(0),
-                           T(0),   T(0), scaleZ, T(0), T(0), T(0),   T(0), T(1) };
+                        T(0),   T(0), scaleZ, T(0), T(0), T(0),   T(0), T(1) };
     }
 
 
     template <Arithmetic T>
-    constexpr Mat4<T> Mat4<T>::makeAffine(const Mat3<T>& linearTransform,
-                                                const Vec3<T>& translation) noexcept
+    constexpr Mat4<T> Mat4<T>::makeAffine(const Mat3<T>& linearTransform, const Vec3<T>& translation) noexcept
     {
         return Mat4<T>{ linearTransform(0, 0),
-                           linearTransform(0, 1),
-                           linearTransform(0, 2),
-                           translation.x(),
-                           linearTransform(1, 0),
-                           linearTransform(1, 1),
-                           linearTransform(1, 2),
-                           translation.y(),
-                           linearTransform(2, 0),
-                           linearTransform(2, 1),
-                           linearTransform(2, 2),
-                           translation.z(),
-                           T(0),
-                           T(0),
-                           T(0),
-                           T(1) };
+                        linearTransform(0, 1),
+                        linearTransform(0, 2),
+                        translation.x(),
+                        linearTransform(1, 0),
+                        linearTransform(1, 1),
+                        linearTransform(1, 2),
+                        translation.y(),
+                        linearTransform(2, 0),
+                        linearTransform(2, 1),
+                        linearTransform(2, 2),
+                        translation.z(),
+                        T(0),
+                        T(0),
+                        T(0),
+                        T(1) };
     }
 
 

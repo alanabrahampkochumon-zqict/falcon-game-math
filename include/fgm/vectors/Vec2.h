@@ -816,7 +816,7 @@ namespace fgm
          *
          * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref fgm::Vec2 with inverted components.
+         * @return A new @ref fgm::Vec2 with negated components.
          */
         [[nodiscard]] constexpr Vec2 operator-() const noexcept
             requires SignedStrictArithmetic<T>;

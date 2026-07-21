@@ -570,7 +570,7 @@ namespace fgm
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
-         * @return A new @ref fgm::Mat4x2 with inverted components.
+         * @return A new @ref fgm::Mat4x2 with negated elements.
          */
         [[nodiscard]] constexpr Mat4x2 operator-() const noexcept
             requires SignedStrictArithmetic<T>;

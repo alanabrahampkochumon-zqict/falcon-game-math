@@ -699,6 +699,18 @@ namespace fgm
                                                                  const Mat4& fallback = Mat4::identity()) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Negate each element of this matrix and return a new @ref Mat4<T>.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @return A new @ref fgm::Mat4 with negated elements.
+         */
+        [[nodiscard]] constexpr Mat4 operator-() const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
         /** @} */
 
 

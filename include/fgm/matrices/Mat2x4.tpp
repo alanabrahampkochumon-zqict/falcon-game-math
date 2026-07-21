@@ -39,7 +39,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat2x4<T>::Mat2x4(const Vec2<T>& col0, const Vec2<T>& col1, const Vec2<T>& col2, const Vec2<T>& col3) noexcept
+    constexpr Mat2x4<T>::Mat2x4(const Vec2<T>& col0, const Vec2<T>& col1, const Vec2<T>& col2,
+                                const Vec2<T>& col3) noexcept
         : _data{ col0, col1, col2, col3 }
     {}
 
@@ -119,7 +120,8 @@ namespace fgm
             }
         }
 #endif
-        return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon) && _data[2].allEq(rhs[2], epsilon) && _data[3].allEq(rhs[3], epsilon);
+        return _data[0].allEq(rhs[0], epsilon) && _data[1].allEq(rhs[1], epsilon) && _data[2].allEq(rhs[2], epsilon) &&
+            _data[3].allEq(rhs[3], epsilon);
     }
 
 
@@ -147,7 +149,8 @@ namespace fgm
             }
         }
 #endif
-        return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon) || _data[2].anyNeq(rhs[2], epsilon) || _data[3].anyNeq(rhs[3], epsilon);
+        return _data[0].anyNeq(rhs[0], epsilon) || _data[1].anyNeq(rhs[1], epsilon) ||
+            _data[2].anyNeq(rhs[2], epsilon) || _data[3].anyNeq(rhs[3], epsilon);
     }
 
 
@@ -228,13 +231,13 @@ namespace fgm
         return *this;
     }
 
-    
+
     template <StrictArithmetic T, StrictArithmetic S>
     constexpr PromotedMat2x4<T, S> operator*(S scalar, const Mat2x4<T>& matrix) noexcept
         requires StrictArithmetic<T>
     { return matrix * scalar; }
-    
-    
+
+
     template <Arithmetic T>
     template <StrictArithmetic S>
     constexpr PromotedMat2x4<T, S> Mat2x4<T>::operator*(const S scalar) const noexcept
@@ -398,6 +401,12 @@ namespace fgm
     { return mat.tryDiv(scalar, status, fallback); }
 
 
+    template <Arithmetic T>
+    constexpr Mat2x4<T> Mat2x4<T>::operator-() const noexcept
+        requires SignedStrictArithmetic<T>
+    { return Mat2x4{ -_data[0], -_data[1], -_data[2], -_data[3] }; }
+
+
 
     /**************************************
      *                                    *
@@ -431,7 +440,7 @@ namespace fgm
 
     template <Arithmetic T>
     constexpr bool Mat2x4<T>::hasInf() const noexcept
-    { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf()|| _data[3].hasInf(); }
+    { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf(); }
 
 
     template <Arithmetic T>
