@@ -13,7 +13,7 @@ target_sources(
         #        StringRepresentationTests.cpp
         #        SubtractionTests.cpp
         TypeConversionTests.cpp
-        #        UtilityTests.cpp
+        UtilityTests.cpp
 )
 
 target_include_directories(

@@ -875,184 +875,34 @@ namespace fgm
     //     constexpr T Mat4x3<T>::trace(const Mat4x3& matrix) noexcept
     //         requires StrictArithmetic<T>
     //     { return matrix.trace(); }
-    //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *             UTILITIES              *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Mat4x3<T>::hasInf() const noexcept
-    //     { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf(); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Mat4x3<T>::hasInf(const Mat4x3& matrix) noexcept
-    //     { return matrix.hasInf(); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Mat4x3<T>::hasNaN() const noexcept
-    //     { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN(); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr bool Mat4x3<T>::hasNaN(const Mat4x3& matrix) noexcept
-    //     { return matrix.hasNaN(); }
-    //
-    //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *       TRANSFORMATION FACTORIES     *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <std::floating_point U>
-    //     constexpr Mat4x3<T> Mat4x3<T>::makeRotationX(U angle) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R  = PromotedValue_t<T, U>;
-    //         R cosine = std::cos(angle);
-    //         R sine   = std::sin(angle);
-    // #ifdef FGM_LEFT_HANDED
-    //         return Mat4x3{
-    //             T(1), T(0), T(0), T(0), T(0), cosine, sine, T(0), T(0), -sine, cosine, T(0), T(0), T(0), T(0), T(1)
-    //         };
-    // #else
-    //         return Mat4x3{
-    //             T(1), T(0), T(0), T(0), T(0), cosine, -sine, T(0), T(0), sine, cosine, T(0), T(0), T(0), T(0), T(1)
-    //         };
-    // #endif
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <std::floating_point U>
-    //     constexpr Mat4x3<T> Mat4x3<T>::makeRotationY(U angle) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R  = PromotedValue_t<T, U>;
-    //         R cosine = std::cos(angle);
-    //         R sine   = std::sin(angle);
-    // #ifdef FGM_LEFT_HANDED
-    //         return Mat4x3{
-    //             cosine, T(0), -sine, T(0), T(0), T(1), T(0), T(0), sine, T(0), cosine, T(0), T(0), T(0), T(0), T(1)
-    //         };
-    // #else
-    //         return Mat4x3{
-    //             cosine, T(0), sine, T(0), T(0), T(1), T(0), T(0), -sine, T(0), cosine, T(0), T(0), T(0), T(0), T(1)
-    //         };
-    // #endif
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <std::floating_point U>
-    //     constexpr Mat4x3<T> Mat4x3<T>::makeRotationZ(U angle) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R  = PromotedValue_t<T, U>;
-    //         R cosine = std::cos(angle);
-    //         R sine   = std::sin(angle);
-    //
-    // #ifdef FGM_LEFT_HANDED
-    //         return Mat4x3{
-    //             cosine, sine, T(0), T(0), -sine, cosine, T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1)
-    //         };
-    // #else
-    //         return Mat4x3{
-    //             cosine, -sine, T(0), T(0), sine, cosine, T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1)
-    //         };
-    // #endif
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <std::floating_point U>
-    //     constexpr PromotedFloatMat4x3<T, U> Mat4x3<T>::makeRotation(U angle, const Vec3<T>& axis) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using S = Magnitude<std::common_type_t<T, U>>;
-    //
-    //         S c = static_cast<S>(std::cos(angle));
-    // #ifdef FGM_LEFT_HANDED
-    //         S s = -static_cast<S>(std::sin(angle));
-    // #else
-    //         S s = static_cast<S>(std::sin(angle));
-    // #endif
-    //         S d = 1 - c;
-    //
-    //         S x = static_cast<S>(axis.x()) * d;
-    //         S y = static_cast<S>(axis.y()) * d;
-    //         S z = static_cast<S>(axis.z()) * d;
-    //
-    //         S axay = x * axis.y();
-    //         S axaz = x * axis.z();
-    //         S ayaz = y * axis.z();
-    //
-    //         return Mat4x3{ S(c + x * axis.x()),
-    //                      S(axay - s * axis.z()),
-    //                      S(axaz + s * axis.y()),
-    //                      S(0),
-    //                      S(axay + s * axis.z()),
-    //                      S(c + y * axis.y()),
-    //                      S(ayaz - s * axis.x()),
-    //                      S(0),
-    //                      S(axaz - s * axis.y()),
-    //                      S(ayaz + s * axis.x()),
-    //                      S(c + z * axis.z()),
-    //                      S(0),
-    //                      S(0),
-    //                      S(0),
-    //                      S(0),
-    //                      S(1) };
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<T> Mat4x3<T>::makeScale(T scale) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         return Mat4x3<T>{ scale, T(0), T(0),  T(0), T(0), scale, T(0), T(0),
-    //                         T(0),  T(0), scale, T(0), T(0), T(0),  T(0), T(1) };
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<T> Mat4x3<T>::makeScale(T scaleX, T scaleY, T scaleZ) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //
-    //         return Mat4x3<T>{ scaleX, T(0), T(0),   T(0), T(0), scaleY, T(0), T(0),
-    //                         T(0),   T(0), scaleZ, T(0), T(0), T(0),   T(0), T(1) };
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<T> Mat4x3<T>::makeAffine(const Mat3<T>& linearTransform, const Vec3<T>& translation)
-    //     noexcept
-    //     {
-    //         return Mat4x3<T>{ linearTransform(0, 0),
-    //                         linearTransform(0, 1),
-    //                         linearTransform(0, 2),
-    //                         translation.x(),
-    //                         linearTransform(1, 0),
-    //                         linearTransform(1, 1),
-    //                         linearTransform(1, 2),
-    //                         translation.y(),
-    //                         linearTransform(2, 0),
-    //                         linearTransform(2, 1),
-    //                         linearTransform(2, 2),
-    //                         translation.z(),
-    //                         T(0),
-    //                         T(0),
-    //                         T(0),
-    //                         T(1) };
-    //     }
+
+
+    /**************************************
+     *                                    *
+     *             UTILITIES              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr bool Mat4x3<T>::hasInf() const noexcept
+    { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf(); }
+
+
+    template <Arithmetic T>
+    constexpr bool Mat4x3<T>::hasInf(const Mat4x3& matrix) noexcept
+    { return matrix.hasInf(); }
+
+
+    template <Arithmetic T>
+    constexpr bool Mat4x3<T>::hasNaN() const noexcept
+    { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN(); }
+
+
+    template <Arithmetic T>
+    constexpr bool Mat4x3<T>::hasNaN(const Mat4x3& matrix) noexcept
+    { return matrix.hasNaN(); }
+
+
 
 
 } // namespace fgm
