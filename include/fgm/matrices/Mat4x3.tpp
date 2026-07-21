@@ -258,207 +258,172 @@ namespace fgm
 
 
 
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x3<T, S> Mat4x3<T>::operator/(const S& scalar) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
-    //             R factor = R(1) / static_cast<R>(scalar);
-    //             return Mat4x3<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor, _data[3] * factor);
-    //         }
-    //         else
-    //         {
-    //             FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
-    //             R tScalar = static_cast<R>(scalar);
-    //             return Mat4x3<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar, _data[3] / tScalar);
-    //         }
-    //     }
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x3<T, S> Mat4x3<T>::operator/(const S& scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            R factor = R(1) / static_cast<R>(scalar);
+            return Mat4x3<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor);
+        }
+        else
+        {
+            FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
+            R tScalar = static_cast<R>(scalar);
+            return Mat4x3<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar);
+        }
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Mat4x3<T>& Mat4x3<T>::operator/=(const S& scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+
+        FGM_ASSERT_MSG(fgm::abs(scalar) > Config::EPSILON<S>, messages::assertion::MAT_DIV_BY_ZERO);
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            R factor = R(1) / static_cast<R>(scalar);
+
+            _data[0][0] = static_cast<R>(_data[0][0]) * factor;
+            _data[1][0] = static_cast<R>(_data[1][0]) * factor;
+            _data[2][0] = static_cast<R>(_data[2][0]) * factor;
+
+            _data[0][1] = static_cast<R>(_data[0][1]) * factor;
+            _data[1][1] = static_cast<R>(_data[1][1]) * factor;
+            _data[2][1] = static_cast<R>(_data[2][1]) * factor;
+
+            _data[0][2] = static_cast<R>(_data[0][2]) * factor;
+            _data[1][2] = static_cast<R>(_data[1][2]) * factor;
+            _data[2][2] = static_cast<R>(_data[2][2]) * factor;
+
+            _data[0][3] = static_cast<R>(_data[0][3]) * factor;
+            _data[1][3] = static_cast<R>(_data[1][3]) * factor;
+            _data[2][3] = static_cast<R>(_data[2][3]) * factor;
+        }
+        else
+        {
+            _data[0][0] = static_cast<T>(_data[0][0] / static_cast<R>(scalar));
+            _data[1][0] = static_cast<T>(_data[1][0] / static_cast<R>(scalar));
+            _data[2][0] = static_cast<T>(_data[2][0] / static_cast<R>(scalar));
+
+            _data[0][1] = static_cast<T>(_data[0][1] / static_cast<R>(scalar));
+            _data[1][1] = static_cast<T>(_data[1][1] / static_cast<R>(scalar));
+            _data[2][1] = static_cast<T>(_data[2][1] / static_cast<R>(scalar));
+
+            _data[0][2] = static_cast<T>(_data[0][2] / static_cast<R>(scalar));
+            _data[1][2] = static_cast<T>(_data[1][2] / static_cast<R>(scalar));
+            _data[2][2] = static_cast<T>(_data[2][2] / static_cast<R>(scalar));
+
+            _data[0][3] = static_cast<T>(_data[0][3] / static_cast<R>(scalar));
+            _data[1][3] = static_cast<T>(_data[1][3] / static_cast<R>(scalar));
+            _data[2][3] = static_cast<T>(_data[2][3] / static_cast<R>(scalar));
+        }
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x3<T, S> Mat4x3<T>::safeDiv(S scalar, Mat4x3 fallback) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
+            {
+                return static_cast<Mat4x3<R>>(fallback);
+            }
+        }
+        if constexpr (std::is_integral_v<R>)
+        {
+            if (scalar == 0)
+            {
+                return static_cast<Mat4x3<R>>(fallback);
+            }
+        }
+
+        return *this / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x3<T, S> Mat4x3<T>::safeDiv(const Mat4x3& mat, S scalar, Mat4x3 fallback) noexcept
+        requires StrictArithmetic<T>
+    { return mat.safeDiv(scalar, fallback); }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(S scalar, OperationStatus& status, Mat4x3 fallback) const
+    noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            // TODO: Check || vs | with benchmarks
+            // Theoretically the slowest method since NaN checks are performed before division by zero
+            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
+            {
+                status = OperationStatus::NANOPERAND;
+                return static_cast<Mat4x3<R>>(fallback);
+            }
+            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return static_cast<Mat4x3<R>>(fallback);
+            }
+        }
+
+        if constexpr (std::is_integral_v<R>)
+        {
+            if (scalar == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return static_cast<Mat4x3<R>>(fallback);
+            }
+        }
+
+        status = OperationStatus::SUCCESS;
+        return *this / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(const Mat4x3& mat, S scalar, OperationStatus& status,
+                                                 Mat4x3 fallback) noexcept
+        requires StrictArithmetic<T>
+    { return mat.tryDiv(scalar, status, fallback); }
+
+
     //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr Mat4x3<T>& Mat4x3<T>::operator/=(const S& scalar) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         FGM_ASSERT_MSG(fgm::abs(scalar) > Config::EPSILON<S>, messages::assertion::MAT_DIV_BY_ZERO);
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             R factor = R(1) / static_cast<R>(scalar);
-    //
-    //             _data[0][0] = static_cast<R>(_data[0][0]) * factor;
-    //             _data[1][0] = static_cast<R>(_data[1][0]) * factor;
-    //             _data[2][0] = static_cast<R>(_data[2][0]) * factor;
-    //             _data[3][0] = static_cast<R>(_data[3][0]) * factor;
-    //
-    //             _data[0][1] = static_cast<R>(_data[0][1]) * factor;
-    //             _data[1][1] = static_cast<R>(_data[1][1]) * factor;
-    //             _data[2][1] = static_cast<R>(_data[2][1]) * factor;
-    //             _data[3][1] = static_cast<R>(_data[3][1]) * factor;
-    //
-    //             _data[0][2] = static_cast<R>(_data[0][2]) * factor;
-    //             _data[1][2] = static_cast<R>(_data[1][2]) * factor;
-    //             _data[2][2] = static_cast<R>(_data[2][2]) * factor;
-    //             _data[3][2] = static_cast<R>(_data[3][2]) * factor;
-    //
-    //             _data[0][3] = static_cast<R>(_data[0][3]) * factor;
-    //             _data[1][3] = static_cast<R>(_data[1][3]) * factor;
-    //             _data[2][3] = static_cast<R>(_data[2][3]) * factor;
-    //             _data[3][3] = static_cast<R>(_data[3][3]) * factor;
-    //         }
-    //         else
-    //         {
-    //             _data[0][0] = static_cast<T>(_data[0][0] / static_cast<R>(scalar));
-    //             _data[1][0] = static_cast<T>(_data[1][0] / static_cast<R>(scalar));
-    //             _data[2][0] = static_cast<T>(_data[2][0] / static_cast<R>(scalar));
-    //             _data[3][0] = static_cast<T>(_data[3][0] / static_cast<R>(scalar));
-    //
-    //             _data[0][1] = static_cast<T>(_data[0][1] / static_cast<R>(scalar));
-    //             _data[1][1] = static_cast<T>(_data[1][1] / static_cast<R>(scalar));
-    //             _data[2][1] = static_cast<T>(_data[2][1] / static_cast<R>(scalar));
-    //             _data[3][1] = static_cast<T>(_data[3][1] / static_cast<R>(scalar));
-    //
-    //             _data[0][2] = static_cast<T>(_data[0][2] / static_cast<R>(scalar));
-    //             _data[1][2] = static_cast<T>(_data[1][2] / static_cast<R>(scalar));
-    //             _data[2][2] = static_cast<T>(_data[2][2] / static_cast<R>(scalar));
-    //             _data[3][2] = static_cast<T>(_data[3][2] / static_cast<R>(scalar));
-    //
-    //             _data[0][3] = static_cast<T>(_data[0][3] / static_cast<R>(scalar));
-    //             _data[1][3] = static_cast<T>(_data[1][3] / static_cast<R>(scalar));
-    //             _data[2][3] = static_cast<T>(_data[2][3] / static_cast<R>(scalar));
-    //             _data[3][3] = static_cast<T>(_data[3][3] / static_cast<R>(scalar));
-    //         }
-    //         return *this;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x3<T, S> Mat4x3<T>::safeDiv(S scalar, Mat4x3 fallback) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
-    //             {
-    //                 return static_cast<Mat4x3<R>>(fallback);
-    //             }
-    //         }
-    //         if constexpr (std::is_integral_v<R>)
-    //         {
-    //             if (scalar == 0)
-    //             {
-    //                 return static_cast<Mat4x3<R>>(fallback);
-    //             }
-    //         }
-    //
-    //         return *this / scalar;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x3<T, S> Mat4x3<T>::safeDiv(const Mat4x3& mat, S scalar, Mat4x3 fallback) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return mat.safeDiv(scalar, fallback); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(S scalar, OperationStatus& status, Mat4x3 fallback) const
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             // TODO: Check || vs | with benchmarks
-    //             // Theoretically the slowest method since NaN checks are performed before division by zero
-    //             if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
-    //             {
-    //                 status = OperationStatus::NANOPERAND;
-    //                 return static_cast<Mat4x3<R>>(fallback);
-    //             }
-    //             if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return static_cast<Mat4x3<R>>(fallback);
-    //             }
-    //         }
-    //
-    //         if constexpr (std::is_integral_v<R>)
-    //         {
-    //             if (scalar == 0)
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return static_cast<Mat4x3<R>>(fallback);
-    //             }
-    //         }
-    //
-    //         status = OperationStatus::SUCCESS;
-    //         return *this / scalar;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(const Mat4x3& mat, S scalar, OperationStatus& status,
-    //                                                  Mat4x3 fallback) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return mat.tryDiv(scalar, status, fallback); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<T> Mat4x3<T>::operator-() const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     { return Mat4x3{ -_data[0], -_data[1], -_data[2], -_data[3] }; }
-    //
-    //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *           MATRIX ALGEBRA           *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     constexpr T Mat4x3<T>::determinant() const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         // TODO: Replace with fgm::swizzle after factor implementation
-    //         auto a = _data[0].template swizzle<axis::X, axis::Y, axis::Z>();
-    //         auto b = _data[1].template swizzle<axis::X, axis::Y, axis::Z>();
-    //         auto c = _data[2].template swizzle<axis::X, axis::Y, axis::Z>();
-    //         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
-    //
-    //         auto x = _data[0][3];
-    //         auto y = _data[1][3];
-    //         auto z = _data[2][3];
-    //         auto w = _data[3][3];
-    //
-    //         auto s = a.cross(b);
-    //         auto t = c.cross(d);
-    //         auto u = y * a - x * b;
-    //         auto v = w * c - z * d;
-    //
-    //         return s.dot(v) + t.dot(u);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr T Mat4x3<T>::determinant(const Mat4x3& matrix) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     { return matrix.determinant(); }
-    //
+    // template <Arithmetic T>
+    // constexpr Mat4x3<T> Mat4x3<T>::operator-() const noexcept
+    //     requires SignedStrictArithmetic<T>
+    // { return Mat4x3{ -_data[0], -_data[1], -_data[2], -_data[3] }; }
+
+
+
+    /**************************************
+     *                                    *
+     *           MATRIX ALGEBRA           *
+     *                                    *
+     **************************************/
+
+
     //
     //     template <Arithmetic T>
     //     constexpr Mat4x3<T> Mat4x3<T>::transpose() const noexcept
@@ -477,190 +442,6 @@ namespace fgm
     //     constexpr Mat4x3<T> Mat4x3<T>::transpose(const Mat4x3& matrix) noexcept
     //     { return matrix.transpose(); }
     //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<Magnitude<T>> Mat4x3<T>::inverse() const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R = Magnitude<T>;
-    //
-    //         auto a = static_cast<Vec3<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
-    //         auto b = static_cast<Vec3<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
-    //         auto c = static_cast<Vec3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
-    //         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
-    //
-    //         auto x = _data[0][3];
-    //         auto y = _data[1][3];
-    //         auto z = _data[2][3];
-    //         auto w = _data[3][3];
-    //
-    //         auto s = static_cast<Vec3<R>>(a.cross(b));
-    //         auto t = c.cross(d);
-    //         auto u = y * a - x * b;
-    //         auto v = w * c - z * d;
-    //
-    //         auto det = s.dot(v) + t.dot(u);
-    //         FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
-    //
-    //         auto invDet = R(1) / det;
-    //
-    //         s *= invDet;
-    //         t *= invDet;
-    //         u *= invDet;
-    //         v *= invDet;
-    //
-    //         auto row0 = b.cross(v) + t * y;
-    //         auto row1 = v.cross(a) - t * x;
-    //         auto row2 = d.cross(u) + s * w;
-    //         auto row3 = u.cross(c) - s * z;
-    //
-    //         return Mat4x3<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t),
-    //         row2.x(),
-    //                        row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<Magnitude<T>> Mat4x3<T>::inverse(const Mat4x3& matrix) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     { return matrix.inverse(); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<Magnitude<T>> Mat4x3<T>::safeInverse(Mat4x3 fallback) const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R = Magnitude<T>;
-    //
-    //         auto a = static_cast<Vec3<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
-    //         auto b = static_cast<Vec3<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
-    //         auto c = static_cast<Vec3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
-    //         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
-    //
-    //         auto x = _data[0][3];
-    //         auto y = _data[1][3];
-    //         auto z = _data[2][3];
-    //         auto w = _data[3][3];
-    //
-    //         auto s = static_cast<Vec3<R>>(a.cross(b));
-    //         auto t = c.cross(d);
-    //         auto u = y * a - x * b;
-    //         auto v = w * c - z * d;
-    //
-    //         auto det = s.dot(v) + t.dot(u);
-    //
-    //         if constexpr (std::is_floating_point_v<T>)
-    //         {
-    //             if (hasNaN() || fgm::abs(det) <= std::numeric_limits<T>::epsilon())
-    //             {
-    //                 return static_cast<Mat4x3<R>>(fallback);
-    //             }
-    //         }
-    //         if constexpr (std::is_integral_v<T>)
-    //         {
-    //             if (det == 0)
-    //             {
-    //                 return static_cast<Mat4x3<R>>(fallback);
-    //             }
-    //         }
-    //
-    //         auto invDet = R(1) / det;
-    //
-    //         s *= invDet;
-    //         t *= invDet;
-    //         u *= invDet;
-    //         v *= invDet;
-    //
-    //         auto row0 = b.cross(v) + t * y;
-    //         auto row1 = v.cross(a) - t * x;
-    //         auto row2 = d.cross(u) + s * w;
-    //         auto row3 = u.cross(c) - s * z;
-    //
-    //         return Mat4x3<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t),
-    //         row2.x(),
-    //                        row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<Magnitude<T>> Mat4x3<T>::safeInverseOf(const Mat4x3& matrix, Mat4x3 fallback) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     { return matrix.safeInverse(fallback); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<Magnitude<T>> Mat4x3<T>::tryInverse(OperationStatus& status, Mat4x3 fallback) const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R = Magnitude<T>;
-    //
-    //         auto a = static_cast<Vec3<R>>(_data[0].template swizzle<axis::X, axis::Y, axis::Z>());
-    //         auto b = static_cast<Vec3<R>>(_data[1].template swizzle<axis::X, axis::Y, axis::Z>());
-    //         auto c = static_cast<Vec3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
-    //         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
-    //
-    //         auto x = _data[0][3];
-    //         auto y = _data[1][3];
-    //         auto z = _data[2][3];
-    //         auto w = _data[3][3];
-    //
-    //         auto s = static_cast<Vec3<R>>(a.cross(b));
-    //         auto t = c.cross(d);
-    //         auto u = y * a - x * b;
-    //         auto v = w * c - z * d;
-    //
-    //         auto det = s.dot(v) + t.dot(u);
-    //
-    //         if constexpr (std::is_floating_point_v<T>)
-    //         {
-    //             if (hasNaN())
-    //             {
-    //                 status = OperationStatus::NANOPERAND;
-    //                 return static_cast<Mat4x3<R>>(fallback);
-    //             }
-    //             if (fgm::abs(det) <= std::numeric_limits<T>::epsilon())
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return static_cast<Mat4x3<R>>(fallback);
-    //             }
-    //         }
-    //
-    //         auto invDet = R(1) / det;
-    //
-    //         s *= invDet;
-    //         t *= invDet;
-    //         u *= invDet;
-    //         v *= invDet;
-    //
-    //         auto row0 = b.cross(v) + t * y;
-    //         auto row1 = v.cross(a) - t * x;
-    //         auto row2 = d.cross(u) + s * w;
-    //         auto row3 = u.cross(c) - s * z;
-    //
-    //         status = OperationStatus::SUCCESS;
-    //         return Mat4x3<R>(row0.x(), row0.y(), row0.z(), -b.dot(t), row1.x(), row1.y(), row1.z(), a.dot(t),
-    //         row2.x(),
-    //                        row2.y(), row2.z(), -d.dot(s), row3.x(), row3.y(), row3.z(), c.dot(s));
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr Mat4x3<Magnitude<T>> Mat4x3<T>::tryInverseOf(const Mat4x3& matrix, OperationStatus& status,
-    //                                                        Mat4x3 fallback) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     { return matrix.tryInverse(status, fallback); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr T Mat4x3<T>::trace() const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3]; }
-    //
-    //
-    //     template <Arithmetic T>
-    //     constexpr T Mat4x3<T>::trace(const Mat4x3& matrix) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return matrix.trace(); }
 
 
     /**************************************
