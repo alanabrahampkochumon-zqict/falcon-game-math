@@ -507,8 +507,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat3<T, S> Mat3<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                 Mat3 fallback) const noexcept
+    constexpr PromotedMat3<T, S> Mat3<T>::tryDiv(const S scalar, OperationStatus& status, Mat3 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -813,6 +812,23 @@ namespace fgm
         return Mat3{ cosine, sine, T(0), -sine, cosine, T(0), T(0), T(0), T(1) };
 #else
         return Mat3{ cosine, -sine, T(0), sine, cosine, T(0), T(0), T(0), T(1) };
+#endif
+    }
+
+
+    template <Arithmetic T>
+    template <std::floating_point U>
+    constexpr Mat3<T> Mat3<T>::makeRotation(U angle, const Vec2<T>& center) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        using R  = PromotedValue_t<T, U>;
+        R cosine = std::cos(angle);
+        R sine   = std::sin(angle);
+
+#ifdef FGM_LEFT_HANDED
+        return Mat3{ cosine, sine, T(center.x()), -sine, cosine, T(center.y()), T(0), T(0), T(1) };
+#else
+        return Mat3{ cosine, -sine, T(center.x()), sine, cosine, T(center.y()), T(0), T(0), T(1) };
 #endif
     }
 

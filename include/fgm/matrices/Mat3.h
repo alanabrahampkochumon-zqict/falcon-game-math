@@ -588,8 +588,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMat3<T, S> safeDiv(S scalar,
-                                                           Mat3 fallback = Mat3::identity()) const noexcept
+        [[nodiscard]] constexpr PromotedMat3<T, S> safeDiv(S scalar, Mat3 fallback = Mat3::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -903,8 +902,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Mat3<Magnitude<T>> safeInverseOf(const Mat3& matrix,
-                                                          Mat3 fallback = Mat3::identity()) noexcept
+        static constexpr Mat3<Magnitude<T>> safeInverseOf(const Mat3& matrix, Mat3 fallback = Mat3::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1207,6 +1205,44 @@ namespace fgm
         template <std::floating_point U>
         [[nodiscard]] static constexpr Mat3 makeRotationZ(U angle) noexcept
             requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 2D affine rotation matrix around @p center.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & -sin(\theta) & x \\
+         *                     sin(\theta) &  cos(\theta) & y \\
+         *                               0 &            0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & sin(\theta) & x \\
+         *                    -sin(\theta) & cos(\theta) & y \\
+         *                               0 &           0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle  The rotation angle in radians.
+         * @param[in] center The center of rotation.
+         *
+         * @return A new @ref Mat3 representing a 2D affine rotation.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Mat3 makeRotation(U angle, const Vec2<T>& center) noexcept
+            requires SignedStrictArithmetic<T>;
+
 
         /**
          * @brief Construct a uniform scale 3D matrix.
