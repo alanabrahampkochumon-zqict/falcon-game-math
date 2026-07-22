@@ -920,6 +920,24 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
+    constexpr Mat4<T> Mat4<T>::makeRotationX(const U angle, const Vec3<T>& center) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        using R  = PromotedValue_t<T, U>;
+        R cosine = std::cos(angle);
+        R sine   = std::sin(angle);
+#ifdef FGM_LEFT_HANDED
+        return Mat4{ T(1), T(0),  T(0),   T(center.x()), T(0), cosine, sine, T(center.y()),
+                     T(0), -sine, cosine, T(center.z()), T(0), T(0),   T(0), T(1) };
+#else
+        return Mat4{ T(1), T(0), T(0),   T(center.x()), T(0), cosine, -sine, T(center.y()),
+                     T(0), sine, cosine, T(center.z()), T(0), T(0),   T(0),  T(1) };
+#endif
+    }
+
+
+    template <Arithmetic T>
+    template <std::floating_point U>
     constexpr Mat4<T> Mat4<T>::makeRotationY(U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
@@ -934,6 +952,24 @@ namespace fgm
         return Mat4{
             cosine, T(0), sine, T(0), T(0), T(1), T(0), T(0), -sine, T(0), cosine, T(0), T(0), T(0), T(0), T(1)
         };
+#endif
+    }
+
+
+    template <Arithmetic T>
+    template <std::floating_point U>
+    constexpr Mat4<T> Mat4<T>::makeRotationY(const U angle, const Vec3<T>& center) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        using R  = PromotedValue_t<T, U>;
+        R cosine = std::cos(angle);
+        R sine   = std::sin(angle);
+#ifdef FGM_LEFT_HANDED
+        return Mat4{ cosine, T(0), -sine,  T(center.x()), T(0), T(1), T(0), T(center.y()),
+                     sine,   T(0), cosine, T(center.z()), T(0), T(0), T(0), T(1) };
+#else
+        return Mat4{ cosine, T(0), sine,   T(center.x()), T(0), T(1), T(0), T(center.y()),
+                     -sine,  T(0), cosine, T(center.z()), T(0), T(0), T(0), T(1) };
 #endif
     }
 
@@ -955,6 +991,24 @@ namespace fgm
         return Mat4{
             cosine, -sine, T(0), T(0), sine, cosine, T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1)
         };
+#endif
+    }
+
+
+    template <Arithmetic T>
+    template <std::floating_point U>
+    constexpr Mat4<T> Mat4<T>::makeRotationZ(U angle, const Vec3<T>& center) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        using R  = PromotedValue_t<T, U>;
+        R cosine = std::cos(angle);
+        R sine   = std::sin(angle);
+#ifdef FGM_LEFT_HANDED
+        return Mat4{ cosine, sine, T(0), T(center.x()), -sine, cosine, T(0), T(center.y()),
+                     T(0),   T(0), T(1), T(center.z()), T(0),  T(0),   T(0), T(1) };
+#else
+        return Mat4{ cosine, -sine, T(0), T(center.x()), sine, cosine, T(0), T(center.y()),
+                     T(0),   T(0),  T(1), T(center.z()), T(0), T(0),   T(0), T(1) };
 #endif
     }
 

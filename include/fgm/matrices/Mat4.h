@@ -606,8 +606,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMat4<T, S> safeDiv(S scalar,
-                                                           Mat4 fallback = Mat4::identity()) const noexcept
+        [[nodiscard]] constexpr PromotedMat4<T, S> safeDiv(S scalar, Mat4 fallback = Mat4::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -986,8 +985,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Mat4<Magnitude<T>> safeInverseOf(const Mat4& matrix,
-                                                          Mat4 fallback = Mat4::identity()) noexcept
+        static constexpr Mat4<Magnitude<T>> safeInverseOf(const Mat4& matrix, Mat4 fallback = Mat4::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1243,6 +1241,45 @@ namespace fgm
 
 
         /**
+         * @brief Construct a 3D affine rotation matrix in the x-axis for a given angle around @p center.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                    1 &            0 &            0 & x \\
+         *                    0 &  cos(\theta) & -sin(\theta) & y \\
+         *                    0 &  sin(\theta) &  cos(\theta) & z \\
+         *                    0 &            0 &            0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                    1 &            0 &           0 & x \\
+         *                    0 &  cos(\theta) & sin(\theta) & y \\
+         *                    0 & -sin(\theta) & cos(\theta) & z \\
+         *                    0 &            0 &           0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle  The rotation angle in radians.
+         * @param[in] center The center of rotation.
+         *
+         * @return A new @ref Mat4 representing the linear rotation around x-axis.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Mat4 makeRotationX(U angle, const Vec3<T>& center) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
          * @brief Construct an affine 3D rotation matrix in the y-axis for a given angle.
          *
          * @details The layout of the returned matrix adapts to the library's active coordinate system:
@@ -1277,6 +1314,46 @@ namespace fgm
          */
         template <std::floating_point U>
         [[nodiscard]] static constexpr Mat4 makeRotationY(U angle) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+
+        /**
+         * @brief Construct an affine 3D rotation matrix in the y-axis for a given angle around @p center.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & 0 & sin(\theta) & x \\
+         *                     0           & 1 &           0 & y \\
+         *                    -sin(\theta) & 0 & cos(\theta) & z \\
+         *                               0 & 0 &           0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                    cos(\theta) & 0 & -sin(\theta) & x \\
+         *                    0           & 1 &            0 & y \\
+         *                    sin(\theta) & 0 &  cos(\theta) & z \\
+         *                              0 & 0 &            0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle  The rotation angle in radians.
+         * @param[in] center The center of rotation.
+         *
+         * @return A new @ref Mat4 representing the linear rotation around y-axis.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Mat4 makeRotationY(U angle, const Vec3<T>& center) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1315,6 +1392,46 @@ namespace fgm
          */
         template <std::floating_point U>
         [[nodiscard]] static constexpr Mat4 makeRotationZ(U angle) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+
+        /**
+         * @brief Construct an affine 3D rotation matrix in the z-axis for a given angle around @p center.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & -sin(\theta) & 0 & x \\
+         *                     sin(\theta) &  cos(\theta) & 0 & y \\
+         *                               0 &            0 & 1 & z \\
+         *                               0 &            0 & 0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *            \f$
+         *                \begin{bmatrix}
+         *                     cos(\theta) & sin(\theta) & 0 & x \\
+         *                    -sin(\theta) & cos(\theta) & 0 & y \\
+         *                               0 &           0 & 1 & z \\
+         *                               0 &           0 & 0 & 1
+         *                \end{bmatrix}
+         *            \f$
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged.
+         *       Trigonometric results will be truncated, resulting in severe precision loss and potential zero-matrices
+         *       for integral types.
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle  The rotation angle in radians.
+         * @param[in] center The center of rotation.
+         *
+         * @return A new @ref Mat4 representing the linear rotation around z-axis.
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr Mat4 makeRotationZ(U angle, const Vec3<T>& center) noexcept
             requires SignedStrictArithmetic<T>;
 
 

@@ -99,14 +99,17 @@ class Mat4FloatRotation: public testing::Test
 {
 protected:
     T _angle;
-    fgm::Vec3<T> _axis;
+    fgm::Vec3<T> _axis, _center;
     fgm::Mat4<T> _expectedMatX, _expectedMatY, _expectedMatZ, _expectedMatXYZ, _expectedAxisRotation;
+    fgm::Mat4<T> _expectedMatXCenter, _expectedMatYCenter, _expectedMatZCenter, _expectedMatXYZCenter,
+        _expectedAxisRotationCenter;
 
 
     void SetUp() override
     {
-        _angle = fgm::constants::PI<T> / T(4.0);
-        _axis  = fgm::Vec3{ T(0.26726124191242440), T(0.53452248382484879), T(0.80178372573727319) };
+        _angle  = fgm::constants::PI<T> / T(4.0);
+        _center = fgm::Vec3{ T(1), T(2), T(3) };
+        _axis   = fgm::Vec3{ T(0.26726124191242440), T(0.53452248382484879), T(0.80178372573727319) };
 
 #ifdef FGM_LEFT_HANDED
         _expectedMatX = { fgm::Vec4{ T(1.0), T(0.0), T(0.0), T(0.0) },
@@ -157,6 +160,56 @@ protected:
             }
         };
 
+        _expectedMatXCenter = { fgm::Vec4{ T(1.0), T(0.0), T(0.0), T(1.0) },
+                                fgm::Vec4{ T(0.0), T(0.70710678118654757), T(-0.70710678118654757), T(2.0) },
+                                fgm::Vec4{ T(0.0), T(0.70710678118654757), T(0.70710678118654757), T(3.0) }, fgm::Vec4 {
+                                    T(0.0),
+                                    T(0.0),
+                                    T(0.0),
+                                    T(1.0)
+                                } };
+
+        _expectedMatYCenter = { fgm::Vec4{ T(0.70710678118654757), T(0.0), T(0.70710678118654757), T(1.0) },
+                                fgm::Vec4{ T(0.0), T(1.0), T(0.0), T(2.0) },
+                                fgm::Vec4{ T(-0.70710678118654757), T(0.0), T(0.70710678118654757), T(3.0) },
+                                fgm::Vec4 {
+                                    T(0.0),
+                                    T(0.0),
+                                    T(0.0),
+                                    T(1.0)
+                                } };
+
+        _expectedMatZCenter = { fgm::Vec4{ T(0.70710678118654757), T(-0.70710678118654757), T(0.0), T(1.0) },
+                                fgm::Vec4{ T(0.70710678118654757), T(0.70710678118654757), T(0.0), T(2.0) },
+                                fgm::Vec4{ T(0.0), T(0.0), T(1.0), T(3.0) }, fgm::Vec4 {
+                                    T(0.0),
+                                    T(0.0),
+                                    T(0.0),
+                                    T(1.0)
+                                } };
+
+        _expectedMatXYZCenter = { fgm::Vec4{ T(0.5), T(0.5), T(-0.70710678118654757), T(1.0) },
+                                  fgm::Vec4{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5), T(2.0) },
+                                  fgm::Vec4{ T(0.85355339059327395), T(-0.14644660940672627), T(0.5), T(3.0) },
+                                  fgm::Vec4 {
+                                      T(0.0),
+                                      T(0.0),
+                                      T(0.0),
+                                      T(1.0)
+                                  } };
+
+        _expectedAxisRotationCenter = {
+            fgm::Vec4{ T(0.72802772538750848), T(0.60878859791576267), T(-0.31520164040634457), T(1.0) },
+            fgm::Vec4{ T(-0.52510482111191903), T(0.79079055799039111), T(0.31450790171037896), T(2.0) },
+            fgm::Vec4{ T(0.44072730561210993), T(-0.06345657129884830), T(0.89539527899519555), T(3.0) },
+            fgm::Vec4 {
+                T(0.0),
+                T(0.0),
+                T(0.0),
+                T(1.0)
+            }
+        };
+
 #else
 
         _expectedMatX = { fgm::Vec4{ T(1.0), T(0.0), T(0.0), T(0.0) },
@@ -185,6 +238,33 @@ protected:
             fgm::Vec4{ T(0.0), T(0.0), T(0.0), T(1.0) }
         };
 
+        _expectedMatXCenter = { fgm::Vec4{ T(1.0), T(0.0), T(0.0), T(1.0) },
+                                fgm::Vec4{ T(0.0), T(0.70710678118654757), T(0.70710678118654757), T(2.0) },
+                                fgm::Vec4{ T(0.0), T(-0.70710678118654757), T(0.70710678118654757), T(3.0) },
+                                fgm::Vec4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
+
+        _expectedMatYCenter = { fgm::Vec4{ T(0.70710678118654757), T(0.0), T(-0.70710678118654757), T(1.0) },
+                                fgm::Vec4{ T(0.0), T(1.0), T(0.0), T(2.0) },
+                                fgm::Vec4{ T(0.70710678118654757), T(0.0), T(0.70710678118654757), T(3.0) },
+                                fgm::Vec4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
+
+        _expectedMatZCenter = { fgm::Vec4{ T(0.70710678118654757), T(0.70710678118654757), T(0.0), T(1.0) },
+                                fgm::Vec4{ T(-0.70710678118654757), T(0.70710678118654757), T(0.0), T(2.0) },
+                                fgm::Vec4{ T(0.0), T(0.0), T(1.0), T(3.0) },
+                                fgm::Vec4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
+
+        _expectedMatXYZCenter = { fgm::Vec4{ T(0.5), T(0.5), T(-0.70710678118654757), T(1.0) },
+                                  fgm::Vec4{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5), T(2.0) },
+                                  fgm::Vec4{ T(0.85355339059327395), T(-0.14644660940672627), T(0.5), T(3.0) },
+                                  fgm::Vec4{ T(0.0), T(0.0), T(0.0), T(1.0) } };
+
+        _expectedAxisRotationCenter = {
+            fgm::Vec4{ T(0.72802772538750848), T(0.60878859791576267), T(-0.31520164040634457), T(1.0) },
+            fgm::Vec4{ T(-0.52510482111191903), T(0.79079055799039111), T(0.31450790171037896), T(2.0) },
+            fgm::Vec4{ T(0.44072730561210993), T(-0.06345657129884830), T(0.89539527899519555), T(3.0) },
+            fgm::Vec4{ T(0.0), T(0.0), T(0.0), T(1.0) }
+        };
+
 #endif
     }
 };
@@ -203,59 +283,65 @@ TYPED_TEST_SUITE(Mat4FloatRotation, SupportedFloatingPointTypes);
 
 /** @brief Verify that rotation transformation factory for x returns a rotation matrix. */
 TYPED_TEST(Mat4Rotation, X_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<typename TypeParam::first_type>::makeRotationX(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for x returns a rotation matrix for non-integral rotation values.
  */
 TYPED_TEST(Mat4FloatRotation, X_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<TypeParam>::makeRotationX(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<TypeParam>::makeRotationX(this->_angle)); }
+
+/**
+ * @brief Verify that rotation transformation factory for x around arbitrary center includes translation to that point.
+ */
+TYPED_TEST(Mat4FloatRotation, X_NonOriginCenter_ReturnsRotationMatrixWithTranslation)
+{ EXPECT_MAT_EQ(this->_expectedMatXCenter, fgm::Mat4<TypeParam>::makeRotationX(this->_angle, this->_center)); }
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Mat4Rotation, Y_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<typename TypeParam::first_type>::makeRotationY(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for y returns a rotation matrix for non-integral rotation values.
  */
 TYPED_TEST(Mat4FloatRotation, Y_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<TypeParam>::makeRotationY(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<TypeParam>::makeRotationY(this->_angle)); }
+
+
+/**
+ * @brief Verify that rotation transformation factory for y around arbitrary center includes translation to that point.
+ */
+TYPED_TEST(Mat4FloatRotation, Y_NonOriginCenter_ReturnsRotationMatrixWithTranslation)
+{ EXPECT_MAT_EQ(this->_expectedMatYCenter, fgm::Mat4<TypeParam>::makeRotationY(this->_angle, this->_center)); }
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Mat4Rotation, Z_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<typename TypeParam::first_type>::makeRotationZ(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for z returns a rotation matrix for non-integral rotation values.
  */
 TYPED_TEST(Mat4FloatRotation, Z_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<TypeParam>::makeRotationZ(this->_angle));
-}
+{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<TypeParam>::makeRotationZ(this->_angle)); }
+
+
+/**
+ * @brief Verify that rotation transformation factory for z around arbitrary center includes translation to that point.
+ */
+TYPED_TEST(Mat4FloatRotation, Z_NonOriginCenter_ReturnsRotationMatrixWithTranslation)
+{ EXPECT_MAT_EQ(this->_expectedMatZCenter, fgm::Mat4<TypeParam>::makeRotationZ(this->_angle, this->_center)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for an axis returns a rotation matrix.
  */
 TYPED_TEST(Mat4FloatRotation, AxisAligned_ReturnsRotationMatrix)
-{
-    EXPECT_MAT_EQ(this->_expectedAxisRotation, fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis));
-}
+{ EXPECT_MAT_EQ(this->_expectedAxisRotation, fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis)); }
 
 
 /** @} */
