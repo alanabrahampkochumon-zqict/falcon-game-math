@@ -1277,18 +1277,19 @@ namespace fgm
                                                        const Vec2<T>& translation) noexcept;
 
 
-        // /**
-        //  * @brief Construct a reflection 3D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
-        //  *
-        //  * @note To construction a reflection matrix around origin, set all axis reflection to true.
-        //  *
-        //  * @param[in] reflectX A flag to whether reflect in the x-direction.
-        //  * @param[in] reflectY A flag to whether reflect in the y-direction.
-        //  *
-        //  * @return A new @ref Mat3 representing the axis-aligned reflection.
-        //  */
-        // [[nodiscard]] static constexpr Mat3 reflect(bool reflectX, bool reflectY) noexcept
-        //     requires StrictArithmetic<T>;
+        /**
+         * @brief Construct a reflection 3D matrix for reflection coordinate axis or any 2D plane formed by the axes.
+         *
+         * @note Factory is constrained to matrices with signed types.
+         *
+         * @tparam On The plane or axis to reflect on. For more details @ref fgm::reflect for more details.
+         *
+         * @return A new @ref Mat3 representing the coordinate axis or plane aligned reflection.
+         */
+        // TODO: Add test
+        template <reflect::RT On>
+        [[nodiscard]] static constexpr Mat3 reflect() noexcept
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
 
