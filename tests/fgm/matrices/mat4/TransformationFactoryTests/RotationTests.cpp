@@ -292,6 +292,7 @@ TYPED_TEST(Mat4Rotation, X_ReturnsRotationMatrix)
 TYPED_TEST(Mat4FloatRotation, X_ReturnsRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<TypeParam>::makeRotationX(this->_angle)); }
 
+
 /**
  * @brief Verify that rotation transformation factory for x around arbitrary center includes translation to that point.
  */
@@ -342,6 +343,17 @@ TYPED_TEST(Mat4FloatRotation, Z_NonOriginCenter_ReturnsRotationMatrixWithTransla
  */
 TYPED_TEST(Mat4FloatRotation, AxisAligned_ReturnsRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedAxisRotation, fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis)); }
+
+
+/**
+ * @brief Verify that rotation transformation factory for an axis and around an arbitrary center
+ *        returns a rotation matrix.
+ */
+TYPED_TEST(Mat4FloatRotation, AxisAligned_NonOriginCenter_ReturnsRotationMatrixWithTranslation)
+{
+    EXPECT_MAT_EQ(this->_expectedAxisRotationCenter,
+                  fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis, this->_center));
+}
 
 
 /** @} */

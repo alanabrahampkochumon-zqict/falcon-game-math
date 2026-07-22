@@ -1056,6 +1056,49 @@ namespace fgm
 
 
     template <Arithmetic T>
+    template <std::floating_point U>
+    constexpr PromotedFloatMat4<T, U> Mat4<T>::makeRotation(U angle, const Vec3<T>& axis,
+                                                            const Vec3<T>& center) noexcept
+        requires StrictArithmetic<T>
+    {
+        using S = Magnitude<std::common_type_t<T, U>>;
+
+        S c = static_cast<S>(std::cos(angle));
+#ifdef FGM_LEFT_HANDED
+        S s = -static_cast<S>(std::sin(angle));
+#else
+        S s = static_cast<S>(std::sin(angle));
+#endif
+        S d = 1 - c;
+
+        S x = static_cast<S>(axis.x()) * d;
+        S y = static_cast<S>(axis.y()) * d;
+        S z = static_cast<S>(axis.z()) * d;
+
+        S axay = x * axis.y();
+        S axaz = x * axis.z();
+        S ayaz = y * axis.z();
+
+        return Mat4{ S(c + x * axis.x()),
+                     S(axay - s * axis.z()),
+                     S(axaz + s * axis.y()),
+                     S(center.x()),
+                     S(axay + s * axis.z()),
+                     S(c + y * axis.y()),
+                     S(ayaz - s * axis.x()),
+                     S(center.y()),
+                     S(axaz - s * axis.y()),
+                     S(ayaz + s * axis.x()),
+                     S(c + z * axis.z()),
+                     S(center.z()),
+                     S(0),
+                     S(0),
+                     S(0),
+                     S(1) };
+    }
+
+
+    template <Arithmetic T>
     constexpr Mat4<T> Mat4<T>::makeScale(T scale) noexcept
         requires StrictArithmetic<T>
     {
