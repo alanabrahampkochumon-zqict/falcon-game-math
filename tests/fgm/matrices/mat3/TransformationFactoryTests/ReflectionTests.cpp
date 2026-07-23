@@ -22,13 +22,12 @@ template <typename T>
 class Mat3Reflection: public ::testing::Test
 {
 protected:
-    fgm::Vec3<T> _xAxis, _yAxis, _zAxis, _axis;
+    fgm::Vec3<T> _xAxis, _yAxis, _zAxis;
     fgm::Mat3<T> _expectedReflectionX, _expectedReflectionY, _expectedReflectionZ, _expectedReflectionXY,
-        _expectedReflectionYZ, _expectedReflectionZX, _expectedReflectionOrigin, _expectedNormReflect;
+        _expectedReflectionYZ, _expectedReflectionZX, _expectedReflectionOrigin;
 
     void SetUp() override
     {
-        _axis  = fgm::Vec3{ T(0.3244428422615251), T(0.48666426339228763), T(0.8111071056538127) };
         _xAxis = fgm::Vec3{ T(1), T(0), T(0) };
         _yAxis = fgm::Vec3{ T(0), T(1), T(0) };
         _zAxis = fgm::Vec3{ T(0), T(0), T(1) };
@@ -53,10 +52,6 @@ protected:
 
         _expectedReflectionOrigin = { fgm::Vec3{ T(-1), T(0), T(0) }, fgm::Vec3{ T(0), T(-1), T(0) },
                                       fgm::Vec3{ T(0), T(0), T(-1) } };
-
-        _expectedNormReflect = { fgm::Vec3{ T(0.7894736842105263), T(-0.31578947368421056), T(-0.5263157894736843) },
-                                 fgm::Vec3{ T(-0.31578947368421056), T(0.5263157894736842), T(-0.7894736842105263) },
-                                 fgm::Vec3{ T(-0.5263157894736843), T(-0.7894736842105263), T(-0.3157894736842106) } };
     }
 };
 /**
@@ -219,12 +214,12 @@ namespace
 } // namespace
 
 
-//
-// /**************************************
-//  *                                    *
-//  *          REFLECTION TESTS          *
-//  *                                    *
-//  **************************************/
+
+/**************************************
+ *                                    *
+ *          REFLECTION TESTS          *
+ *                                    *
+ **************************************/
 
 
 /** @brief Verify that reflection transformation factory for x-axis returns a matrix with negated y and z values. */

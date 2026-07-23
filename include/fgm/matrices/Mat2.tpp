@@ -456,8 +456,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat2<T, S> Mat2<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                 Mat2 fallback) const noexcept
+    constexpr PromotedMat2<T, S> Mat2<T>::tryDiv(const S scalar, OperationStatus& status, Mat2 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -722,9 +721,21 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat2<T> Mat2<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
-        requires StrictArithmetic<T>
-    { return Mat2(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1)); }
+    template <reflect::RT On>
+    constexpr Mat2<T> Mat2<T>::makeReflection() noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        T reflectX = T(-2) * ((On & 0b00000100) >> 2) + T(1);
+        T reflectY = T(-2) * ((On & 0b00000010) >> 1) + T(1);
+
+        return Mat2{ reflectX, T(0), T(0), reflectY };
+    }
+
+    // TODO: Deprecated(REMOVE)
+    // template <Arithmetic T>
+    // constexpr Mat2<T> Mat2<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
+    //     requires StrictArithmetic<T>
+    // { return Mat2(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1)); }
 
 } // namespace fgm
 

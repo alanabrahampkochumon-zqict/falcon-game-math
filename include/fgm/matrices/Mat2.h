@@ -578,8 +578,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMat2<T, S> safeDiv(S scalar,
-                                                           Mat2 fallback = Mat2::identity()) const noexcept
+        [[nodiscard]] constexpr PromotedMat2<T, S> safeDiv(S scalar, Mat2 fallback = Mat2::identity()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -873,8 +872,7 @@ namespace fgm
          *          @p fallback if this matrix is a singular matrix or has NaN(Not-a-Number) element(s).
          */
         [[nodiscard("Inverse does not mutate the matrix. Discarding the result will not produce any change.")]]
-        static constexpr Mat2<Magnitude<T>> safeInverseOf(const Mat2& matrix,
-                                                          Mat2 fallback = Mat2::identity()) noexcept
+        static constexpr Mat2<Magnitude<T>> safeInverseOf(const Mat2& matrix, Mat2 fallback = Mat2::identity()) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1125,19 +1123,31 @@ namespace fgm
         [[nodiscard]] static constexpr Mat2 makeScale(T scaleX, T scaleY) noexcept
             requires StrictArithmetic<T>;
 
+        // TODO: Remove
+        // /**
+        //  * @brief Construct a reflection 2D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
+        //  *
+        //  * @note To construction a reflection matrix around origin, set all axis reflection to true.
+        //  *
+        //  * @param[in] reflectX A flag to whether reflect in the x-direction.
+        //  * @param[in] reflectY A flag to whether reflect in the y-direction.
+        //  *
+        //  * @return A new @ref Mat2 representing the axis-aligned reflection.
+        //  */
+        // [[nodiscard]] static constexpr Mat2 makeReflection(bool reflectX, bool reflectY) noexcept
+        //     requires StrictArithmetic<T>;
+
 
         /**
-         * @brief Construct a reflection 2D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
+         * @brief Construct a 2D reflection matrix across coordinate axis the origin.
          *
-         * @note To construction a reflection matrix around origin, set all axis reflection to true.
+         * @tparam On The axis to reflect across. For more details @ref fgm::reflect for more details.
          *
-         * @param[in] reflectX A flag to whether reflect in the x-direction.
-         * @param[in] reflectY A flag to whether reflect in the y-direction.
-         *
-         * @return A new @ref Mat2 representing the axis-aligned reflection.
+         * @return A new @ref Mat2 representing the reflection across coordinate axis, plane or the origin.
          */
-        [[nodiscard]] static constexpr Mat2 makeReflection(bool reflectX, bool reflectY) noexcept
-            requires StrictArithmetic<T>;
+        template <reflect::RT On>
+        [[nodiscard]] static constexpr Mat2 makeReflection() noexcept
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
 

@@ -1283,7 +1283,7 @@ namespace fgm
          *
          * @note Factory is constrained to matrices of signed types.
          *
-         * @tparam On The plane or axis to reflect on. For more details @ref fgm::reflect for more details.
+         * @tparam On The plane or axis to reflect across. For more details @ref fgm::reflect for more details.
          *
          * @return A new @ref Mat3 representing the reflection across coordinate axis, plane or the origin.
          *
@@ -1295,7 +1295,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 3D reflection matrix across any plane through the origin.
+         * @brief Construct a 3D reflection matrix across any plane through the origin with @p normal.
          *
          * @note Ensure that @p normal is the normal to the plane. If you want coordinate axis reflection you should
          *       pass the axis perpendicular to the axes that forms the plane. For example, you need to make sure to
