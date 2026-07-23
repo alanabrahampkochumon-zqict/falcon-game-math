@@ -22,13 +22,17 @@ template <typename T>
 class Mat2x3Multiplication: public ::testing::Test
 {
 protected:
-    fgm::Mat2x3<T> _mat, _expectedFPMat2x3, _expectedIntMat2x3;
-    fgm::Mat3x2<T> _mat3x2;
-    fgm::Mat3<T> _mat3x3;
     fgm::Mat2<T> _expectedFPMat2, _expectedIntMat2;
+    fgm::Mat2x3<T> _mat, _expectedFPMat2x3, _expectedIntMat2x3;
+    fgm::Mat2x4<T> _expectedFPMat2x4, _expectedIntMat2x4;
 
-    fgm::Vec3<T> _vec3x1;
+    fgm::Mat3<T> _mat3x3;
+    fgm::Mat3x2<T> _mat3x2;
+
+    fgm::Mat3x4<T> _mat3x4;
+
     fgm::Vec2<T> _expectedFPVec2x1, _expectedIntVec2x1;
+    fgm::Vec3<T> _vec3x1;
 
     void SetUp() override
     {
@@ -39,7 +43,17 @@ protected:
         _mat3x3 = { fgm::Vec3{ T(5.12390421300000032), T(8.12390421299999943), T(11.12390421299999943) },
                     fgm::Vec3{ T(6.12390421300000032), T(9.12390421299999943), T(12.12390421299999943) },
                     fgm::Vec3{ T(7.12390421300000032), T(10.12390421299999943), T(13.12390421299999943) } };
+        _mat3x4 = { fgm::Vec3{ T(5.12390421300000032), T(9.12390421299999943), T(13.12390421299999943) },
+                    fgm::Vec3{ T(6.12390421300000032), T(10.12390421299999943), T(14.12390421299999943) },
+                    fgm::Vec3{ T(7.12390421300000032), T(11.12390421299999943), T(15.12390421299999943) },
+                    fgm::Vec3{ T(8.12390421299999943), T(12.12390421299999943), T(16.12390421299999943) } };
 
+        _expectedFPMat2x4  = { fgm::Vec2{ T(71.55553299309299575), T(153.67067091009300839) },
+                               fgm::Vec2{ T(78.52135941009299813), T(169.63649732709299656) },
+                               fgm::Vec2{ T(85.48718582709298630), T(185.60232374409298473) },
+                               fgm::Vec2{ T(92.45301224409298868), T(201.56815016109297289) } };
+        _expectedIntMat2x4 = { fgm::Vec2{ T(62), T(143) }, fgm::Vec2{ T(68), T(158) }, fgm::Vec2{ T(74), T(173) },
+                               fgm::Vec2{ T(80), T(188) } };
 
         _expectedFPMat2x3  = { fgm::Vec2{ T(62.58970657609299337), T(135.70484449309299180) },
                                fgm::Vec2{ T(69.55553299309298154), T(151.67067091009300839) },
@@ -77,6 +91,7 @@ namespace
     constexpr fgm::Vec3 VEC3(5, 6, 7);
     constexpr fgm::Mat3x2 MAT3x2(5, 6, 7, 8, 9, 10);
     constexpr fgm::Mat3 MAT3x3(5, 6, 7, 8, 9, 10, 11, 12, 13);
+    constexpr fgm::Mat3x4 MAT3x4(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
 
     // 2x3 * 3x1 => 2x1
@@ -95,6 +110,12 @@ namespace
     static_assert(EXP_MAT2x3[0] == fgm::Vec2{ 54, 126 });
     static_assert(EXP_MAT2x3[1] == fgm::Vec2{ 60, 141 });
     static_assert(EXP_MAT2x3[2] == fgm::Vec2{ 66, 156 });
+
+    constexpr auto EXP_MAT2x4 = MAT2x3 * MAT3x4;
+    static_assert(EXP_MAT2x4[0] == fgm::Vec2{ 62, 143 });
+    static_assert(EXP_MAT2x4[1] == fgm::Vec2{ 68, 158 });
+    static_assert(EXP_MAT2x4[2] == fgm::Vec2{ 74, 173 });
+    static_assert(EXP_MAT2x4[3] == fgm::Vec2{ 80, 188 });
 
 
     // Verify matrix * vector multiplication
@@ -176,6 +197,23 @@ TYPED_TEST(Mat2x3Multiplication, TimesMat3x3_ReturnsA2x3Matrix)
     else
     {
         EXPECT_MAT_EQ(this->_expectedIntMat2x3, matrixProduct);
+    }
+}
+
+
+/**
+ * @brief Verify that the multiplication between a Mat2x3 and Mat3x4 returns a 2x4 Matrix.
+ */
+TYPED_TEST(Mat2x3Multiplication, TimesMat3x4_ReturnsA2x4Matrix)
+{
+    const auto matrixProduct = this->_mat * this->_mat3x4;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedFPMat2x4, matrixProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedIntMat2x4, matrixProduct);
     }
 }
 

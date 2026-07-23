@@ -18,9 +18,13 @@
 #include "../vectors/Vec4.h"
 #include "Mat2.h"
 #include "Mat2x3.h"
+#include "Mat2x4.h"
 #include "Mat3.h"
 #include "Mat3x2.h"
+#include "Mat3x4.h"
 #include "Mat4.h"
+#include "Mat4x2.h"
+#include "Mat4x3.h"
 
 // TODO: Use transpose from here
 //     /**
@@ -77,7 +81,6 @@
 // TODO: Add Groups
 // TODO: Add Implementation
 // Implementations
-//       2x3 * 3x3 => 2x3
 //       2x3 * 3x4 => 2x4
 // 1x2 * 2x3       => 1x3
 
@@ -168,6 +171,22 @@ namespace fgm
     [[nodiscard]] constexpr PromotedMat2x3<T, U> operator*(const Mat2x3<T>& lhs, const Mat3<U>& rhs) noexcept;
 
 
+    /**
+     * @brief Multiply a 2x3 matrix with a 3x4 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 2x3 matrix on the left hand side.
+     * @param[in] rhs The 3x4 matrix on the right hand side.
+     *
+     * @return A new 2x4 matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat2x4<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x4<U>& rhs) noexcept;
 
 
     // /**
