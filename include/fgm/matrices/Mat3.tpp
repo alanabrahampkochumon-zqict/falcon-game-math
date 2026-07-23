@@ -862,18 +862,14 @@ namespace fgm
 
     template <Arithmetic T>
     template <reflect::RT On>
-    constexpr Mat3<T> Mat3<T>::reflect() noexcept
+    constexpr Mat3<T> Mat3<T>::makeReflection() noexcept
         requires SignedStrictArithmetic<T>
     {
-        T reflectX = T(-2) * (On & 0b00000100) + T(1);
-        T reflectY = T(-2) * (On & 0b00000010) + T(1);
+        T reflectX = T(-2) * ((On & 0b00000100) >> 2) + T(1);
+        T reflectY = T(-2) * ((On & 0b00000010) >> 1) + T(1);
         T reflectZ = T(-2) * (On & 0b00000001) + T(1);
 
-        return Mat3 {
-            reflectX, T(0), T(0),
-            T(0), reflectY, T(0),
-            T(0), T(0), reflectZ
-        };
+        return Mat3{ reflectX, T(0), T(0), T(0), reflectY, T(0), T(0), T(0), reflectZ };
     }
 
 } // namespace fgm

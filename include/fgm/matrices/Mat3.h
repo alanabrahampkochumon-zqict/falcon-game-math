@@ -1288,7 +1288,7 @@ namespace fgm
          */
         // TODO: Add test
         template <reflect::RT On>
-        [[nodiscard]] static constexpr Mat3 reflect() noexcept
+        [[nodiscard]] static constexpr Mat3 makeReflection() noexcept
             requires SignedStrictArithmetic<T>;
 
         /** @} */

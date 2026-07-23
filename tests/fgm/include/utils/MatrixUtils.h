@@ -113,6 +113,33 @@ namespace testutils
         }
     }
 
+    /**
+     * @brief Perform a component-wise strict equality comparison of the data elements expected in the matrix
+     *        with the actual matrix elements at compile time.
+     *
+     * @tparam T The numeric type of the expected data.
+     * @tparam U The type of the actual matrix.
+     *
+     * @param expectedElements The elements in row-major order that forms the elements of the matrix.
+     * @param actual           The matrix being evaluated.
+     *
+     * @note Uses static asserts so the test should be compile time.
+     */
+    template <fgm::Arithmetic T, fgm::Matrix U>
+    constexpr void EXPECT_MAT_CONTAINS_STATIC(const std::vector<T>& expectedElements, const U& actual)
+    {
+        assert(expectedElements.size() == U::ROWS * U::COLUMNS &&
+               "Size of data elements must match the matrix dimension, e.g: 9 to 3x3");
+
+        for (std::size_t i = 0; i < U::ROWS; ++i)
+        {
+            for (std::size_t j = 0; j < U::COLUMNS; ++j)
+            {
+                static_assert(COMPARE_EQ(expectedElements[i * U::COLUMNS + j], static_cast<T>(actual(i, j))));
+            }
+        }
+    }
+
 
     /**
      * @brief Performs a component-wise approximate equality comparison using an absolute epsilon.

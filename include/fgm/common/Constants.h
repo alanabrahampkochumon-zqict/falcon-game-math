@@ -54,13 +54,15 @@ namespace fgm::constants
 
 namespace fgm::reflect
 {
-    using RT = uint8_t;
-    inline constexpr RT XY = 0b00000001; ///< Alias for xy-plane reflection
-    inline constexpr RT YZ = 0b00000100; ///< Alias for xy-plane reflection
-    inline constexpr RT ZX = 0b00000010; ///< Alias for xy-plane reflection
-    inline constexpr RT X  = 0b00000011; ///< Alias for x-axis reflection
-    inline constexpr RT Y  = 0b00000101; ///< Alias for y-axis reflection
-    inline constexpr RT Z  = 0b00000110; ///< Alias for z-axis reflection
+    // NOTE: The last 3 bits are treated as x,y,z indicating in which axis reflection takes place.
+    using RT                   = uint8_t;
+    inline constexpr RT XY     = 0b00000001; ///< Alias for xy-plane reflection
+    inline constexpr RT YZ     = 0b00000100; ///< Alias for yz-plane reflection
+    inline constexpr RT ZX     = 0b00000010; ///< Alias for zx-plane reflection
+    inline constexpr RT X      = 0b00000011; ///< Alias for x-axis reflection
+    inline constexpr RT Y      = 0b00000101; ///< Alias for y-axis reflection
+    inline constexpr RT Z      = 0b00000110; ///< Alias for z-axis reflection
+    inline constexpr RT ORIGIN = 0b00000111; ///< Alias for origin reflection
 
 } // namespace fgm::reflect
 
