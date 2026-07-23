@@ -77,13 +77,16 @@ class Mat3FloatRotation: public testing::Test
 protected:
     T _angle;
     fgm::Vec2<T> _center;
-    fgm::Mat3<T> _expectedMatX, _expectedMatY, _expectedMatZ, _expectedMatXYZ, _expectedMatCenter;
+    fgm::Vec3<T> _axis;
+    fgm::Mat3<T> _expectedMatX, _expectedMatY, _expectedMatZ, _expectedMatXYZ, _expectedMatCenter,
+        _expectedAxisRotation;
 
 
     void SetUp() override
     {
         _angle  = fgm::constants::PI<T> / T(4.0);
         _center = fgm::Vec2{ T(1), T(2) };
+        _axis   = fgm::Vec3{ T(0.26726124191242440), T(0.53452248382484879), T(0.80178372573727319) };
 
 #ifdef FGM_LEFT_HANDED
         _expectedMatX = { fgm::Vec3{ T(1.0), T(0.0), T(0.0) },
@@ -114,6 +117,12 @@ protected:
                                 T(0.5)
                             } };
 
+        _expectedAxisRotation = {
+            fgm::Vec3{ T(0.72802772538750848), T(0.60878859791576267), T(-0.31520164040634457) },
+            fgm::Vec3{ T(-0.52510482111191903), T(0.79079055799039111), T(0.31450790171037896) },
+            fgm::Vec3{ T(0.44072730561210993), T(-0.06345657129884830), T(0.89539527899519555) },
+        };
+
 #else
 
         _expectedMatX = { fgm::Vec3{ T(1.0), T(0.0), T(0.0) },
@@ -135,6 +144,11 @@ protected:
         _expectedMatXYZ = { fgm::Vec3{ T(0.5), T(0.5), T(-0.70710678118654757) },
                             fgm::Vec3{ T(-0.14644660940672627), T(0.85355339059327395), T(0.5) },
                             fgm::Vec3{ T(0.85355339059327395), T(-0.14644660940672627), T(0.5) } };
+
+        _expectedAxisRotation = { fgm::Vec3{ T(0.72802772538750848), T(0.60878859791576267), T(-0.31520164040634457) },
+                                  fgm::Vec3{ T(-0.52510482111191903), T(0.79079055799039111), T(0.31450790171037896) },
+                                  fgm::Vec3{ T(0.44072730561210993), T(-0.06345657129884830),
+                                             T(0.89539527899519555) } };
 
 #endif
     }
@@ -203,6 +217,12 @@ TYPED_TEST(Mat3FloatRotation, Z_ReturnsRotationMatrix)
 /** @brief Verify that rotation transformation factory for 2D returns a rotation matrix with translation. */
 TYPED_TEST(Mat3FloatRotation, Z_NonOriginCenter_ReturnsRotationMatrixWithTranslation)
 { EXPECT_MAT_EQ(this->_expectedMatCenter, fgm::Mat3<TypeParam>::makeRotation(this->_angle, this->_center)); }
+
+/**
+ * @brief Verify that rotation transformation factory for an axis returns a rotation matrix.
+ */
+TYPED_TEST(Mat3FloatRotation, AxisAligned_ReturnsRotationMatrix)
+{ EXPECT_MAT_EQ(this->_expectedAxisRotation, fgm::Mat3<TypeParam>::makeRotation(this->_angle, this->_axis)); }
 
 
 /** @} */

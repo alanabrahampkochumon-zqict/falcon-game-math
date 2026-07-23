@@ -834,6 +834,35 @@ namespace fgm
 
 
     template <Arithmetic T>
+    template <std::floating_point U>
+    constexpr PromotedFloatMat3<T, U> Mat3<T>::makeRotation(U angle, const Vec3<T>& axis) noexcept
+        requires StrictArithmetic<T>
+    {
+        using S = Magnitude<std::common_type_t<T, U>>;
+
+        S c = static_cast<S>(std::cos(angle));
+#ifdef FGM_LEFT_HANDED
+        S s = -static_cast<S>(std::sin(angle));
+#else
+        S s = static_cast<S>(std::sin(angle));
+#endif
+        S d = 1 - c;
+
+        S x = static_cast<S>(axis.x()) * d;
+        S y = static_cast<S>(axis.y()) * d;
+        S z = static_cast<S>(axis.z()) * d;
+
+        S axay = x * axis.y();
+        S axaz = x * axis.z();
+        S ayaz = y * axis.z();
+
+        return Mat3{ S(c + x * axis.x()),    S(axay - s * axis.z()), S(axaz + s * axis.y()),
+                     S(axay + s * axis.z()), S(c + y * axis.y()),    S(ayaz - s * axis.x()),
+                     S(axaz - s * axis.y()), S(ayaz + s * axis.x()), S(c + z * axis.z()) };
+    }
+
+
+    template <Arithmetic T>
     constexpr Mat3<T> Mat3<T>::makeScale(T scale) noexcept
         requires StrictArithmetic<T>
     { return Mat3{ scale, T(0), T(0), T(0), scale, T(0), T(0), T(0), scale }; }

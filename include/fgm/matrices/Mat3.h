@@ -1245,6 +1245,42 @@ namespace fgm
 
 
         /**
+         * @brief Construct a 3D rotation matrix about the @p axis (normalized) for a given angle.
+         *
+         * @details The layout of the returned matrix adapts to the library's active coordinate system:
+         *          - **Right-Handed (Default):** Anticlockwise Rotation
+         *          - **Left-Handed (FGM_LEFT_HANDED):** Clockwise Rotation
+         *          - Uses Rodrigues' formula
+         *            \f$
+         *            \textbf{v}_{Rot} =
+         *                              \textbf{v} \cos{\theta} +
+         *                              \textbf{k}(\textbf{k}\cdot\textbf{v})(1-\cos{\theta}) +
+         *                              (\textbf{k} \times \textbf{v}) \sin{\theta}
+         *            \f$
+         *
+         * @tparam U Numeric type of the angle. Must satisfy `std::floating_point`.
+         *
+         * @param[in] angle The rotation angle in radians.
+         * @param[in] axis  The axis of rotation. Must be a unit vector.
+         *
+         * @return A new @ref Mat3 representing the linear rotation around @p axis
+         *         promoted to the nearest floating point type.
+         *
+         * @relatedalso makeRotationNonNorm(U, const Vec3<T>&) // TODO:
+         * @relatedalso makeRotation(U, const Vec3<T>&, const Vec3<T>&)
+         * @relatedalso makeRotationX(U)
+         * @relatedalso makeRotationX(U, const Vec3<T>&)
+         * @relatedalso makeRotationY(U)
+         * @relatedalso makeRotationY(U, const Vec3<T>&)
+         * @relatedalso makeRotationZ(U)
+         * @relatedalso makeRotationZ(U, const Vec3<T>&)
+         */
+        template <std::floating_point U>
+        [[nodiscard]] static constexpr PromotedFloatMat3<T, U> makeRotation(U angle, const Vec3<T>& axis) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
          * @brief Construct a uniform scale 3D matrix.
          *
          * @param[in] scale The scale factor.
