@@ -73,9 +73,28 @@ TYPED_TEST_SUITE(Mat2x3Multiplication, SupportedArithmeticTypes);
 /** @brief Verify that matrix multiplication operations are available at compile time. */
 namespace
 {
-    // constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
-    // constexpr fgm::Mat2x3 MAT2(5, 6, 7, 8, 9, 10);
-    // constexpr fgm::Vec2 VEC(1, 2);
+    constexpr fgm::Mat2x3 MAT2x3(1, 2, 3, 4, 5, 6);
+    constexpr fgm::Vec3 VEC3(5, 6, 7);
+    constexpr fgm::Mat3x2 MAT3x2(5, 6, 7, 8, 9, 10);
+    constexpr fgm::Mat3 MAT3x3(5, 6, 7, 8, 9, 10, 11, 12, 13);
+
+
+    // 2x3 * 3x1 => 2x1
+    constexpr auto EXP_VEC2 = MAT2x3 * VEC3;
+    static_assert(EXP_VEC2.x() == 38);
+    static_assert(EXP_VEC2.y() == 92);
+
+    // 2x3 * 3x2 => 2x2
+    constexpr auto EXP_MAT2 = MAT2x3 * MAT3x2;
+    static_assert(EXP_MAT2[0] == fgm::Vec2{ 46, 109 });
+    static_assert(EXP_MAT2[1] == fgm::Vec2{ 52, 124 });
+
+
+    // 2x3 * 3x3 => 2x3
+    constexpr auto EXP_MAT2x3 = MAT2x3 * MAT3x3;
+    static_assert(EXP_MAT2x3[0] == fgm::Vec2{ 54, 126 });
+    static_assert(EXP_MAT2x3[1] == fgm::Vec2{ 60, 141 });
+    static_assert(EXP_MAT2x3[2] == fgm::Vec2{ 66, 156 });
 
 
     // Verify matrix * vector multiplication
