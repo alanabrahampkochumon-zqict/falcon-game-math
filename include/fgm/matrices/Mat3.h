@@ -1278,17 +1278,36 @@ namespace fgm
 
 
         /**
-         * @brief Construct a reflection 3D matrix for reflection coordinate axis or any 2D plane formed by the axes.
+         * @brief Construct a 3D reflection matrix across coordinate axis, any 2D plane formed by the axes,
+         *        or the origin.
          *
-         * @note Factory is constrained to matrices with signed types.
+         * @note Factory is constrained to matrices of signed types.
          *
          * @tparam On The plane or axis to reflect on. For more details @ref fgm::reflect for more details.
          *
-         * @return A new @ref Mat3 representing the coordinate axis or plane aligned reflection.
+         * @return A new @ref Mat3 representing the reflection across coordinate axis, plane or the origin.
+         *
+         * @relatedalso makeReflection(const Vec3<T>&)
          */
-        // TODO: Add test
         template <reflect::RT On>
         [[nodiscard]] static constexpr Mat3 makeReflection() noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 3D reflection matrix across any plane through the origin.
+         *
+         * @note Ensure that @p normal is the normal to the plane. If you want coordinate axis reflection you should
+         *       pass the axis perpendicular to the axes that forms the plane. For example, you need to make sure to
+         *       pass in <0, 0, 1>(z-axis) for reflection in the yz-plane, not <1, 1, 0>.
+         *
+         * @param[in] normal Normal of the reflection plane. Must be a unit vector.
+         *
+         * @return A new @ref Mat3 representing the reflection matrix across a given plane.
+         *
+         * @relatedalso makeReflection<RT>()
+         */
+        [[nodiscard]] static constexpr Mat3 makeReflection(const Vec3<T>& normal) noexcept
             requires SignedStrictArithmetic<T>;
 
         /** @} */

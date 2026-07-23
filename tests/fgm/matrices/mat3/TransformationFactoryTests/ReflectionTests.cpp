@@ -22,11 +22,16 @@ template <typename T>
 class Mat3Reflection: public ::testing::Test
 {
 protected:
+    fgm::Vec3<T> _xAxis, _yAxis, _zAxis;
     fgm::Mat3<T> _expectedReflectionX, _expectedReflectionY, _expectedReflectionZ, _expectedReflectionXY,
         _expectedReflectionYZ, _expectedReflectionZX, _expectedReflectionOrigin;
 
     void SetUp() override
     {
+        _xAxis   = fgm::Vec3{ T(1), T(0), T(0) };
+        _yAxis   = fgm::Vec3{ T(0), T(1), T(0) };
+        _zAxis   = fgm::Vec3{ T(0), T(0), T(1) };
+
         _expectedReflectionX = { fgm::Vec3{ T(1), T(0), T(0) }, fgm::Vec3{ T(0), T(-1), T(0) },
                                  fgm::Vec3{ T(0), T(0), T(-1) } };
 
@@ -54,21 +59,6 @@ protected:
  *        parameterized @ref SupportedSignedArithmeticTypes
  */
 TYPED_TEST_SUITE(Mat3Reflection, SupportedSignedArithmeticTypes);
-
-//
-// template <typename T>
-// class Mat3XAxisReflection: public ::testing::Test
-// {
-// protected:
-//     fgm::Mat3<T> _expectedMat;
-//
-//     void SetUp() override { _expectedMat = { fgm::Vec4{ T(-1), T(0) }, fgm::Vec4{ T(0), T(1) } }; }
-// };
-// /**
-//  * @brief Test fixture for @ref fgm::Mat3 reflection along x-axis, parameterized
-//  *        @ref SupportedSignedArithmeticTypes
-//  */
-// TYPED_TEST_SUITE(Mat3XAxisReflection, SupportedSignedArithmeticTypes);
 
 
 /** @brief Verify that reflection transform factory is available at compile time.  */
@@ -207,6 +197,31 @@ TYPED_TEST(Mat3Reflection, Origin_ReturnsMatrixWithNegatedXYZ)
     EXPECT_MAT_EQ(this->_expectedReflectionOrigin,
                   fgm::Mat3<TypeParam>::template makeReflection<fgm::reflect::ORIGIN>());
 }
+
+
+/**
+ * @brief Verify that reflection transformation factory(makeReflection(normal)) along x-axis
+ *        returns a reflection matrix across yz-plane.
+ */
+TYPED_TEST(Mat3Reflection, PlaneNormalReflection_X_ReturnsYZReflectionMatrix)
+{ EXPECT_MAT_EQ(this->_expectedReflectionYZ, fgm::Mat3<TypeParam>::makeReflection(this->_xAxis)); }
+
+
+/**
+ * @brief Verify that reflection transformation factory(makeReflection(normal)) for y-axis
+ *        returns a reflection matrix across zx-plane.
+ */
+TYPED_TEST(Mat3Reflection, PlaneNormalReflection_Y_ReturnsZXReflectionMatrix)
+{ EXPECT_MAT_EQ(this->_expectedReflectionZX, fgm::Mat3<TypeParam>::makeReflection(this->_yAxis)); }
+
+
+/**
+ * @brief Verify that reflection transformation factory(makeReflection(normal)) for z-axis
+ *        returns a reflection matrix across xy-plane.
+ */
+TYPED_TEST(Mat3Reflection, PlaneNormalReflection_Z_ReturnsXYReflectionMatrix)
+{ EXPECT_MAT_EQ(this->_expectedReflectionXY, fgm::Mat3<TypeParam>::makeReflection(this->_zAxis)); }
+
 
 
 // /** @brief Verify that reflection transformation factory for y-axis returns a reflection matrix. */

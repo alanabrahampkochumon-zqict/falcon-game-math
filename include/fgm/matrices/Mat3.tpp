@@ -872,6 +872,18 @@ namespace fgm
         return Mat3{ reflectX, T(0), T(0), T(0), reflectY, T(0), T(0), T(0), reflectZ };
     }
 
+
+    template <Arithmetic T>
+    constexpr Mat3<T> Mat3<T>::makeReflection(const Vec3<T>& normal) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        T ax = normal.x();
+        T ay = normal.y();
+        T az = normal.z();
+        return Mat3<T>{ T(1 - 2 * ax * ax), T(-2 * ax * ay), T(-2 * ax * az), T(-2 * ay * ax),   T(1 - 2 * ay * ay),
+                        T(-2 * ay * az),    T(-2 * az * ax), T(-2 * az * ay), T(1 - 2 * az * az) };
+    }
+
 } // namespace fgm
 
 
