@@ -1577,18 +1577,21 @@ namespace fgm
                                                        const Vec3<T>& translation) noexcept;
 
 
-        // /**
-        //  * @brief Construct a reflection 3D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
-        //  *
-        //  * @note To construction a reflection matrix around origin, set all axis reflection to true.
-        //  *
-        //  * @param[in] reflectX A flag to whether reflect in the x-direction.
-        //  * @param[in] reflectY A flag to whether reflect in the y-direction.
-        //  *
-        //  * @return A new @ref Mat4 representing the axis-aligned reflection.
-        //  */
-        // [[nodiscard]] static constexpr Mat4 reflect(bool reflectX, bool reflectY) noexcept
-        //     requires StrictArithmetic<T>;
+        /**
+         * @brief Construct a 3D affine reflection matrix across coordinate axis, any 2D plane formed by the axes,
+         *        or the origin.
+         *
+         * @note Factory is constrained to matrices of signed types.
+         *
+         * @tparam On The plane or axis to reflect across. For more details @ref fgm::reflect for more details.
+         *
+         * @return A new @ref Mat4 representing the reflection across coordinate axis, plane or the origin.
+         *
+         * @relatedalso makeReflection(const Vec3<T>&)
+         */
+        template <reflect::RT On>
+        [[nodiscard]] static constexpr Mat4 makeReflection() noexcept
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
 
