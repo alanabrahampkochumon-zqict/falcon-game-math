@@ -21,6 +21,20 @@ namespace fgm
                      R(mat[0].y() * vec.x() + mat[1].y() * vec.y() + mat[2].y() * vec.z()) };
     }
 
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedMat2<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x2<U>& rhs) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Mat2{
+            R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
+            R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
+
+            R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
+            R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1)),
+        };
+    }
+
     //     template <StrictArithmetic T, StrictArithmetic S>
     //     constexpr PromotedMatrix2x3<T, S> operator*(const S scalar, const Matrix2x3<T>& matrix) noexcept
     //     { return matrix * scalar; }

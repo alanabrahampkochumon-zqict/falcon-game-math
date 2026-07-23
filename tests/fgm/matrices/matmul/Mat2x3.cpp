@@ -10,6 +10,7 @@
 
 
 #include "CommonSetup.h"
+#include "utils/MatrixUtils.h"
 #include "utils/VectorUtils.h"
 
 #include <fgm/matrices/MatMul.h>
@@ -22,18 +23,30 @@ class Mat2x3Multiplication: public ::testing::Test
 {
 protected:
     fgm::Mat2x3<T> _mat;
+    fgm::Mat3x2<T> _mat3x2;
+    fgm::Mat2<T> _expectedFPMat2, _expectedIntMat2;
+
     fgm::Vec3<T> _vec3x1;
     fgm::Vec2<T> _expectedFPVec2x1, _expectedIntVec2x1;
 
     void SetUp() override
     {
-        _mat    = { fgm::Vec2{ T(1.32194213899999991), T(4.32194213899999991) },
-                    fgm::Vec2{ T(2.32194213899999991), T(5.32194213899999991) },
-                    fgm::Vec2{ T(3.32194213899999991), T(6.32194213899999991) } };
+        _mat = { fgm::Vec2{ T(1.32194213899999991), T(4.32194213899999991) },
+                 fgm::Vec2{ T(2.32194213899999991), T(5.32194213899999991) },
+                 fgm::Vec2{ T(3.32194213899999991), T(6.32194213899999991) } };
+
         _vec3x1 = fgm::Vec3{ T(5.12390421300000032), T(6.12390421300000032), T(7.12390421300000032) };
 
+        _mat3x2 = { fgm::Vec3{ T(5.12390421300000032), T(7.12390421300000032), T(9.12390421299999943) },
+                    fgm::Vec3{ T(6.12390421300000032), T(8.12390421299999943), T(10.12390421299999943) } };
+
+
+        _expectedFPMat2  = { fgm::Vec2{ T(53.62388015909299099), T(117.73901807609298942) },
+                             fgm::Vec2{ T(60.58970657609299337), T(133.70484449309299180) } };
+        _expectedIntMat2 = { fgm::Vec2{ T(46), T(109) }, fgm::Vec2{ T(52), T(124) } };
+
         _expectedFPVec2x1  = fgm::Vec2{ T(44.65805374209299572), T(99.77319165909298704) };
-        _expectedIntVec2x1 = fgm::Vec2 { T(38), T(92)};
+        _expectedIntVec2x1 = fgm::Vec2{ T(38), T(92) };
     }
 };
 /** @brief Test fixture for @ref fgm::Mat2x3 multiplication, parameterized by @ref SupportedArithmeticTypes. */
@@ -87,19 +100,35 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that the binary vector multiplication operation perform linear transformation
- *        and returns a new column vector.
+ * @brief Verify that the multiplication between a Mat2x3 and 3D column vector returns a 2D column vector.
  */
 TYPED_TEST(Mat2x3Multiplication, Times3DVectorReturnsA2DVector)
 {
-    const auto transformedVector = this->_mat * this->_vec3x1;
+    const auto expectedVector = this->_mat * this->_vec3x1;
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_VEC_EQ(this->_expectedFPVec2x1, transformedVector);
+        EXPECT_VEC_EQ(this->_expectedFPVec2x1, expectedVector);
     }
     else
     {
-        EXPECT_VEC_EQ(this->_expectedIntVec2x1, transformedVector);
+        EXPECT_VEC_EQ(this->_expectedIntVec2x1, expectedVector);
+    }
+}
+
+
+/**
+ * @brief Verify that the multiplication between a Mat2x3 and Mat3x2 returns a 2D Matrix.
+ */
+TYPED_TEST(Mat2x3Multiplication, TimesMat3x2ReturnsA2DMatrix)
+{
+    const auto matrixProduct = this->_mat * this->_mat3x2;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedFPMat2, matrixProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedIntMat2, matrixProduct);
     }
 }
 
