@@ -9,104 +9,35 @@
  */
 
 
+#include "CommonSetup.h"
+#include "utils/VectorUtils.h"
 
-//
-// template <typename T>
-// class Mat2x3VectorMultiplication: public ::testing::Test
-// {
-// protected:
-//     fgm::Mat2x3<T> _mat;
-//     fgm::Vec2<T> _vec;
-//     fgm::Vec2<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
-//         _expectedIntegralRowVector;
-//
-//     void SetUp() override
-//     {
-//         _mat                       = { fgm::Vec2{ T(7.12345678912345), T(13.12345678912345) },
-//                                        fgm::Vec2{ T(5.12345678912345), T(4.12345678912345) } };
-//         _vec                       = { T(2.123456789123456), T(3.123456832912) };
-//         _expectedFloatingColVector = { T(31.129248797008778), T(40.74653269883751) };
-//         _expectedIntegralColVector = { T(29), T(38) };
-//         _expectedFloatingRowVector = { T(56.116903460304776), T(23.75887838584987) };
-//         _expectedIntegralRowVector = { T(53), T(22) };
-//     }
-// };
-// /** @brief Test fixture for @ref fgm::Mat2x3 vector multiplication, parameterized by @ref
-// SupportedArithmeticTypes.
-//  */
-// TYPED_TEST_SUITE(Mat2x3VectorMultiplication, SupportedArithmeticTypes);
-//
-//
-// template <typename T>
-// class Mat2x3VectorFractionalMultiplication: public ::testing::Test
-// {
-// protected:
-//     fgm::Mat2x3<T> _mat;
-//     fgm::Vec2<T> _vec, _expectedColVector, _expectedRowVector;
-//
-//     void SetUp() override
-//     {
-//         _mat = { fgm::Vec2{ T(0.1234568989329), T(0.1234214891234) },
-//                  fgm::Vec2{ T(-0.123489823149), T(-0.123489757623) } };
-//         _vec = fgm::Vec2{ T(0.8923764912287), T(0.78352829112384) };
-//
-//         _expectedColVector = fgm::Vec2{ T(0.013412264184596345), T(0.013380716644514457) };
-//         _expectedRowVector = fgm::Vec2{ T(0.20687426274853477), T(-0.20695713384580372) };
-//     }
-// };
-// /**
-//  * @brief Test fixture for @ref fgm::Mat2x3 vector multiplication with small fractions,
-//  *        parameterized by @ref SupportedFloatingPointTypes.
-//  */
-// TYPED_TEST_SUITE(Mat2x3VectorFractionalMultiplication, SupportedFloatingPointTypes);
-//
-//
-// template <typename T>
-// class Mat2x3Multiplication: public ::testing::Test
-// {
-// protected:
-//     fgm::Mat2x3<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
-//
-//     void SetUp() override
-//     {
-//         _matA = { fgm::Vec2{ T(7.12345678912345), T(13.12345678912345) },
-//                   fgm::Vec2{ T(5.12345678912345), T(4.12345678912345) } };
-//         _matB = { fgm::Vec2{ T(3.12345678912345), T(10.12345678912345) },
-//                   fgm::Vec2{ T(8.12345678912345), T(3.12345678912345) } };
-//
-//         _expectedFloatingMat = { fgm::Vec2{ T(74.11690288564759), T(82.73418683126485) },
-//                                  fgm::Vec2{ T(73.8699893074007), T(119.48727325301795) } };
-//         _expectedIntegralMat = { fgm::Vec2{ T(71), T(79) }, fgm::Vec2{ T(71), T(116) } };
-//     }
-// };
-// /** @brief Test fixture for @ref fgm::Mat2x3 matrix multiplication, parameterized by @ref
-// SupportedArithmeticTypes.
-//  */
-// TYPED_TEST_SUITE(Mat2x3Multiplication, SupportedArithmeticTypes);
-//
-//
-// template <typename T>
-// class Mat2x3FractionalMultiplication: public ::testing::Test
-// {
-// protected:
-//     fgm::Mat2x3<T> _matA, _matB, _expectedMat;
-//
-//     void SetUp() override
-//     {
-//         _matA = { fgm::Vec2{ T(0.1234568989329), T(0.1234214891234) },
-//                   fgm::Vec2{ T(-0.123489823149), T(-0.123489757623) } };
-//         _matB = { fgm::Vec2{ T(0.8923764912287), T(0.78352829112384) },
-//                   fgm::Vec2{ T(0.0123412348958), T(-0.0231423489589) } };
-//
-//         _expectedMat = { fgm::Vec2{ T(0.013412264184596345), T(0.013380716644514457) },
-//                          fgm::Vec2{ T(0.004381455169424965), T(0.004381016652222751) } };
-//     }
-// };
-// /**
-//  * @brief Test fixture for @ref fgm::Mat2x3 matrix multiplication with fractional values(<1),
-//  *        parameterized by @ref SupportedFloatingPointTypes.
-//  */
-// TYPED_TEST_SUITE(Mat2x3FractionalMultiplication, SupportedFloatingPointTypes);
+#include <fgm/matrices/MatMul.h>
+#include <gtest/gtest.h>
+
+using namespace testutils;
+
+template <typename T>
+class Mat2x3Multiplication: public ::testing::Test
+{
+protected:
+    fgm::Mat2x3<T> _mat;
+    fgm::Vec3<T> _vec3x1;
+    fgm::Vec2<T> _expectedFPVec2x1, _expectedIntVec2x1;
+
+    void SetUp() override
+    {
+        _mat    = { fgm::Vec2{ T(1.32194213899999991), T(4.32194213899999991) },
+                    fgm::Vec2{ T(2.32194213899999991), T(5.32194213899999991) },
+                    fgm::Vec2{ T(3.32194213899999991), T(6.32194213899999991) } };
+        _vec3x1 = fgm::Vec3{ T(5.12390421300000032), T(6.12390421300000032), T(7.12390421300000032) };
+
+        _expectedFPVec2x1  = fgm::Vec2{ T(44.65805374209299572), T(99.77319165909298704) };
+        _expectedIntVec2x1 = fgm::Vec2 { T(38), T(92)};
+    }
+};
+/** @brief Test fixture for @ref fgm::Mat2x3 multiplication, parameterized by @ref SupportedArithmeticTypes. */
+TYPED_TEST_SUITE(Mat2x3Multiplication, SupportedArithmeticTypes);
 
 
 /**************************************
@@ -159,20 +90,20 @@ namespace
  * @brief Verify that the binary vector multiplication operation perform linear transformation
  *        and returns a new column vector.
  */
-// TYPED_TEST(Mat2x3VectorMultiplication, MatrixTimesVectorReturnsATransformedVector)
-// {
-//     const auto transformedVector = this->_mat * this->_vec;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_VEC_EQ(this->_expectedFloatingColVector, transformedVector);
-//     }
-//     else
-//     {
-//         EXPECT_VEC_EQ(this->_expectedIntegralColVector, transformedVector);
-//     }
-// }
-//
-//
+TYPED_TEST(Mat2x3Multiplication, Times3DVectorReturnsA2DVector)
+{
+    const auto transformedVector = this->_mat * this->_vec3x1;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_VEC_EQ(this->_expectedFPVec2x1, transformedVector);
+    }
+    else
+    {
+        EXPECT_VEC_EQ(this->_expectedIntVec2x1, transformedVector);
+    }
+}
+
+
 // /**
 //  * @brief Verify that the binary vector multiplication operation with fractional values perform linear transformation
 //  *        and returns a new column vector.

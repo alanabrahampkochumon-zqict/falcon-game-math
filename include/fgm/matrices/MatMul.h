@@ -12,10 +12,15 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+#include "../common/Types.h"
+#include "../vectors/Vec2.h"
+#include "../vectors/Vec3.h"
+#include "../vectors/Vec4.h"
+#include "Mat2.h"
 #include "Mat2x3.h"
-#include "Matrix2.h"
-#include "Matrix3.h"
-#include "Matrix4.h"
+#include "Mat3.h"
+#include "Mat3x2.h"
+#include "Mat4.h"
 
 // TODO: Use transpose from here
 //     /**
@@ -111,38 +116,24 @@
 namespace fgm
 {
 
-    // /**
-    //  * @brief Transform the @p Vec **column vector** by this matrix.
-    //  *        \f$
-    //  *            \begin{bmatrix}
-    //  *                 A_{00} & A_{01} & A_{02} \\
-    //  *                 A_{10} & A_{11} & A_{12}
-    //  *            \end{bmatrix}
-    //  *            \cdot
-    //  *            \begin{bmatrix}
-    //  *                  x \\ y \\ z
-    //  *            \end{bmatrix}
-    //  *            =
-    //  *            \begin{bmatrix}
-    //  *                  x' \\ y'
-    //  *            \end{bmatrix}
-    //  *        \f$
-    //  *
-    //  * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
-    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //  *
-    //  * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] vec The column vector to transform.
-    //  *
-    //  * @return A new @ref Vector2 with applied linear transformations.
-    //  */
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // [[nodiscard]] constexpr PromotedVector2<T, U> operator*(const Vector3<U>& vec) const noexcept
-    //     requires StrictArithmetic<T>;
-    //
-    //
+    /**
+     * @brief Multiply a 2x3 matrix with a 3D column vector.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] mat The matrix to multiply.
+     * @param[in] vec The column vector to multiply with.
+     *
+     * @return A new 2D column vector.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Mat2x3<T>& mat, const Vec3<U>& vec) noexcept;
+
+
     // /**
     //  * @brief Compose this matrix with 3x2 @p rhs matrix to form a new 2x2 matrix.
     //  *        \f$

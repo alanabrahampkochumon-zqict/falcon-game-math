@@ -2,7 +2,7 @@ add_library(MatrixMultiplicationTests OBJECT)
 
 target_sources(
         MatrixMultiplicationTests PRIVATE
-        Matrix2x3.cpp
+        Mat2x3.cpp
 )
 
 target_include_directories(
