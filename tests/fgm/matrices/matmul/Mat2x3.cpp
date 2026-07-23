@@ -22,8 +22,9 @@ template <typename T>
 class Mat2x3Multiplication: public ::testing::Test
 {
 protected:
-    fgm::Mat2x3<T> _mat;
+    fgm::Mat2x3<T> _mat, _expectedFPMat2x3, _expectedIntMat2x3;
     fgm::Mat3x2<T> _mat3x2;
+    fgm::Mat3<T> _mat3x3;
     fgm::Mat2<T> _expectedFPMat2, _expectedIntMat2;
 
     fgm::Vec3<T> _vec3x1;
@@ -34,6 +35,16 @@ protected:
         _mat = { fgm::Vec2{ T(1.32194213899999991), T(4.32194213899999991) },
                  fgm::Vec2{ T(2.32194213899999991), T(5.32194213899999991) },
                  fgm::Vec2{ T(3.32194213899999991), T(6.32194213899999991) } };
+
+        _mat3x3 = { fgm::Vec3{ T(5.12390421300000032), T(8.12390421299999943), T(11.12390421299999943) },
+                    fgm::Vec3{ T(6.12390421300000032), T(9.12390421299999943), T(12.12390421299999943) },
+                    fgm::Vec3{ T(7.12390421300000032), T(10.12390421299999943), T(13.12390421299999943) } };
+
+
+        _expectedFPMat2x3  = { fgm::Vec2{ T(62.58970657609299337), T(135.70484449309299180) },
+                               fgm::Vec2{ T(69.55553299309298154), T(151.67067091009300839) },
+                               fgm::Vec2{ T(76.52135941009299813), T(167.63649732709299656) } };
+        _expectedIntMat2x3 = { fgm::Vec2{ T(54), T(126) }, fgm::Vec2{ T(60), T(141) }, fgm::Vec2{ T(66), T(156) } };
 
         _vec3x1 = fgm::Vec3{ T(5.12390421300000032), T(6.12390421300000032), T(7.12390421300000032) };
 
@@ -102,7 +113,7 @@ namespace
 /**
  * @brief Verify that the multiplication between a Mat2x3 and 3D column vector returns a 2D column vector.
  */
-TYPED_TEST(Mat2x3Multiplication, Times3DVectorReturnsA2DVector)
+TYPED_TEST(Mat2x3Multiplication, Times3DVector_ReturnsA2DVector)
 {
     const auto expectedVector = this->_mat * this->_vec3x1;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -119,7 +130,7 @@ TYPED_TEST(Mat2x3Multiplication, Times3DVectorReturnsA2DVector)
 /**
  * @brief Verify that the multiplication between a Mat2x3 and Mat3x2 returns a 2D Matrix.
  */
-TYPED_TEST(Mat2x3Multiplication, TimesMat3x2ReturnsA2DMatrix)
+TYPED_TEST(Mat2x3Multiplication, TimesMat3x2_ReturnsA2DMatrix)
 {
     const auto matrixProduct = this->_mat * this->_mat3x2;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -129,6 +140,23 @@ TYPED_TEST(Mat2x3Multiplication, TimesMat3x2ReturnsA2DMatrix)
     else
     {
         EXPECT_MAT_EQ(this->_expectedIntMat2, matrixProduct);
+    }
+}
+
+
+/**
+ * @brief Verify that the multiplication between a Mat2x3 and Mat3 returns a 2x3 Matrix.
+ */
+TYPED_TEST(Mat2x3Multiplication, TimesMat3x3_ReturnsA2x3Matrix)
+{
+    const auto matrixProduct = this->_mat * this->_mat3x3;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedFPMat2x3, matrixProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedIntMat2x3, matrixProduct);
     }
 }
 

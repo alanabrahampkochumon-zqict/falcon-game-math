@@ -77,7 +77,6 @@
 // TODO: Add Groups
 // TODO: Add Implementation
 // Implementations
-//       2x3 * 3x2 => 2x2
 //       2x3 * 3x3 => 2x3
 //       2x3 * 3x4 => 2x4
 // 1x2 * 2x3       => 1x3
@@ -136,19 +135,38 @@ namespace fgm
     /**
      * @brief Multiply a 2x3 matrix with a 3x2 matrix.
      *
-     * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
+     * @note Promotes the result to the wider type using @ref PromotedMat2<T, U>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
      *
-     * @param[in] lhs The 3x2 matrix on the left hand side.
-     * @param[in] rhs The 2x3 matrix on the right hand side.
+     * @param[in] lhs The 2x3 matrix on the left hand side.
+     * @param[in] rhs The 3x2 matrix on the right hand side.
      *
      * @return A new 2D matrix.
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedMat2<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x2<U>& rhs) noexcept;
+
+
+    /**
+     * @brief Multiply a 2x3 matrix with a 3x3 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat2x3<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 2x3 matrix on the left hand side.
+     * @param[in] rhs The 3x3 matrix on the right hand side.
+     *
+     * @return A new 2x3 matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat2x3<T, U> operator*(const Mat2x3<T>& lhs, const Mat3<U>& rhs) noexcept;
+
 
 
 
