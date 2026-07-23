@@ -1300,6 +1300,9 @@ namespace fgm
          * @note Ensure that @p normal is the normal to the plane. If you want coordinate axis reflection you should
          *       pass the axis perpendicular to the axes that forms the plane. For example, you need to make sure to
          *       pass in <0, 0, 1>(z-axis) for reflection in the yz-plane, not <1, 1, 0>.
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged
+         *       in favor of floating point types due loss of precision from rounding, often resulting in a zero
+         *       matrix.
          *
          * @param[in] normal Normal of the reflection plane. Must be a unit vector.
          *

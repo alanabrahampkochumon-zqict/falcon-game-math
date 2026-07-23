@@ -22,15 +22,16 @@ template <typename T>
 class Mat3Reflection: public ::testing::Test
 {
 protected:
-    fgm::Vec3<T> _xAxis, _yAxis, _zAxis;
+    fgm::Vec3<T> _xAxis, _yAxis, _zAxis, _axis;
     fgm::Mat3<T> _expectedReflectionX, _expectedReflectionY, _expectedReflectionZ, _expectedReflectionXY,
-        _expectedReflectionYZ, _expectedReflectionZX, _expectedReflectionOrigin;
+        _expectedReflectionYZ, _expectedReflectionZX, _expectedReflectionOrigin, _expectedNormReflect;
 
     void SetUp() override
     {
-        _xAxis   = fgm::Vec3{ T(1), T(0), T(0) };
-        _yAxis   = fgm::Vec3{ T(0), T(1), T(0) };
-        _zAxis   = fgm::Vec3{ T(0), T(0), T(1) };
+        _axis  = fgm::Vec3{ T(0.3244428422615251), T(0.48666426339228763), T(0.8111071056538127) };
+        _xAxis = fgm::Vec3{ T(1), T(0), T(0) };
+        _yAxis = fgm::Vec3{ T(0), T(1), T(0) };
+        _zAxis = fgm::Vec3{ T(0), T(0), T(1) };
 
         _expectedReflectionX = { fgm::Vec3{ T(1), T(0), T(0) }, fgm::Vec3{ T(0), T(-1), T(0) },
                                  fgm::Vec3{ T(0), T(0), T(-1) } };
@@ -52,6 +53,10 @@ protected:
 
         _expectedReflectionOrigin = { fgm::Vec3{ T(-1), T(0), T(0) }, fgm::Vec3{ T(0), T(-1), T(0) },
                                       fgm::Vec3{ T(0), T(0), T(-1) } };
+
+        _expectedNormReflect = { fgm::Vec3{ T(0.7894736842105263), T(-0.31578947368421056), T(-0.5263157894736843) },
+                                 fgm::Vec3{ T(-0.31578947368421056), T(0.5263157894736842), T(-0.7894736842105263) },
+                                 fgm::Vec3{ T(-0.5263157894736843), T(-0.7894736842105263), T(-0.3157894736842106) } };
     }
 };
 /**
@@ -59,6 +64,30 @@ protected:
  *        parameterized @ref SupportedSignedArithmeticTypes
  */
 TYPED_TEST_SUITE(Mat3Reflection, SupportedSignedArithmeticTypes);
+
+
+
+template <typename T>
+class Mat3ReflectionFloat: public ::testing::Test
+{
+protected:
+    fgm::Vec3<T> _norm;
+    fgm::Mat3<T> _expectedNormReflect;
+
+    void SetUp() override
+    {
+        _norm = fgm::Vec3{ T(0.3244428422615251), T(0.48666426339228763), T(0.8111071056538127) };
+
+        _expectedNormReflect = { fgm::Vec3{ T(0.7894736842105263), T(-0.31578947368421056), T(-0.5263157894736843) },
+                                 fgm::Vec3{ T(-0.31578947368421056), T(0.5263157894736842), T(-0.7894736842105263) },
+                                 fgm::Vec3{ T(-0.5263157894736843), T(-0.7894736842105263), T(-0.3157894736842106) } };
+    }
+};
+/**
+ * @brief Test fixture for @ref fgm::Mat3 reflection across a plane through origin
+ *        parameterized @ref SupportedFloatingPointTypes
+ */
+TYPED_TEST_SUITE(Mat3ReflectionFloat, SupportedFloatingPointTypes);
 
 
 /** @brief Verify that reflection transform factory is available at compile time.  */
@@ -150,6 +179,43 @@ namespace
     static_assert(REFLECTION_MAT_ORIGIN(2, 2) == -1);
 
 
+    // Reflection along axis(normal)
+    constexpr auto REFLECTION_MAT_X_NORM = fgm::Mat3<int>::makeReflection(fgm::Vec3(1, 0, 0));
+    static_assert(REFLECTION_MAT_X_NORM(0, 0) == -1);
+    static_assert(REFLECTION_MAT_X_NORM(0, 1) == 0);
+    static_assert(REFLECTION_MAT_X_NORM(0, 2) == 0);
+    static_assert(REFLECTION_MAT_X_NORM(1, 0) == 0);
+    static_assert(REFLECTION_MAT_X_NORM(1, 1) == 1);
+    static_assert(REFLECTION_MAT_X_NORM(1, 2) == 0);
+    static_assert(REFLECTION_MAT_X_NORM(2, 0) == 0);
+    static_assert(REFLECTION_MAT_X_NORM(2, 1) == 0);
+    static_assert(REFLECTION_MAT_X_NORM(2, 2) == 1);
+
+
+    constexpr auto REFLECTION_MAT_Y_NORM = fgm::Mat3<int>::makeReflection(fgm::Vec3(0, 1, 0));
+    static_assert(REFLECTION_MAT_Y_NORM(0, 0) == 1);
+    static_assert(REFLECTION_MAT_Y_NORM(0, 1) == 0);
+    static_assert(REFLECTION_MAT_Y_NORM(0, 2) == 0);
+    static_assert(REFLECTION_MAT_Y_NORM(1, 0) == 0);
+    static_assert(REFLECTION_MAT_Y_NORM(1, 1) == -1);
+    static_assert(REFLECTION_MAT_Y_NORM(1, 2) == 0);
+    static_assert(REFLECTION_MAT_Y_NORM(2, 0) == 0);
+    static_assert(REFLECTION_MAT_Y_NORM(2, 1) == 0);
+    static_assert(REFLECTION_MAT_Y_NORM(2, 2) == 1);
+
+
+    constexpr auto REFLECTION_MAT_Z_NORM = fgm::Mat3<int>::makeReflection(fgm::Vec3(0, 0, 1));
+    static_assert(REFLECTION_MAT_Z_NORM(0, 0) == 1);
+    static_assert(REFLECTION_MAT_Z_NORM(0, 1) == 0);
+    static_assert(REFLECTION_MAT_Z_NORM(0, 2) == 0);
+    static_assert(REFLECTION_MAT_Z_NORM(1, 0) == 0);
+    static_assert(REFLECTION_MAT_Z_NORM(1, 1) == 1);
+    static_assert(REFLECTION_MAT_Z_NORM(1, 2) == 0);
+    static_assert(REFLECTION_MAT_Z_NORM(2, 0) == 0);
+    static_assert(REFLECTION_MAT_Z_NORM(2, 1) == 0);
+    static_assert(REFLECTION_MAT_Z_NORM(2, 2) == -1);
+
+
 } // namespace
 
 
@@ -224,9 +290,11 @@ TYPED_TEST(Mat3Reflection, PlaneNormalReflection_Z_ReturnsXYReflectionMatrix)
 
 
 
-// /** @brief Verify that reflection transformation factory for y-axis returns a reflection matrix. */
-// TYPED_TEST(Mat3OriginReflection, ReturnsReflectionMatrix)
-// { EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat3<TypeParam>::reflect(true, true)); }
-//
+/**
+ * @brief Verify that reflection transformation factory(makeReflection(normal)) for z-axis
+ *        returns a reflection matrix across xy-plane.
+ */
+TYPED_TEST(Mat3ReflectionFloat, ReturnsCorrectReflectionMatrix)
+{ EXPECT_MAT_EQ(this->_expectedNormReflect, fgm::Mat3<TypeParam>::makeReflection(this->_norm)); }
 
 /** @} */
