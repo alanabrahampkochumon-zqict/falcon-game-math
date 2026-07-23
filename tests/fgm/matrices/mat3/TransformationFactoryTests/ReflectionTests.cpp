@@ -286,8 +286,8 @@ TYPED_TEST(Mat3Reflection, PlaneNormalReflection_Z_ReturnsXYReflectionMatrix)
 
 
 /**
- * @brief Verify that reflection transformation factory(makeReflection(normal)) for z-axis
- *        returns a reflection matrix across xy-plane.
+ * @brief Verify that reflection transformation factory(makeReflection(normal)) for a plane normal
+ *        returns a reflection matrix.
  */
 TYPED_TEST(Mat3ReflectionFloat, ReturnsCorrectReflectionMatrix)
 { EXPECT_MAT_EQ(this->_expectedNormReflect, fgm::Mat3<TypeParam>::makeReflection(this->_norm)); }
