@@ -223,7 +223,7 @@ TYPED_TEST(Mat2x3Multiplication, Mat2x3TimesMat3x4_ReturnsAValid2x4Matrix)
 }
 
 
-TYPED_TEST(Mat2x3Multiplication, 2DVectorTimeMat2x3_ReturnsAValid3DVector)
+TYPED_TEST(Mat2x3Multiplication, 2DRowVectorTimeMat2x3_ReturnsAValid3DRowVector)
 {
     const auto expectedVector = this->_vec2 * this->_mat2x3;
     if constexpr (std::is_floating_point_v<TypeParam>)

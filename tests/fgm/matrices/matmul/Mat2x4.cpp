@@ -44,9 +44,8 @@ namespace
     {
 
     protected:
-        fgm::Vec2<T> _expectedFPVec2, _expectedIntVec2;
-        fgm::Vec4<T> _vec4;
-        // fgm::Mat2<T> _expectedFPMat2, _expectedIntMat2;
+        fgm::Vec2<T> _vec2, _expectedFPVec2, _expectedIntVec2;
+        fgm::Vec4<T> _vec4, _expectedFPVec4, _expectedIntVec4;
 
         fgm::Mat2<T> _expectedFPMat2, _expectedIntMat2;
         fgm::Mat2x3<T> _expectedFPMat2x3, _expectedIntMat2x3;
@@ -56,21 +55,18 @@ namespace
         fgm::Mat4x2<T> _mat4x2;
         fgm::Mat4x3<T> _mat4x3;
 
-        // fgm::Mat3<T> _mat3x3;
-        // fgm::Mat3x2<T> _mat3x2;
-
-        // fgm::Mat3x4<T> _mat3x4;
-
-        // fgm::Vec2<T> _vec2x1, _expectedFPVec2x1, _expectedIntVec2x1;
-        // fgm::Vec3<T> _vec3x1, _expectedFPVec3x1, _expectedIntVec3x1;
-
         void SetUp() override
         {
+
+            _vec2            = fgm::Vec2{ T(1.23412341000000003), T(2.23412341000000003) };
             _expectedFPVec2  = fgm::Vec2{ T(79.76909769345732570), T(124.92017191745732418) };
             _expectedIntVec2 = fgm::Vec2{ T(70), T(110) };
 
-            _vec4 = fgm::Vec4{ T(1.32194213899999991), T(2.32194213899999991), T(3.32194213899999991),
+            _vec4            = fgm::Vec4{ T(1.32194213899999991), T(2.32194213899999991), T(3.32194213899999991),
                                T(4.32194213899999991) };
+            _expectedFPVec4  = fgm::Vec4{ T(26.70745813272185387), T(30.17570495272185127), T(33.64395177272185578),
+                                         T(37.11219859272185317) };
+            _expectedIntVec4 = fgm::Vec4{ T(23), T(26), T(29), T(32) };
 
 
             _expectedFPMat2  = { fgm::Vec2{ T(225.24785336999659080), T(355.23032077799655326) },
@@ -130,6 +126,7 @@ namespace
     namespace static_tests
     {
         // STATIC TEST SETUP
+        constexpr fgm::Vec2 VEC2(1, 2);
         constexpr fgm::Vec4 VEC4(1, 2, 3, 4);
 
         constexpr fgm::Mat2x4 MAT2X4(5, 6, 7, 8, 9, 10, 11, 12);
@@ -164,11 +161,12 @@ namespace
         static_assert(EXP_MAT_2x4[3] == fgm::Vec2{ 384, 608 });
 
 
-        // /// @test Verify that 2D row vector times a 2x3 matrix yields a 3D row vector at compile time.
-        // constexpr auto EXP_VEC3 = VEC2 * MAT2X3;
-        // static_assert(EXP_VEC3.x() == 9);
-        // static_assert(EXP_VEC3.y() == 12);
-        // static_assert(EXP_VEC3.z() == 15);
+        /// @test Verify that 2D row vector times a 2x4 matrix yields a 4D row vector at compile time.
+        constexpr auto EXP_VEC4 = VEC2 * MAT2X4;
+        static_assert(EXP_VEC4.x() == 23);
+        static_assert(EXP_VEC4.y() == 26);
+        static_assert(EXP_VEC4.z() == 29);
+        static_assert(EXP_VEC4.w() == 32);
 
     } // namespace static_tests
 
@@ -237,18 +235,18 @@ TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4x3_ReturnsAValid2x3Matrix)
     }
 }
 
-//
-// TYPED_TEST(Mat2x4Multiplication, 2DVectorTimeMat2x4_ReturnsAValid3DVector)
-// {
-//     const auto expectedVector = this->_vec2x1 * this->_mat2x3;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_VEC_EQ(this->_expectedFPVec3x1, expectedVector);
-//     }
-//     else
-//     {
-//         EXPECT_VEC_EQ(this->_expectedIntVec3x1, expectedVector);
-//     }
-// }
+
+TYPED_TEST(Mat2x4Multiplication, 2DRowVectorTimesMat2x4_ReturnsAValid4DRowVector)
+{
+    const auto expectedVector = this->_vec2 * this->_mat2x4;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_VEC_EQ(this->_expectedFPVec4, expectedVector);
+    }
+    else
+    {
+        EXPECT_VEC_EQ(this->_expectedIntVec4, expectedVector);
+    }
+}
 
 /** @} */

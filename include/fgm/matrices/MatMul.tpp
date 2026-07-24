@@ -163,4 +163,14 @@ namespace fgm
         };
     }
 
+
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedVec4<T, U> operator*(const Vec2<T>& vec, const Mat2x4<U>& mat) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Vec4{ R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0)), R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1)),
+                     R(vec.x() * mat(0, 2) + vec.y() * mat(1, 2)), R(vec.x() * mat(0, 3) + vec.y() * mat(1, 3)) };
+    }
+
 } // namespace fgm
