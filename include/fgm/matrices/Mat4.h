@@ -1272,7 +1272,7 @@ namespace fgm
          * @param[in] angle  The rotation angle in radians.
          * @param[in] center The center of rotation.
          *
-         * @return A new @ref Mat4 representing the linear rotation around x-axis.
+         * @return A new @ref Mat4 representing the linear rotation around @p center.
          */
         template <std::floating_point U>
         [[nodiscard]] static constexpr Mat4 makeRotationX(U angle, const Vec3<T>& center) noexcept
@@ -1350,7 +1350,7 @@ namespace fgm
          * @param[in] angle  The rotation angle in radians.
          * @param[in] center The center of rotation.
          *
-         * @return A new @ref Mat4 representing the linear rotation around y-axis.
+         * @return A new @ref Mat4 representing the linear rotation around @p center.
          */
         template <std::floating_point U>
         [[nodiscard]] static constexpr Mat4 makeRotationY(U angle, const Vec3<T>& center) noexcept
@@ -1428,7 +1428,7 @@ namespace fgm
          * @param[in] angle  The rotation angle in radians.
          * @param[in] center The center of rotation.
          *
-         * @return A new @ref Mat4 representing the linear rotation around z-axis.
+         * @return A new @ref Mat4 representing the linear rotation around @p center.
          */
         template <std::floating_point U>
         [[nodiscard]] static constexpr Mat4 makeRotationZ(U angle, const Vec3<T>& center) noexcept
@@ -1544,7 +1544,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct an affine uniform scale 3D matrix.
+         * @brief Construct an 3D affine with uniform scale.
          *
          * @param[in] scale The scale factor.
          *
@@ -1555,7 +1555,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct an affine non-uniform scale 3D matrix.
+         * @brief Construct an 3D affine matrix with non-uniform scale.
          *
          * @param[in] scaleX The scale factor in the x-direction.
          * @param[in] scaleY The scale factor in the y-direction.
@@ -1578,7 +1578,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 4D affine reflection matrix across coordinate axis, any 2D plane formed by the axes,
+         * @brief Construct a 3D affine reflection matrix across coordinate axis, any 2D plane formed by the axes,
          *        or the origin.
          *
          * @note Factory is constrained to matrices of signed types.
@@ -1596,7 +1596,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 4D affine reflection matrix across any plane through the origin with @p normal.
+         * @brief Construct a 3D affine reflection matrix across any plane through the origin with @p normal.
          *
          * @note Ensure that @p normal is the normal to the plane. If you want coordinate axis reflection you should
          *       pass the axis perpendicular to the axes that forms the plane. For example, you need to make sure to

@@ -138,13 +138,6 @@ namespace
  *                                    *
  **************************************/
 
-
-/**************************************
- *                                    *
- *    VECTOR MULTIPLICATION TESTS     *
- *                                    *
- **************************************/
-
 /**
  * @brief Verify that the multiplication between a Mat2x3 and 3D column vector returns a 2D column vector.
  */

@@ -1303,11 +1303,12 @@ namespace fgm
         [[nodiscard]] static constexpr Mat3 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
             requires StrictArithmetic<T>;
 
+
         /**
-         * @brief Construct a 3D affine transform matrix from a 2D linear transform matrix and a 2D translation vector.
+         * @brief Construct a 2D affine transform matrix from a 2D linear transform matrix and a 2D translation vector.
          * @param linearTransform The 2D linear transformation matrix.
          * @param translation     The 2D translation vector.
-         * @return A 3D affine transform matrix.
+         * @return A @ref Mat3 containing the 2D affine transformation.
          */
         [[nodiscard]] static constexpr Mat3 makeAffine(const Mat2<T>& linearTransform,
                                                        const Vec2<T>& translation) noexcept;
