@@ -33,7 +33,6 @@
 // TODO: Add Implementation
 // Implementations
 
-//       2x4 * 4x1 => 2x1
 //       2x4 * 4x2 => 2x2
 //       2x4 * 4x3 => 2x3
 //       2x4 * 4x4 => 2x4
@@ -185,6 +184,24 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Mat2x4<T>& mat, const Vec4<U>& vec) noexcept;
+
+
+    /**
+     * @brief Multiply a 2x4 matrix with a 4x2 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat2<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 2x4 matrix on the left hand side.
+     * @param[in] rhs The 4x2 matrix on the right hand side.
+     *
+     * @return A new 2D matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat2<T, U> operator*(const Mat2x4<T>& lhs, const Mat4x2<U>& rhs) noexcept;
 
     /** @} */
 
