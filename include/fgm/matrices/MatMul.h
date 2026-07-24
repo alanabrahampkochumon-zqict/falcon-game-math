@@ -169,6 +169,59 @@ namespace fgm
      * @{
      */
 
+    /**
+     * @brief Multiply a 2x4 matrix with a 4D column vector.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] mat The matrix to multiply.
+     * @param[in] vec The column vector to multiply with.
+     *
+     * @return A new 2D column vector.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Mat2x4<T>& mat, const Vec4<U>& vec) noexcept;
+
+    /** @} */
+
+
+
+    /**
+     * @addtogroup FGM_Mat3x2_Arithmetic
+     * @{
+     */
+
+    /** @} */
+
+
+
+    /**
+     * @addtogroup FGM_Mat3x4_Arithmetic
+     * @{
+     */
+
+    /** @} */
+
+
+
+    /**
+     * @addtogroup FGM_Mat4x2_Arithmetic
+     * @{
+     */
+
+    /** @} */
+
+
+
+    /**
+     * @addtogroup FGM_Mat4x3_Arithmetic
+     * @{
+     */
+
     /** @} */
 
 } // namespace fgm
