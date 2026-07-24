@@ -4,6 +4,7 @@ target_sources(
         Mat4TransformTests
         PRIVATE
         AffineTests.cpp
+        InvolutionTests.cpp
         ReflectionTests.cpp
         RotationTests.cpp
         ScaleTests.cpp

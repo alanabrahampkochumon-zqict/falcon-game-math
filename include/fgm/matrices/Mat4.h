@@ -1566,17 +1566,6 @@ namespace fgm
         [[nodiscard]] static constexpr Mat4 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
             requires StrictArithmetic<T>;
 
-
-        /**
-         * @brief Construct a 4D affine transform matrix from a 3D linear transform matrix and a 3D translation vector.
-         * @param linearTransform The 3D linear transformation matrix.
-         * @param translation     The 3D translation vector.
-         * @return A 4D affine transform matrix.
-         */
-        [[nodiscard]] static constexpr Mat4 makeAffine(const Mat3<T>& linearTransform,
-                                                       const Vec3<T>& translation) noexcept;
-
-
         /**
          * @brief Construct a 3D affine reflection matrix across coordinate axis, any 2D plane formed by the axes,
          *        or the origin.
@@ -1601,7 +1590,7 @@ namespace fgm
          * @note Ensure that @p normal is the normal to the plane. If you want coordinate axis reflection you should
          *       pass the axis perpendicular to the axes that forms the plane. For example, you need to make sure to
          *       pass in <0, 0, 1, 0>(z-axis) for reflection in the yz-plane, not <1, 1, 0, 0>.
-         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged
+         * @note While it is possible to create a reflection matrix of any **signed type**, it is strongly discouraged
          *       in favor of floating point types due loss of precision from rounding, often resulting in a zero
          *       matrix.
          *
@@ -1613,6 +1602,32 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Mat4 makeReflection(const Vec3<T>& normal) noexcept
             requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 3D affine involution matrix across any plane through the origin with @p normal.
+         *
+         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged
+         *       in favor of floating point types due loss of precision from rounding, often resulting in a zero
+         *       matrix.
+         *
+         * @param[in] normal Normal of the reflection plane. Must be a unit vector.
+         *
+         * @return A new @ref Mat4 representing the involution matrix across a given plane.
+         */
+        [[nodiscard]] static constexpr Mat4 makeInvolution(const Vec3<T>& normal) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 4D affine transform matrix from a 3D linear transform matrix and a 3D translation vector.
+         * @param linearTransform The 3D linear transformation matrix.
+         * @param translation     The 3D translation vector.
+         * @return A 4D affine transform matrix.
+         */
+        [[nodiscard]] static constexpr Mat4 makeAffine(const Mat3<T>& linearTransform,
+                                                       const Vec3<T>& translation) noexcept;
+
 
         /** @} */
 

@@ -1102,8 +1102,9 @@ namespace fgm
     constexpr Mat4<T> Mat4<T>::makeScale(T scale) noexcept
         requires StrictArithmetic<T>
     {
-        return Mat4<T>{ scale, T(0), T(0),  T(0), T(0), scale, T(0), T(0),
-                        T(0),  T(0), scale, T(0), T(0), T(0),  T(0), T(1) };
+        return Mat4{
+            scale, T(0), T(0), T(0), T(0), scale, T(0), T(0), T(0), T(0), scale, T(0), T(0), T(0), T(0), T(1)
+        };
     }
 
 
@@ -1111,32 +1112,9 @@ namespace fgm
     constexpr Mat4<T> Mat4<T>::makeScale(T scaleX, T scaleY, T scaleZ) noexcept
         requires StrictArithmetic<T>
     {
-        return Mat4<T>{ scaleX, T(0), T(0),   T(0), T(0), scaleY, T(0), T(0),
-                        T(0),   T(0), scaleZ, T(0), T(0), T(0),   T(0), T(1) };
+        return Mat4{ scaleX, T(0), T(0),   T(0), T(0), scaleY, T(0), T(0),
+                     T(0),   T(0), scaleZ, T(0), T(0), T(0),   T(0), T(1) };
     }
-
-
-    template <Arithmetic T>
-    constexpr Mat4<T> Mat4<T>::makeAffine(const Mat3<T>& linearTransform, const Vec3<T>& translation) noexcept
-    {
-        return Mat4<T>{ linearTransform(0, 0),
-                        linearTransform(0, 1),
-                        linearTransform(0, 2),
-                        translation.x(),
-                        linearTransform(1, 0),
-                        linearTransform(1, 1),
-                        linearTransform(1, 2),
-                        translation.y(),
-                        linearTransform(2, 0),
-                        linearTransform(2, 1),
-                        linearTransform(2, 2),
-                        translation.z(),
-                        T(0),
-                        T(0),
-                        T(0),
-                        T(1) };
-    }
-
 
     template <Arithmetic T>
     template <reflect::RT On>
@@ -1159,23 +1137,73 @@ namespace fgm
         T ax = normal.x();
         T ay = normal.y();
         T az = normal.z();
-        return Mat4<T>{ T(1 - 2 * ax * ax),
-                        T(-2 * ax * ay),
-                        T(-2 * ax * az),
-                        T(0),
-                        T(-2 * ay * ax),
-                        T(1 - 2 * ay * ay),
-                        T(-2 * ay * az),
-                        T(0),
-                        T(-2 * az * ax),
-                        T(-2 * az * ay),
-                        T(1 - 2 * az * az),
-                        T(0),
-                        T(0),
-                        T(0),
-                        T(0),
-                        T(1) };
+        return Mat4{ T(1 - 2 * ax * ax),
+                     T(-2 * ax * ay),
+                     T(-2 * ax * az),
+                     T(0),
+                     T(-2 * ay * ax),
+                     T(1 - 2 * ay * ay),
+                     T(-2 * ay * az),
+                     T(0),
+                     T(-2 * az * ax),
+                     T(-2 * az * ay),
+                     T(1 - 2 * az * az),
+                     T(0),
+                     T(0),
+                     T(0),
+                     T(0),
+                     T(1) };
     }
+
+
+    template <Arithmetic T>
+    constexpr Mat4<T> Mat4<T>::makeInvolution(const Vec3<T>& normal) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        T ax = normal.x();
+        T ay = normal.y();
+        T az = normal.z();
+        return Mat4{ T(2 * ax * ax - 1),
+                     T(2 * ax * ay),
+                     T(2 * ax * az),
+                     T(0),
+                     T(2 * ay * ax),
+                     T(2 * ay * ay - 1),
+                     T(2 * ay * az),
+                     T(0),
+                     T(2 * az * ax),
+                     T(2 * az * ay),
+                     T(2 * az * az - 1),
+                     T(0),
+                     T(0),
+                     T(0),
+                     T(0),
+                     T(1) };
+    }
+
+
+    template <Arithmetic T>
+    constexpr Mat4<T> Mat4<T>::makeAffine(const Mat3<T>& linearTransform, const Vec3<T>& translation) noexcept
+    {
+        return Mat4{ linearTransform(0, 0),
+                     linearTransform(0, 1),
+                     linearTransform(0, 2),
+                     translation.x(),
+                     linearTransform(1, 0),
+                     linearTransform(1, 1),
+                     linearTransform(1, 2),
+                     translation.y(),
+                     linearTransform(2, 0),
+                     linearTransform(2, 1),
+                     linearTransform(2, 2),
+                     translation.z(),
+                     T(0),
+                     T(0),
+                     T(0),
+                     T(1) };
+    }
+
+
 
 
 } // namespace fgm
