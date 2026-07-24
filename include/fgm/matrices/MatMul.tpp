@@ -14,7 +14,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVec2<T, U> operator*(const Mat2x3<T>& mat, const Vec3<U>& vec) noexcept
+    FGM_INLINE constexpr PromotedVec2<T, U> operator*(const Mat2x3<T>& mat, const Vec3<U>& vec) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Vec2{ R(mat[0].x() * vec.x() + mat[1].x() * vec.y() + mat[2].x() * vec.z()),
@@ -23,7 +23,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat2<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x2<U>& rhs) noexcept
+    FGM_INLINE constexpr PromotedMat2<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2{ // Row 1
@@ -38,7 +38,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat2x3<T, U> operator*(const Mat2x3<T>& lhs, const Mat3<U>& rhs) noexcept
+    FGM_INLINE constexpr PromotedMat2x3<T, U> operator*(const Mat2x3<T>& lhs, const Mat3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2x3{ // Row 1
@@ -55,7 +55,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat2x4<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x4<U>& rhs) noexcept
+    FGM_INLINE constexpr PromotedMat2x4<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2x4{ // Row 1
@@ -74,7 +74,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVec3<T, U> operator*(const Vec2<T>& vec, const Mat2x3<U>& mat) noexcept
+    FGM_INLINE constexpr PromotedVec3<T, U> operator*(const Vec2<T>& vec, const Mat2x3<U>& mat) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Vec3{
@@ -85,14 +85,14 @@ namespace fgm
     }
 
     //     template <StrictArithmetic T, StrictArithmetic S>
-    //     constexpr PromotedMatrix2x3<T, S> operator*(const S scalar, const Matrix2x3<T>& matrix) noexcept
+    //     FGM_INLINE constexpr PromotedMatrix2x3<T, S> operator*(const S scalar, const Matrix2x3<T>& matrix) noexcept
     //     { return matrix * scalar; }
     //
     //
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     constexpr PromotedVector2<T, U> Matrix2x3<T>::operator*(const Vector3<U>& vec) const noexcept
+    //     FGM_INLINE constexpr PromotedVector2<T, U> Matrix2x3<T>::operator*(const Vector3<U>& vec) const noexcept
     //         requires StrictArithmetic<T>
     //     {
     //         using R = PromotedValue_t<T, U>;
@@ -125,7 +125,7 @@ namespace fgm
     //
     //     template <StrictArithmetic T, StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     constexpr PromotedVector2<T, U> operator*(const Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
+    //     FGM_INLINE constexpr PromotedVector2<T, U> operator*(const Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
     //     {
     //         using R = PromotedValue_t<T, U>;
     // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -152,7 +152,7 @@ namespace fgm
     //
     //     template <StrictArithmetic T, StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     constexpr Vector2<T>& operator*=(Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
+    //     FGM_INLINE constexpr Vector2<T>& operator*=(Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
     //     {
     //         using R = PromotedValue_t<T, U>;
     // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -188,7 +188,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     constexpr PromotedMatrix2x3<T, U> Matrix2x3<T>::operator*(const Matrix3<U>& rhs) const noexcept
+    //     FGM_INLINE constexpr PromotedMatrix2x3<T, U> Matrix2x3<T>::operator*(const Matrix3<U>& rhs) const noexcept
     //         requires StrictArithmetic<T>
     //     {
     //         const auto m00 = _data[0][0] * rhs(0, 0) + _data[0][1] * rhs(0, 1) + _data[0][2] * rhs(0, 2);
@@ -203,11 +203,11 @@ namespace fgm
     //
     //     template <StrictArithmetic T, StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     constexpr Vector3<T> operator*(Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
+    //     FGM_INLINE constexpr Vector3<T> operator*(Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept
     //     {}
     //
     //     template <StrictArithmetic T, StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     constexpr PromotedMatrix2x3<T, U> operator*(const Matrix2<T>& matrixA, const Matrix2x3<U>& matrixB) noexcept
+    //     FGM_INLINE constexpr PromotedMatrix2x3<T, U> operator*(const Matrix2<T>& matrixA, const Matrix2x3<U>& matrixB) noexcept
     //     {}
 } // namespace fgm

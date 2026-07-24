@@ -27,27 +27,27 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Mat3<T>::Mat3(const T m00, const T m01, const T m02, const T m10, const T m11, const T m12, const T m20,
+    FGM_INLINE constexpr Mat3<T>::Mat3(const T m00, const T m01, const T m02, const T m10, const T m11, const T m12, const T m20,
                             const T m21, const T m22) noexcept
         : _data{ Vec3{ T(m00), T(m10), T(m20) }, Vec3{ T(m01), T(m11), T(m21) }, Vec3{ T(m02), T(m12), T(m22) } }
     {}
 
 
     template <Arithmetic T>
-    constexpr Mat3<T>::Mat3(const Vec3<T>& col0, const Vec3<T>& col1, const Vec3<T>& col2) noexcept
+    FGM_INLINE constexpr Mat3<T>::Mat3(const Vec3<T>& col0, const Vec3<T>& col1, const Vec3<T>& col2) noexcept
         : _data{ col0, col1, col2 }
     {}
 
 
     template <Arithmetic T>
-    constexpr Mat3<T>::Mat3(T d0, T d1, T d2) noexcept
+    FGM_INLINE constexpr Mat3<T>::Mat3(T d0, T d1, T d2) noexcept
         : _data{ Vec3{ T(d0), T(0), T(0) }, Vec3{ T(0), T(d1), T(0) }, Vec3{ T(0), T(0), T(d2) } }
     {}
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Mat3<T>::Mat3(const Mat3<U>& other) noexcept
+    FGM_INLINE constexpr Mat3<T>::Mat3(const Mat3<U>& other) noexcept
     {
         (*this)(0, 0) = static_cast<T>(other(0, 0));
         (*this)(0, 1) = static_cast<T>(other(0, 1));
@@ -69,7 +69,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vec3<T>& Mat3<T>::operator[](const std::size_t col) noexcept
+    FGM_INLINE constexpr Vec3<T>& Mat3<T>::operator[](const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -77,7 +77,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr const Vec3<T>& Mat3<T>::operator[](const std::size_t col) const noexcept
+    FGM_INLINE constexpr const Vec3<T>& Mat3<T>::operator[](const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -85,7 +85,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T& Mat3<T>::operator()(const std::size_t row, const std::size_t col) noexcept
+    FGM_INLINE constexpr T& Mat3<T>::operator()(const std::size_t row, const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
@@ -93,7 +93,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr const T& Mat3<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
+    FGM_INLINE constexpr const T& Mat3<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
@@ -109,9 +109,9 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat3<T>::allEq(const Mat3<U>& rhs, const double epsilon) const noexcept
+    FGM_INLINE constexpr bool Mat3<T>::allEq(const Mat3<U>& rhs, const double epsilon) const noexcept
     {
-        // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+        // MSVC's FGM_INLINE constexpr evaluator incorrectly yields true for NaN relational comparisons.
         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
@@ -130,15 +130,15 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat3<T>::allEq(const Mat3& lhs, const Mat3<U>& rhs, const double epsilon) noexcept
+    FGM_INLINE constexpr bool Mat3<T>::allEq(const Mat3& lhs, const Mat3<U>& rhs, const double epsilon) noexcept
     { return lhs.allEq(rhs, epsilon); }
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat3<T>::anyNeq(const Mat3<U>& rhs, const double epsilon) const noexcept
+    FGM_INLINE constexpr bool Mat3<T>::anyNeq(const Mat3<U>& rhs, const double epsilon) const noexcept
     {
-        // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+        // MSVC's FGM_INLINE constexpr evaluator incorrectly yields true for NaN relational comparisons.
         // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
         // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
@@ -157,21 +157,21 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat3<T>::anyNeq(const Mat3& lhs, const Mat3<U>& rhs, const double epsilon) noexcept
+    FGM_INLINE constexpr bool Mat3<T>::anyNeq(const Mat3& lhs, const Mat3<U>& rhs, const double epsilon) noexcept
     { return lhs.anyNeq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat3<T>::operator==(const Mat3<U>& rhs) const noexcept
+    FGM_INLINE constexpr bool Mat3<T>::operator==(const Mat3<U>& rhs) const noexcept
     { return allEq(rhs); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat3<T>::operator!=(const Mat3<U>& rhs) const noexcept
+    FGM_INLINE constexpr bool Mat3<T>::operator!=(const Mat3<U>& rhs) const noexcept
     { return anyNeq(rhs); }
 
 
@@ -185,7 +185,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat3<T, U> Mat3<T>::operator+(const Mat3<U>& rhs) const noexcept
+    FGM_INLINE constexpr PromotedMat3<T, U> Mat3<T>::operator+(const Mat3<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -209,7 +209,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat3<T, U> Mat3<T>::operator-(const Mat3<U>& rhs) const noexcept
+    FGM_INLINE constexpr PromotedMat3<T, U> Mat3<T>::operator-(const Mat3<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -220,7 +220,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Mat3<T>& Mat3<T>::operator-=(const Mat3<U>& rhs) noexcept
+    FGM_INLINE constexpr Mat3<T>& Mat3<T>::operator-=(const Mat3<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] -= rhs[0];
@@ -232,7 +232,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat3<T, S> Mat3<T>::operator*(const S scalar) const noexcept
+    FGM_INLINE constexpr PromotedMat3<T, S> Mat3<T>::operator*(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -242,7 +242,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Mat3<T>& Mat3<T>::operator*=(const S scalar) noexcept
+    FGM_INLINE constexpr Mat3<T>& Mat3<T>::operator*=(const S scalar) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] *= scalar;
@@ -253,14 +253,14 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic S>
-    constexpr PromotedMat3<T, S> operator*(const S scalar, const Mat3<T>& matrix) noexcept
+    FGM_INLINE constexpr PromotedMat3<T, S> operator*(const S scalar, const Mat3<T>& matrix) noexcept
     { return matrix * scalar; }
 
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVec3<T, U> Mat3<T>::operator*(const Vec3<U>& vec) const noexcept
+    FGM_INLINE constexpr PromotedVec3<T, U> Mat3<T>::operator*(const Vec3<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -296,7 +296,7 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    constexpr PromotedVec3<T, U> operator*(const Vec3<T>& vec, const Mat3<U>& matrix) noexcept
+    FGM_INLINE constexpr PromotedVec3<T, U> operator*(const Vec3<T>& vec, const Mat3<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -335,7 +335,7 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    constexpr Vec3<T>& operator*=(Vec3<T>& vec, const Mat3<U>& matrix) noexcept
+    FGM_INLINE constexpr Vec3<T>& operator*=(Vec3<T>& vec, const Mat3<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -385,7 +385,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat3<T, U> Mat3<T>::operator*(const Mat3<U>& rhs) const noexcept
+    FGM_INLINE constexpr PromotedMat3<T, U> Mat3<T>::operator*(const Mat3<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -396,7 +396,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Mat3<T>& Mat3<T>::operator*=(const Mat3<U>& rhs) noexcept
+    FGM_INLINE constexpr Mat3<T>& Mat3<T>::operator*=(const Mat3<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
@@ -409,7 +409,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat3<T, S> Mat3<T>::operator/(const S scalar) const noexcept
+    FGM_INLINE constexpr PromotedMat3<T, S> Mat3<T>::operator/(const S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -430,7 +430,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Mat3<T>& Mat3<T>::operator/=(const S scalar) noexcept
+    FGM_INLINE constexpr Mat3<T>& Mat3<T>::operator/=(const S scalar) noexcept
         requires StrictArithmetic<T>
     {
 
@@ -474,7 +474,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat3<T, S> Mat3<T>::safeDiv(const S scalar, Mat3 fallback) const noexcept
+    FGM_INLINE constexpr PromotedMat3<T, S> Mat3<T>::safeDiv(const S scalar, Mat3 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -500,14 +500,14 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat3<T, S> Mat3<T>::safeDiv(const Mat3& mat, const S scalar, Mat3 fallback) noexcept
+    FGM_INLINE constexpr PromotedMat3<T, S> Mat3<T>::safeDiv(const Mat3& mat, const S scalar, Mat3 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat3<T, S> Mat3<T>::tryDiv(const S scalar, OperationStatus& status, Mat3 fallback) const noexcept
+    FGM_INLINE constexpr PromotedMat3<T, S> Mat3<T>::tryDiv(const S scalar, OperationStatus& status, Mat3 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -545,14 +545,14 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat3<T, S> Mat3<T>::tryDiv(const Mat3& mat, const S scalar, OperationStatus& status,
+    FGM_INLINE constexpr PromotedMat3<T, S> Mat3<T>::tryDiv(const Mat3& mat, const S scalar, OperationStatus& status,
                                                  Mat3 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::operator-() const noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
     { return Mat3{ -_data[0], -_data[1], -_data[2] }; }
 
@@ -565,7 +565,7 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    constexpr T Mat3<T>::determinant() const noexcept
+    FGM_INLINE constexpr T Mat3<T>::determinant() const noexcept
         requires SignedStrictArithmetic<T>
     {
         /**
@@ -580,13 +580,13 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T Mat3<T>::determinant(const Mat3& matrix) noexcept
+    FGM_INLINE constexpr T Mat3<T>::determinant(const Mat3& matrix) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.determinant(); }
 
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::transpose() const noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::transpose() const noexcept
     {
         /**
          * @note Although the code doesn't seem to transpose, since we are storing in column major order
@@ -598,12 +598,12 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::transpose(const Mat3& matrix) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::transpose(const Mat3& matrix) noexcept
     { return matrix.transpose(); }
 
 
     template <Arithmetic T>
-    constexpr Mat3<Magnitude<T>> Mat3<T>::inverse() const noexcept
+    FGM_INLINE constexpr Mat3<Magnitude<T>> Mat3<T>::inverse() const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -623,13 +623,13 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat3<Magnitude<T>> Mat3<T>::inverse(const Mat3& matrix) noexcept
+    FGM_INLINE constexpr Mat3<Magnitude<T>> Mat3<T>::inverse(const Mat3& matrix) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.inverse(); }
 
 
     template <Arithmetic T>
-    constexpr Mat3<Magnitude<T>> Mat3<T>::safeInverse(Mat3 fallback) const noexcept
+    FGM_INLINE constexpr Mat3<Magnitude<T>> Mat3<T>::safeInverse(Mat3 fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -664,13 +664,13 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat3<Magnitude<T>> Mat3<T>::safeInverseOf(const Mat3& matrix, Mat3 fallback) noexcept
+    FGM_INLINE constexpr Mat3<Magnitude<T>> Mat3<T>::safeInverseOf(const Mat3& matrix, Mat3 fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.safeInverse(fallback); }
 
 
     template <Arithmetic T>
-    constexpr Mat3<Magnitude<T>> Mat3<T>::tryInverse(OperationStatus& status, Mat3 fallback) const noexcept
+    FGM_INLINE constexpr Mat3<Magnitude<T>> Mat3<T>::tryInverse(OperationStatus& status, Mat3 fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -714,20 +714,20 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat3<Magnitude<T>> Mat3<T>::tryInverseOf(const Mat3& matrix, OperationStatus& status,
+    FGM_INLINE constexpr Mat3<Magnitude<T>> Mat3<T>::tryInverseOf(const Mat3& matrix, OperationStatus& status,
                                                        Mat3 fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.tryInverse(status, fallback); }
 
 
     template <Arithmetic T>
-    constexpr T Mat3<T>::trace() const noexcept
+    FGM_INLINE constexpr T Mat3<T>::trace() const noexcept
         requires StrictArithmetic<T>
     { return _data[0][0] + _data[1][1] + _data[2][2]; }
 
 
     template <Arithmetic T>
-    constexpr T Mat3<T>::trace(const Mat3& matrix) noexcept
+    FGM_INLINE constexpr T Mat3<T>::trace(const Mat3& matrix) noexcept
         requires StrictArithmetic<T>
     { return matrix.trace(); }
 
@@ -741,22 +741,22 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    constexpr bool Mat3<T>::hasInf() const noexcept
+    FGM_INLINE constexpr bool Mat3<T>::hasInf() const noexcept
     { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf(); }
 
 
     template <Arithmetic T>
-    constexpr bool Mat3<T>::hasInf(const Mat3& matrix) noexcept
+    FGM_INLINE constexpr bool Mat3<T>::hasInf(const Mat3& matrix) noexcept
     { return matrix.hasInf(); }
 
 
     template <Arithmetic T>
-    constexpr bool Mat3<T>::hasNaN() const noexcept
+    FGM_INLINE constexpr bool Mat3<T>::hasNaN() const noexcept
     { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN(); }
 
 
     template <Arithmetic T>
-    constexpr bool Mat3<T>::hasNaN(const Mat3& matrix) noexcept
+    FGM_INLINE constexpr bool Mat3<T>::hasNaN(const Mat3& matrix) noexcept
     { return matrix.hasNaN(); }
 
 
@@ -769,7 +769,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr Mat3<T> Mat3<T>::makeRotationX(U angle) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeRotationX(U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -785,7 +785,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr Mat3<T> Mat3<T>::makeRotationY(U angle) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeRotationY(U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -801,7 +801,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr Mat3<T> Mat3<T>::makeRotationZ(U angle) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeRotationZ(U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -818,7 +818,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr Mat3<T> Mat3<T>::makeRotation(U angle, const Vec2<T>& center) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeRotation(U angle, const Vec2<T>& center) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -835,7 +835,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    constexpr PromotedFloatMat3<T, U> Mat3<T>::makeRotation(U angle, const Vec3<T>& axis) noexcept
+    FGM_INLINE constexpr PromotedFloatMat3<T, U> Mat3<T>::makeRotation(U angle, const Vec3<T>& axis) noexcept
         requires StrictArithmetic<T>
     {
         using S = Magnitude<std::common_type_t<T, U>>;
@@ -863,19 +863,19 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::makeScale(T scale) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeScale(T scale) noexcept
         requires StrictArithmetic<T>
     { return Mat3{ scale, T(0), T(0), T(0), scale, T(0), T(0), T(0), scale }; }
 
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::makeScale(T scaleX, T scaleY, T scaleZ) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeScale(T scaleX, T scaleY, T scaleZ) noexcept
         requires StrictArithmetic<T>
     { return Mat3{ scaleX, T(0), T(0), T(0), scaleY, T(0), T(0), T(0), scaleZ }; }
 
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::makeScale(T scale, const Vec3<T>& direction) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeScale(T scale, const Vec3<T>& direction) noexcept
         requires SignedStrictArithmetic<T>
     {
 
@@ -895,7 +895,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <reflect::RT On>
-    constexpr Mat3<T> Mat3<T>::makeReflection() noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeReflection() noexcept
         requires SignedStrictArithmetic<T>
     {
         T reflectX = T(-2) * ((On & 0b00000100) >> 2) + T(1);
@@ -907,7 +907,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::makeReflection(const Vec3<T>& normal) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeReflection(const Vec3<T>& normal) noexcept
         requires SignedStrictArithmetic<T>
     {
         T ax = normal.x();
@@ -918,7 +918,7 @@ namespace fgm
     }
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::makeInvolution(const Vec3<T>& normal) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeInvolution(const Vec3<T>& normal) noexcept
         requires SignedStrictArithmetic<T>
     {
         T x  = static_cast<T>(2 * normal.x() * normal.x() - 1);
@@ -932,7 +932,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::makeAffine(const Mat2<T>& linearTransform, const Vec2<T>& translation) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeAffine(const Mat2<T>& linearTransform, const Vec2<T>& translation) noexcept
     {
         return Mat3<T>{ linearTransform(0, 0),
                         linearTransform(0, 1),

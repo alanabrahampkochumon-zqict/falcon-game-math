@@ -144,4 +144,15 @@ inline void logAssertion(const char* condition, const char* message, const char*
     #define FGM_ASSERT(condition) ((void) 0)
 #endif
 
+/**
+ * @brief Compiler specific inlining syntax.
+ */
+#if defined(_MSC_VER) && !defined(__clang__)
+#define FGM_INLINE __forceinline
+#elif defined(__GNUC__) || defined(__clang__)
+#define FGM_INLINE inline __attribute__((always_inline))
+#else
+#define FGM_INLINE inline
+#endif
+
 /** @} */

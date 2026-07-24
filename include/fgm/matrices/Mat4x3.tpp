@@ -31,7 +31,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Mat4x3<T>::Mat4x3(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22, T m30, T m31,
+    FGM_INLINE constexpr Mat4x3<T>::Mat4x3(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22, T m30, T m31,
                                 T m32) noexcept
         : _data{ Vec4{ T(m00), T(m10), T(m20), T(m30) }, Vec4{ T(m01), T(m11), T(m21), T(m31) },
                  Vec4{ T(m02), T(m12), T(m22), T(m32) } }
@@ -39,14 +39,14 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat4x3<T>::Mat4x3(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2) noexcept
+    FGM_INLINE constexpr Mat4x3<T>::Mat4x3(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2) noexcept
         : _data{ col0, col1, col2 }
     {}
 
 
     template <Arithmetic T>
     template <Arithmetic U>
-    constexpr Mat4x3<T>::Mat4x3(const Mat4x3<U>& other) noexcept
+    FGM_INLINE constexpr Mat4x3<T>::Mat4x3(const Mat4x3<U>& other) noexcept
     {
         (*this)(0, 0) = static_cast<T>(other(0, 0));
         (*this)(0, 1) = static_cast<T>(other(0, 1));
@@ -70,7 +70,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr Vec4<T>& Mat4x3<T>::operator[](std::size_t col) noexcept
+    FGM_INLINE constexpr Vec4<T>& Mat4x3<T>::operator[](std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -78,7 +78,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr const Vec4<T>& Mat4x3<T>::operator[](std::size_t col) const noexcept
+    FGM_INLINE constexpr const Vec4<T>& Mat4x3<T>::operator[](std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -86,7 +86,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T& Mat4x3<T>::operator()(std::size_t row, std::size_t col) noexcept
+    FGM_INLINE constexpr T& Mat4x3<T>::operator()(std::size_t row, std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
@@ -94,7 +94,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr const T& Mat4x3<T>::operator()(std::size_t row, std::size_t col) const noexcept
+    FGM_INLINE constexpr const T& Mat4x3<T>::operator()(std::size_t row, std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
@@ -110,9 +110,9 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat4x3<T>::allEq(const Mat4x3<U>& rhs, double epsilon) const noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::allEq(const Mat4x3<U>& rhs, double epsilon) const noexcept
     {
-// MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+// MSVC's FGM_INLINE constexpr evaluator incorrectly yields true for NaN relational comparisons.
 // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
 // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
@@ -131,16 +131,16 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat4x3<T>::allEq(const Mat4x3& lhs, const Mat4x3<U>& rhs, double epsilon) noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::allEq(const Mat4x3& lhs, const Mat4x3<U>& rhs, double epsilon) noexcept
     { return lhs.allEq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat4x3<T>::anyNeq(const Mat4x3<U>& rhs, double epsilon) const noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::anyNeq(const Mat4x3<U>& rhs, double epsilon) const noexcept
     {
-// MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+// MSVC's FGM_INLINE constexpr evaluator incorrectly yields true for NaN relational comparisons.
 // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
 // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
@@ -159,21 +159,21 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat4x3<T>::anyNeq(const Mat4x3& lhs, const Mat4x3<U>& rhs, double epsilon) noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::anyNeq(const Mat4x3& lhs, const Mat4x3<U>& rhs, double epsilon) noexcept
     { return lhs.anyNeq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat4x3<T>::operator==(const Mat4x3<U>& rhs) const noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::operator==(const Mat4x3<U>& rhs) const noexcept
     { return allEq(rhs); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    constexpr bool Mat4x3<T>::operator!=(const Mat4x3<U>& rhs) const noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::operator!=(const Mat4x3<U>& rhs) const noexcept
     { return anyNeq(rhs); }
 
 
@@ -186,7 +186,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat4x3<T, U> Mat4x3<T>::operator+(const Mat4x3<U>& rhs) const noexcept
+    FGM_INLINE constexpr PromotedMat4x3<T, U> Mat4x3<T>::operator+(const Mat4x3<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -209,7 +209,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat4x3<T, U> Mat4x3<T>::operator-(const Mat4x3<U>& rhs) const noexcept
+    FGM_INLINE constexpr PromotedMat4x3<T, U> Mat4x3<T>::operator-(const Mat4x3<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -220,7 +220,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr Mat4x3<T>& Mat4x3<T>::operator-=(const Mat4x3<U>& rhs) noexcept
+    FGM_INLINE constexpr Mat4x3<T>& Mat4x3<T>::operator-=(const Mat4x3<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] -= rhs[0];
@@ -232,7 +232,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat4x3<T, S> Mat4x3<T>::operator*(S scalar) const noexcept
+    FGM_INLINE constexpr PromotedMat4x3<T, S> Mat4x3<T>::operator*(S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -241,13 +241,13 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic S>
-    constexpr PromotedMat4x3<T, S> operator*(S scalar, const Mat4x3<T>& matrix) noexcept
+    FGM_INLINE constexpr PromotedMat4x3<T, S> operator*(S scalar, const Mat4x3<T>& matrix) noexcept
     { return matrix * scalar; }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Mat4x3<T>& Mat4x3<T>::operator*=(S scalar) noexcept
+    FGM_INLINE constexpr Mat4x3<T>& Mat4x3<T>::operator*=(S scalar) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] *= scalar;
@@ -260,7 +260,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat4x3<T, S> Mat4x3<T>::operator/(const S& scalar) const noexcept
+    FGM_INLINE constexpr PromotedMat4x3<T, S> Mat4x3<T>::operator/(const S& scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -281,7 +281,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr Mat4x3<T>& Mat4x3<T>::operator/=(const S& scalar) noexcept
+    FGM_INLINE constexpr Mat4x3<T>& Mat4x3<T>::operator/=(const S& scalar) noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -332,7 +332,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat4x3<T, S> Mat4x3<T>::safeDiv(S scalar, Mat4x3 fallback) const noexcept
+    FGM_INLINE constexpr PromotedMat4x3<T, S> Mat4x3<T>::safeDiv(S scalar, Mat4x3 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -358,14 +358,14 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat4x3<T, S> Mat4x3<T>::safeDiv(const Mat4x3& mat, S scalar, Mat4x3 fallback) noexcept
+    FGM_INLINE constexpr PromotedMat4x3<T, S> Mat4x3<T>::safeDiv(const Mat4x3& mat, S scalar, Mat4x3 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(S scalar, OperationStatus& status, Mat4x3 fallback) const noexcept
+    FGM_INLINE constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(S scalar, OperationStatus& status, Mat4x3 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -402,7 +402,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(const Mat4x3& mat, S scalar, OperationStatus& status,
+    FGM_INLINE constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(const Mat4x3& mat, S scalar, OperationStatus& status,
                                                      Mat4x3 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
@@ -410,7 +410,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat4x3<T> Mat4x3<T>::operator-() const noexcept
+    FGM_INLINE constexpr Mat4x3<T> Mat4x3<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
     { return Mat4x3{ -_data[0], -_data[1], -_data[2] }; }
 
@@ -425,7 +425,7 @@ namespace fgm
 
     //
     //     template <Arithmetic T>
-    //     constexpr Mat4x3<T> Mat4x3<T>::transpose() const noexcept
+    //     FGM_INLINE constexpr Mat4x3<T> Mat4x3<T>::transpose() const noexcept
     //     {
     //         /**
     //          * @note Although the code doesn't seem to transpose, since we are storing in column major order
@@ -438,7 +438,7 @@ namespace fgm
     //
     //
     //     template <Arithmetic T>
-    //     constexpr Mat4x3<T> Mat4x3<T>::transpose(const Mat4x3& matrix) noexcept
+    //     FGM_INLINE constexpr Mat4x3<T> Mat4x3<T>::transpose(const Mat4x3& matrix) noexcept
     //     { return matrix.transpose(); }
     //
 
@@ -450,22 +450,22 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    constexpr bool Mat4x3<T>::hasInf() const noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::hasInf() const noexcept
     { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf(); }
 
 
     template <Arithmetic T>
-    constexpr bool Mat4x3<T>::hasInf(const Mat4x3& matrix) noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::hasInf(const Mat4x3& matrix) noexcept
     { return matrix.hasInf(); }
 
 
     template <Arithmetic T>
-    constexpr bool Mat4x3<T>::hasNaN() const noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::hasNaN() const noexcept
     { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN(); }
 
 
     template <Arithmetic T>
-    constexpr bool Mat4x3<T>::hasNaN(const Mat4x3& matrix) noexcept
+    FGM_INLINE constexpr bool Mat4x3<T>::hasNaN(const Mat4x3& matrix) noexcept
     { return matrix.hasNaN(); }
 
 

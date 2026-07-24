@@ -26,55 +26,6 @@
 #include "Mat4x2.h"
 #include "Mat4x3.h"
 
-// TODO: Use transpose from here
-//     /**
-//      * @addtogroup FGM_Mat2x3_Algebra
-//      * @{
-//      */
-//
-//     /**
-//      * @brief Transpose this matrix by swapping its rows and columns.
-//      *        \f$
-//      *            \begin{bmatrix}
-//      *                 A_{00} & A_{01} \\
-//      *                 A_{10} & A_{11}
-//      *            \end{bmatrix} ^ \top
-//      *            =
-//      *            \begin{bmatrix}
-//      *                 A_{00} & A_{10} \\
-//      *                 A_{01} & A_{11}
-//      *            \end{bmatrix}
-//      *        \f$
-//      *
-//      * @return A new @ref Mat2x3 with its elements flipped along the diagonal.
-//      */
-//     [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-//     constexpr Mat2x3 transpose() const noexcept;
-//
-//
-//     /**
-//      * @brief Transpose @p matrix by swapping its rows and columns.
-//      *        \f$
-//      *            \begin{bmatrix}
-//      *                 A_{00} & A_{01} \\
-//      *                 A_{10} & A_{11}
-//      *            \end{bmatrix} ^ \top
-//      *            =
-//      *            \begin{bmatrix}
-//      *                 A_{00} & A_{10} \\
-//      *                 A_{01} & A_{11}
-//      *            \end{bmatrix}
-//      *        \f$
-//      *
-//      * @param matrix The matrix to transpose.
-//      *
-//      * @return A new @ref Mat2x3 with its elements flipped along the diagonal.
-//      */
-//     [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
-//     static constexpr Mat2x3 transpose(const Mat2x3& matrix) noexcept;
-//
-//     /** @} */
-
 
 
 /// TODO: Not implemented or tested
@@ -114,6 +65,11 @@
 
 namespace fgm
 {
+
+    /**
+     * @addtogroup FGM_Mat2x3_Arithmetic
+     * @{
+     */
 
     /**
      * @brief Multiply a 2x3 matrix with a 3D column vector.
@@ -187,7 +143,6 @@ namespace fgm
     [[nodiscard]] constexpr PromotedMat2x4<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x4<U>& rhs) noexcept;
 
 
-
     /**
      * @brief Multiply a 2D row vector with a 2x3 matrix.
      *
@@ -201,265 +156,20 @@ namespace fgm
      *
      * @return A new 3D row vector.
      */
-    // TODO: FIX Op bug
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const Vec2<T>& vec, const Mat2x3<U>& mat) noexcept;
 
-    // const auto mul = operator*(Vec2<int>{}, Mat2x3<int>{});
-    // 1x2 * 2x3       => 1x3
-    // /**
-    //  * @brief Compose this matrix with 3x2 @p rhs matrix to form a new 2x2 matrix.
-    //  *        \f$
-    //  *            \begin{bmatrix}
-    //  *                 A_{00} & A_{01} & A_{02} \\
-    //  *                 A_{10} & A_{11} & A_{12}
-    //  *            \end{bmatrix}
-    //  *            \cdot
-    //  *            \begin{bmatrix}
-    //  *                 B_{00} & B_{01} B_{02} \\
-    //  *                 B_{10} & B_{11} B_{12} \\
-    //  *                 B_{20} & B_{21} B_{22}
-    //  *            \end{bmatrix}
-    //  *            =
-    //  *            \begin{bmatrix}
-    //  *                 A_{00} & A_{01} & A_{02} \\
-    //  *                 A_{10} & A_{11} & A_{12}
-    //  *            \end{bmatrix}
-    //  *        \f$
-    //  *
-    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //  *
-    //  * @note Promotes the result to the wider type using @ref PromotedMatrix2x3<T, U>.
-    //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] rhs The matrix to multiply.
-    //  *
-    //  * @return A new @ref Matrix2x3 containing the composition of linear transformations.
-    //  */
-    // template <StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // [[nodiscard]] constexpr PromotedMatrix2x3<T, U> operator*(const Matrix3<U>& rhs) const noexcept
-    //     requires StrictArithmetic<T>;
-    //
-    //
-    // // TODO: Add 3x2 and 3x4 matrix multiplication
-    // // /**
-    // //  * @brief Compose this matrix with 3x2 @p rhs matrix to form a new 2x2 matrix.
-    // //  *        \f$
-    // //  *            \begin{bmatrix}
-    // //  *                 A_{00} & A_{01} & A_{02} \\
-    // //  *                 A_{10} & A_{11} & A_{12}
-    // //  *            \end{bmatrix}
-    // //  *            \cdot
-    // //  *            \begin{bmatrix}
-    // //  *                 B_{00} & B_{01} \\
-    // //  *                 B_{10} & B_{11} \\
-    // //  *                 B_{20} & B_{21}
-    // //  *            \end{bmatrix}
-    // //  *            =
-    // //  *            \begin{bmatrix}
-    // //  *                 C_{00} & C_{01} \\
-    // //  *                 C_{10} & C_{11}
-    // //  *            \end{bmatrix}
-    // //  *        \f$
-    // //  *
-    // //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    // //  *
-    // //  * @note Promotes the result to the wider type using @ref PromotedMatrix2<T, U>.
-    // //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-    // //  *
-    // //  * @param[in] rhs The matrix to multiply.
-    // //  *
-    // //  * @return A new @ref Matrix2 containing the composition of linear transformations.
-    // //  */
-    // // template <StrictArithmetic U>
-    // //     requires StrictSignedness<T, U>
-    // // [[nodiscard]] constexpr PromotedMatrix2<T, U> operator*(const Matrix3x2<U>& rhs) const noexcept
-    // //     requires StrictArithmetic<T>;
-    //
-    //
-    // // /**
-    // //  * @brief Compose this matrix with 3x4 @p rhs matrix to form a new 2x4 matrix.
-    // //  *        \f$
-    // //  *            \begin{bmatrix}
-    // //  *                 A_{00} & A_{01} & A_{02} \\
-    // //  *                 A_{10} & A_{11} & A_{12}
-    // //  *            \end{bmatrix}
-    // //  *            \cdot
-    // //  *            \begin{bmatrix}
-    // //  *                 B_{00} & B_{01} & B_{02} & B_{03} \\
-    // //  *                 B_{10} & B_{11} & B_{12} & B_{13} \\
-    // //  *                 B_{20} & B_{21} & B_{22} & B_{23}
-    // //  *            \end{bmatrix}
-    // //  *            =
-    // //  *            \begin{bmatrix}
-    // //  *                 C_{00} & C_{01} & C_{02} \\
-    // //  *                 C_{10} & C_{11} & C_{12} \\
-    // //  *                 C_{20} & C_{21} & C_{22}
-    // //  *            \end{bmatrix}
-    // //  *        \f$
-    // //  *
-    // //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    // //  *
-    // //  * @note Promotes the result to the wider type using @ref PromotedMatrix2x4<T, U>.
-    // //  * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
-    // //  *
-    // //  * @param[in] rhs The matrix to multiply.
-    // //  *
-    // //  * @return A new @ref Matrix2x4 containing the composition of linear transformations.
-    // //  */
-    // // template <StrictArithmetic U>
-    // //     requires StrictSignedness<T, U>
-    // // [[nodiscard]] constexpr PromotedMatrix2x4<T, U> operator*(const Matrix3x4<U>& rhs) const noexcept
-    // //     requires StrictArithmetic<T>;
-    //
-    //
-    // /**
-    //  * @brief Multiply the @p Vec **row vector** by @p matrix.
-    //  *        Perform the linear transformation:
-    //  *        \f$
-    //  *            \begin{bmatrix}
-    //  *                x & y
-    //  *            \end{bmatrix}
-    //  *            \cdot
-    //  *            \begin{bmatrix}
-    //  *                A_{00} & A_{01} & A_{02} \\
-    //  *                A_{10} & A_{11} & A_{12}
-    //  *            \end{bmatrix}
-    //  *            =
-    //  *            \begin{bmatrix}
-    //  *                x' & y' & z'
-    //  *            \end{bmatrix}
-    //  *        \f$
-    //  *
-    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //  *
-    //  * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
-    //  * @tparam U Numeric type of the matrix. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] vec    The row vector.
-    //  * @param[in] matrix The matrix to multiply by.
-    //  *
-    //  * @return A 3D row vector.
-    //  */
-    // template <StrictArithmetic T, StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // static constexpr Vector3<T> operator*(Vector2<T>& vec, const Matrix2x3<U>& matrix) noexcept;
-    //
-    //
-    // /**
-    //  * @brief Multiply a 2x2 matrix with a 2x3 matrix.
-    //  *        \f$
-    //  *            \begin{bmatrix}
-    //  *                B_{00} & B_{01} \\
-    //  *                B_{10} & B_{11}
-    //  *            \end{bmatrix}
-    //  *            \cdot
-    //  *            \begin{bmatrix}
-    //  *                B_{00} & B_{01} & B_{02} \\
-    //  *                B_{10} & B_{11} & B_{12}
-    //  *            \end{bmatrix}
-    //  *            =
-    //  *            \begin{bmatrix}
-    //  *                C_{00} & C_{01} & C_{02} \\
-    //  *                C_{10} & C_{11} & C_{12}
-    //  *            \end{bmatrix}
-    //  *        \f$
-    //  *
-    //  * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
-    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //  *
-    //  * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
-    //  * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] matrixA The first matrix.
-    //  * @param[in] matrixB The second matrix.
-    //  *
-    //  * @return A 2x3 Matrix composed of @p matrixA and @p matrixB.
-    //  */
-    // template <StrictArithmetic T, StrictArithmetic U>
-    //     requires StrictSignedness<T, U>
-    // static constexpr PromotedMatrix2x3<T, U> operator*(const Matrix2<T>& matrixA, const Matrix2x3<U>& matrixB)
-    // noexcept;
-    //
-    //
-    // // /**
-    // //  * @brief Multiply a 2x2 matrix with a 2x3 matrix.
-    // //  *        \f$
-    // //  *            \begin{bmatrix}
-    // //  *                B_{00} & B_{01} \\
-    // //  *                B_{10} & B_{11} \\
-    // //  *                B_{20} & B_{21}
-    // //  *            \end{bmatrix}
-    // //  *            \cdot
-    // //  *            \begin{bmatrix}
-    // //  *                B_{00} & B_{01} & B_{02} \\
-    // //  *                B_{10} & B_{11} & B_{12}
-    // //  *            \end{bmatrix}
-    // //  *            =
-    // //  *            \begin{bmatrix}
-    // //  *                C_{00} & C_{01} & C_{02} \\
-    // //  *                C_{10} & C_{11} & C_{12} \\
-    // //  *                C_{20} & C_{21} & C_{22}
-    // //  *            \end{bmatrix}
-    // //  *        \f$
-    // //  *
-    // //  * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
-    // //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    // //  *
-    // //  * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
-    // //  * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
-    // //  *
-    // //  * @param[in] matrixA The first matrix.
-    // //  * @param[in] matrixB The second matrix.
-    // //  *
-    // //  * @return A 3D Matrix composed of @p matrixA and @p matrixB.
-    // //  */
-    // // template <StrictArithmetic T, StrictArithmetic U>
-    // //     requires StrictSignedness<T, U>
-    // // static constexpr PromotedMatrix3<T, U> operator*(const Matrix3x2<T>& matrixA, const Matrix2x3<U>& matrixB)
-    // // noexcept;
-    //
-    //
-    //
-    // // /**
-    // //  * @brief Multiply a 2x2 matrix with a 2x3 matrix.
-    // //  *        \f$
-    // //  *            \begin{bmatrix}
-    // //  *                B_{00} & B_{01} \\
-    // //  *                B_{10} & B_{11} \\
-    // //  *                B_{20} & B_{21} \\
-    // //  *                B_{30} & B_{31}
-    // //  *            \end{bmatrix}
-    // //  *            \cdot
-    // //  *            \begin{bmatrix}
-    // //  *                B_{00} & B_{01} & B_{02} \\
-    // //  *                B_{10} & B_{11} & B_{12}
-    // //  *            \end{bmatrix}
-    // //  *            =
-    // //  *            \begin{bmatrix}
-    // //  *                C_{00} & C_{01} & C_{02} C_{03} \\
-    // //  *                C_{10} & C_{11} & C_{12} C_{13} \\
-    // //  *                C_{20} & C_{21} & C_{22} C_{23}
-    // //  *            \end{bmatrix}
-    // //  *        \f$
-    // //  *
-    // //  * @note Promotes the result to the wider type using @ref PromotedVector2<T, U>.
-    // //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    // //  *
-    // //  * @tparam T Numeric type of the row vector. Must satisfy @ref StrictArithmetic.
-    // //  * @tparam U Numeric type of the transformation matrix. Must satisfy @ref StrictArithmetic.
-    // //  *
-    // //  * @param[in] matrixA The first matrix.
-    // //  * @param[in] matrixB The second matrix.
-    // //  *
-    // //  * @return A 4x3 Matrix composed of @p matrixA and @p matrixB.
-    // //  */
-    // // template <StrictArithmetic T, StrictArithmetic U>
-    // //     requires StrictSignedness<T, U>
-    // // static constexpr PromotedMatrix4x3<T, U> operator*(const Matrix4x2<T>& matrixA, const Matrix2x3<U>& matrixB)
-    // // noexcept;
+    /** @} */
+
+
+
+    /**
+     * @addtogroup FGM_Mat2x4_Arithmetic
+     * @{
+     */
+
+    /** @} */
 
 } // namespace fgm
 
