@@ -40,7 +40,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat2x4Multiplication: public ::testing::Test
+    class Mat2x4Multiplication: public testing::Test
     {
 
     protected:
@@ -154,11 +154,11 @@ namespace
 
 
         /// @test Verify that 2x4 matrix times a 4x4 matrix yields a 2x4 matrix at compile time.
-        constexpr auto EXP_MAT_2x4 = MAT2X4 * MAT4;
-        static_assert(EXP_MAT_2x4[0] == fgm::Vec2{ 306, 482 });
-        static_assert(EXP_MAT_2x4[1] == fgm::Vec2{ 332, 524 });
-        static_assert(EXP_MAT_2x4[2] == fgm::Vec2{ 358, 566 });
-        static_assert(EXP_MAT_2x4[3] == fgm::Vec2{ 384, 608 });
+        constexpr auto EXP_MAT_2X4 = MAT2X4 * MAT4;
+        static_assert(EXP_MAT_2X4[0] == fgm::Vec2{ 306, 482 });
+        static_assert(EXP_MAT_2X4[1] == fgm::Vec2{ 332, 524 });
+        static_assert(EXP_MAT_2X4[2] == fgm::Vec2{ 358, 566 });
+        static_assert(EXP_MAT_2X4[3] == fgm::Vec2{ 384, 608 });
 
 
         /// @test Verify that 2D row vector times a 2x4 matrix yields a 4D row vector at compile time.
