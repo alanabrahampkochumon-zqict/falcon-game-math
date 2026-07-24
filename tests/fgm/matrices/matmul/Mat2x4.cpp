@@ -50,10 +50,10 @@ namespace
 
         fgm::Mat2<T> _expectedFPMat2, _expectedIntMat2;
         fgm::Mat2x3<T> _expectedFPMat2x3, _expectedIntMat2x3;
-        fgm::Mat2x4<T> _mat2x4; //, _expectedFPMat2x4, _expectedIntMat2x4;
+        fgm::Mat2x4<T> _mat2x4, _expectedFPMat2x4, _expectedIntMat2x4;
 
-
-        fgm::Mat4x2<T> _mat4x2; //, _expectedFPMat2x4, _expectedIntMat2x4;
+        fgm::Mat4<T> _mat4;
+        fgm::Mat4x2<T> _mat4x2;
         fgm::Mat4x3<T> _mat4x3;
 
         // fgm::Mat3<T> _mat3x3;
@@ -84,11 +84,26 @@ namespace
                                    fgm::Vec2{ T(314), T(498) } };
 
 
-            _mat2x4 = { fgm::Vec2{ T(5.12390421300000032), T(9.12390421299999943) },
-                        fgm::Vec2{ T(6.12390421300000032), T(10.12390421299999943) },
-                        fgm::Vec2{ T(7.12390421300000032), T(11.12390421299999943) },
-                        fgm::Vec2{ T(8.12390421299999943), T(12.12390421299999943) } };
+            _mat2x4            = { fgm::Vec2{ T(5.12390421300000032), T(9.12390421299999943) },
+                                   fgm::Vec2{ T(6.12390421300000032), T(10.12390421299999943) },
+                                   fgm::Vec2{ T(7.12390421300000032), T(11.12390421299999943) },
+                                   fgm::Vec2{ T(8.12390421299999943), T(12.12390421299999943) } };
+            _expectedFPMat2x4  = { fgm::Vec2{ T(314.73470392599654133), T(492.71717133399658906) },
+                                   fgm::Vec2{ T(341.23032077799655326), T(535.21278818599660099) },
+                                   fgm::Vec2{ T(367.72593762999656519), T(577.70840503799649923) },
+                                   fgm::Vec2{ T(394.22155448199657712), T(620.20402188999651116) } };
+            _expectedIntMat2x4 = { fgm::Vec2{ T(306), T(482) }, fgm::Vec2{ T(332), T(524) },
+                                   fgm::Vec2{ T(358), T(566) }, fgm::Vec2{ T(384), T(608) } };
 
+
+            _mat4 = { fgm::Vec4{ T(5.12390421300000032), T(9.12390421299999943), T(13.12390421299999943),
+                                 T(17.12390421299999943) },
+                      fgm::Vec4{ T(6.12390421300000032), T(10.12390421299999943), T(14.12390421299999943),
+                                 T(18.12390421299999943) },
+                      fgm::Vec4{ T(7.12390421300000032), T(11.12390421299999943), T(15.12390421299999943),
+                                 T(19.12390421299999943) },
+                      fgm::Vec4{ T(8.12390421299999943), T(12.12390421299999943), T(16.12390421299999943),
+                                 T(20.12390421299999943) } };
 
             _mat4x2 = { fgm::Vec4{ T(5.12390421300000032), T(7.12390421300000032), T(9.12390421299999943),
                                    T(11.12390421299999943) },
@@ -101,7 +116,6 @@ namespace
                                    T(15.12390421299999943) },
                         fgm::Vec4{ T(7.12390421300000032), T(10.12390421299999943), T(13.12390421299999943),
                                    T(16.12390421299999943) } };
-
         }
     };
     TYPED_TEST_SUITE(Mat2x4Multiplication, SupportedArithmeticTypes);
@@ -120,6 +134,7 @@ namespace
 
         constexpr fgm::Mat2x4 MAT2X4(5, 6, 7, 8, 9, 10, 11, 12);
 
+        constexpr fgm::Mat4 MAT4(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
         constexpr fgm::Mat4x2 MAT4X2(5, 6, 7, 8, 9, 10, 11, 12);
         constexpr fgm::Mat4x3 MAT4X3(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
@@ -140,13 +155,14 @@ namespace
         static_assert(EXP_MAT_2X3[1] == fgm::Vec2{ 288, 456 });
         static_assert(EXP_MAT_2X3[2] == fgm::Vec2{ 314, 498 });
 
-        //
-        // /// @test Verify that 2x3 matrix times a 3x3 matrix yields a 2x3 matrix at compile time.
-        // constexpr auto EXP_MAT_2X3 = MAT2X3 * MAT3X3;
-        // static_assert(EXP_MAT_2X3[0] == fgm::Vec2{ 54, 126 });
-        // static_assert(EXP_MAT_2X3[1] == fgm::Vec2{ 60, 141 });
-        // static_assert(EXP_MAT_2X3[2] == fgm::Vec2{ 66, 156 });
-        //
+
+        /// @test Verify that 2x4 matrix times a 4x4 matrix yields a 2x4 matrix at compile time.
+        constexpr auto EXP_MAT_2x4 = MAT2X4 * MAT4;
+        static_assert(EXP_MAT_2x4[0] == fgm::Vec2{ 306, 482 });
+        static_assert(EXP_MAT_2x4[1] == fgm::Vec2{ 332, 524 });
+        static_assert(EXP_MAT_2x4[2] == fgm::Vec2{ 358, 566 });
+        static_assert(EXP_MAT_2x4[3] == fgm::Vec2{ 384, 608 });
+
 
         // /// @test Verify that 2D row vector times a 2x3 matrix yields a 3D row vector at compile time.
         // constexpr auto EXP_VEC3 = VEC2 * MAT2X3;
@@ -193,19 +209,19 @@ TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4x2_ReturnsAValid2DMatrix)
     }
 }
 
-//
-// TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat3x3_ReturnsAValid2x3Matrix)
-// {
-//     const auto matrixProduct = this->_mat2x3 * this->_mat3x3;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_MAT_EQ(this->_expectedFPMat2x4, matrixProduct);
-//     }
-//     else
-//     {
-//         EXPECT_MAT_EQ(this->_expectedIntMat2x4, matrixProduct);
-//     }
-// }
+
+TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4_ReturnsAValid2x4Matrix)
+{
+    const auto matrixProduct = this->_mat2x4 * this->_mat4;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedFPMat2x4, matrixProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedIntMat2x4, matrixProduct);
+    }
+}
 
 
 TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4x3_ReturnsAValid2x3Matrix)

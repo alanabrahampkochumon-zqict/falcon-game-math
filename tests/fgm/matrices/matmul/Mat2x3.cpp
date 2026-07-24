@@ -195,7 +195,7 @@ TYPED_TEST(Mat2x3Multiplication, Mat2x3TimesMat3x2_ReturnsAValid2DMatrix)
 }
 
 
-TYPED_TEST(Mat2x3Multiplication, Mat2x3TimesMat3x3_ReturnsAValid2x3Matrix)
+TYPED_TEST(Mat2x3Multiplication, Mat2x3TimesMat3_ReturnsAValid2x3Matrix)
 {
     const auto matrixProduct = this->_mat2x3 * this->_mat3;
     if constexpr (std::is_floating_point_v<TypeParam>)
