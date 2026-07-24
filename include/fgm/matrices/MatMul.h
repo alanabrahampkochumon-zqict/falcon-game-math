@@ -81,8 +81,6 @@
 // TODO: Add Groups
 // TODO: Add Implementation
 // Implementations
-//       2x3 * 3x4 => 2x4
-// 1x2 * 2x3       => 1x3
 
 //       2x4 * 4x1 => 2x1
 //       2x4 * 4x2 => 2x2
@@ -189,6 +187,27 @@ namespace fgm
     [[nodiscard]] constexpr PromotedMat2x4<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x4<U>& rhs) noexcept;
 
 
+
+    /**
+     * @brief Multiply a 2D row vector with a 2x3 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedVec3<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] vec The row vector to multiply.
+     * @param[in] mat The matrix to multiply with.
+     *
+     * @return A new 3D row vector.
+     */
+    // TODO: FIX Op bug
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const Vec2<T>& vec, const Mat2x3<U>& mat) noexcept;
+
+    // const auto mul = operator*(Vec2<int>{}, Mat2x3<int>{});
+    // 1x2 * 2x3       => 1x3
     // /**
     //  * @brief Compose this matrix with 3x2 @p rhs matrix to form a new 2x2 matrix.
     //  *        \f$

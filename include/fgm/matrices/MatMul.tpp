@@ -26,13 +26,12 @@ namespace fgm
     constexpr PromotedMat2<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
-        return Mat2{
-            // Row 1
-            R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
-            R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
-            // Row 2
-            R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
-            R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1))
+        return Mat2{ // Row 1
+                     R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
+                     R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
+                     // Row 2
+                     R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
+                     R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1))
         };
     }
 
@@ -42,15 +41,14 @@ namespace fgm
     constexpr PromotedMat2x3<T, U> operator*(const Mat2x3<T>& lhs, const Mat3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
-        return Mat2x3{
-            // Row 1
-            R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
-            R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
-            R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2) + lhs(0, 2) * rhs(2, 2)),
-            // Row 2
-            R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
-            R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1)),
-            R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(1, 2) * rhs(2, 2))
+        return Mat2x3{ // Row 1
+                       R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
+                       R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
+                       R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2) + lhs(0, 2) * rhs(2, 2)),
+                       // Row 2
+                       R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
+                       R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1)),
+                       R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(1, 2) * rhs(2, 2))
         };
     }
 
@@ -60,17 +58,29 @@ namespace fgm
     constexpr PromotedMat2x4<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
-        return Mat2x4{
-            // Row 1
-            R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
-            R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
-            R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2) + lhs(0, 2) * rhs(2, 2)),
-            R(lhs(0, 0) * rhs(0, 3) + lhs(0, 1) * rhs(1, 3) + lhs(0, 2) * rhs(2, 3)),
-            // Row 2
-            R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
-            R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1)),
-            R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(1, 2) * rhs(2, 2)),
-            R(lhs(1, 0) * rhs(0, 3) + lhs(1, 1) * rhs(1, 3) + lhs(1, 2) * rhs(2, 3))
+        return Mat2x4{ // Row 1
+                       R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
+                       R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
+                       R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2) + lhs(0, 2) * rhs(2, 2)),
+                       R(lhs(0, 0) * rhs(0, 3) + lhs(0, 1) * rhs(1, 3) + lhs(0, 2) * rhs(2, 3)),
+                       // Row 2
+                       R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
+                       R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1)),
+                       R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(1, 2) * rhs(2, 2)),
+                       R(lhs(1, 0) * rhs(0, 3) + lhs(1, 1) * rhs(1, 3) + lhs(1, 2) * rhs(2, 3))
+        };
+    }
+
+
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedVec3<T, U> operator*(const Vec2<T>& vec, const Mat2x3<U>& mat) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Vec3{
+            R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0)),
+            R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1)),
+            R(vec.x() * mat(0, 2) + vec.y() * mat(1, 2)),
         };
     }
 

@@ -31,8 +31,9 @@ protected:
 
     fgm::Mat3x4<T> _mat3x4;
 
-    fgm::Vec2<T> _expectedFPVec2x1, _expectedIntVec2x1;
-    fgm::Vec3<T> _vec3x1;
+
+    fgm::Vec2<T> _vec2x1, _expectedFPVec2x1, _expectedIntVec2x1;
+    fgm::Vec3<T> _vec3x1, _expectedFPVec3x1, _expectedIntVec3x1;
 
     void SetUp() override
     {
@@ -61,6 +62,7 @@ protected:
         _expectedIntMat2x3 = { fgm::Vec2{ T(54), T(126) }, fgm::Vec2{ T(60), T(141) }, fgm::Vec2{ T(66), T(156) } };
 
         _vec3x1 = fgm::Vec3{ T(5.12390421300000032), T(6.12390421300000032), T(7.12390421300000032) };
+        _vec2x1 = fgm::Vec2{ T(1.23412341000000003), T(2.23412341000000003) };
 
         _mat3x2 = { fgm::Vec3{ T(5.12390421300000032), T(7.12390421300000032), T(9.12390421299999943) },
                     fgm::Vec3{ T(6.12390421300000032), T(8.12390421299999943), T(10.12390421299999943) } };
@@ -72,6 +74,9 @@ protected:
 
         _expectedFPVec2x1  = fgm::Vec2{ T(44.65805374209299572), T(99.77319165909298704) };
         _expectedIntVec2x1 = fgm::Vec2{ T(38), T(92) };
+
+        _expectedFPVec3x1  = fgm::Vec3{ T(11.28719184981074797), T(14.75543866981074714), T(18.22368548981074809) };
+        _expectedIntVec3x1 = fgm::Vec3{ T(9), T(12), T(15) };
     }
 };
 /** @brief Test fixture for @ref fgm::Mat2x3 multiplication, parameterized by @ref SupportedArithmeticTypes. */
@@ -87,53 +92,43 @@ TYPED_TEST_SUITE(Mat2x3Multiplication, SupportedArithmeticTypes);
 /** @brief Verify that matrix multiplication operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Mat2x3 MAT2x3(1, 2, 3, 4, 5, 6);
+    constexpr fgm::Mat2x3 MAT2X3(1, 2, 3, 4, 5, 6);
     constexpr fgm::Vec3 VEC3(5, 6, 7);
-    constexpr fgm::Mat3x2 MAT3x2(5, 6, 7, 8, 9, 10);
-    constexpr fgm::Mat3 MAT3x3(5, 6, 7, 8, 9, 10, 11, 12, 13);
-    constexpr fgm::Mat3x4 MAT3x4(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+    constexpr fgm::Mat3x2 MAT3X2(5, 6, 7, 8, 9, 10);
+    constexpr fgm::Mat3 MAT3X3(5, 6, 7, 8, 9, 10, 11, 12, 13);
+    constexpr fgm::Mat3x4 MAT3X4(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+    constexpr fgm::Vec2 VEC2(1, 2);
 
 
     // 2x3 * 3x1 => 2x1
-    constexpr auto EXP_VEC2 = MAT2x3 * VEC3;
+    constexpr auto EXP_VEC2 = MAT2X3 * VEC3;
     static_assert(EXP_VEC2.x() == 38);
     static_assert(EXP_VEC2.y() == 92);
 
     // 2x3 * 3x2 => 2x2
-    constexpr auto EXP_MAT2 = MAT2x3 * MAT3x2;
+    constexpr auto EXP_MAT2 = MAT2X3 * MAT3X2;
     static_assert(EXP_MAT2[0] == fgm::Vec2{ 46, 109 });
     static_assert(EXP_MAT2[1] == fgm::Vec2{ 52, 124 });
 
 
     // 2x3 * 3x3 => 2x3
-    constexpr auto EXP_MAT2x3 = MAT2x3 * MAT3x3;
-    static_assert(EXP_MAT2x3[0] == fgm::Vec2{ 54, 126 });
-    static_assert(EXP_MAT2x3[1] == fgm::Vec2{ 60, 141 });
-    static_assert(EXP_MAT2x3[2] == fgm::Vec2{ 66, 156 });
+    constexpr auto EXP_MAT_2X3 = MAT2X3 * MAT3X3;
+    static_assert(EXP_MAT_2X3[0] == fgm::Vec2{ 54, 126 });
+    static_assert(EXP_MAT_2X3[1] == fgm::Vec2{ 60, 141 });
+    static_assert(EXP_MAT_2X3[2] == fgm::Vec2{ 66, 156 });
 
-    constexpr auto EXP_MAT2x4 = MAT2x3 * MAT3x4;
-    static_assert(EXP_MAT2x4[0] == fgm::Vec2{ 62, 143 });
-    static_assert(EXP_MAT2x4[1] == fgm::Vec2{ 68, 158 });
-    static_assert(EXP_MAT2x4[2] == fgm::Vec2{ 74, 173 });
-    static_assert(EXP_MAT2x4[3] == fgm::Vec2{ 80, 188 });
+    // 2x4 * 2x3 => 3x4
+    constexpr auto EXP_MAT_2X4 = MAT2X3 * MAT3X4;
+    static_assert(EXP_MAT_2X4[0] == fgm::Vec2{ 62, 143 });
+    static_assert(EXP_MAT_2X4[1] == fgm::Vec2{ 68, 158 });
+    static_assert(EXP_MAT_2X4[2] == fgm::Vec2{ 74, 173 });
+    static_assert(EXP_MAT_2X4[3] == fgm::Vec2{ 80, 188 });
 
-
-    // Verify matrix * vector multiplication
-    // constexpr fgm::Vec2 COL_VECTOR_PRODUCT = MAT1 * VEC;
-    // static_assert(COL_VECTOR_PRODUCT[0] == 5);
-    // static_assert(COL_VECTOR_PRODUCT[1] == 11);
-    //
-    // // Verify vector * matrix multiplication
-    // constexpr fgm::Vec2 ROW_VEC_PRODUCT = VEC * MAT1;
-    // static_assert(ROW_VEC_PRODUCT[0] == 7);
-    // static_assert(ROW_VEC_PRODUCT[1] == 10);
-    //
-    // // Verify matrix * matrix multiplication
-    // constexpr fgm::Mat2x3 MAT_PRODUCT = MAT1 * MAT2;
-    // static_assert(MAT_PRODUCT(0, 0) == 19);
-    // static_assert(MAT_PRODUCT(0, 1) == 22);
-    // static_assert(MAT_PRODUCT(1, 0) == 43);
-    // static_assert(MAT_PRODUCT(1, 1) == 50);
+    // 1x2T * 2x3 => 1x3T(Vector)
+    constexpr auto EXP_VEC3 = VEC2 * MAT2X3;
+    static_assert(EXP_VEC3.x() == 9);
+    static_assert(EXP_VEC3.y() == 12);
+    static_assert(EXP_VEC3.z() == 15);
 } // namespace
 
 
@@ -214,6 +209,22 @@ TYPED_TEST(Mat2x3Multiplication, TimesMat3x4_ReturnsA2x4Matrix)
     else
     {
         EXPECT_MAT_EQ(this->_expectedIntMat2x4, matrixProduct);
+    }
+}
+
+/**
+ * @brief Verify that the multiplication between a 2D row vector and Mat2x3 returns a 3D row vector.
+ */
+TYPED_TEST(Mat2x3Multiplication, 2DVectorTime2x3Matrix_ReturnsA3DVector)
+{
+    const auto expectedVector = this->_vec2x1 * this->_mat;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_VEC_EQ(this->_expectedFPVec3x1, expectedVector);
+    }
+    else
+    {
+        EXPECT_VEC_EQ(this->_expectedIntVec3x1, expectedVector);
     }
 }
 
