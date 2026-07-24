@@ -1574,12 +1574,12 @@ namespace fgm
          *       in favor of floating point types due loss of precision from rounding, often resulting in a zero
          *       matrix.
          *
-         * @param[in] scale The scale factor.
-         * @param[in] vec   The vector along which we need to scale.
+         * @param[in] scale       The scale factor.
+         * @param[in] direction   The direction to scale along. Must be a unit vector.
          *
          * @return A new @ref Mat4 representing the scale matrix along a given vec.
          */
-        [[nodiscard]] static constexpr Mat4 makeScale(T scale, const Vec3<T>& vec) noexcept
+        [[nodiscard]] static constexpr Mat4 makeScale(T scale, const Vec3<T>& direction) noexcept
             requires SignedStrictArithmetic<T>;
 
 

@@ -1118,30 +1118,19 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat4<T> Mat4<T>::makeScale(T scale, const Vec3<T>& vec) noexcept
+    constexpr Mat4<T> Mat4<T>::makeScale(T scale, const Vec3<T>& direction) noexcept
         requires SignedStrictArithmetic<T>
     {
-        T xy = vec.x() * vec.y();
-        T yz = vec.y() * vec.z();
-        T zx = vec.z() * vec.x();
-
         T sInv = scale - 1;
-        return Mat4{ sInv * vec.x() * vec.x() + 1,
-                     sInv * xy,
-                     sInv * zx,
-                     sInv * xy,
-                     T(0),
-                     sInv * vec.y() * vec.y() + 1,
-                     sInv * yz,
-                     sInv * zx,
-                     sInv * yz,
-                     T(0),
-                     sInv * vec.z() * vec.z() + 1,
-                     T(0),
-                     T(0),
-                     T(0),
-                     T(0),
-                     T(1) };
+
+        T x  = sInv * direction.x() * direction.x() + 1;
+        T y  = sInv * direction.y() * direction.y() + 1;
+        T z  = sInv * direction.z() * direction.z() + 1;
+        T xy = sInv * direction.x() * direction.y();
+        T yz = sInv * direction.y() * direction.z();
+        T zx = sInv * direction.z() * direction.x();
+
+        return Mat4{ x, xy, zx, xy, T(0), y, yz, zx, yz, T(0), z, T(0), T(0), T(0), T(0), T(1) };
     }
 
     template <Arithmetic T>

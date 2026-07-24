@@ -1304,6 +1304,20 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
+        /**
+         * @brief Construct a 3D scale matrix for scaling along @p direction.
+         *
+         * @note While it is possible to create a scale matrix of any **signed type**, it is strongly discouraged
+         *       in favor of floating point types due loss of precision from rounding, often resulting in a zero
+         *       matrix.
+         *
+         * @param[in] scale       The scale factor.
+         * @param[in] direction   The direction to scale along. Must be a unit vector.
+         *
+         * @return A new @ref Mat3 representing the scale matrix along a given direction.
+         */
+        [[nodiscard]] static constexpr Mat3 makeScale(T scale, const Vec3<T>& direction) noexcept
+            requires SignedStrictArithmetic<T>;
 
 
         /**
@@ -1341,6 +1355,7 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Mat3 makeReflection(const Vec3<T>& normal) noexcept
             requires SignedStrictArithmetic<T>;
+
 
         /**
          * @brief Construct a 3D involution matrix across any plane through the origin with @p normal.

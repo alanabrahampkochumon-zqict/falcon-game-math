@@ -874,6 +874,24 @@ namespace fgm
     { return Mat3{ scaleX, T(0), T(0), T(0), scaleY, T(0), T(0), T(0), scaleZ }; }
 
 
+    template <Arithmetic T>
+    constexpr Mat3<T> Mat3<T>::makeScale(T scale, const Vec3<T>& direction) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+
+        T sInv = scale - 1;
+
+        T x  = sInv * direction.x() * direction.x() + 1;
+        T y  = sInv * direction.y() * direction.y() + 1;
+        T z  = sInv * direction.z() * direction.z() + 1;
+        T xy = sInv * direction.x() * direction.y();
+        T yz = sInv * direction.y() * direction.z();
+        T zx = sInv * direction.z() * direction.x();
+
+        return Mat3{ x, xy, zx, xy, y, yz, zx, yz, z };
+    }
+
+
 
     template <Arithmetic T>
     template <reflect::RT On>
