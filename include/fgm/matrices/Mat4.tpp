@@ -1162,25 +1162,15 @@ namespace fgm
     constexpr Mat4<T> Mat4<T>::makeReflection(const Vec3<T>& normal) noexcept
         requires SignedStrictArithmetic<T>
     {
-        T ax = normal.x();
-        T ay = normal.y();
-        T az = normal.z();
-        return Mat4{ T(1 - 2 * ax * ax),
-                     T(-2 * ax * ay),
-                     T(-2 * ax * az),
-                     T(0),
-                     T(-2 * ay * ax),
-                     T(1 - 2 * ay * ay),
-                     T(-2 * ay * az),
-                     T(0),
-                     T(-2 * az * ax),
-                     T(-2 * az * ay),
-                     T(1 - 2 * az * az),
-                     T(0),
-                     T(0),
-                     T(0),
-                     T(0),
-                     T(1) };
+
+        T x  = static_cast<T>(1 - 2 * normal.x() * normal.x());
+        T y  = static_cast<T>(1 - 2 * normal.y() * normal.y());
+        T z  = static_cast<T>(1 - 2 * normal.z() * normal.z());
+        T xy = static_cast<T>(-2 * normal.x() * normal.y());
+        T yz = static_cast<T>(-2 * normal.y() * normal.z());
+        T zx = static_cast<T>(-2 * normal.z() * normal.x());
+        return Mat4{ T(x),  T(xy), T(zx), T(0), T(xy), T(y), T(yz), T(0),
+                     T(zx), T(yz), T(z),  T(0), T(0),  T(0), T(0),  T(1) };
     }
 
 

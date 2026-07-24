@@ -12,276 +12,174 @@
 #include "Mat4TestSetup.h"
 
 /**
- * @addtogroup T_FGM_Mat4x3_Transforms
+ * @addtogroup T_FGM_Mat4x4_Transforms
  * @{
  */
 
 
-
-template <typename T>
-class Mat4Reflection: public ::testing::Test
-{
-protected:
-    fgm::Vec3<T> _xAxis, _yAxis, _zAxis;
-    fgm::Mat4<T> _expectedReflectionX, _expectedReflectionY, _expectedReflectionZ, _expectedReflectionXY,
-        _expectedReflectionYZ, _expectedReflectionZX, _expectedReflectionOrigin;
-
-    void SetUp() override
-    {
-        _xAxis = fgm::Vec3{ T(1), T(0), T(0) };
-        _yAxis = fgm::Vec3{ T(0), T(1), T(0) };
-        _zAxis = fgm::Vec3{ T(0), T(0), T(1) };
-
-        _expectedReflectionX = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(-1), T(0), T(0) },
-                                 fgm::Vec4{ T(0), T(0), T(-1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
-
-        _expectedReflectionY = { fgm::Vec4{ T(-1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
-                                 fgm::Vec4{ T(0), T(0), T(-1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
-
-        _expectedReflectionZ = { fgm::Vec4{ T(-1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(-1), T(0), T(0) },
-                                 fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
-
-        _expectedReflectionXY = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
-                                  fgm::Vec4{ T(0), T(0), T(-1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
-
-        _expectedReflectionYZ = { fgm::Vec4{ T(-1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
-                                  fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
-
-        _expectedReflectionZX = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(-1), T(0), T(0) },
-                                  fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
-
-        _expectedReflectionOrigin = { fgm::Vec4{ T(-1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(-1), T(0), T(0) },
-                                      fgm::Vec4{ T(0), T(0), T(-1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
-    }
-};
-/**
- * @brief Test fixture for @ref fgm::Mat4 reflection along coordinate axis, planes, and the origin
- *        parameterized @ref SupportedSignedArithmeticTypes
- */
-TYPED_TEST_SUITE(Mat4Reflection, SupportedSignedArithmeticTypes);
-
-
-
-template <typename T>
-class Mat4ReflectionFloat: public ::testing::Test
-{
-protected:
-    fgm::Vec3<T> _norm;
-    fgm::Mat4<T> _expectedNormReflect;
-
-    void SetUp() override
-    {
-        _norm = fgm::Vec3{ T(0.3244428422615251), T(0.48666426339228763), T(0.8111071056538127) };
-
-        _expectedNormReflect = {
-            fgm::Vec4{ T(0.7894736842105263), T(-0.31578947368421056), T(-0.5263157894736843), T(0) },
-            fgm::Vec4{ T(-0.31578947368421056), T(0.5263157894736842), T(-0.7894736842105263), T(0) },
-            fgm::Vec4{ T(-0.5263157894736843), T(-0.7894736842105263), T(-0.3157894736842106), T(0) },
-            fgm::Vec4{ T(0), T(0), T(0), T(1) }
-        };
-    }
-};
-/**
- * @brief Test fixture for @ref fgm::Mat4 reflection across a plane through origin
- *        parameterized @ref SupportedFloatingPointTypes
- */
-TYPED_TEST_SUITE(Mat4ReflectionFloat, SupportedFloatingPointTypes);
-
-
-/** @brief Verify that reflection transform factory is available at compile time.  */
 namespace
 {
-    // Reflection across axis
-    constexpr auto REFLECTION_MAT_X = fgm::Mat4<int>::makeReflection<fgm::reflect::X>();
-    static_assert(REFLECTION_MAT_X(0, 0) == 1);
-    static_assert(REFLECTION_MAT_X(0, 1) == 0);
-    static_assert(REFLECTION_MAT_X(0, 2) == 0);
-    static_assert(REFLECTION_MAT_X(0, 3) == 0);
-    static_assert(REFLECTION_MAT_X(1, 0) == 0);
-    static_assert(REFLECTION_MAT_X(1, 1) == -1);
-    static_assert(REFLECTION_MAT_X(1, 2) == 0);
-    static_assert(REFLECTION_MAT_X(1, 3) == 0);
-    static_assert(REFLECTION_MAT_X(2, 0) == 0);
-    static_assert(REFLECTION_MAT_X(2, 1) == 0);
-    static_assert(REFLECTION_MAT_X(2, 2) == -1);
-    static_assert(REFLECTION_MAT_X(2, 3) == 0);
-    static_assert(REFLECTION_MAT_X(3, 0) == 0);
-    static_assert(REFLECTION_MAT_X(3, 1) == 0);
-    static_assert(REFLECTION_MAT_X(3, 2) == 0);
-    static_assert(REFLECTION_MAT_X(3, 3) == 1);
+    /**************************************
+     *                                    *
+     *              SETUP                 *
+     *                                    *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat4 reflection factory (Floating Point).
+     *
+     * @tparam T The floating point scalar type (e.g., float, double) used for the matrix and vectors.
+     */
+    template <typename T>
+    class Mat4ReflectionFactoryInt: public ::testing::Test
+    {
+    protected:
+        fgm::Vec3<T> _xAxis, _yAxis, _zAxis;
+        fgm::Mat4<T> _expectedReflectionX, _expectedReflectionY, _expectedReflectionZ, _expectedReflectionXY,
+            _expectedReflectionYZ, _expectedReflectionZX, _expectedReflectionOrigin;
+
+        void SetUp() override
+        {
+            _xAxis = fgm::Vec3{ T(1), T(0), T(0) };
+            _yAxis = fgm::Vec3{ T(0), T(1), T(0) };
+            _zAxis = fgm::Vec3{ T(0), T(0), T(1) };
+
+            _expectedReflectionX = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(-1), T(0), T(0) },
+                                     fgm::Vec4{ T(0), T(0), T(-1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
+
+            _expectedReflectionY = { fgm::Vec4{ T(-1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
+                                     fgm::Vec4{ T(0), T(0), T(-1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
+
+            _expectedReflectionZ = { fgm::Vec4{ T(-1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(-1), T(0), T(0) },
+                                     fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
+
+            _expectedReflectionXY = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
+                                      fgm::Vec4{ T(0), T(0), T(-1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
+
+            _expectedReflectionYZ = { fgm::Vec4{ T(-1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
+                                      fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
+
+            _expectedReflectionZX = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(-1), T(0), T(0) },
+                                      fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
+
+            _expectedReflectionOrigin = { fgm::Vec4{ T(-1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(-1), T(0), T(0) },
+                                          fgm::Vec4{ T(0), T(0), T(-1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
+        }
+    };
+    TYPED_TEST_SUITE(Mat4ReflectionFactoryInt, SupportedSignedArithmeticTypes);
 
 
-    constexpr auto REFLECTION_MAT_Y = fgm::Mat4<int>::makeReflection<fgm::reflect::Y>();
-    static_assert(REFLECTION_MAT_Y(0, 0) == -1);
-    static_assert(REFLECTION_MAT_Y(0, 1) == 0);
-    static_assert(REFLECTION_MAT_Y(0, 2) == 0);
-    static_assert(REFLECTION_MAT_Y(0, 3) == 0);
-    static_assert(REFLECTION_MAT_Y(1, 0) == 0);
-    static_assert(REFLECTION_MAT_Y(1, 1) == 1);
-    static_assert(REFLECTION_MAT_Y(1, 2) == 0);
-    static_assert(REFLECTION_MAT_Y(1, 3) == 0);
-    static_assert(REFLECTION_MAT_Y(2, 0) == 0);
-    static_assert(REFLECTION_MAT_Y(2, 1) == 0);
-    static_assert(REFLECTION_MAT_Y(2, 2) == -1);
-    static_assert(REFLECTION_MAT_Y(2, 3) == 0);
-    static_assert(REFLECTION_MAT_Y(3, 0) == 0);
-    static_assert(REFLECTION_MAT_Y(3, 1) == 0);
-    static_assert(REFLECTION_MAT_Y(3, 2) == 0);
-    static_assert(REFLECTION_MAT_Y(3, 3) == 1);
+    /**
+     * @brief Test fixture for @ref fgm::Mat4 reflection factory (Floating Point).
+     *
+     * @tparam T The signed scalar type (e.g., int32_t, int16_t) used for the matrix and vectors.
+     */
+    template <typename T>
+    class Mat4ReflectionFactoryFactoryFP: public ::testing::Test
+    {
+    protected:
+        fgm::Vec3<T> _norm;
+        fgm::Mat4<T> _expectedNormReflect;
+
+        void SetUp() override
+        {
+            _norm = fgm::Vec3{ T(0.3244428422615251), T(0.48666426339228763), T(0.8111071056538127) };
+
+            _expectedNormReflect = {
+                fgm::Vec4{ T(0.7894736842105263), T(-0.31578947368421056), T(-0.5263157894736843), T(0) },
+                fgm::Vec4{ T(-0.31578947368421056), T(0.5263157894736842), T(-0.7894736842105263), T(0) },
+                fgm::Vec4{ T(-0.5263157894736843), T(-0.7894736842105263), T(-0.3157894736842106), T(0) },
+                fgm::Vec4{ T(0), T(0), T(0), T(1) }
+            };
+        }
+    };
+    TYPED_TEST_SUITE(Mat4ReflectionFactoryFactoryFP, SupportedFloatingPointTypes);
 
 
-    constexpr auto REFLECTION_MAT_Z = fgm::Mat4<int>::makeReflection<fgm::reflect::Z>();
-    static_assert(REFLECTION_MAT_Z(0, 0) == -1);
-    static_assert(REFLECTION_MAT_Z(0, 1) == 0);
-    static_assert(REFLECTION_MAT_Z(0, 2) == 0);
-    static_assert(REFLECTION_MAT_Z(0, 3) == 0);
-    static_assert(REFLECTION_MAT_Z(1, 0) == 0);
-    static_assert(REFLECTION_MAT_Z(1, 1) == -1);
-    static_assert(REFLECTION_MAT_Z(1, 2) == 0);
-    static_assert(REFLECTION_MAT_Z(1, 3) == 0);
-    static_assert(REFLECTION_MAT_Z(2, 0) == 0);
-    static_assert(REFLECTION_MAT_Z(2, 1) == 0);
-    static_assert(REFLECTION_MAT_Z(2, 2) == 1);
-    static_assert(REFLECTION_MAT_Z(2, 3) == 0);
-    static_assert(REFLECTION_MAT_Z(3, 0) == 0);
-    static_assert(REFLECTION_MAT_Z(3, 1) == 0);
-    static_assert(REFLECTION_MAT_Z(3, 2) == 0);
-    static_assert(REFLECTION_MAT_Z(3, 3) == 1);
+
+    namespace static_tests
+    {
+        /// @test Verify that reflection factory returns correct reflection along x-axis at compile time.
+        constexpr auto REFLECTION_MAT_ACROSS_X = fgm::Mat4<int>::makeReflection<fgm::reflect::X>();
+        static_assert(REFLECTION_MAT_ACROSS_X[0] == fgm::Vec4(1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_X[1] == fgm::Vec4(0, -1, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_X[2] == fgm::Vec4(0, 0, -1, 0));
+        static_assert(REFLECTION_MAT_ACROSS_X[3] == fgm::Vec4(0, 0, 0, 1));
 
 
-    // Reflection across plane
-    constexpr auto REFLECTION_MAT_XY = fgm::Mat4<int>::makeReflection<fgm::reflect::XY>();
-    static_assert(REFLECTION_MAT_XY(0, 0) == 1);
-    static_assert(REFLECTION_MAT_XY(0, 1) == 0);
-    static_assert(REFLECTION_MAT_XY(0, 2) == 0);
-    static_assert(REFLECTION_MAT_XY(0, 3) == 0);
-    static_assert(REFLECTION_MAT_XY(1, 0) == 0);
-    static_assert(REFLECTION_MAT_XY(1, 1) == 1);
-    static_assert(REFLECTION_MAT_XY(1, 2) == 0);
-    static_assert(REFLECTION_MAT_XY(1, 3) == 0);
-    static_assert(REFLECTION_MAT_XY(2, 0) == 0);
-    static_assert(REFLECTION_MAT_XY(2, 1) == 0);
-    static_assert(REFLECTION_MAT_XY(2, 2) == -1);
-    static_assert(REFLECTION_MAT_XY(2, 3) == 0);
-    static_assert(REFLECTION_MAT_XY(3, 0) == 0);
-    static_assert(REFLECTION_MAT_XY(3, 1) == 0);
-    static_assert(REFLECTION_MAT_XY(3, 2) == 0);
-    static_assert(REFLECTION_MAT_XY(3, 3) == 1);
+        /// @test Verify that reflection factory returns correct reflection along y-axis at compile time.
+        constexpr auto REFLECTION_MAT_ACROSS_Y = fgm::Mat4<int>::makeReflection<fgm::reflect::Y>();
+        static_assert(REFLECTION_MAT_ACROSS_Y[0] == fgm::Vec4(-1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_Y[1] == fgm::Vec4(0, 1, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_Y[2] == fgm::Vec4(0, 0, -1, 0));
+        static_assert(REFLECTION_MAT_ACROSS_Y[3] == fgm::Vec4(0, 0, 0, 1));
 
 
-    constexpr auto REFLECTION_MAT_YZ = fgm::Mat4<int>::makeReflection<fgm::reflect::YZ>();
-    static_assert(REFLECTION_MAT_YZ(0, 0) == -1);
-    static_assert(REFLECTION_MAT_YZ(0, 1) == 0);
-    static_assert(REFLECTION_MAT_YZ(0, 2) == 0);
-    static_assert(REFLECTION_MAT_YZ(0, 3) == 0);
-    static_assert(REFLECTION_MAT_YZ(1, 0) == 0);
-    static_assert(REFLECTION_MAT_YZ(1, 1) == 1);
-    static_assert(REFLECTION_MAT_YZ(1, 2) == 0);
-    static_assert(REFLECTION_MAT_YZ(1, 3) == 0);
-    static_assert(REFLECTION_MAT_YZ(2, 0) == 0);
-    static_assert(REFLECTION_MAT_YZ(2, 1) == 0);
-    static_assert(REFLECTION_MAT_YZ(2, 2) == 1);
-    static_assert(REFLECTION_MAT_YZ(2, 3) == 0);
-    static_assert(REFLECTION_MAT_YZ(3, 0) == 0);
-    static_assert(REFLECTION_MAT_YZ(3, 1) == 0);
-    static_assert(REFLECTION_MAT_YZ(3, 2) == 0);
-    static_assert(REFLECTION_MAT_YZ(3, 3) == 1);
+        /// @test Verify that reflection factory returns correct reflection along y-axis at compile time.
+        constexpr auto REFLECTION_MAT_ACROSS_Z = fgm::Mat4<int>::makeReflection<fgm::reflect::Z>();
+        static_assert(REFLECTION_MAT_ACROSS_Z[0] == fgm::Vec4(-1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_Z[1] == fgm::Vec4(0, -1, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_Z[2] == fgm::Vec4(0, 0, 1, 0));
+        static_assert(REFLECTION_MAT_ACROSS_Z[3] == fgm::Vec4(0, 0, 0, 1));
+
+        /// @test Verify that reflection factory returns correct reflection along xy-plane at compile time.
+        constexpr auto REFLECTION_MAT_ACROSS_XY = fgm::Mat4<int>::makeReflection<fgm::reflect::XY>();
+        static_assert(REFLECTION_MAT_ACROSS_XY[0] == fgm::Vec4(1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_XY[1] == fgm::Vec4(0, 1, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_XY[2] == fgm::Vec4(0, 0, -1, 0));
+        static_assert(REFLECTION_MAT_ACROSS_XY[3] == fgm::Vec4(0, 0, 0, 1));
+
+        /// @test Verify that reflection factory returns correct reflection along yz-plane at compile time.
+        constexpr auto REFLECTION_MAT_ACROSS_YZ = fgm::Mat4<int>::makeReflection<fgm::reflect::YZ>();
+        static_assert(REFLECTION_MAT_ACROSS_YZ[0] == fgm::Vec4(-1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_YZ[1] == fgm::Vec4(0, 1, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_YZ[2] == fgm::Vec4(0, 0, 1, 0));
+        static_assert(REFLECTION_MAT_ACROSS_YZ[3] == fgm::Vec4(0, 0, 0, 1));
+
+        /// @test Verify that reflection factory returns correct reflection along xz-plane at compile time.
+        constexpr auto REFLECTION_MAT_ACROSS_ZX = fgm::Mat4<int>::makeReflection<fgm::reflect::ZX>();
+        static_assert(REFLECTION_MAT_ACROSS_ZX[0] == fgm::Vec4(1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_ZX[1] == fgm::Vec4(0, -1, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_ZX[2] == fgm::Vec4(0, 0, 1, 0));
+        static_assert(REFLECTION_MAT_ACROSS_ZX[3] == fgm::Vec4(0, 0, 0, 1));
+
+        /// @test Verify that reflection factory returns correct reflection along origin at compile time.
+        constexpr auto REFLECTION_MAT_ACROSS_ORIGIN = fgm::Mat4<int>::makeReflection<fgm::reflect::ORIGIN>();
+        static_assert(REFLECTION_MAT_ACROSS_ORIGIN[0] == fgm::Vec4(-1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_ORIGIN[1] == fgm::Vec4(0, -1, 0, 0));
+        static_assert(REFLECTION_MAT_ACROSS_ORIGIN[2] == fgm::Vec4(0, 0, -1, 0));
+        static_assert(REFLECTION_MAT_ACROSS_ORIGIN[3] == fgm::Vec4(0, 0, 0, 1));
 
 
-    constexpr auto REFLECTION_MAT_ZX = fgm::Mat4<int>::makeReflection<fgm::reflect::ZX>();
-    static_assert(REFLECTION_MAT_ZX(0, 0) == 1);
-    static_assert(REFLECTION_MAT_ZX(0, 1) == 0);
-    static_assert(REFLECTION_MAT_ZX(0, 2) == 0);
-    static_assert(REFLECTION_MAT_ZX(0, 3) == 0);
-    static_assert(REFLECTION_MAT_ZX(1, 0) == 0);
-    static_assert(REFLECTION_MAT_ZX(1, 1) == -1);
-    static_assert(REFLECTION_MAT_ZX(1, 2) == 0);
-    static_assert(REFLECTION_MAT_ZX(1, 3) == 0);
-    static_assert(REFLECTION_MAT_ZX(2, 0) == 0);
-    static_assert(REFLECTION_MAT_ZX(2, 1) == 0);
-    static_assert(REFLECTION_MAT_ZX(2, 2) == 1);
-    static_assert(REFLECTION_MAT_ZX(2, 3) == 0);
-    static_assert(REFLECTION_MAT_ZX(3, 0) == 0);
-    static_assert(REFLECTION_MAT_ZX(3, 1) == 0);
-    static_assert(REFLECTION_MAT_ZX(3, 2) == 0);
-    static_assert(REFLECTION_MAT_ZX(3, 3) == 1);
+        /// @test Verify that reflection factory for any plane returns correct reflection with x-axis normal(yz-plane)
+        ///       at compile time.
+        constexpr auto X_AXIS                = fgm::Vec3(1, 0, 0);
+        constexpr auto REFLECTION_MAT_NORM_X = fgm::Mat4<int>::makeReflection(X_AXIS);
+        static_assert(REFLECTION_MAT_NORM_X[0] == fgm::Vec4(-1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_NORM_X[1] == fgm::Vec4(0, 1, 0, 0));
+        static_assert(REFLECTION_MAT_NORM_X[2] == fgm::Vec4(0, 0, 1, 0));
+        static_assert(REFLECTION_MAT_NORM_X[3] == fgm::Vec4(0, 0, 0, 1));
 
-    // Reflect across origin
-    constexpr auto REFLECTION_MAT_ORIGIN = fgm::Mat4<int>::makeReflection<fgm::reflect::ORIGIN>();
-    static_assert(REFLECTION_MAT_ORIGIN(0, 0) == -1);
-    static_assert(REFLECTION_MAT_ORIGIN(0, 1) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(0, 2) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(0, 3) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(1, 0) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(1, 1) == -1);
-    static_assert(REFLECTION_MAT_ORIGIN(1, 2) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(1, 3) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(2, 0) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(2, 1) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(2, 2) == -1);
-    static_assert(REFLECTION_MAT_ORIGIN(2, 3) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(3, 0) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(3, 1) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(3, 2) == 0);
-    static_assert(REFLECTION_MAT_ORIGIN(3, 3) == 1);
+        /// @test Verify that reflection factory for any plane returns correct reflection with y-axis normal(zx-plane)
+        ///       at compile time.
+        constexpr auto Y_AXIS                = fgm::Vec3(0, 1, 0);
+        constexpr auto REFLECTION_MAT_NORM_Y = fgm::Mat4<int>::makeReflection(Y_AXIS);
+        static_assert(REFLECTION_MAT_NORM_Y[0] == fgm::Vec4(1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_NORM_Y[1] == fgm::Vec4(0, -1, 0, 0));
+        static_assert(REFLECTION_MAT_NORM_Y[2] == fgm::Vec4(0, 0, 1, 0));
+        static_assert(REFLECTION_MAT_NORM_Y[3] == fgm::Vec4(0, 0, 0, 1));
 
+        /// @test Verify that reflection factory for any plane returns correct reflection with z-axis normal(xy-plane)
+        ///       at compile time.
+        constexpr auto Z_AXIS                = fgm::Vec3(0, 0, 1);
+        constexpr auto REFLECTION_MAT_NORM_Z = fgm::Mat4<int>::makeReflection(Z_AXIS);
+        static_assert(REFLECTION_MAT_NORM_Z[0] == fgm::Vec4(1, 0, 0, 0));
+        static_assert(REFLECTION_MAT_NORM_Z[1] == fgm::Vec4(0, 1, 0, 0));
+        static_assert(REFLECTION_MAT_NORM_Z[2] == fgm::Vec4(0, 0, -1, 0));
+        static_assert(REFLECTION_MAT_NORM_Z[3] == fgm::Vec4(0, 0, 0, 1));
 
-    // Reflection along axis(normal)
-    constexpr auto REFLECTION_MAT_X_NORM = fgm::Mat4<int>::makeReflection(fgm::Vec3(1, 0, 0));
-    static_assert(REFLECTION_MAT_X_NORM(0, 0) == -1);
-    static_assert(REFLECTION_MAT_X_NORM(0, 1) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(0, 2) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(0, 3) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(1, 0) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(1, 1) == 1);
-    static_assert(REFLECTION_MAT_X_NORM(1, 2) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(1, 3) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(2, 0) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(2, 1) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(2, 2) == 1);
-    static_assert(REFLECTION_MAT_X_NORM(2, 3) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(3, 0) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(3, 1) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(3, 2) == 0);
-    static_assert(REFLECTION_MAT_X_NORM(3, 3) == 1);
+    } // namespace static_tests
 
-
-    constexpr auto REFLECTION_MAT_Y_NORM = fgm::Mat4<int>::makeReflection(fgm::Vec3(0, 1, 0));
-    static_assert(REFLECTION_MAT_Y_NORM(0, 0) == 1);
-    static_assert(REFLECTION_MAT_Y_NORM(0, 1) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(0, 2) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(0, 3) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(1, 0) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(1, 1) == -1);
-    static_assert(REFLECTION_MAT_Y_NORM(1, 2) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(1, 3) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(2, 0) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(2, 1) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(2, 2) == 1);
-    static_assert(REFLECTION_MAT_Y_NORM(2, 3) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(3, 0) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(3, 1) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(3, 2) == 0);
-    static_assert(REFLECTION_MAT_Y_NORM(3, 3) == 1);
-
-
-    constexpr auto REFLECTION_MAT_Z_NORM = fgm::Mat4<int>::makeReflection(fgm::Vec3(0, 0, 1));
-    static_assert(REFLECTION_MAT_Z_NORM(0, 0) == 1);
-    static_assert(REFLECTION_MAT_Z_NORM(0, 1) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(0, 2) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(0, 3) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(1, 0) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(1, 1) == 1);
-    static_assert(REFLECTION_MAT_Z_NORM(1, 2) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(1, 3) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(2, 0) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(2, 1) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(2, 2) == -1);
-    static_assert(REFLECTION_MAT_Z_NORM(2, 3) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(3, 0) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(3, 1) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(3, 2) == 0);
-    static_assert(REFLECTION_MAT_Z_NORM(3, 3) == 1);
 
 } // namespace
 
@@ -289,79 +187,56 @@ namespace
 
 /**************************************
  *                                    *
- *          REFLECTION TESTS          *
+ *          RUNTIME TESTS             *
  *                                    *
  **************************************/
 
-
-/** @brief Verify that reflection transformation factory for x-axis returns a matrix with negated y and z values. */
-TYPED_TEST(Mat4Reflection, X_ReturnsMatrixWithNegatedYZ)
+TYPED_TEST(Mat4ReflectionFactoryInt, XAxis_ReturnsMatrixWithNegatedYZ)
 { EXPECT_MAT_EQ(this->_expectedReflectionX, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::X>()); }
 
 
-/** @brief Verify that reflection transformation factory for y-axis returns a matrix with negated x and z values. */
-TYPED_TEST(Mat4Reflection, Y_ReturnsMatrixWithNegatedXZ)
+TYPED_TEST(Mat4ReflectionFactoryInt, YAxis_ReturnsMatrixWithNegatedXZ)
 { EXPECT_MAT_EQ(this->_expectedReflectionY, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::Y>()); }
 
 
-/** @brief Verify that reflection transformation factory for z-axis returns a matrix with negated y and z values. */
-TYPED_TEST(Mat4Reflection, Z_ReturnsMatrixWithNegatedXY)
+TYPED_TEST(Mat4ReflectionFactoryInt, ZAxis_ReturnsMatrixWithNegatedXY)
 { EXPECT_MAT_EQ(this->_expectedReflectionZ, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::Z>()); }
 
 
-/** @brief Verify that reflection transformation factory for xy-plane returns a matrix with negated z value. */
-TYPED_TEST(Mat4Reflection, XY_ReturnsMatrixWithNegatedZ)
+TYPED_TEST(Mat4ReflectionFactoryInt, XYPlane_ReturnsMatrixWithNegatedZ)
 { EXPECT_MAT_EQ(this->_expectedReflectionXY, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::XY>()); }
 
 
-/** @brief Verify that reflection transformation factory for yz-plane returns a matrix with negated x value. */
-TYPED_TEST(Mat4Reflection, YZ_ReturnsMatrixWithNegatedX)
+TYPED_TEST(Mat4ReflectionFactoryInt, YZPlane_ReturnsMatrixWithNegatedX)
 { EXPECT_MAT_EQ(this->_expectedReflectionYZ, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::YZ>()); }
 
 
-/** @brief Verify that reflection transformation factory for zx-plane returns a matrix with negated y value. */
-TYPED_TEST(Mat4Reflection, ZX_ReturnsMatrixWithNegatedY)
+TYPED_TEST(Mat4ReflectionFactoryInt, ZXPlane_ReturnsMatrixWithNegatedY)
 { EXPECT_MAT_EQ(this->_expectedReflectionZX, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::ZX>()); }
 
 
-/** @brief Verify that reflection transformation factory for origin returns a matrix with negated x, y and z values. */
-TYPED_TEST(Mat4Reflection, Origin_ReturnsMatrixWithNegatedXYZ)
+TYPED_TEST(Mat4ReflectionFactoryInt, Origin_ReturnsMatrixWithNegatedXYZ)
 {
     EXPECT_MAT_EQ(this->_expectedReflectionOrigin,
                   fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::ORIGIN>());
 }
 
 
-/**
- * @brief Verify that reflection transformation factory(makeReflection(normal)) along x-axis
- *        returns a reflection matrix across yz-plane.
- */
-TYPED_TEST(Mat4Reflection, PlaneNormalReflection_X_ReturnsYZReflectionMatrix)
+TYPED_TEST(Mat4ReflectionFactoryInt, PlaneNormalAlongXAxis_ReturnsYZReflectionMatrix)
 { EXPECT_MAT_EQ(this->_expectedReflectionYZ, fgm::Mat4<TypeParam>::makeReflection(this->_xAxis)); }
 
 
-/**
- * @brief Verify that reflection transformation factory(makeReflection(normal)) for y-axis
- *        returns a reflection matrix across zx-plane.
- */
-TYPED_TEST(Mat4Reflection, PlaneNormalReflection_Y_ReturnsZXReflectionMatrix)
+TYPED_TEST(Mat4ReflectionFactoryInt, PlaneNormalAlongYAxis_ReturnsZXReflectionMatrix)
 { EXPECT_MAT_EQ(this->_expectedReflectionZX, fgm::Mat4<TypeParam>::makeReflection(this->_yAxis)); }
 
 
-/**
- * @brief Verify that reflection transformation factory(makeReflection(normal)) for z-axis
- *        returns a reflection matrix across xy-plane.
- */
-TYPED_TEST(Mat4Reflection, PlaneNormalReflection_Z_ReturnsXYReflectionMatrix)
+TYPED_TEST(Mat4ReflectionFactoryInt, PlaneNormalAlongZAxis_ReturnsXYReflectionMatrix)
 { EXPECT_MAT_EQ(this->_expectedReflectionXY, fgm::Mat4<TypeParam>::makeReflection(this->_zAxis)); }
 
 
-
-/**
- * @brief Verify that reflection transformation factory(makeReflection(normal)) for a plane normal
- *        returns a reflection matrix.
- */
-TYPED_TEST(Mat4ReflectionFloat, ReturnsCorrectReflectionMatrix)
+TYPED_TEST(Mat4ReflectionFactoryFactoryFP,
+           AnyUnitPlaneNormal_ReturnsValidReflectionMatrixAcrossThePlanePerpendicularToTheNormal)
 { EXPECT_MAT_EQ(this->_expectedNormReflect, fgm::Mat4<TypeParam>::makeReflection(this->_norm)); }
+
 
 /** @} */
