@@ -191,6 +191,7 @@
              *   @defgroup T_FGM_Mat2x3_Addition Addition
              *   @defgroup T_FGM_Mat2x3_Subtraction Subtraction
              *   @defgroup T_FGM_Mat2x3_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat2x3_MatVec_Multiplication Matrix and Vector Multiplication
              *   @defgroup T_FGM_Mat2x3_Division Scalar Division
              *   @defgroup T_FGM_Mat2x3_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x3_Constant Matrix Constants
@@ -215,6 +216,7 @@
              *   @defgroup T_FGM_Mat2x4_Addition Addition
              *   @defgroup T_FGM_Mat2x4_Subtraction Subtraction
              *   @defgroup T_FGM_Mat2x4_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat2x4_MatVec_Multiplication Matrix and Vector Multiplication
              *   @defgroup T_FGM_Mat2x4_Division Scalar Division
              *   @defgroup T_FGM_Mat2x4_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x4_Constant Matrix Constants
@@ -240,6 +242,7 @@
              *   @defgroup T_FGM_Mat3x2_Addition Addition
              *   @defgroup T_FGM_Mat3x2_Subtraction Subtraction
              *   @defgroup T_FGM_Mat3x2_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat3x2_MatVec_Multiplication Matrix and Vector Multiplication
              *   @defgroup T_FGM_Mat3x2_Division Scalar Division
              *   @defgroup T_FGM_Mat3x2_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat3x2_Constant Matrix Constants
@@ -294,6 +297,7 @@
              *   @defgroup T_FGM_Mat3x4_Addition Addition
              *   @defgroup T_FGM_Mat3x4_Subtraction Subtraction
              *   @defgroup T_FGM_Mat3x4_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat3x4_MatVec_Multiplication Matrix and Vector Multiplication
              *   @defgroup T_FGM_Mat3x4_Division Scalar Division
              *   @defgroup T_FGM_Mat3x4_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat3x4_Inverse Matrix Inverse
@@ -323,6 +327,7 @@
              *   @defgroup T_FGM_Mat4x2_Addition Addition
              *   @defgroup T_FGM_Mat4x2_Subtraction Subtraction
              *   @defgroup T_FGM_Mat4x2_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat4x2_MatVec_Multiplication Matrix and Vector Multiplication
              *   @defgroup T_FGM_Mat4x2_Division Scalar Division
              *   @defgroup T_FGM_Mat4x2_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat4x2_Inverse Matrix Inverse
@@ -352,6 +357,7 @@
              *   @defgroup T_FGM_Mat4x3_Addition Addition
              *   @defgroup T_FGM_Mat4x3_Subtraction Subtraction
              *   @defgroup T_FGM_Mat4x3_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Mat4x3_MatVec_Multiplication Matrix and Vector Multiplication
              *   @defgroup T_FGM_Mat4x3_Division Scalar Division
              *   @defgroup T_FGM_Mat4x3_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat4x3_Inverse Matrix Inverse
