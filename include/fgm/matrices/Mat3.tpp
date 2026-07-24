@@ -874,20 +874,6 @@ namespace fgm
     { return Mat3{ scaleX, T(0), T(0), T(0), scaleY, T(0), T(0), T(0), scaleZ }; }
 
 
-    template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::makeAffine(const Mat2<T>& linearTransform, const Vec2<T>& translation) noexcept
-    {
-        return Mat3<T>{ linearTransform(0, 0),
-                        linearTransform(0, 1),
-                        translation.x(),
-                        linearTransform(1, 0),
-                        linearTransform(1, 1),
-                        translation.y(),
-                        T(0),
-                        T(0),
-                        T(1) };
-    }
-
 
     template <Arithmetic T>
     template <reflect::RT On>
@@ -911,6 +897,34 @@ namespace fgm
         T az = normal.z();
         return Mat3<T>{ T(1 - 2 * ax * ax), T(-2 * ax * ay), T(-2 * ax * az), T(-2 * ay * ax),   T(1 - 2 * ay * ay),
                         T(-2 * ay * az),    T(-2 * az * ax), T(-2 * az * ay), T(1 - 2 * az * az) };
+    }
+
+    template <Arithmetic T>
+    constexpr Mat3<T> Mat3<T>::makeInvolution(const Vec3<T>& normal) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        T x  = static_cast<T>(2 * normal.x() * normal.x() - 1);
+        T y  = static_cast<T>(2 * normal.y() * normal.y() - 1);
+        T z  = static_cast<T>(2 * normal.z() * normal.z() - 1);
+        T xy = static_cast<T>(2 * normal.x() * normal.y());
+        T yz = static_cast<T>(2 * normal.y() * normal.z());
+        T zx = static_cast<T>(2 * normal.z() * normal.x());
+        return Mat3{ T(x), T(xy), T(zx), T(xy), T(y), T(yz), T(zx), T(yz), T(z) };
+    }
+
+
+    template <Arithmetic T>
+    constexpr Mat3<T> Mat3<T>::makeAffine(const Mat2<T>& linearTransform, const Vec2<T>& translation) noexcept
+    {
+        return Mat3<T>{ linearTransform(0, 0),
+                        linearTransform(0, 1),
+                        translation.x(),
+                        linearTransform(1, 0),
+                        linearTransform(1, 1),
+                        translation.y(),
+                        T(0),
+                        T(0),
+                        T(1) };
     }
 
 } // namespace fgm

@@ -3,6 +3,7 @@ add_library(Mat3TransformTests OBJECT)
 target_sources(
         Mat3TransformTests PRIVATE
         AffineTests.cpp
+        InvolutionTests.cpp
         ReflectionTests.cpp
         RotationTests.cpp
         ScaleTests.cpp

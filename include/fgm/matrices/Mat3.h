@@ -1304,14 +1304,6 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        /**
-         * @brief Construct a 2D affine transform matrix from a 2D linear transform matrix and a 2D translation vector.
-         * @param linearTransform The 2D linear transformation matrix.
-         * @param translation     The 2D translation vector.
-         * @return A @ref Mat3 containing the 2D affine transformation.
-         */
-        [[nodiscard]] static constexpr Mat3 makeAffine(const Mat2<T>& linearTransform,
-                                                       const Vec2<T>& translation) noexcept;
 
 
         /**
@@ -1349,6 +1341,30 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Mat3 makeReflection(const Vec3<T>& normal) noexcept
             requires SignedStrictArithmetic<T>;
+
+        /**
+         * @brief Construct a 3D involution matrix across any plane through the origin with @p normal.
+         *
+         * @note While it is possible to create a involution matrix of any **signed type**, it is strongly discouraged
+         *       in favor of floating point types due loss of precision from rounding, often resulting in a zero
+         *       matrix.
+         *
+         * @param[in] normal Normal of the reflection plane. Must be a unit vector.
+         *
+         * @return A new @ref Mat3 representing the involution matrix across a given plane.
+         */
+        [[nodiscard]] static constexpr Mat3 makeInvolution(const Vec3<T>& normal) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 2D affine transform matrix from a 2D linear transform matrix and a 2D translation vector.
+         * @param linearTransform The 2D linear transformation matrix.
+         * @param translation     The 2D translation vector.
+         * @return A @ref Mat3 containing the 2D affine transformation.
+         */
+        [[nodiscard]] static constexpr Mat3 makeAffine(const Mat2<T>& linearTransform,
+                                                       const Vec2<T>& translation) noexcept;
 
         /** @} */
 
