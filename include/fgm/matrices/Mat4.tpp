@@ -1116,6 +1116,34 @@ namespace fgm
                      T(0),   T(0), scaleZ, T(0), T(0), T(0),   T(0), T(1) };
     }
 
+
+    template <Arithmetic T>
+    constexpr Mat4<T> Mat4<T>::makeScale(T scale, const Vec3<T>& vec) noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        T xy = vec.x() * vec.y();
+        T yz = vec.y() * vec.z();
+        T zx = vec.z() * vec.x();
+
+        T sInv = scale - 1;
+        return Mat4{ sInv * vec.x() * vec.x() + 1,
+                     sInv * xy,
+                     sInv * zx,
+                     sInv * xy,
+                     T(0),
+                     sInv * vec.y() * vec.y() + 1,
+                     sInv * yz,
+                     sInv * zx,
+                     sInv * yz,
+                     T(0),
+                     sInv * vec.z() * vec.z() + 1,
+                     T(0),
+                     T(0),
+                     T(0),
+                     T(0),
+                     T(1) };
+    }
+
     template <Arithmetic T>
     template <reflect::RT On>
     constexpr Mat4<T> Mat4<T>::makeReflection() noexcept
@@ -1160,25 +1188,14 @@ namespace fgm
     constexpr Mat4<T> Mat4<T>::makeInvolution(const Vec3<T>& normal) noexcept
         requires SignedStrictArithmetic<T>
     {
-        T ax = normal.x();
-        T ay = normal.y();
-        T az = normal.z();
-        return Mat4{ T(2 * ax * ax - 1),
-                     T(2 * ax * ay),
-                     T(2 * ax * az),
-                     T(0),
-                     T(2 * ay * ax),
-                     T(2 * ay * ay - 1),
-                     T(2 * ay * az),
-                     T(0),
-                     T(2 * az * ax),
-                     T(2 * az * ay),
-                     T(2 * az * az - 1),
-                     T(0),
-                     T(0),
-                     T(0),
-                     T(0),
-                     T(1) };
+        T x  = static_cast<T>(2 * normal.x() * normal.x() - 1);
+        T y  = static_cast<T>(2 * normal.y() * normal.y() - 1);
+        T z  = static_cast<T>(2 * normal.z() * normal.z() - 1);
+        T xy = static_cast<T>(2 * normal.x() * normal.y());
+        T yz = static_cast<T>(2 * normal.y() * normal.z());
+        T zx = static_cast<T>(2 * normal.z() * normal.x());
+        return Mat4{ T(x),  T(xy), T(zx), T(0), T(xy), T(y), T(yz), T(0),
+                     T(zx), T(yz), T(z),  T(0), T(0),  T(0), T(0),  T(1) };
     }
 
 

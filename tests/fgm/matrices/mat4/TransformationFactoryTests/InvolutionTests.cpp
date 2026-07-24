@@ -105,7 +105,14 @@ namespace
 } // namespace
 
 
-TYPED_TEST(Mat4InvolutionFactoryFP, ReturnsValidInvolutionMatrix)
+
+/**************************************
+ *                                    *
+ *           RUNTIME TESTS            *
+ *                                    *
+ **************************************/
+
+TYPED_TEST(Mat4InvolutionFactoryFP, ArbitraryDirection_ReturnsValidInvolutionMatrix)
 { EXPECT_MAT_EQ(this->_expectedInvolution, fgm::Mat4<TypeParam>::makeInvolution(this->_norm)); }
 
 

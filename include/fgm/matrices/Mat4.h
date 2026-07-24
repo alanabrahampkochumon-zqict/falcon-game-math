@@ -1566,6 +1566,23 @@ namespace fgm
         [[nodiscard]] static constexpr Mat4 makeScale(T scaleX, T scaleY, T scaleZ) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Construct a 3D affine scale matrix for scaling along @p vec.
+         *
+         * @note While it is possible to create a scale matrix of any **signed type**, it is strongly discouraged
+         *       in favor of floating point types due loss of precision from rounding, often resulting in a zero
+         *       matrix.
+         *
+         * @param[in] scale The scale factor.
+         * @param[in] vec   The vector along which we need to scale.
+         *
+         * @return A new @ref Mat4 representing the scale matrix along a given vec.
+         */
+        [[nodiscard]] static constexpr Mat4 makeScale(T scale, const Vec3<T>& vec) noexcept
+            requires SignedStrictArithmetic<T>;
+
+
         /**
          * @brief Construct a 3D affine reflection matrix across coordinate axis, any 2D plane formed by the axes,
          *        or the origin.
@@ -1607,7 +1624,7 @@ namespace fgm
         /**
          * @brief Construct a 3D affine involution matrix across any plane through the origin with @p normal.
          *
-         * @note While it is possible to create a rotation matrix of any **signed type**, it is strongly discouraged
+         * @note While it is possible to create a involution matrix of any **signed type**, it is strongly discouraged
          *       in favor of floating point types due loss of precision from rounding, often resulting in a zero
          *       matrix.
          *
@@ -1620,9 +1637,11 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 4D affine transform matrix from a 3D linear transform matrix and a 3D translation vector.
+         * @brief Construct a 3D affine transform matrix from a 3D linear transform matrix and a 3D translation vector.
+         *
          * @param linearTransform The 3D linear transformation matrix.
          * @param translation     The 3D translation vector.
+         *
          * @return A 4D affine transform matrix.
          */
         [[nodiscard]] static constexpr Mat4 makeAffine(const Mat3<T>& linearTransform,
