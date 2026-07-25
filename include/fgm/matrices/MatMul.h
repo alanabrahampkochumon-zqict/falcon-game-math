@@ -31,6 +31,7 @@
 /// TODO: Not implemented or tested
 // TODO: Add Groups
 // TODO: Add Implementation
+// TODO: Move Matrix * Vec to Matrix Geom files
 // Implementations
 // 3x3 * 3x2
 // 3x3 * 3x4
@@ -59,7 +60,7 @@ namespace fgm
 {
 
     /**
-     * @addtogroup FGM_Mat2x3_Arithmetic
+     * @addtogroup FGM_Mat2x3_Comp
      * @{
      */
 
@@ -157,7 +158,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat2x4_Arithmetic
+     * @addtogroup FGM_Mat2x4_Comp
      * @{
      */
 
@@ -255,7 +256,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat3x2_Arithmetic
+     * @addtogroup FGM_Mat3x2_Comp
      * @{
      */
 
@@ -353,7 +354,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat3x4_Arithmetic
+     * @addtogroup FGM_Mat3x4_Comp
      * @{
      */
 
@@ -446,12 +447,30 @@ namespace fgm
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Vec3<T>& vec, const Mat3x4<U>& mat) noexcept;
 
+
+    /**
+     * @brief Multiply a 3x4 matrix with a 4x2 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat3x2<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 3x4 matrix on the left hand side.
+     * @param[in] rhs The 4x2 matrix on the right hand side.
+     *
+     * @return A new 3x2 matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat3x2<T, U> operator*(const Mat3x4<T>& lhs, const Mat4x2<U>& rhs) noexcept;
+
     /** @} */
 
 
 
     /**
-     * @addtogroup FGM_Mat4x2_Arithmetic
+     * @addtogroup FGM_Mat4x2_Comp
      * @{
      */
 
@@ -472,14 +491,33 @@ namespace fgm
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Mat4x2<T>& mat, const Vec2<U>& vec) noexcept;
 
+
+    /**
+     * @brief Multiply a 4x2 matrix with a 2D matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 4x2 matrix on the left hand side.
+     * @param[in] rhs The 2D matrix on the right hand side.
+     *
+     * @return A new 4x2 matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat4x2<T, U> operator*(const Mat4x2<T>& lhs, const Mat2<U>& rhs) noexcept;
+
     /** @} */
 
 
 
     /**
-     * @addtogroup FGM_Mat4x3_Arithmetic
+     * @addtogroup FGM_Mat4x3_Comp
      * @{
      */
+
 
     /** @} */
 
