@@ -226,7 +226,7 @@ namespace fgm
             R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0) + lhs(1, 3) * rhs(3, 0)),
             R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1) + lhs(1, 3) * rhs(3, 1)),
             R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(1, 2) * rhs(2, 2) + lhs(1, 3) * rhs(3, 2)),
-            // Row 2
+            // Row 3
             R(lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(1, 0) + lhs(2, 2) * rhs(2, 0) + lhs(2, 3) * rhs(3, 0)),
             R(lhs(2, 0) * rhs(0, 1) + lhs(2, 1) * rhs(1, 1) + lhs(2, 2) * rhs(2, 1) + lhs(2, 3) * rhs(3, 1)),
             R(lhs(2, 0) * rhs(0, 2) + lhs(2, 1) * rhs(1, 2) + lhs(2, 2) * rhs(2, 2) + lhs(2, 3) * rhs(3, 2)),
@@ -298,7 +298,7 @@ namespace fgm
             // Row 3
             R(lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(1, 0)), R(lhs(2, 0) * rhs(0, 1) + lhs(2, 1) * rhs(1, 1)),
             R(lhs(2, 0) * rhs(0, 2) + lhs(2, 1) * rhs(1, 2)),
-            // Row 3
+            // Row 4
             R(lhs(3, 0) * rhs(0, 0) + lhs(3, 1) * rhs(1, 0)), R(lhs(3, 0) * rhs(0, 1) + lhs(3, 1) * rhs(1, 1)),
             R(lhs(3, 0) * rhs(0, 2) + lhs(3, 1) * rhs(1, 2))
         };
@@ -350,6 +350,32 @@ namespace fgm
                        // Row 4
                        R(lhs(3, 0) * rhs(0, 0) + lhs(3, 1) * rhs(1, 0) + lhs(3, 2) * rhs(2, 0)),
                        R(lhs(3, 0) * rhs(0, 1) + lhs(3, 1) * rhs(1, 1) + lhs(3, 2) * rhs(2, 1))
+        };
+    }
+
+
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedMat4x3<T, U> operator*(const Mat4x3<T>& lhs, const Mat3<U>& rhs) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Mat4x3{
+            // Row 1
+            R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
+            R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
+            R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2) + lhs(0, 2) * rhs(2, 2)),
+            // Row 2
+            R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
+            R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1)),
+            R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(1, 2) * rhs(2, 2)),
+            // Row 3
+            R(lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(1, 0) + lhs(2, 2) * rhs(2, 0)),
+            R(lhs(2, 0) * rhs(0, 1) + lhs(2, 1) * rhs(1, 1) + lhs(2, 2) * rhs(2, 1)),
+            R(lhs(2, 0) * rhs(0, 2) + lhs(2, 1) * rhs(1, 2) + lhs(2, 2) * rhs(2, 2)),
+            // Row 4
+            R(lhs(3, 0) * rhs(0, 0) + lhs(3, 1) * rhs(1, 0) + lhs(3, 2) * rhs(2, 0)),
+            R(lhs(3, 0) * rhs(0, 1) + lhs(3, 1) * rhs(1, 1) + lhs(3, 2) * rhs(2, 1)),
+            R(lhs(3, 0) * rhs(0, 2) + lhs(3, 1) * rhs(1, 2) + lhs(3, 2) * rhs(2, 2)),
         };
     }
 
