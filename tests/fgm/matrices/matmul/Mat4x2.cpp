@@ -134,7 +134,7 @@ namespace
     {
         // STATIC TEST SETUP
         constexpr fgm::Vec2 VEC2(1, 2);
-        // constexpr fgm::Vec3 ROW_VEC3(1, 2, 3);
+        constexpr fgm::Vec4 ROW_VEC4(1, 2, 3, 4);
 
         constexpr fgm::Mat2 MAT2(1, 2, 3, 4);
         constexpr fgm::Mat2x3 MAT2X3(1, 2, 3, 4, 5, 6);
@@ -168,10 +168,10 @@ namespace
         static_assert(EXP_MAT4[2] == fgm::Vec4{ 30, 35, 15, 30 });
         static_assert(EXP_MAT4[3] == fgm::Vec4{ 11, 12, 5, 11 });
 
-        // /// @test Verify that 3D row vector times a 3x2 matrix yields a 2D row vector at compile time.
-        // constexpr auto EXP_ROW_VEC2 = ROW_VEC3 * MAT3X2;
-        // static_assert(EXP_ROW_VEC2.x() == 22);
-        // static_assert(EXP_ROW_VEC2.y() == 28);
+        /// @test Verify that 4D row vector times a 3x2 matrix yields a 2D row vector at compile time.
+        constexpr auto EXP_ROW_VEC2 = ROW_VEC4 * MAT4X2;
+        static_assert(EXP_ROW_VEC2.x() == 41);
+        static_assert(EXP_ROW_VEC2.y() == 12);
 
     } // namespace static_tests
 
@@ -241,17 +241,17 @@ TYPED_TEST(Mat4x2Multiplication, Mat4x2TimesMat2x4_ReturnsAValid4DMatrix)
 }
 
 
-// TYPED_TEST(Mat4x2Multiplication, 3DRowVectorTimesMat4x2_ReturnsAValid2DRowVector)
-// {
-//     const auto expectedVector = this->_vec3 * this->_mat4x2;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_VEC_EQ(this->_expectedFPVec2, expectedVector);
-//     }
-//     else
-//     {
-//         EXPECT_VEC_EQ(this->_expectedIntVec2, expectedVector);
-//     }
-// }
+TYPED_TEST(Mat4x2Multiplication, 4DRowVectorTimesMat4x2_ReturnsAValid2DRowVector)
+{
+    const auto expectedVector = this->_vec4 * this->_mat4x2;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_VEC_EQ(this->_expectedFPVec2, expectedVector);
+    }
+    else
+    {
+        EXPECT_VEC_EQ(this->_expectedIntVec2, expectedVector);
+    }
+}
 
 /** @} */
