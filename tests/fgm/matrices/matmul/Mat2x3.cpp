@@ -137,17 +137,17 @@ namespace
         static_assert(EXP_MAT2[1] == fgm::Vec2{ 52, 124 });
 
         /// @test Verify that 2x3 matrix times a 3x3 matrix yields a 2x3 matrix at compile time.
-        constexpr auto EXP_MAT_2X3 = MAT2X3 * MAT3X3;
-        static_assert(EXP_MAT_2X3[0] == fgm::Vec2{ 54, 126 });
-        static_assert(EXP_MAT_2X3[1] == fgm::Vec2{ 60, 141 });
-        static_assert(EXP_MAT_2X3[2] == fgm::Vec2{ 66, 156 });
+        constexpr auto EXP_MAT2X3 = MAT2X3 * MAT3X3;
+        static_assert(EXP_MAT2X3[0] == fgm::Vec2{ 54, 126 });
+        static_assert(EXP_MAT2X3[1] == fgm::Vec2{ 60, 141 });
+        static_assert(EXP_MAT2X3[2] == fgm::Vec2{ 66, 156 });
 
         /// @test Verify that 2x3 matrix times a 3x4 matrix yields a 2x4 matrix at compile time.
-        constexpr auto EXP_MAT_2X4 = MAT2X3 * MAT3X4;
-        static_assert(EXP_MAT_2X4[0] == fgm::Vec2{ 62, 143 });
-        static_assert(EXP_MAT_2X4[1] == fgm::Vec2{ 68, 158 });
-        static_assert(EXP_MAT_2X4[2] == fgm::Vec2{ 74, 173 });
-        static_assert(EXP_MAT_2X4[3] == fgm::Vec2{ 80, 188 });
+        constexpr auto EXP_MAT2X4 = MAT2X3 * MAT3X4;
+        static_assert(EXP_MAT2X4[0] == fgm::Vec2{ 62, 143 });
+        static_assert(EXP_MAT2X4[1] == fgm::Vec2{ 68, 158 });
+        static_assert(EXP_MAT2X4[2] == fgm::Vec2{ 74, 173 });
+        static_assert(EXP_MAT2X4[3] == fgm::Vec2{ 80, 188 });
 
         /// @test Verify that 2D row vector times a 2x3 matrix yields a 3D row vector at compile time.
         constexpr auto EXP_ROW_VEC3 = ROW_VEC2 * MAT2X3;

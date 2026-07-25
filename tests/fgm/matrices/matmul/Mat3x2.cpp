@@ -143,11 +143,11 @@ namespace
         static_assert(EXP_MAT3[2] == fgm::Vec3{ 15, 33, 51 });
 
         /// @test Verify that 3x2 matrix times a 2x4 matrix yields a 3x4 matrix at compile time.
-        constexpr auto EXP_MAT_3X4 = MAT3X2 * MAT2X4;
-        static_assert(EXP_MAT_3X4[0] == fgm::Vec3{ 9, 23, 37 });
-        static_assert(EXP_MAT_3X4[1] == fgm::Vec3{ 3, 7, 11 });
-        static_assert(EXP_MAT_3X4[2] == fgm::Vec3{ 15, 35, 55 });
-        static_assert(EXP_MAT_3X4[3] == fgm::Vec3{ 4, 10, 16 });
+        constexpr auto EXP_MAT3X4 = MAT3X2 * MAT2X4;
+        static_assert(EXP_MAT3X4[0] == fgm::Vec3{ 9, 23, 37 });
+        static_assert(EXP_MAT3X4[1] == fgm::Vec3{ 3, 7, 11 });
+        static_assert(EXP_MAT3X4[2] == fgm::Vec3{ 15, 35, 55 });
+        static_assert(EXP_MAT3X4[3] == fgm::Vec3{ 4, 10, 16 });
 
         /// @test Verify that 3D row vector times a 3x2 matrix yields a 2D row vector at compile time.
         constexpr auto EXP_ROW_VEC2 = ROW_VEC3 * MAT3X2;
