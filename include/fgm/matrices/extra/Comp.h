@@ -390,6 +390,24 @@ namespace fgm
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedMat4x3<T, U> operator*(const Mat4x3<T>& lhs, const Mat3<U>& rhs) noexcept;
 
+
+    /**
+     * @brief Multiply a 4x3 matrix with a 3x4 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat4<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 4x3 matrix on the left hand side.
+     * @param[in] rhs The 3x4 matrix on the right hand side.
+     *
+     * @return A new 4D matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat4<T, U> operator*(const Mat4x3<T>& lhs, const Mat3x4<U>& rhs) noexcept;
+
     /** @} */
 
 } // namespace fgm

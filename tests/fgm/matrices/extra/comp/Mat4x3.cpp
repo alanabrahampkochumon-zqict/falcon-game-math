@@ -118,8 +118,7 @@ namespace
         constexpr fgm::Mat4x3 MAT4X3(5, 1, 5, 2, 2, 1, 5, 1, 5, 3, 2, 9);
         constexpr fgm::Mat3x2 MAT3X2(1, 2, 3, 4, 5, 6);
         constexpr fgm::Mat3 MAT3(5, 1, 5, 2, 2, 1, 5, 1, 0);
-        // constexpr fgm::Mat2x4 MAT2X4(5, 1, 5, 2, 2, 1, 5, 1);
-        //
+        constexpr fgm::Mat3x4 MAT3X4(5, 1, 5, 2, 2, 1, 5, 1, 0, 0, 1, 3);
 
 
         /// @test Verify that 4x3 matrix times a 3x2 matrix yields a 4x2 matrix at compile time.
@@ -132,13 +131,13 @@ namespace
         static_assert(EXP_MAT4X3[0] == fgm::Vec4{ 52, 19, 52, 64 });
         static_assert(EXP_MAT4X3[1] == fgm::Vec4{ 12, 7, 12, 16 });
         static_assert(EXP_MAT4X3[2] == fgm::Vec4{ 26, 12, 26, 17 });
-        //
-        // /// @test Verify that 4x2 matrix times a 2x4 matrix yields a 4D matrix at compile time.
-        // constexpr auto EXP_MAT4 = MAT4X3 * MAT2X4;
-        // static_assert(EXP_MAT4[0] == fgm::Vec4{ 27, 29, 12, 27 });
-        // static_assert(EXP_MAT4[1] == fgm::Vec4{ 6, 7, 3, 6 });
-        // static_assert(EXP_MAT4[2] == fgm::Vec4{ 30, 35, 15, 30 });
-        // static_assert(EXP_MAT4[3] == fgm::Vec4{ 11, 12, 5, 11 });
+
+        /// @test Verify that 4x3 matrix times a 3x4 matrix yields a 4D matrix at compile time.
+        constexpr auto EXP_MAT4 = MAT4X3 * MAT3X4;
+        static_assert(EXP_MAT4[0] == fgm::Vec4{ 27, 14, 27, 19 });
+        static_assert(EXP_MAT4[1] == fgm::Vec4{ 6, 4, 6, 5 });
+        static_assert(EXP_MAT4[2] == fgm::Vec4{ 35, 21, 35, 34 });
+        static_assert(EXP_MAT4[3] == fgm::Vec4{ 26, 9, 26, 35 });
 
     } // namespace static_tests
 
@@ -180,17 +179,17 @@ TYPED_TEST(Mat4x3Composition, Mat4x3TimesMat3_ReturnsAValid4x3Matrix)
 }
 
 
-// TYPED_TEST(Mat4x3Composition, Mat4x3TimesMat2x4_ReturnsAValid4DMatrix)
-// {
-//     const auto matrixProduct = this->_mat4x3 * this->_mat2x4;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_MAT_EQ(this->_expectedFPMat4, matrixProduct);
-//     }
-//     else
-//     {
-//         EXPECT_MAT_EQ(this->_expectedIntMat4, matrixProduct);
-//     }
-// }
+TYPED_TEST(Mat4x3Composition, Mat4x3TimesMat3x4_ReturnsAValid4DMatrix)
+{
+    const auto matrixProduct = this->_mat4x3 * this->_mat3x4;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedFPMat4, matrixProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedIntMat4, matrixProduct);
+    }
+}
 
 /** @} */
