@@ -42,11 +42,6 @@
 // 2x2 * 2x4
 //
 
-//       3x2 * 2x1 => 3x1
-//       3x2 * 2x2 => 3x2
-//       3x2 * 2x3 => 3x3
-//       3x2 * 2x4 => 3x4
-// 1x3 * 3x2       => 1x2
 
 //       3x4 * 4x1 => 3x1
 //       3x4 * 4x2 => 3x2
@@ -340,6 +335,24 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedMat3x4<T, U> operator*(const Mat3x2<T>& lhs, const Mat2x4<U>& rhs) noexcept;
+
+
+    /**
+     * @brief Multiply a 3D row vector with a 3x2 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] vec The row vector to multiply.
+     * @param[in] mat The matrix to multiply with.
+     *
+     * @return A new 2D row vector.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Vec3<T>& vec, const Mat3x2<U>& mat) noexcept;
 
     /** @} */
 

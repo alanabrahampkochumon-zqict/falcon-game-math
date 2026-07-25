@@ -233,22 +233,27 @@ namespace fgm
     FGM_INLINE constexpr PromotedMat3x4<T, U> operator*(const Mat3x2<T>& lhs, const Mat2x4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
-        return Mat3x4{ // Row 1
-            R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0)),
-            R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1)),
-            R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2)),
-            R(lhs(0, 0) * rhs(0, 3) + lhs(0, 1) * rhs(1, 3)),
+        return Mat3x4{
+            // Row 1
+            R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0)), R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1)),
+            R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2)), R(lhs(0, 0) * rhs(0, 3) + lhs(0, 1) * rhs(1, 3)),
             // Row 2
-            R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0)),
-            R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1)),
-            R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2)),
-            R(lhs(1, 0) * rhs(0, 3) + lhs(1, 1) * rhs(1, 3)),
+            R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0)), R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1)),
+            R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2)), R(lhs(1, 0) * rhs(0, 3) + lhs(1, 1) * rhs(1, 3)),
             // Row 3
-            R(lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(1, 0)),
-            R(lhs(2, 0) * rhs(0, 1) + lhs(2, 1) * rhs(1, 1)),
-            R(lhs(2, 0) * rhs(0, 2) + lhs(2, 1) * rhs(1, 2)),
-            R(lhs(2, 0) * rhs(0, 3) + lhs(2, 1) * rhs(1, 3))
-};
+            R(lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(1, 0)), R(lhs(2, 0) * rhs(0, 1) + lhs(2, 1) * rhs(1, 1)),
+            R(lhs(2, 0) * rhs(0, 2) + lhs(2, 1) * rhs(1, 2)), R(lhs(2, 0) * rhs(0, 3) + lhs(2, 1) * rhs(1, 3))
+        };
+    }
+
+
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedVec2<T, U> operator*(const Vec3<T>& vec, const Mat3x2<U>& mat) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Vec2{ R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0) + vec.z() * mat(2, 0)),
+                     R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1) + vec.z() * mat(2, 1)) };
     }
 
 } // namespace fgm

@@ -116,18 +116,13 @@ namespace
     {
         // STATIC TEST SETUP
         constexpr fgm::Vec2 VEC2(1, 2);
-        // constexpr fgm::Vec4 VEC4(1, 2, 3, 4);
-        //
+        constexpr fgm::Vec3 ROW_VEC3(1, 2, 3);
+
         constexpr fgm::Mat2 MAT2(1, 2, 3, 4);
         constexpr fgm::Mat2x3 MAT2X3(1, 2, 3, 4, 5, 6);
         constexpr fgm::Mat2x4 MAT2X4(5, 1, 5, 2, 2, 1, 5, 1);
 
         constexpr fgm::Mat3x2 MAT3X2(1, 2, 3, 4, 5, 6);
-
-        //
-        // constexpr fgm::Mat4 MAT4(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-        // constexpr fgm::Mat4x2 MAT4X2(5, 6, 7, 8, 9, 10, 11, 12);
-        // constexpr fgm::Mat4x3 MAT4X3(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
 
         /// @test Verify that 3x2 matrix times a 2D column vector yields a 3D column vector at compile time.
@@ -154,12 +149,11 @@ namespace
         static_assert(EXP_MAT_3X4[2] == fgm::Vec3{ 15, 35, 55 });
         static_assert(EXP_MAT_3X4[3] == fgm::Vec3{ 4, 10, 16 });
 
-        // /// @test Verify that 2D row vector times a 3x2 matrix yields a 4D row vector at compile time.
-        // constexpr auto EXP_VEC4 = VEC2 * MAT2X4;
-        // static_assert(EXP_VEC4.x() == 23);
-        // static_assert(EXP_VEC4.y() == 26);
-        // static_assert(EXP_VEC4.z() == 29);
-        // static_assert(EXP_VEC4.w() == 32);
+        /// @test Verify that 3D row vector times a 3x2 matrix yields a 2D row vector at compile time.
+        constexpr auto EXP_ROW_VEC2 = ROW_VEC3 * MAT3X2;
+        static_assert(EXP_ROW_VEC2.x() == 22);
+        static_assert(EXP_ROW_VEC2.y() == 28);
+
 
     } // namespace static_tests
 
@@ -229,17 +223,17 @@ TYPED_TEST(Mat3x2Multiplication, Mat3x2TimesMat2x4_ReturnsAValid3x4Matrix)
 }
 
 
-// TYPED_TEST(Mat3x2Multiplication, 2DRowVectorTimesMat3x2_ReturnsAValid4DRowVector)
-// {
-//     const auto expectedVector = this->_vec2 * this->_mat3x2;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_VEC_EQ(this->_expectedFPVec4, expectedVector);
-//     }
-//     else
-//     {
-//         EXPECT_VEC_EQ(this->_expectedIntVec4, expectedVector);
-//     }
-// }
+TYPED_TEST(Mat3x2Multiplication, 3DRowVectorTimesMat3x2_ReturnsAValid2DRowVector)
+{
+    const auto expectedVector = this->_vec3 * this->_mat3x2;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_VEC_EQ(this->_expectedFPVec2, expectedVector);
+    }
+    else
+    {
+        EXPECT_VEC_EQ(this->_expectedIntVec2, expectedVector);
+    }
+}
 
 /** @} */

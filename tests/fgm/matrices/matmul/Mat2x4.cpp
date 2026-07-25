@@ -126,7 +126,7 @@ namespace
     namespace static_tests
     {
         // STATIC TEST SETUP
-        constexpr fgm::Vec2 VEC2(1, 2);
+        constexpr fgm::Vec2 ROW_VEC2(1, 2);
         constexpr fgm::Vec4 VEC4(1, 2, 3, 4);
 
         constexpr fgm::Mat2x4 MAT2X4(5, 6, 7, 8, 9, 10, 11, 12);
@@ -162,11 +162,11 @@ namespace
 
 
         /// @test Verify that 2D row vector times a 2x4 matrix yields a 4D row vector at compile time.
-        constexpr auto EXP_VEC4 = VEC2 * MAT2X4;
-        static_assert(EXP_VEC4.x() == 23);
-        static_assert(EXP_VEC4.y() == 26);
-        static_assert(EXP_VEC4.z() == 29);
-        static_assert(EXP_VEC4.w() == 32);
+        constexpr auto EXP_ROW_VEC4 = ROW_VEC2 * MAT2X4;
+        static_assert(EXP_ROW_VEC4.x() == 23);
+        static_assert(EXP_ROW_VEC4.y() == 26);
+        static_assert(EXP_ROW_VEC4.z() == 29);
+        static_assert(EXP_ROW_VEC4.w() == 32);
 
     } // namespace static_tests
 

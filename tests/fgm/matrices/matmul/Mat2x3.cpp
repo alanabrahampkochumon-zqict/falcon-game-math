@@ -116,7 +116,7 @@ namespace
     namespace static_tests
     {
         // STATIC TEST SETUP
-        constexpr fgm::Vec2 VEC2(1, 2);
+        constexpr fgm::Vec2 ROW_VEC2(1, 2);
         constexpr fgm::Vec3 VEC3(5, 6, 7);
 
         constexpr fgm::Mat2x3 MAT2X3(1, 2, 3, 4, 5, 6);
@@ -150,10 +150,10 @@ namespace
         static_assert(EXP_MAT_2X4[3] == fgm::Vec2{ 80, 188 });
 
         /// @test Verify that 2D row vector times a 2x3 matrix yields a 3D row vector at compile time.
-        constexpr auto EXP_VEC3 = VEC2 * MAT2X3;
-        static_assert(EXP_VEC3.x() == 9);
-        static_assert(EXP_VEC3.y() == 12);
-        static_assert(EXP_VEC3.z() == 15);
+        constexpr auto EXP_ROW_VEC3 = ROW_VEC2 * MAT2X3;
+        static_assert(EXP_ROW_VEC3.x() == 9);
+        static_assert(EXP_ROW_VEC3.y() == 12);
+        static_assert(EXP_ROW_VEC3.z() == 15);
 
     } // namespace static_tests
 
