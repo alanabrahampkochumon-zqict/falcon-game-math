@@ -97,7 +97,7 @@ namespace
         static_assert(EXP_VEC4.z() == 4);
         static_assert(EXP_VEC4.w() == 7);
 
-        /// @test Verify that 4D row vector times a 3x2 matrix yields a 2D row vector at compile time.
+        /// @test Verify that 4D row vector times a 4x2 matrix yields a 2D row vector at compile time.
         constexpr auto EXP_ROW_VEC2 = ROW_VEC4 * MAT4X2;
         static_assert(EXP_ROW_VEC2.x() == 41);
         static_assert(EXP_ROW_VEC2.y() == 12);

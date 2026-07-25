@@ -14,6 +14,7 @@ target_sources(
         geom/Mat3x2.cpp
         geom/Mat3x4.cpp
         geom/Mat4x2.cpp
+        geom/Mat4x3.cpp
 )
 
 target_include_directories(

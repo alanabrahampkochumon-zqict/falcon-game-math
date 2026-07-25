@@ -267,6 +267,22 @@ namespace fgm
      * @{
      */
 
+    /**
+     * @brief Multiply a 4x3 matrix with a 3D column vector.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedVector4<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] mat The matrix to multiply.
+     * @param[in] vec The column vector to multiply with.
+     *
+     * @return A new 4D column vector.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Mat4x3<T>& mat, const Vec3<U>& vec) noexcept;
 
     /** @} */
 
