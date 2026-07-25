@@ -131,7 +131,7 @@ namespace
     namespace static_tests
     {
         // STATIC TEST SETUP
-        // constexpr fgm::Vec2 ROW_VEC2(1, 2);
+        constexpr fgm::Vec3 ROW_VEC3(1, 2, 3);
         constexpr fgm::Vec4 VEC4(1, 2, 3, 4);
 
         constexpr fgm::Mat3x4 MAT3X4(5, 1, 5, 2, 2, 1, 5, 1, 0, 0, 1, 3);
@@ -165,12 +165,12 @@ namespace
         static_assert(EXP_MAT3X4[2] == fgm::Vec3{ 50, 30, 17 });
         static_assert(EXP_MAT3X4[3] == fgm::Vec3{ 64, 54, 21 });
 
-        // /// @test Verify that 2D row vector times a 2x4 matrix yields a 4D row vector at compile time.
-        // constexpr auto EXP_ROW_VEC4 = ROW_VEC2 * MAT2X4;
-        // static_assert(EXP_ROW_VEC4.x() == 23);
-        // static_assert(EXP_ROW_VEC4.y() == 26);
-        // static_assert(EXP_ROW_VEC4.z() == 29);
-        // static_assert(EXP_ROW_VEC4.w() == 32);
+        /// @test Verify that 3D row vector times a 3x4 matrix yields a 4D row vector at compile time.
+        constexpr auto EXP_ROW_VEC4 = ROW_VEC3 * MAT3X4;
+        static_assert(EXP_ROW_VEC4.x() == 9);
+        static_assert(EXP_ROW_VEC4.y() == 3);
+        static_assert(EXP_ROW_VEC4.z() == 18);
+        static_assert(EXP_ROW_VEC4.w() == 13);
 
     } // namespace static_tests
 
@@ -240,17 +240,17 @@ TYPED_TEST(Mat3x4Multiplication, Mat3x4TimesMat4_ReturnsAValid3x4Matrix)
 }
 
 
-// TYPED_TEST(Mat3x4Multiplication, 2DRowVectorTimesMat3x4_ReturnsAValid4DRowVector)
-// {
-//     const auto expectedVector = this->_vec2 * this->_mat3x4;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_VEC_EQ(this->_expectedFPVec4, expectedVector);
-//     }
-//     else
-//     {
-//         EXPECT_VEC_EQ(this->_expectedIntVec4, expectedVector);
-//     }
-// }
+TYPED_TEST(Mat3x4Multiplication, 3DRowVectorTimesMat3x4_ReturnsAValid4DRowVector)
+{
+    const auto expectedVector = this->_vec3 * this->_mat3x4;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_VEC_EQ(this->_expectedFPVec4, expectedVector);
+    }
+    else
+    {
+        EXPECT_VEC_EQ(this->_expectedIntVec4, expectedVector);
+    }
+}
 
 /** @} */
