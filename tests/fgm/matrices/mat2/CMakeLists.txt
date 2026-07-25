@@ -30,10 +30,5 @@ add_subdirectory(TransformationFactoryTests)
 
 target_link_libraries(
         Mat2Tests PRIVATE
-        FGM
-        StrictWarnings
-        ProjectSanitizers
-        GTest::gtest
-        GTest::gtest_main
-        NonComprehensiveTestMode
+        FGMTestSetup
 )

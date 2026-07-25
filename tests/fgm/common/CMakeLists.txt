@@ -17,10 +17,5 @@ target_include_directories(
 
 target_link_libraries(
         CommonTests PRIVATE
-        FGM
-        GTest::gtest
-        GTest::gtest_main
-        StrictWarnings
-        ProjectSanitizers
-        NonComprehensiveTestMode
+        FGMTestSetup
 )

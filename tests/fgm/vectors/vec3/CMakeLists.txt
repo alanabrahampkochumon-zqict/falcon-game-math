@@ -31,10 +31,5 @@ target_include_directories(
 
 target_link_libraries(
         Vec3Tests PRIVATE
-        FGM
-        GTest::gtest
-        GTest::gtest_main
-        StrictWarnings
-        ProjectSanitizers
-        NonComprehensiveTestMode
+        FGMTestSetup
 )

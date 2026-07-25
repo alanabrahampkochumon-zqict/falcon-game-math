@@ -35,8 +35,6 @@
 // Mat4x2
 // Mat4x3
 
-//       4x3 * 3x1 => 4x1
-// 1x4 * 4x3       => 1x3
 
 namespace fgm
 {

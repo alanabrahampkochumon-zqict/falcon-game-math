@@ -16,10 +16,5 @@ target_include_directories(
 
 target_link_libraries(
         Mat2TransformTests PRIVATE
-        FGM
-        GTest::gtest
-        GTest::gtest_main # googletest
-        StrictWarnings
-        ProjectSanitizers
-        NonComprehensiveTestMode
+        FGMTestSetup
 )
