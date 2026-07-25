@@ -256,4 +256,24 @@ namespace fgm
                      R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1) + vec.z() * mat(2, 1)) };
     }
 
+
+
+    /**************************************
+     *                                    *
+     *            MATRIX 3x4              *
+     *                                    *
+     **************************************/
+
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedVec3<T, U> operator*(const Mat3x4<T>& mat, const Vec4<U>& vec) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Vec3{
+            R(mat[0].x() * vec.x() + mat[1].x() * vec.y() + mat[2].x() * vec.z() + mat[3].x() * vec.w()),
+            R(mat[0].y() * vec.x() + mat[1].y() * vec.y() + mat[2].y() * vec.z() + mat[3].y() * vec.w()),
+            R(mat[0].z() * vec.x() + mat[1].z() * vec.y() + mat[2].z() * vec.z() + mat[3].z() * vec.w()),
+        };
+    }
+
 } // namespace fgm
