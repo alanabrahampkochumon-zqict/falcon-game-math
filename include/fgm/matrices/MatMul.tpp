@@ -166,7 +166,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVec4<T, U> operator*(const Vec2<T>& vec, const Mat2x4<U>& mat) noexcept
+    FGM_INLINE constexpr PromotedVec4<T, U> operator*(const Vec2<T>& vec, const Mat2x4<U>& mat) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Vec4{ R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0)), R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1)),
@@ -174,15 +174,38 @@ namespace fgm
     }
 
 
+
+    /**************************************
+     *                                    *
+     *            MATRIX 3x2              *
+     *                                    *
+     **************************************/
+
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedVec3<T, U> operator*(const Mat3x2<T>& mat, const Vec2<U>& vec) noexcept
+    FGM_INLINE constexpr PromotedVec3<T, U> operator*(const Mat3x2<T>& mat, const Vec2<U>& vec) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Vec3{
             R(mat[0].x() * vec.x() + mat[1].x() * vec.y()),
             R(mat[0].y() * vec.x() + mat[1].y() * vec.y()),
             R(mat[0].z() * vec.x() + mat[1].z() * vec.y()),
+        };
+    }
+
+
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedMat3x2<T, U> operator*(const Mat3x2<T>& lhs, const Mat2<U>& rhs) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Mat3x2{
+            // Row 1
+            R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0)), R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1)),
+            // Row 2
+            R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0)), R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1)),
+            // Row 3
+            R(lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(1, 0)), R(lhs(2, 0) * rhs(0, 1) + lhs(2, 1) * rhs(1, 1))
         };
     }
 
