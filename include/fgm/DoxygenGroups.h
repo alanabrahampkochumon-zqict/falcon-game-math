@@ -147,7 +147,7 @@
              *   @defgroup FGM_Mat2x3_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Mat2x3_Algebra Matrix Algebra
              *   @defgroup FGM_Mat2x3_Equality Equality
-             *   @defgroup FGM_Mat2x3_Product Geometric Products
+             *   @defgroup FGM_Mat2x3_Geom Geometric Operations
              *   @defgroup FGM_Mat2x3_Comp Matrix Compositions
              *   @defgroup FGM_Mat2x3_Log String Representation
              *   @defgroup FGM_Mat2x3_Const Matrix Constants
@@ -168,7 +168,7 @@
              *   @defgroup FGM_Mat2x4_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Mat2x4_Algebra Matrix Algebra
              *   @defgroup FGM_Mat2x4_Equality Equality
-             *   @defgroup FGM_Mat2x4_Product Geometric Products
+             *   @defgroup FGM_Mat2x4_Geom Geometric Operations
              *   @defgroup FGM_Mat2x4_Comp Matrix Compositions
              *   @defgroup FGM_Mat2x4_Log String Representation
              *   @defgroup FGM_Mat2x4_Const Matrix Constants
@@ -189,7 +189,7 @@
             *   @defgroup FGM_Mat3x2_Arithmetic Arithmetic Operations
             *   @defgroup FGM_Mat3x2_Algebra Matrix Algebra
             *   @defgroup FGM_Mat3x2_Equality Equality
-            *   @defgroup FGM_Mat3x2_Product Geometric Products
+            *   @defgroup FGM_Mat3x2_Geom Geometric Operations
             *   @defgroup FGM_Mat3x2_Comp Matrix Compositions
             *   @defgroup FGM_Mat3x2_Log String Representation
             *   @defgroup FGM_Mat3x2_Const Matrix Constants
@@ -231,7 +231,7 @@
             *   @defgroup FGM_Mat3x4_Arithmetic Arithmetic Operations
             *   @defgroup FGM_Mat3x4_Algebra Matrix Algebra
             *   @defgroup FGM_Mat3x4_Equality Equality
-            *   @defgroup FGM_Mat3x4_Product Geometric Products
+            *   @defgroup FGM_Mat3x4_Geom Geometric Operations
             *   @defgroup FGM_Mat3x4_Comp Matrix Compositions
             *   @defgroup FGM_Mat3x4_Log String Representation
             *   @defgroup FGM_Mat3x4_Const Matrix Constants
@@ -251,7 +251,7 @@
              *   @defgroup FGM_Mat4x2_Arithmetic Arithmetic Operations
              *   @defgroup FGM_Mat4x2_Algebra Matrix Algebra
              *   @defgroup FGM_Mat4x2_Equality Equality
-             *   @defgroup FGM_Mat4x2_Product Geometric Products
+             *   @defgroup FGM_Mat4x2_Geom Geometric Operations
              *   @defgroup FGM_Mat4x2_Comp Matrix Compositions
              *   @defgroup FGM_Mat4x2_Log String Representation
              *   @defgroup FGM_Mat4x2_Const Matrix Constants
@@ -269,9 +269,8 @@
              *   @defgroup FGM_Mat4x3_Init Constructors
              *   @defgroup FGM_Mat4x3_Access Accessors
              *   @defgroup FGM_Mat4x3_Arithmetic Arithmetic Operations
-             *   @defgroup FGM_Mat4x3_Algebra Matrix Algebra
              *   @defgroup FGM_Mat4x3_Equality Equality
-             *   @defgroup FGM_Mat4x3_Product Geometric Products
+             *   @defgroup FGM_Mat4x3_Geom Geometric Operations
              *   @defgroup FGM_Mat4x3_Comp Matrix Compositions
              *   @defgroup FGM_Mat4x3_Log String Representation
              *   @defgroup FGM_Mat4x3_Const Matrix Constants
