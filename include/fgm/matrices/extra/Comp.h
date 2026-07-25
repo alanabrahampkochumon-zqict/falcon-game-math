@@ -31,11 +31,9 @@
 // 2x2 * 2x3
 // 2x2 * 2x4
 //
-//       4x3 * 3x1 => 4x1
 //       4x3 * 3x2 => 4x2
 //       4x3 * 3x3 => 4x3
 //       4x3 * 3x4 => 4x4
-// 1x4 * 4x3       => 1x3
 
 namespace fgm
 {
@@ -357,6 +355,22 @@ namespace fgm
      * @{
      */
 
+    /**
+     * @brief Multiply a 4x3 matrix with a 3x2 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat4x2<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 4x2 matrix on the left hand side.
+     * @param[in] rhs The 3x2 matrix on the right hand side.
+     *
+     * @return A new 4x2 matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat4x2<T, U> operator*(const Mat4x3<T>& lhs, const Mat3x2<U>& rhs) noexcept;
 
     /** @} */
 

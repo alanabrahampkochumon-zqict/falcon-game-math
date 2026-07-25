@@ -7,6 +7,7 @@ target_sources(
         comp/Mat3x2.cpp
         comp/Mat3x4.cpp
         comp/Mat4x2.cpp
+        comp/Mat4x3.cpp
 
         geom/Mat2x3.cpp
         geom/Mat2x4.cpp
