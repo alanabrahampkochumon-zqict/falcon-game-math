@@ -191,7 +191,8 @@
              *   @defgroup T_FGM_Mat2x3_Addition Addition
              *   @defgroup T_FGM_Mat2x3_Subtraction Subtraction
              *   @defgroup T_FGM_Mat2x3_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Mat2x3_MatVec_Multiplication Matrix and Vector Multiplication
+             *   @defgroup T_FGM_Mat2x3_Comp Matrix Compositions
+             *   @defgroup T_FGM_Mat2x3_Geom Matrix Geometric Operations
              *   @defgroup T_FGM_Mat2x3_Division Scalar Division
              *   @defgroup T_FGM_Mat2x3_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x3_Constant Matrix Constants
@@ -216,7 +217,8 @@
              *   @defgroup T_FGM_Mat2x4_Addition Addition
              *   @defgroup T_FGM_Mat2x4_Subtraction Subtraction
              *   @defgroup T_FGM_Mat2x4_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Mat2x4_MatVec_Multiplication Matrix and Vector Multiplication
+             *   @defgroup T_FGM_Mat2x4_Comp Matrix Compositions
+             *   @defgroup T_FGM_Mat2x4_Geom Matrix Geometric Operations
              *   @defgroup T_FGM_Mat2x4_Division Scalar Division
              *   @defgroup T_FGM_Mat2x4_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x4_Constant Matrix Constants
@@ -242,7 +244,8 @@
              *   @defgroup T_FGM_Mat3x2_Addition Addition
              *   @defgroup T_FGM_Mat3x2_Subtraction Subtraction
              *   @defgroup T_FGM_Mat3x2_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Mat3x2_MatVec_Multiplication Matrix and Vector Multiplication
+             *   @defgroup T_FGM_Mat3x2_Comp Matrix Compositions
+             *   @defgroup T_FGM_Mat3x2_Geom Matrix Geometric Operations
              *   @defgroup T_FGM_Mat3x2_Division Scalar Division
              *   @defgroup T_FGM_Mat3x2_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat3x2_Constant Matrix Constants
@@ -287,7 +290,7 @@
 
             /**
              * @defgroup FGM_Mat3x4_Tests 3x4 Matrix Test Suite
-             * @brief Verification of 3x4  matrix operations.
+             * @brief Verification of 3x4 matrix operations.
              * @ingroup MatrixTests
              * @{
              *   @defgroup T_FGM_Mat3x4_Access Component Access
@@ -297,7 +300,8 @@
              *   @defgroup T_FGM_Mat3x4_Addition Addition
              *   @defgroup T_FGM_Mat3x4_Subtraction Subtraction
              *   @defgroup T_FGM_Mat3x4_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Mat3x4_MatVec_Multiplication Matrix and Vector Multiplication
+             *   @defgroup T_FGM_Mat3x4_Comp Matrix Compositions
+             *   @defgroup T_FGM_Mat3x4_Geom Matrix Geometric Operations
              *   @defgroup T_FGM_Mat3x4_Division Scalar Division
              *   @defgroup T_FGM_Mat3x4_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat3x4_Inverse Matrix Inverse
@@ -317,7 +321,7 @@
 
             /**
              * @defgroup FGM_Mat4x2_Tests 4x2 Matrix Test Suite
-             * @brief Verification of 4x2  matrix operations.
+             * @brief Verification of 4x2 matrix operations.
              * @ingroup MatrixTests
              * @{
              *   @defgroup T_FGM_Mat4x2_Access Component Access
@@ -327,7 +331,8 @@
              *   @defgroup T_FGM_Mat4x2_Addition Addition
              *   @defgroup T_FGM_Mat4x2_Subtraction Subtraction
              *   @defgroup T_FGM_Mat4x2_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Mat4x2_MatVec_Multiplication Matrix and Vector Multiplication
+             *   @defgroup T_FGM_Mat4x2_Comp Matrix Compositions
+             *   @defgroup T_FGM_Mat4x2_Geom Matrix Geometric Operations
              *   @defgroup T_FGM_Mat4x2_Division Scalar Division
              *   @defgroup T_FGM_Mat4x2_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat4x2_Inverse Matrix Inverse
@@ -357,7 +362,8 @@
              *   @defgroup T_FGM_Mat4x3_Addition Addition
              *   @defgroup T_FGM_Mat4x3_Subtraction Subtraction
              *   @defgroup T_FGM_Mat4x3_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Mat4x3_MatVec_Multiplication Matrix and Vector Multiplication
+             *   @defgroup T_FGM_Mat4x3_Comp Matrix Compositions
+             *   @defgroup T_FGM_Mat4x3_Geom Matrix Geometric Operations
              *   @defgroup T_FGM_Mat4x3_Division Scalar Division
              *   @defgroup T_FGM_Mat4x3_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat4x3_Inverse Matrix Inverse

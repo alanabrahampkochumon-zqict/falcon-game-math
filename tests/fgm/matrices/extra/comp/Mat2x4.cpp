@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 24, 2026
  *
- * @brief Verify @ref fgm::Mat2x4 vector and matrix multiplication logic.
+ * @brief Verify @ref fgm::Mat2x4 composition (matrix-matrix Composition) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -11,17 +11,17 @@
 
 #include "CommonSetup.h"
 #include "utils/MatrixUtils.h"
-#include "utils/VectorUtils.h"
 
-#include <fgm/matrices/MatMul.h>
+#include <fgm/matrices/extra/Comp.h>
 #include <gtest/gtest.h>
+
 
 using namespace testutils;
 
 
 
 /**
- * @addtogroup T_FGM_Mat2x4_MatVec_Multiplication
+ * @addtogroup T_FGM_Mat2x4_Comp
  * @{
  */
 
@@ -35,17 +35,15 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2x4 matrix and vector multiplication.
+     * @brief Test fixture for @ref fgm::Mat2x4 matrix composition.
      *
-     * @tparam T The scalar type (e.g., float, double) used for the matrix and vectors.
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat2x4Multiplication: public testing::Test
+    class Mat2x4Composition: public testing::Test
     {
 
     protected:
-        fgm::Vec2<T> _vec2, _expectedFPVec2, _expectedIntVec2;
-        fgm::Vec4<T> _vec4, _expectedFPVec4, _expectedIntVec4;
 
         fgm::Mat2<T> _expectedFPMat2, _expectedIntMat2;
         fgm::Mat2x3<T> _expectedFPMat2x3, _expectedIntMat2x3;
@@ -57,18 +55,6 @@ namespace
 
         void SetUp() override
         {
-
-            _vec2            = fgm::Vec2{ T(1.23412341000000003), T(2.21341324399999984) };
-            _expectedFPVec2  = fgm::Vec2{ T(32.15467085860238683), T(24.40151006828770974) };
-            _expectedIntVec2 = fgm::Vec2{ T(30), T(23) };
-
-            _vec4            = fgm::Vec4{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988),
-                               T(4.01283041000000029) };
-            _expectedFPVec4  = fgm::Vec4{ T(10.77767014729188588), T(3.52277011050120237), T(17.28037759123665751),
-                                         T(4.92348186700635182) };
-            _expectedIntVec4 = fgm::Vec4{ T(9), T(3), T(15), T(4) };
-
-
             _expectedFPMat2  = { fgm::Vec2{ T(51.53148302175357287), T(31.05492997565247038) },
                                  fgm::Vec2{ T(14.61642063652532286), T(10.45638242976778720) } };
             _expectedIntMat2 = { fgm::Vec2{ T(50), T(30) }, fgm::Vec2{ T(14), T(10) } };
@@ -114,7 +100,7 @@ namespace
                                    T(9.10234799999999922) } };
         }
     };
-    TYPED_TEST_SUITE(Mat2x4Multiplication, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat2x4Composition, SupportedArithmeticTypes);
 
 
     /**************************************
@@ -126,20 +112,12 @@ namespace
     namespace static_tests
     {
         // STATIC TEST SETUP
-        constexpr fgm::Vec2 ROW_VEC2(1, 2);
-        constexpr fgm::Vec4 VEC4(1, 2, 3, 4);
-
         constexpr fgm::Mat2x4 MAT2X4(5, 6, 7, 8, 9, 10, 11, 12);
 
         constexpr fgm::Mat4 MAT4(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
         constexpr fgm::Mat4x2 MAT4X2(5, 6, 7, 8, 9, 10, 11, 12);
         constexpr fgm::Mat4x3 MAT4X3(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
-
-        /// @test Verify that 2x4 matrix times a 4D column vector yields a 2D column vector at compile time.
-        constexpr auto EXP_VEC2 = MAT2X4 * VEC4;
-        static_assert(EXP_VEC2.x() == 70);
-        static_assert(EXP_VEC2.y() == 110);
 
         /// @test Verify that 2x4 matrix times a 4x2 matrix yields a 2x2 matrix at compile time.
         constexpr auto EXP_MAT2 = MAT2X4 * MAT4X2;
@@ -160,14 +138,6 @@ namespace
         static_assert(EXP_MAT2X4[2] == fgm::Vec2{ 358, 566 });
         static_assert(EXP_MAT2X4[3] == fgm::Vec2{ 384, 608 });
 
-
-        /// @test Verify that 2D row vector times a 2x4 matrix yields a 4D row vector at compile time.
-        constexpr auto EXP_ROW_VEC4 = ROW_VEC2 * MAT2X4;
-        static_assert(EXP_ROW_VEC4.x() == 23);
-        static_assert(EXP_ROW_VEC4.y() == 26);
-        static_assert(EXP_ROW_VEC4.z() == 29);
-        static_assert(EXP_ROW_VEC4.w() == 32);
-
     } // namespace static_tests
 
 } // namespace
@@ -180,21 +150,7 @@ namespace
  *                                    *
  **************************************/
 
-TYPED_TEST(Mat2x4Multiplication, Mat2x4Times4DVector_ReturnsAValid2DVector)
-{
-    const auto expectedVector = this->_mat2x4 * this->_vec4;
-    if constexpr (std::is_floating_point_v<TypeParam>)
-    {
-        EXPECT_VEC_EQ(this->_expectedFPVec2, expectedVector);
-    }
-    else
-    {
-        EXPECT_VEC_EQ(this->_expectedIntVec2, expectedVector);
-    }
-}
-
-
-TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4x2_ReturnsAValid2DMatrix)
+TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4x2_ReturnsAValid2DMatrix)
 {
     const auto matrixProduct = this->_mat2x4 * this->_mat4x2;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -208,7 +164,7 @@ TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4x2_ReturnsAValid2DMatrix)
 }
 
 
-TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4_ReturnsAValid2x4Matrix)
+TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4_ReturnsAValid2x4Matrix)
 {
     const auto matrixProduct = this->_mat2x4 * this->_mat4;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -222,7 +178,7 @@ TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4_ReturnsAValid2x4Matrix)
 }
 
 
-TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4x3_ReturnsAValid2x3Matrix)
+TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4x3_ReturnsAValid2x3Matrix)
 {
     const auto matrixProduct = this->_mat2x4 * this->_mat4x3;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -232,20 +188,6 @@ TYPED_TEST(Mat2x4Multiplication, Mat2x4TimesMat4x3_ReturnsAValid2x3Matrix)
     else
     {
         EXPECT_MAT_EQ(this->_expectedIntMat2x3, matrixProduct);
-    }
-}
-
-
-TYPED_TEST(Mat2x4Multiplication, 2DRowVectorTimesMat2x4_ReturnsAValid4DRowVector)
-{
-    const auto expectedVector = this->_vec2 * this->_mat2x4;
-    if constexpr (std::is_floating_point_v<TypeParam>)
-    {
-        EXPECT_VEC_EQ(this->_expectedFPVec4, expectedVector);
-    }
-    else
-    {
-        EXPECT_VEC_EQ(this->_expectedIntVec4, expectedVector);
     }
 }
 

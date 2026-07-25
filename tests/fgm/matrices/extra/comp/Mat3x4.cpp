@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 25, 2026
  *
- * @brief Verify @ref fgm::Mat3x4 vector and matrix multiplication logic.
+ * @brief Verify @ref fgm::Mat3x4 composition (matrix-matrix Composition) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -11,17 +11,17 @@
 
 #include "CommonSetup.h"
 #include "utils/MatrixUtils.h"
-#include "utils/VectorUtils.h"
 
-#include <fgm/matrices/MatMul.h>
+#include <fgm/matrices/extra/Comp.h>
 #include <gtest/gtest.h>
+
 
 using namespace testutils;
 
 
 
 /**
- * @addtogroup T_FGM_Mat3x4_MatVec_Multiplication
+ * @addtogroup T_FGM_Mat3x4_Comp
  * @{
  */
 
@@ -35,18 +35,15 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x4 matrix and vector multiplication.
+     * @brief Test fixture for @ref fgm::Mat3x4 matrix composition.
      *
-     * @tparam T The scalar type (e.g., float, double) used for the matrix and vectors.
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat3x4Multiplication: public testing::Test
+    class Mat3x4Composition: public testing::Test
     {
 
     protected:
-        fgm::Vec3<T> _vec3, _expectedFPVec3, _expectedIntVec3;
-        fgm::Vec4<T> _vec4, _expectedFPVec4, _expectedIntVec4;
-
         fgm::Mat3x2<T> _expectedFPMat3x2, _expectedIntMat3x2;
         fgm::Mat3x4<T> _mat3x4, _expectedFPMat3x4, _expectedIntMat3x4;
 
@@ -57,19 +54,6 @@ namespace
 
         void SetUp() override
         {
-
-            _vec3            = fgm::Vec3{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988) };
-            _expectedFPVec3  = { fgm::Vec3{ T(32.15467085860238683), T(24.40151006828770974),
-                                           T(16.28906864577547253) } };
-            _expectedIntVec3 = { fgm::Vec3{ T(30), T(23), T(15) } };
-
-            _vec4            = { fgm::Vec4{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988),
-                                 T(4.01283041000000029) } };
-            _expectedFPVec4  = fgm::Vec4{ T(11.08456156345330790), T(4.27872517874863956), T(20.91827216587800464),
-                                         T(14.10190761507471002) };
-            _expectedIntVec4 = fgm::Vec4{ T(9), T(3), T(18), T(13) };
-
-
             _expectedFPMat3  = { fgm::Vec3{ T(59.71294882333997123), T(40.93849965675766356), T(16.03666856715538813) },
                                  fgm::Vec3{ T(17.06563996375492565), T(11.97595332411097502), T(8.24852207871460053) },
                                  fgm::Vec3{ T(70.16686590855846362), T(46.29281811210886133),
@@ -119,7 +103,7 @@ namespace
                                    T(9.10234799999999922) } };
         }
     };
-    TYPED_TEST_SUITE(Mat3x4Multiplication, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat3x4Composition, SupportedArithmeticTypes);
 
 
     /**************************************
@@ -131,21 +115,12 @@ namespace
     namespace static_tests
     {
         // STATIC TEST SETUP
-        constexpr fgm::Vec3 ROW_VEC3(1, 2, 3);
-        constexpr fgm::Vec4 VEC4(1, 2, 3, 4);
-
         constexpr fgm::Mat3x4 MAT3X4(5, 1, 5, 2, 2, 1, 5, 1, 0, 0, 1, 3);
 
         constexpr fgm::Mat4 MAT4(5, 1, 5, 2, 2, 1, 5, 1, 5, 3, 2, 9, 7, 3, 5, 4);
         constexpr fgm::Mat4x2 MAT4X2(5, 1, 5, 2, 2, 1, 5, 1);
         constexpr fgm::Mat4x3 MAT4X3(5, 1, 5, 2, 2, 1, 5, 1, 5, 3, 2, 9);
 
-
-        /// @test Verify that 3x4 matrix times a 4D column vector yields a 3D column vector at compile time.
-        constexpr auto EXP_VEC3 = MAT3X4 * VEC4;
-        static_assert(EXP_VEC3.x() == 30);
-        static_assert(EXP_VEC3.y() == 23);
-        static_assert(EXP_VEC3.z() == 15);
 
         /// @test Verify that 3x4 matrix times a 4x2 matrix yields a 3x2 matrix at compile time.
         constexpr auto EXP_MAT3X2 = MAT3X4 * MAT4X2;
@@ -165,13 +140,6 @@ namespace
         static_assert(EXP_MAT3X4[2] == fgm::Vec3{ 50, 30, 17 });
         static_assert(EXP_MAT3X4[3] == fgm::Vec3{ 64, 54, 21 });
 
-        /// @test Verify that 3D row vector times a 3x4 matrix yields a 4D row vector at compile time.
-        constexpr auto EXP_ROW_VEC4 = ROW_VEC3 * MAT3X4;
-        static_assert(EXP_ROW_VEC4.x() == 9);
-        static_assert(EXP_ROW_VEC4.y() == 3);
-        static_assert(EXP_ROW_VEC4.z() == 18);
-        static_assert(EXP_ROW_VEC4.w() == 13);
-
     } // namespace static_tests
 
 } // namespace
@@ -184,21 +152,7 @@ namespace
  *                                    *
  **************************************/
 
-TYPED_TEST(Mat3x4Multiplication, Mat3x4Times4DVector_ReturnsAValid3DVector)
-{
-    const auto expectedVector = this->_mat3x4 * this->_vec4;
-    if constexpr (std::is_floating_point_v<TypeParam>)
-    {
-        EXPECT_VEC_EQ(this->_expectedFPVec3, expectedVector);
-    }
-    else
-    {
-        EXPECT_VEC_EQ(this->_expectedIntVec3, expectedVector);
-    }
-}
-
-
-TYPED_TEST(Mat3x4Multiplication, Mat3x4TimesMat4x2_ReturnsAValid3x2Matrix)
+TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4x2_ReturnsAValid3x2Matrix)
 {
     const auto matrixProduct = this->_mat3x4 * this->_mat4x2;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -212,7 +166,7 @@ TYPED_TEST(Mat3x4Multiplication, Mat3x4TimesMat4x2_ReturnsAValid3x2Matrix)
 }
 
 
-TYPED_TEST(Mat3x4Multiplication, Mat3x4TimesMat4x3_ReturnsAValid3DMatrix)
+TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4x3_ReturnsAValid3DMatrix)
 {
     const auto matrixProduct = this->_mat3x4 * this->_mat4x3;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -226,7 +180,7 @@ TYPED_TEST(Mat3x4Multiplication, Mat3x4TimesMat4x3_ReturnsAValid3DMatrix)
 }
 
 
-TYPED_TEST(Mat3x4Multiplication, Mat3x4TimesMat4_ReturnsAValid3x4Matrix)
+TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4_ReturnsAValid3x4Matrix)
 {
     const auto matrixProduct = this->_mat3x4 * this->_mat4;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -236,20 +190,6 @@ TYPED_TEST(Mat3x4Multiplication, Mat3x4TimesMat4_ReturnsAValid3x4Matrix)
     else
     {
         EXPECT_MAT_EQ(this->_expectedIntMat3x4, matrixProduct);
-    }
-}
-
-
-TYPED_TEST(Mat3x4Multiplication, 3DRowVectorTimesMat3x4_ReturnsAValid4DRowVector)
-{
-    const auto expectedVector = this->_vec3 * this->_mat3x4;
-    if constexpr (std::is_floating_point_v<TypeParam>)
-    {
-        EXPECT_VEC_EQ(this->_expectedFPVec4, expectedVector);
-    }
-    else
-    {
-        EXPECT_VEC_EQ(this->_expectedIntVec4, expectedVector);
     }
 }
 
