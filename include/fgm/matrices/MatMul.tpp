@@ -173,4 +173,17 @@ namespace fgm
                      R(vec.x() * mat(0, 2) + vec.y() * mat(1, 2)), R(vec.x() * mat(0, 3) + vec.y() * mat(1, 3)) };
     }
 
+
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedVec3<T, U> operator*(const Mat3x2<T>& mat, const Vec2<U>& vec) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Vec3{
+            R(mat[0].x() * vec.x() + mat[1].x() * vec.y()),
+            R(mat[0].y() * vec.x() + mat[1].y() * vec.y()),
+            R(mat[0].z() * vec.x() + mat[1].z() * vec.y()),
+        };
+    }
+
 } // namespace fgm
