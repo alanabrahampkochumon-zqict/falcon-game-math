@@ -85,7 +85,7 @@ namespace
     {
         // STATIC TEST SETUP
         constexpr fgm::Vec3 VEC3(1, 2, 3);
-        // constexpr fgm::Vec4 ROW_VEC4(1, 2, 3, 4);
+        constexpr fgm::Vec4 ROW_VEC4(1, 2, 3, 4);
 
         constexpr fgm::Mat4x3 MAT4X3(5, 1, 5, 2, 2, 1, 5, 1, 5, 3, 2, 9);
 
@@ -98,9 +98,10 @@ namespace
         static_assert(EXP_VEC4.w() == 34);
 
         /// @test Verify that 4D row vector times a 4x3 matrix yields a 3D row vector at compile time.
-        // constexpr auto EXP_ROW_VEC3 = ROW_VEC4 * MAT4X3;
-        // static_assert(EXP_ROW_VEC3.x() == 41);
-        // static_assert(EXP_ROW_VEC3.y() == 12);
+        constexpr auto EXP_ROW_VEC3 = ROW_VEC4 * MAT4X3;
+        static_assert(EXP_ROW_VEC3.x() == 36);
+        static_assert(EXP_ROW_VEC3.y() == 16);
+        static_assert(EXP_ROW_VEC3.z() == 58);
 
     } // namespace static_tests
 
@@ -128,17 +129,17 @@ TYPED_TEST(Mat4x3GeometricOps, Mat4x3Times2DVector_ReturnsAValid4DVector)
 }
 
 
-// TYPED_TEST(Mat4x3GeometricOps, 4DRowVectorTimesMat4x3_ReturnsAValid2DRowVector)
-// {
-//     const auto expectedVector = this->_vec4 * this->_mat4x2;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_VEC_EQ(this->_expectedFPVec2, expectedVector);
-//     }
-//     else
-//     {
-//         EXPECT_VEC_EQ(this->_expectedIntVec2, expectedVector);
-//     }
-// }
+TYPED_TEST(Mat4x3GeometricOps, 4DRowVectorTimesMat4x3_ReturnsAValid2DRowVector)
+{
+    const auto expectedVector = this->_vec4 * this->_mat4x3;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_VEC_EQ(this->_expectedFPVec3, expectedVector);
+    }
+    else
+    {
+        EXPECT_VEC_EQ(this->_expectedIntVec3, expectedVector);
+    }
+}
 
 /** @} */

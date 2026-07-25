@@ -284,6 +284,24 @@ namespace fgm
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Mat4x3<T>& mat, const Vec3<U>& vec) noexcept;
 
+
+    /**
+     * @brief Multiply a 4D row vector with a 4x3 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedVector3<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] vec The row vector to multiply.
+     * @param[in] mat The matrix to multiply with.
+     *
+     * @return A new 3D row vector.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedVec3<T, U> operator*( const Vec4<U>& vec, const Mat4x3<T>& mat) noexcept;
+
     /** @} */
 
 } // namespace fgm
