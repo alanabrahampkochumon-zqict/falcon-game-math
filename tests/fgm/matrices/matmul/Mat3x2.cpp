@@ -119,13 +119,15 @@ namespace
         // constexpr fgm::Vec4 VEC4(1, 2, 3, 4);
         //
         constexpr fgm::Mat2 MAT2(1, 2, 3, 4);
+        constexpr fgm::Mat2x3 MAT2X3(1, 2, 3, 4, 5, 6);
+
         constexpr fgm::Mat3x2 MAT3X2(1, 2, 3, 4, 5, 6);
         //
         // constexpr fgm::Mat4 MAT4(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
         // constexpr fgm::Mat4x2 MAT4X2(5, 6, 7, 8, 9, 10, 11, 12);
         // constexpr fgm::Mat4x3 MAT4X3(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-        //
-        //
+
+
         /// @test Verify that 3x2 matrix times a 2D column vector yields a 3D column vector at compile time.
         constexpr auto EXP_VEC3 = MAT3X2 * VEC2;
         static_assert(EXP_VEC3.x() == 5);
@@ -137,13 +139,13 @@ namespace
         static_assert(EXP_MAT2[0] == fgm::Vec3{ 7, 15, 23 });
         static_assert(EXP_MAT2[1] == fgm::Vec3{ 10, 22, 34 });
 
-        // /// @test Verify that 3x2 matrix times a 4x3 matrix yields a 2x3 matrix at compile time.
-        // constexpr auto EXP_MAT_2X3 = MAT2X4 * MAT4X3;
-        // static_assert(EXP_MAT_2X3[0] == fgm::Vec2{ 262, 414 });
-        // static_assert(EXP_MAT_2X3[1] == fgm::Vec2{ 288, 456 });
-        // static_assert(EXP_MAT_2X3[2] == fgm::Vec2{ 314, 498 });
-        //
-        //
+        /// @test Verify that 3x2 matrix times a 2x3 matrix yields a 3x3 matrix at compile time.
+        constexpr auto EXP_MAT3 = MAT3X2 * MAT2X3;
+        static_assert(EXP_MAT3[0] == fgm::Vec3{ 9, 19, 29 });
+        static_assert(EXP_MAT3[1] == fgm::Vec3{ 12, 26, 40 });
+        static_assert(EXP_MAT3[2] == fgm::Vec3{ 15, 33, 51 });
+
+
         // /// @test Verify that 3x2 matrix times a 4x4 matrix yields a 2x4 matrix at compile time.
         // constexpr auto EXP_MAT_2X4 = MAT2X4 * MAT4;
         // static_assert(EXP_MAT_2X4[0] == fgm::Vec2{ 306, 482 });
@@ -185,7 +187,7 @@ TYPED_TEST(Mat3x2Multiplication, Mat3x2Times2DVector_ReturnsAValid3DVector)
 }
 
 
-TYPED_TEST(Mat3x2Multiplication, Mat3x2TimesMat2x3_ReturnsAValid3DMatrix)
+TYPED_TEST(Mat3x2Multiplication, Mat3x2TimesMat2_ReturnsAValid3x2Matrix)
 {
     const auto matrixProduct = this->_mat3x2 * this->_mat2;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -199,20 +201,20 @@ TYPED_TEST(Mat3x2Multiplication, Mat3x2TimesMat2x3_ReturnsAValid3DMatrix)
 }
 
 
-// TYPED_TEST(Mat3x2Multiplication, Mat3x2TimesMat4_ReturnsAValid2x4Matrix)
-// {
-//     const auto matrixProduct = this->_mat3x2 * this->_mat4;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_MAT_EQ(this->_expectedFPMat3x2, matrixProduct);
-//     }
-//     else
-//     {
-//         EXPECT_MAT_EQ(this->_expectedIntMat3x2, matrixProduct);
-//     }
-// }
-//
-//
+TYPED_TEST(Mat3x2Multiplication, Mat3x2TimesMat2x3_ReturnsAValid3DMatrix)
+{
+    const auto matrixProduct = this->_mat3x2 * this->_mat2x3;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedFPMat3, matrixProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedIntMat3, matrixProduct);
+    }
+}
+
+
 // TYPED_TEST(Mat3x2Multiplication, Mat3x2TimesMat4x3_ReturnsAValid2x3Matrix)
 // {
 //     const auto matrixProduct = this->_mat3x2 * this->_mat4x3;
