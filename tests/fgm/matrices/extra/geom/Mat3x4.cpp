@@ -36,7 +36,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x4 matrix geometric operations.
+     * @brief Test fixture for @ref fgm::Mat3x4 matrix geometric operations (Matrix-Vector Multiplication).
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices and vectors.
      */

@@ -30,8 +30,7 @@
 namespace fgm
 {
 
-    // Forward declarations
-
+    /// Forward declarations
     template <Arithmetic T>
     struct Vec2;
 
