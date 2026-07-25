@@ -182,7 +182,7 @@ namespace fgm
         return Vec3{
             R(mat[0].x() * vec.x() + mat[1].x() * vec.y()),
             R(mat[0].y() * vec.x() + mat[1].y() * vec.y()),
-            R(mat[0].z() * vec.x() + mat[1].z() * vec.y()),
+            R(mat[0].z() * vec.x() + mat[1].z() * vec.y())
         };
     }
 
@@ -341,6 +341,20 @@ namespace fgm
                      R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1) + vec.z() * mat(2, 1)),
                      R(vec.x() * mat(0, 2) + vec.y() * mat(1, 2) + vec.z() * mat(2, 2)),
                      R(vec.x() * mat(0, 3) + vec.y() * mat(1, 3) + vec.z() * mat(2, 3)) };
+    }
+
+
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedVec4<T, U> operator*(const Mat4x2<T>& mat, const Vec2<U>& vec) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Vec4{
+            R(mat[0].x() * vec.x() + mat[1].x() * vec.y()),
+            R(mat[0].y() * vec.x() + mat[1].y() * vec.y()),
+            R(mat[0].z() * vec.x() + mat[1].z() * vec.y()),
+            R(mat[0].w() * vec.x() + mat[1].w() * vec.y())
+        };
     }
 
 } // namespace fgm

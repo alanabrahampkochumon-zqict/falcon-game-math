@@ -43,12 +43,6 @@
 //
 
 
-//       3x4 * 4x1 => 3x1
-//       3x4 * 4x2 => 3x2
-//       3x4 * 4x3 => 3x3
-//       3x4 * 4x4 => 3x4
-// 1x3 * 3x4       => 1x4
-
 //       4x2 * 2x1 => 4x1
 //       4x2 * 2x2 => 4x2
 //       4x2 * 2x3 => 4x3
@@ -460,6 +454,23 @@ namespace fgm
      * @addtogroup FGM_Mat4x2_Arithmetic
      * @{
      */
+
+    /**
+     * @brief Multiply a 4x2 matrix with a 2D column vector.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedVector4<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] mat The matrix to multiply.
+     * @param[in] vec The column vector to multiply with.
+     *
+     * @return A new 4D column vector.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Mat4x2<T>& mat, const Vec2<U>& vec) noexcept;
 
     /** @} */
 

@@ -6,6 +6,7 @@ target_sources(
         Mat2x4.cpp
         Mat3x2.cpp
         Mat3x4.cpp
+        Mat4x2.cpp
 )
 
 target_include_directories(
