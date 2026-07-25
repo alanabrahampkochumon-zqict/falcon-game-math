@@ -448,23 +448,6 @@ namespace fgm
     [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Vec3<T>& vec, const Mat3x4<U>& mat) noexcept;
 
 
-    /**
-     * @brief Multiply a 3x4 matrix with a 4x2 matrix.
-     *
-     * @note Promotes the result to the wider type using @ref PromotedMat3x2<T, U>.
-     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-     *
-     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
-     *
-     * @param[in] lhs The 3x4 matrix on the left hand side.
-     * @param[in] rhs The 4x2 matrix on the right hand side.
-     *
-     * @return A new 3x2 matrix.
-     */
-    template <StrictArithmetic T, StrictArithmetic U>
-        requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedMat3x2<T, U> operator*(const Mat3x4<T>& lhs, const Mat4x2<U>& rhs) noexcept;
-
     /** @} */
 
 
@@ -508,6 +491,42 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedMat4x2<T, U> operator*(const Mat4x2<T>& lhs, const Mat2<U>& rhs) noexcept;
+
+
+    /**
+     * @brief Multiply a 4x2 matrix with a 2x3 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat4x3<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 4x2 matrix on the left hand side.
+     * @param[in] rhs The 2x3 matrix on the right hand side.
+     *
+     * @return A new 4x3 matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat4x3<T, U> operator*(const Mat4x2<T>& lhs, const Mat2x3<U>& rhs) noexcept;
+
+
+    /**
+     * @brief Multiply a 4x2 matrix with a 2x4 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat4<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 4x2 matrix on the left hand side.
+     * @param[in] rhs The 2x4 matrix on the right hand side.
+     *
+     * @return A new 4D matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat4<T, U> operator*(const Mat4x2<T>& lhs, const Mat2x4<U>& rhs) noexcept;
 
     /** @} */
 
