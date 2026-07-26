@@ -13,6 +13,7 @@ target_sources(
         NegationTests.cpp
         StringRepresentationTests.cpp
         SubtractionTests.cpp
+        TransposeTests.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
 )

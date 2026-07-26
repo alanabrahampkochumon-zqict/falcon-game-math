@@ -40,7 +40,7 @@ namespace fgm
 
     template <Arithmetic T>
     FGM_INLINE constexpr Mat2x4<T>::Mat2x4(const Vec2<T>& col0, const Vec2<T>& col1, const Vec2<T>& col2,
-                                const Vec2<T>& col3) noexcept
+                                           const Vec2<T>& col3) noexcept
         : _data{ col0, col1, col2, col3 }
     {}
 
@@ -351,7 +351,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     FGM_INLINE constexpr PromotedMat2x4<T, S> Mat2x4<T>::safeDiv(const Mat2x4& mat, const S scalar,
-                                                      Mat2x4 fallback) noexcept
+                                                                 Mat2x4 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
@@ -359,7 +359,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     FGM_INLINE constexpr PromotedMat2x4<T, S> Mat2x4<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                     Mat2x4 fallback) const noexcept
+                                                                Mat2x4 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -395,8 +395,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat2x4<T, S> Mat2x4<T>::tryDiv(const Mat2x4& mat, const S scalar, OperationStatus& status,
-                                                     Mat2x4 fallback) noexcept
+    FGM_INLINE constexpr PromotedMat2x4<T, S> Mat2x4<T>::tryDiv(const Mat2x4& mat, const S scalar,
+                                                                OperationStatus& status, Mat2x4 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
@@ -414,22 +414,18 @@ namespace fgm
      *                                    *
      **************************************/
 
-    //
-    //
-    //     template <Arithmetic T>
-    //     FGM_INLINE constexpr Mat2x4<T> Mat2x4<T>::transpose() const noexcept
-    //     {
-    //         // NOTE: _data is a column major vector so _data[0][1] gives element at first row and zeroth column.
-    //         return Mat2x4(_data[0][0], _data[0][1], _data[1][0], _data[1][1]);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FGM_INLINE constexpr Mat2x4<T> Mat2x4<T>::transpose(const Mat2x4& matrix) noexcept
-    //     {
-    //         return matrix.transpose();
-    //     }
-    //
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat4x2<T> Mat2x4<T>::transpose() const noexcept
+    {
+        return Mat4x2{ _data[0][0], _data[0][1], _data[1][0], _data[1][1],
+                       _data[2][0], _data[2][1], _data[3][0], _data[3][1] };
+    }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat4x2<T> Mat2x4<T>::transpose(const Mat2x4& matrix) noexcept
+    { return matrix.transpose(); }
+
 
 
     /**************************************

@@ -579,6 +579,59 @@ namespace fgm
 
 
         /**
+         * @addtogroup FGM_Mat2x4_Algebra
+         * @{
+         */
+
+        /**
+         * @brief Transpose this matrix by swapping its rows and columns.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13}
+         *            \end{bmatrix} ^ \top
+         *            =
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} \\
+         *                 A_{01} & A_{11} \\
+         *                 A_{02} & A_{12} \\
+         *                 A_{03} & A_{13}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @return A new @ref Mat4x2 with its elements flipped along the diagonal.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+        constexpr Mat4x2<T> transpose() const noexcept;
+
+
+        /**
+         * @brief Transpose @p matrix by swapping its rows and columns.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13}
+         *            \end{bmatrix} ^ \top
+         *            =
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} \\
+         *                 A_{01} & A_{11} \\
+         *                 A_{02} & A_{12} \\
+         *                 A_{03} & A_{13}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @param matrix The matrix to transpose.
+         *
+         * @return A new @ref Mat4x2 with its elements flipped along the diagonal.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+        static constexpr Mat4x2<T> transpose(const Mat2x4& matrix) noexcept;
+
+        /** @} */
+
+
+        /**
          * @addtogroup FGM_Mat2x4_Utils
          * @{
          */
@@ -711,7 +764,7 @@ namespace fgm
         std::array<Vec2<T>, COLUMNS> _data;
     };
 
-    
+
     /**
      * @addtogroup FGM_Mat2x4_Alias
      * @{
