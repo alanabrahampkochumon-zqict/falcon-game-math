@@ -423,6 +423,14 @@ namespace fgm
         constexpr Mat2& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Mat2x2_Geom
+         * @{
+         */
 
         /**
          * @brief Transform the @p Vec **column vector** by this matrix.
@@ -455,6 +463,14 @@ namespace fgm
         [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Vec2<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Mat2x2_Comp
+         * @{
+         */
 
         /**
          * @brief Compose this matrix with @p rhs matrix to form a new matrix.
@@ -522,6 +538,14 @@ namespace fgm
         constexpr Mat2& operator*=(const Mat2<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Mat2x2_Algebra
+         * @{
+         */
 
         /**
          * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
@@ -1248,6 +1272,14 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic S>
     [[nodiscard]] constexpr PromotedMat2<T, S> operator*(S scalar, const Mat2<T>& matrix) noexcept;
 
+    /** @} */
+
+
+
+    /**
+     * @addtogroup FGM_Mat2x2_Geom
+     * @{
+     */
 
     /**
      * @brief Transform the @p Vec **row vector** by @p matrix.

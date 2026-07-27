@@ -426,6 +426,14 @@ namespace fgm
         constexpr Mat3& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Mat3x3_Geom
+         * @{
+         */
 
         /**
          * @brief Transform the @p Vec **column vector** by this matrix.
@@ -459,6 +467,14 @@ namespace fgm
         [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const Vec3<U>& vec) const noexcept
             requires StrictArithmetic<T>;
 
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Mat3x3_Comp
+         * @{
+         */
 
         /**
          * @brief Compose this matrix with @p rhs matrix to form a new matrix.
@@ -532,6 +548,14 @@ namespace fgm
         constexpr Mat3& operator*=(const Mat3<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_Mat3x3_Algebra
+         * @{
+         */
 
         /**
          * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
@@ -1476,6 +1500,14 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic S>
     [[nodiscard]] constexpr PromotedMat3<T, S> operator*(S scalar, const Mat3<T>& matrix) noexcept;
 
+    /** @} */
+
+
+
+    /**
+     * @addtogroup FGM_Mat3x3_Geom
+     * @{
+     */
 
     /**
      * @brief Transform the @p Vec **row vector** by @p matrix.
