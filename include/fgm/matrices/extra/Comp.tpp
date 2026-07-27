@@ -69,6 +69,22 @@ namespace fgm
     }
 
 
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedMat2x3<T, U> operator*(const Mat2<T>& lhs, const Mat2x3<U>& rhs) noexcept
+    {
+        using R = PromotedValue_t<T, U>;
+        return Mat2x3{
+            // Row 1
+            R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0)), R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1)),
+            R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2)),
+            // Row 2
+            R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0)), R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1)),
+            R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2))
+        };
+    }
+
+
 
     /**************************************
      *                                    *
@@ -384,27 +400,27 @@ namespace fgm
         requires StrictSignedness<T, U>
     FGM_INLINE constexpr PromotedMat4<T, U> operator*(const Mat4x3<T>& lhs, const Mat3x4<U>& rhs) noexcept
     {
-        using R = PromotedValue_t<T, U>; 
+        using R = PromotedValue_t<T, U>;
         return Mat4{ // Row 1
-                       R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
-                       R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
-                       R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2) + lhs(0, 2) * rhs(2, 2)),
-                       R(lhs(0, 0) * rhs(0, 3) + lhs(0, 1) * rhs(1, 3) + lhs(0, 2) * rhs(2, 3)),
-                       // Row 2
-                       R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
-                       R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1)),
-                       R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(1, 2) * rhs(2, 2)),
-                       R(lhs(1, 0) * rhs(0, 3) + lhs(1, 1) * rhs(1, 3) + lhs(1, 2) * rhs(2, 3)),
-                       // Row 3
-                       R(lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(1, 0) + lhs(2, 2) * rhs(2, 0)),
-                       R(lhs(2, 0) * rhs(0, 1) + lhs(2, 1) * rhs(1, 1) + lhs(2, 2) * rhs(2, 1)),
-                       R(lhs(2, 0) * rhs(0, 2) + lhs(2, 1) * rhs(1, 2) + lhs(2, 2) * rhs(2, 2)),
-                       R(lhs(2, 0) * rhs(0, 3) + lhs(2, 1) * rhs(1, 3) + lhs(2, 2) * rhs(2, 3)),
-                       // Row 4
-                       R(lhs(3, 0) * rhs(0, 0) + lhs(3, 1) * rhs(1, 0) + lhs(3, 2) * rhs(2, 0)),
-                       R(lhs(3, 0) * rhs(0, 1) + lhs(3, 1) * rhs(1, 1) + lhs(3, 2) * rhs(2, 1)),
-                       R(lhs(3, 0) * rhs(0, 2) + lhs(3, 1) * rhs(1, 2) + lhs(3, 2) * rhs(2, 2)),
-                       R(lhs(3, 0) * rhs(0, 3) + lhs(3, 1) * rhs(1, 3) + lhs(3, 2) * rhs(2, 3))
+                     R(lhs(0, 0) * rhs(0, 0) + lhs(0, 1) * rhs(1, 0) + lhs(0, 2) * rhs(2, 0)),
+                     R(lhs(0, 0) * rhs(0, 1) + lhs(0, 1) * rhs(1, 1) + lhs(0, 2) * rhs(2, 1)),
+                     R(lhs(0, 0) * rhs(0, 2) + lhs(0, 1) * rhs(1, 2) + lhs(0, 2) * rhs(2, 2)),
+                     R(lhs(0, 0) * rhs(0, 3) + lhs(0, 1) * rhs(1, 3) + lhs(0, 2) * rhs(2, 3)),
+                     // Row 2
+                     R(lhs(1, 0) * rhs(0, 0) + lhs(1, 1) * rhs(1, 0) + lhs(1, 2) * rhs(2, 0)),
+                     R(lhs(1, 0) * rhs(0, 1) + lhs(1, 1) * rhs(1, 1) + lhs(1, 2) * rhs(2, 1)),
+                     R(lhs(1, 0) * rhs(0, 2) + lhs(1, 1) * rhs(1, 2) + lhs(1, 2) * rhs(2, 2)),
+                     R(lhs(1, 0) * rhs(0, 3) + lhs(1, 1) * rhs(1, 3) + lhs(1, 2) * rhs(2, 3)),
+                     // Row 3
+                     R(lhs(2, 0) * rhs(0, 0) + lhs(2, 1) * rhs(1, 0) + lhs(2, 2) * rhs(2, 0)),
+                     R(lhs(2, 0) * rhs(0, 1) + lhs(2, 1) * rhs(1, 1) + lhs(2, 2) * rhs(2, 1)),
+                     R(lhs(2, 0) * rhs(0, 2) + lhs(2, 1) * rhs(1, 2) + lhs(2, 2) * rhs(2, 2)),
+                     R(lhs(2, 0) * rhs(0, 3) + lhs(2, 1) * rhs(1, 3) + lhs(2, 2) * rhs(2, 3)),
+                     // Row 4
+                     R(lhs(3, 0) * rhs(0, 0) + lhs(3, 1) * rhs(1, 0) + lhs(3, 2) * rhs(2, 0)),
+                     R(lhs(3, 0) * rhs(0, 1) + lhs(3, 1) * rhs(1, 1) + lhs(3, 2) * rhs(2, 1)),
+                     R(lhs(3, 0) * rhs(0, 2) + lhs(3, 1) * rhs(1, 2) + lhs(3, 2) * rhs(2, 2)),
+                     R(lhs(3, 0) * rhs(0, 3) + lhs(3, 1) * rhs(1, 3) + lhs(3, 2) * rhs(2, 3))
         };
     }
 
