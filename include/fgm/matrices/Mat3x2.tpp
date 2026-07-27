@@ -338,7 +338,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     FGM_INLINE constexpr PromotedMat3x2<T, S> Mat3x2<T>::safeDiv(const Mat3x2& mat, const S scalar,
-                                                      Mat3x2 fallback) noexcept
+                                                                 Mat3x2 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
@@ -346,7 +346,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     FGM_INLINE constexpr PromotedMat3x2<T, S> Mat3x2<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                     Mat3x2 fallback) const noexcept
+                                                                Mat3x2 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -382,8 +382,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat3x2<T, S> Mat3x2<T>::tryDiv(const Mat3x2& mat, const S scalar, OperationStatus& status,
-                                                     Mat3x2 fallback) noexcept
+    FGM_INLINE constexpr PromotedMat3x2<T, S> Mat3x2<T>::tryDiv(const Mat3x2& mat, const S scalar,
+                                                                OperationStatus& status, Mat3x2 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
@@ -392,6 +392,16 @@ namespace fgm
     FGM_INLINE constexpr Mat3x2<T> Mat3x2<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
     { return Mat3x2{ -_data[0], -_data[1] }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat2x3<T> Mat3x2<T>::transpose() const noexcept
+    { return Mat2x3{ _data[0][0], _data[0][1], _data[0][2], _data[1][0], _data[1][1], _data[1][2] }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat2x3<T> Mat3x2<T>::transpose(const Mat3x2& matrix) noexcept
+    { return matrix.transpose(); }
 
 
     /**************************************

@@ -28,8 +28,6 @@
 /// TODO: Not implemented or tested
 // TODO: Add Groups
 // TODO: Transpose
-// Mat2x3
-// Mat2x4
 // Mat3x2
 // Mat3x4
 // Mat4x2
