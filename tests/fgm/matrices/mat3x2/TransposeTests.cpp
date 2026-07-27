@@ -62,8 +62,8 @@ namespace
         constexpr fgm::Mat3x2 MAT(1, 2, 3, 4, 5, 6);
 
         // NOTE: The matrix takes elements in row, col order
-        //       but when compared with Vec3, we are taking col, row order.
-        //       That's why Vec3(1, 2, 3) is the transpose and not Vec3(1, 3, 5)
+        //       but when compared with Vec2, we are taking col, row order.
+        //       That's why Vec2(1, 2) is the transpose and not Vec2(1, 3)
 
         /// @test Verify matrix transpose is returns a 2x3 matrix with swapped rows and
         ///       columns at compile time.

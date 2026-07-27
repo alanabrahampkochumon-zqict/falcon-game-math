@@ -35,14 +35,14 @@ namespace fgm
 
     template <Arithmetic T>
     FGM_INLINE constexpr Mat3x4<T>::Mat3x4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22,
-                                T m23) noexcept
+                                           T m23) noexcept
         : _data{ Vec3<T>(m00, m10, m20), Vec3<T>(m01, m11, m21), Vec3<T>(m02, m12, m22), Vec3<T>(m03, m13, m23) }
     {}
 
 
     template <Arithmetic T>
     FGM_INLINE constexpr Mat3x4<T>::Mat3x4(const Vec3<T>& col0, const Vec3<T>& col1, const Vec3<T>& col2,
-                                const Vec3<T>& col3) noexcept
+                                           const Vec3<T>& col3) noexcept
         : _data{ col0, col1, col2, col3 }
     {}
 
@@ -368,7 +368,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     FGM_INLINE constexpr PromotedMat3x4<T, S> Mat3x4<T>::safeDiv(const Mat3x4& mat, const S scalar,
-                                                      Mat3x4 fallback) noexcept
+                                                                 Mat3x4 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
@@ -376,7 +376,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     FGM_INLINE constexpr PromotedMat3x4<T, S> Mat3x4<T>::tryDiv(const S scalar, OperationStatus& status,
-                                                     Mat3x4 fallback) const noexcept
+                                                                Mat3x4 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -412,8 +412,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat3x4<T, S> Mat3x4<T>::tryDiv(const Mat3x4& mat, const S scalar, OperationStatus& status,
-                                                     Mat3x4 fallback) noexcept
+    FGM_INLINE constexpr PromotedMat3x4<T, S> Mat3x4<T>::tryDiv(const Mat3x4& mat, const S scalar,
+                                                                OperationStatus& status, Mat3x4 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
@@ -422,6 +422,19 @@ namespace fgm
     FGM_INLINE constexpr Mat3x4<T> Mat3x4<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
     { return Mat3x4{ -_data[0], -_data[1], -_data[2], -_data[3] }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat4x3<T> Mat3x4<T>::transpose() const noexcept
+    {
+        return Mat4x3{ _data[0][0], _data[0][1], _data[0][2], _data[1][0], _data[1][1], _data[1][2],
+                       _data[2][0], _data[2][1], _data[2][2], _data[3][0], _data[3][1], _data[3][2] };
+    }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat4x3<T> Mat3x4<T>::transpose(const Mat3x4& matrix) noexcept
+    { return matrix.transpose(); }
 
 
     /**************************************

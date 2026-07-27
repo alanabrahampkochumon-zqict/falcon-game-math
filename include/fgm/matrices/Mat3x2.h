@@ -619,7 +619,7 @@ namespace fgm
          *
          * @param matrix The matrix to transpose.
          *
-         * @return A new @ref Mat3 with its elements flipped along the diagonal.
+         * @return A new @ref Mat2x3 with its elements flipped along the diagonal.
          */
         [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
         static constexpr Mat2x3<T> transpose(const Mat3x2& matrix) noexcept;

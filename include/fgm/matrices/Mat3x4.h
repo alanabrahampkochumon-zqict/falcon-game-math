@@ -481,8 +481,7 @@ namespace fgm
          *         epsilon threshold or if the matrix has a NaN(Not-a-Number) element(s).
          */
         template <StrictArithmetic S>
-        [[nodiscard]] constexpr PromotedMat3x4<T, S> safeDiv(S scalar,
-                                                             Mat3x4 fallback = Mat3x4::zero()) const noexcept
+        [[nodiscard]] constexpr PromotedMat3x4<T, S> safeDiv(S scalar, Mat3x4 fallback = Mat3x4::zero()) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -586,6 +585,62 @@ namespace fgm
             requires SignedStrictArithmetic<T>;
 
         /** @} */
+
+
+        /**
+         * @addtogroup FGM_Mat3x2_Algebra
+         * @{
+         */
+
+        /**
+         * @brief Transpose this matrix by swapping its rows and columns.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23}
+         *            \end{bmatrix} ^ \top
+         *            =
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} & A_{20} \\
+         *                 A_{01} & A_{11} & A_{21} \\
+         *                 A_{02} & A_{12} & A_{22} \\
+         *                 A_{03} & A_{13} & A_{23}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @return A new @ref Mat4x3 with its elements flipped along the diagonal.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+        constexpr Mat4x3<T> transpose() const noexcept;
+
+
+        /**
+         * @brief Transpose @p matrix by swapping its rows and columns.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23}
+         *            \end{bmatrix} ^ \top
+         *            =
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} & A_{20} \\
+         *                 A_{01} & A_{11} & A_{21} \\
+         *                 A_{02} & A_{12} & A_{22} \\
+         *                 A_{03} & A_{13} & A_{23}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @param matrix The matrix to transpose.
+         *
+         * @return A new @ref Mat4x3 with its elements flipped along the diagonal.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+        static constexpr Mat4x3<T> transpose(const Mat3x4& matrix) noexcept;
+
+        /** @} */
+
 
 
         /**
@@ -723,8 +778,8 @@ namespace fgm
         std::array<Vec3<T>, COLUMNS> _data;
     };
 
-    
-    
+
+
     /**
      * @addtogroup FGM_Mat3x4_Alias
      * @{
@@ -746,9 +801,9 @@ namespace fgm
     using Mat3x4ULL = Mat3x4<uint64_t>; ///< Unsigned Long Long (64-bit) matrix
 
     /** @} */
-    
-    
-    
+
+
+
     /**
      * @brief Compute the element-wise product between @p scalar and @p matrix and return a new matrix.
      *
