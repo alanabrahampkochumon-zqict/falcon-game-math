@@ -26,10 +26,7 @@
 // 3x3 * 3x4
 //
 // 4x4 * 4x2
-// 4x4 * 4x4
-//
-// 2x2 * 2x3
-// 2x2 * 2x4
+// 4x4 * 4x3
 
 namespace fgm
 {
@@ -58,7 +55,7 @@ namespace fgm
 
 
     /**
-     * @brief Multiply a 2x3 matrix with a 3x3 matrix.
+     * @brief Multiply a 2x3 matrix with a 3D matrix.
      *
      * @note Promotes the result to the wider type using @ref PromotedMat2x3<T, U>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -66,7 +63,7 @@ namespace fgm
      * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
      *
      * @param[in] lhs The 2x3 matrix on the left hand side.
-     * @param[in] rhs The 3x3 matrix on the right hand side.
+     * @param[in] rhs The 3D matrix on the right hand side.
      *
      * @return A new 2x3 matrix.
      */
@@ -94,14 +91,14 @@ namespace fgm
 
 
     /**
-     * @brief Multiply a 2x2 matrix with a 2x3 matrix.
+     * @brief Multiply a 2D matrix with a 2x3 matrix.
      *
      * @note Promotes the result to the wider type using @ref PromotedMat2x3<T, U>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
      *
-     * @param[in] lhs The 2x2 matrix on the left hand side.
+     * @param[in] lhs The 2D matrix on the left hand side.
      * @param[in] rhs The 2x3 matrix on the right hand side.
      *
      * @return A new 2x3 matrix.
@@ -157,7 +154,7 @@ namespace fgm
 
 
     /**
-     * @brief Multiply a 2x4 matrix with a 4x4 matrix.
+     * @brief Multiply a 2x4 matrix with a 4D matrix.
      *
      * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, U>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -165,7 +162,7 @@ namespace fgm
      * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
      *
      * @param[in] lhs The 2x4 matrix on the left hand side.
-     * @param[in] rhs The 4x4 matrix on the right hand side.
+     * @param[in] rhs The 4D matrix on the right hand side.
      *
      * @return A new 2x4 matrix.
      */
@@ -175,14 +172,14 @@ namespace fgm
 
 
     /**
-     * @brief Multiply a 2x2 matrix with a 2x4 matrix.
+     * @brief Multiply a 2D matrix with a 2x4 matrix.
      *
      * @note Promotes the result to the wider type using @ref PromotedMat2x4<T, U>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
      *
-     * @param[in] lhs The 2x2 matrix on the left hand side.
+     * @param[in] lhs The 2D matrix on the left hand side.
      * @param[in] rhs The 2x4 matrix on the right hand side.
      *
      * @return A new 2x4 matrix.
@@ -252,6 +249,24 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedMat3x4<T, U> operator*(const Mat3x2<T>& lhs, const Mat2x4<U>& rhs) noexcept;
+
+
+    /**
+     * @brief Multiply a 3D matrix with a 3x2 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat3x2<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 3D matrix on the left hand side.
+     * @param[in] rhs The 3x2 matrix on the right hand side.
+     *
+     * @return A new 3x2 matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat3x2<T, U> operator*(const Mat3<T>& lhs, const Mat3x2<U>& rhs) noexcept;
 
     /** @} */
 

@@ -46,10 +46,10 @@ namespace
     protected:
         fgm::Mat2<T> _mat2, _expectedFPMat2, _expectedIntMat2;
         fgm::Mat2x3<T> _expectedFPMat2x3, _expectedIntMat2x3;
-        fgm::Mat2x4<T> _mat2x4, _expectedFPMat2x4, _expectedIntMat2x4;
-
-        /// 2x2 by 2x4 multiplication result
-        fgm::Mat2x4<T> _expectedFPMat2x4SquareMat, _expectedIntMat2x4SquareMat;
+        // 2D x 2x4 -> 2x2 matrix * 2x4 matrix result
+        // 2x4 x 4D -> 2x4 matrix * 4x4 matrix result
+        fgm::Mat2x4<T> _mat2x4, _expectedFPMat2Dx2x4, _expectedIntMat2Dx2x4, _expectedFPMat2x4x4D,
+            _expectedIntMat2x4x4D;
 
         fgm::Mat4<T> _mat4;
         fgm::Mat4x2<T> _mat4x2;
@@ -74,19 +74,19 @@ namespace
                                    fgm::Vec2{ T(1.01820339999999998), T(1.02384019999999998) },
                                    fgm::Vec2{ T(5.01238399999999995), T(5.01238401234000008) },
                                    fgm::Vec2{ T(2.01238399999999995), T(1.10234800000000011) } };
-            _expectedFPMat2x4  = { fgm::Vec2{ T(67.53826583649818360), T(45.22504796609911892) },
+            _expectedFPMat2x4x4D  = { fgm::Vec2{ T(67.53826583649818360), T(45.22504796609911892) },
                                    fgm::Vec2{ T(28.27462878677400582), T(22.23648098676159535) },
                                    fgm::Vec2{ T(51.74586730346002383), T(31.51383195965590645) },
                                    fgm::Vec2{ T(66.95907009498898788), T(56.22624476530457116) } };
-            _expectedIntMat2x4 = { fgm::Vec2{ T(66), T(44) }, fgm::Vec2{ T(27), T(21) }, fgm::Vec2{ T(50), T(30) },
+            _expectedIntMat2x4x4D = { fgm::Vec2{ T(66), T(44) }, fgm::Vec2{ T(27), T(21) }, fgm::Vec2{ T(50), T(30) },
                                    fgm::Vec2{ T(64), T(54) } };
 
-            _expectedFPMat2x4SquareMat  = { fgm::Vec2{ T(5.12390421300000032), T(2.01234000000000002) },
-                                            fgm::Vec2{ T(1.01820339999999998), T(1.02384019999999998) },
-                                            fgm::Vec2{ T(5.01238399999999995), T(5.01238401234000008) },
-                                            fgm::Vec2{ T(2.01238399999999995), T(1.10234800000000011) } };
-            _expectedIntMat2x4SquareMat = { fgm::Vec2{ T(9), T(23) }, fgm::Vec2{ T(3), T(7) },
-                                            fgm::Vec2{ T(15), T(35) }, fgm::Vec2{ T(4), T(10) } };
+            _expectedFPMat2Dx2x4  = { fgm::Vec2{ T(5.12390421300000032), T(2.01234000000000002) },
+                                       fgm::Vec2{ T(1.01820339999999998), T(1.02384019999999998) },
+                                       fgm::Vec2{ T(5.01238399999999995), T(5.01238401234000008) },
+                                       fgm::Vec2{ T(2.01238399999999995), T(1.10234800000000011) } };
+            _expectedIntMat2Dx2x4 = { fgm::Vec2{ T(9), T(23) }, fgm::Vec2{ T(3), T(7) }, fgm::Vec2{ T(15), T(35) },
+                                       fgm::Vec2{ T(4), T(10) } };
 
             _mat4 = { fgm::Vec4{ T(5.12390421300000032), T(2.01234000000000002), T(5.01238399999999995),
                                  T(7.01203481000000028) },
@@ -187,11 +187,11 @@ TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4_ReturnsAValid2x4Matrix)
     const auto matrixProduct = this->_mat2x4 * this->_mat4;
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedFPMat2x4, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedFPMat2x4x4D, matrixProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedIntMat2x4, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedIntMat2x4x4D, matrixProduct);
     }
 }
 
@@ -215,11 +215,11 @@ TYPED_TEST(Mat2x4Composition, Mat2TimesMat2x4_ReturnsAValid2x4Matrix)
     const auto matrixProduct = this->_mat2 * this->_mat2x4;
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedFPMat2x4SquareMat, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedFPMat2Dx2x4, matrixProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedIntMat2x4SquareMat, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedIntMat2Dx2x4, matrixProduct);
     }
 }
 

@@ -45,11 +45,11 @@ namespace
 
     protected:
         fgm::Mat2<T> _mat2, _expectedFPMat2, _expectedIntMat2;
-        fgm::Mat2x3<T> _mat2x3, _expectedFPMat2x3, _expectedIntMat2x3;
         fgm::Mat2x4<T> _expectedFPMat2x4, _expectedIntMat2x4;
-
-        /// 2x2 by 2x3 multiplication result
-        fgm::Mat2x3<T> _expectedFPMat2x3SquareMat, _expectedIntMat2x3SquareMat;
+        // 2D x 2x3 -> 2x2 matrix * 2x3 matrix result
+        // 2x3 x 3D -> 2x3 matrix * 3x3 matrix result
+        fgm::Mat2x3<T> _mat2x3, _expectedFPMat2Dx2x3, _expectedIntMat2Dx2x3, _expectedFPMat2x3x3D,
+            _expectedIntMat2x3x3D;
 
 
         fgm::Mat3x2<T> _mat3x2;
@@ -71,17 +71,16 @@ namespace
             _mat2x3            = { fgm::Vec2{ T(1.32194213899999991), T(4.01283041000000029) },
                                    fgm::Vec2{ T(2.12304122299999998), T(5.10238399999999981) },
                                    fgm::Vec2{ T(3.02134123399999988), T(6.01238399999999995) } };
-            _expectedFPMat2x3  = { fgm::Vec2{ T(26.19000158099516895), T(60.96569200495833485) },
+            _expectedFPMat2x3x3D  = { fgm::Vec2{ T(26.19000158099516895), T(60.96569200495833485) },
                                    fgm::Vec2{ T(8.94885622184232510), T(20.98134846327739567) },
                                    fgm::Vec2{ T(8.83851247021109643), T(25.41503573309023878) } };
-            _expectedIntMat2x3 = { fgm::Vec2{ T(24), T(60) }, fgm::Vec2{ T(8), T(20) }, fgm::Vec2{ T(7), T(25) } };
+            _expectedIntMat2x3x3D = { fgm::Vec2{ T(24), T(60) }, fgm::Vec2{ T(8), T(20) }, fgm::Vec2{ T(7), T(25) } };
 
 
-            _expectedFPMat2x3SquareMat  = { fgm::Vec2{ T(10.26693540020188777), T(20.09684619294363017) },
-                                            fgm::Vec2{ T(13.63910922309342588), T(26.88943366722913098) },
-                                            fgm::Vec2{ T(16.75857737402849068), T(33.25518020406607889) } };
-            _expectedIntMat2x3SquareMat = { fgm::Vec2{ T(9), T(19) }, fgm::Vec2{ T(12), T(26) },
-                                            fgm::Vec2{ T(15), T(33) } };
+            _expectedFPMat2Dx2x3  = { fgm::Vec2{ T(10.26693540020188777), T(20.09684619294363017) },
+                                       fgm::Vec2{ T(13.63910922309342588), T(26.88943366722913098) },
+                                       fgm::Vec2{ T(16.75857737402849068), T(33.25518020406607889) } };
+            _expectedIntMat2Dx2x3 = { fgm::Vec2{ T(9), T(19) }, fgm::Vec2{ T(12), T(26) }, fgm::Vec2{ T(15), T(33) } };
 
             _expectedFPMat2x4  = { fgm::Vec2{ T(11.08456156345330790), T(30.90625299866951892) },
                                    fgm::Vec2{ T(4.27872517874863956), T(10.82041990645499396) },
@@ -179,11 +178,11 @@ TYPED_TEST(Mat2x3Composition, Mat2x3TimesMat3_ReturnsAValid2x3Matrix)
     const auto matrixProduct = this->_mat2x3 * this->_mat3;
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedFPMat2x3, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedFPMat2x3x3D, matrixProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedIntMat2x3, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedIntMat2x3x3D, matrixProduct);
     }
 }
 
@@ -207,11 +206,11 @@ TYPED_TEST(Mat2x3Composition, Mat2x2TimesMat2x3_ReturnsAValid2x3Matrix)
     const auto matrixProduct = this->_mat2 * this->_mat2x3;
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedFPMat2x3SquareMat, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedFPMat2Dx2x3, matrixProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedIntMat2x3SquareMat, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedIntMat2Dx2x3, matrixProduct);
     }
 }
 
