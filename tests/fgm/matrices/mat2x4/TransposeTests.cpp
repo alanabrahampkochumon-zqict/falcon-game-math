@@ -63,16 +63,16 @@ namespace
         constexpr fgm::Mat2x4 MAT(1, 2, 3, 4, 5, 6, 7, 8);
 
         // NOTE: The matrix takes elements in row, col order
-        //       but when compared with Vec3, we are taking col, row order.
-        //       That's why Vec3(1, 2, 3) is the transpose and not Vec3(1, 3, 5)
+        //       but when compared with Vec4, we are taking col, row order.
+        //       That's why Vec4(1, 2, 3, 4) is the transpose and not Vec4(1, 5, 2, 6)
 
-        /// @test Verify matrix transpose is returns a 3x2 matrix with swapped rows and
+        /// @test Verify matrix transpose is returns a 4x2 matrix with swapped rows and
         ///       columns at compile time.
         constexpr auto TRANSPOSE_MAT = MAT.transpose();
         static_assert(TRANSPOSE_MAT[0] == fgm::Vec4(1, 2, 3, 4));
         static_assert(TRANSPOSE_MAT[1] == fgm::Vec4(5, 6, 7, 8));
 
-        /// @test Verify matrix transpose using static variant returns a 3x2 matrix with
+        /// @test Verify matrix transpose using static variant returns a 4x2 matrix with
         ///       swapped rows and columns at compile time.
         constexpr auto TRANSPOSE_MAT_STATIC = fgm::Mat2x4<int>::transpose(MAT);
         static_assert(TRANSPOSE_MAT_STATIC[0] == fgm::Vec4(1, 2, 3, 4));
