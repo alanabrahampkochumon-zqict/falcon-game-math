@@ -32,7 +32,7 @@ namespace fgm
 
     template <Arithmetic T>
     FGM_INLINE constexpr Mat4x3<T>::Mat4x3(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22, T m30, T m31,
-                                T m32) noexcept
+                                           T m32) noexcept
         : _data{ Vec4{ T(m00), T(m10), T(m20), T(m30) }, Vec4{ T(m01), T(m11), T(m21), T(m31) },
                  Vec4{ T(m02), T(m12), T(m22), T(m32) } }
     {}
@@ -365,7 +365,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(S scalar, OperationStatus& status, Mat4x3 fallback) const noexcept
+    FGM_INLINE constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(S scalar, OperationStatus& status,
+                                                                Mat4x3 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -403,7 +404,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     FGM_INLINE constexpr PromotedMat4x3<T, S> Mat4x3<T>::tryDiv(const Mat4x3& mat, S scalar, OperationStatus& status,
-                                                     Mat4x3 fallback) noexcept
+                                                                Mat4x3 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
@@ -413,6 +414,19 @@ namespace fgm
     FGM_INLINE constexpr Mat4x3<T> Mat4x3<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
     { return Mat4x3{ -_data[0], -_data[1], -_data[2] }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat3x4<T> Mat4x3<T>::transpose() const noexcept
+    {
+        return Mat3x4{ _data[0][0], _data[0][1], _data[0][2], _data[0][3], _data[1][0], _data[1][1],
+                       _data[1][2], _data[1][3], _data[2][0], _data[2][1], _data[2][2], _data[2][3] };
+    }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat3x4<T> Mat4x3<T>::transpose(const Mat4x3& matrix) noexcept
+    { return matrix.transpose(); }
 
 
 

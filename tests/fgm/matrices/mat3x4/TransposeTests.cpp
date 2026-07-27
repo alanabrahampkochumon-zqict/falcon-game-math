@@ -64,7 +64,7 @@ namespace
         constexpr fgm::Mat3x4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
         // NOTE: The matrix takes elements in row, col order
-        //       but when compared with Vec3, we are taking col, row order.
+        //       but when compared with Vec4, we are taking col, row order.
         //       That's why Vec4(1, 2, 3, 4) is the transpose and not Vec4(1, 5, 9, 2)
 
         /// @test Verify matrix transpose is returns a 4x3 matrix with swapped rows and

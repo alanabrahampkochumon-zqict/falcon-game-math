@@ -589,6 +589,53 @@ namespace fgm
          * @{
          */
 
+        /**
+         * @brief Transpose this matrix by swapping its rows and columns.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} & A_{20} \\
+         *                 A_{01} & A_{11} & A_{21} \\
+         *                 A_{02} & A_{12} & A_{22} \\
+         *                 A_{03} & A_{13} & A_{23}
+         *            \end{bmatrix} ^ \top
+         *            =
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @return A new @ref Mat4x3 with its elements flipped along the diagonal.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+        constexpr Mat3x4<T> transpose() const noexcept;
+
+
+        /**
+         * @brief Transpose @p matrix by swapping its rows and columns.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{10} & A_{20} \\
+         *                 A_{01} & A_{11} & A_{21} \\
+         *                 A_{02} & A_{12} & A_{22} \\
+         *                 A_{03} & A_{13} & A_{23}
+         *            \end{bmatrix} ^ \top
+         *            =
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23}
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @param matrix The matrix to transpose.
+         *
+         * @return A new @ref Mat4x3 with its elements flipped along the diagonal.
+         */
+        [[nodiscard("Transpose does not mutate the matrix. Discarding the result will not produce any change.")]]
+        static constexpr Mat3x4<T> transpose(const Mat4x3& matrix) noexcept;
+
         /** @} */
 
 

@@ -580,7 +580,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x4_Algebra
+         * @addtogroup FGM_Mat4x2_Algebra
          * @{
          */
 
