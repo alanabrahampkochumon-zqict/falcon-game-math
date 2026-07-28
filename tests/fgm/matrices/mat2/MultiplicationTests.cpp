@@ -12,175 +12,178 @@
 #include "Mat2TestSetup.h"
 
 
-
-template <typename T>
-class Mat2ScalarMultiplication: public ::testing::Test
-{
-protected:
-    fgm::Mat2<T> _mat;
-    T _scalar;
-    fgm::Mat2<T> _expectedFloatingMat;
-    fgm::Mat2<T> _expectedIntegralMat;
-
-
-
-    void SetUp() override
-    {
-        _mat                 = { fgm::Vec2{ T(7), T(13) }, fgm::Vec2{ T(5), T(4) } };
-        _scalar              = T(2.123456789123456);
-        _expectedFloatingMat = { fgm::Vec2{ T(14.864197523864192), T(27.604938258604928) },
-                                 fgm::Vec2{ T(10.61728394561728), T(8.493827156493824) } };
-        _expectedIntegralMat = { fgm::Vec2{ T(14), T(26) }, fgm::Vec2{ T(10), T(8) } };
-    }
-};
-/** @brief Test fixture for @ref fgm::Mat2 scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat2ScalarMultiplication, SupportedArithmeticTypes);
-
-
-template <typename T>
-class Mat2VectorMultiplication: public ::testing::Test
-{
-protected:
-    fgm::Mat2<T> _mat;
-    fgm::Vec2<T> _vec;
-    fgm::Vec2<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
-        _expectedIntegralRowVector;
-
-    void SetUp() override
-    {
-        _mat                       = { fgm::Vec2{ T(7.12345678912345), T(13.12345678912345) },
-                                       fgm::Vec2{ T(5.12345678912345), T(4.12345678912345) } };
-        _vec                       = { T(2.123456789123456), T(3.123456832912) };
-        _expectedFloatingColVector = { T(31.129248797008778), T(40.74653269883751) };
-        _expectedIntegralColVector = { T(29), T(38) };
-        _expectedFloatingRowVector = { T(56.116903460304776), T(23.75887838584987) };
-        _expectedIntegralRowVector = { T(53), T(22) };
-    }
-};
-/** @brief Test fixture for @ref fgm::Mat2 vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat2VectorMultiplication, SupportedArithmeticTypes);
-
-
-template <typename T>
-class Mat2VectorFractionalMultiplication: public ::testing::Test
-{
-protected:
-    fgm::Mat2<T> _mat;
-    fgm::Vec2<T> _vec, _expectedColVector, _expectedRowVector;
-
-    void SetUp() override
-    {
-        _mat = { fgm::Vec2{ T(0.1234568989329), T(0.1234214891234) },
-                 fgm::Vec2{ T(-0.123489823149), T(-0.123489757623) } };
-        _vec = fgm::Vec2{ T(0.8923764912287), T(0.78352829112384) };
-
-        _expectedColVector = fgm::Vec2{ T(0.013412264184596345), T(0.013380716644514457) };
-        _expectedRowVector = fgm::Vec2{ T(0.20687426274853477), T(-0.20695713384580372) };
-    }
-};
-/**
- * @brief Test fixture for @ref fgm::Mat2 vector multiplication with small fractions,
- *        parameterized by @ref SupportedFloatingPointTypes.
- */
-TYPED_TEST_SUITE(Mat2VectorFractionalMultiplication, SupportedFloatingPointTypes);
-
-
-template <typename T>
-class Mat2Multiplication: public ::testing::Test
-{
-protected:
-    fgm::Mat2<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
-
-    void SetUp() override
-    {
-        _matA = { fgm::Vec2{ T(7.12345678912345), T(13.12345678912345) },
-                  fgm::Vec2{ T(5.12345678912345), T(4.12345678912345) } };
-        _matB = { fgm::Vec2{ T(3.12345678912345), T(10.12345678912345) },
-                  fgm::Vec2{ T(8.12345678912345), T(3.12345678912345) } };
-
-        _expectedFloatingMat = { fgm::Vec2{ T(74.11690288564759), T(82.73418683126485) },
-                                 fgm::Vec2{ T(73.8699893074007), T(119.48727325301795) } };
-        _expectedIntegralMat = { fgm::Vec2{ T(71), T(79) }, fgm::Vec2{ T(71), T(116) } };
-    }
-};
-/** @brief Test fixture for @ref fgm::Mat2 matrix multiplication, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat2Multiplication, SupportedArithmeticTypes);
-
-
-template <typename T>
-class Mat2FractionalMultiplication: public ::testing::Test
-{
-protected:
-    fgm::Mat2<T> _matA, _matB, _expectedMat;
-
-    void SetUp() override
-    {
-        _matA = { fgm::Vec2{ T(0.1234568989329), T(0.1234214891234) },
-                  fgm::Vec2{ T(-0.123489823149), T(-0.123489757623) } };
-        _matB = { fgm::Vec2{ T(0.8923764912287), T(0.78352829112384) },
-                  fgm::Vec2{ T(0.0123412348958), T(-0.0231423489589) } };
-
-        _expectedMat = { fgm::Vec2{ T(0.013412264184596345), T(0.013380716644514457) },
-                         fgm::Vec2{ T(0.004381455169424965), T(0.004381016652222751) } };
-    }
-};
-/** @brief Test fixture for @ref fgm::Mat2 matrix multiplication with fractional values(<1), parameterized by @ref
- * SupportedFloatingPointTypes. */
-TYPED_TEST_SUITE(Mat2FractionalMultiplication, SupportedFloatingPointTypes);
-
-
-
-/**
- * @addtogroup T_FGM_Mat2x2_Multiplication
- * @{
- */
-
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that matrix multiplication operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Mat2 MAT1(1, 2, 3, 4);
-    constexpr fgm::Mat2 MAT2(5, 6, 7, 8);
-    constexpr fgm::Vec2 VEC(1, 2);
 
-    // Verify matrix * scalar multiplication
-    constexpr fgm::Mat2 BINARY_PRODUCT_1 = MAT1 * 2;
-    static_assert(BINARY_PRODUCT_1(0, 0) == 2);
-    static_assert(BINARY_PRODUCT_1(0, 1) == 4);
-    static_assert(BINARY_PRODUCT_1(1, 0) == 6);
-    static_assert(BINARY_PRODUCT_1(1, 1) == 8);
+    template <typename T>
+    class Mat2ScalarMultiplication: public ::testing::Test
+    {
+    protected:
+        fgm::Mat2<T> _mat;
+        T _scalar;
+        fgm::Mat2<T> _expectedFloatingMat;
+        fgm::Mat2<T> _expectedIntegralMat;
 
 
-    // Verify scalar * matrix multiplication
-    constexpr fgm::Mat2 BINARY_PRODUCT_2 = 2 * MAT1;
-    static_assert(BINARY_PRODUCT_2(0, 0) == 2);
-    static_assert(BINARY_PRODUCT_2(0, 1) == 4);
-    static_assert(BINARY_PRODUCT_2(1, 0) == 6);
-    static_assert(BINARY_PRODUCT_2(1, 1) == 8);
 
-    // Verify matrix * vector multiplication
-    constexpr fgm::Vec2 COL_VECTOR_PRODUCT = MAT1 * VEC;
-    static_assert(COL_VECTOR_PRODUCT[0] == 5);
-    static_assert(COL_VECTOR_PRODUCT[1] == 11);
+        void SetUp() override
+        {
+            _mat                 = { fgm::Vec2{ T(7), T(13) }, fgm::Vec2{ T(5), T(4) } };
+            _scalar              = T(2.123456789123456);
+            _expectedFloatingMat = { fgm::Vec2{ T(14.864197523864192), T(27.604938258604928) },
+                                     fgm::Vec2{ T(10.61728394561728), T(8.493827156493824) } };
+            _expectedIntegralMat = { fgm::Vec2{ T(14), T(26) }, fgm::Vec2{ T(10), T(8) } };
+        }
+    };
+    /** @brief Test fixture for @ref fgm::Mat2 scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
+    TYPED_TEST_SUITE(Mat2ScalarMultiplication, SupportedArithmeticTypes);
 
-    // Verify vector * matrix multiplication
-    constexpr fgm::Vec2 ROW_VEC_PRODUCT = VEC * MAT1;
-    static_assert(ROW_VEC_PRODUCT[0] == 7);
-    static_assert(ROW_VEC_PRODUCT[1] == 10);
 
-    // Verify matrix * matrix multiplication
-    constexpr fgm::Mat2 MAT_PRODUCT = MAT1 * MAT2;
-    static_assert(MAT_PRODUCT(0, 0) == 19);
-    static_assert(MAT_PRODUCT(0, 1) == 22);
-    static_assert(MAT_PRODUCT(1, 0) == 43);
-    static_assert(MAT_PRODUCT(1, 1) == 50);
+    template <typename T>
+    class Mat2VectorMultiplication: public ::testing::Test
+    {
+    protected:
+        fgm::Mat2<T> _mat;
+        fgm::Vec2<T> _vec;
+        fgm::Vec2<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
+            _expectedIntegralRowVector;
+
+        void SetUp() override
+        {
+            _mat                       = { fgm::Vec2{ T(7.12345678912345), T(13.12345678912345) },
+                                           fgm::Vec2{ T(5.12345678912345), T(4.12345678912345) } };
+            _vec                       = { T(2.123456789123456), T(3.123456832912) };
+            _expectedFloatingColVector = { T(31.129248797008778), T(40.74653269883751) };
+            _expectedIntegralColVector = { T(29), T(38) };
+            _expectedFloatingRowVector = { T(56.116903460304776), T(23.75887838584987) };
+            _expectedIntegralRowVector = { T(53), T(22) };
+        }
+    };
+    /** @brief Test fixture for @ref fgm::Mat2 vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
+    TYPED_TEST_SUITE(Mat2VectorMultiplication, SupportedArithmeticTypes);
+
+
+    template <typename T>
+    class Mat2VectorFractionalMultiplication: public ::testing::Test
+    {
+    protected:
+        fgm::Mat2<T> _mat;
+        fgm::Vec2<T> _vec, _expectedColVector, _expectedRowVector;
+
+        void SetUp() override
+        {
+            _mat = { fgm::Vec2{ T(0.1234568989329), T(0.1234214891234) },
+                     fgm::Vec2{ T(-0.123489823149), T(-0.123489757623) } };
+            _vec = fgm::Vec2{ T(0.8923764912287), T(0.78352829112384) };
+
+            _expectedColVector = fgm::Vec2{ T(0.013412264184596345), T(0.013380716644514457) };
+            _expectedRowVector = fgm::Vec2{ T(0.20687426274853477), T(-0.20695713384580372) };
+        }
+    };
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 vector multiplication with small fractions,
+     *        parameterized by @ref SupportedFloatingPointTypes.
+     */
+    TYPED_TEST_SUITE(Mat2VectorFractionalMultiplication, SupportedFloatingPointTypes);
+
+
+    template <typename T>
+    class Mat2Multiplication: public ::testing::Test
+    {
+    protected:
+        fgm::Mat2<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
+
+        void SetUp() override
+        {
+            _matA = { fgm::Vec2{ T(7.12345678912345), T(13.12345678912345) },
+                      fgm::Vec2{ T(5.12345678912345), T(4.12345678912345) } };
+            _matB = { fgm::Vec2{ T(3.12345678912345), T(10.12345678912345) },
+                      fgm::Vec2{ T(8.12345678912345), T(3.12345678912345) } };
+
+            _expectedFloatingMat = { fgm::Vec2{ T(74.11690288564759), T(82.73418683126485) },
+                                     fgm::Vec2{ T(73.8699893074007), T(119.48727325301795) } };
+            _expectedIntegralMat = { fgm::Vec2{ T(71), T(79) }, fgm::Vec2{ T(71), T(116) } };
+        }
+    };
+    /** @brief Test fixture for @ref fgm::Mat2 matrix multiplication, parameterized by @ref SupportedArithmeticTypes. */
+    TYPED_TEST_SUITE(Mat2Multiplication, SupportedArithmeticTypes);
+
+
+    template <typename T>
+    class Mat2FractionalMultiplication: public ::testing::Test
+    {
+    protected:
+        fgm::Mat2<T> _matA, _matB, _expectedMat;
+
+        void SetUp() override
+        {
+            _matA = { fgm::Vec2{ T(0.1234568989329), T(0.1234214891234) },
+                      fgm::Vec2{ T(-0.123489823149), T(-0.123489757623) } };
+            _matB = { fgm::Vec2{ T(0.8923764912287), T(0.78352829112384) },
+                      fgm::Vec2{ T(0.0123412348958), T(-0.0231423489589) } };
+
+            _expectedMat = { fgm::Vec2{ T(0.013412264184596345), T(0.013380716644514457) },
+                             fgm::Vec2{ T(0.004381455169424965), T(0.004381016652222751) } };
+        }
+    };
+    /** @brief Test fixture for @ref fgm::Mat2 matrix multiplication with fractional values(<1), parameterized by @ref
+     * SupportedFloatingPointTypes. */
+    TYPED_TEST_SUITE(Mat2FractionalMultiplication, SupportedFloatingPointTypes);
+
+
+
+    /**
+     * @addtogroup T_FGM_Mat2x2_Multiplication
+     * @{
+     */
+
+    /**************************************
+     *                                    *
+     *            STATIC TESTS            *
+     *                                    *
+     **************************************/
+
+    namespace static_test
+    {
+        constexpr fgm::Mat2 MAT1(1, 2, 3, 4);
+        constexpr fgm::Mat2 MAT2(5, 6, 7, 8);
+        constexpr fgm::Vec2 VEC(1, 2);
+
+        /// @test Verify that matrix * scalar multiplication returns 2D matrix at compile time.
+        constexpr fgm::Mat2 BINARY_PRODUCT_1 = MAT1 * 2;
+        static_assert(BINARY_PRODUCT_1(0, 0) == 2);
+        static_assert(BINARY_PRODUCT_1(0, 1) == 4);
+        static_assert(BINARY_PRODUCT_1(1, 0) == 6);
+        static_assert(BINARY_PRODUCT_1(1, 1) == 8);
+
+
+        /// @test Verify scalar * matrix multiplication returns 2D matrix at compile time.
+        constexpr fgm::Mat2 BINARY_PRODUCT_2 = 2 * MAT1;
+        static_assert(BINARY_PRODUCT_2(0, 0) == 2);
+        static_assert(BINARY_PRODUCT_2(0, 1) == 4);
+        static_assert(BINARY_PRODUCT_2(1, 0) == 6);
+        static_assert(BINARY_PRODUCT_2(1, 1) == 8);
+
+        /// @test Verify matrix * vector multiplication returns 2D column vector at compile time.
+        constexpr fgm::Vec2 COL_VECTOR_PRODUCT = MAT1 * VEC;
+        static_assert(COL_VECTOR_PRODUCT[0] == 5);
+        static_assert(COL_VECTOR_PRODUCT[1] == 11);
+
+        /// @test Verify vector * matrix multiplication returns 2D row vector at compile time.
+        constexpr fgm::Vec2 ROW_VEC_PRODUCT = VEC * MAT1;
+        static_assert(ROW_VEC_PRODUCT[0] == 7);
+        static_assert(ROW_VEC_PRODUCT[1] == 10);
+
+        /// @test Verify that matrix * matrix multiplication returns 2D matrix at compile time.
+        constexpr fgm::Mat2 MAT_PRODUCT = MAT1 * MAT2;
+        static_assert(MAT_PRODUCT(0, 0) == 19);
+        static_assert(MAT_PRODUCT(0, 1) == 22);
+        static_assert(MAT_PRODUCT(1, 0) == 43);
+        static_assert(MAT_PRODUCT(1, 1) == 50);
+
+    } // namespace static_test
+
 } // namespace
-
 
 
 /**************************************
