@@ -116,7 +116,6 @@ namespace
      *                                    *
      **************************************/
 
-    /** @brief Verify that vector geometric product operations are available at compile time. */
     namespace
     {
         constexpr fgm::Vec2 VEC_A(1, 2);

@@ -13,59 +13,98 @@
 
 
 
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Vec4DotProduct: public ::testing::Test
-{
-protected:
-    fgm::Vec4<T> _vecA;
-    fgm::Vec4<T> _vecB;
-
-    fgm::Vec4<T> _vecAOrthogonal;
-    fgm::Vec4<T> _vecBOrthogonal;
-
-    T _expectedDotProduct;
-
-    T _expectedADotA;
-
-    void SetUp() override
-    {
-        _vecA               = { T(2), T(3), T(4), T(5) };
-        _vecB               = { T(6), T(7), T(8), T(9) };
-        _vecAOrthogonal     = { T(3), T(0), T(4), T(0) };
-        _vecBOrthogonal     = { T(0), T(5), T(0), T(6) };
-        _expectedDotProduct = static_cast<T>(110);
-
-        _expectedADotA = static_cast<T>(54);
-    }
-};
-/** @brief Test fixture for @ref fgm::Vec4 dot project, parameterized by @ref SupportedArithmeticTypes */
-TYPED_TEST_SUITE(Vec4DotProduct, SupportedArithmeticTypes);
-
-
-
 /**
  * @addtogroup T_FGM_Vec4_Product
  * @{
  */
 
-/** @brief Verify that vector geometric product operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Vec4 vec1(1, 2, 3, 4);
-    constexpr fgm::Vec4 vec2(4, 5, 6, 2);
-    constexpr auto dotProductA = vec1.dot(vec2);
-    constexpr auto dotProductB = fgm::Vec4<int>::dot(vec1, vec2);
-    static_assert(dotProductA == 40);
-    static_assert(dotProductB == 40);
+
+    /**************************************
+     *                                    *
+     *               SETUP                *
+     *                                    *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec4 dot product.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
+    template <typename T>
+    class Vec4DotProduct: public testing::Test
+    {
+    protected:
+        fgm::Vec4<T> _vecA;
+        fgm::Vec4<T> _vecB;
+
+        fgm::Vec4<T> _vecAOrthogonal;
+        fgm::Vec4<T> _vecBOrthogonal;
+
+        T _expectedDotProduct;
+
+        T _expectedADotA;
+
+        void SetUp() override
+        {
+            _vecA               = { T(2), T(3), T(4), T(5) };
+            _vecB               = { T(6), T(7), T(8), T(9) };
+            _vecAOrthogonal     = { T(3), T(0), T(4), T(0) };
+            _vecBOrthogonal     = { T(0), T(5), T(0), T(6) };
+            _expectedDotProduct = static_cast<T>(110);
+
+            _expectedADotA = static_cast<T>(54);
+        }
+    };
+    TYPED_TEST_SUITE(Vec4DotProduct, SupportedArithmeticTypes);
+
+
+    /**************************************
+     *                                    *
+     *           STATIC TESTS             *
+     *                                    *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Vec4 VEC_A(1, 2, 3, 4);
+        constexpr fgm::Vec4 VEC_B(5, 6, 7, 8);
+
+        /// @test Verify that dot product of two 4D vectors return a valid scale at compile time.
+        constexpr auto DOT_PROD = VEC_A.dot(VEC_B);
+        static_assert(DOT_PROD == 70);
+
+        /// @test Verify that dot product of two 4D vectors using static variant of cross()
+        ///       return a valid scale at compile time.
+        constexpr auto DOT_PROD_STATIC = fgm::Vec4<int>::dot(VEC_A, VEC_B);
+        static_assert(DOT_PROD_STATIC == 70);
+
+
+        // /// @test Verify that inner product of two 4D vectors return a valid 4D matrix at compile time.
+        // constexpr auto INNER_PROD = VEC_A.innerProduct(VEC_B);
+        // static_assert(INNER_PROD[0] == fgm::Vec4{ 3, 6 });
+        // static_assert(INNER_PROD[1] == fgm::Vec4{ 4, 8 });
+        // static_assert(INNER_PROD[2] == fgm::Vec4{ 4, 8 });
+        // static_assert(INNER_PROD[3] == fgm::Vec4{ 4, 8 });
+        //
+        // /// @test Verify that inner product of two 4D vectors using static variant of cross()
+        // ///       return a valid 4D matrix at compile time.
+        // constexpr auto INNER_PROD_STATIC = fgm::Vec4<int>::innerProduct(VEC_A, VEC_B);
+        // static_assert(INNER_PROD_STATIC[0] == fgm::Vec4{ 3, 6 });
+        // static_assert(INNER_PROD_STATIC[1] == fgm::Vec4{ 4, 8 });
+
+    } // namespace static_tests
 
 } // namespace
 
+
+
+/**************************************
+ *                                    *
+ *            DOT PRODUCT             *
+ *                                    *
+ **************************************/
 
 /** @brief Verify that the dot product of a vector with itself returns its squared magnitude. */
 TYPED_TEST(Vec4DotProduct, SelfDotProductReturnsSquareMagnitude)
