@@ -22,7 +22,6 @@
 
 // TODO: Add Implementation
 // Implementations
-// 3x3 * 3x2
 // 3x3 * 3x4
 //
 // 4x4 * 4x2
@@ -329,6 +328,24 @@ namespace fgm
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
     [[nodiscard]] constexpr PromotedMat3x4<T, U> operator*(const Mat3x4<T>& lhs, const Mat4<U>& rhs) noexcept;
+
+
+    /**
+     * @brief Multiply a 3D matrix with a 3x4 matrix.
+     *
+     * @note Promotes the result to the wider type using @ref PromotedMat3x4<T, U>.
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] lhs The 3D matrix on the left hand side.
+     * @param[in] rhs The 3x4 matrix on the right hand side.
+     *
+     * @return A new 3x4 matrix.
+     */
+    template <StrictArithmetic T, StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    [[nodiscard]] constexpr PromotedMat3x4<T, U> operator*(const Mat3<T>& lhs, const Mat3x4<U>& rhs) noexcept;
 
     /** @} */
 
