@@ -15,8 +15,24 @@
 namespace
 {
 
+    /**
+     * @addtogroup T_FGM_Mat2x2_Multiplication
+     * @{
+     */
+
+
+    /**************************************
+     *                                    *
+     *            TEST SETUP              *
+     *                                    *
+     **************************************/
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 scalar multiplication.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
+     */
     template <typename T>
-    class Mat2ScalarMultiplication: public ::testing::Test
+    class Mat2ScalarMultiplication: public testing::Test
     {
     protected:
         fgm::Mat2<T> _mat;
@@ -35,12 +51,15 @@ namespace
             _expectedIntegralMat = { fgm::Vec2{ T(14), T(26) }, fgm::Vec2{ T(10), T(8) } };
         }
     };
-    /** @brief Test fixture for @ref fgm::Mat2 scalar multiplication, parameterized by @ref SupportedArithmeticTypes. */
     TYPED_TEST_SUITE(Mat2ScalarMultiplication, SupportedArithmeticTypes);
 
-
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 vector multiplication.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
+     */
     template <typename T>
-    class Mat2VectorMultiplication: public ::testing::Test
+    class Mat2VectorMultiplication: public testing::Test
     {
     protected:
         fgm::Mat2<T> _mat;
@@ -59,12 +78,16 @@ namespace
             _expectedIntegralRowVector = { T(53), T(22) };
         }
     };
-    /** @brief Test fixture for @ref fgm::Mat2 vector multiplication, parameterized by @ref SupportedArithmeticTypes. */
     TYPED_TEST_SUITE(Mat2VectorMultiplication, SupportedArithmeticTypes);
 
 
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 vector multiplication with floating point elements.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
+     */
     template <typename T>
-    class Mat2VectorFractionalMultiplication: public ::testing::Test
+    class Mat2VectorFractionalMultiplication: public testing::Test
     {
     protected:
         fgm::Mat2<T> _mat;
@@ -80,15 +103,16 @@ namespace
             _expectedRowVector = fgm::Vec2{ T(0.20687426274853477), T(-0.20695713384580372) };
         }
     };
-    /**
-     * @brief Test fixture for @ref fgm::Mat2 vector multiplication with small fractions,
-     *        parameterized by @ref SupportedFloatingPointTypes.
-     */
     TYPED_TEST_SUITE(Mat2VectorFractionalMultiplication, SupportedFloatingPointTypes);
 
 
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 matrix-matrix multiplication.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
+     */
     template <typename T>
-    class Mat2Multiplication: public ::testing::Test
+    class Mat2Multiplication: public testing::Test
     {
     protected:
         fgm::Mat2<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
@@ -105,10 +129,14 @@ namespace
             _expectedIntegralMat = { fgm::Vec2{ T(71), T(79) }, fgm::Vec2{ T(71), T(116) } };
         }
     };
-    /** @brief Test fixture for @ref fgm::Mat2 matrix multiplication, parameterized by @ref SupportedArithmeticTypes. */
     TYPED_TEST_SUITE(Mat2Multiplication, SupportedArithmeticTypes);
 
 
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 matrix-matrix multiplication with floating-point elements.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
+     */
     template <typename T>
     class Mat2FractionalMultiplication: public ::testing::Test
     {
@@ -126,16 +154,9 @@ namespace
                              fgm::Vec2{ T(0.004381455169424965), T(0.004381016652222751) } };
         }
     };
-    /** @brief Test fixture for @ref fgm::Mat2 matrix multiplication with fractional values(<1), parameterized by @ref
-     * SupportedFloatingPointTypes. */
     TYPED_TEST_SUITE(Mat2FractionalMultiplication, SupportedFloatingPointTypes);
 
 
-
-    /**
-     * @addtogroup T_FGM_Mat2x2_Multiplication
-     * @{
-     */
 
     /**************************************
      *                                    *
@@ -184,6 +205,7 @@ namespace
     } // namespace static_test
 
 } // namespace
+
 
 
 /**************************************
