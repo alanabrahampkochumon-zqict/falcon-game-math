@@ -110,7 +110,6 @@ namespace
 
 
 
-
     /**************************************
      *                                    *
      *           STATIC TESTS             *
@@ -120,17 +119,39 @@ namespace
     /** @brief Verify that vector geometric product operations are available at compile time. */
     namespace
     {
-        constexpr fgm::Vec2 vec1(1, 2);
-        constexpr fgm::Vec2 vec2(3, 4);
-        constexpr auto dotProductA = vec1.dot(vec2);
-        constexpr auto dotProductB = fgm::Vec2<int>::dot(vec1, vec2);
-        static_assert(dotProductA == 11);
-        static_assert(dotProductB == 11);
+        constexpr fgm::Vec2 VEC_A(1, 2);
+        constexpr fgm::Vec2 VEC_B(3, 4);
 
-        constexpr auto crossProductA = vec1.cross(vec2);
-        constexpr auto crossProductB = fgm::Vec2<int>::cross(vec1, vec2);
-        static_assert(crossProductA == -2);
-        static_assert(crossProductB == -2);
+
+        /// @test Verify that dot product of two 2D vectors return a valid scale at compile time.
+        constexpr auto DOT_PROD = VEC_A.dot(VEC_B);
+        static_assert(DOT_PROD == 11);
+
+        /// @test Verify that dot product of two 2D vectors using static variant of cross()
+        ///       return a valid scale at compile time.
+        constexpr auto DOT_PROD_STATIC = fgm::Vec2<int>::dot(VEC_A, VEC_B);
+        static_assert(DOT_PROD_STATIC == 11);
+
+
+        /// @test Verify that pseudo-cross product of two 2D vectors return a valid scalar at compile time.
+        constexpr auto CROSS_PROD = VEC_A.cross(VEC_B);
+        static_assert(CROSS_PROD == -2);
+
+        /// @test Verify that pseudo-cross product of two 2D vectors using static variant of cross()
+        ///       return a valid scalar at compile time.
+        constexpr auto CROSS_PROD_STATIC = fgm::Vec2<int>::cross(VEC_A, VEC_B);
+        static_assert(CROSS_PROD_STATIC == -2);
+
+        /// @test Verify that inner product of two 2D vectors return a valid 2D matrix at compile time.
+        constexpr auto INNER_PROD = VEC_A.innerProduct(VEC_B);
+        static_assert(INNER_PROD[0] == fgm::Vec2{ 3, 6 });
+        static_assert(INNER_PROD[1] == fgm::Vec2{ 4, 8 });
+
+        /// @test Verify that inner product of two 2D vectors using static variant of cross()
+        ///       return a valid 2D matrix at compile time.
+        constexpr auto INNER_PROD_STATIC = fgm::Vec2<int>::innerProduct(VEC_A, VEC_B);
+        static_assert(INNER_PROD_STATIC[0] == fgm::Vec2{ 3, 6 });
+        static_assert(INNER_PROD_STATIC[1] == fgm::Vec2{ 4, 8 });
 
     } // namespace
 

@@ -767,14 +767,14 @@ namespace fgm
 
     /*************************************
      *                                   *
-     *        VECTOR INNER PRODUCT         *
+     *        VECTOR INNER PRODUCT       *
      *                                   *
      *************************************/
 
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat2<T, U> Vec2<T>::innerProduct(const Vec2<U>& rhs) const noexcept
+    FGM_INLINE constexpr PromotedMat2<T, U> Vec2<T>::innerProduct(const Vec2<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -785,7 +785,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    constexpr PromotedMat2<T, U> Vec2<T>::innerProduct(const Vec2& lhs, const Vec2<U>& rhs) noexcept
+    FGM_INLINE constexpr PromotedMat2<T, U> Vec2<T>::innerProduct(const Vec2& lhs, const Vec2<U>& rhs) noexcept
         requires StrictArithmetic<T>
     { return lhs.innerProduct(rhs); }
 

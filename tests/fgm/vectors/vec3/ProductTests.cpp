@@ -10,61 +10,9 @@
 
 
 #include "Vec3TestSetup.h"
+#include "utils/MatrixUtils.h"
 
-
-
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Vec3DotProduct: public ::testing::Test
-{
-protected:
-    fgm::Vec3<T> _vecA;
-    fgm::Vec3<T> _vecB;
-
-    fgm::Vec3<T> _vecAOrthogonal;
-    fgm::Vec3<T> _vecBOrthogonal;
-
-    T _expectedDotProduct;
-
-    T _expectedADotA;
-
-    void SetUp() override
-    {
-        _vecA               = { T(2), T(3), T(4) };
-        _vecB               = { T(6), T(7), T(8) };
-        _vecAOrthogonal     = { T(3), T(0), T(4) };
-        _vecBOrthogonal     = { T(0), T(5), T(0) };
-        _expectedDotProduct = static_cast<T>(65);
-
-        _expectedADotA = static_cast<T>(29);
-    }
-};
-/** @brief Test fixture for @ref fgm::Vec3 dot product, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec3DotProduct, SupportedArithmeticTypes);
-
-
-template <typename T>
-class Vec3CrossProduct: public ::testing::Test
-{
-protected:
-    fgm::Vec3<T> _vecA;
-    fgm::Vec3<T> _vecB;
-    fgm::Vec3<T> _expectedCrossProduct;
-
-    void SetUp() override
-    {
-        _vecA                 = { T(2), T(3), T(4) };
-        _vecB                 = { T(5), T(6), T(7) };
-        _expectedCrossProduct = { T(-3), T(6), T(-3) };
-    }
-};
-/** @brief Test fixture for @ref fgm::Vec3 cross product, parameterized by @ref SupportedSignedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec3CrossProduct, SupportedSignedArithmeticTypes);
+#include <fgm/matrices/Mat3.h>
 
 
 
@@ -73,27 +21,154 @@ TYPED_TEST_SUITE(Vec3CrossProduct, SupportedSignedArithmeticTypes);
  * @{
  */
 
-/** @brief Verify that vector geometric product operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Vec3 vec1(1, 2, 3);
-    constexpr fgm::Vec3 vec2(4, 5, 6);
-    constexpr auto dotProductA = vec1.dot(vec2);
-    constexpr auto dotProductB = fgm::Vec3<int>::dot(vec1, vec2);
-    static_assert(dotProductA == 32);
-    static_assert(dotProductB == 32);
 
-    constexpr auto crossProductA = vec1.cross(vec2);
-    constexpr auto crossProductB = fgm::Vec3<int>::cross(vec1, vec2);
-    static_assert(crossProductA.x() == -3);
-    static_assert(crossProductA.y() == 6);
-    static_assert(crossProductA.z() == -3);
+    /**************************************
+     *                                    *
+     *               SETUP                *
+     *                                    *
+     **************************************/
 
-    static_assert(crossProductB.x() == -3);
-    static_assert(crossProductB.y() == 6);
-    static_assert(crossProductB.z() == -3);
+    /**
+     * @brief Test fixture for @ref fgm::Vec3 dot product.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
+    template <typename T>
+    class Vec3DotProduct: public ::testing::Test
+    {
+    protected:
+        fgm::Vec3<T> _vecA;
+        fgm::Vec3<T> _vecB;
+
+        fgm::Vec3<T> _vecAOrthogonal;
+        fgm::Vec3<T> _vecBOrthogonal;
+
+        T _expectedDotProduct;
+
+        T _expectedADotA;
+
+        void SetUp() override
+        {
+            _vecA               = { T(2), T(3), T(4) };
+            _vecB               = { T(6), T(7), T(8) };
+            _vecAOrthogonal     = { T(3), T(0), T(4) };
+            _vecBOrthogonal     = { T(0), T(5), T(0) };
+            _expectedDotProduct = static_cast<T>(65);
+
+            _expectedADotA = static_cast<T>(29);
+        }
+    };
+    TYPED_TEST_SUITE(Vec3DotProduct, SupportedArithmeticTypes);
+
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec3 cross product.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
+    template <typename T>
+    class Vec3CrossProduct: public ::testing::Test
+    {
+    protected:
+        fgm::Vec3<T> _vecA;
+        fgm::Vec3<T> _vecB;
+        fgm::Vec3<T> _expectedCrossProduct;
+
+        void SetUp() override
+        {
+            _vecA                 = { T(2), T(3), T(4) };
+            _vecB                 = { T(5), T(6), T(7) };
+            _expectedCrossProduct = { T(-3), T(6), T(-3) };
+        }
+    };
+    /** @brief Test fixture for @ref fgm::Vec3 cross product, parameterized by @ref SupportedSignedArithmeticTypes. */
+    TYPED_TEST_SUITE(Vec3CrossProduct, SupportedSignedArithmeticTypes);
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 inner product.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
+    template <typename T>
+    class Vec3InnerProduct: public ::testing::Test
+    {
+    protected:
+        fgm::Vec3<T> _vecA;
+        fgm::Vec3<T> _vecB;
+        fgm::Mat3<T> _expectedInnerProductInt, _expectedInnerProductFP;
+
+        void SetUp() override
+        {
+            _vecA = fgm::Vec3{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988) };
+            _vecB = fgm::Vec3{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988) };
+            _expectedInnerProductInt = {
+                fgm::Vec3{ T(1.74753101886389506), T(2.80653765551779566), T(3.99403829352285911) },
+                fgm::Vec3{ T(2.80653765551779566), T(4.50730403455733519), T(6.41443198853168894) },
+                fgm::Vec3{ T(3.99403829352285911), T(6.41443198853168894), T(9.12850285226864244) }
+            };
+            _expectedInnerProductFP = { fgm::Vec3{ T(1), T(2), T(3) }, fgm::Vec3{ T(2), T(4), T(6) },
+                                        fgm::Vec3{ T(3), T(6), T(9) } };
+        }
+    };
+    TYPED_TEST_SUITE(Vec3InnerProduct, SupportedSignedArithmeticTypes);
+
+
+
+    /**************************************
+     *                                    *
+     *           STATIC TESTS             *
+     *                                    *
+     **************************************/
+
+    /** @brief Verify that vector geometric product operations are available at compile time. */
+    namespace static_tests
+    {
+        constexpr fgm::Vec3 VEC_A(1, 2, 3);
+        constexpr fgm::Vec3 VEC_B(4, 5, 6);
+
+
+        /// @test Verify that dot product of two 3D vectors return a valid scale at compile time.
+        constexpr auto DOT_PROD = VEC_A.dot(VEC_B);
+        static_assert(DOT_PROD == 32);
+
+        /// @test Verify that dot product of two 3D vectors using static variant of cross()
+        ///       return a valid scale at compile time.
+        constexpr auto DOT_PROD_STATIC = fgm::Vec3<int>::dot(VEC_A, VEC_B);
+        static_assert(DOT_PROD_STATIC == 32);
+
+        /// @test Verify that cross product of two 2D vectors return a valid 3D vector at compile time.
+        constexpr auto CROSS_PROD = VEC_A.cross(VEC_B);
+        static_assert(CROSS_PROD.x() == -3);
+        static_assert(CROSS_PROD.y() == 6);
+        static_assert(CROSS_PROD.z() == -3);
+
+        /// @test Verify that cross product of two 3D vectors using static variant of cross()
+        ///       return a valid 3D vector at compile time.
+        constexpr auto CROSS_PROD_STATIC = fgm::Vec3<int>::cross(VEC_A, VEC_B);
+        static_assert(CROSS_PROD_STATIC.x() == -3);
+        static_assert(CROSS_PROD_STATIC.y() == 6);
+        static_assert(CROSS_PROD_STATIC.z() == -3);
+
+
+        /// @test Verify that inner product of two 3D vectors return a valid 3D matrix at compile time.
+        constexpr auto INNER_PROD = VEC_A.innerProduct(VEC_B);
+        static_assert(INNER_PROD[0] == fgm::Vec3{ 4, 8, 12 });
+        static_assert(INNER_PROD[1] == fgm::Vec3{ 5, 10, 15 });
+        static_assert(INNER_PROD[2] == fgm::Vec3{ 6, 12, 18 });
+
+        /// @test Verify that inner product of two 3D vectors using static variant of cross()
+        ///       return a valid 3D matrix at compile time.
+        constexpr auto INNER_PROD_STATIC = fgm::Vec3<int>::innerProduct(VEC_A, VEC_B);
+        static_assert(INNER_PROD_STATIC[0] == fgm::Vec3{ 4, 8, 12 });
+        static_assert(INNER_PROD_STATIC[1] == fgm::Vec3{ 5, 10, 15 });
+        static_assert(INNER_PROD_STATIC[2] == fgm::Vec3{ 6, 12, 18 });
+
+    } // namespace static_tests
 
 } // namespace
+
 
 
 /**************************************
@@ -402,6 +477,61 @@ TEST(Vec3CrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
     [[maybe_unused]] const fgm::Vec3 crossProduct = vecA.cross(vecB);
 
     static_assert(std::is_same_v<typename decltype(crossProduct)::value_type, double>);
+}
+
+
+
+/**************************************
+ *                                    *
+ *        INNER PRODUCT TESTS         *
+ *                                    *
+ **************************************/
+
+TYPED_TEST(Vec3InnerProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
+{
+    const auto innerProduct = this->_vecA.innerProduct(this->_vecB);
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedInnerProductFP, innerProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedInnerProductInt, innerProduct);
+    }
+}
+
+
+TEST(Vec3InnerProduct, BetweenDifferentlyTypedVectorsPromotesType)
+{
+    const fgm::Vec3 vecA(2.0f, 3.0f, 4.0f);
+    const fgm::Vec3 vecB(5.0, 6.0, 7.0);
+
+    [[maybe_unused]] const auto crossProduct = vecA.innerProduct(vecB);
+    static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat3<double>>);
+}
+
+
+TYPED_TEST(Vec3InnerProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatrix)
+{
+    const auto innerProduct = fgm::Vec3<TypeParam>::innerProduct(this->_vecA, this->_vecB);
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedInnerProductFP, innerProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedInnerProductInt, innerProduct);
+    }
+}
+
+
+TEST(Vec3InnerProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
+{
+    const fgm::Vec3 vecA(2.0f, 3.0f, 4.0f);
+    const fgm::Vec3 vecB(5.0, 6.0, 7.0);
+
+    [[maybe_unused]] const auto crossProduct = fgm::Vec3<float>::innerProduct(vecA, vecB);
+    static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat3<double>>);
 }
 
 /** @} */
