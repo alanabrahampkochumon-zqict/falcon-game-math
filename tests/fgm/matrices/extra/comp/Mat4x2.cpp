@@ -50,8 +50,11 @@ namespace
 
         fgm::Mat3x2<T> _mat3x2;
 
-        fgm::Mat4<T> _expectedFPMat4, _expectedIntMat4;
-        fgm::Mat4x2<T> _mat4x2, _expectedFPMat4x2, _expectedIntMat4x2;
+        fgm::Mat4<T> _mat4, _expectedFPMat4, _expectedIntMat4;
+        // 4D x 4x2 -> 4x4 matrix * 4x2 matrix result
+        // 4x2 x 2D -> 4x2 matrix * 2x2 matrix result
+        fgm::Mat4x2<T> _mat4x2, _expectedFPMat4Dx4x2, _expectedIntMat4Dx4x2, _expectedFPMat4x2x2D,
+            _expectedIntMat4x2x2D;
         fgm::Mat4x3<T> _expectedFPMat4x3, _expectedIntMat4x3;
 
 
@@ -78,11 +81,18 @@ namespace
                         fgm::Vec4{ T(1.01820339999999998), T(2.01238399999999995), T(1.02384019999999998),
                                    T(1.10234800000000011) } };
 
-            _expectedFPMat4x2  = { fgm::Vec4{ T(9.84984481238332776), T(12.70618038429122976), T(5.75356765728206643),
-                                             T(9.95665110937957465) },
-                                   fgm::Vec4{ T(14.96413743398776930), T(18.71685356930307265), T(8.38077786423230364),
-                                             T(15.06503346050664049) } };
-            _expectedIntMat4x2 = { fgm::Vec4{ T(8), T(11), T(5), T(8) }, fgm::Vec4{ T(14), T(18), T(8), T(14) } };
+            _expectedFPMat4x2x2D = { fgm::Vec4{ T(9.84984481238332776), T(12.70618038429122976), T(5.75356765728206643),
+                                                T(9.95665110937957465) },
+                                     fgm::Vec4{ T(14.96413743398776930), T(18.71685356930307265),
+                                                T(8.38077786423230364), T(15.06503346050664049) } };
+            _expectedIntMat4x2x2D = { fgm::Vec4{ T(8), T(11), T(5), T(8) }, fgm::Vec4{ T(14), T(18), T(8), T(14) } };
+
+            _expectedFPMat4Dx4x2  = { fgm::Vec4{ T(51.53148302175357287), T(31.05492997565247038),
+                                                T(91.23728708151516287), T(86.74229998537445852) },
+                                      fgm::Vec4{ T(14.61642063652532286), T(10.45638242976778720),
+                                                T(23.59765950407579993), T(24.16954430946035259) } };
+            _expectedIntMat4Dx4x2 = { fgm::Vec4{ T(50), T(30), T(89), T(80) },
+                                      fgm::Vec4{ T(14), T(10), T(22), T(22) } };
 
             _expectedFPMat4x3  = { fgm::Vec4{ T(10.85938246244972660), T(14.70143733824681576), T(6.76869413353574245),
                                              T(11.04961721956482279) },
@@ -93,6 +103,15 @@ namespace
             _expectedIntMat4x3 = { fgm::Vec4{ T(9), T(13), T(6), T(9) }, fgm::Vec4{ T(15), T(20), T(9), T(15) },
                                    fgm::Vec4{ T(21), T(27), T(12), T(21) } };
 
+
+            _mat4            = { fgm::Vec4{ T(5.12390421300000032), T(2.01234000000000002), T(5.01238399999999995),
+                                 T(7.01203481000000028) },
+                                 fgm::Vec4{ T(1.01820339999999998), T(1.02384019999999998), T(3.12343210000000004),
+                                 T(3.16000000000000014) },
+                                 fgm::Vec4{ T(5.01238399999999995), T(5.01238401234000008), T(2.12389900000000020),
+                                 T(5.12500000000000000) },
+                                 fgm::Vec4{ T(2.01238399999999995), T(1.10234800000000011), T(9.10234799999999922),
+                                 T(4.91999999999999993) } };
             _expectedFPMat4  = { fgm::Vec4{ T(28.30336581395515338), T(29.73257631333379436), T(12.37135199205641989),
                                            T(27.90127453232277333) },
                                  fgm::Vec4{ T(6.25965426364760447), T(7.16398606794239967), T(3.09722018509204000),
@@ -121,6 +140,7 @@ namespace
         constexpr fgm::Mat2x3 MAT2X3(1, 2, 3, 4, 5, 6);
         constexpr fgm::Mat2x4 MAT2X4(5, 1, 5, 2, 2, 1, 5, 1);
 
+        constexpr fgm::Mat4 MAT4(5, 1, 5, 2, 2, 1, 5, 1, 5, 3, 2, 9, 7, 3, 5, 4);
         constexpr fgm::Mat4x2 MAT4X2(5, 1, 5, 2, 2, 1, 5, 1);
 
 
@@ -142,6 +162,11 @@ namespace
         static_assert(EXP_MAT4[2] == fgm::Vec4{ 30, 35, 15, 30 });
         static_assert(EXP_MAT4[3] == fgm::Vec4{ 11, 12, 5, 11 });
 
+        /// @test Verify that 4D matrix times a 4x2 matrix yields a 4x2 matrix at compile time.
+        constexpr auto EXP_MAT4X2SQ = MAT4 * MAT4X2;
+        static_assert(EXP_MAT4X2SQ[0] == fgm::Vec4{ 50, 30, 89, 80 });
+        static_assert(EXP_MAT4X2SQ[1] == fgm::Vec4{ 14, 10, 22, 22 });
+
     } // namespace static_tests
 
 } // namespace
@@ -159,11 +184,11 @@ TYPED_TEST(Mat4x2Composition, Mat4x2TimesMat2_ReturnsAValid4x2Matrix)
     const auto matrixProduct = this->_mat4x2 * this->_mat2;
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedFPMat4x2, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedFPMat4x2x2D, matrixProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedIntMat4x2, matrixProduct);
+        EXPECT_MAT_EQ(this->_expectedIntMat4x2x2D, matrixProduct);
     }
 }
 
@@ -192,6 +217,20 @@ TYPED_TEST(Mat4x2Composition, Mat4x2TimesMat2x4_ReturnsAValid4DMatrix)
     else
     {
         EXPECT_MAT_EQ(this->_expectedIntMat4, matrixProduct);
+    }
+}
+
+
+TYPED_TEST(Mat4x2Composition, Mat4TimesMat4x2_ReturnsAValid4x2Matrix)
+{
+    const auto matrixProduct = this->_mat4 * this->_mat4x2;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedFPMat4Dx4x2, matrixProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedIntMat4Dx4x2, matrixProduct);
     }
 }
 

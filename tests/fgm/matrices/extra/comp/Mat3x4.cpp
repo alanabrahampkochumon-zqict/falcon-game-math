@@ -156,7 +156,7 @@ namespace
         static_assert(EXP_MAT3X4[2] == fgm::Vec3{ 50, 30, 17 });
         static_assert(EXP_MAT3X4[3] == fgm::Vec3{ 64, 54, 21 });
 
-        /// @test Verify that 3x3 matrix times a 3x4 matrix yields a 3x4 matrix at compile time.
+        /// @test Verify that 3D matrix times a 3x4 matrix yields a 3x4 matrix at compile time.
         constexpr auto EXP_MAT3X4SQ = MAT3 * MAT3X4;
         static_assert(EXP_MAT3X4SQ[0] == fgm::Vec3{ 27, 14, 27 });
         static_assert(EXP_MAT3X4SQ[1] == fgm::Vec3{ 6, 4, 6 });
