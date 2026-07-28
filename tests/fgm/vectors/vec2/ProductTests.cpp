@@ -67,7 +67,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
     template <typename T>
-    class Vec2CrossProduct: public ::testing::Test
+    class Vec2CrossProduct: public testing::Test
     {
     protected:
         fgm::Vec2<T> _vecA;
@@ -90,7 +90,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
     template <typename T>
-    class Vec2InnerProduct: public ::testing::Test
+    class Vec2InnerProduct: public testing::Test
     {
     protected:
         fgm::Vec2<T> _vecA;

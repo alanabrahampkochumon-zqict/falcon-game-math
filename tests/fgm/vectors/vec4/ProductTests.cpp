@@ -10,6 +10,9 @@
 
 
 #include "Vec4TestSetup.h"
+#include "utils/MatrixUtils.h"
+
+#include <fgm/matrices/Mat4.h>
 
 
 
@@ -60,6 +63,41 @@ namespace
     TYPED_TEST_SUITE(Vec4DotProduct, SupportedArithmeticTypes);
 
 
+    /**
+     * @brief Test fixture for @ref fgm::Vec4 inner product.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
+    template <typename T>
+    class Vec4InnerProduct: public testing::Test
+    {
+    protected:
+        fgm::Vec4<T> _vecA;
+        fgm::Vec4<T> _vecB;
+        fgm::Mat4<T> _expectedInnerProductInt, _expectedInnerProductFP;
+
+        void SetUp() override
+        {
+            _vecA = fgm::Vec4{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988),
+                               T(4.01283041000000029) };
+            _vecB = fgm::Vec4{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988),
+                               T(4.01283041000000029) };
+            _expectedInnerProductInt = { fgm::Vec4{ T(1), T(2), T(3), T(4) }, fgm::Vec4{ T(2), T(4), T(6), T(8) },
+                                         fgm::Vec4{ T(3), T(6), T(9), T(12) }, fgm::Vec4{ T(4), T(8), T(12), T(16) } };
+            _expectedInnerProductFP  = { fgm::Vec4{ T(1.74753101886389506), T(2.80653765551779566),
+                                                   T(3.99403829352285911), T(5.30472961563964684) },
+                                         fgm::Vec4{ T(2.80653765551779566), T(4.50730403455733519),
+                                                   T(6.41443198853168894), T(8.51940438133799205) },
+                                         fgm::Vec4{ T(3.99403829352285911), T(6.41443198853168894),
+                                                   T(9.12850285226864244), T(12.12412998278212584) },
+                                         fgm::Vec4{ T(5.30472961563964684), T(8.51940438133799205),
+                                                   T(12.12412998278212584), T(16.10280789942077107) } };
+        }
+    };
+    TYPED_TEST_SUITE(Vec4InnerProduct, SupportedSignedArithmeticTypes);
+
+
+
     /**************************************
      *                                    *
      *           STATIC TESTS             *
@@ -81,18 +119,20 @@ namespace
         static_assert(DOT_PROD_STATIC == 70);
 
 
-        // /// @test Verify that inner product of two 4D vectors return a valid 4D matrix at compile time.
-        // constexpr auto INNER_PROD = VEC_A.innerProduct(VEC_B);
-        // static_assert(INNER_PROD[0] == fgm::Vec4{ 3, 6 });
-        // static_assert(INNER_PROD[1] == fgm::Vec4{ 4, 8 });
-        // static_assert(INNER_PROD[2] == fgm::Vec4{ 4, 8 });
-        // static_assert(INNER_PROD[3] == fgm::Vec4{ 4, 8 });
-        //
-        // /// @test Verify that inner product of two 4D vectors using static variant of cross()
-        // ///       return a valid 4D matrix at compile time.
-        // constexpr auto INNER_PROD_STATIC = fgm::Vec4<int>::innerProduct(VEC_A, VEC_B);
-        // static_assert(INNER_PROD_STATIC[0] == fgm::Vec4{ 3, 6 });
-        // static_assert(INNER_PROD_STATIC[1] == fgm::Vec4{ 4, 8 });
+        /// @test Verify that inner product of two 4D vectors return a valid 4D matrix at compile time.
+        constexpr auto INNER_PROD = VEC_A.innerProduct(VEC_B);
+        static_assert(INNER_PROD[0] == fgm::Vec4{ 5, 10, 15, 20 });
+        static_assert(INNER_PROD[1] == fgm::Vec4{ 6, 12, 18, 24 });
+        static_assert(INNER_PROD[2] == fgm::Vec4{ 7, 14, 21, 28 });
+        static_assert(INNER_PROD[3] == fgm::Vec4{ 8, 16, 24, 32 });
+
+        /// @test Verify that inner product of two 4D vectors using static variant of cross()
+        ///       return a valid 4D matrix at compile time.
+        constexpr auto INNER_PROD_STATIC = fgm::Vec4<int>::innerProduct(VEC_A, VEC_B);
+        static_assert(INNER_PROD_STATIC[0] == fgm::Vec4{ 5, 10, 15, 20 });
+        static_assert(INNER_PROD_STATIC[1] == fgm::Vec4{ 6, 12, 18, 24 });
+        static_assert(INNER_PROD_STATIC[2] == fgm::Vec4{ 7, 14, 21, 28 });
+        static_assert(INNER_PROD_STATIC[3] == fgm::Vec4{ 8, 16, 24, 32 });
 
     } // namespace static_tests
 
@@ -223,6 +263,61 @@ TEST(Vec4DotProduct, MixedTypeDotProductPromotesType)
 
     // Then, the dot product is non-zero
     EXPECT_DOUBLE_EQ(295.11111101, dotProduct);
+}
+
+
+
+/**************************************
+ *                                    *
+ *        INNER PRODUCT TESTS         *
+ *                                    *
+ **************************************/
+
+TYPED_TEST(Vec4InnerProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
+{
+    const auto innerProduct = this->_vecA.innerProduct(this->_vecB);
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedInnerProductFP, innerProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedInnerProductInt, innerProduct);
+    }
+}
+
+
+TEST(Vec4InnerProduct, BetweenDifferentlyTypedVectorsPromotesType)
+{
+    const fgm::Vec4 vecA(2.0f, 3.0f, 4.0f, 5.0f);
+    const fgm::Vec4 vecB(5.0, 6.0, 1.0, 2.0);
+
+    [[maybe_unused]] const auto crossProduct = vecA.innerProduct(vecB);
+    static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat4<double>>);
+}
+
+
+TYPED_TEST(Vec4InnerProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatrix)
+{
+    const auto innerProduct = fgm::Vec4<TypeParam>::innerProduct(this->_vecA, this->_vecB);
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedInnerProductFP, innerProduct);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedInnerProductInt, innerProduct);
+    }
+}
+
+
+TEST(Vec4InnerProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
+{
+    const fgm::Vec4 vecA(2.0f, 3.0f, 4.0f, 5.0f);
+    const fgm::Vec4 vecB(5.0, 6.0, 1.0, 2.0);
+
+    [[maybe_unused]] const auto crossProduct = fgm::Vec4<float>::innerProduct(vecA, vecB);
+    static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat4<double>>);
 }
 
 /** @} */

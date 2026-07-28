@@ -1160,6 +1160,45 @@ namespace fgm
         [[nodiscard]] static constexpr PromotedValue_t<T, U> dot(const Vec4& lhs, const Vec4<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Compute the inner product with another vector.
+         *        \f$ \mathbf{u} \otimes \mathbf{v} = u v^\top \f$
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compute the tensor product with.
+         *
+         * @return A new 4D matrix containing the tensor product.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedMat4<T, U> innerProduct(const Vec4<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the dot product of two vectors.
+         *        \f$ \mathbf{u} \otimes \mathbf{v} = u v^\top \f$
+         *
+         * @note Promotes the result to the wider type using @ref PromotedMat4<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first vector to compute the tensor product with.
+         * @param[in] rhs The second vector to compute the tensor product with.
+         *
+         * @return A new 4D matrix containing the tensor product.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr PromotedMat4<T, U> innerProduct(const Vec4& lhs, const Vec4<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
         /** @} */
 
 

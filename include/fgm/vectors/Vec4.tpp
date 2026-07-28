@@ -47,7 +47,8 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Vec4<T>::Vec4(const Vec3<T>& vec, const T v) noexcept: _data{ T(vec[0]), T(vec[1]), T(vec[2]), T(v) }
+    FGM_INLINE constexpr Vec4<T>::Vec4(const Vec3<T>& vec, const T v) noexcept
+        : _data{ T(vec[0]), T(vec[1]), T(vec[2]), T(v) }
     {}
 
 
@@ -874,6 +875,35 @@ namespace fgm
     { return lhs.dot(rhs); }
 
 
+
+    /*************************************
+     *                                   *
+     *        VECTOR INNER PRODUCT       *
+     *                                   *
+     *************************************/
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedMat4<T, U> Vec4<T>::innerProduct(const Vec4<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        return Mat4{ R(this->x() * rhs.x()), R(this->x() * rhs.y()), R(this->x() * rhs.z()), R(this->x() * rhs.w()),
+                     R(this->y() * rhs.x()), R(this->y() * rhs.y()), R(this->y() * rhs.z()), R(this->y() * rhs.w()),
+                     R(this->z() * rhs.x()), R(this->z() * rhs.y()), R(this->z() * rhs.z()), R(this->z() * rhs.w()),
+                     R(this->w() * rhs.x()), R(this->w() * rhs.y()), R(this->w() * rhs.z()), R(this->w() * rhs.w()) };
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedMat4<T, U> Vec4<T>::innerProduct(const Vec4& lhs, const Vec4<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.innerProduct(rhs); }
+
+
     /*************************************
      *                                   *
      *         VECTOR MAGNITUDE          *
@@ -1234,7 +1264,8 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedFloatVec4<T, U> Vec4<T>::tryProject(const Vec4<U>& onto, OperationStatus& status) const noexcept
+    FGM_INLINE constexpr PromotedFloatVec4<T, U> Vec4<T>::tryProject(const Vec4<U>& onto,
+                                                                     OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R       = PromotedValue_t<T, U>;
@@ -1263,7 +1294,8 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec4<T, U> Vec4<T>::tryProjectNorm(const Vec4<U>& onto, OperationStatus& status) const noexcept
+    FGM_INLINE constexpr PromotedVec4<T, U> Vec4<T>::tryProjectNorm(const Vec4<U>& onto,
+                                                                    OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -1283,7 +1315,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     FGM_INLINE constexpr PromotedFloatVec4<T, U> Vec4<T>::tryProject(const Vec4& vec, const Vec4<U>& onto,
-                                                          OperationStatus& status) noexcept
+                                                                     OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     { return vec.tryProject(onto, status); }
 
@@ -1292,7 +1324,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     FGM_INLINE constexpr PromotedVec4<T, U> Vec4<T>::tryProjectNorm(const Vec4& vec, const Vec4<U>& onto,
-                                                         OperationStatus& status) noexcept
+                                                                    OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     { return vec.tryProjectNorm(onto, status); }
 
@@ -1384,7 +1416,8 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedFloatVec4<T, U> Vec4<T>::tryReject(const Vec4<U>& from, OperationStatus& status) const noexcept
+    FGM_INLINE constexpr PromotedFloatVec4<T, U> Vec4<T>::tryReject(const Vec4<U>& from,
+                                                                    OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1400,7 +1433,8 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec4<T, U> Vec4<T>::tryRejectNorm(const Vec4<U>& from, OperationStatus& status) const noexcept
+    FGM_INLINE constexpr PromotedVec4<T, U> Vec4<T>::tryRejectNorm(const Vec4<U>& from,
+                                                                   OperationStatus& status) const noexcept
         requires StrictArithmetic<T>
     {
         if (hasNaN() || from.hasNaN())
@@ -1417,7 +1451,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     FGM_INLINE constexpr PromotedFloatVec4<T, U> Vec4<T>::tryReject(const Vec4& vec, const Vec4<U>& from,
-                                                         OperationStatus& status) noexcept
+                                                                    OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     { return vec.tryReject(from, status); }
 
@@ -1426,7 +1460,7 @@ namespace fgm
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
     FGM_INLINE constexpr PromotedVec4<T, U> Vec4<T>::tryRejectNorm(const Vec4& vec, const Vec4<U>& from,
-                                                        OperationStatus& status) noexcept
+                                                                   OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     { return vec.tryRejectNorm(from, status); }
 
