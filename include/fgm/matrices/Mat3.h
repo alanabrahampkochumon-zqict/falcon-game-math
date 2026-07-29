@@ -1444,6 +1444,18 @@ namespace fgm
 
 
         /**
+         * @brief Construct a 3D shear matrix by the y-axis (XY plane).
+         *
+         * @param[in] shearX The shear amount on the x-axis.
+         * @param[in] shearY The shear amount on the y-axis.
+         *
+         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         */
+        [[nodiscard]] static constexpr Mat3 makeShearZ3D(T shearX, T shearY) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
          * @brief Construct a 2D affine transform matrix from a 2D linear transform matrix and a 2D translation vector.
          * @param linearTransform The 2D linear transformation matrix.
          * @param translation     The 2D translation vector.

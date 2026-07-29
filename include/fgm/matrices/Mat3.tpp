@@ -951,9 +951,16 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Mat3<T> Mat3<T>::makeShear3DY(T shearZ, T shearX) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShear3DY(T shearZ, T shearX) noexcept
         requires StrictArithmetic<T>
     { return Mat3{ T(1), shearX, T(0), T(0), T(1), T(0), T(0), shearZ, T(1) }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearZ3D(T shearX, T shearY) noexcept
+        requires StrictArithmetic<T>
+    { return Mat3{ T(1), T(0), shearX, T(0), T(1), shearY, T(0), T(0), T(1) }; }
+
 
 
     template <Arithmetic T>
