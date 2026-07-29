@@ -1425,9 +1425,21 @@ namespace fgm
          * @param[in] shearY The shear amount on the y-axis.
          * @param[in] shearZ The shear amount on the z-axis.
          *
-         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         * @return A new @ref Mat3 representing the affine shear transform by the x-axis.
          */
         [[nodiscard]] static constexpr Mat3 makeShear3DX(T shearY, T shearZ) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 3D shear matrix by the y-axis (ZX plane).
+         *
+         * @param[in] shearZ The shear amount on the z-axis.
+         * @param[in] shearX The shear amount on the x-axis.
+         *
+         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         */
+        [[nodiscard]] static constexpr Mat3 makeShear3DY(T shearZ, T shearX) noexcept
             requires StrictArithmetic<T>;
 
 

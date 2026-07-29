@@ -102,6 +102,12 @@ namespace
         static_assert(SHEAR3D_X_MAT[0] == fgm::Vec3{ 1, SHEAR_FACTOR1, SHEAR_FACTOR2 });
         static_assert(SHEAR3D_X_MAT[1] == fgm::Vec3{ 0, 1, 0 });
         static_assert(SHEAR3D_X_MAT[2] == fgm::Vec3{ 0, 0, 1 });
+
+        /// @test Verify that @ref Mat3 makeShear3DY by y-axis returns a valid 3D shear matrix at compile time.
+        constexpr auto SHEAR3D_Y_MAT = fgm::Mat3<int>::makeShear3DY(SHEAR_FACTOR1, SHEAR_FACTOR2);
+        static_assert(SHEAR3D_Y_MAT[0] == fgm::Vec3{ 1, 0,  0});
+        static_assert(SHEAR3D_Y_MAT[1] == fgm::Vec3{ SHEAR_FACTOR2, 1, SHEAR_FACTOR1 });
+        static_assert(SHEAR3D_Y_MAT[2] == fgm::Vec3{ 0, 0, 1 });
     } // namespace static_tests
 
 } // namespace
@@ -124,5 +130,10 @@ TYPED_TEST(Mat3ShearTests, Shear2DY_ReturnsAValid3DAffineShearMatrix)
 
 TYPED_TEST(Mat3ShearTests, Shear3DX_ReturnsAValid3DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearX3D, fgm::Mat3<TypeParam>::makeShear3DX(this->_shearFactor1, this->_shearFactor2)); }
+
+
+TYPED_TEST(Mat3ShearTests, Shear3DY_ReturnsAValid3DShearMatrix)
+{ EXPECT_MAT_EQ(this->_shearY3D, fgm::Mat3<TypeParam>::makeShear3DY(this->_shearFactor1, this->_shearFactor2)); }
+
 
 /** @} */
