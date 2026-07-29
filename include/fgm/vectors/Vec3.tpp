@@ -825,7 +825,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3<T, U> Vec3<T>::innerProduct(const Vec3<U>& rhs) const noexcept
+    FGM_INLINE constexpr PromotedMat3<T, U> Vec3<T>::tensorProduct(const Vec3<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -840,10 +840,10 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3<T, U> Vec3<T>::innerProduct(const Vec3& lhs, const Vec3<U>& rhs) noexcept
+    FGM_INLINE constexpr PromotedMat3<T, U> Vec3<T>::tensorProduct(const Vec3& lhs, const Vec3<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
-        return lhs.innerProduct(rhs);
+        return lhs.tensorProduct(rhs);
     }
 
 

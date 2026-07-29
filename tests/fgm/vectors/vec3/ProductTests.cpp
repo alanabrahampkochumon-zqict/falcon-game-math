@@ -87,7 +87,7 @@ namespace
     TYPED_TEST_SUITE(Vec3CrossProduct, SupportedSignedArithmeticTypes);
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 inner product.
+     * @brief Test fixture for @ref fgm::Vec2 tensor product.
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
@@ -152,18 +152,18 @@ namespace
         static_assert(CROSS_PROD_STATIC.z() == -3);
 
 
-        /// @test Verify that inner product of two 3D vectors return a valid 3D matrix at compile time.
-        constexpr auto INNER_PROD = VEC_A.innerProduct(VEC_B);
-        static_assert(INNER_PROD[0] == fgm::Vec3{ 4, 8, 12 });
-        static_assert(INNER_PROD[1] == fgm::Vec3{ 5, 10, 15 });
-        static_assert(INNER_PROD[2] == fgm::Vec3{ 6, 12, 18 });
+        /// @test Verify that tensor product of two 3D vectors return a valid 3D matrix at compile time.
+        constexpr auto TENSOR_PROD = VEC_A.tensorProduct(VEC_B);
+        static_assert(TENSOR_PROD[0] == fgm::Vec3{ 4, 8, 12 });
+        static_assert(TENSOR_PROD[1] == fgm::Vec3{ 5, 10, 15 });
+        static_assert(TENSOR_PROD[2] == fgm::Vec3{ 6, 12, 18 });
 
-        /// @test Verify that inner product of two 3D vectors using static variant of cross()
+        /// @test Verify that tensor product of two 3D vectors using static variant of cross()
         ///       return a valid 3D matrix at compile time.
-        constexpr auto INNER_PROD_STATIC = fgm::Vec3<int>::innerProduct(VEC_A, VEC_B);
-        static_assert(INNER_PROD_STATIC[0] == fgm::Vec3{ 4, 8, 12 });
-        static_assert(INNER_PROD_STATIC[1] == fgm::Vec3{ 5, 10, 15 });
-        static_assert(INNER_PROD_STATIC[2] == fgm::Vec3{ 6, 12, 18 });
+        constexpr auto TENSOR_PROD_STATIC = fgm::Vec3<int>::tensorProduct(VEC_A, VEC_B);
+        static_assert(TENSOR_PROD_STATIC[0] == fgm::Vec3{ 4, 8, 12 });
+        static_assert(TENSOR_PROD_STATIC[1] == fgm::Vec3{ 5, 10, 15 });
+        static_assert(TENSOR_PROD_STATIC[2] == fgm::Vec3{ 6, 12, 18 });
 
     } // namespace static_tests
 
@@ -483,20 +483,20 @@ TEST(Vec3CrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
 
 /**************************************
  *                                    *
- *        INNER PRODUCT TESTS         *
+ *        TENSOR PRODUCT TESTS         *
  *                                    *
  **************************************/
 
 TYPED_TEST(Vec3InnerProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
 {
-    const auto innerProduct = this->_vecA.innerProduct(this->_vecB);
+    const auto tensorProduct = this->_vecA.tensorProduct(this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductFP, innerProduct);
+        EXPECT_MAT_EQ(this->_expectedInnerProductFP, tensorProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductInt, innerProduct);
+        EXPECT_MAT_EQ(this->_expectedInnerProductInt, tensorProduct);
     }
 }
 
@@ -506,21 +506,21 @@ TEST(Vec3InnerProduct, BetweenDifferentlyTypedVectorsPromotesType)
     const fgm::Vec3 vecA(2.0f, 3.0f, 4.0f);
     const fgm::Vec3 vecB(5.0, 6.0, 7.0);
 
-    [[maybe_unused]] const auto crossProduct = vecA.innerProduct(vecB);
+    [[maybe_unused]] const auto crossProduct = vecA.tensorProduct(vecB);
     static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat3<double>>);
 }
 
 
 TYPED_TEST(Vec3InnerProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatrix)
 {
-    const auto innerProduct = fgm::Vec3<TypeParam>::innerProduct(this->_vecA, this->_vecB);
+    const auto tensorProduct = fgm::Vec3<TypeParam>::tensorProduct(this->_vecA, this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductFP, innerProduct);
+        EXPECT_MAT_EQ(this->_expectedInnerProductFP, tensorProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductInt, innerProduct);
+        EXPECT_MAT_EQ(this->_expectedInnerProductInt, tensorProduct);
     }
 }
 
@@ -530,7 +530,7 @@ TEST(Vec3InnerProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
     const fgm::Vec3 vecA(2.0f, 3.0f, 4.0f);
     const fgm::Vec3 vecB(5.0, 6.0, 7.0);
 
-    [[maybe_unused]] const auto crossProduct = fgm::Vec3<float>::innerProduct(vecA, vecB);
+    [[maybe_unused]] const auto crossProduct = fgm::Vec3<float>::tensorProduct(vecA, vecB);
     static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat3<double>>);
 }
 

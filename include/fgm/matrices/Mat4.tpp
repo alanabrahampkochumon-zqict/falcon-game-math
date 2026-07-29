@@ -1121,14 +1121,14 @@ namespace fgm
     FGM_INLINE constexpr Mat4<T> Mat4<T>::makeScale(T scale, const Vec3<T>& direction) noexcept
         requires SignedStrictArithmetic<T>
     {
-        T sInv = scale - 1;
+        scale -= T(1);
 
-        T x  = sInv * direction.x() * direction.x() + 1;
-        T y  = sInv * direction.y() * direction.y() + 1;
-        T z  = sInv * direction.z() * direction.z() + 1;
-        T xy = sInv * direction.x() * direction.y();
-        T yz = sInv * direction.y() * direction.z();
-        T zx = sInv * direction.z() * direction.x();
+        T x  = scale * direction.x() * direction.x() + 1;
+        T y  = scale * direction.y() * direction.y() + 1;
+        T z  = scale * direction.z() * direction.z() + 1;
+        T xy = scale * direction.x() * direction.y();
+        T yz = scale * direction.y() * direction.z();
+        T zx = scale * direction.z() * direction.x();
 
         return Mat4{ x, xy, zx, xy, T(0), y, yz, zx, yz, T(0), z, T(0), T(0), T(0), T(0), T(1) };
     }

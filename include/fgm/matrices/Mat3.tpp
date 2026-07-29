@@ -880,14 +880,14 @@ namespace fgm
         requires SignedStrictArithmetic<T>
     {
 
-        T sInv = scale - 1;
+        scale -= T(1);
 
-        T x  = sInv * direction.x() * direction.x() + 1;
-        T y  = sInv * direction.y() * direction.y() + 1;
-        T z  = sInv * direction.z() * direction.z() + 1;
-        T xy = sInv * direction.x() * direction.y();
-        T yz = sInv * direction.y() * direction.z();
-        T zx = sInv * direction.z() * direction.x();
+        T x  = scale * direction.x() * direction.x() + 1;
+        T y  = scale * direction.y() * direction.y() + 1;
+        T z  = scale * direction.z() * direction.z() + 1;
+        T xy = scale * direction.x() * direction.y();
+        T yz = scale * direction.y() * direction.z();
+        T zx = scale * direction.z() * direction.x();
 
         return Mat3{ x, xy, zx, xy, y, yz, zx, yz, z };
     }

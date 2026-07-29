@@ -1093,7 +1093,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the inner product with another vector.
+         * @brief Compute the tensor product with another vector.
          *        \f$ \mathbf{u} \otimes \mathbf{v} = u v^\top \f$
          *
          * @note Promotes the result to the wider type using @ref PromotedMat3<T, U>.
@@ -1107,7 +1107,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr PromotedMat3<T, U> innerProduct(const Vec3<U>& rhs) const noexcept
+        [[nodiscard]] constexpr PromotedMat3<T, U> tensorProduct(const Vec3<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1123,11 +1123,11 @@ namespace fgm
          * @param[in] lhs The first vector to compute the tensor product with.
          * @param[in] rhs The second vector to compute the tensor product with.
          *
-         * @return A new 3D matrix containing the tensor product. 
+         * @return A new 3D matrix containing the tensor product.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedMat3<T, U> innerProduct(const Vec3& lhs, const Vec3<U>& rhs) noexcept
+        [[nodiscard]] static constexpr PromotedMat3<T, U> tensorProduct(const Vec3& lhs, const Vec3<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 

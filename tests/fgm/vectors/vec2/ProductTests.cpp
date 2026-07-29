@@ -85,28 +85,28 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 inner product.
+     * @brief Test fixture for @ref fgm::Vec2 tensor product.
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
     template <typename T>
-    class Vec2InnerProduct: public testing::Test
+    class Vec2TensorProduct: public testing::Test
     {
     protected:
         fgm::Vec2<T> _vecA;
         fgm::Vec2<T> _vecB;
-        fgm::Mat2<T> _expectedInnerProductInt, _expectedInnerProductFP;
+        fgm::Mat2<T> _expectedTensorProductInt, _expectedTensorProductFP;
 
         void SetUp() override
         {
             _vecA                    = fgm::Vec2{ T(1.23412341000000003), T(2.21341324399999984) };
             _vecB                    = { T(1.23412341000000003), T(2.21341324399999984) };
-            _expectedInnerProductInt = { fgm::Vec2{ T(1.52306059111002812), T(2.73162510042444184) },
+            _expectedTensorProductInt = { fgm::Vec2{ T(1.52306059111002812), T(2.73162510042444184) },
                                          fgm::Vec2{ T(2.73162510042444184), T(4.89919818871460322) } };
-            _expectedInnerProductFP  = { fgm::Vec2{ T(1), T(2) }, fgm::Vec2{ T(2), T(4) } };
+            _expectedTensorProductFP  = { fgm::Vec2{ T(1), T(2) }, fgm::Vec2{ T(2), T(4) } };
         }
     };
-    TYPED_TEST_SUITE(Vec2InnerProduct, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2TensorProduct, SupportedSignedArithmeticTypes);
 
 
 
@@ -141,16 +141,16 @@ namespace
         constexpr auto CROSS_PROD_STATIC = fgm::Vec2<int>::cross(VEC_A, VEC_B);
         static_assert(CROSS_PROD_STATIC == -2);
 
-        /// @test Verify that inner product of two 2D vectors return a valid 2D matrix at compile time.
-        constexpr auto INNER_PROD = VEC_A.innerProduct(VEC_B);
-        static_assert(INNER_PROD[0] == fgm::Vec2{ 3, 6 });
-        static_assert(INNER_PROD[1] == fgm::Vec2{ 4, 8 });
+        /// @test Verify that tensor product of two 2D vectors return a valid 2D matrix at compile time.
+        constexpr auto TENSOR_PROD = VEC_A.tensorProduct(VEC_B);
+        static_assert(TENSOR_PROD[0] == fgm::Vec2{ 3, 6 });
+        static_assert(TENSOR_PROD[1] == fgm::Vec2{ 4, 8 });
 
-        /// @test Verify that inner product of two 2D vectors using static variant of cross()
+        /// @test Verify that tensor product of two 2D vectors using static variant of cross()
         ///       return a valid 2D matrix at compile time.
-        constexpr auto INNER_PROD_STATIC = fgm::Vec2<int>::innerProduct(VEC_A, VEC_B);
-        static_assert(INNER_PROD_STATIC[0] == fgm::Vec2{ 3, 6 });
-        static_assert(INNER_PROD_STATIC[1] == fgm::Vec2{ 4, 8 });
+        constexpr auto TENSOR_PROD_STATIC = fgm::Vec2<int>::tensorProduct(VEC_A, VEC_B);
+        static_assert(TENSOR_PROD_STATIC[0] == fgm::Vec2{ 3, 6 });
+        static_assert(TENSOR_PROD_STATIC[1] == fgm::Vec2{ 4, 8 });
 
     } // namespace
 
@@ -357,54 +357,54 @@ TEST(Vec2CrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
 
 /**************************************
  *                                    *
- *        INNER PRODUCT TESTS         *
+ *        TENSOR PRODUCT TESTS        *
  *                                    *
  **************************************/
 
-TYPED_TEST(Vec2InnerProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
+TYPED_TEST(Vec2TensorProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
 {
-    const auto innerProduct = this->_vecA.innerProduct(this->_vecB);
+    const auto tensorProduct = this->_vecA.tensorProduct(this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductFP, innerProduct);
+        EXPECT_MAT_EQ(this->_expectedTensorProductFP, tensorProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductInt, innerProduct);
+        EXPECT_MAT_EQ(this->_expectedTensorProductInt, tensorProduct);
     }
 }
 
 
-TEST(Vec2InnerProduct, BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vec2TensorProduct, BetweenDifferentlyTypedVectorsPromotesType)
 {
     const fgm::Vec2 vecA(2.0f, 3.0f);
     const fgm::Vec2 vecB(5.0, 6.0);
 
-    [[maybe_unused]] const auto crossProduct = vecA.innerProduct(vecB);
+    [[maybe_unused]] const auto crossProduct = vecA.tensorProduct(vecB);
     static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat2<double>>);
 }
 
 
-TYPED_TEST(Vec2InnerProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatrix)
+TYPED_TEST(Vec2TensorProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatrix)
 {
-    const auto innerProduct = fgm::Vec2<TypeParam>::innerProduct(this->_vecA, this->_vecB);
+    const auto tensorProduct = fgm::Vec2<TypeParam>::tensorProduct(this->_vecA, this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductFP, innerProduct);
+        EXPECT_MAT_EQ(this->_expectedTensorProductFP, tensorProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductInt, innerProduct);
+        EXPECT_MAT_EQ(this->_expectedTensorProductInt, tensorProduct);
     }
 }
 
 
-TEST(Vec2InnerProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vec2TensorProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
 {
     const fgm::Vec2 vecA(2.0f, 3.0f);
     const fgm::Vec2 vecB(5.0, 6.0);
 
-    [[maybe_unused]] const auto crossProduct = fgm::Vec2<float>::innerProduct(vecA, vecB);
+    [[maybe_unused]] const auto crossProduct = fgm::Vec2<float>::tensorProduct(vecA, vecB);
     static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat2<double>>);
 }
 
