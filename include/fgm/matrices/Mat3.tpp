@@ -945,6 +945,12 @@ namespace fgm
 
 
     template <Arithmetic T>
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShear3DX(T shearY, T shearZ) noexcept
+        requires StrictArithmetic<T>
+    { return Mat3{ T(1), T(0), T(0), shearY, T(1), T(0), shearZ, T(0), T(1) }; }
+
+
+    template <Arithmetic T>
     FGM_INLINE constexpr Mat3<T> Mat3<T>::makeAffine(const Mat2<T>& linearTransform,
                                                      const Vec2<T>& translation) noexcept
     {

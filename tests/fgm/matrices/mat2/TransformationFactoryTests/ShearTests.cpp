@@ -85,11 +85,11 @@ namespace
  *                                    *
  **************************************/
 
-TYPED_TEST(Mat2ShearTests, ShearX_ReturnsAValid2DMatrix)
+TYPED_TEST(Mat2ShearTests, ShearX_ReturnsAValid2DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearX, fgm::Mat2<TypeParam>::makeShearX(this->_shearFactor)); }
 
 
-TYPED_TEST(Mat2ShearTests, ShearY_ReturnsAValid2DMatrix)
+TYPED_TEST(Mat2ShearTests, ShearY_ReturnsAValid2DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearY, fgm::Mat2<TypeParam>::makeShearY(this->_shearFactor)); }
 
 /** @} */
