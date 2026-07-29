@@ -27,8 +27,8 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat3<T>::Mat3(const T m00, const T m01, const T m02, const T m10, const T m11, const T m12, const T m20,
-                            const T m21, const T m22) noexcept
+    FGM_INLINE constexpr Mat3<T>::Mat3(const T m00, const T m01, const T m02, const T m10, const T m11, const T m12,
+                                       const T m20, const T m21, const T m22) noexcept
         : _data{ Vec3{ T(m00), T(m10), T(m20) }, Vec3{ T(m01), T(m11), T(m21) }, Vec3{ T(m02), T(m12), T(m22) } }
     {}
 
@@ -507,7 +507,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat3<T, S> Mat3<T>::tryDiv(const S scalar, OperationStatus& status, Mat3 fallback) const noexcept
+    FGM_INLINE constexpr PromotedMat3<T, S> Mat3<T>::tryDiv(const S scalar, OperationStatus& status,
+                                                            Mat3 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -546,7 +547,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     FGM_INLINE constexpr PromotedMat3<T, S> Mat3<T>::tryDiv(const Mat3& mat, const S scalar, OperationStatus& status,
-                                                 Mat3 fallback) noexcept
+                                                            Mat3 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
@@ -715,7 +716,7 @@ namespace fgm
 
     template <Arithmetic T>
     FGM_INLINE constexpr Mat3<Magnitude<T>> Mat3<T>::tryInverseOf(const Mat3& matrix, OperationStatus& status,
-                                                       Mat3 fallback) noexcept
+                                                                  Mat3 fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.tryInverse(status, fallback); }
 
@@ -932,7 +933,20 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeAffine(const Mat2<T>& linearTransform, const Vec2<T>& translation) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShear2DX(T shear) noexcept
+        requires StrictArithmetic<T>
+    { return Mat3{ T(1), shear, T(0), T(0), T(1), T(0), T(0), T(0), T(1) }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShear2DY(T shear) noexcept
+        requires StrictArithmetic<T>
+    { return Mat3{ T(1), T(0), T(0), shear, T(1), T(0), T(0), T(0), T(1) }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeAffine(const Mat2<T>& linearTransform,
+                                                     const Vec2<T>& translation) noexcept
     {
         return Mat3<T>{ linearTransform(0, 0),
                         linearTransform(0, 1),

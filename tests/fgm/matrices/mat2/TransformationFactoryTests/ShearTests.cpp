@@ -1,7 +1,7 @@
 /**
  * @file ShearTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: July 229, 2026
+ * @date Created on: July 29, 2026
  *
  * @brief Verify @ref fgm::Mat2 shear factory logic.
  *

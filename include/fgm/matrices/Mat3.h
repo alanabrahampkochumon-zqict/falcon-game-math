@@ -1396,6 +1396,29 @@ namespace fgm
             requires SignedStrictArithmetic<T>;
 
 
+
+        /**
+         * @brief Construct a 2D affine shear matrix by the x-axis (horizontal axis).
+         *
+         * @param[in] shear The shear amount.
+         *
+         * @return A new @ref Mat2 representing the affine shear transform by the x-axis.
+         */
+        [[nodiscard]] static constexpr Mat3 makeShear2DX(T shear) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 2D affine shear matrix by the y-axis (vertical axis).
+         *
+         * @param[in] shear The shear amount.
+         *
+         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         */
+        [[nodiscard]] static constexpr Mat3 makeShear2DY(T shear) noexcept
+            requires StrictArithmetic<T>;
+
+
         /**
          * @brief Construct a 2D affine transform matrix from a 2D linear transform matrix and a 2D translation vector.
          * @param linearTransform The 2D linear transformation matrix.
