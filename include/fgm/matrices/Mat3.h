@@ -1404,7 +1404,7 @@ namespace fgm
          *
          * @return A new @ref Mat2 representing the affine shear transform by the x-axis.
          */
-        [[nodiscard]] static constexpr Mat3 makeShear2DX(T shear) noexcept
+        [[nodiscard]] static constexpr Mat3 makeShearX2D(T shear) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1415,7 +1415,7 @@ namespace fgm
          *
          * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
          */
-        [[nodiscard]] static constexpr Mat3 makeShear2DY(T shear) noexcept
+        [[nodiscard]] static constexpr Mat3 makeShearY2D(T shear) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1427,7 +1427,7 @@ namespace fgm
          *
          * @return A new @ref Mat3 representing the affine shear transform by the x-axis.
          */
-        [[nodiscard]] static constexpr Mat3 makeShear3DX(T shearY, T shearZ) noexcept
+        [[nodiscard]] static constexpr Mat3 makeShearX3D(T shearY, T shearZ) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1439,7 +1439,7 @@ namespace fgm
          *
          * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
          */
-        [[nodiscard]] static constexpr Mat3 makeShear3DY(T shearZ, T shearX) noexcept
+        [[nodiscard]] static constexpr Mat3 makeShearY3D(T shearZ, T shearX) noexcept
             requires StrictArithmetic<T>;
 
 
