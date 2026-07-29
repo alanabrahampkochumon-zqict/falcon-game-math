@@ -31,7 +31,6 @@
 #include <cstdint>
 #include <type_traits>
 
-// TODO: Add makeShear
 
 namespace fgm
 {
@@ -1147,31 +1146,39 @@ namespace fgm
         [[nodiscard]] static constexpr Mat2 makeScale(T scaleX, T scaleY) noexcept
             requires StrictArithmetic<T>;
 
-        // TODO: Remove
-        // /**
-        //  * @brief Construct a reflection 2D matrix for reflection along coordinate axis(X, Y), and the origin<0, 0>.
-        //  *
-        //  * @note To construction a reflection matrix around origin, set all axis reflection to true.
-        //  *
-        //  * @param[in] reflectX A flag to whether reflect in the x-direction.
-        //  * @param[in] reflectY A flag to whether reflect in the y-direction.
-        //  *
-        //  * @return A new @ref Mat2 representing the axis-aligned reflection.
-        //  */
-        // [[nodiscard]] static constexpr Mat2 makeReflection(bool reflectX, bool reflectY) noexcept
-        //     requires StrictArithmetic<T>;
-
 
         /**
-         * @brief Construct a 2D reflection matrix across coordinate axis the origin.
+         * @brief Construct a 2D reflection matrix across coordinate axis.
          *
          * @tparam On The axis to reflect across. For more details @ref fgm::reflect for more details.
          *
-         * @return A new @ref Mat2 representing the reflection across coordinate axis, plane or the origin.
+         * @return A new @ref Mat2 representing the reflection across coordinate axis, or the origin.
          */
         template <reflect::RT On>
         [[nodiscard]] static constexpr Mat2 makeReflection() noexcept
             requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 2D shear matrix by the x-axis (horizontal axis).
+         *
+         * @param[in] shear The shear amount.
+         *
+         * @return A new @ref Mat2 representing the shear transform by the x-axis.
+         */
+        [[nodiscard]] static constexpr Mat2 makeShearX(T shear) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 2D shear matrix by the y-axis (vertical axis).
+         *
+         * @param[in] shear The shear amount.
+         *
+         * @return A new @ref Mat2 representing the shear transform by the y-axis.
+         */
+        [[nodiscard]] static constexpr Mat2 makeShearY(T shear) noexcept
+            requires StrictArithmetic<T>;
 
         /** @} */
 

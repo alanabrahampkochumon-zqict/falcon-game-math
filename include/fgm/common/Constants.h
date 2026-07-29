@@ -11,9 +11,9 @@
 
 
 #include <concepts>
+#include <cstdint>
 #include <limits>
 #include <numbers>
-#include <cstdint>
 
 
 /**
@@ -70,10 +70,13 @@ namespace fgm::reflect
 
 namespace fgm::axis
 {
-    inline constexpr std::size_t X = 0; ///< Alias for x-coordinate
-    inline constexpr std::size_t Y = 1; ///< Alias for y-coordinate
-    inline constexpr std::size_t Z = 2; ///< Alias for z-coordinate
-    inline constexpr std::size_t W = 3; ///< Alias for w-coordinate
+    /// @brief Alias for axis used in fgm.
+    /// @typedef AT stands for Axis Type, which is uint8_t by default.
+    using AT                       = uint8_t;
+    inline constexpr AT X = 0; ///< Alias for x-coordinate
+    inline constexpr AT Y = 1; ///< Alias for y-coordinate
+    inline constexpr AT Z = 2; ///< Alias for z-coordinate
+    inline constexpr AT W = 3; ///< Alias for w-coordinate
 } // namespace fgm::axis
 
 

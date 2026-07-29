@@ -456,7 +456,8 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat2<T, S> Mat2<T>::tryDiv(const S scalar, OperationStatus& status, Mat2 fallback) const noexcept
+    FGM_INLINE constexpr PromotedMat2<T, S> Mat2<T>::tryDiv(const S scalar, OperationStatus& status,
+                                                            Mat2 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -493,7 +494,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic S>
     FGM_INLINE constexpr PromotedMat2<T, S> Mat2<T>::tryDiv(const Mat2& mat, const S scalar, OperationStatus& status,
-                                                 Mat2 fallback) noexcept
+                                                            Mat2 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
@@ -640,7 +641,7 @@ namespace fgm
 
     template <Arithmetic T>
     FGM_INLINE constexpr Mat2<Magnitude<T>> Mat2<T>::tryInverseOf(const Mat2& matrix, OperationStatus& status,
-                                                       Mat2 fallback) noexcept
+                                                                  Mat2 fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.tryInverse(status, fallback); }
 
@@ -731,11 +732,17 @@ namespace fgm
         return Mat2{ reflectX, T(0), T(0), reflectY };
     }
 
-    // TODO: Deprecated(REMOVE)
-    // template <Arithmetic T>
-    // FGM_INLINE constexpr Mat2<T> Mat2<T>::makeReflection(const bool reflectX, const bool reflectY) noexcept
-    //     requires StrictArithmetic<T>
-    // { return Mat2(static_cast<T>(reflectX * -2 + 1), T(0), T(0), static_cast<T>(reflectY * -2 + 1)); }
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat2<T> Mat2<T>::makeShearX(T shear) noexcept
+        requires StrictArithmetic<T>
+    { return Mat2{ T(1), shear, T(0), T(1) }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat2<T> Mat2<T>::makeShearY(T shear) noexcept
+        requires StrictArithmetic<T>
+    { return Mat2{ T(1), T(0), shear, T(1) }; }
 
 } // namespace fgm
 
