@@ -1721,8 +1721,8 @@ namespace fgm
          * @param[in] normal     The unit vector orthogonal to shear direction.
          *
          * @code
-         *      const fgm::Vec4 xAxis(1.0f, 0.0f, 0.0f, 0.0f);
-         *      const fgm::Vec4 zAxis(0.0f, 0.0f, 1.0f, 0.0f);
+         *      const fgm::Vec3 xAxis(1.0f, 0.0f, 0.0f);
+         *      const fgm::Vec3 zAxis(0.0f, 0.0f, 1.0f);
          *      const auto shearAngle = 3.1415f / 4.0f;
          *      const auto shearMat = fgm::Mat4<float>::makeShearByAngle(shearAngle, xAxis, zAxis);
          * @endcode
@@ -1736,6 +1736,37 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Mat4 makeShearByAngle(T shearAngle, const Vec3<T>& direction,
                                                              const Vec3<T>& normal) noexcept
+            requires std::floating_point<T>;
+
+
+
+        /**
+         * @brief Construct a 3D affine transformation matrix that shears by @p shearFactor along @p direction.
+         *
+         * @note For angle based shears use @ref makeShearByAngle.
+         * @note Constrained to floating point types via `std::floating_point<T>`.
+         *
+         * @param[in] shearFactor The shear angle in radians.
+         * @param[in] direction  The direction of shear. Must be a unit vector.
+         * @param[in] normal     The unit vector orthogonal to shear direction.
+         *
+         * @code
+         *      const fgm::Vec3 xAxis(1.0f, 0.0f, 0.0f);
+         *      const fgm::Vec3 zAxis(0.0f, 0.0f, 1.0f);
+         *      const auto shearAngle = 3.1415f / 4.0f;
+         *      const auto shearValue = std::tan(shearAngle);
+         *      const auto shearMat = fgm::Mat4<float>makeShear(shearValue, xAxis, zAxis);
+         * @endcode
+         *
+         * @return A new @ref Mat4 representing the affine shear transform.
+         *
+         * @relatedalso makeShearX(T, T)
+         * @relatedalso makeShearY(T, T)
+         * @relatedalso makeShearZ(T, T)
+         * @relatedalso makeShearByAngle(T, const Vec3<T>&, const Vec3<T>&)
+         */
+        [[nodiscard]] static constexpr Mat4 makeShear(T shearFactor, const Vec3<T>& direction,
+                                                      const Vec3<T>& normal) noexcept
             requires std::floating_point<T>;
 
 

@@ -102,12 +102,14 @@ namespace
         static_assert(SHEAR4D_X_MAT[2] == fgm::Vec4{ 0, 0, 1, 0 });
         static_assert(SHEAR4D_X_MAT[3] == fgm::Vec4{ 0, 0, 0, 1 });
 
+
         /// @test Verify that @ref Mat4 makeShearY by y-axis returns a valid 4D shear matrix at compile time.
         constexpr auto SHEAR4D_Y_MAT = fgm::Mat4<int>::makeShearY(SHEAR_FACTOR1, SHEAR_FACTOR2);
         static_assert(SHEAR4D_Y_MAT[0] == fgm::Vec4{ 1, 0, 0, 0 });
         static_assert(SHEAR4D_Y_MAT[1] == fgm::Vec4{ SHEAR_FACTOR1, 1, SHEAR_FACTOR2, 0 });
         static_assert(SHEAR4D_Y_MAT[2] == fgm::Vec4{ 0, 0, 1, 0 });
         static_assert(SHEAR4D_Y_MAT[3] == fgm::Vec4{ 0, 0, 0, 1 });
+
 
         /// @test Verify that @ref Mat4 makeShearZ by z-axis returns a valid 4D shear matrix at compile time.
         constexpr auto SHEAR4D_Z_MAT = fgm::Mat4<int>::makeShearZ(SHEAR_FACTOR1, SHEAR_FACTOR2);
@@ -116,15 +118,17 @@ namespace
         static_assert(SHEAR4D_Z_MAT[2] == fgm::Vec4{ SHEAR_FACTOR1, SHEAR_FACTOR2, 1, 0 });
         static_assert(SHEAR4D_Y_MAT[3] == fgm::Vec4{ 0, 0, 0, 1 });
 
-        // /// TODO: Add shear by angle static tests after making tan compile time.
-        //
-        //
-        // /// @test Verify that @ref Mat4 makeShear returns a valid 4D shear matrix at compile time.
-        // constexpr auto SHEAR4D_MAT =
-        //     fgm::Mat4<float>::makeShear(1.0f, fgm::Vec4{ 1.0f, 0.0f, 0.0f }, fgm::Vec4{ 0.0f, 0.0f, 1.0f });
-        // static_assert(SHEAR4D_MAT[0] == fgm::Vec4{ 1, 0, 0 });
-        // static_assert(SHEAR4D_MAT[1] == fgm::Vec4{ 0, 1, 0 });
-        // static_assert(SHEAR4D_MAT[2] == fgm::Vec4{ 1, 0, 1 });
+
+        /// TODO: Add shear by angle static tests after making tan compile time.
+
+
+        /// @test Verify that @ref Mat4 makeShear returns a valid 4D shear matrix at compile time.
+        constexpr auto SHEAR4D_MAT =
+            fgm::Mat4<float>::makeShear(1.0f, fgm::Vec3{ 1.0f, 0.0f, 0.0f }, fgm::Vec3{ 0.0f, 0.0f, 1.0f });
+        static_assert(SHEAR4D_MAT[0] == fgm::Vec4{ 1, 0, 0, 0 });
+        static_assert(SHEAR4D_MAT[1] == fgm::Vec4{ 0, 1, 0, 0 });
+        static_assert(SHEAR4D_MAT[2] == fgm::Vec4{ 1, 0, 1, 0 });
+        static_assert(SHEAR4D_MAT[3] == fgm::Vec4{ 0, 0, 0, 1 });
     } // namespace static_tests
 
 } // namespace
@@ -156,13 +160,11 @@ TYPED_TEST(Mat4ArbitraryShear, ShearByAngle_ReturnsAValid4DShearMatrix)
         fgm::Mat4<TypeParam>::makeShearByAngle(this->_shearAngle, this->_shearPlaneNormal, this->_shearDirection));
 }
 
-
-// TYPED_TEST(Mat4ArbitraryShear, Shear_ReturnsAValid4DShearMatrix)
-// {
-//     EXPECT_MAT_EQ(
-//         this->_shear,
-//         fgm::Mat4<TypeParam>::makeShear(this->_shearFactor, this->_shearPlaneNormal, this->_shearDirection));
-// }
+TYPED_TEST(Mat4ArbitraryShear, Shear_ReturnsAValid4DShearMatrix)
+{
+    EXPECT_MAT_EQ(this->_shear,
+                  fgm::Mat4<TypeParam>::makeShear(this->_shearFactor, this->_shearPlaneNormal, this->_shearDirection));
+}
 
 
 /** @} */
