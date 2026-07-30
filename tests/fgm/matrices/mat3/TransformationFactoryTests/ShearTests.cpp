@@ -186,6 +186,12 @@ TYPED_TEST(Mat3ArbitraryShear, ShearByAngle_ReturnsAValid3DShearMatrix)
 }
 
 
+TYPED_TEST(Mat3ArbitraryShear, Shear_ReturnsAValid3DShearMatrix)
+{
+    EXPECT_MAT_EQ(
+        this->_shear,
+        fgm::Mat3<TypeParam>::makeShearByAngle(this->_shearFactor, this->_shearPlaneNormal, this->_shearDirection));
+}
 
 
 /** @} */

@@ -1403,6 +1403,12 @@ namespace fgm
          * @param[in] shear The shear amount.
          *
          * @return A new @ref Mat2 representing the affine shear transform by the x-axis.
+         *
+         * @relatedalso makeShearY2D(T)
+         * @relatedalso makeShearX3D(T)
+         * @relatedalso makeShearY3D(T)
+         * @relatedalso makeShearZ3D(T)
+         * @relatedalso makeShearByAngle(T, const Vec3<T>&, const Vec3<T>&)
          */
         [[nodiscard]] static constexpr Mat3 makeShearX2D(T shear) noexcept
             requires StrictArithmetic<T>;
@@ -1414,6 +1420,13 @@ namespace fgm
          * @param[in] shear The shear amount.
          *
          * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         *
+         * @relatedalso makeShearX2D(T)
+         * @relatedalso makeShearX3D(T)
+         * @relatedalso makeShearY3D(T)
+         * @relatedalso makeShearZ3D(T)
+         * @relatedalso makeShearByAngle(T, const Vec3<T>&, const Vec3<T>&)
+         * @relatedalso makeShear(T, const Vec3<T>&, const Vec3<T>&)
          */
         [[nodiscard]] static constexpr Mat3 makeShearY2D(T shear) noexcept
             requires StrictArithmetic<T>;
@@ -1426,6 +1439,13 @@ namespace fgm
          * @param[in] shearZ The shear amount on the z-axis.
          *
          * @return A new @ref Mat3 representing the affine shear transform by the x-axis.
+         *
+         * @relatedalso makeShearX2D(T)
+         * @relatedalso makeShearY2D(T)
+         * @relatedalso makeShearY3D(T)
+         * @relatedalso makeShearZ3D(T)
+         * @relatedalso makeShearByAngle(T, const Vec3<T>&, const Vec3<T>&)
+         * @relatedalso makeShear(T, const Vec3<T>&, const Vec3<T>&)
          */
         [[nodiscard]] static constexpr Mat3 makeShearX3D(T shearY, T shearZ) noexcept
             requires StrictArithmetic<T>;
@@ -1437,7 +1457,14 @@ namespace fgm
          * @param[in] shearZ The shear amount on the z-axis.
          * @param[in] shearX The shear amount on the x-axis.
          *
-         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+        * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+        *
+         * @relatedalso makeShearX2D(T)
+         * @relatedalso makeShearY2D(T)
+         * @relatedalso makeShearX3D(T)
+         * @relatedalso makeShearZ3D(T)
+         * @relatedalso makeShearByAngle(T, const Vec3<T>&, const Vec3<T>&)
+         * @relatedalso makeShear(T, const Vec3<T>&, const Vec3<T>&)
          */
         [[nodiscard]] static constexpr Mat3 makeShearY3D(T shearZ, T shearX) noexcept
             requires StrictArithmetic<T>;
@@ -1449,7 +1476,14 @@ namespace fgm
          * @param[in] shearX The shear amount on the x-axis.
          * @param[in] shearY The shear amount on the y-axis.
          *
-         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         * @return A new @ref Mat3 representing the affine shear transform by the z-axis.
+         *
+         * @relatedalso makeShearX2D(T)
+         * @relatedalso makeShearY2D(T)
+         * @relatedalso makeShearX3D(T)
+         * @relatedalso makeShearY3D(T)
+         * @relatedalso makeShearByAngle(T, const Vec3<T>&, const Vec3<T>&)
+         * @relatedalso makeShear(T, const Vec3<T>&, const Vec3<T>&)
          */
         [[nodiscard]] static constexpr Mat3 makeShearZ3D(T shearX, T shearY) noexcept
             requires StrictArithmetic<T>;
@@ -1458,6 +1492,7 @@ namespace fgm
         /**
          * @brief Construct a 3D transformation matrix that shears by @p shearAngle along @p direction.
          *
+         * @note For value-based shears use @ref makeShear or any of the component axis variants.
          * @note Constrained to floating point types via `std::floating_point<T>`.
          *
          * @param[in] shearAngle The shear angle in radians.
@@ -1468,7 +1503,7 @@ namespace fgm
          *      const fgm::Vec3 xAxis(1.0f, 0.0f, 0.0f);
          *      const fgm::Vec3 zAxis(0.0f, 0.0f, 1.0f);
          *      const auto shearAngle = 3.1415f / 4.0f;
-         *      const auto shearMat = fgm::Mat3<float>(shearAngle, xAxis, zAxis);
+         *      const auto shearMat = fgm::Mat3<float>::makeShearByAngle(shearAngle, xAxis, zAxis);
          * @endcode
          *
          * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
@@ -1482,6 +1517,38 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Mat3 makeShearByAngle(T shearAngle, const Vec3<T>& direction,
                                                              const Vec3<T>& normal) noexcept
+            requires std::floating_point<T>;
+
+
+        /**
+         * @brief Construct a 3D transformation matrix that shears by @p shearFactor along @p direction.
+         *
+         * @note For angle based shears use @ref makeShearByAngle.
+         * @note Constrained to floating point types via `std::floating_point<T>`.
+         *
+         * @param[in] shearFactor The shear angle in radians.
+         * @param[in] direction  The direction of shear. Must be a unit vector.
+         * @param[in] normal     The unit vector orthogonal to shear direction.
+         *
+         * @code
+         *      const fgm::Vec3 xAxis(1.0f, 0.0f, 0.0f);
+         *      const fgm::Vec3 zAxis(0.0f, 0.0f, 1.0f);
+         *      const auto shearAngle = 3.1415f / 4.0f;
+         *      const auto shearValue = std::tan(shearAngle);
+         *      const auto shearMat = fgm::Mat3<float>makeShear(shearValue, xAxis, zAxis);
+         * @endcode
+         *
+         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         *
+         * @relatedalso makeShearX2D(T)
+         * @relatedalso makeShearY2D(T)
+         * @relatedalso makeShearX3D(T)
+         * @relatedalso makeShearY3D(T)
+         * @relatedalso makeShearZ3D(T)
+         * @relatedalso makeShearByAngle(T, const Vec3<T>&, const Vec3<T>&)
+         */
+        [[nodiscard]] static constexpr Mat3 makeShear(T shearFactor, const Vec3<T>& direction,
+                                                      const Vec3<T>& normal) noexcept
             requires std::floating_point<T>;
 
 
