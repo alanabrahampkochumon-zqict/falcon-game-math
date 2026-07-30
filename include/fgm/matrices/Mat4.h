@@ -1682,7 +1682,7 @@ namespace fgm
          * @param[in] shearX The shear amount on the x-axis.
          * @param[in] shearZ The shear amount on the z-axis.
          *
-         * @return A new @ref Mat4 representing the affine shear transform by the x-axis.
+         * @return A new @ref Mat4 representing the affine shear transform by the y-axis.
          *
          * @relatedalso makeShearX(T)
          * @relatedalso makeShearZ(T)
@@ -1690,6 +1690,23 @@ namespace fgm
          * @relatedalso makeShear(T, const Vec3<T>&, const Vec3<T>&)
          */
         [[nodiscard]] static constexpr Mat4 makeShearY(T shearX, T shearZ) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Construct a 3D affine shear matrix by the z-axis.
+         *
+         * @param[in] shearX The shear amount on the x-axis.
+         * @param[in] shearY The shear amount on the y-axis.
+         *
+         * @return A new @ref Mat4 representing the affine shear transform by the z-axis.
+         *
+         * @relatedalso makeShearX(T)
+         * @relatedalso makeShearY(T)
+         * @relatedalso makeShearByAngle(T, const Vec3<T>&, const Vec3<T>&)
+         * @relatedalso makeShear(T, const Vec3<T>&, const Vec3<T>&)
+         */
+        [[nodiscard]] static constexpr Mat4 makeShearZ(T shearX, T shearY) noexcept
             requires StrictArithmetic<T>;
 
 

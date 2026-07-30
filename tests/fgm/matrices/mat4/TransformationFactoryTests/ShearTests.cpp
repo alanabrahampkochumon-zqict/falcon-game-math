@@ -107,12 +107,13 @@ namespace
         static_assert(SHEAR4D_Y_MAT[2] == fgm::Vec4{ 0, 0, 1, 0 });
         static_assert(SHEAR4D_Y_MAT[3] == fgm::Vec4{ 0, 0, 0, 1 });
 
-        // /// @test Verify that @ref Mat4 makeShearZ by z-axis returns a valid 4D shear matrix at compile time.
-        // constexpr auto SHEAR4D_Z_MAT = fgm::Mat4<int>::makeShearZ(SHEAR_FACTOR1, SHEAR_FACTOR2);
-        // static_assert(SHEAR4D_Z_MAT[0] == fgm::Vec4{ 1, 0, 0 });
-        // static_assert(SHEAR4D_Z_MAT[1] == fgm::Vec4{ 0, 1, 0 });
-        // static_assert(SHEAR4D_Z_MAT[2] == fgm::Vec4{ SHEAR_FACTOR1, SHEAR_FACTOR2, 1 });
-        //
+        /// @test Verify that @ref Mat4 makeShearZ by z-axis returns a valid 4D shear matrix at compile time.
+        constexpr auto SHEAR4D_Z_MAT = fgm::Mat4<int>::makeShearZ(SHEAR_FACTOR1, SHEAR_FACTOR2);
+        static_assert(SHEAR4D_Z_MAT[0] == fgm::Vec4{ 1, 0, 0, 0 });
+        static_assert(SHEAR4D_Z_MAT[1] == fgm::Vec4{ 0, 1, 0, 0 });
+        static_assert(SHEAR4D_Z_MAT[2] == fgm::Vec4{ SHEAR_FACTOR1, SHEAR_FACTOR2, 1, 0 });
+        static_assert(SHEAR4D_Y_MAT[3] == fgm::Vec4{ 0, 0, 0, 1 });
+
         // /// TODO: Add shear by angle static tests after making tan compile time.
         //
         //
@@ -142,10 +143,10 @@ TYPED_TEST(Mat4Shear, ShearY4D_ReturnsAValid4DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearY, fgm::Mat4<TypeParam>::makeShearY(this->_shearFactor1, this->_shearFactor2)); }
 
 
-// TYPED_TEST(Mat4Shear, ShearZ4D_ReturnsAValid4DShearMatrix)
-// { EXPECT_MAT_EQ(this->_shearZ, fgm::Mat4<TypeParam>::makeShearZ(this->_shearFactor1, this->_shearFactor2)); }
-//
-//
+TYPED_TEST(Mat4Shear, ShearZ4D_ReturnsAValid4DShearMatrix)
+{ EXPECT_MAT_EQ(this->_shearZ, fgm::Mat4<TypeParam>::makeShearZ(this->_shearFactor1, this->_shearFactor2)); }
+
+
 // TYPED_TEST(Mat4ArbitraryShear, ShearByAngle_ReturnsAValid4DShearMatrix)
 // {
 //     EXPECT_MAT_EQ(

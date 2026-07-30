@@ -1181,7 +1181,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearX(T shearY, T shearZ) noexcept
+    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearX(const T shearY, const T shearZ) noexcept
         requires StrictArithmetic<T>
     {
         return Mat4{
@@ -1191,9 +1191,23 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearY(T shearX, T shearZ) noexcept
+    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearY(const T shearX, const T shearZ) noexcept
         requires StrictArithmetic<T>
-    { return Mat4{ T(1), shearX, T(0), T(0), T(0), T(1), T(0), T(0), T(0), shearZ, T(1), T(0), T(0), T(0), T(0), T(1) };}
+    {
+        return Mat4{
+            T(1), shearX, T(0), T(0), T(0), T(1), T(0), T(0), T(0), shearZ, T(1), T(0), T(0), T(0), T(0), T(1)
+        };
+    }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearZ(const T shearX, const T shearY) noexcept
+        requires StrictArithmetic<T>
+    {
+        return Mat4{
+            T(1), T(0), shearX, T(0), T(0), T(1), shearY, T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1)
+        };
+    }
 
 
     template <Arithmetic T>

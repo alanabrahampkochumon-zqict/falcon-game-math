@@ -933,37 +933,37 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearX2D(T shear) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearX2D(const T shear) noexcept
         requires StrictArithmetic<T>
     { return Mat3{ T(1), shear, T(0), T(0), T(1), T(0), T(0), T(0), T(1) }; }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearY2D(T shear) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearY2D(const T shear) noexcept
         requires StrictArithmetic<T>
     { return Mat3{ T(1), T(0), T(0), shear, T(1), T(0), T(0), T(0), T(1) }; }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearX3D(T shearY, T shearZ) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearX3D(const T shearY, const T shearZ) noexcept
         requires StrictArithmetic<T>
     { return Mat3{ T(1), T(0), T(0), shearY, T(1), T(0), shearZ, T(0), T(1) }; }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearY3D(T shearZ, T shearX) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearY3D(const T shearZ, const T shearX) noexcept
         requires StrictArithmetic<T>
     { return Mat3{ T(1), shearX, T(0), T(0), T(1), T(0), T(0), shearZ, T(1) }; }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearZ3D(T shearX, T shearY) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearZ3D(const T shearX, const T shearY) noexcept
         requires StrictArithmetic<T>
     { return Mat3{ T(1), T(0), shearX, T(0), T(1), shearY, T(0), T(0), T(1) }; }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearByAngle(T shearAngle, const Vec3<T>& direction,
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShearByAngle(const T shearAngle, const Vec3<T>& direction,
                                                            const Vec3<T>& normal) noexcept
         requires std::floating_point<T>
     {
@@ -977,7 +977,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShear(T shearFactor, const Vec3<T>& direction,
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeShear(const T shearFactor, const Vec3<T>& direction,
                                                     const Vec3<T>& normal) noexcept
         requires std::floating_point<T>
     {
