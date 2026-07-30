@@ -37,39 +37,39 @@ namespace fgm
          * @{
          */
 
-        // /**
-        //  * @brief Add a vector(direction) to this point.
-        //  *
-        //  * @note Promotes the result to the wider type using @ref PromotedPoint2<T, U>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] vector The vector to add.
-        //  *
-        //  * @return A new @ref Point2 representing a translated point.
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] constexpr PromotedPoint2<T, U> operator+(const Vec2<U>& vector) const noexcept;
-        //
-        //
-        // /**
-        //  * @brief Add a vector(direction) to this point in-place.
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] vector The vector to add.
-        //  *
-        //  * @return A reference to the current Point2 instance (*this).
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // constexpr Point2& operator+=(const Vec2<U>& vector) noexcept;
-        //
-        //
+        /**
+         * @brief Add a vector(direction) to this point.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedPoint2<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vector The vector to add.
+         *
+         * @return A new @ref Point2 representing a translated point.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedPoint2<T, U> operator+(const Vec2<U>& vector) const noexcept;
+
+
+        /**
+         * @brief Add a vector(direction) to this point in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vector The vector to add.
+         *
+         * @return A reference to the current Point2 instance (*this).
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr Point2& operator+=(const Vec2<U>& vector) noexcept;
+
+
         // /**
         //  * @brief Subtract a point from this point yielding a direction.
         //  *
