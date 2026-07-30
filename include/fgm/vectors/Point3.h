@@ -38,7 +38,7 @@ namespace fgm
          */
 
         /**
-         * @brief Compute the sum of this point with a vector(direction).
+         * @brief Add a vector(direction) to this point.
          *
          * @note Promotes the result to the wider type using @ref PromotedPoint3<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
@@ -55,7 +55,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the sum of this point with a vector(direction) in-place.
+         * @brief Add a vector(direction) to this point in-place.
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
@@ -68,6 +68,24 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         constexpr Point3& operator+=(const Vec3<U>& vector) noexcept;
+
+
+        /**
+         * @brief Subtract a point from this point yielding a direction.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedVec3<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS point. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The point to subtract.
+         *
+         * @return A new @ref Vec3 representing a direction vector.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedVec3<T, U> operator-(const Point3<U>& rhs) const noexcept;
+
 
         /** @} */
     };

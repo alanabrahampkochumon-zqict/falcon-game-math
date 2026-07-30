@@ -85,12 +85,19 @@ namespace
         constexpr fgm::Vec3 DIR_VEC(1, 3, 7);
         constexpr fgm::Point3<int> POINT_B(4, 3, 1);
 
-        /// @test Verify that a Point3 + Vec3 returns the correct Point3 at compile time.
+        /// @test Verify that a Point3 + Vec3 returns a valid Point3 at compile time.
         constexpr auto SUM_POINT = POINT_A + DIR_VEC;
         static_assert(std::is_same_v<decltype(SUM_POINT), const fgm::Point3<int>>);
         static_assert(SUM_POINT.x() == 2);
         static_assert(SUM_POINT.y() == 5);
         static_assert(SUM_POINT.z() == 10);
+
+        /// @test Verify that a Point3 - Point3 returns a valid Vec3 at compile time.
+        constexpr auto SUB_DIR_VEC = POINT_A - POINT_B;
+        static_assert(std::is_same_v<decltype(SUB_DIR_VEC), const fgm::Vec3<int>>);
+        static_assert(SUB_DIR_VEC.x() == -3);
+        static_assert(SUB_DIR_VEC.y() == -1);
+        static_assert(SUB_DIR_VEC.z() == 2);
 
     } // namespace static_tests
 
@@ -148,58 +155,22 @@ TEST(Point3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
  * @{
  */
 
-// /**
-//  * @brief Verify that the binary subtraction operator perform a component-wise subtraction and
-//  *       returns a new vector instance.
-//  */
-// TYPED_TEST(Point3Subtraction, MinusOperator_ReturnsDifference)
-// {
-//     const fgm::Point3 result = this->_pointA - this->_pointB;
-//
-//     EXPECT_VEC_EQ(this->_expectedVector, result);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound subtraction assignment operator perform a component-wise subtraction
-//  *       and mutates the vector in-place.
-//  */
-// TYPED_TEST(Point3Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
-// {
-//     this->_pointA -= this->_pointB;
-//
-//     EXPECT_VEC_EQ(this->_expectedVector, this->_pointA);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary subtraction operator perform automatic type promotion
-//  *       to the wider numeric type.
-//  */
-// TEST(Point3Subtraction, MinusOperator_MixedTypePromotesType)
-// {
-//     const fgm::Point3 vec1(3.0f, 0.0f, -1.0f);
-//     const fgm::Point3 vec2(9.0, -5.0, 10.0);
-//
-//     [[maybe_unused]] const fgm::Point3 result = vec1 - vec2;
-//
-//     static_assert(std::is_same_v<decltype(result)::value_type, double>);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
-//  *       perform an implicit cast.
-//  */
-// TEST(Point3Subtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
-// {
-//     fgm::Point3 vec1(3.0f, 0.0f, -1.0f);
-//     [[maybe_unused]] const fgm::Point3 vec2(9.0, -5.0, 10.0);
-//
-//     static_cast<void>(vec1 -= vec2);
-//
-//     static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
-// }
-//
-// /** @} */
-//
+TYPED_TEST(Point3Subtraction, MinusOperator_ReturnsAVectorWithComponentwiseDifference)
+{
+    const auto result = this->_pointA - this->_pointB;
+
+    EXPECT_VEC_EQ(this->_expectedVector, result);
+}
+
+
+TEST(Point3Subtraction, MinusOperator_MixedTypePromotesType)
+{
+    const fgm::Point3<float> pointA(3.0f, 0.0f, -1.0f);
+    const fgm::Point3<double> pointB(9.0, -5.0, 10.0);
+
+    [[maybe_unused]] const auto result = pointA - pointB;
+
+    static_assert(std::is_same_v<decltype(result)::value_type, double>);
+}
+
+/** @} */

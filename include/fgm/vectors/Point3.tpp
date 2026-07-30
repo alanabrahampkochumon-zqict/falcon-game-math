@@ -38,4 +38,14 @@ namespace fgm
     }
 
 
+    template <StrictArithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedVec3<T, U> Point3<T>::operator-(const Point3<U>& rhs) const noexcept
+    {
+        using R = std::common_type_t<T, U>;
+        return Point3<R>(this->x() - rhs.x(), this->y() - rhs.y(), this->z() - rhs.z());
+    }
+
+
 } // namespace fgm
