@@ -1456,6 +1456,36 @@ namespace fgm
 
 
         /**
+         * @brief Construct a 3D transformation matrix that shears by @p shearAngle along @p direction.
+         *
+         * @note Constrained to floating point types via `std::floating_point<T>`.
+         *
+         * @param[in] shearAngle The shear angle in radians.
+         * @param[in] direction  The direction of shear. Must be a unit vector.
+         * @param[in] normal     The unit vector orthogonal to shear direction.
+         *
+         * @code
+         *      const fgm::Vec3 xAxis(1.0f, 0.0f, 0.0f);
+         *      const fgm::Vec3 zAxis(0.0f, 0.0f, 1.0f);
+         *      const auto shearAngle = 3.1415f / 4.0f;
+         *      const auto shearMat = fgm::Mat3<float>(shearAngle, xAxis, zAxis);
+         * @endcode
+         *
+         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         *
+         * @relatedalso makeShearX2D(T)
+         * @relatedalso makeShearY2D(T)
+         * @relatedalso makeShearX3D(T)
+         * @relatedalso makeShearY3D(T)
+         * @relatedalso makeShearZ3D(T)
+         * @relatedalso makeShear(T, const Vec3<T>&, const Vec3<T>&)
+         */
+        [[nodiscard]] static constexpr Mat3 makeShearByAngle(T shearAngle, const Vec3<T>& direction,
+                                                             const Vec3<T>& normal) noexcept
+            requires std::floating_point<T>;
+
+
+        /**
          * @brief Construct a 2D affine transform matrix from a 2D linear transform matrix and a 2D translation vector.
          * @param linearTransform The 2D linear transformation matrix.
          * @param translation     The 2D translation vector.
