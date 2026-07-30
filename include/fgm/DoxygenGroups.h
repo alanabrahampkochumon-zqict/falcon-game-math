@@ -32,6 +32,16 @@
          */
 
             /**
+             * @defgroup FGM_Point 3D Point
+             * @brief 3-dimensional point with an implicit w-value of 1.
+             * @ingroup FGM_Vectors
+             * @{
+             *   @defgroup FGM_Point3_Init Constructors
+             *   @defgroup FGM_Point3_Arithmetic Arithmetic Operations
+             * @}
+             */
+
+            /**
              * @defgroup FGM_Vec2 2D Vectors
              * @brief 2-dimensional Euclidean vectors.
              * @ingroup FGM_Vectors

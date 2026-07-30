@@ -1,0 +1,17 @@
+add_library(Point3Tests OBJECT)
+
+target_sources(
+        Point3Tests PRIVATE
+        InitializationTests.cpp
+)
+
+target_include_directories(
+        Point3Tests PRIVATE
+        ${FGM_TEST_ROOT_DIR}/include
+)
+
+
+target_link_libraries(
+        Point3Tests PRIVATE
+        FGMTestSetup
+)

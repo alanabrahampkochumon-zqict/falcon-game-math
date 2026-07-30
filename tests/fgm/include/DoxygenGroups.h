@@ -32,7 +32,7 @@
          */
 
             /**
-             * @defgroup FGM_Vec2_Tests Vec4 Test Suite
+             * @defgroup FGM_Vec2_Tests 2D Vector Tests
              * @brief Verification of 2D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
@@ -69,7 +69,7 @@
 
 
             /**
-             * @defgroup FGM_Vec3_Tests Vec4 Test Suite
+             * @defgroup FGM_Vec3_Tests 3D Vector Tests
              * @brief Verification of 3D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
@@ -106,7 +106,7 @@
 
 
             /**
-             * @defgroup FGM_Vec4_Tests Vec4 Test Suite
+             * @defgroup FGM_Vec4_Tests 4D Vector Tests
              * @brief Verification of 4D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
@@ -138,6 +138,17 @@
              *   @defgroup T_FGM_Vec4_Negation Negation(-)
              *   @defgroup T_FGM_Vec4_Utils Vector Utilities
              *   @defgroup T_FGM_Vec4_Swizzle Vector Swizzling
+             * @}
+             */
+
+            /**
+             * @defgroup FGM_Point3_Tests 3D Point Tests
+             * @brief Verification of 3D Point<x, y, z, w> operations.
+             * @ingroup VectorTests
+             * @{
+             *   @defgroup T_FGM_Point3_Addition Addition
+             *   @defgroup T_FGM_Point3_Subtraction Subtraction
+             *   @defgroup T_FGM_Point3_Init Initialization
              * @}
              */
 
