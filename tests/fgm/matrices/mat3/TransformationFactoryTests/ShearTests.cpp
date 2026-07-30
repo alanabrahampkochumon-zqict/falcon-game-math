@@ -146,6 +146,13 @@ namespace
         static_assert(SHEAR3D_Z_MAT[2] == fgm::Vec3{ SHEAR_FACTOR1, SHEAR_FACTOR2, 1 });
 
         /// TODO: Add shear by angle static tests after making tan compile time.
+
+
+        /// @test Verify that @ref Mat3 makeShear returns a valid 3D shear matrix at compile time.
+        constexpr auto SHEAR3D_MAT = fgm::Mat3<float>::makeShear(1.0f, fgm::Vec3{1.0f, 0.0f, 0.0f},fgm::Vec3{0.0f, 0.0f, 1.0f} );
+        static_assert(SHEAR3D_MAT[0] == fgm::Vec3{ 1, 0, 0 });
+        static_assert(SHEAR3D_MAT[1] == fgm::Vec3{ 0, 1, 0 });
+        static_assert(SHEAR3D_MAT[2] == fgm::Vec3{ 1, 0, 1 });
     } // namespace static_tests
 
 } // namespace
