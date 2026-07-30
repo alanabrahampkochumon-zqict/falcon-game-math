@@ -421,6 +421,35 @@
              * @}
              */
 
+            /**
+             * @defgroup FGM_Transform4_Tests 4D Transformation Matrix Tests
+             * @brief Verification of 4D transformation matrix operations.
+             * @ingroup MatrixTests
+             * @{
+             *   @defgroup T_FGM_Transform4_Access Component Access
+             *   @defgroup T_FGM_Transform4_Mutation Component Mutation
+             *   @defgroup T_FGM_Transform4_Alias Spatial Aliasing
+             *   @defgroup T_FGM_Transform4_Const Matrix Constants
+             *   @defgroup T_FGM_Transform4_Addition Addition
+             *   @defgroup T_FGM_Transform4_Subtraction Subtraction
+             *   @defgroup T_FGM_Transform4_Multiplication Scalar Multiplication
+             *   @defgroup T_FGM_Transform4_Division Scalar Division
+             *   @defgroup T_FGM_Transform4_Transpose Matrix Transpose
+             *   @defgroup T_FGM_Transform4_Inverse Matrix Inverse
+             *   @defgroup T_FGM_Transform4_Constant Matrix Constants
+             *   @defgroup T_FGM_Transform4_Equality Equality
+             *   @defgroup T_FGM_Transform4_Inequality  Inequality
+             *   @defgroup T_FGM_Transform4_Init Initialization
+             *   @defgroup T_FGM_Transform4_String_Repr Formatted String Representation
+             *   @defgroup T_FGM_Transform4_Type_Conv Conversion Constructor
+             *   @defgroup T_FGM_Transform4_Negation Negation(-)
+             *   @defgroup T_FGM_Transform4_Det Determinants
+             *   @defgroup T_FGM_Transform4_Trace Trace
+             *   @defgroup T_FGM_Transform4_Transforms Transformation Factories
+             *   @defgroup T_FGM_Transform4_Utils Matrix Utilities
+             * @}
+             */
+
         /** @} */ // End of MatrixTests
 
         /**

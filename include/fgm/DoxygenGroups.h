@@ -318,6 +318,26 @@
              *   @defgroup FGM_Mat4x4_Transforms Matrix Transformation Factories
              * @}
              */
+
+
+            /**
+            * @defgroup FGM_Transform4 4x4 Transformation Matrix
+            * @brief 4D Matrix used for transformation with inherent assumption that last row is <0, 0, 0, 1>.
+            * @ingroup FGM_Matrices
+            * @{
+            *   @defgroup FGM_Transform4_Init Constructors
+            *   @defgroup FGM_Transform4_Access Accessors
+            *   @defgroup FGM_Transform4_Arithmetic Arithmetic Operations
+            *   @defgroup FGM_Transform4_Algebra Matrix Algebra
+            *   @defgroup FGM_Transform4_Equality Equality
+            *   @defgroup FGM_Transform4_Geom Geometric Products
+            *   @defgroup FGM_Transform4_Comp Matrix Compositions
+            *   @defgroup FGM_Transform4_Log String Representation
+            *   @defgroup FGM_Transform4_Const Matrix Constants
+            *   @defgroup FGM_Transform4_Utils Matrix Utilities
+            *   @defgroup FGM_Transform4_Transforms Matrix Transformation Factories
+            * @}
+            */
         
         /** @} */ // FGM_Matrices
 

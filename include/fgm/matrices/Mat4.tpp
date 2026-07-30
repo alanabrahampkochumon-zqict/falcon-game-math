@@ -696,6 +696,12 @@ namespace fgm
         auto c = static_cast<Vec3<R>>(_data[2].template swizzle<axis::X, axis::Y, axis::Z>());
         auto d = _data[3].template swizzle<axis::X, axis::Y, axis::Z>();
 
+        // NOTE: NOT CONSTEXPR COMPATIBLE
+        // const auto& a = reinterpret_cast<const Vec3<R>&>(_data[0]);
+        // const auto& b = reinterpret_cast<const Vec3<R>&>(_data[1]);
+        // const auto& c = reinterpret_cast<const Vec3<R>&>(_data[2]);
+        // const auto& d = reinterpret_cast<const Vec3<R>&>(_data[3]);
+
         auto x = _data[0][3];
         auto y = _data[1][3];
         auto z = _data[2][3];

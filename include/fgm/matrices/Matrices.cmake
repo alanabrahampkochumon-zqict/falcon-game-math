@@ -24,7 +24,7 @@ set(FGM_MAT_HEADERS
         extra/Comp.tpp
         extra/Geom.h
         extra/Geom.tpp
-        #        MatMul.h
-        #        MatMul.tpp
+        Transform4.h
+        Transform4.tpp
 )
 list(TRANSFORM FGM_MAT_HEADERS PREPEND ${FGM_MAT_DIR})
