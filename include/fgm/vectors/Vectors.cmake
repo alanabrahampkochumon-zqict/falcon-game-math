@@ -2,6 +2,8 @@ include_guard()
 
 set(FGM_VEC_DIR "vectors/")
 set(FGM_VEC_HEADERS
+        Point2.h
+        Point2.tpp
         Point3.h
         Point3.tpp
         Vec2.h

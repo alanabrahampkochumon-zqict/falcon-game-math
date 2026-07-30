@@ -32,6 +32,16 @@
          */
 
             /**
+             * @defgroup FGM_Point 2D Point
+             * @brief 2-dimensional point with an implicit z-value of 1.
+             * @ingroup FGM_Vectors
+             * @{
+             *   @defgroup FGM_Point2_Init Constructors
+             *   @defgroup FGM_Point2_Arithmetic Arithmetic Operations
+             * @}
+             */
+
+            /**
              * @defgroup FGM_Point 3D Point
              * @brief 3-dimensional point with an implicit w-value of 1.
              * @ingroup FGM_Vectors

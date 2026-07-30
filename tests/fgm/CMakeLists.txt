@@ -30,6 +30,7 @@ set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
 list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
 
 add_subdirectory(common)
+add_subdirectory(vectors/point2)
 add_subdirectory(vectors/point3)
 add_subdirectory(vectors/vec2)
 add_subdirectory(vectors/vec3)
@@ -79,6 +80,7 @@ target_link_libraries(
 
         # Objs
         CommonTests
+        Point2Tests
         Point3Tests
         Vec2Tests
         Vec3Tests

@@ -86,7 +86,6 @@ namespace fgm
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVec3<T, U> operator-(const Point3<U>& rhs) const noexcept;
 
-
         /** @} */
     };
 
@@ -95,7 +94,15 @@ namespace fgm
     /** @brief Template deduction guide for Point3 */
     template <typename T>
         requires StrictArithmetic<T>
-    Point3(T, T) -> Point3<T>;
+    Point3(T, T, T) -> Point3<T>;
+
+    template <typename T, typename U, typename V>
+        requires StrictArithmetic<T> && StrictArithmetic<U> && StrictArithmetic<V>
+    Point3(T, U, V) -> Point3<std::common_type_t<std::common_type_t<T, U>, V>>;
+
+    template <typename T>
+        requires StrictArithmetic<T>
+    Point3(T) -> Point3<T>;
 
 } // namespace fgm
 

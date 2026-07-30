@@ -1,0 +1,176 @@
+// /**
+//  * @file ArithmeticOperationTests.cpp
+//  * @author Alan Abraham P Kochumon
+//  * @date Created on: July 30, 2026
+//  *
+//  * @brief Verify @ref fgm::Point3 arithmetic operator(+, -) logic.
+//  *
+//  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+//  */
+//
+//
+// #include "Point3TestSetup.h"
+//
+//
+// /**
+//  * @addtogroup T_FGM_Point3_Addition
+//  * @{
+//  */
+//
+// namespace
+// {
+//
+//     /**************************************
+//      *                                    *
+//      *            TEST SETUP              *
+//      *                                    *
+//      **************************************/
+//
+//     /**
+//      * @brief Test fixture for @ref fgm::Point3 addition operation.
+//      *
+//      * @tparam T The scalar type (e.g., float, double) used for the point.
+//      */
+//     template <typename T>
+//     class Point3Addition: public testing::Test
+//     {
+//     protected:
+//         fgm::Vec3<T> _vector;
+//         fgm::Point2<T> _point;
+//         fgm::Point2<T> _expectedPoint;
+//
+//         void SetUp() override
+//         {
+//             _vector        = { T(3), T(1), T(6) };
+//             _point         = { T(1), T(2), T(3) };
+//             _expectedPoint = { T(4), T(3), T(9) };
+//         }
+//     };
+//     TYPED_TEST_SUITE(Point3Addition, SupportedArithmeticTypes);
+//
+//
+//     /**
+//      * @brief Test fixture for @ref fgm::Point3 subtraction operation.
+//      *
+//      * @tparam T The scalar type (e.g., float, double) used for the point.
+//      */
+//     template <typename T>
+//     class Point3Subtraction: public testing::Test
+//     {
+//     protected:
+//         fgm::Point2<T> _pointA;
+//         fgm::Point2<T> _pointB;
+//         fgm::Point2<T> _expectedVector;
+//
+//         void SetUp() override
+//         {
+//             _pointA         = { T(95), T(11), T(6) };
+//             _pointB         = { T(8), T(5), T(2) };
+//             _expectedVector = { T(87), T(6), T(4) };
+//         }
+//     };
+//     TYPED_TEST_SUITE(Point3Subtraction, SupportedArithmeticTypes);
+//
+//
+//
+//     /**************************************
+//      *                                    *
+//      *            STATIC TESTS            *
+//      *                                    *
+//      **************************************/
+//
+//     namespace static_tests
+//     {
+//         constexpr fgm::Point2<int> POINT_A(1, 2, 3);
+//         constexpr fgm::Vec3 DIR_VEC(1, 3, 7);
+//         constexpr fgm::Point2<int> POINT_B(4, 3, 1);
+//
+//         /// @test Verify that a Point3 + Vec3 returns a valid Point3 at compile time.
+//         constexpr auto SUM_POINT = POINT_A + DIR_VEC;
+//         static_assert(std::is_same_v<decltype(SUM_POINT), const fgm::Point2<int>>);
+//         static_assert(SUM_POINT.x() == 2);
+//         static_assert(SUM_POINT.y() == 5);
+//         static_assert(SUM_POINT.z() == 10);
+//
+//         /// @test Verify that a Point3 - Point3 returns a valid Vec3 at compile time.
+//         constexpr auto SUB_DIR_VEC = POINT_A - POINT_B;
+//         static_assert(std::is_same_v<decltype(SUB_DIR_VEC), const fgm::Vec3<int>>);
+//         static_assert(SUB_DIR_VEC.x() == -3);
+//         static_assert(SUB_DIR_VEC.y() == -1);
+//         static_assert(SUB_DIR_VEC.z() == 2);
+//
+//     } // namespace static_tests
+//
+// } // namespace
+//
+//
+//
+// /**************************************
+//  *                                    *
+//  *           RUNTIME TESTS            *
+//  *                                    *
+//  **************************************/
+//
+// TYPED_TEST(Point3Addition, PlusOperator_ReturnsAPointWithComponentwiseSum)
+// {
+//     const fgm::Point2 result = this->_point + this->_vector;
+//     EXPECT_VEC_EQ(this->_expectedPoint, result);
+// }
+//
+//
+// TEST(Point3Addition, PlusOperator_MixedTypePromotesType)
+// {
+//     const fgm::Point2<float> point(3.0f, 0.0f, -1.0f);
+//     const fgm::Vec3 vector(9.0, -5.0, 10.0);
+//
+//     [[maybe_unused]] const fgm::Point2 result = point + vector;
+//
+//     static_assert(std::is_same_v<decltype(result)::value_type, double>);
+// }
+//
+//
+// TYPED_TEST(Point3Addition, PlusEqualsOperator_ReturnsSamePointWithComponentwiseSum)
+// {
+//     this->_point += this->_vector;
+//     EXPECT_VEC_EQ(this->_expectedPoint, this->_point);
+// }
+//
+//
+// TEST(Point3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+// {
+//     fgm::Point2<float> point(3.0f, 0.0f, -1.0f);
+//     const fgm::Vec3 vector(9.0, -5.0, 10.0);
+//
+//     static_cast<void>(point += vector);
+//
+//     static_assert(std::is_same_v<decltype(point)::value_type, float>);
+// }
+//
+// /** @} */
+//
+//
+//
+// /**
+//  * @addtogroup T_FGM_Point3_Subtraction
+//  * @{
+//  */
+//
+// TYPED_TEST(Point3Subtraction, MinusOperator_ReturnsAVectorWithComponentwiseDifference)
+// {
+//     const auto result = this->_pointA - this->_pointB;
+//
+//     EXPECT_VEC_EQ(this->_expectedVector, result);
+// }
+//
+//
+// TEST(Point3Subtraction, MinusOperator_MixedTypePromotesType)
+// {
+//     const fgm::Point2<float> pointA(3.0f, 0.0f, -1.0f);
+//     const fgm::Point2<double> pointB(9.0, -5.0, 10.0);
+//
+//     [[maybe_unused]] const auto result = pointA - pointB;
+//
+//     static_assert(std::is_same_v<decltype(result)::value_type, double>);
+// }
+//
+// /** @} */

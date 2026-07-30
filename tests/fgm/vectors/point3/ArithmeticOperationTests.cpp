@@ -81,9 +81,9 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Point3<int> POINT_A(1, 2, 3);
+        constexpr fgm::Point3 POINT_A(1, 2, 3);
         constexpr fgm::Vec3 DIR_VEC(1, 3, 7);
-        constexpr fgm::Point3<int> POINT_B(4, 3, 1);
+        constexpr fgm::Point3 POINT_B(4, 3, 1);
 
         /// @test Verify that a Point3 + Vec3 returns a valid Point3 at compile time.
         constexpr auto SUM_POINT = POINT_A + DIR_VEC;
@@ -120,7 +120,7 @@ TYPED_TEST(Point3Addition, PlusOperator_ReturnsAPointWithComponentwiseSum)
 
 TEST(Point3Addition, PlusOperator_MixedTypePromotesType)
 {
-    const fgm::Point3<float> point(3.0f, 0.0f, -1.0f);
+    const fgm::Point3 point(3.0f, 0.0f, -1.0f);
     const fgm::Vec3 vector(9.0, -5.0, 10.0);
 
     [[maybe_unused]] const fgm::Point3 result = point + vector;
@@ -138,7 +138,7 @@ TYPED_TEST(Point3Addition, PlusEqualsOperator_ReturnsSamePointWithComponentwiseS
 
 TEST(Point3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
 {
-    fgm::Point3<float> point(3.0f, 0.0f, -1.0f);
+    fgm::Point3 point(3.0f, 0.0f, -1.0f);
     const fgm::Vec3 vector(9.0, -5.0, 10.0);
 
     static_cast<void>(point += vector);
@@ -165,8 +165,8 @@ TYPED_TEST(Point3Subtraction, MinusOperator_ReturnsAVectorWithComponentwiseDiffe
 
 TEST(Point3Subtraction, MinusOperator_MixedTypePromotesType)
 {
-    const fgm::Point3<float> pointA(3.0f, 0.0f, -1.0f);
-    const fgm::Point3<double> pointB(9.0, -5.0, 10.0);
+    const fgm::Point3 pointA(3.0f, 0.0f, -1.0f);
+    const fgm::Point3  pointB(9.0, -5.0, 10.0);
 
     [[maybe_unused]] const auto result = pointA - pointB;
 
