@@ -1211,6 +1211,34 @@ namespace fgm
 
 
     template <Arithmetic T>
+    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearByAngle(T shearAngle, const Vec3<T>& direction,
+                                                           const Vec3<T>& normal) noexcept
+        requires std::floating_point<T>
+    {
+        const auto t = std::tan(shearAngle);
+        T x          = direction.x() * t;
+        T y          = direction.y() * t;
+        T z          = direction.z() * t;
+        return Mat4{ x * normal.x() + T(1),
+                     x * normal.y(),
+                     x * normal.z(),
+                     T(0),
+                     y * normal.x(),
+                     y * normal.y() + T(1),
+                     y * normal.z(),
+                     T(0),
+                     z * normal.x(),
+                     z * normal.y(),
+                     z * normal.z() + T(1),
+                     T(0),
+                     T(0),
+                     T(0),
+                     T(0),
+                     T(1) };
+    }
+
+
+    template <Arithmetic T>
     FGM_INLINE constexpr Mat4<T> Mat4<T>::makeAffine(const Mat3<T>& linearTransform,
                                                      const Vec3<T>& translation) noexcept
     {

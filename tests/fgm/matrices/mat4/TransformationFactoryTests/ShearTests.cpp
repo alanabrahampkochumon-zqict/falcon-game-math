@@ -58,27 +58,29 @@ namespace
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
-    // template <typename T>
-    // class Mat4ArbitraryShear: public testing::Test
-    // {
-    // protected:
-    //     T _shearAngle;
-    //     T _shearFactor;
-    //     fgm::Vec4<T> _shearDirection, _shearPlaneNormal;
-    //     fgm::Mat4<T> _shear;
-    //
-    //     void SetUp() override
-    //     {
-    //         _shearAngle       = T(3.1415 / 4);
-    //         _shearFactor      = T(1);
-    //         _shearDirection   = fgm::Vec4{ T(0.2672612419124244), T(0.5345224838248488), T(0.8017837257372732) };
-    //         _shearPlaneNormal = fgm::Vec4{ T(0.48471791416315496), T(0.5728484440110013), T(0.6609789738588476) };
-    //         _shear = fgm::Mat4{ fgm::Vec4{ T(1.1295403103900423), T(0.1530930940973227), T(0.17664587780460309) },
-    //                             fgm::Vec4{ T(0.25908062078008454), T(1.3061861881946455), T(0.35329175560920617) },
-    //                             fgm::Vec4{ T(0.38862093117012675), T(0.459279282291968), T(1.5299376334138093) } };
-    //     }
-    // };
-    // TYPED_TEST_SUITE(Mat4ArbitraryShear, SupportedFloatingPointTypes);
+    template <typename T>
+    class Mat4ArbitraryShear: public testing::Test
+    {
+    protected:
+        T _shearAngle;
+        T _shearFactor;
+        fgm::Vec3<T> _shearDirection, _shearPlaneNormal;
+        fgm::Mat4<T> _shear;
+
+        void SetUp() override
+        {
+            _shearAngle       = T(3.1415 / 4);
+            _shearFactor      = T(1);
+            _shearDirection   = fgm::Vec3{ T(0.2672612419124244), T(0.5345224838248488), T(0.8017837257372732) };
+            _shearPlaneNormal = fgm::Vec3{ T(0.48471791416315496), T(0.5728484440110013), T(0.6609789738588476) };
+            _shear =
+                fgm::Mat4{ fgm::Vec4{ T(1.1295403103900423), T(0.1530930940973227), T(0.17664587780460309), T(0) },
+                           fgm::Vec4{ T(0.25908062078008454), T(1.3061861881946455), T(0.35329175560920617), T(0) },
+                           fgm::Vec4{ T(0.38862093117012675), T(0.459279282291968), T(1.5299376334138093), T(0) },
+                           fgm::Vec4{ T(0), T(0), T(0), T(1) } };
+        }
+    };
+    TYPED_TEST_SUITE(Mat4ArbitraryShear, SupportedFloatingPointTypes);
 
 
 
@@ -147,14 +149,14 @@ TYPED_TEST(Mat4Shear, ShearZ4D_ReturnsAValid4DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearZ, fgm::Mat4<TypeParam>::makeShearZ(this->_shearFactor1, this->_shearFactor2)); }
 
 
-// TYPED_TEST(Mat4ArbitraryShear, ShearByAngle_ReturnsAValid4DShearMatrix)
-// {
-//     EXPECT_MAT_EQ(
-//         this->_shear,
-//         fgm::Mat4<TypeParam>::makeShearByAngle(this->_shearAngle, this->_shearPlaneNormal, this->_shearDirection));
-// }
-//
-//
+TYPED_TEST(Mat4ArbitraryShear, ShearByAngle_ReturnsAValid4DShearMatrix)
+{
+    EXPECT_MAT_EQ(
+        this->_shear,
+        fgm::Mat4<TypeParam>::makeShearByAngle(this->_shearAngle, this->_shearPlaneNormal, this->_shearDirection));
+}
+
+
 // TYPED_TEST(Mat4ArbitraryShear, Shear_ReturnsAValid4DShearMatrix)
 // {
 //     EXPECT_MAT_EQ(

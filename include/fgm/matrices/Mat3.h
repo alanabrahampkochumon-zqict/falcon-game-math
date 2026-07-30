@@ -1506,7 +1506,7 @@ namespace fgm
          *      const auto shearMat = fgm::Mat3<float>::makeShearByAngle(shearAngle, xAxis, zAxis);
          * @endcode
          *
-         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         * @return A new @ref Mat3 representing the affine shear transform.
          *
          * @relatedalso makeShearX2D(T)
          * @relatedalso makeShearY2D(T)
@@ -1538,7 +1538,7 @@ namespace fgm
          *      const auto shearMat = fgm::Mat3<float>makeShear(shearValue, xAxis, zAxis);
          * @endcode
          *
-         * @return A new @ref Mat3 representing the affine shear transform by the y-axis.
+         * @return A new @ref Mat3 representing the affine shear transform.
          *
          * @relatedalso makeShearX2D(T)
          * @relatedalso makeShearY2D(T)
