@@ -31,7 +31,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat3ShearTests: public testing::Test
+    class Mat3Shear: public testing::Test
     {
     protected:
         T _shearFactor1, _shearFactor2;
@@ -41,7 +41,7 @@ namespace
         void SetUp() override
         {
             _shearFactor1 = T(22.58923191238);
-            _shearFactor1 = T(3.16);
+            _shearFactor2 = T(3.16);
 
             _shearX2D = { fgm::Vec3{ T(1), T(0), T(0) }, fgm::Vec3{ _shearFactor1, T(1), T(0) },
                           fgm::Vec3{ T(0), T(0), T(1) } };
@@ -68,11 +68,9 @@ namespace
                 fgm::Vec3{ T(0), T(1), T(0) },
                 fgm::Vec3{ _shearFactor1, _shearFactor2, T(1) },
             };
-
-            if constexpr (std::is_floating_point_v<T>) {}
         }
     };
-    TYPED_TEST_SUITE(Mat3ShearTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat3Shear, SupportedArithmeticTypes);
 
 
     /**
@@ -165,23 +163,23 @@ namespace
  *                                    *
  **************************************/
 
-TYPED_TEST(Mat3ShearTests, ShearX2D_ReturnsAValid3DAffineShearMatrix)
+TYPED_TEST(Mat3Shear, ShearX2D_ReturnsAValid3DAffineShearMatrix)
 { EXPECT_MAT_EQ(this->_shearX2D, fgm::Mat3<TypeParam>::makeShearX2D(this->_shearFactor1)); }
 
 
-TYPED_TEST(Mat3ShearTests, ShearY2D_ReturnsAValid3DAffineShearMatrix)
+TYPED_TEST(Mat3Shear, ShearY2D_ReturnsAValid3DAffineShearMatrix)
 { EXPECT_MAT_EQ(this->_shearY2D, fgm::Mat3<TypeParam>::makeShearY2D(this->_shearFactor1)); }
 
 
-TYPED_TEST(Mat3ShearTests, ShearX3D_ReturnsAValid3DShearMatrix)
+TYPED_TEST(Mat3Shear, ShearX3D_ReturnsAValid3DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearX3D, fgm::Mat3<TypeParam>::makeShearX3D(this->_shearFactor1, this->_shearFactor2)); }
 
 
-TYPED_TEST(Mat3ShearTests, ShearY3D_ReturnsAValid3DShearMatrix)
+TYPED_TEST(Mat3Shear, ShearY3D_ReturnsAValid3DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearY3D, fgm::Mat3<TypeParam>::makeShearY3D(this->_shearFactor1, this->_shearFactor2)); }
 
 
-TYPED_TEST(Mat3ShearTests, ShearZ3D_ReturnsAValid3DShearMatrix)
+TYPED_TEST(Mat3Shear, ShearZ3D_ReturnsAValid3DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearZ3D, fgm::Mat3<TypeParam>::makeShearZ3D(this->_shearFactor1, this->_shearFactor2)); }
 
 
@@ -197,7 +195,7 @@ TYPED_TEST(Mat3ArbitraryShear, Shear_ReturnsAValid3DShearMatrix)
 {
     EXPECT_MAT_EQ(
         this->_shear,
-        fgm::Mat3<TypeParam>::makeShearByAngle(this->_shearFactor, this->_shearPlaneNormal, this->_shearDirection));
+        fgm::Mat3<TypeParam>::makeShear(this->_shearFactor, this->_shearPlaneNormal, this->_shearDirection));
 }
 
 
