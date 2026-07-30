@@ -2,6 +2,7 @@ add_library(Point3Tests OBJECT)
 
 target_sources(
         Point3Tests PRIVATE
+        ArithmeticOperationTests.cpp
         InitializationTests.cpp
 )
 

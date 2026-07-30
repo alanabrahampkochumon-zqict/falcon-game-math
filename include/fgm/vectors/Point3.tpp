@@ -9,5 +9,33 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+
+#include "fgm/common/PreprocessorDefinitions.h"
+
 namespace fgm
-{}
+{
+
+    template <StrictArithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedPoint3<T, U> Point3<T>::operator+(const Vec3<U>& vector) const noexcept
+    {
+        using R = std::common_type_t<T, U>;
+        return Point3<R>(this->x() + vector.x(), this->y() + vector.y(), this->z() + vector.z());
+    }
+
+
+    template <StrictArithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr Point3<T>& Point3<T>::operator+=(const Vec3<U>& vector) noexcept
+    {
+        this->x() += static_cast<T>(vector.x());
+        this->y() += static_cast<T>(vector.y());
+        this->z() += static_cast<T>(vector.z());
+
+        return *this;
+    }
+
+
+} // namespace fgm

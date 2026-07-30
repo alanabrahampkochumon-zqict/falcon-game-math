@@ -31,6 +31,9 @@ namespace fgm
 {
 
     /// Forward declarations
+    template <StrictArithmetic T>
+    struct Point3;
+
     template <Arithmetic T>
     struct Vec2;
 
@@ -66,6 +69,12 @@ namespace fgm
 
     template <Arithmetic T>
     struct Mat4;
+
+
+    /** @brief Alias for @ref Point3 with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedPoint3 = Point3<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Vec2 with promoted value type. */
