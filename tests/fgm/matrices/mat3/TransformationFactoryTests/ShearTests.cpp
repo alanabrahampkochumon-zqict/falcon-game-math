@@ -59,7 +59,7 @@ namespace
 
             _shearY3D = {
                 fgm::Vec3{ T(1), T(0), T(0) },
-                fgm::Vec3{ _shearFactor2, T(1), _shearFactor1 },
+                fgm::Vec3{ _shearFactor1, T(1), _shearFactor2 },
                 fgm::Vec3{ T(0), T(0), T(1) },
             };
 
@@ -134,7 +134,7 @@ namespace
         /// @test Verify that @ref Mat3 makeShearY3D by y-axis returns a valid 3D shear matrix at compile time.
         constexpr auto SHEAR3D_Y_MAT = fgm::Mat3<int>::makeShearY3D(SHEAR_FACTOR1, SHEAR_FACTOR2);
         static_assert(SHEAR3D_Y_MAT[0] == fgm::Vec3{ 1, 0, 0 });
-        static_assert(SHEAR3D_Y_MAT[1] == fgm::Vec3{ SHEAR_FACTOR2, 1, SHEAR_FACTOR1 });
+        static_assert(SHEAR3D_Y_MAT[1] == fgm::Vec3{ SHEAR_FACTOR1, 1, SHEAR_FACTOR2 });
         static_assert(SHEAR3D_Y_MAT[2] == fgm::Vec3{ 0, 0, 1 });
 
         /// @test Verify that @ref Mat3 makeShearZ3D by z-axis returns a valid 3D shear matrix at compile time.

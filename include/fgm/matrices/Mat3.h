@@ -1454,8 +1454,8 @@ namespace fgm
         /**
          * @brief Construct a 3D shear matrix by the y-axis (ZX plane).
          *
-         * @param[in] shearZ The shear amount on the z-axis.
          * @param[in] shearX The shear amount on the x-axis.
+         * @param[in] shearZ The shear amount on the z-axis.
          *
         * @return A new @ref Mat3 representing the shear transform by the y-axis.
         *
@@ -1466,7 +1466,7 @@ namespace fgm
          * @relatedalso makeShearByAngle(T, const Vec3<T>&, const Vec3<T>&)
          * @relatedalso makeShear(T, const Vec3<T>&, const Vec3<T>&)
          */
-        [[nodiscard]] static constexpr Mat3 makeShearY3D(T shearZ, T shearX) noexcept
+        [[nodiscard]] static constexpr Mat3 makeShearY3D(T shearX, T shearZ) noexcept
             requires StrictArithmetic<T>;
         // TODO: Update parameters to be reversed
 
