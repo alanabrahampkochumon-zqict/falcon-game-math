@@ -70,21 +70,21 @@ namespace fgm
         constexpr Point2& operator+=(const Vec2<U>& vector) noexcept;
 
 
-        // /**
-        //  * @brief Subtract a point from this point yielding a direction.
-        //  *
-        //  * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
-        //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //  *
-        //  * @tparam U Numeric type of the RHS point. Must satisfy @ref StrictArithmetic.
-        //  *
-        //  * @param[in] rhs The point to subtract.
-        //  *
-        //  * @return A new @ref Vec2 representing a direction vector.
-        //  */
-        // template <StrictArithmetic U>
-        //     requires StrictSignedness<T, U>
-        // [[nodiscard]] constexpr PromotedVec2<T, U> operator-(const Point2<U>& rhs) const noexcept;
+        /**
+         * @brief Subtract a point from this point yielding a direction.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS point. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The point to subtract.
+         *
+         * @return A new @ref Vec2 representing a direction vector.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedVec2<T, U> operator-(const Point2<U>& rhs) const noexcept;
 
         /** @} */
     };

@@ -93,10 +93,10 @@ namespace
         static_assert(SUM_POINT.y() == 5);
 
         /// @test Verify that a Point2 - Point2 returns a valid Vec2 at compile time.
-        // constexpr auto SUB_DIR_VEC = POINT_A - POINT_B;
-        // static_assert(std::is_same_v<decltype(SUB_DIR_VEC), const fgm::Vec2<int>>);
-        // static_assert(SUB_DIR_VEC.x() == -3);
-        // static_assert(SUB_DIR_VEC.y() == -1);
+        constexpr auto SUB_DIR_VEC = POINT_A - POINT_B;
+        static_assert(std::is_same_v<decltype(SUB_DIR_VEC), const fgm::Vec2<int>>);
+        static_assert(SUB_DIR_VEC.x() == -3);
+        static_assert(SUB_DIR_VEC.y() == -1);
 
     } // namespace static_tests
 
@@ -154,22 +154,22 @@ TEST(Point2Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
  * @{
  */
 
-// TYPED_TEST(Point2Subtraction, MinusOperator_ReturnsAVectorWithComponentwiseDifference)
-// {
-//     const auto result = this->_pointA - this->_pointB;
-//
-//     EXPECT_VEC_EQ(this->_expectedVector, result);
-// }
-//
-//
-// TEST(Point2Subtraction, MinusOperator_MixedTypePromotesType)
-// {
-//     const fgm::Point2 pointA(3.0f, 0.0f);
-//     const fgm::Point2 pointB(9.0, -5.0);
-//
-//     [[maybe_unused]] const auto result = pointA - pointB;
-//
-//     static_assert(std::is_same_v<decltype(result)::value_type, double>);
-// }
+TYPED_TEST(Point2Subtraction, MinusOperator_ReturnsAVectorWithComponentwiseDifference)
+{
+    const auto result = this->_pointA - this->_pointB;
+
+    EXPECT_VEC_EQ(this->_expectedVector, result);
+}
+
+
+TEST(Point2Subtraction, MinusOperator_MixedTypePromotesType)
+{
+    const fgm::Point2 pointA(3.0f, 0.0f);
+    const fgm::Point2 pointB(9.0, -5.0);
+
+    [[maybe_unused]] const auto result = pointA - pointB;
+
+    static_assert(std::is_same_v<decltype(result)::value_type, double>);
+}
 
 /** @} */
