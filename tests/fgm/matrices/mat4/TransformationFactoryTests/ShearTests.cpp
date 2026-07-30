@@ -44,7 +44,7 @@ namespace
             _shearFactor2 = T(3.16);
             _shearX = { fgm::Vec4{ T(1), _shearFactor1, _shearFactor2, T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
                         fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
-            _shearY = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ _shearFactor2, T(1), _shearFactor1, T(0) },
+            _shearY = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ _shearFactor1, T(1), _shearFactor2, T(0) },
                         fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
             _shearZ = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
                         fgm::Vec4{ _shearFactor1, _shearFactor2, T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
@@ -100,12 +100,13 @@ namespace
         static_assert(SHEAR4D_X_MAT[2] == fgm::Vec4{ 0, 0, 1, 0 });
         static_assert(SHEAR4D_X_MAT[3] == fgm::Vec4{ 0, 0, 0, 1 });
 
-        // /// @test Verify that @ref Mat4 makeShearY by y-axis returns a valid 4D shear matrix at compile time.
-        // constexpr auto SHEAR4D_Y_MAT = fgm::Mat4<int>::makeShearY(SHEAR_FACTOR1, SHEAR_FACTOR2);
-        // static_assert(SHEAR4D_Y_MAT[0] == fgm::Vec4{ 1, 0, 0 });
-        // static_assert(SHEAR4D_Y_MAT[1] == fgm::Vec4{ SHEAR_FACTOR2, 1, SHEAR_FACTOR1 });
-        // static_assert(SHEAR4D_Y_MAT[2] == fgm::Vec4{ 0, 0, 1 });
-        //
+        /// @test Verify that @ref Mat4 makeShearY by y-axis returns a valid 4D shear matrix at compile time.
+        constexpr auto SHEAR4D_Y_MAT = fgm::Mat4<int>::makeShearY(SHEAR_FACTOR1, SHEAR_FACTOR2);
+        static_assert(SHEAR4D_Y_MAT[0] == fgm::Vec4{ 1, 0, 0, 0 });
+        static_assert(SHEAR4D_Y_MAT[1] == fgm::Vec4{ SHEAR_FACTOR1, 1, SHEAR_FACTOR2, 0 });
+        static_assert(SHEAR4D_Y_MAT[2] == fgm::Vec4{ 0, 0, 1, 0 });
+        static_assert(SHEAR4D_Y_MAT[3] == fgm::Vec4{ 0, 0, 0, 1 });
+
         // /// @test Verify that @ref Mat4 makeShearZ by z-axis returns a valid 4D shear matrix at compile time.
         // constexpr auto SHEAR4D_Z_MAT = fgm::Mat4<int>::makeShearZ(SHEAR_FACTOR1, SHEAR_FACTOR2);
         // static_assert(SHEAR4D_Z_MAT[0] == fgm::Vec4{ 1, 0, 0 });
@@ -137,12 +138,12 @@ TYPED_TEST(Mat4Shear, ShearX4D_ReturnsAValid4DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearX, fgm::Mat4<TypeParam>::makeShearX(this->_shearFactor1, this->_shearFactor2)); }
 
 
-// TYPED_TEST(Mat4Shear, ShearY4D_ReturnsAValid4DShearMatrix)
-// { EXPECT_MAT_EQ(this->_shearY4D, fgm::Mat4<TypeParam>::makeShearY(this->_shearFactor1, this->_shearFactor2)); }
-//
-//
+TYPED_TEST(Mat4Shear, ShearY4D_ReturnsAValid4DShearMatrix)
+{ EXPECT_MAT_EQ(this->_shearY, fgm::Mat4<TypeParam>::makeShearY(this->_shearFactor1, this->_shearFactor2)); }
+
+
 // TYPED_TEST(Mat4Shear, ShearZ4D_ReturnsAValid4DShearMatrix)
-// { EXPECT_MAT_EQ(this->_shearZ4D, fgm::Mat4<TypeParam>::makeShearZ(this->_shearFactor1, this->_shearFactor2)); }
+// { EXPECT_MAT_EQ(this->_shearZ, fgm::Mat4<TypeParam>::makeShearZ(this->_shearFactor1, this->_shearFactor2)); }
 //
 //
 // TYPED_TEST(Mat4ArbitraryShear, ShearByAngle_ReturnsAValid4DShearMatrix)
