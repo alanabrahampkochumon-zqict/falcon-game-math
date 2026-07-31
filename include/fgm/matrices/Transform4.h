@@ -149,6 +149,14 @@ namespace fgm
          */
         [[nodiscard]] constexpr const T& operator()(std::size_t row, std::size_t col) const noexcept;
 
+
+
+        /**
+         * @brief Get the translation vector of this transformation matrix.
+         * @return A Point3 representing the translation vector.
+         */
+        [[nodiscard]] constexpr const auto getTranslation() const noexcept;
+
         /** @} */
 
 

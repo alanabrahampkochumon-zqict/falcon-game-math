@@ -16,6 +16,12 @@
 namespace fgm
 {
 
+    /**************************************
+     *                                    *
+     *            INITIALIZERS            *
+     *                                    *
+     **************************************/
+
     template <StrictArithmetic T>
     FGM_INLINE constexpr Transform4<T>::Transform4(const T m00, const T m01, const T m02, const T m03, const T m10,
                                                    const T m11, const T m12, const T m13, const T m20, const T m21,
@@ -97,6 +103,12 @@ namespace fgm
         FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return this->_data[col][row];
     }
+
+
+    template <StrictArithmetic T>
+    FGM_INLINE constexpr const auto Transform4<T>::getTranslation() const noexcept
+    { return Point3<T>{ (*this)(0, 3), (*this)(1, 3), (*this)(2, 3)}; }
+
 
 
     /**************************************

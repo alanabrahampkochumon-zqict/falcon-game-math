@@ -78,31 +78,39 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Transform4<int> MAT{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        constexpr fgm::Transform4<int> TRANSFORM{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         constexpr fgm::Vec3 VEC0(1, 5, 9);
         constexpr fgm::Vec3 VEC1(2, 6, 10);
         constexpr fgm::Vec3 VEC2(3, 7, 11);
         constexpr fgm::Vec3 VEC3(4, 8, 12);
 
         /// @test Verify that matrix elements are accessible as (row, column) at compile time.
-        static_assert(MAT(0, 0) == 1);
-        static_assert(MAT(0, 1) == 2);
-        static_assert(MAT(0, 2) == 3);
-        static_assert(MAT(0, 3) == 4);
-        static_assert(MAT(1, 0) == 5);
-        static_assert(MAT(1, 1) == 6);
-        static_assert(MAT(1, 2) == 7);
-        static_assert(MAT(1, 3) == 8);
-        static_assert(MAT(2, 0) == 9);
-        static_assert(MAT(2, 1) == 10);
-        static_assert(MAT(2, 2) == 11);
-        static_assert(MAT(2, 3) == 12);
+        static_assert(TRANSFORM(0, 0) == 1);
+        static_assert(TRANSFORM(0, 1) == 2);
+        static_assert(TRANSFORM(0, 2) == 3);
+        static_assert(TRANSFORM(0, 3) == 4);
+        static_assert(TRANSFORM(1, 0) == 5);
+        static_assert(TRANSFORM(1, 1) == 6);
+        static_assert(TRANSFORM(1, 2) == 7);
+        static_assert(TRANSFORM(1, 3) == 8);
+        static_assert(TRANSFORM(2, 0) == 9);
+        static_assert(TRANSFORM(2, 1) == 10);
+        static_assert(TRANSFORM(2, 2) == 11);
+        static_assert(TRANSFORM(2, 3) == 12);
 
         /// @test Verify that matrix columns are accessible as 3D-vectors at compile time.
-        static_assert(MAT[0] == VEC0);
-        static_assert(MAT[1] == VEC1);
-        static_assert(MAT[2] == VEC2);
-        static_assert(MAT[3] == VEC3);
+        static_assert(TRANSFORM[0] == VEC0);
+        static_assert(TRANSFORM[1] == VEC1);
+        static_assert(TRANSFORM[2] == VEC2);
+        static_assert(TRANSFORM[3] == VEC3);
+
+
+        /// @test Verify that getTranslation returns the last column vector as a Point3 at compile time.
+        constexpr auto TRANSLATION = TRANSFORM.getTranslation();
+        static_assert(std::is_same_v<decltype(TRANSLATION), const fgm::Point3<int>> == true);
+        static_assert(TRANSLATION[0] == 4);
+        static_assert(TRANSLATION[1] == 8);
+        static_assert(TRANSLATION[2] == 12);
 
     } // namespace static_tests
 
@@ -136,10 +144,20 @@ TEST_F(Transform4Access, AccessibleAsElements)
 
 TEST_F(Transform4Access, AccessibleAsColumnVectors)
 {
-
     EXPECT_VEC_EQ(fgm::Vec3(1.0f, 5.0f, 9.0f), mat[0]);
     EXPECT_VEC_EQ(fgm::Vec3(2.0f, 6.0f, 10.0f), mat[1]);
     EXPECT_VEC_EQ(fgm::Vec3(3.0f, 7.0f, 11.0f), mat[2]);
+    EXPECT_VEC_EQ(fgm::Vec3(4.0f, 8.0f, 12.0f), mat[3]);
+}
+
+
+
+TEST_F(Transform4Access, GetTranslation_ReturnsLastColumnAsPoint3)
+{
+    const auto translation = mat.getTranslation();
+    EXPECT_FLOAT_EQ(4.0f, translation.x());
+    EXPECT_FLOAT_EQ(8.0f, translation.y());
+    EXPECT_FLOAT_EQ(12.0f, translation.z());
 }
 
 
@@ -208,7 +226,7 @@ TEST_F(Transform4Mutation, ElementsCanBeMutatedUsingIndex)
 }
 
 
-TEST_F(Transform4Access, ColumnsCanBeMutatedUsingIndex)
+TEST_F(Transform4Mutation, ColumnsCanBeMutatedUsingIndex)
 {
     const fgm::Vec3 col0 = { 1.0f, 4.0f, 7.0f };
     const fgm::Vec3 col1 = { 2.0f, 5.0f, 8.0f };
