@@ -5,6 +5,7 @@ target_sources(
         AccessAndMutationTests.cpp
         InitializationTests.cpp
         InverseTests.cpp
+        MultiplicationTests.cpp
 )
 
 target_include_directories(

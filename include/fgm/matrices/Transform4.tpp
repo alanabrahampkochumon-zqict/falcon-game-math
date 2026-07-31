@@ -122,6 +122,42 @@ namespace fgm
 
     /**************************************
      *                                    *
+     *       ARITHMETIC OPERATIONS        *
+     *                                    *
+     **************************************/
+
+    template <StrictArithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedTransform4<T, U> Transform4<T>::operator*(const Transform4<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        return Transform4<R>{
+            // First Row
+            static_cast<R>((*this)(0, 0) * rhs(0, 0) + (*this)(0, 1) * rhs(1, 0) + (*this)(0, 2) * rhs(2, 0)),
+            static_cast<R>((*this)(0, 0) * rhs(0, 1) + (*this)(0, 1) * rhs(1, 1) + (*this)(0, 2) * rhs(2, 1)),
+            static_cast<R>((*this)(0, 0) * rhs(0, 2) + (*this)(0, 1) * rhs(1, 2) + (*this)(0, 2) * rhs(2, 2)),
+            static_cast<R>((*this)(0, 0) * rhs(0, 3) + (*this)(0, 1) * rhs(1, 3) + (*this)(0, 2) * rhs(2, 3) +
+                           (*this)(0, 3)),
+            // Second Row
+            static_cast<R>((*this)(1, 0) * rhs(0, 0) + (*this)(1, 1) * rhs(1, 0) + (*this)(1, 2) * rhs(2, 0)),
+            static_cast<R>((*this)(1, 0) * rhs(0, 1) + (*this)(1, 1) * rhs(1, 1) + (*this)(1, 2) * rhs(2, 1)),
+            static_cast<R>((*this)(1, 0) * rhs(0, 2) + (*this)(1, 1) * rhs(1, 2) + (*this)(1, 2) * rhs(2, 2)),
+            static_cast<R>((*this)(1, 0) * rhs(0, 3) + (*this)(1, 1) * rhs(1, 3) + (*this)(1, 2) * rhs(2, 3) +
+                           (*this)(1, 3)),
+            // Third Row
+            static_cast<R>((*this)(2, 0) * rhs(0, 0) + (*this)(2, 1) * rhs(1, 0) + (*this)(2, 2) * rhs(2, 0)),
+            static_cast<R>((*this)(2, 0) * rhs(0, 1) + (*this)(2, 1) * rhs(1, 1) + (*this)(2, 2) * rhs(2, 1)),
+            static_cast<R>((*this)(2, 0) * rhs(0, 2) + (*this)(2, 1) * rhs(1, 2) + (*this)(2, 2) * rhs(2, 2)),
+            static_cast<R>((*this)(2, 0) * rhs(0, 3) + (*this)(2, 1) * rhs(1, 3) + (*this)(2, 2) * rhs(2, 3) +
+                           (*this)(2, 3))
+        };
+    }
+
+
+    /**************************************
+     *                                    *
      *           MATRIX ALGEBRA           *
      *                                    *
      **************************************/
