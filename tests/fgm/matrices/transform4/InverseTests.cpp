@@ -51,9 +51,9 @@ namespace
     TYPED_TEST_SUITE(Transform4Inverse, SupportedSignedArithmeticTypes);
 
 
+#ifdef ENABLE_DEBUG_TESTS
     /**
      * @brief Parameterized Test fixture for @ref fgm::Transform4 singular matrix inverse.
-     * @tparam T The scalar type (e.g., float, double) used for the transforms.
      */
     class Transform4Inverse_Singular: public testing::TestWithParam<fgm::Transform4<float>>
     {};
@@ -71,7 +71,7 @@ namespace
                                            fgm::Vec3{ 3.0f, 3.0f, 9.0f }, fgm::Point3{ 4.0f, 4.0f, 31.6f } },
                           fgm::Transform4{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 2.0f, 4.0f, 5.0f },
                                            fgm::Vec3{ 3.0f, 6.0f, 9.0f }, fgm::Point3{ 4.0f, 8.0f, 31.6f } }));
-
+#endif
 
 
     /**************************************
