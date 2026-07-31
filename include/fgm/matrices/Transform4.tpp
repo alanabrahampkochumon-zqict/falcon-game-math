@@ -70,7 +70,8 @@ namespace fgm
     FGM_INLINE constexpr Vec3<T>& Transform4<T>::operator[](std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
-        return *reinterpret_cast<Vec3<T>*>((this->_data[col]));
+        return *reinterpret_cast<Vec3<T>*>(&(this->_data[col]));
+
     }
 
 
