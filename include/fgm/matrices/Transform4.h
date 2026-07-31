@@ -22,10 +22,10 @@ namespace fgm
     {
 
         /**
-         * @addtogroup FGM_Mat4x4_Members
+         * @addtogroup FGM_Transform4x4_Members
          * @{
          */
-        using value_type = T; ///< The numeric type of the matrix elements.
+        using value_type = T; ///< The numeric type of the transform elements.
 
         static constexpr std::size_t COLUMNS = 4; ///< Matrix column count.
         static constexpr std::size_t ROWS    = 3; ///< Matrix row count (This is a pseudo-row count).
@@ -80,6 +80,16 @@ namespace fgm
          */
         [[nodiscard]] constexpr Transform4(const Vec3<T>& firstAxis, const Vec3<T>& secondAxis,
                                            const Vec3<T>& thirdAxis, const Point3<T>& origin) noexcept;
+
+        /**
+         * @brief Initialize @ref Transform4 from another @ref Transform4 of a different type.
+         *
+         * @tparam U Numeric type of the source transform matrix.
+         *
+         * @param[in] other The source transform matrix to be converted.
+         */
+        template <StrictArithmetic U>
+        [[nodiscard]] explicit constexpr Transform4(const Transform4<U>& other) noexcept;
 
         /** @} */
 
@@ -138,6 +148,84 @@ namespace fgm
          * @return A const reference to the element at row, col.
          */
         [[nodiscard]] constexpr const T& operator()(std::size_t row, std::size_t col) const noexcept;
+
+        /** @} */
+
+
+        /**
+         * @addtogroup FGM_Transform4_Geom
+         * @{
+         */
+
+
+        /**
+         * @brief Compute the inverse of this transform.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{det(A)}
+         *            \begin{bmatrix}
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
+         *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
+         *        \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Performs assertion for division by zero (singular transform) in **Debug mode**.
+         *
+         * @return A new @ref Transform4 such that \f$ A \cdot A^{-1} = I \f$.
+         */
+        [[nodiscard("Inverse does not mutate the transform. Discarding the result will not produce any change.")]]
+        constexpr Transform4<Magnitude<T>> inverse() const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the inverse of a transform.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                 A_{30} & A_{31} & A_{32} & A_{33}
+         *            \end{bmatrix}^{-1}
+         *            =
+         *            \frac{1}{det(A)}
+         *            \begin{bmatrix}
+         *                     C_{00} & C_{10} & C_{20} & C_{30} \\
+         *                     C_{01} & C_{11} & C_{21} & C_{31} \\
+         *                     C_{02} & C_{12} & C_{22} & C_{32} \\
+         *                     C_{03} & C_{13} & C_{23} & C_{33}
+         *            \end{bmatrix}
+         *            \\
+         *            \begin{text}
+         *                where C_{ij} = [\text{adj}(A)]_{ij} = (-1)^{i+j} \det(M_{ji})
+         *            \end{text}
+         *        \f$
+         *
+         * @note Promotes the result to a floating point result using @ref Magnitude.
+         * @note Operation is restricted to **signed** numeric types via @ref SignedStrictArithmetic.
+         * @note Performs assertion for division by zero (singular transform) in **Debug mode**.
+         *
+         * @param[in] transform The transform to invert.
+         *
+         * @return A new @ref Transform4 such that \f$ A \cdot A^{-1} = I \f$.
+         */
+        [[nodiscard("Inverse does not mutate the transform. Discarding the result will not produce any change.")]]
+        static constexpr Transform4<Magnitude<T>> inverse(const Transform4& transform) noexcept
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
     };

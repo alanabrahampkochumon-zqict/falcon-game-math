@@ -34,6 +34,26 @@ namespace fgm
     {}
 
 
+    template <StrictArithmetic T>
+    template <StrictArithmetic U>
+    FGM_INLINE constexpr Transform4<T>::Transform4(const Transform4<U>& other) noexcept
+    {
+        (*this)(0, 0) = static_cast<T>(other(0, 0));
+        (*this)(0, 1) = static_cast<T>(other(0, 1));
+        (*this)(0, 2) = static_cast<T>(other(0, 2));
+        (*this)(0, 3) = static_cast<T>(other(0, 3));
+        (*this)(1, 0) = static_cast<T>(other(1, 0));
+        (*this)(1, 1) = static_cast<T>(other(1, 1));
+        (*this)(1, 2) = static_cast<T>(other(1, 2));
+        (*this)(1, 3) = static_cast<T>(other(1, 3));
+        (*this)(2, 0) = static_cast<T>(other(2, 0));
+        (*this)(2, 1) = static_cast<T>(other(2, 1));
+        (*this)(2, 2) = static_cast<T>(other(2, 2));
+        (*this)(2, 3) = static_cast<T>(other(2, 3));
+    }
+
+
+
     /*************************************
      *                                   *
      *            ACCESSORS              *
@@ -77,5 +97,46 @@ namespace fgm
         FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return this->_data[col][row];
     }
+
+
+    /**************************************
+     *                                    *
+     *           MATRIX ALGEBRA           *
+     *                                    *
+     **************************************/
+
+    template <StrictArithmetic T>
+    FGM_INLINE constexpr Transform4<Magnitude<T>> Transform4<T>::inverse() const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        using R = Magnitude<T>;
+
+        auto a = static_cast<Vec3<R>>((*this)[0]);
+        auto b = static_cast<Vec3<R>>((*this)[1]);
+        auto c = static_cast<Vec3<R>>((*this)[2]);
+        auto d = static_cast<Vec3<R>>((*this)[3]);
+
+        auto s = a.cross(b);
+        auto t = c.cross(d);
+
+        FGM_ASSERT_MSG(fgm::abs(s.dot(c)) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
+
+        R invDet = R(1) / s.dot(c);
+        s *= invDet;
+        t *= invDet;
+        auto v = c * invDet;
+
+        auto r0 = b.cross(v);
+        auto r1 = v.cross(a);
+
+        return Transform4<R>{ r0.x(), r0.y(),   r0.z(), -b.dot(t), r1.x(), r1.y(),
+                              r1.z(), a.dot(t), s.x(),  s.y(),     s.z(),  -d.dot(s) };
+    }
+
+
+    template <StrictArithmetic T>
+    FGM_INLINE constexpr Transform4<Magnitude<T>> Transform4<T>::inverse(const Transform4& transform) noexcept
+        requires SignedStrictArithmetic<T>
+    { return transform.inverse(); }
 
 } // namespace fgm

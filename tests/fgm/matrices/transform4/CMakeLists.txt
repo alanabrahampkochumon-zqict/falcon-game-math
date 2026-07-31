@@ -4,6 +4,7 @@ target_sources(
         Transform4Tests PRIVATE
         AccessAndMutationTests.cpp
         InitializationTests.cpp
+        InverseTests.cpp
 )
 
 target_include_directories(
