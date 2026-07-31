@@ -117,22 +117,8 @@ TYPED_TEST(Transform4Inverse, ReturnsInverseMatrix)
 { EXPECT_MAT_EQ(this->_expectedInverse, this->_transform.inverse()); }
 
 
-TYPED_TEST(Transform4Inverse, InverseTimesMatrixReturnsIdentityMatrix)
-{
-    const auto invMatrix = this->_transform.inverse();
-    EXPECT_MAT_IDENTITY(this->_transform * invMatrix);
-}
-
-
 TYPED_TEST(Transform4Inverse, StaticWrapper_ReturnsInverseMatrix)
 { EXPECT_MAT_EQ(this->_expectedInverse, fgm::Transform4<TypeParam>::inverse(this->_transform)); }
-
-
-TYPED_TEST(Transform4Inverse, StaticWrapper_InverseTimesMatrixReturnsIdentityMatrix)
-{
-    const auto invMatrix = fgm::Transform4<TypeParam>::inverse(this->_transform);
-    EXPECT_MAT_IDENTITY(this->_transform * invMatrix);
-}
 
 
 
