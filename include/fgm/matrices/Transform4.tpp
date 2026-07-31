@@ -107,7 +107,16 @@ namespace fgm
 
     template <StrictArithmetic T>
     FGM_INLINE constexpr const auto Transform4<T>::getTranslation() const noexcept
-    { return Point3<T>{ (*this)(0, 3), (*this)(1, 3), (*this)(2, 3)}; }
+    { return Point3<T>{ (*this)(0, 3), (*this)(1, 3), (*this)(2, 3) }; }
+
+
+    template <StrictArithmetic T>
+    FGM_INLINE constexpr void Transform4<T>::setTranslation(const Point3<T>& translation) noexcept
+    {
+        (*this)(0, 3) = translation.x();
+        (*this)(1, 3) = translation.y();
+        (*this)(2, 3) = translation.z();
+    }
 
 
 

@@ -228,17 +228,31 @@ TEST_F(Transform4Mutation, ElementsCanBeMutatedUsingIndex)
 
 TEST_F(Transform4Mutation, ColumnsCanBeMutatedUsingIndex)
 {
-    const fgm::Vec3 col0 = { 1.0f, 4.0f, 7.0f };
-    const fgm::Vec3 col1 = { 2.0f, 5.0f, 8.0f };
-    const fgm::Vec3 col2 = { 3.0f, 6.0f, 9.0f };
+    const fgm::Vec3 col0 = { 1.0f, 5.0f, 9.0f };
+    const fgm::Vec3 col1 = { 2.0f, 6.0f, 10.0f };
+    const fgm::Vec3 col2 = { 3.0f, 7.0f, 11.0f };
+    const fgm::Vec3 col3 = { 4.0f, 8.0f, 12.0f };
 
     mat[0] = col0;
     mat[1] = col1;
     mat[2] = col2;
+    mat[3] = col3;
 
     EXPECT_VEC_EQ(col0, mat[0]);
     EXPECT_VEC_EQ(col1, mat[1]);
     EXPECT_VEC_EQ(col2, mat[2]);
+    EXPECT_VEC_EQ(col3, mat[3]);
+}
+
+
+TEST_F(Transform4Mutation, SetTranslationMutatesTheLastColumn)
+{
+    const fgm::Point3 translation{ 1.0f, 2.0f, 3.0f };
+    mat.setTranslation(translation);
+
+    EXPECT_FLOAT_EQ(translation.x(), mat(0, 3));
+    EXPECT_FLOAT_EQ(translation.y(), mat(1, 3));
+    EXPECT_FLOAT_EQ(translation.z(), mat(2, 3));
 }
 
 

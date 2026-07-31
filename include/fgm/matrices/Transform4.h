@@ -157,6 +157,13 @@ namespace fgm
          */
         [[nodiscard]] constexpr const auto getTranslation() const noexcept;
 
+
+        /**
+         * @brief Set the translation vector of this transformation matrix.
+         * @param translation The translation vector/point.
+         */
+        constexpr void setTranslation(const Point3<T>& translation) noexcept;
+
         /** @} */
 
 
