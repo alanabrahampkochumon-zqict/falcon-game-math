@@ -169,6 +169,47 @@ namespace fgm
 
 
         /**
+         * @addtogroup FGM_Mat4x4_Geom
+         * @{
+         */
+
+        /**
+         * @brief Transform the @p Vec **column vector** by this matrix.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23}
+         *            \end{bmatrix}
+         *            \cdot
+         *            \begin{bmatrix}
+         *                  x \\ y \\ z
+         *            \end{bmatrix}
+         *            =
+         *            \begin{bmatrix}
+         *                  x' \\ y' \\ z'
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @note Promotes the result to the wider type using @ref PromotedVec4<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] vec The column vector to transform.
+         *
+         * @return A new @ref Vec3 with applied linear transformations.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const Vec3<U>& vec) const noexcept
+            requires StrictArithmetic<T>;
+
+        /** @} */
+
+
+
+        /**
          * @addtogroup FGM_Transform4_Comp
          * @{
          */

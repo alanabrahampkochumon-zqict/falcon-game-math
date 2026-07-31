@@ -119,6 +119,21 @@ namespace fgm
     }
 
 
+    template <StrictArithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedVec3<T, U> Transform4<T>::operator*(const Vec3<U>& vec) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        return Vec3<R>{
+            static_cast<R>((*this)(0, 0) * vec.x() + (*this)(0, 1) * vec.y() + (*this)(0, 2) * vec.z()),
+            static_cast<R>((*this)(1, 0) * vec.x() + (*this)(1, 1) * vec.y() + (*this)(1, 2) * vec.z()),
+            static_cast<R>((*this)(2, 0) * vec.x() + (*this)(2, 1) * vec.y() + (*this)(2, 2) * vec.z())
+        };
+    }
+
+
 
     /**************************************
      *                                    *
