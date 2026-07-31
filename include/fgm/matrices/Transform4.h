@@ -121,7 +121,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const auto operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr auto operator[](std::size_t col) const noexcept;
 
 
         /**
@@ -155,7 +155,7 @@ namespace fgm
          * @brief Get the translation vector of this transformation matrix.
          * @return A Point3 representing the translation vector.
          */
-        [[nodiscard]] constexpr const auto getTranslation() const noexcept;
+        [[nodiscard]] constexpr auto getTranslation() const noexcept;
 
 
         /**

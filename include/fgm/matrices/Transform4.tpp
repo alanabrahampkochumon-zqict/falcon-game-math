@@ -70,12 +70,12 @@ namespace fgm
     FGM_INLINE constexpr Vec3<T>& Transform4<T>::operator[](std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
-        return *reinterpret_cast<Vec3<T>*>(&(this->_data[col]));
+        return *reinterpret_cast<Vec3<T>*>((this->_data[col]));
     }
 
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr const auto Transform4<T>::operator[](std::size_t col) const noexcept
+    FGM_INLINE constexpr auto Transform4<T>::operator[](std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         if (std::is_constant_evaluated())
@@ -106,7 +106,7 @@ namespace fgm
 
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr const auto Transform4<T>::getTranslation() const noexcept
+    FGM_INLINE constexpr auto Transform4<T>::getTranslation() const noexcept
     { return Point3<T>{ (*this)(0, 3), (*this)(1, 3), (*this)(2, 3) }; }
 
 
