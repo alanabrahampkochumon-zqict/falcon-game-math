@@ -156,6 +156,20 @@ namespace fgm
     }
 
 
+    template <StrictArithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr Transform4<T>& Transform4<T>::operator*=(const Transform4<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        // We need an intermediate since the multiplication can override the values in "this" matrix
+        // leading to incorrect values when multiplying the next (row, col).
+        const auto intermediate = (*this) * rhs;
+        (*this)                 = static_cast<Transform4<T>>(intermediate);
+        return *this;
+    }
+
+
     /**************************************
      *                                    *
      *           MATRIX ALGEBRA           *

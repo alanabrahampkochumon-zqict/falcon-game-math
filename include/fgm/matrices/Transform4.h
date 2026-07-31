@@ -213,6 +213,47 @@ namespace fgm
         [[nodiscard]] constexpr PromotedTransform4<T, U> operator*(const Transform4<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Compose this transformation matrix with @p rhs matrix in-place.
+         *
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                      0 &      0 &      0 &      1
+         *            \end{bmatrix}
+         *            \cdot
+         *            \begin{bmatrix}
+         *                 B_{00} & B_{01} & B_{02} & B_{03} \\
+         *                 B_{10} & B_{11} & B_{12} & B_{13} \\
+         *                 B_{20} & B_{21} & B_{22} & B_{23} \\
+         *                      0 &      0 &      0 &      1
+         *            \end{bmatrix}
+         *            =
+         *            \begin{bmatrix}
+         *                 C_{00} & C_{01} & C_{02} & C_{03} \\
+         *                 C_{10} & C_{11} & C_{12} & C_{13} \\
+         *                 C_{20} & C_{21} & C_{22} & C_{23} \\
+         *                      0 &      0 &      0 &      1
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS matrix. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The matrix to multiply.
+         *
+         * @return A reference to this matrix (*this).
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr Transform4& operator*=(const Transform4<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
         /** @} */
 
 

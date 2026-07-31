@@ -444,68 +444,28 @@ TEST(Transform4TransformMultiplication, TimesOperator_MixedTypes_PromotesToWider
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
 }
 
-//
-// /** @brief Verify that the compound vector multiplication operation perform an in-place matrix multiplication. */
-// TYPED_TEST(Transform4TransformMultiplication, CompoundMultiplicationOperationPerformInPlaceMatrixMultiplication)
-// {
-//     auto transformedVector = this->_transformA;
-//     transformedVector *= this->_transformB;
-//     if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_MAT_EQ(this->_expectedFPTransform, transformedVector);
-//     }
-//     else
-//     {
-//         EXPECT_MAT_EQ(this->_expectedIntTransform, transformedVector);
-//     }
-// }
-//
-//
-// /**
-//  * @brief Verify that components matrix multiplication with identity matrix
-//  *        does not mutate the calling matrix.
-//  */
-// TEST(Transform4TransformMultiplication, TimesEqualIdentityMatrixReturnsOriginalMatrix)
-// {
-//     const fgm::Transform4<float> iMatrix = fgm::Transform4<float>::identity();
-//     fgm::Transform4 mat{ 1.0f, 2.0f, 3.0f, 4.0f };
-//
-//     mat *= iMatrix;
-//     EXPECT_MAT_CONTAINS(
-//         std::vector{ 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 0.0f, 0.0f, 4.0f
-//         }, mat);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound matrix multiplication operation maintains the destination type and
-//  *        perform an implicit cast.
-//  */
-// TEST(Transform4TransformMultiplication, MixedTypeVectorMultiplicationAssignmentDoesNotPromoteType)
-// {
-//     const fgm::Transform4<double> iMatrix = fgm::Transform4<double>::identity();
-//     fgm::Transform4 mat{ 1, 2, 3, 4 };
-//
-//     mat *= iMatrix;
-//     static_assert(std::is_same_v<decltype(mat)::value_type, int>);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound multiplication operator (matrix) for mixed type
-//  *        ensure minimal precision loss.
-//  */
-// TEST(Transform4TransformMultiplication, MixedTypeVectorMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
-// {
-//     fgm::Transform4 matA{ 2.5, 3.5, 0.5, 1.5, 2.5, -12.5, 5.45, 23.25, 85.5, 12.5, 0.5, 1.75, 15.5, 13.5, 14.5, 16.5
-//     }; const fgm::Transform4 matB{ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80 }; const
-//     fgm::Transform4 expectedMatrix{
-//         220, 260, 300, 340, 1456, 1550, 1643, 1737, 876, 1377, 1878, 2380, 2140, 2440, 2740, 3040,
-//     };
-//
-//     matA *= matB;
-//
-//     EXPECT_MAT_EQ(expectedMatrix, matA);
-// }
+
+TYPED_TEST(Transform4TransformMultiplication, TimesEqualOperator_MutatesCurrentTransformMatrix)
+{
+    this->_transformA *= this->_transformB;
+    if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_MAT_EQ(this->_expectedFPTransform, this->_transformA);
+    }
+    else
+    {
+        EXPECT_MAT_EQ(this->_expectedIntTransform, this->_transformA);
+    }
+}
+
+
+TEST(Transform4TransformMultiplication, TimesEqualOperator_MixedTypes_DoesNotPromotesToWiderType)
+{
+    fgm::Transform4 transformA{ 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+    const fgm::Transform4 transformB{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
+
+    transformA *= transformB;
+    static_assert(std::is_same_v<decltype(transformA)::value_type, int>);
+}
 
 /** @} */
