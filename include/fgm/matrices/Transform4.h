@@ -111,7 +111,7 @@ namespace fgm
          *
          * @return A const reference to the column vector.
          */
-        [[nodiscard]] constexpr const Vec3<T>& operator[](std::size_t col) const noexcept;
+        [[nodiscard]] constexpr const auto operator[](std::size_t col) const noexcept;
 
 
         /**

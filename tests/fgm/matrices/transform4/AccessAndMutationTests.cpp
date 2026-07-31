@@ -79,9 +79,10 @@ namespace
     namespace static_tests
     {
         constexpr fgm::Transform4<int> MAT{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-        constexpr fgm::Vec3 VEC0(1, 4, 7);
-        constexpr fgm::Vec3 VEC1(2, 5, 8);
-        constexpr fgm::Vec3 VEC2(3, 6, 9);
+        constexpr fgm::Vec3 VEC0(1, 5, 9);
+        constexpr fgm::Vec3 VEC1(2, 6, 10);
+        constexpr fgm::Vec3 VEC2(3, 7, 11);
+        constexpr fgm::Vec3 VEC3(4, 8, 12);
 
         /// @test Verify that matrix elements are accessible as (row, column) at compile time.
         static_assert(MAT(0, 0) == 1);
@@ -98,10 +99,10 @@ namespace
         static_assert(MAT(2, 3) == 12);
 
         /// @test Verify that matrix columns are accessible as 3D-vectors at compile time.
-        // static_assert(MAT[0][0] == 1);
-        // static_assert(MAT[0] == VEC0);
-        // static_assert(MAT[1] == VEC1);
-        // static_assert(MAT[2] == VEC2);
+        static_assert(MAT[0] == VEC0);
+        static_assert(MAT[1] == VEC1);
+        static_assert(MAT[2] == VEC2);
+        static_assert(MAT[3] == VEC3);
 
     } // namespace static_tests
 
