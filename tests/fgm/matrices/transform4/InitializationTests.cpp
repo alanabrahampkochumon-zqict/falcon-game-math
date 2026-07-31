@@ -45,8 +45,7 @@ namespace
         void SetUp() override
         {
             _elements         = { T(1), T(2), T(3), T(4), T(5), T(6), T(7), T(8), T(9), T(10), T(11), T(12) };
-            _expectedElements = { T(1), T(2),  T(3),  T(4),  T(5), T(6), T(7), T(8),
-                                  T(9), T(10), T(11), T(12), T(0), T(0), T(0), T(1) };
+            _expectedElements = { T(1), T(2), T(3), T(4), T(5), T(6), T(7), T(8), T(9), T(10), T(11), T(12) };
             _firstAxis        = fgm::Vec3{ T(1), T(5), T(9) };
             _secondAxis       = fgm::Vec3{ T(2), T(6), T(10) };
             _thirdAxis        = fgm::Vec3{ T(3), T(7), T(11) };
@@ -79,10 +78,6 @@ namespace
         static_assert(ROW_COL_INIT_MAT(2, 1) == 10);
         static_assert(ROW_COL_INIT_MAT(2, 2) == 11);
         static_assert(ROW_COL_INIT_MAT(2, 3) == 12);
-        static_assert(ROW_COL_INIT_MAT(3, 0) == 0);
-        static_assert(ROW_COL_INIT_MAT(3, 1) == 0);
-        static_assert(ROW_COL_INIT_MAT(3, 2) == 0);
-        static_assert(ROW_COL_INIT_MAT(3, 3) == 1);
 
 
         /// @test Verify that the matrix can be initialized at compile time using transformation axis and an origin
@@ -101,10 +96,6 @@ namespace
         static_assert(MAT2(2, 1) == 10);
         static_assert(MAT2(2, 2) == 11);
         static_assert(MAT2(2, 3) == 12);
-        static_assert(MAT2(3, 0) == 0);
-        static_assert(MAT2(3, 1) == 0);
-        static_assert(MAT2(3, 2) == 0);
-        static_assert(MAT2(3, 3) == 1);
 
 
         /// @test Verify that the matrix can be initialized at compile time using value initialization.
@@ -121,10 +112,6 @@ namespace
         static_assert(MAT4(2, 1) == 0);
         static_assert(MAT4(2, 2) == 0);
         static_assert(MAT4(2, 3) == 0);
-        static_assert(MAT4(3, 0) == 0);
-        static_assert(MAT4(3, 1) == 0);
-        static_assert(MAT4(3, 2) == 0);
-        static_assert(MAT4(3, 3) == 0);
 
     } // namespace static_tests
 

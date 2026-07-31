@@ -1828,7 +1828,7 @@ namespace fgm
 
         /** @} */
 
-    private:
+    protected:
         std::array<Vec4<T>, COLUMNS> _data;
     };
 

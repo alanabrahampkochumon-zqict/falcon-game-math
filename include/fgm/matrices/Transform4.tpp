@@ -33,4 +33,42 @@ namespace fgm
                    T(0),          T(0),           T(0),          T(1) }
     {}
 
+
+    /*************************************
+     *                                   *
+     *            ACCESSORS              *
+     *                                   *
+     *************************************/
+
+    template <StrictArithmetic T>
+    FGM_INLINE constexpr Vec3<T>& Transform4<T>::operator[](std::size_t col) noexcept
+    {
+        FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        return *reinterpret_cast<Vec3<T>*>(&(this->_data[col]));
+    }
+
+
+    template <StrictArithmetic T>
+    FGM_INLINE constexpr const Vec3<T>& Transform4<T>::operator[](std::size_t col) const noexcept
+    {
+        FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        return this->_data[col].template swizzle<axis::X, axis::Y, axis::Z>();
+    }
+
+
+    template <StrictArithmetic T>
+    FGM_INLINE constexpr T& Transform4<T>::operator()(std::size_t row, std::size_t col) noexcept
+    {
+        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        return this->_data[col][row];
+    }
+
+
+    template <StrictArithmetic T>
+    FGM_INLINE constexpr const T& Transform4<T>::operator()(std::size_t row, std::size_t col) const noexcept
+    {
+        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        return this->_data[col][row];
+    }
+
 } // namespace fgm

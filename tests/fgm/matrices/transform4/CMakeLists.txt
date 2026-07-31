@@ -2,6 +2,7 @@ add_library(Transform4Tests OBJECT)
 
 target_sources(
         Transform4Tests PRIVATE
+        AccessAndMutationTests.cpp
         InitializationTests.cpp
 )
 
