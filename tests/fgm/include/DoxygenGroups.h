@@ -453,6 +453,33 @@
         /** @} */ // End of MatrixTests
 
         /**
+         * @defgroup FGM_Quaternion_Tests Quaternion Tests
+         * @brief Verification of quaternion operations.
+         * @ingroup VectorTests
+         * @{
+         *   @defgroup T_FGM_Quaternion_Access_Mutate Component Access and Mutation
+         *   @defgroup T_FGM_Quaternion_Alias Spatial Aliasing
+         *   @defgroup T_FGM_Quaternion_Addition Addition
+         *   @defgroup T_FGM_Quaternion_Subtraction Subtraction
+         *   @defgroup T_FGM_Quaternion_Multiplication Scalar Multiplication
+         *   @defgroup T_FGM_Quaternion_Division Scalar Division
+         *   @defgroup T_FGM_Quaternion_Bool_Bit Boolean Bitwise Operation
+         *   @defgroup T_FGM_Quaternion_GT_Comp Greater Than Comparison
+         *   @defgroup T_FGM_Quaternion_GTE_Comp Greater Than or Equal Comparison
+         *   @defgroup T_FGM_Quaternion_LT_Comp Less Than Comparison
+         *   @defgroup T_FGM_Quaternion_LTE_Comp Less Than or Equal Comparison
+         *   @defgroup T_FGM_Quaternion_Equality Component-wise and Masked Equality
+         *   @defgroup T_FGM_Quaternion_Inequality Component-wise and Masked Inequality
+         *   @defgroup T_FGM_Quaternion_Init Initialization
+         *   @defgroup T_FGM_Quaternion_Magnitude Scalar Length(Magnitude)
+         *   @defgroup T_FGM_Quaternion_String_Repr Formatted String Representation
+         *   @defgroup T_FGM_Quaternion_Type_Conv Conversion Constructor
+         *   @defgroup T_FGM_Quaternion_Negation Negation(-)
+         *   @defgroup T_FGM_Quaternion_Utils Quaternion Utilities
+         * @}
+         */
+
+        /**
          * @defgroup FGM_Common_Tests Common 
          * @brief Verify general function operations exposed by FGM library.
          * @ingroup MathTests
