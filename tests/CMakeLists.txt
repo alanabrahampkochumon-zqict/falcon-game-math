@@ -26,4 +26,4 @@ if (NONCOMPREHENSIVE)
     target_compile_definitions(FGMTestSetup INTERFACE NONCOMPREHENSIVE)
 endif ()
 
-AddSIMDCompilerFlag(FGMTestSuite)
+# AddSIMDCompilerFlag(FGMTestSuite)

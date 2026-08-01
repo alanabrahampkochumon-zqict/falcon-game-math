@@ -1,7 +1,7 @@
-add_library(CommonTests OBJECT)
+add_executable(FGMCommonTests)
 
 target_sources(
-        CommonTests PRIVATE
+        FGMCommonTests PRIVATE
         MathTraitTests.cpp
         OperationStatusTests.cpp
         TrivialTypeTests.cpp
@@ -10,12 +10,15 @@ target_sources(
 )
 
 target_include_directories(
-        CommonTests PRIVATE
+        FGMCommonTests PRIVATE
         ${FGM_TEST_ROOT_DIR}/include
 )
 
 
 target_link_libraries(
-        CommonTests PRIVATE
+        FGMCommonTests PRIVATE
         FGMTestSetup
 )
+
+include(GoogleTest)
+gtest_discover_tests(FGMCommonTests DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 180)
