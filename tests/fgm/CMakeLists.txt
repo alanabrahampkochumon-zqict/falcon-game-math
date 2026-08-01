@@ -4,14 +4,14 @@ set_target_properties(FGMTestSuite PROPERTIES CXX_STANDARD_REQUIRED ON)
 set_target_properties(FGMTestSuite PROPERTIES CXX_EXTENSIONS OFF)
 
 # Directories
-set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/")
+set(FGM_ROOT_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 set(FGM_TEST_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-set(UtilityDirectory "${INCLUDE_DIR}utils/")
+set(UTILS_DIR "${FGM_ROOT_INCLUDE_DIR}utils/")
 
 
 # Files
-set(SetupFiles
+set(SetupHeaderFiles
         Vec2TestSetup.h
         Vec3TestSetup.h
         Vec4TestSetup.h
@@ -24,10 +24,10 @@ set(SetupFiles
         Mat4TestSetup.h
         CommonSetup.h
 )
-list(TRANSFORM SetupFiles PREPEND ${INCLUDE_DIR})
+list(TRANSFORM SetupHeaderFiles PREPEND ${FGM_ROOT_INCLUDE_DIR})
 
-set(Utilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
-list(TRANSFORM Utilities PREPEND ${UtilityDirectory})
+set(TestUtilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
+list(TRANSFORM TestUtilities PREPEND ${UTILS_DIR})
 
 add_subdirectory(common)
 add_subdirectory(vectors/point2)
@@ -46,6 +46,7 @@ add_subdirectory(matrices/mat4x2)
 add_subdirectory(matrices/mat4x3)
 add_subdirectory(matrices/transform4)
 add_subdirectory(matrices/extra)
+add_subdirectory(quaternions)
 
 target_sources(
         FGMTestSuite
@@ -54,24 +55,13 @@ target_sources(
 
         PRIVATE
         FILE_SET HEADERS
-        BASE_DIRS ${HeaderDirectory}
+        BASE_DIRS ${FGM_ROOT_INCLUDE_DIR}
         FILES
-        ${SetupFiles}
-        ${Utilities}
+        ${SetupHeaderFiles}
+        ${TestUtilities}
 )
 
 target_compile_options(FGMTestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
-
-target_precompile_headers(
-        FGMTestSuite
-        PRIVATE
-        <gtest/gtest.h>
-        <iostream>
-        <limits>
-        <concepts>
-        <cstddef>
-        <type_traits>
-)
 
 
 target_link_libraries(
@@ -102,6 +92,17 @@ target_link_libraries(
         Transform4Tests
 )
 
+target_precompile_headers(
+        FGMTestSuite
+        PRIVATE
+        <gtest/gtest.h>
+        <iostream>
+        <limits>
+        <concepts>
+        <cstddef>
+        <type_traits>
+)
+
 target_include_directories(
         FGMTestSuite
         PRIVATE
@@ -114,11 +115,11 @@ gtest_discover_tests(FGMTestSuite DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 180)
 
 source_group(
         TREE
-        "${INCLUDE_DIR}"
+        "${FGM_ROOT_INCLUDE_DIR}"
         PREFIX "Header Files"
         FILES
-        ${SetupFiles}
-        ${Utilities}
+        ${SetupHeaderFiles}
+        ${TestUtilities}
 )
 
 source_group(
