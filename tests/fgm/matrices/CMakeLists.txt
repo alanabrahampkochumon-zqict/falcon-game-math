@@ -69,9 +69,17 @@ gtest_discover_tests(FGMMatrixTests DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 18
 set_target_properties(
         Mat2Tests
         Mat2TransformTests
+        Mat2x3Tests
+        Mat2x4Tests
         Mat3Tests
         Mat3TransformTests
+        Mat3x2Tests
+        Mat3x4Tests
         Mat4Tests
+        Mat4x2Tests
+        Mat4x3Tests
         Mat4TransformTests
+        MatrixExtraOpTests
+        Transform4Tests
         PROPERTIES FOLDER "Test Intermediates/FGM"
 )
