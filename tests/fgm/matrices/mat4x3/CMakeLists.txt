@@ -16,6 +16,8 @@ target_sources(
         TransposeTests.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
+
+        Mat4x3TestSetup.h
 )
 
 target_include_directories(

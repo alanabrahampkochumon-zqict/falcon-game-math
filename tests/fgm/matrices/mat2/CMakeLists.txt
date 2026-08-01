@@ -19,6 +19,8 @@ target_sources(
         TransposeTests.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
+
+        Mat2TestSetup.h
 )
 
 target_include_directories(

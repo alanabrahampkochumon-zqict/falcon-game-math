@@ -6,6 +6,8 @@ target_sources(
         InitializationTests.cpp
         InverseTests.cpp
         MultiplicationTests.cpp
+
+        Transform4TestSetup.h
 )
 
 target_include_directories(
