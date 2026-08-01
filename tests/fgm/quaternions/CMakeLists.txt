@@ -1,4 +1,10 @@
-add_executable(FGMQuaternionsTests Test.cpp QuaternionSetup.h)
+add_executable(FGMQuaternionsTests
+        # Compilation Units
+        InitializationTests.cpp
+
+        # Headers
+        include/QuaternionTestSetup.h
+)
 set_target_properties(FGMQuaternionsTests PROPERTIES CXX_STANDARD 20)
 set_target_properties(FGMQuaternionsTests PROPERTIES CXX_STANDARD_REQUIRED ON)
 set_target_properties(FGMQuaternionsTests PROPERTIES CXX_EXTENSIONS OFF)

@@ -25,6 +25,7 @@
 
 #include "common/MathTraits.h"
 #include "common/PreprocessorDefinitions.h"
+#include "vectors/Vec3.h"
 
 #include <array>
 
@@ -124,6 +125,16 @@ namespace fgm
     private:
         std::array<T, 4> _data;
     };
+
+
+    /** @brief Template deduction guide for Quaternion. */
+    template <typename T>
+        requires Arithmetic<T>
+    Quaternion(T, T, T, T) -> Quaternion<T>;
+
+    template <typename T>
+        requires Arithmetic<T>
+    Quaternion(Vec3<T>, T) -> Quaternion<T>;
 
 } // namespace fgm
 
