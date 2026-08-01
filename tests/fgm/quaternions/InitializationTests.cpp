@@ -42,7 +42,7 @@ namespace
         void SetUp() override
         {
             _complexPart        = { T(1), T(2), T(3) };
-            _realPart           = 4;
+            _realPart           = T(4);
             _expectedQuaternion = { T(1), T(2), T(3), T(4) };
         }
     };
