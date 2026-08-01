@@ -10,8 +10,8 @@
 
 
 
-#include "Mat2TestSetup.h"
-#include "Mat3TestSetup.h"
+#include "../../mat2/Mat2TestSetup.h"
+#include "../Mat3TestSetup.h"
 
 /**
  * @addtogroup T_FGM_Mat3x3_Transforms

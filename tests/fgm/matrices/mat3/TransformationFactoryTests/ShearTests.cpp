@@ -9,7 +9,7 @@
  */
 
 
-#include "Mat3TestSetup.h"
+#include "../Mat3TestSetup.h"
 
 
 /**

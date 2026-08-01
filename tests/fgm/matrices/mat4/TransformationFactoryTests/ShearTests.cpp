@@ -9,7 +9,7 @@
  */
 
 
-#include "Mat4TestSetup.h"
+#include "../Mat4TestSetup.h"
 
 
 /**

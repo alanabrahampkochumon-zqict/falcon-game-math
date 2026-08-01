@@ -10,7 +10,7 @@
 
 
 
-#include "Mat2TestSetup.h"
+#include "../Mat2TestSetup.h"
 
 
 /**

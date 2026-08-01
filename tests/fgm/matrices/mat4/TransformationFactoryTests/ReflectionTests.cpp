@@ -9,7 +9,7 @@
  */
 
 
-#include "Mat4TestSetup.h"
+#include "../Mat4TestSetup.h"
 
 /**
  * @addtogroup T_FGM_Mat4x4_Transforms

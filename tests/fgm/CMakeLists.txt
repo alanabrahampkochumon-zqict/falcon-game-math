@@ -16,12 +16,6 @@ set(SetupHeaderFiles
         Vec3TestSetup.h
         Vec4TestSetup.h
         DoxygenGroups.h
-        Mat2TestSetup.h
-        Mat2x3TestSetup.h
-        Mat2x4TestSetup.h
-        Mat3TestSetup.h
-        Mat3x2TestSetup.h
-        Mat4TestSetup.h
         CommonSetup.h
 )
 list(TRANSFORM SetupHeaderFiles PREPEND ${FGM_ROOT_INCLUDE_DIR})
@@ -35,18 +29,8 @@ add_subdirectory(vectors/point3)
 add_subdirectory(vectors/vec2)
 add_subdirectory(vectors/vec3)
 add_subdirectory(vectors/vec4)
-add_subdirectory(matrices/mat2)
-add_subdirectory(matrices/mat2x3)
-add_subdirectory(matrices/mat2x4)
-add_subdirectory(matrices/mat3)
-add_subdirectory(matrices/mat3x2)
-add_subdirectory(matrices/mat3x4)
-add_subdirectory(matrices/mat4)
-add_subdirectory(matrices/mat4x2)
-add_subdirectory(matrices/mat4x3)
-add_subdirectory(matrices/transform4)
-add_subdirectory(matrices/extra)
 add_subdirectory(quaternions)
+add_subdirectory(matrices)
 
 target_sources(
         FGMTestSuite
@@ -76,20 +60,6 @@ target_link_libraries(
         Vec2Tests
         Vec3Tests
         Vec4Tests
-        Mat2Tests
-        Mat2TransformTests
-        Mat2x3Tests
-        Mat2x4Tests
-        Mat3Tests
-        Mat3TransformTests
-        Mat3x2Tests
-        Mat3x4Tests
-        Mat4Tests
-        Mat4x2Tests
-        Mat4x3Tests
-        Mat4TransformTests
-        MatrixExtraOpTests
-        Transform4Tests
 )
 
 target_precompile_headers(
@@ -132,14 +102,10 @@ source_group(
 
 
 set_target_properties(CommonTests
+        Point2Tests
+        Point3Tests
         Vec2Tests
         Vec3Tests
         Vec4Tests
-        Mat2Tests
-        Mat2TransformTests
-        Mat3Tests
-        Mat3TransformTests
-        Mat4Tests
-        Mat4TransformTests
         PROPERTIES FOLDER "Test Intermediates/FGM"
 )
