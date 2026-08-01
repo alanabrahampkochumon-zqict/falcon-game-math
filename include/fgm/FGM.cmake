@@ -9,6 +9,8 @@ include(${FGM_LIBRARY_DIR}/vectors/Vectors.cmake)
 set(FGM_LIBRARY_ROOT_FILES
         Mat
         Vec
+        Quaternion.h
+        Quaternion.tpp
         DoxygenGroups.h
 )
 
