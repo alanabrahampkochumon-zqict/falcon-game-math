@@ -51,7 +51,7 @@ namespace fgm::testutils
      *       if the quaternions are not equal.
      */
     template <Arithmetic T, Arithmetic U>
-    constexpr void expectQuaternionEq(const Quaternion<T>& expected, const Quaternion<T>& actual)
+    constexpr void expectQuaternionEq(const Quaternion<T>& expected, const Quaternion<U>& actual)
     {
         using ValueType = std::common_type_t<T, U>;
         if constexpr (std::is_same_v<ValueType, double>)

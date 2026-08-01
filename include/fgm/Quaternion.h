@@ -33,6 +33,15 @@
 namespace fgm
 {
 
+    /**
+     * @brief Quaternion data structure.
+     *
+     * @note While a quaternion can be initialized in any order <vector, scalar> or <scalar, vector>,
+     *       it strictly follows the <vector, scalar> or <x, y, z, w> order internally.
+     *
+     * @tparam T The numeric type of the real and complex components. Must satisfy @ref Arithmetic.
+     *
+     */
     template <Arithmetic T>
     struct Quaternion
     {
@@ -63,6 +72,24 @@ namespace fgm
          * @param[in] w The scalar component.
          */
         [[nodiscard]] constexpr Quaternion(T x, T y, T z, T w) noexcept;
+
+
+        /**
+         * @brief Initialize @ref Quaternion with a complex and real component.
+         *
+         * @param[in] complex The complex/vector component.
+         * @param[in] real The real/scalar component.
+         */
+        [[nodiscard]] constexpr Quaternion(const Vec3<T>& complex, T real) noexcept;
+
+
+        /**
+         * @brief Initialize @ref Quaternion with a real and complex component.
+         *
+         * @param[in] complex The complex/vector component.
+         * @param[in] real The real/scalar component.
+         */
+        [[nodiscard]] constexpr Quaternion(T real, const Vec3<T>& complex) noexcept;
 
         /** @} */
 

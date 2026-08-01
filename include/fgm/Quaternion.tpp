@@ -28,6 +28,26 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    FGM_INLINE constexpr Quaternion<T>::Quaternion(const Vec3<T>& complex, T real) noexcept
+    {
+        _data[0] = complex.x();
+        _data[1] = complex.y();
+        _data[2] = complex.z();
+        _data[3] = real;
+    }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Quaternion<T>::Quaternion(T real, const Vec3<T>& complex) noexcept
+    {
+        _data[0] = complex.x();
+        _data[1] = complex.y();
+        _data[2] = complex.z();
+        _data[3] = real;
+    }
+
+
 
     /**************************************
      *                                    *

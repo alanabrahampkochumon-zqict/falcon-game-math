@@ -34,7 +34,19 @@ namespace
      */
     template <typename T>
     class QuaternionInitialization: public testing::Test
-    {};
+    {
+    protected:
+        fgm::Vec3<T> _complexPart;
+        T _realPart;
+        fgm::Quaternion<T> _expectedQuaternion;
+
+        void SetUp() override
+        {
+            _complexPart        = { T(1), T(2), T(3) };
+            _realPart           = 4;
+            _expectedQuaternion = { T(1), T(2), T(3), T(4) };
+        }
+    };
     TYPED_TEST_SUITE(QuaternionInitialization, SupportedTypes);
 
 
@@ -47,6 +59,9 @@ namespace
 
     namespace static_tests
     {
+        constexpr fgm::Vec3 VECTOR(1, 2, 3);
+        constexpr auto SCALAR{ 5 };
+
         /// @test Verify that quaternions can be initialized with braced initializer has zero out components
         ///       at compile time.
         constexpr fgm::Quaternion<int> ZERO_QUATERNION{};
@@ -57,11 +72,26 @@ namespace
 
 
         /// @test Verify that quaternions can be initialized with individuals values at compile time.
-        constexpr fgm::Quaternion QUATERNION(1, 2, 3, 4);
-        static_assert(QUATERNION.x() == 1);
-        static_assert(QUATERNION.y() == 2);
-        static_assert(QUATERNION.z() == 3);
-        static_assert(QUATERNION.w() == 4);
+        constexpr fgm::Quaternion QUATERNION_VALUE_INIT(1, 2, 3, 4);
+        static_assert(QUATERNION_VALUE_INIT.x() == 1);
+        static_assert(QUATERNION_VALUE_INIT.y() == 2);
+        static_assert(QUATERNION_VALUE_INIT.z() == 3);
+        static_assert(QUATERNION_VALUE_INIT.w() == 4);
+
+        /// @test Verify that quaternions can be initialized with <vector, scalar> at compile time.
+        constexpr fgm::Quaternion QUATERNION_VEC_SCALAR(VECTOR, SCALAR);
+        static_assert(QUATERNION_VEC_SCALAR.x() == 1);
+        static_assert(QUATERNION_VEC_SCALAR.y() == 2);
+        static_assert(QUATERNION_VEC_SCALAR.z() == 3);
+        static_assert(QUATERNION_VEC_SCALAR.w() == 5);
+
+        /// @test Verify that quaternions can be initialized with <scalar, vector> at compile time.
+        constexpr fgm::Quaternion QUATERNION_SCALAR_VECTOR(SCALAR, VECTOR);
+        static_assert(QUATERNION_SCALAR_VECTOR.x() == 1);
+        static_assert(QUATERNION_SCALAR_VECTOR.y() == 2);
+        static_assert(QUATERNION_SCALAR_VECTOR.z() == 3);
+        static_assert(QUATERNION_SCALAR_VECTOR.w() == 5);
+
 
     } // namespace static_tests
 
@@ -85,70 +115,30 @@ TYPED_TEST(QuaternionInitialization, BracedInitializer_InitializesAllComponentsT
 
 TYPED_TEST(QuaternionInitialization, ParameterizedCtor_InitializesQuaternionWithIndividalComponents)
 {
-    const TypeParam a = static_cast<TypeParam>(3);
-    const TypeParam b = static_cast<TypeParam>(1);
-    const TypeParam c = static_cast<TypeParam>(6);
-    const TypeParam d = static_cast<TypeParam>(4);
+    const auto a = static_cast<TypeParam>(3);
+    const auto b = static_cast<TypeParam>(1);
+    const auto c = static_cast<TypeParam>(6);
+    const auto d = static_cast<TypeParam>(4);
 
     const fgm::Quaternion<TypeParam> quat(a, b, c, d);
 
     EXPECT_QUAT_CONTAINS(quat, a, b, c, d);
 }
 
-//
-// /**
-//  * @brief Verify that the parameterized constructor correctly composes a 4D quattor from
-//  *       two @ref fgm::Vec2 instances.
-//  */
-// TYPED_TEST(QuaternionInitialization, Two2DVectorsCanInitializeA4DVector)
-// {
-//     const TypeParam a = static_cast<TypeParam>(3);
-//     const TypeParam b = static_cast<TypeParam>(1);
-//     const TypeParam c = static_cast<TypeParam>(6);
-//     const TypeParam d = static_cast<TypeParam>(4);
-//     const fgm::Vec2<TypeParam> quat1(a, b);
-//     const fgm::Vec2<TypeParam> quat2(c, d);
-//
-//     const fgm::Quaternion<TypeParam> quat(quat1, quat2);
-//
-//     EXPECT_VEC_CONTAINS(quat, a, b, c, d);
-// }
-//
-//
-// /**
-//  * @brief Verify that the parameterized constructor correctly composes a 4D quattor from a
-//  *       @ref fgm::Vec3 instance and a scalar.
-//  */
-// TYPED_TEST(QuaternionInitialization, 3DVectorAndScalarCanInitializeA4DVector)
-// {
-//     const TypeParam a = static_cast<TypeParam>(3);
-//     const TypeParam b = static_cast<TypeParam>(1);
-//     const TypeParam c = static_cast<TypeParam>(6);
-//     const fgm::Vec3 quat1(a, b, c);
-//     const TypeParam scalar = static_cast<TypeParam>(4);
-//
-//     const fgm::Quaternion quat(quat1, scalar);
-//
-//     EXPECT_VEC_CONTAINS(quat, a, b, c, scalar);
-// }
-//
-//
-// /**
-//  * @brief Verify that the parameterized constructor correctly composes a 4D quattor from a scalar and
-//  *        a @ref fgm::Vec3 instance.
-//  */
-// TYPED_TEST(QuaternionInitialization, ScalarAnd3DVectorCanInitializeA4DVector)
-// {
-//     const TypeParam a = static_cast<TypeParam>(3);
-//     const TypeParam b = static_cast<TypeParam>(1);
-//     const TypeParam c = static_cast<TypeParam>(6);
-//     const fgm::Vec3 quat1(a, b, c);
-//     const TypeParam scalar = static_cast<TypeParam>(4);
-//
-//     const fgm::Quaternion quat(scalar, quat1);
-//
-//     EXPECT_VEC_CONTAINS(quat, scalar, a, b, c);
-// }
+
+/**
+ * @test Verify that Quaternion(vector, scalar) initializes a quaternion of <vector, scalar> component order.
+ */
+TYPED_TEST(QuaternionInitialization, VectorScalarParameterCtor_InitializesQuaternionWithValidComponentOrder)
+{ EXPECT_QUAT_EQ(this->_expectedQuaternion, fgm::Quaternion<TypeParam>(this->_complexPart, this->_realPart)); }
+
+
+/**
+ * @test Verify that Quaternion(scalar, vector) initializes a quaternion of <vector, scalar> component order.
+ */
+TYPED_TEST(QuaternionInitialization, ScalarVectorParameterCtor_InitializesQuaternionWithValidComponentOrder)
+{ EXPECT_QUAT_EQ(this->_expectedQuaternion, fgm::Quaternion<TypeParam>(this->_complexPart, this->_realPart)); }
+
 
 
 /** @} */
