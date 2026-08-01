@@ -21,6 +21,8 @@ target_sources(
         SwizzlingTests.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
+
+        Vec2TestSetup.h
 )
 
 target_include_directories(

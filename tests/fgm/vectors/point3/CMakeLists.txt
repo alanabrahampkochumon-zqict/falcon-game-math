@@ -4,6 +4,8 @@ target_sources(
         Point3Tests PRIVATE
         ArithmeticOperationTests.cpp
         InitializationTests.cpp
+
+        Point3TestSetup.h
 )
 
 target_include_directories(

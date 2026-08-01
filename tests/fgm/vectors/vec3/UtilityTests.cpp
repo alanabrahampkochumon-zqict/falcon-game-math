@@ -9,7 +9,7 @@
  */
 
 
-#include <Vec3TestSetup.h>
+#include "Vec3TestSetup.h"
 
 
 /**************************************

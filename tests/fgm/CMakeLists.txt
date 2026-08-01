@@ -12,9 +12,6 @@ set(UTILS_DIR "${FGM_ROOT_INCLUDE_DIR}utils/")
 
 # Files
 set(SetupHeaderFiles
-        Vec2TestSetup.h
-        Vec3TestSetup.h
-        Vec4TestSetup.h
         DoxygenGroups.h
         CommonSetup.h
 )
@@ -24,11 +21,7 @@ set(TestUtilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
 list(TRANSFORM TestUtilities PREPEND ${UTILS_DIR})
 
 add_subdirectory(common)
-add_subdirectory(vectors/point2)
-add_subdirectory(vectors/point3)
-add_subdirectory(vectors/vec2)
-add_subdirectory(vectors/vec3)
-add_subdirectory(vectors/vec4)
+add_subdirectory(vectors)
 add_subdirectory(quaternions)
 add_subdirectory(matrices)
 
@@ -55,11 +48,6 @@ target_link_libraries(
 
         # Objs
         CommonTests
-        Point2Tests
-        Point3Tests
-        Vec2Tests
-        Vec3Tests
-        Vec4Tests
 )
 
 target_precompile_headers(
@@ -102,10 +90,5 @@ source_group(
 
 
 set_target_properties(CommonTests
-        Point2Tests
-        Point3Tests
-        Vec2Tests
-        Vec3Tests
-        Vec4Tests
         PROPERTIES FOLDER "Test Intermediates/FGM"
 )

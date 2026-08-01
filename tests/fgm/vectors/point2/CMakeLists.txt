@@ -4,6 +4,8 @@ target_sources(
         Point2Tests PRIVATE
         ArithmeticOperationTests.cpp
         InitializationTests.cpp
+
+        Point2TestSetup.h
 )
 
 target_include_directories(
