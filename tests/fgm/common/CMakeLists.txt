@@ -22,7 +22,7 @@ target_link_libraries(
 
 target_precompile_headers(
         FGMCommonTests
-        PRIVATE
+        PUBLIC
         <gtest/gtest.h>
         <iostream>
         <limits>

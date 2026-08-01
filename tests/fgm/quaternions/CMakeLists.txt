@@ -31,13 +31,8 @@ target_link_libraries(
 
 target_precompile_headers(
         FGMQuaternionsTests
-        PRIVATE
-        <gtest/gtest.h>
-        <iostream>
-        <limits>
-        <concepts>
-        <cstddef>
-        <type_traits>
+        REUSE_FROM
+        FGMCommonTests
 )
 
 
