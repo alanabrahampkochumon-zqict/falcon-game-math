@@ -27,7 +27,7 @@
         /**
          * @defgroup FGM_Vectors Vectors
          * @brief N-dimensional Euclidean vector implementations.
-         * @ingroup FGM_Math
+         * @ingroup FGM_Core
          * @{
          */
 
@@ -131,7 +131,7 @@
         /**
          * @defgroup FGM_Matrices Matrices
          * @brief MxN-dimensional Matrix implementations.
-         * @ingroup FGM_Math
+         * @ingroup FGM_Core
          * @{
          */
             
@@ -340,6 +340,24 @@
             */
         
         /** @} */ // FGM_Matrices
+
+        /**
+        * @defgroup FGM_Quaternion Quaternions
+        * @brief Quaternions
+        * @ingroup FGM_Core
+        * @{
+        *   @defgroup FGM_Quaternion_Members Class Members
+        *   @defgroup FGM_Quaternion_Init Constructors
+        *   @defgroup FGM_Quaternion_Access Accessors
+        *   @defgroup FGM_Quaternion_Arithmetic Arithmetic Operations
+        *   @defgroup FGM_Quaternion_Equality Equality
+        *   @defgroup FGM_Quaternion_Comparison Comparisons
+        *   @defgroup FGM_Quaternion_Product Geometric Products
+        *   @defgroup FGM_Quaternion_Mag Quaternion Magnitude
+        *   @defgroup FGM_Quaternion_Log String Representation
+        *   @defgroup FGM_Quaternion_Const Quaternion Constants
+        * @}
+        */
 
     /** @} */ // End of FGM_Core
 
