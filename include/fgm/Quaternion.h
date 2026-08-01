@@ -147,6 +147,54 @@ namespace fgm
          */
         [[nodiscard]] constexpr T& w() noexcept;
 
+
+        /**
+         * @brief Get the first vector component.
+         */
+        [[nodiscard]] constexpr T i() const noexcept;
+
+
+        /**
+         * @brief Get a reference to the first vector component.
+         */
+        [[nodiscard]] constexpr T& i() noexcept;
+
+
+        /**
+         * @brief Get the second vector component.
+         */
+        [[nodiscard]] constexpr T j() const noexcept;
+
+
+        /**
+         * @brief Get a reference to the second vector component.
+         */
+        [[nodiscard]] constexpr T& j() noexcept;
+
+
+        /**
+         * @brief Get the third vector component.
+         */
+        [[nodiscard]] constexpr T k() const noexcept;
+
+
+        /**
+         * @brief Get a reference to the third vector component.
+         */
+        [[nodiscard]] constexpr T& k() noexcept;
+
+
+        /**
+         * @brief Get the scalar component (last component).
+         */
+        [[nodiscard]] constexpr T s() const noexcept;
+
+
+        /**
+         * @brief Get a reference to the scalar component (last component).
+         */
+        [[nodiscard]] constexpr T& s() noexcept;
+
         /** @} */
 
     private:

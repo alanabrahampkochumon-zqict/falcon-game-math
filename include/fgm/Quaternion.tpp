@@ -94,4 +94,44 @@ namespace fgm
     FGM_INLINE constexpr T& Quaternion<T>::w() noexcept
     { return _data[3]; }
 
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr T Quaternion<T>::i() const noexcept
+    { return _data[0]; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr T& Quaternion<T>::i() noexcept
+    { return _data[0]; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr T Quaternion<T>::j() const noexcept
+    { return _data[1]; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr T& Quaternion<T>::j() noexcept
+    { return _data[1]; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr T Quaternion<T>::k() const noexcept
+    { return _data[2]; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr T& Quaternion<T>::k() noexcept
+    { return _data[2]; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr T Quaternion<T>::s() const noexcept
+    { return _data[3]; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr T& Quaternion<T>::s() noexcept
+    { return _data[3]; }
+
 } // namespace fgm
