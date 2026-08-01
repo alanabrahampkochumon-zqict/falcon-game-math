@@ -179,19 +179,20 @@ namespace fgm
          *            \begin{bmatrix}
          *                 A_{00} & A_{01} & A_{02} & A_{03} \\
          *                 A_{10} & A_{11} & A_{12} & A_{13} \\
-         *                 A_{20} & A_{21} & A_{22} & A_{23}
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                      0 &      0 &      0 &      1
          *            \end{bmatrix}
          *            \cdot
          *            \begin{bmatrix}
-         *                  x \\ y \\ z
+         *                  x \\ y \\ z \\ 0 (implied)
          *            \end{bmatrix}
          *            =
          *            \begin{bmatrix}
-         *                  x' \\ y' \\ z'
+         *                  x' \\ y' \\ z' \\ 0 (implied)
          *            \end{bmatrix}
          *        \f$
          *
-         * @note Promotes the result to the wider type using @ref PromotedVec4<T, U>.
+         * @note Promotes the result to the wider type using @ref PromotedVec3<T, U>.
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
          * @tparam U Numeric type of the column vector. Must satisfy @ref StrictArithmetic.
@@ -203,6 +204,40 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const Vec3<U>& vec) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Transform the @p point by this matrix.
+         *        \f$
+         *            \begin{bmatrix}
+         *                 A_{00} & A_{01} & A_{02} & A_{03} \\
+         *                 A_{10} & A_{11} & A_{12} & A_{13} \\
+         *                 A_{20} & A_{21} & A_{22} & A_{23} \\
+         *                      0 &      0 &      0 &      1
+         *            \end{bmatrix}
+         *            \cdot
+         *            \begin{bmatrix}
+         *                  x \\ y \\ z \\ 1 (implied)
+         *            \end{bmatrix}
+         *            =
+         *            \begin{bmatrix}
+         *                  x' \\ y' \\ z' \\ 1 (implied)
+         *            \end{bmatrix}
+         *        \f$
+         *
+         * @note Promotes the result to the wider type using @ref PromotedPoint3<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the point. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] point The point to transform.
+         *
+         * @return A new @ref Point3 with applied linear transformations.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedPoint3<T, U> operator*(const Point3<U>& point) const noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

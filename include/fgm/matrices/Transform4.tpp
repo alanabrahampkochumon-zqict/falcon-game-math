@@ -71,7 +71,6 @@ namespace fgm
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return *reinterpret_cast<Vec3<T>*>(&(this->_data[col]));
-
     }
 
 
@@ -126,12 +125,28 @@ namespace fgm
     FGM_INLINE constexpr PromotedVec3<T, U> Transform4<T>::operator*(const Vec3<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
+        // NOTE: The last column entry is ignored since we have an implied w entry for Vec3 of 0 (<x, y, z, 0>).
         using R = std::common_type_t<T, U>;
-        return Vec3<R>{
-            static_cast<R>((*this)(0, 0) * vec.x() + (*this)(0, 1) * vec.y() + (*this)(0, 2) * vec.z()),
-            static_cast<R>((*this)(1, 0) * vec.x() + (*this)(1, 1) * vec.y() + (*this)(1, 2) * vec.z()),
-            static_cast<R>((*this)(2, 0) * vec.x() + (*this)(2, 1) * vec.y() + (*this)(2, 2) * vec.z())
-        };
+        return Vec3<R>{ static_cast<R>((*this)(0, 0) * vec.x() + (*this)(0, 1) * vec.y() + (*this)(0, 2) * vec.z()),
+                        static_cast<R>((*this)(1, 0) * vec.x() + (*this)(1, 1) * vec.y() + (*this)(1, 2) * vec.z()),
+                        static_cast<R>((*this)(2, 0) * vec.x() + (*this)(2, 1) * vec.y() + (*this)(2, 2) * vec.z()) };
+    }
+
+
+    template <StrictArithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    constexpr PromotedPoint3<T, U> Transform4<T>::operator*(const Point3<U>& point) const noexcept
+        requires StrictArithmetic<T>
+    {
+        // NOTE: The last column entry is added since we have an implied w entry for Point3 of 1 (<x, y, z, 1>).
+        using R = std::common_type_t<T, U>;
+        return Point3<R>{ static_cast<R>((*this)(0, 0) * point.x() + (*this)(0, 1) * point.y() +
+                                         (*this)(0, 2) * point.z() + (*this)(0, 3)),
+                          static_cast<R>((*this)(1, 0) * point.x() + (*this)(1, 1) * point.y() +
+                                         (*this)(1, 2) * point.z() + (*this)(1, 3)),
+                          static_cast<R>((*this)(2, 0) * point.x() + (*this)(2, 1) * point.y() +
+                                         (*this)(2, 2) * point.z() + (*this)(2, 3)) };
     }
 
 
