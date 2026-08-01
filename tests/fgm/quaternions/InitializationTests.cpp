@@ -11,7 +11,6 @@
 
 #include "include/QuaternionTestSetup.h"
 
-
 /**
  * @addtogroup T_FGM_Quaternion_Init
  * @{
@@ -28,7 +27,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test Fixture for Quaternion initialization.
+     * @brief Test Fixture for @ref fgm::Quaternion initialization.
      *
      * @tparam T The scalar type (uint8_t, float, uint32_t...) used for the values.
      */
