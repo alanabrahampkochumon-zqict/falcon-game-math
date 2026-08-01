@@ -20,5 +20,16 @@ target_link_libraries(
         FGMTestSetup
 )
 
+target_precompile_headers(
+        FGMCommonTests
+        PRIVATE
+        <gtest/gtest.h>
+        <iostream>
+        <limits>
+        <concepts>
+        <cstddef>
+        <type_traits>
+)
+
 include(GoogleTest)
 gtest_discover_tests(FGMCommonTests DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 180)
