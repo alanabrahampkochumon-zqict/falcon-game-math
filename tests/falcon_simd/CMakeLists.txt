@@ -44,6 +44,6 @@ target_include_directories(
 
 
 include(GoogleTest)
-gtest_discover_tests(FalconSIMDTestSuite DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(FalconSIMDTestSuite DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 
 set_target_properties(FalconSIMDUtilTests PROPERTIES FOLDER "Test Intermediates/Falcon SIMD")

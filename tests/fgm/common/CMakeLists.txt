@@ -1,4 +1,5 @@
 add_executable(FGMCommonTests)
+set_target_properties(FGMCommonTests PROPERTIES DISABLE_PRECOMPILE_HEADERS OFF)
 
 target_sources(
         FGMCommonTests PRIVATE
@@ -32,4 +33,4 @@ target_precompile_headers(
 )
 
 include(GoogleTest)
-gtest_discover_tests(FGMCommonTests DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 180)
+gtest_discover_tests(FGMCommonTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)

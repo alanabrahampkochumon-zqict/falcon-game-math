@@ -59,7 +59,7 @@ target_precompile_headers(
 
 
 include(GoogleTest)
-gtest_discover_tests(FGMMatrixTests DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 180)
+gtest_discover_tests(FGMMatrixTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 
 set_target_properties(
         Mat2Tests

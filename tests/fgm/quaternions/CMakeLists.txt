@@ -37,4 +37,4 @@ target_precompile_headers(
 
 
 include(GoogleTest)
-gtest_discover_tests(FGMQuaternionsTests DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 180)
+gtest_discover_tests(FGMQuaternionsTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
