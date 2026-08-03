@@ -240,15 +240,17 @@ namespace fgm
 
         using R = PromotedValue_t<T, S>;
 
-        FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
 
         if constexpr (std::is_floating_point_v<R>)
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
+
             R factor = R(1) / static_cast<R>(scalar);
             return Quaternion<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor, _data[3] * factor);
         }
         else
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) != R(0), fgm::messages::assertion::QUAT_DIV_BY_ZERO);
             R tScalar = static_cast<R>(scalar);
             return Quaternion<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar, _data[3] / tScalar);
         }
@@ -263,10 +265,10 @@ namespace fgm
     {
         using R = PromotedValue_t<T, S>;
 
-        FGM_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
 
         if constexpr (std::is_floating_point_v<R>)
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
 
             R factor = R(1) / static_cast<R>(scalar);
 
@@ -277,6 +279,7 @@ namespace fgm
         }
         else
         {
+            FGM_ASSERT_MSG(fgm::abs(scalar) != R(0), fgm::messages::assertion::QUAT_DIV_BY_ZERO);
             _data[0] = static_cast<T>(_data[0] / static_cast<R>(scalar));
             _data[1] = static_cast<T>(_data[1] / static_cast<R>(scalar));
             _data[2] = static_cast<T>(_data[2] / static_cast<R>(scalar));
