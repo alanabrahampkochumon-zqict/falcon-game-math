@@ -225,11 +225,12 @@ namespace fgm
          *
          * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
          *
-         * @param rhs The quaternion to add.
+         * @param[in] rhs The quaternion to add.
          *
          * @return A new @ref Quaternion with the component-wise sum.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr PromotedQuaternion<T, U> operator+(const Quaternion<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -239,11 +240,12 @@ namespace fgm
          *
          * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
          *
-         * @param rhs The quaternion to add.
+         * @param[in] rhs The quaternion to add.
          *
          * @return A reference to this quaternion (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr Quaternion& operator+=(const Quaternion<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
@@ -252,11 +254,12 @@ namespace fgm
          *
          * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
          *
-         * @param rhs The quaternion to subtract.
+         * @param[in] rhs The quaternion to subtract.
          *
          * @return A new @ref Quaternion with the component-wise difference.
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr PromotedQuaternion<T, U> operator-(const Quaternion<U>& rhs) const noexcept
             requires StrictArithmetic<T>;
 
@@ -266,12 +269,43 @@ namespace fgm
          *
          * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
          *
-         * @param rhs The quaternion to subtract.
+         * @param[in] rhs The quaternion to subtract.
          *
          * @return A reference to this quaternion (*this).
          */
         template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
         constexpr Quaternion& operator-=(const Quaternion<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise product of this quaternion with @p scalar.
+         *
+         * @tparam S The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The scalar to multiply.
+         *
+         * @return A new @ref Quaternion scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+            requires StrictSignedness<T, S>
+        constexpr PromotedQuaternion<T, S> operator*(S scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise product of this quaternion with @p scalar in-place.
+         *
+         * @tparam S The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The scalar to multiply.
+         *
+         * @return A reference to this quaternion (*this).
+         */
+        template <StrictArithmetic S>
+            requires StrictSignedness<T, S>
+        constexpr Quaternion& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -279,6 +313,29 @@ namespace fgm
     private:
         std::array<T, 4> _data;
     };
+
+
+
+    /**
+     * @addtogroup FGM_Quaternion_Arithmetic
+     * @{
+     */
+
+    /**
+     * @brief Compute the component-wise product of this quaternion with @p scalar.
+     *
+     * @tparam S The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The scalar to multiply.
+     *
+     * @return A new @ref Quaternion scaled by @p scalar.
+     */
+    template <StrictArithmetic T, StrictArithmetic S>
+        requires StrictSignedness<T, S>
+    constexpr PromotedQuaternion<T, S> operator*(S scalar, const Quaternion<T>& quat) noexcept;
+
+    /** @} */
+
 
 
     /** @brief Template deduction guide for Quaternion. */

@@ -148,6 +148,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     FGM_INLINE constexpr PromotedQuaternion<T, U> Quaternion<T>::operator+(const Quaternion<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -158,6 +159,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     FGM_INLINE constexpr Quaternion<T>& Quaternion<T>::operator+=(const Quaternion<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -172,6 +174,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     FGM_INLINE constexpr PromotedQuaternion<T, U> Quaternion<T>::operator-(const Quaternion<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
@@ -183,6 +186,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
     FGM_INLINE constexpr Quaternion<T>& Quaternion<T>::operator-=(const Quaternion<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
@@ -193,6 +197,38 @@ namespace fgm
 
         return *this;
     }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+        requires StrictSignedness<T, S>
+    FGM_INLINE constexpr PromotedQuaternion<T, S> Quaternion<T>::operator*(S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, S>;
+        return Quaternion<R>{ R(_data[0] * scalar), R(_data[1] * scalar), R(_data[2] * scalar), R(_data[3] * scalar) };
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+        requires StrictSignedness<T, S>
+    FGM_INLINE constexpr Quaternion<T>& Quaternion<T>::operator*=(S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] = static_cast<T>(_data[0] * scalar);
+        _data[1] = static_cast<T>(_data[1] * scalar);
+        _data[2] = static_cast<T>(_data[2] * scalar);
+        _data[3] = static_cast<T>(_data[3] * scalar);
+
+        return *this;
+    }
+
+
+    template <StrictArithmetic T, StrictArithmetic S>
+        requires StrictSignedness<T, S>
+    FGM_INLINE constexpr PromotedQuaternion<T, S> operator*(S scalar, const Quaternion<T>& quat) noexcept
+    { return quat * scalar; }
 
 
 
