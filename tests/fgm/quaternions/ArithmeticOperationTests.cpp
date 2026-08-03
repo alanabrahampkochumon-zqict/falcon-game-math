@@ -47,29 +47,29 @@ namespace
     TYPED_TEST_SUITE(QuaternionAddition, SupportedArithmeticTypes);
 
 
-    // /**
-    //  * @brief Test fixture for verifying quaternion subtraction across different scalar types.
-    //  *
-    //  * @tparam T The scalar type (uint32_t, float, double...) for the quaternion values.
-    //  */
-    // template <typename T>
-    // class QuaternionSubtraction: public testing::Test
-    // {
-    // protected:
-    //     fgm::Quaternion<T> _quatA;
-    //     fgm::Quaternion<T> _quatB;
-    //     fgm::Quaternion<T> _expectedDifference;
-    //
-    //     void SetUp() override
-    //     {
-    //         _quatA               = { T(95), T(11), T(-6), T(2) };
-    //         _quatB               = { T(-8), T(5), T(-2), T(-5) };
-    //         _expectedDifference = { T(103), T(6), T(-4), T(7) };
-    //     }
-    // };
-    // TYPED_TEST_SUITE(QuaternionSubtraction, SupportedArithmeticTypes);
-    //
-    //
+    /**
+     * @brief Test fixture for verifying quaternion subtraction across different scalar types.
+     *
+     * @tparam T The scalar type (uint32_t, float, double...) for the quaternion values.
+     */
+    template <typename T>
+    class QuaternionSubtraction: public testing::Test
+    {
+    protected:
+        fgm::Quaternion<T> _quatA;
+        fgm::Quaternion<T> _quatB;
+        fgm::Quaternion<T> _expectedDifference;
+
+        void SetUp() override
+        {
+            _quatA              = { T(95), T(12), T(5), T(7) };
+            _quatB              = { T(88), T(5), T(2), T(5) };
+            _expectedDifference = { T(7), T(7), T(3), T(2) };
+        }
+    };
+    TYPED_TEST_SUITE(QuaternionSubtraction, SupportedArithmeticTypes);
+
+
     // /**
     //  * @brief Test fixture for verifying quaternion multiplication with scalar across different scalar types.
     //  *
@@ -158,6 +158,14 @@ namespace
         static_assert(QUAT_SUM.k() == -2);
         static_assert(QUAT_SUM.s() == 7);
 
+
+        /// @test Verify that quaterion subtraction returns a valid quaternion at compile-time.
+        constexpr auto QUAT_DIFF = QUAT_A - QUAT_B;
+        static_assert(QUAT_DIFF.i() == -6);
+        static_assert(QUAT_DIFF.j() == 0);
+        static_assert(QUAT_DIFF.k() == 8);
+        static_assert(QUAT_DIFF.s() == 1);
+
     } // namespace static_tests
 
 
@@ -207,77 +215,47 @@ TEST(QuaternionAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
     static_assert(std::is_same_v<decltype(quat1)::value_type, float>);
 }
 
-//
-//
-//
-// /**
-//  * @addtogroup T_FGM_Quaternion_Subtraction
-//  * @{
-//  */
-//
-// /**************************************
-//  *                                    *
-//  *          SUBTRACTION TESTS         *
-//  *                                    *
-//  **************************************/
-//
-// /**
-//  * @brief Verify that the binary subtraction operator perform a component-wise subtraction and
-//  *       returns a new vector instance.
-//  */
-// TYPED_TEST(QuaternionSubtraction, MinusOperator_ReturnsDifference)
-// {
-//     const fgm::Quaternion result = this->_quatA - this->_quatB;
-//
-//     EXPECT_VEC_EQ(this->_expectedDifference, result);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound subtraction assignment operator perform a component-wise subtraction
-//  *       and mutates the vector in-place.
-//  */
-// TYPED_TEST(QuaternionSubtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
-// {
-//     this->_quatA -= this->_quatB;
-//
-//     EXPECT_VEC_EQ(this->_expectedDifference, this->_quatA);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary subtraction operator perform automatic type promotion
-//  *       to the wider numeric type.
-//  */
-// TEST(QuaternionSubtraction, MinusOperator_MixedTypePromotesType)
-// {
-//     const fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
-//     const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
-//
-//     [[maybe_unused]] const fgm::Quaternion result = quat1 - quat2;
-//
-//     static_assert(std::is_same_v<decltype(result)::value_type, double>);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
-//  *       perform an implicit cast.
-//  */
-// TEST(QuaternionSubtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
-// {
-//     fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
-//     [[maybe_unused]] const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
-//
-//     static_cast<void>(quat1 -= quat2);
-//
-//     static_assert(std::is_same_v<decltype(quat1)::value_type, float>);
-// }
-//
-// /** @} */
-//
-//
-//
+
+TYPED_TEST(QuaternionSubtraction, MinusOperator_ReturnsQuaternionDifference)
+{
+    const fgm::Quaternion result = this->_quatA - this->_quatB;
+
+    EXPECT_QUAT_EQ(this->_expectedDifference, result);
+}
+
+
+TYPED_TEST(QuaternionSubtraction, MinusEqualsOperator_ReturnsSameQuaternionWithDifference)
+{
+    this->_quatA -= this->_quatB;
+
+    EXPECT_QUAT_EQ(this->_expectedDifference, this->_quatA);
+}
+
+
+TEST(QuaternionSubtraction, MinusOperator_MixedTypePromotesType)
+{
+    const fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
+    const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
+
+    [[maybe_unused]] const fgm::Quaternion result = quat1 - quat2;
+
+    static_assert(std::is_same_v<decltype(result)::value_type, double>);
+}
+
+
+TEST(QuaternionSubtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
+{
+    fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
+    [[maybe_unused]] const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
+
+    static_cast<void>(quat1 -= quat2);
+
+    static_assert(std::is_same_v<decltype(quat1)::value_type, float>);
+}
+
+
+
+
 // /**
 //  * @addtogroup T_FGM_Quaternion_Multiplication
 //  * @{

@@ -247,6 +247,33 @@ namespace fgm
         constexpr Quaternion& operator+=(const Quaternion<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
+        /**
+         * @brief Compute the component-wise difference between two quaternions.
+         *
+         * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param rhs The quaternion to subtract.
+         *
+         * @return A new @ref Quaternion with the component-wise difference.
+         */
+        template <StrictArithmetic U>
+        constexpr PromotedQuaternion<T, U> operator-(const Quaternion<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise difference between two quaternions in-place.
+         *
+         * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param rhs The quaternion to subtract.
+         *
+         * @return A reference to this quaternion (*this).
+         */
+        template <StrictArithmetic U>
+        constexpr Quaternion& operator-=(const Quaternion<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
         /** @} */
 
     private:
