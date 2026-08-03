@@ -156,6 +156,19 @@ namespace fgm
                               R(_data[3] + rhs.s()) };
     }
 
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    FGM_INLINE constexpr Quaternion<T>& Quaternion<T>::operator+=(const Quaternion<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        _data[0] = static_cast<T>(_data[0] + rhs.i());
+        _data[1] = static_cast<T>(_data[1] + rhs.j());
+        _data[2] = static_cast<T>(_data[2] + rhs.k());
+        _data[3] = static_cast<T>(_data[3] + rhs.s());
+
+        return *this;
+    }
+
 
 
 } // namespace fgm

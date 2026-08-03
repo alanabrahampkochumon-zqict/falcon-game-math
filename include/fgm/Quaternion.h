@@ -23,6 +23,7 @@
 
 
 
+#include "Quaternion.h"
 #include "common/MathTraits.h"
 #include "common/PreprocessorDefinitions.h"
 #include "vectors/Vec3.h"
@@ -230,6 +231,20 @@ namespace fgm
          */
         template <StrictArithmetic U>
         constexpr PromotedQuaternion<T, U> operator+(const Quaternion<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise sum of two quaternions in-place.
+         *
+         * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param rhs The quaternion to add.
+         *
+         * @return A reference to this quaternion (*this).
+         */
+        template <StrictArithmetic U>
+        constexpr Quaternion& operator+=(const Quaternion<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

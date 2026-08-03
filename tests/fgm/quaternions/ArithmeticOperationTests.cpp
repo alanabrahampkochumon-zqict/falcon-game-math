@@ -39,8 +39,8 @@ namespace
 
         void SetUp() override
         {
-            _quatA        = { T(3), T(1), T(6), T(2) };
-            _quatB        = { T(5), T(3), T(1), T(6) };
+            _quatA       = { T(3), T(1), T(6), T(2) };
+            _quatB       = { T(5), T(3), T(1), T(6) };
             _expectedSum = { T(8), T(4), T(7), T(8) };
         }
     };
@@ -169,11 +169,7 @@ namespace
  *           ADDITION TESTS           *
  **************************************/
 
-/**
- * @brief Verify that the binary addition operator perform a component-wise addition and
- *       returns a new vector instance.
- */
-TYPED_TEST(QuaternionAddition, PlusOperator_ReturnsVectorSum)
+TYPED_TEST(QuaternionAddition, PlusOperator_ReturnsQuaternionSum)
 {
     const fgm::Quaternion result = this->_quatA + this->_quatB;
 
@@ -181,48 +177,36 @@ TYPED_TEST(QuaternionAddition, PlusOperator_ReturnsVectorSum)
 }
 
 
-// /**
-//  * @brief Verify that the compound addition assignment operator perform a component-wise addition and
-//  *       mutates the vector in-place.
-//  */
-// TYPED_TEST(QuaternionAddition, PlusEqualsOperator_ReturnsSameVectorWithSum)
-// {
-//     this->_quatA += this->_quatB;
-//
-//     EXPECT_VEC_EQ(this->_expectedSum, this->_quatA);
-// }
+TYPED_TEST(QuaternionAddition, PlusEqualsOperator_ReturnsSameQuaternionWithSum)
+{
+    this->_quatA += this->_quatB;
+
+    EXPECT_QUAT_EQ(this->_expectedSum, this->_quatA);
+}
 
 
-/**
- * @brief Verify that the binary addition operator perform automatic type promotion
- *       to the wider numeric type.
- */
 TEST(QuaternionAddition, PlusOperator_MixedTypePromotesType)
 {
-    const fgm::Quaternion vec1(3.0f, 0.0f, -1.0f, 2.0f);
-    const fgm::Quaternion vec2(9.0, -5.0, 10.0, 3.0);
+    const fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
+    const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
 
-    [[maybe_unused]] const fgm::Quaternion result = vec1 + vec2;
+    [[maybe_unused]] const fgm::Quaternion result = quat1 + quat2;
 
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
 
-//
-// /**
-//  * @brief Verify that the compound addition assignment operator maintains the destination type and
-//  *       perform an implicit cast.
-//  */
-// TEST(QuaternionAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
-// {
-//     fgm::Quaternion vec1(3.0f, 0.0f, -1.0f, 2.0f);
-//     [[maybe_unused]] const fgm::Quaternion vec2(9.0, -5.0, 10.0, 3.0);
-//
-//     static_cast<void>(vec1 += vec2);
-//
-//     static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
-// }
-//
-// /** @} */
+
+
+TEST(QuaternionAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+{
+    fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
+    [[maybe_unused]] const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
+
+    static_cast<void>(quat1 += quat2);
+
+    static_assert(std::is_same_v<decltype(quat1)::value_type, float>);
+}
+
 //
 //
 //
@@ -267,10 +251,10 @@ TEST(QuaternionAddition, PlusOperator_MixedTypePromotesType)
 //  */
 // TEST(QuaternionSubtraction, MinusOperator_MixedTypePromotesType)
 // {
-//     const fgm::Quaternion vec1(3.0f, 0.0f, -1.0f, 2.0f);
-//     const fgm::Quaternion vec2(9.0, -5.0, 10.0, 3.0);
+//     const fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
+//     const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
 //
-//     [[maybe_unused]] const fgm::Quaternion result = vec1 - vec2;
+//     [[maybe_unused]] const fgm::Quaternion result = quat1 - quat2;
 //
 //     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 // }
@@ -282,12 +266,12 @@ TEST(QuaternionAddition, PlusOperator_MixedTypePromotesType)
 //  */
 // TEST(QuaternionSubtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
 // {
-//     fgm::Quaternion vec1(3.0f, 0.0f, -1.0f, 2.0f);
-//     [[maybe_unused]] const fgm::Quaternion vec2(9.0, -5.0, 10.0, 3.0);
+//     fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
+//     [[maybe_unused]] const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
 //
-//     static_cast<void>(vec1 -= vec2);
+//     static_cast<void>(quat1 -= quat2);
 //
-//     static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
+//     static_assert(std::is_same_v<decltype(quat1)::value_type, float>);
 // }
 //
 // /** @} */
@@ -328,7 +312,8 @@ TEST(QuaternionAddition, PlusOperator_MixedTypePromotesType)
 //
 //
 // /**
-//  * @brief Verify that the binary multiplication operator (vector * scalar) perform a component-wise (Hadamard) product
+//  * @brief Verify that the binary multiplication operator (vector * scalar) perform a component-wise (Hadamard)
+//  product
 //  *       and returns a new vector instance.
 //  */
 // TYPED_TEST(QuaternionScalarMultiplication, VectorTimesScalarReturnsScaledVector)
@@ -347,7 +332,8 @@ TEST(QuaternionAddition, PlusOperator_MixedTypePromotesType)
 //
 //
 // /**
-//  * @brief Verify that the binary multiplication operator (scalar * vector) perform a component-wise (Hadamard) product
+//  * @brief Verify that the binary multiplication operator (scalar * vector) perform a component-wise (Hadamard)
+//  product
 //  *       and returns a new vector instance.
 //  */
 // TYPED_TEST(QuaternionScalarMultiplication, ScalarTimesAVectorReturnsScaledVector)
@@ -796,7 +782,8 @@ TEST(QuaternionAddition, PlusOperator_MixedTypePromotesType)
 //
 //
 // /**
-//  * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Quaternion::tryDiv returns zero vector
+//  * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Quaternion::tryDiv returns zero
+//  vector
 //  * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
