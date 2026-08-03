@@ -34,6 +34,8 @@ namespace fgm::messages
         inline constexpr auto VEC_REJECT_DIV_BY_ZERO    = "[Vector Rejection]: Division by zero.";
         inline constexpr auto VEC_OUT_OF_BOUNDS_ACCESS  = "[Vector]: Out of bounds.";
 
+        inline constexpr auto QUAT_DIV_BY_ZERO = "[Quaternion]: Division by zero";
+
     } // namespace assertion
 
 

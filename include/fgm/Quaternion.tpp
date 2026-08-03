@@ -210,6 +210,12 @@ namespace fgm
     }
 
 
+    template <StrictArithmetic T, StrictArithmetic S>
+        requires StrictSignedness<T, S>
+    FGM_INLINE constexpr PromotedQuaternion<T, S> operator*(S scalar, const Quaternion<T>& quat) noexcept
+    { return quat * scalar; }
+
+
     template <Arithmetic T>
     template <StrictArithmetic S>
         requires StrictSignedness<T, S>
@@ -225,11 +231,60 @@ namespace fgm
     }
 
 
-    template <StrictArithmetic T, StrictArithmetic S>
+    template <Arithmetic T>
+    template <StrictArithmetic S>
         requires StrictSignedness<T, S>
-    FGM_INLINE constexpr PromotedQuaternion<T, S> operator*(S scalar, const Quaternion<T>& quat) noexcept
-    { return quat * scalar; }
+    FGM_INLINE constexpr PromotedQuaternion<T, S> Quaternion<T>::operator/(S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
 
+        using R = PromotedValue_t<T, S>;
+
+        FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+            R factor = R(1) / static_cast<R>(scalar);
+            return Quaternion<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor, _data[3] * factor);
+        }
+        else
+        {
+            R tScalar = static_cast<R>(scalar);
+            return Quaternion<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar, _data[3] / tScalar);
+        }
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+        requires StrictSignedness<T, S>
+    FGM_INLINE constexpr Quaternion<T>& Quaternion<T>::operator/=(S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = PromotedValue_t<T, S>;
+
+        FGM_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
+
+        if constexpr (std::is_floating_point_v<R>)
+        {
+
+            R factor = R(1) / static_cast<R>(scalar);
+
+            _data[0] = static_cast<T>(factor * _data[0]);
+            _data[1] = static_cast<T>(factor * _data[1]);
+            _data[2] = static_cast<T>(factor * _data[2]);
+            _data[3] = static_cast<T>(factor * _data[3]);
+        }
+        else
+        {
+            _data[0] = static_cast<T>(_data[0] / static_cast<R>(scalar));
+            _data[1] = static_cast<T>(_data[1] / static_cast<R>(scalar));
+            _data[2] = static_cast<T>(_data[2] / static_cast<R>(scalar));
+            _data[3] = static_cast<T>(_data[3] / static_cast<R>(scalar));
+        }
+
+        return *this;
+    }
 
 
 } // namespace fgm

@@ -11,6 +11,7 @@
 
 #include "CommonSetup.h"
 
+#include <cmath>
 #include <fgm/Quaternion.h>
 #include <type_traits>
 
@@ -34,6 +35,12 @@
         fgm::testutils::expectQuaternionContains(quat, x, y, z, w);                                                    \
     } while (0)
 
+
+#define EXPECT_QUAT_INF(quat)                                                                                          \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        fgm::testutils::expectQuatInf(quat);                                                                           \
+    } while (0)
 
 
 namespace fgm::testutils
@@ -115,6 +122,26 @@ namespace fgm::testutils
             EXPECT_EQ(y, quat.y());
             EXPECT_EQ(z, quat.z());
             EXPECT_EQ(w, quat.w());
+        }
+    }
+
+
+    /**
+     * @brief Validates that the provided quaternion contains only @ref INFINITY components.
+     *
+     * @tparam T Numeric type of the actual quaternion components.
+     *
+     * @param quat The quaternion being evaluated.
+     *
+     * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
+     *       if any of the quaternion components are not @ref `INFINITY` or `-INFINITY`.
+     */
+    template <Arithmetic T>
+    void expectQuatInf(const Quaternion<T>& quat)
+    {
+        if (std::is_floating_point_v<T>)
+        {
+            EXPECT_TRUE(std::isinf(quat.x()) || std::isinf(quat.y()) || std::isinf(quat.z()) || std::isinf(quat.w()));
         }
     }
 

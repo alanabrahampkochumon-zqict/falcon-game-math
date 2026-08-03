@@ -308,6 +308,36 @@ namespace fgm
         constexpr Quaternion& operator*=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Divide this quaternion by @p scalar component-wise.
+         *
+         * @tparam S The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The scalar to divide by.
+         *
+         * @return A new @ref Quaternion inverse-scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+            requires StrictSignedness<T, S>
+        constexpr PromotedQuaternion<T, S> operator/(S scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Divide this quaternion by @p scalar component-wise in-place.
+         *
+         * @tparam S The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The scalar to divide by.
+         *
+         * @return A reference to this quaternion (*this).
+         */
+        template <StrictArithmetic S>
+            requires StrictSignedness<T, S>
+        constexpr Quaternion& operator/=(S scalar) noexcept
+            requires StrictArithmetic<T>;
+
         /** @} */
 
     private:

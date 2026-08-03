@@ -86,7 +86,7 @@ namespace
 
         void SetUp() override
         {
-            _quat                 = { T(7), T(13), T(29), T(41) };
+            _quat                = { T(7), T(13), T(29), T(41) };
             _scalar              = T(2.123456789123456);
             _expectedFloatingVec = { T(14.864197523864192), T(27.604938258604928), T(61.580246884580224),
                                      T(87.061728354061696) };
@@ -96,30 +96,30 @@ namespace
     TYPED_TEST_SUITE(QuaternionScalarMultiplication, SupportedArithmeticTypes);
 
 
-    // /**
-    //  * @brief Test fixture for verifying quaternion division by a scalar across different scalar types.
-    //  *
-    //  * @tparam T The scalar type (uint32_t, float, double...) for the quaternion values.
-    //  */
-    // template <typename T>
-    // class QuaternionScalarDivision: public testing::Test
-    // {
-    // protected:
-    //     fgm::Quaternion<T> _quat;
-    //     T _scalar;
-    //     fgm::Quaternion<T> _expectedScaledVec;
-    //
-    //     void SetUp() override
-    //     {
-    //         _quat               = { T(17), T(31), T(59), T(73) };
-    //         _scalar            = T(13);
-    //         _expectedScaledVec = { T(1.30769230769230769231), T(2.38461538461538461538), T(4.53846153846153846154),
-    //                                T(5.61538461538461538462) };
-    //     }
-    // };
-    // TYPED_TEST_SUITE(QuaternionScalarDivision, SupportedArithmeticTypes);
-    //
-    //
+    /**
+     * @brief Test fixture for verifying quaternion division by a scalar across different scalar types.
+     *
+     * @tparam T The scalar type (uint32_t, float, double...) for the quaternion values.
+     */
+    template <typename T>
+    class QuaternionScalarDivision: public testing::Test
+    {
+    protected:
+        fgm::Quaternion<T> _quat;
+        T _scalar;
+        fgm::Quaternion<T> _expectedScaledVec;
+
+        void SetUp() override
+        {
+            _quat              = { T(17), T(31), T(59), T(73) };
+            _scalar            = T(13);
+            _expectedScaledVec = { T(1.30769230769230769231), T(2.38461538461538461538), T(4.53846153846153846154),
+                                   T(5.61538461538461538462) };
+        }
+    };
+    TYPED_TEST_SUITE(QuaternionScalarDivision, SupportedArithmeticTypes);
+
+
     // /**
     //  * @brief Test fixture for verifying quaternion negation across different scalar types.
     //  *
@@ -145,7 +145,7 @@ namespace
      *            STATIC TESTS            *
      **************************************/
 
-    /** @brief Verify that quattor arithmetic operations are available at compile time. */
+    /** @brief Verify that quaternion arithmetic operations are available at compile time. */
     namespace static_tests
     {
         constexpr fgm::Quaternion QUAT_A(-1, 12, 3, 4);
@@ -367,142 +367,102 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 }
 
 
-// /**
-//  * @addtogroup T_FGM_Quaternion_Division
-//  * @{
-//  */
-//
-// /**************************************
-//  *                                    *
-//  *        SCALAR DIVISION TESTS       *
-//  *                                    *
-//  **************************************/
-//
-// #ifndef ENABLE_DEBUG_TESTS
-//
-// /**
-//  * @brief Verify that dividing a float quattor by zero returns an
-//  *       infinity quattor of float type.
-//  */
-// TEST(QuaternionScalarDivision, FloatQuaternionDivisionByZeroReturnsInfinityQuaternion)
-// {
-//     const fgm::Quaternion quat(1.0f, 2.0f, 3.0f, 4.0f);
-//     EXPECT_VEC_INF(quat / 0);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a double quattor by zero returns an
-//  *       infinity quattor of double type.
-//  */
-// TEST(QuaternionScalarDivision, DoubleQuaternionDivisionByZeroReturnsInfinityQuaternion)
-// {
-//     const fgm::Quaternion quat(1.0, 2.0, 3.0, 4.0);
-//     EXPECT_VEC_INF(quat / 0);
-// }
-//
-// #endif
-//
-//
-// /** @brief Verify that dividing a quattor by one returns the original quattor. */
-// TYPED_TEST(QuaternionScalarDivision, DivisionByOneReturnsOriginalQuaternion)
-// {
-//     const fgm::Quaternion result = this->_quat / 1;
-//
-//     EXPECT_VEC_EQ(result, this->_quat);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary division operator (quattor / scalar) perform a component-wise divide and
-//  *       returns a quattor instance.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, ScalarDivision_ReturnsInverseScaledQuaternion)
-// {
-//     const fgm::Quaternion result = this->_quat / this->_scalar;
-//
-//     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound division assignment operator perform a component-wise divide and
-//  *       mutates the quattor in-place.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, ScalarDivisionAssignment_ReturnsSameQuaternionInverseScaled)
-// {
-//     this->_quat /= this->_scalar;
-//
-//     EXPECT_VEC_EQ(this->_expectedScaledVec, this->_quat);
-// }
-//
-//
-// /**
-//  * @brief Verify that the binary division operator perform automatic type promotion
-//  *       to the wider numeric type.
-//  */
-// TEST(QuaternionScalarDivision, MixedType_ScalarDivision_PromotesType)
-// {
-//     const fgm::Quaternion quat(15.0, 0.0, -5.0, 10.0);
-//     const double scalar = 5.0;
-//
-//     [[maybe_unused]] const fgm::Quaternion result = quat / scalar;
-//
-//     static_assert(std::is_same_v<decltype(result)::value_type, double>);
-// }
-//
-//
-// /**
-//  * @brief Verify that the compound division assignment operator maintains the destination type and
-//  *       perform an implicit cast.
-//  */
-// TEST(QuaternionScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
-// {
-//     fgm::Quaternion quat(15.0f, 0.0f, -5.0f, 10.0f);
-//     const double scalar = 5.0;
-//
-//     quat /= scalar;
-//
-//     static_assert(std::is_same_v<decltype(quat)::value_type, float>);
-// }
-//
-//
-// /** @brief Verify that the compound division operator for mixed types ensures minimal precision loss. */
-// TEST(QuaternionScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWithMinimalPrecisionLoss)
-// {
-//     fgm::Quaternion quat(10, 25, -30, 2);
-//     const double scalar = 2.5;
-//     const fgm::Quaternion expected(4, 10, -12, 0);
-//
-//     quat /= scalar;
-//
-//     EXPECT_VEC_EQ(expected, quat);
-// }
-//
-//
-// #ifdef ENABLE_DEBUG_TESTS
-//
-// /**
-//  * @brief Verify that the binary division assignment operator when dividing a quattor by zero,
-//  *        triggers assert in debug mode.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
-// { EXPECT_DEBUG_DEATH(static_cast<void>(this->_quat / 0), ""); }
-//
-//
-// /**
-//  * @brief Verify that the compound division assignment operator when dividing a quattor by zero,
-//  *        triggers assert in debug mode.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
-// {
-//     [[maybe_unused]] fgm::Quaternion newVec = this->_quat;
-//     EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= 0), "");
-// }
-// #endif
-//
-//
-//
+// TODO: Move to death tests separate binary
+#ifndef ENABLE_DEBUG_TESTS
+// Release mode behaviour
+
+TEST(QuaternionScalarDivision, FloatQuaternionDivisionByZero_ReturnsInfinityQuaternion_InReleaseMode)
+{
+    const fgm::Quaternion quat(1.0f, 2.0f, 3.0f, 4.0f);
+    EXPECT_QUAT_INF(quat / 0);
+}
+
+
+TEST(QuaternionScalarDivision, DoubleQuaternionDivisionByZero_ReturnsInfinityQuaternion_InReleaseMode)
+{
+    const fgm::Quaternion quat(1.0, 2.0, 3.0, 4.0);
+    EXPECT_QUAT_INF(quat / 0);
+}
+
+#else
+// Debug Mode behaviour
+
+TYPED_TEST(QuaternionScalarDivision, DivideOperator_ByZeroTriggersAssertionInDebugMode)
+{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_quat / TypeParam(0)), ""); }
+
+
+TYPED_TEST(QuaternionScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertionInDebugMode)
+{
+    [[maybe_unused]] fgm::Quaternion newVec = this->_quat;
+    EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= TypeParam(0)), "");
+}
+
+#endif
+
+
+
+TYPED_TEST(QuaternionScalarDivision, ByOneReturnsOriginalQuaternion)
+{
+    const fgm::Quaternion result = this->_quat / TypeParam(1);
+
+    EXPECT_QUAT_EQ(result, this->_quat);
+}
+
+
+TYPED_TEST(QuaternionScalarDivision, DivideOperator_ReturnsAValidQuaternion)
+{
+    const fgm::Quaternion result = this->_quat / this->_scalar;
+
+    EXPECT_QUAT_EQ(this->_expectedScaledVec, result);
+}
+
+
+TYPED_TEST(QuaternionScalarDivision, DivideEqualsOperator_ReturnsSameQuaternionInverseScaled)
+{
+    this->_quat /= this->_scalar;
+
+    EXPECT_QUAT_EQ(this->_expectedScaledVec, this->_quat);
+}
+
+
+TEST(QuaternionScalarDivision, DivideOperator_MixedType_PromotesType)
+{
+    const fgm::Quaternion quat(15.0, 0.0, -5.0, 10.0);
+    const double scalar = 5.0;
+
+    [[maybe_unused]] const auto result = quat / scalar;
+
+    static_assert(std::is_same_v<decltype(result)::value_type, double>);
+}
+
+
+TEST(QuaternionScalarDivision, DivideEqualsOperator_MixedType_DoesNotPromoteType)
+{
+    fgm::Quaternion quat(15.0f, 0.0f, -5.0f, 10.0f);
+    const double scalar = 5.0;
+
+    quat /= scalar;
+
+    static_assert(std::is_same_v<decltype(quat)::value_type, float>);
+}
+
+
+TEST(QuaternionScalarDivision, DivideEqualsOperator_MixedType_ReturnsResultWithMinimalPrecisionLoss)
+{
+    fgm::Quaternion quat(10, 25, -30, 2);
+    const double scalar = 2.5;
+    const fgm::Quaternion expected(4, 10, -12, 0);
+
+    quat /= scalar;
+
+    EXPECT_QUAT_EQ(expected, quat);
+}
+
+
+
+
+
+
 // /**************************************
 //  *                                    *
 //  *        SAFE DIVISION TESTS         *
@@ -510,20 +470,20 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //  **************************************/
 //
 // /**
-//  * @brief Verify that dividing a quattor using @ref fgm::Quaternion::safeDiv perform a component-wise divide and
-//  *       returns a new quattor instance.
+//  * @brief Verify that dividing a quaternion using @ref fgm::Quaternion::safeDiv perform a component-wise divide and
+//  *       returns a new quaternion instance.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, SafeDivide_ReturnsAInverseScaledQuaternion)
 // {
 //     const auto result = this->_quat.safeDiv(this->_scalar);
 //
-//     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+//     EXPECT_QUAT_EQ(this->_expectedScaledVec, result);
 // }
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by integral zero using @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quattor instance.
+//  * @brief Verify that dividing a quaternion by integral zero using @ref fgm::Quaternion::safeDiv
+//  *       perform a component-wise divide and returns a new quaternion instance.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, SafeDivideByIntegralZero_ReturnsZeroQuaternion)
 // {
@@ -533,8 +493,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by floating point zero using @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quattor instance.
+//  * @brief Verify that dividing a quaternion by floating point zero using @ref fgm::Quaternion::safeDiv
+//  *       perform a component-wise divide and returns a new quaternion instance.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, SafeDivideByFloatZero_ReturnsZeroQuaternion)
 // {
@@ -544,19 +504,19 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor using static variant of @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quattor instance.
+//  * @brief Verify that dividing a quaternion using static variant of @ref fgm::Quaternion::safeDiv
+//  *       perform a component-wise divide and returns a new quaternion instance.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScaledQuaternion)
 // {
 //     const auto result = fgm::Quaternion<TypeParam>::safeDiv(this->_quat, this->_scalar);
-//     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+//     EXPECT_QUAT_EQ(this->_expectedScaledVec, result);
 // }
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by integral zero using static variant of @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quattor instance.
+//  * @brief Verify that dividing a quaternion by integral zero using static variant of @ref fgm::Quaternion::safeDiv
+//  *       perform a component-wise divide and returns a new quaternion instance.
 //  */
 // TEST(QuaternionScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroQuaternion)
 // {
@@ -566,8 +526,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by floating point zero using static variant @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quattor instance.
+//  * @brief Verify that dividing a quaternion by floating point zero using static variant @ref fgm::Quaternion::safeDiv
+//  *       perform a component-wise divide and returns a new quaternion instance.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZeroQuaternion)
 // {
@@ -577,8 +537,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by NaN using @ref fgm::Quaternion::safeDiv
-//  *       returns a zero quattor.
+//  * @brief Verify that dividing a quaternion by NaN using @ref fgm::Quaternion::safeDiv
+//  *       returns a zero quaternion.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, SafeDivideByNaN_ReturnsZeroQuaternion)
 // {
@@ -589,8 +549,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by NaN using static variant of @ref fgm::Quaternion::safeDiv
-//  *       returns a zero quattor.
+//  * @brief Verify that dividing a quaternion by NaN using static variant of @ref fgm::Quaternion::safeDiv
+//  *       returns a zero quaternion.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroQuaternion)
 // {
@@ -607,8 +567,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //  **************************************/
 //
 // /**
-//  * @brief Verify that dividing a quattor using @ref fgm::Quaternion::tryDiv perform a component-wise divide and
-//  *       returns a new quattor instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+//  * @brief Verify that dividing a quaternion using @ref fgm::Quaternion::tryDiv perform a component-wise divide and
+//  *       returns a new quaternion instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, TryDivide_ReturnsAInverseScaledQuaternionAndSetsCorrectFlag)
 // {
@@ -616,12 +576,13 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //     const auto result = this->_quat.tryDiv(this->_scalar, flag);
 //
 //     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-//     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+//     EXPECT_QUAT_EQ(this->_expectedScaledVec, result);
 // }
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by integral zero using @ref fgm::Quaternion::tryDiv returns zero quattor and
+//  * @brief Verify that dividing a quaternion by integral zero using @ref fgm::Quaternion::tryDiv returns zero
+//  quaternion and
 //  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, TryDivideByIntegralZero_ReturnsZeroQuaternionAndSetsCorrectFlag)
@@ -635,7 +596,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by floating point zero using @ref fgm::Quaternion::tryDiv returns zero quattor
+//  * @brief Verify that dividing a quaternion by floating point zero using @ref fgm::Quaternion::tryDiv returns zero
+//  quaternion
 //  * and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, TryDivideByFloatZero_ReturnsZeroQuaternionAndSetsCorrectFlag)
@@ -649,7 +611,7 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a NaN quattor by zero using @ref fgm::Quaternion::tryDiv
+//  * @brief Verify that dividing a NaN quaternion by zero using @ref fgm::Quaternion::tryDiv
 //  *       @ref fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::NANOPERAND.
 //  */
 // TEST(QuaternionScalarDivision, TryDivideNaNQuaternionByZero_NaNOperandStatusTakesPrecedence)
@@ -661,7 +623,7 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by NaN using @ref fgm::Quaternion::tryDiv returns a zero quattor and
+//  * @brief Verify that dividing a quaternion by NaN using @ref fgm::Quaternion::tryDiv returns a zero quaternion and
 //  *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, TryDivideByNaN_ReturnsZeroQuaternionAndSetsCorrectFlag)
@@ -675,8 +637,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor using static variant of @ref fgm::Quaternion::tryDiv
-//  *       perform a component-wise divide and returns a new quattor instance and
+//  * @brief Verify that dividing a quaternion using static variant of @ref fgm::Quaternion::tryDiv
+//  *       perform a component-wise divide and returns a new quaternion instance and
 //  *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, StaticWrapper_TryDivide_ReturnsAInverseScaledQuaternionAndSetsCorrectFlag)
@@ -684,14 +646,14 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //     fgm::OperationStatus flag;
 //     const auto result = fgm::Quaternion<TypeParam>::tryDiv(this->_quat, this->_scalar, flag);
 //
-//     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
+//     EXPECT_QUAT_EQ(this->_expectedScaledVec, result);
 //     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 // }
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by integral zero using static variant of @ref fgm::Quaternion::tryDiv
-//  *       returns zero quattor and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+//  * @brief Verify that dividing a quaternion by integral zero using static variant of @ref fgm::Quaternion::tryDiv
+//  *       returns zero quaternion and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroQuaternionAndSetsCorrectFlag)
 // {
@@ -704,8 +666,9 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by floating point zero using static variant of @ref fgm::Quaternion::tryDiv
-//  *       returns zero quattor and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+//  * @brief Verify that dividing a quaternion by floating point zero using static variant of @ref
+//  fgm::Quaternion::tryDiv
+//  *       returns zero quaternion and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, StaticWrapper_TryDivideByFloatZero_ReturnsZeroQuaternionAndSetsCorrectFlag)
 // {
@@ -718,8 +681,9 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by floating point zero using static variant of @ref fgm::Quaternion::tryDiv
-//  *       returns zero quattor and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+//  * @brief Verify that dividing a quaternion by floating point zero using static variant of @ref
+//  fgm::Quaternion::tryDiv
+//  *       returns zero quaternion and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
 //  */
 // TEST(QuaternionScalarDivision, StaticWrapper_TryDivideNaNQuaternion_ReturnsZeroQuaternionAndSetsCorrectFlag)
 // {
@@ -732,8 +696,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a quattor by NaN using static variant of @ref fgm::Quaternion::tryDiv returns zero
-//  quattor
+//  * @brief Verify that dividing a quaternion by NaN using static variant of @ref fgm::Quaternion::tryDiv returns zero
+//  quaternion
 //  * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
 //  */
 // TYPED_TEST(QuaternionScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroQuaternionAndSetsCorrectFlag)
@@ -753,8 +717,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //  **************************************/
 //
 // /**
-//  * @brief Verify that dividing a nan quattor by a scalar using @ref fgm::Quaternion::safeDiv
-//  *       returns quattor with NaN-components as zero.
+//  * @brief Verify that dividing a nan quaternion by a scalar using @ref fgm::Quaternion::safeDiv
+//  *       returns quaternion with NaN-components as zero.
 //  */
 // TEST_P(QuaternionDivisionNaNTests, SafeDiv_ReturnsQuaternionWithNaNComponentsAsZero)
 // {
@@ -763,8 +727,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 // }
 //
 // /**
-//  * @brief Verify that dividing a nan quattor by a scalar using static variant of @ref fgm::Quaternion::safeDiv
-//  *       returns zero quattor.
+//  * @brief Verify that dividing a nan quaternion by a scalar using static variant of @ref fgm::Quaternion::safeDiv
+//  *       returns zero quaternion.
 //  */
 // TEST_P(QuaternionDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsQuaternionWithNaNComponentsAsZero)
 // {
@@ -774,8 +738,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a nan quattor by a scalar using @ref fgm::Quaternion::tryDiv
-//  *       returns zero quattor and sets flag to OperationStatus::NANOPERAND.
+//  * @brief Verify that dividing a nan quaternion by a scalar using @ref fgm::Quaternion::tryDiv
+//  *       returns zero quaternion and sets flag to OperationStatus::NANOPERAND.
 //  */
 // TEST_P(QuaternionDivisionNaNTests, TryDiv_ReturnsQuaternionWithNaNComponentsAsZero)
 // {
@@ -787,8 +751,8 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //
 // /**
-//  * @brief Verify that dividing a nan quattor by a scalar using static variant of @ref fgm::Quaternion::tryDiv
-//  *       returns zero quattor and sets flag to OperationStatus::NANOPERAND.
+//  * @brief Verify that dividing a nan quaternion by a scalar using static variant of @ref fgm::Quaternion::tryDiv
+//  *       returns zero quaternion and sets flag to OperationStatus::NANOPERAND.
 //  */
 // TEST_P(QuaternionDivisionNaNTests, StaticWrapper_TryDiv_ReturnsQuaternionWithNaNComponentsAsZero)
 // {
@@ -809,16 +773,16 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 // /**
 //  * @brief Verify that  @ref fgm::Quaternion unary minus operator inverts each component and
-//  *       returns a new quattor.
+//  *       returns a new quaternion.
 //  */
 // TYPED_TEST(QuaternionNegation, InvertsTheSignOfEachComponents)
 // {
 //     const fgm::Quaternion inverted = -this->_quat;
-//     EXPECT_VEC_EQ(this->_expectedInvertedVec, inverted);
+//     EXPECT_QUAT_EQ(this->_expectedInvertedVec, inverted);
 // }
 //
 //
-// /** @brief Verify that @ref fgm::Quaternion unary minus operator inverts each component of an infinity quattor. */
+// /** @brief Verify that @ref fgm::Quaternion unary minus operator inverts each component of an infinity quaternion. */
 // TEST(QuaternionNegation, InvertsSignOfInfinity)
 // {
 //     const fgm::Quaternion infVec = {
@@ -836,7 +800,7 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
 //
 //     const fgm::Quaternion<float> inverted = -infVec;
 //
-//     EXPECT_VEC_EQ(expected, inverted);
+//     EXPECT_QUAT_EQ(expected, inverted);
 // }
 //
 //
