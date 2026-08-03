@@ -1,4 +1,5 @@
 #pragma once
+#include "common/Types.h"
 /**
  * @file Quaternion.tpp
  * @author Alan Abraham P Kochumon
@@ -143,6 +144,17 @@ namespace fgm
     template <Arithmetic T>
     FGM_INLINE constexpr T Quaternion<T>::getScalarPart() const noexcept
     { return _data[3]; }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+    FGM_INLINE constexpr PromotedQuaternion<T, U> Quaternion<T>::operator+(const Quaternion<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        return Quaternion<R>{ R(_data[0] + rhs.i()), R(_data[1] + rhs.j()), R(_data[2] + rhs.k()),
+                              R(_data[3] + rhs.s()) };
+    }
 
 
 

@@ -46,6 +46,8 @@ namespace fgm
     struct Quaternion
     {
 
+        using value_type = T; /// The numeric type of member variables.
+
 
         /**
          * @addtogroup FGM_Quaternion_Init
@@ -208,6 +210,27 @@ namespace fgm
          * @brief Get the scalar part of this quaternion.
          */
         [[nodiscard]] constexpr T getScalarPart() const noexcept;
+
+        /** @} */
+
+
+        /**
+         * @addtogroup FGM_Quaternion_Arithmetic
+         * @{
+         */
+
+        /**
+         * @brief Compute the component-wise sum of two quaternions.
+         *
+         * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param rhs The quaternion to add.
+         *
+         * @return A new @ref Quaternion with the component-wise sum.
+         */
+        template <StrictArithmetic U>
+        constexpr PromotedQuaternion<T, U> operator+(const Quaternion<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
 
         /** @} */
 

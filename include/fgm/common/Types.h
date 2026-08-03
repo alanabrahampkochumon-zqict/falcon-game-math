@@ -76,6 +76,9 @@ namespace fgm
     template <StrictArithmetic T>
     struct Transform4;
 
+    template <Arithmetic T>
+    struct Quaternion;
+
 
 
     /** @brief Alias for @ref Point2 with promoted value type. */
@@ -222,6 +225,12 @@ namespace fgm
     /** @brief Alias for @ref Mat4 with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
     using PromotedFloatMat4 = Mat4<Magnitude<std::common_type_t<T, U>>>;
+
+
+    /** @brief Alias for @ref Quaternion with promoted value type. */
+    template <Arithmetic T, Arithmetic U>
+        requires Arithmetic<PromotedValue_t<T, U>>
+    using PromotedQuaternion = Quaternion<PromotedValue_t<T, U>>;
 
 
     /** @brief Alias for @ref Transform4 with promoted value type. */

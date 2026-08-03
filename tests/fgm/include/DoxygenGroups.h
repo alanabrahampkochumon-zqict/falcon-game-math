@@ -459,10 +459,7 @@
          * @{
          *   @defgroup T_FGM_Quaternion_Access_Mutate Component Access and Mutation
          *   @defgroup T_FGM_Quaternion_Alias Spatial Aliasing
-         *   @defgroup T_FGM_Quaternion_Addition Addition
-         *   @defgroup T_FGM_Quaternion_Subtraction Subtraction
-         *   @defgroup T_FGM_Quaternion_Multiplication Scalar Multiplication
-         *   @defgroup T_FGM_Quaternion_Division Scalar Division
+         *   @defgroup T_FGM_Quaternion_Arithmetic Arithmetic Operations(+, -, *, /)
          *   @defgroup T_FGM_Quaternion_Bool_Bit Boolean Bitwise Operation
          *   @defgroup T_FGM_Quaternion_GT_Comp Greater Than Comparison
          *   @defgroup T_FGM_Quaternion_GTE_Comp Greater Than or Equal Comparison
