@@ -134,4 +134,16 @@ namespace fgm
     FGM_INLINE constexpr T& Quaternion<T>::s() noexcept
     { return _data[3]; }
 
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Vec3<T> Quaternion<T>::getVectorPart() const noexcept
+    { return Vec3<T>{ _data[0], _data[1], _data[2] }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr T Quaternion<T>::getScalarPart() const noexcept
+    { return _data[3]; }
+
+
+
 } // namespace fgm

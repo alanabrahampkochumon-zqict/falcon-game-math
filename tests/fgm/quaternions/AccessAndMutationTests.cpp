@@ -45,6 +45,12 @@ namespace
         static_assert(QUATERNION.k() == 3);
         static_assert(QUATERNION.s() == 4);
 
+        /// @test Verify that quaternion's getVectorPart returns a valid 3D vector at compile time.
+        static_assert(QUATERNION.getVectorPart() == fgm::Vec3{ 1, 2, 3 });
+
+        /// @test Verify that quaternion's getScalarPart returns the fourth component of the vector at compile time.
+        static_assert(QUATERNION.getScalarPart() == 4);
+
     } // namespace static_tests
 
 } // namespace
@@ -76,6 +82,23 @@ TEST(QuaternionAccess, ComponentsAreAccessibleAsIJKS)
     EXPECT_FLOAT_EQ(2.0f, quat.j());
     EXPECT_FLOAT_EQ(3.0f, quat.k());
     EXPECT_FLOAT_EQ(4.0f, quat.s());
+}
+
+
+TEST(QuaternionAccess, GetVectorPart_ReturnsAValid3DVector)
+{
+    const fgm::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    const auto vectorPart = quat.getVectorPart();
+    EXPECT_FLOAT_EQ(1.0f, vectorPart.x());
+    EXPECT_FLOAT_EQ(2.0f, vectorPart.y());
+    EXPECT_FLOAT_EQ(3.0f, vectorPart.z());
+}
+
+
+TEST(QuaternionAccess, GetScalarPart_ReturnsAScalarComponent)
+{
+    const fgm::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    EXPECT_FLOAT_EQ(4.0f, quat.getScalarPart());
 }
 
 

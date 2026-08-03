@@ -195,6 +195,20 @@ namespace fgm
          */
         [[nodiscard]] constexpr T& s() noexcept;
 
+
+        /**
+         * @brief Get the vector/complex part of this quaternion.
+         *
+         * @return A *new* 3D Vector containing the complex part (i, j, k) of the quaternion.
+         */
+        [[nodiscard]] constexpr Vec3<T> getVectorPart() const noexcept;
+
+
+        /**
+         * @brief Get the scalar part of this quaternion.
+         */
+        [[nodiscard]] constexpr T getScalarPart() const noexcept;
+
         /** @} */
 
     private:
