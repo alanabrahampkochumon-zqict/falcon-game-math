@@ -458,40 +458,6 @@ TEST(QuaternionQuaternionMultiplication, TimesEqualsOperator_MixedType_DoesNotPr
 }
 
 
-// TODO: Move to death tests separate binary
-#ifndef ENABLE_DEBUG_TESTS
-// Release mode behaviour
-
-TEST(QuaternionScalarDivision, FloatQuaternionDivisionByZero_ReturnsInfinityQuaternion_InReleaseMode)
-{
-    const fgm::Quaternion quat(1.0f, 2.0f, 3.0f, 4.0f);
-    EXPECT_QUAT_INF(quat / 0);
-}
-
-
-TEST(QuaternionScalarDivision, DoubleQuaternionDivisionByZero_ReturnsInfinityQuaternion_InReleaseMode)
-{
-    const fgm::Quaternion quat(1.0, 2.0, 3.0, 4.0);
-    EXPECT_QUAT_INF(quat / 0);
-}
-
-#else
-// Debug Mode behaviour
-
-TYPED_TEST(QuaternionScalarDivision, DivideOperator_ByZeroTriggersAssertionInDebugMode)
-{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_quat / TypeParam(0)), ""); }
-
-
-TYPED_TEST(QuaternionScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertionInDebugMode)
-{
-    [[maybe_unused]] fgm::Quaternion newVec = this->_quat;
-    EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= TypeParam(0)), "");
-}
-
-#endif
-
-
-
 TYPED_TEST(QuaternionScalarDivision, ByOneReturnsOriginalQuaternion)
 {
     const fgm::Quaternion result = this->_quat / TypeParam(1);
