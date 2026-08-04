@@ -1465,6 +1465,7 @@ namespace fgm
     { return vec.tryRejectNorm(from, status); }
 
 
+
     /**************************************
      *                                    *
      *             UTILITIES              *

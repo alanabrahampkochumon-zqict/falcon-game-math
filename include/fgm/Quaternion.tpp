@@ -232,6 +232,39 @@ namespace fgm
 
 
     template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedQuaternion<T, U> Quaternion<T>::operator*(const Quaternion<U>& other) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        return Quaternion<R>{
+            R(this->w() * other.x() + this->x() * other.w() + this->y() * other.z() - this->z() * other.y()),
+            R(this->w() * other.y() - this->x() * other.z() + this->y() * other.w() + this->z() * other.x()),
+            R(this->w() * other.z() + this->x() * other.y() - this->y() * other.x() + this->z() * other.w()),
+            R(this->w() * other.w() - this->x() * other.x() - this->y() * other.y() - this->z() * other.z())
+        };
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr Quaternion<T>& Quaternion<T>::operator*=(const Quaternion<U>& other) noexcept
+        requires StrictArithmetic<T>
+    {
+
+        auto intermediate = (*this) * other;
+        // TODO: Update with conversion ctor
+        this->x() = static_cast<T>(intermediate.x());
+        this->y() = static_cast<T>(intermediate.y());
+        this->z() = static_cast<T>(intermediate.z());
+        this->w() = static_cast<T>(intermediate.w());
+        return *this;
+    }
+
+
+    template <Arithmetic T>
     template <StrictArithmetic S>
         requires StrictSignedness<T, S>
     FGM_INLINE constexpr PromotedQuaternion<T, S> Quaternion<T>::operator/(S scalar) const noexcept

@@ -310,6 +310,36 @@ namespace fgm
 
 
         /**
+         * @brief Compute the product of this quaternion with @p other quaternion.
+         *
+         * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] other The quaternion to multiply.
+         *
+         * @return A new @ref Quaternion scaled by @p scalar.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr PromotedQuaternion<T, U> operator*(const Quaternion<U>& other) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the product of this quaternion with @p other quaternion in-place.
+         *
+         * @tparam U The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] other The quaternion to multiply.
+         *
+         * @return A reference to this quaternion (*this).
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        constexpr Quaternion& operator*=(const Quaternion<U>& other) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
          * @brief Divide this quaternion by @p scalar component-wise.
          *
          * @tparam S The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.

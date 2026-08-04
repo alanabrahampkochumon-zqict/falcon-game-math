@@ -81,19 +81,43 @@ namespace
     protected:
         fgm::Quaternion<T> _quat;
         T _scalar;
-        fgm::Quaternion<T> _expectedFloatingVec;
-        fgm::Quaternion<T> _expectedIntegralVec;
+        fgm::Quaternion<T> _expectedFPQuat;
+        fgm::Quaternion<T> _expectedIntQuat;
 
         void SetUp() override
         {
-            _quat                = { T(7), T(13), T(29), T(41) };
-            _scalar              = T(2.123456789123456);
-            _expectedFloatingVec = { T(14.864197523864192), T(27.604938258604928), T(61.580246884580224),
-                                     T(87.061728354061696) };
-            _expectedIntegralVec = { T(14), T(26), T(58), T(82) };
+            _quat            = { T(7), T(13), T(29), T(41) };
+            _scalar          = T(2.123456789123456);
+            _expectedFPQuat  = { T(14.864197523864192), T(27.604938258604928), T(61.580246884580224),
+                                 T(87.061728354061696) };
+            _expectedIntQuat = { T(14), T(26), T(58), T(82) };
         }
     };
     TYPED_TEST_SUITE(QuaternionScalarMultiplication, SupportedArithmeticTypes);
+
+
+    /**
+     * @brief Test fixture for verifying quaternion multiplication with another quaternion
+     *        across different scalar types.
+     *
+     * @tparam T The scalar type (int32_t, float, double...) for the quaternion values.
+     */
+    template <typename T>
+    class QuaternionQuaternionMultiplication: public testing::Test
+    {
+    protected:
+        fgm::Quaternion<T> _quatA, _quatB, _expectedFPQuat, _expectedIntQuat;
+
+        void SetUp() override
+        {
+            _quatA           = { T(1.2343241213), T(2.12343214423), T(3.2134324), T(4.123423414) };
+            _quatB           = { T(4.29012340), T(2.012384023), T(5.75012034), T(2.41012384023) };
+            _expectedFPQuat  = fgm::Quaternion{ T(26.40819961022155127), T(20.10415512983554720),
+                                               T(24.82909909011548422), T(-18.10822564795768841) };
+            _expectedIntQuat = { T(22), T(19), T(20), T(-15) };
+        }
+    };
+    TYPED_TEST_SUITE(QuaternionQuaternionMultiplication, SupportedSignedArithmeticTypes);
 
 
     /**
@@ -186,6 +210,14 @@ namespace
         static_assert(NEG_QUAT.j() == -12);
         static_assert(NEG_QUAT.k() == -3);
         static_assert(NEG_QUAT.s() == -4);
+
+
+        /// @test Verify that quaternion-quaternion multiplication returns a valid quaternion at compile time.
+        constexpr auto QUAT_QUAT_MUL = QUAT_A * QUAT_B;
+        static_assert(QUAT_QUAT_MUL.i() == -79);
+        static_assert(QUAT_QUAT_MUL.j() == 94);
+        static_assert(QUAT_QUAT_MUL.k() == -83);
+        static_assert(QUAT_QUAT_MUL.s() == -112);
 
     } // namespace static_tests
 
@@ -301,11 +333,11 @@ TYPED_TEST(QuaternionScalarMultiplication, QuaternionTimesScalarReturnsScaledQua
 
     if (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_QUAT_EQ(this->_expectedFloatingVec, result);
+        EXPECT_QUAT_EQ(this->_expectedFPQuat, result);
     }
     else
     {
-        EXPECT_QUAT_EQ(this->_expectedIntegralVec, result);
+        EXPECT_QUAT_EQ(this->_expectedIntQuat, result);
     }
 }
 
@@ -316,11 +348,11 @@ TYPED_TEST(QuaternionScalarMultiplication, ScalarTimesAQuaternionReturnsScaledQu
 
     if (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_QUAT_EQ(this->_expectedFloatingVec, result);
+        EXPECT_QUAT_EQ(this->_expectedFPQuat, result);
     }
     else
     {
-        EXPECT_QUAT_EQ(this->_expectedIntegralVec, result);
+        EXPECT_QUAT_EQ(this->_expectedIntQuat, result);
     }
 }
 
@@ -331,11 +363,11 @@ TYPED_TEST(QuaternionScalarMultiplication, QuaternionTimesEqualScalarIsTheSameQu
 
     if (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_QUAT_EQ(this->_expectedFloatingVec, this->_quat);
+        EXPECT_QUAT_EQ(this->_expectedFPQuat, this->_quat);
     }
     else
     {
-        EXPECT_QUAT_EQ(this->_expectedIntegralVec, this->_quat);
+        EXPECT_QUAT_EQ(this->_expectedIntQuat, this->_quat);
     }
 }
 
@@ -371,6 +403,58 @@ TEST(QuaternionScalarMultiplication, MixedTypeScalarMultiplicationAssignment_Ens
     quat *= scalar;
 
     EXPECT_QUAT_EQ(expected, quat);
+}
+
+
+TYPED_TEST(QuaternionQuaternionMultiplication, TimesOperator_ReturnsAValidQuaternion)
+{
+    const fgm::Quaternion result = this->_quatA * this->_quatB;
+
+    if (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_QUAT_EQ(this->_expectedFPQuat, result);
+    }
+    else
+    {
+        EXPECT_QUAT_EQ(this->_expectedIntQuat, result);
+    }
+}
+
+
+TYPED_TEST(QuaternionQuaternionMultiplication, TimesEqualsOperator_ReturnsTheSameQuaternionWithUpdatedComponents)
+{
+    this->_quatA *= this->_quatB;
+
+    if (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_QUAT_EQ(this->_expectedFPQuat, this->_quatA);
+    }
+    else
+    {
+        EXPECT_QUAT_EQ(this->_expectedIntQuat, this->_quatA);
+    }
+}
+
+
+
+TEST(QuaternionQuaternionMultiplication, TimesOperator_MixedType_PromotesType)
+{
+    fgm::Quaternion quatA(3.0f, 0.0f, -1.0f, 2.0f);
+    const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
+
+    [[maybe_unused]] const auto result = quatA * quatB;
+
+    static_assert(std::is_same_v<typename decltype(result)::value_type, double>);
+}
+
+
+TEST(QuaternionQuaternionMultiplication, TimesEqualsOperator_MixedType_DoesNotPromoteType)
+{
+    fgm::Quaternion quatA(3.0f, 0.0f, -1.0f, 2.0f);
+    const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
+    quatA *= quatB;
+
+    static_assert(std::is_same_v<decltype(quatA)::value_type, float>);
 }
 
 
