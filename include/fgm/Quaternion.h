@@ -94,6 +94,17 @@ namespace fgm
          */
         [[nodiscard]] constexpr Quaternion(T real, const Vec3<T>& complex) noexcept;
 
+
+        /**
+         * @brief Initialize @ref Quaternion from another @ref Quaternion of a different type.
+         *
+         * @tparam U Numeric type of the source quaternion.
+         *
+         * @param[in] other The source quaternion to be converted.
+         */
+        template <Arithmetic U>
+        [[nodiscard]] explicit constexpr Quaternion(const Quaternion<U>& other) noexcept;
+
         /** @} */
 
 

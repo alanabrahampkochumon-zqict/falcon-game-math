@@ -49,6 +49,17 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <Arithmetic U>
+    FGM_INLINE constexpr Quaternion<T>::Quaternion(const Quaternion<U>& other) noexcept
+    {
+        this->x() = static_cast<T>(other.x());
+        this->y() = static_cast<T>(other.y());
+        this->z() = static_cast<T>(other.z());
+        this->w() = static_cast<T>(other.w());
+    }
+
+
 
     /**************************************
      *                                    *

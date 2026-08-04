@@ -3,6 +3,7 @@ add_executable(FGMQuaternionsTests
         ArithmeticOperationTests.cpp
         AccessAndMutationTests.cpp
         InitializationTests.cpp
+        TypeConversionTests.cpp
         UtilityTests.cpp
 
         # Headers
