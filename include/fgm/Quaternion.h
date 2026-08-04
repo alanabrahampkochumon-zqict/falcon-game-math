@@ -338,6 +338,17 @@ namespace fgm
         constexpr Quaternion& operator/=(S scalar) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Negate each component of this quaternion and return a new @ref Quaternion<T>.
+         *
+         * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A new @ref fgm::Quaternion with negated components.
+         */
+        [[nodiscard]] constexpr Quaternion operator-() const noexcept
+            requires SignedStrictArithmetic<T>;
+
         /** @} */
 
     private:

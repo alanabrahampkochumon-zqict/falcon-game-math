@@ -290,4 +290,10 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    FGM_INLINE constexpr Quaternion<T> Quaternion<T>::operator-() const noexcept
+        requires SignedStrictArithmetic<T>
+    { return Quaternion{ T(-_data[0]), T(-_data[1]), T(-_data[2]), T(-_data[3]) }; }
+
+
 } // namespace fgm

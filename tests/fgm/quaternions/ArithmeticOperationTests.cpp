@@ -120,25 +120,24 @@ namespace
     TYPED_TEST_SUITE(QuaternionScalarDivision, SupportedArithmeticTypes);
 
 
-    // /**
-    //  * @brief Test fixture for verifying quaternion negation across different scalar types.
-    //  *
-    //  * @tparam T The scalar type (uint32_t, float, double...) for the quaternion values.
-    //  */
-    // template <typename T>
-    // class QuaternionNegation: public testing::Test
-    // {
-    // protected:
-    //     fgm::Quaternion<T> _quat;
-    //     fgm::Quaternion<T> _expectedInvertedVec;
-    //
-    //     void SetUp() override
-    //     {
-    //         _quat                 = { T(-8), T(0), T(-2), T(5) };
-    //         _expectedInvertedVec = { T(8), T(0), T(2), T(-5) };
-    //     }
-    // };
-    // TYPED_TEST_SUITE(QuaternionNegation, SupportedSignedArithmeticTypes);
+    /**
+     * @brief Test fixture for verifying quaternion negation across different scalar types.
+     *
+     * @tparam T The scalar type (uint32_t, float, double...) for the quaternion values.
+     */
+    template <typename T>
+    class QuaternionNegation: public testing::Test
+    {
+    protected:
+        fgm::Quaternion<T> _quat, _expectedQuat;
+
+        void SetUp() override
+        {
+            _quat         = fgm::Quaternion<T>{ T(-8), T(0), T(-2), T(5) };
+            _expectedQuat = fgm::Quaternion<T>{ T(8), T(0), T(2), T(-5) };
+        }
+    };
+    TYPED_TEST_SUITE(QuaternionNegation, SupportedSignedArithmeticTypes);
 
 
     /**************************************
@@ -179,6 +178,14 @@ namespace
         static_assert(QUAT_SCALAR_PROD_QUAT.j() == 24);
         static_assert(QUAT_SCALAR_PROD_QUAT.k() == 6);
         static_assert(QUAT_SCALAR_PROD_QUAT.s() == 8);
+
+
+        /// @test Verify that quaternion negation returns a new Quaternion with negated components at compile-time.
+        constexpr auto NEG_QUAT = -QUAT_A;
+        static_assert(NEG_QUAT.i() == 1);
+        static_assert(NEG_QUAT.j() == -12);
+        static_assert(NEG_QUAT.k() == -3);
+        static_assert(NEG_QUAT.s() == -4);
 
     } // namespace static_tests
 
@@ -459,367 +466,49 @@ TEST(QuaternionScalarDivision, DivideEqualsOperator_MixedType_ReturnsResultWithM
 }
 
 
+TYPED_TEST(QuaternionNegation, InvertsTheSignOfEachComponents)
+{
+    const fgm::Quaternion inverted = -this->_quat;
+    EXPECT_QUAT_EQ(this->_expectedQuat, inverted);
+}
 
 
+TEST(QuaternionNegation, InvertsSignOfInfinity)
+{
+    const fgm::Quaternion infQuat = {
+        fgm::constants::INFINITY_F,
+        -fgm::constants::INFINITY_F,
+        fgm::constants::INFINITY_F,
+        -fgm::constants::INFINITY_F,
+    };
+    const fgm::Quaternion expected = {
+        -fgm::constants::INFINITY_F,
+        fgm::constants::INFINITY_F,
+        -fgm::constants::INFINITY_F,
+        fgm::constants::INFINITY_F,
+    };
+
+    const fgm::Quaternion<float> inverted = -infQuat;
+
+    EXPECT_QUAT_EQ(expected, inverted);
+}
 
 
-// /**************************************
-//  *                                    *
-//  *        SAFE DIVISION TESTS         *
-//  *                                    *
-//  **************************************/
-//
-// /**
-//  * @brief Verify that dividing a quaternion using @ref fgm::Quaternion::safeDiv perform a component-wise divide and
-//  *       returns a new quaternion instance.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, SafeDivide_ReturnsAInverseScaledQuaternion)
-// {
-//     const auto result = this->_quat.safeDiv(this->_scalar);
-//
-//     EXPECT_QUAT_EQ(this->_expectedScaledVec, result);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by integral zero using @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quaternion instance.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, SafeDivideByIntegralZero_ReturnsZeroQuaternion)
-// {
-//     const auto result = this->_quat.safeDiv(0);
-//     EXPECT_VEC_ZERO(result);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by floating point zero using @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quaternion instance.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, SafeDivideByFloatZero_ReturnsZeroQuaternion)
-// {
-//     const auto result = this->_quat.safeDiv(0.0f);
-//     EXPECT_VEC_ZERO(result);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion using static variant of @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quaternion instance.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScaledQuaternion)
-// {
-//     const auto result = fgm::Quaternion<TypeParam>::safeDiv(this->_quat, this->_scalar);
-//     EXPECT_QUAT_EQ(this->_expectedScaledVec, result);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by integral zero using static variant of @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quaternion instance.
-//  */
-// TEST(QuaternionScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroQuaternion)
-// {
-//     const fgm::Quaternion quat(1, 2, 3, 4);
-//     EXPECT_VEC_ZERO(fgm::Quaternion<int>::safeDiv(quat, 0));
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by floating point zero using static variant @ref fgm::Quaternion::safeDiv
-//  *       perform a component-wise divide and returns a new quaternion instance.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZeroQuaternion)
-// {
-//     const auto result = fgm::Quaternion<TypeParam>::safeDiv(this->_quat, 0.0f);
-//     EXPECT_VEC_ZERO(result);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by NaN using @ref fgm::Quaternion::safeDiv
-//  *       returns a zero quaternion.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, SafeDivideByNaN_ReturnsZeroQuaternion)
-// {
-//     const auto result = this->_quat.safeDiv(fgm::constants::NaN);
-//
-//     EXPECT_VEC_ZERO(result);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by NaN using static variant of @ref fgm::Quaternion::safeDiv
-//  *       returns a zero quaternion.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroQuaternion)
-// {
-//     const auto result = fgm::Quaternion<TypeParam>::safeDiv(this->_quat, fgm::constants::INFINITY_F);
-//
-//     EXPECT_VEC_ZERO(result);
-// }
-//
-//
-// /**************************************
-//  *                                    *
-//  *         TRY DIVISION TESTS         *
-//  *                                    *
-//  **************************************/
-//
-// /**
-//  * @brief Verify that dividing a quaternion using @ref fgm::Quaternion::tryDiv perform a component-wise divide and
-//  *       returns a new quaternion instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, TryDivide_ReturnsAInverseScaledQuaternionAndSetsCorrectFlag)
-// {
-//     fgm::OperationStatus flag;
-//     const auto result = this->_quat.tryDiv(this->_scalar, flag);
-//
-//     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-//     EXPECT_QUAT_EQ(this->_expectedScaledVec, result);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by integral zero using @ref fgm::Quaternion::tryDiv returns zero
-//  quaternion and
-//  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, TryDivideByIntegralZero_ReturnsZeroQuaternionAndSetsCorrectFlag)
-// {
-//     fgm::OperationStatus flag;
-//     const auto result = this->_quat.tryDiv(0, flag);
-//
-//     EXPECT_VEC_ZERO(result);
-//     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by floating point zero using @ref fgm::Quaternion::tryDiv returns zero
-//  quaternion
-//  * and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, TryDivideByFloatZero_ReturnsZeroQuaternionAndSetsCorrectFlag)
-// {
-//     fgm::OperationStatus flag;
-//     const auto result = this->_quat.tryDiv(0.0, flag);
-//
-//     EXPECT_VEC_ZERO(result);
-//     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a NaN quaternion by zero using @ref fgm::Quaternion::tryDiv
-//  *       @ref fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::NANOPERAND.
-//  */
-// TEST(QuaternionScalarDivision, TryDivideNaNQuaternionByZero_NaNOperandStatusTakesPrecedence)
-// {
-//     fgm::OperationStatus flag;
-//     [[maybe_unused]] const auto result = fgm::Quaternion<double>::qnan().tryDiv(0, flag);
-//     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by NaN using @ref fgm::Quaternion::tryDiv returns a zero quaternion and
-//  *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, TryDivideByNaN_ReturnsZeroQuaternionAndSetsCorrectFlag)
-// {
-//     fgm::OperationStatus flag;
-//     const auto result = this->_quat.tryDiv(fgm::constants::NaN, flag);
-//
-//     EXPECT_VEC_ZERO(result);
-//     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion using static variant of @ref fgm::Quaternion::tryDiv
-//  *       perform a component-wise divide and returns a new quaternion instance and
-//  *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, StaticWrapper_TryDivide_ReturnsAInverseScaledQuaternionAndSetsCorrectFlag)
-// {
-//     fgm::OperationStatus flag;
-//     const auto result = fgm::Quaternion<TypeParam>::tryDiv(this->_quat, this->_scalar, flag);
-//
-//     EXPECT_QUAT_EQ(this->_expectedScaledVec, result);
-//     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by integral zero using static variant of @ref fgm::Quaternion::tryDiv
-//  *       returns zero quaternion and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroQuaternionAndSetsCorrectFlag)
-// {
-//     fgm::OperationStatus flag;
-//     const auto result = fgm::Quaternion<TypeParam>::tryDiv(this->_quat, 0, flag);
-//
-//     EXPECT_VEC_ZERO(result);
-//     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by floating point zero using static variant of @ref
-//  fgm::Quaternion::tryDiv
-//  *       returns zero quaternion and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, StaticWrapper_TryDivideByFloatZero_ReturnsZeroQuaternionAndSetsCorrectFlag)
-// {
-//     fgm::OperationStatus flag;
-//     const auto result = fgm::Quaternion<TypeParam>::tryDiv(this->_quat, 0.0, flag);
-//
-//     EXPECT_VEC_ZERO(result);
-//     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by floating point zero using static variant of @ref
-//  fgm::Quaternion::tryDiv
-//  *       returns zero quaternion and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-//  */
-// TEST(QuaternionScalarDivision, StaticWrapper_TryDivideNaNQuaternion_ReturnsZeroQuaternionAndSetsCorrectFlag)
-// {
-//     fgm::OperationStatus flag;
-//     const auto result = fgm::Quaternion<double>::tryDiv(fgm::Quaternion<double>::qnan(), 3, flag);
-//
-//     EXPECT_VEC_ZERO(result);
-//     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a quaternion by NaN using static variant of @ref fgm::Quaternion::tryDiv returns zero
-//  quaternion
-//  * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
-//  */
-// TYPED_TEST(QuaternionScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroQuaternionAndSetsCorrectFlag)
-// {
-//     fgm::OperationStatus flag;
-//     const auto result = fgm::Quaternion<TypeParam>::tryDiv(this->_quat, fgm::constants::NaN, flag);
-//
-//     EXPECT_VEC_ZERO(result);
-//     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-// }
-//
-//
-// /**************************************
-//  *                                    *
-//  *         NaN DIVISION TESTS         *
-//  *                                    *
-//  **************************************/
-//
-// /**
-//  * @brief Verify that dividing a nan quaternion by a scalar using @ref fgm::Quaternion::safeDiv
-//  *       returns quaternion with NaN-components as zero.
-//  */
-// TEST_P(QuaternionDivisionNaNTests, SafeDiv_ReturnsQuaternionWithNaNComponentsAsZero)
-// {
-//     const auto& quat = GetParam();
-//     EXPECT_VEC_ZERO(quat.safeDiv(3));
-// }
-//
-// /**
-//  * @brief Verify that dividing a nan quaternion by a scalar using static variant of @ref fgm::Quaternion::safeDiv
-//  *       returns zero quaternion.
-//  */
-// TEST_P(QuaternionDivisionNaNTests, StaticWrapper_SafeDiv_ReturnsQuaternionWithNaNComponentsAsZero)
-// {
-//     const auto& quat = GetParam();
-//     EXPECT_VEC_ZERO(fgm::Quaternion<float>::safeDiv(quat, 3));
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a nan quaternion by a scalar using @ref fgm::Quaternion::tryDiv
-//  *       returns zero quaternion and sets flag to OperationStatus::NANOPERAND.
-//  */
-// TEST_P(QuaternionDivisionNaNTests, TryDiv_ReturnsQuaternionWithNaNComponentsAsZero)
-// {
-//     const auto& quat = GetParam();
-//     fgm::OperationStatus flag;
-//     EXPECT_VEC_ZERO(quat.tryDiv(3, flag));
-//     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-// }
-//
-//
-// /**
-//  * @brief Verify that dividing a nan quaternion by a scalar using static variant of @ref fgm::Quaternion::tryDiv
-//  *       returns zero quaternion and sets flag to OperationStatus::NANOPERAND.
-//  */
-// TEST_P(QuaternionDivisionNaNTests, StaticWrapper_TryDiv_ReturnsQuaternionWithNaNComponentsAsZero)
-// {
-//     const auto& quat = GetParam();
-//     fgm::OperationStatus flag;
-//     EXPECT_VEC_ZERO(fgm::Quaternion<float>::tryDiv(quat, 3, flag));
-//     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
-// }
-//
-// /** @} */
-//
-//
-//
-// /**
-//  * @addtogroup T_FGM_Quaternion_Negation
-//  * @{
-//  */
-//
-// /**
-//  * @brief Verify that  @ref fgm::Quaternion unary minus operator inverts each component and
-//  *       returns a new quaternion.
-//  */
-// TYPED_TEST(QuaternionNegation, InvertsTheSignOfEachComponents)
-// {
-//     const fgm::Quaternion inverted = -this->_quat;
-//     EXPECT_QUAT_EQ(this->_expectedInvertedVec, inverted);
-// }
-//
-//
-// /** @brief Verify that @ref fgm::Quaternion unary minus operator inverts each component of an infinity quaternion. */
-// TEST(QuaternionNegation, InvertsSignOfInfinity)
-// {
-//     const fgm::Quaternion infVec = {
-//         fgm::constants::INFINITY_F,
-//         -fgm::constants::INFINITY_F,
-//         fgm::constants::INFINITY_F,
-//         -fgm::constants::INFINITY_F,
-//     };
-//     const fgm::Quaternion expected = {
-//         -fgm::constants::INFINITY_F,
-//         fgm::constants::INFINITY_F,
-//         -fgm::constants::INFINITY_F,
-//         fgm::constants::INFINITY_F,
-//     };
-//
-//     const fgm::Quaternion<float> inverted = -infVec;
-//
-//     EXPECT_QUAT_EQ(expected, inverted);
-// }
-//
-//
-// /** @brief Verify that @ref fgm::Quaternion unary minus follows IEEE 754 rules for NaN. */
-// TEST(QuaternionNegation, NoOpOnNaNQuaternions)
-// {
-//     const fgm::Quaternion nanVec = {
-//         fgm::constants::NaN,
-//         fgm::constants::NaN,
-//         fgm::constants::NaN,
-//         fgm::constants::NaN,
-//     };
-//
-//     const fgm::Quaternion<float> inverted = -nanVec;
-//
-//     EXPECT_TRUE(std::isnan(inverted.x()));
-//     EXPECT_TRUE(std::isnan(inverted.y()));
-//     EXPECT_TRUE(std::isnan(inverted.z()));
-//     EXPECT_TRUE(std::isnan(inverted.w()));
-// }
+TEST(QuaternionNegation, NoOpOnNaNQuaternions)
+{
+    const fgm::Quaternion nanQuat = {
+        fgm::constants::NaN,
+        fgm::constants::NaN,
+        fgm::constants::NaN,
+        fgm::constants::NaN,
+    };
+
+    const fgm::Quaternion<float> inverted = -nanQuat;
+
+    EXPECT_TRUE(std::isnan(inverted.x()));
+    EXPECT_TRUE(std::isnan(inverted.y()));
+    EXPECT_TRUE(std::isnan(inverted.z()));
+    EXPECT_TRUE(std::isnan(inverted.w()));
+}
 
 /** @} */
