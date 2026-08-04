@@ -12,6 +12,8 @@
 #include "../include/QuaternionTestSetup.h"
 
 
+#ifdef ENABLE_DEBUG_TESTS
+
 namespace
 {
     /**
@@ -46,7 +48,6 @@ namespace
 
 
 
-#ifdef ENABLE_DEBUG_TESTS
 
 // Debug Mode behaviour
 

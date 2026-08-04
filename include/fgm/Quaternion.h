@@ -402,6 +402,18 @@ namespace fgm
         constexpr Quaternion& operator*=(const Quaternion<U>& other) noexcept
             requires StrictArithmetic<T>;
 
+
+        // /**
+        //  * @brief Compute the conjugate of this quaternion.
+        //  *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$ // TODO: Update Formula
+        //  *
+        //  * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
+        //  *
+        //  * @return A new @ref fgm::Quaternion with negated components.
+        //  */
+        // [[nodiscard]] constexpr Quaternion operator-() const noexcept
+        //     requires SignedStrictArithmetic<T>;
+
         /** @} */
 
 
