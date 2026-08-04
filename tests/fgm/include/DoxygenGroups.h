@@ -460,6 +460,9 @@
          *   @defgroup T_FGM_Quaternion_Access_Mutate Component Access and Mutation
          *   @defgroup T_FGM_Quaternion_Alias Spatial Aliasing
          *   @defgroup T_FGM_Quaternion_Arithmetic Arithmetic Operations(+, -, *, /)
+         *   @defgroup T_FGM_Quaternion_Algebra Quaternion Algebra
+         *   @defgroup T_FGM_Quaternion_Calculus Quaternion Calculus(Analysis)
+         *   @defgroup T_FGM_Quaternion_Vector_Algebra Quaternion-Vector Algebra
          *   @defgroup T_FGM_Quaternion_Bool_Bit Boolean Bitwise Operation
          *   @defgroup T_FGM_Quaternion_GT_Comp Greater Than Comparison
          *   @defgroup T_FGM_Quaternion_GTE_Comp Greater Than or Equal Comparison

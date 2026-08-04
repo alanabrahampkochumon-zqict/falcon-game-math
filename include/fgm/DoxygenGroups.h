@@ -350,6 +350,9 @@
         *   @defgroup FGM_Quaternion_Init Constructors
         *   @defgroup FGM_Quaternion_Access Accessors
         *   @defgroup FGM_Quaternion_Arithmetic Arithmetic Operations
+        *   @defgroup FGM_Quaternion_Algebra Quaternion Algebra
+        *   @defgroup FGM_Quaternion_Calculus Quaternion Calculus(Analysis)
+        *   @defgroup FGM_Quaternion_Vector_Algebra Quaternion-Vector Algebra
         *   @defgroup FGM_Quaternion_Equality Equality
         *   @defgroup FGM_Quaternion_Comparison Comparisons
         *   @defgroup FGM_Quaternion_Product Geometric Products
