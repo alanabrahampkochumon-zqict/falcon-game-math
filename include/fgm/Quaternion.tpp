@@ -265,12 +265,10 @@ namespace fgm
         requires StrictArithmetic<T>
     {
 
+        // We need an intermediate since every quaternion components participate
+        // in determining each component of result.
         auto intermediate = (*this) * other;
-        // TODO: Update with conversion ctor
-        this->x() = static_cast<T>(intermediate.x());
-        this->y() = static_cast<T>(intermediate.y());
-        this->z() = static_cast<T>(intermediate.z());
-        this->w() = static_cast<T>(intermediate.w());
+        *this             = static_cast<Quaternion<T>>(intermediate);
         return *this;
     }
 
@@ -309,7 +307,6 @@ namespace fgm
     {
         using R = PromotedValue_t<T, S>;
 
-
         if constexpr (std::is_floating_point_v<R>)
         {
             FGM_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
@@ -338,6 +335,7 @@ namespace fgm
     FGM_INLINE constexpr Quaternion<T> Quaternion<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
     { return Quaternion{ T(-_data[0]), T(-_data[1]), T(-_data[2]), T(-_data[3]) }; }
+
 
 
     /**************************************
