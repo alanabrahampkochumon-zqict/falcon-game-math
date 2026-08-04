@@ -380,6 +380,28 @@ namespace fgm
          */
         [[nodiscard]] static constexpr bool hasInf(const Quaternion& quat) noexcept;
 
+
+        /**
+         * @brief Check if any component of this quaternion is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @return True if at least one component is NaN.
+         */
+        [[nodiscard]] constexpr bool hasNaN() const noexcept;
+
+
+        /**
+         * @brief Check if any component of this quaternion is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @param[in] quat The quaternion to evaluate for NaN components.
+         *
+         * @return True if at least one component is NaN.
+         */
+        [[nodiscard]] static constexpr bool hasNaN(const Quaternion& quat) noexcept;
+
         /** @} */
 
     private:

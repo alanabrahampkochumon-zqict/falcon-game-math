@@ -94,18 +94,21 @@ namespace
         static_assert(NORMAL_QUATERNION.hasInf() == false);
         static_assert(INF_QUATERNION.hasInf() == true);
         static_assert(NAN_QUATERNION.hasInf() == false);
-        //
-        // static_assert(fgm::Quaternion<float>::hasInf(normVec) == false);
-        // static_assert(fgm::Quaternion<float>::hasInf(infVec) == true);
-        // static_assert(fgm::Quaternion<float>::hasInf(nanVec) == false);
-        //
-        // static_assert(normVec.hasNaN() == false);
-        // static_assert(infVec.hasNaN() == false);
-        // static_assert(nanVec.hasNaN() == true);
-        //
-        // static_assert(fgm::Quaternion<float>::hasNaN(normVec) == false);
-        // static_assert(fgm::Quaternion<float>::hasNaN(infVec) == false);
-        // static_assert(fgm::Quaternion<float>::hasNaN(nanVec) == true);
+
+        /// @test Verify that quaternion hasInf(static variant) return correct boolean at compile time.
+        static_assert(fgm::Quaternion<float>::hasInf(NORMAL_QUATERNION) == false);
+        static_assert(fgm::Quaternion<float>::hasInf(INF_QUATERNION) == true);
+        static_assert(fgm::Quaternion<float>::hasInf(NAN_QUATERNION) == false);
+
+        /// @test Verify that quaternion hasNaN return correct boolean at compile time.
+        static_assert(NORMAL_QUATERNION.hasNaN() == false);
+        static_assert(INF_QUATERNION.hasNaN() == false);
+        static_assert(NAN_QUATERNION.hasNaN() == true);
+
+        /// @test Verify that quaternion hasNaN(static variant) return correct boolean at compile time.
+        static_assert(fgm::Quaternion<float>::hasNaN(NORMAL_QUATERNION) == false);
+        static_assert(fgm::Quaternion<float>::hasNaN(INF_QUATERNION) == false);
+        static_assert(fgm::Quaternion<float>::hasNaN(NAN_QUATERNION) == true);
 
     } // namespace static_tests
 
@@ -146,47 +149,36 @@ TYPED_TEST(QuaternionIntegralUtilityTests, StaticWrapper_HasInf_ReturnsFalseForI
     EXPECT_FALSE(fgm::Quaternion<TypeParam>::hasInf(fgm::Quaternion(value, value, value, value)));
 }
 
-//
-// /**************************************
-//  *         NAN CHECKER TESTS          *
-//  **************************************/
-//
-// /**
-//  * @brief Verify that @ref std::Quaternion::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
-//  *       and False otherwise.
-//  */
-// TEST_P(QuaternionNaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
-// {
-//     const auto& [vec, expected] = GetParam();
-//     EXPECT_EQ(expected, vec.hasNaN());
-// }
-//
-//
-//
-// /** @brief Verify that @ref std::Quaternion::hasNaN returns False for integral types. */
-// TYPED_TEST(QuaternionIntegralUtilityTests, HasNaN_ReturnsFalseForIntegrals)
-// {
-//     const auto value = TypeParam(1);
-//     EXPECT_FALSE(fgm::Quaternion(value, value, value, value).hasNaN());
-// }
-//
-//
-// /**
-//  * @brief Verify that the static variant of @ref std::Quaternion::hasNaN returns True if any of components are IEE754
-//  *       NaN(Not-a-Number) and False otherwise.
-//  */
-// TEST_P(QuaternionNaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
-// {
-//     const auto& [vec, expected] = GetParam();
-//     EXPECT_EQ(expected, fgm::Quaternion<float>::hasNaN(vec));
-// }
-//
-//
-// /** @brief Verify that the static variant of @ref std::Quaternion::hasNaN returns False for integral types. */
-// TYPED_TEST(QuaternionIntegralUtilityTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
-// {
-//     const auto value = TypeParam(1);
-//     EXPECT_FALSE(fgm::Quaternion<TypeParam>::hasNaN(fgm::Quaternion(value, value, value, value)));
-// }
+
+/**************************************
+ *         NAN CHECKER TESTS          *
+ **************************************/
+
+TEST_P(QuaternionNaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
+{
+    const auto& [vec, expected] = GetParam();
+    EXPECT_EQ(expected, vec.hasNaN());
+}
+
+
+TYPED_TEST(QuaternionIntegralUtilityTests, HasNaN_ReturnsFalseForIntegrals)
+{
+    const auto value = TypeParam(1);
+    EXPECT_FALSE(fgm::Quaternion(value, value, value, value).hasNaN());
+}
+
+
+TEST_P(QuaternionNaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
+{
+    const auto& [vec, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Quaternion<float>::hasNaN(vec));
+}
+
+
+TYPED_TEST(QuaternionIntegralUtilityTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
+{
+    const auto value = TypeParam(1);
+    EXPECT_FALSE(fgm::Quaternion<TypeParam>::hasNaN(fgm::Quaternion(value, value, value, value)));
+}
 
 /** @} */

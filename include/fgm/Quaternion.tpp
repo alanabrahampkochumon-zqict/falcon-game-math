@@ -304,12 +304,40 @@ namespace fgm
 
     template <Arithmetic T>
     FGM_INLINE constexpr bool Quaternion<T>::hasInf() const noexcept
-    { return fgm::isinf(_data[0]) || fgm::isinf(_data[1]) || fgm::isinf(_data[2]) || fgm::isinf(_data[3]); }
+    {
+        if constexpr (std::is_floating_point_v<T>)
+        {
+            return fgm::isinf(_data[0]) || fgm::isinf(_data[1]) || fgm::isinf(_data[2]) || fgm::isinf(_data[3]);
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
     template <Arithmetic T>
     FGM_INLINE constexpr bool Quaternion<T>::hasInf(const Quaternion& quat) noexcept
     { return quat.hasInf(); }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr bool Quaternion<T>::hasNaN() const noexcept
+    {
+        if constexpr (std::is_floating_point_v<T>)
+        {
+            return fgm::isnan(_data[0]) || fgm::isnan(_data[1]) || fgm::isnan(_data[2]) || fgm::isnan(_data[3]);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr bool Quaternion<T>::hasNaN(const Quaternion& quat) noexcept
+    { return quat.hasNaN(); }
 
 
 } // namespace fgm

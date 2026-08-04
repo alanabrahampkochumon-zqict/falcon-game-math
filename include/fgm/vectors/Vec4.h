@@ -2215,7 +2215,7 @@ namespace fgm
          *
          * @note Always return false for integral types.
          *
-         * @param[in] vec The vector to evaluate for indefinite components.
+         * @param[in] vec The vector to evaluate for NaN components.
          *
          * @return True if at least one component is NaN.
          */
