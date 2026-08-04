@@ -353,6 +353,8 @@ namespace fgm
         /**
          * @brief Divide this quaternion by @p scalar component-wise.
          *
+         * @note Checks for division by zero and presence of NaN components in *Debug Mode*.
+         *
          * @tparam S The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
          *
          * @param[in] scalar The scalar to divide by.
@@ -367,6 +369,8 @@ namespace fgm
 
         /**
          * @brief Divide this quaternion by @p scalar component-wise in-place.
+         *
+         * @note Checks for division by zero and presence of NaN components in *Debug Mode*.
          *
          * @tparam S The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
          *

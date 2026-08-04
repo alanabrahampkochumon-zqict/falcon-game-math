@@ -35,6 +35,7 @@ namespace fgm::messages
         inline constexpr auto VEC_OUT_OF_BOUNDS_ACCESS  = "[Vector]: Out of bounds.";
 
         inline constexpr auto QUAT_DIV_BY_ZERO = "[Quaternion]: Division by zero";
+        inline constexpr auto QUAT_HAS_NAN     = "[Quaternion]: Invalid operation. NaN found!";
 
     } // namespace assertion
 

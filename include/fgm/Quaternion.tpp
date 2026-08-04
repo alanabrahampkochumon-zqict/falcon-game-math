@@ -286,6 +286,7 @@ namespace fgm
         if constexpr (std::is_floating_point_v<R>)
         {
             FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
+            FGM_ASSERT_MSG(!fgm::isnan(scalar) && !this->hasNaN(), fgm::messages::assertion::QUAT_HAS_NAN);
 
             R factor = R(1) / static_cast<R>(scalar);
             return Quaternion<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor, _data[3] * factor);
@@ -310,6 +311,7 @@ namespace fgm
         if constexpr (std::is_floating_point_v<R>)
         {
             FGM_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
+            FGM_ASSERT_MSG(!fgm::isnan(scalar) && !this->hasNaN(), fgm::messages::assertion::QUAT_HAS_NAN);
 
             R factor = R(1) / static_cast<R>(scalar);
 

@@ -29,6 +29,19 @@ namespace
     };
     TYPED_TEST_SUITE(QuaternionScalarDivisionDeathTests, SupportedArithmeticTypes);
 
+
+    /** @brief Parameterized test fixture for @ref fgm::Quaternion NaN division operation. */
+    class QuaternionNaNDivisionDeathTests: public testing::TestWithParam<fgm::Quaternion<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(QuaternionNaNDivisionTestSuite, QuaternionNaNDivisionDeathTests,
+                             ::testing::Values(fgm::Quaternion(fgm::constants::NaN, 1.0f, 1.0f, 1.0f),
+                                               fgm::Quaternion(1.0f, fgm::constants::NaN, 1.0f, 1.0f),
+                                               fgm::Quaternion(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
+                                               fgm::Quaternion(1.0f, 1.0f, fgm::constants::NaN, 1.0f),
+                                               fgm::Quaternion(1.0f, 1.0f, 1.0f, fgm::constants::NaN),
+                                               fgm::Quaternion(fgm::constants::NaN, fgm::constants::NaN,
+                                                               fgm::constants::NaN, fgm::constants::NaN)));
+
 } // namespace
 
 
@@ -43,9 +56,32 @@ TYPED_TEST(QuaternionScalarDivisionDeathTests, DivideOperator_ByZeroTriggersAsse
 
 TYPED_TEST(QuaternionScalarDivisionDeathTests, DivideEqualsOperator_ByZeroTriggersAssertionInDebugMode)
 {
-    [[maybe_unused]] fgm::Quaternion newVec = this->_quat;
-    EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= TypeParam(0)), "");
+    [[maybe_unused]] fgm::Quaternion newQuat = this->_quat;
+    EXPECT_DEBUG_DEATH(static_cast<void>(newQuat /= TypeParam(0)), "");
 }
+
+
+TEST_P(QuaternionNaNDivisionDeathTests, DivideOperator_NaNQuaternionTriggersAssertionInDebugMode)
+{ EXPECT_DEBUG_DEATH(static_cast<void>(GetParam() / 1.0f), ""); }
+
+
+TEST(QuaternionNaNDivisionDeathTests, DivideOperator_DivisionByNaNTriggersAssertionInDebugMode)
+{ EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Quaternion(1.0f, 2.0f, 3.0f, 4.0f) / fgm::constants::NaN), ""); }
+
+
+TEST_P(QuaternionNaNDivisionDeathTests, DivideEqualsOperator_NaNQuaternionTriggersInDebugMode)
+{
+    [[maybe_unused]] fgm::Quaternion newQuat = GetParam();
+    EXPECT_DEBUG_DEATH(static_cast<void>(newQuat /= 1.0f), "");
+}
+
+
+TEST_P(QuaternionNaNDivisionDeathTests, DivideEqualsOperator_DivisionByNaNTriggersInDebugMode)
+{
+    [[maybe_unused]] fgm::Quaternion newQuat(1.0f, 2.0f, 3.0f, 4.0f);
+    EXPECT_DEBUG_DEATH(static_cast<void>(newQuat /= fgm::constants::NaN), "");
+}
+
 
 #else
 
