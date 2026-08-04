@@ -296,4 +296,20 @@ namespace fgm
     { return Quaternion{ T(-_data[0]), T(-_data[1]), T(-_data[2]), T(-_data[3]) }; }
 
 
+    /**************************************
+     *                                    *
+     *             UTILITIES              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr bool Quaternion<T>::hasInf() const noexcept
+    { return fgm::isinf(_data[0]) || fgm::isinf(_data[1]) || fgm::isinf(_data[2]) || fgm::isinf(_data[3]); }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr bool Quaternion<T>::hasInf(const Quaternion& quat) noexcept
+    { return quat.hasInf(); }
+
+
 } // namespace fgm

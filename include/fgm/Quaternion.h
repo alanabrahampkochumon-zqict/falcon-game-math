@@ -351,6 +351,37 @@ namespace fgm
 
         /** @} */
 
+
+
+
+        /**
+         * @addtogroup FGM_Quaternion_Utils
+         * @{
+         */
+
+        /**
+         * @brief Check if any component of this quaternion is an IEEE 754 infinity.
+         *
+         * @note Always return false for integral types.
+         *
+         * @return True if at least one component is positive or negative infinity.
+         */
+        [[nodiscard]] constexpr bool hasInf() const noexcept;
+
+
+        /**
+         * @brief Check if any component of a quaternion is an IEEE 754 infinity.
+         *
+         * @note Always return false for integral types.
+         *
+         * @param[in] quat The quaternion to evaluate for indefinite components.
+         *
+         * @return True if at least one component is positive or negative infinity.
+         */
+        [[nodiscard]] static constexpr bool hasInf(const Quaternion& quat) noexcept;
+
+        /** @} */
+
     private:
         std::array<T, 4> _data;
     };
