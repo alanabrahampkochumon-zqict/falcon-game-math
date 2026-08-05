@@ -118,11 +118,30 @@ namespace
 
         /// @test Verify that Quaternion operator== returns the correct boolean at compile time,
         ///       given two quaternions with different components.
-        static_assert((QUAT_A == QUAT_B) == false); 
+        static_assert((QUAT_A == QUAT_B) == false);
 
         /// @test Verify that Quaternion operator== returns the correct boolean at compile time,
         ///       given two quaternions with same components.
         static_assert((QUAT_A == QUAT_C) == true);
+
+
+
+        /// @test Verify that Quaternion anyNeq returns the correct boolean at compile time,
+        ///       given two quaternions with different components.
+        static_assert(QUAT_A.anyNeq(QUAT_B) == true);
+
+        /// @test Verify that Quaternion anyNeq returns the correct boolean at compile time,
+        ///       given two quaternions with same components.
+        static_assert(QUAT_A.anyNeq(QUAT_C) == false);
+
+
+        /// @test Verify that Quaternion anyNeq(static wrapper) returns the correct boolean at compile time,
+        ///       given two quaternions with different components.
+        static_assert(fgm::Quaternion<int>::anyNeq(QUAT_A, QUAT_B) == true);
+
+        /// @test Verify that Quaternion anyNeq(static wrapper) returns the correct boolean at compile time,
+        ///       given two quaternions with same components.
+        static_assert(fgm::Quaternion<int>::anyNeq(QUAT_A, QUAT_C) == false);
 
 
         // constexpr auto allEqQuat5 = QUAT_A == QUAT_B;
@@ -498,58 +517,106 @@ TYPED_TEST(QuaternionEqualityTests, EqualityOperator_MixedType_IdenticalQuaterni
     EXPECT_TRUE(quatA == quatB);
 }
 
-// /** @brief Verify that the equality operator returns true for identical vectors. */
-// TYPED_TEST(QuaternionEqualityTests, EqualityOperator_IdenticalQuaternionsReturnsTrue)
-// {
-//     const bool equality = this->_eqQuatA == this->_eqQuatB;
-//
-//     EXPECT_TRUE(equality);
-// }
-//
-//
 
-//
-//
-// /** @brief Verify that @ref fgm::Quaternion::allEq works for different vector types with different components. */
-// TYPED_TEST(QuaternionEqualityTests, MixedType_Equality_DifferentQuaternionsReturnsFalse)
-// {
-//     const fgm::Quaternion quatA(5, 6, 7, 8);
-//     const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
-//
-//     const bool equality = quatA.allEq(quatB);
-//
-//     EXPECT_FALSE(equality);
-// }
-//
-//
-// /** @brief Verify that the equality operator returns false if any component differ. */
-// TYPED_TEST(QuaternionEqualityTests, EqualityOperator_DifferentQuaternionsReturnsFalse)
-// {
-//     const bool equality = this->_eqQuatA == this->_dissimilarQuat;
-//
-//     EXPECT_FALSE(equality);
-// }
-//
-//
-// /** @brief Verify that the equality operator works for bool vector with identical components. */
-// TEST(QuaternionEqualityTests, EqualityOperator_IdenticalBooleanQuaternionsReturnsTrue)
-// {
-//     const fgm::Quaternion quatA(true, false, true, false);
-//     const fgm::Quaternion quatB(true, false, true, false);
-//
-//     const bool equality = quatA == quatB;
-//
-//     EXPECT_TRUE(equality);
-// }
-//
-//
 
-// }
-//
-// /** @} */
-//
-//
-//
+
+/**************************************
+ *                                    *
+ *          INEQUALITY TESTS          *
+ *                                    *
+ **************************************/
+
+/**************************************
+ *             ANY NEQ                *
+ **************************************/
+
+TYPED_TEST(QuaternionEqualityTests, AnyNeq_IdenticalQuaternionsReturnsFalse)
+{ EXPECT_FALSE(this->_eqQuatA.anyNeq(this->_eqQuatB)); }
+
+
+TYPED_TEST(QuaternionEqualityTests, AnyNeq__DifferentQuaternionsReturnsTrue)
+{ EXPECT_TRUE(this->_eqQuatA.anyNeq(this->_dissimilarQuat)); }
+
+
+TEST(QuaternionEqualityTests, AnyNeq_NanQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA         = { NAN_F, NAN_F, NAN_F, NAN_F };
+    const fgm::Quaternion<double> quatB = { 1.0, -5.88874789, fgm::constants::INFINITY_D, NAN_F };
+
+    EXPECT_TRUE(quatA.anyNeq(quatB));
+}
+
+
+TEST(QuaternionEqualityTests, AnyNeq_IdenticalInfiniteQuaternionsReturnsFalse)
+{
+    const fgm::Quaternion quatA = { INF, -INF, INF, -INF };
+    const fgm::Quaternion quatB = { INF, -INF, INF, -INF };
+
+    EXPECT_FALSE(quatA.anyNeq(quatB));
+}
+
+
+TEST(QuaternionEqualityTests, AnyNeq_DifferentInfiniteQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA = { INF, INF, INF, -INF };
+    const fgm::Quaternion quatB = { INF, -INF, INF, INF };
+
+    EXPECT_TRUE(quatA.anyNeq(quatB));
+}
+
+
+TYPED_TEST(QuaternionEqualityTests, AnyNeq_MixedType_IdenticalQuaternionsReturnsFalse)
+{
+    const fgm::Quaternion quatA(1, 2, 3, 4);
+    const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
+
+    EXPECT_FALSE(quatA.anyNeq(quatB));
+}
+
+
+TYPED_TEST(QuaternionEqualityTests, StaticWrapper_AnyNeq_IdenticalQuaternionsReturnsFalse)
+{ EXPECT_FALSE(fgm::Quaternion<TypeParam>::anyNeq(this->_eqQuatA, this->_eqQuatB)); }
+
+
+TYPED_TEST(QuaternionEqualityTests, StaticWrapper_AnyNeq_DifferentQuaternionsReturnsTrue)
+{ EXPECT_TRUE(fgm::Quaternion<TypeParam>::anyNeq(this->_eqQuatA, this->_dissimilarQuat)); }
+
+
+TEST(QuaternionEqualityTests, StaticWrapper_AnyNeq_NanQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA         = { NAN_F, NAN_F, NAN_F, NAN_F };
+    const fgm::Quaternion<double> quatB = { 1.0, -5.88874789, fgm::constants::INFINITY_D, NAN_F };
+
+    EXPECT_TRUE(fgm::Quaternion<float>::anyNeq(quatA, quatB));
+}
+
+
+TEST(QuaternionEqualityTests, StaticWrapper_AnyNeq_IdenticalInfiniteQuaternionsReturnsFalse)
+{
+    const fgm::Quaternion quatA = { INF, -INF, INF, -INF };
+    const fgm::Quaternion quatB = { INF, -INF, INF, -INF };
+
+    EXPECT_FALSE(fgm::Quaternion<float>::anyNeq(quatA, quatB));
+}
+
+
+TEST(QuaternionEqualityTests, StaticWrapper_AnyNeq_DifferentInfiniteQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA = { INF, INF, INF, -INF };
+    const fgm::Quaternion quatB = { INF, -INF, INF, INF };
+
+    EXPECT_TRUE(fgm::Quaternion<float>::anyNeq(quatA, quatB));
+}
+
+
+TYPED_TEST(QuaternionEqualityTests, StaticWrapper_AnyNeq_MixedType_IdenticalQuaternionsReturnsFalse)
+{
+    const fgm::Quaternion quatA(1, 2, 3, 4);
+    const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
+
+    EXPECT_FALSE(fgm::Quaternion<int>::anyNeq(quatA, quatB));
+}
+
 // /**
 //  * @addtogroup T_FGM_Quaternion_Inequality
 //  * @{
