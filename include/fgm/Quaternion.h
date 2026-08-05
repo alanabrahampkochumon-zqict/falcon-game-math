@@ -423,6 +423,49 @@ namespace fgm
 
 
         /**
+         * @brief Compare all components of this quaternion with @p rhs quaternion for inequality.
+         *        Perform a component-wise comparison and returns `true` if any corresponding elements differ by more
+         *        than @p epsilon.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref neq.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if any of the components are not equivalent within @p epsilon.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr bool anyNeq(const Quaternion<U>& rhs,
+                                            double epsilon = Config::EPSILON<std::common_type_t<T, U>>) const noexcept;
+
+
+        /**
+         * @brief Compare all components of @p lhs quaternion with @p rhs quaternion for inequality.
+         *        Perform a component-wise comparison and returns `true` if any corresponding elements differ by more
+         *        than @p epsilon.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref neq.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The quaternion to compare.
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if any of the components are not equivalent within @p epsilon.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr bool anyNeq(const Quaternion& lhs, const Quaternion<U>& rhs,
+                                                   double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
+
+
+        /**
          * @brief Perform component-wise equality check between this quaternion and @p rhs quaternion.
          *        Compare each component pair and returns a boolean mask.
          *
@@ -464,6 +507,46 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr Quaternion<bool> eq(
+            const Quaternion& lhs, const Quaternion<U>& rhs,
+            double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
+
+
+        /**
+         * @brief Perform component-wise inequality check between this quaternion and @p rhs quaternion.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note To obtain a single scalar result, use @ref anyNeq or @ref operator!=.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return A @ref Quaternion<bool> mask containing the results of each component comparison.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr Quaternion<bool> neq(
+            const Quaternion<U>& rhs, double epsilon = Config::EPSILON<std::common_type_t<T, U>>) const noexcept;
+
+
+        /**
+         * @brief Perform component-wise inequality check between @p lhs quaternion and @p rhs quaternion.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The quaternion to compare.
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return A @ref Quaternion<bool> mask containing the results of each component comparison.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr Quaternion<bool> neq(
             const Quaternion& lhs, const Quaternion<U>& rhs,
             double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
 
@@ -527,48 +610,6 @@ namespace fgm
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr bool operator==(const Quaternion<U>& rhs) const noexcept;
 
-
-        /**
-         * @brief Compare all components of this quaternion with @p rhs quaternion for inequality.
-         *        Perform a component-wise comparison and returns `true` if any corresponding elements differ by more
-         *        than @p epsilon.
-         *
-         * @note To obtain a component-wise boolean mask, use @ref neq.
-         *
-         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
-         *
-         * @param[in] rhs     The quaternion to compare against.
-         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-         *
-         * @return True if any of the components are not equivalent within @p epsilon.
-         */
-        template <Arithmetic U>
-            requires StrictSignedness<T, U>
-        [[nodiscard]] constexpr bool anyNeq(const Quaternion<U>& rhs,
-                                            double epsilon = Config::EPSILON<std::common_type_t<T, U>>) const noexcept;
-
-
-        /**
-         * @brief Compare all components of @p lhs quaternion with @p rhs quaternion for inequality.
-         *        Perform a component-wise comparison and returns `true` if any corresponding elements differ by more
-         *        than @p epsilon.
-         *
-         * @note To obtain a component-wise boolean mask, use @ref neq.
-         *
-         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
-         *
-         * @param[in] lhs     The quaternion to compare.
-         * @param[in] rhs     The quaternion to compare against.
-         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-         *
-         * @return True if any of the components are not equivalent within @p epsilon.
-         */
-        template <Arithmetic U>
-            requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr bool anyNeq(const Quaternion& lhs, const Quaternion<U>& rhs,
-                                                   double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
 
         /** @} */
 
