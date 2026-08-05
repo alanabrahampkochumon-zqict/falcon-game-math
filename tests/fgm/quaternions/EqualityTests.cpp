@@ -115,6 +115,16 @@ namespace
         ///       given two quaternions with same vector parts.
         static_assert(fgm::Quaternion<int>::vecEq(QUAT_A, QUAT_D) == true);
 
+
+        /// @test Verify that Quaternion operator== returns the correct boolean at compile time,
+        ///       given two quaternions with different components.
+        static_assert((QUAT_A == QUAT_B) == false); 
+
+        /// @test Verify that Quaternion operator== returns the correct boolean at compile time,
+        ///       given two quaternions with same components.
+        static_assert((QUAT_A == QUAT_C) == true);
+
+
         // constexpr auto allEqQuat5 = QUAT_A == QUAT_B;
         // static_assert(allEqQuat5 == false);
         //
@@ -437,6 +447,55 @@ TYPED_TEST(QuaternionEqualityTests, StaticWrapper_VeqEq_MixedType_QuaternionsWit
     const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
 
     EXPECT_TRUE(fgm::Quaternion<int>::vecEq(quatA, quatB));
+}
+
+
+
+/**************************************
+ *         EQUALITY OPERATOR          *
+ **************************************/
+
+TYPED_TEST(QuaternionEqualityTests, EqualityOperator_IdenticalQuaternionsReturnsTrue)
+{ EXPECT_TRUE(this->_eqQuatA == this->_eqQuatB); }
+
+
+TYPED_TEST(QuaternionEqualityTests, EqualityOperator_DifferentQuaternionsReturnsFalse)
+{ EXPECT_FALSE(this->_eqQuatA == this->_dissimilarQuat); }
+
+
+TEST(QuaternionEqualityTests, EqualityOperator_NanQuaternionsReturnsFalse)
+{
+    const fgm::Quaternion quatA         = { NAN_F, NAN_F, NAN_F, NAN_F };
+    const fgm::Quaternion<double> quatB = { 1.0, -5.88874789, fgm::constants::INFINITY_D, NAN_F };
+
+    EXPECT_FALSE(quatA == quatB);
+}
+
+
+TEST(QuaternionEqualityTests, EqualityOperator_IdenticalInfiniteQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA = { INF, -INF, INF, -INF };
+    const fgm::Quaternion quatB = { INF, -INF, INF, -INF };
+
+    EXPECT_TRUE(quatA == quatB);
+}
+
+
+TEST(QuaternionEqualityTests, EqualityOperator_DifferentInfiniteQuaternionsReturnsFalse)
+{
+    const fgm::Quaternion quatA = { INF, INF, INF, -INF };
+    const fgm::Quaternion quatB = { INF, -INF, INF, INF };
+
+    EXPECT_FALSE(quatA == quatB);
+}
+
+
+TYPED_TEST(QuaternionEqualityTests, EqualityOperator_MixedType_IdenticalQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA(1, 2, 3, 4);
+    const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
+
+    EXPECT_TRUE(quatA == quatB);
 }
 
 // /** @brief Verify that the equality operator returns true for identical vectors. */

@@ -502,8 +502,15 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     FGM_INLINE constexpr bool Quaternion<T>::vecEq(const Quaternion& lhs, const Quaternion<U>& rhs,
-                                                               double epsilon) noexcept
+                                                   double epsilon) noexcept
     { return lhs.vecEq(rhs, epsilon); }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr bool Quaternion<T>::operator==(const Quaternion<U>& rhs) const noexcept
+    { return allEq(rhs); }
 
 
 

@@ -511,6 +511,22 @@ namespace fgm
         [[nodiscard]] static constexpr bool vecEq(const Quaternion& lhs, const Quaternion<U>& rhs,
                                                   double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
 
+
+        /**
+         * @copybrief allEq(const Quaternion<U>&, double) const
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs The quaternion to compare against.
+         *
+         * @return True if all components are equivalent within the default epsilon.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U> 
+        [[nodiscard]] constexpr bool operator==(const Quaternion<U>& rhs) const noexcept;
+
         /** @} */
 
 
