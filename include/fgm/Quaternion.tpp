@@ -467,6 +467,45 @@ namespace fgm
     { return lhs.eq(rhs, epsilon); }
 
 
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr bool Quaternion<T>::vecEq(const Quaternion<U>& rhs, double epsilon) const noexcept
+    {
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+        {
+            return x() == rhs.x() && y() == rhs.y() && z() == rhs.z(); // Scalar part is not considered
+        }
+        else
+        {
+// MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
+// To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
+// if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
+#ifdef _MSC_VER
+            if (std::is_constant_evaluated())
+            {
+                if (hasNaN() || rhs.hasNaN())
+                {
+                    return false;
+                }
+            }
+#endif
+            /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
+            return (x() == rhs.x() || fgm::abs(x() - rhs.x()) <= epsilon) &&
+                (y() == rhs.y() || fgm::abs(y() - rhs.y()) <= epsilon) &&
+                (z() == rhs.z() || fgm::abs(z() - rhs.z()) <= epsilon);
+        }
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr bool Quaternion<T>::vecEq(const Quaternion& lhs, const Quaternion<U>& rhs,
+                                                               double epsilon) noexcept
+    { return lhs.vecEq(rhs, epsilon); }
+
+
 
     /**************************************
      *             UTILITIES              *

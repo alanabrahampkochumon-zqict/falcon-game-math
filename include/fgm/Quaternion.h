@@ -387,6 +387,9 @@ namespace fgm
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
          * @return True if all components are equivalent within @p epsilon.
+         *
+         * @relatedalso vecEq()
+         * @relatedalso eq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -407,7 +410,11 @@ namespace fgm
          * @param[in] rhs     The quaternion to compare against.
          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
          * @return True if all components are equivalent within @p epsilon.
+         *
+         * @relatedalso vecEq()
+         * @relatedalso eq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -428,6 +435,9 @@ namespace fgm
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
          * @return A @ref Quaternion<bool> mask containing the results of each component comparison.
+         *
+         * @relatedalso allEq()
+         * @relatedalso vecEq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -447,12 +457,59 @@ namespace fgm
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
          * @return A @ref Quaternion<bool> mask containing the results of each component comparison.
+         *
+         * @relatedalso allEq()
+         * @relatedalso vecEq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr Quaternion<bool> eq(
             const Quaternion& lhs, const Quaternion<U>& rhs,
             double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
+
+
+        /**
+         * @brief Perform component-wise equality check between the vector part of this quaternion
+         *        and @p rhs quaternion.
+         *
+         * @note To obtain a single scalar result, use @ref allEq or @ref operator==.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if all components of the vector part(i, j, k) are equivalent within @p epsilon.
+         *
+         * @relatedalso allEq()
+         * @relatedalso eq()
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr bool vecEq(const Quaternion<U>& rhs,
+                                           double epsilon = Config::EPSILON<std::common_type_t<T, U>>) const noexcept;
+
+
+        /**
+         * @brief Perform component-wise equality check between the vector part of @p lhs and @p rhs quaternion.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The quaternion to compare.
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if all components of the vector part(i, j, k) are equivalent within @p epsilon.
+         *
+         * @relatedalso allEq()
+         * @relatedalso eq()
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr bool vecEq(const Quaternion& lhs, const Quaternion<U>& rhs,
+                                                  double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
 
         /** @} */
 
