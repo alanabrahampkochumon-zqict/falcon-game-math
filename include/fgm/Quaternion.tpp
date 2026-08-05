@@ -286,6 +286,26 @@ namespace fgm
 
 
     template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedValue_t<T, U> Quaternion<T>::dot(const Quaternion<U>& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        using R = std::common_type_t<T, U>;
+        return R(this->x() * rhs.x() + this->y() * rhs.y() + this->z() * rhs.z() + this->w() * rhs.w());
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr PromotedValue_t<T, U> Quaternion<T>::dot(const Quaternion& lhs,
+                                                                  const Quaternion<U>& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.dot(rhs); }
+
+
+    template <Arithmetic T>
     template <StrictArithmetic S>
         requires StrictSignedness<T, S>
     FGM_INLINE constexpr PromotedQuaternion<T, S> Quaternion<T>::operator/(S scalar) const noexcept

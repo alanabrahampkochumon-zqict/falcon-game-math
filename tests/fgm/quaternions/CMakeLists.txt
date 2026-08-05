@@ -6,6 +6,7 @@ add_executable(FGMQuaternionsTests
         QuaternionAlgebra.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
+        VectorAlgebraTests.cpp
 
         # Headers
         include/QuaternionTestSetup.h

@@ -431,6 +431,53 @@ namespace fgm
 
 
         /**
+         * @addtogroup FGM_Quaternion_Vector_Algebra
+         * @{
+         */
+
+        /**
+         * @brief Compute the dot product with another quaternion.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$
+         *
+         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The quaternion to compute the dot product with.
+         *
+         * @return The scalar dot product of the two quaternion.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr PromotedValue_t<T, U> dot(const Quaternion<U>& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the dot product of two quaternions.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{4} a_i b_i \f$
+         *
+         * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first quaternion to compute the dot product with.
+         * @param[in] rhs The second quaternion to compute the dot product with.
+         *
+         * @return The scalar dot product of @p lhs and @p rhs.
+         */
+        template <StrictArithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> dot(const Quaternion& lhs, const Quaternion<U>& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+        /** @} */
+
+
+
+        /**
          * @addtogroup FGM_Quaternion_Utils
          * @{
          */
