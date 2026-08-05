@@ -597,6 +597,15 @@ namespace fgm
     { return allEq(rhs); }
 
 
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr bool Quaternion<T>::operator!=(const Quaternion<U>& rhs) const noexcept
+    {
+        return anyNeq(rhs);
+    }
+
+
 
 
     /**************************************

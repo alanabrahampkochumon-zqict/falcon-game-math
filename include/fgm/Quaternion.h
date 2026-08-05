@@ -702,6 +702,22 @@ namespace fgm
         [[nodiscard]] constexpr bool operator==(const Quaternion<U>& rhs) const noexcept;
 
 
+        /**
+         * @copybrief anyNeq(const Quaternion<U>&, double) const
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs The quaternion to compare against.
+         *
+         * @return True if any of the components are not equivalent within the default epsilon.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr bool operator!=(const Quaternion<U>& rhs) const noexcept;
+
+
         /** @} */
 
 
