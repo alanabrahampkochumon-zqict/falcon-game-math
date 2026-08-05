@@ -53,10 +53,10 @@ namespace fgm
     template <Arithmetic U>
     FGM_INLINE constexpr Quaternion<T>::Quaternion(const Quaternion<U>& other) noexcept
     {
-        this->x() = static_cast<T>(other.x());
-        this->y() = static_cast<T>(other.y());
-        this->z() = static_cast<T>(other.z());
-        this->w() = static_cast<T>(other.w());
+        x() = static_cast<T>(other.x());
+        y() = static_cast<T>(other.y());
+        z() = static_cast<T>(other.z());
+        w() = static_cast<T>(other.w());
     }
 
 
@@ -264,7 +264,7 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         // TODO: Update to use fgm::sqrt
-        return Magnitude<T>(std::sqrt(this->dot(*this)));
+        return Magnitude<T>(std::sqrt(dot(*this)));
     }
 
 
@@ -286,12 +286,10 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
-        return Quaternion<R>{
-            R(this->w() * other.x() + this->x() * other.w() + this->y() * other.z() - this->z() * other.y()),
-            R(this->w() * other.y() - this->x() * other.z() + this->y() * other.w() + this->z() * other.x()),
-            R(this->w() * other.z() + this->x() * other.y() - this->y() * other.x() + this->z() * other.w()),
-            R(this->w() * other.w() - this->x() * other.x() - this->y() * other.y() - this->z() * other.z())
-        };
+        return Quaternion<R>{ R(w() * other.x() + x() * other.w() + y() * other.z() - z() * other.y()),
+                              R(w() * other.y() - x() * other.z() + y() * other.w() + z() * other.x()),
+                              R(w() * other.z() + x() * other.y() - y() * other.x() + z() * other.w()),
+                              R(w() * other.w() - x() * other.x() - y() * other.y() - z() * other.z()) };
     }
 
 
@@ -343,7 +341,7 @@ namespace fgm
         if constexpr (std::is_floating_point_v<R>)
         {
             FGM_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
-            FGM_ASSERT_MSG(!fgm::isnan(scalar) && !this->hasNaN(), fgm::messages::assertion::QUAT_HAS_NAN);
+            FGM_ASSERT_MSG(!fgm::isnan(scalar) && !hasNaN(), fgm::messages::assertion::QUAT_HAS_NAN);
 
             R factor = R(1) / static_cast<R>(scalar);
             return Quaternion<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor, _data[3] * factor);
@@ -368,7 +366,7 @@ namespace fgm
         if constexpr (std::is_floating_point_v<R>)
         {
             FGM_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
-            FGM_ASSERT_MSG(!fgm::isnan(scalar) && !this->hasNaN(), fgm::messages::assertion::QUAT_HAS_NAN);
+            FGM_ASSERT_MSG(!fgm::isnan(scalar) && !hasNaN(), fgm::messages::assertion::QUAT_HAS_NAN);
 
             R factor = R(1) / static_cast<R>(scalar);
 
@@ -421,9 +419,9 @@ namespace fgm
 #endif
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
             return (x() == rhs.x() || fgm::abs(x() - rhs.x()) <= epsilon) &&
-                   (y() == rhs.y() || fgm::abs(y() - rhs.y()) <= epsilon) &&
-                   (z() == rhs.z() || fgm::abs(z() - rhs.z()) <= epsilon) &&
-                   (w() == rhs.w() || fgm::abs(w() - rhs.w()) <= epsilon);
+                (y() == rhs.y() || fgm::abs(y() - rhs.y()) <= epsilon) &&
+                (z() == rhs.z() || fgm::abs(z() - rhs.z()) <= epsilon) &&
+                (w() == rhs.w() || fgm::abs(w() - rhs.w()) <= epsilon);
         }
     }
 
