@@ -1222,7 +1222,7 @@ namespace fgm
 
 
         /**
-         * @brief Compute the magnitude (Euclidean Norm) of @p Vec.
+         * @brief Compute the magnitude (Euclidean Norm) of @p vec.
          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
          *
          * @note To avoid precision loss, integral types are promoted to their
@@ -1230,7 +1230,7 @@ namespace fgm
          *
          * @param[in] vec The vector to compute the magnitude of.
          *
-         * @return The scalar magnitude of @p Vec.
+         * @return The scalar magnitude of @p vec.
          */
         [[nodiscard]] static constexpr Magnitude<T> mag(const Vec4& vec) noexcept
             requires StrictArithmetic<T>;

@@ -10,6 +10,7 @@
 
 
 #include "include/QuaternionTestSetup.h"
+#include "utils/VectorUtils.h"
 
 
 /**
@@ -19,6 +20,7 @@
 
 namespace
 {
+    using namespace testutils;
 
     /**************************************
      *            TEST SETUP              *
@@ -45,6 +47,27 @@ namespace
     TYPED_TEST_SUITE(QuaternionConjugateTests, SupportedSignedArithmeticTypes);
 
 
+    /**
+     * @brief Test fixture for verifying quaternion magnitude across different scalar types.
+     *
+     * @tparam T The scalar type (int, float, double...) for the quaternion values.
+     */
+    template <typename T>
+    class QuaternionMagnitudeTests: public testing::Test
+    {
+    protected:
+        fgm::Quaternion<T> _quat;
+        fgm::Magnitude<T> _expectedMagnitude;
+
+        void SetUp() override
+        {
+            _quat              = { T(1), T(2), T(3), T(4) };
+            _expectedMagnitude = fgm::Magnitude<T>(5.477225575051661);
+        }
+    };
+    TYPED_TEST_SUITE(QuaternionMagnitudeTests, SupportedArithmeticTypes);
+
+
 
     /**************************************
      *            STATIC TESTS            *
@@ -69,8 +92,9 @@ namespace
         static_assert(QUAT_CONJUGATE_STATIC.k() == -3);
         static_assert(QUAT_CONJUGATE_STATIC.s() == 4);
 
-    } // namespace static_tests
+        // TODO: Add quaternion magnitude test after adding fgm::sqrt(constexpr)
 
+    } // namespace static_tests
 
 } // namespace
 
@@ -86,5 +110,43 @@ TYPED_TEST(QuaternionConjugateTests, ReturnsAQuaternionWithInvertedVectorPart)
 
 TYPED_TEST(QuaternionConjugateTests, StaticWrapper_ReturnsAQuaternionWithInvertedVectorPart)
 { EXPECT_QUAT_EQ(this->_expectedConjugate, fgm::Quaternion<TypeParam>::conjugate(this->_quat)); }
+
+
+
+/**************************************
+ *          MAGNITUDE TESTS           *
+ **************************************/
+
+TYPED_TEST(QuaternionMagnitudeTests, NonUnitVectorReturnsCorrectMagnitude)
+{
+    const auto magnitude = this->_quat.mag();
+
+    static_assert(std::is_floating_point_v<decltype(magnitude)>);
+    testutils::EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
+}
+
+
+TYPED_TEST(QuaternionMagnitudeTests, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
+{
+    [[maybe_unused]] const auto magnitude = this->_quat.mag();
+    static_assert(std::is_floating_point_v<decltype(magnitude)>);
+}
+
+
+TYPED_TEST(QuaternionMagnitudeTests, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
+{
+    const auto magnitude = fgm::Quaternion<TypeParam>::mag(this->_quat);
+
+    static_assert(std::is_floating_point_v<decltype(magnitude)>);
+    testutils::EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
+}
+
+
+TYPED_TEST(QuaternionMagnitudeTests, StaticWrapper_MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
+{
+    [[maybe_unused]] const auto magnitude = fgm::Quaternion<TypeParam>::mag(this->_quat);
+    static_assert(std::is_floating_point_v<decltype(magnitude)>);
+}
+
 
 /** @} */

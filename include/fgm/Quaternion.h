@@ -426,6 +426,38 @@ namespace fgm
         [[nodiscard]] static constexpr Quaternion conjugate(const Quaternion& quat) noexcept
             requires SignedStrictArithmetic<T>;
 
+
+        /**
+         * @brief Compute the magnitude of this quaternion.
+         *        \f$ \|\mathbf{q}\| = \sqrt{\mathbf{\|v\|^2} + w^2} \f$
+         *
+         * @note To avoid precision loss, integral types are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note If you only want the magnitude squared, use @ref dot,
+         *       which is faster due to be the absense of sqrt.
+         *
+         * @return The scalar magnitude of the quaternion.
+         */
+        [[nodiscard]] constexpr Magnitude<T> mag() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the magnitude of @p quat.
+         *        \f$ \|\mathbf{q}\| = \sqrt{\mathbf{\|v\|^2} + w^2} \f$
+         *
+         * @note To avoid precision loss, integral types are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         * @note If you only want the magnitude squared, use @ref dot,
+         *       which is faster due to be the absense of sqrt.
+         *
+         * @param[in] quat The quaternion to compute the magnitude of.
+         *
+         * @return The scalar magnitude of @p quat.
+         */
+        [[nodiscard]] static constexpr Magnitude<T> mag(const Quaternion& quat) noexcept
+            requires StrictArithmetic<T>;
+
         /** @} */
 
 
@@ -470,7 +502,8 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedValue_t<T, U> dot(const Quaternion& lhs, const Quaternion<U>& rhs) noexcept
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> dot(const Quaternion& lhs,
+                                                                 const Quaternion<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */

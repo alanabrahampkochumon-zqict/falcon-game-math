@@ -242,6 +242,43 @@ namespace fgm
     }
 
 
+
+    /**************************************
+     *         QUATERNION ALGEBRA         *
+     **************************************/
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Quaternion<T> Quaternion<T>::conjugate() const noexcept
+        requires SignedStrictArithmetic<T>
+    { return Quaternion{ T(-_data[0]), T(-_data[1]), T(-_data[2]), T(_data[3]) }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Quaternion<T> Quaternion<T>::conjugate(const Quaternion& quat) noexcept
+        requires SignedStrictArithmetic<T>
+    { return quat.conjugate(); }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Magnitude<T> Quaternion<T>::mag() const noexcept
+        requires StrictArithmetic<T>
+    {
+        // TODO: Update to use fgm::sqrt
+        return Magnitude<T>(std::sqrt(this->dot(*this)));
+    }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Magnitude<T> Quaternion<T>::mag(const Quaternion& quat) noexcept
+        requires StrictArithmetic<T>
+    { return quat.mag(); }
+
+
+
+    /**************************************
+     *           VECTOR ALGEBRA           *
+     **************************************/
+
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
@@ -271,18 +308,6 @@ namespace fgm
         *this             = static_cast<Quaternion<T>>(intermediate);
         return *this;
     }
-
-
-    template <Arithmetic T>
-    FGM_INLINE constexpr Quaternion<T> Quaternion<T>::conjugate() const noexcept
-        requires SignedStrictArithmetic<T>
-    { return Quaternion{ T(-_data[0]), T(-_data[1]), T(-_data[2]), T(_data[3]) }; }
-
-
-    template <Arithmetic T>
-    FGM_INLINE constexpr Quaternion<T> Quaternion<T>::conjugate(const Quaternion& quat) noexcept
-        requires SignedStrictArithmetic<T>
-    { return quat.conjugate(); }
 
 
     template <Arithmetic T>
