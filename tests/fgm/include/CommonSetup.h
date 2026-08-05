@@ -17,10 +17,6 @@
 #include <utility>
 #include <vector>
 
-#ifndef NDEBUG
-    #define ENABLE_DEBUG_TESTS
-#endif
-
 
 #ifdef NONCOMPREHENSIVE
 using SupportedTypes                 = ::testing::Types<int32_t, int64_t, uint8_t, bool, float, double>;

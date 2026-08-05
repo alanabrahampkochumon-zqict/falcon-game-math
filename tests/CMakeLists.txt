@@ -20,6 +20,8 @@ target_link_libraries(FGMTestSetup INTERFACE
         StrictWarnings
         ProjectSanitizers
 )
+target_compile_definitions(FGMTestSetup INTERFACE $<$<CONFIG:Debug>:ENABLE_DEBUG_TESTS>)
+
 # TODO: Update Falcon SIMD to use a similar TEST SETUP
 if (NONCOMPREHENSIVE)
     message(STATUS "[FGM]: Running only non-comprehensive tests")
