@@ -369,6 +369,55 @@ namespace fgm
 
 
         /**
+         * @addtogroup FGM_Quaternion_Equality
+         * @{
+         */
+
+        /**
+         * @brief Compare all components of this quaternion with @p rhs quaternion for equality.
+         *        Perform a component-wise comparison and returns true only if every element pair
+         *        satisfies the equality condition within the given @p epsilon.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if all components are equivalent within @p epsilon.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr bool allEq(const Quaternion<U>& rhs,
+                                           double epsilon = Config::EPSILON<std::common_type_t<T, U>>) const noexcept;
+
+
+        /**
+         * @brief Compare all components of @p lhs quaternion with @p rhs quaternion for equality.
+         *        Perform a component-wise comparison and returns `true` only if every element pair
+         *        satisfies the equality condition within the given @p epsilon.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The quaternion to compare.
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         * @return True if all components are equivalent within @p epsilon.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr bool allEq(const Quaternion& lhs, const Quaternion<U>& rhs,
+                                                  double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
+        /** @} */
+
+
+
+        /**
          * @addtogroup FGM_Quaternion_Algebra
          * @{
          */

@@ -464,12 +464,7 @@
          *   @defgroup T_FGM_Quaternion_Calculus Quaternion Calculus(Analysis)
          *   @defgroup T_FGM_Quaternion_Vector_Algebra Quaternion-Vector Algebra
          *   @defgroup T_FGM_Quaternion_Bool_Bit Boolean Bitwise Operation
-         *   @defgroup T_FGM_Quaternion_GT_Comp Greater Than Comparison
-         *   @defgroup T_FGM_Quaternion_GTE_Comp Greater Than or Equal Comparison
-         *   @defgroup T_FGM_Quaternion_LT_Comp Less Than Comparison
-         *   @defgroup T_FGM_Quaternion_LTE_Comp Less Than or Equal Comparison
-         *   @defgroup T_FGM_Quaternion_Equality Component-wise and Masked Equality
-         *   @defgroup T_FGM_Quaternion_Inequality Component-wise and Masked Inequality
+         *   @defgroup T_FGM_Quaternion_Equality Component-wise, Masked and Vector Equality and Inequality
          *   @defgroup T_FGM_Quaternion_Init Initialization
          *   @defgroup T_FGM_Quaternion_Magnitude Scalar Length(Magnitude)
          *   @defgroup T_FGM_Quaternion_String_Repr Formatted String Representation
