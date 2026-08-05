@@ -274,6 +274,18 @@ namespace fgm
 
 
     template <Arithmetic T>
+    FGM_INLINE constexpr Quaternion<T> Quaternion<T>::conjugate() const noexcept
+        requires SignedStrictArithmetic<T>
+    { return Quaternion{ T(-_data[0]), T(-_data[1]), T(-_data[2]), T(_data[3]) }; }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Quaternion<T> Quaternion<T>::conjugate(const Quaternion& quat) noexcept
+        requires SignedStrictArithmetic<T>
+    { return quat.conjugate(); }
+
+
+    template <Arithmetic T>
     template <StrictArithmetic S>
         requires StrictSignedness<T, S>
     FGM_INLINE constexpr PromotedQuaternion<T, S> Quaternion<T>::operator/(S scalar) const noexcept

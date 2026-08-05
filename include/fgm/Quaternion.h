@@ -403,16 +403,28 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        // /**
-        //  * @brief Compute the conjugate of this quaternion.
-        //  *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$ // TODO: Update Formula
-        //  *
-        //  * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
-        //  *
-        //  * @return A new @ref fgm::Quaternion with negated components.
-        //  */
-        // [[nodiscard]] constexpr Quaternion operator-() const noexcept
-        //     requires SignedStrictArithmetic<T>;
+        /**
+         * @brief Compute the conjugate of this quaternion.
+         *        \f$ \mathbf{q^*} = [\mathbf{v} \quad w]^* = [-\mathbf{v} \quad w] \f$
+         *
+         * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A new @ref fgm::Quaternion with negated vector components.
+         */
+        [[nodiscard]] constexpr Quaternion conjugate() const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the conjugate of a quaternion.
+         *        \f$ \mathbf{q^*} = [\mathbf{v} \quad w]^* = [-\mathbf{v} \quad w] \f$
+         *
+         * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A new @ref fgm::Quaternion with negated vector components.
+         */
+        [[nodiscard]] static constexpr Quaternion conjugate(const Quaternion& quat) noexcept
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
 
