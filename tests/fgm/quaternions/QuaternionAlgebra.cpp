@@ -68,6 +68,29 @@ namespace
     TYPED_TEST_SUITE(QuaternionMagnitudeTests, SupportedArithmeticTypes);
 
 
+    /**
+     * @brief Test fixture for verifying quaternion inverse across different scalar types.
+     *
+     * @tparam T The scalar type (int, float, double...) for the quaternion values.
+     */
+    template <typename T>
+    class QuaternionInverseTests: public testing::Test
+    {
+    protected:
+        using M = fgm::Magnitude<T>;
+        fgm::Quaternion<T> _quat;
+        fgm::Quaternion<M> _expectedInverse;
+
+        void SetUp() override
+        {
+            _quat            = { T(3), T(1), T(6), T(4) };
+            _expectedInverse = fgm::Quaternion<M>{ M(-0.04838709677419355), M(-0.01612903225806452),
+                                                   M(-0.09677419354838709), M(0.06451612903225806) };
+        }
+    };
+    TYPED_TEST_SUITE(QuaternionInverseTests, SupportedSignedArithmeticTypes);
+
+
 
     /**************************************
      *            STATIC TESTS            *
@@ -93,6 +116,22 @@ namespace
         static_assert(QUAT_CONJUGATE_STATIC.s() == 4);
 
         // TODO: Add quaternion magnitude test after adding fgm::sqrt(constexpr)
+
+
+        /// @test Verify that quaterion inverse(static wrapper) returns a valid quaternion at compile-time.
+        constexpr auto QUAT_INVERSE = QUAT_A.inverse();
+        static_assert(QUAT_INVERSE.i() - 0.005882 < fgm::Config::FLOAT_EPSILON);
+        static_assert(QUAT_INVERSE.j() - -0.07058 < fgm::Config::FLOAT_EPSILON);
+        static_assert(QUAT_INVERSE.k() - -0.01764 < fgm::Config::FLOAT_EPSILON);
+        static_assert(QUAT_INVERSE.s() - 0.023529 < fgm::Config::FLOAT_EPSILON);
+
+
+        /// @test Verify that quaterion inverse(static wrapper) returns a valid quaternion at compile-time.
+        constexpr auto QUAT_INVERSE_STATIC = fgm::Quaternion<int>::inverse(QUAT_A);
+        static_assert(QUAT_INVERSE_STATIC.i() - 0.005882 < fgm::Config::FLOAT_EPSILON);
+        static_assert(QUAT_INVERSE_STATIC.j() - -0.07058 < fgm::Config::FLOAT_EPSILON);
+        static_assert(QUAT_INVERSE_STATIC.k() - -0.01764 < fgm::Config::FLOAT_EPSILON);
+        static_assert(QUAT_INVERSE_STATIC.s() - 0.023529 < fgm::Config::FLOAT_EPSILON);
 
     } // namespace static_tests
 
@@ -148,5 +187,29 @@ TYPED_TEST(QuaternionMagnitudeTests, StaticWrapper_MagnitudeIsAlwaysTypedPromote
     static_assert(std::is_floating_point_v<decltype(magnitude)>);
 }
 
+
+
+/**************************************
+ *           INVERSE TESTS           *
+ **************************************/
+
+TYPED_TEST(QuaternionInverseTests, ReturnsValidQuaternion)
+{ EXPECT_QUAT_EQ(this->_expectedInverse, this->_quat.inverse()); }
+
+
+TYPED_TEST(QuaternionInverseTests, AlwaysReturnFloatingPointQuaternion)
+{ static_assert(std::is_floating_point_v<typename decltype(this->_quat.inverse())::value_type> == true); }
+
+
+TYPED_TEST(QuaternionInverseTests, StaticWrapper_ReturnsValidQuaternion)
+{ EXPECT_QUAT_EQ(this->_expectedInverse, fgm::Quaternion<TypeParam>::inverse(this->_quat)); }
+
+
+TYPED_TEST(QuaternionInverseTests, StaticWrapper_AlwaysReturnFloatingPointQuaternion)
+{
+    static_assert(
+        std::is_floating_point_v<typename decltype(fgm::Quaternion<TypeParam>::inverse(this->_quat))::value_type> ==
+        true);
+}
 
 /** @} */

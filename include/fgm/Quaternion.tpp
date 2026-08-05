@@ -274,6 +274,23 @@ namespace fgm
     { return quat.mag(); }
 
 
+    template <Arithmetic T>
+    FGM_INLINE constexpr Quaternion<Magnitude<T>> Quaternion<T>::inverse() const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        // TODO: Add assertion for 0 quaternion
+        // note: this->conjugate(this is implied)
+        using M = Magnitude<T>;
+        return static_cast<Quaternion<M>>(conjugate()) / static_cast<M>(dot(*this));
+    }
+
+
+    template <Arithmetic T>
+    FGM_INLINE constexpr Quaternion<Magnitude<T>> Quaternion<T>::inverse(const Quaternion& quat) noexcept
+        requires SignedStrictArithmetic<T>
+    { return quat.inverse(); }
+
+
 
     /**************************************
      *           VECTOR ALGEBRA           *
@@ -601,9 +618,7 @@ namespace fgm
     template <Arithmetic U>
         requires StrictSignedness<T, U>
     FGM_INLINE constexpr bool Quaternion<T>::operator!=(const Quaternion<U>& rhs) const noexcept
-    {
-        return anyNeq(rhs);
-    }
+    { return anyNeq(rhs); }
 
 
 

@@ -812,6 +812,36 @@ namespace fgm
         [[nodiscard]] static constexpr Magnitude<T> mag(const Quaternion& quat) noexcept
             requires StrictArithmetic<T>;
 
+
+        /**
+         * @brief Compute the inverse of this quaternion.
+         *        \f$ \mathbf{q^{-1}} = \frac{\mathbf{q^*}}{\|q\|^2} \f$
+         *
+         * @note To avoid precision loss, integral types are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A new @ref fgm::Quaternion which satisfies q * inv(q) = [0 0 0 1].
+         */
+        [[nodiscard]] constexpr Quaternion<Magnitude<T>> inverse() const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the inverse of a quaternion.
+         *        \f$ \mathbf{q^{-1}} = \frac{\mathbf{q^*}}{\|q\|^2} \f$
+         *
+         * @note To avoid precision loss, integral types are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A new @ref fgm::Quaternion which satisfies q * inv(q) = [0 0 0 1].
+         */
+        [[nodiscard]] static constexpr Quaternion<Magnitude<T>> inverse(const Quaternion& quat) noexcept
+            requires SignedStrictArithmetic<T>;
+
         /** @} */
 
 
