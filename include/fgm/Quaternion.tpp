@@ -394,6 +394,11 @@ namespace fgm
     { return Quaternion{ T(-_data[0]), T(-_data[1]), T(-_data[2]), T(-_data[3]) }; }
 
 
+
+    /**************************************
+     *             EQUALITY              *
+     **************************************/
+
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
@@ -434,11 +439,37 @@ namespace fgm
     { return lhs.allEq(rhs, epsilon); }
 
 
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr Quaternion<bool> Quaternion<T>::eq(const Quaternion<U>& rhs, double epsilon) const noexcept
+    {
+        if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
+        {
+            return Quaternion<bool>{ x() == rhs.x(), y() == rhs.y(), z() == rhs.z(), w() == rhs.w() };
+        }
+        else
+        {
+            /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
+            return Quaternion<bool>{ x() == rhs.x() || fgm::abs(x() - rhs.x()) <= epsilon,
+                                     y() == rhs.y() || fgm::abs(y() - rhs.y()) <= epsilon,
+                                     z() == rhs.z() || fgm::abs(z() - rhs.z()) <= epsilon,
+                                     w() == rhs.w() || fgm::abs(w() - rhs.w()) <= epsilon };
+        }
+    }
+
+
+    template <Arithmetic T>
+    template <Arithmetic U>
+        requires StrictSignedness<T, U>
+    FGM_INLINE constexpr Quaternion<bool> Quaternion<T>::eq(const Quaternion& lhs, const Quaternion<U>& rhs,
+                                                            double epsilon) noexcept
+    { return lhs.eq(rhs, epsilon); }
+
+
 
     /**************************************
-     *                                    *
      *             UTILITIES              *
-     *                                    *
      **************************************/
 
     template <Arithmetic T>

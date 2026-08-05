@@ -413,6 +413,47 @@ namespace fgm
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr bool allEq(const Quaternion& lhs, const Quaternion<U>& rhs,
                                                   double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
+
+
+        /**
+         * @brief Perform component-wise equality check between this quaternion and @p rhs quaternion.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note To obtain a single scalar result, use @ref allEq or @ref operator==.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return A @ref Quaternion<bool> mask containing the results of each component comparison.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr Quaternion<bool> eq(
+            const Quaternion<U>& rhs, double epsilon = Config::EPSILON<std::common_type_t<T, U>>) const noexcept;
+
+
+        /**
+         * @brief Perform component-wise equality check between @p lhs and @p rhs quaternion.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The quaternion to compare.
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return A @ref Quaternion<bool> mask containing the results of each component comparison.
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr Quaternion<bool> eq(
+            const Quaternion& lhs, const Quaternion<U>& rhs,
+            double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
+
         /** @} */
 
 

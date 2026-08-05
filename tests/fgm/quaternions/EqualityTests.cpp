@@ -1,7 +1,7 @@
 /**
- * @file QuaternionEqualityTests.cpp
+ * @file EqualityTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: March 07, 2026
+ * @date Created on: August 05, 2026
  *
  * @brief Verify @ref fgm::Quaternion equality operator (==, !=) and their functional counterpart's (vecEq,  allEq,
  * anyNeq) logic.
@@ -61,23 +61,37 @@ namespace
         constexpr fgm::Quaternion QUAT_B(3, 2, 1, 7);
         constexpr fgm::Quaternion QUAT_C(1, 2, 4, 12);
 
-        /// @test Verify that allEq returns the correct boolean at compile time, given two quaternions
-        ///       with different components.
+        /// @test Verify that Quaternion allEq returns the correct boolean at compile time,
+        ///       given two quaternions with different components.
         static_assert(QUAT_A.allEq(QUAT_B) == false);
 
-        /// @test Verify that allEq returns the correct boolean at compile time, given two quaternions
-        ///       with same components.
+        /// @test Verify that Quaternion allEq returns the correct boolean at compile time,
+        ///       given two quaternions with same components.
         static_assert(QUAT_A.allEq(QUAT_C) == true);
 
 
-        /// @test Verify that allEq(static wrapper) returns the correct boolean at compile time, given two quaternions
-        ///       with different components.
+        /// @test Verify that Quaternion allEq(static wrapper) returns the correct boolean at compile time,
+        ///       given two quaternions with different components.
         static_assert(fgm::Quaternion<int>::allEq(QUAT_A, QUAT_B) == false);
 
-        /// @test Verify that allEq(static wrapper) returns the correct boolean at compile time, given two quaternions
-        ///       with same components.
+        /// @test Verify that Quaternion allEq(static wrapper) returns the correct boolean at compile time,
+        ///       given two quaternions with same components.
         static_assert(fgm::Quaternion<int>::allEq(QUAT_A, QUAT_C) == true);
 
+
+        /// @test Verify that Quaternion eq returns the correct boolean mask at compile time.
+        constexpr auto EQ_QUAT_MASK = QUAT_A.eq(QUAT_B);
+        static_assert(EQ_QUAT_MASK.x() == false);
+        static_assert(EQ_QUAT_MASK.y() == true);
+        static_assert(EQ_QUAT_MASK.z() == false);
+        static_assert(EQ_QUAT_MASK.w() == false);
+
+        /// @test Verify that Quaternion eq (static wrapper) returns the correct boolean mask at compile time.
+        constexpr auto EQ_QUAT_MASK_STATIC = fgm::Quaternion<int>::eq(QUAT_A, QUAT_B);
+        static_assert(EQ_QUAT_MASK_STATIC.x() == false);
+        static_assert(EQ_QUAT_MASK_STATIC.y() == true);
+        static_assert(EQ_QUAT_MASK_STATIC.z() == false);
+        static_assert(EQ_QUAT_MASK_STATIC.w() == false);
 
         // constexpr auto allEqQuat5 = QUAT_A == QUAT_B;
         // static_assert(allEqQuat5 == false);
@@ -124,7 +138,13 @@ namespace
 
 
 /**************************************
+ *                                    *
  *           EQUALITY TESTS           *
+ *                                    *
+ **************************************/
+
+/**************************************
+ *             ALL EQ                 *
  **************************************/
 
 TYPED_TEST(QuaternionEqualityTests, AllEq_IdenticalQuaternionsReturnsTrue)
@@ -159,6 +179,15 @@ TEST(QuaternionEqualityTests, AllEq_DifferentInfiniteQuaternionsReturnsFalse)
     const fgm::Quaternion quatB = { INF, -INF, INF, INF };
 
     EXPECT_FALSE(quatA.allEq(quatB));
+}
+
+
+TYPED_TEST(QuaternionEqualityTests, AllEq_MixedType_IdenticalQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA(1, 2, 3, 4);
+    const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
+
+    EXPECT_TRUE(quatA.allEq(quatB));
 }
 
 
@@ -197,6 +226,107 @@ TEST(QuaternionEqualityTests, StaticWrapper_AllEq_DifferentInfiniteQuaternionsRe
 }
 
 
+TYPED_TEST(QuaternionEqualityTests, StaticWrapper_AllEq_MixedType_IdenticalQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA(1, 2, 3, 4);
+    const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
+
+    EXPECT_TRUE(fgm::Quaternion<int>::allEq(quatA, quatB));
+}
+
+
+
+/**************************************
+ *          EQUALITY MASK             *
+ **************************************/
+
+TYPED_TEST(QuaternionEqualityTests, Eq_ReturnsCorrectBooleanMask)
+{
+    const fgm::Quaternion<bool> mask = this->_eqQuatA.eq(this->_dissimilarQuat);
+    EXPECT_QUAT_EQ(this->_equalityMask, mask);
+}
+
+
+TEST(QuaternionEqualityTests, Eq_MixedType_ReturnsCorrectBooleanMask)
+{
+    const fgm::Quaternion quatA        = { 1, 2, 3, 4 };
+    const fgm::Quaternion quatB        = { 1.0, 4.0, 0.0, 4.0 };
+    const fgm::Quaternion expectedMask = { true, false, false, true };
+
+    const fgm::Quaternion<bool> mask = quatA.eq(quatB);
+
+    EXPECT_QUAT_EQ(expectedMask, mask);
+}
+
+
+TEST(QuaternionEqualityTests, Eq_NaNQuaternionsReturnsFalseBooleanMask)
+{
+    const fgm::Quaternion quatA        = { NAN_F, NAN_F, NAN_F, NAN_F };
+    const fgm::Quaternion quatB        = { 1.0, -5.88874789, fgm::constants::INFINITY_D, fgm::constants::NaN_D };
+    const fgm::Quaternion expectedMask = { false, false, false, false };
+
+    const fgm::Quaternion mask = quatA.eq(quatB);
+
+    EXPECT_QUAT_EQ(expectedMask, mask);
+}
+
+
+TEST(QuaternionEqualityTests, Eq_InfiniteQuaternionsReturnsCorrectBooleanMask)
+{
+    const fgm::Quaternion quatA         = { INF, -INF, INF, -INF };
+    const fgm::Quaternion<double> quatB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D, 10e11, 10e11 };
+    const fgm::Quaternion expectedMask  = { true, false, false, false };
+
+    const fgm::Quaternion mask = quatA.eq(quatB);
+
+    EXPECT_QUAT_EQ(expectedMask, mask);
+}
+
+
+TYPED_TEST(QuaternionEqualityTests, StaticWrapper_Eq_ReturnsCorrectBooleanMask)
+{
+    const fgm::Quaternion<bool> mask = fgm::Quaternion<TypeParam>::eq(this->_eqQuatA, this->_dissimilarQuat);
+    EXPECT_QUAT_EQ(this->_equalityMask, mask);
+}
+
+
+TEST(QuaternionEqualityTests, StaticWrapper_Eq_MixedType_ReturnsCorrectBooleanMask)
+{
+    const fgm::Quaternion quatA        = { 1, 2, 3, 4 };
+    const fgm::Quaternion quatB        = { 1.0, 4.0, 0.0, 4.0 };
+    const fgm::Quaternion expectedMask = { true, false, false, true };
+
+    const fgm::Quaternion<bool> mask = fgm::Quaternion<int>::eq(quatA, quatB);
+
+    EXPECT_QUAT_EQ(expectedMask, mask);
+}
+
+
+TEST(QuaternionEqualityTests, StaticWrapper_Eq_NaNQuaternionsReturnsFalseBooleanMask)
+{
+    const fgm::Quaternion quatA        = { NAN_F, NAN_F, NAN_F, NAN_F };
+    const fgm::Quaternion quatB        = { 1.0, -5.88874789, fgm::constants::INFINITY_D, fgm::constants::NaN_D };
+    const fgm::Quaternion expectedMask = { false, false, false, false };
+
+    const fgm::Quaternion<bool> mask = fgm::Quaternion<float>::eq(quatA, quatB);
+
+    EXPECT_QUAT_EQ(expectedMask, mask);
+}
+
+
+TEST(QuaternionEqualityTests, StaticWrapper_Eq_InfiniteQuaternionsReturnsCorrectBooleanMask)
+{
+    const fgm::Quaternion quatA         = { INF, -INF, INF, -INF };
+    const fgm::Quaternion<double> quatB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D, 10e11, 10e11 };
+    const fgm::Quaternion expectedMask  = { true, false, false, false };
+
+    const fgm::Quaternion<bool> mask = fgm::Quaternion<float>::eq(quatA, quatB);
+
+    EXPECT_QUAT_EQ(expectedMask, mask);
+}
+
+
+
 // /** @brief Verify that the equality operator returns true for identical vectors. */
 // TYPED_TEST(QuaternionEqualityTests, EqualityOperator_IdenticalQuaternionsReturnsTrue)
 // {
@@ -206,16 +336,7 @@ TEST(QuaternionEqualityTests, StaticWrapper_AllEq_DifferentInfiniteQuaternionsRe
 // }
 //
 //
-// /** @brief Verify that @ref fgm::Quaternion::allEq works for different vector types with identical components. */
-// TYPED_TEST(QuaternionEqualityTests, MixedType_Equality_IdenticalQuaternionsReturnsTrue)
-// {
-//     const fgm::Quaternion quatA(1, 2, 3, 4);
-//     const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
-//
-//     const bool equality = quatA.allEq(quatB);
-//
-//     EXPECT_TRUE(equality);
-// }
+
 //
 //
 // /** @brief Verify that @ref fgm::Quaternion::allEq works for different vector types with different components. */
@@ -251,74 +372,7 @@ TEST(QuaternionEqualityTests, StaticWrapper_AllEq_DifferentInfiniteQuaternionsRe
 // }
 //
 //
-// /** @brief Verify that the equality operator works for bool vector with different components. */
-// TEST(QuaternionEqualityTests, EqualityOperator_DifferentBooleanQuaternionsReturnsFalse)
-// {
-//     const fgm::Quaternion quatA(true, false, true, false);
-//     const fgm::Quaternion quatB(true, true, true, false);
-//
-//     const bool equality = quatA == quatB;
-//
-//     EXPECT_FALSE(equality);
-// }
-//
-//
-// /** @brief Verify that @ref fgm::Quaternion::eq returns @ref fgm::Quaternion<bool> mask for identical vectors. */
-// TYPED_TEST(QuaternionEqualityTests, EqualityReturnsCorrectBooleanMask)
-// {
-//     const fgm::Quaternion<bool> mask = this->_eqQuatA.eq(this->_dissimilarQuat);
-//
-//     EXPECT_QUAT_EQ(this->_equalityMask, mask);
-// }
-//
-// /** @brief Verify that @ref fgm::Quaternion::eq returns @ref fgm::Quaternion<bool> mask for different vectors. */
-// TEST(QuaternionEqualityTests, MixedType_EqualityReturnsCorrectBooleanMask)
-// {
-//     const fgm::Quaternion quatA         = { 1, 2, 3, 4 };
-//     const fgm::Quaternion quatB         = { 1.0, 4.0, 0.0, 4.0 };
-//     const fgm::Quaternion expectedMask = { true, false, false, true };
-//
-//     const fgm::Quaternion<bool> mask = quatA.eq(quatB);
-//
-//     EXPECT_QUAT_EQ(expectedMask, mask);
-// }
-//
-//
-// /** @brief Verify that @ref fgm::Quaternion::eq follows IEEE 754 for NaN comparisons. */
-// TEST(QuaternionEqualityTests, NanEqualityReturnsFalseBooleanMask)
-// {
-//     const fgm::Quaternion quatA         = { NAN_F, NAN_F, NAN_F, NAN_F };
-//     const fgm::Quaternion quatB         = { 1.0, -5.88874789, fgm::constants::INFINITY_D, fgm::constants::NaN_D };
-//     const fgm::Quaternion expectedMask = { false, false, false, false };
-//
-//     const fgm::Quaternion mask = quatA.eq(quatB);
-//
-//     EXPECT_QUAT_EQ(expectedMask, mask);
-// }
-//
-//
-// /** @brief Verify that @ref fgm::Quaternion::eq follows IEEE 754 for INFINITY comparisons. */
-// TEST(QuaternionEqualityTests, InfinityEqualityReturnsCorrectBooleanMask)
-// {
-//     const fgm::Quaternion quatA         = { INF, -INF, INF, -INF };
-//     const fgm::Quaternion<double> quatB = { fgm::constants::INFINITY_D, fgm::constants::INFINITY_D, 10e11, 10e11 };
-//     const fgm::Quaternion expectedMask = { true, false, false, false };
-//
-//     const fgm::Quaternion mask = quatA.eq(quatB);
-//
-//     EXPECT_QUAT_EQ(expectedMask, mask);
-// }
-//
-//
-// /**
-//  * @brief Verify that the static variant of @ref fgm::Quaternion::eq returns @ref fgm::Quaternion<bool> mask
-//  *       for different vectors.
-//  */
-// TYPED_TEST(QuaternionEqualityTests, StaticWrapper_EqualityReturnsCorrectBooleanMask)
-// {
-//     const fgm::Quaternion<bool> mask = fgm::Quaternion<TypeParam>::eq(this->_eqQuatA, this->_dissimilarQuat);
-//
-//     EXPECT_QUAT_EQ(this->_equalityMask, mask);
+
 // }
 //
 // /** @} */
