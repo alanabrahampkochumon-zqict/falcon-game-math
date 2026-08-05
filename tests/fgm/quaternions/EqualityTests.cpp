@@ -56,9 +56,16 @@ namespace
 
 
 
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-    namespace
+    namespace static_tests
     {
+        /**************************************
+         *          EQUALITY TESTS            *
+         **************************************/
+
         // Quat C and D have same vector but different vector part
         constexpr fgm::Quaternion QUAT_A(1, 2, 4, 12);
         constexpr fgm::Quaternion QUAT_B(3, 2, 1, 7);
@@ -102,16 +109,16 @@ namespace
         ///       given two quaternions with different vector parts.
         static_assert(QUAT_A.vecEq(QUAT_B) == false);
 
-        /// @test Verify that Quaternion allEq returns the correct boolean at compile time,
+        /// @test Verify that Quaternion vecEq returns the correct boolean at compile time,
         ///       given two quaternions with same vector parts.
         static_assert(QUAT_A.vecEq(QUAT_D) == true);
 
 
-        /// @test Verify that Quaternion allEq(static wrapper) returns the correct boolean at compile time,
+        /// @test Verify that Quaternion vecEq(static wrapper) returns the correct boolean at compile time,
         ///       given two quaternions with different vector parts.
         static_assert(fgm::Quaternion<int>::vecEq(QUAT_A, QUAT_B) == false);
 
-        /// @test Verify that Quaternion allEq(static wrapper) returns the correct boolean at compile time,
+        /// @test Verify that Quaternion vecEq(static wrapper) returns the correct boolean at compile time,
         ///       given two quaternions with same vector parts.
         static_assert(fgm::Quaternion<int>::vecEq(QUAT_A, QUAT_D) == true);
 
@@ -125,6 +132,10 @@ namespace
         static_assert((QUAT_A == QUAT_C) == true);
 
 
+
+        /**************************************
+         *         INEQUALITY TESTS           *
+         **************************************/
 
         /// @test Verify that Quaternion anyNeq returns the correct boolean at compile time,
         ///       given two quaternions with different components.
@@ -159,7 +170,25 @@ namespace
         static_assert(NEQ_QUAT_MASK_STATIC.w() == true);
 
 
-    } // namespace
+        /// @test Verify that Quaternion vecNeq returns the correct boolean at compile time,
+        ///       given two quaternions with different vector parts.
+        static_assert(QUAT_A.vecNeq(QUAT_B) == true);
+
+        /// @test Verify that Quaternion vecNeq returns the correct boolean at compile time,
+        ///       given two quaternions with same vector parts.
+        static_assert(QUAT_A.vecNeq(QUAT_D) == false);
+
+
+        /// @test Verify that Quaternion vecNeq(static wrapper) returns the correct boolean at compile time,
+        ///       given two quaternions with different vector parts.
+        static_assert(fgm::Quaternion<int>::vecNeq(QUAT_A, QUAT_B) == true);
+
+        /// @test Verify that Quaternion vecNeq(static wrapper) returns the correct boolean at compile time,
+        ///       given two quaternions with same vector parts.
+        static_assert(fgm::Quaternion<int>::vecNeq(QUAT_A, QUAT_D) == false);
+
+
+    } // namespace static_tests
 
 } // namespace
 
@@ -684,5 +713,97 @@ TEST(QuaternionEqualityTests, StaticWrapper_Neq_InfiniteQuaternionsReturnsCorrec
     EXPECT_QUAT_EQ(expectedMask, mask);
 }
 
+
+
+/**************************************
+ *             VEC NEQ                *
+ **************************************/
+
+TYPED_TEST(QuaternionEqualityTests, VeqNeq_QuaternionsWithIdenticalVectorPartReturnsFalse)
+{ EXPECT_FALSE(this->_eqVecQuatA.vecNeq(this->_eqVecQuatB)); }
+
+
+TYPED_TEST(QuaternionEqualityTests, VeqNeq_QuaternionsWithDifferentVectorPartReturnsTrue)
+{ EXPECT_TRUE(this->_eqVecQuatA.vecNeq(this->_dissimilarQuat)); }
+
+
+TEST(QuaternionEqualityTests, VeqNeq_NanQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA         = { NAN_F, NAN_F, NAN_F, NAN_F };
+    const fgm::Quaternion<double> quatB = { 1.0, -5.88874789, fgm::constants::INFINITY_D, NAN_F };
+
+    EXPECT_TRUE(quatA.vecNeq(quatB));
+}
+
+
+TEST(QuaternionEqualityTests, VeqNeq_IdenticalInfiniteQuaternionsReturnsFalse)
+{
+    const fgm::Quaternion quatA = { INF, -INF, INF, 4.0f };
+    const fgm::Quaternion quatB = { INF, -INF, INF, 8.0f };
+
+    EXPECT_FALSE(quatA.vecNeq(quatB));
+}
+
+
+TEST(QuaternionEqualityTests, VeqNeq_DifferentInfiniteQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA = { INF, INF, INF, -INF };
+    const fgm::Quaternion quatB = { INF, -INF, INF, -INF };
+
+    EXPECT_TRUE(quatA.vecNeq(quatB));
+}
+
+
+TYPED_TEST(QuaternionEqualityTests, VeqNeq_MixedType_QuaternionsWithIdenticalVectorPartReturnsFalse)
+{
+    const fgm::Quaternion quatA(1, 2, 3, 4);
+    const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
+
+    EXPECT_FALSE(quatA.vecNeq(quatB));
+}
+
+
+TYPED_TEST(QuaternionEqualityTests, StaticWrapper_VeqNeq_QuaternionsWithIdenticalVectorPartReturnsFalse)
+{ EXPECT_FALSE(fgm::Quaternion<TypeParam>::vecNeq(this->_eqVecQuatA, this->_eqVecQuatB)); }
+
+
+TYPED_TEST(QuaternionEqualityTests, StaticWrapper_VeqNeq_QuaternionsWithDifferentVectorPartReturnsTrue)
+{ EXPECT_TRUE(fgm::Quaternion<TypeParam>::vecNeq(this->_eqVecQuatA, this->_dissimilarQuat)); }
+
+
+TEST(QuaternionEqualityTests, StaticWrapper_VeqNeq_NanQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA         = { NAN_F, NAN_F, NAN_F, NAN_F };
+    const fgm::Quaternion<double> quatB = { 1.0, -5.88874789, fgm::constants::INFINITY_D, NAN_F };
+
+    EXPECT_TRUE(fgm::Quaternion<float>::vecNeq(quatA, quatB));
+}
+
+
+TEST(QuaternionEqualityTests, StaticWrapper_VeqNeq_IdenticalInfiniteQuaternionsReturnsFalse)
+{
+    const fgm::Quaternion quatA = { INF, -INF, INF, 4.0f };
+    const fgm::Quaternion quatB = { INF, -INF, INF, 8.0f };
+
+    EXPECT_FALSE(fgm::Quaternion<float>::vecNeq(quatA, quatB));
+}
+
+
+TEST(QuaternionEqualityTests, StaticWrapper_VeqNeq_DifferentInfiniteQuaternionsReturnsTrue)
+{
+    const fgm::Quaternion quatA = { INF, INF, INF, -INF };
+    const fgm::Quaternion quatB = { INF, -INF, INF, -INF };
+
+    EXPECT_TRUE(fgm::Quaternion<float>::vecNeq(quatA, quatB));
+}
+
+
+TYPED_TEST(QuaternionEqualityTests, StaticWrapper_VeqNeq_MixedType_QuaternionsWithIdenticalVectorPartReturnsFalse)
+{
+    const fgm::Quaternion quatA(1, 2, 3, 4);
+    const fgm::Quaternion quatB(1.0, 2.0, 3.0, 4.0);
+
+    EXPECT_FALSE(fgm::Quaternion<int>::vecNeq(quatA, quatB));
+}
 
 /** @} */

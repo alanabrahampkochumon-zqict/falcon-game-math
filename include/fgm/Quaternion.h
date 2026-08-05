@@ -25,7 +25,6 @@
 
 #include "Quaternion.h"
 #include "common/MathTraits.h"
-#include "common/PreprocessorDefinitions.h"
 #include "vectors/Vec3.h"
 
 #include <array>
@@ -390,6 +389,9 @@ namespace fgm
          *
          * @relatedalso vecEq()
          * @relatedalso eq()
+         * @relatedalso anyNeq()
+         * @relatedalso neq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -415,6 +417,9 @@ namespace fgm
          *
          * @relatedalso vecEq()
          * @relatedalso eq()
+         * @relatedalso anyNeq()
+         * @relatedalso neq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -436,6 +441,12 @@ namespace fgm
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
          * @return True if any of the components are not equivalent within @p epsilon.
+         *
+         * @relatedalso allEq()
+         * @relatedalso vecEq()
+         * @relatedalso eq()
+         * @relatedalso neq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -458,6 +469,12 @@ namespace fgm
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
          * @return True if any of the components are not equivalent within @p epsilon.
+         *
+         * @relatedalso allEq()
+         * @relatedalso vecEq()
+         * @relatedalso eq()
+         * @relatedalso neq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -481,6 +498,9 @@ namespace fgm
          *
          * @relatedalso allEq()
          * @relatedalso vecEq()
+         * @relatedalso anyNeq()
+         * @relatedalso neq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -503,6 +523,9 @@ namespace fgm
          *
          * @relatedalso allEq()
          * @relatedalso vecEq()
+         * @relatedalso anyNeq()
+         * @relatedalso neq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -524,6 +547,12 @@ namespace fgm
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
          * @return A @ref Quaternion<bool> mask containing the results of each component comparison.
+         *
+         * @relatedalso allEq()
+         * @relatedalso vecEq()
+         * @relatedalso eq()
+         * @relatedalso anyNeq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -543,6 +572,12 @@ namespace fgm
          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
          *
          * @return A @ref Quaternion<bool> mask containing the results of each component comparison.
+         *
+         * @relatedalso allEq()
+         * @relatedalso vecEq()
+         * @relatedalso eq()
+         * @relatedalso anyNeq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -567,6 +602,9 @@ namespace fgm
          *
          * @relatedalso allEq()
          * @relatedalso eq()
+         * @relatedalso anyNeq()
+         * @relatedalso neq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
@@ -588,11 +626,64 @@ namespace fgm
          *
          * @relatedalso allEq()
          * @relatedalso eq()
+         * @relatedalso anyNeq()
+         * @relatedalso neq()
+         * @relatedalso vecNeq()
          */
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr bool vecEq(const Quaternion& lhs, const Quaternion<U>& rhs,
                                                   double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
+
+
+        /**
+         * @brief Perform component-wise inequality check between the vector part of this quaternion
+         *        and @p rhs quaternion.
+         *
+         * @note To obtain a single scalar result, use @ref allEq or @ref operator==.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if any components of the vector part(i, j, k) are not equivalent within @p epsilon.
+         *
+         * @relatedalso allEq()
+         * @relatedalso vecNeq()
+         * @relatedalso eq()
+         * @relatedalso anyNeq()
+         * @relatedalso neq()
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] constexpr bool vecNeq(const Quaternion<U>& rhs,
+                                            double epsilon = Config::EPSILON<std::common_type_t<T, U>>) const noexcept;
+
+
+        /**
+         * @brief Perform component-wise inequality check between the vector part of @p lhs and @p rhs quaternion.
+         *
+         * @tparam U Numeric type of the RHS quaternion. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The quaternion to compare.
+         * @param[in] rhs     The quaternion to compare against.
+         * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
+         *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
+         *
+         * @return True if any components of the vector part(i, j, k) are not equivalent within @p epsilon.
+         *
+         * @relatedalso allEq()
+         * @relatedalso vecNeq()
+         * @relatedalso eq()
+         * @relatedalso anyNeq()
+         * @relatedalso neq()
+         */
+        template <Arithmetic U>
+            requires StrictSignedness<T, U>
+        [[nodiscard]] static constexpr bool vecNeq(const Quaternion& lhs, const Quaternion<U>& rhs,
+                                                   double epsilon = Config::EPSILON<std::common_type_t<T, U>>) noexcept;
 
 
         /**
