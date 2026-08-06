@@ -566,7 +566,7 @@ namespace fgm
             requires StrictSignedness<T, U>
         constexpr Mat4& operator*=(const Mat4<U>& rhs) noexcept
             requires StrictArithmetic<T>;
-        
+
         /** @} */
 
 
@@ -1971,4 +1971,4 @@ namespace fgm
 
 } // namespace fgm
 
-#include "Mat
+#include "Mat4.tpp"
