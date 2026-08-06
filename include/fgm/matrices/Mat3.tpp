@@ -827,7 +827,9 @@ namespace fgm
         R sine   = std::sin(angle);
 
 #ifdef FGM_LEFT_HANDED
-        return Mat3{ cosine, sine, T(center.x()), -sine, cosine, T(center.y()), T(0), T(0), T(1) };
+        return Mat3{ cosine, sine, T(center.x()),
+                    -sine, cosine, T(center.y()),
+                       T(0), T(0), T(1) };
 #else
         return Mat3{ cosine, -sine, T(center.x()), sine, cosine, T(center.y()), T(0), T(0), T(1) };
 #endif
