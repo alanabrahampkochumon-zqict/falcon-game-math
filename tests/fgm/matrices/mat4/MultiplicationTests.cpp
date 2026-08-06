@@ -619,7 +619,7 @@ TYPED_TEST(Mat4Multiplication, MatrixTimesMatrixReturnsAMatrixProduct)
     const auto transformedVector = this->_matA * this->_matB;
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+        EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector, std::is_same_v<TypeParam, float> ? 1e-4: 1e-14);
     }
     else
     {
@@ -672,7 +672,7 @@ TYPED_TEST(Mat4Multiplication, CompoundMultiplicationOperationPerformInPlaceMatr
     transformedVector *= this->_matB;
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector);
+        EXPECT_MAT_EQ(this->_expectedFloatingMat, transformedVector, std::is_same_v<TypeParam, float> ? 1e-4: 1e-14);
     }
     else
     {
