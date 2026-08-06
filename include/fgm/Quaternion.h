@@ -944,6 +944,39 @@ namespace fgm
 
         /** @} */
 
+
+        /**
+         * @addtogroup FGM_Quaternion_Const
+         * @{
+         */
+
+        /**
+         * @brief A quaternion with zero vector part and unit scalar part (0i, 0j, 0k, 1).
+         */
+        static constexpr Quaternion identity()
+            requires StrictArithmetic<T>
+        { return Quaternion{ T(0), T(0), T(0), T(1) }; }
+
+
+        /**
+         * @brief A quaternion with unit vector part and scalar part (1i, 1j, 1k, 1).
+         */
+        static constexpr Quaternion one()
+            requires StrictArithmetic<T>
+        { return Quaternion{ T(1), T(1), T(1), T(1) }; }
+
+
+        /**
+         * @brief A quaternion with all components set to zero (0i, 0j, 0k, 0).
+         */
+        static constexpr Quaternion zero()
+            requires StrictArithmetic<T>
+        { return Quaternion{ T(0), T(0), T(0), T(0) }; }
+
+        /** @} */
+
+
+
     private:
         std::array<T, 4> _data;
     };

@@ -2,6 +2,7 @@ add_executable(FGMQuaternionsTests
         # Compilation Units
         ArithmeticOperationTests.cpp
         AccessAndMutationTests.cpp
+        ConstantsTests.cpp
         EqualityTests.cpp
         InitializationTests.cpp
         QuaternionAlgebraTests.cpp
