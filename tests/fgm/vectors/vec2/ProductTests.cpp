@@ -101,9 +101,9 @@ namespace
         {
             _vecA                    = fgm::Vec2{ T(1.23412341000000003), T(2.21341324399999984) };
             _vecB                    = { T(1.23412341000000003), T(2.21341324399999984) };
-            _expectedTensorProductInt = { fgm::Vec2{ T(1.52306059111002812), T(2.73162510042444184) },
+            _expectedTensorProductFP = { fgm::Vec2{ T(1.52306059111002812), T(2.73162510042444184) },
                                          fgm::Vec2{ T(2.73162510042444184), T(4.89919818871460322) } };
-            _expectedTensorProductFP  = { fgm::Vec2{ T(1), T(2) }, fgm::Vec2{ T(2), T(4) } };
+            _expectedTensorProductInt  = { fgm::Vec2{ T(1), T(2) }, fgm::Vec2{ T(2), T(4) } };
         }
     };
     TYPED_TEST_SUITE(Vec2TensorProduct, SupportedSignedArithmeticTypes);

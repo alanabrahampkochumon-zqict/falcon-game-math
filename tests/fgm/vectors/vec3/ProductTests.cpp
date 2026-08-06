@@ -92,27 +92,27 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
     template <typename T>
-    class Vec3InnerProduct: public ::testing::Test
+    class Vec3TensorProduct: public ::testing::Test
     {
     protected:
         fgm::Vec3<T> _vecA;
         fgm::Vec3<T> _vecB;
-        fgm::Mat3<T> _expectedInnerProductInt, _expectedInnerProductFP;
+        fgm::Mat3<T> _expectedTensorProductInt, _expectedTensorProductFP;
 
         void SetUp() override
         {
             _vecA = fgm::Vec3{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988) };
             _vecB = fgm::Vec3{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988) };
-            _expectedInnerProductInt = {
+            _expectedTensorProductFP = {
                 fgm::Vec3{ T(1.74753101886389506), T(2.80653765551779566), T(3.99403829352285911) },
                 fgm::Vec3{ T(2.80653765551779566), T(4.50730403455733519), T(6.41443198853168894) },
                 fgm::Vec3{ T(3.99403829352285911), T(6.41443198853168894), T(9.12850285226864244) }
             };
-            _expectedInnerProductFP = { fgm::Vec3{ T(1), T(2), T(3) }, fgm::Vec3{ T(2), T(4), T(6) },
+            _expectedTensorProductInt = { fgm::Vec3{ T(1), T(2), T(3) }, fgm::Vec3{ T(2), T(4), T(6) },
                                         fgm::Vec3{ T(3), T(6), T(9) } };
         }
     };
-    TYPED_TEST_SUITE(Vec3InnerProduct, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec3TensorProduct, SupportedSignedArithmeticTypes);
 
 
 
@@ -487,21 +487,21 @@ TEST(Vec3CrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
  *                                    *
  **************************************/
 
-TYPED_TEST(Vec3InnerProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
+TYPED_TEST(Vec3TensorProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
 {
     const auto tensorProduct = this->_vecA.tensorProduct(this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductFP, tensorProduct);
+        EXPECT_MAT_EQ(this->_expectedTensorProductFP, tensorProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductInt, tensorProduct);
+        EXPECT_MAT_EQ(this->_expectedTensorProductInt, tensorProduct);
     }
 }
 
 
-TEST(Vec3InnerProduct, BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vec3TensorProduct, BetweenDifferentlyTypedVectorsPromotesType)
 {
     const fgm::Vec3 vecA(2.0f, 3.0f, 4.0f);
     const fgm::Vec3 vecB(5.0, 6.0, 7.0);
@@ -511,21 +511,21 @@ TEST(Vec3InnerProduct, BetweenDifferentlyTypedVectorsPromotesType)
 }
 
 
-TYPED_TEST(Vec3InnerProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatrix)
+TYPED_TEST(Vec3TensorProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatrix)
 {
     const auto tensorProduct = fgm::Vec3<TypeParam>::tensorProduct(this->_vecA, this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductFP, tensorProduct);
+        EXPECT_MAT_EQ(this->_expectedTensorProductFP, tensorProduct);
     }
     else
     {
-        EXPECT_MAT_EQ(this->_expectedInnerProductInt, tensorProduct);
+        EXPECT_MAT_EQ(this->_expectedTensorProductInt, tensorProduct);
     }
 }
 
 
-TEST(Vec3InnerProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vec3TensorProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
 {
     const fgm::Vec3 vecA(2.0f, 3.0f, 4.0f);
     const fgm::Vec3 vecB(5.0, 6.0, 7.0);
@@ -533,5 +533,3 @@ TEST(Vec3InnerProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
     [[maybe_unused]] const auto crossProduct = fgm::Vec3<float>::tensorProduct(vecA, vecB);
     static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat3<double>>);
 }
-
-/** @} */
