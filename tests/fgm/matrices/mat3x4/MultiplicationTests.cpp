@@ -128,7 +128,7 @@ TEST(Mat3x4ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 TEST(Mat3x4ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 {
     const fgm::Mat3x4 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f, 3.5f, 4.0f, 12.5f, -1.0f, 33.0f, 12.0f };
-    const fgm::Mat3x4 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f, 7.0f, 8.0f, 25.0f, -2.0f, 66.0f, 24.0f };
+    const fgm::Mat3x4 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f, -7.0f, -8.0f, -25.0f, 2.0f, -66.0f, -24.0f };
     const float scalar         = -2.0f;
 
     const fgm::Mat3x4<float> product = mat * scalar;

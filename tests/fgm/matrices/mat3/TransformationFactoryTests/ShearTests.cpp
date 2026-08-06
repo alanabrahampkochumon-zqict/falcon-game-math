@@ -11,6 +11,8 @@
 
 #include "../Mat3TestSetup.h"
 
+#include <numbers>
+
 
 /**
  * @addtogroup T_FGM_Mat3x3_Transforms
@@ -89,13 +91,13 @@ namespace
 
         void SetUp() override
         {
-            _shearAngle       = T(3.1415 / 4);
+            _shearAngle       = T(std::numbers::pi / 4);
             _shearFactor      = T(1);
             _shearDirection   = fgm::Vec3{ T(0.2672612419124244), T(0.5345224838248488), T(0.8017837257372732) };
             _shearPlaneNormal = fgm::Vec3{ T(0.48471791416315496), T(0.5728484440110013), T(0.6609789738588476) };
-            _shear = fgm::Mat3{ fgm::Vec3{ T(1.1295403103900423), T(0.1530930940973227), T(0.17664587780460309) },
-                                fgm::Vec3{ T(0.25908062078008454), T(1.3061861881946455), T(0.35329175560920617) },
-                                fgm::Vec3{ T(0.38862093117012675), T(0.459279282291968), T(1.5299376334138093) } };
+            _shear = fgm::Mat3<T>{ fgm::Vec3{ T(1.1295463117164446), T(0.15310018657398008), T(0.1766540614315155) },
+                                   fgm::Vec3{ T(0.2590926234328894), T(1.3062003731479601), T(0.353308122863031) },
+                                   fgm::Vec3{ T(0.3886389351493341), T(0.45930055972194034), T(1.5299621842945466) } };
         }
     };
     TYPED_TEST_SUITE(Mat3ArbitraryShear, SupportedFloatingPointTypes);
@@ -147,7 +149,8 @@ namespace
 
 
         /// @test Verify that @ref Mat3 makeShear returns a valid 3D shear matrix at compile time.
-        constexpr auto SHEAR3D_MAT = fgm::Mat3<float>::makeShear(1.0f, fgm::Vec3{1.0f, 0.0f, 0.0f},fgm::Vec3{0.0f, 0.0f, 1.0f} );
+        constexpr auto SHEAR3D_MAT =
+            fgm::Mat3<float>::makeShear(1.0f, fgm::Vec3{ 1.0f, 0.0f, 0.0f }, fgm::Vec3{ 0.0f, 0.0f, 1.0f });
         static_assert(SHEAR3D_MAT[0] == fgm::Vec3{ 1, 0, 0 });
         static_assert(SHEAR3D_MAT[1] == fgm::Vec3{ 0, 1, 0 });
         static_assert(SHEAR3D_MAT[2] == fgm::Vec3{ 1, 0, 1 });
@@ -193,9 +196,8 @@ TYPED_TEST(Mat3ArbitraryShear, ShearByAngle_ReturnsAValid3DShearMatrix)
 
 TYPED_TEST(Mat3ArbitraryShear, Shear_ReturnsAValid3DShearMatrix)
 {
-    EXPECT_MAT_EQ(
-        this->_shear,
-        fgm::Mat3<TypeParam>::makeShear(this->_shearFactor, this->_shearPlaneNormal, this->_shearDirection));
+    EXPECT_MAT_EQ(this->_shear,
+                  fgm::Mat3<TypeParam>::makeShear(this->_shearFactor, this->_shearPlaneNormal, this->_shearDirection));
 }
 
 

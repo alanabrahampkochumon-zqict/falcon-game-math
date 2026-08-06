@@ -113,21 +113,21 @@ namespace
         void SetUp() override
         {
             _scale = 5;
-            _xAxis = { T(1), T(0), T(0) };
-            _yAxis = { T(0), T(1), T(0) };
-            _zAxis = { T(0), T(0), T(1) };
+            _xAxis = fgm::Vec3{ T(1), T(0), T(0) };
+            _yAxis = fgm::Vec3{ T(0), T(1), T(0) };
+            _zAxis = fgm::Vec3{ T(0), T(0), T(1) };
 
-            _expectedMatX = { fgm::Vec3{ T(5), T(0), T(0) }, fgm::Vec3{ T(0), T(1), T(0) },
-                              fgm::Vec3{ T(0), T(0), T(1) } };
+            _expectedMatX = fgm::Mat3<T>{ fgm::Vec3{ T(5), T(0), T(0) }, fgm::Vec3{ T(0), T(1), T(0) },
+                                          fgm::Vec3{ T(0), T(0), T(1) } };
 
-            _expectedMatX = { fgm::Vec3{ T(1), T(0), T(0) }, fgm::Vec3{ T(0), T(5), T(0) },
-                              fgm::Vec3{ T(0), T(0), T(1) } };
+            _expectedMatY = fgm::Mat3<T>{ fgm::Vec3{ T(1), T(0), T(0) }, fgm::Vec3{ T(0), T(5), T(0) },
+                                          fgm::Vec3{ T(0), T(0), T(1) } };
 
-            _expectedMatX = { fgm::Vec3{ T(1), T(0), T(0) }, fgm::Vec3{ T(0), T(1), T(0) },
-                              fgm::Vec3{ T(0), T(0), T(5) } };
+            _expectedMatZ = fgm::Mat3<T>{ fgm::Vec3{ T(1), T(0), T(0) }, fgm::Vec3{ T(0), T(1), T(0) },
+                                          fgm::Vec3{ T(0), T(0), T(5) } };
         }
     };
-    TYPED_TEST_SUITE(Mat3ScaleFactoryDirectionVectorInt, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat3ScaleFactoryDirectionVectorInt, SupportedSignedArithmeticTypes);
 
 
 
@@ -185,7 +185,7 @@ TYPED_TEST(Mat3ScaleFactoryDirectionVectorFP, ArbitraryDirectionVector_ReturnsVa
 
 
 TYPED_TEST(Mat3ScaleFactoryDirectionVectorInt, XAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheFirstRow)
-{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat3<TypeParam>::makeScale(this->_scale, this->_xAxis)); }
+{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat3<TypeParam>::makeScale(this->_scale, this->_xAxis)); }
 
 
 TYPED_TEST(Mat3ScaleFactoryDirectionVectorInt, YAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheSecondRow)
