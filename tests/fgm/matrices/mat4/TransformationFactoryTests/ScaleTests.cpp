@@ -123,10 +123,10 @@ namespace
             _expectedMatX = { fgm::Vec4{ T(5), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
                               fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
 
-            _expectedMatX = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(5), T(0), T(0) },
+            _expectedMatY = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(5), T(0), T(0) },
                               fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
 
-            _expectedMatX = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
+            _expectedMatZ = { fgm::Vec4{ T(1), T(0), T(0), T(0) }, fgm::Vec4{ T(0), T(1), T(0), T(0) },
                               fgm::Vec4{ T(0), T(0), T(5), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
         }
     };
@@ -191,7 +191,7 @@ TYPED_TEST(Mat4ScaleFactoryDirectionVectorFP, ArbitraryDirectionVector_ReturnsVa
 
 
 TYPED_TEST(Mat4ScaleFactoryDirectionVectorInt, XAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheFirstRow)
-{ EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<TypeParam>::makeScale(this->_scale, this->_xAxis)); }
+{ EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<TypeParam>::makeScale(this->_scale, this->_xAxis)); }
 
 
 TYPED_TEST(Mat4ScaleFactoryDirectionVectorInt, YAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheSecondRow)

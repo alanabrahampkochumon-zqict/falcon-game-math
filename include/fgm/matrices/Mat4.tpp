@@ -1138,7 +1138,7 @@ namespace fgm
         T yz = scale * direction.y() * direction.z();
         T zx = scale * direction.z() * direction.x();
 
-        return Mat4{ x, xy, zx, xy, T(0), y, yz, zx, yz, T(0), z, T(0), T(0), T(0), T(0), T(1) };
+        return Mat4{ x, xy, zx, T(0), xy, y, yz, T(0), zx, yz, z, T(0), T(0), T(0), T(0), T(1) };
     }
 
     template <Arithmetic T>
