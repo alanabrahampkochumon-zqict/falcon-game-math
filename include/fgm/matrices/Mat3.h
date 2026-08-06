@@ -1398,7 +1398,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 2D affine shear matrix by the x-axis (horizontal axis).
+         * @brief Construct a 2D affine shear matrix along the x-axis (horizontal axis).
          *
          * @param[in] shear The shear amount.
          *
@@ -1415,7 +1415,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 2D affine shear matrix by the y-axis (vertical axis).
+         * @brief Construct a 2D affine shear matrix along the y-axis (vertical axis).
          *
          * @param[in] shear The shear amount.
          *
@@ -1433,7 +1433,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 3D shear matrix by the x-axis (YZ plane).
+         * @brief Construct a 3D shear matrix along the x-axis (YZ plane).
          *
          * @param[in] shearY The shear amount on the y-axis.
          * @param[in] shearZ The shear amount on the z-axis.
@@ -1452,7 +1452,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 3D shear matrix by the y-axis (ZX plane).
+         * @brief Construct a 3D shear matrix along the y-axis (ZX plane).
          *
          * @param[in] shearX The shear amount on the x-axis.
          * @param[in] shearZ The shear amount on the z-axis.
@@ -1471,7 +1471,7 @@ namespace fgm
         // TODO: Update parameters to be reversed
 
         /**
-         * @brief Construct a 3D shear matrix by the y-axis (XY plane).
+         * @brief Construct a 3D shear matrix along the y-axis (XY plane).
          *
          * @param[in] shearX The shear amount on the x-axis.
          * @param[in] shearY The shear amount on the y-axis.

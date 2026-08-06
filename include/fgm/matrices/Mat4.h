@@ -566,15 +566,15 @@ namespace fgm
             requires StrictSignedness<T, U>
         constexpr Mat4& operator*=(const Mat4<U>& rhs) noexcept
             requires StrictArithmetic<T>;
+        
+        /** @} */
+
+
 
         /**
          * @addtogroup FGM_Mat4x4_Algebra
          * @{
          */
-
-
-
-        /** @} */
 
         /**
          * @brief Compute the element-wise division of this matrix by @p scalar and return a new matrix.
@@ -1660,7 +1660,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 3D affine shear matrix by the x-axis.
+         * @brief Construct a 3D affine shear matrix along the x-axis.
          *
          * @param[in] shearY The shear amount on the y-axis.
          * @param[in] shearZ The shear amount on the z-axis.
@@ -1677,7 +1677,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 3D affine shear matrix by the y-axis.
+         * @brief Construct a 3D affine shear matrix along the y-axis.
          *
          * @param[in] shearX The shear amount on the x-axis.
          * @param[in] shearZ The shear amount on the z-axis.
@@ -1694,7 +1694,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 3D affine shear matrix by the z-axis.
+         * @brief Construct a 3D affine shear matrix along the z-axis.
          *
          * @param[in] shearX The shear amount on the x-axis.
          * @param[in] shearY The shear amount on the y-axis.
@@ -1971,4 +1971,4 @@ namespace fgm
 
 } // namespace fgm
 
-#include "Mat4.tpp"
+#include "Mat

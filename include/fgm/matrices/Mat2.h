@@ -1160,7 +1160,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 2D shear matrix by the x-axis (horizontal axis).
+         * @brief Construct a 2D shear matrix along the x-axis (horizontal axis).
          *
          * @param[in] shear The shear amount.
          *
@@ -1171,7 +1171,7 @@ namespace fgm
 
 
         /**
-         * @brief Construct a 2D shear matrix by the y-axis (vertical axis).
+         * @brief Construct a 2D shear matrix along the y-axis (vertical axis).
          *
          * @param[in] shear The shear amount.
          *
