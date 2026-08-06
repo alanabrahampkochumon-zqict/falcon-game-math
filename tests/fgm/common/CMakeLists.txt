@@ -1,5 +1,9 @@
 add_executable(FGMCommonTests)
 set_target_properties(FGMCommonTests PROPERTIES DISABLE_PRECOMPILE_HEADERS OFF)
+set_target_properties(FGMCommonTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FGMCommonTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FGMCommonTests PROPERTIES CXX_EXTENSIONS OFF)
+
 
 target_sources(
         FGMCommonTests PRIVATE
