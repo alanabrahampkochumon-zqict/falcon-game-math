@@ -55,10 +55,10 @@ namespace
     /**
      * @brief Parameterized Test fixture for @ref fgm::Transform4 singular matrix inverse.
      */
-    class Transform4Inverse_Singular: public testing::TestWithParam<fgm::Transform4<float>>
+    class Transform4InverseSingular: public testing::TestWithParam<fgm::Transform4<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Transform4InverseTestSuite, Transform4Inverse_Singular,
+        Transform4InverseTestSuite, Transform4InverseSingular,
         ::testing::Values(fgm::Transform4{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 1.0f, 2.0f, 3.0f },
                                            fgm::Vec3{ 7.0f, 8.0f, 9.0f }, fgm::Point3{ 1.0f, 85.0f, 19.0f } },
                           fgm::Transform4{ fgm::Vec3{ 1.0f, 1.0f, 3.0f }, fgm::Vec3{ 2.0f, 2.0f, 3.0f },
@@ -124,14 +124,14 @@ TYPED_TEST(Transform4Inverse, StaticWrapper_ReturnsInverseMatrix)
 
 #ifdef ENABLE_DEBUG_TESTS
 
-TEST_P(Transform4Inverse_Singular, TriggersAssertionInDebugMode)
+TEST_P(Transform4InverseSingular, TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(matrix.inverse()), "");
 }
 
 
-TEST_P(Transform4Inverse_Singular, StaticWrapper_TriggersAssertionInDebugMode)
+TEST_P(Transform4InverseSingular, StaticWrapper_TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Transform4<float>::inverse(matrix)), "");
