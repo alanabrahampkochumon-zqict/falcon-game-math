@@ -11,9 +11,16 @@
 
 #include "utils/TypeUtils.h"
 
+#include <fgm/Quaternion.h>
 #include <fgm/matrices/Mat2.h>
+#include <fgm/matrices/Mat2x3.h>
+#include <fgm/matrices/Mat2x4.h>
 #include <fgm/matrices/Mat3.h>
+#include <fgm/matrices/Mat3x2.h>
+#include <fgm/matrices/Mat3x4.h>
 #include <fgm/matrices/Mat4.h>
+#include <fgm/matrices/Mat4x2.h>
+#include <fgm/matrices/Mat4x3.h>
 #include <fgm/vectors/Vec2.h>
 #include <fgm/vectors/Vec3.h>
 #include <fgm/vectors/Vec4.h>
@@ -23,15 +30,25 @@
  * @{
  */
 
-/** @brief Verify that @ref fgm Vectors are trivial types. */
+/** @test Verify that @ref fgm Vectors are trivial types. */
 ASSERT_TRIVIAL_TYPE(fgm::Vec2<float>);
 ASSERT_TRIVIAL_TYPE(fgm::Vec3<float>);
 ASSERT_TRIVIAL_TYPE(fgm::Vec4<float>);
 
 
-/** @brief Verify that @ref fgm Matrices are trivial types. */
+/** @test Verify that @ref fgm Matrices are trivial types. */
 ASSERT_TRIVIAL_TYPE(fgm::Mat2<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Mat2x3<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Mat2x4<float>);
 ASSERT_TRIVIAL_TYPE(fgm::Mat3<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Mat3x2<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Mat3x4<float>);
 ASSERT_TRIVIAL_TYPE(fgm::Mat4<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Mat4x2<float>);
+ASSERT_TRIVIAL_TYPE(fgm::Mat4x3<float>);
+
+
+/** @test Verify that @ref fgm Quaternions are trivial types. */
+ASSERT_TRIVIAL_TYPE(fgm::Quaternion<float>);
 
 /** @} */

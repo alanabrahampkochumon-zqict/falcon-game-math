@@ -994,6 +994,7 @@ namespace fgm
      * @tparam S The numeric type of RHS quaternion. Must satisfy @ref StrictArithmetic.
      *
      * @param[in] scalar The scalar to multiply.
+     * @param[in] quat   The quaternion to multiply.
      *
      * @return A new @ref Quaternion scaled by @p scalar.
      */
