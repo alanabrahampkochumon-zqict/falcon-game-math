@@ -10,8 +10,9 @@
  */
 
 
-#include <cmath>
+#include "Wrappers.h"
 
+#include <cmath>
 
 namespace fgm::utils
 {
@@ -22,6 +23,21 @@ namespace fgm::utils
         // Only one side of the expression is evaluated to a non-zero number.
         // So, if either side of + underflows, it will be canceled out by the boolean expression.
         return PromotedValue_t<T, U>((lhs - rhs) * (lhs >= rhs) + (rhs - lhs) * (lhs < rhs));
+    }
+
+
+    template <typename T>
+        requires std::floating_point<T> || std::integral<T>
+    constexpr bool compareEq(const T a, const T b) noexcept
+    {
+        if constexpr (std::integral<T>)
+        {
+            return a == b;
+        }
+        else
+        {
+            return fgm::abs(a - b) <= std::numeric_limits<T>::epsilon() * std::max(fgm::abs(a), fgm::abs(b));
+        }
     }
 
 

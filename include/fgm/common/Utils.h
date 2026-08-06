@@ -45,6 +45,25 @@ namespace fgm::utils
 
 
     /**
+     * @brief Compare two values for equality.
+     *
+     * @details Compares if two numbers are equal. For floating point numbers, a relative equality
+     *          based on machine epsilon is used.
+     *
+     * @tparam T The type of operands. Must satisfy `std::floating_point` or `std::integral`.
+     *
+     * @param a The first operand.
+     * @param b The second operand.
+     *
+     * @return A boolean whether the values are equal.
+     */
+    template <typename T>
+        requires std::floating_point<T> || std::integral<T>
+    constexpr bool compareEq(T a, T b) noexcept;
+
+
+
+    /**
      * @brief Compute the square root of a number.
      * TODO: Move to Wrappers.h
      * @note Wrapper around the `std::sqrt` function with Newton-Raphson approximation for compile time evaluation.

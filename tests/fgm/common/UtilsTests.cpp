@@ -16,52 +16,95 @@
 #include <fgm/common/Utils.h>
 
 
-template <typename T>
-class FGMDiffAbs: public testing::Test
-{};
-/** @brief Test fixture for @ref fgm::utils::diffAbs, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(FGMDiffAbs, SupportedArithmeticTypes);
-
-
-
 /**
  * @addtogroup T_FGM_Utils
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
 namespace
 {
-    /** @brief Verify that @ref fgm::utils::diffAbs is available at compile time. */
-    namespace
+
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::utils::diffAbs.
+     *
+     * @tparam T The scalar type (int, float,...) of the scalar values.
+     */
+    template <typename T>
+    class FGMDiffAbsTests: public testing::Test
+    {};
+    TYPED_TEST_SUITE(FGMDiffAbsTests, SupportedArithmeticTypes);
+
+
+
+    template <typename T>
+    struct CompareEqTestParams
     {
+        T a, b;
+        bool expected;
+    };
+
+    /**
+     * @brief Test fixture for validating @ref fgm::utils::compareEq across different types.
+     */
+    template <typename T>
+    class CompareEqTests: public testing::Test
+    {
+    protected:
+        T _equalValueA, _equalValueB, _unequalValue;
+
+        void SetUp() override
+        {
+            _equalValueA  = T(1.01238402134);
+            _equalValueB  = T(1.01238402134);
+            _unequalValue = T(5.2139032);
+        }
+    };
+    TYPED_TEST_SUITE(CompareEqTests, SupportedArithmeticTypes);
+
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        /** @test Verify that @ref fgm::utils::diffAbs returns the correct value at compile time. */
         static_assert(fgm::utils::diffAbs(1000, 100) == 900);
         static_assert(fgm::utils::diffAbs(100, 1000) == 900);
-    } // namespace
 
 
-    // namespace
-    //{
-    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //     static_assert(fgm::utils::sqrt(2.0) - 1.41421356237 <= fgm::Config::DOUBLE_EPSILON);
-    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-    // }
+        /// @test Verify that @ref fgm::utils::compareEq returns the correct boolean at compile time. */
+        static_assert(fgm::utils::compareEq(9.1111, 9.1112) == false);
+        static_assert(fgm::utils::compareEq(9.1112, 9.1111) == false);
+        static_assert(fgm::utils::compareEq(9.1112, 9.1112) == true);
+
+        /// TODO: Add sqrt tests
+        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+        //     static_assert(fgm::utils::sqrt(2.0) - 1.41421356237 <= fgm::Config::DOUBLE_EPSILON);
+        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+    } // namespace static_tests
+
+
 } // namespace
 
 
-/**
- * @brief Verify that @ref fgm::utils::diffAbs returns absolute difference without overflow when
- *        first operand is greater than second operand.
- */
-TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenAGreaterThanB)
+
+
+/**************************************
+ *              DIFF ABS              *
+ **************************************/
+
+TYPED_TEST(FGMDiffAbsTests, ReturnsAbsoluteValueWithUnderflow_WhenAGreaterThanB)
 {
     const auto a      = TypeParam(12);
     const auto b      = TypeParam(7);
@@ -70,11 +113,7 @@ TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenAGreaterThanB)
 }
 
 
-/**
- * @brief Verify that @ref fgm::utils::diffAbs returns absolute difference without overflow when
- *        second operand is greater than first operand.
- */
-TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenBGreaterThanA)
+TYPED_TEST(FGMDiffAbsTests, ReturnsAbsoluteValueWithUnderflow_WhenBGreaterThanA)
 {
     const auto a      = TypeParam(7);
     const auto b      = TypeParam(12);
@@ -83,16 +122,30 @@ TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenBGreaterThanA)
 }
 
 
-/**
- * @brief Verify that @ref fgm::utils::diffAbs returns zero when
- *        first operand is equal to second operand.
- */
-TYPED_TEST(FGMDiffAbs, ReturnsAbsoluteValueWithUnderflow_WhenAEqualsB)
+TYPED_TEST(FGMDiffAbsTests, ReturnsAbsoluteValueWithUnderflow_WhenAEqualsB)
 {
     const auto a      = TypeParam(12);
     const auto b      = TypeParam(12);
     const auto result = TypeParam(0);
     testutils::EXPECT_MAG_EQ(result, fgm::utils::diffAbs(a, b));
 }
+
+
+
+/**************************************
+ *             COMPARE EQ             *
+ **************************************/
+
+TYPED_TEST(CompareEqTests, EqualValues_ReturnTrue)
+{ EXPECT_TRUE(fgm::utils::compareEq(this->_equalValueA, this->_equalValueB)); }
+
+
+TYPED_TEST(CompareEqTests, UnequalValues_ReturnFalse)
+{ EXPECT_FALSE(fgm::utils::compareEq(this->_equalValueA, this->_unequalValue)); }
+
+
+/// @test Verify that compareEq works with relative precision when compared IEEE 754 floating point types.
+TEST(CompareEqTests, MaintainsARelativePrecision)
+{ EXPECT_FALSE(fgm::utils::compareEq(316.810892301231, 316.810892301222)); }
 
 /** @} */
