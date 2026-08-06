@@ -278,8 +278,8 @@ namespace fgm
     FGM_INLINE constexpr Quaternion<Magnitude<T>> Quaternion<T>::inverse() const noexcept
         requires SignedStrictArithmetic<T>
     {
-        // TODO: Add assertion for 0 quaternion
         // note: this->conjugate(this is implied)
+        FGM_ASSERT_MSG(dot(*this) > 0, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
         using M = Magnitude<T>;
         return static_cast<Quaternion<M>>(conjugate()) / static_cast<M>(dot(*this));
     }

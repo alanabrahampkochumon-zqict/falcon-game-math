@@ -1,5 +1,5 @@
 /**
- * @file ArithmeticOperationTests.cpp
+ * @file QuaternionAlgebraTests.cpp
  * @author Alan Abraham P Kochumon
  * @date Created on: August 03, 2026
  *

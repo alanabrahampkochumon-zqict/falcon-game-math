@@ -4,7 +4,7 @@ add_executable(FGMQuaternionsTests
         AccessAndMutationTests.cpp
         EqualityTests.cpp
         InitializationTests.cpp
-        QuaternionAlgebra.cpp
+        QuaternionAlgebraTests.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
         VectorAlgebraTests.cpp
@@ -48,6 +48,7 @@ target_precompile_headers(
 add_executable(FGMQuaternionsDeathTests
         # Compilation Units
         death-tests/ArithmeticOperationDeathTests.cpp
+        death-tests/QuaternionAlgebraTests.cpp
 
         # Headers
         include/QuaternionTestSetup.h
