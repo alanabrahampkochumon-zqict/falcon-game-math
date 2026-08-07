@@ -27,7 +27,7 @@ namespace
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
     template <typename T>
-    class Mat2x4Negation: public ::testing::Test
+    class Mat2x4NegationTests: public ::testing::Test
     {
     protected:
         fgm::Mat2x4<T> _matA, _expectedMat;
@@ -39,7 +39,7 @@ namespace
         }
     };
     /** @brief Test fixture for @ref fgm::Mat2x4 negation, parameterized by @ref SupportedSignedArithmeticTypes. */
-    TYPED_TEST_SUITE(Mat2x4Negation, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat2x4NegationTests, SupportedSignedArithmeticTypes);
 
 
 
@@ -72,7 +72,7 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TYPED_TEST(Mat2x4Negation, ReturnsElementWiseNegatedMatrix)
+TYPED_TEST(Mat2x4NegationTests, ReturnsElementWiseNegatedMatrix)
 {
     const fgm::Mat2x4 negMat = -this->_matA;
     EXPECT_MAT_EQ(this->_expectedMat, negMat);

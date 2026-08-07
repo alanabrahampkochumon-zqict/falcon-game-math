@@ -45,7 +45,7 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TEST(Mat2x4ConversionConstructor, ConversionCtor_CanPromoteType)
+TEST(Mat2x4ConversionConstructorTests, ConversionCtor_CanPromoteType)
 {
     const fgm::Mat2x4 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
@@ -54,7 +54,7 @@ TEST(Mat2x4ConversionConstructor, ConversionCtor_CanPromoteType)
 }
 
 
-TEST(Mat2x4ConversionConstructor, ConversionCtor_ReturnsNewInstance)
+TEST(Mat2x4ConversionConstructorTests, ConversionCtor_ReturnsNewInstance)
 {
     // Given a float matrix
     const fgm::Mat2x4 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
@@ -72,7 +72,7 @@ TEST(Mat2x4ConversionConstructor, ConversionCtor_ReturnsNewInstance)
 }
 
 
-TEST(Mat2x4ConversionConstructor, ConversionCtor_DemotesType)
+TEST(Mat2x4ConversionConstructorTests, ConversionCtor_DemotesType)
 {
     const fgm::Mat2x4 mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0);
 

@@ -180,7 +180,7 @@ TYPED_TEST(Mat2x3EqualityTests, AllEq_DifferentMatricesReturnFalse)
 }
 
 
-TEST(Mat2x3Equality, AllEq_NanMatrixReturnsFalse)
+TEST(Mat2x3EqualityTests, AllEq_NanMatrixReturnsFalse)
 {
     const fgm::Mat2x3 matA(NAN_F, NAN_F, NAN_F, NAN_F, NAN_F, 1.0f);
     const fgm::Mat2x3 matB(1.0f, -5.88874789f, 2.0f, 0.888749f, 0.5329f, 5.23193f);
@@ -191,7 +191,7 @@ TEST(Mat2x3Equality, AllEq_NanMatrixReturnsFalse)
 }
 
 
-TEST(Mat2x3Equality, AllEq_IdenticalInfiniteMatricesReturnTrue)
+TEST(Mat2x3EqualityTests, AllEq_IdenticalInfiniteMatricesReturnTrue)
 {
     const fgm::Mat2x3 matA(INF, -INF, INF, -INF, -INF, INF);
     const fgm::Mat2x3 matB(INF, -INF, INF, -INF, -INF, INF);
@@ -202,7 +202,7 @@ TEST(Mat2x3Equality, AllEq_IdenticalInfiniteMatricesReturnTrue)
 }
 
 
-TEST(Mat2x3Equality, AllEq_DifferentInfiniteMatricesReturnFalse)
+TEST(Mat2x3EqualityTests, AllEq_DifferentInfiniteMatricesReturnFalse)
 {
     const fgm::Mat2x3 matA(INF, -INF, INF, -INF, INF, INF);
     const fgm::Mat2x3 matB(-INF, -INF, INF, INF, INF, INF);

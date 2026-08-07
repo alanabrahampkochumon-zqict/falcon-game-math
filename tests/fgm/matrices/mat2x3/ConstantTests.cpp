@@ -29,9 +29,9 @@ namespace
      * @brief Test fixture for @ref fgm::Mat2 Constants.
      */
     template <typename>
-    class Mat2x3Constants: public testing::Test
+    class Mat2x3ConstantsTests: public testing::Test
     {};
-    TYPED_TEST_SUITE(Mat2x3Constants, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat2x3ConstantsTests, SupportedArithmeticTypes);
 
 
 
@@ -72,9 +72,9 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TYPED_TEST(Mat2x3Constants, One_ReturnsOneMatrix) { EXPECT_MAT_ONE(fgm::Mat2x3<TypeParam>::one()); }
+TYPED_TEST(Mat2x3ConstantsTests, One_ReturnsOneMatrix) { EXPECT_MAT_ONE(fgm::Mat2x3<TypeParam>::one()); }
 
 
-TYPED_TEST(Mat2x3Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Mat2x3<TypeParam>::zero()); }
+TYPED_TEST(Mat2x3ConstantsTests, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Mat2x3<TypeParam>::zero()); }
 
 /** @} */

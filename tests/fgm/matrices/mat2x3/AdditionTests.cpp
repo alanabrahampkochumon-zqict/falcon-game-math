@@ -84,7 +84,7 @@ TYPED_TEST(Mat2x3AdditionTests, PlusOperator_ReturnsMatrixSum)
 }
 
 
-TEST(Mat2x3Addition, PlusOperator_MixedType_PromotesType)
+TEST(Mat2x3AdditionTests, PlusOperator_MixedType_PromotesType)
 {
     const fgm::Mat2x3 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f } };
     const fgm::Mat2x3 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 } };
@@ -101,7 +101,7 @@ TYPED_TEST(Mat2x3AdditionTests, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 }
 
 
-TEST(Mat2x3Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Mat2x3AdditionTests, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat2x3 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f } };
     const fgm::Mat2x3 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 } };

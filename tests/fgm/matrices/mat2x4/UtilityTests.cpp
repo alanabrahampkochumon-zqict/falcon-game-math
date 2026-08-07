@@ -32,10 +32,10 @@ namespace
 
 
     /// @brief Test fixture for @ref fgm::Mat2x4 Infinity Checking.
-    class Mat2x4InfChecker: public testing::TestWithParam<Mat2x4UtilityParams<float>>
+    class Mat2x4InfCheckerTests: public testing::TestWithParam<Mat2x4UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat2x4InfCheckerTestSuite, Mat2x4InfChecker,
+        Mat2x4InfCheckerTestSuite, Mat2x4InfCheckerTests,
         ::testing::Values(
             Mat2x4UtilityParams{ fgm::Mat2x4(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
                                  true },
@@ -63,10 +63,10 @@ namespace
 
 
     /// @brief Test fixture for @ref fgm::Mat2x4 NaN Checking.
-    class Mat2x4NaNChecker: public testing::TestWithParam<Mat2x4UtilityParams<float>>
+    class Mat2x4NaNCheckerTests: public testing::TestWithParam<Mat2x4UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat2x4NaNCheckerTestSuite, Mat2x4NaNChecker,
+        Mat2x4NaNCheckerTestSuite, Mat2x4NaNCheckerTests,
         ::testing::Values(
             Mat2x4UtilityParams{ fgm::Mat2x4(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
             Mat2x4UtilityParams{ fgm::Mat2x4(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
@@ -86,9 +86,9 @@ namespace
 
     /// @brief Test fixture for @ref fgm::Mat2x3 utilities, verifying across various integral types.
     template <typename>
-    class Mat2x4IntegralUtility: public ::testing::Test
+    class Mat2x4UtilsIntTests: public testing::Test
     {};
-    TYPED_TEST_SUITE(Mat2x4IntegralUtility, SupportedIntegralTypes);
+    TYPED_TEST_SUITE(Mat2x4UtilsIntTests, SupportedIntegralTypes);
 
 
 
@@ -127,28 +127,28 @@ namespace
  *         INFINITY CHECKER           *
  **************************************/
 
-TEST_P(Mat2x4InfChecker, HasInf_ReturnTrueIfAnyElementIsInfinity)
+TEST_P(Mat2x4InfCheckerTests, HasInf_ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasInf());
 }
 
 
-TYPED_TEST(Mat2x4IntegralUtility, HasInf_ReturnsFalseForIntegralMatrix)
+TYPED_TEST(Mat2x4UtilsIntTests, HasInf_ReturnsFalseForIntegralMatrix)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Mat2x4(value, value, value, value, value, value, value, value).hasInf());
 }
 
 
-TEST_P(Mat2x4InfChecker, StaticWrapper_HasInf_ReturnTrueIfAnyElementIsInfinity)
+TEST_P(Mat2x4InfCheckerTests, StaticWrapper_HasInf_ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, fgm::Mat2x4<float>::hasInf(mat));
 }
 
 
-TYPED_TEST(Mat2x4IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegralMatrix)
+TYPED_TEST(Mat2x4UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegralMatrix)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Mat2x4<TypeParam>::hasInf(fgm::Mat2x4(value, value, value, value, value, value, value, value)));
@@ -160,28 +160,28 @@ TYPED_TEST(Mat2x4IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegralMa
  *             NAN CHECKER            *
  **************************************/
 
-TEST_P(Mat2x4NaNChecker, HasNaN_ReturnTrueIfAnyElementIsNaN)
+TEST_P(Mat2x4NaNCheckerTests, HasNaN_ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasNaN());
 }
 
 
-TYPED_TEST(Mat2x4IntegralUtility, HasNaN_ReturnsFalseForIntegralMatrix)
+TYPED_TEST(Mat2x4UtilsIntTests, HasNaN_ReturnsFalseForIntegralMatrix)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Mat2x4(value, value, value, value, value, value, value, value).hasNaN());
 }
 
 
-TEST_P(Mat2x4NaNChecker, StaticWrapper_HasNaN_ReturnTrueIfAnyElementIsNaN)
+TEST_P(Mat2x4NaNCheckerTests, StaticWrapper_HasNaN_ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, fgm::Mat2x4<float>::hasNaN(mat));
 }
 
 
-TYPED_TEST(Mat2x4IntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegralMatrix)
+TYPED_TEST(Mat2x4UtilsIntTests, StaticWrapper_HasNaN_ReturnsFalseForIntegralMatrix)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Mat2x4<TypeParam>::hasNaN(fgm::Mat2x4(value, value, value, value, value, value, value, value)));

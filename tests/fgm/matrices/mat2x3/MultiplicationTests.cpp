@@ -90,7 +90,7 @@ namespace
  *     SCALAR MULTIPLICATION TESTS    *
  **************************************/
 
-TEST(Mat2x3ScalarMultiplication, TimesOperator_ByZeroReturnsZeroMatrix)
+TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByZeroReturnsZeroMatrix)
 {
     const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
     const fgm::Mat2x3 product = mat * 0;
@@ -98,7 +98,7 @@ TEST(Mat2x3ScalarMultiplication, TimesOperator_ByZeroReturnsZeroMatrix)
 }
 
 
-TEST(Mat2x3ScalarMultiplication, TimesOperator_ByOneReturnsOriginalMatrix)
+TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByOneReturnsOriginalMatrix)
 {
     const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
@@ -108,7 +108,7 @@ TEST(Mat2x3ScalarMultiplication, TimesOperator_ByOneReturnsOriginalMatrix)
 }
 
 
-TEST(Mat2x3ScalarMultiplication, TimesOperator_ByNegativeScalarFlipsSigns)
+TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByNegativeScalarFlipsSigns)
 {
     const fgm::Mat2x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f };
     const fgm::Mat2x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f };
@@ -180,7 +180,7 @@ TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesEqualsOperator_MatrixTimesEqual
 }
 
 
-TEST(Mat2x3ScalarMultiplication, TimesEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Mat2x3ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat2x3 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f);
     const double scalar = 5.0;
@@ -190,7 +190,7 @@ TEST(Mat2x3ScalarMultiplication, TimesEqualsOperator_MixedType_DoesNotPromoteTyp
 }
 
 
-TEST(Mat2x3ScalarMultiplication, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
+TEST(Mat2x3ScalarMultiplicationTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Mat2x3 mat(3, -1, 10, 5, 50, 12);
     const double scalar = 2.5;
