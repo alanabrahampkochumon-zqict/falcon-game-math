@@ -12,6 +12,7 @@
 #include "Transform4TestSetup.h"
 
 
+
 /**
  * @addtogroup T_FGM_Transform4_Multiplication
  * @{
@@ -21,9 +22,7 @@ namespace
 {
 
     /**************************************
-     *                                    *
      *             TEST SETUP             *
-     *                                    *
      **************************************/
 
     /**
@@ -32,7 +31,7 @@ namespace
      * @tparam T The scalar type (e.g., uint32_t, int32_t, float, double) used for the values.
      */
     template <typename T>
-    class Transform4TransformMultiplication: public testing::Test
+    class Transform4TransformMultiplicationTests: public testing::Test
     {
     protected:
         fgm::Transform4<T> _transformA, _transformB, _expectedFPTransform, _expectedIntTransform;
@@ -61,7 +60,7 @@ namespace
             };
         }
     };
-    TYPED_TEST_SUITE(Transform4TransformMultiplication, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Transform4TransformMultiplicationTests, SupportedArithmeticTypes);
 
 
     /**
@@ -122,10 +121,9 @@ namespace
     TYPED_TEST_SUITE(Transform4PointMultiplication, SupportedArithmeticTypes);
 
 
+
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -165,9 +163,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *    VECTOR MULTIPLICATION TESTS     *
- *                                    *
  **************************************/
 
 /**
@@ -226,13 +222,12 @@ TEST(Transform4PointMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPro
 }
 
 
+
 /**************************************
- *                                    *
  *    MATRIX MULTIPLICATION TESTS     *
- *                                    *
  **************************************/
 
-TYPED_TEST(Transform4TransformMultiplication, TimesOperator_ReturnsValidTransformMatrix)
+TYPED_TEST(Transform4TransformMultiplicationTests, TimesOperator_ReturnsValidTransformMatrix)
 {
     const auto transformResult = this->_transformA * this->_transformB;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -246,7 +241,7 @@ TYPED_TEST(Transform4TransformMultiplication, TimesOperator_ReturnsValidTransfor
 }
 
 
-TEST(Transform4TransformMultiplication, TimesOperator_MixedTypes_PromotesToWiderType)
+TEST(Transform4TransformMultiplicationTests, TimesOperator_MixedTypes_PromotesToWiderType)
 {
     const fgm::Transform4 transformA{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
     const fgm::Transform4 transformB{ 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
@@ -256,7 +251,7 @@ TEST(Transform4TransformMultiplication, TimesOperator_MixedTypes_PromotesToWider
 }
 
 
-TYPED_TEST(Transform4TransformMultiplication, TimesEqualOperator_MutatesCurrentTransformMatrix)
+TYPED_TEST(Transform4TransformMultiplicationTests, TimesEqualOperator_MutatesCurrentTransformMatrix)
 {
     this->_transformA *= this->_transformB;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -270,7 +265,7 @@ TYPED_TEST(Transform4TransformMultiplication, TimesEqualOperator_MutatesCurrentT
 }
 
 
-TEST(Transform4TransformMultiplication, TimesEqualOperator_MixedTypes_DoesNotPromotesToWiderType)
+TEST(Transform4TransformMultiplicationTests, TimesEqualOperator_MixedTypes_DoesNotPromotesToWiderType)
 {
     fgm::Transform4 transformA{ 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
     const fgm::Transform4 transformB{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };

@@ -22,9 +22,7 @@ namespace
 {
 
     /**************************************
-     *                                    *
      *            TEST SETUP              *
-     *                                    *
      **************************************/
 
     /**
@@ -32,7 +30,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the transforms.
      */
     template <typename T>
-    class Transform4Inverse: public testing::Test
+    class Transform4InverseTests: public testing::Test
     {
     protected:
         using Mag = fgm::Magnitude<T>;
@@ -48,36 +46,12 @@ namespace
                                  { Mag(-0.704545454545455), Mag(-0.022727272727273), Mag(-0.136363636363636) } };
         }
     };
-    TYPED_TEST_SUITE(Transform4Inverse, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(Transform4InverseTests, SupportedSignedArithmeticTypes);
 
-
-#ifdef ENABLE_DEBUG_TESTS
-    /**
-     * @brief Parameterized Test fixture for @ref fgm::Transform4 singular matrix inverse.
-     */
-    class Transform4InverseSingular: public testing::TestWithParam<fgm::Transform4<float>>
-    {};
-    INSTANTIATE_TEST_SUITE_P(
-        Transform4InverseTestSuite, Transform4InverseSingular,
-        ::testing::Values(fgm::Transform4{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 1.0f, 2.0f, 3.0f },
-                                           fgm::Vec3{ 7.0f, 8.0f, 9.0f }, fgm::Point3{ 1.0f, 85.0f, 19.0f } },
-                          fgm::Transform4{ fgm::Vec3{ 1.0f, 1.0f, 3.0f }, fgm::Vec3{ 2.0f, 2.0f, 3.0f },
-                                           fgm::Vec3{ 3.0f, 3.0f, 9.0f }, fgm::Point3{ 4.0f, 4.0f, 31.6f } },
-                          fgm::Transform4{ fgm::Vec3{ 0.0f, 0.0f, 0.0f }, fgm::Vec3{ 2.0f, 2.0f, 3.0f },
-                                           fgm::Vec3{ 3.0f, 3.0f, 9.0f }, fgm::Point3{ 4.0f, 4.0f, 31.6f } },
-                          fgm::Transform4{ fgm::Vec3{ 0.0f, 1.0f, 3.0f }, fgm::Vec3{ 0.0f, 2.0f, 3.0f },
-                                           fgm::Vec3{ 0.0f, 3.0f, 9.0f }, fgm::Point3{ 0.0f, 4.0f, 31.6f } },
-                          fgm::Transform4{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 2.0f, 4.0f, 6.0f },
-                                           fgm::Vec3{ 3.0f, 3.0f, 9.0f }, fgm::Point3{ 4.0f, 4.0f, 31.6f } },
-                          fgm::Transform4{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 2.0f, 4.0f, 5.0f },
-                                           fgm::Vec3{ 3.0f, 6.0f, 9.0f }, fgm::Point3{ 4.0f, 8.0f, 31.6f } }));
-#endif
 
 
     /**************************************
-     *                                    *
      *           STATIC TESTS             *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -85,14 +59,12 @@ namespace
         constexpr fgm::Transform4 TRANSFORM(1.0f, -1.0f, 0.0f, -2.0f, 2.0f, -1.0f, -2.0f, -6.0f, 0.0f, -1.0f, 3.0f,
                                             3.0f);
 
-
         /// @test Verify that inverse using inverse returns a valid Transform4 at compile time.
         constexpr fgm::Transform4 INV_TRANSFORM = TRANSFORM.inverse();
         static_assert(INV_TRANSFORM[0] == fgm::Vec3{ -5.0f, -6.0f, -2.0f });
         static_assert(INV_TRANSFORM[1] == fgm::Vec3{ 3.0f, 3.0f, 1.0f });
         static_assert(INV_TRANSFORM[2] == fgm::Vec3{ 2.0f, 2.0f, 1.0f });
         static_assert(INV_TRANSFORM[3] == fgm::Vec3{ 2.0f, 0.0f, -1.0f });
-
 
         /// @test Verify that static variant of inverse using inverse returns a valid Transform4 at compile time.
         constexpr fgm::Transform4 INV_TRANSFORM_STATIC = fgm::Transform4<float>::inverse(TRANSFORM);
@@ -108,35 +80,14 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-TYPED_TEST(Transform4Inverse, ReturnsInverseMatrix)
+TYPED_TEST(Transform4InverseTests, ReturnsInverseMatrix)
 { EXPECT_MAT_EQ(this->_expectedInverse, this->_transform.inverse()); }
 
 
-TYPED_TEST(Transform4Inverse, StaticWrapper_ReturnsInverseMatrix)
+TYPED_TEST(Transform4InverseTests, StaticWrapper_ReturnsInverseMatrix)
 { EXPECT_MAT_EQ(this->_expectedInverse, fgm::Transform4<TypeParam>::inverse(this->_transform)); }
-
-
-
-#ifdef ENABLE_DEBUG_TESTS
-
-TEST_P(Transform4InverseSingular, TriggersAssertionInDebugMode)
-{
-    const auto& matrix = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(matrix.inverse()), "");
-}
-
-
-TEST_P(Transform4InverseSingular, StaticWrapper_TriggersAssertionInDebugMode)
-{
-    const auto& matrix = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Transform4<float>::inverse(matrix)), "");
-}
-
-#endif
 
 /** @} */

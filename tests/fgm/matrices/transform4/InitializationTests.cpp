@@ -20,11 +20,8 @@
 
 namespace
 {
-
     /**************************************
-     *                                    *
      *            TEST SETUP              *
-     *                                    *
      **************************************/
 
     /**
@@ -33,7 +30,7 @@ namespace
      * @tparam T The scalar type (e.g., uint32_t, int32_t, float, double) used for the values.
      */
     template <typename T>
-    class Transform4Initialization: public testing::Test
+    class Transform4InitializationTests: public testing::Test
     {
     protected:
         std::vector<T> _elements;
@@ -52,14 +49,12 @@ namespace
             _translation      = fgm::Point3{ T(4), T(8), T(12) };
         }
     };
-    TYPED_TEST_SUITE(Transform4Initialization, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Transform4InitializationTests, SupportedArithmeticTypes);
 
 
 
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -121,12 +116,10 @@ namespace
 
 
 /**************************************
- *                                    *
  *            RUNTIME TESTS           *
- *                                    *
  **************************************/
 
-TYPED_TEST(Transform4Initialization, EmptyCtor_ReturnsIdentityMatrix)
+TYPED_TEST(Transform4InitializationTests, EmptyCtor_ReturnsIdentityMatrix)
 {
     constexpr fgm::Transform4<TypeParam> matrix{};
 
@@ -134,7 +127,7 @@ TYPED_TEST(Transform4Initialization, EmptyCtor_ReturnsIdentityMatrix)
 }
 
 
-TYPED_TEST(Transform4Initialization, ParameterizedCtor_InitializesMatrixWithElements)
+TYPED_TEST(Transform4InitializationTests, ParameterizedCtor_InitializesMatrixWithElements)
 {
     const fgm::Transform4<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2],
                                             this->_elements[3], this->_elements[4], this->_elements[5],
@@ -144,7 +137,7 @@ TYPED_TEST(Transform4Initialization, ParameterizedCtor_InitializesMatrixWithElem
 }
 
 
-TYPED_TEST(Transform4Initialization, ParameterizedCtor_InitializesMatrixWithAxisAndOriginPoint)
+TYPED_TEST(Transform4InitializationTests, ParameterizedCtor_InitializesMatrixWithAxisAndOriginPoint)
 {
     const fgm::Transform4<TypeParam> matrix{ this->_firstAxis, this->_secondAxis, this->_thirdAxis,
                                              this->_translation };
@@ -153,7 +146,7 @@ TYPED_TEST(Transform4Initialization, ParameterizedCtor_InitializesMatrixWithAxis
 
 
 /** @brief Verify that a matrix can be initialized with implicit braced initialization. */
-TYPED_TEST(Transform4Initialization, CanBeConstructedWithBracedInitialization)
+TYPED_TEST(Transform4InitializationTests, CanBeConstructedWithBracedInitialization)
 {
     const fgm::Transform4<TypeParam> matrix = { { TypeParam(1), TypeParam(5), TypeParam(9) },
                                                 { TypeParam(2), TypeParam(6), TypeParam(10) },
