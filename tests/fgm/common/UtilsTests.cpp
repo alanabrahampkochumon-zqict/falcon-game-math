@@ -30,10 +30,8 @@ namespace
 
     /**
      * @brief Test fixture for @ref fgm::utils::diffAbs.
-     *
-     * @tparam T The scalar type (int, float,...) of the scalar values.
      */
-    template <typename T>
+    template <typename>
     class FGMDiffAbsTests: public testing::Test
     {};
     TYPED_TEST_SUITE(FGMDiffAbsTests, SupportedArithmeticTypes);

@@ -13,18 +13,24 @@
 #include <gtest/gtest.h>
 
 
-
-/** @brief Parameters for testing @ref fgm::OperationStatus mapping to string message. */
-struct OperationStatusMappingParams
+namespace
 {
-    fgm::OperationStatus status;
-    const char* expectedMessage;
-};
-/** @brief Test fixture for @ref fgm::OperationStatus mapping, parameterized by @ref OperationStatusMappingParams. */
-class OperationStatusMappingTests: public ::testing::TestWithParam<OperationStatusMappingParams>
-{};
 
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
 
+    struct OperationStatusMappingParams
+    {
+        fgm::OperationStatus status;
+        const char* expectedMessage;
+    };
+
+    /// @brief Test fixture for @ref fgm::OperationStatus to verify corresponding string mapping.
+    class OperationStatusMappingTests: public testing::TestWithParam<OperationStatusMappingParams>
+    {};
+
+} // namespace
 
 
 /**
@@ -32,7 +38,7 @@ class OperationStatusMappingTests: public ::testing::TestWithParam<OperationStat
  * @{
  */
 
-TEST_P(OperationStatusMappingTests, ReturnsCorrectMessage)
+TEST_P(OperationStatusMappingTests, GetStatusMessage_ReturnsCorrectMessage)
 {
     const auto& [status, expectedMessage] = GetParam();
     const auto message                    = fgm::getStatusMessage(status);
