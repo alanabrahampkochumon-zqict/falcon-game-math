@@ -32,9 +32,7 @@ namespace
 
 
 
-    /**
-     * @brief Test fixture for @ref fgm::Mat2x3 Infinity Checking.
-     */
+    /// @brief Test fixture for @ref fgm::Mat2x3 Infinity Checking.
     class Mat2x3InfCheckerTests: public testing::TestWithParam<Mat2x3UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
@@ -54,9 +52,7 @@ namespace
 
 
 
-    /**
-     * @brief Test fixture for @ref fgm::Mat2x3 NaN Checking.
-     */
+    /// @brief Test fixture for @ref fgm::Mat2x3 NaN Checking.
     class Mat2x3NaNCheckerTests: public testing::TestWithParam<Mat2x3UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
@@ -75,9 +71,7 @@ namespace
 
 
 
-    /**
-     * @brief Test fixture for @ref fgm::Mat2x3 utilities, verifying across various integral types.
-     */
+    /// @brief Test fixture for @ref fgm::Mat2x3 utilities, verifying across various integral types.
     template <typename>
     class Mat2x3UtilsIntTests: public testing::Test
     {};

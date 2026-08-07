@@ -157,11 +157,16 @@ TYPED_TEST(Mat2x4ScalarMultiplicationTestsTests, TimesOperator_ScalarTimesMatrix
 }
 
 
-/**
- * @brief Verify that the compound multiplication assignment operator (scalar) performs an element-wise product
- *        and mutates the matrix in-place.
- */
-TYPED_TEST(Mat2x4ScalarMultiplicationTestsTests, MatrixTimesEqualScalarIsTheSameMatrixScaled)
+TYPED_TEST(Mat2x4ScalarMultiplicationTestsTests, TimesOperator_MixedType_PromotesType)
+{
+    const double scalar = 2.123456789123456;
+
+    [[maybe_unused]] const fgm::Mat2x4 product = this->_mat * scalar;
+    static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
+}
+
+
+TYPED_TEST(Mat2x4ScalarMultiplicationTestsTests, TimesEqualsOperator_MatrixTimesEqualScalarIsTheSameMatrixScaled)
 {
     this->_mat *= this->_scalar;
 
@@ -176,46 +181,23 @@ TYPED_TEST(Mat2x4ScalarMultiplicationTestsTests, MatrixTimesEqualScalarIsTheSame
 }
 
 
-/**
- * @brief Verify that the binary multiplication operator (scalar) perform automatic type promotion
- *        to the wider numeric type.
- */
-TYPED_TEST(Mat2x4ScalarMultiplicationTestsTests, MixedTypeScalarMultiplicationPromotesType)
-{
-    const double scalar = 2.123456789123456;
-
-    [[maybe_unused]] const fgm::Mat2x4 product = this->_mat * scalar;
-
-    static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
-}
-
-
-/**
- * @brief Verify that the compound multiplication assignment operator (scalar) maintains the destination type and
- *        perform an implicit cast.
- */
-TEST(Mat2x4ScalarMultiplicationTests, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
+TEST(Mat2x4ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat2x4 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f, 9.0f, 10.0f);
     const double scalar = 5.0;
-    mat *= scalar;
 
+    mat *= scalar;
     static_assert(std::is_same_v<decltype(mat)::value_type, float>);
 }
 
 
-/**
- * @brief Verify that the compound multiplication operator (scalar) for mixed type
- *        ensure minimal precision loss.
- */
-TEST(Mat2x4ScalarMultiplicationTests, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+TEST(Mat2x4ScalarMultiplicationTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Mat2x4 mat(3, -1, 10, 5, 50, 12, 20, 5);
     const double scalar = 2.5;
     const fgm::Mat2x4 expected(7, -2, 25, 12, 125, 30, 50, 12);
 
     mat *= scalar;
-
     EXPECT_MAT_EQ(expected, mat);
 }
 

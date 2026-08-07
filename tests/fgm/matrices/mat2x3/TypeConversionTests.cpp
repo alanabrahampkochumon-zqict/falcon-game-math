@@ -40,6 +40,7 @@ namespace
 } // namespace
 
 
+
 /**************************************
  *           RUNTIME TESTS            *
  **************************************/
@@ -49,7 +50,6 @@ TEST(Mat2x3ConversionConstructor, ConversionCtor_CanPromoteType)
     const fgm::Mat2x3 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);
 
     [[maybe_unused]] const fgm::Mat2x3<double> mat2(mat1);
-
     static_assert(std::is_same_v<decltype(mat2)::value_type, double>);
 }
 
@@ -77,7 +77,6 @@ TEST(Mat2x3ConversionConstructor, ConversionCtor_DemotesType)
     const fgm::Mat2x3 mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 
     [[maybe_unused]] const fgm::Mat2x3<float> mat2(mat1);
-
     static_assert(std::is_same_v<decltype(mat2)::value_type, float>);
 }
 

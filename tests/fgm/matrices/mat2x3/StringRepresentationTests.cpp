@@ -28,7 +28,6 @@ namespace
     /**
      * @brief Test fixture for @ref fgm::Mat2x3 String Representation.
      */
-
     class Mat2x3StringRepresentationTests: public testing::Test
     {
         /** @brief Switch to use full precision for testing. */

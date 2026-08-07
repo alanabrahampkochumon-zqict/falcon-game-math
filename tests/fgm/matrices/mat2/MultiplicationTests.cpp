@@ -211,9 +211,7 @@ namespace
 TEST(Mat2ScalarMultiplicationTests, TimesOperator_ByZeroReturnsZeroMatrix)
 {
     const fgm::Mat2 mat(3.0f, 4.0f, 5.0f, 6.0f);
-
     const fgm::Mat2 product = mat * 0;
-
     EXPECT_MAT_ZERO(product);
 }
 
@@ -221,9 +219,7 @@ TEST(Mat2ScalarMultiplicationTests, TimesOperator_ByZeroReturnsZeroMatrix)
 TEST(Mat2ScalarMultiplicationTests, TimesOperator_ByOneReturnsOriginalMatrix)
 {
     const fgm::Mat2 mat(3.0f, 4.0f, 5.0f, 6.0f);
-
     const fgm::Mat2 product = mat * 1;
-
     EXPECT_MAT_EQ(mat, product);
 }
 
@@ -295,7 +291,7 @@ TYPED_TEST(Mat2ScalarMultiplicationTests, TimesEqualsOperator_MatrixTimesEqualSc
 }
 
 
-TEST(Mat2ScalarMultiplicationTests, TimesOperator_MixedType_DoesNotPromoteType)
+TEST(Mat2ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat2 mat(3.0f, -1.0f, -12.0f, 14.0f);
     const double scalar = 5.0;
@@ -305,7 +301,7 @@ TEST(Mat2ScalarMultiplicationTests, TimesOperator_MixedType_DoesNotPromoteType)
 }
 
 
-TEST(Mat2ScalarMultiplicationTests, TimesOperator_MixedType_EnsuresMinimalPrecisionLoss)
+TEST(Mat2ScalarMultiplicationTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Mat2 mat(3, -1, 10, 5);
     const double scalar = 2.5;
