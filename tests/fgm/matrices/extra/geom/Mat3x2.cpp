@@ -28,11 +28,8 @@ using namespace testutils;
 
 namespace
 {
-
     /**************************************
-     *                                    *
-     *               SETUP                *
-     *                                    *
+     *            TEST SETUP              *
      **************************************/
 
     /**
@@ -70,9 +67,7 @@ namespace
 
 
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -103,9 +98,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *            RUNTIME TESTS           *
- *                                    *
  **************************************/
 
 TYPED_TEST(Mat3x2GeometricOps, Mat3x2Times2DVector_ReturnsAValid3DVector)

@@ -27,11 +27,8 @@ using namespace testutils;
 
 namespace
 {
-
     /**************************************
-     *                                    *
-     *               SETUP                *
-     *                                    *
+     *            TEST SETUP              *
      **************************************/
 
     /**
@@ -111,9 +108,7 @@ namespace
 
 
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -157,9 +152,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *            RUNTIME TESTS           *
- *                                    *
  **************************************/
 
 TYPED_TEST(Mat3x2Composition, Mat3x2TimesMat2_ReturnsAValid3x2Matrix)

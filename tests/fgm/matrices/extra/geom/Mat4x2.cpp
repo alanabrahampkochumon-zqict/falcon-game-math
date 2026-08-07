@@ -28,11 +28,8 @@ using namespace testutils;
 
 namespace
 {
-
     /**************************************
-     *                                    *
-     *               SETUP                *
-     *                                    *
+     *            TEST SETUP              *
      **************************************/
 
     /**
@@ -75,10 +72,9 @@ namespace
     TYPED_TEST_SUITE(Mat4x2GeometricOps, SupportedArithmeticTypes);
 
 
+
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -109,9 +105,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *            RUNTIME TESTS           *
- *                                    *
  **************************************/
 
 TYPED_TEST(Mat4x2GeometricOps, Mat4x2Times2DVector_ReturnsAValid4DVector)

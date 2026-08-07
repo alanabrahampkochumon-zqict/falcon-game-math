@@ -27,11 +27,8 @@ using namespace testutils;
 
 namespace
 {
-
     /**************************************
-     *                                    *
-     *               SETUP                *
-     *                                    *
+     *            TEST SETUP              *
      **************************************/
 
     /**
@@ -121,10 +118,9 @@ namespace
     TYPED_TEST_SUITE(Mat3x4Composition, SupportedArithmeticTypes);
 
 
+
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -170,9 +166,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *            RUNTIME TESTS           *
- *                                    *
  **************************************/
 
 TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4x2_ReturnsAValid3x2Matrix)
