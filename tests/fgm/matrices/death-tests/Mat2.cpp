@@ -25,6 +25,8 @@
 
 namespace
 {
+    fgm::Mat2 mat(1, 2);
+
     /**************************************
      *            TEST SETUP              *
      **************************************/
@@ -105,14 +107,12 @@ namespace
 
 TEST_P(Mat2ColumnIndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 {
-    const fgm::Mat2 mat(1, 2);
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
 }
 
 TEST_P(Mat2IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 {
-    const fgm::Mat2 mat(1, 2);
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col)), "");
 }
@@ -121,14 +121,12 @@ TEST_P(Mat2IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 
 TEST_P(Mat2ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
-    [[maybe_unused]] fgm::Mat2 mat(1, 2);
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec2<int>::zero()), "");
 }
 
 TEST_P(Mat2IndexingTests, OutOfBoundMutationTriggersAssertInDebugMode)
 {
-    [[maybe_unused]] fgm::Mat2 mat(1, 2);
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col) = 5), "");
 }

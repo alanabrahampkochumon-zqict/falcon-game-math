@@ -55,9 +55,9 @@ namespace
     {
         constexpr fgm::Mat2 MAT1(1, 2, 3, 4);
         constexpr fgm::Mat2 MAT2(5, 6, 7, 8);
-        constexpr fgm::Mat2 BINARY_SUM = MAT1 + MAT2;
 
         /// @test Verify that Mat2 can be added at compile time.
+        constexpr fgm::Mat2 BINARY_SUM = MAT1 + MAT2;
         static_assert(BINARY_SUM(0, 0) == 6);
         static_assert(BINARY_SUM(0, 1) == 8);
         static_assert(BINARY_SUM(1, 0) == 10);
@@ -76,7 +76,6 @@ namespace
 TYPED_TEST(Mat2AdditionTests, PlusOperator_ReturnsMatrixSum)
 {
     const fgm::Mat2 sum = this->_matA + this->_matB;
-
     EXPECT_MAT_EQ(this->_expectedSum, sum);
 }
 
@@ -94,7 +93,6 @@ TEST(Mat2AdditionTests, PlusOperator_MixedType_PromotesType)
 TYPED_TEST(Mat2AdditionTests, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 {
     this->_matA += this->_matB;
-
     EXPECT_MAT_EQ(this->_expectedSum, this->_matA);
 }
 

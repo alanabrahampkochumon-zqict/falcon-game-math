@@ -93,7 +93,6 @@ namespace
 
     namespace static_tests
     {
-
         constexpr fgm::Mat2 MAT1(1, 2, 3, 4);
         constexpr fgm::Mat2 MAT2(1, 2, 3, 4);
         constexpr fgm::Mat2 MAT3(4, 2, 2, 4);

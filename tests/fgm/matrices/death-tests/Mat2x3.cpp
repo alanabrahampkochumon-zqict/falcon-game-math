@@ -24,6 +24,8 @@
 
 namespace
 {
+
+    fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
     /**************************************
      *            TEST SETUP              *
      **************************************/
@@ -54,7 +56,7 @@ namespace
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
     template <typename T>
-    class Mat2x3Division: public testing::Test
+    class Mat2x3DivisionTests: public testing::Test
     {
     protected:
         fgm::Mat2x3<T> _matrix;
@@ -69,7 +71,7 @@ namespace
                                 fgm::Vec2{ T(1), T(3) } };
         }
     };
-    TYPED_TEST_SUITE(Mat2x3Division, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat2x3DivisionTests, SupportedArithmeticTypes);
 
 
     // TODO: Add after adding nan assertion to /
@@ -78,7 +80,7 @@ namespace
     //  */
     // class NaNMat2x3Division: public testing::TestWithParam<fgm::Mat2x3<float>>
     // {};
-    // INSTANTIATE_TEST_SUITE_P(Mat2x3DivisionTestSuite, NaNMat2x3Division,
+    // INSTANTIATE_TEST_SUITE_P(Mat2x3InvalidDivision, NaNMat2x3Division,
     //                          ::testing::Values(fgm::Mat2x3<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
     //                                            fgm::Mat2x3<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f),
     //                                            fgm::Mat2x3<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
@@ -99,14 +101,12 @@ namespace
 
 TEST_P(Mat2x3ColumnIndexingTests, OutOfBoundAccessTriggers_AssertInDebugMode)
 {
-    const fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
 }
 
 TEST_P(Mat2x3IndexingTests, OutOfBoundAccessTriggers_AssertInDebugMode)
 {
-    const fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col)), "");
 }
@@ -114,7 +114,6 @@ TEST_P(Mat2x3IndexingTests, OutOfBoundAccessTriggers_AssertInDebugMode)
 
 TEST_P(Mat2x3ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
-    [[maybe_unused]] fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec2<int>::zero()), "");
 }
@@ -122,17 +121,16 @@ TEST_P(Mat2x3ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 
 TEST_P(Mat2x3IndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
-    [[maybe_unused]] fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col) = 5), "");
 }
 
 
-TYPED_TEST(Mat2x3Division, DivideOperator_ByZeroTriggersAssertInDebugMode)
+TYPED_TEST(Mat2x3DivisionTests, DivideOperator_ByZeroTriggersAssertInDebugMode)
 { EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), ""); }
 
 
-TYPED_TEST(Mat2x3Division, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
+TYPED_TEST(Mat2x3DivisionTests, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
 { EXPECT_DEBUG_DEATH(this->_matrix /= 0, ""); }
 
 #endif

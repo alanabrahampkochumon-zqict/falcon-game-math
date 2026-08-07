@@ -111,7 +111,6 @@ namespace
 TYPED_TEST(Mat2DivisionTests, DivideOperator_ReturnsAValidMatrix)
 {
     const fgm::Mat2 resultantMat = this->_matrix / this->_scalar;
-
     EXPECT_MAT_EQ(this->_expectedMatrix, resultantMat);
 }
 

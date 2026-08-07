@@ -72,14 +72,6 @@ TEST(Mat2AccessTests, AccessibleAsColumnVectors)
     EXPECT_VEC_EQ(fgm::Vec2(2.0f, 4.0f), mat[1]);
 }
 
-/** @} */
-
-
-
-/**
- * @addtogroup T_FGM_Mat2x2_Mutation
- * @{
- */
 
 /**************************************
  *           MUTATION TESTS           *

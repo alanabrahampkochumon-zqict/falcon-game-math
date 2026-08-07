@@ -36,7 +36,6 @@ namespace
      *           STATIC TESTS             *
      **************************************/
 
-    /** @brief Verify that @ref fgm::Mat2 constants are available at compile time. */
     namespace static_tests
     {
         /// @test Verify that Mat2::identity() returns an identity matrix at compile time.
