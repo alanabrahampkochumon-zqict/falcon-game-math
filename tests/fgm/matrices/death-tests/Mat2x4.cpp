@@ -28,7 +28,7 @@ namespace
      *            TEST SETUP              *
      **************************************/
 
-    const fgm::Mat2x4 mat(1, 2, 3, 4, 5, 6, 7, 8);
+    fgm::Mat2x4 mat(1, 2, 3, 4, 5, 6, 7, 8);
 
     /**
      * @brief Test fixture for @ref fgm::Mat2x4 (Row, Column) Access.

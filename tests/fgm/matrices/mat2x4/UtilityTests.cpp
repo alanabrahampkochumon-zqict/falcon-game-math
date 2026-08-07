@@ -155,6 +155,7 @@ TYPED_TEST(Mat2x4IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegralMa
 }
 
 
+
 /**************************************
  *             NAN CHECKER            *
  **************************************/
