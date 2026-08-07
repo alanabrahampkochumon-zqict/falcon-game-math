@@ -13,105 +13,95 @@
 #include "Mat2TestSetup.h"
 
 
-
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Mat2Determinant: public ::testing::Test
-{
-protected:
-    fgm::Mat2<T> _matrix;
-    T _expectedDeterminant;
-
-    void SetUp() override
-    {
-        _matrix              = { fgm::Vec2<T>{ 4, 1 }, fgm::Vec2<T>{ 2, 5 } };
-        _expectedDeterminant = 18;
-    }
-};
-/** @brief Test fixture for @ref fgm::Mat2 determinant, parameterized by @ref SupportedSignedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat2Determinant, SupportedSignedArithmeticTypes);
-
-
-/** @brief Test fixture for calculating @ref fgm::Mat2 determinant with singular matrices */
-class SingularMat2Determinant: public ::testing::TestWithParam<fgm::Mat2<float>>
-{};
-INSTANTIATE_TEST_SUITE_P(Mat2DeterminantTestSuite, SingularMat2Determinant,
-                         ::testing::Values(fgm::Mat2{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ 1.0f, 2.0f } },
-                                           fgm::Mat2{ fgm::Vec2{ 2.0f, 2.0f }, fgm::Vec2{ 2.0f, 2.0f } },
-                                           fgm::Mat2{ fgm::Vec2{ 3.0f, 2.0f }, fgm::Vec2{ 6.0f, 4.0f } },
-                                           fgm::Mat2{ fgm::Vec2{ 0.0f, 0.0f }, fgm::Vec2{ 4.0f, 5.0f } },
-                                           fgm::Mat2{ fgm::Vec2{ 0.0f, 3.0f }, fgm::Vec2{ 0.0f, 5.0f } }));
-
-
-
 /**
  * @addtogroup T_FGM_Mat2x2_Det
  * @{
  */
 
-/**************************************
- *                                    *
- *           STATIC TESTS             *
- *                                    *
- **************************************/
-
-/** @brief Verify that matrix determinant operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Mat2 MAT{ fgm::Vec2{ 4, 2 }, fgm::Vec2{ 3, 4 } };
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
 
-    // Verify determinant (member function)
-    static_assert(MAT.determinant() == 10);
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 Determinants.
+     *
+     * @tparam T The numeric type (int, float, double...) for matrix values.
+     */
+    template <typename T>
+    class Mat2DeterminantTests: public testing::Test
+    {
+    protected:
+        fgm::Mat2<T> _matrix;
+        T _expectedDeterminant;
 
-    // Verify determinant (static function)
-    static_assert(fgm::Mat2<int>::determinant(MAT) == 10);
+        void SetUp() override
+        {
+            _matrix              = { fgm::Vec2<T>{ 4, 1 }, fgm::Vec2<T>{ 2, 5 } };
+            _expectedDeterminant = 18;
+        }
+    };
+    TYPED_TEST_SUITE(Mat2DeterminantTests, SupportedSignedArithmeticTypes);
+
+
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 Determinants.
+     *
+     * @tparam T The numeric type (int, float, double...) for matrix values.
+     */
+    class Mat2DeterminantSingularTests: public ::testing::TestWithParam<fgm::Mat2<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(Mat2DeterminantTests, Mat2DeterminantSingularTests,
+                             ::testing::Values(fgm::Mat2{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ 1.0f, 2.0f } },
+                                               fgm::Mat2{ fgm::Vec2{ 2.0f, 2.0f }, fgm::Vec2{ 2.0f, 2.0f } },
+                                               fgm::Mat2{ fgm::Vec2{ 3.0f, 2.0f }, fgm::Vec2{ 6.0f, 4.0f } },
+                                               fgm::Mat2{ fgm::Vec2{ 0.0f, 0.0f }, fgm::Vec2{ 4.0f, 5.0f } },
+                                               fgm::Mat2{ fgm::Vec2{ 0.0f, 3.0f }, fgm::Vec2{ 0.0f, 5.0f } }));
+
+
+
+    /**************************************
+     *           STATIC TESTS             *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Mat2 MAT{ fgm::Vec2{ 4, 2 }, fgm::Vec2{ 3, 4 } };
+
+        /// @test Verify that Mat2 determinant returns a valid value at compile time.
+        static_assert(MAT.determinant() == 10);
+
+        /// @test Verify that Mat2 determinant (static wrapper) returns a valid value at compile time.
+        static_assert(fgm::Mat2<int>::determinant(MAT) == 10);
+
+    } // namespace
 
 } // namespace
 
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-
-/** @brief Verify that computing the determinant of a non-singular matrix returns a non-zero value. */
-TYPED_TEST(Mat2Determinant, ReturnsNonZeroScalar)
-{
-    EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant());
-}
+TYPED_TEST(Mat2DeterminantTests, NonSingularMatrix_ReturnsNonZeroScalar)
+{ EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant()); }
 
 
-/** @brief Verify that computing the determinant of a singular matrix returns zero. */
-TEST_P(SingularMat2Determinant, SingularMatrixReturnsZero)
+TYPED_TEST(Mat2DeterminantTests, StaticWrapper_NonSingularMatrix_ReturnsNonZeroScalar)
+{ EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Mat2<TypeParam>::determinant(this->_matrix)); }
+
+
+TEST_P(Mat2DeterminantSingularTests, SingularMatrix_ReturnsZero)
 {
     const auto& matrix = GetParam();
     EXPECT_MAG_EQ(0.0f, matrix.determinant());
 }
 
 
-/**
- * @brief Verify that computing the determinant of a non-singular matrix using static variant of
- *        @ref fgm::Mat2::determinant returns a non-zero value.
- */
-TYPED_TEST(Mat2Determinant, StaticWrapper_ReturnsNonZeroScalar)
-{
-    EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Mat2<TypeParam>::determinant(this->_matrix));
-}
-
-
-/**
- * @brief Verify that computing the determinant of a singular matrix using static variant of
- *        @ref fgm::Mat2::determinant returns zero.
- */
-TEST_P(SingularMat2Determinant, StaticWrapper_SingularMatrixReturnsZero)
+TEST_P(Mat2DeterminantSingularTests, StaticWrapper_SingularMatrix_ReturnsZero)
 {
     const auto& matrix = GetParam();
     EXPECT_MAG_EQ(0.0f, fgm::Mat2<float>::determinant(matrix));

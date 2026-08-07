@@ -37,7 +37,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat2x4Composition: public testing::Test
+    class Mat2x4CompositionTests: public testing::Test
     {
 
     protected:
@@ -107,7 +107,7 @@ namespace
                                    T(9.10234799999999922) } };
         }
     };
-    TYPED_TEST_SUITE(Mat2x4Composition, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat2x4CompositionTests, SupportedArithmeticTypes);
 
 
     /**************************************
@@ -163,7 +163,7 @@ namespace
  *                                    *
  **************************************/
 
-TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4x2_ReturnsAValid2DMatrix)
+TYPED_TEST(Mat2x4CompositionTests, Mat2x4TimesMat4x2_ReturnsAValid2DMatrix)
 {
     const auto matrixProduct = this->_mat2x4 * this->_mat4x2;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -177,7 +177,7 @@ TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4x2_ReturnsAValid2DMatrix)
 }
 
 
-TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4_ReturnsAValid2x4Matrix)
+TYPED_TEST(Mat2x4CompositionTests, Mat2x4TimesMat4_ReturnsAValid2x4Matrix)
 {
     const auto matrixProduct = this->_mat2x4 * this->_mat4;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -191,7 +191,7 @@ TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4_ReturnsAValid2x4Matrix)
 }
 
 
-TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4x3_ReturnsAValid2x3Matrix)
+TYPED_TEST(Mat2x4CompositionTests, Mat2x4TimesMat4x3_ReturnsAValid2x3Matrix)
 {
     const auto matrixProduct = this->_mat2x4 * this->_mat4x3;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -205,7 +205,7 @@ TYPED_TEST(Mat2x4Composition, Mat2x4TimesMat4x3_ReturnsAValid2x3Matrix)
 }
 
 
-TYPED_TEST(Mat2x4Composition, Mat2TimesMat2x4_ReturnsAValid2x4Matrix)
+TYPED_TEST(Mat2x4CompositionTests, Mat2TimesMat2x4_ReturnsAValid2x4Matrix)
 {
     const auto matrixProduct = this->_mat2 * this->_mat2x4;
     if constexpr (std::is_floating_point_v<TypeParam>)

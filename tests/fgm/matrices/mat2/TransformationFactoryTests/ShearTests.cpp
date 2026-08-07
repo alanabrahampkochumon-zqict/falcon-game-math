@@ -20,9 +20,7 @@
 namespace
 {
     /**************************************
-     *                                    *
      *             TEST SETUP             *
-     *                                    *
      **************************************/
 
     /**
@@ -56,10 +54,9 @@ namespace
 
 
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
+
     namespace static_tests
     {
         constexpr auto SHEAR_FACTOR = 22;
@@ -80,9 +77,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
 TYPED_TEST(Mat2ShearTests, ShearX_ReturnsAValid2DShearMatrix)

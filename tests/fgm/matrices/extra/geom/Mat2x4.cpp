@@ -38,7 +38,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices and vectors.
      */
     template <typename T>
-    class Mat2x4GeometricOps: public testing::Test
+    class Mat2x4GeometricOpsTests: public testing::Test
     {
 
     protected:
@@ -68,7 +68,7 @@ namespace
                                    fgm::Vec2{ T(2.01238399999999995), T(1.10234800000000011) } };
         }
     };
-    TYPED_TEST_SUITE(Mat2x4GeometricOps, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat2x4GeometricOpsTests, SupportedArithmeticTypes);
 
 
     /**************************************
@@ -106,7 +106,7 @@ namespace
  *            RUNTIME TESTS           *
  **************************************/
 
-TYPED_TEST(Mat2x4GeometricOps, Mat2x4Times4DVector_ReturnsAValid2DVector)
+TYPED_TEST(Mat2x4GeometricOpsTests, Mat2x4Times4DVector_ReturnsAValid2DVector)
 {
     const auto expectedVector = this->_mat2x4 * this->_vec4;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -120,7 +120,7 @@ TYPED_TEST(Mat2x4GeometricOps, Mat2x4Times4DVector_ReturnsAValid2DVector)
 }
 
 
-TYPED_TEST(Mat2x4GeometricOps, 2DRowVectorTimesMat2x4_ReturnsAValid4DRowVector)
+TYPED_TEST(Mat2x4GeometricOpsTests, 2DRowVectorTimesMat2x4_ReturnsAValid4DRowVector)
 {
     const auto expectedVector = this->_vec2 * this->_mat2x4;
     if constexpr (std::is_floating_point_v<TypeParam>)

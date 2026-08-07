@@ -37,7 +37,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat4x2Composition: public testing::Test
+    class Mat4x2CompositionTests: public testing::Test
     {
 
     protected:
@@ -121,7 +121,7 @@ namespace
                                  fgm::Vec4{ T(30), T(35), T(15), T(30) }, fgm::Vec4{ T(11), T(12), T(5), T(11) } };
         }
     };
-    TYPED_TEST_SUITE(Mat4x2Composition, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat4x2CompositionTests, SupportedArithmeticTypes);
 
 
 
@@ -173,7 +173,7 @@ namespace
  *            RUNTIME TESTS           *
  **************************************/
 
-TYPED_TEST(Mat4x2Composition, Mat4x2TimesMat2_ReturnsAValid4x2Matrix)
+TYPED_TEST(Mat4x2CompositionTests, Mat4x2TimesMat2_ReturnsAValid4x2Matrix)
 {
     const auto matrixProduct = this->_mat4x2 * this->_mat2;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -187,7 +187,7 @@ TYPED_TEST(Mat4x2Composition, Mat4x2TimesMat2_ReturnsAValid4x2Matrix)
 }
 
 
-TYPED_TEST(Mat4x2Composition, Mat4x2TimesMat2x3_ReturnsAValid4x3Matrix)
+TYPED_TEST(Mat4x2CompositionTests, Mat4x2TimesMat2x3_ReturnsAValid4x3Matrix)
 {
     const auto matrixProduct = this->_mat4x2 * this->_mat2x3;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -201,7 +201,7 @@ TYPED_TEST(Mat4x2Composition, Mat4x2TimesMat2x3_ReturnsAValid4x3Matrix)
 }
 
 
-TYPED_TEST(Mat4x2Composition, Mat4x2TimesMat2x4_ReturnsAValid4DMatrix)
+TYPED_TEST(Mat4x2CompositionTests, Mat4x2TimesMat2x4_ReturnsAValid4DMatrix)
 {
     const auto matrixProduct = this->_mat4x2 * this->_mat2x4;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -215,7 +215,7 @@ TYPED_TEST(Mat4x2Composition, Mat4x2TimesMat2x4_ReturnsAValid4DMatrix)
 }
 
 
-TYPED_TEST(Mat4x2Composition, Mat4TimesMat4x2_ReturnsAValid4x2Matrix)
+TYPED_TEST(Mat4x2CompositionTests, Mat4TimesMat4x2_ReturnsAValid4x2Matrix)
 {
     const auto matrixProduct = this->_mat4 * this->_mat4x2;
     if constexpr (std::is_floating_point_v<TypeParam>)

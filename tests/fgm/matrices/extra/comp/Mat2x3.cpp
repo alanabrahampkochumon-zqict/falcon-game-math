@@ -37,7 +37,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat2x3Composition: public ::testing::Test
+    class Mat2x3CompositionTests: public ::testing::Test
     {
 
     protected:
@@ -100,7 +100,7 @@ namespace
                         fgm::Vec3{ T(2.01238399999999995), T(1.10234800000000011), T(3.01234499999999983) } };
         }
     };
-    TYPED_TEST_SUITE(Mat2x3Composition, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat2x3CompositionTests, SupportedArithmeticTypes);
 
 
 
@@ -152,7 +152,7 @@ namespace
  *            RUNTIME TESTS           *
  **************************************/
 
-TYPED_TEST(Mat2x3Composition, Mat2x3TimesMat3x2_ReturnsAValid2DMatrix)
+TYPED_TEST(Mat2x3CompositionTests, Mat2x3TimesMat3x2_ReturnsAValid2DMatrix)
 {
     const auto matrixProduct = this->_mat2x3 * this->_mat3x2;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -166,7 +166,7 @@ TYPED_TEST(Mat2x3Composition, Mat2x3TimesMat3x2_ReturnsAValid2DMatrix)
 }
 
 
-TYPED_TEST(Mat2x3Composition, Mat2x3TimesMat3_ReturnsAValid2x3Matrix)
+TYPED_TEST(Mat2x3CompositionTests, Mat2x3TimesMat3_ReturnsAValid2x3Matrix)
 {
     const auto matrixProduct = this->_mat2x3 * this->_mat3;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -180,7 +180,7 @@ TYPED_TEST(Mat2x3Composition, Mat2x3TimesMat3_ReturnsAValid2x3Matrix)
 }
 
 
-TYPED_TEST(Mat2x3Composition, Mat2x3TimesMat3x4_ReturnsAValid2x4Matrix)
+TYPED_TEST(Mat2x3CompositionTests, Mat2x3TimesMat3x4_ReturnsAValid2x4Matrix)
 {
     const auto matrixProduct = this->_mat2x3 * this->_mat3x4;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -194,7 +194,7 @@ TYPED_TEST(Mat2x3Composition, Mat2x3TimesMat3x4_ReturnsAValid2x4Matrix)
 }
 
 
-TYPED_TEST(Mat2x3Composition, Mat2x2TimesMat2x3_ReturnsAValid2x3Matrix)
+TYPED_TEST(Mat2x3CompositionTests, Mat2x2TimesMat2x3_ReturnsAValid2x3Matrix)
 {
     const auto matrixProduct = this->_mat2 * this->_mat2x3;
     if constexpr (std::is_floating_point_v<TypeParam>)

@@ -37,7 +37,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat3x4Composition: public testing::Test
+    class Mat3x4CompositionTests: public testing::Test
     {
 
     protected:
@@ -115,7 +115,7 @@ namespace
                                    T(9.10234799999999922) } };
         }
     };
-    TYPED_TEST_SUITE(Mat3x4Composition, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat3x4CompositionTests, SupportedArithmeticTypes);
 
 
 
@@ -169,7 +169,7 @@ namespace
  *            RUNTIME TESTS           *
  **************************************/
 
-TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4x2_ReturnsAValid3x2Matrix)
+TYPED_TEST(Mat3x4CompositionTests, Mat3x4TimesMat4x2_ReturnsAValid3x2Matrix)
 {
     const auto matrixProduct = this->_mat3x4 * this->_mat4x2;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -183,7 +183,7 @@ TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4x2_ReturnsAValid3x2Matrix)
 }
 
 
-TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4x3_ReturnsAValid3DMatrix)
+TYPED_TEST(Mat3x4CompositionTests, Mat3x4TimesMat4x3_ReturnsAValid3DMatrix)
 {
     const auto matrixProduct = this->_mat3x4 * this->_mat4x3;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -197,7 +197,7 @@ TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4x3_ReturnsAValid3DMatrix)
 }
 
 
-TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4_ReturnsAValid3x4Matrix)
+TYPED_TEST(Mat3x4CompositionTests, Mat3x4TimesMat4_ReturnsAValid3x4Matrix)
 {
     const auto matrixProduct = this->_mat3x4 * this->_mat4;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -211,7 +211,7 @@ TYPED_TEST(Mat3x4Composition, Mat3x4TimesMat4_ReturnsAValid3x4Matrix)
 }
 
 
-TYPED_TEST(Mat3x4Composition, Mat3DTimesMat3x4_ReturnsAValid3x4Matrix)
+TYPED_TEST(Mat3x4CompositionTests, Mat3DTimesMat3x4_ReturnsAValid3x4Matrix)
 {
     const auto matrixProduct = this->_mat3 * this->_mat3x4;
     if constexpr (std::is_floating_point_v<TypeParam>)

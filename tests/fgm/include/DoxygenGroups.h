@@ -49,8 +49,7 @@
              *   @defgroup T_FGM_Vec2_GTE_Comp Greater Than or Equal Comparison
              *   @defgroup T_FGM_Vec2_LT_Comp Less Than Comparison
              *   @defgroup T_FGM_Vec2_LTE_Comp Less Than or Equal Comparison
-             *   @defgroup T_FGM_Vec2_Equality Component-wise and Masked Equality
-             *   @defgroup T_FGM_Vec2_Inequality Component-wise and Masked Inequality
+             *   @defgroup T_FGM_Vec2_Equality Component-wise and Masked Equality and Inequality
              *   @defgroup T_FGM_Vec2_Init Initialization
              *   @defgroup T_FGM_Vec2_Magnitude Scalar Length(Magnitude)
              *   @defgroup T_FGM_Vec2_Norm P-Norm (Length)
@@ -86,8 +85,7 @@
              *   @defgroup T_FGM_Vec3_GTE_Comp Greater Than or Equal Comparison
              *   @defgroup T_FGM_Vec3_LT_Comp Less Than Comparison
              *   @defgroup T_FGM_Vec3_LTE_Comp Less Than or Equal Comparison
-             *   @defgroup T_FGM_Vec3_Equality Component-wise and Masked Equality
-             *   @defgroup T_FGM_Vec3_Inequality Component-wise and Masked Inequality
+             *   @defgroup T_FGM_Vec3_Equality Component-wise and Masked Equality and Inequality
              *   @defgroup T_FGM_Vec3_Init Initialization
              *   @defgroup T_FGM_Vec3_Magnitude Scalar Length(Magnitude)
              *   @defgroup T_FGM_Vec3_Norm P-Norm (Length)
@@ -123,8 +121,7 @@
              *   @defgroup T_FGM_Vec4_GTE_Comp Greater Than or Equal Comparison
              *   @defgroup T_FGM_Vec4_LT_Comp Less Than Comparison
              *   @defgroup T_FGM_Vec4_LTE_Comp Less Than or Equal Comparison
-             *   @defgroup T_FGM_Vec4_Equality Component-wise and Masked Equality
-             *   @defgroup T_FGM_Vec4_Inequality Component-wise and Masked Inequality
+             *   @defgroup T_FGM_Vec4_Equality Component-wise and Masked Equality and Inequality
              *   @defgroup T_FGM_Vec4_Init Initialization
              *   @defgroup T_FGM_Vec4_Magnitude Scalar Length(Magnitude)
              *   @defgroup T_FGM_Vec4_Norm P-Norm (Length)
@@ -178,8 +175,7 @@
              *   @defgroup T_FGM_Mat2x2_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x2_Inverse Matrix Inverse
              *   @defgroup T_FGM_Mat2x2_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat2x2_Equality Equality
-             *   @defgroup T_FGM_Mat2x2_Inequality  Inequality
+             *   @defgroup T_FGM_Mat2x2_Equality Equality and Inequality
              *   @defgroup T_FGM_Mat2x2_Init Initialization
              *   @defgroup T_FGM_Mat2x2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x2_Type_Conv Conversion Constructor
@@ -207,8 +203,7 @@
              *   @defgroup T_FGM_Mat2x3_Division Scalar Division
              *   @defgroup T_FGM_Mat2x3_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x3_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat2x3_Equality Equality
-             *   @defgroup T_FGM_Mat2x3_Inequality Inequality
+             *   @defgroup T_FGM_Mat2x3_Equality Equality and Inequality
              *   @defgroup T_FGM_Mat2x3_Init Initialization
              *   @defgroup T_FGM_Mat2x3_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x3_Type_Conv Conversion Constructor
@@ -233,8 +228,7 @@
              *   @defgroup T_FGM_Mat2x4_Division Scalar Division
              *   @defgroup T_FGM_Mat2x4_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat2x4_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat2x4_Equality Equality
-             *   @defgroup T_FGM_Mat2x4_Inequality Inequality
+             *   @defgroup T_FGM_Mat2x4_Equality Equality and Inequality
              *   @defgroup T_FGM_Mat2x4_Init Initialization
              *   @defgroup T_FGM_Mat2x4_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat2x4_Type_Conv Conversion Constructor
@@ -260,8 +254,7 @@
              *   @defgroup T_FGM_Mat3x2_Division Scalar Division
              *   @defgroup T_FGM_Mat3x2_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat3x2_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat3x2_Equality Equality
-             *   @defgroup T_FGM_Mat3x2_Inequality Inequality
+             *   @defgroup T_FGM_Mat3x2_Equality Equality and Inequality
              *   @defgroup T_FGM_Mat3x2_Init Initialization
              *   @defgroup T_FGM_Mat3x2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat3x2_Type_Conv Conversion Constructor
@@ -286,8 +279,7 @@
              *   @defgroup T_FGM_Mat3x3_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat3x3_Inverse Matrix Inverse
              *   @defgroup T_FGM_Mat3x3_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat3x3_Equality Equality
-             *   @defgroup T_FGM_Mat3x3_Inequality  Inequality
+             *   @defgroup T_FGM_Mat3x3_Equality Equality and Inequality
              *   @defgroup T_FGM_Mat3x3_Init Initialization
              *   @defgroup T_FGM_Mat3x3_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat3x3_Type_Conv Conversion Constructor
@@ -317,8 +309,7 @@
              *   @defgroup T_FGM_Mat3x4_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat3x4_Inverse Matrix Inverse
              *   @defgroup T_FGM_Mat3x4_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat3x4_Equality Equality
-             *   @defgroup T_FGM_Mat3x4_Inequality  Inequality
+             *   @defgroup T_FGM_Mat3x4_Equality Equality and Inequality
              *   @defgroup T_FGM_Mat3x4_Init Initialization
              *   @defgroup T_FGM_Mat3x4_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat3x4_Type_Conv Conversion Constructor
@@ -348,8 +339,7 @@
              *   @defgroup T_FGM_Mat4x2_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat4x2_Inverse Matrix Inverse
              *   @defgroup T_FGM_Mat4x2_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat4x2_Equality Equality
-             *   @defgroup T_FGM_Mat4x2_Inequality  Inequality
+             *   @defgroup T_FGM_Mat4x2_Equality Equality and Inequality
              *   @defgroup T_FGM_Mat4x2_Init Initialization
              *   @defgroup T_FGM_Mat4x2_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat4x2_Type_Conv Conversion Constructor
@@ -379,8 +369,7 @@
              *   @defgroup T_FGM_Mat4x3_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat4x3_Inverse Matrix Inverse
              *   @defgroup T_FGM_Mat4x3_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat4x3_Equality Equality
-             *   @defgroup T_FGM_Mat4x3_Inequality  Inequality
+             *   @defgroup T_FGM_Mat4x3_Equality Equality and Inequality
              *   @defgroup T_FGM_Mat4x3_Init Initialization
              *   @defgroup T_FGM_Mat4x3_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat4x3_Type_Conv Conversion Constructor
@@ -408,8 +397,7 @@
              *   @defgroup T_FGM_Mat4x4_Transpose Matrix Transpose
              *   @defgroup T_FGM_Mat4x4_Inverse Matrix Inverse
              *   @defgroup T_FGM_Mat4x4_Constant Matrix Constants
-             *   @defgroup T_FGM_Mat4x4_Equality Equality
-             *   @defgroup T_FGM_Mat4x4_Inequality  Inequality
+             *   @defgroup T_FGM_Mat4x4_Equality Equality and Inequality
              *   @defgroup T_FGM_Mat4x4_Init Initialization
              *   @defgroup T_FGM_Mat4x4_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Mat4x4_Type_Conv Conversion Constructor
@@ -437,8 +425,7 @@
              *   @defgroup T_FGM_Transform4_Transpose Matrix Transpose
              *   @defgroup T_FGM_Transform4_Inverse Matrix Inverse
              *   @defgroup T_FGM_Transform4_Constant Matrix Constants
-             *   @defgroup T_FGM_Transform4_Equality Equality
-             *   @defgroup T_FGM_Transform4_Inequality  Inequality
+             *   @defgroup T_FGM_Transform4_Equality Equality and Inequality
              *   @defgroup T_FGM_Transform4_Init Initialization
              *   @defgroup T_FGM_Transform4_String_Repr Formatted String Representation
              *   @defgroup T_FGM_Transform4_Type_Conv Conversion Constructor

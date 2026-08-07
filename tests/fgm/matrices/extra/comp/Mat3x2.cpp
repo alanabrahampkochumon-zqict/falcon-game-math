@@ -37,7 +37,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat3x2Composition: public testing::Test
+    class Mat3x2CompositionTests: public testing::Test
     {
 
     protected:
@@ -103,7 +103,7 @@ namespace
                                    fgm::Vec3{ T(15), T(35), T(55) }, fgm::Vec3{ T(4), T(10), T(16) } };
         }
     };
-    TYPED_TEST_SUITE(Mat3x2Composition, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat3x2CompositionTests, SupportedArithmeticTypes);
 
 
 
@@ -155,7 +155,7 @@ namespace
  *            RUNTIME TESTS           *
  **************************************/
 
-TYPED_TEST(Mat3x2Composition, Mat3x2TimesMat2_ReturnsAValid3x2Matrix)
+TYPED_TEST(Mat3x2CompositionTests, Mat3x2TimesMat2_ReturnsAValid3x2Matrix)
 {
     const auto matrixProduct = this->_mat3x2 * this->_mat2;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -169,7 +169,7 @@ TYPED_TEST(Mat3x2Composition, Mat3x2TimesMat2_ReturnsAValid3x2Matrix)
 }
 
 
-TYPED_TEST(Mat3x2Composition, Mat3x2TimesMat2x3_ReturnsAValid3DMatrix)
+TYPED_TEST(Mat3x2CompositionTests, Mat3x2TimesMat2x3_ReturnsAValid3DMatrix)
 {
     const auto matrixProduct = this->_mat3x2 * this->_mat2x3;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -183,7 +183,7 @@ TYPED_TEST(Mat3x2Composition, Mat3x2TimesMat2x3_ReturnsAValid3DMatrix)
 }
 
 
-TYPED_TEST(Mat3x2Composition, Mat3x2TimesMat2x4_ReturnsAValid3x4Matrix)
+TYPED_TEST(Mat3x2CompositionTests, Mat3x2TimesMat2x4_ReturnsAValid3x4Matrix)
 {
     const auto matrixProduct = this->_mat3x2 * this->_mat2x4;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -197,7 +197,7 @@ TYPED_TEST(Mat3x2Composition, Mat3x2TimesMat2x4_ReturnsAValid3x4Matrix)
 }
 
 
-TYPED_TEST(Mat3x2Composition, Mat3TimesMat3x2_ReturnsAValid3x2Matrix)
+TYPED_TEST(Mat3x2CompositionTests, Mat3TimesMat3x2_ReturnsAValid3x2Matrix)
 {
     const auto matrixProduct = this->_mat3 * this->_mat3x2;
     if constexpr (std::is_floating_point_v<TypeParam>)
