@@ -338,7 +338,7 @@ TYPED_TEST(Mat2VectorFractionalMultiplicationTests, ColumnFloatVector_ReturnsACo
 }
 
 
-TEST(Mat2VectorMultiplicationTests ColumnVectorTimesIdentityMatrix_ReturnsOriginalColumnVector)
+TEST(Mat2VectorMultiplicationTests, ColumnVectorTimesIdentityMatrix_ReturnsOriginalColumnVector)
 {
     const fgm::Mat2<float> iMatrix = fgm::Mat2<float>::identity();
     const fgm::Vec2F vec(2.0f, 1.0f);
@@ -349,7 +349,7 @@ TEST(Mat2VectorMultiplicationTests ColumnVectorTimesIdentityMatrix_ReturnsOrigin
 }
 
 
-TEST(Mat2VectorMultiplicationTests ColumnVector_MixedType_PromotesType)
+TEST(Mat2VectorMultiplicationTests, ColumnVector_MixedType_PromotesType)
 {
     const fgm::Mat2 mat(1.0, 2.0);
     const fgm::Vec2I vec(2, 1);
@@ -380,7 +380,7 @@ TYPED_TEST(Mat2VectorFractionalMultiplicationTests, RowFloatVector_ReturnsARowVe
 }
 
 
-TEST(Mat2VectorMultiplicationTests RowVectorTimesIdentityMatrixReturnsOriginalVector)
+TEST(Mat2VectorMultiplicationTests, RowVectorTimesIdentityMatrixReturnsOriginalVector)
 {
     const fgm::Mat2<float> iMatrix = fgm::Mat2<float>::identity();
     const fgm::Vec2F vec(2.0f, 1.0f);
@@ -391,7 +391,7 @@ TEST(Mat2VectorMultiplicationTests RowVectorTimesIdentityMatrixReturnsOriginalVe
 }
 
 
-TEST(Mat2VectorMultiplicationTests RowVector_MixedType_PromotesType)
+TEST(Mat2VectorMultiplicationTests, RowVector_MixedType_PromotesType)
 {
     const fgm::Mat2 mat(1.0, 2.0);
     const fgm::Vec2I vec(2, 1);
@@ -416,7 +416,7 @@ TYPED_TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_RowVector_ReturnsAT
 }
 
 
-TEST(Mat2VectorMultiplicationTests TimesEqualOperator_RowVector_IdentityMatrix_ReturnsOriginalRowVector)
+TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_RowVector_IdentityMatrix_ReturnsOriginalRowVector)
 {
     const auto iMatrix = fgm::Mat2<float>::identity();
     fgm::Vec2F vec(2.0f, 1.0f);
@@ -426,7 +426,7 @@ TEST(Mat2VectorMultiplicationTests TimesEqualOperator_RowVector_IdentityMatrix_R
 }
 
 
-TEST(Mat2VectorMultiplicationTests TimesEqualOperator_MixedType_DoesNotPromoteType)
+TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_MixedType_DoesNotPromoteType)
 {
     const fgm::Mat2<double> iMatrix = fgm::Mat2<double>::identity();
     [[maybe_unused]] fgm::Vec2I vec(2, 1);
@@ -436,7 +436,7 @@ TEST(Mat2VectorMultiplicationTests TimesEqualOperator_MixedType_DoesNotPromoteTy
 }
 
 
-TEST(Mat2VectorMultiplicationTests TimesEqualOperator_MixedType_EnsuresMinimalPrecisionLoss)
+TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     const fgm::Mat2 mat(2.5, 3.5, 0.5, 1.5);
     fgm::Vec2 vec(10, 20);
