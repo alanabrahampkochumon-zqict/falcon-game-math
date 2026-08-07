@@ -20,7 +20,6 @@
  * @{
  */
 
-/** @brief Verify that fgm::Mat2x3[] are alias wrappers for integral and floating-point 4D matrix. */
 namespace
 {
     /** Verify @ref fgm::Mat2x3B has `int8_t` value_type. */
@@ -28,7 +27,7 @@ namespace
     static_assert(std::is_same_v<fgm::Mat2x3B, fgm::Mat2x3<int8_t>> && "Mat2x3B must be an alias of Mat2x3<int8_t>");
 
 
-    /** Verify @ref fgm::Mat2x3UB has `int8_t` value_type. */
+    /** Verify @ref fgm::Mat2x3UB has `uint8_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat2x3UB::value_type, uint8_t> && "Mat2x3UB must contain uint8_t elements");
     static_assert(std::is_same_v<fgm::Mat2x3UB, fgm::Mat2x3<uint8_t>> && "Mat2x3UB must be an alias of Mat2x3<uint8_t>");
 

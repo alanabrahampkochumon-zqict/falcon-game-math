@@ -184,6 +184,7 @@
              *   @defgroup T_FGM_Mat2x2_Trace Trace
              *   @defgroup T_FGM_Mat2x2_Transforms Transformation Factories
              *   @defgroup T_FGM_Mat2x2_Utils Matrix Utilities
+             *   @defgroup T_FGM_Mat2x2_Assertion Matrix Death Tests
              * @}
              */
 
@@ -209,6 +210,7 @@
              *   @defgroup T_FGM_Mat2x3_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Mat2x3_Negation Negation(-)
              *   @defgroup T_FGM_Mat2x3_Utils Matrix Utilities
+             *   @defgroup T_FGM_Mat2x3_Assertion Matrix Death Tests
              * @}
              */
 
@@ -234,6 +236,7 @@
              *   @defgroup T_FGM_Mat2x4_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Mat2x4_Negation Negation(-)
              *   @defgroup T_FGM_Mat2x4_Utils Matrix Utilities
+             *   @defgroup T_FGM_Mat2x4_Assertion Matrix Death Tests
              * @}
              */
 
@@ -260,6 +263,7 @@
              *   @defgroup T_FGM_Mat3x2_Type_Conv Conversion Constructor
              *   @defgroup T_FGM_Mat3x2_Negation Negation(-)
              *   @defgroup T_FGM_Mat3x2_Utils Matrix Utilities
+             *   @defgroup T_FGM_Mat3x2_Assertion Matrix Death Tests
              * @}
              */
 
@@ -288,6 +292,7 @@
              *   @defgroup T_FGM_Mat3x3_Trace Trace
              *   @defgroup T_FGM_Mat3x3_Transforms Transformation Factories
              *   @defgroup T_FGM_Mat3x3_Utils Matrix Utilities
+             *   @defgroup T_FGM_Mat3x3_Assertion Matrix Death Tests
              * @}
              */
 
@@ -317,6 +322,7 @@
              *   @defgroup T_FGM_Mat3x4_Det Determinants
              *   @defgroup T_FGM_Mat3x4_Trace Trace
              *   @defgroup T_FGM_Mat3x4_Utils Matrix Utilities
+             *   @defgroup T_FGM_Mat3x4_Assertion Matrix Death Tests
              * @}
              */
 
@@ -347,6 +353,7 @@
              *   @defgroup T_FGM_Mat4x2_Det Determinants
              *   @defgroup T_FGM_Mat4x2_Trace Trace
              *   @defgroup T_FGM_Mat4x2_Utils Matrix Utilities
+             *   @defgroup T_FGM_Mat4x2_Assertion Matrix Death Tests
              * @}
              */
 
@@ -377,6 +384,7 @@
              *   @defgroup T_FGM_Mat4x3_Det Determinants
              *   @defgroup T_FGM_Mat4x3_Trace Trace
              *   @defgroup T_FGM_Mat4x3_Utils Matrix Utilities
+             *   @defgroup T_FGM_Mat4x3_Assertion Matrix Death Tests
              * @}
              */
 
@@ -406,6 +414,7 @@
              *   @defgroup T_FGM_Mat4x4_Trace Trace
              *   @defgroup T_FGM_Mat4x4_Transforms Transformation Factories
              *   @defgroup T_FGM_Mat4x4_Utils Matrix Utilities
+             *   @defgroup T_FGM_Mat4x4_Assertion Matrix Death Tests
              * @}
              */
 

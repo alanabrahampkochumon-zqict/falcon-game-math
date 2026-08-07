@@ -55,7 +55,7 @@ namespace
     {};
     TYPED_TEST_SUITE(Mat2UtilsIntTests, SupportedIntegralTypes);
     INSTANTIATE_TEST_SUITE_P(
-        Mat2NaNCheckerTestSuite, Mat2NaNCheckerTests,
+        Mat2NaNTestMatrices, Mat2NaNCheckerTests,
         ::testing::Values(Mat2UtilityParams{ fgm::Mat2(fgm::constants::NaN, 1.0f), true },
                           Mat2UtilityParams{ fgm::Mat2(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
                           Mat2UtilityParams{ fgm::Mat2(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },

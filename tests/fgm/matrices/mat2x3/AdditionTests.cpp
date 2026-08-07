@@ -11,30 +11,6 @@
 
 #include "Mat2x3TestSetup.h"
 
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Mat2x3Addition: public ::testing::Test
-{
-protected:
-    fgm::Mat2x3<T> _matA;
-    fgm::Mat2x3<T> _matB;
-    fgm::Mat2x3<T> _expectedSum;
-
-    void SetUp() override
-    {
-        _matA        = { fgm::Vec2<T>(1, 2), fgm::Vec2<T>(3, 4), fgm::Vec2<T>(4, 6) };
-        _matB        = { fgm::Vec2<T>(5, 6), fgm::Vec2<T>(7, 8), fgm::Vec2<T>(1, 3) };
-        _expectedSum = { fgm::Vec2<T>(6, 8), fgm::Vec2<T>(10, 12), fgm::Vec2<T>(5, 9) };
-    }
-};
-/** @brief Test fixture for @ref fgm::Mat2x3 addition, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat2x3Addition, SupportedArithmeticTypes);
-
 
 
 /**
@@ -42,52 +18,73 @@ TYPED_TEST_SUITE(Mat2x3Addition, SupportedArithmeticTypes);
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that matrix addition operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
-    constexpr fgm::Mat2x3 MAT2(5, 6, 7, 8, 10, 11);
-    constexpr fgm::Mat2x3 BINARY_SUM = MAT1 + MAT2;
 
-    static_assert(BINARY_SUM(0, 0) == 6);
-    static_assert(BINARY_SUM(0, 1) == 8);
-    static_assert(BINARY_SUM(0, 2) == 10);
-    static_assert(BINARY_SUM(1, 0) == 12);
-    static_assert(BINARY_SUM(1, 1) == 15);
-    static_assert(BINARY_SUM(1, 2) == 17);
 
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 Addition.
+     *
+     * @tparam T The numeric type (int, float, double...) for matrix values.
+     */
+    template <typename T>
+    class Mat2x3AdditionTests: public testing::Test
+    {
+    protected:
+        fgm::Mat2x3<T> _matA;
+        fgm::Mat2x3<T> _matB;
+        fgm::Mat2x3<T> _expectedSum;
+
+        void SetUp() override
+        {
+            _matA        = { fgm::Vec2<T>(1, 2), fgm::Vec2<T>(3, 4), fgm::Vec2<T>(4, 6) };
+            _matB        = { fgm::Vec2<T>(5, 6), fgm::Vec2<T>(7, 8), fgm::Vec2<T>(1, 3) };
+            _expectedSum = { fgm::Vec2<T>(6, 8), fgm::Vec2<T>(10, 12), fgm::Vec2<T>(5, 9) };
+        }
+    };
+    TYPED_TEST_SUITE(Mat2x3AdditionTests, SupportedArithmeticTypes);
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
+        constexpr fgm::Mat2x3 MAT2(5, 6, 7, 8, 10, 11);
+
+        /** @brief Verify that Mat2x3 addition returns a valid matrix at compile time. */
+        constexpr fgm::Mat2x3 BINARY_SUM = MAT1 + MAT2;
+        static_assert(BINARY_SUM(0, 0) == 6);
+        static_assert(BINARY_SUM(0, 1) == 8);
+        static_assert(BINARY_SUM(0, 2) == 10);
+        static_assert(BINARY_SUM(1, 0) == 12);
+        static_assert(BINARY_SUM(1, 1) == 15);
+        static_assert(BINARY_SUM(1, 2) == 17);
+
+    } // namespace static_tests
 } // namespace
 
 
+
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-/**
- * @brief Verify that the binary addition operator perform a component-wise addition and
- *       returns a new matrix instance.
- */
-TYPED_TEST(Mat2x3Addition, PlusOperator_ReturnsMatrixSum)
+TYPED_TEST(Mat2x3AdditionTests, PlusOperator_ReturnsMatrixSum)
 {
     const fgm::Mat2x3 sum = this->_matA + this->_matB;
-
     EXPECT_MAT_EQ(this->_expectedSum, sum);
 }
 
 
-/**
- * @brief Verify that the binary addition operator perform automatic type promotion
- *       to the wider numeric type.
- */
-TEST(Mat2x3Addition, MixedTypeAdditionPromotesType)
+TEST(Mat2x3Addition, PlusOperator_MixedType_PromotesType)
 {
     const fgm::Mat2x3 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f } };
     const fgm::Mat2x3 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 } };
@@ -97,29 +94,19 @@ TEST(Mat2x3Addition, MixedTypeAdditionPromotesType)
 }
 
 
-/**
- * @brief Verify that the compound addition assignment operator perform a component-wise addition and
- *       mutates the matrix in-place.
- */
-TYPED_TEST(Mat2x3Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
+TYPED_TEST(Mat2x3AdditionTests, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 {
     this->_matA += this->_matB;
-
     EXPECT_MAT_EQ(this->_expectedSum, this->_matA);
 }
 
 
-/**
- * @brief Verify that the compound addition assignment operator maintains the destination type and
- *       perform an implicit cast.
- */
-TEST(Mat2x3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Mat2x3Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat2x3 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f } };
     const fgm::Mat2x3 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 } };
 
     mat1 += mat2;
-
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);
 }
 

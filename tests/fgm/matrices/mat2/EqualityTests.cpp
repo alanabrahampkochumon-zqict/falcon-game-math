@@ -36,7 +36,6 @@ namespace
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
-
     template <typename T>
     class Mat2EqualityTests: public testing::Test
     {
@@ -226,13 +225,6 @@ TEST_P(Mat2PerElementEqualityTests, AllEq_VerifiesElementwiseEquality)
 }
 
 
-TEST_P(Mat2PerElementEqualityTests, DoubleEqualsOperator_AllEq_VerifiesElementwiseEquality)
-{
-    const auto& [firstMat, secondMat, expected] = GetParam();
-    EXPECT_EQ(expected, firstMat == secondMat);
-}
-
-
 TYPED_TEST(Mat2EqualityTests, StaticWrapper_AllEq_IdenticalMatricesReturnTrue)
 {
     const bool equality = fgm::Mat2<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
@@ -270,6 +262,13 @@ TYPED_TEST(Mat2EqualityTests, DoubleEqualsOperator_DifferentMatricesReturnFalse)
 {
     const bool equality = this->_eqMatA == this->_unEqualMat;
     EXPECT_FALSE(equality);
+}
+
+
+TEST_P(Mat2PerElementEqualityTests, DoubleEqualsOperator_AllEq_VerifiesElementwiseEquality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat == secondMat);
 }
 
 

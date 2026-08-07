@@ -11,91 +11,94 @@
 
 #include "Mat2x3TestSetup.h"
 
-
-template <typename T>
-class Mat2x3ScalarMultiplication: public ::testing::Test
-{
-protected:
-    fgm::Mat2x3<T> _mat;
-    T _scalar;
-    fgm::Mat2x3<T> _expectedFloatingMat;
-    fgm::Mat2x3<T> _expectedIntegralMat;
-
-
-
-    void SetUp() override
-    {
-        _mat                 = { fgm::Vec2{ T(7), T(13) }, fgm::Vec2{ T(5), T(4) }, fgm::Vec2{ T(11), T(2) } };
-        _scalar              = T(2.123456789123456);
-        _expectedFloatingMat = { fgm::Vec2{ T(14.864197523864192), T(27.604938258604928) },
-                                 fgm::Vec2{ T(10.61728394561728), T(8.493827156493824) },
-                                 fgm::Vec2{ T(23.358024680358014), T(4.246913578246912) } };
-        _expectedIntegralMat = { fgm::Vec2{ T(14), T(26) }, fgm::Vec2{ T(10), T(8) }, fgm::Vec2{ T(22), T(4) } };
-    }
-};
-/** @brief Test fixture for @ref fgm::Mat2x3 scalar multiplication, parameterized by @ref SupportedArithmeticTypes.
- */
-TYPED_TEST_SUITE(Mat2x3ScalarMultiplication, SupportedArithmeticTypes);
-
-
 /**
  * @addtogroup T_FGM_Mat2x3_Multiplication
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that matrix multiplication operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
 
-    // Verify matrix * scalar multiplication
-    constexpr fgm::Mat2x3 BINARY_PRODUCT_1 = MAT1 * 2;
-    static_assert(BINARY_PRODUCT_1(0, 0) == 2);
-    static_assert(BINARY_PRODUCT_1(0, 1) == 4);
-    static_assert(BINARY_PRODUCT_1(0, 2) == 6);
-    static_assert(BINARY_PRODUCT_1(1, 0) == 8);
-    static_assert(BINARY_PRODUCT_1(1, 1) == 10);
-    static_assert(BINARY_PRODUCT_1(1, 2) == 12);
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 scalar multiplication.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
+     */
+    template <typename T>
+    class Mat2x3ScalarMultiplicationTests: public ::testing::Test
+    {
+    protected:
+        fgm::Mat2x3<T> _mat;
+        T _scalar;
+        fgm::Mat2x3<T> _expectedFloatingMat;
+        fgm::Mat2x3<T> _expectedIntegralMat;
 
 
-    // Verify scalar * matrix multiplication
-    constexpr fgm::Mat2x3 BINARY_PRODUCT_2 = 2 * MAT1;
-    static_assert(BINARY_PRODUCT_2(0, 0) == 2);
-    static_assert(BINARY_PRODUCT_2(0, 1) == 4);
-    static_assert(BINARY_PRODUCT_2(0, 2) == 6);
-    static_assert(BINARY_PRODUCT_2(1, 0) == 8);
-    static_assert(BINARY_PRODUCT_2(1, 1) == 10);
-    static_assert(BINARY_PRODUCT_2(1, 2) == 12);
+
+        void SetUp() override
+        {
+            _mat                 = { fgm::Vec2{ T(7), T(13) }, fgm::Vec2{ T(5), T(4) }, fgm::Vec2{ T(11), T(2) } };
+            _scalar              = T(2.123456789123456);
+            _expectedFloatingMat = { fgm::Vec2{ T(14.864197523864192), T(27.604938258604928) },
+                                     fgm::Vec2{ T(10.61728394561728), T(8.493827156493824) },
+                                     fgm::Vec2{ T(23.358024680358014), T(4.246913578246912) } };
+            _expectedIntegralMat = { fgm::Vec2{ T(14), T(26) }, fgm::Vec2{ T(10), T(8) }, fgm::Vec2{ T(22), T(4) } };
+        }
+    };
+    TYPED_TEST_SUITE(Mat2x3ScalarMultiplicationTests, SupportedArithmeticTypes);
+
+
+    /**************************************
+     *                                    *
+     *            STATIC TESTS            *
+     *                                    *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
+
+        /// @test Verify that matrix * scalar multiplication returns 2x3 matrix at compile time.
+        constexpr fgm::Mat2x3 BINARY_PRODUCT_1 = MAT1 * 2;
+        static_assert(BINARY_PRODUCT_1(0, 0) == 2);
+        static_assert(BINARY_PRODUCT_1(0, 1) == 4);
+        static_assert(BINARY_PRODUCT_1(0, 2) == 6);
+        static_assert(BINARY_PRODUCT_1(1, 0) == 8);
+        static_assert(BINARY_PRODUCT_1(1, 1) == 10);
+        static_assert(BINARY_PRODUCT_1(1, 2) == 12);
+
+
+        /// @test Verify scalar * matrix multiplication returns 2x3 matrix at compile time.
+        constexpr fgm::Mat2x3 BINARY_PRODUCT_2 = 2 * MAT1;
+        static_assert(BINARY_PRODUCT_2(0, 0) == 2);
+        static_assert(BINARY_PRODUCT_2(0, 1) == 4);
+        static_assert(BINARY_PRODUCT_2(0, 2) == 6);
+        static_assert(BINARY_PRODUCT_2(1, 0) == 8);
+        static_assert(BINARY_PRODUCT_2(1, 1) == 10);
+        static_assert(BINARY_PRODUCT_2(1, 2) == 12);
+
+    } // namespace static_tests
 
 } // namespace
 
 
 
 /**************************************
- *                                    *
  *     SCALAR MULTIPLICATION TESTS    *
- *                                    *
  **************************************/
 
-/** @brief Verify that scalar multiplication by zero returns a zero matrix. */
-TEST(Mat2x3ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
+TEST(Mat2x3ScalarMultiplication, TimesOperator_ByZeroReturnsZeroMatrix)
 {
     const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
-
     const fgm::Mat2x3 product = mat * 0;
-
     EXPECT_MAT_ZERO(product);
 }
 
 
-/** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Mat2x3ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
+TEST(Mat2x3ScalarMultiplication, TimesOperator_ByOneReturnsOriginalMatrix)
 {
     const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
@@ -105,8 +108,7 @@ TEST(Mat2x3ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 }
 
 
-/** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Mat2x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
+TEST(Mat2x3ScalarMultiplication, TimesOperator_ByNegativeScalarFlipsSigns)
 {
     const fgm::Mat2x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f };
     const fgm::Mat2x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f };
@@ -118,11 +120,7 @@ TEST(Mat2x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
 }
 
 
-/**
- * @brief Verify that the binary multiplication operator (matrix * scalar) perform an element-wise product
- *        and returns a new matrix instance.
- */
-TYPED_TEST(Mat2x3ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
+TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByScalarReturnsScaledMatrix)
 {
     const fgm::Mat2x3 product = this->_mat * this->_scalar;
 
@@ -141,7 +139,7 @@ TYPED_TEST(Mat2x3ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
  * @brief Verify that the binary multiplication operator (scalar * matrix) perform an element-wise product
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Mat2x3ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
+TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ScalarTimesMatrixReturnsScaledMatrix)
 {
     const fgm::Mat2x3 product = this->_scalar * this->_mat;
 
@@ -156,11 +154,18 @@ TYPED_TEST(Mat2x3ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 }
 
 
-/**
- * @brief Verify that the compound multiplication assignment operator (scalar) performs an element-wise product
- *        and mutates the matrix in-place.
- */
-TYPED_TEST(Mat2x3ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScaled)
+TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_MixedType_PromotesType)
+{
+    const double scalar = 2.123456789123456;
+
+    [[maybe_unused]] const fgm::Mat2x3 product = this->_mat * scalar;
+
+    static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
+}
+
+
+
+TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesEqualsOperator_MatrixTimesEqualScalarIsTheSameMatrixScaled)
 {
     this->_mat *= this->_scalar;
 
@@ -175,25 +180,7 @@ TYPED_TEST(Mat2x3ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScal
 }
 
 
-/**
- * @brief Verify that the binary multiplication operator (scalar) perform automatic type promotion
- *        to the wider numeric type.
- */
-TYPED_TEST(Mat2x3ScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
-{
-    const double scalar = 2.123456789123456;
-
-    [[maybe_unused]] const fgm::Mat2x3 product = this->_mat * scalar;
-
-    static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
-}
-
-
-/**
- * @brief Verify that the compound multiplication assignment operator (scalar) maintains the destination type and
- *        perform an implicit cast.
- */
-TEST(Mat2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
+TEST(Mat2x3ScalarMultiplication, TimesOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat2x3 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f);
     const double scalar = 5.0;
@@ -203,11 +190,7 @@ TEST(Mat2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotP
 }
 
 
-/**
- * @brief Verify that the compound multiplication operator (scalar) for mixed type
- *        ensure minimal precision loss.
- */
-TEST(Mat2x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+TEST(Mat2x3ScalarMultiplication, TimesOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Mat2x3 mat(3, -1, 10, 5, 50, 12);
     const double scalar = 2.5;

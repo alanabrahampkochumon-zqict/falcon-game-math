@@ -12,70 +12,50 @@
 #include "Mat2x3TestSetup.h"
 
 
-#ifdef ENABLE_DEBUG_TESTS
-    #include <utility>
-
-class Mat2x3Indexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
-{};
-INSTANTIATE_TEST_SUITE_P(Mat2x3Tests, Mat2x3Indexing,
-                         testing::Values(std::make_pair(3, 3), std::make_pair(2, 3), std::make_pair(3, 2),
-                                         std::make_pair(100, 100)));
-
-class Mat2x3ColumnIndexing: public testing::TestWithParam<std::size_t>
-{};
-INSTANTIATE_TEST_SUITE_P(Mat2x3Tests, Mat2x3ColumnIndexing, testing::Values(3, 4, 100));
-#endif
-
-
-
-
 /**
  * @addtogroup T_FGM_Mat2x3_Access
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that matrix accessors are available at compile time. */
 namespace
 {
-    constexpr fgm::Mat2x3 MAT(1, 2, 3, 4, 5, 6);
-    constexpr fgm::Vec2 VEC0(1, 4);
-    constexpr fgm::Vec2 VEC1(2, 5);
-    constexpr fgm::Vec2 VEC2(3, 6);
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-    // Verify that matrix elements are accessible as (row, column) during compile time.
-    static_assert(MAT(0, 0) == 1);
-    static_assert(MAT(0, 1) == 2);
-    static_assert(MAT(0, 2) == 3);
-    static_assert(MAT(1, 0) == 4);
-    static_assert(MAT(1, 1) == 5);
-    static_assert(MAT(1, 2) == 6);
+    namespace static_tests
+    {
+        constexpr fgm::Mat2x3 MAT(1, 2, 3, 4, 5, 6);
+        constexpr fgm::Vec2 VEC0(1, 4);
+        constexpr fgm::Vec2 VEC1(2, 5);
+        constexpr fgm::Vec2 VEC2(3, 6);
 
-    // Verify that matrix columns are accessible as 2D-vectors during compile time.
-    static_assert(MAT[0].x() == VEC0[0]);
-    static_assert(MAT[0].y() == VEC0[1]);
-    static_assert(MAT[1].x() == VEC1[0]);
-    static_assert(MAT[1].y() == VEC1[1]);
-    static_assert(MAT[2].x() == VEC2[0]);
-    static_assert(MAT[2].y() == VEC2[1]);
+        /// @test Verify that matrix elements are accessible as (row, column) during compile time.
+        static_assert(MAT(0, 0) == 1);
+        static_assert(MAT(0, 1) == 2);
+        static_assert(MAT(0, 2) == 3);
+        static_assert(MAT(1, 0) == 4);
+        static_assert(MAT(1, 1) == 5);
+        static_assert(MAT(1, 2) == 6);
 
+        /// @test Verify that matrix columns are accessible as 2D-vectors during compile time.
+        static_assert(MAT[0].x() == VEC0[0]);
+        static_assert(MAT[0].y() == VEC0[1]);
+        static_assert(MAT[1].x() == VEC1[0]);
+        static_assert(MAT[1].y() == VEC1[1]);
+        static_assert(MAT[2].x() == VEC2[0]);
+        static_assert(MAT[2].y() == VEC2[1]);
+
+    } // namespace static_tests
 } // namespace
 
 
 
 /**************************************
- *                                    *
  *            ACCESS TESTS            *
- *                                    *
  **************************************/
 
-/** @brief Verify that the matrix elements are accessible via subscript indexing for reads. */
-TEST(Mat2x3Access, AccessibleAsElements)
+TEST(Mat2x3AccessTests, AccessibleAsElements)
 {
     constexpr fgm::Mat2x3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);
 
@@ -88,8 +68,7 @@ TEST(Mat2x3Access, AccessibleAsElements)
 }
 
 
-/** @brief Verify that the matrix columns are accessible as vectors for reads. */
-TEST(Mat2x3Access, AccessibleAsColumnVectors)
+TEST(Mat2x3AccessTests, AccessibleAsColumnVectors)
 {
     constexpr fgm::Mat2x3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);
 
@@ -99,43 +78,12 @@ TEST(Mat2x3Access, AccessibleAsColumnVectors)
 }
 
 
-#ifdef ENABLE_DEBUG_TESTS
-
-/** @brief Verify that @ref fgm::Mat2x3 out-of-bounds column access triggers assert in debug mode. */
-TEST_P(Mat2x3ColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
-{
-    const fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
-    const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
-}
-
-/** @brief Verify that @ref fgm::Mat2x3 out-of-bounds row, column access triggers assert in debug mode. */
-TEST_P(Mat2x3Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
-{
-    const fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
-    const auto [row, col] = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col)), "");
-}
-
-#endif
-
-/** @} */
-
-
-
-/**
- * @addtogroup T_FGM_Mat2x2_Mutation
- * @{
- */
 
 /**************************************
- *                                    *
  *           MUTATION TESTS           *
- *                                    *
  **************************************/
 
-/** @brief Verify that the matrix elements are accessible via subscript indexing for writes. */
-TEST(Mat2x3Access, ElementsCanBeMutatedUsingIndex)
+TEST(Mat2x3MutationTests, ElementsCanBeMutatedUsingIndex)
 {
     fgm::Mat2x3<float> mat;
 
@@ -155,8 +103,7 @@ TEST(Mat2x3Access, ElementsCanBeMutatedUsingIndex)
 }
 
 
-/** @brief Verify that the matrix columns are accessible as vectors for writes. */
-TEST(Mat2x3Access, ColumnsCanBeMutatedUsingIndex)
+TEST(Mat2x3MutationTests, ColumnsCanBeMutatedUsingIndex)
 {
     const fgm::Vec2 col0 = { 1.0f, 4.0f };
     const fgm::Vec2 col1 = { 2.0f, 5.0f };
@@ -171,27 +118,5 @@ TEST(Mat2x3Access, ColumnsCanBeMutatedUsingIndex)
     EXPECT_VEC_EQ(col1, mat[1]);
     EXPECT_VEC_EQ(col2, mat[2]);
 }
-
-
-#ifdef ENABLE_DEBUG_TESTS
-
-/** @brief Verify that @ref fgm::Mat2x3 out-of-bounds column mutation triggers assert in debug mode. */
-TEST_P(Mat2x3ColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
-{
-    [[maybe_unused]] fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
-    const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec2<int>::zero()), "");
-}
-
-
-/** @brief Verify that @ref fgm::Mat2x3 out-of-bounds row, column mutation triggers assert in debug mode. */
-TEST_P(Mat2x3Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
-{
-    [[maybe_unused]] fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
-    const auto [row, col] = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col) = 5), "");
-}
-
-#endif
 
 /** @} */

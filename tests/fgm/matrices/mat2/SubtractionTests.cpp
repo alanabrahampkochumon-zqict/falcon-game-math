@@ -30,7 +30,6 @@ namespace
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
-
     template <typename T>
     class Mat2SubtractionTests: public ::testing::Test
     {
