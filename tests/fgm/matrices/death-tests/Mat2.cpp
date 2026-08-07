@@ -23,6 +23,29 @@ INSTANTIATE_TEST_SUITE_P(Mat2OutOfBoundsColumnIndices, Mat2ColumnIndexingTests, 
 
 
 
+/** @brief Test fixture for calculating @ref fgm::Mat2 inverse with singular matrices. */
+class Mat2InverseSingularTests: public testing::TestWithParam<fgm::Mat2<float>>
+{};
+INSTANTIATE_TEST_SUITE_P(Mat2SingularMatrixInverse, Mat2InverseSingularTests,
+                         ::testing::Values(fgm::Mat2{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ 1.0f, 2.0f } },
+                                           fgm::Mat2{ fgm::Vec2{ 2.0f, 2.0f }, fgm::Vec2{ 2.0f, 2.0f } },
+                                           fgm::Mat2{ fgm::Vec2{ 3.0f, 2.0f }, fgm::Vec2{ 6.0f, 4.0f } },
+                                           fgm::Mat2{ fgm::Vec2{ 0.0f, 0.0f }, fgm::Vec2{ 4.0f, 5.0f } },
+                                           fgm::Mat2{ fgm::Vec2{ 0.0f, 3.0f }, fgm::Vec2{ 0.0f, 5.0f } }));
+
+
+
+/** @brief Test fixture for @ref fgm::Mat2 inverse with NaN elements. */
+class Mat2InverseNaNTests: public ::testing::TestWithParam<fgm::Mat2<float>>
+{};
+INSTANTIATE_TEST_SUITE_P(Mat2NaNMatrixInverse, Mat2InverseNaNTests,
+                         ::testing::Values(fgm::Mat2<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
+                                           fgm::Mat2<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
+                                           fgm::Mat2<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
+                                           fgm::Mat2<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
+                                           fgm::Mat2<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                                                            fgm ::constants::NaN, fgm ::constants::NaN)));
+
 
 #ifdef ENABLE_DEBUG_TESTS
 
@@ -79,5 +102,32 @@ TYPED_TEST(Mat2Division, DivideOperator_ByZeroTriggersAssertInDebugMode)
 /** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
 TYPED_TEST(Mat2Division, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
 { EXPECT_DEBUG_DEATH(this->_matrix /= 0, ""); }
+
+#endif
+
+
+#ifdef ENABLE_DEBUG_TESTS
+
+/**
+ * @brief Verify that inverting a singular matrix using @ref fgm::Mat2::inverse
+ *        triggers assertion in debug mode.
+ */
+TEST_P(Mat2InverseSingularTests, TriggersAssertionInDebugMode)
+{
+    const auto& matrix = GetParam();
+    // Static cast is placed to suppress the no-discard warning
+    EXPECT_DEBUG_DEATH(static_cast<void>(matrix.inverse()), "");
+}
+
+/**
+ * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat2::inverse
+ *        triggers assertion in debug mode.
+ */
+TEST_P(Mat2InverseSingularTests, StaticWrapper_TriggersAssertionInDebugMode)
+{
+    const auto& matrix = GetParam();
+    // Static cast is placed to suppress the no-discard warning
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Mat2<float>::inverse(matrix)), "");
+}
 
 #endif

@@ -43,14 +43,14 @@ namespace
     protected:
         fgm::Mat2<T> _eqMatA;
         fgm::Mat2<T> _eqMatB;
-        fgm::Mat2<T> _dissimilarMat;
+        fgm::Mat2<T> _unEqualMat;
 
 
         void SetUp() override
         {
             _eqMatA        = { { T(1.1234568789), T(2.123458319) }, { T(3.1234568789), T(4.123458319) } };
             _eqMatB        = { { T(1.1234568789), T(2.123458319) }, { T(3.1234568789), T(4.123458319) } };
-            _dissimilarMat = { { T(1.1234568789), T(4.5238852912) }, { T(3.1234568789), T(6.123458319) } };
+            _unEqualMat = { { T(1.1234568789), T(4.5238852912) }, { T(3.1234568789), T(6.123458319) } };
         }
     };
     TYPED_TEST_SUITE(Mat2EqualityTests, SupportedArithmeticTypes);
@@ -104,24 +104,48 @@ namespace
                                      -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
 
 
-        /** @brief Verify that Mat2 allEq returns true for equal matrices at compile time. */
+        /** @test Verify that Mat2 allEq returns true for equal matrices at compile time. */
         static_assert(MAT1.allEq(MAT2) == true);
 
-        /** @brief Verify that Mat2 allEq returns false for unequal matrices at compile time. */
+        /** @test Verify that Mat2 allEq returns false for unequal matrices at compile time. */
         static_assert(MAT1.allEq(MAT3) == false);
 
-        /** @brief Verify that Mat2 allEq returns true for equal infinite matrices at compile time. */
+        /** @test Verify that Mat2 allEq returns true for equal infinite matrices at compile time. */
         static_assert(INF_MAT1.allEq(INF_MAT2) == true);
 
 
-        /** @brief Verify that Mat2 allEq (static wrapper) returns true for equal matrices at compile time. */
+
+        /** @test Verify that Mat2 allEq (static wrapper) returns true for equal matrices at compile time. */
         static_assert(fgm::Mat2<int>::allEq(MAT1, MAT2) == true);
 
-        /** @brief Verify that Mat2 allEq (static wrapper) returns false for unequal matrices at compile time. */
+        /** @test Verify that Mat2 allEq (static wrapper) returns false for unequal matrices at compile time. */
         static_assert(fgm::Mat2<int>::allEq(MAT1, MAT3) == false);
 
-        /** @brief Verify that Mat2 allEq (static wrapper) returns true for equal infinite matrices at compile time. */
+        /** @test Verify that Mat2 allEq (static wrapper) returns true for equal infinite matrices at compile time. */
         static_assert(fgm::Mat2<float>::allEq(INF_MAT1, INF_MAT2) == true);
+
+
+
+        /** @test Verify that Mat2 anyNeq returns false for equal matrices at compile time. */
+        static_assert(MAT1.anyNeq(MAT2) == false);
+
+        /** @test Verify that Mat2 anyNeq returns true for unequal matrices at compile time. */
+        static_assert(MAT1.anyNeq(MAT3) == true);
+
+        /** @test Verify that Mat2 anyNeq returns false for equal infinite matrices at compile time. */
+        static_assert(INF_MAT1.anyNeq(INF_MAT2) == false);
+
+
+
+        /** @test Verify that Mat2 anyNeq (static wrapper) returns false for equal matrices at compile time. */
+        static_assert(fgm::Mat2<int>::anyNeq(MAT1, MAT2) == false);
+
+        /** @test Verify that Mat2 anyNeq (static wrapper) returns true for unequal matrices at compile time. */
+        static_assert(fgm::Mat2<int>::anyNeq(MAT1, MAT3) == true);
+
+        /** @test Verify that Mat2 anyNeq (static wrapper) returns false for equal infinite matrices at compile time. */
+        static_assert(fgm::Mat2<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
+
     } // namespace static_tests
 
 } // namespace
@@ -141,21 +165,7 @@ TYPED_TEST(Mat2EqualityTests, AllEq_IdenticalMatricesReturnTrue)
 
 TYPED_TEST(Mat2EqualityTests, AllEq_DifferentMatricesReturnFalse)
 {
-    const bool equality = this->_eqMatA.allEq(this->_dissimilarMat);
-    EXPECT_FALSE(equality);
-}
-
-
-TYPED_TEST(Mat2EqualityTests, StaticWrapper_AllEq_IdenticalMatricesReturnTrue)
-{
-    const bool equality = fgm::Mat2<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
-    EXPECT_TRUE(equality);
-}
-
-
-TYPED_TEST(Mat2EqualityTests, StaticWrapper_AllEq_DifferentMatricesReturnFalse)
-{
-    const bool equality = fgm::Mat2<TypeParam>::allEq(this->_eqMatA, this->_dissimilarMat);
+    const bool equality = this->_eqMatA.allEq(this->_unEqualMat);
     EXPECT_FALSE(equality);
 }
 
@@ -170,7 +180,7 @@ TEST(Mat2EqualityTests, AllEq_NanMatrixReturnsFalse)
 }
 
 
-TEST(Mat2Equality, AllEq_IdenticalInfiniteMatricesReturnTrue)
+TEST(Mat2EqualityTests, AllEq_IdenticalInfiniteMatricesReturnTrue)
 {
     const fgm::Mat2 matA(INF, -INF, INF, -INF);
     const fgm::Mat2 matB(INF, -INF, INF, -INF);
@@ -180,7 +190,7 @@ TEST(Mat2Equality, AllEq_IdenticalInfiniteMatricesReturnTrue)
 }
 
 
-TEST(Mat2Equality, AllEq_DifferentInfiniteMatricesReturnFalse)
+TEST(Mat2EqualityTests, AllEq_DifferentInfiniteMatricesReturnFalse)
 {
     const fgm::Mat2 matA(INF, -INF, INF, -INF);
     const fgm::Mat2 matB(-INF, -INF, INF, INF);
@@ -223,6 +233,20 @@ TEST_P(Mat2PerElementEqualityTests, DoubleEqualsOperator_AllEq_VerifiesElementwi
 }
 
 
+TYPED_TEST(Mat2EqualityTests, StaticWrapper_AllEq_IdenticalMatricesReturnTrue)
+{
+    const bool equality = fgm::Mat2<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
+    EXPECT_TRUE(equality);
+}
+
+
+TYPED_TEST(Mat2EqualityTests, StaticWrapper_AllEq_DifferentMatricesReturnFalse)
+{
+    const bool equality = fgm::Mat2<TypeParam>::allEq(this->_eqMatA, this->_unEqualMat);
+    EXPECT_FALSE(equality);
+}
+
+
 TEST_P(Mat2PerElementEqualityTests, StaticWrapper_AllEq_VerifiesElementwiseEquality)
 {
     const auto& [firstMat, secondMat, expected] = GetParam();
@@ -244,12 +268,12 @@ TYPED_TEST(Mat2EqualityTests, DoubleEqualsOperator_IdenticalMatricesReturnTrue)
 
 TYPED_TEST(Mat2EqualityTests, DoubleEqualsOperator_DifferentMatricesReturnFalse)
 {
-    const bool equality = this->_eqMatA == this->_dissimilarMat;
+    const bool equality = this->_eqMatA == this->_unEqualMat;
     EXPECT_FALSE(equality);
 }
 
 
-TEST(Mat2Equality, DoubleEqualsOperator_IdenticalBooleanMatricesReturnTrue)
+TEST(Mat2EqualityTests, DoubleEqualsOperator_IdenticalBooleanMatricesReturnTrue)
 {
     const fgm::Mat2 matA(true, false, true, false);
     const fgm::Mat2 matB(true, false, true, false);
@@ -259,7 +283,7 @@ TEST(Mat2Equality, DoubleEqualsOperator_IdenticalBooleanMatricesReturnTrue)
 }
 
 
-TEST(Mat2Equality, DoubleEqualsOperator_DifferentBooleanMatricesReturnFalse)
+TEST(Mat2EqualityTests, DoubleEqualsOperator_DifferentBooleanMatricesReturnFalse)
 {
     const fgm::Mat2 matA(true, false, false, true);
     const fgm::Mat2 matB(true, true, false, true);
@@ -277,79 +301,26 @@ TEST_P(Mat2PerElementEqualityTests, DoubleEqualsOperator_VerifiesElementwiseEqua
 }
 
 
-/**
- * @addtogroup T_FGM_Mat2x2_Inequality
- * @{
- */
 
 /**************************************
- *                                    *
- *           STATIC TESTS             *
- *                                    *
+ *             ANY NEQ                *
  **************************************/
 
-/** @brief Verify that matrix inequality check is available at compile time. */
-namespace
-{
-    // Member functions
-    static_assert(MAT1.anyNeq(MAT2) == false);
-    static_assert(MAT1.anyNeq(MAT3) == true);
-    static_assert(INF_MAT1.anyNeq(INF_MAT2) == false);
-
-
-    // Static functions
-    static_assert(fgm::Mat2<int>::anyNeq(MAT1, MAT2) == false);
-    static_assert(fgm::Mat2<int>::anyNeq(MAT1, MAT3) == true);
-    static_assert(fgm::Mat2<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
-
-} // namespace
-
-
-
-/**************************************
- *                                    *
- *           RUNTIME TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that @ref fgm::Mat2::anyNeq returns false for identical matrices. */
-TYPED_TEST(Mat2EqualityTests, Inequality_IdenticalMatricesReturnFalse)
+TYPED_TEST(Mat2EqualityTests, AnyNeq_IdenticalMatricesReturnFalse)
 {
     const bool inequality = this->_eqMatA.anyNeq(this->_eqMatB);
-
     EXPECT_FALSE(inequality);
 }
 
 
-/** @brief Verify that @ref fgm::Mat2::anyNeq returns true if any component differ. */
-TYPED_TEST(Mat2EqualityTests, Inequality_DifferentMatricesReturnTrue)
+TYPED_TEST(Mat2EqualityTests, AnyNeq_DifferentMatricesReturnTrue)
 {
-    const bool inequality = this->_eqMatA.anyNeq(this->_dissimilarMat);
-
+    const bool inequality = this->_eqMatA.anyNeq(this->_unEqualMat);
     EXPECT_TRUE(inequality);
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Mat2::anyNeq for identical matrices. */
-TYPED_TEST(Mat2EqualityTests, StaticWrapper_Inequality_IdenticalMatricesReturnFalse)
-{
-    const bool inequality = fgm::Mat2<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
-
-    EXPECT_FALSE(inequality);
-}
-
-
-/** @brief Verify that the static variant of @ref fgm::Mat2::anyNeq for different matrices. */
-TYPED_TEST(Mat2EqualityTests, StaticWrapper_Inequality_DifferentMatricesReturnTrue)
-{
-    const bool inequality = fgm::Mat2<TypeParam>::anyNeq(this->_eqMatA, this->_dissimilarMat);
-
-    EXPECT_TRUE(inequality);
-}
-
-
-/** @brief Verify that @ref fgm::Mat2::anyNeq follows IEEE 754 for NaN comparisons. */
-TEST(Mat2Equality, NanInequalityReturnsTrue)
+TEST(Mat2EqualityTests, AnyNeq_NanMatrixReturnsTrue)
 {
     const fgm::Mat2 matA(NAN_F, NAN_F, NAN_F, NAN_F);
     const fgm::Mat2 matB(1.0f, -5.88874789f, INF, -INF);
@@ -360,74 +331,95 @@ TEST(Mat2Equality, NanInequalityReturnsTrue)
 }
 
 
-/** @brief Verify that @ref fgm::Mat2::anyNeq follows IEEE 754 for INFINITY comparisons. */
-TEST(Mat2Equality, InfinityInequality_IdenticalMatricesReturnFalse)
+TEST(Mat2EqualityTests, AnyNeq_IdenticalInfiniteMatricesReturnFalse)
 {
     const fgm::Mat2 matA(INF, -INF, INF, -INF);
     const fgm::Mat2 matB(INF, -INF, INF, -INF);
 
     const bool inequality = matA.anyNeq(matB);
-
     EXPECT_FALSE(inequality);
 }
 
 
-/** @brief Verify that @ref fgm::Mat2::anyNeq follows IEEE 754 for INFINITY comparisons. */
-TEST(Mat2Equality, InfinityInequality_DifferentMatricesReturnTrue)
+TEST(Mat2EqualityTests, AnyNeq_DifferentInfiniteMatricesReturnTrue)
 {
     const fgm::Mat2 matA(-INF, INF, INF, -INF);
     const fgm::Mat2 matB(INF, INF, -INF, -INF);
 
     const bool inequality = matA.anyNeq(matB);
-
     EXPECT_TRUE(inequality);
 }
 
 
-/** @brief Verify that @ref fgm::Mat2::anyNeq works for different vector types with identical components. */
-TYPED_TEST(Mat2EqualityTests, MixedType_Inequality_IdenticalMatricesReturnFalse)
+TYPED_TEST(Mat2EqualityTests, AnyNeq_MixedType_IdenticalMatricesReturnFalse)
 {
     const fgm::Mat2 matA(1, 2, 3, 4);
     const fgm::Mat2 matB(1.0, 2.0, 3.0, 4.0);
 
     const bool inequality = matA.anyNeq(matB);
-
     EXPECT_FALSE(inequality);
 }
 
 
-/** @brief Verify that @ref fgm::Mat2::anyNeq works for different vector types with different components. */
-TYPED_TEST(Mat2EqualityTests, MixedType_Inequality_DifferentMatricesReturnTrue)
+TYPED_TEST(Mat2EqualityTests, AnyNeq_MixedType_DifferentMatricesReturnTrue)
 {
     const fgm::Mat2 matA(5, 6, 7, 8);
     const fgm::Mat2 matB(1.0, 2.0, 7.0, 8.0);
 
     const bool inequality = matA.anyNeq(matB);
-
     EXPECT_TRUE(inequality);
 }
 
 
-/** @brief Verify that the operator returns false for identical matrices. */
-TYPED_TEST(Mat2EqualityTests, InDoubleEqualsOperator_IdenticalMatricesReturnFalse)
+TEST_P(Mat2PerElementInequalityTests, AnyNeq_VerifiesElementwiseInequality)
 {
-    const bool inequality = this->_eqMatA != this->_eqMatB;
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, firstMat.anyNeq(secondMat));
+}
 
+
+TYPED_TEST(Mat2EqualityTests, StaticWrapper_AnyNeq_IdenticalMatricesReturnFalse)
+{
+    const bool inequality = fgm::Mat2<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
     EXPECT_FALSE(inequality);
 }
 
 
-/** @brief Verify that the inequality operator returns true for different matrices. */
-TYPED_TEST(Mat2EqualityTests, InDoubleEqualsOperator_DifferentMatricesReturnTrue)
+TYPED_TEST(Mat2EqualityTests, StaticWrapper_AnyNeq_DifferentMatricesReturnTrue)
 {
-    const bool inequality = this->_eqMatA != this->_dissimilarMat;
+    const bool inequality = fgm::Mat2<TypeParam>::anyNeq(this->_eqMatA, this->_unEqualMat);
+    EXPECT_TRUE(inequality);
+}
+
+
+TEST_P(Mat2PerElementInequalityTests, StaticWrapper_AnyNeq_VerifiesElementwiseInequality)
+{
+    const auto& [firstMat, secondMat, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Mat2<int>::anyNeq(firstMat, secondMat));
+}
+
+
+
+/**************************************
+ *            NOT EQUALS              *
+ **************************************/
+
+TYPED_TEST(Mat2EqualityTests, NotEqualsOperator_IdenticalMatricesReturnFalse)
+{
+    const bool inequality = this->_eqMatA != this->_eqMatB;
+    EXPECT_FALSE(inequality);
+}
+
+
+TYPED_TEST(Mat2EqualityTests, NotEqualsOperator_DifferentMatricesReturnTrue)
+{
+    const bool inequality = this->_eqMatA != this->_unEqualMat;
 
     EXPECT_TRUE(inequality);
 }
 
 
-/** @brief Verify that the inequality operator works for @ref fgm::Mat2<bool> with identical components. */
-TEST(Mat2Equality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
+TEST(Mat2EqualityTests, NotEqualsOperator_IdenticalBooleanMatricesReturnFalse)
 {
     const fgm::Mat2 matA(true, false);
     const fgm::Mat2 matB(true, false);
@@ -438,8 +430,7 @@ TEST(Mat2Equality, InequalityOperator_IdenticalBooleanMatricesReturnFalse)
 }
 
 
-/** @brief Verify that the inequality operator works for @ref fgm::Mat2<bool> with different components. */
-TEST(Mat2Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
+TEST(Mat2EqualityTests, NotEqualsOperator_DifferentBooleanMatricesReturnTrue)
 {
     const fgm::Mat2 matA(true, false, true, false);
     const fgm::Mat2 matB(true, true, false, true);
@@ -449,24 +440,8 @@ TEST(Mat2Equality, InequalityOperator_DifferentBooleanMatricesReturnTrue)
     EXPECT_TRUE(inequality);
 }
 
-/** @brief Verify that fgm::Mat2::anyNeq works for any element being unequal. */
-TEST_P(Mat2PerElementInequalityTests, AnyNeq_VerifiesElementwiseInequality)
-{
-    const auto& [firstMat, secondMat, expected] = GetParam();
-    EXPECT_EQ(expected, firstMat.anyNeq(secondMat));
-}
 
-
-/** @brief Verify that static variant of fgm::Mat2::anyNeq works for any element being unequal. */
-TEST_P(Mat2PerElementInequalityTests, StaticWrapper_AnyNeq_VerifiesElementwiseInequality)
-{
-    const auto& [firstMat, secondMat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Mat2<int>::anyNeq(firstMat, secondMat));
-}
-
-
-/** @brief Verify that operator!= works for any element being unequal. */
-TEST_P(Mat2PerElementInequalityTests, InequalityOperator_AnyNeq_VerifiesElementwiseInequality)
+TEST_P(Mat2PerElementInequalityTests, NotEqualsOperator_VerifiesElementwiseInequality)
 {
     const auto& [firstMat, secondMat, expected] = GetParam();
     EXPECT_EQ(expected, firstMat != secondMat);

@@ -15,66 +15,64 @@
 
 
 
-/**************************************
- *                                    *
- *                SETUP               *
- *                                    *
- **************************************/
-
-class Mat2StringRepresentationTests: public ::testing::Test
-{
-    /** @brief Switch to use full precision for testing. */
-    void SetUp() override { fgm::Config::useFullPrecision = true; }
-
-    /** @brief Switch back to normal log precision. */
-    void TearDown() override { fgm::Config::useFullPrecision = false; }
-};
-
-
-
 /**
  * @addtogroup T_FGM_Mat2x2_String_Repr
  * @{
  */
 
-/** @brief Verify that the string representation matches the expected format for integral types. */
-TEST_F(Mat2StringRepresentationTests, IntegralRepresentation)
+namespace
+
+{
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat2 String Representation.
+     */
+    class Mat2StringRepresentationTests: public ::testing::Test
+    {
+        /** @brief Switch to use full precision for testing. */
+        void SetUp() override { fgm::Config::useFullPrecision = true; }
+
+        /** @brief Switch back to normal log precision. */
+        void TearDown() override { fgm::Config::useFullPrecision = false; }
+    };
+
+} // namespace
+
+
+
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
+
+TEST_F(Mat2StringRepresentationTests, IntegralMatrix_ReturnsFormattedString)
 {
     const fgm::Mat2 mat(1, 2, 3, 4);
     std::stringstream ss;
 
     ss << mat;
-
     EXPECT_EQ(ss.str(), "|1 2|\n|3 4|\n");
 }
 
 
-/**
- * @brief Verify that the string representation matches the expected format for single-precision
- *       floating-point types.
- */
-TEST_F(Mat2StringRepresentationTests, FloatRepresentation)
+TEST_F(Mat2StringRepresentationTests, FloatingPointMatrix_ReturnsFormattedString)
 {
     const fgm::Mat2 mat(1.2345f, 2.0f, 4.53823f, 3.323f);
     std::stringstream ss;
 
     ss << mat;
-
     EXPECT_EQ(ss.str(), "|1.23450 2.00000|\n|4.53823 3.32300|\n");
 }
 
 
-/**
- * @brief Verify that the string representation matches the expected format for double-precision
- *       floating-point types.
- */
-TEST_F(Mat2StringRepresentationTests, DoubleRepresentation)
+TEST_F(Mat2StringRepresentationTests, DoublePrecisionFloatingPointMatrix_ReturnsFormattedString)
 {
     const fgm::Mat2 mat(1.2345789777, 2.65831, 2.0, 4.0);
     std::stringstream ss;
 
     ss << mat;
-
     EXPECT_EQ(ss.str(), "|1.234578977700000 2.658310000000000|\n|2.000000000000000 4.000000000000000|\n");
 }
 

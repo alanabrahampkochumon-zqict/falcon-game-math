@@ -48,8 +48,6 @@ namespace
 
     /**
      * @brief Test fixture for @ref fgm::Mat2 Determinants.
-     *
-     * @tparam T The numeric type (int, float, double...) for matrix values.
      */
     class Mat2DeterminantSingularTests: public ::testing::TestWithParam<fgm::Mat2<float>>
     {};
