@@ -59,7 +59,6 @@ target_precompile_headers(
 
 
 include(GoogleTest)
-gtest_discover_tests(FGMMatrixTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 
 set_target_properties(
         Mat2Tests
@@ -78,3 +77,35 @@ set_target_properties(
         Transform4Tests
         PROPERTIES FOLDER "Test Intermediates/FGM"
 )
+
+
+#####################################
+## DEATH TESTS
+
+add_executable(FGMMatrixDeathTests
+        death-tests/Mat2.cpp
+)
+set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_EXTENSIONS OFF)
+
+target_sources(
+        FGMMatrixDeathTests
+
+        PRIVATE
+        FILE_SET HEADERS
+        BASE_DIRS ${FGM_ROOT_INCLUDE_DIR}
+        FILES
+        ${SetupHeaderFiles}
+        ${TestUtilities}
+)
+
+target_compile_options(FGMMatrixDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
+target_link_libraries(FGMMatrixDeathTests PRIVATE FGMTestSetup)
+target_precompile_headers(FGMMatrixDeathTests REUSE_FROM FGMCommonTests)
+
+
+#### GTEST
+include(GoogleTest)
+gtest_discover_tests(FGMMatrixTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+gtest_discover_tests(FGMMatrixDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
