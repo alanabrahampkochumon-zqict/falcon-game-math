@@ -11,14 +11,26 @@
 
 #include "Mat4x3TestSetup.h"
 
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
 
+
+/**
+ * @addtogroup T_FGM_Mat4x3_Negation
+ * @{
+ */
+
+namespace
+{
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat4x3 Negation(-Mat).
+     *
+     * @tparam T The numeric type (int, float, double...) for matrix values.
+     */
 template <typename T>
-class Mat4x3Negation: public ::testing::Test
+class Mat4x3NegationTests: public testing::Test
 {
 protected:
     fgm::Mat4x3<T> _matA, _expectedMat;
@@ -29,28 +41,20 @@ protected:
         _expectedMat = { fgm::Vec4<T>(1, -2, -3, 4), fgm::Vec4<T>(-5, -6, -7, -8), fgm::Vec4<T>(-9, -10, -11, -12) };
     }
 };
-/** @brief Test fixture for @ref fgm::Mat4x3 negation, parameterized by @ref SupportedSignedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat4x3Negation, SupportedSignedArithmeticTypes);
+TYPED_TEST_SUITE(Mat4x3NegationTests, SupportedSignedArithmeticTypes);
 
 
 
-/**
- * @addtogroup T_FGM_Mat2x2_Negation
- * @{
- */
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that matrix negation operations are available at compile time. */
-namespace
-{
-    constexpr fgm::Mat4x3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    namespace static_tests
+    {
+        constexpr fgm::Mat4x3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
     constexpr fgm::Mat4x3 NEG_MAT = -MAT;
 
+        /** @test Verify that matrix negation returns a valid matrix at compile time. */
     static_assert(NEG_MAT(0, 0) == -MAT(0, 0));
     static_assert(NEG_MAT(0, 1) == -MAT(0, 1));
     static_assert(NEG_MAT(0, 2) == -MAT(0, 2));
@@ -64,22 +68,18 @@ namespace
     static_assert(NEG_MAT(3, 1) == -MAT(3, 1));
     static_assert(NEG_MAT(3, 2) == -MAT(3, 2));
 
+    } // namespace static_tests
 } // namespace
 
 
+
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-/**
- * @brief Verify that the negation operator perform an element-wise sign inversion.
- */
-TYPED_TEST(Mat4x3Negation, PlusOperator_ReturnsMatrixSum)
+TYPED_TEST(Mat4x3NegationTests, ReturnsElementWiseNegatedMatrix)
 {
     const fgm::Mat4x3 negMat = -this->_matA;
-
     EXPECT_MAT_EQ(this->_expectedMat, negMat);
 }
 

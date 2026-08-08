@@ -52,10 +52,10 @@ namespace
     /**
      * @brief Test fixture for @ref fgm::Mat3x4 Division with NaN elements.
      */
-    class NaNMat3x4Division: public testing::TestWithParam<fgm::Mat3x4<float>>
+    class Mat3x4NaNDivisionTests: public testing::TestWithParam<fgm::Mat3x4<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat3x4DivisionTestSuite, NaNMat3x4Division,
+        Mat3x4DivisionTestSuite, Mat3x4NaNDivisionTests,
         ::testing::Values(
             fgm::Mat3x4<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
             fgm::Mat3x4<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
@@ -189,14 +189,14 @@ TYPED_TEST(Mat3x4DivisionTests, SafeDiv_DivisionByZeroReturnsPassedInFallbackMat
 }
 
 
-TEST_P(NaNMat3x4Division, SafeDiv_ReturnsIdentityMatrixByDefault)
+TEST_P(Mat3x4NaNDivisionTests, SafeDiv_ReturnsIdentityMatrixByDefault)
 {
     const fgm::Mat3x4 inverseScaledMat = GetParam().safeDiv(2.5);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
 
-TEST_P(NaNMat3x4Division, SafeDiv_ReturnsPassedInFallbackMatrix)
+TEST_P(Mat3x4NaNDivisionTests, SafeDiv_ReturnsPassedInFallbackMatrix)
 {
     const fgm::Mat3x4 inverseScaledMat = GetParam().safeDiv(2.5, fgm::Mat3x4<ParamType::value_type>::zero());
     EXPECT_MAT_ZERO(inverseScaledMat);
@@ -226,7 +226,7 @@ TYPED_TEST(Mat3x4DivisionTests, StaticWrapper_SafeDiv_DivisionByZeroReturnsPasse
 }
 
 
-TEST_P(NaNMat3x4Division, StaticWrapper_SafeDiv_ReturnsIdentityMatrixByDefault)
+TEST_P(Mat3x4NaNDivisionTests, StaticWrapper_SafeDiv_ReturnsIdentityMatrixByDefault)
 {
     using T                            = ParamType::value_type;
     const fgm::Mat3x4 inverseScaledMat = fgm::Mat3x4<T>::safeDiv(GetParam(), 2.5);
@@ -234,7 +234,7 @@ TEST_P(NaNMat3x4Division, StaticWrapper_SafeDiv_ReturnsIdentityMatrixByDefault)
 }
 
 
-TEST_P(NaNMat3x4Division, StaticWrapper_SafeDiv_ReturnsPassedInFallbackMatrix)
+TEST_P(Mat3x4NaNDivisionTests, StaticWrapper_SafeDiv_ReturnsPassedInFallbackMatrix)
 {
     using T                            = ParamType::value_type;
     const fgm::Mat3x4 inverseScaledMat = fgm::Mat3x4<T>::safeDiv(GetParam(), 2.5, fgm::Mat3x4<T>::zero());
@@ -293,7 +293,7 @@ TYPED_TEST(Mat3x4DivisionTests, TryDiv_DivisionByZeroReturnsPassedInFallbackAndS
  * @brief Verify that dividing a NaN matrix using @ref fgm::Mat3x4::tryDiv returns zero matrix
  *        by default and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMat3x4Division, TryDiv_ReturnsIdentityMatrixByDefault)
+TEST_P(Mat3x4NaNDivisionTests, TryDiv_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     const fgm::Mat3x4 inverseScaledMat = GetParam().tryDiv(2.5, flag);
@@ -306,7 +306,7 @@ TEST_P(NaNMat3x4Division, TryDiv_ReturnsIdentityMatrixByDefault)
  * @brief Verify that dividing a NaN matrix using @ref fgm::Mat3x4::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMat3x4Division, TryDiv_ReturnsPassedInFallbackMatrix)
+TEST_P(Mat3x4NaNDivisionTests, TryDiv_ReturnsPassedInFallbackMatrix)
 {
     fgm::OperationStatus flag;
     const fgm::Mat3x4 inverseScaledMat = GetParam().tryDiv(2.5, flag, fgm::Mat3x4<ParamType::value_type>::zero());
@@ -319,7 +319,7 @@ TEST_P(NaNMat3x4Division, TryDiv_ReturnsPassedInFallbackMatrix)
  * @brief Verify that dividing a NaN matrix by zero using @ref fgm::Mat3x4::tryDiv
  *        returns set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMat3x4Division, TryDiv_NaNOperandTakesPrecedenceOverZeroDivision)
+TEST_P(Mat3x4NaNDivisionTests, TryDiv_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
     [[maybe_unused]] const fgm::Mat3x4 inverseScaledMat =
@@ -374,7 +374,7 @@ TYPED_TEST(Mat3x4DivisionTests, StaticWrapper_TryDiv_DivisionByZeroReturnsPassed
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Mat3x4::tryDiv
  *        returns zero matrix by default and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMat3x4Division, StaticWrapper_TryDiv_ReturnsIdentityMatrixByDefault)
+TEST_P(Mat3x4NaNDivisionTests, StaticWrapper_TryDiv_ReturnsIdentityMatrixByDefault)
 {
     fgm::OperationStatus flag;
     using T                            = ParamType::value_type;
@@ -389,7 +389,7 @@ TEST_P(NaNMat3x4Division, StaticWrapper_TryDiv_ReturnsIdentityMatrixByDefault)
  * @brief Verify that dividing a NaN matrix by zero using the static variant of @ref fgm::Mat3x4::tryDiv
  *        set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMat3x4Division, StaticWrapper_TryDiv_NaNOperandTakesPrecedenceOverZeroDivision)
+TEST_P(Mat3x4NaNDivisionTests, StaticWrapper_TryDiv_NaNOperandTakesPrecedenceOverZeroDivision)
 {
     fgm::OperationStatus flag;
     using T                                             = ParamType::value_type;
@@ -402,7 +402,7 @@ TEST_P(NaNMat3x4Division, StaticWrapper_TryDiv_NaNOperandTakesPrecedenceOverZero
  * @brief Verify that dividing a NaN matrix using the static variant of @ref fgm::Mat3x4::tryDiv
  *        returns passed-in fallback and set flag to @ref OperationStatus::NANOPERAND.
  */
-TEST_P(NaNMat3x4Division, StaticWrapper_TryDiv_ReturnsPassedInFallbackMatrix)
+TEST_P(Mat3x4NaNDivisionTests, StaticWrapper_TryDiv_ReturnsPassedInFallbackMatrix)
 {
     fgm::OperationStatus flag;
     using T = ParamType::value_type;

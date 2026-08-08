@@ -28,7 +28,6 @@ namespace
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
-
     template <typename T>
     class Mat4ScalarMultiplicationTests: public testing::Test
     {
@@ -300,7 +299,6 @@ TEST(Mat4ScalarMultiplicationTests, TimesOperator_ByZeroReturnsZeroMatrix)
                          11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
 
     const fgm::Mat4 product = mat * 0;
-
     EXPECT_MAT_ZERO(product);
 }
 
@@ -311,7 +309,6 @@ TEST(Mat4ScalarMultiplicationTests, TimesOperator_ByOneReturnsOriginalMatrix)
                          11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
 
     const fgm::Mat4 product = mat * 1;
-
     EXPECT_MAT_EQ(mat, product);
 }
 
@@ -325,7 +322,6 @@ TEST(Mat4ScalarMultiplicationTests, TimesOperator_ByNegativeScalarFlipsSigns)
     const float scalar       = -2.0f;
 
     const fgm::Mat4 product = mat * scalar;
-
     EXPECT_MAT_EQ(expected, product);
 }
 

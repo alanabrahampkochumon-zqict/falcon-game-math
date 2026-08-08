@@ -65,27 +65,27 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat4 matA(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-        constexpr fgm::Mat4 matB(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-        constexpr fgm::Mat4 binarySum = matA + matB;
+        constexpr fgm::Mat4 MATA(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        constexpr fgm::Mat4 MATB(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
 
         /// @test Verify that Mat4 can be added at compile time.
-        static_assert(binarySum(0, 0) == 6);
-        static_assert(binarySum(0, 1) == 8);
-        static_assert(binarySum(0, 2) == 10);
-        static_assert(binarySum(0, 3) == 12);
-        static_assert(binarySum(1, 0) == 14);
-        static_assert(binarySum(1, 1) == 16);
-        static_assert(binarySum(1, 2) == 18);
-        static_assert(binarySum(1, 3) == 20);
-        static_assert(binarySum(2, 0) == 22);
-        static_assert(binarySum(2, 1) == 24);
-        static_assert(binarySum(2, 2) == 26);
-        static_assert(binarySum(2, 3) == 28);
-        static_assert(binarySum(3, 0) == 30);
-        static_assert(binarySum(3, 1) == 32);
-        static_assert(binarySum(3, 2) == 34);
-        static_assert(binarySum(3, 3) == 36);
+        constexpr fgm::Mat4 BINARY_SUM = MATA + MATB;
+        static_assert(BINARY_SUM(0, 0) == 6);
+        static_assert(BINARY_SUM(0, 1) == 8);
+        static_assert(BINARY_SUM(0, 2) == 10);
+        static_assert(BINARY_SUM(0, 3) == 12);
+        static_assert(BINARY_SUM(1, 0) == 14);
+        static_assert(BINARY_SUM(1, 1) == 16);
+        static_assert(BINARY_SUM(1, 2) == 18);
+        static_assert(BINARY_SUM(1, 3) == 20);
+        static_assert(BINARY_SUM(2, 0) == 22);
+        static_assert(BINARY_SUM(2, 1) == 24);
+        static_assert(BINARY_SUM(2, 2) == 26);
+        static_assert(BINARY_SUM(2, 3) == 28);
+        static_assert(BINARY_SUM(3, 0) == 30);
+        static_assert(BINARY_SUM(3, 1) == 32);
+        static_assert(BINARY_SUM(3, 2) == 34);
+        static_assert(BINARY_SUM(3, 3) == 36);
 
     } // namespace static_tests
 } // namespace

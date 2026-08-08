@@ -32,6 +32,7 @@ namespace
      */
     class Mat2StringRepresentationTests: public ::testing::Test
     {
+    protected:
         /** @brief Switch to use full precision for testing. */
         void SetUp() override { fgm::Config::useFullPrecision = true; }
 

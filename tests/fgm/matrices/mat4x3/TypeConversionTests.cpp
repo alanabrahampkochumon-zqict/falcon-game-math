@@ -19,9 +19,7 @@
  */
 
 /**************************************
- *                                    *
  *           STATIC TESTS             *
- *                                    *
  **************************************/
 
 /** @brief Verify that the matrix can be type promoted and demoted at compile time. */
@@ -41,15 +39,13 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
 /**
  * @brief Verify that the conversion constructor correctly promotes components from float to double.
  */
-TEST(Mat4x3ConversionConstructor, PromotesType)
+TEST(Mat4x3TypeConversionTests, ConversionCtor_PromotesType)
 {
     const fgm::Mat4x3 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f);
 
@@ -60,7 +56,7 @@ TEST(Mat4x3ConversionConstructor, PromotesType)
 
 
 /** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
-TEST(Mat4x3ConversionConstructor, ReturnsNewInstance)
+TEST(Mat4x3TypeConversionTests, ConversionCtor_ReturnsNewInstance)
 {
     // Given a float matrix
     const fgm::Mat4x3 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f);
@@ -81,7 +77,7 @@ TEST(Mat4x3ConversionConstructor, ReturnsNewInstance)
 /**
  * @brief Verify that the conversion constructor correctly demotes components from double to float.
  */
-TEST(Mat4x3ConversionConstructor, DemotesType)
+TEST(Mat4x3TypeConversionTests, ConversionCtor_DemotesType)
 {
     const fgm::Mat4x3 mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0);
 
