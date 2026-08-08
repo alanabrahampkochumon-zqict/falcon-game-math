@@ -22,9 +22,7 @@
 namespace
 {
     /**************************************
-     *                                    *
      *               SETUP                *
-     *                                    *
      **************************************/
 
     /**
@@ -51,11 +49,8 @@ namespace
 
 
 
-
     /**************************************
-     *                                    *
      *           STATIC TESTS             *
-     *                                    *
      **************************************/
 
     /** @brief Verify that matrix transpose is available at compile time. */
@@ -88,9 +83,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
 TYPED_TEST(Mat3x4Transpose, Returns4x3MatrixWithRowAndColumnElementsExchanged)

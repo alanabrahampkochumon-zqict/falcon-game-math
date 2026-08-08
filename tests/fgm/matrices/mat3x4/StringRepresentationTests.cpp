@@ -15,30 +15,39 @@
 
 
 
-/**************************************
- *                                    *
- *                SETUP               *
- *                                    *
- **************************************/
-
-class Mat3x4StringRepresentationTests: public ::testing::Test
-{
-    /** @brief Switch to use full precision for testing. */
-    void SetUp() override { fgm::Config::useFullPrecision = true; }
-
-    /** @brief Switch back to normal log precision. */
-    void TearDown() override { fgm::Config::useFullPrecision = false; }
-};
-
-
-
 /**
- * @addtogroup T_FGM_Mat2x2_String_Repr
+ * @addtogroup T_FGM_Mat3x4_String_Repr
  * @{
  */
 
-/** @brief Verify that the string representation matches the expected format for integral types. */
-TEST_F(Mat3x4StringRepresentationTests, IntegralRepresentation)
+namespace
+{
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat3x4 String Representation.
+     */
+    class Mat3x4StringRepresentationTests: public ::testing::Test
+    {
+    protected:
+        /** @brief Switch to use full precision for testing. */
+        void SetUp() override { fgm::Config::useFullPrecision = true; }
+
+        /** @brief Switch back to normal log precision. */
+        void TearDown() override { fgm::Config::useFullPrecision = false; }
+    };
+
+} // namespace
+
+
+
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
+
+TEST_F(Mat3x4StringRepresentationTests, IntegralMatrix_ReturnsFormattedString)
 {
     const fgm::Mat3x4 mat(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
     std::stringstream ss;
@@ -49,11 +58,7 @@ TEST_F(Mat3x4StringRepresentationTests, IntegralRepresentation)
 }
 
 
-/**
- * @brief Verify that the string representation matches the expected format for single-precision
- *       floating-point types.
- */
-TEST_F(Mat3x4StringRepresentationTests, FloatRepresentation)
+TEST_F(Mat3x4StringRepresentationTests, FloatingPointMatrix_ReturnsFormattedString)
 {
     const fgm::Mat3x4 mat(1.2345f, 2.0f, 4.53823f, 3.323f, 3.5832f, 5.8392f, 9.9238f, -12.0532f, 3.2312f, 12.0f, 13.5f,
                           14.4f);
@@ -68,11 +73,7 @@ TEST_F(Mat3x4StringRepresentationTests, FloatRepresentation)
 }
 
 
-/**
- * @brief Verify that the string representation matches the expected format for double-precision
- *       floating-point types.
- */
-TEST_F(Mat3x4StringRepresentationTests, DoubleRepresentation)
+TEST_F(Mat3x4StringRepresentationTests, DoublePrecisionFloatingPointMatrix_ReturnsFormattedString)
 {
     const fgm::Mat3x4 mat(1.2345789777, 2.65831, 2.0, 4.0, 3.2345789777, 1.2345789777, 12.0, -6.2345789777,
                           0.2345789777, 5.9123849123, 12.123948213, 5.1912384);

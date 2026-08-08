@@ -13,77 +13,79 @@
 
 
 
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Mat3x4Subtraction: public ::testing::Test
-{
-protected:
-    fgm::Mat3x4<T> _matA;
-    fgm::Mat3x4<T> _matB;
-    fgm::Mat3x4<T> _expectedDifference;
-
-    void SetUp() override
-    {
-        _matA = { fgm::Vec3<T>(5, 6, 5), fgm::Vec3<T>(7, 8, 12), fgm::Vec3<T>(17, 81, 22), fgm::Vec3<T>(22, 32, 11) };
-        _matB = { fgm::Vec3<T>(1, 2, 5), fgm::Vec3<T>(3, 4, 11), fgm::Vec3<T>(0, 1, 19), fgm::Vec3<T>(21, 14, 11) };
-        _expectedDifference = { fgm::Vec3<T>(4, 4, 0), fgm::Vec3<T>(4, 4, 1), fgm::Vec3<T>(17, 80, 3),
-                                fgm::Vec3<T>(1, 18, 0) };
-    }
-};
-/** @brief Test fixture for @ref fgm::Mat3x4 subtraction, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat3x4Subtraction, SupportedArithmeticTypes);
-
-
 /**
- * @addtogroup T_FGM_Mat2x2_Subtraction
+ * @addtogroup T_FGM_Mat3x4_Subtraction
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that matrix subtraction operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Mat3x4 MAT1(8, 2, 12, 4, -5, 0, -12, 5, 11, 23, 11, 5);
-    constexpr fgm::Mat3x4 MAT2(5, 6, 7, 8, -11, 5, -12, -5, 0, 2, -1, -3);
-    constexpr fgm::Mat3x4 BINARY_DIFF = MAT1 - MAT2;
 
-    static_assert(BINARY_DIFF(0, 0) == 3);
-    static_assert(BINARY_DIFF(0, 1) == -4);
-    static_assert(BINARY_DIFF(0, 2) == 5);
-    static_assert(BINARY_DIFF(0, 3) == -4);
-    static_assert(BINARY_DIFF(1, 0) == 6);
-    static_assert(BINARY_DIFF(1, 1) == -5);
-    static_assert(BINARY_DIFF(1, 2) == 0);
-    static_assert(BINARY_DIFF(1, 3) == 10);
-    static_assert(BINARY_DIFF(2, 0) == 11);
-    static_assert(BINARY_DIFF(2, 1) == 21);
-    static_assert(BINARY_DIFF(2, 2) == 12);
-    static_assert(BINARY_DIFF(2, 3) == 8);
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat3x4 Subtraction.
+     *
+     * @tparam T The numeric type (int, float, double...) for matrix values.
+     */
+    template <typename T>
+    class Mat3x4SubtractionTests: public ::testing::Test
+    {
+    protected:
+        fgm::Mat3x4<T> _matA;
+        fgm::Mat3x4<T> _matB;
+        fgm::Mat3x4<T> _expectedDifference;
+
+        void SetUp() override
+        {
+            _matA = { fgm::Vec3<T>(5, 6, 5), fgm::Vec3<T>(7, 8, 12), fgm::Vec3<T>(17, 81, 22),
+                      fgm::Vec3<T>(22, 32, 11) };
+            _matB = { fgm::Vec3<T>(1, 2, 5), fgm::Vec3<T>(3, 4, 11), fgm::Vec3<T>(0, 1, 19), fgm::Vec3<T>(21, 14, 11) };
+            _expectedDifference = { fgm::Vec3<T>(4, 4, 0), fgm::Vec3<T>(4, 4, 1), fgm::Vec3<T>(17, 80, 3),
+                                    fgm::Vec3<T>(1, 18, 0) };
+        }
+    };
+    TYPED_TEST_SUITE(Mat3x4SubtractionTests, SupportedArithmeticTypes);
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Mat3x4 MAT1(8, 2, 12, 4, -5, 0, -12, 5, 11, 23, 11, 5);
+        constexpr fgm::Mat3x4 MAT2(5, 6, 7, 8, -11, 5, -12, -5, 0, 2, -1, -3);
+
+
+        /** @test Verify that matrix subtraction operations return a valid matrix at compile time. */
+        constexpr fgm::Mat3x4 BINARY_DIFF = MAT1 - MAT2;
+        static_assert(BINARY_DIFF(0, 0) == 3);
+        static_assert(BINARY_DIFF(0, 1) == -4);
+        static_assert(BINARY_DIFF(0, 2) == 5);
+        static_assert(BINARY_DIFF(0, 3) == -4);
+        static_assert(BINARY_DIFF(1, 0) == 6);
+        static_assert(BINARY_DIFF(1, 1) == -5);
+        static_assert(BINARY_DIFF(1, 2) == 0);
+        static_assert(BINARY_DIFF(1, 3) == 10);
+        static_assert(BINARY_DIFF(2, 0) == 11);
+        static_assert(BINARY_DIFF(2, 1) == 21);
+        static_assert(BINARY_DIFF(2, 2) == 12);
+        static_assert(BINARY_DIFF(2, 3) == 8);
+
+    } // namespace static_tests
 
 } // namespace
 
 
-/**************************************
- *                                    *
- *           RUNTIME TESTS            *
- *                                    *
- **************************************/
 
-/**
- * @brief Verify that the binary subtraction operator perform an element-wise subtraction and
- *       returns a new matrix instance.
- */
-TYPED_TEST(Mat3x4Subtraction, MinusOperator_ReturnsMatrixDifference)
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
+TYPED_TEST(Mat3x4SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 {
     const fgm::Mat3x4 difference = this->_matA - this->_matB;
 
@@ -91,10 +93,6 @@ TYPED_TEST(Mat3x4Subtraction, MinusOperator_ReturnsMatrixDifference)
 }
 
 
-/**
- * @brief Verify that the binary subtraction operator perform automatic type promotion
- *       to the wider numeric type.
- */
 TEST(Mat3x4Subtraction, MinusOperator_MixedType_PromotesType)
 {
     const fgm::Mat3x4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.2f, 2.25f, 3.0f, 15.0f, 22.0f, 1.0f);
@@ -106,11 +104,7 @@ TEST(Mat3x4Subtraction, MinusOperator_MixedType_PromotesType)
 }
 
 
-/**
- * @brief Verify that the compound subtraction assignment operator perform an element-wise subtraction
- *       and mutates the matrix in-place.
- */
-TYPED_TEST(Mat3x4Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
+TYPED_TEST(Mat3x4SubtractionTests, MinusEqualsOperator_ReturnsSameVectorWithDifference)
 {
     this->_matA -= this->_matB;
 
@@ -118,10 +112,6 @@ TYPED_TEST(Mat3x4Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifferenc
 }
 
 
-/**
- * @brief Verify that the compound subtraction assignment operator maintains the destination type and
- *       perform an implicit cast.
- */
 TEST(Mat3x4Subtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat3x4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.2f, 2.25f, 3.0f, 15.0f, 22.0f, 1.0f);

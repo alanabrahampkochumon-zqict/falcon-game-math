@@ -162,7 +162,7 @@ TYPED_TEST(Mat4x3Division, DivideOperator_ByZeroTriggersAssertInDebugMode)
  * @brief Verify that the compound division operator perform an element-wise divide
  *        and mutates the matrix in-place.
  */
-TYPED_TEST(Mat4x3Division, DivideEqualsOperator_InverseScalesMatrixInPlace)
+TYPED_TEST(Mat4x3Division, DivideEqualsOperator_PerformsElementWiseDivisionInPlace)
 {
     fgm::Mat4x3 matrix = this->_matrix;
     matrix /= this->_scalar;

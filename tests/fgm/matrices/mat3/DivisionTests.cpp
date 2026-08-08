@@ -129,7 +129,7 @@ TYPED_TEST(Mat3DivisionTests, DivideOperator_ReturnsAValidMatrix)
 }
 
 
-TYPED_TEST(Mat3DivisionTests, DivideEqualsOperator_InverseScalesMatrixInPlace)
+TYPED_TEST(Mat3DivisionTests, DivideEqualsOperator_PerformsElementWiseDivisionInPlace)
 {
     fgm::Mat3 matrix = this->_matrix;
     matrix /= this->_scalar;

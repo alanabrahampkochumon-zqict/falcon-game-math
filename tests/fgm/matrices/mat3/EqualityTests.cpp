@@ -189,7 +189,6 @@ namespace
 
 
 
-
 /**************************************
  *             ALL EQ                 *
  **************************************/
@@ -479,6 +478,5 @@ TEST_P(Mat3PerElementInequalityTests, NotEqualsOperator_VerifiesElementwiseInequ
     const auto& [firstMat, secondMat, expected] = GetParam();
     EXPECT_EQ(expected, firstMat != secondMat);
 }
-
 
 /** @} */

@@ -132,7 +132,7 @@ TYPED_TEST(Mat2x4DivisionTests, DivideOperator_ReturnsAValidMatrix)
 
 
 
-TYPED_TEST(Mat2x4DivisionTests, DivideEqualsOperator_InverseScalesMatrixInPlace)
+TYPED_TEST(Mat2x4DivisionTests, DivideEqualsOperator_PerformsElementWiseDivisionInPlace)
 {
     fgm::Mat2x4 matrix = this->_matrix;
     matrix /= this->_scalar;

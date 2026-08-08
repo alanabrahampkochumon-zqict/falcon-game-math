@@ -95,7 +95,7 @@ TYPED_TEST(Mat4x3Addition, PlusOperator_ReturnsMatrixSum)
  * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Mat4x3Addition, MixedTypeAdditionPromotesType)
+TEST(Mat4x3Addition, PlusOperator_MixedType_PromotesType)
 {
     const fgm::Mat4x3 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ -3.0f, -4.0f, 12.0f, 0.0f },
                             fgm::Vec4{ 3.0f, 8.0f, 3.5f, 1.5f } };
@@ -123,7 +123,7 @@ TYPED_TEST(Mat4x3Addition, PlusEqualsOperator_ReturnsSameMatrixWithSum)
  * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Mat4x3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Mat4x3Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat4x3 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ -3.0f, -4.0f, 12.0f, 0.0f },
                       fgm::Vec4{ 3.0f, 8.0f, 3.5f, 1.5f } };

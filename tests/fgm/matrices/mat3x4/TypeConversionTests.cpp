@@ -18,24 +18,25 @@
  * @{
  */
 
-/**************************************
- *                                    *
- *           STATIC TESTS             *
- *                                    *
- **************************************/
-
-/** @brief Verify that the matrix can be type promoted and demoted at compile time. */
 namespace
 {
-    constexpr fgm::Mat3x4<float> MAT{ 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f };
+    /**************************************
+     *           STATIC TESTS             *
+     **************************************/
 
-    // Verify that the matrix can be type promoted at compile time.
-    constexpr fgm::Mat3x4<double> MAT_D(MAT);
-    static_assert(std::is_same_v<decltype(MAT_D)::value_type, double>);
+    /** @brief Verify that the matrix can be type promoted and demoted at compile time. */
+    namespace static_tests
+    {
+        constexpr fgm::Mat3x4<float> MAT{ 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f };
 
-    // Verify that the matrix can be type demoted at compile time.
-    constexpr fgm::Mat3x4<int> MATI(MAT);
-    static_assert(std::is_same_v<decltype(MATI)::value_type, int>);
+        // Verify that the matrix can be type promoted at compile time.
+        constexpr fgm::Mat3x4<double> MAT_D(MAT);
+        static_assert(std::is_same_v<decltype(MAT_D)::value_type, double>);
+
+        // Verify that the matrix can be type demoted at compile time.
+        constexpr fgm::Mat3x4<int> MATI(MAT);
+        static_assert(std::is_same_v<decltype(MATI)::value_type, int>);
+    } // namespace static_tests
 } // namespace
 
 

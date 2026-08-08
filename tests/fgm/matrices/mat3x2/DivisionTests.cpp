@@ -120,7 +120,7 @@ TYPED_TEST(Mat3x2DivisionTests, DivideOperator_ReturnsAValidMatrix)
 }
 
 
-TYPED_TEST(Mat3x2DivisionTests, DivideEqualsOperator_InverseScalesMatrixInPlace)
+TYPED_TEST(Mat3x2DivisionTests, DivideEqualsOperator_PerformsElementWiseDivisionInPlace)
 {
     fgm::Mat3x2 matrix = this->_matrix;
     matrix /= this->_scalar;
