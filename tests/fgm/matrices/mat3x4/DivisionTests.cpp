@@ -28,7 +28,6 @@ namespace
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
-
     template <typename T>
     class Mat3x4DivisionTests: public testing::Test
     {

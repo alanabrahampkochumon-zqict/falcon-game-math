@@ -88,6 +88,7 @@ add_executable(FGMMatrixDeathTests
         death-tests/Mat2x4.cpp
         death-tests/Mat3.cpp
         death-tests/Mat3x2.cpp
+        death-tests/Mat3x4.cpp
         death-tests/Transform4.cpp
 )
 set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_STANDARD 20)
