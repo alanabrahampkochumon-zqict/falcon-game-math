@@ -213,7 +213,7 @@ namespace fgm
         }
         else if constexpr (swizzleDimension == 2)
         {
-            return Vec2(_data[Indices]...);
+            return Vec2<T>(_data[Indices]...);
         }
         else
         {
