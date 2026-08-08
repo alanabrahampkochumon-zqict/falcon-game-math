@@ -110,7 +110,11 @@ namespace
     };
     TYPED_TEST_SUITE(Mat3VectorFractionalMultiplicationTests, SupportedFloatingPointTypes);
 
-
+    /**
+     * @brief Test fixture for @ref fgm::Mat3 matrix-matrix multiplication.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
+     */
     template <typename T>
     class Mat3MatrixMultiplicationTests: public testing::Test
     {
@@ -134,12 +138,15 @@ namespace
                                      fgm::Vec3{ T(105), T(90), T(35) } };
         }
     };
-
-    /** @brief Test fixture for @ref fgm::Mat3 matrix multiplication, parameterized by @ref SupportedArithmeticTypes.
-    /*/
     TYPED_TEST_SUITE(Mat3MatrixMultiplicationTests, SupportedArithmeticTypes);
 
 
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat3 matrix-matrix multiplication with floating-point elements.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
+     */
     template <typename T>
     class Mat3MatrixFractionalMultiplicationTests: public testing::Test
     {
@@ -367,7 +374,7 @@ TYPED_TEST(Mat3VectorFractionalMultiplicationTests, ColumnFloatVector_ReturnsACo
 }
 
 
-TEST(Mat3VectorMultiplicationTests, ColumnVectorTimesIdentityMatrix_ReturnsOriginalColumnVector)
+TEST(Mat3VectorMultiplicationTests, IdentityMatrixTimesColumnVector_ReturnsOriginalColumnVector)
 {
     const fgm::Mat3<float> iMatrix = fgm::Mat3<float>::identity();
     const fgm::Vec3F vec{ 2.0f, 1.0f, 2.5 };
@@ -408,7 +415,7 @@ TYPED_TEST(Mat3VectorFractionalMultiplicationTests, RowFloatVector_ReturnsARowVe
 }
 
 
-TEST(Mat3VectorMultiplicationTests, RowVectorTimesIdentityMatrixReturnsOriginalVector)
+TEST(Mat3VectorMultiplicationTests, RowVectorTimesIdentityMatrix_ReturnsOriginalVector)
 {
     const fgm::Mat3<float> iMatrix = fgm::Mat3<float>::identity();
     const fgm::Vec3F vec{ 2.0f, 1.0f, 3.0f };

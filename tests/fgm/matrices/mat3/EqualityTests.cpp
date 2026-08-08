@@ -98,7 +98,7 @@ namespace
 
 
     /// @brief Test fixture for @ref fgm::Mat3 Inequality on a per-element basis.
-    class Mat3PerElementInequalityTests: public ::testing::TestWithParam<Mat3ElementParam>
+    class Mat3PerElementInequalityTests: public testing::TestWithParam<Mat3ElementParam>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Mat3ElementwiseInequality, Mat3PerElementInequalityTests,

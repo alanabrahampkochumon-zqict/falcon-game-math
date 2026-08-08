@@ -12,142 +12,147 @@
 #include "Mat4TestSetup.h"
 
 
-
-template <typename T>
-class Mat4Initialization: public ::testing::Test
-{
-protected:
-    std::vector<T> _elements;
-    std::vector<T> _diagonalElements;
-    fgm::Vec4<T> _col0, _col1, _col2, _col3;
-    T _diagonal0, _diagonal1, _diagonal2, _diagonal3;
-
-    void SetUp() override
-    {
-        _elements         = { T(1), T(2),  T(3),  T(4),  T(5),  T(6),  T(7),  T(8),
-                              T(9), T(10), T(11), T(12), T(13), T(14), T(15), T(16) };
-        _diagonalElements = { T(2), T(0), T(0), T(0), T(0), T(3), T(0), T(0),
-                              T(0), T(0), T(5), T(0), T(0), T(0), T(0), T(11) };
-        _col0             = { T(1), T(5), T(9), T(13) };
-        _col1             = { T(2), T(6), T(10), T(14) };
-        _col2             = { T(3), T(7), T(11), T(15) };
-        _col3             = { T(4), T(8), T(12), T(16) };
-        _diagonal0        = T(2);
-        _diagonal1        = T(3);
-        _diagonal2        = T(5);
-        _diagonal3        = T(11);
-    }
-};
-/** Test fixture for @ref fgm::Mat4 initialization, parameterized by @ref SupportedTypes. */
-TYPED_TEST_SUITE(Mat4Initialization, SupportedTypes);
-
-
-
 /**
  * @addtogroup T_FGM_Mat4x4_Init
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that the matrix can be initialized at compile time. */
 namespace
 {
-    // Verify that the matrix can be initialized at compile time using scalar values.
-    constexpr fgm::Mat4 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-    static_assert(MAT1(0, 0) == 1);
-    static_assert(MAT1(0, 1) == 2);
-    static_assert(MAT1(0, 2) == 3);
-    static_assert(MAT1(0, 3) == 4);
-    static_assert(MAT1(1, 0) == 5);
-    static_assert(MAT1(1, 1) == 6);
-    static_assert(MAT1(1, 2) == 7);
-    static_assert(MAT1(1, 3) == 8);
-    static_assert(MAT1(2, 0) == 9);
-    static_assert(MAT1(2, 1) == 10);
-    static_assert(MAT1(2, 2) == 11);
-    static_assert(MAT1(2, 3) == 12);
-    static_assert(MAT1(3, 0) == 13);
-    static_assert(MAT1(3, 1) == 14);
-    static_assert(MAT1(3, 2) == 15);
-    static_assert(MAT1(3, 3) == 16);
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat4 initialization.
+     *
+     * @tparam T The numeric type (int, float, double...) for matrix values.
+     */
+    template <typename T>
+    class Mat4InitializationTests: public testing::Test
+    {
+    protected:
+        std::vector<T> _elements;
+        std::vector<T> _diagonalElements;
+        fgm::Vec4<T> _col0, _col1, _col2, _col3;
+        T _diagonal0, _diagonal1, _diagonal2, _diagonal3;
+
+        void SetUp() override
+        {
+            _elements         = { T(1), T(2),  T(3),  T(4),  T(5),  T(6),  T(7),  T(8),
+                                  T(9), T(10), T(11), T(12), T(13), T(14), T(15), T(16) };
+            _diagonalElements = { T(2), T(0), T(0), T(0), T(0), T(3), T(0), T(0),
+                                  T(0), T(0), T(5), T(0), T(0), T(0), T(0), T(11) };
+            _col0             = { T(1), T(5), T(9), T(13) };
+            _col1             = { T(2), T(6), T(10), T(14) };
+            _col2             = { T(3), T(7), T(11), T(15) };
+            _col3             = { T(4), T(8), T(12), T(16) };
+            _diagonal0        = T(2);
+            _diagonal1        = T(3);
+            _diagonal2        = T(5);
+            _diagonal3        = T(11);
+        }
+    };
+    TYPED_TEST_SUITE(Mat4InitializationTests, SupportedTypes);
 
 
-    // Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Mat4 MAT2(fgm::Vec4(1, 5, 9, 13), fgm::Vec4(2, 6, 10, 14), fgm::Vec4(3, 7, 11, 15),
-                             fgm::Vec4(4, 8, 12, 16));
-    static_assert(MAT2(0, 0) == 1);
-    static_assert(MAT2(0, 1) == 2);
-    static_assert(MAT2(0, 2) == 3);
-    static_assert(MAT2(0, 3) == 4);
-    static_assert(MAT2(1, 0) == 5);
-    static_assert(MAT2(1, 1) == 6);
-    static_assert(MAT2(1, 2) == 7);
-    static_assert(MAT2(1, 3) == 8);
-    static_assert(MAT2(2, 0) == 9);
-    static_assert(MAT2(2, 1) == 10);
-    static_assert(MAT2(2, 2) == 11);
-    static_assert(MAT2(2, 3) == 12);
-    static_assert(MAT2(3, 0) == 13);
-    static_assert(MAT2(3, 1) == 14);
-    static_assert(MAT2(3, 2) == 15);
-    static_assert(MAT2(3, 3) == 16);
 
-    // Verify that the matrix can be initialized at compile time using diagonals.
-    constexpr fgm::Mat4 MAT3(3, 4, 5, 6);
-    static_assert(MAT3(0, 0) == 3);
-    static_assert(MAT3(0, 1) == 0);
-    static_assert(MAT3(0, 2) == 0);
-    static_assert(MAT3(0, 3) == 0);
-    static_assert(MAT3(1, 0) == 0);
-    static_assert(MAT3(1, 1) == 4);
-    static_assert(MAT3(1, 2) == 0);
-    static_assert(MAT3(1, 3) == 0);
-    static_assert(MAT3(2, 0) == 0);
-    static_assert(MAT3(2, 1) == 0);
-    static_assert(MAT3(2, 2) == 5);
-    static_assert(MAT3(2, 3) == 0);
-    static_assert(MAT3(3, 0) == 0);
-    static_assert(MAT3(3, 1) == 0);
-    static_assert(MAT3(3, 2) == 0);
-    static_assert(MAT3(3, 3) == 6);
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        /// @test Verify that the matrix can be initialized at compile time using scalar values.
+        constexpr fgm::Mat4 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        static_assert(MAT1(0, 0) == 1);
+        static_assert(MAT1(0, 1) == 2);
+        static_assert(MAT1(0, 2) == 3);
+        static_assert(MAT1(0, 3) == 4);
+        static_assert(MAT1(1, 0) == 5);
+        static_assert(MAT1(1, 1) == 6);
+        static_assert(MAT1(1, 2) == 7);
+        static_assert(MAT1(1, 3) == 8);
+        static_assert(MAT1(2, 0) == 9);
+        static_assert(MAT1(2, 1) == 10);
+        static_assert(MAT1(2, 2) == 11);
+        static_assert(MAT1(2, 3) == 12);
+        static_assert(MAT1(3, 0) == 13);
+        static_assert(MAT1(3, 1) == 14);
+        static_assert(MAT1(3, 2) == 15);
+        static_assert(MAT1(3, 3) == 16);
 
 
-    // Verify that the matrix can be initialized at compile time using value initialization.
-    constexpr fgm::Mat4<int> MAT4{};
-    static_assert(MAT4(0, 0) == 0);
-    static_assert(MAT4(0, 1) == 0);
-    static_assert(MAT4(0, 2) == 0);
-    static_assert(MAT4(0, 3) == 0);
-    static_assert(MAT4(1, 0) == 0);
-    static_assert(MAT4(1, 1) == 0);
-    static_assert(MAT4(1, 2) == 0);
-    static_assert(MAT4(1, 3) == 0);
-    static_assert(MAT4(2, 0) == 0);
-    static_assert(MAT4(2, 1) == 0);
-    static_assert(MAT4(2, 2) == 0);
-    static_assert(MAT4(2, 3) == 0);
-    static_assert(MAT4(3, 0) == 0);
-    static_assert(MAT4(3, 1) == 0);
-    static_assert(MAT4(3, 2) == 0);
-    static_assert(MAT4(3, 3) == 0);
+        /// @test Verify that the matrix can be initialized at compile time using column vectors.
+        constexpr fgm::Mat4 MAT2(fgm::Vec4(1, 5, 9, 13), fgm::Vec4(2, 6, 10, 14), fgm::Vec4(3, 7, 11, 15),
+                                 fgm::Vec4(4, 8, 12, 16));
+        static_assert(MAT2(0, 0) == 1);
+        static_assert(MAT2(0, 1) == 2);
+        static_assert(MAT2(0, 2) == 3);
+        static_assert(MAT2(0, 3) == 4);
+        static_assert(MAT2(1, 0) == 5);
+        static_assert(MAT2(1, 1) == 6);
+        static_assert(MAT2(1, 2) == 7);
+        static_assert(MAT2(1, 3) == 8);
+        static_assert(MAT2(2, 0) == 9);
+        static_assert(MAT2(2, 1) == 10);
+        static_assert(MAT2(2, 2) == 11);
+        static_assert(MAT2(2, 3) == 12);
+        static_assert(MAT2(3, 0) == 13);
+        static_assert(MAT2(3, 1) == 14);
+        static_assert(MAT2(3, 2) == 15);
+        static_assert(MAT2(3, 3) == 16);
 
+
+        /// @test Verify that the matrix can be initialized at compile time using diagonals.
+        constexpr fgm::Mat4 MAT3(3, 4, 5, 6);
+        static_assert(MAT3(0, 0) == 3);
+        static_assert(MAT3(0, 1) == 0);
+        static_assert(MAT3(0, 2) == 0);
+        static_assert(MAT3(0, 3) == 0);
+        static_assert(MAT3(1, 0) == 0);
+        static_assert(MAT3(1, 1) == 4);
+        static_assert(MAT3(1, 2) == 0);
+        static_assert(MAT3(1, 3) == 0);
+        static_assert(MAT3(2, 0) == 0);
+        static_assert(MAT3(2, 1) == 0);
+        static_assert(MAT3(2, 2) == 5);
+        static_assert(MAT3(2, 3) == 0);
+        static_assert(MAT3(3, 0) == 0);
+        static_assert(MAT3(3, 1) == 0);
+        static_assert(MAT3(3, 2) == 0);
+        static_assert(MAT3(3, 3) == 6);
+
+
+        /// @test Verify that the matrix can be initialized at compile time using value initialization.
+        constexpr fgm::Mat4<int> MAT4{};
+        static_assert(MAT4(0, 0) == 0);
+        static_assert(MAT4(0, 1) == 0);
+        static_assert(MAT4(0, 2) == 0);
+        static_assert(MAT4(0, 3) == 0);
+        static_assert(MAT4(1, 0) == 0);
+        static_assert(MAT4(1, 1) == 0);
+        static_assert(MAT4(1, 2) == 0);
+        static_assert(MAT4(1, 3) == 0);
+        static_assert(MAT4(2, 0) == 0);
+        static_assert(MAT4(2, 1) == 0);
+        static_assert(MAT4(2, 2) == 0);
+        static_assert(MAT4(2, 3) == 0);
+        static_assert(MAT4(3, 0) == 0);
+        static_assert(MAT4(3, 1) == 0);
+        static_assert(MAT4(3, 2) == 0);
+        static_assert(MAT4(3, 3) == 0);
+
+    } // namespace static_tests
 } // namespace
 
 
 
 /**************************************
- *                                    *
  *            RUNTIME TESTS           *
- *                                    *
  **************************************/
 
-/** @brief Verify that the default constructor initializes an identity matrix. */
-TYPED_TEST(Mat4Initialization, EmptyConstructorReturnsIdentityMatrix)
+TYPED_TEST(Mat4InitializationTests, EmptyConstructorReturnsIdentityMatrix)
 {
     constexpr fgm::Mat4<TypeParam> matrix{};
 
@@ -155,8 +160,7 @@ TYPED_TEST(Mat4Initialization, EmptyConstructorReturnsIdentityMatrix)
 }
 
 
-/** @brief Verify that the parameterized constructor can initialize matrix with elements. */
-TYPED_TEST(Mat4Initialization, ParameterizedConstructorInitializesMatrixWithElements)
+TYPED_TEST(Mat4InitializationTests, ParameterizedConstructorInitializesMatrixWithElements)
 {
     const fgm::Mat4<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
                                       this->_elements[4], this->_elements[5], this->_elements[6], this->_elements[7],
@@ -167,24 +171,21 @@ TYPED_TEST(Mat4Initialization, ParameterizedConstructorInitializesMatrixWithElem
 }
 
 
-/** @brief Verify that the parameterized constructor can initialize matrix with vectors. */
-TYPED_TEST(Mat4Initialization, ParameterizedConstructorInitializesMatrixWithVectors)
+TYPED_TEST(Mat4InitializationTests, ParameterizedConstructorInitializesMatrixWithVectors)
 {
     const fgm::Mat4<TypeParam> matrix(this->_col0, this->_col1, this->_col2, this->_col3);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
 
-/** @brief Verify that the parameterized constructor can initialize a diagonal matrix. */
-TYPED_TEST(Mat4Initialization, ParameterizedConstructorInitializesDiagonalMatrix)
+TYPED_TEST(Mat4InitializationTests, ParameterizedConstructorInitializesDiagonalMatrix)
 {
     const fgm::Mat4<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2, this->_diagonal3);
     EXPECT_MAT_CONTAINS(this->_diagonalElements, matrix);
 }
 
 
-/** @brief Verify that a matrix can be initialized with implicit braced initialization. */
-TYPED_TEST(Mat4Initialization, CanBeConstructedWithBracedInitialization)
+TYPED_TEST(Mat4InitializationTests, CanBeConstructedWithBracedInitialization)
 {
     const fgm::Mat4<TypeParam> matrix = { { TypeParam(1), TypeParam(5), TypeParam(9), TypeParam(13) },
                                           { TypeParam(2), TypeParam(6), TypeParam(10), TypeParam(14) },

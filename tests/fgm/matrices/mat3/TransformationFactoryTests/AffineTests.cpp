@@ -22,6 +22,10 @@
 
 namespace
 {
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
     /**
      * @brief Test fixture for @ref fgm::Mat3 Affine Transformation Factory.
      *

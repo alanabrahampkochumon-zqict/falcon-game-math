@@ -17,13 +17,12 @@
  * @addtogroup T_FGM_Mat4x4_Transforms
  * @{
  */
+
 namespace
 {
 
     /**************************************
-     *                                    *
      *              SETUP                 *
-     *                                    *
      **************************************/
 
     /**
@@ -32,7 +31,7 @@ namespace
      * @tparam T The signed scalar type (e.g., int32_t, int16_t, float) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat4ScaleFactoryUniform: public testing::Test
+    class Mat4ScaleFactoryUniformTests: public testing::Test
     {
     protected:
         fgm::Mat4<T> _expectedMat;
@@ -46,7 +45,8 @@ namespace
             _scale       = T(5.3821839321);
         }
     };
-    TYPED_TEST_SUITE(Mat4ScaleFactoryUniform, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat4ScaleFactoryUniformTests, SupportedArithmeticTypes);
+
 
 
     /**
@@ -55,7 +55,7 @@ namespace
      * @tparam T The signed scalar type (e.g., int32_t, int16_t, float) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat4ScaleFactoryNonUniform: public testing::Test
+    class Mat4ScaleFactoryNonUniformTests: public testing::Test
     {
     protected:
         fgm::Mat4<T> _expectedMat;
@@ -71,7 +71,8 @@ namespace
             _scaleZ      = T(0.12348921340);
         }
     };
-    TYPED_TEST_SUITE(Mat4ScaleFactoryNonUniform, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat4ScaleFactoryNonUniformTests, SupportedArithmeticTypes);
+
 
 
     /**
@@ -80,7 +81,7 @@ namespace
      * @tparam T The floating point scalar type (float, double) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat4ScaleFactoryDirectionVectorFP: public testing::Test
+    class Mat4ScaleFactoryDirectionVectorFPTests: public testing::Test
     {
     protected:
         fgm::Vec3<T> _direction;
@@ -97,7 +98,8 @@ namespace
                              fgm::Vec4{ T(0), T(0), T(0), T(1) } };
         }
     };
-    TYPED_TEST_SUITE(Mat4ScaleFactoryDirectionVectorFP, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat4ScaleFactoryDirectionVectorFPTests, SupportedFloatingPointTypes);
+
 
 
     /**
@@ -106,7 +108,7 @@ namespace
      * @tparam T The signed scalar type (e.g., int32_t, int16_t) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat4ScaleFactoryDirectionVectorInt: public testing::Test
+    class Mat4ScaleFactoryDirectionVectorIntTests: public testing::Test
     {
     protected:
         fgm::Vec3<T> _xAxis, _yAxis, _zAxis;
@@ -130,17 +132,14 @@ namespace
                               fgm::Vec4{ T(0), T(0), T(5), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
         }
     };
-    TYPED_TEST_SUITE(Mat4ScaleFactoryDirectionVectorInt, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat4ScaleFactoryDirectionVectorIntTests, SupportedFloatingPointTypes);
 
 
 
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
-    /** @brief Verify that scale transform factory is available at compile time.  */
     namespace static_tests
     {
         /// @test Verify that scale transformation factory for uniform scale is available at compile time.
@@ -173,32 +172,30 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-TYPED_TEST(Mat4ScaleFactoryUniform, ReturnsValidScaleMatrix)
+TYPED_TEST(Mat4ScaleFactoryUniformTests, ReturnsValidScaleMatrix)
 { EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat4<TypeParam>::makeScale(this->_scale)); }
 
 
-TYPED_TEST(Mat4ScaleFactoryNonUniform, ReturnsValidScaleMatrix)
+TYPED_TEST(Mat4ScaleFactoryNonUniformTests, ReturnsValidScaleMatrix)
 { EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat4<TypeParam>::makeScale(this->_scaleX, this->_scaleY, this->_scaleZ)); }
 
 
-TYPED_TEST(Mat4ScaleFactoryDirectionVectorFP, ArbitraryDirectionVector_ReturnsValidScaleMatrix)
+TYPED_TEST(Mat4ScaleFactoryDirectionVectorFPTests, ArbitraryDirectionVector_ReturnsValidScaleMatrix)
 { EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat4<TypeParam>::makeScale(this->_scale, this->_direction)); }
 
 
-TYPED_TEST(Mat4ScaleFactoryDirectionVectorInt, XAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheFirstRow)
+TYPED_TEST(Mat4ScaleFactoryDirectionVectorIntTests, XAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheFirstRow)
 { EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<TypeParam>::makeScale(this->_scale, this->_xAxis)); }
 
 
-TYPED_TEST(Mat4ScaleFactoryDirectionVectorInt, YAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheSecondRow)
+TYPED_TEST(Mat4ScaleFactoryDirectionVectorIntTests, YAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheSecondRow)
 { EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<TypeParam>::makeScale(this->_scale, this->_yAxis)); }
 
 
-TYPED_TEST(Mat4ScaleFactoryDirectionVectorInt, ZAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheThirdRow)
+TYPED_TEST(Mat4ScaleFactoryDirectionVectorIntTests, ZAxis_ReturnsIdentityMatrixWithScaleAppliedAlongTheThirdRow)
 { EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<TypeParam>::makeScale(this->_scale, this->_zAxis)); }
 
 /** @} */

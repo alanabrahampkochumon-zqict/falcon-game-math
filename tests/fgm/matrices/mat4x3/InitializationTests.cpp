@@ -105,7 +105,7 @@ namespace
  *                                    *
  **************************************/
 
-/** @brief Verify that the default constructor initializes an identity matrix. */
+/** @brief Verify that the default constructor initializes an zero matrix. */
 TYPED_TEST(Mat4x3Initialization, EmptyConstructorReturnsIdentityMatrix)
 {
     constexpr fgm::Mat4x3<TypeParam> matrix{};

@@ -35,7 +35,7 @@ namespace
     class Mat2x4InfCheckerTests: public testing::TestWithParam<Mat2x4UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat2x4InfCheckerTestSuite, Mat2x4InfCheckerTests,
+        Mat2x4UtilsInfMatrices, Mat2x4InfCheckerTests,
         ::testing::Values(
             Mat2x4UtilityParams{ fgm::Mat2x4(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
                                  true },
@@ -66,7 +66,7 @@ namespace
     class Mat2x4NaNCheckerTests: public testing::TestWithParam<Mat2x4UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat2x4NaNCheckerTestSuite, Mat2x4NaNCheckerTests,
+        Mat2x4UtilsNaNMatrices, Mat2x4NaNCheckerTests,
         ::testing::Values(
             Mat2x4UtilityParams{ fgm::Mat2x4(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
             Mat2x4UtilityParams{ fgm::Mat2x4(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },

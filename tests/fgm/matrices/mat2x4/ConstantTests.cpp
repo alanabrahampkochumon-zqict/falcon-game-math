@@ -40,7 +40,7 @@ namespace
 
     namespace static_tests
     {
-        /// @test Verify that Mat2x4::identity() returns an identity matrix at compile time.
+        /// @test Verify that Mat2x4::one() returns an one matrix at compile time.
         static_assert(fgm::Mat2x4<int>::one()(0, 0) == 1);
         static_assert(fgm::Mat2x4<int>::one()(0, 1) == 1);
         static_assert(fgm::Mat2x4<int>::one()(0, 2) == 1);

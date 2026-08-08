@@ -22,9 +22,7 @@
 namespace
 {
     /**************************************
-     *                                    *
      *             TEST SETUP             *
-     *                                    *
      **************************************/
 
     /**
@@ -33,7 +31,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat4Shear: public testing::Test
+    class Mat4ShearTests: public testing::Test
     {
     protected:
         T _shearFactor1, _shearFactor2;
@@ -52,7 +50,8 @@ namespace
                         fgm::Vec4{ _shearFactor1, _shearFactor2, T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
         }
     };
-    TYPED_TEST_SUITE(Mat4Shear, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat4ShearTests, SupportedArithmeticTypes);
+
 
 
     /**
@@ -61,7 +60,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat4ArbitraryShear: public testing::Test
+    class Mat4ShearCustomTests: public testing::Test
     {
     protected:
         T _shearAngle;
@@ -82,15 +81,14 @@ namespace
                               fgm::Vec4{ T(0), T(0), T(0), T(1) } };
         }
     };
-    TYPED_TEST_SUITE(Mat4ArbitraryShear, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat4ShearCustomTests, SupportedFloatingPointTypes);
 
 
 
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
+
     namespace static_tests
     {
         constexpr auto SHEAR_FACTOR1 = 22;
@@ -138,35 +136,32 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-TYPED_TEST(Mat4Shear, ShearX4D_ReturnsAValid4DShearMatrix)
+TYPED_TEST(Mat4ShearTests, ShearX4D_ReturnsAValid4DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearX, fgm::Mat4<TypeParam>::makeShearX(this->_shearFactor1, this->_shearFactor2)); }
 
 
-TYPED_TEST(Mat4Shear, ShearY4D_ReturnsAValid4DShearMatrix)
+TYPED_TEST(Mat4ShearTests, ShearY4D_ReturnsAValid4DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearY, fgm::Mat4<TypeParam>::makeShearY(this->_shearFactor1, this->_shearFactor2)); }
 
 
-TYPED_TEST(Mat4Shear, ShearZ4D_ReturnsAValid4DShearMatrix)
+TYPED_TEST(Mat4ShearTests, ShearZ4D_ReturnsAValid4DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearZ, fgm::Mat4<TypeParam>::makeShearZ(this->_shearFactor1, this->_shearFactor2)); }
 
 
-TYPED_TEST(Mat4ArbitraryShear, ShearByAngle_ReturnsAValid4DShearMatrix)
+TYPED_TEST(Mat4ShearCustomTests, ShearByAngle_ReturnsAValid4DShearMatrix)
 {
     EXPECT_MAT_EQ(
         this->_shear,
         fgm::Mat4<TypeParam>::makeShearByAngle(this->_shearAngle, this->_shearPlaneNormal, this->_shearDirection));
 }
 
-TYPED_TEST(Mat4ArbitraryShear, Shear_ReturnsAValid4DShearMatrix)
+TYPED_TEST(Mat4ShearCustomTests, Shear_ReturnsAValid4DShearMatrix)
 {
     EXPECT_MAT_EQ(this->_shear,
                   fgm::Mat4<TypeParam>::makeShear(this->_shearFactor, this->_shearPlaneNormal, this->_shearDirection));
 }
-
 
 /** @} */

@@ -13,16 +13,17 @@
 #include "../../mat3/Mat3TestSetup.h"
 #include "../Mat4TestSetup.h"
 
+
+
 /**
  * @addtogroup T_FGM_Mat4x4_Transforms
  * @{
  */
+
 namespace
 {
     /**************************************
-     *                                    *
-     *              SETUP                 *
-     *                                    *
+     *            TEST SETUP              *
      **************************************/
 
     /**
@@ -56,9 +57,7 @@ namespace
 
 
     /**************************************
-     *                                    *
      *           STATIC TESTS             *
-     *                                    *
      **************************************/
 
     namespace static_test
@@ -76,6 +75,11 @@ namespace
 
 } // namespace
 
+
+
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
 
 TYPED_TEST(Mat4AffineFactory, ReturnsCombinedLinearTransformAndTranslation)
 { EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat4<TypeParam>::makeAffine(this->_linearTransform, this->_translation)); }

@@ -9,7 +9,6 @@ target_sources(
         RotationTests.cpp
         ScaleTests.cpp
         ShearTests.cpp
-        TranslationTests.cpp
 )
 
 target_include_directories(

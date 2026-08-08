@@ -19,7 +19,6 @@
 
 namespace
 {
-
     /**************************************
      *            TEST SETUP              *
      **************************************/
@@ -72,6 +71,11 @@ namespace
     } // namespace static_tests
 } // namespace
 
+
+
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
 
 TYPED_TEST(Mat3AdditionTests, PlusOperator_ReturnsMatrixSum)
 {

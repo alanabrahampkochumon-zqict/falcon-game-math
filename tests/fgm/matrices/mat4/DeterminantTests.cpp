@@ -14,14 +14,24 @@
 
 
 
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
+/**
+ * @addtogroup T_FGM_Mat4x4_Det
+ * @{
+ */
 
+namespace
+{
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat4 Determinants.
+     *
+     * @tparam T The numeric type (int, float, double...) for matrix values.
+     */
 template <typename T>
-class Mat4Determinant: public ::testing::Test
+class Mat4DeterminantTests: public testing::Test
 {
 protected:
     fgm::Mat4<T> _matrix;
@@ -36,12 +46,13 @@ protected:
         _expectedDeterminant = T(39);
     }
 };
-/** @brief Test fixture for @ref fgm::Mat4 determinant, parameterized by @ref SupportedSignedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat4Determinant, SupportedSignedArithmeticTypes);
+TYPED_TEST_SUITE(Mat4DeterminantTests, SupportedSignedArithmeticTypes);
 
 
-/** @brief Test fixture for calculating @ref fgm::Mat4 determinant with singular matrices */
-class SingularMat4Determinant: public ::testing::TestWithParam<fgm::Mat4<float>>
+    /**
+       * @brief Test fixture for @ref fgm::Mat4 Determinants with singular matrices.
+       */
+class SingularMat4Determinant: public testing::TestWithParam<fgm::Mat4<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(
     Mat4DeterminantTestSuite, SingularMat4Determinant,
@@ -60,48 +71,36 @@ INSTANTIATE_TEST_SUITE_P(
 
 
 
-/**
- * @addtogroup T_FGM_Mat4x4_Det
- * @{
- */
+    /**************************************
+     *           STATIC TESTS             *
+     **************************************/
 
-/**************************************
- *                                    *
- *           STATIC TESTS             *
- *                                    *
- **************************************/
-
-/** @brief Verify that matrix determinant operation is available at compile time. */
-namespace
-{
+    namespace static_tests
+    {
     constexpr fgm::Mat4 MAT{ fgm::Vec4{ 1, 2, 3, 4 }, fgm::Vec4{ 1, 2, 1, 3 }, fgm::Vec4{ 2, 3, 4, 12 },
                              fgm::Vec4{ 2, 1, 3, 2 } };
 
-    // Verify determinant (member function)
+        /// @test Verify that Mat4 determinant returns a valid value at compile time.
     static_assert(MAT.determinant() == 39);
 
-    // Verify determinant (static function)
+        /// @test Verify that Mat4 determinant (static wrapper) returns a valid value at compile time.
     static_assert(fgm::Mat4<int>::determinant(MAT) == 39);
 
+} // namespace
 } // namespace
 
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-
-/** @brief Verify that computing the determinant of a non-singular matrix returns a non-zero value. */
-TYPED_TEST(Mat4Determinant, ReturnsNonZeroScalar)
+TYPED_TEST(Mat4DeterminantTests, ReturnsNonZeroScalar)
 {
     EXPECT_MAG_EQ(this->_expectedDeterminant, this->_matrix.determinant());
 }
 
 
-/** @brief Verify that computing the determinant of a singular matrix returns zero. */
 TEST_P(SingularMat4Determinant, SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();
@@ -109,20 +108,12 @@ TEST_P(SingularMat4Determinant, SingularMatrixReturnsZero)
 }
 
 
-/**
- * @brief Verify that computing the determinant of a non-singular matrix using static variant of
- *        @ref fgm::Mat4::determinant returns a non-zero value.
- */
-TYPED_TEST(Mat4Determinant, StaticWrapper_ReturnsNonZeroScalar)
+TYPED_TEST(Mat4DeterminantTests, StaticWrapper_ReturnsNonZeroScalar)
 {
     EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Mat4<TypeParam>::determinant(this->_matrix));
 }
 
 
-/**
- * @brief Verify that computing the determinant of a singular matrix using static variant of
- *        @ref fgm::Mat4::determinant returns zero.
- */
 TEST_P(SingularMat4Determinant, StaticWrapper_SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();

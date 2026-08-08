@@ -11,6 +11,8 @@
 
 #include "Mat3TestSetup.h"
 
+
+
 /**
  * @addtogroup T_FGM_Mat3x3_Utils
  * @{
@@ -37,7 +39,7 @@ namespace
     class Mat3InfCheckerTests: public testing::TestWithParam<Mat3UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat3InfCheckerTestSuite, Mat3InfCheckerTests,
+        Mat3UtilsInfMatrices, Mat3InfCheckerTests,
         ::testing::Values(
             Mat3UtilityParams{ fgm::Mat3(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
                                true },
@@ -68,7 +70,7 @@ namespace
     class Mat3NaNCheckerTests: public testing::TestWithParam<Mat3UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat3NaNCheckerTestSuite, Mat3NaNCheckerTests,
+        Mat3UtilsNaNMatrices, Mat3NaNCheckerTests,
         ::testing::Values(
             Mat3UtilityParams{ fgm::Mat3(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
             Mat3UtilityParams{ fgm::Mat3(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },

@@ -338,7 +338,7 @@ TYPED_TEST(Mat2VectorFractionalMultiplicationTests, ColumnFloatVector_ReturnsACo
 }
 
 
-TEST(Mat2VectorMultiplicationTests, ColumnVectorTimesIdentityMatrix_ReturnsOriginalColumnVector)
+TEST(Mat2VectorMultiplicationTests, IdentityMatrixTimesColumnVector_ReturnsOriginalColumnVector)
 {
     const fgm::Mat2<float> iMatrix = fgm::Mat2<float>::identity();
     const fgm::Vec2F vec(2.0f, 1.0f);

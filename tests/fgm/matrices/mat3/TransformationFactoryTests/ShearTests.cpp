@@ -79,7 +79,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat3ArbitraryShearTests: public testing::Test
+    class Mat3ShearCustomTests: public testing::Test
     {
     protected:
         T _shearAngle;
@@ -98,7 +98,7 @@ namespace
                                    fgm::Vec3{ T(0.3886389351493341), T(0.45930055972194034), T(1.5299621842945466) } };
         }
     };
-    TYPED_TEST_SUITE(Mat3ArbitraryShearTests, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat3ShearCustomTests, SupportedFloatingPointTypes);
 
 
 
@@ -180,7 +180,7 @@ TYPED_TEST(Mat3ShearTests, ShearZ3D_ReturnsAValid3DShearMatrix)
 { EXPECT_MAT_EQ(this->_shearZ3D, fgm::Mat3<TypeParam>::makeShearZ3D(this->_shearFactor1, this->_shearFactor2)); }
 
 
-TYPED_TEST(Mat3ArbitraryShearTests, ShearByAngle_ReturnsAValid3DShearMatrix)
+TYPED_TEST(Mat3ShearCustomTests, ShearByAngle_ReturnsAValid3DShearMatrix)
 {
     EXPECT_MAT_EQ(
         this->_shear,
@@ -188,7 +188,7 @@ TYPED_TEST(Mat3ArbitraryShearTests, ShearByAngle_ReturnsAValid3DShearMatrix)
 }
 
 
-TYPED_TEST(Mat3ArbitraryShearTests, Shear_ReturnsAValid3DShearMatrix)
+TYPED_TEST(Mat3ShearCustomTests, Shear_ReturnsAValid3DShearMatrix)
 {
     EXPECT_MAT_EQ(this->_shear,
                   fgm::Mat3<TypeParam>::makeShear(this->_shearFactor, this->_shearPlaneNormal, this->_shearDirection));

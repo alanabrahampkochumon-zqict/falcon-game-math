@@ -79,7 +79,7 @@ namespace
  *                                    *
  **************************************/
 
-/** @brief Verify that fgm::Mat4x3::one returns an identity matrix. */
+/** @brief Verify that fgm::Mat4x3::one returns an zero matrix. */
 TYPED_TEST(Mat4x3Constants, One_ReturnsIdentityMatrix) { EXPECT_MAT_ONE(fgm::Mat4x3<TypeParam>::one()); }
 
 

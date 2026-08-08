@@ -21,9 +21,7 @@
 namespace
 {
     /**************************************
-     *                                    *
-     *               SETUP                *
-     *                                    *
+     *            TEST SETUP              *
      **************************************/
 
     /**
@@ -86,9 +84,7 @@ namespace
 
 
     /**************************************
-     *                                    *
      *           STATIC TESTS             *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -107,9 +103,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
 TYPED_TEST(Mat4InvolutionFactoryFP, ArbitraryDirection_ReturnsValidInvolutionMatrix)

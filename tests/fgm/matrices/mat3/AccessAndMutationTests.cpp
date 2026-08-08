@@ -123,6 +123,7 @@ TEST(Mat3MutationTests, ElementsCanBeMutatedUsingIndex)
 }
 
 
+/** @test Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Mat3MutationTests, ColumnsCanBeMutatedUsingIndex)
 {
     const fgm::Vec3 col0 = { 1.0f, 4.0f, 7.0f };

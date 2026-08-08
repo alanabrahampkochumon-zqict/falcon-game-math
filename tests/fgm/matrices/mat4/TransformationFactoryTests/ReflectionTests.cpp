@@ -11,18 +11,16 @@
 
 #include "../Mat4TestSetup.h"
 
+
 /**
  * @addtogroup T_FGM_Mat4x4_Transforms
  * @{
  */
 
-
 namespace
 {
     /**************************************
-     *                                    *
-     *              SETUP                 *
-     *                                    *
+     *            TEST SETUP              *
      **************************************/
 
     /**
@@ -186,9 +184,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *          RUNTIME TESTS             *
- *                                    *
  **************************************/
 
 TYPED_TEST(Mat4ReflectionFactoryInt, XAxis_ReturnsMatrixWithNegatedYZ)
