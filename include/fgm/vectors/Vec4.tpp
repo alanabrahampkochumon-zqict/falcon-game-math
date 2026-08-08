@@ -14,6 +14,7 @@
 
 #include "fgm/common/Utils.h"
 #include "fgm/common/Wrappers.h"
+#include "Vec3.h"
 
 #include <algorithm>
 #include <cassert>
@@ -257,15 +258,15 @@ namespace fgm
 
         if constexpr (swizzleDimension == 4)
         {
-            return Vec4(_data[Indices]...);
+            return Vec4<T>(_data[Indices]...);
         }
         else if constexpr (swizzleDimension == 3)
         {
-            return Vec3(_data[Indices]...);
+            return Vec3<T>(_data[Indices]...);
         }
         else if constexpr (swizzleDimension == 2)
         {
-            return Vec2(_data[Indices]...);
+            return Vec2<T>(_data[Indices]...);
         }
         else
         {

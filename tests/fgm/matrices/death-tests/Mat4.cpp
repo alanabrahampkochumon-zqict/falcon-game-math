@@ -12,7 +12,7 @@
 #include "CommonSetup.h"
 #include "utils/MatrixUtils.h"
 
-#include <fgm/matrices/Mat3x4.h>
+#include <fgm/matrices/Mat4.h>
 #include <utility>
 
 
@@ -20,109 +20,109 @@
 #ifdef ENABLE_DEBUG_TESTS
 
 /**
- * @addtogroup T_FGM_Mat3x4_Assertion
+ * @addtogroup T_FGM_Mat4x4_Assertion
  * @{
  */
 
 namespace
 {
-    fgm::Mat3x4 mat(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    fgm::Mat4 mat(1, 2, 3, 4);
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat4 invalid (row, column) indices.
+     */
     class Mat4Indexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
     {};
     INSTANTIATE_TEST_SUITE_P(Mat4Tests, Mat4Indexing,
                              testing::Values(std::make_pair(5, 5), std::make_pair(4, 5), std::make_pair(5, 4),
                                              std::make_pair(100, 100)));
 
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat4 invalid column indices.
+     */
     class Mat4ColumnIndexing: public testing::TestWithParam<std::size_t>
     {};
     INSTANTIATE_TEST_SUITE_P(Mat4Tests, Mat4ColumnIndexing, testing::Values(5, 6, 100));
-    /**************************************
-     *            TEST SETUP              *
-     **************************************/
-
-    /**
-     * @brief Test fixture for @ref fgm::Mat3x4 invalid (row, column) indices.
-     */
-    class Mat3x4IndexingTests: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
-    {};
-    INSTANTIATE_TEST_SUITE_P(Mat3x4OutOfBoundsRowColumnIndices, Mat3x4IndexingTests,
-                             testing::Values(std::make_pair(3, 3), std::make_pair(3, 4), std::make_pair(4, 3),
-                                             std::make_pair(100, 100)));
 
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x4 invalid column indices.
-     */
-    class Mat3x4ColumnIndexingTests: public testing::TestWithParam<std::size_t>
-    {};
-    INSTANTIATE_TEST_SUITE_P(Mat3x4OutOfBoundsColumnIndices, Mat3x4ColumnIndexingTests, testing::Values(4, 5, 100));
-
-
-
-    /**
-     * @brief Test fixture for @ref fgm::Mat3x4 Division.
+     * @brief Test fixture for @ref fgm::Mat4 Division.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
     template <typename T>
-    class Mat3x4DivisionTests: public testing::Test
+    class Mat4DivisionTests: public testing::Test
     {
     protected:
-        fgm::Mat3x4<T> _matrix;
+        fgm::Mat4<T> _matrix;
         T _scalar;
-        fgm::Mat3x4<T> _expectedMatrix;
+        fgm::Mat4<T> _expectedMatrix;
+
 
         void SetUp() override
         {
-            _matrix = { fgm::Vec3{ T(7), T(3), T(0) }, fgm::Vec3{ T(1), T(6), T(6) }, fgm::Vec3{ T(0), T(6), T(9) },
-                        fgm::Vec3{ T(27), T(24), T(30) } };
-            _scalar = T(3);
-            _expectedMatrix = { fgm::Vec3{ T(2.333333333333333), T(1), T(0) },
-                                fgm::Vec3{ T(0.3333333333333333), T(2), T(2) }, fgm::Vec3{ T(0), T(2), T(3) },
-                                fgm::Vec3{ T(9), T(8), T(10) } };
+            _matrix         = { { T(17), T(13), T(15), T(12) },
+                                { T(11), T(16), T(35), T(101) },
+                                { T(27), T(44), T(56), T(23) },
+                                { T(5), T(6), T(11), T(31) } };
+            _scalar         = T(7);
+            _expectedMatrix = {
+                { T(2.428571428571428), T(1.857142857142857), T(2.142857142857143), T(1.714285714285714) },
+                { T(1.571428571428571), T(2.285714285714286), T(5.0), T(14.428571428571429) },
+                { T(3.857142857142857), T(6.285714285714286), T(8.0), T(3.285714285714286) },
+                { T(0.714285714285714), T(0.857142857142857), T(1.571428571428571), T(4.428571428571429) },
+            };
         }
     };
-    TYPED_TEST_SUITE(Mat3x4DivisionTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat4DivisionTests, SupportedArithmeticTypes);
 
 
-    // TODO: Add after adding assertions
-    // /**
-    //  * @brief Test fixture for @ref fgm::Mat3x4 Division with NaN elements.
-    //  */
-    // class NaNMat3x4Division: public testing::TestWithParam<fgm::Mat3x4<float>>
+    // TODO: Add tests
+    /**
+     * @brief Test fixture for @ref fgm::Mat4 Division with NaN elements.
+     */
+    // class NaNMat4DivisionTests: public testing::TestWithParam<fgm::Mat4<float>>
     // {};
-    // INSTANTIATE_TEST_SUITE_P(
-    //     Mat3x4DivisionTestSuite, NaNMat3x4Division,
-    //     ::testing::Values(
-    //         fgm::Mat3x4<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN), fgm::Mat3x4<float>(fgm ::constants::NaN, fgm::constants::NaN, fgm ::constants::NaN,
-    //         fgm ::constants::NaN,
-    //                            fgm::constants::NaN, fgm::constants::NaN, fgm ::constants::NaN, fgm::constants::NaN,
-    //                            fgm ::constants::NaN, fgm ::constants::NaN, fgm::constants::NaN,
-    //                            fgm::constants::NaN)));
+    // INSTANTIATE_TEST_SUITE_P(Mat4InvalidDivision, NaNMat4DivisionTests,
+    //                          ::testing::Values(fgm::Mat4<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
+    //                                            fgm::Mat4<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
+    //                                            fgm::Mat4<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
+    //                                            fgm::Mat4<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
+    //                                            fgm::Mat4<float>{ fgm ::constants::NaN, fgm::constants::NaN,
+    //                                                              fgm ::constants::NaN, fgm ::constants::NaN }));
 
+    /** @brief Test fixture for calculating @ref fgm::Mat4 inverse with singular matrices. */
+    class Mat4InverseSingularTests: public testing::TestWithParam<fgm::Mat4<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(
+        Mat4SingularMatrixInverse, Mat4InverseSingularTests,
+        ::testing::Values(fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
+                                     fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
+                          fgm::Mat4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                          fgm::Mat4{ fgm::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                          fgm::Mat4{ fgm::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
+                                     fgm::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
+                          fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
+                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                          fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
+                                     fgm::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
+
+
+    // TODO: Add
+    // /** @brief Test fixture for @ref fgm::Mat4 inverse with NaN elements. */
+    // class Mat4InverseNaNTests: public testing::TestWithParam<fgm::Mat4<float>>
+    // {};
+    // INSTANTIATE_TEST_SUITE_P(Mat4NaNMatrixInverse, Mat4InverseNaNTests,
+    //                          ::testing::Values(fgm::Mat4<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
+    //                                            fgm::Mat4<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
+    //                                            fgm::Mat4<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
+    //                                            fgm::Mat4<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
+    //                                            fgm::Mat4<float>{ fgm ::constants::NaN, fgm::constants::NaN,
+    //                                                              fgm ::constants::NaN, fgm ::constants::NaN }));
 
 } // namespace
 
@@ -132,90 +132,44 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TEST_P(Mat3x4ColumnIndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
+TEST_P(Mat4ColumnIndexing, OutOfBoundAccessTriggers_AssertInDebugMode)
 {
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
 }
 
 
-TEST_P(Mat3x4IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
+TEST_P(Mat4Indexing, OutOfBoundAccessTriggers_AssertInDebugMode)
 {
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col)), "");
 }
 
 
-TEST_P(Mat3x4ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
+TEST_P(Mat4ColumnIndexing, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
-    const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec3<int>::zero()), "");
-}
-
-
-TEST_P(Mat3x4IndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
-{
-    const auto [row, col] = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col) = 5), "");
-}
-
-
-TYPED_TEST(Mat3x4DivisionTests, DivideOperator_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), ""); }
-
-
-TYPED_TEST(Mat3x4DivisionTests, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
-{ EXPECT_DEBUG_DEATH(this->_matrix /= 0, ""); }
-
-///////////////////////////////////////////////
-/** @brief Verify that @ref fgm::Mat4 out-of-bounds column access triggers assert in debug mode. */
-TEST_P(Mat4ColumnIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
-{
-    const fgm::Mat4 mat(1, 2, 3, 4);
-    const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
-}
-
-/** @brief Verify that @ref fgm::Mat4 out-of-bounds row, column access triggers assert in debug mode. */
-TEST_P(Mat4Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
-{
-    const fgm::Mat4 mat(1, 2, 3, 4);
-    const auto [row, col] = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col)), "");
-}
-/** @brief Verify that @ref fgm::Mat4 out-of-bounds column mutation triggers assert in debug mode. */
-TEST_P(Mat4ColumnIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
-{
-    [[maybe_unused]] fgm::Mat4 mat(1, 2, 3, 4);
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec4<int>::zero()), "");
 }
 
 
-/** @brief Verify that @ref fgm::Mat4 out-of-bounds row, column mutation triggers assert in debug mode. */
-TEST_P(Mat4Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
+TEST_P(Mat4Indexing, OutOfBoundMutationTriggers_AssertInDebugMode)
 {
-    [[maybe_unused]] fgm::Mat4 mat(1, 2, 3, 4);
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col) = 5), "");
 }
 
-/** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
-TYPED_TEST(Mat4Division, DivideOperator_ByZeroTriggersAssertInDebugMode)
-{
-    EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), "");
-}
 
-/** @brief Verify that assertion is triggered when dividing by zero (compound division) in **Debug Mode**. */
-TYPED_TEST(Mat4Division, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
-{
-    EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix /= 0), "");
-}
 
-/**
- * @brief Verify that inverting a singular matrix using @ref fgm::Mat4::inverse
- *        triggers assertion in debug mode.
- */
+TYPED_TEST(Mat4DivisionTests, DivideOperator_ByZeroTriggersAssertInDebugMode)
+{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix / 0), ""); }
+
+
+TYPED_TEST(Mat4DivisionTests, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
+{ EXPECT_DEBUG_DEATH(static_cast<void>(this->_matrix /= 0), ""); }
+
+
+
 TEST_P(Mat4InverseSingularTests, TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
@@ -223,10 +177,7 @@ TEST_P(Mat4InverseSingularTests, TriggersAssertionInDebugMode)
     EXPECT_DEBUG_DEATH(static_cast<void>(matrix.inverse()), "");
 }
 
-/**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::inverse
- *        triggers assertion in debug mode.
- */
+
 TEST_P(Mat4InverseSingularTests, StaticWrapper_TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();

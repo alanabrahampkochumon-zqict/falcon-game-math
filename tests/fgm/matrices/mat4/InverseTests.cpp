@@ -60,7 +60,7 @@ namespace
     class Mat4InverseSingularTests: public testing::TestWithParam<fgm::Mat4<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat3SingularMatrixInverse, Mat4InverseSingularTests,
+        Mat4SingularMatrixInverse, Mat4InverseSingularTests,
         ::testing::Values(fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
                                      fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
                           fgm::Mat4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
