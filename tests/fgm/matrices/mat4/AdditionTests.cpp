@@ -122,7 +122,7 @@ TYPED_TEST(Mat4AdditionTests, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 }
 
 
-TEST(Mat4Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Mat4AdditionTests, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     [[maybe_unused]] fgm::Mat4 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
                                      fgm::Vec4{ 4.5f, 3.25f, 3.16f, -22.0f },

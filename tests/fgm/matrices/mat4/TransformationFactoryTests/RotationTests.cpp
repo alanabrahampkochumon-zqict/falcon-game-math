@@ -112,7 +112,7 @@ namespace
      * @tparam T The numeric type (float, double) for matrix values.
      */
     template <typename T>
-    class Mat4FloatRotation: public testing::Test
+    class Mat4FloatRotationTests: public testing::Test
     {
     protected:
         T _angle;
@@ -299,7 +299,7 @@ namespace
 #endif
         }
     };
-    TYPED_TEST_SUITE(Mat4FloatRotation, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat4FloatRotationTests, SupportedFloatingPointTypes);
 
 
 
@@ -328,14 +328,14 @@ TYPED_TEST(Mat4RotationTests, X_ReturnsAValidRotationMatrix)
 /**
  * @brief Verify that rotation transformation factory for x returns a rotation matrix for non-integral rotation values.
  */
-TYPED_TEST(Mat4FloatRotation, X_ReturnsAValidRotationMatrix)
+TYPED_TEST(Mat4FloatRotationTests, X_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<TypeParam>::makeRotationX(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for x around arbitrary center includes translation to that point.
  */
-TYPED_TEST(Mat4FloatRotation, X_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
+TYPED_TEST(Mat4FloatRotationTests, X_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
 { EXPECT_MAT_EQ(this->_expectedMatXCenter, fgm::Mat4<TypeParam>::makeRotationX(this->_angle, this->_center)); }
 
 
@@ -347,14 +347,14 @@ TYPED_TEST(Mat4RotationTests, Y_ReturnsAValidRotationMatrix)
 /**
  * @brief Verify that rotation transformation factory for y returns a rotation matrix for non-integral rotation values.
  */
-TYPED_TEST(Mat4FloatRotation, Y_ReturnsAValidRotationMatrix)
+TYPED_TEST(Mat4FloatRotationTests, Y_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<TypeParam>::makeRotationY(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for y around arbitrary center includes translation to that point.
  */
-TYPED_TEST(Mat4FloatRotation, Y_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
+TYPED_TEST(Mat4FloatRotationTests, Y_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
 { EXPECT_MAT_EQ(this->_expectedMatYCenter, fgm::Mat4<TypeParam>::makeRotationY(this->_angle, this->_center)); }
 
 
@@ -366,21 +366,21 @@ TYPED_TEST(Mat4RotationTests, Z_ReturnsAValidRotationMatrix)
 /**
  * @brief Verify that rotation transformation factory for z returns a rotation matrix for non-integral rotation values.
  */
-TYPED_TEST(Mat4FloatRotation, Z_ReturnsAValidRotationMatrix)
+TYPED_TEST(Mat4FloatRotationTests, Z_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<TypeParam>::makeRotationZ(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for z around arbitrary center includes translation to that point.
  */
-TYPED_TEST(Mat4FloatRotation, Z_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
+TYPED_TEST(Mat4FloatRotationTests, Z_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
 { EXPECT_MAT_EQ(this->_expectedMatZCenter, fgm::Mat4<TypeParam>::makeRotationZ(this->_angle, this->_center)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for an axis returns a rotation matrix.
  */
-TYPED_TEST(Mat4FloatRotation, AxisAligned_ReturnsAValidRotationMatrix)
+TYPED_TEST(Mat4FloatRotationTests, AxisAligned_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedAxisRotation, fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis)); }
 
 
@@ -388,7 +388,7 @@ TYPED_TEST(Mat4FloatRotation, AxisAligned_ReturnsAValidRotationMatrix)
  * @brief Verify that rotation transformation factory for an axis and around an arbitrary center
  *        returns a rotation matrix.
  */
-TYPED_TEST(Mat4FloatRotation, AxisAligned_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
+TYPED_TEST(Mat4FloatRotationTests, AxisAligned_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
 {
     EXPECT_MAT_EQ(this->_expectedAxisRotationCenter,
                   fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis, this->_center));

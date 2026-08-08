@@ -30,7 +30,7 @@ namespace
      * @tparam T The floating point scalar type (e.g., float, double) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat4InvolutionFactoryFP: public testing::Test
+    class Mat4InvolutionFactoryFPTests: public testing::Test
     {
     protected:
         fgm::Vec3<T> _norm;
@@ -48,7 +48,7 @@ namespace
             };
         }
     };
-    TYPED_TEST_SUITE(Mat4InvolutionFactoryFP, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat4InvolutionFactoryFPTests, SupportedFloatingPointTypes);
 
 
     /**
@@ -57,7 +57,7 @@ namespace
      * @tparam T The signed scalar type (e.g., int32_t, int16_t) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat4InvolutionFactoryInt: public ::testing::Test
+    class Mat4InvolutionFactoryIntTests: public ::testing::Test
     {
     protected:
         fgm::Vec3<T> _xAxis, _yAxis, _zAxis;
@@ -79,7 +79,7 @@ namespace
                                      fgm::Vec4{ T(0), T(0), T(1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
         }
     };
-    TYPED_TEST_SUITE(Mat4InvolutionFactoryInt, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat4InvolutionFactoryIntTests, SupportedSignedArithmeticTypes);
 
 
 
@@ -106,19 +106,19 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TYPED_TEST(Mat4InvolutionFactoryFP, ArbitraryDirection_ReturnsValidInvolutionMatrix)
+TYPED_TEST(Mat4InvolutionFactoryFPTests, ArbitraryDirection_ReturnsValidInvolutionMatrix)
 { EXPECT_MAT_EQ(this->_expectedInvolution, fgm::Mat4<TypeParam>::makeInvolution(this->_norm)); }
 
 
-TYPED_TEST(Mat4InvolutionFactoryInt, XAxis_ReturnsIdentityMatrixWithNegatedYAndZ)
+TYPED_TEST(Mat4InvolutionFactoryIntTests, XAxis_ReturnsIdentityMatrixWithNegatedYAndZ)
 { EXPECT_MAT_EQ(this->_expectedInvolutionX, fgm::Mat4<TypeParam>::makeInvolution(this->_xAxis)); }
 
 
-TYPED_TEST(Mat4InvolutionFactoryInt, YAxis_ReturnsIdentityMatrixWithNegatedZAndX)
+TYPED_TEST(Mat4InvolutionFactoryIntTests, YAxis_ReturnsIdentityMatrixWithNegatedZAndX)
 { EXPECT_MAT_EQ(this->_expectedInvolutionY, fgm::Mat4<TypeParam>::makeInvolution(this->_yAxis)); }
 
 
-TYPED_TEST(Mat4InvolutionFactoryInt, ZAxis_IdentityMatrixWithNegatedXAndY)
+TYPED_TEST(Mat4InvolutionFactoryIntTests, ZAxis_IdentityMatrixWithNegatedXAndY)
 { EXPECT_MAT_EQ(this->_expectedInvolutionZ, fgm::Mat4<TypeParam>::makeInvolution(this->_zAxis)); }
 
 /** @} */

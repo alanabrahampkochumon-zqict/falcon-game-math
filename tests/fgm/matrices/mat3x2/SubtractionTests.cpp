@@ -83,7 +83,7 @@ TYPED_TEST(Mat3x2SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 }
 
 
-TEST(Mat3x2Subtraction, MinusOperator_MixedType_PromotesType)
+TEST(Mat3x2SubtractionTests, MinusOperator_MixedType_PromotesType)
 {
     const fgm::Mat3x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
     const fgm::Mat3x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
@@ -100,7 +100,7 @@ TYPED_TEST(Mat3x2SubtractionTests, MinusEqualsOperator_ReturnsSameVectorWithDiff
 }
 
 
-TEST(Mat3x2Subtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Mat3x2SubtractionTests, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat3x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
     [[maybe_unused]] const fgm::Mat3x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);

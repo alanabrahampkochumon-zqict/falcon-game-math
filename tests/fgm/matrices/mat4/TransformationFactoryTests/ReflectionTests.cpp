@@ -29,7 +29,7 @@ namespace
      * @tparam T The floating point scalar type (e.g., float, double) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat4ReflectionFactoryInt: public ::testing::Test
+    class Mat4ReflectionFactoryIntTests: public testing::Test
     {
     protected:
         fgm::Vec3<T> _xAxis, _yAxis, _zAxis;
@@ -64,7 +64,7 @@ namespace
                                           fgm::Vec4{ T(0), T(0), T(-1), T(0) }, fgm::Vec4{ T(0), T(0), T(0), T(1) } };
         }
     };
-    TYPED_TEST_SUITE(Mat4ReflectionFactoryInt, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat4ReflectionFactoryIntTests, SupportedSignedArithmeticTypes);
 
 
     /**
@@ -73,7 +73,7 @@ namespace
      * @tparam T The signed scalar type (e.g., int32_t, int16_t) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat4ReflectionFactoryFactoryFP: public ::testing::Test
+    class Mat4ReflectionFactoryFactoryFPTests: public ::testing::Test
     {
     protected:
         fgm::Vec3<T> _norm;
@@ -91,7 +91,7 @@ namespace
             };
         }
     };
-    TYPED_TEST_SUITE(Mat4ReflectionFactoryFactoryFP, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat4ReflectionFactoryFactoryFPTests, SupportedFloatingPointTypes);
 
 
 
@@ -187,50 +187,50 @@ namespace
  *          RUNTIME TESTS             *
  **************************************/
 
-TYPED_TEST(Mat4ReflectionFactoryInt, XAxis_ReturnsMatrixWithNegatedYZ)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, XAxis_ReturnsMatrixWithNegatedYZ)
 { EXPECT_MAT_EQ(this->_expectedReflectionX, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::X>()); }
 
 
-TYPED_TEST(Mat4ReflectionFactoryInt, YAxis_ReturnsMatrixWithNegatedXZ)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, YAxis_ReturnsMatrixWithNegatedXZ)
 { EXPECT_MAT_EQ(this->_expectedReflectionY, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::Y>()); }
 
 
-TYPED_TEST(Mat4ReflectionFactoryInt, ZAxis_ReturnsMatrixWithNegatedXY)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, ZAxis_ReturnsMatrixWithNegatedXY)
 { EXPECT_MAT_EQ(this->_expectedReflectionZ, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::Z>()); }
 
 
-TYPED_TEST(Mat4ReflectionFactoryInt, XYPlane_ReturnsMatrixWithNegatedZ)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, XYPlane_ReturnsMatrixWithNegatedZ)
 { EXPECT_MAT_EQ(this->_expectedReflectionXY, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::XY>()); }
 
 
-TYPED_TEST(Mat4ReflectionFactoryInt, YZPlane_ReturnsMatrixWithNegatedX)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, YZPlane_ReturnsMatrixWithNegatedX)
 { EXPECT_MAT_EQ(this->_expectedReflectionYZ, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::YZ>()); }
 
 
-TYPED_TEST(Mat4ReflectionFactoryInt, ZXPlane_ReturnsMatrixWithNegatedY)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, ZXPlane_ReturnsMatrixWithNegatedY)
 { EXPECT_MAT_EQ(this->_expectedReflectionZX, fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::ZX>()); }
 
 
-TYPED_TEST(Mat4ReflectionFactoryInt, Origin_ReturnsMatrixWithNegatedXYZ)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, Origin_ReturnsMatrixWithNegatedXYZ)
 {
     EXPECT_MAT_EQ(this->_expectedReflectionOrigin,
                   fgm::Mat4<TypeParam>::template makeReflection<fgm::reflect::ORIGIN>());
 }
 
 
-TYPED_TEST(Mat4ReflectionFactoryInt, PlaneNormalAlongXAxis_ReturnsYZReflectionMatrix)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, PlaneNormalAlongXAxis_ReturnsYZReflectionMatrix)
 { EXPECT_MAT_EQ(this->_expectedReflectionYZ, fgm::Mat4<TypeParam>::makeReflection(this->_xAxis)); }
 
 
-TYPED_TEST(Mat4ReflectionFactoryInt, PlaneNormalAlongYAxis_ReturnsZXReflectionMatrix)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, PlaneNormalAlongYAxis_ReturnsZXReflectionMatrix)
 { EXPECT_MAT_EQ(this->_expectedReflectionZX, fgm::Mat4<TypeParam>::makeReflection(this->_yAxis)); }
 
 
-TYPED_TEST(Mat4ReflectionFactoryInt, PlaneNormalAlongZAxis_ReturnsXYReflectionMatrix)
+TYPED_TEST(Mat4ReflectionFactoryIntTests, PlaneNormalAlongZAxis_ReturnsXYReflectionMatrix)
 { EXPECT_MAT_EQ(this->_expectedReflectionXY, fgm::Mat4<TypeParam>::makeReflection(this->_zAxis)); }
 
 
-TYPED_TEST(Mat4ReflectionFactoryFactoryFP,
+TYPED_TEST(Mat4ReflectionFactoryFactoryFPTests,
            AnyUnitPlaneNormal_ReturnsValidReflectionMatrixAcrossThePlanePerpendicularToTheNormal)
 { EXPECT_MAT_EQ(this->_expectedNormReflect, fgm::Mat4<TypeParam>::makeReflection(this->_norm)); }
 

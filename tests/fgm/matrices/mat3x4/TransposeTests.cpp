@@ -31,7 +31,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat3x4Transpose: public ::testing::Test
+    class Mat3x4TransposeTests: public ::testing::Test
     {
     protected:
         fgm::Mat3x4<T> _matrix;
@@ -45,7 +45,7 @@ namespace
                                    fgm::Vec4{ T(3), T(6), T(9), T(12) } };
         }
     };
-    TYPED_TEST_SUITE(Mat3x4Transpose, SupportedTypes);
+    TYPED_TEST_SUITE(Mat3x4TransposeTests, SupportedTypes);
 
 
 
@@ -86,11 +86,11 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TYPED_TEST(Mat3x4Transpose, Returns4x3MatrixWithRowAndColumnElementsExchanged)
+TYPED_TEST(Mat3x4TransposeTests, Returns4x3MatrixWithRowAndColumnElementsExchanged)
 { EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose()); }
 
 
-TYPED_TEST(Mat3x4Transpose, StaticWrapper_Returns4x3MatrixWithRowAndColumnElementsExchanged)
+TYPED_TEST(Mat3x4TransposeTests, StaticWrapper_Returns4x3MatrixWithRowAndColumnElementsExchanged)
 { EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Mat3x4<TypeParam>::transpose(this->_matrix)); }
 
 /** @} */

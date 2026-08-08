@@ -175,7 +175,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat4FractionalMultiplication: public testing::Test
+    class Mat4FractionalMultiplicationTests: public testing::Test
     {
     protected:
         fgm::Mat4<T> _matA, _matB, _expectedMat;
@@ -199,7 +199,7 @@ namespace
             };
         }
     };
-    TYPED_TEST_SUITE(Mat4FractionalMultiplication, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat4FractionalMultiplicationTests, SupportedFloatingPointTypes);
 
 
     /**************************************
@@ -432,7 +432,7 @@ TYPED_TEST(Mat4VectorFractionalMultiplicationTests, ColumnVector_ReturnsATransfo
 }
 
 
-TEST(Mat4VectorMultiplication, IdentityMatrixTimesColumnVector_ReturnsOriginalColumnVector)
+TEST(Mat4VectorMultiplicationTests, IdentityMatrixTimesColumnVector_ReturnsOriginalColumnVector)
 {
     const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
     const fgm::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
@@ -443,7 +443,7 @@ TEST(Mat4VectorMultiplication, IdentityMatrixTimesColumnVector_ReturnsOriginalCo
 }
 
 
-TEST(Mat4VectorMultiplication, ColumnVector_MixedType_PromotesType)
+TEST(Mat4VectorMultiplicationTests, ColumnVector_MixedType_PromotesType)
 {
     const fgm::Mat4 mat{ 1.0, 2.0, 3.0, 4.0 };
     const fgm::Vec4I vec{ 2, 1, 3, 4 };
@@ -474,7 +474,7 @@ TYPED_TEST(Mat4VectorFractionalMultiplicationTests, RowFloatVector_ReturnsARowVe
 }
 
 
-TEST(Mat4VectorMultiplication, RowVectorTimesIdentityMatrix_ReturnsOriginalVector)
+TEST(Mat4VectorMultiplicationTests, RowVectorTimesIdentityMatrix_ReturnsOriginalVector)
 {
     const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
     const fgm::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
@@ -486,7 +486,7 @@ TEST(Mat4VectorMultiplication, RowVectorTimesIdentityMatrix_ReturnsOriginalVecto
 
 
 
-TEST(Mat4VectorMultiplication, RowVector_MixedType_PromotesType)
+TEST(Mat4VectorMultiplicationTests, RowVector_MixedType_PromotesType)
 {
     const fgm::Mat4 mat{ 1.0, 2.0, 3.0, 4.0 };
     const fgm::Vec4I vec{ 2, 1, 3, 4 };
@@ -511,7 +511,7 @@ TYPED_TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_RowVector_ReturnsAT
 }
 
 
-TEST(Mat4VectorMultiplication, TimesEqualOperator_RowVector_IdentityMatrix_ReturnsOriginalRowVector)
+TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_RowVector_IdentityMatrix_ReturnsOriginalRowVector)
 {
     const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
     fgm::Vec4F vec{ 2.0f, 1.0f, 3.0f, 12.0f };
@@ -522,7 +522,7 @@ TEST(Mat4VectorMultiplication, TimesEqualOperator_RowVector_IdentityMatrix_Retur
 }
 
 
-TEST(Mat4VectorMultiplication, TimesEqualOperator_MixedType_DoesNotPromoteType)
+TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_MixedType_DoesNotPromoteType)
 {
     const fgm::Mat4<double> iMatrix = fgm::Mat4<double>::identity();
     [[maybe_unused]] fgm::Vec4I vec{ 2, 1, 5, 4 };
@@ -532,7 +532,7 @@ TEST(Mat4VectorMultiplication, TimesEqualOperator_MixedType_DoesNotPromoteType)
 }
 
 
-TEST(Mat4VectorMultiplication, TimesEqualOperator_MixedType_EnsuresMinimalPrecisionLoss)
+TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     const fgm::Mat4 mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5 };
     fgm::Vec4 vec{ 10, 20, 30, 40 };
@@ -564,14 +564,14 @@ TYPED_TEST(Mat4MatrixMultiplicationTests, TimesOperator_ReturnsMatrixProduct)
 }
 
 
-TYPED_TEST(Mat4FractionalMultiplication, TimesOperator_ReturnsMatrixWithPrecision)
+TYPED_TEST(Mat4FractionalMultiplicationTests, TimesOperator_ReturnsMatrixWithPrecision)
 {
     const auto transformedVector = this->_matA * this->_matB;
     EXPECT_MAT_EQ(this->_expectedMat, transformedVector);
 }
 
 
-TEST(Mat4Multiplication, TimesOperator_IdentityMatrix_ReturnsOriginalMatrix)
+TEST(Mat4MultiplicationTests, TimesOperator_IdentityMatrix_ReturnsOriginalMatrix)
 {
     const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
     const fgm::Mat4 mat{ 1.0f, 2.0f, 3.0f, 4.0f };
@@ -583,7 +583,7 @@ TEST(Mat4Multiplication, TimesOperator_IdentityMatrix_ReturnsOriginalMatrix)
 
 
 
-TEST(Mat4Multiplication, TimesOperator_PromotesType)
+TEST(Mat4MultiplicationTests, TimesOperator_PromotesType)
 {
     const fgm::Mat4 matA{ 1.0, 2.0, 3.0, 4.0 };
     const fgm::Mat4 matB{ 2, 1, 3, 4 };
@@ -609,7 +609,7 @@ TYPED_TEST(Mat4MatrixMultiplicationTests, TimesEqualsOperator_PerformInPlaceMatr
 }
 
 
-TEST(Mat4Multiplication, TimesEqualsOperator_IdentityMatrix_ReturnsOriginalMatrix)
+TEST(Mat4MultiplicationTests, TimesEqualsOperator_IdentityMatrix_ReturnsOriginalMatrix)
 {
     const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
     fgm::Mat4 mat{ 1.0f, 2.0f, 3.0f, 4.0f };
@@ -621,7 +621,7 @@ TEST(Mat4Multiplication, TimesEqualsOperator_IdentityMatrix_ReturnsOriginalMatri
 }
 
 
-TEST(Mat4Multiplication, TimesEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Mat4MultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
     const fgm::Mat4<double> iMatrix = fgm::Mat4<double>::identity();
     fgm::Mat4 mat{ 1, 2, 3, 4 };
@@ -631,7 +631,7 @@ TEST(Mat4Multiplication, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 }
 
 
-TEST(Mat4Multiplication, TimesEqualsOperator_EnsuresMinimalPrecisionLoss)
+TEST(Mat4MultiplicationTests, TimesEqualsOperator_EnsuresMinimalPrecisionLoss)
 {
     fgm::Mat4 matA{ 2.5, 3.5, 0.5, 1.5, 2.5, -12.5, 5.45, 23.25, 85.5, 12.5, 0.5, 1.75, 15.5, 13.5, 14.5, 16.5 };
     const fgm::Mat4 matB{ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80 };

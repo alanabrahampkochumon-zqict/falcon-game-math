@@ -52,10 +52,10 @@ TYPED_TEST_SUITE(Mat4DeterminantTests, SupportedSignedArithmeticTypes);
     /**
        * @brief Test fixture for @ref fgm::Mat4 Determinants with singular matrices.
        */
-class SingularMat4Determinant: public testing::TestWithParam<fgm::Mat4<float>>
+class SingularMat4DeterminantTests: public testing::TestWithParam<fgm::Mat4<float>>
 {};
 INSTANTIATE_TEST_SUITE_P(
-    Mat4DeterminantTestSuite, SingularMat4Determinant,
+    Mat4DeterminantTestSuite, SingularMat4DeterminantTests,
     ::testing::Values(fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
                                  fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
                       fgm::Mat4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
@@ -101,7 +101,7 @@ TYPED_TEST(Mat4DeterminantTests, ReturnsNonZeroScalar)
 }
 
 
-TEST_P(SingularMat4Determinant, SingularMatrixReturnsZero)
+TEST_P(SingularMat4DeterminantTests, SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();
     EXPECT_MAG_EQ(0.0f, matrix.determinant());
@@ -114,7 +114,7 @@ TYPED_TEST(Mat4DeterminantTests, StaticWrapper_ReturnsNonZeroScalar)
 }
 
 
-TEST_P(SingularMat4Determinant, StaticWrapper_SingularMatrixReturnsZero)
+TEST_P(SingularMat4DeterminantTests, StaticWrapper_SingularMatrixReturnsZero)
 {
     const auto& matrix = GetParam();
     EXPECT_MAG_EQ(0.0f, fgm::Mat4<float>::determinant(matrix));

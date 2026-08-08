@@ -50,7 +50,7 @@ namespace
 /**
  * @brief Verify that the conversion constructor correctly promotes components from float to double.
  */
-TEST(Mat3x4ConversionConstructor, PromotesType)
+TEST(Mat3x4TypeConversionTests, PromotesType)
 {
     const fgm::Mat3x4 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f);
 
@@ -61,7 +61,7 @@ TEST(Mat3x4ConversionConstructor, PromotesType)
 
 
 /** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
-TEST(Mat3x4ConversionConstructor, ReturnsNewInstance)
+TEST(Mat3x4TypeConversionTests, ReturnsNewInstance)
 {
     // Given a float matrix
     const fgm::Mat3x4 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f);
@@ -82,7 +82,7 @@ TEST(Mat3x4ConversionConstructor, ReturnsNewInstance)
 /**
  * @brief Verify that the conversion constructor correctly demotes components from double to float.
  */
-TEST(Mat3x4ConversionConstructor, DemotesType)
+TEST(Mat3x4TypeConversionTests, DemotesType)
 {
     const fgm::Mat3x4 mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0);
 

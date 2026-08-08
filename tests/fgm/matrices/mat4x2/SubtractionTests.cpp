@@ -86,7 +86,7 @@ TYPED_TEST(Mat4x2SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 }
 
 
-TEST(Mat4x2Subtraction, MinusOperator_MixedType_PromotesType)
+TEST(Mat4x2SubtractionTests, MinusOperator_MixedType_PromotesType)
 {
     const fgm::Mat4x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.5f, 2.0f);
     const fgm::Mat4x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 1.0, 2.25);
@@ -105,7 +105,7 @@ TYPED_TEST(Mat4x2SubtractionTests, MinusEqualsOperator_ReturnsSameVectorWithDiff
 }
 
 
-TEST(Mat4x2Subtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Mat4x2SubtractionTests, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat4x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.5f, 2.0f);
     [[maybe_unused]] const fgm::Mat4x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 1.0, 2.25);

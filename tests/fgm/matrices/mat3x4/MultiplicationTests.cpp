@@ -109,7 +109,7 @@ namespace
  *     SCALAR MULTIPLICATION TESTS    *
  **************************************/
 
-TEST(Mat3x4ScalarMultiplication, TimesOperator_ByZeroReturnsZeroMatrix)
+TEST(Mat3x4ScalarMultiplicationTests, TimesOperator_ByZeroReturnsZeroMatrix)
 {
     const fgm::Mat3x4 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f);
 
@@ -118,7 +118,7 @@ TEST(Mat3x4ScalarMultiplication, TimesOperator_ByZeroReturnsZeroMatrix)
 }
 
 
-TEST(Mat3x4ScalarMultiplication, TimesOperator_ByOneReturnsOriginalMatrix)
+TEST(Mat3x4ScalarMultiplicationTests, TimesOperator_ByOneReturnsOriginalMatrix)
 {
     const fgm::Mat3x4 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f);
 
@@ -127,7 +127,7 @@ TEST(Mat3x4ScalarMultiplication, TimesOperator_ByOneReturnsOriginalMatrix)
 }
 
 
-TEST(Mat3x4ScalarMultiplication, TimesOperator_ByNegativeScalarFlipsSigns)
+TEST(Mat3x4ScalarMultiplicationTests, TimesOperator_ByNegativeScalarFlipsSigns)
 {
     const fgm::Mat3x4 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f, 3.5f, 4.0f, 12.5f, -1.0f, 33.0f, 12.0f };
     const fgm::Mat3x4 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f, -7.0f, -8.0f, -25.0f, 2.0f, -66.0f, -24.0f };
@@ -193,7 +193,7 @@ TYPED_TEST(Mat3x4ScalarMultiplicationTests, TimesOperator_MixedType_PromotesType
 }
 
 
-TEST(Mat3x4ScalarMultiplication, TimesEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Mat3x4ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat3x4 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f, 3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f);
     const double scalar = 5.0;
@@ -203,7 +203,7 @@ TEST(Mat3x4ScalarMultiplication, TimesEqualsOperator_MixedType_DoesNotPromoteTyp
 }
 
 
-TEST(Mat3x4ScalarMultiplication, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
+TEST(Mat3x4ScalarMultiplicationTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Mat3x4 mat(3, -1, 10, 5, 50, 12, 1, 0, 22, 12, 5, 11);
     const double scalar = 2.5;

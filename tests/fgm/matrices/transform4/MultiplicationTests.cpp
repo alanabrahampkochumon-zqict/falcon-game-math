@@ -69,7 +69,7 @@ namespace
      * @tparam T The scalar type (e.g., uint32_t, int32_t, float, double) used for the values.
      */
     template <typename T>
-    class Transform4VectorMultiplication: public testing::Test
+    class Transform4VectorMultiplicationTests: public testing::Test
     {
     protected:
         fgm::Transform4<T> _transform;
@@ -89,7 +89,7 @@ namespace
             _expectedIntVector = { T(30), T(32), T(13) };
         }
     };
-    TYPED_TEST_SUITE(Transform4VectorMultiplication, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Transform4VectorMultiplicationTests, SupportedArithmeticTypes);
 
 
     /**
@@ -98,7 +98,7 @@ namespace
      * @tparam T The scalar type (e.g., uint32_t, int32_t, float, double) used for the values.
      */
     template <typename T>
-    class Transform4PointMultiplication: public testing::Test
+    class Transform4PointMultiplicationTests: public testing::Test
     {
     protected:
         fgm::Transform4<T> _transform;
@@ -118,7 +118,7 @@ namespace
             _expectedIntPoint = { T(34), T(33), T(17) };
         }
     };
-    TYPED_TEST_SUITE(Transform4PointMultiplication, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Transform4PointMultiplicationTests, SupportedArithmeticTypes);
 
 
 
@@ -170,7 +170,7 @@ namespace
  * @brief Verify that the binary vector multiplication operation perform linear transformation
  *        and returns a new column vector(<x, y, z, 0>).
  */
-TYPED_TEST(Transform4VectorMultiplication, MatrixTimesVectorReturnsATransformedVector)
+TYPED_TEST(Transform4VectorMultiplicationTests, MatrixTimesVectorReturnsATransformedVector)
 {
     const auto transformedVector = this->_transform * this->_vec;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -184,7 +184,7 @@ TYPED_TEST(Transform4VectorMultiplication, MatrixTimesVectorReturnsATransformedV
 }
 
 
-TEST(Transform4VectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
+TEST(Transform4VectorMultiplicationTests, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
     const fgm::Transform4 mat{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
     const fgm::Vec3 vec{ 2, 1, 3 };
@@ -198,7 +198,7 @@ TEST(Transform4VectorMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPr
  * @brief Verify that the binary vector multiplication operation perform linear transformation
  *        and returns a new point(<x, y, z, 1>).
  */
-TYPED_TEST(Transform4PointMultiplication, MatrixTimesPointReturnsATransformedPoint)
+TYPED_TEST(Transform4PointMultiplicationTests, MatrixTimesPointReturnsATransformedPoint)
 {
     const auto transformedVector = this->_transform * this->_point;
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -212,7 +212,7 @@ TYPED_TEST(Transform4PointMultiplication, MatrixTimesPointReturnsATransformedPoi
 }
 
 
-TEST(Transform4PointMultiplication, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
+TEST(Transform4PointMultiplicationTests, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
     const fgm::Transform4 mat{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
     const fgm::Point3 point{ 2, 1, 3 };

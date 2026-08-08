@@ -95,9 +95,9 @@ namespace
      * @brief Test fixture for @ref fgm::Mat4x2 utilities, verifying across various integral types.
      */
     template <typename>
-    class Mat4x2IntegralUtility: public testing::Test
+    class Mat4x2IntegralUtilityTests: public testing::Test
     {};
-    TYPED_TEST_SUITE(Mat4x2IntegralUtility, SupportedIntegralTypes);
+    TYPED_TEST_SUITE(Mat4x2IntegralUtilityTests, SupportedIntegralTypes);
 
 
 
@@ -146,7 +146,7 @@ TEST_P(Mat4x2InfCheckerTests, ReturnTrueIfAnyElementIsInfinity)
 }
 
 
-TYPED_TEST(Mat4x2IntegralUtility, HasInf_ReturnsFalseForIntegrals)
+TYPED_TEST(Mat4x2IntegralUtilityTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Mat4x2(value, value, value, value, value, value, value, value).hasInf());
@@ -160,7 +160,7 @@ TEST_P(Mat4x2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 }
 
 
-TYPED_TEST(Mat4x2IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
+TYPED_TEST(Mat4x2IntegralUtilityTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Mat4x2<TypeParam>::hasInf(fgm::Mat4x2(value, value, value, value, value, value, value, value)));
@@ -179,7 +179,7 @@ TEST_P(Mat4x2NaNCheckerTests, ReturnTrueIfAnyElementIsNaN)
 }
 
 
-TYPED_TEST(Mat4x2IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
+TYPED_TEST(Mat4x2IntegralUtilityTests, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Mat4x2(value, value, value, value, value, value, value, value).hasNaN());
@@ -193,7 +193,7 @@ TEST_P(Mat4x2NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 }
 
 
-TYPED_TEST(Mat4x2IntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
+TYPED_TEST(Mat4x2IntegralUtilityTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Mat4x2<TypeParam>::hasNaN(fgm::Mat4x2(value, value, value, value, value, value, value, value)));

@@ -104,7 +104,7 @@ namespace
  *     SCALAR MULTIPLICATION TESTS    *
  **************************************/
 
-TEST(Mat4x3ScalarMultiplication, TimesOperator_ByZeroReturnsZeroMatrix)
+TEST(Mat4x3ScalarMultiplicationTests, TimesOperator_ByZeroReturnsZeroMatrix)
 {
     const fgm::Mat4x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f);
 
@@ -113,7 +113,7 @@ TEST(Mat4x3ScalarMultiplication, TimesOperator_ByZeroReturnsZeroMatrix)
 }
 
 
-TEST(Mat4x3ScalarMultiplication, TimesOperator_ByOneReturnsOriginalMatrix)
+TEST(Mat4x3ScalarMultiplicationTests, TimesOperator_ByOneReturnsOriginalMatrix)
 {
     const fgm::Mat4x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f);
 
@@ -122,7 +122,7 @@ TEST(Mat4x3ScalarMultiplication, TimesOperator_ByOneReturnsOriginalMatrix)
 }
 
 
-TEST(Mat4x3ScalarMultiplication, TimesOperator_ByNegativeScalarFlipsSigns)
+TEST(Mat4x3ScalarMultiplicationTests, TimesOperator_ByNegativeScalarFlipsSigns)
 {
     const fgm::Mat4x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f, -1.5f, 2.25f, 5.0f, 10.0f, -1.0f, -1.5f };
     const fgm::Mat4x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f, 3.0f, -4.5f, -10.0f, -20.f, 2.0f, 3.0f };
@@ -188,7 +188,7 @@ TYPED_TEST(Mat4x3ScalarMultiplicationTests, TimesOperator_MixedType_PromotesType
 }
 
 
-TEST(Mat4x3ScalarMultiplication, TimesEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Mat4x3ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat4x3 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f, 2.1f, 0.75f, -10.0f, -20.f, 2.0f, 3.0f);
     const double scalar = 5.0;
@@ -198,7 +198,7 @@ TEST(Mat4x3ScalarMultiplication, TimesEqualsOperator_MixedType_DoesNotPromoteTyp
 }
 
 
-TEST(Mat4x3ScalarMultiplication, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
+TEST(Mat4x3ScalarMultiplicationTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Mat4x3 mat(3, -1, 10, 5, 50, 12, 0, 5, 2, 4, 8, 10);
     const double scalar = 2.5;

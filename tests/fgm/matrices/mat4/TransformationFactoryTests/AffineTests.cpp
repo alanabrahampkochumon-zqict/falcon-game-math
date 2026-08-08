@@ -32,7 +32,7 @@ namespace
      * @tparam T The scalar type (e.g., int, long, float, double) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat4AffineFactory: public testing::Test
+    class Mat4AffineFactoryTests: public testing::Test
     {
     protected:
         fgm::Mat3<T> _linearTransform;
@@ -52,7 +52,7 @@ namespace
                              fgm::Vec4{ T(1.2398412349), T(12.1234892134), T(35.012342380), T(1) } };
         }
     };
-    TYPED_TEST_SUITE(Mat4AffineFactory, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat4AffineFactoryTests, SupportedArithmeticTypes);
 
 
 
@@ -81,7 +81,7 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TYPED_TEST(Mat4AffineFactory, ReturnsCombinedLinearTransformAndTranslation)
+TYPED_TEST(Mat4AffineFactoryTests, ReturnsCombinedLinearTransformAndTranslation)
 { EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat4<TypeParam>::makeAffine(this->_linearTransform, this->_translation)); }
 
 /** @} */

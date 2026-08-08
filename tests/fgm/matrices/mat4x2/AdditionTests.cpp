@@ -85,7 +85,7 @@ TYPED_TEST(Mat4x2AdditionTests, PlusOperator_ReturnsMatrixSum)
 }
 
 
-TEST(Mat4x2Addition, PlusOperator_MixedType_PromotesType)
+TEST(Mat4x2AdditionTests, PlusOperator_MixedType_PromotesType)
 {
     const fgm::Mat4x2 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ -3.0f, -4.0f, 12.0f, 0.0f } };
     const fgm::Mat4x2 mat2{
@@ -105,7 +105,7 @@ TYPED_TEST(Mat4x2AdditionTests, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 }
 
 
-TEST(Mat4x2Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Mat4x2AdditionTests, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat4x2 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ -3.0f, -4.0f, 12.0f, 0.0f } };
     const fgm::Mat4x2 mat2{
