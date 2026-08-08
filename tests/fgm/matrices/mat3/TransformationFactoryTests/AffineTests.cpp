@@ -10,8 +10,10 @@
 
 
 
-#include "../../mat2/Mat2TestSetup.h"
 #include "../Mat3TestSetup.h"
+
+#include <fgm/matrices/Mat2.h>
+
 
 /**
  * @addtogroup T_FGM_Mat3x3_Transforms
@@ -21,7 +23,7 @@
 namespace
 {
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Affine Transformation Factory.
+     * @brief Test fixture for @ref fgm::Mat3 Affine Transformation Factory.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */

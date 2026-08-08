@@ -24,7 +24,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Uniform Scale Factory.
+     * @brief Test fixture for @ref fgm::Mat3 Uniform Scale Factory.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */

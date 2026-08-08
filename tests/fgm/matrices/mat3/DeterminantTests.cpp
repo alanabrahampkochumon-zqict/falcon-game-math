@@ -48,7 +48,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Determinants with singular matrices.
+     * @brief Test fixture for @ref fgm::Mat3 Determinants with singular matrices.
      */
     class Mat3DeterminantSingularTests: public testing::TestWithParam<fgm::Mat3<float>>
     {};

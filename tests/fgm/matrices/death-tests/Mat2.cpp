@@ -42,6 +42,15 @@ namespace
 
 
     /**
+     * @brief Test fixture for @ref fgm::Mat2 invalid column indexing.
+     */
+    class Mat2ColumnIndexingTests: public testing::TestWithParam<std::size_t>
+    {};
+    INSTANTIATE_TEST_SUITE_P(Mat2OutOfBoundsColumnIndices, Mat2ColumnIndexingTests, testing::Values(3, 4, 100));
+
+
+
+    /**
      * @brief Test fixture for @ref fgm::Mat2 Division.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
@@ -62,15 +71,6 @@ namespace
         }
     };
     TYPED_TEST_SUITE(Mat2DivisionTests, SupportedArithmeticTypes);
-
-
-
-    /**
-     * @brief Test fixture for @ref fgm::Mat2 invalid column indexing.
-     */
-    class Mat2ColumnIndexingTests: public testing::TestWithParam<std::size_t>
-    {};
-    INSTANTIATE_TEST_SUITE_P(Mat2OutOfBoundsColumnIndices, Mat2ColumnIndexingTests, testing::Values(3, 4, 100));
 
 
 

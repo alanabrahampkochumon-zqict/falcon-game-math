@@ -50,7 +50,7 @@ namespace
 
 
 
-    /** @brief Test fixture for calculating @ref fgm::Mat2 inverse with singular matrices. */
+    /** @brief Test fixture for calculating @ref fgm::Mat3 inverse with singular matrices. */
     class Mat3InverseSingularTests: public testing::TestWithParam<fgm::Mat3<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
@@ -65,7 +65,7 @@ namespace
 
 
 
-    /** @brief Test fixture for @ref fgm::Mat2 inverse with NaN elements. */
+    /** @brief Test fixture for @ref fgm::Mat3 inverse with NaN elements. */
     class Mat3InverseNaNTests: public testing::TestWithParam<fgm::Mat3<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(Mat3NaNMatrixInverse, Mat3InverseNaNTests,

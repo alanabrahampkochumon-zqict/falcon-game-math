@@ -62,7 +62,6 @@ namespace
                                                                 fgm ::constants::NaN, fgm ::constants::NaN)));
 
 
-
     /**************************************
      *           STATIC TESTS             *
      **************************************/

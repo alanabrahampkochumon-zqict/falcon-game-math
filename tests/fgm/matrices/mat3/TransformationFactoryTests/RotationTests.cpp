@@ -78,7 +78,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Reflection Factory(Floating Point Numbers).
+     * @brief Test fixture for @ref fgm::Mat3 Reflection Factory(Floating Point Numbers).
      *
      * @tparam T The numeric type (float, double) for matrix values.
      */

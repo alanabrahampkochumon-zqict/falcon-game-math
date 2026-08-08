@@ -25,33 +25,33 @@
 namespace
 {
     /// @brief Parameterized Test Fixture for @ref fgm::Transform4 element access/mutation out-of-bounds.
-    class Transform4Indexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
+    class Transform4IndexingTests: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
     {
     public:
         fgm::Transform4<int> transform{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
     };
-    INSTANTIATE_TEST_SUITE_P(Transform4ElementAccessOutOfBoundsTests, Transform4Indexing,
+    INSTANTIATE_TEST_SUITE_P(Transform4ElementAccessOutOfBoundsTests, Transform4IndexingTests,
                              testing::Values(std::make_pair(3, 3), std::make_pair(3, 4), std::make_pair(4, 3),
                                              std::make_pair(100, 100)));
 
 
     /// @brief Parameterized Test Fixture for @ref fgm::Transform4 vector access/mutation out-of-bounds.
-    class Transform4VectorIndexing: public testing::TestWithParam<std::size_t>
+    class Transform4VectorIndexingTests: public testing::TestWithParam<std::size_t>
     {
     public:
         fgm::Transform4<int> transform{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
     };
-    INSTANTIATE_TEST_SUITE_P(Transform4VectorAccessOutOfBoundsTests, Transform4VectorIndexing,
+    INSTANTIATE_TEST_SUITE_P(Transform4VectorAccessOutOfBoundsTests, Transform4VectorIndexingTests,
                              testing::Values(5, 6, 100));
 
 
     /**
      * @brief Parameterized Test fixture for @ref fgm::Transform4 singular matrix inverse.
      */
-    class Transform4InverseSingular: public testing::TestWithParam<fgm::Transform4<float>>
+    class Transform4InverseSingularTests: public testing::TestWithParam<fgm::Transform4<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Transform4InverseTestSuite, Transform4InverseSingular,
+        Transform4InverseTestSuite, Transform4InverseSingularTests,
         ::testing::Values(fgm::Transform4{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 1.0f, 2.0f, 3.0f },
                                            fgm::Vec3{ 7.0f, 8.0f, 9.0f }, fgm::Point3{ 1.0f, 85.0f, 19.0f } },
                           fgm::Transform4{ fgm::Vec3{ 1.0f, 1.0f, 3.0f }, fgm::Vec3{ 2.0f, 2.0f, 3.0f },
@@ -75,7 +75,7 @@ namespace
  **************************************/
 
 /** @brief Verify that @ref fgm::Transform4 out-of-bounds column access triggers assert in debug mode. */
-TEST_P(Transform4VectorIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
+TEST_P(Transform4VectorIndexingTests, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(transform[col]), "");
@@ -83,14 +83,14 @@ TEST_P(Transform4VectorIndexing, OutOfBoundAccessTriggersAssertInDebugMode)
 
 
 /** @brief Verify that @ref fgm::Transform4 out-of-bounds row, column access triggers assert in debug mode. */
-TEST_P(Transform4Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
+TEST_P(Transform4IndexingTests, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(transform(row, col)), "");
 }
 
 /** @test Verify that @ref fgm::Transform4 out-of-bounds column mutation triggers assert in debug mode. */
-TEST_P(Transform4VectorIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
+TEST_P(Transform4VectorIndexingTests, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(transform[col] = fgm::Vec3<int>::zero()), "");
@@ -98,20 +98,20 @@ TEST_P(Transform4VectorIndexing, OutOfBoundMutationTriggersAssertInDebugMode)
 
 
 /** @test Verify that @ref fgm::Transform4 out-of-bounds row, column mutation triggers assert in debug mode. */
-TEST_P(Transform4Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
+TEST_P(Transform4IndexingTests, OutOfBoundMutationTriggersAssertInDebugMode)
 {
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(transform(row, col) = 5), "");
 }
 
-TEST_P(Transform4InverseSingular, TriggersAssertionInDebugMode)
+TEST_P(Transform4InverseSingularTests, TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(matrix.inverse()), "");
 }
 
 
-TEST_P(Transform4InverseSingular, StaticWrapper_TriggersAssertionInDebugMode)
+TEST_P(Transform4InverseSingularTests, StaticWrapper_TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Transform4<float>::inverse(matrix)), "");

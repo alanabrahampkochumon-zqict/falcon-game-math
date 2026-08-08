@@ -50,7 +50,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Division with NaN elements.
+     * @brief Test fixture for @ref fgm::Mat3 Division with NaN elements.
      */
     class Mat3DivisionNaNTests: public testing::TestWithParam<fgm::Mat3<float>>
     {};
@@ -84,7 +84,7 @@ namespace
         static_assert(DIV_RESULT_1(2, 2) == 9);
 
 
-        /// @test Verify that Mat2 safeDiv returns a valid matrix at compile time.
+        /// @test Verify that Mat3 safeDiv returns a valid matrix at compile time.
         constexpr fgm::Mat3 DIV_RESULT_2 = MAT.safeDiv(2);
         static_assert(DIV_RESULT_2(0, 0) == 1);
         static_assert(DIV_RESULT_2(0, 1) == 2);
@@ -96,7 +96,7 @@ namespace
         static_assert(DIV_RESULT_2(2, 1) == 8);
         static_assert(DIV_RESULT_2(2, 2) == 9);
 
-        /// @test Verify that Mat2 safeDiv (static wrapper) returns a valid matrix at compile time.
+        /// @test Verify that Mat3 safeDiv (static wrapper) returns a valid matrix at compile time.
         constexpr fgm::Mat3 DIV_RESULT_3 = fgm::Mat3<int>::safeDiv(MAT, 2);
         static_assert(DIV_RESULT_3(0, 0) == 1);
         static_assert(DIV_RESULT_3(0, 1) == 2);
