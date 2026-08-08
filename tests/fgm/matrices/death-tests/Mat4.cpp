@@ -31,9 +31,9 @@ namespace
     /**
      * @brief Test fixture for @ref fgm::Mat4 invalid (row, column) indices.
      */
-    class Mat4Indexing: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
+    class Mat4IndexingTests: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
     {};
-    INSTANTIATE_TEST_SUITE_P(Mat4Tests, Mat4Indexing,
+    INSTANTIATE_TEST_SUITE_P(Mat4OutOfBoundsRowColumnIndices, Mat4IndexingTests,
                              testing::Values(std::make_pair(5, 5), std::make_pair(4, 5), std::make_pair(5, 4),
                                              std::make_pair(100, 100)));
 
@@ -41,9 +41,9 @@ namespace
     /**
      * @brief Test fixture for @ref fgm::Mat4 invalid column indices.
      */
-    class Mat4ColumnIndexing: public testing::TestWithParam<std::size_t>
+    class Mat4ColumnIndexingTests: public testing::TestWithParam<std::size_t>
     {};
-    INSTANTIATE_TEST_SUITE_P(Mat4Tests, Mat4ColumnIndexing, testing::Values(5, 6, 100));
+    INSTANTIATE_TEST_SUITE_P(Mat4OutOfBoundsColumnIndices, Mat4ColumnIndexingTests, testing::Values(5, 6, 100));
 
 
 
@@ -132,28 +132,28 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TEST_P(Mat4ColumnIndexing, OutOfBoundAccessTriggers_AssertInDebugMode)
+TEST_P(Mat4ColumnIndexingTests, OutOfBoundAccessTriggers_AssertInDebugMode)
 {
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col]), "");
 }
 
 
-TEST_P(Mat4Indexing, OutOfBoundAccessTriggers_AssertInDebugMode)
+TEST_P(Mat4IndexingTests, OutOfBoundAccessTriggers_AssertInDebugMode)
 {
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col)), "");
 }
 
 
-TEST_P(Mat4ColumnIndexing, OutOfBoundMutation_TriggersAssertInDebugMode)
+TEST_P(Mat4ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
     const auto col = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec4<int>::zero()), "");
 }
 
 
-TEST_P(Mat4Indexing, OutOfBoundMutationTriggers_AssertInDebugMode)
+TEST_P(Mat4IndexingTests, OutOfBoundMutationTriggers_AssertInDebugMode)
 {
     const auto [row, col] = GetParam();
     EXPECT_DEBUG_DEATH(static_cast<void>(mat(row, col) = 5), "");

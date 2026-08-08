@@ -152,7 +152,7 @@ namespace
  *            RUNTIME TESTS           *
  **************************************/
 
-TYPED_TEST(Mat4InitializationTests, EmptyConstructorReturnsIdentityMatrix)
+TYPED_TEST(Mat4InitializationTests, EmptyCtor_ReturnsIdentityMatrix)
 {
     constexpr fgm::Mat4<TypeParam> matrix{};
 
@@ -160,7 +160,7 @@ TYPED_TEST(Mat4InitializationTests, EmptyConstructorReturnsIdentityMatrix)
 }
 
 
-TYPED_TEST(Mat4InitializationTests, ParameterizedConstructorInitializesMatrixWithElements)
+TYPED_TEST(Mat4InitializationTests, ParameterizedCtor_InitializesMatrixWithElements)
 {
     const fgm::Mat4<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
                                       this->_elements[4], this->_elements[5], this->_elements[6], this->_elements[7],
@@ -171,14 +171,14 @@ TYPED_TEST(Mat4InitializationTests, ParameterizedConstructorInitializesMatrixWit
 }
 
 
-TYPED_TEST(Mat4InitializationTests, ParameterizedConstructorInitializesMatrixWithVectors)
+TYPED_TEST(Mat4InitializationTests, ParameterizedCtor_InitializesMatrixWithVectors)
 {
     const fgm::Mat4<TypeParam> matrix(this->_col0, this->_col1, this->_col2, this->_col3);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
 
-TYPED_TEST(Mat4InitializationTests, ParameterizedConstructorInitializesDiagonalMatrix)
+TYPED_TEST(Mat4InitializationTests, ParameterizedCtor_InitializesDiagonalMatrix)
 {
     const fgm::Mat4<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2, this->_diagonal3);
     EXPECT_MAT_CONTAINS(this->_diagonalElements, matrix);

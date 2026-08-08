@@ -76,72 +76,72 @@ namespace
 
     namespace static_tests
     {
-    constexpr fgm::Mat4 MAT(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32);
+        constexpr fgm::Mat4 MAT(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32);
 
         /// @test Verify that Mat4 division operator returns a valid matrix at compile time.
-    constexpr fgm::Mat4 DIV_RESULT_1 = MAT / 2;
-    static_assert(DIV_RESULT_1(0, 0) == 1);
-    static_assert(DIV_RESULT_1(0, 1) == 2);
-    static_assert(DIV_RESULT_1(0, 2) == 3);
-    static_assert(DIV_RESULT_1(0, 3) == 4);
-    static_assert(DIV_RESULT_1(1, 0) == 5);
-    static_assert(DIV_RESULT_1(1, 1) == 6);
-    static_assert(DIV_RESULT_1(1, 2) == 7);
-    static_assert(DIV_RESULT_1(1, 3) == 8);
-    static_assert(DIV_RESULT_1(2, 0) == 9);
-    static_assert(DIV_RESULT_1(2, 1) == 10);
-    static_assert(DIV_RESULT_1(2, 2) == 11);
-    static_assert(DIV_RESULT_1(2, 3) == 12);
-    static_assert(DIV_RESULT_1(3, 0) == 13);
-    static_assert(DIV_RESULT_1(3, 1) == 14);
-    static_assert(DIV_RESULT_1(3, 2) == 15);
-    static_assert(DIV_RESULT_1(3, 3) == 16);
+        constexpr fgm::Mat4 DIV_RESULT_1 = MAT / 2;
+        static_assert(DIV_RESULT_1(0, 0) == 1);
+        static_assert(DIV_RESULT_1(0, 1) == 2);
+        static_assert(DIV_RESULT_1(0, 2) == 3);
+        static_assert(DIV_RESULT_1(0, 3) == 4);
+        static_assert(DIV_RESULT_1(1, 0) == 5);
+        static_assert(DIV_RESULT_1(1, 1) == 6);
+        static_assert(DIV_RESULT_1(1, 2) == 7);
+        static_assert(DIV_RESULT_1(1, 3) == 8);
+        static_assert(DIV_RESULT_1(2, 0) == 9);
+        static_assert(DIV_RESULT_1(2, 1) == 10);
+        static_assert(DIV_RESULT_1(2, 2) == 11);
+        static_assert(DIV_RESULT_1(2, 3) == 12);
+        static_assert(DIV_RESULT_1(3, 0) == 13);
+        static_assert(DIV_RESULT_1(3, 1) == 14);
+        static_assert(DIV_RESULT_1(3, 2) == 15);
+        static_assert(DIV_RESULT_1(3, 3) == 16);
 
 
         /// @test Verify that Mat4 safeDiv returns a valid matrix at compile time.
-    constexpr fgm::Mat4 DIV_RESULT_2 = MAT.safeDiv(2);
-    static_assert(DIV_RESULT_2(0, 0) == 1);
-    static_assert(DIV_RESULT_2(0, 1) == 2);
-    static_assert(DIV_RESULT_2(0, 2) == 3);
-    static_assert(DIV_RESULT_2(0, 3) == 4);
-    static_assert(DIV_RESULT_2(1, 0) == 5);
-    static_assert(DIV_RESULT_2(1, 1) == 6);
-    static_assert(DIV_RESULT_2(1, 2) == 7);
-    static_assert(DIV_RESULT_2(1, 3) == 8);
-    static_assert(DIV_RESULT_2(2, 0) == 9);
-    static_assert(DIV_RESULT_2(2, 1) == 10);
-    static_assert(DIV_RESULT_2(2, 2) == 11);
-    static_assert(DIV_RESULT_2(2, 3) == 12);
-    static_assert(DIV_RESULT_2(3, 0) == 13);
-    static_assert(DIV_RESULT_2(3, 1) == 14);
-    static_assert(DIV_RESULT_2(3, 2) == 15);
-    static_assert(DIV_RESULT_2(3, 3) == 16);
+        constexpr fgm::Mat4 DIV_RESULT_2 = MAT.safeDiv(2);
+        static_assert(DIV_RESULT_2(0, 0) == 1);
+        static_assert(DIV_RESULT_2(0, 1) == 2);
+        static_assert(DIV_RESULT_2(0, 2) == 3);
+        static_assert(DIV_RESULT_2(0, 3) == 4);
+        static_assert(DIV_RESULT_2(1, 0) == 5);
+        static_assert(DIV_RESULT_2(1, 1) == 6);
+        static_assert(DIV_RESULT_2(1, 2) == 7);
+        static_assert(DIV_RESULT_2(1, 3) == 8);
+        static_assert(DIV_RESULT_2(2, 0) == 9);
+        static_assert(DIV_RESULT_2(2, 1) == 10);
+        static_assert(DIV_RESULT_2(2, 2) == 11);
+        static_assert(DIV_RESULT_2(2, 3) == 12);
+        static_assert(DIV_RESULT_2(3, 0) == 13);
+        static_assert(DIV_RESULT_2(3, 1) == 14);
+        static_assert(DIV_RESULT_2(3, 2) == 15);
+        static_assert(DIV_RESULT_2(3, 3) == 16);
 
 
         /// @test Verify that Mat4 safeDiv (static wrapper) returns a valid matrix at compile time.
-    constexpr fgm::Mat4 DIV_RESULT_3 = fgm::Mat4<int>::safeDiv(MAT, 2);
-    static_assert(DIV_RESULT_3(0, 0) == 1);
-    static_assert(DIV_RESULT_3(0, 1) == 2);
-    static_assert(DIV_RESULT_3(0, 2) == 3);
-    static_assert(DIV_RESULT_3(0, 3) == 4);
-    static_assert(DIV_RESULT_3(1, 0) == 5);
-    static_assert(DIV_RESULT_3(1, 1) == 6);
-    static_assert(DIV_RESULT_3(1, 2) == 7);
-    static_assert(DIV_RESULT_3(1, 3) == 8);
-    static_assert(DIV_RESULT_3(2, 0) == 9);
-    static_assert(DIV_RESULT_3(2, 1) == 10);
-    static_assert(DIV_RESULT_3(2, 2) == 11);
-    static_assert(DIV_RESULT_3(2, 3) == 12);
-    static_assert(DIV_RESULT_3(3, 0) == 13);
-    static_assert(DIV_RESULT_3(3, 1) == 14);
-    static_assert(DIV_RESULT_3(3, 2) == 15);
-    static_assert(DIV_RESULT_3(3, 3) == 16);
+        constexpr fgm::Mat4 DIV_RESULT_3 = fgm::Mat4<int>::safeDiv(MAT, 2);
+        static_assert(DIV_RESULT_3(0, 0) == 1);
+        static_assert(DIV_RESULT_3(0, 1) == 2);
+        static_assert(DIV_RESULT_3(0, 2) == 3);
+        static_assert(DIV_RESULT_3(0, 3) == 4);
+        static_assert(DIV_RESULT_3(1, 0) == 5);
+        static_assert(DIV_RESULT_3(1, 1) == 6);
+        static_assert(DIV_RESULT_3(1, 2) == 7);
+        static_assert(DIV_RESULT_3(1, 3) == 8);
+        static_assert(DIV_RESULT_3(2, 0) == 9);
+        static_assert(DIV_RESULT_3(2, 1) == 10);
+        static_assert(DIV_RESULT_3(2, 2) == 11);
+        static_assert(DIV_RESULT_3(2, 3) == 12);
+        static_assert(DIV_RESULT_3(3, 0) == 13);
+        static_assert(DIV_RESULT_3(3, 1) == 14);
+        static_assert(DIV_RESULT_3(3, 2) == 15);
+        static_assert(DIV_RESULT_3(3, 3) == 16);
 
 
-    // Matrix Try Division
-    // NOT available at compile time due to [out] parameter (OperationStatus).
+        // Matrix Try Division
+        // NOT available at compile time due to [out] parameter (OperationStatus).
 
-} // namespace
+    } // namespace static_tests
 } // namespace
 
 

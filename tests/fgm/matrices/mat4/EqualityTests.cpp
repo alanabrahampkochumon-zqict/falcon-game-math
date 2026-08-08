@@ -520,10 +520,8 @@ TYPED_TEST(Mat4EqualityTests, NotEqualsOperator_DifferentMatricesReturnTrue)
 
 TEST(Mat4EqualityTests, NotEqualsOperator_IdenticalBooleanMatricesReturnFalse)
 {
-
     const fgm::Mat4 matA(true, false, true, false);
     const fgm::Mat4 matB(true, false, true, false);
-
 
     const bool inequality = matA != matB;
     EXPECT_FALSE(inequality);

@@ -13,114 +13,139 @@
 
 
 
-/**************************************
- *                                    *
- *                SETUP               *
- *                                    *
- **************************************/
-
-template <typename T>
-    requires std::floating_point<T>
-struct Mat4x2UtilityParams
-{
-    fgm::Mat4x2<T> mat;
-    bool expected;
-};
-/** @brief Test fixture for @ref fgm::Mat4x2 infinity checker, parameterized by @ref VectorUtilityParams */
-class Mat4x2InfChecker: public ::testing::TestWithParam<Mat4x2UtilityParams<float>>
-{};
-
-/** @brief Test fixture for @ref fgm::Mat4x2 NaN checker, parameterized by @ref VectorUtilityParams */
-class Mat4x2NaNChecker: public ::testing::TestWithParam<Mat4x2UtilityParams<float>>
-{};
-
-
-template <typename T>
-class Mat4x2IntegralUtility: public ::testing::Test
-{};
-/** @brief Test fixture for @ref fgm::Mat4x2 utilities, parameterized by @ref SupportedIntegralTypes */
-TYPED_TEST_SUITE(Mat4x2IntegralUtility, SupportedIntegralTypes);
-
-
-
 /**
  * @addtogroup T_FGM_Mat4x2_Utils
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
 namespace
 {
-    constexpr fgm::Mat4x2 INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
-    constexpr fgm::Mat4x2 MAT(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
 
-
-    /** @brief Verify that the matrix hasNaN utility is available at compile time. */
-    namespace
+    template <typename T>
+        requires std::floating_point<T>
+    struct Mat4x2UtilityParams
     {
-        /// Member functions
+        fgm::Mat4x2<T> mat;
+        bool expected;
+    };
+
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat4x2 Infinity Checking.
+     */
+    class Mat4x2InfCheckerTests: public testing::TestWithParam<Mat4x2UtilityParams<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(
+        Mat4UtilsInfMatrices, Mat4x2InfCheckerTests,
+        ::testing::Values(
+            Mat4x2UtilityParams{ fgm::Mat4x2(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                                             fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                                             fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
+                                             fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
+
+
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat4x2 NaN Checking.
+     */
+    class Mat4x2NaNCheckerTests: public testing::TestWithParam<Mat4x2UtilityParams<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(
+        Mat4UtilsNaNMatrices, Mat4x2NaNCheckerTests,
+        ::testing::Values(
+            Mat4x2UtilityParams{ fgm::Mat4x2(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
+                                             fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
+                                             fgm::constants::NaN, fgm::constants::NaN),
+                                 true },
+            Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
+
+
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat4x2 utilities, verifying across various integral types.
+     */
+    template <typename>
+    class Mat4x2IntegralUtility: public testing::Test
+    {};
+    TYPED_TEST_SUITE(Mat4x2IntegralUtility, SupportedIntegralTypes);
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Mat4x2 INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+        constexpr fgm::Mat4x2 NAN_MAT(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+        constexpr fgm::Mat4x2 MAT(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+
+
+        /** @brief Verify that the Mat4x2 hasNaN return correct boolean at compile time. */
         static_assert(MAT.hasNaN() == false);
+        static_assert(NAN_MAT.hasNaN() == true);
 
-        // Static functions
+        /** @brief Verify that the Mat4x2 hasNaN (static wrapper) return correct boolean at compile time. */
         static_assert(fgm::Mat4x2<float>::hasNaN(MAT) == false);
-    } // namespace
+        static_assert(fgm::Mat4x2<float>::hasNaN(NAN_MAT) == true);
 
 
-    /** @brief Verify that the matrix hasInf utility is available at compile time. */
-    namespace
-    {
-        // Member functions
+        /** @brief Verify that the Mat4x2 hasInf return correct boolean at compile time. */
         static_assert(INF_MAT.hasInf() == true);
         static_assert(MAT.hasInf() == false);
 
-        // Static functions
+        /** @brief Verify that the Mat4x2 hasInf (static wrapper) return correct boolean at compile time. */
         static_assert(fgm::Mat4x2<float>::hasInf(INF_MAT) == true);
         static_assert(fgm::Mat4x2<float>::hasInf(MAT) == false);
-    } // namespace
+
+    } // namespace static_tests
 
 } // namespace
 
 
+
 /**************************************
- *                                    *
- *      INFINITY CHECKER TESTS        *
- *                                    *
+ *         INFINITY CHECKER           *
  **************************************/
 
-/**
- * @brief Verify that @ref std:: Mat4x2::hasInf returns  `true` if any of elements are IEE754 infinity
- *        and `false` otherwise.
- */
-TEST_P(Mat4x2InfChecker, ReturnTrueIfAnyElementIsInfinity)
+TEST_P(Mat4x2InfCheckerTests, ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasInf());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Mat4x2InfCheckerTestSuite, Mat4x2InfChecker,
-    ::testing::Values(
-        Mat4x2UtilityParams{ fgm::Mat4x2(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                         fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                         fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                         fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
-                             true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
-/** @brief Verify that @ref std:: Mat4x2::hasInf returns `false` for integral types. */
 TYPED_TEST(Mat4x2IntegralUtility, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -128,18 +153,13 @@ TYPED_TEST(Mat4x2IntegralUtility, HasInf_ReturnsFalseForIntegrals)
 }
 
 
-/**
- * @brief Verify that the static variant of @ref std:: Mat4x2::hasInf returns  `true` if any of elements are IEE754
- *        infinity and `false` otherwise.
- */
-TEST_P(Mat4x2InfChecker, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
+TEST_P(Mat4x2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, fgm::Mat4x2<float>::hasInf(mat));
 }
 
 
-/** @brief Verify that the static variant of @ref std:: Mat4x2::hasInf returns `false` for integral types. */
 TYPED_TEST(Mat4x2IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -147,41 +167,18 @@ TYPED_TEST(Mat4x2IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 }
 
 
+
 /**************************************
- *                                    *
  *         NAN CHECKER TESTS          *
- *                                    *
  **************************************/
 
-/**
- * @brief Verify that @ref std:: Mat4x2::hasNaN returns  `true` if any of elements are IEE754 NaN(Not-a-Number)
- *       and `false` otherwise.
- */
-TEST_P(Mat4x2NaNChecker, ReturnTrueIfAnyElementIsNaN)
+TEST_P(Mat4x2NaNCheckerTests, ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, mat.hasNaN());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Mat4x2NaNCheckerTestSuite, Mat4x2NaNChecker,
-    ::testing::Values(
-        Mat4x2UtilityParams{ fgm::Mat4x2(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
-                                         fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
-                                         fgm::constants::NaN, fgm::constants::NaN),
-                             true },
-        Mat4x2UtilityParams{ fgm::Mat4x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
-/** @brief Verify that @ref std:: Mat4x2::hasNaN returns `false` for integral types. */
 TYPED_TEST(Mat4x2IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -189,18 +186,13 @@ TYPED_TEST(Mat4x2IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
 }
 
 
-/**
- * @brief Verify that the static variant of @ref std:: Mat4x2::hasNaN returns  `true` if any of elements are IEE754
- *        NaN(Not-a-Number) and `false` otherwise.
- */
-TEST_P(Mat4x2NaNChecker, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
+TEST_P(Mat4x2NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
     EXPECT_EQ(expected, fgm::Mat4x2<float>::hasNaN(mat));
 }
 
 
-/** @brief Verify that the static variant of @ref std:: Mat4x2::hasNaN returns `false` for integral types. */
 TYPED_TEST(Mat4x2IntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);

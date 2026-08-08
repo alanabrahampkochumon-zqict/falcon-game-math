@@ -22,9 +22,7 @@
 namespace
 {
     /**************************************
-     *                                    *
      *               SETUP                *
-     *                                    *
      **************************************/
 
     /**
@@ -52,12 +50,9 @@ namespace
 
 
     /**************************************
-     *                                    *
      *           STATIC TESTS             *
-     *                                    *
      **************************************/
 
-    /** @brief Verify that matrix transpose is available at compile time. */
     namespace static_tests
     {
         constexpr fgm::Mat4x2 MAT(1, 2, 3, 4, 5, 6, 7, 8);
@@ -89,9 +84,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
 TYPED_TEST(Mat4x2Transpose, Returns2x4MatrixWithRowAndColumnElementsExchanged)

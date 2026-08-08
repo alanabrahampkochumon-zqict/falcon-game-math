@@ -13,7 +13,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat3x3_Subtraction
+ * @addtogroup T_FGM_Mat4x4_Subtraction
  * @{
  */
 
@@ -65,28 +65,28 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat4 matA{ 8, 2, 12, 4, 15, -11, 23, -55, 12, 10, 11, 19, 20, 22, 15, 16 };
-        constexpr fgm::Mat4 matB{ 80, -5, 15, 3, 1, -13, 0, 55, 38, 33, -12, 10, 59, 11, 15, -16 };
-        constexpr fgm::Mat4 binaryDiff = matA - matB;
+        constexpr fgm::Mat4 MATA{ 8, 2, 12, 4, 15, -11, 23, -55, 12, 10, 11, 19, 20, 22, 15, 16 };
+        constexpr fgm::Mat4 MATB{ 80, -5, 15, 3, 1, -13, 0, 55, 38, 33, -12, 10, 59, 11, 15, -16 };
+        constexpr fgm::Mat4 BINARY_DIFF = MATA - MATB;
 
 
         /** @test Verify that matrix subtraction operations return a valid matrix at compile time. */
-        static_assert(binaryDiff(0, 0) == -72);
-        static_assert(binaryDiff(0, 1) == 7);
-        static_assert(binaryDiff(0, 2) == -3);
-        static_assert(binaryDiff(0, 3) == 1);
-        static_assert(binaryDiff(1, 0) == 14);
-        static_assert(binaryDiff(1, 1) == 2);
-        static_assert(binaryDiff(1, 2) == 23);
-        static_assert(binaryDiff(1, 3) == -110);
-        static_assert(binaryDiff(2, 0) == -26);
-        static_assert(binaryDiff(2, 1) == -23);
-        static_assert(binaryDiff(2, 2) == 23);
-        static_assert(binaryDiff(2, 3) == 9);
-        static_assert(binaryDiff(3, 0) == -39);
-        static_assert(binaryDiff(3, 1) == 11);
-        static_assert(binaryDiff(3, 2) == 0);
-        static_assert(binaryDiff(3, 3) == 32);
+        static_assert(BINARY_DIFF(0, 0) == -72);
+        static_assert(BINARY_DIFF(0, 1) == 7);
+        static_assert(BINARY_DIFF(0, 2) == -3);
+        static_assert(BINARY_DIFF(0, 3) == 1);
+        static_assert(BINARY_DIFF(1, 0) == 14);
+        static_assert(BINARY_DIFF(1, 1) == 2);
+        static_assert(BINARY_DIFF(1, 2) == 23);
+        static_assert(BINARY_DIFF(1, 3) == -110);
+        static_assert(BINARY_DIFF(2, 0) == -26);
+        static_assert(BINARY_DIFF(2, 1) == -23);
+        static_assert(BINARY_DIFF(2, 2) == 23);
+        static_assert(BINARY_DIFF(2, 3) == 9);
+        static_assert(BINARY_DIFF(3, 0) == -39);
+        static_assert(BINARY_DIFF(3, 1) == 11);
+        static_assert(BINARY_DIFF(3, 2) == 0);
+        static_assert(BINARY_DIFF(3, 3) == 32);
 
     } // namespace static_tests
 } // namespace

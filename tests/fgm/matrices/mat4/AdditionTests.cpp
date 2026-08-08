@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4x4 Addition.
+     * @brief Test fixture for @ref fgm::Mat4 Addition.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
