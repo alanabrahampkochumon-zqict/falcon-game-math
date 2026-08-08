@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 09, 2026
  *
- * @brief Verify @ref fgm::Mat3 reflection factory logic.
+ * @brief Verify @ref fgm::Mat2 reflection factory logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

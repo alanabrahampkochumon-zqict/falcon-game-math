@@ -18,49 +18,42 @@
  * @{
  */
 
-/**************************************
- *                                    *
- *           STATIC TESTS             *
- *                                    *
- **************************************/
-
-/** @brief Verify that the matrix can be type promoted and demoted at compile time. */
 namespace
 {
-    constexpr fgm::Mat3 MAT(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
+    /**************************************
+     *           STATIC TESTS             *
+     **************************************/
 
-    // Verify that the matrix can be type promoted at compile time.
-    constexpr fgm::Mat3<double> MAT_D(MAT);
-    static_assert(std::is_same_v<decltype(MAT_D)::value_type, double>);
+    namespace static_tests
+    {
+        constexpr fgm::Mat3 MAT(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
-    // Verify that the matrix can be type demoted at compile time.
-    constexpr fgm::Mat3<int> MATI(MAT);
-    static_assert(std::is_same_v<decltype(MATI)::value_type, int>);
+
+        /// @test Verify that the matrix can be type promoted at compile time.
+        constexpr fgm::Mat3<double> MAT_D(MAT);
+        static_assert(std::is_same_v<decltype(MAT_D)::value_type, double>);
+
+        /// @test Verify that the matrix can be type demoted at compile time.
+        constexpr fgm::Mat3<int> MATI(MAT);
+        static_assert(std::is_same_v<decltype(MATI)::value_type, int>);
+    } // namespace static_tests
 } // namespace
 
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-/**
- * @brief Verify that the conversion constructor correctly promotes components from float to double.
- */
-TEST(Mat3ConversionConstructor, PromotesType)
+TEST(Mat3TypeConversionTests, ConversionCtor_PromotesType)
 {
     const fgm::Mat3 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
-
     [[maybe_unused]] const fgm::Mat3<double> mat2(mat1);
-
     static_assert(std::is_same_v<decltype(mat2)::value_type, double>);
 }
 
 
-/** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
-TEST(Mat3ConversionConstructor, ReturnsNewInstance)
+TEST(Mat3TypeConversionTests, ConversionCtor_ReturnsNewInstance)
 {
     // Given a float matrix
     const fgm::Mat3 mat1(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
@@ -78,15 +71,10 @@ TEST(Mat3ConversionConstructor, ReturnsNewInstance)
 }
 
 
-/**
- * @brief Verify that the conversion constructor correctly demotes components from double to float.
- */
-TEST(Mat3ConversionConstructor, DemotesType)
+TEST(Mat3TypeConversionTests, ConversionCtor_DemotesType)
 {
     const fgm::Mat3 mat1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
-
     [[maybe_unused]] const fgm::Mat3<float> mat2(mat1);
-
     static_assert(std::is_same_v<decltype(mat2)::value_type, float>);
 }
 

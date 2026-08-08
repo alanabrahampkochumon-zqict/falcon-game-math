@@ -76,7 +76,7 @@ namespace
  * @brief Verify that the binary subtraction operator perform an element-wise subtraction and
  *       returns a new matrix instance.
  */
-TYPED_TEST(Mat3x2Subtraction, MinusOperator_ReturnsDifference)
+TYPED_TEST(Mat3x2Subtraction, MinusOperator_ReturnsMatrixDifference)
 {
     const fgm::Mat3x2 difference = this->_matA - this->_matB;
 
@@ -88,7 +88,7 @@ TYPED_TEST(Mat3x2Subtraction, MinusOperator_ReturnsDifference)
  * @brief Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Mat3x2Subtraction, MixedTypeSubtractionPromotesType)
+TEST(Mat3x2Subtraction, MinusOperator_MixedType_PromotesType)
 {
     const fgm::Mat3x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
     const fgm::Mat3x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);

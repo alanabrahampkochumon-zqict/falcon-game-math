@@ -293,66 +293,66 @@ TYPED_TEST_SUITE(Mat4FloatRotation, SupportedFloatingPointTypes);
  **************************************/
 
 /** @brief Verify that rotation transformation factory for x returns a rotation matrix. */
-TYPED_TEST(Mat4Rotation, X_ReturnsRotationMatrix)
+TYPED_TEST(Mat4Rotation, X_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for x returns a rotation matrix for non-integral rotation values.
  */
-TYPED_TEST(Mat4FloatRotation, X_ReturnsRotationMatrix)
+TYPED_TEST(Mat4FloatRotation, X_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat4<TypeParam>::makeRotationX(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for x around arbitrary center includes translation to that point.
  */
-TYPED_TEST(Mat4FloatRotation, X_NonOriginCenter_ReturnsRotationMatrixWithTranslation)
+TYPED_TEST(Mat4FloatRotation, X_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
 { EXPECT_MAT_EQ(this->_expectedMatXCenter, fgm::Mat4<TypeParam>::makeRotationX(this->_angle, this->_center)); }
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
-TYPED_TEST(Mat4Rotation, Y_ReturnsRotationMatrix)
+TYPED_TEST(Mat4Rotation, Y_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for y returns a rotation matrix for non-integral rotation values.
  */
-TYPED_TEST(Mat4FloatRotation, Y_ReturnsRotationMatrix)
+TYPED_TEST(Mat4FloatRotation, Y_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat4<TypeParam>::makeRotationY(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for y around arbitrary center includes translation to that point.
  */
-TYPED_TEST(Mat4FloatRotation, Y_NonOriginCenter_ReturnsRotationMatrixWithTranslation)
+TYPED_TEST(Mat4FloatRotation, Y_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
 { EXPECT_MAT_EQ(this->_expectedMatYCenter, fgm::Mat4<TypeParam>::makeRotationY(this->_angle, this->_center)); }
 
 
 /** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
-TYPED_TEST(Mat4Rotation, Z_ReturnsRotationMatrix)
+TYPED_TEST(Mat4Rotation, Z_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for z returns a rotation matrix for non-integral rotation values.
  */
-TYPED_TEST(Mat4FloatRotation, Z_ReturnsRotationMatrix)
+TYPED_TEST(Mat4FloatRotation, Z_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat4<TypeParam>::makeRotationZ(this->_angle)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for z around arbitrary center includes translation to that point.
  */
-TYPED_TEST(Mat4FloatRotation, Z_NonOriginCenter_ReturnsRotationMatrixWithTranslation)
+TYPED_TEST(Mat4FloatRotation, Z_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
 { EXPECT_MAT_EQ(this->_expectedMatZCenter, fgm::Mat4<TypeParam>::makeRotationZ(this->_angle, this->_center)); }
 
 
 /**
  * @brief Verify that rotation transformation factory for an axis returns a rotation matrix.
  */
-TYPED_TEST(Mat4FloatRotation, AxisAligned_ReturnsRotationMatrix)
+TYPED_TEST(Mat4FloatRotation, AxisAligned_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedAxisRotation, fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis)); }
 
 
@@ -360,7 +360,7 @@ TYPED_TEST(Mat4FloatRotation, AxisAligned_ReturnsRotationMatrix)
  * @brief Verify that rotation transformation factory for an axis and around an arbitrary center
  *        returns a rotation matrix.
  */
-TYPED_TEST(Mat4FloatRotation, AxisAligned_NonOriginCenter_ReturnsRotationMatrixWithTranslation)
+TYPED_TEST(Mat4FloatRotation, AxisAligned_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
 {
     EXPECT_MAT_EQ(this->_expectedAxisRotationCenter,
                   fgm::Mat4<TypeParam>::makeRotation(this->_angle, this->_axis, this->_center));

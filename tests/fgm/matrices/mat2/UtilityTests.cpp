@@ -53,7 +53,6 @@ namespace
      */
     class Mat2NaNCheckerTests: public testing::TestWithParam<Mat2UtilityParams<float>>
     {};
-    TYPED_TEST_SUITE(Mat2UtilsIntTests, SupportedIntegralTypes);
     INSTANTIATE_TEST_SUITE_P(
         Mat2NaNTestMatrices, Mat2NaNCheckerTests,
         ::testing::Values(Mat2UtilityParams{ fgm::Mat2(fgm::constants::NaN, 1.0f), true },
@@ -73,6 +72,7 @@ namespace
     template <typename>
     class Mat2UtilsIntTests: public testing::Test
     {};
+    TYPED_TEST_SUITE(Mat2UtilsIntTests, SupportedIntegralTypes);
 
 
 

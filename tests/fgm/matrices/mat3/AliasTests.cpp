@@ -28,7 +28,7 @@ namespace
     static_assert(std::is_same_v<fgm::Mat3B, fgm::Mat3<int8_t>> && "Mat3B must be an alias of Mat3<int8_t>");
 
 
-    /** Verify @ref fgm::Mat3UB has `int8_t` value_type. */
+    /** Verify @ref fgm::Mat3UB has `uint8_t` value_type. */
     static_assert(std::is_same_v<fgm::Mat3UB::value_type, uint8_t> && "Mat3UB must contain uint8_t elements");
     static_assert(std::is_same_v<fgm::Mat3UB, fgm::Mat3<uint8_t>> && "Mat3UB must be an alias of Mat3<uint8_t>");
 

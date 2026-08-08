@@ -13,69 +13,75 @@
 
 
 
-template <typename T>
-class Mat3Constants: public testing::Test
-{};
-/** @brief Test fixture for @ref fgm::Mat3 constants, parameterized @ref SupportedArithmeticTypes.*/
-TYPED_TEST_SUITE(Mat3Constants, SupportedArithmeticTypes);
-
-
-
 /**
  * @addtogroup T_FGM_Mat3x3_Constant
  * @{
  */
 
-/**************************************
- *                                    *
- *           STATIC TESTS             *
- *                                    *
- **************************************/
-
-/** @brief Verify that @ref fgm::Mat3 constants are available at compile time. */
 namespace
 {
-    // Verify identity matrix
-    static_assert(fgm::Mat3<int>::identity()(0, 0) == 1);
-    static_assert(fgm::Mat3<int>::identity()(0, 1) == 0);
-    static_assert(fgm::Mat3<int>::identity()(0, 2) == 0);
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
 
-    static_assert(fgm::Mat3<int>::identity()(1, 0) == 0);
-    static_assert(fgm::Mat3<int>::identity()(1, 1) == 1);
-    static_assert(fgm::Mat3<int>::identity()(1, 2) == 0);
+    /**
+     * @brief Test fixture for @ref fgm::Mat3 Constants.
+     */
+    template <typename>
+    class Mat3ConstantsTests: public testing::Test
+    {};
+    TYPED_TEST_SUITE(Mat3ConstantsTests, SupportedArithmeticTypes);
 
-    static_assert(fgm::Mat3<int>::identity()(2, 0) == 0);
-    static_assert(fgm::Mat3<int>::identity()(2, 1) == 0);
-    static_assert(fgm::Mat3<int>::identity()(2, 2) == 1);
 
 
-    // Verify zero matrix
-    static_assert(fgm::Mat3<int>::zero()(0, 0) == 0);
-    static_assert(fgm::Mat3<int>::zero()(0, 1) == 0);
-    static_assert(fgm::Mat3<int>::zero()(0, 2) == 0);
+    /**************************************
+     *           STATIC TESTS             *
+     **************************************/
 
-    static_assert(fgm::Mat3<int>::zero()(1, 0) == 0);
-    static_assert(fgm::Mat3<int>::zero()(1, 1) == 0);
-    static_assert(fgm::Mat3<int>::zero()(1, 2) == 0);
+    namespace static_tests
+    {
+        /// @test Verify that Mat3::identity() returns an identity matrix at compile time.
 
-    static_assert(fgm::Mat3<int>::zero()(2, 0) == 0);
-    static_assert(fgm::Mat3<int>::zero()(2, 1) == 0);
-    static_assert(fgm::Mat3<int>::zero()(2, 2) == 0);
+        static_assert(fgm::Mat3<int>::identity()(0, 0) == 1);
+        static_assert(fgm::Mat3<int>::identity()(0, 1) == 0);
+        static_assert(fgm::Mat3<int>::identity()(0, 2) == 0);
+
+        static_assert(fgm::Mat3<int>::identity()(1, 0) == 0);
+        static_assert(fgm::Mat3<int>::identity()(1, 1) == 1);
+        static_assert(fgm::Mat3<int>::identity()(1, 2) == 0);
+
+        static_assert(fgm::Mat3<int>::identity()(2, 0) == 0);
+        static_assert(fgm::Mat3<int>::identity()(2, 1) == 0);
+        static_assert(fgm::Mat3<int>::identity()(2, 2) == 1);
+
+
+        /// @test Verify that Mat3::zero() returns a zero matrix at compile time.
+
+        static_assert(fgm::Mat3<int>::zero()(0, 0) == 0);
+        static_assert(fgm::Mat3<int>::zero()(0, 1) == 0);
+        static_assert(fgm::Mat3<int>::zero()(0, 2) == 0);
+
+        static_assert(fgm::Mat3<int>::zero()(1, 0) == 0);
+        static_assert(fgm::Mat3<int>::zero()(1, 1) == 0);
+        static_assert(fgm::Mat3<int>::zero()(1, 2) == 0);
+
+        static_assert(fgm::Mat3<int>::zero()(2, 0) == 0);
+        static_assert(fgm::Mat3<int>::zero()(2, 1) == 0);
+        static_assert(fgm::Mat3<int>::zero()(2, 2) == 0);
+
+    } // namespace static_tests
 } // namespace
 
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-/** @brief Verify that fgm::Mat3::identity returns an identity matrix. */
-TYPED_TEST(Mat3Constants, Identity_ReturnsIdentityMatrix) { EXPECT_MAT_IDENTITY(fgm::Mat3<TypeParam>::identity()); }
+TYPED_TEST(Mat3ConstantsTests, Identity_ReturnsIdentityMatrix)
+{ EXPECT_MAT_IDENTITY(fgm::Mat3<TypeParam>::identity()); }
 
 
-/** @brief Verify that fgm::Mat3::zero returns a zero matrix. */
-TYPED_TEST(Mat3Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Mat3<TypeParam>::zero()); }
+TYPED_TEST(Mat3ConstantsTests, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Mat3<TypeParam>::zero()); }
 
 /** @} */

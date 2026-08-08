@@ -115,7 +115,7 @@ namespace
 
 
 /** @brief Verify that transposing a matrix exchanges row and column elements and returns a new matrix. */
-TYPED_TEST(Mat4Transpose, ExchangesRowsAndColumnElements)
+TYPED_TEST(Mat4Transpose, ReturnsMatrixWithExchangedRowsAndColumnElements)
 {
     EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose());
 }
@@ -125,7 +125,7 @@ TYPED_TEST(Mat4Transpose, ExchangesRowsAndColumnElements)
  * @brief Verify that transposing a matrix using static variant of @ref fgm::Mat4::transpose exchanges row and
  *        column elements and returns a new matrix.
  */
-TYPED_TEST(Mat4Transpose, StaticWrapper_ExchangesRowsAndColumnElements)
+TYPED_TEST(Mat4Transpose, StaticWrapper_ReturnsMatrixWithExchangedRowsAndColumnElements)
 {
     EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Mat4<TypeParam>::transpose(this->_matrix));
 }

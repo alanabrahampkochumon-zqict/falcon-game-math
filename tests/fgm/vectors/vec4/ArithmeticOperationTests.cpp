@@ -268,7 +268,7 @@ TEST(Vec4Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
  * @brief Verify that the binary subtraction operator perform a component-wise subtraction and
  *       returns a new vector instance.
  */
-TYPED_TEST(Vec4Subtraction, MinusOperator_ReturnsDifference)
+TYPED_TEST(Vec4Subtraction, MinusOperator_ReturnsMatrixDifference)
 {
     const fgm::Vec4 result = this->_vecA - this->_vecB;
 
@@ -606,7 +606,7 @@ TYPED_TEST(Vec4ScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugM
  * @brief Verify that dividing a vector using @ref fgm::Vec4::safeDiv perform a component-wise divide and
  *       returns a new vector instance.
  */
-TYPED_TEST(Vec4ScalarDivision, SafeDivide_ReturnsAInverseScaledVector)
+TYPED_TEST(Vec4ScalarDivision, SafeDiv_ReturnsAInverseScaledVector)
 {
     const auto result = this->_vec.safeDiv(this->_scalar);
 
@@ -640,7 +640,7 @@ TYPED_TEST(Vec4ScalarDivision, SafeDivideByFloatZero_ReturnsZeroVector)
  * @brief Verify that dividing a vector using static variant of @ref fgm::Vec4::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
-TYPED_TEST(Vec4ScalarDivision, StaticWrapper_SafeDivide_ReturnsAInverseScaledVector)
+TYPED_TEST(Vec4ScalarDivision, StaticWrapper_SafeDiv_ReturnsAInverseScaledVector)
 {
     const auto result = fgm::Vec4<TypeParam>::safeDiv(this->_vec, this->_scalar);
     EXPECT_VEC_EQ(this->_expectedScaledVec, result);

@@ -62,7 +62,7 @@ namespace
 
 
     /** @brief Test fixture for @ref fgm::Mat2 inverse with NaN elements. */
-    class Mat2InverseNaNTests: public ::testing::TestWithParam<fgm::Mat2<float>>
+    class Mat2InverseNaNTests: public testing::TestWithParam<fgm::Mat2<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(Mat2NaNMatrixInverse, Mat2InverseNaNTests,
                              ::testing::Values(fgm::Mat2<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
@@ -91,11 +91,25 @@ namespace
         static_assert(INV_MAT(1, 1) == -0.5f);
 
         /// @test Verify matrix inverse (static wrapper) returns a valid matrix at compile time.
-        constexpr fgm::Mat2 INV_MAT_S = fgm::Mat2<float>::inverse(MAT);
-        static_assert(INV_MAT_S(0, 0) == -2.0f);
-        static_assert(INV_MAT_S(0, 1) == 1.0f);
-        static_assert(INV_MAT_S(1, 0) == 1.5f);
-        static_assert(INV_MAT_S(1, 1) == -0.5f);
+        constexpr fgm::Mat2 INV_MAT_STATIC = fgm::Mat2<float>::inverse(MAT);
+        static_assert(INV_MAT_STATIC(0, 0) == -2.0f);
+        static_assert(INV_MAT_STATIC(0, 1) == 1.0f);
+        static_assert(INV_MAT_STATIC(1, 0) == 1.5f);
+        static_assert(INV_MAT_STATIC(1, 1) == -0.5f);
+
+        /// @test Verify matrix inverse returns a valid matrix at compile time.
+        constexpr fgm::Mat2 SAFE_INV_MAT = MAT.safeInverse();
+        static_assert(SAFE_INV_MAT(0, 0) == -2.0f);
+        static_assert(SAFE_INV_MAT(0, 1) == 1.0f);
+        static_assert(SAFE_INV_MAT(1, 0) == 1.5f);
+        static_assert(SAFE_INV_MAT(1, 1) == -0.5f);
+
+        /// @test Verify matrix inverse (static wrapper) returns a valid matrix at compile time.
+        constexpr fgm::Mat2 SAFE_INV_MAT_STATIC = fgm::Mat2<float>::safeInverseOf(MAT);
+        static_assert(SAFE_INV_MAT_STATIC(0, 0) == -2.0f);
+        static_assert(SAFE_INV_MAT_STATIC(0, 1) == 1.0f);
+        static_assert(SAFE_INV_MAT_STATIC(1, 0) == 1.5f);
+        static_assert(SAFE_INV_MAT_STATIC(1, 1) == -0.5f);
 
     } // namespace static_tests
 
@@ -131,7 +145,7 @@ TYPED_TEST(Mat2InverseTests, StaticWrapper_Inverse_InverseMatrixTimesOriginalMat
 
 
 /**************************************
- *          SAFE INVERSE TESTS        *
+ *             SAFE INVERSE           *
  **************************************/
 
 TYPED_TEST(Mat2InverseTests, SafeInverse_NonSingularMatrix_ReturnsValidInverseMatrix)
@@ -214,7 +228,7 @@ TEST_P(Mat2InverseNaNTests, StaticWrapper_SafeInverse_ReturnsPassedInFallbackMat
 
 
 /**************************************
- *          TRY INVERSE TESTS         *
+ *            TRY INVERSE             *
  **************************************/
 
 /**

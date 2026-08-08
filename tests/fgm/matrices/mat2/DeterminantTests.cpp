@@ -47,11 +47,11 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Determinants.
+     * @brief Test fixture for @ref fgm::Mat2 Determinants with singular matrices.
      */
     class Mat2DeterminantSingularTests: public ::testing::TestWithParam<fgm::Mat2<float>>
     {};
-    INSTANTIATE_TEST_SUITE_P(Mat2DeterminantTests, Mat2DeterminantSingularTests,
+    INSTANTIATE_TEST_SUITE_P(Mat2InvalidDeterminantTests, Mat2DeterminantSingularTests,
                              ::testing::Values(fgm::Mat2{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ 1.0f, 2.0f } },
                                                fgm::Mat2{ fgm::Vec2{ 2.0f, 2.0f }, fgm::Vec2{ 2.0f, 2.0f } },
                                                fgm::Mat2{ fgm::Vec2{ 3.0f, 2.0f }, fgm::Vec2{ 6.0f, 4.0f } },
@@ -92,14 +92,14 @@ TYPED_TEST(Mat2DeterminantTests, StaticWrapper_NonSingularMatrix_ReturnsNonZeroS
 { EXPECT_MAG_EQ(this->_expectedDeterminant, fgm::Mat2<TypeParam>::determinant(this->_matrix)); }
 
 
-TEST_P(Mat2DeterminantSingularTests, SingularMatrix_ReturnsZero)
+TEST_P(Mat2DeterminantSingularTests, SingularMatrix_ReturnsZeroMatrix)
 {
     const auto& matrix = GetParam();
     EXPECT_MAG_EQ(0.0f, matrix.determinant());
 }
 
 
-TEST_P(Mat2DeterminantSingularTests, StaticWrapper_SingularMatrix_ReturnsZero)
+TEST_P(Mat2DeterminantSingularTests, StaticWrapper_SingularMatrix_ReturnsZeroMatrix)
 {
     const auto& matrix = GetParam();
     EXPECT_MAG_EQ(0.0f, fgm::Mat2<float>::determinant(matrix));

@@ -154,49 +154,49 @@ TYPED_TEST(Mat2x4DivisionTests, SafeDiv_ReturnsAValidMatrix)
 }
 
 
-TYPED_TEST(Mat2x4DivisionTests, SafeDivide_DivisionByZero_ReturnsZeroMatrixByDefault)
+TYPED_TEST(Mat2x4DivisionTests, SafeDiv_DivisionByZero_ReturnsZeroMatrixByDefault)
 {
     const fgm::Mat2x4 inverseScaledMat = this->_matrix.safeDiv(TypeParam(0));
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
 
-TYPED_TEST(Mat2x4DivisionTests, SafeDivide_DivisionByZero_ReturnsPassedInFallback)
+TYPED_TEST(Mat2x4DivisionTests, SafeDiv_DivisionByZero_ReturnsPassedInFallback)
 {
     const fgm::Mat2x4 inverseScaledMat = this->_matrix.safeDiv(TypeParam(0), fgm::Mat2x4<TypeParam>::zero());
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
 
-TEST_P(NaNMat2x4DivisionTests, SafeDivide_ReturnsZeroMatrixByDefault)
+TEST_P(NaNMat2x4DivisionTests, SafeDiv_ReturnsZeroMatrixByDefault)
 {
     const fgm::Mat2x4 inverseScaledMat = GetParam().safeDiv(2.5);
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
 
-TEST_P(NaNMat2x4DivisionTests, SafeDivide_ReturnsPassedInFallback)
+TEST_P(NaNMat2x4DivisionTests, SafeDiv_ReturnsPassedInFallback)
 {
     const fgm::Mat2x4 inverseScaledMat = GetParam().safeDiv(2.5, fgm::Mat2x4<ParamType::value_type>::zero());
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
 
-TYPED_TEST(Mat2x4DivisionTests, StaticWrapper_SafeDivide_ReturnsInverseScaledMatrix)
+TYPED_TEST(Mat2x4DivisionTests, StaticWrapper_SafeDiv_ReturnsAValidMatrix)
 {
     const fgm::Mat2x4 inverseScaledMat = fgm::Mat2x4<TypeParam>::safeDiv(this->_matrix, this->_scalar);
     EXPECT_MAT_EQ(this->_expectedMatrix, inverseScaledMat);
 }
 
 
-TYPED_TEST(Mat2x4DivisionTests, StaticWrapper_SafeDivide_DivisionByZero_ReturnsZeroMatrixByDefault)
+TYPED_TEST(Mat2x4DivisionTests, StaticWrapper_SafeDiv_DivisionByZero_ReturnsZeroMatrixByDefault)
 {
     const fgm::Mat2x4 inverseScaledMat = fgm::Mat2x4<TypeParam>::safeDiv(this->_matrix, TypeParam(0));
     EXPECT_MAT_ZERO(inverseScaledMat);
 }
 
 
-TYPED_TEST(Mat2x4DivisionTests, StaticWrapper_SafeDivide_DivisionByZeroReturnsPassedInFallback)
+TYPED_TEST(Mat2x4DivisionTests, StaticWrapper_SafeDiv_DivisionByZeroReturnsPassedInFallback)
 {
     const fgm::Mat2x4 inverseScaledMat =
         fgm::Mat2x4<TypeParam>::safeDiv(this->_matrix, TypeParam(0), fgm::Mat2x4<TypeParam>::zero());
@@ -204,7 +204,7 @@ TYPED_TEST(Mat2x4DivisionTests, StaticWrapper_SafeDivide_DivisionByZeroReturnsPa
 }
 
 
-TEST_P(NaNMat2x4DivisionTests, StaticWrapper_SafeDivide_ReturnsZeroMatrixByDefault)
+TEST_P(NaNMat2x4DivisionTests, StaticWrapper_SafeDiv_ReturnsZeroMatrixByDefault)
 {
     using T                            = ParamType::value_type;
     const fgm::Mat2x4 inverseScaledMat = fgm::Mat2x4<T>::safeDiv(GetParam(), 2.5);
@@ -212,7 +212,7 @@ TEST_P(NaNMat2x4DivisionTests, StaticWrapper_SafeDivide_ReturnsZeroMatrixByDefau
 }
 
 
-TEST_P(NaNMat2x4DivisionTests, StaticWrapper_SafeDivide_ReturnsPassedInFallback)
+TEST_P(NaNMat2x4DivisionTests, StaticWrapper_SafeDiv_ReturnsPassedInFallback)
 {
     using T                            = ParamType::value_type;
     const fgm::Mat2x4 inverseScaledMat = fgm::Mat2x4<T>::safeDiv(GetParam(), 2.5, fgm::Mat2x4<T>::zero());
@@ -311,7 +311,7 @@ TEST_P(NaNMat2x4DivisionTests, TryDivide_NaNOperandTakesPrecedenceOverZeroDivisi
  *        perform an element-wise divide, returns a new matrix instance
  *        and set flag to @ref OperationStatus::SUCCESS.
  */
-TYPED_TEST(Mat2x4DivisionTests, StaticWrapper_TryDivide_ReturnsInverseScaledMatrixAndSetsCorrectFlag)
+TYPED_TEST(Mat2x4DivisionTests, StaticWrapper_TryDivide_ReturnsAValidMatrixAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Mat2x4 inverseScaledMat = fgm::Mat2x4<TypeParam>::tryDiv(this->_matrix, this->_scalar, flag);

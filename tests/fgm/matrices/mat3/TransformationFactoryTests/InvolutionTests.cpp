@@ -21,9 +21,7 @@
 namespace
 {
     /**************************************
-     *                                    *
-     *               SETUP                *
-     *                                    *
+     *            TEST SETUP              *
      **************************************/
 
     /**
@@ -32,7 +30,7 @@ namespace
      * @tparam T The floating point scalar type (e.g., float, double) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat3InvolutionFactoryFP: public testing::Test
+    class Mat3InvolutionFactoryFPTests: public testing::Test
     {
     protected:
         fgm::Vec3<T> _norm;
@@ -49,7 +47,7 @@ namespace
             };
         }
     };
-    TYPED_TEST_SUITE(Mat3InvolutionFactoryFP, SupportedFloatingPointTypes);
+    TYPED_TEST_SUITE(Mat3InvolutionFactoryFPTests, SupportedFloatingPointTypes);
 
 
     /**
@@ -58,7 +56,7 @@ namespace
      * @tparam T The signed scalar type (e.g., int32_t, int16_t) used for the matrix and vectors.
      */
     template <typename T>
-    class Mat3InvolutionFactoryInt: public ::testing::Test
+    class Mat3InvolutionFactoryIntTests: public ::testing::Test
     {
     protected:
         fgm::Vec3<T> _xAxis, _yAxis, _zAxis;
@@ -80,14 +78,12 @@ namespace
                                      fgm::Vec3{ T(0), T(0), T(1) } };
         }
     };
-    TYPED_TEST_SUITE(Mat3InvolutionFactoryInt, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(Mat3InvolutionFactoryIntTests, SupportedSignedArithmeticTypes);
 
 
 
     /**************************************
-     *                                    *
      *           STATIC TESTS             *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -105,24 +101,22 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-TYPED_TEST(Mat3InvolutionFactoryFP, ArbitraryDirection_ReturnsValidInvolutionMatrix)
+TYPED_TEST(Mat3InvolutionFactoryFPTests, ArbitraryDirection_ReturnsValidInvolutionMatrix)
 { EXPECT_MAT_EQ(this->_expectedInvolution, fgm::Mat3<TypeParam>::makeInvolution(this->_norm)); }
 
 
-TYPED_TEST(Mat3InvolutionFactoryInt, XAxis_ReturnsIdentityMatrixWithNegatedYAndZ)
+TYPED_TEST(Mat3InvolutionFactoryIntTests, XAxis_ReturnsIdentityMatrixWithNegatedYAndZ)
 { EXPECT_MAT_EQ(this->_expectedInvolutionX, fgm::Mat3<TypeParam>::makeInvolution(this->_xAxis)); }
 
 
-TYPED_TEST(Mat3InvolutionFactoryInt, YAxis_ReturnsIdentityMatrixWithNegatedZAndX)
+TYPED_TEST(Mat3InvolutionFactoryIntTests, YAxis_ReturnsIdentityMatrixWithNegatedZAndX)
 { EXPECT_MAT_EQ(this->_expectedInvolutionY, fgm::Mat3<TypeParam>::makeInvolution(this->_yAxis)); }
 
 
-TYPED_TEST(Mat3InvolutionFactoryInt, ZAxis_IdentityMatrixWithNegatedXAndY)
+TYPED_TEST(Mat3InvolutionFactoryIntTests, ZAxis_IdentityMatrixWithNegatedXAndY)
 { EXPECT_MAT_EQ(this->_expectedInvolutionZ, fgm::Mat3<TypeParam>::makeInvolution(this->_zAxis)); }
 
 /** @} */

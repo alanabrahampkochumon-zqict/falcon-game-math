@@ -12,50 +12,69 @@
 #include "Mat3TestSetup.h"
 
 
-
-template <typename T>
-class Mat3Trace: public ::testing::Test
-{
-protected:
-    fgm::Mat3<T> _mat;
-    T _expectedSum;
-
-    void SetUp() override
-    {
-        _mat         = { { T(5.1234523151234), T(1.2521412341253), T(5.481578329483) },
-                         { T(8.1234983217498234), T(3.12348219341342), T(1.2138348294893) },
-                         { T(1.3482939843), T(12.38424812934), T(7.248381294829) } };
-        _expectedSum = T(15.49531580336582);
-    }
-};
-/** @brief Test fixtures for @ref fgm::Mat3 trace operation, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Mat3Trace, SupportedArithmeticTypes);
-
-
-
 /**
  * @addtogroup T_FGM_Mat3x3_Trace
  * @{
  */
 
-/** @brief Verify that the matrix trace operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Mat3 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12);
-    static_assert(MAT.trace() == 20);                // Member function
-    static_assert(fgm::Mat3<int>::trace(MAT) == 20); // Static function
 
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat3 Trace (Sum along diagonals).
+     *
+     * @tparam T The numeric type (int, float, double...) for matrix values.
+     */
+    template <typename T>
+    class Mat3TraceTests: public testing::Test
+    {
+    protected:
+        fgm::Mat3<T> _mat;
+        T _expectedSum;
+
+        void SetUp() override
+        {
+            _mat         = { { T(5.1234523151234), T(1.2521412341253), T(5.481578329483) },
+                             { T(8.1234983217498234), T(3.12348219341342), T(1.2138348294893) },
+                             { T(1.3482939843), T(12.38424812934), T(7.248381294829) } };
+            _expectedSum = T(15.49531580336582);
+        }
+    };
+    TYPED_TEST_SUITE(Mat3TraceTests, SupportedArithmeticTypes);
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Mat3 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12);
+
+        /// @test Verify that the Mat3 trace returns valid scalar at compile time.
+        static_assert(MAT.trace() == 20);
+
+        /// @test Verify that the Mat3 trace (static wrapper) returns valid scalar at compile time.
+        static_assert(fgm::Mat3<int>::trace(MAT) == 20);
+
+    } // namespace static_tests
 } // namespace
 
 
-/** @brief Verify that trace of a 2D matrix returns the sum of diagonal elements. */
-TYPED_TEST(Mat3Trace, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
+
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
+
+TYPED_TEST(Mat3TraceTests, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_expectedSum, this->_mat.trace()); }
 
 
-/** @brief Verify that trace of a 2D matrix using static variant returns the sum of diagonal elements. */
-TYPED_TEST(Mat3Trace, StaticWrapper_ReturnsSumOfDiagonalElements)
-{
-    EXPECT_MAG_EQ(this->_expectedSum, fgm::Mat3<TypeParam>::trace(this->_mat));
-}
+TYPED_TEST(Mat3TraceTests, StaticWrapper_ReturnsSumOfDiagonalElements)
+{ EXPECT_MAG_EQ(this->_expectedSum, fgm::Mat3<TypeParam>::trace(this->_mat)); }
 
 /** @} */

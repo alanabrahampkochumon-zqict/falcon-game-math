@@ -143,42 +143,42 @@ TYPED_TEST(Mat2DivisionTests, SafeDiv_DivisionByZero_ReturnsIdentityMatrixByDefa
 }
 
 
-TYPED_TEST(Mat2DivisionTests, SafeDivide_DivisionByZero_ReturnsPassedInFallbackMatrix)
+TYPED_TEST(Mat2DivisionTests, SafeDiv_DivisionByZero_ReturnsPassedInFallbackMatrix)
 {
     const fgm::Mat2 resultantMat = this->_matrix.safeDiv(TypeParam(0), fgm::Mat2<TypeParam>::zero());
     EXPECT_MAT_ZERO(resultantMat);
 }
 
 
-TEST_P(Mat2DivisionNaNTests, SafeDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(Mat2DivisionNaNTests, SafeDiv_ReturnsIdentityMatrixByDefault)
 {
     const fgm::Mat2 resultantMat = GetParam().safeDiv(2.5);
     EXPECT_MAT_IDENTITY(resultantMat);
 }
 
 
-TEST_P(Mat2DivisionNaNTests, SafeDivide_ReturnsPassedInFallbackMatrix)
+TEST_P(Mat2DivisionNaNTests, SafeDiv_ReturnsPassedInFallbackMatrix)
 {
     const fgm::Mat2 resultantMat = GetParam().safeDiv(2.5, fgm::Mat2<ParamType::value_type>::zero());
     EXPECT_MAT_ZERO(resultantMat);
 }
 
 
-TYPED_TEST(Mat2DivisionTests, StaticWrapper_SafeDivide_ReturnsAValidMatrix)
+TYPED_TEST(Mat2DivisionTests, StaticWrapper_SafeDiv_ReturnsAValidMatrix)
 {
     const fgm::Mat2 resultantMat = fgm::Mat2<TypeParam>::safeDiv(this->_matrix, this->_scalar);
     EXPECT_MAT_EQ(this->_expectedMatrix, resultantMat);
 }
 
 
-TYPED_TEST(Mat2DivisionTests, StaticWrapper_SafeDivide_DivisionByZeroReturnsIdentityMatrixByDefault)
+TYPED_TEST(Mat2DivisionTests, StaticWrapper_SafeDiv_DivisionByZeroReturnsIdentityMatrixByDefault)
 {
     const fgm::Mat2 resultantMat = fgm::Mat2<TypeParam>::safeDiv(this->_matrix, TypeParam(0));
     EXPECT_MAT_IDENTITY(resultantMat);
 }
 
 
-TYPED_TEST(Mat2DivisionTests, StaticWrapper_SafeDivide_DivisionByZeroReturnsPassedInFallbackMatrix)
+TYPED_TEST(Mat2DivisionTests, StaticWrapper_SafeDiv_DivisionByZeroReturnsPassedInFallbackMatrix)
 {
     const fgm::Mat2 resultantMat =
         fgm::Mat2<TypeParam>::safeDiv(this->_matrix, TypeParam(0), fgm::Mat2<TypeParam>::zero());
@@ -186,7 +186,7 @@ TYPED_TEST(Mat2DivisionTests, StaticWrapper_SafeDivide_DivisionByZeroReturnsPass
 }
 
 
-TEST_P(Mat2DivisionNaNTests, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDefault)
+TEST_P(Mat2DivisionNaNTests, StaticWrapper_SafeDiv_ReturnsIdentityMatrixByDefault)
 {
     using T                          = ParamType::value_type;
     const fgm::Mat2 resultantMat = fgm::Mat2<T>::safeDiv(GetParam(), 2.5);
@@ -194,7 +194,7 @@ TEST_P(Mat2DivisionNaNTests, StaticWrapper_SafeDivide_ReturnsIdentityMatrixByDef
 }
 
 
-TEST_P(Mat2DivisionNaNTests, StaticWrapper_SafeDivide_ReturnsPassedInFallbackMatrix)
+TEST_P(Mat2DivisionNaNTests, StaticWrapper_SafeDiv_ReturnsPassedInFallbackMatrix)
 {
     using T                          = ParamType::value_type;
     const fgm::Mat2 resultantMat = fgm::Mat2<T>::safeDiv(GetParam(), 2.5, fgm::Mat2<T>::zero());
