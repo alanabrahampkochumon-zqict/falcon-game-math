@@ -13,65 +13,66 @@
 
 
 
-template <typename T>
-class Mat3x2Constants: public testing::Test
-{};
-/** @brief Test fixture for @ref fgm::Mat3x2 constants, parameterized @ref SupportedArithmeticTypes.*/
-TYPED_TEST_SUITE(Mat3x2Constants, SupportedArithmeticTypes);
-
-
-
 /**
- * @addtogroup T_FGM_Mat3x2x4_Constant
+ * @addtogroup T_FGM_Mat3x2_Constant
  * @{
  */
 
-/**************************************
- *                                    *
- *           STATIC TESTS             *
- *                                    *
- **************************************/
-
-/** @brief Verify that @ref fgm::Mat3x2 constants are available at compile time. */
 namespace
 {
-    // Verify one matrix
-    static_assert(fgm::Mat3x2<int>::one()(0, 0) == 1);
-    static_assert(fgm::Mat3x2<int>::one()(0, 1) == 1);
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
 
-    static_assert(fgm::Mat3x2<int>::one()(1, 0) == 1);
-    static_assert(fgm::Mat3x2<int>::one()(1, 1) == 1);
+    /**
+     * @brief Test fixture for @ref fgm::Mat3x2 Constants.
+     */
+    template <typename>
+    class Mat3x2ConstantsTests: public testing::Test
+    {};
+    TYPED_TEST_SUITE(Mat3x2ConstantsTests, SupportedArithmeticTypes);
 
-    static_assert(fgm::Mat3x2<int>::one()(2, 0) == 1);
-    static_assert(fgm::Mat3x2<int>::one()(2, 1) == 1);
 
 
+    /**************************************
+     *           STATIC TESTS             *
+     **************************************/
 
-    // Verify zero matrix
-    static_assert(fgm::Mat3x2<int>::zero()(0, 0) == 0);
-    static_assert(fgm::Mat3x2<int>::zero()(0, 1) == 0);
+    namespace static_tests
+    {
+        /// @test Verify that Mat3::one() returns an one matrix at compile time.
+        static_assert(fgm::Mat3x2<int>::one()(0, 0) == 1);
+        static_assert(fgm::Mat3x2<int>::one()(0, 1) == 1);
 
-    static_assert(fgm::Mat3x2<int>::zero()(1, 0) == 0);
-    static_assert(fgm::Mat3x2<int>::zero()(1, 1) == 0);
+        static_assert(fgm::Mat3x2<int>::one()(1, 0) == 1);
+        static_assert(fgm::Mat3x2<int>::one()(1, 1) == 1);
 
-    static_assert(fgm::Mat3x2<int>::zero()(2, 0) == 0);
-    static_assert(fgm::Mat3x2<int>::zero()(2, 1) == 0);
+        static_assert(fgm::Mat3x2<int>::one()(2, 0) == 1);
+        static_assert(fgm::Mat3x2<int>::one()(2, 1) == 1);
 
+
+        /// @test Verify that Mat3::zero() returns a zero matrix at compile time.
+        static_assert(fgm::Mat3x2<int>::zero()(0, 0) == 0);
+        static_assert(fgm::Mat3x2<int>::zero()(0, 1) == 0);
+
+        static_assert(fgm::Mat3x2<int>::zero()(1, 0) == 0);
+        static_assert(fgm::Mat3x2<int>::zero()(1, 1) == 0);
+
+        static_assert(fgm::Mat3x2<int>::zero()(2, 0) == 0);
+        static_assert(fgm::Mat3x2<int>::zero()(2, 1) == 0);
+
+    } // namespace static_tests
 } // namespace
 
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-/** @brief Verify that fgm::Mat3x2::one returns an identity matrix. */
-TYPED_TEST(Mat3x2Constants, One_ReturnsIdentityMatrix) { EXPECT_MAT_ONE(fgm::Mat3x2<TypeParam>::one()); }
+TYPED_TEST(Mat3x2ConstantsTests, One_ReturnsOneMatrix) { EXPECT_MAT_ONE(fgm::Mat3x2<TypeParam>::one()); }
 
 
-/** @brief Verify that fgm::Mat3x2::zero returns a zero matrix. */
-TYPED_TEST(Mat3x2Constants, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Mat3x2<TypeParam>::zero()); }
+TYPED_TEST(Mat3x2ConstantsTests, Zero_ReturnsZeroMatrix) { EXPECT_MAT_ZERO(fgm::Mat3x2<TypeParam>::zero()); }
 
 /** @} */

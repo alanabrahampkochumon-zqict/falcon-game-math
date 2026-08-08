@@ -41,7 +41,6 @@ namespace
     namespace static_tests
     {
         /// @test Verify that Mat3::identity() returns an identity matrix at compile time.
-
         static_assert(fgm::Mat3<int>::identity()(0, 0) == 1);
         static_assert(fgm::Mat3<int>::identity()(0, 1) == 0);
         static_assert(fgm::Mat3<int>::identity()(0, 2) == 0);
@@ -56,7 +55,6 @@ namespace
 
 
         /// @test Verify that Mat3::zero() returns a zero matrix at compile time.
-
         static_assert(fgm::Mat3<int>::zero()(0, 0) == 0);
         static_assert(fgm::Mat3<int>::zero()(0, 1) == 0);
         static_assert(fgm::Mat3<int>::zero()(0, 2) == 0);

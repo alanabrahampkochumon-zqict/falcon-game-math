@@ -72,7 +72,7 @@ namespace
     class Mat3PerElementEqualityTests: public testing::TestWithParam<Mat3ElementParam>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat3Tests, Mat3PerElementEqualityTests,
+        Mat3ElementwiseEquality, Mat3PerElementEqualityTests,
         ::testing::Values(
             Mat3ElementParam{
                 .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .expected = true },
@@ -97,12 +97,11 @@ namespace
 
 
 
-
     /// @brief Test fixture for @ref fgm::Mat3 Inequality on a per-element basis.
     class Mat3PerElementInequalityTests: public ::testing::TestWithParam<Mat3ElementParam>
     {};
     INSTANTIATE_TEST_SUITE_P(
-        Mat3Tests, Mat3PerElementInequalityTests,
+        Mat3ElementwiseInequality, Mat3PerElementInequalityTests,
         ::testing::Values(
             Mat3ElementParam{
                 .first = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .second = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, .expected = false },

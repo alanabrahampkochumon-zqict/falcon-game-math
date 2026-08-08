@@ -100,7 +100,7 @@ namespace
  **************************************/
 
 /** @brief Verify that scalar multiplication by zero returns a zero matrix. */
-TEST(Mat4x3ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
+TEST(Mat4x3ScalarMultiplication, TimesOperator_ByZeroReturnsZeroMatrix)
 {
     const fgm::Mat4x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f);
 
@@ -111,7 +111,7 @@ TEST(Mat4x3ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 
 
 /** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Mat4x3ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
+TEST(Mat4x3ScalarMultiplication, TimesOperator_ByOneReturnsOriginalMatrix)
 {
     const fgm::Mat4x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f);
 
@@ -122,7 +122,7 @@ TEST(Mat4x3ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 
 
 /** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Mat4x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
+TEST(Mat4x3ScalarMultiplication, TimesOperator_ByNegativeScalarFlipsSigns)
 {
     const fgm::Mat4x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f, -1.5f, 2.25f, 5.0f, 10.0f, -1.0f, -1.5f };
     const fgm::Mat4x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f, 3.0f, -4.5f, -10.0f, -20.f, 2.0f, 3.0f };
@@ -138,7 +138,7 @@ TEST(Mat4x3ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
  * @brief Verify that the binary multiplication operator (matrix * scalar) perform an element-wise product
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Mat4x3ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
+TYPED_TEST(Mat4x3ScalarMultiplication, TimesOperator_ByScalarReturnsScaledMatrix)
 {
     const fgm::Mat4x3 product = this->_mat * this->_scalar;
 
@@ -157,7 +157,7 @@ TYPED_TEST(Mat4x3ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
  * @brief Verify that the binary multiplication operator (scalar * matrix) perform an element-wise product
  *        and returns a new matrix instance.
  */
-TYPED_TEST(Mat4x3ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
+TYPED_TEST(Mat4x3ScalarMultiplication, TimesOperator_ScalarTimesMatrixReturnsScaledMatrix)
 {
     const fgm::Mat4x3 product = this->_scalar * this->_mat;
 
@@ -176,7 +176,7 @@ TYPED_TEST(Mat4x3ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
  * @brief Verify that the compound multiplication assignment operator (scalar) performs an element-wise product
  *        and mutates the matrix in-place.
  */
-TYPED_TEST(Mat4x3ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScaled)
+TYPED_TEST(Mat4x3ScalarMultiplication, TimesEqualsOperator_MatrixTimesEqualScalarIsTheSameMatrixScaled)
 {
     this->_mat *= this->_scalar;
 
@@ -195,7 +195,7 @@ TYPED_TEST(Mat4x3ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScal
  * @brief Verify that the binary multiplication operator (scalar) perform automatic type promotion
  *        to the wider numeric type.
  */
-TYPED_TEST(Mat4x3ScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
+TYPED_TEST(Mat4x3ScalarMultiplication, TimesOperator_MixedType_PromotesType)
 {
     const double scalar = 2.123456789123456;
 
@@ -209,7 +209,7 @@ TYPED_TEST(Mat4x3ScalarMultiplication, MixedTypeScalarMultiplicationPromotesType
  * @brief Verify that the compound multiplication assignment operator (scalar) maintains the destination type and
  *        perform an implicit cast.
  */
-TEST(Mat4x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
+TEST(Mat4x3ScalarMultiplication, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat4x3 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f, 2.1f, 0.75f, -10.0f, -20.f, 2.0f, 3.0f);
     const double scalar = 5.0;
@@ -223,7 +223,7 @@ TEST(Mat4x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotP
  * @brief Verify that the compound multiplication operator (scalar) for mixed type
  *        ensure minimal precision loss.
  */
-TEST(Mat4x3ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+TEST(Mat4x3ScalarMultiplication, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Mat4x3 mat(3, -1, 10, 5, 50, 12, 0, 5, 2, 4, 8, 10);
     const double scalar = 2.5;

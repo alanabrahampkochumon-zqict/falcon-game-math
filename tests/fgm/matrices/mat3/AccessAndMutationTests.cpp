@@ -24,7 +24,7 @@ namespace
      *            STATIC TESTS            *
      **************************************/
 
-    namespace
+    namespace static_tests
     {
         constexpr fgm::Mat3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
         constexpr fgm::Vec3 VEC0(1, 4, 7);
@@ -52,9 +52,9 @@ namespace
         static_assert(MAT[2].x() == VEC2[0]);
         static_assert(MAT[2].y() == VEC2[1]);
         static_assert(MAT[2].z() == VEC2[2]);
-    } // namespace
+    } // namespace static_tests
 
-}
+} // namespace
 
 
 
@@ -123,7 +123,6 @@ TEST(Mat3MutationTests, ElementsCanBeMutatedUsingIndex)
 }
 
 
-/** @brief Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Mat3MutationTests, ColumnsCanBeMutatedUsingIndex)
 {
     const fgm::Vec3 col0 = { 1.0f, 4.0f, 7.0f };

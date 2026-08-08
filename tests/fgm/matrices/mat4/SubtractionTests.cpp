@@ -138,7 +138,7 @@ TYPED_TEST(Mat4Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Mat4Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+TEST(Mat4Subtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f, 7.0f, 3.0f, -12.0f, 15.0f, 44.0f, 316.0f,
                    55.0f);

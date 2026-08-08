@@ -1,7 +1,7 @@
 /**
- * @file Mat2.cpp
+ * @file Mat3.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: August 4, 2026
+ * @date Created on: August 08, 2026
  *
  * @brief Verifies quaternion assertions in quaternion arithmetic operations that can result in application death.
  *
@@ -38,7 +38,7 @@ namespace
      */
     class Mat3IndexingTests: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
     {};
-    INSTANTIATE_TEST_SUITE_P(Mat3Tests, Mat3IndexingTests,
+    INSTANTIATE_TEST_SUITE_P(Mat3OutOfBoundsRowColumnIndices, Mat3IndexingTests,
                              testing::Values(std::make_pair(4, 4), std::make_pair(3, 4), std::make_pair(4, 3),
                                              std::make_pair(100, 100)));
 
@@ -49,11 +49,11 @@ namespace
      */
     class Mat3ColumnIndexingTests: public testing::TestWithParam<std::size_t>
     {};
-    INSTANTIATE_TEST_SUITE_P(Mat3Tests, Mat3ColumnIndexingTests, testing::Values(4, 5, 100));
+    INSTANTIATE_TEST_SUITE_P(Mat3OutOfBoundsColumnIndices, Mat3ColumnIndexingTests, testing::Values(4, 5, 100));
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Division.
+     * @brief Test fixture for @ref fgm::Mat3 Division.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */

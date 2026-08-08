@@ -22,9 +22,7 @@
 namespace
 {
     /**************************************
-     *                                    *
      *               SETUP                *
-     *                                    *
      **************************************/
 
     /**
@@ -33,7 +31,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
     template <typename T>
-    class Mat3x2Transpose: public ::testing::Test
+    class Mat3x2TransposeTests: public ::testing::Test
     {
     protected:
         fgm::Mat3x2<T> _matrix;
@@ -45,18 +43,15 @@ namespace
             _expectedTranspose = { fgm::Vec2{ T(1), T(4) }, fgm::Vec2{ T(2), T(5) }, fgm::Vec2{ T(3), T(6) } };
         }
     };
-    TYPED_TEST_SUITE(Mat3x2Transpose, SupportedTypes);
+    TYPED_TEST_SUITE(Mat3x2TransposeTests, SupportedTypes);
 
 
 
 
     /**************************************
-     *                                    *
      *           STATIC TESTS             *
-     *                                    *
      **************************************/
 
-    /** @brief Verify that matrix transpose is available at compile time. */
     namespace static_tests
     {
         constexpr fgm::Mat3x2 MAT(1, 2, 3, 4, 5, 6);
@@ -86,16 +81,14 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-TYPED_TEST(Mat3x2Transpose, Returns2x3MatrixWithRowAndColumnElementsExchanged)
+TYPED_TEST(Mat3x2TransposeTests, Returns2x3MatrixWithRowAndColumnElementsExchanged)
 { EXPECT_MAT_EQ(this->_expectedTranspose, this->_matrix.transpose()); }
 
 
-TYPED_TEST(Mat3x2Transpose, StaticWrapper_Returns2x3MatrixWithRowAndColumnElementsExchanged)
+TYPED_TEST(Mat3x2TransposeTests, StaticWrapper_Returns2x3MatrixWithRowAndColumnElementsExchanged)
 { EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Mat3x2<TypeParam>::transpose(this->_matrix)); }
 
 /** @} */

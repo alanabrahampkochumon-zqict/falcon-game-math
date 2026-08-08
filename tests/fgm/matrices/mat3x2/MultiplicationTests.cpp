@@ -11,9 +11,24 @@
 
 #include "Mat3x2TestSetup.h"
 
+/**
+ * @addtogroup T_FGM_Mat3x2_Multiplication
+ * @{
+ */
 
+namespace
+{
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat3x2 scalar multiplication.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the matrices.
+     */
 template <typename T>
-class Mat3x2ScalarMultiplication: public ::testing::Test
+class Mat3x2ScalarMultiplicationTests: public ::testing::Test
 {
 protected:
     fgm::Mat3x2<T> _mat;
@@ -32,28 +47,19 @@ protected:
         _expectedIntegralMat = { fgm::Vec3{ T(14), T(26), T(22) }, fgm::Vec3{ T(10), T(8), T(4) } };
     }
 };
-/** @brief Test fixture for @ref fgm::Mat3x2 scalar multiplication, parameterized by @ref SupportedArithmeticTypes.
- */
-TYPED_TEST_SUITE(Mat3x2ScalarMultiplication, SupportedArithmeticTypes);
+TYPED_TEST_SUITE(Mat3x2ScalarMultiplicationTests, SupportedArithmeticTypes);
 
 
-/**
- * @addtogroup T_FGM_Mat3x2_Multiplication
- * @{
- */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-/** @brief Verify that matrix multiplication operations are available at compile time. */
-namespace
-{
+    namespace static_test
+    {
     constexpr fgm::Mat3x2 MAT1(1, 2, 3, 4, 5, 6);
 
-    // Verify matrix * scalar multiplication
+        /// @test Verify that matrix * scalar multiplication returns 3x2 matrix at compile time.
     constexpr fgm::Mat3x2 BINARY_PRODUCT_1 = MAT1 * 2;
     static_assert(BINARY_PRODUCT_1(0, 0) == 2);
     static_assert(BINARY_PRODUCT_1(0, 1) == 4);
@@ -63,7 +69,7 @@ namespace
     static_assert(BINARY_PRODUCT_1(2, 1) == 12);
 
 
-    // Verify scalar * matrix multiplication
+        /// @test Verify scalar * matrix multiplication returns 3x2 matrix at compile time.
     constexpr fgm::Mat3x2 BINARY_PRODUCT_2 = 2 * MAT1;
     static_assert(BINARY_PRODUCT_2(0, 0) == 2);
     static_assert(BINARY_PRODUCT_2(0, 1) == 4);
@@ -73,17 +79,15 @@ namespace
     static_assert(BINARY_PRODUCT_2(2, 1) == 12);
 
 } // namespace
+} // namespace
 
 
 
-/**************************************
- *                                    *
- *     SCALAR MULTIPLICATION TESTS    *
- *                                    *
- **************************************/
+    /**************************************
+     *     SCALAR MULTIPLICATION TESTS    *
+     **************************************/
 
-/** @brief Verify that scalar multiplication by zero returns a zero matrix. */
-TEST(Mat3x2ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
+TEST(Mat3x2ScalarMultiplication, TimesOperator_ByZeroReturnsZeroMatrix)
 {
     const fgm::Mat3x2 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
@@ -93,8 +97,7 @@ TEST(Mat3x2ScalarMultiplication, MultiplicationByZeroReturnsZeroMatrix)
 }
 
 
-/** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Mat3x2ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
+TEST(Mat3x2ScalarMultiplication, TimesOperator_ByOneReturnsOriginalMatrix)
 {
     const fgm::Mat3x2 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
@@ -104,24 +107,18 @@ TEST(Mat3x2ScalarMultiplication, MultiplicationByOneReturnsOriginalMatrix)
 }
 
 
-/** @brief Verify that scalar multiplication by one returns original matrix. */
-TEST(Mat3x2ScalarMultiplication, MultiplicationByNegativeScalarFlipsSigns)
+TEST(Mat3x2ScalarMultiplication, TimesOperator_ByNegativeScalarFlipsSigns)
 {
     const fgm::Mat3x2 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f };
     const fgm::Mat3x2 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f };
     const float scalar         = -2.0f;
 
     const fgm::Mat3x2<float> product = mat * scalar;
-
     EXPECT_MAT_EQ(expected, product);
 }
 
 
-/**
- * @brief Verify that the binary multiplication operator (matrix * scalar) perform an element-wise product
- *        and returns a new matrix instance.
- */
-TYPED_TEST(Mat3x2ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
+TYPED_TEST(Mat3x2ScalarMultiplicationTests, TimesOperator_ByScalarReturnsScaledMatrix)
 {
     const fgm::Mat3x2 product = this->_mat * this->_scalar;
 
@@ -136,11 +133,7 @@ TYPED_TEST(Mat3x2ScalarMultiplication, MatrixTimesScalarReturnsScaledMatrix)
 }
 
 
-/**
- * @brief Verify that the binary multiplication operator (scalar * matrix) perform an element-wise product
- *        and returns a new matrix instance.
- */
-TYPED_TEST(Mat3x2ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
+TYPED_TEST(Mat3x2ScalarMultiplicationTests, TimesOperator_ScalarTimesMatrixReturnsScaledMatrix)
 {
     const fgm::Mat3x2 product = this->_scalar * this->_mat;
 
@@ -155,11 +148,16 @@ TYPED_TEST(Mat3x2ScalarMultiplication, ScalarTimesAMatrixReturnsScaledMatrix)
 }
 
 
-/**
- * @brief Verify that the compound multiplication assignment operator (scalar) performs an element-wise product
- *        and mutates the matrix in-place.
- */
-TYPED_TEST(Mat3x2ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScaled)
+TYPED_TEST(Mat3x2ScalarMultiplicationTests, TimesOperator_MixedType_PromotesType)
+{
+    const double scalar = 2.123456789123456;
+
+    [[maybe_unused]] const fgm::Mat3x2 product = this->_mat * scalar;
+    static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
+}
+
+
+TYPED_TEST(Mat3x2ScalarMultiplicationTests, TimesEqualsOperator_MatrixTimesEqualScalarIsTheSameMatrixScaled)
 {
     this->_mat *= this->_scalar;
 
@@ -174,46 +172,23 @@ TYPED_TEST(Mat3x2ScalarMultiplication, MatrixTimesEqualScalarIsTheSameMatrixScal
 }
 
 
-/**
- * @brief Verify that the binary multiplication operator (scalar) perform automatic type promotion
- *        to the wider numeric type.
- */
-TYPED_TEST(Mat3x2ScalarMultiplication, MixedTypeScalarMultiplicationPromotesType)
-{
-    const double scalar = 2.123456789123456;
-
-    [[maybe_unused]] const fgm::Mat3x2 product = this->_mat * scalar;
-
-    static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
-}
-
-
-/**
- * @brief Verify that the compound multiplication assignment operator (scalar) maintains the destination type and
- *        perform an implicit cast.
- */
-TEST(Mat3x2ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
+TEST(Mat3x2ScalarMultiplication, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat3x2 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f);
     const double scalar = 5.0;
-    mat *= scalar;
 
+    mat *= scalar;
     static_assert(std::is_same_v<decltype(mat)::value_type, float>);
 }
 
 
-/**
- * @brief Verify that the compound multiplication operator (scalar) for mixed type
- *        ensure minimal precision loss.
- */
-TEST(Mat3x2ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
+TEST(Mat3x2ScalarMultiplication, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Mat3x2 mat(3, -1, 10, 5, 50, 12);
     const double scalar = 2.5;
     const fgm::Mat3x2 expected(7, -2, 25, 12, 125, 30);
 
     mat *= scalar;
-
     EXPECT_MAT_EQ(expected, mat);
 }
 

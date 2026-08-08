@@ -117,7 +117,7 @@ TYPED_TEST(Mat4x2Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifferenc
  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Mat4x2Subtraction, MixedTypeSubtractionAssignmentDoesNotPromoteType)
+TEST(Mat4x2Subtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Mat4x2 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.5f, 2.0f);
     [[maybe_unused]] const fgm::Mat4x2 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 1.0, 2.25);

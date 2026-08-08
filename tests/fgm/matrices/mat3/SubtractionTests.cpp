@@ -30,7 +30,6 @@ namespace
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
-
     template <typename T>
     class Mat3SubtractionTests: public testing::Test
     {
@@ -46,7 +45,6 @@ namespace
             _expectedDifference = { fgm::Vec3<T>{ 2, 5, 3 }, fgm::Vec3<T>{ 5, 7, 0 }, fgm::Vec3<T>{ 3, 1, 9 } };
         }
     };
-    /** @brief Test fixture for @ref fgm::Mat3 subtraction, parameterized by @ref SupportedArithmeticTypes. */
     TYPED_TEST_SUITE(Mat3SubtractionTests, SupportedArithmeticTypes);
 
 

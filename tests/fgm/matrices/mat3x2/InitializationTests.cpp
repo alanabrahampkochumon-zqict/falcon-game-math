@@ -13,8 +13,25 @@
 
 
 
+/**
+ * @addtogroup T_FGM_Mat3x2_Init
+ * @{
+ */
+
+namespace
+{
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Mat3x2 initialization.
+     *
+     * @tparam T The numeric type (int, float, double...) for matrix values.
+     */
+
 template <typename T>
-class Mat3x2Initialization: public testing::Test
+class Mat3x2InitializationTests: public testing::Test
 {
 protected:
     std::vector<T> _elements;
@@ -27,26 +44,17 @@ protected:
         _col1     = { T(2), T(4), T(6) };
     }
 };
-/** Test fixture for @ref fgm::Mat3x2 initialization, parameterized by @ref SupportedTypes. */
-TYPED_TEST_SUITE(Mat3x2Initialization, SupportedTypes);
+TYPED_TEST_SUITE(Mat3x2InitializationTests, SupportedTypes);
 
 
 
-/**
- * @addtogroup T_FGM_Mat3x2_Init
- * @{
- */
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that the matrix can be initialized at compile time. */
-namespace
-{
-    // Verify that the matrix can be initialized at compile time using scalar values.
+    namespace static_tests
+    {
+        /// @test Verify that the matrix can be initialized at compile time using scalar values.
     constexpr fgm::Mat3x2 MAT1(1, 2, 3, 4, 5, 6);
     static_assert(MAT1(0, 0) == 1);
     static_assert(MAT1(0, 1) == 2);
@@ -56,7 +64,7 @@ namespace
     static_assert(MAT1(2, 1) == 6);
 
 
-    // Verify that the matrix can be initialized at compile time using column vectors.
+    /// @test Verify that the matrix can be initialized at compile time using column vectors.
     constexpr fgm::Mat3x2 MAT2(fgm::Vec3(1, 3, 5), fgm::Vec3(2, 4, 6));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
@@ -66,8 +74,7 @@ namespace
     static_assert(MAT2(2, 1) == 6);
 
 
-
-    // Verify that the matrix can be initialized at compile time using value initialization.
+    /// @test Verify that the matrix can be initialized at compile time using value initialization.
     constexpr fgm::Mat3x2<int> MAT4{};
     static_assert(MAT4(0, 0) == 0);
     static_assert(MAT4(0, 1) == 0);
@@ -77,26 +84,22 @@ namespace
     static_assert(MAT4(2, 1) == 0);
 
 } // namespace
+} // namespace
 
 
 
 /**************************************
- *                                    *
  *            RUNTIME TESTS           *
- *                                    *
  **************************************/
 
-/** @brief Verify that the default constructor initializes an identity matrix. */
-TYPED_TEST(Mat3x2Initialization, EmptyConstructorReturnsIdentityMatrix)
+TYPED_TEST(Mat3x2InitializationTests, EmptyCtor_ReturnsIdentityMatrix)
 {
     constexpr fgm::Mat3x2<TypeParam> matrix{};
-
     EXPECT_MAT_ZERO(matrix);
 }
 
 
-/** @brief Verify that the parameterized constructor can initialize matrix with elements. */
-TYPED_TEST(Mat3x2Initialization, ParameterizedConstructorInitializesMatrixWithElements)
+TYPED_TEST(Mat3x2InitializationTests, ParameterizedCtor_InitializesMatrixWithElements)
 {
     const fgm::Mat3x2<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
                                         this->_elements[4], this->_elements[5]);
@@ -104,8 +107,7 @@ TYPED_TEST(Mat3x2Initialization, ParameterizedConstructorInitializesMatrixWithEl
 }
 
 
-/** @brief Verify that the parameterized constructor can initialize matrix with vectors. */
-TYPED_TEST(Mat3x2Initialization, ParameterizedConstructorInitializesMatrixWithVectors)
+TYPED_TEST(Mat3x2InitializationTests, ParameterizedCtor_InitializesMatrixWithVectors)
 {
     const fgm::Mat3x2<TypeParam> matrix(this->_col0, this->_col1);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
@@ -113,8 +115,7 @@ TYPED_TEST(Mat3x2Initialization, ParameterizedConstructorInitializesMatrixWithVe
 
 
 
-/** @brief Verify that a matrix can be initialized with implicit braced initialization. */
-TYPED_TEST(Mat3x2Initialization, CanBeConstructedWithBracedInitialization)
+TYPED_TEST(Mat3x2InitializationTests, CanBeConstructedWithBracedInitialization)
 {
     const fgm::Mat3x2<TypeParam> matrix = {
         { TypeParam(1), TypeParam(3), TypeParam(5) },
