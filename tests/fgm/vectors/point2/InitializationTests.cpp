@@ -19,11 +19,8 @@
 
 namespace
 {
-
     /**************************************
-     *                                    *
-     *               SETUP                *
-     *                                    *
+     *            TEST SETUP              *
      **************************************/
     /**
      * @brief Test fixture for @ref fgm::Point2 initialization(CTOR).
@@ -36,10 +33,9 @@ namespace
     TYPED_TEST_SUITE(Point2Initialization, SupportedArithmeticTypes);
 
 
+
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
     /** @brief Verify that vector can be instantiated during compile time. */
@@ -61,11 +57,8 @@ namespace
 
 
 
-
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
 TYPED_TEST(Point2Initialization, BracedInitialization_InitializesComponentsToZero)

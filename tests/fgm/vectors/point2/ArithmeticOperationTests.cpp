@@ -19,11 +19,8 @@
 
 namespace
 {
-
     /**************************************
-     *                                    *
      *            TEST SETUP              *
-     *                                    *
      **************************************/
 
     /**
@@ -74,9 +71,7 @@ namespace
 
 
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
     namespace static_tests
@@ -105,9 +100,7 @@ namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
 TYPED_TEST(Point2Addition, PlusOperator_ReturnsAPointWithComponentwiseSum)
