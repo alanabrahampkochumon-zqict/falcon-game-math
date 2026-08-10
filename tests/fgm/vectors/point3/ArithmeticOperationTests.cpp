@@ -112,7 +112,7 @@ TYPED_TEST(Point3Addition, PlusOperator_ReturnsAPointWithComponentwiseSum)
 }
 
 
-TEST(Point3Addition, PlusOperator_MixedTypePromotesType)
+TEST(Point3Addition, PlusOperator_MixedType_PromotesType)
 {
     const fgm::Point3 point(3.0f, 0.0f, -1.0f);
     const fgm::Vec3 vector(9.0, -5.0, 10.0);
@@ -130,7 +130,7 @@ TYPED_TEST(Point3Addition, PlusEqualsOperator_ReturnsSamePointWithComponentwiseS
 }
 
 
-TEST(Point3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Point3Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Point3 point(3.0f, 0.0f, -1.0f);
     const fgm::Vec3 vector(9.0, -5.0, 10.0);
@@ -157,7 +157,7 @@ TYPED_TEST(Point3Subtraction, MinusOperator_ReturnsAVectorWithComponentwiseDiffe
 }
 
 
-TEST(Point3Subtraction, MinusOperator_MixedTypePromotesType)
+TEST(Point3Subtraction, MinusOperator_MixedType_PromotesType)
 {
     const fgm::Point3 pointA(3.0f, 0.0f, -1.0f);
     const fgm::Point3  pointB(9.0, -5.0, 10.0);

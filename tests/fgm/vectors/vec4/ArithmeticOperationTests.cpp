@@ -224,7 +224,7 @@ TYPED_TEST(Vec4Addition, PlusEqualsOperator_ReturnsSameVectorWithSum)
  * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Vec4Addition, PlusOperator_MixedTypePromotesType)
+TEST(Vec4Addition, PlusOperator_MixedType_PromotesType)
 {
     const fgm::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
     const fgm::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
@@ -239,7 +239,7 @@ TEST(Vec4Addition, PlusOperator_MixedTypePromotesType)
  * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Vec4Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Vec4Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
     [[maybe_unused]] const fgm::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
@@ -292,7 +292,7 @@ TYPED_TEST(Vec4Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
  * @brief Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Vec4Subtraction, MinusOperator_MixedTypePromotesType)
+TEST(Vec4Subtraction, MinusOperator_MixedType_PromotesType)
 {
     const fgm::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
     const fgm::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
@@ -307,7 +307,7 @@ TEST(Vec4Subtraction, MinusOperator_MixedTypePromotesType)
  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Vec4Subtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Vec4Subtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
     [[maybe_unused]] const fgm::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
@@ -396,7 +396,7 @@ TYPED_TEST(Vec4ScalarMultiplication, ScalarTimesAVectorReturnsScaledVector)
  * @brief Verify that the compound multiplication assignment operator performs a component-wise (Hadamard) product
  *       and mutates the vector in-place.
  */
-TYPED_TEST(Vec4ScalarMultiplication, VectorTimesEqualScalarIsTheSameVectorScaled)
+TYPED_TEST(Vec4ScalarMultiplication, VectorTimesEqualScalarReturnsTheSameVectorWithScaledComponents)
 {
     this->_vec *= this->_scalar;
 
@@ -508,7 +508,7 @@ TYPED_TEST(Vec4ScalarDivision, DivisionByOneReturnsOriginalVector)
  * @brief Verify that the binary division operator (vector / scalar) perform a component-wise divide and
  *       returns a vector instance.
  */
-TYPED_TEST(Vec4ScalarDivision, ScalarDivision_ReturnsInverseScaledVector)
+TYPED_TEST(Vec4ScalarDivision, ScalarDivision_ReturnsVectorWithDividedComponents)
 {
     const fgm::Vec4 result = this->_vec / this->_scalar;
 
@@ -520,7 +520,7 @@ TYPED_TEST(Vec4ScalarDivision, ScalarDivision_ReturnsInverseScaledVector)
  * @brief Verify that the compound division assignment operator perform a component-wise divide and
  *       mutates the vector in-place.
  */
-TYPED_TEST(Vec4ScalarDivision, ScalarDivisionAssignment_ReturnsSameVectorInverseScaled)
+TYPED_TEST(Vec4ScalarDivision, DivideEqualsOperator_ReturnsSameVectorWithDividedComponents)
 {
     this->_vec /= this->_scalar;
 
@@ -559,7 +559,7 @@ TEST(Vec4ScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
 
 
 /** @brief Verify that the compound division operator for mixed types ensures minimal precision loss. */
-TEST(Vec4ScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWithMinimalPrecisionLoss)
+TEST(Vec4ScalarDivision,TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Vec4 vec(10, 25, -30, 2);
     const double scalar = 2.5;
@@ -606,7 +606,7 @@ TYPED_TEST(Vec4ScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugM
  * @brief Verify that dividing a vector using @ref fgm::Vec4::safeDiv perform a component-wise divide and
  *       returns a new vector instance.
  */
-TYPED_TEST(Vec4ScalarDivision, SafeDiv_ReturnsAInverseScaledVector)
+TYPED_TEST(Vec4ScalarDivision, SafeDiv_ReturnsVectorWithDividedComponents)
 {
     const auto result = this->_vec.safeDiv(this->_scalar);
 
@@ -640,7 +640,7 @@ TYPED_TEST(Vec4ScalarDivision, SafeDivideByFloatZero_ReturnsZeroVector)
  * @brief Verify that dividing a vector using static variant of @ref fgm::Vec4::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
-TYPED_TEST(Vec4ScalarDivision, StaticWrapper_SafeDiv_ReturnsAInverseScaledVector)
+TYPED_TEST(Vec4ScalarDivision, StaticWrapper_SafeDiv_ReturnsVectorWithDividedComponents)
 {
     const auto result = fgm::Vec4<TypeParam>::safeDiv(this->_vec, this->_scalar);
     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
@@ -703,7 +703,7 @@ TYPED_TEST(Vec4ScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroVector)
  * @brief Verify that dividing a vector using @ref fgm::Vec4::tryDiv perform a component-wise divide and
  *       returns a new vector instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec4ScalarDivision, TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec4ScalarDivision, TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = this->_vec.tryDiv(this->_scalar, flag);
@@ -772,7 +772,7 @@ TYPED_TEST(Vec4ScalarDivision, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFla
  *       perform a component-wise divide and returns a new vector instance and
  *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec4ScalarDivision, StaticWrapper_TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec4ScalarDivision, StaticWrapper_TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = fgm::Vec4<TypeParam>::tryDiv(this->_vec, this->_scalar, flag);

@@ -159,7 +159,7 @@ TYPED_TEST(Vec3UncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnit
  **************************************/
 
 /** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vec3Magnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
+TYPED_TEST(Vec3Magnitude, MagSq_ReturnsSquaredMagnitude)
 {
     const auto magnitude = this->_vec.magSq();
 
@@ -171,7 +171,7 @@ TYPED_TEST(Vec3Magnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
  * @brief Verify that taking the magnitude square of a non-unit vector using static variant of
  *        @ref fgm::Vec3::mag returns non-unit scalar.
  */
-TYPED_TEST(Vec3Magnitude, StaticWrapper_MagnitudeSquare_ReturnsSquaredMagnitude)
+TYPED_TEST(Vec3Magnitude, StaticWrapper_MagSq_ReturnsSquaredMagnitude)
 {
     const auto magnitude = fgm::Vec3<TypeParam>::magSq(this->_vec);
 

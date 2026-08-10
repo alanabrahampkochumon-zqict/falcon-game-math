@@ -352,14 +352,14 @@ TYPED_TEST(Vec4DistanceSigned, ChebyshevDist_HandlesNegativeNumbers)
  * @brief Verify that the static variant of  @ref fgm::Vec4::chebyshevDist function
  *        returns the Chebyshev distance.
  */
-TYPED_TEST(Vec4Distance, StaticWrapper_Chebyshev_ReturnsChebyshevDistance)
+TYPED_TEST(Vec4Distance, StaticWrapper_ChebyshevDist_ReturnsChebyshevDistance)
 {
     EXPECT_MAG_EQ(this->_distChebyshev, fgm::Vec4<TypeParam>::chebyshevDist(this->_vecA, this->_vecB));
 }
 
 
 /** @brief Verify that the @ref fgm::Vec4::chebyshevDist function returns zero for the same vector. */
-TYPED_TEST(Vec4Distance, StaticWrapper_Chebyshev_BetweenSameVectorReturnsZero)
+TYPED_TEST(Vec4Distance, StaticWrapper_ChebyshevDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
     const auto distance = fgm::Vec4<TypeParam>::chebyshevDist(this->_vecA, this->_vecA);
@@ -368,7 +368,7 @@ TYPED_TEST(Vec4Distance, StaticWrapper_Chebyshev_BetweenSameVectorReturnsZero)
 
 
 /** @brief Verify that the static variant of @ref fgm::Vec4::chebyshevDist function handles negative coordinates. */
-TYPED_TEST(Vec4DistanceSigned, StaticWrapper_Chebyshev_HandlesNegativeNumbers)
+TYPED_TEST(Vec4DistanceSigned, StaticWrapper_ChebyshevDist_HandlesNegativeNumbers)
 {
     const auto distance = fgm::Vec4<TypeParam>::chebyshevDist(this->_vecA, this->_vecB);
     EXPECT_MAG_EQ(this->_distChebyshev, distance);

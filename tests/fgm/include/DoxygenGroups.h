@@ -36,19 +36,12 @@
              * @brief Verification of 2D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
-             *   @defgroup T_FGM_Vec2_Access Component Access
-             *   @defgroup T_FGM_Vec2_Mutation Component Mutation
+             *   @defgroup T_FGM_Vec2_Access Component Access and Mutation
              *   @defgroup T_FGM_Vec2_Alias Spatial Aliasing
              *   @defgroup T_FGM_Vec2_Const Vector Constants
-             *   @defgroup T_FGM_Vec2_Addition Addition
-             *   @defgroup T_FGM_Vec2_Subtraction Subtraction
-             *   @defgroup T_FGM_Vec2_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Vec2_Division Scalar Division
+             *   @defgroup T_FGM_Vec2_Arithmetic Arithmetic Operations(+, -, *, /)
              *   @defgroup T_FGM_Vec2_Bool_Bit Boolean Bitwise Operation
-             *   @defgroup T_FGM_Vec2_GT_Comp Greater Than Comparison
-             *   @defgroup T_FGM_Vec2_GTE_Comp Greater Than or Equal Comparison
-             *   @defgroup T_FGM_Vec2_LT_Comp Less Than Comparison
-             *   @defgroup T_FGM_Vec2_LTE_Comp Less Than or Equal Comparison
+             *   @defgroup T_FGM_Vec2_Comp Vector Comparisons(>, >=, <, <=)
              *   @defgroup T_FGM_Vec2_Equality Component-wise and Masked Equality and Inequality
              *   @defgroup T_FGM_Vec2_Init Initialization
              *   @defgroup T_FGM_Vec2_Magnitude Scalar Length(Magnitude)
@@ -72,19 +65,12 @@
              * @brief Verification of 3D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
-             *   @defgroup T_FGM_Vec3_Access Component Access
-             *   @defgroup T_FGM_Vec3_Mutation Component Mutation
+             *   @defgroup T_FGM_Vec3_Access Component Access and Mutation
              *   @defgroup T_FGM_Vec3_Alias Spatial Aliasing
              *   @defgroup T_FGM_Vec3_Const Vector Constants
-             *   @defgroup T_FGM_Vec3_Addition Addition
-             *   @defgroup T_FGM_Vec3_Subtraction Subtraction
-             *   @defgroup T_FGM_Vec3_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Vec3_Division Scalar Division
+             *   @defgroup T_FGM_Vec3_Arithmetic Arithmetic Operations(+, -, *, /)
              *   @defgroup T_FGM_Vec3_Bool_Bit Boolean Bitwise Operation
-             *   @defgroup T_FGM_Vec3_GT_Comp Greater Than Comparison
-             *   @defgroup T_FGM_Vec3_GTE_Comp Greater Than or Equal Comparison
-             *   @defgroup T_FGM_Vec3_LT_Comp Less Than Comparison
-             *   @defgroup T_FGM_Vec3_LTE_Comp Less Than or Equal Comparison
+             *   @defgroup T_FGM_Vec3_Comp Vector Comparisons(>, >=, <, <=)
              *   @defgroup T_FGM_Vec3_Equality Component-wise and Masked Equality and Inequality
              *   @defgroup T_FGM_Vec3_Init Initialization
              *   @defgroup T_FGM_Vec3_Magnitude Scalar Length(Magnitude)
@@ -108,19 +94,12 @@
              * @brief Verification of 4D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
-             *   @defgroup T_FGM_Vec4_Access Component Access
-             *   @defgroup T_FGM_Vec4_Mutation Component Mutation
+             *   @defgroup T_FGM_Vec4_Access Component Access and Mutation
              *   @defgroup T_FGM_Vec4_Alias Spatial Aliasing
              *   @defgroup T_FGM_Vec4_Const Vector Constants
-             *   @defgroup T_FGM_Vec4_Addition Addition
-             *   @defgroup T_FGM_Vec4_Subtraction Subtraction
-             *   @defgroup T_FGM_Vec4_Multiplication Scalar Multiplication
-             *   @defgroup T_FGM_Vec4_Division Scalar Division
+             *   @defgroup T_FGM_Vec4_Arithmetic Arithmetic Operations(+, -, *, /)
              *   @defgroup T_FGM_Vec4_Bool_Bit Boolean Bitwise Operation
-             *   @defgroup T_FGM_Vec4_GT_Comp Greater Than Comparison
-             *   @defgroup T_FGM_Vec4_GTE_Comp Greater Than or Equal Comparison
-             *   @defgroup T_FGM_Vec4_LT_Comp Less Than Comparison
-             *   @defgroup T_FGM_Vec4_LTE_Comp Less Than or Equal Comparison
+             *   @defgroup T_FGM_Vec4_Comp Vector Comparisons(>, >=, <, <=)
              *   @defgroup T_FGM_Vec4_Equality Component-wise and Masked Equality and Inequality
              *   @defgroup T_FGM_Vec4_Init Initialization
              *   @defgroup T_FGM_Vec4_Magnitude Scalar Length(Magnitude)

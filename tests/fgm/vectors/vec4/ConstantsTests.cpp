@@ -133,7 +133,7 @@ TYPED_TEST(Vec4Constants, ZERO_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZER
 
 
 /** @brief Verify that @ref fgm::Vec4<float>::INF returns a 4D vector with infinity components. */
-TEST(Vec4Constants, Float_INF_ReturnsFloatVectorWithInfinityComponents)
+TEST(Vec4Constants, INF_Float_ReturnsFloatVectorWithInfinityComponents)
 {
     const auto inf = fgm::Vec4<float>::inf();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -142,7 +142,7 @@ TEST(Vec4Constants, Float_INF_ReturnsFloatVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::Vec4<double>::INF returns a 4D vector with infinity components. */
-TEST(Vec4Constants, Double_INF_ReturnsDoubleVectorWithInfinityComponents)
+TEST(Vec4Constants, INF_Double_ReturnsDoubleVectorWithInfinityComponents)
 {
     const auto inf = fgm::Vec4<double>::inf();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
@@ -151,7 +151,7 @@ TEST(Vec4Constants, Double_INF_ReturnsDoubleVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::Vec4<float>::INF_NEG returns a 4D vector with negative infinity components. */
-TEST(Vec4Constants, Float_INF_NEG_ReturnsFloatVectorWithNegativeInfinityComponents)
+TEST(Vec4Constants, INFNEG_Float_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::Vec4<float>::infNeg();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -160,7 +160,7 @@ TEST(Vec4Constants, Float_INF_NEG_ReturnsFloatVectorWithNegativeInfinityComponen
 
 
 /** @brief Verify that @ref fgm::Vec4<double>::INF_NEG returns a 4D vector with negative infinity components. */
-TEST(Vec4Constants, Double_INF_NEG_ReturnsDoubleVectorWithNegativeInfinityComponents)
+TEST(Vec4Constants, INFNEG_Double_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::Vec4<double>::infNeg();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);

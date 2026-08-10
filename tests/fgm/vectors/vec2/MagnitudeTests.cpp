@@ -13,156 +13,143 @@
 
 
 
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Vec2Magnitude: public ::testing::Test
-{
-protected:
-    fgm::Vec2<T> _vec;
-    fgm::Magnitude<T> _expectedMagnitude;
-    T _expectedMagnitudeSquare;
-
-    void SetUp() override
-    {
-        _vec                     = { T(3), T(4) };
-        _expectedMagnitude       = fgm::Magnitude<T>(5);
-        _expectedMagnitudeSquare = T(25);
-    }
-};
-/** @brief Test fixture for @ref fgm::Vec2 magnitude, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec2Magnitude, SupportedArithmeticTypes);
-
-
-template <typename T>
-class Vec2UncleanMagnitude: public ::testing::Test
-{
-protected:
-    fgm::Vec2<T> _vec;
-    fgm::Magnitude<T> _expectedMagnitude;
-
-    void SetUp() override
-    {
-        _vec               = { T(1), T(2) };
-        _expectedMagnitude = fgm::Magnitude<T>(2.2360679774997898);
-    }
-};
-/**
- * @brief Test fixture for @ref fgm::Vec2 magnitude, parameterized by @ref SupportedArithmeticTypes,
- *        for testing high-precision magnitude.
- */
-TYPED_TEST_SUITE(Vec2UncleanMagnitude, SupportedArithmeticTypes);
-
-
-
 /**
  * @addtogroup T_FGM_Vec2_Magnitude
  * @{
  */
 
-/** @brief Verify that vector magnitude operation is available at compile time. */
 namespace
 {
-    // TODO: Add static test after making sqrt constexpr
-    // constexpr auto magA = Vec.mag();
-    // constexpr auto magB = fgm::Vec2<int>::mag(Vec);
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
 
-    constexpr fgm::Vec2 vecM(1, 2);
-    constexpr auto magSqA = vecM.magSq();
-    constexpr auto magSqB = fgm::Vec2<int>::magSq(vecM);
+    /**
+     * @brief Test fixture for @ref Vec2 magnitude.
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec2MagnitudeTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<T> _vec;
+        fgm::Magnitude<T> _expectedMagnitude;
+        T _expectedMagnitudeSquare;
 
-    static_assert(magSqA == 5.0);
-    static_assert(magSqB == 5.0);
+        void SetUp() override
+        {
+            _vec                     = { T(3), T(4) };
+            _expectedMagnitude       = fgm::Magnitude<T>(5);
+            _expectedMagnitudeSquare = T(25);
+        }
+    };
+    TYPED_TEST_SUITE(Vec2MagnitudeTests, SupportedArithmeticTypes);
+
+
+    /**
+     * @brief Test fixture for @ref Vec2 magnitude that returns a value with decimal places.
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec2UncleanMagnitudeTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<T> _vec;
+        fgm::Magnitude<T> _expectedMagnitude;
+
+        void SetUp() override
+        {
+            _vec               = { T(1), T(2) };
+            _expectedMagnitude = fgm::Magnitude<T>(2.2360679774997898);
+        }
+    };
+    TYPED_TEST_SUITE(Vec2UncleanMagnitudeTests, SupportedArithmeticTypes);
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Vec2 VEC_A(1, 2);
+
+        // TODO: Add static test after making sqrt constexpr
+        /// @test Verify that mag returns a valid value at compile time.
+        // constexpr auto MAG = Vec.mag();
+        /// @test Verify that mag (static wrapper) returns a valid value at compile time.
+        // constexpr auto MAG_STATIC = fgm::Vec2<int>::mag(Vec);
+
+        /// @test Verify that magSq returns a valid value at compile time.
+        constexpr auto MAG_SQ = VEC_A.magSq();
+        static_assert(MAG_SQ == 5.0);
+        /// @test Verify that magSq (static wrapper) returns a valid value at compile time.
+        constexpr auto MAG_SQ_STATIC = fgm::Vec2<int>::magSq(VEC_A);
+        static_assert(MAG_SQ_STATIC == 5.0);
+
+    } // namespace static_tests
 } // namespace
 
 
+
 /**************************************
- *                                    *
  *           MAGNITUDE TESTS          *
- *                                    *
  **************************************/
 
-
-/** @brief Verify that taking the magnitude of a zero vector returns exactly zero. */
-TEST(Vec2Magnitude, ZeroVectorReturnsZero)
+TEST(Vec2MagnitudeTests, ZeroVectorReturnsZero)
 {
     const fgm::Vec2 vec(0.0f, 0.0f);
-
     EXPECT_FLOAT_EQ(0.0f, vec.mag());
 }
 
 
-/** @brief Verify that taking the magnitude of a one vector returns non-unit scalar. */
-TEST(Vec2Magnitude, OneComponentVectorReturnsNonUnitScalar)
+TEST(Vec2MagnitudeTests, OneComponentVectorReturnsNonUnitScalar)
 {
     const fgm::Vec2 vec(1.0f, 1.0f);
-
     EXPECT_NE(1.0f, vec.mag());
 }
 
 
-/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vec2Magnitude, NonUnitVectorReturnsCorrectMagnitude)
+TYPED_TEST(Vec2MagnitudeTests, NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = this->_vec.mag();
-
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
 
-/** @brief Verify that taking the magnitude always returns a floating-point scalar. */
-TYPED_TEST(Vec2Magnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
+TYPED_TEST(Vec2MagnitudeTests, Mag_AlwaysTypePromoteToFloatingPointType)
 {
     [[maybe_unused]] const auto magnitude = this->_vec.mag();
     static_assert(std::is_floating_point_v<decltype(magnitude)>);
 }
 
 
-/**
- * @brief Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vec2::mag
- *        returns non-unit scalar.
- */
-TYPED_TEST(Vec2Magnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
+TYPED_TEST(Vec2MagnitudeTests, StaticWrapper_Mag_NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = fgm::Vec2<TypeParam>::mag(this->_vec);
-
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
 
-/** @brief Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
-TYPED_TEST(Vec2UncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
+TYPED_TEST(Vec2UncleanMagnitudeTests, Mag_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
     const auto magnitude = this->_vec.mag();
-
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
 
-/**
- * @brief Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vec2::mag
- *       ensure minimal precision loss.
- */
-TYPED_TEST(Vec2UncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
+TYPED_TEST(Vec2UncleanMagnitudeTests, StaticWrapper_Mag_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
     const auto magnitude = fgm::Vec2<TypeParam>::mag(this->_vec);
-
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
 
 /**************************************
- *                                    *
  *       MAGNITUDE SQUARE TESTS       *
- *                                    *
  **************************************/
 
-/** @brief Verify that taking the magnitude square of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vec2Magnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
+TYPED_TEST(Vec2MagnitudeTests, MagSq_ReturnsSquaredMagnitude)
 {
     const auto magnitude = this->_vec.magSq();
 
@@ -170,11 +157,7 @@ TYPED_TEST(Vec2Magnitude, MagnitudeSquare_ReturnsSquaredMagnitude)
 }
 
 
-/**
- * @brief Verify that taking the magnitude square of a non-unit vector using static variant of
- *        @ref fgm::Vec2::mag returns non-unit scalar.
- */
-TYPED_TEST(Vec2Magnitude, StaticWrapper_MagnitudeSquare_ReturnsSquaredMagnitude)
+TYPED_TEST(Vec2MagnitudeTests, StaticWrapper_MagSq_ReturnsSquaredMagnitude)
 {
     const auto magnitude = fgm::Vec2<TypeParam>::magSq(this->_vec);
 

@@ -246,7 +246,7 @@ TYPED_TEST(QuaternionAddition, PlusEqualsOperator_ReturnsSameQuaternionWithSum)
 }
 
 
-TEST(QuaternionAddition, PlusOperator_MixedTypePromotesType)
+TEST(QuaternionAddition, PlusOperator_MixedType_PromotesType)
 {
     const fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
     const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
@@ -258,7 +258,7 @@ TEST(QuaternionAddition, PlusOperator_MixedTypePromotesType)
 
 
 
-TEST(QuaternionAddition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(QuaternionAddition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
     [[maybe_unused]] const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
@@ -285,7 +285,7 @@ TYPED_TEST(QuaternionSubtraction, MinusEqualsOperator_ReturnsSameQuaternionWithD
 }
 
 
-TEST(QuaternionSubtraction, MinusOperator_MixedTypePromotesType)
+TEST(QuaternionSubtraction, MinusOperator_MixedType_PromotesType)
 {
     const fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
     const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);
@@ -296,7 +296,7 @@ TEST(QuaternionSubtraction, MinusOperator_MixedTypePromotesType)
 }
 
 
-TEST(QuaternionSubtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(QuaternionSubtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Quaternion quat1(3.0f, 0.0f, -1.0f, 2.0f);
     [[maybe_unused]] const fgm::Quaternion quat2(9.0, -5.0, 10.0, 3.0);

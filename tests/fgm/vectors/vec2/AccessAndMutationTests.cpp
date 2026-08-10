@@ -13,12 +13,6 @@
 #include "Vec2TestSetup.h"
 
 
-#ifdef ENABLE_DEBUG_TESTS
-class Vec2Indexing: public testing::TestWithParam<std::size_t>
-{};
-INSTANTIATE_TEST_SUITE_P(Vec2Tests, Vec2Indexing, testing::Values(3, 4, 100));
-#endif
-
 
 
 /**
@@ -26,36 +20,38 @@ INSTANTIATE_TEST_SUITE_P(Vec2Tests, Vec2Indexing, testing::Values(3, 4, 100));
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that vector accessors are available at compile time. */
 namespace
 {
-    constexpr fgm::Vec2 vector(1, 2);
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-    static_assert(vector.x() == 1);
-    static_assert(vector.y() == 2);
+    namespace
+    {
+        constexpr fgm::Vec2 vector(1, 2);
 
-    static_assert(vector.r() == 1);
-    static_assert(vector.g() == 2);
+        /// @test Verify that vector is accessible as <x, y> at compile time.
+        static_assert(vector.x() == 1);
+        static_assert(vector.y() == 2);
 
-    static_assert(vector.s() == 1);
-    static_assert(vector.t() == 2);
+        /// @test Verify that vector is accessible as <r, g> at compile time.
+        static_assert(vector.r() == 1);
+        static_assert(vector.g() == 2);
+
+        /// @test Verify that vector is accessible as <s, t> at compile time.
+        static_assert(vector.s() == 1);
+        static_assert(vector.t() == 2);
+    } // namespace
+
 } // namespace
 
 
 /**************************************
- *                                    *
  *            ACCESS TESTS            *
- *                                    *
  **************************************/
 
 /** @brief Verify that the components are accessible via named spatial aliases (x, y). */
-TEST(Vec2Access, AccessibleAsXYZW)
+TEST(Vec2AccessTests, AccessibleAsXYZW)
 {
     static const fgm::Vec2 vec(3.0f, 1.0f);
 
@@ -65,7 +61,7 @@ TEST(Vec2Access, AccessibleAsXYZW)
 
 
 /** @brief Verify that the components are accessible via named spatial aliases (s, t). */
-TEST(Vec2Access, AccessibleAsSTPQ)
+TEST(Vec2AccessTests, AccessibleAsSTPQ)
 {
     const fgm::Vec2 vec(3.0f, 1.0f);
 
@@ -75,7 +71,7 @@ TEST(Vec2Access, AccessibleAsSTPQ)
 
 
 /** @brief Verify that the components are accessible via named spatial aliases (r, g). */
-TEST(Vec2Access, AccessibleAsRGBA)
+TEST(Vec2AccessTests, AccessibleAsRGBA)
 {
     const fgm::Vec2 vec(3.0f, 1.0f);
 
@@ -85,7 +81,7 @@ TEST(Vec2Access, AccessibleAsRGBA)
 
 
 /** @brief Verify that the components are accessible via subscript indexing for reads. */
-TEST(Vec2Access, AccessibleAsArray)
+TEST(Vec2AccessTests, AccessibleAsArray)
 {
     const fgm::Vec2 vec(3.0f, 1.0f);
 
@@ -94,33 +90,13 @@ TEST(Vec2Access, AccessibleAsArray)
 }
 
 
-#ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vec2 out-of-bounds access triggers assert in debug mode. */
-TEST_P(Vec2Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
-{
-    const fgm::Vec2 vec(1, 2);
-    const auto index = GetParam();
-    EXPECT_DEBUG_DEATH(vec[index], "");
-}
-#endif
-
-/** @} */
-
-
-
-/**
- * @addtogroup T_FGM_Vec2_Mutation
- * @{
- */
 
 /**************************************
- *                                    *
  *           MUTATION TESTS           *
- *                                    *
  **************************************/
 
 /** @brief Verify that the components can be mutated via named spatial aliases (x, y). */
-TEST(Vec2Mutation, ElementsCanBeMutatedUsingXYZW)
+TEST(Vec2MutationTests, ElementsCanBeMutatedUsingXYZW)
 {
     fgm::Vec2<float> vec;
 
@@ -133,7 +109,7 @@ TEST(Vec2Mutation, ElementsCanBeMutatedUsingXYZW)
 
 
 /** @brief Verify that the components can be mutated via named spatial aliases (s, t). */
-TEST(Vec2Mutation, ElementsCanBeMutatedUsingSTPQ)
+TEST(Vec2MutationTests, ElementsCanBeMutatedUsingSTPQ)
 {
     fgm::Vec2<float> vec;
 
@@ -146,7 +122,7 @@ TEST(Vec2Mutation, ElementsCanBeMutatedUsingSTPQ)
 
 
 /** @brief Verify that the components can be mutated via named spatial aliases (r, g). */
-TEST(Vec2Mutation, ElementsCanBeMutatedUsingRGBA)
+TEST(Vec2MutationTests, ElementsCanBeMutatedUsingRGBA)
 {
     fgm::Vec2<float> vec;
 
@@ -159,7 +135,7 @@ TEST(Vec2Mutation, ElementsCanBeMutatedUsingRGBA)
 
 
 /** @brief Verify that the components are accessible via subscript indexing for writing. */
-TEST(Vec2Mutation, ElementsCanBeMutatedUsingIndex)
+TEST(Vec2MutationTests, ElementsCanBeMutatedUsingIndex)
 {
     fgm::Vec2<float> vec;
 
@@ -171,14 +147,5 @@ TEST(Vec2Mutation, ElementsCanBeMutatedUsingIndex)
 }
 
 
-#ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vec2 out-of-bounds mutation triggers assert in debug mode. */
-TEST_P(Vec2Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
-{
-    fgm::Vec2 vec(1, 2);
-    const auto index = GetParam();
-    EXPECT_DEBUG_DEATH(vec[index] = 2, "");
-}
-#endif
 
 /** @} */

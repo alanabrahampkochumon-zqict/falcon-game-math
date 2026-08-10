@@ -218,7 +218,7 @@ TYPED_TEST(Vec3Addition, PlusEqualsOperator_ReturnsSameVectorWithSum)
  * @brief Verify that the binary addition operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Vec3Addition, PlusOperator_MixedTypePromotesType)
+TEST(Vec3Addition, PlusOperator_MixedType_PromotesType)
 {
     const fgm::Vec3 vec1(3.0f, 0.0f, -1.0f);
     const fgm::Vec3 vec2(9.0, -5.0, 10.0);
@@ -233,7 +233,7 @@ TEST(Vec3Addition, PlusOperator_MixedTypePromotesType)
  * @brief Verify that the compound addition assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Vec3Addition, PlusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Vec3Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Vec3 vec1(3.0f, 0.0f, -1.0f);
     [[maybe_unused]] const fgm::Vec3 vec2(9.0, -5.0, 10.0);
@@ -285,7 +285,7 @@ TYPED_TEST(Vec3Subtraction, MinusEqualsOperator_ReturnsSameVectorWithDifference)
  * @brief Verify that the binary subtraction operator perform automatic type promotion
  *       to the wider numeric type.
  */
-TEST(Vec3Subtraction, MinusOperator_MixedTypePromotesType)
+TEST(Vec3Subtraction, MinusOperator_MixedType_PromotesType)
 {
     const fgm::Vec3 vec1(3.0f, 0.0f, -1.0f);
     const fgm::Vec3 vec2(9.0, -5.0, 10.0);
@@ -300,7 +300,7 @@ TEST(Vec3Subtraction, MinusOperator_MixedTypePromotesType)
  * @brief Verify that the compound subtraction assignment operator maintains the destination type and
  *       perform an implicit cast.
  */
-TEST(Vec3Subtraction, MinusEqualsOperator_MixedTypeDoesNotPromoteType)
+TEST(Vec3Subtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Vec3 vec1(3.0f, 0.0f, -1.0f);
     [[maybe_unused]] const fgm::Vec3 vec2(9.0, -5.0, 10.0);
@@ -388,7 +388,7 @@ TYPED_TEST(Vec3ScalarMultiplication, ScalarTimesAVectorReturnsScaledVector)
  * @brief Verify that the compound multiplication assignment operator performs a component-wise (Hadamard) product
  *       and mutates the vector in-place.
  */
-TYPED_TEST(Vec3ScalarMultiplication, VectorTimesEqualScalarIsTheSameVectorScaled)
+TYPED_TEST(Vec3ScalarMultiplication, VectorTimesEqualScalarReturnsTheSameVectorWithScaledComponents)
 {
     this->_vec *= this->_scalar;
 
@@ -496,7 +496,7 @@ TYPED_TEST(Vec3ScalarDivision, DivisionByOneReturnsOriginalVector)
  * @brief Verify that the binary division operator (vector / scalar) perform a component-wise divide and
  *       returns a vector instance.
  */
-TYPED_TEST(Vec3ScalarDivision, ScalarDivision_ReturnsInverseScaledVector)
+TYPED_TEST(Vec3ScalarDivision, ScalarDivision_ReturnsVectorWithDividedComponents)
 {
     const fgm::Vec3 result = this->_vec / this->_scalar;
 
@@ -508,7 +508,7 @@ TYPED_TEST(Vec3ScalarDivision, ScalarDivision_ReturnsInverseScaledVector)
  * @brief Verify that the compound division assignment operator perform a component-wise divide and
  *       mutates the vector in-place.
  */
-TYPED_TEST(Vec3ScalarDivision, ScalarDivisionAssignment_ReturnsSameVectorInverseScaled)
+TYPED_TEST(Vec3ScalarDivision, DivideEqualsOperator_ReturnsSameVectorWithDividedComponents)
 {
     this->_vec /= this->_scalar;
 
@@ -547,7 +547,7 @@ TEST(Vec3ScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
 
 
 /** @brief Verify that the compound division operator for mixed types ensures minimal precision loss. */
-TEST(Vec3ScalarDivision, MixedType_ScalarDivisionAssignment_ReturnsResultWithMinimalPrecisionLoss)
+TEST(Vec3ScalarDivision,TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Vec3 vec(10, 25, -30);
     const double scalar = 2.5;
@@ -594,7 +594,7 @@ TYPED_TEST(Vec3ScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugM
  * @brief Verify that dividing a vector using @ref fgm::Vec3::safeDiv perform a component-wise divide and
  *       returns a new vector instance.
  */
-TYPED_TEST(Vec3ScalarDivision, SafeDiv_ReturnsAInverseScaledVector)
+TYPED_TEST(Vec3ScalarDivision, SafeDiv_ReturnsVectorWithDividedComponents)
 {
     const auto result = this->_vec.safeDiv(this->_scalar);
 
@@ -606,7 +606,7 @@ TYPED_TEST(Vec3ScalarDivision, SafeDiv_ReturnsAInverseScaledVector)
  * @brief Verify that dividing a vector by integral zero using @ref fgm::Vec3::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
-TYPED_TEST(Vec3ScalarDivision, SafeDivideByIntegralZero_ReturnsZeroVector)
+TYPED_TEST(Vec3ScalarDivision, SafeDiv_ByIntegralZero_ReturnsZeroVector)
 {
     const auto result = this->_vec.safeDiv(0);
     EXPECT_VEC_ZERO(result);
@@ -617,7 +617,7 @@ TYPED_TEST(Vec3ScalarDivision, SafeDivideByIntegralZero_ReturnsZeroVector)
  * @brief Verify that dividing a vector by floating point zero using @ref fgm::Vec3::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
-TYPED_TEST(Vec3ScalarDivision, SafeDivideByFloatZero_ReturnsZeroVector)
+TYPED_TEST(Vec3ScalarDivision, SafeDiv_ByFloatZero_ReturnsZeroVector)
 {
     const auto result = this->_vec.safeDiv(0.0f);
     EXPECT_VEC_ZERO(result);
@@ -628,7 +628,7 @@ TYPED_TEST(Vec3ScalarDivision, SafeDivideByFloatZero_ReturnsZeroVector)
  * @brief Verify that dividing a vector using static variant of @ref fgm::Vec3::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
-TYPED_TEST(Vec3ScalarDivision, StaticWrapper_SafeDiv_ReturnsAInverseScaledVector)
+TYPED_TEST(Vec3ScalarDivision, StaticWrapper_SafeDiv_ReturnsVectorWithDividedComponents)
 {
     const auto result = fgm::Vec3<TypeParam>::safeDiv(this->_vec, this->_scalar);
     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
@@ -639,7 +639,7 @@ TYPED_TEST(Vec3ScalarDivision, StaticWrapper_SafeDiv_ReturnsAInverseScaledVector
  * @brief Verify that dividing a vector by integral zero using static variant of @ref fgm::Vec3::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
-TEST(Vec3ScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroVector)
+TEST(Vec3ScalarDivision, StaticWrapper_SafeDiv_ByIntergralZero_ReturnsZeroVector)
 {
     const fgm::Vec3 vec(1, 2, 3);
     EXPECT_VEC_ZERO(fgm::Vec3<int>::safeDiv(vec, 0));
@@ -650,7 +650,7 @@ TEST(Vec3ScalarDivision, StaticWrapper_SafeDivideByIntergralZero_ReturnsZeroVect
  * @brief Verify that dividing a vector by floating point zero using static variant @ref fgm::Vec3::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
-TYPED_TEST(Vec3ScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZeroVector)
+TYPED_TEST(Vec3ScalarDivision, StaticWrapper_SafeDiv_ByFloatZero_ReturnsZeroVector)
 {
     const auto result = fgm::Vec3<TypeParam>::safeDiv(this->_vec, 0.0f);
     EXPECT_VEC_ZERO(result);
@@ -661,7 +661,7 @@ TYPED_TEST(Vec3ScalarDivision, StaticWrapper_SafeDivideByFloatZero_ReturnsZeroVe
  * @brief Verify that dividing a vector by NaN using @ref fgm::Vec3::safeDiv
  *       returns a zero vector.
  */
-TYPED_TEST(Vec3ScalarDivision, SafeDivideByNaN_ReturnsZeroVector)
+TYPED_TEST(Vec3ScalarDivision, SafeDiv_ByNaN_ReturnsZeroVector)
 {
     const auto result = this->_vec.safeDiv(fgm::constants::NaN);
 
@@ -673,7 +673,7 @@ TYPED_TEST(Vec3ScalarDivision, SafeDivideByNaN_ReturnsZeroVector)
  * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vec3::safeDiv
  *       returns a zero vector.
  */
-TYPED_TEST(Vec3ScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroVector)
+TYPED_TEST(Vec3ScalarDivision, StaticWrapper_SafeDiv_ByNaN_ReturnsZeroVector)
 {
     const auto result = fgm::Vec3<TypeParam>::safeDiv(this->_vec, fgm::constants::INFINITY_F);
 
@@ -691,7 +691,7 @@ TYPED_TEST(Vec3ScalarDivision, StaticWrapper_SafeDivideByNaN_ReturnsZeroVector)
  * @brief Verify that dividing a vector using @ref fgm::Vec3::tryDiv perform a component-wise divide and
  *       returns a new vector instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec3ScalarDivision, TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec3ScalarDivision, TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = this->_vec.tryDiv(this->_scalar, flag);
@@ -760,7 +760,7 @@ TYPED_TEST(Vec3ScalarDivision, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFla
  *       perform a component-wise divide and returns a new vector instance and
  *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec3ScalarDivision, StaticWrapper_TryDivide_ReturnsAInverseScaledVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec3ScalarDivision, StaticWrapper_TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = fgm::Vec3<TypeParam>::tryDiv(this->_vec, this->_scalar, flag);

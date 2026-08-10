@@ -118,7 +118,7 @@ TYPED_TEST(Vec3Constants, ZERO_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZER
 
 
 /** @brief Verify that @ref fgm::Vec3<float>::INF returns a 3D vector with infinity components. */
-TEST(Vec3Constants, Float_INF_ReturnsFloatVectorWithInfinityComponents)
+TEST(Vec3Constants, INF_Float_ReturnsFloatVectorWithInfinityComponents)
 {
     const auto inf = fgm::Vec3<float>::inf();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -127,7 +127,7 @@ TEST(Vec3Constants, Float_INF_ReturnsFloatVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::Vec3<double>::INF returns a 3D vector with infinity components. */
-TEST(Vec3Constants, Double_INF_ReturnsDoubleVectorWithInfinityComponents)
+TEST(Vec3Constants, INF_Double_ReturnsDoubleVectorWithInfinityComponents)
 {
     const auto inf = fgm::Vec3<double>::inf();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);
@@ -136,7 +136,7 @@ TEST(Vec3Constants, Double_INF_ReturnsDoubleVectorWithInfinityComponents)
 
 
 /** @brief Verify that @ref fgm::Vec3<float>::INF_NEG returns a 3D vector with negative infinity components. */
-TEST(Vec3Constants, Float_INF_NEG_ReturnsFloatVectorWithNegativeInfinityComponents)
+TEST(Vec3Constants, INFNEG_Float_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::Vec3<float>::infNeg();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, float>);
@@ -145,7 +145,7 @@ TEST(Vec3Constants, Float_INF_NEG_ReturnsFloatVectorWithNegativeInfinityComponen
 
 
 /** @brief Verify that @ref fgm::Vec3<double>::INF_NEG returns a 3D vector with negative infinity components. */
-TEST(Vec3Constants, Double_INF_NEG_ReturnsDoubleVectorWithNegativeInfinityComponents)
+TEST(Vec3Constants, INFNEG_Double_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::Vec3<double>::infNeg();
     static_assert(std::is_same_v<typename decltype(inf)::value_type, double>);

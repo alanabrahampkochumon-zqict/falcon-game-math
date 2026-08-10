@@ -12,69 +12,81 @@
 #include "Vec2TestSetup.h"
 
 
-
-/**************************************
- *                                    *
- *                SETUP               *
- *                                    *
- **************************************/
-
-/** @brief Test fixture for @ref Vec2<bool> bitwise operations */
-class BooleanVec2BitOperations: public ::testing::Test
-{
-protected:
-    fgm::Vec2<bool> _vecA;
-    fgm::Vec2<bool> _vecB;
-    fgm::Vec2<bool> _expectedConjunctionVector;
-    fgm::Vec2<bool> _expectedDisjunctionVec;
-    fgm::Vec2<bool> _expectedInvertedVec;
-
-    void SetUp() override
-    {
-        _vecA                      = { true, false };
-        _vecB                      = { true, true };
-        _expectedConjunctionVector = { true, false };
-        _expectedDisjunctionVec    = { true, true };
-        _expectedInvertedVec       = { false, true };
-    }
-};
-
-
-
 /**
  * @addtogroup T_FGM_Vec2_Bool_Bit
  * @{
  */
 
-/** @brief Verify that vector boolean bitwise operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Vec2 vec1(true, false);
-    constexpr fgm::Vec2 vec2(false, false);
-    constexpr auto andVec = vec1 & vec2;
-    constexpr auto orVec  = vec1 | vec2;
-    constexpr auto notVec = !vec1;
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
 
-    static_assert(andVec.x() == false);
-    static_assert(andVec.y() == false);
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 boolean bitwise operations.
+     */
+    class BooleanVec2BitOperationsTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<bool> _vecA;
+        fgm::Vec2<bool> _vecB;
+        fgm::Vec2<bool> _expectedConjunctionVector;
+        fgm::Vec2<bool> _expectedDisjunctionVec;
+        fgm::Vec2<bool> _expectedInvertedVec;
 
-    static_assert(orVec.x() == true);
-    static_assert(orVec.y() == false);
+        void SetUp() override
+        {
+            _vecA                      = { true, false };
+            _vecB                      = { true, true };
+            _expectedConjunctionVector = { true, false };
+            _expectedDisjunctionVec    = { true, true };
+            _expectedInvertedVec       = { false, true };
+        }
+    };
 
-    static_assert(notVec.x() == false);
-    static_assert(notVec.y() == true);
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Vec2 VEC_A(true, false);
+        constexpr fgm::Vec2 VEC_B(false, false);
+
+
+        /// @test Verify that vector AND returns a valid vector at compile time.
+        constexpr auto AND_VEC = VEC_A & VEC_B;
+        static_assert(AND_VEC.x() == false);
+        static_assert(AND_VEC.y() == false);
+
+
+        /// @test Verify that vector OR returns a valid vector at compile time.
+        constexpr auto OR_VEC = VEC_A | VEC_B;
+        static_assert(OR_VEC.x() == true);
+        static_assert(OR_VEC.y() == false);
+
+
+        /// @test Verify that vector NOT returns a valid vector at compile time.
+        constexpr auto NOT_VEC = !VEC_A;
+        static_assert(NOT_VEC.x() == false);
+        static_assert(NOT_VEC.y() == true);
+
+    } // namespace static_tests
 
 } // namespace
+
 
 
 /**
  * @brief Verify that the bitwise AND operator perform a component-wise logical conjunction and
  *       returns the correct boolean mask.
  */
-TEST_F(BooleanVec2BitOperations, BitwiseAND_PerformComponentwiseConjunction)
+TEST_F(BooleanVec2BitOperationsTests, BitwiseAND_PerformComponentwiseConjunction)
 {
     const auto mask = this->_vecA & this->_vecB;
-
     EXPECT_VEC_EQ(this->_expectedConjunctionVector, mask);
 }
 
@@ -82,10 +94,9 @@ TEST_F(BooleanVec2BitOperations, BitwiseAND_PerformComponentwiseConjunction)
  * @brief Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
-TEST_F(BooleanVec2BitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
+TEST_F(BooleanVec2BitOperationsTests, CompoundBitwiseAND_PerformInPlaceConjunction)
 {
     this->_vecA &= this->_vecB;
-
     EXPECT_VEC_EQ(this->_expectedConjunctionVector, this->_vecA);
 }
 
@@ -94,10 +105,9 @@ TEST_F(BooleanVec2BitOperations, CompoundBitwiseAND_PerformInPlaceConjunction)
  * @brief Verify that the bitwise OR operator performs a component-wise logical disjunction and
  *       returns the correct boolean mask.
  */
-TEST_F(BooleanVec2BitOperations, BitwiseOR_PerformComponentwiseDisjunction)
+TEST_F(BooleanVec2BitOperationsTests, BitwiseOR_PerformComponentwiseDisjunction)
 {
     const auto mask = this->_vecA | this->_vecB;
-
     EXPECT_VEC_EQ(this->_expectedDisjunctionVec, mask);
 }
 
@@ -106,10 +116,9 @@ TEST_F(BooleanVec2BitOperations, BitwiseOR_PerformComponentwiseDisjunction)
  * @brief Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
-TEST_F(BooleanVec2BitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
+TEST_F(BooleanVec2BitOperationsTests, CompoundBitwiseOR_PerformInPlaceDisjunction)
 {
     this->_vecA |= this->_vecB;
-
     EXPECT_VEC_EQ(this->_expectedConjunctionVector, this->_vecA);
 }
 
@@ -118,10 +127,9 @@ TEST_F(BooleanVec2BitOperations, CompoundBitwiseOR_PerformInPlaceDisjunction)
  * @brief Verify that the bitwise NOT operator performs a component-wise logical inversion and
  *       returns the correct boolean mask.
  */
-TEST_F(BooleanVec2BitOperations, BitwiseNOT_PerformComponentwiseInversion)
+TEST_F(BooleanVec2BitOperationsTests, BitwiseNOT_PerformComponentwiseInversion)
 {
     const auto mask = !this->_vecA;
-
     EXPECT_VEC_EQ(this->_expectedInvertedVec, mask);
 }
 

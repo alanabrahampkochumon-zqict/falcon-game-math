@@ -119,7 +119,7 @@ namespace
  **************************************/
 
 /** @brief Verify that @ref fgm::Vec4::allEq returns true for identical vectors. */
-TYPED_TEST(Vec4Equality, Equality_IdenticalVectorsReturnsTrue)
+TYPED_TEST(Vec4Equality, AllEq_IdenticalVectorsReturnsTrue)
 {
     const bool equality = this->_eqVecA.allEq(this->_eqVecB);
 
@@ -137,7 +137,7 @@ TYPED_TEST(Vec4Equality, Equality_DifferentVectorsReturnsFalse)
 
 
 /** @brief Verify that the static variant of @ref fgm::Vec4::allEq for identical vectors. */
-TYPED_TEST(Vec4Equality, StaticWrapper_Equality_IdenticalVectorsReturnsTrue)
+TYPED_TEST(Vec4Equality, StaticWrapper_AllEq_IdenticalVectorsReturnsTrue)
 {
     const bool equality = fgm::Vec4<TypeParam>::allEq(this->_eqVecA, this->_eqVecB);
 
@@ -167,7 +167,7 @@ TEST(Vec4Equality, NanEqualityReturnsFalse)
 
 
 /** @brief Verify that @ref fgm::Vec4::allEq follows IEEE 754 for INFINITY comparisons. */
-TEST(Vec4Equality, InfinityEquality_IdenticalVectorsReturnsTrue)
+TEST(Vec4Equality, InfinityAllEq_IdenticalVectorsReturnsTrue)
 {
     const fgm::Vec4 vecA = { INF, -INF, INF, -INF };
     const fgm::Vec4 vecB = { INF, -INF, INF, -INF };
@@ -200,7 +200,7 @@ TYPED_TEST(Vec4Equality, EqualityOperator_IdenticalVectorsReturnsTrue)
 
 
 /** @brief Verify that @ref fgm::Vec4::allEq works for different vector types with identical components. */
-TYPED_TEST(Vec4Equality, MixedType_Equality_IdenticalVectorsReturnsTrue)
+TYPED_TEST(Vec4Equality, MixedType_AllEq_IdenticalVectorsReturnsTrue)
 {
     const fgm::Vec4 vecA(1, 2, 3, 4);
     const fgm::Vec4 vecB(1.0, 2.0, 3.0, 4.0);
@@ -427,7 +427,7 @@ TYPED_TEST(Vec4Equality, MixedType_Inequality_DifferentVectorsReturnsTrue)
 
 
 /** @brief Verify that the operator returns false for identical vectors. */
-TYPED_TEST(Vec4Equality, InEqualityOperator_IdenticalVectorsReturnsFalse)
+TYPED_TEST(Vec4Equality, NotEqualsOperator_IdenticalVectorsReturnsFalse)
 {
     const bool equality = this->_eqVecA != this->_eqVecB;
 
@@ -436,7 +436,7 @@ TYPED_TEST(Vec4Equality, InEqualityOperator_IdenticalVectorsReturnsFalse)
 
 
 /** @brief Verify that the inequality operator returns true for different vectors. */
-TYPED_TEST(Vec4Equality, InEqualityOperator_DifferentVectorsReturnsTrue)
+TYPED_TEST(Vec4Equality, NotEqualsOperator_DifferentVectorsReturnsTrue)
 {
     const bool equality = this->_eqVecA != this->_dissimilarVec;
 

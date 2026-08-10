@@ -129,7 +129,7 @@ TYPED_TEST(Vec4Comparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWithEle
  * @brief Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling infinite values.
  */
-TEST(Vec4Comparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, GT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
     const fgm::Vec4 vec(1.2, 4.5, 6.8, 9.5);
     const fgm::Vec4 infVec(INF, INF, -INF, -INF);
@@ -145,7 +145,7 @@ TEST(Vec4Comparison, InfinityVector_GreaterThan_ReturnsBooleanVectorWithCorrectV
  * @brief Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling NaN values.
  */
-TEST(Vec4Comparison, NaNVector_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, GT_NaNVector_ReturnsBooleanVectorWithCorrectValues)
 {
     const fgm::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
     const fgm::Vec4 infVec(NAN_F, NAN_F, -5.9f, NAN_F);
@@ -219,7 +219,7 @@ namespace
  * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec4Comparison, GreaterThanOrEqual_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+TYPED_TEST(Vec4Comparison, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
     const fgm::Vec4<bool> mask = this->_vecA.gte(this->_vecB);
 
@@ -243,7 +243,7 @@ TYPED_TEST(Vec4Comparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWithEl
  * @brief Verify that the static variant of greater-than-or-equal (gte) function perform a component-wise
  *       comparison and returns the correct boolean mask.
  */
-TYPED_TEST(Vec4Comparison, StaticWrapper_GreaterThanOrEqual_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+TYPED_TEST(Vec4Comparison, StaticWrapper_GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
     const fgm::Vec4<bool> mask = fgm::Vec4<TypeParam>::gte(this->_vecA, this->_vecB);
 
@@ -255,7 +255,7 @@ TYPED_TEST(Vec4Comparison, StaticWrapper_GreaterThanOrEqual_ReturnsBooleanVector
  * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
  *       when handling infinite values.
  */
-TEST(Vec4Comparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, GTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
     const fgm::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
     const fgm::Vec4 infVec(INF, INF, -INF, -INF);
@@ -271,7 +271,7 @@ TEST(Vec4Comparison, InfinityVector_GreaterThanOrEqual_ReturnsBooleanVectorWithC
  * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
  *       when handling NaN values.
  */
-TEST(Vec4Comparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, GTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 {
     const fgm::Vec4 vec(1.2, 4.5, 6.8, 9.5);
     const fgm::Vec4 infVec(NAN_F, NAN_F, -5.9f, NAN_F);
@@ -287,7 +287,7 @@ TEST(Vec4Comparison, NanVector_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrec
  * @brief Verify that the greater-than-or-equal (gte) function performs a component-wise comparison
  *       when handling vectors of different types.
  */
-TEST(Vec4Comparison, MixedType_GreaterThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, GTE_MixedType_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
     const fgm::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
@@ -345,7 +345,7 @@ namespace
  * @brief Verify that the less-than (lt) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec4Comparison, LessThan_ReturnsBooleanVectorWithElementsLessThanAsTrue)
+TYPED_TEST(Vec4Comparison, LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
     const fgm::Vec4<bool> mask = this->_vecA.lt(this->_vecB);
 
@@ -369,7 +369,7 @@ TYPED_TEST(Vec4Comparison, LessThanOperator_ReturnsBooleanVectorWithElementsLess
  * @brief Verify that the static variant of less-than (lt) function perform a component-wise comparison and
  *		 returns the correct boolean mask.
  */
-TYPED_TEST(Vec4Comparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithElementsLessThanAsTrue)
+TYPED_TEST(Vec4Comparison, StaticWrapper_LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
     const fgm::Vec4<bool> mask = fgm::Vec4<TypeParam>::lt(this->_vecA, this->_vecB);
 
@@ -381,7 +381,7 @@ TYPED_TEST(Vec4Comparison, StaticWrapper_LessThan_ReturnsBooleanVectorWithElemen
  * @brief Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling infinite values.
  */
-TEST(Vec4Comparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, LT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
     const fgm::Vec4 vec(1.2, 4.5, 6.8, 9.5);
     const fgm::Vec4 infVec(INF, INF, -INF, -INF);
@@ -397,7 +397,7 @@ TEST(Vec4Comparison, InfinityVector_LessThan_ReturnsBooleanVectorWithCorrectValu
  * @brief Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling NaN values.
  */
-TEST(Vec4Comparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, LT_NanVector_ReturnsBooleanVectorWithCorrectValues)
 {
     const fgm::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
     const fgm::Vec4 nanVec(NAN_F, NAN_F, -5.9f, NAN_F);
@@ -422,7 +422,7 @@ TEST(Vec4Comparison, NanVector_LessThan_ReturnsBooleanVectorWithCorrectValues)
  * @brief Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
-TEST(Vec4Comparison, MixedType_LessThan_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, LT_MixedType_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
     const fgm::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
@@ -480,7 +480,7 @@ namespace
  * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec4Comparison, LessThanOrEqual_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
+TYPED_TEST(Vec4Comparison, LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
     const fgm::Vec4<bool> mask = this->_vecA.lte(this->_vecB);
 
@@ -504,7 +504,7 @@ TYPED_TEST(Vec4Comparison, LessThanOrEqualOperator_ReturnsBooleanVectorWithEleme
  * @brief Verify that the static variant of less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec4Comparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
+TYPED_TEST(Vec4Comparison, StaticWrapper_LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
     const fgm::Vec4<bool> mask = fgm::Vec4<TypeParam>::lte(this->_vecA, this->_vecB);
 
@@ -516,7 +516,7 @@ TYPED_TEST(Vec4Comparison, StaticWrapper_LessThanOrEqual_ReturnsBooleanVectorWit
  * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling infinite values.
  */
-TEST(Vec4Comparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, LTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
     const fgm::Vec4 vec(1.2, 4.5, 6.8, 9.5);
     const fgm::Vec4 infVec(INF, INF, -INF, -INF);
@@ -532,7 +532,7 @@ TEST(Vec4Comparison, InfinityVector_LessThanOrEqual_ReturnsBooleanVectorWithCorr
  * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling NaN values.
  */
-TEST(Vec4Comparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, LTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 {
     const fgm::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
     const fgm::Vec4 nanVec(NAN_F, NAN_F, -5.9f, NAN_F);
@@ -557,7 +557,7 @@ TEST(Vec4Comparison, NanVector_LessThanOrEqual_ReturnsBooleanVectorWithCorrectVa
  * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
-TEST(Vec4Comparison, MixedType_LessThanOrEqual_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec4Comparison, LTE_MixedType_LTE_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
     const fgm::Vec4 vecA(1.2, 4.5, 7.5, 9.5);

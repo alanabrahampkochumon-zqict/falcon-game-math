@@ -13,69 +13,65 @@
 
 
 
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Vec2Initialization: public ::testing::Test
-{};
-/** @brief Test fixture for @ref fgm::Vec2 initialization, parameterized by @ref SupportedTypes */
-TYPED_TEST_SUITE(Vec2Initialization, SupportedTypes);
-
-
-
 /**
  * @addtogroup T_FGM_Vec2_Init
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that vector can be instantiated during compile time. */
 namespace
 {
-    constexpr fgm::Vec2 vecA(1, 2);
-    constexpr fgm::Vec2<int> vecB{};
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
 
-    static_assert(vecA.x() == 1);
-    static_assert(vecA.y() == 2);
+    /**
+     * @brief Test fixture for @ref Vec2 initialization.
+     */
+    template <typename>
+    class Vec2InitializationTests: public testing::Test
+    {};
+    TYPED_TEST_SUITE(Vec2InitializationTests, SupportedTypes);
 
-    static_assert(vecB.x() == 0);
-    static_assert(vecB.y() == 0);
 
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_wrapper
+    {
+
+        /// @test Verify that Vec2 can be initialized with parameters at compile time.
+        constexpr fgm::Vec2 vecA(1, 2);
+        static_assert(vecA.x() == 1);
+        static_assert(vecA.y() == 2);
+
+        /// @test Verify that Vec2 can be initialized using braced initialization at compile time.
+        constexpr fgm::Vec2<int> vecB{};
+        static_assert(vecB.x() == 0);
+        static_assert(vecB.y() == 0);
+
+    } // namespace static_wrapper
 } // namespace
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
-/** @brief Verify that the default constructor initializes all components to zero. */
-TYPED_TEST(Vec2Initialization, EmptyConstructorInitializesZeroVector)
+TYPED_TEST(Vec2InitializationTests, EmptyCtor_InitializesZeroVector)
 {
     const fgm::Vec2<TypeParam> vec{};
-
     EXPECT_VEC_ZERO(vec);
 }
 
 
-/** @brief Verify that the parameterized constructor correctly assigns components from the provided arguments. */
-TYPED_TEST(Vec2Initialization, ConstructorParametersInitializesVector)
+TYPED_TEST(Vec2InitializationTests, Ctor_ParametersInitializesVector)
 {
     const TypeParam a = static_cast<TypeParam>(3);
     const TypeParam b = static_cast<TypeParam>(1);
 
     const fgm::Vec2<TypeParam> vec(a, b);
-
     EXPECT_VEC_CONTAINS(vec, a, b);
 }
 
