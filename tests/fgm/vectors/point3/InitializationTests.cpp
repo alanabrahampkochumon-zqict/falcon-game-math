@@ -22,9 +22,7 @@ namespace
 {
 
     /**************************************
-     *                                    *
      *               SETUP                *
-     *                                    *
      **************************************/
     /**
      * @brief Test fixture for @ref fgm::Point3 initialization(CTOR).
@@ -38,9 +36,7 @@ namespace
 
 
     /**************************************
-     *                                    *
      *            STATIC TESTS            *
-     *                                    *
      **************************************/
 
     /** @brief Verify that vector can be instantiated during compile time. */
@@ -64,11 +60,8 @@ namespace
 
 
 
-
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
 TYPED_TEST(Point3Initialization, BracedInitialization_InitializesComponentsToZero)
