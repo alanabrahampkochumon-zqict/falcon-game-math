@@ -38,15 +38,13 @@ namespace
 
 
 
-
     /**************************************
      *           STATIC TESTS             *
      **************************************/
+
     namespace static_tests
     {
         constexpr fgm::Vec3 VECTOR(1.0f, 2.0f, 3.0f);
-
-        using namespace fgm::axis;
 
         /// @test Verify that vector swizzle<x,y,z> is available at compile time.
         static_assert(VECTOR.swizzle<X, Y, Z>().x() == 1.0f);

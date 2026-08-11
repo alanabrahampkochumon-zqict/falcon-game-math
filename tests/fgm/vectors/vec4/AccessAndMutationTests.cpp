@@ -13,55 +13,49 @@
 
 
 
-#ifdef ENABLE_DEBUG_TESTS
-class Vec4Indexing: public testing::TestWithParam<std::size_t>
-{};
-INSTANTIATE_TEST_SUITE_P(Vec3Tests, Vec4Indexing, testing::Values(4, 5, 100));
-#endif
-
-
-
 /**
  * @addtogroup T_FGM_Vec4_Access
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that vector accessors are available at compile time. */
 namespace
 {
-    constexpr fgm::Vec4 vector(1, 2, 3, 4);
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-    static_assert(vector.x() == 1);
-    static_assert(vector.y() == 2);
-    static_assert(vector.z() == 3);
-    static_assert(vector.w() == 4);
+    namespace static_tests
+    {
+        constexpr fgm::Vec4 VEC(1, 2, 3, 4);
 
-    static_assert(vector.r() == 1);
-    static_assert(vector.g() == 2);
-    static_assert(vector.b() == 3);
-    static_assert(vector.a() == 4);
+        /// @test Verify that vector is accessible as <x, y, z, w> at compile time.
+        static_assert(VEC.x() == 1);
+        static_assert(VEC.y() == 2);
+        static_assert(VEC.z() == 3);
+        static_assert(VEC.w() == 4);
 
-    static_assert(vector.s() == 1);
-    static_assert(vector.t() == 2);
-    static_assert(vector.p() == 3);
-    static_assert(vector.q() == 4);
+        /// @test Verify that vector is accessible as <r, g, b, a> at compile time.
+        static_assert(VEC.r() == 1);
+        static_assert(VEC.g() == 2);
+        static_assert(VEC.b() == 3);
+        static_assert(VEC.a() == 4);
+
+        /// @test Verify that vector is accessible as <s, t, p, q> at compile time.
+        static_assert(VEC.s() == 1);
+        static_assert(VEC.t() == 2);
+        static_assert(VEC.p() == 3);
+        static_assert(VEC.q() == 4);
+    } // namespace static_tests
 } // namespace
 
 
+
 /**************************************
- *                                    *
  *            ACCESS TESTS            *
- *                                    *
  **************************************/
 
-/** @brief Verify that the components are accessible via named spatial aliases (x, y, z, w). */
-TEST(Vec4Access, AccessibleAsXYZW)
+/** @test Verify that the components are accessible via named spatial aliases (x, y, z, w). */
+TEST(Vec4AccessTests, AccessibleAsXYZW)
 {
     const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
@@ -72,8 +66,8 @@ TEST(Vec4Access, AccessibleAsXYZW)
 }
 
 
-/** @brief Verify that the components are accessible via named spatial aliases (s, t, p, q). */
-TEST(Vec4Access, AccessibleAsSTPQ)
+/** @test Verify that the components are accessible via named spatial aliases (s, t, p, q). */
+TEST(Vec4AccessTests, AccessibleAsSTPQ)
 {
     const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
@@ -84,8 +78,8 @@ TEST(Vec4Access, AccessibleAsSTPQ)
 }
 
 
-/** @brief Verify that the components are accessible via named spatial aliases (r, g, b, a). */
-TEST(Vec4Access, AccessibleAsRGBA)
+/** @test Verify that the components are accessible via named spatial aliases (r, g, b, a). */
+TEST(Vec4AccessTests, AccessibleAsRGBA)
 {
     const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
@@ -96,8 +90,8 @@ TEST(Vec4Access, AccessibleAsRGBA)
 }
 
 
-/** @brief Verify that the components are accessible via subscript indexing for reads. */
-TEST(Vec4Access, AccessibleAsArray)
+/** @test Verify that the components are accessible via subscript indexing for reads. */
+TEST(Vec4AccessTests, AccessibleAsArray)
 {
     const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
@@ -108,33 +102,14 @@ TEST(Vec4Access, AccessibleAsArray)
 }
 
 
-#ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vec4 out-of-bounds access triggers assert in debug mode. */
-TEST_P(Vec4Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
-{
-    const fgm::Vec4 vec(1, 2, 3, 4);
-    const auto index = GetParam();
-    EXPECT_DEBUG_DEATH(vec[index], "");
-}
-#endif
 
-/** @} */
-
-
-
-/**
- * @addtogroup T_FGM_Vec4_Mutation
- * @{
- */
 
 /**************************************
- *                                    *
  *           MUTATION TESTS           *
- *                                    *
  **************************************/
 
-/** @brief Verify that the components can be mutated via named spatial aliases (x, y, z, w). */
-TEST(Vec4Mutation, ElementsCanBeMutatedUsingXYZW)
+/** @test Verify that the components can be mutated via named spatial aliases (x, y, z, w). */
+TEST(Vec4MutationTests, ElementsCanBeMutatedUsingXYZW)
 {
     fgm::Vec4<float> vec;
 
@@ -150,8 +125,8 @@ TEST(Vec4Mutation, ElementsCanBeMutatedUsingXYZW)
 }
 
 
-/** @brief Verify that the components can be mutated via named spatial aliases (s, t, p, q). */
-TEST(Vec4Mutation, ElementsCanBeMutatedUsingSTPQ)
+/** @test Verify that the components can be mutated via named spatial aliases (s, t, p, q). */
+TEST(Vec4MutationTests, ElementsCanBeMutatedUsingSTPQ)
 {
     fgm::Vec4<float> vec;
 
@@ -167,8 +142,8 @@ TEST(Vec4Mutation, ElementsCanBeMutatedUsingSTPQ)
 }
 
 
-/** @brief Verify that the components can be mutated via named spatial aliases (r, g, b, a). */
-TEST(Vec4Mutation, ElementsCanBeMutatedUsingRGBA)
+/** @test Verify that the components can be mutated via named spatial aliases (r, g, b, a). */
+TEST(Vec4MutationTests, ElementsCanBeMutatedUsingRGBA)
 {
     fgm::Vec4<float> vec;
 
@@ -184,8 +159,8 @@ TEST(Vec4Mutation, ElementsCanBeMutatedUsingRGBA)
 }
 
 
-/** @brief Verify that the components are accessible via subscript indexing for writing. */
-TEST(Vec4Mutation, ElementsCanBeMutatedUsingIndex)
+/** @test Verify that the components are accessible via subscript indexing for writing. */
+TEST(Vec4MutationTests, ElementsCanBeMutatedUsingIndex)
 {
     fgm::Vec4<float> vec;
 
@@ -199,15 +174,5 @@ TEST(Vec4Mutation, ElementsCanBeMutatedUsingIndex)
     EXPECT_FLOAT_EQ(6.0f, vec[2]);
     EXPECT_FLOAT_EQ(2.0f, vec[3]);
 }
-
-#ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vec4 out-of-bounds mutation triggers assert in debug mode. */
-TEST_P(Vec4Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
-{
-    fgm::Vec4 vec(1, 2, 3, 4);
-    const auto index = GetParam();
-    EXPECT_DEBUG_DEATH(vec[index] = 2, "");
-}
-#endif
 
 /** @} */

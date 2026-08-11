@@ -28,7 +28,6 @@ namespace
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
-
     template <typename T>
     class Vec3ProjectionTests: public ::testing::Test
     {
@@ -79,20 +78,17 @@ namespace
         static_assert(PROJ_VEC.y() == 0);
         static_assert(PROJ_VEC.z() == 0);
 
-
         /// @test Verify that vector projection(project-static wrapper) returns a valid vector at compile time.
         constexpr auto PROJ_VEC_STATIC = fgm::Vec3<int>::project(VEC_A, VEC_B);
         static_assert(PROJ_VEC_STATIC.x() == 1);
         static_assert(PROJ_VEC_STATIC.y() == 0);
         static_assert(PROJ_VEC_STATIC.z() == 0);
 
-
         /// @test Verify that vector projection(project normalized) returns a valid vector at compile time.
         constexpr auto PROJ_NORM_VEC = VEC_A.projectNorm(VEC_B);
         static_assert(PROJ_NORM_VEC.x() == 1);
         static_assert(PROJ_NORM_VEC.y() == 0);
         static_assert(PROJ_NORM_VEC.z() == 0);
-
 
         /// @test Verify that vector projection(project normalized-static wrapper) returns a valid vector at compile
         /// time.
@@ -101,13 +97,11 @@ namespace
         static_assert(PROJ_NORM_VEC_STATIC.y() == 0);
         static_assert(PROJ_NORM_VEC_STATIC.z() == 0);
 
-
         /// @test Verify that vector projection(safe project) returns a valid vector at compile time.
         constexpr auto SAFE_PROJ_VEC = VEC_A.safeProject(VEC_B);
         static_assert(SAFE_PROJ_VEC.x() == 1);
         static_assert(SAFE_PROJ_VEC.y() == 0);
         static_assert(SAFE_PROJ_VEC.z() == 0);
-
 
         /// @test Verify that vector projection(safe project-static wrapper) returns a valid vector at compile time.
         constexpr auto SAFE_PROJ_VEC_STATIC = fgm::Vec3<int>::safeProject(VEC_A, VEC_B);
@@ -115,13 +109,11 @@ namespace
         static_assert(SAFE_PROJ_VEC_STATIC.y() == 0);
         static_assert(SAFE_PROJ_VEC_STATIC.z() == 0);
 
-
         /// @test Verify that vector projection(safe project normalized) returns a valid vector at compile time.
         constexpr auto SAFE_PROJ_NORM_VEC = VEC_A.safeProjectNorm(VEC_B);
         static_assert(SAFE_PROJ_NORM_VEC.x() == 1);
         static_assert(SAFE_PROJ_NORM_VEC.y() == 0);
         static_assert(SAFE_PROJ_NORM_VEC.z() == 0);
-
 
         /// @test Verify that vector projection(safe project normalized-static wrapper) returns a valid vector at
         /// compile time.

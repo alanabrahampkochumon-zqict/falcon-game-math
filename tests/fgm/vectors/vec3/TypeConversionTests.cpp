@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec2_Type_Conv
+ * @addtogroup T_FGM_Vec3_Type_Conv
  * @{
  */
 

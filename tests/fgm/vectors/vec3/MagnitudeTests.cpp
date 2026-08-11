@@ -28,42 +28,42 @@ namespace
      * @brief Test fixture for @ref Vec3 magnitude.
      * @tparam T The scalar type (int, float, double...) of the vector components.
      */
-template <typename T>
-class Vec3MagnitudeTests: public testing::Test
-{
-protected:
-    fgm::Vec3<T> _vec;
-    fgm::Magnitude<T> _expectedMagnitude;
-    T _expectedMagnitudeSquare;
-
-    void SetUp() override
+    template <typename T>
+    class Vec3MagnitudeTests: public testing::Test
     {
-        _vec                     = { T(9), T(6), T(2) };
-        _expectedMagnitude       = fgm::Magnitude<T>(11);
-        _expectedMagnitudeSquare = T(121);
-    }
-};
-TYPED_TEST_SUITE(Vec3MagnitudeTests, SupportedArithmeticTypes);
+    protected:
+        fgm::Vec3<T> _vec;
+        fgm::Magnitude<T> _expectedMagnitude;
+        T _expectedMagnitudeSquare;
+
+        void SetUp() override
+        {
+            _vec                     = { T(9), T(6), T(2) };
+            _expectedMagnitude       = fgm::Magnitude<T>(11);
+            _expectedMagnitudeSquare = T(121);
+        }
+    };
+    TYPED_TEST_SUITE(Vec3MagnitudeTests, SupportedArithmeticTypes);
 
 
     /**
      * @brief Test fixture for @ref Vec3 magnitude that returns a value with decimal places.
      * @tparam T The scalar type (int, float, double...) of the vector components.
      */
-template <typename T>
-class Vec3UncleanMagnitudeTests: public testing::Test
-{
-protected:
-    fgm::Vec3<T> _vec;
-    fgm::Magnitude<T> _expectedMagnitude;
-
-    void SetUp() override
+    template <typename T>
+    class Vec3UncleanMagnitudeTests: public testing::Test
     {
-        _vec               = { T(1), T(2), T(3) };
-        _expectedMagnitude = fgm::Magnitude<T>(3.7416573867739413);
-    }
-};
-TYPED_TEST_SUITE(Vec3UncleanMagnitudeTests, SupportedArithmeticTypes);
+    protected:
+        fgm::Vec3<T> _vec;
+        fgm::Magnitude<T> _expectedMagnitude;
+
+        void SetUp() override
+        {
+            _vec               = { T(1), T(2), T(3) };
+            _expectedMagnitude = fgm::Magnitude<T>(3.7416573867739413);
+        }
+    };
+    TYPED_TEST_SUITE(Vec3UncleanMagnitudeTests, SupportedArithmeticTypes);
 
 
 
@@ -94,11 +94,15 @@ TYPED_TEST_SUITE(Vec3UncleanMagnitudeTests, SupportedArithmeticTypes);
 } // namespace
 
 
+
+/**************************************
+ *          MAGNITUDE TESTS           *
+ **************************************/
+
 /** @brief Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vec3Magnitude, ZeroVectorReturnsZero)
 {
     const fgm::Vec3 vec(0.0f, 0.0f, 0.0f);
-
     EXPECT_FLOAT_EQ(0.0f, vec.mag());
 }
 
@@ -107,7 +111,6 @@ TEST(Vec3Magnitude, ZeroVectorReturnsZero)
 TEST(Vec3Magnitude, OneComponentVectorReturnsNonUnitScalar)
 {
     const fgm::Vec3 vec(1.0f, 1.0f, 1.0f);
-
     EXPECT_NE(1.0f, vec.mag());
 }
 
@@ -116,7 +119,6 @@ TEST(Vec3Magnitude, OneComponentVectorReturnsNonUnitScalar)
 TYPED_TEST(Vec3MagnitudeTests, NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = this->_vec.mag();
-
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 

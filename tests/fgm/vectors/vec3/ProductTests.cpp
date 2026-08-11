@@ -60,6 +60,7 @@ namespace
     TYPED_TEST_SUITE(Vec3DotProductTests, SupportedArithmeticTypes);
 
 
+
     /**
      * @brief Test fixture for @ref fgm::Vec3 cross product.
      *
@@ -81,6 +82,8 @@ namespace
         }
     };
     TYPED_TEST_SUITE(Vec3CrossProductTests, SupportedSignedArithmeticTypes);
+
+
 
     /**
      * @brief Test fixture for @ref fgm::Vec3 tensor product.

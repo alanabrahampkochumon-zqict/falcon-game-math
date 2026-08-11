@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verify @ref fgm::Vec4 magnitude logic.
+ * @test Verify @ref fgm::Vec4 magnitude logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -13,97 +13,114 @@
 
 
 
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Vec4Magnitude: public ::testing::Test
-{
-protected:
-    fgm::Vec4<T> _vec;
-    fgm::Magnitude<T> _expectedMagnitude;
-    T _expectedMagnitudeSquare;
-
-    void SetUp() override
-    {
-        _vec                     = { T(1), T(2), T(2), T(4) };
-        _expectedMagnitude       = fgm::Magnitude<T>(5);
-        _expectedMagnitudeSquare = T(25);
-    }
-};
-/** @brief Test fixture for @ref fgm::Vec4 magnitude, parameterized by SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec4Magnitude, SupportedArithmeticTypes);
-
-
-template <typename T>
-class Vec4UncleanMagnitude: public ::testing::Test
-{
-protected:
-    fgm::Vec4<T> _vec;
-    fgm::Magnitude<T> _expectedMagnitude;
-
-    void SetUp() override
-    {
-        _vec               = { T(1), T(2), T(3), T(4) };
-        _expectedMagnitude = fgm::Magnitude<T>(5.477225575051661);
-    }
-};
 /**
- * @brief Test fixture for @ref fgm::Vec4 magnitude, parameterized by @ref SupportedArithmeticTypes,
- *        for testing high-precision magnitude.
- */
-TYPED_TEST_SUITE(Vec4UncleanMagnitude, SupportedArithmeticTypes);
-
-
-
-/**
- * @addtogroup T_FGM_Vec4_Magnitude
+ * @addtogroup T_FGM_Vec3_Magnitude
  * @{
  */
 
-/** @brief Verify that vector magnitude operation is available at compile time. */
 namespace
 {
-    // TODO: Add static test after making sqrt constexpr
-    // constexpr fgm::Vec4 Vec(1, 2, 3, 4);
-    // constexpr auto magA = Vec.mag();
-    // constexpr auto magB = fgm::Vec2<int>::mag(Vec);
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
 
-    // static_assert(magA - 5.477225575051661 <= 1e-5);
-    // static_assert(magB - 5.477225575051661 <= 1e-5);
+    /**
+     * @brief Test fixture for @ref Vec3 magnitude.
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec4MagnitudeTests: public testing::Test
+    {
+    protected:
+        fgm::Vec4<T> _vec;
+        fgm::Magnitude<T> _expectedMagnitude;
+        T _expectedMagnitudeSquare;
 
-    constexpr fgm::Vec4 vecM(1, 2, 3, 4);
-    constexpr auto magSqA = vecM.magSq();
-    constexpr auto magSqB = fgm::Vec4<int>::magSq(vecM);
+        void SetUp() override
+        {
+            _vec                     = { T(1), T(2), T(2), T(4) };
+            _expectedMagnitude       = fgm::Magnitude<T>(5);
+            _expectedMagnitudeSquare = T(25);
+        }
+    };
+    TYPED_TEST_SUITE(Vec4MagnitudeTests, SupportedArithmeticTypes);
 
-    static_assert(magSqA == 30);
-    static_assert(magSqB == 30);
+
+
+    /**
+     * @brief Test fixture for @ref Vec3 magnitude that returns a value with decimal places.
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec4UncleanMagnitude: public testing::Test
+    {
+    protected:
+        fgm::Vec4<T> _vec;
+        fgm::Magnitude<T> _expectedMagnitude;
+
+        void SetUp() override
+        {
+            _vec               = { T(1), T(2), T(3), T(4) };
+            _expectedMagnitude = fgm::Magnitude<T>(5.477225575051661);
+        }
+    };
+    TYPED_TEST_SUITE(Vec4UncleanMagnitude, SupportedArithmeticTypes);
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Vec4 VEC_A(1, 2, 3, 4);
+
+        // TODO: Add static test after making sqrt constexpr
+        /// @test Verify that mag returns a valid value at compile time.
+
+        // constexpr auto MAG = Vec.mag();
+        // static_assert(MAG - 5.477225575051661 <= 1e-5);
+
+        /// @test Verify that mag (static wrapper) returns a valid value at compile time.
+        // constexpr auto MAG_STATIC = fgm::Vec4<int>::mag(Vec);
+        // static_assert(MAG_STATIC - 5.477225575051661 <= 1e-5);
+
+        /// @test Verify that magSq returns a valid value at compile time.
+        constexpr auto MAG_SQ = VEC_A.magSq();
+        static_assert(MAG_SQ - 30.0 < 1e5);
+
+        /// @test Verify that magSq (static wrapper) returns a valid value at compile time.
+        constexpr auto MAG_SQ_STATIC = fgm::Vec4<int>::magSq(VEC_A);
+        static_assert(MAG_SQ_STATIC - 30.0 < 1e5);
+
+    } // namespace static_tests
 } // namespace
 
 
-/** @brief Verify that taking the magnitude of a zero vector returns exactly zero. */
+
+/**************************************
+ *          MAGNITUDE TESTS           *
+ **************************************/
+
+/** @test Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vec4Magnitude, ZeroVectorReturnsZero)
 {
     const fgm::Vec4 vec(0.0f, 0.0f, 0.0f, 0.0f);
-
     EXPECT_FLOAT_EQ(0.0f, vec.mag());
 }
 
 
-/** @brief Verify that taking the magnitude of a one vector returns non-unit scalar. */
+/** @test Verify that taking the magnitude of a one vector returns non-unit scalar. */
 TEST(Vec4Magnitude, OneComponentVectorReturnsNonUnitScalar)
 {
     const fgm::Vec4 vec(1.0f, 1.0f, 1.0f, 1.0f);
-
     EXPECT_NE(1.0f, vec.mag());
 }
 
 
-/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vec4Magnitude, NonUnitVectorReturnsCorrectMagnitude)
+/** @test Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+TYPED_TEST(Vec4MagnitudeTests, NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = this->_vec.mag();
 
@@ -112,8 +129,8 @@ TYPED_TEST(Vec4Magnitude, NonUnitVectorReturnsCorrectMagnitude)
 }
 
 
-/** @brief Verify that taking the magnitude always returns a floating-point scalar. */
-TYPED_TEST(Vec4Magnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
+/** @test Verify that taking the magnitude always returns a floating-point scalar. */
+TYPED_TEST(Vec4MagnitudeTests, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] const auto magnitude = this->_vec.mag();
     static_assert(std::is_floating_point_v<decltype(magnitude)>);
@@ -121,61 +138,54 @@ TYPED_TEST(Vec4Magnitude, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 
 
 /**
- * @brief Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vec4::mag
+ * @test Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vec4::mag
  *       returns non-unit scalar.
  */
-TYPED_TEST(Vec4Magnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
+TYPED_TEST(Vec4MagnitudeTests, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = fgm::Vec4<TypeParam>::mag(this->_vec);
-
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
 
-/** @brief Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
+/** @test Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
 TYPED_TEST(Vec4UncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
     const auto magnitude = this->_vec.mag();
-
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
 
 /**
- * @brief Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vec4::mag
+ * @test Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vec4::mag
  *       ensure minimal precision loss.
  */
 TYPED_TEST(Vec4UncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
     const auto magnitude = fgm::Vec4<TypeParam>::mag(this->_vec);
-
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
 
 /**************************************
- *                                    *
  *       MAGNITUDE SQUARE TESTS       *
- *                                    *
  **************************************/
 
-/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vec4Magnitude, MagSq_ReturnsSquaredMagnitude)
+/** @test Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+TYPED_TEST(Vec4MagnitudeTests, MagSq_ReturnsSquaredMagnitude)
 {
     const auto magnitude = this->_vec.magSq();
-
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 
 
 /**
- * @brief Verify that taking the magnitude square of a non-unit vector using static variant of
+ * @test Verify that taking the magnitude square of a non-unit vector using static variant of
  *        @ref fgm::Vec4::mag returns non-unit scalar.
  */
-TYPED_TEST(Vec4Magnitude, StaticWrapper_MagSq_ReturnsSquaredMagnitude)
+TYPED_TEST(Vec4MagnitudeTests, StaticWrapper_MagSq_ReturnsSquaredMagnitude)
 {
     const auto magnitude = fgm::Vec4<TypeParam>::magSq(this->_vec);
-
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 

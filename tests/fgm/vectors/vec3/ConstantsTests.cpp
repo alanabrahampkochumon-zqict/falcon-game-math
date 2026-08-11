@@ -36,7 +36,7 @@ namespace
     TYPED_TEST_SUITE(Vec3ConstantsTests, SupportedSignedArithmeticTypes);
 
 
-    
+
     /**************************************
      *            STATIC TESTS            *
      **************************************/
@@ -55,31 +55,31 @@ namespace
         static_assert(fgm::Vec3<int>::zero().z() == 0);
 
 
-        /// @test Verify that @ref Vec3::inf() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec3::inf() returns a infinity vector at compile time.
         static_assert(fgm::isinf(fgm::Vec3<float>::inf().x()));
         static_assert(fgm::isinf(fgm::Vec3<float>::inf().y()));
         static_assert(fgm::isinf(fgm::Vec3<float>::inf().z()));
 
 
-        /// @test Verify that @ref Vec3::infNeg() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec3::infNeg() returns a negative infinity vector at compile time.
         static_assert(fgm::isinf(fgm::Vec3<float>::infNeg().x()));
         static_assert(fgm::isinf(fgm::Vec3<float>::infNeg().y()));
         static_assert(fgm::isinf(fgm::Vec3<float>::infNeg().z()));
 
 
-        /// @test Verify that @ref Vec3::qnan() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec3::qnan() returns a qnan vector at compile time.
         static_assert(fgm::isnan(fgm::Vec3<float>::qnan().x()));
         static_assert(fgm::isnan(fgm::Vec3<float>::qnan().y()));
         static_assert(fgm::isnan(fgm::Vec3<float>::qnan().z()));
 
 
-        /// @test Verify that @ref Vec3::left() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec3::left() returns a valid vector at compile time.
         static_assert(fgm::Vec3<int>::left().x() == -1);
         static_assert(fgm::Vec3<int>::left().y() == 0);
         static_assert(fgm::Vec3<int>::left().z() == 0);
 
 
-        /// @test Verify that @ref Vec3::right() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec3::right() returns a valid vector at compile time.
         static_assert(fgm::Vec3<int>::right().x() == 1);
         static_assert(fgm::Vec3<int>::right().y() == 0);
         static_assert(fgm::Vec3<int>::right().z() == 0);
@@ -121,16 +121,6 @@ namespace
         static_assert(fgm::Vec3<int>::backward().y() == 0);
         static_assert(fgm::Vec3<int>::backward().z() == 1);
 #endif
-
-        constexpr auto P1 = fgm::Vec3<int>::point();
-        static_assert(P1.x() == 0);
-        static_assert(P1.y() == 0);
-        static_assert(P1.z() == 1);
-
-        constexpr auto P2 = fgm::Vec3<int>::point(4, 5);
-        static_assert(P2.x() == 4);
-        static_assert(P2.y() == 5);
-        static_assert(P2.z() == 1);
 
     } // namespace static_tests
 } // namespace
@@ -274,27 +264,5 @@ TYPED_TEST(Vec3ConstantsTests, BACKWARD_ReturnsUnitVectorWithOnlyNegativeZCompon
 }
 
 #endif
-
-/**
- * @brief Verify that @ref fgm::Vec3::POINT returns a vector with a unit z-component
- *        and zero <x,y> component by default.
- */
-TYPED_TEST(Vec3ConstantsTests, POINT_ReturnsVectorWithUnitZComponent)
-{
-    const auto vec = fgm::Vec3<TypeParam>::point();
-    EXPECT_VEC_CONTAINS(vec, this->_zero, this->_zero, this->_one);
-}
-
-/**
- * @brief Verify that @ref fgm::Vec3::POINT returns a vector with a unit z-component
- *        and passed-in <x,y> component.
- */
-TYPED_TEST(Vec3ConstantsTests, POINT_ReturnsVectorWithUnitZComponentAndPassedInXYComponent)
-{
-    const auto x   = TypeParam(5);
-    const auto y   = TypeParam(8);
-    const auto vec = fgm::Vec3<TypeParam>::point(x, y);
-    EXPECT_VEC_CONTAINS(vec, x, y, this->_one);
-}
 
 /** @} */

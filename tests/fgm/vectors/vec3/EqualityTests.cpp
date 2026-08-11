@@ -21,10 +21,8 @@
 
 namespace
 {
-
     constexpr auto NAN_F = fgm::constants::NaN;
     constexpr auto INF   = fgm::constants::INFINITY_F;
-
 
     /**************************************
      *           TEST SETUP               *
@@ -34,27 +32,27 @@ namespace
      * @brief Test fixture for @ref Vec3 equality.
      * @tparam T The scalar type (int, float, double...) of the vector components.
      */
-template <typename T>
-class Vec3EqualityTests: public testing::Test
-{
-protected:
-    fgm::Vec3<T> _eqVecA;
-    fgm::Vec3<T> _eqVecB;
-    fgm::Vec3<T> _dissimilarVec;
-    fgm::Vec3<bool> _equalityMask;
-    fgm::Vec3<bool> _inequalityMask;
-
-
-    void SetUp() override
+    template <typename T>
+    class Vec3EqualityTests: public testing::Test
     {
-        _eqVecA         = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
-        _eqVecB         = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
-        _dissimilarVec  = { T(7.1234568789), T(2.123458319), T(24.00) };
-        _equalityMask   = { false, true, false };
-        _inequalityMask = { true, false, true };
-    }
-};
-TYPED_TEST_SUITE(Vec3EqualityTests, SupportedArithmeticTypes);
+    protected:
+        fgm::Vec3<T> _eqVecA;
+        fgm::Vec3<T> _eqVecB;
+        fgm::Vec3<T> _dissimilarVec;
+        fgm::Vec3<bool> _equalityMask;
+        fgm::Vec3<bool> _inequalityMask;
+
+
+        void SetUp() override
+        {
+            _eqVecA         = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
+            _eqVecB         = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
+            _dissimilarVec  = { T(7.1234568789), T(2.123458319), T(24.00) };
+            _equalityMask   = { false, true, false };
+            _inequalityMask = { true, false, true };
+        }
+    };
+    TYPED_TEST_SUITE(Vec3EqualityTests, SupportedArithmeticTypes);
 
 
 
@@ -64,11 +62,11 @@ TYPED_TEST_SUITE(Vec3EqualityTests, SupportedArithmeticTypes);
 
     namespace static_tests
     {
-    constexpr fgm::Vec3 VEC_A(1, 2, 4);
-    constexpr fgm::Vec3 VEC_B(3, 2, 1);
-    constexpr fgm::Vec3 VEC_C(1, 2, 4);
+        constexpr fgm::Vec3 VEC_A(1, 2, 4);
+        constexpr fgm::Vec3 VEC_B(3, 2, 1);
+        constexpr fgm::Vec3 VEC_C(1, 2, 4);
 
-    
+
         /// @test Verify that @ref Vec3 allEq returns correct boolean for equal vectors.
         constexpr auto ALLEQ_EQ_VECS = VEC_A.allEq(VEC_B);
         static_assert(ALLEQ_EQ_VECS == false);
@@ -129,7 +127,7 @@ TYPED_TEST_SUITE(Vec3EqualityTests, SupportedArithmeticTypes);
         static_assert(NEQ_MASK_VEC.x() == true);
         static_assert(NEQ_MASK_VEC.y() == false);
 
-} // namespace
+    } // namespace static_tests
 } // namespace
 
 

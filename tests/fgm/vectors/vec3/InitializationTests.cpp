@@ -57,12 +57,11 @@ namespace
         static_assert(SCALAR_VEC2_INIT_VEC.y() == 2);
         static_assert(SCALAR_VEC2_INIT_VEC.z() == 3);
 
-        constexpr fgm::Vec3<int> BRACED_INIT_VEC{};
         /// @test Verify that Vec3 can be initialized using braced initialization at compile time.
+        constexpr fgm::Vec3<int> BRACED_INIT_VEC{};
         static_assert(BRACED_INIT_VEC.x() == 0);
         static_assert(BRACED_INIT_VEC.y() == 0);
         static_assert(BRACED_INIT_VEC.z() == 0);
-
     } // namespace static_wrapper
 } // namespace
 
@@ -76,7 +75,6 @@ namespace
 TYPED_TEST(Vec3InitializationTests, EmptyConstructorInitializesZeroVector)
 {
     const fgm::Vec3<TypeParam> vec{};
-
     EXPECT_VEC_ZERO(vec);
 }
 
@@ -89,7 +87,6 @@ TYPED_TEST(Vec3InitializationTests, ConstructorParametersInitializesVector)
     const TypeParam c = static_cast<TypeParam>(6);
 
     const fgm::Vec3<TypeParam> vec(a, b, c);
-
     EXPECT_VEC_CONTAINS(vec, a, b, c);
 }
 
@@ -106,7 +103,6 @@ TYPED_TEST(Vec3InitializationTests, 2DVectorAndScalarCanInitializeA3DVector)
     const TypeParam scalar = static_cast<TypeParam>(6);
 
     const fgm::Vec3<TypeParam> vec(vec1, scalar);
-
     EXPECT_VEC_CONTAINS(vec, a, b, scalar);
 }
 
@@ -123,6 +119,5 @@ TYPED_TEST(Vec3InitializationTests, ScalarAnd2DVectorCanInitializeA3DVector)
     const fgm::Vec2<TypeParam> vec1(a, b);
 
     const fgm::Vec3<TypeParam> vec(scalar, vec1);
-
     EXPECT_VEC_CONTAINS(vec, scalar, a, b);
 }

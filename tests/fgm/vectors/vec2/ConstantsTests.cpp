@@ -53,23 +53,23 @@ namespace
         static_assert(fgm::Vec2<int>::zero().x() == 0);
         static_assert(fgm::Vec2<int>::zero().y() == 0);
 
-        /// @test Verify that @ref Vec2::inf() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec2::inf() returns a infinity vector at compile time.
         static_assert(fgm::isinf(fgm::Vec2<float>::inf().x()));
         static_assert(fgm::isinf(fgm::Vec2<float>::inf().y()));
 
-        /// @test Verify that @ref Vec2::infNeg() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec2::infNeg() returns a negative infinity vector at compile time.
         static_assert(fgm::isinf(fgm::Vec2<float>::infNeg().x()));
         static_assert(fgm::isinf(fgm::Vec2<float>::infNeg().y()));
 
-        /// @test Verify that @ref Vec2::qnan() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec2::qnan() returns a qnan vector at compile time.
         static_assert(fgm::isnan(fgm::Vec2<float>::qnan().x()));
         static_assert(fgm::isnan(fgm::Vec2<float>::qnan().y()));
 
-        /// @test Verify that @ref Vec2::left() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec2::left() returns a valid vector at compile time.
         static_assert(fgm::Vec2<int>::left().x() == -1);
         static_assert(fgm::Vec2<int>::left().y() == 0);
 
-        /// @test Verify that @ref Vec2::right() returns a zero vector at compile time.
+        /// @test Verify that @ref Vec2::right() returns a valid vector at compile time.
         static_assert(fgm::Vec2<int>::right().x() == 1);
         static_assert(fgm::Vec2<int>::right().y() == 0);
 

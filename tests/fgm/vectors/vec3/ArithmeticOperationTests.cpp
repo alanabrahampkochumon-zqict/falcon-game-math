@@ -141,7 +141,6 @@ namespace
     /// @brief Test fixture for @ref fgm::Vec3 division with NaN vectors.
     class Vec3DivisionNaNTests: public testing::TestWithParam<fgm::Vec3<float>>
     {};
-
     INSTANTIATE_TEST_SUITE_P(Vec3InvalidDivision, Vec3DivisionNaNTests,
                              ::testing::Values(fgm::Vec3<float>(fgm::constants::NaN, 3.0f, 3.0f),
                                                fgm::Vec3<float>(3.0f, fgm::constants::NaN, 3.0f),
@@ -159,6 +158,7 @@ namespace
     {
         constexpr fgm::Vec3 VEC_A(1, 2, 3);
         constexpr fgm::Vec3 VEC_B(3, 5, 6);
+
         /// @test Verify that vector sum returns a valid vector at compile time.
         constexpr auto VEC_SUM = VEC_A + VEC_B;
         static_assert(VEC_SUM.x() == 4);

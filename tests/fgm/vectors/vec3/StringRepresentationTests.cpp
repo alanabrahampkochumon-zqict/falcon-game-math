@@ -28,16 +28,16 @@ namespace
     /**
      * @brief Test fixture for @ref fgm::Vec3 string representation.
      */
-class Vec3StringRepresentationTests: public testing::Test
-{
-protected:
-    /** @brief Switch to use full precision for testing. */
-    void SetUp() override { fgm::Config::useFullPrecision = true; }
+    class Vec3StringRepresentationTests: public testing::Test
+    {
+    protected:
+        /** @brief Switch to use full precision for testing. */
+        void SetUp() override { fgm::Config::useFullPrecision = true; }
 
-    /** @brief Switch back to normal log precision. */
-    void TearDown() override { fgm::Config::useFullPrecision = false; }
-};
-}
+        /** @brief Switch back to normal log precision. */
+        void TearDown() override { fgm::Config::useFullPrecision = false; }
+    };
+} // namespace
 
 
 

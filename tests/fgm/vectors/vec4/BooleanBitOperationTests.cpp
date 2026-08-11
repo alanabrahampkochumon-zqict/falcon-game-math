@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verify @ref fgm::Vec4 bitwise operator(&, |, !) logic.
+ * @test Verify @ref fgm::Vec4 bitwise operator(&, |, !) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -12,15 +12,21 @@
 #include "Vec4TestSetup.h"
 
 
+/**
+ * @addtogroup T_FGM_Vec4_Bool_Bit
+ * @{
+ */
 
-/**************************************
- *                                    *
- *                SETUP               *
- *                                    *
- **************************************/
+namespace
+{
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
 
-/** @brief Test fixture for @ref Vec4<bool> bitwise operations */
-class BooleanVec4BitOperationTests: public ::testing::Test
+    /**
+     * @brief Test fixture for @ref fgm::Vec4 boolean bitwise operations.
+     */
+class BooleanVec4BitOperationTests: public testing::Test
 {
 protected:
     fgm::Vec4<bool> _vecA;
@@ -41,93 +47,97 @@ protected:
 
 
 
-/**
- * @addtogroup T_FGM_Vec4_Bool_Bit
- * @{
- */
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-/** @brief Verify that vector boolean bitwise operations are available at compile time. */
-namespace
-{
-    constexpr fgm::Vec4 vec1(true, false, true, false);
-    constexpr fgm::Vec4 vec2(false, false, true, false);
-    constexpr auto andVec = vec1 & vec2;
-    constexpr auto orVec  = vec1 | vec2;
-    constexpr auto notVec = !vec1;
+    namespace static_tests
+    {
+        constexpr fgm::Vec4 VEC_A(true, false, true, false);
+        constexpr fgm::Vec4 VEC_B(false, false, true, true);
 
-    static_assert(andVec.x() == false);
-    static_assert(andVec.y() == false);
-    static_assert(andVec.z() == true);
-    static_assert(andVec.w() == false);
+        /// @test Verify that vector AND returns a valid vector at compile time.
+        constexpr auto AND_VEC = VEC_A & VEC_B;
+        static_assert(AND_VEC.x() == false);
+        static_assert(AND_VEC.y() == false);
+        static_assert(AND_VEC.z() == true);
+        static_assert(AND_VEC.w() == false);
 
-    static_assert(orVec.x() == true);
-    static_assert(orVec.y() == false);
-    static_assert(orVec.z() == true);
-    static_assert(orVec.w() == false);
 
-    static_assert(notVec.x() == false);
-    static_assert(notVec.y() == true);
-    static_assert(notVec.z() == false);
-    static_assert(notVec.w() == true);
+        /// @test Verify that vector OR returns a valid vector at compile time.
+        constexpr auto OR_VEC = VEC_A | VEC_B;
+        static_assert(OR_VEC.x() == true);
+        static_assert(OR_VEC.y() == false);
+        static_assert(OR_VEC.z() == true);
+        static_assert(OR_VEC.w() == true);
+
+
+        /// @test Verify that vector NOT returns a valid vector at compile time.
+        constexpr auto NOT_VEC = !VEC_A;
+        static_assert(NOT_VEC.x() == false);
+        static_assert(NOT_VEC.y() == true);
+        static_assert(NOT_VEC.z() == false);
+        static_assert(NOT_VEC.w() == true);
+    } // namespace static_tests
 
 } // namespace
 
 
+
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
+
 /**
- * @brief Verify that the bitwise AND operator perform a component-wise logical conjunction and
+ * @test Verify that the bitwise AND operator perform a component-wise logical conjunction and
  *       returns the correct boolean mask.
  */
 TEST_F(BooleanVec4BitOperationTests, BitwiseAND_PerformComponentwiseConjunction)
 {
     const auto mask = this->_vecA & this->_vecB;
-
     EXPECT_VEC_EQ(this->_expectedConjunctionVector, mask);
 }
 
 /**
- * @brief Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
+ * @test Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
 TEST_F(BooleanVec4BitOperationTests, CompoundBitwiseAND_PerformInPlaceConjunction)
 {
     this->_vecA &= this->_vecB;
-
     EXPECT_VEC_EQ(this->_expectedConjunctionVector, this->_vecA);
 }
 
 
 /**
- * @brief Verify that the bitwise OR operator performs a component-wise logical disjunction and
+ * @test Verify that the bitwise OR operator performs a component-wise logical disjunction and
  *       returns the correct boolean mask.
  */
 TEST_F(BooleanVec4BitOperationTests, BitwiseOR_PerformComponentwiseDisjunction)
 {
     const auto mask = this->_vecA | this->_vecB;
-
     EXPECT_VEC_EQ(this->_expectedDisjunctionVec, mask);
 }
 
 
 /**
- * @brief Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place
+ * @test Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
 TEST_F(BooleanVec4BitOperationTests, CompoundBitwiseOR_PerformInPlaceDisjunction)
 {
     this->_vecA |= this->_vecB;
-
     EXPECT_VEC_EQ(this->_expectedConjunctionVector, this->_vecA);
 }
 
 
 /**
- * @brief Verify that the bitwise NOT operator performs a component-wise logical inversion and
+ * @test Verify that the bitwise NOT operator performs a component-wise logical inversion and
  *       returns the correct boolean mask.
  */
 TEST_F(BooleanVec4BitOperationTests, BitwiseNOT_PerformComponentwiseInversion)
 {
     const auto mask = !this->_vecA;
-
     EXPECT_VEC_EQ(this->_expectedInvertedVec, mask);
 }
 

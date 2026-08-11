@@ -76,9 +76,8 @@ namespace
         static_assert(NOT_VEC.x() == false);
         static_assert(NOT_VEC.y() == true);
         static_assert(NOT_VEC.z() == false);
-
-
     } // namespace static_tests
+
 } // namespace
 
 

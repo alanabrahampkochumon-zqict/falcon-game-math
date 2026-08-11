@@ -2391,19 +2391,6 @@ namespace fgm
 
 #endif
 
-        // TODO: Specialize
-        /**
-         * @brief Alias for a 2D-point representation.
-         *
-         * @note Last component is reserved for distinguishing a Point(1) and a Vector(0).
-         * @param[in] x The x-coordinate of the point. Default: 0
-         * @param[in] y The y-coordinate of the point. Default: 0
-         */
-        static constexpr Vec3 point(const T x = T(0), const T y = T(0))
-            requires std::is_signed_v<T>
-        { return Vec3{ x, y, T(1) }; }
-
-
         // NOLINTEND
         /** @} */
 
