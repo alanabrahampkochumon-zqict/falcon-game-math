@@ -80,6 +80,10 @@ namespace
 
 
 
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
+
 /**
  * @brief Verify that the bitwise AND operator perform a component-wise logical conjunction and
  *       returns the correct boolean mask.

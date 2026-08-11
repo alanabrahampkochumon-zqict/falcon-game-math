@@ -45,7 +45,7 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TEST_F(Vec2StringRepresentationTests, IntegralMatrix_ReturnsFormattedString)
+TEST_F(Vec2StringRepresentationTests, IntegralVector_ReturnsFormattedString)
 {
     const fgm::Vec2 vec(1, 2);
     std::stringstream ss;
@@ -56,7 +56,7 @@ TEST_F(Vec2StringRepresentationTests, IntegralMatrix_ReturnsFormattedString)
 }
 
 
-TEST_F(Vec2StringRepresentationTests, FloatingPointMatrix_ReturnsFormattedString)
+TEST_F(Vec2StringRepresentationTests, FloatingPointVector_ReturnsFormattedString)
 {
     const fgm::Vec2 vec(1.2345f, 2.0f);
     std::stringstream ss;
@@ -67,7 +67,7 @@ TEST_F(Vec2StringRepresentationTests, FloatingPointMatrix_ReturnsFormattedString
 }
 
 
-TEST_F(Vec2StringRepresentationTests, DoublePrecisionFloatingPointMatrix_ReturnsFormattedString)
+TEST_F(Vec2StringRepresentationTests, DoublePrecisionFloatingPointVector_ReturnsFormattedString)
 {
     const fgm::Vec2 vec(1.2345789777, 2.65831);
     std::stringstream ss;

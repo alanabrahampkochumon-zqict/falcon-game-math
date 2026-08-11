@@ -83,13 +83,11 @@ namespace
 
 
 
-    /**
-     * @addtogroup T_FGM_Vec2_Dist
-     * @{
-     */
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-    /** @brief Verify that @ref fgm::Vec2 distance calculations are available at compile time. */
-    namespace
+    namespace static_tests
     {
         constexpr fgm::Vec2 VEC_A(2, 3);
         constexpr fgm::Vec2 VEC_B(5, 7);

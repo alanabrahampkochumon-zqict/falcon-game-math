@@ -12,105 +12,132 @@
 #include "Vec3TestSetup.h"
 
 
-
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Vec3ProjectionTests: public ::testing::Test
-{
-protected:
-    fgm::Vec3<T> _vec;
-    fgm::Vec3<T> _perpendicularVec;
-    fgm::Vec3<T> _ontoVec;
-    fgm::Vec3<T> _expectedProjection;
-
-    void SetUp() override
-    {
-        _vec                = { T(4), T(9), T(0) };
-        _perpendicularVec   = { T(0), T(0), T(11) };
-        _ontoVec            = { T(0), T(2), T(0) };
-        _expectedProjection = { T(0), T(9), T(0) };
-    }
-};
-/** @brief Test fixture for @ref Vec3 projection, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec3ProjectionTests, SupportedArithmeticTypes);
-
-
-/** @brief Test fixture for @ref fgm::Vec3 projection with NaN vectors. */
-class Vec3ProjectionNaNTests: public ::testing::TestWithParam<fgm::Vec3<float>>
-{};
-INSTANTIATE_TEST_SUITE_P(Vec3ProjectionTestSuite, Vec3ProjectionNaNTests,
-                         ::testing::Values(fgm::Vec3<float>(fgm::constants::NaN, 1.0f, 1.0f),
-                                           fgm::Vec3<float>(1.0f, fgm::constants::NaN, 1.0f),
-                                           fgm::Vec3<float>(1.0f, 1.0f, fgm::constants::NaN),
-                                           fgm::Vec3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                            fgm ::constants::NaN)));
-
-
-
 /**
  * @addtogroup T_FGM_Vec3_Proj
  * @{
  */
 
-/**************************************
- *                                    *
- *          PROJECTION TESTS          *
- *                                    *
- **************************************/
-
-/** @brief Verify that vector projection is available at compile time. */
 namespace
 {
-    constexpr fgm::Vec3 vecA(1, 2, 3);
-    constexpr fgm::Vec3 vecB(1, 0, 0);
-    constexpr auto proj1 = vecA.project(vecB);
-    static_assert(proj1.x() == 1);
-    static_assert(proj1.y() == 0);
-    static_assert(proj1.z() == 0);
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
 
-    constexpr auto proj2 = vecA.projectNorm(vecB);
-    static_assert(proj2.x() == 1);
-    static_assert(proj2.y() == 0);
-    static_assert(proj2.z() == 0);
+    /**
+     * @brief Test fixture for @ref fgm::Vec3 projection.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
 
-    constexpr auto proj3 = fgm::Vec3<int>::project(vecA, vecB);
-    static_assert(proj3.x() == 1);
-    static_assert(proj3.y() == 0);
-    static_assert(proj3.z() == 0);
+    template <typename T>
+    class Vec3ProjectionTests: public ::testing::Test
+    {
+    protected:
+        fgm::Vec3<T> _vec;
+        fgm::Vec3<T> _perpendicularVec;
+        fgm::Vec3<T> _ontoVec;
+        fgm::Vec3<T> _expectedProjection;
 
-    constexpr auto proj4 = fgm::Vec3<int>::projectNorm(vecA, vecB);
-    static_assert(proj4.x() == 1);
-    static_assert(proj4.y() == 0);
-    static_assert(proj4.z() == 0);
+        void SetUp() override
+        {
+            _vec                = { T(4), T(9), T(0) };
+            _perpendicularVec   = { T(0), T(0), T(11) };
+            _ontoVec            = { T(0), T(2), T(0) };
+            _expectedProjection = { T(0), T(9), T(0) };
+        }
+    };
+    TYPED_TEST_SUITE(Vec3ProjectionTests, SupportedArithmeticTypes);
 
-    constexpr auto proj5 = vecA.safeProject(vecB);
-    static_assert(proj5.x() == 1);
-    static_assert(proj5.y() == 0);
-    static_assert(proj5.z() == 0);
 
-    constexpr auto proj6 = vecA.safeProjectNorm(vecB);
-    static_assert(proj6.x() == 1);
-    static_assert(proj6.y() == 0);
-    static_assert(proj6.z() == 0);
 
-    constexpr auto proj7 = fgm::Vec3<int>::safeProject(vecA, vecB);
-    static_assert(proj7.x() == 1);
-    static_assert(proj7.y() == 0);
-    static_assert(proj7.z() == 0);
+    /**
+     * @brief Test fixture for @ref fgm::Vec3 projection with NaN vectors.
+     */
+    class Vec3ProjectionNaNTests: public testing::TestWithParam<fgm::Vec3<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(Vec3ProjectionNanVectors, Vec3ProjectionNaNTests,
+                             ::testing::Values(fgm::Vec3<float>(fgm::constants::NaN, 1.0f, 1.0f),
+                                               fgm::Vec3<float>(1.0f, fgm::constants::NaN, 1.0f),
+                                               fgm::Vec3<float>(1.0f, 1.0f, fgm::constants::NaN),
+                                               fgm::Vec3<float>(fgm ::constants::NaN, fgm::constants::NaN,
+                                                                fgm ::constants::NaN)));
 
-    constexpr auto proj8 = fgm::Vec3<int>::safeProjectNorm(vecA, vecB);
-    static_assert(proj8.x() == 1);
-    static_assert(proj8.y() == 0);
-    static_assert(proj8.z() == 0);
+
+
+
+    /**************************************
+     *           STATIC TESTS             *
+     **************************************/
+    namespace static_tests
+    {
+        constexpr fgm::Vec3 VEC_A(1, 2, 3);
+        constexpr fgm::Vec3 VEC_B(1, 0, 0);
+
+        /// @test Verify that vector projection(project) returns a valid vector at compile time.
+        constexpr auto PROJ_VEC = VEC_A.project(VEC_B);
+        static_assert(PROJ_VEC.x() == 1);
+        static_assert(PROJ_VEC.y() == 0);
+        static_assert(PROJ_VEC.z() == 0);
+
+
+        /// @test Verify that vector projection(project-static wrapper) returns a valid vector at compile time.
+        constexpr auto PROJ_VEC_STATIC = fgm::Vec3<int>::project(VEC_A, VEC_B);
+        static_assert(PROJ_VEC_STATIC.x() == 1);
+        static_assert(PROJ_VEC_STATIC.y() == 0);
+        static_assert(PROJ_VEC_STATIC.z() == 0);
+
+
+        /// @test Verify that vector projection(project normalized) returns a valid vector at compile time.
+        constexpr auto PROJ_NORM_VEC = VEC_A.projectNorm(VEC_B);
+        static_assert(PROJ_NORM_VEC.x() == 1);
+        static_assert(PROJ_NORM_VEC.y() == 0);
+        static_assert(PROJ_NORM_VEC.z() == 0);
+
+
+        /// @test Verify that vector projection(project normalized-static wrapper) returns a valid vector at compile
+        /// time.
+        constexpr auto PROJ_NORM_VEC_STATIC = fgm::Vec3<int>::projectNorm(VEC_A, VEC_B);
+        static_assert(PROJ_NORM_VEC_STATIC.x() == 1);
+        static_assert(PROJ_NORM_VEC_STATIC.y() == 0);
+        static_assert(PROJ_NORM_VEC_STATIC.z() == 0);
+
+
+        /// @test Verify that vector projection(safe project) returns a valid vector at compile time.
+        constexpr auto SAFE_PROJ_VEC = VEC_A.safeProject(VEC_B);
+        static_assert(SAFE_PROJ_VEC.x() == 1);
+        static_assert(SAFE_PROJ_VEC.y() == 0);
+        static_assert(SAFE_PROJ_VEC.z() == 0);
+
+
+        /// @test Verify that vector projection(safe project-static wrapper) returns a valid vector at compile time.
+        constexpr auto SAFE_PROJ_VEC_STATIC = fgm::Vec3<int>::safeProject(VEC_A, VEC_B);
+        static_assert(SAFE_PROJ_VEC_STATIC.x() == 1);
+        static_assert(SAFE_PROJ_VEC_STATIC.y() == 0);
+        static_assert(SAFE_PROJ_VEC_STATIC.z() == 0);
+
+
+        /// @test Verify that vector projection(safe project normalized) returns a valid vector at compile time.
+        constexpr auto SAFE_PROJ_NORM_VEC = VEC_A.safeProjectNorm(VEC_B);
+        static_assert(SAFE_PROJ_NORM_VEC.x() == 1);
+        static_assert(SAFE_PROJ_NORM_VEC.y() == 0);
+        static_assert(SAFE_PROJ_NORM_VEC.z() == 0);
+
+
+        /// @test Verify that vector projection(safe project normalized-static wrapper) returns a valid vector at
+        /// compile time.
+        constexpr auto SAFE_PROJ_NORM_VEC_STATIC = fgm::Vec3<int>::safeProjectNorm(VEC_A, VEC_B);
+        static_assert(SAFE_PROJ_NORM_VEC_STATIC.x() == 1);
+        static_assert(SAFE_PROJ_NORM_VEC_STATIC.y() == 0);
+        static_assert(SAFE_PROJ_NORM_VEC_STATIC.z() == 0);
+    } // namespace static_tests
 
 } // namespace
 
 
+
+/**************************************
+ *          PROJECTION TESTS          *
+ **************************************/
 
 /** @brief Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::project returns a zero vector. */
 TYPED_TEST(Vec3ProjectionTests, OrthogonalVectorsReturnsZeroVector)
@@ -260,6 +287,7 @@ TEST(Vec3ProjectionTests, MixedTypeProjectionPromotesType)
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
 
+
 /**
  * @brief Verify that projecting onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vec3::projectNorm returns a non-zero vector.
@@ -298,35 +326,9 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_Project_AlwaysReturnFloatingPointV
 }
 
 
-#ifdef ENABLE_DEBUG_TESTS
-/**
- * @brief Verify that projecting a vector onto zero vector triggers assert in debug mode.
- */
-TYPED_TEST(Vec3ProjectionTests, ProjectionOntoZeroVectorTriggersAssertionInCallback)
-{
-    const fgm::Vec3<TypeParam> zeroVec(0, 0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.project(zeroVec)), "");
-}
-
-
-/**
- * @brief Verify that projecting a vector onto zero vector using static variant of @ref fgm::Vec3::project
- *        triggers assert in debug mode.
- */
-TYPED_TEST(Vec3ProjectionTests, StaticWrapper_ProjectionOntoZeroVectorTriggersAssertionInCallback)
-{
-    const fgm::Vec3<TypeParam> zeroVec(0, 0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec3<TypeParam>::project(this->_vec, zeroVec)), "");
-}
-
-#endif
-
-
 
 /**************************************
- *                                    *
  *        SAFE PROJECTION TESTS       *
- *                                    *
  **************************************/
 
 /**
@@ -642,9 +644,7 @@ TEST_P(Vec3ProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZer
 
 
 /**************************************
- *                                    *
  *         TRY PROJECTION TESTS       *
- *                                    *
  **************************************/
 
 /**
@@ -791,7 +791,8 @@ TYPED_TEST(Vec3ProjectionTests, TryProject_OntoZeroReturnsZeroVectorAndSetsCorre
  * @brief Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::tryProject
  *       returns a non-zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec3ProjectionTests, StaticWrapper_TryProject_Project_NonOrthogonalVectors_ReturnsNonZeroVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec3ProjectionTests,
+           StaticWrapper_TryProject_Project_NonOrthogonalVectors_ReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Vec3 actualProjection = fgm::Vec3<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);

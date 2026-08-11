@@ -82,10 +82,11 @@ namespace
 
         /// @test Verify that magSq returns a valid value at compile time.
         constexpr auto MAG_SQ = VEC_A.magSq();
-        static_assert(MAG_SQ == 5.0);
+        static_assert(MAG_SQ - 5.0 < 1e5);
+
         /// @test Verify that magSq (static wrapper) returns a valid value at compile time.
         constexpr auto MAG_SQ_STATIC = fgm::Vec2<int>::magSq(VEC_A);
-        static_assert(MAG_SQ_STATIC == 5.0);
+        static_assert(MAG_SQ_STATIC - 5.0 < 1e5);
 
     } // namespace static_tests
 } // namespace

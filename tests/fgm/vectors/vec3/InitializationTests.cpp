@@ -12,67 +12,68 @@
 #include "Vec3TestSetup.h"
 
 
-
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Vec3Initialization: public ::testing::Test
-{};
-/** @brief Test fixture for @ref fgm::Vec3 initialization, parameterized by @ref SupportedTypes */
-TYPED_TEST_SUITE(Vec3Initialization, SupportedTypes);
-
-
-
 /**
  * @addtogroup T_FGM_Vec3_Init
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that vector can be instantiated during compile time. */
 namespace
 {
-    constexpr fgm::Vec3 vecA(1, 2, 3);
-    constexpr fgm::Vec3 vecB({ 1, 2 }, 3);
-    constexpr fgm::Vec3 vecC(1, { 2, 3 });
-    constexpr fgm::Vec3<int> vecD{};
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
 
-    static_assert(vecA.x() == 1);
-    static_assert(vecA.y() == 2);
-    static_assert(vecA.z() == 3);
+    /**
+     * @brief Test fixture for @ref Vec3 initialization.
+     */
+    template <typename>
+    class Vec3InitializationTests: public testing::Test
+    {};
+    TYPED_TEST_SUITE(Vec3InitializationTests, SupportedTypes);
 
-    static_assert(vecB.x() == 1);
-    static_assert(vecB.y() == 2);
-    static_assert(vecB.z() == 3);
 
-    static_assert(vecC.x() == 1);
-    static_assert(vecC.y() == 2);
-    static_assert(vecC.z() == 3);
 
-    static_assert(vecD.x() == 0);
-    static_assert(vecD.y() == 0);
-    static_assert(vecD.z() == 0);
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
+    namespace static_wrapper
+    {
+        /// @test Verify that Vec3 can be initialized with parameters at compile time.
+        constexpr fgm::Vec3 SCALAR_INIT_VEC(1, 2, 3);
+        static_assert(SCALAR_INIT_VEC.x() == 1);
+        static_assert(SCALAR_INIT_VEC.y() == 2);
+        static_assert(SCALAR_INIT_VEC.z() == 3);
+
+        /// @test Verify that Vec3 can be initialized with a Vec2 and scalar at compile time.
+        constexpr fgm::Vec3 VEC2_SCALAR_INIT_VEC({ 1, 2 }, 3);
+        static_assert(VEC2_SCALAR_INIT_VEC.x() == 1);
+        static_assert(VEC2_SCALAR_INIT_VEC.y() == 2);
+        static_assert(VEC2_SCALAR_INIT_VEC.z() == 3);
+
+        /// @test Verify that Vec3 can be initialized with a scalar and Vec2 at compile time.
+        constexpr fgm::Vec3 SCALAR_VEC2_INIT_VEC(1, { 2, 3 });
+        static_assert(SCALAR_VEC2_INIT_VEC.x() == 1);
+        static_assert(SCALAR_VEC2_INIT_VEC.y() == 2);
+        static_assert(SCALAR_VEC2_INIT_VEC.z() == 3);
+
+        constexpr fgm::Vec3<int> BRACED_INIT_VEC{};
+        /// @test Verify that Vec3 can be initialized using braced initialization at compile time.
+        static_assert(BRACED_INIT_VEC.x() == 0);
+        static_assert(BRACED_INIT_VEC.y() == 0);
+        static_assert(BRACED_INIT_VEC.z() == 0);
+
+    } // namespace static_wrapper
 } // namespace
 
 
+
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
 
 /** @brief Verify that the default constructor initializes all components to zero. */
-TYPED_TEST(Vec3Initialization, EmptyConstructorInitializesZeroVector)
+TYPED_TEST(Vec3InitializationTests, EmptyConstructorInitializesZeroVector)
 {
     const fgm::Vec3<TypeParam> vec{};
 
@@ -81,7 +82,7 @@ TYPED_TEST(Vec3Initialization, EmptyConstructorInitializesZeroVector)
 
 
 /** @brief Verify that the parameterized constructor correctly assigns components from the provided arguments. */
-TYPED_TEST(Vec3Initialization, ConstructorParametersInitializesVector)
+TYPED_TEST(Vec3InitializationTests, ConstructorParametersInitializesVector)
 {
     const TypeParam a = static_cast<TypeParam>(3);
     const TypeParam b = static_cast<TypeParam>(1);
@@ -95,9 +96,9 @@ TYPED_TEST(Vec3Initialization, ConstructorParametersInitializesVector)
 
 /**
  * @brief Verify that the parameterized constructor correctly composes a 3D vector from a
- *       @ref fgm::Vec2 instance and a scalar.
+ *       @ref fgm::Vec3 instance and a scalar.
  */
-TYPED_TEST(Vec3Initialization, 2DVectorAndScalarCanInitializeA3DVector)
+TYPED_TEST(Vec3InitializationTests, 2DVectorAndScalarCanInitializeA3DVector)
 {
     const TypeParam a = static_cast<TypeParam>(3);
     const TypeParam b = static_cast<TypeParam>(1);
@@ -112,9 +113,9 @@ TYPED_TEST(Vec3Initialization, 2DVectorAndScalarCanInitializeA3DVector)
 
 /**
  * @brief Verify that the parameterized constructor correctly composes a 3D vector from a
- *       @ref fgm::Vec2 instance and a scalar.
+ *       @ref fgm::Vec3 instance and a scalar.
  */
-TYPED_TEST(Vec3Initialization, ScalarAnd2DVectorCanInitializeA3DVector)
+TYPED_TEST(Vec3InitializationTests, ScalarAnd2DVectorCanInitializeA3DVector)
 {
     const TypeParam scalar = static_cast<TypeParam>(3);
     const TypeParam a      = static_cast<TypeParam>(1);

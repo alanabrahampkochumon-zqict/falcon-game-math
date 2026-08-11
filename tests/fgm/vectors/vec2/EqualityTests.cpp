@@ -37,7 +37,6 @@ namespace
      * @brief Test fixture for @ref Vec2 equality.
      * @tparam T The scalar type (int, float, double...) of the vector components.
      */
-
     template <typename T>
     class Vec2EqualityTests: public testing::Test
     {
@@ -68,68 +67,68 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec2 vec1(1, 2);
-        constexpr fgm::Vec2 vec2(3, 2);
-        constexpr fgm::Vec2 vec3(1, 2);
+        constexpr fgm::Vec2 VEC_A(1, 2);
+        constexpr fgm::Vec2 VEC_B(3, 2);
+        constexpr fgm::Vec2 VEC_C(1, 2);
 
 
         /// @test Verify that @ref Vec2 allEq returns correct boolean for equal vectors.
-        constexpr auto ALLEQ_EQ_VECS = vec1.allEq(vec2);
+        constexpr auto ALLEQ_EQ_VECS = VEC_A.allEq(VEC_B);
         static_assert(ALLEQ_EQ_VECS == false);
 
         /// @test Verify that @ref Vec2 allEq returns correct boolean for unequal vectors.
-        constexpr auto ALL_EQ_UNEQUAL_VECS = vec1.allEq(vec3);
+        constexpr auto ALL_EQ_UNEQUAL_VECS = VEC_A.allEq(VEC_C);
         static_assert(ALL_EQ_UNEQUAL_VECS == true);
 
         /// @test Verify that @ref Vec2 allEq (static wrapper) returns correct boolean for equal vectors.
-        constexpr auto ALLEQ_EQ_VECS_STATIC = fgm::Vec2<int>::allEq(vec1, vec2);
+        constexpr auto ALLEQ_EQ_VECS_STATIC = fgm::Vec2<int>::allEq(VEC_A, VEC_B);
         static_assert(ALLEQ_EQ_VECS_STATIC == false);
 
         /// @test Verify that @ref Vec2 allEq (static wrapper) returns correct boolean for unequal vectors.
-        constexpr auto ALLEQ_UNEQUAL_VECS_STATIC = fgm::Vec2<int>::allEq(vec1, vec3);
+        constexpr auto ALLEQ_UNEQUAL_VECS_STATIC = fgm::Vec2<int>::allEq(VEC_A, VEC_C);
         static_assert(ALLEQ_UNEQUAL_VECS_STATIC == true);
 
         /// @test Verify that @ref Vec2 equals operator returns correct boolean for equal vectors.
-        constexpr auto DBLEQ_OP_EQUAL_VECS = vec1 == vec2;
+        constexpr auto DBLEQ_OP_EQUAL_VECS = VEC_A == VEC_B;
         static_assert(DBLEQ_OP_EQUAL_VECS == false);
 
         /// @test Verify that @ref Vec2 equals operator returns correct boolean for unequal vectors.
-        constexpr auto DBLEQ_OP_UNEQUAL_VECS = vec1 == vec3;
+        constexpr auto DBLEQ_OP_UNEQUAL_VECS = VEC_A == VEC_C;
         static_assert(DBLEQ_OP_UNEQUAL_VECS == true);
 
 
         /// @test Verify that @ref Vec2 equality mask returns valid boolean mask
-        constexpr auto EQ_VEC_MASK = vec1.eq(vec2);
+        constexpr auto EQ_VEC_MASK = VEC_A.eq(VEC_B);
         static_assert(EQ_VEC_MASK.x() == false);
         static_assert(EQ_VEC_MASK.y() == true);
 
 
         /// @test Verify that @ref Vec2 anyNeq returns correct boolean for equal vectors.
-        constexpr auto ANYNEQ_EQ_VECS = vec1.anyNeq(vec2);
+        constexpr auto ANYNEQ_EQ_VECS = VEC_A.anyNeq(VEC_B);
         static_assert(ANYNEQ_EQ_VECS == true);
 
         /// @test Verify that @ref Vec2 anyNeq returns correct boolean for unequal vectors.
-        constexpr auto ANYNEQ_UNEQUAL_VECS = vec1.anyNeq(vec3);
+        constexpr auto ANYNEQ_UNEQUAL_VECS = VEC_A.anyNeq(VEC_C);
         static_assert(ANYNEQ_UNEQUAL_VECS == false);
 
         /// @test Verify that @ref Vec2 anyNeq(static wrapper) returns correct boolean for equal vectors.
-        constexpr auto ANYNEQ_EQ_VECS_STATIC = fgm::Vec2<int>::anyNeq(vec1, vec2);
+        constexpr auto ANYNEQ_EQ_VECS_STATIC = fgm::Vec2<int>::anyNeq(VEC_A, VEC_B);
         static_assert(ANYNEQ_EQ_VECS_STATIC == true);
 
         /// @test Verify that @ref Vec2 anyNeq(static wrapper) returns correct boolean for unequal vectors.
-        constexpr auto ANYNEQ_UNEQUAL_VECS_STATIC = fgm::Vec2<int>::anyNeq(vec1, vec3);
+        constexpr auto ANYNEQ_UNEQUAL_VECS_STATIC = fgm::Vec2<int>::anyNeq(VEC_A, VEC_C);
         static_assert(ANYNEQ_UNEQUAL_VECS_STATIC == false);
 
         /// @test Verify that @ref Vec2 not equals operator returns correct boolean for equal vectors.
-        constexpr auto ANYNEQ_OP_EQUAL_VECS = vec1 != vec2;
+        constexpr auto ANYNEQ_OP_EQUAL_VECS = VEC_A != VEC_B;
         static_assert(ANYNEQ_OP_EQUAL_VECS == true);
 
         /// @test Verify that @ref Vec2 not equals operator returns correct boolean for unequal vectors.
-        constexpr auto NOT_EQ_OP = vec1 != vec3;
+        constexpr auto NOT_EQ_OP = VEC_A != VEC_C;
         static_assert(NOT_EQ_OP == false);
 
         /// @test Verify that @ref Vec2 inequality mask returns valid boolean mask.
-        constexpr auto NEQ_MASK_VEC = vec1.neq(vec2);
+        constexpr auto NEQ_MASK_VEC = VEC_A.neq(VEC_B);
         static_assert(NEQ_MASK_VEC.x() == true);
         static_assert(NEQ_MASK_VEC.y() == false);
 
@@ -313,29 +312,29 @@ TYPED_TEST(Vec2EqualityTests, StaticWrapper_Eq_ReturnsCorrectBooleanMask)
 
 TYPED_TEST(Vec2EqualityTests, AnyNeq_IdenticalVectorsReturnsFalse)
 {
-    const bool equality = this->_eqVecA.anyNeq(this->_eqVecB);
-    EXPECT_FALSE(equality);
+    const bool inequality = this->_eqVecA.anyNeq(this->_eqVecB);
+    EXPECT_FALSE(inequality);
 }
 
 
 TYPED_TEST(Vec2EqualityTests, AnyNeq_DifferentVectorsReturnsTrue)
 {
-    const bool equality = this->_eqVecA.anyNeq(this->_dissimilarVec);
-    EXPECT_TRUE(equality);
+    const bool inequality = this->_eqVecA.anyNeq(this->_dissimilarVec);
+    EXPECT_TRUE(inequality);
 }
 
 
 TYPED_TEST(Vec2EqualityTests, StaticWrapper_AnyNeq_IdenticalVectorsReturnsFalse)
 {
-    const bool equality = fgm::Vec2<TypeParam>::anyNeq(this->_eqVecA, this->_eqVecB);
-    EXPECT_FALSE(equality);
+    const bool inequality = fgm::Vec2<TypeParam>::anyNeq(this->_eqVecA, this->_eqVecB);
+    EXPECT_FALSE(inequality);
 }
 
 
 TYPED_TEST(Vec2EqualityTests, StaticWrapper_AnyNeq_DifferentVectorsReturnsTrue)
 {
-    const bool equality = fgm::Vec2<TypeParam>::anyNeq(this->_eqVecA, this->_dissimilarVec);
-    EXPECT_TRUE(equality);
+    const bool inequality = fgm::Vec2<TypeParam>::anyNeq(this->_eqVecA, this->_dissimilarVec);
+    EXPECT_TRUE(inequality);
 }
 
 
@@ -344,8 +343,8 @@ TEST(Vec2EqualityTests, AnyNeq_NaNVectorsReturnsTrue)
     const fgm::Vec2 vecA = { NAN_F, NAN_F };
     const fgm::Vec2 vecB = { 1.0, -5.88874789 };
 
-    const bool equality = vecA.anyNeq(vecB);
-    EXPECT_TRUE(equality);
+    const bool inequality = vecA.anyNeq(vecB);
+    EXPECT_TRUE(inequality);
 }
 
 
@@ -354,8 +353,8 @@ TEST(Vec2EqualityTests, AnyNeq_IdenticalInfinitVectors_ReturnsFalse)
     const fgm::Vec2 vecA = { INF, -INF };
     const fgm::Vec2 vecB = { INF, -INF };
 
-    const bool equality = vecA.anyNeq(vecB);
-    EXPECT_FALSE(equality);
+    const bool inequality = vecA.anyNeq(vecB);
+    EXPECT_FALSE(inequality);
 }
 
 
@@ -364,8 +363,8 @@ TEST(Vec2EqualityTests, AnyNeq_DifferentInfinitVectors_ReturnsTrue)
     const fgm::Vec2 vecA = { INF, INF };
     const fgm::Vec2 vecB = { INF, -INF };
 
-    const bool equality = vecA.anyNeq(vecB);
-    EXPECT_TRUE(equality);
+    const bool inequality = vecA.anyNeq(vecB);
+    EXPECT_TRUE(inequality);
 }
 
 
@@ -374,8 +373,8 @@ TYPED_TEST(Vec2EqualityTests, AnyNeq_MixedType_IdenticalVectorsReturnsFalse)
     const fgm::Vec2 vecA(1, 2);
     const fgm::Vec2 vecB(1.0, 2.0);
 
-    const bool equality = vecA.anyNeq(vecB);
-    EXPECT_FALSE(equality);
+    const bool inequality = vecA.anyNeq(vecB);
+    EXPECT_FALSE(inequality);
 }
 
 
@@ -384,22 +383,22 @@ TYPED_TEST(Vec2EqualityTests, AnyNeq_MixedType_DifferentVectorsReturnsTrue)
     const fgm::Vec2 vecA(5, 6);
     const fgm::Vec2 vecB(1.0, 2.0);
 
-    const bool equality = vecA.anyNeq(vecB);
-    EXPECT_TRUE(equality);
+    const bool inequality = vecA.anyNeq(vecB);
+    EXPECT_TRUE(inequality);
 }
 
 
 TYPED_TEST(Vec2EqualityTests, NotEqualsOperator_IdenticalVectorsReturnsFalse)
 {
-    const bool equality = this->_eqVecA != this->_eqVecB;
-    EXPECT_FALSE(equality);
+    const bool inequality = this->_eqVecA != this->_eqVecB;
+    EXPECT_FALSE(inequality);
 }
 
 
 TYPED_TEST(Vec2EqualityTests, NotEqualsOperator_DifferentVectorsReturnsTrue)
 {
-    const bool equality = this->_eqVecA != this->_dissimilarVec;
-    EXPECT_TRUE(equality);
+    const bool inequality = this->_eqVecA != this->_dissimilarVec;
+    EXPECT_TRUE(inequality);
 }
 
 
@@ -408,8 +407,8 @@ TEST(Vec2EqualityTests, InequalityOperator_IdenticalBooleanVectorsReturnsFalse)
     const fgm::Vec2 vecA(true, false);
     const fgm::Vec2 vecB(true, false);
 
-    const bool equality = vecA != vecB;
-    EXPECT_FALSE(equality);
+    const bool inequality = vecA != vecB;
+    EXPECT_FALSE(inequality);
 }
 
 
@@ -418,8 +417,8 @@ TEST(Vec2EqualityTests, InequalityOperator_DifferentBooleanVectorsReturnsTrue)
     const fgm::Vec2 vecA(true, false);
     const fgm::Vec2 vecB(true, true);
 
-    const bool equality = vecA != vecB;
-    EXPECT_TRUE(equality);
+    const bool inequality = vecA != vecB;
+    EXPECT_TRUE(inequality);
 }
 
 

@@ -16,81 +16,147 @@
 
 
 
-constexpr auto NAN_F = fgm::constants::NaN;
-constexpr auto INF   = fgm::constants::INFINITY_F;
-
-
-
-/**************************************
- *                                    *
- *                SETUP               *
- *                                    *
- **************************************/
-
-template <typename T>
-class Vec3Comparison: public ::testing::Test
-{
-protected:
-    fgm::Vec3<T> _vecA;
-    fgm::Vec3<T> _vecB;
-    fgm::Vec3<bool> _expectedGT, _expectedGTE, _expectedLT,
-        _expectedLTE; // GT-> Greater Than, GTE-> Greater Than or Equal, LT -> Less than, LTE -> Less than or equal
-
-    void SetUp() override
-    {
-        _vecA        = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
-        _vecB        = { T(5.1234568789), T(1.123458319), T(8.123412593891) };
-        _expectedGT  = { false, true, false };
-        _expectedGTE = { false, true, false };
-        _expectedLT  = { true, false, true };
-        _expectedLTE = { true, false, true };
-    }
-};
-/** @brief Test fixture for @fgm::Vec3 comparisons, parameterized by @ref SupportedArithmeticTypes */
-TYPED_TEST_SUITE(Vec3Comparison, SupportedArithmeticTypes);
-
-
 
 /**
- * @addtogroup T_FGM_Vec3_GT_Comp
+ * @addtogroup T_FGM_Vec3_Comp
  * @{
  */
 
-/**************************************
- *                                    *
- *         GREATER THAN TESTS         *
- *                                    *
- **************************************/
-
-/** @brief Verify that vector greater than operation is available at compile time. */
 namespace
 {
-    constexpr fgm::Vec3 vec1(1, 2, 5);
-    constexpr fgm::Vec3 vec2(1, 3, 4);
-    constexpr auto gtVec      = vec1 > vec2;
-    constexpr auto gtVecMask1 = vec1.gt(vec2);
-    constexpr auto gtVecMask2 = fgm::Vec3<int>::gt(vec1, vec2);
 
-    static_assert(gtVec.x() == false);
-    static_assert(gtVec.y() == false);
-    static_assert(gtVec.z() == true);
+    constexpr auto NAN_F = fgm::constants::NaN;
+    constexpr auto INF   = fgm::constants::INFINITY_F;
 
-    static_assert(gtVecMask1.x() == false);
-    static_assert(gtVecMask1.y() == false);
-    static_assert(gtVecMask1.z() == true);
 
-    static_assert(gtVecMask2.x() == false);
-    static_assert(gtVecMask2.y() == false);
-    static_assert(gtVecMask2.z() == true);
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
 
+    /**
+     * @brief Test fixture for @ref Vec3 comparisons.
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec3ComparisonTests: public testing::Test
+    {
+    protected:
+        fgm::Vec3<T> _vecA;
+        fgm::Vec3<T> _vecB;
+        fgm::Vec3<bool> _expectedGT, _expectedGTE, _expectedLT,
+            _expectedLTE; // GT-> Greater Than, GTE-> Greater Than or Equal, LT -> Less than, LTE -> Less than or equal
+
+        void SetUp() override
+        {
+            _vecA        = { T(1.1234568789), T(2.123458319), T(5.123412593891) };
+            _vecB        = { T(5.1234568789), T(1.123458319), T(8.123412593891) };
+            _expectedGT  = { false, true, false };
+            _expectedGTE = { false, true, false };
+            _expectedLT  = { true, false, true };
+            _expectedLTE = { true, false, true };
+        }
+    };
+    TYPED_TEST_SUITE(Vec3ComparisonTests, SupportedArithmeticTypes);
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Vec3 VEC_A(1, 2, 5);
+        constexpr fgm::Vec3 VEC_B(1, 3, 4);
+        /// @test Verify that greater than operator (operator>) returns a valid mask at compile time.
+        constexpr auto GT_OP_MASK_VEC = VEC_A > VEC_B;
+        static_assert(GT_OP_MASK_VEC.x() == false);
+        static_assert(GT_OP_MASK_VEC.y() == false);
+        static_assert(GT_OP_MASK_VEC.z() == true);
+
+        /// @test Verify that greater than operator (gt) returns a valid mask at compile time.
+        constexpr auto GT_MASK_VEC = VEC_A.gt(VEC_B);
+        static_assert(GT_MASK_VEC.x() == false);
+        static_assert(GT_MASK_VEC.y() == false);
+        static_assert(GT_MASK_VEC.z() == true);
+
+        /// @test Verify that greater than operator (gt-static wrapper) returns a valid mask at compile time.
+        constexpr auto GT_MASK_VEC_STATIC = fgm::Vec3<int>::gt(VEC_A, VEC_B);
+        static_assert(GT_MASK_VEC_STATIC.x() == false);
+        static_assert(GT_MASK_VEC_STATIC.y() == false);
+        static_assert(GT_MASK_VEC_STATIC.z() == true);
+
+
+        /// @test Verify that greater or equals operator (operator>=) returns a valid mask at compile time.
+        constexpr auto GTE_OP_MASK_VEC = VEC_A >= VEC_B;
+        static_assert(GTE_OP_MASK_VEC.x() == true);
+        static_assert(GTE_OP_MASK_VEC.y() == false);
+        static_assert(GTE_OP_MASK_VEC.z() == true);
+
+        /// @test Verify that greater than or equals operator (gte) returns a valid mask at compile time.
+        constexpr auto GTE_MASK_VEC = VEC_A.gte(VEC_B);
+        static_assert(GTE_MASK_VEC.x() == true);
+        static_assert(GTE_MASK_VEC.y() == false);
+        static_assert(GTE_MASK_VEC.z() == true);
+
+        /// @test Verify that greater than or equals operator (gte-static wrapper) returns a valid mask at compile time.
+        constexpr auto GTE_MASK_VEC_STATIC = fgm::Vec3<int>::gte(VEC_A, VEC_B);
+        static_assert(GTE_MASK_VEC_STATIC.x() == true);
+        static_assert(GTE_MASK_VEC_STATIC.y() == false);
+        static_assert(GTE_MASK_VEC_STATIC.z() == true);
+
+
+        /// @test Verify that less than operator (operator<) returns a valid mask at compile time.
+        constexpr auto LT_OP_MASK_VEC = VEC_A < VEC_B;
+        static_assert(LT_OP_MASK_VEC.x() == false);
+        static_assert(LT_OP_MASK_VEC.y() == true);
+        static_assert(LT_OP_MASK_VEC.z() == false);
+
+        /// @test Verify that less than operator (lt) returns a valid mask at compile time.
+        constexpr auto LT_MASK_VEC = VEC_A.lt(VEC_B);
+        static_assert(LT_MASK_VEC.x() == false);
+        static_assert(LT_MASK_VEC.y() == true);
+        static_assert(LT_MASK_VEC.z() == false);
+
+        /// @test Verify that less than operator (lt-static wrapper) returns a valid mask at compile time.
+        constexpr auto LT_MASK_VEC_STATIC = fgm::Vec3<int>::lt(VEC_A, VEC_B);
+        static_assert(LT_MASK_VEC_STATIC.x() == false);
+        static_assert(LT_MASK_VEC_STATIC.y() == true);
+        static_assert(LT_MASK_VEC_STATIC.z() == false);
+
+
+        constexpr auto LTE_OP_MASK_VEC = VEC_A <= VEC_B;
+        /// @test Verify that less than or equals operator (operator<=) returns a valid mask at compile time.
+        static_assert(LTE_OP_MASK_VEC.x() == true);
+        static_assert(LTE_OP_MASK_VEC.y() == true);
+        static_assert(LTE_OP_MASK_VEC.z() == false);
+
+        /// @test Verify that less than or equals operator (lte) returns a valid mask at compile time.
+        constexpr auto LTE_MASK_VEC = VEC_A.lte(VEC_B);
+        static_assert(LTE_MASK_VEC.x() == true);
+        static_assert(LTE_MASK_VEC.y() == true);
+        static_assert(LTE_MASK_VEC.z() == false);
+
+        /// @test Verify that less than or equals operator (lte-static wrapper) returns a valid mask at compile time.
+        constexpr auto LTE_MASK_VEC_STATIC = fgm::Vec3<int>::lte(VEC_A, VEC_B);
+        static_assert(LTE_MASK_VEC_STATIC.x() == true);
+        static_assert(LTE_MASK_VEC_STATIC.y() == true);
+        static_assert(LTE_MASK_VEC_STATIC.z() == false);
+
+    } // namespace static_tests
 } // namespace
 
+
+
+/**************************************
+ *         GREATER THAN TESTS         *
+ **************************************/
 
 /**
  * @brief Verify that the greater-than (gt) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
+TYPED_TEST(Vec3ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
     const fgm::Vec3<bool> mask = this->_vecA.gt(this->_vecB);
 
@@ -102,7 +168,7 @@ TYPED_TEST(Vec3Comparison, GreaterThan_ReturnsBooleanVectorWithElementsGreaterTh
  * @brief Verify that the greater-than operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
+TYPED_TEST(Vec3ComparisonTests, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
     const fgm::Vec3<bool> mask = this->_vecA > this->_vecB;
 
@@ -114,7 +180,7 @@ TYPED_TEST(Vec3Comparison, GreaterThanOperator_ReturnsBooleanVectorWithElementsG
  * @brief Verify that the static variant of greater-than (gt) function performs a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, StaticWrapper_GreaterThan_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
+TYPED_TEST(Vec3ComparisonTests, StaticWrapper_GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
     const fgm::Vec3<bool> mask = fgm::Vec3<TypeParam>::gt(this->_vecA, this->_vecB);
 
@@ -158,7 +224,7 @@ TEST(Vec3Comparison, GT_NaNVector_ReturnsBooleanVectorWithCorrectValues)
  * @brief Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
-TEST(Vec3Comparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectValues)
+TEST(Vec3Comparison, MixedType_GT_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
     const fgm::Vec3 vecA(1.2, 4.5, 7.5);
@@ -172,48 +238,17 @@ TEST(Vec3Comparison, MixedType_GreaterThan_ReturnsBooleanVectorWithCorrectValues
     EXPECT_VEC_EQ(expected, mask);
 }
 
-/** @} */
 
-
-
-/**
- * @addtogroup T_FGM_Vec3_GTE_Comp
- * @{
- */
 
 /**************************************
- *                                    *
  *    GREATER THAN OR EQUALS TESTS    *
- *                                    *
  **************************************/
-
-/** @brief Verify that vector greater than or equals operation is available at compile time. */
-namespace
-{
-    constexpr auto gteVec      = vec1 >= vec2;
-    constexpr auto gteVecMask1 = vec1.gte(vec2);
-    constexpr auto gteVecMask2 = fgm::Vec3<int>::gte(vec1, vec2);
-
-    static_assert(gteVec.x() == true);
-    static_assert(gteVec.y() == false);
-    static_assert(gteVec.z() == true);
-
-    static_assert(gteVecMask1.x() == true);
-    static_assert(gteVecMask1.y() == false);
-    static_assert(gteVecMask1.z() == true);
-
-    static_assert(gteVecMask2.x() == true);
-    static_assert(gteVecMask2.y() == false);
-    static_assert(gteVecMask2.z() == true);
-
-} // namespace
-
 
 /**
  * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+TYPED_TEST(Vec3ComparisonTests, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
     const fgm::Vec3<bool> mask = this->_vecA.gte(this->_vecB);
 
@@ -225,7 +260,7 @@ TYPED_TEST(Vec3Comparison, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqua
  * @brief Verify that the greater-than-or-equal operator performs a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+TYPED_TEST(Vec3ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
     const fgm::Vec3<bool> mask = this->_vecA >= this->_vecB;
 
@@ -237,7 +272,7 @@ TYPED_TEST(Vec3Comparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWithEl
  * @brief Verify that the static variant of greater-than-or-equal (gte) function perform a component-wise
  *       comparison and returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, StaticWrapper_GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+TYPED_TEST(Vec3ComparisonTests, StaticWrapper_GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
     const fgm::Vec3<bool> mask = fgm::Vec3<TypeParam>::gte(this->_vecA, this->_vecB);
 
@@ -295,48 +330,17 @@ TEST(Vec3Comparison, GTE_MixedType_ReturnsBooleanVectorWithCorrectValues)
     EXPECT_VEC_EQ(expected, mask);
 }
 
-/** @} */
 
-
-
-/**
- * @addtogroup T_FGM_Vec3_LT_Comp
- * @{
- */
 
 /**************************************
- *                                    *
  *          LESS THAN TESTS           *
- *                                    *
  **************************************/
-
-/** @brief Verify that vector less than operation is available at compile time. */
-namespace
-{
-    constexpr auto ltVec      = vec1 < vec2;
-    constexpr auto ltVecMask1 = vec1.lt(vec2);
-    constexpr auto ltVecMask2 = fgm::Vec3<int>::lt(vec1, vec2);
-
-    static_assert(ltVec.x() == false);
-    static_assert(ltVec.y() == true);
-    static_assert(ltVec.z() == false);
-
-    static_assert(ltVecMask1.x() == false);
-    static_assert(ltVecMask1.y() == true);
-    static_assert(ltVecMask1.z() == false);
-
-    static_assert(ltVecMask2.x() == false);
-    static_assert(ltVecMask2.y() == true);
-    static_assert(ltVecMask2.z() == false);
-
-} // namespace
-
 
 /**
  * @brief Verify that the less-than (lt) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
+TYPED_TEST(Vec3ComparisonTests, LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
     const fgm::Vec3<bool> mask = this->_vecA.lt(this->_vecB);
 
@@ -348,7 +352,7 @@ TYPED_TEST(Vec3Comparison, LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
  * @brief Verify that the less-than operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
+TYPED_TEST(Vec3ComparisonTests, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
     const fgm::Vec3<bool> mask = this->_vecA < this->_vecB;
 
@@ -360,7 +364,7 @@ TYPED_TEST(Vec3Comparison, LessThanOperator_ReturnsBooleanVectorWithElementsLess
  * @brief Verify that the static variant of less-than (lt) function perform a component-wise comparison and
  *		 returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, StaticWrapper_LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
+TYPED_TEST(Vec3ComparisonTests, StaticWrapper_LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
     const fgm::Vec3<bool> mask = fgm::Vec3<TypeParam>::lt(this->_vecA, this->_vecB);
 
@@ -427,48 +431,17 @@ TEST(Vec3Comparison, LT_MixedType_ReturnsBooleanVectorWithCorrectValues)
     EXPECT_VEC_EQ(expected, mask);
 }
 
-/** @} */
 
-
-
-/**
- * @addtogroup T_FGM_Vec3_LTE_Comp
- * @{
- */
 
 /**************************************
- *                                    *
  *      LESS THAN OR EQUALS TESTS     *
- *                                    *
  **************************************/
-
-/** @brief Verify that vector less than or equals operation is available at compile time. */
-namespace
-{
-    constexpr auto lteVec      = vec1 <= vec2;
-    constexpr auto lteVecMask1 = vec1.lte(vec2);
-    constexpr auto lteVecMask2 = fgm::Vec3<int>::lte(vec1, vec2);
-
-    static_assert(lteVec.x() == true);
-    static_assert(lteVec.y() == true);
-    static_assert(lteVec.z() == false);
-
-    static_assert(lteVecMask1.x() == true);
-    static_assert(lteVecMask1.y() == true);
-    static_assert(lteVecMask1.z() == false);
-
-    static_assert(lteVecMask2.x() == true);
-    static_assert(lteVecMask2.x() == true);
-    static_assert(lteVecMask2.z() == false);
-
-} // namespace
-
 
 /**
  * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
+TYPED_TEST(Vec3ComparisonTests, LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
     const fgm::Vec3<bool> mask = this->_vecA.lte(this->_vecB);
 
@@ -480,7 +453,7 @@ TYPED_TEST(Vec3Comparison, LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAs
  * @brief Verify that the less-than-or-equal operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
+TYPED_TEST(Vec3ComparisonTests, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
     const fgm::Vec3<bool> mask = this->_vecA <= this->_vecB;
 
@@ -492,7 +465,7 @@ TYPED_TEST(Vec3Comparison, LessThanOrEqualOperator_ReturnsBooleanVectorWithEleme
  * @brief Verify that the static variant of less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec3Comparison, StaticWrapper_LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
+TYPED_TEST(Vec3ComparisonTests, StaticWrapper_LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
     const fgm::Vec3<bool> mask = fgm::Vec3<TypeParam>::lte(this->_vecA, this->_vecB);
 

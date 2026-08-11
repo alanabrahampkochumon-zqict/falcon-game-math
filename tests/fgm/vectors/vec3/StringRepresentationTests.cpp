@@ -14,31 +14,38 @@
 #include <sstream>
 
 
+/**
+ * @addtogroup T_FGM_Vec3_String_Repr
+ * @{
+ */
 
-/**************************************
- *                                    *
- *                SETUP               *
- *                                    *
- **************************************/
-
-class Vec3StringRepresentationTests: public ::testing::Test
+namespace
 {
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec3 string representation.
+     */
+class Vec3StringRepresentationTests: public testing::Test
+{
+protected:
     /** @brief Switch to use full precision for testing. */
     void SetUp() override { fgm::Config::useFullPrecision = true; }
 
     /** @brief Switch back to normal log precision. */
     void TearDown() override { fgm::Config::useFullPrecision = false; }
 };
+}
 
 
 
-/**
- * @addtogroup T_FGM_Vec3_String_Repr
- * @{
- */
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
 
-/** @brief Verify that the string representation matches the expected format for integral types. */
-TEST_F(Vec3StringRepresentationTests, IntegralRepresentation)
+TEST_F(Vec3StringRepresentationTests, IntegralVector_ReturnsFormattedString)
 {
     const fgm::Vec3 vec(1, 2, 3);
     std::stringstream ss;
@@ -49,11 +56,7 @@ TEST_F(Vec3StringRepresentationTests, IntegralRepresentation)
 }
 
 
-/**
- * @brief Verify that the string representation matches the expected format for single-precision
- *       floating-point types.
- */
-TEST_F(Vec3StringRepresentationTests, FloatRepresentation)
+TEST_F(Vec3StringRepresentationTests, FloatingPointVector_ReturnsFormattedString)
 {
     const fgm::Vec3 vec(1.2345f, 2.0f, 3.56789f);
     std::stringstream ss;
@@ -64,11 +67,7 @@ TEST_F(Vec3StringRepresentationTests, FloatRepresentation)
 }
 
 
-/**
- * @brief Verify that the string representation matches the expected format for double-precision
- *       floating-point types.
- */
-TEST_F(Vec3StringRepresentationTests, DoubleRepresentation)
+TEST_F(Vec3StringRepresentationTests, DoublePrecisionFloatingPointVector_ReturnsFormattedString)
 {
     const fgm::Vec3 vec(1.2345789777, 2.65831, 3.161285);
     std::stringstream ss;

@@ -42,14 +42,14 @@ namespace
     {
 
         /// @test Verify that Vec2 can be initialized with parameters at compile time.
-        constexpr fgm::Vec2 vecA(1, 2);
-        static_assert(vecA.x() == 1);
-        static_assert(vecA.y() == 2);
+        constexpr fgm::Vec2 SCALAR_INIT_VEC(1, 2);
+        static_assert(SCALAR_INIT_VEC.x() == 1);
+        static_assert(SCALAR_INIT_VEC.y() == 2);
 
         /// @test Verify that Vec2 can be initialized using braced initialization at compile time.
-        constexpr fgm::Vec2<int> vecB{};
-        static_assert(vecB.x() == 0);
-        static_assert(vecB.y() == 0);
+        constexpr fgm::Vec2<int> BRACED_INIT_VEC{};
+        static_assert(BRACED_INIT_VEC.x() == 0);
+        static_assert(BRACED_INIT_VEC.y() == 0);
 
     } // namespace static_wrapper
 } // namespace

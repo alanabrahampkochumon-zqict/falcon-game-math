@@ -256,7 +256,7 @@ TEST(Vec2ComparisonTests, GTE_MixedType_ReturnsBooleanVectorWithCorrectValues)
 }
 
 
-TYPED_TEST(Vec2ComparisonTests, GreaterThanOrEqualOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+TYPED_TEST(Vec2ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
     const fgm::Vec2<bool> mask = this->_vecA >= this->_vecB;
 

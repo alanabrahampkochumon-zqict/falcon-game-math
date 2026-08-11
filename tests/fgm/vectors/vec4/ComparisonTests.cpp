@@ -231,7 +231,7 @@ TYPED_TEST(Vec4Comparison, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqua
  * @brief Verify that the greater-than-or-equal operator performs a component-wise comparison and
  *       returns the correct boolean mask.
  */
-TYPED_TEST(Vec4Comparison, GreaterThanOrEqualOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+TYPED_TEST(Vec4Comparison, GreaterThanOrEqualsOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
     const fgm::Vec4<bool> mask = this->_vecA >= this->_vecB;
 

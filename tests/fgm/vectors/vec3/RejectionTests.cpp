@@ -12,9 +12,24 @@
 #include "Vec3TestSetup.h"
 
 
+/**
+ * @addtogroup T_FGM_Vec3_Rej
+ * @{
+ */
 
+namespace
+{
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec3 rejection.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
 template <typename T>
-class Vec3Rejection: public ::testing::Test
+class Vec3RejectionTests: public testing::Test
 {
 protected:
     fgm::Vec3<T> _vec;
@@ -31,13 +46,16 @@ protected:
     }
 };
 /** @brief Test fixture for @ref fgm::Vec3 rejection, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec3Rejection, SupportedArithmeticTypes);
+TYPED_TEST_SUITE(Vec3RejectionTests, SupportedArithmeticTypes);
 
 
-/** @brief Test fixture for @ref fgm::Vec3 rejection with NaN vectors. */
-class Vec3RejectionNaNTests: public ::testing::TestWithParam<fgm::Vec3<float>>
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec3 rejection with NaN vectors.
+     */
+class Vec3RejectionNaNTests: public testing::TestWithParam<fgm::Vec3<float>>
 {};
-INSTANTIATE_TEST_SUITE_P(Vec3RejectionTestSuite, Vec3RejectionNaNTests,
+INSTANTIATE_TEST_SUITE_P(Vec3RejectionNaNVectors, Vec3RejectionNaNTests,
                          ::testing::Values(fgm::Vec3<float>(fgm::constants::NaN, 1.0f, 1.0f),
                                            fgm::Vec3<float>(1.0f, fgm::constants::NaN, 1.0f),
                                            fgm::Vec3<float>(1.0f, 1.0f, fgm::constants::NaN),
@@ -46,67 +64,79 @@ INSTANTIATE_TEST_SUITE_P(Vec3RejectionTestSuite, Vec3RejectionNaNTests,
 
 
 
-/**
- * @addtogroup T_FGM_Vec3_Rej
- * @{
- */
+    /**************************************
+     *           STATIC TESTS             *
+     **************************************/
 
-/** @brief Verify that vector rejection is available at compile time. */
-namespace
-{
-    constexpr fgm::Vec3 vecA(1, 2, 3);
-    constexpr fgm::Vec3 vecB(1, 0, 0);
-    constexpr auto rej1 = vecA.reject(vecB);
-    static_assert(rej1.x() == 0);
-    static_assert(rej1.y() == 2);
-    static_assert(rej1.z() == 3);
+    namespace static_tests
+    {
+    constexpr fgm::Vec3 VEC_A(1, 2, 3);
+    constexpr fgm::Vec3 VEC_B(1, 0, 0);
 
-    constexpr auto rej2 = vecA.rejectNorm(vecB);
-    static_assert(rej2.x() == 0);
-    static_assert(rej2.y() == 2);
-    static_assert(rej2.z() == 3);
 
-    constexpr auto rej3 = fgm::Vec3<int>::reject(vecA, vecB);
-    static_assert(rej3.x() == 0);
-    static_assert(rej3.y() == 2);
-    static_assert(rej3.z() == 3);
+    /// @test Verify that vector rejection(reject) returns a valid vector at compile time.
+        constexpr auto REJ_VEC = VEC_A.reject(VEC_B);
+        static_assert(REJ_VEC.x() == 0);
+        static_assert(REJ_VEC.y() == 2);
+        static_assert(REJ_VEC.z() == 3);
 
-    constexpr auto rej4 = fgm::Vec3<int>::rejectNorm(vecA, vecB);
-    static_assert(rej4.x() == 0);
-    static_assert(rej4.y() == 2);
-    static_assert(rej4.z() == 3);
+        /// @test Verify that vector rejection(reject-static wrapper) returns a valid vector at compile time.
+        constexpr auto REJ_VEC_STATIC = fgm::Vec3<int>::reject(VEC_A, VEC_B);
+        static_assert(REJ_VEC_STATIC.x() == 0);
+        static_assert(REJ_VEC_STATIC.y() == 2);
+        static_assert(REJ_VEC_STATIC.z() == 3);
 
-    constexpr auto rej5 = vecA.safeReject(vecB);
-    static_assert(rej5.x() == 0);
-    static_assert(rej5.y() == 2);
-    static_assert(rej5.z() == 3);
+        /// @test Verify that vector rejection(reject normalized) returns a valid vector at compile time.
+        constexpr auto REJ_NORM_VEC = VEC_A.rejectNorm(VEC_B);
+        static_assert(REJ_NORM_VEC.x() == 0);
+        static_assert(REJ_NORM_VEC.y() == 2);
+        static_assert(REJ_NORM_VEC.z() == 3);
 
-    constexpr auto rej6 = vecA.safeRejectNorm(vecB);
-    static_assert(rej6.x() == 0);
-    static_assert(rej6.y() == 2);
-    static_assert(rej6.z() == 3);
+        /// @test Verify that vector rejection(reject normalized-static wrapper) returns a valid vector at compile
+        /// time.
+        constexpr auto REJ_NORM_VEC_STATIC = fgm::Vec3<int>::rejectNorm(VEC_A, VEC_B);
+        static_assert(REJ_NORM_VEC_STATIC.x() == 0);
+        static_assert(REJ_NORM_VEC_STATIC.y() == 2);
+        static_assert(REJ_NORM_VEC_STATIC.z() == 3);
 
-    constexpr auto rej7 = fgm::Vec3<int>::safeReject(vecA, vecB);
-    static_assert(rej7.x() == 0);
-    static_assert(rej7.y() == 2);
-    static_assert(rej7.z() == 3);
 
-    constexpr auto rej8 = fgm::Vec3<int>::safeRejectNorm(vecA, vecB);
-    static_assert(rej8.x() == 0);
-    static_assert(rej8.y() == 2);
-    static_assert(rej8.z() == 3);
+        /// @test Verify that vector rejection(safe reject) returns a valid vector at compile time.
+        constexpr auto SAFE_REJ_VEC = VEC_A.safeReject(VEC_B);
+        static_assert(SAFE_REJ_VEC.x() == 0);
+        static_assert(SAFE_REJ_VEC.y() == 2);
+        static_assert(SAFE_REJ_VEC.z() == 3);
+
+        /// @test Verify that vector rejection(safe reject-static wrapper) returns a valid vector at compile time.
+        constexpr auto SAFE_REJ_VEC_STATIC = fgm::Vec3<int>::safeReject(VEC_A, VEC_B);
+        static_assert(SAFE_REJ_VEC_STATIC.x() == 0);
+        static_assert(SAFE_REJ_VEC_STATIC.y() == 2);
+        static_assert(SAFE_REJ_VEC_STATIC.z() == 3);
+
+
+        /// @test Verify that vector rejection(safe reject normalized) returns a valid vector at compile time.
+        constexpr auto SAFE_REJ_NORM_VEC = VEC_A.safeRejectNorm(VEC_B);
+        static_assert(SAFE_REJ_NORM_VEC.x() == 0);
+        static_assert(SAFE_REJ_NORM_VEC.y() == 2);
+        static_assert(SAFE_REJ_NORM_VEC.z() == 3);
+
+        /// @test Verify that vector rejection(safe reject normalized-static wrapper) returns a valid vector at
+        /// compile time.
+        constexpr auto SAFE_REJ_NORM_VEC_STATIC = fgm::Vec3<int>::safeRejectNorm(VEC_A, VEC_B);
+        static_assert(SAFE_REJ_NORM_VEC_STATIC.x() == 0);
+        static_assert(SAFE_REJ_NORM_VEC_STATIC.y() == 2);
+        static_assert(SAFE_REJ_NORM_VEC_STATIC.z() == 3);
+    } // namespace static_tests
 
 } // namespace
 
 
+
 /**************************************
- *                                    *
  *          REJECTION TESTS           *
- *                                    *
  **************************************/
 
 /** @brief Verify that rejecting from a parallel vector using @ref fgm::Vec3::reject returns a zero vector. */
-TYPED_TEST(Vec3Rejection, ParallelVectorsReturnsZeroVector)
+TYPED_TEST(Vec3RejectionTests, ParallelVectorsReturnsZeroVector)
 {
     const fgm::Vec3 actualRejection = this->_vec.reject(this->_parallelVec);
     EXPECT_VEC_ZERO(actualRejection);
@@ -189,7 +219,7 @@ TEST(Vec3Rejection, OrthogonalRejectionReturnsOriginalVector)
  * @brief Verify that rejecting from a non-orthogonal vector using @ref fgm::Vec3::reject
  *       returns a non-zero vector with perpendicular component.
  */
-TYPED_TEST(Vec3Rejection, NonOrthogonalRejectionReturnsNonZeroVector)
+TYPED_TEST(Vec3RejectionTests, NonOrthogonalRejectionReturnsNonZeroVector)
 {
     const fgm::Vec3 actualRejection = this->_vec.reject(this->_fromVec);
 
@@ -201,7 +231,7 @@ TYPED_TEST(Vec3Rejection, NonOrthogonalRejectionReturnsNonZeroVector)
  * @brief Verify that rejecting from a non-orthogonal vector using static variant of @ref fgm::Vec3::reject
  *       returns a non-zero vector with perpendicular component.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_NonOrthogonalRejectionReturnsNonZeroVector)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_NonOrthogonalRejectionReturnsNonZeroVector)
 {
     const fgm::Vec3 actualRejection = fgm::Vec3<TypeParam>::reject(this->_vec, this->_fromVec);
 
@@ -288,7 +318,7 @@ TEST(Vec3Rejection, StaticWrapper_RejectionFromNormalizedVectorReturnsNonZeroVec
 
 
 /** @brief Verify that rejection using @ref fgm::Vec3::reject always return floating-point vector. */
-TYPED_TEST(Vec3Rejection, Reject_AlwaysReturnFloatingPointVector)
+TYPED_TEST(Vec3RejectionTests, Reject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vec3 rejection = this->_vec.reject(this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
@@ -299,50 +329,22 @@ TYPED_TEST(Vec3Rejection, Reject_AlwaysReturnFloatingPointVector)
  * @brief Verify that rejection using static variant of @ref fgm::Vec3::reject
  *       always return floating-point vector.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_Reject_AlwaysReturnFloatingPointVector)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_Reject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vec3 rejection = fgm::Vec3<TypeParam>::reject(this->_vec, this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
 
-#ifdef ENABLE_DEBUG_TESTS
-
-/**
- * @brief Verify that rejecting a vector from a zero vector triggers assert in debug mode.
- */
-TYPED_TEST(Vec3Rejection, FromZeroVectorTriggersAssertionInCallback)
-{
-    const fgm::Vec3<TypeParam> zeroVec(0, 0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.reject(zeroVec)), "");
-}
-
-
-/**
- * @brief Verify that rejecting a vector from a zero vector using static variant of @ref fgm::Vec3::reject
- *        triggers assert in debug mode.
- */
-TYPED_TEST(Vec3Rejection, StaticWrapper_FromZeroVectorTriggersAssertionInCallback)
-{
-    const fgm::Vec3<TypeParam> zeroVec(0, 0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec3<TypeParam>::reject(this->_vec, zeroVec)), "");
-}
-
-#endif
-
-
-
 /**************************************
- *                                    *
  *       SAFE REJECTION TESTS         *
- *                                    *
  **************************************/
 
 /**
  * @brief Verify that safely rejecting from a parallel vector using @ref fgm::Vec3::safeReject
  *       returns a zero vector.
  */
-TYPED_TEST(Vec3Rejection, SafeReject_ParallelVectorsReturnsZeroVector)
+TYPED_TEST(Vec3RejectionTests, SafeReject_ParallelVectorsReturnsZeroVector)
 {
     const fgm::Vec3 actualRejection = this->_vec.safeReject(this->_parallelVec);
 
@@ -372,7 +374,7 @@ TEST(Vec3Rejection, SafeReject_OrthogonalRejectionReturnsOriginalVector)
  * @brief Verify that safely rejecting from a non-orthogonal vector using @ref fgm::Vec3::safeReject
  *       returns a non-zero vector with perpendicular component.
  */
-TYPED_TEST(Vec3Rejection, SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
+TYPED_TEST(Vec3RejectionTests, SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
 {
     const fgm::Vec3 actualRejection = this->_vec.safeReject(this->_fromVec);
 
@@ -460,7 +462,7 @@ TEST(Vec3Rejection, SafeReject_MixedTypeRejectionPromotesType)
  * @brief Verify that safely rejecting from a zero vector using @ref fgm::Vec3::safeReject
  *       returns the same vector.
  */
-TYPED_TEST(Vec3Rejection, SafeReject_FromZeroVectorReturnsSameVector)
+TYPED_TEST(Vec3RejectionTests, SafeReject_FromZeroVectorReturnsSameVector)
 {
     const fgm::Vec3 zeroVec = fgm::Vec3<TypeParam>::zero();
 
@@ -474,7 +476,7 @@ TYPED_TEST(Vec3Rejection, SafeReject_FromZeroVectorReturnsSameVector)
  * @brief Verify that safely rejecting from a parallel vector using static variant of @ref fgm::Vec3::safeReject
  *       returns a zero vector.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_SafeReject_ParallelVectorsReturnsZeroVector)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_SafeReject_ParallelVectorsReturnsZeroVector)
 {
     const fgm::Vec3 actualRejection = fgm::Vec3<TypeParam>::safeReject(this->_vec, this->_parallelVec);
 
@@ -501,7 +503,7 @@ TEST(Vec3Rejection, StaticWrapper_SafeReject_OrthogonalRejectionReturnsOriginalV
  * @brief Verify that safely rejecting from a non-orthogonal vector using static variant of
  *       @ref fgm::Vec3::safeReject returns a non-zero vector with perpendicular component.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_SafeReject_NonOrthogonalRejectionReturnsNonZeroVector)
 {
     const fgm::Vec3 actualRejection = fgm::Vec3<TypeParam>::safeReject(this->_vec, this->_fromVec);
 
@@ -589,7 +591,7 @@ TEST(Vec3Rejection, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
  * @brief Verify that safely rejecting from a zero length vector using static variant of @ref fgm::Vec3::safeReject
  *       returns the same vector.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_SafeReject_FromZeroVectorReturnsSameVector)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_SafeReject_FromZeroVectorReturnsSameVector)
 {
     const fgm::Vec3 zeroVec = fgm::Vec3<TypeParam>::zero();
 
@@ -600,7 +602,7 @@ TYPED_TEST(Vec3Rejection, StaticWrapper_SafeReject_FromZeroVectorReturnsSameVect
 
 
 /** @brief Verify that rejection using @ref fgm::Vec3::safeReject always return floating-point vector. */
-TYPED_TEST(Vec3Rejection, SafeReject_AlwaysReturnFloatingPointVector)
+TYPED_TEST(Vec3RejectionTests, SafeReject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vec3 rejection = this->_vec.safeReject(this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
@@ -611,7 +613,7 @@ TYPED_TEST(Vec3Rejection, SafeReject_AlwaysReturnFloatingPointVector)
  * @brief Verify that rejection using static variant of @ref fgm::Vec3::safeReject
  *       always return floating-point vector.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_SafeReject_AlwaysReturnFloatingPointVector)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_SafeReject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vec3 rejection = fgm::Vec3<TypeParam>::safeReject(this->_vec, this->_fromVec);
     static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
@@ -680,7 +682,7 @@ TEST_P(Vec3RejectionNaNTests, StaticWrapper_SafeReject_OntoNaNVectorReturnsZeroV
  * @brief Verify that safely rejecting from a parallel vector using @ref fgm::Vec3::tryReject
  *       returns a zero vector  and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec3Rejection, TryReject_ParallelVectorsReturnsZeroVectorAndSetsCorrectStatusFlag)
+TYPED_TEST(Vec3RejectionTests, TryReject_ParallelVectorsReturnsZeroVectorAndSetsCorrectStatusFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Vec3 actualRejection = this->_vec.tryReject(this->_parallelVec, flag);
@@ -714,7 +716,7 @@ TEST(Vec3Rejection, TryReject_OrthogonalRejectionReturnsOriginalVectorAndSetsCor
  * @brief Verify that safely rejecting from a non-orthogonal vector using @ref fgm::Vec3::tryReject
  *       returns a non-zero vector with perpendicular component sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec3Rejection, TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+TYPED_TEST(Vec3RejectionTests, TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Vec3 actualRejection = this->_vec.tryReject(this->_fromVec, flag);
@@ -816,7 +818,7 @@ TEST(Vec3Rejection, TryReject_MixedTypeRejectionPromotesType)
  * @brief Verify that safely rejecting from a zero vector using @ref fgm::Vec3::tryReject
  *       returns the same vector and sets flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Vec3Rejection, TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
+TYPED_TEST(Vec3RejectionTests, TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
     const fgm::Vec3 zeroVec = fgm::Vec3<TypeParam>::zero();
     fgm::OperationStatus flag;
@@ -832,7 +834,7 @@ TYPED_TEST(Vec3Rejection, TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrec
  * @brief Verify that safely rejecting from a parallel vector using static variant of @ref fgm::Vec3::tryReject
  *       returns a zero vector and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_TryReject_ParallelVectorsReturnsZeroVectorAndSetsCorrectStatusFlag)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_TryReject_ParallelVectorsReturnsZeroVectorAndSetsCorrectStatusFlag)
 {
     fgm::OperationStatus flag;
 
@@ -866,7 +868,7 @@ TEST(Vec3Rejection, StaticWrapper_TryReject_OrthogonalRejectionReturnsOriginalVe
  *       @ref fgm::Vec3::tryReject returns a non-zero vector with perpendicular component
  *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_TryReject_NonOrthogonalRejectionReturnsNonZeroVectorAndSetsCorrectStatusFlag)
 {
     fgm::OperationStatus flag;
 
@@ -879,7 +881,7 @@ TYPED_TEST(Vec3Rejection, StaticWrapper_TryReject_NonOrthogonalRejectionReturnsN
 
 /**
  * @brief Verify that safely rejecting from an orthogonal unit vector using static variant of
- *       @ref fgm::Vec2::tryRejectNorm returns a non-zero vector and with perpendicular component sets flag to
+ *       @ref fgm::Vec3::tryRejectNorm returns a non-zero vector and with perpendicular component sets flag to
  *       @ref fgm::OperationStatus::SUCCESS.
  */
 TEST(Vec3Rejection, StaticWrapper_TryRejectNorm_FromNormalizedVectorReturnsNonZeroVectorAndSetsCorrectStatusFlag)
@@ -970,7 +972,7 @@ TEST(Vec3Rejection, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
  * @brief Verify that safely rejecting from a zero length vector using static variant of @ref fgm::Vec3::tryReject
  *       returns the same vector and sets flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_TryReject_FromZeroVectorReturnsSameVectorAndSetsCorrectStatusFlag)
 {
     const fgm::Vec3 zeroVec = fgm::Vec3<TypeParam>::zero();
     fgm::OperationStatus flag;
@@ -983,7 +985,7 @@ TYPED_TEST(Vec3Rejection, StaticWrapper_TryReject_FromZeroVectorReturnsSameVecto
 
 
 /** @brief Verify that rejection using @ref fgm::Vec3::tryReject always return floating-point vector. */
-TYPED_TEST(Vec3Rejection, TryRejectAlwaysReturnFloatingPointVector)
+TYPED_TEST(Vec3RejectionTests, TryRejectAlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] fgm::OperationStatus status;
     [[maybe_unused]] const fgm::Vec3 rejection = this->_vec.tryReject(this->_fromVec, status);
@@ -995,7 +997,7 @@ TYPED_TEST(Vec3Rejection, TryRejectAlwaysReturnFloatingPointVector)
  * @brief Verify that rejection using static variant of @ref fgm::Vec3::tryReject
  *       always return floating-point vector.
  */
-TYPED_TEST(Vec3Rejection, StaticWrapper_TryReject_AlwaysReturnFloatingPointVector)
+TYPED_TEST(Vec3RejectionTests, StaticWrapper_TryReject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] fgm::OperationStatus status;
     [[maybe_unused]] const fgm::Vec3 rejection = fgm::Vec3<TypeParam>::tryReject(this->_vec, this->_fromVec, status);

@@ -120,7 +120,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref Vec2 scalar negation.
+     * @brief Test fixture for @ref Vec2 negation.
      * @tparam T The scalar type (int, float, double...) of the vector components.
      */
     template <typename T>
@@ -143,7 +143,7 @@ namespace
     class Vec2DivisionNaNTests: public testing::TestWithParam<fgm::Vec2<float>>
     {};
 
-    INSTANTIATE_TEST_SUITE_P(Vec2DivisionTestSuite, Vec2DivisionNaNTests,
+    INSTANTIATE_TEST_SUITE_P(Vec2InvalidDivision, Vec2DivisionNaNTests,
                              ::testing::Values(fgm::Vec2<float>(fgm::constants::NaN, 3.0f),
                                                fgm::Vec2<float>(3.0f, fgm::constants::NaN),
                                                fgm::Vec2<float>(fgm ::constants::NaN, fgm::constants::NaN)));

@@ -55,7 +55,7 @@ namespace
      */
     class Vec2ProjectionNaNTests: public testing::TestWithParam<fgm::Vec2<float>>
     {};
-    INSTANTIATE_TEST_SUITE_P(Vec2ProjectionTestSuite, Vec2ProjectionNaNTests,
+    INSTANTIATE_TEST_SUITE_P(Vec2ProjectionNanVectors, Vec2ProjectionNaNTests,
                              ::testing::Values(fgm::Vec2<float>(fgm::constants::NaN, 1.0f),
                                                fgm::Vec2<float>(1.0f, fgm::constants::NaN),
                                                fgm::Vec2<float>(fgm::constants::NaN, fgm::constants::NaN)));

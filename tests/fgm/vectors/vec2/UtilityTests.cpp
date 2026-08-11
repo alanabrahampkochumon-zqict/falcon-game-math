@@ -12,6 +12,11 @@
 #include "Vec2TestSetup.h"
 
 
+/**
+ * @addtogroup T_FGM_Vec2_Utils
+ * @{
+ */
+
 namespace
 {
     /**************************************
@@ -69,7 +74,7 @@ namespace
      *            STATIC TESTS            *
      **************************************/
 
-    namespace
+    namespace static_tests
     {
         constexpr fgm::Vec2 NORM_VEC(1.0f, 2.0f);
         constexpr fgm::Vec2 INF_VEC(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);

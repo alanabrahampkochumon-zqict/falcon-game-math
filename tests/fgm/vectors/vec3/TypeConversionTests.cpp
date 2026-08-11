@@ -14,52 +14,50 @@
 
 
 /**
- * @addtogroup T_FGM_Vec3_Type_Conv
+ * @addtogroup T_FGM_Vec2_Type_Conv
  * @{
  */
 
-/**************************************
- *                                    *
- *            STATIC TESTS            *
- *                                    *
- **************************************/
-
-/** @brief Verify that vector conversion constructor is available during compile time. */
 namespace
 {
-    constexpr fgm::Vec3 vecF(3.0f, 1.0f, 4.0f);
-    constexpr fgm::Vec3<double> vecD(vecF);
-    static_assert(std::is_same_v<decltype(vecD)::value_type, double>);
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
 
-    [[maybe_unused]] constexpr fgm::Vec3<float> vecF2(vecD);
-    static_assert(std::is_same_v<decltype(vecF2)::value_type, float>);
+    namespace static_tests
+    {
+        constexpr fgm::Vec3 VEC(3.0f, 1.0f, 4.0f);
 
+        /// @test Verify that vector conversion constructor can promote type at compile time. */
+        constexpr fgm::Vec3<double> PROMOTED_VEC(VEC);
+        static_assert(std::is_same_v<decltype(PROMOTED_VEC)::value_type, double>);
+
+        /// @test Verify that vector conversion constructor can demote type at compile time. */
+        [[maybe_unused]] constexpr fgm::Vec3<float> DEMOTED_VEC(PROMOTED_VEC);
+        static_assert(std::is_same_v<decltype(DEMOTED_VEC)::value_type, float>);
+
+    } // namespace static_tests
 } // namespace
 
 
 
 /**************************************
- *                                    *
  *           RUNTIME TESTS            *
- *                                    *
  **************************************/
-
 
 /**
  * @brief Verify that the conversion constructor correctly promotes components from float to double.
  */
-TEST(Vec3TypeConversionTests, PromotesType)
+TEST(Vec3TypeConversionTests, ConversionCtor_PromotesType)
 {
     const fgm::Vec3 vec1(3.0f, 1.0f, 6.0f);
-
     [[maybe_unused]] const fgm::Vec3<double> vec2(vec1);
-
     static_assert(std::is_same_v<decltype(vec2)::value_type, double>);
 }
 
 
 /** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
-TEST(Vec3TypeConversionTests, ReturnsNewInstance)
+TEST(Vec3TypeConversionTests, ConversionCtor_ReturnsNewInstance)
 {
     // Given a float vector
     const fgm::Vec3 vec1(3.0f, 1.0f, 6.0f);
@@ -80,12 +78,10 @@ TEST(Vec3TypeConversionTests, ReturnsNewInstance)
 /**
  * @brief Verify that the conversion constructor correctly demotes components from double to float.
  */
-TEST(Vec3TypeConversionTests, DemotesType)
+TEST(Vec3TypeConversionTests, ConversionCtor_DemotesType)
 {
     const fgm::Vec3 vec1(3.0, 1.0, 6.0);
-
     [[maybe_unused]] const fgm::Vec3<float> vec2(vec1);
-
     static_assert(std::is_same_v<decltype(vec2)::value_type, float>);
 }
 
