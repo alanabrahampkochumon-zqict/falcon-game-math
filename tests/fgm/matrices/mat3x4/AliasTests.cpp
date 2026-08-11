@@ -20,7 +20,7 @@
  * @{
  */
 
-/** @brief Verify that fgm::Mat3x4[] are alias wrappers for integral and floating-point 4D matrix. */
+/** @test Verify that fgm::Mat3x4[] are alias wrappers for integral and floating-point 4D matrix. */
 namespace
 {
     /** @test Verify @ref fgm::Mat3x4B has `int8_t` value_type. */

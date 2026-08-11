@@ -59,7 +59,7 @@ namespace
  *            ACCESS TESTS            *
  **************************************/
 
-/** @brief Verify that the matrix elements are accessible via subscript indexing for reads. */
+/** @test Verify that the matrix elements are accessible via subscript indexing for reads. */
 TEST(Mat4x2AccessTests, AccessibleAsElements)
 {
     constexpr fgm::Mat4x2 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
@@ -73,7 +73,7 @@ TEST(Mat4x2AccessTests, AccessibleAsElements)
 }
 
 
-/** @brief Verify that the matrix columns are accessible as vectors for reads. */
+/** @test Verify that the matrix columns are accessible as vectors for reads. */
 TEST(Mat4x2AccessTests, AccessibleAsColumnVectors)
 {
     constexpr fgm::Mat4x2 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
@@ -88,7 +88,7 @@ TEST(Mat4x2AccessTests, AccessibleAsColumnVectors)
  *           MUTATION TESTS           *
  **************************************/
 
-/** @brief Verify that the matrix elements are accessible via subscript indexing for writes. */
+/** @test Verify that the matrix elements are accessible via subscript indexing for writes. */
 TEST(Mat4x2MutationTests, ElementsCanBeMutatedUsingIndex)
 {
     fgm::Mat4x2<float> mat;
@@ -113,7 +113,7 @@ TEST(Mat4x2MutationTests, ElementsCanBeMutatedUsingIndex)
 }
 
 
-/** @brief Verify that the matrix columns are accessible as vectors for writes. */
+/** @test Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Mat4x2MutationTests, ColumnsCanBeMutatedUsingIndex)
 {
     const fgm::Vec4 col0 = { 1.0f, 3.0f, 5.0f, 7.0f };

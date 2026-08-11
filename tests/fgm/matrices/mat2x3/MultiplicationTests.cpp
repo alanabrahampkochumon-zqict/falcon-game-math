@@ -136,7 +136,7 @@ TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByScalarReturnsScaledM
 
 
 /**
- * @brief Verify that the binary multiplication operator (scalar * matrix) perform an element-wise product
+ * @test Verify that the binary multiplication operator (scalar * matrix) perform an element-wise product
  *        and returns a new matrix instance.
  */
 TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ScalarTimesMatrixReturnsScaledMatrix)

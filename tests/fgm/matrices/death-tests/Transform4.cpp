@@ -74,7 +74,7 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-/** @brief Verify that @ref fgm::Transform4 out-of-bounds column access triggers assert in debug mode. */
+/** @test Verify that @ref fgm::Transform4 out-of-bounds column access triggers assert in debug mode. */
 TEST_P(Transform4VectorIndexingTests, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const auto col = GetParam();
@@ -82,7 +82,7 @@ TEST_P(Transform4VectorIndexingTests, OutOfBoundAccessTriggersAssertInDebugMode)
 }
 
 
-/** @brief Verify that @ref fgm::Transform4 out-of-bounds row, column access triggers assert in debug mode. */
+/** @test Verify that @ref fgm::Transform4 out-of-bounds row, column access triggers assert in debug mode. */
 TEST_P(Transform4IndexingTests, OutOfBoundAccessTriggersAssertInDebugMode)
 {
     const auto [row, col] = GetParam();

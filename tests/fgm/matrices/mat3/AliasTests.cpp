@@ -20,7 +20,7 @@
  * @{
  */
 
-/** @brief Verify that fgm::Mat3[] are alias wrappers for integral and floating-point 3D matrix. */
+/** @test Verify that fgm::Mat3[] are alias wrappers for integral and floating-point 3D matrix. */
 namespace
 {
     /** @test Verify @ref fgm::Mat3B has `int8_t` value_type. */

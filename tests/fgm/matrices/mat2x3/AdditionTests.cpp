@@ -59,7 +59,7 @@ namespace
         constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
         constexpr fgm::Mat2x3 MAT2(5, 6, 7, 8, 10, 11);
 
-        /** @brief Verify that Mat2x3 addition returns a valid matrix at compile time. */
+        /** @test Verify that Mat2x3 addition returns a valid matrix at compile time. */
         constexpr fgm::Mat2x3 BINARY_SUM = MAT1 + MAT2;
         static_assert(BINARY_SUM(0, 0) == 6);
         static_assert(BINARY_SUM(0, 1) == 8);

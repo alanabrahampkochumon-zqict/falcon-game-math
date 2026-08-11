@@ -167,7 +167,7 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that the binary vector multiplication operation perform linear transformation
+ * @test Verify that the binary vector multiplication operation perform linear transformation
  *        and returns a new column vector(<x, y, z, 0>).
  */
 TYPED_TEST(Transform4VectorMultiplicationTests, MatrixTimesVectorReturnsATransformedVector)
@@ -195,7 +195,7 @@ TEST(Transform4VectorMultiplicationTests, MatTimesVec_MixedTypeScalarMultiplicat
 
 
 /**
- * @brief Verify that the binary vector multiplication operation perform linear transformation
+ * @test Verify that the binary vector multiplication operation perform linear transformation
  *        and returns a new point(<x, y, z, 1>).
  */
 TYPED_TEST(Transform4PointMultiplicationTests, MatrixTimesPointReturnsATransformedPoint)

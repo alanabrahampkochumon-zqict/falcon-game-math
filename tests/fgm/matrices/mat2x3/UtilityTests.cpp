@@ -90,19 +90,19 @@ namespace
         constexpr fgm::Mat2x3 MAT(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 
 
-        /** @brief Verify that the Mat2x3 hasNaN return correct boolean at compile time. */
+        /** @test Verify that the Mat2x3 hasNaN return correct boolean at compile time. */
         static_assert(MAT.hasNaN() == false);
         static_assert(NAN_MAT.hasNaN() == true);
 
-        /** @brief Verify that the Mat2x3 hasNaN (static wrapper) return correct boolean at compile time. */
+        /** @test Verify that the Mat2x3 hasNaN (static wrapper) return correct boolean at compile time. */
         static_assert(fgm::Mat2x3<float>::hasNaN(MAT) == false);
         static_assert(fgm::Mat2x3<float>::hasNaN(NAN_MAT) == true);
 
-        /** @brief Verify that the Mat2x3 hasInf return correct boolean at compile time. */
+        /** @test Verify that the Mat2x3 hasInf return correct boolean at compile time. */
         static_assert(INF_MAT.hasInf() == true);
         static_assert(MAT.hasInf() == false);
 
-        /** @brief Verify that the Mat2x3 hasInf (static wrapper) return correct boolean at compile time. */
+        /** @test Verify that the Mat2x3 hasInf (static wrapper) return correct boolean at compile time. */
         static_assert(fgm::Mat2x3<float>::hasInf(INF_MAT) == true);
         static_assert(fgm::Mat2x3<float>::hasInf(MAT) == false);
 

@@ -116,11 +116,11 @@ TYPED_TEST(AbsTest, SignedNumbers_ReturnsAbsoluteValue) { testutils::EXPECT_MAG_
  *            ISNAN TESTS             *
  **************************************/
 
-/** @brief Verify that check for IEEE 754 NaN using @ref fgm::isnan returns true for a standard quiet NaN. */
+/** @test Verify thatcheck for IEEE 754 NaN using @ref fgm::isnan returns true for a standard quiet NaN. */
 TEST(IsNaNTests, NaNReturnsTrue) { EXPECT_TRUE(fgm::isnan(fgm::constants::NaN)); }
 
 
-/** @brief Verify that check for IEEE 754 NaN using @ref fgm::isnan returns false for a non-NaN. */
+/** @test Verify thatcheck for IEEE 754 NaN using @ref fgm::isnan returns false for a non-NaN. */
 TEST(IsNaNTests, NumberReturnsFalse) { EXPECT_FALSE(fgm::isnan(3.16f)); }
 
 
@@ -129,15 +129,15 @@ TEST(IsNaNTests, NumberReturnsFalse) { EXPECT_FALSE(fgm::isnan(3.16f)); }
  *            IS INF TESTS            *
  **************************************/
 
-/** @brief Verify that check for IEEE 754 infinity using @ref fgm::isinf returns true for a positive infinity. */
+/** @test Verify thatcheck for IEEE 754 infinity using @ref fgm::isinf returns true for a positive infinity. */
 TEST(IsInfTests, PositiveInfinityReturnsTrue) { EXPECT_TRUE(fgm::isinf(fgm::constants::INFINITY_F)); }
 
 
-/** @brief Verify that check for IEEE 754 infinity using @ref fgm::isinf returns true for a negative infinity. */
+/** @test Verify thatcheck for IEEE 754 infinity using @ref fgm::isinf returns true for a negative infinity. */
 TEST(IsInfTests, NegativeInfinityReturnsTrue) { EXPECT_TRUE(fgm::isinf(-fgm::constants::INFINITY_F)); }
 
 
-/** @brief Verify that check for IEEE 754 infinity using @ref fgm::isinf returns true for a non-infinity value. */
+/** @test Verify thatcheck for IEEE 754 infinity using @ref fgm::isinf returns true for a non-infinity value. */
 TEST(IsInfTests, NonInfiniteNumberReturnsFalse) { EXPECT_FALSE(fgm::isinf(3.16f)); }
 
 /** @} */

@@ -175,20 +175,20 @@ namespace
         constexpr fgm::Mat4 NAN_MAT(fgm::constants::NaN, 1.0f, 1.0f, 1.0f);
         constexpr fgm::Mat4 MAT(1.0f, 1.0f, 1.0f, 1.0f);
 
-        /** @brief Verify that the Mat4 hasNaN return correct boolean at compile time. */
+        /** @test Verify that the Mat4 hasNaN return correct boolean at compile time. */
         static_assert(MAT.hasNaN() == false);
         static_assert(NAN_MAT.hasNaN() == true);
 
-        /** @brief Verify that the Mat4 hasNaN (static wrapper) return correct boolean at compile time. */
+        /** @test Verify that the Mat4 hasNaN (static wrapper) return correct boolean at compile time. */
         static_assert(fgm::Mat4<float>::hasNaN(MAT) == false);
         static_assert(fgm::Mat4<float>::hasNaN(NAN_MAT) == true);
 
 
-        /** @brief Verify that the Mat4 hasInf return correct boolean at compile time. */
+        /** @test Verify that the Mat4 hasInf return correct boolean at compile time. */
         static_assert(INF_MAT.hasInf() == true);
         static_assert(MAT.hasInf() == false);
 
-        /** @brief Verify that the Mat4 hasInf (static wrapper) return correct boolean at compile time. */
+        /** @test Verify that the Mat4 hasInf (static wrapper) return correct boolean at compile time. */
         static_assert(fgm::Mat4<float>::hasInf(INF_MAT) == true);
         static_assert(fgm::Mat4<float>::hasInf(MAT) == false);
 

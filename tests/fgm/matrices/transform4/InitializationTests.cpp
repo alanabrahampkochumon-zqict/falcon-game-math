@@ -145,7 +145,7 @@ TYPED_TEST(Transform4InitializationTests, ParameterizedCtor_InitializesMatrixWit
 }
 
 
-/** @brief Verify that a matrix can be initialized with implicit braced initialization. */
+/** @test Verify that a matrix can be initialized with implicit braced initialization. */
 TYPED_TEST(Transform4InitializationTests, CanBeConstructedWithBracedInitialization)
 {
     const fgm::Transform4<TypeParam> matrix = { { TypeParam(1), TypeParam(5), TypeParam(9) },

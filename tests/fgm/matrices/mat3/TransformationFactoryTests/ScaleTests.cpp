@@ -132,7 +132,7 @@ namespace
      *            STATIC TESTS            *
      **************************************/
 
-    /** @brief Verify that scale transform factory is available at compile time.  */
+    /** @test Verify that scale transform factory is available at compile time.  */
     namespace static_tests
     {
         /// @test Verify that scale transformation factory for uniform scale is available at compile time.

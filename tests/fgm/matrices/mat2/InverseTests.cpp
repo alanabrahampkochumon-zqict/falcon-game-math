@@ -78,7 +78,7 @@ namespace
      *           STATIC TESTS             *
      **************************************/
 
-    /** @brief Verify that matrix inverse is available at compile time. */
+    /** s@test Verify that matrix inverse is available at compile time. */
     namespace static_tests
     {
         constexpr fgm::Mat2 MAT(1.0f, 2.0f, 3.0f, 4.0f);
@@ -232,7 +232,7 @@ TEST_P(Mat2InverseNaNTests, StaticWrapper_SafeInverse_ReturnsPassedInFallbackMat
  **************************************/
 
 /**
- * @brief Verify that inverting a matrix using @ref fgm::Mat2::tryInverse returns a new matrix
+ * @test Verify that inverting a matrix using @ref fgm::Mat2::tryInverse returns a new matrix
  *        that when multiplied with the original matrix returns an identity matrix and sets status flag to
  *        @ref OperationStatus::SUCCESS.
  */
@@ -245,7 +245,7 @@ TYPED_TEST(Mat2InverseTests, TryInverse_ReturnsInverseMatrixAndSetsCorrectFlag)
 
 
 /**
- * @brief Verify that inverse of matrix (using @ref fgm::Mat2::tryInverse) times itself is an identity matrix and
+ * @test Verify that inverse of matrix (using @ref fgm::Mat2::tryInverse) times itself is an identity matrix and
  *        sets status flag to @ref OperationStatus::SUCCESS.
  */
 TYPED_TEST(Mat2InverseTests, TryInverse_InverseMatrixTimesOriginalMatrixReturnsIdentityMatrixAndSetsCorrectFlag)
@@ -258,7 +258,7 @@ TYPED_TEST(Mat2InverseTests, TryInverse_InverseMatrixTimesOriginalMatrixReturnsI
 
 
 /**
- * @brief Verify that inverting a singular matrix using @ref fgm::Mat2::tryInverse
+ * @test Verify that inverting a singular matrix using @ref fgm::Mat2::tryInverse
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(Mat2InverseSingularTests, TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
@@ -271,7 +271,7 @@ TEST_P(Mat2InverseSingularTests, TryInverse_ReturnsIdentityMatrixByDefaultAndSet
 
 
 /**
- * @brief Verify that inverting a singular matrix using @ref fgm::Mat2::tryInverse
+ * @test Verify that inverting a singular matrix using @ref fgm::Mat2::tryInverse
  *        returns passed-in fallback and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(Mat2InverseSingularTests, TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorrectFlag)
@@ -284,7 +284,7 @@ TEST_P(Mat2InverseSingularTests, TryInverse_ReturnsPassedInFallbackMatrixAndSets
 
 
 /**
- * @brief Verify that inverting a NaN matrix using @ref fgm::Mat2::tryInverse
+ * @test Verify that inverting a NaN matrix using @ref fgm::Mat2::tryInverse
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::NANOPERAND.
  */
 TEST_P(Mat2InverseNaNTests, TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
@@ -297,7 +297,7 @@ TEST_P(Mat2InverseNaNTests, TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorr
 
 
 /**
- * @brief Verify that inverting a NaN matrix using @ref fgm::Mat2::tryInverse returns passed-in fallback
+ * @test Verify that inverting a NaN matrix using @ref fgm::Mat2::tryInverse returns passed-in fallback
  *        and sets status flag to @ref OperationStatus::NANOPERAND.
  */
 TEST_P(Mat2InverseNaNTests, TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorrectFlag)
@@ -310,7 +310,7 @@ TEST_P(Mat2InverseNaNTests, TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorre
 
 
 /**
- * @brief Verify that inverting a matrix using static variant of @ref fgm::Mat2::tryInverse returns a new matrix
+ * @test Verify that inverting a matrix using static variant of @ref fgm::Mat2::tryInverse returns a new matrix
  *        that when multiplied with the original matrix returns an identity matrix and sets status flag to
  *        @ref OperationStatus::SUCCESS.
  */
@@ -323,7 +323,7 @@ TYPED_TEST(Mat2InverseTests, StaticWrapper_TryInverse_ReturnsInverseMatrixAndSet
 
 
 /**
- * @brief Verify that inverse of matrix (using static variant of @ref fgm::Mat2::tryInverse) times itself is an
+ * @test Verify that inverse of matrix (using static variant of @ref fgm::Mat2::tryInverse) times itself is an
  *        identity matrix and sets status flag to @ref OperationStatus::SUCCESS.
  */
 TYPED_TEST(Mat2InverseTests,
@@ -337,7 +337,7 @@ TYPED_TEST(Mat2InverseTests,
 
 
 /**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat2::tryInverseOf
+ * @test Verify that inverting a singular matrix using static variant of @ref fgm::Mat2::tryInverseOf
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(Mat2InverseSingularTests, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
@@ -350,7 +350,7 @@ TEST_P(Mat2InverseSingularTests, StaticWrapper_TryInverse_ReturnsIdentityMatrixB
 
 
 /**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat2::tryInverseOf
+ * @test Verify that inverting a singular matrix using static variant of @ref fgm::Mat2::tryInverseOf
  *        returns passed-in fallback and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(Mat2InverseSingularTests, StaticWrapper_TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorrectFlag)
@@ -363,7 +363,7 @@ TEST_P(Mat2InverseSingularTests, StaticWrapper_TryInverse_ReturnsPassedInFallbac
 
 
 /**
- * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Mat2::tryInverse
+ * @test Verify that inverting a NaN matrix using static variant of @ref fgm::Mat2::tryInverse
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::NANOPERAND.
  */
 TEST_P(Mat2InverseNaNTests, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
@@ -376,7 +376,7 @@ TEST_P(Mat2InverseNaNTests, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefa
 
 
 /**
- * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Mat2::tryInverse
+ * @test Verify that inverting a NaN matrix using static variant of @ref fgm::Mat2::tryInverse
  *        returns passed-in fallback and sets status flag to @ref OperationStatus::NANOPERAND.
  */
 TEST_P(Mat2InverseNaNTests, StaticWrapper_TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorrectFlag)

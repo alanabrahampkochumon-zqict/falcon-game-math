@@ -270,7 +270,7 @@ TYPED_TEST(Mat3ReflectionTests, Origin_ReturnsMatrixWithNegatedXYZ)
 
 
 /**
- * @brief Verify that reflection transformation factory(makeReflection(normal)) along x-axis
+ * @test Verify that reflection transformation factory(makeReflection(normal)) along x-axis
  *        returns a reflection matrix across yz-plane.
  */
 TYPED_TEST(Mat3ReflectionTests, PlaneNormalReflection_X_ReturnsYZReflectionMatrix)
@@ -278,7 +278,7 @@ TYPED_TEST(Mat3ReflectionTests, PlaneNormalReflection_X_ReturnsYZReflectionMatri
 
 
 /**
- * @brief Verify that reflection transformation factory(makeReflection(normal)) for y-axis
+ * @test Verify that reflection transformation factory(makeReflection(normal)) for y-axis
  *        returns a reflection matrix across zx-plane.
  */
 TYPED_TEST(Mat3ReflectionTests, PlaneNormalReflection_Y_ReturnsZXReflectionMatrix)
@@ -286,7 +286,7 @@ TYPED_TEST(Mat3ReflectionTests, PlaneNormalReflection_Y_ReturnsZXReflectionMatri
 
 
 /**
- * @brief Verify that reflection transformation factory(makeReflection(normal)) for z-axis
+ * @test Verify that reflection transformation factory(makeReflection(normal)) for z-axis
  *        returns a reflection matrix across xy-plane.
  */
 TYPED_TEST(Mat3ReflectionTests, PlaneNormalReflection_Z_ReturnsXYReflectionMatrix)
@@ -295,7 +295,7 @@ TYPED_TEST(Mat3ReflectionTests, PlaneNormalReflection_Z_ReturnsXYReflectionMatri
 
 
 /**
- * @brief Verify that reflection transformation factory(makeReflection(normal)) for a plane normal
+ * @test Verify that reflection transformation factory(makeReflection(normal)) for a plane normal
  *        returns a reflection matrix.
  */
 TYPED_TEST(Mat3ReflectionArbitraryPlaneTests, ReturnsCorrectReflectionMatrix)

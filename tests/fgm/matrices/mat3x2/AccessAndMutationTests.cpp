@@ -64,7 +64,7 @@ namespace
  *            ACCESS TESTS            *
  **************************************/
 
-/** @brief Verify that the matrix elements are accessible via subscript indexing for reads. */
+/** @test Verify that the matrix elements are accessible via subscript indexing for reads. */
 TEST(Mat3x2AccessTests, AccessibleAsElements)
 {
     constexpr fgm::Mat3x2 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);
@@ -78,7 +78,7 @@ TEST(Mat3x2AccessTests, AccessibleAsElements)
 }
 
 
-/** @brief Verify that the matrix columns are accessible as vectors for reads. */
+/** @test Verify that the matrix columns are accessible as vectors for reads. */
 TEST(Mat3x2AccessTests, AccessibleAsColumnVectors)
 {
     constexpr fgm::Mat3x2 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);

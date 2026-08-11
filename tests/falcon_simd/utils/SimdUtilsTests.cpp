@@ -23,7 +23,7 @@ class PackedSizeCalculatorTests: public ::testing::TestWithParam<TestPackingPara
  */
 
 /**
- * @brief Verify that the packed size parameter returns the correct aligned byte size, padding, register width
+ * @test Verify that the packed size parameter returns the correct aligned byte size, padding, register width
  *        and count.
  */
 TEST_P(PackedSizeCalculatorTests, CalculatesCorrectSize)

@@ -106,21 +106,21 @@ namespace
         constexpr fgm::Mat3 MAT(1.0f, 1.0f, 1.0f);
 
 
-        /** @brief Verify that the Mat3 hasNaN return correct boolean at compile time. */
+        /** @test Verify that the Mat3 hasNaN return correct boolean at compile time. */
         static_assert(MAT.hasNaN() == false);
         static_assert(NAN_MAT.hasNaN() == true);
 
-        /** @brief Verify that the Mat3 hasNaN (static wrapper) return correct boolean at compile time. */
+        /** @test Verify that the Mat3 hasNaN (static wrapper) return correct boolean at compile time. */
         static_assert(fgm::Mat3<float>::hasNaN(MAT) == false);
         static_assert(fgm::Mat3<float>::hasNaN(NAN_MAT) == true);
 
 
-        /** @brief Verify that the Mat3 hasInf return correct boolean at compile time. */
+        /** @test Verify that the Mat3 hasInf return correct boolean at compile time. */
         static_assert(INF_MAT.hasInf() == true);
         static_assert(MAT.hasInf() == false);
 
 
-        /** @brief Verify that the Mat3 hasInf (static wrapper) return correct boolean at compile time. */
+        /** @test Verify that the Mat3 hasInf (static wrapper) return correct boolean at compile time. */
         static_assert(fgm::Mat3<float>::hasInf(INF_MAT) == true);
         static_assert(fgm::Mat3<float>::hasInf(MAT) == false);
 
@@ -141,7 +141,7 @@ TEST_P(Mat3InfCheckerTests, ReturnTrueIfAnyElementIsInfinity)
 }
 
 
-/** @brief Verify that @ref std::Mat3::hasInf returns `false` for integral types. */
+/** @test Verify that @ref std::Mat3::hasInf returns `false` for integral types. */
 TYPED_TEST(Mat3UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);

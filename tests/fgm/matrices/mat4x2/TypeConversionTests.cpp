@@ -24,7 +24,7 @@ namespace
      *           STATIC TESTS             *
      **************************************/
 
-    /** @brief Verify that the matrix can be type promoted and demoted at compile time. */
+    /** @test Verify that the matrix can be type promoted and demoted at compile time. */
     namespace static_tests
     {
         constexpr fgm::Mat4x2 MAT(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);

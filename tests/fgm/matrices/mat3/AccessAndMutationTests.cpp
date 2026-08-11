@@ -62,7 +62,7 @@ namespace
  *            ACCESS TESTS            *
  **************************************/
 
-/** @brief Verify that the matrix elements are accessible via subscript indexing for reads. */
+/** @test Verify that the matrix elements are accessible via subscript indexing for reads. */
 TEST(Mat3AccessTests, AccessibleAsElements)
 {
     constexpr fgm::Mat3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
@@ -79,7 +79,7 @@ TEST(Mat3AccessTests, AccessibleAsElements)
 }
 
 
-/** @brief Verify that the matrix columns are accessible as vectors for reads. */
+/** @test Verify that the matrix columns are accessible as vectors for reads. */
 TEST(Mat3AccessTests, AccessibleAsColumnVectors)
 {
     constexpr fgm::Mat3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
@@ -95,7 +95,7 @@ TEST(Mat3AccessTests, AccessibleAsColumnVectors)
  *           MUTATION TESTS           *
  **************************************/
 
-/** @brief Verify that the matrix elements are accessible via subscript indexing for writes. */
+/** @test Verify that the matrix elements are accessible via subscript indexing for writes. */
 TEST(Mat3MutationTests, ElementsCanBeMutatedUsingIndex)
 {
     fgm::Mat3<float> mat;

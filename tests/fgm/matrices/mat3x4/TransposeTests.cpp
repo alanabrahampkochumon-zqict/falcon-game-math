@@ -53,7 +53,7 @@ namespace
      *           STATIC TESTS             *
      **************************************/
 
-    /** @brief Verify that matrix transpose is available at compile time. */
+    /** @test Verify that matrix transpose is available at compile time. */
     namespace static_tests
     {
         constexpr fgm::Mat3x4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);

@@ -22,7 +22,7 @@
 
 namespace
 {
-    /** @brief Verify that @ref fgm::Arithmetic concept constraints integrals and floating point types. */
+    /** @test Verify that@ref fgm::Arithmetic concept constraints integrals and floating point types. */
     namespace
     {
         static_assert(fgm::Arithmetic<uint8_t> == true);
@@ -46,7 +46,7 @@ namespace
 
 
     /**
-     * @brief Verify that @ref fgm::SignedStrictArithmetic concept constraints signed integrals
+     * @test Verify that@ref fgm::SignedStrictArithmetic concept constraints signed integrals
      *        and floating point types.
      */
     namespace
@@ -68,7 +68,7 @@ namespace
 
 
     /**
-     * @brief Verify that @ref fgm::StrictArithmetic concept constraints all signed integrals
+     * @test Verify that@ref fgm::StrictArithmetic concept constraints all signed integrals
      *        and floating point types except `bool`.
      */
     namespace
@@ -91,7 +91,7 @@ namespace
     } // namespace
 
 
-    /** @brief Verify that @ref fgm::WeakArithmetic concept constraints integrals and floating point types. */
+    /** @test Verify that@ref fgm::WeakArithmetic concept constraints integrals and floating point types. */
     namespace
     {
         static_assert(fgm::WeakArithmetic<uint8_t> == true);
@@ -114,7 +114,7 @@ namespace
     } // namespace
 
 
-    /** @brief Verify that @ref fgm::StrictSignedness concept constraints two types of similar signedness. */
+    /** @test Verify that@ref fgm::StrictSignedness concept constraints two types of similar signedness. */
     namespace
     {
         // Unsigned types

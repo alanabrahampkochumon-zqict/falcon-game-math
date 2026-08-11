@@ -91,7 +91,7 @@ namespace
      *           STATIC TESTS             *
      **************************************/
 
-    /** @brief Verify that matrix inverse is available at compile time. */
+    /** @test Verify that matrix inverse is available at compile time. */
     namespace static_tests
     {
         constexpr fgm::Mat4 mat(1.0f, -1.0f, 0.0f, -2.0f, 2.0f, -1.0f, -2.0f, -6.0f, 0.0f, -1.0f, 3.0f, 3.0f, -2.0f,
@@ -293,7 +293,7 @@ TEST_P(Mat4InverseNaNTests, StaticWrapper_SafeInverse_ReturnsPassedInFallbackMat
  **************************************/
 
 /**
- * @brief Verify that inverting a matrix using @ref fgm::Mat4::tryInverse exchanges row and column elements and
+ * @test Verify that inverting a matrix using @ref fgm::Mat4::tryInverse exchanges row and column elements and
  *        returns a new matrix and sets status flag to @ref OperationStatus::SUCCESS.
  */
 TYPED_TEST(Mat4InverseTests, TryInverse_ReturnsInverseMatrixAndSetsCorrectFlag)
@@ -305,7 +305,7 @@ TYPED_TEST(Mat4InverseTests, TryInverse_ReturnsInverseMatrixAndSetsCorrectFlag)
 
 
 /**
- * @brief Verify that inverse of matrix (using @ref fgm::Mat4::tryInverse) times itself is an identity matrix and
+ * @test Verify that inverse of matrix (using @ref fgm::Mat4::tryInverse) times itself is an identity matrix and
  *        sets status flag to @ref OperationStatus::SUCCESS.
  */
 TYPED_TEST(Mat4InverseTests, TryInverse_InverseTimesMatrixReturnsIdentityMatrixAndSetsCorrectFlag)
@@ -318,7 +318,7 @@ TYPED_TEST(Mat4InverseTests, TryInverse_InverseTimesMatrixReturnsIdentityMatrixA
 
 
 /**
- * @brief Verify that inverting a singular matrix using @ref fgm::Mat4::tryInverse
+ * @test Verify that inverting a singular matrix using @ref fgm::Mat4::tryInverse
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(Mat4InverseSingularTests, TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
@@ -331,7 +331,7 @@ TEST_P(Mat4InverseSingularTests, TryInverse_ReturnsIdentityMatrixByDefaultAndSet
 
 
 /**
- * @brief Verify that inverting a singular matrix using @ref fgm::Mat4::tryInverse
+ * @test Verify that inverting a singular matrix using @ref fgm::Mat4::tryInverse
  *        returns passed-in fallback and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(Mat4InverseSingularTests, TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorrectFlag)
@@ -344,7 +344,7 @@ TEST_P(Mat4InverseSingularTests, TryInverse_ReturnsPassedInFallbackMatrixAndSets
 
 
 /**
- * @brief Verify that inverting a NaN matrix using @ref fgm::Mat4::tryInverse
+ * @test Verify that inverting a NaN matrix using @ref fgm::Mat4::tryInverse
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::NANOPERAND.
  */
 TEST_P(Mat4InverseNaNTests, TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
@@ -357,7 +357,7 @@ TEST_P(Mat4InverseNaNTests, TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorr
 
 
 /**
- * @brief Verify that inverting a NaN matrix using @ref fgm::Mat4::tryInverse returns passed-in fallback
+ * @test Verify that inverting a NaN matrix using @ref fgm::Mat4::tryInverse returns passed-in fallback
  *        and sets status flag to @ref OperationStatus::NANOPERAND.
  */
 TEST_P(Mat4InverseNaNTests, TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorrectFlag)
@@ -370,7 +370,7 @@ TEST_P(Mat4InverseNaNTests, TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorre
 
 
 /**
- * @brief Verify that inverting a matrix using static variant of @ref fgm::Mat4::tryInverse exchanges row and
+ * @test Verify that inverting a matrix using static variant of @ref fgm::Mat4::tryInverse exchanges row and
  *        column elements and returns a new matrix and sets status flag to @ref OperationStatus::SUCCESS.
  */
 TYPED_TEST(Mat4InverseTests, StaticWrapper_TryInverse_ReturnsInverseMatrixAndSetsCorrectFlag)
@@ -382,7 +382,7 @@ TYPED_TEST(Mat4InverseTests, StaticWrapper_TryInverse_ReturnsInverseMatrixAndSet
 
 
 /**
- * @brief Verify that inverse of matrix (using static variant of @ref fgm::Mat4::tryInverse) times itself is an
+ * @test Verify that inverse of matrix (using static variant of @ref fgm::Mat4::tryInverse) times itself is an
  *        identity matrix and sets status flag to @ref OperationStatus::SUCCESS.
  */
 TYPED_TEST(Mat4InverseTests, StaticWrapper_TryInverse_InverseTimesMatrixReturnsIdentityMatrixAndSetsCorrectFlag)
@@ -395,7 +395,7 @@ TYPED_TEST(Mat4InverseTests, StaticWrapper_TryInverse_InverseTimesMatrixReturnsI
 
 
 /**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::tryInverseOf
+ * @test Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::tryInverseOf
  *         returns identity matrix by default and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(Mat4InverseSingularTests, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
@@ -408,7 +408,7 @@ TEST_P(Mat4InverseSingularTests, StaticWrapper_TryInverse_ReturnsIdentityMatrixB
 
 
 /**
- * @brief Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::tryInverseOf
+ * @test Verify that inverting a singular matrix using static variant of @ref fgm::Mat4::tryInverseOf
  *         returns passed-in fallback and sets status flag to @ref OperationStatus::DIVISIONBYZERO.
  */
 TEST_P(Mat4InverseSingularTests, StaticWrapper_TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorrectFlag)
@@ -421,7 +421,7 @@ TEST_P(Mat4InverseSingularTests, StaticWrapper_TryInverse_ReturnsPassedInFallbac
 
 
 /**
- * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Mat4::tryInverse
+ * @test Verify that inverting a NaN matrix using static variant of @ref fgm::Mat4::tryInverse
  *        returns identity matrix by default and sets status flag to @ref OperationStatus::NANOPERAND.
  */
 TEST_P(Mat4InverseNaNTests, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefaultAndSetsCorrectFlag)
@@ -435,7 +435,7 @@ TEST_P(Mat4InverseNaNTests, StaticWrapper_TryInverse_ReturnsIdentityMatrixByDefa
 
 
 /**
- * @brief Verify that inverting a NaN matrix using static variant of @ref fgm::Mat4::tryInverse
+ * @test Verify that inverting a NaN matrix using static variant of @ref fgm::Mat4::tryInverse
  *        returns passed-in fallback and sets status flag to @ref OperationStatus::NANOPERAND.
  */
 TEST_P(Mat4InverseNaNTests, StaticWrapper_TryInverse_ReturnsPassedInFallbackMatrixAndSetsCorrectFlag)

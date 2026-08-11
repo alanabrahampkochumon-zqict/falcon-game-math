@@ -39,7 +39,7 @@ namespace
      *           STATIC TESTS             *
      **************************************/
 
-    /** @brief Verify that @ref fgm::Mat2x3 constants are available at compile time. */
+    /** @test Verify that @ref fgm::Mat2x3 constants are available at compile time. */
     namespace static_tests
     {
         /// @test Verify that Mat2x3::one returns a one matrix at compile time.

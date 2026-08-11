@@ -203,42 +203,42 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-/** @brief Verify that rotation transformation factory for x returns a rotation matrix. */
+/** @test Verify that rotation transformation factory for x returns a rotation matrix. */
 TYPED_TEST(Mat3RotationTests, X_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat3<typename TypeParam::first_type>::makeRotationX(this->_angle)); }
 
 
-/** @brief Verify that rotation transformation factory for x returns a rotation matrix for non-integral values. */
+/** @test Verify that rotation transformation factory for x returns a rotation matrix for non-integral values. */
 TYPED_TEST(Mat3RotationFloatTests, X_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatX, fgm::Mat3<TypeParam>::makeRotationX(this->_angle)); }
 
 
-/** @brief Verify that rotation transformation factory for y returns a rotation matrix. */
+/** @test Verify that rotation transformation factory for y returns a rotation matrix. */
 TYPED_TEST(Mat3RotationTests, Y_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat3<typename TypeParam::first_type>::makeRotationY(this->_angle)); }
 
 
-/** @brief Verify that rotation transformation factory for y returns a rotation matrix for non-integral values. */
+/** @test Verify that rotation transformation factory for y returns a rotation matrix for non-integral values. */
 TYPED_TEST(Mat3RotationFloatTests, Y_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatY, fgm::Mat3<TypeParam>::makeRotationY(this->_angle)); }
 
 
-/** @brief Verify that rotation transformation factory for z returns a rotation matrix. */
+/** @test Verify that rotation transformation factory for z returns a rotation matrix. */
 TYPED_TEST(Mat3RotationTests, Z_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat3<typename TypeParam::first_type>::makeRotationZ(this->_angle)); }
 
 
-/** @brief Verify that rotation transformation factory for z returns a rotation matrix for non-integral values. */
+/** @test Verify that rotation transformation factory for z returns a rotation matrix for non-integral values. */
 TYPED_TEST(Mat3RotationFloatTests, Z_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedMatZ, fgm::Mat3<TypeParam>::makeRotationZ(this->_angle)); }
 
 
-/** @brief Verify that rotation transformation factory for 2D returns a rotation matrix with translation. */
+/** @test Verify that rotation transformation factory for 2D returns a rotation matrix with translation. */
 TYPED_TEST(Mat3RotationFloatTests, Z_NonOriginCenter_ReturnsAValidRotationMatrixWithTranslation)
 { EXPECT_MAT_EQ(this->_expectedMatCenter, fgm::Mat3<TypeParam>::makeRotation(this->_angle, this->_center)); }
 
 /**
- * @brief Verify that rotation transformation factory for an axis returns a rotation matrix.
+ * @test Verify that rotation transformation factory for an axis returns a rotation matrix.
  */
 TYPED_TEST(Mat3RotationFloatTests, AxisAligned_ReturnsAValidRotationMatrix)
 { EXPECT_MAT_EQ(this->_expectedAxisRotation, fgm::Mat3<TypeParam>::makeRotation(this->_angle, this->_axis)); }
