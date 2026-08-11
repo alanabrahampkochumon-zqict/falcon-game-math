@@ -207,6 +207,7 @@ namespace
     } // namespace static_tests
 
 } // namespace
+} // namespace
 
 
 
@@ -461,6 +462,30 @@ TEST(Vec2ScalarDivisionTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecis
 }
 
 
+#ifndef ENABLE_DEBUG_TESTS
+/**
+ * @test Verify that dividing a float vector by zero returns an
+ *        infinity vector of float type.
+ */
+TEST(Vec2ScalarDivisionTests, FloatVectorDivisionByZeroReturnsInfinityVector)
+{
+    const fgm::Vec2 vec(1.0f, 3.0f);
+    EXPECT_VEC_INF(vec / 0);
+}
+
+
+/**
+ * @test Verify that dividing a double vector by zero returns an
+ *        infinity vector of double type.
+ */
+TEST(Vec2ScalarDivisionTests, DoubleVectorDivisionByZeroReturnsInfinityVector)
+{
+    const fgm::Vec2 vec(1.0, 3.0);
+    EXPECT_VEC_INF(vec / 0);
+}
+#endif
+
+
 
 /**************************************
  *        SAFE DIVISION TESTS         *
@@ -532,7 +557,7 @@ TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_SafeDiv_ByNaN_ReturnsZeroVecto
  **************************************/
 
 /**
- * @brief Verify that dividing a vector using @ref fgm::Vec2::tryDiv perform a component-wise divide and
+ * @test Verify that dividing a vector using @ref fgm::Vec2::tryDiv perform a component-wise divide and
  *       returns a new vector instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vec2ScalarDivisionTests, TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
@@ -546,7 +571,7 @@ TYPED_TEST(Vec2ScalarDivisionTests, TryDivide_ReturnsVectorWithDividedComponents
 
 
 /**
- * @brief Verify that dividing a vector by integral zero using @ref fgm::Vec2::tryDiv returns zero vector and
+ * @test Verify that dividing a vector by integral zero using @ref fgm::Vec2::tryDiv returns zero vector and
  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -560,7 +585,7 @@ TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByIntegralZero_ReturnsZeroVectorAnd
 
 
 /**
- * @brief Verify that dividing a vector by floating point zero using @ref fgm::Vec2::tryDiv returns zero vector and
+ * @test Verify that dividing a vector by floating point zero using @ref fgm::Vec2::tryDiv returns zero vector and
  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -574,7 +599,7 @@ TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByFloatZero_ReturnsZeroVectorAndSet
 
 
 /**
- * @brief Verify that dividing a NaN vector by zero using @ref fgm::Vec2::tryDiv
+ * @test Verify that dividing a NaN vector by zero using @ref fgm::Vec2::tryDiv
  *       @ref fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vec2ScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
@@ -586,7 +611,7 @@ TEST(Vec2ScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedenc
 
 
 /**
- * @brief Verify that dividing a vector by NaN using @ref fgm::Vec2::tryDiv returns a zero vector and
+ * @test Verify that dividing a vector by NaN using @ref fgm::Vec2::tryDiv returns a zero vector and
  *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -600,7 +625,7 @@ TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByNaN_ReturnsZeroVectorAndSetsCorre
 
 
 /**
- * @brief Verify that dividing a vector using static variant of @ref fgm::Vec2::tryDiv
+ * @test Verify that dividing a vector using static variant of @ref fgm::Vec2::tryDiv
  *       perform a component-wise divide and returns a new vector instance and
  *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -615,7 +640,7 @@ TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivide_ReturnsVectorWithDiv
 
 
 /**
- * @brief Verify that dividing a vector by integral zero using static variant of @ref fgm::Vec2::tryDiv
+ * @test Verify that dividing a vector by integral zero using static variant of @ref fgm::Vec2::tryDiv
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -629,7 +654,7 @@ TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByIntegralZero_Return
 
 
 /**
- * @brief Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vec2::tryDiv
+ * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vec2::tryDiv
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -643,7 +668,7 @@ TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByFloatZero_ReturnsZe
 
 
 /**
- * @brief Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vec2::tryDiv
+ * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vec2::tryDiv
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vec2ScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -657,7 +682,7 @@ TEST(Vec2ScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSe
 
 
 /**
- * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vec2::tryDiv returns zero vector
+ * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vec2::tryDiv returns zero vector
  * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
@@ -670,14 +695,13 @@ TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByNaN_ReturnsZeroVect
 }
 
 
+
 /**************************************
- *                                    *
  *         NaN DIVISION TESTS         *
- *                                    *
  **************************************/
 
 /**
- * @brief Verify that dividing a nan vector by a scalar using @ref fgm::Vec2::safeDiv
+ * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vec2::safeDiv
  *       returns vector with NaN-components as zero.
  */
 TEST_P(Vec2DivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
@@ -687,7 +711,7 @@ TEST_P(Vec2DivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 }
 
 /**
- * @brief Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vec2::safeDiv
+ * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vec2::safeDiv
  *       returns zero vector.
  */
 TEST_P(Vec2DivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
@@ -698,7 +722,7 @@ TEST_P(Vec2DivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponent
 
 
 /**
- * @brief Verify that dividing a nan vector by a scalar using @ref fgm::Vec2::tryDiv
+ * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vec2::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
 TEST_P(Vec2DivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
@@ -711,7 +735,7 @@ TEST_P(Vec2DivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 
 
 /**
- * @brief Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vec2::tryDiv
+ * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vec2::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
 TEST_P(Vec2DivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
@@ -722,29 +746,6 @@ TEST_P(Vec2DivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponents
     EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
 }
 
-
-#ifndef ENABLE_DEBUG_TESTS
-/**
- * @brief Verify that dividing a float vector by zero returns an
- *        infinity vector of float type.
- */
-TEST(Vec2ScalarDivisionTests, FloatVectorDivisionByZeroReturnsInfinityVector)
-{
-    const fgm::Vec2 vec(1.0f, 3.0f);
-    EXPECT_VEC_INF(vec / 0);
-}
-
-
-/**
- * @brief Verify that dividing a double vector by zero returns an
- *        infinity vector of double type.
- */
-TEST(Vec2ScalarDivisionTests, DoubleVectorDivisionByZeroReturnsInfinityVector)
-{
-    const fgm::Vec2 vec(1.0, 3.0);
-    EXPECT_VEC_INF(vec / 0);
-}
-#endif
 
 
 /**************************************
@@ -758,7 +759,7 @@ TYPED_TEST(Vec2NegationTests, InvertsTheSignOfEachComponents)
 }
 
 
-/** @brief Verify that @ref fgm::Vec2 unary minus operator inverts each component of an infinity vector. */
+/** @test Verify that @ref fgm::Vec2 unary minus operator inverts each component of an infinity vector. */
 TEST(Vec2NegationTests, InvertsSignOfInfinity)
 {
     const fgm::Vec2 infVec = {
@@ -776,7 +777,7 @@ TEST(Vec2NegationTests, InvertsSignOfInfinity)
 }
 
 
-/** @brief Verify that @ref fgm::Vec2 unary minus follows IEEE 754 rules for NaN. */
+/** @test Verify that @ref fgm::Vec2 unary minus follows IEEE 754 rules for NaN. */
 TEST(Vec2NegationTests, NoOpOnNaNVectors)
 {
     const fgm::Vec2 nanVec = {

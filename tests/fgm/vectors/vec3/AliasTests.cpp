@@ -20,7 +20,7 @@
  * @{
  */
 
-/** @brief Verify that fgm::Vec3[] are alias wrappers for integral and floating-point 3D vector. */
+/** @test Verify that fgm::Vec3[] are alias wrappers for integral and floating-point 3D vector. */
 namespace
 {
     /** @test Verify @ref fgm::Vec3B has `int8_t` value_type. */

@@ -20,7 +20,7 @@
  * @{
  */
 
-/** @brief Verify that fgm::Vec4[] are alias wrappers for integral and floating-point 4D vector. */
+/** @test Verify that fgm::Vec4[] are alias wrappers for integral and floating-point 4D vector. */
 namespace
 {
     /** @test Verify @ref fgm::Vec4B has `int8_t` value_type. */

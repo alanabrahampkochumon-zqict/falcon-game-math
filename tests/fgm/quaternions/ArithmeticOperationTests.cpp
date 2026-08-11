@@ -168,7 +168,6 @@ namespace
      *            STATIC TESTS            *
      **************************************/
 
-    /** @brief Verify that quaternion arithmetic operations are available at compile time. */
     namespace static_tests
     {
         constexpr fgm::Quaternion QUAT_A(-1, 12, 3, 4);

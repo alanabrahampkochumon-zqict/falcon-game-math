@@ -122,12 +122,12 @@ namespace
  *        EUCLIDEAN DISTANCE          *
  **************************************/
 
-/** @brief Verify that the @ref fgm::Vec3::dist function returns the Euclidean distance. */
+/** @test Verify that the @ref fgm::Vec3::dist function returns the Euclidean distance. */
 TYPED_TEST(Vec3DistanceTests, Dist_ReturnsEuclideanDistance)
 { EXPECT_MAG_EQ(this->_dist, this->_vecA.dist(this->_vecB)); }
 
 
-/** @brief Verify that the @ref fgm::Vec3::dist function maintains precision for irrational numbers. */
+/** @test Verify that the @ref fgm::Vec3::dist function maintains precision for irrational numbers. */
 TYPED_TEST(Vec3DistanceTests, Dist_IrrationalDistanceMaintainsPrecision)
 {
     using T = TypeParam;
@@ -142,7 +142,7 @@ TYPED_TEST(Vec3DistanceTests, Dist_IrrationalDistanceMaintainsPrecision)
 }
 
 
-/** @brief Verify that the @ref fgm::Vec3::dist function returns zero for the same vector. */
+/** @test Verify that the @ref fgm::Vec3::dist function returns zero for the same vector. */
 TYPED_TEST(Vec3DistanceTests, Dist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = fgm::Magnitude<TypeParam>(0);
@@ -151,7 +151,7 @@ TYPED_TEST(Vec3DistanceTests, Dist_BetweenSameVectorReturnsZero)
 }
 
 
-/** @brief Verify that the @ref fgm::Vec3::dist function handles negative coordinates. */
+/** @test Verify that the @ref fgm::Vec3::dist function handles negative coordinates. */
 TYPED_TEST(Vec3DistanceSignedTests, Dist_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.dist(this->_vecB);
@@ -159,7 +159,7 @@ TYPED_TEST(Vec3DistanceSignedTests, Dist_HandlesNegativeNumbers)
 }
 
 
-/** @brief Verify that the @ref fgm::Vec3::dist function always return a floating-point value. */
+/** @test Verify that the @ref fgm::Vec3::dist function always return a floating-point value. */
 TYPED_TEST(Vec3DistanceTests, Dist_AlwaysReturnFloatingPointValue)
 {
     [[maybe_unused]] const auto distance = this->_vecA.dist(this->_vecB);
@@ -167,13 +167,13 @@ TYPED_TEST(Vec3DistanceTests, Dist_AlwaysReturnFloatingPointValue)
 }
 
 
-/** @brief Verify that the static variant of  @ref fgm::Vec3::dist function returns the Euclidean distance. */
+/** @test Verify that the static variant of  @ref fgm::Vec3::dist function returns the Euclidean distance. */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_Dist_ReturnsEuclideanDistance)
 { EXPECT_MAG_EQ(this->_dist, fgm::Vec3<TypeParam>::dist(this->_vecA, this->_vecB)); }
 
 
 /**
- * @brief Verify that the static variant of @ref fgm::Vec3::dist function maintains precision
+ * @test Verify that the static variant of @ref fgm::Vec3::dist function maintains precision
  *        for irrational numbers.
  */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_Dist_IrrationalDistanceMaintainsPrecision)
@@ -191,7 +191,7 @@ TYPED_TEST(Vec3DistanceTests, StaticWrapper_Dist_IrrationalDistanceMaintainsPrec
 }
 
 
-/** @brief Verify that the @ref fgm::Vec3::dist function returns zero for the same vector. */
+/** @test Verify that the @ref fgm::Vec3::dist function returns zero for the same vector. */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_Dist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = fgm::Magnitude<TypeParam>(0);
@@ -200,7 +200,7 @@ TYPED_TEST(Vec3DistanceTests, StaticWrapper_Dist_BetweenSameVectorReturnsZero)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Vec3::dist function handles negative coordinates. */
+/** @test Verify that the static variant of @ref fgm::Vec3::dist function handles negative coordinates. */
 TYPED_TEST(Vec3DistanceSignedTests, StaticWrapper_Dist_HandlesNegativeNumbers)
 {
     const auto distance = fgm::Vec3<TypeParam>::dist(this->_vecA, this->_vecB);
@@ -208,7 +208,7 @@ TYPED_TEST(Vec3DistanceSignedTests, StaticWrapper_Dist_HandlesNegativeNumbers)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Vec3::dist function always return a floating-point value. */
+/** @test Verify that the static variant of @ref fgm::Vec3::dist function always return a floating-point value. */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
 {
     [[maybe_unused]] const auto distance = this->_vecA.dist(this->_vecB);
@@ -221,12 +221,12 @@ TYPED_TEST(Vec3DistanceTests, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
  *    EUCLIDEAN DISTANCE (SQUARED)    *
  **************************************/
 
-/** @brief Verify that the @ref fgm::Vec3::distSq function returns the Euclidean distance (squared). */
+/** @test Verify that the @ref fgm::Vec3::distSq function returns the Euclidean distance (squared). */
 TYPED_TEST(Vec3DistanceTests, DistSq_ReturnsSquaredEuclideanDistance)
 { EXPECT_MAG_EQ(this->_distSq, this->_vecA.distSq(this->_vecB)); }
 
 
-/** @brief Verify that the @ref fgm::Vec3::distSq function returns zero for the same vector. */
+/** @test Verify that the @ref fgm::Vec3::distSq function returns zero for the same vector. */
 TYPED_TEST(Vec3DistanceTests, DistSq_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
@@ -235,7 +235,7 @@ TYPED_TEST(Vec3DistanceTests, DistSq_BetweenSameVectorReturnsZero)
 }
 
 
-/** @brief Verify that the @ref fgm::Vec3::distSq function handles negative coordinates. */
+/** @test Verify that the @ref fgm::Vec3::distSq function handles negative coordinates. */
 TYPED_TEST(Vec3DistanceSignedTests, DistSq_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.distSq(this->_vecB);
@@ -244,14 +244,14 @@ TYPED_TEST(Vec3DistanceSignedTests, DistSq_HandlesNegativeNumbers)
 
 
 /**
- * @brief Verify that the static variant of  @ref fgm::Vec3::distSq function
+ * @test Verify that the static variant of  @ref fgm::Vec3::distSq function
  *        returns the Euclidean distance (squared).
  */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_DistSq_ReturnsSquaredEuclideanDistance)
 { EXPECT_MAG_EQ(this->_distSq, fgm::Vec3<TypeParam>::distSq(this->_vecA, this->_vecB)); }
 
 
-/** @brief Verify that the @ref fgm::Vec3::distSq function returns zero for the same vector. */
+/** @test Verify that the @ref fgm::Vec3::distSq function returns zero for the same vector. */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_DistSq_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
@@ -260,7 +260,7 @@ TYPED_TEST(Vec3DistanceTests, StaticWrapper_DistSq_BetweenSameVectorReturnsZero)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Vec3::distSq function handles negative coordinates. */
+/** @test Verify that the static variant of @ref fgm::Vec3::distSq function handles negative coordinates. */
 TYPED_TEST(Vec3DistanceSignedTests, StaticWrapper_DistSq_HandlesNegativeNumbers)
 {
     const auto distance = fgm::Vec3<TypeParam>::distSq(this->_vecA, this->_vecB);
@@ -272,12 +272,12 @@ TYPED_TEST(Vec3DistanceSignedTests, StaticWrapper_DistSq_HandlesNegativeNumbers)
  *        MANHATTAN DISTANCE          *
  **************************************/
 
-/** @brief Verify that the @ref fgm::Vec3::manhattanDist function returns the Manhattan. */
+/** @test Verify that the @ref fgm::Vec3::manhattanDist function returns the Manhattan. */
 TYPED_TEST(Vec3DistanceTests, ManhattanDist_ReturnsManhattanDistance)
 { EXPECT_MAG_EQ(this->_distManhattan, this->_vecA.manhattanDist(this->_vecB)); }
 
 
-/** @brief Verify that the @ref fgm::Vec3::manhattanDist function returns zero for the same vector. */
+/** @test Verify that the @ref fgm::Vec3::manhattanDist function returns zero for the same vector. */
 TYPED_TEST(Vec3DistanceTests, ManhattanDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
@@ -286,7 +286,7 @@ TYPED_TEST(Vec3DistanceTests, ManhattanDist_BetweenSameVectorReturnsZero)
 }
 
 
-/** @brief Verify that the @ref fgm::Vec3::manhattanDist function handles negative coordinates. */
+/** @test Verify that the @ref fgm::Vec3::manhattanDist function handles negative coordinates. */
 TYPED_TEST(Vec3DistanceSignedTests, ManhattanDist_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.manhattanDist(this->_vecB);
@@ -295,14 +295,14 @@ TYPED_TEST(Vec3DistanceSignedTests, ManhattanDist_HandlesNegativeNumbers)
 
 
 /**
- * @brief Verify that the static variant of  @ref fgm::Vec3::manhattanDist function
+ * @test Verify that the static variant of  @ref fgm::Vec3::manhattanDist function
  *        returns the Manhattan distance.
  */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_ManhattanDist_ReturnsManhattanDistance)
 { EXPECT_MAG_EQ(this->_distManhattan, fgm::Vec3<TypeParam>::manhattanDist(this->_vecA, this->_vecB)); }
 
 
-/** @brief Verify that the @ref fgm::Vec3::manhattanDist function returns zero for the same vector. */
+/** @test Verify that the @ref fgm::Vec3::manhattanDist function returns zero for the same vector. */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_ManhattanDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
@@ -311,7 +311,7 @@ TYPED_TEST(Vec3DistanceTests, StaticWrapper_ManhattanDist_BetweenSameVectorRetur
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Vec3::manhattanDist function handles negative coordinates. */
+/** @test Verify that the static variant of @ref fgm::Vec3::manhattanDist function handles negative coordinates. */
 TYPED_TEST(Vec3DistanceSignedTests, StaticWrapper_ManhattanDist_HandlesNegativeNumbers)
 {
     const auto distance = fgm::Vec3<TypeParam>::manhattanDist(this->_vecA, this->_vecB);
@@ -324,12 +324,12 @@ TYPED_TEST(Vec3DistanceSignedTests, StaticWrapper_ManhattanDist_HandlesNegativeN
  **************************************/
 
 
-/** @brief Verify that the @ref fgm::Vec3::chebyshevDist function returns the Chebyshev distance. */
+/** @test Verify that the @ref fgm::Vec3::chebyshevDist function returns the Chebyshev distance. */
 TYPED_TEST(Vec3DistanceTests, ChebyshevDist_ReturnsChebyshevDistance)
 { EXPECT_MAG_EQ(this->_distChebyshev, this->_vecA.chebyshevDist(this->_vecB)); }
 
 
-/** @brief Verify that the @ref fgm::Vec3::chebyshevDist function returns zero for the same vector. */
+/** @test Verify that the @ref fgm::Vec3::chebyshevDist function returns zero for the same vector. */
 TYPED_TEST(Vec3DistanceTests, ChebyshevDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
@@ -338,7 +338,7 @@ TYPED_TEST(Vec3DistanceTests, ChebyshevDist_BetweenSameVectorReturnsZero)
 }
 
 
-/** @brief Verify that the @ref fgm::Vec3::chebyshevDist function handles negative coordinates. */
+/** @test Verify that the @ref fgm::Vec3::chebyshevDist function handles negative coordinates. */
 TYPED_TEST(Vec3DistanceSignedTests, ChebyshevDist_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.chebyshevDist(this->_vecB);
@@ -347,14 +347,14 @@ TYPED_TEST(Vec3DistanceSignedTests, ChebyshevDist_HandlesNegativeNumbers)
 
 
 /**
- * @brief Verify that the static variant of  @ref fgm::Vec3::chebyshevDist function
+ * @test Verify that the static variant of  @ref fgm::Vec3::chebyshevDist function
  *        returns the Chebyshev distance.
  */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_ChebyshevDist_ReturnsChebyshevDistance)
 { EXPECT_MAG_EQ(this->_distChebyshev, fgm::Vec3<TypeParam>::chebyshevDist(this->_vecA, this->_vecB)); }
 
 
-/** @brief Verify that the @ref fgm::Vec3::chebyshevDist function returns zero for the same vector. */
+/** @test Verify that the @ref fgm::Vec3::chebyshevDist function returns zero for the same vector. */
 TYPED_TEST(Vec3DistanceTests, StaticWrapper_ChebyshevDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
@@ -363,7 +363,7 @@ TYPED_TEST(Vec3DistanceTests, StaticWrapper_ChebyshevDist_BetweenSameVectorRetur
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Vec3::chebyshevDist function handles negative coordinates. */
+/** @test Verify that the static variant of @ref fgm::Vec3::chebyshevDist function handles negative coordinates. */
 TYPED_TEST(Vec3DistanceSignedTests, StaticWrapper_ChebyshevDist_HandlesNegativeNumbers)
 {
     const auto distance = fgm::Vec3<TypeParam>::chebyshevDist(this->_vecA, this->_vecB);

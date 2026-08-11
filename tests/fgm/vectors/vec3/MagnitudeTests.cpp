@@ -99,7 +99,7 @@ namespace
  *          MAGNITUDE TESTS           *
  **************************************/
 
-/** @brief Verify that taking the magnitude of a zero vector returns exactly zero. */
+/** @test Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vec3Magnitude, ZeroVectorReturnsZero)
 {
     const fgm::Vec3 vec(0.0f, 0.0f, 0.0f);
@@ -107,7 +107,7 @@ TEST(Vec3Magnitude, ZeroVectorReturnsZero)
 }
 
 
-/** @brief Verify that taking the magnitude of a one vector returns non-unit scalar. */
+/** @test Verify that taking the magnitude of a one vector returns non-unit scalar. */
 TEST(Vec3Magnitude, OneComponentVectorReturnsNonUnitScalar)
 {
     const fgm::Vec3 vec(1.0f, 1.0f, 1.0f);
@@ -115,7 +115,7 @@ TEST(Vec3Magnitude, OneComponentVectorReturnsNonUnitScalar)
 }
 
 
-/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+/** @test Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
 TYPED_TEST(Vec3MagnitudeTests, NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = this->_vec.mag();
@@ -123,7 +123,7 @@ TYPED_TEST(Vec3MagnitudeTests, NonUnitVectorReturnsCorrectMagnitude)
 }
 
 
-/** @brief Verify that taking the magnitude always returns a floating-point scalar. */
+/** @test Verify that taking the magnitude always returns a floating-point scalar. */
 TYPED_TEST(Vec3MagnitudeTests, MagnitudeIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] const auto magnitude = this->_vec.mag();
@@ -132,7 +132,7 @@ TYPED_TEST(Vec3MagnitudeTests, MagnitudeIsAlwaysTypedPromotedToFloatingPointType
 
 
 /**
- * @brief Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vec3::mag
+ * @test Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vec3::mag
  *       returns non-unit scalar.
  */
 TYPED_TEST(Vec3MagnitudeTests, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
@@ -142,7 +142,7 @@ TYPED_TEST(Vec3MagnitudeTests, StaticWrapper_NonUnitVectorReturnsCorrectMagnitud
 }
 
 
-/** @brief Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
+/** @test Verify that the magnitude calculations for non-unit vectors ensure minimal precision loss. */
 TYPED_TEST(Vec3UncleanMagnitudeTests, NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
     const auto magnitude = this->_vec.mag();
@@ -151,7 +151,7 @@ TYPED_TEST(Vec3UncleanMagnitudeTests, NonUnitVectorReturnsCorrectMagnitudeWithMi
 
 
 /**
- * @brief Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vec3::mag
+ * @test Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vec3::mag
  *       ensure minimal precision loss.
  */
 TYPED_TEST(Vec3UncleanMagnitudeTests, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
@@ -165,7 +165,7 @@ TYPED_TEST(Vec3UncleanMagnitudeTests, StaticWrapper_NonUnitVectorReturnsCorrectM
  *       MAGNITUDE SQUARE TESTS       *
  **************************************/
 
-/** @brief Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
+/** @test Verify that taking the magnitude of a non-unit vector returns non-unit scalar. */
 TYPED_TEST(Vec3MagnitudeTests, MagSq_ReturnsSquaredMagnitude)
 {
     const auto magnitude = this->_vec.magSq();
@@ -174,7 +174,7 @@ TYPED_TEST(Vec3MagnitudeTests, MagSq_ReturnsSquaredMagnitude)
 
 
 /**
- * @brief Verify that taking the magnitude square of a non-unit vector using static variant of
+ * @test Verify that taking the magnitude square of a non-unit vector using static variant of
  *        @ref fgm::Vec3::mag returns non-unit scalar.
  */
 TYPED_TEST(Vec3MagnitudeTests, StaticWrapper_MagSq_ReturnsSquaredMagnitude)

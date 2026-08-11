@@ -131,7 +131,7 @@ namespace
  *          PROJECTION TESTS          *
  **************************************/
 
-/** @brief Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::project returns a zero vector. */
+/** @test Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::project returns a zero vector. */
 TYPED_TEST(Vec3ProjectionTests, OrthogonalVectorsReturnsZeroVector)
 {
     const fgm::Vec3 actualProjection = this->_perpendicularVec.project(this->_ontoVec);
@@ -141,7 +141,7 @@ TYPED_TEST(Vec3ProjectionTests, OrthogonalVectorsReturnsZeroVector)
 
 
 /**
- * @brief Verify that projecting onto a vector parallel to x-axis using @ref fgm::Vec3::project
+ * @test Verify that projecting onto a vector parallel to x-axis using @ref fgm::Vec3::project
  *       returns a vector containing only an x-component.
  */
 TEST(Vec3ProjectionTests, Project_XAxis_ReturnVectorWithNonZeroXComponent)
@@ -160,7 +160,7 @@ TEST(Vec3ProjectionTests, Project_XAxis_ReturnVectorWithNonZeroXComponent)
 
 
 /**
- * @brief Verify that projecting onto a vector parallel to y-axis using @ref fgm::Vec3::project
+ * @test Verify that projecting onto a vector parallel to y-axis using @ref fgm::Vec3::project
  *       returns a vector containing only a y-component.
  */
 TEST(Vec3ProjectionTests, Project_YAxis_ReturnVectorWithNonZeroYComponent)
@@ -179,7 +179,7 @@ TEST(Vec3ProjectionTests, Project_YAxis_ReturnVectorWithNonZeroYComponent)
 
 
 /**
- * @brief Verify that projecting onto a vector parallel to z-axis using @ref fgm::Vec3::project
+ * @test Verify that projecting onto a vector parallel to z-axis using @ref fgm::Vec3::project
  *       returns a vector containing only a z-component.
  */
 TEST(Vec3ProjectionTests, Project_ZAxis_ReturnVectorWithNonZeroZComponent)
@@ -198,7 +198,7 @@ TEST(Vec3ProjectionTests, Project_ZAxis_ReturnVectorWithNonZeroZComponent)
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector using @ref fgm::Vec3::project
+ * @test Verify that projecting onto a non-orthogonal vector using @ref fgm::Vec3::project
  *       returns a non-zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, Project_NonOrthogonalVectors_ReturnsNonZeroVector)
@@ -210,7 +210,7 @@ TYPED_TEST(Vec3ProjectionTests, Project_NonOrthogonalVectors_ReturnsNonZeroVecto
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::project
+ * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::project
  *       returns a non-zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_Project_NonOrthogonalVectors_ReturnsNonZeroVector)
@@ -222,7 +222,7 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_Project_NonOrthogonalVectors_Retur
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vec3::projectNorm
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vec3::projectNorm
  *       returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
@@ -241,7 +241,7 @@ TEST(Vec3ProjectionTests, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using @ref fgm::Vec3::project returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVectorInSameDirection)
@@ -260,7 +260,7 @@ TEST(Vec3ProjectionTests, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroV
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using @ref fgm::Vec3::project returns a type-promoted vector.
  */
 TEST(Vec3ProjectionTests, MixedTypeProjectionPromotesType)
@@ -281,7 +281,7 @@ TEST(Vec3ProjectionTests, MixedTypeProjectionPromotesType)
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal unit vector using static variant of
+ * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vec3::projectNorm returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
@@ -299,7 +299,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_ProjectionOntoNormalizedVectorReturnsNon
 }
 
 
-/** @brief Verify that projection using @ref fgm::Vec3::project always return floating-point vector. */
+/** @test Verify that projection using @ref fgm::Vec3::project always return floating-point vector. */
 TYPED_TEST(Vec3ProjectionTests, Project_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vec3 projection = this->_vec.project(this->_ontoVec);
@@ -308,7 +308,7 @@ TYPED_TEST(Vec3ProjectionTests, Project_AlwaysReturnFloatingPointVector)
 
 
 /**
- * @brief Verify that projection using static variant of @ref fgm::Vec3::project
+ * @test Verify that projection using static variant of @ref fgm::Vec3::project
  *       always return floating-point vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_Project_AlwaysReturnFloatingPointVector)
@@ -324,7 +324,7 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_Project_AlwaysReturnFloatingPointV
  **************************************/
 
 /**
- * @brief Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::safeProject
+ * @test Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::safeProject
  *       returns a zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, SafeProject_Project_NonOrthogonalVectors_ReturnsNonZeroVector)
@@ -336,7 +336,7 @@ TYPED_TEST(Vec3ProjectionTests, SafeProject_Project_NonOrthogonalVectors_Returns
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vec3::safeProjectNorm
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vec3::safeProjectNorm
  *       returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
@@ -355,7 +355,7 @@ TEST(Vec3ProjectionTests, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsN
 
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
  * fgm::Vec3::safeProjectNorm returns a zero vector.
  */
 TEST(Vec3ProjectionTests, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
@@ -373,7 +373,7 @@ TEST(Vec3ProjectionTests, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
  * fgm::Vec3::safeProjectNorm returns a zero vector.
  */
 TEST(Vec3ProjectionTests, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
@@ -391,7 +391,7 @@ TEST(Vec3ProjectionTests, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using @ref fgm::Vec3::safeProject returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
@@ -410,7 +410,7 @@ TEST(Vec3ProjectionTests, SafeProject_OntoVectorInOppositeDirectionReturnsVector
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using @ref fgm::Vec3::safeProject returns a type-promoted vector.
  */
 TEST(Vec3ProjectionTests, SafeProject_MixedTypeProjectionPromotesType)
@@ -431,7 +431,7 @@ TEST(Vec3ProjectionTests, SafeProject_MixedTypeProjectionPromotesType)
 
 
 /**
- * @brief Verify that projecting onto a zero length vector using @ref fgm::Vec3::safeProject
+ * @test Verify that projecting onto a zero length vector using @ref fgm::Vec3::safeProject
  *       returns a zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, SafeProject_OntoZeroReturnsZeroVector)
@@ -444,7 +444,7 @@ TYPED_TEST(Vec3ProjectionTests, SafeProject_OntoZeroReturnsZeroVector)
 }
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::safeProject
  *       returns a non-zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_Project_NonOrthogonalVectors_ReturnsNonZeroVector)
@@ -456,7 +456,7 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_Project_NonOrthogonalV
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal unit vector using static variant of
+ * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vec3::safeProjectNorm returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
@@ -476,7 +476,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_ProjectionOntoNormalized
 
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vec3::safeProjectNorm returns a zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_NaNVectorReturnsNonZeroVector)
@@ -494,7 +494,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_NaNVectorReturnsNonZeroV
 
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vec3::safeProjectNorm returns a zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
@@ -511,7 +511,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_OntoNaNVectorReturnsNonZ
 }
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using static variant of @ref fgm::Vec3::safeProject returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
@@ -530,7 +530,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_OntoVectorInOppositeDirectio
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using static variant of @ref fgm::Vec3::safeProject returns a type-promoted vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_MixedTypeProjectionPromotesType)
@@ -551,7 +551,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_MixedTypeProjectionPromotesT
 
 
 /**
- * @brief Verify that projecting onto a zero length vector using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projecting onto a zero length vector using static variant of @ref fgm::Vec3::safeProject
  *       returns a type-promoted vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
@@ -564,7 +564,7 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_OntoZeroVectorReturnsZ
 }
 
 
-/** @brief Verify that projection using @ref fgm::Vec3::safeProject always return floating-point vector. */
+/** @test Verify that projection using @ref fgm::Vec3::safeProject always return floating-point vector. */
 TYPED_TEST(Vec3ProjectionTests, SafeProject_AlwaysReturnFloatingPointVector)
 {
     [[maybe_unused]] const fgm::Vec3 projection = this->_vec.safeProject(this->_ontoVec);
@@ -573,7 +573,7 @@ TYPED_TEST(Vec3ProjectionTests, SafeProject_AlwaysReturnFloatingPointVector)
 
 
 /**
- * @brief Verify that projection using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projection using static variant of @ref fgm::Vec3::safeProject
  *       always return floating-point vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_AlwaysReturnFloatingPointVector)
@@ -584,7 +584,7 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_AlwaysReturnFloatingPo
 
 
 /**
- * @brief Verify that projection of NaN vector using @ref fgm::Vec3::safeProject
+ * @test Verify that projection of NaN vector using @ref fgm::Vec3::safeProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -597,7 +597,7 @@ TEST_P(Vec3ProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCorr
 
 
 /**
- * @brief Verify that projection onto NaN vector using @ref fgm::Vec3::safeProject
+ * @test Verify that projection onto NaN vector using @ref fgm::Vec3::safeProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -610,7 +610,7 @@ TEST_P(Vec3ProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSets
 
 
 /**
- * @brief Verify that projection of NaN vector using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projection of NaN vector using static variant of @ref fgm::Vec3::safeProject
  *       returns zero vector.
  */
 TEST_P(Vec3ProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -623,7 +623,7 @@ TEST_P(Vec3ProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVec
 
 
 /**
- * @brief Verify that projection onto NaN vector using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projection onto NaN vector using static variant of @ref fgm::Vec3::safeProject
  *       returns zero vector.
  */
 TEST_P(Vec3ProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -640,7 +640,7 @@ TEST_P(Vec3ProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZer
  **************************************/
 
 /**
- * @brief Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::tryProject
+ * @test Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::tryProject
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vec3ProjectionTests, TryProject_Project_NonOrthogonalVectors_ReturnsNonZeroVectorAndSetsCorrectFlag)
@@ -652,7 +652,7 @@ TYPED_TEST(Vec3ProjectionTests, TryProject_Project_NonOrthogonalVectors_ReturnsN
     EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
 }
 /**
- * @brief Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vec3::tryProject
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vec3::tryProject
  *       returns a non-zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TEST(Vec3ProjectionTests, TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
@@ -674,7 +674,7 @@ TEST(Vec3ProjectionTests, TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNo
 
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vec3::tryProjectNorm
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vec3::tryProjectNorm
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vec3ProjectionTests, TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -694,7 +694,7 @@ TEST(Vec3ProjectionTests, TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrec
 }
 
 /**
- * @brief Verify that projecting a vector onto a NaN vector using @ref fgm::Vec3::tryProjectNorm
+ * @test Verify that projecting a vector onto a NaN vector using @ref fgm::Vec3::tryProjectNorm
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vec3ProjectionTests, TryProjectNorm_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -715,7 +715,7 @@ TEST(Vec3ProjectionTests, TryProjectNorm_OntoNaNVectorReturnsZeroVectorAndSetsCo
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using @ref fgm::Vec3::tryProject returns a non-zero vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -738,7 +738,7 @@ TEST(Vec3ProjectionTests, TryProject_OntoVectorInOppositeDirectionReturnsVectorI
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using @ref fgm::Vec3::tryProject returns a type-promoted vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -763,7 +763,7 @@ TEST(Vec3ProjectionTests, TryProject_MixedTypeProjectionPromotesType)
 
 
 /**
- * @brief Verify that projecting onto a zero length vector using @ref fgm::Vec3::tryProject
+ * @test Verify that projecting onto a zero length vector using @ref fgm::Vec3::tryProject
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec3ProjectionTests, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
@@ -780,7 +780,7 @@ TYPED_TEST(Vec3ProjectionTests, TryProject_OntoZeroReturnsZeroVectorAndSetsCorre
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::tryProject
+ * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::tryProject
  *       returns a non-zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vec3ProjectionTests,
@@ -795,7 +795,7 @@ TYPED_TEST(Vec3ProjectionTests,
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal unit vector using static variant of
+ * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
  *       @ref fgm::Vec3::tryProject returns a non-zero vector and sets the flag to
  *       @ref fgm::OperationStatus::SUCCESS.
  */
@@ -819,7 +819,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_TryProject_ProjectionOntoNormalizedVecto
 
 
 /**
- * @brief Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of @ref
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of @ref
  * fgm::Vec3::tryProjectNorm returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -839,7 +839,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_TryProjectNorm_NaNVectorReturnsZeroVecto
 }
 
 /**
- * @brief Verify that projecting a vector onto a NaN vector using static variant of @ref fgm::Vec3::tryProjectNorm
+ * @test Verify that projecting a vector onto a NaN vector using static variant of @ref fgm::Vec3::tryProjectNorm
  *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_TryProjectNorm_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -861,7 +861,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_TryProjectNorm_OntoNaNVectorReturnsZeroV
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
+ * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
  *       using static variant of @ref fgm::Vec3::tryProject returns a non-zero vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -885,7 +885,7 @@ TEST(Vec3ProjectionTests,
 
 
 /**
- * @brief Verify that projecting onto a non-orthogonal vector of a different numeric type
+ * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
  *       using static variant of @ref fgm::Vec3::tryProject returns a type-promoted vector
  *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
@@ -910,7 +910,7 @@ TEST(Vec3ProjectionTests, StaticWrapper_TryProject_MixedTypeProjectionPromotesTy
 
 
 /**
- * @brief Verify that projecting onto a zero length vector using static variant of @ref fgm::Vec3::tryProject
+ * @test Verify that projecting onto a zero length vector using static variant of @ref fgm::Vec3::tryProject
  *       returns a type-promoted vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -925,7 +925,7 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_TryProject_OntoZeroVectorReturnsZe
 }
 
 
-/** @brief Verify that projection using @ref fgm::Vec3::tryProject always return floating-point vector. */
+/** @test Verify that projection using @ref fgm::Vec3::tryProject always return floating-point vector. */
 TYPED_TEST(Vec3ProjectionTests, TryProject_AlwaysReturnFloatingPointVectorAndSetsCorrectFlag)
 {
     [[maybe_unused]] fgm::OperationStatus flag;
@@ -935,7 +935,7 @@ TYPED_TEST(Vec3ProjectionTests, TryProject_AlwaysReturnFloatingPointVectorAndSet
 
 
 /**
- * @brief Verify that projection using static variant of @ref fgm::Vec3::tryProject
+ * @test Verify that projection using static variant of @ref fgm::Vec3::tryProject
  *       always return floating-point vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_TryProject_AlwaysReturnFloatingPointVector)
@@ -947,7 +947,7 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_TryProject_AlwaysReturnFloatingPoi
 
 
 /**
- * @brief Verify that projection of NaN vector using @ref fgm::Vec3::tryProject
+ * @test Verify that projection of NaN vector using @ref fgm::Vec3::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -962,7 +962,7 @@ TEST_P(Vec3ProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorre
 
 
 /**
- * @brief Verify that projection onto NaN vector using @ref fgm::Vec3::tryProject
+ * @test Verify that projection onto NaN vector using @ref fgm::Vec3::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -977,7 +977,7 @@ TEST_P(Vec3ProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsC
 
 
 /**
- * @brief Verify that projection of NaN vector using static variant of @ref fgm::Vec3::tryProject
+ * @test Verify that projection of NaN vector using static variant of @ref fgm::Vec3::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -992,7 +992,7 @@ TEST_P(Vec3ProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVect
 
 
 /**
- * @brief Verify that projection onto NaN vector using static variant of @ref fgm::Vec3::tryProject
+ * @test Verify that projection onto NaN vector using static variant of @ref fgm::Vec3::tryProject
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, StaticWrapper_TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)

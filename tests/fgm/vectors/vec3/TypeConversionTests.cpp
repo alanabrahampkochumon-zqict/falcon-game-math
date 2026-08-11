@@ -46,7 +46,7 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that the conversion constructor correctly promotes components from float to double.
+ * @test Verify that the conversion constructor correctly promotes components from float to double.
  */
 TEST(Vec3TypeConversionTests, ConversionCtor_PromotesType)
 {
@@ -56,7 +56,7 @@ TEST(Vec3TypeConversionTests, ConversionCtor_PromotesType)
 }
 
 
-/** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
+/** @test Verify that the conversion constructor ensures deep-copy value semantics. */
 TEST(Vec3TypeConversionTests, ConversionCtor_ReturnsNewInstance)
 {
     // Given a float vector
@@ -76,7 +76,7 @@ TEST(Vec3TypeConversionTests, ConversionCtor_ReturnsNewInstance)
 
 
 /**
- * @brief Verify that the conversion constructor correctly demotes components from double to float.
+ * @test Verify that the conversion constructor correctly demotes components from double to float.
  */
 TEST(Vec3TypeConversionTests, ConversionCtor_DemotesType)
 {

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @test Verify @ref fgm::Vec4 initialization logic.
+ * @brief Verify @ref fgm::Vec4 initialization logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -29,7 +29,7 @@ namespace
     template <typename>
     class Vec4InitializationTests: public testing::Test
     {};
-    /** @test Test fixture for @ref fgm::Vec4 initialization, parameterized by @ref SupportedTypes */
+    /** @brief Test fixture for @ref fgm::Vec4 initialization, parameterized by @ref SupportedTypes */
     TYPED_TEST_SUITE(Vec4InitializationTests, SupportedTypes);
 
 

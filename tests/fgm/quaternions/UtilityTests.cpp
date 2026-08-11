@@ -128,7 +128,7 @@ TEST_P(QuaternionInfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
 
 
 
-/** @brief Verify that @ref std::Quaternion::hasInf returns False for integral types. */
+/** @test Verify that @ref std::Quaternion::hasInf returns False for integral types. */
 TYPED_TEST(QuaternionIntegralUtilityTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);

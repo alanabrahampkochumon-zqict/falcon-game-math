@@ -93,7 +93,7 @@ namespace
  *           MANHATTAN NORM           *
  **************************************/
 
-/** @brief Verify that taking the manhattan norm of a non-unit vector returns non-unit scalar. */
+/** @test Verify that taking the manhattan norm of a non-unit vector returns non-unit scalar. */
 TYPED_TEST(Vec2ManhattanNormTests, ReturnsSumOfAbsoluteValueOfComponents)
 {
     const auto magnitude = this->_vec.manhattanNorm();
@@ -102,7 +102,7 @@ TYPED_TEST(Vec2ManhattanNormTests, ReturnsSumOfAbsoluteValueOfComponents)
 
 
 /**
- * @brief Verify that taking the manhattan norm of a non-unit vector using static variant of
+ * @test Verify that taking the manhattan norm of a non-unit vector using static variant of
  *        @ref fgm::Vec2::manhattanNorm returns non-unit scalar.
  */
 TYPED_TEST(Vec2ManhattanNormTests, StaticWrapper_ReturnsSumOfAbsoluteValueOfComponents)
@@ -117,7 +117,7 @@ TYPED_TEST(Vec2ManhattanNormTests, StaticWrapper_ReturnsSumOfAbsoluteValueOfComp
  *           CHEBYSHEV NORM           *
  **************************************/
 
-/** @brief Verify that taking the chebyshev norm of a non-unit vector returns non-unit scalar. */
+/** @test Verify that taking the chebyshev norm of a non-unit vector returns non-unit scalar. */
 TYPED_TEST(Vec2ChebyshevNormTests, ReturnsLongestAbsoluteComponent)
 {
     const auto magnitude = this->_vec.chebyshevNorm();
@@ -126,7 +126,7 @@ TYPED_TEST(Vec2ChebyshevNormTests, ReturnsLongestAbsoluteComponent)
 
 
 /**
- * @brief Verify that taking the chebyshev norm of a non-unit vector using static variant of
+ * @test Verify that taking the chebyshev norm of a non-unit vector using static variant of
  *        @ref fgm::Vec2::chebyshevNorm returns non-unit scalar.
  */
 TYPED_TEST(Vec2ChebyshevNormTests, StaticWrapper_ReturnsLongestAbsoluteComponent)

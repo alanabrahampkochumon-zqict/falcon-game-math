@@ -131,7 +131,7 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-/** @brief Verify that @ref fgm::Vec3::ONE() returns a 3D vector with unit components. */
+/** @test Verify that @ref fgm::Vec3::ONE() returns a 3D vector with unit components. */
 TYPED_TEST(Vec3ConstantsTests, ONE_ReturnsVectorWithUnitComponents)
 {
     const auto one = TypeParam(1);
@@ -139,11 +139,11 @@ TYPED_TEST(Vec3ConstantsTests, ONE_ReturnsVectorWithUnitComponents)
 }
 
 
-/** @brief Verify that @ref fgm::Vec3::ZERO returns a 3D vector with zero components. */
+/** @test Verify that @ref fgm::Vec3::ZERO returns a 3D vector with zero components. */
 TYPED_TEST(Vec3ConstantsTests, ZERO_ReturnsVectorWithZeroComponents) { EXPECT_VEC_ZERO(fgm::Vec3<TypeParam>::zero()); }
 
 
-/** @brief Verify that @ref fgm::Vec3<float>::INF returns a 3D vector with infinity components. */
+/** @test Verify that @ref fgm::Vec3<float>::INF returns a 3D vector with infinity components. */
 TEST(Vec3Constants, INF_Float_ReturnsFloatVectorWithInfinityComponents)
 {
     const auto inf = fgm::Vec3<float>::inf();
@@ -152,7 +152,7 @@ TEST(Vec3Constants, INF_Float_ReturnsFloatVectorWithInfinityComponents)
 }
 
 
-/** @brief Verify that @ref fgm::Vec3<double>::INF returns a 3D vector with infinity components. */
+/** @test Verify that @ref fgm::Vec3<double>::INF returns a 3D vector with infinity components. */
 TEST(Vec3Constants, INF_Double_ReturnsDoubleVectorWithInfinityComponents)
 {
     const auto inf = fgm::Vec3<double>::inf();
@@ -161,7 +161,7 @@ TEST(Vec3Constants, INF_Double_ReturnsDoubleVectorWithInfinityComponents)
 }
 
 
-/** @brief Verify that @ref fgm::Vec3<float>::INF_NEG returns a 3D vector with negative infinity components. */
+/** @test Verify that @ref fgm::Vec3<float>::INF_NEG returns a 3D vector with negative infinity components. */
 TEST(Vec3Constants, INFNEG_Float_ReturnsFloatVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::Vec3<float>::infNeg();
@@ -170,7 +170,7 @@ TEST(Vec3Constants, INFNEG_Float_ReturnsFloatVectorWithNegativeInfinityComponent
 }
 
 
-/** @brief Verify that @ref fgm::Vec3<double>::INF_NEG returns a 3D vector with negative infinity components. */
+/** @test Verify that @ref fgm::Vec3<double>::INF_NEG returns a 3D vector with negative infinity components. */
 TEST(Vec3Constants, INFNEG_Double_ReturnsDoubleVectorWithNegativeInfinityComponents)
 {
     const auto inf = fgm::Vec3<double>::infNeg();
@@ -179,7 +179,7 @@ TEST(Vec3Constants, INFNEG_Double_ReturnsDoubleVectorWithNegativeInfinityCompone
 }
 
 
-/** @brief Verify that @ref fgm::Vec3<float>::QNAN returns a 3D vector with NaN components. */
+/** @test Verify that @ref fgm::Vec3<float>::QNAN returns a 3D vector with NaN components. */
 TEST(Vec3Constants, Float_QNAN_ReturnsFloatVectorWithNaNComponents)
 {
     const auto nan = fgm::Vec3<float>::qnan();
@@ -188,7 +188,7 @@ TEST(Vec3Constants, Float_QNAN_ReturnsFloatVectorWithNaNComponents)
 }
 
 
-/** @brief Verify that @ref fgm::Vec3<double>::QNAN returns a 3D vector with NaN components. */
+/** @test Verify that @ref fgm::Vec3<double>::QNAN returns a 3D vector with NaN components. */
 TEST(Vec3Constants, Double_QNAN_ReturnsDoubleVectorWithNaNComponents)
 {
     const auto nan = fgm::Vec3<double>::qnan();
@@ -197,7 +197,7 @@ TEST(Vec3Constants, Double_QNAN_ReturnsDoubleVectorWithNaNComponents)
 }
 
 
-/** @brief Verify that @ref fgm::Vec3::RIGHT returns a unit vector aligned with positive x-axis. */
+/** @test Verify that @ref fgm::Vec3::RIGHT returns a unit vector aligned with positive x-axis. */
 TYPED_TEST(Vec3ConstantsTests, RIGHT_ReturnsUnitVectorWithOnlyPositiveXComponent)
 {
     const auto vec = fgm::Vec3<TypeParam>::right();
@@ -205,7 +205,7 @@ TYPED_TEST(Vec3ConstantsTests, RIGHT_ReturnsUnitVectorWithOnlyPositiveXComponent
 }
 
 
-/** @brief Verify that @ref fgm::Vec3::LEFT returns a unit vector aligned with negative x-axis. */
+/** @test Verify that @ref fgm::Vec3::LEFT returns a unit vector aligned with negative x-axis. */
 TYPED_TEST(Vec3ConstantsTests, LEFT_ReturnsUnitVectorWithOnlyNegativeXComponent)
 {
     const auto vec = fgm::Vec3<TypeParam>::left();
@@ -213,7 +213,7 @@ TYPED_TEST(Vec3ConstantsTests, LEFT_ReturnsUnitVectorWithOnlyNegativeXComponent)
 }
 
 
-/** @brief Verify that @ref fgm::Vec3::UP returns a unit vector aligned with positive y-axis. */
+/** @test Verify that @ref fgm::Vec3::UP returns a unit vector aligned with positive y-axis. */
 TYPED_TEST(Vec3ConstantsTests, UP_ReturnsUnitVectorWithOnlyPositiveYComponent)
 {
     const auto vec = fgm::Vec3<TypeParam>::up();
@@ -221,7 +221,7 @@ TYPED_TEST(Vec3ConstantsTests, UP_ReturnsUnitVectorWithOnlyPositiveYComponent)
 }
 
 
-/** @brief Verify that @ref fgm::Vec3::DOWN returns a unit vector aligned with negative y-axis. */
+/** @test Verify that @ref fgm::Vec3::DOWN returns a unit vector aligned with negative y-axis. */
 TYPED_TEST(Vec3ConstantsTests, DOWN_ReturnsUnitVectorWithOnlyNegativeYComponent)
 {
     const auto vec = fgm::Vec3<TypeParam>::down();
@@ -231,7 +231,7 @@ TYPED_TEST(Vec3ConstantsTests, DOWN_ReturnsUnitVectorWithOnlyNegativeYComponent)
 
 #ifdef FGM_LEFT_HANDED
 
-/** @brief Verify that @ref fgm::Vec3::FORWARD returns a unit vector aligned with positive z-axis. */
+/** @test Verify that @ref fgm::Vec3::FORWARD returns a unit vector aligned with positive z-axis. */
 TYPED_TEST(Vec3ConstantsTests, FORWARD_ReturnsUnitVectorWithOnlyPositiveZComponent)
 {
     const auto vec = fgm::Vec3<TypeParam>::forward();
@@ -239,7 +239,7 @@ TYPED_TEST(Vec3ConstantsTests, FORWARD_ReturnsUnitVectorWithOnlyPositiveZCompone
 }
 
 
-/** @brief Verify that @ref fgm::Vec3::BACKWARD returns a unit vector aligned with negative z-axis. */
+/** @test Verify that @ref fgm::Vec3::BACKWARD returns a unit vector aligned with negative z-axis. */
 TYPED_TEST(Vec3ConstantsTests, BACKWARD_ReturnsUnitVectorWithOnlyNegativeZComponent)
 {
     const auto vec = fgm::Vec3<TypeParam>::backward();
@@ -248,7 +248,7 @@ TYPED_TEST(Vec3ConstantsTests, BACKWARD_ReturnsUnitVectorWithOnlyNegativeZCompon
 
 #else
 
-/** @brief Verify that @ref fgm::Vec3::FORWARD returns a unit vector aligned with negative z-axis. */
+/** @test Verify that @ref fgm::Vec3::FORWARD returns a unit vector aligned with negative z-axis. */
 TYPED_TEST(Vec3ConstantsTests, FORWARD_ReturnsUnitVectorWithOnlyPositiveZComponent)
 {
     const auto vec = fgm::Vec3<TypeParam>::forward();
@@ -256,7 +256,7 @@ TYPED_TEST(Vec3ConstantsTests, FORWARD_ReturnsUnitVectorWithOnlyPositiveZCompone
 }
 
 
-/** @brief Verify that @ref fgm::Vec3::BACKWARD returns a unit vector aligned with positive z-axis. */
+/** @test Verify that @ref fgm::Vec3::BACKWARD returns a unit vector aligned with positive z-axis. */
 TYPED_TEST(Vec3ConstantsTests, BACKWARD_ReturnsUnitVectorWithOnlyNegativeZComponent)
 {
     const auto vec = fgm::Vec3<TypeParam>::backward();

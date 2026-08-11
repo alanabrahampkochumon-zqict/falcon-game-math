@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 03, 2026
  *
- * @test Verify @ref fgm::Vec4 constants (@ref fgm::Vec4::ONE(), @ref fgm::Vec4::ZERO(), etc).
+ * @brief Verify @ref fgm::Vec4 constants (@ref fgm::Vec4::ONE(), @ref fgm::Vec4::ZERO(), etc).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

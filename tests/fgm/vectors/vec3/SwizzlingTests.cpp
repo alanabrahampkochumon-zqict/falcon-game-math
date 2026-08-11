@@ -274,7 +274,7 @@ namespace
  *            RUNTIME TESTS           *
  **************************************/
 
-/** @brief Verify that swizzling returns shuffled vector across different numeric. */
+/** @test Verify that swizzling returns shuffled vector across different numeric. */
 TYPED_TEST(Vec3SwizzlingTests, SwizzlingWorksAcrossDifferentTypes)
 {
     const fgm::Vec3 vector(TypeParam(1), TypeParam(2), TypeParam(3));
@@ -285,7 +285,7 @@ TYPED_TEST(Vec3SwizzlingTests, SwizzlingWorksAcrossDifferentTypes)
 }
 
 
-/** @brief Verify that swizzling returns shuffled vector for boolean vector. */
+/** @test Verify that swizzling returns shuffled vector for boolean vector. */
 TEST(Vec3SwizzlingTests, SwizzlingWorksForBooleanVector)
 {
     const fgm::Vec3 vector(true, false, false);
@@ -296,7 +296,7 @@ TEST(Vec3SwizzlingTests, SwizzlingWorksForBooleanVector)
 }
 
 
-/** @brief Verify that static variant of swizzling returns shuffled vector across different numeric. */
+/** @test Verify that static variant of swizzling returns shuffled vector across different numeric. */
 TYPED_TEST(Vec3SwizzlingTests, StaticVariant_SwizzlingWorksAcrossDifferentTypes)
 {
     const fgm::Vec3 vector(TypeParam(1), TypeParam(2), TypeParam(3));
@@ -307,7 +307,7 @@ TYPED_TEST(Vec3SwizzlingTests, StaticVariant_SwizzlingWorksAcrossDifferentTypes)
 }
 
 
-/** @brief Verify that static variant of swizzling returns shuffled vector for boolean vector. */
+/** @test Verify that static variant of swizzling returns shuffled vector for boolean vector. */
 TEST(Vec3SwizzlingTests, StaticVariant_SwizzlingWorksForBooleanVector)
 {
     const fgm::Vec3 vector(true, false, false);

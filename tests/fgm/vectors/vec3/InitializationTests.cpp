@@ -71,7 +71,7 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-/** @brief Verify that the default constructor initializes all components to zero. */
+/** @test Verify that the default constructor initializes all components to zero. */
 TYPED_TEST(Vec3InitializationTests, EmptyConstructorInitializesZeroVector)
 {
     const fgm::Vec3<TypeParam> vec{};
@@ -79,7 +79,7 @@ TYPED_TEST(Vec3InitializationTests, EmptyConstructorInitializesZeroVector)
 }
 
 
-/** @brief Verify that the parameterized constructor correctly assigns components from the provided arguments. */
+/** @test Verify that the parameterized constructor correctly assigns components from the provided arguments. */
 TYPED_TEST(Vec3InitializationTests, ConstructorParametersInitializesVector)
 {
     const TypeParam a = static_cast<TypeParam>(3);
@@ -92,7 +92,7 @@ TYPED_TEST(Vec3InitializationTests, ConstructorParametersInitializesVector)
 
 
 /**
- * @brief Verify that the parameterized constructor correctly composes a 3D vector from a
+ * @test Verify that the parameterized constructor correctly composes a 3D vector from a
  *       @ref fgm::Vec3 instance and a scalar.
  */
 TYPED_TEST(Vec3InitializationTests, 2DVectorAndScalarCanInitializeA3DVector)
@@ -108,7 +108,7 @@ TYPED_TEST(Vec3InitializationTests, 2DVectorAndScalarCanInitializeA3DVector)
 
 
 /**
- * @brief Verify that the parameterized constructor correctly composes a 3D vector from a
+ * @test Verify that the parameterized constructor correctly composes a 3D vector from a
  *       @ref fgm::Vec3 instance and a scalar.
  */
 TYPED_TEST(Vec3InitializationTests, ScalarAnd2DVectorCanInitializeA3DVector)

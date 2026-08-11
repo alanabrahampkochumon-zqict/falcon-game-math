@@ -173,7 +173,7 @@ TYPED_TEST(Vec2NormalizationTests, StaticWrapper_SafeNormalize_NormalizedVectorI
  **************************************/
 
 /**
- * @brief Verify that normalizing a vector using @ref fgm::Vec2::tryNormalize
+ * @test Verify that normalizing a vector using @ref fgm::Vec2::tryNormalize
  *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vec2NormalizationTests, TryNormalize_NonZeroVectorReturnsUnitVector)
@@ -187,7 +187,7 @@ TYPED_TEST(Vec2NormalizationTests, TryNormalize_NonZeroVectorReturnsUnitVector)
 
 
 /**
- * @brief Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vec2::tryNormalize
+ * @test Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vec2::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec2NormalizationTests, TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -199,7 +199,7 @@ TYPED_TEST(Vec2NormalizationTests, TryNormalize_ZeroVectorReturnsZeroVectorAndSe
 
 
 /**
- * @brief Verify that attempting to normalize a NaN vector using @ref fgm::Vec2::tryNormalize
+ * @test Verify that attempting to normalize a NaN vector using @ref fgm::Vec2::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vec2NormalizationTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -211,7 +211,7 @@ TEST(Vec2NormalizationTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorre
 
 
 /**
- * @brief Verify that normalizing a vector using @ref fgm::Vec2::tryNormalize always
+ * @test Verify that normalizing a vector using @ref fgm::Vec2::tryNormalize always
  *       return a floating-point vector.
  */
 TYPED_TEST(Vec2NormalizationTests, TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
@@ -223,7 +223,7 @@ TYPED_TEST(Vec2NormalizationTests, TryNormalize_NormalizedVectorIsAlwaysTypedPro
 
 
 /**
- * @brief Verify that normalizing a 2D vector using static variant of @ref fgm::Vec2::tryNormalize
+ * @test Verify that normalizing a 2D vector using static variant of @ref fgm::Vec2::tryNormalize
  *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NonZeroVectorReturnsUnitVectorAndSetsCorrectFlag)
@@ -237,7 +237,7 @@ TYPED_TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NonZeroVectorRetur
 
 
 /**
- * @brief Verify that attempting to normalize a zero-magnitude vector using static variant of
+ * @test Verify that attempting to normalize a zero-magnitude vector using static variant of
  *       @ref fgm::Vec2::tryNormalize returns a zero-vector and
  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
@@ -250,7 +250,7 @@ TYPED_TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_ZeroVectorReturnsZ
 
 
 /**
- * @brief Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vec2::tryNormalize
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vec2::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -262,7 +262,7 @@ TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVect
 
 
 /**
- * @brief Verify that the normalizing a 2D vector using static variant of @ref fgm::Vec2::tryNormalize
+ * @test Verify that the normalizing a 2D vector using static variant of @ref fgm::Vec2::tryNormalize
  *       always return a floating-point vector.
  */
 TYPED_TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
@@ -280,7 +280,7 @@ TYPED_TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NormalizedVectorIs
  **************************************/
 
 /**
- * @brief Verify that attempting to normalize a NaN vector of @ref fgm::Vec2::safeNormalize
+ * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vec2::safeNormalize
  *       returns a zero-vector.
  */
 TEST_P(Vec2NormalizationNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
@@ -292,7 +292,7 @@ TEST_P(Vec2NormalizationNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
 
 
 /**
- * @brief Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vec2::safeNormalize
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vec2::safeNormalize
  *       returns a zero-vector.
  */
 TEST_P(Vec2NormalizationNaNTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
@@ -304,7 +304,7 @@ TEST_P(Vec2NormalizationNaNTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZe
 
 
 /**
- * @brief Verify that attempting to normalize a NaN vector of @ref fgm::Vec2::tryNormalize
+ * @test Verify that attempting to normalize a NaN vector of @ref fgm::Vec2::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec2NormalizationNaNTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
@@ -318,7 +318,7 @@ TEST_P(Vec2NormalizationNaNTests, TryNormalize_NaNVectorReturnsZeroVectorAndSets
 
 
 /**
- * @brief Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vec2::tryNormalize
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vec2::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec2NormalizationNaNTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)

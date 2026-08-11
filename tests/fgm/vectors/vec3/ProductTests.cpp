@@ -171,7 +171,7 @@ namespace
  *         DOT PRODUCT TESTS          *
  **************************************/
 
-/** @brief Verify that the dot product of a vector with itself returns its squared magnitude. */
+/** @test Verify that the dot product of a vector with itself returns its squared magnitude. */
 TYPED_TEST(Vec3DotProductTests, Dot_WithItselfReturnSquaredMagnitude)
 {
 
@@ -192,7 +192,7 @@ TYPED_TEST(Vec3DotProductTests, Dot_WithItselfReturnSquaredMagnitude)
 }
 
 
-/** @brief Verify that the dot product of a vector with an orthogonal vector returns zero. */
+/** @test Verify that the dot product of a vector with an orthogonal vector returns zero. */
 TYPED_TEST(Vec3DotProductTests, Dot_OrthogonalVectorsReturnZero)
 {
     const TypeParam dotProduct = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
@@ -212,7 +212,7 @@ TYPED_TEST(Vec3DotProductTests, Dot_OrthogonalVectorsReturnZero)
 }
 
 
-/** @brief Verify that the dot product of a vector with a non-orthogonal vector returns a non-zero scalar. */
+/** @test Verify that the dot product of a vector with a non-orthogonal vector returns a non-zero scalar. */
 TYPED_TEST(Vec3DotProductTests, Dot_NonOrthogonalVectorsReturnNonZeroScalar)
 {
     const TypeParam dotProduct = this->_vecA.dot(this->_vecB);
@@ -232,7 +232,7 @@ TYPED_TEST(Vec3DotProductTests, Dot_NonOrthogonalVectorsReturnNonZeroScalar)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Vec3::dot returns a non-zero scalar. */
+/** @test Verify that the static variant of @ref fgm::Vec3::dot returns a non-zero scalar. */
 TYPED_TEST(Vec3DotProductTests, StaticWrapper_Dot_NonOrthogonalVectorsReturnNonZeroScalar)
 {
     const TypeParam dotProduct = fgm::Vec3<TypeParam>::dot(this->_vecA, this->_vecB);
@@ -253,7 +253,7 @@ TYPED_TEST(Vec3DotProductTests, StaticWrapper_Dot_NonOrthogonalVectorsReturnNonZ
 
 
 /**
- * @brief Verify that the dot product of a vector with another vector in opposite direction
+ * @test Verify that the dot product of a vector with another vector in opposite direction
  *        returns a negative scalar.
  */
 TEST(Vec3DotProduct, Dot_AntiParallelVectorsReturnsNegativeScalar)
@@ -271,7 +271,7 @@ TEST(Vec3DotProduct, Dot_AntiParallelVectorsReturnsNegativeScalar)
 
 
 /**
- * @brief Verify that the dot product of a vector with another vector of different type
+ * @test Verify that the dot product of a vector with another vector of different type
  *        returns a type promoted vector.
  */
 TEST(Vec3DotProduct, Dot_MixedType_PromotesType)
@@ -296,7 +296,7 @@ TEST(Vec3DotProduct, Dot_MixedType_PromotesType)
  **************************************/
 
 /**
- * @brief Verify that the cross product of vector aligned with x-axis and a vector aligned with y-axis
+ * @test Verify that the cross product of vector aligned with x-axis and a vector aligned with y-axis
  *        returns a vector aligned with the z-axis.
  */
 TEST(Vec3CrossProduct, BetweenAxisAlignedXAndYVectorsReturnsZ)
@@ -312,7 +312,7 @@ TEST(Vec3CrossProduct, BetweenAxisAlignedXAndYVectorsReturnsZ)
 
 
 /**
- * @brief Verify that the cross product of vector aligned with y-axis and a vector aligned with x-axis
+ * @test Verify that the cross product of vector aligned with y-axis and a vector aligned with x-axis
  *        returns a vector aligned with the negative z-axis.
  */
 TEST(Vec3CrossProduct, BetweenAxisAlignedYAndZVectorsReturnsNegativeZ)
@@ -328,7 +328,7 @@ TEST(Vec3CrossProduct, BetweenAxisAlignedYAndZVectorsReturnsNegativeZ)
 
 
 /**
- * @brief Verify that the cross product of vector aligned with z-axis and a vector aligned with y-axis
+ * @test Verify that the cross product of vector aligned with z-axis and a vector aligned with y-axis
  *        returns a vector aligned with the negative x-axis.
  */
 TEST(Vec3CrossProduct, BetweenAxisAlignedZAndYVectorsReturnsNegativeX)
@@ -346,7 +346,7 @@ TEST(Vec3CrossProduct, BetweenAxisAlignedZAndYVectorsReturnsNegativeX)
 }
 
 
-/** @brief Verify that the cross product of vector with self is a zero-vector. */
+/** @test Verify that the cross product of vector with self is a zero-vector. */
 TEST(Vec3CrossProduct, Cross_WithItself_ReturnsZeroVector)
 {
     const fgm::Vec3 vec(0.0f, 0.0f, 1.0f);
@@ -357,7 +357,7 @@ TEST(Vec3CrossProduct, Cross_WithItself_ReturnsZeroVector)
 }
 
 
-/** @brief Verify that the cross product of vector with a non-parallel vector returns a new vector. */
+/** @test Verify that the cross product of vector with a non-parallel vector returns a new vector. */
 TYPED_TEST(Vec3CrossProductTests, Cross_TwoNonParallelVectorsReturnsNewProduct)
 {
     const fgm::Vec3 crossProduct = this->_vecA.cross(this->_vecB);
@@ -367,7 +367,7 @@ TYPED_TEST(Vec3CrossProductTests, Cross_TwoNonParallelVectorsReturnsNewProduct)
 
 
 /**
- * @brief Verify that the cross product of vector with a non-parallel vector
+ * @test Verify that the cross product of vector with a non-parallel vector
  *        returns a new vector perpendicular to both.
  */
 TYPED_TEST(Vec3CrossProductTests, BetweenTwoNonParallelVectorsReturnAVectorPerpendicularToBoth)
@@ -394,7 +394,7 @@ TYPED_TEST(Vec3CrossProductTests, BetweenTwoNonParallelVectorsReturnAVectorPerpe
 
 
 /**
- * @brief Verify that the cross product of vector with a non-parallel vector using static variant of
+ * @test Verify that the cross product of vector with a non-parallel vector using static variant of
  *        @ref fgm::Vec3::cross returns a new vector.
  */
 TYPED_TEST(Vec3CrossProductTests, StaticWrapper_Cross_TwoNonParallelVectorsReturnsNewProduct)
@@ -406,7 +406,7 @@ TYPED_TEST(Vec3CrossProductTests, StaticWrapper_Cross_TwoNonParallelVectorsRetur
 
 
 /**
- * @brief Verify that the cross product of vector with a non-parallel vector using static variant of
+ * @test Verify that the cross product of vector with a non-parallel vector using static variant of
  *        @ref fgm::Vec3::cross returns a new vector perpendicular to both.
  */
 TYPED_TEST(Vec3CrossProductTests, StaticWrapper_BetweenTwoNonParallelVectorsReturnAVectorPerpendicularToBoth)
@@ -433,7 +433,7 @@ TYPED_TEST(Vec3CrossProductTests, StaticWrapper_BetweenTwoNonParallelVectorsRetu
 
 
 /**
- * @brief Verify that the cross product between non-parallel vectors is anti-commutative.
+ * @test Verify that the cross product between non-parallel vectors is anti-commutative.
  *        Anti-Commutativity: \f$ \mathbf{a}\times\mathbf{b} = -(\mathbf{b}\times\mathbf{a}) \f$
  */
 TYPED_TEST(Vec3CrossProductTests, IsAntiCommutative)
@@ -446,7 +446,7 @@ TYPED_TEST(Vec3CrossProductTests, IsAntiCommutative)
 
 
 /**
- * @brief Verify that the cross product between parallel vectors is commutative.
+ * @test Verify that the cross product between parallel vectors is commutative.
  *        Commutativity: \f$ \mathbf{a}\times\mathbf{b} = \mathbf{b}\times\mathbf{a} \f$,
  *        **given a and b are scalar multiples of each other**.
  */
@@ -460,7 +460,7 @@ TYPED_TEST(Vec3CrossProductTests, BetweenParallelVectorIsCommutatives)
 }
 
 
-/** @brief Verify that the cross product between two differently typed vectors promote type. */
+/** @test Verify that the cross product between two differently typed vectors promote type. */
 TEST(Vec3CrossProduct, TensorProduct_MixedTypes_PromotesType)
 {
     const fgm::Vec3 vecA(2.0f, 3.0f, 4.0f);

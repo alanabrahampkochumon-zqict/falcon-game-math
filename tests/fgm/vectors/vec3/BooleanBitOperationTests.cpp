@@ -87,7 +87,7 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that the bitwise AND operator perform a component-wise logical conjunction and
+ * @test Verify that the bitwise AND operator perform a component-wise logical conjunction and
  *       returns the correct boolean mask.
  */
 TEST_F(BooleanVec3BitOperationsTests, BitwiseAND_PerformComponentwiseConjunction)
@@ -98,7 +98,7 @@ TEST_F(BooleanVec3BitOperationsTests, BitwiseAND_PerformComponentwiseConjunction
 }
 
 /**
- * @brief Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
+ * @test Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
 TEST_F(BooleanVec3BitOperationsTests, CompoundBitwiseAND_PerformInPlaceConjunction)
@@ -109,7 +109,7 @@ TEST_F(BooleanVec3BitOperationsTests, CompoundBitwiseAND_PerformInPlaceConjuncti
 
 
 /**
- * @brief Verify that the bitwise OR operator performs a component-wise logical disjunction and
+ * @test Verify that the bitwise OR operator performs a component-wise logical disjunction and
  *       returns the correct boolean mask.
  */
 TEST_F(BooleanVec3BitOperationsTests, BitwiseOR_PerformComponentwiseDisjunction)
@@ -120,7 +120,7 @@ TEST_F(BooleanVec3BitOperationsTests, BitwiseOR_PerformComponentwiseDisjunction)
 
 
 /**
- * @brief Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place
+ * @test Verify that the compound bitwise OR operator performs a component-wise logical disjunction in-place
  *       and updates the calling vector with the resulting mask.
  */
 TEST_F(BooleanVec3BitOperationsTests, CompoundBitwiseOR_PerformInPlaceDisjunction)
@@ -131,7 +131,7 @@ TEST_F(BooleanVec3BitOperationsTests, CompoundBitwiseOR_PerformInPlaceDisjunctio
 
 
 /**
- * @brief Verify that the bitwise NOT operator performs a component-wise logical inversion and
+ * @test Verify that the bitwise NOT operator performs a component-wise logical inversion and
  *       returns the correct boolean mask.
  */
 TEST_F(BooleanVec3BitOperationsTests, BitwiseNOT_PerformComponentwiseInversion)

@@ -20,7 +20,7 @@
  * @{
  */
 
-/** @brief Verify that fgm::Vec2[] are alias wrappers for integral and floating-point 2D vector. */
+/** @test Verify that fgm::Vec2[] are alias wrappers for integral and floating-point 2D vector. */
 namespace
 {
     /** @test Verify @ref fgm::Vec2B has `int8_t` value_type. */

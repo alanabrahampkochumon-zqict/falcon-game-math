@@ -153,7 +153,7 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that the greater-than (gt) function perform a component-wise comparison and
+ * @test Verify that the greater-than (gt) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
@@ -165,7 +165,7 @@ TYPED_TEST(Vec3ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 
 
 /**
- * @brief Verify that the greater-than operator perform a component-wise comparison and
+ * @test Verify that the greater-than operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
@@ -177,7 +177,7 @@ TYPED_TEST(Vec3ComparisonTests, GreaterThanOperator_ReturnsBooleanVectorWithElem
 
 
 /**
- * @brief Verify that the static variant of greater-than (gt) function performs a component-wise comparison and
+ * @test Verify that the static variant of greater-than (gt) function performs a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, StaticWrapper_GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
@@ -189,7 +189,7 @@ TYPED_TEST(Vec3ComparisonTests, StaticWrapper_GT_ReturnsBooleanVectorWithElement
 
 
 /**
- * @brief Verify that the greater-than (gt) function perform a component-wise comparison
+ * @test Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vec3Comparison, GT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
@@ -205,7 +205,7 @@ TEST(Vec3Comparison, GT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 
 
 /**
- * @brief Verify that the greater-than (gt) function perform a component-wise comparison
+ * @test Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vec3Comparison, GT_NaNVector_ReturnsBooleanVectorWithCorrectValues)
@@ -221,7 +221,7 @@ TEST(Vec3Comparison, GT_NaNVector_ReturnsBooleanVectorWithCorrectValues)
 
 
 /**
- * @brief Verify that the greater-than (gt) function perform a component-wise comparison
+ * @test Verify that the greater-than (gt) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vec3Comparison, MixedType_GT_ReturnsBooleanVectorWithCorrectValues)
@@ -245,7 +245,7 @@ TEST(Vec3Comparison, MixedType_GT_ReturnsBooleanVectorWithCorrectValues)
  **************************************/
 
 /**
- * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
+ * @test Verify that the greater-than-or-equal (gte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
@@ -257,7 +257,7 @@ TYPED_TEST(Vec3ComparisonTests, GTE_ReturnsBooleanVectorWithElementsGreaterThanO
 
 
 /**
- * @brief Verify that the greater-than-or-equal operator performs a component-wise comparison and
+ * @test Verify that the greater-than-or-equal operator performs a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
@@ -269,7 +269,7 @@ TYPED_TEST(Vec3ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVector
 
 
 /**
- * @brief Verify that the static variant of greater-than-or-equal (gte) function perform a component-wise
+ * @test Verify that the static variant of greater-than-or-equal (gte) function perform a component-wise
  *       comparison and returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, StaticWrapper_GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
@@ -281,7 +281,7 @@ TYPED_TEST(Vec3ComparisonTests, StaticWrapper_GTE_ReturnsBooleanVectorWithElemen
 
 
 /**
- * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
+ * @test Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vec3Comparison, GTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
@@ -297,7 +297,7 @@ TEST(Vec3Comparison, GTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 
 
 /**
- * @brief Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
+ * @test Verify that the greater-than-or-equal (gte) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vec3Comparison, GTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
@@ -313,7 +313,7 @@ TEST(Vec3Comparison, GTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 
 
 /**
- * @brief Verify that the greater-than-or-equal (gte) function performs a component-wise comparison
+ * @test Verify that the greater-than-or-equal (gte) function performs a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vec3Comparison, GTE_MixedType_ReturnsBooleanVectorWithCorrectValues)
@@ -337,7 +337,7 @@ TEST(Vec3Comparison, GTE_MixedType_ReturnsBooleanVectorWithCorrectValues)
  **************************************/
 
 /**
- * @brief Verify that the less-than (lt) function perform a component-wise comparison and
+ * @test Verify that the less-than (lt) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
@@ -349,7 +349,7 @@ TYPED_TEST(Vec3ComparisonTests, LT_ReturnsBooleanVectorWithElementsLessThanAsTru
 
 
 /**
- * @brief Verify that the less-than operator perform a component-wise comparison and
+ * @test Verify that the less-than operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
@@ -361,7 +361,7 @@ TYPED_TEST(Vec3ComparisonTests, LessThanOperator_ReturnsBooleanVectorWithElement
 
 
 /**
- * @brief Verify that the static variant of less-than (lt) function perform a component-wise comparison and
+ * @test Verify that the static variant of less-than (lt) function perform a component-wise comparison and
  *		 returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, StaticWrapper_LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
@@ -373,7 +373,7 @@ TYPED_TEST(Vec3ComparisonTests, StaticWrapper_LT_ReturnsBooleanVectorWithElement
 
 
 /**
- * @brief Verify that the less-than (lt) function perform a component-wise comparison
+ * @test Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vec3Comparison, LT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
@@ -389,7 +389,7 @@ TEST(Vec3Comparison, LT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 
 
 /**
- * @brief Verify that the less-than (lt) function perform a component-wise comparison
+ * @test Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vec3Comparison, LT_NanVector_ReturnsBooleanVectorWithCorrectValues)
@@ -414,7 +414,7 @@ TEST(Vec3Comparison, LT_NanVector_ReturnsBooleanVectorWithCorrectValues)
 
 
 /**
- * @brief Verify that the less-than (lt) function perform a component-wise comparison
+ * @test Verify that the less-than (lt) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vec3Comparison, LT_MixedType_ReturnsBooleanVectorWithCorrectValues)
@@ -438,7 +438,7 @@ TEST(Vec3Comparison, LT_MixedType_ReturnsBooleanVectorWithCorrectValues)
  **************************************/
 
 /**
- * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison and
+ * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
@@ -450,7 +450,7 @@ TYPED_TEST(Vec3ComparisonTests, LTE_ReturnsBooleanVectorWithElementsLessThanOrEq
 
 
 /**
- * @brief Verify that the less-than-or-equal operator perform a component-wise comparison and
+ * @test Verify that the less-than-or-equal operator perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
@@ -462,7 +462,7 @@ TYPED_TEST(Vec3ComparisonTests, LessThanOrEqualOperator_ReturnsBooleanVectorWith
 
 
 /**
- * @brief Verify that the static variant of less-than-or-equal (lte) function perform a component-wise comparison and
+ * @test Verify that the static variant of less-than-or-equal (lte) function perform a component-wise comparison and
  *       returns the correct boolean mask.
  */
 TYPED_TEST(Vec3ComparisonTests, StaticWrapper_LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
@@ -474,7 +474,7 @@ TYPED_TEST(Vec3ComparisonTests, StaticWrapper_LTE_ReturnsBooleanVectorWithElemen
 
 
 /**
- * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
+ * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling infinite values.
  */
 TEST(Vec3Comparison, LTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
@@ -490,7 +490,7 @@ TEST(Vec3Comparison, LTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 
 
 /**
- * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
+ * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling NaN values.
  */
 TEST(Vec3Comparison, LTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
@@ -515,7 +515,7 @@ TEST(Vec3Comparison, LTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 
 
 /**
- * @brief Verify that the less-than-or-equal (lte) function perform a component-wise comparison
+ * @test Verify that the less-than-or-equal (lte) function perform a component-wise comparison
  *       when handling vectors of different types.
  */
 TEST(Vec3Comparison, LTE_MixedType_LTE_ReturnsBooleanVectorWithCorrectValues)

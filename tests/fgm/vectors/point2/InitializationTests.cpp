@@ -36,7 +36,7 @@ namespace
      *            STATIC TESTS            *
      **************************************/
 
-    /** @brief Verify that vector can be instantiated during compile time. */
+    /** @test Verify that vector can be instantiated during compile time. */
     namespace static_tests
     {
         /// @test Verify that Point2 gets initialized with correct values at compile time.

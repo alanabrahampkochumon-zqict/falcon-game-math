@@ -109,7 +109,7 @@ namespace
  **************************************/
 
 /**
- * @brief Verify that @ref std::Vec2::hasInf returns True if any of components are IEE754 infinity
+ * @test Verify that @ref std::Vec2::hasInf returns True if any of components are IEE754 infinity
  *       and False otherwise.
  */
 TEST_P(Vec2InfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
@@ -120,7 +120,7 @@ TEST_P(Vec2InfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
 
 
 
-/** @brief Verify that @ref std::Vec2::hasInf returns False for integral types. */
+/** @test Verify that @ref std::Vec2::hasInf returns False for integral types. */
 TYPED_TEST(Vec2UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -129,7 +129,7 @@ TYPED_TEST(Vec2UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 
 
 /**
- * @brief Verify that the static variant of @ref std::Vec2::hasInf returns True if any of components are IEE754
+ * @test Verify that the static variant of @ref std::Vec2::hasInf returns True if any of components are IEE754
  *       infinity and False otherwise.
  */
 TEST_P(Vec2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
@@ -139,7 +139,7 @@ TEST_P(Vec2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 }
 
 
-/** @brief Verify that the static variant of @ref std::Vec2::hasInf returns False for integral types. */
+/** @test Verify that the static variant of @ref std::Vec2::hasInf returns False for integral types. */
 TYPED_TEST(Vec2UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -152,7 +152,7 @@ TYPED_TEST(Vec2UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
  **************************************/
 
 /**
- * @brief Verify that @ref std::Vec2::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
+ * @test Verify that @ref std::Vec2::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
  *       and False otherwise.
  */
 TEST_P(Vec2NaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
@@ -162,7 +162,7 @@ TEST_P(Vec2NaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
 }
 
 
-/** @brief Verify that @ref std::Vec2::hasNaN returns False for integral types. */
+/** @test Verify that @ref std::Vec2::hasNaN returns False for integral types. */
 TYPED_TEST(Vec2UtilsIntTests, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
@@ -171,7 +171,7 @@ TYPED_TEST(Vec2UtilsIntTests, HasNaN_ReturnsFalseForIntegrals)
 
 
 /**
- * @brief Verify that the static variant of @ref std::Vec2::hasNaN returns True if any of components are IEE754
+ * @test Verify that the static variant of @ref std::Vec2::hasNaN returns True if any of components are IEE754
  *       NaN(Not-a-Number) and False otherwise.
  */
 TEST_P(Vec2NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
@@ -181,7 +181,7 @@ TEST_P(Vec2NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 }
 
 
-/** @brief Verify that the static variant of @ref std::Vec2::hasNaN returns False for integral types. */
+/** @test Verify that the static variant of @ref std::Vec2::hasNaN returns False for integral types. */
 TYPED_TEST(Vec2UtilsIntTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
