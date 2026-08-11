@@ -56,6 +56,7 @@ set_target_properties(
 add_executable(FGMVectorDeathTests
         vec2/DeathTests.cpp
         vec3/DeathTests.cpp
+        vec4/DeathTests.cpp
 )
 set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD 20)
 set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
