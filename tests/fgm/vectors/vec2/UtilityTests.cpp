@@ -12,91 +12,111 @@
 #include "Vec2TestSetup.h"
 
 
-/**************************************
- *                                    *
- *                SETUP               *
- *                                    *
- **************************************/
-
-template <typename T>
-    requires std::floating_point<T>
-struct Vec2UtilityParams
-{
-    fgm::Vec2<T> vec;
-    bool expected;
-};
-/** @brief Test fixture for @ref fgm::Vec2 infinity checker, parameterized by @ref VectorUtilityParams */
-class Vec2InfChecker: public ::testing::TestWithParam<Vec2UtilityParams<float>>
-{};
-
-/** @brief Test fixture for @ref fgm::Vec2 NaN checker, parameterized by @ref VectorUtilityParams */
-class Vec2NaNChecker: public ::testing::TestWithParam<Vec2UtilityParams<float>>
-{};
-
-
-/** @brief Test fixture for @ref fgm::Vec2 utilities, parameterized by @ref SupportedIntegralTypes */
-template <typename T>
-class Vec2IntegralUtility: public ::testing::Test
-{};
-TYPED_TEST_SUITE(Vec2IntegralUtility, SupportedIntegralTypes);
-
-
-
-/**
- * @addtogroup T_FGM_Vec2_Utils
- * @{
- */
-
-/** @brief Verify that vector utilities are available at compile time. */
 namespace
 {
-    constexpr fgm::Vec2 normVec(1.0f, 2.0f);
-    constexpr fgm::Vec2 infVec(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
-    constexpr fgm::Vec2 nanVec(fgm::constants::NaN, fgm::constants::NaN);
+    /**************************************
+     *            TEST SETUP              *
+     **************************************/
 
-    static_assert(normVec.hasInf() == false);
-    static_assert(infVec.hasInf() == true);
-    static_assert(nanVec.hasInf() == false);
+    template <typename T>
+        requires std::floating_point<T>
+    struct Vec2UtilityParams
+    {
+        fgm::Vec2<T> vec;
+        bool expected;
+    };
 
-    static_assert(fgm::Vec2<float>::hasInf(normVec) == false);
-    static_assert(fgm::Vec2<float>::hasInf(infVec) == true);
-    static_assert(fgm::Vec2<float>::hasInf(nanVec) == false);
 
-    static_assert(normVec.hasNaN() == false);
-    static_assert(infVec.hasNaN() == false);
-    static_assert(nanVec.hasNaN() == true);
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 Infinity Checking.
+     */
+    class Vec2InfCheckerTests: public testing::TestWithParam<Vec2UtilityParams<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(
+        Vec2UtilsInfVectors, Vec2InfCheckerTests,
+        ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, 1.0f), true },
+                          Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::INFINITY_F), true },
+                          Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F), true },
+                          Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
 
-    static_assert(fgm::Vec2<float>::hasNaN(normVec) == false);
-    static_assert(fgm::Vec2<float>::hasNaN(infVec) == false);
-    static_assert(fgm::Vec2<float>::hasNaN(nanVec) == true);
 
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 NaN Checking.
+     */
+    class Vec2NaNCheckerTests: public testing::TestWithParam<Vec2UtilityParams<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(Vec2UtilsNaNVectors, Vec2NaNCheckerTests,
+                             ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::NaN, 1.0f), true },
+                                               Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::NaN), true },
+                                               Vec2UtilityParams{ fgm::Vec2(fgm::constants::NaN, fgm::constants::NaN),
+                                                                  true },
+                                               Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
+
+
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 utilities, verifying across various integral types.
+     */
+    template <typename>
+    class Vec2UtilsIntTests: public testing::Test
+    {};
+    TYPED_TEST_SUITE(Vec2UtilsIntTests, SupportedIntegralTypes);
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace
+    {
+        constexpr fgm::Vec2 NORM_VEC(1.0f, 2.0f);
+        constexpr fgm::Vec2 INF_VEC(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
+        constexpr fgm::Vec2 NAN_VEC(fgm::constants::NaN, fgm::constants::NaN);
+
+        /// @test Verify that Vec2::hasInf returns a valid boolean at compile time.
+        static_assert(NORM_VEC.hasInf() == false);
+        static_assert(INF_VEC.hasInf() == true);
+        static_assert(NAN_VEC.hasInf() == false);
+
+        /// @test Verify that Vec2::hasInf(static wrapper) returns a valid boolean at compile time.
+        static_assert(fgm::Vec2<float>::hasInf(NORM_VEC) == false);
+        static_assert(fgm::Vec2<float>::hasInf(INF_VEC) == true);
+        static_assert(fgm::Vec2<float>::hasInf(NAN_VEC) == false);
+
+        /// @test Verify that Vec2::hasNaN returns a valid boolean at compile time.
+        static_assert(NORM_VEC.hasNaN() == false);
+        static_assert(INF_VEC.hasNaN() == false);
+        static_assert(NAN_VEC.hasNaN() == true);
+
+        /// @test Verify that Vec2::hasNaN(static wrapper) returns a valid boolean at compile time.
+        static_assert(fgm::Vec2<float>::hasNaN(NORM_VEC) == false);
+        static_assert(fgm::Vec2<float>::hasNaN(INF_VEC) == false);
+        static_assert(fgm::Vec2<float>::hasNaN(NAN_VEC) == true);
+
+    } // namespace
 } // namespace
 
+
 /**************************************
- *                                    *
  *      INFINITY CHECKER TESTS        *
- *                                    *
  **************************************/
 
 /**
  * @brief Verify that @ref std::Vec2::hasInf returns True if any of components are IEE754 infinity
  *       and False otherwise.
  */
-TEST_P(Vec2InfChecker, ReturnTrueIfAnyComponentIsInfinity)
+TEST_P(Vec2InfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
 {
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasInf());
 }
-INSTANTIATE_TEST_SUITE_P(
-    Vec2InfCheckerTestSuite, Vec2InfChecker,
-    ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, 1.0f), true },
-                      Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::INFINITY_F), true },
-                      Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F), true },
-                      Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
+
 
 
 /** @brief Verify that @ref std::Vec2::hasInf returns False for integral types. */
-TYPED_TEST(Vec2IntegralUtility, HasInf_ReturnsFalseForIntegrals)
+TYPED_TEST(Vec2UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vec2(value, value).hasInf());
@@ -107,7 +127,7 @@ TYPED_TEST(Vec2IntegralUtility, HasInf_ReturnsFalseForIntegrals)
  * @brief Verify that the static variant of @ref std::Vec2::hasInf returns True if any of components are IEE754
  *       infinity and False otherwise.
  */
-TEST_P(Vec2InfChecker, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
+TEST_P(Vec2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 {
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, fgm::Vec2<float>::hasInf(vec));
@@ -115,7 +135,7 @@ TEST_P(Vec2InfChecker, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 
 
 /** @brief Verify that the static variant of @ref std::Vec2::hasInf returns False for integral types. */
-TYPED_TEST(Vec2IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
+TYPED_TEST(Vec2UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vec2<TypeParam>::hasInf(fgm::Vec2(value, value)));
@@ -123,30 +143,22 @@ TYPED_TEST(Vec2IntegralUtility, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 
 
 /**************************************
- *                                    *
  *         NAN CHECKER TESTS          *
- *                                    *
  **************************************/
 
 /**
  * @brief Verify that @ref std::Vec2::hasNaN returns True if any of components are IEE754 NaN(Not-a-Number)
  *       and False otherwise.
  */
-TEST_P(Vec2NaNChecker, ReturnTrueIfAnyComponentIsNaN)
+TEST_P(Vec2NaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
 {
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, vec.hasNaN());
 }
-INSTANTIATE_TEST_SUITE_P(Vec2NaNCheckerTestSuite, Vec2NaNChecker,
-                         ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::NaN, 1.0f), true },
-                                           Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::NaN), true },
-                                           Vec2UtilityParams{ fgm::Vec2(fgm::constants::NaN, fgm::constants::NaN),
-                                                              true },
-                                           Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
 
 
 /** @brief Verify that @ref std::Vec2::hasNaN returns False for integral types. */
-TYPED_TEST(Vec2IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
+TYPED_TEST(Vec2UtilsIntTests, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vec2(value, value).hasNaN());
@@ -157,7 +169,7 @@ TYPED_TEST(Vec2IntegralUtility, HasNaN_ReturnsFalseForIntegrals)
  * @brief Verify that the static variant of @ref std::Vec2::hasNaN returns True if any of components are IEE754
  *       NaN(Not-a-Number) and False otherwise.
  */
-TEST_P(Vec2NaNChecker, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
+TEST_P(Vec2NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 {
     const auto& [vec, expected] = GetParam();
     EXPECT_EQ(expected, fgm::Vec2<float>::hasNaN(vec));
@@ -165,7 +177,7 @@ TEST_P(Vec2NaNChecker, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 
 
 /** @brief Verify that the static variant of @ref std::Vec2::hasNaN returns False for integral types. */
-TYPED_TEST(Vec2IntegralUtility, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
+TYPED_TEST(Vec2UtilsIntTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
     EXPECT_FALSE(fgm::Vec2<TypeParam>::hasNaN(fgm::Vec2(value, value)));

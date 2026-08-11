@@ -13,130 +13,108 @@
 
 
 
-/**************************************
- *                                    *
- *               SETUP                *
- *                                    *
- **************************************/
-
-template <typename T>
-class Vec2Normalization: public ::testing::Test
-{
-    using R = fgm::Magnitude<T>;
-
-protected:
-    fgm::Vec2<T> _vec;
-    fgm::Vec2<R> _expectedUnitVec;
-
-    void SetUp() override
-    {
-        _vec             = { T(14), T(27) };
-        _expectedUnitVec = { static_cast<R>(0.46031716445500037), static_cast<R>(0.8877545314489294) };
-    }
-};
-/** @brief Test fixture for @ref fgm::Vec2 normalization, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec2Normalization, SupportedArithmeticTypes);
-
-
-template <typename T>
-class Vec2ZeroNormalization: public ::testing::Test
-{
-protected:
-    fgm::Vec2<T> _vec;
-
-    void SetUp() override { _vec = { T(0), T(0) }; }
-};
-/**
- * @brief Test fixture for @ref fgm::Vec2 zero-vector normalization, parameterized by
- *        @ref SupportedArithmeticTypes.
- */
-TYPED_TEST_SUITE(Vec2ZeroNormalization, SupportedArithmeticTypes);
-
-
-/** @brief Test fixture for @ref fgm::Vec2 normalization with NaN vectors. */
-class Vec2NormalizationNaNTests: public ::testing::TestWithParam<fgm::Vec2<float>>
-{};
-INSTANTIATE_TEST_SUITE_P(Vec2NormalizationNaNTestSuite, Vec2NormalizationNaNTests,
-                         ::testing::Values(fgm::Vec2<float>(fgm::constants::NaN, 1.0f),
-                                           fgm::Vec2<float>(1.0f, fgm::constants::NaN),
-                                           fgm::Vec2<float>(fgm ::constants::NaN, fgm::constants::NaN)));
-
-
-
 /**
  * @addtogroup T_FGM_Vec2_Normalize
  * @{
  */
 
-/** @brief Verify that vector normalization operations are available at compile time. */
 namespace
 {
-    // TODO: Add static tests after making sqrt constexpr
-    // constexpr fgm::Vec2 Vec(14, 27);
-    // constexpr auto norm = Vec.normalize();
-}
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref Vec2 normalization.
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec2NormalizationTests: public testing::Test
+    {
+        using R = fgm::Magnitude<T>;
+
+    protected:
+        fgm::Vec2<T> _vec;
+        fgm::Vec2<R> _expectedUnitVec;
+
+        void SetUp() override
+        {
+            _vec             = { T(14), T(27) };
+            _expectedUnitVec = { static_cast<R>(0.46031716445500037), static_cast<R>(0.8877545314489294) };
+        }
+    };
+    TYPED_TEST_SUITE(Vec2NormalizationTests, SupportedArithmeticTypes);
+
+
+
+    /**
+     * @brief Test fixture for @ref Vec2 normalization with zero vectors.
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec2NormalizationZeroTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<T> _vec;
+
+        void SetUp() override { _vec = { T(0), T(0) }; }
+    };
+    TYPED_TEST_SUITE(Vec2NormalizationZeroTests, SupportedArithmeticTypes);
+
+
+
+
+    /**
+     * @brief Test fixture for @ref Vec2 normalization with NaN vectors.
+     */
+    class Vec2NormalizationNaNTests: public testing::TestWithParam<fgm::Vec2<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(Vec2NormalizationNaNVectors, Vec2NormalizationNaNTests,
+                             ::testing::Values(fgm::Vec2<float>(fgm::constants::NaN, 1.0f),
+                                               fgm::Vec2<float>(1.0f, fgm::constants::NaN),
+                                               fgm::Vec2<float>(fgm ::constants::NaN, fgm::constants::NaN)));
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        // TODO: Add static tests after making sqrt constexpr
+        // constexpr fgm::Vec2 Vec(14, 27);
+        // constexpr auto norm = Vec.normalize();
+    }
+} // namespace
+
 
 
 /**************************************
- *                                    *
  *        NORMALIZATION TESTS         *
- *                                    *
  **************************************/
 
-/** @brief Verify that normalizing a vector using @ref fgm::Vec2::normalize returns a unit vector. */
-TYPED_TEST(Vec2Normalization, Normalize_NonZeroVectorReturnsUnitVector)
+TYPED_TEST(Vec2NormalizationTests, Normalize_NonZeroVectorReturnsUnitVector)
 {
     const fgm::Vec2 normalized = this->_vec.normalize();
-
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
 }
 
 
-/**
- * @brief Verify that normalizing a vector using static variant of @ref fgm::Vec2::normalize
- *       returns a unit vector.
- */
-TYPED_TEST(Vec2Normalization, StaticWrapper_Normalize_NonZeroVectorReturnsUnitVector)
+TYPED_TEST(Vec2NormalizationTests, StaticWrapper_Normalize_NonZeroVectorReturnsUnitVector)
 {
     const fgm::Vec2 normalized = fgm::Vec2<TypeParam>::normalize(this->_vec);
-
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
 }
 
 
-/**
- * @brief Verify that normalizing a vector using @ref fgm::Vec2::normalize
- *       always return a floating-point vector.
- */
-TYPED_TEST(Vec2Normalization, NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+TYPED_TEST(Vec2NormalizationTests, NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] const auto normalized = this->_vec.normalize();
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
 
 
-#ifdef ENABLE_DEBUG_TESTS
-/**
- * @brief Verify that normalizing a vector with zero magnitude triggers assert in debug mode.
- */
-TYPED_TEST(Vec2Normalization, ZeroMagnitudeTriggersAssertInDebugMode)
-{
-    const fgm::Vec2<TypeParam> zVec(0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(zVec.normalize()), "");
-}
-
-
-/**
- * @brief Verify that normalizing a vector with zero magnitude using static variant of fgm::Vec2::normalize triggers
- *        assert in debug mode.
- */
-TYPED_TEST(Vec2Normalization, StaticWrapper_ZeroMagnitudeTriggersAssertInDebugMode)
-{
-    const fgm::Vec2<TypeParam> zVec(0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec2<TypeParam>::normalize(zVec)), "");
-}
-
-#endif
 
 
 /**************************************
@@ -145,98 +123,60 @@ TYPED_TEST(Vec2Normalization, StaticWrapper_ZeroMagnitudeTriggersAssertInDebugMo
  *                                    *
  **************************************/
 
-/** @brief Verify that normalizing a vector using @ref fgm::Vec2::safeNormalize returns a unit vector. */
-TYPED_TEST(Vec2Normalization, SafeNormalize_NonZeroVectorReturnsUnitVector)
+TYPED_TEST(Vec2NormalizationTests, SafeNormalize_NonZeroVectorReturnsUnitVector)
 {
     const fgm::Vec2 normalized = this->_vec.safeNormalize();
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
 }
 
 
-/**
- * @brief Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vec2::safeNormalize
- *       returns a zero-vector.
- */
-TYPED_TEST(Vec2Normalization, SafeNormalize_ZeroVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::Vec2<TypeParam>::zero().safeNormalize());
-}
+TYPED_TEST(Vec2NormalizationTests, SafeNormalize_ZeroVectorReturnsZeroVector)
+{ EXPECT_VEC_ZERO(fgm::Vec2<TypeParam>::zero().safeNormalize()); }
 
 
-/**
- * @brief Verify that attempting to normalize a NaN vector using @ref fgm::Vec2::safeNormalize
- *       returns a zero-vector.
- */
-TEST(Vec2Normalization, SafeNormalize_NaNVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::Vec2<float>::qnan().safeNormalize());
-}
+TEST(Vec2NormalizationTests, SafeNormalize_NaNVectorReturnsZeroVector)
+{ EXPECT_VEC_ZERO(fgm::Vec2<float>::qnan().safeNormalize()); }
 
 
-/**
- * @brief Verify that normalizing a vector using @ref fgm::Vec2::safeNormalize always
- *       return a floating-point vector.
- */
-TYPED_TEST(Vec2Normalization, SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+TYPED_TEST(Vec2NormalizationTests, SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] const auto normalized = this->_vec.safeNormalize();
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
 
 
-/**
- * @brief Verify that normalizing a 2D vector using static variant of @ref fgm::Vec2::safeNormalize
- *       returns a unit vector.
- */
-TYPED_TEST(Vec2Normalization, StaticWrapper_SafeNormalize_NonZeroVectorReturnsUnitVector)
+TYPED_TEST(Vec2NormalizationTests, StaticWrapper_SafeNormalize_NonZeroVectorReturnsUnitVector)
 {
     const fgm::Vec2 normalized = fgm::Vec2<TypeParam>::safeNormalize(this->_vec);
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
 }
 
 
-/**
- * @brief Verify that attempting to normalize a zero-magnitude vector using static variant of
- *       @ref fgm::Vec2::safeNormalize returns a zero-vector.
- */
-TYPED_TEST(Vec2Normalization, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::Vec2<TypeParam>::safeNormalize(fgm::Vec2<TypeParam>::zero()));
-}
+TYPED_TEST(Vec2NormalizationTests, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
+{ EXPECT_VEC_ZERO(fgm::Vec2<TypeParam>::safeNormalize(fgm::Vec2<TypeParam>::zero())); }
 
 
-/**
- * @brief Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vec2::safeNormalize
- *       returns a zero-vector.
- */
-TEST(Vec2Normalization, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
-{
-    EXPECT_VEC_ZERO(fgm::Vec2<float>::safeNormalize(fgm::Vec2<float>::qnan()));
-}
+TEST(Vec2NormalizationTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
+{ EXPECT_VEC_ZERO(fgm::Vec2<float>::safeNormalize(fgm::Vec2<float>::qnan())); }
 
 
-/**
- * @brief Verify that the normalizing a 2D vector using static variant of @ref fgm::Vec2::safeNormalize
- *       always return a floating-point vector.
- */
-TYPED_TEST(Vec2Normalization, StaticWrapper_SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+TYPED_TEST(Vec2NormalizationTests, StaticWrapper_SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] const auto normalized = fgm::Vec2<TypeParam>::safeNormalize(this->_vec);
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
 
 
+
 /**************************************
- *                                    *
  *      TRY NORMALIZATION TESTS       *
- *                                    *
  **************************************/
 
 /**
  * @brief Verify that normalizing a vector using @ref fgm::Vec2::tryNormalize
  *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec2Normalization, TryNormalize_NonZeroVectorReturnsUnitVector)
+TYPED_TEST(Vec2NormalizationTests, TryNormalize_NonZeroVectorReturnsUnitVector)
 {
     fgm::OperationStatus flag;
     const fgm::Vec2 normalized = this->_vec.tryNormalize(flag);
@@ -250,7 +190,7 @@ TYPED_TEST(Vec2Normalization, TryNormalize_NonZeroVectorReturnsUnitVector)
  * @brief Verify that attempting to normalize a zero-magnitude vector using @ref fgm::Vec2::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Vec2Normalization, TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec2NormalizationTests, TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     EXPECT_VEC_ZERO(fgm::Vec2<TypeParam>::zero().tryNormalize(flag));
@@ -262,7 +202,7 @@ TYPED_TEST(Vec2Normalization, TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCor
  * @brief Verify that attempting to normalize a NaN vector using @ref fgm::Vec2::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST(Vec2Normalization, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST(Vec2NormalizationTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     EXPECT_VEC_ZERO(fgm::Vec2<float>::qnan().tryNormalize(flag));
@@ -274,7 +214,7 @@ TEST(Vec2Normalization, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFla
  * @brief Verify that normalizing a vector using @ref fgm::Vec2::tryNormalize always
  *       return a floating-point vector.
  */
-TYPED_TEST(Vec2Normalization, TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+TYPED_TEST(Vec2NormalizationTests, TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] fgm::OperationStatus flag;
     [[maybe_unused]] const auto normalized = this->_vec.tryNormalize(flag);
@@ -286,7 +226,7 @@ TYPED_TEST(Vec2Normalization, TryNormalize_NormalizedVectorIsAlwaysTypedPromoted
  * @brief Verify that normalizing a 2D vector using static variant of @ref fgm::Vec2::tryNormalize
  *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec2Normalization, StaticWrapper_TryNormalize_NonZeroVectorReturnsUnitVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NonZeroVectorReturnsUnitVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const fgm::Vec2 normalized = fgm::Vec2<TypeParam>::tryNormalize(this->_vec, flag);
@@ -301,7 +241,7 @@ TYPED_TEST(Vec2Normalization, StaticWrapper_TryNormalize_NonZeroVectorReturnsUni
  *       @ref fgm::Vec2::tryNormalize returns a zero-vector and
  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Vec2Normalization, StaticWrapper_TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     EXPECT_VEC_ZERO(fgm::Vec2<TypeParam>::zero().tryNormalize(flag));
@@ -313,7 +253,7 @@ TYPED_TEST(Vec2Normalization, StaticWrapper_TryNormalize_ZeroVectorReturnsZeroVe
  * @brief Verify that attempting to normalize a NaN vector using static variant of @ref fgm::Vec2::tryNormalize
  *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TEST(Vec2Normalization, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
+TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     EXPECT_VEC_ZERO(fgm::Vec2<float>::tryNormalize(fgm::Vec2<float>::qnan(), flag));
@@ -325,7 +265,7 @@ TEST(Vec2Normalization, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAnd
  * @brief Verify that the normalizing a 2D vector using static variant of @ref fgm::Vec2::tryNormalize
  *       always return a floating-point vector.
  */
-TYPED_TEST(Vec2Normalization, StaticWrapper_TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
+TYPED_TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
     [[maybe_unused]] fgm::OperationStatus flag;
     [[maybe_unused]] const auto normalized = fgm::Vec2<TypeParam>::tryNormalize(this->_vec, flag);

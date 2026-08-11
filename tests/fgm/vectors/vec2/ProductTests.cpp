@@ -23,9 +23,7 @@
 namespace
 {
     /**************************************
-     *                                    *
-     *               SETUP                *
-     *                                    *
+     *           TEST SETUP               *
      **************************************/
 
     /**
@@ -34,7 +32,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
     template <typename T>
-    class Vec2DotProduct: public testing::Test
+    class Vec2DotProductTests: public testing::Test
     {
     protected:
         fgm::Vec2<T> _vecA;
@@ -58,7 +56,7 @@ namespace
             _expectedADotA = static_cast<T>(173);
         }
     };
-    TYPED_TEST_SUITE(Vec2DotProduct, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2DotProductTests, SupportedArithmeticTypes);
 
 
     /**
@@ -67,7 +65,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
     template <typename T>
-    class Vec2CrossProduct: public testing::Test
+    class Vec2CrossProductTests: public testing::Test
     {
     protected:
         fgm::Vec2<T> _vecA;
@@ -81,7 +79,7 @@ namespace
             _expectedCrossProduct = T(12);
         }
     };
-    TYPED_TEST_SUITE(Vec2CrossProduct, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2CrossProductTests, SupportedSignedArithmeticTypes);
 
 
     /**
@@ -90,7 +88,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
     template <typename T>
-    class Vec2TensorProduct: public testing::Test
+    class Vec2TensorProductTests: public testing::Test
     {
     protected:
         fgm::Vec2<T> _vecA;
@@ -106,14 +104,12 @@ namespace
             _expectedTensorProductInt  = { fgm::Vec2{ T(1), T(2) }, fgm::Vec2{ T(2), T(4) } };
         }
     };
-    TYPED_TEST_SUITE(Vec2TensorProduct, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2TensorProductTests, SupportedSignedArithmeticTypes);
 
 
 
     /**************************************
-     *                                    *
      *           STATIC TESTS             *
-     *                                    *
      **************************************/
 
     namespace
@@ -159,13 +155,10 @@ namespace
 
 
 /**************************************
- *                                    *
  *         DOT PRODUCT TESTS          *
- *                                    *
  **************************************/
 
-/** @brief Verify that the dot product of a vector with itself returns its squared magnitude. */
-TYPED_TEST(Vec2DotProduct, SelfDotProductReturnsSquareMagnitude)
+TYPED_TEST(Vec2DotProductTests, Dot_WithItselfReturnSquaredMagnitude)
 {
 
     const TypeParam dotProduct = this->_vecA.dot(this->_vecA);
@@ -185,8 +178,7 @@ TYPED_TEST(Vec2DotProduct, SelfDotProductReturnsSquareMagnitude)
 }
 
 
-/** @brief Verify that the dot product of a vector with an orthogonal vector returns zero. */
-TYPED_TEST(Vec2DotProduct, OrthogonalDotProductReturnZero)
+TYPED_TEST(Vec2DotProductTests, Dot_OrthogonalVectorsReturnZero)
 {
     const TypeParam dotProduct = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
 
@@ -205,8 +197,7 @@ TYPED_TEST(Vec2DotProduct, OrthogonalDotProductReturnZero)
 }
 
 
-/** @brief Verify that the dot product of a vector with a non-orthogonal vector returns a non-zero scalar. */
-TYPED_TEST(Vec2DotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
+TYPED_TEST(Vec2DotProductTests, Dot_NonOrthogonalVectorsReturnNonZeroScalar)
 {
     const TypeParam dotProduct = this->_vecA.dot(this->_vecB);
 
@@ -225,8 +216,7 @@ TYPED_TEST(Vec2DotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 }
 
 
-/** @brief Verify that the static variant of @ref fgm::Vec2::dot returns a non-zero scalar. */
-TYPED_TEST(Vec2DotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
+TYPED_TEST(Vec2DotProductTests, StaticWrapper_Dot_NonOrthogonalVectorsReturnNonZeroScalar)
 {
     const TypeParam dotProduct = fgm::Vec2<TypeParam>::dot(this->_vecA, this->_vecB);
 
@@ -245,11 +235,7 @@ TYPED_TEST(Vec2DotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroSc
 }
 
 
-/**
- * @brief Verify that the dot product of a vector with another vector in opposite direction
- *        returns a negative scalar.
- */
-TEST(Vec2DotProduct, AntiParallelDotProductReturnsNegativeScalar)
+TEST(Vec2DotProduct, Dot_AntiParallelVectorsReturnsNegativeScalar)
 {
     // Given two opposite vectors
     const fgm::Vec2 vecA(-1.0, 0.0);
@@ -263,11 +249,7 @@ TEST(Vec2DotProduct, AntiParallelDotProductReturnsNegativeScalar)
 }
 
 
-/**
- * @brief Verify that the dot product of a vector with another vector of different type
- *        returns a type promoted vector.
- */
-TEST(Vec2DotProduct, MixedTypeDotProductPromotesType)
+TEST(Vec2DotProduct, Dot_MixedType_PromotesType)
 {
     // Given two vectors of different type
     const fgm::Vec2 vecA(7, 13);
@@ -285,13 +267,10 @@ TEST(Vec2DotProduct, MixedTypeDotProductPromotesType)
 
 
 /**************************************
- *                                    *
  *        CROSS PRODUCT TESTS         *
- *                                    *
  **************************************/
 
-/** @brief Verify that the cross product of vector with self is a zero-vector. */
-TEST(Vec2CrossProduct, VectorCrossItselfReturnsZeroVector)
+TEST(Vec2CrossProduct, Cross_WithItself_ReturnsZeroVector)
 {
     const fgm::Vec2 vec(2.0f, 1.0f);
 
@@ -301,8 +280,7 @@ TEST(Vec2CrossProduct, VectorCrossItselfReturnsZeroVector)
 }
 
 
-/** @brief Verify that the cross product of vector with a non-parallel vector returns a new vector. */
-TYPED_TEST(Vec2CrossProduct, BetweenTwoNonParallelVectorsReturnsNewProduct)
+TYPED_TEST(Vec2CrossProductTests, Cross_TwoNonParallelVectorsReturnsNewProduct)
 {
     const TypeParam crossProduct = this->_vecA.cross(this->_vecB);
 
@@ -321,11 +299,7 @@ TYPED_TEST(Vec2CrossProduct, BetweenTwoNonParallelVectorsReturnsNewProduct)
 }
 
 
-/**
- * @brief Verify that the cross product of vector with a non-parallel vector using static variant of
- *        @ref fgm::Vec2::cross returns a new vector.
- */
-TYPED_TEST(Vec2CrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnsNewProduct)
+TYPED_TEST(Vec2CrossProductTests, StaticWrapper_Cross_TwoNonParallelVectorsReturnsNewProduct)
 {
     const TypeParam crossProduct = fgm::Vec2<TypeParam>::cross(this->_vecA, this->_vecB);
     if constexpr (std::is_same_v<TypeParam, double>)
@@ -343,8 +317,7 @@ TYPED_TEST(Vec2CrossProduct, StaticWrapper_BetweenTwoNonParallelVectorsReturnsNe
 }
 
 
-/** @brief Verify that the cross product between two differently typed vectors promote type. */
-TEST(Vec2CrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vec2CrossProduct, TensorProduct_MixedTypes_PromotesType)
 {
     const fgm::Vec2 vecA(2.0f, 3.0f);
     const fgm::Vec2 vecB(5.0, 6.0);
@@ -356,12 +329,10 @@ TEST(Vec2CrossProduct, BetweenDifferentlyTypedVectorsPromotesType)
 
 
 /**************************************
- *                                    *
  *        TENSOR PRODUCT TESTS        *
- *                                    *
  **************************************/
 
-TYPED_TEST(Vec2TensorProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
+TYPED_TEST(Vec2TensorProductTests, TensorProduct_BetweenTwoVectorsReturnsAValid2DMatrix)
 {
     const auto tensorProduct = this->_vecA.tensorProduct(this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -375,7 +346,7 @@ TYPED_TEST(Vec2TensorProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
 }
 
 
-TEST(Vec2TensorProduct, BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vec2TensorProduct, TensorProduct_MixedTypes_PromotesType)
 {
     const fgm::Vec2 vecA(2.0f, 3.0f);
     const fgm::Vec2 vecB(5.0, 6.0);
@@ -385,7 +356,7 @@ TEST(Vec2TensorProduct, BetweenDifferentlyTypedVectorsPromotesType)
 }
 
 
-TYPED_TEST(Vec2TensorProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatrix)
+TYPED_TEST(Vec2TensorProductTests, StaticWrapper_TensorProduct_BetweenTwoVectorsReturnsAValid2DMatrix)
 {
     const auto tensorProduct = fgm::Vec2<TypeParam>::tensorProduct(this->_vecA, this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -399,7 +370,7 @@ TYPED_TEST(Vec2TensorProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatr
 }
 
 
-TEST(Vec2TensorProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vec2TensorProduct, StaticWrapper_TensorProduct_MixedTypes_PromotesType)
 {
     const fgm::Vec2 vecA(2.0f, 3.0f);
     const fgm::Vec2 vecB(5.0, 6.0);

@@ -24,13 +24,11 @@ namespace
      **************************************/
     /**
      * @brief Test fixture for @ref fgm::Point2 initialization(CTOR).
-     *
-     * @tparam T The scalar type (e.g., float, double) used for the point.
      */
-    template <typename T>
-    class Point2Initialization: public testing::Test
+    template <typename>
+    class Point2InitializationTests: public testing::Test
     {};
-    TYPED_TEST_SUITE(Point2Initialization, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Point2InitializationTests, SupportedArithmeticTypes);
 
 
 
@@ -61,14 +59,14 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TYPED_TEST(Point2Initialization, BracedInitialization_InitializesComponentsToZero)
+TYPED_TEST(Point2InitializationTests, BracedInitialization_InitializesComponentsToZero)
 {
     const fgm::Point2<TypeParam> vec{};
     EXPECT_VEC_ZERO(vec);
 }
 
 
-TYPED_TEST(Point2Initialization, ParameterizedCtor_InitalizatesWithTheCorrectValues)
+TYPED_TEST(Point2InitializationTests, ParameterizedCtor_InitalizatesWithTheCorrectValues)
 {
     const TypeParam a = static_cast<TypeParam>(3);
     const TypeParam b = static_cast<TypeParam>(1);

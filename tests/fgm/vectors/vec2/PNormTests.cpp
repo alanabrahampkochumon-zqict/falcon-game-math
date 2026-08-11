@@ -12,72 +12,91 @@
 
 
 
-template <typename T>
-class Vec2ManhattanNorm: public testing::Test
-{
-protected:
-    fgm::Vec2<T> _vec;
-    T _norm;
-
-    void SetUp() override
-    {
-        _vec  = { T(1), T(2) };
-        _norm = T(3);
-    }
-};
-/** @brief Test fixture for @ref fgm::Vec2 manhattan norm, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec2ManhattanNorm, SupportedArithmeticTypes);
-
-
-template <typename T>
-class Vec2ChebyshevNorm: public testing::Test
-{
-protected:
-    fgm::Vec2<T> _vec;
-    T _norm;
-
-    void SetUp() override
-    {
-        _vec  = { T(1), T(2) };
-        _norm = T(2);
-    }
-};
-/** @brief Test fixture for @ref fgm::Vec2 chebyshev norm, parameterized by @ref SupportedArithmeticTypes. */
-TYPED_TEST_SUITE(Vec2ChebyshevNorm, SupportedArithmeticTypes);
-
-
 /**
  * @addtogroup T_FGM_Vec2_Norm
  * @{
  */
 
-/** @brief Verify that pNorm (Manhattan and Chebyshev length) operations are available at compile time. */
 namespace
 {
-    constexpr fgm::Vec2 vector(1, -2);
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
 
-    // L1 Norm (Manhattan Norm)
-    static_assert(vector.manhattanNorm() == 3);
-    static_assert(fgm::Vec2<int>::manhattanNorm(vector) == 3);
+    /**
+     * @brief Test fixture for @ref Vec2 Manhattan Norm(Distance).
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec2ManhattanNormTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<T> _vec;
+        T _norm;
 
-    // L∞ Norm (Chebyshev Norm)
-    static_assert(vector.chebyshevNorm() == 2);
-    static_assert(fgm::Vec2<int>::chebyshevNorm(vector) == 2);
+        void SetUp() override
+        {
+            _vec  = { T(1), T(2) };
+            _norm = T(3);
+        }
+    };
+    TYPED_TEST_SUITE(Vec2ManhattanNormTests, SupportedArithmeticTypes);
 
+
+
+    /**
+     * @brief Test fixture for @ref Vec2 Chebyshev Norm(Distance).
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec2ChebyshevNormTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<T> _vec;
+        T _norm;
+
+        void SetUp() override
+        {
+            _vec  = { T(1), T(2) };
+            _norm = T(2);
+        }
+    };
+    TYPED_TEST_SUITE(Vec2ChebyshevNormTests, SupportedArithmeticTypes);
+
+
+
+    /**************************************
+     *            STATIC TESTS            *
+     **************************************/
+
+    namespace static_tests
+    {
+        constexpr fgm::Vec2 VEC(1, -2);
+
+        /// @test Verify that Vec2 Manhattan Norm returns a valid scalar.
+        static_assert(VEC.manhattanNorm() == 3);
+        /// @test Verify that Vec2 Manhattan Norm (static wrapper) returns a valid scalar.
+        static_assert(fgm::Vec2<int>::manhattanNorm(VEC) == 3);
+
+
+        /// @test Verify that Vec2 Chebyshev Norm returns a valid scalar.
+        static_assert(VEC.chebyshevNorm() == 2);
+        /// @test Verify that Vec2 Chebyshev Norm (static wrapper) returns a valid scalar.
+        static_assert(fgm::Vec2<int>::chebyshevNorm(VEC) == 2);
+
+    } // namespace static_tests
 } // namespace
 
 
+
 /**************************************
- *                                    *
  *           MANHATTAN NORM           *
- *                                    *
  **************************************/
 
 /** @brief Verify that taking the manhattan norm of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vec2ManhattanNorm, ReturnsSumOfAbsoluteValueOfComponents)
+TYPED_TEST(Vec2ManhattanNormTests, ReturnsSumOfAbsoluteValueOfComponents)
 {
     const auto magnitude = this->_vec.manhattanNorm();
-
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 
@@ -86,26 +105,22 @@ TYPED_TEST(Vec2ManhattanNorm, ReturnsSumOfAbsoluteValueOfComponents)
  * @brief Verify that taking the manhattan norm of a non-unit vector using static variant of
  *        @ref fgm::Vec2::manhattanNorm returns non-unit scalar.
  */
-TYPED_TEST(Vec2ManhattanNorm, StaticWrapper_ReturnsSumOfAbsoluteValueOfComponents)
+TYPED_TEST(Vec2ManhattanNormTests, StaticWrapper_ReturnsSumOfAbsoluteValueOfComponents)
 {
     const auto magnitude = fgm::Vec2<TypeParam>::manhattanNorm(this->_vec);
-
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 
 
 
 /**************************************
- *                                    *
  *           CHEBYSHEV NORM           *
- *                                    *
  **************************************/
 
 /** @brief Verify that taking the chebyshev norm of a non-unit vector returns non-unit scalar. */
-TYPED_TEST(Vec2ChebyshevNorm, ReturnsLongestAbsoluteComponent)
+TYPED_TEST(Vec2ChebyshevNormTests, ReturnsLongestAbsoluteComponent)
 {
     const auto magnitude = this->_vec.chebyshevNorm();
-
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 
@@ -114,10 +129,9 @@ TYPED_TEST(Vec2ChebyshevNorm, ReturnsLongestAbsoluteComponent)
  * @brief Verify that taking the chebyshev norm of a non-unit vector using static variant of
  *        @ref fgm::Vec2::chebyshevNorm returns non-unit scalar.
  */
-TYPED_TEST(Vec2ChebyshevNorm, StaticWrapper_ReturnsLongestAbsoluteComponent)
+TYPED_TEST(Vec2ChebyshevNormTests, StaticWrapper_ReturnsLongestAbsoluteComponent)
 {
     const auto magnitude = fgm::Vec2<TypeParam>::chebyshevNorm(this->_vec);
-
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 

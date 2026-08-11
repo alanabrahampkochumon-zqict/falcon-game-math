@@ -75,3 +75,73 @@ TYPED_TEST(Vec2ScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugM
     EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= 0), "");
 }
 #endif
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that normalizing a vector with zero magnitude triggers assert in debug mode.
+ */
+TYPED_TEST(Vec2NormalizationTests, ZeroMagnitudeTriggersAssertInDebugMode)
+{
+    const fgm::Vec2<TypeParam> zVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(zVec.normalize()), "");
+}
+
+
+/**
+ * @brief Verify that normalizing a vector with zero magnitude using static variant of fgm::Vec2::normalize triggers
+ *        assert in debug mode.
+ */
+TYPED_TEST(Vec2NormalizationTests, StaticWrapper_ZeroMagnitudeTriggersAssertInDebugMode)
+{
+    const fgm::Vec2<TypeParam> zVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec2<TypeParam>::normalize(zVec)), "");
+}
+
+#endif
+
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that projecting a vector onto zero vector triggers assert in debug mode.
+ */
+TYPED_TEST(Vec2ProjectionTests, ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vec2<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.project(zeroVec)), "");
+}
+
+
+/**
+ * @brief Verify that projecting a vector onto zero vector using static variant of @ref fgm::Vec2::project
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vec2ProjectionTests, StaticWrapper_ProjectionOntoZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vec2<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec2<TypeParam>::project(this->_vec, zeroVec)), "");
+}
+
+#endif
+
+
+#ifdef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that rejecting a vector from a zero vector triggers assert in debug mode.
+ */
+TYPED_TEST(Vec2RejectionTests, FromZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vec2<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.reject(zeroVec)), "");
+}
+
+
+/**
+ * @brief Verify that rejecting a vector from a zero vector using static variant of @ref fgm::Vec2::reject
+ *        triggers assert in debug mode.
+ */
+TYPED_TEST(Vec2RejectionTests, StaticWrapper_FromZeroVectorTriggersAssertionInCallback)
+{
+    const fgm::Vec2<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec2<TypeParam>::reject(this->_vec, zeroVec)), "");
+}
+
+#endif
+

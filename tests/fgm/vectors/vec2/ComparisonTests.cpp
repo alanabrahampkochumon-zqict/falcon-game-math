@@ -65,69 +65,69 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec2 vec1(1, 2);
-        constexpr fgm::Vec2 vec2(1, 3);
+        constexpr fgm::Vec2 VEC_A(1, 2);
+        constexpr fgm::Vec2 VEC_B(1, 3);
 
         /// @test Verify that greater than operator (operator>) returns a valid mask at compile time.
-        constexpr auto GT_OP_MASK_VEC = vec1 > vec2;
+        constexpr auto GT_OP_MASK_VEC = VEC_A > VEC_B;
         static_assert(GT_OP_MASK_VEC.x() == false);
         static_assert(GT_OP_MASK_VEC.y() == false);
 
         /// @test Verify that greater than operator (gt) returns a valid mask at compile time.
-        constexpr auto GT_MASK_VEC = vec1.gt(vec2);
+        constexpr auto GT_MASK_VEC = VEC_A.gt(VEC_B);
         static_assert(GT_MASK_VEC.x() == false);
         static_assert(GT_MASK_VEC.y() == false);
 
         /// @test Verify that greater than operator (gt-static wrapper) returns a valid mask at compile time.
-        constexpr auto GT_MASK_VEC_STATIC = fgm::Vec2<int>::gt(vec1, vec2);
+        constexpr auto GT_MASK_VEC_STATIC = fgm::Vec2<int>::gt(VEC_A, VEC_B);
         static_assert(GT_MASK_VEC_STATIC.x() == false);
         static_assert(GT_MASK_VEC_STATIC.y() == false);
 
 
         /// @test Verify that greater or equals operator (operator>=) returns a valid mask at compile time.
-        constexpr auto GTE_OP_MASK_VEC = vec1 >= vec2;
+        constexpr auto GTE_OP_MASK_VEC = VEC_A >= VEC_B;
         static_assert(GTE_OP_MASK_VEC.x() == true);
         static_assert(GTE_OP_MASK_VEC.y() == false);
 
         /// @test Verify that greater than or equals operator (gte) returns a valid mask at compile time.
-        constexpr auto GTE_MASK_VEC = vec1.gte(vec2);
+        constexpr auto GTE_MASK_VEC = VEC_A.gte(VEC_B);
         static_assert(GTE_MASK_VEC.x() == true);
         static_assert(GTE_MASK_VEC.y() == false);
 
         /// @test Verify that greater than or equals operator (gte-static wrapper) returns a valid mask at compile time.
-        constexpr auto GTE_MASK_VEC_STATIC = fgm::Vec2<int>::gte(vec1, vec2);
+        constexpr auto GTE_MASK_VEC_STATIC = fgm::Vec2<int>::gte(VEC_A, VEC_B);
         static_assert(GTE_MASK_VEC_STATIC.x() == true);
         static_assert(GTE_MASK_VEC_STATIC.y() == false);
 
 
         /// @test Verify that less than operator (operator<) returns a valid mask at compile time.
-        constexpr auto LT_OP_MASK_VEC = vec1 < vec2;
+        constexpr auto LT_OP_MASK_VEC = VEC_A < VEC_B;
         static_assert(LT_OP_MASK_VEC.x() == false);
         static_assert(LT_OP_MASK_VEC.y() == true);
 
         /// @test Verify that less than operator (lt) returns a valid mask at compile time.
-        constexpr auto LT_MASK_VEC = vec1.lt(vec2);
+        constexpr auto LT_MASK_VEC = VEC_A.lt(VEC_B);
         static_assert(LT_MASK_VEC.x() == false);
         static_assert(LT_MASK_VEC.y() == true);
 
         /// @test Verify that less than operator (lt-static wrapper) returns a valid mask at compile time.
-        constexpr auto LT_MASK_VEC_STATIC = fgm::Vec2<int>::lt(vec1, vec2);
+        constexpr auto LT_MASK_VEC_STATIC = fgm::Vec2<int>::lt(VEC_A, VEC_B);
         static_assert(LT_MASK_VEC_STATIC.x() == false);
         static_assert(LT_MASK_VEC_STATIC.y() == true);
 
 
-        constexpr auto LTE_OP_MASK_VEC = vec1 <= vec2;
+        constexpr auto LTE_OP_MASK_VEC = VEC_A <= VEC_B;
         /// @test Verify that less than or equals operator (operator<=) returns a valid mask at compile time.
         static_assert(LTE_OP_MASK_VEC.x() == true);
         static_assert(LTE_OP_MASK_VEC.y() == true);
 
         /// @test Verify that less than or equals operator (lte) returns a valid mask at compile time.
-        constexpr auto LTE_MASK_VEC = vec1.lte(vec2);
+        constexpr auto LTE_MASK_VEC = VEC_A.lte(VEC_B);
         static_assert(LTE_MASK_VEC.x() == true);
         static_assert(LTE_MASK_VEC.y() == true);
 
         /// @test Verify that less than or equals operator (lte-static wrapper) returns a valid mask at compile time.
-        constexpr auto LTE_MASK_VEC_STATIC = fgm::Vec2<int>::lte(vec1, vec2);
+        constexpr auto LTE_MASK_VEC_STATIC = fgm::Vec2<int>::lte(VEC_A, VEC_B);
         static_assert(LTE_MASK_VEC_STATIC.x() == true);
         static_assert(LTE_MASK_VEC_STATIC.y() == true);
 

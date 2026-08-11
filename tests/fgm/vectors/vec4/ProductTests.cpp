@@ -147,7 +147,7 @@ namespace
  **************************************/
 
 /** @brief Verify that the dot product of a vector with itself returns its squared magnitude. */
-TYPED_TEST(Vec4DotProduct, SelfDotProductReturnsSquareMagnitude)
+TYPED_TEST(Vec4DotProduct, Dot_WithItselfReturnSquaredMagnitude)
 {
 
     const TypeParam dotProduct = this->_vecA.dot(this->_vecA);
@@ -168,7 +168,7 @@ TYPED_TEST(Vec4DotProduct, SelfDotProductReturnsSquareMagnitude)
 
 
 /** @brief Verify that the dot product of a vector with an orthogonal vector returns zero. */
-TYPED_TEST(Vec4DotProduct, OrthogonalDotProductReturnZero)
+TYPED_TEST(Vec4DotProduct, Dot_OrthogonalVectorsReturnZero)
 {
     const TypeParam dotProduct = this->_vecAOrthogonal.dot(this->_vecBOrthogonal);
 
@@ -188,7 +188,7 @@ TYPED_TEST(Vec4DotProduct, OrthogonalDotProductReturnZero)
 
 
 /** @brief Verify that the dot product of a vector with a non-orthogonal vector returns a non-zero scalar. */
-TYPED_TEST(Vec4DotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
+TYPED_TEST(Vec4DotProduct, Dot_NonOrthogonalVectorsReturnNonZeroScalar)
 {
     const TypeParam dotProduct = this->_vecA.dot(this->_vecB);
 
@@ -208,7 +208,7 @@ TYPED_TEST(Vec4DotProduct, NonOrthogonalDotProductReturnsNonZeroScalar)
 
 
 /** @brief Verify that the static variant of @ref fgm::Vec4::dot returns a non-zero scalar. */
-TYPED_TEST(Vec4DotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroScalar)
+TYPED_TEST(Vec4DotProduct, StaticWrapper_Dot_NonOrthogonalVectorsReturnNonZeroScalar)
 {
     const TypeParam dotProduct = fgm::Vec4<TypeParam>::dot(this->_vecA, this->_vecB);
 
@@ -231,7 +231,7 @@ TYPED_TEST(Vec4DotProduct, StaticWrapper_NonOrthogonalDotProductReturnsNonZeroSc
  * @brief Verify that the dot product of a vector with another vector in opposite direction
  *        returns a negative scalar.
  */
-TEST(Vec4DotProduct, AntiParallelDotProductReturnsNegativeScalar)
+TEST(Vec4DotProduct, Dot_AntiParallelVectorsReturnsNegativeScalar)
 {
     // Given two opposite vectors
     const fgm::Vec4 vecA(-1.0, 0.0, 0.0, 0.0);
@@ -249,7 +249,7 @@ TEST(Vec4DotProduct, AntiParallelDotProductReturnsNegativeScalar)
  * @brief Verify that the dot product of a vector with another vector of different type
  *        returns a type promoted vector.
  */
-TEST(Vec4DotProduct, MixedTypeDotProductPromotesType)
+TEST(Vec4DotProduct, Dot_MixedType_PromotesType)
 {
     // Given two vectors of different type
     const fgm::Vec4 vecA(7, 13, 29, 41);
@@ -273,7 +273,7 @@ TEST(Vec4DotProduct, MixedTypeDotProductPromotesType)
  *                                    *
  **************************************/
 
-TYPED_TEST(Vec4TensorProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
+TYPED_TEST(Vec4TensorProduct, TensorProduct_BetweenTwoVectorsReturnsAValid2DMatrix)
 {
     const auto tensorProduct = this->_vecA.tensorProduct(this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -287,7 +287,7 @@ TYPED_TEST(Vec4TensorProduct, BetweenTwoVectorsReturnsAValid2DMatrix)
 }
 
 
-TEST(Vec4TensorProduct, BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vec4TensorProduct, TensorProduct_MixedTypes_PromotesType)
 {
     const fgm::Vec4 vecA(2.0f, 3.0f, 4.0f, 5.0f);
     const fgm::Vec4 vecB(5.0, 6.0, 1.0, 2.0);
@@ -297,7 +297,7 @@ TEST(Vec4TensorProduct, BetweenDifferentlyTypedVectorsPromotesType)
 }
 
 
-TYPED_TEST(Vec4TensorProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatrix)
+TYPED_TEST(Vec4TensorProduct, StaticWrapper_TensorProduct_BetweenTwoVectorsReturnsAValid2DMatrix)
 {
     const auto tensorProduct = fgm::Vec4<TypeParam>::tensorProduct(this->_vecA, this->_vecB);
     if constexpr (std::is_floating_point_v<TypeParam>)
@@ -311,7 +311,7 @@ TYPED_TEST(Vec4TensorProduct, StaticWrapper_BetweenTwoVectorsReturnsAValid2DMatr
 }
 
 
-TEST(Vec4TensorProduct, StaticWrapper_BetweenDifferentlyTypedVectorsPromotesType)
+TEST(Vec4TensorProduct, StaticWrapper_TensorProduct_MixedTypes_PromotesType)
 {
     const fgm::Vec4 vecA(2.0f, 3.0f, 4.0f, 5.0f);
     const fgm::Vec4 vecB(5.0, 6.0, 1.0, 2.0);

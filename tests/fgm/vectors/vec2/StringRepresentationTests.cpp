@@ -14,31 +14,38 @@
 #include <sstream>
 
 
-
-/**************************************
- *                                    *
- *                SETUP               *
- *                                    *
- **************************************/
-
-class Vec2StringRepresentationTests: public ::testing::Test
-{
-    /** @brief Switch to use full precision for testing. */
-    void SetUp() override { fgm::Config::useFullPrecision = true; }
-
-    /** @brief Switch back to normal log precision. */
-    void TearDown() override { fgm::Config::useFullPrecision = false; }
-};
-
-
-
 /**
  * @addtogroup T_FGM_Vec2_String_Repr
  * @{
  */
 
-/** @brief Verify that the string representation matches the expected format for integral types. */
-TEST_F(Vec2StringRepresentationTests, IntegralRepresentation)
+namespace
+{
+    /**************************************
+     *           TEST SETUP               *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 string representation.
+     */
+    class Vec2StringRepresentationTests: public testing::Test
+    {
+    protected:
+        /** @brief Switch to use full precision for testing. */
+        void SetUp() override { fgm::Config::useFullPrecision = true; }
+
+        /** @brief Switch back to normal log precision. */
+        void TearDown() override { fgm::Config::useFullPrecision = false; }
+    };
+} // namespace
+
+
+
+/**************************************
+ *           RUNTIME TESTS            *
+ **************************************/
+
+TEST_F(Vec2StringRepresentationTests, IntegralMatrix_ReturnsFormattedString)
 {
     const fgm::Vec2 vec(1, 2);
     std::stringstream ss;
@@ -49,11 +56,7 @@ TEST_F(Vec2StringRepresentationTests, IntegralRepresentation)
 }
 
 
-/**
- * @brief Verify that the string representation matches the expected format for single-precision
- *       floating-point types.
- */
-TEST_F(Vec2StringRepresentationTests, FloatRepresentation)
+TEST_F(Vec2StringRepresentationTests, FloatingPointMatrix_ReturnsFormattedString)
 {
     const fgm::Vec2 vec(1.2345f, 2.0f);
     std::stringstream ss;
@@ -64,11 +67,7 @@ TEST_F(Vec2StringRepresentationTests, FloatRepresentation)
 }
 
 
-/**
- * @brief Verify that the string representation matches the expected format for double-precision
- *       floating-point types.
- */
-TEST_F(Vec2StringRepresentationTests, DoubleRepresentation)
+TEST_F(Vec2StringRepresentationTests, DoublePrecisionFloatingPointMatrix_ReturnsFormattedString)
 {
     const fgm::Vec2 vec(1.2345789777, 2.65831);
     std::stringstream ss;

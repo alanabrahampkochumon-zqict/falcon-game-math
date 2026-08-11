@@ -96,7 +96,7 @@ TYPED_TEST(QuaternionDotProduct, DotProductIsCommutative)
     testutils::EXPECT_MAG_EQ(aDotB, bDotA);
 }
 
-TEST(QuaternionDotProduct, MixedTypeDotProductPromotesType)
+TEST(QuaternionDotProduct, Dot_MixedType_PromotesType)
 {
     const fgm::Quaternion quatA(7, 13, 29, 41);
     const fgm::Quaternion quatB(1.123456789, 2.123456789, 3.123456789, 4.123456789);
@@ -124,7 +124,7 @@ TYPED_TEST(QuaternionDotProduct, StaticWrapper_DotProductIsCommutative)
     testutils::EXPECT_MAG_EQ(aDotB, bDotA);
 }
 
-TEST(QuaternionDotProduct, StaticWrapper_MixedTypeDotProductPromotesType)
+TEST(QuaternionDotProduct, StaticWrapper_Dot_MixedType_PromotesType)
 {
     const fgm::Quaternion quatA(7, 13, 29, 41);
     const fgm::Quaternion quatB(1.123456789, 2.123456789, 3.123456789, 4.123456789);

@@ -145,6 +145,7 @@ TYPED_TEST(Vec2UncleanMagnitudeTests, StaticWrapper_Mag_NonUnitVectorReturnsCorr
 }
 
 
+
 /**************************************
  *       MAGNITUDE SQUARE TESTS       *
  **************************************/
@@ -152,7 +153,6 @@ TYPED_TEST(Vec2UncleanMagnitudeTests, StaticWrapper_Mag_NonUnitVectorReturnsCorr
 TYPED_TEST(Vec2MagnitudeTests, MagSq_ReturnsSquaredMagnitude)
 {
     const auto magnitude = this->_vec.magSq();
-
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 
@@ -160,7 +160,6 @@ TYPED_TEST(Vec2MagnitudeTests, MagSq_ReturnsSquaredMagnitude)
 TYPED_TEST(Vec2MagnitudeTests, StaticWrapper_MagSq_ReturnsSquaredMagnitude)
 {
     const auto magnitude = fgm::Vec2<TypeParam>::magSq(this->_vec);
-
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 

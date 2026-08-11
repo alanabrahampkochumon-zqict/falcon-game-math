@@ -29,7 +29,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the point.
      */
     template <typename T>
-    class Point2Addition: public testing::Test
+    class Point2AdditionTests: public testing::Test
     {
     protected:
         fgm::Vec2<T> _vector;
@@ -43,7 +43,7 @@ namespace
             _expectedPoint = { T(4), T(3) };
         }
     };
-    TYPED_TEST_SUITE(Point2Addition, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Point2AdditionTests, SupportedArithmeticTypes);
 
 
     /**
@@ -52,7 +52,7 @@ namespace
      * @tparam T The scalar type (e.g., float, double) used for the point.
      */
     template <typename T>
-    class Point2Subtraction: public testing::Test
+    class Point2SubtractionTests: public testing::Test
     {
     protected:
         fgm::Point2<T> _pointA;
@@ -66,7 +66,7 @@ namespace
             _expectedVector = { T(87), T(6) };
         }
     };
-    TYPED_TEST_SUITE(Point2Subtraction, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Point2SubtractionTests, SupportedArithmeticTypes);
 
 
 
@@ -103,14 +103,14 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TYPED_TEST(Point2Addition, PlusOperator_ReturnsAPointWithComponentwiseSum)
+TYPED_TEST(Point2AdditionTests, PlusOperator_ReturnsAPointWithComponentwiseSum)
 {
     const fgm::Point2 result = this->_point + this->_vector;
     EXPECT_VEC_EQ(this->_expectedPoint, result);
 }
 
 
-TEST(Point2Addition, PlusOperator_MixedType_PromotesType)
+TEST(Point2AdditionTests, PlusOperator_MixedType_PromotesType)
 {
     const fgm::Point2 point(3.0f, 0.0f);
     const fgm::Vec2 vector(9.0, -5.0);
@@ -121,14 +121,14 @@ TEST(Point2Addition, PlusOperator_MixedType_PromotesType)
 }
 
 
-TYPED_TEST(Point2Addition, PlusEqualsOperator_ReturnsSamePointWithComponentwiseSum)
+TYPED_TEST(Point2AdditionTests, PlusEqualsOperator_ReturnsSamePointWithComponentwiseSum)
 {
     this->_point += this->_vector;
     EXPECT_VEC_EQ(this->_expectedPoint, this->_point);
 }
 
 
-TEST(Point2Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
+TEST(Point2AdditionTests, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
     fgm::Point2 point(3.0f, 0.0f);
     const fgm::Vec2 vector(9.0, -5.0);
@@ -147,7 +147,7 @@ TEST(Point2Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
  * @{
  */
 
-TYPED_TEST(Point2Subtraction, MinusOperator_ReturnsAVectorWithComponentwiseDifference)
+TYPED_TEST(Point2SubtractionTests, MinusOperator_ReturnsAVectorWithComponentwiseDifference)
 {
     const auto result = this->_pointA - this->_pointB;
 
@@ -155,7 +155,7 @@ TYPED_TEST(Point2Subtraction, MinusOperator_ReturnsAVectorWithComponentwiseDiffe
 }
 
 
-TEST(Point2Subtraction, MinusOperator_MixedType_PromotesType)
+TEST(Point2SubtractionTests, MinusOperator_MixedType_PromotesType)
 {
     const fgm::Point2 pointA(3.0f, 0.0f);
     const fgm::Point2 pointB(9.0, -5.0);

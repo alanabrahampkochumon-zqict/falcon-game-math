@@ -101,7 +101,7 @@ namespace
      * @tparam T The scalar type (int, float, double...) of the vector components.
      */
     template <typename T>
-    class Vec2ScalarDivision: public testing::Test
+    class Vec2ScalarDivisionTests: public testing::Test
     {
     protected:
         fgm::Vec2<T> _vec;
@@ -115,7 +115,7 @@ namespace
             _expectedScaledVec = { T(1.30769230769230769231), T(2.38461538461538461538) };
         }
     };
-    TYPED_TEST_SUITE(Vec2ScalarDivision, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2ScalarDivisionTests, SupportedArithmeticTypes);
 
 
 
@@ -403,7 +403,7 @@ TEST(Vec2ScalarMultiplicationTests, TimesEqualsOperator_MixedType_EnsuresMinimal
  *           DIVIDE OPERATOR          *
  **************************************/
 
-TYPED_TEST(Vec2ScalarDivision, DivideOperator_ByOneReturnsOriginalVector)
+TYPED_TEST(Vec2ScalarDivisionTests, DivideOperator_ByOneReturnsOriginalVector)
 {
     const fgm::Vec2 result = this->_vec / 1;
 
@@ -411,7 +411,7 @@ TYPED_TEST(Vec2ScalarDivision, DivideOperator_ByOneReturnsOriginalVector)
 }
 
 
-TYPED_TEST(Vec2ScalarDivision, DivideOperator_ReturnsVectorWithDividedComponents)
+TYPED_TEST(Vec2ScalarDivisionTests, DivideOperator_ReturnsVectorWithDividedComponents)
 {
     const fgm::Vec2 result = this->_vec / this->_scalar;
 
@@ -419,7 +419,7 @@ TYPED_TEST(Vec2ScalarDivision, DivideOperator_ReturnsVectorWithDividedComponents
 }
 
 
-TEST(Vec2ScalarDivision, MixedType_ScalarDivision_PromotesType)
+TEST(Vec2ScalarDivisionTests, MixedType_ScalarDivision_PromotesType)
 {
     const fgm::Vec2 vec(15.0, -5.0);
     const double scalar = 5.0;
@@ -430,7 +430,7 @@ TEST(Vec2ScalarDivision, MixedType_ScalarDivision_PromotesType)
 }
 
 
-TYPED_TEST(Vec2ScalarDivision, DivideEqualsOperator_ReturnsSameVectorWithDividedComponents)
+TYPED_TEST(Vec2ScalarDivisionTests, DivideEqualsOperator_ReturnsSameVectorWithDividedComponents)
 {
     this->_vec /= this->_scalar;
 
@@ -438,7 +438,7 @@ TYPED_TEST(Vec2ScalarDivision, DivideEqualsOperator_ReturnsSameVectorWithDivided
 }
 
 
-TEST(Vec2ScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
+TEST(Vec2ScalarDivisionTests, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
 {
     fgm::Vec2 vec(15.0f, -5.0f);
     const double scalar = 5.0;
@@ -449,7 +449,7 @@ TEST(Vec2ScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
 }
 
 
-TEST(Vec2ScalarDivision, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
+TEST(Vec2ScalarDivisionTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     fgm::Vec2 vec(10, -30);
     const double scalar = 2.5;
@@ -466,7 +466,7 @@ TEST(Vec2ScalarDivision, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLo
  *        SAFE DIVISION TESTS         *
  **************************************/
 
-TYPED_TEST(Vec2ScalarDivision, SafeDiv_ReturnsVectorWithDividedComponents)
+TYPED_TEST(Vec2ScalarDivisionTests, SafeDiv_ReturnsVectorWithDividedComponents)
 {
     const auto result = this->_vec.safeDiv(this->_scalar);
 
@@ -474,21 +474,21 @@ TYPED_TEST(Vec2ScalarDivision, SafeDiv_ReturnsVectorWithDividedComponents)
 }
 
 
-TYPED_TEST(Vec2ScalarDivision, SafeDiv_ByIntegralZero_ReturnsZeroVector)
+TYPED_TEST(Vec2ScalarDivisionTests, SafeDiv_ByIntegralZero_ReturnsZeroVector)
 {
     const auto result = this->_vec.safeDiv(0);
     EXPECT_VEC_ZERO(result);
 }
 
 
-TYPED_TEST(Vec2ScalarDivision, SafeDiv_ByFloatZero_ReturnsZeroVector)
+TYPED_TEST(Vec2ScalarDivisionTests, SafeDiv_ByFloatZero_ReturnsZeroVector)
 {
     const auto result = this->_vec.safeDiv(0.0f);
     EXPECT_VEC_ZERO(result);
 }
 
 
-TYPED_TEST(Vec2ScalarDivision, StaticWrapper_SafeDiv_ReturnsVectorWithDividedComponents)
+TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_SafeDiv_ReturnsVectorWithDividedComponents)
 {
     const auto result = fgm::Vec2<TypeParam>::safeDiv(this->_vec, this->_scalar);
     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
@@ -502,14 +502,14 @@ TEST(Vec2ScalarDivision, StaticWrapper_SafeDiv_ByIntergralZero_ReturnsZeroVector
 }
 
 
-TYPED_TEST(Vec2ScalarDivision, StaticWrapper_SafeDiv_ByFloatZero_ReturnsZeroVector)
+TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_SafeDiv_ByFloatZero_ReturnsZeroVector)
 {
     const auto result = fgm::Vec2<TypeParam>::safeDiv(this->_vec, 0.0f);
     EXPECT_VEC_ZERO(result);
 }
 
 
-TYPED_TEST(Vec2ScalarDivision, SafeDiv_ByNaN_ReturnsZeroVector)
+TYPED_TEST(Vec2ScalarDivisionTests, SafeDiv_ByNaN_ReturnsZeroVector)
 {
     const auto result = this->_vec.safeDiv(fgm::constants::NaN);
 
@@ -518,7 +518,7 @@ TYPED_TEST(Vec2ScalarDivision, SafeDiv_ByNaN_ReturnsZeroVector)
 
 
 
-TYPED_TEST(Vec2ScalarDivision, StaticWrapper_SafeDiv_ByNaN_ReturnsZeroVector)
+TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_SafeDiv_ByNaN_ReturnsZeroVector)
 {
     const auto result = fgm::Vec2<TypeParam>::safeDiv(this->_vec, fgm::constants::INFINITY_F);
 
@@ -535,7 +535,7 @@ TYPED_TEST(Vec2ScalarDivision, StaticWrapper_SafeDiv_ByNaN_ReturnsZeroVector)
  * @brief Verify that dividing a vector using @ref fgm::Vec2::tryDiv perform a component-wise divide and
  *       returns a new vector instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec2ScalarDivision, TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
+TYPED_TEST(Vec2ScalarDivisionTests, TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = this->_vec.tryDiv(this->_scalar, flag);
@@ -549,7 +549,7 @@ TYPED_TEST(Vec2ScalarDivision, TryDivide_ReturnsVectorWithDividedComponentsAndSe
  * @brief Verify that dividing a vector by integral zero using @ref fgm::Vec2::tryDiv returns zero vector and
  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Vec2ScalarDivision, TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = this->_vec.tryDiv(0, flag);
@@ -563,7 +563,7 @@ TYPED_TEST(Vec2ScalarDivision, TryDivideByIntegralZero_ReturnsZeroVectorAndSetsC
  * @brief Verify that dividing a vector by floating point zero using @ref fgm::Vec2::tryDiv returns zero vector and
  *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Vec2ScalarDivision, TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = this->_vec.tryDiv(0.0, flag);
@@ -589,7 +589,7 @@ TEST(Vec2ScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedenc
  * @brief Verify that dividing a vector by NaN using @ref fgm::Vec2::tryDiv returns a zero vector and
  *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TYPED_TEST(Vec2ScalarDivision, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = this->_vec.tryDiv(fgm::constants::NaN, flag);
@@ -604,7 +604,7 @@ TYPED_TEST(Vec2ScalarDivision, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFla
  *       perform a component-wise divide and returns a new vector instance and
  *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
  */
-TYPED_TEST(Vec2ScalarDivision, StaticWrapper_TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
+TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = fgm::Vec2<TypeParam>::tryDiv(this->_vec, this->_scalar, flag);
@@ -618,7 +618,7 @@ TYPED_TEST(Vec2ScalarDivision, StaticWrapper_TryDivide_ReturnsVectorWithDividedC
  * @brief Verify that dividing a vector by integral zero using static variant of @ref fgm::Vec2::tryDiv
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Vec2ScalarDivision, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = fgm::Vec2<TypeParam>::tryDiv(this->_vec, 0, flag);
@@ -632,7 +632,7 @@ TYPED_TEST(Vec2ScalarDivision, StaticWrapper_TryDivideByIntegralZero_ReturnsZero
  * @brief Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vec2::tryDiv
  *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
-TYPED_TEST(Vec2ScalarDivision, StaticWrapper_TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = fgm::Vec2<TypeParam>::tryDiv(this->_vec, 0.0, flag);
@@ -660,7 +660,7 @@ TEST(Vec2ScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSe
  * @brief Verify that dividing a vector by NaN using static variant of @ref fgm::Vec2::tryDiv returns zero vector
  * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
-TYPED_TEST(Vec2ScalarDivision, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
+TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {
     fgm::OperationStatus flag;
     const auto result = fgm::Vec2<TypeParam>::tryDiv(this->_vec, fgm::constants::NaN, flag);

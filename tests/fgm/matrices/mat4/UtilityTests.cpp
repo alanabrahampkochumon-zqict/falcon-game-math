@@ -159,7 +159,7 @@ namespace
      * @brief Test fixture for @ref fgm::Mat4 utilities, verifying across various integral types.
      */
     template <typename>
-    class Mat4UtilsIntTests: public ::testing::Test
+    class Mat4UtilsIntTests: public testing::Test
     {};
     TYPED_TEST_SUITE(Mat4UtilsIntTests, SupportedIntegralTypes);
 

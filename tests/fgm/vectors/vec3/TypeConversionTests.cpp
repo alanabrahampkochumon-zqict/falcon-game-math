@@ -48,7 +48,7 @@ namespace
 /**
  * @brief Verify that the conversion constructor correctly promotes components from float to double.
  */
-TEST(Vec3ConversionConstructor, PromotesType)
+TEST(Vec3TypeConversionTests, PromotesType)
 {
     const fgm::Vec3 vec1(3.0f, 1.0f, 6.0f);
 
@@ -59,7 +59,7 @@ TEST(Vec3ConversionConstructor, PromotesType)
 
 
 /** @brief Verify that the conversion constructor ensures deep-copy value semantics. */
-TEST(Vec3ConversionConstructor, ReturnsNewInstance)
+TEST(Vec3TypeConversionTests, ReturnsNewInstance)
 {
     // Given a float vector
     const fgm::Vec3 vec1(3.0f, 1.0f, 6.0f);
@@ -80,7 +80,7 @@ TEST(Vec3ConversionConstructor, ReturnsNewInstance)
 /**
  * @brief Verify that the conversion constructor correctly demotes components from double to float.
  */
-TEST(Vec3ConversionConstructor, DemotesType)
+TEST(Vec3TypeConversionTests, DemotesType)
 {
     const fgm::Vec3 vec1(3.0, 1.0, 6.0);
 
