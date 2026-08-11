@@ -53,7 +53,7 @@ namespace
     /**
      * @brief Test fixture for @ref fgm::Vec2 rejection with NaN vectors.
      */
-    class Vec2RejectionNaNTests: public ::testing::TestWithParam<fgm::Vec2<float>>
+    class Vec2RejectionNaNTests: public testing::TestWithParam<fgm::Vec2<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(Vec2RejectionTestSuite, Vec2RejectionNaNTests,
                              ::testing::Values(fgm::Vec2<float>(fgm::constants::NaN, 1.0f),

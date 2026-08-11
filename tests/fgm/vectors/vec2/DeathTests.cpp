@@ -1,84 +1,160 @@
-#ifdef ENABLE_DEBUG_TESTS
-class Vec2Indexing: public testing::TestWithParam<std::size_t>
-{};
-INSTANTIATE_TEST_SUITE_P(Vec2Tests, Vec2Indexing, testing::Values(3, 4, 100));
-#endif
+/**
+ * @file DeathTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: August 10, 2026
+ *
+ * @brief Verifies @ref fgm::Vec2 assertions in Debug Mode.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
 
 #ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vec2 out-of-bounds access triggers assert in debug mode. */
-TEST_P(Vec2Indexing, OutOfBoundAccessTriggersAssertInDebugMode)
+    #include "CommonSetup.h"
+
+    #include <fgm/vectors/Vec2.h>
+    #include <gtest/gtest.h>
+
+namespace
+{
+    /**************************************
+     *             TEST SETUP             *
+     **************************************/
+
+    /**
+     * @brief Test fixture for @ref Vec2 accessor.
+     */
+    class Vec2IndexingTests: public testing::TestWithParam<std::size_t>
+    {};
+    INSTANTIATE_TEST_SUITE_P(Vec2InvalidIndices, Vec2IndexingTests, testing::Values(3, 4, 100));
+
+
+
+    /**
+     * @brief Test fixture for @ref Vec2 scalar division.
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec2ScalarDivisionTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<T> _vec;
+        T _scalar;
+        fgm::Vec2<T> _expectedScaledVec;
+
+        void SetUp() override
+        {
+            _vec               = { T(17), T(31) };
+            _scalar            = T(13);
+            _expectedScaledVec = { T(1.30769230769230769231), T(2.38461538461538461538) };
+        }
+    };
+    TYPED_TEST_SUITE(Vec2ScalarDivisionTests, SupportedArithmeticTypes);
+
+
+    /**
+     * @brief Test fixture for @ref Vec2 normalization.
+     * @tparam T The scalar type (int, float, double...) of the vector components.
+     */
+    template <typename T>
+    class Vec2NormalizationTests: public testing::Test
+    {
+        using R = fgm::Magnitude<T>;
+
+    protected:
+        fgm::Vec2<T> _vec;
+        fgm::Vec2<R> _expectedUnitVec;
+
+        void SetUp() override
+        {
+            _vec             = { T(14), T(27) };
+            _expectedUnitVec = { static_cast<R>(0.46031716445500037), static_cast<R>(0.8877545314489294) };
+        }
+    };
+    TYPED_TEST_SUITE(Vec2NormalizationTests, SupportedArithmeticTypes);
+
+
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 projection.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
+    template <typename T>
+    class Vec2ProjectionTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<T> _vec;
+        fgm::Vec2<T> _perpendicularVec;
+        fgm::Vec2<T> _ontoVec;
+        fgm::Vec2<T> _expectedProjection;
+
+        void SetUp() override
+        {
+            _vec                = { T(4), T(0) };
+            _perpendicularVec   = { T(0), T(11) };
+            _ontoVec            = { T(2), T(0) };
+            _expectedProjection = { T(4), T(0) };
+        }
+    };
+    TYPED_TEST_SUITE(Vec2ProjectionTests, SupportedArithmeticTypes);
+
+
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 rejection.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
+    template <typename T>
+    class Vec2RejectionTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<T> _vec;
+        fgm::Vec2<T> _parallelVec;
+        fgm::Vec2<T> _fromVec;
+        fgm::Vec2<T> _expectedRejection;
+
+        void SetUp() override
+        {
+            _vec               = { T(4), T(0) };
+            _parallelVec       = { T(6), T(0) };
+            _fromVec           = { T(0), T(2) };
+            _expectedRejection = { T(4), T(0) };
+        }
+    };
+    TYPED_TEST_SUITE(Vec2RejectionTests, SupportedArithmeticTypes);
+
+} // namespace
+
+
+
+TEST_P(Vec2IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 {
     const fgm::Vec2 vec(1, 2);
     const auto index = GetParam();
     EXPECT_DEBUG_DEATH(vec[index], "");
 }
-#endif
 
 
-#ifdef ENABLE_DEBUG_TESTS
-/** @brief Verify that @ref fgm::Vec2 out-of-bounds mutation triggers assert in debug mode. */
-TEST_P(Vec2Indexing, OutOfBoundMutationTriggersAssertInDebugMode)
+TEST_P(Vec2IndexingTests, OutOfBoundMutationTriggers_AssertInDebugMode)
 {
     fgm::Vec2 vec(1, 2);
     const auto index = GetParam();
     EXPECT_DEBUG_DEATH(vec[index] = 2, "");
 }
-#endif
 
 
-
-/**************************************
- *        SCALAR DIVISION TESTS       *
- **************************************/
-
-#ifndef ENABLE_DEBUG_TESTS
-/**
- * @brief Verify that dividing a float vector by zero returns an
- *       infinity vector of float type.
- */
-TEST(Vec2ScalarDivision, FloatVectorDivisionByZeroReturnsInfinityVector)
-{
-    const fgm::Vec2 vec(1.0f, 3.0f);
-    EXPECT_VEC_INF(vec / 0);
-}
-
-
-/**
- * @brief Verify that dividing a double vector by zero returns an
- *       infinity vector of double type.
- */
-TEST(Vec2ScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
-{
-    const fgm::Vec2 vec(1.0, 3.0);
-    EXPECT_VEC_INF(vec / 0);
-}
-#endif
-
-
-#ifdef ENABLE_DEBUG_TESTS
-
-/**
- * @brief Verify that the binary division assignment operator when dividing a vector by zero,
- *        triggers assert in debug mode.
- */
-TYPED_TEST(Vec2ScalarDivision, DivideOperator_ByZeroTriggersAssertInDebugMode)
+TYPED_TEST(Vec2ScalarDivisionTests, DivideOperator_ByZeroTriggersAssertInDebugMode)
 { EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec / 0), ""); }
 
 
-/**
- * @brief Verify that the compound division assignment operator when dividing a vector by zero,
- *        triggers assert in debug mode.
- */
-TYPED_TEST(Vec2ScalarDivision, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
+TYPED_TEST(Vec2ScalarDivisionTests, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
 {
     [[maybe_unused]] fgm::Vec2 newVec = this->_vec;
     EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= 0), "");
 }
-#endif
-#ifdef ENABLE_DEBUG_TESTS
-/**
- * @brief Verify that normalizing a vector with zero magnitude triggers assert in debug mode.
- */
+
+
 TYPED_TEST(Vec2NormalizationTests, ZeroMagnitudeTriggersAssertInDebugMode)
 {
     const fgm::Vec2<TypeParam> zVec(0, 0);
@@ -86,22 +162,13 @@ TYPED_TEST(Vec2NormalizationTests, ZeroMagnitudeTriggersAssertInDebugMode)
 }
 
 
-/**
- * @brief Verify that normalizing a vector with zero magnitude using static variant of fgm::Vec2::normalize triggers
- *        assert in debug mode.
- */
 TYPED_TEST(Vec2NormalizationTests, StaticWrapper_ZeroMagnitudeTriggersAssertInDebugMode)
 {
     const fgm::Vec2<TypeParam> zVec(0, 0);
     EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec2<TypeParam>::normalize(zVec)), "");
 }
 
-#endif
 
-#ifdef ENABLE_DEBUG_TESTS
-/**
- * @brief Verify that projecting a vector onto zero vector triggers assert in debug mode.
- */
 TYPED_TEST(Vec2ProjectionTests, ProjectionOntoZeroVectorTriggersAssertionInCallback)
 {
     const fgm::Vec2<TypeParam> zeroVec(0, 0);
@@ -109,23 +176,12 @@ TYPED_TEST(Vec2ProjectionTests, ProjectionOntoZeroVectorTriggersAssertionInCallb
 }
 
 
-/**
- * @brief Verify that projecting a vector onto zero vector using static variant of @ref fgm::Vec2::project
- *        triggers assert in debug mode.
- */
 TYPED_TEST(Vec2ProjectionTests, StaticWrapper_ProjectionOntoZeroVectorTriggersAssertionInCallback)
 {
     const fgm::Vec2<TypeParam> zeroVec(0, 0);
     EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec2<TypeParam>::project(this->_vec, zeroVec)), "");
 }
 
-#endif
-
-
-#ifdef ENABLE_DEBUG_TESTS
-/**
- * @brief Verify that rejecting a vector from a zero vector triggers assert in debug mode.
- */
 TYPED_TEST(Vec2RejectionTests, FromZeroVectorTriggersAssertionInCallback)
 {
     const fgm::Vec2<TypeParam> zeroVec(0, 0);
@@ -133,10 +189,6 @@ TYPED_TEST(Vec2RejectionTests, FromZeroVectorTriggersAssertionInCallback)
 }
 
 
-/**
- * @brief Verify that rejecting a vector from a zero vector using static variant of @ref fgm::Vec2::reject
- *        triggers assert in debug mode.
- */
 TYPED_TEST(Vec2RejectionTests, StaticWrapper_FromZeroVectorTriggersAssertionInCallback)
 {
     const fgm::Vec2<TypeParam> zeroVec(0, 0);
@@ -144,4 +196,3 @@ TYPED_TEST(Vec2RejectionTests, StaticWrapper_FromZeroVectorTriggersAssertionInCa
 }
 
 #endif
-

@@ -42,10 +42,6 @@ target_precompile_headers(
         FGMCommonTests
 )
 
-
-include(GoogleTest)
-gtest_discover_tests(FGMVectorTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
-
 set_target_properties(
         Point2Tests
         Point3Tests
@@ -54,3 +50,43 @@ set_target_properties(
         Vec4Tests
         PROPERTIES FOLDER "Test Intermediates/FGM"
 )
+
+###########################
+### DEATH TESTS
+add_executable(FGMVectorDeathTests
+        vec2/DeathTests.cpp
+)
+set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FGMVectorDeathTests PROPERTIES CXX_EXTENSIONS OFF)
+
+target_sources(
+        FGMVectorDeathTests
+
+        PRIVATE
+        FILE_SET HEADERS
+        BASE_DIRS ${FGM_ROOT_INCLUDE_DIR}
+        FILES
+        ${SetupHeaderFiles}
+        ${TestUtilities}
+)
+
+target_compile_options(FGMVectorDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
+
+target_link_libraries(
+        FGMVectorDeathTests
+        PRIVATE
+        FGMTestSetup
+)
+
+target_precompile_headers(
+        FGMVectorDeathTests
+        REUSE_FROM
+        FGMCommonTests
+)
+
+
+include(GoogleTest)
+gtest_discover_tests(FGMVectorTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+gtest_discover_tests(FGMVectorDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+

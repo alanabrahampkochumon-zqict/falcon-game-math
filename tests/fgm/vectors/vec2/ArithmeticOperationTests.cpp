@@ -723,6 +723,29 @@ TEST_P(Vec2DivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponents
 }
 
 
+#ifndef ENABLE_DEBUG_TESTS
+/**
+ * @brief Verify that dividing a float vector by zero returns an
+ *        infinity vector of float type.
+ */
+TEST(Vec2ScalarDivisionTests, FloatVectorDivisionByZeroReturnsInfinityVector)
+{
+    const fgm::Vec2 vec(1.0f, 3.0f);
+    EXPECT_VEC_INF(vec / 0);
+}
+
+
+/**
+ * @brief Verify that dividing a double vector by zero returns an
+ *        infinity vector of double type.
+ */
+TEST(Vec2ScalarDivisionTests, DoubleVectorDivisionByZeroReturnsInfinityVector)
+{
+    const fgm::Vec2 vec(1.0, 3.0);
+    EXPECT_VEC_INF(vec / 0);
+}
+#endif
+
 
 /**************************************
  *              NEGATION              *
