@@ -207,8 +207,6 @@ namespace
     } // namespace static_tests
 
 } // namespace
-} // namespace
-
 
 
 
