@@ -23,18 +23,7 @@ target_precompile_headers(
         <type_traits>
 )
 
-target_link_libraries(
-        FalconSIMDTestSuite
-        PRIVATE
-        FalconSIMD
-        GTest::gtest
-        GTest::gtest_main # googletest
-        StrictWarnings
-        ProjectSanitizers
-
-        FalconSIMDUtilTests
-        # NonComprehensiveTestMode
-)
+target_link_libraries(FalconSIMDTestSuite PRIVATE FalconSimdTestSetup)
 
 target_include_directories(
         FalconSIMDTestSuite

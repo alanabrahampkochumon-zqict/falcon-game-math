@@ -2,19 +2,16 @@
 option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
 
 # Add Project Sanitizers to Gtest
-if (TARGET gtest)
+if (TARGET gtest AND (FGM_TESTS OR FALCON_SIMD_TESTS))
     target_link_libraries(gtest PRIVATE ProjectSanitizers)
     target_link_libraries(gmock PRIVATE ProjectSanitizers)
     target_link_libraries(gtest_main PRIVATE ProjectSanitizers)
 endif ()
 
-add_subdirectory(fgm)
-add_subdirectory(falcon_simd)
 
 #----------------------------------
 # Falcon Game Math(FGM) Test Setup
 #----------------------------------
-
 add_library(FGMTestSetup INTERFACE)
 target_link_libraries(FGMTestSetup INTERFACE
         FGM
@@ -30,11 +27,15 @@ if (NONCOMPREHENSIVE)
     target_compile_definitions(FGMTestSetup INTERFACE NONCOMPREHENSIVE)
 endif ()
 
+if (FGM_TESTS)
+    message("[FGM]: Game Math Tests are enabled")
+    add_subdirectory(fgm)
+endif ()
+
 
 #----------------------------------
 # Falcon SIMD Test Setup
 #----------------------------------
-
 add_library(FalconSimdTestSetup INTERFACE)
 target_link_libraries(FalconSimdTestSetup INTERFACE
         FalconSIMD
@@ -46,3 +47,8 @@ target_link_libraries(FalconSimdTestSetup INTERFACE
 # TODO: Add simd vectorization flags to this project
 
 # AddSIMDCompilerFlag(FGMTestSuite)
+
+if (FALCON_SIMD_TESTS)
+    message("[FGM]: SIMD tests are enabled")
+    add_subdirectory(falcon_simd)
+endif ()

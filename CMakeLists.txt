@@ -55,10 +55,8 @@ endif ()
 # Core Library
 add_subdirectory(include)
 
-if (FGM_TESTS)
-    message("[FGM]: Tests are enabled")
-    add_subdirectory(tests)
-endif ()
+# Test enabling is handled in tests CML per project
+add_subdirectory(tests)
 
 if (FGM_BENCHMARK)
     message("[FGM]: Benchmarks are enabled")
