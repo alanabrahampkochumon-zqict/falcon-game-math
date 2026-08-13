@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Vectorization(SIMD) Tests
 
 on:
     push:
