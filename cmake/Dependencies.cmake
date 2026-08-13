@@ -40,7 +40,7 @@ FetchContent_Declare(
 )
 
 # Test Harness Dependencies
-if (FGM_TESTS)
+if (FGM_TESTS OR FALCON_SIMD_TESTS)
     FetchContent_MakeAvailable(googletest)
     # Group google_test projects into a "Gtest" folder
     set_target_properties(
