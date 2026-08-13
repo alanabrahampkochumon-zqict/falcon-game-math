@@ -11,7 +11,10 @@ endif ()
 add_subdirectory(fgm)
 add_subdirectory(falcon_simd)
 
-# Add test setup library to make the linking per subdirectory target easy
+#----------------------------------
+# Falcon Game Math(FGM) Test Setup
+#----------------------------------
+
 add_library(FGMTestSetup INTERFACE)
 target_link_libraries(FGMTestSetup INTERFACE
         FGM
@@ -22,10 +25,24 @@ target_link_libraries(FGMTestSetup INTERFACE
 )
 target_compile_definitions(FGMTestSetup INTERFACE $<$<CONFIG:Debug>:ENABLE_DEBUG_TESTS>)
 
-# TODO: Update Falcon SIMD to use a similar TEST SETUP
 if (NONCOMPREHENSIVE)
     message(STATUS "[FGM]: Running only non-comprehensive tests")
     target_compile_definitions(FGMTestSetup INTERFACE NONCOMPREHENSIVE)
 endif ()
+
+
+#----------------------------------
+# Falcon SIMD Test Setup
+#----------------------------------
+
+add_library(FalconSimdTestSetup INTERFACE)
+target_link_libraries(FalconSimdTestSetup INTERFACE
+        FalconSIMD
+        GTest::gtest
+        GTest::gtest_main
+        StrictWarnings
+        ProjectSanitizers
+)
+# TODO: Add simd vectorization flags to this project
 
 # AddSIMDCompilerFlag(FGMTestSuite)
