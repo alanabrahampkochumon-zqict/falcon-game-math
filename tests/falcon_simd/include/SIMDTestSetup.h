@@ -11,7 +11,7 @@
 
 
 #include <cstdint>
-#include <falcon_simd/SIMD.h>
+#include <falcon_simd/Simd.h>
 #include <gtest/gtest.h>
 
 

@@ -3,11 +3,7 @@ include_guard()
 
 set(FALCON_SIMD_DIR ${LIBRARY_ROOT_DIR}/falcon_simd/)
 set(FALCON_SIMD_ROOT_HEADERS
-        SIMD.h
-        SIMD.tpp
-        SIMDMemory.h
-        SIMDMemory.tpp
-        FalconSimd.h
+        Simd.h
 
         memory/Simd128.h
 

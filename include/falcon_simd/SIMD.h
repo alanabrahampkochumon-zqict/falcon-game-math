@@ -110,3 +110,7 @@ inline constexpr size_t ALIGNMENT          = 16;
 inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_UNKNOWN;
 
 #endif
+
+
+/// Library Includes
+#include "memory/Simd128.h"

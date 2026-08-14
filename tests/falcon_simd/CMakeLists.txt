@@ -8,7 +8,8 @@ add_subdirectory(utils)
 target_sources(
         FalconSIMDTestSuite
         PRIVATE
-        RegisterTypeTests.cpp
+        SimdTests.cpp
+        #        RegisterTypeTests.cpp
 )
 
 target_compile_options(FalconSIMDTestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
