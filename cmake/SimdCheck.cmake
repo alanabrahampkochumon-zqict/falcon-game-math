@@ -40,10 +40,13 @@ function(AddCompilerFlag Target Config)
                 AVX512_COMPILES
                 ${TEST_COMPILE_DIR}
                 "${TEST_PROG_DIR}/AVX512Test.cpp"
-                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
-                COMPILE_OPTIONS ${TEST_FLAG_AVX512}
-                RUN_OUTPUT_VARIABLE AVX512_COMPILER_OUTPUT
+                CMAKE_FLAGS
+                "-DCMAKE_CXX_STANDARD=17"
+                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_AVX512}"
+                COMPILE_DEFINITIONS ${TEST_FLAG_AVX512}
+                COMPILE_OUTPUT_VARIABLE AVX512_COMPILE_OUTPUT
         )
+        message(STATUS "AVX512 RUN OUT: ${AVX512_RUN_OUTPUT} COMPILE OUTPUT: ${AVX512_COMPILE_OUTPUT} TEST FLAG: ${TEST_FLAG_AVX512}")
         if (AVX512_RUNS EQUAL 0)
             message(STATUS "AVX512 detection success!")
         else ()
@@ -57,7 +60,7 @@ function(AddCompilerFlag Target Config)
         #                    "${PROJECT_SOURCE_DIR}/TestPrograms/build"
         #                    "${TEST_PROG_DIR}/AVX10Test.cpp"
         #                    CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
-        #                    RUN_OUTPUT_VARIABLE AVX10_COMPILER_OUTPUT
+        #                    RUN_OUTPUT_VARIABLE AVX10_RUN_OUTPUT
         #            )
 
         message(STATUS "Running AVX2 Tests")
@@ -66,9 +69,10 @@ function(AddCompilerFlag Target Config)
                 AVX2_COMPILES
                 ${TEST_COMPILE_DIR}
                 "${TEST_PROG_DIR}/AVX2Test.cpp"
-                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
-                COMPILE_OPTIONS ${TEST_FLAG_AVX2}
-                RUN_OUTPUT_VARIABLE AVX2_COMPILER_OUTPUT
+                CMAKE_FLAGS
+                "-DCMAKE_CXX_STANDARD=17"
+                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_AVX2}"
+                COMPILE_DEFINITIONS ${TEST_FLAG_AVX2}
         )
         if (AVX2_RUNS EQUAL 0)
             message(STATUS "AVX2 detection success!")
@@ -82,9 +86,10 @@ function(AddCompilerFlag Target Config)
                 AVX_COMPILES
                 ${TEST_COMPILE_DIR}
                 "${TEST_PROG_DIR}/AVXTest.cpp"
-                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
-                COMPILE_OPTIONS ${TEST_FLAG_AVX}
-                RUN_OUTPUT_VARIABLE AVX_COMPILER_OUTPUT
+                CMAKE_FLAGS
+                "-DCMAKE_CXX_STANDARD=17"
+                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_AVX}"
+                COMPILE_DEFINITIONS ${TEST_FLAG_AVX}
         )
         if (AVX_RUNS EQUAL 0)
             message(STATUS "AVX detection success!")
@@ -98,9 +103,10 @@ function(AddCompilerFlag Target Config)
                 SSE4_COMPILES
                 ${TEST_COMPILE_DIR}
                 "${TEST_PROG_DIR}/SSE4Test.cpp"
-                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
-                COMPILE_OPTIONS ${TEST_FLAG_SSE4}
-                RUN_OUTPUT_VARIABLE SSE4_COMPILER_OUTPUT
+                CMAKE_FLAGS
+                "-DCMAKE_CXX_STANDARD=17"
+                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_SSE4}"
+                COMPILE_DEFINITIONS ${TEST_FLAG_SSE4}
         )
         if (SSE4_RUNS EQUAL 0)
             message(STATUS "SSE4 detection success!")
@@ -114,9 +120,10 @@ function(AddCompilerFlag Target Config)
                 SSE2_COMPILES
                 ${TEST_COMPILE_DIR}
                 "${TEST_PROG_DIR}/SSETest.cpp"
-                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
-                COMPILE_OPTIONS ${TEST_FLAG_SSE2}
-                RUN_OUTPUT_VARIABLE SSE2_COMPILER_OUTPUT
+                CMAKE_FLAGS
+                "-DCMAKE_CXX_STANDARD=17"
+                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_SSE2}"
+                COMPILE_DEFINITIONS ${TEST_FLAG_SSE2}
         )
         if (SSE2_RUNS EQUAL 0)
             message(STATUS "SSE2 detection success!")
@@ -130,8 +137,8 @@ function(AddCompilerFlag Target Config)
                 NEON_COMPILES
                 ${TEST_COMPILE_DIR}
                 "${TEST_PROG_DIR}/NeonTest.cpp"
-                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
-                RUN_OUTPUT_VARIABLE NEON_COMPILER_OUTPUT
+                CMAKE_FLAGS
+                "-DCMAKE_CXX_STANDARD=17"
         )
         if (NEON_RUNS EQUAL 0)
             message(STATUS "Neon detection success!")
