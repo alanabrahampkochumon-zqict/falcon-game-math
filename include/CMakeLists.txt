@@ -39,6 +39,7 @@ target_link_libraries(FGM INTERFACE
 ###############
 
 include(falcon_simd/FalconSimd.cmake)
+message(STATUS ${FALCON_SIMD_HEADERS})
 add_library(FalconSIMD INTERFACE ${FALCON_SIMD_HEADERS})
 target_compile_features(FalconSIMD INTERFACE cxx_std_20)
 

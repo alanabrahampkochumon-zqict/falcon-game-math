@@ -44,9 +44,7 @@ function(AddCompilerFlag Target Config)
                 "-DCMAKE_CXX_STANDARD=17"
                 "-DCMAKE_CXX_FLAGS=${TEST_FLAG_AVX512}"
                 COMPILE_DEFINITIONS ${TEST_FLAG_AVX512}
-                COMPILE_OUTPUT_VARIABLE AVX512_COMPILE_OUTPUT
         )
-        message(STATUS "AVX512 RUN OUT: ${AVX512_RUN_OUTPUT} COMPILE OUTPUT: ${AVX512_COMPILE_OUTPUT} TEST FLAG: ${TEST_FLAG_AVX512}")
         if (AVX512_RUNS EQUAL 0)
             message(STATUS "AVX512 detection success!")
         else ()
