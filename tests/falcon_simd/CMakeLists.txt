@@ -32,6 +32,8 @@ target_include_directories(
         include
 )
 
+AddCompilerFlag(FalconSIMDTestSuite AUTO) # Update to compile an executable per flag
+
 
 include(GoogleTest)
 gtest_discover_tests(FalconSIMDTestSuite DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)

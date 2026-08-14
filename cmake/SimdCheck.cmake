@@ -55,88 +55,176 @@ set(SIMD_SSE_PROG "
 include(CheckCXXSourceRuns)
 include(CheckCXXCompilerFlag)
 
+set(TEST_PROG_DIR "${PROJECT_SOURCE_DIR}/cmake/TestPrograms/")
+set(TEST_COMPILE_DIR "${PROJECT_SOURCE_DIR}/cmake/TestPrograms/build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_BUILD_TYPE}")
+
+
 function(AddCompilerFlag Target Config)
+    #--------------------------
+    # AUTO SIMD FLAG DETECTION
+    #--------------------------
     if (Config STREQUAL "AUTO")
-        # Detect CPU ISA Automatically
-        if (SYSTEM_ARCH MATCHES "x86_64|amd64|i386|i686")
-            message("Detected x64 Architecture. Running tests to detect max supported SIMD")
-            try_run(
-                    AVX512_RUNS
-                    AVX512_COMPILES
-                    "${CMAKE_CURRENT_BINARY_DIR}/TestPrograms/build"
-                    "${CMAKE_CURRENT_SOURCE_DIR}/AVX512Test.cpp"
-                    RUN_OUTPUT_VARIABLE AVX512_COMPILER_OUTPUT
-            )
-            try_run(
-                    AVX10_RUNS
-                    AVX10_COMPILES
-                    "${CMAKE_CURRENT_BINARY_DIR}/TestPrograms/build"
-                    "${CMAKE_CURRENT_SOURCE_DIR}/AVX10Test.cpp"
-                    RUN_OUTPUT_VARIABLE AVX10_COMPILER_OUTPUT
-            )
-            try_run(
-                    AVX2_RUNS
-                    AVX2_COMPILES
-                    "${CMAKE_CURRENT_BINARY_DIR}/TestPrograms/build"
-                    "${CMAKE_CURRENT_SOURCE_DIR}/AVX2Test.cpp"
-                    RUN_OUTPUT_VARIABLE AVX2_COMPILER_OUTPUT
-            )
-            try_run(
-                    AVX_RUNS
-                    AVX_COMPILES
-                    "${CMAKE_CURRENT_BINARY_DIR}/TestPrograms/build"
-                    "${CMAKE_CURRENT_SOURCE_DIR}/AVXTest.cpp"
-                    RUN_OUTPUT_VARIABLE AVX_COMPILER_OUTPUT
-            )
-            try_run(
-                    SSE4_RUNS
-                    SSE4_COMPILES
-                    "${CMAKE_CURRENT_BINARY_DIR}/TestPrograms/build"
-                    "${CMAKE_CURRENT_SOURCE_DIR}/SSE4Test.cpp"
-                    RUN_OUTPUT_VARIABLE SSE4_COMPILER_OUTPUT
-            )
-            try_run(
-                    SSE2_RUNS
-                    SSE2_COMPILES
-                    "${CMAKE_CURRENT_BINARY_DIR}/TestPrograms/build"
-                    "${CMAKE_CURRENT_SOURCE_DIR}/SSE2Test.cpp"
-                    RUN_OUTPUT_VARIABLE SSE4_COMPILER_OUTPUT
-            )
-        elseif (SYSTEM_ARCH MATCHES "arm|aarch64")
-            message("Detected ARM Architecture. Running tests to detect max supported SIMD")
-            try_run(
-                    NEON_RUNS
-                    NEON_COMPILES
-                    "${CMAKE_CURRENT_BINARY_DIR}/TestPrograms/build"
-                    "${CMAKE_CURRENT_SOURCE_DIR}/NeonTest.cpp"
-                    RUN_OUTPUT_VARIABLE NEON_COMPILER_OUTPUT
-            )
+
+        #----------------------------------------
+        # SETUP COMPILER FLAGS FOR TEST PROGRAMS
+        #----------------------------------------
+        if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+            set(TEST_FLAG_AVX512 "/arch:AVX512")
+            set(TEST_FLAG_AVX2 "/arch:AVX2")
+            set(TEST_FLAG_AVX "/arch:AVX")
+            set(TEST_FLAG_SSE4 "")
+            set(TEST_FLAG_SSE2 "")
+        else ()
+            # GCC / Clang / AppleClang
+            set(TEST_FLAG_AVX512 "-mavx512f")
+            set(TEST_FLAG_AVX2 "-mavx2")
+            set(TEST_FLAG_AVX "-mavx")
+            set(TEST_FLAG_SSE4 "-msse4.2")
+            set(TEST_FLAG_SSE2 "-msse2")
         endif ()
-        if (AVX512_RUNS)
+
+        #-------------------
+        # TEST PROGRAM RUNS
+        #-------------------
+        message(STATUS "Running AVX512 Tests")
+        try_run(
+                AVX512_RUNS
+                AVX512_COMPILES
+                ${TEST_COMPILE_DIR}
+                "${TEST_PROG_DIR}/AVX512Test.cpp"
+                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
+                COMPILE_OPTIONS ${TEST_FLAG_AVX512}
+                RUN_OUTPUT_VARIABLE AVX512_COMPILER_OUTPUT
+        )
+        if (AVX512_RUNS EQUAL 0)
+            message(STATUS "AVX512 detection success!")
+        else ()
+            message(STATUS "AVX512 detection failed!")
+        endif ()
+
+        # AVX10 Has to be manually enabled
+        #            try_run(
+        #                    AVX10_RUNS
+        #                    AVX10_COMPILES
+        #                    "${PROJECT_SOURCE_DIR}/TestPrograms/build"
+        #                    "${TEST_PROG_DIR}/AVX10Test.cpp"
+        #                    CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
+        #                    RUN_OUTPUT_VARIABLE AVX10_COMPILER_OUTPUT
+        #            )
+
+        message(STATUS "Running AVX2 Tests")
+        try_run(
+                AVX2_RUNS
+                AVX2_COMPILES
+                ${TEST_COMPILE_DIR}
+                "${TEST_PROG_DIR}/AVX2Test.cpp"
+                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
+                COMPILE_OPTIONS ${TEST_FLAG_AVX2}
+                RUN_OUTPUT_VARIABLE AVX2_COMPILER_OUTPUT
+        )
+        if (AVX2_RUNS EQUAL 0)
+            message(STATUS "AVX2 detection success!")
+        else ()
+            message(STATUS "AVX2 detection failed!")
+        endif ()
+
+        message(STATUS "Running AVX Tests")
+        try_run(
+                AVX_RUNS
+                AVX_COMPILES
+                ${TEST_COMPILE_DIR}
+                "${TEST_PROG_DIR}/AVXTest.cpp"
+                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
+                COMPILE_OPTIONS ${TEST_FLAG_AVX}
+                RUN_OUTPUT_VARIABLE AVX_COMPILER_OUTPUT
+        )
+        if (AVX_RUNS EQUAL 0)
+            message(STATUS "AVX detection success!")
+        else ()
+            message(STATUS "AVX detection failed!")
+        endif ()
+
+        message(STATUS "Running SSE4 Tests")
+        try_run(
+                SSE4_RUNS
+                SSE4_COMPILES
+                ${TEST_COMPILE_DIR}
+                "${TEST_PROG_DIR}/SSE4Test.cpp"
+                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
+                COMPILE_OPTIONS ${TEST_FLAG_SSE4}
+                RUN_OUTPUT_VARIABLE SSE4_COMPILER_OUTPUT
+        )
+        if (SSE4_RUNS EQUAL 0)
+            message(STATUS "SSE4 detection success!")
+        else ()
+            message(STATUS "SSE4 detection failed!")
+        endif ()
+
+        message(STATUS "Running SSE2 Tests")
+        try_run(
+                SSE2_RUNS
+                SSE2_COMPILES
+                ${TEST_COMPILE_DIR}
+                "${TEST_PROG_DIR}/SSETest.cpp"
+                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
+                COMPILE_OPTIONS ${TEST_FLAG_SSE2}
+                RUN_OUTPUT_VARIABLE SSE2_COMPILER_OUTPUT
+        )
+        if (SSE2_RUNS EQUAL 0)
+            message(STATUS "SSE2 detection success!")
+        else ()
+            message(STATUS "SSE2 detection failed!")
+        endif ()
+
+        message(STATUS "Running ARM Neon Tests")
+        try_run(
+                NEON_RUNS
+                NEON_COMPILES
+                ${TEST_COMPILE_DIR}
+                "${TEST_PROG_DIR}/NeonTest.cpp"
+                CMAKE_FLAGS "-DCMAKE_CXX_STANDARD=17"
+                RUN_OUTPUT_VARIABLE NEON_COMPILER_OUTPUT
+        )
+        if (NEON_RUNS EQUAL 0)
+            message(STATUS "Neon detection success!")
+        else ()
+            message(STATUS "Neon detection failed!")
+        endif ()
+
+
+        #-----------------------------------------------
+        # CONFIGURING CONFIG FLAG BASED ON PROGRAM RUNS
+        #-----------------------------------------------
+        if (AVX512_RUNS EQUAL 0)
             set(Config FALCON_ENABLE_AVX512)
-        elseif (AVX10_RUNS)
-            set(Config FALCON_ENABLE_AVX10)
-        elseif (AVX2_RUNS)
+            #        elseif (AVX10_RUNS)
+            #            set(Config FALCON_ENABLE_AVX10)
+        elseif (AVX2_RUNS EQUAL 0)
             set(Config FALCON_ENABLE_AVX2)
-        elseif (AVX_RUNS)
+        elseif (AVX_RUNS EQUAL 0)
             set(Config FALCON_ENABLE_AVX)
-        elseif (SSE4_RUNS)
+        elseif (SSE4_RUNS EQUAL 0)
             set(Config FALCON_ENABLE_SSE4)
-        elseif (SSE2_RUNS)
+        elseif (SSE2_RUNS EQUAL 0)
             set(Config FALCON_ENABLE_SSE2)
-        elseif (NEON_RUNS)
+        elseif (NEON_RUNS EQUAL 0)
             set(Config FALCON_ENABLE_NEON)
         else ()
             set(Config FALCON_DISABLE_SIMD)
         endif ()
     endif ()
+
+
+    #----------------------
+    # SETUP COMPILER FLAGS
+    #----------------------
     if (Config STREQUAL "FALCON_ENABLE_AVX512")
         set(MSVCCompilerFlag "/arch:AVX512")
         set(CompilerFlag "-mavx512f")
         message(STATUS "Turned on AVX512")
     elseif (Config STREQUAL "FALCON_ENABLE_AVX10")
-        set(MSVCCompilerFlag "/arch:AVX10")
-        set(CompilerFlag "-mavx10")
+        set(MSVCCompilerFlag "/arch:AVX10.1")
+        set(CompilerFlag "-mavx10.1")
         message(STATUS "Turned on AVX10")
     elseif (Config STREQUAL "FALCON_ENABLE_AVX2")
         set(MSVCCompilerFlag "/arch:AVX2")
@@ -160,20 +248,26 @@ function(AddCompilerFlag Target Config)
         set(CompilerFlag "-msse2")
         message(STATUS "Turned on SSE2")
     elseif (Config STREQUAL "FALCON_ENABLE_NEON")
-        set(CompilerFlag "-fvectorize")
+        # AARCH64 comes with Neon Mandatory so need to switch flags
         message(STATUS "Turned on ARM Neon")
     elseif (Config STREQUAL "FALCON_DISABLE_SIMD")
-        message(STATUS "[FGM]: SIMD is disabled.")
+        message(STATUS "SIMD is disabled.")
     else ()
         message(WARNING "Unsupported SIMD Flag. Refer docs for supported flags, or use 'AUTO' for automatically detecting based on system.")
         return() # Returning so that the flag will not get added!
     endif ()
+
+
+    #-------------------------
+    # INJECT FLAGS AND MACROS
+    #-------------------------
+
     if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-        target_compile_options(Target PUBLIC ${MSVCCompileFlag})
-    elseif ()
-        target_compile_options(Target PUBLIC ${CompileFlag})
+        target_compile_options(${Target} PUBLIC ${MSVCCompilerFlag})
+    else ()
+        target_compile_options(${Target} PUBLIC ${CompilerFlag})
     endif ()
-    target_compile_definitions(Target PUBLIC ${Config})
+    target_compile_definitions(${Target} PUBLIC ${Config})
 endfunction()
 
 
