@@ -1,63 +1,11 @@
 include_guard()
 
-cmake_host_system_information(
-        RESULT CPU_NAME
-        QUERY PROCESSOR_NAME
-)
-
-set(SIMD_AVX512_PROG "
-    #include <immintrin.h>
-
-    int main()
-    {
-        float data[16] = {0};
-        __m512 a = _mm512_setzero_ps();
-        _mm512_storeu_ps(data, a);
-        return 0;
-    }
-")
-
-set(SIMD_AVX2_PROG "
-    #include <immintrin.h>
-
-    int main() {
-        __m256i data = _mm256_setzero_si256();
-        __m256i result = _mm256_abs_epi32(data); // AVX2 specific intrinsic for calculating absolute value of integers
-        (void)result;
-        return 0;
-    }
-")
-
-set(SIMD_AVX_PROG "
-    #include <immintrin.h>
-
-    int main()
-    {
-        float data[8] = {0};
-        __m256 a = _mm256_setzero_ps();
-        _mm256_storeu_ps(data, a);
-        return 0;
-    }
-")
-
-set(SIMD_SSE_PROG "
-    #include <xmmintrin.h>
-
-    int main()
-    {
-        float data[4] = {0};
-        __m128 a = _mm_setzero_ps();
-        _mm_storeu_ps(data, a);
-        return 0;
-    }
-")
-
 include(CheckCXXSourceRuns)
 include(CheckCXXCompilerFlag)
 
 set(TEST_PROG_DIR "${PROJECT_SOURCE_DIR}/cmake/TestPrograms/")
-set(TEST_COMPILE_DIR "${PROJECT_SOURCE_DIR}/cmake/TestPrograms/build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_BUILD_TYPE}")
-
+string(RANDOM RANDOM_STR) # Random Suffix is required since the program same config like Clang-Debug LHS may try to access the same variable
+set(TEST_COMPILE_DIR "${PROJECT_SOURCE_DIR}/cmake/TestPrograms/build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_BUILD_TYPE}-${RANDOM_STR}")
 
 function(AddCompilerFlag Target Config)
     #--------------------------
@@ -68,7 +16,7 @@ function(AddCompilerFlag Target Config)
         #----------------------------------------
         # SETUP COMPILER FLAGS FOR TEST PROGRAMS
         #----------------------------------------
-        if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        if (MSVC)
             set(TEST_FLAG_AVX512 "/arch:AVX512")
             set(TEST_FLAG_AVX2 "/arch:AVX2")
             set(TEST_FLAG_AVX "/arch:AVX")
@@ -191,7 +139,12 @@ function(AddCompilerFlag Target Config)
             message(STATUS "Neon detection failed!")
         endif ()
 
-
+        message(STATUS "COMPILATION")
+        message(STATUS "SSE2 ${SSE2_COMPILES}")
+        message(STATUS "SSE4 ${SSE4_COMPILES}")
+        message(STATUS "AVX ${AVX_COMPILES}")
+        message(STATUS "AVX2 ${AVX2_COMPILES}")
+        message(STATUS "AVX512 ${AVX512_COMPILES}")
         #-----------------------------------------------
         # CONFIGURING CONFIG FLAG BASED ON PROGRAM RUNS
         #-----------------------------------------------
@@ -269,61 +222,3 @@ function(AddCompilerFlag Target Config)
     endif ()
     target_compile_definitions(${Target} PUBLIC ${Config})
 endfunction()
-
-
-function(AddSIMDCompilerFlag Target)
-    string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" SYSTEM_ARCH)
-
-    # Arm
-    if (SYSTEM_ARCH MATCHES "arm|aarch64")
-        message(STATUS "Detected ARM Architecture. Enabling NEON...")
-        return()
-    endif ()
-
-    if (NOT SYSTEM_ARCH MATCHES "x86_64|amd64|i386|i686")
-        message(WARNING "Unknown Architecture: ${SYSTEM_ARCH}. Disabling SIMD.")
-        return()
-    endif ()
-
-    message(CHECK_START "Running x86 SIMD checks for ${CPU_NAME}")
-
-    set(ProgramNames "SIMD_AVX512_PROG;SIMD_AVX2_PROG;SIMD_AVX_PROG;SIMD_SSE_PROG")
-    set(Architectures "AVX-512;AVX2;AVX;SSE")
-
-    if (MSVC)
-        check_cxx_compiler_flag("/arch:SSE2" COMPILER_SUPPORTS_SSE)
-        set(CompilerFlags "/arch:AVX512;/arch:AVX2;/arch:AVX")
-        if (COMPILER_SUPPORTS_SSE)
-            list(APPEND CompilerFlags "/arch:SSE2")
-        else ()
-            list(APPEND CompilerFlags " ")
-        endif ()
-    else ()
-        set(CompilerFlags "-mavx512f;-mavx2;-mavx;-msse4.2")
-    endif ()
-
-    set(SIMDSupported False)
-    foreach (i RANGE 3)
-        list(GET CompilerFlags ${i} Flag)
-        list(GET ProgramNames ${i} ProgName)
-        list(GET Architectures ${i} Arch)
-        set(Program "${${ProgName}}")
-
-        set(CMAKE_REQUIRED_FLAGS ${Flag})
-        message(STATUS "Running checks for ${Arch}...")
-        check_cxx_source_runs("${Program}" HAS_${Arch})
-        unset(CMAKE_REQUIRED_FLAGS)
-
-        if (HAS_${Arch})
-            target_compile_options(
-                    ${Target} PRIVATE ${Flag}
-            )
-            message(CHECK_PASS "${CPU_NAME} supports ${Arch}. Enabling ${Arch}...")
-            set(SIMDSupported True)
-            break()
-        endif ()
-    endforeach ()
-    if (NOT (SIMDSupported))
-        message(CHECK_FAIL "${CPU_NAME} doesn't support SIMD instruction set")
-    endif ()
-endfunction(AddSIMDCompilerFlag)
