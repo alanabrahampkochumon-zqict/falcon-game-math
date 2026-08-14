@@ -17,13 +17,27 @@ High performance math library written in modern C++. *Requires C++20 or above*
 - **FGM_DOCS**: Enables FGM Documentation Generation.
 - **FGM_STRICT_MODE**: Enables Strict Warnings, treating warnings as errors.
 - **FGM_ASAN**: Enables Address Sanitizer in Strict Mode.
-- **FGM_FORCE_LEFT_HANDED**: Switches Library to use Left Handed Coordinate System(Right-Handed by default).
+- **FGM_FORCE_LEFT_HANDED**: Switches Library to use Left Handed Coordinate System (Right-Handed by default).
 
 ### Testing and Benchmarks
 
 - **FGM_BENCHMARK**: Enables FGM Benchmark Suite.
 - **FGM_TESTS**: Enable FGM Unit Tests.
 - **NONCOMPREHENSIVE**: Run unit tests with essential type matrix only.
+
+### SIMD
+
+The flag is currently only available for testing targets and will need to be defined per target using the
+`AddSimdCompilerFlag` CMake function.
+
+- **AUTO**: Automatically detect SIMD based on the host machine.
+- **FALCON_ENABLE_AVX512**: Enables AVX512 support.
+- **FALCON_ENABLE_AVX10**: Enables AVX10.1 support. *No auto-detect available*
+- **FALCON_ENABLE_AVX2**: Enables AVX2 support.
+- **FALCON_ENABLE_AVX**: Enables AVX support.
+- **FALCON_ENABLE_SSE4**: Enables SSE4 support.
+- **FALCON_ENABLE_SSE2**: Enables SSE2 support.
+- **FALCON_DISABLE_SIMD**: Disables SIMD.
 
 ## How to run
 
@@ -37,12 +51,10 @@ High performance math library written in modern C++. *Requires C++20 or above*
         cmake --build build
         ./build/playground/Debug/Playground.exe # To Run the playground
     ```
-   OR
-   Run it in Visual Studio or your IDE of choice.
+   OR Run it in Visual Studio or your IDE of choice.
 
 ## References
 
 - <a href="https://foundationsofgameenginedev.com/" target="_blank">Eric Lengyel's Foundations of Game Engine
-  Development
-  Series</a>
+  Development Series</a>
 - <a href="https://gamemath.com/" target="_blank">3D Math Primer for Graphics and Game Engine Development</a>
