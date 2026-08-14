@@ -7,6 +7,9 @@ set(FALCON_SIMD_ROOT_HEADERS
         SIMD.tpp
         SIMDMemory.h
         SIMDMemory.tpp
+        FalconSimd.h
+
+        memory/Simd128.h
 
         DoxygenGroups.h
 )
@@ -15,8 +18,6 @@ include(${FALCON_SIMD_DIR}utils/Utils.cmake)
 
 set(FALCON_SIMD_HEADERS ${FALCON_SIMD_ROOT_HEADERS} ${FALCON_SIMD_UTILS_HEADERS})
 list(TRANSFORM FALCON_SIMD_HEADERS PREPEND ${FALCON_SIMD_DIR})
-
-
 
 
 #add_library(FalconSIMD INTERFACE)

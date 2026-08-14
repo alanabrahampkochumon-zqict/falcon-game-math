@@ -9,4 +9,30 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-// TODO: Add groups
+// clang-format off
+
+/**
+ * @defgroup FALCON_SIMD Falcon SIMD
+ * @brief Platform Agnostic SIMD Wrapper.
+ * @{
+ */
+
+
+    /**
+     * @defgroup Falcon_SIMD_128 Falcon SIMD 128
+     * @brief 128-bit wide register pack.
+     */
+
+    /**
+     * @defgroup Falcon_SIMD_256 Falcon SIMD 256
+     * @brief 256-bit wide register pack.
+     */
+
+    /**
+     * @defgroup Falcon_SIMD_512 Falcon SIMD 512
+     * @brief 512-bit wide register pack.
+     */
+
+/** @} */ // End of FGMSIMDTestSuite
+
+// clang-format on
