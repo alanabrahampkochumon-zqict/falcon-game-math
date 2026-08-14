@@ -53,23 +53,16 @@
       }
     },
     {
-      "name": "Clang-Debug",
-      "displayName": "Clang Debug",
-      "inherits": "windows-base",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_COMPILER": "clang-cl",
-        "CMAKE_C_COMPILER": "clang-cl"
-      }
-    },
-    {
       "name": "Clang-Debug-LHS",
       "displayName": "Clang Debug (Left Handed)",
       "inherits": "windows-base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_COMPILER": "clang-cl",
-        "CMAKE_C_COMPILER": "clang-cl",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_C_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_LINKER": "lld-link",
         "FGM_FORCE_LEFT_HANDED": "ON"
       }
     },
@@ -79,9 +72,25 @@
       "inherits": "windows-base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_COMPILER": "clang-cl",
-        "CMAKE_C_COMPILER": "clang-cl",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_C_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_LINKER": "lld-link",
         "NONCOMPREHENSIVE": "ON"
+      }
+    },
+    {
+      "name": "Clang-Debug",
+      "displayName": "Clang Debug",
+      "inherits": "windows-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_C_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_LINKER": "lld-link"
       }
     },
     {
@@ -90,8 +99,11 @@
       "inherits": "windows-base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_CXX_COMPILER": "clang-cl",
-        "CMAKE_C_COMPILER": "clang-cl"
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_C_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_LINKER": "lld-link"
       }
     },
     {
