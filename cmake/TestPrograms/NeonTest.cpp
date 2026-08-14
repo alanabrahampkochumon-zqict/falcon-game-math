@@ -13,6 +13,6 @@
 int main()
 {
     const float rawData[4] = { 1.0f, 2.0f, 3.0f, 4.0f };
-    const float32x4_t data = vld1q_fp32(rawData);
+    const float32x4_t data = vld1q_f32(rawData);
     return 0;
 }

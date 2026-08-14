@@ -50,6 +50,6 @@ target_link_libraries(FalconSimdTestSetup INTERFACE
 
 
 if (FALCON_SIMD_TESTS)
-    message("[FGM]: SIMD tests are enabled")
+    message(STATUS "[FGM]: SIMD tests are enabled")
     add_subdirectory(falcon_simd)
 endif ()
