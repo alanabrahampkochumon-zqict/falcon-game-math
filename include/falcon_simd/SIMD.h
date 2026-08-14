@@ -17,97 +17,96 @@
 // FALCON_ENABLE_SVE
 // FALCON_DISABLE_SIMD
 // #define FALCON_ENABLE_SSE
+
+
+#include "utils/Preprocessors.h"
+
 #include <type_traits>
 
-// #define FALCON_ENABLE_AVX512
-// #define FALCON_ENABLE_NEON
-#define FALCON_ENABLE_SSE2
-#if defined(FALCON_ENABLE_SSE2) || defined(FALCON_ENABLE_SSE4)
-    #include <immintrin.h>
-
-template <typename T, size_t BusWidth>
-struct RegType
+namespace falcon
 {
-    static_assert(BusWidth > 0 && BusWidth % 128 == 0 && BusWidth <= 512,
-                  "Invalid Width for Register. Must be 128, 256, 512");
-    using type = std::conditional_t<std::is_same_v<T, double>, __m128,
-                                    std::conditional_t<std::is_same_v<T, float>, __m128, __m128i>>;
-};
+    /**
+     * @brief Backends Supported by Falcon SIMD.
+     */
+    enum class SimdBackend : uint8_t
+    {
+        ARCH_SSE2,
+        ARCH_SSE4,
+        ARCH_AVX,
+        ARCH_AVX2,
+        ARCH_AVX512,
+        ARCH_AVX10, // TODO: Future impl
+        ARCH_NEON,
+        ARCH_UNKNOWN
+    };
 
-#elif defined(FALCON_ENABLE_AVX) || defined(FALCON_ENABLE_AVX2)
-    #include <immintrin.h>
+    // TODO: Test Function
+    FALCON_SIMD_INLINE constexpr std::string toString(const SimdBackend backend)
+    {
+        switch (backend)
+        {
+            case SimdBackend::ARCH_SSE2:
+                return "Streaming SIMD Extensions 2 (SSE2)";
+            case SimdBackend::ARCH_SSE4:
+                return "Streaming SIMD Extensions 4 (SSE4)";
+            case SimdBackend::ARCH_AVX:
+                return "Advanced Vector Extensions (AVX)";
+            case SimdBackend::ARCH_AVX2:
+                return "Advanced Vector Extensions 2 (AVX2)";
+            case SimdBackend::ARCH_AVX512:
+                return "Advanced Vector Extensions 512 (AVX512)";
+            case SimdBackend::ARCH_AVX10:
+                return "Advanced Vector Extensions 10 (AVX10)";
+            case SimdBackend::ARCH_NEON:
+                return "Arm Neon";
+            default:
+                return "Unsupported SIMD Instruction set";
+        }
+    }
+} // namespace falcon
 
-template <typename T, size_t BusWidth>
-struct RegType
-{
-    static_assert(BusWidth > 0 && BusWidth % 128 == 0 && BusWidth <= 512,
-                  "Invalid width for Register. Must be 128, 256, 512");
-    using type = std::conditional_t<std::is_same_v<T, double>, __m128d,
-                                    std::conditional_t<std::is_same_v<T, float>, __m128, __m128i>>;
-};
 
-template <typename T>
-struct RegType<T, 256>
-{
-    using type = std::conditional_t<std::is_same_v<T, double>, __m256d,
-                                    std::conditional_t<std::is_same_v<T, float>, __m256, __m256i>>;
-};
+/// Switch Alignment and Backend Variable based on highest supported backend.
+/// ALIGNMENT Gives the maximum alignment required.
+/// CURRENT_SIMD_BACKEND The current SIMD backend used by the target application.
+#if defined(FALCON_ENABLE_SSE2)
 
-template <typename T>
-struct RegType<T, 512>
-{
-    using type = std::conditional_t<std::is_same_v<T, double>, __m256d,
-                                    std::conditional_t<std::is_same_v<T, float>, __m256, __m256i>>;
-};
+inline constexpr size_t ALIGNMENT          = 16;
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_SSE2;
+
+#elif defined(FALCON_ENABLE_SSE4)
+
+inline constexpr size_t ALIGNMENT          = 16;
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_SSE4;
+
+#elif defined(FALCON_ENABLE_AVX)
+
+inline constexpr size_t ALIGNMENT          = 32;
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX;
+
+#elif defined(FALCON_ENABLE_AVX2)
+
+inline constexpr size_t ALIGNMENT          = 32;
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX2;
 
 #elif defined(FALCON_ENABLE_AVX512)
 
-    #include <immintrin.h>
-
-template <typename T, size_t BusWidth>
-struct RegType
-{
-    static_assert(BusWidth > 0 && BusWidth % 128 == 0 && BusWidth <= 512,
-                  "Invalid width for Register. Must be 128, 256, 512");
-    using type = std::conditional_t<std::is_same_v<T, double>, __m128d,
-                                    std::conditional_t<std::is_same_v<T, float>, __m128, __m128i>>;
-};
-
-template <typename T>
-struct RegType<T, 256>
-{
-    using type = std::conditional_t<std::is_same_v<T, double>, __m256d,
-                                    std::conditional_t<std::is_same_v<T, float>, __m256, __m256i>>;
-};
-
-template <typename T>
-struct RegType<T, 512>
-{
-    using type = std::conditional_t<std::is_same_v<T, double>, __m512,
-                                    std::conditional_t<std::is_same_v<T, float>, __m512, __m512i>>;
-};
+inline constexpr size_t ALIGNMENT          = 64;
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX512;
 
 #elif defined(FALCON_ENABLE_AVX10)
-// TODO: Types
+
+inline constexpr size_t ALIGNMENT          = 32; // TODO: TBD
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX10;
+
 #elif defined(FALCON_ENABLE_NEON)
-// TODO: Types
-// template <typename T, size_t BusWidth>
-// struct RegType
-// {
-//     static_assert(BusWidth > 0 && BusWidth % 128 == 0 && BusWidth <= 512,
-//                   "Invalid width for Register. Must be 128, 256, 512");
-//     using type = std::conditional_t<std::is_same_v<T, double>, __m128d,
-//                                     std::conditional_t<std::is_same_v<T, float>, __m128, __m128i>>;
-// };
-#elif defined(FALCON_ENABLE_SVE)
-// TODO: Types
+
+inline constexpr size_t ALIGNMENT          = 16;
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_NEON;
+
 #else
-    #include <array>
-template <typename T, size_t BusWidth>
-struct RegType
-{
-    static_assert(BusWidth > 0 && BusWidth % 128 == 0 && BusWidth <= 512,
-                  "Invalid width for Register. Must be 128, 256, 512");
-    using type = std::array<T, BusWidth / sizeof(T)>;
-};
+
+inline constexpr size_t ALIGNMENT          = 16;
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_UNKNOWN;
+
 #endif

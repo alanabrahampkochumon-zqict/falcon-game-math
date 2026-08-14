@@ -33,6 +33,11 @@
      * @brief 512-bit wide register pack.
      */
 
-/** @} */ // End of FGMSIMDTestSuite
+    /**
+     * @defgroup Falcon_Preprocessors Preprocessor Definitions
+     * @brief Macros and Preprocessor definitions.
+     */
+
+/** @} */ // End of FALCON_SIMD
 
 // clang-format on
