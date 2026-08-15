@@ -10,52 +10,36 @@
  */
 
 
+#include "falcon_simd/Simd.h"
+
 #include <concepts>
 /**
  * @addtogroup Falcon_SIMD_128
  * @{
  */
 
-// TODO: REMOVE EXPLORATION CONCEPT BASED INHERITANCE
-template <typename T, typename Scalar>
-concept Simd128C = requires(T t, Scalar s) {
-    { T::load(t) } -> std::same_as<T>;
-    { t.store() } -> std::same_as<Scalar*>;
-};
-
-
-void doSomething(Simd128C data)
-{
-    Simd128C<int, int>::load(0);
-}
-
 namespace falcon
 {
 
-    template <typename T>
-    concept RegType = requires(T t) {
-        { T::type };
+    template <typename SIMDReg, typename T>
+    concept IsSIMDLoadable = requires(SIMDReg reg, T* buffer) {
+        // { reg.load(buffer) };
+        // { reg.store() } -> std::same_as<T*>;
+        { SIMDReg(buffer) };
     };
 
-    template <typename T>
+
+    template <SimdBackend Backend, typename DataType>
     struct Simd128
-    {
-        RegType<T>::type _reg;
+    {};
 
-        static Simd128 load(T* buffer);
 
-        T* store(Simd128 simd);
-
-        // zero
-        // set_zero
-        // set_all
-        // set(
-        // operator+
-        // operator-
-    };
-
+#include "impl/Simd128SSE.tpp"
+    template <typename DataType>
+    using Simd128_t = Simd128<SimdBackend::ARCH_SSE2, DataType>;
+    // static_assert(IsSIMDLoadable<Simd128_t<float>, float> == true);
 } // namespace falcon
 
-#include "impl/Simd128AVX2.tpp"
+Simd128_t simd{};
 
 /** @} */

@@ -137,9 +137,7 @@ function(AddCompilerFlag Target Config)
                 "${TEST_PROG_DIR}/NeonTest.cpp"
                 CMAKE_FLAGS
                 "-DCMAKE_CXX_STANDARD=17"
-                COMPILE_OUTPUT_VARIABLE NEON_COMPILE_OUT
         )
-        message(WARNING "ARM COMPILE OUTPUT:\n${NEON_COMPILE_OUT}")
         if (NEON_RUNS EQUAL 0)
             message(STATUS "Neon detection success!")
         else ()
