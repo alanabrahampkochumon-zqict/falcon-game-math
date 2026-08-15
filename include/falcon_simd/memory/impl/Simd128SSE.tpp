@@ -12,7 +12,6 @@
 #include "falcon_simd/Simd.h"
 
 #include <bit>
-
 #include <emmintrin.h>
 #include <immintrin.h>
 #include <xmmintrin.h>
@@ -27,9 +26,9 @@ namespace falcon
 
         static constexpr size_t BUFFER_WIDTH = 128; ///< Width of the register in bits.
 
-        // Don't do this
-        // Trap. You dont know the size when store the data
-        FALCON_SIMD_INLINE explicit Simd128() = default;
+
+        FALCON_SIMD_INLINE constexpr explicit Simd128() = default;
+
 
         /**
          * @brief Load data from memory into the SIMD register.
@@ -46,7 +45,7 @@ namespace falcon
          * @param data The data to load.
          */
         template <size_t Lane>
-        FALCON_SIMD_API void loadAligned(DataType* data) noexcept
+        FALCON_SIMD_API constexpr void loadAligned(DataType* data) noexcept
         {
             static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && "Invalid size.");
             static_assert(std::has_single_bit(Lane) && Lane >= 1 && "Invalid Number of Lanes.");
@@ -205,7 +204,8 @@ namespace falcon
                 {
                     _mm_store_ps(pBuffer, _register);
                 }
-            } else
+            }
+            else
             {
                 if constexpr (sizeof(DataType) * Lane == 16)
                 {
@@ -243,48 +243,8 @@ namespace falcon
         //
         // FALCON_SIMD_INLINE constexpr getAt(size_t index) const noexcept;
 
-
-
-        //
-        // FALCON_SIMD_INLINE constexpr DataType* store() const noexcept;
-        //
-        // FALCON_SIMD_INLINE void loadInt8x2(DataType* data);
-        // FALCON_SIMD_INLINE void loadInt8x4(DataType* data);
-        // FALCON_SIMD_INLINE void loadInt8x8(DataType* data);
-        // FALCON_SIMD_INLINE void loadInt8x16(DataType* data);
-        //
-        // FALCON_SIMD_INLINE void loadInt16x2(DataType* data);
-        // FALCON_SIMD_INLINE void loadInt16x4(DataType* data);
-        // FALCON_SIMD_INLINE void loadInt16x8(DataType* data);
-        //
-        // FALCON_SIMD_INLINE void loadInt32x4(DataType* data);
-        //
-        // FALCON_SIMD_INLINE void loadInt64x2(DataType* data);
-        //
-        // FALCON_SIMD_INLINE void loadFP32x2(DataType* data);
-        // FALCON_SIMD_INLINE void loadFP32x4(DataType* data);
-        //
-        // FALCON_SIMD_INLINE void loadFP64x2(DataType* data);
-        //
-        // FALCON_SIMD_INLINE void storeInt8x2(DataType* buffer);
-        // FALCON_SIMD_INLINE void storeInt8x4(DataType* buffer);
-        // FALCON_SIMD_INLINE void storeInt8x8(DataType* buffer);
-        // FALCON_SIMD_INLINE void storeInt8x16(DataType* buffer);
-        //
-        // FALCON_SIMD_INLINE void storeInt16x2(DataType* buffer);
-        // FALCON_SIMD_INLINE void storeInt16x4(DataType* buffer);
-        // FALCON_SIMD_INLINE void storeInt16x8(DataType* buffer);
-        //
-        // FALCON_SIMD_INLINE void storeInt32x2(DataType* data);
-        // FALCON_SIMD_INLINE void storeInt32x4(DataType* data);
-        //
-        // FALCON_SIMD_INLINE void storeInt64x2(DataType* data);
-        //
-        // FALCON_SIMD_INLINE void storeFP32x4(DataType* data);
-        //
-        // FALCON_SIMD_INLINE void storeFP64x2(DataType* data);
-
     private:
         RegisterType _register;
     };
+
 } // namespace falcon

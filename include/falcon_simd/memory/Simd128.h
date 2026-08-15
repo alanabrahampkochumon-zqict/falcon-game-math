@@ -37,9 +37,8 @@ namespace falcon
 #include "impl/Simd128SSE.tpp"
     template <typename DataType>
     using Simd128_t = Simd128<SimdBackend::ARCH_SSE2, DataType>;
+
     // static_assert(IsSIMDLoadable<Simd128_t<float>, float> == true);
 } // namespace falcon
-
-Simd128_t simd{};
 
 /** @} */
