@@ -12,8 +12,11 @@
 #include "falcon_simd/Simd.h"
 
 #include <bit>
+
 #include <emmintrin.h>
+#include <immintrin.h>
 #include <xmmintrin.h>
+
 namespace falcon
 {
     template <typename DataType>
@@ -103,7 +106,15 @@ namespace falcon
         }
 
 
-        FALCON_SIMD_INLINE constexpr broadcast(DataType value) noexcept
+        /**
+         * @brief Broadcast single value across the whole simd register.
+         *
+         * @details
+         *        Fills the entire register lane with the same value, i.e, for 32-bit floats, all the 4 lanes will
+         *        contain the same @p value.
+         * @param value The value to broadcast.
+         */
+        FALCON_SIMD_INLINE constexpr void broadcast(DataType value) noexcept
         {
             if constexpr (std::is_same_v<DataType, double>)
             {
@@ -135,7 +146,10 @@ namespace falcon
         }
 
 
-        FALCON_SIMD_INLINE constexpr setZero() noexcept
+        /**
+         * @brief Zero out the register.
+         */
+        FALCON_SIMD_INLINE constexpr void setZero() noexcept
         {
             if constexpr (std::is_same_v<DataType, double>)
             {
@@ -152,8 +166,71 @@ namespace falcon
         }
 
 
-        template<size_t Lane>
-        FALCON_SIMD_INLINE constexpr store(DataType* pBuffer) const noexcept;
+        /**
+         * @brief Dump the current register value into a 16-byte aligned buffer.
+         *
+         * @tparam Lane Number of lanes, must match the number of elements allocated for the datatype.
+         *              Can cause segmentation fault otherwise.
+         *
+         * @param pBuffer The buffer to write the data to.
+         */
+        template <size_t Lane>
+        FALCON_SIMD_INLINE constexpr void storeAligned(DataType* pBuffer) const noexcept
+        {
+            static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && std::has_single_bit(Lane) && Lane >= 1 &&
+                          "Invalid Number of Lanes.");
+            if constexpr (std::is_same_v<DataType, double>)
+            {
+                if constexpr (Lane == 1)
+                {
+                    _mm_store_sd(pBuffer, _register);
+                }
+                else
+                {
+                    _mm_store_pd(pBuffer, _register);
+                }
+            }
+            else if constexpr (std::is_same_v<DataType, float>)
+            {
+                if constexpr (Lane == 1)
+                {
+                    _mm_store_ss(pBuffer, _register);
+                }
+                else if constexpr (Lane == 2)
+                {
+                    // _mm_store_sd(reinterpret_cast<double*>(pBuffer), _register);
+                    _mm_storel_pi(pBuffer, _register);
+                }
+                else
+                {
+                    _mm_store_ps(pBuffer, _register);
+                }
+            } else
+            {
+                if constexpr (sizeof(DataType) * Lane == 16)
+                {
+                    _register = _mm_store_si128(reinterpret_cast<__m128i*>(pBuffer), _register);
+                }
+                else if constexpr (sizeof(DataType) * Lane == 8)
+                {
+                    _register = _mm_storeu_si64(pBuffer, _register);
+                }
+                else if constexpr (sizeof(DataType) * Lane == 4)
+                {
+                    _register = _mm_storeu_si32(pBuffer, _register);
+                }
+                else if constexpr (sizeof(DataType) * Lane == 2)
+                {
+                    _register = _mm_storeu_si16(pBuffer, _register);
+                }
+                else
+                {
+                    /// We need to static cast since there is no store func for Bytes
+                    /// TODO: Look into this as this can might be problem.
+                    _register = _mm_storeu_si16(reinterpret_cast<uint16_t*>(pBuffer), _register);
+                }
+            }
+        }
         // template <typename... Args>
         // FALCON_SIMD_INLINE constexpr explicit set(Args... data) const noexcept; // Analogous to setting
 
