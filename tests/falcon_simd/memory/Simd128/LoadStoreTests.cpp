@@ -9,8 +9,6 @@
  */
 
 #include "SIMDTestSetup.h"
+#include "falcon_simd/memory/Simd128.h"
 
-TEST(Testing, ONETWOTHREE)
-{
-    EXPECT_EQ(3, 1 + 2);
-}
+TEST(Testing, ONETWOTHREE) { EXPECT_EQ(3, 1 + 2); }

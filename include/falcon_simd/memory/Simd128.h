@@ -13,6 +13,7 @@
 #include "falcon_simd/Simd.h"
 
 #include <concepts>
+
 /**
  * @addtogroup Falcon_SIMD_128
  * @{
@@ -29,16 +30,20 @@ namespace falcon
     };
 
 
-    template <SimdBackend Backend, typename DataType>
-    struct Simd128
-    {};
-
-
-#include "impl/Simd128SSE.tpp"
-    template <typename DataType>
-    using Simd128_t = Simd128<SimdBackend::ARCH_SSE2, DataType>;
+    /// Primary Template for Simd128
+    template <SimdBackend, typename, size_t>
+    struct Simd128;
 
     // static_assert(IsSIMDLoadable<Simd128_t<float>, float> == true);
 } // namespace falcon
+
+
+#include "impl/Simd128SSE.tpp"
+
+namespace falcon
+{
+    template <typename DataType, size_t Lane>
+    using Simd128_t = Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>;
+}
 
 /** @} */

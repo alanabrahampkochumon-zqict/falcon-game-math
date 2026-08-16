@@ -4,28 +4,36 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: August 13, 2026
  *
- * @brief AVX2 implementation for Simd128.
+ * @brief SSE2 implementation for Simd128.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include "falcon_simd/Simd.h"
 
 #include <bit>
 #include <emmintrin.h>
 #include <immintrin.h>
+#include <type_traits>
 #include <xmmintrin.h>
 
 namespace falcon
 {
-    template <typename DataType>
-    struct Simd128<SimdBackend::ARCH_SSE2, DataType>
+    /**
+     * @brief 128-bit Simd Register specialized for SSE2 architecture.
+     *
+     * @tparam DataType The word-width/data type of the register.
+     * @tparam Lane     The number of data lanes. Must be a power of 2 and the total width in bits(size * Lane) must be
+     *                  less than 128.
+     */
+    template <typename DataType, size_t Lane>
+    struct Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>
     {
-        using RegisterType = std::conditional_t<std::is_same_v<DataType, double>, __m128d,
-                                                std::conditional_t<std::is_same_v<DataType, float>, __m128, __m128i>>;
-
+        using RegisterType                   = std::conditional_t<std::is_same_v<DataType, double>, __m128d,
+                                                                  std::conditional_t<std::is_same_v<DataType, float>, __m128, __m128i>>;
         static constexpr size_t BUFFER_WIDTH = 128; ///< Width of the register in bits.
 
+        static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && "Invalid size.");
+        static_assert(std::has_single_bit(Lane) && Lane >= 1 && "Invalid Number of Lanes.");
 
         FALCON_SIMD_INLINE constexpr explicit Simd128() = default;
 
@@ -39,16 +47,10 @@ namespace falcon
          *       zeroes.
          * @note For floating-point types, single lane will fill the entire buffer with the data.
          *
-         * @tparam Lane The number of data lanes. Must be a power of 2 and the total width in bits(size * Lane) must be
-         *              less than 128.
-         *
          * @param data The data to load.
          */
-        template <size_t Lane>
         FALCON_SIMD_API constexpr void loadAligned(DataType* data) noexcept
         {
-            static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && "Invalid size.");
-            static_assert(std::has_single_bit(Lane) && Lane >= 1 && "Invalid Number of Lanes.");
             // We are using sizes for loading integers since we are storing both signed and unsigned types into the
             // register as bits, with packing.
             if constexpr (std::is_same_v<DataType, double>)
@@ -168,16 +170,10 @@ namespace falcon
         /**
          * @brief Dump the current register value into a 16-byte aligned buffer.
          *
-         * @tparam Lane Number of lanes, must match the number of elements allocated for the datatype.
-         *              Can cause segmentation fault otherwise.
-         *
          * @param pBuffer The buffer to write the data to.
          */
-        template <size_t Lane>
         FALCON_SIMD_INLINE constexpr void storeAligned(DataType* pBuffer) const noexcept
         {
-            static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && std::has_single_bit(Lane) && Lane >= 1 &&
-                          "Invalid Number of Lanes.");
             if constexpr (std::is_same_v<DataType, double>)
             {
                 if constexpr (Lane == 1)

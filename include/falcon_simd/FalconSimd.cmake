@@ -14,7 +14,6 @@ list(APPEND FALCON_SIMD_ROOT_HEADERS ${FALCON_SIMD_UTILS_HEADERS})
 # We need append the directory since the files are "included" from the root cml of the library
 list(TRANSFORM FALCON_SIMD_ROOT_HEADERS PREPEND ${FALCON_SIMD_DIR})
 
-message(STATUS ${FALCON_SIMD_ROOT_HEADERS})
 #add_library(FalconSIMD INTERFACE)
 #
 ## Directories
