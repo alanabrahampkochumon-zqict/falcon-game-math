@@ -11,7 +11,7 @@ target_precompile_headers(
         FGMBenchmark
         PRIVATE
         <benchmark/benchmark.h>
-#        <fgm>
+        #        <fgm>
 )
 
 target_link_libraries(

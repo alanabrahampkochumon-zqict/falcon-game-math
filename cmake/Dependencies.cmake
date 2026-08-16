@@ -57,8 +57,8 @@ endif ()
 
 # Benchmark Dependencies
 if (FGM_BENCHMARK)
-    FetchContent_MakeAvailable(googlebenchmark)
-    set_target_properties(benchmark benchmark_main PROPERTIES FOLDER "${VENDORS_DIR}/Google/Benchmark")
+#    FetchContent_MakeAvailable(googlebenchmark)
+#    set_target_properties(benchmark benchmark_main PROPERTIES FOLDER "${VENDORS_DIR}/Google/Benchmark")
 endif ()
 
 
