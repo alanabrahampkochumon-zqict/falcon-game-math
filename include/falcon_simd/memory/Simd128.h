@@ -37,13 +37,19 @@ namespace falcon
     // static_assert(IsSIMDLoadable<Simd128_t<float>, float> == true);
 } // namespace falcon
 
-
-#include "impl/Simd128SSE.tpp"
+#if defined(FALCON_ENABLE_SSE2) || defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_AVX) ||                        \
+    defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX10)
+    #include "impl/Simd128SSE.tpp"
+#endif
 
 namespace falcon
 {
+
+#if defined(FALCON_ENABLE_SSE2) || defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_AVX) ||                        \
+    defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX10)
     template <typename DataType, size_t Lane>
     using Simd128_t = Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>;
-}
+#endif
+} // namespace falcon
 
 /** @} */
