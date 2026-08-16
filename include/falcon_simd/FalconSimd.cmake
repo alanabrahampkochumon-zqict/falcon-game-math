@@ -1,21 +1,20 @@
 include_guard()
-
-
 set(FALCON_SIMD_DIR ${LIBRARY_ROOT_DIR}/falcon_simd/)
-set(FALCON_SIMD_ROOT_HEADERS
-        Simd.h
 
-        memory/Simd128.h
-
-        DoxygenGroups.h
-)
-
+include(${FALCON_SIMD_DIR}memory/FalconMemory.cmake)
 include(${FALCON_SIMD_DIR}utils/Utils.cmake)
 
-message(STATUS ${FALCON_SIMD_DIR})
-message(STATUS ${FALCON_SIMD_HEADERS})
+set(FALCON_SIMD_ROOT_HEADERS
+        Simd.h
+        DoxygenGroups.h
+)
+list(APPEND FALCON_SIMD_ROOT_HEADERS ${FALCON_SIMD_MEMORY_HEADERS})
+list(APPEND FALCON_SIMD_ROOT_HEADERS ${FALCON_SIMD_UTILS_HEADERS})
 
+# We need append the directory since the files are "included" from the root cml of the library
+list(TRANSFORM FALCON_SIMD_ROOT_HEADERS PREPEND ${FALCON_SIMD_DIR})
 
+message(STATUS ${FALCON_SIMD_ROOT_HEADERS})
 #add_library(FalconSIMD INTERFACE)
 #
 ## Directories

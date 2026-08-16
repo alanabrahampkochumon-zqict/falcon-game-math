@@ -11,7 +11,6 @@ function(AddCompilerFlag Target Config)
     #--------------------------
     # AUTO SIMD FLAG DETECTION
     #--------------------------
-    message(STATUS "COMPILER: ${CMAKE_CXX_COMPILER_ID} MSVC FLAG: ${MSVC}")
     if (Config STREQUAL "AUTO")
         #----------------------------------------
         # SETUP COMPILER FLAGS FOR TEST PROGRAMS

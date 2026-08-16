@@ -39,13 +39,13 @@ target_link_libraries(FGM INTERFACE
 ###############
 
 include(falcon_simd/FalconSimd.cmake)
-add_library(FalconSIMD INTERFACE ${FALCON_SIMD_HEADERS})
+add_library(FalconSIMD INTERFACE ${FALCON_SIMD_ROOT_HEADERS})
 target_compile_features(FalconSIMD INTERFACE cxx_std_20)
 
 target_include_directories(FalconSIMD INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
-source_group("CMake Files/falcon_simd/" FILES falcon_simd/FalconSimd.cmake falcon_simd/utils/Utils.cmake)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${FALCON_SIMD_HEADERS})
+source_group("CMake Files/falcon_simd/" FILES falcon_simd/FalconSimd.cmake falcon_simd/utils/Utils.cmake falcon_simd/memory/FalconMemory.cmake)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${FALCON_SIMD_ROOT_HEADERS})
 target_link_libraries(FalconSIMD INTERFACE
         StrictWarnings
         ProjectSanitizers
