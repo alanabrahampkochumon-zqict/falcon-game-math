@@ -31,7 +31,7 @@ if (NONCOMPREHENSIVE)
 endif ()
 
 if (FGM_TESTS)
-    message("[FGM]: Game Math Tests are enabled")
+    message(STATUS "[FGM]: Game Math Tests are enabled")
     add_subdirectory(fgm)
 endif ()
 

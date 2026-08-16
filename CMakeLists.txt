@@ -59,6 +59,6 @@ add_subdirectory(include)
 add_subdirectory(tests)
 
 if (FGM_BENCHMARK)
-    message("[FGM]: Benchmarks are enabled")
+    message(STATUS "[FGM]: Benchmarks are enabled")
     add_subdirectory(benchmarks)
 endif ()
