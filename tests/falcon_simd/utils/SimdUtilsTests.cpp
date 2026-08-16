@@ -1,26 +1,32 @@
 #include <falcon_simd/utils/SIMDUtils.h>
 #include <gtest/gtest.h>
 
-struct TestPackingParams
-{
-    std::size_t totalByteSize;
-    std::size_t alignAs;
-    std::size_t expectedByteSize;
-    std::size_t padding;
-    std::size_t packedRegisterWidth;
-    std::size_t registerCount;
-};
-/** @brief Test fixture for register packed size calculation, parameterized by @ref TestPackingParams */
-class PackedSizeCalculatorTests: public ::testing::TestWithParam<TestPackingParams>
-{};
-
-
-
 
 /**
  * @addtogroup T_SIMD_Utils
  * @{
  */
+
+namespace
+{
+    /**************************************
+     *             TEST SETUP             *
+     **************************************/
+
+    struct TestPackingParams
+    {
+        std::size_t totalByteSize;
+        std::size_t alignAs;
+        std::size_t expectedByteSize;
+        std::size_t padding;
+        std::size_t packedRegisterWidth;
+        std::size_t registerCount;
+    };
+    /** @brief Test fixture for register packed size calculation, parameterized by @ref TestPackingParams */
+    class PackedSizeCalculatorTests: public ::testing::TestWithParam<TestPackingParams>
+    {};
+}
+
 
 /**
  * @test Verify that the packed size parameter returns the correct aligned byte size, padding, register width

@@ -1,6 +1,7 @@
 # For faster CI/CD unit-tests on push are only run with essential types rather than the full type permutation.
 option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
-option(FGM_COMBINED_TEST_RUN "Runs entire test binaries as unified tests")
+option(FGM_COMBINED_TEST_RUN "Runs entire test binaries as unified tests for fgm")
+option(FALCON_SIMD_COMBINED_TEST_RUN "Runs entire test binaries as unified tests for falcon simd")
 set(ENV{FALCON_SIMD_TEST_FLAG} "AUTO") # SIMD Test Flags for Falcon Math Suite
 
 # Add Project Sanitizers to Gtest

@@ -1,15 +1,18 @@
+set(FALCON_SIMD_TEST_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(FALCON_SIMD_TEST_ROOT_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/")
+
 add_executable(FalconSIMDTestSuite)
 set_target_properties(FalconSIMDTestSuite PROPERTIES CXX_STANDARD 20)
 set_target_properties(FalconSIMDTestSuite PROPERTIES CXX_STANDARD_REQUIRED ON)
 set_target_properties(FalconSIMDTestSuite PROPERTIES CXX_EXTENSIONS OFF)
 
 add_subdirectory(utils)
+add_subdirectory(memory)
 
 target_sources(
         FalconSIMDTestSuite
         PRIVATE
         SimdTests.cpp
-        #        RegisterTypeTests.cpp
 )
 
 target_compile_options(FalconSIMDTestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
