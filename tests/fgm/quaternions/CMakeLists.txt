@@ -85,5 +85,10 @@ target_precompile_headers(
 
 
 include(GoogleTest)
-gtest_discover_tests(FGMQuaternionsTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
-gtest_discover_tests(FGMQuaternionsDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+if (FGM_COMBINED_TEST_RUN)
+    add_test(NAME FGMQuaternionsTestSuite COMMAND FGMQuaternionsTests)
+    add_test(NAME FGMQuaternionsDeathTestSuite COMMAND FGMQuaternionsDeathTests)
+else ()
+    gtest_discover_tests(FGMQuaternionsTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FGMQuaternionsDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+endif ()

@@ -89,6 +89,12 @@ target_precompile_headers(
 
 
 include(GoogleTest)
-gtest_discover_tests(FGMVectorTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
-gtest_discover_tests(FGMVectorDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+# Runs the test binary as a single test
+if (FGM_COMBINED_TEST_RUN)
+    add_test(NAME FGMVectorTestSuite COMMAND FGMVectorTests)
+    add_test(NAME FGMVectorDeathTestSuite COMMAND FGMVectorDeathTests)
+else ()
+    gtest_discover_tests(FGMVectorTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FGMVectorDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+endif ()
 

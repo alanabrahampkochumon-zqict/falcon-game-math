@@ -37,4 +37,9 @@ target_precompile_headers(
 )
 
 include(GoogleTest)
-gtest_discover_tests(FGMCommonTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+
+if (FGM_COMBINED_TEST_RUN)
+    add_test(NAME FGMCommonTestSuite COMMAND FGMCommonTests)
+else ()
+    gtest_discover_tests(FGMCommonTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+endif ()

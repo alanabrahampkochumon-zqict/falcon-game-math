@@ -107,6 +107,20 @@
       }
     },
     {
+      "name": "Clang-Debug-Combo-Test-Bin",
+      "displayName": "Clang Debug(Combined Test Binary)",
+      "inherits": "windows-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_C_FLAGS": "-target x86_64-pc-windows-msvc",
+        "CMAKE_LINKER": "lld-link",
+        "FGM_COMBINED_TEST_RUN": "ON"
+      }
+    },
+    {
       "name": "macos-debug",
       "displayName": "macOS AppleClang Debug",
       "inherits": "base-strict",

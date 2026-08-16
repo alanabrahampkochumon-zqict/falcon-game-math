@@ -116,5 +116,10 @@ target_precompile_headers(FGMMatrixDeathTests REUSE_FROM FGMCommonTests)
 
 #### GTEST
 include(GoogleTest)
-gtest_discover_tests(FGMMatrixTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
-gtest_discover_tests(FGMMatrixDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+if (FGM_COMBINED_TEST_RUN)
+    add_test(NAME FGMMatrixTestSuite COMMAND FGMMatrixTests)
+    add_test(NAME FGMMatrixDeathTestSuite COMMAND FGMMatrixDeathTests)
+else ()
+    gtest_discover_tests(FGMMatrixTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FGMMatrixDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+endif ()
