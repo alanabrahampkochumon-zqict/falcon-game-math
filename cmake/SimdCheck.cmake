@@ -8,6 +8,8 @@ string(RANDOM RANDOM_STR) # Random Suffix is required since the program same con
 set(TEST_COMPILE_DIR "${PROJECT_SOURCE_DIR}/cmake/TestPrograms/build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_BUILD_TYPE}-${RANDOM_STR}")
 
 function(AddCompilerFlag Target Config)
+    # Remove any temporary directories
+    file(REMOVE_RECURSE "${TEST_PROG_DIR}/build")
     #--------------------------
     # AUTO SIMD FLAG DETECTION
     #--------------------------
