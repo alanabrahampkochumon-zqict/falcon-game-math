@@ -36,7 +36,7 @@ TYPED_TEST(Simd128LoadStoreTests, LoadAligned_LoadsAndStoresDataWithoutCorruptio
     data.resize(Lane);
     for (size_t i = 0; i < Lane; ++i)
     {
-        data[i] = static_cast<Type>(i);
+        data[i] = static_cast<Type>(i + 11);
     }
 
     falcon::Simd128_t<Type, Lane> reg;
