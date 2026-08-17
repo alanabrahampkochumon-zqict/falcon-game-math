@@ -14,13 +14,18 @@
 
 namespace
 {
-    template <typename T>
+    /**
+     * @brief Test Fixture for Simd128 load and store operations.
+     */
+    template <typename>
     class Simd128LoadStoreTests: public testing::Test
     {};
     TYPED_TEST_SUITE(Simd128LoadStoreTests, Simd128RegisterTypeHints);
+
 } // namespace
 
-TYPED_TEST(Simd128LoadStoreTests, RegisterLoadsAndStoresDataWithoutCorruption)
+
+TYPED_TEST(Simd128LoadStoreTests, LoadAligned_LoadsAndStoresDataWithoutCorruption)
 {
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
@@ -53,6 +58,68 @@ TYPED_TEST(Simd128LoadStoreTests, RegisterLoadsAndStoresDataWithoutCorruption)
         else
         {
             EXPECT_EQ(data[i], result[i]);
+        }
+    }
+}
+
+TYPED_TEST(Simd128LoadStoreTests, Broadcast_StoresASingleValueIntoTheRegister)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    Type data = Type(7);
+    falcon::Simd128_t<Type, Lane> reg;
+    reg.broadcast(data);
+
+    std::vector<Type> result{};
+    result.resize(Lane);
+
+    reg.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(data, result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(data, result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(data, result[i]);
+        }
+    }
+}
+
+
+TYPED_TEST(Simd128LoadStoreTests, SetZero_ZeroesOutTheRegister)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    falcon::Simd128_t<Type, Lane> reg;
+    reg.setZero();
+
+    std::vector<Type> result{};
+    result.resize(Lane);
+
+    reg.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(Type(0), result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(Type(0), result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(Type(0), result[i]);
         }
     }
 }

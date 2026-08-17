@@ -132,7 +132,7 @@ namespace falcon
             {
                 if constexpr (sizeof(DataType) == 8)
                 {
-                    _register = _mm_set1_epi64(value);
+                    _register = _mm_set1_epi64x(value);
                 }
                 else if constexpr (sizeof(DataType) == 4)
                 {
