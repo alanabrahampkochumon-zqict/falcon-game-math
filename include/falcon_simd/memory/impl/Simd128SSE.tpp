@@ -10,6 +10,7 @@
  */
 
 
+#include "../RegisterTraits.h"
 #include "falcon_simd/FalconSimd.h"
 
 #include <bit>
@@ -21,7 +22,7 @@
 namespace falcon
 {
     /**
-     * @brief 128-bit Simd Register specialized for SSE2 architecture.
+     * @brief 128-bit Simd Register specialized for SSE2/4.1 architecture.
      *
      * @tparam DataType The word-width/data type of the register.
      * @tparam Lane     The number of data lanes. Must be a power of 2 and the total width in bits(size * Lane) must be
@@ -30,14 +31,16 @@ namespace falcon
     template <typename DataType, size_t Lane>
     struct Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>
     {
-        // TODO: Add unused pragma for GCC
-        using RegisterType                   = std::conditional_t<std::is_same_v<DataType, double>, __m128d,
-                                                                  std::conditional_t<std::is_same_v<DataType, float>, __m128, __m128i>>;
-        static constexpr size_t BUFFER_WIDTH = 128; ///< Width of the register in bits.
+
+        static constexpr size_t BUFFER_WIDTH = 128;      ///< Width of the register in bits.
+        using ValueType                      = DataType; ///< The internal data type of this Register.
+        static constexpr size_t LaneCount    = Lane;     ///< Number of Lanes of current SIMD128 Register
 
         static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && "Invalid size.");
         static_assert(std::has_single_bit(Lane) && Lane >= 1 && "Invalid Number of Lanes.");
 
+
+        // TODO: Update
         FALCON_SIMD_INLINE constexpr explicit Simd128() = default;
 
 
@@ -242,7 +245,7 @@ namespace falcon
         // FALCON_SIMD_INLINE constexpr getAt(size_t index) const noexcept;
 
     private:
-        RegisterType _register;
+        simd::internal::SSERegister_t<DataType> _register;
     };
 
 } // namespace falcon

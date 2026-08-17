@@ -38,6 +38,11 @@
      * @brief Macros and Preprocessor definitions.
      */
 
+    /**
+     * @defgroup Falcon_Reg Register Wrapper
+     * @brief Wrappers for C++ Simd intrinsics.
+     */
+
 /** @} */ // End of FALCON_SIMD
 
 // clang-format on

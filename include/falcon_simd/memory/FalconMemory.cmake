@@ -4,6 +4,7 @@ set(FALCON_SIMD_MEMORY_DIR "memory/")
 
 set(FALCON_SIMD_MEMORY_HEADERS
         Simd128.h
+        RegisterTraits.h
         impl/Simd128SSE.tpp
 )
 list(TRANSFORM FALCON_SIMD_MEMORY_HEADERS PREPEND ${FALCON_SIMD_MEMORY_DIR})

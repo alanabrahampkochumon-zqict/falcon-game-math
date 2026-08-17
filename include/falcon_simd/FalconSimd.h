@@ -74,42 +74,49 @@ namespace falcon
 inline constexpr size_t ALIGNMENT          = 16;
 inline constexpr size_t SIMD_LANE_WIDTH    = 128;
 inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_SSE2;
+    #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_SSE4)
 
 inline constexpr size_t ALIGNMENT          = 16;
 inline constexpr size_t SIMD_LANE_WIDTH    = 128;
 inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_SSE4;
+    #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX)
 
 inline constexpr size_t ALIGNMENT          = 32;
 inline constexpr size_t SIMD_LANE_WIDTH    = 256;
 inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX;
+    #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX2)
 
 inline constexpr size_t ALIGNMENT          = 32;
 inline constexpr size_t SIMD_LANE_WIDTH    = 256;
 inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX2;
+    #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX512)
 
 inline constexpr size_t ALIGNMENT          = 64;
 inline constexpr size_t SIMD_LANE_WIDTH    = 512;
 inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX512;
+    #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX10)
 
 inline constexpr size_t ALIGNMENT          = 32;  // TODO: TBD
 inline constexpr size_t SIMD_LANE_WIDTH    = 256; // TODO: TBD
 inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX10;
+    #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_NEON)
 
 inline constexpr size_t ALIGNMENT          = 16;
 inline constexpr size_t SIMD_LANE_WIDTH    = 128;
 inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_NEON;
+    #define FALCON_PLATFORM_NEON
 
 #else
 
