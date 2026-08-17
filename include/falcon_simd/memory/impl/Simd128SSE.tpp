@@ -78,7 +78,7 @@ namespace falcon
                 }
                 else if constexpr (Lane == 2)
                 {
-                    _register = _mm_loadl_pi(_register, reinterpret_cast<__m64*>(data));
+                    _register = _mm_castpd_ps(_mm_load_sd(reinterpret_cast<const double*>(data)));
                 }
                 else
                 {
@@ -199,7 +199,7 @@ namespace falcon
                 }
                 else if constexpr (Lane == 2)
                 {
-                    _mm_storel_pi(reinterpret_cast<__m64*>(pBuffer), _register);
+                    _mm_store_sd(reinterpret_cast<double*>(pBuffer), _mm_castps_pd(_register));
                 }
                 else
                 {
