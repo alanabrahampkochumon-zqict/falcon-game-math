@@ -7,11 +7,13 @@
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
-#define FALCON_ENABLE_SSE2
 
 #include "SIMDTestSetup.h"
-#include "falcon_simd/memory/Simd128.h"
 
+#include <falcon_simd/memory/Simd128.h>
+
+#if defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX2) ||                                                    \
+    defined(FALCON_ENABLE_AVX) defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_SSE2)
 namespace
 {
     /**
@@ -123,3 +125,5 @@ TYPED_TEST(Simd128LoadStoreTests, SetZero_ZeroesOutTheRegister)
         }
     }
 }
+
+#endif

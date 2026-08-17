@@ -15,6 +15,8 @@ target_link_libraries(
         ProjectSanitizers
 )
 
+AddCompilerFlag(FalconSIMDMemoryTests PUBLIC ${FALCON_SIMD_MODE}) # Update to compile an executable per flag
+
 if (FALCON_SIMD_COMBINED_TEST_RUN)
     add_test(NAME FalconSIMDMemoryTestSuite COMMAND FalconSIMDMemoryTests)
 else ()

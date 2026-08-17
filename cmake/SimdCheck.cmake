@@ -1,5 +1,20 @@
 include_guard()
 
+
+# Usage(Override): -DFALCON_SIMD_MODE=FALCON_ENABLE_AVX512 or set(FALCON_SIMD_MODE FALCON_ENABLE_AVX512)
+set(FALCON_SIMD_MODE "AUTO" CACHE STRING "AUTO, FALCON_ENABLE_AVX512, FALCON_ENABLE_AVX2, FALCON_ENABLE_AVX, FALCON_ENABLE_SSE4 FALCON_ENABLE_SSE2, FALCON_ENABLE_NEON FALCON_DISABLE_SIMD")
+set_property(CACHE FALCON_SIMD_MODE PROPERTY
+        STRINGS
+        "AUTO"
+        "FALCON_ENABLE_AVX512"
+        "FALCON_ENABLE_AVX2"
+        "FALCON_ENABLE_AVX"
+        "FALCON_ENABLE_SSE4"
+        "FALCON_ENABLE_SSE2"
+        "FALCON_ENABLE_NEON"
+        "FALCON_DISABLE_SIMD"
+)
+
 include(CheckCXXSourceRuns)
 include(CheckCXXCompilerFlag)
 
@@ -7,7 +22,19 @@ set(TEST_PROG_DIR "${PROJECT_SOURCE_DIR}/cmake/TestPrograms/")
 string(RANDOM RANDOM_STR) # Random Suffix is required since the program same config like Clang-Debug LHS may try to access the same variable
 set(TEST_COMPILE_DIR "${PROJECT_SOURCE_DIR}/cmake/TestPrograms/build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_BUILD_TYPE}-${RANDOM_STR}")
 
-function(AddCompilerFlag Target Config)
+
+#--------------------------------------------------------------------------------------
+# Add the appropriate compiler flag and preprocessor definitions to target based
+# on the provided config.
+#
+# ``Target``     The target to add the flag. Can be a library or executable.
+# ``Visibility`` The linking visibility (PUBLIC PRIVATE INTERFACE)
+# ``Config``     The Simd Configuration Flag to apply.
+#                Options: AUTO(Detects Host System Capability), FALCON_ENABLE_AVX512,
+#                         FALCON_ENABLE_AVX2, FALCON_ENABLE_AVX, FALCON_ENABLE_SSE4
+#                         FALCON_ENABLE_SSE2, FALCON_ENABLE_NEON, FALCON_DISABLE_SIMD
+#--------------------------------------------------------------------------------------
+function(AddCompilerFlag Target Visibility Config)
     #--------------------------
     # AUTO SIMD FLAG DETECTION
     #--------------------------
@@ -143,12 +170,12 @@ function(AddCompilerFlag Target Config)
             message(STATUS "Neon detection failed!")
         endif ()
 
-        message(STATUS "COMPILATION")
-        message(STATUS "SSE2 ${SSE2_COMPILES}")
-        message(STATUS "SSE4 ${SSE4_COMPILES}")
-        message(STATUS "AVX ${AVX_COMPILES}")
-        message(STATUS "AVX2 ${AVX2_COMPILES}")
-        message(STATUS "AVX512 ${AVX512_COMPILES}")
+        # message(STATUS "COMPILATION")
+        # message(STATUS "SSE2 ${SSE2_COMPILES}")
+        # message(STATUS "SSE4 ${SSE4_COMPILES}")
+        # message(STATUS "AVX ${AVX_COMPILES}")
+        # message(STATUS "AVX2 ${AVX2_COMPILES}")
+        # message(STATUS "AVX512 ${AVX512_COMPILES}")
         #-----------------------------------------------
         # CONFIGURING CONFIG FLAG BASED ON PROGRAM RUNS
         #-----------------------------------------------
@@ -219,9 +246,10 @@ function(AddCompilerFlag Target Config)
     # INJECT FLAGS AND MACROS
     #-------------------------
     if (MSVC)
-        target_compile_options(${Target} PUBLIC ${MSVCCompilerFlag})
+        target_compile_options(${Target} ${Visibility} ${MSVCCompilerFlag})
     else ()
-        target_compile_options(${Target} PUBLIC ${CompilerFlag})
+        target_compile_options(${Target} ${Visibility} ${CompilerFlag})
     endif ()
-    target_compile_definitions(${Target} PUBLIC ${Config})
+    target_compile_definitions(${Target} ${Visibility} ${Config})
+
 endfunction()

@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(FalconGameMath LANGUAGES CXX)
-#set(CMAKE_CXX_EXTENSIONS OFF) # TODO: Move to target based
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 enable_testing()
 

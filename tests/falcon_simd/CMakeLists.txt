@@ -35,7 +35,7 @@ target_include_directories(
         include
 )
 
-AddCompilerFlag(FalconSIMDTestSuite AUTO) # Update to compile an executable per flag
+AddCompilerFlag(FalconSIMDTestSuite PUBLIC ${FALCON_SIMD_MODE}) # Update to compile an executable per flag
 
 
 include(GoogleTest)

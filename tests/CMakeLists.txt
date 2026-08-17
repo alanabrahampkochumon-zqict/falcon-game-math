@@ -37,9 +37,10 @@ if (FGM_TESTS)
 endif ()
 
 
-#----------------------------------
+#------------------------
 # Falcon SIMD Test Setup
-#----------------------------------
+#------------------------
+
 add_library(FalconSimdTestSetup INTERFACE)
 target_link_libraries(FalconSimdTestSetup INTERFACE
         FalconSIMD
@@ -48,7 +49,6 @@ target_link_libraries(FalconSimdTestSetup INTERFACE
         StrictWarnings
         ProjectSanitizers
 )
-# TODO: Add simd vectorization flags to this project
 
 
 if (FALCON_SIMD_TESTS)
