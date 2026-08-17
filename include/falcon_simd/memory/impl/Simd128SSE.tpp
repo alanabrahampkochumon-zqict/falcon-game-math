@@ -90,7 +90,7 @@ namespace falcon
 
                 if constexpr (sizeof(DataType) * Lane == 16)
                 {
-                    _register = _mm_load_si128(reinterpret_cast<__m128i const*>(data));
+                    _register = _mm_load_si128(reinterpret_cast<const __m128i*>(data));
                 }
                 else if constexpr (sizeof(DataType) * Lane == 8)
                 {
