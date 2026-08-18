@@ -200,6 +200,79 @@ namespace falcon
                 }
             }
         }
+
+        template <typename T, typename U>
+        using CType = std::common_type_t<T, U>;
+
+        template <typename DataType2>
+        FALCON_SIMD_INLINE Simd128<SimdBackend::ARCH_SSE2, CType<DataType, DataType2>, Lane> operator+(
+            const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
+        {
+            // using R = CType<DataType, DataType2>;
+            // TODO: Implementation
+            return other;
+        }
+
+
+        // TODO: Add Packing and Unpacking
+
+        template <typename DataType2>
+        FALCON_SIMD_INLINE explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
+        {
+            if constexpr (std::is_same_v<DataType2, double>)
+            {
+                if constexpr (std::is_same_v<DataType, double>)
+                {
+                    _register = other.naive();
+                }
+                else if constexpr (std::is_same_v<DataType, float>)
+                {
+                    _register = _mm_cvtpd_ps(other.naive());
+                }
+                else
+                {
+                    _register = _mm_cvtpd_epi32(other.naive());
+                }
+            }
+            else if constexpr (std::is_same_v<DataType2, float>)
+            {
+                if constexpr (std::is_same_v<DataType, double>)
+                {
+                    _register = _mm_cvtps_pd(other.naive());
+                }
+                else if constexpr (std::is_same_v<DataType, float>)
+                {
+                    _register = other.naive();
+                }
+                else
+                {
+                    _register = _mm_cvtpd_epi32(other.naive());
+                }
+            }
+            else
+            {
+                if constexpr (std::is_same_v<DataType, double>)
+                {
+                    _register = _mm_cvtepi32_pd(other.naive());
+                }
+                else if constexpr (std::is_same_v<DataType, float>)
+                {
+                    _register = _mm_cvtepi32_ps(other.naive());
+                }
+                else
+                {
+                    _register = other.naive();
+                }
+            }
+        }
+
+
+        /// @brief Get the internal register used by Simd128
+        FALCON_SIMD_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept
+        {
+            return _register;
+        }
+
         // template <typename... Args>
         // FALCON_SIMD_INLINE constexpr explicit set(Args... data) const noexcept; // Analogous to setting
 
