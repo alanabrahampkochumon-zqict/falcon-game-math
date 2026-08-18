@@ -201,21 +201,57 @@ namespace falcon
             }
         }
 
-        template <typename T, typename U>
-        using CType = std::common_type_t<T, U>;
 
-        template <typename DataType2>
-        FALCON_SIMD_INLINE Simd128<SimdBackend::ARCH_SSE2, CType<DataType, DataType2>, Lane> operator+(
-            const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
+        /// @brief Initialize a Simd128 with the supplied register.
+        FALCON_SIMD_INLINE explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
+
+
+        FALCON_SIMD_INLINE Simd128 operator+(const Simd128 other)
         {
-            // using R = CType<DataType, DataType2>;
-            // TODO: Implementation
-            return other;
+            if constexpr (std::is_same_v<DataType, double>)
+            {
+                return Simd128(_mm_add_pd(_register, other.naive()));
+            }
+            else if constexpr (std::is_same_v<DataType, float>)
+            {
+                return Simd128(_mm_add_ps(_register, other.naive()));
+            }
+            else
+            {
+                if constexpr (sizeof(DataType) == 8)
+                {
+                    return Simd128(_mm_add_epi64(_register, other.naive()));
+                }
+                else if constexpr (sizeof(DataType) == 4)
+                {
+                    return Simd128(_mm_add_epi32(_register, other.naive()));
+                }
+                else if constexpr (sizeof(DataType) == 2)
+                {
+                    return Simd128(_mm_add_epi16(_register, other.naive()));
+                }
+                else
+                {
+                    return Simd128(_mm_add_epi8(_register, other.naive()));
+                }
+            }
         }
+
+
 
 
         // TODO: Add Packing and Unpacking
 
+        /**
+         * @brief Convert a register from one data type to another.
+         *
+         * @note The number of lanes must match.
+         * @note Converting between data types of unmatched size, like from `uint8_t` to `double` and performing
+         *       operations on them may yield undesired outcome due to the pure intrinsic casts used.
+         *
+         * @tparam DataType2 The data type of the incoming register.
+         * @param other      The register to conform to the current register type.
+         */
         template <typename DataType2>
         FALCON_SIMD_INLINE explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
         {
@@ -267,11 +303,11 @@ namespace falcon
         }
 
 
+        /// TODO: Add tests for these
+
         /// @brief Get the internal register used by Simd128
         FALCON_SIMD_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept
-        {
-            return _register;
-        }
+        { return _register; }
 
         // template <typename... Args>
         // FALCON_SIMD_INLINE constexpr explicit set(Args... data) const noexcept; // Analogous to setting
