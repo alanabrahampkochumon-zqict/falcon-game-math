@@ -247,6 +247,23 @@ namespace falcon
         }
 
 
+
+        /**
+         * @brief Add two registers together and update the current register with the sum.
+         *
+         * @note Register arithmetic to limited is same data types and lanes.
+         *
+         * @param other The register to add.
+         *
+         * @return A reference to the current register with the sum elements from this register and @p other.
+         */
+        FALCON_SIMD_INLINE Simd128& operator+=(const Simd128 other)
+        {
+            *this = *this + other;
+            return *this;
+        }
+
+
         /**
          * @brief Subtract two registers and return a new register.
          *
