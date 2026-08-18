@@ -249,13 +249,13 @@ namespace falcon
 
 
         /**
-         * @brief Add two registers together and update the current register with the sum.
+         * @brief Add contents of this register with @p other in-place.
          *
          * @note Register arithmetic to limited is same data types and lanes.
          *
          * @param other The register to add.
          *
-         * @return A reference to the current register with the sum elements from this register and @p other.
+         * @return A reference to the this register with sum.
          */
         FALCON_SIMD_INLINE Simd128& operator+=(const Simd128 other)
         {
@@ -301,6 +301,22 @@ namespace falcon
                     return Simd128(_mm_sub_epi8(_register, other.naive()));
                 }
             }
+        }
+
+
+        /**
+         * @brief Subtract contents of this register from @p other in-place.
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         *
+         * @param other The register to subtract.
+         *
+         * @return A reference to the this register with difference.
+         */
+        FALCON_SIMD_INLINE Simd128 operator-=(const Simd128 other)
+        {
+            *this = *this - other;
+            return *this;
         }
 
         // TODO: Add Packing and Unpacking
