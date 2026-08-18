@@ -206,6 +206,15 @@ namespace falcon
         FALCON_SIMD_INLINE explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
 
 
+        /**
+         * @brief Add two registers together and return a new register.
+         *
+         * @note Register arithmetic to limited is same data types and lanes.
+         *
+         * @param other The register to add.
+         *
+         * @return A new register with the sum elements from this register and @p other.
+         */
         FALCON_SIMD_INLINE Simd128 operator+(const Simd128 other)
         {
             if constexpr (std::is_same_v<DataType, double>)
@@ -238,7 +247,44 @@ namespace falcon
         }
 
 
-
+        /**
+         * @brief Subtract two registers and return a new register.
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         *
+         * @param other The register to subtract.
+         * @return A new register with the difference between elements of this register and @p other.
+         */
+        FALCON_SIMD_INLINE Simd128 operator-(const Simd128 other)
+        {
+            if constexpr (std::is_same_v<DataType, double>)
+            {
+                return Simd128(_mm_sub_pd(_register, other.naive()));
+            }
+            else if constexpr (std::is_same_v<DataType, float>)
+            {
+                return Simd128(_mm_sub_ps(_register, other.naive()));
+            }
+            else
+            {
+                if constexpr (sizeof(DataType) == 8)
+                {
+                    return Simd128(_mm_sub_epi64(_register, other.naive()));
+                }
+                else if constexpr (sizeof(DataType) == 4)
+                {
+                    return Simd128(_mm_sub_epi32(_register, other.naive()));
+                }
+                else if constexpr (sizeof(DataType) == 2)
+                {
+                    return Simd128(_mm_sub_epi16(_register, other.naive()));
+                }
+                else
+                {
+                    return Simd128(_mm_sub_epi8(_register, other.naive()));
+                }
+            }
+        }
 
         // TODO: Add Packing and Unpacking
 
