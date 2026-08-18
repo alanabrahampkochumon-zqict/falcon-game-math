@@ -37,11 +37,21 @@ TYPED_TEST(Simd128ConversionCtorTests, PromotesRegisterType)
 
     falcon::Simd128_t<Type, Lane> regA{};
     [[maybe_unused]] falcon::Simd128_t<PromotedType, Lane> regB(regA);
+
+    #if defined(__GNUC__) || defined(__clang__)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wignored-attributes"
+    #endif
+
     // Compile time check -> Immediate feedback
     static_assert(std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>);
     // Runtime check
     const bool result = std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>;
     EXPECT_TRUE(result);
+
+    #if defined(__GNUC__) || defined(__clang__)
+    #pragma GCC diagnostic pop
+    #endif
 }
 
 
@@ -53,11 +63,21 @@ TYPED_TEST(Simd128ConversionCtorTests, DemotesRegisterType)
 
     falcon::Simd128_t<Type, Lane> regA{};
     [[maybe_unused]] falcon::Simd128_t<PromotedType, Lane> regB(regA);
+
+    #if defined(__GNUC__) || defined(__clang__)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wignored-attributes"
+    #endif
+
     // Compile time check -> Immediate feedback
     static_assert(std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>);
     // Runtime check
     const bool result = std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>;
     EXPECT_TRUE(result);
+
+    #if defined(__GNUC__) || defined(__clang__)
+    #pragma GCC diagnostic pop
+    #endif
 }
 
 
