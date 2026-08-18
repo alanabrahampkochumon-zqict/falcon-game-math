@@ -37,7 +37,7 @@ namespace falcon
         static constexpr size_t LaneCount    = Lane;     ///< Number of Lanes of current SIMD128 Register
 
         static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && "Invalid size.");
-        static_assert(std::has_single_bit(Lane) && Lane >= 1 && "Invalid Number of Lanes.");
+        static_assert(std::has_single_bit(Lane) && Lane > 1 && "Invalid Number of Lanes.");
 
 
         // TODO: Update
@@ -61,24 +61,12 @@ namespace falcon
             // register as bits, with packing.
             if constexpr (std::is_same_v<DataType, double>)
             {
-                if constexpr (Lane == 1)
-                {
-                    _register = _mm_load_pd1(data);
-                }
-                else
-                {
-                    _register = _mm_load_pd(data);
-                }
+                _register = _mm_load_pd(data);
             }
             else if constexpr (std::is_same_v<DataType, float>)
             {
-                if constexpr (Lane == 1)
+                if constexpr (Lane == 2)
                 {
-                    _register = _mm_load_ps1(data);
-                }
-                else if constexpr (Lane == 2)
-                {
-                    //_register = _mm_castpd_ps(_mm_load_sd(reinterpret_cast<const double*>(data)));
                     _register = _mm_loadl_pi(_mm_setzero_ps(), reinterpret_cast<const __m64*>(data));
                 }
                 else
@@ -101,14 +89,9 @@ namespace falcon
                 {
                     _register = _mm_loadu_si32(data);
                 }
-                else if constexpr (sizeof(DataType) * Lane == 2)
+                else // Lane * Size = 2
                 {
                     _register = _mm_loadu_si16(data);
-                }
-                else
-                {
-                    /// We need to static cast since there is no load func for Bytes
-                    _register = _mm_loadu_si16(reinterpret_cast<uint16_t*>(data));
                 }
             }
         }
@@ -183,22 +166,11 @@ namespace falcon
         {
             if constexpr (std::is_same_v<DataType, double>)
             {
-                if constexpr (Lane == 1)
-                {
-                    _mm_store_sd(pBuffer, _register);
-                }
-                else
-                {
-                    _mm_store_pd(pBuffer, _register);
-                }
+                _mm_store_pd(pBuffer, _register);
             }
             else if constexpr (std::is_same_v<DataType, float>)
             {
-                if constexpr (Lane == 1)
-                {
-                    _mm_store_ss(pBuffer, _register);
-                }
-                else if constexpr (Lane == 2)
+                if constexpr (Lane == 2)
                 {
                     _mm_storel_pi(reinterpret_cast<__m64*>(pBuffer), _register);
                     // _mm_store_sd(reinterpret_cast<double*>(pBuffer), _mm_castps_pd(_register));
@@ -222,15 +194,9 @@ namespace falcon
                 {
                     _mm_storeu_si32(pBuffer, _register);
                 }
-                else if constexpr (sizeof(DataType) * Lane == 2)
+                else // Size * Lane == 2
                 {
                     _mm_storeu_si16(pBuffer, _register);
-                }
-                else
-                {
-                    /// We need to static cast since there is no store func for Bytes
-                    /// TODO: Look into this as this can might be problem.
-                    _mm_storeu_si16(reinterpret_cast<uint16_t*>(pBuffer), _register);
                 }
             }
         }
