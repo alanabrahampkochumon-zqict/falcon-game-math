@@ -35,7 +35,7 @@ TYPED_TEST(Simd128ConversionCtorTests, PromotesRegisterType)
     constexpr size_t Lane = TypeParam::VALUE;
     using PromotedType    = double;
 
-    falcon::Simd128_t<Type, Lane> regA;
+    falcon::Simd128_t<Type, Lane> regA{};
     [[maybe_unused]] falcon::Simd128_t<PromotedType, Lane> regB(regA);
     // Compile time check -> Immediate feedback
     static_assert(std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>);
@@ -51,7 +51,7 @@ TYPED_TEST(Simd128ConversionCtorTests, DemotesRegisterType)
     constexpr size_t Lane = TypeParam::VALUE;
     using PromotedType    = uint8_t;
 
-    falcon::Simd128_t<Type, Lane> regA;
+    falcon::Simd128_t<Type, Lane> regA{};
     [[maybe_unused]] falcon::Simd128_t<PromotedType, Lane> regB(regA);
     // Compile time check -> Immediate feedback
     static_assert(std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>);

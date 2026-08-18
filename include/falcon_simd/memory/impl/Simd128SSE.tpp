@@ -361,7 +361,7 @@ namespace falcon
                 }
                 else
                 {
-                    _register = _mm_cvtpd_epi32(other.naive());
+                    _register = _mm_cvtps_epi32(other.naive());
                 }
             }
             else
