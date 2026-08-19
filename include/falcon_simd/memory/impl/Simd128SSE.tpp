@@ -401,7 +401,19 @@ namespace falcon
             {
                 if constexpr (sizeof(DataType) == 8)
                 {
-                    return Simd128(_mm_sub_epi64(_register, other.naive()));
+                    if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+                    {
+                        return Simd128(_mm_mullo_epi64(_register, other.naive()));
+                    }
+                    else if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                    {
+                        // return Simd128(); // TODO:
+                        return Simd128(_mm_sub_epi64(_register, other.naive()));
+                    }
+                    else
+                    {
+                        return Simd128(_mm_sub_epi64(_register, other.naive()));
+                    }
                 }
                 else if constexpr (sizeof(DataType) == 4)
                 {
@@ -413,7 +425,31 @@ namespace falcon
                 }
                 else
                 {
-                    return Simd128(_mm_sub_epi8(_register, other.naive()));
+                    // Agner Fog's VCL: https://github.com/vectorclass/version2/blob/master/vectori128.h
+                    /// Split the numbers into even and odd lanes
+                    /// Since we dont have a problem corruptin the even lanes
+                    /// we don't need to mask them
+                    const __m128i oddA = _mm_srli_epi16(_register, 8); // Shift right by 8-bits
+                    const __m128i oddB = _mm_srli_epi16(other.naive(), 8);
+
+                    const __m128i evenProduct = _mm_mullo_epi16(_register, other.naive());
+                    __m128i oddProduct  = _mm_mullo_epi16(oddA, oddB);
+
+                    // Shift the odd product to left to prepare for ORing
+                    oddProduct = _mm_slli_epi16(oddProduct, 8);
+
+                    // OR together with a mask since pure OR can collect the garbage values from even product
+                    // For blend 0 select first bit from first register and 1 selects bits from second register
+                    if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+                    {
+                        /// 0x5555 translates to 0b010101.. which select the 8-bits from oddReg, then evenReg etc.
+                        return Simd128(_mm_mask_mov_epi8(oddProduct, 0x5555 , evenProduct));
+                    }
+                    else
+                    {
+                        const __m128i mask = _mm_set1_epi16(0x00FF);
+                        return Simd128(_mm_blendv_epi8(oddProduct, evenProduct, mask));
+                    }
                 }
             }
         }

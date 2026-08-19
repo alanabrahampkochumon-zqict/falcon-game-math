@@ -21,9 +21,13 @@ namespace
     /**
      * @brief Test Fixture for Simd128 load and store operations.
      */
-    template <typename>
+    template <typename T>
     class Simd128ArithmeticTests: public testing::Test
-    {};
+    {
+    public:
+        std::array<typename T::Type, 16> lhsData = { 10, 2, 0, 3, 5, 11, 15, 3, 1, 2, 5, 12, 14, 3, 15, 12 };
+        std::array<typename T::Type, 16> rhsData = { 12, 15, 8, 0, 5, 11, 3, 28, 2, 7, 5, 6, 4, 11, 4, 6 };
+    };
     TYPED_TEST_SUITE(Simd128ArithmeticTests, Simd128RegisterTypeHints);
 
 } // namespace
@@ -271,9 +275,9 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryMultiplication_ReturnsAValidResult)
     alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        lhs[i]      = static_cast<Type>(i + 3);
-        rhs[i]      = static_cast<Type>(i + 1);
-        expected[i] = static_cast<Type>((i + 3) * (i + 1));
+        lhs[i]      = this->lhsData[i];
+        rhs[i]      = this->rhsData[i];
+        expected[i] = static_cast<Type>(rhs[i] * lhs[i]);
     }
 
     falcon::Simd128_t<Type, Lane> regA, regB;
