@@ -207,6 +207,67 @@ namespace falcon
 
 
         /**
+         * @brief Convert a register from one data type to another.
+         *
+         * @note The number of lanes must match.
+         * @note Converting between data types of unmatched size, like from `uint8_t` to `double` and performing
+         *       operations on them may yield undesired outcome due to the pure intrinsic casts used.
+         *
+         * @tparam DataType2 The data type of the incoming register.
+         * @param other      The register to conform to the current register type.
+         */
+        template <typename DataType2>
+        FALCON_SIMD_INLINE explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
+        {
+            if constexpr (std::is_same_v<DataType2, double>)
+            {
+                if constexpr (std::is_same_v<DataType, double>)
+                {
+                    _register = other.naive();
+                }
+                else if constexpr (std::is_same_v<DataType, float>)
+                {
+                    _register = _mm_cvtpd_ps(other.naive());
+                }
+                else
+                {
+                    _register = _mm_cvtpd_epi32(other.naive());
+                }
+            }
+            else if constexpr (std::is_same_v<DataType2, float>)
+            {
+                if constexpr (std::is_same_v<DataType, double>)
+                {
+                    _register = _mm_cvtps_pd(other.naive());
+                }
+                else if constexpr (std::is_same_v<DataType, float>)
+                {
+                    _register = other.naive();
+                }
+                else
+                {
+                    _register = _mm_cvtps_epi32(other.naive());
+                }
+            }
+            else
+            {
+                if constexpr (std::is_same_v<DataType, double>)
+                {
+                    _register = _mm_cvtepi32_pd(other.naive());
+                }
+                else if constexpr (std::is_same_v<DataType, float>)
+                {
+                    _register = _mm_cvtepi32_ps(other.naive());
+                }
+                else
+                {
+                    _register = other.naive();
+                }
+            }
+        }
+
+
+        /**
          * @brief Add two registers together and return a new register.
          *
          * @note Register arithmetic to limited is same data types and lanes.
@@ -245,7 +306,6 @@ namespace falcon
                 }
             }
         }
-
 
 
         /**
@@ -319,67 +379,47 @@ namespace falcon
             return *this;
         }
 
-        // TODO: Add Packing and Unpacking
-
         /**
-         * @brief Convert a register from one data type to another.
+         * @brief Multiply two registers and return a new register.
          *
-         * @note The number of lanes must match.
-         * @note Converting between data types of unmatched size, like from `uint8_t` to `double` and performing
-         *       operations on them may yield undesired outcome due to the pure intrinsic casts used.
+         * @note Register arithmetic is limited to same data types and lanes.
          *
-         * @tparam DataType2 The data type of the incoming register.
-         * @param other      The register to conform to the current register type.
+         * @param other The register to multiply.
+         * @return A new register with the product of elements of this register and @p other.
          */
-        template <typename DataType2>
-        FALCON_SIMD_INLINE explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
+        FALCON_SIMD_INLINE Simd128 operator*(const Simd128 other)
         {
-            if constexpr (std::is_same_v<DataType2, double>)
+            if constexpr (std::is_same_v<DataType, double>)
             {
-                if constexpr (std::is_same_v<DataType, double>)
-                {
-                    _register = other.naive();
-                }
-                else if constexpr (std::is_same_v<DataType, float>)
-                {
-                    _register = _mm_cvtpd_ps(other.naive());
-                }
-                else
-                {
-                    _register = _mm_cvtpd_epi32(other.naive());
-                }
+                return Simd128(_mm_mul_pd(_register, other.naive()));
             }
-            else if constexpr (std::is_same_v<DataType2, float>)
+            else if constexpr (std::is_same_v<DataType, float>)
             {
-                if constexpr (std::is_same_v<DataType, double>)
-                {
-                    _register = _mm_cvtps_pd(other.naive());
-                }
-                else if constexpr (std::is_same_v<DataType, float>)
-                {
-                    _register = other.naive();
-                }
-                else
-                {
-                    _register = _mm_cvtps_epi32(other.naive());
-                }
+                return Simd128(_mm_mul_ps(_register, other.naive()));
             }
             else
             {
-                if constexpr (std::is_same_v<DataType, double>)
+                if constexpr (sizeof(DataType) == 8)
                 {
-                    _register = _mm_cvtepi32_pd(other.naive());
+                    return Simd128(_mm_sub_epi64(_register, other.naive()));
                 }
-                else if constexpr (std::is_same_v<DataType, float>)
+                else if constexpr (sizeof(DataType) == 4)
                 {
-                    _register = _mm_cvtepi32_ps(other.naive());
+                    return Simd128(_mm_sub_epi32(_register, other.naive()));
+                }
+                else if constexpr (sizeof(DataType) == 2)
+                {
+                    return Simd128(_mm_sub_epi16(_register, other.naive()));
                 }
                 else
                 {
-                    _register = other.naive();
+                    return Simd128(_mm_sub_epi8(_register, other.naive()));
                 }
             }
         }
+
+        // TODO: Add Packing and Unpacking
+
 
 
         /// TODO: Add tests for these

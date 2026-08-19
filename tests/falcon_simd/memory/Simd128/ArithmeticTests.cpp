@@ -29,7 +29,7 @@ namespace
 } // namespace
 
 
-TYPED_TEST(Simd128ArithmeticTests, BinaryAddOperation_ProducesAValidResult)
+TYPED_TEST(Simd128ArithmeticTests, BinaryAddOperation_ReturnsAValidResult)
 {
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
@@ -88,7 +88,7 @@ TEST(Simd128ArithmeticTests, BinaryAddOperation_WorksWithMixedNumbers)
 }
 
 
-TYPED_TEST(Simd128ArithmeticTests, CompoundAddOperation_ProducesAValidResult)
+TYPED_TEST(Simd128ArithmeticTests, CompoundAddOperation_ReturnsAValidResult)
 {
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
@@ -146,7 +146,7 @@ TEST(Simd128ArithmeticTests, CompoundAddOperation_WorksWithMixedNumbers)
 }
 
 
-TYPED_TEST(Simd128ArithmeticTests, BinarySubtractOperation_ProducesAValidResult)
+TYPED_TEST(Simd128ArithmeticTests, BinarySubtractOperation_ReturnsAValidResult)
 {
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
@@ -205,7 +205,7 @@ TEST(Simd128ArithmeticTests, BinarySubtractOperation_WorksWithMixedNumbers)
 }
 
 
-TYPED_TEST(Simd128ArithmeticTests, CompoundSubtractOperation_ProducesAValidResult)
+TYPED_TEST(Simd128ArithmeticTests, CompoundSubtractOperation_ReturnsAValidResult)
 {
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
@@ -258,6 +258,45 @@ TEST(Simd128ArithmeticTests, CompoundSubtractOperation_WorksWithMixedNumbers)
     for (size_t i = 0; i < 4; ++i)
     {
         EXPECT_FLOAT_EQ(expected[i], result[i]);
+    }
+}
+
+
+
+TYPED_TEST(Simd128ArithmeticTests, BinaryMultiplication_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        lhs[i]      = static_cast<Type>(i + 3);
+        rhs[i]      = static_cast<Type>(i + 1);
+        expected[i] = static_cast<Type>((i + 3) * (i + 1));
+    }
+
+    falcon::Simd128_t<Type, Lane> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    auto regRes = regA * regB;
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(expected[i], result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(expected[i], result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(expected[i], result[i]);
+        }
     }
 }
 
