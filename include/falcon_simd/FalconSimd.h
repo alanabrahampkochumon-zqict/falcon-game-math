@@ -30,16 +30,27 @@ namespace falcon
      */
     enum class SimdBackend : uint8_t
     {
-        ARCH_AVX10,    // TODO: Future impl
-        ARCH_AVX512EX, // Extended for AVX512VL, AVX512BW, and AVX512DQ
-        ARCH_AVX512F,
-        ARCH_AVX2,
-        ARCH_AVX,
-        ARCH_SSE4,
-        ARCH_SSE2,
-        ARCH_NEON,
-        ARCH_UNKNOWN
+        ARCH_AVX10    = 6, // TODO: Future impl
+        ARCH_AVX512EX = 5, // Extended for AVX512VL, AVX512BW, and AVX512DQ
+        ARCH_AVX512F  = 4,
+        ARCH_AVX2     = 4,
+        ARCH_AVX      = 3,
+        ARCH_SSE4     = 2,
+        ARCH_SSE2     = 1,
+        ARCH_NEON     = 101,
+        ARCH_UNKNOWN  = 0,
     };
+
+    // TODO: Test Function
+    /// @brief Return whether a given backend belongs to x86 CPU instruction set.
+    FALCON_SIMD_INLINE constexpr bool isX86ISA(const SimdBackend backend)
+    { return static_cast<uint8_t>(backend) < 100 && static_cast<uint8_t>(backend) > 0; }
+
+
+    /// @brief Return whether a given backend belongs to ARM CPU instruction set.
+    FALCON_SIMD_INLINE constexpr bool isArmISA(const SimdBackend backend)
+    { return static_cast<uint8_t>(backend) > 100; }
+
 
     // -mavx512f -mavx512cd -mavx512bw -mavx512dq -mavx512vl
     // TODO: Test Function
