@@ -506,7 +506,9 @@ namespace falcon
                     else
                     {
                         const __m128i mask = _mm_set1_epi16(0x00FF);
-                        return Simd128(_mm_blendv_epi8(oddProduct, evenProduct, mask));
+
+                        return Simd128(
+                            _mm_or_si128(_mm_and_si128(mask, evenProduct), _mm_andnot_si128(mask, oddProduct)));
                     }
                 }
             }
