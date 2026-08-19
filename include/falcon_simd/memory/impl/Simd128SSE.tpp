@@ -401,18 +401,51 @@ namespace falcon
             {
                 if constexpr (sizeof(DataType) == 8)
                 {
+
                     if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
                     {
                         return Simd128(_mm_mullo_epi64(_register, other.naive()));
                     }
                     else if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
                     {
-                        // return Simd128(); // TODO:
-                        return Simd128(_mm_sub_epi64(_register, other.naive()));
+                        // Since there are no EPI64 instructions less than AVX512DQ/VL architecture
+                        // we need to resort to splitting low and high part and multiplying
+                        // We can split a 64-bit number into high and low parts A => A_Lo + A_Hi * 2^32(or << 32)
+                        // A * B = A_Lo * B_Lo + A_Lo * B_Hi << 2^32 + A_Hi * B_Lo << 2^32 + A_Hi * B_Hi << 2^64 (zero
+                        // so no calculation needed for this part)
+                        // (G, A1_Lo * B1_Lo, G, A0_Lo * B0_Lo)
+                        __m128i lowProduct = _mm_mullo_epi32(_register, other.naive()); // A_Lo * B_Lo
+
+                        // Swap High and Low lanes
+                        // (B1_Hi, B1_Lo, B0_Hi, B0_Lo) => (B1_Lo, B1_Hi, B0_Lo, B0_Hi)
+                        __m128i swappedB = _mm_shuffle_epi32(other.naive(), _MM_SHUFFLE(2, 3, 0, 1));
+
+                        // (A1_Hi * B1_Lo , A1_Lo, B1_Hi, A0_Hi * B0_Lo, A0_Lo * B0_Hi)
+                        __m128i highLowProduct = _mm_mullo_epi32(_register, swappedB);
+                        __m128i zero           = _mm_setzero_si128();
+
+                        // (0, 0, A1_Hi * B1_Lo + A1_Lo, B1_Hi, A0_Hi * B0_Lo + A0_Lo, B0_Hi)
+                        __m128i addedProd = _mm_hadd_epi32(zero, highLowProduct);
+                        // Shuffle the horizontally added product so that we can add the results together and
+                        // form the final values
+                        // The first and second to last position for shuffled can be anything as its irrelevant
+                        // but since we have zeros at 3 and 2 we can use them so the add will produce a perfect result
+                        __m128i shuffledProd = _mm_shuffle_epi32(addedProd, _MM_SHUFFLE(3, 1, 2, 0));
+
+                        return Simd128(_mm_add_epi64(shuffledProd, lowProduct));
                     }
                     else
                     {
-                        return Simd128(_mm_sub_epi64(_register, other.naive()));
+                        // Since SSE2 doesn't natively support HAdd, we need to extract the elements and
+                        // do direct add
+                        // TODO: Update with set/ctor init
+                        DataType a[2], b[2];
+                        storeAligned(a);
+                        other.storeAligned(b);
+                        Simd128 result{};
+                        alignas(16) DataType resultData[2]{ a[0] * b[0], a[1] * b[1] };
+                        result.loadAligned(resultData);
+                        return result;
                     }
                 }
                 else if constexpr (sizeof(DataType) == 4)
@@ -423,6 +456,7 @@ namespace falcon
                     }
                     else
                     {
+                        // Agner Fog's VCL: https://github.com/vectorclass/version2/blob/master/vectori128.h
                         // Since EPU multiplication instruction in SSE2 multiplies only the low part of "64-bit"
                         // integers aka the even lanes we need to shuffle and put the numbers in the odd lane to the
                         // even lanes and perform two separate multiplication and then pack them together
