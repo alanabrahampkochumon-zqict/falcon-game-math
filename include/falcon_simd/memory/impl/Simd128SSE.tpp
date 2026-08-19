@@ -437,7 +437,7 @@ namespace falcon
                     else
                     {
                         // Since SSE2 doesn't natively support HAdd, we need to extract the elements and
-                        // do direct add
+                        // do direct multiplication
                         // TODO: Update with set/ctor init
                         DataType a[2], b[2];
                         storeAligned(a);
