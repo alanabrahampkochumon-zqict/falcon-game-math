@@ -417,23 +417,47 @@ namespace falcon
                 }
                 else if constexpr (sizeof(DataType) == 4)
                 {
-                    return Simd128(_mm_sub_epi32(_register, other.naive()));
+                    if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                    {
+                        return Simd128(_mm_mullo_epi32(_register, other.naive()));
+                    }
+                    else
+                    {
+                        // Since EPU multiplication instruction in SSE2 multiplies only the low part of "64-bit"
+                        // integers aka the even lanes we need to shuffle and put the numbers in the odd lane to the
+                        // even lanes and perform two separate multiplication and then pack them together
+                        __m128i oddA = _mm_shuffle_epi32(_register, _MM_SHUFFLE(3, 3, 1, 1));
+                        __m128i oddB = _mm_shuffle_epi32(other.naive(), _MM_SHUFFLE(3, 3, 1, 1));
+
+                        __m128i evenProduct = _mm_mul_epu32(_register, other.naive());
+                        __m128i oddProduct  = _mm_mul_epu32(oddA, oddB);
+
+                        // Pack the odd and even register so that their lower part is filled appropriately
+                        // G -> Garbage
+                        // even(G, 2, G, 0) + odd(G, 3, G, 1) =packed=> Lo(G, G, 1, 0) & Hi(G, G, 3, 2)
+                        __m128i packedLowerHalf  = _mm_unpacklo_epi32(evenProduct, oddProduct);
+                        __m128i packedHigherHalf = _mm_unpackhi_epi32(evenProduct, oddProduct);
+
+                        // Pack the packed 32-bits into 2 64-bit lanes
+                        // Lo(G, G, 1, 0) & Hi(G, G, 3, 2) =packed=> (3, 2, 1, 0)
+                        return Simd128(_mm_unpacklo_epi64(packedLowerHalf, packedHigherHalf));
+                    }
                 }
                 else if constexpr (sizeof(DataType) == 2)
                 {
-                    return Simd128(_mm_sub_epi16(_register, other.naive()));
+                    return Simd128(_mm_mullo_epi16(_register, other.naive()));
                 }
                 else
                 {
                     // Agner Fog's VCL: https://github.com/vectorclass/version2/blob/master/vectori128.h
                     /// Split the numbers into even and odd lanes
-                    /// Since we dont have a problem corruptin the even lanes
+                    /// Since we dont have a problem corrupting the even lanes
                     /// we don't need to mask them
                     const __m128i oddA = _mm_srli_epi16(_register, 8); // Shift right by 8-bits
                     const __m128i oddB = _mm_srli_epi16(other.naive(), 8);
 
                     const __m128i evenProduct = _mm_mullo_epi16(_register, other.naive());
-                    __m128i oddProduct  = _mm_mullo_epi16(oddA, oddB);
+                    __m128i oddProduct        = _mm_mullo_epi16(oddA, oddB);
 
                     // Shift the odd product to left to prepare for ORing
                     oddProduct = _mm_slli_epi16(oddProduct, 8);
@@ -443,7 +467,7 @@ namespace falcon
                     if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
                     {
                         /// 0x5555 translates to 0b010101.. which select the 8-bits from oddReg, then evenReg etc.
-                        return Simd128(_mm_mask_mov_epi8(oddProduct, 0x5555 , evenProduct));
+                        return Simd128(_mm_mask_mov_epi8(oddProduct, 0x5555, evenProduct));
                     }
                     else
                     {
