@@ -30,9 +30,9 @@ namespace falcon
      */
     enum class SimdBackend : uint8_t
     {
-        ARCH_AVX10    = 6, // TODO: Future impl
-        ARCH_AVX512EX = 5, // Extended for AVX512VL, AVX512BW, and AVX512DQ
-        ARCH_AVX512F  = 4,
+        ARCH_AVX10    = 7, // TODO: Future impl
+        ARCH_AVX512EX = 6, // Extended for AVX512VL, AVX512BW, and AVX512DQ
+        ARCH_AVX512F  = 5,
         ARCH_AVX2     = 4,
         ARCH_AVX      = 3,
         ARCH_SSE4     = 2,
