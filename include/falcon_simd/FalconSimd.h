@@ -30,16 +30,18 @@ namespace falcon
      */
     enum class SimdBackend : uint8_t
     {
-        ARCH_SSE2,
-        ARCH_SSE4,
-        ARCH_AVX,
+        ARCH_AVX10,    // TODO: Future impl
+        ARCH_AVX512EX, // Extended for AVX512VL, AVX512BW, and AVX512DQ
+        ARCH_AVX512F,
         ARCH_AVX2,
-        ARCH_AVX512,
-        ARCH_AVX10, // TODO: Future impl
+        ARCH_AVX,
+        ARCH_SSE4,
+        ARCH_SSE2,
         ARCH_NEON,
         ARCH_UNKNOWN
     };
 
+    // -mavx512f -mavx512cd -mavx512bw -mavx512dq -mavx512vl
     // TODO: Test Function
     FALCON_SIMD_INLINE constexpr std::string toString(const SimdBackend backend)
     {
@@ -53,8 +55,10 @@ namespace falcon
                 return "Advanced Vector Extensions (AVX)";
             case SimdBackend::ARCH_AVX2:
                 return "Advanced Vector Extensions 2 (AVX2)";
-            case SimdBackend::ARCH_AVX512:
-                return "Advanced Vector Extensions 512 (AVX512)";
+            case SimdBackend::ARCH_AVX512F:
+                return "Advanced Vector Extensions 512 Foundation (AVX512F)";
+            case SimdBackend::ARCH_AVX512EX:
+                return "Advanced Vector Extensions 512 (AVX512BW/DQ/VL)";
             case SimdBackend::ARCH_AVX10:
                 return "Advanced Vector Extensions 10 (AVX10)";
             case SimdBackend::ARCH_NEON:
@@ -97,11 +101,18 @@ inline constexpr size_t SIMD_LANE_WIDTH    = 256;
 inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX2;
     #define FALCON_PLATFORM_X86
 
-#elif defined(FALCON_ENABLE_AVX512)
+#elif defined(FALCON_ENABLE_AVX512F)
 
 inline constexpr size_t ALIGNMENT          = 64;
 inline constexpr size_t SIMD_LANE_WIDTH    = 512;
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX512;
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX512F;
+    #define FALCON_PLATFORM_X86
+
+#elif defined(FALCON_ENABLE_AVX512EX)
+
+inline constexpr size_t ALIGNMENT          = 64;
+inline constexpr size_t SIMD_LANE_WIDTH    = 512;
+inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX512EX;
     #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX10)

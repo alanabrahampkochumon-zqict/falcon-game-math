@@ -1,12 +1,13 @@
 include_guard()
 
 
-# Usage(Override): -DFALCON_SIMD_MODE=FALCON_ENABLE_AVX512 or set(FALCON_SIMD_MODE FALCON_ENABLE_AVX512)
-set(FALCON_SIMD_MODE "AUTO" CACHE STRING "AUTO, FALCON_ENABLE_AVX512, FALCON_ENABLE_AVX2, FALCON_ENABLE_AVX, FALCON_ENABLE_SSE4 FALCON_ENABLE_SSE2, FALCON_ENABLE_NEON FALCON_DISABLE_SIMD")
+# Usage(Override): -DFALCON_SIMD_MODE=FALCON_ENABLE_AVX512F or set(FALCON_SIMD_MODE FALCON_ENABLE_AVX512F)
+set(FALCON_SIMD_MODE "AUTO" CACHE STRING "AUTO, FALCON_ENABLE_AVX512EX, FALCON_ENABLE_AVX512F, FALCON_ENABLE_AVX2, FALCON_ENABLE_AVX, FALCON_ENABLE_SSE4 FALCON_ENABLE_SSE2, FALCON_ENABLE_NEON FALCON_DISABLE_SIMD")
 set_property(CACHE FALCON_SIMD_MODE PROPERTY
         STRINGS
         "AUTO"
-        "FALCON_ENABLE_AVX512"
+        "FALCON_ENABLE_AVX512EX"
+        "FALCON_ENABLE_AVX512F"
         "FALCON_ENABLE_AVX2"
         "FALCON_ENABLE_AVX"
         "FALCON_ENABLE_SSE4"
@@ -30,9 +31,10 @@ set(TEST_COMPILE_DIR "${PROJECT_SOURCE_DIR}/cmake/TestPrograms/build/${CMAKE_CXX
 # ``Target``     The target to add the flag. Can be a library or executable.
 # ``Visibility`` The linking visibility (PUBLIC PRIVATE INTERFACE)
 # ``Config``     The Simd Configuration Flag to apply.
-#                Options: AUTO(Detects Host System Capability), FALCON_ENABLE_AVX512,
-#                         FALCON_ENABLE_AVX2, FALCON_ENABLE_AVX, FALCON_ENABLE_SSE4
-#                         FALCON_ENABLE_SSE2, FALCON_ENABLE_NEON, FALCON_DISABLE_SIMD
+#                Options: AUTO(Detects Host System Capability), FALCON_ENABLE_AVX512EX,
+#                         FALCON_ENABLE_AVX512F, FALCON_ENABLE_AVX2, FALCON_ENABLE_AVX,
+##                        FALCON_ENABLE_SSE4 FALCON_ENABLE_SSE2, FALCON_ENABLE_NEON,
+#                         FALCON_DISABLE_SIMD
 #--------------------------------------------------------------------------------------
 function(AddCompilerFlag Target Visibility Config)
     #--------------------------
@@ -43,14 +45,16 @@ function(AddCompilerFlag Target Visibility Config)
         # SETUP COMPILER FLAGS FOR TEST PROGRAMS
         #----------------------------------------
         if (MSVC)
-            set(TEST_FLAG_AVX512 "/arch:AVX512")
+            set(TEST_FLAG_AVX512EX "/arch:AVX512")
+            set(TEST_FLAG_AVX512F "/arch:AVX512")
             set(TEST_FLAG_AVX2 "/arch:AVX2")
             set(TEST_FLAG_AVX "/arch:AVX")
             set(TEST_FLAG_SSE4 "")
             set(TEST_FLAG_SSE2 "")
         else ()
             # GCC / Clang / AppleClang
-            set(TEST_FLAG_AVX512 "-mavx512f")
+            set(TEST_FLAG_AVX512EX "-mavx512f;-mavx512cd;-mavx512bw;-mavx512dq;-mavx512vl")
+            set(TEST_FLAG_AVX512F "-mavx512f")
             set(TEST_FLAG_AVX2 "-mavx2")
             set(TEST_FLAG_AVX "-mavx")
             set(TEST_FLAG_SSE4 "-msse4.2")
@@ -60,21 +64,39 @@ function(AddCompilerFlag Target Visibility Config)
         #-------------------
         # TEST PROGRAM RUNS
         #-------------------
-        message(STATUS "Running AVX512 Tests")
+        message(STATUS "Running AVX512 Extension Tests")
         try_run(
-                AVX512_RUNS
-                AVX512_COMPILES
+                AVX512EX_RUNS
+                AVX512EX_COMPILES
                 ${TEST_COMPILE_DIR}
-                "${TEST_PROG_DIR}/AVX512Test.cpp"
+                "${TEST_PROG_DIR}/AVX512ExTest.cpp"
                 CMAKE_FLAGS
                 "-DCMAKE_CXX_STANDARD=17"
-                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_AVX512}"
-                COMPILE_DEFINITIONS ${TEST_FLAG_AVX512}
+                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_AVX512EX}"
+                COMPILE_DEFINITIONS ${TEST_FLAG_AVX512EX}
         )
-        if (AVX512_RUNS EQUAL 0)
-            message(STATUS "AVX512 detection success!")
+        if (AVX512EX_RUNS EQUAL 0)
+            message(STATUS "AVX512BW/VL/DQ detection success!")
         else ()
-            message(STATUS "AVX512 detection failed!")
+            message(STATUS "AVX512BW/VL/DQ detection failed!")
+        endif ()
+        #        message(WARNING "AVX512EX Status: ${AVX512EX_COMPILES}")
+
+        message(STATUS "Running AVX512 Foundation Tests")
+        try_run(
+                AVX512F_RUNS
+                AVX512F_COMPILES
+                ${TEST_COMPILE_DIR}
+                "${TEST_PROG_DIR}/AVX512FTest.cpp"
+                CMAKE_FLAGS
+                "-DCMAKE_CXX_STANDARD=17"
+                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_AVX512F}"
+                COMPILE_DEFINITIONS ${TEST_FLAG_AVX512F}
+        )
+        if (AVX512F_RUNS EQUAL 0)
+            message(STATUS "AVX512F detection success!")
+        else ()
+            message(STATUS "AVX512F detection failed!")
         endif ()
 
         # AVX10 Has to be manually enabled
@@ -175,12 +197,14 @@ function(AddCompilerFlag Target Visibility Config)
         # message(STATUS "SSE4 ${SSE4_COMPILES}")
         # message(STATUS "AVX ${AVX_COMPILES}")
         # message(STATUS "AVX2 ${AVX2_COMPILES}")
-        # message(STATUS "AVX512 ${AVX512_COMPILES}")
+        # message(STATUS "AVX512 ${AVX512F_COMPILES}")
         #-----------------------------------------------
         # CONFIGURING CONFIG FLAG BASED ON PROGRAM RUNS
         #-----------------------------------------------
-        if (AVX512_RUNS EQUAL 0)
-            set(Config FALCON_ENABLE_AVX512)
+        if (AVX512EX_RUNS EQUAL 0)
+            set(Config FALCON_ENABLE_AVX512EX)
+        elseif (AVX512F_RUNS EQUAL 0)
+            set(Config FALCON_ENABLE_AVX512F)
             #        elseif (AVX10_RUNS)
             #            set(Config FALCON_ENABLE_AVX10)
         elseif (AVX2_RUNS EQUAL 0)
@@ -202,10 +226,14 @@ function(AddCompilerFlag Target Visibility Config)
     #----------------------
     # SETUP COMPILER FLAGS
     #----------------------
-    if (Config STREQUAL "FALCON_ENABLE_AVX512")
+    if (Config STREQUAL "FALCON_ENABLE_AVX512EX")
+        set(MSVCCompilerFlag "/arch:AVX512")
+        set(CompilerFlag "-mavx512f;-mavx512cd;-mavx512bw;-mavx512dq;-mavx512vl")
+        message(STATUS "Turned on AVX512BW/DQ/VL")
+    elseif (Config STREQUAL "FALCON_ENABLE_AVX512F")
         set(MSVCCompilerFlag "/arch:AVX512")
         set(CompilerFlag "-mavx512f")
-        message(STATUS "Turned on AVX512")
+        message(STATUS "Turned on AVX512F")
     elseif (Config STREQUAL "FALCON_ENABLE_AVX10")
         set(MSVCCompilerFlag "/arch:AVX10.1")
         set(CompilerFlag "-mavx10.1")

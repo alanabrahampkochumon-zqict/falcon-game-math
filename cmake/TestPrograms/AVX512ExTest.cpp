@@ -1,5 +1,5 @@
 /**
- * @file AVX512Test.cpp
+ * @file AVX512ExTest.cpp
  * @author Alan Abraham P Kochumon
  * @date Created on: July 10, 2026
  *
@@ -12,7 +12,7 @@
 
 int main()
 {
-    float data[16] = {0};
+    float data[16] {0};
     const __m512 a = _mm512_setzero_ps();
     _mm512_storeu_ps(data, a);
     return 0;
