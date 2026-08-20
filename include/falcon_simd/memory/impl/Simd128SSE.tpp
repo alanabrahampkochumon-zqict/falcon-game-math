@@ -48,10 +48,9 @@ namespace falcon
          * @brief Load data from memory into the SIMD register.
          *
          * @note Data must be aligned to 16 bit boundary.
-         *       If the size * Lane cannot saturate the buffer, data will be moved to lower
+         *       If the size * Lane cannot saturate the buffer, data will be moved to lower lanes.
          *       Example: loadAligned<2>(uint8_t*) will only load the lower 16-bit with the data and fill the rest with
          *       zeroes.
-         * @note For floating-point types, single lane will fill the entire buffer with the data.
          *
          * @param data The data to load.
          */
@@ -80,6 +79,64 @@ namespace falcon
                 if constexpr (sizeof(DataType) * Lane == 16)
                 {
                     _register = _mm_load_si128(reinterpret_cast<const __m128i*>(data));
+                }
+                else if constexpr (sizeof(DataType) * Lane == 8)
+                {
+                    _register = _mm_loadu_si64(data);
+                }
+                else if constexpr (sizeof(DataType) * Lane == 4)
+                {
+                    _register = _mm_loadu_si32(data);
+                }
+                else // Lane * Size = 2
+                {
+                    _register = _mm_loadu_si16(data);
+                }
+            }
+        }
+
+
+        /**
+         * @brief Load data from memory into the SIMD register.
+         *
+         * @note Can work with unaligned memory.
+         *       If the size * Lane cannot saturate the buffer, data will be moved to lower lanes.
+         *       Example: loadAligned<2>(uint8_t*) will only load the lower 16-bit with the data and fill the rest with
+         *       zeroes.
+         *
+         * @param data The data to load.
+         *
+         * @relatedalso loadAligned
+         * @relatedalso store
+         * @relatedalso storeAligned
+         * @relatedalso broadcast
+         * @relatedalso setZero
+         */
+        FALCON_SIMD_INLINE constexpr void load(DataType* data) noexcept
+        {
+            // We are using sizes for loading integers since we are storing both signed and unsigned types into the
+            // register as bits, with packing.
+            if constexpr (std::is_same_v<DataType, double>)
+            {
+                _register = _mm_loadu_pd(data);
+            }
+            else if constexpr (std::is_same_v<DataType, float>)
+            {
+                if constexpr (Lane == 2)
+                {
+                    _register = _mm_loadl_pi(_mm_setzero_ps(), reinterpret_cast<const __m64*>(data));
+                }
+                else
+                {
+                    _register = _mm_loadu_ps(data);
+                }
+            }
+            else
+            {
+
+                if constexpr (sizeof(DataType) * Lane == 16)
+                {
+                    _register = _mm_loadu_si128(reinterpret_cast<const __m128i*>(data));
                 }
                 else if constexpr (sizeof(DataType) * Lane == 8)
                 {
@@ -158,7 +215,55 @@ namespace falcon
 
 
         /**
-         * @brief Dump the current register value into a 16-byte aligned buffer.
+         * @brief Store the current register value buffer.
+         *
+         * @note The provided buffer must have enough size to hold the data.
+         *
+         * @param pBuffer The buffer to write the data to.
+         */
+        FALCON_SIMD_INLINE constexpr void store(DataType* pBuffer) const noexcept
+        {
+            if constexpr (std::is_same_v<DataType, double>)
+            {
+                _mm_storeu_pd(pBuffer, _register);
+            }
+            else if constexpr (std::is_same_v<DataType, float>)
+            {
+                if constexpr (Lane == 2)
+                {
+                    _mm_storel_pi(reinterpret_cast<__m64*>(pBuffer), _register);
+                }
+                else
+                {
+                    _mm_storeu_ps(pBuffer, _register);
+                }
+            }
+            else
+            {
+                if constexpr (sizeof(DataType) * Lane == 16)
+                {
+                    _mm_storeu_si128(reinterpret_cast<__m128i*>(pBuffer), _register);
+                }
+                else if constexpr (sizeof(DataType) * Lane == 8)
+                {
+                    _mm_storeu_si64(pBuffer, _register);
+                }
+                else if constexpr (sizeof(DataType) * Lane == 4)
+                {
+                    _mm_storeu_si32(pBuffer, _register);
+                }
+                else // Size * Lane == 2
+                {
+                    _mm_storeu_si16(pBuffer, _register);
+                }
+            }
+        }
+
+
+        /**
+         * @brief Store the current register values into a 16-byte aligned buffer.
+         *
+         * @note The provided buffer must have enough size to hold the data.
          *
          * @param pBuffer The buffer to write the data to.
          */

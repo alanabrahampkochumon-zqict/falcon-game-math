@@ -11,6 +11,8 @@
 #include "SIMDTestSetup.h"
 
 #include <falcon_simd/memory/Simd128.h>
+#include <array>
+
 
 // TODO: Remove Preprocessor after implementing individual simd paths
 #if defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX) ||                      \
@@ -33,8 +35,8 @@ TYPED_TEST(Simd128LoadStoreTests, LoadAligned_LoadsAndStoresDataWithoutCorruptio
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::vector<Type> data{};
-    data.resize(Lane);
+    alignas(16) std::array<Type, Lane> data{};
+
     for (size_t i = 0; i < Lane; ++i)
     {
         data[i] = static_cast<Type>(i + 11);
@@ -43,9 +45,7 @@ TYPED_TEST(Simd128LoadStoreTests, LoadAligned_LoadsAndStoresDataWithoutCorruptio
     falcon::Simd128_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
-    std::vector<Type> result{};
-    result.resize(Lane);
-
+    alignas(16) std::array<Type, Lane> result{};
     reg.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -65,6 +65,80 @@ TYPED_TEST(Simd128LoadStoreTests, LoadAligned_LoadsAndStoresDataWithoutCorruptio
     }
 }
 
+
+TYPED_TEST(Simd128LoadStoreTests, Load_LoadsDataFromUnalignedMemory)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(8) std::array<Type, Lane> data{}; // Min alignment possible is 8
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = static_cast<Type>(i + 11);
+    }
+
+    falcon::Simd128_t<Type, Lane> reg;
+    reg.load(data.data());
+
+    alignas(16) std::array<Type, Lane> result{};
+    reg.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(data[i], result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(data[i], result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(data[i], result[i]);
+        }
+    }
+}
+
+
+TYPED_TEST(Simd128LoadStoreTests, Store_StoresDataIntoUnalignedMemory)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> data{}; // Min alignment possible is 8
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = static_cast<Type>(i + 11);
+    }
+
+    falcon::Simd128_t<Type, Lane> reg;
+    reg.loadAligned(data.data());
+
+    alignas(8) std::array<Type, Lane> result{};
+
+    reg.store(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(data[i], result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(data[i], result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(data[i], result[i]);
+        }
+    }
+}
+
+
 TYPED_TEST(Simd128LoadStoreTests, Broadcast_StoresASingleValueIntoTheRegister)
 {
     using Type            = TypeParam::Type;
@@ -74,9 +148,7 @@ TYPED_TEST(Simd128LoadStoreTests, Broadcast_StoresASingleValueIntoTheRegister)
     falcon::Simd128_t<Type, Lane> reg;
     reg.broadcast(data);
 
-    std::vector<Type> result{};
-    result.resize(Lane);
-
+    alignas(16) std::array<Type, Lane> result{};
     reg.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -105,8 +177,7 @@ TYPED_TEST(Simd128LoadStoreTests, SetZero_ZeroesOutTheRegister)
     falcon::Simd128_t<Type, Lane> reg;
     reg.setZero();
 
-    std::vector<Type> result{};
-    result.resize(Lane);
+    alignas(16) std::array<Type, Lane> result{};
 
     reg.storeAligned(result.data());
 
