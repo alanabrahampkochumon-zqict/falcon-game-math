@@ -106,11 +106,11 @@ namespace falcon
          *
          * @param data The data to load.
          *
-         * @relatedalso loadAligned
-         * @relatedalso store
-         * @relatedalso storeAligned
-         * @relatedalso broadcast
-         * @relatedalso setZero
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso store(DataType*)
+         * @relatedalso storeAligned(DataType*)
+         * @relatedalso broadcast(DataType)
+         * @relatedalso setZero()
          */
         FALCON_SIMD_INLINE constexpr void load(DataType* data) noexcept
         {
@@ -161,6 +161,12 @@ namespace falcon
          *        Fills the entire register lane with the same value, i.e, for 32-bit floats, all the 4 lanes will
          *        contain the same @p value.
          * @param value The value to broadcast.
+         *
+         * @relatedalso load(DataType*)
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso store(DataType*)
+         * @relatedalso storeAligned(DataType*)
+         * @relatedalso setZero()
          */
         FALCON_SIMD_INLINE constexpr void broadcast(DataType value) noexcept
         {
@@ -196,6 +202,12 @@ namespace falcon
 
         /**
          * @brief Zero out the register.
+         *
+         * @relatedalso load(DataType*)
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso store(DataType*)
+         * @relatedalso storeAligned(DataType*)
+         * @relatedalso broadcast(DataType)
          */
         FALCON_SIMD_INLINE constexpr void setZero() noexcept
         {
@@ -220,6 +232,12 @@ namespace falcon
          * @note The provided buffer must have enough size to hold the data.
          *
          * @param pBuffer The buffer to write the data to.
+         *
+         * @relatedalso load(DataType*)
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso storeAligned(DataType*)
+         * @relatedalso broadcast(DataType)
+         * @relatedalso setZero()
          */
         FALCON_SIMD_INLINE constexpr void store(DataType* pBuffer) const noexcept
         {
@@ -266,6 +284,12 @@ namespace falcon
          * @note The provided buffer must have enough size to hold the data.
          *
          * @param pBuffer The buffer to write the data to.
+         *
+         * @relatedalso load(DataType*)
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso store(DataType*)
+         * @relatedalso broadcast(DataType)
+         * @relatedalso setZero()
          */
         FALCON_SIMD_INLINE constexpr void storeAligned(DataType* pBuffer) const noexcept
         {
