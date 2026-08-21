@@ -35,6 +35,7 @@ target_include_directories(
         include
 )
 
+# TODO: Remove after refactor
 AddCompilerFlag(FalconSIMDTestSuite PUBLIC ${FALCON_SIMD_MODE}) # Update to compile an executable per flag
 
 

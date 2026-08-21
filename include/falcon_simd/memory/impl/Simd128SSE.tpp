@@ -668,9 +668,16 @@ namespace falcon
         }
 
 
+
         // FALCON_SIMD_INLINE Simd128 divReg(const Simd128 other) const noexcept
         // {
-        //
+        //     if constexpr(std::is_same_v<DataType, double>)
+        //     {
+        //         _mm_div_pd(_register, other.naive());
+        //     } else if constexpr(std::is_same_v<DataType, float>)
+        //     {
+        //         _mm_div_ps(_register, other.naive());
+        //     } else if (std::is_same_v)
         // }
 
 

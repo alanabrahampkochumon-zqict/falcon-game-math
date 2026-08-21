@@ -12,16 +12,29 @@ if (TARGET gtest AND (FGM_TESTS OR FALCON_SIMD_TESTS))
 endif ()
 
 
+add_library(FalconTestSetup INTERFACE)
+target_link_libraries(
+        FalconTestSetup INTERFACE
+
+        GTest::gtest
+        GTest::gtest_main
+        StrictWarnings
+        ProjectSanitizers
+)
+
+if (FALCON_CORE_TESTS)
+    message(STATUS "[Falcon]: Core Library tests are enabled")
+    add_subdirectory(falcon_core)
+endif ()
+
+
 #----------------------------------
 # Falcon Game Math(FGM) Test Setup
 #----------------------------------
 add_library(FGMTestSetup INTERFACE)
 target_link_libraries(FGMTestSetup INTERFACE
         FGM
-        GTest::gtest
-        GTest::gtest_main
-        StrictWarnings
-        ProjectSanitizers
+        FalconTestSetup
 )
 target_compile_definitions(FGMTestSetup INTERFACE $<$<CONFIG:Debug>:ENABLE_DEBUG_TESTS>)
 
@@ -32,7 +45,7 @@ if (NONCOMPREHENSIVE)
 endif ()
 
 if (FGM_TESTS)
-    message(STATUS "[FGM]: Game Math Tests are enabled")
+    message(STATUS "[Falcon]: Game Math tests are enabled")
     add_subdirectory(fgm)
 endif ()
 
@@ -41,17 +54,15 @@ endif ()
 # Falcon SIMD Test Setup
 #------------------------
 
-add_library(FalconSimdTestSetup INTERFACE)
+add_library(FalconSimdTestSetup INTERFACE
+        falcon_core/traits/TypeHelpersTests.cpp
+        falcon_core/traits/DummyTest.cpp)
 target_link_libraries(FalconSimdTestSetup INTERFACE
         FalconSIMD
-        GTest::gtest
-        GTest::gtest_main
-        StrictWarnings
-        ProjectSanitizers
+        FalconTestSetup
 )
 
-
 if (FALCON_SIMD_TESTS)
-    message(STATUS "[FGM]: SIMD tests are enabled")
+    message(STATUS "[Falcon]: SIMD tests are enabled")
     add_subdirectory(falcon_simd)
 endif ()

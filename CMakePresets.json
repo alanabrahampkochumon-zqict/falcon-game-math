@@ -13,7 +13,8 @@
         "FGM_DEMO_RASTERIZER": "ON",
         "FGM_DOCS": "ON",
         "FGM_STRICT_MODE": "ON",
-        "FALCON_SIMD_TESTS": "ON"
+        "FALCON_SIMD_TESTS": "ON",
+        "FALCON_CORE_TESTS": "ON"
       }
     },
     {
