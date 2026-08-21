@@ -508,6 +508,7 @@ namespace falcon
             return *this;
         }
 
+
         /**
          * @brief Multiply two registers and return a new register.
          *
@@ -642,6 +643,23 @@ namespace falcon
                 }
             }
         }
+
+
+        /**
+         * @brief Multiply contents of this register with @p other in-place.
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         *
+         * @param other The register to multiply.
+         *
+         * @return A reference to the this register with products.
+         */
+        FALCON_SIMD_INLINE Simd128 operator*=(const Simd128 other)
+        {
+            *this = *this * other;
+            return *this;
+        }
+
 
         // TODO: Add Packing and Unpacking
 

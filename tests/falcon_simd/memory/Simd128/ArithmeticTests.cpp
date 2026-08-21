@@ -304,4 +304,82 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryMultiplication_ReturnsAValidResult)
     }
 }
 
+
+TEST(Simd128ArithmeticTests, BinaryMultiplicationOperation_WorksWithMixedNumbers)
+{
+    alignas(16) std::array<float, 4> lhs{ 1, 5, -2, 0 }, rhs{ -1, 5, -5, -1 }, result{};
+    const std::array<float, 4> expected{ -1, 25, 10, 0 };
+
+    falcon::Simd128_t<float, 4> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    const auto regRes = regA * regB;
+    regRes.storeAligned(result.data());
+
+
+    for (size_t i = 0; i < 4; ++i)
+    {
+        EXPECT_FLOAT_EQ(expected[i], result[i]);
+    }
+}
+
+
+
+TYPED_TEST(Simd128ArithmeticTests, CompoundMultiplication_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        lhs[i]      = this->lhsData[i];
+        rhs[i]      = this->rhsData[i];
+        expected[i] = static_cast<Type>(rhs[i] * lhs[i]);
+    }
+
+    falcon::Simd128_t<Type, Lane> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    regA *= regB;
+    regA.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(expected[i], result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(expected[i], result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(expected[i], result[i]);
+        }
+    }
+}
+
+
+TEST(Simd128ArithmeticTests, CompoundMultiplicationOperation_WorksWithMixedNumbers)
+{
+    alignas(16) std::array<float, 4> lhs{ 1, 5, -2, 0 }, rhs{ -1, 5, -5, -1 }, result{};
+    const std::array<float, 4> expected{ -1, 25, 10, 0 };
+
+    falcon::Simd128_t<float, 4> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    regA *= regB;
+    regA.storeAligned(result.data());
+
+    for (size_t i = 0; i < 4; ++i)
+    {
+        EXPECT_FLOAT_EQ(expected[i], result[i]);
+    }
+}
+
 #endif
