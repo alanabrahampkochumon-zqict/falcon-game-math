@@ -44,6 +44,70 @@ namespace falcon
         FALCON_SIMD_INLINE constexpr explicit Simd128() = default;
 
 
+        /// @brief Initialize a Simd128 with the supplied register.
+        FALCON_SIMD_INLINE explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
+
+
+        /**
+         * @brief Convert a register from one data type to another.
+         *
+         * @note The number of lanes must match.
+         * @note Converting between data types of unmatched size, like from `uint8_t` to `double` and performing
+         *       operations on them may yield undesired outcome due to the pure intrinsic casts used.
+         *
+         * @tparam DataType2 The data type of the incoming register.
+         * @param other      The register to conform to the current register type.
+         */
+        template <typename DataType2>
+        FALCON_SIMD_INLINE explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
+        {
+            if constexpr (std::is_same_v<DataType2, double>)
+            {
+                if constexpr (std::is_same_v<DataType, double>)
+                {
+                    _register = other.naive();
+                }
+                else if constexpr (std::is_same_v<DataType, float>)
+                {
+                    _register = _mm_cvtpd_ps(other.naive());
+                }
+                else
+                {
+                    _register = _mm_cvtpd_epi32(other.naive());
+                }
+            }
+            else if constexpr (std::is_same_v<DataType2, float>)
+            {
+                if constexpr (std::is_same_v<DataType, double>)
+                {
+                    _register = _mm_cvtps_pd(other.naive());
+                }
+                else if constexpr (std::is_same_v<DataType, float>)
+                {
+                    _register = other.naive();
+                }
+                else
+                {
+                    _register = _mm_cvtps_epi32(other.naive());
+                }
+            }
+            else
+            {
+                if constexpr (std::is_same_v<DataType, double>)
+                {
+                    _register = _mm_cvtepi32_pd(other.naive());
+                }
+                else if constexpr (std::is_same_v<DataType, float>)
+                {
+                    _register = _mm_cvtepi32_ps(other.naive());
+                }
+                else
+                {
+                    _register = other.naive();
+                }
+            }
+        }
+
         /**
          * @brief Load data from memory into the SIMD register.
          *
@@ -331,70 +395,10 @@ namespace falcon
         }
 
 
-        /// @brief Initialize a Simd128 with the supplied register.
-        FALCON_SIMD_INLINE explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
 
-
-        /**
-         * @brief Convert a register from one data type to another.
-         *
-         * @note The number of lanes must match.
-         * @note Converting between data types of unmatched size, like from `uint8_t` to `double` and performing
-         *       operations on them may yield undesired outcome due to the pure intrinsic casts used.
-         *
-         * @tparam DataType2 The data type of the incoming register.
-         * @param other      The register to conform to the current register type.
-         */
-        template <typename DataType2>
-        FALCON_SIMD_INLINE explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
-        {
-            if constexpr (std::is_same_v<DataType2, double>)
-            {
-                if constexpr (std::is_same_v<DataType, double>)
-                {
-                    _register = other.naive();
-                }
-                else if constexpr (std::is_same_v<DataType, float>)
-                {
-                    _register = _mm_cvtpd_ps(other.naive());
-                }
-                else
-                {
-                    _register = _mm_cvtpd_epi32(other.naive());
-                }
-            }
-            else if constexpr (std::is_same_v<DataType2, float>)
-            {
-                if constexpr (std::is_same_v<DataType, double>)
-                {
-                    _register = _mm_cvtps_pd(other.naive());
-                }
-                else if constexpr (std::is_same_v<DataType, float>)
-                {
-                    _register = other.naive();
-                }
-                else
-                {
-                    _register = _mm_cvtps_epi32(other.naive());
-                }
-            }
-            else
-            {
-                if constexpr (std::is_same_v<DataType, double>)
-                {
-                    _register = _mm_cvtepi32_pd(other.naive());
-                }
-                else if constexpr (std::is_same_v<DataType, float>)
-                {
-                    _register = _mm_cvtepi32_ps(other.naive());
-                }
-                else
-                {
-                    _register = other.naive();
-                }
-            }
-        }
-
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///   ARITHMETIC OPERATIONS
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
 
         /**
          * @brief Add two registers together and return a new register.
@@ -405,7 +409,7 @@ namespace falcon
          *
          * @return A new register with the sum elements from this register and @p other.
          */
-        FALCON_SIMD_INLINE Simd128 operator+(const Simd128 other)
+        [[nodiscard]] FALCON_SIMD_INLINE Simd128 operator+(const Simd128 other) const noexcept
         {
             if constexpr (std::is_same_v<DataType, double>)
             {
@@ -446,7 +450,7 @@ namespace falcon
          *
          * @return A reference to the this register with sum.
          */
-        FALCON_SIMD_INLINE Simd128& operator+=(const Simd128 other)
+        FALCON_SIMD_INLINE Simd128& operator+=(const Simd128 other) noexcept
         {
             *this = *this + other;
             return *this;
@@ -461,7 +465,7 @@ namespace falcon
          * @param other The register to subtract.
          * @return A new register with the difference between elements of this register and @p other.
          */
-        FALCON_SIMD_INLINE Simd128 operator-(const Simd128 other)
+        [[nodiscard]] FALCON_SIMD_INLINE Simd128 operator-(const Simd128 other) const noexcept
         {
             if constexpr (std::is_same_v<DataType, double>)
             {
@@ -502,7 +506,7 @@ namespace falcon
          *
          * @return A reference to the this register with difference.
          */
-        FALCON_SIMD_INLINE Simd128 operator-=(const Simd128 other)
+        FALCON_SIMD_INLINE Simd128& operator-=(const Simd128 other) noexcept
         {
             *this = *this - other;
             return *this;
@@ -517,7 +521,7 @@ namespace falcon
          * @param other The register to multiply.
          * @return A new register with the product of elements of this register and @p other.
          */
-        FALCON_SIMD_INLINE Simd128 operator*(const Simd128 other)
+        [[nodiscard]] FALCON_SIMD_INLINE Simd128 operator*(const Simd128 other) const noexcept
         {
             if constexpr (std::is_same_v<DataType, double>)
             {
@@ -645,6 +649,9 @@ namespace falcon
         }
 
 
+        // FALCON_SIMD_INLINE
+
+
         /**
          * @brief Multiply contents of this register with @p other in-place.
          *
@@ -654,18 +661,24 @@ namespace falcon
          *
          * @return A reference to the this register with products.
          */
-        FALCON_SIMD_INLINE Simd128 operator*=(const Simd128 other)
+        FALCON_SIMD_INLINE Simd128& operator*=(const Simd128 other) noexcept
         {
             *this = *this * other;
             return *this;
         }
 
 
+        // FALCON_SIMD_INLINE Simd128 divReg(const Simd128 other) const noexcept
+        // {
+        //
+        // }
+
+
         // TODO: Add Packing and Unpacking
 
 
 
-        /// TODO: Add tests for these
+        /// TODO: Add tests for these ctor and getters
 
         /// @brief Get the internal register used by Simd128
         FALCON_SIMD_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept
