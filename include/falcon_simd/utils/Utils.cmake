@@ -3,7 +3,5 @@ include_guard()
 set(FALCON_SIMD_UTILS_DIR "utils/")
 set(FALCON_SIMD_UTILS_HEADERS
         SIMDUtils.h
-        Preprocessors.h
-        TypeHelpers.h
 )
 list(TRANSFORM FALCON_SIMD_UTILS_HEADERS PREPEND ${FALCON_SIMD_UTILS_DIR})

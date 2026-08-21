@@ -11,7 +11,8 @@
 
 
 #include "../RegisterTraits.h"
-#include "falcon_simd/FalconSimd.h"
+#include "falcon_core/Preprocessors.h"
+#include "falcon_core/traits/TypeHelpers.h"
 
 #include <bit>
 #include <emmintrin.h>
@@ -41,11 +42,11 @@ namespace falcon
 
 
         // TODO: Update
-        FALCON_SIMD_INLINE constexpr explicit Simd128() = default;
+        FALCON_INLINE constexpr explicit Simd128() = default;
 
 
         /// @brief Initialize a Simd128 with the supplied register.
-        FALCON_SIMD_INLINE explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
+        FALCON_INLINE explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
 
 
         /**
@@ -59,15 +60,15 @@ namespace falcon
          * @param other      The register to conform to the current register type.
          */
         template <typename DataType2>
-        FALCON_SIMD_INLINE explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
+        FALCON_INLINE explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
         {
-            if constexpr (std::is_same_v<DataType2, double>)
+            if constexpr (types::IsFP64<DataType2>)
             {
-                if constexpr (std::is_same_v<DataType, double>)
+                if constexpr (types::IsFP64<DataType>)
                 {
                     _register = other.naive();
                 }
-                else if constexpr (std::is_same_v<DataType, float>)
+                else if constexpr (types::IsFP32<DataType>)
                 {
                     _register = _mm_cvtpd_ps(other.naive());
                 }
@@ -76,13 +77,13 @@ namespace falcon
                     _register = _mm_cvtpd_epi32(other.naive());
                 }
             }
-            else if constexpr (std::is_same_v<DataType2, float>)
+            else if constexpr (types::IsFP32<DataType2>)
             {
-                if constexpr (std::is_same_v<DataType, double>)
+                if constexpr (types::IsFP64<DataType>)
                 {
                     _register = _mm_cvtps_pd(other.naive());
                 }
-                else if constexpr (std::is_same_v<DataType, float>)
+                else if constexpr (types::IsFP32<DataType>)
                 {
                     _register = other.naive();
                 }
@@ -93,11 +94,11 @@ namespace falcon
             }
             else
             {
-                if constexpr (std::is_same_v<DataType, double>)
+                if constexpr (types::IsFP64<DataType>)
                 {
                     _register = _mm_cvtepi32_pd(other.naive());
                 }
-                else if constexpr (std::is_same_v<DataType, float>)
+                else if constexpr (types::IsFP32<DataType>)
                 {
                     _register = _mm_cvtepi32_ps(other.naive());
                 }
@@ -118,15 +119,15 @@ namespace falcon
          *
          * @param data The data to load.
          */
-        FALCON_SIMD_INLINE constexpr void loadAligned(DataType* data) noexcept
+        FALCON_INLINE constexpr void loadAligned(DataType* data) noexcept
         {
             // We are using sizes for loading integers since we are storing both signed and unsigned types into the
             // register as bits, with packing.
-            if constexpr (std::is_same_v<DataType, double>)
+            if constexpr (types::IsFP64<DataType>)
             {
                 _register = _mm_load_pd(data);
             }
-            else if constexpr (std::is_same_v<DataType, float>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 if constexpr (Lane == 2)
                 {
@@ -176,15 +177,15 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        FALCON_SIMD_INLINE constexpr void load(DataType* data) noexcept
+        FALCON_INLINE constexpr void load(DataType* data) noexcept
         {
             // We are using sizes for loading integers since we are storing both signed and unsigned types into the
             // register as bits, with packing.
-            if constexpr (std::is_same_v<DataType, double>)
+            if constexpr (types::IsFP64<DataType>)
             {
                 _register = _mm_loadu_pd(data);
             }
-            else if constexpr (std::is_same_v<DataType, float>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 if constexpr (Lane == 2)
                 {
@@ -232,13 +233,13 @@ namespace falcon
          * @relatedalso storeAligned(DataType*)
          * @relatedalso setZero()
          */
-        FALCON_SIMD_INLINE constexpr void broadcast(DataType value) noexcept
+        FALCON_INLINE constexpr void broadcast(DataType value) noexcept
         {
-            if constexpr (std::is_same_v<DataType, double>)
+            if constexpr (types::IsFP64<DataType>)
             {
                 _register = _mm_set1_pd(value);
             }
-            else if constexpr (std::is_same_v<DataType, float>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 _register = _mm_set1_ps(value);
             }
@@ -273,13 +274,13 @@ namespace falcon
          * @relatedalso storeAligned(DataType*)
          * @relatedalso broadcast(DataType)
          */
-        FALCON_SIMD_INLINE constexpr void setZero() noexcept
+        FALCON_INLINE constexpr void setZero() noexcept
         {
-            if constexpr (std::is_same_v<DataType, double>)
+            if constexpr (types::IsFP64<DataType>)
             {
                 _register = _mm_setzero_pd();
             }
-            else if constexpr (std::is_same_v<DataType, float>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 _register = _mm_setzero_ps();
             }
@@ -303,13 +304,13 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        FALCON_SIMD_INLINE constexpr void store(DataType* pBuffer) const noexcept
+        FALCON_INLINE constexpr void store(DataType* pBuffer) const noexcept
         {
-            if constexpr (std::is_same_v<DataType, double>)
+            if constexpr (types::IsFP64<DataType>)
             {
                 _mm_storeu_pd(pBuffer, _register);
             }
-            else if constexpr (std::is_same_v<DataType, float>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 if constexpr (Lane == 2)
                 {
@@ -355,13 +356,13 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        FALCON_SIMD_INLINE constexpr void storeAligned(DataType* pBuffer) const noexcept
+        FALCON_INLINE constexpr void storeAligned(DataType* pBuffer) const noexcept
         {
-            if constexpr (std::is_same_v<DataType, double>)
+            if constexpr (types::IsFP64<DataType>)
             {
                 _mm_store_pd(pBuffer, _register);
             }
-            else if constexpr (std::is_same_v<DataType, float>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 if constexpr (Lane == 2)
                 {
@@ -409,13 +410,13 @@ namespace falcon
          *
          * @return A new register with the sum elements from this register and @p other.
          */
-        [[nodiscard]] FALCON_SIMD_INLINE Simd128 operator+(const Simd128 other) const noexcept
+        [[nodiscard]] FALCON_INLINE Simd128 operator+(const Simd128 other) const noexcept
         {
-            if constexpr (std::is_same_v<DataType, double>)
+            if constexpr (types::IsFP64<DataType>)
             {
                 return Simd128(_mm_add_pd(_register, other.naive()));
             }
-            else if constexpr (std::is_same_v<DataType, float>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 return Simd128(_mm_add_ps(_register, other.naive()));
             }
@@ -450,7 +451,7 @@ namespace falcon
          *
          * @return A reference to the this register with sum.
          */
-        FALCON_SIMD_INLINE Simd128& operator+=(const Simd128 other) noexcept
+        FALCON_INLINE Simd128& operator+=(const Simd128 other) noexcept
         {
             *this = *this + other;
             return *this;
@@ -465,13 +466,13 @@ namespace falcon
          * @param other The register to subtract.
          * @return A new register with the difference between elements of this register and @p other.
          */
-        [[nodiscard]] FALCON_SIMD_INLINE Simd128 operator-(const Simd128 other) const noexcept
+        [[nodiscard]] FALCON_INLINE Simd128 operator-(const Simd128 other) const noexcept
         {
-            if constexpr (std::is_same_v<DataType, double>)
+            if constexpr (types::IsFP64<DataType>)
             {
                 return Simd128(_mm_sub_pd(_register, other.naive()));
             }
-            else if constexpr (std::is_same_v<DataType, float>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 return Simd128(_mm_sub_ps(_register, other.naive()));
             }
@@ -506,7 +507,7 @@ namespace falcon
          *
          * @return A reference to the this register with difference.
          */
-        FALCON_SIMD_INLINE Simd128& operator-=(const Simd128 other) noexcept
+        FALCON_INLINE Simd128& operator-=(const Simd128 other) noexcept
         {
             *this = *this - other;
             return *this;
@@ -521,13 +522,13 @@ namespace falcon
          * @param other The register to multiply.
          * @return A new register with the product of elements of this register and @p other.
          */
-        [[nodiscard]] FALCON_SIMD_INLINE Simd128 operator*(const Simd128 other) const noexcept
+        [[nodiscard]] FALCON_INLINE Simd128 operator*(const Simd128 other) const noexcept
         {
-            if constexpr (std::is_same_v<DataType, double>)
+            if constexpr (types::IsFP64<DataType>)
             {
                 return Simd128(_mm_mul_pd(_register, other.naive()));
             }
-            else if constexpr (std::is_same_v<DataType, float>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 return Simd128(_mm_mul_ps(_register, other.naive()));
             }
@@ -649,7 +650,7 @@ namespace falcon
         }
 
 
-        // FALCON_SIMD_INLINE
+        // FALCON_INLINE
 
 
         /**
@@ -661,7 +662,7 @@ namespace falcon
          *
          * @return A reference to the this register with products.
          */
-        FALCON_SIMD_INLINE Simd128& operator*=(const Simd128 other) noexcept
+        FALCON_INLINE Simd128& operator*=(const Simd128 other) noexcept
         {
             *this = *this * other;
             return *this;
@@ -669,12 +670,12 @@ namespace falcon
 
 
 
-        // FALCON_SIMD_INLINE Simd128 divReg(const Simd128 other) const noexcept
+        // FALCON_INLINE Simd128 divReg(const Simd128 other) const noexcept
         // {
-        //     if constexpr(std::is_same_v<DataType, double>)
+        //     if constexpr(types::IsFP64<DataType>)
         //     {
         //         _mm_div_pd(_register, other.naive());
-        //     } else if constexpr(std::is_same_v<DataType, float>)
+        //     } else if constexpr(types::IsFP32<DataType>)
         //     {
         //         _mm_div_ps(_register, other.naive());
         //     } else if (std::is_same_v)
@@ -688,20 +689,19 @@ namespace falcon
         /// TODO: Add tests for these ctor and getters
 
         /// @brief Get the internal register used by Simd128
-        FALCON_SIMD_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept
-        { return _register; }
+        FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept { return _register; }
 
         // template <typename... Args>
-        // FALCON_SIMD_INLINE constexpr explicit set(Args... data) const noexcept; // Analogous to setting
+        // FALCON_INLINE constexpr explicit set(Args... data) const noexcept; // Analogous to setting
 
         /// Given for completion sake
         /// Note: Each lane is considered the native width of the datatype
         /// The operation will get the data, mutate it and set it into register, which can be expensive
         /// so it highly recommended to not use this operation
         /// TODO: Implementation Later
-        // FALCON_SIMD_INLINE constexpr setAt(size_t index, const DataType data) const noexcept;
+        // FALCON_INLINE constexpr setAt(size_t index, const DataType data) const noexcept;
         //
-        // FALCON_SIMD_INLINE constexpr getAt(size_t index) const noexcept;
+        // FALCON_INLINE constexpr getAt(size_t index) const noexcept;
 
     private:
         simd::internal::SSERegister_t<DataType> _register;

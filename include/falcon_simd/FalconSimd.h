@@ -19,7 +19,7 @@
 // #define FALCON_ENABLE_SSE
 
 
-#include "utils/Preprocessors.h"
+#include "falcon_core/Preprocessors.h"
 
 #include <type_traits>
 
@@ -43,18 +43,18 @@ namespace falcon
 
     // TODO: Test Function
     /// @brief Return whether a given backend belongs to x86 CPU instruction set.
-    FALCON_SIMD_INLINE constexpr bool isX86ISA(const SimdBackend backend)
+    FALCON_INLINE constexpr bool isX86ISA(const SimdBackend backend)
     { return static_cast<uint8_t>(backend) < 100 && static_cast<uint8_t>(backend) > 0; }
 
 
     /// @brief Return whether a given backend belongs to ARM CPU instruction set.
-    FALCON_SIMD_INLINE constexpr bool isArmISA(const SimdBackend backend)
+    FALCON_INLINE constexpr bool isArmISA(const SimdBackend backend)
     { return static_cast<uint8_t>(backend) > 100; }
 
 
     // -mavx512f -mavx512cd -mavx512bw -mavx512dq -mavx512vl
     // TODO: Test Function
-    FALCON_SIMD_INLINE constexpr std::string toString(const SimdBackend backend)
+    FALCON_INLINE constexpr std::string toString(const SimdBackend backend)
     {
         switch (backend)
         {

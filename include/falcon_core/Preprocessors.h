@@ -16,7 +16,7 @@
 
 
 /**
- * @addtogroup Falcon_Preprocessors
+ * @addtogroup Falcon_Core_Preprocessors
  * @{
  */
 
@@ -24,24 +24,24 @@
  * @brief Triggers a compiler-specific breakpoint.
  */
 #ifdef _MSC_VER
-    #define FALCON_SIMD_DEBUG_BREAK() __debugbreak()
+    #define FALCON_DEBUG_BREAK() __debugbreak()
 #elif defined(__clang__) || defined(__GNUC__)
-    #define FALCON_SIMD_DEBUG_BREAK() __builtin_trap()
+    #define FALCON_DEBUG_BREAK() __builtin_trap()
 #else
     #include <signal.h>
-    #define FALCON_SIMD_DEBUG_BREAK() raise(SIGTRAP)
+    #define FALCON_DEBUG_BREAK() raise(SIGTRAP)
 #endif
 
 /**
  * @brief API directive for handle DLL exports.
  */
 #ifdef _WIN32
-    #define FALCON_SIMD_API __declspec(dllimport)
+    #define FALCON_API __declspec(dllimport)
 #else
     #if __GNUC__ >= 4 || defined(__clang__)
-        #define FALCON_SIMD_API __attribute__((visibility("default")))
+        #define FALCON_API __attribute__((visibility("default")))
     #else
-        #define FALCON_SIMD_API
+        #define FALCON_API
     #endif
 #endif
 
@@ -78,7 +78,7 @@ inline void logAssertion(const char* condition, const char* message, const char*
 
 
 /**
- * @def FALCON_SIMD_ASSERT_MSG(condition, message)
+ * @def FALCON_ASSERT_MSG(condition, message)
  * @brief Asserts a condition is `true`, breaking into the debugger with a custom message if `false`.
  *
  * @note This macro is strictly active only in **Debug** builds. In **Release** builds
@@ -90,7 +90,7 @@ inline void logAssertion(const char* condition, const char* message, const char*
  * @param message   A string literal or streamable object providing context on the failure.
  */
 #ifndef NDEBUG
-    #define FALCON_SIMD_ASSERT_MSG(condition, message)                                                                 \
+    #define FALCON_ASSERT_MSG(condition, message)                                                                 \
         do                                                                                                             \
         {                                                                                                              \
             if (std::is_constant_evaluated())                                                                          \
@@ -103,16 +103,16 @@ inline void logAssertion(const char* condition, const char* message, const char*
                 if (!(condition))                                                                                      \
                 {                                                                                                      \
                     logAssertion(#condition, message, __FILE__, __LINE__);                                             \
-                    FALCON_SIMD_DEBUG_BREAK();                                                                         \
+                    FALCON_DEBUG_BREAK();                                                                         \
                 }                                                                                                      \
             }                                                                                                          \
         } while (false)
 #else
-    #define FALCON_SIMD_ASSERT_MSG(condition, message) ((void) 0)
+    #define FALCON_ASSERT_MSG(condition, message) ((void) 0)
 #endif
 
 /**
- * @def FALCON_SIMD_ASSERT(condition)
+ * @def FALCON_ASSERT(condition)
  * @brief Asserts a condition is `true`, breaking into the debugger if `false`.
  *
  * @note This macro is strictly active only in **Debug** builds. In **Release** builds
@@ -123,7 +123,7 @@ inline void logAssertion(const char* condition, const char* message, const char*
  * @param condition The boolean expression to evaluate.
  */
 #ifndef NDEBUG
-    #define FALCON_SIMD_ASSERT(condition)                                                                              \
+    #define FALCON_ASSERT(condition)                                                                              \
         do                                                                                                             \
         {                                                                                                              \
             if (std::is_constant_evaluated())                                                                          \
@@ -136,12 +136,12 @@ inline void logAssertion(const char* condition, const char* message, const char*
                 if (!(condition))                                                                                      \
                 {                                                                                                      \
                     logAssertion(#condition, "", __FILE__, __LINE__);                                                  \
-                    FALCON_SIMD_DEBUG_BREAK();                                                                         \
+                    FALCON_DEBUG_BREAK();                                                                         \
                 }                                                                                                      \
             }                                                                                                          \
         } while (false)
 #else
-    #define FALCON_SIMD_ASSERT(condition) ((void) 0)
+    #define FALCON_ASSERT(condition) ((void) 0)
 #endif
 
 
@@ -149,11 +149,11 @@ inline void logAssertion(const char* condition, const char* message, const char*
  * @brief Compiler specific inlining syntax.
  */
 #if defined(_MSC_VER) && !defined(__clang__)
-    #define FALCON_SIMD_INLINE __forceinline
+    #define FALCON_INLINE __forceinline
 #elif defined(__GNUC__) || defined(__clang__)
-    #define FALCON_SIMD_INLINE inline __attribute__((always_inline))
+    #define FALCON_INLINE inline __attribute__((always_inline))
 #else
-    #define FALCON_SIMD_INLINE inline
+    #define FALCON_INLINE inline
 #endif
 
 /** @} */

@@ -49,4 +49,5 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${FALCON_SIMD_ROOT_HEADERS})
 target_link_libraries(FalconSIMD INTERFACE
         StrictWarnings
         ProjectSanitizers
+        FalconCore
 )

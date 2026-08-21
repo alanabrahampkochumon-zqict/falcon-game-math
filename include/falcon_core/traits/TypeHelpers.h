@@ -14,7 +14,7 @@
 #include <type_traits>
 
 
-/** @addtogroup Falcon_Types
+/** @addtogroup Falcon_Core_Types
  *  @{
  */
 

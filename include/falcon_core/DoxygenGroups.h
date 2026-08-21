@@ -18,8 +18,13 @@
  */
 
     /**
-     * @defgroup Falcon_Types Falcon Type Traits
+     * @defgroup Falcon_Core_Types Falcon Type Traits
      * @brief Wrappers for type traits.
+     */
+
+    /**
+     * @defgroup Falcon_Core_Preprocessors Falcon Preprocessor Macros
+     * @brief Shared preprocessor directives.
      */
 
 /** @} */ // End of FALCON_SIMD
