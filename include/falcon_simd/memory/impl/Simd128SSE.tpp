@@ -14,6 +14,7 @@
 #include "falcon_core/Preprocessors.h"
 #include "falcon_core/traits/TypeHelpers.h"
 
+#include <array>
 #include <bit>
 #include <emmintrin.h>
 #include <immintrin.h>
@@ -604,12 +605,12 @@ namespace falcon
                         // Pack the odd and even register so that their lower part is filled appropriately
                         // G -> Garbage
                         // even(G, 2, G, 0) + odd(G, 3, G, 1) =packed=> Lo(G, G, 1, 0) & Hi(G, G, 3, 2)
-                        __m128i packedLowerHalf  = _mm_unpacklo_epi32(evenProduct, oddProduct);
-                        __m128i packedHigherHalf = _mm_unpackhi_epi32(evenProduct, oddProduct);
+                        __m128i packedLowerHalf = _mm_unpacklo_epi32(evenProduct, oddProduct);
+                        __m128i packedhighHalf  = _mm_unpackhi_epi32(evenProduct, oddProduct);
 
                         // Pack the packed 32-bits into 2 64-bit lanes
                         // Lo(G, G, 1, 0) & Hi(G, G, 3, 2) =packed=> (3, 2, 1, 0)
-                        return Simd128(_mm_unpacklo_epi64(packedLowerHalf, packedHigherHalf));
+                        return Simd128(_mm_unpacklo_epi64(packedLowerHalf, packedhighHalf));
                     }
                 }
                 else if constexpr (sizeof(DataType) == 2)
@@ -670,16 +671,224 @@ namespace falcon
 
 
 
-        // FALCON_INLINE Simd128 divReg(const Simd128 other) const noexcept
-        // {
-        //     if constexpr(types::IsFP64<DataType>)
-        //     {
-        //         _mm_div_pd(_register, other.naive());
-        //     } else if constexpr(types::IsFP32<DataType>)
-        //     {
-        //         _mm_div_ps(_register, other.naive());
-        //     } else if (std::is_same_v)
-        // }
+        FALCON_INLINE Simd128 divReg(const Simd128 other) const noexcept
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                return Simd128(_mm_div_pd(_register, other.naive()));
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                return Simd128(_mm_div_ps(_register, other.naive()));
+            }
+            else
+            {
+                // Since double can have only 53-bits of precision
+                // we need to either use the division by constant algorithm by Donald E. Knuth
+                // or unload the register do the division with IDIV and load the result to a new register.
+                // Latter is implemented here and former for operator/(TODO)
+                if constexpr (sizeof(DataType) == 8)
+                {
+                    // The only possible combination for b lane is 2.
+                    // so we can manually calculate the division for 2 integers without loops
+                    std::array<DataType, Lane> a{}, b{}, result{};
+                    store(a.data());
+                    other.store(b.data());
+
+                    result[0] = a[0] / b[0];
+                    result[1] = a[1] / b[1];
+
+                    // TODO: Refactor using ctor inits
+                    Simd128 reg;
+                    reg.load(result.data());
+                    return reg;
+                }
+                if constexpr (types::IsDWord<DataType>)
+                {
+                    // Since floats cannot fully represent 32-bit integers
+                    // we need to unpack them to doubles across 2 registers
+                    // perform the division and cast back and pack
+                    const __m128d lowA = _mm_cvtepi32_pd(_register); // (3, 2, 1, 0) => (1, 0)
+                    const __m128d lowB = _mm_cvtepi32_pd(other.naive());
+
+                    // Since epi32_pd takes bytes from lower lane, we need shift the upper bytes to lower lanes by
+                    // 8-bytes and cast to packed doubles (3, 2, 1, 0) => (_, _, 3, 2) => (3, 2)
+                    const __m128d highA = _mm_cvtepi32_pd(_mm_srli_si128(_register, 8));
+                    const __m128d highB = _mm_cvtepi32_pd(_mm_srli_si128(other.naive(), 8));
+
+                    // Perform division
+                    const __m128d resultLow  = _mm_div_pd(lowA, lowB);
+                    const __m128d resultHigh = _mm_div_pd(highA, highB);
+
+                    // Convert back to integers with truncation (cvt"t")
+                    const __m128i intLow  = _mm_cvttpd_epi32(resultLow);  // (_, _, 1, 0)
+                    const __m128i intHigh = _mm_cvttpd_epi32(resultHigh); // (_, _, 3, 2)
+
+                    // Pack and return
+                    // Here we can use unpack to "pack" the lower lanes
+                    return Simd128(_mm_unpacklo_epi64(intLow, intHigh)); // (3, 2, 1, 0)
+                }
+                else if constexpr (types::IsUDWord<DataType>)
+                {
+                    // Unsigned integer to double packing is only supported on AVX512F/VL
+                    if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+                    {
+                        // Since floats cannot fully represent 32-bit integers
+                        // we need to unpack them to doubles across 2 registers
+                        // perform the division and cast back and pack
+                        const __m128d lowA = _mm_cvtepu32_pd(_register); // (3, 2, 1, 0) => (1, 0)
+                        const __m128d lowB = _mm_cvtepu32_pd(other.naive());
+
+                        // Since epi32_pd takes bytes from lower lane, we need shift the upper bytes to lower lanes by
+                        // 8-bytes and cast to packed doubles (3, 2, 1, 0) => (_, _, 3, 2) => (3, 2)
+                        const __m128d highA = _mm_cvtepu32_pd(_mm_srli_si128(_register, 8));
+                        const __m128d highB = _mm_cvtepu32_pd(_mm_srli_si128(other.naive(), 8));
+
+                        // Perform division
+                        const __m128d resultLow  = _mm_div_pd(lowA, lowB);
+                        const __m128d resultHigh = _mm_div_pd(highA, highB);
+
+                        // Convert back to integers with truncation (cvt"t")
+                        const __m128i intLow  = _mm_cvttpd_epu32(resultLow);  // (_, _, 1, 0)
+                        const __m128i intHigh = _mm_cvttpd_epu32(resultHigh); // (_, _, 3, 2)
+
+                        // Pack and return
+                        // Here we can use unpack to "pack" the lower lanes
+                        return Simd128(_mm_unpacklo_epi64(intLow, intHigh)); // (3, 2, 1, 0)
+                    }
+                    else
+                    {
+                        std::array<DataType, Lane> a{}, b{}, result{};
+                        store(a.data());
+                        other.store(b.data());
+                        for (size_t i = 0; i < Lane; ++i)
+                        {
+                            result[i] = a[i] / b[i];
+                        }
+
+                        // TODO: Refactor to 1 line with ctor
+                        Simd128 data;
+                        data.load(result.data());
+                        return data;
+                    }
+                }
+                else
+                {
+                    return other;
+                }
+
+                // if constexpr (types::IsDWord<DataType>)
+                // {
+                //     // Since floats cannot fully represent 32-bit integers
+                //     // we need to unpack them to doubles across 2 registers
+                //     // perform the division and cast back and pack
+                //     const __m128d lowA = _mm_cvtepi32_pd(_register); // (3, 2, 1, 0) => (1, 0)
+                //     const __m128d lowB = _mm_cvtepi32_pd(other.naive());
+                //
+                //     // Since epi32_pd takes bytes from lower lane, we need shift the upper bytes to lower lanes by
+                //     // 8-bytes and cast to packed doubles (3, 2, 1, 0) => (_, _, 3, 2) => (3, 2)
+                //     const __m128d highA = _mm_cvtepi32_pd(_mm_srli_si128(_register, 8));
+                //     const __m128d highB = _mm_cvtepi32_pd(_mm_srli_si128(other.naive(), 8));
+                //
+                //     // Perform division
+                //     const __m128d resultLow  = _mm_div_pd(lowA, lowB);
+                //     const __m128d resultHigh = _mm_div_pd(highA, highB);
+                //
+                //     // Convert back to integers with truncation (cvt"t")
+                //     const __m128i intLow  = _mm_cvttpd_epi32(resultLow);  // (_, _, 1, 0)
+                //     const __m128i intHigh = _mm_cvttpd_epi32(resultHigh); // (_, _, 3, 2)
+                //
+                //     // Pack and return
+                //     // Here we can use unpack to "pack" the lower lanes
+                //     if (std::is_signed_v<DataType>)
+                //     {
+                //         return Simd128(_mm_unpacklo_epi64(intLow, intHigh)); // (3, 2, 1, 0)
+                //     }
+                // }
+                // else if constexpr (types::IsUDWord<DataType>)
+                // {
+                //     std::array<DataType, 8> a{}, b{}, result{};
+                //     store(a.data());
+                //     other.store(b.data());
+                //     for (size_t i = 0; i < 8; ++i)
+                //     {
+                //         result[i] = a[i] / b[i];
+                //     }
+                //     // TODO: Refactor to 1 line with ctor
+                //     Simd128 data;
+                //     data.load(result.data());
+                //     return data;
+                //     // if (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                //     // {
+                //     //
+                //     // } else
+                //     // {
+                //     //    // There is extend in sse2 so we have extract the data and perform multiplication manually
+                //     // and load them into the registers
+                //     // Since floats cannot fully represent 32-bit integers
+                //     // we need to unpack them to doubles across 2 registers
+                //     // perform the division and cast back and pack
+                //     // const __m128d lowA = _mm_cvtepi32_pd(_mm_cvtepu16_epi32(_register)); // (3, 2, 1, 0) => (1, 0)
+                //     // const __m128d lowB = _mm_cvtepi32_pd(_mm_cvtepu16_epi32(other.naive()));
+                //     //
+                //     // // Since epi32_pd takes bytes from lower lane, we need shift the upper bytes to lower lanes by
+                //     // // 8-bytes and cast to packed doubles (3, 2, 1, 0) => (_, _, 3, 2) => (3, 2)
+                //     // const __m128d highA = _mm_cvtepi32_pd(_mm_cvtepu16_epi32(_mm_srli_si128(_register, 8)));
+                //     // const __m128d highB = _mm_cvtepi32_pd(_mm_cvtepu16_epi32(_mm_srli_si128(other.naive(), 8)));
+                //     //
+                //     // // Perform division
+                //     // const __m128d resultLow  = _mm_div_pd(lowA, lowB);
+                //     // const __m128d resultHigh = _mm_div_pd(highA, highB);
+                //     //
+                //     // // Convert back to integers with truncation (cvt"t")
+                //     // const __m128i intLow  = _mm_cvttpd_epi32(resultLow);  // (_, _, 1, 0)
+                //     // const __m128i intHigh = _mm_cvttpd_epi32(resultHigh); // (_, _, 3, 2)
+                //     //
+                //     // // Pack and return
+                //     // // Here we can use unpack to "pack" the lower lanes
+                //     // if (std::is_signed_v<DataType>)
+                //     // {
+                //     //     return Simd128(_mm_unpacklo_epi64(intLow, intHigh)); // (3, 2, 1, 0)
+                //     // }
+                //     // }
+                // }
+                // else if constexpr (sizeof(DataType) == 2)
+                // {
+                //     const __m128i zero = _mm_setzero_si128();
+                //     // Similar logic to 32-bit integrals but we can use floats since
+                //     // they have 23-bits of precision
+                //     // Due to the lack of direct conversion from epi16 to ps we need to unpack and then convert
+                //     // (7, 6, 5, 4, 3, 2, 1, 0) => (_, 3, _, 2, _, 1, _, 0)
+                //     const __m128 lowA = _mm_cvtepi32_ps(_mm_unpacklo_epi16(_register, zero));
+                //     const __m128 lowB = _mm_cvtepi32_ps(_mm_unpacklo_epi16(other.naive(), zero));
+                //     // (7, 6, 5, 4, 3, 2, 1, 0) => (_, 7, _, 6, _, 5, _, 4)
+                //     const __m128 highA = _mm_cvtepi32_ps(_mm_unpackhi_epi16(_register, zero));
+                //     const __m128 highB = _mm_cvtepi32_ps(_mm_unpackhi_epi16(other.naive(), zero));
+                //
+                //     // Perform division
+                //     const __m128 resultLow  = _mm_div_ps(lowA, lowB);
+                //     const __m128 resultHigh = _mm_div_ps(highA, highB);
+                //
+                //     // Convert to integers
+                //     const __m128i intLow  = _mm_cvttps_epi32(resultLow);  // (_, Q3, _, Q2, _, Q1, _, Q0)
+                //     const __m128i intHigh = _mm_cvttps_epi32(resultHigh); // (_, Q7, _, Q6, _, Q5, _, Q4)
+                //
+                //     if (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                //     {
+                //         return Simd128(_mm_blend_epi16(intLow, intHigh, 0x00ff));
+                //     }
+                //     else
+                //     {
+                //         return Simd128(intLow);
+                //         // TODO:
+                //     }
+                // }
+                // else
+                // {
+                //     return other;
+                // }
+            }
+        }
 
 
         // TODO: Add Packing and Unpacking
