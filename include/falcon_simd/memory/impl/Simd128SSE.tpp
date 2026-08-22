@@ -651,8 +651,6 @@ namespace falcon
         }
 
 
-        // FALCON_INLINE
-
 
         /**
          * @brief Multiply contents of this register with @p other in-place.
@@ -668,7 +666,6 @@ namespace falcon
             *this = *this * other;
             return *this;
         }
-
 
 
         FALCON_INLINE Simd128 divReg(const Simd128 other) const noexcept
@@ -804,7 +801,7 @@ namespace falcon
                 }
                 else if constexpr (types::IsUWord<DataType>)
                 {
-                    if (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                    if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
                     {
                         // Extend the 16 unsigned integrals to 32 bit signed integrals
                         const __m128i extLowA  = _mm_cvtepu16_epi32(_register);
@@ -841,8 +838,63 @@ namespace falcon
                         return reg;
                     }
                 }
+                else if constexpr (types::IsByte<DataType>)
+                {
+                    // For processing bytes we need first promoted to word (16-bit registers
+                    // and then to qword or 32-bit integral with sign extension
+                    // and then to float perform division and pack them back
+                    // Sign extend from 8 - 16 bits
+                    const __m128i sExtWordLowA  = _mm_srai_epi16(_mm_unpacklo_epi8(_register, _register), 8);
+                    const __m128i sExtWordLowB  = _mm_srai_epi16(_mm_unpacklo_epi8(other.naive(), other.naive()), 8);
+                    const __m128i sExtWordHighA = _mm_srai_epi16(_mm_unpackhi_epi8(_register, _register), 8);
+                    const __m128i sExtWordHighB = _mm_srai_epi16(_mm_unpackhi_epi8(other.naive(), other.naive()), 8);
+
+                    // We have a total of 8 registers containing the unpacked 8 x 8 values L -> Low and H -> High
+                    // abbreviated to prevent confusion
+
+                    // Sign extend from 16 - 32 bits
+                    const __m128i sExtLowAL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordLowA, sExtWordLowA), 16);
+                    const __m128i sExtLowAH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordLowA, sExtWordLowA), 16);
+                    const __m128i sExtLowBL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordLowB, sExtWordLowB), 16);
+                    const __m128i sExtLowBH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordLowB, sExtWordLowB), 16);
+
+                    const __m128i sExtHighAL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordHighA, sExtWordHighA), 16);
+                    const __m128i sExtHighAH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordHighA, sExtWordHighA), 16);
+                    const __m128i sExtHighBL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordHighB, sExtWordHighB), 16);
+                    const __m128i sExtHighBH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordHighB, sExtWordHighB), 16);
+
+                    // Convert to 32-bit floats
+                    const __m128 lowAL = _mm_cvtepi32_ps(sExtLowAL);
+                    const __m128 lowBL = _mm_cvtepi32_ps(sExtLowBL);
+                    const __m128 lowAH = _mm_cvtepi32_ps(sExtLowAH);
+                    const __m128 lowBH = _mm_cvtepi32_ps(sExtLowBH);
+
+                    const __m128 highAL = _mm_cvtepi32_ps(sExtHighAL);
+                    const __m128 highBL = _mm_cvtepi32_ps(sExtHighBL);
+                    const __m128 highAH = _mm_cvtepi32_ps(sExtHighAH);
+                    const __m128 highBH = _mm_cvtepi32_ps(sExtHighBH);
+
+                    // Perform division
+                    const __m128 resLowL  = _mm_div_ps(lowAL, lowBL);
+                    const __m128 resLowH  = _mm_div_ps(lowAH, lowBH);
+                    const __m128 resHighL = _mm_div_ps(highAL, highBL);
+                    const __m128 resHighH = _mm_div_ps(highAH, highBH);
+
+                    // Convert to 32-bit integral with truncation
+                    const __m128i iResLowL  = _mm_cvttps_epi32(resLowL);
+                    const __m128i iResLowH  = _mm_cvttps_epi32(resLowH);
+                    const __m128i iResHighL = _mm_cvttps_epi32(resHighL);
+                    const __m128i iResHighH = _mm_cvttps_epi32(resHighH);
+
+                    // Unpack to 8 bit register(32->16->8)
+                    const __m128i iLow  = _mm_packs_epi32(iResLowL, iResLowH);
+                    const __m128i iHigh = _mm_packs_epi32(iResHighL, iResHighH);
+
+                    return Simd128(_mm_packs_epi16(iLow, iHigh));
+                }
                 else
                 {
+                    // TODO: Byte
                     return other;
                 }
             }
