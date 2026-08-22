@@ -687,7 +687,7 @@ namespace falcon
          * @relatedalso operator/(const DataType)
          * @relatedalso operator/=(const DataType)
          */
-        FALCON_INLINE Simd128 divReg(const Simd128 other) const noexcept
+        [[nodiscard]] FALCON_INLINE Simd128 divReg(const Simd128 other) const noexcept
         {
             if constexpr (types::IsFP64<DataType>)
             {
@@ -1046,11 +1046,34 @@ namespace falcon
          * @relatedalso divReg(const Simd128)
          * @relatedalso operator/=(const DataType)
          */
-        // FALCON_INLINE Simd128 operator/(const DataType scalar) const noexcept
-        // {
-        //     // TODO: Update to division by const
-        // }
-        // TODO: Add Packing and Unpacking
+        [[nodiscard]] FALCON_INLINE Simd128 operator/(const DataType scalar) const noexcept
+        {
+            Simd128 divisor;
+            divisor.broadcast(scalar);
+            return divReg(divisor);
+        }
+
+
+        /**
+         * @brief Divide contents of this register by a @p scalar in-place.
+         * @todo Update to use division by constant and update readme
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         * @note For integral division with different divisors @ref divReg may be
+         *       faster.
+         *
+         * @param scalar The divisor.
+         *
+         * @return A reference to the this register with products.
+         *
+         * @relatedalso divReg(const Simd128)
+         * @relatedalso operator/(const DataType)
+         */
+        FALCON_INLINE Simd128& operator/=(const DataType scalar) noexcept
+        {
+            *this = *this / scalar;
+            return *this;
+        }
 
 
 

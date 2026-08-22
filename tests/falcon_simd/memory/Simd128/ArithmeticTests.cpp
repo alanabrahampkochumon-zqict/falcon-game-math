@@ -490,4 +490,215 @@ TEST(Simd128ArithmeticTests, DivReg_WorksWithMixedNumbers)
     }
 }
 
+
+
+TYPED_TEST(Simd128ArithmeticTests, BinaryDivideOperator_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+    const Type divisor    = Type(5);
+
+    alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        lhs[i]      = this->lhsData[i];
+        expected[i] = static_cast<Type>(lhs[i] / divisor);
+    }
+
+    falcon::Simd128_t<Type, Lane> regA;
+    regA.loadAligned(lhs.data());
+
+    auto regRes = regA / divisor;
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(expected[i], result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(expected[i], result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(expected[i], result[i]);
+        }
+    }
+}
+
+
+
+/// @test Verify that division using operator/ returns the correct value for the largest and smallest numbers.
+TYPED_TEST(Simd128ArithmeticTests, BinaryDivideOperator_MaintainsPrecisionForAtUpperAndLowerLimits)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+    const Type divisor    = Type(5);
+
+    constexpr auto largestNumber  = std::numeric_limits<Type>::max();
+    constexpr auto smallestNumber = std::numeric_limits<Type>::min();
+
+    // We are swapping for the largest and smallest for the first two indices
+    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
+    alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        lhs[i]      = this->lhsData[i];
+        expected[i] = static_cast<Type>(lhs[i] / divisor);
+    }
+    lhs[0]      = largestNumber;
+    lhs[1]      = smallestNumber;
+    expected[0] = static_cast<Type>(lhs[0] / divisor);
+    expected[1] = static_cast<Type>(lhs[1] / divisor);
+
+
+    falcon::Simd128_t<Type, Lane> regA;
+    regA.loadAligned(lhs.data());
+
+    auto regRes = regA / divisor;
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(expected[i], result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(expected[i], result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(expected[i], result[i]);
+        }
+    }
+}
+
+
+TEST(Simd128ArithmeticTests, BinaryDivideOperator_WorksWithMixedNumbers)
+{
+    alignas(16) std::array<float, 4> lhs{ 25, -51, 13, 0 }, result{};
+    const std::array<float, 4> expected{ -6.25f, 12.75f, -3.25f, 0 };
+
+    falcon::Simd128_t<float, 4> regA;
+    regA.loadAligned(lhs.data());
+
+    const auto regRes = regA / -4;
+    regRes.storeAligned(result.data());
+
+
+    for (size_t i = 0; i < 4; ++i)
+    {
+        EXPECT_FLOAT_EQ(expected[i], result[i]);
+    }
+}
+
+
+
+TYPED_TEST(Simd128ArithmeticTests, CompoundDivideOperator_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+    const Type divisor    = Type(5);
+
+    alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        lhs[i]      = this->lhsData[i];
+        expected[i] = static_cast<Type>(lhs[i] / divisor);
+    }
+
+    falcon::Simd128_t<Type, Lane> regA;
+    regA.loadAligned(lhs.data());
+
+    regA /= divisor;
+    regA.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(expected[i], result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(expected[i], result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(expected[i], result[i]);
+        }
+    }
+}
+
+
+
+/// @test Verify that division using operator/ returns the correct value for the largest and smallest numbers.
+TYPED_TEST(Simd128ArithmeticTests, CompoundDivideOperator_MaintainsPrecisionForAtUpperAndLowerLimits)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+    const Type divisor    = Type(5);
+
+    constexpr auto largestNumber  = std::numeric_limits<Type>::max();
+    constexpr auto smallestNumber = std::numeric_limits<Type>::min();
+
+    // We are swapping for the largest and smallest for the first two indices
+    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
+    alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        lhs[i]      = this->lhsData[i];
+        expected[i] = static_cast<Type>(lhs[i] / divisor);
+    }
+    lhs[0]      = largestNumber;
+    lhs[1]      = smallestNumber;
+    expected[0] = static_cast<Type>(lhs[0] / divisor);
+    expected[1] = static_cast<Type>(lhs[1] / divisor);
+
+
+    falcon::Simd128_t<Type, Lane> regA;
+    regA.loadAligned(lhs.data());
+
+    regA /= divisor;
+    regA.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        if constexpr (std::is_same_v<Type, double>)
+        {
+            EXPECT_DOUBLE_EQ(expected[i], result[i]);
+        }
+        else if constexpr (std::is_same_v<Type, float>)
+        {
+            EXPECT_FLOAT_EQ(expected[i], result[i]);
+        }
+        else
+        {
+            EXPECT_EQ(expected[i], result[i]);
+        }
+    }
+}
+
+
+TEST(Simd128ArithmeticTests, CompoundDivideOperator_WorksWithMixedNumbers)
+{
+    alignas(16) std::array<float, 4> lhs{ 25, -51, 13, 0 }, result{};
+    const std::array<float, 4> expected{ -6.25f, 12.75f, -3.25f, 0 };
+
+    falcon::Simd128_t<float, 4> regA;
+    regA.loadAligned(lhs.data());
+
+    regA /= -4;
+    regA.storeAligned(result.data());
+
+    for (size_t i = 0; i < 4; ++i)
+    {
+        EXPECT_FLOAT_EQ(expected[i], result[i]);
+    }
+}
+
 #endif
