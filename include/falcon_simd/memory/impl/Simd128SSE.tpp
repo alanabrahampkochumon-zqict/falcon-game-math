@@ -745,7 +745,7 @@ namespace falcon
                     reg.load(result.data());
                     return reg;
                 }
-                if constexpr (types::IsDWord<DataType>)
+                else if constexpr (types::IsDWord<DataType>)
                 {
                     // Since floats cannot fully represent 32-bit integers
                     // we need to unpack them to doubles across 2 registers
@@ -969,10 +969,6 @@ namespace falcon
                 }
                 else
                 {
-                    // To perform unsigned divide we need to first unpack to 8 bits into
-                    // 16 and then 32 with zero bits interleaved
-                    const __m128i zero = _mm_setzero_si128();
-
                     __m128i extLowAL;
                     __m128i extLowAH;
                     __m128i extHighAL;
@@ -984,11 +980,10 @@ namespace falcon
 
                     if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
                     {
-
                         // To convert the 8-bit register from 8-bit to 32-bits directly we need to use
                         // shifts in combination with cvt(only available in SSE4.1 and above)
-                        //                (highAH, highAL, lowAH, lowAL)
-                        // Shift amount        12,      8,     4,     0
+                        // Register     (highAH, highAL, lowAH, lowAL)
+                        // Shift amount      12,      8,     4,     0
                         extLowAL  = _mm_cvtepu8_epi32(_register);
                         extLowAH  = _mm_cvtepu8_epi32(_mm_srli_si128(_register, 4));
                         extHighAL = _mm_cvtepu8_epi32(_mm_srli_si128(_register, 8));
@@ -1001,6 +996,9 @@ namespace falcon
                     }
                     else
                     {
+                        // To perform unsigned divide we need to first unpack to 8 bits into
+                        // 16 and then 32 with zero bits interleaved
+                        const __m128i zero = _mm_setzero_si128();
                         // Unpack from 8 bit to 16 bits with zero extension
                         const __m128i extLowA  = _mm_unpacklo_epi8(_register, zero);
                         const __m128i extHighA = _mm_unpackhi_epi8(_register, zero);

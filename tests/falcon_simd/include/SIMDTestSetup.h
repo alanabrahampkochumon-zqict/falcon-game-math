@@ -60,7 +60,10 @@ constexpr T getAllOnes()
     {
         return std::bit_cast<T>(std::numeric_limits<uint64_t>::max());
     }
-    return 1; // Shouldn't hit this path.
+    else
+    {
+        return 1; // Shouldn't hit this path.
+    }
 }
 
 

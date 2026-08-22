@@ -90,16 +90,18 @@ TYPED_TEST(Simd128GetterSetterTests, Set_FillsUnoccupiedSpaceWithZeroes)
     {
         GTEST_SKIP() << "Register is fully occupied, skipping zero-padding test.";
     }
-
-    auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
-
-    alignas(16) std::array<Type, MaxLanes> result{};
-    reg.store(result.data());
-
-
-    for (size_t i = Lane; i < MaxLanes; ++i)
+    else
     {
-        EXPECT_EQ(result[i], static_cast<Type>(0));
+        auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
+
+        alignas(16) std::array<Type, MaxLanes> result{};
+        reg.store(result.data());
+
+
+        for (size_t i = Lane; i < MaxLanes; ++i)
+        {
+            EXPECT_EQ(result[i], static_cast<Type>(0));
+        }
     }
 }
 
