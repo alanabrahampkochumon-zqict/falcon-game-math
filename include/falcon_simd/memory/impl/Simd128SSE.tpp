@@ -826,6 +826,7 @@ namespace falcon
                     }
                     else
                     {
+                        // TODO: Add Simd if possible
                         std::array<DataType, Lane> a{}, b{}, result{};
                         store(a.data());
                         other.store(b.data());
@@ -840,28 +841,57 @@ namespace falcon
                 }
                 else if constexpr (types::IsByte<DataType>)
                 {
-                    // For processing bytes we need first promoted to word (16-bit registers
-                    // and then to qword or 32-bit integral with sign extension
-                    // and then to float perform division and pack them back
-                    // Sign extend from 8 - 16 bits
-                    const __m128i sExtWordLowA  = _mm_srai_epi16(_mm_unpacklo_epi8(_register, _register), 8);
-                    const __m128i sExtWordLowB  = _mm_srai_epi16(_mm_unpacklo_epi8(other.naive(), other.naive()), 8);
-                    const __m128i sExtWordHighA = _mm_srai_epi16(_mm_unpackhi_epi8(_register, _register), 8);
-                    const __m128i sExtWordHighB = _mm_srai_epi16(_mm_unpackhi_epi8(other.naive(), other.naive()), 8);
 
                     // We have a total of 8 registers containing the unpacked 8 x 8 values L -> Low and H -> High
                     // abbreviated to prevent confusion
+                    __m128i sExtLowAL;
+                    __m128i sExtLowAH;
+                    __m128i sExtLowBL;
+                    __m128i sExtLowBH;
+                    __m128i sExtHighAL;
+                    __m128i sExtHighAH;
+                    __m128i sExtHighBL;
+                    __m128i sExtHighBH;
+                    if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                    {
+                        // To convert the 8-bit register from 8-bit to 32-bits directly we need to use
+                        // shifts in combination with cvt(only available in SSE4.1 and above)
+                        //                (highAH, highAL, lowAH, lowAL)
+                        // Shift amount        12,      8,     4,     0
+                        sExtLowAL  = _mm_cvtepi8_epi32(_register);
+                        sExtLowAH  = _mm_cvtepi8_epi32(_mm_srli_si128(_register, 4));
+                        sExtHighAL = _mm_cvtepi8_epi32(_mm_srli_si128(_register, 8));
+                        sExtHighAH = _mm_cvtepi8_epi32(_mm_srli_si128(_register, 12));
 
-                    // Sign extend from 16 - 32 bits
-                    const __m128i sExtLowAL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordLowA, sExtWordLowA), 16);
-                    const __m128i sExtLowAH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordLowA, sExtWordLowA), 16);
-                    const __m128i sExtLowBL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordLowB, sExtWordLowB), 16);
-                    const __m128i sExtLowBH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordLowB, sExtWordLowB), 16);
+                        sExtLowBL  = _mm_cvtepi8_epi32(other.naive());
+                        sExtLowBH  = _mm_cvtepi8_epi32(_mm_srli_si128(other.naive(), 4));
+                        sExtHighBL = _mm_cvtepi8_epi32(_mm_srli_si128(other.naive(), 8));
+                        sExtHighBH = _mm_cvtepi8_epi32(_mm_srli_si128(other.naive(), 12));
+                    }
+                    else
+                    {
+                        // For processing bytes we need first promoted to word (16-bit registers
+                        // and then to qword or 32-bit integral with sign extension
+                        // and then to float perform division and pack them back
+                        // Sign extend from 8 - 16 bits
+                        const __m128i sExtWordLowA = _mm_srai_epi16(_mm_unpacklo_epi8(_register, _register), 8);
+                        const __m128i sExtWordLowB = _mm_srai_epi16(_mm_unpacklo_epi8(other.naive(), other.naive()), 8);
+                        const __m128i sExtWordHighA = _mm_srai_epi16(_mm_unpackhi_epi8(_register, _register), 8);
+                        const __m128i sExtWordHighB =
+                            _mm_srai_epi16(_mm_unpackhi_epi8(other.naive(), other.naive()), 8);
 
-                    const __m128i sExtHighAL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordHighA, sExtWordHighA), 16);
-                    const __m128i sExtHighAH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordHighA, sExtWordHighA), 16);
-                    const __m128i sExtHighBL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordHighB, sExtWordHighB), 16);
-                    const __m128i sExtHighBH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordHighB, sExtWordHighB), 16);
+
+                        sExtLowAL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordLowA, sExtWordLowA), 16);
+                        sExtLowAH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordLowA, sExtWordLowA), 16);
+                        sExtLowBL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordLowB, sExtWordLowB), 16);
+                        sExtLowBH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordLowB, sExtWordLowB), 16);
+
+                        // Sign extend from 16 - 32 bits
+                        sExtHighAL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordHighA, sExtWordHighA), 16);
+                        sExtHighAH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordHighA, sExtWordHighA), 16);
+                        sExtHighBL = _mm_srai_epi32(_mm_unpacklo_epi16(sExtWordHighB, sExtWordHighB), 16);
+                        sExtHighBH = _mm_srai_epi32(_mm_unpackhi_epi16(sExtWordHighB, sExtWordHighB), 16);
+                    }
 
                     // Convert to 32-bit floats
                     const __m128 lowAL = _mm_cvtepi32_ps(sExtLowAL);
@@ -894,8 +924,89 @@ namespace falcon
                 }
                 else
                 {
-                    // TODO: Byte
-                    return other;
+                    // To perform unsigned divide we need to first unpack to 8 bits into
+                    // 16 and then 32 with zero bits interleaved
+                    const __m128i zero = _mm_setzero_si128();
+
+                    __m128i extLowAL;
+                    __m128i extLowAH;
+                    __m128i extHighAL;
+                    __m128i extHighAH;
+                    __m128i extLowBL;
+                    __m128i extLowBH;
+                    __m128i extHighBL;
+                    __m128i extHighBH;
+
+                    if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                    {
+
+                        // To convert the 8-bit register from 8-bit to 32-bits directly we need to use
+                        // shifts in combination with cvt(only available in SSE4.1 and above)
+                        //                (highAH, highAL, lowAH, lowAL)
+                        // Shift amount        12,      8,     4,     0
+                        extLowAL = _mm_cvtepu8_epi32(_register);
+                        extLowAH = _mm_cvtepu8_epi32(_mm_srli_si128(_register, 4));
+                        extHighAL = _mm_cvtepu8_epi32(_mm_srli_si128(_register, 8));
+                        extHighAH = _mm_cvtepu8_epi32(_mm_srli_si128(_register, 12));
+
+                        extLowBL = _mm_cvtepu8_epi32(other.naive());
+                        extLowBH = _mm_cvtepu8_epi32(_mm_srli_si128(other.naive(), 4));
+                        extHighBL = _mm_cvtepu8_epi32(_mm_srli_si128(other.naive(), 8));
+                        extHighBH = _mm_cvtepu8_epi32(_mm_srli_si128(other.naive(), 12));
+                    }
+                    else
+                    {
+                        // Unpack from 8 bit to 16 bits with zero extension
+                        const __m128i extLowA  = _mm_unpacklo_epi8(_register, zero);
+                        const __m128i extHighA = _mm_unpackhi_epi8(_register, zero);
+                        const __m128i extLowB  = _mm_unpacklo_epi8(other.naive(), zero);
+                        const __m128i extHighB = _mm_unpackhi_epi8(other.naive(), zero);
+
+                        // Unpack from 16 bits to 32 bit with zero extension
+                        extLowAL  = _mm_unpacklo_epi16(extLowA, zero);
+                        extLowAH  = _mm_unpackhi_epi16(extLowA, zero);
+                        extHighAL = _mm_unpacklo_epi16(extHighA, zero);
+                        extHighAH = _mm_unpackhi_epi16(extHighA, zero);
+
+                        extLowBL  = _mm_unpacklo_epi16(extLowB, zero);
+                        extLowBH  = _mm_unpackhi_epi16(extLowB, zero);
+                        extHighBL = _mm_unpacklo_epi16(extHighB, zero);
+                        extHighBH = _mm_unpackhi_epi16(extHighB, zero);
+                    }
+
+
+                    // Convert to 32-bit floats
+                    const __m128 lowAL = _mm_cvtepi32_ps(extLowAL);
+                    const __m128 lowBL = _mm_cvtepi32_ps(extLowBL);
+                    const __m128 lowAH = _mm_cvtepi32_ps(extLowAH);
+                    const __m128 lowBH = _mm_cvtepi32_ps(extLowBH);
+
+                    const __m128 highAL = _mm_cvtepi32_ps(extHighAL);
+                    const __m128 highBL = _mm_cvtepi32_ps(extHighBL);
+                    const __m128 highAH = _mm_cvtepi32_ps(extHighAH);
+                    const __m128 highBH = _mm_cvtepi32_ps(extHighBH);
+
+                    // Perform division
+                    const __m128 resLowL  = _mm_div_ps(lowAL, lowBL);
+                    const __m128 resLowH  = _mm_div_ps(lowAH, lowBH);
+                    const __m128 resHighL = _mm_div_ps(highAL, highBL);
+                    const __m128 resHighH = _mm_div_ps(highAH, highBH);
+
+                    // Convert to 32-bit integral with truncation
+                    const __m128i iResLowL  = _mm_cvttps_epi32(resLowL);
+                    const __m128i iResLowH  = _mm_cvttps_epi32(resLowH);
+                    const __m128i iResHighL = _mm_cvttps_epi32(resHighL);
+                    const __m128i iResHighH = _mm_cvttps_epi32(resHighH);
+
+
+                    // Unpack to 8 bit register(32->16->8)
+                    // Since we are converting from 32 to 8 we can use signed packing
+                    // for 32-bit to 16-bit since the maximum saturation of 32,767 will never
+                    // be hit, since the max value for 8-bit is 255
+                    const __m128i iLow  = _mm_packs_epi32(iResLowL, iResLowH);
+                    const __m128i iHigh = _mm_packs_epi32(iResHighL, iResHighH);
+
+                    return Simd128(_mm_packus_epi16(iLow, iHigh));
                 }
             }
         }
