@@ -42,6 +42,8 @@ using Simd128RegisterTypeHints = testing::Types<
     SimdRegisterTypeMatrix<double, 2>>;
 
 
+/// TODO: Add the below helpers to main library.
+
 /// Helper that returns all 1s bitwise(1111..1111) for the given type.
 template <typename T>
 constexpr T getAllOnes()

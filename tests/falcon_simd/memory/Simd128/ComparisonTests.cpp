@@ -43,10 +43,20 @@ namespace
         {
             const Type False = Type(0);
             const Type True  = getAllOnes<Type>();
-            lhsData          = { 15, 2, 0, 3, 5, 11, 15, 3, 1, 2, 5, 12, 14, 3, 15, 12 };
-            rhsData          = { 12, 15, 8, 1, 5, 11, 3, 28, 2, 7, 5, 6, 4, 11, 4, 6 };
-            gtMask           = { True,  False, False, True, False, False, True, False,
-                                 False, False, False, True, True,  False, True, True };
+            if constexpr (std::is_signed_v<Type>)
+            {
+                lhsData = { 15, -2, 0, -3, 5, -11, 15, 3, -1, 2, -5, 12, -14, 3, 15, 12 };
+                rhsData = { -12, 15, 8, 1, -5, 11, -3, 28, 2, 7, -5, 6, -4, 11, 4, 6 };
+                gtMask  = { True,  False, False, False, True,  False, True, False,
+                            False, False, False, True,  False, False, True, True };
+            }
+            else
+            {
+                lhsData = { 15, 2, 0, 3, 5, 11, 15, 3, 1, 2, 5, 12, 14, 3, 15, 12 };
+                rhsData = { 12, 15, 8, 1, 5, 11, 3, 28, 2, 7, 5, 6, 4, 11, 4, 6 };
+                gtMask  = { True,  False, False, True, False, False, True, False,
+                            False, False, False, True, True,  False, True, True };
+            }
         }
     };
     TYPED_TEST_SUITE(Simd128ComparisonTests, Simd128RegisterTypeHints);
@@ -67,8 +77,9 @@ TYPED_TEST(Simd128ComparisonTests, GreaterThanOperator_ReturnsAValidMask)
     resReg.store(result.data());
     for (size_t i = 0; i < this->Lane; ++i)
     {
-        EXPECT_TRUE(isEqualBitwise(this->gtMask[i], result[i])) << "Equality mismatch at index " << i
-                                                 << "\nExpected: " << this->gtMask[i] << "\nGot: " << result[i] << '\n';
+        EXPECT_TRUE(isEqualBitwise(this->gtMask[i], result[i]))
+            << "Equality mismatch at index " << i << "\nExpected: " << this->gtMask[i] << "\nGot: " << result[i]
+            << '\n';
     }
 }
 

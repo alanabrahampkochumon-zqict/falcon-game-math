@@ -1102,13 +1102,54 @@ namespace falcon
         }
 
 
-
+        // TODO: Add comparisons
         [[nodiscard]] FALCON_INLINE Simd128 operator>(const Simd128 other) const noexcept
         {
             if constexpr (types::IsFP64<DataType>)
             {
                 return Simd128(_mm_cmpgt_pd(_register, other.naive()));
             }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                return Simd128(_mm_cmpgt_ps(_register, other.naive()));
+            }
+            else if constexpr (types::IsQWord<DataType>)
+            {
+                if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                {
+                    // Only SSE4.2 has
+                    return Simd128(_mm_cmpgt_epi64(_register, other.naive()));
+                }
+                else
+                {
+                    // TODO:
+                }
+            }
+            else if constexpr (types::IsUQWord<DataType>)
+            {
+                if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                {
+                    // Only SSE4.2 has
+                    return Simd128(_mm_cmpgt_epi64(_register, other.naive()));
+                }
+                else
+                {
+                    // TODO:
+                }
+            }
+            else if constexpr (types::IsDWord<DataType>)
+            {
+                return Simd128(_mm_cmpgt_epi32(_register, other.naive()));
+            }
+            else if constexpr (types::IsWord<DataType>)
+            {
+                return Simd128(_mm_cmpgt_epi16(_register, other.naive()));
+            }
+            else if constexpr (types::IsByte<DataType>)
+            {
+                return Simd128(_mm_cmpgt_epi8(_register, other.naive()));
+            }
+
             else
             {
                 return other;
