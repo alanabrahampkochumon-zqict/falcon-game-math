@@ -8,11 +8,17 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+
 #include "SIMDTestSetup.h"
 
 #include <falcon_simd/memory/Simd128.h>
 #include <array>
 
+
+/**
+ * @addtogroup T_SIMD128_Load_Store
+ * @{
+ */
 
 // TODO: Remove Preprocessor after implementing individual simd paths
 #if defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX) ||                      \
@@ -199,3 +205,5 @@ TYPED_TEST(Simd128LoadStoreTests, SetZero_ZeroesOutTheRegister)
 }
 
 #endif
+
+/** @} */

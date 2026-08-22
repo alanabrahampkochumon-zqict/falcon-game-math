@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: August 18, 2026
  *
- * @brief Verify @ref falcon::Simd128 arithmetics.
+ * @brief Verify @ref falcon::Simd128 conversion constructors.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -12,6 +12,11 @@
 
 #include <array>
 #include <falcon_simd/memory/Simd128.h>
+
+/**
+ * @addtogroup T_SIMD128_ConvCtor
+ * @{
+ */
 
 // TODO: Remove Preprocessor after implementing individual simd paths
 #if defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX) ||                      \
@@ -39,8 +44,8 @@ TYPED_TEST(Simd128ConversionCtorTests, PromotesRegisterType)
     [[maybe_unused]] falcon::Simd128_t<PromotedType, Lane> regB(regA);
 
     #if defined(__GNUC__) || defined(__clang__)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wignored-attributes"
+        #pragma GCC diagnostic push
+        #pragma GCC diagnostic ignored "-Wignored-attributes"
     #endif
 
     // Compile time check -> Immediate feedback
@@ -50,7 +55,7 @@ TYPED_TEST(Simd128ConversionCtorTests, PromotesRegisterType)
     EXPECT_TRUE(result);
 
     #if defined(__GNUC__) || defined(__clang__)
-    #pragma GCC diagnostic pop
+        #pragma GCC diagnostic pop
     #endif
 }
 
@@ -65,8 +70,8 @@ TYPED_TEST(Simd128ConversionCtorTests, DemotesRegisterType)
     [[maybe_unused]] falcon::Simd128_t<PromotedType, Lane> regB(regA);
 
     #if defined(__GNUC__) || defined(__clang__)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wignored-attributes"
+        #pragma GCC diagnostic push
+        #pragma GCC diagnostic ignored "-Wignored-attributes"
     #endif
 
     // Compile time check -> Immediate feedback
@@ -76,9 +81,10 @@ TYPED_TEST(Simd128ConversionCtorTests, DemotesRegisterType)
     EXPECT_TRUE(result);
 
     #if defined(__GNUC__) || defined(__clang__)
-    #pragma GCC diagnostic pop
+        #pragma GCC diagnostic pop
     #endif
 }
 
-
 #endif
+
+/** @} */

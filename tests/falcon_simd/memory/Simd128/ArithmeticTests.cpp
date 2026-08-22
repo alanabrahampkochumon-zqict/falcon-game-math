@@ -13,6 +13,13 @@
 #include <array>
 #include <falcon_simd/memory/Simd128.h>
 
+
+
+/**
+ * @addtogroup T_SIMD128_Arithmetic
+ * @{
+ */
+
 // TODO: Remove Preprocessor after implementing individual simd paths
 #if defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX) ||                      \
     defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_SSE2)
@@ -702,3 +709,5 @@ TEST(Simd128ArithmeticTests, CompoundDivideOperator_WorksWithMixedNumbers)
 }
 
 #endif
+
+/** @} */

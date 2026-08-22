@@ -46,6 +46,52 @@ namespace falcon
         FALCON_INLINE constexpr explicit Simd128() = default;
 
 
+        /**
+         * Set the register with the given values.
+         *
+         * @tparam Args The numeric type of arguments. Must match the @ref Type of this register.
+         *
+         * @param args The data to put in the register.
+         *
+         * @return A reference to this register.
+         */
+        template <typename... Args>
+            requires(sizeof...(Args) == Lane) && (std::same_as<Args, DataType> && ...)
+        FALCON_INLINE constexpr Simd128& set(Args... args)
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                _register = _mm_setr_pd(args...);
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                _register = _mm_setr_ps(args...);
+            }
+            else
+            {
+                // For integrals loading is done by the same function for bytes and unsigned bytes
+                // so we can use size for branching
+                if constexpr (sizeof(DataType) == 8)
+                {
+                    _register = _mm_setr_epi64(args...);
+                }
+                else if constexpr (sizeof(DataType) == 4)
+                {
+                    _register = _mm_setr_epi32(args...);
+                }
+                else if constexpr (sizeof(DataType) == 2)
+                {
+                    _register = _mm_setr_epi16(args...);
+                }
+                else
+                {
+                    _register = _mm_setr_epi8(args...);
+                }
+            }
+            return *this;
+        }
+
+
         /// @brief Initialize a Simd128 with the supplied register.
         FALCON_INLINE explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
 
@@ -1077,8 +1123,8 @@ namespace falcon
 
 
 
-        /// TODO: Add tests for these ctor and getters
-
+        /// TODO: Add tests for these ctor and getter
+        /// TODO: Add test for naive
         /// @brief Get the internal register used by Simd128
         FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept { return _register; }
 
