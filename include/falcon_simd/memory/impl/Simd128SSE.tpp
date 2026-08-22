@@ -549,7 +549,7 @@ namespace falcon
                         // We can split a 64-bit number into high and low parts A => A_Lo + A_Hi * 2^32(or << 32)
                         // A * B = A_Lo * B_Lo + A_Lo * B_Hi << 2^32 + A_Hi * B_Lo << 2^32 + A_Hi * B_Hi << 2^64 (zero
                         // so no calculation needed for this part)
-                        // (G, A1_Lo * B1_Lo, G, A0_Lo * B0_Lo)
+                        // (_, A1_Lo * B1_Lo, _, A0_Lo * B0_Lo)
                         __m128i lowProduct = _mm_mullo_epi32(_register, other.naive()); // A_Lo * B_Lo
 
                         // Swap High and Low lanes
@@ -604,12 +604,12 @@ namespace falcon
 
                         // Pack the odd and even register so that their lower part is filled appropriately
                         // G -> Garbage
-                        // even(G, 2, G, 0) + odd(G, 3, G, 1) =packed=> Lo(G, G, 1, 0) & Hi(G, G, 3, 2)
+                        // even(_, 2, _, 0) + odd(_, 3, _, 1) =packed=> Lo(_, _, 1, 0) & Hi(_, _, 3, 2)
                         __m128i packedLowerHalf = _mm_unpacklo_epi32(evenProduct, oddProduct);
                         __m128i packedhighHalf  = _mm_unpackhi_epi32(evenProduct, oddProduct);
 
                         // Pack the packed 32-bits into 2 64-bit lanes
-                        // Lo(G, G, 1, 0) & Hi(G, G, 3, 2) =packed=> (3, 2, 1, 0)
+                        // Lo(_, _, 1, 0) & Hi(_, _, 3, 2) =packed=> (3, 2, 1, 0)
                         return Simd128(_mm_unpacklo_epi64(packedLowerHalf, packedhighHalf));
                     }
                 }
@@ -668,6 +668,25 @@ namespace falcon
         }
 
 
+        /**
+         * @brief Divide contents of this register by another register(@p other).
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         * @note Direct SIMD operations are limited to floating-point numbers only.
+         *       Therefore the operations for integrals are emulated by converting them to floating points, but some
+         *       integrals like for `uint64_t` and `int64_t` are fully scalar since converting them to floating point
+         *       can lead to precision loss due to the 53-bit maximum precision of double precision float point numbers.
+         *
+         * @note For division with same divisor it is faster to use operator/ or operator/= which implements division
+         *       by constant from Hackers Delight. (TODO)
+         *
+         * @param other The register containing the divisors.
+         *
+         * @return A new register with the quotient.
+         *
+         * @relatedalso operator/(const DataType)
+         * @relatedalso operator/=(const DataType)
+         */
         FALCON_INLINE Simd128 divReg(const Simd128 other) const noexcept
         {
             if constexpr (types::IsFP64<DataType>)
@@ -944,13 +963,13 @@ namespace falcon
                         // shifts in combination with cvt(only available in SSE4.1 and above)
                         //                (highAH, highAL, lowAH, lowAL)
                         // Shift amount        12,      8,     4,     0
-                        extLowAL = _mm_cvtepu8_epi32(_register);
-                        extLowAH = _mm_cvtepu8_epi32(_mm_srli_si128(_register, 4));
+                        extLowAL  = _mm_cvtepu8_epi32(_register);
+                        extLowAH  = _mm_cvtepu8_epi32(_mm_srli_si128(_register, 4));
                         extHighAL = _mm_cvtepu8_epi32(_mm_srli_si128(_register, 8));
                         extHighAH = _mm_cvtepu8_epi32(_mm_srli_si128(_register, 12));
 
-                        extLowBL = _mm_cvtepu8_epi32(other.naive());
-                        extLowBH = _mm_cvtepu8_epi32(_mm_srli_si128(other.naive(), 4));
+                        extLowBL  = _mm_cvtepu8_epi32(other.naive());
+                        extLowBH  = _mm_cvtepu8_epi32(_mm_srli_si128(other.naive(), 4));
                         extHighBL = _mm_cvtepu8_epi32(_mm_srli_si128(other.naive(), 8));
                         extHighBH = _mm_cvtepu8_epi32(_mm_srli_si128(other.naive(), 12));
                     }
@@ -1012,6 +1031,25 @@ namespace falcon
         }
 
 
+        /**
+         * @brief Divide contents of this register by a @p scalar.
+         * @todo Update to use division by constant and update readme
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         * @note For integral division with different divisors @ref divReg may be
+         *       faster.
+         *
+         * @param scalar The divisor.
+         *
+         * @return A new register with the quotient.
+         *
+         * @relatedalso divReg(const Simd128)
+         * @relatedalso operator/=(const DataType)
+         */
+        // FALCON_INLINE Simd128 operator/(const DataType scalar) const noexcept
+        // {
+        //     // TODO: Update to division by const
+        // }
         // TODO: Add Packing and Unpacking
 
 
