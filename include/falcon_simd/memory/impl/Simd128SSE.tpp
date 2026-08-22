@@ -47,47 +47,27 @@ namespace falcon
 
 
         /**
-         * Set the register with the given values.
+         * @brief Set the register with the given values in the lower lanes filling the unfilled lanes with zeroes.
          *
-         * @tparam Args The numeric type of arguments. Must match the @ref Type of this register.
+         * @note Internally the register gets filled from the bottom to top, but when used with store
+         *       to retrieve the value, the values will be identical.
+         *       REGISTER VIEW SET(1, 2) => [0, 0, 2, 1] => STORE() => [1, 2]
+         *
+         * @tparam Args The numeric type of arguments. Must be less than the maximum lane size.
          *
          * @param args The data to put in the register.
          *
          * @return A reference to this register.
          */
         template <typename... Args>
-            requires(sizeof...(Args) == Lane) && (std::same_as<Args, DataType> && ...)
+            requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...)
         FALCON_INLINE constexpr Simd128& set(Args... args)
         {
-            if constexpr (types::IsFP64<DataType>)
-            {
-                _register = _mm_setr_pd(args...);
-            }
-            else if constexpr (types::IsFP32<DataType>)
-            {
-                _register = _mm_setr_ps(args...);
-            }
-            else
-            {
-                // For integrals loading is done by the same function for bytes and unsigned bytes
-                // so we can use size for branching
-                if constexpr (sizeof(DataType) == 8)
-                {
-                    _register = _mm_setr_epi64(args...);
-                }
-                else if constexpr (sizeof(DataType) == 4)
-                {
-                    _register = _mm_setr_epi32(args...);
-                }
-                else if constexpr (sizeof(DataType) == 2)
-                {
-                    _register = _mm_setr_epi16(args...);
-                }
-                else
-                {
-                    _register = _mm_setr_epi8(args...);
-                }
-            }
+            constexpr auto MaxLanes = 128 / sizeof(DataType);
+            // By packing to a compile time array and adding values
+            alignas(16) std::array<DataType, MaxLanes> data{ args... };
+            loadAligned(data.data());
+
             return *this;
         }
 
