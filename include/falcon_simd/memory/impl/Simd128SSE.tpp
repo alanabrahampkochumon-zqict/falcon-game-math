@@ -1103,6 +1103,19 @@ namespace falcon
 
 
 
+        [[nodiscard]] FALCON_INLINE Simd128 operator>(const Simd128 other) const noexcept
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                return Simd128(_mm_cmpgt_pd(_register, other.naive()));
+            }
+            else
+            {
+                return other;
+            }
+        }
+
+
         /// TODO: Add tests for these ctor and getter
         /// TODO: Add test for naive
         /// @brief Get the internal register used by Simd128

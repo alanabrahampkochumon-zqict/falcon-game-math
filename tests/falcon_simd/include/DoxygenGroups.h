@@ -39,6 +39,7 @@
          *   @defgroup T_SIMD128_ConvCtor Conversion Constructors Tests
          *   @defgroup T_SIMD128_Get_Set Getters/Setters Tests
          *   @defgroup T_SIMD128_Load_Store Load/Store Tests
+         *   @defgroup T_SIMD128_Cmp Comparison operation Tests(>, <, >=, <=, ==, !=)
          * @}
         */
 
