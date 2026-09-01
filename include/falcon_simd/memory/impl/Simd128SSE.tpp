@@ -1100,6 +1100,56 @@ namespace falcon
         }
 
 
+
+        // A < B => B > A
+        [[nodiscard]] FALCON_INLINE Simd128 operator==(const Simd128 other) const noexcept
+        {
+            if constexpr (std::is_same_v<DataType, double>)
+            {
+                return Simd128(_mm_cmpeq_pd(_register, other.naive()));
+            }
+            else if constexpr (std::is_same_v<DataType, float>)
+            {
+                return Simd128(_mm_cmpeq_ps(_register, other.naive()));
+            }
+            else
+            {
+                if constexpr (sizeof(DataType) == 8)
+                {
+
+                    if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                    {
+                        // Equality operator for epi64 was introduced in SSE4.2
+                        return Simd128(_mm_cmpeq_epi64(_register, other.naive()));
+                    }
+                    else
+                    {
+                        // Compare high and low in one go
+                        const auto eqHiLo = _mm_cmpeq_epi32(_register, other.naive());
+                        // Shuffle the high bits into the lower portion
+                        const auto eqHi =
+                            _mm_shuffle_epi32(eqHiLo, _MM_SHUFFLE(3, 3, 1, 1)); // (A_Hi1, A_Hi1, A_Hi0, A_Hi0)
+                        // And(&&) the result and extend it into lower higher lanes
+                        const auto result = _mm_and_si128(eqHiLo, eqHi);
+                        return Simd128(_mm_shuffle_epi32(result, _MM_SHUFFLE(2, 2, 0, 0)));
+                    }
+                }
+                else if constexpr (sizeof(DataType) == 4)
+                {
+                    return Simd128(_mm_cmpeq_epi32(_register, other.naive()));
+                }
+                else if constexpr (sizeof(DataType) == 2)
+                {
+                    return Simd128(_mm_cmpeq_epi16(_register, other.naive()));
+                }
+                else // if constexpr(sizeof(DataType) == 1)
+                {
+                    return Simd128(_mm_cmpeq_epi8(_register, other.naive()));
+                }
+            }
+        }
+
+
         // TODO: Add comparisons
         [[nodiscard]] FALCON_INLINE Simd128 operator>(const Simd128 other) const noexcept
         {
@@ -1216,7 +1266,6 @@ namespace falcon
                 return Simd128(_mm_cmpgt_epi8(biasedRegisterA, biasedRegisterB));
             }
         }
-
 
         // A < B => B > A
         [[nodiscard]] FALCON_INLINE Simd128 operator<(const Simd128 other) const noexcept { return other > *this; }

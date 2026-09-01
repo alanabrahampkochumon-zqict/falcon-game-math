@@ -36,7 +36,7 @@ namespace
     public:
         using Type                   = typename T::Type;
         static constexpr size_t Lane = T::VALUE;
-        std::array<typename T::Type, 16> lhsData, rhsData, gtMask, ltMask;
+        std::array<typename T::Type, 16> lhsData, rhsData, gtMask, ltMask, eqMask;
 
     protected:
         void SetUp() override
@@ -55,6 +55,9 @@ namespace
 
                 ltMask = { False, True, False, False, False, True, False, True,
                            True,  True, False, False, True,  True, False, False };
+
+                eqMask = { False, False, True, True, False, False, False, False,
+                           False,  False, True, False, False,  False, False, False };
             }
             else
             {
@@ -64,8 +67,11 @@ namespace
                 gtMask = { True,  False, False, False, False, False, True, False,
                            False, False, False, True,  True,  False, True, True };
 
-                ltMask = { False, True, False, False, False,  False, False, True,
-                           True,  True, False, False, False, True, False, False };
+                ltMask = { False, True, False, False, False, False, False, True,
+                           True,  True, False, False, False, True,  False, False };
+
+                eqMask = { False, False, True, True, True, True, False, False,
+                           False,  False, True, False, False,  False, False, False };
             }
         }
     };
@@ -106,6 +112,24 @@ TYPED_TEST(Simd128ComparisonTests, LessThanOperator_ReturnsAValidMask)
     {
         EXPECT_TRUE(isEqualBitwise(this->ltMask[i], result[i]))
             << "Equality mismatch at index " << i << "\nExpected: " << this->ltMask[i] << "\nGot: " << result[i]
+            << "\nLHS: " << this->lhsData[i] << "\nRHS: " << this->rhsData[i] << '\n';
+    }
+}
+
+TYPED_TEST(Simd128ComparisonTests, DoubleEqualsOperator_ReturnsAValidMask)
+{
+    using Type = typename TypeParam::Type;
+    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    a.load(this->lhsData.data());
+    b.load(this->rhsData.data());
+
+    std::array<Type, TypeParam::VALUE> result{};
+    auto resReg = a == b;
+    resReg.store(result.data());
+    for (size_t i = 0; i < TypeParam::VALUE; ++i)
+    {
+        EXPECT_TRUE(isEqualBitwise(this->eqMask[i], result[i]))
+            << "Equality mismatch at index " << i << "\nExpected: " << this->eqMask[i] << "\nGot: " << result[i]
             << "\nLHS: " << this->lhsData[i] << "\nRHS: " << this->rhsData[i] << '\n';
     }
 }
