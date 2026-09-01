@@ -36,86 +36,36 @@ namespace
     public:
         using Type                   = typename T::Type;
         static constexpr size_t Lane = T::VALUE;
-        std::array<typename T::Type, 16> lhsData, rhsData, gtMask;
+        std::array<typename T::Type, 16> lhsData, rhsData, gtMask, ltMask;
 
     protected:
         void SetUp() override
         {
-            const Type False = Type(0);
-            const Type True  = getAllOnes<Type>();
+            const Type False   = Type(0);
+            const Type True    = getAllOnes<Type>();
+            constexpr auto max = std::numeric_limits<Type>::max();
+            constexpr auto min = std::numeric_limits<Type>::min();
             if constexpr (std::is_signed_v<Type>)
             {
-                lhsData = { std::numeric_limits<Type>::max(),
-                            std::numeric_limits<Type>::min(),
-                            std::numeric_limits<Type>::max(),
-                            std::numeric_limits<Type>::min(),
-                            5,
-                            -11,
-                            15,
-                            3,
-                            -1,
-                            2,
-                            -5,
-                            12,
-                            -14,
-                            3,
-                            15,
-                            12 };
-                rhsData = { std::numeric_limits<Type>::min(),
-                            std::numeric_limits<Type>::max(),
-                            std::numeric_limits<Type>::max(),
-                            std::numeric_limits<Type>::min(),
-                            -5,
-                            11,
-                            -3,
-                            28,
-                            2,
-                            7,
-                            -5,
-                            6,
-                            -4,
-                            11,
-                            4,
-                            6 };
-                gtMask  = { True,  False, False, False, True,  False, True, False,
-                            False, False, False, True,  False, False, True, True };
+                lhsData = { max, min, max, min, 5, -11, 15, 3, -1, 2, -5, 12, -14, 3, 15, 12 };
+                rhsData = { min, max, max, min, -5, 11, -3, 28, 2, 7, -5, 6, -4, 11, 4, 6 };
+
+                gtMask = { True,  False, False, False, True,  False, True, False,
+                           False, False, False, True,  False, False, True, True };
+
+                ltMask = { False, True, False, False, False, True, False, True,
+                           True,  True, False, False, True,  True, False, False };
             }
             else
             {
-                lhsData = { std::numeric_limits<Type>::max(),
-                            std::numeric_limits<Type>::min(),
-                            std::numeric_limits<Type>::max(),
-                            std::numeric_limits<Type>::min(),
-                            5,
-                            11,
-                            15,
-                            3,
-                            1,
-                            2,
-                            5,
-                            12,
-                            14,
-                            3,
-                            15,
-                            12 };
-                rhsData = { std::numeric_limits<Type>::min(),
-                            std::numeric_limits<Type>::max(),
-                            std::numeric_limits<Type>::max(),
-                            std::numeric_limits<Type>::min(),
-                            5,
-                            11,
-                            3,
-                            28,
-                            2,
-                            7,
-                            5,
-                            6,
-                            4,
-                            11,
-                            4,
-                            6 };
-                gtMask  = { True,  False, False, False, False, False, True, False,
-                            False, False, False, True, True,  False, True, True };
+                lhsData = { max, min, max, min, 5, 11, 15, 3, 1, 2, 5, 12, 14, 3, 15, 12 };
+                rhsData = { min, max, max, min, 5, 11, 3, 28, 2, 7, 5, 6, 4, 11, 4, 6 };
+
+                gtMask = { True,  False, False, False, False, False, True, False,
+                           False, False, False, True,  True,  False, True, True };
+
+                ltMask = { False, True, False, False, False,  False, False, True,
+                           True,  True, False, False, False, True, False, False };
             }
         }
     };
@@ -142,7 +92,23 @@ TYPED_TEST(Simd128ComparisonTests, GreaterThanOperator_ReturnsAValidMask)
     }
 }
 
-TEST(Simd128ComparisonTests, GreaterThanOperator_MixedValues_ReturnsAValidMask) {}
+TYPED_TEST(Simd128ComparisonTests, LessThanOperator_ReturnsAValidMask)
+{
+    using Type = typename TypeParam::Type;
+    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    a.load(this->lhsData.data());
+    b.load(this->rhsData.data());
+
+    std::array<Type, TypeParam::VALUE> result{};
+    auto resReg = a < b;
+    resReg.store(result.data());
+    for (size_t i = 0; i < TypeParam::VALUE; ++i)
+    {
+        EXPECT_TRUE(isEqualBitwise(this->ltMask[i], result[i]))
+            << "Equality mismatch at index " << i << "\nExpected: " << this->ltMask[i] << "\nGot: " << result[i]
+            << "\nLHS: " << this->lhsData[i] << "\nRHS: " << this->rhsData[i] << '\n';
+    }
+}
 
 #endif
 

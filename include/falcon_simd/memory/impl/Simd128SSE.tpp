@@ -1218,6 +1218,9 @@ namespace falcon
         }
 
 
+        // A < B => B > A
+        [[nodiscard]] FALCON_INLINE Simd128 operator<(const Simd128 other) const noexcept { return other > *this; }
+
         /// TODO: Add tests for these ctor and getter
         /// TODO: Add test for naive
         /// @brief Get the internal register used by Simd128
