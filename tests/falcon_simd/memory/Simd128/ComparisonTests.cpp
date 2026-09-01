@@ -114,7 +114,7 @@ namespace
                             11,
                             4,
                             6 };
-                gtMask  = { True,  False, False, True, False, False, True, False,
+                gtMask  = { True,  False, False, False, False, False, True, False,
                             False, False, False, True, True,  False, True, True };
             }
         }
@@ -127,15 +127,14 @@ namespace
 TYPED_TEST(Simd128ComparisonTests, GreaterThanOperator_ReturnsAValidMask)
 {
     using Type = typename TypeParam::Type;
-
-    falcon::Simd128_t<Type, this->Lane> a{}, b{};
+    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
 
-    std::array<Type, this->Lane> result{};
+    std::array<Type, TypeParam::VALUE> result{};
     auto resReg = a > b;
     resReg.store(result.data());
-    for (size_t i = 0; i < this->Lane; ++i)
+    for (size_t i = 0; i < TypeParam::VALUE; ++i)
     {
         EXPECT_TRUE(isEqualBitwise(this->gtMask[i], result[i]))
             << "Equality mismatch at index " << i << "\nExpected: " << this->gtMask[i] << "\nGot: " << result[i]

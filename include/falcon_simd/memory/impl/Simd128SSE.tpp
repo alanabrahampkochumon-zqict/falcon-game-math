@@ -1114,38 +1114,35 @@ namespace falcon
             else if constexpr (types::IsQWord<DataType>)
             {
 
-                // Formula A_Hi > B_Hi | ((A_Hi == B_Hi) & A_Lo > B_Lo)
-                // For signed numbers the upper lane comparisons are direct,
-                // but for lower lanes we need we need to bias it, since the lower 31st bit is not a sign bit
-                // which the epi32 comparison expected
+                if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                {
+                    // Only SSE4.2 and above have _mm_cmpgt_epi64
+                    return Simd128(_mm_cmpgt_epi64(_register, other.naive()));
+                }
+                else
+                {
+                    // Formula A_Hi > B_Hi | ((A_Hi == B_Hi) & A_Lo > B_Lo)
+                    // For signed numbers the upper lane comparisons are direct,
+                    // but for lower lanes we need we need to bias it, since the lower 31st bit is not a sign bit
+                    // which the epi32 comparison expected
 
-                // Move the high bits into the lower lanes
-                const auto aHi = _mm_shuffle_epi32(_register, _MM_SHUFFLE(3, 3, 1, 1)); // (A_Hi1, A_Hi1, A_Hi0, A_Hi0)
-                const auto bHi =
-                    _mm_shuffle_epi32(other.naive(), _MM_SHUFFLE(3, 3, 1, 1)); // (B_Hi1, B_Hi1, B_Hi0, B_Hi0)
-                const auto gtHi = _mm_cmpgt_epi32(aHi, bHi);
-                const auto eqHi = _mm_cmpeq_epi32(aHi, bHi);
+                    // Move the high bits into the lower lanes
+                    const auto aHi =
+                        _mm_shuffle_epi32(_register, _MM_SHUFFLE(3, 3, 1, 1)); // (A_Hi1, A_Hi1, A_Hi0, A_Hi0)
+                    const auto bHi =
+                        _mm_shuffle_epi32(other.naive(), _MM_SHUFFLE(3, 3, 1, 1)); // (B_Hi1, B_Hi1, B_Hi0, B_Hi0)
+                    const auto gtHi = _mm_cmpgt_epi32(aHi, bHi);
+                    const auto eqHi = _mm_cmpeq_epi32(aHi, bHi);
 
-                // Offset the lower portion
-                const auto bias      = _mm_set1_epi32(static_cast<uint32_t>(0x80000000));
-                const auto biasedALo = _mm_sub_epi32(_register, bias);
-                const auto biasedBLo = _mm_sub_epi32(other.naive(), bias);
-                const auto gtLo = _mm_cmpgt_epi32(biasedALo, biasedBLo);
-                const auto resLo = _mm_or_si128(gtHi, _mm_and_si128(eqHi, gtLo));
-                // Result is stored in low memory so we need to copy them to high memory
-                return Simd128(_mm_shuffle_epi32(resLo, _MM_SHUFFLE(3, 3, 1, 1)));
-
-
-                //
-                // if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
-                // {
-                //     // Only SSE4.2 has
-                //     return Simd128(_mm_cmpgt_epi64(_register, other.naive()));
-                // }
-                // else
-                // {
-                //     // TODO:
-                // }
+                    // Offset the lower portion
+                    const auto bias      = _mm_set1_epi32(static_cast<uint32_t>(0x80000000));
+                    const auto biasedALo = _mm_sub_epi32(_register, bias);
+                    const auto biasedBLo = _mm_sub_epi32(other.naive(), bias);
+                    const auto gtLo      = _mm_cmpgt_epi32(biasedALo, biasedBLo);
+                    const auto resLo     = _mm_or_si128(gtHi, _mm_and_si128(eqHi, gtLo));
+                    // Result is stored in low memory so we need to copy them to high memory
+                    return Simd128(_mm_shuffle_epi32(resLo, _MM_SHUFFLE(2, 2, 0, 0)));
+                }
             }
             else if constexpr (types::IsDWord<DataType>)
             {
@@ -1169,9 +1166,12 @@ namespace falcon
 
             else if constexpr (types::IsUQWord<DataType>)
             {
-                const auto bias            = _mm_set1_epi64x(static_cast<uint64_t>(0x8000000000000000));
-                const auto biasedRegisterA = _mm_sub_epi64(_register, bias);
-                const auto biasedRegisterB = _mm_sub_epi64(other.naive(), bias);
+                // For unsigned integers we need to bias both lower lanes and upper lanes, since both expect a signed
+                // bit of for 31st bits
+                const auto bias            = _mm_set1_epi32(static_cast<uint32_t>(0x80000000));
+                const auto biasedRegisterA = _mm_sub_epi32(_register, bias);
+                const auto biasedRegisterB = _mm_sub_epi32(other.naive(), bias);
+
 
                 if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
                 {
@@ -1182,9 +1182,9 @@ namespace falcon
                     // Formula A_Hi > B_Hi | ((A_Hi == B_Hi) & A_Lo > B_Lo)
                     const auto gtLo = _mm_cmpgt_epi32(biasedRegisterA, biasedRegisterB); // A_Lo > B_Lo
                     const auto aHi =
-                        _mm_shuffle_epi32(biasedRegisterA, _MM_SHUFFLE(3, 3, 1, 1)); // (_, A_Hi1, _, A_Hi0)
+                        _mm_shuffle_epi32(biasedRegisterA, _MM_SHUFFLE(3, 3, 1, 1)); // (A_Hi1, A_Hi1, A_Hi0, A_Hi0)
                     const auto bHi =
-                        _mm_shuffle_epi32(biasedRegisterB, _MM_SHUFFLE(3, 3, 1, 1)); // (_, B_Hi1, _, B_Hi0)
+                        _mm_shuffle_epi32(biasedRegisterB, _MM_SHUFFLE(3, 3, 1, 1)); // (B_Hi1, B_Hi1, B_Hi0, B_Hi0)
                     const auto gtHi = _mm_cmpgt_epi32(aHi, bHi);                     // A_Hi > B_Hi
                     const auto eqHi = _mm_cmpeq_epi32(aHi, bHi);                     // (A_Hi == B_Hi)
 
