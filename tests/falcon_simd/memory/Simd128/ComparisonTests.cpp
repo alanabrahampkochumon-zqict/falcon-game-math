@@ -56,8 +56,8 @@ namespace
                 ltMask = { False, True, False, False, False, True, False, True,
                            True,  True, False, False, True,  True, False, False };
 
-                eqMask = { False, False, True, True, False, False, False, False,
-                           False,  False, True, False, False,  False, False, False };
+                eqMask = { False, False, True, True,  False, False, False, False,
+                           False, False, True, False, False, False, False, False };
             }
             else
             {
@@ -70,8 +70,8 @@ namespace
                 ltMask = { False, True, False, False, False, False, False, True,
                            True,  True, False, False, False, True,  False, False };
 
-                eqMask = { False, False, True, True, True, True, False, False,
-                           False,  False, True, False, False,  False, False, False };
+                eqMask = { False, False, True, True,  True,  True,  False, False,
+                           False, False, True, False, False, False, False, False };
             }
         }
     };
@@ -132,6 +132,25 @@ TYPED_TEST(Simd128ComparisonTests, DoubleEqualsOperator_ReturnsAValidMask)
             << "Equality mismatch at index " << i << "\nExpected: " << this->eqMask[i] << "\nGot: " << result[i]
             << "\nLHS: " << this->lhsData[i] << "\nRHS: " << this->rhsData[i] << '\n';
     }
+}
+
+
+/// @test Verify that equality operator works for equal values in a 64-bit 2-lane register
+/// @note This test is required since our typed test only tests for inequality among first two values
+TEST(Simd128ComparisonTests, DoubleEqualsOperator_UnequalValuesForFirstTwoLanesReturnsAValidMask)
+{
+    std::array<uint64_t, 2> lhsData{ 538293, 532212300123421 };
+    std::array<uint64_t, 2> rhsData{ 538293, 532212300123421 };
+    falcon::Simd128_t<uint64_t, 2> a{}, b{};
+    a.load(lhsData.data());
+    b.load(rhsData.data());
+
+    std::array<uint64_t, 2> result{};
+    const auto resReg = a == b;
+    resReg.store(result.data());
+
+    EXPECT_TRUE(isEqualBitwise(getAllOnes<uint64_t>(), result[0]));
+    EXPECT_TRUE(isEqualBitwise(getAllOnes<uint64_t>(), result[1]));
 }
 
 #endif
