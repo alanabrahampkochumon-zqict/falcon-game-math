@@ -36,7 +36,7 @@ namespace
     public:
         using Type                   = typename T::Type;
         static constexpr size_t Lane = T::VALUE;
-        std::array<typename T::Type, 16> lhsData, rhsData, gtMask, ltMask, eqMask;
+        std::array<typename T::Type, 16> lhsData, rhsData, gtMask, ltMask, eqMask, neqMask;
 
     protected:
         void SetUp() override
@@ -58,6 +58,9 @@ namespace
 
                 eqMask = { False, False, True, True,  False, False, False, False,
                            False, False, True, False, False, False, False, False };
+
+                neqMask = { True, True, False, False, True, True, True, True,
+                            True, True, False, True,  True, True, True, True };
             }
             else
             {
@@ -72,6 +75,9 @@ namespace
 
                 eqMask = { False, False, True, True,  True,  True,  False, False,
                            False, False, True, False, False, False, False, False };
+
+                neqMask = { True, True, False, False, False, False, True, True,
+                            True, True, False, True,  True,  True,  True, True };
             }
         }
     };
@@ -136,7 +142,8 @@ TYPED_TEST(Simd128ComparisonTests, DoubleEqualsOperator_ReturnsAValidMask)
 
 
 /// @test Verify that equality operator works for equal values in a 64-bit 2-lane register
-/// @note This test is required since our typed test only tests for inequality among first two values
+/// @note This test is required since our typed test only tests for equality among first two values
+///       both of which are unequal
 TEST(Simd128ComparisonTests, DoubleEqualsOperator_UnequalValuesForFirstTwoLanesReturnsAValidMask)
 {
     std::array<uint64_t, 2> lhsData{ 538293, 532212300123421 };
@@ -151,6 +158,45 @@ TEST(Simd128ComparisonTests, DoubleEqualsOperator_UnequalValuesForFirstTwoLanesR
 
     EXPECT_TRUE(isEqualBitwise(getAllOnes<uint64_t>(), result[0]));
     EXPECT_TRUE(isEqualBitwise(getAllOnes<uint64_t>(), result[1]));
+}
+
+
+TYPED_TEST(Simd128ComparisonTests, NotEqualsOperator_ReturnsAValidMask)
+{
+    using Type = typename TypeParam::Type;
+    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    a.load(this->lhsData.data());
+    b.load(this->rhsData.data());
+
+    std::array<Type, TypeParam::VALUE> result{};
+    auto resReg = a != b;
+    resReg.store(result.data());
+    for (size_t i = 0; i < TypeParam::VALUE; ++i)
+    {
+        EXPECT_TRUE(isEqualBitwise(this->neqMask[i], result[i]))
+            << "Equality mismatch at index " << i << "\nExpected: " << this->neqMask[i] << "\nGot: " << result[i]
+            << "\nLHS: " << this->lhsData[i] << "\nRHS: " << this->rhsData[i] << '\n';
+    }
+}
+
+
+/// @test Verify that inequality operator works for equal values in a 64-bit 2-lane register
+/// @note This test is required since our typed test only tests for inequality among first two values
+///       both of which are unequal
+TEST(Simd128ComparisonTests, NotEqualsOperator_UnequalValuesForFirstTwoLanesReturnsAValidMask)
+{
+    std::array<uint64_t, 2> lhsData{ 538293, 532212300123421 };
+    std::array<uint64_t, 2> rhsData{ 538293, 532212300123421 };
+    falcon::Simd128_t<uint64_t, 2> a{}, b{};
+    a.load(lhsData.data());
+    b.load(rhsData.data());
+
+    std::array<uint64_t, 2> result{};
+    const auto resReg = a != b;
+    resReg.store(result.data());
+
+    EXPECT_TRUE(isEqualBitwise(static_cast<uint64_t>(0), result[0]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<uint64_t>(0), result[1]));
 }
 
 #endif

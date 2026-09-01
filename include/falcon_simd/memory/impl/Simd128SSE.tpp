@@ -1100,8 +1100,8 @@ namespace falcon
         }
 
 
+        // TODO: Add masked variants comparison AVX512(__mmask) and emulate
 
-        // A < B => B > A
         [[nodiscard]] FALCON_INLINE Simd128 operator==(const Simd128 other) const noexcept
         {
             if constexpr (std::is_same_v<DataType, double>)
@@ -1146,6 +1146,28 @@ namespace falcon
                 {
                     return Simd128(_mm_cmpeq_epi8(_register, other.naive()));
                 }
+            }
+        }
+
+        [[nodiscard]] FALCON_INLINE Simd128 operator!=(const Simd128 other) const noexcept
+        {
+            if constexpr (std::is_same_v<DataType, double>)
+            {
+                return Simd128(_mm_cmpneq_pd(_register, other.naive()));
+            }
+            else if constexpr (std::is_same_v<DataType, float>)
+            {
+                return Simd128(_mm_cmpneq_ps(_register, other.naive()));
+            }
+            else
+            {
+                // TODO: Update to use direction inversion after implementing ~
+                // Integrals have no dedicated instruction in sse
+                // We have no dedicated ~ operator, so we have use ~a AND 1
+                // ~0 -> Inverts all the bits to 1
+                const auto one   = _mm_set1_epi32(static_cast<int32_t>(~0));
+                const auto eqReg = (*this == other).naive();
+                return Simd128(_mm_andnot_si128(eqReg, one));
             }
         }
 
