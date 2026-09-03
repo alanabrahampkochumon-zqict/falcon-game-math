@@ -63,19 +63,20 @@ namespace falcon
     constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
                                                                       Lane>::operator~() const noexcept
     {
-        return *this;
-        // // There is no direct invert instruction so we have to use andnot = ~a ^ b and set b = 1(~0)
-        // if constexpr(std::is_same_v<DataType, double>)
-        // {
-        //     const auto one = _mm_set1_pd(1.0);
-        //     return Simd128(_mm_andnot_pd(_register, one));
-        // } else if constexpr(std::is_same_v<DataType, float>)
-        // {
-        //     const auto one = _mm_set1_ps(1.0);
-        //     return Simd128(_mm_andnot_ps(_register, one));
-        // } else
-        // {
-        //     const auto one = _mm_set1_
-        // }
+        // There is no direct invert instruction so we have to use and_not = ~a ^ b and set b = 1(~0)
+        Simd128 oneReg{};
+        oneReg.setOne();
+        if constexpr (std::is_same_v<DataType, double>)
+        {
+            return Simd128(_mm_andnot_pd(_register, oneReg.naive()));
+        }
+        else if constexpr (std::is_same_v<DataType, float>)
+        {
+            return Simd128(_mm_andnot_ps(_register, oneReg.naive()));
+        }
+        else
+        {
+            return Simd128(_mm_andnot_ps(_register, oneReg.naive()));
+        }
     }
 } // namespace falcon
