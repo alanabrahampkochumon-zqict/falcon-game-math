@@ -11,6 +11,7 @@
 
 
 #include <bit>
+#include <cmath>
 #include <cstdint>
 #include <falcon_simd/FalconSimd.h>
 #include <gtest/gtest.h>
@@ -43,23 +44,34 @@ using Simd128RegisterTypeHints = testing::Types<
 
 
 /// @brief Wrapper around gtest macro for asserting equality(EXPECT) in a type agnostic manner.
-    #define EXPECT_ANY_EQ(expected, actual)                                                                            \
-        do                                                                                                             \
+#define EXPECT_ANY_EQ(expected, actual)                                                                                \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        using T = std::common_type_t<decltype(expected), decltype(actual)>;                                            \
+        if (std::is_floating_point_v<T>)                                                                               \
         {                                                                                                              \
-            using T = std::common_type_t<decltype(expected), decltype(actual)>;                                        \
-            if constexpr (std::is_same_v<T, double>)                                                                   \
+            if (std::isnan(expected) || std::isnan(actual))                                                            \
             {                                                                                                          \
-                EXPECT_DOUBLE_EQ(expected, actual);                                                                    \
-            }                                                                                                          \
-            else if constexpr (std::is_same_v<T, float>)                                                               \
-            {                                                                                                          \
-                EXPECT_FLOAT_EQ(expected, actual);                                                                     \
+                EXPECT_TRUE(std::isnan(expected) && std::isnan(actual));                                               \
             }                                                                                                          \
             else                                                                                                       \
             {                                                                                                          \
-                EXPECT_EQ(expected, actual);                                                                           \
+                                                                                                                       \
+                if constexpr (std::is_same_v<T, double>)                                                               \
+                {                                                                                                      \
+                    EXPECT_DOUBLE_EQ(expected, actual);                                                                \
+                }                                                                                                      \
+                else if constexpr (std::is_same_v<T, float>)                                                           \
+                {                                                                                                      \
+                    EXPECT_FLOAT_EQ(expected, actual);                                                                 \
+                }                                                                                                      \
             }                                                                                                          \
-        } while (0)
+        }                                                                                                              \
+        else                                                                                                           \
+        {                                                                                                              \
+            EXPECT_EQ(expected, actual);                                                                               \
+        }                                                                                                              \
+    } while (0)
 
 
 

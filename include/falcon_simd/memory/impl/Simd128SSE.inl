@@ -102,4 +102,23 @@ namespace falcon
             return Simd128(_mm_and_si128(_register, other.naive()));
         }
     }
+
+
+    template <typename DataType, size_t Lane>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                      Lane>::operator|(Simd128 other) const noexcept
+    {
+        if constexpr (std::is_same_v<DataType, double>)
+        {
+            return Simd128(_mm_or_pd(_register, other.naive()));
+        }
+        else if constexpr (std::is_same_v<DataType, float>)
+        {
+            return Simd128(_mm_or_ps(_register, other.naive()));
+        }
+        else
+        {
+            return Simd128(_mm_or_si128(_register, other.naive()));
+        }
+    }
 } // namespace falcon

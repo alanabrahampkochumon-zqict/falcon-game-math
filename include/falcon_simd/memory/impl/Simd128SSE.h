@@ -436,6 +436,9 @@ namespace falcon
         /// @brief Perform bitwise AND between this register and @p other.
         FALCON_INLINE constexpr Simd128 operator&(Simd128 other) const noexcept;
 
+        /// @brief Perform bitwise OR between this register and @p other.
+        FALCON_INLINE constexpr Simd128 operator|(Simd128 other) const noexcept;
+
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///   ARITHMETIC OPERATIONS
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
