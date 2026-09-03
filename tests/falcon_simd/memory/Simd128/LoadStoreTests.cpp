@@ -11,8 +11,8 @@
 
 #include "SIMDTestSetup.h"
 
-#include <falcon_simd/memory/Simd128.h>
 #include <array>
+#include <falcon_simd/memory/Simd128.h>
 
 
 /**
@@ -56,18 +56,7 @@ TYPED_TEST(Simd128LoadStoreTests, LoadAligned_LoadsAndStoresDataWithoutCorruptio
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(data[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(data[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(data[i], result[i]);
-        }
+        EXPECT_ANY_EQ(data[i], result[i]);
     }
 }
 
@@ -92,18 +81,7 @@ TYPED_TEST(Simd128LoadStoreTests, Load_LoadsDataFromUnalignedMemory)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(data[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(data[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(data[i], result[i]);
-        }
+        EXPECT_ANY_EQ(data[i], result[i]);
     }
 }
 
@@ -129,18 +107,7 @@ TYPED_TEST(Simd128LoadStoreTests, Store_StoresDataIntoUnalignedMemory)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(data[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(data[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(data[i], result[i]);
-        }
+        EXPECT_ANY_EQ(data[i], result[i]);
     }
 }
 
@@ -159,18 +126,7 @@ TYPED_TEST(Simd128LoadStoreTests, Broadcast_StoresASingleValueIntoTheRegister)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(data, result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(data, result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(data, result[i]);
-        }
+        EXPECT_ANY_EQ(data, result[i]);
     }
 }
 
@@ -189,18 +145,7 @@ TYPED_TEST(Simd128LoadStoreTests, SetZero_ZeroesOutTheRegister)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(Type(0), result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(Type(0), result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(Type(0), result[i]);
-        }
+        EXPECT_ANY_EQ(Type(0), result[i]);
     }
 }
 

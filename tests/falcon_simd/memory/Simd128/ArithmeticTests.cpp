@@ -63,18 +63,7 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryAddOperation_ReturnsAValidResult)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -121,18 +110,7 @@ TYPED_TEST(Simd128ArithmeticTests, CompoundAddOperation_ReturnsAValidResult)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -180,18 +158,7 @@ TYPED_TEST(Simd128ArithmeticTests, BinarySubtractOperation_ReturnsAValidResult)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -238,18 +205,7 @@ TYPED_TEST(Simd128ArithmeticTests, CompoundSubtractOperation_ReturnsAValidResult
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -296,18 +252,7 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryMultiplication_ReturnsAValidResult)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -355,18 +300,7 @@ TYPED_TEST(Simd128ArithmeticTests, CompoundMultiplication_ReturnsAValidResult)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -412,18 +346,7 @@ TYPED_TEST(Simd128ArithmeticTests, DivReg_ReturnsAValidResult)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -462,18 +385,7 @@ TYPED_TEST(Simd128ArithmeticTests, DivReg_MaintainsPrecisionForAtUpperAndLowerLi
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -520,18 +432,7 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryDivideOperator_ReturnsAValidResult)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -569,18 +470,7 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryDivideOperator_MaintainsPrecisionForAtU
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -626,18 +516,7 @@ TYPED_TEST(Simd128ArithmeticTests, CompoundDivideOperator_ReturnsAValidResult)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
@@ -675,18 +554,7 @@ TYPED_TEST(Simd128ArithmeticTests, CompoundDivideOperator_MaintainsPrecisionForA
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 

@@ -83,18 +83,7 @@ TYPED_TEST(Simd128BitwiseOperationTests, bitwiseNot_ReturnsAValidResult)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (std::is_same_v<Type, double>)
-        {
-            EXPECT_DOUBLE_EQ(expected[i], result[i]);
-        }
-        else if constexpr (std::is_same_v<Type, float>)
-        {
-            EXPECT_FLOAT_EQ(expected[i], result[i]);
-        }
-        else
-        {
-            EXPECT_EQ(expected[i], result[i]);
-        }
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
