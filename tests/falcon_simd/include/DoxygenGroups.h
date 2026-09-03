@@ -40,6 +40,7 @@
          *   @defgroup T_SIMD128_Get_Set Getters/Setters Tests
          *   @defgroup T_SIMD128_Load_Store Load/Store Tests
          *   @defgroup T_SIMD128_Cmp Comparison operation Tests(>, <, >=, <=, ==, !=)
+         *   @defgroup T_SIMD128_Bit Bitwise operation Tests(>, <, >=, <=, ==, !=)
          * @}
         */
 

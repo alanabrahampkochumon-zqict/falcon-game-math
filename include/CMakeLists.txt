@@ -39,7 +39,8 @@ target_link_libraries(FGM INTERFACE
 ###############
 
 include(falcon_simd/FalconSimd.cmake)
-add_library(FalconSIMD INTERFACE ${FALCON_SIMD_ROOT_HEADERS})
+add_library(FalconSIMD INTERFACE ${FALCON_SIMD_ROOT_HEADERS}
+        falcon_simd/memory/impl/Simd128SSE.inl)
 target_compile_features(FalconSIMD INTERFACE cxx_std_20)
 
 target_include_directories(FalconSIMD INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})

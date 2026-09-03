@@ -42,8 +42,28 @@ using Simd128RegisterTypeHints = testing::Types<
     SimdRegisterTypeMatrix<double, 2>>;
 
 
-/// TODO: Add the below helpers to main library.
+/// @brief Wrapper around gtest macro for asserting equality(EXPECT) in a type agnostic manner.
+    #define EXPECT_ANY_EQ(expected, actual)                                                                            \
+        do                                                                                                             \
+        {                                                                                                              \
+            using T = std::common_type_t<decltype(expected), decltype(actual)>;                                        \
+            if constexpr (std::is_same_v<T, double>)                                                                   \
+            {                                                                                                          \
+                EXPECT_DOUBLE_EQ(expected, actual);                                                                    \
+            }                                                                                                          \
+            else if constexpr (std::is_same_v<T, float>)                                                               \
+            {                                                                                                          \
+                EXPECT_FLOAT_EQ(expected, actual);                                                                     \
+            }                                                                                                          \
+            else                                                                                                       \
+            {                                                                                                          \
+                EXPECT_EQ(expected, actual);                                                                           \
+            }                                                                                                          \
+        } while (0)
 
+
+
+/// TODO: Add the below helpers to main library.
 /// Helper that returns all 1s bitwise(1111..1111) for the given type.
 template <typename T>
 constexpr T getAllOnes()

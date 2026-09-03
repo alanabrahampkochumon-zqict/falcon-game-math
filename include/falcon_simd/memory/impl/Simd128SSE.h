@@ -300,28 +300,31 @@ namespace falcon
          * @relatedalso store(DataType*)
          * @relatedalso storeAligned(DataType*)
          * @relatedalso broadcast(DataType)
+         * @relatedalso setOne()
          */
-        FALCON_INLINE constexpr void setZero() noexcept
-        {
-            if constexpr (types::IsFP64<DataType>)
-            {
-                _register = _mm_setzero_pd();
-            }
-            else if constexpr (types::IsFP32<DataType>)
-            {
-                _register = _mm_setzero_ps();
-            }
-            else
-            {
-                _register = _mm_setzero_si128();
-            }
-        }
+        FALCON_INLINE constexpr void setZero() noexcept;
+
+
+        /**
+         * @brief Get a register filled with ones.
+         *
+         * @relatedalso load(DataType*)
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso store(DataType*)
+         * @relatedalso storeAligned(DataType*)
+         * @relatedalso broadcast(DataType)
+         * @relatedalso setZero()
+         */
+        FALCON_INLINE constexpr void setOne() noexcept;
 
 
         /**
          * @brief Store the current register value buffer.
          *
          * @note The provided buffer must have enough size to hold the data.
+         * @note The buffer only fills upto the lane size of the register. This means that if you pass-in
+         *       an array of big enough to hold 4 int32_t but the Lane is 2, then it will only fill the
+         *       upper two elements, i.e [0, 1, _, _]
          *
          * @param pBuffer The buffer to write the data to.
          *
@@ -421,6 +424,14 @@ namespace falcon
                 }
             }
         }
+
+
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///    BITWISE OPERATIONS
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /// @brief Apply bitwise NOT across the entire register.
+        FALCON_INLINE constexpr Simd128 operator~() const noexcept;
 
 
 
@@ -1289,6 +1300,9 @@ namespace falcon
             }
         }
 
+        // A >= B => !(A < B) same as (A > B) | (A == B) but saves a lot of cpu cycles.
+        // [[nodiscard]] FALCON_INLINE Simd128 operator>=(const Simd128 other) const noexcept {}
+
         // A < B => B > A
         [[nodiscard]] FALCON_INLINE Simd128 operator<(const Simd128 other) const noexcept { return other > *this; }
 
@@ -1313,4 +1327,7 @@ namespace falcon
         simd::internal::SSERegister_t<DataType> _register;
     };
 
+
 } // namespace falcon
+
+#include "Simd128SSE.inl"

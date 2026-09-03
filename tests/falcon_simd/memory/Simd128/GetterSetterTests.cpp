@@ -126,6 +126,53 @@ TEST(Simd128GetterSetterTests, Set_CanTakeParametersLessThanLaneSize)
     EXPECT_EQ(7, result[6]);
 }
 
+
+
+TYPED_TEST(Simd128GetterSetterTests, SetZero_FillsTheLanesWithZeroes)
+{
+    using Type            = typename TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    auto reg = falcon::Simd128_t<Type, Lane>();
+    reg.setZero();
+
+    std::array<Type, Lane> result{};
+    reg.store(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(static_cast<Type>(0), result[i]);
+    }
+}
+
+
+TYPED_TEST(Simd128GetterSetterTests, SetOne_FillsTheLanesWithOnes)
+{
+    using Type            = typename TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+    constexpr auto one    = getAllOnes<Type>();
+
+    auto reg = falcon::Simd128_t<Type, Lane>();
+    reg.setOne();
+
+    std::array<Type, Lane> result{};
+    reg.store(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        // Floating point types returns -nan which doesn't equal any so we must use
+        // bitwise comparison.
+        if constexpr (std::is_floating_point_v<Type>)
+        {
+            EXPECT_TRUE(isEqualBitwise(one, result[i]));
+        }
+        else
+        {
+            EXPECT_ANY_EQ(one, result[i]);
+        }
+    }
+}
+
 #endif
 
 /** @} */
