@@ -1135,10 +1135,13 @@ namespace falcon
         [[nodiscard]] constexpr Simd128 operator>(Simd128 other) const noexcept;
 
         // A >= B => !(A < B) same as (A > B) | (A == B) but saves a lot of cpu cycles.
-        [[nodiscard]] constexpr Simd128 operator>=(const Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator>=(Simd128 other) const noexcept;
 
         // A < B => B > A
-        [[nodiscard]] constexpr Simd128 operator<(const Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator<(Simd128 other) const noexcept;
+
+        // A <= B => ~(A > B)
+        [[nodiscard]] constexpr Simd128 operator<=(Simd128 other) const noexcept;
 
         /// TODO: Add tests for these ctor and getter
         /// TODO: Add test for naive

@@ -358,4 +358,12 @@ namespace falcon
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator<(const Simd128 other) const noexcept
     { return other > *this; }
 
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                      Lane>::operator<=(const Simd128 other) const noexcept
+    {
+        return ~(*this > other);
+    }
+
 } // namespace falcon

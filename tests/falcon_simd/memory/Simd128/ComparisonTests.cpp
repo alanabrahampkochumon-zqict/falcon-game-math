@@ -36,7 +36,7 @@ namespace
     public:
         using Type                   = typename T::Type;
         static constexpr size_t Lane = T::VALUE;
-        std::array<typename T::Type, 16> lhsData, rhsData, gtMask, gteMask, ltMask, eqMask, neqMask;
+        std::array<typename T::Type, 16> lhsData, rhsData, gtMask, gteMask, ltMask, lteMask, eqMask, neqMask;
 
     protected:
         void SetUp() override
@@ -53,11 +53,14 @@ namespace
                 gtMask = { True,  False, False, False, True,  False, True, False,
                            False, False, False, True,  False, False, True, True };
 
-                gteMask = { True,  False, True,  True, True,  False, True, False,
-                            False, False,  True, True, False, False, True, True };
+                gteMask = { True,  False, True, True, True,  False, True, False,
+                            False, False, True, True, False, False, True, True };
 
-                ltMask = { False, True, False,  False,  False, True, False, True,
+                ltMask = { False, True, False, False, False, True, False, True,
                            True,  True, False, False, True,  True, False, False };
+
+                lteMask = { False, True, True, True,  False, True, False, True,
+                            True,  True, True, False, True,  True, False, False };
 
                 eqMask = { False, False, True, True,  False, False, False, False,
                            False, False, True, False, False, False, False, False };
@@ -74,11 +77,14 @@ namespace
                 gtMask = { True,  False, False, False, False, False, True, False,
                            False, False, False, True,  True,  False, True, True };
 
-                gteMask = { True,  False, True,  True, True,  True,  True, False,
-                            False, False,  True, True, True, False, True, True };
+                gteMask = { True,  False, True, True, True, True,  True, False,
+                            False, False, True, True, True, False, True, True };
 
                 ltMask = { False, True, False, False, False, False, False, True,
                            True,  True, False, False, False, True,  False, False };
+
+                lteMask = { False, True, True, True,  True,  True, False, True,
+                            True,  True, True, False, False, True, False, False };
 
                 eqMask = { False, False, True, True,  True,  True,  False, False,
                            False, False, True, False, False, False, False, False };
@@ -148,6 +154,26 @@ TYPED_TEST(Simd128ComparisonTests, LessThanOperator_ReturnsAValidMask)
             << "\nLHS: " << this->lhsData[i] << "\nRHS: " << this->rhsData[i] << '\n';
     }
 }
+
+
+TYPED_TEST(Simd128ComparisonTests, LessThanOrEqualsOperator_ReturnsAValidMask)
+{
+    using Type = typename TypeParam::Type;
+    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    a.load(this->lhsData.data());
+    b.load(this->rhsData.data());
+
+    std::array<Type, TypeParam::VALUE> result{};
+    auto resReg = a <= b;
+    resReg.store(result.data());
+    for (size_t i = 0; i < TypeParam::VALUE; ++i)
+    {
+        EXPECT_TRUE(isEqualBitwise(this->lteMask[i], result[i]))
+            << "Equality mismatch at index " << i << "\nExpected: " << this->lteMask[i] << "\nGot: " << result[i]
+            << "\nLHS: " << this->lhsData[i] << "\nRHS: " << this->rhsData[i] << '\n';
+    }
+}
+
 
 TYPED_TEST(Simd128ComparisonTests, DoubleEqualsOperator_ReturnsAValidMask)
 {
