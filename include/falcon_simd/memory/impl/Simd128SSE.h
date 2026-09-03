@@ -430,10 +430,11 @@ namespace falcon
         ///    BITWISE OPERATIONS
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
 
-        /// @brief Apply bitwise NOT across the entire register.
+        /// @brief Perform bitwise NOT on the entire register.
         FALCON_INLINE constexpr Simd128 operator~() const noexcept;
 
-
+        /// @brief Perform bitwise AND between this register and @p other.
+        FALCON_INLINE constexpr Simd128 operator&(Simd128 other) const noexcept;
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///   ARITHMETIC OPERATIONS
