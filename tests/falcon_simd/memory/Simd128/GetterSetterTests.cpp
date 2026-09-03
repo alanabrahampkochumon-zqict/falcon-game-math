@@ -34,9 +34,10 @@ namespace
     public:
         using Register = falcon::Simd128_t<typename T::Type, T::VALUE>;
 
-        static constexpr std::array<typename T::Type, 16> data = {
-            10, 2, 0, 3, 5, 11, 15, 3, 1, 2, 5, 12, 14, 3, 15, 12
-        };
+        static constexpr auto max                              = std::numeric_limits<typename T::Type>::max();
+        static constexpr auto min                              = std::numeric_limits<typename T::Type>::min();
+        static constexpr std::array<typename T::Type, 16> data = { max, min, 0, 3,  5,  11, 15, 3,
+                                                                   1,   2,   5, 12, 14, 3,  15, 12 };
 
         /// Testing condition
         template <size_t... Index>
@@ -66,14 +67,7 @@ TYPED_TEST(Simd128GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        if constexpr (falcon::types::IsFP32<Type> || falcon::types::IsFP64<Type>)
-        {
-            EXPECT_DOUBLE_EQ(static_cast<double>(result[i]), static_cast<double>(this->data[i]));
-        }
-        else
-        {
-            EXPECT_EQ(result[i], this->data[i]);
-        }
+        EXPECT_ANY_EQ(result[i], this->data[i]);
     }
 }
 
@@ -170,6 +164,19 @@ TYPED_TEST(Simd128GetterSetterTests, SetOne_FillsTheLanesWithOnes)
         {
             EXPECT_ANY_EQ(one, result[i]);
         }
+    }
+}
+
+
+/// @test Verify that get(index) returns the element at the given index.
+TYPED_TEST(Simd128GetterSetterTests, Get_FillsTheLanesWithOnes)
+{
+    constexpr size_t Lane = TypeParam::VALUE;
+    auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(this->data[i], reg.get(i));
     }
 }
 

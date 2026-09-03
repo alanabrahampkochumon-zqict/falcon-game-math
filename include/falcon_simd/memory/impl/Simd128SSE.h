@@ -425,22 +425,31 @@ namespace falcon
             }
         }
 
+        /**
+         *
+         * @param index Get the value at @p index.
+         * @note Index must be less than the Lane - 1.
+         *
+         * @return The value at index [read-only].
+         */
+        constexpr DataType get(size_t index) const noexcept;
+
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///    BITWISE OPERATIONS
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
 
         /// @brief Perform bitwise NOT on the entire register.
-        FALCON_INLINE constexpr Simd128 operator~() const noexcept;
+        constexpr Simd128 operator~() const noexcept;
 
         /// @brief Perform bitwise AND between this register and @p other.
-        FALCON_INLINE constexpr Simd128 operator&(Simd128 other) const noexcept;
+        constexpr Simd128 operator&(Simd128 other) const noexcept;
 
         /// @brief Perform bitwise OR between this register and @p other.
-        FALCON_INLINE constexpr Simd128 operator|(Simd128 other) const noexcept;
+        constexpr Simd128 operator|(Simd128 other) const noexcept;
 
         /// @brief Perform bitwise OR between this register and @p other.
-        FALCON_INLINE constexpr Simd128 operator^(Simd128 other) const noexcept;
+        constexpr Simd128 operator^(Simd128 other) const noexcept;
 
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -1156,6 +1165,7 @@ namespace falcon
         /// The operation will get the data, mutate it and set it into register, which can be expensive
         /// so it highly recommended to not use this operation
         /// TODO: Implementation Later
+        /// TODO: Add constexpr variant to get (useful for .x, .y, ...)
         // FALCON_INLINE constexpr setAt(size_t index, const DataType data) const noexcept;
         //
         // FALCON_INLINE constexpr getAt(size_t index) const noexcept;
@@ -1163,8 +1173,6 @@ namespace falcon
     private:
         simd::internal::SSERegister_t<DataType> _register;
     };
-
-
 
 
 } // namespace falcon

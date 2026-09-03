@@ -10,6 +10,10 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+
+#include <emmintrin.h>
+#include <format>
+
 namespace falcon
 {
 
@@ -56,6 +60,70 @@ namespace falcon
             constexpr auto ONE = ~static_cast<int32_t>(0);
             _register          = _mm_set1_epi32(ONE);
         }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::get(
+        const size_t index) const noexcept
+    {
+
+        // TODO: Extract out message
+        // TODO: Add death test
+        FALCON_ASSERT_MSG(
+            index < Lane,
+            std::format("Out of bounds access. Index must be less than {}. But it is currently {}", Lane, index)
+                .c_str());
+
+        // We can use the compress and extract trick from CVL2(Agner Fog)
+        // But that instruction is available only in AVX512F + AVX512VL
+        // https://github.com/vectorclass/version2/blob/master/vectori128.h
+        if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+        {
+            // 1u << index creates a mask that selects the lane we want to index into
+            // Eg: For index 4 the mask is 1 << 4 => 0001 0000 instead of 0000 1000
+            auto mask = static_cast<__mmask8>(1u << index);
+            if constexpr (types::IsFP64<DataType>)
+            {
+                auto reg = _mm_maskz_compress_pd(mask, _register);
+                return _mm_cvtsd_f64(reg);
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                auto reg = _mm_maskz_compress_ps(mask, _register);
+                return _mm_cvtss_f32(reg);
+            }
+            else if constexpr (sizeof(DataType) == 8)
+            {
+                auto reg = _mm_maskz_compress_epi64(mask, _register);
+                return std::bit_cast<DataType>(_mm_cvtsi128_si64(reg));
+            }
+            else if constexpr (sizeof(DataType) == 4)
+            {
+                auto reg = _mm_maskz_compress_epi32(mask, _register);
+                return std::bit_cast<DataType>(_mm_cvtsi128_si32(reg));
+            }
+            else if constexpr (sizeof(DataType) == 2)
+            {
+                auto reg = _mm_maskz_compress_epi16(mask, _register);
+                return std::bit_cast<DataType>(_mm_cvtsi128_si16(reg));
+            }
+            else // if constexpr (sizeof(DataType) == 2)
+            {
+                // Note: epi8 version of maskz_compress require __mmask16 and there is no standalone
+                //       variant of cvtsi128 for converting to 8-bit integral
+                auto reg = _mm_maskz_compress_epi8(static_cast<__mmask16>(1u << index), _register);
+                return static_cast<DataType>(_mm_cvtsi128_si16);
+            }
+            return static_cast<DataType>(index);
+        }
+        else
+        {
+            std::array<DataType, Lane> buffer{};
+            store(buffer.data());
+            return buffer[index];
+        }
+        return static_cast<DataType>(index);
     }
 
 
@@ -346,11 +414,9 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::operator>=(
-        const Simd128 other) const noexcept
-    {
-        return ~(*this < other);
-    }
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator>=(const Simd128 other) const noexcept
+    { return ~(*this < other); }
 
 
     template <typename DataType, size_t Lane>
@@ -360,10 +426,8 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
-                                                                      Lane>::operator<=(const Simd128 other) const noexcept
-    {
-        return ~(*this > other);
-    }
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator<=(const Simd128 other) const noexcept
+    { return ~(*this > other); }
 
 } // namespace falcon
