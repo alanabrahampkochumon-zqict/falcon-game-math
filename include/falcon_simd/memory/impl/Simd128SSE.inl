@@ -148,7 +148,7 @@ namespace falcon
         }
         else
         {
-            return Simd128(_mm_andnot_ps(_register, oneReg.naive()));
+            return Simd128(_mm_andnot_si128(_register, oneReg.naive()));
         }
     }
 
