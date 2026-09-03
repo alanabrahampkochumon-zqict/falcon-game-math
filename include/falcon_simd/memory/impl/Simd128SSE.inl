@@ -123,7 +123,6 @@ namespace falcon
             store(buffer.data());
             return buffer[index];
         }
-        return static_cast<DataType>(index);
     }
 
 
