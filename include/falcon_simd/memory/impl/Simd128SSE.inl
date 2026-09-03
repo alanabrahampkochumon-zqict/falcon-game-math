@@ -148,7 +148,7 @@ namespace falcon
      **************************************/
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator==(const Simd128 other) const noexcept
     {
         if constexpr (std::is_same_v<DataType, double>)
@@ -198,7 +198,7 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator!=(const Simd128 other) const noexcept
     {
         if constexpr (std::is_same_v<DataType, double>)
@@ -228,7 +228,7 @@ namespace falcon
      **************************************/
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator>(const Simd128 other) const noexcept
     {
         if constexpr (types::IsFP64<DataType>)
@@ -346,8 +346,16 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::operator<(
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::operator>=(
         const Simd128 other) const noexcept
+    {
+        return ~(*this < other);
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator<(const Simd128 other) const noexcept
     { return other > *this; }
 
 } // namespace falcon

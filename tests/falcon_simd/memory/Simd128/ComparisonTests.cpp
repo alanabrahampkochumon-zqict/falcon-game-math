@@ -36,7 +36,7 @@ namespace
     public:
         using Type                   = typename T::Type;
         static constexpr size_t Lane = T::VALUE;
-        std::array<typename T::Type, 16> lhsData, rhsData, gtMask, ltMask, eqMask, neqMask;
+        std::array<typename T::Type, 16> lhsData, rhsData, gtMask, gteMask, ltMask, eqMask, neqMask;
 
     protected:
         void SetUp() override
@@ -53,7 +53,10 @@ namespace
                 gtMask = { True,  False, False, False, True,  False, True, False,
                            False, False, False, True,  False, False, True, True };
 
-                ltMask = { False, True, False, False, False, True, False, True,
+                gteMask = { True,  False, True,  True, True,  False, True, False,
+                            False, False,  True, True, False, False, True, True };
+
+                ltMask = { False, True, False,  False,  False, True, False, True,
                            True,  True, False, False, True,  True, False, False };
 
                 eqMask = { False, False, True, True,  False, False, False, False,
@@ -64,11 +67,15 @@ namespace
             }
             else
             {
+                // 9 -> 1
                 lhsData = { max, min, max, min, 5, 11, 15, 3, 1, 2, 5, 12, 14, 3, 15, 12 };
                 rhsData = { min, max, max, min, 5, 11, 3, 28, 2, 7, 5, 6, 4, 11, 4, 6 };
 
                 gtMask = { True,  False, False, False, False, False, True, False,
                            False, False, False, True,  True,  False, True, True };
+
+                gteMask = { True,  False, True,  True, True,  True,  True, False,
+                            False, False,  True, True, True, False, True, True };
 
                 ltMask = { False, True, False, False, False, False, False, True,
                            True,  True, False, False, False, True,  False, False };
@@ -103,6 +110,26 @@ TYPED_TEST(Simd128ComparisonTests, GreaterThanOperator_ReturnsAValidMask)
             << '\n';
     }
 }
+
+
+TYPED_TEST(Simd128ComparisonTests, GreaterThanOrEqualsOperator_ReturnsAValidMask)
+{
+    using Type = typename TypeParam::Type;
+    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    a.load(this->lhsData.data());
+    b.load(this->rhsData.data());
+
+    std::array<Type, TypeParam::VALUE> result{};
+    auto resReg = a >= b;
+    resReg.store(result.data());
+    for (size_t i = 0; i < TypeParam::VALUE; ++i)
+    {
+        EXPECT_TRUE(isEqualBitwise(this->gteMask[i], result[i]))
+            << "Equality mismatch at index " << i << "\nExpected: " << this->gteMask[i] << "\nGot: " << result[i]
+            << "\nLHS: " << this->lhsData[i] << "\nRHS: " << this->rhsData[i] << '\n';
+    }
+}
+
 
 TYPED_TEST(Simd128ComparisonTests, LessThanOperator_ReturnsAValidMask)
 {

@@ -1118,6 +1118,8 @@ namespace falcon
             return *this;
         }
 
+        // TODO: Move arithmetic ops to inl file and mark as constexpr
+
 
         // TODO: Add masked variants comparison AVX512(__mmask) and emulate
 
@@ -1126,17 +1128,17 @@ namespace falcon
         ///   COMPARISON/EQUALITY
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
 
-        [[nodiscard]] Simd128 operator==(Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator==(Simd128 other) const noexcept;
 
-        [[nodiscard]] Simd128 operator!=(const Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator!=(Simd128 other) const noexcept;
 
-        [[nodiscard]] Simd128 operator>(const Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator>(Simd128 other) const noexcept;
 
         // A >= B => !(A < B) same as (A > B) | (A == B) but saves a lot of cpu cycles.
-        // [[nodiscard]] FALCON_INLINE Simd128 operator>=(const Simd128 other) const noexcept {}
+        [[nodiscard]] constexpr Simd128 operator>=(const Simd128 other) const noexcept;
 
         // A < B => B > A
-        [[nodiscard]] FALCON_INLINE Simd128 operator<(const Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator<(const Simd128 other) const noexcept;
 
         /// TODO: Add tests for these ctor and getter
         /// TODO: Add test for naive
@@ -1158,6 +1160,8 @@ namespace falcon
     private:
         simd::internal::SSERegister_t<DataType> _register;
     };
+
+
 
 
 } // namespace falcon
