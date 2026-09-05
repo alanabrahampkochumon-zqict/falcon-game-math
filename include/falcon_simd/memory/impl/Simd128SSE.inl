@@ -211,6 +211,25 @@ namespace falcon
     }
 
 
+    template <typename DataType, size_t Lane>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::andNot(
+        const Simd128 other) const noexcept
+    {
+        if constexpr (types::IsFP64<DataType>)
+        {
+            return Simd128(_mm_andnot_pd(_register, other.naive()));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            return Simd128(_mm_andnot_ps(_register, other.naive()));
+        }
+        else
+        {
+            return Simd128(_mm_andnot_si128(_register, other.naive()));
+        }
+    }
+
+
 
     /**************************************
      *       EQUALITY OPERATIONS          *

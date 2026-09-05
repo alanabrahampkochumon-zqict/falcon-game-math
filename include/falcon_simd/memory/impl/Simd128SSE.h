@@ -451,6 +451,10 @@ namespace falcon
         /// @brief Perform bitwise OR between this register and @p other.
         constexpr Simd128 operator^(Simd128 other) const noexcept;
 
+        /// @brief Perform a bitwise `and_not` combination between this register and @p other.
+        /// @note  Faster than manually doing (~RegA & RegB) since this executes only a single SIMD instruction.
+        constexpr Simd128 andNot(Simd128 other) const noexcept;
+
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///   ARITHMETIC OPERATIONS

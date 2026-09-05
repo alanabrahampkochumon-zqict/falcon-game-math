@@ -28,6 +28,9 @@ namespace
 {
     using namespace simd::testing;
 
+    // Test param to pass in a combination matrix for testing blend function.
+    // since gtest doesn't natively support parameterized typed test(where you can pass in parameters against a type
+    // vector)
     template <typename T, size_t Lanes, Array<T, Lanes> first, Array<T, Lanes> second, Array<T, Lanes> mask,
               Array<T, Lanes> expected>
     struct Simd128BlendTestParam
@@ -81,6 +84,7 @@ namespace
                               Array<U32, 4>{ 0, ONE<U32>, ONE<U32>, 0 }, Array<U32, 4>{ 100, 15, 61, 15 }>,
         Simd128BlendTestParam<U64, 2, Array<U64, 2>{ 100, 24 }, Array<U64, 2>{ 32, 15 }, Array<U64, 2>{ 0, ONE<U32> },
                               Array<U64, 2>{ 100, 15 }>,
+
         // Signed types
         Simd128BlendTestParam<I8, 2, Array<I8, 2>{ 100, 24 }, Array<I8, 2>{ 32, 15 }, Array<I8, 2>{ 0, ONE<I8> },
                               Array<I8, 2>{ 100, 15 }>,
@@ -90,6 +94,7 @@ namespace
                               Array<I8, 8>{ 32, 15, 61, 14, 46, 55, 21, 74 },
                               Array<I8, 8>{ 0, ONE<I8>, ONE<I8>, 0, ONE<I8>, 0, 0, ONE<I8> },
                               Array<I8, 8>{ 100, 15, 61, 15, 46, 15, 71, 74 }>,
+
         Simd128BlendTestParam<I8, 16, Array<I8, 16>{ 100, 24, 13, 15, 32, 15, 71, 44, 100, 24, 13, 15, 32, 15, 71, 44 },
                               Array<I8, 16>{ 32, 15, 61, 14, 46, 55, 21, 74, 32, 15, 61, 14, 46, 55, 21, 74 },
                               Array<I8, 16>{ 0, ONE<I8>, ONE<I8>, 0, ONE<I8>, 0, ONE<I8>, 0, ONE<I8>, ONE<I8>, 0,
