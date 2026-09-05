@@ -173,7 +173,7 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        FALCON_INLINE constexpr void store(DataType* pBuffer) const noexcept;
+        constexpr void store(DataType* pBuffer) const noexcept;
 
 
         /**
@@ -189,7 +189,7 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        FALCON_INLINE constexpr void storeAligned(DataType* pBuffer) const noexcept;
+        constexpr void storeAligned(DataType* pBuffer) const noexcept;
 
         /**
          *
@@ -198,7 +198,7 @@ namespace falcon
          *
          * @return The value at index [read-only].
          */
-        constexpr DataType get(size_t index) const noexcept;
+        [[nodiscard]] constexpr DataType get(size_t index) const noexcept;
 
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -206,20 +206,20 @@ namespace falcon
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
 
         /// @brief Perform bitwise NOT on the entire register.
-        constexpr Simd128 operator~() const noexcept;
+        [[nodiscard]] constexpr Simd128 operator~() const noexcept;
 
         /// @brief Perform bitwise AND between this register and @p other.
-        constexpr Simd128 operator&(Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator&(Simd128 other) const noexcept;
 
         /// @brief Perform bitwise OR between this register and @p other.
-        constexpr Simd128 operator|(Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator|(Simd128 other) const noexcept;
 
         /// @brief Perform bitwise OR between this register and @p other.
-        constexpr Simd128 operator^(Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator^(Simd128 other) const noexcept;
 
         /// @brief Perform a bitwise `and_not` combination between this register and @p other.
         /// @note  Faster than manually doing (~RegA & RegB) since this executes only a single SIMD instruction.
-        constexpr Simd128 andNot(Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 andNot(Simd128 other) const noexcept;
 
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
