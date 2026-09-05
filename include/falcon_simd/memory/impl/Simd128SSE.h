@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file Simd128SSE.tpp
+ * @file Simd128SSE.h
  * @author Alan Abraham P Kochumon
  * @date Created on: August 13, 2026
  *

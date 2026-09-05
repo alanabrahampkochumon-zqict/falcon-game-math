@@ -1,5 +1,4 @@
 #pragma once
-#include "Simd128SSE.h"
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon
@@ -25,8 +24,8 @@ namespace falcon
     template <typename DataType, size_t Lane>
     template <typename... Args>
         requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...)
-    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::set(
-        Args... args)
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                                     Lane>::set(Args... args)
 
     {
         constexpr auto MaxLanes = 128 / sizeof(DataType);
@@ -252,7 +251,8 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::store(DataType* pBuffer) const noexcept
+    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::store(
+        DataType* pBuffer) const noexcept
     {
         if constexpr (types::IsFP64<DataType>)
         {
@@ -292,7 +292,8 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::storeAligned(DataType* pBuffer) const noexcept
+    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::storeAligned(
+        DataType* pBuffer) const noexcept
     {
         if constexpr (types::IsFP64<DataType>)
         {
