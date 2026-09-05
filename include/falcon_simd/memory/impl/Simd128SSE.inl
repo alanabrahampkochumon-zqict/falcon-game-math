@@ -1344,7 +1344,7 @@ namespace falcon
             // Pick from this register whenever value of zero is encountered(~mask) and from other whenever 1 is
             // encountered
             // return *this & ~mask | other & mask;
-            return mask.andNot(*this) | other & mask;
+            return mask.andNot(*this) | (other & mask);
         }
     }
 
