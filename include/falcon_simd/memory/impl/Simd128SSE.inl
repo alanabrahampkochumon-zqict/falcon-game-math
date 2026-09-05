@@ -11,6 +11,8 @@
  */
 
 
+#include "Simd128SSE.h"
+
 #include <emmintrin.h>
 #include <format>
 
@@ -428,5 +430,34 @@ namespace falcon
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator<=(const Simd128 other) const noexcept
     { return ~(*this > other); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::blend(const Simd128 other, const Simd128 mask) const noexcept
+    {
+        // Blend functions are only available from SSE 4.1
+        if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                return Simd128(_mm_blendv_pd(_register, other.naive(), mask.naive()));
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                return Simd128(_mm_blendv_ps(_register, other.naive(), mask.naive()));
+            }
+            else
+            {
+                return Simd128(_mm_blendv_epi8(_register, other.naive(), mask.naive()));
+            }
+        }
+        else
+        {
+            // Pick from this register whenever value of zero is encountered(~mask) and from other whenever 1 is
+            // encountered
+            return *this & ~mask | other & mask; // TODO: Replace with andnot after impl
+        }
+    }
 
 } // namespace falcon

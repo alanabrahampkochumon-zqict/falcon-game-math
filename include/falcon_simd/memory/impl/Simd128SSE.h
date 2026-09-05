@@ -1152,6 +1152,29 @@ namespace falcon
         // A <= B => ~(A > B)
         [[nodiscard]] constexpr Simd128 operator<=(Simd128 other) const noexcept;
 
+
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///   MASKING/BLENDING
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /**
+         * @brief Selectively blend values from this register and @p other using the @p mask.
+         *
+         * @code
+         * // Masking sample
+         * this  -> 0x ff 23 15 81
+         * other -> 0x 32 3f ed 55
+         * mask  -> 0x ff 00 ff 00
+         * ret   -> 0x 32 23 ed 81
+         * @endcode
+         *
+         * @param other The register whose values are selected when mask is 0b11..11 or 0xf..f.
+         * @param mask  The mask to use for blending.
+         *
+         * @return Return a new register with blended values.
+         */
+        constexpr Simd128 blend(Simd128 other, Simd128 mask) const noexcept;
+
         /// TODO: Add tests for these ctor and getter
         /// TODO: Add test for naive
         /// @brief Get the internal register used by Simd128

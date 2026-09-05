@@ -16,6 +16,7 @@
 #include <falcon_simd/FalconSimd.h>
 #include <gtest/gtest.h>
 #include <limits>
+#include "utils/TypeUtils.h"
 
 using SupportedSIMDTypes =
     testing::Types<int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t, int64_t, uint64_t, double, float>;
@@ -116,3 +117,29 @@ constexpr bool isEqualBitwise(T a, T b)
         return a == b;
     }
 }
+
+
+namespace simd::testing
+{
+    /// A numeric primitive with all 1s(0b1111...111)
+    /// @tparam T The numeric type of the primitive.
+    template<typename T>
+    constexpr T ONE = getAllOnes<T>();
+
+    /// Alias for signed and unsigned types to facilitate easier testing.
+    using U8 = uint8_t;
+    using U16 = uint16_t;
+    using U32 = uint32_t;
+    using U64 = uint64_t;
+    using I8 = int8_t;
+    using I16 = int16_t;
+    using I32 = int32_t;
+    using I64 = int64_t;
+    using FP32 = float;
+    using FP64 = double;
+
+    /// Alias for array for easier testing.
+    template<typename T, size_t Size>
+    using Array = std::array<T, Size>;
+}
+

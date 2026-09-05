@@ -5,6 +5,7 @@ add_executable(FalconSIMDMemoryTests
         Simd128/GetterSetterTests.cpp
         Simd128/LoadStoreTests.cpp
         Simd128/BitwiseOperationTests.cpp
+        Simd128/BlendTests.cpp
 )
 
 target_include_directories(FalconSIMDMemoryTests PRIVATE "${FALCON_SIMD_TEST_ROOT_DIR}/include")
