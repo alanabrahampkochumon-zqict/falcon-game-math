@@ -6,6 +6,13 @@
  *
  * @brief SSE2 implementation for Simd128.
  *
+ * @details 128-bit SIMD register wrapper for x64-based systems.
+ *          Support for faster instruction in higher instruction sets like AVX2 or AVX512
+ *          is checked inside implementation, and this only common interface for 128-bit
+ *          register for the x86-64 ISA. Note, there is no distinction made between SSE3,
+ *          SSE4.1, SSE4.2, and the library expects a baseline of SSE4.2 but provides
+ *          SSE2 implementation for backwards-compatibility.
+ *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
@@ -270,7 +277,7 @@ namespace falcon
          *
          * @return A reference to the this register with difference.
          */
-        constexpr  Simd128& operator-=(Simd128 other) noexcept;
+        constexpr Simd128& operator-=(Simd128 other) noexcept;
 
 
         /**
@@ -281,7 +288,7 @@ namespace falcon
          * @param other The register to multiply.
          * @return A new register with the product of elements of this register and @p other.
          */
-        [[nodiscard]] constexpr  Simd128 operator*(Simd128 other) const noexcept;
+        [[nodiscard]] constexpr Simd128 operator*(Simd128 other) const noexcept;
 
 
         /**
@@ -351,7 +358,7 @@ namespace falcon
          * @relatedalso divReg(const Simd128)
          * @relatedalso operator/(const DataType)
          */
-         constexpr Simd128& operator/=(DataType scalar) noexcept;
+        constexpr Simd128& operator/=(DataType scalar) noexcept;
 
 
         // TODO: Add masked variants comparison AVX512(__mmask) and emulate
@@ -367,13 +374,10 @@ namespace falcon
 
         [[nodiscard]] constexpr Simd128 operator>(Simd128 other) const noexcept;
 
-        // A >= B => !(A < B) same as (A > B) | (A == B) but saves a lot of cpu cycles.
         [[nodiscard]] constexpr Simd128 operator>=(Simd128 other) const noexcept;
 
-        // A < B => B > A
         [[nodiscard]] constexpr Simd128 operator<(Simd128 other) const noexcept;
 
-        // A <= B => ~(A > B)
         [[nodiscard]] constexpr Simd128 operator<=(Simd128 other) const noexcept;
 
 

@@ -1161,8 +1161,8 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd128<SimdBackend::ARCH_SSE2, DataType,
-                                                                       Lane>::operator/=(const DataType scalar) noexcept
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator/=(const DataType scalar) noexcept
     {
         *this = *this / scalar;
         return *this;
@@ -1295,19 +1295,28 @@ namespace falcon
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator>=(const Simd128 other) const noexcept
-    { return ~(*this < other); }
+    {
+        // A >= B => !(A < B) same as (A > B) | (A == B) but saves a lot of cpu cycles.
+        return ~(*this < other);
+    }
 
 
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator<(const Simd128 other) const noexcept
-    { return other > *this; }
+    {
+        // A < B => B > A
+        return other > *this;
+    }
 
 
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator<=(const Simd128 other) const noexcept
-    { return ~(*this > other); }
+    {
+        // A <= B => ~(A > B)
+        return ~(*this > other);
+    }
 
 
     template <typename DataType, size_t Lane>
