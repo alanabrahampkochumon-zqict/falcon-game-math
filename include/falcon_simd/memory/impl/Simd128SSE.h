@@ -43,7 +43,7 @@ namespace falcon
 
 
         // TODO: Update
-        FALCON_INLINE constexpr explicit Simd128() = default;
+        constexpr explicit Simd128() = default;
 
 
         /**
@@ -61,19 +61,11 @@ namespace falcon
          */
         template <typename... Args>
             requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...)
-        FALCON_INLINE constexpr Simd128& set(Args... args)
-        {
-            constexpr auto MaxLanes = 128 / sizeof(DataType);
-            // By packing to a compile time array and adding values
-            alignas(16) std::array<DataType, MaxLanes> data{ args... };
-            loadAligned(data.data());
-
-            return *this;
-        }
+        constexpr Simd128& set(Args... args);
 
 
         /// @brief Initialize a Simd128 with the supplied register.
-        FALCON_INLINE explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
+        explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
 
 
         /**
@@ -87,54 +79,8 @@ namespace falcon
          * @param other      The register to conform to the current register type.
          */
         template <typename DataType2>
-        FALCON_INLINE explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
-        {
-            if constexpr (types::IsFP64<DataType2>)
-            {
-                if constexpr (types::IsFP64<DataType>)
-                {
-                    _register = other.naive();
-                }
-                else if constexpr (types::IsFP32<DataType>)
-                {
-                    _register = _mm_cvtpd_ps(other.naive());
-                }
-                else
-                {
-                    _register = _mm_cvtpd_epi32(other.naive());
-                }
-            }
-            else if constexpr (types::IsFP32<DataType2>)
-            {
-                if constexpr (types::IsFP64<DataType>)
-                {
-                    _register = _mm_cvtps_pd(other.naive());
-                }
-                else if constexpr (types::IsFP32<DataType>)
-                {
-                    _register = other.naive();
-                }
-                else
-                {
-                    _register = _mm_cvtps_epi32(other.naive());
-                }
-            }
-            else
-            {
-                if constexpr (types::IsFP64<DataType>)
-                {
-                    _register = _mm_cvtepi32_pd(other.naive());
-                }
-                else if constexpr (types::IsFP32<DataType>)
-                {
-                    _register = _mm_cvtepi32_ps(other.naive());
-                }
-                else
-                {
-                    _register = other.naive();
-                }
-            }
-        }
+        explicit constexpr Simd128(const Simd128<SimdBackend::ARCH_SSE2, DataType2, Lane>& other);
+
 
         /**
          * @brief Load data from memory into the SIMD register.
@@ -146,46 +92,7 @@ namespace falcon
          *
          * @param data The data to load.
          */
-        FALCON_INLINE constexpr void loadAligned(DataType* data) noexcept
-        {
-            // We are using sizes for loading integers since we are storing both signed and unsigned types into the
-            // register as bits, with packing.
-            if constexpr (types::IsFP64<DataType>)
-            {
-                _register = _mm_load_pd(data);
-            }
-            else if constexpr (types::IsFP32<DataType>)
-            {
-                if constexpr (Lane == 2)
-                {
-                    _register = _mm_loadl_pi(_mm_setzero_ps(), reinterpret_cast<const __m64*>(data));
-                }
-                else
-                {
-                    _register = _mm_load_ps(data);
-                }
-            }
-            else
-            {
-
-                if constexpr (sizeof(DataType) * Lane == 16)
-                {
-                    _register = _mm_load_si128(reinterpret_cast<const __m128i*>(data));
-                }
-                else if constexpr (sizeof(DataType) * Lane == 8)
-                {
-                    _register = _mm_loadu_si64(data);
-                }
-                else if constexpr (sizeof(DataType) * Lane == 4)
-                {
-                    _register = _mm_loadu_si32(data);
-                }
-                else // Lane * Size = 2
-                {
-                    _register = _mm_loadu_si16(data);
-                }
-            }
-        }
+        constexpr void loadAligned(DataType* data) noexcept;
 
 
         /**
@@ -204,46 +111,7 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        FALCON_INLINE constexpr void load(DataType* data) noexcept
-        {
-            // We are using sizes for loading integers since we are storing both signed and unsigned types into the
-            // register as bits, with packing.
-            if constexpr (types::IsFP64<DataType>)
-            {
-                _register = _mm_loadu_pd(data);
-            }
-            else if constexpr (types::IsFP32<DataType>)
-            {
-                if constexpr (Lane == 2)
-                {
-                    _register = _mm_loadl_pi(_mm_setzero_ps(), reinterpret_cast<const __m64*>(data));
-                }
-                else
-                {
-                    _register = _mm_loadu_ps(data);
-                }
-            }
-            else
-            {
-
-                if constexpr (sizeof(DataType) * Lane == 16)
-                {
-                    _register = _mm_loadu_si128(reinterpret_cast<const __m128i*>(data));
-                }
-                else if constexpr (sizeof(DataType) * Lane == 8)
-                {
-                    _register = _mm_loadu_si64(data);
-                }
-                else if constexpr (sizeof(DataType) * Lane == 4)
-                {
-                    _register = _mm_loadu_si32(data);
-                }
-                else // Lane * Size = 2
-                {
-                    _register = _mm_loadu_si16(data);
-                }
-            }
-        }
+        constexpr void load(DataType* data) noexcept;
 
 
         /**
@@ -260,36 +128,7 @@ namespace falcon
          * @relatedalso storeAligned(DataType*)
          * @relatedalso setZero()
          */
-        FALCON_INLINE constexpr void broadcast(DataType value) noexcept
-        {
-            if constexpr (types::IsFP64<DataType>)
-            {
-                _register = _mm_set1_pd(value);
-            }
-            else if constexpr (types::IsFP32<DataType>)
-            {
-                _register = _mm_set1_ps(value);
-            }
-            else
-            {
-                if constexpr (sizeof(DataType) == 8)
-                {
-                    _register = _mm_set1_epi64x(value);
-                }
-                else if constexpr (sizeof(DataType) == 4)
-                {
-                    _register = _mm_set1_epi32(value);
-                }
-                else if constexpr (sizeof(DataType) == 2)
-                {
-                    _register = _mm_set1_epi16(value);
-                }
-                else if constexpr (sizeof(DataType) == 1)
-                {
-                    _register = _mm_set1_epi8(value);
-                }
-            }
-        }
+        constexpr void broadcast(DataType value) noexcept;
 
 
         /**
@@ -302,7 +141,7 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setOne()
          */
-        FALCON_INLINE constexpr void setZero() noexcept;
+        constexpr void setZero() noexcept;
 
 
         /**
@@ -315,7 +154,7 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        FALCON_INLINE constexpr void setOne() noexcept;
+        constexpr void setOne() noexcept;
 
 
         /**
@@ -334,43 +173,7 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        FALCON_INLINE constexpr void store(DataType* pBuffer) const noexcept
-        {
-            if constexpr (types::IsFP64<DataType>)
-            {
-                _mm_storeu_pd(pBuffer, _register);
-            }
-            else if constexpr (types::IsFP32<DataType>)
-            {
-                if constexpr (Lane == 2)
-                {
-                    _mm_storel_pi(reinterpret_cast<__m64*>(pBuffer), _register);
-                }
-                else
-                {
-                    _mm_storeu_ps(pBuffer, _register);
-                }
-            }
-            else
-            {
-                if constexpr (sizeof(DataType) * Lane == 16)
-                {
-                    _mm_storeu_si128(reinterpret_cast<__m128i*>(pBuffer), _register);
-                }
-                else if constexpr (sizeof(DataType) * Lane == 8)
-                {
-                    _mm_storeu_si64(pBuffer, _register);
-                }
-                else if constexpr (sizeof(DataType) * Lane == 4)
-                {
-                    _mm_storeu_si32(pBuffer, _register);
-                }
-                else // Size * Lane == 2
-                {
-                    _mm_storeu_si16(pBuffer, _register);
-                }
-            }
-        }
+        FALCON_INLINE constexpr void store(DataType* pBuffer) const noexcept;
 
 
         /**
@@ -386,44 +189,7 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        FALCON_INLINE constexpr void storeAligned(DataType* pBuffer) const noexcept
-        {
-            if constexpr (types::IsFP64<DataType>)
-            {
-                _mm_store_pd(pBuffer, _register);
-            }
-            else if constexpr (types::IsFP32<DataType>)
-            {
-                if constexpr (Lane == 2)
-                {
-                    _mm_storel_pi(reinterpret_cast<__m64*>(pBuffer), _register);
-                    // _mm_store_sd(reinterpret_cast<double*>(pBuffer), _mm_castps_pd(_register));
-                }
-                else
-                {
-                    _mm_store_ps(pBuffer, _register);
-                }
-            }
-            else
-            {
-                if constexpr (sizeof(DataType) * Lane == 16)
-                {
-                    _mm_store_si128(reinterpret_cast<__m128i*>(pBuffer), _register);
-                }
-                else if constexpr (sizeof(DataType) * Lane == 8)
-                {
-                    _mm_storeu_si64(pBuffer, _register);
-                }
-                else if constexpr (sizeof(DataType) * Lane == 4)
-                {
-                    _mm_storeu_si32(pBuffer, _register);
-                }
-                else // Size * Lane == 2
-                {
-                    _mm_storeu_si16(pBuffer, _register);
-                }
-            }
-        }
+        FALCON_INLINE constexpr void storeAligned(DataType* pBuffer) const noexcept;
 
         /**
          *
