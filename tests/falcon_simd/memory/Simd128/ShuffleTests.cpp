@@ -1,0 +1,219 @@
+/**
+ * @file ShuffleTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: September 07, 2026
+ *
+ * @brief Verifies Simd128 shuffling operations.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+
+#include "SIMDTestSetup.h"
+
+#include <array>
+#include <bit>
+
+// TODO: Remove Preprocessor after implementing individual simd paths
+#if defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX) ||                      \
+    defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_SSE2)
+
+
+/**
+ * @addtogroup T_SIMD128_Shuffle
+ * @{
+ */
+
+namespace
+{
+    using namespace simd::testing;
+
+    // Test param to pass in a combination matrix for testing shuffle function.
+    // since gtest doesn't natively support parameterized typed test(where you can pass in parameters against a type
+    // vector)
+    template <typename T, size_t Lanes, Array<T, Lanes> Data, Array<T, Lanes> Expected, uint8_t... Indices>
+    struct Simd128ShuffleTestParam
+    {
+        using Type                            = T;
+        using IndexSequence                   = std::integer_sequence<uint8_t, Indices...>;
+        static constexpr size_t REGISTER_SIZE = 128;
+        static constexpr size_t LaneCount     = Lanes;
+        static constexpr auto data            = Data;
+        static constexpr auto expected        = Expected;
+        const char* TypeName                  = typeid(Type).name();
+
+        // TODO: Fix pretty function not being used.
+        friend std::ostream& operator<<(std::ostream& os, const Simd128ShuffleTestParam& param)
+        { return os << "Simd128ShuffleTestParam(Type=" << param.TypeName << ", Lanes" << param.LaneCount << ")"; }
+
+        // friend void PrintTo(const Simd128ShuffleTestParam& param, std::ostream* os)
+        // { *os << "Simd128ShuffleTestParam(Type=" << param.TypeName << ", Lanes" << param.LaneCount << ")"; }
+    };
+
+
+    using Simd128BlendTestTypeHints = testing::Types<
+        // Unsigned types
+        Simd128ShuffleTestParam<U8, 2, Array<U8, 2>{{ 100, 24 }}, Array<U8, 2>{{ 100, 100 }}, 0, 0>,
+        Simd128ShuffleTestParam<U8, 2, Array<U8, 2>{{ 100, 24 }}, Array<U8, 2>{{ 24, 100 }}, 1, 0>,
+        Simd128ShuffleTestParam<U8, 2, Array<U8, 2>{{ 100, 24 }}, Array<U8, 2>{{ 100, 24 }}, 0, 1>,
+        Simd128ShuffleTestParam<U8, 4, Array<U8, 4>{{ 100, 24, 13, 15 }}, Array<U8, 4>{{ 100, 100, 100, 100 }}, 0, 0, 0, 0>,
+        Simd128ShuffleTestParam<U8, 4, Array<U8, 4>{{ 100, 24, 13, 15 }}, Array<U8, 4>{{ 15, 13, 24, 100 }}, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<U8, 4, Array<U8, 4>{{ 100, 24, 13, 15 }}, Array<U8, 4>{{ 100, 24, 13, 15 }}, 1, 2, 3, 0>,
+        Simd128ShuffleTestParam<U8, 8, Array<U8, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<U8, 8>{{ 100, 100, 100, 100, 100, 100, 100, 100 }}, 0, 0, 0, 0, 0, 0, 0, 0>,
+        Simd128ShuffleTestParam<U8, 8, Array<U8, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<U8, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }}, 7, 6, 5, 4, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<U8, 8, Array<U8, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<U8, 8>{{ 44, 71, 15, 32, 15, 13, 24, 100 }}, 0, 1, 2, 3, 4, 5, 6, 7>,
+        Simd128ShuffleTestParam<
+            U8, 16, Array<U8, 16>{{ 100, 24, 13, 15, 32, 15, 71, 44, 100, 24, 13, 15, 32, 15, 71, 44 }},
+            Array<U8, 16>{{ 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 }}, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0>,
+        Simd128ShuffleTestParam<U8, 16,
+                                Array<U8, 16>{{ 100, 24, 13, 15, 32, 15, 71, 44, 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<U8, 16>{{ 44, 71, 15, 32, 15, 13, 24, 100, 44, 71, 15, 32, 15, 13, 24, 100 }}, 15,
+                                14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<U8, 16,
+                                Array<U8, 16>{{ 100, 24, 13, 15, 32, 15, 71, 44, 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<U8, 16>{{ 100, 24, 13, 15, 32, 15, 71, 44, 100, 24, 13, 15, 32, 15, 71, 44 }}, 0, 1,
+                                2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15>,
+
+        Simd128ShuffleTestParam<U16, 2, Array<U16, 2>{{ 100, 24 }}, Array<U16, 2>{{ 100, 100 }}, 0, 0>,
+        Simd128ShuffleTestParam<U16, 2, Array<U16, 2>{{ 100, 24 }}, Array<U16, 2>{{ 24, 100 }}, 1, 0>,
+        Simd128ShuffleTestParam<U16, 2, Array<U16, 2>{{ 100, 24 }}, Array<U16, 2>{{ 100, 24 }}, 0, 1>,
+        Simd128ShuffleTestParam<U16, 4, Array<U16, 4>{{ 100, 24, 13, 15 }}, Array<U16, 4>{{ 100, 100, 100, 100 }}, 0, 0, 0,
+                                0>,
+        Simd128ShuffleTestParam<U16, 4, Array<U16, 4>{{ 100, 24, 13, 15 }}, Array<U16, 4>{{ 15, 13, 24, 100 }}, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<U16, 4, Array<U16, 4>{{ 100, 24, 13, 15 }}, Array<U16, 4>{{ 100, 24, 13, 15 }}, 1, 2, 3, 0>,
+        Simd128ShuffleTestParam<U16, 8, Array<U16, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<U16, 8>{{ 100, 100, 100, 100, 100, 100, 100, 100 }}, 0, 0, 0, 0, 0, 0, 0, 0>,
+        Simd128ShuffleTestParam<U16, 8, Array<U16, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<U16, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }}, 7, 6, 5, 4, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<U16, 8, Array<U16, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<U16, 8>{{ 44, 71, 15, 32, 15, 13, 24, 100 }}, 0, 1, 2, 3, 4, 5, 6, 7>,
+
+        Simd128ShuffleTestParam<U32, 2, Array<U32, 2>{{ 100, 24 }}, Array<U32, 2>{{ 100, 100 }}, 0, 0>,
+        Simd128ShuffleTestParam<U32, 2, Array<U32, 2>{{ 100, 24 }}, Array<U32, 2>{{ 24, 100 }}, 1, 0>,
+        Simd128ShuffleTestParam<U32, 2, Array<U32, 2>{{ 100, 24 }}, Array<U32, 2>{{ 100, 24 }}, 0, 1>,
+        Simd128ShuffleTestParam<U32, 4, Array<U32, 4>{{ 100, 24, 13, 15 }}, Array<U32, 4>{{ 100, 100, 100, 100 }}, 0, 0, 0,
+                                0>,
+        Simd128ShuffleTestParam<U32, 4, Array<U32, 4>{{ 100, 24, 13, 15 }}, Array<U32, 4>{{ 15, 13, 24, 100 }}, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<U32, 4, Array<U32, 4>{{ 100, 24, 13, 15 }}, Array<U32, 4>{{ 100, 24, 13, 15 }}, 1, 2, 3, 0>,
+
+        Simd128ShuffleTestParam<U64, 2, Array<U64, 2>{{ 100, 24 }}, Array<U64, 2>{{ 100, 100 }}, 0, 0>,
+        Simd128ShuffleTestParam<U64, 2, Array<U64, 2>{{ 100, 24 }}, Array<U64, 2>{{ 24, 100 }}, 1, 0>,
+        Simd128ShuffleTestParam<U64, 2, Array<U64, 2>{{ 100, 24 }}, Array<U64, 2>{{ 100, 24 }}, 0, 1>,
+
+        // Signed types
+        Simd128ShuffleTestParam<I8, 2, Array<I8, 2>{{ 100, 24 }}, Array<I8, 2>{{ 100, 100 }}, 0, 0>,
+        Simd128ShuffleTestParam<I8, 2, Array<I8, 2>{{ 100, 24 }}, Array<I8, 2>{{ 24, 100 }}, 1, 0>,
+        Simd128ShuffleTestParam<I8, 2, Array<I8, 2>{{ 100, 24 }}, Array<I8, 2>{{ 100, 24 }}, 0, 1>,
+        Simd128ShuffleTestParam<I8, 4, Array<I8, 4>{{ 100, 24, 13, 15 }}, Array<I8, 4>{{ 100, 100, 100, 100 }}, 0, 0, 0, 0>,
+        Simd128ShuffleTestParam<I8, 4, Array<I8, 4>{{ 100, 24, 13, 15 }}, Array<I8, 4>{{ 15, 13, 24, 100 }}, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<I8, 4, Array<I8, 4>{{ 100, 24, 13, 15 }}, Array<I8, 4>{{ 100, 24, 13, 15 }}, 1, 2, 3, 0>,
+        Simd128ShuffleTestParam<I8, 8, Array<I8, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<I8, 8>{{ 100, 100, 100, 100, 100, 100, 100, 100 }}, 0, 0, 0, 0, 0, 0, 0, 0>,
+        Simd128ShuffleTestParam<I8, 8, Array<I8, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<I8, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }}, 7, 6, 5, 4, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<I8, 8, Array<I8, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<I8, 8>{{ 44, 71, 15, 32, 15, 13, 24, 100 }}, 0, 1, 2, 3, 4, 5, 6, 7>,
+        Simd128ShuffleTestParam<
+            I8, 16, Array<I8, 16>{{ 100, 24, 13, 15, 32, 15, 71, 44, 100, 24, 13, 15, 32, 15, 71, 44 }},
+            Array<I8, 16>{{ 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 }}, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0>,
+        Simd128ShuffleTestParam<I8, 16,
+                                Array<I8, 16>{{ 100, 24, 13, 15, 32, 15, 71, 44, 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<I8, 16>{{ 44, 71, 15, 32, 15, 13, 24, 100, 44, 71, 15, 32, 15, 13, 24, 100 }}, 15,
+                                14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<I8, 16,
+                                Array<I8, 16>{{ 100, 24, 13, 15, 32, 15, 71, 44, 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<I8, 16>{{ 100, 24, 13, 15, 32, 15, 71, 44, 100, 24, 13, 15, 32, 15, 71, 44 }}, 0, 1,
+                                2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15>,
+
+        Simd128ShuffleTestParam<I16, 2, Array<I16, 2>{{ 100, 24 }}, Array<I16, 2>{{ 100, 100 }}, 0, 0>,
+        Simd128ShuffleTestParam<I16, 2, Array<I16, 2>{{ 100, 24 }}, Array<I16, 2>{{ 24, 100 }}, 1, 0>,
+        Simd128ShuffleTestParam<I16, 2, Array<I16, 2>{{ 100, 24 }}, Array<I16, 2>{{ 100, 24 }}, 0, 1>,
+        Simd128ShuffleTestParam<I16, 4, Array<I16, 4>{{ 100, 24, 13, 15 }}, Array<I16, 4>{{ 100, 100, 100, 100 }}, 0, 0, 0,
+                                0>,
+        Simd128ShuffleTestParam<I16, 4, Array<I16, 4>{{ 100, 24, 13, 15 }}, Array<I16, 4>{{ 15, 13, 24, 100 }}, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<I16, 4, Array<I16, 4>{{ 100, 24, 13, 15 }}, Array<I16, 4>{{ 100, 24, 13, 15 }}, 1, 2, 3, 0>,
+        Simd128ShuffleTestParam<I16, 8, Array<I16, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<I16, 8>{{ 100, 100, 100, 100, 100, 100, 100, 100 }}, 0, 0, 0, 0, 0, 0, 0, 0>,
+        Simd128ShuffleTestParam<I16, 8, Array<I16, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<I16, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }}, 7, 6, 5, 4, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<I16, 8, Array<I16, 8>{{ 100, 24, 13, 15, 32, 15, 71, 44 }},
+                                Array<I16, 8>{{ 44, 71, 15, 32, 15, 13, 24, 100 }}, 0, 1, 2, 3, 4, 5, 6, 7>,
+
+        Simd128ShuffleTestParam<I32, 2, Array<I32, 2>{{ 100, 24 }}, Array<I32, 2>{{ 100, 100 }}, 0, 0>,
+        Simd128ShuffleTestParam<I32, 2, Array<I32, 2>{{ 100, 24 }}, Array<I32, 2>{{ 24, 100 }}, 1, 0>,
+        Simd128ShuffleTestParam<I32, 2, Array<I32, 2>{{ 100, 24 }}, Array<I32, 2>{{ 100, 24 }}, 0, 1>,
+        Simd128ShuffleTestParam<I32, 4, Array<I32, 4>{{ 100, 24, 13, 15 }}, Array<I32, 4>{{ 100, 100, 100, 100 }}, 0, 0, 0,
+                                0>,
+        Simd128ShuffleTestParam<I32, 4, Array<I32, 4>{{ 100, 24, 13, 15 }}, Array<I32, 4>{{ 15, 13, 24, 100 }}, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<I32, 4, Array<I32, 4>{{ 100, 24, 13, 15 }}, Array<I32, 4>{{ 100, 24, 13, 15 }}, 1, 2, 3, 0>,
+
+        Simd128ShuffleTestParam<I64, 2, Array<I64, 2>{{ 100, 24 }}, Array<I64, 2>{{ 100, 100 }}, 0, 0>,
+        Simd128ShuffleTestParam<I64, 2, Array<I64, 2>{{ 100, 24 }}, Array<I64, 2>{{ 24, 100 }}, 1, 0>,
+        Simd128ShuffleTestParam<I64, 2, Array<I64, 2>{{ 100, 24 }}, Array<I64, 2>{{ 100, 24 }}, 0, 1>,
+
+        // Floating point types
+        Simd128ShuffleTestParam<FP32, 2, Array<FP32, 2>{{ 100.0f, 24.123849f }}, Array<FP32, 2>{{ 100.0f, 100.0f }}, 0, 0>,
+        Simd128ShuffleTestParam<FP32, 2, Array<FP32, 2>{{ 100.0f, 24.123849f }}, Array<FP32, 2>{{ 24.123849f, 100.0f }}, 1,
+                                0>,
+        Simd128ShuffleTestParam<FP32, 2, Array<FP32, 2>{{ 100.0f, 24.123849f }}, Array<FP32, 2>{{ 100.0f, 24.123849f }}, 0,
+                                1>,
+
+        Simd128ShuffleTestParam<FP32, 4, Array<FP32, 4>{{ 100.0f, 24.123849f, 4.12349f, 3.1239f }},
+                                Array<FP32, 4>{{ 100.0f, 100.0f, 100.0f, 100.0f }}, 0, 0, 0, 0>,
+        Simd128ShuffleTestParam<FP32, 4, Array<FP32, 4>{{ 100.0f, 24.123849f, 4.12349f, 3.1239f }},
+                                Array<FP32, 4>{{ 3.1239f, 4.12349f, 24.123849f, 100.0f }}, 3, 2, 1, 0>,
+        Simd128ShuffleTestParam<FP32, 4, Array<FP32, 4>{{ 100.0f, 24.123849f, 4.12349f, 3.1239f }},
+                                Array<FP32, 4>{{ 100.0f, 24.123849f, 4.12349f, 3.1239f }}, 0, 1, 2, 3>,
+
+        Simd128ShuffleTestParam<FP64, 2, Array<FP64, 2>{{ 100.0, 24.123849 }}, Array<FP64, 2>{{ 100.0, 100.0 }}, 0, 0>,
+        Simd128ShuffleTestParam<FP64, 2, Array<FP64, 2>{{ 100.0, 24.123849 }}, Array<FP64, 2>{{ 24.123849, 100.0 }}, 1, 0>,
+        Simd128ShuffleTestParam<FP64, 2, Array<FP64, 2>{{ 100.0, 24.123849 }}, Array<FP64, 2>{{ 100.0, 24.123849 }}, 0, 1>>;
+
+    /// @brief Test fixture for Simd128 blending operations.
+    template <typename>
+    class Simd128BlendTests: public testing::Test
+    {};
+    TYPED_TEST_SUITE(Simd128BlendTests, Simd128BlendTestTypeHints);
+
+} // namespace
+
+
+TYPED_TEST(Simd128BlendTests, BlendingWithMaskReturnsRegisterWithCorrectValues)
+{
+    // Get all the parameters from the types
+    using Type                            = TypeParam::Type;
+    constexpr size_t Lanes                = TypeParam::LaneCount;
+    constexpr Array<Type, Lanes> data     = TypeParam::data;
+    constexpr Array<Type, Lanes> expected = TypeParam::expected;
+
+    // Create the register and load them
+    // Note: While const cast is not recommended in such a situation since the underlying buffer
+    //       non-const, we can cast this as internally the load function doesn't mutate the parameters.
+    // Since we can't directly access the parameter pack
+    // we need to use call it using a lambda nad integer_sequence
+    auto execShuffle = [data]<uint8_t... I>(std::integer_sequence<uint8_t, I...>) {
+        falcon::Simd128_t<Type, Lanes> reg{};
+        reg.load(const_cast<Type*>(data.data()));
+        return reg.template shuffle<I...>();
+    };
+
+    // Perform the shuffling
+    Array<Type, Lanes> result{};
+    auto resultReg = execShuffle(typename TypeParam::IndexSequence{});
+    resultReg.store(result.data());
+
+    // Compare and assert the result.
+    for (size_t i = 0; i < Lanes; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+/** @} */
+
+#endif

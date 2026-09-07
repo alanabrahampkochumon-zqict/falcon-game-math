@@ -403,6 +403,19 @@ namespace falcon
          */
         constexpr Simd128 blend(Simd128 other, Simd128 mask) const noexcept;
 
+        /**
+         * Shuffle the values as per given index.
+         *
+         * @tparam ShuffleIndex The indices to use for shuffling. Only accepts values from 0 to Lane - 1.
+         *                      Must be specified from lower index to higher index,
+         *                      i.e, <0, 1, 2, 3> returns the same register.
+         *
+         * @return A new Simd register with shuffled values.
+         */
+        template <uint8_t... ShuffleIndex>
+        constexpr Simd128 shuffle() const noexcept;
+
+
         /// TODO: Add tests for these ctor and getter
         /// TODO: Add test for naive
         /// @brief Get the internal register used by Simd128

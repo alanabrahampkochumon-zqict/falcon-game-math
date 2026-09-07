@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: September 05, 2026
  *
- * @brief Verifies Simd128 blending and shuffling operations.
+ * @brief Verifies Simd128 blending operations.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,7 +20,7 @@
 
 
 /**
- * @addtogroup T_SIMD128_Bit
+ * @addtogroup T_SIMD128_Shuffle
  * @{
  */
 

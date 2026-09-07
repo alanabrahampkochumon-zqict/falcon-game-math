@@ -1348,4 +1348,37 @@ namespace falcon
         }
     }
 
+
+    template <typename DataType, size_t Lane>
+    template <uint8_t... ShuffleIndex>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::shuffle()
+        const noexcept
+    {
+        static_assert(sizeof...(ShuffleIndex) == Lane && "There must be <Lane> shuffle indices.");
+        static_assert(((ShuffleIndex < Lane) && ...) && "Indices must be between 0(inclusive) and <Lane>(exclusive).");
+
+        // Since packed indexing is not support until C++26, we need to use this workaround
+        constexpr std::array<uint8_t, sizeof...(ShuffleIndex)> indices{ { ShuffleIndex... } };
+
+        if constexpr (types::IsFP64<DataType>)
+        {
+            return Simd128(_mm_shuffle_pd(_register, _register, (indices[0] << 1 | indices[1])));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            // Evaluated at compile-time
+            // Since there is a possibility that indices can be 2 but _MM_SHUFFLE
+            // only takes 4 values, so we need to use 0 indices for the other indices
+            constexpr int thirdIndex  = indices.size() > 2 ? indices[2] : 0;
+            constexpr int fourthIndex = indices.size() > 2 ? indices[3] : 0;
+
+            return Simd128(
+                _mm_shuffle_ps(_register, _register, _MM_SHUFFLE(indices[0], indices[1], thirdIndex, fourthIndex)));
+        }
+        else
+        {
+            return *this;
+        }
+    }
+
 } // namespace falcon
