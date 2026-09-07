@@ -11,8 +11,6 @@
 
 
 
-#include "Simd128SSE.h"
-
 #include <emmintrin.h>
 #include <format>
 
@@ -344,8 +342,7 @@ namespace falcon
         // TODO: Add death test
         FALCON_ASSERT_MSG(
             index < Lane,
-            std::format("Out of bounds access. Index must be less than {}. But it is currently {}", Lane, index)
-                .c_str());
+            std::format("Out of bounds access. Idx must be less than {}. But it is currently {}", Lane, index).c_str());
 
         // We can use the compress and extract trick from CVL2(Agner Fog)
         // But that instruction is available only in AVX512F + AVX512VL
@@ -1352,16 +1349,16 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    template <uint8_t... ShuffleIndex>
+    template <uint8_t... ShuffleIdx>
     constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::shuffle()
         const noexcept
     {
-        static_assert(sizeof...(ShuffleIndex) == Lane && "There must be <Lane> shuffle indices.");
-        static_assert(((ShuffleIndex < Lane) && ...) && "Indices must be between 0(inclusive) and <Lane>(exclusive).");
+        static_assert(sizeof...(ShuffleIdx) == Lane && "There must be <Lane> shuffle indices.");
+        static_assert(((ShuffleIdx < Lane) && ...) && "Indices must be between 0(inclusive) and <Lane>(exclusive).");
 
         // NOTE: _MM_SHUFFLE takes indices in the opposite order
         // Since packed indexing is not support until C++26, we need to use this workaround
-        constexpr std::array<uint8_t, sizeof...(ShuffleIndex)> indices{ { ShuffleIndex... } };
+        constexpr std::array<uint8_t, sizeof...(ShuffleIdx)> indices{ { ShuffleIdx... } };
 
         if constexpr (types::IsFP64<DataType>)
         {
@@ -1372,11 +1369,11 @@ namespace falcon
             // Evaluated at compile-time
             // Since there is a possibility that indices can be 2 but _MM_SHUFFLE
             // only takes 4 values, so we need to use 0 indices for the other indices
-            constexpr int thirdIndex  = indices.size() > 2 ? indices[2] : 0;
-            constexpr int fourthIndex = indices.size() > 2 ? indices[3] : 0;
+            constexpr int thirdIdx  = indices.size() > 2 ? indices[2] : 0;
+            constexpr int fourthIdx = indices.size() > 2 ? indices[3] : 0;
 
             return Simd128(
-                _mm_shuffle_ps(_register, _register, _MM_SHUFFLE(fourthIndex, thirdIndex, indices[1], indices[0])));
+                _mm_shuffle_ps(_register, _register, _MM_SHUFFLE(fourthIdx, thirdIdx, indices[1], indices[0])));
         }
         else
         {
@@ -1385,18 +1382,22 @@ namespace falcon
                 // Intel's x86 doesn't provide a epi64 version of shuffle
                 // so we need to use the epi32 version and use the shuffle indices twice since
                 // the 64-bit lanes are just 2 32-bit lanes <64, 64> = <32, 32, 32, 32>
-                return Simd128(
-                    _mm_shuffle_epi32(_register, _MM_SHUFFLE(indices[1], indices[1], indices[0], indices[0])));
+                // We need to scale the indices from 2 indices to 4
+                constexpr auto firstIndex  = indices[0] * 2;
+                constexpr auto secondIndex = indices[0] * 2 + 1;
+                constexpr auto thirdIndex  = indices[1] * 2;
+                constexpr auto fourthIndex = indices[1] * 2 + 1;
+                auto reg = _mm_shuffle_epi32(_register, _MM_SHUFFLE(fourthIndex, thirdIndex, secondIndex, firstIndex));
+                return Simd128(reg);
             }
             else if constexpr (sizeof(DataType) == 4)
             {
                 // Since there is a possibility that indices can be 2 but _MM_SHUFFLE
                 // only takes 4 values, so we need to use 0 indices for the other indices
-                constexpr int thirdIndex  = indices.size() > 2 ? indices[2] : 0;
-                constexpr int fourthIndex = indices.size() > 2 ? indices[3] : 0;
+                constexpr int thirdIdx  = indices.size() > 2 ? indices[2] : 0;
+                constexpr int fourthIdx = indices.size() > 2 ? indices[3] : 0;
 
-                return Simd128(
-                    _mm_shuffle_epi32(_register, _MM_SHUFFLE(fourthIndex, thirdIndex, indices[1], indices[0])));
+                return Simd128(_mm_shuffle_epi32(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, indices[1], indices[0])));
             }
             else if constexpr (sizeof(DataType) == 2)
             {
@@ -1405,16 +1406,16 @@ namespace falcon
                 {
 
                     // NOTE: Due to the static assert above it can be guaranteed that indices[i] won't be
-                    //       greater than 3(0b11) and hence give overflow errors which is not the case with
+                    //       greater than 3(0b11) and hence will not give overflow errors, which is not the case with
                     //       lanes greater than 4.
                     // Since there is a possibility that indices can be 2 but _MM_SHUFFLE
                     // only takes 4 values, so we need to use 0 indices for the other indices
-                    constexpr int firstIndex  = indices[0];
-                    constexpr int secondIndex = indices[1];
-                    constexpr int thirdIndex  = indices.size() > 2 ? indices[2] : 0;
-                    constexpr int fourthIndex = indices.size() > 2 ? indices[3] : 0;
+                    constexpr int firstIdx  = indices[0];
+                    constexpr int secondIdx = indices[1];
+                    constexpr int thirdIdx  = indices.size() > 2 ? indices[2] : 0;
+                    constexpr int fourthIdx = indices.size() > 2 ? indices[3] : 0;
                     return Simd128(
-                        _mm_shufflelo_epi16(_register, _MM_SHUFFLE(fourthIndex, thirdIndex, secondIndex, firstIndex)));
+                        _mm_shufflelo_epi16(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx)));
                 }
                 // We only need to shuffle the high lanes if Lane(s) are larger than 4
                 else
@@ -1425,46 +1426,51 @@ namespace falcon
                     // 2. Higher Lane with the first 4 indices
                     // 3. Lower Lane with the last 4 indices
                     // 4. Higher Lane with the last 4 indices
-                    //
-                    // constexpr int firstIndex  = indices[0] > 3 ? indices[0] - 4 : indices[0];
-                    // constexpr int secondIndex = indices[1] > 3 ? indices[1] - 4 : indices[1];
-                    // constexpr int thirdIndex  = indices.size() > 2 ? (indices[2] > 3 ? indices[2] - 4 : indices[2]) :
-                    // 0; constexpr int fourthIndex = indices.size() > 2 ? (indices[3] > 3 ? indices[3] - 4 :
-                    // indices[3]) : 0; constexpr int fifthIndex = indices.size() > 4 ? (indices[4] > 3 ? indices[4] - 4
-                    // : indices[4]) : 0; constexpr int sixthIndex = indices.size() > 4 ? (indices[5] > 3 ? indices[5] -
-                    // 4 : indices[5]) : 0; constexpr int seventhIndex =
-                    //     indices.size() > 6 ? (indices[6] > 3 ? indices[6] - 4 : indices[6]) : 0;
-                    // constexpr int eighthIndex = indices.size() > 6 ? (indices[7] > 3 ? indices[7] - 4 : indices[7]) :
-                    // 0;
-                    //
-                    // auto shuffleLoLo =
-                    //     _mm_shufflelo_epi16(_register, _MM_SHUFFLE(fourthIndex, thirdIndex, secondIndex,
-                    //     firstIndex));
-                    // auto shuffleHiLo =
-                    //     _mm_shufflehi_epi16(_register, _MM_SHUFFLE(fourthIndex, thirdIndex, secondIndex,
-                    //     firstIndex));
-                    //
-                    // auto shuffleHiHi =
-                    //     _mm_shufflehi_epi16(_register, _MM_SHUFFLE(eighthIndex, seventhIndex, sixthIndex,
-                    //     fifthIndex));
-                    // auto shuffleLoHi =
-                    //     _mm_shufflelo_epi16(_register, _MM_SHUFFLE(eighthIndex, seventhIndex, sixthIndex,
-                    //     fifthIndex));
-                    //
-                    // // Then we need combine the lanes with a select mask, selecting the value from upper shuffled
-                    // region
-                    // // if the indices are greater than 3 and lower shuffled region otherwise
-                    // auto digitToCompare = _mm_set1_epi16(3);
-                    // auto indexReg       = _mm_loadu_epi16(indices.data());
-                    // auto mask           = _mm_cmpgt_epi16(indexReg, digitToCompare);
-                    // // TODO: Update to use ctor based inits
-                    // auto blendedLo = Simd128(shuffleLoLo).blend(Simd128(shuffleHiLo), Simd128(mask));
-                    // auto blendedHi = Simd128(shuffleHiHi).blend(Simd128(shuffleLoHi), Simd128(mask));
-                    //
-                    // // We need to unpack the lower 64-bits from shuffle low and high
-                    // // Since unpack takes the lower 64-bits from the first argument, we need to pass the low part
-                    // first. return Simd128(_mm_unpacklo_epi64(blendedLo, blendedHi));
-                    return *this;
+
+                    constexpr int firstIdx   = indices[0] > 3 ? indices[0] - 4 : indices[0];
+                    constexpr int secondIdx  = indices[1] > 3 ? indices[1] - 4 : indices[1];
+                    constexpr int thirdIdx   = indices.size() > 2 ? (indices[2] > 3 ? indices[2] - 4 : indices[2]) : 0;
+                    constexpr int fourthIdx  = indices.size() > 2 ? (indices[3] > 3 ? indices[3] - 4 : indices[3]) : 0;
+                    constexpr int fifthIdx   = indices.size() > 4 ? (indices[4] > 3 ? indices[4] - 4 : indices[4]) : 0;
+                    constexpr int sixthIdx   = indices.size() > 4 ? (indices[5] > 3 ? indices[5] - 4 : indices[5]) : 0;
+                    constexpr int seventhIdx = indices.size() > 6 ? (indices[6] > 3 ? indices[6] - 4 : indices[6]) : 0;
+                    constexpr int eighthIdx  = indices.size() > 6 ? (indices[7] > 3 ? indices[7] - 4 : indices[7]) : 0;
+
+                    auto shuffleLoLo =
+                        _mm_shufflelo_epi16(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx));
+                    auto shuffleHiLo =
+                        _mm_shufflehi_epi16(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx));
+                    // We need to shuffle the data back into the lower lanes since shufflehi puts them in upper lane
+                    shuffleHiLo = _mm_srli_si128(shuffleHiLo, 8);
+
+                    auto shuffleLoHi =
+                        _mm_shufflelo_epi16(_register, _MM_SHUFFLE(eighthIdx, seventhIdx, sixthIdx, fifthIdx));
+                    auto shuffleHiHi =
+                        _mm_shufflehi_epi16(_register, _MM_SHUFFLE(eighthIdx, seventhIdx, sixthIdx, fifthIdx));
+                    // We need to shuffle the data back into the lower lanes since shufflehi puts them in upper lane
+                    shuffleHiHi = _mm_srli_si128(shuffleHiHi, 8);
+
+                    // Then we need combine the lanes with a select mask, selecting the value
+                    // from upper shuffled region.
+                    // if the indices are greater than 3 and lower shuffled region otherwise
+                    const auto digitToCompare = _mm_set1_epi16(3);
+                    // The number of lanes here should be 8 since there we cannot create a non-power of 2 lanes
+                    // and less than 5 lanes are handled in the if block.
+                    const auto indexReg =
+                        _mm_setr_epi16(indices.size() > 0 ? indices[0] : 0, indices.size() > 1 ? indices[1] : 0,
+                                       indices.size() > 2 ? indices[2] : 0, indices.size() > 3 ? indices[3] : 0,
+                                       indices.size() > 4 ? indices[4] : 0, indices.size() > 5 ? indices[5] : 0,
+                                       indices.size() > 6 ? indices[6] : 0, indices.size() > 7 ? indices[7] : 0);
+                    auto mask = _mm_cmpgt_epi16(indexReg, digitToCompare);
+                    // TODO: Update to use ctor based inits
+                    auto blendedLo = Simd128(shuffleLoLo).blend(Simd128(shuffleHiLo), Simd128(mask));
+                    // TODO: FIX FROM HERE
+                    auto blendedHi = Simd128(shuffleLoHi).blend(Simd128(shuffleHiHi), ~Simd128(mask));
+
+                    // We need to unpack the lower 64-bits from shuffle low and high
+                    // Since unpack takes the lower 64-bits from the first argument,
+                    // we need to pass the low part first.
+                    return Simd128(_mm_unpacklo_epi64(blendedLo.naive(), blendedHi.naive()));
                 }
             }
             else
