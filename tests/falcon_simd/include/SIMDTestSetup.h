@@ -51,39 +51,6 @@ using Simd128RegisterTypeHints = testing::Types<
     SimdRegisterTypeMatrix<double, 2>>;
 
 
-/// Macro was causing problems when evaluating certain tests where the floating_point step was getting hit
-/// regardless of typeof T. This was only happening in MSVC.
-// #define EXPECT_ANY_EQ(expected, actual) \
-//     do \
-//     { \
-//         using T = std::common_type_t<decltype(expected), decltype(actual)>; \
-//         std::cout << "Deduced type " << typeid(T).name() << '\n'; \
-//         if constexpr (std::is_floating_point_v<T>) \
-//         { \
-//             if (std::isnan(expected) || std::isnan(actual)) \
-//             { \
-//                 EXPECT_TRUE(std::isnan(expected) && std::isnan(actual)); \
-//                 std::cout << "NAN GETTING HIT" << '\n'; \
-//             } \
-//             else \
-//             { \
-//                                                                                                                        \
-//                 if constexpr (std::is_same_v<T, double>) \
-//                 { \
-//                     EXPECT_DOUBLE_EQ(expected, actual); \
-//                 } \
-//                 else if constexpr (std::is_same_v<T, float>) \
-//                 { \
-//                     EXPECT_FLOAT_EQ(expected, actual); \
-//                 } \
-//             } \
-//         } \
-//         else \
-//         { \
-//             std::cout << "INT GETTING HIT" << '\n'; \
-//             EXPECT_EQ(expected, actual); \
-//         } \
-//     } while (0)
 
 template <typename T>
 constexpr void expectAnyEq(const T& expected, const T& actual)
