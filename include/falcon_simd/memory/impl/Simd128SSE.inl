@@ -1382,7 +1382,9 @@ namespace falcon
                 // Intel's x86 doesn't provide a epi64 version of shuffle
                 // so we need to use the epi32 version and use the shuffle indices twice since
                 // the 64-bit lanes are just 2 32-bit lanes <64, 64> = <32, 32, 32, 32>
-                // We need to scale the indices from 2 indices to 4
+                // We need to scale the indices from 2 to 4 since the 64 bit register is placed in two
+                // adjacent 32-bit registers
+                // So multiplication maps from 0, 1 to 0, 2 and addition selects pair <0, 1> and <2, 3>
                 constexpr auto firstIndex  = indices[0] * 2;
                 constexpr auto secondIndex = indices[0] * 2 + 1;
                 constexpr auto thirdIndex  = indices[1] * 2;
@@ -1404,7 +1406,6 @@ namespace falcon
 
                 if constexpr (Lane < 5)
                 {
-
                     // NOTE: Due to the static assert above it can be guaranteed that indices[i] won't be
                     //       greater than 3(0b11) and hence will not give overflow errors, which is not the case with
                     //       lanes greater than 4.
@@ -1426,7 +1427,6 @@ namespace falcon
                     // 2. Higher Lane with the first 4 indices
                     // 3. Lower Lane with the last 4 indices
                     // 4. Higher Lane with the last 4 indices
-
                     constexpr int firstIdx   = indices[0] > 3 ? indices[0] - 4 : indices[0];
                     constexpr int secondIdx  = indices[1] > 3 ? indices[1] - 4 : indices[1];
                     constexpr int thirdIdx   = indices.size() > 2 ? (indices[2] > 3 ? indices[2] - 4 : indices[2]) : 0;
@@ -1436,41 +1436,58 @@ namespace falcon
                     constexpr int seventhIdx = indices.size() > 6 ? (indices[6] > 3 ? indices[6] - 4 : indices[6]) : 0;
                     constexpr int eighthIdx  = indices.size() > 6 ? (indices[7] > 3 ? indices[7] - 4 : indices[7]) : 0;
 
+                    ///-------------- LOWER LANE SHUFFLE --------------
+                    // NOTE: Here Lo refers to Lower indices(< 4) and A and B are the lower and upper lanes.
+                    // (_, _, _, _, A_Lo3, A_Lo2, A_Lo1, A_Lo0)
                     auto shuffleLoLo =
                         _mm_shufflelo_epi16(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx));
+                    // (A_Hi7, A_Hi6, A_Hi5, A_Hi4, _, _, _, _)
                     auto shuffleHiLo =
                         _mm_shufflehi_epi16(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx));
                     // We need to shuffle the data back into the lower lanes since shufflehi puts them in upper lane
+                    // (_, _, _, _, A_Hi7, A_Hi6, A_Hi5, A_Hi4)
                     shuffleHiLo = _mm_srli_si128(shuffleHiLo, 8);
 
+                    ///-------------- UPPER LANE SHUFFLE --------------
+                    // (_, _, _, _, B_Lo3, B_Lo2, B_Lo1, B_Lo0)
                     auto shuffleLoHi =
                         _mm_shufflelo_epi16(_register, _MM_SHUFFLE(eighthIdx, seventhIdx, sixthIdx, fifthIdx));
+                    // For the upper shuffle we need to shift the lower lanes to the upper lanes.
+                    // (B_Lo3, B_Lo2, B_Lo1, B_Lo0, _, _, _, _)
+                    shuffleLoHi = _mm_slli_si128(shuffleLoHi, 8);
+                    // (B_Hi7, B_Hi6, B_Hi5, B_Hi4, _, _, _, _)
                     auto shuffleHiHi =
                         _mm_shufflehi_epi16(_register, _MM_SHUFFLE(eighthIdx, seventhIdx, sixthIdx, fifthIdx));
-                    // We need to shuffle the data back into the lower lanes since shufflehi puts them in upper lane
-                    shuffleHiHi = _mm_srli_si128(shuffleHiHi, 8);
 
-                    // Then we need combine the lanes with a select mask, selecting the value
-                    // from upper shuffled region.
-                    // if the indices are greater than 3 and lower shuffled region otherwise
+                    ///-------------- MASKING --------------
+                    // Now that we have the two registers each filled with values from upper and lower lanes
+                    // we need to select the correct one with each entry with a mask.
+                    // For indices are greater than 3 the value in the upper(..Hi) will be selected
+                    // and values from lower shuffled register otherwise.
                     const auto digitToCompare = _mm_set1_epi16(3);
                     // The number of lanes here should be 8 since there we cannot create a non-power of 2 lanes
                     // and less than 5 lanes are handled in the if block.
+                    // While the first 2 checks for indices.size() are unnecessary it is left for completion
+                    // and no runtime const is incurred since all the variables are known at compile time.
                     const auto indexReg =
                         _mm_setr_epi16(indices.size() > 0 ? indices[0] : 0, indices.size() > 1 ? indices[1] : 0,
                                        indices.size() > 2 ? indices[2] : 0, indices.size() > 3 ? indices[3] : 0,
                                        indices.size() > 4 ? indices[4] : 0, indices.size() > 5 ? indices[5] : 0,
                                        indices.size() > 6 ? indices[6] : 0, indices.size() > 7 ? indices[7] : 0);
                     auto mask = _mm_cmpgt_epi16(indexReg, digitToCompare);
+
+                    ///-------------- PACKING --------------
                     // TODO: Update to use ctor based inits
                     auto blendedLo = Simd128(shuffleLoLo).blend(Simd128(shuffleHiLo), Simd128(mask));
-                    // TODO: FIX FROM HERE
-                    auto blendedHi = Simd128(shuffleLoHi).blend(Simd128(shuffleHiHi), ~Simd128(mask));
+                    auto blendedHi = Simd128(shuffleLoHi).blend(Simd128(shuffleHiHi), Simd128(mask));
 
+                    // Before we unpack we need to shift the upper lanes of blendedHi to the lower lanes
+                    // since _mm_unpacklo_epi64 expects both the values to be in the lower lane.
+                    auto shiftedHi = _mm_srli_si128(blendedHi.naive(), 8);
                     // We need to unpack the lower 64-bits from shuffle low and high
                     // Since unpack takes the lower 64-bits from the first argument,
                     // we need to pass the low part first.
-                    return Simd128(_mm_unpacklo_epi64(blendedLo.naive(), blendedHi.naive()));
+                    return Simd128(_mm_unpacklo_epi64(blendedLo.naive(), shiftedHi));
                 }
             }
             else
