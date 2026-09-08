@@ -11,6 +11,8 @@
 
 
 
+#include "Simd128SSE.h"
+
 #include <emmintrin.h>
 #include <format>
 
@@ -1492,7 +1494,29 @@ namespace falcon
             }
             else
             {
-                return *this;
+                // TODO: Update to ctor based Simd128 construction in else path
+                // _mm_shuffle_epi8 is supported from SSSE3 but since we only provide
+                // two categories for SSE, anything below SSE4.2 will use the SSE2 fallback.
+                if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+                {
+                    // TODO: Move to ctor inits
+                    alignas(16) std::array<DataType, Lane> mask{ ShuffleIdx... };
+                    Simd128 maskReg{};
+                    maskReg.loadAligned(mask.data());
+                    return Simd128(_mm_shuffle_epi8(_register, maskReg.naive()));
+                }
+                else
+                {
+                    // Store the data into an stack-array
+                    std::array<DataType, Lane> stored{};
+                    store(stored.data());
+                    // Create a new array using shuffleIdx and parameter unpacking
+                    std::array<DataType, Lane> res{ stored[ShuffleIdx]... };
+                    // Loading it into a new register and return it.
+                    Simd128 reg;
+                    reg.load(res.data());
+                    return reg;
+                }
             }
         }
     }
