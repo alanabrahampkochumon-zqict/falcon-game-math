@@ -1411,6 +1411,8 @@ namespace falcon
     constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::shuffle()
         const noexcept
     {
+        // NOTE: Shuffle mask must be evaluated as a separate const-expression since GCC
+        //       is very strict about the immediate value being constexpr, which is guaranteed for constexpr lvalues.
         static_assert(sizeof...(ShuffleIdx) == Lane && "There must be <Lane> shuffle indices.");
         static_assert(((ShuffleIdx < Lane) && ...) && "Indices must be between 0(inclusive) and <Lane>(exclusive).");
 
@@ -1430,8 +1432,8 @@ namespace falcon
             constexpr int thirdIdx  = indices.size() > 2 ? indices[2] : 0;
             constexpr int fourthIdx = indices.size() > 2 ? indices[3] : 0;
 
-            return Simd128(
-                _mm_shuffle_ps(_register, _register, _MM_SHUFFLE(fourthIdx, thirdIdx, indices[1], indices[0])));
+            constexpr int shuffleMask = _MM_SHUFFLE(fourthIdx, thirdIdx, indices[1], indices[0]);
+            return Simd128(_mm_shuffle_ps(_register, _register, shuffleMask));
         }
         else
         {
@@ -1447,7 +1449,8 @@ namespace falcon
                 constexpr auto secondIndex = indices[0] * 2 + 1;
                 constexpr auto thirdIndex  = indices[1] * 2;
                 constexpr auto fourthIndex = indices[1] * 2 + 1;
-                auto reg = _mm_shuffle_epi32(_register, _MM_SHUFFLE(fourthIndex, thirdIndex, secondIndex, firstIndex));
+                constexpr int shuffleMask  = _MM_SHUFFLE(fourthIndex, thirdIndex, secondIndex, firstIndex);
+                auto reg                   = _mm_shuffle_epi32(_register, shuffleMask);
                 return Simd128(reg);
             }
             else if constexpr (sizeof(DataType) == 4)
@@ -1457,7 +1460,8 @@ namespace falcon
                 constexpr int thirdIdx  = indices.size() > 2 ? indices[2] : 0;
                 constexpr int fourthIdx = indices.size() > 2 ? indices[3] : 0;
 
-                return Simd128(_mm_shuffle_epi32(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, indices[1], indices[0])));
+                constexpr int shuffleMask = _MM_SHUFFLE(fourthIdx, thirdIdx, indices[1], indices[0]);
+                return Simd128(_mm_shuffle_epi32(_register, shuffleMask));
             }
             else if constexpr (sizeof(DataType) == 2)
             {
@@ -1469,12 +1473,12 @@ namespace falcon
                     //       lanes greater than 4.
                     // Since there is a possibility that indices can be 2 but _MM_SHUFFLE
                     // only takes 4 values, so we need to use 0 indices for the other indices
-                    constexpr int firstIdx  = indices[0];
-                    constexpr int secondIdx = indices[1];
-                    constexpr int thirdIdx  = indices.size() > 2 ? indices[2] : 0;
-                    constexpr int fourthIdx = indices.size() > 2 ? indices[3] : 0;
-                    return Simd128(
-                        _mm_shufflelo_epi16(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx)));
+                    constexpr int firstIdx    = indices[0];
+                    constexpr int secondIdx   = indices[1];
+                    constexpr int thirdIdx    = indices.size() > 2 ? indices[2] : 0;
+                    constexpr int fourthIdx   = indices.size() > 2 ? indices[3] : 0;
+                    constexpr int shuffleMask = _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx);
+                    return Simd128(_mm_shufflelo_epi16(_register, shuffleMask));
                 }
                 // We only need to shuffle the high lanes if Lane(s) are larger than 4
                 else
@@ -1497,25 +1501,23 @@ namespace falcon
                     ///-------------- LOWER LANE SHUFFLE --------------
                     // NOTE: Here Lo refers to Lower indices(< 4) and A and B are the lower and upper lanes.
                     // (_, _, _, _, A_Lo3, A_Lo2, A_Lo1, A_Lo0)
-                    auto shuffleLoLo =
-                        _mm_shufflelo_epi16(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx));
+                    constexpr int shuffleMaskA = _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx);
+                    auto shuffleLoLo           = _mm_shufflelo_epi16(_register, shuffleMaskA);
                     // (A_Hi7, A_Hi6, A_Hi5, A_Hi4, _, _, _, _)
-                    auto shuffleHiLo =
-                        _mm_shufflehi_epi16(_register, _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx));
+                    auto shuffleHiLo = _mm_shufflehi_epi16(_register, shuffleMaskA);
                     // We need to shuffle the data back into the lower lanes since shufflehi puts them in upper lane
                     // (_, _, _, _, A_Hi7, A_Hi6, A_Hi5, A_Hi4)
                     shuffleHiLo = _mm_srli_si128(shuffleHiLo, 8);
 
                     ///-------------- UPPER LANE SHUFFLE --------------
+                    constexpr int shuffleMaskB = _MM_SHUFFLE(eighthIdx, seventhIdx, sixthIdx, fifthIdx);
                     // (_, _, _, _, B_Lo3, B_Lo2, B_Lo1, B_Lo0)
-                    auto shuffleLoHi =
-                        _mm_shufflelo_epi16(_register, _MM_SHUFFLE(eighthIdx, seventhIdx, sixthIdx, fifthIdx));
+                    auto shuffleLoHi = _mm_shufflelo_epi16(_register, shuffleMaskB);
                     // For the upper shuffle we need to shift the lower lanes to the upper lanes.
                     // (B_Lo3, B_Lo2, B_Lo1, B_Lo0, _, _, _, _)
                     shuffleLoHi = _mm_slli_si128(shuffleLoHi, 8);
                     // (B_Hi7, B_Hi6, B_Hi5, B_Hi4, _, _, _, _)
-                    auto shuffleHiHi =
-                        _mm_shufflehi_epi16(_register, _MM_SHUFFLE(eighthIdx, seventhIdx, sixthIdx, fifthIdx));
+                    auto shuffleHiHi = _mm_shufflehi_epi16(_register, shuffleMaskB);
 
                     ///-------------- MASKING --------------
                     // Now that we have the two registers each filled with values from upper and lower lanes
