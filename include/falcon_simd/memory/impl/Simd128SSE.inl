@@ -1413,12 +1413,15 @@ namespace falcon
     {
         // NOTE: Shuffle mask must be evaluated as a separate const-expression since GCC
         //       is very strict about the immediate value being constexpr, which is guaranteed for constexpr lvalues.
+        // NOTE: _MM_SHUFFLE takes indices in the opposite order
         static_assert(sizeof...(ShuffleIdx) == Lane && "There must be <Lane> shuffle indices.");
         static_assert(((ShuffleIdx < Lane) && ...) && "Indices must be between 0(inclusive) and <Lane>(exclusive).");
 
-        // NOTE: _MM_SHUFFLE takes indices in the opposite order
+        // 128(16 bytes) / sizeof bits give the maximum lanes possible
+        // and this can be used to remove conditions since the unoccupied values by pack expansion will be zero.
+        constexpr size_t MaxLanes = 16 / sizeof(DataType);
         // Since packed indexing is not support until C++26, we need to use this workaround
-        constexpr std::array<uint8_t, Lane> indices{ { ShuffleIdx... } };
+        constexpr std::array<uint8_t, MaxLanes> indices{ { ShuffleIdx... } };
 
         if constexpr (types::IsFP64<DataType>)
         {
@@ -1430,10 +1433,8 @@ namespace falcon
             // Evaluated at compile-time
             // Since there is a possibility that indices can be 2 but _MM_SHUFFLE
             // only takes 4 values, so we need to use 0 indices for the other indices
-            constexpr int thirdIdx  = indices.size() > 2 ? indices[2] : 0;
-            constexpr int fourthIdx = indices.size() > 2 ? indices[3] : 0;
 
-            constexpr int shuffleMask = _MM_SHUFFLE(fourthIdx, thirdIdx, indices[1], indices[0]);
+            constexpr int shuffleMask = _MM_SHUFFLE(indices[3], indices[2], indices[1], indices[0]);
             return Simd128(_mm_shuffle_ps(_register, _register, shuffleMask));
         }
         else
@@ -1456,12 +1457,7 @@ namespace falcon
             }
             else if constexpr (sizeof(DataType) == 4)
             {
-                // Since there is a possibility that indices can be 2 but _MM_SHUFFLE
-                // only takes 4 values, so we need to use 0 indices for the other indices
-                constexpr int thirdIdx  = indices.size() > 2 ? indices[2] : 0;
-                constexpr int fourthIdx = indices.size() > 2 ? indices[3] : 0;
-
-                constexpr int shuffleMask = _MM_SHUFFLE(fourthIdx, thirdIdx, indices[1], indices[0]);
+                constexpr int shuffleMask = _MM_SHUFFLE(indices[3], indices[2], indices[1], indices[0]);
                 return Simd128(_mm_shuffle_epi32(_register, shuffleMask));
             }
             else if constexpr (sizeof(DataType) == 2)
@@ -1472,13 +1468,7 @@ namespace falcon
                     // NOTE: Due to the static assert above it can be guaranteed that indices[i] won't be
                     //       greater than 3(0b11) and hence will not give overflow errors, which is not the case with
                     //       lanes greater than 4.
-                    // Since there is a possibility that indices can be 2 but _MM_SHUFFLE
-                    // only takes 4 values, so we need to use 0 indices for the other indices
-                    constexpr int firstIdx    = indices[0];
-                    constexpr int secondIdx   = indices[1];
-                    constexpr int thirdIdx    = indices.size() > 2 ? indices[2] : 0;
-                    constexpr int fourthIdx   = indices.size() > 2 ? indices[3] : 0;
-                    constexpr int shuffleMask = _MM_SHUFFLE(fourthIdx, thirdIdx, secondIdx, firstIdx);
+                    constexpr int shuffleMask = _MM_SHUFFLE(indices[3], indices[2], indices[1], indices[0]);
                     return Simd128(_mm_shufflelo_epi16(_register, shuffleMask));
                 }
                 // We only need to shuffle the high lanes if Lane(s) are larger than 4
@@ -1492,12 +1482,12 @@ namespace falcon
                     // 4. Higher Lane with the last 4 indices
                     constexpr int firstIdx   = indices[0] > 3 ? indices[0] - 4 : indices[0];
                     constexpr int secondIdx  = indices[1] > 3 ? indices[1] - 4 : indices[1];
-                    constexpr int thirdIdx   = indices.size() > 2 ? (indices[2] > 3 ? indices[2] - 4 : indices[2]) : 0;
-                    constexpr int fourthIdx  = indices.size() > 2 ? (indices[3] > 3 ? indices[3] - 4 : indices[3]) : 0;
-                    constexpr int fifthIdx   = indices.size() > 4 ? (indices[4] > 3 ? indices[4] - 4 : indices[4]) : 0;
-                    constexpr int sixthIdx   = indices.size() > 4 ? (indices[5] > 3 ? indices[5] - 4 : indices[5]) : 0;
-                    constexpr int seventhIdx = indices.size() > 6 ? (indices[6] > 3 ? indices[6] - 4 : indices[6]) : 0;
-                    constexpr int eighthIdx  = indices.size() > 6 ? (indices[7] > 3 ? indices[7] - 4 : indices[7]) : 0;
+                    constexpr int thirdIdx   = indices[2] > 3 ? indices[2] - 4 : indices[2];
+                    constexpr int fourthIdx  = indices[3] > 3 ? indices[3] - 4 : indices[3];
+                    constexpr int fifthIdx   = indices[4] > 3 ? indices[4] - 4 : indices[4];
+                    constexpr int sixthIdx   = indices[5] > 3 ? indices[5] - 4 : indices[5];
+                    constexpr int seventhIdx = indices[6] > 3 ? indices[6] - 4 : indices[6];
+                    constexpr int eighthIdx  = indices[7] > 3 ? indices[7] - 4 : indices[7];
 
                     ///-------------- LOWER LANE SHUFFLE --------------
                     // NOTE: Here Lo refers to Lower indices(< 4) and A and B are the lower and upper lanes.
@@ -1530,12 +1520,9 @@ namespace falcon
                     // and less than 5 lanes are handled in the if block.
                     // While the first 2 checks for indices.size() are unnecessary it is left for completion
                     // and no runtime const is incurred since all the variables are known at compile time.
-                    const auto indexReg =
-                        _mm_setr_epi16(indices.size() > 0 ? indices[0] : 0, indices.size() > 1 ? indices[1] : 0,
-                                       indices.size() > 2 ? indices[2] : 0, indices.size() > 3 ? indices[3] : 0,
-                                       indices.size() > 4 ? indices[4] : 0, indices.size() > 5 ? indices[5] : 0,
-                                       indices.size() > 6 ? indices[6] : 0, indices.size() > 7 ? indices[7] : 0);
-                    auto mask = _mm_cmpgt_epi16(indexReg, digitToCompare);
+                    const auto indexReg = _mm_setr_epi16(indices[0], indices[1], indices[2], indices[3], indices[4],
+                                                         indices[5], indices[6], indices[7]);
+                    auto mask           = _mm_cmpgt_epi16(indexReg, digitToCompare);
 
                     ///-------------- PACKING --------------
                     // TODO: Update to use ctor based inits
