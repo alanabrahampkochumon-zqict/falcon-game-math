@@ -1418,11 +1418,12 @@ namespace falcon
 
         // NOTE: _MM_SHUFFLE takes indices in the opposite order
         // Since packed indexing is not support until C++26, we need to use this workaround
-        constexpr std::array<uint8_t, sizeof...(ShuffleIdx)> indices{ { ShuffleIdx... } };
+        constexpr std::array<uint8_t, Lane> indices{ { ShuffleIdx... } };
 
         if constexpr (types::IsFP64<DataType>)
         {
-            return Simd128(_mm_shuffle_pd(_register, _register, (indices[1] << 1 | indices[0])));
+            constexpr int shuffleMask = indices[1] << 1 | indices[0];
+            return Simd128(_mm_shuffle_pd(_register, _register, shuffleMask));
         }
         else if constexpr (types::IsFP32<DataType>)
         {
