@@ -52,6 +52,20 @@ namespace falcon
         // TODO: Update
         constexpr explicit Simd128() = default;
 
+        /**
+         *
+         * @tparam Args The numeric type of @p data. Must match the register's datatype.
+         * @param data  The values to initialize the register with.
+         *
+         * @note If only a single argument is provided then the value will be broadcasted across the entire register.
+         *       The number of values provided must be less than or equal to the total register lanes. If
+         *       the number of values is less than the lanes, values will be inserted into the lower lanes,
+         *       and rest filled with zeroes.
+         */
+        template <typename... Args>
+        requires (std::same_as<Args, DataType> && ...)
+        constexpr explicit Simd128(Args... data) noexcept;
+
 
         /**
          * @brief Set the register with the given values in the lower lanes filling the unfilled lanes with zeroes.

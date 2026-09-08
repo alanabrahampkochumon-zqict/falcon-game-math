@@ -10,13 +10,14 @@
  */
 
 
+#include "utils/TypeUtils.h"
+
 #include <bit>
 #include <cmath>
 #include <cstdint>
 #include <falcon_simd/FalconSimd.h>
 #include <gtest/gtest.h>
 #include <limits>
-#include "utils/TypeUtils.h"
 
 using SupportedSIMDTypes =
     testing::Types<int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t, int64_t, uint64_t, double, float>;
@@ -31,6 +32,12 @@ struct SimdRegisterTypeMatrix
     static constexpr size_t VALUE = V;
 };
 
+template <typename T>
+static constexpr T max = std::numeric_limits<T>::max();
+template <typename T>
+static constexpr T min = std::numeric_limits<T>::min();
+
+
 
 using Simd128RegisterTypeHints = testing::Types<
     SimdRegisterTypeMatrix<uint8_t, 2>, SimdRegisterTypeMatrix<uint8_t, 4>, SimdRegisterTypeMatrix<uint8_t, 4>,
@@ -44,36 +51,70 @@ using Simd128RegisterTypeHints = testing::Types<
     SimdRegisterTypeMatrix<double, 2>>;
 
 
-/// @brief Wrapper around gtest macro for asserting equality(EXPECT) in a type agnostic manner.
-#define EXPECT_ANY_EQ(expected, actual)                                                                                \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        using T = std::common_type_t<decltype(expected), decltype(actual)>;                                            \
-        if (std::is_floating_point_v<T>)                                                                               \
-        {                                                                                                              \
-            if (std::isnan(expected) || std::isnan(actual))                                                            \
-            {                                                                                                          \
-                EXPECT_TRUE(std::isnan(expected) && std::isnan(actual));                                               \
-            }                                                                                                          \
-            else                                                                                                       \
-            {                                                                                                          \
-                                                                                                                       \
-                if constexpr (std::is_same_v<T, double>)                                                               \
-                {                                                                                                      \
-                    EXPECT_DOUBLE_EQ(expected, actual);                                                                \
-                }                                                                                                      \
-                else if constexpr (std::is_same_v<T, float>)                                                           \
-                {                                                                                                      \
-                    EXPECT_FLOAT_EQ(expected, actual);                                                                 \
-                }                                                                                                      \
-            }                                                                                                          \
-        }                                                                                                              \
-        else                                                                                                           \
-        {                                                                                                              \
-            EXPECT_EQ(expected, actual);                                                                               \
-        }                                                                                                              \
-    } while (0)
+/// Macro was causing problems when evaluating certain tests where the floating_point step was getting hit
+/// regardless of typeof T. This was only happening in MSVC.
+// #define EXPECT_ANY_EQ(expected, actual) \
+//     do \
+//     { \
+//         using T = std::common_type_t<decltype(expected), decltype(actual)>; \
+//         std::cout << "Deduced type " << typeid(T).name() << '\n'; \
+//         if constexpr (std::is_floating_point_v<T>) \
+//         { \
+//             if (std::isnan(expected) || std::isnan(actual)) \
+//             { \
+//                 EXPECT_TRUE(std::isnan(expected) && std::isnan(actual)); \
+//                 std::cout << "NAN GETTING HIT" << '\n'; \
+//             } \
+//             else \
+//             { \
+//                                                                                                                        \
+//                 if constexpr (std::is_same_v<T, double>) \
+//                 { \
+//                     EXPECT_DOUBLE_EQ(expected, actual); \
+//                 } \
+//                 else if constexpr (std::is_same_v<T, float>) \
+//                 { \
+//                     EXPECT_FLOAT_EQ(expected, actual); \
+//                 } \
+//             } \
+//         } \
+//         else \
+//         { \
+//             std::cout << "INT GETTING HIT" << '\n'; \
+//             EXPECT_EQ(expected, actual); \
+//         } \
+//     } while (0)
 
+template <typename T>
+constexpr void expectAnyEq(const T& expected, const T& actual)
+{
+    if constexpr (std::is_floating_point_v<T>)
+    {
+        if (std::isnan(expected) || std::isnan(actual))
+        {
+            EXPECT_TRUE(std::isnan(expected) && std::isnan(actual));
+        }
+        else
+        {
+
+            if constexpr (std::is_same_v<T, double>)
+            {
+                EXPECT_DOUBLE_EQ(expected, actual);
+            }
+            else if constexpr (std::is_same_v<T, float>)
+            {
+                EXPECT_FLOAT_EQ(expected, actual);
+            }
+        }
+    }
+    else
+    {
+        EXPECT_EQ(expected, actual);
+    }
+}
+
+/// @brief Wrapper around gtest macro for asserting equality(EXPECT) in a type agnostic manner.
+#define EXPECT_ANY_EQ(expected, actual) expectAnyEq(expected, actual);
 
 
 /// TODO: Add the below helpers to main library.
@@ -123,23 +164,22 @@ namespace simd::testing
 {
     /// A numeric primitive with all 1s(0b1111...111)
     /// @tparam T The numeric type of the primitive.
-    template<typename T>
+    template <typename T>
     constexpr T ONE = getAllOnes<T>();
 
     /// Alias for signed and unsigned types to facilitate easier testing.
-    using U8 = uint8_t;
-    using U16 = uint16_t;
-    using U32 = uint32_t;
-    using U64 = uint64_t;
-    using I8 = int8_t;
-    using I16 = int16_t;
-    using I32 = int32_t;
-    using I64 = int64_t;
+    using U8   = uint8_t;
+    using U16  = uint16_t;
+    using U32  = uint32_t;
+    using U64  = uint64_t;
+    using I8   = int8_t;
+    using I16  = int16_t;
+    using I32  = int32_t;
+    using I64  = int64_t;
     using FP32 = float;
     using FP64 = double;
 
     /// Alias for array for easier testing.
-    template<typename T, size_t Size>
+    template <typename T, size_t Size>
     using Array = std::array<T, Size>;
-}
-
+} // namespace simd::testing

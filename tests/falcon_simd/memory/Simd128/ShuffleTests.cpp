@@ -31,6 +31,7 @@ namespace
     // Test param to pass in a combination matrix for testing shuffle function.
     // since gtest doesn't natively support parameterized typed test(where you can pass in parameters against a type
     // vector)
+    // TODO: Update values to use std::numeric_limits::max(from 100 to that)
     template <typename T, size_t Lanes, Array<T, Lanes> Data, Array<T, Lanes> Expected, uint8_t... Indices>
     struct Simd128ShuffleTestParam
     {
