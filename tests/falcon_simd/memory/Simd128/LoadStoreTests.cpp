@@ -149,7 +149,6 @@ TYPED_TEST(Simd128LoadStoreTests, SetZero_ZeroesOutTheRegister)
     }
 }
 
-
 #endif
 
 /** @} */

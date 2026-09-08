@@ -199,13 +199,28 @@ namespace falcon
         constexpr void storeAligned(DataType* pBuffer) const noexcept;
 
         /**
+         * Get the value at @p index.
          *
-         * @param index Get the value at @p index.
-         * @note Index must be less than the Lane - 1.
+         * @param index The index of the register. Must be between 0 and Lane - 1.
+         *
+         * @note For indices known at compile-time, use get<Index>() as it is faster
+         *       due to the availability of direct hardware intrinsic.
          *
          * @return The value at index [read-only].
          */
-        [[nodiscard]] constexpr DataType get(size_t index) const noexcept;
+        [[nodiscard]] constexpr DataType getAt(size_t index) const noexcept;
+
+
+        /**
+         * Set the value at @p index to @p value.
+         *
+         * @param index The index of the register. Must be between 0 and Lane - 1.
+         * @param value The value to set.
+         *
+         * @note For indices known at compile-time, use set<Index>(value) as it is faster
+         *       due to the availability of direct hardware intrinsic.
+         */
+        constexpr void setAt(size_t index, DataType value) noexcept;
 
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=

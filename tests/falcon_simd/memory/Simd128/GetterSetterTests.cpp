@@ -169,14 +169,36 @@ TYPED_TEST(Simd128GetterSetterTests, SetOne_FillsTheLanesWithOnes)
 
 
 /// @test Verify that get(index) returns the element at the given index.
-TYPED_TEST(Simd128GetterSetterTests, Get_FillsTheLanesWithOnes)
+TYPED_TEST(Simd128GetterSetterTests, GetAt_FillsTheLanesWithOnes)
 {
     constexpr size_t Lane = TypeParam::VALUE;
-    auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
+    auto reg              = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        EXPECT_ANY_EQ(this->data[i], reg.get(i));
+        EXPECT_ANY_EQ(this->data[i], reg.getAt(i));
+    }
+}
+
+
+
+/// @test Verifies that store function stores a data in the appropriate index
+/// @note Due to amount of combinations, we are using the typed test combined
+///       with loop to test each index corresponding to matrix type, although
+///       not recommended due to single assert per test, writing all the tests
+///       manually will be wasteful in terms of resources.
+TYPED_TEST(Simd128GetterSetterTests, SetAt_SetsTheValueAtAppropriateIndex)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    falcon::Simd128_t<Type, Lane> reg;
+    reg.setZero();
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        reg.setAt(i, this->max);
+        EXPECT_ANY_EQ(this->max, reg.getAt(i));
     }
 }
 

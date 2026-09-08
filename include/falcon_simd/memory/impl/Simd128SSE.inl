@@ -11,8 +11,6 @@
 
 
 
-#include "Simd128SSE.h"
-
 #include <emmintrin.h>
 #include <format>
 
@@ -336,15 +334,14 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::get(
+    FALCON_INLINE constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::getAt(
         const size_t index) const noexcept
     {
-
         // TODO: Extract out message
         // TODO: Add death test
         FALCON_ASSERT_MSG(
             index < Lane,
-            std::format("Out of bounds access. Idx must be less than {}. But it is currently {}", Lane, index).c_str());
+            std::format("Out of bounds access. Idx must be less than {}. But it is currently {}.", Lane, index).c_str());
 
         // We can use the compress and extract trick from CVL2(Agner Fog)
         // But that instruction is available only in AVX512F + AVX512VL
@@ -394,6 +391,26 @@ namespace falcon
             store(buffer.data());
             return buffer[index];
         }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::setAt(size_t index, DataType value) noexcept
+    {
+        // TODO: Extract out message
+        // TODO: Add death test
+        FALCON_ASSERT_MSG(
+            index < Lane,
+            std::format("Out of bounds access. Idx must be less than {}. But it is currently {}.", Lane, index).c_str());
+
+        // Since insert and blend function require the selector to be an immediate value know at compile-time
+        // for compile-indexing, we can only store the data from register, update the value
+        // and then load the updated value.
+        // Due to stack-spilling it is not recommended to use this setter unless absolutely necessary.
+        alignas(16) std::array<DataType, Lane> interArray{};
+        storeAligned(interArray.data());
+        interArray[index] = value;
+        loadAligned(interArray.data());
     }
 
 
