@@ -26,6 +26,7 @@
 #include <bit>
 #include <emmintrin.h>
 #include <immintrin.h>
+#include <span>
 #include <type_traits>
 #include <xmmintrin.h>
 
@@ -54,6 +55,7 @@ namespace falcon
         constexpr explicit Simd128() = default;
 
         /**
+         * Initialize a 128-bit SIMD register with @p data.
          *
          * @tparam Args The numeric type of @p data. Must match the register's datatype.
          * @param data  The values to initialize the register with.
@@ -66,6 +68,31 @@ namespace falcon
         template <typename... Args>
             requires(SimdSafeConvertible<Args, DataType> && ...)
         constexpr explicit Simd128(Args... data) noexcept;
+
+
+        /**
+         * Initialize a 128-bit SIMD register with values from a std::container(std::array, std::vector).
+         *
+         * @param values The values to fill the register with.
+         *
+         * @warning The container must be aligned to 16-byte boundary. For unaligned data,
+         *          use @ref load to load data manually.
+         */
+        constexpr explicit Simd128(std::span<DataType> values) noexcept;
+
+
+        /**
+         * Initialize a 128-bit SIMD register with C-style arrays.
+         *
+         * @note Passing in a buffer with allocated size less than @p Lane * @p sizeof(DataType)
+         *       can cause segmentation faults.
+         *
+         * @param buffer The starting address of the values to fill the register with.
+         *
+         * @warning @p buffer must be aligned to 16-byte boundary. For unaligned data,
+         *          use @ref load to load data manually.
+         */
+        constexpr explicit Simd128(DataType* buffer) noexcept;
 
 
         /**

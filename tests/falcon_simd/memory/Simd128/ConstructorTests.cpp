@@ -17,88 +17,104 @@
 #if defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX) ||                      \
     defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_SSE2)
 
-
 /**
- * @addtogroup T_SIMD128_Cmp
+ * @addtogroup T_SIMD128_Ctor
  * @{
  */
 
-
 namespace
 {
-    // using namespace simd::testing;
-    //
-    // /// Test param for constructor initialization with parameter pack.
-    // // since gtest doesn't natively support parameterized typed test(where you can pass in parameters against a type
-    // // vector)
-    // template <typename T, size_t Lanes, size_t Count, Array<T, Count> Data>
-    // struct Simd128CtorParamPackTestParams
-    // {
-    //     using Type                            = T;
-    //     static constexpr Array<T, Count> data = Data;
-    //     static constexpr size_t count         = Count;
-    //     static constexpr size_t REGISTER_SIZE = 128;
-    //     static constexpr size_t LaneCount     = Lanes;
-    //     const char* TypeName                  = typeid(Type).name();
-    //
-    //     // TODO: Fix pretty function not being used.
-    //     friend std::ostream& operator<<(std::ostream& os, const Simd128CtorParamPackTestParams& param)
-    //     {
-    //         return os << "Simd128CtorParamPackTestParams(Type=" << param.TypeName << ", Lanes" << param.LaneCount
-    //                   << ")";
-    //     }
-    //
-    //     // friend void PrintTo(const Simd128CtorParamPackTestParams& param, std::ostream* os)
-    //     // { *os << "Simd128CtorParamPackTestParams(Type=" << param.TypeName << ", Lanes" << param.LaneCount << ")";
-    //     }
-    // };
-    //
-    // using Simd128ParamPackCtorTypeHints =
-    //     testing::Types<Simd128CtorParamPackTestParams<U8, 2, 1, std::array<U8, 1>{ { 1 } }>>;
-    //
-    //
-    // /// @brief Test fixture for Simd128 constructor init with variable number of parameters(>1).
-    // template <typename>
-    // class Simd128CtorParamPackTests: public testing::Test
-    // {};
-    // TYPED_TEST_SUITE(Simd128CtorParamPackTests, Simd128ParamPackCtorTypeHints);
+    /**
+     * @brief Test Fixture for Simd128 constructor(Buffer* and std::container based).
+     */
+    template <typename>
+    class Simd128CtorTests: public testing::Test
+    {};
+    TYPED_TEST_SUITE(Simd128CtorTests, Simd128RegisterTypeHints);
+
 } // namespace
 
+using namespace simd::testing;
 
-// TYPED_TEST(Simd128CtorParamPackTests, CtorInitializesTheRegisterWithTheValues)
-// {
-//     // Get all the parameters from the types
-//     using Type                          = TypeParam::Type;
-//     constexpr size_t Lanes              = TypeParam::LaneCount;
-//     constexpr size_t ArrSize            = TypeParam::count;
-//     constexpr Array<Type, ArrSize> data = TypeParam::data;
-//
-//     falcon::Simd128_t<Type, Lanes>(data.begin(), data.end());
-//
-//     // Create the register and load them
-//     // Note: While const cast is not recommended in such a situation since the underlying buffer
-//     //       non-const, we can cast this as internally the load function doesn't mutate the parameters.
-//     // Since we can't directly access the parameter pack
-//     // we need to use call it using a lambda nad integer_sequence
-//     auto execShuffle = [data]<uint8_t... I>(std::integer_sequence<uint8_t, I...>) {
-//         falcon::Simd128_t<Type, Lanes> reg{};
-//         reg.load(const_cast<Type*>(data.data()));
-//         return reg.template shuffle<I...>();
-//     };
-//
-//     // Perform the shuffling
-//     Array<Type, Lanes> result{};
-//     auto resultReg = execShuffle(typename TypeParam::IndexSequence{});
-//     resultReg.store(result.data());
-//
-//     // Compare and assert the result.
-//     for (size_t i = 0; i < Lanes; ++i)
-//     {
-//         EXPECT_ANY_EQ(expected[i], result[i]);
-//     }
-// }
-//
 
+TYPED_TEST(Simd128CtorTests, Simd128_CanBeInitializedWithAStdVector)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::vector<Type> data{};
+    data.resize(Lane);
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = static_cast<Type>(i + 11);
+    }
+
+    falcon::Simd128_t<Type, Lane> reg{ data };
+
+    alignas(16) std::array<Type, Lane> result{};
+    reg.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(data[i], result[i]);
+    }
+}
+
+
+
+TYPED_TEST(Simd128CtorTests, Simd128_CanBeInitializedWithAStdArray)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> data{};
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = static_cast<Type>(i + 11);
+    }
+
+    falcon::Simd128_t<Type, Lane> reg{ data };
+
+    alignas(16) std::array<Type, Lane> result{};
+    reg.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(data[i], result[i]);
+    }
+}
+
+
+TYPED_TEST(Simd128CtorTests, Simd128_CanBeInitializedWithACStyleArray)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) Type data[Lane]{};
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = static_cast<Type>(i + 11);
+    }
+
+    falcon::Simd128_t<Type, Lane> reg{ data };
+
+    alignas(16) std::array<Type, Lane> result{};
+    reg.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(data[i], result[i]);
+    }
+}
+
+
+
+/**************************************
+ *        VARARG CTOR TESTS           *
+ **************************************/
 
 /// @test Verifies that Simd128 can be constructed with variable arguments.
 /// @note The Simd register expects integral args of datatype and since there is not direct static cast we need to use
@@ -122,9 +138,7 @@ namespace
         }
 
 
-using namespace simd::testing;
-
-// // Uint8_t
+// Uint8_t
 TEST_SIMD128_VARG_CTOR(Uint8_2Lanes_2Arguments, U8, 2, max<U8>, min<U8>)
 TEST_SIMD128_VARG_CTOR(Uint8_4Lanes_2Arguments, U8, 4, max<U8>, min<U8>)
 TEST_SIMD128_VARG_CTOR(Uint8_4Lanes_3Arguments, U8, 4, max<U8>, min<U8>, 64)

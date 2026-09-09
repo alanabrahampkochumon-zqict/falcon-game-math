@@ -36,6 +36,7 @@
 *
          * @{
          *   @defgroup T_SIMD128_Arithmetic Arithmetic Tests
+         *   @defgroup T_SIMD128_Ctor Constructor Tests
          *   @defgroup T_SIMD128_ConvCtor Conversion Constructors Tests
          *   @defgroup T_SIMD128_Get_Set Getters/Setters Tests
          *   @defgroup T_SIMD128_Load_Store Load/Store Tests

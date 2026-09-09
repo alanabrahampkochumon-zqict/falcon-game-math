@@ -38,6 +38,15 @@ namespace falcon
         }
     }
 
+
+    template <typename DataType, size_t Lane>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(std::span<DataType> values) noexcept
+    { loadAligned(values.data()); }
+
+    template <typename DataType, size_t Lane>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(DataType* buffer) noexcept
+    { loadAligned(buffer); }
+
     template <typename DataType, size_t Lane>
     template <typename... Args>
         requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...)
