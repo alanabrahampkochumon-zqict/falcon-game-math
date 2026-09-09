@@ -12,8 +12,6 @@
 
 
 
-#include "Simd128SSE.h"
-
 #include <emmintrin.h>
 #include <format>
 
@@ -1368,7 +1366,7 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator<<(const uint32_t count) const noexcept
     {
         const auto countReg = _mm_cvtsi32_si128(count);
@@ -1416,6 +1414,14 @@ namespace falcon
             //  [1100 1000] ... [1100 1000] [1100 1000]
             return Simd128(_mm_sll_epi16(andReg, countReg));
         }
+    }
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator<<=(uint32_t count) noexcept
+    {
+        *this = (*this << count);
+        return *this;
     }
 
 
