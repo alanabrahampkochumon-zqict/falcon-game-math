@@ -12,6 +12,8 @@
 
 
 
+#include "Simd128SSE.h"
+
 #include <emmintrin.h>
 #include <format>
 
@@ -1362,6 +1364,58 @@ namespace falcon
     {
         // A <= B => ~(A > B)
         return ~(*this > other);
+    }
+
+
+    template <typename DataType, size_t Lane>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator<<(const uint32_t count) const noexcept
+    {
+        const auto countReg = _mm_cvtsi32_si128(count);
+        // For floating point numbers we need to convert them to integral of similar Lane width
+        // perform the shifting and convert them back.
+        if constexpr (types::IsFP64<DataType>)
+        {
+            auto integralReg = _mm_castpd_si128(_register);
+            auto shifted     = _mm_sll_epi64(integralReg, countReg);
+            return Simd128(_mm_castsi128_pd(shifted));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            auto integralReg = _mm_castps_si128(_register);
+            auto shifted     = _mm_sll_epi32(integralReg, countReg);
+            return Simd128(_mm_castsi128_ps(shifted));
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            return Simd128(_mm_sll_epi64(_register, countReg));
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+            return Simd128(_mm_sll_epi32(_register, countReg));
+        }
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            return Simd128(_mm_sll_epi16(_register, countReg));
+        }
+        else // if constexpr (sizeof(DataType) == 1))
+        {
+            // Since there is no direct shift operation for 8-bit integers
+            // we need to shift using epi16 and apply a mask to the overflow
+            // ([1001 1001] [1001 1001]) << 3 = [1100 1000] [1100 1000]
+            // We first mask out the bit that will be zero when shifted
+            // [1111 1111] >> 3 -> [0001 1111] Create the mask
+            // [1001 1001] & [0001 1111] = [0001 1001] And apply it
+            const auto mask    = 0xff >> count;
+            const auto maskReg = _mm_set1_epi8(static_cast<int8_t>(mask));
+            const auto andReg  = _mm_and_si128(_register, maskReg);
+            // Now we shift the entire register to the left by shiftCount
+            // since the overflown values are already zero-ed out shifting this will
+            // create the correct put.
+            // ([0001 1001] ... [0001 1001] [0001 1001]) << 3
+            //  [1100 1000] ... [1100 1000] [1100 1000]
+            return Simd128(_mm_sll_epi16(andReg, countReg));
+        }
     }
 
 

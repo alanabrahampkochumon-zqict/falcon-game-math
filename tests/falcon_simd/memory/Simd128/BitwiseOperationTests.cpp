@@ -254,6 +254,45 @@ TYPED_TEST(Simd128BitwiseOperationTests, BitwiseAndNot_ReturnsAValidResult)
 }
 
 
+/// @test Verify that bitwise operator<< returns a valid vector(register).
+TYPED_TEST(Simd128BitwiseOperationTests, LeftShift_ReturnsAValidResult)
+{
+    using Type                     = TypeParam::Type;
+    constexpr size_t Lane          = TypeParam::VALUE;
+    constexpr uint32_t shiftAmount = 4;
+
+    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = this->lhsData[i];
+        // Since float and doubles don't have a NOT supported we need to bit cast it to integral types
+        // and cast it back.
+        if constexpr (std::is_same_v<double, Type>)
+        {
+            expected[i] = std::bit_cast<double>(std::bit_cast<uint64_t>(data[i]) << static_cast<uint64_t>(shiftAmount));
+        }
+        else if constexpr (std::is_same_v<float, Type>)
+        {
+            expected[i] = std::bit_cast<float>(std::bit_cast<uint32_t>(data[i]) << static_cast<uint32_t>(shiftAmount));
+        }
+        else
+        {
+            expected[i] = static_cast<Type>(data[i] << shiftAmount);
+        }
+    }
+
+    falcon::Simd128_t<Type, Lane> reg{ data };
+
+    auto regRes = reg << shiftAmount;
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+
 /** @} */
 
 #endif
