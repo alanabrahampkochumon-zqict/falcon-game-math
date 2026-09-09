@@ -11,32 +11,12 @@
 
 
 
+
 #include <emmintrin.h>
 #include <format>
 
 namespace falcon
 {
-
-    // TODO: Move to separate file and test
-    template <typename From, typename To>
-    struct IsNonNarrowingConvertible
-    {
-        static constexpr bool value = sizeof(From) <= sizeof(To);
-    };
-
-    template <typename From>
-    struct IsNonNarrowingConvertible<From, float>
-    {
-        static constexpr bool value = std::is_same_v<From, float> || sizeof(From) < sizeof(float);
-    };
-
-    template <typename From>
-    struct IsNonNarrowingConvertible<From, double>
-    {
-        static constexpr bool value = std::is_floating_point_v<From> || sizeof(From) < sizeof(double);
-    };
-    // TODO: END move to separate file and test.
-
 
     /**************************************
      *         SETTERS/GETTERS            *
@@ -44,17 +24,17 @@ namespace falcon
 
     template <typename DataType, size_t Lane>
     template <typename... Args>
-        requires(std::same_as<Args, DataType> && ...)
+        requires(SimdSafeConvertible<Args, DataType> && ...)
     constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(Args... data) noexcept
     {
         static_assert(sizeof...(Args) <= Lane && "Number of argument exceeded the register lane count");
         if constexpr (sizeof...(Args) == 1)
         {
-            broadcast(data...);
+            broadcast(static_cast<DataType>(data)...);
         }
         else
         {
-            set(data...);
+            set(static_cast<DataType>(data)...);
         }
     }
 

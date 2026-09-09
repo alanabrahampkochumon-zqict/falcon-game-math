@@ -20,6 +20,7 @@
 #include "../RegisterTraits.h"
 #include "falcon_core/Preprocessors.h"
 #include "falcon_core/traits/TypeHelpers.h"
+#include "falcon_simd/utils/TypeTraits.h"
 
 #include <array>
 #include <bit>
@@ -63,7 +64,7 @@ namespace falcon
          *       and rest filled with zeroes.
          */
         template <typename... Args>
-        requires (std::same_as<Args, DataType> && ...)
+            requires(SimdSafeConvertible<Args, DataType> && ...)
         constexpr explicit Simd128(Args... data) noexcept;
 
 
