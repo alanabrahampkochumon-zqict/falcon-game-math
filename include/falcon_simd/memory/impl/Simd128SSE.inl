@@ -1420,8 +1420,63 @@ namespace falcon
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator<<=(uint32_t count) noexcept
     {
-        *this = (*this << count);
+        *this = *this << count;
         return *this;
+    }
+
+
+    template <typename DataType, size_t Lane>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                      Lane>::operator>>(uint32_t count) const noexcept
+    {
+        const auto countReg = _mm_cvtsi32_si128(count);
+        // For floating point numbers we need to convert them to integral of similar Lane width
+        // perform the shifting and convert them back.
+        if constexpr (types::IsFP64<DataType>)
+        {
+            auto integralReg = _mm_castpd_si128(_register);
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+            {
+                auto shifted = _mm_sra_epi64(integralReg, countReg);
+                return Simd128(_mm_castsi128_pd(shifted));
+            }
+            else
+            {
+                // TODO: IMPL
+                return *this;
+            }
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            auto integralReg = _mm_castps_si128(_register);
+            auto shifted     = _mm_sra_epi32(integralReg, countReg);
+            return Simd128(_mm_castsi128_ps(shifted));
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+            {
+                return Simd128(_mm_sra_epi64(_register, countReg));
+            }
+            else
+            {
+                // TODO: IMPL
+                return *this;
+            }
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+            return Simd128(_mm_sra_epi32(_register, countReg));
+        }
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            return Simd128(_mm_sra_epi16(_register, countReg));
+        }
+        else // if constexpr (sizeof(DataType) == 1))
+        {
+            // TODO:
+            return *this;
+        }
     }
 
 
