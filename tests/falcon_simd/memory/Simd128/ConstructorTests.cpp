@@ -123,15 +123,7 @@ namespace
 
 
 using namespace simd::testing;
-// namespace
-// {
-//     #include <type_traits>
-//
-//     [[maybe_unused]] falcon::Simd128_t<uint64_t, 2> reg2{ 1ull, 2ull };
-//     [[maybe_unused]] falcon::Simd128_t<uint64_t, 2> reg3{ 1ull, 2ull };
-//     assert(std::is_same_v<decltype(reg2.naive()), __m128i>);
-// } // namespace
-//
+
 // // Uint8_t
 TEST_SIMD128_VARG_CTOR(Uint8_2Lanes_2Arguments, U8, 2, max<U8>, min<U8>)
 TEST_SIMD128_VARG_CTOR(Uint8_4Lanes_2Arguments, U8, 4, max<U8>, min<U8>)
@@ -234,7 +226,52 @@ TEST_SIMD128_VARG_CTOR(FP32_4Lanes_4Arguments, FP32, 4, max<FP32>, min<FP32>, 64
 // FP64
 TEST_SIMD128_VARG_CTOR(FP64_2Lanes_2Arguments, FP64, 2, max<FP64>, min<FP64>)
 
-// TODO: Add single argument broadcast test
+
+
+
+/// @test Verifies that Simd128 when constructed with single argument broadcasts it across the lanes.
+/// @note The Simd register expects integral args of datatype and since there is not direct static cast we need to use
+///       a helper lambda that takes in a __VA_ARGS__ and static cast each element with parameter args.
+    #define TEST_SIMD128_SINGLE_ARG_CTOR(TestNameSuffix, DataType, Lanes, Data)                                        \
+        TEST(Simd128SingleArgCtorTests, InitializesWith_##TestNameSuffix)                                              \
+        {                                                                                                              \
+            DataType outputData[Lanes]{};                                                                              \
+            falcon::Simd128_t<DataType, Lanes> reg{ Data };                                                            \
+            reg.store(outputData);                                                                                     \
+                                                                                                                       \
+            for (size_t i = 0; i < Lanes; ++i)                                                                         \
+            {                                                                                                          \
+                EXPECT_ANY_EQ(Data, outputData[i]);                                                                    \
+            }                                                                                                          \
+        }
+
+// Signed Types
+TEST_SIMD128_VARG_CTOR(Uint8_2Lanes, U8, 2, max<U8>)
+TEST_SIMD128_VARG_CTOR(Uint8_4Lanes, U8, 4, max<U8>)
+TEST_SIMD128_VARG_CTOR(Uint8_8Lanes, U8, 8, max<U8>)
+TEST_SIMD128_VARG_CTOR(Uint8_16Lanes, U8, 16, max<U8>)
+TEST_SIMD128_VARG_CTOR(Uint16_2Lanes, U16, 2, max<U16>)
+TEST_SIMD128_VARG_CTOR(Uint16_4Lanes, U16, 4, max<U16>)
+TEST_SIMD128_VARG_CTOR(Uint16_8Lanes, U16, 8, max<U16>)
+TEST_SIMD128_VARG_CTOR(Uint32_2Lanes, U32, 2, max<U32>)
+TEST_SIMD128_VARG_CTOR(Uint32_4Lanes, U32, 4, max<U32>)
+TEST_SIMD128_VARG_CTOR(Uint64_2Lanes, U64, 2, max<U64>)
+
+// Unsigned Types
+TEST_SIMD128_VARG_CTOR(Int8_2Lanes, I8, 2, max<I8>)
+TEST_SIMD128_VARG_CTOR(Int8_4Lanes, I8, 4, max<I8>)
+TEST_SIMD128_VARG_CTOR(Int8_8Lanes, I8, 8, max<I8>)
+TEST_SIMD128_VARG_CTOR(Int8_16Lanes, I8, 16, max<I8>)
+TEST_SIMD128_VARG_CTOR(Int16_2Lanes, I16, 2, max<I16>)
+TEST_SIMD128_VARG_CTOR(Int16_4Lanes, I16, 4, max<I16>)
+TEST_SIMD128_VARG_CTOR(Int16_8Lanes, I16, 8, max<I16>)
+TEST_SIMD128_VARG_CTOR(Int32_2Lanes, I32, 2, max<I32>)
+TEST_SIMD128_VARG_CTOR(Int32_4Lanes, I32, 4, max<I32>)
+TEST_SIMD128_VARG_CTOR(Int64_2Lanes, I64, 2, max<I64>)
+
+TEST_SIMD128_VARG_CTOR(FP32_2Lanes, FP32, 2, max<FP32>)
+TEST_SIMD128_VARG_CTOR(FP32_4Lanes, FP32, 4, max<FP32>)
+TEST_SIMD128_VARG_CTOR(FP64_2Lanes, FP64, 2, max<FP64>)
 
 #endif
 /** @} */
