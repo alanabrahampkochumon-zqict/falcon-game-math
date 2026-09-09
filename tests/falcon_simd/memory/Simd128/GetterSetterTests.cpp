@@ -49,7 +49,6 @@ namespace
         }
     };
     TYPED_TEST_SUITE(Simd128GetterSetterTests, Simd128RegisterTypeHints);
-
 } // namespace
 
 

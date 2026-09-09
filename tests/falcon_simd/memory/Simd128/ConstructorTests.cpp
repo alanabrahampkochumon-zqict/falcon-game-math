@@ -112,6 +112,7 @@ TYPED_TEST(Simd128CtorTests, Simd128_CanBeInitializedWithACStyleArray)
 
 
 
+
 /**************************************
  *        VARARG CTOR TESTS           *
  **************************************/

@@ -51,7 +51,6 @@ namespace falcon
         static_assert(std::has_single_bit(Lane) && Lane > 1 && "Invalid Number of Lanes.");
 
 
-        // TODO: Update
         constexpr explicit Simd128() = default;
 
         /**
@@ -473,23 +472,9 @@ namespace falcon
         constexpr Simd128 shuffle() const noexcept;
 
 
-        /// TODO: Add tests for these ctor and getter
         /// TODO: Add test for naive
         /// @brief Get the internal register used by Simd128
         FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept { return _register; }
-
-        // template <typename... Args>
-        // FALCON_INLINE constexpr explicit set(Args... data) const noexcept; // Analogous to setting
-
-        /// Given for completion sake
-        /// Note: Each lane is considered the native width of the datatype
-        /// The operation will get the data, mutate it and set it into register, which can be expensive
-        /// so it highly recommended to not use this operation
-        /// TODO: Implementation Later
-        /// TODO: Add constexpr variant to get (useful for .x, .y, ...)
-        // FALCON_INLINE constexpr setAt(size_t index, const DataType data) const noexcept;
-        //
-        // FALCON_INLINE constexpr getAt(size_t index) const noexcept;
 
     private:
         simd::internal::SSERegister_t<DataType> _register;
