@@ -451,6 +451,11 @@ namespace falcon
         [[nodiscard]] constexpr Simd128 operator>>(uint32_t count) const noexcept;
 
 
+        /// @warning If @p count is known at compile time then it is recommended to use @ref shiftRight<Count> as
+        ///          it is faster.
+        constexpr Simd128& operator>>=(uint32_t count) noexcept;
+
+
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///   MASKING/BLENDING
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
