@@ -1492,7 +1492,10 @@ namespace falcon
         else // if constexpr (types::IsByte<DataType>)
         {
             // Hacker Delight Ch.2 (2-7)
-            // ((x + 0x80) u>> n) - (0x80 u>> n)
+            // ((x + 0x80) u>> n) - (0x80 u>> n) This formula doesn't capture the edge case of shifting out of bounds
+            // which returns a 0 instead of -1 for negative numbers.
+            // So we use t = -(x >> 7)
+            // ((x xor t) >> n) xor t)
             // For signed shift we need to first remove the sign bit or add it (if its a positive number)
             // and then we shift both the sum and the sign by the shifted amount.
             // Finally subtracting the sign will remove the sign if it was a unsigned number(or positive signed
@@ -1503,6 +1506,8 @@ namespace falcon
             // 0101 >> 2   = 0001                                | 1101 >> 2    = 0011                           |
             // 1000 >> 2   = 0010                                | 1000 >> 2    = 0010                           |
             // 0001 - 0010 = 1111 (Borrowed bit signed overflow) | 0011 - 0010  = 0001                           |
+            // const auto signShiftReg = _mm_cvtsi32_si128(7); // sizeof(DataType) * 8 - 1
+            // const auto isolatedSignBit = _mm_
             const auto signReg        = _mm_set1_epi8(static_cast<uint8_t>(0x80));
             const auto sumReg         = _mm_add_epi8(_register, signReg);
             const auto shiftedSumReg  = _mm_srl_epi8_custom(sumReg, count);

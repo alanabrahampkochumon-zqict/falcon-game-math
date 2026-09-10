@@ -259,6 +259,17 @@ TYPED_TEST(Simd128BitwiseOperationTests, BitwiseAndNot_ReturnsAValidResult)
  *        BITWISE SHIFT TESTS         *
  **************************************/
 
+// Suppress boundary warning for bitshift overflow
+    #ifdef _MSC_VER
+        #pragma warning(push)
+        #pragma warning(disable : 4333) // Shifting too much(compliance to this will require rewriting test cases)
+        #pragma warning(disable : 4293) // shift count negative or too big, undefined behavior
+    #endif
+    #ifdef __clang__
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wshift-count-overflow"
+    #endif
+
 /// @test Verify that bitwise operator<< returns a valid vector(register).
     #define TEST_SIMD128_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(ShiftAmount)                                            \
         TYPED_TEST(Simd128BitwiseOperationTests, ShiftLeft_ReturnsAValidResult_WhenShiftedBy##ShiftAmount)             \
@@ -306,6 +317,7 @@ TEST_SIMD128_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(8)
 TEST_SIMD128_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(12)
 TEST_SIMD128_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(24)
 TEST_SIMD128_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(31)
+TEST_SIMD128_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(63)
 
 
 
@@ -356,6 +368,7 @@ TEST_SIMD128_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(8)
 TEST_SIMD128_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(12)
 TEST_SIMD128_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(24)
 TEST_SIMD128_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(31)
+TEST_SIMD128_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(63)
 
 
 /// @test Verify that bitwise operator>> returns a valid vector(register).
@@ -396,10 +409,7 @@ TEST_SIMD128_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(31)
             }                                                                                                          \
         }
 
-    #ifdef _MSC_VER
-        #pragma warning(push)
-        #pragma warning(disable : 4333) // Shifting too much(compliance to this will require rewriting test cases)
-    #endif
+
 
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(0)
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(1)
@@ -410,7 +420,11 @@ TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(8)
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(12)
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(24)
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
+TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(63)
 
+    #ifdef __clang__
+        #pragma clang diagnostic pop
+    #endif
     #ifdef _MSC_VER
         #pragma warning(pop)
     #endif

@@ -10,6 +10,7 @@ add_executable(FalconSIMDMemoryTests
         Simd128/ConstructorTests.cpp
 )
 
+target_compile_options(FalconSIMDMemoryTests PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>)
 target_include_directories(FalconSIMDMemoryTests PRIVATE "${FALCON_SIMD_TEST_ROOT_DIR}/include")
 
 target_link_libraries(
