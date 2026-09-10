@@ -455,6 +455,11 @@ namespace falcon
         ///          it is faster.
         constexpr Simd128& operator>>=(uint32_t count) noexcept;
 
+        /// Perform a logical shift right(zero extension).
+        /// @warning If @p count is known at compile time then it is recommended to use @ref shiftRight<Count> as
+        ///          it is faster.
+        [[nodiscard]] constexpr Simd128 shl(uint32_t count) const noexcept;
+
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///   MASKING/BLENDING

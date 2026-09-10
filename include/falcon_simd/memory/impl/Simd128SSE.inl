@@ -11,6 +11,7 @@
 
 
 
+
 #include <emmintrin.h>
 #include <format>
 
@@ -1512,11 +1513,48 @@ namespace falcon
     }
 
     template <typename DataType, size_t Lane>
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd128<SimdBackend::ARCH_SSE2, DataType,
-                                                                       Lane>::operator>>=(uint32_t count) noexcept
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator>>=(uint32_t count) noexcept
     {
         *this = *this >> count;
         return *this;
+    }
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::shl(uint32_t count) const noexcept
+    {
+        const auto countReg = _mm_cvtsi32_si128(count);
+        /// Floating point numbers needs to be cast to use integrals since there is no
+        /// intrinsics for floating point shifts
+        if constexpr (types::IsFP64<DataType>)
+        {
+            const auto integralRegister = _mm_castpd_si128(_register);
+            const auto shifted          = _mm_srl_epi64(integralRegister, countReg);
+            return Simd128(_mm_castsi128_pd(shifted));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            const auto integralRegister = _mm_castps_si128(_register);
+            const auto shifted          = _mm_srl_epi32(integralRegister, countReg);
+            return Simd128(_mm_castsi128_ps(shifted));
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            return Simd128(_mm_srl_epi64(_register, countReg));
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+            return Simd128(_mm_srl_epi32(_register, countReg));
+        }
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            return Simd128(_mm_srl_epi16(_register, countReg));
+        }
+        else // if constexpr (sizeof(DataType) == 1)
+        {
+            return Simd128(_mm_srl_epi8_custom(_register, count));
+        }
     }
 
 
