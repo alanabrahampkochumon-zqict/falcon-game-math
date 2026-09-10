@@ -1492,27 +1492,22 @@ namespace falcon
         else // if constexpr (types::IsByte<DataType>)
         {
             // Hacker Delight Ch.2 (2-7)
-            // ((x + 0x80) u>> n) - (0x80 u>> n) This formula doesn't capture the edge case of shifting out of bounds
-            // which returns a 0 instead of -1 for negative numbers.
-            // So we use t = -(x >> 7)
+            // t = -(x >> 7)
             // ((x xor t) >> n) xor t)
-            // For signed shift we need to first remove the sign bit or add it (if its a positive number)
-            // and then we shift both the sum and the sign by the shifted amount.
-            // Finally subtracting the sign will remove the sign if it was a unsigned number(or positive signed
-            // number) or if it was a negative number, it will cause an signed overflow since we are subtracting a
-            // smaller number from a larger number(sign will be larger), which will fill all the shifted spaces with 1.
-            // -7(1101) >> 2 = -1(1111)                          | 5(0101) >> 2 = 1(0001)                        |
-            // 1101 + 1000 = 0101 (Overflow)                     | 0101 + 1000  = 1101                           |
-            // 0101 >> 2   = 0001                                | 1101 >> 2    = 0011                           |
-            // 1000 >> 2   = 0010                                | 1000 >> 2    = 0010                           |
-            // 0001 - 0010 = 1111 (Borrowed bit signed overflow) | 0011 - 0010  = 0001                           |
-            // const auto signShiftReg = _mm_cvtsi32_si128(7); // sizeof(DataType) * 8 - 1
-            // const auto isolatedSignBit = _mm_
-            const auto signReg        = _mm_set1_epi8(static_cast<uint8_t>(0x80));
-            const auto sumReg         = _mm_add_epi8(_register, signReg);
-            const auto shiftedSumReg  = _mm_srl_epi8_custom(sumReg, count);
-            const auto shiftedSignReg = _mm_srl_epi8_custom(signReg, count);
-            return Simd128(_mm_sub_epi8(shiftedSumReg, shiftedSignReg));
+            // For positive number all the shifts t results in a zero which when xored returns the same result.
+            // But for negative number, the first xor converts it to a positive number and the next one undoes
+            // that converting the positive shifted number to a negative.
+            // -7(1101) >> 2 = -1(1111)  | 5(0101) >>  2 = 1(0001)   |
+            // 1101 >>     3 = 0001      | 0101 >>     3 = 0000      |
+            // 0000  -  0001 = 1111 (t)  | 0000 -   0000 = 0000 (t)  |
+            // 1101 xor 1111 = 0010      | 0101 xor 0000 = 0101      |
+            // 0011 >>     3 = 0000      | 0101 >>     3 = 0001      |
+            // 0000 xor 1111 = 1111      | 0000 xor 0001 = 0001      |
+            const auto isolatedSignBit = _mm_srl_epi8_custom(_register, 7);
+            const auto tReg            = _mm_sub_epi8(_mm_setzero_si128(), isolatedSignBit);
+            const auto xXorTReg        = _mm_xor_si128(_register, tReg);
+            const auto shiftedXor      = _mm_srl_epi8_custom(xXorTReg, count);
+            return Simd128(_mm_xor_si128(shiftedXor, tReg));
         }
     }
 
