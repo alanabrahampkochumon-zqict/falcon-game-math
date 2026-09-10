@@ -11,7 +11,6 @@
 
 
 
-
 #include <emmintrin.h>
 #include <format>
 
@@ -1442,8 +1441,8 @@ namespace falcon
             }
             else
             {
-                // TODO: IMPL
-                return *this;
+                auto shifted = _mm_sra_epi64_custom(integralReg, count);
+                return Simd128(_mm_castsi128_pd(shifted));
             }
         }
         else if constexpr (types::IsFP32<DataType>)
@@ -1452,7 +1451,26 @@ namespace falcon
             auto shifted     = _mm_sra_epi32(integralReg, countReg);
             return Simd128(_mm_castsi128_ps(shifted));
         }
-        else if constexpr (sizeof(DataType) == 8)
+        // Unsigned types needs to use logical shifts
+        else if constexpr (types::IsUQWord<DataType>)
+        {
+            return Simd128(_mm_srl_epi64(_register, countReg));
+        }
+        else if constexpr (types::IsUDWord<DataType>)
+        {
+            return Simd128(_mm_srl_epi32(_register, countReg));
+        }
+        else if constexpr (types::IsUWord<DataType>)
+        {
+            return Simd128(_mm_srl_epi16(_register, countReg));
+        }
+        else if constexpr (types::IsUByte<DataType>)
+        {
+            // Custom function(not an intel intrinsic)
+            return Simd128(_mm_srl_epi8_custom(_register, count));
+        }
+        // Signed Types
+        else if constexpr (types::IsQWord<DataType>)
         {
             if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
             {
@@ -1460,22 +1478,36 @@ namespace falcon
             }
             else
             {
-                // TODO: IMPL
-                return *this;
+                return Simd128(_mm_sra_epi64_custom(_register, count));
             }
         }
-        else if constexpr (sizeof(DataType) == 4)
+        else if constexpr (types::IsDWord<DataType>)
         {
             return Simd128(_mm_sra_epi32(_register, countReg));
         }
-        else if constexpr (sizeof(DataType) == 2)
+        else if constexpr (types::IsWord<DataType>)
         {
             return Simd128(_mm_sra_epi16(_register, countReg));
         }
-        else // if constexpr (sizeof(DataType) == 1))
+        else // if constexpr (types::IsByte<DataType>)
         {
-            // TODO:
-            return *this;
+            // Hacker Delight Ch.2 (2-7)
+            // ((x + 0x80) u>> n) - (0x80 u>> n)
+            // For signed shift we need to first remove the sign bit or add it (if its a positive number)
+            // and then we shift both the sum and the sign by the shifted amount.
+            // Finally subtracting the sign will remove the sign if it was a unsigned number(or positive signed
+            // number) or if it was a negative number, it will cause an signed overflow since we are subtracting a
+            // smaller number from a larger number(sign will be larger), which will fill all the shifted spaces with 1.
+            // -7(1101) >> 2 = -1(1111)                          | 5(0101) >> 2 = 1(0001)                        |
+            // 1101 + 1000 = 0101 (Overflow)                     | 0101 + 1000  = 1101                           |
+            // 0101 >> 2   = 0001                                | 1101 >> 2    = 0011                           |
+            // 1000 >> 2   = 0010                                | 1000 >> 2    = 0010                           |
+            // 0001 - 0010 = 1111 (Borrowed bit signed overflow) | 0011 - 0010  = 0001                           |
+            const auto signReg        = _mm_set1_epi8(static_cast<uint8_t>(0x80));
+            const auto sumReg         = _mm_add_epi8(_register, signReg);
+            const auto shiftedSumReg  = _mm_srl_epi8_custom(sumReg, count);
+            const auto shiftedSignReg = _mm_srl_epi8_custom(signReg, count);
+            return Simd128(_mm_sub_epi8(shiftedSumReg, shiftedSignReg));
         }
     }
 
@@ -1669,6 +1701,54 @@ namespace falcon
                 }
             }
         }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr __m128i Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::_mm_srl_epi8_custom(
+        const __m128i reg, const uint32_t count) noexcept
+    {
+        // Since there is no direct shift operation for 8-bit integers
+        // we need to shift using epi16 and apply a mask to the overflow
+        // ([1001 1001] [1001 1001]) >> 3 = [0010 0110] [0010 0110]
+        // We first mask out the bit that will be zero when shifted
+        // [1111 1111] << 3 -> [1111 1000] Create the mask
+        // [1001 1001] & [1111 1000] = [1001 1000] And apply it
+        const auto countReg = _mm_cvtsi32_si128(count); // Load the shift value into the lower 32-bit lanes
+        const auto mask     = 0xff << count;
+        const auto maskReg  = _mm_set1_epi8(static_cast<int8_t>(mask));
+        const auto andReg   = _mm_and_si128(reg, maskReg);
+        // Now we shift the entire register to the left by shiftCount
+        // since the overflown values are already zero-ed out shifting this will
+        // create the correct put.
+        // [1001 1000] [1001 1000] >> 3
+        // [0010 1100] [0010 1100]
+        return _mm_srl_epi16(andReg, countReg);
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr __m128i Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::_mm_sra_epi64_custom(
+        const __m128i reg, const uint32_t count) noexcept
+    {
+        const auto countReg = _mm_cvtsi32_si128(count);
+        // Hacker Delight Ch.2 (2-7)
+        // ((x + 0x8000..00) u>> n) - (0x8000.000 u>> n)
+        // For signed shift we need to first remove the sign bit or add it (if its a positive number)
+        // and then we shift both the sum and the sign by the shifted amount.
+        // Finally subtracting the sign will remove the sign if it was a unsigned number(or positive signed
+        // number) or if it was a negative number, it will cause an signed overflow since we are subtracting a
+        // smaller number from a larger number(sign will be larger), which will fill all the shifted spaces with 1.
+        // -7(1101) >> 2 = -1(1111)                          | 5(0101) >> 2 = 1(0001)                        |
+        // 1101 + 1000 = 0101 (Overflow)                     | 0101 + 1000  = 1101                           |
+        // 0101 >> 2   = 0001                                | 1101 >> 2    = 0011                           |
+        // 1000 >> 2   = 0010                                | 1000 >> 2    = 0010                           |
+        // 0001 - 0010 = 1111 (Borrowed bit signed overflow) | 0011 - 0010  = 0001                           |
+        const auto signReg        = _mm_set1_epi64x(0x8000000000000000ULL);
+        const auto sumReg         = _mm_add_epi64(reg, signReg);
+        const auto shiftedSumReg  = _mm_srl_epi64(sumReg, countReg);
+        const auto shiftedSignReg = _mm_srl_epi64(signReg, countReg);
+        return _mm_sub_epi64(shiftedSumReg, shiftedSignReg);
     }
 
 } // namespace falcon

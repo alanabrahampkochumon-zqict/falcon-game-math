@@ -492,6 +492,17 @@ namespace falcon
 
     private:
         simd::internal::SSERegister_t<DataType> _register;
+
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///         HELPERS
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /// Perform a logical right shift on the 128-bit register composed of Byte values.
+        static constexpr __m128i _mm_srl_epi8_custom(__m128i reg, uint32_t count) noexcept;
+
+
+        /// Perform a arithmetic right shift on the 128-bit register composed of Quad Word (64-bit integral) values.
+        static constexpr __m128i _mm_sra_epi64_custom(__m128i reg, uint32_t count) noexcept;
     };
 
 

@@ -372,16 +372,16 @@ TEST_SIMD128_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(31)
                 if constexpr (std::is_same_v<double, Type>)                                                            \
                 {                                                                                                      \
                     expected[i] =                                                                                      \
-                        std::bit_cast<double>(std::bit_cast<uint64_t>(data[i]) >> static_cast<uint64_t>(ShiftAmount)); \
+                        std::bit_cast<double>(std::bit_cast<int64_t>(data[i]) >> static_cast<int64_t>(ShiftAmount));   \
                 }                                                                                                      \
                 else if constexpr (std::is_same_v<float, Type>)                                                        \
                 {                                                                                                      \
                     expected[i] =                                                                                      \
-                        std::bit_cast<float>(std::bit_cast<uint32_t>(data[i]) >> static_cast<uint32_t>(ShiftAmount));  \
+                        std::bit_cast<float>(std::bit_cast<int32_t>(data[i]) >> static_cast<int32_t>(ShiftAmount));    \
                 }                                                                                                      \
                 else                                                                                                   \
                 {                                                                                                      \
-                    expected[i] = static_cast<Type>(data[i] << ShiftAmount);                                           \
+                    expected[i] = data[i] >> ShiftAmount;                                                              \
                 }                                                                                                      \
             }                                                                                                          \
                                                                                                                        \
@@ -396,6 +396,11 @@ TEST_SIMD128_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(31)
             }                                                                                                          \
         }
 
+    #ifdef _MSC_VER
+        #pragma warning(push)
+        #pragma warning(disable : 4333) // Shifting too much(compliance to this will require rewriting test cases)
+    #endif
+
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(0)
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(1)
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(2)
@@ -405,6 +410,12 @@ TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(8)
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(12)
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(24)
 TEST_SIMD128_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
+
+    #ifdef _MSC_VER
+        #pragma warning(pop)
+    #endif
+
+// TODO: FIX SHIFT >= WIDTH OF TYPE
 
 /** @} */
 
