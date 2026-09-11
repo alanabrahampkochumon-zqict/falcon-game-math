@@ -34,10 +34,10 @@ namespace
     public:
         using Register = falcon::Simd128_t<typename T::Type, T::VALUE>;
 
-        static constexpr auto max                              = std::numeric_limits<typename T::Type>::max();
-        static constexpr auto min                              = std::numeric_limits<typename T::Type>::min();
-        static constexpr std::array<typename T::Type, 16> data = { max, min, 0, 3,  5,  11, 15, 3,
-                                                                   1,   2,   5, 12, 14, 3,  15, 12 };
+        static constexpr auto max = std::numeric_limits<typename T::Type>::max();
+        static constexpr auto min = std::numeric_limits<typename T::Type>::min();
+        alignas(16) static constexpr std::array<typename T::Type, 16> data = { max, min, 0, 3,  5,  11, 15, 3,
+                                                                               1,   2,   5, 12, 14, 3,  15, 12 };
 
         /// Testing condition
         template <size_t... Index>
@@ -207,9 +207,10 @@ using namespace simd::testing;
     #define TEST_SIMD128_CONST_GET_AT_RETURNS_VALUE_AT_INDEX(TestSuffix, Type, Lanes, Index)                           \
         TEST(Simd128ConstGetAtTests, ReturnsTheValueAtGivenIndex_##TestSuffix)                                         \
         {                                                                                                              \
-            constexpr auto max                     = std::numeric_limits<Type>::max();                                 \
-            constexpr auto min                     = std::numeric_limits<Type>::min();                                 \
-            constexpr std::array<Type, 16> dataArr = { max, min, 0, 3, 5, 11, 15, 3, 1, 2, 5, 12, 14, 3, 15, 12 };     \
+            constexpr auto max                                 = std::numeric_limits<Type>::max();                     \
+            constexpr auto min                                 = std::numeric_limits<Type>::min();                     \
+            alignas(16) constexpr std::array<Type, 16> dataArr = { max, min, 0, 3,  5,  11, 15, 3,                     \
+                                                                   1,   2,   5, 12, 14, 3,  15, 12 };                  \
                                                                                                                        \
             falcon::Simd128_t<Type, Lanes> reg(dataArr.data());                                                        \
             EXPECT_ANY_EQ(dataArr[Index], reg.getAt<Index>());                                                         \
