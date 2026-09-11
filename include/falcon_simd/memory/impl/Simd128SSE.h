@@ -449,7 +449,7 @@ namespace falcon
          * @relatedalso operator>>=(uint32_t)
          * @relatedalso shiftRightLogical(uint32_t)
          * @relatedalso shiftLeft<uint32_t>()
-         * @relatedalso shiftArithmeticLogical<uint32_t>()
+         * @relatedalso shiftRightArithmetic<uint32_t>()
          * @relatedalso shiftRightLogical<uint32_t>()
          */
         [[nodiscard]] constexpr Simd128 operator<<(uint32_t count) const noexcept;
@@ -468,7 +468,7 @@ namespace falcon
          * @relatedalso operator>>=(uint32_t)
          * @relatedalso shiftRightLogical(uint32_t)
          * @relatedalso shiftLeft<uint32_t>()
-         * @relatedalso shiftArithmeticLogical<uint32_t>()
+         * @relatedalso shiftRightArithmetic<uint32_t>()
          * @relatedalso shiftRightLogical<uint32_t>()
          */
         constexpr Simd128& operator<<=(uint32_t count) noexcept;
@@ -487,7 +487,7 @@ namespace falcon
          * @relatedalso operator>>=(uint32_t)
          * @relatedalso shiftRightLogical(uint32_t)
          * @relatedalso shiftLeft<uint32_t>()
-         * @relatedalso shiftArithmeticLogical<uint32_t>()
+         * @relatedalso shiftRightArithmetic<uint32_t>()
          * @relatedalso shiftRightLogical<uint32_t>()
          */
         [[nodiscard]] constexpr Simd128 operator>>(uint32_t count) const noexcept;
@@ -506,7 +506,7 @@ namespace falcon
          * @relatedalso operator>>(uint32_t)
          * @relatedalso shiftRightLogical(uint32_t)
          * @relatedalso shiftLeft<uint32_t>()
-         * @relatedalso shiftArithmeticLogical<uint32_t>()
+         * @relatedalso shiftRightArithmetic<uint32_t>()
          * @relatedalso shiftRightLogical<uint32_t>()
          */
         constexpr Simd128& operator>>=(uint32_t count) noexcept;
@@ -525,7 +525,7 @@ namespace falcon
          * @relatedalso operator>>(uint32_t)
          * @relatedalso operator>>=(uint32_t)
          * @relatedalso shiftLeft<uint32_t>()
-         * @relatedalso shiftArithmeticLogical<uint32_t>()
+         * @relatedalso shiftRightArithmetic<uint32_t>()
          * @relatedalso shiftRightLogical<uint32_t>()
          */
         [[nodiscard]] constexpr Simd128 shiftRightLogical(uint32_t count) const noexcept;
@@ -541,11 +541,28 @@ namespace falcon
          * @relatedalso operator>>(uint32_t)
          * @relatedalso operator>>=(uint32_t)
          * @relatedalso shiftRightLogical(uint32_t)
-         * @relatedalso shiftArithmeticLogical<uint32_t>()
+         * @relatedalso shiftRightArithmetic<uint32_t>()
          * @relatedalso shiftRightLogical<uint32_t>()
          */
         template <uint32_t Count>
         [[nodiscard]] constexpr Simd128 shiftLeft() const noexcept;
+
+
+        /**
+         * @brief Perform a arithmetic right shift on this register by a compile time constant, @p Count.
+         *
+         * @tparam Count The shift amount.
+         *
+         * @relatedalso operator<<(uint32_t)
+         * @relatedalso operator<<=(uint32_t)
+         * @relatedalso operator>>(uint32_t)
+         * @relatedalso operator>>=(uint32_t)
+         * @relatedalso shiftRightLogical(uint32_t)
+         * @relatedalso shiftLeft<uint32_t>()
+         * @relatedalso shiftRightLogical<uint32_t>()
+         */
+        template <uint32_t Count>
+        [[nodiscard]] constexpr Simd128 shiftRightArithmetic() const noexcept;
 
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -607,6 +624,13 @@ namespace falcon
         /// @tparam Count The shift amount.
         template <uint32_t Count>
         static constexpr __m128i _mm_slli_epi8_custom(__m128i reg) noexcept;
+
+
+        /// @brief Perform a arithmetic right shift on the 128-bit register composed of Quad Word (64-bit integral) values
+        ///        by a constant known at compile time.
+        /// @tparam Count The shift amount.
+        template <uint32_t Count>
+        static constexpr __m128i _mm_srai_epi64_custom(__m128i reg) noexcept;
     };
 
 

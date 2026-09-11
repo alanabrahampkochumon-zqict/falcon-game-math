@@ -12,8 +12,6 @@
 
 
 
-#include "Simd128SSE.h"
-
 #include <emmintrin.h>
 #include <format>
 
@@ -1506,7 +1504,7 @@ namespace falcon
             // 1101 xor 1111 = 0010      | 0101 xor 0000 = 0101      |
             // 0011 >>     3 = 0000      | 0101 >>     3 = 0001      |
             // 0000 xor 1111 = 1111      | 0000 xor 0001 = 0001      |
-            const auto isolatedSignBit = _mm_srl_epi8_custom(_register, 7);
+            const auto isolatedSignBit = _mm_srl_epi8_custom(_register, 7); // TODO: Update to SRLI EPI CUSTOM
             const auto tReg            = _mm_sub_epi8(_mm_setzero_si128(), isolatedSignBit);
             const auto xXorTReg        = _mm_xor_si128(_register, tReg);
             const auto shiftedXor      = _mm_srl_epi8_custom(xXorTReg, count);
@@ -1592,6 +1590,77 @@ namespace falcon
         else // if constexpr(sizeof(DataType) == 1)
         {
             return Simd128(_mm_slli_epi8_custom<Count>(_register));
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    template <uint32_t Count>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::shiftRightArithmetic() const noexcept
+    {
+        // For floating points we need to cast registers to integrals do shifting and convert back.
+        if constexpr (types::IsFP64<DataType>)
+        {
+            const auto integralReg = _mm_castpd_si128(_register);
+            // AVX512F + VL has srai_epi64
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+            {
+                const auto shifted = _mm_srai_epi64(integralReg, Count);
+                return Simd128(_mm_castsi128_pd(shifted));
+            }
+            else
+            {
+                const auto shifted = _mm_srai_epi64_custom<Count>(integralReg);
+                return Simd128(_mm_castsi128_pd(shifted));
+            }
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            const auto integralReg = _mm_castps_si128(_register);
+            const auto shifted     = _mm_srai_epi32(integralReg, Count);
+            return Simd128(_mm_castsi128_ps(shifted));
+        }
+        // Unsigned types
+        else if constexpr (types::IsUQWord<DataType>)
+        {
+            return Simd128(_mm_srli_epi64(_register, Count));
+        }
+        else if constexpr (types::IsUDWord<DataType>)
+        {
+            return Simd128(_mm_srli_epi32(_register, Count));
+        }
+        else if constexpr (types::IsUWord<DataType>)
+        {
+            return Simd128(_mm_srli_epi16(_register, Count));
+        }
+        else if constexpr (types::IsUByte<DataType>)
+        {
+            return *this; // TODO:
+        }
+        // Signed types
+        else if constexpr (types::IsQWord<DataType>)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+            {
+                return Simd128(_mm_srai_epi64(_register, Count));
+            }
+            else
+            {
+                return Simd128(_mm_srai_epi64_custom<Count>(_register));
+            }
+        }
+        else if constexpr (types::IsDWord<DataType>)
+        {
+            return Simd128(_mm_srai_epi32(_register, Count));
+        }
+        else if constexpr (types::IsWord<DataType>)
+        {
+            return Simd128(_mm_srai_epi16(_register, Count));
+        }
+        else // if constexpr (types::IsByte<DataType>)
+        {
+            return *this; // TODO:
         }
     }
 
@@ -1848,6 +1917,23 @@ namespace falcon
         const auto maskReg  = _mm_set1_epi8(static_cast<uint8_t>(mask)); // [0b00111111, 0b00111111, ..]
         const auto andReg   = _mm_and_si128(reg, maskReg);               // [00xxxxxx, 00xxxxxx, 00xxxxxx,..]
         return _mm_slli_epi16(andReg, Count);
+    }
+
+
+    template <typename DataType, size_t Lane>
+    template <uint32_t Count>
+    constexpr __m128i Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::_mm_srai_epi64_custom(const __m128i reg) noexcept
+    {
+        // Until AVX512F + VL there is no dedicated srai function so, we need to use xor to convert the signed
+        // values to unsigned and then shifted and the sign bits.
+        // Hacker Delight Ch.2 (2-7) (See a detailed example in operator>> definition)
+        // t = -(x u>> 63) // This is -1(0b111..111) for negative numbers and 0 for positive numbers.
+        // res = ((x xor t) u>> Count) xor t
+        const auto signShifted   = _mm_srli_epi64(reg, 63); // x u>> 63
+        const auto t             = _mm_sub_epi64(_mm_setzero_si128(), signShifted);
+        const auto signIsolated  = _mm_xor_si128(reg, t);               // x xor t
+        const auto unsignedShift = _mm_srli_epi64(signIsolated, Count); // (x xor t) u>> Count
+        return _mm_xor_si128(unsignedShift, t);
     }
 
 } // namespace falcon
