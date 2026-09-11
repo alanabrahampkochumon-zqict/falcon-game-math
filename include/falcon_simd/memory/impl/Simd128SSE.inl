@@ -446,8 +446,91 @@ namespace falcon
 
     template <typename DataType, size_t Lane>
     template <size_t Index>
+        requires(Index < Lane)
     FALCON_INLINE constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::getAt() const noexcept
-    { return 0; }
+    {
+        // For extracting integrals(other than 16-bits) before SSE4.1 we need shift and extract
+        // Extracting a value at index, say 2, we need to first move it
+        // to the 0th lane and extract it using cvtsi128_si32 and then cast it to a DataType
+        //         3 |         2 |         1 |         0 Indices
+        // 1111 1101 | 0011 1101 | 0111 1010 | 0111 1111 (Extract Index 2)
+        // Shift the register to the left by Index * DataSize(si128 shifts) Here Index * sizeof(DataType)
+        // 0000 0000 | 0000 0000 | 1111 1101 | 0011 1101
+        // Now extract using _mm_cvtsi128_si32(si64) and cast it down to DataType integral.
+
+        if constexpr (types::IsFP64<DataType>)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                return std::bit_cast<double>(_mm_extract_epi64(_mm_castpd_si128(_register), Index));
+            }
+            else
+            {
+                constexpr auto shiftAmt = Index * sizeof(DataType);
+                const auto shiftedReg   = _mm_srli_si128(_mm_castpd_si128(_register), shiftAmt);
+                return std::bit_cast<double>(_mm_cvtsi128_si64(shiftedReg));
+            }
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                // _mm_extract_ps returns an int so we need to bit cast it a float
+                return std::bit_cast<float>(_mm_extract_ps(_register, Index));
+            }
+            else
+            {
+                constexpr auto shiftAmt = Index * sizeof(DataType);
+                const auto shiftedReg   = _mm_srli_si128(_mm_castps_si128(_register), shiftAmt);
+                return std::bit_cast<float>(_mm_cvtsi128_si32(shiftedReg));
+            }
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                return static_cast<DataType>(_mm_extract_epi64(_register, Index));
+            }
+            else
+            {
+                constexpr auto shiftAmt = Index * sizeof(DataType);
+                const auto shiftedReg   = _mm_srli_si128(_register, shiftAmt);
+                return static_cast<DataType>(_mm_cvtsi128_si64(shiftedReg));
+            }
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                return static_cast<DataType>(_mm_extract_epi32(_register, Index));
+            }
+            else
+            {
+                constexpr auto shiftAmt = Index * sizeof(DataType);
+                const auto shiftedReg   = _mm_srli_si128(_register, shiftAmt);
+                return static_cast<DataType>(_mm_cvtsi128_si32(shiftedReg));
+            }
+        }
+        // While both Byte and Word can have the same code, it can given index warning
+        // when used with a single else expression.
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            return static_cast<DataType>(_mm_extract_epi16(_register, Index));
+        }
+        else // if constexpr(sizeof(DataType) == 1)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                return static_cast<DataType>(_mm_extract_epi8(_register, Index)); // SSE4.1
+            }
+            else
+            {
+                constexpr auto shiftAmt = Index * sizeof(DataType);
+                const auto shiftedReg   = _mm_srli_si128(_register, shiftAmt);
+                return static_cast<DataType>(_mm_cvtsi128_si32(shiftedReg));
+            }
+        }
+    }
 
 
     /**************************************

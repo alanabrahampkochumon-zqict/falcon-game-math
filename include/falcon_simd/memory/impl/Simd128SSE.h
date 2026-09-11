@@ -286,6 +286,7 @@ namespace falcon
          * @relatedalso setAt<size_t>(DataType)
          */
         template <size_t Index>
+            requires(Index < Lane)
         [[nodiscard]] constexpr DataType getAt() const noexcept;
 
 
