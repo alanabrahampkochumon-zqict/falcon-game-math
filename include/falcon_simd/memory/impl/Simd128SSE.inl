@@ -12,6 +12,8 @@
 
 
 
+#include "Simd128SSE.h"
+
 #include <emmintrin.h>
 #include <format>
 
@@ -1589,7 +1591,7 @@ namespace falcon
         }
         else // if constexpr(sizeof(DataType) == 1)
         {
-            return *this;
+            return Simd128(_mm_slli_epi8_custom<Count>(_register));
         }
     }
 
@@ -1831,6 +1833,21 @@ namespace falcon
         const auto shiftedSumReg  = _mm_srl_epi64(sumReg, countReg);
         const auto shiftedSignReg = _mm_srl_epi64(signReg, countReg);
         return _mm_sub_epi64(shiftedSumReg, shiftedSignReg);
+    }
+
+
+    template <typename DataType, size_t Lane>
+    template <uint32_t Count>
+    FALCON_INLINE constexpr __m128i Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::_mm_slli_epi8_custom(
+        const __m128i reg) noexcept
+    {
+        // 8-bit integrals have no right or left shift operations so, we need to mask out the overflow bits
+        // and then do a shift using the epi16 intrinsic.
+        // Since this is a left shift operations values to to the right will need to be masked.
+        constexpr auto mask = 0xFF >> Count;                             // 0b0011 1111(Assume Count = 2)
+        const auto maskReg  = _mm_set1_epi8(static_cast<uint8_t>(mask)); // [0b00111111, 0b00111111, ..]
+        const auto andReg   = _mm_and_si128(reg, maskReg);               // [00xxxxxx, 00xxxxxx, 00xxxxxx,..]
+        return _mm_slli_epi16(andReg, Count);
     }
 
 } // namespace falcon

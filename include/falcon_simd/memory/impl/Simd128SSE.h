@@ -600,6 +600,13 @@ namespace falcon
 
         /// Perform a arithmetic right shift on the 128-bit register composed of Quad Word (64-bit integral) values.
         static constexpr __m128i _mm_sra_epi64_custom(__m128i reg, uint32_t count) noexcept;
+
+
+        /// @brief Perform a logical left shift on the 128-bit register composed of Byte values by a constant known
+        ///        at compile time.
+        /// @tparam Count The shift amount.
+        template <uint32_t Count>
+        static constexpr __m128i _mm_slli_epi8_custom(__m128i reg) noexcept;
     };
 
 
