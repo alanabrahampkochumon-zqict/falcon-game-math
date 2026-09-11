@@ -532,7 +532,7 @@ namespace falcon
 
 
         /**
-         * @brief Perform a logical left shift by a compile time constant @p Count.
+         * @brief Perform a logical left shift on this register by a compile time constant, @p Count.
          *
          * @tparam Count The shift amount.
          *
@@ -541,9 +541,11 @@ namespace falcon
          * @relatedalso operator>>(uint32_t)
          * @relatedalso operator>>=(uint32_t)
          * @relatedalso shiftRightLogical(uint32_t)
+         * @relatedalso shiftArithmeticLogical<uint32_t>()
+         * @relatedalso shiftRightLogical<uint32_t>()
          */
-        // template <uint32_t Count>
-        // [[nodiscard]] const Simd128 s
+        template <uint32_t Count>
+        [[nodiscard]] constexpr Simd128 shiftLeft() const noexcept;
 
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -599,6 +601,7 @@ namespace falcon
         /// Perform a arithmetic right shift on the 128-bit register composed of Quad Word (64-bit integral) values.
         static constexpr __m128i _mm_sra_epi64_custom(__m128i reg, uint32_t count) noexcept;
     };
+
 
 
 } // namespace falcon
