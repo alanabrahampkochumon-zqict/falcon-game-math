@@ -12,8 +12,6 @@
 
 
 
-#include "Simd128SSE.h"
-
 #include <emmintrin.h>
 #include <format>
 
@@ -42,11 +40,11 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(std::span<DataType> values) noexcept
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(std::span<const DataType> values) noexcept
     { loadAligned(values.data()); }
 
     template <typename DataType, size_t Lane>
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(DataType* buffer) noexcept
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(const DataType* buffer) noexcept
     { loadAligned(buffer); }
 
     template <typename DataType, size_t Lane>
@@ -119,7 +117,8 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::loadAligned(DataType* data) noexcept
+    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::loadAligned(
+        const DataType* data) noexcept
     {
         // We are using sizes for loading integers since we are storing both signed and unsigned types into the
         // register as bits, with packing.
@@ -162,7 +161,7 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::load(DataType* data) noexcept
+    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::load(const DataType* data) noexcept
     {
         // We are using sizes for loading integers since we are storing both signed and unsigned types into the
         // register as bits, with packing.
@@ -205,7 +204,8 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::broadcast(DataType value) noexcept
+    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::broadcast(
+        const DataType value) noexcept
     {
         if constexpr (types::IsFP64<DataType>)
         {
@@ -442,6 +442,12 @@ namespace falcon
         interArray[index] = value;
         loadAligned(interArray.data());
     }
+
+
+    template <typename DataType, size_t Lane>
+    template <size_t Index>
+    FALCON_INLINE constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::getAt() const noexcept
+    { return 0; }
 
 
     /**************************************

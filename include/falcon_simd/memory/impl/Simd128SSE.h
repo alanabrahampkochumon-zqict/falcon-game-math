@@ -54,7 +54,7 @@ namespace falcon
         constexpr explicit Simd128() = default;
 
         /**
-         * Initialize a 128-bit SIMD register with @p data.
+         * @brief Initialize a 128-bit SIMD register with @p data.
          *
          * @tparam Args The numeric type of @p data. Must match the register's datatype.
          * @param data  The values to initialize the register with.
@@ -70,18 +70,18 @@ namespace falcon
 
 
         /**
-         * Initialize a 128-bit SIMD register with values from a std::container(std::array, std::vector).
+         * @brief Initialize a 128-bit SIMD register with values from a std::container(std::array, std::vector).
          *
          * @param values The values to fill the register with.
          *
          * @warning The container must be aligned to 16-byte boundary. For unaligned data,
          *          use @ref load to load data manually.
          */
-        constexpr explicit Simd128(std::span<DataType> values) noexcept;
+        constexpr explicit Simd128(std::span<const DataType> values) noexcept;
 
 
         /**
-         * Initialize a 128-bit SIMD register with C-style arrays.
+         * @brief Initialize a 128-bit SIMD register with a raw memory buffer.
          *
          * @note Passing in a buffer with allocated size less than @p Lane * @p sizeof(DataType)
          *       can cause segmentation faults.
@@ -91,7 +91,7 @@ namespace falcon
          * @warning @p buffer must be aligned to 16-byte boundary. For unaligned data,
          *          use @ref load to load data manually.
          */
-        constexpr explicit Simd128(DataType* buffer) noexcept;
+        constexpr explicit Simd128(const DataType* buffer) noexcept;
 
 
         /**
@@ -140,7 +140,7 @@ namespace falcon
          *
          * @param data The data to load.
          */
-        constexpr void loadAligned(DataType* data) noexcept;
+        constexpr void loadAligned(const DataType* data) noexcept;
 
 
         /**
@@ -159,7 +159,7 @@ namespace falcon
          * @relatedalso broadcast(DataType)
          * @relatedalso setZero()
          */
-        constexpr void load(DataType* data) noexcept;
+        constexpr void load(const DataType* data) noexcept;
 
 
         /**
@@ -248,9 +248,13 @@ namespace falcon
          *       due to the availability of direct hardware intrinsic.
          *
          * @return The value at index [read-only].
+         *
+         * @relatedalso setAt(size_t, DataType)
+         * @relatedalso getAt<size_t>()
+         * @relatedalso setAt<size_t>(DataType)
          */
         [[nodiscard]] constexpr DataType getAt(size_t index) const noexcept;
-
+        // TODO: Migrate runtime getAt to use a switch expression if it's faster
 
         /**
          * Set the value at @p index to @p value.
@@ -260,8 +264,29 @@ namespace falcon
          *
          * @note For indices known at compile-time, use set<Index>(value) as it is faster
          *       due to the availability of direct hardware intrinsic.
+         *
+         * @relatedalso getAt(size_t)
+         * @relatedalso getAt<size_t>()
+         * @relatedalso setAt<size_t>(DataType)
          */
         constexpr void setAt(size_t index, DataType value) noexcept;
+
+        /**
+         * Get the value at @p index.
+         *
+         * @tparam Index The index of the register. Must be between 0 and Lane - 1.
+         *
+         * @note For indices known at compile-time, use get<Index>() as it is faster
+         *       due to the availability of direct hardware intrinsic.
+         *
+         * @return The value at index [read-only].
+         *
+         * @relatedalso getAt(size_t)
+         * @relatedalso setAt(size_t, DataType)
+         * @relatedalso setAt<size_t>(DataType)
+         */
+        template <size_t Index>
+        [[nodiscard]] constexpr DataType getAt() const noexcept;
 
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -620,6 +645,7 @@ namespace falcon
         /// TODO: Add test for naive
         /// @brief Get the internal register used by Simd128
         FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept { return _register; }
+        /// TODO: Operator* as a way to get the native register
 
     private:
         simd::internal::SSERegister_t<DataType> _register;
