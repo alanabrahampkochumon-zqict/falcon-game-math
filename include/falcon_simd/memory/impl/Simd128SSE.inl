@@ -12,6 +12,8 @@
 
 
 
+#include "Simd128SSE.h"
+
 #include <emmintrin.h>
 #include <format>
 
@@ -1636,7 +1638,7 @@ namespace falcon
         }
         else if constexpr (types::IsUByte<DataType>)
         {
-            return *this; // TODO:
+            return Simd128(_mm_srli_epi8_custom<Count>(_register));
         }
         // Signed types
         else if constexpr (types::IsQWord<DataType>)
@@ -1660,7 +1662,7 @@ namespace falcon
         }
         else // if constexpr (types::IsByte<DataType>)
         {
-            return *this; // TODO:
+            return Simd128(_mm_srai_epi8_custom<Count>(_register));
         }
     }
 
@@ -1922,7 +1924,8 @@ namespace falcon
 
     template <typename DataType, size_t Lane>
     template <uint32_t Count>
-    constexpr __m128i Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::_mm_srai_epi64_custom(const __m128i reg) noexcept
+    FALCON_INLINE constexpr __m128i Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::_mm_srai_epi64_custom(
+        const __m128i reg) noexcept
     {
         // Until AVX512F + VL there is no dedicated srai function so, we need to use xor to convert the signed
         // values to unsigned and then shifted and the sign bits.
@@ -1934,6 +1937,39 @@ namespace falcon
         const auto signIsolated  = _mm_xor_si128(reg, t);               // x xor t
         const auto unsignedShift = _mm_srli_epi64(signIsolated, Count); // (x xor t) u>> Count
         return _mm_xor_si128(unsignedShift, t);
+    }
+
+
+    template <typename DataType, size_t Lane>
+    template <uint32_t Count>
+    FALCON_INLINE constexpr __m128i Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::_mm_srli_epi8_custom(
+        const __m128i reg) noexcept
+    {
+        // Since we don't have 8-bit integral logical right shift intrinsic we need to use masks to mask out all the
+        // bits that are not overflown, and then use epi16 shifts.
+        // See _mm_srl_epi8_custom for a detailed example.
+        constexpr auto mask = 0xff << Count; // 0b11111100 (Assume Count = 2)
+        const auto maskReg  = _mm_set1_epi8(static_cast<uint8_t>(mask));
+        // This essentially pseudo-shifts by zeroing out the bit in that would have zeroed out if
+        // performed the shift.
+        const auto andReg = _mm_and_si128(reg, maskReg);
+        // The final shift, shifts the binary values to their shifted place.
+        return _mm_srli_epi16(andReg, Count);
+    }
+
+
+    template <typename DataType, size_t Lane>
+    template <uint32_t Count>
+    constexpr __m128i Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::_mm_srai_epi8_custom(const __m128i reg) noexcept
+    {
+        // For arithmetic shifts we can use the XOR trick from Hackers Delight explained in operator>> or
+        // _mm_srai_epi64_custom implementation.
+        const auto shiftedSign = _mm_srli_epi8_custom<7>(reg);                   // Extract the sign bit to the LSB
+        const auto t           = _mm_sub_epi8(_mm_setzero_si128(), shiftedSign); // t = -(x u>> 7)
+        const auto unsignedReg = _mm_xor_si128(reg, t);                          // x xor t => Remove the sign bit
+        const auto shiftedReg  = _mm_srli_epi8_custom<Count>(unsignedReg);       // x xor t u>> Count.
+        // Add back the sign bit and return
+        return _mm_xor_si128(shiftedReg, t); // ((x xor t) u>> Count) xor t
     }
 
 } // namespace falcon
