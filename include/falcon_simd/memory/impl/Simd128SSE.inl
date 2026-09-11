@@ -1668,6 +1668,43 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
+    template <uint32_t Count>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::shiftRightLogical() const noexcept
+    {
+        // Floating point types
+        if constexpr (types::IsFP64<DataType>)
+        {
+            const auto integralReg = _mm_castpd_si128(_register);
+            const auto shiftedReg  = _mm_srli_epi64(integralReg, Count);
+            return Simd128(_mm_castsi128_pd(shiftedReg));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            const auto integralReg = _mm_castps_si128(_register);
+            const auto shiftedReg  = _mm_srli_epi32(integralReg, Count);
+            return Simd128(_mm_castsi128_ps(shiftedReg));
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            return Simd128(_mm_srli_epi64(_register, Count));
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+            return Simd128(_mm_srli_epi32(_register, Count));
+        }
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            return Simd128(_mm_srli_epi16(_register, Count));
+        }
+        else // if constexpr (sizeof(DataType) == 1)
+        {
+            return Simd128(_mm_srli_epi8_custom<Count>(_register));
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::blend(const Simd128 other, const Simd128 mask) const noexcept
     {

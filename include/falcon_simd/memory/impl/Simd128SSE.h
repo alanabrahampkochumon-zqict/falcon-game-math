@@ -565,6 +565,23 @@ namespace falcon
         [[nodiscard]] constexpr Simd128 shiftRightArithmetic() const noexcept;
 
 
+        /**
+         * @brief Perform a logical right shift on this register by a compile time constant, @p Count.
+         *
+         * @tparam Count The shift amount.
+         *
+         * @relatedalso operator<<(uint32_t)
+         * @relatedalso operator<<=(uint32_t)
+         * @relatedalso operator>>(uint32_t)
+         * @relatedalso operator>>=(uint32_t)
+         * @relatedalso shiftRightLogical(uint32_t)
+         * @relatedalso shiftLeft<uint32_t>()
+         * @relatedalso shiftRightLogical<uint32_t>()
+         */
+        template <uint32_t Count>
+        [[nodiscard]] constexpr Simd128 shiftRightLogical() const noexcept;
+
+
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///   MASKING/BLENDING
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
