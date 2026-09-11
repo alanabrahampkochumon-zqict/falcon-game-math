@@ -458,7 +458,19 @@ namespace falcon
         /// Perform a logical shift right(zero extension).
         /// @warning If @p count is known at compile time then it is recommended to use @ref shiftRight<Count> as
         ///          it is faster.
-        [[nodiscard]] constexpr Simd128 shl(uint32_t count) const noexcept;
+        [[nodiscard]] constexpr Simd128 shiftRightLogical(uint32_t count) const noexcept;
+
+
+        /** Perform a logical left shift by a compile time constant @p Count.
+        * @tparam Count The shift amount.
+        *
+        * @relatedalso operator<<(uint32_t)
+        * @relatedalso operator<<=(uint32_t)
+        * @relatedalso operator>>(uint32_t)
+        * @relatedalso operator>>=(uint32_t)
+        */
+        // template <uint32_t Count>
+        // [[nodiscard]] const Simd128 s
 
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=

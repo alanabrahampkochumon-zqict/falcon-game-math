@@ -509,7 +509,7 @@ TEST_SIMD128_SHIFT_RIGHT_EQUALS_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
                                                                                                                        \
             falcon::Simd128_t<Type, Lane> reg{ data };                                                                 \
                                                                                                                        \
-            auto resultReg = reg.shl(ShiftAmount);                                                                     \
+            auto resultReg = reg.shiftRightLogical(ShiftAmount);                                                       \
             resultReg.storeAligned(result.data());                                                                     \
                                                                                                                        \
             for (size_t i = 0; i < Lane; ++i)                                                                          \

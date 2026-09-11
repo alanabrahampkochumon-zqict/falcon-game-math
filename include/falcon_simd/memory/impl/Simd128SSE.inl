@@ -1522,7 +1522,7 @@ namespace falcon
 
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
-        SimdBackend::ARCH_SSE2, DataType, Lane>::shl(uint32_t count) const noexcept
+        SimdBackend::ARCH_SSE2, DataType, Lane>::shiftRightLogical(uint32_t count) const noexcept
     {
         const auto countReg = _mm_cvtsi32_si128(count);
         /// Floating point numbers needs to be cast to use integrals since there is no
