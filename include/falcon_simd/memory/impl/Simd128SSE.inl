@@ -1623,23 +1623,6 @@ namespace falcon
             const auto shifted     = _mm_srai_epi32(integralReg, Count);
             return Simd128(_mm_castsi128_ps(shifted));
         }
-        // Unsigned types
-        else if constexpr (types::IsUQWord<DataType>)
-        {
-            return Simd128(_mm_srli_epi64(_register, Count));
-        }
-        else if constexpr (types::IsUDWord<DataType>)
-        {
-            return Simd128(_mm_srli_epi32(_register, Count));
-        }
-        else if constexpr (types::IsUWord<DataType>)
-        {
-            return Simd128(_mm_srli_epi16(_register, Count));
-        }
-        else if constexpr (types::IsUByte<DataType>)
-        {
-            return Simd128(_mm_srli_epi8_custom<Count>(_register));
-        }
         // Signed types
         else if constexpr (types::IsQWord<DataType>)
         {
@@ -1660,9 +1643,14 @@ namespace falcon
         {
             return Simd128(_mm_srai_epi16(_register, Count));
         }
-        else // if constexpr (types::IsByte<DataType>)
+        else if constexpr (types::IsByte<DataType>)
         {
             return Simd128(_mm_srai_epi8_custom<Count>(_register));
+        }
+        // Unsigned
+        else // if (std::is_unsigned_v<DataType>)
+        {
+            return shiftRightLogical<Count>();
         }
     }
 
