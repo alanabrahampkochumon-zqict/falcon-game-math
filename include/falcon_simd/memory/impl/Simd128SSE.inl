@@ -1454,24 +1454,6 @@ namespace falcon
             auto shifted     = _mm_sra_epi32(integralReg, countReg);
             return Simd128(_mm_castsi128_ps(shifted));
         }
-        // Unsigned types needs to use logical shifts
-        else if constexpr (types::IsUQWord<DataType>)
-        {
-            return Simd128(_mm_srl_epi64(_register, countReg));
-        }
-        else if constexpr (types::IsUDWord<DataType>)
-        {
-            return Simd128(_mm_srl_epi32(_register, countReg));
-        }
-        else if constexpr (types::IsUWord<DataType>)
-        {
-            return Simd128(_mm_srl_epi16(_register, countReg));
-        }
-        else if constexpr (types::IsUByte<DataType>)
-        {
-            // Custom function(not an intel intrinsic)
-            return Simd128(_mm_srl_epi8_custom(_register, count));
-        }
         // Signed Types
         else if constexpr (types::IsQWord<DataType>)
         {
@@ -1492,7 +1474,7 @@ namespace falcon
         {
             return Simd128(_mm_sra_epi16(_register, countReg));
         }
-        else // if constexpr (types::IsByte<DataType>)
+        else if constexpr (types::IsByte<DataType>)
         {
             // Hacker Delight Ch.2 (2-7)
             // t = -(x >> 7)
@@ -1506,11 +1488,16 @@ namespace falcon
             // 1101 xor 1111 = 0010      | 0101 xor 0000 = 0101      |
             // 0011 >>     3 = 0000      | 0101 >>     3 = 0001      |
             // 0000 xor 1111 = 1111      | 0000 xor 0001 = 0001      |
-            const auto isolatedSignBit = _mm_srl_epi8_custom(_register, 7); // TODO: Update to SRLI EPI CUSTOM
+            const auto isolatedSignBit = _mm_srli_epi8_custom<7>(_register);
             const auto tReg            = _mm_sub_epi8(_mm_setzero_si128(), isolatedSignBit);
             const auto xXorTReg        = _mm_xor_si128(_register, tReg);
             const auto shiftedXor      = _mm_srl_epi8_custom(xXorTReg, count);
             return Simd128(_mm_xor_si128(shiftedXor, tReg));
+        }
+        // Unsigned types
+        else // if (std::is_unsigned_v<DataType>)
+        {
+            return shiftRightLogical(count);
         }
     }
 
