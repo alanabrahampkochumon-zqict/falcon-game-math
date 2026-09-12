@@ -277,6 +277,7 @@ function(AddCompilerFlag Target Visibility Config)
     # Disable FMA if the feature set is not available, like in less than avx architectures, when simd is disabled,
     # or on neon
     if (${FALCON_SIMD_MODE} IN_LIST "FALCON_DISABLE_SIMD;FALCON_ENABLE_NEON;FALCON_ENABLE_SSE2;FALCON_ENABLE_SSE4")
+        message(STATUS "FMA disabled due to unsupported ISA. Select an architecture above AVX")
         unset(FMA_Config)
     endif ()
 
