@@ -16,6 +16,14 @@ set_property(CACHE FALCON_SIMD_MODE PROPERTY
         "FALCON_DISABLE_SIMD"
 )
 
+
+# The FMA flag will be passed-down with no compile time checks if FMA is ENABLED.
+# Auto will run a small program and detect FMA support.
+# Note: ENABLED and AUTO put the -march=native flag for GCC, and Clang.
+#       While FMA4 put the -mfma4 and FMA3 the -mfma flags respectively.
+set(FALCON_SIMD_FMA "AUTO" CACHE STRING "AUTO, ENABLED, DISABLED, FMA4(AMD BullDozer), FMA3")
+set_property(CACHE FALCON_SIMD_FMA PROPERTY STRINGS "AUTO" "ENABLED" "DISABLED" , "FMA4" , "FMA3")
+
 include(CheckCXXSourceRuns)
 include(CheckCXXCompilerFlag)
 
@@ -40,6 +48,7 @@ function(AddCompilerFlag Target Visibility Config)
     #--------------------------
     # AUTO SIMD FLAG DETECTION
     #--------------------------
+
     if (Config STREQUAL "AUTO")
         #----------------------------------------
         # SETUP COMPILER FLAGS FOR TEST PROGRAMS
@@ -53,7 +62,7 @@ function(AddCompilerFlag Target Visibility Config)
             set(TEST_FLAG_SSE2 "")
         else ()
             # GCC / Clang / AppleClang
-            set(TEST_FLAG_AVX512EX "-mavx512f;-mavx512cd;-mavx512bw;-mavx512dq;-mavx512vl")
+            set(TEST_FLAG_AVX512EX "-mavx512f;-mavx512cd;-mavx512bw;-mavx512dq;-mavx512vl;-mfma")
             set(TEST_FLAG_AVX512F "-mavx512f")
             set(TEST_FLAG_AVX2 "-mavx2")
             set(TEST_FLAG_AVX "-mavx")
@@ -192,6 +201,7 @@ function(AddCompilerFlag Target Visibility Config)
             message(STATUS "Neon detection failed!")
         endif ()
 
+
         # message(STATUS "COMPILATION")
         # message(STATUS "SSE2 ${SSE2_COMPILES}")
         # message(STATUS "SSE4 ${SSE4_COMPILES}")
@@ -220,6 +230,48 @@ function(AddCompilerFlag Target Visibility Config)
         else ()
             set(Config FALCON_DISABLE_SIMD)
         endif ()
+    endif ()
+
+    #----------------------
+    # FMA SUPPORT CHECK
+    #----------------------
+    if (FALCON_SIMD_FMA STREQUAL "AUTO")
+        if (MSVC)
+            set(TEST_FLAG_FMA "/arch:AVX2")
+        else ()
+            # GCC / Clang / AppleClang
+            set(TEST_FLAG_FMA "-mavx;-march=native")
+        endif ()
+
+        message(STATUS "Running FMA Extension Tests")
+        try_run(
+                FMA_RUNS
+                FMA_COMPILES
+                ${TEST_COMPILE_DIR}
+                "${TEST_PROG_DIR}/FMATest.cpp"
+                CMAKE_FLAGS
+                "-DCMAKE_CXX_STANDARD=17"
+                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_FMA}"
+                COMPILE_DEFINITIONS ${TEST_FLAG_FMA}
+        )
+
+        if (FMA_RUNS EQUAL 0)
+            message(STATUS "FMA detection success!")
+        else ()
+            message(STATUS "FMA detection failed!")
+        endif ()
+
+        if (FMA_RUNS EQUAL 0)
+            set(FMA_Config FALCON_ENABLE_FMA)
+        endif ()
+    endif ()
+
+    if (FALCON_SIMD_FMA STREQUAL "ENABLED")
+        set(FMA_Config FALCON_ENABLE_FMA)
+    elseif (FALCON_SIMD_FMA STREQUAL "FMA3")
+        set(FMA_Config FALCON_ENABLE_FMA3)
+    elseif (FALCON_SIMD_FMA STREQUAL "FMA4")
+        set(FMA_Config FALCON_ENABLE_FMA4)
     endif ()
 
 
@@ -267,6 +319,15 @@ function(AddCompilerFlag Target Visibility Config)
     else ()
         message(WARNING "Unsupported SIMD Flag. Refer docs for supported flags, or use 'AUTO' for automatically detecting based on system.")
         return() # Returning so that the flag will not get added!
+    endif ()
+
+
+    if (FMA_Config STREQUAL FALCON_ENABLE_FMA)
+        string(APPEND CompilerFlag ";-march=native")
+    elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA3)
+        string(APPEND CompilerFlag ";-mfma")
+    elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA4)
+        string(APPEND CompilerFlag ";-mfma4")
     endif ()
 
 
