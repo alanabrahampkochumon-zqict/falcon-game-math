@@ -1,4 +1,5 @@
 #pragma once
+#include "Simd128SSE.h"
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon
@@ -934,46 +935,31 @@ namespace falcon
                 {
                     return Simd128(_mm_mullo_epi64(_register, other.naive()));
                 }
-                else if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
-                {
-                    // Since there are no EPI64 instructions less than AVX512DQ/VL architecture
-                    // we need to resort to splitting low and high part and multiplying
-                    // We can split a 64-bit number into high and low parts A => A_Lo + A_Hi * 2^32(or << 32)
-                    // A * B = A_Lo * B_Lo + A_Lo * B_Hi << 2^32 + A_Hi * B_Lo << 2^32 + A_Hi * B_Hi << 2^64 (zero
-                    // so no calculation needed for this part)
-                    // (_, A1_Lo * B1_Lo, _, A0_Lo * B0_Lo)
-                    const __m128i lowProduct = _mm_mullo_epi32(_register, other.naive()); // A_Lo * B_Lo
-
-                    // Swap High and Low lanes
-                    // (B1_Hi, B1_Lo, B0_Hi, B0_Lo) => (B1_Lo, B1_Hi, B0_Lo, B0_Hi)
-                    const __m128i swappedB = _mm_shuffle_epi32(other.naive(), _MM_SHUFFLE(2, 3, 0, 1));
-
-                    // (A1_Hi * B1_Lo , A1_Lo, B1_Hi, A0_Hi * B0_Lo, A0_Lo * B0_Hi)
-                    const __m128i highLowProduct = _mm_mullo_epi32(_register, swappedB);
-                    const __m128i zero           = _mm_setzero_si128();
-
-                    // (0, 0, A1_Hi * B1_Lo + A1_Lo, B1_Hi, A0_Hi * B0_Lo + A0_Lo, B0_Hi)
-                    __m128i addedProd = _mm_hadd_epi32(zero, highLowProduct);
-                    // Shuffle the horizontally added product so that we can add the results together and
-                    // form the final values
-                    // The first and second to last position for shuffled can be anything as its irrelevant
-                    // but since we have zeros at 3 and 2 we can use them so the add will produce a perfect result
-                    const __m128i shuffledProd = _mm_shuffle_epi32(addedProd, _MM_SHUFFLE(3, 1, 2, 0));
-
-                    return Simd128(_mm_add_epi64(shuffledProd, lowProduct));
-                }
                 else
                 {
-                    // Since SSE2 doesn't natively support HAdd, we need to extract the elements and
-                    // do direct multiplication
-                    // TODO: Update with set/ctor init
-                    DataType a[2], b[2];
-                    storeAligned(a);
-                    other.storeAligned(b);
-                    Simd128 result{};
-                    alignas(16) DataType resultData[2]{ a[0] * b[0], a[1] * b[1] };
-                    result.loadAligned(resultData);
-                    return result;
+                    // TODO: Add an example and illustrative docs
+                    // Since there are no EPI64 instructions less than AVX512DQ/VL architecture
+                    // we need to resort to splitting low and high part and multiplying.
+                    // We can get the product of the lower half and and get the cross product (A upper x B upper)
+                    // and add them together.
+                    const auto lowProd = _mm_mul_epu32(_register, other.naive());
+
+                    // Extract the higher lanes
+                    const auto aHi = _mm_srli_epi64(_register, 32);
+                    const auto bHi = _mm_srli_epi64(other.naive(), 32);
+
+                    // Multiply A's upper part with B' lower and and vice-versa
+                    const auto aUpperProdB = _mm_mul_epu32(aHi, other.naive());
+                    const auto bUpperProdA = _mm_mul_epu32(bHi, _register);
+
+                    // Add the sums of the products
+                    const auto crossSum = _mm_add_epi64(aUpperProdB, bUpperProdA);
+                    // Shift the cross sum to the upper lanes
+                    const auto shiftedSum = _mm_slli_epi64(crossSum, 32);
+
+                    // Add the upper and lower products joining them together(Low + High << 32)
+                    return Simd128(_mm_add_epi64(lowProd, shiftedSum));
+
                 }
             }
             else if constexpr (sizeof(DataType) == 4)
