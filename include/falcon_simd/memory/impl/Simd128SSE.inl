@@ -9,12 +9,6 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-
-
-
-#include <emmintrin.h>
-#include <format>
-
 namespace falcon
 {
 
@@ -948,15 +942,15 @@ namespace falcon
                     // A * B = A_Lo * B_Lo + A_Lo * B_Hi << 2^32 + A_Hi * B_Lo << 2^32 + A_Hi * B_Hi << 2^64 (zero
                     // so no calculation needed for this part)
                     // (_, A1_Lo * B1_Lo, _, A0_Lo * B0_Lo)
-                    __m128i lowProduct = _mm_mullo_epi32(_register, other.naive()); // A_Lo * B_Lo
+                    const __m128i lowProduct = _mm_mullo_epi32(_register, other.naive()); // A_Lo * B_Lo
 
                     // Swap High and Low lanes
                     // (B1_Hi, B1_Lo, B0_Hi, B0_Lo) => (B1_Lo, B1_Hi, B0_Lo, B0_Hi)
-                    __m128i swappedB = _mm_shuffle_epi32(other.naive(), _MM_SHUFFLE(2, 3, 0, 1));
+                    const __m128i swappedB = _mm_shuffle_epi32(other.naive(), _MM_SHUFFLE(2, 3, 0, 1));
 
                     // (A1_Hi * B1_Lo , A1_Lo, B1_Hi, A0_Hi * B0_Lo, A0_Lo * B0_Hi)
-                    __m128i highLowProduct = _mm_mullo_epi32(_register, swappedB);
-                    __m128i zero           = _mm_setzero_si128();
+                    const __m128i highLowProduct = _mm_mullo_epi32(_register, swappedB);
+                    const __m128i zero           = _mm_setzero_si128();
 
                     // (0, 0, A1_Hi * B1_Lo + A1_Lo, B1_Hi, A0_Hi * B0_Lo + A0_Lo, B0_Hi)
                     __m128i addedProd = _mm_hadd_epi32(zero, highLowProduct);
@@ -964,7 +958,7 @@ namespace falcon
                     // form the final values
                     // The first and second to last position for shuffled can be anything as its irrelevant
                     // but since we have zeros at 3 and 2 we can use them so the add will produce a perfect result
-                    __m128i shuffledProd = _mm_shuffle_epi32(addedProd, _MM_SHUFFLE(3, 1, 2, 0));
+                    const __m128i shuffledProd = _mm_shuffle_epi32(addedProd, _MM_SHUFFLE(3, 1, 2, 0));
 
                     return Simd128(_mm_add_epi64(shuffledProd, lowProduct));
                 }
@@ -1425,7 +1419,7 @@ namespace falcon
                                                                                                Simd128 c) const noexcept
     {
         // if (FALCON_FMA_ENABLED &&)
-        // return (*this * b) + c;
+        return (*this * b) + c;
     }
 
 

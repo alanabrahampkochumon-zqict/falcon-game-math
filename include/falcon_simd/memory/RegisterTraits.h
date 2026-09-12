@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-
+#include "falcon_simd/utils/SimdTraits.h"
 
 /**
  * @addtogroup Falcon_Reg

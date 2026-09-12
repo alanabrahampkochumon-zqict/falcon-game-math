@@ -9,6 +9,8 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+#include "../utils/SimdTraits.h"
+
 #include <concepts>
 
 /**

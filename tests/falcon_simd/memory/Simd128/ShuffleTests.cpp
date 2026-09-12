@@ -13,6 +13,7 @@
 
 #include <array>
 #include <bit>
+#include <falcon_simd/FalconSimd.h>
 
 // TODO: Remove Preprocessor after implementing individual simd paths
 #if defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX) ||                      \
@@ -251,7 +252,6 @@ namespace
     TYPED_TEST_SUITE(Simd128ShuffleTests, Simd128BlendTestTypeHints);
 
 } // namespace
-
 
 TYPED_TEST(Simd128ShuffleTests, BlendingWithMaskReturnsRegisterWithCorrectValues)
 {

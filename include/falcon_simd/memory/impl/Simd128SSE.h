@@ -17,17 +17,18 @@
  */
 
 
-#include "../RegisterTraits.h"
 #include "falcon_core/Preprocessors.h"
 #include "falcon_core/traits/TypeHelpers.h"
+#include "falcon_simd/memory/RegisterTraits.h"
+#include "falcon_simd/utils/SimdTraits.h"
 #include "falcon_simd/utils/TypeTraits.h"
 
 #include <array>
 #include <bit>
 #include <emmintrin.h>
+#include <format>
 #include <immintrin.h>
 #include <span>
-#include <type_traits>
 #include <xmmintrin.h>
 
 namespace falcon
@@ -717,7 +718,6 @@ namespace falcon
         template <uint32_t Count>
         static constexpr __m128i _mm_srai_epi8_custom(__m128i reg) noexcept;
     };
-
 
 
 } // namespace falcon
