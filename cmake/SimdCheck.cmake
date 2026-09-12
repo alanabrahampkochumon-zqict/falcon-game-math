@@ -274,6 +274,12 @@ function(AddCompilerFlag Target Visibility Config)
         set(FMA_Config FALCON_ENABLE_FMA4)
     endif ()
 
+    # Disable FMA if the feature set is not available, like in less than avx architectures, when simd is disabled,
+    # or on neon
+    if (${FALCON_SIMD_MODE} IN_LIST "FALCON_DISABLE_SIMD;FALCON_ENABLE_NEON;FALCON_ENABLE_SSE2;FALCON_ENABLE_SSE4")
+        unset(FMA_Config)
+    endif ()
+
 
     #----------------------
     # SETUP COMPILER FLAGS
