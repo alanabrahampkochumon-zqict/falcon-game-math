@@ -6,6 +6,11 @@ set_target_properties(FalconSIMDTestSuite PROPERTIES CXX_STANDARD 20)
 set_target_properties(FalconSIMDTestSuite PROPERTIES CXX_STANDARD_REQUIRED ON)
 set_target_properties(FalconSIMDTestSuite PROPERTIES CXX_EXTENSIONS OFF)
 
+# Error with avx1-10 invalid combination
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    target_compile_options(FalconSIMDTestSuite PRIVATE -Wno-invalid-feature-combination)
+endif ()
+
 add_subdirectory(utils)
 add_subdirectory(memory)
 
