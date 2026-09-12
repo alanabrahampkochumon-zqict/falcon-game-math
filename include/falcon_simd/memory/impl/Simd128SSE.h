@@ -457,6 +457,18 @@ namespace falcon
         constexpr Simd128& operator/=(DataType scalar) noexcept;
 
 
+        /**
+         * @brief Perform a fused multiply and add (this * b + c).
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         * @param b The register to multiply with this register.
+         * @param c The register to add to the product.
+         *
+         * @return A new register with the fma result.
+         */
+        [[nodiscard]] constexpr Simd128 fma(Simd128 b, Simd128 c) const noexcept;
+
+
         // TODO: Add masked variants comparison AVX512(__mmask) and emulate
 
 

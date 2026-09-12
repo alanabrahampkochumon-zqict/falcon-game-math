@@ -9,9 +9,6 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-
-#include "falcon_simd/FalconSimd.h"
-
 #include <concepts>
 
 /**

@@ -18,7 +18,6 @@
 // FALCON_DISABLE_SIMD
 // #define FALCON_ENABLE_SSE
 
-#include "memory/Simd128.h"
 #include "falcon_core/Preprocessors.h"
 
 #include <type_traits>
@@ -150,7 +149,10 @@ inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_UNKNOWN;
 
 /// FMA SUPPORT FLAGS
 #if defined(FALCON_ENABLE_FMA) || defined(FALCON_ENABLE_FMA3) || defined(FALCON_ENABLE_FMA4)
-inline constexpr bool FMA_ENABLED = true;
+inline constexpr bool FALCON_FMA_ENABLED = true;
 #else
-inline constexpr bool FMA_ENABLED = false;
+inline constexpr bool FALCON_FMA_ENABLED = false;
 #endif
+
+/// Library Includes
+#include "memory/Simd128.h"

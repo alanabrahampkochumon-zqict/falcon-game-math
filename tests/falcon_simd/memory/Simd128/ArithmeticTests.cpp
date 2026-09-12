@@ -32,8 +32,14 @@ namespace
     class Simd128ArithmeticTests: public testing::Test
     {
     public:
-        std::array<typename T::Type, 16> lhsData = { 10, 2, 0, 3, 5, 11, 15, 3, 1, 2, 5, 12, 14, 3, 15, 12 };
-        std::array<typename T::Type, 16> rhsData = { 12, 15, 8, 1, 5, 11, 3, 28, 2, 7, 5, 6, 4, 11, 4, 6 };
+        static constexpr auto max = std::numeric_limits<typename T::Type>::max();
+        static constexpr auto min = std::numeric_limits<typename T::Type>::min();
+        // Note: Min is swapped with 1 in b to prevent seh
+        std::array<typename T::Type, 16> a = { max, min, max, min, 5, 11, 15, 3, 1, 2, 5, 12, 14, 3, 15, 12 };
+        std::array<typename T::Type, 16> b = {
+            min == 0 ? 1 : min, max, max, min == 0 ? 1 : min, 2, 3, 3, 4, 2, 2, 6, 3, 7, 5, 4, 6
+        };
+        std::array<typename T::Type, 16> c = { min, max, max, min, 15, 23, 21, 12, 17, 15, 13, 3, 2, 1, 6, 12 };
     };
     TYPED_TEST_SUITE(Simd128ArithmeticTests, Simd128RegisterTypeHints);
 
@@ -238,8 +244,8 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryMultiplication_ReturnsAValidResult)
     alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        lhs[i]      = this->lhsData[i];
-        rhs[i]      = this->rhsData[i];
+        lhs[i]      = this->a[i];
+        rhs[i]      = this->b[i];
         expected[i] = static_cast<Type>(rhs[i] * lhs[i]);
     }
 
@@ -286,8 +292,8 @@ TYPED_TEST(Simd128ArithmeticTests, CompoundMultiplication_ReturnsAValidResult)
     alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        lhs[i]      = this->lhsData[i];
-        rhs[i]      = this->rhsData[i];
+        lhs[i]      = this->a[i];
+        rhs[i]      = this->b[i];
         expected[i] = static_cast<Type>(rhs[i] * lhs[i]);
     }
 
@@ -332,8 +338,8 @@ TYPED_TEST(Simd128ArithmeticTests, DivReg_ReturnsAValidResult)
     alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        lhs[i]      = this->lhsData[i];
-        rhs[i]      = this->rhsData[i];
+        lhs[i]      = this->a[i];
+        rhs[i]      = this->b[i];
         expected[i] = static_cast<Type>(lhs[i] / rhs[i]);
     }
 
@@ -366,8 +372,8 @@ TYPED_TEST(Simd128ArithmeticTests, DivReg_MaintainsPrecisionForAtUpperAndLowerLi
     alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        lhs[i]      = this->lhsData[i];
-        rhs[i]      = this->rhsData[i];
+        lhs[i]      = this->a[i];
+        rhs[i]      = this->b[i];
         expected[i] = static_cast<Type>(lhs[i] / rhs[i]);
     }
     lhs[0]      = largestNumber;
@@ -420,7 +426,7 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryDivideOperator_ReturnsAValidResult)
     alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        lhs[i]      = this->lhsData[i];
+        lhs[i]      = this->a[i];
         expected[i] = static_cast<Type>(lhs[i] / divisor);
     }
 
@@ -453,7 +459,7 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryDivideOperator_MaintainsPrecisionForAtU
     alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        lhs[i]      = this->lhsData[i];
+        lhs[i]      = this->a[i];
         expected[i] = static_cast<Type>(lhs[i] / divisor);
     }
     lhs[0]      = largestNumber;
@@ -504,7 +510,7 @@ TYPED_TEST(Simd128ArithmeticTests, CompoundDivideOperator_ReturnsAValidResult)
     alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        lhs[i]      = this->lhsData[i];
+        lhs[i]      = this->a[i];
         expected[i] = static_cast<Type>(lhs[i] / divisor);
     }
 
@@ -537,7 +543,7 @@ TYPED_TEST(Simd128ArithmeticTests, CompoundDivideOperator_MaintainsPrecisionForA
     alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        lhs[i]      = this->lhsData[i];
+        lhs[i]      = this->a[i];
         expected[i] = static_cast<Type>(lhs[i] / divisor);
     }
     lhs[0]      = largestNumber;
@@ -573,6 +579,36 @@ TEST(Simd128ArithmeticTests, CompoundDivideOperator_WorksWithMixedNumbers)
     for (size_t i = 0; i < 4; ++i)
     {
         EXPECT_FLOAT_EQ(expected[i], result[i]);
+    }
+}
+
+
+/// @test Verify that fma operation returns a valid result (a * b + c).
+TYPED_TEST(Simd128ArithmeticTests, FMA_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    // We are swapping for the largest and smallest for the first two indices
+    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
+    alignas(16) std::array<Type, Lane> a{}, b{}, c{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        a[i]        = this->a[i];
+        b[i]        = this->b[i];
+        c[i]        = this->c[i];
+        expected[i] = static_cast<Type>(a[i] * b[i] + c[i]);
+    }
+
+
+    falcon::Simd128_t<Type, Lane> regA{ a }, regB{ b }, regC{ c };
+
+    const auto resReg = regA.fma(regB, regC);
+    resReg.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
     }
 }
 
