@@ -533,6 +533,119 @@ namespace falcon
     }
 
 
+    template <typename DataType, size_t Lane>
+    template <size_t Index>
+        requires(Index < Lane)
+    FALCON_INLINE constexpr void Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::setAt(
+        [[maybe_unused]] const DataType value) noexcept
+    {
+        // TODO: Remove may be unused.
+        if constexpr (types::IsFP64<DataType>)
+        {
+            // There is no insert instruction for pd so we need to use our knowledge of indices at compile and
+            // insert it using unpacking.
+            const auto valueReg = _mm_set1_pd(value);
+            if constexpr (Index == 0)
+            {
+                // If index is zero we can load a register with and unpack it to the lower lane
+                _register = _mm_unpackhi_pd(valueReg, _register);
+            }
+            else
+            {
+                // And if the index is 1 we can insert it to the upper lane
+                _register = _mm_unpackhi_pd(_register, valueReg);
+            }
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            // For floats we can use bit_cast and the insertion technique used by 32-bit integrals but by using a cast
+            const auto integralValue = std::bit_cast<uint32_t>(value);
+            const auto integralReg   = _mm_castps_si128(_register);
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                _register = _mm_castsi128_ps(_mm_insert_epi32(integralReg, integralValue, Index));
+            }
+            else
+            {
+                // Don't assign the upperFilledReg to _register before inserting the upper half as it can cause errors.
+                const auto upperFilledReg = _mm_insert_epi16(integralReg, integralValue & 0xFFFF, 2 * Index);
+                _register = _mm_castsi128_ps(_mm_insert_epi16(upperFilledReg, integralValue >> 16, 2 * Index + 1));
+            }
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            // Since our index is known at compile time, we can use set and unpack since it's faster
+            // than 4 insert_epi16
+            const auto valueReg = _mm_set1_epi64x(value);
+            if constexpr (Index == 0)
+            {
+                // If index is zero we can load a register with and unpack it to the lower lane
+                _register = _mm_unpackhi_epi64(valueReg, _register);
+            }
+            else
+            {
+                // And if the index is 1 we can insert it to the upper lane
+                _register = _mm_unpackhi_epi64(_register, valueReg);
+            }
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                _register = _mm_insert_epi32(_register, value, Index);
+            }
+            else
+            {
+                // SSE2 doesn't have an insert_epi16 function so we need to insert it in two parts
+                // first the lower part and then the upper part(after shifting)
+                // There are 8 16-bit lanes compared to 4 32-bit lanes so we need to use 2 * Index and 2 * Index + 1
+                // adjacent indices.
+                // [     3     ] [     2     ] [     1     ] [     0     ] 4x32
+                // [[ 7 ] [ 6 ]] [[ 5 ] [ 4 ]] [[ 3 ] [ 2 ]] [[ 1 ] [ 0 ]] 8x16
+                _register = _mm_insert_epi16(_register, value & 0xFFFF, 2 * Index);  // Insert the lower part into index
+                _register = _mm_insert_epi16(_register, value >> 16, 2 * Index + 1); // And upper part into Index + 1
+            }
+        }
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            _register = _mm_insert_epi16(_register, value, Index);
+        }
+        else // if constexpr (sizeof(DataType) == 1)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                _register = _mm_insert_epi8(_register, value, Index);
+            }
+            else
+            {
+                // For inserting the values into we can unpack the values into upper and lower lanes
+                // insert the value using _mm_insert_epi16 and pack them into the 8-bit register
+                const auto zero = _mm_setzero_si128();
+                auto lowerLane  = _mm_unpacklo_epi8(_register, zero);
+                auto upperLane  = _mm_unpackhi_epi8(_register, zero);
+                if constexpr (Index < 8) // Our data is in the lower lane
+                {
+                    lowerLane = _mm_insert_epi16(lowerLane, value, Index);
+                }
+                else
+                {
+                    // We need to subtract 8 from index since for 16 bit registers, only indices are 0-7
+                    upperLane = _mm_insert_epi16(upperLane, value, Index - 8);
+                }
+                if constexpr (std::is_signed_v<DataType>)
+                {
+                    _register = _mm_packs_epi16(lowerLane, upperLane);
+                }
+                else
+                {
+                    _register = _mm_packus_epi16(lowerLane, upperLane);
+                }
+            }
+        }
+    }
+
+
     /**************************************
      *        BITWISE OPERATIONS          *
      **************************************/

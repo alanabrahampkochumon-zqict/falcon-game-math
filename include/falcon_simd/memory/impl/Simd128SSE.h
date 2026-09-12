@@ -257,7 +257,7 @@ namespace falcon
         // TODO: Migrate runtime getAt to use a switch expression if it's faster
 
         /**
-         * Set the value at @p index to @p value.
+         * @brief Set the value at @p index to @p value.
          *
          * @param index The index of the register. Must be between 0 and Lane - 1.
          * @param value The value to set.
@@ -271,13 +271,11 @@ namespace falcon
          */
         constexpr void setAt(size_t index, DataType value) noexcept;
 
+
         /**
-         * Get the value at @p index.
+         * @brief Get the value at @p index.
          *
          * @tparam Index The index of the register. Must be between 0 and Lane - 1.
-         *
-         * @note For indices known at compile-time, use get<Index>() as it is faster
-         *       due to the availability of direct hardware intrinsic.
          *
          * @return The value at index [read-only].
          *
@@ -288,6 +286,22 @@ namespace falcon
         template <size_t Index>
             requires(Index < Lane)
         [[nodiscard]] constexpr DataType getAt() const noexcept;
+
+
+        /**
+         * @brief Set the value at @p index to @p value.
+         *
+         * @tparam Index The index of the register. Must be between 0 and Lane - 1.
+         *
+         * @return The value at index [read-only].
+         *
+         * @relatedalso getAt(size_t)
+         * @relatedalso setAt(size_t, DataType)
+         * @relatedalso getAt<size_t>()
+         */
+        template <size_t Index>
+            requires(Index < Lane)
+        constexpr void setAt(DataType value) noexcept;
 
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
