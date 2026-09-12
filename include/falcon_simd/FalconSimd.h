@@ -18,7 +18,7 @@
 // FALCON_DISABLE_SIMD
 // #define FALCON_ENABLE_SSE
 
-
+#include "memory/Simd128.h"
 #include "falcon_core/Preprocessors.h"
 
 #include <type_traits>
@@ -48,8 +48,7 @@ namespace falcon
 
 
     /// @brief Return whether a given backend belongs to ARM CPU instruction set.
-    FALCON_INLINE constexpr bool isArmISA(const SimdBackend backend)
-    { return static_cast<uint8_t>(backend) > 100; }
+    FALCON_INLINE constexpr bool isArmISA(const SimdBackend backend) { return static_cast<uint8_t>(backend) > 100; }
 
 
     // -mavx512f -mavx512cd -mavx512bw -mavx512dq -mavx512vl
@@ -149,5 +148,9 @@ inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_UNKNOWN;
 #endif
 
 
-/// Library Includes
-#include "memory/Simd128.h"
+/// FMA SUPPORT FLAGS
+#if defined(FALCON_ENABLE_FMA) || defined(FALCON_ENABLE_FMA3) || defined(FALCON_ENABLE_FMA4)
+inline constexpr bool FMA_ENABLED = true;
+#else
+inline constexpr bool FMA_ENABLED = false;
+#endif

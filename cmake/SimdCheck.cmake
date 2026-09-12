@@ -339,6 +339,6 @@ function(AddCompilerFlag Target Visibility Config)
     else ()
         target_compile_options(${Target} ${Visibility} ${CompilerFlag})
     endif ()
-    target_compile_definitions(${Target} ${Visibility} ${Config})
+    target_compile_definitions(${Target} ${Visibility} ${Config} ${FMA_Config})
 
 endfunction()
