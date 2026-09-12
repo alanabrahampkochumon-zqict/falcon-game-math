@@ -959,7 +959,6 @@ namespace falcon
 
                     // Add the upper and lower products joining them together(Low + High << 32)
                     return Simd128(_mm_add_epi64(lowProd, shiftedSum));
-
                 }
             }
             else if constexpr (sizeof(DataType) == 4)
@@ -1404,8 +1403,18 @@ namespace falcon
                                                                                     Lane>::fma(Simd128 b,
                                                                                                Simd128 c) const noexcept
     {
-        // if (FALCON_FMA_ENABLED &&)
-        return (*this * b) + c;
+        if constexpr (FALCON_FMA_ENABLED && types::IsFP64<DataType>)
+        {
+            return Simd128(_mm_fmadd_pd(_register, b.naive(), c.naive()));
+        }
+        else if constexpr (FALCON_FMA_ENABLED && types::IsFP32<DataType>)
+        {
+            return Simd128(_mm_fmadd_ps(_register, b.naive(), c.naive()));
+        }
+        else
+        {
+            return (*this * b) + c;
+        }
     }
 
 
