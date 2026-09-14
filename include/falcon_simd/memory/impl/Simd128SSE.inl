@@ -937,9 +937,14 @@ namespace falcon
                 }
                 else
                 {
-                    // TODO: Add an example and illustrative docs
                     // Since there are no EPI64 instructions less than AVX512DQ/VL architecture
                     // we need to resort to splitting low and high part and multiplying.
+                    // So, we can replace A x B with (A_Hi * 2^32 + A_Lo ) * (B_Hi * 2^32 + B_Lo)
+                    // A_Hi * 2^32 * B_Hi * 2^32 + A_Hi * 2^32 * B_Lo + B_Hi * 2^32 * A_Lo + A_Lo * B_Lo
+                    // But since the first part (A_Hi * B_Hi * 2^64) will overflow we can ignore it.
+                    // A_Lo * B_Lo + A_Hi * 2^32 * B_Lo + B_Hi * 2^32 * A_Lo
+                    // This works similar to how Base-10 multiplication can be done.
+                    // E.g: (22 * 25) => (20 + 2) * (20 + 5) = 400 + 40 + 100 + 10 = 550.
                     // We can get the product of the lower half and and get the cross product (A upper x B upper)
                     // and add them together.
                     const auto lowProd = _mm_mul_epu32(_register, other.naive());
