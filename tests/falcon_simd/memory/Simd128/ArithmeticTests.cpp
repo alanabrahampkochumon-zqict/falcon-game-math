@@ -39,7 +39,9 @@ namespace
         std::array<typename T::Type, 16> b = {
             min == 0 ? 1 : min, max, max, min == 0 ? 1 : min, 2, 3, 3, 4, 2, 2, 6, 3, 7, 5, 4, 6
         };
-        std::array<typename T::Type, 16> c = { min, max, max, min, 15, 23, 21, 12, 17, 15, 13, 3, 2, 1, 6, 12 };
+        std::array<typename T::Type, 16> c        = { min, max, max, min, 15, 23, 21, 12, 17, 15, 13, 3, 2, 1, 6, 12 };
+        std::array<typename T::Type, 16> haddData = { max / 2, min + 4, max / 4, min + 12, 5,  11, 15, 3,
+                                                      1,       2,       5,       11,       14, 3,  15, 12 };
     };
     TYPED_TEST_SUITE(Simd128ArithmeticTests, Simd128RegisterTypeHints);
 
@@ -610,6 +612,27 @@ TYPED_TEST(Simd128ArithmeticTests, FMA_ReturnsAValidResult)
     {
         EXPECT_ANY_EQ(expected[i], result[i]);
     }
+}
+
+
+TYPED_TEST(Simd128ArithmeticTests, HAdd_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    // We are swapping for the largest and smallest for the first two indices
+    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
+    alignas(16) std::array<Type, Lane> a{};
+    Type sum = 0;
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        a[i] = this->haddData[i];
+        sum += a[i];
+    }
+
+    falcon::Simd128_t<Type, Lane> regA{ a };
+    const auto result = regA.horizontalAdd();
+    EXPECT_ANY_EQ(sum, result);
 }
 
 #endif

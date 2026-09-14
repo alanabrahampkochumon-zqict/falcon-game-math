@@ -470,6 +470,13 @@ namespace falcon
         [[nodiscard]] constexpr Simd128 fma(Simd128 b, Simd128 c) const noexcept;
 
 
+        /**
+         * @brief Add together elements from all the lanes of the current register.
+         * @return The sum of elements in all the lanes.
+         */
+        [[nodiscard]] constexpr DataType horizontalAdd() const noexcept;
+
+
         // TODO: Add masked variants comparison AVX512(__mmask) and emulate
 
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "Simd128SSE.h"
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon
@@ -462,7 +463,7 @@ namespace falcon
             {
                 constexpr auto shiftAmt = Index * sizeof(DataType);
                 const auto shiftedReg   = _mm_srli_si128(_mm_castpd_si128(_register), shiftAmt);
-                return std::bit_cast<double>(_mm_cvtsi128_si64(shiftedReg));
+                return _mm_cvtsd_f64(_mm_castsi128_pd(shiftedReg));
             }
         }
         else if constexpr (types::IsFP32<DataType>)
@@ -476,7 +477,7 @@ namespace falcon
             {
                 constexpr auto shiftAmt = Index * sizeof(DataType);
                 const auto shiftedReg   = _mm_srli_si128(_mm_castps_si128(_register), shiftAmt);
-                return std::bit_cast<float>(_mm_cvtsi128_si32(shiftedReg));
+                return _mm_cvtss_f32(_mm_castsi128_ps(shiftedReg));
             }
         }
         else if constexpr (sizeof(DataType) == 8)
@@ -1418,6 +1419,57 @@ namespace falcon
         else
         {
             return (*this * b) + c;
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalAdd() const noexcept
+    {
+        if constexpr (types::IsFP64<DataType>)
+        {
+            // To add two register we can shift the register to the right by 64 place
+            // add them together and take the value at the 0th position.
+            // [A, B] +
+            // [0, A]
+            // [A, B + A]
+            const auto shifted = _mm_srli_si128(_mm_castpd_si128(_register), 64);
+            const auto sum     = _mm_add_pd(_register, _mm_castsi128_pd(shifted));
+            return std::bit_cast<double>(_mm_cvtsi128_si64(_mm_castpd_si128(sum)));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            // For FP32 we need to do 2 shifts and adds
+            // [A, B, C, D] +
+            // [0, A, B, C] Shift 1
+            // [A, B+A, C+B, D+C] +
+            // [0, 0, 0, 0,  B+A] Shift 2 (If there are only two lanes we can return the sum from here.)
+            // [A, B+A, C+B, D+C+B+A]
+            const auto firstShift  = _mm_srli_si128(_mm_castpd_si128(_register), 32);
+            const auto firstSum    = _mm_add_ps(_register, _mm_castsi128_ps(firstShift));
+            const auto secondShift = _mm_srli_si128(_mm_castpd_si128(firstSum), 64);
+            if constexpr (LaneCount == 2)
+            {
+                return std::bit_cast<float>(_mm_cvtsi128_si32(secondShift));
+            }
+            const auto secondSum = _mm_add_ps(firstSum, _mm_castsi128_ps(secondShift));
+            return std::bit_cast<float>(_mm_cvtsi128_si32(_mm_castpd_si128(secondSum)));
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            return 0;
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+            return 0;
+        }
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            return 0;
+        }
+        else // if constexpr(sizeof(DataType) == 1)
+        {
+            return 0;
         }
     }
 
