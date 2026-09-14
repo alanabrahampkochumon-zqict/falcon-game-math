@@ -670,10 +670,13 @@ namespace falcon
         constexpr Simd128 shuffle() const noexcept;
 
 
-        /// TODO: Add test for naive
-        /// @brief Get the internal register used by Simd128
+        /// @brief Get the internal register used by Simd128.
         FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept { return _register; }
-        /// TODO: Operator* as a way to get the native register
+
+
+        /// @brief Get the internal register used by Simd128.
+        FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> operator*() const noexcept { return _register; }
+
 
     private:
         simd::internal::SSERegister_t<DataType> _register;
