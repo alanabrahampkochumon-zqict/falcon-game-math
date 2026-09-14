@@ -71,6 +71,7 @@ TYPED_TEST(Simd128GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
 }
 
 
+
 TYPED_TEST(Simd128GetterSetterTests, Set_FillsUnoccupiedSpaceWithZeroes)
 {
     using Type                = typename TypeParam::Type;
@@ -200,6 +201,54 @@ TYPED_TEST(Simd128GetterSetterTests, SetAt_SetsTheValueAtAppropriateIndex)
         EXPECT_ANY_EQ(this->max, reg.getAt(i));
     }
 }
+
+
+TEST(Simd128GetterSetterTests, Integrals_Naive_ReturnsDefaultRegister)
+{
+    falcon::Simd128_t<int32_t, 4> reg{ 1, 2, 3, 4 };
+
+    const auto naiveReg = reg.naive();
+
+    std::array<int, 4> data{};
+    _mm_store_si128(reinterpret_cast<__m128i*>(data.data()), naiveReg);
+
+    EXPECT_ANY_EQ(1, data[0]);
+    EXPECT_ANY_EQ(2, data[1]);
+    EXPECT_ANY_EQ(3, data[2]);
+    EXPECT_ANY_EQ(4, data[3]);
+}
+
+
+TEST(Simd128GetterSetterTests, Float_Naive_ReturnsDefaultRegister)
+{
+    falcon::Simd128_t<float, 4> reg{ 1, 2, 3, 4 };
+
+    const auto naiveReg = reg.naive();
+
+    std::array<float, 4> data{};
+    _mm_store_ps(data.data(), naiveReg);
+
+    EXPECT_ANY_EQ(1.0f, data[0]);
+    EXPECT_ANY_EQ(2.0f, data[1]);
+    EXPECT_ANY_EQ(3.0f, data[2]);
+    EXPECT_ANY_EQ(4.0f, data[3]);
+}
+
+
+TEST(Simd128GetterSetterTests, Double_Naive_ReturnsDefaultRegister)
+{
+    falcon::Simd128_t<double, 2> reg{ 1, 2 };
+
+    const auto naiveReg = reg.naive();
+
+    std::array<double, 2> data{};
+    _mm_store_pd(data.data(), naiveReg);
+
+    EXPECT_ANY_EQ(1.0, data[0]);
+    EXPECT_ANY_EQ(2.0, data[1]);
+}
+
+
 
 using namespace simd::testing;
 

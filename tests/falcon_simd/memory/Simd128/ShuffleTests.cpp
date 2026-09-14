@@ -253,6 +253,7 @@ namespace
 
 } // namespace
 
+
 TYPED_TEST(Simd128ShuffleTests, BlendingWithMaskReturnsRegisterWithCorrectValues)
 {
     // Get all the parameters from the types
