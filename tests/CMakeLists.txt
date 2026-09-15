@@ -38,6 +38,9 @@ target_link_libraries(FGMTestSetup INTERFACE
 )
 target_compile_definitions(FGMTestSetup INTERFACE $<$<CONFIG:Debug>:ENABLE_DEBUG_TESTS>)
 
+# TODO: Remove after refactor
+AddCompilerFlag(FGMTestSetup INTERFACE ${FALCON_SIMD_MODE}) # Update to compile an executable per flag
+
 if (NONCOMPREHENSIVE)
     message(STATUS "[FGM]: Running only non-comprehensive tests")
     target_compile_definitions(FGMTestSetup INTERFACE NONCOMPREHENSIVE)

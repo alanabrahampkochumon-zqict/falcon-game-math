@@ -241,7 +241,7 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the specified location (read-only).
+         * @brief Access the element at the specified location.
          *        Provide read-write access to the element.
          *
          * @note Performs bounds checking in **DEBUG MODE**.
@@ -254,7 +254,7 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the specified location (read-only).
+         * @brief Access the element at the specified location.
          *
          * @note Performs bounds checking in **DEBUG MODE**.
          *

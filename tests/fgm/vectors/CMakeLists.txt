@@ -50,6 +50,8 @@ set_target_properties(
         CVec2Tests
         Vec3Tests
         Vec4Tests
+
+        Vec2Tests
         PROPERTIES FOLDER "Test Intermediates/FGM"
 )
 
@@ -100,4 +102,6 @@ else ()
     gtest_discover_tests(FGMVectorTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
     gtest_discover_tests(FGMVectorDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 endif ()
+
+
 
