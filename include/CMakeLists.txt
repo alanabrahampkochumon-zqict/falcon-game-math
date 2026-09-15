@@ -31,6 +31,8 @@ target_link_libraries(FGM INTERFACE
         FalconSIMD
         StrictWarnings
         ProjectSanitizers
+        FalconCore
+        FalconSIMD
 )
 
 

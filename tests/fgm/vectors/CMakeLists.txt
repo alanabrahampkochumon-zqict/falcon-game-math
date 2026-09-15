@@ -16,12 +16,14 @@ target_sources(
 
 target_compile_options(FGMVectorTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
-
+# CONSTEXPR NON_SIMD
 add_subdirectory(point2)
 add_subdirectory(point3)
 add_subdirectory(cvec2)
 add_subdirectory(vec3)
 add_subdirectory(vec4)
+# SIMD
+add_subdirectory(vec2)
 
 target_link_libraries(
         FGMVectorTests
@@ -57,6 +59,7 @@ add_executable(FGMVectorDeathTests
         cvec2/DeathTests.cpp # TODO: Add death tests here
         vec3/DeathTests.cpp
         vec4/DeathTests.cpp
+        # vec2/DeathTests.cpp # TODO: Add death tests here
 )
 set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD 20)
 set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
