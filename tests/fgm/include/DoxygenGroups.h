@@ -32,7 +32,7 @@
          */
 
             /**
-             * @defgroup FGM_CVec2_Tests 2D Vector Tests
+             * @defgroup FGM_CVec2_Tests Constexpr-Capable 2D Vector Tests
              * @brief Verification of 2D Euclidean vector operations.
              * @ingroup VectorTests
              * @{
@@ -58,6 +58,34 @@
              *   @defgroup T_FGM_CVec2_Swizzle Vector Swizzling
              * @}
              */
+
+            /**
+              * @defgroup FGM_Vec2_Tests Simd-Accelerated 2D Vector Tests
+              * @brief Verification of 2D Euclidean vector operations(Simd-Accelerated).
+              * @ingroup VectorTests
+              * @{
+              *   @defgroup T_FGM_Vec2_Access Component Access and Mutation
+              *   @defgroup T_FGM_Vec2_Alias Spatial Aliasing
+              *   @defgroup T_FGM_Vec2_Const Vector Constants
+              *   @defgroup T_FGM_Vec2_Arithmetic Arithmetic Operations(+, -, *, /)
+              *   @defgroup T_FGM_Vec2_Bool_Bit Boolean Bitwise Operation
+              *   @defgroup T_FGM_Vec2_Comp Vector Comparisons(>, >=, <, <=)
+              *   @defgroup T_FGM_Vec2_Equality Component-wise and Masked Equality and Inequality
+              *   @defgroup T_FGM_Vec2_Init Initialization
+              *   @defgroup T_FGM_Vec2_Magnitude Scalar Length(Magnitude)
+              *   @defgroup T_FGM_Vec2_Norm P-Norm (Length)
+              *   @defgroup T_FGM_Vec2_Dist Vector Distance
+              *   @defgroup T_FGM_Vec2_Normalize Vector Normalization
+              *   @defgroup T_FGM_Vec2_Product Dot and Cross Product
+              *   @defgroup T_FGM_Vec2_Proj Vector Projection
+              *   @defgroup T_FGM_Vec2_Rej Vector Rejection
+              *   @defgroup T_FGM_Vec2_String_Repr Formatted String Representation
+              *   @defgroup T_FGM_Vec2_Type_Conv Conversion Constructor
+              *   @defgroup T_FGM_Vec2_Negation Negation(-)
+              *   @defgroup T_FGM_Vec2_Utils Vector Utilities
+              *   @defgroup T_FGM_Vec2_Swizzle Vector Swizzling
+              * @}
+              */
 
 
             /**

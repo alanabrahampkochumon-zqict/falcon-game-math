@@ -24,126 +24,230 @@
      * @{
      */
 
-    /**
-     * @defgroup FGM_Core_SIMD SIMD Accelerated Math
-     * @brief Fundamental mathematical structures with SIMD acceleration.
-     * @ingroup FGM_Core
-     * @{
-     */
-
-    /** @} */
-
-
         /**
-         * @defgroup FGM_Core_Const Compile-time Math(Scalar)
-         * @brief Fundamental mathematical structures with constexpr evaluation with auto-vectorization.
+         * @defgroup FGM_Core_SIMD SIMD Accelerated Math
+         * @brief Fundamental mathematical structures with SIMD acceleration.
          * @ingroup FGM_Core
          * @{
          */
 
-        /**
-                 * @defgroup FGM_Vectors Vectors
-                 * @brief N-dimensional Euclidean vector implementations.
-                 * @ingroup FGM_Core
+            /**
+             * @defgroup FGM_Vectors Vectors
+             * @brief N-dimensional Euclidean vector implementations.
+             * @ingroup FGM_Core_SIMD
+             * @{
+             */
+
+                /**
+                 * @defgroup FGM_Point 2D Point
+                 * @brief 2-dimensional point with an implicit z-value of 1.
+                 * @ingroup FGM_Vectors
                  * @{
+                 *   @defgroup FGM_Point2_Init Constructors
+                 *   @defgroup FGM_Point2_Arithmetic Arithmetic Operations
+                 * @}
                  */
 
-                    /**
-                     * @defgroup FGM_Point 2D Point
-                     * @brief 2-dimensional point with an implicit z-value of 1.
-                     * @ingroup FGM_Vectors
-                     * @{
-                     *   @defgroup FGM_Point2_Init Constructors
-                     *   @defgroup FGM_Point2_Arithmetic Arithmetic Operations
-                     * @}
-                     */
+                /**
+                 * @defgroup FGM_Point 3D Point
+                 * @brief 3-dimensional point with an implicit w-value of 1.
+                 * @ingroup FGM_Vectors
+                 * @{
+                 *   @defgroup FGM_Point3_Init Constructors
+                 *   @defgroup FGM_Point3_Arithmetic Arithmetic Operations
+                 * @}
+                 */
 
-                    /**
-                     * @defgroup FGM_Point 3D Point
-                     * @brief 3-dimensional point with an implicit w-value of 1.
-                     * @ingroup FGM_Vectors
-                     * @{
-                     *   @defgroup FGM_Point3_Init Constructors
-                     *   @defgroup FGM_Point3_Arithmetic Arithmetic Operations
-                     * @}
-                     */
+                /**
+                 * @defgroup FGM_Vec2 2D Vectors
+                 * @brief 2-dimensional Euclidean vectors (SIMD Accelerated).
+                 * @ingroup FGM_Vectors
+                 * @{
+                 *   @defgroup FGM_Vec2_Members Class Members
+                 *   @defgroup FGM_Vec2_Init Constructors
+                 *   @defgroup FGM_Vec2_Access Accessors
+                 *   @defgroup FGM_Vec2_Arithmetic Arithmetic Operations
+                 *   @defgroup FGM_Vec2_Bitwise Boolean Bitwise Operations
+                 *   @defgroup FGM_Vec2_Equality Equality
+                 *   @defgroup FGM_Vec2_Comparison Comparisons
+                 *   @defgroup FGM_Vec2_Product Geometric Products
+                 *   @defgroup FGM_Vec2_Mag Vector Magnitude and Norms
+                 *   @defgroup FGM_Vec2_Dist Vector Distance
+                 *   @defgroup FGM_Vec2_Normalize Vector Normalization
+                 *   @defgroup FGM_Vec2_Proj Vector Projection and Rejection
+                 *   @defgroup FGM_Vec2_Alias Spatial Alias
+                 *   @defgroup FGM_Vec2_Log String Representation
+                 *   @defgroup FGM_Vec2_Const Vector Constants
+                 *   @defgroup FGM_Vec2_Utils Vector Utilities
+                 *   @defgroup FGM_Vec2_Swizzle Vector Swizzling
+                 * @}
+                 */
 
-                    /**
-                     * @defgroup FGM_CVec2 2D Vectors
-                     * @brief 2-dimensional Euclidean vectors.
-                     * @ingroup FGM_Vectors
-                     * @{
-                     *   @defgroup FGM_CVec2_Members Class Members
-                     *   @defgroup FGM_CVec2_Init Constructors
-                     *   @defgroup FGM_CVec2_Access Accessors
-                     *   @defgroup FGM_CVec2_Arithmetic Arithmetic Operations
-                     *   @defgroup FGM_CVec2_Bitwise Boolean Bitwise Operations
-                     *   @defgroup FGM_CVec2_Equality Equality
-                     *   @defgroup FGM_CVec2_Comparison Comparisons
-                     *   @defgroup FGM_CVec2_Product Geometric Products
-                     *   @defgroup FGM_CVec2_Mag Vector Magnitude and Norms
-                     *   @defgroup FGM_CVec2_Dist Vector Distance
-                     *   @defgroup FGM_CVec2_Normalize Vector Normalization
-                     *   @defgroup FGM_CVec2_Proj Vector Projection and Rejection
-                     *   @defgroup FGM_CVec2_Alias Spatial Alias
-                     *   @defgroup FGM_CVec2_Log String Representation
-                     *   @defgroup FGM_CVec2_Const Vector Constants
-                     *   @defgroup FGM_CVec2_Utils Vector Utilities
-                     *   @defgroup FGM_CVec2_Swizzle Vector Swizzling
-                     * @}
-                     */
+                /**
+                 * @defgroup FGM_Vec3 3D Vectors
+                 * @brief 3-dimensional Euclidean vectors.
+                 * @ingroup FGM_Vectors
+                 * @{
+                 *   @defgroup FGM_Vec3_Members Class Members
+                 *   @defgroup FGM_Vec3_Init Constructors
+                 *   @defgroup FGM_Vec3_Access Accessors
+                 *   @defgroup FGM_Vec3_Arithmetic Arithmetic Operations
+                 *   @defgroup FGM_Vec3_Bitwise Boolean Bitwise Operations
+                 *   @defgroup FGM_Vec3_Equality Equality
+                 *   @defgroup FGM_Vec3_Comparison Comparisons
+                 *   @defgroup FGM_Vec3_Product Geometric Products
+                 *   @defgroup FGM_Vec3_Mag Vector Magnitude and Norms
+                 *   @defgroup FGM_Vec3_Dist Vector Distance
+                 *   @defgroup FGM_Vec3_Normalize Vector Normalization
+                 *   @defgroup FGM_Vec3_Proj Vector Projection and Rejection
+                 *   @defgroup FGM_Vec3_Alias Spatial Alias
+                 *   @defgroup FGM_Vec3_Log String Representation
+                 *   @defgroup FGM_Vec3_Const Vector Constants
+                 *   @defgroup FGM_Vec3_Utils Vector Utilities
+                 *   @defgroup FGM_Vec3_Swizzle Vector Swizzling
+                 * @}
+                 */
 
-                    /**
-                     * @defgroup FGM_Vec3 3D Vectors
-                     * @brief 3-dimensional Euclidean vectors.
-                     * @ingroup FGM_Vectors
-                     * @{
-                     *   @defgroup FGM_Vec3_Members Class Members
-                     *   @defgroup FGM_Vec3_Init Constructors
-                     *   @defgroup FGM_Vec3_Access Accessors
-                     *   @defgroup FGM_Vec3_Arithmetic Arithmetic Operations
-                     *   @defgroup FGM_Vec3_Bitwise Boolean Bitwise Operations
-                     *   @defgroup FGM_Vec3_Equality Equality
-                     *   @defgroup FGM_Vec3_Comparison Comparisons
-                     *   @defgroup FGM_Vec3_Product Geometric Products
-                     *   @defgroup FGM_Vec3_Mag Vector Magnitude and Norms
-                     *   @defgroup FGM_Vec3_Dist Vector Distance
-                     *   @defgroup FGM_Vec3_Normalize Vector Normalization
-                     *   @defgroup FGM_Vec3_Proj Vector Projection and Rejection
-                     *   @defgroup FGM_Vec3_Alias Spatial Alias
-                     *   @defgroup FGM_Vec3_Log String Representation
-                     *   @defgroup FGM_Vec3_Const Vector Constants
-                     *   @defgroup FGM_Vec3_Utils Vector Utilities
-                     *   @defgroup FGM_Vec3_Swizzle Vector Swizzling
-                     * @}
-                     */
+                /**
+                 * @defgroup FGM_Vec4 4D Vectors
+                 * @brief 4-dimensional Euclidean vectors.
+                 * @ingroup FGM_Vectors
+                 * @{
+                 *   @defgroup FGM_Vec4_Members Class Members
+                 *   @defgroup FGM_Vec4_Init Constructors
+                 *   @defgroup FGM_Vec4_Access Accessors
+                 *   @defgroup FGM_Vec4_Arithmetic Arithmetic Operations
+                 *   @defgroup FGM_Vec4_Bitwise Boolean Bitwise Operations
+                 *   @defgroup FGM_Vec4_Equality Equality
+                 *   @defgroup FGM_Vec4_Comparison Comparisons
+                 *   @defgroup FGM_Vec4_Product Geometric Products
+                 *   @defgroup FGM_Vec4_Mag Vector Magnitude and Norms
+                 *   @defgroup FGM_Vec4_Dist Vector Distance
+                 *   @defgroup FGM_Vec4_Normalize Vector Normalization
+                 *   @defgroup FGM_Vec4_Proj Vector Projection and Rejection
+                 *   @defgroup FGM_Vec4_Alias Spatial Alias
+                 *   @defgroup FGM_Vec4_Log String Representation
+                 *   @defgroup FGM_Vec4_Const Vector Constants
+                 *   @defgroup FGM_Vec4_Utils Vector Utilities
+                 *   @defgroup FGM_Vec4_Swizzle Vector Swizzling
+                 * @}
+                 */
 
-                    /**
-                     * @defgroup FGM_Vec4 4D Vectors
-                     * @brief 4-dimensional Euclidean vectors.
-                     * @ingroup FGM_Vectors
-                     * @{
-                     *   @defgroup FGM_Vec4_Members Class Members
-                     *   @defgroup FGM_Vec4_Init Constructors
-                     *   @defgroup FGM_Vec4_Access Accessors
-                     *   @defgroup FGM_Vec4_Arithmetic Arithmetic Operations
-                     *   @defgroup FGM_Vec4_Bitwise Boolean Bitwise Operations
-                     *   @defgroup FGM_Vec4_Equality Equality
-                     *   @defgroup FGM_Vec4_Comparison Comparisons
-                     *   @defgroup FGM_Vec4_Product Geometric Products
-                     *   @defgroup FGM_Vec4_Mag Vector Magnitude and Norms
-                     *   @defgroup FGM_Vec4_Dist Vector Distance
-                     *   @defgroup FGM_Vec4_Normalize Vector Normalization
-                     *   @defgroup FGM_Vec4_Proj Vector Projection and Rejection
-                     *   @defgroup FGM_Vec4_Alias Spatial Alias
-                     *   @defgroup FGM_Vec4_Log String Representation
-                     *   @defgroup FGM_Vec4_Const Vector Constants
-                     *   @defgroup FGM_Vec4_Utils Vector Utilities
-                     *   @defgroup FGM_Vec4_Swizzle Vector Swizzling
-                     * @}
-                     */
+            /** @} */ // FGM_Vectors
 
-                /** @} */ // FGM_Vectors
+        /** @} */ // FGM_Core_SIMD
+
+
+        /**
+         * @defgroup FGM_Core_Const Compile-time Math (Scalar).
+         * @brief Fundamental mathematical structures with constexpr evaluation and auto-vectorization.
+         * @ingroup FGM_Core
+         * @{
+         */
+
+            /**
+             * @defgroup FGM_Vectors Vectors
+             * @brief N-dimensional Euclidean vector implementations.
+             * @ingroup FGM_Core_Const
+             * @{
+             */
+
+                /**
+                 * @defgroup FGM_Point 2D Point
+                 * @brief 2-dimensional point with an implicit z-value of 1.
+                 * @ingroup FGM_Vectors
+                 * @{
+                 *   @defgroup FGM_Point2_Init Constructors
+                 *   @defgroup FGM_Point2_Arithmetic Arithmetic Operations
+                 * @}
+                 */
+
+                /**
+                 * @defgroup FGM_Point 3D Point
+                 * @brief 3-dimensional point with an implicit w-value of 1.
+                 * @ingroup FGM_Vectors
+                 * @{
+                 *   @defgroup FGM_Point3_Init Constructors
+                 *   @defgroup FGM_Point3_Arithmetic Arithmetic Operations
+                 * @}
+                 */
+
+                /**
+                 * @defgroup FGM_CVec2 2D Vectors
+                 * @brief 2-dimensional Euclidean vectors.
+                 * @ingroup FGM_Vectors
+                 * @{
+                 *   @defgroup FGM_CVec2_Members Class Members
+                 *   @defgroup FGM_CVec2_Init Constructors
+                 *   @defgroup FGM_CVec2_Access Accessors
+                 *   @defgroup FGM_CVec2_Arithmetic Arithmetic Operations
+                 *   @defgroup FGM_CVec2_Bitwise Boolean Bitwise Operations
+                 *   @defgroup FGM_CVec2_Equality Equality
+                 *   @defgroup FGM_CVec2_Comparison Comparisons
+                 *   @defgroup FGM_CVec2_Product Geometric Products
+                 *   @defgroup FGM_CVec2_Mag Vector Magnitude and Norms
+                 *   @defgroup FGM_CVec2_Dist Vector Distance
+                 *   @defgroup FGM_CVec2_Normalize Vector Normalization
+                 *   @defgroup FGM_CVec2_Proj Vector Projection and Rejection
+                 *   @defgroup FGM_CVec2_Alias Spatial Alias
+                 *   @defgroup FGM_CVec2_Log String Representation
+                 *   @defgroup FGM_CVec2_Const Vector Constants
+                 *   @defgroup FGM_CVec2_Utils Vector Utilities
+                 *   @defgroup FGM_CVec2_Swizzle Vector Swizzling
+                 * @}
+                 */
+
+                /**
+                 * @defgroup FGM_Vec3 3D Vectors
+                 * @brief 3-dimensional Euclidean vectors.
+                 * @ingroup FGM_Vectors
+                 * @{
+                 *   @defgroup FGM_Vec3_Members Class Members
+                 *   @defgroup FGM_Vec3_Init Constructors
+                 *   @defgroup FGM_Vec3_Access Accessors
+                 *   @defgroup FGM_Vec3_Arithmetic Arithmetic Operations
+                 *   @defgroup FGM_Vec3_Bitwise Boolean Bitwise Operations
+                 *   @defgroup FGM_Vec3_Equality Equality
+                 *   @defgroup FGM_Vec3_Comparison Comparisons
+                 *   @defgroup FGM_Vec3_Product Geometric Products
+                 *   @defgroup FGM_Vec3_Mag Vector Magnitude and Norms
+                 *   @defgroup FGM_Vec3_Dist Vector Distance
+                 *   @defgroup FGM_Vec3_Normalize Vector Normalization
+                 *   @defgroup FGM_Vec3_Proj Vector Projection and Rejection
+                 *   @defgroup FGM_Vec3_Alias Spatial Alias
+                 *   @defgroup FGM_Vec3_Log String Representation
+                 *   @defgroup FGM_Vec3_Const Vector Constants
+                 *   @defgroup FGM_Vec3_Utils Vector Utilities
+                 *   @defgroup FGM_Vec3_Swizzle Vector Swizzling
+                 * @}
+                 */
+
+                /**
+                 * @defgroup FGM_Vec4 4D Vectors
+                 * @brief 4-dimensional Euclidean vectors.
+                 * @ingroup FGM_Vectors
+                 * @{
+                 *   @defgroup FGM_Vec4_Members Class Members
+                 *   @defgroup FGM_Vec4_Init Constructors
+                 *   @defgroup FGM_Vec4_Access Accessors
+                 *   @defgroup FGM_Vec4_Arithmetic Arithmetic Operations
+                 *   @defgroup FGM_Vec4_Bitwise Boolean Bitwise Operations
+                 *   @defgroup FGM_Vec4_Equality Equality
+                 *   @defgroup FGM_Vec4_Comparison Comparisons
+                 *   @defgroup FGM_Vec4_Product Geometric Products
+                 *   @defgroup FGM_Vec4_Mag Vector Magnitude and Norms
+                 *   @defgroup FGM_Vec4_Dist Vector Distance
+                 *   @defgroup FGM_Vec4_Normalize Vector Normalization
+                 *   @defgroup FGM_Vec4_Proj Vector Projection and Rejection
+                 *   @defgroup FGM_Vec4_Alias Spatial Alias
+                 *   @defgroup FGM_Vec4_Log String Representation
+                 *   @defgroup FGM_Vec4_Const Vector Constants
+                 *   @defgroup FGM_Vec4_Utils Vector Utilities
+                 *   @defgroup FGM_Vec4_Swizzle Vector Swizzling
+                 * @}
+                 */
+
+            /** @} */ // FGM_Vectors
 
         /** @} */
 
