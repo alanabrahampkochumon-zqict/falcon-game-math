@@ -40,7 +40,7 @@ namespace
             min == 0 ? 1 : min, max, max, min == 0 ? 1 : min, 2, 3, 3, 4, 2, 2, 6, 3, 7, 5, 4, 6
         };
         std::array<typename T::Type, 16> c        = { min, max, max, min, 15, 23, 21, 12, 17, 15, 13, 3, 2, 1, 6, 12 };
-        std::array<typename T::Type, 16> haddData = { max / 2, min + 4, max / 4, min + 12, 5,  11, 15, 3,
+        std::array<typename T::Type, 16> haddData = { max / 2, min + 4, max / 7, min + 12, 5,  11, 15, 3,
                                                       1,       2,       5,       11,       14, 3,  15, 12 };
     };
     TYPED_TEST_SUITE(Simd128ArithmeticTests, Simd128RegisterTypeHints);
@@ -629,6 +629,7 @@ TYPED_TEST(Simd128ArithmeticTests, HAdd_ReturnsAValidResult)
         a[i] = this->haddData[i];
         sum += a[i];
     }
+    sum = static_cast<Type>(sum);
 
     falcon::Simd128_t<Type, Lane> regA{ a };
     const auto result = regA.horizontalAdd();

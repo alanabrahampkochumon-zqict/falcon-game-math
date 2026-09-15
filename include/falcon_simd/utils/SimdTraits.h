@@ -154,3 +154,12 @@ inline constexpr bool FALCON_FMA_ENABLED = true;
 #else
 inline constexpr bool FALCON_FMA_ENABLED = false;
 #endif
+
+
+/// Force enables Horizontal Add cpu intrinsics which will be otherwise emulated (which is faster).
+/// TODO: Add this a library flag
+#ifdef FALCON_FORCE_HADD_INTRIN
+inline constexpr bool FALCON_ENABLE_HADD_INTRINSIC = true;
+#else
+inline constexpr bool FALCON_ENABLE_HADD_INTRINSIC = false;
+#endif

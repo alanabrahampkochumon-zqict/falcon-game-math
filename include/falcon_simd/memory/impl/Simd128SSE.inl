@@ -1428,48 +1428,210 @@ namespace falcon
     {
         if constexpr (types::IsFP64<DataType>)
         {
-            // To add two register we can shift the register to the right by 64 place
-            // add them together and take the value at the 0th position.
-            // [A, B] +
-            // [0, A]
-            // [A, B + A]
-            const auto shifted = _mm_srli_si128(_mm_castpd_si128(_register), 64);
-            const auto sum     = _mm_add_pd(_register, _mm_castsi128_pd(shifted));
-            return std::bit_cast<double>(_mm_cvtsi128_si64(_mm_castpd_si128(sum)));
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4 && FALCON_ENABLE_HADD_INTRINSIC)
+            {
+                const auto sum = _mm_hadd_pd(_register, _register);
+                return _mm_cvtsd_f64(sum);
+            }
+            else
+            {
+                // To add two register we can shift the register
+                // add them together and take the value at the 0th position.
+                // [A, B] +
+                // [A, A]
+                // [2A, B + A]
+                const auto shifted = _mm_shuffle_pd(_register, _register, 1);
+                const auto sum     = _mm_add_pd(_register, shifted);
+                return _mm_cvtsd_f64(sum);
+            }
         }
         else if constexpr (types::IsFP32<DataType>)
         {
-            // For FP32 we need to do 2 shifts and adds
-            // [A, B, C, D] +
-            // [0, A, B, C] Shift 1
-            // [A, B+A, C+B, D+C] +
-            // [0, 0, 0, 0,  B+A] Shift 2 (If there are only two lanes we can return the sum from here.)
-            // [A, B+A, C+B, D+C+B+A]
-            const auto firstShift  = _mm_srli_si128(_mm_castpd_si128(_register), 32);
-            const auto firstSum    = _mm_add_ps(_register, _mm_castsi128_ps(firstShift));
-            const auto secondShift = _mm_srli_si128(_mm_castpd_si128(firstSum), 64);
-            if constexpr (LaneCount == 2)
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4 && FALCON_ENABLE_HADD_INTRINSIC)
             {
-                return std::bit_cast<float>(_mm_cvtsi128_si32(secondShift));
+                // We need 2 hadd to get the sum up 4 lanes
+                // [_, _, a + b, c + d]
+                const auto firstSum = _mm_hadd_ps(_register, _register);
+                // If there are only 2 lanes we can return from here
+                if constexpr (LaneCount == 2)
+                {
+                    return _mm_cvtss_f32(firstSum);
+                }
+                else
+                {
+                    // [_, _, _, a + b + c + d]
+                    const auto secondSum = _mm_hadd_ps(firstSum, firstSum);
+                    return _mm_cvtss_f32(secondSum);
+                }
             }
-            const auto secondSum = _mm_add_ps(firstSum, _mm_castsi128_ps(secondShift));
-            return std::bit_cast<float>(_mm_cvtsi128_si32(_mm_castpd_si128(secondSum)));
+            else
+            {
+                // For FP32 we need to do 2 shifts and adds
+                // [A, B, C, D] +
+                // [A, B, A, B] Shift 1
+                // [2A, 2B, C+A, D+B] +
+                // [C+A, C+A, C+A, C+A] Shift 2
+                // [_, _, _, D+B+C+A] (_ means we don't care about those values)
+                // https://github.com/vectorclass/version2/blob/master/vectorf128.h
+                const auto firstShift  = _mm_movehl_ps(_register, _register);
+                const auto firstSum    = _mm_add_ps(_register, firstShift);
+                const auto secondShift = _mm_shuffle_ps(firstSum, firstSum, _MM_SHUFFLE(1, 1, 1, 1));
+                const auto secondSum   = _mm_add_ps(firstSum, secondShift);
+                return _mm_cvtss_f32(secondSum);
+            }
         }
         else if constexpr (sizeof(DataType) == 8)
         {
-            return 0;
+            // [a,     b]
+            // [0,     a] + (64-bit >>)
+            // [a, a + b]
+            const auto shifted = _mm_srli_si128(_register, 8);
+            const auto sum     = _mm_add_epi64(_register, shifted);
+            return static_cast<DataType>(_mm_cvtsi128_si64(sum));
         }
         else if constexpr (sizeof(DataType) == 4)
         {
-            return 0;
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4 && FALCON_ENABLE_HADD_INTRINSIC)
+            {
+                // We need 2 hadd to get the sum up 4 lanes
+                // [_, _, a + b, c + d]
+                const auto firstSum = _mm_hadd_epi32(_register, _register);
+                // If there are only 2 lanes we can return from here
+                if constexpr (LaneCount == 2)
+                {
+                    return static_cast<DataType>(_mm_cvtsi128_si32(firstSum));
+                }
+                else
+                {
+                    // [_, _, _, a + b + c + d]
+                    const auto secondSum = _mm_hadd_epi32(firstSum, firstSum);
+                    return static_cast<DataType>(_mm_cvtsi128_si32(secondSum));
+                }
+            }
+            else
+            {
+                // [a,     b,     c,     d]
+                // [0,     a,     b,     c] (32-bit >>)
+                // [a, a + b, c + b, d + c]
+                const auto firstShift = _mm_srli_si128(_register, 4);
+                const auto firstSum   = _mm_add_epi32(_register, firstShift);
+
+                // If there are only two lanes we can return from here
+                if constexpr (LaneCount == 2)
+                {
+                    return static_cast<DataType>(_mm_cvtsi128_si32(firstSum));
+                }
+                else
+                {
+                    // The sum we need are in the odd lanes
+                    // So shift the register to line up the terms
+                    // [a, a + b, c + b, d + c]
+                    // [_,     _,     _, a + b] + (64-bit >>)
+                    // [_,     _,     _, a + b + c + d]
+                    const auto secondShift = _mm_srli_si128(firstSum, 8);
+                    const auto secondSum   = _mm_add_epi32(firstSum, secondShift);
+
+                    // Then extract
+                    return static_cast<DataType>(_mm_cvtsi128_si32(secondSum));
+                }
+            }
         }
         else if constexpr (sizeof(DataType) == 2)
         {
-            return 0;
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4 && FALCON_ENABLE_HADD_INTRINSIC)
+            {
+                // We need 3 hadd to get the sum up 8 lanes
+                // NOTE: The sum in the upper and lower lanes will be the same, but we only consider the lower lanes.
+                // NOTE: The conditionals are nested since some compilers can give unreachable code warning.
+                // [_, _, _, _, a + b, c + d, e + f, g + h]
+                const auto firstSum = _mm_hadd_epi16(_register, _register);
+                // If there are only 2 lanes we can return from here
+                if constexpr (LaneCount == 2)
+                {
+                    return static_cast<DataType>(_mm_cvtsi128_si32(firstSum));
+                }
+                else
+                {
+                    // [_, _, _, _, _, _, a + b + c + d, e + f + g + h]
+                    const auto secondSum = _mm_hadd_epi16(firstSum, firstSum);
+                    // If there are only 4 lanes we can return from here
+                    // If there are only 2 lanes we can return from here
+                    if constexpr (LaneCount == 4)
+                    {
+                        return static_cast<DataType>(_mm_cvtsi128_si32(secondSum));
+                    }
+                    else
+                    {
+                        // [_, _, _, _, _, _, _, a + b + c + d + e + f + g + h]
+                        const auto thirdSum = _mm_hadd_epi16(secondSum, secondSum);
+                        return static_cast<DataType>(_mm_cvtsi128_si32(thirdSum));
+                    }
+                }
+            }
+            else
+            {
+                // [a,     b,     c,     d,     e,     f,     g,     h]
+                // [0,     a,     b,     c,     d,     e,     f,     g] (16-bit >>)
+                // [a, a + b, c + b, d + c, e + d, f + e, g + f, h + g]
+                const auto firstShift = _mm_srli_si128(_register, 2);
+                const auto firstSum   = _mm_add_epi16(_register, firstShift);
+
+                // For 2 lanes the sum will be already computed in the lower lane,
+                // so we can return from here.
+                if constexpr (LaneCount == 2)
+                {
+                    return static_cast<DataType>(_mm_cvtsi128_si32(firstSum));
+                }
+                else
+                {
+                    // The sum we need are in the odd lanes
+                    // So shift the register to line up the terms
+                    // [a, a + b, c + b,         d + c, e + d, f + e, g + f, h + g]
+                    // [_,     _,     _,         a + b,     _,     _,     _, f + e] + (32-bit >>)
+                    // [_,     _,     _, a + b + c + d,     _,     _,     _, e + f + g + h]
+                    const auto secondShift = _mm_srli_si128(firstSum, 4);
+                    const auto secondSum   = _mm_add_epi16(firstSum, secondShift);
+
+                    // For 4 lanes we can return second sum
+                    if constexpr (LaneCount == 4)
+                    {
+                        return static_cast<DataType>(_mm_cvtsi128_si32(secondSum));
+                    }
+                    else
+                    {
+                        // Again shift and add
+                        // [_,     _,     _, a + b + c + d,     _,     _,     _, e + f + g + h]
+                        // [_,     _,     _,            _,     _,     _,      _, a + b + c + d] + (64-bit >>)
+                        const auto thirdShift = _mm_srli_si128(secondSum, 8);
+                        const auto finalSum   = _mm_add_epi16(secondSum, thirdShift);
+
+                        return static_cast<DataType>(_mm_cvtsi128_si32(finalSum));
+                    }
+                }
+            }
         }
         else // if constexpr(sizeof(DataType) == 1)
         {
-            return 0;
+            // https://fgiesen.wordpress.com/2016/04/03/sse-mind-the-gap/
+            // sad_epu8 find the abs difference between a and b and the first 8 lanes and put them into
+            // first 16-bit of the upper and lower 64-bit lanes.
+            // NOTE: Only 8 lanes shown in sample, real epi8/epu8 will have 16 lanes.
+            // [h, g, f, e, d, c, b, a] = [h + g + f + e, d + c + b + a]
+            // [sum1, sum0] +
+            // [sum1, sum1] // Shifted
+            // [2sum1, sum0 + sum1]
+            const auto firstSum = _mm_sad_epu8(_register, _mm_setzero_si128());
+            if constexpr (LaneCount <= 8)
+            {
+                // If the lane count is less than 8 then all the sum will be in the lower lanes.
+                return static_cast<DataType>(_mm_cvtsi128_si32(firstSum));
+            }
+            else
+            {
+                const auto shifted   = _mm_unpackhi_epi64(firstSum, firstSum);
+                const auto secondSum = _mm_add_epi64(firstSum, shifted);
+                return static_cast<DataType>(_mm_cvtsi128_si32(secondSum));
+            }
         }
     }
 
