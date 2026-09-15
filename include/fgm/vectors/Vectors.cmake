@@ -6,8 +6,8 @@ set(FGM_VEC_HEADERS
         Point2.tpp
         Point3.h
         Point3.tpp
-        Vec2.h
-        Vec2.tpp
+        CVec2.h
+        CVec2.tpp
         Vec3.h
         Vec3.tpp
         Vec4.h

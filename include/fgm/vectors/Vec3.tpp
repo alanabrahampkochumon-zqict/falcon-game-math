@@ -36,12 +36,12 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Vec3<T>::Vec3(Vec2<T> vec, T v) noexcept: _data{ vec[0], vec[1], v }
+    FGM_INLINE constexpr Vec3<T>::Vec3(CVec2<T> vec, T v) noexcept: _data{ vec[0], vec[1], v }
     {}
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Vec3<T>::Vec3(T v, Vec2<T> vec) noexcept: _data{ v, vec[0], vec[1] }
+    FGM_INLINE constexpr Vec3<T>::Vec3(T v, CVec2<T> vec) noexcept: _data{ v, vec[0], vec[1] }
     {}
 
 
@@ -213,7 +213,7 @@ namespace fgm
         }
         else if constexpr (swizzleDimension == 2)
         {
-            return Vec2<T>(_data[Indices]...);
+            return CVec2<T>(_data[Indices]...);
         }
         else
         {

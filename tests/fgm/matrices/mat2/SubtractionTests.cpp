@@ -40,9 +40,9 @@ namespace
 
         void SetUp() override
         {
-            _matA               = { fgm::Vec2<T>(5, 6), fgm::Vec2<T>(7, 8) };
-            _matB               = { fgm::Vec2<T>(1, 2), fgm::Vec2<T>(3, 4) };
-            _expectedDifference = { fgm::Vec2<T>(4, 4), fgm::Vec2<T>(4, 4) };
+            _matA               = { fgm::CVec2<T>(5, 6), fgm::CVec2<T>(7, 8) };
+            _matB               = { fgm::CVec2<T>(1, 2), fgm::CVec2<T>(3, 4) };
+            _expectedDifference = { fgm::CVec2<T>(4, 4), fgm::CVec2<T>(4, 4) };
         }
     };
     TYPED_TEST_SUITE(Mat2SubtractionTests, SupportedArithmeticTypes);

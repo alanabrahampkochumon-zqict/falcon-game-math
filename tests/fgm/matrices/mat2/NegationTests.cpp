@@ -37,8 +37,8 @@ namespace
 
         void SetUp() override
         {
-            _mat         = { fgm::Vec2<T>(-1, 2), fgm::Vec2<T>(5, 6) };
-            _expectedMat = { fgm::Vec2<T>(1, -2), fgm::Vec2<T>(-5, -6) };
+            _mat         = { fgm::CVec2<T>(-1, 2), fgm::CVec2<T>(5, 6) };
+            _expectedMat = { fgm::CVec2<T>(1, -2), fgm::CVec2<T>(-5, -6) };
         }
     };
     TYPED_TEST_SUITE(Mat2NegationTests, SupportedSignedArithmeticTypes);

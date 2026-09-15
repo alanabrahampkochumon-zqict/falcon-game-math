@@ -19,7 +19,7 @@
 #include "fgm/matrices/Mat4.h"
 #include "fgm/matrices/Mat4x2.h"
 #include "fgm/matrices/Mat4x3.h"
-#include "fgm/vectors/Vec2.h"
+#include "fgm/vectors/CVec2.h"
 #include "fgm/vectors/Vec3.h"
 #include "fgm/vectors/Vec4.h"
 
@@ -57,7 +57,7 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Mat2x3<T>& mat, const Vec3<U>& vec) noexcept;
+    [[nodiscard]] constexpr PromotedCVec2<T, U> operator*(const Mat2x3<T>& mat, const Vec3<U>& vec) noexcept;
 
 
     /**
@@ -75,7 +75,7 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const Vec2<T>& vec, const Mat2x3<U>& mat) noexcept;
+    [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const CVec2<T>& vec, const Mat2x3<U>& mat) noexcept;
 
     /** @} */
 
@@ -101,7 +101,7 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Mat2x4<T>& mat, const Vec4<U>& vec) noexcept;
+    [[nodiscard]] constexpr PromotedCVec2<T, U> operator*(const Mat2x4<T>& mat, const Vec4<U>& vec) noexcept;
 
 
     /**
@@ -119,7 +119,7 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Vec2<T>& vec, const Mat2x4<U>& mat) noexcept;
+    [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const CVec2<T>& vec, const Mat2x4<U>& mat) noexcept;
 
     /** @} */
 
@@ -145,13 +145,13 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const Mat3x2<T>& mat, const Vec2<U>& vec) noexcept;
+    [[nodiscard]] constexpr PromotedVec3<T, U> operator*(const Mat3x2<T>& mat, const CVec2<U>& vec) noexcept;
 
 
     /**
      * @brief Multiply a 3D row vector with a 3x2 matrix.
      *
-     * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
+     * @note Promotes the result to the wider type using @ref PromotedCVec2<T, U>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
@@ -163,7 +163,7 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Vec3<T>& vec, const Mat3x2<U>& mat) noexcept;
+    [[nodiscard]] constexpr PromotedCVec2<T, U> operator*(const Vec3<T>& vec, const Mat3x2<U>& mat) noexcept;
 
     /** @} */
 
@@ -234,13 +234,13 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Mat4x2<T>& mat, const Vec2<U>& vec) noexcept;
+    [[nodiscard]] constexpr PromotedVec4<T, U> operator*(const Mat4x2<T>& mat, const CVec2<U>& vec) noexcept;
 
 
     /**
      * @brief Multiply a 4D row vector with a 4x2 matrix.
      *
-     * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
+     * @note Promotes the result to the wider type using @ref PromotedCVec2<T, U>.
      * @note Operation is restricted to numeric types via @ref StrictArithmetic.
      *
      * @tparam U Numeric type of the second matrix. Must satisfy @ref StrictArithmetic.
@@ -252,7 +252,7 @@ namespace fgm
      */
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    [[nodiscard]] constexpr PromotedVec2<T, U> operator*(const Vec4<T>& vec, const Mat4x2<U>& mat) noexcept;
+    [[nodiscard]] constexpr PromotedCVec2<T, U> operator*(const Vec4<T>& vec, const Mat4x2<U>& mat) noexcept;
 
     /** @} */
 

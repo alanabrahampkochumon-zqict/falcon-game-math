@@ -48,7 +48,7 @@ namespace
         static_assert(SCALAR_INIT_VEC.z() == 3);
         static_assert(SCALAR_INIT_VEC.w() == 4);
 
-        /// @test Verify that Vec4 can be initialized with a 2 Vec2 at compile time.
+        /// @test Verify that Vec4 can be initialized with a 2 CVec2 at compile time.
         constexpr fgm::Vec4<int> VEC2_INIT_VEC({ 1, 2 }, { 3, 4 });
         static_assert(VEC2_INIT_VEC.x() == 1);
         static_assert(VEC2_INIT_VEC.y() == 2);
@@ -108,7 +108,7 @@ TYPED_TEST(Vec4InitializationTests, ConstructorInitializesVectorsWithCorrectValu
 
 /**
  * @test Verify that the parameterized constructor correctly composes a 4D vector from
- *       two @ref fgm::Vec2 instances.
+ *       two @ref fgm::CVec2 instances.
  */
 TYPED_TEST(Vec4InitializationTests, Two2DVectorsCanInitializeA4DVector)
 {
@@ -116,8 +116,8 @@ TYPED_TEST(Vec4InitializationTests, Two2DVectorsCanInitializeA4DVector)
     const TypeParam b = static_cast<TypeParam>(1);
     const TypeParam c = static_cast<TypeParam>(6);
     const TypeParam d = static_cast<TypeParam>(4);
-    const fgm::Vec2<TypeParam> vec1(a, b);
-    const fgm::Vec2<TypeParam> vec2(c, d);
+    const fgm::CVec2<TypeParam> vec1(a, b);
+    const fgm::CVec2<TypeParam> vec2(c, d);
 
     const fgm::Vec4<TypeParam> vec(vec1, vec2);
     EXPECT_VEC_CONTAINS(vec, a, b, c, d);

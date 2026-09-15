@@ -38,7 +38,7 @@ namespace fgm
     struct Point3;
 
     template <Arithmetic T>
-    struct Vec2;
+    struct CVec2;
 
     template <Arithmetic T>
     struct Vec3;
@@ -93,16 +93,16 @@ namespace fgm
     using PromotedPoint3 = Point3<PromotedValue_t<T, U>>;
 
 
-    /** @brief Alias for @ref Vec2 with promoted value type. */
+    /** @brief Alias for @ref CVec2 with promoted value type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedVec2 = Vec2<PromotedValue_t<T, U>>;
+    using PromotedCVec2 = CVec2<PromotedValue_t<T, U>>;
 
 
-    /** @brief Alias for @ref Vec2 with a `value_type` of @ref Magnitude of the wider type. */
+    /** @brief Alias for @ref CVec2 with a `value_type` of @ref Magnitude of the wider type. */
     template <Arithmetic T, Arithmetic U>
         requires Arithmetic<PromotedValue_t<T, U>>
-    using PromotedFloatVec2 = Vec2<Magnitude<PromotedValue_t<T, U>>>;
+    using PromotedFloatCVec2 = CVec2<Magnitude<PromotedValue_t<T, U>>>;
 
 
     /** @brief Alias for @ref Vec3 with promoted value type. */

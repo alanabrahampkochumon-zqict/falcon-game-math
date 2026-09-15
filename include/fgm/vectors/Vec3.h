@@ -20,7 +20,7 @@
  */
 
 
-#include "Vec2.h"
+#include "CVec2.h"
 #include "fgm/common/Config.h"
 #include "fgm/common/Constants.h"
 #include "fgm/common/OperationStatus.h"
@@ -77,21 +77,21 @@ namespace fgm
 
 
         /**
-         * @brief Initialize @ref Vec3 with 1 @ref Vec2 and 1 @ref T value.
+         * @brief Initialize @ref Vec3 with 1 @ref CVec2 and 1 @ref T value.
          *
          * @param[in] vec The first two entries of @ref Vec3.
          * @param[in] v   The last entry of @ref Vec3.
          */
-        [[nodiscard]] constexpr Vec3(Vec2<T> vec, T v) noexcept;
+        [[nodiscard]] constexpr Vec3(CVec2<T> vec, T v) noexcept;
 
 
         /**
-         * @brief Initialize @ref Vec3 with 1 @ref T value and 1 @ref Vec2.
+         * @brief Initialize @ref Vec3 with 1 @ref T value and 1 @ref CVec2.
          *
          * @param[in] v   The first entry of @ref Vec3.
          * @param[in] vec The last two entries of @ref Vec3.
          */
-        [[nodiscard]] constexpr Vec3(T v, Vec2<T> vec) noexcept;
+        [[nodiscard]] constexpr Vec3(T v, CVec2<T> vec) noexcept;
 
 
         /**
@@ -2462,11 +2462,11 @@ namespace fgm
 
     template <typename T>
         requires Arithmetic<T>
-    Vec3(Vec2<T>, T) -> Vec3<T>;
+    Vec3(CVec2<T>, T) -> Vec3<T>;
 
     template <typename T>
         requires Arithmetic<T>
-    Vec3(T, Vec2<T>) -> Vec3<T>;
+    Vec3(T, CVec2<T>) -> Vec3<T>;
 
 } // namespace fgm
 

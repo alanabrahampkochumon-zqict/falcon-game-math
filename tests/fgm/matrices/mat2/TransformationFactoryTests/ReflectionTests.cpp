@@ -38,9 +38,9 @@ namespace
 
         void SetUp() override
         {
-            _expectedReflectionX      = { fgm::Vec2{ T(1), T(0) }, fgm::Vec2{ T(0), T(-1) } };
-            _expectedReflectionY      = { fgm::Vec2{ T(-1), T(0) }, fgm::Vec2{ T(0), T(1) } };
-            _expectedReflectionOrigin = { fgm::Vec2{ T(-1), T(0) }, fgm::Vec2{ T(0), T(-1) } };
+            _expectedReflectionX      = { fgm::CVec2{ T(1), T(0) }, fgm::CVec2{ T(0), T(-1) } };
+            _expectedReflectionY      = { fgm::CVec2{ T(-1), T(0) }, fgm::CVec2{ T(0), T(1) } };
+            _expectedReflectionOrigin = { fgm::CVec2{ T(-1), T(0) }, fgm::CVec2{ T(0), T(-1) } };
         }
     };
     TYPED_TEST_SUITE(Mat2ReflectionFactoryTests, SupportedSignedArithmeticTypes);

@@ -38,9 +38,9 @@ namespace
 
         void SetUp() override
         {
-            _matA        = { fgm::Vec2<T>(1, 2), fgm::Vec2<T>(3, 4) };
-            _matB        = { fgm::Vec2<T>(5, 6), fgm::Vec2<T>(7, 8) };
-            _expectedSum = { fgm::Vec2<T>(6, 8), fgm::Vec2<T>(10, 12) };
+            _matA        = { fgm::CVec2<T>(1, 2), fgm::CVec2<T>(3, 4) };
+            _matB        = { fgm::CVec2<T>(5, 6), fgm::CVec2<T>(7, 8) };
+            _expectedSum = { fgm::CVec2<T>(6, 8), fgm::CVec2<T>(10, 12) };
         }
     };
     TYPED_TEST_SUITE(Mat2AdditionTests, SupportedArithmeticTypes);
@@ -82,8 +82,8 @@ TYPED_TEST(Mat2AdditionTests, PlusOperator_ReturnsMatrixSum)
 
 TEST(Mat2AdditionTests, PlusOperator_MixedType_PromotesType)
 {
-    const fgm::Mat2 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f } };
-    const fgm::Mat2 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 } };
+    const fgm::Mat2 mat1{ fgm::CVec2{ 1.0f, 2.0f }, fgm::CVec2{ -3.0f, -4.0f } };
+    const fgm::Mat2 mat2{ fgm::CVec2{ 10.0, 2.0 }, fgm::CVec2{ 3.0, 8.0 } };
     [[maybe_unused]] const fgm::Mat2 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
@@ -99,8 +99,8 @@ TYPED_TEST(Mat2AdditionTests, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 
 TEST(Mat2AdditionTests, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Mat2 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f } };
-    const fgm::Mat2 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 } };
+    fgm::Mat2 mat1{ fgm::CVec2{ 1.0f, 2.0f }, fgm::CVec2{ -3.0f, -4.0f } };
+    const fgm::Mat2 mat2{ fgm::CVec2{ 10.0, 2.0 }, fgm::CVec2{ 3.0, 8.0 } };
 
     mat1 += mat2;
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);

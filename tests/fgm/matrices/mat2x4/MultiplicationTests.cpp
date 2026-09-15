@@ -40,15 +40,15 @@ namespace
 
         void SetUp() override
         {
-            _mat                 = { fgm::Vec2{ T(7), T(13) }, fgm::Vec2{ T(5), T(4) }, fgm::Vec2{ T(11), T(2) },
-                                     fgm::Vec2{ T(0), T(5) } };
+            _mat                 = { fgm::CVec2{ T(7), T(13) }, fgm::CVec2{ T(5), T(4) }, fgm::CVec2{ T(11), T(2) },
+                                     fgm::CVec2{ T(0), T(5) } };
             _scalar              = T(2.123456789123456);
-            _expectedFloatingMat = { fgm::Vec2{ T(14.864197523864192), T(27.604938258604928) },
-                                     fgm::Vec2{ T(10.61728394561728), T(8.493827156493824) },
-                                     fgm::Vec2{ T(23.358024680358014), T(4.246913578246912) },
-                                     fgm::Vec2{ T(0.0), T(10.61728394561728) } };
-            _expectedIntegralMat = { fgm::Vec2{ T(14), T(26) }, fgm::Vec2{ T(10), T(8) }, fgm::Vec2{ T(22), T(4) },
-                                     fgm::Vec2{ T(0), T(10) } };
+            _expectedFloatingMat = { fgm::CVec2{ T(14.864197523864192), T(27.604938258604928) },
+                                     fgm::CVec2{ T(10.61728394561728), T(8.493827156493824) },
+                                     fgm::CVec2{ T(23.358024680358014), T(4.246913578246912) },
+                                     fgm::CVec2{ T(0.0), T(10.61728394561728) } };
+            _expectedIntegralMat = { fgm::CVec2{ T(14), T(26) }, fgm::CVec2{ T(10), T(8) }, fgm::CVec2{ T(22), T(4) },
+                                     fgm::CVec2{ T(0), T(10) } };
         }
     };
     TYPED_TEST_SUITE(Mat2x4ScalarMultiplicationTestsTests, SupportedArithmeticTypes);

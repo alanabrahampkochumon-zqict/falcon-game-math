@@ -35,17 +35,17 @@ namespace fgm
 
     template <Arithmetic T>
     FGM_INLINE constexpr Mat2<T>::Mat2(const T m00, const T m01, const T m10, const T m11) noexcept
-        : _data{ Vec2<T>(m00, m10), Vec2<T>(m01, m11) }
+        : _data{ CVec2<T>(m00, m10), CVec2<T>(m01, m11) }
     {}
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat2<T>::Mat2(const Vec2<T>& col0, const Vec2<T>& col1) noexcept: _data{ col0, col1 }
+    FGM_INLINE constexpr Mat2<T>::Mat2(const CVec2<T>& col0, const CVec2<T>& col1) noexcept: _data{ col0, col1 }
     {}
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat2<T>::Mat2(const T d0, const T d1) noexcept: _data{ Vec2<T>(d0, 0), Vec2<T>(0, d1) }
+    FGM_INLINE constexpr Mat2<T>::Mat2(const T d0, const T d1) noexcept: _data{ CVec2<T>(d0, 0), CVec2<T>(0, d1) }
     {}
 
 
@@ -69,14 +69,14 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Vec2<T>& Mat2<T>::operator[](const std::size_t col) noexcept
+    FGM_INLINE constexpr CVec2<T>& Mat2<T>::operator[](const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
     template <Arithmetic T>
-    FGM_INLINE constexpr const Vec2<T>& Mat2<T>::operator[](const std::size_t col) const noexcept
+    FGM_INLINE constexpr const CVec2<T>& Mat2<T>::operator[](const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
@@ -254,7 +254,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec2<T, U> Mat2<T>::operator*(const Vec2<U>& vec) const noexcept
+    FGM_INLINE constexpr PromotedCVec2<T, U> Mat2<T>::operator*(const CVec2<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -264,7 +264,7 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vec2<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
+                return CVec2<R>(std::fma(static_cast<R>(_data[0][0]), static_cast<R>(vec[0]),
                                         static_cast<R>(_data[1][0]) * static_cast<R>(vec[1])),
                                std::fma(static_cast<R>(_data[0][1]), static_cast<R>(vec[0]),
                                         static_cast<R>(_data[1][1]) * static_cast<R>(vec[1])));
@@ -277,13 +277,13 @@ namespace fgm
         R y =
             static_cast<R>(_data[0][1]) * static_cast<R>(vec[0]) + static_cast<R>(_data[1][1]) * static_cast<R>(vec[1]);
 
-        return Vec2<R>(x, y);
+        return CVec2<R>(x, y);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec2<T, U> operator*(const Vec2<T>& vec, const Mat2<U>& matrix) noexcept
+    FGM_INLINE constexpr PromotedCVec2<T, U> operator*(const CVec2<T>& vec, const Mat2<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -292,7 +292,7 @@ namespace fgm
         {
             if (!std::is_constant_evaluated())
             {
-                return Vec2<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
+                return CVec2<R>(std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 0)),
                                         static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 0))),
                                std::fma(static_cast<R>(vec[0]), static_cast<R>(matrix(0, 1)),
                                         static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1))));
@@ -305,13 +305,13 @@ namespace fgm
         R y = static_cast<R>(vec[0]) * static_cast<R>(matrix(0, 1)) +
             static_cast<R>(vec[1]) * static_cast<R>(matrix(1, 1));
 
-        return Vec2<R>(x, y);
+        return CVec2<R>(x, y);
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr Vec2<T>& operator*=(Vec2<T>& vec, const Mat2<U>& matrix) noexcept
+    FGM_INLINE constexpr CVec2<T>& operator*=(CVec2<T>& vec, const Mat2<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -362,8 +362,8 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
-        _data[0]       = static_cast<Vec2<T>>(mat[0]);
-        _data[1]       = static_cast<Vec2<T>>(mat[1]);
+        _data[0]       = static_cast<CVec2<T>>(mat[0]);
+        _data[1]       = static_cast<CVec2<T>>(mat[1]);
         return *this;
     }
 

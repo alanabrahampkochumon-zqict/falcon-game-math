@@ -37,7 +37,7 @@ namespace
 
         void SetUp() override
         {
-            _expectedMat = { fgm::Vec2{ T(5.3821839321), T(0) }, fgm::Vec2{ T(0), T(5.3821839321) } };
+            _expectedMat = { fgm::CVec2{ T(5.3821839321), T(0) }, fgm::CVec2{ T(0), T(5.3821839321) } };
             _scale       = T(5.3821839321);
         }
     };
@@ -59,7 +59,7 @@ namespace
 
         void SetUp() override
         {
-            _expectedMat = { fgm::Vec2{ T(5.3821839321), T(0) }, fgm::Vec2{ T(0), T(8.1234921348) } };
+            _expectedMat = { fgm::CVec2{ T(5.3821839321), T(0) }, fgm::CVec2{ T(0), T(8.1234921348) } };
             _scaleX      = T(5.3821839321);
             _scaleY      = T(8.1234921348);
         }

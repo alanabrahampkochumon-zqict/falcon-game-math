@@ -34,8 +34,8 @@ namespace
 
         void SetUp() override
         {
-            _matA        = { fgm::Vec2<T>(-1, 2), fgm::Vec2<T>(5, 6), fgm::Vec2<T>(0, 15), fgm::Vec2<T>(1, 3) };
-            _expectedMat = { fgm::Vec2<T>(1, -2), fgm::Vec2<T>(-5, -6), fgm::Vec2<T>(0, -15), fgm::Vec2<T>(-1, -3) };
+            _matA        = { fgm::CVec2<T>(-1, 2), fgm::CVec2<T>(5, 6), fgm::CVec2<T>(0, 15), fgm::CVec2<T>(1, 3) };
+            _expectedMat = { fgm::CVec2<T>(1, -2), fgm::CVec2<T>(-5, -6), fgm::CVec2<T>(0, -15), fgm::CVec2<T>(-1, -3) };
         }
     };
     /** @brief Test fixture for @ref fgm::Mat2x4 negation, parameterized by @ref SupportedSignedArithmeticTypes. */

@@ -65,9 +65,9 @@ namespace
 
         void SetUp() override
         {
-            _matrix         = { fgm::Vec2<T>{ 7, 3 }, fgm::Vec2<T>{ 1, 6 } };
+            _matrix         = { fgm::CVec2<T>{ 7, 3 }, fgm::CVec2<T>{ 1, 6 } };
             _scalar         = T(3);
-            _expectedMatrix = { fgm::Vec2{ T(2.333333333333333), T(1) }, fgm::Vec2{ T(0.3333333333333333), T(2) } };
+            _expectedMatrix = { fgm::CVec2{ T(2.333333333333333), T(1) }, fgm::CVec2{ T(0.3333333333333333), T(2) } };
         }
     };
     TYPED_TEST_SUITE(Mat2DivisionTests, SupportedArithmeticTypes);
@@ -79,11 +79,11 @@ namespace
     class Mat2InverseSingularTests: public testing::TestWithParam<fgm::Mat2<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(Mat2SingularMatrixInverse, Mat2InverseSingularTests,
-                             ::testing::Values(fgm::Mat2{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ 1.0f, 2.0f } },
-                                               fgm::Mat2{ fgm::Vec2{ 2.0f, 2.0f }, fgm::Vec2{ 2.0f, 2.0f } },
-                                               fgm::Mat2{ fgm::Vec2{ 3.0f, 2.0f }, fgm::Vec2{ 6.0f, 4.0f } },
-                                               fgm::Mat2{ fgm::Vec2{ 0.0f, 0.0f }, fgm::Vec2{ 4.0f, 5.0f } },
-                                               fgm::Mat2{ fgm::Vec2{ 0.0f, 3.0f }, fgm::Vec2{ 0.0f, 5.0f } }));
+                             ::testing::Values(fgm::Mat2{ fgm::CVec2{ 1.0f, 2.0f }, fgm::CVec2{ 1.0f, 2.0f } },
+                                               fgm::Mat2{ fgm::CVec2{ 2.0f, 2.0f }, fgm::CVec2{ 2.0f, 2.0f } },
+                                               fgm::Mat2{ fgm::CVec2{ 3.0f, 2.0f }, fgm::CVec2{ 6.0f, 4.0f } },
+                                               fgm::Mat2{ fgm::CVec2{ 0.0f, 0.0f }, fgm::CVec2{ 4.0f, 5.0f } },
+                                               fgm::Mat2{ fgm::CVec2{ 0.0f, 3.0f }, fgm::CVec2{ 0.0f, 5.0f } }));
 
 
 
@@ -122,7 +122,7 @@ TEST_P(Mat2IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 TEST_P(Mat2ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec2<int>::zero()), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::CVec2<int>::zero()), "");
 }
 
 TEST_P(Mat2IndexingTests, OutOfBoundMutationTriggersAssertInDebugMode)

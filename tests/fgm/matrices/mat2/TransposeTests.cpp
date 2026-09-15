@@ -39,8 +39,8 @@ namespace
 
         void SetUp() override
         {
-            _matrix            = { fgm::Vec2{ T(1), T(2) }, fgm::Vec2{ T(3), T(4) } };
-            _expectedTranspose = { fgm::Vec2{ T(1), T(3) }, fgm::Vec2{ T(2), T(4) } };
+            _matrix            = { fgm::CVec2{ T(1), T(2) }, fgm::CVec2{ T(3), T(4) } };
+            _expectedTranspose = { fgm::CVec2{ T(1), T(3) }, fgm::CVec2{ T(2), T(4) } };
         }
     };
     TYPED_TEST_SUITE(Mat2TransposeTests, SupportedTypes);

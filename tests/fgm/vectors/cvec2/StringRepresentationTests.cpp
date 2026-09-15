@@ -3,19 +3,19 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Vec2 string representation.
+ * @brief Verify @ref fgm::CVec2 string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
-#include "Vec2TestSetup.h"
+#include "CVec2TestSetup.h"
 
 #include <sstream>
 
 
 /**
- * @addtogroup T_FGM_Vec2_String_Repr
+ * @addtogroup T_FGM_CVec2_String_Repr
  * @{
  */
 
@@ -26,9 +26,9 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 string representation.
+     * @brief Test fixture for @ref fgm::CVec2 string representation.
      */
-    class Vec2StringRepresentationTests: public testing::Test
+    class CVec2StringRepresentationTests: public testing::Test
     {
     protected:
         /** @brief Switch to use full precision for testing. */
@@ -45,9 +45,9 @@ namespace
  *           RUNTIME TESTS            *
  **************************************/
 
-TEST_F(Vec2StringRepresentationTests, IntegralVector_ReturnsFormattedString)
+TEST_F(CVec2StringRepresentationTests, IntegralVector_ReturnsFormattedString)
 {
-    const fgm::Vec2 vec(1, 2);
+    const fgm::CVec2 vec(1, 2);
     std::stringstream ss;
 
     ss << vec;
@@ -56,9 +56,9 @@ TEST_F(Vec2StringRepresentationTests, IntegralVector_ReturnsFormattedString)
 }
 
 
-TEST_F(Vec2StringRepresentationTests, FloatingPointVector_ReturnsFormattedString)
+TEST_F(CVec2StringRepresentationTests, FloatingPointVector_ReturnsFormattedString)
 {
-    const fgm::Vec2 vec(1.2345f, 2.0f);
+    const fgm::CVec2 vec(1.2345f, 2.0f);
     std::stringstream ss;
 
     ss << vec;
@@ -67,9 +67,9 @@ TEST_F(Vec2StringRepresentationTests, FloatingPointVector_ReturnsFormattedString
 }
 
 
-TEST_F(Vec2StringRepresentationTests, DoublePrecisionFloatingPointVector_ReturnsFormattedString)
+TEST_F(CVec2StringRepresentationTests, DoublePrecisionFloatingPointVector_ReturnsFormattedString)
 {
-    const fgm::Vec2 vec(1.2345789777, 2.65831);
+    const fgm::CVec2 vec(1.2345789777, 2.65831);
     std::stringstream ss;
 
     ss << vec;

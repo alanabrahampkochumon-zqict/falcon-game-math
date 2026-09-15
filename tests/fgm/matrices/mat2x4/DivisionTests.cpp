@@ -39,11 +39,11 @@ namespace
 
         void SetUp() override
         {
-            _matrix         = { fgm::Vec2{ T(7), T(3) }, fgm::Vec2{ T(1), T(6) }, fgm::Vec2{ T(3), T(9) },
-                                fgm::Vec2{ T(0), T(24) } };
+            _matrix         = { fgm::CVec2{ T(7), T(3) }, fgm::CVec2{ T(1), T(6) }, fgm::CVec2{ T(3), T(9) },
+                                fgm::CVec2{ T(0), T(24) } };
             _scalar         = T(3);
-            _expectedMatrix = { fgm::Vec2{ T(2.333333333333333), T(1) }, fgm::Vec2{ T(0.3333333333333333), T(2) },
-                                fgm::Vec2{ T(1), T(3) }, fgm::Vec2{ T(0), T(8) } };
+            _expectedMatrix = { fgm::CVec2{ T(2.333333333333333), T(1) }, fgm::CVec2{ T(0.3333333333333333), T(2) },
+                                fgm::CVec2{ T(1), T(3) }, fgm::CVec2{ T(0), T(8) } };
         }
     };
     TYPED_TEST_SUITE(Mat2x4DivisionTests, SupportedArithmeticTypes);

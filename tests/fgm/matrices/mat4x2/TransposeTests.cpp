@@ -40,8 +40,8 @@ namespace
         void SetUp() override
         {
             _matrix            = { fgm::Vec4{ T(1), T(2), T(3), T(4) }, fgm::Vec4{ T(5), T(6), T(7), T(8) } };
-            _expectedTranspose = { fgm::Vec2{ T(1), T(5) }, fgm::Vec2{ T(2), T(6) }, fgm::Vec2{ T(3), T(7) },
-                                   fgm::Vec2{ T(4), T(8) } };
+            _expectedTranspose = { fgm::CVec2{ T(1), T(5) }, fgm::CVec2{ T(2), T(6) }, fgm::CVec2{ T(3), T(7) },
+                                   fgm::CVec2{ T(4), T(8) } };
         }
     };
     TYPED_TEST_SUITE(Mat4x2TransposeTests, SupportedTypes);
@@ -58,24 +58,24 @@ namespace
         constexpr fgm::Mat4x2 MAT(1, 2, 3, 4, 5, 6, 7, 8);
 
         // NOTE: The matrix takes elements in row, col order
-        //       but when compared with Vec2, we are taking col, row order.
-        //       That's why Vec2(1, 2) is the transpose and not Vec2(1, 3)
+        //       but when compared with CVec2, we are taking col, row order.
+        //       That's why CVec2(1, 2) is the transpose and not CVec2(1, 3)
 
         /// @test Verify matrix transpose is returns a 2x4 matrix with swapped rows and
         ///       columns at compile time.
         constexpr auto TRANSPOSE_MAT = MAT.transpose();
-        static_assert(TRANSPOSE_MAT[0] == fgm::Vec2(1, 2));
-        static_assert(TRANSPOSE_MAT[1] == fgm::Vec2(3, 4));
-        static_assert(TRANSPOSE_MAT[2] == fgm::Vec2(5, 6));
-        static_assert(TRANSPOSE_MAT[3] == fgm::Vec2(7, 8));
+        static_assert(TRANSPOSE_MAT[0] == fgm::CVec2(1, 2));
+        static_assert(TRANSPOSE_MAT[1] == fgm::CVec2(3, 4));
+        static_assert(TRANSPOSE_MAT[2] == fgm::CVec2(5, 6));
+        static_assert(TRANSPOSE_MAT[3] == fgm::CVec2(7, 8));
 
         /// @test Verify matrix transpose using static variant returns a 2x4 matrix with
         ///       swapped rows and columns at compile time.
         constexpr auto TRANSPOSE_MAT_STATIC = fgm::Mat4x2<int>::transpose(MAT);
-        static_assert(TRANSPOSE_MAT_STATIC[0] == fgm::Vec2(1, 2));
-        static_assert(TRANSPOSE_MAT_STATIC[1] == fgm::Vec2(3, 4));
-        static_assert(TRANSPOSE_MAT_STATIC[2] == fgm::Vec2(5, 6));
-        static_assert(TRANSPOSE_MAT_STATIC[3] == fgm::Vec2(7, 8));
+        static_assert(TRANSPOSE_MAT_STATIC[0] == fgm::CVec2(1, 2));
+        static_assert(TRANSPOSE_MAT_STATIC[1] == fgm::CVec2(3, 4));
+        static_assert(TRANSPOSE_MAT_STATIC[2] == fgm::CVec2(5, 6));
+        static_assert(TRANSPOSE_MAT_STATIC[3] == fgm::CVec2(7, 8));
 
     } // namespace static_tests
 

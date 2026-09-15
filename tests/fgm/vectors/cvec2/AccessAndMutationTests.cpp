@@ -3,20 +3,20 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 03, 2026
  *
- * @brief Verify @ref fgm::Vec2 accessors and mutators.
+ * @brief Verify @ref fgm::CVec2 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
 
-#include "Vec2TestSetup.h"
+#include "CVec2TestSetup.h"
 
 
 
 
 /**
- * @addtogroup T_FGM_Vec2_Access
+ * @addtogroup T_FGM_CVec2_Access
  * @{
  */
 
@@ -28,7 +28,7 @@ namespace
 
     namespace
     {
-        constexpr fgm::Vec2 vector(1, 2);
+        constexpr fgm::CVec2 vector(1, 2);
 
         /// @test Verify that vector is accessible as <x, y> at compile time.
         static_assert(vector.x() == 1);
@@ -51,9 +51,9 @@ namespace
  **************************************/
 
 /** @test Verify that the components are accessible via named spatial aliases (x, y). */
-TEST(Vec2AccessTests, AccessibleAsXYZW)
+TEST(CVec2AccessTests, AccessibleAsXYZW)
 {
-    static const fgm::Vec2 vec(3.0f, 1.0f);
+    static const fgm::CVec2 vec(3.0f, 1.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.x());
     EXPECT_FLOAT_EQ(1.0f, vec.y());
@@ -61,9 +61,9 @@ TEST(Vec2AccessTests, AccessibleAsXYZW)
 
 
 /** @test Verify that the components are accessible via named spatial aliases (s, t). */
-TEST(Vec2AccessTests, AccessibleAsSTPQ)
+TEST(CVec2AccessTests, AccessibleAsSTPQ)
 {
-    const fgm::Vec2 vec(3.0f, 1.0f);
+    const fgm::CVec2 vec(3.0f, 1.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.s());
     EXPECT_FLOAT_EQ(1.0f, vec.t());
@@ -71,9 +71,9 @@ TEST(Vec2AccessTests, AccessibleAsSTPQ)
 
 
 /** @test Verify that the components are accessible via named spatial aliases (r, g). */
-TEST(Vec2AccessTests, AccessibleAsRGBA)
+TEST(CVec2AccessTests, AccessibleAsRGBA)
 {
-    const fgm::Vec2 vec(3.0f, 1.0f);
+    const fgm::CVec2 vec(3.0f, 1.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.r());
     EXPECT_FLOAT_EQ(1.0f, vec.g());
@@ -81,9 +81,9 @@ TEST(Vec2AccessTests, AccessibleAsRGBA)
 
 
 /** @test Verify that the components are accessible via subscript indexing for reads. */
-TEST(Vec2AccessTests, AccessibleAsArray)
+TEST(CVec2AccessTests, AccessibleAsArray)
 {
-    const fgm::Vec2 vec(3.0f, 1.0f);
+    const fgm::CVec2 vec(3.0f, 1.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
@@ -96,9 +96,9 @@ TEST(Vec2AccessTests, AccessibleAsArray)
  **************************************/
 
 /** @test Verify that the components can be mutated via named spatial aliases (x, y). */
-TEST(Vec2MutationTests, ElementsCanBeMutatedUsingXYZW)
+TEST(CVec2MutationTests, ElementsCanBeMutatedUsingXYZW)
 {
-    fgm::Vec2<float> vec;
+    fgm::CVec2<float> vec;
 
     vec.x() = 3.0f;
     vec.y() = 1.0f;
@@ -109,9 +109,9 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingXYZW)
 
 
 /** @test Verify that the components can be mutated via named spatial aliases (s, t). */
-TEST(Vec2MutationTests, ElementsCanBeMutatedUsingSTPQ)
+TEST(CVec2MutationTests, ElementsCanBeMutatedUsingSTPQ)
 {
-    fgm::Vec2<float> vec;
+    fgm::CVec2<float> vec;
 
     vec.s() = 3.0f;
     vec.t() = 1.0f;
@@ -122,9 +122,9 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingSTPQ)
 
 
 /** @test Verify that the components can be mutated via named spatial aliases (r, g). */
-TEST(Vec2MutationTests, ElementsCanBeMutatedUsingRGBA)
+TEST(CVec2MutationTests, ElementsCanBeMutatedUsingRGBA)
 {
-    fgm::Vec2<float> vec;
+    fgm::CVec2<float> vec;
 
     vec.r() = 3.0f;
     vec.g() = 1.0f;
@@ -135,9 +135,9 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingRGBA)
 
 
 /** @test Verify that the components are accessible via subscript indexing for writing. */
-TEST(Vec2MutationTests, ElementsCanBeMutatedUsingIndex)
+TEST(CVec2MutationTests, ElementsCanBeMutatedUsingIndex)
 {
-    fgm::Vec2<float> vec;
+    fgm::CVec2<float> vec;
 
     vec[0] = 3.0f;
     vec[1] = 1.0f;

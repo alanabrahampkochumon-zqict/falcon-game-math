@@ -11,14 +11,14 @@
 
 
 #include "CommonSetup.h"
-#include "Vec2TestSetup.h"
+#include "CVec2TestSetup.h"
 
 #include <numbers>
 
 
 
 /**
- * @addtogroup T_FGM_Vec2_Dist
+ * @addtogroup T_FGM_CVec2_Dist
  * @{
  */
 
@@ -29,14 +29,14 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref Vec2 distance functions.
+     * @brief Test fixture for @ref CVec2 distance functions.
      * @tparam T The scalar type (int, float, double...) of the vector components.
      */
     template <typename T>
-    class Vec2DistanceTests: public testing::Test
+    class CVec2DistanceTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vecA, _vecB;
+        fgm::CVec2<T> _vecA, _vecB;
         fgm::Magnitude<T> _dist;
         T _distSq, _distManhattan, _distChebyshev;
 
@@ -52,18 +52,18 @@ namespace
             _distChebyshev = T(4);
         }
     };
-    TYPED_TEST_SUITE(Vec2DistanceTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(CVec2DistanceTests, SupportedArithmeticTypes);
 
 
     /**
-     * @brief Test fixture for @ref Vec2 distance functions(signed types).
+     * @brief Test fixture for @ref CVec2 distance functions(signed types).
      * @tparam T The scalar type (int, float, double...) of the vector components.
      */
     template <typename T>
-    class Vec2DistanceSignedTests: public testing::Test
+    class CVec2DistanceSignedTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vecA, _vecB;
+        fgm::CVec2<T> _vecA, _vecB;
         fgm::Magnitude<T> _dist;
         T _distSq, _distManhattan, _distChebyshev;
 
@@ -79,7 +79,7 @@ namespace
             _distChebyshev = T(3);
         }
     };
-    TYPED_TEST_SUITE(Vec2DistanceSignedTests, SupportedSignedArithmeticTypes);
+    TYPED_TEST_SUITE(CVec2DistanceSignedTests, SupportedSignedArithmeticTypes);
 
 
 
@@ -89,31 +89,31 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec2 VEC_A(2, 3);
-        constexpr fgm::Vec2 VEC_B(5, 7);
+        constexpr fgm::CVec2 VEC_A(2, 3);
+        constexpr fgm::CVec2 VEC_B(5, 7);
 
-        /// @test Verify that @ref Vec2::dist returns the euclidean distance.
+        /// @test Verify that @ref CVec2::dist returns the euclidean distance.
         // TODO: Add back after creating fgm::sqrt
         // static_assert(VEC_A.dist(VEC_B) == 5);
-        // static_assert(fgm::Vec2<int>::dist(VEC_A, VEC_B) == 5);
+        // static_assert(fgm::CVec2<int>::dist(VEC_A, VEC_B) == 5);
 
 
-        /// @test Verify that @ref Vec2::distSq returns the squared distance.
+        /// @test Verify that @ref CVec2::distSq returns the squared distance.
         static_assert(VEC_A.distSq(VEC_B) == 25);
-        /// @test Verify that @ref Vec2::distSq (static wrapper) returns the squared distance.
-        static_assert(fgm::Vec2<int>::distSq(VEC_A, VEC_B) == 25);
+        /// @test Verify that @ref CVec2::distSq (static wrapper) returns the squared distance.
+        static_assert(fgm::CVec2<int>::distSq(VEC_A, VEC_B) == 25);
 
 
-        /// @test Verify that @ref Vec2::manhattanDist returns the manhattan distance.
+        /// @test Verify that @ref CVec2::manhattanDist returns the manhattan distance.
         static_assert(VEC_A.manhattanDist(VEC_B) == 7);
-        /// @test Verify that @ref Vec2::manhattanDist (static wrapper) returns the manhattan distance.
-        static_assert(fgm::Vec2<int>::manhattanDist(VEC_A, VEC_B) == 7);
+        /// @test Verify that @ref CVec2::manhattanDist (static wrapper) returns the manhattan distance.
+        static_assert(fgm::CVec2<int>::manhattanDist(VEC_A, VEC_B) == 7);
 
 
-        /// @test Verify that @ref Vec2::chebyshevDist returns the chebyshev distance.
+        /// @test Verify that @ref CVec2::chebyshevDist returns the chebyshev distance.
         static_assert(VEC_A.chebyshevDist(VEC_B) == 4);
-        /// @test Verify that @ref Vec2::chebyshevDist (static wrapper) returns the chebyshev distance.
-        static_assert(fgm::Vec2<int>::chebyshevDist(VEC_A, VEC_B) == 4);
+        /// @test Verify that @ref CVec2::chebyshevDist (static wrapper) returns the chebyshev distance.
+        static_assert(fgm::CVec2<int>::chebyshevDist(VEC_A, VEC_B) == 4);
 
     } // namespace
 } // namespace
@@ -124,15 +124,15 @@ namespace
  *        EUCLIDEAN DISTANCE          *
  **************************************/
 
-TYPED_TEST(Vec2DistanceTests, Dist_ReturnsEuclideanDistance)
+TYPED_TEST(CVec2DistanceTests, Dist_ReturnsEuclideanDistance)
 { EXPECT_MAG_EQ(this->_dist, this->_vecA.dist(this->_vecB)); }
 
 
-TYPED_TEST(Vec2DistanceTests, Dist_IrrationalDistanceMaintainsPrecision)
+TYPED_TEST(CVec2DistanceTests, Dist_IrrationalDistanceMaintainsPrecision)
 {
     using T = TypeParam;
-    const fgm::Vec2 v1{ T(0), T(0) };
-    const fgm::Vec2 v2{ T(1), T(1) };
+    const fgm::CVec2 v1{ T(0), T(0) };
+    const fgm::CVec2 v2{ T(1), T(1) };
 
     using P                         = fgm::Magnitude<T>;
     constexpr auto expectedDistance = P(std::numbers::sqrt2);
@@ -142,7 +142,7 @@ TYPED_TEST(Vec2DistanceTests, Dist_IrrationalDistanceMaintainsPrecision)
 }
 
 
-TYPED_TEST(Vec2DistanceTests, Dist_BetweenSameVectorReturnsZero)
+TYPED_TEST(CVec2DistanceTests, Dist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = fgm::Magnitude<TypeParam>(0);
     const auto distance = this->_vecA.dist(this->_vecA);
@@ -150,56 +150,56 @@ TYPED_TEST(Vec2DistanceTests, Dist_BetweenSameVectorReturnsZero)
 }
 
 
-TYPED_TEST(Vec2DistanceSignedTests, Dist_HandlesNegativeNumbers)
+TYPED_TEST(CVec2DistanceSignedTests, Dist_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.dist(this->_vecB);
     EXPECT_MAG_EQ(this->_dist, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceTests, Dist_AlwaysReturnFloatingPointValue)
+TYPED_TEST(CVec2DistanceTests, Dist_AlwaysReturnFloatingPointValue)
 {
     [[maybe_unused]] const auto distance = this->_vecA.dist(this->_vecB);
     static_assert(std::is_floating_point_v<decltype(distance)>);
 }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_Dist_ReturnsEuclideanDistance)
-{ EXPECT_MAG_EQ(this->_dist, fgm::Vec2<TypeParam>::dist(this->_vecA, this->_vecB)); }
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_Dist_ReturnsEuclideanDistance)
+{ EXPECT_MAG_EQ(this->_dist, fgm::CVec2<TypeParam>::dist(this->_vecA, this->_vecB)); }
 
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_Dist_IrrationalDistanceMaintainsPrecision)
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_Dist_IrrationalDistanceMaintainsPrecision)
 {
     using T = TypeParam;
-    const fgm::Vec2 v1{ T(0), T(0) };
-    const fgm::Vec2 v2{ T(1), T(1) };
+    const fgm::CVec2 v1{ T(0), T(0) };
+    const fgm::CVec2 v2{ T(1), T(1) };
 
     using P                         = fgm::Magnitude<T>;
     constexpr auto expectedDistance = P(std::numbers::sqrt2);
 
-    const auto distance = fgm::Vec2<T>::dist(v1, v2);
+    const auto distance = fgm::CVec2<T>::dist(v1, v2);
 
     EXPECT_MAG_EQ(expectedDistance, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_Dist_BetweenSameVectorReturnsZero)
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_Dist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = fgm::Magnitude<TypeParam>(0);
-    const auto distance = fgm::Vec2<TypeParam>::dist(this->_vecA, this->_vecA);
+    const auto distance = fgm::CVec2<TypeParam>::dist(this->_vecA, this->_vecA);
     EXPECT_MAG_EQ(zero, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceSignedTests, StaticWrapper_Dist_HandlesNegativeNumbers)
+TYPED_TEST(CVec2DistanceSignedTests, StaticWrapper_Dist_HandlesNegativeNumbers)
 {
-    const auto distance = fgm::Vec2<TypeParam>::dist(this->_vecA, this->_vecB);
+    const auto distance = fgm::CVec2<TypeParam>::dist(this->_vecA, this->_vecB);
     EXPECT_MAG_EQ(this->_dist, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
 {
     [[maybe_unused]] const auto distance = this->_vecA.dist(this->_vecB);
     static_assert(std::is_floating_point_v<decltype(distance)>);
@@ -213,11 +213,11 @@ TYPED_TEST(Vec2DistanceTests, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
  *                                    *
  **************************************/
 
-TYPED_TEST(Vec2DistanceTests, DistSq_ReturnsSquaredEuclideanDistance)
+TYPED_TEST(CVec2DistanceTests, DistSq_ReturnsSquaredEuclideanDistance)
 { EXPECT_MAG_EQ(this->_distSq, this->_vecA.distSq(this->_vecB)); }
 
 
-TYPED_TEST(Vec2DistanceTests, DistSq_BetweenSameVectorReturnsZero)
+TYPED_TEST(CVec2DistanceTests, DistSq_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
     const auto distance = this->_vecA.distSq(this->_vecA);
@@ -225,28 +225,28 @@ TYPED_TEST(Vec2DistanceTests, DistSq_BetweenSameVectorReturnsZero)
 }
 
 
-TYPED_TEST(Vec2DistanceSignedTests, DistSq_HandlesNegativeNumbers)
+TYPED_TEST(CVec2DistanceSignedTests, DistSq_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.distSq(this->_vecB);
     EXPECT_MAG_EQ(this->_distSq, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_DistSq_ReturnsSquaredEuclideanDistance)
-{ EXPECT_MAG_EQ(this->_distSq, fgm::Vec2<TypeParam>::distSq(this->_vecA, this->_vecB)); }
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_DistSq_ReturnsSquaredEuclideanDistance)
+{ EXPECT_MAG_EQ(this->_distSq, fgm::CVec2<TypeParam>::distSq(this->_vecA, this->_vecB)); }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_DistSq_BetweenSameVectorReturnsZero)
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_DistSq_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
-    const auto distance = fgm::Vec2<TypeParam>::distSq(this->_vecA, this->_vecA);
+    const auto distance = fgm::CVec2<TypeParam>::distSq(this->_vecA, this->_vecA);
     EXPECT_MAG_EQ(zero, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceSignedTests, StaticWrapper_DistSq_HandlesNegativeNumbers)
+TYPED_TEST(CVec2DistanceSignedTests, StaticWrapper_DistSq_HandlesNegativeNumbers)
 {
-    const auto distance = fgm::Vec2<TypeParam>::distSq(this->_vecA, this->_vecB);
+    const auto distance = fgm::CVec2<TypeParam>::distSq(this->_vecA, this->_vecB);
     EXPECT_MAG_EQ(this->_distSq, distance);
 }
 
@@ -256,11 +256,11 @@ TYPED_TEST(Vec2DistanceSignedTests, StaticWrapper_DistSq_HandlesNegativeNumbers)
  *        MANHATTAN DISTANCE          *
  **************************************/
 
-TYPED_TEST(Vec2DistanceTests, ManhattanDist_ReturnsManhattanDistance)
+TYPED_TEST(CVec2DistanceTests, ManhattanDist_ReturnsManhattanDistance)
 { EXPECT_MAG_EQ(this->_distManhattan, this->_vecA.manhattanDist(this->_vecB)); }
 
 
-TYPED_TEST(Vec2DistanceTests, ManhattanDist_BetweenSameVectorReturnsZero)
+TYPED_TEST(CVec2DistanceTests, ManhattanDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
     const auto distance = this->_vecA.manhattanDist(this->_vecA);
@@ -268,28 +268,28 @@ TYPED_TEST(Vec2DistanceTests, ManhattanDist_BetweenSameVectorReturnsZero)
 }
 
 
-TYPED_TEST(Vec2DistanceSignedTests, ManhattanDist_HandlesNegativeNumbers)
+TYPED_TEST(CVec2DistanceSignedTests, ManhattanDist_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.manhattanDist(this->_vecB);
     EXPECT_MAG_EQ(this->_distManhattan, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_ManhattanDist_ReturnsManhattanDistance)
-{ EXPECT_MAG_EQ(this->_distManhattan, fgm::Vec2<TypeParam>::manhattanDist(this->_vecA, this->_vecB)); }
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_ManhattanDist_ReturnsManhattanDistance)
+{ EXPECT_MAG_EQ(this->_distManhattan, fgm::CVec2<TypeParam>::manhattanDist(this->_vecA, this->_vecB)); }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_ManhattanDist_BetweenSameVectorReturnsZero)
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_ManhattanDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
-    const auto distance = fgm::Vec2<TypeParam>::manhattanDist(this->_vecA, this->_vecA);
+    const auto distance = fgm::CVec2<TypeParam>::manhattanDist(this->_vecA, this->_vecA);
     EXPECT_MAG_EQ(zero, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceSignedTests, StaticWrapper_ManhattanDist_HandlesNegativeNumbers)
+TYPED_TEST(CVec2DistanceSignedTests, StaticWrapper_ManhattanDist_HandlesNegativeNumbers)
 {
-    const auto distance = fgm::Vec2<TypeParam>::manhattanDist(this->_vecA, this->_vecB);
+    const auto distance = fgm::CVec2<TypeParam>::manhattanDist(this->_vecA, this->_vecB);
     EXPECT_MAG_EQ(this->_distManhattan, distance);
 }
 
@@ -298,12 +298,12 @@ TYPED_TEST(Vec2DistanceSignedTests, StaticWrapper_ManhattanDist_HandlesNegativeN
  *        CHEBYSHEV DISTANCE          *
  **************************************/
 
-TYPED_TEST(Vec2DistanceTests, ChebyshevDist_ReturnsChebyshevDistance)
+TYPED_TEST(CVec2DistanceTests, ChebyshevDist_ReturnsChebyshevDistance)
 { EXPECT_MAG_EQ(this->_distChebyshev, this->_vecA.chebyshevDist(this->_vecB)); }
 
 
 
-TYPED_TEST(Vec2DistanceTests, ChebyshevDist_BetweenSameVectorReturnsZero)
+TYPED_TEST(CVec2DistanceTests, ChebyshevDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
     const auto distance = this->_vecA.chebyshevDist(this->_vecA);
@@ -311,28 +311,28 @@ TYPED_TEST(Vec2DistanceTests, ChebyshevDist_BetweenSameVectorReturnsZero)
 }
 
 
-TYPED_TEST(Vec2DistanceSignedTests, ChebyshevDist_HandlesNegativeNumbers)
+TYPED_TEST(CVec2DistanceSignedTests, ChebyshevDist_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.chebyshevDist(this->_vecB);
     EXPECT_MAG_EQ(this->_distChebyshev, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_ChebyshevDist_ReturnsChebyshevDistance)
-{ EXPECT_MAG_EQ(this->_distChebyshev, fgm::Vec2<TypeParam>::chebyshevDist(this->_vecA, this->_vecB)); }
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_ChebyshevDist_ReturnsChebyshevDistance)
+{ EXPECT_MAG_EQ(this->_distChebyshev, fgm::CVec2<TypeParam>::chebyshevDist(this->_vecA, this->_vecB)); }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_ChebyshevDist_BetweenSameVectorReturnsZero)
+TYPED_TEST(CVec2DistanceTests, StaticWrapper_ChebyshevDist_BetweenSameVectorReturnsZero)
 {
     constexpr auto zero = TypeParam(0);
-    const auto distance = fgm::Vec2<TypeParam>::chebyshevDist(this->_vecA, this->_vecA);
+    const auto distance = fgm::CVec2<TypeParam>::chebyshevDist(this->_vecA, this->_vecA);
     EXPECT_MAG_EQ(zero, distance);
 }
 
 
-TYPED_TEST(Vec2DistanceSignedTests, StaticWrapper_ChebyshevDist_HandlesNegativeNumbers)
+TYPED_TEST(CVec2DistanceSignedTests, StaticWrapper_ChebyshevDist_HandlesNegativeNumbers)
 {
-    const auto distance = fgm::Vec2<TypeParam>::chebyshevDist(this->_vecA, this->_vecB);
+    const auto distance = fgm::CVec2<TypeParam>::chebyshevDist(this->_vecA, this->_vecB);
     EXPECT_MAG_EQ(this->_distChebyshev, distance);
 }
 

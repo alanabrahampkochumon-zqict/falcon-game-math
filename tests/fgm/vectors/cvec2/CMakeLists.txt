@@ -1,7 +1,7 @@
-add_library(Vec2Tests OBJECT)
+add_library(CVec2Tests OBJECT)
 
 target_sources(
-        Vec2Tests PRIVATE
+        CVec2Tests PRIVATE
         AccessAndMutationTests.cpp
         AliasTests.cpp
         ArithmeticOperationTests.cpp
@@ -22,16 +22,16 @@ target_sources(
         TypeConversionTests.cpp
         UtilityTests.cpp
 
-        Vec2TestSetup.h
+        CVec2TestSetup.h
 )
 
 target_include_directories(
-        Vec2Tests PRIVATE
+        CVec2Tests PRIVATE
         ${FGM_TEST_ROOT_DIR}/include
 )
 
 
 target_link_libraries(
-        Vec2Tests PRIVATE
+        CVec2Tests PRIVATE
         FGMTestSetup
 )

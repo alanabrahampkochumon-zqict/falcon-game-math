@@ -16,7 +16,7 @@
 
 #include <fgm/common/MathTraits.h>
 #include <fgm/matrices/Mat2x4.h>
-#include <fgm/vectors/Vec2.h>
+#include <fgm/vectors/CVec2.h>
 
 
 

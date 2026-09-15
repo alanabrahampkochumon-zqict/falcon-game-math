@@ -52,27 +52,27 @@
              */
 
             /**
-             * @defgroup FGM_Vec2 2D Vectors
+             * @defgroup FGM_CVec2 2D Vectors
              * @brief 2-dimensional Euclidean vectors.
              * @ingroup FGM_Vectors
              * @{
-             *   @defgroup FGM_Vec2_Members Class Members
-             *   @defgroup FGM_Vec2_Init Constructors
-             *   @defgroup FGM_Vec2_Access Accessors
-             *   @defgroup FGM_Vec2_Arithmetic Arithmetic Operations
-             *   @defgroup FGM_Vec2_Bitwise Boolean Bitwise Operations
-             *   @defgroup FGM_Vec2_Equality Equality
-             *   @defgroup FGM_Vec2_Comparison Comparisons
-             *   @defgroup FGM_Vec2_Product Geometric Products
-             *   @defgroup FGM_Vec2_Mag Vector Magnitude and Norms
-             *   @defgroup FGM_Vec2_Dist Vector Distance
-             *   @defgroup FGM_Vec2_Normalize Vector Normalization
-             *   @defgroup FGM_Vec2_Proj Vector Projection and Rejection
-             *   @defgroup FGM_Vec2_Alias Spatial Alias
-             *   @defgroup FGM_Vec2_Log String Representation
-             *   @defgroup FGM_Vec2_Const Vector Constants
-             *   @defgroup FGM_Vec2_Utils Vector Utilities
-             *   @defgroup FGM_Vec2_Swizzle Vector Swizzling
+             *   @defgroup FGM_CVec2_Members Class Members
+             *   @defgroup FGM_CVec2_Init Constructors
+             *   @defgroup FGM_CVec2_Access Accessors
+             *   @defgroup FGM_CVec2_Arithmetic Arithmetic Operations
+             *   @defgroup FGM_CVec2_Bitwise Boolean Bitwise Operations
+             *   @defgroup FGM_CVec2_Equality Equality
+             *   @defgroup FGM_CVec2_Comparison Comparisons
+             *   @defgroup FGM_CVec2_Product Geometric Products
+             *   @defgroup FGM_CVec2_Mag Vector Magnitude and Norms
+             *   @defgroup FGM_CVec2_Dist Vector Distance
+             *   @defgroup FGM_CVec2_Normalize Vector Normalization
+             *   @defgroup FGM_CVec2_Proj Vector Projection and Rejection
+             *   @defgroup FGM_CVec2_Alias Spatial Alias
+             *   @defgroup FGM_CVec2_Log String Representation
+             *   @defgroup FGM_CVec2_Const Vector Constants
+             *   @defgroup FGM_CVec2_Utils Vector Utilities
+             *   @defgroup FGM_CVec2_Swizzle Vector Swizzling
              * @}
              */
 

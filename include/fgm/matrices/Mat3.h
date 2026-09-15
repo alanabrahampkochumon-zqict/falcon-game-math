@@ -1264,7 +1264,7 @@ namespace fgm
          * @return A new @ref Mat3 representing a 2D affine rotation.
          */
         template <std::floating_point U>
-        [[nodiscard]] static constexpr Mat3 makeRotation(U angle, const Vec2<T>& center) noexcept
+        [[nodiscard]] static constexpr Mat3 makeRotation(U angle, const CVec2<T>& center) noexcept
             requires SignedStrictArithmetic<T>;
 
 
@@ -1559,7 +1559,7 @@ namespace fgm
          * @return A @ref Mat3 containing the 2D affine transformation.
          */
         [[nodiscard]] static constexpr Mat3 makeAffine(const Mat2<T>& linearTransform,
-                                                       const Vec2<T>& translation) noexcept;
+                                                       const CVec2<T>& translation) noexcept;
 
         /** @} */
 

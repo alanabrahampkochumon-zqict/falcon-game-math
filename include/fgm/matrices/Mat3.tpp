@@ -819,7 +819,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeRotation(U angle, const Vec2<T>& center) noexcept
+    FGM_INLINE constexpr Mat3<T> Mat3<T>::makeRotation(U angle, const CVec2<T>& center) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -993,7 +993,7 @@ namespace fgm
 
     template <Arithmetic T>
     FGM_INLINE constexpr Mat3<T> Mat3<T>::makeAffine(const Mat2<T>& linearTransform,
-                                                     const Vec2<T>& translation) noexcept
+                                                     const CVec2<T>& translation) noexcept
     {
         return Mat3<T>{ linearTransform(0, 0),
                         linearTransform(0, 1),

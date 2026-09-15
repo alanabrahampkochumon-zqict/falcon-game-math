@@ -21,7 +21,7 @@
 #include <fgm/matrices/Mat4.h>
 #include <fgm/matrices/Mat4x2.h>
 #include <fgm/matrices/Mat4x3.h>
-#include <fgm/vectors/Vec2.h>
+#include <fgm/vectors/CVec2.h>
 #include <fgm/vectors/Vec3.h>
 #include <fgm/vectors/Vec4.h>
 
@@ -31,7 +31,7 @@
  */
 
 /** @test Verify that @ref fgm Vectors are trivial types. */
-ASSERT_TRIVIAL_TYPE(fgm::Vec2<float>);
+ASSERT_TRIVIAL_TYPE(fgm::CVec2<float>);
 ASSERT_TRIVIAL_TYPE(fgm::Vec3<float>);
 ASSERT_TRIVIAL_TYPE(fgm::Vec4<float>);
 

@@ -83,12 +83,12 @@ namespace fgm
 
 
         /**
-         * @brief Initialize @ref Vec4 with 2 @ref Vec2.
+         * @brief Initialize @ref Vec4 with 2 @ref CVec2.
          *
          * @param[in] vec1 The first two entries of @ref Vec4.
          * @param[in] vec2 The last two entries of @ref Vec4.
          */
-        [[nodiscard]] constexpr Vec4(const Vec2<T>& vec1, const Vec2<T>& vec2) noexcept;
+        [[nodiscard]] constexpr Vec4(const CVec2<T>& vec1, const CVec2<T>& vec2) noexcept;
 
 
         /**
@@ -2481,7 +2481,7 @@ namespace fgm
 
     template <typename T>
         requires Arithmetic<T>
-    Vec4(Vec2<T>, Vec2<T>) -> Vec4<T>;
+    Vec4(CVec2<T>, CVec2<T>) -> Vec4<T>;
 
     template <typename T>
         requires Arithmetic<T>

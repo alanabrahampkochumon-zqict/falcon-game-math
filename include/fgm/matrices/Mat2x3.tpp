@@ -34,12 +34,12 @@ namespace fgm
 
     template <Arithmetic T>
     FGM_INLINE constexpr Mat2x3<T>::Mat2x3(T m00, T m01, T m02, T m10, T m11, T m12) noexcept
-        : _data{ Vec2<T>(m00, m10), Vec2<T>(m01, m11), Vec2<T>(m02, m12) }
+        : _data{ CVec2<T>(m00, m10), CVec2<T>(m01, m11), CVec2<T>(m02, m12) }
     {}
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat2x3<T>::Mat2x3(const Vec2<T>& col0, const Vec2<T>& col1, const Vec2<T>& col2) noexcept
+    FGM_INLINE constexpr Mat2x3<T>::Mat2x3(const CVec2<T>& col0, const CVec2<T>& col1, const CVec2<T>& col2) noexcept
         : _data{ col0, col1, col2 }
     {}
 
@@ -66,14 +66,14 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Vec2<T>& Mat2x3<T>::operator[](const std::size_t col) noexcept
+    FGM_INLINE constexpr CVec2<T>& Mat2x3<T>::operator[](const std::size_t col) noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
     template <Arithmetic T>
-    FGM_INLINE constexpr const Vec2<T>& Mat2x3<T>::operator[](const std::size_t col) const noexcept
+    FGM_INLINE constexpr const CVec2<T>& Mat2x3<T>::operator[](const std::size_t col) const noexcept
     {
         FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];

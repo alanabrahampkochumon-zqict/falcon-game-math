@@ -19,7 +19,7 @@ target_compile_options(FGMVectorTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:st
 
 add_subdirectory(point2)
 add_subdirectory(point3)
-add_subdirectory(vec2)
+add_subdirectory(cvec2)
 add_subdirectory(vec3)
 add_subdirectory(vec4)
 
@@ -31,7 +31,7 @@ target_link_libraries(
         # OBJs
         Point2Tests
         Point3Tests
-        Vec2Tests
+        CVec2Tests
         Vec3Tests
         Vec4Tests
 )
@@ -45,7 +45,7 @@ target_precompile_headers(
 set_target_properties(
         Point2Tests
         Point3Tests
-        Vec2Tests
+        CVec2Tests
         Vec3Tests
         Vec4Tests
         PROPERTIES FOLDER "Test Intermediates/FGM"
@@ -54,7 +54,7 @@ set_target_properties(
 ###########################
 ### DEATH TESTS
 add_executable(FGMVectorDeathTests
-        vec2/DeathTests.cpp
+        cvec2/DeathTests.cpp # TODO: Add death tests here
         vec3/DeathTests.cpp
         vec4/DeathTests.cpp
 )

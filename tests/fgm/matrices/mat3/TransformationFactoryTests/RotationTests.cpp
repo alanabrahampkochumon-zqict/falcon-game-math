@@ -87,7 +87,7 @@ namespace
     {
     protected:
         T _angle;
-        fgm::Vec2<T> _center;
+        fgm::CVec2<T> _center;
         fgm::Vec3<T> _axis;
         fgm::Mat3<T> _expectedMatX, _expectedMatY, _expectedMatZ, _expectedMatXYZ, _expectedMatCenter,
             _expectedAxisRotation;
@@ -96,7 +96,7 @@ namespace
         void SetUp() override
         {
             _angle  = fgm::constants::PI<T> / T(4.0);
-            _center = fgm::Vec2{ T(1), T(2) };
+            _center = fgm::CVec2{ T(1), T(2) };
             _axis   = fgm::Vec3{ T(0.26726124191242440), T(0.53452248382484879), T(0.80178372573727319) };
 
 #ifdef FGM_LEFT_HANDED

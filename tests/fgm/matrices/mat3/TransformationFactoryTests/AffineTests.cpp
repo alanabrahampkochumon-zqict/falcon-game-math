@@ -36,13 +36,13 @@ namespace
     {
     protected:
         fgm::Mat2<T> _linearTransform;
-        fgm::Vec2<T> _translation;
+        fgm::CVec2<T> _translation;
         fgm::Mat3<T> _expectedMat;
 
         void SetUp() override
         {
-            _linearTransform = { fgm::Vec2{ T(1.2341234), T(2.31419123) },
-                                 fgm::Vec2{ T(15.123949182), T(0.93819231) } };
+            _linearTransform = { fgm::CVec2{ T(1.2341234), T(2.31419123) },
+                                 fgm::CVec2{ T(15.123949182), T(0.93819231) } };
             _translation     = { T(1.2398412349), T(12.1234892134) };
 
             _expectedMat = { fgm::Vec3{ T(1.2341234), T(2.31419123), T(0) },
@@ -61,7 +61,7 @@ namespace
     namespace static_tests
     {
         constexpr fgm::Mat2 LIN_TRANSFORM{ 1, 2, 3, 4 };
-        constexpr fgm::Vec2 TRANSLATION3D{ 11, 12 };
+        constexpr fgm::CVec2 TRANSLATION3D{ 11, 12 };
 
         /// @test Verify that fgm::Mat3::makeAffine returns a valid matrix at compile time.
         constexpr auto AFFINE3D = fgm::Mat3<int>::makeAffine(LIN_TRANSFORM, TRANSLATION3D);

@@ -38,7 +38,7 @@ namespace
 
         void SetUp() override
         {
-            _matrix              = { fgm::Vec2<T>{ 4, 1 }, fgm::Vec2<T>{ 2, 5 } };
+            _matrix              = { fgm::CVec2<T>{ 4, 1 }, fgm::CVec2<T>{ 2, 5 } };
             _expectedDeterminant = 18;
         }
     };
@@ -52,11 +52,11 @@ namespace
     class Mat2DeterminantSingularTests: public ::testing::TestWithParam<fgm::Mat2<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(Mat2InvalidDeterminantTests, Mat2DeterminantSingularTests,
-                             ::testing::Values(fgm::Mat2{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ 1.0f, 2.0f } },
-                                               fgm::Mat2{ fgm::Vec2{ 2.0f, 2.0f }, fgm::Vec2{ 2.0f, 2.0f } },
-                                               fgm::Mat2{ fgm::Vec2{ 3.0f, 2.0f }, fgm::Vec2{ 6.0f, 4.0f } },
-                                               fgm::Mat2{ fgm::Vec2{ 0.0f, 0.0f }, fgm::Vec2{ 4.0f, 5.0f } },
-                                               fgm::Mat2{ fgm::Vec2{ 0.0f, 3.0f }, fgm::Vec2{ 0.0f, 5.0f } }));
+                             ::testing::Values(fgm::Mat2{ fgm::CVec2{ 1.0f, 2.0f }, fgm::CVec2{ 1.0f, 2.0f } },
+                                               fgm::Mat2{ fgm::CVec2{ 2.0f, 2.0f }, fgm::CVec2{ 2.0f, 2.0f } },
+                                               fgm::Mat2{ fgm::CVec2{ 3.0f, 2.0f }, fgm::CVec2{ 6.0f, 4.0f } },
+                                               fgm::Mat2{ fgm::CVec2{ 0.0f, 0.0f }, fgm::CVec2{ 4.0f, 5.0f } },
+                                               fgm::Mat2{ fgm::CVec2{ 0.0f, 3.0f }, fgm::CVec2{ 0.0f, 5.0f } }));
 
 
 
@@ -66,7 +66,7 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat2 MAT{ fgm::Vec2{ 4, 2 }, fgm::Vec2{ 3, 4 } };
+        constexpr fgm::Mat2 MAT{ fgm::CVec2{ 4, 2 }, fgm::CVec2{ 3, 4 } };
 
         /// @test Verify that Mat2 determinant returns a valid value at compile time.
         static_assert(MAT.determinant() == 10);

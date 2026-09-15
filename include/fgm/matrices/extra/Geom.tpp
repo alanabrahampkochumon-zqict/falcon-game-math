@@ -20,17 +20,17 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec2<T, U> operator*(const Mat2x3<T>& mat, const Vec3<U>& vec) noexcept
+    FGM_INLINE constexpr PromotedCVec2<T, U> operator*(const Mat2x3<T>& mat, const Vec3<U>& vec) noexcept
     {
         using R = PromotedValue_t<T, U>;
-        return Vec2{ R(mat[0].x() * vec.x() + mat[1].x() * vec.y() + mat[2].x() * vec.z()),
+        return CVec2{ R(mat[0].x() * vec.x() + mat[1].x() * vec.y() + mat[2].x() * vec.z()),
                      R(mat[0].y() * vec.x() + mat[1].y() * vec.y() + mat[2].y() * vec.z()) };
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec3<T, U> operator*(const Vec2<T>& vec, const Mat2x3<U>& mat) noexcept
+    FGM_INLINE constexpr PromotedVec3<T, U> operator*(const CVec2<T>& vec, const Mat2x3<U>& mat) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Vec3{ R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0)), R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1)),
@@ -47,17 +47,17 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec2<T, U> operator*(const Mat2x4<T>& mat, const Vec4<U>& vec) noexcept
+    FGM_INLINE constexpr PromotedCVec2<T, U> operator*(const Mat2x4<T>& mat, const Vec4<U>& vec) noexcept
     {
         using R = PromotedValue_t<T, U>;
-        return Vec2{ R(mat[0].x() * vec.x() + mat[1].x() * vec.y() + mat[2].x() * vec.z() + mat[3].x() * vec.w()),
+        return CVec2{ R(mat[0].x() * vec.x() + mat[1].x() * vec.y() + mat[2].x() * vec.z() + mat[3].x() * vec.w()),
                      R(mat[0].y() * vec.x() + mat[1].y() * vec.y() + mat[2].y() * vec.z() + mat[3].y() * vec.w()) };
     }
 
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec4<T, U> operator*(const Vec2<T>& vec, const Mat2x4<U>& mat) noexcept
+    FGM_INLINE constexpr PromotedVec4<T, U> operator*(const CVec2<T>& vec, const Mat2x4<U>& mat) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Vec4{ R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0)), R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1)),
@@ -74,7 +74,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec3<T, U> operator*(const Mat3x2<T>& mat, const Vec2<U>& vec) noexcept
+    FGM_INLINE constexpr PromotedVec3<T, U> operator*(const Mat3x2<T>& mat, const CVec2<U>& vec) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Vec3{ R(mat[0].x() * vec.x() + mat[1].x() * vec.y()), R(mat[0].y() * vec.x() + mat[1].y() * vec.y()),
@@ -84,10 +84,10 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec2<T, U> operator*(const Vec3<T>& vec, const Mat3x2<U>& mat) noexcept
+    FGM_INLINE constexpr PromotedCVec2<T, U> operator*(const Vec3<T>& vec, const Mat3x2<U>& mat) noexcept
     {
         using R = PromotedValue_t<T, U>;
-        return Vec2{ R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0) + vec.z() * mat(2, 0)),
+        return CVec2{ R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0) + vec.z() * mat(2, 0)),
                      R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1) + vec.z() * mat(2, 1)) };
     }
 
@@ -131,7 +131,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec4<T, U> operator*(const Mat4x2<T>& mat, const Vec2<U>& vec) noexcept
+    FGM_INLINE constexpr PromotedVec4<T, U> operator*(const Mat4x2<T>& mat, const CVec2<U>& vec) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Vec4{ R(mat[0].x() * vec.x() + mat[1].x() * vec.y()), R(mat[0].y() * vec.x() + mat[1].y() * vec.y()),
@@ -141,10 +141,10 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec2<T, U> operator*(const Vec4<T>& vec, const Mat4x2<U>& mat) noexcept
+    FGM_INLINE constexpr PromotedCVec2<T, U> operator*(const Vec4<T>& vec, const Mat4x2<U>& mat) noexcept
     {
         using R = PromotedValue_t<T, U>;
-        return Vec2{ R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0) + vec.z() * mat(2, 0) + vec.w() * mat(3, 0)),
+        return CVec2{ R(vec.x() * mat(0, 0) + vec.y() * mat(1, 0) + vec.z() * mat(2, 0) + vec.w() * mat(3, 0)),
                      R(vec.x() * mat(0, 1) + vec.y() * mat(1, 1) + vec.z() * mat(2, 1) + vec.w() * mat(3, 1)) };
     }
 

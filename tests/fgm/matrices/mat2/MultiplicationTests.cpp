@@ -41,11 +41,11 @@ namespace
 
         void SetUp() override
         {
-            _mat                 = { fgm::Vec2{ T(7), T(13) }, fgm::Vec2{ T(5), T(4) } };
+            _mat                 = { fgm::CVec2{ T(7), T(13) }, fgm::CVec2{ T(5), T(4) } };
             _scalar              = T(2.123456789123456);
-            _expectedFloatingMat = { fgm::Vec2{ T(14.864197523864192), T(27.604938258604928) },
-                                     fgm::Vec2{ T(10.61728394561728), T(8.493827156493824) } };
-            _expectedIntegralMat = { fgm::Vec2{ T(14), T(26) }, fgm::Vec2{ T(10), T(8) } };
+            _expectedFloatingMat = { fgm::CVec2{ T(14.864197523864192), T(27.604938258604928) },
+                                     fgm::CVec2{ T(10.61728394561728), T(8.493827156493824) } };
+            _expectedIntegralMat = { fgm::CVec2{ T(14), T(26) }, fgm::CVec2{ T(10), T(8) } };
         }
     };
     TYPED_TEST_SUITE(Mat2ScalarMultiplicationTests, SupportedArithmeticTypes);
@@ -61,14 +61,14 @@ namespace
     {
     protected:
         fgm::Mat2<T> _mat;
-        fgm::Vec2<T> _vec;
-        fgm::Vec2<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
+        fgm::CVec2<T> _vec;
+        fgm::CVec2<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
             _expectedIntegralRowVector;
 
         void SetUp() override
         {
-            _mat                       = { fgm::Vec2{ T(7.12345678912345), T(13.12345678912345) },
-                                           fgm::Vec2{ T(5.12345678912345), T(4.12345678912345) } };
+            _mat                       = { fgm::CVec2{ T(7.12345678912345), T(13.12345678912345) },
+                                           fgm::CVec2{ T(5.12345678912345), T(4.12345678912345) } };
             _vec                       = { T(2.123456789123456), T(3.123456832912) };
             _expectedFloatingColVector = { T(31.129248797008778), T(40.74653269883751) };
             _expectedIntegralColVector = { T(29), T(38) };
@@ -89,16 +89,16 @@ namespace
     {
     protected:
         fgm::Mat2<T> _mat;
-        fgm::Vec2<T> _vec, _expectedColVector, _expectedRowVector;
+        fgm::CVec2<T> _vec, _expectedColVector, _expectedRowVector;
 
         void SetUp() override
         {
-            _mat = { fgm::Vec2{ T(0.1234568989329), T(0.1234214891234) },
-                     fgm::Vec2{ T(-0.123489823149), T(-0.123489757623) } };
-            _vec = fgm::Vec2{ T(0.8923764912287), T(0.78352829112384) };
+            _mat = { fgm::CVec2{ T(0.1234568989329), T(0.1234214891234) },
+                     fgm::CVec2{ T(-0.123489823149), T(-0.123489757623) } };
+            _vec = fgm::CVec2{ T(0.8923764912287), T(0.78352829112384) };
 
-            _expectedColVector = fgm::Vec2{ T(0.013412264184596345), T(0.013380716644514457) };
-            _expectedRowVector = fgm::Vec2{ T(0.20687426274853477), T(-0.20695713384580372) };
+            _expectedColVector = fgm::CVec2{ T(0.013412264184596345), T(0.013380716644514457) };
+            _expectedRowVector = fgm::CVec2{ T(0.20687426274853477), T(-0.20695713384580372) };
         }
     };
     TYPED_TEST_SUITE(Mat2VectorFractionalMultiplicationTests, SupportedFloatingPointTypes);
@@ -117,14 +117,14 @@ namespace
 
         void SetUp() override
         {
-            _matA = { fgm::Vec2{ T(7.12345678912345), T(13.12345678912345) },
-                      fgm::Vec2{ T(5.12345678912345), T(4.12345678912345) } };
-            _matB = { fgm::Vec2{ T(3.12345678912345), T(10.12345678912345) },
-                      fgm::Vec2{ T(8.12345678912345), T(3.12345678912345) } };
+            _matA = { fgm::CVec2{ T(7.12345678912345), T(13.12345678912345) },
+                      fgm::CVec2{ T(5.12345678912345), T(4.12345678912345) } };
+            _matB = { fgm::CVec2{ T(3.12345678912345), T(10.12345678912345) },
+                      fgm::CVec2{ T(8.12345678912345), T(3.12345678912345) } };
 
-            _expectedFloatingMat = { fgm::Vec2{ T(74.11690288564759), T(82.73418683126485) },
-                                     fgm::Vec2{ T(73.8699893074007), T(119.48727325301795) } };
-            _expectedIntegralMat = { fgm::Vec2{ T(71), T(79) }, fgm::Vec2{ T(71), T(116) } };
+            _expectedFloatingMat = { fgm::CVec2{ T(74.11690288564759), T(82.73418683126485) },
+                                     fgm::CVec2{ T(73.8699893074007), T(119.48727325301795) } };
+            _expectedIntegralMat = { fgm::CVec2{ T(71), T(79) }, fgm::CVec2{ T(71), T(116) } };
         }
     };
     TYPED_TEST_SUITE(Mat2MatrixMultiplicationTests, SupportedArithmeticTypes);
@@ -143,13 +143,13 @@ namespace
 
         void SetUp() override
         {
-            _matA = { fgm::Vec2{ T(0.1234568989329), T(0.1234214891234) },
-                      fgm::Vec2{ T(-0.123489823149), T(-0.123489757623) } };
-            _matB = { fgm::Vec2{ T(0.8923764912287), T(0.78352829112384) },
-                      fgm::Vec2{ T(0.0123412348958), T(-0.0231423489589) } };
+            _matA = { fgm::CVec2{ T(0.1234568989329), T(0.1234214891234) },
+                      fgm::CVec2{ T(-0.123489823149), T(-0.123489757623) } };
+            _matB = { fgm::CVec2{ T(0.8923764912287), T(0.78352829112384) },
+                      fgm::CVec2{ T(0.0123412348958), T(-0.0231423489589) } };
 
-            _expectedMat = { fgm::Vec2{ T(0.013412264184596345), T(0.013380716644514457) },
-                             fgm::Vec2{ T(0.004381455169424965), T(0.004381016652222751) } };
+            _expectedMat = { fgm::CVec2{ T(0.013412264184596345), T(0.013380716644514457) },
+                             fgm::CVec2{ T(0.004381455169424965), T(0.004381016652222751) } };
         }
     };
     TYPED_TEST_SUITE(Mat2MatrixFractionalMultiplicationTests, SupportedFloatingPointTypes);
@@ -164,7 +164,7 @@ namespace
     {
         constexpr fgm::Mat2 MAT1(1, 2, 3, 4);
         constexpr fgm::Mat2 MAT2(5, 6, 7, 8);
-        constexpr fgm::Vec2 VEC(1, 2);
+        constexpr fgm::CVec2 VEC(1, 2);
 
         /// @test Verify that matrix * scalar multiplication returns 2D matrix at compile time.
         constexpr fgm::Mat2 BINARY_PRODUCT_1 = MAT1 * 2;
@@ -182,12 +182,12 @@ namespace
         static_assert(BINARY_PRODUCT_2(1, 1) == 8);
 
         /// @test Verify matrix * vector multiplication returns 2D column vector at compile time.
-        constexpr fgm::Vec2 COL_VECTOR_PRODUCT = MAT1 * VEC;
+        constexpr fgm::CVec2 COL_VECTOR_PRODUCT = MAT1 * VEC;
         static_assert(COL_VECTOR_PRODUCT[0] == 5);
         static_assert(COL_VECTOR_PRODUCT[1] == 11);
 
         /// @test Verify vector * matrix multiplication returns 2D row vector at compile time.
-        constexpr fgm::Vec2 ROW_VEC_PRODUCT = VEC * MAT1;
+        constexpr fgm::CVec2 ROW_VEC_PRODUCT = VEC * MAT1;
         static_assert(ROW_VEC_PRODUCT[0] == 7);
         static_assert(ROW_VEC_PRODUCT[1] == 10);
 
@@ -341,9 +341,9 @@ TYPED_TEST(Mat2VectorFractionalMultiplicationTests, ColumnFloatVector_ReturnsACo
 TEST(Mat2VectorMultiplicationTests, IdentityMatrixTimesColumnVector_ReturnsOriginalColumnVector)
 {
     const fgm::Mat2<float> iMatrix = fgm::Mat2<float>::identity();
-    const fgm::Vec2F vec(2.0f, 1.0f);
+    const fgm::CVec2F vec(2.0f, 1.0f);
 
-    const fgm::Vec2F transformedVector = iMatrix * vec;
+    const fgm::CVec2F transformedVector = iMatrix * vec;
 
     EXPECT_VEC_EQ(vec, transformedVector);
 }
@@ -352,7 +352,7 @@ TEST(Mat2VectorMultiplicationTests, IdentityMatrixTimesColumnVector_ReturnsOrigi
 TEST(Mat2VectorMultiplicationTests, ColumnVector_MixedType_PromotesType)
 {
     const fgm::Mat2 mat(1.0, 2.0);
-    const fgm::Vec2I vec(2, 1);
+    const fgm::CVec2I vec(2, 1);
 
     [[maybe_unused]] const auto transformedVector = mat * vec;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -383,9 +383,9 @@ TYPED_TEST(Mat2VectorFractionalMultiplicationTests, RowFloatVector_ReturnsARowVe
 TEST(Mat2VectorMultiplicationTests, RowVectorTimesIdentityMatrixReturnsOriginalVector)
 {
     const fgm::Mat2<float> iMatrix = fgm::Mat2<float>::identity();
-    const fgm::Vec2F vec(2.0f, 1.0f);
+    const fgm::CVec2F vec(2.0f, 1.0f);
 
-    const fgm::Vec2F transformedVector = vec * iMatrix;
+    const fgm::CVec2F transformedVector = vec * iMatrix;
 
     EXPECT_VEC_EQ(vec, transformedVector);
 }
@@ -394,7 +394,7 @@ TEST(Mat2VectorMultiplicationTests, RowVectorTimesIdentityMatrixReturnsOriginalV
 TEST(Mat2VectorMultiplicationTests, RowVector_MixedType_PromotesType)
 {
     const fgm::Mat2 mat(1.0, 2.0);
-    const fgm::Vec2I vec(2, 1);
+    const fgm::CVec2I vec(2, 1);
 
     [[maybe_unused]] const auto transformedVector = vec * mat;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -419,7 +419,7 @@ TYPED_TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_RowVector_ReturnsAT
 TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_RowVector_IdentityMatrix_ReturnsOriginalRowVector)
 {
     const auto iMatrix = fgm::Mat2<float>::identity();
-    fgm::Vec2F vec(2.0f, 1.0f);
+    fgm::CVec2F vec(2.0f, 1.0f);
 
     vec *= iMatrix;
     EXPECT_VEC_CONTAINS(vec, 2.0f, 1.0f);
@@ -429,7 +429,7 @@ TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_RowVector_IdentityMatrix_
 TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_MixedType_DoesNotPromoteType)
 {
     const fgm::Mat2<double> iMatrix = fgm::Mat2<double>::identity();
-    [[maybe_unused]] fgm::Vec2I vec(2, 1);
+    [[maybe_unused]] fgm::CVec2I vec(2, 1);
 
     (void) (vec *= iMatrix);
     static_assert(std::is_same_v<decltype(vec)::value_type, int>);
@@ -439,8 +439,8 @@ TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_MixedType_DoesNotPromoteT
 TEST(Mat2VectorMultiplicationTests, TimesEqualOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
     const fgm::Mat2 mat(2.5, 3.5, 0.5, 1.5);
-    fgm::Vec2 vec(10, 20);
-    const fgm::Vec2 expected(35, 65);
+    fgm::CVec2 vec(10, 20);
+    const fgm::CVec2 expected(35, 65);
 
     vec *= mat;
 

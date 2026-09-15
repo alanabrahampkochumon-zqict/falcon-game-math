@@ -39,7 +39,7 @@ namespace
 
         void SetUp() override
         {
-            _matrix            = { fgm::Vec2{ T(1), T(4) }, fgm::Vec2{ T(2), T(5) }, fgm::Vec2{ T(3), T(6) } };
+            _matrix            = { fgm::CVec2{ T(1), T(4) }, fgm::CVec2{ T(2), T(5) }, fgm::CVec2{ T(3), T(6) } };
             _expectedTranspose = { fgm::Vec3{ T(1), T(2), T(3) }, fgm::Vec3{ T(4), T(5), T(6) } };
         }
     };

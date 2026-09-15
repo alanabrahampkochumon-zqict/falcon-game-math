@@ -33,7 +33,7 @@ namespace
     {
     protected:
         std::vector<T> _elements;
-        fgm::Vec2<T> _col0, _col1, _col2, _col3;
+        fgm::CVec2<T> _col0, _col1, _col2, _col3;
 
         void SetUp() override
         {
@@ -67,7 +67,7 @@ namespace
 
 
         /// @test Verify that the matrix can be initialized at compile time using column vectors.
-        constexpr fgm::Mat2x4 MAT2(fgm::Vec2(1, 5), fgm::Vec2(2, 6), fgm::Vec2(3, 7), fgm::Vec2(4, 8));
+        constexpr fgm::Mat2x4 MAT2(fgm::CVec2(1, 5), fgm::CVec2(2, 6), fgm::CVec2(3, 7), fgm::CVec2(4, 8));
         static_assert(MAT2(0, 0) == 1);
         static_assert(MAT2(0, 1) == 2);
         static_assert(MAT2(0, 2) == 3);

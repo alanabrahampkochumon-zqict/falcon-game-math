@@ -38,9 +38,9 @@ namespace
 
         void SetUp() override
         {
-            _matA        = { fgm::Vec2<T>(1, 2), fgm::Vec2<T>(3, 4), fgm::Vec2<T>(4, 6), fgm::Vec2<T>(1, 2) };
-            _matB        = { fgm::Vec2<T>(5, 6), fgm::Vec2<T>(7, 8), fgm::Vec2<T>(1, 3), fgm::Vec2<T>(3, 2) };
-            _expectedSum = { fgm::Vec2<T>(6, 8), fgm::Vec2<T>(10, 12), fgm::Vec2<T>(5, 9), fgm::Vec2<T>(4, 4) };
+            _matA        = { fgm::CVec2<T>(1, 2), fgm::CVec2<T>(3, 4), fgm::CVec2<T>(4, 6), fgm::CVec2<T>(1, 2) };
+            _matB        = { fgm::CVec2<T>(5, 6), fgm::CVec2<T>(7, 8), fgm::CVec2<T>(1, 3), fgm::CVec2<T>(3, 2) };
+            _expectedSum = { fgm::CVec2<T>(6, 8), fgm::CVec2<T>(10, 12), fgm::CVec2<T>(5, 9), fgm::CVec2<T>(4, 4) };
         }
     };
     TYPED_TEST_SUITE(Mat2x4AdditionTests, SupportedArithmeticTypes);
@@ -85,10 +85,10 @@ TYPED_TEST(Mat2x4AdditionTests, PlusOperator_ReturnsMatrixSum)
 
 TEST(Mat2x4AdditionTests, PlusOperator_MixedType_PromotesType)
 {
-    const fgm::Mat2x4 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f },
-                            fgm::Vec2{ 2.0f, 8.0f } };
-    const fgm::Mat2x4 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 },
-                            fgm::Vec2{ 13.0, 3.0 } };
+    const fgm::Mat2x4 mat1{ fgm::CVec2{ 1.0f, 2.0f }, fgm::CVec2{ -3.0f, -4.0f }, fgm::CVec2{ 5.0f, 12.0f },
+                            fgm::CVec2{ 2.0f, 8.0f } };
+    const fgm::Mat2x4 mat2{ fgm::CVec2{ 10.0, 2.0 }, fgm::CVec2{ 3.0, 8.0 }, fgm::CVec2{ -2.0, -12.0 },
+                            fgm::CVec2{ 13.0, 3.0 } };
     [[maybe_unused]] const fgm::Mat2x4 sum = mat1 + mat2;
 
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
@@ -104,10 +104,10 @@ TYPED_TEST(Mat2x4AdditionTests, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 
 TEST(Mat2x4AdditionTests, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Mat2x4 mat1{ fgm::Vec2{ 1.0f, 2.0f }, fgm::Vec2{ -3.0f, -4.0f }, fgm::Vec2{ 5.0f, 12.0f },
-                      fgm::Vec2{ 3.0f, 1.0f } };
-    const fgm::Mat2x4 mat2{ fgm::Vec2{ 10.0, 2.0 }, fgm::Vec2{ 3.0, 8.0 }, fgm::Vec2{ -2.0, -12.0 },
-                            fgm::Vec2{ 1.0, 6.0 } };
+    fgm::Mat2x4 mat1{ fgm::CVec2{ 1.0f, 2.0f }, fgm::CVec2{ -3.0f, -4.0f }, fgm::CVec2{ 5.0f, 12.0f },
+                      fgm::CVec2{ 3.0f, 1.0f } };
+    const fgm::Mat2x4 mat2{ fgm::CVec2{ 10.0, 2.0 }, fgm::CVec2{ 3.0, 8.0 }, fgm::CVec2{ -2.0, -12.0 },
+                            fgm::CVec2{ 1.0, 6.0 } };
 
     mat1 += mat2;
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);

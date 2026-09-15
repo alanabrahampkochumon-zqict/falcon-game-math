@@ -87,7 +87,7 @@ namespace demo
         }
 
         template <typename T>
-        void renderTriangleWireframe(const fgm::Vec2<T>& v0, const fgm::Vec2<T>& v1, const fgm::Vec2<T>& v2)
+        void renderTriangleWireframe(const fgm::CVec2<T>& v0, const fgm::CVec2<T>& v1, const fgm::CVec2<T>& v2)
         {
             renderLine(v0.x(), v0.y(), v1.x(), v1.y(), 0xff, 0xff, 0xff, 0xff);
             renderLine(v1.x(), v1.y(), v2.x(), v2.y(), 0xff, 0xff, 0xff, 0xff);
@@ -134,7 +134,7 @@ namespace demo
          *         negative number if the poit is below the edge and 0 if the point is on the edge.
          */
         template <typename T>
-        T edgeCross(const fgm::Vec2<T>& vert0, const fgm::Vec2<T>& vert1, const fgm::Vec2<T>& point)
+        T edgeCross(const fgm::CVec2<T>& vert0, const fgm::CVec2<T>& vert1, const fgm::CVec2<T>& point)
         {
             // We are assuming that the edges start from vert0
             const auto edge0 = vert1 - vert0;
@@ -143,8 +143,8 @@ namespace demo
         }
 
 
-        BarycentricCoordinates computeBaryCentricCoordinates(const fgm::Vec2F& v0, const fgm::Vec2F& v1,
-                                                             const fgm::Vec2F& v2, const fgm::Vec2F& point)
+        BarycentricCoordinates computeBaryCentricCoordinates(const fgm::CVec2F& v0, const fgm::CVec2F& v1,
+                                                             const fgm::CVec2F& v2, const fgm::CVec2F& point)
         {
             // Division by two is omitted since that is common in smaller triangles area too
             const auto triArea   = (v1 - v0).cross(v2 - v1);
@@ -157,8 +157,8 @@ namespace demo
                                            .gamma = gammaArea / triArea };
         }
 
-        BarycentricCoordinates computeBaryCentricCoordinates(const fgm::Vec2F& v0, const fgm::Vec2F& v1,
-                                                             const fgm::Vec2F& v2, const fgm::Vec2F& point,
+        BarycentricCoordinates computeBaryCentricCoordinates(const fgm::CVec2F& v0, const fgm::CVec2F& v1,
+                                                             const fgm::CVec2F& v2, const fgm::CVec2F& point,
                                                              const float triArea)
         {
             const auto alphaArea = 0.5f * (v2 - v1).cross(point - v1);
@@ -177,7 +177,7 @@ namespace demo
          * @param v1 The second vertex of the edge.
          * @return `true` if the edge is a top or left edge else `false`.
          */
-        bool isTopLeftEdge(const fgm::Vec2<float>& v0, const fgm::Vec2<float>& v1)
+        bool isTopLeftEdge(const fgm::CVec2<float>& v0, const fgm::CVec2<float>& v1)
         {
             const auto edge = v1 - v0;
             // Top Left if edge's x coordinate is positive (negative is bottom edge due to clockwise convention used)
@@ -213,9 +213,9 @@ namespace demo
         // minValue-> Lowest vertex value
         // maxValue -> Highest vertex value
         template <typename T>
-        fgm::Vec2<T> toScreenSpace(const fgm::Vec3<T>& vec) const
+        fgm::CVec2<T> toScreenSpace(const fgm::Vec3<T>& vec) const
         {
-            return fgm::Vec2<T>{
+            return fgm::CVec2<T>{
                 width - vec.x() * width,
                 height - vec.y() * height,
             };
@@ -230,7 +230,7 @@ namespace demo
                                  static_cast<T>((vec.z() - minValueVec.z()) / (maxValueVec.z() - minValueVec.z())) };
         }
 
-        inline BoundingBox computeBoundingBox(const fgm::Vec2F& v0, const fgm::Vec2F& v1, const fgm::Vec2F& v2)
+        inline BoundingBox computeBoundingBox(const fgm::CVec2F& v0, const fgm::CVec2F& v1, const fgm::CVec2F& v2)
         {
             return BoundingBox{
                 .top    = static_cast<std::size_t>(std::min({ v0.y(), v1.y(), v2.y() })),
@@ -290,7 +290,7 @@ namespace demo
                 {
                     const auto offset      = y * static_cast<std::size_t>(width) + x;
                     const auto colorOffset = static_cast<std::size_t>(colorChannels) * offset;
-                    const auto point       = fgm::Vec2(static_cast<float>(x), static_cast<float>(y));
+                    const auto point       = fgm::CVec2(static_cast<float>(x), static_cast<float>(y));
 
                     if (offset > static_cast<std::size_t>(width * height))
                     {
