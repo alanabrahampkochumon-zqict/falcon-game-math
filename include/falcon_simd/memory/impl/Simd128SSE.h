@@ -329,6 +329,8 @@ namespace falcon
         /// @note  Faster than manually doing (~RegA & RegB) since this executes only a single SIMD instruction.
         [[nodiscard]] constexpr Simd128 andNot(Simd128 other) const noexcept;
 
+        /// @brief Perform OR operation on the entire vector, horizontally.
+        [[nodiscard]] constexpr DataType horizontalOr() const noexcept;
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///   ARITHMETIC OPERATIONS
