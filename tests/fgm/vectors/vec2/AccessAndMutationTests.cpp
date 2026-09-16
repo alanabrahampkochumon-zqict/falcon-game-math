@@ -24,7 +24,7 @@
  **************************************/
 
 /** @test Verify that the components are accessible via named spatial aliases (x, y). */
-TEST(Vec2AccessTests, AccessibleAsXYZW)
+TEST(Vec2AccessTests, AccessibleAsXY)
 {
     static const fgm::Vec2 vec(3.0f, 1.0f);
 
@@ -34,7 +34,7 @@ TEST(Vec2AccessTests, AccessibleAsXYZW)
 
 
 /** @test Verify that the components are accessible via named spatial aliases (s, t). */
-TEST(Vec2AccessTests, AccessibleAsSTPQ)
+TEST(Vec2AccessTests, AccessibleAsST)
 {
     const fgm::Vec2 vec(3.0f, 1.0f);
 
@@ -44,7 +44,7 @@ TEST(Vec2AccessTests, AccessibleAsSTPQ)
 
 
 /** @test Verify that the components are accessible via named spatial aliases (r, g). */
-TEST(Vec2AccessTests, AccessibleAsRGBA)
+TEST(Vec2AccessTests, AccessibleAsRG)
 {
     const fgm::Vec2 vec(3.0f, 1.0f);
 
@@ -68,7 +68,7 @@ TEST(Vec2AccessTests, AccessibleAsArray)
  **************************************/
 
 /** @test Verify that the components can be mutated via named spatial aliases (x, y). */
-TEST(Vec2MutationTests, ElementsCanBeMutatedUsingXYZW)
+TEST(Vec2MutationTests, ElementsCanBeMutatedUsingXY)
 {
     fgm::Vec2<float> vec;
 
@@ -81,7 +81,7 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingXYZW)
 
 
 /** @test Verify that the components can be mutated via named spatial aliases (s, t). */
-TEST(Vec2MutationTests, ElementsCanBeMutatedUsingSTPQ)
+TEST(Vec2MutationTests, ElementsCanBeMutatedUsingST)
 {
     fgm::Vec2<float> vec;
 
@@ -94,7 +94,7 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingSTPQ)
 
 
 /** @test Verify that the components can be mutated via named spatial aliases (r, g). */
-TEST(Vec2MutationTests, ElementsCanBeMutatedUsingRGBA)
+TEST(Vec2MutationTests, ElementsCanBeMutatedUsingRG)
 {
     fgm::Vec2<float> vec;
 

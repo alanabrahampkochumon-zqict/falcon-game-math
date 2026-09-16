@@ -4,17 +4,18 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: September 15, 2026
  *
- * @brief Templated 2D Vector supporting integral, floating-point, and boolean types.
- *
- * @details Provide high-performance 2D vector implementation with SIMD acceleration
- *          and support for component-wise operations.
+ * @brief High-performance 2D vector implementation with SIMD acceleration.
  *
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
+ * @warning Due to the inherent nature of SIMD, indexing using operator[] is strongly discouraged.
+ *          For non-frequent indices use functional variants like x(), y(), s(), t(), etc.
+ *          or compile-time indexing using get<Index> or set<Index>.
+ *          If your program require frequent mutation of types, it is recommended to use @ref fgm::CVec2
+ *          and convert it to Vec2 after mutation logic, prior to operations.
  *
  * @par Configuration
  * Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
  * Even if disabled, functional comparisons like `greaterThan()` remain available.
- * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,10 +26,10 @@
 #include "fgm/common/Constants.h"
 #include "fgm/common/MathTraits.h"
 #include "fgm/common/OperationStatus.h"
-#include <falcon_core/Preprocessors.h>
 #include "fgm/common/Types.h"
 
 #include <array>
+#include <falcon_core/Preprocessors.h>
 #include <falcon_simd/FalconSimd.h>
 #include <iomanip>
 #include <type_traits>
@@ -2368,14 +2369,14 @@ namespace fgm
                 : _vec{ parent }, _index{ index }
             {}
 
-            FALCON_INLINE constexpr const IndexableProxy& operator=(T value) const noexcept
+            FALCON_INLINE constexpr IndexableProxy& operator=(T value) noexcept
             {
                 _vec._data.setAt(_index, value);
                 return *this;
             }
 
             // Allows for operator chaining
-            FALCON_INLINE constexpr const IndexableProxy& operator=(const IndexableProxy& other) const noexcept
+            FALCON_INLINE constexpr IndexableProxy& operator=(const IndexableProxy& other) noexcept
             {
                 _vec._data.setAt(_index, static_cast<T>(other));
                 return *this;
@@ -2399,14 +2400,14 @@ namespace fgm
         public:
             FALCON_INLINE constexpr ConstIndexableProxy(Vec2& parent) noexcept: _vec{ parent } {}
 
-            FALCON_INLINE constexpr ConstIndexableProxy& operator=(T value) && noexcept
+            FALCON_INLINE constexpr ConstIndexableProxy& operator=(T value) noexcept
             {
                 _vec._data.template setAt<Index>(value);
                 return *this;
             }
 
             // Allows for operator chaining(a = b = c)
-            FALCON_INLINE constexpr ConstIndexableProxy& operator=(const ConstIndexableProxy& other) && noexcept
+            FALCON_INLINE constexpr ConstIndexableProxy& operator=(const ConstIndexableProxy& other) noexcept
             {
                 _vec._data.template setAt<Index>(static_cast<T>(other));
                 return *this;

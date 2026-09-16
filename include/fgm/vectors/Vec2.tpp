@@ -102,7 +102,7 @@ namespace fgm
 
     template <Arithmetic T>
     FALCON_INLINE constexpr T Vec2<T>::t() const noexcept
-    { return _data.template getAt<0>(); }
+    { return _data.template getAt<1>(); }
 
 
     template <Arithmetic T>
@@ -128,7 +128,7 @@ namespace fgm
 
     template <Arithmetic T>
     FALCON_INLINE constexpr T Vec2<T>::g() const noexcept
-    { return _data.template getAt<0>(); }
+    { return _data.template getAt<1>(); }
 
 
     template <Arithmetic T>
@@ -157,7 +157,7 @@ namespace fgm
         return _data.getAt(idx);
     }
 
-
+    // TODO: Add swizzling after adding compiletime indexing (get<> and set<>)
     //     /**************************************
     //      *                                    *
     //      *             SWIZZLING              *
@@ -229,8 +229,8 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& lhs, const Vec2<U>& rhs, const double epsilon) noexcept
-    //     { return lhs.allEq(rhs, epsilon); }
+    //     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& lhs, const Vec2<U>& rhs, const double epsilon)
+    //     noexcept { return lhs.allEq(rhs, epsilon); }
     //
     //
     //     template <Arithmetic T>
@@ -254,8 +254,8 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2& lhs, const Vec2<U>& rhs, const double epsilon) noexcept
-    //     { return lhs.anyNeq(rhs, epsilon); }
+    //     FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2& lhs, const Vec2<U>& rhs, const double epsilon)
+    //     noexcept { return lhs.anyNeq(rhs, epsilon); }
     //
     //
     //     /**************************************
@@ -727,8 +727,8 @@ namespace fgm
     //
     //     template <Arithmetic T>
     //     template <StrictArithmetic S>
-    //     FALCON_INLINE constexpr PromotedVec2<T, S> Vec2<T>::tryDiv(const Vec2& vec, S scalar, OperationStatus& status)
-    //     noexcept
+    //     FALCON_INLINE constexpr PromotedVec2<T, S> Vec2<T>::tryDiv(const Vec2& vec, S scalar, OperationStatus&
+    //     status) noexcept
     //         requires StrictArithmetic<T>
     //     { return vec.tryDiv(scalar, status); }
     //
@@ -792,7 +792,8 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedMat2<T, U> Vec2<T>::tensorProduct(const Vec2& lhs, const Vec2<U>& rhs) noexcept
+    //     FALCON_INLINE constexpr PromotedMat2<T, U> Vec2<T>::tensorProduct(const Vec2& lhs, const Vec2<U>& rhs)
+    //     noexcept
     //         requires StrictArithmetic<T>
     //     { return lhs.tensorProduct(rhs); }
     //
@@ -917,8 +918,8 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Magnitude<PromotedValue_t<T, U>> Vec2<T>::dist(const Vec2<U>& lhs, const Vec2<U>& rhs)
-    //     noexcept
+    //     FALCON_INLINE constexpr Magnitude<PromotedValue_t<T, U>> Vec2<T>::dist(const Vec2<U>& lhs, const Vec2<U>&
+    //     rhs) noexcept
     //         requires StrictArithmetic<T>
     //     { return lhs.dist(rhs); }
     //
@@ -939,7 +940,8 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::distSq(const Vec2<U>& lhs, const Vec2<U>& rhs) noexcept
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::distSq(const Vec2<U>& lhs, const Vec2<U>& rhs)
+    //     noexcept
     //         requires StrictArithmetic<T>
     //     { return lhs.distSq(rhs); }
     //
@@ -1106,14 +1108,16 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::project(const Vec2& vec, const Vec2<U>& onto) noexcept
+    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::project(const Vec2& vec, const Vec2<U>& onto)
+    //     noexcept
     //         requires StrictArithmetic<T>
     //     { return vec.project(onto); }
     //
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::projectNorm(const Vec2& vec, const Vec2<U>& onto) noexcept
+    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::projectNorm(const Vec2& vec, const Vec2<U>& onto)
+    //     noexcept
     //         requires StrictArithmetic<T>
     //     { return vec.projectNorm(onto); }
     //
@@ -1273,7 +1277,8 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::reject(const Vec2& vec, const Vec2<U>& from) noexcept
+    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::reject(const Vec2& vec, const Vec2<U>& from)
+    //     noexcept
     //         requires StrictArithmetic<T>
     //     { return vec.reject(from); }
     //
@@ -1281,7 +1286,8 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::rejectNorm(const Vec2& vector, const Vec2<U>& from) noexcept
+    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::rejectNorm(const Vec2& vector, const Vec2<U>& from)
+    //     noexcept
     //         requires StrictArithmetic<T>
     //     { return vector.rejectNorm(from); }
     //

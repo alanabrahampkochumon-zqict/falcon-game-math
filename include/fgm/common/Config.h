@@ -11,8 +11,9 @@
 
 
 
-#include "PreprocessorDefinitions.h"
 #include "MathTraits.h"
+
+#include <falcon_core/Preprocessors.h>
 
 namespace fgm
 {
