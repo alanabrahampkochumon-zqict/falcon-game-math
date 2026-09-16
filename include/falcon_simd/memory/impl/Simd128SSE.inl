@@ -1,5 +1,4 @@
 #pragma once
-#include "Simd128SSE.h"
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon
@@ -36,11 +35,15 @@ namespace falcon
 
     template <typename DataType, size_t Lane>
     constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(std::span<const DataType> values) noexcept
-    { loadAligned(values.data()); }
+    {
+        loadAligned(values.data());
+    }
 
     template <typename DataType, size_t Lane>
     constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(const DataType* buffer) noexcept
-    { loadAligned(buffer); }
+    {
+        loadAligned(buffer);
+    }
 
     template <typename DataType, size_t Lane>
     template <typename... Args>

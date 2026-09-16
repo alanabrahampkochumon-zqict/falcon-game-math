@@ -28,7 +28,6 @@
 #include "fgm/common/OperationStatus.h"
 #include "fgm/common/Types.h"
 
-#include <array>
 #include <falcon_core/Preprocessors.h>
 #include <falcon_simd/FalconSimd.h>
 #include <iomanip>

@@ -73,6 +73,8 @@ namespace falcon
         /**
          * @brief Initialize a 128-bit SIMD register with values from a std::container(std::array, std::vector).
          *
+         * @note Unused lanes must be zeroed-out manually.
+         *
          * @param values The values to fill the register with.
          *
          * @warning The container must be aligned to 16-byte boundary. For unaligned data,
@@ -86,6 +88,7 @@ namespace falcon
          *
          * @note Passing in a buffer with allocated size less than @p Lane * @p sizeof(DataType)
          *       can cause segmentation faults.
+         * @note Unused lanes must be zeroed-out manually.
          *
          * @param buffer The starting address of the values to fill the register with.
          *
@@ -101,6 +104,7 @@ namespace falcon
          * @note Internally the register gets filled from the bottom to top, but when used with store
          *       to retrieve the value, the values will be identical.
          *       REGISTER VIEW SET(1, 2) => [0, 0, 2, 1] => STORE() => [1, 2]
+         * @note Unused lanes are zeroed out.
          *
          * @tparam Args The numeric type of arguments. Must be less than the maximum lane size.
          *
