@@ -43,6 +43,7 @@
          *   @defgroup T_SIMD128_Cmp Comparison operation Tests(>, <, >=, <=, ==, !=)
          *   @defgroup T_SIMD128_Bit Bitwise operation Tests(>, <, >=, <=, ==, !=)
          *   @defgroup T_SIMD128_Shuffle Shuffling and Blending Operations
+         *   @defgroup T_SIMD128_Utils Simd Utilities.
          * @}
         */
 

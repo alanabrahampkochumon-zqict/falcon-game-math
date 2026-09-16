@@ -8,6 +8,7 @@ add_executable(FalconSIMDMemoryTests
         Simd128/BlendTests.cpp
         Simd128/ShuffleTests.cpp
         Simd128/ConstructorTests.cpp
+        Simd128/UtilTests.cpp
 )
 
 target_compile_options(FalconSIMDMemoryTests PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>)

@@ -666,7 +666,7 @@ namespace falcon
          *
          * @return Return a new register with blended values.
          */
-        constexpr Simd128 blend(Simd128 other, Simd128 mask) const noexcept;
+        [[nodiscard]] constexpr Simd128 blend(Simd128 other, Simd128 mask) const noexcept;
 
         /**
          * Shuffle the values as per given index.
@@ -678,15 +678,27 @@ namespace falcon
          * @return A new Simd register with shuffled values.
          */
         template <uint8_t... ShuffleIndex>
-        constexpr Simd128 shuffle() const noexcept;
+        [[nodiscard]] constexpr Simd128 shuffle() const noexcept;
 
 
         /// @brief Get the internal register used by Simd128.
-        FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept { return _register; }
+        [[nodiscard]] FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept
+        { return _register; }
 
 
         /// @brief Get the internal register used by Simd128.
-        FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> operator*() const noexcept { return _register; }
+        [[nodiscard]] FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> operator*() const noexcept
+        { return _register; }
+
+
+
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///       UTILITIES
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /// @brief Get a mask with the Nan status of each Lane of elements.
+        /// @note Integrals always return a zero register.
+        [[nodiscard]] constexpr Simd128 hasNan() const noexcept;
 
 
     private:

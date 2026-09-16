@@ -35,15 +35,11 @@ namespace falcon
 
     template <typename DataType, size_t Lane>
     constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(std::span<const DataType> values) noexcept
-    {
-        loadAligned(values.data());
-    }
+    { loadAligned(values.data()); }
 
     template <typename DataType, size_t Lane>
     constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(const DataType* buffer) noexcept
-    {
-        loadAligned(buffer);
-    }
+    { loadAligned(buffer); }
 
     template <typename DataType, size_t Lane>
     template <typename... Args>
@@ -2292,6 +2288,44 @@ namespace falcon
         }
     }
 
+
+    template <typename DataType, size_t Lane>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::hasNan()
+        const noexcept
+    {
+        if constexpr (types::IsFP64<DataType>)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX)
+            {
+                return Simd128(_mm_cmp_pd(_register, _register, _CMP_UNORD_Q));
+            }
+            else
+            {
+                return Simd128(_mm_cmpunord_pd(_register, _register));
+            }
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX)
+            {
+                return Simd128(_mm_cmp_ps(_register, _register, _CMP_UNORD_Q));
+            }
+            else
+            {
+                return Simd128(_mm_cmpunord_ps(_register, _register));
+            }
+        }
+        else // if constexpr (std::is_integral_v<DataType>)
+        {
+            return Simd128(_mm_setzero_si128());
+        }
+    }
+
+
+
+    ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+    ///    PRIVATE FUNCTIONS
+    ///+=+=+=+=+=+=+=+=+=+=+=+=+=
 
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr __m128i Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::_mm_srl_epi8_custom(
