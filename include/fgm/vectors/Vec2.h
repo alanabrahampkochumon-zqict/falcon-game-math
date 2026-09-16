@@ -94,6 +94,12 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] explicit constexpr Vec2(const Vec2<U>& other) noexcept;
 
+        /**
+         * @brief Initialize a @ref Vec2 with an Simd128_t register.
+         * @param reg The register to bind to this vector.
+         */
+        [[nodiscard]] explicit constexpr Vec2(const falcon::Simd128_t<T, DIMENSION>& reg) noexcept;
+
         /** @} */
 
 
@@ -764,265 +770,255 @@ namespace fgm
         //             requires std::is_same_v<T, bool>;
         //
         //         /** @} */
-        //
-        //
-        //         /**
-        //          * @addtogroup FGM_Vec2_Arithmetic
-        //          * @{
-        //          */
-        //
-        //         /**
-        //          * @brief Compute the component-wise sum of this vector with @p rhs vector and return a new vector.
-        //          *
-        //          * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The vector to add.
-        //          *
-        //          * @return A new @ref Vec2 containing the component-wise sum.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr PromotedVec2<T, U> operator+(const Vec2<U>& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise sum of this vector with @p rhs vector in-place.
-        //          *
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The vector to add.
-        //          *
-        //          * @return A reference to this vector (*this).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         constexpr Vec2& operator+=(const Vec2<U>& rhs) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise difference between this vector and @p rhs vector and return a
-        //          new vector.
-        //          *
-        //          * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The vector to subtract.
-        //          *
-        //          * @return A new @ref Vec2 containing the component-wise difference.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr PromotedVec2<T, U> operator-(const Vec2<U>& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise difference between this vector and @p rhs vector in-place.
-        //          *
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The vector to subtract.
-        //          *
-        //          * @return A reference to this vector (*this).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         constexpr Vec2& operator-=(const Vec2<U>& rhs) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Negate each component of this vector and return a new @ref Vec2<T>.
-        //          *
-        //          * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
-        //          *
-        //          * @return A new @ref fgm::Vec2 with negated components.
-        //          */
-        //         [[nodiscard]] constexpr Vec2 operator-() const noexcept
-        //             requires SignedStrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise product between this vector and @p scalar and return a new
-        //          vector.
-        //          *
-        //          * @note Promotes the result to the wider type using @ref PromotedVec2<T, S>.
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] scalar The value to scale by.
-        //          *
-        //          * @return A new @ref Vec2 scaled by @p scalar.
-        //          */
-        //         template <StrictArithmetic S>
-        //         [[nodiscard]] constexpr PromotedVec2<T, S> operator*(S scalar) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise product between this vector and @p scalar in-place.
-        //          *
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] scalar The value to scale by.
-        //          *
-        //          * @return A reference to this vector (*this).
-        //          */
-        //         template <StrictArithmetic S>
-        //         constexpr Vec2& operator*=(S scalar) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
-        //          *
-        //          * @note Promotes the result to the wider type using @ref PromotedVec2<T, S>.
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          * @note Performs assertion for division by zero in **Debug mode**.
-        //          *
-        //          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] scalar The value to scale by.
-        //          *
-        //          * @return A new @ref Vec2 scaled by @p scalar.
-        //          */
-        //         template <StrictArithmetic S>
-        //         [[nodiscard]] constexpr PromotedVec2<T, S> operator/(S scalar) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise division of this vector by @p scalar in-place.
-        //          *
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          * @note Performs assertion for division by zero in **Debug mode**.
-        //          *
-        //          * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] scalar The value to scale by.
-        //          *
-        //          * @return A reference to this vector (*this).
-        //          */
-        //         template <StrictArithmetic S>
-        //         constexpr Vec2& operator/=(S scalar) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
-        //          *
-        //          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
-        //          components,
-        //          *       returns a zero vector.
-        //          * @note Promotes the result to the wider type using @ref PromotedVec2<T, S>.
-        //          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-        //          *
-        //          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
-        //          *
-        //          * @param[in] scalar The value to divide the vector components by.
-        //          *
-        //          * @return A new @ref Vec2 resulting from the division or a zero-vector if the @p scalar is below the
-        //          *         epsilon threshold or if either of the vectors contains NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic S>
-        //         [[nodiscard]] constexpr PromotedVec2<T, S> safeDiv(S scalar) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise division of @p Vec by @p scalar and return a new vector.
-        //          *
-        //          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
-        //          components,
-        //          *       returns a zero vector.
-        //          * @note Promotes the result to the wider type using @ref PromotedVec2<T, S>.
-        //          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-        //          *
-        //          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
-        //          *
-        //          * @param[in] vec The vector to divide.
-        //          * @param[in] scalar The value to divide the vector components by.
-        //          *
-        //          * @return A new @ref Vec2 resulting from the division or a zero-vector if the @p scalar is below the
-        //          *         epsilon threshold or if either of the vectors contains NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic S>
-        //         [[nodiscard]] static constexpr PromotedVec2<T, S> safeDiv(const Vec2& vec, S scalar) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise division of this vector by @p scalar, return a new vector,
-        //          *        and updates @p status to reflect the result of the operation.
-        //          *
-        //          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
-        //          components,
-        //          *       returns a zero vector.
-        //          * @note Promotes the result to the wider type using @ref PromotedVec2<T, S>.
-        //          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-        //          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
-        //          mathematical
-        //          *       invalidity (Division by Zero) when reporting status.
-        //          *
-        //          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
-        //          *
-        //          * @param[in] scalar  The value to divide the vector components by.
-        //          * @param[out] status The status flag to store the status of the current operation result.
-        //          *                    For details on status codes see @ref OperationStatus.
-        //          *
-        //          * @return A new @ref Vec2 resulting from the division or a zero-vector if the @p scalar is below the
-        //          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic S>
-        //         [[nodiscard]] constexpr PromotedVec2<T, S> tryDiv(S scalar, OperationStatus& status) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the component-wise division of @p Vec by @p scalar, return a new vector,
-        //          *        and updates @p status to reflect the result of the operation.
-        //          *
-        //          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
-        //          components,
-        //          *       returns a zero vector.
-        //          * @note Promotes the result to the wider type using @ref PromotedVec2<T, S>.
-        //          * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
-        //          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
-        //          mathematical
-        //          *       invalidity (Division by Zero) when reporting status.
-        //          *
-        //          * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
-        //          *
-        //          * @param[in] vec     The vector to divide.
-        //          * @param[in] scalar  The value to divide the vector components by.
-        //          * @param[out] status The status flag to store the status of the current operation result.
-        //          *                    For details on status codes see @ref OperationStatus.
-        //          *
-        //          * @return A new @ref Vec2 resulting from the division or a zero-vector if the @p scalar is below the
-        //          *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic S>
-        //         [[nodiscard]] static constexpr PromotedVec2<T, S> tryDiv(const Vec2& vec, S scalar,
-        //                                                                  OperationStatus& status) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //         /** @} */
-        //
-        //
+
+
+        /**
+         * @addtogroup FGM_Vec2_Arithmetic
+         * @{
+         */
+
+        /**
+         * @brief Compute the component-wise sum of this vector with @p rhs vector and return a new vector.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Both operands must be of the same numeric type.
+         *
+         * @param[in] rhs The vector to add.
+         *
+         * @return A new @ref Vec2 containing the component-wise sum.
+         */
+        [[nodiscard]] constexpr Vec2 operator+(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise sum of this vector with @p rhs vector in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *@note Both operands must be of the same numeric type.
+         *
+         * @param[in] rhs The vector to add.
+         *
+         * @return A reference to this vector (*this).
+         */
+        constexpr Vec2& operator+=(const Vec2& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise difference between this vector and @p rhs vector and return a
+         *        new vector.
+         *
+         * @note Promotes the result to the wider type using @ref PromotedVec2<T, U>.
+         * @note Both operands must be of the same numeric type.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to subtract.
+         *
+         * @return A new @ref Vec2 containing the component-wise difference.
+         */
+        [[nodiscard]] constexpr Vec2 operator-(const Vec2 rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise difference between this vector and @p rhs vector in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Both operands must be of the same numeric type.
+         *
+         * @param[in] rhs The vector to subtract.
+         *
+         * @return A reference to this vector (*this).
+         */
+        constexpr Vec2& operator-=(const Vec2& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Negate each component of this vector and return a new @ref Vec2<T>.
+         *
+         * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
+         *
+         * @return A new @ref fgm::Vec2 with negated components.
+         */
+        [[nodiscard]] constexpr Vec2 operator-() const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise product between this vector and @p scalar and
+         *        return a new vector.
+         *
+         * @warning The scalar value will be cast to the numeric type of the vector.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Vec2 scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr Vec2 operator*(S scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise product between this vector and @p scalar in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @warning The scalar value will be cast to the numeric type of the vector.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this vector (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Vec2& operator*=(S scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
+         *
+         * @warning The scalar value will be cast to the numeric type of the vector.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A new @ref Vec2 scaled by @p scalar.
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr Vec2 operator/(S scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise division of this vector by @p scalar in-place.
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         * @note Performs assertion for division by zero in **Debug mode**.
+         *
+         * @warning The scalar value will be cast to the numeric type of the vector.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] scalar The value to scale by.
+         *
+         * @return A reference to this vector (*this).
+         */
+        template <StrictArithmetic S>
+        constexpr Vec2& operator/=(S scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise division of this vector by @p scalar and return a new vector.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
+         *       components, returns a zero vector.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         *
+         * @warning The scalar value will be cast to the numeric type of the vector.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] scalar The value to divide the vector components by.
+         *
+         * @return A new @ref Vec2 resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold or if either of the vectors contains NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr Vec2 safeDiv(S scalar) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise division of @p Vec by @p scalar and return a new vector.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
+         *       components, returns a zero vector.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         *
+         * @warning The scalar value will be cast to the numeric type of the vector.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] vec The vector to divide.
+         * @param[in] scalar The value to divide the vector components by.
+         *
+         * @return A new @ref Vec2 resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold or if either of the vectors contains NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] static constexpr Vec2 safeDiv(const Vec2& vec, S scalar) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise division of this vector by @p scalar, return a new vector,
+         *        and updates @p status to reflect the result of the operation.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
+         *       components, returns a zero vector.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
+         *       mathematical invalidity (Division by Zero) when reporting status.
+         *
+         * @warning The scalar value will be cast to the numeric type of the vector.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] scalar  The value to divide the vector components by.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A new @ref Vec2 resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] constexpr Vec2 tryDiv(S scalar, OperationStatus& status) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the component-wise division of @p Vec by @p scalar, return a new vector,
+         *        and updates @p status to reflect the result of the operation.
+         *
+         * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
+         *       components, returns a zero vector.
+         * @note Promotes the result to the wider type using @ref PromotedVec2<T, S>.
+         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
+         *       mathematical invalidity (Division by Zero) when reporting status.
+         *
+         * @warning The scalar value will be cast to the numeric type of the vector.
+         *
+         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         *
+         * @param[in] vec     The vector to divide.
+         * @param[in] scalar  The value to divide the vector components by.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A new @ref Vec2 resulting from the division or a zero-vector if the @p scalar is below the
+         *         epsilon threshold or if either of the vectors+ has NaN(Not-a-Number) component(s).
+         */
+        template <StrictArithmetic S>
+        [[nodiscard]] static constexpr Vec2 tryDiv(const Vec2& vec, S scalar, OperationStatus& status) noexcept
+            requires StrictArithmetic<T>;
+
+        /** @} */
+
+
         //         /**
         //          * @addtogroup FGM_Vec2_Product
         //          * @{
@@ -2249,104 +2245,104 @@ namespace fgm
         //         }
         //
         //         /** @} */
-        //
-        //         /**
-        //          * @addtogroup FGM_Vec2_Const
-        //          * @{
-        //          */
-        //
-        //         /*************************************
-        //          *                                   *
-        //          *            CONSTANTS              *
-        //          *                                   *
-        //          *************************************/
-        //
-        //         // NOLINTBEGIN
-        //
-        //         /**
-        //          * @brief A 2D vector with all components set to one (1, 1).
-        //          */
-        //         static constexpr Vec2 one()
-        //             requires StrictArithmetic<T>
-        //         { return Vec2{ T(1), T(1) }; }
-        //
-        //
-        //         /**
-        //          * @brief A 2D vector with all components set to zero (0, 0).
-        //          */
-        //         static constexpr Vec2 zero()
-        //             requires StrictArithmetic<T>
-        //         { return Vec2{ T(0), T(0) }; }
-        //
-        //
-        //         /**
-        //          * @brief A 2D vector with all components set to positive infinity.
-        //          *
-        //          * @note Constrained to floating point types.
-        //          */
-        //         static constexpr Vec2 inf()
-        //             requires std::floating_point<T>
-        //         { return Vec2{ T(constants::INFINITY_D), T(constants::INFINITY_D) }; }
-        //
-        //
-        //         /**
-        //          * @brief A 2D vector with all components set to negative infinity.
-        //          *
-        //          * @note Constrained to floating point types.
-        //          */
-        //         static constexpr Vec2 infNeg()
-        //             requires std::floating_point<T>
-        //         { return Vec2{ T(-constants::INFINITY_D), T(-constants::INFINITY_D) }; }
-        //
-        //
-        //         /**
-        //          * @brief A 2D vector with all components set to Not-A-Number (NaN).
-        //          *
-        //          * @note Constrained to floating point types.
-        //          */
-        //         static constexpr Vec2 qnan()
-        //             requires std::floating_point<T>
-        //         { return Vec2{ T(constants::NaN_D), T(constants::NaN_D) }; }
-        //
-        //
-        //         /**
-        //          * @brief A 2D unit vector aligned with the positive X-axis (1, 0).
-        //          *
-        //          * @note Constrained to signed types.
-        //          */
-        //         static constexpr Vec2 right()
-        //             requires std::is_signed_v<T>
-        //         { return Vec2{ T(1), T(0) }; }
-        //
-        //
-        //         /**
-        //          * @brief A 2D unit vector aligned with the negative X-axis (-1, 0).
-        //          *
-        //          * @note Constrained to signed types.
-        //          */
-        //         static constexpr Vec2 left()
-        //             requires std::is_signed_v<T>
-        //         { return Vec2{ T(-1), T(0) }; }
-        //
-        //
-        //         /**
-        //          * @brief A 2D unit vector aligned with the positive Y-axis (0, 1).
-        //          *
-        //          * @note Constrained to signed types.
-        //          */
-        //         static constexpr Vec2 up()
-        //             requires std::is_signed_v<T>
-        //         { return Vec2{ T(0), T(1) }; }
-        //
-        //
-        //         /**
-        //          * @brief A 2D unit vector aligned with the negative Y-axis (0, -1).
-        //          *
-        //          * @note Constrained to signed types.
-        //          */
-        //         static constexpr Vec2 down()
-        //             requires std::is_signed_v<T>
-        //         { return Vec2{ T(0), T(-1) }; }
+
+        /**
+         * @addtogroup FGM_Vec2_Const
+         * @{
+         */
+
+        /*************************************
+         *                                   *
+         *            CONSTANTS              *
+         *                                   *
+         *************************************/
+
+        // NOLINTBEGIN
+
+        /**
+         * @brief A 2D vector with all components set to one (1, 1).
+         */
+        static constexpr Vec2 one()
+            requires StrictArithmetic<T>
+        { return Vec2{ T(1), T(1) }; }
+
+
+        /**
+         * @brief A 2D vector with all components set to zero (0, 0).
+         */
+        static constexpr Vec2 zero()
+            requires StrictArithmetic<T>
+        { return Vec2{ T(0), T(0) }; }
+
+
+        /**
+         * @brief A 2D vector with all components set to positive infinity.
+         *
+         * @note Constrained to floating point types.
+         */
+        static constexpr Vec2 inf()
+            requires std::floating_point<T>
+        { return Vec2{ T(constants::INFINITY_D), T(constants::INFINITY_D) }; }
+
+
+        /**
+         * @brief A 2D vector with all components set to negative infinity.
+         *
+         * @note Constrained to floating point types.
+         */
+        static constexpr Vec2 infNeg()
+            requires std::floating_point<T>
+        { return Vec2{ T(-constants::INFINITY_D), T(-constants::INFINITY_D) }; }
+
+
+        /**
+         * @brief A 2D vector with all components set to Not-A-Number (NaN).
+         *
+         * @note Constrained to floating point types.
+         */
+        static constexpr Vec2 qnan()
+            requires std::floating_point<T>
+        { return Vec2{ T(constants::NaN_D), T(constants::NaN_D) }; }
+
+
+        /**
+         * @brief A 2D unit vector aligned with the positive X-axis (1, 0).
+         *
+         * @note Constrained to signed types.
+         */
+        static constexpr Vec2 right()
+            requires std::is_signed_v<T>
+        { return Vec2{ T(1), T(0) }; }
+
+
+        /**
+         * @brief A 2D unit vector aligned with the negative X-axis (-1, 0).
+         *
+         * @note Constrained to signed types.
+         */
+        static constexpr Vec2 left()
+            requires std::is_signed_v<T>
+        { return Vec2{ T(-1), T(0) }; }
+
+
+        /**
+         * @brief A 2D unit vector aligned with the positive Y-axis (0, 1).
+         *
+         * @note Constrained to signed types.
+         */
+        static constexpr Vec2 up()
+            requires std::is_signed_v<T>
+        { return Vec2{ T(0), T(1) }; }
+
+
+        /**
+         * @brief A 2D unit vector aligned with the negative Y-axis (0, -1).
+         *
+         * @note Constrained to signed types.
+         */
+        static constexpr Vec2 down()
+            requires std::is_signed_v<T>
+        { return Vec2{ T(0), T(-1) }; }
 
         // NOLINTEND
 
@@ -2422,48 +2418,45 @@ namespace fgm
 
 
 
-    // /*************************************
-    //  *                                   *
-    //  *       NON-MEMBER FUNCTIONS        *
-    //  *                                   *
-    //  *************************************/
-    //
-    // /**
-    //  * @addtogroup FGM_Vec2_Arithmetic
-    //  * @{
-    //  */
-    //
-    // /**
-    //  * @brief Scale the vector by a scalar value.
-    //  *        Multiply @p scalar by each component of the vector and returns a new vector.
-    //  *
-    //  * @note Promotes the result to the wider type using @ref PromotedVec2<T, S>.
-    //  * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-    //  *
-    //  * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
-    //  *
-    //  * @param[in] scalar The value to scale by.
-    //  * @param[in] vector The vector to scale[RHS].
-    //  *
-    //  * @return A new @ref Vec2 scaled by @p scalar.
-    //  */
-    // template <StrictArithmetic T, StrictArithmetic S>
-    // [[nodiscard]] constexpr PromotedVec2<T, S> operator*(S scalar, const Vec2<T>& vector) noexcept
-    //     requires StrictArithmetic<T>;
-    //
-    // /** @} */
-    //
-    //
-    // /**
-    //  * @addtogroup FGM_Vec2_Alias
-    //  * @{
-    //  */
-    //
-    // /*************************************
-    //  *                                   *
-    //  *             ALIASES               *
-    //  *                                   *
-    //  *************************************/
+    /*************************************
+     *       NON-MEMBER FUNCTIONS        *
+     *************************************/
+
+    /**
+     * @addtogroup FGM_Vec2_Arithmetic
+     * @{
+     */
+
+    /**
+     * @brief Scale the vector by a scalar value.
+     *        Multiply @p scalar by each component of the vector and returns a new vector.
+     *
+     * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+     *
+     * @warning The scalar will be cast to the numeric type of the vector.
+     *
+     * @tparam S Numeric type of the scalar. Must satisfy @ref StrictArithmetic.
+     *
+     * @param[in] scalar The value to scale by.
+     * @param[in] vector The vector to scale[RHS].
+     *
+     * @return A new @ref Vec2 scaled by @p scalar.
+     */
+    template <StrictArithmetic T, StrictArithmetic S>
+    [[nodiscard]] constexpr Vec2<T> operator*(S scalar, const Vec2<T>& vector) noexcept
+        requires StrictArithmetic<T>;
+
+    /** @} */
+
+
+    /**
+     * @addtogroup FGM_Vec2_Alias
+     * @{
+     */
+
+    /*************************************
+     *             ALIASES               *
+     *************************************/
 
     using Vec2B   = Vec2<int8_t>;   ///< Signed Byte (8-bit) vector
     using Vec2UB  = Vec2<uint8_t>;  ///< Unsigned Byte (8-bit) vector

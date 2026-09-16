@@ -52,6 +52,11 @@ namespace fgm
         _data[1] = static_cast<T>(other.y());
     }
 
+
+    template <Arithmetic T>
+    constexpr Vec2<T>::Vec2(const falcon::Simd128_t<T, DIMENSION>& reg) noexcept: _data{ reg }
+    {}
+
     /*************************************
      *                                   *
      *            ACCESSORS              *
@@ -491,248 +496,196 @@ namespace fgm
     //         requires std::is_same_v<T, bool>
     //     { return Vec2(!_data[0], !_data[1]); }
     //
-    //
-    //     /*************************************
-    //      *                                   *
-    //      *      ARITHMETIC OPERATORS         *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     /*************************************
-    //      *                                   *
-    //      *            ADDITION               *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::operator+(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    //         return Vec2<R>(_data[0] + rhs[0], _data[1] + rhs[1]);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<T>& Vec2<T>::operator+=(const Vec2<U>& rhs) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         _data[0] += static_cast<T>(rhs[0]);
-    //         _data[1] += static_cast<T>(rhs[1]);
-    //         return *this;
-    //     }
-    //
-    //
-    //     /*************************************
-    //      *                                   *
-    //      *           SUBTRACTION             *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::operator-(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    //         return Vec2<R>(_data[0] - rhs[0], _data[1] - rhs[1]);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<T>& Vec2<T>::operator-=(const Vec2<U>& rhs) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         _data[0] -= static_cast<T>(rhs[0]);
-    //         _data[1] -= static_cast<T>(rhs[1]);
-    //         return *this;
-    //     }
-    //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *         INVERT OPERATION           *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<T> Vec2<T>::operator-() const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     { return Vec2(-_data[0], -_data[1]); }
-    //
-    //
-    //     /*************************************
-    //      *                                   *
-    //      *           MULTIPLICATION          *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     FALCON_INLINE constexpr PromotedVec2<T, S> Vec2<T>::operator*(const S scalar) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //         return Vec2<R>(static_cast<R>(_data[0]) * static_cast<R>(scalar),
-    //                        static_cast<R>(_data[1]) * static_cast<R>(scalar));
-    //     }
-    //
-    //
-    //     template <StrictArithmetic T, StrictArithmetic S>
-    //     FALCON_INLINE constexpr PromotedVec2<T, S> operator*(const S scalar, const Vec2<T>& vector) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vector * scalar; }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     FALCON_INLINE constexpr Vec2<T>& Vec2<T>::operator*=(const S scalar) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         _data[0] = static_cast<T>(scalar * _data[0]);
-    //         _data[1] = static_cast<T>(scalar * _data[1]);
-    //         return *this;
-    //     }
-    //
-    //
-    //     /*************************************
-    //      *                                   *
-    //      *             DIVISION              *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     FALCON_INLINE constexpr PromotedVec2<T, S> Vec2<T>::operator/(const S scalar) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             FALCON_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>,
-    //             fgm::messages::assertion::VEC_DIV_BY_ZERO);
-    //
-    //             R factor = R(1) / static_cast<R>(scalar);
-    //             return Vec2<R>(_data[0] * factor, _data[1] * factor);
-    //         }
-    //         else
-    //         {
-    //             FALCON_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
-    //             R tScalar = static_cast<R>(scalar);
-    //             return Vec2<R>(_data[0] / tScalar, _data[1] / tScalar);
-    //         }
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     FALCON_INLINE constexpr Vec2<T>& Vec2<T>::operator/=(const S scalar) noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         FALCON_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             R factor = R(1) / static_cast<R>(scalar);
-    //
-    //             _data[0] = static_cast<T>(factor * _data[0]);
-    //             _data[1] = static_cast<T>(factor * _data[1]);
-    //         }
-    //         else
-    //         {
-    //             _data[0] = static_cast<T>(_data[0] / static_cast<R>(scalar));
-    //             _data[1] = static_cast<T>(_data[1] / static_cast<R>(scalar));
-    //         }
-    //
-    //         return *this;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     FALCON_INLINE constexpr PromotedVec2<T, S> Vec2<T>::safeDiv(const S scalar) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
-    //             {
-    //                 return Vec2<R>::zero();
-    //             }
-    //         }
-    //         if constexpr (std::is_integral_v<R>)
-    //         {
-    //             if (scalar == 0)
-    //             {
-    //                 return Vec2<R>::zero();
-    //             }
-    //         }
-    //
-    //         return *this / scalar;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     FALCON_INLINE constexpr PromotedVec2<T, S> Vec2<T>::safeDiv(const Vec2& vec, const S scalar) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.safeDiv(scalar); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     FALCON_INLINE constexpr PromotedVec2<T, S> Vec2<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, S>;
-    //
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             if (hasNaN() | fgm::isnan(scalar))
-    //             {
-    //                 status = OperationStatus::NANOPERAND;
-    //                 return Vec2<R>::zero();
-    //             }
-    //             if (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon())
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return Vec2<R>::zero();
-    //             }
-    //         }
-    //
-    //         if constexpr (std::is_integral_v<R>)
-    //         {
-    //             if (scalar == 0)
-    //             {
-    //                 status = OperationStatus::DIVISIONBYZERO;
-    //                 return Vec2<R>::zero();
-    //             }
-    //         }
-    //
-    //
-    //         status = OperationStatus::SUCCESS;
-    //         return *this / scalar;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic S>
-    //     FALCON_INLINE constexpr PromotedVec2<T, S> Vec2<T>::tryDiv(const Vec2& vec, S scalar, OperationStatus&
-    //     status) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.tryDiv(scalar, status); }
-    //
-    //
+
+
+    /*************************************
+     *                                   *
+     *      ARITHMETIC OPERATORS         *
+     *                                   *
+     *************************************/
+
+    /*************************************
+     *            ADDITION               *
+     *************************************/
+
+    template <Arithmetic T>
+    constexpr Vec2<T> Vec2<T>::operator+(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    { return Vec2(_data + rhs._data); }
+
+
+    template <Arithmetic T>
+    constexpr Vec2<T>& Vec2<T>::operator+=(const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        *this = *this + rhs;
+        return *this;
+    }
+
+
+    /*************************************
+     *           SUBTRACTION             *
+     *************************************/
+
+    template <Arithmetic T>
+    constexpr Vec2<T> Vec2<T>::operator-(const Vec2 rhs) const noexcept
+        requires StrictArithmetic<T>
+    { return Vec2(_data - rhs._data); }
+
+
+    template <Arithmetic T>
+    constexpr Vec2<T>& Vec2<T>::operator-=(const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    {
+        *this = *this - rhs;
+        return *this;
+    }
+
+
+    /**************************************
+     *         INVERT OPERATION           *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr Vec2<T> Vec2<T>::operator-() const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        // TODO: Add an intrinsic to Simd128 for operator- overload.
+        return *this;
+    }
+
+
+    /*************************************
+     *           MULTIPLICATION          *
+     *************************************/
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vec2<T> Vec2<T>::operator*(S scalar) const noexcept
+        requires StrictArithmetic<T>
+    { return Vec2(_data * falcon::Simd128_t<T, DIMENSION>(static_cast<T>(scalar))); }
+
+
+    template <StrictArithmetic T, StrictArithmetic S>
+    constexpr Vec2<T> operator*(S scalar, const Vec2<T>& vector) noexcept
+        requires StrictArithmetic<T>
+    { return vector * scalar; }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vec2<T>& Vec2<T>::operator*=(S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        *this = *this * scalar;
+        return *this;
+    }
+
+
+    /*************************************
+     *             DIVISION              *
+     *************************************/
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vec2<T> Vec2<T>::operator/(S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        if constexpr (std::is_floating_point_v<T>)
+        {
+            FALCON_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<T>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+        }
+        else
+        {
+            FALCON_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+        }
+        return Vec2(_data / static_cast<T>(scalar));
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vec2<T>& Vec2<T>::operator/=(S scalar) noexcept
+        requires StrictArithmetic<T>
+    {
+        *this = *this / scalar;
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vec2<T> Vec2<T>::safeDiv(S scalar) const noexcept
+        requires StrictArithmetic<T>
+    {
+        if constexpr (std::is_floating_point_v<T>)
+        {
+            // TODO: Add back check after adding hasNaN
+            // if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+            // {
+            //     return Vec2<T>::zero();
+            // }
+        }
+        if constexpr (std::is_integral_v<T>)
+        {
+            if (scalar == 0)
+            {
+                return Vec2<T>::zero();
+            }
+        }
+
+        return *this / scalar;
+    }
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vec2<T> Vec2<T>::safeDiv(const Vec2& vec, S scalar) noexcept
+        requires StrictArithmetic<T>
+    { return vec.safeDiv(scalar); }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vec2<T> Vec2<T>::tryDiv(S scalar, OperationStatus& status) const noexcept
+        requires StrictArithmetic<T>
+    {
+        if constexpr (std::is_floating_point_v<T>)
+        {
+            // TODO: Add back check after adding hasNaN
+            // if (hasNaN() | fgm::isnan(scalar))
+            // {
+            //     status = OperationStatus::NANOPERAND;
+            //     return Vec2<T>::zero();
+            // }
+            if (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon())
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Vec2<T>::zero();
+            }
+        }
+
+        if constexpr (std::is_integral_v<T>)
+        {
+            if (scalar == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Vec2<T>::zero();
+            }
+        }
+
+        status = OperationStatus::SUCCESS;
+        return *this / scalar;
+    }
+
+
+    template <Arithmetic T>
+    template <StrictArithmetic S>
+    constexpr Vec2<T> Vec2<T>::tryDiv(const Vec2& vec, S scalar, OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    { return vec.tryDiv(scalar, status); }
+
+
+
     //     /*************************************
     //      *                                   *
     //      *        VECTOR DOT PRODUCT         *

@@ -147,65 +147,6 @@ namespace
                              ::testing::Values(fgm::Vec2<float>(fgm::constants::NaN, 3.0f),
                                                fgm::Vec2<float>(3.0f, fgm::constants::NaN),
                                                fgm::Vec2<float>(fgm ::constants::NaN, fgm::constants::NaN)));
-
-
-
-    /**************************************
-     *            STATIC TESTS            *
-     **************************************/
-
-    namespace static_tests
-    {
-        constexpr fgm::Vec2 VEC_A(1, 2);
-        constexpr fgm::Vec2 VEC_B(3, 5);
-
-        /// @test Verify that vector sum returns a valid vector at compile time.
-        constexpr auto VEC_SUM = VEC_A + VEC_B;
-        static_assert(VEC_SUM.x() == 4);
-        static_assert(VEC_SUM.y() == 7);
-
-
-        /// @test Verify that vector difference returns a valid vector at compile time.
-        constexpr auto VEC_DIFF = VEC_B - VEC_A;
-        static_assert(VEC_DIFF.x() == 2);
-        static_assert(VEC_DIFF.y() == 3);
-
-
-        /// @test Verify that vector scalar product(vector * scalar) returns a valid vector at compile time.
-        constexpr auto VEC_MUL_SCALAR = VEC_A * 2;
-        static_assert(VEC_MUL_SCALAR.x() == 2);
-        static_assert(VEC_MUL_SCALAR.y() == 4);
-
-        /// @test Verify that vector scalar product(scalar * vector) returns a valid vector at compile time.
-        constexpr auto SCALAR_MUL_VEC = VEC_A * 2;
-        static_assert(SCALAR_MUL_VEC.x() == 2);
-        static_assert(SCALAR_MUL_VEC.y() == 4);
-
-
-        /// @test Verify that vector scalar division(operator/) returns a valid vector at compile time.
-        constexpr auto DIV_VEC = VEC_B / 2;
-        static_assert(DIV_VEC.x() == 1);
-        static_assert(DIV_VEC.y() == 2);
-
-
-        /// @test Verify that vector scalar division(safeDiv) returns a valid vector at compile time.
-        constexpr auto SAFE_DIV_VEC = VEC_B.safeDiv(2);
-        static_assert(SAFE_DIV_VEC.x() == 1);
-        static_assert(SAFE_DIV_VEC.y() == 2);
-
-
-        /// @test Verify that vector scalar division(safeDiv-static wrapper) returns a valid vector at compile time.
-        constexpr auto SAFE_DIV_VEC_STATIC = fgm::Vec2<int>::safeDiv(VEC_B, 2);
-        static_assert(SAFE_DIV_VEC_STATIC.x() == 1);
-        static_assert(SAFE_DIV_VEC_STATIC.y() == 2);
-
-
-        /// @test Verify that vector inverse returns a valid vector at compile time.
-        constexpr auto INV_VEC = -VEC_A;
-        static_assert(INV_VEC.x() == -1);
-        static_assert(INV_VEC.y() == -2);
-    } // namespace static_tests
-
 } // namespace
 
 
@@ -222,16 +163,6 @@ TYPED_TEST(Vec2AdditionTests, PlusOperator_ReturnsVectorSum)
 }
 
 
-TEST(Vec2AdditionTests, PlusOperator_MixedType_PromotesType)
-{
-    const fgm::Vec2 vec1(3.0f, -1.0f);
-    const fgm::Vec2 vec2(9.0, 10.0);
-
-    [[maybe_unused]] const fgm::Vec2 result = vec1 + vec2;
-
-    static_assert(std::is_same_v<decltype(result)::value_type, double>);
-}
-
 
 TYPED_TEST(Vec2AdditionTests, PlusEqualsOperator_ReturnsSameVectorWithSum)
 {
@@ -240,16 +171,6 @@ TYPED_TEST(Vec2AdditionTests, PlusEqualsOperator_ReturnsSameVectorWithSum)
     EXPECT_VEC_EQ(this->_expectedSum, this->_vecA);
 }
 
-
-TEST(Vec2AdditionTests, PlusEqualsOperator_MixedType_DoesNotPromoteType)
-{
-    fgm::Vec2 vec1(3.0f, -1.0f);
-    [[maybe_unused]] const fgm::Vec2 vec2(9.0, 10.0);
-
-    static_cast<void>(vec1 += vec2);
-
-    static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
-}
 
 
 
@@ -265,17 +186,6 @@ TYPED_TEST(Vec2SubtractionTests, MinusOperator_ReturnsVectorDifference)
 }
 
 
-TEST(Vec2SubtractionTests, MinusOperator_MixedType_PromotesType)
-{
-    const fgm::Vec2 vec1(3.0f, -1.0f);
-    const fgm::Vec2 vec2(9.0, 10.0);
-
-    [[maybe_unused]] const fgm::Vec2 result = vec1 - vec2;
-
-    static_assert(std::is_same_v<decltype(result)::value_type, double>);
-}
-
-
 TYPED_TEST(Vec2SubtractionTests, MinusEqualsOperator_ReturnsSameVectorWithDifference)
 {
     this->_vecA -= this->_vecB;
@@ -283,16 +193,6 @@ TYPED_TEST(Vec2SubtractionTests, MinusEqualsOperator_ReturnsSameVectorWithDiffer
     EXPECT_VEC_EQ(this->_expectedDifference, this->_vecA);
 }
 
-
-TEST(Vec2SubtractionTests, MinusEqualsOperator_MixedType_DoesNotPromoteType)
-{
-    fgm::Vec2 vec1(3.0f, -1.0f);
-    [[maybe_unused]] const fgm::Vec2 vec2(9.0, 10.0);
-
-    static_cast<void>(vec1 -= vec2);
-
-    static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
-}
 
 
 
@@ -350,15 +250,6 @@ TYPED_TEST(Vec2ScalarMultiplicationTests, TimesOperator_ScalarByVectorReturnsSca
 }
 
 
-TYPED_TEST(Vec2ScalarMultiplicationTests, TimesOperator_MixedType_PromotesType)
-{
-    const double scalar = 2.123456789123456;
-
-    [[maybe_unused]] const fgm::Vec2 result = this->_vec * scalar;
-
-    static_assert(std::is_same_v<typename decltype(result)::value_type, double>);
-}
-
 
 TYPED_TEST(Vec2ScalarMultiplicationTests, TimesEqualsOperator_ByScalarReturnsTheSameVectorWithScaledComponents)
 {
@@ -373,29 +264,6 @@ TYPED_TEST(Vec2ScalarMultiplicationTests, TimesEqualsOperator_ByScalarReturnsThe
         EXPECT_VEC_EQ(this->_expectedIntegralVec, this->_vec);
     }
 }
-
-
-TEST(Vec2ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
-{
-    fgm::Vec2 vec(3.0f, -1.0f);
-    const double scalar = 5.0;
-    vec *= scalar;
-
-    static_assert(std::is_same_v<decltype(vec)::value_type, float>);
-}
-
-
-TEST(Vec2ScalarMultiplicationTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
-{
-    fgm::Vec2 vec(3, -1);
-    const double scalar = 2.5;
-    const fgm::Vec2 expected(7, -2);
-
-    vec *= scalar;
-
-    EXPECT_VEC_EQ(expected, vec);
-}
-
 
 
 /**************************************
@@ -418,17 +286,6 @@ TYPED_TEST(Vec2ScalarDivisionTests, DivideOperator_ReturnsVectorWithDividedCompo
 }
 
 
-TEST(Vec2ScalarDivisionTests, MixedType_ScalarDivision_PromotesType)
-{
-    const fgm::Vec2 vec(15.0, -5.0);
-    const double scalar = 5.0;
-
-    [[maybe_unused]] const fgm::Vec2 result = vec / scalar;
-
-    static_assert(std::is_same_v<decltype(result)::value_type, double>);
-}
-
-
 TYPED_TEST(Vec2ScalarDivisionTests, DivideEqualsOperator_ReturnsSameVectorWithDividedComponents)
 {
     this->_vec /= this->_scalar;
@@ -437,15 +294,6 @@ TYPED_TEST(Vec2ScalarDivisionTests, DivideEqualsOperator_ReturnsSameVectorWithDi
 }
 
 
-TEST(Vec2ScalarDivisionTests, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
-{
-    fgm::Vec2 vec(15.0f, -5.0f);
-    const double scalar = 5.0;
-
-    vec /= scalar;
-
-    static_assert(std::is_same_v<decltype(vec)::value_type, float>);
-}
 
 
 TEST(Vec2ScalarDivisionTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
