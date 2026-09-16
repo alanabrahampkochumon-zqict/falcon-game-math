@@ -7,7 +7,6 @@ set(FGM_COMMON_HEADERS
         MathTraits.h
         Messages.h
         OperationStatus.h
-        PreprocessorDefinitions.h
         Types.h
         Utils.h
         Utils.tpp

@@ -10,7 +10,7 @@
  */
 
 
-#include "fgm/common/PreprocessorDefinitions.h"
+#include <falcon_core/Preprocessors.h>
 
 namespace fgm
 {
@@ -18,7 +18,7 @@ namespace fgm
     template <StrictArithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedPoint3<T, U> Point3<T>::operator+(const Vec3<U>& vector) const noexcept
+    FALCON_INLINE constexpr PromotedPoint3<T, U> Point3<T>::operator+(const Vec3<U>& vector) const noexcept
     {
         using R = std::common_type_t<T, U>;
         return Point3<R>(this->x() + vector.x(), this->y() + vector.y(), this->z() + vector.z());
@@ -28,7 +28,7 @@ namespace fgm
     template <StrictArithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr Point3<T>& Point3<T>::operator+=(const Vec3<U>& vector) noexcept
+    FALCON_INLINE constexpr Point3<T>& Point3<T>::operator+=(const Vec3<U>& vector) noexcept
     {
         this->x() += static_cast<T>(vector.x());
         this->y() += static_cast<T>(vector.y());
@@ -41,7 +41,7 @@ namespace fgm
     template <StrictArithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec3<T, U> Point3<T>::operator-(const Point3<U>& rhs) const noexcept
+    FALCON_INLINE constexpr PromotedVec3<T, U> Point3<T>::operator-(const Point3<U>& rhs) const noexcept
     {
         using R = std::common_type_t<T, U>;
         return Point3<R>(this->x() - rhs.x(), this->y() - rhs.y(), this->z() - rhs.z());

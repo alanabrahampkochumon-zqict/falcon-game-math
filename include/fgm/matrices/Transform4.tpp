@@ -10,7 +10,7 @@
  */
 
 
-#include "fgm/common/PreprocessorDefinitions.h"
+#include <falcon_core/Preprocessors.h>
 
 
 namespace fgm
@@ -23,7 +23,7 @@ namespace fgm
      **************************************/
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr Transform4<T>::Transform4(const T m00, const T m01, const T m02, const T m03, const T m10,
+    FALCON_INLINE constexpr Transform4<T>::Transform4(const T m00, const T m01, const T m02, const T m03, const T m10,
                                                    const T m11, const T m12, const T m13, const T m20, const T m21,
                                                    const T m22, const T m23) noexcept
         : Mat4<T>{ m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, T(0), T(0), T(0), T(1) }
@@ -31,7 +31,7 @@ namespace fgm
 
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr Transform4<T>::Transform4(const Vec3<T>& firstAxis, const Vec3<T>& secondAxis,
+    FALCON_INLINE constexpr Transform4<T>::Transform4(const Vec3<T>& firstAxis, const Vec3<T>& secondAxis,
                                                    const Vec3<T>& thirdAxis, const Point3<T>& origin) noexcept
         : Mat4<T>{ firstAxis.x(), secondAxis.x(), thirdAxis.x(), origin.x(),
                    firstAxis.y(), secondAxis.y(), thirdAxis.y(), origin.y(),
@@ -42,7 +42,7 @@ namespace fgm
 
     template <StrictArithmetic T>
     template <StrictArithmetic U>
-    FGM_INLINE constexpr Transform4<T>::Transform4(const Transform4<U>& other) noexcept
+    FALCON_INLINE constexpr Transform4<T>::Transform4(const Transform4<U>& other) noexcept
     {
         (*this)(0, 0) = static_cast<T>(other(0, 0));
         (*this)(0, 1) = static_cast<T>(other(0, 1));
@@ -67,17 +67,17 @@ namespace fgm
      *************************************/
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr Vec3<T>& Transform4<T>::operator[](std::size_t col) noexcept
+    FALCON_INLINE constexpr Vec3<T>& Transform4<T>::operator[](std::size_t col) noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return *reinterpret_cast<Vec3<T>*>(&(this->_data[col]));
     }
 
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr auto Transform4<T>::operator[](std::size_t col) const noexcept
+    FALCON_INLINE constexpr auto Transform4<T>::operator[](std::size_t col) const noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         if (std::is_constant_evaluated())
         {
             return this->_data[col].template swizzle<axis::X, axis::Y, axis::Z>();
@@ -90,28 +90,28 @@ namespace fgm
 
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr T& Transform4<T>::operator()(std::size_t row, std::size_t col) noexcept
+    FALCON_INLINE constexpr T& Transform4<T>::operator()(std::size_t row, std::size_t col) noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return this->_data[col][row];
     }
 
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr const T& Transform4<T>::operator()(std::size_t row, std::size_t col) const noexcept
+    FALCON_INLINE constexpr const T& Transform4<T>::operator()(std::size_t row, std::size_t col) const noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return this->_data[col][row];
     }
 
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr auto Transform4<T>::getTranslation() const noexcept
+    FALCON_INLINE constexpr auto Transform4<T>::getTranslation() const noexcept
     { return Point3<T>{ (*this)(0, 3), (*this)(1, 3), (*this)(2, 3) }; }
 
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr void Transform4<T>::setTranslation(const Point3<T>& translation) noexcept
+    FALCON_INLINE constexpr void Transform4<T>::setTranslation(const Point3<T>& translation) noexcept
     {
         (*this)(0, 3) = translation.x();
         (*this)(1, 3) = translation.y();
@@ -122,7 +122,7 @@ namespace fgm
     template <StrictArithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec3<T, U> Transform4<T>::operator*(const Vec3<U>& vec) const noexcept
+    FALCON_INLINE constexpr PromotedVec3<T, U> Transform4<T>::operator*(const Vec3<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
         // NOTE: The last column entry is ignored since we have an implied w entry for Vec3 of 0 (<x, y, z, 0>).
@@ -160,7 +160,7 @@ namespace fgm
     template <StrictArithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedTransform4<T, U> Transform4<T>::operator*(const Transform4<U>& rhs) const noexcept
+    FALCON_INLINE constexpr PromotedTransform4<T, U> Transform4<T>::operator*(const Transform4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = std::common_type_t<T, U>;
@@ -208,7 +208,7 @@ namespace fgm
      **************************************/
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr Transform4<Magnitude<T>> Transform4<T>::inverse() const noexcept
+    FALCON_INLINE constexpr Transform4<Magnitude<T>> Transform4<T>::inverse() const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -221,7 +221,7 @@ namespace fgm
         auto s = a.cross(b);
         auto t = c.cross(d);
 
-        FGM_ASSERT_MSG(fgm::abs(s.dot(c)) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
+        FALCON_ASSERT_MSG(fgm::abs(s.dot(c)) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
 
         R invDet = R(1) / s.dot(c);
         s *= invDet;
@@ -237,7 +237,7 @@ namespace fgm
 
 
     template <StrictArithmetic T>
-    FGM_INLINE constexpr Transform4<Magnitude<T>> Transform4<T>::inverse(const Transform4& transform) noexcept
+    FALCON_INLINE constexpr Transform4<Magnitude<T>> Transform4<T>::inverse(const Transform4& transform) noexcept
         requires SignedStrictArithmetic<T>
     { return transform.inverse(); }
 

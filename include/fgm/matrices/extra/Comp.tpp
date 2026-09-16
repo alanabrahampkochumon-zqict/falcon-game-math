@@ -20,7 +20,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat2<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat2<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2{ // Row 1
@@ -35,7 +35,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat2x3<T, U> operator*(const Mat2x3<T>& lhs, const Mat3<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat2x3<T, U> operator*(const Mat2x3<T>& lhs, const Mat3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2x3{ // Row 1
@@ -52,7 +52,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat2x4<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x4<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat2x4<T, U> operator*(const Mat2x3<T>& lhs, const Mat3x4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2x4{ // Row 1
@@ -71,7 +71,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat2x3<T, U> operator*(const Mat2<T>& lhs, const Mat2x3<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat2x3<T, U> operator*(const Mat2<T>& lhs, const Mat2x3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2x3{
@@ -94,7 +94,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat2<T, U> operator*(const Mat2x4<T>& lhs, const Mat4x2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat2<T, U> operator*(const Mat2x4<T>& lhs, const Mat4x2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2{ // Row 1
@@ -109,7 +109,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat2x3<T, U> operator*(const Mat2x4<T>& lhs, const Mat4x3<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat2x3<T, U> operator*(const Mat2x4<T>& lhs, const Mat4x3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2x3{ // Row 1
@@ -126,7 +126,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat2x4<T, U> operator*(const Mat2x4<T>& lhs, const Mat4<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat2x4<T, U> operator*(const Mat2x4<T>& lhs, const Mat4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2x4{ // Row 1
@@ -145,7 +145,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat2x4<T, U> operator*(const Mat2<T>& lhs, const Mat2x4<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat2x4<T, U> operator*(const Mat2<T>& lhs, const Mat2x4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat2x4{
@@ -169,7 +169,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3x2<T, U> operator*(const Mat3x2<T>& lhs, const Mat2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat3x2<T, U> operator*(const Mat3x2<T>& lhs, const Mat2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat3x2{
@@ -185,7 +185,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3<T, U> operator*(const Mat3x2<T>& lhs, const Mat2x3<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat3<T, U> operator*(const Mat3x2<T>& lhs, const Mat2x3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat3{ // Row 1
@@ -203,7 +203,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3x4<T, U> operator*(const Mat3x2<T>& lhs, const Mat2x4<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat3x4<T, U> operator*(const Mat3x2<T>& lhs, const Mat2x4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat3x4{
@@ -222,7 +222,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3x2<T, U> operator*(const Mat3<T>& lhs, const Mat3x2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat3x2<T, U> operator*(const Mat3<T>& lhs, const Mat3x2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat3x2{ // Row 1
@@ -247,7 +247,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3x2<T, U> operator*(const Mat3x4<T>& lhs, const Mat4x2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat3x2<T, U> operator*(const Mat3x4<T>& lhs, const Mat4x2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat3x2{ // Row 1
@@ -265,7 +265,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3<T, U> operator*(const Mat3x4<T>& lhs, const Mat4x3<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat3<T, U> operator*(const Mat3x4<T>& lhs, const Mat4x3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat3{
@@ -287,7 +287,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3x4<T, U> operator*(const Mat3x4<T>& lhs, const Mat4<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat3x4<T, U> operator*(const Mat3x4<T>& lhs, const Mat4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat3x4{ // Row 1
@@ -311,7 +311,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat3x4<T, U> operator*(const Mat3<T>& lhs, const Mat3x4<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat3x4<T, U> operator*(const Mat3<T>& lhs, const Mat3x4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat3x4{ // Row 1
@@ -342,7 +342,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4x2<T, U> operator*(const Mat4x2<T>& lhs, const Mat2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat4x2<T, U> operator*(const Mat4x2<T>& lhs, const Mat2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat4x2{
@@ -360,7 +360,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4x3<T, U> operator*(const Mat4x2<T>& lhs, const Mat2x3<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat4x3<T, U> operator*(const Mat4x2<T>& lhs, const Mat2x3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat4x3{
@@ -382,7 +382,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4<T, U> operator*(const Mat4x2<T>& lhs, const Mat2x4<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, U> operator*(const Mat4x2<T>& lhs, const Mat2x4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat4{ // Row 1
@@ -403,7 +403,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4x2<T, U> operator*(const Mat4<T>& lhs, const Mat4x2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat4x2<T, U> operator*(const Mat4<T>& lhs, const Mat4x2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat4x2{
@@ -432,7 +432,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4x2<T, U> operator*(const Mat4x3<T>& lhs, const Mat3x2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat4x2<T, U> operator*(const Mat4x3<T>& lhs, const Mat3x2<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat4x2{ // Row 1
@@ -453,7 +453,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4x3<T, U> operator*(const Mat4x3<T>& lhs, const Mat3<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat4x3<T, U> operator*(const Mat4x3<T>& lhs, const Mat3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat4x3{
@@ -479,7 +479,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4<T, U> operator*(const Mat4x3<T>& lhs, const Mat3x4<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, U> operator*(const Mat4x3<T>& lhs, const Mat3x4<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat4{ // Row 1
@@ -508,7 +508,7 @@ namespace fgm
 
     template <StrictArithmetic T, StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4x3<T, U> operator*(const Mat4<T>& lhs, const Mat4x3<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedMat4x3<T, U> operator*(const Mat4<T>& lhs, const Mat4x3<U>& rhs) noexcept
     {
         using R = PromotedValue_t<T, U>;
         return Mat4x3{ // Row 1

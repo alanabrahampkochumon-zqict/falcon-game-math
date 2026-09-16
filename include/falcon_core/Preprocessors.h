@@ -70,7 +70,7 @@ namespace fgm::internal
  */
 inline void logAssertion(const char* condition, const char* message, const char* file, const int line)
 {
-    std::cerr << "[FGM ASSERTION FAILED]\n"
+    std::cerr << "[Falcon ASSERTION FAILED]\n"
               << "Condition: " << condition << '\n'
               << "Message:   " << (message ? message : "None") << '\n'
               << "Location:  " << file << ":" << line << '\n';

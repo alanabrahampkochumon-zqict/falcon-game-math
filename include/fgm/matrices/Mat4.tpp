@@ -25,7 +25,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T>::Mat4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22,
+    FALCON_INLINE constexpr Mat4<T>::Mat4(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22,
                                        T m23, T m30, T m31, T m32, T m33) noexcept
         : _data{ Vec4{ T(m00), T(m10), T(m20), T(m30) }, Vec4{ T(m01), T(m11), T(m21), T(m31) },
                  Vec4{ T(m02), T(m12), T(m22), T(m32) }, Vec4{ T(m03), T(m13), T(m23), T(m33) } }
@@ -33,14 +33,14 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T>::Mat4(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2,
+    FALCON_INLINE constexpr Mat4<T>::Mat4(const Vec4<T>& col0, const Vec4<T>& col1, const Vec4<T>& col2,
                                        const Vec4<T>& col3) noexcept
         : _data{ col0, col1, col2, col3 }
     {}
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T>::Mat4(T d0, T d1, T d2, T d3) noexcept
+    FALCON_INLINE constexpr Mat4<T>::Mat4(T d0, T d1, T d2, T d3) noexcept
         : _data{ Vec4{ T(d0), T(0), T(0), T(0) }, Vec4{ T(0), T(d1), T(0), T(0) }, Vec4{ T(0), T(0), T(d2), T(0) },
                  Vec4{ T(0), T(0), T(0), T(d3) } }
     {}
@@ -48,7 +48,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <Arithmetic U>
-    FGM_INLINE constexpr Mat4<T>::Mat4(const Mat4<U>& other) noexcept
+    FALCON_INLINE constexpr Mat4<T>::Mat4(const Mat4<U>& other) noexcept
     {
         (*this)(0, 0) = static_cast<T>(other(0, 0));
         (*this)(0, 1) = static_cast<T>(other(0, 1));
@@ -76,33 +76,33 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Vec4<T>& Mat4<T>::operator[](std::size_t col) noexcept
+    FALCON_INLINE constexpr Vec4<T>& Mat4<T>::operator[](std::size_t col) noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr const Vec4<T>& Mat4<T>::operator[](std::size_t col) const noexcept
+    FALCON_INLINE constexpr const Vec4<T>& Mat4<T>::operator[](std::size_t col) const noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr T& Mat4<T>::operator()(std::size_t row, std::size_t col) noexcept
+    FALCON_INLINE constexpr T& Mat4<T>::operator()(std::size_t row, std::size_t col) noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr const T& Mat4<T>::operator()(std::size_t row, std::size_t col) const noexcept
+    FALCON_INLINE constexpr const T& Mat4<T>::operator()(std::size_t row, std::size_t col) const noexcept
     {
-        FGM_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
@@ -116,9 +116,9 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr bool Mat4<T>::allEq(const Mat4<U>& rhs, double epsilon) const noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::allEq(const Mat4<U>& rhs, double epsilon) const noexcept
     {
-// MSVC's FGM_INLINE constexpr evaluator incorrectly yields true for NaN relational comparisons.
+// MSVC's FALCON_INLINE constexpr evaluator incorrectly yields true for NaN relational comparisons.
 // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
 // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
@@ -138,16 +138,16 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr bool Mat4<T>::allEq(const Mat4& lhs, const Mat4<U>& rhs, double epsilon) noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::allEq(const Mat4& lhs, const Mat4<U>& rhs, double epsilon) noexcept
     { return lhs.allEq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr bool Mat4<T>::anyNeq(const Mat4<U>& rhs, double epsilon) const noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::anyNeq(const Mat4<U>& rhs, double epsilon) const noexcept
     {
-// MSVC's FGM_INLINE constexpr evaluator incorrectly yields true for NaN relational comparisons.
+// MSVC's FALCON_INLINE constexpr evaluator incorrectly yields true for NaN relational comparisons.
 // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
 // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
 #ifdef _MSC_VER
@@ -167,21 +167,21 @@ namespace fgm
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr bool Mat4<T>::anyNeq(const Mat4& lhs, const Mat4<U>& rhs, double epsilon) noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::anyNeq(const Mat4& lhs, const Mat4<U>& rhs, double epsilon) noexcept
     { return lhs.anyNeq(rhs, epsilon); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr bool Mat4<T>::operator==(const Mat4<U>& rhs) const noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::operator==(const Mat4<U>& rhs) const noexcept
     { return allEq(rhs); }
 
 
     template <Arithmetic T>
     template <Arithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr bool Mat4<T>::operator!=(const Mat4<U>& rhs) const noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::operator!=(const Mat4<U>& rhs) const noexcept
     { return anyNeq(rhs); }
 
 
@@ -194,7 +194,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4<T, U> Mat4<T>::operator+(const Mat4<U>& rhs) const noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, U> Mat4<T>::operator+(const Mat4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -218,7 +218,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4<T, U> Mat4<T>::operator-(const Mat4<U>& rhs) const noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, U> Mat4<T>::operator-(const Mat4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -229,7 +229,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr Mat4<T>& Mat4<T>::operator-=(const Mat4<U>& rhs) noexcept
+    FALCON_INLINE constexpr Mat4<T>& Mat4<T>::operator-=(const Mat4<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] -= rhs[0];
@@ -242,7 +242,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat4<T, S> Mat4<T>::operator*(S scalar) const noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, S> Mat4<T>::operator*(S scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -251,13 +251,13 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat4<T, S> operator*(S scalar, const Mat4<T>& matrix) noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, S> operator*(S scalar, const Mat4<T>& matrix) noexcept
     { return matrix * scalar; }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr Mat4<T>& Mat4<T>::operator*=(S scalar) noexcept
+    FALCON_INLINE constexpr Mat4<T>& Mat4<T>::operator*=(S scalar) noexcept
         requires StrictArithmetic<T>
     {
         _data[0] *= scalar;
@@ -271,7 +271,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedVec4<T, U> Mat4<T>::operator*(const Vec4<U>& vec) const noexcept
+    FALCON_INLINE constexpr PromotedVec4<T, U> Mat4<T>::operator*(const Vec4<U>& vec) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -321,7 +321,7 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    FGM_INLINE constexpr PromotedVec4<T, U> operator*(const Vec4<T>& vec, const Mat4<U>& matrix) noexcept
+    FALCON_INLINE constexpr PromotedVec4<T, U> operator*(const Vec4<T>& vec, const Mat4<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -375,7 +375,7 @@ namespace fgm
 
 
     template <StrictArithmetic T, StrictArithmetic U>
-    FGM_INLINE constexpr Vec4<T>& operator*=(Vec4<T>& vec, const Mat4<U>& matrix) noexcept
+    FALCON_INLINE constexpr Vec4<T>& operator*=(Vec4<T>& vec, const Mat4<U>& matrix) noexcept
     {
         using R = PromotedValue_t<T, U>;
 #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__AVX2__)
@@ -442,7 +442,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr PromotedMat4<T, U> Mat4<T>::operator*(const Mat4<U>& rhs) const noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, U> Mat4<T>::operator*(const Mat4<U>& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, U>;
@@ -453,7 +453,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FGM_INLINE constexpr Mat4<T>& Mat4<T>::operator*=(const Mat4<U>& rhs) noexcept
+    FALCON_INLINE constexpr Mat4<T>& Mat4<T>::operator*=(const Mat4<U>& rhs) noexcept
         requires StrictArithmetic<T>
     {
         const auto mat = *this * rhs;
@@ -467,19 +467,19 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat4<T, S> Mat4<T>::operator/(const S& scalar) const noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, S> Mat4<T>::operator/(const S& scalar) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
-            FGM_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
             return Mat4<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor, _data[3] * factor);
         }
         else
         {
-            FGM_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(scalar != S(0), messages::assertion::MAT_DIV_BY_ZERO);
             R tScalar = static_cast<R>(scalar);
             return Mat4<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar, _data[3] / tScalar);
         }
@@ -488,12 +488,12 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr Mat4<T>& Mat4<T>::operator/=(const S& scalar) noexcept
+    FALCON_INLINE constexpr Mat4<T>& Mat4<T>::operator/=(const S& scalar) noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
 
-        FGM_ASSERT_MSG(fgm::abs(scalar) > Config::EPSILON<S>, messages::assertion::MAT_DIV_BY_ZERO);
+        FALCON_ASSERT_MSG(fgm::abs(scalar) > Config::EPSILON<S>, messages::assertion::MAT_DIV_BY_ZERO);
 
         if constexpr (std::is_floating_point_v<R>)
         {
@@ -547,7 +547,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat4<T, S> Mat4<T>::safeDiv(S scalar, Mat4 fallback) const noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, S> Mat4<T>::safeDiv(S scalar, Mat4 fallback) const noexcept
         requires StrictArithmetic<T>
     {
         using R = PromotedValue_t<T, S>;
@@ -573,14 +573,14 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat4<T, S> Mat4<T>::safeDiv(const Mat4& mat, S scalar, Mat4 fallback) noexcept
+    FALCON_INLINE constexpr PromotedMat4<T, S> Mat4<T>::safeDiv(const Mat4& mat, S scalar, Mat4 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.safeDiv(scalar, fallback); }
 
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat4<T, S> Mat4<T>::tryDiv(S scalar, OperationStatus& status,
+    FALCON_INLINE constexpr PromotedMat4<T, S> Mat4<T>::tryDiv(S scalar, OperationStatus& status,
                                                             Mat4 fallback) const noexcept
         requires StrictArithmetic<T>
     {
@@ -618,14 +618,14 @@ namespace fgm
 
     template <Arithmetic T>
     template <StrictArithmetic S>
-    FGM_INLINE constexpr PromotedMat4<T, S> Mat4<T>::tryDiv(const Mat4& mat, S scalar, OperationStatus& status,
+    FALCON_INLINE constexpr PromotedMat4<T, S> Mat4<T>::tryDiv(const Mat4& mat, S scalar, OperationStatus& status,
                                                             Mat4 fallback) noexcept
         requires StrictArithmetic<T>
     { return mat.tryDiv(scalar, status, fallback); }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::operator-() const noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
     { return Mat4{ -_data[0], -_data[1], -_data[2], -_data[3] }; }
 
@@ -638,7 +638,7 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    FGM_INLINE constexpr T Mat4<T>::determinant() const noexcept
+    FALCON_INLINE constexpr T Mat4<T>::determinant() const noexcept
         requires SignedStrictArithmetic<T>
     {
         // TODO: Replace with fgm::swizzle after factor implementation
@@ -662,13 +662,13 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr T Mat4<T>::determinant(const Mat4& matrix) noexcept
+    FALCON_INLINE constexpr T Mat4<T>::determinant(const Mat4& matrix) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.determinant(); }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::transpose() const noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::transpose() const noexcept
     {
         /**
          * @note Although the code doesn't seem to transpose, since we are storing in column major order
@@ -681,12 +681,12 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::transpose(const Mat4& matrix) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::transpose(const Mat4& matrix) noexcept
     { return matrix.transpose(); }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::inverse() const noexcept
+    FALCON_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::inverse() const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -713,7 +713,7 @@ namespace fgm
         auto v = w * c - z * d;
 
         auto det = s.dot(v) + t.dot(u);
-        FGM_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
+        FALCON_ASSERT_MSG(fgm::abs(det) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
 
         auto invDet = R(1) / det;
 
@@ -733,13 +733,13 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::inverse(const Mat4& matrix) noexcept
+    FALCON_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::inverse(const Mat4& matrix) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.inverse(); }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::safeInverse(Mat4 fallback) const noexcept
+    FALCON_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::safeInverse(Mat4 fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -794,13 +794,13 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::safeInverseOf(const Mat4& matrix, Mat4 fallback) noexcept
+    FALCON_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::safeInverseOf(const Mat4& matrix, Mat4 fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.safeInverse(fallback); }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::tryInverse(OperationStatus& status, Mat4 fallback) const noexcept
+    FALCON_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::tryInverse(OperationStatus& status, Mat4 fallback) const noexcept
         requires SignedStrictArithmetic<T>
     {
         using R = Magnitude<T>;
@@ -855,20 +855,20 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::tryInverseOf(const Mat4& matrix, OperationStatus& status,
+    FALCON_INLINE constexpr Mat4<Magnitude<T>> Mat4<T>::tryInverseOf(const Mat4& matrix, OperationStatus& status,
                                                                   Mat4 fallback) noexcept
         requires SignedStrictArithmetic<T>
     { return matrix.tryInverse(status, fallback); }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr T Mat4<T>::trace() const noexcept
+    FALCON_INLINE constexpr T Mat4<T>::trace() const noexcept
         requires StrictArithmetic<T>
     { return _data[0][0] + _data[1][1] + _data[2][2] + _data[3][3]; }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr T Mat4<T>::trace(const Mat4& matrix) noexcept
+    FALCON_INLINE constexpr T Mat4<T>::trace(const Mat4& matrix) noexcept
         requires StrictArithmetic<T>
     { return matrix.trace(); }
 
@@ -880,22 +880,22 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    FGM_INLINE constexpr bool Mat4<T>::hasInf() const noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::hasInf() const noexcept
     { return _data[0].hasInf() || _data[1].hasInf() || _data[2].hasInf() || _data[3].hasInf(); }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr bool Mat4<T>::hasInf(const Mat4& matrix) noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::hasInf(const Mat4& matrix) noexcept
     { return matrix.hasInf(); }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr bool Mat4<T>::hasNaN() const noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::hasNaN() const noexcept
     { return _data[0].hasNaN() || _data[1].hasNaN() || _data[2].hasNaN() || _data[3].hasNaN(); }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr bool Mat4<T>::hasNaN(const Mat4& matrix) noexcept
+    FALCON_INLINE constexpr bool Mat4<T>::hasNaN(const Mat4& matrix) noexcept
     { return matrix.hasNaN(); }
 
 
@@ -908,7 +908,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeRotationX(U angle) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeRotationX(U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -928,7 +928,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeRotationX(const U angle, const Vec3<T>& center) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeRotationX(const U angle, const Vec3<T>& center) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -946,7 +946,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeRotationY(U angle) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeRotationY(U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -966,7 +966,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeRotationY(const U angle, const Vec3<T>& center) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeRotationY(const U angle, const Vec3<T>& center) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -984,7 +984,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeRotationZ(U angle) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeRotationZ(U angle) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -1005,7 +1005,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeRotationZ(U angle, const Vec3<T>& center) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeRotationZ(U angle, const Vec3<T>& center) noexcept
         requires SignedStrictArithmetic<T>
     {
         using R  = PromotedValue_t<T, U>;
@@ -1023,7 +1023,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    FGM_INLINE constexpr PromotedFloatMat4<T, U> Mat4<T>::makeRotation(U angle, const Vec3<T>& axis) noexcept
+    FALCON_INLINE constexpr PromotedFloatMat4<T, U> Mat4<T>::makeRotation(U angle, const Vec3<T>& axis) noexcept
         requires StrictArithmetic<T>
     {
         using S = Magnitude<std::common_type_t<T, U>>;
@@ -1065,7 +1065,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <std::floating_point U>
-    FGM_INLINE constexpr PromotedFloatMat4<T, U> Mat4<T>::makeRotation(U angle, const Vec3<T>& axis,
+    FALCON_INLINE constexpr PromotedFloatMat4<T, U> Mat4<T>::makeRotation(U angle, const Vec3<T>& axis,
                                                                        const Vec3<T>& center) noexcept
         requires StrictArithmetic<T>
     {
@@ -1107,7 +1107,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeScale(T scale) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeScale(T scale) noexcept
         requires StrictArithmetic<T>
     {
         return Mat4{
@@ -1117,7 +1117,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeScale(T scaleX, T scaleY, T scaleZ) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeScale(T scaleX, T scaleY, T scaleZ) noexcept
         requires StrictArithmetic<T>
     {
         return Mat4{ scaleX, T(0), T(0),   T(0), T(0), scaleY, T(0), T(0),
@@ -1126,7 +1126,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeScale(T scale, const Vec3<T>& direction) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeScale(T scale, const Vec3<T>& direction) noexcept
         requires SignedStrictArithmetic<T>
     {
         scale -= T(1);
@@ -1143,7 +1143,7 @@ namespace fgm
 
     template <Arithmetic T>
     template <reflect::RT On>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeReflection() noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeReflection() noexcept
         requires SignedStrictArithmetic<T>
     {
         T reflectX = T(-2) * ((On & 0b00000100) >> 2) + T(1);
@@ -1156,7 +1156,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeReflection(const Vec3<T>& normal) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeReflection(const Vec3<T>& normal) noexcept
         requires SignedStrictArithmetic<T>
     {
 
@@ -1172,7 +1172,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeInvolution(const Vec3<T>& normal) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeInvolution(const Vec3<T>& normal) noexcept
         requires SignedStrictArithmetic<T>
     {
         T x  = static_cast<T>(2 * normal.x() * normal.x() - 1);
@@ -1187,7 +1187,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearX(const T shearY, const T shearZ) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeShearX(const T shearY, const T shearZ) noexcept
         requires StrictArithmetic<T>
     {
         return Mat4{
@@ -1197,7 +1197,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearY(const T shearX, const T shearZ) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeShearY(const T shearX, const T shearZ) noexcept
         requires StrictArithmetic<T>
     {
         return Mat4{
@@ -1207,7 +1207,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearZ(const T shearX, const T shearY) noexcept
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeShearZ(const T shearX, const T shearY) noexcept
         requires StrictArithmetic<T>
     {
         return Mat4{
@@ -1217,7 +1217,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShearByAngle(T shearAngle, const Vec3<T>& direction,
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeShearByAngle(T shearAngle, const Vec3<T>& direction,
                                                            const Vec3<T>& normal) noexcept
         requires std::floating_point<T>
     {
@@ -1245,7 +1245,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeShear(T shearFactor, const Vec3<T>& direction,
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeShear(T shearFactor, const Vec3<T>& direction,
                                                     const Vec3<T>& normal) noexcept
         requires std::floating_point<T>
     {
@@ -1272,7 +1272,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr Mat4<T> Mat4<T>::makeAffine(const Mat3<T>& linearTransform,
+    FALCON_INLINE constexpr Mat4<T> Mat4<T>::makeAffine(const Mat3<T>& linearTransform,
                                                      const Vec3<T>& translation) noexcept
     {
         return Mat4{ linearTransform(0, 0),

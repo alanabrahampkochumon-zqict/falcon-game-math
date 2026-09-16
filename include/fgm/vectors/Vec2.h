@@ -25,7 +25,7 @@
 #include "fgm/common/Constants.h"
 #include "fgm/common/MathTraits.h"
 #include "fgm/common/OperationStatus.h"
-#include "fgm/common/PreprocessorDefinitions.h"
+#include <falcon_core/Preprocessors.h>
 #include "fgm/common/Types.h"
 
 #include <array>
@@ -2364,25 +2364,25 @@ namespace fgm
         class IndexableProxy
         {
         public:
-            FGM_INLINE constexpr IndexableProxy(Vec2& parent, const std::size_t index) noexcept
+            FALCON_INLINE constexpr IndexableProxy(Vec2& parent, const std::size_t index) noexcept
                 : _vec{ parent }, _index{ index }
             {}
 
-            FGM_INLINE constexpr const IndexableProxy& operator=(T value) const noexcept
+            FALCON_INLINE constexpr const IndexableProxy& operator=(T value) const noexcept
             {
                 _vec._data.setAt(_index, value);
                 return *this;
             }
 
             // Allows for operator chaining
-            FGM_INLINE constexpr const IndexableProxy& operator=(const IndexableProxy& other) const noexcept
+            FALCON_INLINE constexpr const IndexableProxy& operator=(const IndexableProxy& other) const noexcept
             {
                 _vec._data.setAt(_index, static_cast<T>(other));
                 return *this;
             }
 
             // Implicit conversion
-            FGM_INLINE constexpr operator T() const noexcept { return _vec._data.getAt(_index); }
+            FALCON_INLINE constexpr operator T() const noexcept { return _vec._data.getAt(_index); }
 
 
         private:
@@ -2397,23 +2397,23 @@ namespace fgm
         class ConstIndexableProxy
         {
         public:
-            FGM_INLINE constexpr ConstIndexableProxy(Vec2& parent) noexcept: _vec{ parent } {}
+            FALCON_INLINE constexpr ConstIndexableProxy(Vec2& parent) noexcept: _vec{ parent } {}
 
-            FGM_INLINE constexpr ConstIndexableProxy& operator=(T value) && noexcept
+            FALCON_INLINE constexpr ConstIndexableProxy& operator=(T value) && noexcept
             {
                 _vec._data.template setAt<Index>(value);
                 return *this;
             }
 
             // Allows for operator chaining(a = b = c)
-            FGM_INLINE constexpr ConstIndexableProxy& operator=(const ConstIndexableProxy& other) && noexcept
+            FALCON_INLINE constexpr ConstIndexableProxy& operator=(const ConstIndexableProxy& other) && noexcept
             {
                 _vec._data.template setAt<Index>(static_cast<T>(other));
                 return *this;
             }
 
             // Implicit conversion
-            FGM_INLINE constexpr operator T() const noexcept { return _vec._data.template getAt<Index>(); }
+            FALCON_INLINE constexpr operator T() const noexcept { return _vec._data.template getAt<Index>(); }
 
         private:
             Vec2& _vec;
