@@ -129,7 +129,7 @@ namespace fgm
          */
 
         /**
-         * @brief Access the element at the first location (read-only).
+         * @brief Access the element at the first location.
          * @return A copy of the first vector element.
          */
         [[nodiscard]] constexpr T x() const noexcept;
@@ -186,7 +186,7 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the first location (read-only).
+         * @brief Access the element at the first location.
          * @return A copy of the first vector element.
          */
         [[nodiscard]] constexpr T s() const noexcept;
@@ -243,7 +243,7 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the first location (read-only).
+         * @brief Access the element at the first location.
          * @return A copy of the first vector element.
          */
         [[nodiscard]] constexpr T r() const noexcept;

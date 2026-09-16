@@ -31,11 +31,14 @@ target_link_libraries(
         FGMTestSetup
 
         # OBJs
+        # CONSTEXPR
         Point2Tests
         Point3Tests
         CVec2Tests
         Vec3Tests
         Vec4Tests
+        # SIMD
+        Vec2Tests
 )
 
 target_precompile_headers(

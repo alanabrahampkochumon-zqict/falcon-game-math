@@ -44,6 +44,10 @@ namespace fgm
     template <Arithmetic U>
     FGM_INLINE constexpr Vec2<T>::Vec2(const Vec2<U>& other) noexcept
     {
+        // Required for clearing the upper lanes.
+        _data.setZero();
+        // _data.set()
+        // TODO: Update to return a ptr (maybe overload operator*)?
         _data[0] = static_cast<T>(other.x());
         _data[1] = static_cast<T>(other.y());
     }
@@ -65,9 +69,9 @@ namespace fgm
     { return _data.template getAt<0>(); }
 
 
-    // template <Arithmetic T>
-    // constexpr T& Vec2<T>::x() noexcept
-    // { return _data[0]; }
+    template <Arithmetic T>
+    constexpr Vec2<T>::template ConstIndexableProxy<0> Vec2<T>::x() noexcept
+    { return ConstIndexableProxy<0>(*this); }
 
 
     template <Arithmetic T>
@@ -75,9 +79,9 @@ namespace fgm
     { return _data.template getAt<1>(); }
 
 
-    // template <Arithmetic T>
-    // FGM_INLINE constexpr T& Vec2<T>::y() noexcept
-    // { return _data[1]; }
+    template <Arithmetic T>
+    FGM_INLINE constexpr Vec2<T>::template ConstIndexableProxy<1> Vec2<T>::y() noexcept
+    { return ConstIndexableProxy<1>(*this); }
 
 
     /**************************************
@@ -91,9 +95,9 @@ namespace fgm
     { return _data.template getAt<0>(); }
 
 
-    // template <Arithmetic T>
-    // FGM_INLINE constexpr T& Vec2<T>::s() noexcept
-    // { return _data[0]; }
+    template <Arithmetic T>
+    FGM_INLINE constexpr Vec2<T>::template ConstIndexableProxy<0> Vec2<T>::s() noexcept
+    { return ConstIndexableProxy<0>(*this); }
 
 
     template <Arithmetic T>
@@ -101,9 +105,9 @@ namespace fgm
     { return _data.template getAt<0>(); }
 
 
-    // template <Arithmetic T>
-    // FGM_INLINE constexpr T& Vec2<T>::t() noexcept
-    // { return _data[1]; }
+    template <Arithmetic T>
+    FGM_INLINE constexpr Vec2<T>::template ConstIndexableProxy<1> Vec2<T>::t() noexcept
+    { return ConstIndexableProxy<1>(*this); }
 
 
     /**************************************
@@ -117,9 +121,9 @@ namespace fgm
     { return _data.template getAt<0>(); }
 
 
-    // template <Arithmetic T>
-    // FGM_INLINE constexpr T& Vec2<T>::r() noexcept
-    // { return _data[0]; }
+    template <Arithmetic T>
+    FGM_INLINE constexpr Vec2<T>::template ConstIndexableProxy<0> Vec2<T>::r() noexcept
+    { return ConstIndexableProxy<0>(*this); }
 
 
     template <Arithmetic T>
@@ -127,9 +131,9 @@ namespace fgm
     { return _data.template getAt<0>(); }
 
 
-    // template <Arithmetic T>
-    // FGM_INLINE constexpr T& Vec2<T>::g() noexcept
-    // { return _data[1]; }
+    template <Arithmetic T>
+    FGM_INLINE constexpr Vec2<T>::template ConstIndexableProxy<1> Vec2<T>::g() noexcept
+    { return ConstIndexableProxy<1>(*this); }
 
 
     /**************************************
@@ -139,15 +143,15 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    FGM_INLINE constexpr T& Vec2<T>::operator[](const std::size_t idx) noexcept
+    FGM_INLINE constexpr Vec2<T>::IndexableProxy Vec2<T>::operator[](const std::size_t idx) noexcept
     {
         FGM_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
-        return _data[idx];
+        return IndexableProxy(*this, idx);
     }
 
 
     template <Arithmetic T>
-    FGM_INLINE constexpr const T& Vec2<T>::operator[](const std::size_t idx) const noexcept
+    FGM_INLINE constexpr T Vec2<T>::operator[](const std::size_t idx) const noexcept
     {
         FGM_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data.getAt(idx);

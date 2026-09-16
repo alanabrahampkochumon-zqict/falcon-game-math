@@ -25,6 +25,7 @@
 #include "fgm/common/Constants.h"
 #include "fgm/common/MathTraits.h"
 #include "fgm/common/OperationStatus.h"
+#include "fgm/common/PreprocessorDefinitions.h"
 #include "fgm/common/Types.h"
 
 #include <array>
@@ -38,6 +39,13 @@ namespace fgm
     template <Arithmetic T>
     struct alignas(16) Vec2
     {
+    private:
+        /// ForwardDeclarations
+        template <size_t Index>
+        class ConstIndexableProxy;
+        class IndexableProxy;
+
+    public:
         /**
          * @addtogroup FGM_Vec2_Members
          * @{
@@ -95,87 +103,87 @@ namespace fgm
          */
 
         /**
-         * @brief Access the element at the first location (read-only).
+         * @brief Access the element at the first location.
          * @return A copy of the first vector element.
          */
         [[nodiscard]] constexpr T x() const noexcept;
 
 
-        // /**
-        //  * @brief Access the element at the first location (read-write access).
-        //  * @return A reference to the first element of the vector.
-        //  */
-        // [[nodiscard]] constexpr T& x() noexcept;
+        /**
+         * @brief Access the element at the first location (read-write access).
+         * @return A reference to the first element of the vector.
+         */
+        [[nodiscard]] constexpr ConstIndexableProxy<0> x() noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-only).
+         * @brief Access the element at the last location.
          * @return A copy of the last vector element.
          */
         [[nodiscard]] constexpr T y() const noexcept;
 
 
-        // /**
-        //  * @brief Access the element at the last location (read-write access).
-        //  * @return A reference to the last element of the vector.
-        //  */
-        // [[nodiscard]] constexpr T& y() noexcept;
+        /**
+         * @brief Access the element at the last location (read-write access).
+         * @return A reference to the last element of the vector.
+         */
+        [[nodiscard]] constexpr ConstIndexableProxy<1> y() noexcept;
 
 
         /**
-         * @brief Access the element at the first location (read-only).
+         * @brief Access the element at the first location.
          * @return A copy of the first vector element.
          */
         [[nodiscard]] constexpr T s() const noexcept;
 
 
-        // /**
-        //  * @brief Access the element at the first location (read-write access).
-        //  * @return A reference to the first element of the vector.
-        //  */
-        // [[nodiscard]] constexpr T& s() noexcept;
+        /**
+         * @brief Access the element at the first location (read-write access).
+         * @return A reference to the first element of the vector.
+         */
+        [[nodiscard]] constexpr ConstIndexableProxy<0> s() noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-only).
+         * @brief Access the element at the last location.
          * @return A copy of the last vector element.
          */
         [[nodiscard]] constexpr T t() const noexcept;
 
 
-        // /**
-        //  * @brief Access the element at the last location (read-write access).
-        //  * @return A reference to the last element of the vector.
-        //  */
-        // [[nodiscard]] constexpr T& t() noexcept;
+        /**
+         * @brief Access the element at the last location (read-write access).
+         * @return A reference to the last element of the vector.
+         */
+        [[nodiscard]] constexpr ConstIndexableProxy<1> t() noexcept;
 
 
         /**
-         * @brief Access the element at the first location (read-only).
+         * @brief Access the element at the first location.
          * @return A copy of the first vector element.
          */
         [[nodiscard]] constexpr T r() const noexcept;
 
 
-        // /**
-        //  * @brief Access the element at the first location (read-write access).
-        //  * @return A reference to the first element of the vector.
-        //  */
-        // [[nodiscard]] constexpr T& r() noexcept;
+        /**
+         * @brief Access the element at the first location (read-write access).
+         * @return A reference to the first element of the vector.
+         */
+        [[nodiscard]] constexpr ConstIndexableProxy<0> r() noexcept;
 
 
         /**
-         * @brief Access the element at the last location (read-only).
+         * @brief Access the element at the last location.
          * @return A copy of the last vector element.
          */
         [[nodiscard]] constexpr T g() const noexcept;
 
 
-        // /**
-        //  * @brief Access the element at the last location (read-write access).
-        //  * @return A reference to the last element of the vector.
-        //  */
-        // [[nodiscard]] constexpr T& g() noexcept;
+        /**
+         * @brief Access the element at the last location (read-write access).
+         * @return A reference to the last element of the vector.
+         */
+        [[nodiscard]] constexpr ConstIndexableProxy<1> g() noexcept;
 
 
         /**
@@ -188,7 +196,7 @@ namespace fgm
          *
          * @return A reference to the vector component(Proxy).
          */
-        constexpr T& operator[](std::size_t idx) noexcept;
+        constexpr IndexableProxy operator[](std::size_t idx) noexcept;
 
 
         /**
@@ -204,7 +212,7 @@ namespace fgm
          *
          * @return A copy of the vector component.
          */
-        constexpr const T& operator[](std::size_t idx) const noexcept;
+        constexpr T operator[](std::size_t idx) const noexcept;
 
         //         /** @} */
         //
@@ -2349,34 +2357,66 @@ namespace fgm
 
 
         /**************************************
-         *          ACCESS PROXY              *
+         *          MUTATION PROXY            *
          **************************************/
-        /// Proxy for enabling indexing for Vec2 since Simd128 doesn't support indexed write.
+
+        /// Proxy that enables indexing for Vec2 indexing since Simd128 doesn't support indexed write.
         class IndexableProxy
         {
         public:
-            constexpr IndexableProxy(Vec2& parent, const std::size_t index) noexcept: _vec{ parent }, _index{ index } {}
+            FGM_INLINE constexpr IndexableProxy(Vec2& parent, const std::size_t index) noexcept
+                : _vec{ parent }, _index{ index }
+            {}
 
-            constexpr IndexableProxy& operator=(T value) noexcept
+            FGM_INLINE constexpr const IndexableProxy& operator=(T value) const noexcept
             {
                 _vec._data.setAt(_index, value);
                 return *this;
             }
 
             // Allows for operator chaining
-            constexpr IndexableProxy& operator=(const IndexableProxy& other) noexcept
+            FGM_INLINE constexpr const IndexableProxy& operator=(const IndexableProxy& other) const noexcept
             {
                 _vec._data.setAt(_index, static_cast<T>(other));
                 return *this;
             }
 
             // Implicit conversion
-            constexpr operator T() const noexcept { return _vec._data.getAt(_index); }
+            FGM_INLINE constexpr operator T() const noexcept { return _vec._data.getAt(_index); }
 
 
         private:
             Vec2& _vec;
             std::size_t _index;
+        };
+
+
+        /// Proxy that enables indexing with compile-time known indices.
+        /// @tparam Index The index to use for indexing.
+        template <size_t Index>
+        class ConstIndexableProxy
+        {
+        public:
+            FGM_INLINE constexpr ConstIndexableProxy(Vec2& parent) noexcept: _vec{ parent } {}
+
+            FGM_INLINE constexpr ConstIndexableProxy& operator=(T value) && noexcept
+            {
+                _vec._data.template setAt<Index>(value);
+                return *this;
+            }
+
+            // Allows for operator chaining(a = b = c)
+            FGM_INLINE constexpr ConstIndexableProxy& operator=(const ConstIndexableProxy& other) && noexcept
+            {
+                _vec._data.template setAt<Index>(static_cast<T>(other));
+                return *this;
+            }
+
+            // Implicit conversion
+            FGM_INLINE constexpr operator T() const noexcept { return _vec._data.template getAt<Index>(); }
+
+        private:
+            Vec2& _vec;
         };
     };
 

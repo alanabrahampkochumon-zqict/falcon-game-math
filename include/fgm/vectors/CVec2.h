@@ -93,7 +93,7 @@ namespace fgm
          */
 
         /**
-         * @brief Access the element at the first location (read-only).
+         * @brief Access the element at the first location.
          * @return A copy of the first vector element.
          */
         [[nodiscard]] constexpr T x() const noexcept;
@@ -107,7 +107,7 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the last location (read-only).
+         * @brief Access the element at the last location.
          * @return A copy of the last vector element.
          */
         [[nodiscard]] constexpr T y() const noexcept;
@@ -121,7 +121,7 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the first location (read-only).
+         * @brief Access the element at the first location.
          * @return A copy of the first vector element.
          */
         [[nodiscard]] constexpr T s() const noexcept;
@@ -135,7 +135,7 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the last location (read-only).
+         * @brief Access the element at the last location.
          * @return A copy of the last vector element.
          */
         [[nodiscard]] constexpr T t() const noexcept;
@@ -149,7 +149,7 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the first location (read-only).
+         * @brief Access the element at the first location.
          * @return A copy of the first vector element.
          */
         [[nodiscard]] constexpr T r() const noexcept;
@@ -163,7 +163,7 @@ namespace fgm
 
 
         /**
-         * @brief Access the element at the last location (read-only).
+         * @brief Access the element at the last location.
          * @return A copy of the last vector element.
          */
         [[nodiscard]] constexpr T g() const noexcept;
