@@ -69,6 +69,12 @@ namespace falcon
             requires(SimdSafeConvertible<Args, DataType> && ...)
         constexpr explicit Simd128(Args... data) noexcept;
 
+        // TODO: Add test
+        /// @brief Cast a register from @p DataType to @p T.
+        /// @tparam T The destination data type.
+        template <typename T>
+        [[nodiscard]] constexpr Simd128<SimdBackend::ARCH_SSE2, T, Lane> cast() const noexcept;
+
 
         /**
          * @brief Initialize a 128-bit SIMD register with values from a std::container(std::array, std::vector).

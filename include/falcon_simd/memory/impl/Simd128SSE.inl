@@ -19,7 +19,7 @@ namespace falcon
     template <typename DataType, size_t Lane>
     template <typename... Args>
         requires(SimdSafeConvertible<Args, DataType> && ...)
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(Args... data) noexcept
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(Args... data) noexcept
     {
         static_assert(sizeof...(Args) <= Lane && "Number of argument exceeded the register lane count");
         if constexpr (sizeof...(Args) == 1)
@@ -34,11 +34,57 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(std::span<const DataType> values) noexcept
+    template <typename T>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, T, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                             Lane>::cast() const noexcept
+    {
+        if constexpr (std::is_same_v<DataType, T>)
+        {
+            return Simd128(_register);
+        }
+        else if constexpr (types::IsFP64<DataType>)
+        {
+            if constexpr (types::IsFP32<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castpd_ps(_register));
+            }
+            else //  if (std::is_integral_v<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castpd_si128(_register));
+            }
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            if constexpr (types::IsFP64<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castps_pd(_register));
+            }
+            else //  if (std::is_integral_v<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castps_si128(_register));
+            }
+        }
+        else // Integral to floating point.
+        {
+            if constexpr (types::IsFP64<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castsi128_pd(_register));
+            }
+            else // if constexpr (types::IsFP32<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castsi128_pd(_register));
+            }
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(
+        std::span<const DataType> values) noexcept
     { loadAligned(values.data()); }
 
     template <typename DataType, size_t Lane>
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(const DataType* buffer) noexcept
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd128(const DataType* buffer) noexcept
     { loadAligned(buffer); }
 
     template <typename DataType, size_t Lane>

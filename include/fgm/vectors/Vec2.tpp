@@ -204,7 +204,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2<U>& rhs, const double epsilon) const noexcept
+    //     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& rhs, const double epsilon) const noexcept
     //     {
     //         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
     //         {
@@ -234,14 +234,14 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& lhs, const Vec2<U>& rhs, const double epsilon)
+    //     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& lhs, const Vec2& rhs, const double epsilon)
     //     noexcept { return lhs.allEq(rhs, epsilon); }
     //
     //
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2<U>& rhs, const double epsilon) const noexcept
+    //     FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2& rhs, const double epsilon) const noexcept
     //     {
     //         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
     //         {
@@ -259,7 +259,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2& lhs, const Vec2<U>& rhs, const double epsilon)
+    //     FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2& lhs, const Vec2& rhs, const double epsilon)
     //     noexcept { return lhs.anyNeq(rhs, epsilon); }
     //
     //
@@ -272,13 +272,13 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::operator==(const Vec2<U>& rhs) const noexcept
+    //     FALCON_INLINE constexpr bool Vec2<T>::operator==(const Vec2& rhs) const noexcept
     //     { return this->allEq(rhs); }
     //
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::operator!=(const Vec2<U>& rhs) const noexcept
+    //     FALCON_INLINE constexpr bool Vec2<T>::operator!=(const Vec2& rhs) const noexcept
     //     { return this->anyNeq(rhs); }
     //
     //
@@ -292,7 +292,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::eq(const Vec2<U>& rhs, const double epsilon) const noexcept
+    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::eq(const Vec2& rhs, const double epsilon) const noexcept
     //     {
     //         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
     //         {
@@ -310,14 +310,14 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::eq(const Vec2& lhs, const Vec2<U>& rhs, const double epsilon)
+    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::eq(const Vec2& lhs, const Vec2& rhs, const double epsilon)
     //     noexcept { return lhs.eq(rhs, epsilon); }
     //
     //
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::neq(const Vec2<U>& rhs, const double epsilon) const noexcept
+    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::neq(const Vec2& rhs, const double epsilon) const noexcept
     //     {
     //         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
     //         {
@@ -335,130 +335,121 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <Arithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::neq(const Vec2& lhs, const Vec2<U>& rhs, const double epsilon)
+    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::neq(const Vec2& lhs, const Vec2& rhs, const double epsilon)
     //     noexcept { return lhs.neq(rhs, epsilon); }
     //
     //
-    //     /***************************************
-    //      *                                     *
-    //      *            COMPARISONS              *
-    //      *                                     *
-    //      ***************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gt(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return Vec2<bool>(_data[0] > rhs[0], _data[1] > rhs[1]); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gt(const Vec2& lhs, const Vec2<U>& rhs) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return lhs.gt(rhs); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gte(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return Vec2<bool>(_data[0] >= rhs[0], _data[1] >= rhs[1]); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gte(const Vec2& lhs, const Vec2<U>& rhs) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return lhs.gte(rhs); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lt(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return Vec2<bool>(_data[0] < rhs[0], _data[1] < rhs[1]); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lt(const Vec2& lhs, const Vec2<U>& rhs) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return lhs.lt(rhs); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lte(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = Magnitude<PromotedValue_t<T, U>>;
-    //         return Vec2<bool>(static_cast<R>(_data[0]) <= static_cast<R>(rhs[0]),
-    //                           static_cast<R>(_data[1]) <= static_cast<R>(rhs[1]));
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lte(const Vec2& lhs, const Vec2<U>& rhs) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return lhs.lte(rhs); }
-    //
-    //
-    //     /***************************************
-    //      *                                     *
-    //      *        COMPARISON OPERATORS         *
-    //      *                                     *
-    //      ***************************************/
-    //
-    // #ifdef ENABLE_FGM_SHADER_OPERATORS
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator>(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return this->gt(rhs); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator>=(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return this->gte(rhs); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator<(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return this->lt(rhs); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator<=(const Vec2<U>& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return this->lte(rhs); }
-    //
-    // #endif
-    //
-
     /***************************************
      *                                     *
-     *      BOOLEAN BITWISE OPERATORS      *
+     *            COMPARISONS              *
      *                                     *
+     ***************************************/
+
+    template<typename T>
+    struct Integral
+    {
+        using type = T;
+    };
+
+    template<>
+    struct Integral<float>
+    {
+        using type = int32_t;
+    };
+
+    template<>
+    struct Integral<double>
+    {
+        using type = int64_t;
+    };
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gt(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return Vec2<bool>(falcon::Simd128_t<typename Integral<T>::type, DIMENSION>(_data > rhs._data));
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gt(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.gt(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gte(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    { return Vec2<bool>(_data >= rhs._data); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gte(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.gte(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lt(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    { return Vec2<bool>(_data < rhs._data); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lt(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.lt(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lte(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    { return Vec2<bool>(_data <= rhs._data); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lte(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.lte(rhs); }
+
+
+
+    /***************************************
+     *        COMPARISON OPERATORS         *
+     ***************************************/
+
+#ifdef ENABLE_FGM_SHADER_OPERATORS
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator>(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    { return this->gt(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator>=(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    { return this->gte(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator<(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    { return this->lt(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator<=(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    { return this->lte(rhs); }
+
+#endif
+
+
+
+
+    /***************************************
+     *      BOOLEAN BITWISE OPERATORS      *
      ***************************************/
 
     template <Arithmetic T>
@@ -689,7 +680,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::dot(const Vec2<U>& rhs) const noexcept
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::dot(const Vec2& rhs) const noexcept
     //         requires StrictArithmetic<T>
     //     {
     // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
@@ -712,7 +703,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::dot(const Vec2& lhs, const Vec2<U>& rhs) noexcept
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::dot(const Vec2& lhs, const Vec2& rhs) noexcept
     //         requires StrictArithmetic<T>
     //     { return lhs.dot(rhs); }
     //
@@ -727,7 +718,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedMat2<T, U> Vec2<T>::tensorProduct(const Vec2<U>& rhs) const noexcept
+    //     FALCON_INLINE constexpr PromotedMat2<T, U> Vec2<T>::tensorProduct(const Vec2& rhs) const noexcept
     //         requires StrictArithmetic<T>
     //     {
     //         using R = std::common_type_t<T, U>;
@@ -739,7 +730,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedMat2<T, U> Vec2<T>::tensorProduct(const Vec2& lhs, const Vec2<U>& rhs)
+    //     FALCON_INLINE constexpr PromotedMat2<T, U> Vec2<T>::tensorProduct(const Vec2& lhs, const Vec2& rhs)
     //     noexcept
     //         requires StrictArithmetic<T>
     //     { return lhs.tensorProduct(rhs); }
@@ -753,7 +744,7 @@ namespace fgm
     //
     //     template <Arithmetic T>
     //     template <SignedStrictArithmetic U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::cross(const Vec2<U>& rhs) const noexcept
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::cross(const Vec2& rhs) const noexcept
     //         requires SignedStrictArithmetic<T>
     //     {
     //         using R = PromotedValue_t<T, U>;
@@ -763,7 +754,7 @@ namespace fgm
     //
     //     template <Arithmetic T>
     //     template <SignedStrictArithmetic U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::cross(const Vec2& lhs, const Vec2<U>& rhs) noexcept
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::cross(const Vec2& lhs, const Vec2& rhs) noexcept
     //         requires SignedStrictArithmetic<T>
     //     { return lhs.cross(rhs); }
     //
@@ -852,7 +843,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Magnitude<PromotedValue_t<T, U>> Vec2<T>::dist(const Vec2<U>& rhs) const noexcept
+    //     FALCON_INLINE constexpr Magnitude<PromotedValue_t<T, U>> Vec2<T>::dist(const Vec2& rhs) const noexcept
     //         requires StrictArithmetic<T>
     //     {
     //         using R       = Magnitude<PromotedValue_t<T, U>>;
@@ -874,7 +865,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::distSq(const Vec2<U>& rhs) const noexcept
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::distSq(const Vec2& rhs) const noexcept
     //         requires StrictArithmetic<T>
     //     {
     //         const auto dx = utils::diffAbs(_data[0], rhs[0]);
@@ -887,7 +878,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::distSq(const Vec2<U>& lhs, const Vec2<U>& rhs)
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::distSq(const Vec2<U>& lhs, const Vec2& rhs)
     //     noexcept
     //         requires StrictArithmetic<T>
     //     { return lhs.distSq(rhs); }
@@ -903,7 +894,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::manhattanDist(const Vec2<U>& rhs) const noexcept
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::manhattanDist(const Vec2& rhs) const noexcept
     //         requires StrictArithmetic<T>
     //     { return utils::diffAbs(_data[0], rhs[0]) + utils::diffAbs(_data[1], rhs[1]); }
     //
@@ -911,7 +902,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::manhattanDist(const Vec2<U>& lhs, const Vec2<U>& rhs)
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::manhattanDist(const Vec2<U>& lhs, const Vec2& rhs)
     //     noexcept
     //         requires StrictArithmetic<T>
     //     { return lhs.manhattanDist(rhs); }
@@ -927,7 +918,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::chebyshevDist(const Vec2<U>& rhs) const noexcept
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::chebyshevDist(const Vec2& rhs) const noexcept
     //         requires StrictArithmetic<T>
     //     { return std::max(utils::diffAbs(_data[0], rhs[0]), utils::diffAbs(_data[1], rhs[1])); }
     //
@@ -935,7 +926,7 @@ namespace fgm
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
     //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::chebyshevDist(const Vec2<U>& lhs, const Vec2<U>& rhs)
+    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::chebyshevDist(const Vec2<U>& lhs, const Vec2& rhs)
     //     noexcept
     //         requires StrictArithmetic<T>
     //     { return lhs.chebyshevDist(rhs); }
