@@ -822,18 +822,11 @@ namespace falcon
         }
         else if constexpr (sizeof(DataType) == 2)
         {
-            // For 16-bit data types we need to do one additional shift
-            // and use a mask to zero out all the lanes beyond the first 16-bit lower lanes
-            // since or can produce some garbage data in the upper lanes.
-            // _mm_cvtsi128_si16 is available in AVX512.
             const auto shifted1 = _mm_srli_si128(_register, 2);
             const auto orReg1   = _mm_or_si128(_register, shifted1);
             if constexpr (LaneCount == 2)
             {
-                // TODO: Migrate to a standalone helper function.
-                // ADD SIMD_128 FP16 Intrinsics
-                const auto zeroedOut = _mm_unpacklo_epi16(orReg1, _mm_setzero_si128());
-                return _mm_cvtsi128_si32(zeroedOut);
+                return static_cast<DataType>(_mm_cvtsi128_si32(orReg1));
             }
             else
             {
@@ -841,30 +834,23 @@ namespace falcon
                 const auto orReg2   = _mm_or_si128(orReg1, shifted2);
                 if constexpr (LaneCount == 4)
                 {
-                    const auto zeroedOut = _mm_unpacklo_epi16(orReg2, _mm_setzero_si128());
-                    return _mm_cvtsi128_si32(zeroedOut);
+                    return static_cast<DataType>(_mm_cvtsi128_si32(orReg2));
                 }
-                const auto shifted3  = _mm_srli_si128(orReg2, 8);
-                const auto orReg3    = _mm_or_si128(orReg2, shifted3);
-                const auto zeroedOut = _mm_unpacklo_epi16(orReg3, _mm_setzero_si128());
-                return _mm_cvtsi128_si32(zeroedOut);
+                else
+                {
+                    const auto shifted3 = _mm_srli_si128(orReg2, 8);
+                    const auto orReg3   = _mm_or_si128(orReg2, shifted3);
+                    return static_cast<DataType>(_mm_cvtsi128_si32(orReg3));
+                }
             }
         }
         else // if constexpr (sizeof(DataType) == 1)
         {
-            // For 8-bit data types we need to do 4 shifts(1, 2, 4, 8 bytes respectively)
-            // and use a mask to zero out all the lanes beyond the first 16-bit lower lanes
-            // since or can produce some garbage data in the upper lanes.
-            // _mm_cvtsi128_si16 is available in AVX512.
             const auto shifted1 = _mm_srli_si128(_register, 1);
             const auto orReg1   = _mm_or_si128(_register, shifted1);
             if constexpr (LaneCount == 2)
             {
-                // TODO: Migrate to a standalone helper function.
-                // ADD SIMD_128 FP16 Intrinsics
-                const auto zeroedOut1 = _mm_unpacklo_epi8(orReg1, _mm_setzero_si128());
-                const auto zeroedOut2 = _mm_unpacklo_epi16(zeroedOut1, _mm_setzero_si128());
-                return _mm_cvtsi128_si32(zeroedOut2);
+                return static_cast<DataType>(_mm_cvtsi128_si32(orReg1));
             }
             else
             {
@@ -872,9 +858,7 @@ namespace falcon
                 const auto orReg2   = _mm_or_si128(orReg1, shifted2);
                 if constexpr (LaneCount == 4)
                 {
-                    const auto zeroedOut1 = _mm_unpacklo_epi8(orReg2, _mm_setzero_si128());
-                    const auto zeroedOut2 = _mm_unpacklo_epi16(zeroedOut1, _mm_setzero_si128());
-                    return _mm_cvtsi128_si32(zeroedOut2);
+                    return static_cast<DataType>(_mm_cvtsi128_si32(orReg2));
                 }
                 else
                 {
@@ -882,20 +866,13 @@ namespace falcon
                     const auto orReg3   = _mm_or_si128(orReg2, shifted3);
                     if constexpr (LaneCount == 8)
                     {
-                        const auto zeroedOut1 = _mm_unpacklo_epi8(orReg3, _mm_setzero_si128());
-                        const auto zeroedOut2 = _mm_unpacklo_epi16(zeroedOut1, _mm_setzero_si128());
-                        return _mm_cvtsi128_si32(zeroedOut2);
+                        return static_cast<DataType>(_mm_cvtsi128_si32(orReg3));
                     }
                     else
                     {
                         const auto shifted4 = _mm_srli_si128(orReg3, 8);
                         const auto orReg4   = _mm_or_si128(orReg3, shifted4);
-                        if constexpr (LaneCount == 8)
-                        {
-                            const auto zeroedOut1 = _mm_unpacklo_epi8(orReg4, _mm_setzero_si128());
-                            const auto zeroedOut2 = _mm_unpacklo_epi16(zeroedOut1, _mm_setzero_si128());
-                            return _mm_cvtsi128_si32(zeroedOut2);
-                        }
+                        return static_cast<DataType>(_mm_cvtsi128_si32(orReg4));
                     }
                 }
             }
