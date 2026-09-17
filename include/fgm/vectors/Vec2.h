@@ -695,81 +695,81 @@ namespace fgm
         // #endif
         //
         //         /** @} */
-        //
-        //
-        //         /**
-        //          * @addtogroup FGM_Vec2_Bitwise
-        //          * @{
-        //          */
-        //
-        //         /**
-        //          * @brief Perform component-wise logical AND between this vector and @p rhs vector.
-        //          *        Compute the conjunction between each component pair.
-        //          *
-        //          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
-        //          *
-        //          * @param[in] rhs The vector to combine with.
-        //          *
-        //          * @return A @ref Vec2<bool> mask containing the results of component-wise AND.
-        //          */
-        //         [[nodiscard]] constexpr Vec2 operator&(const Vec2& rhs) const noexcept
-        //             requires std::is_same_v<T, bool>;
-        //
-        //
-        //         /**
-        //          * @brief Perform an in-place component-wise logical AND between this vector and @p rhs vector.
-        //          *        Compute the conjunction between each component pair in-place and update the calling vector.
-        //          *
-        //          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
-        //          *
-        //          * @param[in] rhs The vector to combine with.
-        //          *
-        //          * @return A reference to this vector (*this).
-        //          */
-        //         constexpr Vec2& operator&=(const Vec2& rhs) noexcept
-        //             requires std::is_same_v<T, bool>;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise logical OR between this vector and @p rhs vector.
-        //          *        Compute the disjunction between each component pair.
-        //          *
-        //          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
-        //          *
-        //          * @param[in] rhs The vector to combine with.
-        //          *
-        //          * @return A @ref Vec2<bool> mask containing the results of component-wise OR.
-        //          */
-        //         [[nodiscard]] constexpr Vec2 operator|(const Vec2& rhs) const noexcept
-        //             requires std::is_same_v<T, bool>;
-        //
-        //
-        //         /**
-        //          * @brief Perform an in-place component-wise logical OR between this vector and @p rhs vector.
-        //          *        Compute the disjunction between each component pair in-place and update the calling vector.
-        //          *
-        //          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
-        //          *
-        //          * @param[in] rhs The vector to combine with.
-        //          *
-        //          * @return A reference to this vector (*this).
-        //          */
-        //         constexpr Vec2& operator|=(const Vec2& rhs) noexcept
-        //             requires std::is_same_v<T, bool>;
-        //
-        //
-        //         /**
-        //          * @brief Apply a component-wise logical NOT on this vector.
-        //          *        Invert each boolean component and returns a new @ref Vec2<bool>.
-        //          *
-        //          * @note Only available for @ref bVec2 and vectors with `bool` value_type.
-        //          *
-        //          * @return A @ref Vec2<bool> with inverted values.
-        //          */
-        //         [[nodiscard]] constexpr Vec2 operator!() const noexcept
-        //             requires std::is_same_v<T, bool>;
-        //
-        //         /** @} */
+
+
+        /**
+         * @addtogroup FGM_Vec2_Bitwise
+         * @{
+         */
+
+        /**
+         * @brief Perform component-wise logical AND between this vector and @p rhs vector.
+         *        Compute the conjunction between each component pair.
+         *
+         * @note Only available for @ref bVec2 and vectors with `bool` value_type.
+         *
+         * @param[in] rhs The vector to combine with.
+         *
+         * @return A @ref Vec2<bool> mask containing the results of component-wise AND.
+         */
+        [[nodiscard]] constexpr Vec2 operator&(const Vec2& rhs) const noexcept
+            requires std::is_same_v<T, bool>;
+
+
+        /**
+         * @brief Perform an in-place component-wise logical AND between this vector and @p rhs vector.
+         *        Compute the conjunction between each component pair in-place and update the calling vector.
+         *
+         * @note Only available for @ref bVec2 and vectors with `bool` value_type.
+         *
+         * @param[in] rhs The vector to combine with.
+         *
+         * @return A reference to this vector (*this).
+         */
+        constexpr Vec2& operator&=(const Vec2& rhs) noexcept
+            requires std::is_same_v<T, bool>;
+
+
+        /**
+         * @brief Perform component-wise logical OR between this vector and @p rhs vector.
+         *        Compute the disjunction between each component pair.
+         *
+         * @note Only available for @ref bVec2 and vectors with `bool` value_type.
+         *
+         * @param[in] rhs The vector to combine with.
+         *
+         * @return A @ref Vec2<bool> mask containing the results of component-wise OR.
+         */
+        [[nodiscard]] constexpr Vec2 operator|(const Vec2& rhs) const noexcept
+            requires std::is_same_v<T, bool>;
+
+
+        /**
+         * @brief Perform an in-place component-wise logical OR between this vector and @p rhs vector.
+         *        Compute the disjunction between each component pair in-place and update the calling vector.
+         *
+         * @note Only available for @ref bVec2 and vectors with `bool` value_type.
+         *
+         * @param[in] rhs The vector to combine with.
+         *
+         * @return A reference to this vector (*this).
+         */
+        constexpr Vec2& operator|=(const Vec2& rhs) noexcept
+            requires std::is_same_v<T, bool>;
+
+
+        /**
+         * @brief Apply a component-wise logical NOT on this vector.
+         *        Invert each boolean component and returns a new @ref Vec2<bool>.
+         *
+         * @note Only available for @ref bVec2 and vectors with `bool` value_type.
+         *
+         * @return A @ref Vec2<bool> with inverted values.
+         */
+        [[nodiscard]] constexpr Vec2 operator!() const noexcept
+            requires std::is_same_v<T, bool>;
+
+        /** @} */
 
 
         /**

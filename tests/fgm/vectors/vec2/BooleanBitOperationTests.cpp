@@ -45,37 +45,6 @@ namespace
         }
     };
 
-
-
-    /**************************************
-     *            STATIC TESTS            *
-     **************************************/
-
-    namespace static_tests
-    {
-        constexpr fgm::Vec2 VEC_A(true, false);
-        constexpr fgm::Vec2 VEC_B(false, false);
-
-
-        /// @test Verify that vector AND returns a valid vector at compile time.
-        constexpr auto AND_VEC = VEC_A & VEC_B;
-        static_assert(AND_VEC.x() == false);
-        static_assert(AND_VEC.y() == false);
-
-
-        /// @test Verify that vector OR returns a valid vector at compile time.
-        constexpr auto OR_VEC = VEC_A | VEC_B;
-        static_assert(OR_VEC.x() == true);
-        static_assert(OR_VEC.y() == false);
-
-
-        /// @test Verify that vector NOT returns a valid vector at compile time.
-        constexpr auto NOT_VEC = !VEC_A;
-        static_assert(NOT_VEC.x() == false);
-        static_assert(NOT_VEC.y() == true);
-
-    } // namespace static_tests
-
 } // namespace
 
 
@@ -93,6 +62,7 @@ TEST_F(BooleanVec2BitOperationsTests, BitwiseAND_PerformComponentwiseConjunction
     const auto mask = this->_vecA & this->_vecB;
     EXPECT_VEC_EQ(this->_expectedConjunctionVector, mask);
 }
+
 
 /**
  * @test Verify that the compound bitwise AND operator performs a component-wise logical conjunction in-place

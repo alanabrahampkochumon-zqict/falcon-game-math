@@ -454,48 +454,48 @@ namespace fgm
     //
     // #endif
     //
-    //
-    //     /***************************************
-    //      *                                     *
-    //      *      BOOLEAN BITWISE OPERATORS      *
-    //      *                                     *
-    //      ***************************************/
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<T> Vec2<T>::operator&(const Vec2& rhs) const noexcept
-    //         requires std::is_same_v<T, bool>
-    //     { return Vec2(_data[0] & rhs[0], _data[1] & rhs[1]); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<T>& Vec2<T>::operator&=(const Vec2& rhs) noexcept
-    //         requires std::is_same_v<T, bool>
-    //     {
-    //         *this = *this & rhs;
-    //         return *this;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<T> Vec2<T>::operator|(const Vec2& rhs) const noexcept
-    //         requires std::is_same_v<T, bool>
-    //     { return Vec2(_data[0] | rhs[0], _data[1] | rhs[1]); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<T>& Vec2<T>::operator|=(const Vec2& rhs) noexcept
-    //         requires std::is_same_v<T, bool>
-    //     {
-    //         *this = *this & rhs;
-    //         return *this;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<T> Vec2<T>::operator!() const noexcept
-    //         requires std::is_same_v<T, bool>
-    //     { return Vec2(!_data[0], !_data[1]); }
-    //
+
+    /***************************************
+     *                                     *
+     *      BOOLEAN BITWISE OPERATORS      *
+     *                                     *
+     ***************************************/
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::operator&(const Vec2& rhs) const noexcept
+        requires std::is_same_v<T, bool>
+    { return Vec2(_data & rhs._data); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T>& Vec2<T>::operator&=(const Vec2& rhs) noexcept
+        requires std::is_same_v<T, bool>
+    {
+        *this = *this & rhs;
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::operator|(const Vec2& rhs) const noexcept
+        requires std::is_same_v<T, bool>
+    { return Vec2(_data | rhs._data); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T>& Vec2<T>::operator|=(const Vec2& rhs) noexcept
+        requires std::is_same_v<T, bool>
+    {
+        *this = *this & rhs;
+        return *this;
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::operator!() const noexcept
+        requires std::is_same_v<T, bool>
+    { return Vec2(~_data); }
+
 
 
     /*************************************
