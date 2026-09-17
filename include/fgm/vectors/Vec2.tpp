@@ -45,11 +45,9 @@ namespace fgm
     FALCON_INLINE constexpr Vec2<T>::Vec2(const Vec2<U>& other) noexcept
     {
         // Required for clearing the upper lanes.
-        _data.setZero();
-        // _data.set()
         // TODO: Update to return a ptr (maybe overload operator*)?
-        _data[0] = static_cast<T>(other.x());
-        _data[1] = static_cast<T>(other.y());
+        _data.setZero();
+        _data.set(static_cast<T>(other.x()), static_cast<T>(other.y()));
     }
 
 
@@ -345,106 +343,90 @@ namespace fgm
      *                                     *
      ***************************************/
 
-    template<typename T>
-    struct Integral
-    {
-        using type = T;
-    };
-
-    template<>
-    struct Integral<float>
-    {
-        using type = int32_t;
-    };
-
-    template<>
-    struct Integral<double>
-    {
-        using type = int64_t;
-    };
-
     template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gt(const Vec2& rhs) const noexcept
+    FALCON_INLINE constexpr Vec2<typename Integral<T>::type> Vec2<T>::gt(const Vec2& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        return Vec2<bool>(falcon::Simd128_t<typename Integral<T>::type, DIMENSION>(_data > rhs._data));
+        using Int      = Integral<T>::type;
+        const auto reg = (_data > rhs._data).template cast<Int>();
+        return Vec2<Int>(reg);
     }
 
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gt(const Vec2& lhs, const Vec2& rhs) noexcept
-        requires StrictArithmetic<T>
-    { return lhs.gt(rhs); }
-
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gte(const Vec2& rhs) const noexcept
-        requires StrictArithmetic<T>
-    { return Vec2<bool>(_data >= rhs._data); }
-
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gte(const Vec2& lhs, const Vec2& rhs) noexcept
-        requires StrictArithmetic<T>
-    { return lhs.gte(rhs); }
-
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lt(const Vec2& rhs) const noexcept
-        requires StrictArithmetic<T>
-    { return Vec2<bool>(_data < rhs._data); }
-
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lt(const Vec2& lhs, const Vec2& rhs) noexcept
-        requires StrictArithmetic<T>
-    { return lhs.lt(rhs); }
-
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lte(const Vec2& rhs) const noexcept
-        requires StrictArithmetic<T>
-    { return Vec2<bool>(_data <= rhs._data); }
-
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lte(const Vec2& lhs, const Vec2& rhs) noexcept
-        requires StrictArithmetic<T>
-    { return lhs.lte(rhs); }
-
-
-
-    /***************************************
-     *        COMPARISON OPERATORS         *
-     ***************************************/
-
-#ifdef ENABLE_FGM_SHADER_OPERATORS
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator>(const Vec2& rhs) const noexcept
-        requires StrictArithmetic<T>
-    { return this->gt(rhs); }
-
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator>=(const Vec2& rhs) const noexcept
-        requires StrictArithmetic<T>
-    { return this->gte(rhs); }
-
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator<(const Vec2& rhs) const noexcept
-        requires StrictArithmetic<T>
-    { return this->lt(rhs); }
-
-
-    template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator<=(const Vec2& rhs) const noexcept
-        requires StrictArithmetic<T>
-    { return this->lte(rhs); }
-
-#endif
-
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gt(const Vec2& lhs, const Vec2& rhs) noexcept
+//         requires StrictArithmetic<T>
+//     { return lhs.gt(rhs); }
+//
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gte(const Vec2& rhs) const noexcept
+//         requires StrictArithmetic<T>
+//     { return Vec2<bool>(_data >= rhs._data); }
+//
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::gte(const Vec2& lhs, const Vec2& rhs) noexcept
+//         requires StrictArithmetic<T>
+//     { return lhs.gte(rhs); }
+//
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lt(const Vec2& rhs) const noexcept
+//         requires StrictArithmetic<T>
+//     { return Vec2<bool>(_data < rhs._data); }
+//
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lt(const Vec2& lhs, const Vec2& rhs) noexcept
+//         requires StrictArithmetic<T>
+//     { return lhs.lt(rhs); }
+//
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lte(const Vec2& rhs) const noexcept
+//         requires StrictArithmetic<T>
+//     { return Vec2<bool>(_data <= rhs._data); }
+//
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::lte(const Vec2& lhs, const Vec2& rhs) noexcept
+//         requires StrictArithmetic<T>
+//     { return lhs.lte(rhs); }
+//
+//
+//
+//     /***************************************
+//      *        COMPARISON OPERATORS         *
+//      ***************************************/
+//
+// #ifdef ENABLE_FGM_SHADER_OPERATORS
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator>(const Vec2& rhs) const noexcept
+//         requires StrictArithmetic<T>
+//     { return this->gt(rhs); }
+//
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator>=(const Vec2& rhs) const noexcept
+//         requires StrictArithmetic<T>
+//     { return this->gte(rhs); }
+//
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator<(const Vec2& rhs) const noexcept
+//         requires StrictArithmetic<T>
+//     { return this->lt(rhs); }
+//
+//
+//     template <Arithmetic T>
+//     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::operator<=(const Vec2& rhs) const noexcept
+//         requires StrictArithmetic<T>
+//     { return this->lte(rhs); }
+//
+// #endif
+//
 
 
 

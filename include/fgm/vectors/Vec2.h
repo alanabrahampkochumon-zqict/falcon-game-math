@@ -36,6 +36,26 @@
 
 namespace fgm
 {
+    // TODO: Move out
+    template <typename T>
+    struct Integral
+    {
+        using type = T;
+    };
+
+    template <>
+    struct Integral<float>
+    {
+        using type = int32_t;
+    };
+
+    template <>
+    struct Integral<double>
+    {
+        using type = int64_t;
+    };
+
+
     template <Arithmetic T>
     struct alignas(16) Vec2
     {
@@ -44,6 +64,8 @@ namespace fgm
         template <size_t Index>
         class ConstIndexableProxy;
         class IndexableProxy;
+
+
 
     public:
         /**
@@ -500,6 +522,10 @@ namespace fgm
         //         /** @} */
 
 
+        // TODO: Add tests create conversion.
+        [[nodiscard]] constexpr Vec2<bool> toBool() const noexcept
+        { return Vec2<bool>(static_cast<bool>(x()), static_cast<bool>(y())); }
+
         /**
          * @addtogroup FGM_Vec2_Comparison
          * @{
@@ -513,146 +539,146 @@ namespace fgm
          *
          * @return A @ref Vec2<bool> mask containing the results of each component comparison.
          */
-        [[nodiscard]] constexpr Vec2<bool> gt(const Vec2& rhs) const noexcept
+        [[nodiscard]] constexpr Vec2<typename Integral<T>::type> gt(const Vec2& rhs) const noexcept
             requires StrictArithmetic<T>;
 
-
-        /**
-         * @brief Perform component-wise greater-than comparison between @p lhs vector and @p rhs vector.
-         *        Compare each component pair and returns a boolean mask.
-         *
-         * @param[in]  lhs The vector to compare.
-         * @param[in]  rhs The vector to compare against.
-         *
-         * @return A @ref Vec2<bool> mask containing the results of each component comparison.
-         */
-        [[nodiscard]] static constexpr Vec2<bool> gt(const Vec2& lhs, const Vec2& rhs) noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @brief Perform component-wise greater-than-or-equal comparison between this vector and @p rhs
-         *        vector. Compare each component pair and returns a boolean mask.
-         *
-         * @param[in] rhs The vector to compare against.
-         *
-         * @return A @ref Vec2<bool> mask containing the results of each component comparison.
-         */
-        [[nodiscard]] constexpr Vec2<bool> gte(const Vec2& rhs) const noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @brief Perform component-wise greater-than-or-equal comparison between @p lhs vector and @p rhs
-         *        vector. Compare each component pair and returns a boolean mask.
-         *
-         * @param[in]  lhs The vector to compare.
-         * @param[in]  rhs The vector to compare against.
-         *
-         * @return A @ref Vec2<bool> mask containing the results of each component comparison.
-         */
-        [[nodiscard]] static constexpr Vec2<bool> gte(const Vec2& lhs, const Vec2& rhs) noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @brief Perform component-wise less-than comparison between this vector and @p rhs vector.
-         *        Compare each component pair and returns a boolean mask.
-         *
-         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
-         *       compiler-level constant folding bugs.
-         *       Runtime execution remains IEEE 754 compliant under /fp:strict.
-         *
-         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-         *
-         * @param[in] rhs The vector to compare against.
-         *
-         * @return A @ref Vec2<bool> mask containing the results of each component comparison.
-         */
-        [[nodiscard]] constexpr Vec2<bool> lt(const Vec2& rhs) const noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @brief Perform component-wise less-than comparison between @p lhs vector and @p rhs vector.
-         *        Compare each component pair and returns a boolean mask.
-         *
-         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
-         *       compiler-level constant folding bugs.
-         *       Runtime execution remains IEEE 754 compliant under /fp:strict.
-         *
-         * @param[in]  lhs The vector to compare.
-         * @param[in]  rhs The vector to compare against.
-         *
-         * @return A @ref Vec2<bool> mask containing the results of each component comparison.
-         */
-        [[nodiscard]] static constexpr Vec2<bool> lt(const Vec2& lhs, const Vec2& rhs) noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @brief Perform component-wise less-than-or-equal comparison between this vector and @p rhs vector.
-         *        Compares each component pair and returns a boolean mask.
-         *
-         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
-         *       compiler-level constant folding bugs.
-         *       Runtime execution remains IEEE 754 compliant under /fp:strict.
-         *
-         * @param[in] rhs The vector to compare against.
-         *
-         * @return A @ref Vec2<bool> mask containing the results of each component comparison.
-         */
-        [[nodiscard]] constexpr Vec2<bool> lte(const Vec2& rhs) const noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @brief Perform component-wise less-than-or-equal comparison between @p lhs vector and @p rhs
-         *        vector. Compares each component pair and returns a boolean mask.
-         *
-        * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
-         *       compiler-level constant folding bugs.
-         *       Runtime execution remains IEEE 754 compliant under /fp:strict.
-         *
-         *
-         * @param[in]  lhs The vector to compare.
-         * @param[in]  rhs The vector to compare against.
-         *
-         * @return A @ref Vec2<bool> mask containing the results of each component comparison.
-         */
-        [[nodiscard]] static constexpr Vec2<bool> lte(const Vec2& lhs, const Vec2& rhs) noexcept
-            requires StrictArithmetic<T>;
-
-
-#ifdef ENABLE_FGM_SHADER_OPERATORS
-
-        /**
-         * @copydoc gt(const Vec2&) const
-         */
-        [[nodiscard]] constexpr Vec2<bool> operator>(const Vec2& rhs) const noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @copydoc gte(const Vec2&) const
-         */
-        [[nodiscard]] constexpr Vec2<bool> operator>=(const Vec2& rhs) const noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @copydoc lt(const Vec2&) const
-         */
-        [[nodiscard]] constexpr Vec2<bool> operator<(const Vec2& rhs) const noexcept
-            requires StrictArithmetic<T>;
-
-
-        /**
-         * @copydoc lte(const Vec2&) const
-         */
-        [[nodiscard]] constexpr Vec2<bool> operator<=(const Vec2& rhs) const noexcept
-            requires StrictArithmetic<T>;
-#endif
+        //
+        //         /**
+        //          * @brief Perform component-wise greater-than comparison between @p lhs vector and @p rhs vector.
+        //          *        Compare each component pair and returns a boolean mask.
+        //          *
+        //          * @param[in]  lhs The vector to compare.
+        //          * @param[in]  rhs The vector to compare against.
+        //          *
+        //          * @return A @ref Vec2<bool> mask containing the results of each component comparison.
+        //          */
+        //         [[nodiscard]] static constexpr Vec2<bool> gt(const Vec2& lhs, const Vec2& rhs) noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        //         /**
+        //          * @brief Perform component-wise greater-than-or-equal comparison between this vector and @p rhs
+        //          *        vector. Compare each component pair and returns a boolean mask.
+        //          *
+        //          * @param[in] rhs The vector to compare against.
+        //          *
+        //          * @return A @ref Vec2<bool> mask containing the results of each component comparison.
+        //          */
+        //         [[nodiscard]] constexpr Vec2<bool> gte(const Vec2& rhs) const noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        //         /**
+        //          * @brief Perform component-wise greater-than-or-equal comparison between @p lhs vector and @p rhs
+        //          *        vector. Compare each component pair and returns a boolean mask.
+        //          *
+        //          * @param[in]  lhs The vector to compare.
+        //          * @param[in]  rhs The vector to compare against.
+        //          *
+        //          * @return A @ref Vec2<bool> mask containing the results of each component comparison.
+        //          */
+        //         [[nodiscard]] static constexpr Vec2<bool> gte(const Vec2& lhs, const Vec2& rhs) noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        //         /**
+        //          * @brief Perform component-wise less-than comparison between this vector and @p rhs vector.
+        //          *        Compare each component pair and returns a boolean mask.
+        //          *
+        //          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
+        //          *       compiler-level constant folding bugs.
+        //          *       Runtime execution remains IEEE 754 compliant under /fp:strict.
+        //          *
+        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+        //          *
+        //          * @param[in] rhs The vector to compare against.
+        //          *
+        //          * @return A @ref Vec2<bool> mask containing the results of each component comparison.
+        //          */
+        //         [[nodiscard]] constexpr Vec2<bool> lt(const Vec2& rhs) const noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        //         /**
+        //          * @brief Perform component-wise less-than comparison between @p lhs vector and @p rhs vector.
+        //          *        Compare each component pair and returns a boolean mask.
+        //          *
+        //          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
+        //          *       compiler-level constant folding bugs.
+        //          *       Runtime execution remains IEEE 754 compliant under /fp:strict.
+        //          *
+        //          * @param[in]  lhs The vector to compare.
+        //          * @param[in]  rhs The vector to compare against.
+        //          *
+        //          * @return A @ref Vec2<bool> mask containing the results of each component comparison.
+        //          */
+        //         [[nodiscard]] static constexpr Vec2<bool> lt(const Vec2& lhs, const Vec2& rhs) noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        //         /**
+        //          * @brief Perform component-wise less-than-or-equal comparison between this vector and @p rhs vector.
+        //          *        Compares each component pair and returns a boolean mask.
+        //          *
+        //          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
+        //          *       compiler-level constant folding bugs.
+        //          *       Runtime execution remains IEEE 754 compliant under /fp:strict.
+        //          *
+        //          * @param[in] rhs The vector to compare against.
+        //          *
+        //          * @return A @ref Vec2<bool> mask containing the results of each component comparison.
+        //          */
+        //         [[nodiscard]] constexpr Vec2<bool> lte(const Vec2& rhs) const noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        //         /**
+        //          * @brief Perform component-wise less-than-or-equal comparison between @p lhs vector and @p rhs
+        //          *        vector. Compares each component pair and returns a boolean mask.
+        //          *
+        //          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
+        //          *       compiler-level constant folding bugs.
+        //          *       Runtime execution remains IEEE 754 compliant under /fp:strict.
+        //          *
+        //          *
+        //          * @param[in]  lhs The vector to compare.
+        //          * @param[in]  rhs The vector to compare against.
+        //          *
+        //          * @return A @ref Vec2<bool> mask containing the results of each component comparison.
+        //          */
+        //         [[nodiscard]] static constexpr Vec2<bool> lte(const Vec2& lhs, const Vec2& rhs) noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        // #ifdef ENABLE_FGM_SHADER_OPERATORS
+        //
+        //         /**
+        //          * @copydoc gt(const Vec2&) const
+        //          */
+        //         [[nodiscard]] constexpr Vec2<bool> operator>(const Vec2& rhs) const noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        //         /**
+        //          * @copydoc gte(const Vec2&) const
+        //          */
+        //         [[nodiscard]] constexpr Vec2<bool> operator>=(const Vec2& rhs) const noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        //         /**
+        //          * @copydoc lt(const Vec2&) const
+        //          */
+        //         [[nodiscard]] constexpr Vec2<bool> operator<(const Vec2& rhs) const noexcept
+        //             requires StrictArithmetic<T>;
+        //
+        //
+        //         /**
+        //          * @copydoc lte(const Vec2&) const
+        //          */
+        //         [[nodiscard]] constexpr Vec2<bool> operator<=(const Vec2& rhs) const noexcept
+        //             requires StrictArithmetic<T>;
+        // #endif
 
         /** @} */
 
