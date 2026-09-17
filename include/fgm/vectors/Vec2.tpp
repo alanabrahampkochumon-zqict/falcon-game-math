@@ -344,10 +344,10 @@ namespace fgm
      ***************************************/
 
     template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<typename Integral<T>::type> Vec2<T>::gt(const Vec2& rhs) const noexcept
+    FALCON_INLINE constexpr Vec2<typename UInt<T>::type> Vec2<T>::gt(const Vec2& rhs) const noexcept
         requires StrictArithmetic<T>
     {
-        using Int      = Integral<T>::type;
+        using Int      = UInt<T>::type;
         const auto reg = (_data > rhs._data).template cast<Int>();
         return Vec2<Int>(reg);
     }

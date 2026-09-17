@@ -21,7 +21,6 @@
  */
 
 // TODO: Update header description
-
 #include "fgm/common/Config.h"
 #include "fgm/common/Constants.h"
 #include "fgm/common/MathTraits.h"
@@ -29,6 +28,7 @@
 #include "fgm/common/Types.h"
 
 #include <falcon_core/Preprocessors.h>
+#include <falcon_core/traits/TypeHelpers.h>
 #include <falcon_simd/FalconSimd.h>
 #include <iomanip>
 #include <type_traits>
@@ -36,25 +36,8 @@
 
 namespace fgm
 {
-    // TODO: Move out
-    template <typename T>
-    struct Integral
-    {
-        using type = T;
-    };
 
-    template <>
-    struct Integral<float>
-    {
-        using type = int32_t;
-    };
-
-    template <>
-    struct Integral<double>
-    {
-        using type = int64_t;
-    };
-
+    using namespace falcon::types;
 
     template <Arithmetic T>
     struct alignas(16) Vec2
@@ -64,7 +47,6 @@ namespace fgm
         template <size_t Index>
         class ConstIndexableProxy;
         class IndexableProxy;
-
 
 
     public:
@@ -539,7 +521,7 @@ namespace fgm
          *
          * @return A @ref Vec2<bool> mask containing the results of each component comparison.
          */
-        [[nodiscard]] constexpr Vec2<typename Integral<T>::type> gt(const Vec2& rhs) const noexcept
+        [[nodiscard]] constexpr Vec2<typename UInt<T>::type> gt(const Vec2& rhs) const noexcept
             requires StrictArithmetic<T>;
 
         //

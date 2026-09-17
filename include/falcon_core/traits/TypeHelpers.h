@@ -62,6 +62,36 @@ namespace falcon::types
     constexpr auto IsUQWord = std::is_same_v<T, uint64_t>;
 
 
+    /// @brief Convert any type to an equally-sized unsigned integral.
+    template <typename T>
+    struct UInt
+    {
+        using type = std::make_unsigned_t<T>;
+    };
+
+    template <>
+    struct UInt<float>
+    {
+        using type = uint32_t;
+    };
+
+    template <>
+    struct UInt<double>
+    {
+        using type = uint64_t;
+    };
+
+    template <>
+    struct UInt<bool>
+    {
+        using type = uint8_t;
+    };
+
+    /// @brief Variable template helper for @ref fgm::UInt<T>::type.
+    template <typename T>
+    using UInt_t = UInt<T>::type;
+
+
 } // namespace falcon::types
 
 /** @} */

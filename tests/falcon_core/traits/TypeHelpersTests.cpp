@@ -144,6 +144,21 @@ namespace
         static_assert(IsFP64<float> == false);
         static_assert(IsFP64<double> == true);
 
+        /// @test Verify that UInt_t returns the unsigned integral counterpart for all types.
+        static_assert(std::is_same_v<UInt_t<int8_t>, uint8_t>);
+        static_assert(std::is_same_v<UInt_t<int16_t>, uint16_t>);
+        static_assert(std::is_same_v<UInt_t<int32_t>, uint32_t>);
+        static_assert(std::is_same_v<UInt_t<int64_t>, uint64_t>);
+
+        static_assert(std::is_same_v<UInt_t<uint8_t>, uint8_t>);
+        static_assert(std::is_same_v<UInt_t<uint16_t>, uint16_t>);
+        static_assert(std::is_same_v<UInt_t<uint32_t>, uint32_t>);
+        static_assert(std::is_same_v<UInt_t<uint64_t>, uint64_t>);
+
+        static_assert(std::is_same_v<UInt_t<double>, uint64_t>);
+        static_assert(std::is_same_v<UInt_t<float>, uint32_t>);
+        static_assert(std::is_same_v<UInt_t<bool>, uint8_t>);
+
     } // namespace static_tests
 } // namespace
 
