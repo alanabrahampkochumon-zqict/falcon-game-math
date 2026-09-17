@@ -1044,6 +1044,15 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                      Lane>::operator-() const noexcept
+    {
+        // NOTE: Since we are using Templated parameters CTAD won't work inside the class and zero will decay to NP.
+        return Simd128(static_cast<DataType>(0)) - *this;
+    }
+
+
+    template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator-=(const Simd128 other) noexcept
     {

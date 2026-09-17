@@ -375,6 +375,14 @@ namespace falcon
 
 
         /**
+         * @brief Perform a arithmetic negation on this register(NOT BITWISE) and return a new register.
+         *        Analogous to (0 - reg) or -reg.
+         * @return A new register with negated elements.
+         */
+        [[nodiscard]] constexpr Simd128 operator-() const noexcept;
+
+
+        /**
          * @brief Subtract contents of this register from @p other in-place.
          *
          * @note Register arithmetic is limited to same data types and lanes.

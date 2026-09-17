@@ -76,6 +76,43 @@ TYPED_TEST(Simd128ArithmeticTests, BinaryAddOperation_ReturnsAValidResult)
 }
 
 
+/// @test Verify that unary minus return a new register with negated values(0-reg).
+TYPED_TEST(Simd128ArithmeticTests, UnaryMinusOperator_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    Type min = std::numeric_limits<Type>::min();
+    Type max = std::numeric_limits<Type>::max();
+    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+
+        if (i % 2 == 0)
+        {
+            data[i] = static_cast<Type>(max - i * 2);
+        }
+        else
+        {
+            data[i] = static_cast<Type>(min + i * 2);
+        }
+        expected[i] = -data[i];
+        std::cout << "FILLING DATA AT " << i << " EXPECTED: " << expected[i] << " DATA: " << data[i] << '\n';
+    }
+    falcon::Simd128_t<Type, Lane> reg{ data };
+    std::cout << "Created register!" << '\n';
+    auto regRes = -reg;
+    std::cout << "RESULT!" << '\n';
+    regRes.storeAligned(result.data());
+    std::cout << "STORED!" << '\n';
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+
 TEST(Simd128ArithmeticTests, BinaryAddOperation_WorksWithMixedNumbers)
 {
 
