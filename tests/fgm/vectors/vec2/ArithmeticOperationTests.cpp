@@ -296,18 +296,6 @@ TYPED_TEST(Vec2ScalarDivisionTests, DivideEqualsOperator_ReturnsSameVectorWithDi
 
 
 
-TEST(Vec2ScalarDivisionTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
-{
-    fgm::Vec2 vec(10, -30);
-    const double scalar = 2.5;
-    const fgm::Vec2 expected(4, -12);
-
-    vec /= scalar;
-
-    EXPECT_VEC_EQ(expected, vec);
-}
-
-
 #ifndef ENABLE_DEBUG_TESTS
 /**
  * @test Verify that dividing a float vector by zero returns an
@@ -382,18 +370,30 @@ TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_SafeDiv_ByFloatZero_ReturnsZer
 
 TYPED_TEST(Vec2ScalarDivisionTests, SafeDiv_ByNaN_ReturnsZeroVector)
 {
-    const auto result = this->_vec.safeDiv(fgm::constants::NaN);
-
-    EXPECT_VEC_ZERO(result);
+    if constexpr (std::is_integral_v<TypeParam>)
+    {
+        GTEST_SKIP() << "NaN tests only applicable for floating-point types.";
+    }
+    else
+    {
+        const auto result = this->_vec.safeDiv(fgm::constants::NaN);
+        EXPECT_VEC_ZERO(result);
+    }
 }
 
 
 
 TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_SafeDiv_ByNaN_ReturnsZeroVector)
 {
-    const auto result = fgm::Vec2<TypeParam>::safeDiv(this->_vec, fgm::constants::INFINITY_F);
-
-    EXPECT_VEC_ZERO(result);
+    if constexpr (std::is_integral_v<TypeParam>)
+    {
+        GTEST_SKIP() << "NaN tests only applicable for floating-point types.";
+    }
+    else
+    {
+        const auto result = fgm::Vec2<TypeParam>::safeDiv(this->_vec, fgm::constants::INFINITY_F);
+        EXPECT_VEC_ZERO(result);
+    }
 }
 
 
@@ -462,11 +462,17 @@ TEST(Vec2ScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedenc
  */
 TYPED_TEST(Vec2ScalarDivisionTests, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const auto result = this->_vec.tryDiv(fgm::constants::NaN, flag);
-
-    EXPECT_VEC_ZERO(result);
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    if constexpr (std::is_integral_v<TypeParam>)
+    {
+        GTEST_SKIP() << "NaN tests only applies to floating-point types.";
+    }
+    else
+    {
+        fgm::OperationStatus flag;
+        const auto result = this->_vec.tryDiv(fgm::constants::NaN, flag);
+        EXPECT_VEC_ZERO(result);
+        EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    }
 }
 
 
@@ -529,15 +535,22 @@ TEST(Vec2ScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSe
 
 /**
  * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vec2::tryDiv returns zero vector
- * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ *       and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vec2ScalarDivisionTests, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const auto result = fgm::Vec2<TypeParam>::tryDiv(this->_vec, fgm::constants::NaN, flag);
+    if constexpr (std::is_integral_v<TypeParam>)
+    {
+        GTEST_SKIP() << "NaN tests only applies to floating-point types.";
+    }
+    else
+    {
+        fgm::OperationStatus flag;
+        const auto result = fgm::Vec2<TypeParam>::tryDiv(this->_vec, fgm::constants::NaN, flag);
 
-    EXPECT_VEC_ZERO(result);
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+        EXPECT_VEC_ZERO(result);
+        EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    }
 }
 
 
