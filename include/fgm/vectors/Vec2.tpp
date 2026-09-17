@@ -550,8 +550,7 @@ namespace fgm
     constexpr Vec2<T> Vec2<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
     {
-        // TODO: Add an intrinsic to Simd128 for operator- overload.
-        return *this;
+        return Vec2(-_data);
     }
 
 
