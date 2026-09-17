@@ -549,9 +549,7 @@ namespace fgm
     template <Arithmetic T>
     constexpr Vec2<T> Vec2<T>::operator-() const noexcept
         requires SignedStrictArithmetic<T>
-    {
-        return Vec2(-_data);
-    }
+    { return Vec2(-_data); }
 
 
     /*************************************
@@ -619,11 +617,10 @@ namespace fgm
     {
         if constexpr (std::is_floating_point_v<T>)
         {
-            // TODO: Add back check after adding hasNaN
-            // if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
-            // {
-            //     return Vec2<T>::zero();
-            // }
+            if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+            {
+                return Vec2<T>::zero();
+            }
         }
         if constexpr (std::is_integral_v<T>)
         {
@@ -650,12 +647,11 @@ namespace fgm
     {
         if constexpr (std::is_floating_point_v<T>)
         {
-            // TODO: Add back check after adding hasNaN
-            // if (hasNaN() | fgm::isnan(scalar))
-            // {
-            //     status = OperationStatus::NANOPERAND;
-            //     return Vec2<T>::zero();
-            // }
+            if (hasNaN() | fgm::isnan(scalar))
+            {
+                status = OperationStatus::NANOPERAND;
+                return Vec2<T>::zero();
+            }
             if (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
@@ -682,7 +678,6 @@ namespace fgm
     constexpr Vec2<T> Vec2<T>::tryDiv(const Vec2& vec, S scalar, OperationStatus& status) noexcept
         requires StrictArithmetic<T>
     { return vec.tryDiv(scalar, status); }
-
 
 
     //     /*************************************
@@ -1369,23 +1364,25 @@ namespace fgm
     //     { return vec.hasInf(); }
     //
     //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr bool Vec2<T>::hasNaN() const noexcept
-    //     {
-    //         if constexpr (std::is_floating_point_v<T>)
-    //         {
-    //             return fgm::isnan(_data[0]) | fgm::isnan(_data[1]);
-    //         }
-    //         else
-    //         {
-    //             return false;
-    //         }
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr bool Vec2<T>::hasNaN(const Vec2& vec) noexcept
-    //     { return vec.hasNaN(); }
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::hasNaN() const noexcept
+    {
+        if constexpr (std::is_floating_point_v<T>)
+        {
+            // Since nan is not equal to anything we need to query for nan
+            // and use that property to convert from -nan(returned if an entry is nan) to a boolean.
+            T isNan = _data.hasNan().horizontalOr();
+            return isNan != isNan;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::hasNaN(const Vec2& vec) noexcept
+    { return vec.hasNaN(); }
 } // namespace fgm
 
 #if defined(__clang__)

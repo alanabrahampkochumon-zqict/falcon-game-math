@@ -2161,12 +2161,12 @@ namespace fgm
         //
         //         /** @} */
         //
-        //
-        //         /**
-        //          * @addtogroup FGM_Vec2_Utils
-        //          * @{
-        //          */
-        //
+
+        /**
+         * @addtogroup FGM_Vec2_Utils
+         * @{
+         */
+
         //         /**
         //          * @brief Check if any component of this vector is an IEEE 754 infinity.
         //          *
@@ -2189,28 +2189,28 @@ namespace fgm
         //         [[nodiscard]] static constexpr bool hasInf(const Vec2& vec) noexcept;
         //
         //
-        //         /**
-        //          * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
-        //          *
-        //          * @note Always return false for integral types.
-        //          *
-        //          * @return True if at least one component is NaN.
-        //          */
-        //         [[nodiscard]] constexpr bool hasNaN() const noexcept;
-        //
-        //
-        //         /**
-        //          * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
-        //          *
-        //          * @note Always return false for integral types.
-        //          *
-        //          * @param[in] vec The vector to evaluate for indefinite components.
-        //          *
-        //          * @return True if at least one component is NaN.
-        //          */
-        //         [[nodiscard]] static constexpr bool hasNaN(const Vec2& vec) noexcept;
-        //
-        //         /** @} */
+        /**
+         * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @return True if at least one component is NaN.
+         */
+        [[nodiscard]] constexpr bool hasNaN() const noexcept;
+
+
+        /**
+         * @brief Check if any component of this vector is an IEEE NaN(Not-a-Number).
+         *
+         * @note Always return false for integral types.
+         *
+         * @param[in] vec The vector to evaluate for indefinite components.
+         *
+         * @return True if at least one component is NaN.
+         */
+        [[nodiscard]] static constexpr bool hasNaN(const Vec2& vec) noexcept;
+
+        /** @} */
         //
         //
         //         /**
