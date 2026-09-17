@@ -640,6 +640,30 @@ namespace falcon
     }
 
 
+    template <typename DataType, size_t Lane>
+    constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::extractFirst() noexcept
+    {
+        if constexpr (types::IsFP64<DataType>)
+        {
+            return _mm_cvtsd_f64(_register);
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            return _mm_cvtss_f32(_register);
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            return static_cast<DataType>(_mm_cvtsi128_si64(_register));
+        }
+        else // if constexpr (sizeof(DataType) == 4)
+        {
+            // All values from 8-32 bits can use the same function and static cast
+            // which will perform truncation.
+            return static_cast<DataType>(_mm_cvtsi128_si32(_register));
+        }
+    }
+
+
     /**************************************
      *        BITWISE OPERATIONS          *
      **************************************/

@@ -181,6 +181,15 @@ TYPED_TEST(Simd128GetterSetterTests, GetAt_ReturnsTheValueAtGivenIndex)
 }
 
 
+TYPED_TEST(Simd128GetterSetterTests, ExtractFirst_ReturnsTheValueAtZerothIndex)
+{
+    constexpr size_t Lane = TypeParam::VALUE;
+    auto reg              = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
+
+    EXPECT_ANY_EQ(this->data[0], reg.extractFirst());
+}
+
+
 
 /// @test Verifies that store function stores a data in the appropriate index
 /// @note Due to amount of combinations, we are using the typed test combined
