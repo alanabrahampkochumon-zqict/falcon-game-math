@@ -1,7 +1,7 @@
 include_guard()
 set(FALCON_SIMD_DIR ${LIBRARY_ROOT_DIR}/falcon_simd/)
 
-include(${FALCON_SIMD_DIR}memory/FalconMemory.cmake)
+include(${FALCON_SIMD_DIR}core/FalconMemory.cmake)
 include(${FALCON_SIMD_DIR}utils/Utils.cmake)
 
 set(FALCON_SIMD_ROOT_HEADERS

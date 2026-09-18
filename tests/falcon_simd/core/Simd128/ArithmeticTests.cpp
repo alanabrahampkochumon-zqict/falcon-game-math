@@ -26,7 +26,7 @@
 namespace
 {
     /**
-     * @brief Test Fixture for Simd128 load and store operations.
+     * @brief Test Fixture for Simd128 arithmetic operations.
      */
     template <typename T>
     class Simd128ArithmeticTests: public testing::Test

@@ -44,6 +44,7 @@
          *   @defgroup T_SIMD128_Bit Bitwise operation Tests(>, <, >=, <=, ==, !=)
          *   @defgroup T_SIMD128_Shuffle Shuffling and Blending Operations
          *   @defgroup T_SIMD128_Utils Simd Utilities.
+         *   @defgroup T_SIMD128_Math Basic Math Operations(min, max, abs...).
          * @}
         */
 

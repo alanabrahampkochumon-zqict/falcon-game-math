@@ -12,7 +12,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif ()
 
 add_subdirectory(utils)
-add_subdirectory(memory)
+add_subdirectory(core)
 
 target_sources(
         FalconSIMDTestSuite

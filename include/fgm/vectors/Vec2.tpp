@@ -271,7 +271,7 @@ namespace fgm
     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& rhs) const noexcept
     {
         const auto mask = _data == rhs._data;
-        return static_cast<bool>(mask.horizontalAnd()); // TODO: Swap to horizontal and
+        return static_cast<bool>(mask.horizontalAnd());
     }
 
 
@@ -303,6 +303,10 @@ namespace fgm
     { return anyNeq(rhs); }
 
 
+    /***************************************
+     *           EQUALITY (MASK)           *
+     ***************************************/
+
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<Mask_t<T>> Vec2<T>::eq(const Vec2& rhs) const noexcept
     { return Vec2<Mask_t<T>>((_data == rhs._data).template cast<Mask_t<T>>()); }
@@ -322,81 +326,10 @@ namespace fgm
     FALCON_INLINE constexpr Vec2<Mask_t<T>> Vec2<T>::neq(const Vec2& lhs, const Vec2& rhs) noexcept
     { return lhs.neq(rhs); }
 
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::operator==(const Vec2& rhs) const noexcept
-    //     { return this->allEq(rhs); }
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::operator!=(const Vec2& rhs) const noexcept
-    //     { return this->anyNeq(rhs); }
-    //
-    //
-    //     /***************************************
-    //      *                                     *
-    //      *           EQUALITY (MASK)           *
-    //      *                                     *
-    //      ***************************************/
-    //
-    //     // TODO: Add MSVC NaN check tests + add new implementation as required.
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::eq(const Vec2& rhs, const double epsilon) const noexcept
-    //     {
-    //         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-    //         {
-    //             return Vec2<bool>(_data[0] == rhs[0], _data[1] == rhs[1]);
-    //         }
-    //         else
-    //         {
-    //             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in
-    //             NAN_F. */ return Vec2<bool>(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
-    //                               _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
-    //         }
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::eq(const Vec2& lhs, const Vec2& rhs, const double epsilon)
-    //     noexcept { return lhs.eq(rhs, epsilon); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::neq(const Vec2& rhs, const double epsilon) const noexcept
-    //     {
-    //         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-    //         {
-    //             return Vec2<bool>(_data[0] != rhs[0], _data[1] != rhs[1]);
-    //         }
-    //         else
-    //         {
-    //             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-    //             return Vec2<bool>(_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon),
-    //                               _data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon));
-    //         }
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr Vec2<bool> Vec2<T>::neq(const Vec2& lhs, const Vec2& rhs, const double epsilon)
-    //     noexcept { return lhs.neq(rhs, epsilon); }
-    //
-    //
+
+
     /***************************************
-     *                                     *
      *            COMPARISONS              *
-     *                                     *
      ***************************************/
 
     template <Arithmetic T>

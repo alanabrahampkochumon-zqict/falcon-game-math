@@ -768,7 +768,8 @@ namespace falcon
         static constexpr __m128i _mm_srai_epi8_custom(__m128i reg) noexcept;
     };
 
-
 } // namespace falcon
+
+#include "Simd128Math.h"
 
 #include "Simd128SSE.inl"
