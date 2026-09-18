@@ -11,7 +11,7 @@
 #include "SIMDTestSetup.h"
 
 #include <array>
-#include <falcon_simd/memory/Simd128.h>
+#include <falcon_simd/core/Simd128.h>
 
 /**
  * @addtogroup T_SIMD128_ConvCtor

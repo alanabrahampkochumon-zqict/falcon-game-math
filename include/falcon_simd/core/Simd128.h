@@ -39,7 +39,7 @@ namespace falcon
 
 #if defined(FALCON_ENABLE_SSE2) || defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_AVX) ||                        \
     defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX10)
-    #include "impl/Simd128SSE.h"
+    #include "x86/Simd128SSE.h"
 #endif
 
 

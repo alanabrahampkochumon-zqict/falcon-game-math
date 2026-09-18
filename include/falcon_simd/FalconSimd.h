@@ -10,8 +10,8 @@
  */
 
 /// Library Includes
-#include "memory/RegisterTraits.h"
-#include "memory/Simd128.h"
+#include "core/RegisterTraits.h"
+#include "core/Simd128.h"
 #include "utils/SIMDUtils.h"
 #include "utils/SimdTraits.h"
 #include "utils/TypeTraits.h"

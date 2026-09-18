@@ -19,7 +19,7 @@
 
 #include "falcon_core/Preprocessors.h"
 #include "falcon_core/traits/TypeHelpers.h"
-#include "falcon_simd/memory/RegisterTraits.h"
+#include "falcon_simd/core/RegisterTraits.h"
 #include "falcon_simd/utils/SimdTraits.h"
 #include "falcon_simd/utils/TypeTraits.h"
 
@@ -770,6 +770,5 @@ namespace falcon
 
 } // namespace falcon
 
-#include "Simd128Math.h"
-
 #include "Simd128SSE.inl"
+#include "Simd128X86Math.h"
