@@ -9,7 +9,7 @@ target_sources(
         ComparisonTests.cpp
         ConstantsTests.cpp
         # DistanceTests.cpp
-        # EqualityTests.cpp
+        EqualityTests.cpp
         InitializationTests.cpp
         # MagnitudeTests.cpp
         # NormalizationTests.cpp

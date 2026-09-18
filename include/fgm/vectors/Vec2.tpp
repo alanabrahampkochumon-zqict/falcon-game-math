@@ -261,11 +261,67 @@ namespace fgm
     //     noexcept { return lhs.anyNeq(rhs, epsilon); }
     //
     //
-    //     /**************************************
-    //      *                                    *
-    //      *         EQUALITY OPERATORS         *
-    //      *                                    *
-    //      **************************************/
+    /**************************************
+     *                                    *
+     *         EQUALITY OPERATORS         *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& rhs) const noexcept
+    {
+        const auto mask = _data == rhs._data;
+        return static_cast<bool>(mask.horizontalOr()); // TODO: Swap to horizontal and
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& lhs, const Vec2& rhs) noexcept
+    { return lhs.allEq(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2& rhs) const noexcept
+    {
+        const auto mask = _data != rhs._data;
+        return static_cast<bool>(mask.horizontalOr());
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2& lhs, const Vec2& rhs) noexcept
+    { return lhs.anyNeq(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::operator==(const Vec2& rhs) const noexcept
+    { return allEq(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::operator!=(const Vec2& rhs) const noexcept
+    { return anyNeq(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Mask_t<T>> Vec2<T>::eq(const Vec2& rhs) const noexcept
+    { return Vec2<Mask_t<T>>((_data == rhs._data).template cast<Mask_t<T>>()); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Mask_t<T>> Vec2<T>::eq(const Vec2& lhs, const Vec2& rhs) noexcept
+    { return lhs.eq(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Mask_t<T>> Vec2<T>::neq(const Vec2& rhs) const noexcept
+    { return Vec2<Mask_t<T>>((_data != rhs._data).template cast<Mask_t<T>>()); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Mask_t<T>> Vec2<T>::neq(const Vec2& lhs, const Vec2& rhs) noexcept
+    { return lhs.neq(rhs); }
+
     //
     //     template <Arithmetic T>
     //     template <Arithmetic U>

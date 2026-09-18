@@ -277,240 +277,158 @@ namespace fgm
         //         static constexpr auto swizzle(const Vec2& vec) noexcept;
         //
         //         /** @} */
-        //
-        //
-        //         /**
-        //          * @addtogroup FGM_Vec2_Equality
-        //          * @{
-        //          */
-        //
-        //         /**
-        //          * @brief Compare all components of this vector with @p rhs vector for equality.
-        //          *        Perform a component-wise comparison and returns true only if every element pair
-        //          *        satisfies the equality condition within the given @p epsilon.
-        //          *
-        //          * @note To obtain a component-wise boolean mask, use @ref eq.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] rhs     The vector to compare against.
-        //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-        //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-        //          *
-        //          * @return True if all components are equivalent within @p epsilon.
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr bool allEq(const Vec2<U>& rhs,
-        //                                            double epsilon = std::is_same_v<T, double> || std::is_same_v<U,
-        //                                            double>
-        //                                                ? Config::DOUBLE_EPSILON
-        //                                                : Config::FLOAT_EPSILON) const noexcept;
-        //
-        //
-        //         /**
-        //          * @brief Compare all components of @p lhs vector with @p rhs vector for equality.
-        //          *        Perform a component-wise comparison and returns `true` only if every element pair
-        //          *        satisfies the equality condition within the given @p epsilon.
-        //          *
-        //          * @note To obtain a component-wise boolean mask, use @ref eq.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] lhs     The vector to compare.
-        //          * @param[in] rhs     The vector to compare against.
-        //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-        //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-        //          * @return `true` if all components are equivalent within @p epsilon.
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr bool allEq(const Vec2& lhs, const Vec2<U>& rhs,
-        //                                                   double epsilon = std::is_same_v<T, double> ||
-        //                                                           std::is_same_v<U, double>
-        //                                                       ? Config::DOUBLE_EPSILON
-        //                                                       : Config::FLOAT_EPSILON) noexcept;
-        //
-        //
-        //         /**
-        //          * @brief Compare all components of this vector with @p rhs vector for inequality.
-        //          *        Perform a component-wise comparison and returns `true` if any corresponding elements differ
-        //          by more
-        //          *        than @p epsilon.
-        //          *
-        //          * @note To obtain a component-wise boolean mask, use @ref neq.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] rhs     The vector to compare against.
-        //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-        //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-        //          *
-        //          * @return `true` if any of the components are not equivalent within @p epsilon.
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr bool anyNeq(const Vec2<U>& rhs,
-        //                                             double epsilon = std::is_same_v<T, double> || std::is_same_v<U,
-        //                                             double>
-        //                                                 ? Config::DOUBLE_EPSILON
-        //                                                 : Config::FLOAT_EPSILON) const noexcept;
-        //
-        //
-        //         /**
-        //          * @brief Compare all components of @p lhs vector with @p rhs vector for inequality.
-        //          *        Perform a component-wise comparison and returns `true` if any corresponding elements differ
-        //          by more
-        //          *        than @p epsilon.
-        //          *
-        //          * @note To obtain a component-wise boolean mask, use @ref neq.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] lhs     The vector to compare.
-        //          * @param[in] rhs     The vector to compare against.
-        //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-        //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-        //          *
-        //          * @return `true` if any of the components are not equivalent within @p epsilon.
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr bool anyNeq(const Vec2& lhs, const Vec2<U>& rhs,
-        //                                                    double epsilon = std::is_same_v<T, double> ||
-        //                                                            std::is_same_v<U, double>
-        //                                                        ? Config::DOUBLE_EPSILON
-        //                                                        : Config::FLOAT_EPSILON) noexcept;
-        //
-        //
-        //         /**
-        //          * @copybrief allEq(const Vec2<U>&, double) const
-        //          *
-        //          * @note To obtain a component-wise boolean mask, use @ref eq.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] rhs The vector to compare against.
-        //          *
-        //          * @return True if all components are equivalent within the default epsilon.
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr bool operator==(const Vec2<U>& rhs) const noexcept;
-        //
-        //
-        //         /**
-        //          * @copybrief anyNeq(const Vec2<U>&, double) const
-        //          *
-        //          * @note To obtain a component-wise boolean mask, use @ref eq.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] rhs The vector to compare against.
-        //          *
-        //          * @return True if any of the components are not equivalent within the default epsilon.
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr bool operator!=(const Vec2<U>& rhs) const noexcept;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise equality check between this vector and @p rhs vector.
-        //          *        Compare each component pair and returns a boolean mask.
-        //          *
-        //          * @note To obtain a single scalar result, use @ref allEq or @ref operator==.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] rhs     The vector to compare against.
-        //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-        //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr Vec2<bool> eq(const Vec2<U>& rhs,
-        //                                               double epsilon = std::is_same_v<T, double> || std::is_same_v<U,
-        //                                               double>
-        //                                                   ? Config::DOUBLE_EPSILON
-        //                                                   : Config::FLOAT_EPSILON) const noexcept;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise equality check between @p lhs and @p rhs vector.
-        //          *        Compare each component pair and returns a boolean mask.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] lhs     The vector to compare.
-        //          * @param[in] rhs     The vector to compare against.
-        //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-        //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr Vec2<bool> eq(const Vec2& lhs, const Vec2<U>& rhs,
-        //                                                      double epsilon = std::is_same_v<T, double> ||
-        //                                                              std::is_same_v<U, double>
-        //                                                          ? Config::DOUBLE_EPSILON
-        //                                                          : Config::FLOAT_EPSILON) noexcept;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise inequality check between this vector and @p rhs vector.
-        //          *        Compare each component pair and returns a boolean mask.
-        //          *
-        //          * @note To obtain a single scalar result, use @ref anyNeq or @ref operator!=.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] rhs     The vector to compare against.
-        //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-        //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr Vec2<bool> neq(const Vec2<U>& rhs,
-        //                                                double epsilon = std::is_same_v<T, double> ||
-        //                                                std::is_same_v<U, double>
-        //                                                    ? Config::DOUBLE_EPSILON
-        //                                                    : Config::FLOAT_EPSILON) const noexcept;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise inequality check between @p lhs vector and @p rhs vector.
-        //          *        Compare each component pair and returns a boolean mask.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
-        //          *
-        //          * @param[in] lhs     The vector to compare.
-        //          * @param[in] rhs     The vector to compare against.
-        //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
-        //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         template <Arithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr Vec2<bool> neq(const Vec2& lhs, const Vec2<U>& rhs,
-        //                                                       double epsilon = std::is_same_v<T, double> ||
-        //                                                               std::is_same_v<U, double>
-        //                                                           ? Config::DOUBLE_EPSILON
-        //                                                           : Config::FLOAT_EPSILON) noexcept;
-        //
-        //         /** @} */
 
 
+        /**
+         * @addtogroup FGM_Vec2_Equality
+         * @{
+         */
+
+        /**
+         * @brief Compare all components of this vector with @p rhs vector for equality.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @param[in] rhs     The vector to compare against.
+         *
+         * @return True if all components are equal.
+         */
+        [[nodiscard]] constexpr bool allEq(const Vec2& rhs) const noexcept;
+
+
+        /**
+         * @brief Compare all components of @p lhs vector with @p rhs vector for equality.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
+         *
+         * @return `true` if all components are equal.
+         */
+        [[nodiscard]] static constexpr bool allEq(const Vec2& lhs, const Vec2& rhs) noexcept;
+
+
+        /**
+         * @brief Compare all components of this vector with @p rhs vector for inequality.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref neq.
+         *
+         *
+         * @param[in] rhs     The vector to compare against.
+         *
+         * @return `true` if any of the components are not equal.
+         */
+        [[nodiscard]] constexpr bool anyNeq(const Vec2& rhs) const noexcept;
+
+
+        /**
+         * @brief Compare all components of @p lhs vector with @p rhs vector for inequality.
+         *
+         * @note To obtain a component-wise boolean mask, use @ref neq.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
+         *
+         * @return `true` if any of the components are not equal.
+         */
+        [[nodiscard]] static constexpr bool anyNeq(const Vec2& lhs, const Vec2& rhs) noexcept;
+
+
+        /**
+         * @copybrief allEq(const Vec2<U>&, double) const
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return True if all components are equivalent within the default epsilon.
+         */
+        [[nodiscard]] constexpr bool operator==(const Vec2& rhs) const noexcept;
+
+
+        /**
+         * @copybrief anyNeq(const Vec2<U>&, double) const
+         *
+         * @note To obtain a component-wise boolean mask, use @ref eq.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @return True if any of the components are not equivalent within the default epsilon.
+         */
+        [[nodiscard]] constexpr bool operator!=(const Vec2& rhs) const noexcept;
+
+
+        /**
+         * @brief Perform component-wise equality check between this vector and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note To obtain a single scalar result, use @ref allEq or @ref operator==.
+         *
+         * @param[in] rhs     The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] constexpr Vec2<Mask_t<T>> eq(const Vec2& rhs) const noexcept;
+
+
+        /**
+         * @brief Perform component-wise equality check between @p lhs and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref Arithmetic.
+         *
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] static constexpr Vec2<Mask_t<T>> eq(const Vec2& lhs, const Vec2& rhs) noexcept;
+
+
+        /**
+         * @brief Perform component-wise inequality check between this vector and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note To obtain a single scalar result, use @ref anyNeq or @ref operator!=.
+         *
+         * @param[in] rhs     The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] constexpr Vec2<Mask_t<T>> neq(const Vec2& rhs) const noexcept;
+
+
+        /**
+         * @brief Perform component-wise inequality check between @p lhs vector and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @param[in] lhs     The vector to compare.
+         * @param[in] rhs     The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] static constexpr Vec2<Mask_t<T>> neq(const Vec2& lhs, const Vec2& rhs) noexcept;
+
+        /** @} */
+
+        // TODO: Add near equals
         // TODO: Add tests create conversion.
         [[nodiscard]] constexpr Vec2<bool> toBool() const noexcept
         { return Vec2<bool>(static_cast<bool>(x()), static_cast<bool>(y())); }
@@ -527,7 +445,7 @@ namespace fgm
          * @param[in] rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -543,7 +461,7 @@ namespace fgm
          * @param[in]  rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -558,7 +476,7 @@ namespace fgm
          * @param[in] rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -574,7 +492,7 @@ namespace fgm
          * @param[in]  rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -593,7 +511,7 @@ namespace fgm
          * @param[in] rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -613,7 +531,7 @@ namespace fgm
          * @param[in]  rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -632,7 +550,7 @@ namespace fgm
          * @param[in] rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -652,7 +570,7 @@ namespace fgm
          * @param[in]  rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
