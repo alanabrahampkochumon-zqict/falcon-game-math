@@ -815,7 +815,7 @@ namespace falcon
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalOr() const noexcept
     {
-        // There is not dedicated horizontal OR so we need to shuffle or shift the registers
+        // There is no dedicated horizontal OR so we need to shuffle or shift the registers
         // and or them together.
         if constexpr (types::IsFP64<DataType>)
         {
@@ -919,6 +919,121 @@ namespace falcon
                         const auto shifted4 = _mm_srli_si128(orReg3, 8);
                         const auto orReg4   = _mm_or_si128(orReg3, shifted4);
                         return static_cast<DataType>(_mm_cvtsi128_si32(orReg4));
+                    }
+                }
+            }
+        }
+        return 0; // SHOULD NOT REACH HERE! LEFT FOR COMPILER
+    }
+
+
+    template <typename DataType, size_t Lane>
+    constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalAnd() const noexcept
+    {
+        // There is no dedicated horizontal AND so we need to shuffle or shift the registers
+        // and & them together.
+        if constexpr (types::IsFP64<DataType>)
+        {
+            const auto shifted = _mm_srli_si128(_mm_castpd_si128(_register), 8);
+            const auto andReg  = _mm_and_pd(_register, _mm_castsi128_pd(shifted));
+            return _mm_cvtsd_f64(andReg);
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            // For floats we need to do shifts
+            // A,     B, C,     D
+            // 0,     A, B,     C
+            // _, A & B, _, C & D
+            // _,     _, _, A & B
+            // _,     _, _, A & B & C & D
+            // But if only two lanes are filled, we can do just 1 shift return the value from lower lane.
+            const auto shifted1 = _mm_srli_si128(_mm_castps_si128(_register), 4);
+            const auto andReg1   = _mm_and_ps(_register, _mm_castsi128_ps(shifted1));
+            if constexpr (LaneCount == 2)
+            {
+                return _mm_cvtss_f32(andReg1);
+            }
+            else
+            {
+                const auto shifted2 = _mm_srli_si128(_mm_castps_si128(andReg1), 8);
+                const auto andReg2   = _mm_and_ps(andReg1, _mm_castsi128_ps(shifted2));
+                return _mm_cvtss_f32(andReg2);
+            }
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            const auto shifted = _mm_srli_si128(_register, 8);
+            const auto andReg   = _mm_and_si128(_register, shifted);
+            return _mm_cvtsi128_si64(andReg);
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+            const auto shifted1 = _mm_srli_si128(_register, 4);
+            const auto andReg1   = _mm_and_si128(_register, shifted1);
+            if constexpr (LaneCount == 2)
+            {
+                return _mm_cvtsi128_si32(andReg1);
+            }
+            else
+            {
+                const auto shifted2 = _mm_srli_si128(andReg1, 8);
+                const auto andReg2   = _mm_and_si128(andReg1, shifted2);
+                return _mm_cvtsi128_si32(andReg2);
+            }
+        }
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            const auto shifted1 = _mm_srli_si128(_register, 2);
+            const auto andReg1   = _mm_and_si128(_register, shifted1);
+            if constexpr (LaneCount == 2)
+            {
+                return static_cast<DataType>(_mm_cvtsi128_si32(andReg1));
+            }
+            else
+            {
+                const auto shifted2 = _mm_srli_si128(andReg1, 4);
+                const auto andReg2   = _mm_and_si128(andReg1, shifted2);
+                if constexpr (LaneCount == 4)
+                {
+                    return static_cast<DataType>(_mm_cvtsi128_si32(andReg2));
+                }
+                else
+                {
+                    const auto shifted3 = _mm_srli_si128(andReg2, 8);
+                    const auto andReg3   = _mm_and_si128(andReg2, shifted3);
+                    return static_cast<DataType>(_mm_cvtsi128_si32(andReg3));
+                }
+            }
+        }
+        else // if constexpr (sizeof(DataType) == 1)
+        {
+            const auto shifted1 = _mm_srli_si128(_register, 1);
+            const auto andReg1   = _mm_and_si128(_register, shifted1);
+            if constexpr (LaneCount == 2)
+            {
+                return static_cast<DataType>(_mm_cvtsi128_si32(andReg1));
+            }
+            else
+            {
+                const auto shifted2 = _mm_srli_si128(andReg1, 2);
+                const auto andReg2   = _mm_and_si128(andReg1, shifted2);
+                if constexpr (LaneCount == 4)
+                {
+                    return static_cast<DataType>(_mm_cvtsi128_si32(andReg2));
+                }
+                else
+                {
+                    const auto shifted3 = _mm_srli_si128(andReg2, 4);
+                    const auto andReg3   = _mm_and_si128(andReg2, shifted3);
+                    if constexpr (LaneCount == 8)
+                    {
+                        return static_cast<DataType>(_mm_cvtsi128_si32(andReg3));
+                    }
+                    else
+                    {
+                        const auto shifted4 = _mm_srli_si128(andReg3, 8);
+                        const auto andReg4   = _mm_and_si128(andReg3, shifted4);
+                        return static_cast<DataType>(_mm_cvtsi128_si32(andReg4));
                     }
                 }
             }
