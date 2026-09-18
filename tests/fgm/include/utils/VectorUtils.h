@@ -16,6 +16,7 @@
 #include <cmath>
 #include <fgm/common/MathTraits.h>
 #include <fgm/vectors/CVec2.h>
+#include <fgm/vectors/Vec2.h>
 #include <fgm/vectors/Vec3.h>
 #include <fgm/vectors/Vec4.h>
 #include <gtest/gtest.h>
@@ -83,6 +84,38 @@ namespace testutils
      */
     template <fgm::Arithmetic T>
     void EXPECT_VEC_CONTAINS(const fgm::CVec2<T>& vector, T x, T y)
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            EXPECT_FLOAT_EQ(x, vector.x());
+            EXPECT_FLOAT_EQ(y, vector.y());
+        }
+        else if constexpr (std::is_same_v<T, double>)
+        {
+            EXPECT_DOUBLE_EQ(x, vector.x());
+            EXPECT_DOUBLE_EQ(y, vector.y());
+        }
+        else
+        {
+            EXPECT_EQ(x, vector.x());
+            EXPECT_EQ(y, vector.y());
+        }
+    }
+
+    /**
+     * @brief Performs a strict component-wise validation of a @ref fgm::Vec2 against discrete scalar values.
+     *
+     * @tparam T Numeric type of the vector and scalar components.
+     *
+     * @param vector The 2D vector instance being evaluated.
+     * @param x      The expected value for the x-component.
+     * @param y      The expected value for the y-component.
+     *
+     * @note Uses GoogleTest macros. Triggers a non-fatal test failure if the vector's
+     *       internal state does not match the provided scalars.
+     */
+    template <fgm::Arithmetic T>
+    void EXPECT_VEC_CONTAINS(const fgm::Vec2<T>& vector, T x, T y)
     {
         if constexpr (std::is_same_v<T, float>)
         {
