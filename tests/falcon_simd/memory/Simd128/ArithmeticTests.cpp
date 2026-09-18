@@ -97,14 +97,10 @@ TYPED_TEST(Simd128ArithmeticTests, UnaryMinusOperator_ReturnsAValidResult)
             data[i] = static_cast<Type>(min + i * 2);
         }
         expected[i] = -data[i];
-        std::cout << "FILLING DATA AT " << i << " EXPECTED: " << expected[i] << " DATA: " << data[i] << '\n';
     }
     falcon::Simd128_t<Type, Lane> reg{ data };
-    std::cout << "Created register!" << '\n';
     auto regRes = -reg;
-    std::cout << "RESULT!" << '\n';
     regRes.storeAligned(result.data());
-    std::cout << "STORED!" << '\n';
 
     for (size_t i = 0; i < Lane; ++i)
     {

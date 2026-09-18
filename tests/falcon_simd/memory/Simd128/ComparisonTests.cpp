@@ -252,6 +252,131 @@ TEST(Simd128ComparisonTests, NotEqualsOperator_UnequalValuesForFirstTwoLanesRetu
     EXPECT_TRUE(isEqualBitwise(static_cast<uint64_t>(0), result[1]));
 }
 
+
+
+/**************************************
+ *         NAN COMPARISONS            *
+ **************************************/
+
+static constexpr float NaN = std::numeric_limits<float>::quiet_NaN();
+// TEST NOTE: For floats ~0 when static cast results in -1, which is not the mask
+//            returned. For comparisons of floats NaN is returned but since we use
+//            isBitwiseEqual, it will compare on a bitwise basis so the result will
+//            be accurate only if we compare truthiness against NaN and not -1 or ~0.
+
+TEST(Simd128ComparisonTests, GreaterThanOperator_ReturnFalseForNaNComparisons)
+{
+    constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
+    constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
+    falcon::Simd128_t<float, 4> a{}, b{};
+    a.load(lhsData.data());
+    b.load(rhsData.data());
+
+    std::array<float, 4> result{};
+    const auto resReg = a > b;
+    resReg.store(result.data());
+
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[0]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[1]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[2]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[3]));
+}
+
+
+TEST(Simd128ComparisonTests, GreaterThanOrEqualsOperator_ReturnFalseForNaNComparisons)
+{
+    constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
+    constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
+    falcon::Simd128_t<float, 4> a{}, b{};
+    a.load(lhsData.data());
+    b.load(rhsData.data());
+
+    std::array<float, 4> result{};
+    const auto resReg = a >= b;
+    resReg.store(result.data());
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[0]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[1]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[2]));
+    EXPECT_TRUE(isEqualBitwise(getAllOnes<float>(), result[3]));
+}
+
+
+TEST(Simd128ComparisonTests, LessThanOperator_ReturnFalseForNaNComparisons)
+{
+    constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
+    constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
+    falcon::Simd128_t<float, 4> a{}, b{};
+    a.load(lhsData.data());
+    b.load(rhsData.data());
+
+    std::array<float, 4> result{};
+    const auto resReg = a < b;
+    resReg.store(result.data());
+
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[0]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[1]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[2]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[3]));
+}
+
+
+TEST(Simd128ComparisonTests, LessThanOrEqualsOperator_ReturnFalseForNaNComparisons)
+{
+    constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
+    constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
+    falcon::Simd128_t<float, 4> a{}, b{};
+    a.load(lhsData.data());
+    b.load(rhsData.data());
+
+    std::array<float, 4> result{};
+    const auto resReg = a <= b;
+    resReg.store(result.data());
+
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[0]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[1]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[2]));
+    EXPECT_TRUE(isEqualBitwise(getAllOnes<float>(), result[3]));
+}
+
+
+TEST(Simd128ComparisonTests, NotEqualsOperator_ReturnFalseForNaNComparisons)
+{
+    constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
+    constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
+    falcon::Simd128_t<float, 4> a{}, b{};
+    a.load(lhsData.data());
+    b.load(rhsData.data());
+
+    std::array<float, 4> result{};
+    const auto resReg = a != b;
+    resReg.store(result.data());
+
+    // ONLY For != does NaN comparisons return a true.
+    EXPECT_TRUE(isEqualBitwise(getAllOnes<float>(), result[0]));
+    EXPECT_TRUE(isEqualBitwise(getAllOnes<float>(), result[1]));
+    EXPECT_TRUE(isEqualBitwise(getAllOnes<float>(), result[2]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[3]));
+}
+
+
+TEST(Simd128ComparisonTests, DoubleEqualsOperator_ReturnFalseForNaNComparisons)
+{
+    constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
+    constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
+    falcon::Simd128_t<float, 4> a{}, b{};
+    a.load(lhsData.data());
+    b.load(rhsData.data());
+
+    std::array<float, 4> result{};
+    const auto resReg = a == b;
+    resReg.store(result.data());
+
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[0]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[1]));
+    EXPECT_TRUE(isEqualBitwise(static_cast<float>(0), result[2]));
+    EXPECT_TRUE(isEqualBitwise(getAllOnes<float>(), result[3]));
+}
+
 #endif
 
 /** @} */

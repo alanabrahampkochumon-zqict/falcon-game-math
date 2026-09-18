@@ -1956,12 +1956,19 @@ namespace falcon
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator>=(const Simd128 other) const noexcept
     {
-        // This will not work with comparisons involving NaN doesn't equal to anything.
-        // so ~(A<B) will make any nan comparisons true ~(NaN < NaN) => ~(0000...0000) = 1111...1111
-        // return ~(*this < other);
-        // TODO: Give a fast gte and lte interface(that doesn't work with NaN)
-        // A >= B => !(A < B) same as (A > B) | (A == B).
-        return (*this == other) | (*this > other);
+        if constexpr (types::IsFP64<DataType>)
+        {
+            return Simd128(_mm_cmpge_pd(_register, *other));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            return Simd128(_mm_cmpge_ps(_register, *other));
+        }
+        else
+        {
+            // A >= B == ~(A < B)
+            return ~(*this < other);
+        }
     }
 
 
@@ -1969,8 +1976,19 @@ namespace falcon
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator<(const Simd128 other) const noexcept
     {
-        // A < B => B > A
-        return other > *this;
+        if constexpr (types::IsFP64<DataType>)
+        {
+            return Simd128(_mm_cmplt_pd(_register, *other));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            return Simd128(_mm_cmplt_ps(_register, *other));
+        }
+        else
+        {
+            // A < B == B > A
+            return other > *this;
+        }
     }
 
 
@@ -1978,12 +1996,19 @@ namespace falcon
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator<=(const Simd128 other) const noexcept
     {
-        // This will not work with comparisons involving NaN doesn't equal to anything.
-        // so ~(A>B) will make any nan comparisons true ~(NaN > NaN) => ~(0000...0000) = 1111...1111
-        // A <= B => ~(A > B)
-        // return ~(*this > other);
-        // A <= B => (A == B | A < B)
-        return (*this == other) | (*this < other);
+        if constexpr (types::IsFP64<DataType>)
+        {
+            return Simd128(_mm_cmple_pd(_register, *other));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            return Simd128(_mm_cmple_ps(_register, *other));
+        }
+        else
+        {
+            // A <= B == ~(A > B)
+            return ~(*this > other);
+        }
     }
 
 
