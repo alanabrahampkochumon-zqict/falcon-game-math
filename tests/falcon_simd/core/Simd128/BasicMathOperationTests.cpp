@@ -59,14 +59,14 @@ TYPED_TEST(Simd128BasicMathTests, Min_ReturnsARegisterWithMinimumValuesFromEithe
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
-    // auto regRes = falcon::min(regA, regB);
+    auto regRes = falcon::min(regA, regB);
 
-    // regRes.storeAligned(result.data());
-    //
-    // for (size_t i = 0; i < Lane; ++i)
-    // {
-    //     EXPECT_ANY_EQ(expected[i], result[i]);
-    // }
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
 }
 
 

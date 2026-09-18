@@ -770,5 +770,8 @@ namespace falcon
 
 } // namespace falcon
 
-#include "Simd128SSE.inl"
+
+// --- THIS SHOULD BE INCLUDED FIRST as the .inl files use functions declared in this header.
 #include "Simd128X86Math.h"
+// ------
+#include "Simd128SSE.inl"
