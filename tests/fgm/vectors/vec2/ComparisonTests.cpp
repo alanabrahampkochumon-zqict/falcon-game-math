@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Vec2<bool> comparison operator (>, >=, <, <=) and
+ * @brief Verify @ref auto comparison operator (>, >=, <, <=) and
  *        their functional counterpart's (gt, gte, lt, lte) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -39,20 +39,24 @@ namespace
     template <typename T>
     class Vec2ComparisonTests: public testing::Test
     {
+    public:
+        static constexpr auto True  = fgm::TRUE_MASK<fgm::Mask_t<T>>;
+        static constexpr auto False = fgm::FALSE_MASK<fgm::Mask_t<T>>;
+
     protected:
         fgm::Vec2<T> _vecA;
         fgm::Vec2<T> _vecB;
-        fgm::Vec2<bool> _expectedGT, _expectedGTE, _expectedLT,
+        fgm::Vec2<fgm::Mask_t<T>> _expectedGT, _expectedGTE, _expectedLT,
             _expectedLTE; // GT-> Greater Than, GTE-> Greater Than or Equal, LT -> Less than, LTE -> Less than or equal
 
         void SetUp() override
         {
             _vecA        = { T(1.1234568789), T(2.123458319) };
             _vecB        = { T(5.1234568789), T(1.123458319) };
-            _expectedGT  = { false, true };
-            _expectedGTE = { false, true };
-            _expectedLT  = { true, false };
-            _expectedLTE = { true, false };
+            _expectedGT  = { False, True };
+            _expectedGTE = { False, True };
+            _expectedLT  = { True, False };
+            _expectedLTE = { True, False };
         }
     };
     TYPED_TEST_SUITE(Vec2ComparisonTests, SupportedArithmeticTypes);
@@ -67,7 +71,7 @@ namespace
 
 TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
-    const fgm::Vec2<bool> mask = this->_vecA.gt(this->_vecB).toBool();
+    const auto mask = this->_vecA.gt(this->_vecB);
     EXPECT_VEC_EQ(this->_expectedGT, mask);
 }
 
@@ -79,7 +83,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 infVec(INF, -INF);
 //     const fgm::Vec2 expected(false, true);
 //
-//     const fgm::Vec2<bool> mask = vec.gt(infVec);
+//     const auto mask = vec.gt(infVec);
 //
 //     EXPECT_VEC_EQ(expected, mask);
 // }
@@ -92,7 +96,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 infVec(NAN_F, NAN_F);
 //     const fgm::Vec2 expected(false, false);
 //
-//     const fgm::Vec2<bool> mask = vec.gt(infVec);
+//     const auto mask = vec.gt(infVec);
 //
 //     EXPECT_VEC_EQ(expected, mask);
 // }
@@ -106,7 +110,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 expected(false, true);
 //
 //     // When compared with greater than or equal
-//     const fgm::Vec2<bool> mask = vecA.gt(vecB);
+//     const auto mask = vecA.gt(vecB);
 //
 //     // Then, the resulting elements are as expected
 //     EXPECT_VEC_EQ(expected, mask);
@@ -115,7 +119,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //
 // TYPED_TEST(Vec2ComparisonTests, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = this->_vecA > this->_vecB;
+//     const auto mask = this->_vecA > this->_vecB;
 //
 //     EXPECT_VEC_EQ(this->_expectedGT, mask);
 // }
@@ -123,7 +127,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //
 // TYPED_TEST(Vec2ComparisonTests, StaticWrapper_GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = fgm::Vec2<TypeParam>::gt(this->_vecA, this->_vecB);
+//     const auto mask = fgm::Vec2<TypeParam>::gt(this->_vecA, this->_vecB);
 //
 //     EXPECT_VEC_EQ(this->_expectedGT, mask);
 // }
@@ -136,7 +140,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //
 // TYPED_TEST(Vec2ComparisonTests, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = this->_vecA.gte(this->_vecB);
+//     const auto mask = this->_vecA.gte(this->_vecB);
 //
 //     EXPECT_VEC_EQ(this->_expectedGTE, mask);
 // }
@@ -148,7 +152,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 infVec(INF, -INF);
 //     const fgm::Vec2 expected(false, true);
 //
-//     const fgm::Vec2<bool> mask = vec.gte(infVec);
+//     const auto mask = vec.gte(infVec);
 //
 //     EXPECT_VEC_EQ(expected, mask);
 // }
@@ -160,7 +164,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 infVec(NAN_F, -5.9f);
 //     const fgm::Vec2 expected(false, true);
 //
-//     const fgm::Vec2<bool> mask = vec.gte(infVec);
+//     const auto mask = vec.gte(infVec);
 //
 //     EXPECT_VEC_EQ(expected, mask);
 // }
@@ -174,7 +178,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 expected(false, true);
 //
 //     // When compared with greater or equal than
-//     const fgm::Vec2<bool> mask = vecA.gte(vecB);
+//     const auto mask = vecA.gte(vecB);
 //
 //     // Then, the resulting elements are as expected
 //     EXPECT_VEC_EQ(expected, mask);
@@ -183,7 +187,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //
 // TYPED_TEST(Vec2ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = this->_vecA >= this->_vecB;
+//     const auto mask = this->_vecA >= this->_vecB;
 //
 //     EXPECT_VEC_EQ(this->_expectedGTE, mask);
 // }
@@ -191,7 +195,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //
 // TYPED_TEST(Vec2ComparisonTests, StaticWrapper_GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = fgm::Vec2<TypeParam>::gte(this->_vecA, this->_vecB);
+//     const auto mask = fgm::Vec2<TypeParam>::gte(this->_vecA, this->_vecB);
 //
 //     EXPECT_VEC_EQ(this->_expectedGTE, mask);
 // }
@@ -205,7 +209,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //
 // TYPED_TEST(Vec2ComparisonTests, LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = this->_vecA.lt(this->_vecB);
+//     const auto mask = this->_vecA.lt(this->_vecB);
 //     EXPECT_VEC_EQ(this->_expectedLT, mask);
 // }
 //
@@ -216,7 +220,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 infVec(INF, -INF);
 //     const fgm::Vec2 expected(true, false);
 //
-//     const fgm::Vec2<bool> mask = vec.lt(infVec);
+//     const auto mask = vec.lt(infVec);
 //
 //     EXPECT_VEC_EQ(expected, mask);
 // }
@@ -232,11 +236,11 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     // MSVC constant evaluator incorrectly returns true for NAN_F comparisons.
 //     // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
 //     // Resharper disable all
-//     const fgm::Vec2<bool> mask = vec.lt(nanVec);
+//     const auto mask = vec.lt(nanVec);
 // // Resharper restore all
 // #else
 //     // Clang and GCC follow IEEE 754 strictly at compile-time.
-//     const fgm::Vec2<bool> mask = vec.lt(nanVec);
+//     const auto mask = vec.lt(nanVec);
 // #endif
 //
 //     EXPECT_VEC_EQ(expected, mask);
@@ -251,7 +255,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 expected(true, false);
 //
 //     // When compared with less than or equal
-//     const fgm::Vec2<bool> mask = vecA.lt(vecB);
+//     const auto mask = vecA.lt(vecB);
 //
 //     // Then, the resulting elements are as expected
 //     EXPECT_VEC_EQ(expected, mask);
@@ -260,14 +264,14 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //
 // TYPED_TEST(Vec2ComparisonTests, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = this->_vecA < this->_vecB;
+//     const auto mask = this->_vecA < this->_vecB;
 //     EXPECT_VEC_EQ(this->_expectedLT, mask);
 // }
 //
 //
 // TYPED_TEST(Vec2ComparisonTests, StaticWrapper_LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = fgm::Vec2<TypeParam>::lt(this->_vecA, this->_vecB);
+//     const auto mask = fgm::Vec2<TypeParam>::lt(this->_vecA, this->_vecB);
 //     EXPECT_VEC_EQ(this->_expectedLT, mask);
 // }
 //
@@ -279,7 +283,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //
 // TYPED_TEST(Vec2ComparisonTests, LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = this->_vecA.lte(this->_vecB);
+//     const auto mask = this->_vecA.lte(this->_vecB);
 //     EXPECT_VEC_EQ(this->_expectedLTE, mask);
 // }
 //
@@ -289,7 +293,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 infVec(INF, -INF);
 //     const fgm::Vec2 expected(true, false);
 //
-//     const fgm::Vec2<bool> mask = vec.lte(infVec);
+//     const auto mask = vec.lte(infVec);
 //
 //     EXPECT_VEC_EQ(expected, mask);
 // }
@@ -305,11 +309,11 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     // MSVC constant evaluator incorrectly returns true for NAN_F comparisons.
 //     // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
 //     // Resharper disable all
-//     const fgm::Vec2<bool> mask = vec.lte(nanVec);
+//     const auto mask = vec.lte(nanVec);
 //     // Resharper restore all
 //     #else
 //     // Clang and GCC follow IEEE 754 strictly at compile-time.
-//     const fgm::Vec2<bool> mask = vec.lte(nanVec);
+//     const auto mask = vec.lte(nanVec);
 //     #endif
 //
 //     EXPECT_VEC_EQ(expected, mask);
@@ -324,7 +328,7 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //     const fgm::Vec2 expected(true, false);
 //
 //     // When compared with less than or equal
-//     const fgm::Vec2<bool> mask = vecA.lte(vecB);
+//     const auto mask = vecA.lte(vecB);
 //
 //     // Then, the resulting elements are as expected
 //     EXPECT_VEC_EQ(expected, mask);
@@ -333,14 +337,14 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 //
 // TYPED_TEST(Vec2ComparisonTests, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = this->_vecA <= this->_vecB;
+//     const auto mask = this->_vecA <= this->_vecB;
 //     EXPECT_VEC_EQ(this->_expectedLTE, mask);
 // }
 //
 //
 // TYPED_TEST(Vec2ComparisonTests, StaticWrapper_LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 // {
-//     const fgm::Vec2<bool> mask = fgm::Vec2<TypeParam>::lte(this->_vecA, this->_vecB);
+//     const auto mask = fgm::Vec2<TypeParam>::lte(this->_vecA, this->_vecB);
 //     EXPECT_VEC_EQ(this->_expectedLTE, mask);
 // }
 

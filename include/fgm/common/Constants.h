@@ -50,6 +50,16 @@ namespace fgm::constants
     template <std::floating_point T>
     inline constexpr T TAU = std::numbers::pi_v<T> * T(2);
 
+    /// Bitwise comparison mask representing truthiness.
+    /// @note Not recommended for direct comparison with floating point numbers,
+    ///       as the mask is a NaN for floating-point types.
+    template <typename T>
+    inline constexpr T TRUE_MASK = static_cast<T>(~0ULL);
+
+    /// Bitwise comparison mask representing falsiness.
+    template <typename T>
+    inline constexpr T FALSE_MASK = static_cast<T>(0);
+
 } // namespace fgm::constants
 
 
@@ -72,7 +82,7 @@ namespace fgm::axis
 {
     /// @brief Alias for axis used in fgm.
     /// @typedef AT stands for Axis Type, which is uint8_t by default.
-    using AT                       = uint8_t;
+    using AT              = uint8_t;
     inline constexpr AT X = 0; ///< Alias for x-coordinate
     inline constexpr AT Y = 1; ///< Alias for y-coordinate
     inline constexpr AT Z = 2; ///< Alias for z-coordinate

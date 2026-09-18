@@ -37,6 +37,8 @@
 namespace fgm
 {
     using namespace falcon::types;
+    using namespace fgm::constants;
+
     template <typename T>
     using Mask_t = UInt_t<T>;
 
@@ -425,7 +427,8 @@ namespace fgm
         //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
         //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         template <Arithmetic U>
         //             requires StrictSignedness<T, U>
@@ -447,7 +450,8 @@ namespace fgm
         //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
         //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         template <Arithmetic U>
         //             requires StrictSignedness<T, U>
@@ -470,7 +474,8 @@ namespace fgm
         //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
         //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         template <Arithmetic U>
         //             requires StrictSignedness<T, U>
@@ -492,7 +497,8 @@ namespace fgm
         //          * @param[in] epsilon The maximum allowable difference for `std::floating_point` types.
         //          *                    Defaults to @ref DOUBLE_EPSILON or @ref FLOAT_EPSILON based on type promotion.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         template <Arithmetic U>
         //             requires StrictSignedness<T, U>
@@ -519,8 +525,9 @@ namespace fgm
          *        Compare each component pair and returns a boolean mask.
          *
          * @param[in] rhs The vector to compare against.
-         * 
+         *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -535,7 +542,8 @@ namespace fgm
         //          * @param[in]  lhs The vector to compare.
         //          * @param[in]  rhs The vector to compare against.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         [[nodiscard]] static constexpr Vec2<bool> gt(const Vec2& lhs, const Vec2& rhs) noexcept
         //             requires StrictArithmetic<T>;
@@ -547,7 +555,8 @@ namespace fgm
         //          *
         //          * @param[in] rhs The vector to compare against.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         [[nodiscard]] constexpr Vec2<bool> gte(const Vec2& rhs) const noexcept
         //             requires StrictArithmetic<T>;
@@ -560,7 +569,8 @@ namespace fgm
         //          * @param[in]  lhs The vector to compare.
         //          * @param[in]  rhs The vector to compare against.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         [[nodiscard]] static constexpr Vec2<bool> gte(const Vec2& lhs, const Vec2& rhs) noexcept
         //             requires StrictArithmetic<T>;
@@ -578,7 +588,8 @@ namespace fgm
         //          *
         //          * @param[in] rhs The vector to compare against.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         [[nodiscard]] constexpr Vec2<bool> lt(const Vec2& rhs) const noexcept
         //             requires StrictArithmetic<T>;
@@ -595,7 +606,8 @@ namespace fgm
         //          * @param[in]  lhs The vector to compare.
         //          * @param[in]  rhs The vector to compare against.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         [[nodiscard]] static constexpr Vec2<bool> lt(const Vec2& lhs, const Vec2& rhs) noexcept
         //             requires StrictArithmetic<T>;
@@ -611,7 +623,8 @@ namespace fgm
         //          *
         //          * @param[in] rhs The vector to compare against.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         [[nodiscard]] constexpr Vec2<bool> lte(const Vec2& rhs) const noexcept
         //             requires StrictArithmetic<T>;
@@ -629,7 +642,8 @@ namespace fgm
         //          * @param[in]  lhs The vector to compare.
         //          * @param[in]  rhs The vector to compare against.
         //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000..
+        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
+        //          000...000..
         //          */
         //         [[nodiscard]] static constexpr Vec2<bool> lte(const Vec2& lhs, const Vec2& rhs) noexcept
         //             requires StrictArithmetic<T>;
