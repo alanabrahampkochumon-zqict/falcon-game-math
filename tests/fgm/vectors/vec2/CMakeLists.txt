@@ -10,7 +10,7 @@ target_sources(
         ConstantsTests.cpp
         # DistanceTests.cpp
         # EqualityTests.cpp
-        # InitializationTests.cpp
+        InitializationTests.cpp
         # MagnitudeTests.cpp
         # NormalizationTests.cpp
         # PNormTests.cpp
@@ -19,7 +19,7 @@ target_sources(
         # RejectionTests.cpp
         # StringRepresentationTests.cpp
         # SwizzlingTests.cpp
-        # TypeConversionTests.cpp
+        TypeConversionTests.cpp
         UtilityTests.cpp
 
         Vec2TestSetup.h

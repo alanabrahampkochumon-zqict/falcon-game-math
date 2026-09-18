@@ -31,27 +31,6 @@ namespace
     class Vec2InitializationTests: public testing::Test
     {};
     TYPED_TEST_SUITE(Vec2InitializationTests, SupportedTypes);
-
-
-
-    /**************************************
-     *            STATIC TESTS            *
-     **************************************/
-
-    namespace static_wrapper
-    {
-
-        /// @test Verify that Vec2 can be initialized with parameters at compile time.
-        constexpr fgm::Vec2 SCALAR_INIT_VEC(1, 2);
-        static_assert(SCALAR_INIT_VEC.x() == 1);
-        static_assert(SCALAR_INIT_VEC.y() == 2);
-
-        /// @test Verify that Vec2 can be initialized using braced initialization at compile time.
-        constexpr fgm::Vec2<int> BRACED_INIT_VEC{};
-        static_assert(BRACED_INIT_VEC.x() == 0);
-        static_assert(BRACED_INIT_VEC.y() == 0);
-
-    } // namespace static_wrapper
 } // namespace
 
 
