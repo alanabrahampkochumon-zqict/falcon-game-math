@@ -108,7 +108,7 @@ TEST(Simd128GetterSetterTests, Set_CanTakeParametersLessThanLaneSize)
 
     reg.set(static_cast<Type>(1), static_cast<Type>(2), static_cast<Type>(3), static_cast<Type>(4),
             static_cast<Type>(5), static_cast<Type>(6), static_cast<Type>(7));
-    std::array<Type, Lane> result;
+    alignas(16) std::array<Type, Lane> result;
     reg.store(result.data());
 
     EXPECT_EQ(1, result[0]);
@@ -130,7 +130,7 @@ TYPED_TEST(Simd128GetterSetterTests, SetZero_FillsTheLanesWithZeroes)
     auto reg = falcon::Simd128_t<Type, Lane>();
     reg.setZero();
 
-    std::array<Type, Lane> result{};
+    alignas(16) std::array<Type, Lane> result{};
     reg.store(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -149,7 +149,7 @@ TYPED_TEST(Simd128GetterSetterTests, SetOne_FillsTheLanesWithOnes)
     auto reg = falcon::Simd128_t<Type, Lane>();
     reg.setOne();
 
-    std::array<Type, Lane> result{};
+    alignas(16) std::array<Type, Lane> result{};
     reg.store(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -218,7 +218,7 @@ TEST(Simd128GetterSetterTests, Integrals_Naive_ReturnsDefaultRegister)
 
     const auto naiveReg = reg.naive();
 
-    std::array<int, 4> data{};
+    alignas(16) std::array<int, 4> data{};
     _mm_store_si128(reinterpret_cast<__m128i*>(data.data()), naiveReg);
 
     EXPECT_ANY_EQ(1, data[0]);
@@ -234,7 +234,7 @@ TEST(Simd128GetterSetterTests, Float_Naive_ReturnsDefaultRegister)
 
     const auto naiveReg = reg.naive();
 
-    std::array<float, 4> data{};
+    alignas(16) std::array<float, 4> data{};
     _mm_store_ps(data.data(), naiveReg);
 
     EXPECT_ANY_EQ(1.0f, data[0]);
@@ -250,7 +250,7 @@ TEST(Simd128GetterSetterTests, Double_Naive_ReturnsDefaultRegister)
 
     const auto naiveReg = reg.naive();
 
-    std::array<double, 2> data{};
+    alignas(16) std::array<double, 2> data{};
     _mm_store_pd(data.data(), naiveReg);
 
     EXPECT_ANY_EQ(1.0, data[0]);
@@ -265,7 +265,7 @@ TEST(Simd128GetterSetterTests, UnaryTimesOperator_IntegralRegister_ReturnsDefaul
 
     const auto naiveReg = *reg;
 
-    std::array<int, 4> data{};
+    alignas(16) std::array<int, 4> data{};
     _mm_store_si128(reinterpret_cast<__m128i*>(data.data()), naiveReg);
 
     EXPECT_ANY_EQ(1, data[0]);
@@ -282,7 +282,7 @@ TEST(Simd128GetterSetterTests, UnaryTimesOperator_FloatRegister_ReturnsDefaultRe
 
     const auto naiveReg = *reg;
 
-    std::array<float, 4> data{};
+    alignas(16) std::array<float, 4> data{};
     _mm_store_ps(data.data(), naiveReg);
 
     EXPECT_ANY_EQ(1.0f, data[0]);
@@ -298,7 +298,7 @@ TEST(Simd128GetterSetterTests, UnaryTimesOperator_DoubleRegister_ReturnsDefaultR
 
     const auto naiveReg = *reg;
 
-    std::array<double, 2> data{};
+    alignas(16) std::array<double, 2> data{};
     _mm_store_pd(data.data(), naiveReg);
 
     EXPECT_ANY_EQ(1.0, data[0]);
