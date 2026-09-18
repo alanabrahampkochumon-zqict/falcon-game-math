@@ -95,11 +95,11 @@ constexpr T getAllOnes()
     }
     else if constexpr (sizeof(T) == 4)
     {
-        return std::bit_cast<T>(~0UL);
+        return std::bit_cast<T>(0xFFFFFFFF);
     }
     else if constexpr (sizeof(T) == 8)
     {
-        return std::bit_cast<T>(~0ULL);
+        return std::bit_cast<T>(0xFFFFFFFFFFFFFFFF);
     }
     else
     {
