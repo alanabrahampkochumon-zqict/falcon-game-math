@@ -996,13 +996,7 @@ namespace falcon
         }
         else
         {
-            // TODO: Update to use direction inversion after implementing ~
-            // Integrals have no dedicated instruction in sse
-            // We have no dedicated ~ operator, so we have use ~a AND 1
-            // ~0 -> Inverts all the bits to 1
-            const auto one   = _mm_set1_epi32(static_cast<int32_t>(~0));
-            const auto eqReg = (*this == other).naive();
-            return Simd128(_mm_andnot_si128(eqReg, one));
+            return ~(*this == other);
         }
     }
 
