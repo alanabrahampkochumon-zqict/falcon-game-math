@@ -328,13 +328,16 @@ function(AddCompilerFlag Target Visibility Config)
         return() # Returning so that the flag will not get added!
     endif ()
 
-
-    if (FMA_Config STREQUAL FALCON_ENABLE_FMA)
-        string(APPEND CompilerFlag ";-march=native")
-    elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA3)
-        string(APPEND CompilerFlag ";-mfma")
-    elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA4)
-        string(APPEND CompilerFlag ";-mfma4")
+    if (Config STREQUAL "FALCON_ENABLE_NEON" OR Config STREQUAL "FALCON_DISABLE_SIMD" OR Config STREQUAL "FALCON_ENABLE_SSE2" OR Config STREQUAL "FALCON_ENABLE_SSE4")
+        message(STATUS "ISA doesn't support FMA flag")
+    else ()
+        if (FMA_Config STREQUAL FALCON_ENABLE_FMA)
+            string(APPEND CompilerFlag ";-march=native")
+        elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA3)
+            string(APPEND CompilerFlag ";-mfma")
+        elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA4)
+            string(APPEND CompilerFlag ";-mfma4")
+        endif ()
     endif ()
 
 

@@ -923,7 +923,6 @@ namespace falcon
                 }
             }
         }
-        return 0; // SHOULD NOT REACH HERE! LEFT FOR COMPILER
     }
 
 
@@ -1038,7 +1037,6 @@ namespace falcon
                 }
             }
         }
-        return 0; // SHOULD NOT REACH HERE! LEFT FOR COMPILER
     }
 
 

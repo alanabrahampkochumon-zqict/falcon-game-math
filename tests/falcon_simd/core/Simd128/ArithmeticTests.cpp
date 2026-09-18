@@ -96,7 +96,15 @@ TYPED_TEST(Simd128ArithmeticTests, UnaryMinusOperator_ReturnsAValidResult)
         {
             data[i] = static_cast<Type>(min + i * 2);
         }
-        expected[i] = -data[i];
+        // Disable msvc from generating unsigned negation warnings
+    #ifdef _MSC_VER
+        #pragma warning(push)
+        #pragma warning(disable : 4146)
+    #endif
+        expected[i] = static_cast<Type>(-data[i]);
+    #ifdef _MSC_VER
+        #pragma warning(pop)
+    #endif
     }
     falcon::Simd128_t<Type, Lane> reg{ data };
     auto regRes = -reg;
