@@ -54,11 +54,11 @@ namespace fgm::constants
     /// @note Not recommended for direct comparison with floating point numbers,
     ///       as the mask is a NaN for floating-point types.
     template <typename T>
-    inline constexpr T TRUE_MASK = static_cast<T>(~0ULL);
+    inline constexpr T TrueMask = static_cast<T>(~0ULL);
 
     /// Bitwise comparison mask representing falsiness.
     template <typename T>
-    inline constexpr T FALSE_MASK = static_cast<T>(0);
+    inline constexpr T FalseMask = static_cast<T>(0);
 
 } // namespace fgm::constants
 
