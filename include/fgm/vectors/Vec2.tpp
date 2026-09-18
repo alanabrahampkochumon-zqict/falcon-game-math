@@ -271,7 +271,7 @@ namespace fgm
     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& rhs) const noexcept
     {
         const auto mask = _data == rhs._data;
-        return static_cast<bool>(mask.horizontalOr()); // TODO: Swap to horizontal and
+        return static_cast<bool>(mask.horizontalAnd()); // TODO: Swap to horizontal and
     }
 
 
