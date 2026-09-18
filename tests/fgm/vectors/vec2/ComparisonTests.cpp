@@ -100,235 +100,183 @@ TEST(Vec2ComparisonTests, GT_NaNVector_ReturnsBooleanVectorWithCorrectValues)
 
 
 
-// TYPED_TEST(Vec2ComparisonTests, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
-// {
-//     const auto mask = this->_vecA > this->_vecB;
-//
-//     EXPECT_VEC_EQ(this->_expectedGT, mask);
-// }
-//
-//
-// TYPED_TEST(Vec2ComparisonTests, StaticWrapper_GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
-// {
-//     const auto mask = fgm::Vec2<TypeParam>::gt(this->_vecA, this->_vecB);
-//
-//     EXPECT_VEC_EQ(this->_expectedGT, mask);
-// }
-//
-//
-//
-// /**************************************
-//  *    GREATER THAN OR EQUALS TESTS    *
-//  **************************************/
-//
-// TYPED_TEST(Vec2ComparisonTests, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
-// {
-//     const auto mask = this->_vecA.gte(this->_vecB);
-//
-//     EXPECT_VEC_EQ(this->_expectedGTE, mask);
-// }
-//
-//
-// TEST(Vec2ComparisonTests, GTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
-// {
-//     const fgm::Vec2 vec(1.2f, 6.8f);
-//     const fgm::Vec2 infVec(INF, -INF);
-//     const fgm::Vec2 expected(False<float>, True<float>);
-//
-//     const auto mask = vec.gte(infVec);
-//
-//     EXPECT_VEC_EQ(expected, mask);
-// }
-//
-//
-// TEST(Vec2ComparisonTests, GTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
-// {
-//     const fgm::Vec2 vec(1.2, 6.8);
-//     const fgm::Vec2 infVec(NAN_F, -5.9f);
-//     const fgm::Vec2 expected(False<float>, True<float>);
-//
-//     const auto mask = vec.gte(infVec);
-//
-//     EXPECT_VEC_EQ(expected, mask);
-// }
-//
-//
-// TEST(Vec2ComparisonTests, GTE_MixedType_ReturnsBooleanVectorWithCorrectValues)
-// {
-//     // Given two arbitrary vectors of different types
-//     const fgm::Vec2 vecA(1.2, 7.5);
-//     const fgm::Vec2 vecB(5, 7);
-//     const fgm::Vec2 expected(False<float>, True<float>);
-//
-//     // When compared with greater or equal than
-//     const auto mask = vecA.gte(vecB);
-//
-//     // Then, the resulting elements are as expected
-//     EXPECT_VEC_EQ(expected, mask);
-// }
-//
-//
-// TYPED_TEST(Vec2ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
-// {
-//     const auto mask = this->_vecA >= this->_vecB;
-//
-//     EXPECT_VEC_EQ(this->_expectedGTE, mask);
-// }
-//
-//
-// TYPED_TEST(Vec2ComparisonTests, StaticWrapper_GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
-// {
-//     const auto mask = fgm::Vec2<TypeParam>::gte(this->_vecA, this->_vecB);
-//
-//     EXPECT_VEC_EQ(this->_expectedGTE, mask);
-// }
-//
-//
-//
-// /**************************************
-//  *          LESS THAN TESTS           *
-//  **************************************/
-//
-//
-// TYPED_TEST(Vec2ComparisonTests, LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
-// {
-//     const auto mask = this->_vecA.lt(this->_vecB);
-//     EXPECT_VEC_EQ(this->_expectedLT, mask);
-// }
-//
-//
-// TEST(Vec2ComparisonTests, LT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
-// {
-//     const fgm::Vec2 vec(1.2, 6.8);
-//     const fgm::Vec2 infVec(INF, -INF);
-//     const fgm::Vec2 expected(True<float>, False<float>);
-//
-//     const auto mask = vec.lt(infVec);
-//
-//     EXPECT_VEC_EQ(expected, mask);
-// }
-//
-//
-// TEST(Vec2ComparisonTests, LT_NanVector_ReturnsBooleanVectorWithCorrectValues)
-// {
-//     const fgm::Vec2 vec(1.2f, 6.8f);
-//     const fgm::Vec2 nanVec(NAN_F, -5.9f);
-//     const fgm::Vec2 expected(False<float>, False<float>);
-//
-// #if defined(_MSC_VER) && !defined(__clang__)
-//     // MSVC constant evaluator incorrectly returns True<float> for NAN_F comparisons.
-//     // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
-//     // Resharper disable all
-//     const auto mask = vec.lt(nanVec);
-// // Resharper restore all
-// #else
-//     // Clang and GCC follow IEEE 754 strictly at compile-time.
-//     const auto mask = vec.lt(nanVec);
-// #endif
-//
-//     EXPECT_VEC_EQ(expected, mask);
-// }
-//
-//
-// TEST(Vec2ComparisonTests, LT_MixedType_ReturnsBooleanVectorWithCorrectValues)
-// {
-//     // Given two arbitrary vectors of different types
-//     const fgm::Vec2 vecA(1.2, 7.5);
-//     const fgm::Vec2 vecB(5, 7);
-//     const fgm::Vec2 expected(True<float>, False<float>);
-//
-//     // When compared with less than or equal
-//     const auto mask = vecA.lt(vecB);
-//
-//     // Then, the resulting elements are as expected
-//     EXPECT_VEC_EQ(expected, mask);
-// }
-//
-//
-// TYPED_TEST(Vec2ComparisonTests, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
-// {
-//     const auto mask = this->_vecA < this->_vecB;
-//     EXPECT_VEC_EQ(this->_expectedLT, mask);
-// }
-//
-//
-// TYPED_TEST(Vec2ComparisonTests, StaticWrapper_LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
-// {
-//     const auto mask = fgm::Vec2<TypeParam>::lt(this->_vecA, this->_vecB);
-//     EXPECT_VEC_EQ(this->_expectedLT, mask);
-// }
-//
-//
-//
-// /**************************************
-//  *      LESS THAN OR EQUALS TESTS     *
-//  **************************************/
-//
-// TYPED_TEST(Vec2ComparisonTests, LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
-// {
-//     const auto mask = this->_vecA.lte(this->_vecB);
-//     EXPECT_VEC_EQ(this->_expectedLTE, mask);
-// }
-//
-// TEST(Vec2ComparisonTests, LTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
-// {
-//     const fgm::Vec2 vec(1.2, 6.8);
-//     const fgm::Vec2 infVec(INF, -INF);
-//     const fgm::Vec2 expected(True<float>, False<float>);
-//
-//     const auto mask = vec.lte(infVec);
-//
-//     EXPECT_VEC_EQ(expected, mask);
-// }
-//
-//
-// TEST(Vec2ComparisonTests, LTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
-// {
-//     const fgm::Vec2 vec(1.2f, 6.8f);
-//     const fgm::Vec2 nanVec(NAN_F, -5.9f);
-//     const fgm::Vec2 expected(False<float>, False<float>);
-//
-//     #if defined(_MSC_VER) && !defined(__clang__)
-//     // MSVC constant evaluator incorrectly returns True<float> for NAN_F comparisons.
-//     // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
-//     // Resharper disable all
-//     const auto mask = vec.lte(nanVec);
-//     // Resharper restore all
-//     #else
-//     // Clang and GCC follow IEEE 754 strictly at compile-time.
-//     const auto mask = vec.lte(nanVec);
-//     #endif
-//
-//     EXPECT_VEC_EQ(expected, mask);
-// }
-//
-//
-// TEST(Vec2ComparisonTests, LTE_MixedType_ReturnsBooleanVectorWithCorrectValues)
-// {
-//     // Given two arbitrary vectors of different types
-//     const fgm::Vec2 vecA(1.2, 7.5);
-//     const fgm::Vec2 vecB(5, 7);
-//     const fgm::Vec2 expected(True<float>, False<float>);
-//
-//     // When compared with less than or equal
-//     const auto mask = vecA.lte(vecB);
-//
-//     // Then, the resulting elements are as expected
-//     EXPECT_VEC_EQ(expected, mask);
-// }
-//
-//
-// TYPED_TEST(Vec2ComparisonTests, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
-// {
-//     const auto mask = this->_vecA <= this->_vecB;
-//     EXPECT_VEC_EQ(this->_expectedLTE, mask);
-// }
-//
-//
-// TYPED_TEST(Vec2ComparisonTests, StaticWrapper_LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
-// {
-//     const auto mask = fgm::Vec2<TypeParam>::lte(this->_vecA, this->_vecB);
-//     EXPECT_VEC_EQ(this->_expectedLTE, mask);
-// }
+TYPED_TEST(Vec2ComparisonTests, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
+{
+    const auto mask = this->_vecA > this->_vecB;
+    EXPECT_VEC_EQ(this->_expectedGT, mask);
+}
+
+
+TYPED_TEST(Vec2ComparisonTests, StaticWrapper_GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
+{
+    const auto mask = fgm::Vec2<TypeParam>::gt(this->_vecA, this->_vecB);
+    EXPECT_VEC_EQ(this->_expectedGT, mask);
+}
+
+
+
+/**************************************
+ *    GREATER THAN OR EQUALS TESTS    *
+ **************************************/
+
+TYPED_TEST(Vec2ComparisonTests, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+{
+    const auto mask = this->_vecA.gte(this->_vecB);
+    EXPECT_VEC_EQ(this->_expectedGTE, mask);
+}
+
+
+TEST(Vec2ComparisonTests, GTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
+{
+    const fgm::Vec2 vec(1.2f, 6.8f);
+    const fgm::Vec2 infVec(INF, -INF);
+    const fgm::Vec2 expected(False<float>, True<float>);
+
+    const auto mask = vec.gte(infVec);
+    EXPECT_VEC_EQ(expected, mask);
+}
+
+
+TEST(Vec2ComparisonTests, GTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
+{
+    const fgm::Vec2 vec(1.2f, 6.8f);
+    const fgm::Vec2 infVec(NAN_F, -5.9f);
+    const fgm::Vec2 expected(False<float>, True<float>);
+
+    const auto mask = vec.gte(infVec);
+    EXPECT_VEC_EQ(expected, mask);
+}
+
+
+TYPED_TEST(Vec2ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+{
+    const auto mask = this->_vecA >= this->_vecB;
+    EXPECT_VEC_EQ(this->_expectedGTE, mask);
+}
+
+
+TYPED_TEST(Vec2ComparisonTests, StaticWrapper_GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
+{
+    const auto mask = fgm::Vec2<TypeParam>::gte(this->_vecA, this->_vecB);
+    EXPECT_VEC_EQ(this->_expectedGTE, mask);
+}
+
+
+
+/**************************************
+ *          LESS THAN TESTS           *
+ **************************************/
+
+
+TYPED_TEST(Vec2ComparisonTests, LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
+{
+    const auto mask = this->_vecA.lt(this->_vecB);
+    EXPECT_VEC_EQ(this->_expectedLT, mask);
+}
+
+
+TEST(Vec2ComparisonTests, LT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
+{
+    const fgm::Vec2 vec(1.2f, 6.8f);
+    const fgm::Vec2 infVec(INF, -INF);
+    const fgm::Vec2 expected(True<float>, False<float>);
+
+    const auto mask = vec.lt(infVec);
+
+    EXPECT_VEC_EQ(expected, mask);
+}
+
+
+TEST(Vec2ComparisonTests, LT_NanVector_ReturnsBooleanVectorWithCorrectValues)
+{
+    const fgm::Vec2 vec(1.2f, 6.8f);
+    const fgm::Vec2 nanVec(NAN_F, -5.9f);
+    const fgm::Vec2 expected(False<float>, False<float>);
+
+#if defined(_MSC_VER) && !defined(__clang__)
+    // MSVC constant evaluator incorrectly returns True<float> for NAN_F comparisons.
+    // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
+    // Resharper disable all
+    const auto mask = vec.lt(nanVec);
+// Resharper restore all
+#else
+    // Clang and GCC follow IEEE 754 strictly at compile-time.
+    const auto mask = vec.lt(nanVec);
+#endif
+
+    EXPECT_VEC_EQ(expected, mask);
+}
+
+
+TYPED_TEST(Vec2ComparisonTests, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
+{
+    const auto mask = this->_vecA < this->_vecB;
+    EXPECT_VEC_EQ(this->_expectedLT, mask);
+}
+
+
+TYPED_TEST(Vec2ComparisonTests, StaticWrapper_LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
+{
+    const auto mask = fgm::Vec2<TypeParam>::lt(this->_vecA, this->_vecB);
+    EXPECT_VEC_EQ(this->_expectedLT, mask);
+}
+
+
+
+/**************************************
+ *      LESS THAN OR EQUALS TESTS     *
+ **************************************/
+
+TYPED_TEST(Vec2ComparisonTests, LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
+{
+    const auto mask = this->_vecA.lte(this->_vecB);
+    EXPECT_VEC_EQ(this->_expectedLTE, mask);
+}
+
+TEST(Vec2ComparisonTests, LTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
+{
+    const fgm::Vec2 vec(1.2f, 6.8f);
+    const fgm::Vec2 infVec(INF, -INF);
+    const fgm::Vec2 expected(True<float>, False<float>);
+
+    const auto mask = vec.lte(infVec);
+
+    EXPECT_VEC_EQ(expected, mask);
+}
+
+
+TEST(Vec2ComparisonTests, LTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
+{
+    const fgm::Vec2 vec(1.2f, 6.8f);
+    const fgm::Vec2 nanVec(NAN_F, -5.9f);
+    const fgm::Vec2 expected(False<float>, False<float>);
+
+    #if defined(_MSC_VER) && !defined(__clang__)
+    // MSVC constant evaluator incorrectly returns True<float> for NAN_F comparisons.
+    // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
+    // Resharper disable all
+    const auto mask = vec.lte(nanVec);
+    // Resharper restore all
+    #else
+    // Clang and GCC follow IEEE 754 strictly at compile-time.
+    const auto mask = vec.lte(nanVec);
+    #endif
+
+    EXPECT_VEC_EQ(expected, mask);
+}
+
+
+TYPED_TEST(Vec2ComparisonTests, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
+{
+    const auto mask = this->_vecA <= this->_vecB;
+    EXPECT_VEC_EQ(this->_expectedLTE, mask);
+}
+
+
+TYPED_TEST(Vec2ComparisonTests, StaticWrapper_LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
+{
+    const auto mask = fgm::Vec2<TypeParam>::lte(this->_vecA, this->_vecB);
+    EXPECT_VEC_EQ(this->_expectedLTE, mask);
+}
 
 /** @} */

@@ -551,135 +551,144 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        //         /**
-        //          * @brief Perform component-wise greater-than-or-equal comparison between this vector and @p rhs
-        //          *        vector. Compare each component pair and returns a boolean mask.
-        //          *
-        //          * @param[in] rhs The vector to compare against.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Mask_t<T>> gte(const Vec2& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise greater-than-or-equal comparison between @p lhs vector and @p rhs
-        //          *        vector. Compare each component pair and returns a boolean mask.
-        //          *
-        //          * @param[in]  lhs The vector to compare.
-        //          * @param[in]  rhs The vector to compare against.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         [[nodiscard]] static constexpr Vec2<Mask_t<T>> gte(const Vec2& lhs, const Vec2& rhs) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise less-than comparison between this vector and @p rhs vector.
-        //          *        Compare each component pair and returns a boolean mask.
-        //          *
-        //          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
-        //          *       compiler-level constant folding bugs.
-        //          *       Runtime execution remains IEEE 754 compliant under /fp:strict.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The vector to compare against.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Mask_t<T>> lt(const Vec2& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise less-than comparison between @p lhs vector and @p rhs vector.
-        //          *        Compare each component pair and returns a boolean mask.
-        //          *
-        //          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
-        //          *       compiler-level constant folding bugs.
-        //          *       Runtime execution remains IEEE 754 compliant under /fp:strict.
-        //          *
-        //          * @param[in]  lhs The vector to compare.
-        //          * @param[in]  rhs The vector to compare against.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         [[nodiscard]] static constexpr Vec2<Mask_t<T>> lt(const Vec2& lhs, const Vec2& rhs) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise less-than-or-equal comparison between this vector and @p rhs vector.
-        //          *        Compares each component pair and returns a boolean mask.
-        //          *
-        //          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
-        //          *       compiler-level constant folding bugs.
-        //          *       Runtime execution remains IEEE 754 compliant under /fp:strict.
-        //          *
-        //          * @param[in] rhs The vector to compare against.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Mask_t<T>> lte(const Vec2& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Perform component-wise less-than-or-equal comparison between @p lhs vector and @p rhs
-        //          *        vector. Compares each component pair and returns a boolean mask.
-        //          *
-        //          * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
-        //          *       compiler-level constant folding bugs.
-        //          *       Runtime execution remains IEEE 754 compliant under /fp:strict.
-        //          *
-        //          *
-        //          * @param[in]  lhs The vector to compare.
-        //          * @param[in]  rhs The vector to compare against.
-        //          *
-        //          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by
-        //          000...000..
-        //          */
-        //         [[nodiscard]] static constexpr Vec2<Mask_t<T>> lte(const Vec2& lhs, const Vec2& rhs) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        // #ifdef ENABLE_FGM_SHADER_OPERATORS
-        //
-        //         /**
-        //          * @copydoc gt(const Vec2&) const
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Mask_t<T>> operator>(const Vec2& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @copydoc gte(const Vec2&) const
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Mask_t<T>> operator>=(const Vec2& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @copydoc lt(const Vec2&) const
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Mask_t<T>> operator<(const Vec2& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @copydoc lte(const Vec2&) const
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Mask_t<T>> operator<=(const Vec2& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        // #endif
+        /**
+         * @brief Perform component-wise greater-than-or-equal comparison between this vector and @p rhs
+         *        vector. Compare each component pair and returns a boolean mask.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] constexpr Vec2<Mask_t<T>> gte(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise greater-than-or-equal comparison between @p lhs vector and @p rhs
+         *        vector. Compare each component pair and returns a boolean mask.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] static constexpr Vec2<Mask_t<T>> gte(const Vec2& lhs, const Vec2& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise less-than comparison between this vector and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
+         *       compiler-level constant folding bugs.
+         *       Runtime execution remains IEEE 754 compliant under /fp:strict.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] constexpr Vec2<Mask_t<T>> lt(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise less-than comparison between @p lhs vector and @p rhs vector.
+         *        Compare each component pair and returns a boolean mask.
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
+         *       compiler-level constant folding bugs.
+         *       Runtime execution remains IEEE 754 compliant under /fp:strict.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] static constexpr Vec2<Mask_t<T>> lt(const Vec2& lhs, const Vec2& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise less-than-or-equal comparison between this vector and @p rhs vector.
+         *        Compares each component pair and returns a boolean mask.
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
+         *       compiler-level constant folding bugs.
+         *       Runtime execution remains IEEE 754 compliant under /fp:strict.
+         *
+         * @param[in] rhs The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] constexpr Vec2<Mask_t<T>> lte(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Perform component-wise less-than-or-equal comparison between @p lhs vector and @p rhs
+         *        vector. Compares each component pair and returns a boolean mask.
+         *
+         * @note On MSVC, constexpr comparisons involving NaN may return incorrect results due to
+         *       compiler-level constant folding bugs.
+         *       Runtime execution remains IEEE 754 compliant under /fp:strict.
+         *
+         * @param[in]  lhs The vector to compare.
+         * @param[in]  rhs The vector to compare against.
+         *
+         * @note Use @ref toBool to convert mask vector to a boolean vector.
+         * @note For direct comparisons use @ref fgm<T>::TRUE_MASK or fgm<T>::FALSE_MASK.
+         *
+         * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
+         */
+        [[nodiscard]] static constexpr Vec2<Mask_t<T>> lte(const Vec2& lhs, const Vec2& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+#ifdef ENABLE_FGM_SHADER_OPERATORS
+
+        /**
+         * @copydoc gt(const Vec2&) const
+         */
+        [[nodiscard]] constexpr Vec2<Mask_t<T>> operator>(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copydoc gte(const Vec2&) const
+         */
+        [[nodiscard]] constexpr Vec2<Mask_t<T>> operator>=(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copydoc lt(const Vec2&) const
+         */
+        [[nodiscard]] constexpr Vec2<Mask_t<T>> operator<(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @copydoc lte(const Vec2&) const
+         */
+        [[nodiscard]] constexpr Vec2<Mask_t<T>> operator<=(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+#endif
 
         /** @} */
 
