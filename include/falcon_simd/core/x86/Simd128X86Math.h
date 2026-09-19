@@ -18,7 +18,7 @@ namespace falcon
     using _REG_128_SSE = Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>;
 
     /**
-     * Get the minimum values from both the registers, packed into a single register.
+     * @brief Get the minimum values from both the registers, packed into a single register.
      *
      * @tparam DataType The data type of the Simd128 register.
      * @tparam Lane     The number of lanes of the Simd128 register.
@@ -34,7 +34,7 @@ namespace falcon
 
 
     /**
-     * Get the maximum values from both the registers, packed into a single register.
+     * @brief Get the maximum values from both the registers, packed into a single register.
      *
      * @tparam DataType The data type of the Simd128 register.
      * @tparam Lane     The number of lanes of the Simd128 register.
@@ -50,7 +50,7 @@ namespace falcon
 
 
     /**
-     * Compute the absolute value of each entry in the register.
+     * @brief Compute the absolute value of each entry in the register.
      *
      * @note For unsigned types the value will not be affected.
      *

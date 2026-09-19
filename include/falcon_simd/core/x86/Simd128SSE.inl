@@ -947,7 +947,7 @@ namespace falcon
             // _,     _, _, A & B & C & D
             // But if only two lanes are filled, we can do just 1 shift return the value from lower lane.
             const auto shifted1 = _mm_srli_si128(_mm_castps_si128(_register), 4);
-            const auto andReg1   = _mm_and_ps(_register, _mm_castsi128_ps(shifted1));
+            const auto andReg1  = _mm_and_ps(_register, _mm_castsi128_ps(shifted1));
             if constexpr (LaneCount == 2)
             {
                 return _mm_cvtss_f32(andReg1);
@@ -955,20 +955,20 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(_mm_castps_si128(andReg1), 8);
-                const auto andReg2   = _mm_and_ps(andReg1, _mm_castsi128_ps(shifted2));
+                const auto andReg2  = _mm_and_ps(andReg1, _mm_castsi128_ps(shifted2));
                 return _mm_cvtss_f32(andReg2);
             }
         }
         else if constexpr (sizeof(DataType) == 8)
         {
             const auto shifted = _mm_srli_si128(_register, 8);
-            const auto andReg   = _mm_and_si128(_register, shifted);
+            const auto andReg  = _mm_and_si128(_register, shifted);
             return _mm_cvtsi128_si64(andReg);
         }
         else if constexpr (sizeof(DataType) == 4)
         {
             const auto shifted1 = _mm_srli_si128(_register, 4);
-            const auto andReg1   = _mm_and_si128(_register, shifted1);
+            const auto andReg1  = _mm_and_si128(_register, shifted1);
             if constexpr (LaneCount == 2)
             {
                 return _mm_cvtsi128_si32(andReg1);
@@ -976,14 +976,14 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(andReg1, 8);
-                const auto andReg2   = _mm_and_si128(andReg1, shifted2);
+                const auto andReg2  = _mm_and_si128(andReg1, shifted2);
                 return _mm_cvtsi128_si32(andReg2);
             }
         }
         else if constexpr (sizeof(DataType) == 2)
         {
             const auto shifted1 = _mm_srli_si128(_register, 2);
-            const auto andReg1   = _mm_and_si128(_register, shifted1);
+            const auto andReg1  = _mm_and_si128(_register, shifted1);
             if constexpr (LaneCount == 2)
             {
                 return static_cast<DataType>(_mm_cvtsi128_si32(andReg1));
@@ -991,7 +991,7 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(andReg1, 4);
-                const auto andReg2   = _mm_and_si128(andReg1, shifted2);
+                const auto andReg2  = _mm_and_si128(andReg1, shifted2);
                 if constexpr (LaneCount == 4)
                 {
                     return static_cast<DataType>(_mm_cvtsi128_si32(andReg2));
@@ -999,7 +999,7 @@ namespace falcon
                 else
                 {
                     const auto shifted3 = _mm_srli_si128(andReg2, 8);
-                    const auto andReg3   = _mm_and_si128(andReg2, shifted3);
+                    const auto andReg3  = _mm_and_si128(andReg2, shifted3);
                     return static_cast<DataType>(_mm_cvtsi128_si32(andReg3));
                 }
             }
@@ -1007,7 +1007,7 @@ namespace falcon
         else // if constexpr (sizeof(DataType) == 1)
         {
             const auto shifted1 = _mm_srli_si128(_register, 1);
-            const auto andReg1   = _mm_and_si128(_register, shifted1);
+            const auto andReg1  = _mm_and_si128(_register, shifted1);
             if constexpr (LaneCount == 2)
             {
                 return static_cast<DataType>(_mm_cvtsi128_si32(andReg1));
@@ -1015,7 +1015,7 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(andReg1, 2);
-                const auto andReg2   = _mm_and_si128(andReg1, shifted2);
+                const auto andReg2  = _mm_and_si128(andReg1, shifted2);
                 if constexpr (LaneCount == 4)
                 {
                     return static_cast<DataType>(_mm_cvtsi128_si32(andReg2));
@@ -1023,7 +1023,7 @@ namespace falcon
                 else
                 {
                     const auto shifted3 = _mm_srli_si128(andReg2, 4);
-                    const auto andReg3   = _mm_and_si128(andReg2, shifted3);
+                    const auto andReg3  = _mm_and_si128(andReg2, shifted3);
                     if constexpr (LaneCount == 8)
                     {
                         return static_cast<DataType>(_mm_cvtsi128_si32(andReg3));
@@ -1031,7 +1031,7 @@ namespace falcon
                     else
                     {
                         const auto shifted4 = _mm_srli_si128(andReg3, 8);
-                        const auto andReg4   = _mm_and_si128(andReg3, shifted4);
+                        const auto andReg4  = _mm_and_si128(andReg3, shifted4);
                         return static_cast<DataType>(_mm_cvtsi128_si32(andReg4));
                     }
                 }
@@ -2624,8 +2624,104 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::hasNan()
-        const noexcept
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::abs() noexcept
+    {
+        // There is no intrinsic for floating point abs so we have to use a sign flag mask and use AND
+        // 1 101 1010
+        // 0 111 1111 &
+        // 0 101 1010
+
+        // For integral we can use the trick mention in Hackers Delight[2-4]
+        // y = x a>> (sizeof(DataType) * 8 - 1) (for int32 its y = x >> 31)
+        // (x xor y) - y
+        // -7  1001
+        // t = 1111 xor
+        //   = 0110
+        //   = 1111 -
+        //   = 0111 (7)
+        if constexpr (std::is_unsigned_v<DataType>)
+        {
+            return Simd128(_register);
+        }
+        else if constexpr (types::IsFP64<DataType>)
+        {
+            // We can take the abs of a register by using a flag mask and ANDing it with our register.
+            const auto flagMask    = _mm_set1_epi64x(0x7FFFFFFFFFFFFFFF); // 0b0111..1111
+            const auto integralReg = _mm_castpd_si128(_register);
+            const auto absReg      = _mm_and_si128(integralReg, flagMask);
+            return Simd128(_mm_castsi128_pd(absReg));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            // We can take the abs of a register by using a flag mask and ANDing it with our register.
+            const auto flagMask    = _mm_set1_epi32(0x7FFFFFFF); // 0b0111..1111
+            const auto integralReg = _mm_castps_si128(_register);
+            const auto absReg      = _mm_and_si128(integralReg, flagMask);
+            return Simd128(_mm_castsi128_ps(absReg));
+        }
+        else if constexpr (types::IsQWord<DataType>)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+            {
+                return Simd128(_mm_abs_epi64(_register));
+            }
+            else
+            {
+                // t = x a>> 63; abs = (x xor t) - t;
+                const auto t      = *shiftRightArithmetic<63>();
+                const auto xorReg = _mm_xor_si128(_register, t);
+                return Simd128(_mm_sub_epi64(xorReg, t));
+            }
+        }
+        else if constexpr (types::IsDWord<DataType>)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                return Simd128(_mm_abs_epi32(_register));
+            }
+            else
+            {
+                // t = x a>> 31; abs = (x xor t) - t;
+                const auto t      = *shiftRightArithmetic<31>();
+                const auto xorReg = _mm_xor_si128(_register, t);
+                return Simd128(_mm_sub_epi32(xorReg, t));
+            }
+        }
+        else if constexpr (types::IsWord<DataType>)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                return Simd128(_mm_abs_epi16(_register));
+            }
+            else
+            {
+                // t = x a>> 15; abs = (x xor t) - t;
+                const auto t      = *shiftRightArithmetic<15>();
+                const auto xorReg = _mm_xor_si128(_register, t);
+                return Simd128(_mm_sub_epi16(xorReg, t));
+            }
+        }
+        else // if constexpr (types::IsByte<DataType>)
+        {
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+            {
+                return Simd128(_mm_abs_epi8(_register));
+            }
+            else
+            {
+                // t = x a>> 7; abs = (x xor t) - t;
+                const auto t      = *shiftRightArithmetic<7>();
+                const auto xorReg = _mm_xor_si128(_register, t);
+                return Simd128(_mm_sub_epi8(xorReg, t));
+            }
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::hasNan() const noexcept
     {
         if constexpr (types::IsFP64<DataType>)
         {

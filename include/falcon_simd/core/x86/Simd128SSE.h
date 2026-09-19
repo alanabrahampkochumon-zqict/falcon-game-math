@@ -719,6 +719,15 @@ namespace falcon
         ///       UTILITIES
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
 
+        /**
+         * @brief Compute the absolute value of each entry in this register.
+         * @note For unsigned types the value will not be affected.
+         *
+         * @return A Simd128 register with absolute values.
+         */
+        [[nodiscard]] constexpr Simd128 abs() noexcept;
+
+
         /// @brief Get a mask with the Nan status of each Lane of elements.
         /// @note Integrals always return a zero register.
         [[nodiscard]] constexpr Simd128 hasNan() const noexcept;
