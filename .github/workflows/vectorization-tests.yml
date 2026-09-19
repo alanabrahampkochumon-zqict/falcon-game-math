@@ -105,7 +105,6 @@ jobs:
           -D FALCON_SIMD_COMBINED_TEST_RUN=ON
           -D FGM_BENCHMARK=OFF
           -D FGM_DEMO_RASTERIZER=OFF
-          -D FALCON_SIMD_FMA=FMA3
           -D FGM_DOCS=ON
           -DSDL_UNIX_CONSOLE_BUILD=ON
           -S ${{ github.workspace }}

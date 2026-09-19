@@ -233,56 +233,6 @@ function(AddCompilerFlag Target Visibility Config)
     endif ()
 
     #----------------------
-    # FMA SUPPORT CHECK
-    #----------------------
-    if (FALCON_SIMD_FMA STREQUAL "AUTO")
-        if (MSVC)
-            set(TEST_FLAG_FMA "/arch:AVX2")
-        else ()
-            # GCC / Clang / AppleClang
-            set(TEST_FLAG_FMA "-mavx;-march=native")
-        endif ()
-
-        message(STATUS "Running FMA Extension Tests")
-        try_run(
-                FMA_RUNS
-                FMA_COMPILES
-                ${TEST_COMPILE_DIR}
-                "${TEST_PROG_DIR}/FMATest.cpp"
-                CMAKE_FLAGS
-                "-DCMAKE_CXX_STANDARD=17"
-                "-DCMAKE_CXX_FLAGS=${TEST_FLAG_FMA}"
-                COMPILE_DEFINITIONS ${TEST_FLAG_FMA}
-        )
-
-        if (FMA_RUNS EQUAL 0)
-            message(STATUS "FMA detection success!")
-        else ()
-            message(STATUS "FMA detection failed!")
-        endif ()
-
-        if (FMA_RUNS EQUAL 0)
-            set(FMA_Config FALCON_ENABLE_FMA)
-        endif ()
-    endif ()
-
-    if (FALCON_SIMD_FMA STREQUAL "ENABLED")
-        set(FMA_Config FALCON_ENABLE_FMA)
-    elseif (FALCON_SIMD_FMA STREQUAL "FMA3")
-        set(FMA_Config FALCON_ENABLE_FMA3)
-    elseif (FALCON_SIMD_FMA STREQUAL "FMA4")
-        set(FMA_Config FALCON_ENABLE_FMA4)
-    endif ()
-
-    # Disable FMA if the feature set is not available, like in less than avx architectures, when simd is disabled,
-    # or on neon
-    if (${FALCON_SIMD_MODE} IN_LIST "FALCON_DISABLE_SIMD;FALCON_ENABLE_NEON;FALCON_ENABLE_SSE2;FALCON_ENABLE_SSE4")
-        message(STATUS "FMA disabled due to unsupported ISA. Select an architecture above AVX")
-        unset(FMA_Config)
-    endif ()
-
-
-    #----------------------
     # SETUP COMPILER FLAGS
     #----------------------
     if (Config STREQUAL "FALCON_ENABLE_AVX512EX")
@@ -328,16 +278,75 @@ function(AddCompilerFlag Target Visibility Config)
         return() # Returning so that the flag will not get added!
     endif ()
 
-    if (Config STREQUAL "FALCON_ENABLE_NEON" OR Config STREQUAL "FALCON_DISABLE_SIMD" OR Config STREQUAL "FALCON_ENABLE_SSE2" OR Config STREQUAL "FALCON_ENABLE_SSE4")
-        message(STATUS "ISA doesn't support FMA flag")
-    else ()
-        if (FMA_Config STREQUAL FALCON_ENABLE_FMA)
-            string(APPEND CompilerFlag ";-march=native")
-        elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA3)
-            string(APPEND CompilerFlag ";-mfma")
-        elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA4)
-            string(APPEND CompilerFlag ";-mfma4")
+
+    #----------------------
+    # FMA SUPPORT CHECK
+    #----------------------
+    # Check compiler flag support
+    check_compiler_flag(CXX "-mfma" FMA3_FLAG_SUPPORTED)
+    check_compiler_flag(CXX "-mfma4" FMA4_FLAG_SUPPORTED)
+    check_compiler_flag(CXX "-march=native" ARCH_NATIVE_FLAG_SUPPORTED)
+
+    if (FALCON_SIMD_FMA STREQUAL "AUTO")
+        if (MSVC)
+            set(TEST_FLAG_FMA "/arch:AVX2")
+        else ()
+            # GCC / Clang / AppleClang
+            if (FMA3_FLAG_SUPPORTED)
+                set(TEST_FLAG_FMA "-mavx;-march=native")
+            elseif (FMA4_FLAG_SUPPORTED)
+                set(TEST_FLAG_FMA "-mavx;-march=native")
+            elseif (ARCH_NATIVE_FLAG_SUPPORTED)
+                set(TEST_FLAG_FMA "-mavx;-march=native")
+            else ()
+                message(STATUS "Compiler doesn't support FMA flags. FMA disabled.")
+            endif ()
         endif ()
+
+        if (TEST_FLAG_FMA)
+            message(STATUS "Running FMA Extension Tests")
+            try_run(
+                    FMA_RUNS
+                    FMA_COMPILES
+                    ${TEST_COMPILE_DIR}
+                    "${TEST_PROG_DIR}/FMATest.cpp"
+                    CMAKE_FLAGS
+                    "-DCMAKE_CXX_STANDARD=17"
+                    "-DCMAKE_CXX_FLAGS=${TEST_FLAG_FMA}"
+                    COMPILE_DEFINITIONS ${TEST_FLAG_FMA}
+            )
+            # Turn appropriate FMA Flags if supported
+            if (FMA_RUNS EQUAL 0)
+                message(STATUS "FMA detection success!")
+            else ()
+                message(STATUS "FMA detection failed!")
+            endif ()
+            if (FMA_RUNS EQUAL 0)
+                set(FMA_Config FALCON_ENABLE_FMA)
+            endif ()
+        endif ()
+    endif ()
+
+    # Manual FMA enabling
+    if (FALCON_SIMD_FMA STREQUAL "ENABLED")
+        if (ARCH_NATIVE_FLAG_SUPPORTED)
+            set(FMA_Config FALCON_ENABLE_FMA)
+        else ()
+            message("FMA disabled due to lack of `-march` flag support. Try FMA3 or FMA4 option")
+        endif ()
+    elseif (FALCON_SIMD_FMA STREQUAL "FMA3")
+        set(FMA_Config FALCON_ENABLE_FMA3)
+    elseif (FALCON_SIMD_FMA STREQUAL "FMA4")
+        set(FMA_Config FALCON_ENABLE_FMA4)
+    endif ()
+
+    # Set FMA Compiler flags
+    if (FMA_Config STREQUAL FALCON_ENABLE_FMA)
+        string(APPEND CompilerFlag ";-march=native")
+    elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA3)
+        string(APPEND CompilerFlag ";-mfma")
+    elseif (FMA_Config STREQUAL FALCON_ENABLE_FMA4)
+        string(APPEND CompilerFlag ";-mfma4")
     endif ()
 
 
