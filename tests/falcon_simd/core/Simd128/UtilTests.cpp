@@ -97,7 +97,7 @@ using namespace simd::testing;
         {                                                                                                              \
             falcon::Simd128_t<Type, Lane> regA{ Data };                                                                \
                                                                                                                        \
-            std::array<Type, Lane> resultMask{};                                                                       \
+            alignas(16) std::array<Type, Lane> resultMask{};                                                                       \
             auto regRes = regA.hasNan();                                                                               \
             regRes.storeAligned(resultMask.data());                                                                    \
                                                                                                                        \
