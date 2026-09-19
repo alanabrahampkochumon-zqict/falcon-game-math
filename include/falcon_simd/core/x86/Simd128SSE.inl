@@ -1,4 +1,5 @@
 #pragma once
+#include "Simd128SSE.h"
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon
@@ -2715,6 +2716,85 @@ namespace falcon
                 const auto xorReg = _mm_xor_si128(_register, t);
                 return Simd128(_mm_sub_epi8(xorReg, t));
             }
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                      Lane>::sqrt() noexcept
+    {
+        // For integrals we need to convert them to fp-register, and do the sqrt and then
+        // convert them back with truncation.
+        if constexpr (types::IsFP64<DataType>)
+        {
+            return Simd128(_mm_sqrt_pd(_register));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            return Simd128(_mm_sqrt_ps(_register));
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            // TODO: NOTE: May not provide enough precision for unsigned integral so update
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+            {
+                const auto doubleReg = _mm_cvtepi64_pd(_register);
+                const auto sqrt      = _mm_sqrt_pd(doubleReg);
+                return Simd128(_mm_cvttpd_epi64(sqrt));
+            }
+            else
+            {
+                // TODO: Update to Newton's method if its faster
+                // There must only 2 lanes for 8-bit integrals
+                alignas(16) std::array<DataType, 2> array{};
+                storeAligned(array.data());
+                return Simd128(static_cast<DataType>(std::sqrt(array[0])), static_cast<DataType>(std::sqrt(array[1])));
+            }
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+            // For EPI32 we need to
+            const auto doubleReg1 = _mm_cvtepi32_pd(_register);
+            const auto sqrt1      = _mm_sqrt_pd(doubleReg1);
+            if constexpr (Lane == 2)
+            {
+                return Simd128(_mm_cvttpd_epi32(sqrt1));
+            }
+            else
+            {
+                return Simd128(_mm_cvttpd_epi32(sqrt1));
+            }
+        }
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            // For Epi16 we need to unpack to a 32-integral register,
+            // convert it to a float register, perform the sqrt and then pack it back into a 16-bit integral register.
+            // We only need to sqrt with the lower lane if lane count is less than or equal to 4.
+
+            // We can use t = x >> 31; sign mask x xor x >> 31 to extract the sign bits.
+            const auto int32RegLo = _mm_unpacklo_epi16(_register, _mm_setzero_si128());
+            const auto floatRegLo = _mm_cvtepi32_ps(int32RegLo);
+            const auto sqrtLo     = _mm_sqrt_ps(floatRegLo);
+            const auto intSqrtLo  = _mm_cvttps_epi32(sqrtLo);
+            if constexpr (Lane <= 4)
+            {
+                return Simd128(_mm_packs_epi32(intSqrtLo, _mm_setzero_si128()));
+            }
+            else
+            {
+                // If there are 8 lanes then we need to do the same operations on upper lane as well
+                // Unpack and sqrt the upper lane
+                const auto int32RegHi = _mm_unpackhi_epi16(_register, _mm_setzero_si128());
+                const auto floatRegHi = _mm_cvtepi32_ps(int32RegHi);
+                const auto sqrtHi     = _mm_sqrt_ps(floatRegHi);
+                const auto intSqrtHi  = _mm_cvttps_epi32(sqrtHi);
+                return Simd128(_mm_packs_epi32(intSqrtLo, intSqrtHi));
+            }
+        }
+        else
+        {
+            return *this;
         }
     }
 

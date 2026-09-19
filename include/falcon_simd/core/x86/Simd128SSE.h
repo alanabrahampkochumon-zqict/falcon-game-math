@@ -728,6 +728,14 @@ namespace falcon
         [[nodiscard]] constexpr Simd128 abs() noexcept;
 
 
+        /**
+         * @brief Compute the square root value of each entry in this register.
+         *
+         * @return A Simd128 register with square root of values, rounded to the same target type.
+         */
+        [[nodiscard]] constexpr Simd128 sqrt() noexcept;
+
+
         /// @brief Get a mask with the Nan status of each Lane of elements.
         /// @note Integrals always return a zero register.
         [[nodiscard]] constexpr Simd128 hasNan() const noexcept;

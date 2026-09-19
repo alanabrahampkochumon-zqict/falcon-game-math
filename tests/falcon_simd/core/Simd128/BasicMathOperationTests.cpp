@@ -150,8 +150,7 @@ TYPED_TEST(Simd128BasicMathTests, Abs_ReturnsARegisterWithAbsoluteValues)
 }
 
 
-/// @test Verify that abs(member function) return the absolute value of data types from the register.
-TYPED_TEST(Simd128BasicMathTests, MemberAbsFunction_ReturnsARegisterWithAbsoluteValues)
+TYPED_TEST(Simd128BasicMathTests, MemberSqrtFunction_ReturnsARegisterWithSquareRootValues)
 {
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
@@ -159,22 +158,14 @@ TYPED_TEST(Simd128BasicMathTests, MemberAbsFunction_ReturnsARegisterWithAbsolute
     alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        data[i] = this->absData[i];
-
-        if constexpr (std::is_unsigned_v<Type>)
-        {
-            expected[i] = data[i];
-        }
-        else
-        {
-            expected[i] = data[i] < 0 ? data[i] * -1 : data[i];
-        }
+        data[i]     = this->a[i];
+        expected[i] = static_cast<Type>(std::sqrt(data[i]));
     }
 
     falcon::Simd128_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
-    auto regRes = reg.abs();
+    auto regRes = reg.sqrt();
     regRes.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
