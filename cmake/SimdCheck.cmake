@@ -283,12 +283,12 @@ function(AddCompilerFlag Target Visibility Config)
     # FMA SUPPORT CHECK
     #----------------------
     # Check compiler flag support
-    check_compiler_flag(CXX "-mfma" FMA3_FLAG_SUPPORTED)
-    check_compiler_flag(CXX "-mfma4" FMA4_FLAG_SUPPORTED)
-    check_compiler_flag(CXX "-march=native" ARCH_NATIVE_FLAG_SUPPORTED)
+    check_cxx_compiler_flag(CXX "-mfma" FMA3_FLAG_SUPPORTED)
+    check_cxx_compiler_flag(CXX "-mfma4" FMA4_FLAG_SUPPORTED)
+    check_cxx_compiler_flag(CXX "-march=native" ARCH_NATIVE_FLAG_SUPPORTED)
 
     if (FALCON_SIMD_FMA STREQUAL "AUTO")
-        if (MSVC)
+        if (MSVC AND NOT (Config STREQUAL "FALCON_DISABLE_SIMD" OR Config STREQUAL "FALCON_ENABLE_SSE2" OR Config STREQUAL "FALCON_ENABLE_SSE4" OR Config STREQUAL "FALCON_ENABLE_AVX"))
             set(TEST_FLAG_FMA "/arch:AVX2")
         else ()
             # GCC / Clang / AppleClang
