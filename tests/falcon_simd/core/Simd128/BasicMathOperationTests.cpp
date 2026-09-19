@@ -69,6 +69,34 @@ TYPED_TEST(Simd128BasicMathTests, Min_ReturnsARegisterWithMinimumValuesFromEithe
     }
 }
 
+TYPED_TEST(Simd128BasicMathTests, Max_ReturnsARegisterWithMinimumValuesFromEitherRegister)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        lhs[i]      = this->a[i];
+        rhs[i]      = this->b[i];
+        expected[i] = std::max(lhs[i], rhs[i]);
+    }
+
+    falcon::Simd128_t<Type, Lane> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    auto regRes = falcon::max(regA, regB);
+
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+
 
 #endif
 
