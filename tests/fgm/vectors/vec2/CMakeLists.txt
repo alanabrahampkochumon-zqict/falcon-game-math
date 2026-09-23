@@ -14,7 +14,7 @@ target_sources(
         MagnitudeTests.cpp
         # NormalizationTests.cpp
         # PNormTests.cpp
-        # ProductTests.cpp
+        ProductTests.cpp
         # ProjectionTests.cpp
         # RejectionTests.cpp
         # StringRepresentationTests.cpp

@@ -933,51 +933,41 @@ namespace fgm
         /** @} */
 
 
-        //         /**
-        //          * @addtogroup FGM_Vec2_Product
-        //          * @{
-        //          */
-        //
-        //         /**
-        //          * @brief Compute the dot product with another vector.
-        //          *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$
-        //          *
-        //          * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The vector to compute the dot product with.
-        //          *
-        //          * @return The scalar dot product of the two vectors.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr PromotedValue_t<T, U> dot(const Vec2<U>& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the dot product of two vectors.
-        //          *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$
-        //          *
-        //          * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] lhs The first vector to compute the dot product with.
-        //          * @param[in] rhs The second vector to compute the dot product with.
-        //          *
-        //          * @return The scalar dot product of @p lhs and @p rhs.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr PromotedValue_t<T, U> dot(const Vec2& lhs, const Vec2<U>& rhs)
-        //         noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
+        /**
+         * @addtogroup FGM_Vec2_Product
+         * @{
+         */
+
+        /**
+         * @brief Compute the dot product with another vector.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @param[in] rhs The vector to compute the dot product with.
+         *
+         * @return The scalar dot product of the two vectors.
+         */
+        [[nodiscard]] constexpr T dot(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the dot product of two vectors.
+         *        \f$ \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{2} a_i b_i \f$
+         *
+         * @note Operation is restricted to numeric types via @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first vector to compute the dot product with.
+         * @param[in] rhs The second vector to compute the dot product with.
+         *
+         * @return The scalar dot product of @p lhs and @p rhs.
+         */
+        [[nodiscard]] static constexpr T dot(const Vec2& lhs, const Vec2& rhs)
+        noexcept
+            requires StrictArithmetic<T>;
+
+
         //         /**
         //          * @brief Compute the tensor product with another vector.
         //          *        \f$ \mathbf{u} \otimes \mathbf{v} = u v^\top \f$
@@ -1053,9 +1043,9 @@ namespace fgm
         //         template <SignedStrictArithmetic U>
         //         static constexpr PromotedValue_t<T, U> cross(const Vec2& lhs, const Vec2<U>& rhs) noexcept
         //             requires SignedStrictArithmetic<T>;
-        //
-        //         /** @} */
-        //
+
+        /** @} */
+
 
         /**
          * @addtogroup FGM_Vec2_Mag

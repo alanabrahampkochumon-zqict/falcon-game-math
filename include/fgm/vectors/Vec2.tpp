@@ -639,6 +639,26 @@ namespace fgm
 
 
 
+    /*************************************
+     *        VECTOR DOT PRODUCT         *
+     *************************************/
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::dot([[maybe_unused]] const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        const auto product = _data * rhs._data;
+        return product.horizontalAdd();
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::dot(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.dot(rhs); }
+
+
+
     /**************************************
      *           EUCLIDEAN NORM           *
      **************************************/
