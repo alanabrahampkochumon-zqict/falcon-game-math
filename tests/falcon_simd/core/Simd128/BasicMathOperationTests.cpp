@@ -214,12 +214,32 @@ TYPED_TEST(Simd128BasicMathTests, HorizontalMax_ReturnsTheMaxValueFromTheRegiste
         max     = std::max(max, data[i]);
     }
 
-    falcon::Simd128_t<Type, Lane> reg;
-    reg.loadAligned(data.data());
+    falcon::Simd128_t<Type, Lane> reg{ data };
 
     auto res = reg.horizontalMax();
 
     EXPECT_ANY_EQ(max, res);
+}
+
+/// @test Verify that horizontal min return the minimum element from the register.
+TYPED_TEST(Simd128BasicMathTests, HorizontalMin_ReturnsTheMaxValueFromTheRegister)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> data{};
+    Type min = std::numeric_limits<Type>::max();
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = this->absData[i];
+        min     = std::min(min, data[i]);
+    }
+
+    falcon::Simd128_t<Type, Lane> reg{ data };
+
+    auto res = reg.horizontalMin();
+
+    EXPECT_ANY_EQ(min, res);
 }
 
 
