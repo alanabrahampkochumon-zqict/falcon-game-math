@@ -2742,7 +2742,9 @@ namespace falcon
             storeAligned(array.data());
             return Simd128(static_cast<DataType>(std::sqrt(array[0])), static_cast<DataType>(std::sqrt(array[1])));
         }
-        else if constexpr (sizeof(DataType) == 4)
+        // Since there is no epu32 to pd instruction we need to split paths for unsigned
+        // and signed 32-bit integers
+        else if constexpr (types::IsDWord<DataType>)
         {
             // For EPI32 we need to convert them to 64-bit integrals and then to doubles
             // to ensure minimal precision loss.
@@ -2755,15 +2757,16 @@ namespace falcon
             }
             else
             {
-                const auto mask         = _mm_set_epi32(0x00, 0x00, 0xFFFFFFFF, 0xFFFFFFFF);
-                intSqrtLo               = _mm_and_si128(intSqrtLo, mask);
                 const auto shifted      = _mm_srli_si128(_register, 8);
                 const auto doubleRegHi  = _mm_cvtepi32_pd(shifted);
                 const auto sqrtHi       = _mm_sqrt_pd(doubleRegHi);
                 const auto intSqrtHi    = _mm_cvttpd_epi32(sqrtHi);     // (0, 0, D, C)
-                const auto shiftedUpper = _mm_slli_si128(intSqrtHi, 8); // (D, C, 0, 0)
-                return Simd128(_mm_or_si128(intSqrtLo, intSqrtHi));     // (D, C, B, A)
+                return Simd128(_mm_unpacklo_epi64(intSqrtLo, intSqrtHi));     // (D, C, B, A)
             }
+        }
+        else if constexpr (types::IsUDWord<DataType>)
+        {
+            return *this;
         }
         else if constexpr (sizeof(DataType) == 2)
         {
