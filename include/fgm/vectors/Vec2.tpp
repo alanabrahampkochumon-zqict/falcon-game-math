@@ -845,44 +845,7 @@ namespace fgm
     { return lhs.chebyshevDist(rhs); }
 
 
-    //     /*************************************
-    //      *                                   *
-    //      *        VECTOR DOT PRODUCT         *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::dot(const Vec2& rhs) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    // #if defined(FP_FAST_FMA) || defined(FP_FAST_FMAF) || defined(__FMA__) || defined(__FMA4__) || defined(__AVX2__)
-    //         using R = PromotedValue_t<T, U>;
-    //         if constexpr (std::is_floating_point_v<R>)
-    //         {
-    //             return std::fma(static_cast<R>(_data[0]), static_cast<R>(rhs[0]),
-    //                             std::fma(static_cast<R>(_data[1]), static_cast<R>(rhs[1]), T(0)));
-    //         }
-    //         else
-    //         {
-    //             return _data[0] * rhs[0] + _data[1] * rhs[1];
-    //         }
-    // #else
-    //         return _data[0] * rhs[0] + _data[1] * rhs[1];
-    // #endif
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::dot(const Vec2& lhs, const Vec2& rhs) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return lhs.dot(rhs); }
-    //
-    //
-    //
+    // TODO: Add vec2 inner product after adding Mat2
     //     /*************************************
     //      *                                   *
     //      *        VECTOR INNER PRODUCT       *
@@ -931,76 +894,9 @@ namespace fgm
     //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::cross(const Vec2& lhs, const Vec2& rhs) noexcept
     //         requires SignedStrictArithmetic<T>
     //     { return lhs.cross(rhs); }
-    //
-    //
-    //     /*************************************
-    //      *                                   *
-    //      *         VECTOR MAGNITUDE          *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Magnitude<T> Vec2<T>::mag() const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using M = Magnitude<T>;
-    //
-    //         M tX = static_cast<M>(_data[0]);
-    //         M tY = static_cast<M>(_data[1]);
-    //
-    //         return sqrt(tX * tX + tY * tY);
-    //     }
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Magnitude<T> Vec2<T>::mag(const Vec2& vec) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.mag(); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr T Vec2<T>::magSq() const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         // return _data[0] * _data[0] + _data[1] * _data[1];
-    //         return this->dot(*this);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr T Vec2<T>::magSq(const Vec2& vec) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.magSq(); }
-    //
-    //
-    //     /**************************************
-    //      *                                    *
-    //      *           MANHATTAN NORM           *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr T Vec2<T>::manhattanNorm() const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return fgm::abs(_data[0]) + fgm::abs(_data[1]); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr T Vec2<T>::manhattanNorm(const Vec2& vec) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.manhattanNorm(); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr T Vec2<T>::chebyshevNorm() const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return std::max(fgm::abs(_data[0]), fgm::abs(_data[1])); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr T Vec2<T>::chebyshevNorm(const Vec2& vec) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.chebyshevNorm(); }
-    //
+
+
+    
     //     /*************************************
     //      *                                   *
     //      *       VECTOR NORMALIZATION        *
