@@ -64,6 +64,20 @@ namespace falcon
     template <typename DataType, size_t Lane>
     [[nodiscard]] constexpr _REG_128_SSE<DataType, Lane> abs(_REG_128_SSE<DataType, Lane> reg) noexcept;
 
+
+    /**
+     * @brief Compute the square root of each entry in the register.
+     *
+     * @tparam DataType The data type of the Simd128 register.
+     * @tparam Lane     The number of lanes of the Simd128 register.
+     *
+     * @param reg The register.
+     *
+     * @return A Simd128 register with square root of each entry.
+     */
+    template <typename DataType, size_t Lane>
+    [[nodiscard]] constexpr _REG_128_SSE<DataType, Lane> sqrt(_REG_128_SSE<DataType, Lane> reg) noexcept;
+
 } // namespace falcon
 
 #include "Simd128X86Math.inl"

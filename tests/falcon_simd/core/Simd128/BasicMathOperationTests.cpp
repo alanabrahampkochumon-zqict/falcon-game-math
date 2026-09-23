@@ -173,6 +173,31 @@ TYPED_TEST(Simd128BasicMathTests, MemberSqrtFunction_ReturnsARegisterWithSquareR
     }
 }
 
+/// @test Verify that the non member variant of sqrt function returns the sqrt of the register values.
+TYPED_TEST(Simd128BasicMathTests, Sqrt_ReturnsARegisterWithSquareRootValues)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i]     = this->a[i];
+        expected[i] = static_cast<Type>(std::sqrt(data[i]));
+    }
+
+    falcon::Simd128_t<Type, Lane> reg;
+    reg.loadAligned(data.data());
+
+    auto regRes = falcon::sqrt(reg);
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
 
 
 /// @test Verify that horizontal max return the maximum element from the register.
