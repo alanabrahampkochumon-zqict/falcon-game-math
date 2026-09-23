@@ -783,6 +783,17 @@ namespace falcon
         /// @tparam Count The shift amount.
         template <uint32_t Count>
         static constexpr __m128i _mm_srai_epi8_custom(__m128i reg) noexcept;
+
+        /// @brief Unpack the lower lanes of the integral register into the next power of 2 (16->32).
+        ///        with sign saturation.
+        /// @note This has no effect on the 64-bit integrals.
+        static constexpr __m128i _mm_unpacklo_saturated_custom(__m128i reg) noexcept;
+
+
+        /// @brief Unpack the upper lanes of the integral register into the next power of 2 (16->32)
+        ///        with sign saturation.
+        /// @note This has no effect on the 64-bit integrals.
+        static constexpr __m128i _mm_unpackhi_saturated_custom(__m128i reg) noexcept;
     };
 
 } // namespace falcon
