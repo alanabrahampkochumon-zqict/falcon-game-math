@@ -719,13 +719,17 @@ namespace falcon
         ///       UTILITIES
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
 
+
+        /// @brief Get the maximum value from this register.
+        [[nodiscard]] constexpr DataType horizontalMax() const noexcept;
+
         /**
          * @brief Compute the absolute value of each entry in this register.
          * @note For unsigned types the value will not be affected.
          *
          * @return A Simd128 register with absolute values.
          */
-        [[nodiscard]] constexpr Simd128 abs() noexcept;
+        [[nodiscard]] constexpr Simd128 abs() const noexcept;
 
 
         /**
@@ -733,7 +737,7 @@ namespace falcon
          *
          * @return A Simd128 register with square root of values, rounded to the same target type.
          */
-        [[nodiscard]] constexpr Simd128 sqrt() noexcept;
+        [[nodiscard]] constexpr Simd128 sqrt() const noexcept;
 
 
         /// @brief Get a mask with the Nan status of each Lane of elements.

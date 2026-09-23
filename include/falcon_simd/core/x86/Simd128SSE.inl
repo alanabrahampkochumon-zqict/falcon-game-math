@@ -1,5 +1,4 @@
 #pragma once
-#include "Simd128SSE.h"
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon
@@ -2625,8 +2624,122 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
+    constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalMax() const noexcept
+    {
+        // There is no dedicated horizontal OR so we need to shuffle or shift the registers
+        // and or them together.
+        if constexpr (types::IsFP64<DataType>)
+        {
+            const auto shifted = _mm_srli_si128(_mm_castpd_si128(_register), 8);
+            const auto maxReg  = *falcon::max(*this, Simd128(_mm_castsi128_pd(shifted)));
+            return _mm_cvtsd_f64(maxReg);
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            // For floats we need to do 2 shifts
+            // A,         B, C, D
+            // 0,         A, B, C
+            // _, max(A, B), _, max(C, D)
+            // _,         _, _, max(A, B)
+            // _,         _, _, max(A, B, C, D)
+            // But if only two lanes are filled, we can do just 1 shift return the value from lower lane.
+            const auto shifted1 = _mm_srli_si128(_mm_castps_si128(_register), 4);
+            const auto maxReg1  = *falcon::max(*this, Simd128(_mm_castsi128_ps(shifted1)));
+            if constexpr (LaneCount == 2)
+            {
+                return _mm_cvtss_f32(maxReg1);
+            }
+            else
+            {
+                const auto shifted2 = _mm_srli_si128(_mm_castps_si128(maxReg1), 8);
+                const auto maxReg2  = *falcon::max(Simd128(maxReg1), Simd128(_mm_castsi128_ps(shifted2)));
+                return _mm_cvtss_f32(maxReg2);
+            }
+        }
+        else if constexpr (sizeof(DataType) == 8)
+        {
+            const auto shifted = _mm_srli_si128(_register, 8);
+            const auto maxReg  = *falcon::max(*this, Simd128(shifted));
+            return _mm_cvtsi128_si64(maxReg);
+        }
+        else if constexpr (sizeof(DataType) == 4)
+        {
+            const auto shifted1 = _mm_srli_si128(_register, 4);
+            const auto maxReg1  = *falcon::max(*this, Simd128(shifted1));
+            if constexpr (LaneCount == 2)
+            {
+                return _mm_cvtsi128_si32(maxReg1);
+            }
+            else
+            {
+                const auto shifted2 = _mm_srli_si128(maxReg1, 8);
+                const auto maxReg2  = *falcon::max(Simd128(maxReg1), Simd128(shifted2));
+                return _mm_cvtsi128_si32(maxReg2);
+            }
+        }
+        else if constexpr (sizeof(DataType) == 2)
+        {
+            const auto shifted1 = _mm_srli_si128(_register, 2);
+            const auto maxReg1  = *falcon::max(*this, Simd128(shifted1));
+            if constexpr (LaneCount == 2)
+            {
+                return static_cast<DataType>(_mm_cvtsi128_si32(maxReg1));
+            }
+            else
+            {
+                const auto shifted2 = _mm_srli_si128(maxReg1, 4);
+                const auto maxReg2  = *falcon::max(Simd128(maxReg1), Simd128(shifted2));
+                if constexpr (LaneCount == 4)
+                {
+                    return static_cast<DataType>(_mm_cvtsi128_si32(maxReg2));
+                }
+                else
+                {
+                    const auto shifted3 = _mm_srli_si128(maxReg2, 8);
+                    const auto maxReg3  = *falcon::max(Simd128(maxReg2), Simd128(shifted3));
+                    return static_cast<DataType>(_mm_cvtsi128_si32(maxReg3));
+                }
+            }
+        }
+        else // if constexpr (sizeof(DataType) == 1)
+        {
+            const auto shifted1 = _mm_srli_si128(_register, 1);
+            const auto maxReg1  = *falcon::max(*this, Simd128(shifted1));
+            if constexpr (LaneCount == 2)
+            {
+                return static_cast<DataType>(_mm_cvtsi128_si32(maxReg1));
+            }
+            else
+            {
+                const auto shifted2 = _mm_srli_si128(maxReg1, 2);
+                const auto maxReg2  = *falcon::max(Simd128(maxReg1), Simd128(shifted2));
+                if constexpr (LaneCount == 4)
+                {
+                    return static_cast<DataType>(_mm_cvtsi128_si32(maxReg2));
+                }
+                else
+                {
+                    const auto shifted3 = _mm_srli_si128(maxReg2, 4);
+                    const auto maxReg3  = *falcon::max(Simd128(maxReg2), Simd128(shifted3));
+                    if constexpr (LaneCount == 8)
+                    {
+                        return static_cast<DataType>(_mm_cvtsi128_si32(maxReg3));
+                    }
+                    else
+                    {
+                        const auto shifted4 = _mm_srli_si128(maxReg3, 8);
+                        const auto maxReg4  = *falcon::max(Simd128(maxReg3), Simd128(shifted4));
+                        return static_cast<DataType>(_mm_cvtsi128_si32(maxReg4));
+                    }
+                }
+            }
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
-                                                                                    Lane>::abs() noexcept
+                                                                                    Lane>::abs() const noexcept
     {
         // There is no intrinsic for floating point abs so we have to use a sign flag mask and use AND
         // 1 101 1010
@@ -2721,8 +2834,8 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
-                                                                      Lane>::sqrt() noexcept
+    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::sqrt()
+        const noexcept
     {
         // For integrals we need to convert them to fp-register, and do the sqrt and then
         // convert them back with truncation.

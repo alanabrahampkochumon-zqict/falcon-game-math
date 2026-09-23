@@ -50,7 +50,6 @@ namespace
                 absExpected = { max, min, max, min, -5, 11, -15, 0, -1, 2, -5, 12, -14, 3, -15, 12 };
             }
         }
-        // TODO: Add separate data for abs.
     };
     TYPED_TEST_SUITE(Simd128BasicMathTests, Simd128RegisterTypeHints);
 
@@ -172,6 +171,30 @@ TYPED_TEST(Simd128BasicMathTests, MemberSqrtFunction_ReturnsARegisterWithSquareR
     {
         EXPECT_ANY_EQ(expected[i], result[i]);
     }
+}
+
+
+
+/// @test Verify that horizontal max return the maximum element from the register.
+TYPED_TEST(Simd128BasicMathTests, HorizontalMax_ReturnsTheMaxValueFromTheRegister)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> data{};
+    Type max = std::numeric_limits<Type>::min();
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = this->absData[i];
+        max     = std::max(max, data[i]);
+    }
+
+    falcon::Simd128_t<Type, Lane> reg;
+    reg.loadAligned(data.data());
+
+    auto res = reg.horizontalMax();
+
+    EXPECT_ANY_EQ(max, res);
 }
 
 
