@@ -638,6 +638,122 @@ namespace fgm
     { return vec.tryDiv(scalar, status); }
 
 
+
+    /**************************************
+     *         VECTOR DISTANCE            *
+     **************************************/
+
+    /**************************************
+     *             EUCLIDEAN              *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::dist(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        // sqrt((x2 - x1)^2 + (y2 - y1)^2)
+        return static_cast<T>(std::sqrt(distSq(rhs)));
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::dist(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.dist(rhs); }
+
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::distSq(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        // (x2 - x1)^2 + (y2 - y1)^2
+        const auto diff        = rhs._data - _data;
+        const auto squaredDiff = diff * diff;
+        return squaredDiff.horizontalAdd();
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::distSq(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.distSq(rhs); }
+
+
+    /**************************************
+     *             MANHATTAN              *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::manhattanDist(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        // For unsigned integrals taking difference and then abs will cause wrap around
+        // when the difference is negative.
+        // To circumvent this, we can take both differences and selectively take
+        // whichever is greater.
+        if constexpr (std::is_signed_v<T>)
+        {
+            const auto diff = rhs._data - _data;
+            const auto abs  = diff.abs();
+            return abs.horizontalAdd();
+        }
+        else
+        {
+            // For unsigned number we need to manually do diff abs a mask and selection
+            // a > b ? a - b : b - a
+            const auto diff1 = rhs._data - _data; // b - a
+            const auto diff2 = _data - rhs._data; // a - b
+            const auto mask  = _data > rhs._data; // a > b
+            const auto abs   = diff1.blend(diff2, mask);
+            return abs.horizontalAdd();
+        }
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::manhattanDist(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.manhattanDist(rhs); }
+
+
+
+    /**************************************
+     *             CHEBYSHEV              *
+     **************************************/
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::chebyshevDist(const Vec2& rhs) const noexcept
+        requires StrictArithmetic<T>
+    {
+        // For unsigned integrals taking difference and then abs will cause wrap around
+        // when the difference is negative.
+        // To circumvent this, we can take both differences and selectively take
+        // whichever is greater.
+        if constexpr (std::is_signed_v<T>)
+        {
+            const auto diff = rhs._data - _data;
+            const auto abs  = diff.abs();
+            return abs.horizontalMax();
+        }
+        else
+        {
+            // For unsigned number we need to manually do diff abs a mask and selection
+            // a > b ? a - b : b - a
+            const auto diff1 = rhs._data - _data; // b - a
+            const auto diff2 = _data - rhs._data; // a - b
+            const auto mask  = _data > rhs._data; // a > b
+            const auto abs   = diff1.blend(diff2, mask);
+            return abs.horizontalMax();
+        }
+    }
+
+
+    template <Arithmetic T>
+    constexpr T Vec2<T>::chebyshevDist(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires StrictArithmetic<T>
+    { return lhs.chebyshevDist(rhs); }
+
+
     //     /*************************************
     //      *                                   *
     //      *        VECTOR DOT PRODUCT         *

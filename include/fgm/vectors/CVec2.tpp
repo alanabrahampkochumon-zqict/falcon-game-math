@@ -931,7 +931,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FALCON_INLINE constexpr PromotedValue_t<T, U> CVec2<T>::distSq(const CVec2<U>& lhs, const CVec2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedValue_t<T, U> CVec2<T>::distSq(const CVec2& lhs, const CVec2<U>& rhs) noexcept
         requires StrictArithmetic<T>
     { return lhs.distSq(rhs); }
 
@@ -954,7 +954,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FALCON_INLINE constexpr PromotedValue_t<T, U> CVec2<T>::manhattanDist(const CVec2<U>& lhs, const CVec2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedValue_t<T, U> CVec2<T>::manhattanDist(const CVec2& lhs, const CVec2<U>& rhs) noexcept
         requires StrictArithmetic<T>
     { return lhs.manhattanDist(rhs); }
 
@@ -977,7 +977,7 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FALCON_INLINE constexpr PromotedValue_t<T, U> CVec2<T>::chebyshevDist(const CVec2<U>& lhs, const CVec2<U>& rhs) noexcept
+    FALCON_INLINE constexpr PromotedValue_t<T, U> CVec2<T>::chebyshevDist(const CVec2& lhs, const CVec2<U>& rhs) noexcept
         requires StrictArithmetic<T>
     { return lhs.chebyshevDist(rhs); }
 

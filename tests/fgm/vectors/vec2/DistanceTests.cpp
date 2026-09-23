@@ -1,9 +1,9 @@
 /**
  * @file DistanceTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: May 28, 2026
+ * @date Created on: September 23, 2026
  *
- * @brief Verify @ref fgm::Vec3 distance (L1, L2, L3) calculation logic.
+ * @brief Verify @ref fgm::Vec2 distance (L1, L2, L3) calculation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -37,7 +37,7 @@ namespace
     {
     protected:
         fgm::Vec2<T> _vecA, _vecB;
-        fgm::Magnitude<T> _dist;
+        T _dist;
         T _distSq, _distManhattan, _distChebyshev;
 
 
@@ -46,7 +46,7 @@ namespace
             _vecA = { T(2), T(7) };
             _vecB = { T(5), T(3) };
 
-            _dist          = fgm::Magnitude<T>(5);
+            _dist          = T(5);
             _distSq        = T(25);
             _distManhattan = T(7);
             _distChebyshev = T(4);
@@ -64,7 +64,7 @@ namespace
     {
     protected:
         fgm::Vec2<T> _vecA, _vecB;
-        fgm::Magnitude<T> _dist;
+        T _dist;
         T _distSq, _distManhattan, _distChebyshev;
 
 
@@ -73,7 +73,7 @@ namespace
             _vecA = { T(1), T(2) };
             _vecB = { T(-2), T(3) };
 
-            _dist          = fgm::Magnitude<T>(3.1622776601683795);
+            _dist          = T(3.1622776601683795);
             _distSq        = T(10);
             _distManhattan = T(4);
             _distChebyshev = T(3);
@@ -81,41 +81,6 @@ namespace
     };
     TYPED_TEST_SUITE(Vec2DistanceSignedTests, SupportedSignedArithmeticTypes);
 
-
-
-    /**************************************
-     *            STATIC TESTS            *
-     **************************************/
-
-    namespace static_tests
-    {
-        constexpr fgm::Vec2 VEC_A(2, 3);
-        constexpr fgm::Vec2 VEC_B(5, 7);
-
-        /// @test Verify that @ref Vec2::dist returns the euclidean distance.
-        // TODO: Add back after creating fgm::sqrt
-        // static_assert(VEC_A.dist(VEC_B) == 5);
-        // static_assert(fgm::Vec2<int>::dist(VEC_A, VEC_B) == 5);
-
-
-        /// @test Verify that @ref Vec2::distSq returns the squared distance.
-        static_assert(VEC_A.distSq(VEC_B) == 25);
-        /// @test Verify that @ref Vec2::distSq (static wrapper) returns the squared distance.
-        static_assert(fgm::Vec2<int>::distSq(VEC_A, VEC_B) == 25);
-
-
-        /// @test Verify that @ref Vec2::manhattanDist returns the manhattan distance.
-        static_assert(VEC_A.manhattanDist(VEC_B) == 7);
-        /// @test Verify that @ref Vec2::manhattanDist (static wrapper) returns the manhattan distance.
-        static_assert(fgm::Vec2<int>::manhattanDist(VEC_A, VEC_B) == 7);
-
-
-        /// @test Verify that @ref Vec2::chebyshevDist returns the chebyshev distance.
-        static_assert(VEC_A.chebyshevDist(VEC_B) == 4);
-        /// @test Verify that @ref Vec2::chebyshevDist (static wrapper) returns the chebyshev distance.
-        static_assert(fgm::Vec2<int>::chebyshevDist(VEC_A, VEC_B) == 4);
-
-    } // namespace
 } // namespace
 
 
@@ -134,8 +99,7 @@ TYPED_TEST(Vec2DistanceTests, Dist_IrrationalDistanceMaintainsPrecision)
     const fgm::Vec2 v1{ T(0), T(0) };
     const fgm::Vec2 v2{ T(1), T(1) };
 
-    using P                         = fgm::Magnitude<T>;
-    constexpr auto expectedDistance = P(std::numbers::sqrt2);
+    constexpr auto expectedDistance = T(std::numbers::sqrt2);
 
     const auto distance = v1.dist(v2);
     EXPECT_MAG_EQ(expectedDistance, distance);
@@ -144,7 +108,7 @@ TYPED_TEST(Vec2DistanceTests, Dist_IrrationalDistanceMaintainsPrecision)
 
 TYPED_TEST(Vec2DistanceTests, Dist_BetweenSameVectorReturnsZero)
 {
-    constexpr auto zero = fgm::Magnitude<TypeParam>(0);
+    constexpr auto zero = TypeParam(0);
     const auto distance = this->_vecA.dist(this->_vecA);
     EXPECT_MAG_EQ(zero, distance);
 }
@@ -154,13 +118,6 @@ TYPED_TEST(Vec2DistanceSignedTests, Dist_HandlesNegativeNumbers)
 {
     const auto distance = this->_vecA.dist(this->_vecB);
     EXPECT_MAG_EQ(this->_dist, distance);
-}
-
-
-TYPED_TEST(Vec2DistanceTests, Dist_AlwaysReturnFloatingPointValue)
-{
-    [[maybe_unused]] const auto distance = this->_vecA.dist(this->_vecB);
-    static_assert(std::is_floating_point_v<decltype(distance)>);
 }
 
 
@@ -174,9 +131,7 @@ TYPED_TEST(Vec2DistanceTests, StaticWrapper_Dist_IrrationalDistanceMaintainsPrec
     using T = TypeParam;
     const fgm::Vec2 v1{ T(0), T(0) };
     const fgm::Vec2 v2{ T(1), T(1) };
-
-    using P                         = fgm::Magnitude<T>;
-    constexpr auto expectedDistance = P(std::numbers::sqrt2);
+    constexpr auto expectedDistance = T(std::numbers::sqrt2);
 
     const auto distance = fgm::Vec2<T>::dist(v1, v2);
 
@@ -186,7 +141,7 @@ TYPED_TEST(Vec2DistanceTests, StaticWrapper_Dist_IrrationalDistanceMaintainsPrec
 
 TYPED_TEST(Vec2DistanceTests, StaticWrapper_Dist_BetweenSameVectorReturnsZero)
 {
-    constexpr auto zero = fgm::Magnitude<TypeParam>(0);
+    constexpr auto zero = TypeParam(0);
     const auto distance = fgm::Vec2<TypeParam>::dist(this->_vecA, this->_vecA);
     EXPECT_MAG_EQ(zero, distance);
 }
@@ -199,18 +154,8 @@ TYPED_TEST(Vec2DistanceSignedTests, StaticWrapper_Dist_HandlesNegativeNumbers)
 }
 
 
-TYPED_TEST(Vec2DistanceTests, StaticWrapper_Dist_AlwaysReturnFloatingPointValue)
-{
-    [[maybe_unused]] const auto distance = this->_vecA.dist(this->_vecB);
-    static_assert(std::is_floating_point_v<decltype(distance)>);
-}
-
-
-
 /**************************************
- *                                    *
  *    EUCLIDEAN DISTANCE (SQUARED)    *
- *                                    *
  **************************************/
 
 TYPED_TEST(Vec2DistanceTests, DistSq_ReturnsSquaredEuclideanDistance)

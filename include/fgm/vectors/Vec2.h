@@ -1156,176 +1156,148 @@ namespace fgm
         //             requires StrictArithmetic<T>;
         //
         //         /** @} */
-        //
-        //
-        //         /**
-        //          * @addtogroup FGM_Vec2_Dist
-        //          * @{
-        //          */
-        //
-        //         /**
-        //          * @brief Compute the Euclidean (L2) distance between this vector and the @p rhs vector.
-        //          *        \f$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \f$
-        //          *
-        //          * @note Mathematically, distance is a metric between points, not directional vectors.
-        //          *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The target position vector.
-        //          *
-        //          * @return The Euclidean distance promoted as the promoted floating-point type.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr Magnitude<PromotedValue_t<T, U>> dist(const Vec2<U>& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the Euclidean (L2) distance between two vectors.
-        //          *        \f$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \f$
-        //          *
-        //          * @note Mathematically, distance is a metric between points, not directional vectors.
-        //          *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] lhs The first position vector.
-        //          * @param[in] rhs The second position vector.
-        //          *
-        //          * @return The Euclidean distance as the promoted floating-point type.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr Magnitude<PromotedValue_t<T, U>> dist(const Vec2<U>& lhs,
-        //                                                                              const Vec2<U>& rhs) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the squared Euclidean (L2) distance between this vector and the @p rhs vector.
-        //          *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 \f$
-        //          *
-        //          * @note Mathematically, distance is a metric between points, not directional vectors.
-        //          *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The target position vector.
-        //          *
-        //          * @return The squared Euclidean distance.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr PromotedValue_t<T, U> distSq(const Vec2<U>& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the squared Euclidean (L2) distance between two vectors.
-        //          *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 \f$
-        //          *
-        //          * @note Mathematically, distance is a metric between points, not directional vectors.
-        //          *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] lhs The first position vector.
-        //          * @param[in] rhs The second position vector.
-        //          *
-        //          * @return The squared Euclidean distance.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr PromotedValue_t<T, U> distSq(const Vec2<U>& lhs, const Vec2<U>& rhs)
-        //         noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the Manhattan (L1) distance between this vector and the @p rhs vector.
-        //          *        \f$ d = |x_1 - x_2| + |y_1 - y_2| \f$
-        //          *
-        //          * @note Mathematically, distance is a metric between points, not directional vectors.
-        //          *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The target position vector.
-        //          *
-        //          * @return The Manhattan (Taxicab) distance.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr PromotedValue_t<T, U> manhattanDist(const Vec2<U>& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the Manhattan (L1) distance between two vectors.
-        //          *        \f$ d = |x_1 - x_2| + |y_1 - y_2| \f$
-        //          *
-        //          * @note Mathematically, distance is a metric between points, not directional vectors.
-        //          *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] lhs The first position vector.
-        //          * @param[in] rhs The second position vector.
-        //          *
-        //          * @return The Manhattan(Taxicab) distance.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr PromotedValue_t<T, U> manhattanDist(const Vec2<U>& lhs,
-        //                                                                            const Vec2<U>& rhs) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the Chebyshev (L∞) distance between this vector and the @p rhs vector.
-        //          *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|)} \f$
-        //          *
-        //          * @note Mathematically, distance is a metric between points, not directional vectors.
-        //          *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The target position vector.
-        //          *
-        //          * @return The Chebyshev distance.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr PromotedValue_t<T, U> chebyshevDist(const Vec2<U>& rhs) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the Chebyshev (L∞) distance between two vectors.
-        //          *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|)} \f$
-        //          *
-        //          * @note Mathematically, distance is a metric between points, not directional vectors.
-        //          *       This operation treats both vectors as position vectors (coordinates in affine space).
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] lhs The first position vector.
-        //          * @param[in] rhs The second position vector.
-        //          *
-        //          * @return The Chebyshev distance.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr PromotedValue_t<T, U> chebyshevDist(const Vec2<U>& lhs,
-        //                                                                            const Vec2<U>& rhs) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //         /** @} */
-        //
-        //
-        //
+
+
+        /**
+         * @addtogroup FGM_Vec2_Dist
+         * @{
+         */
+
+        /**
+         * @brief Compute the Euclidean (L2) distance between this vector and the @p rhs vector.
+         *        \f$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @param[in] rhs The target position vector.
+         *
+         * @return The Euclidean distance promoted as the promoted floating-point type.
+         */
+        [[nodiscard]] constexpr T dist(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Euclidean (L2) distance between two vectors.
+         *        \f$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @param[in] lhs The first position vector.
+         * @param[in] rhs The second position vector.
+         *
+         * @return The Euclidean distance as the promoted floating-point type.
+         */
+        [[nodiscard]] static constexpr T dist(const Vec2& lhs, const Vec2& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the squared Euclidean (L2) distance between this vector and the @p rhs vector.
+         *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @param[in] rhs The target position vector.
+         *
+         * @return The squared Euclidean distance.
+         */
+        [[nodiscard]] constexpr T distSq(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the squared Euclidean (L2) distance between two vectors.
+         *        \f$ d = (x_2 - x_1)^2 + (y_2 - y_1)^2 \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @param[in] lhs The first position vector.
+         * @param[in] rhs The second position vector.
+         *
+         * @return The squared Euclidean distance.
+         */
+        [[nodiscard]] static constexpr T distSq(const Vec2& lhs, const Vec2& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan (L1) distance between this vector and the @p rhs vector.
+         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The target position vector.
+         *
+         * @return The Manhattan (Taxicab) distance.
+         */
+        [[nodiscard]] constexpr T manhattanDist(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan (L1) distance between two vectors.
+         *        \f$ d = |x_1 - x_2| + |y_1 - y_2| \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first position vector.
+         * @param[in] rhs The second position vector.
+         *
+         * @return The Manhattan(Taxicab) distance.
+         */
+        [[nodiscard]] static constexpr T manhattanDist(const Vec2& lhs, const Vec2& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev (L∞) distance between this vector and the @p rhs vector.
+         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|)} \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] rhs The target position vector.
+         *
+         * @return The Chebyshev distance.
+         */
+        [[nodiscard]] constexpr T chebyshevDist(const Vec2& rhs) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev (L∞) distance between two vectors.
+         *        \f$ d = \max{(|x_2 - x_1|, |y_2 - y_1|)} \f$
+         *
+         * @note Mathematically, distance is a metric between points, not directional vectors.
+         *       This operation treats both vectors as position vectors (coordinates in affine space).
+         *
+         * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
+         *
+         * @param[in] lhs The first position vector.
+         * @param[in] rhs The second position vector.
+         *
+         * @return The Chebyshev distance.
+         */
+        [[nodiscard]] static constexpr T chebyshevDist(const Vec2& lhs, const Vec2& rhs) noexcept
+            requires StrictArithmetic<T>;
+
+        /** @} */
+
+
+
         //         /**
         //          * @addtogroup FGM_Vec2_Normalize
         //          * @{
