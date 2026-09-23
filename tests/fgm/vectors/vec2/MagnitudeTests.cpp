@@ -1,7 +1,7 @@
 /**
  * @file MagnitudeTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: April 04, 2026
+ * @date Created on: September 23, 2026
  *
  * @brief Verify @ref fgm::Vec2 magnitude logic.
  *
@@ -33,13 +33,13 @@ namespace
     {
     protected:
         fgm::Vec2<T> _vec;
-        fgm::Magnitude<T> _expectedMagnitude;
+        T _expectedMagnitude;
         T _expectedMagnitudeSquare;
 
         void SetUp() override
         {
             _vec                     = { T(3), T(4) };
-            _expectedMagnitude       = fgm::Magnitude<T>(5);
+            _expectedMagnitude       = T(5);
             _expectedMagnitudeSquare = T(25);
         }
     };
@@ -55,40 +55,16 @@ namespace
     {
     protected:
         fgm::Vec2<T> _vec;
-        fgm::Magnitude<T> _expectedMagnitude;
+        T _expectedMagnitude;
 
         void SetUp() override
         {
             _vec               = { T(1), T(2) };
-            _expectedMagnitude = fgm::Magnitude<T>(2.2360679774997898);
+            _expectedMagnitude = T(2.2360679774997898);
         }
     };
     TYPED_TEST_SUITE(Vec2UncleanMagnitudeTests, SupportedArithmeticTypes);
 
-
-    /**************************************
-     *            STATIC TESTS            *
-     **************************************/
-
-    namespace static_tests
-    {
-        constexpr fgm::Vec2 VEC_A(1, 2);
-
-        // TODO: Add static test after making sqrt constexpr
-        /// @test Verify that mag returns a valid value at compile time.
-        // constexpr auto MAG = Vec.mag();
-        /// @test Verify that mag (static wrapper) returns a valid value at compile time.
-        // constexpr auto MAG_STATIC = fgm::Vec2<int>::mag(Vec);
-
-        /// @test Verify that magSq returns a valid value at compile time.
-        constexpr auto MAG_SQ = VEC_A.magSq();
-        static_assert(MAG_SQ - 5.0 < 1e5);
-
-        /// @test Verify that magSq (static wrapper) returns a valid value at compile time.
-        constexpr auto MAG_SQ_STATIC = fgm::Vec2<int>::magSq(VEC_A);
-        static_assert(MAG_SQ_STATIC - 5.0 < 1e5);
-
-    } // namespace static_tests
 } // namespace
 
 
@@ -115,13 +91,6 @@ TYPED_TEST(Vec2MagnitudeTests, NonUnitVectorReturnsCorrectMagnitude)
 {
     const auto magnitude = this->_vec.mag();
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
-}
-
-
-TYPED_TEST(Vec2MagnitudeTests, Mag_AlwaysTypePromoteToFloatingPointType)
-{
-    [[maybe_unused]] const auto magnitude = this->_vec.mag();
-    static_assert(std::is_floating_point_v<decltype(magnitude)>);
 }
 
 

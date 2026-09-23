@@ -1056,106 +1056,106 @@ namespace fgm
         //
         //         /** @} */
         //
-        //
-        //         /**
-        //          * @addtogroup FGM_Vec2_Mag
-        //          * @{
-        //          */
-        //
-        //         /**
-        //          * @brief Compute the magnitude (Euclidean Norm) of this vector.
-        //          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
-        //          *
-        //          * @note To avoid precision loss, integral types are promoted to their
-        //          *       corresponding floating-point representation via @ref Magnitude.
-        //          *
-        //          * @return The scalar magnitude of the vector.
-        //          */
-        //         [[nodiscard]] constexpr Magnitude<T> mag() const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the magnitude (Euclidean Norm) of @p Vec.
-        //          *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
-        //          *
-        //          * @note To avoid precision loss, integral types are promoted to their
-        //          *       corresponding floating-point representation via @ref Magnitude.
-        //          *
-        //          * @param[in] vec The vector to compute the magnitude of.
-        //          *
-        //          * @return The scalar magnitude of @p Vec.
-        //          */
-        //         [[nodiscard]] static constexpr Magnitude<T> mag(const Vec2& vec) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the magnitude square (Euclidean Norm) of this vector.
-        //          *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
-        //          *
-        //          * @return The scalar magnitude of the vector.
-        //          */
-        //         [[nodiscard]] constexpr T magSq() const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the magnitude square (Euclidean Norm) of @p Vec.
-        //          *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
-        //          *
-        //          * @param[in] vec The vector to compute the magnitude of.
-        //          *
-        //          * @return The scalar magnitude of @p Vec.
-        //          */
-        //         [[nodiscard]] static constexpr T magSq(const Vec2& vec) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the Manhattan length (L1 Norm) of this vector.
-        //          *        \f$ \|\mathbf{v}\|_1 = |x| + |y| \f$
-        //          *
-        //          * @return The Manhattan length.
-        //          */
-        //         [[nodiscard]] constexpr T manhattanNorm() const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the Manhattan length (L1 Norm) of @p Vec.
-        //          *        \f$ \|\mathbf{v}\|_1 = |x| + |y| \f$
-        //          *
-        //          * @param[in] vec The vector to compute the taxicab norm of.
-        //          *
-        //          * @return The Manhattan length.
-        //          */
-        //         [[nodiscard]] static constexpr T manhattanNorm(const Vec2& vec) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the Chebyshev length (L∞ Norm) of this vector.
-        //          *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|) \f$
-        //          *
-        //          * @return The Chebyshev length.
-        //          */
-        //         [[nodiscard]] constexpr T chebyshevNorm() const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the Chebyshev length (L∞ Norm) of @p Vec.
-        //          *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|) \f$
-        //          *
-        //          * @param[in] vec The vector to compute the taxicab norm of.
-        //          *
-        //          * @return The Chebyshev length.
-        //          */
-        //         [[nodiscard]] static constexpr T chebyshevNorm(const Vec2& vec) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //         /** @} */
+
+        /**
+         * @addtogroup FGM_Vec2_Mag
+         * @{
+         */
+
+        /**
+         * @brief Compute the magnitude (Euclidean Norm) of this vector.
+         *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
+         *
+         * @note To avoid precision loss, integral types are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @return The scalar magnitude of the vector.
+         */
+        [[nodiscard]] constexpr T mag() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the magnitude (Euclidean Norm) of @p Vec.
+         *        \f$ \|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} \f$
+         *
+         * @note To avoid precision loss, integral types are promoted to their
+         *       corresponding floating-point representation via @ref Magnitude.
+         *
+         * @param[in] vec The vector to compute the magnitude of.
+         *
+         * @return The scalar magnitude of @p Vec.
+         */
+        [[nodiscard]] static constexpr T mag(const Vec2& vec) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the magnitude square (Euclidean Norm) of this vector.
+         *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
+         *
+         * @return The scalar magnitude of the vector.
+         */
+        [[nodiscard]] constexpr T magSq() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the magnitude square (Euclidean Norm) of @p Vec.
+         *        \f$ \|\mathbf{v}\| = \mathbf{v} \cdot \mathbf{v} \f$
+         *
+         * @param[in] vec The vector to compute the magnitude of.
+         *
+         * @return The scalar magnitude of @p Vec.
+         */
+        [[nodiscard]] static constexpr T magSq(const Vec2& vec) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan length (L1 Norm) of this vector.
+         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| \f$
+         *
+         * @return The Manhattan length.
+         */
+        [[nodiscard]] constexpr T manhattanNorm() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Manhattan length (L1 Norm) of @p Vec.
+         *        \f$ \|\mathbf{v}\|_1 = |x| + |y| \f$
+         *
+         * @param[in] vec The vector to compute the taxicab norm of.
+         *
+         * @return The Manhattan length.
+         */
+        [[nodiscard]] static constexpr T manhattanNorm(const Vec2& vec) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev length (L∞ Norm) of this vector.
+         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|) \f$
+         *
+         * @return The Chebyshev length.
+         */
+        [[nodiscard]] constexpr T chebyshevNorm() const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the Chebyshev length (L∞ Norm) of @p Vec.
+         *        \f$ \|\mathbf{v}\|_{\infty} = max(|x|, |y|) \f$
+         *
+         * @param[in] vec The vector to compute the taxicab norm of.
+         *
+         * @return The Chebyshev length.
+         */
+        [[nodiscard]] static constexpr T chebyshevNorm(const Vec2& vec) noexcept
+            requires StrictArithmetic<T>;
+
+        /** @} */
 
 
         /**
