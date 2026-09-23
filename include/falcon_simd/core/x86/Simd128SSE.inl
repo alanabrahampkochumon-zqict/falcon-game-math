@@ -48,9 +48,13 @@ namespace falcon
             {
                 return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castpd_ps(_register));
             }
-            else //  if (std::is_integral_v<T>)
+            else if constexpr (std::is_integral_v<T>)
             {
                 return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castpd_si128(_register));
+            }
+            else
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_register);
             }
         }
         else if constexpr (types::IsFP32<DataType>)
@@ -59,9 +63,13 @@ namespace falcon
             {
                 return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castps_pd(_register));
             }
-            else //  if (std::is_integral_v<T>)
+            else if constexpr (std::is_integral_v<T>)
             {
                 return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castps_si128(_register));
+            }
+            else
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_register);
             }
         }
         else // Integral to floating point.
@@ -70,9 +78,70 @@ namespace falcon
             {
                 return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castsi128_pd(_register));
             }
-            else // if constexpr (types::IsFP32<T>)
+            else if constexpr (types::IsFP32<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castsi128_ps(_register));
+            }
+            else
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_register);
+            }
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    template <typename T>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, T, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                             Lane>::cast() noexcept
+    {
+        if constexpr (std::is_same_v<DataType, T>)
+        {
+            return Simd128(_register);
+        }
+        else if constexpr (types::IsFP64<DataType>)
+        {
+            if constexpr (types::IsFP32<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castpd_ps(_register));
+            }
+            else if constexpr (std::is_integral_v<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castpd_si128(_register));
+            }
+            else
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_register);
+            }
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            if constexpr (types::IsFP64<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castps_pd(_register));
+            }
+            else if constexpr (std::is_integral_v<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castps_si128(_register));
+            }
+            else
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_register);
+            }
+        }
+        else // Integral to floating point.
+        {
+            if constexpr (types::IsFP64<T>)
             {
                 return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castsi128_pd(_register));
+            }
+            else if constexpr (types::IsFP32<T>)
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_mm_castsi128_ps(_register));
+            }
+            else
+            {
+                return Simd128<SimdBackend::ARCH_SSE2, T, Lane>(_register);
             }
         }
     }

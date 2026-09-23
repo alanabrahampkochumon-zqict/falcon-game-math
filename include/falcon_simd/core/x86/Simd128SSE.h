@@ -76,6 +76,12 @@ namespace falcon
         [[nodiscard]] constexpr Simd128<SimdBackend::ARCH_SSE2, T, Lane> cast() const noexcept;
 
 
+        /// @brief Cast a register from @p DataType to @p T (non-const variant).
+        /// @tparam T The destination data type.
+        template <typename T>
+        [[nodiscard]] constexpr Simd128<SimdBackend::ARCH_SSE2, T, Lane> cast() noexcept;
+
+
         /**
          * @brief Initialize a 128-bit SIMD register with values from a std::container(std::array, std::vector).
          *
