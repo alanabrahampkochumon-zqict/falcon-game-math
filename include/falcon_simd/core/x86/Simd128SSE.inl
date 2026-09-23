@@ -2757,16 +2757,72 @@ namespace falcon
             }
             else
             {
-                const auto shifted      = _mm_srli_si128(_register, 8);
-                const auto doubleRegHi  = _mm_cvtepi32_pd(shifted);
-                const auto sqrtHi       = _mm_sqrt_pd(doubleRegHi);
-                const auto intSqrtHi    = _mm_cvttpd_epi32(sqrtHi);     // (0, 0, D, C)
-                return Simd128(_mm_unpacklo_epi64(intSqrtLo, intSqrtHi));     // (D, C, B, A)
+                const auto shifted     = _mm_srli_si128(_register, 8);
+                const auto doubleRegHi = _mm_cvtepi32_pd(shifted);
+                const auto sqrtHi      = _mm_sqrt_pd(doubleRegHi);
+                const auto intSqrtHi   = _mm_cvttpd_epi32(sqrtHi);        // (0, 0, D, C)
+                return Simd128(_mm_unpacklo_epi64(intSqrtLo, intSqrtHi)); // (D, C, B, A)
             }
         }
         else if constexpr (types::IsUDWord<DataType>)
         {
-            return *this;
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+            {
+                const auto doubleRegLo = _mm_cvtepu32_pd(_register);
+                const auto sqrtLo      = _mm_sqrt_pd(doubleRegLo);
+                const auto intSqrtLo   = _mm_cvttpd_epi32(sqrtLo);
+                if constexpr (Lane == 2)
+                {
+                    return Simd128(intSqrtLo);
+                }
+                else
+                {
+                    // Shift the upper 2 lanes to the lower lanes since the cvtepi converts values in the lower lane
+                    const auto shiftedHi   = _mm_srli_si128(_register, 8);
+                    const auto doubleRegHi = _mm_cvtepu32_pd(shiftedHi);
+                    const auto sqrtHi      = _mm_sqrt_pd(doubleRegHi);
+                    const auto intSqrtHi   = _mm_cvttpd_epi32(sqrtHi);
+
+                    return Simd128(_mm_unpacklo_epi64(intSqrtLo, intSqrtHi));
+                }
+            }
+            else
+            {
+                // For 32-bit integers since we don't have an epu32_pd(unless in AVX512F+VL)
+                // when having an int with the MSB `ON`, it will get interpreted as a negative double.
+                // To convert that negative interpretation to a positive number
+                // we add the int32-max, which will reset the negative number to our original number
+                // If our number is 111.111 it will get interpreted as -1 although it is (2^32) - 1 or 4294967295
+                // but adding 2^32 to the -1 yields our original number.
+                const auto offset = _mm_set1_pd(4294967296.0);
+                const auto zero   = _mm_setzero_pd();
+
+                // If hardware created a negative double, it was a large unsigned int
+                // so add an offset to it
+                const auto doubleRegLo = _mm_cvtepi32_pd(_register);
+                const auto maskLo      = _mm_cmplt_pd(doubleRegLo, zero);
+                const auto filterLo    = _mm_and_pd(maskLo, offset);
+                const auto correctedLo = _mm_add_pd(doubleRegLo, filterLo);
+                const auto sqrtLo      = _mm_sqrt_pd(correctedLo);
+                const auto intSqrtLo   = _mm_cvttpd_epi32(sqrtLo);
+                if constexpr (Lane == 2)
+                {
+                    return Simd128(intSqrtLo);
+                }
+                else
+                {
+                    // Shift the upper 2 lanes to the lower lanes since the cvtepi converts values in the lower lane
+                    const auto shiftedHi   = _mm_srli_si128(_register, 8);
+                    const auto doubleRegHi = _mm_cvtepi32_pd(shiftedHi);
+                    const auto maskHi      = _mm_cmplt_pd(doubleRegHi, zero);
+                    const auto filterHi    = _mm_and_pd(offset, maskHi);
+                    const auto correctedHi = _mm_add_pd(doubleRegHi, filterHi);
+                    const auto sqrtHi      = _mm_sqrt_pd(correctedHi);
+                    const auto intSqrtHi   = _mm_cvttpd_epi32(sqrtHi);
+
+                    return Simd128(_mm_unpacklo_epi64(intSqrtLo, intSqrtHi));
+                }
+            }
         }
         else if constexpr (sizeof(DataType) == 2)
         {
