@@ -896,7 +896,7 @@ namespace fgm
     //     { return lhs.cross(rhs); }
 
 
-    
+
     //     /*************************************
     //      *                                   *
     //      *       VECTOR NORMALIZATION        *

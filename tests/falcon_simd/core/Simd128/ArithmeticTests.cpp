@@ -683,14 +683,19 @@ TYPED_TEST(Simd128ArithmeticTests, HorizontalSub_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    // We are swapping for the largest and smallest for the first two indices
-    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
     alignas(16) std::array<Type, Lane> a{};
     Type difference = 0;
     for (size_t i = 0; i < Lane; ++i)
     {
         a[i] = this->haddData[i];
-        difference -= a[i];
+        if (i == 0)
+        {
+            difference = a[i];
+        }
+        else
+        {
+            difference -= a[i];
+        }
     }
     difference = static_cast<Type>(difference);
 
