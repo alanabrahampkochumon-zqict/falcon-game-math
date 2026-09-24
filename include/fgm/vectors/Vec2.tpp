@@ -901,7 +901,7 @@ namespace fgm
     {
         const auto magnitude = mag();
         FALCON_ASSERT_MSG(magnitude >= fgm::Config::EPSILON<decltype(magnitude)>,
-                       fgm::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
+                          fgm::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
         return *this / magnitude;
     }
 
@@ -958,192 +958,170 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::tryNormalize(const Vec2& vec, OperationStatus& status)
-    noexcept
+    FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::tryNormalize(const Vec2& vec, OperationStatus& status) noexcept
         requires FPArithmetic<T>
     { return vec.tryNormalize(status); }
 
 
-    //     /*************************************
-    //      *                                   *
-    //      *        VECTOR PROJECTION          *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::project(const Vec2<U>& onto) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    //         /** @note Static cast ensures integral type dots don't lose much precision */
-    //         const auto b2 = static_cast<Magnitude<R>>(onto.dot(onto));
-    //
-    //         FALCON_ASSERT_MSG(b2 >= fgm::Config::EPSILON_SQUARE<Magnitude<R>>,
-    //                        fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
-    //
-    //         return this->dot(onto) / b2 * onto; // a.dot(b) / b.dot(b) * b
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::projectNorm(const Vec2<U>& onto) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         return this->dot(onto) * onto; // a.dot(b) * b
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::project(const Vec2& vec, const Vec2<U>& onto)
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.project(onto); }
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::projectNorm(const Vec2& vec, const Vec2<U>& onto)
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.projectNorm(onto); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::safeProject(const Vec2<U>& onto) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R       = PromotedValue_t<T, U>;
-    //         using MagType = Magnitude<R>;
-    //
-    //         /** @note Static cast ensures integral type dots don't lose much precision */
-    //         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
-    //
-    //         if (hasNaN() | fgm::isnan(ontoSquared))
-    //         {
-    //             return Vec2<MagType>::zero();
-    //         }
-    //
-    //         if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
-    //         {
-    //             return Vec2<MagType>::zero();
-    //         }
-    //
-    //         return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::safeProjectNorm(const Vec2<U>& onto) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    //
-    //         if (hasNaN() || onto.hasNaN())
-    //         {
-    //             return Vec2<R>::zero();
-    //         }
-    //
-    //         return this->dot(onto) * onto;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::safeProject(const Vec2& vec, const Vec2<U>& onto)
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.safeProject(onto); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::safeProjectNorm(const Vec2& vec, const Vec2<U>& onto)
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.safeProjectNorm(onto); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::tryProject(const Vec2<U>& onto,
-    //                                                                      OperationStatus& status) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R       = PromotedValue_t<T, U>;
-    //         using MagType = Magnitude<R>;
-    //
-    //         /** @note Static cast ensures integral type dots don't lose too much precision. */
-    //         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
-    //
-    //         if (hasNaN() | fgm::isnan(ontoSquared))
-    //         {
-    //             status = OperationStatus::NANOPERAND;
-    //             return Vec2<MagType>::zero();
-    //         }
-    //
-    //         if (ontoSquared <= Config::EPSILON_SQUARE<MagType>)
-    //         {
-    //             status = OperationStatus::DIVISIONBYZERO;
-    //             return Vec2<MagType>::zero();
-    //         }
-    //
-    //         status = OperationStatus::SUCCESS;
-    //         return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::tryProjectNorm(const Vec2<U>& onto,
-    //                                                                     OperationStatus& status) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R       = PromotedValue_t<T, U>;
-    //         using MagType = Magnitude<R>;
-    //
-    //         if (hasNaN() || onto.hasNaN())
-    //         {
-    //             status = OperationStatus::NANOPERAND;
-    //             return Vec2<MagType>::zero();
-    //         }
-    //
-    //         status = OperationStatus::SUCCESS;
-    //         return this->dot(onto) * onto;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::tryProject(const Vec2& vec, const Vec2<U>& onto,
-    //                                                                      OperationStatus& status) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.tryProject(onto, status); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::tryProjectNorm(const Vec2& vec, const Vec2<U>& onto,
-    //                                                                     OperationStatus& status) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.tryProjectNorm(onto, status); }
-    //
-    //
+
+    /*************************************
+     *        VECTOR PROJECTION          *
+     *************************************/
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::project(const Vec2& onto) const noexcept
+        requires StrictArithmetic<T>
+    {
+        const auto b2 = onto.dot(onto);
+        // NOTE: Epsilon for integrals return 0
+        if constexpr (FPArithmetic<T>)
+        {
+            FALCON_ASSERT_MSG(b2 > fgm::Config::EPSILON_SQUARE<T>, fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
+        }
+        else
+        {
+            FALCON_ASSERT_MSG(b2 != 0, fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
+        }
+        return this->dot(onto) / b2 * onto; // a.dot(b) / b.dot(b) * b
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::projectNorm(const Vec2& onto) const noexcept
+        requires StrictArithmetic<T>
+    {
+        return dot(onto) * onto; // A.B * A
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::project(const Vec2& vec, const Vec2& onto) noexcept
+        requires StrictArithmetic<T>
+    { return vec.project(onto); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::projectNorm(const Vec2& vec, const Vec2& onto) noexcept
+        requires StrictArithmetic<T>
+    { return vec.projectNorm(onto); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeProject(const Vec2& onto) const noexcept
+        requires StrictArithmetic<T>
+    {
+        const auto ontoSquared = onto.dot(onto);
+
+        if constexpr (FPArithmetic<T>)
+        {
+            if (hasNaN() || fgm::isnan(ontoSquared) || ontoSquared <= Config::EPSILON_SQUARE<T>)
+            {
+                return Vec2<T>::zero();
+            }
+        }
+        else
+        {
+            if (ontoSquared == 0)
+            {
+                return Vec2<T>::zero();
+            }
+        }
+
+        return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeProjectNorm(const Vec2& onto) const noexcept
+        requires StrictArithmetic<T>
+    {
+        if constexpr (FPArithmetic<T>)
+        {
+            if (hasNaN() || onto.hasNaN())
+            {
+                return Vec2<T>::zero();
+            }
+        }
+        return this->dot(onto) * onto;
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeProject(const Vec2& vec, const Vec2& onto) noexcept
+        requires StrictArithmetic<T>
+    { return vec.safeProject(onto); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeProjectNorm(const Vec2& vec, const Vec2& onto) noexcept
+        requires StrictArithmetic<T>
+    { return vec.safeProjectNorm(onto); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryProject(const Vec2& onto, OperationStatus& status) const noexcept
+        requires StrictArithmetic<T>
+    {
+        const auto ontoSquared = onto.dot(onto);
+        if constexpr (FPArithmetic<T>)
+        {
+            if (hasNaN() || fgm::isnan(ontoSquared))
+            {
+                status = OperationStatus::NANOPERAND;
+                return Vec2<T>::zero();
+            }
+            if (ontoSquared <= Config::EPSILON_SQUARE<T>)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Vec2<T>::zero();
+            }
+        }
+        else
+        {
+            if (ontoSquared == 0)
+            {
+                status = OperationStatus::DIVISIONBYZERO;
+                return Vec2<T>::zero();
+            }
+        }
+
+        status = OperationStatus::SUCCESS;
+        return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryProjectNorm(const Vec2& onto, OperationStatus& status) const noexcept
+        requires StrictArithmetic<T>
+    {
+        if constexpr (FPArithmetic<T>)
+        {
+            if (hasNaN() || onto.hasNaN())
+            {
+                status = OperationStatus::NANOPERAND;
+                return Vec2<T>::zero();
+            }
+        }
+        status = OperationStatus::SUCCESS;
+        return this->dot(onto) * onto;
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryProject(const Vec2& vec, const Vec2& onto,
+                                                        OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    { return vec.tryProject(onto, status); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryProjectNorm(const Vec2& vec, const Vec2& onto,
+                                                            OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    { return vec.tryProjectNorm(onto, status); }
+
+
     //     /*************************************
     //      *                                   *
     //      *         VECTOR REJECTION          *

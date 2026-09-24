@@ -62,29 +62,6 @@ namespace
         }
     };
     TYPED_TEST_SUITE(Vec2ChebyshevNormTests, SupportedArithmeticTypes);
-
-
-
-    /**************************************
-     *            STATIC TESTS            *
-     **************************************/
-
-    namespace static_tests
-    {
-        constexpr fgm::Vec2 VEC(1, -2);
-
-        /// @test Verify that Vec2 Manhattan Norm returns a valid scalar.
-        static_assert(VEC.manhattanNorm() == 3);
-        /// @test Verify that Vec2 Manhattan Norm (static wrapper) returns a valid scalar.
-        static_assert(fgm::Vec2<int>::manhattanNorm(VEC) == 3);
-
-
-        /// @test Verify that Vec2 Chebyshev Norm returns a valid scalar.
-        static_assert(VEC.chebyshevNorm() == 2);
-        /// @test Verify that Vec2 Chebyshev Norm (static wrapper) returns a valid scalar.
-        static_assert(fgm::Vec2<int>::chebyshevNorm(VEC) == 2);
-
-    } // namespace static_tests
 } // namespace
 
 
