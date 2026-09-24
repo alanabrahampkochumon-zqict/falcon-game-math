@@ -2009,53 +2009,24 @@ namespace falcon
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr DataType Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalSub() const noexcept
     {
-        // TODO: Update to a HSUB intrinsic flag?
         if constexpr (types::IsFP64<DataType>)
         {
-            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4 && FALCON_ENABLE_HADD_INTRINSIC)
-            {
-                const auto diff = _mm_hsub_pd(_register, _register);
-                return _mm_cvtsd_f64(diff);
-            }
-            else
-            {
-                // To perform A-B, we can invert the flag bits of B.
-                // A + (-B)
-                // Note: Mask is flipped due to how set_epi64x works.
-                // Setting and casting will prevent any compiler optimization where -0.0 will be regarded
-                // as 0.0 in some cases.
-                const auto flipMask   = _mm_castsi128_pd(_mm_set_epi64x(0x8000000000000000, 0x0000000000000000));
-                const auto flippedReg = _mm_xor_pd(_register, flipMask);
-                return Simd128(flippedReg).horizontalAdd();
-            }
+            // To perform A-B, we can invert the flag bits of B.
+            // A + (-B)
+            // Note: Mask is flipped due to how set_epi64x works.
+            // Setting and casting will prevent any compiler optimization where -0.0 will be regarded
+            // as 0.0 in some cases.
+            const auto flipMask   = _mm_castsi128_pd(_mm_set_epi64x(0x8000000000000000, 0x0000000000000000));
+            const auto flippedReg = _mm_xor_pd(_register, flipMask);
+            return Simd128(flippedReg).horizontalAdd();
         }
         else if constexpr (types::IsFP32<DataType>)
         {
-            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4 && FALCON_ENABLE_HADD_INTRINSIC)
-            {
-                // We need 2 hsub to get the sum up 4 lanes
-                // [_, _, a - b, c - d]
-                const auto firstDiff = _mm_hsub_ps(_register, _register);
-                // If there are only 2 lanes we can return from here
-                if constexpr (LaneCount == 2)
-                {
-                    return _mm_cvtss_f32(firstDiff);
-                }
-                else
-                {
-                    // [_, _, _, a - b - c - d]
-                    const auto secondDiff = _mm_hsub_ps(firstDiff, firstDiff);
-                    return _mm_cvtss_f32(secondDiff);
-                }
-            }
-            else
-            {
-                // To perform A-B-C-D, we can invert the flag bits of B, C, and D.
-                // A + (-B) + (-C) + (-D)
-                const auto flipMask = _mm_castsi128_ps(_mm_setr_epi32(0x00000000, 0x80000000, 0x80000000, 0x80000000));
-                const auto flippedReg = _mm_xor_ps(_register, flipMask);
-                return Simd128(flippedReg).horizontalAdd();
-            }
+            // To perform A-B-C-D, we can invert the flag bits of B, C, and D.
+            // A + (-B) + (-C) + (-D)
+            const auto flipMask   = _mm_castsi128_ps(_mm_setr_epi32(0x00000000, 0x80000000, 0x80000000, 0x80000000));
+            const auto flippedReg = _mm_xor_ps(_register, flipMask);
+            return Simd128(flippedReg).horizontalAdd();
         }
         else if constexpr (sizeof(DataType) == 8)
         {
