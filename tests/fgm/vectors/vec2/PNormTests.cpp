@@ -1,7 +1,7 @@
 /**
  * @file PNormTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: May 22, 2026
+ * @date Created on: September 24, 2026
  *
  * @brief Verify the @ref fgm::Vec2 p-Norm length logic.
  *
